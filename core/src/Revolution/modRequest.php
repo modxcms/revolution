@@ -219,14 +219,14 @@ class modRequest
                 $resource->_content = $cachedResource['resource']['_content'];
                 $resource->_isForward = $isForward;
                 if (isset($cachedResource['contentType'])) {
-                    $contentType = $this->modx->newObject('modContentType');
+                    $contentType = $this->modx->newObject(modContentType::class);
                     $contentType->fromArray($cachedResource['contentType'], '', true, true, true);
                     $resource->addOne($contentType, 'ContentType');
                 }
                 if (isset($cachedResource['resourceGroups'])) {
                     $rGroups = [];
                     foreach ($cachedResource['resourceGroups'] as $rGroupKey => $rGroup) {
-                        $rGroups[$rGroupKey] = $this->modx->newObject('modResourceGroupResource', $rGroup);
+                        $rGroups[$rGroupKey] = $this->modx->newObject(modResourceGroupResource::class, $rGroup);
                     }
                     $resource->addMany($rGroups);
                 }
@@ -255,18 +255,18 @@ class modRequest
             }
         }
         if (!$fromCache || !is_object($resource)) {
-            $criteria = $this->modx->newQuery('modResource');
+            $criteria = $this->modx->newQuery(modResource::class);
             $criteria->select([$this->modx->escape('modResource') . '.*']);
             $criteria->where(['id' => $resourceId, 'deleted' => '0']);
             if (!$this->modx->hasPermission('view_unpublished') || $this->modx->getSessionState() !== modX::SESSION_STATE_INITIALIZED) {
                 $criteria->where(['published' => 1]);
             }
-            if ($resource = $this->modx->getObject('modResource', $criteria)) {
+            if ($resource = $this->modx->getObject(modResource::class, $criteria)) {
                 if ($resource instanceof modResource) {
                     if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                         if (!$isForward || ($isForward && !$this->modx->getOption('allow_forward_across_contexts',
                                     $options, false))) {
-                            if (!$this->modx->getCount('modContextResource',
+                            if (!$this->modx->getCount(modContextResource::class,
                                 [$this->modx->context->get('key'), $resourceId])) {
                                 return null;
                             }
@@ -296,7 +296,7 @@ class modRequest
                 if ($resource->get('context_key') !== $this->modx->context->get('key')) {
                     if (!$isForward || ($isForward && !$this->modx->getOption('allow_forward_across_contexts', $options,
                                 false))) {
-                        if (!$this->modx->getCount('modContextResource',
+                        if (!$this->modx->getCount(modContextResource::class,
                             [$this->modx->context->get('key'), $resourceId])) {
                             return null;
                         }

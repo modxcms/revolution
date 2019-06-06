@@ -358,15 +358,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
     public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0, $search = '')
     {
         $result = ['collection' => [], 'total' => 0];
-        $c = $modx->newQuery('transport.modTransportPackage');
-        $c->leftJoin('transport.modTransportProvider', 'Provider', ["modTransportPackage.provider = Provider.id"]);
+        $c = $modx->newQuery(\MODX\Revolution\Transport\modTransportPackage::class);
+        $c->leftJoin(\MODX\Revolution\Transport\modTransportProvider::class, 'Provider', ["modTransportPackage.provider = Provider.id"]);
         $c->where([
             'workspace' => $workspace,
         ]);
         $c->where([
             "(SELECT
                 `signature`
-              FROM {$modx->getTableName('modTransportPackage')} AS `latestPackage`
+              FROM {$modx->getTableName(\MODX\Revolution\Transport\modTransportPackage::class)} AS `latestPackage`
               WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
               ORDER BY
                 `latestPackage`.`version_major` DESC,
@@ -382,7 +382,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'OR:modTransportPackage.package_name:LIKE' => '%' . $search . '%',
             ]);
         }
-        $result['total'] = $modx->getCount('modTransportPackage', $c);
+        $result['total'] = $modx->getCount(\MODX\Revolution\Transport\modTransportPackage::class, $c);
         $c->select([
             'modTransportPackage.*',
         ]);
@@ -391,7 +391,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
         if ($limit > 0) {
             $c->limit($limit, $offset);
         }
-        $result['collection'] = $modx->getCollection('transport.modTransportPackage', $c);
+        $result['collection'] = $modx->getCollection(\MODX\Revolution\Transport\modTransportPackage::class, $c);
 
         return $result;
     }
@@ -399,12 +399,12 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
     public static function listPackageVersions(modX &$modx, $criteria, $limit = 0, $offset = 0)
     {
         $result = ['collection' => [], 'total' => 0];
-        $c = $modx->newQuery('transport.modTransportPackage');
-        $c->select($modx->getSelectColumns('transport.modTransportPackage', 'modTransportPackage'));
+        $c = $modx->newQuery(\MODX\Revolution\Transport\modTransportPackage::class);
+        $c->select($modx->getSelectColumns(\MODX\Revolution\Transport\modTransportPackage::class, 'modTransportPackage'));
         $c->select(['Provider.name AS provider_name']);
-        $c->leftJoin('transport.modTransportProvider', 'Provider');
+        $c->leftJoin(\MODX\Revolution\Transport\modTransportProvider::class, 'Provider');
         $c->where($criteria);
-        $result['total'] = $modx->getCount('modTransportPackage', $c);
+        $result['total'] = $modx->getCount(\MODX\Revolution\Transport\modTransportPackage::class, $c);
         $c->sortby('modTransportPackage.version_major', 'DESC');
         $c->sortby('modTransportPackage.version_minor', 'DESC');
         $c->sortby('modTransportPackage.version_patch', 'DESC');
@@ -414,7 +414,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);
         }
-        $result['collection'] = $modx->getCollection('transport.modTransportPackage', $c);
+        $result['collection'] = $modx->getCollection(\MODX\Revolution\Transport\modTransportPackage::class, $c);
 
         return $result;
     }

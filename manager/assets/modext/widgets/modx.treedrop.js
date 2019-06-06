@@ -3,17 +3,17 @@ Ext.dd.DragDropMgr.getZIndex = function(element) {
         z,
         zIndex = -1;
     var overTargetEl = element;
- 
+
     element = Ext.getDom(element);
     while (element !== body) {
- 
+
         // this fixes the problem
         if(!element) {
             this._remove(overTargetEl); // remove the drop target from the manager
             break;
         }
         // fix end
- 
+
         if (!isNaN(z = Number(Ext.fly(element).getStyle('zIndex')))) {
             zIndex = z;
         }
@@ -51,11 +51,11 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
             }
             ,notifyDrop: function(ddSource, e, data) {
                 if (!data.node || !data.node.attributes || !data.node.attributes.type) return false;
-                if (data.node.attributes.type != 'modResource' && data.node.attributes.leaf != true) return false;
+                if (data.node.attributes.type != 'MODX\\Revolution\\modResource' && data.node.attributes.leaf != true) return false;
                 var v = '';
                 var win = false;
                 switch (data.node.attributes.type) {
-                    case 'modResource': v = '[[~'+data.node.attributes.pk+']]'; break;
+                    case 'MODX\\Revolution\\modResource': v = '[[~'+data.node.attributes.pk+']]'; break;
                     case 'snippet': win = true; break;
                     case 'chunk': win = true; break;
                     case 'tv': win = true; break;
@@ -242,7 +242,7 @@ MODx.window.InsertElement = function(config) {
                 ,elementType: config.record.classKey
             }
             ,listeners: {
-                'render': {fn:function() {Ext.getCmp('modx-dise-propset').getStore().load(); Ext.getCmp('modx-dise-propset').value = '0';},scope:this} 
+                'render': {fn:function() {Ext.getCmp('modx-dise-propset').getStore().load(); Ext.getCmp('modx-dise-propset').value = '0';},scope:this}
                 ,'select': {fn:this.changePropertySet,scope:this}
             }
         },{
@@ -343,9 +343,9 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
             v = v+'!';
         }
         switch (this.config.record.classKey) {
-            case 'modSnippet': v = v+n; break;
-            case 'modChunk': v = v+'$'+n; break;
-            case 'modTemplateVar': v = v+'*'+n; break;
+            case 'MODX\\Revolution\\modSnippet': v = v+n; break;
+            case 'MODX\\Revolution\\modChunk': v = v+'$'+n; break;
+            case 'MODX\\Revolution\\modTemplateVar': v = v+'*'+n; break;
         }
         var ps = f.findField('propertyset').getValue();
         if (ps != 0 && ps !== '') {

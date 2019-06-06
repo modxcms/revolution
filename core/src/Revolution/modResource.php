@@ -2,6 +2,8 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Registry\modDbRegister;
+use MODX\Revolution\Registry\modRegistry;
 use PDO;
 use xPDO\Cache\xPDOCache;
 use xPDO\Cache\xPDOCacheManager;
@@ -204,7 +206,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $segment = html_entity_decode($segment, ENT_QUOTES, $charset);
 
         /* prepare '&' replacement */
-        if ($xpdo instanceof modX && $xpdo->getService('lexicon', 'modLexicon') && $xpdo->lexicon('and')) {
+        if ($xpdo instanceof modX && $xpdo->getService('lexicon', modLexicon::class) && $xpdo->lexicon('and')) {
             $ampersand = ' ' . $xpdo->lexicon('and') . ' ';
         } else {
             $ampersand = ' and ';
@@ -319,13 +321,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public static function listGroups(modResource &$resource, array $sort = ['id' => 'ASC'], $limit = 0, $offset = 0)
     {
         $result = ['collection' => [], 'total' => 0];
-        $c = $resource->xpdo->newQuery('modResourceGroup');
-        $c->leftJoin('modResourceGroupResource', 'ResourceGroupResource', [
+        $c = $resource->xpdo->newQuery(modResourceGroup::class);
+        $c->leftJoin(modResourceGroupResource::class, 'ResourceGroupResource', [
             "ResourceGroupResource.document_group = modResourceGroup.id",
             'ResourceGroupResource.document' => $resource->get('id'),
         ]);
-        $result['total'] = $resource->xpdo->getCount('modResourceGroup', $c);
-        $c->select($resource->xpdo->getSelectColumns('modResourceGroup', 'modResourceGroup'));
+        $result['total'] = $resource->xpdo->getCount(modResourceGroup::class, $c);
+        $c->select($resource->xpdo->getSelectColumns(modResourceGroup::class, 'modResourceGroup'));
         $c->select(["IF(ISNULL(ResourceGroupResource.document),0,1) AS access"]);
         foreach ($sort as $sortKey => $sortDir) {
             $c->sortby($resource->xpdo->escape('modResourceGroup') . '.' . $resource->xpdo->escape($sortKey), $sortDir);
@@ -333,7 +335,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         if ($limit > 0) {
             $c->limit($limit, $offset);
         }
-        $result['collection'] = $resource->xpdo->getCollection('modResourceGroup', $c);
+        $result['collection'] = $resource->xpdo->getCollection(modResourceGroup::class, $c);
 
         return $result;
     }
@@ -349,10 +351,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public static function getTemplateVarCollection(modResource &$resource)
     {
-        $c = $resource->xpdo->newQuery('modTemplateVar');
+        $c = $resource->xpdo->newQuery(modTemplateVar::class);
         $c->query['distinct'] = 'DISTINCT';
-        $c->select($resource->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
-        $c->select($resource->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', ['rank']));
+        $c->select($resource->xpdo->getSelectColumns(modTemplateVar::class, 'modTemplateVar'));
+        $c->select($resource->xpdo->getSelectColumns(modTemplateVarTemplate::class, 'tvtpl', '', ['rank']));
         if ($resource->isNew()) {
             $c->select([
                 'modTemplateVar.default_text AS value',
@@ -364,19 +366,19 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $resource->get('id') . ' AS resourceId',
             ]);
         }
-        $c->innerJoin('modTemplateVarTemplate', 'tvtpl', [
+        $c->innerJoin(modTemplateVarTemplate::class, 'tvtpl', [
             'tvtpl.tmplvarid = modTemplateVar.id',
             'tvtpl.templateid' => $resource->get('template'),
         ]);
         if (!$resource->isNew()) {
-            $c->leftJoin('modTemplateVarResource', 'tvc', [
+            $c->leftJoin(modTemplateVarResource::class, 'tvc', [
                 'tvc.tmplvarid = modTemplateVar.id',
                 'tvc.contentid' => $resource->get('id'),
             ]);
         }
         $c->sortby('tvtpl.rank,modTemplateVar.rank');
 
-        return $resource->xpdo->getCollection('modTemplateVar', $c);
+        return $resource->xpdo->getCollection(modTemplateVar::class, $c);
     }
 
     /**
@@ -396,7 +398,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean)$options['resetOverrides'] : false;
         $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
-        $criteria = $modx->newQuery('modResource', ['parent' => $parent]);
+        $criteria = $modx->newQuery(modResource::class, ['parent' => $parent]);
         if (!$resetOverrides) {
             $criteria->where(['uri_override' => false]);
         }
@@ -405,7 +407,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
         $criteria->sortby('menuindex', 'ASC');
         /** @var modResource $resource */
-        foreach ($modx->getIterator('modResource', $criteria) as $resource) {
+        foreach ($modx->getIterator(modResource::class, $criteria) as $resource) {
             $resource->set('refreshURIs', true);
             if ($resetOverrides) {
                 $resource->set('uri_override', false);
@@ -629,7 +631,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getTemplateVars()
     {
-        return $this->xpdo->call('modResource', 'getTemplateVarCollection', [&$this]);
+        return $this->xpdo->call(modResource::class, 'getTemplateVarCollection', [&$this]);
     }
 
     /**
@@ -650,7 +652,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 break;
             case 'contentType' :
                 if ($v !== $this->get('contentType')) {
-                    if ($contentType = $this->xpdo->getObject('modContentType', ['mime_type' => $v])) {
+                    if ($contentType = $this->xpdo->getObject(modContentType::class, ['mime_type' => $v])) {
                         if ($contentType->get('mime_type') != $this->get('contentType')) {
                             $this->addOne($contentType, 'ContentType');
                         }
@@ -660,7 +662,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             case 'content_type' :
                 if ($v !== $this->get('content_type')) {
                     /** @var modContentType $contentType */
-                    if ($contentType = $this->xpdo->getObject('modContentType', $v)) {
+                    if ($contentType = $this->xpdo->getObject(modContentType::class, $v)) {
                         if ($contentType->get('mime_type') != $this->get('contentType')) {
                             $this->_fields['contentType'] = $contentType->get('mime_type');
                             $this->_dirty['contentType'] = 'contentType';
@@ -751,7 +753,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
         $rt = parent:: save($cacheFlag);
         if ($rt && $refreshChildURIs) {
-            $this->xpdo->call('modResource', 'refreshURIs', [
+            $this->xpdo->call(modResource::class, 'refreshURIs', [
                 &$this->xpdo,
                 $this->get('id'),
             ]);
@@ -825,8 +827,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         $lock = 0;
         if ($this->xpdo instanceof modX) {
-            if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
-                $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', ['directory' => 'locks']);
+            if ($this->xpdo->getService('registry', modRegistry::class)) {
+                $this->xpdo->registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
                 $this->xpdo->registry->locks->connect();
                 $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
                 if ($msgs = $this->xpdo->registry->locks->read(['remove_read' => false, 'poll_limit' => 1])) {
@@ -857,8 +859,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             }
             $lockedBy = $this->getLock();
             if (empty($lockedBy) || $lockedBy == $user) {
-                if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
-                    $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', ['directory' => 'locks']);
+                if ($this->xpdo->getService('registry', modRegistry::class)) {
+                    $this->xpdo->registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
                     $this->xpdo->registry->locks->connect();
                     $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
                     $this->xpdo->registry->locks->read(['remove_read' => true, 'poll_limit' => 1]);
@@ -887,12 +889,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
-                $accessTable = $this->xpdo->getTableName('modAccessResourceGroup');
-                $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-                $resourceGroupTable = $this->xpdo->getTableName('modResourceGroupResource');
+                $accessTable = $this->xpdo->getTableName(modAccessResourceGroup::class);
+                $policyTable = $this->xpdo->getTableName(modAccessPolicy::class);
+                $resourceGroupTable = $this->xpdo->getTableName(modResourceGroupResource::class);
                 $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                     "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'modUserGroup' " .
+                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'MODX\\Revolution\\modUserGroup' " .
                     "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                     "AND ResourceGroup.document = :resource " .
                     "AND ResourceGroup.document_group = Acl.target " .
@@ -929,12 +931,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function hasChildren()
     {
-        $c = $this->xpdo->newQuery('modResource');
+        $c = $this->xpdo->newQuery(modResource::class);
         $c->where([
             'parent' => $this->get('id'),
         ]);
 
-        return $this->xpdo->getCount('modResource', $c);
+        return $this->xpdo->getCount(modResource::class, $c);
     }
 
     /**
@@ -953,9 +955,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
         /** @var modTemplateVar $tv */
         if ($byName && $this->xpdo instanceof modX) {
-            $tv = $this->xpdo->getParser()->getElement('modTemplateVar', $pk);
+            $tv = $this->xpdo->getParser()->getElement(modTemplateVar::class, $pk);
         } else {
-            $tv = $this->xpdo->getObject('modTemplateVar', $byName ? ['name' => $pk] : $pk);
+            $tv = $this->xpdo->getObject(modTemplateVar::class, $byName ? ['name' => $pk] : $pk);
         }
 
         return $tv == null ? null : $tv->renderOutput($this->get('id'));
@@ -978,7 +980,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $pk = ['name' => $pk];
         }
         /** @var modTemplateVar $tv */
-        $tv = $this->xpdo->getObject('modTemplateVar', $pk);
+        $tv = $this->xpdo->getObject(modTemplateVar::class, $pk);
         if ($tv) {
             $tv->setValue($this->get('id'), $value);
             $success = $tv->save();
@@ -1018,8 +1020,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $extension = '';
             $containerSuffix = $workingContext->getOption('container_suffix', '');
             /* @var modContentType $contentType process content type */
-            if (!empty($fields['content_type']) && $contentType = $this->xpdo->getObject('modContentType',
-                    $fields['content_type'])) {
+            if (!empty($fields['content_type']) && $contentType = $this->xpdo->getObject(modContentType::class, $fields['content_type'])) {
                 $extension = $contentType->getExtension();
                 $isHtml = (strpos($contentType->get('mime_type'), 'html') !== false);
             }
@@ -1033,8 +1034,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $useFrozenPathUris = $workingContext->getOption('use_frozen_parent_uris', false);
                 $pathParentId = $fields['parent'];
                 $parentResources = [];
-                $query = $this->xpdo->newQuery('modResource');
-                $query->select($this->xpdo->getSelectColumns('modResource', '', '',
+                $query = $this->xpdo->newQuery(modResource::class);
+                $query->select($this->xpdo->getSelectColumns(modResource::class, '', '',
                     ['parent', 'alias', 'alias_visible', 'uri', 'uri_override']));
                 $query->where("{$this->xpdo->escape('id')} = ?");
                 $query->prepare();
@@ -1092,7 +1093,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         if (empty($aliasPath)) {
             $aliasPath = $this->getAliasPath($this->get('alias'));
         }
-        $criteria = $this->xpdo->newQuery('modResource');
+        $criteria = $this->xpdo->newQuery(modResource::class);
         $where = [
             'id:!=' => $this->get('id'),
             'uri' => $aliasPath,
@@ -1189,7 +1190,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $preserve_menuindex = $this->xpdo->getOption('preserve_menuindex', $options, false);
         /* set new menuindex */
         if (!$preserve_menuindex) {
-            $menuindex = $this->xpdo->getCount('modResource', ['parent' => $this->get('parent')]);
+            $menuindex = $this->xpdo->getCount(modResource::class, ['parent' => $this->get('parent')]);
             $newResource->set('menuindex', $menuindex);
         }
 
@@ -1202,7 +1203,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         /** @var modTemplateVarResource $oldTemplateVarResource */
         foreach ($tvds as $oldTemplateVarResource) {
             /** @var modTemplateVarResource $newTemplateVarResource */
-            $newTemplateVarResource = $this->xpdo->newObject('modTemplateVarResource');
+            $newTemplateVarResource = $this->xpdo->newObject(modTemplateVarResource::class);
             $newTemplateVarResource->set('contentid', $newResource->get('id'));
             $newTemplateVarResource->set('tmplvarid', $oldTemplateVarResource->get('tmplvarid'));
             $newTemplateVarResource->set('value', $oldTemplateVarResource->get('value'));
@@ -1213,7 +1214,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         /** @var modResourceGroupResource $oldResourceGroupResource */
         foreach ($groups as $oldResourceGroupResource) {
             /** @var modResourceGroupResource $newResourceGroupResource */
-            $newResourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
+            $newResourceGroupResource = $this->xpdo->newObject(modResourceGroupResource::class);
             $newResourceGroupResource->set('document_group', $oldResourceGroupResource->get('document_group'));
             $newResourceGroupResource->set('document', $newResource->get('id'));
             $newResourceGroupResource->save();
@@ -1231,10 +1232,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 'parent' => $this->get('id'),
             ];
 
-            $count = $this->xpdo->getCount('modResource', $criteria);
+            $count = $this->xpdo->getCount(modResource::class, $criteria);
 
             if ($count > 0) {
-                $children = $this->xpdo->getIterator('modResource', $criteria);
+                $children = $this->xpdo->getIterator(modResource::class, $criteria);
 
                 /** @var modResource $child */
                 foreach ($children as $child) {
@@ -1278,7 +1279,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 ];
             }
             /** @var modResourceGroup $resourceGroup */
-            $resourceGroup = $this->xpdo->getObject('modResourceGroup', $c);
+            $resourceGroup = $this->xpdo->getObject(modResourceGroup::class, $c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - No resource group: ' . $resourceGroupPk);
 
@@ -1295,7 +1296,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
-        $resourceGroupResource = $this->xpdo->newObject('modResourceGroupResource');
+        $resourceGroupResource = $this->xpdo->newObject(modResourceGroupResource::class);
         $resourceGroupResource->set('document', $this->get('id'));
         $resourceGroupResource->set('document_group', $resourceGroup->get('id'));
 
@@ -1318,7 +1319,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 is_int($resourceGroupPk) ? 'id' : 'name' => $resourceGroupPk,
             ];
             /** @var modResourceGroup $resourceGroup */
-            $resourceGroup = $this->xpdo->getObject('modResourceGroup', $c);
+            $resourceGroup = $this->xpdo->getObject(modResourceGroup::class, $c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,
                     __METHOD__ . ' - No resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
@@ -1336,7 +1337,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
-        $resourceGroupResource = $this->xpdo->getObject('modResourceGroupResource', [
+        $resourceGroupResource = $this->xpdo->getObject(modResourceGroupResource::class, [
             'document' => $this->get('id'),
             'document_group' => $resourceGroup->get('id'),
         ]);
@@ -1355,7 +1356,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getGroupsList(array $sort = ['id' => 'ASC'], $limit = 0, $offset = 0)
     {
-        return $this->xpdo->call('modResource', 'listGroups', [&$this, $sort, $limit, $offset]);
+        return $this->xpdo->call(modResource::class, 'listGroups', [&$this, $sort, $limit, $offset]);
     }
 
     /**
@@ -1368,7 +1369,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         $resourceGroupNames = [];
 
-        $resourceGroups = $this->xpdo->getCollectionGraph('modResourceGroup', '{"ResourceGroupResources":{}}',
+        $resourceGroups = $this->xpdo->getCollectionGraph(modResourceGroup::class, '{"ResourceGroupResources":{}}',
             ['ResourceGroupResources.document' => $this->get('id')]);
 
         if ($resourceGroups) {
@@ -1457,7 +1458,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function getResourceTypeName()
     {
         $className = $this->_class;
-        if ($className == 'modDocument') {
+        if ($className == modDocument::class) {
             $className = 'document';
         }
 

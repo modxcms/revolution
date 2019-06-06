@@ -970,8 +970,6 @@ class modUser extends modPrincipal
      */
     public function getDashboard()
     {
-        $this->xpdo->loadClass('modDashboard');
-
         /** @var modUserGroup $userGroup */
         $userGroup = $this->getPrimaryGroup();
         if ($userGroup) {

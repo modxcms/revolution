@@ -8,6 +8,12 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
+use MODX\Revolution\modDashboardWidgetPlacement;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modUserGroup;
+
 /**
  * Loads the dashboard update page
  *
@@ -39,7 +45,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
             $this->failure($this->modx->lexicon('dashboard_err_ns'));
             return [];
         }
-        $this->dashboard = $this->modx->getObject('modDashboard', array('id' => $this->scriptProperties['id']));
+        $this->dashboard = $this->modx->getObject(modDashboard::class, array('id' => $this->scriptProperties['id']));
         if (empty($this->dashboard)) {
             $this->failure($this->modx->lexicon('dashboard_err_nf'));
             return [];
@@ -57,13 +63,13 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getWidgets() {
-        $c = $this->modx->newQuery('modDashboardWidgetPlacement');
+        $c = $this->modx->newQuery(modDashboardWidgetPlacement::class);
         $c->where(array(
             'dashboard' => $this->dashboard->get('id'),
             'user' => 0,
         ));
         $c->sortby('modDashboardWidgetPlacement.rank','ASC');
-        $placements = $this->modx->getCollection('modDashboardWidgetPlacement',$c);
+        $placements = $this->modx->getCollection(modDashboardWidgetPlacement::class, $c);
         $list = array();
         /** @var modDashboardWidgetPlacement $placement */
         foreach ($placements as $placement) {
@@ -96,12 +102,12 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      */
     public function getUserGroups() {
         $list = [];
-        $c = $this->modx->newQuery('modUserGroup');
+        $c = $this->modx->newQuery(modUserGroup::class);
         $c->where([
             'dashboard' => $this->dashboard->get('id'),
         ]);
         $c->sortby('name', 'ASC');
-        $usergroups = $this->modx->getIterator('modUserGroup', $c);
+        $usergroups = $this->modx->getIterator(modUserGroup::class, $c);
         /** @var modUserGroup $usergroup */
         foreach ($usergroups as $usergroup) {
             $list[] = [$usergroup->get('id'), $usergroup->get('name')];

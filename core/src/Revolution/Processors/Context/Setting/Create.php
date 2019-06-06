@@ -16,6 +16,7 @@ use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\modResource;
 
 /**
  * Creates a context setting
@@ -137,7 +138,7 @@ class Create extends modObjectCreateProcessor
         }
         if ($refreshURIs) {
             $this->context->config[$key] = $value;
-            $this->modx->call('modResource', 'refreshURIs',
+            $this->modx->call(modResource::class, 'refreshURIs',
                 [&$this->modx, 0, ['contexts' => $this->context->get('key')]]);
         }
 

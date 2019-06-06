@@ -13,6 +13,7 @@ namespace MODX\Revolution\Processors\Security\Forms\Set;
 use MODX\Revolution\modActionDom;
 use MODX\Revolution\modFormCustomizationSet;
 use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\modResource;
 
 /**
  * Duplicate a FC Set
@@ -31,7 +32,7 @@ class Duplicate extends modObjectDuplicateProcessor
      */
     public function beforeSave()
     {
-        $this->newObject->set('constraint_class', 'modResource');
+        $this->newObject->set('constraint_class', modResource::class);
         $this->newObject->set('active', false);
 
         return parent::beforeSave();

@@ -876,12 +876,12 @@ abstract class modManagerController
                 $userGroups = [$primaryGroup->get('id')];
             }
         }
-        $c = $this->modx->newQuery('modActionDom');
-        $c->innerJoin('modFormCustomizationSet', 'FCSet');
-        $c->innerJoin('modFormCustomizationProfile', 'Profile', 'FCSet.profile = Profile.id');
-        $c->leftJoin('modFormCustomizationProfileUserGroup', 'ProfileUserGroup',
+        $c = $this->modx->newQuery(modActionDom::class);
+        $c->innerJoin(modFormCustomizationSet::class, 'FCSet');
+        $c->innerJoin(modFormCustomizationProfile::class, 'Profile', 'FCSet.profile = Profile.id');
+        $c->leftJoin(modFormCustomizationProfileUserGroup::class, 'ProfileUserGroup',
             'Profile.id = ProfileUserGroup.profile');
-        $c->leftJoin('modFormCustomizationProfile', 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
+        $c->leftJoin(modFormCustomizationProfile::class, 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
 
         // Filter on the controller (action).
         $controller = array_key_exists('controller', $this->config) ? $this->config['controller'] : '';
@@ -915,15 +915,15 @@ abstract class modManagerController
                 'OR:ProfileUserGroup.usergroup:=' => null,
             ], xPDOQuery::SQL_AND, null, 2);
         }
-        $c->select($this->modx->getSelectColumns('modActionDom', 'modActionDom'));
-        $c->select($this->modx->getSelectColumns('modFormCustomizationSet', 'FCSet', '', [
+        $c->select($this->modx->getSelectColumns(modActionDom::class, 'modActionDom'));
+        $c->select($this->modx->getSelectColumns(modFormCustomizationSet::class, 'FCSet', '', [
             'constraint_class',
             'constraint_field',
             'constraint',
             'template',
         ]));
         $c->sortby('modActionDom.rank', 'ASC');
-        $domRules = $this->modx->getCollection('modActionDom', $c);
+        $domRules = $this->modx->getCollection(modActionDom::class, $c);
         $rules = [];
         /** @var modActionDom $rule */
         foreach ($domRules as $rule) {

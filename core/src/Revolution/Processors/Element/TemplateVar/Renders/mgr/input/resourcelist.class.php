@@ -31,7 +31,7 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
         $parentList = array();
         foreach ($parents as $parent) {
             /** @var modResource $parent */
-            $parent = $this->modx->getObject('modResource',$parent);
+            $parent = $this->modx->getObject(modResource::class,$parent);
             if ($parent) $parentList[] = $parent;
         }
 
@@ -48,8 +48,8 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
             $ids = array_unique($ids);
         }
 
-        $c = $this->modx->newQuery('modResource');
-        $c->leftJoin('modResource','Parent');
+        $c = $this->modx->newQuery(modResource::class);
+        $c->leftJoin(modResource::class,'Parent');
         if (!empty($ids)) {
             $c->where(array('modResource.id:IN' => $ids));
         } else if (!empty($parents) && $parents[0] == 0) {
@@ -67,7 +67,7 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
         if (!empty($params['limit'])) {
             $c->limit($params['limit']);
         }
-        $resources = $this->modx->getCollection('modResource',$c);
+        $resources = $this->modx->getCollection(modResource::class, $c);
 
         /* iterate */
         $opts = array();

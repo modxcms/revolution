@@ -592,7 +592,7 @@ MODx.combo.ClassDerivatives = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             'action': 'system/derivatives/getList',
-            'class': 'modResource'
+            'class': 'MODX\\Revolution\\modResource'
         }
         ,displayField: 'name'
         ,valueField: 'id'
@@ -617,7 +617,7 @@ MODx.combo.Object = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'workspace/builder/getAssocObject'
-            ,class_key: 'modResource'
+            ,class_key: 'MODX\\Revolution\\modResource'
         }
         ,displayField: 'name'
         ,valueField: 'id'

@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\Element\TemplateVar\Renders;
 
 
 use DirectoryIterator;
+use MODX\Revolution\modNamespace;
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\Processors\Element\TemplateVar\Renders\Controllers\TvInputManagerController;
 use UnexpectedValueException;
@@ -60,7 +61,7 @@ class GetInputs extends modProcessor {
         }
 
         /* load namespace caches */
-        $cache = $this->modx->call('modNamespace','loadCache',array(&$this->modx));
+        $cache = $this->modx->call(modNamespace::class,'loadCache',array(&$this->modx));
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {
                 $inputDir = rtrim($namespace['path'],'/').'/tv/input/';

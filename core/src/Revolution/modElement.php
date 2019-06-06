@@ -246,11 +246,11 @@ class modElement extends modAccessibleSimpleObject
     protected function isStaticFilesAutomated()
     {
         $elements = [
-            'modTemplate' => 'templates',
-            'modTemplateVar' => 'tvs',
-            'modChunk' => 'chunks',
-            'modSnippet' => 'snippets',
-            'modPlugin' => 'plugins',
+            modTemplate::class => 'templates',
+            modTemplateVar::class => 'tvs',
+            modChunk::class => 'chunks',
+            modSnippet::class => 'snippets',
+            modPlugin::class => 'plugins',
         ];
 
         if (!array_key_exists($this->_class, $elements)) {
@@ -381,7 +381,7 @@ class modElement extends modAccessibleSimpleObject
     {
         if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
             if (!$inputFilterClass = $this->get('input_filter')) {
-                $inputFilterClass = $this->xpdo->getOption('input_filter', null, 'filters.modInputFilter');
+                $inputFilterClass = $this->xpdo->getOption('input_filter', null, modInputFilter::class);
             }
             if ($filterClass = $this->xpdo->loadClass($inputFilterClass, '', false, true)) {
                 if ($filter = new $filterClass($this->xpdo)) {
@@ -402,7 +402,7 @@ class modElement extends modAccessibleSimpleObject
     {
         if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
             if (!$outputFilterClass = $this->get('output_filter')) {
-                $outputFilterClass = $this->xpdo->getOption('output_filter', null, 'filters.modOutputFilter');
+                $outputFilterClass = $this->xpdo->getOption('output_filter', null, modOutputFilter::class);
             }
             if ($filterClass = $this->xpdo->loadClass($outputFilterClass, '', false, true)) {
                 if ($filter = new $filterClass($this->xpdo)) {

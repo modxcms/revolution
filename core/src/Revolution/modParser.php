@@ -459,7 +459,7 @@ class modParser
                     break;
                 case '$':
                     $tagName= substr($tagName, 1 + $tokenOffset);
-                    if ($element= $this->getElement('modChunk', $tagName)) {
+                    if ($element= $this->getElement(modChunk::class, $tagName)) {
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);

@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modConnectorRequest;
+use MODX\Revolution\modX;
+use xPDO\xPDO;
+
 /**
  * @package modx
  * @subpackage connectors
@@ -40,7 +44,7 @@ if (!require_once(MODX_CORE_PATH . 'vendor/autoload.php')) {
 }
 
 /* load modX instance */
-$modx = new \MODX\Revolution\modX('', array(\xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true)));
+$modx = new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) && is_string($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
@@ -69,7 +73,7 @@ if ($ctx == 'mgr') {
 }
 
 /* handle the request */
-$connectorRequestClass = $modx->getOption('modConnectorRequest.class', null, \MODX\Revolution\modConnectorRequest::class);
+$connectorRequestClass = $modx->getOption('modConnectorRequest.class', null, modConnectorRequest::class);
 $modx->config['modRequest.class'] = $connectorRequestClass;
 $modx->getRequest();
 $modx->request->sanitizeRequest();

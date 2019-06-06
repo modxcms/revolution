@@ -297,7 +297,7 @@ class modLexicon
 
             /* get DB overrides */
             $c = $this->modx->newQuery('modLexiconEntry');
-            $c->innerJoin('modNamespace', 'Namespace');
+            $c->innerJoin(modNamespace::class, 'Namespace');
             $c->where([
                 'modLexiconEntry.topic' => $topic,
                 'modLexiconEntry.language' => $language,
@@ -371,7 +371,7 @@ class modLexicon
         $corePath = $this->modx->getOption('core_path', null, MODX_CORE_PATH);
         if ($namespace != 'core') {
             /** @var modNamespace $namespaceObj */
-            $namespaceObj = $this->modx->getObject('modNamespace', $namespace);
+            $namespaceObj = $this->modx->getObject(modNamespace::class, $namespace);
             if ($namespaceObj) {
                 $corePath = $namespaceObj->getCorePath();
             }

@@ -279,12 +279,12 @@ class modX extends xPDO {
      */
     public $pluginCache= array();
     /**
-     * @var array The elemnt source cache used for caching and preparing Element data
+     * @var array The element source cache used for caching and preparing Element data
      */
     public $sourceCache= array(
-        'modChunk' => array()
-        ,'modSnippet' => array()
-        ,'modTemplateVar' => array(),
+        modChunk::class => array()
+        ,modSnippet::class => array()
+        ,modTemplateVar::class => array(),
     );
     /** @var modCacheManager $cacheManager */
     public $cacheManager;
@@ -1035,7 +1035,7 @@ class modX extends xPDO {
                 $ctx= null;
                 if ($context == '') {
                     /** @var PDOStatement $stmt  */
-                    if ($stmt = $this->prepare("SELECT context_key FROM " . $this->getTableName('modResource') . " WHERE id = :id")) {
+                    if ($stmt = $this->prepare("SELECT context_key FROM " . $this->getTableName(modResource::class) . " WHERE id = :id")) {
                         $stmt->bindValue(':id', $id);
                         if ($contextKey = $this->getValue($stmt)) {
                             $ctx = $this->getContext($contextKey);
@@ -1067,7 +1067,7 @@ class modX extends xPDO {
      * @return string|null A valid path segment string or null if an error occurs.
      */
     public function filterPathSegment($string, array $options = array()) {
-        return $this->call('modResource', 'filterPathSegment', array(&$this, $string, $options));
+        return $this->call(modResource::class, 'filterPathSegment', array(&$this, $string, $options));
     }
 
     public function findResource($uri, $context = '') {
@@ -1731,6 +1731,17 @@ class modX extends xPDO {
             return $processor->run();
         }
 
+        $legacyAction = 'MODX\\Revolution\\Processors\\' . implode('\\', array_map('ucfirst', explode('/', $action)));
+        if (strpos($legacyAction, '\\Tv\\') !== false) {
+            $legacyAction = str_replace('\\Tv\\', '\\TemplateVar\\', $legacyAction);
+        }
+        if (class_exists($legacyAction)) {
+            /** @var modProcessor $processor */
+            $processor = new $legacyAction($this, $scriptProperties);
+
+            return $processor->run();
+        }
+
         /* calculate processor file path from options and action */
         $isClass = true;
         $processorsPath = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
@@ -1889,7 +1900,7 @@ class modX extends xPDO {
     public function getChunk($chunkName, array $properties= array ()) {
         $output= '';
         if ($this->getParser()) {
-            $chunk= $this->parser->getElement('modChunk', $chunkName);
+            $chunk= $this->parser->getElement(modChunk::class, $chunkName);
             if ($chunk instanceof modChunk) {
                 $chunk->setCacheable(false);
                 $output= $chunk->process($properties);

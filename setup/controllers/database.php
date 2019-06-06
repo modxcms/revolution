@@ -104,7 +104,7 @@ if (!empty($_POST['proceed'])) {
                     $settings['mgr_url'] = $webUrl . 'manager/';
                     $settings['connectors_path'] = MODX_INSTALL_PATH . 'connectors/';
                     $settings['connectors_url'] = $webUrl . 'connectors/';
-                    $settings['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
+                    $settings['processors_path'] = MODX_CORE_PATH . 'src/Revolution/Processors/';
                     $settings['assets_path'] = $settings['web_path'] . 'assets/';
                     $settings['assets_url'] = $settings['web_url'] . 'assets/';
                 } elseif ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_REVO_ADVANCED) {
@@ -119,7 +119,7 @@ if (!empty($_POST['proceed'])) {
                     $settings['mgr_url'] = defined('MODX_MANAGER_URL') ? MODX_MANAGER_URL : $webUrl . 'manager/';
                     $settings['assets_path'] = defined('MODX_ASSETS_PATH') ? MODX_ASSETS_PATH : $settings['web_path'] . 'assets/';
                     $settings['assets_url'] = defined('MODX_ASSETS_URL') ? MODX_ASSETS_URL : $settings['web_url'] . 'assets/';
-                    $settings['processors_path'] = defined('MODX_PROCESSORS_PATH') ? MODX_PROCESSORS_PATH : MODX_CORE_PATH . 'model/modx/processors/';
+                    $settings['processors_path'] = defined('MODX_PROCESSORS_PATH') ? MODX_PROCESSORS_PATH : MODX_CORE_PATH . 'src/Revolution/Processors/';
                 }
                 $install->settings->store($settings);
                 $this->proceed('summary');

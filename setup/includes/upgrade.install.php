@@ -11,15 +11,32 @@
 /**
  * Upgrade-specific scripts
  *
- * @var modInstallRunner $this
- * @var modInstall $install
- * @var \xPDO\xPDO $modx
+ * @var modInstallRunner   $this
+ * @var modInstall         $install
+ * @var xPDO               $modx
  * @var modInstallSettings $settings
  *
  * @package modx
  * @subpackage setup
  */
 /* handle change of manager_theme to default (FIXME: temp hack) */
+
+use MODX\Revolution\modAccessActionDom;
+use MODX\Revolution\modAccessPermission;
+use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modAccessPolicyTemplate;
+use MODX\Revolution\modAction;
+use MODX\Revolution\modActionDom;
+use MODX\Revolution\modFormCustomizationProfile;
+use MODX\Revolution\modFormCustomizationProfileUserGroup;
+use MODX\Revolution\modFormCustomizationSet;
+use MODX\Revolution\modResource;
+use MODX\Revolution\modSystemSetting;
+use MODX\Revolution\modUserGroup;
+use MODX\Revolution\Transport\modTransportPackage;
+use MODX\Revolution\Transport\modTransportProvider;
+use xPDO\xPDO;
+
 if ($settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
     $managerTheme = $modx->getObject('modSystemSetting', array(
         'key' => 'manager_theme',
@@ -154,19 +171,19 @@ if (!$setting) {
      */
     /* get admin policy and list of standard policies */
     $standards = array('Administrator','Resource','Load Only','Load, List and View','Object','Element');
-    $adminPolicy = $modx->getObject('modAccessPolicy',array('name' => 'Administrator'));
+    $adminPolicy = $modx->getObject(modAccessPolicy::class, array('name' => 'Administrator'));
     $adminPolicyData = $adminPolicy ? $adminPolicy->get('data') : array();
 
-    $adminPolicyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'AdministratorTemplate'));
+    $adminPolicyTpl = $modx->getObject(modAccessPolicyTemplate::class, array('name' => 'AdministratorTemplate'));
     if (!$adminPolicyTpl) {
-        $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not find Administrator Access Policy Template');
+        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Administrator Access Policy Template');
     }
     $adminPolicyTplGroup = $adminPolicyTpl ? $adminPolicyTpl->get('template_group') : 1;
 
     /* get all existing policies */
-    $c = $modx->newQuery('modAccessPolicy');
+    $c = $modx->newQuery(modAccessPolicy::class);
     $c->sortby('name','ASC');
-    $policies = $modx->getCollection('modAccessPolicy',$c);
+    $policies = $modx->getCollection(modAccessPolicy::class, $c);
 
     /** @var modAccessPolicy $policy */
     foreach ($policies as $policy) {
@@ -177,39 +194,39 @@ if (!$setting) {
             $id = $adminPolicyTpl ? $adminPolicyTpl->get('id') : 3; /* default to object */
             switch ($policy->get('name')) {
                 case 'Resource':
-                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'ResourceTemplate'));
+                    $policyTpl = $modx->getObject(modAccessPolicyTemplate::class, array('name' => 'ResourceTemplate'));
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not find Resource Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Resource Access Policy Template');
                     }
                     break;
                 case 'Element':
-                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'ElementTemplate'));
+                    $policyTpl = $modx->getObject(modAccessPolicyTemplate::class, array('name' => 'ElementTemplate'));
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not find Element Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Element Access Policy Template');
                     }
                     break;
                 case 'Object':
                 case 'Load, List and View':
                 case 'Load Only':
-                    $policyTpl = $modx->getObject('modAccessPolicyTemplate',array('name' => 'ObjectTemplate'));
+                    $policyTpl = $modx->getObject(modAccessPolicyTemplate::class, array('name' => 'ObjectTemplate'));
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not find Object Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Object Access Policy Template');
                     }
                     break;
                 case 'Administrator':
                 default:
                     break;
             }
-            $modx->log(\xPDO\xPDO::LOG_LEVEL_DEBUG,'Setting template to '.$id.' for standard '.$policy->get('name'));
+            $modx->log(xPDO::LOG_LEVEL_DEBUG,'Setting template to '.$id.' for standard '.$policy->get('name'));
 
             /* prevent duplicate standard policies */
-            $policyExists = $modx->getObject('modAccessPolicy',array(
+            $policyExists = $modx->getObject(modAccessPolicy::class, array(
                 'template' => $id,
                 'name' => $policy->get('name'),
             ));
@@ -222,10 +239,10 @@ if (!$setting) {
             unset($policyTpl,$policy,$id,$policyExists);
 
         } else {
-            $modx->log(\xPDO\xPDO::LOG_LEVEL_DEBUG,'Found non-standard policy: '.$policy->get('name'));
+            $modx->log(xPDO::LOG_LEVEL_DEBUG,'Found non-standard policy: '.$policy->get('name'));
             /* non-standard policies */
             if (!$policyTpl = $policy->getOne('Template')) {
-                $policyTpl = $modx->getObject('modAccessPolicyTemplate',array(
+                $policyTpl = $modx->getObject(modAccessPolicyTemplate::class, array(
                     'name' => $policy->get('name'),
                 ));
             }
@@ -233,7 +250,7 @@ if (!$setting) {
                 /* array_diff data with standard admin policy */
                 $data = $policy->get('data');
                 $diff = array_diff_key($data,$adminPolicyData);
-                $modx->log(\xPDO\xPDO::LOG_LEVEL_DEBUG,'Diff: '.print_r($diff,true));
+                $modx->log(xPDO::LOG_LEVEL_DEBUG,'Diff: '.print_r($diff,true));
 
                 /* if the unknown policy has all the perms and no new perms of the admin
                  * policy, just set its tpl to the admin policy tpl
@@ -244,7 +261,7 @@ if (!$setting) {
 
                 /* otherwise create a custom policy tpl */
                 } else {
-                    $policyTpl = $modx->newObject('modAccessPolicyTemplate');
+                    $policyTpl = $modx->newObject(modAccessPolicyTemplate::class);
                     $policyTpl->fromArray(array(
                         'name' => $policy->get('name').'Template',
                         'template_group' => $adminPolicyTplGroup,
@@ -252,22 +269,22 @@ if (!$setting) {
                     ));
                     $lexicon = $policy->get('lexicon');
                     if (!empty($lexicon)) {
-                        $modx->log(\xPDO\xPDO::LOG_LEVEL_DEBUG,'Setting lexicon to '.$lexicon.' for policy '.$policy->get('name'));
+                        $modx->log(xPDO::LOG_LEVEL_DEBUG,'Setting lexicon to '.$lexicon.' for policy '.$policy->get('name'));
                         $policyTpl->set('lexicon',$lexicon);
                     }
                     $policyTpl->save();
-                    $modx->log(\xPDO\xPDO::LOG_LEVEL_DEBUG,'Setting template to '.$policyTpl->get('id').' for '.$policy->get('name'));
+                    $modx->log(xPDO::LOG_LEVEL_DEBUG,'Setting template to '.$policyTpl->get('id').' for '.$policy->get('name'));
                     $policy->set('template',$policyTpl->get('id'));
                     $policy->save();
 
-                    $permissions = $modx->getCollection('modAccessPermission',array(
+                    $permissions = $modx->getCollection(modAccessPermission::class, array(
                         'policy' => $policy->get('id'),
                     ));
                     // add permissions to tpl
                     foreach ($permissions as $permission) {
                         // prevent duplicate permissions
                         /** @var modAccessPermission $permission */
-                        $permExists = $modx->getObject('modAccessPermission',array(
+                        $permExists = $modx->getObject(modAccessPermission::class, array(
                             'name' => $permission->get('name'),
                             'template' => $policyTpl->get('id'),
                         ));
@@ -285,13 +302,13 @@ if (!$setting) {
     }
     unset($policy,$permission,$permissions,$policies,$policy,$policyTpl,$adminPolicy,$adminPolicyData,$adminPolicyTpl,$adminPolicyTplGroup,$data);
     /* now remove all 0 template permissions */
-    $permissions =$modx->getCollection('modAccessPermission',array('template' => 0));
+    $permissions =$modx->getCollection(modAccessPermission::class, array('template' => 0));
     foreach ($permissions as $permission) { $permission->remove(); }
     unset($permissions,$permission);
 
 
     /* drop policy index from modAccessPermission */
-    $class = 'modAccessPermission';
+    $class = modAccessPermission::class;
     $table = $modx->getTableName($class);
     $sql = "ALTER TABLE {$table} DROP INDEX policy";
     $modx->exec($sql);
@@ -301,7 +318,7 @@ if (!$setting) {
     $modx->exec($sql);
 
     /* add setting so that this runs only once to prevent errors or goof-ups */
-    $setting = $modx->newObject('modSystemSetting');
+    $setting = $modx->newObject(modSystemSetting::class);
     $setting->set('key','access_policies_version');
     $setting->set('namespace','core');
     $setting->set('area','system');
@@ -310,23 +327,23 @@ if (!$setting) {
 }
 
 /* upgrade FC rules */
-$ct = $modx->getCount('modFormCustomizationProfile');
+$ct = $modx->getCount(modFormCustomizationProfile::class);
 if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
-    $c = $modx->newQuery('modActionDom');
-    $c->innerJoin('modAction','Action');
-    $c->leftJoin('modAccessActionDom','Access','Access.target = modActionDom.id');
+    $c = $modx->newQuery(modActionDom::class);
+    $c->innerJoin(modAction::class,'Action');
+    $c->leftJoin(modAccessActionDom::class,'Access','Access.target = modActionDom.id');
     $c->where(array(
         'modActionDom.active' => true,
     ));
     $c->select(array(
-        $modx->getSelectColumns('modActionDom', 'modActionDom'),
-        $modx->getSelectColumns('modAction', 'Action', '', array('controller')),
-        $modx->getSelectColumns('modAccessActionDom', 'Access', '', array('principal')),
+        $modx->getSelectColumns(modActionDom::class, 'modActionDom'),
+        $modx->getSelectColumns(modAction::class, 'Action', '', array('controller')),
+        $modx->getSelectColumns(modAccessActionDom::class, 'Access', '', array('principal')),
     ));
     $c->sortby('Access.principal','ASC');
     $c->sortby('modActionDom.action','ASC');
     $c->sortby('modActionDom.constraint_field','ASC');
-    $rules = $modx->getCollection('modActionDom',$c);
+    $rules = $modx->getCollection(modActionDom::class, $c);
 
     $currentProfile = 0;
     $currentAction = 0;
@@ -342,7 +359,7 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
         $principal = $rule->get('principal');
         if (!isset($currentUserGroup) || $currentUserGroup != $principal) {
             if (!empty($principal)) {
-                $usergroup = $modx->getObject('modUserGroup',$principal);
+                $usergroup = $modx->getObject(modUserGroup::class,$principal);
                 if (!$usergroup) {
                     $currentUserGroup = 0;
                 } else {
@@ -353,7 +370,7 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
                 $currentUserGroup = 0;
             }
 
-            $profile = $modx->newObject('modFormCustomizationProfile');
+            $profile = $modx->newObject(modFormCustomizationProfile::class);
             if ($usergroup) {
                 $profile->set('name','Default: '.$usergroup->get('name'));
                 $profile->set('description','Default profile based on import from Revolution upgrade for '.$usergroup->get('name').' User Group.');
@@ -363,22 +380,22 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
             }
             $profile->set('active',true);
             if (!$profile->save()) {
-                $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not create modFormCustomizationProfile object: '.print_r($profile->toArray(),true));
+                $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not create modFormCustomizationProfile object: '.print_r($profile->toArray(),true));
             }
             $currentProfile = $profile->get('id');
 
             /* create user group record */
             if ($usergroup) {
-                $fcpug = $modx->newObject('modFormCustomizationProfileUserGroup');
+                $fcpug = $modx->newObject(modFormCustomizationProfileUserGroup::class);
                 $fcpug->set('usergroup',$usergroup->get('id'));
                 $fcpug->set('profile',$profile->get('id'));
                 if (!$fcpug->save()) {
-                    $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not associate Profile to User Group: '.print_r($fcpug->toArray(),true));
+                    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not associate Profile to User Group: '.print_r($fcpug->toArray(),true));
                 }
             }
             $newSet = true;
         } else {
-            $modx->log(\xPDO\xPDO::LOG_LEVEL_DEBUG,'Skipping Profile creation, already has one for this rule.');
+            $modx->log(xPDO::LOG_LEVEL_DEBUG,'Skipping Profile creation, already has one for this rule.');
         }
 
         /* if moving to a new action, create a new set */
@@ -398,7 +415,7 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
 
         /* if generating a new set */
         if ($newSet) {
-            $set = $modx->newObject('modFormCustomizationSet');
+            $set = $modx->newObject(modFormCustomizationSet::class);
             $set->set('profile',$currentProfile);
             $set->set('action',$rule->get('action'));
             $set->set('active',true);
@@ -410,10 +427,10 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
                 /* otherwise a non-template field, set as constraint */
                 $set->set('constraint',$rule->get('constraint'));
                 $set->set('constraint_field',$rule->get('constraint_field'));
-                $set->set('constraint_class','modResource');
+                $set->set('constraint_class', modResource::class);
             }
             if (!$set->save()) {
-                $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not save new Set: '.print_r($set->toArray(),true));
+                $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not save new Set: '.print_r($set->toArray(),true));
             }
             $currentSet = $set->get('id');
         }
@@ -437,7 +454,7 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
             $rule->set('value',$name);
         }
         if (!$rule->save()) {
-            $modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR,'Could not save new modActionDom rule: '.print_r($rule->toArray(),true));
+            $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not save new modActionDom rule: '.print_r($rule->toArray(),true));
         }
 
         /* explode csv fields into new rules */
@@ -448,7 +465,7 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
             foreach ($fields as $fld) {
                 if ($idx != 0) {
                     /* create new rule from other fields */
-                    $newRule = $modx->newObject('modActionDom');
+                    $newRule = $modx->newObject(modActionDom::class);
                     $newRule->fromArray($rule->toArray());
                     $newRule->set('name',$fld);
                     $newRule->save();
@@ -463,17 +480,17 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
     }
 
     /* remove all inactive rules */
-    $rules = $modx->getCollection('modActionDom',array('active' => false));
+    $rules = $modx->getCollection(modActionDom::class,array('active' => false));
     foreach ($rules as $rule) { $rule->remove(); }
 
     /* remove all non-resource rules */
-    $c = $modx->newQuery('modActionDom');
-    $c->innerJoin('modAction','Action');
+    $c = $modx->newQuery(modActionDom::class);
+    $c->innerJoin(modAction::class, 'Action');
     $c->where(array(
         'Action.controller:!=' => 'resource/create',
         'AND:Action.controller:!=' => 'resource/update',
     ));
-    $invalidRules = $modx->getCollection('modActionDom',$c);
+    $invalidRules = $modx->getCollection(modActionDom::class,$c);
     foreach ($invalidRules as $invalidRule) {
         /** @var modActionDom $invalidRule */
         $invalidRule->remove();
@@ -481,17 +498,17 @@ if (empty($ct) || $modx->getOption('fc_upgrade_100',null,false)) {
 }
 
 /* remove modxcms.com provider if it occurs */
-$provider = $modx->getObject('transport.modTransportProvider',array(
+$provider = $modx->getObject(modTransportProvider::class, array(
     'service_url' => 'http://rest.modxcms.com/extras/',
 ));
-$newProvider = $modx->getObject('transport.modTransportProvider',array(
-    'service_url' => 'http://rest.modx.com/extras/',
+$newProvider = $modx->getObject(modTransportProvider::class, array(
+    'service_url' => 'https://rest.modx.com/extras/',
 ));
 if ($provider && $newProvider && $provider->get('id') != $newProvider->get('id')) {
     /* if 2 providers found, remove old one */
     if ($provider->remove()) {
         /* and then migrate old packages to new provider */
-        $packages = $modx->getCollection('transport.modTransportPackage',array(
+        $packages = $modx->getCollection(modTransportPackage::class, array(
             'provider' => $provider->get('id'),
         ));
         foreach ($packages as $package) {
@@ -501,12 +518,12 @@ if ($provider && $newProvider && $provider->get('id') != $newProvider->get('id')
         }
     }
 } else if ($provider && empty($newProvider)) {
-    $provider->set('service_url','http://rest.modx.com/extras/');
+    $provider->set('service_url','https://rest.modx.com/extras/');
     $provider->save();
 }
 
 /* Set session_gc_maxlifetime equal to session_cookie_lifetime or session.gc_maxlifetime if empty */
-$setting = $modx->getObject('modSystemSetting', array('key' => 'session_gc_maxlifetime'));
+$setting = $modx->getObject(modSystemSetting::class, array('key' => 'session_gc_maxlifetime'));
 if ($setting && $setting->get('value') == '') {
     $session_gc_maxlifetime = (integer) $modx->getOption('session_cookie_lifetime', null, @ini_get('session.gc_maxlifetime'));
     if ($session_gc_maxlifetime < 1) {
@@ -518,7 +535,7 @@ if ($setting && $setting->get('value') == '') {
 unset($setting);
 
 /* add ext_debug setting for sdk distro and turn it off if it exists outside sdk */
-$setting = $modx->getObject('modSystemSetting', array('key' => 'ext_debug'));
+$setting = $modx->getObject(modSystemSetting::class, array('key' => 'ext_debug'));
 if (!$setting && ('sdk' === trim($currentVersion['distro'], '@') || 'git' === trim($currentVersion['distro'], '@'))) {
     $setting = $modx->newObject('modSystemSetting');
     $setting->fromArray(

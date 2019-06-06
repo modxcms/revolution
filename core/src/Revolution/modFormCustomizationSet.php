@@ -56,12 +56,12 @@ class modFormCustomizationSet extends xPDOSimpleObject
 
         /** @var modActionField $field */
         foreach ($fields as $field) {
-            $c = $this->xpdo->newQuery('modActionDom');
+            $c = $this->xpdo->newQuery(modActionDom::class);
             $c->where([
                 'set' => $this->get('id'),
                 'name' => $field->get('name'),
             ]);
-            $rules = $this->xpdo->getCollection('modActionDom', $c);
+            $rules = $this->xpdo->getCollection(modActionDom::class, $c);
 
             $fieldArray = $field->toArray();
             $fieldArray['visible'] = true;
@@ -116,7 +116,7 @@ class modFormCustomizationSet extends xPDOSimpleObject
         }
         /** @var modTemplateVar $tv */
         foreach ($tvs as $tv) {
-            $c = $this->xpdo->newQuery('modActionDom');
+            $c = $this->xpdo->newQuery(modActionDom::class);
             $c->where([
                 'set' => $this->get('id'),
             ]);
@@ -124,7 +124,7 @@ class modFormCustomizationSet extends xPDOSimpleObject
                 'name:=' => 'tv' . $tv->get('id'),
                 'OR:value:=' => 'tv' . $tv->get('id'),
             ], null, 2);
-            $rules = $this->xpdo->getCollection('modActionDom', $c);
+            $rules = $this->xpdo->getCollection(modActionDom::class, $c);
 
             $tvArray = $tv->toArray('', true, true);
             $tvArray['visible'] = true;
@@ -173,12 +173,12 @@ class modFormCustomizationSet extends xPDOSimpleObject
 
         /** @var modActionField $tab */
         foreach ($tabs as $tab) {
-            $c = $this->xpdo->newQuery('modActionDom');
+            $c = $this->xpdo->newQuery(modActionDom::class);
             $c->where([
                 'set' => $this->get('id'),
                 'name' => $tab->get('name'),
             ]);
-            $rules = $this->xpdo->getCollection('modActionDom', $c);
+            $rules = $this->xpdo->getCollection(modActionDom::class, $c);
 
             $tabArray = $tab->toArray();
             $tabArray['visible'] = true;
@@ -198,7 +198,7 @@ class modFormCustomizationSet extends xPDOSimpleObject
             }
             $setArray['tabs'][] = $tabArray;
         }
-        $newTabs = $this->xpdo->getCollection('modActionDom', [
+        $newTabs = $this->xpdo->getCollection(modActionDom::class, [
             'set' => $this->get('id'),
             'action' => $this->get('action'),
             'rule' => 'tabNew',

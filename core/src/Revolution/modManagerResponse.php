@@ -31,7 +31,7 @@ class modManagerResponse extends modResponse
     protected function _loadNamespaces()
     {
         $loaded = false;
-        $cache = $this->modx->call('modNamespace', 'loadCache', [&$this->modx]);
+        $cache = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
         if ($cache) {
             $this->namespaces = $cache;
             $loaded = true;
@@ -84,7 +84,6 @@ class modManagerResponse extends modResponse
         if ($isLoggedIn && !$this->checkForMenuPermissions($route)) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('access_denied'));
         } else {
-            $this->modx->loadClass('modManagerController', '', false, true);
             $className = $this->loadControllerClass(!$isDeprecated);
             $this->instantiateController($className, $isDeprecated ? 'getInstanceDeprecated' : 'getInstance');
             $this->body = $this->modx->controller->render();
@@ -238,7 +237,7 @@ class modManagerResponse extends modResponse
     {
         $canAccess = true;
         /** @var modMenu $menu */
-        $menu = $this->modx->getObject('modMenu', [
+        $menu = $this->modx->getObject(modMenu::class, [
             'action' => $action,
             'namespace' => $this->namespace,
         ]);

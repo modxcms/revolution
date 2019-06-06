@@ -135,22 +135,22 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
         $offset = 0
     ) {
         /* query for profiles */
-        $c = $xpdo->newQuery('modFormCustomizationProfile');
+        $c = $xpdo->newQuery(\MODX\Revolution\modFormCustomizationProfile::class);
         $c->select([
             'modFormCustomizationProfile.*',
         ]);
         $c->select('
-            (SELECT GROUP_CONCAT(UserGroup.name) FROM ' . $xpdo->getTableName('modUserGroup') . ' AS UserGroup
-                INNER JOIN ' . $xpdo->getTableName('modFormCustomizationProfileUserGroup') . ' AS fcpug
+            (SELECT GROUP_CONCAT(UserGroup.name) FROM ' . $xpdo->getTableName(\MODX\Revolution\modUserGroup::class) . ' AS UserGroup
+                INNER JOIN ' . $xpdo->getTableName(\MODX\Revolution\modFormCustomizationProfileUserGroup::class) . ' AS fcpug
                 ON fcpug.usergroup = UserGroup.id
              WHERE fcpug.profile = modFormCustomizationProfile.id
             ) AS usergroups
         ');
         $c->where($criteria, null, 2);// also log issue in remine to look at this usage of where()
-        $count = $xpdo->getCount('modFormCustomizationProfile', $c);
+        $count = $xpdo->getCount(\MODX\Revolution\modFormCustomizationProfile::class, $c);
 
         foreach ($sort as $field => $dir) {
-            $c->sortby($xpdo->getSelectColumns('modFormCustomizationProfile', 'modFormCustomizationProfile', '',
+            $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modFormCustomizationProfile::class, 'modFormCustomizationProfile', '',
                 [$field]), $dir);
         }
         if ((int)$limit > 0) {
@@ -159,7 +159,7 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
 
         return [
             'count' => $count,
-            'collection' => $xpdo->getCollection('modFormCustomizationProfile', $c),
+            'collection' => $xpdo->getCollection(\MODX\Revolution\modFormCustomizationProfile::class, $c),
         ];
     }
 }

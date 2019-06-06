@@ -32,7 +32,7 @@ class modChunkTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->chunk = $this->modx->newObject('modChunk');
+        $this->chunk = $this->modx->newObject(modChunk::class);
         $this->chunk->fromArray(array(
             'id' => 12345,
             'name' => 'Unit Test Chunk',

@@ -55,7 +55,7 @@ class modStaticImport extends modImport
             return;
         }
         if ($parent > 0) {
-            if ($parentResource = $this->modx->getObject('modResource', $parent)) {
+            if ($parentResource = $this->modx->getObject(modResource::class, $parent)) {
                 $parentResource->set('isfolder', true);
                 $parentResource->save();
             } else {
@@ -65,7 +65,7 @@ class modStaticImport extends modImport
             }
         }
         $menuindex = 0;
-        $maxIdxQuery = $this->modx->newQuery('modResource', ['parent' => $parent]);
+        $maxIdxQuery = $this->modx->newQuery(modResource::class, ['parent' => $parent]);
         $maxIdxQuery->select('MAX(menuindex)');
         if ($maxIdxQuery->prepare() && $maxIdxQuery->stmt->execute()) {
             $menuindex = $maxIdxQuery->stmt->fetch(PDO::FETCH_COLUMN);
@@ -87,7 +87,7 @@ class modStaticImport extends modImport
             if (is_array($value)) {
                 // create folder
                 /** @var modDocument $resource */
-                $resource = $this->modx->newObject('modDocument');
+                $resource = $this->modx->newObject(modDocument::class);
                 $resource->set('context_key', $context);
                 $resource->set('content_type', 1);
                 $resource->set('pagetitle', $id);
@@ -206,7 +206,7 @@ class modStaticImport extends modImport
             $alias = $resource->cleanAlias($alias);
         }
         /** @var modContext $resourceContext */
-        $resourceContext = $this->modx->getObject('modContext', $context);
+        $resourceContext = $this->modx->getObject(modContext::class, $context);
         $resourceContext->prepare(true);
 
         $isHtml = true;
@@ -224,7 +224,7 @@ class modStaticImport extends modImport
         if ($this->modx->getOption('use_alias_path')) {
             $pathParentId = intval($parent);
             $parentResources = [];
-            $currResource = $this->modx->getObject('modResource', $pathParentId);
+            $currResource = $this->modx->getObject(modResource::class, $pathParentId);
             while ($currResource) {
                 $parentAlias = $currResource->get('alias');
                 if (empty ($parentAlias)) {

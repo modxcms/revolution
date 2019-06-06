@@ -122,16 +122,16 @@ class modMenu extends modAccessibleObject
     public function getSubMenus($start = '')
     {
         if (!$this->xpdo->lexicon) {
-            $this->xpdo->getService('lexicon', 'modLexicon');
+            $this->xpdo->getService('lexicon', modLexicon::class);
         }
 
         $this->xpdo->lexicon->load('menu', 'en:menu', 'topmenu', 'en:topmenu');
 
-        $c = $this->xpdo->newQuery('modMenu');
-        $c->select($this->xpdo->getSelectColumns('modMenu', 'modMenu'));
+        $c = $this->xpdo->newQuery(modMenu::class);
+        $c->select($this->xpdo->getSelectColumns(modMenu::class, 'modMenu'));
 
         /* 2.2 and earlier support */
-        $c->leftJoin('modAction', 'Action');
+        $c->leftJoin(modAction::class, 'Action');
         $c->select([
             'action_controller' => 'Action.controller',
             'action_namespace' => 'Action.namespace',
@@ -140,8 +140,8 @@ class modMenu extends modAccessibleObject
         $c->where([
             'modMenu.parent' => $start,
         ]);
-        $c->sortby($this->xpdo->getSelectColumns('modMenu', 'modMenu', '', ['menuindex']), 'ASC');
-        $menus = $this->xpdo->getCollection('modMenu', $c);
+        $c->sortby($this->xpdo->getSelectColumns(modMenu::class, 'modMenu', '', ['menuindex']), 'ASC');
+        $menus = $this->xpdo->getCollection(modMenu::class, $c);
         if (count($menus) < 1) {
             return [];
         }

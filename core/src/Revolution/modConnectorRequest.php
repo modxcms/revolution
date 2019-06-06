@@ -74,7 +74,6 @@ class modConnectorRequest extends modManagerRequest
         if ((!isset($options['action']) || $options['action'] == '') && isset($_REQUEST['action'])) {
             $options['action'] = $_REQUEST['action'];
         }
-        $options['action'] = strtolower($options['action']);
 
         $this->loadErrorHandler();
 
@@ -101,7 +100,7 @@ class modConnectorRequest extends modManagerRequest
      */
     public function setDirectory($dir = '')
     {
-        if (!$this->modx->getResponse('modConnectorResponse')) {
+        if (!$this->modx->getResponse(modConnectorResponse::class)) {
             $this->modx->log(modX::LOG_LEVEL_FATAL, 'Could not load response class: modConnectorResponse');
         }
         $this->modx->response->setDirectory($dir);

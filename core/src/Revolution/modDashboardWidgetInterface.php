@@ -130,7 +130,7 @@ abstract class modDashboardWidgetInterface
         }
         if (file_exists($file)) {
             /** @var modChunk $chunk */
-            $chunk = $this->modx->newObject('modChunk');
+            $chunk = $this->modx->newObject(modChunk::class);
             $chunk->setCacheable(false);
             $tplContent = file_get_contents($file);
             $chunk->setContent($tplContent);

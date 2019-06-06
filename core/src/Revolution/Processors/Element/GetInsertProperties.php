@@ -14,6 +14,7 @@ namespace MODX\Revolution\Processors\Element;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\modPropertySet;
+use MODX\Revolution\modResource;
 use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplateVar;
 
@@ -216,7 +217,7 @@ class GetInsertProperties extends modProcessor
             case 'file':
                 $resid = $this->getProperty('resourceId');
                 if (!empty($resid)) {
-                    $resobj = $this->modx->getObject('modResource', ['id' => $this->getProperty('resourceId')]);
+                    $resobj = $this->modx->getObject(modResource::class, ['id' => $this->getProperty('resourceId')]);
                     $ctx = $resobj->get('context_key');
                     $orgctx = $this->modx->context->get('key');
                     $this->modx->switchContext($ctx);

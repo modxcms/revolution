@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Import;
 
 
+use MODX\Revolution\modContentType;
 use MODX\Revolution\modX;
 
 /**
@@ -98,9 +99,9 @@ class modImport {
      * @return string The content-type of the file
      */
     public function getFileContentType($extension) {
-        if (!$contentType= $this->modx->getObject('modContentType', array('file_extensions:LIKE' => '%'.$extension.'%'))) {
+        if (!$contentType= $this->modx->getObject(modContentType::class, array('file_extensions:LIKE' => '%'.$extension.'%'))) {
             $this->log("Could not find content type for extension '$extension'; using <samp>text/plain</samp>.");
-            $contentType= $this->modx->getObject('modContentType', array('mime_type' => 'text/plain'));
+            $contentType= $this->modx->getObject(modContentType::class, array('mime_type' => 'text/plain'));
         }
         return $contentType;
     }

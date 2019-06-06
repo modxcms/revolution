@@ -39,7 +39,7 @@ class modActionDomTest extends MODxTestCase {
      */
     public function testApply($expected,$ruleType,$name,$value,$container) {
         /** @var modActionDom $rule */
-        $rule = $this->modx->newObject('modActionDom');
+        $rule = $this->modx->newObject(modActionDom::class);
         $rule->fromArray(array(
             'set' => 0,
             'action' => 1,

@@ -2,8 +2,9 @@
 
 namespace MODX\Revolution\Transport;
 
-use modRestResponse;
 use MODX\Revolution\modX;
+use MODX\Revolution\Rest\modRestClient;
+use MODX\Revolution\Rest\modRestResponse;
 use SimpleXMLElement;
 use xPDO\Om\xPDOSimpleObject;
 use xPDO\Transport\xPDOTransport;
@@ -230,7 +231,7 @@ class modTransportProvider extends xPDOSimpleObject
         $metadata = $this->info($signature);
         if (!empty($metadata)) {
             /** @var modTransportPackage $package */
-            $package = $this->xpdo->newObject('transport.modTransportPackage');
+            $package = $this->xpdo->newObject(modTransportPackage::class);
             $package->set('signature', $signature);
             $package->set('state', 1);
             $package->set('workspace', 1);
@@ -289,7 +290,7 @@ class modTransportProvider extends xPDOSimpleObject
 
         /** @var SimpleXMLElement $package */
         foreach ($xml as $package) {
-            $installed = $this->xpdo->getObject('transport.modTransportPackage', (string)$package->signature);
+            $installed = $this->xpdo->getObject(modTransportPackage::class, (string)$package->signature);
 
             $versionCompiled = rtrim((string)$package->version . '-' . (string)$package->release, '-');
             $releasedon = strftime($this->arg('dateFormat', $where), strtotime((string)$package->releasedon));
@@ -335,7 +336,7 @@ class modTransportProvider extends xPDOSimpleObject
     {
         $url = false;
         /** @var modRestClient $rest */
-        $rest = $this->xpdo->getService('rest', 'rest.modRestClient');
+        $rest = $this->xpdo->getService('rest', modRestClient::class);
         if ($rest) {
             $responseType = $rest->responseType;
             $rest->setResponseType('text');
@@ -438,7 +439,7 @@ class modTransportProvider extends xPDOSimpleObject
     public function getClient()
     {
         if (empty($this->xpdo->rest)) {
-            $this->xpdo->getService('rest', 'rest.modRestClient');
+            $this->xpdo->getService('rest', modRestClient::class);
             $loaded = $this->xpdo->rest->getConnection();
             if (!$loaded) {
                 return false;

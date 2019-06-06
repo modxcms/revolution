@@ -10,6 +10,7 @@
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modContext;
+use MODX\Revolution\modDocument;
 use MODX\Revolution\modManagerController;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
@@ -40,7 +41,7 @@ abstract class ResourceManagerController extends modManagerController
     /** @var modResource $resource */
     public $parent = null;
     /** @var string $resourceClass */
-    public $resourceClass = 'modDocument';
+    public $resourceClass = modDocument::class;
     /** @var array $tvCounts */
     public $tvCounts = [];
     /** @var array $rteFields */
@@ -71,21 +72,21 @@ abstract class ResourceManagerController extends modManagerController
      */
     public static function getInstance(modX &$modx, $className, array $config = [])
     {
-        $resourceClass = 'modDocument';
+        $resourceClass = modDocument::class;
         $isDerivative = false;
         if (!empty($_REQUEST['class_key'])) {
             $isDerivative = true;
-            $resourceClass = in_array($_REQUEST['class_key'], ['modDocument', 'modResource']) ? 'modDocument'
+            $resourceClass = in_array($_REQUEST['class_key'], [modDocument::class, modResource::class]) ? modDocument::class
                 : $_REQUEST['class_key'];
-            if ($resourceClass == 'modResource') $resourceClass = 'modDocument';
+            if ($resourceClass == modResource::class) $resourceClass = modDocument::class;
         } elseif (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined' && strlen($_REQUEST['id']) === strlen((integer)$_REQUEST['id'])) {
             /** @var modResource $resource */
-            $resource = $modx->getObject('modResource', ['id' => $_REQUEST['id']]);
-            if ($resource && !in_array($resource->get('class_key'), ['modDocument', 'modResource'])) {
+            $resource = $modx->getObject(modResource::class, ['id' => $_REQUEST['id']]);
+            if ($resource && !in_array($resource->get('class_key'), [modDocument::class, modResource::class])) {
                 $isDerivative = true;
                 $resourceClass = $resource->get('class_key');
-            } elseif ($resource && $resource->get('class_key') == 'modResource') { /* fix improper class key */
-                $resource->set('class_key', 'modDocument');
+            } elseif ($resource && $resource->get('class_key') == modResource::class) { /* fix improper class key */
+                $resource->set('class_key', modDocument::class);
                 $resource->save();
             }
         }
@@ -93,7 +94,7 @@ abstract class ResourceManagerController extends modManagerController
         if ($isDerivative) {
             $resourceClass = str_replace(['../', '..', '/', '\\'], '', $resourceClass);
             if (!class_exists($resourceClass) && !$modx->loadClass($resourceClass)) {
-                $resourceClass = 'modDocument';
+                $resourceClass = modDocument::class;
             }
 
             $delegateView = $modx->call($resourceClass, 'getControllerPath', [&$modx]);
@@ -172,7 +173,7 @@ abstract class ResourceManagerController extends modManagerController
         if ($parentId == 0) {
             $parentName = $this->context->getOption('site_name', '', $this->modx->_userConfig);
         } else {
-            $this->parent = $this->modx->getObject('modResource', $parentId);
+            $this->parent = $this->modx->getObject(modResource::class, $parentId);
             if ($this->parent !== null) {
                 $parentName = $this->parent->get('pagetitle');
                 $this->resource->set('parent', $parentId);

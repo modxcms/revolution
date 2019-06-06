@@ -32,7 +32,7 @@ class modNamespace extends modAccessibleObject
     {
         $saved = parent::save();
         if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modNamespace', 'clearCache', [&$this->xpdo]);
+            $this->xpdo->call(modNamespace::class, 'clearCache', [&$this->xpdo]);
         }
 
         return $saved;
@@ -42,7 +42,7 @@ class modNamespace extends modAccessibleObject
     {
         $removed = parent::remove($ancestors);
         if ($removed && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modNamespace', 'clearCache', [&$this->xpdo]);
+            $this->xpdo->call(modNamespace::class, 'clearCache', [&$this->xpdo]);
         }
 
         return $removed;
@@ -86,14 +86,14 @@ class modNamespace extends modAccessibleObject
     {
         $path = $this->get('path');
 
-        return $this->xpdo->call('modNamespace', 'translatePath', [&$this->xpdo, $path]);
+        return $this->xpdo->call(modNamespace::class, 'translatePath', [&$this->xpdo, $path]);
     }
 
     public function getAssetsPath()
     {
         $path = $this->get('assets_path');
 
-        return $this->xpdo->call('modNamespace', 'translatePath', [&$this->xpdo, $path]);
+        return $this->xpdo->call(modNamespace::class, 'translatePath', [&$this->xpdo, $path]);
     }
 
     public static function translatePath(xPDO &$xpdo, $path)
@@ -127,9 +127,9 @@ class modNamespace extends modAccessibleObject
         $context = 'mgr';
 
         if (empty($this->_policies) || !isset($this->_policies[$context])) {
-            $accessTable = $this->xpdo->getTableName('modAccessNamespace');
-            $namespaceTable = $this->xpdo->getTableName('modNamespace');
-            $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+            $accessTable = $this->xpdo->getTableName(modAccessNamespace::class);
+            $namespaceTable = $this->xpdo->getTableName(modNamespace::class);
+            $policyTable = $this->xpdo->getTableName(modAccessPolicy::class);
             $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                 "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
                 "JOIN {$namespaceTable} Namespace ON Acl.principal_class = 'modUserGroup' " .

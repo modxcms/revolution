@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modResource;
 use MODX\Revolution\modTemplateVarOutputRender;
 
 /**
@@ -33,7 +34,7 @@ class modTemplateVarOutputRenderUrl extends modTemplateVarOutputRender {
             if (!$url) $url = $name;
             if ((empty($name) || $name == $url) && $this->tv->get('type') == 'resourcelist') {
                 /** @var modResource $resource */
-                $resource = $this->modx->getObject('modResource',$url);
+                $resource = $this->modx->getObject(modResource::class, $url);
                 if ($resource) {
                     $name = $resource->get('pagetitle');
                 }

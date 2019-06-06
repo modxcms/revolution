@@ -3,7 +3,11 @@
 namespace MODX\Revolution;
 
 use DirectoryIterator;
+use MODX\Revolution\Smarty\modSmarty;
+use MODX\Revolution\Sources\modFileMediaSource;
+use MODX\Revolution\Sources\modFTPMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
+use MODX\Revolution\Sources\modS3MediaSource;
 use PDO;
 use PDOStatement;
 use UnexpectedValueException;
@@ -320,15 +324,11 @@ class modTemplateVar extends modElement
         $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types', null, 'image,file');
         $mTypes = explode(',', $mTypes);
         if (!empty($value) && in_array($this->get('type'), $mTypes)) {
-            $context = !empty($resourceId) ? $this->xpdo->getObject('modResource',
+            $context = !empty($resourceId) ? $this->xpdo->getObject(modResource::class,
                 $resourceId)->get('context_key') : $this->xpdo->context->get('key');
             $sourceCache = $this->getSourceCache($context);
-            if (!empty($sourceCache) && !empty($sourceCache['class_key'])) {
-                $coreSourceClasses = $this->xpdo->getOption('core_media_sources', null,
-                    'modFileMediaSource,modS3MediaSource,modFTPMediaSource');
-                $coreSourceClasses = explode(',', $coreSourceClasses);
-                $classKey = in_array($sourceCache['class_key'],
-                    $coreSourceClasses) ? 'sources.' . $sourceCache['class_key'] : $sourceCache['class_key'];
+            $classKey = $sourceCache['class_key'];
+            if (!empty($sourceCache) && !empty($classKey)) {
                 if ($this->xpdo->loadClass($classKey)) {
                     /** @var modMediaSource $source */
                     $source = $this->xpdo->newObject($classKey);
@@ -361,7 +361,7 @@ class modTemplateVar extends modElement
     public function renderInput($resource = null, $options = [])
     {
         if (is_int($resource)) {
-            $resource = $this->xpdo->getObject('modResource', $resource);
+            $resource = $this->xpdo->getObject(modResource::class, $resource);
         }
         if (empty($resource)) {
             $resource = $this->xpdo->resource;
@@ -378,7 +378,7 @@ class modTemplateVar extends modElement
             $value = is_array($options) && isset($options['value']) ? strval($options['value']) : '';
         }
         if (!isset($this->xpdo->smarty)) {
-            $this->xpdo->getService('smarty', 'smarty.modSmarty', '', [
+            $this->xpdo->getService('smarty', modSmarty::class, '', [
                 'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',
                         null, 'default') . '/',
             ]);
@@ -623,12 +623,12 @@ class modTemplateVar extends modElement
                     $userGroups = [$primaryGroup->get('id')];
                 }
             }
-            $c = $this->xpdo->newQuery('modActionDom');
-            $c->innerJoin('modFormCustomizationSet', 'FCSet');
-            $c->innerJoin('modFormCustomizationProfile', 'Profile', 'FCSet.profile = Profile.id');
-            $c->leftJoin('modFormCustomizationProfileUserGroup', 'ProfileUserGroup',
+            $c = $this->xpdo->newQuery(modActionDom::class);
+            $c->innerJoin(modFormCustomizationSet::class, 'FCSet');
+            $c->innerJoin(modFormCustomizationProfile::class, 'Profile', 'FCSet.profile = Profile.id');
+            $c->leftJoin(modFormCustomizationProfileUserGroup::class, 'ProfileUserGroup',
                 'Profile.id = ProfileUserGroup.profile');
-            $c->leftJoin('modFormCustomizationProfile', 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
+            $c->leftJoin(modFormCustomizationProfile::class, 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
             $ruleFieldName = $this->xpdo->escape('rule');
             $c->where([
                 [
@@ -659,7 +659,7 @@ class modTemplateVar extends modElement
                     'modActionDom.action:IN' => [$this->xpdo->request->action, $wildAction],
                 ]);
             }
-            $c->select($this->xpdo->getSelectColumns('modActionDom', 'modActionDom'));
+            $c->select($this->xpdo->getSelectColumns(modActionDom::class, 'modActionDom'));
             $c->select([
                 'FCSet.constraint_class',
                 'FCSet.constraint_field',
@@ -668,7 +668,7 @@ class modTemplateVar extends modElement
             ]);
             $c->sortby('FCSet.template', 'ASC');
             $c->sortby('modActionDom.rank', 'ASC');
-            $domRules = $this->xpdo->getCollection('modActionDom', $c);
+            $domRules = $this->xpdo->getCollection(modActionDom::class, $c);
             /** @var modActionDom $rule */
             foreach ($domRules as $rule) {
                 if (!empty($resource)) {
@@ -861,10 +861,10 @@ class modTemplateVar extends modElement
         $modx =& $this->xpdo;
         if (empty($modx->resource)) {
             if (!empty($resourceId)) {
-                $modx->resource = $modx->getObject('modResource', $resourceId);
+                $modx->resource = $modx->getObject(modResource::class, $resourceId);
             }
             if (empty($modx->resource) || empty($resourceId)) {
-                $modx->resource = $modx->newObject('modResource');
+                $modx->resource = $modx->newObject(modResource::class);
                 $modx->resource->set('id', 0);
             }
         }
@@ -886,7 +886,7 @@ class modTemplateVar extends modElement
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
                 if ($preProcess) {
-                    $query = $this->xpdo->newQuery('modResource', [
+                    $query = $this->xpdo->newQuery(modResource::class, [
                         'id' => (integer)$param,
                         'deleted' => false,
                     ]);
@@ -1008,9 +1008,9 @@ class modTemplateVar extends modElement
     {
         $output = $default; /* Default to param value if no content from parents */
         $resource = null;
-        $resourceColumns = $this->xpdo->getSelectColumns('modResource', '', '', ['id', 'parent']);
+        $resourceColumns = $this->xpdo->getSelectColumns(modResource::class, '', '', ['id', 'parent']);
         $resourceQuery = new xPDOCriteria($this->xpdo,
-            "SELECT {$resourceColumns} FROM {$this->xpdo->getTableName('modResource')} WHERE id = ?");
+            "SELECT {$resourceColumns} FROM {$this->xpdo->getTableName(modResource::class)} WHERE id = ?");
         if (!empty($resourceId) && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
             if ($resourceQuery->stmt && $resourceQuery->stmt->execute([$resourceId])) {
                 $result = $resourceQuery->stmt->fetchAll(PDO::FETCH_ASSOC);

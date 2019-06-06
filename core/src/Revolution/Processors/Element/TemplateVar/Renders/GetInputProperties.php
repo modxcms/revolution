@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Element\TemplateVar\Renders;
 
 
+use MODX\Revolution\modNamespace;
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\Processors\Element\TemplateVar\Renders\Controllers\TvInputPropertiesManagerController;
@@ -132,7 +133,7 @@ class GetInputProperties extends modProcessor {
      * @return array
      */
     public function loadNamespaceCache() {
-        $cache = $this->modx->call('modNamespace', 'loadCache', array(&$this->modx));
+        $cache = $this->modx->call(modNamespace::class, 'loadCache', array(&$this->modx));
         $cachedDirs = array();
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {

@@ -109,7 +109,7 @@
     </object>
 
     <object class="modAccessMenu" table="access_menus" extends="MODX\Revolution\modAccess">
-        <aggregate alias="Target" class="modMenu" local="target" foreign="text" owner="foreign" cardinality="one" />
+        <aggregate alias="Target" class="MODX\Revolution\modMenu" local="target" foreign="text" owner="foreign" cardinality="one" />
     </object>
 
     <object class="modAccessPolicy" table="access_policies" extends="xPDO\Om\xPDOSimpleObject">

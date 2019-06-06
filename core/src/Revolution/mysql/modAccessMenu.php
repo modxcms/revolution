@@ -11,17 +11,17 @@ class modAccessMenu extends \MODX\Revolution\modAccessMenu
         'version' => '3.0',
         'table' => 'access_menus',
         'extends' => 'MODX\\Revolution\\modAccess',
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
-                'class' => 'modMenu',
+                'class' => 'MODX\\Revolution\\modMenu',
                 'local' => 'target',
                 'foreign' => 'text',
                 'owner' => 'foreign',

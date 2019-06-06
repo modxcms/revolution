@@ -101,7 +101,7 @@ class modConnectorResponse extends modResponse
         $target = preg_replace('/[\.]{2,}/', '', htmlspecialchars($options['action']));
 
         $siteId = $this->modx->user->getUserToken($this->modx->context->get('key'));
-        $isLogin = $target == 'login' || $target == 'security/login';
+        $isLogin = $target == 'Login' || $target == 'Security/Login';
 
         /* Block the user if there's no user token for the current context, and permissions are in fact required */
         if (empty($siteId) && (!defined('MODX_REQP') || MODX_REQP === true)) {

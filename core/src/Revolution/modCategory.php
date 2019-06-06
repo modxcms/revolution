@@ -138,11 +138,11 @@ class modCategory extends modAccessibleSimpleObject
 
         if ($removed && $this->xpdo instanceof modX) {
             $elementClasses = [
-                'modChunk',
-                'modPlugin',
-                'modSnippet',
-                'modTemplate',
-                'modTemplateVar',
+                modChunk::class,
+                modPlugin::class,
+                modSnippet::class,
+                modTemplate::class,
+                modTemplateVar::class,
             ];
             foreach ($elementClasses as $classKey) {
                 $elements = $this->xpdo->getCollection($classKey, ['category' => $this->get('id')]);
@@ -179,27 +179,27 @@ class modCategory extends modAccessibleSimpleObject
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
-                $aclSelectColumns = $this->xpdo->getSelectColumns('modAccessCategory', 'modAccessCategory', '',
+                $aclSelectColumns = $this->xpdo->getSelectColumns(modAccessCategory::class, 'modAccessCategory', '',
                     ['id', 'target', 'principal', 'authority', 'policy']);
-                $c = $this->xpdo->newQuery('modAccessCategory');
+                $c = $this->xpdo->newQuery(modAccessCategory::class);
                 $c->select($aclSelectColumns);
-                $c->select($this->xpdo->getSelectColumns('modAccessPolicy', 'Policy', '', ['data']));
-                $c->leftJoin('modAccessPolicy', 'Policy');
-                $c->innerJoin('modCategoryClosure', 'CategoryClosure', [
+                $c->select($this->xpdo->getSelectColumns(modAccessPolicy::class, 'Policy', '', ['data']));
+                $c->leftJoin(modAccessPolicy::class, 'Policy');
+                $c->innerJoin(modCategoryClosure::class, 'CategoryClosure', [
                     'CategoryClosure.descendant:=' => $this->get('id'),
                     'modAccessCategory.principal_class:=' => 'modUserGroup',
                     'CategoryClosure.ancestor = modAccessCategory.target',
                     [
                         'modAccessCategory.context_key:=' => $context,
-                        'OR:modAccessCategory.context_key:=' => null,
+                        'OR:modAccessCategory.context_key:IS' => null,
                         'OR:modAccessCategory.context_key:=' => '',
                     ],
                 ]);
                 $c->groupby($aclSelectColumns);
-                $c->sortby($this->xpdo->getSelectColumns('modCategoryClosure', 'CategoryClosure', '',
-                        ['depth']) . ' DESC, ' . $this->xpdo->getSelectColumns('modAccessCategory', 'modAccessCategory',
+                $c->sortby($this->xpdo->getSelectColumns(modCategoryClosure::class, 'CategoryClosure', '',
+                        ['depth']) . ' DESC, ' . $this->xpdo->getSelectColumns(modAccessCategory::class, 'modAccessCategory',
                         '', ['authority']) . ' ASC', '');
-                $acls = $this->xpdo->getIterator('modAccessCategory', $c);
+                $acls = $this->xpdo->getIterator(modAccessCategory::class, $c);
 
                 foreach ($acls as $acl) {
                     $policy['modAccessCategory'][$acl->get('target')][] = [
@@ -228,7 +228,7 @@ class modCategory extends modAccessibleSimpleObject
         $parent = $this->get('parent');
 
         /* create self closure */
-        $cl = $this->xpdo->newObject('modCategoryClosure');
+        $cl = $this->xpdo->newObject(modCategoryClosure::class);
         $cl->set('ancestor', $id);
         $cl->set('descendant', $id);
         if ($cl->save() === false) {
@@ -238,12 +238,12 @@ class modCategory extends modAccessibleSimpleObject
         }
 
         /* create closures and calculate rank */
-        $c = $this->xpdo->newQuery('modCategoryClosure');
+        $c = $this->xpdo->newQuery(modCategoryClosure::class);
         $c->where([
             'descendant' => $parent,
         ]);
         $c->sortby('depth', 'DESC');
-        $gparents = $this->xpdo->getCollection('modCategoryClosure', $c);
+        $gparents = $this->xpdo->getCollection(modCategoryClosure::class, $c);
         $cgps = count($gparents);
         $i = $cgps - 1;
         $gps = [];
@@ -254,7 +254,7 @@ class modCategory extends modAccessibleSimpleObject
             if ($ancestor != 0) {
                 $depth = $i;
             }
-            $obj = $this->xpdo->newObject('modCategoryClosure');
+            $obj = $this->xpdo->newObject(modCategoryClosure::class);
             $obj->set('ancestor', $ancestor);
             $obj->set('descendant', $id);
             $obj->set('depth', $depth);
@@ -264,12 +264,12 @@ class modCategory extends modAccessibleSimpleObject
         }
 
         /* handle 0 ancestor closure */
-        $rootcl = $this->xpdo->getObject('modCategoryClosure', [
+        $rootcl = $this->xpdo->getObject(modCategoryClosure::class, [
             'ancestor' => 0,
             'descendant' => $id,
         ]);
         if (!$rootcl) {
-            $rootcl = $this->xpdo->newObject('modCategoryClosure');
+            $rootcl = $this->xpdo->newObject(modCategoryClosure::class);
             $rootcl->set('ancestor', 0);
             $rootcl->set('descendant', $id);
             $rootcl->set('depth', 0);
@@ -285,19 +285,19 @@ class modCategory extends modAccessibleSimpleObject
     public function rebuildClosure()
     {
         /* first remove old tree path */
-        $this->xpdo->removeCollection('modCategoryClosure', [
+        $this->xpdo->removeCollection(modCategoryClosure::class, [
             'descendant' => $this->get('id'),
             'ancestor:!=' => $this->get('id'),
         ]);
 
         /* now create new tree path from new parent */
         $newParentId = $this->get('parent');
-        $c = $this->xpdo->newQuery('modCategoryClosure');
+        $c = $this->xpdo->newQuery(modCategoryClosure::class);
         $c->where([
             'descendant' => $newParentId,
         ]);
         $c->sortby('depth', 'DESC');
-        $ancestors = $this->xpdo->getCollection('modCategoryClosure', $c);
+        $ancestors = $this->xpdo->getCollection(modCategoryClosure::class, $c);
         $grandParents = [];
         /** @var modCategoryClosure $ancestor */
         foreach ($ancestors as $ancestor) {
@@ -315,7 +315,7 @@ class modCategory extends modAccessibleSimpleObject
                 $grandParents[] = $grandParentId;
             }
 
-            $cl = $this->xpdo->newObject('modCategoryClosure');
+            $cl = $this->xpdo->newObject(modCategoryClosure::class);
             $cl->set('ancestor', $ancestor->get('ancestor'));
             $cl->set('descendant', $this->get('id'));
             $cl->set('depth', $depth);
@@ -323,7 +323,7 @@ class modCategory extends modAccessibleSimpleObject
         }
         /* if parent is root, make sure to set the root closure */
         if ($newParentId == 0) {
-            $cl = $this->xpdo->newObject('modCategoryClosure');
+            $cl = $this->xpdo->newObject(modCategoryClosure::class);
             $cl->set('ancestor', 0);
             $cl->set('descendant', $this->get('id'));
             $cl->save();

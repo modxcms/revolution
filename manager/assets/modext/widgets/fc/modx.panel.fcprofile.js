@@ -10,7 +10,7 @@ MODx.panel.FCProfile = function(config) {
         url: MODx.config.connector_url
         ,id: 'modx-panel-fc-profile'
 		,cls: 'container'
-        ,class_key: 'modFormCustomizationProfile'
+        ,class_key: 'MODX\\Revolution\\modFormCustomizationProfile'
         ,bodyStyle: ''
         ,items: [{
             html: _('profile_new')

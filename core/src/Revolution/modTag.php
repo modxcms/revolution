@@ -289,7 +289,7 @@ abstract class modTag
     {
         if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
             if (!$inputFilterClass = $this->get('input_filter')) {
-                $inputFilterClass = $this->modx->getOption('input_filter', null, 'filters.modInputFilter');
+                $inputFilterClass = $this->modx->getOption('input_filter', null, modInputFilter::class);
             }
             if ($filterClass = $this->modx->loadClass($inputFilterClass, '', false, true)) {
                 if ($filter = new $filterClass($this->modx)) {
@@ -310,7 +310,7 @@ abstract class modTag
     {
         if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
             if (!$outputFilterClass = $this->get('output_filter')) {
-                $outputFilterClass = $this->modx->getOption('output_filter', null, 'filters.modOutputFilter');
+                $outputFilterClass = $this->modx->getOption('output_filter', null, modOutputFilter::class);
             }
             if ($filterClass = $this->modx->loadClass($outputFilterClass, '', false, true)) {
                 if ($filter = new $filterClass($this->modx)) {

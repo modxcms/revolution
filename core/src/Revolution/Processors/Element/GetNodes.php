@@ -12,8 +12,11 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\modCategory;
+use MODX\Revolution\modChunk;
 use MODX\Revolution\modElement;
+use MODX\Revolution\modPlugin;
 use MODX\Revolution\modProcessor;
+use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
 
@@ -27,12 +30,12 @@ use MODX\Revolution\modTemplateVar;
 class GetNodes extends modProcessor
 {
     public $typeMap = [
-        'template' => 'modTemplate',
-        'tv' => 'modTemplateVar',
-        'chunk' => 'modChunk',
-        'snippet' => 'modSnippet',
-        'plugin' => 'modPlugin',
-        'category' => 'modCategory',
+        'template' => modTemplate::class,
+        'tv' => modTemplateVar::class,
+        'chunk' => modChunk::class,
+        'snippet' => modSnippet::class,
+        'plugin' => modPlugin::class,
+        'category' => modCategory::class,
     ];
 
     public $actionMap = [];

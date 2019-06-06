@@ -73,11 +73,11 @@ class Sort extends modProcessor
         $data = urldecode($data);
         $data = $this->modx->fromJSON($data);
 
-        $this->sortNodes('modTemplate', 'template', $data);
-        $this->sortNodes('modTemplateVar', 'tv', $data);
-        $this->sortNodes('modChunk', 'chunk', $data);
-        $this->sortNodes('modSnippet', 'snippet', $data);
-        $this->sortNodes('modPlugin', 'plugin', $data);
+        $this->sortNodes(modTemplate::class, 'template', $data);
+        $this->sortNodes(modTemplateVar::class, 'tv', $data);
+        $this->sortNodes(modChunk::class, 'chunk', $data);
+        $this->sortNodes(modSnippet::class, 'snippet', $data);
+        $this->sortNodes(modPlugin::class, 'plugin', $data);
 
         return $data;
     }
