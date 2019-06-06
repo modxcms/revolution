@@ -130,24 +130,24 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
         $offset = 0
     ) {
         /* build query */
-        $c = $xpdo->newQuery('modContextSetting');
+        $c = $xpdo->newQuery(\MODX\Revolution\modContextSetting::class);
         $c->select([
-            $xpdo->getSelectColumns('modContextSetting', 'modContextSetting'),
+            $xpdo->getSelectColumns(\MODX\Revolution\modContextSetting::class, 'modContextSetting'),
         ]);
         $c->select([
             'Entry.value AS name_trans',
             'Description.value AS description_trans',
         ]);
-        $c->leftJoin('modLexiconEntry', 'Entry',
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Entry',
             "CONCAT('setting_',modContextSetting.{$xpdo->escape('key')}) = Entry.name");
-        $c->leftJoin('modLexiconEntry', 'Description',
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Description',
             "CONCAT('setting_',modContextSetting.{$xpdo->escape('key')},'_desc') = Description.name");
         $c->where($criteria);
 
-        $count = $xpdo->getCount('modContextSetting', $c);
-        $c->sortby($xpdo->getSelectColumns('modContextSetting', 'modContextSetting', '', ['area']), 'ASC');
+        $count = $xpdo->getCount(\MODX\Revolution\modContextSetting::class, $c);
+        $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modContextSetting::class, 'modContextSetting', '', ['area']), 'ASC');
         foreach ($sort as $field => $dir) {
-            $c->sortby($xpdo->getSelectColumns('modContextSetting', 'modContextSetting', '', [$field]), $dir);
+            $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modContextSetting::class, 'modContextSetting', '', [$field]), $dir);
         }
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);
@@ -155,7 +155,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
 
         return [
             'count' => $count,
-            'collection' => $xpdo->getCollection('modContextSetting', $c),
+            'collection' => $xpdo->getCollection(\MODX\Revolution\modContextSetting::class, $c),
         ];
     }
 }

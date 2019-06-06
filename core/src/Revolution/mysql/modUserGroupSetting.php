@@ -131,20 +131,20 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
         $limit = 0,
         $offset = 0
     ) {
-        $c = $xpdo->newQuery('modUserGroupSetting');
+        $c = $xpdo->newQuery(\MODX\Revolution\modUserGroupSetting::class);
         $c->select([
-            $xpdo->getSelectColumns('modUserGroupSetting', 'modUserGroupSetting'),
+            $xpdo->getSelectColumns(\MODX\Revolution\modUserGroupSetting::class, 'modUserGroupSetting'),
             'Entry.value AS name_trans',
             'Description.value AS description_trans',
         ]);
-        $c->leftJoin('modLexiconEntry', 'Entry', "CONCAT('setting_',modUserGroupSetting.`key`) = Entry.name");
-        $c->leftJoin('modLexiconEntry', 'Description',
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Entry', "CONCAT('setting_',modUserGroupSetting.`key`) = Entry.name");
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Description',
             "CONCAT('setting_',modUserGroupSetting.`key`,'_desc') = Description.name");
         $c->where($criteria);
-        $count = $xpdo->getCount('modUserGroupSetting', $c);
-        $c->sortby($xpdo->getSelectColumns('modUserGroupSetting', 'modUserGroupSetting', '', ['area']), 'ASC');
+        $count = $xpdo->getCount(\MODX\Revolution\modUserGroupSetting::class, $c);
+        $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modUserGroupSetting::class, 'modUserGroupSetting', '', ['area']), 'ASC');
         foreach ($sort as $field => $dir) {
-            $c->sortby($xpdo->getSelectColumns('modUserGroupSetting', 'modUserGroupSetting', '', [$field]), $dir);
+            $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modUserGroupSetting::class, 'modUserGroupSetting', '', [$field]), $dir);
         }
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);
@@ -152,7 +152,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
 
         return [
             'count' => $count,
-            'collection' => $xpdo->getCollection('modUserGroupSetting', $c),
+            'collection' => $xpdo->getCollection(\MODX\Revolution\modUserGroupSetting::class, $c),
         ];
     }
 }

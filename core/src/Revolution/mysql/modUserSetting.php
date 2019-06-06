@@ -132,20 +132,20 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
         $limit = 0,
         $offset = 0
     ) {
-        $c = $xpdo->newQuery('modUserSetting');
+        $c = $xpdo->newQuery(\MODX\Revolution\modUserSetting::class);
         $c->select([
-            $xpdo->getSelectColumns('modUserSetting', 'modUserSetting'),
+            $xpdo->getSelectColumns(\MODX\Revolution\modUserSetting::class, 'modUserSetting'),
             'Entry.value AS name_trans',
             'Description.value AS description_trans',
         ]);
-        $c->leftJoin('modLexiconEntry', 'Entry', "CONCAT('setting_',modUserSetting.`key`) = Entry.name");
-        $c->leftJoin('modLexiconEntry', 'Description',
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Entry', "CONCAT('setting_',modUserSetting.`key`) = Entry.name");
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Description',
             "CONCAT('setting_',modUserSetting.`key`,'_desc') = Description.name");
         $c->where($criteria);
-        $count = $xpdo->getCount('modUserSetting', $c);
-        $c->sortby($xpdo->getSelectColumns('modUserSetting', 'modUserSetting', '', ['area']), 'ASC');
+        $count = $xpdo->getCount(\MODX\Revolution\modUserSetting::class, $c);
+        $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modUserSetting::class, 'modUserSetting', '', ['area']), 'ASC');
         foreach ($sort as $field => $dir) {
-            $c->sortby($xpdo->getSelectColumns('modUserSetting', 'modUserSetting', '', [$field]), $dir);
+            $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modUserSetting::class, 'modUserSetting', '', [$field]), $dir);
         }
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);
@@ -153,7 +153,7 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
 
         return [
             'count' => $count,
-            'collection' => $xpdo->getCollection('modUserSetting', $c),
+            'collection' => $xpdo->getCollection(\MODX\Revolution\modUserSetting::class, $c),
         ];
     }
 }

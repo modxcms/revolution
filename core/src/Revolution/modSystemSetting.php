@@ -43,7 +43,7 @@ class modSystemSetting extends xPDOObject
 
         $entries = $this->xpdo->lexicon->getFileTopic($options['cultureKey'], $options['namespace'], $options['topic']);
         /** @var modLexiconEntry $entry */
-        $entry = $this->xpdo->getObject('modLexiconEntry', [
+        $entry = $this->xpdo->getObject(modLexiconEntry::class, [
             'name' => $key,
             'namespace' => $options['namespace'],
             'language' => $options['cultureKey'],
@@ -56,7 +56,7 @@ class modSystemSetting extends xPDOObject
             }
         } else {
             if ($entry == null) {
-                $entry = $this->xpdo->newObject('modLexiconEntry');
+                $entry = $this->xpdo->newObject(modLexiconEntry::class);
                 $entry->set('name', $key);
                 $entry->set('namespace', $options['namespace']);
                 $entry->set('language', $options['cultureKey']);

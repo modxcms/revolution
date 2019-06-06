@@ -119,24 +119,24 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
         $offset = 0
     ) {
         /* build query */
-        $c = $xpdo->newQuery('modSystemSetting');
+        $c = $xpdo->newQuery(\MODX\Revolution\modSystemSetting::class);
         $c->select([
-            $xpdo->getSelectColumns('modSystemSetting', 'modSystemSetting'),
+            $xpdo->getSelectColumns(\MODX\Revolution\modSystemSetting::class, 'modSystemSetting'),
         ]);
         $c->select([
             'name_trans' => 'Entry.value',
             'description_trans' => 'Description.value',
         ]);
-        $c->leftJoin('modLexiconEntry', 'Entry',
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Entry',
             "CONCAT('setting_',modSystemSetting.{$xpdo->escape('key')}) = Entry.name");
-        $c->leftJoin('modLexiconEntry', 'Description',
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Description',
             "CONCAT('setting_',modSystemSetting.{$xpdo->escape('key')},'_desc') = Description.name");
         $c->where($criteria);
 
-        $count = $xpdo->getCount('modSystemSetting', $c);
-        $c->sortby($xpdo->getSelectColumns('modSystemSetting', 'modSystemSetting', '', ['area']), 'ASC');
+        $count = $xpdo->getCount(\MODX\Revolution\modSystemSetting::class, $c);
+        $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modSystemSetting::class, 'modSystemSetting', '', ['area']), 'ASC');
         foreach ($sort as $field => $dir) {
-            $c->sortby($xpdo->getSelectColumns('modSystemSetting', 'modSystemSetting', '', [$field]), $dir);
+            $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modSystemSetting::class, 'modSystemSetting', '', [$field]), $dir);
         }
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);
@@ -145,7 +145,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
 
         return [
             'count' => $count,
-            'collection' => $xpdo->getCollection('modSystemSetting', $c),
+            'collection' => $xpdo->getCollection(\MODX\Revolution\modSystemSetting::class, $c),
         ];
     }
 }

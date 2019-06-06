@@ -296,15 +296,15 @@ class modLexicon
             }
 
             /* get DB overrides */
-            $c = $this->modx->newQuery('modLexiconEntry');
+            $c = $this->modx->newQuery(modLexiconEntry::class);
             $c->innerJoin(modNamespace::class, 'Namespace');
             $c->where([
                 'modLexiconEntry.topic' => $topic,
                 'modLexiconEntry.language' => $language,
                 'Namespace.name' => $namespace,
             ]);
-            $c->sortby($this->modx->getSelectColumns('modLexiconEntry', 'modLexiconEntry', '', ['name']), 'ASC');
-            $entries = $this->modx->getCollection('modLexiconEntry', $c);
+            $c->sortby($this->modx->getSelectColumns(modLexiconEntry::class, 'modLexiconEntry', '', ['name']), 'ASC');
+            $entries = $this->modx->getCollection(modLexiconEntry::class, $c);
             if (!empty($entries)) {
                 /** @var modLexiconEntry $entry */
                 foreach ($entries as $entry) {
@@ -414,7 +414,7 @@ class modLexicon
             }
         }
 
-        $c = $this->modx->newQuery('modLexiconEntry');
+        $c = $this->modx->newQuery(modLexiconEntry::class);
         $c->where([
             'namespace' => $namespace,
             'topic:NOT IN' => $topics,
@@ -484,7 +484,7 @@ class modLexicon
             }
         }
 
-        $c = $this->modx->newQuery('modLexiconEntry');
+        $c = $this->modx->newQuery(modLexiconEntry::class);
         $c->where([
             'namespace' => $namespace,
             'language:NOT IN' => $languages,

@@ -165,7 +165,7 @@ class modDbRegister extends modRegister
                     $balance,
                     ['fetchMode' => PDO::FETCH_OBJ],
                 ];
-                foreach ($this->modx->call('registry.db.modDbRegisterMessage', 'getValidMessages', $args) as $msg) {
+                foreach ($this->modx->call(modDbRegisterMessage::class, 'getValidMessages', $args) as $msg) {
                     $newMsg = $this->_readMessage($msg, $removeRead);
                     if ($newMsg !== null) {
                         if (!$includeKeys) {
@@ -212,8 +212,7 @@ class modDbRegister extends modRegister
         if (is_object($obj) && !empty($obj->payload)) {
             $message = eval($obj->payload);
             if ($remove || ($obj->expires > 1 && $obj->expires < time())) {
-                $this->modx->removeObject('registry.db.modDbRegisterMessage',
-                    ['topic' => $obj->topic, 'id' => $obj->id]);
+                $this->modx->removeObject(modDbRegisterMessage::class, ['topic' => $obj->topic, 'id' => $obj->id]);
             }
             if ($obj->kill) {
                 $this->__kill = true;

@@ -227,8 +227,8 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
     ) {
         $messages = [];
         $fetchMode = isset($options['fetchMode']) ? $options['fetchMode'] : PDO::FETCH_OBJ;
-        $msgTable = $register->modx->getTableName('registry.db.modDbRegisterMessage');
-        $topicTable = $register->modx->getTableName('registry.db.modDbRegisterTopic');
+        $msgTable = $register->modx->getTableName(\MODX\Revolution\Registry\Db\modDbRegisterMessage::class);
+        $topicTable = $register->modx->getTableName(\MODX\Revolution\Registry\Db\modDbRegisterTopic::class);
         $limitClause = $limit > 0 ? "LIMIT {$limit}" : '';
         $query = new xPDOCriteria(
             $register->modx,

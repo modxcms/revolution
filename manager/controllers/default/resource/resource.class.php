@@ -20,6 +20,7 @@ use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\modTemplateVarResource;
 use MODX\Revolution\modTemplateVarTemplate;
+use MODX\Revolution\modX;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
 
