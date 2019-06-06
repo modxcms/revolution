@@ -269,14 +269,14 @@ class GetNodes extends modProcessor
             $c->where([
                 'parent' => $map[1],
             ]);
-            $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']), 'ASC');
+            $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']));
         } else {
             /* if trying to grab all root categories */
             $c = $this->modx->newQuery(modCategory::class);
             $c->where([
                 'parent' => 0,
             ]);
-            $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']), 'ASC');
+            $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']));
         }
 
         $c->select($this->modx->getSelectColumns(modCategory::class, 'modCategory'));
@@ -358,7 +358,7 @@ class GetNodes extends modProcessor
             'parent' => $categoryId,
         ]);
         $c->groupby($this->modx->getSelectColumns(modCategory::class, 'modCategory'));
-        $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']), 'ASC');
+        $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']));
         $categories = $this->modx->getCollection(modCategory::class, $c);
 
         /* set permissions as css classes */
@@ -392,7 +392,7 @@ class GetNodes extends modProcessor
 
             /* check subcategories recursively */
             if ($category->get('childrenCount') > 0 && $category->get('elementCount') < 1) {
-                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) == false) {
+                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) === false) {
                     continue;
                 }
             }
@@ -419,7 +419,7 @@ class GetNodes extends modProcessor
         $c->where([
             'category' => $categoryId,
         ]);
-        $c->sortby($elementIdentifier == 'template' ? 'templatename' : 'name', 'ASC');
+        $c->sortby($elementIdentifier === 'template' ? 'templatename' : 'name');
         $elements = $this->modx->getCollection($elementClassKey, $c);
 
         /* do permission checks */
@@ -435,8 +435,8 @@ class GetNodes extends modProcessor
             if (!$element->checkPolicy('list')) {
                 continue;
             }
-            $name = $elementIdentifier == 'template' ? $element->get('templatename') : $element->get('name');
-            $caption = $elementClassKey == 'modTemplateVar' ? $element->get('caption') : '';
+            $name = $elementIdentifier === 'template' ? $element->get('templatename') : $element->get('name');
+            $caption = $elementClassKey === 'modTemplateVar' ? $element->get('caption') : '';
 
             $class = [];
             if ($canNewElement) {
@@ -454,12 +454,12 @@ class GetNodes extends modProcessor
             if ($element->get('locked')) {
                 $class[] = 'element-node-locked';
             }
-            if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
+            if ($elementClassKey === 'modPlugin' && $element->get('disabled')) {
                 $class[] = 'element-node-disabled';
             }
 
             $active = false;
-            if ($this->getProperty('currentElement') == $element->id && $this->getProperty('currentAction') == $this->actionMap[$map[0]]) {
+            if ($this->getProperty('currentElement') === $element->id && $this->getProperty('currentAction') === $this->actionMap[$map[0]]) {
                 $active = true;
             }
 
@@ -507,7 +507,7 @@ class GetNodes extends modProcessor
         $c->where([
             'category' => $categoryId,
         ]);
-        $c->sortby($elementIdentifier == 'template' ? 'templatename' : 'name', 'ASC');
+        $c->sortby($elementIdentifier === 'template' ? 'templatename' : 'name');
         $elements = $this->modx->getCollection($elementClassKey, $c);
 
         /* do permission checks */
@@ -587,7 +587,7 @@ class GetNodes extends modProcessor
         $c->where([
             'modCategory.parent' => 0,
         ]);
-        $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']), 'ASC');
+        $c->sortby($this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['category']));
         $c->groupby($this->modx->getSelectColumns(modCategory::class, 'modCategory'));
         $categories = $this->modx->getCollection(modCategory::class, $c);
 
@@ -611,12 +611,12 @@ class GetNodes extends modProcessor
             }
             $elCount = (int)$category->get('elementCount');
             $catCount = (int)$category->get('childrenCount');
-            if ($elCount < 1 && $catCount < 1 && $category->get('id') != 0) {
+            if ($elCount < 1 && $catCount < 1 && $category->get('id') !== 0) {
                 continue;
             }
 
             if ($catCount > 0 && $elCount < 1) {
-                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) == false) {
+                if ($this->subCategoriesHaveElements($category->get('id'), $elementClassKey) === false) {
                     continue;
                 }
             }
@@ -625,7 +625,7 @@ class GetNodes extends modProcessor
 
             $nodes[] = [
                 'text' => strip_tags($category->get('category')) . $cc,
-                'id' => 'n_' . $map[1] . '_category_' . ($category->get('id') != null ? $category->get('id') : 0),
+                'id' => 'n_' . $map[1] . '_category_' . ($category->get('id') !== null ? $category->get('id') : 0),
                 'pk' => $category->get('id'),
                 'category' => $category->get('id'),
                 'data' => $category->toArray(),
@@ -645,7 +645,7 @@ class GetNodes extends modProcessor
         $c->where([
             'category' => 0,
         ]);
-        $c->sortby($elementClassKey == 'modTemplate' ? 'templatename' : 'name', 'ASC');
+        $c->sortby($elementClassKey === modTemplate::class ? 'templatename' : 'name');
         $elements = $this->modx->getCollection($elementClassKey, $c);
 
         /* do permission checks */
@@ -662,8 +662,8 @@ class GetNodes extends modProcessor
                 continue;
             }
             /* handle templatename case */
-            $name = $elementClassKey == modTemplate::class ? $element->get('templatename') : $element->get('name');
-            $caption = $elementClassKey == modTemplateVar::class ? $element->get('caption') : '';
+            $name = $elementClassKey === modTemplate::class ? $element->get('templatename') : $element->get('name');
+            $caption = $elementClassKey === modTemplateVar::class ? $element->get('caption') : '';
 
             $class = [];
             if ($canNewElement) {
@@ -681,7 +681,7 @@ class GetNodes extends modProcessor
             if ($element->get('locked')) {
                 $class[] = 'element-node-locked';
             }
-            if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
+            if ($elementClassKey === modPlugin::class && $element->get('disabled')) {
                 $class[] = 'element-node-disabled';
             }
             if (!empty($scriptProperties['currentElement']) && $scriptProperties['currentElement'] == $element->get('id') && $scriptProperties['currentAction'] == $this->actionMap[$map[1]]) {

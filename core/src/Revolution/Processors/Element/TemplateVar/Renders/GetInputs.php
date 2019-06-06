@@ -44,12 +44,10 @@ class GetInputs extends modProcessor {
 
         /* simulate controller with the faux class above */
         $c = new TvInputManagerController($this->modx);
-        $this->modx->controller = call_user_func_array(array($c,'getInstance'),array(&$this->modx,'TvInputManagerController'));
+        $this->modx->controller = call_user_func_array([$c, 'getInstance'], [&$this->modx, TvInputManagerController::class]);
         $this->modx->controller->render();
 
-        $renderDirectories = array(
-            dirname(__FILE__).'/'.$context.'/input/',
-        );
+        $renderDirectories = [__DIR__ . '/' . $context . '/input/'];
 
         /* allow for custom directories */
         $pluginResult = $this->modx->invokeEvent('OnTVInputRenderList',array(
