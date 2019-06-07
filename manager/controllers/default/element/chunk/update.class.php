@@ -157,7 +157,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
      */
     public function loadRte() {
         $o = '';
-        if ($this->modx->getOption('use_editor') == 1) {
+        if ($this->modx->getOption('use_editor') === 1) {
             $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
                 'elements' => array('post'),
                 'chunk' => &$this->chunk,

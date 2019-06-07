@@ -2125,10 +2125,10 @@ class modX extends xPDO {
                     /* dont load Manager Access Events */
                     $service= "Event.service IN (1,3,4,5,6) AND";
             }
-            $pluginEventTbl= $this->getTableName('modPluginEvent');
-            $eventTbl= $this->getTableName('modEvent');
-            $pluginTbl= $this->getTableName('modPlugin');
-            $propsetTbl= $this->getTableName('modPropertySet');
+            $pluginEventTbl= $this->getTableName(modPluginEvent::class);
+            $eventTbl= $this->getTableName(modEvent::class);
+            $pluginTbl= $this->getTableName(modPlugin::class);
+            $propsetTbl= $this->getTableName(modPropertySet::class);
             $sql= "
                 SELECT
                     Event.name AS event,

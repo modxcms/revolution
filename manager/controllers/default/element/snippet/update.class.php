@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load update snippet page
  *
@@ -71,7 +74,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('snippet_err_ns'));
         }
-        $this->snippet = $this->modx->getObject('modSnippet', array('id' => $scriptProperties['id']));
+        $this->snippet = $this->modx->getObject(modSnippet::class, array('id' => $scriptProperties['id']));
         if ($this->snippet == null) return $this->failure($this->modx->lexicon('snippet_err_nf'));
         if (!$this->snippet->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
