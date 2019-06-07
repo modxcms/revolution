@@ -1,5 +1,7 @@
 <?php
 
+use MODX\Revolution\modParsedManagerController;
+
 /**
  * Switches the current manger language to requested.
  *
