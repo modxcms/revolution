@@ -645,7 +645,7 @@ MODx.combo.Namespace = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/namespace/getlist'
+            action: 'workspace/packagenamespace/getlist'
         }
         ,fields: ['name']
         ,displayField: 'name'
