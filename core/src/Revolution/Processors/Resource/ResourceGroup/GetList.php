@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\Resource\ResourceGroup;
 
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modResourceGroupResource;
 
 /**

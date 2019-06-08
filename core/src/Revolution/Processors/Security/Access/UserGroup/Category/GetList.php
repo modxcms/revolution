@@ -104,7 +104,7 @@ class GetList extends modObjectGetListProcessor
     }
 
     /**
-     * @param xPDOObject|modAccessResourceGroup $object
+     * @param xPDOObject modAccessResourceGroup $object
      * @return array
      * @throws \xPDO\xPDOException
      */

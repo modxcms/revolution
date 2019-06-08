@@ -10,7 +10,9 @@
 
 namespace MODX\Revolution\Processors\Security\Access;
 
+use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\modUserGroup;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 

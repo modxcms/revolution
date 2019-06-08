@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Access;
 
 use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\modUserGroup;
 
 /**
  * Adds an ACL

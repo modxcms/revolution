@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\Source;
 
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Sources\modAccessMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 

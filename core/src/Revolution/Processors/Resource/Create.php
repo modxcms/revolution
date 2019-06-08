@@ -80,7 +80,7 @@ class Create extends modObjectCreateProcessor
     public $beforeSaveEvent = 'OnBeforeDocFormSave';
     public $afterSaveEvent = 'OnDocFormSave';
 
-    /** @var \modResource $parentResource */
+    /** @var modResource $parentResource */
     public $parentResource;
     /** @var modContext $this ->workingContext */
     public $workingContext;

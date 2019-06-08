@@ -161,12 +161,12 @@ class modRestClient {
      * Translates a SimpleXMLElement object into an array.
      *
      * @access public
-     * @param SimpleXMLElement $obj
+     * @param \SimpleXMLElement $obj
      * @param array &$arr The reference array to store the results in.
      * @return boolean True if successful.
      */
     public function xml2array($obj, &$arr) {
-        if (!($obj instanceof SimpleXMLElement)) return false;
+        if (!($obj instanceof \SimpleXMLElement)) return false;
         $children = $obj->children();
         foreach ($children as $elementName => $node)
         {

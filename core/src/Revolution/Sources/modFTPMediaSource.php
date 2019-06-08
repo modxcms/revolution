@@ -1,6 +1,7 @@
 <?php
 namespace MODX\Revolution\Sources;
 
+use League\Flysystem\Adapter\Ftp;
 use xPDO\xPDO;
 
 /**
@@ -36,7 +37,7 @@ class modFTPMediaSource extends modMediaSource
         try {
             $adapter = new Ftp($config);
             $adapter->connect();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
                 $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
 
