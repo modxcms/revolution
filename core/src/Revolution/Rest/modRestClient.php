@@ -12,6 +12,7 @@ namespace MODX\Revolution\Rest;
 
 
 use MODX\Revolution\modX;
+use SimpleXMLElement;
 
 /**
  * The basic REST client for handling REST requests

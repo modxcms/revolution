@@ -1,6 +1,8 @@
 <?php
 namespace MODX\Revolution\Sources;
 
+use Exception;
+use League\Flysystem\Adapter\Ftp;
 use xPDO\xPDO;
 
 /**

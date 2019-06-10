@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Group;
 
 use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
 

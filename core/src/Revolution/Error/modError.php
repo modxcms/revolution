@@ -11,7 +11,9 @@
 namespace MODX\Revolution\Error;
 
 use MODX\Revolution\modX;
+use MODX\Revolution\Validation\modValidator;
 use xPDO\Om\xPDOObject;
+use xPDO\xPDO;
 
 /**
  * Class modError

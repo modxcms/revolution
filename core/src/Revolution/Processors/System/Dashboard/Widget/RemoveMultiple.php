@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\modProcessor;
+use MODX\Revolution\modX;
 
 /**
  * Removes multiple Dashboard Widgets

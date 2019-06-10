@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\Category;
 
 use MODX\Revolution\modAccessCategory;
 use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modAccessResourceGroup;
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modObjectGetListProcessor;
 use MODX\Revolution\modUserGroup;
@@ -99,7 +100,7 @@ class GetList extends modObjectGetListProcessor
             'policy_name' => 'Policy.name',
             'policy_data' => 'Policy.data',
         ]);
-        
+
         return $c;
     }
 
@@ -145,7 +146,7 @@ class GetList extends modObjectGetListProcessor
             '-',
             [
                 'text' => $this->modx->lexicon('access_category_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["security/access/usergroup/category/remove"])',
+                'handler' => 'this.confirm.createDelegate(this,["Security/Access/UserGroup/Category/Remove"])',
             ]
         ];
 
