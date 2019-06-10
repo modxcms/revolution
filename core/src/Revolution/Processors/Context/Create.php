@@ -91,7 +91,7 @@ class Create extends modObjectCreateProcessor
                 /** @var modAccessContext $adminAdminAccess */
                 $adminAdminAccess = $this->modx->newObject(modAccessContext::class);
                 $adminAdminAccess->set('principal', $adminGroup->get('id'));
-                $adminAdminAccess->set('principal_class', 'modUserGroup');
+                $adminAdminAccess->set('principal_class', modUserGroup::class);
                 $adminAdminAccess->set('target', $this->object->get('key'));
                 $adminAdminAccess->set('policy', $adminContextPolicy->get('id'));
                 $adminAdminAccess->save();
@@ -106,17 +106,17 @@ class Create extends modObjectCreateProcessor
      */
     public function enableAnonymousAccess()
     {
-        $anonContextPolicy = $this->modx->getObject('modAccessPolicy', ['name' => 'Load Only']);
-        $anonACL = $this->modx->getObject('modAccessContext', [
+        $anonContextPolicy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Load Only']);
+        $anonACL = $this->modx->getObject(modAccessContext::class, [
             'principal' => 0,
-            'principal_class' => 'modUserGroup',
+            'principal_class' => modUserGroup::class,
             'target' => $this->object->get('key'),
             'authority' => 9999,
         ]);
         if ($anonContextPolicy && !$anonACL) {
-            $anonACL = $this->modx->newObject('modAccessContext');
+            $anonACL = $this->modx->newObject(modAccessContext::class);
             $anonACL->set('principal', 0);
-            $anonACL->set('principal_class', 'modUserGroup');
+            $anonACL->set('principal_class', modUserGroup::class);
             $anonACL->set('target', $this->object->get('key'));
             $anonACL->set('policy', $anonContextPolicy->get('id'));
             $anonACL->set('authority', 9999);

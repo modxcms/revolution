@@ -212,7 +212,7 @@ class modContext extends modAccessibleObject
                     'Policy.data',
                 ]);
                 $c->where([
-                    'modAccessContext.principal_class' => 'modUserGroup',
+                    'modAccessContext.principal_class' => modUserGroup::class,
                     'modAccessContext.target' => $this->get('key'),
                 ]);
                 $c->sortby('modAccessContext.target,modAccessContext.principal,modAccessContext.authority,modAccessContext.policy');

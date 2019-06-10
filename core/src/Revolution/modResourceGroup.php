@@ -96,9 +96,9 @@ class modResourceGroup extends modAccessibleSimpleObject
      */
     public function getUserGroups()
     {
-        $access = $this->xpdo->getCollection('modAccessResourceGroup', [
+        $access = $this->xpdo->getCollection(modAccessResourceGroup::class, [
             'target' => $this->get('id'),
-            'principal_class' => 'modUserGroup',
+            'principal_class' => modUserGroup::class,
         ]);
         $groups = [];
         /** @var modAccessResourceGroup $arg */

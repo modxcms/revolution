@@ -15,9 +15,11 @@ use Exception;
 use MODX\Revolution\modObjectCreateProcessor;
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\modUser;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modX;
+use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * Create a user
@@ -117,7 +119,7 @@ class Create extends modObjectCreateProcessor {
                 }
 
                 /** @var modUserGroupMember $membership */
-                $membership = $this->modx->newObject('modUserGroupMember');
+                $membership = $this->modx->newObject(modUserGroupMember::class);
                 $membership->fromArray(array(
                     'user_group' => $group['usergroup'],
                     'role' => $group['role'],
@@ -128,7 +130,7 @@ class Create extends modObjectCreateProcessor {
                     $primaryGroupId = $group['usergroup'];
                 }
 
-                $usergroup = $this->modx->getObject('modUserGroup', $group['usergroup']);
+                $usergroup = $this->modx->getObject(modUserGroup::class, $group['usergroup']);
                 /* invoke OnUserBeforeAddToGroup event */
                 $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', array(
                     'user' => &$this->object,
@@ -169,7 +171,7 @@ class Create extends modObjectCreateProcessor {
      * @return modUserProfile
      */
     public function addProfile() {
-        $this->profile = $this->modx->newObject('modUserProfile');
+        $this->profile = $this->modx->newObject(modUserProfile::class);
         $this->profile->fromArray($this->getProperties());
         $this->profile->set('blocked',$this->getProperty('blocked',false));
         $this->profile->set('photo','');
@@ -213,7 +215,7 @@ class Create extends modObjectCreateProcessor {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
-            $this->modx->getService('smarty', 'smarty.modSmarty', '', [
+            $this->modx->getService('smarty', modSmarty::class, '', [
                 'template_dir' => $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme', null, 'default') . '/',
             ]);
             $this->modx->smarty->assign('_config', $this->modx->config);

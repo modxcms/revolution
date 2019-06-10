@@ -187,7 +187,7 @@ class modCategory extends modAccessibleSimpleObject
                 $c->leftJoin(modAccessPolicy::class, 'Policy');
                 $c->innerJoin(modCategoryClosure::class, 'CategoryClosure', [
                     'CategoryClosure.descendant:=' => $this->get('id'),
-                    'modAccessCategory.principal_class:=' => 'modUserGroup',
+                    'modAccessCategory.principal_class:=' => modUserGroup::class,
                     'CategoryClosure.ancestor = modAccessCategory.target',
                     [
                         'modAccessCategory.context_key:=' => $context,

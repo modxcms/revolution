@@ -132,7 +132,7 @@ class modNamespace extends modAccessibleObject
             $policyTable = $this->xpdo->getTableName(modAccessPolicy::class);
             $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                 "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                "JOIN {$namespaceTable} Namespace ON Acl.principal_class = 'modUserGroup' " .
+                "JOIN {$namespaceTable} Namespace ON Acl.principal_class = {$this->xpdo->quote(modUserGroup::class)} " .
                 "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                 "AND Namespace.name = Acl.target " .
                 "WHERE Acl.target = :namespace " .

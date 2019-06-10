@@ -460,13 +460,13 @@ class modElement extends modAccessibleSimpleObject
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
-                $accessTable = $this->xpdo->getTableName('modAccessCategory');
-                $policyTable = $this->xpdo->getTableName('modAccessPolicy');
-                $categoryClosureTable = $this->xpdo->getTableName('modCategoryClosure');
+                $accessTable = $this->xpdo->getTableName(modAccessCategory::class);
+                $policyTable = $this->xpdo->getTableName(modAccessPolicy::class);
+                $categoryClosureTable = $this->xpdo->getTableName(modCategoryClosure::class);
                 $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                     "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
                     "JOIN {$categoryClosureTable} CategoryClosure ON CategoryClosure.descendant = :category " .
-                    "AND Acl.principal_class = 'modUserGroup' " .
+                    "AND Acl.principal_class = {$this->xpdo->quote(modUserGroup::class)} " .
                     "AND CategoryClosure.ancestor = Acl.target " .
                     "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                     "ORDER BY CategoryClosure.depth DESC, target, principal, authority ASC";

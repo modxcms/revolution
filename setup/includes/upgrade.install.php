@@ -22,6 +22,7 @@
 /* handle change of manager_theme to default (FIXME: temp hack) */
 
 use MODX\Revolution\modAccessActionDom;
+use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessPolicyTemplate;
@@ -32,13 +33,15 @@ use MODX\Revolution\modFormCustomizationProfileUserGroup;
 use MODX\Revolution\modFormCustomizationSet;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modSystemSetting;
+use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
+use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Transport\modTransportProvider;
 use xPDO\xPDO;
 
 if ($settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
-    $managerTheme = $modx->getObject('modSystemSetting', array(
+    $managerTheme = $modx->getObject(modSystemSetting::class, array(
         'key' => 'manager_theme',
         'value:!=' => 'default'
     ));
@@ -50,7 +53,7 @@ if ($settings->get('installmode') == modInstall::MODE_UPGRADE_EVO) {
 }
 
 /* handle change of default language to proper IANA code based on initial language selection in setup */
-$managerLanguage = $modx->getObject('modSystemSetting', array(
+$managerLanguage = $modx->getObject(modSystemSetting::class, array(
     'key' => 'manager_language',
 ));
 if ($managerLanguage) {
@@ -62,11 +65,11 @@ unset($managerLanguage);
 $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 
 /* update settings_version */
-$settings_version = $modx->getObject('modSystemSetting', array(
+$settings_version = $modx->getObject(modSystemSetting::class, array(
     'key' => 'settings_version',
 ));
 if ($settings_version == null) {
-    $settings_version = $modx->newObject('modSystemSetting');
+    $settings_version = $modx->newObject(modSystemSetting::class);
     $settings_version->set('key','settings_version');
     $settings_version->set('xtype','textfield');
     $settings_version->set('namespace','core');
@@ -76,11 +79,11 @@ $settings_version->set('value', $currentVersion['full_version']);
 $settings_version->save();
 
 /* update settings_distro */
-$settings_distro = $modx->getObject('modSystemSetting', array(
+$settings_distro = $modx->getObject(modSystemSetting::class, array(
     'key' => 'settings_distro',
 ));
 if ($settings_distro == null) {
-    $settings_distro = $modx->newObject('modSystemSetting');
+    $settings_distro = $modx->newObject(modSystemSetting::class);
     $settings_distro->set('key','settings_distro');
     $settings_distro->set('xtype','textfield');
     $settings_distro->set('namespace','core');
@@ -90,11 +93,11 @@ $settings_distro->set('value', trim($currentVersion['distro'], '@'));
 $settings_distro->save();
 
 /* make sure admin user (1) has proper group and role */
-$adminUser = $modx->getObject('modUser', 1);
+$adminUser = $modx->getObject(modUser::class, 1);
 if ($adminUser) {
-    $userGroupMembership = $modx->getObject('modUserGroupMember', array('user_group' => true, 'member' => true));
+    $userGroupMembership = $modx->getObject(modUserGroupMember::class, array('user_group' => true, 'member' => true));
     if (!$userGroupMembership) {
-        $userGroupMembership = $modx->newObject('modUserGroupMember');
+        $userGroupMembership = $modx->newObject(modUserGroupMember::class);
         $userGroupMembership->set('user_group', 1);
         $userGroupMembership->set('member', 1);
         $userGroupMembership->set('role', 2);
@@ -106,25 +109,25 @@ if ($adminUser) {
 }
 
 /* setup default admin ACLs */
-$adminPolicy = $modx->getObject('modAccessPolicy',array(
+$adminPolicy = $modx->getObject(modAccessPolicy::class,array(
     'name' => 'Administrator',
 ));
-$adminGroup = $modx->getObject('modUserGroup',array(
+$adminGroup = $modx->getObject(modUserGroup::class,array(
     'name' => 'Administrator',
 ));
 if ($adminPolicy && $adminGroup) {
-    $access= $modx->getObject('modAccessContext',array(
+    $access= $modx->getObject(modAccessContext::class,array(
         'target' => 'mgr',
-        'principal_class' => 'modUserGroup',
+        'principal_class' => modUserGroup::class,
         'principal' => $adminGroup->get('id'),
         'authority' => 0,
         'policy' => $adminPolicy->get('id'),
     ));
     if (!$access) {
-        $access = $modx->newObject('modAccessContext');
+        $access = $modx->newObject(modAccessContext::class);
         $access->fromArray(array(
           'target' => 'mgr',
-          'principal_class' => 'modUserGroup',
+          'principal_class' => modUserGroup::class,
           'principal' => $adminGroup->get('id'),
           'authority' => 0,
           'policy' => $adminPolicy->get('id'),
@@ -133,18 +136,18 @@ if ($adminPolicy && $adminGroup) {
     }
     unset($access);
 
-    $access = $modx->getObject('modAccessContext',array(
+    $access = $modx->getObject(modAccessContext::class,array(
       'target' => 'web',
-      'principal_class' => 'modUserGroup',
+      'principal_class' => modUserGroup::class,
       'principal' => $adminGroup->get('id'),
       'authority' => 0,
       'policy' => $adminPolicy->get('id'),
     ));
     if (!$access) {
-        $access= $modx->newObject('modAccessContext');
+        $access= $modx->newObject(modAccessContext::class);
         $access->fromArray(array(
           'target' => 'web',
-          'principal_class' => 'modUserGroup',
+          'principal_class' => modUserGroup::class,
           'principal' => $adminGroup->get('id'),
           'authority' => 0,
           'policy' => $adminPolicy->get('id'),
@@ -158,7 +161,7 @@ unset($adminPolicy,$adminGroup);
 /* Access Policy changes (have to happen post package install) */
 
 /* setup a setting to run this only once */
-$setting = $modx->getObject('modSystemSetting',array(
+$setting = $modx->getObject(modSystemSetting::class,array(
     'key' => 'access_policies_version',
     'value' => '1.0',
 ));
@@ -537,7 +540,7 @@ unset($setting);
 /* add ext_debug setting for sdk distro and turn it off if it exists outside sdk */
 $setting = $modx->getObject(modSystemSetting::class, array('key' => 'ext_debug'));
 if (!$setting && ('sdk' === trim($currentVersion['distro'], '@') || 'git' === trim($currentVersion['distro'], '@'))) {
-    $setting = $modx->newObject('modSystemSetting');
+    $setting = $modx->newObject(modSystemSetting::class);
     $setting->fromArray(
         array(
             'key' => 'ext_debug',

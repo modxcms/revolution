@@ -6,6 +6,8 @@ use MODX\Revolution\Hashing\modHash;
 use MODX\Revolution\Hashing\modHashing;
 use MODX\Revolution\Mail\modMail;
 use MODX\Revolution\Mail\modPHPMailer;
+use MODX\Revolution\Registry\modDbRegister;
+use MODX\Revolution\Registry\modRegistry;
 use MODX\Revolution\Sources\modMediaSource;
 use xPDO\xPDO;
 
@@ -254,7 +256,7 @@ class modUser extends modPrincipal
     public function passwordMatches($password, array $options = [])
     {
         $match = false;
-        if ($this->xpdo->getService('hashing', 'hashing.modHashing')) {
+        if ($this->xpdo->getService('hashing', modHashing::class)) {
             $options = array_merge(['salt' => $this->get('salt')], $options);
 
             /** @var modHash $hasher */
@@ -280,8 +282,8 @@ class modUser extends modPrincipal
     {
         $activated = -1;
         if ($this->get('cachepwd')) {
-            if ($this->xpdo->getService('registry',
-                    'registry.modRegistry') && $this->xpdo->registry->getRegister('user', 'registry.modDbRegister')) {
+            if ($this->xpdo->getService('registry', modRegistry::class)
+                && $this->xpdo->registry->getRegister('user', modDbRegister::class)) {
                 if ($this->xpdo->registry->user->connect()) {
                     $activated = false;
                     $this->xpdo->registry->user->subscribe('/pwd/reset/' . md5($this->get('username')));
@@ -409,8 +411,7 @@ class modUser extends modPrincipal
                 $_SESSION["modx.{$context}.user.token"] = $this->generateToken($context);
             }
         } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key", '', __METHOD__,
-                __FILE__, __LINE__);
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Attempt to login to a context with an empty key", '', __METHOD__, __FILE__, __LINE__);
         }
     }
 
@@ -584,13 +585,12 @@ class modUser extends modPrincipal
     {
         $settings = [];
         $primary = [];
-        $query = $this->xpdo->newQuery('modUserGroupSetting');
-        $query->innerJoin('modUserGroup', 'UserGroup', ['UserGroup.id = modUserGroupSetting.group']);
-        $query->innerJoin('modUserGroupMember', 'Member',
-            ['Member.member' => $this->get('id'), 'UserGroup.id = Member.user_group']);
+        $query = $this->xpdo->newQuery(modUserGroupSetting::class);
+        $query->innerJoin(modUserGroup::class, 'UserGroup', ['UserGroup.id = modUserGroupSetting.group']);
+        $query->innerJoin(modUserGroupMember::class, 'Member', ['Member.member' => $this->get('id'), 'UserGroup.id = Member.user_group']);
         $query->sortby('UserGroup.rank', 'DESC');
         $query->sortby('Member.rank', 'DESC');
-        $ugss = $this->xpdo->getCollection('modUserGroupSetting', $query);
+        $ugss = $this->xpdo->getCollection(modUserGroupSetting::class, $query);
         /** @var modUserGroupSetting $ugs */
         foreach ($ugss as $ugs) {
             if ($ugs->get('group') === $this->get('primary_group')) {
@@ -645,7 +645,7 @@ class modUser extends modPrincipal
         if (isset($_SESSION["modx.user.{$id}.userGroups"]) && $this->xpdo->user->get('id') == $this->get('id')) {
             $groups = $_SESSION["modx.user.{$id}.userGroups"];
         } else {
-            $memberGroups = $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}',
+            $memberGroups = $this->xpdo->getCollectionGraph(modUserGroup::class, '{"UserGroupMembers":{}}',
                 ['UserGroupMembers.member' => $this->get('id')]);
             if ($memberGroups) {
                 /** @var modUserGroup $group */
@@ -672,13 +672,13 @@ class modUser extends modPrincipal
         /** @var modUserGroup $userGroup */
         $userGroup = $this->getOne('PrimaryGroup');
         if (!$userGroup) {
-            $c = $this->xpdo->newQuery('modUserGroup');
-            $c->innerJoin('modUserGroupMember', 'UserGroupMembers');
+            $c = $this->xpdo->newQuery(modUserGroup::class);
+            $c->innerJoin(modUserGroupMember::class, 'UserGroupMembers');
             $c->where([
                 'UserGroupMembers.member' => $this->get('id'),
             ]);
             $c->sortby('UserGroupMembers.rank', 'ASC');
-            $userGroup = $this->xpdo->getObject('modUserGroup', $c);
+            $userGroup = $this->xpdo->getObject(modUserGroup::class, $c);
         }
 
         return $userGroup;
@@ -697,7 +697,7 @@ class modUser extends modPrincipal
         if (isset($_SESSION["modx.user.{$id}.userGroupNames"]) && $this->xpdo->user->get('id') == $this->get('id')) {
             $groupNames = $_SESSION["modx.user.{$id}.userGroupNames"];
         } else {
-            $memberGroups = $this->xpdo->getCollectionGraph('modUserGroup', '{"UserGroupMembers":{}}',
+            $memberGroups = $this->xpdo->getCollectionGraph(modUserGroup::class, '{"UserGroupMembers":{}}',
                 ['UserGroupMembers.member' => $this->get('id')]);
             if ($memberGroups) {
                 /** @var modUserGroup $group */
@@ -765,7 +765,7 @@ class modUser extends modPrincipal
 
         $groupPk = is_string($groupId) ? ['name' => $groupId] : $groupId;
         /** @var modUserGroup $userGroup */
-        $userGroup = $this->xpdo->getObject('modUserGroup', $groupPk);
+        $userGroup = $this->xpdo->getObject(modUserGroup::class, $groupPk);
         if (empty($userGroup)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'User Group not found with key: ' . $groupId);
 
@@ -775,7 +775,7 @@ class modUser extends modPrincipal
         /** @var modUserGroupRole $role */
         if (!empty($roleId)) {
             $rolePk = is_string($roleId) ? ['name' => $roleId] : $roleId;
-            $role = $this->xpdo->getObject('modUserGroupRole', $rolePk);
+            $role = $this->xpdo->getObject(modUserGroupRole::class, $rolePk);
             if (empty($role)) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Role not found with key: ' . $roleId);
 
@@ -784,7 +784,7 @@ class modUser extends modPrincipal
         }
 
         /** @var modUserGroupMember $member */
-        $member = $this->xpdo->getObject('modUserGroupMember', [
+        $member = $this->xpdo->getObject(modUserGroupMember::class, [
             'member' => $this->get('id'),
             'user_group' => $userGroup->get('id'),
         ]);
@@ -792,7 +792,7 @@ class modUser extends modPrincipal
             if ($rank == null) {
                 $rank = count($this->getMany('UserGroupMembers'));
             }
-            $member = $this->xpdo->newObject('modUserGroupMember');
+            $member = $this->xpdo->newObject(modUserGroupMember::class);
             $member->set('member', $this->get('id'));
             $member->set('user_group', $userGroup->get('id'));
             $member->set('rank', $rank);
@@ -827,8 +827,8 @@ class modUser extends modPrincipal
     {
         $left = false;
 
-        $c = $this->xpdo->newQuery('modUserGroupMember');
-        $c->innerJoin('modUserGroup', 'UserGroup');
+        $c = $this->xpdo->newQuery(modUserGroupMember::class);
+        $c->innerJoin(modUserGroup::class, 'UserGroup');
         $c->where(['member' => $this->get('id')]);
 
         $fk = is_string($groupId) ? 'name' : 'id';
@@ -838,15 +838,13 @@ class modUser extends modPrincipal
         ]);
 
         /** @var modUserGroupMember $member */
-        $member = $this->xpdo->getObject('modUserGroupMember', $c);
+        $member = $this->xpdo->getObject(modUserGroupMember::class, $c);
         if (empty($member)) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                'User could not leave group with key "' . $groupId . '" because the User was not a part of that group.');
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'User could not leave group with key "' . $groupId . '" because the User was not a part of that group.');
         } else {
             $left = $member->remove();
             if (!$left) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                    'An unknown error occurred preventing removing the User from the User Group.');
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'An unknown error occurred preventing removing the User from the User Group.');
             } else {
                 unset($_SESSION["modx.user.{$this->get('id')}.userGroupNames"],
                     $_SESSION["modx.user.{$this->get('id')}.userGroups"]);
@@ -868,8 +866,8 @@ class modUser extends modPrincipal
     {
         $removed = false;
         if ($this->xpdo instanceof modX) {
-            if ($this->xpdo->getService('registry', 'registry.modRegistry')) {
-                $this->xpdo->registry->addRegister('locks', 'registry.modDbRegister', ['directory' => 'locks']);
+            if ($this->xpdo->getService('registry', modRegistry::class)) {
+                $this->xpdo->registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
                 $this->xpdo->registry->locks->connect();
 
                 $this->xpdo->registry->locks->subscribe('/resource/');
@@ -937,7 +935,7 @@ class modUser extends modPrincipal
         /** @var modUserProfile $profile */
         $profile = $this->getOne('Profile');
         /** @var modPHPMailer $mail */
-        $mail = $this->xpdo->getService('mail', 'mail.modPHPMailer');
+        $mail = $this->xpdo->getService('mail', modPHPMailer::class);
 
         if (!$profile || !$mail) {
             return false;

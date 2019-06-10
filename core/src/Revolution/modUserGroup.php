@@ -65,8 +65,7 @@ class modUserGroup extends modPrincipal
         $removed = parent:: remove($ancestors);
 
         // delete ACLs for this group
-        $targets = explode(',', $this->xpdo->getOption('principal_targets', null,
-            'modAccessContext,modAccessResourceGroup,modAccessCategory'));
+        $targets = explode(',', $this->xpdo->getOption('principal_targets', null, implode(',', [modAccessContext::class,modAccessResourceGroup::class,modAccessCategory::class])));
         array_walk($targets, 'trim');
         foreach ($targets as $target) {
             $fields = $this->xpdo->getFields($target);
@@ -75,7 +74,7 @@ class modUserGroup extends modPrincipal
                 $principal_class_field = $this->xpdo->escape('principal_class');
                 $principal_field = $this->xpdo->escape('principal');
                 if (!empty($tablename)) {
-                    $this->xpdo->query("DELETE FROM {$tablename} WHERE {$principal_class_field} = 'modUserGroup' AND {$principal_field} = {$this->_fields['id']}");
+                    $this->xpdo->query("DELETE FROM {$tablename} WHERE {$principal_class_field} = {$this->xpdo->quote(modUserGroup::class)} AND {$principal_field} = {$this->_fields['id']}");
                 }
             }
         }
@@ -102,14 +101,14 @@ class modUserGroup extends modPrincipal
      */
     public function getUsersIn(array $criteria = [])
     {
-        $c = $this->xpdo->newQuery('modUser');
-        $c->select($this->xpdo->getSelectColumns('modUser', 'modUser'));
+        $c = $this->xpdo->newQuery(modUser::class);
+        $c->select($this->xpdo->getSelectColumns(modUser::class, 'modUser'));
         $c->select([
             'role' => 'UserGroupRole.name',
             'role_name' => 'UserGroupRole.name',
         ]);
-        $c->innerJoin('modUserGroupMember', 'UserGroupMembers');
-        $c->leftJoin('modUserGroupRole', 'UserGroupRole', 'UserGroupMembers.role = UserGroupRole.id');
+        $c->innerJoin(modUserGroupMember::class, 'UserGroupMembers');
+        $c->leftJoin(modUserGroupRole::class, 'UserGroupRole', 'UserGroupMembers.role = UserGroupRole.id');
         $c->where([
             'UserGroupMembers.user_group' => $this->get('id'),
         ]);
@@ -123,7 +122,7 @@ class modUserGroup extends modPrincipal
             $c->limit($criteria['limit'], $start);
         }
 
-        return $this->xpdo->getCollection('modUser', $c);
+        return $this->xpdo->getCollection(modUser::class, $c);
     }
 
     /**
@@ -139,15 +138,15 @@ class modUserGroup extends modPrincipal
      */
     public function getResourceGroups($limit = false, $start = 0)
     {
-        $c = $this->xpdo->newQuery('modResourceGroup');
-        $c->innerJoin('modAccessResourceGroup', 'Acls', [
-            'Acls.principal_class' => 'modUserGroup',
+        $c = $this->xpdo->newQuery(modResourceGroup::class);
+        $c->innerJoin(modAccessResourceGroup::class, 'Acls', [
+            'Acls.principal_class' => modUserGroup::class,
             'Acls.principal' => $this->get('id'),
         ]);
         if ($limit) {
             $c->limit($limit, $start);
         }
 
-        return $this->xpdo->getCollection('modResourceGroup', $c);
+        return $this->xpdo->getCollection(modResourceGroup::class, $c);
     }
 }

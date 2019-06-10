@@ -34,14 +34,14 @@ class modAccessContext extends modAccess
             $enabled = (boolean)$modx->contexts[$context]->getOption('access_context_enabled', $enabled);
         }
         if ($enabled) {
-            $accessTable = $modx->getTableName('modAccessContext');
-            $policyTable = $modx->getTableName('modAccessPolicy');
-            $memberTable = $modx->getTableName('modUserGroupMember');
-            $memberRoleTable = $modx->getTableName('modUserGroupRole');
+            $accessTable = $modx->getTableName(modAccessContext::class);
+            $policyTable = $modx->getTableName(modAccessPolicy::class);
+            $memberTable = $modx->getTableName(modUserGroupMember::class);
+            $memberRoleTable = $modx->getTableName(modUserGroupRole::class);
             if ($userId > 0) {
                 $sql = "SELECT acl.target, acl.principal, mr.authority, acl.policy, p.data FROM {$accessTable} acl " .
                     "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
-                    "JOIN {$memberTable} mug ON acl.principal_class = 'modUserGroup' " .
+                    "JOIN {$memberTable} mug ON acl.principal_class = {$modx->quote(modUserGroup::class)} " .
                     "AND mug.member = :principal " .
                     "AND mug.user_group = acl.principal " .
                     "JOIN {$memberRoleTable} mr ON mr.id = mug.role " .
@@ -63,7 +63,7 @@ class modAccessContext extends modAccess
             } else {
                 $sql = "SELECT acl.target, acl.principal, 0 AS authority, acl.policy, p.data FROM {$accessTable} acl " .
                     "LEFT JOIN {$policyTable} p ON p.id = acl.policy " .
-                    "WHERE acl.principal_class = 'modUserGroup' " .
+                    "WHERE acl.principal_class = {$modx->quote(modUserGroup::class)} " .
                     "AND acl.principal = 0 " .
                     "ORDER BY acl.target, acl.principal, acl.authority, acl.policy";
                 $query = new xPDOCriteria($modx, $sql);

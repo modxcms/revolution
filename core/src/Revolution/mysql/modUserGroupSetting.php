@@ -138,8 +138,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
             'Description.value AS description_trans',
         ]);
         $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Entry', "CONCAT('setting_',modUserGroupSetting.`key`) = Entry.name");
-        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Description',
-            "CONCAT('setting_',modUserGroupSetting.`key`,'_desc') = Description.name");
+        $c->leftJoin(\MODX\Revolution\modLexiconEntry::class, 'Description', "CONCAT('setting_',modUserGroupSetting.`key`,'_desc') = Description.name");
         $c->where($criteria);
         $count = $xpdo->getCount(\MODX\Revolution\modUserGroupSetting::class, $c);
         $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modUserGroupSetting::class, 'modUserGroupSetting', '', ['area']), 'ASC');

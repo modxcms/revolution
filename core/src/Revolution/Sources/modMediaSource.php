@@ -16,9 +16,11 @@ use League\Flysystem\Handler;
 use League\Flysystem\MountManager;
 use Memcached;
 use MODX\Revolution\modAccessibleSimpleObject;
+use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modCacheManager;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modUser;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modX;
 use PDO;
 use xPDO\Cache\xPDOCacheManager;
@@ -1542,12 +1544,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
-                $accessTable = $this->xpdo->getTableName('sources.modAccessMediaSource');
-                $sourceTable = $this->xpdo->getTableName('sources.modMediaSource');
-                $policyTable = $this->xpdo->getTableName('modAccessPolicy');
+                $accessTable = $this->xpdo->getTableName(modAccessMediaSource::class);
+                $sourceTable = $this->xpdo->getTableName(modMediaSource::class);
+                $policyTable = $this->xpdo->getTableName(modAccessPolicy::class);
                 $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                     "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                    "JOIN {$sourceTable} Source ON Acl.principal_class = 'modUserGroup' " .
+                    "JOIN {$sourceTable} Source ON Acl.principal_class = {$this->xpdo->quote(modUserGroup::class)} " .
                     "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                     "AND Source.id = Acl.target " .
                     "WHERE Acl.target = :source " .
@@ -1559,7 +1561,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                 if ($query->stmt && $query->stmt->execute()) {
                     while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                        $policy['sources.modAccessMediaSource'][$row['target']][] = [
+                        $policy[modAccessMediaSource::class][$row['target']][] = [
                             'principal' => $row['principal'],
                             'authority' => $row['authority'],
                             'policy' => $row['data'] ? json_decode($row['data'], true) : [],
@@ -1630,7 +1632,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             return;
         }
 
-        $c = $this->xpdo->newQuery('modContext');
+        $c = $this->xpdo->newQuery(modContext::class);
         $c->select($this->xpdo->escape('key'));
 
         $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');

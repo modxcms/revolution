@@ -15,6 +15,7 @@ use MODX\Revolution\modObjectUpdateProcessor;
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\modUser;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modX;
@@ -28,7 +29,7 @@ use MODX\Revolution\modX;
  * @subpackage processors.security.user
  */
 class Update extends modObjectUpdateProcessor {
-    public $classKey = 'modUser';
+    public $classKey = modUser::class;
     public $languageTopics = array('user');
     public $permission = 'save_user';
     public $objectType = 'user';
@@ -149,7 +150,7 @@ class Update extends modObjectUpdateProcessor {
     public function setProfile() {
         $this->profile = $this->object->getOne('Profile');
         if (empty($this->profile)) {
-            $this->profile = $this->modx->newObject('modUserProfile');
+            $this->profile = $this->modx->newObject(modUserProfile::class);
             $this->profile->set('internalKey',$this->object->get('id'));
             $this->profile->save();
             $this->object->addOne($this->profile,'Profile');
@@ -223,7 +224,7 @@ class Update extends modObjectUpdateProcessor {
             $idx = 0;
             foreach ($newGroups as $newGroup) {
                 /** @var modUserGroupMember $membership */
-                $membership = $this->modx->newObject('modUserGroupMember');
+                $membership = $this->modx->newObject(modUserGroupMember::class);
                 $membership->fromArray(array(
                     'user_group' => $newGroup['usergroup'],
                     'role' => $newGroup['role'],
@@ -234,7 +235,7 @@ class Update extends modObjectUpdateProcessor {
                     $primaryGroupId = $newGroup['usergroup'];
                 }
 
-                $usergroup = $this->modx->getObject('modUserGroup', $newGroup['usergroup']);
+                $usergroup = $this->modx->getObject(modUserGroup::class, $newGroup['usergroup']);
                 /* invoke OnUserBeforeAddToGroup event */
                 $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', array(
                     'user' => &$this->object,

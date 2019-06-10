@@ -8,7 +8,12 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modManagerController;
+use MODX\Revolution\modUserGroup;
+use MODX\Revolution\modUserGroupRole;
+use MODX\Revolution\Sources\modAccessMediaSource;
+use MODX\Revolution\Sources\modMediaSource;
 
 /**
  * Loads the Media Sources page
@@ -111,22 +116,22 @@ class SourceUpdateManagerController extends modManagerController {
     }
 
     public function getAccess() {
-        $c = $this->modx->newQuery('sources.modAccessMediaSource');
-        $c->innerJoin('sources.modMediaSource','Target');
-        $c->innerJoin('modAccessPolicy','Policy');
-        $c->innerJoin('modUserGroup','Principal');
-        $c->innerJoin('modUserGroupRole','MinimumRole');
+        $c = $this->modx->newQuery(modAccessMediaSource::class);
+        $c->innerJoin(modMediaSource::class, 'Target');
+        $c->innerJoin(modAccessPolicy::class, 'Policy');
+        $c->innerJoin(modUserGroup::class, 'Principal');
+        $c->innerJoin(modUserGroupRole::class, 'MinimumRole');
         $c->where(array(
             'target' => $this->source->get('id'),
         ));
-        $c->select($this->modx->getSelectColumns('sources.modAccessMediaSource','modAccessMediaSource'));
+        $c->select($this->modx->getSelectColumns(modAccessMediaSource::class, 'modAccessMediaSource'));
         $c->select(array(
             'target_name' => 'Target.name',
             'principal_name' => 'Principal.name',
             'policy_name' => 'Policy.name',
             'authority_name' => 'MinimumRole.name',
         ));
-        $acls = $this->modx->getCollection('sources.modAccessMediaSource',$c);
+        $acls = $this->modx->getCollection(modAccessMediaSource::class,$c);
         $access = array();
         /** @var modAccessMediaSource $acl */
         foreach ($acls as $acl) {
