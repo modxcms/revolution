@@ -94,7 +94,7 @@ class Update extends modObjectUpdateProcessor
         $xtype = $this->getProperty('xtype');
         $value = $this->getProperty('value');
         if ($xtype === 'combo-boolean' && !is_numeric($value)) {
-            $value = in_array($value, ['yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True'], true) ? 1 : 0;
+            $value = in_array($value, ['yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True', true], true) ? 1 : 0;
             $this->object->set('value', $value);
         }
 
