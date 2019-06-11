@@ -232,14 +232,14 @@ class modTemplate extends \MODX\Revolution\modTemplate
         array $conditions = []
     ) {
         $result = ['collection' => [], 'total' => 0];
-        $c = $template->xpdo->newQuery('modTemplateVar');
-        $result['total'] = $template->xpdo->getCount('modTemplateVar', $c);
-        $c->select($template->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
-        $c->leftJoin('modTemplateVarTemplate', 'modTemplateVarTemplate', [
+        $c = $template->xpdo->newQuery(\MODX\Revolution\modTemplateVar::class);
+        $result['total'] = $template->xpdo->getCount(\MODX\Revolution\modTemplateVar::class, $c);
+        $c->select($template->xpdo->getSelectColumns(\MODX\Revolution\modTemplateVar::class, 'modTemplateVar'));
+        $c->leftJoin(\MODX\Revolution\modTemplateVarTemplate::class, 'modTemplateVarTemplate', [
             "modTemplateVarTemplate.tmplvarid = modTemplateVar.id",
             'modTemplateVarTemplate.templateid' => $template->get('id'),
         ]);
-        $c->leftJoin('modCategory', 'Category');
+        $c->leftJoin(\MODX\Revolution\modCategory::class, 'Category');
         if (!empty($conditions)) {
             $c->where($conditions);
         }
@@ -254,7 +254,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
         if ($limit > 0) {
             $c->limit($limit, $offset);
         }
-        $result['collection'] = $template->xpdo->getCollection('modTemplateVar', $c);
+        $result['collection'] = $template->xpdo->getCollection(\MODX\Revolution\modTemplateVar::class, $c);
 
         return $result;
     }
