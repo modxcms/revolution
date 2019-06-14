@@ -282,6 +282,11 @@ Ext.extend(MODx.window.DashboardWidgetAdd, MODx.Window, {
 
     getFields: function (config) {
         return [{
+            hideLabel: true,
+            xtype: 'displayfield',
+            html: _('widget_add_desc'),
+            anchor: '100%'
+        }, {
             fieldLabel: _('widget_add'),
             id: this.ident + '-widget',
             xtype: 'modx-combo-dashboard-widgets',
@@ -309,21 +314,11 @@ Ext.extend(MODx.window.DashboardWidgetAdd, MODx.Window, {
                 }
             }
         }, {
-            hideLabel: true,
-            xtype: 'displayfield',
-            html: _('widget_add_desc'),
-            anchor: '100%'
-        }, {
             fieldLabel: _('widget_size'),
             id: this.ident + '-size',
             xtype: 'modx-combo-dashboard-widget-size',
             name: 'size',
             value: 'half',
-            anchor: '100%'
-        }, {
-            hideLabel: true,
-            xtype: 'displayfield',
-            html: _('widget_size_desc'),
             anchor: '100%'
         }];
     },
