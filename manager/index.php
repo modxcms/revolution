@@ -24,9 +24,9 @@ if (!defined('MODX_API_MODE')) {
 }
 
 /* check for correct version of php */
-$php_ver_comp = version_compare(phpversion(),'5.6');
+$php_ver_comp = version_compare(phpversion(),'7.0');
 if ($php_ver_comp < 0) {
-    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODX Revolution only works on 5.6 or higher.');
+    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODX Revolution only works on 7.0 or higher.');
 }
 
 /* set the document_root */

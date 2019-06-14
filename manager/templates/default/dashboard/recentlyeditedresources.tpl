@@ -17,8 +17,8 @@
                 {foreach $data.results as $record}
                     <tr>
                         <td>{$record.id}</td>
-                        <td>
-                            <div class="{if !$record.published}unpublished{elseif $record.deleted}deleted{/if}">{$record.pagetitle}</div>
+                        <td class="resource">
+                            <div class="{if !$record.published}unpublished{elseif $record.deleted}deleted{else}title{/if}">{$record.pagetitle}</div>
                             {if !empty($record.action)}
                                 <div>
                                     <small>{$record.action}</small>

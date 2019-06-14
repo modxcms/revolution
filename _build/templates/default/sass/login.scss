@@ -21,7 +21,9 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
   outline: 0;
 }
@@ -30,7 +32,17 @@ html {
   box-shadow: 0 0 0 0.125rem $blue;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+form {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -56,7 +68,7 @@ body {
   width: calc(100% - 30rem);
   background: $lightGray no-repeat center center;
   background-size: cover;
-  opacity: 0.8;
+  opacity: .8;
 }
 
 .l-main {
@@ -136,8 +148,9 @@ p {
 a {
   color: $blue;
   text-decoration: none;
+
   &:hover {
-    opacity: 0.8;
+    opacity: .8;
   }
 }
 
@@ -159,6 +172,7 @@ label {
   color: $darkestGray;
   cursor: pointer;
   font-weight: 500;
+
   a {
     font-weight: 400;
   }
@@ -228,6 +242,7 @@ input[type="checkbox"] {
   color: $blue;
   background: transparent;
   border: none;
+
   .c-arrow {
     stroke: $blue;
   }
@@ -236,11 +251,14 @@ input[type="checkbox"] {
 #modx-login-btn,
 #modx-fl-btn {
   border: 1px solid transparent;
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     background: $greener;
     color: $buttonColorPrimaryHover;
     transition: background-color .2s ease-out;
   }
+
   &:hover {
     box-shadow: none;
   }
@@ -270,19 +288,16 @@ input[type="checkbox"] {
   border: 0.125rem solid $green;
   padding: 0 1rem;
   border-radius: $borderRadius;
+
   &.is-visible {
     display: block;
   }
 }
 
 .l-footer {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -ms-flex-pack: justify;
   justify-content: flex-end;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   margin-bottom: 1rem;
@@ -297,12 +312,7 @@ input[type="checkbox"] {
   background: transparent;
   border: none;
   border-radius: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   cursor: pointer;
   font-family: inherit;
@@ -332,7 +342,7 @@ input[type="checkbox"] {
   vertical-align: middle;
   position: relative;
   top: -2px;
-  transition: left 0.4s ease-in-out, right 0.4s ease-in-out;
+  transition: left .4s ease-in-out, right .4s ease-in-out;
   right: 0;
 
   a:hover > & {
@@ -357,13 +367,13 @@ input[type="checkbox"] {
 .can-toggle {
   max-height: 50rem;
   overflow: hidden;
-  transition: max-height 0.4s ease-in-out;
+  transition: max-height .4s ease-in-out;
 }
 
 .is-hidden {
   max-height: 0;
   visibility: hidden;
-  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s;
+  transition: max-height .4s ease-in-out, 0s visibility .7s;
 }
 
 .is-error {

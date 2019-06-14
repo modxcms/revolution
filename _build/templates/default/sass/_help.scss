@@ -46,13 +46,12 @@
 }
 
 #managerbuttons ul li a {
-  background: linear-gradient(top, white, whitesmoke);
+  background-color: $white;
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   box-shadow: 0 1px 0 $borderColor;
   color: $darkestGray;
-  display: table-cell;
-  /* MODX 2.x.x Manager Button Styles */
+  display: table-cell; /* MODX 2.x.x Manager Button Styles */
   font: $fontSmall;
   font-weight: bold;
   padding: 12px;
@@ -88,13 +87,14 @@
 
 #helpBanner,
 #contactus {
-  box-sizing:border-box;
-  background: #fff;
+  box-sizing: border-box;
+  background: $white;
   border: 1px solid $borderColor;
   box-shadow: 0 1px 0 $borderColor;
   margin: 0.75em 0 1.75em;
   padding: 18px;
   width: 100%;
+
   h3 {
     margin: 0 0 1em;
   }
@@ -103,13 +103,13 @@
 #helpBanner {
   margin-top: 1.5em;
   min-height: 112px;
-  background-color: transparent;
   background-image: url($imgPath + 'modx-logo-color.png');
-  background-image: url($imgPath + 'modx-logo-color.svg'),none;
+  background-image: url($imgPath + 'modx-logo-color.svg'), none;
   background-repeat: no-repeat;
-  background-attachment:none;
+  background-attachment: none;
   background-position: 97% center;
   background-size: 200px;
+
   #helpLogo {
     float: right;
     height: 76px;
@@ -119,19 +119,22 @@
 }
 
 #contactus {
-  box-sizing:border-box;
+  box-sizing: border-box;
   float: left;
   width: 60%;
+
   form {
     display: inline;
   }
+
   input[type=email] {
-    box-sizing:border-box;
+    box-sizing: border-box;
     font-size: 1.1em;
     margin-right: 4px;
     padding: 0.4em;
     width: 70%;
   }
+
   input[type=submit] {
     /*background: none;*/
     border: 0;
@@ -139,11 +142,13 @@
     font-size: 1.1em;
     padding: 6px 10px;
   }
+
   p {
     color: lighten($mainText, 15%);
     margin: 1em 0;
   }
-  form + p {
+
+  form+p {
     margin: 2em 0 0;
   }
 }
@@ -151,27 +156,32 @@
 #contactus a {
   color: $mainText;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
+
     i {
       text-decoration: none;
     }
   }
+
   i {
-    margin: 0 8px -6px 0;
+    margin: 0 15px -6px 0;
   }
 }
 
 #mcsignup input.x-btn {
   padding: 10px 15px;
 }
+
 .icon.icon-2x {
   width: 22px;
   text-align: center;
   vertical-align: text-bottom;
 }
+
 #aboutMODX {
-  box-sizing:border-box;
+  box-sizing: border-box;
   background: $lighterGray;
   float: left;
   margin: 1em 0 0 2%;
@@ -183,13 +193,15 @@
     line-height: 1.6;
     margin: 0 0 1em;
   }
+
   a {
     color: $colorSplash;
     margin: -2px -4px;
     padding: 2px 4px;
+
     &:hover {
       background-color: $colorSplash;
-      color: #fff;
+      color: $white;
       text-decoration: none;
     }
   }

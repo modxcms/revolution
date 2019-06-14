@@ -487,6 +487,7 @@ MODx.browser.Window = function(config) {
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
+        ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
         ,rootName: _('files')
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
@@ -871,6 +872,7 @@ MODx.Media = function(config) {
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
+        ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
         ,rootName: _('files')
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
@@ -1218,6 +1220,7 @@ MODx.browser.RTE = function(config) {
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
+        ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
         ,rootName: _('files')
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
