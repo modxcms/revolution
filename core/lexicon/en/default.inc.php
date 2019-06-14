@@ -51,6 +51,7 @@ $_lang['caption'] = 'Caption';
 $_lang['caption_desc'] = 'The name to show beside the input when editing a TV on a Resource form.';
 $_lang['categories'] = 'Categories';
 $_lang['category'] = 'Category';
+$_lang['category_child'] = 'Child elements: ';
 $_lang['category_create'] = 'Create New Category';
 $_lang['category_confirm_delete'] = 'Are you sure you want to remove this category? All Elements within it will revert to having no category.';
 $_lang['category_rename'] = 'Rename Category';
