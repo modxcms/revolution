@@ -349,9 +349,10 @@ class modElementGetNodesProcessor extends modProcessor {
                 }
             }
 
-            $cc = ($category->get('elementCount') > 0) ? ' (' . $category->get('elementCount') . ')' : '';
+            $idNote = $this->modx->hasPermission('tree_show_element_ids') ? ' (' . $category->get('id') . ')' : '';
+            $cc = ($category->get('elementCount') > 0) ? $this->modx->lexicon('category_child') . $category->get('elementCount') : '';
             $nodes[] = array(
-                'text' => strip_tags($category->get('category')) . $cc,
+                'text' => strip_tags($category->get('category')) . $idNote,
                 'id' => 'n_'.$map[0].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
                 'pk' => $category->get('id'),
                 'category' => $category->get('id'),
@@ -363,6 +364,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'elementType' => $elementType,
                 'page' => '',
                 'type' => $elementIdentifier,
+                'qtip' => $cc
             );
         }
 
@@ -543,10 +545,10 @@ class modElementGetNodesProcessor extends modProcessor {
                 }
             }
 
-            $cc = $elCount > 0 ? ' ('.$elCount.')' : '';
-
+            $idNote = $this->modx->hasPermission('tree_show_element_ids') ? ' (' . $category->get('id') . ')' : '';
+            $cc = $elCount > 0 ? $this->modx->lexicon('category_child') . $elCount : '';
             $nodes[] = array(
-                'text' => strip_tags($category->get('category')).$cc,
+                'text' => strip_tags($category->get('category')) . $idNote,
                 'id' => 'n_'.$map[1].'_category_'.($category->get('id') != null ? $category->get('id') : 0),
                 'pk' => $category->get('id'),
                 'category' => $category->get('id'),
@@ -558,6 +560,7 @@ class modElementGetNodesProcessor extends modProcessor {
                 'classKey' => 'modCategory',
                 'elementType' => $elementType,
                 'type' => $map[1],
+                'qtip' => $cc
             );
             unset($elCount,$childCats);
         }
