@@ -6,7 +6,10 @@
  * @package setup
  * @subpackage upgrades
  */
-$class = 'modUserProfile';
+
+use MODX\Revolution\modUserProfile;
+
+$class = modUserProfile::class;
 $table = $modx->getTableName($class);
 
 $description = $this->install->lexicon(
