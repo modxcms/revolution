@@ -45,4 +45,5 @@ class modAccessPolicyTemplateGroup extends \MODX\Revolution\modAccessPolicyTempl
             ),
         ),
     );
+
 }

@@ -66,4 +66,5 @@ class modAccessResource extends \MODX\Revolution\modAccessResource
             ),
         ),
     );
+
 }

@@ -103,4 +103,5 @@ class modScript extends \MODX\Revolution\modScript
             ),
         ),
     );
+
 }

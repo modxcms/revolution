@@ -90,4 +90,5 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
             ),
         ),
     );
+
 }

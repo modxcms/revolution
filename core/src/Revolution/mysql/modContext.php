@@ -12,16 +12,16 @@ class modContext extends \MODX\Revolution\modContext
         'version' => '3.0',
         'table' => 'context',
         'extends' => 'MODX\\Revolution\\modAccessibleObject',
-        'fields' =>
+        'fields' => 
         array (
             'key' => NULL,
             'name' => NULL,
             'description' => NULL,
             'rank' => 0,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'key' =>
+            'key' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -29,19 +29,19 @@ class modContext extends \MODX\Revolution\modContext
                 'null' => false,
                 'index' => 'pk',
             ),
-            'name' =>
+            'name' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
                 'phptype' => 'string',
                 'index' => 'index',
             ),
-            'description' =>
+            'description' => 
             array (
                 'dbtype' => 'tinytext',
                 'phptype' => 'string',
             ),
-            'rank' =>
+            'rank' => 
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -51,17 +51,17 @@ class modContext extends \MODX\Revolution\modContext
                 'index' => 'index',
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'key' =>
+                    'key' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -69,15 +69,15 @@ class modContext extends \MODX\Revolution\modContext
                     ),
                 ),
             ),
-            'name' =>
+            'name' => 
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'name' =>
+                    'name' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -85,15 +85,15 @@ class modContext extends \MODX\Revolution\modContext
                     ),
                 ),
             ),
-            'rank' =>
+            'rank' => 
             array (
                 'alias' => 'rank',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'rank' =>
+                    'rank' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -102,9 +102,9 @@ class modContext extends \MODX\Revolution\modContext
                 ),
             ),
         ),
-        'composites' =>
+        'composites' => 
         array (
-            'ContextResources' =>
+            'ContextResources' => 
             array (
                 'class' => 'MODX\\Revolution\\modContextResource',
                 'local' => 'key',
@@ -112,7 +112,7 @@ class modContext extends \MODX\Revolution\modContext
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'ContextSettings' =>
+            'ContextSettings' => 
             array (
                 'class' => 'MODX\\Revolution\\modContextSetting',
                 'local' => 'key',
@@ -120,7 +120,7 @@ class modContext extends \MODX\Revolution\modContext
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'SourceElements' =>
+            'SourceElements' => 
             array (
                 'class' => 'MODX\\Revolution\\Sources\\modMediaSourceElement',
                 'local' => 'key',
@@ -128,7 +128,7 @@ class modContext extends \MODX\Revolution\modContext
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Acls' =>
+            'Acls' => 
             array (
                 'class' => 'MODX\\Revolution\\modAccessContext',
                 'local' => 'key',
@@ -137,13 +137,13 @@ class modContext extends \MODX\Revolution\modContext
                 'cardinality' => 'many',
             ),
         ),
-        'validation' =>
+        'validation' => 
         array (
-            'rules' =>
+            'rules' => 
             array (
-                'key' =>
+                'key' => 
                 array (
-                    'key' =>
+                    'key' => 
                     array (
                         'type' => 'preg_match',
                         'rule' => '/^[a-zA-Z\\x7f-\\xff][a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff]*$/',

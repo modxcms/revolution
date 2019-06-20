@@ -17,4 +17,5 @@ class modFTPMediaSource extends \MODX\Revolution\Sources\modFTPMediaSource
         array (
         ),
     );
+
 }

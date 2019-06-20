@@ -26,7 +26,7 @@
     <object class="modMediaSource" table="media_sources" extends="MODX\Revolution\modAccessibleSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index"/>
         <field key="description" dbtype="text" phptype="string" null="true" />
-        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="MODX\\Revolution\\Sources\\modFileMediaSource" index="index" />
+        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="\\MODX\\Revolution\\Sources\\modFileMediaSource" index="index" />
         <field key="properties" dbtype="mediumtext" phptype="array" null="true" />
         <field key="is_stream" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
 

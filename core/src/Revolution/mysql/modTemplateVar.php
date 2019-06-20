@@ -311,4 +311,5 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
             ),
         ),
     );
+
 }

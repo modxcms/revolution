@@ -121,4 +121,5 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
             ),
         ),
     );
+
 }

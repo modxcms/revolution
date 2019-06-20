@@ -99,4 +99,5 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
             ),
         ),
     );
+
 }

@@ -102,4 +102,5 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
             ),
         ),
     );
+
 }

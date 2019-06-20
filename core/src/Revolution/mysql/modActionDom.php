@@ -277,4 +277,5 @@ class modActionDom extends \MODX\Revolution\modActionDom
             ),
         ),
     );
+
 }

@@ -100,4 +100,5 @@ class modAccessResourceGroup extends \MODX\Revolution\modAccessResourceGroup
             ),
         ),
     );
+
 }

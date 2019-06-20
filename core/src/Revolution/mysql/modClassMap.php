@@ -115,4 +115,5 @@ class modClassMap extends \MODX\Revolution\modClassMap
             ),
         ),
     );
+
 }

@@ -29,4 +29,5 @@ class modAccessAction extends \MODX\Revolution\modAccessAction
             ),
         ),
     );
+
 }

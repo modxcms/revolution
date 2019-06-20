@@ -146,4 +146,5 @@ class modActionField extends \MODX\Revolution\modActionField
             ),
         ),
     );
+
 }

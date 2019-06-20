@@ -215,4 +215,5 @@ class modMenu extends \MODX\Revolution\modMenu
             ),
         ),
     );
+
 }

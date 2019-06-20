@@ -159,4 +159,5 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
             ),
         ),
     );
+
 }

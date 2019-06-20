@@ -17,4 +17,5 @@ class modSymLink extends \MODX\Revolution\modSymLink
         array (
         ),
     );
+
 }

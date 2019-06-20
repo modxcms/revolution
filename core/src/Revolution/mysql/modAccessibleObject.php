@@ -17,4 +17,5 @@ class modAccessibleObject extends \MODX\Revolution\modAccessibleObject
         array (
         ),
     );
+
 }

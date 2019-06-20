@@ -66,4 +66,5 @@ class modAccessNamespace extends \MODX\Revolution\modAccessNamespace
             ),
         ),
     );
+
 }

@@ -66,4 +66,5 @@ class modAccessMediaSource extends \MODX\Revolution\Sources\modAccessMediaSource
             ),
         ),
     );
+
 }

@@ -93,4 +93,5 @@ class modSession extends \MODX\Revolution\modSession
             ),
         ),
     );
+
 }

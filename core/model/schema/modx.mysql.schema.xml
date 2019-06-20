@@ -13,7 +13,7 @@
 <model package="MODX\Revolution\" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="" version="3.0">
     <object class="modAccess" extends="xPDO\Om\xPDOSimpleObject">
         <field key="target" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
-        <field key="principal_class" dbtype="varchar" precision="100" phptype="string" null="false" default="\MODX\Revolution\modPrincipal" index="index" />
+        <field key="principal_class" dbtype="varchar" precision="100" phptype="string" null="false" default="\\MODX\\Revolution\\modPrincipal" index="index" />
         <field key="principal" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
         <field key="authority" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="9999" index="index" />
         <field key="policy" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
@@ -897,7 +897,7 @@
         <field key="privatemgr" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="content_dispo" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="hidemenu" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="\MODX\Revolution\modDocument" index="index" />
+        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="\\MODX\\Revolution\\modDocument" index="index" />
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="web" index="index" />
         <field key="content_type" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="1" />
         <field key="uri" dbtype="text" phptype="string" null="true" index="index" />
@@ -1240,11 +1240,11 @@
         <field key="username" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="unique" />
         <field key="password" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="cachepwd" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="\MODX\Revolution\modUser" index="index" />
+        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="\\MODX\\Revolution\\modUser" index="index" />
         <field key="active" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
         <field key="remote_key" dbtype="varchar" precision="191" phptype="string" null="true" index="index" />
         <field key="remote_data" dbtype="text" phptype="json" null="true" />
-        <field key="hash_class" dbtype="varchar" precision="100" phptype="string" null="false" default="\MODX\Revolution\Hashing\modNative" />
+        <field key="hash_class" dbtype="varchar" precision="100" phptype="string" null="false" default="\\MODX\\Revolution\\Hashing\\modNative" />
         <field key="salt" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="primary_group" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="session_stale" dbtype="text" phptype="array" null="true" />

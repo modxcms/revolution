@@ -180,4 +180,5 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
             ),
         ),
     );
+
 }

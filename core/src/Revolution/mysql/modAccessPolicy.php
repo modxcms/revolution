@@ -178,4 +178,5 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
             ),
         ),
     );
+
 }

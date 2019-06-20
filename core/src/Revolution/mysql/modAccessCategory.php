@@ -66,4 +66,5 @@ class modAccessCategory extends \MODX\Revolution\modAccessCategory
             ),
         ),
     );
+
 }

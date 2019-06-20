@@ -78,4 +78,5 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
             ),
         ),
     );
+
 }

@@ -17,4 +17,5 @@ class modWebLink extends \MODX\Revolution\modWebLink
         array (
         ),
     );
+
 }

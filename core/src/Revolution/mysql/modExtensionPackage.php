@@ -132,4 +132,5 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
             ),
         ),
     );
+
 }

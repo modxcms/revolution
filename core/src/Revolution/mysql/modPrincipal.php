@@ -28,4 +28,5 @@ class modPrincipal extends \MODX\Revolution\modPrincipal
             ),
         ),
     );
+
 }

@@ -29,4 +29,5 @@ class modAccessTemplateVar extends \MODX\Revolution\modAccessTemplateVar
             ),
         ),
     );
+
 }

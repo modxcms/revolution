@@ -66,4 +66,5 @@ class modAccessElement extends \MODX\Revolution\modAccessElement
             ),
         ),
     );
+
 }

@@ -17,4 +17,5 @@ class modFileMediaSource extends \MODX\Revolution\Sources\modFileMediaSource
         array (
         ),
     );
+
 }

@@ -151,4 +151,5 @@ class modAction extends \MODX\Revolution\modAction
             ),
         ),
     );
+
 }

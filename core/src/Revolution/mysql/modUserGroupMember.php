@@ -122,4 +122,5 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
             ),
         ),
     );
+
 }

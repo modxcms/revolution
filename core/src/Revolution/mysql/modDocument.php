@@ -17,4 +17,5 @@ class modDocument extends \MODX\Revolution\modDocument
         array (
         ),
     );
+
 }

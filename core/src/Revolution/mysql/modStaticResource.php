@@ -17,4 +17,5 @@ class modStaticResource extends \MODX\Revolution\modStaticResource
         array (
         ),
     );
+
 }

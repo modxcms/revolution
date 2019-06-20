@@ -68,4 +68,5 @@ class modElement extends \MODX\Revolution\modElement
             ),
         ),
     );
+
 }

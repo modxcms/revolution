@@ -218,4 +218,5 @@ class modChunk extends \MODX\Revolution\modChunk
             ),
         ),
     );
+
 }

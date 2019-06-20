@@ -183,4 +183,5 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
             ),
         ),
     );
+
 }

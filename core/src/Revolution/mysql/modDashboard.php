@@ -112,4 +112,5 @@ class modDashboard extends \MODX\Revolution\modDashboard
             ),
         ),
     );
+
 }

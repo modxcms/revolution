@@ -272,4 +272,5 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             ),
         ),
     );
+
 }

@@ -162,4 +162,5 @@ class modSnippet extends \MODX\Revolution\modSnippet
             ),
         ),
     );
+
 }

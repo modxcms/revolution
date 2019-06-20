@@ -124,4 +124,5 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
             ),
         ),
     );
+
 }

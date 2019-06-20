@@ -127,4 +127,5 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
             ),
         ),
     );
+
 }

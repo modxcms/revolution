@@ -141,4 +141,5 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
             ),
         ),
     );
+
 }

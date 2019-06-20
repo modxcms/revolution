@@ -78,4 +78,5 @@ class modContextResource extends \MODX\Revolution\modContextResource
             ),
         ),
     );
+
 }

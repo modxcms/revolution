@@ -96,4 +96,5 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
             ),
         ),
     );
+
 }

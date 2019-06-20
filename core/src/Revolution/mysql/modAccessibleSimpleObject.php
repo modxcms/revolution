@@ -47,4 +47,5 @@ class modAccessibleSimpleObject extends \MODX\Revolution\modAccessibleSimpleObje
             ),
         ),
     );
+
 }

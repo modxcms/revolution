@@ -29,4 +29,5 @@ class modAccessMenu extends \MODX\Revolution\modAccessMenu
             ),
         ),
     );
+
 }

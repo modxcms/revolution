@@ -267,4 +267,5 @@ class modCategory extends \MODX\Revolution\modCategory
             ),
         ),
     );
+
 }

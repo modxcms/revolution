@@ -198,4 +198,5 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
             ),
         ),
     );
+
 }

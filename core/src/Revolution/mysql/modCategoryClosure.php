@@ -94,4 +94,5 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
             ),
         ),
     );
+
 }

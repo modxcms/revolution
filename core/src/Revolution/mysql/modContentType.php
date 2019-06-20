@@ -115,4 +115,5 @@ class modContentType extends \MODX\Revolution\modContentType
             ),
         ),
     );
+
 }

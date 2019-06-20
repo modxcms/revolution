@@ -120,4 +120,5 @@ class modNamespace extends \MODX\Revolution\modNamespace
             ),
         ),
     );
+
 }

@@ -82,4 +82,5 @@ class modMediaSourceContext extends \MODX\Revolution\Sources\modMediaSourceConte
             ),
         ),
     );
+
 }

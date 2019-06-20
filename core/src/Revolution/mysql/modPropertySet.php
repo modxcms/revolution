@@ -112,4 +112,5 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
             ),
         ),
     );
+
 }

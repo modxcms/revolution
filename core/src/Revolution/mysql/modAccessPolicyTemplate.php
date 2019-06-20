@@ -84,4 +84,5 @@ class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
             ),
         ),
     );
+
 }

@@ -94,4 +94,5 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
             ),
         ),
     );
+
 }

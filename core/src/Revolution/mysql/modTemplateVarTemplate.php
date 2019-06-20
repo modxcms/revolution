@@ -93,4 +93,5 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
             ),
         ),
     );
+
 }

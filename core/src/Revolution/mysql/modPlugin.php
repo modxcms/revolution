@@ -183,4 +183,5 @@ class modPlugin extends \MODX\Revolution\modPlugin
             ),
         ),
     );
+
 }

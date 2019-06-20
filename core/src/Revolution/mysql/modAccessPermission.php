@@ -103,4 +103,5 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
             ),
         ),
     );
+
 }

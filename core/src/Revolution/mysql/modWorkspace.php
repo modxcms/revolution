@@ -124,4 +124,5 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
             ),
         ),
     );
+
 }

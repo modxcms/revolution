@@ -107,4 +107,5 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
             ),
         ),
     );
+
 }

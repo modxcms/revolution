@@ -11,7 +11,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
         'version' => '3.0',
         'table' => 'user_group_settings',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' =>
+        'fields' => 
         array (
             'group' => 0,
             'key' => NULL,
@@ -21,9 +21,9 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
             'area' => '',
             'editedon' => NULL,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'group' =>
+            'group' => 
             array (
                 'dbtype' => 'integer',
                 'attributes' => 'unsigned',
@@ -32,7 +32,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'key' =>
+            'key' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '50',
@@ -40,12 +40,12 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 'null' => false,
                 'index' => 'pk',
             ),
-            'value' =>
+            'value' => 
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
             ),
-            'xtype' =>
+            'xtype' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '75',
@@ -53,7 +53,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 'null' => false,
                 'default' => 'textfield',
             ),
-            'namespace' =>
+            'namespace' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '40',
@@ -61,7 +61,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 'null' => false,
                 'default' => 'core',
             ),
-            'area' =>
+            'area' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -69,7 +69,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 'null' => false,
                 'default' => '',
             ),
-            'editedon' =>
+            'editedon' => 
             array (
                 'dbtype' => 'timestamp',
                 'phptype' => 'timestamp',
@@ -78,23 +78,23 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'group' =>
+                    'group' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'key' =>
+                    'key' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -103,9 +103,9 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'UserGroup' =>
+            'UserGroup' => 
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'group',
@@ -113,7 +113,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Namespace' =>
+            'Namespace' => 
             array (
                 'class' => 'MODX\\Revolution\\modNamespace',
                 'local' => 'namespace',

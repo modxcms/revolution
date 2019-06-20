@@ -29,4 +29,5 @@ class modAccessContext extends \MODX\Revolution\modAccessContext
             ),
         ),
     );
+
 }

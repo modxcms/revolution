@@ -82,4 +82,5 @@ class modFormCustomizationProfileUserGroup extends \MODX\Revolution\modFormCusto
             ),
         ),
     );
+
 }
