@@ -11,9 +11,38 @@ MODx.page.CreatePlugin = function(config) {
     Ext.applyIf(config,{
         formpanel: 'modx-panel-plugin'
         ,buttons: [{
+            text: '<i class="icon icon-ellipsis-h"></i>'
+            ,id: 'modx-abtn-menu'
+            ,xtype: 'splitbutton'
+            ,split: false
+            ,arrowSelector: false
+            ,handler: function(btn, e) {
+                if (!btn.menu.isVisible() && !btn.ignoreNextClick) {
+                    btn.showMenu();
+                }
+                btn.fireEvent('arrowclick', btn, e);
+                if (btn.arrowHandler) {
+                    btn.arrowHandler.call(btn.scope || btn, btn, e);
+                }
+            }
+            ,menu: {
+                id: 'modx-abtn-menu-list'
+                ,items: [{
+                    text: _('cancel') + ' <i class="icon icon-times"></i>'
+                    ,id: 'modx-abtn-cancel'
+                    ,handler: function() {
+                        MODx.loadPage('?');
+                    }
+                },{
+                    text: _('help_ex') + ' <i class="icon icon-question-circle"></i>'
+                    ,id: 'modx-abtn-help'
+                    ,handler: MODx.loadHelpPane
+                }]
+            }
+        },{
             process: 'element/plugin/create'
             ,reload: true
-            ,text: _('save')
+            ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
             ,method: 'remote'
@@ -22,13 +51,6 @@ MODx.page.CreatePlugin = function(config) {
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
-        },{
-            text: _('cancel')
-            ,id: 'modx-abtn-cancel'
-        },{
-            text: _('help_ex')
-            ,id: 'modx-abtn-help'
-            ,handler: MODx.loadHelpPane
         }]
         ,components: [{
             xtype: 'modx-panel-plugin'

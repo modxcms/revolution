@@ -1,5 +1,4 @@
 /* Main colors */
-/* unused */
 /* needs much more adaption, should be used as text color for elements with $colorSplash background */
 /* a blueish dark gray */
 /* generate the black from the $colorSplash */
@@ -18,14 +17,9 @@
 /* locked is already signaled with lock-icon, no need to use other semantic style here
    as italic is used for "unpublished" */
 /* Top navigation colors */
-/* unused */
-/* unused */
-/* unused */
 /* Tabs */
 /* Windows */
 /* Font stacks */
-/* unused */
-/* unused */
 /* Responsive breakpoints */
 /* Path for background-images */
 @-ms-viewport {
@@ -42,14 +36,26 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%; }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
   outline: 0; }
 
 *:focus {
   box-shadow: 0 0 0 0.125rem #3697CD; }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+form {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -72,14 +78,14 @@ body {
   width: calc(100% - 30rem);
   background: #E4E4E4 no-repeat center center;
   background-size: cover;
-  opacity: 0.8; }
+  opacity: .8; }
 
 .l-main {
   margin: 0.5rem 0 2rem; }
 
 .l-content {
   position: relative;
-  background: #FFF;
+  background: #FFFFFF;
   max-width: 100%;
   min-height: 100vh;
   overflow: hidden;
@@ -137,7 +143,7 @@ a {
   color: #3697CD;
   text-decoration: none; }
   a:hover {
-    opacity: 0.8; }
+    opacity: .8; }
 
 .lead {
   font-size: 1rem;
@@ -206,7 +212,7 @@ input[type="checkbox"] {
   background: #6CB24A;
   border: 1px solid #568e3b;
   border-radius: 3px;
-  color: #FFF;
+  color: #FFFFFF;
   text-align: center;
   font-size: 1rem;
   cursor: pointer; }
@@ -225,7 +231,7 @@ input[type="checkbox"] {
   #modx-fl-btn:hover,
   #modx-fl-btn:focus {
     background: #528738;
-    color: #FFF;
+    color: #FFFFFF;
     transition: background-color .2s ease-out; }
   #modx-login-btn:hover,
   #modx-fl-btn:hover {
@@ -260,14 +266,14 @@ input[type="checkbox"] {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: row;
-  flex-direction: row;
-  -ms-flex-pack: justify;
-  justify-content: flex-end;
+      flex-direction: row;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
   -ms-flex-align: center;
-  align-items: center;
+      align-items: center;
   position: relative;
   margin-bottom: 1rem;
-  background: #FFF; }
+  background: #FFFFFF; }
 
 .c-languageselect {
   position: relative; }
@@ -277,12 +283,12 @@ input[type="checkbox"] {
   border: none;
   border-radius: 0;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
@@ -310,7 +316,7 @@ input[type="checkbox"] {
   vertical-align: middle;
   position: relative;
   top: -2px;
-  transition: left 0.4s ease-in-out, right 0.4s ease-in-out;
+  transition: left .4s ease-in-out, right .4s ease-in-out;
   right: 0; }
   a:hover > .c-arrow {
     right: -0.5rem; }
@@ -328,12 +334,12 @@ input[type="checkbox"] {
 .can-toggle {
   max-height: 50rem;
   overflow: hidden;
-  transition: max-height 0.4s ease-in-out; }
+  transition: max-height .4s ease-in-out; }
 
 .is-hidden {
   max-height: 0;
   visibility: hidden;
-  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s; }
+  transition: max-height .4s ease-in-out, 0s visibility .7s; }
 
 .is-error {
   color: #CF1124;

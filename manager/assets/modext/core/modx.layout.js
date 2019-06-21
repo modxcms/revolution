@@ -221,8 +221,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
             ,split: true
-            ,width: 270
-            ,minSize: 270
+            ,width: 310
+            ,minSize: 288
             ,autoScroll: true
             ,unstyled: true
             ,useSplitTips: true
@@ -310,7 +310,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             if (tab.tabEl.classList.contains('active')) {
                                 var tree = Ext.getCmp('modx-resource-tree');
                                 if (tree) {
-                                    tree[tab.handler.replace(/this./, '')]();
+                                    tree.redirect("?a=resource/trash");
                                 }
                             }
                             return false;

@@ -4,6 +4,13 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Automatically marking required fields by an asterisk [#14522]
+- Using a single pattern for elements action buttons like for resources [#14463]
+- A status notification is shown when optimizing the database via System Information [#14525]
+- Fixes an issue that would cause no results to display when using spaces before/after a search term in the search field [#14523]
+- System Information now shows the correct version numbers of Smarty and PHPMailer [#14517]
+- The minimum required PHP version for MODX is PHP 7.0 [#14488]
+- If you edit a resource and at the same time move it in the tree through drag and drop the menuindex will now stay in sync [#14423]
 - Alter modUserProfile gender field to tinyint from int [#14412]
 - Return empty string for empty xml tag in modRestService [#14305]
 - Missing file size translation and proper description for selected files in Media Source Browser [#14360]

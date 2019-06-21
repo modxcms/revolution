@@ -98,7 +98,7 @@
     background-color: $buttonBgDisabled;
     color: $buttonColorDisabled;
     box-shadow: $shadowBorderDisabled;
-    opacity: 0.6; /* extjs default theme is also 0.6 */
+    opacity: .6; /* extjs default theme is also 0.6 */
     filter: alpha(opacity=60); /* for IE <= 8 */
   }
 

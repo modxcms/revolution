@@ -36,7 +36,7 @@
 
 .x-tab-panel-header-plain .x-tab-strip-spacer,
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
-  /*background-color: #fff;*/
+  /*background-color: $white*/
   border: none;
   height: 0;
   /*margin: -2px 0 0 0; /* was -2px 0 0 -1px */
@@ -46,7 +46,7 @@
 
   /* take care of nested tab panels as seen in MIGX */
   .x-tab-panel {
-    padding-top: 18px; /* 15px + 3px for the active tab box-shadow on top */
+    padding-top: 18px;  /* 15px + 3px for the active tab box-shadow on top */
 
     &.vertical-tabs-panel {
       padding-top: 0; /* do not add that padding to vertical tabs panels */
@@ -62,9 +62,6 @@
       }
     }
 
-    .x-tab-panel-body {
-      /*border-top: 1px solid $softGray;*/
-    }
   }
 }
 
@@ -91,7 +88,6 @@ ul.x-tab-strip li {
   border-top-right-radius: $borderRadius;
   cursor: pointer;
   font: $tabFont;
-  //font-weight: bold;
   line-height: 2.2;
   margin-left: 0;
   padding: 0 12px;
@@ -133,7 +129,7 @@ ul.x-tab-strip li {
 
 .x-tab-strip-wrap {
   overflow: hidden;
-  padding: 2px 5px 0px 5px; /* keep the tab box-shadows visible */
+  padding: 2px 5px 0 5px; /* keep the tab box-shadows visible */
   margin-left: -5px; /* and move the tab strip back into place */
 }
 
@@ -148,13 +144,12 @@ ul.x-tab-strip li {
 }
 
 ul.x-tab-strip-top li:first-child {
-  /*margin-left: -1px*/;
   margin-left: 0;
 }
 
 ul.x-tab-strip-bottom {
-  background-color: #f4f4f4;
-  border-top-color: #dfdfdf;
+  background-color: $wildSand;
+  border-top-color: $alto;
 
   & .x-tab-right {
     background-image: url($imgPath + 'modx-theme/tabs/tab-btm-inactive-right-bg.gif');
@@ -162,6 +157,7 @@ ul.x-tab-strip-bottom {
     & .x-tab-right {
       background-image: url($imgPath + 'modx-theme/tabs/tab-btm-right-bg.gif');
     }
+
     & .x-tab-left {
       background-image: url($imgPath + 'modx-theme/tabs/tab-btm-left-bg.gif');
     }
@@ -182,6 +178,7 @@ ul.x-tab-strip-bottom {
 .x-tab-scroller-left,
 .x-tab-scroller-right {
   border: 0;
+
   &:before {
     @extend %pseudo-font;
 
@@ -192,10 +189,12 @@ ul.x-tab-strip-bottom {
     margin-top: -14px; /* half of the height to center vertically with top 50% */
     opacity: 1;
     filter: alpha(opacity=100); /* for IE <= 8 */
-    position: absolute; top: 50%; right: 0;
+    position: absolute;
+    top: 50%;
+    right: 0;
     text-align: center;
     width: 18px;
-    transition: opacity 0.25s;
+    transition: opacity .25s;
   }
 
   &-over {
@@ -209,7 +208,7 @@ ul.x-tab-strip-bottom {
 
     &:before {
       color: $treeColor;
-      opacity: 0.4;
+      opacity: .4;
       filter: alpha(opacity=100); /* for IE <= 8 */
     }
   }
@@ -229,7 +228,7 @@ ul.x-tab-strip-bottom {
 
 .x-tab-panel-bbar .x-toolbar,
 .x-tab-panel-tbar .x-toolbar {
-  border-color: #dfdfdf;
+  border-color: $alto;
 }
 
 .x-tab-panel-body-noborder .x-panel-body-noheader:first-child {
@@ -276,7 +275,7 @@ ul.x-tab-strip-bottom {
         top: 0; /* overrides extjs default theme style of 1px */
         width: auto;
 
-        > li {
+        >li {
           border-right: 1px solid $borderColor;
           border-bottom: 1px solid $borderColor;
           color: $coreFieldLabelColor;
@@ -285,7 +284,7 @@ ul.x-tab-strip-bottom {
           margin: 0; /* override default extjs theme value of 2px */
           overflow: hidden;
           padding: 10px 15px 10px 15px;
-          transition: background-color 0.25s, color 0.25s;
+          transition: background-color .25s, color .25s;
 
           &:hover {
             background: $white;
@@ -318,15 +317,16 @@ ul.x-tab-strip-bottom {
         }
       }
     }
+
     /* the "categories" text */
     h4 {
-      background: $white;
-      /*border-right: 1px solid $borderColor;*/
+      background: $white; /*border-right: 1px solid $borderColor;*/
       border-bottom: 1px solid $borderColor;
       color: $darkestGray;
       font-size: 16px;
       padding: 15px 0 15px 15px;
     }
+
     .x-tab-strip-spacer {
       display: none; /* added by extjs */
     }
@@ -344,10 +344,6 @@ ul.x-tab-strip-bottom {
     .vertical-tabs-body {
       border: 0; /* do not add the top border for nested tabs panels */
       padding: 15px 20px 15px 15px; /* 20px account for too wide form fields (no border-box) */
-
-      /*.tvs-wrapper & {*/
-        /*padding: 15px 20px 15px 30px; /* 30px account for the tv reset icon */
-      /*}*/
     }
   }
 }
@@ -364,13 +360,13 @@ ul.x-tab-strip-bottom {
   }
 }
 
-
 .window-vtabs {
   .x-panel-mr {
-    padding-right: 0px;
+    padding-right: 0;
   }
+
   .vertical-tabs-panel {
     width: 100% !important;
-    margin: 0px;
+    margin: 0;
   }
 }

@@ -30,7 +30,7 @@ class modSearchProcessor extends modProcessor
      */
     public function process()
     {
-        $this->query = $this->getProperty('query');
+        $this->query = trim($this->getProperty('query'));
         if (!empty($this->query)) {
             if (strpos($this->query, ':') === 0) {
                 // upcoming "launch actions"

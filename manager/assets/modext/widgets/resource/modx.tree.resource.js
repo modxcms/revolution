@@ -235,7 +235,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });
                     }
 
                     var n = this.cm.activeNode;
@@ -276,7 +279,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });
                     }
 
                     var n = this.cm.activeNode;
@@ -382,12 +388,18 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['resource/update']) && dropNode.attributes.pk == MODx.request.id){
-            var parentFieldCmb = Ext.getCmp('modx-resource-parent');
-            var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
-            if(parentFieldCmb && parentFieldHidden){
-                parentFieldHidden.setValue(dropNode.parentNode.attributes.pk);
-                parentFieldCmb.setValue(dropNode.parentNode.attributes.text.replace(/(<([^>]+)>)/ig,""));
+        if((MODx.request.a == MODx.action['resource/update'])){
+		    if(dropNode.attributes.pk == MODx.request.id) {
+                var parentFieldCmb = Ext.getCmp('modx-resource-parent');
+                var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
+                if(parentFieldCmb && parentFieldHidden){
+                    parentFieldHidden.setValue(dropNode.parentNode.attributes.pk);
+                    parentFieldCmb.setValue(dropNode.parentNode.attributes.text.replace(/(<([^>]+)>)/ig,""));
+                }
+            }
+            var menuindexField = Ext.getCmp('modx-resource-menuindex');
+            if(menuindexField && o.result.object.menuindex !== undefined){
+                menuindexField.setValue(o.result.object.menuindex);
             }
         }
     }
@@ -743,6 +755,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             url: this.config.url
             ,params: {
                 target: dropEvent.target.attributes.id
+                ,activeTarget: MODx.request.a == MODx.action['resource/update'] ? MODx.request.id : ''
                 ,source: dropEvent.source.dragData.node.attributes.id
                 ,point: dropEvent.point
                 ,data: encodeURIComponent(encNodes)

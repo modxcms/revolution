@@ -23,8 +23,8 @@
 
   .x-window &,
   .modx-browser-rte & {
-      border-radius: 0;
-      box-shadow: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 
@@ -38,39 +38,47 @@
   cursor: pointer;
   user-select: none;
 }
-.modx-browser-thumb-wrap.x-view-over {
+
+.modx-browser-thumb-wrap .x-view-over {
   border: 1px solid $brandSelectedColor;
   padding: 4px;
 }
-.modx-browser-thumb-wrap.x-view-selected {
+
+.modx-browser-thumb-wrap .x-view-selected {
   background: $brandSelectedBg;
   border: 1px solid $brandSelectedColor;
   padding: 4px;
 }
-.modx-browser-thumb-wrap.x-view-selected .modx-browser-thumb {
+
+.modx-browser-thumb-wrap .x-view-selected .modx-browser-thumb {
   background: $white;
 }
-.modx-browser-thumb-wrap.x-view-selected span {
+
+.modx-browser-thumb-wrap .x-view-selected span {
   color: $brandSelectedColor;
 }
-  .modx-browser-thumb {
-    border: 1px solid $borderColor;
-    height: 100px;
-    line-height: 100px;
-    padding: 5px;
-    text-align: center;
-    width: 100px;
-  }
-    .modx-browser-thumb img {
-      vertical-align: middle;
-      background-color: #ccc;
-      background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
-    }
-  .modx-browser-thumb-wrap span {
-    display: block;
-    overflow: hidden;
-    text-align: center;
-  }
+
+.modx-browser-thumb {
+  border: 1px solid $borderColor;
+  height: 100px;
+  line-height: 100px;
+  padding: 5px;
+  text-align: center;
+  width: 100px;
+}
+
+.modx-browser-thumb img {
+  vertical-align: middle;
+  background-color: $silver;
+  background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
+}
+
+.modx-browser-thumb-wrap span {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+}
+
 .modx-browser-placeholder {
   font-size: 14px;
   font-weight: bold;
@@ -86,40 +94,49 @@
     overflow: hidden;
   }
 }
+
 .modx-browser-list-item {
   padding: 0 5px 0 5px;
 }
-.modx-browser-list-item.x-view-over > span {
+
+.modx-browser-list-item .x-view-over>span {
   background: $brandHover;
 }
-.modx-browser-list-item.x-view-selected > span {
+
+.modx-browser-list-item .x-view-selected>span {
   background: $brandSelectedBg;
   border-bottom: 1px solid $brandSelectedColor;
   color: $brandSelectedColor;
 }
-  .modx-browser-list-item > span {
-    background-position: center left !important;
-    border-bottom: 1px solid $borderColor;
-    clear: both;
-    display: block;
-    min-height: 16px;
-    padding: 5px 0 5px 20px;
-    position: relative;
-  }
-  .modx-browser-list-item > span:before {
-    font-size: 14px;
-    position: absolute; left: 2px;
-  }
-    .modx-browser-list-item > span span {
-      display: inline-block;
-      font: $fontSmall;
-      padding-top: 2px;
-    }
-    .modx-browser-list-item > span span.file-size,
-    .modx-browser-list-item > span span.image-size {
-      float: right;
-      width: 13%;
-    }
+
+.modx-browser-list-item>span {
+  background-position: center left !important;
+  border-bottom: 1px solid $borderColor;
+  clear: both;
+  display: block;
+  min-height: 16px;
+  padding: 5px 0 5px 20px;
+  position: relative;
+}
+
+.modx-browser-list-item > span:before {
+  font-size: 14px;
+  position: absolute;
+  left: 2px;
+}
+
+.modx-browser-list-item > span span {
+  display: inline-block;
+  font: $fontSmall;
+  padding-top: 2px;
+}
+
+.modx-browser-list-item > span span.file-size,
+.modx-browser-list-item > span span.image-size {
+  float: right;
+  width: 13%;
+}
+
 .modx-browser-view-ct .loading-indicator {
   background-position: left;
   background-repeat: no-repeat;
@@ -141,7 +158,8 @@
   .x-toolbar-left {
 
     .x-toolbar-left-row {
-    /* we need 4 classes to override the !important height of extjs default theme */
+
+      /* we need 4 classes to override the !important height of extjs default theme */
       td.x-toolbar-cell {
         position: relative;
 
@@ -151,9 +169,11 @@
           content: fa-content($fa-var-clipboard);
           font-size: 14px;
           margin-top: -7px; /* half of the height to center vertically with top 50% */
-          opacity: 0.6;
+          opacity: .6;
           filter: alpha(opacity=60); /* for IE <= 8 */
-          position: absolute; top: 50%; left: 0;
+          position: absolute;
+          top: 50%;
+          left: 0;
           text-align: center;
           width: 30px;
         }
@@ -164,10 +184,11 @@
         box-sizing: border-box;
         border-radius: 0;
         border: 0;
-        border-top: 1px solid #e4e4e4;
+        border-top: 1px solid $lightGray;
         margin: 0 !important;
         padding-left: 30px; /* for the icon */
-        width: 100%; height: 32px !important;
+        width: 100%;
+        height: 32px !important;
       }
     }
   }
@@ -203,15 +224,17 @@
       margin-top: -28px; /* half of the height to center vertically with top 50% */
       opacity: 0;
       filter: alpha(opacity=0); /* for IE <= 8 */
-      position: absolute; top: 50%; left: 0;
+      position: absolute;
+      top: 50%;
+      left: 0;
       text-align: center;
       width: 100%;
-      text-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: opacity 0.25s;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: opacity .25s;
     }
 
     &:hover:before {
-      opacity: 0.6;
+      opacity: .6;
       filter: alpha(opacity=60); /* for IE <= 8 */
     }
   }
@@ -222,7 +245,7 @@
     width: 100%;
     max-width: 100%;
     height: auto;
-    background-color: #ccc;
+    background-color: $silver;
     background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
   }
 }
@@ -234,7 +257,7 @@
   text-align: left;
 
   b {
-    color: #555;
+    color: $darkestGray;
     display: block;
     margin-bottom: 2px;
   }
@@ -254,7 +277,7 @@
     width: 100%;
     max-width: 100%;
     height: auto;
-    background-color: #ccc;
+    background-color: $silver;
     background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
   }
 }
