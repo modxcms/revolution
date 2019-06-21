@@ -8,6 +8,7 @@
  */
 
 /* run upgrades common to all db platforms */
+include dirname(__DIR__) . '/common/3.0-cleanup-files.php';
 include dirname(__DIR__) . '/common/3.0.0-dashboard-widgets.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-copy-to-clipboard.php';
 include dirname(__DIR__) . '/common/3.0.0-cleanup-system-settings.php';

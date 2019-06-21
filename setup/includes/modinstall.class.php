@@ -201,7 +201,10 @@ class modInstall {
                 )
             ));
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
-            $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->settings->get('table_prefix'));
+            $this->xpdo->setPackage('Revolution', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
+            $this->xpdo->addPackage('Revolution\Registry\Db', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
+            $this->xpdo->addPackage('Revolution\Sources', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
+            $this->xpdo->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
         }
         return $this->xpdo;
     }
