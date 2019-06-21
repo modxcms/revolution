@@ -13,7 +13,7 @@ class modAccess extends \MODX\Revolution\modAccess
         'fields' => 
         array (
             'target' => '',
-            'principal_class' => '\\\\MODX\\\\Revolution\\\\modPrincipal',
+            'principal_class' => 'MODX\\Revolution\\modPrincipal',
             'principal' => 0,
             'authority' => 9999,
             'policy' => 0,
@@ -35,7 +35,7 @@ class modAccess extends \MODX\Revolution\modAccess
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => '\\\\MODX\\\\Revolution\\\\modPrincipal',
+                'default' => 'MODX\\Revolution\\modPrincipal',
                 'index' => 'index',
             ),
             'principal' => 

@@ -48,7 +48,7 @@ class modResource extends \MODX\Revolution\modResource
             'privatemgr' => 0,
             'content_dispo' => 0,
             'hidemenu' => 0,
-            'class_key' => '\\\\MODX\\\\Revolution\\\\modDocument',
+            'class_key' => 'MODX\\Revolution\\modDocument',
             'context_key' => 'web',
             'content_type' => 1,
             'uri' => NULL,
@@ -362,7 +362,7 @@ class modResource extends \MODX\Revolution\modResource
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => '\\\\MODX\\\\Revolution\\\\modDocument',
+                'default' => 'MODX\\Revolution\\modDocument',
                 'index' => 'index',
             ),
             'context_key' => 

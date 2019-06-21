@@ -16,11 +16,11 @@ class modUser extends \MODX\Revolution\modUser
             'username' => '',
             'password' => '',
             'cachepwd' => '',
-            'class_key' => '\\\\MODX\\\\Revolution\\\\modUser',
+            'class_key' => 'MODX\\Revolution\\modUser',
             'active' => 1,
             'remote_key' => NULL,
             'remote_data' => NULL,
-            'hash_class' => '\\\\MODX\\\\Revolution\\\\Hashing\\\\modNative',
+            'hash_class' => 'MODX\\Revolution\\Hashing\\modNative',
             'salt' => '',
             'primary_group' => 0,
             'session_stale' => NULL,
@@ -60,7 +60,7 @@ class modUser extends \MODX\Revolution\modUser
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => '\\\\MODX\\\\Revolution\\\\modUser',
+                'default' => 'MODX\\Revolution\\modUser',
                 'index' => 'index',
             ),
             'active' => 
@@ -92,7 +92,7 @@ class modUser extends \MODX\Revolution\modUser
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => '\\\\MODX\\\\Revolution\\\\Hashing\\\\modNative',
+                'default' => 'MODX\\Revolution\\Hashing\\modNative',
             ),
             'salt' => 
             array (

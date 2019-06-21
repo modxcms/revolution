@@ -15,7 +15,7 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
         array (
             'name' => '',
             'description' => NULL,
-            'class_key' => '\\\\MODX\\\\Revolution\\\\Sources\\\\modFileMediaSource',
+            'class_key' => 'MODX\\Revolution\\Sources\\modFileMediaSource',
             'properties' => NULL,
             'is_stream' => 1,
         ),
@@ -42,7 +42,7 @@ class modMediaSource extends \MODX\Revolution\Sources\modMediaSource
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => '\\\\MODX\\\\Revolution\\\\Sources\\\\modFileMediaSource',
+                'default' => 'MODX\\Revolution\\Sources\\modFileMediaSource',
                 'index' => 'index',
             ),
             'properties' => 
