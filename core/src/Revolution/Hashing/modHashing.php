@@ -97,7 +97,8 @@ class modHashing
         $className = $this->modx->loadClass($class, '', false, true);
         if ($className) {
             if (empty($key)) {
-                $key = strtolower(str_replace('mod', '', array_pop(explode('\\', $className))));
+                $exploded = explode('\\', $className);
+                $key = strtolower(str_replace('mod', '', array_pop($exploded)));
             }
             if (!array_key_exists($key, $this->_hashes)) {
                 $hash = new $className($this, $options);
