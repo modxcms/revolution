@@ -30,6 +30,7 @@ class modProfileUpdateProcessor extends modProcessor {
         if (empty($this->profile)) {
             return $this->modx->lexicon('user_profile_err_not_found');
         }
+        
         return true;
     }
 
