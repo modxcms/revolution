@@ -157,6 +157,13 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'foreign' => 'element',
                 'owner' => 'local',
                 'cardinality' => 'many',
+                'criteria' => 
+                array (
+                    'foreign' => 
+                    array (
+                        'element_class' => 'MODX\\Revolution\\modPlugin',
+                    ),
+                ),
             ),
             'PluginEvents' => 
             array (

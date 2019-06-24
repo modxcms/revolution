@@ -38,12 +38,12 @@
         <aggregate alias="Principal" class="MODX\Revolution\modPrincipal" local="principal" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="GroupPrincipal" class="MODX\Revolution\modUserGroup" local="principal" foreign="id" owner="foreign" cardinality="one">
             <criteria target="local"><![CDATA[
-            {"principal_class":"\MODX\Revolution\modUserGroup"}
+            {"principal_class":"MODX\\Revolution\\modUserGroup"}
             ]]></criteria>
         </aggregate>
         <aggregate alias="UserPrincipal" class="MODX\Revolution\modUserGroup" local="principal" foreign="id" owner="foreign" cardinality="one">
             <criteria target="local"><![CDATA[
-            {"principal_class":"\MODX\Revolution\modUser"}
+            {"principal_class":"MODX\\Revolution\\modUser"}
             ]]></criteria>
         </aggregate>
         <aggregate alias="MinimumRole" class="MODX\Revolution\modUserGroupRole" local="authority" foreign="authority" owner="local" cardinality="one" />
@@ -388,7 +388,7 @@
 
         <composite alias="PropertySets" class="MODX\Revolution\modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
             <criteria target="foreign"><![CDATA[
-            {"element_class":"\MODX\Revolution\modChunk"}
+            {"element_class":"MODX\\Revolution\\modChunk"}
             ]]></criteria>
         </composite>
         <aggregate alias="Category" class="MODX\Revolution\modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -813,7 +813,7 @@
 
         <composite alias="PropertySets" class="MODX\Revolution\modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
             <criteria target="foreign"><![CDATA[
-            {"element_class":"\MODX\Revolution\modPlugin"}
+            {"element_class":"MODX\\Revolution\\modPlugin"}
             ]]></criteria>
         </composite>
         <composite alias="PluginEvents" class="MODX\Revolution\modPluginEvent" local="id" foreign="pluginid" cardinality="many" owner="local" />
@@ -1073,7 +1073,7 @@
 
         <composite alias="PropertySets" class="MODX\Revolution\modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
             <criteria target="foreign"><![CDATA[
-            {"element_class":"\MODX\Revolution\modSnippet"}
+            {"element_class":"MODX\\Revolution\\modSnippet"}
             ]]></criteria>
         </composite>
 
@@ -1130,7 +1130,7 @@
 
         <composite alias="PropertySets" class="MODX\Revolution\modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
             <criteria target="foreign"><![CDATA[
-            {"element_class":"\MODX\Revolution\modTemplate"}
+            {"element_class":"MODX\\Revolution\\modTemplate"}
             ]]></criteria>
         </composite>
         <aggregate alias="Category" class="MODX\Revolution\modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -1176,7 +1176,7 @@
 
         <composite alias="PropertySets" class="MODX\Revolution\modElementPropertySet" local="id" foreign="element" owner="local" cardinality="many">
             <criteria target="foreign"><![CDATA[
-            {"element_class":"\MODX\Revolution\modTemplateVar"}
+            {"element_class":"MODX\\Revolution\\modTemplateVar"}
             ]]></criteria>
         </composite>
         <aggregate alias="Category" class="MODX\Revolution\modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />

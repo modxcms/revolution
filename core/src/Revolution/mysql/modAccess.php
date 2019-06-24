@@ -177,6 +177,13 @@ class modAccess extends \MODX\Revolution\modAccess
                 'foreign' => 'id',
                 'owner' => 'foreign',
                 'cardinality' => 'one',
+                'criteria' => 
+                array (
+                    'local' => 
+                    array (
+                        'principal_class' => 'MODX\\Revolution\\modUserGroup',
+                    ),
+                ),
             ),
             'UserPrincipal' => 
             array (
@@ -185,6 +192,13 @@ class modAccess extends \MODX\Revolution\modAccess
                 'foreign' => 'id',
                 'owner' => 'foreign',
                 'cardinality' => 'one',
+                'criteria' => 
+                array (
+                    'local' => 
+                    array (
+                        'principal_class' => 'MODX\\Revolution\\modUser',
+                    ),
+                ),
             ),
             'MinimumRole' => 
             array (

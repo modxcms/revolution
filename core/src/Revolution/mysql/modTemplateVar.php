@@ -252,6 +252,13 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
                 'foreign' => 'element',
                 'owner' => 'local',
                 'cardinality' => 'many',
+                'criteria' => 
+                array (
+                    'foreign' => 
+                    array (
+                        'element_class' => 'MODX\\Revolution\\modTemplateVar',
+                    ),
+                ),
             ),
             'TemplateVarTemplates' => 
             array (

@@ -188,6 +188,13 @@ class modChunk extends \MODX\Revolution\modChunk
                 'foreign' => 'element',
                 'owner' => 'local',
                 'cardinality' => 'many',
+                'criteria' => 
+                array (
+                    'foreign' => 
+                    array (
+                        'element_class' => 'MODX\\Revolution\\modChunk',
+                    ),
+                ),
             ),
         ),
         'aggregates' => 

@@ -144,6 +144,13 @@ class modSnippet extends \MODX\Revolution\modSnippet
                 'foreign' => 'element',
                 'owner' => 'local',
                 'cardinality' => 'many',
+                'criteria' => 
+                array (
+                    'foreign' => 
+                    array (
+                        'element_class' => 'MODX\\Revolution\\modSnippet',
+                    ),
+                ),
             ),
         ),
         'validation' => 
