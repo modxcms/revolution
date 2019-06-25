@@ -10,13 +10,15 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX db registry package -->
-<model package="MODX\Revolution\Registry\Db" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="registry.db" version="3.0">
+<model package="MODX\Revolution\Registry\Db" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution\Registry\Db" version="3.0">
     <object class="modDbRegisterQueue" table="register_queues" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="options" dbtype="mediumtext" phptype="array" />
+
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
+
         <composite alias="Topics" class="MODX\Revolution\Registry\Db\modDbRegisterTopic" local="id" foreign="queue" cardinality="many" owner="local" />
     </object>
     <object class="modDbRegisterTopic" table="register_topics" extends="xPDO\Om\xPDOSimpleObject">
@@ -25,14 +27,16 @@
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
         <field key="options" dbtype="mediumtext" phptype="array" />
-        <aggregate alias="Queue" class="MODX\Revolution\Registry\Db\modDbRegisterQueue" local="queue" foreign="id" cardinality="one" owner="foreign" />
-        <composite alias="Messages" class="MODX\Revolution\Registry\Db\modDbRegisterMessage" local="id" foreign="topic" cardinality="many" owner="local" />
+
         <index alias="queue" name="queue" primary="false" unique="false" type="BTREE">
             <column key="queue" length="" collation="A" null="false" />
         </index>
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Queue" class="MODX\Revolution\Registry\Db\modDbRegisterQueue" local="queue" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Messages" class="MODX\Revolution\Registry\Db\modDbRegisterMessage" local="id" foreign="topic" cardinality="many" owner="local" />
     </object>
     <object class="modDbRegisterMessage" table="register_messages" extends="xPDO\Om\xPDOObject">
         <field key="topic" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="pk" />
@@ -44,6 +48,7 @@
         <field key="expires" dbtype="integer" precision="20" phptype="integer" null="false" default="0" index="index" />
         <field key="payload" dbtype="mediumtext" phptype="string" null="false" />
         <field key="kill" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="topic" length="" collation="A" null="false" />
             <column key="id" length="" collation="A" null="false" />
@@ -63,6 +68,7 @@
         <index alias="expires" name="expires" primary="false" unique="false" type="BTREE">
             <column key="expires" length="" collation="A" null="false" />
         </index>
+
         <aggregate alias="Topic" class="MODX\Revolution\Registry\Db\modDbRegisterTopic" local="topic" foreign="id" cardinality="one" owner="foreign" />
     </object>
 </model>

@@ -34,5 +34,25 @@ return [
         ),
         'log_target' => 'ECHO',
         'log_level' => \xPDO\xPDO::LOG_LEVEL_WARN,
+    ],
+    'sqlsrv_array_options' => [
+        \xPDO\xPDO::OPT_CACHE_PATH => __DIR__ . '/cache/',
+        \xPDO\xPDO::OPT_HYDRATE_FIELDS => true,
+        \xPDO\xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
+        \xPDO\xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
+        \xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true),
+        \xPDO\xPDO::OPT_CONNECTIONS => array(
+            array(
+                'dsn' => $properties['sqlsrv_string_dsn_test'],
+                'username' => $properties['sqlsrv_string_username'],
+                'password' => $properties['sqlsrv_string_password'],
+                'options' => array(
+                    \xPDO\xPDO::OPT_CONN_MUTABLE => true,
+                ),
+                'driverOptions' => [],
+            ),
+        ),
+        'log_target' => 'ECHO',
+        'log_level' => \xPDO\xPDO::LOG_LEVEL_WARN,
     ]
 ];

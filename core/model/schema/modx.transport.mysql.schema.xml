@@ -10,7 +10,7 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
-<model package="MODX\Revolution\Transport" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="transport" version="3.0">
+<model package="MODX\Revolution\Transport" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution\Transport" version="3.0">
     <object class="modTransportProvider" table="transport_providers" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />

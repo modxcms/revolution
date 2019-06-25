@@ -10,7 +10,7 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX db registry package -->
-<model package="MODX\Revolution\Sources" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="sources" version="3.0">
+<model package="MODX\Revolution\Sources" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution\Sources" version="3.0">
 
     <object class="modAccessMediaSource" table="access_media_source" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
