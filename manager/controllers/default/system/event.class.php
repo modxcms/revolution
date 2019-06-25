@@ -7,6 +7,9 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
+
+use MODX\Revolution\modManagerController;
+
 class SystemEventManagerController extends modManagerController {
     public $logArray = array();
 

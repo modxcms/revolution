@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboardWidgetInterface;
+
 /**
  * @package modx
  * @subpackage dashboard

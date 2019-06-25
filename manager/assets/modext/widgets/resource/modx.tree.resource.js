@@ -119,11 +119,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         } else {
             var m = [];
             switch (n.attributes.type) {
-                case 'modResource':
-                case 'modDocument':
+                case 'MODX\\Revolution\\modResource':
+                case 'MODX\\Revolution\\modDocument':
                     m = this._getModResourceMenu(n);
                     break;
-                case 'modContext':
+                case 'MODX\\Revolution\\modContext':
                     m = this._getModContextMenu(n);
                     break;
             }
@@ -1060,11 +1060,11 @@ Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 MODx.getQRContentField = function(id,cls) {
     id = id || 'qur';
-    cls = cls || 'modDocument';
+    cls = cls || 'MODX\\Revolution\\modDocument';
     var dm = Ext.getBody().getViewSize();
     var o = {};
     switch (cls) {
-        case 'modSymLink':
+        case 'MODX\\Revolution\\modSymLink':
             o = {
                 xtype: 'textfield'
                 ,fieldLabel: _('symlink')
@@ -1075,7 +1075,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,allowBlank: false
             };
             break;
-        case 'modWebLink':
+        case 'MODX\\Revolution\\modWebLink':
             o = {
                 xtype: 'textfield'
                 ,fieldLabel: _('weblink')
@@ -1087,7 +1087,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,allowBlank: false
             };
             break;
-        case 'modStaticResource':
+        case 'MODX\\Revolution\\modStaticResource':
             o = {
                 xtype: 'modx-combo-browser'
                 ,browserEl: 'modx-browser'
@@ -1109,8 +1109,8 @@ MODx.getQRContentField = function(id,cls) {
                 }
             };
             break;
-        case 'modResource':
-        case 'modDocument':
+        case 'MODX\\Revolution\\modResource':
+        case 'MODX\\Revolution\\modDocument':
         default:
             o = {
                 xtype: 'textarea'

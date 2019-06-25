@@ -16,7 +16,7 @@ MODx.panel.Chunk = function(config) {
         }
         ,id: 'modx-panel-chunk'
 		,cls: 'container form-with-labels'
-        ,class_key: 'modChunk'
+        ,class_key: 'MODX\\Revolution\\modChunk'
         ,chunk: ''
         ,bodyStyle: ''
         ,items: [{
@@ -248,7 +248,7 @@ MODx.panel.Chunk = function(config) {
             xtype: 'modx-panel-element-properties'
             ,elementPanel: 'modx-panel-chunk'
             ,elementId: config.chunk
-            ,elementType: 'modChunk'
+            ,elementType: 'MODX\\Revolution\\modChunk'
             ,record: config.record
         }],{
             id: 'modx-chunk-tabs'

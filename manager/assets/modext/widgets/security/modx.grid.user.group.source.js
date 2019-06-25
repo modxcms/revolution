@@ -157,7 +157,7 @@ MODx.window.CreateUGSource = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'hidden'
             ,name: 'context_key'

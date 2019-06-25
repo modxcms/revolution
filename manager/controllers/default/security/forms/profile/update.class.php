@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modFormCustomizationProfile;
+use MODX\Revolution\modFormCustomizationProfileUserGroup;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modUserGroup;
+
 /**
  * Loads form customization profile editing panel
  *
@@ -59,18 +64,18 @@ class SecurityFormsProfileUpdateManagerController extends modManagerController {
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('profile_err_ns'));
         }
-        $profile = $this->modx->getObject('modFormCustomizationProfile', array('id' => $scriptProperties['id']));
+        $profile = $this->modx->getObject(modFormCustomizationProfile::class, array('id' => $scriptProperties['id']));
         if (empty($profile)) return $this->failure($this->modx->lexicon('profile_err_nfs',array('id' => $scriptProperties['id'])));
 
         $this->profileArray = $profile->toArray();
 
-        $c = $this->modx->newQuery('modUserGroup');
-        $c->innerJoin('modFormCustomizationProfileUserGroup','FormCustomizationProfiles');
+        $c = $this->modx->newQuery(modUserGroup::class);
+        $c->innerJoin(modFormCustomizationProfileUserGroup::class,'FormCustomizationProfiles');
         $c->where(array(
             'FormCustomizationProfiles.profile' => $profile->get('id'),
         ));
         $c->sortby('name','ASC');
-        $usergroups = $this->modx->getCollection('modUserGroup',$c);
+        $usergroups = $this->modx->getCollection(modUserGroup::class, $c);
 
         $this->profileArray['usergroups'] = array();
         foreach ($usergroups as $usergroup) {

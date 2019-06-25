@@ -11,7 +11,7 @@ MODx.panel.ResourceData = function(config) {
             action: 'resource/data'
         }
         ,id: 'modx-panel-resource-data'
-        ,class_key: 'modResource'
+        ,class_key: 'MODX\\Revolution\\modResource'
         ,cls: 'container form-with-labels'
         ,resource: ''
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -144,7 +144,7 @@ MODx.panel.ResourceData = function(config) {
                 ,baseParams: {
                     action: 'system/log/getlist'
                     ,item: MODx.request.id
-                    ,classKey: 'modResource'
+                    ,classKey: 'MODX\\Revolution\\modResource'
                 }
                 ,tbar: []
             }]

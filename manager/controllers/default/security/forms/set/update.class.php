@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modFormCustomizationSet;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modTemplate;
+
 /**
  * Loads form customization set editing panel
  *
@@ -56,9 +60,9 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
 
         /* get profile */
         if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('set_err_ns'));
-        $c = $this->modx->newQuery('modFormCustomizationSet');
-        $c->leftJoin('modTemplate','Template');
-        $c->select($this->modx->getSelectColumns('modFormCustomizationSet','modFormCustomizationSet'));
+        $c = $this->modx->newQuery(modFormCustomizationSet::class);
+        $c->leftJoin(modTemplate::class,'Template');
+        $c->select($this->modx->getSelectColumns(modFormCustomizationSet::class,'modFormCustomizationSet'));
         $c->select(array(
             'Template.templatename',
         ));
@@ -66,7 +70,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
             'id' => $scriptProperties['id'],
         ));
         /** @var modFormCustomizationSet $set */
-        $set = $this->modx->getObject('modFormCustomizationSet',$c);
+        $set = $this->modx->getObject(modFormCustomizationSet::class, $c);
         if (empty($set)) return $this->failure($this->modx->lexicon('set_err_nfs',array('id' => $scriptProperties['id'])));
 
         $this->setArray = $set->toArray();

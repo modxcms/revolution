@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Element;
+
+
+use MODX\Revolution\modChunk;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modChunk class.
@@ -27,7 +32,7 @@ class modChunkTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->chunk = $this->modx->newObject('modChunk');
+        $this->chunk = $this->modx->newObject(modChunk::class);
         $this->chunk->fromArray(array(
             'id' => 12345,
             'name' => 'Unit Test Chunk',

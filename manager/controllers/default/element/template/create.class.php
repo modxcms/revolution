@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load create template page
  *
@@ -64,8 +67,8 @@ class ElementTemplateCreateManagerController extends modManagerController {
 
         /* grab category if preset */
         if (isset($scriptProperties['category'])) {
-            $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
-            if ($this->category != null) {
+            $this->category = $this->modx->getObject(modCategory::class, $scriptProperties['category']);
+            if ($this->category !== null) {
                 $placeholders['category'] = $this->category;
             }
         }

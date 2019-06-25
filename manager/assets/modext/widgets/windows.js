@@ -321,7 +321,7 @@ MODx.window.CreateNamespace = function(config) {
         ,id: this.ident
         ,width: 600
         ,url: MODx.config.connector_url
-        ,action: 'workspace/namespace/create'
+        ,action: 'workspace/packageNamespace/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -374,7 +374,7 @@ MODx.window.UpdateNamespace = function(config) {
 
     Ext.applyIf(config, {
         title: _('namespace_update')
-        ,action: 'workspace/namespace/update'
+        ,action: 'workspace/packageNamespace/update'
         ,isUpdate: true
     });
     MODx.window.UpdateNamespace.superclass.constructor.call(this, config);

@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  *
  */
+namespace MODX\Revolution\Tests;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests related to verifying and setting up the test environment.
@@ -15,7 +18,7 @@
  * @package modx-test
  * @subpackage modx
  */
-class modXSetupTest extends \PHPUnit\Framework\TestCase {
+class modXSetupTest extends TestCase {
     /**
      * Test that the PDO extension is available and loaded.
      */

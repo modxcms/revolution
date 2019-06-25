@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\Sources\modMediaSource;
+
 /**
  * Load create tv page
  *
@@ -67,8 +71,8 @@ Ext.onReady(function() {
 
         /* grab category if preset */
         if (isset($scriptProperties['category'])) {
-            $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
-            if ($this->category != null) {
+            $this->category = $this->modx->getObject(modCategory::class,$scriptProperties['category']);
+            if ($this->category !== null) {
                 $placeholders['category'] = $this->category;
             }
         }
@@ -80,13 +84,13 @@ Ext.onReady(function() {
     }
 
     public function getElementSources() {
-        $c = $this->modx->newQuery('modContext');
+        $c = $this->modx->newQuery(modContext::class);
         $c->where(array(
             'key:!=' => 'mgr',
         ));
-        $c->sortby($this->modx->escape('rank'),'ASC');
+        $c->sortby($this->modx->escape('rank'));
         $c->sortby($this->modx->escape('key'),'DESC');
-        $contexts = $this->modx->getCollection('modContext',$c);
+        $contexts = $this->modx->getCollection(modContext::class, $c);
         $list = array();
         $this->modx->loadClass('sources.modMediaSource');
         /** @var $source modMediaSource */

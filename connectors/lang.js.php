@@ -11,7 +11,7 @@
 /**
  * Loads the lexicon into a JS-compatible function _()
  *
- * @var modX $modx
+ * @var \MODX\Revolution\modX $modx
  * @package modx
  * @subpackage lexicon
  */

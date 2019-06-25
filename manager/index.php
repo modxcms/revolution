@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modX;
+use xPDO\xPDO;
+
 /**
  * Initializes the modx manager
  *
@@ -35,13 +38,13 @@ if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {
 }
 
 /* include the modX class */
-if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+if (!(require_once MODX_CORE_PATH . 'vendor/autoload.php')) {
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     die('Site temporarily unavailable!');
 }
 
 /* @var modX $modx create the modX object */
-$modx= new modX('', array(\xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true)));
+$modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
 if (!is_object($modx) || !($modx instanceof modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';

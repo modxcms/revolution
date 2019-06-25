@@ -162,7 +162,7 @@ MODx.window.CreateUGRG = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'modx-combo-resourcegroup'
             ,fieldLabel: _('resource_group')

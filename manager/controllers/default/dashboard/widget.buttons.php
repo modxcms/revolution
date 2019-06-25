@@ -1,5 +1,9 @@
 <?php
 
+use MODX\Revolution\modChunk;
+use MODX\Revolution\modDashboardWidgetInterface;
+use MODX\Revolution\Smarty\modSmarty;
+
 /**
  * @package modx
  * @subpackage dashboard
@@ -12,7 +16,7 @@ class modDashboardWidgetButtons extends modDashboardWidgetInterface
      */
     public function render()
     {
-        $this->modx->getService('smarty', 'smarty.modSmarty');
+        $this->modx->getService('smarty', modSmarty::class);
         foreach ($this->widget->toArray() as $key => $value) {
             $this->modx->smarty->assign($key, $value);
         }
@@ -28,7 +32,7 @@ class modDashboardWidgetButtons extends modDashboardWidgetInterface
     public function process()
     {
         /** @var modChunk $chunk */
-        $chunk = $this->modx->newObject('modChunk');
+        $chunk = $this->modx->newObject(modChunk::class);
         $chunk->setCacheable(false);
         $chunk->setContent($this->render());
 

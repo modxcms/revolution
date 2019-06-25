@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load update template page
  *
@@ -72,7 +75,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('template_err_ns'));
         }
-        $this->template = $this->modx->getObject('modTemplate', array('id' => $scriptProperties['id']));
+        $this->template = $this->modx->getObject(modTemplate::class, array('id' => $scriptProperties['id']));
         if ($this->template == null) return $this->failure($this->modx->lexicon('template_err_nf'));
         if (!$this->template->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 

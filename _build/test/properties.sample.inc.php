@@ -16,6 +16,8 @@
  * @package modx-test
  */
 
+use xPDO\xPDO;
+
 /* define some properties */
 $properties['runtime'] = strftime("%Y%m%dT%H%M%S");
 $properties['config_key'] = 'test';
@@ -56,6 +58,6 @@ $properties['logTarget']= array(
         'filepath' => dirname(__FILE__) . '/'
     )
 );
-$properties['logLevel']= modX::LOG_LEVEL_INFO;
+$properties['logLevel']= xPDO::LOG_LEVEL_INFO;
 $properties['context'] = 'web';
 $properties['debug'] = false;

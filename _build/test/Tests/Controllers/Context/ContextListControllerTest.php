@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  *
  */
+namespace MODX\Revolution\Tests\Controllers\Context;
+
+
+use MODX\Revolution\MODxControllerTestCase;
 
 /**
  * Tests related to the Update Context controller
@@ -20,7 +24,7 @@
  * @group ContextListController
  */
 class ContextListControllerTest extends MODxControllerTestCase {
-    /** @var ContextUpdateManagerController $controller */
+    /** @var \ContextUpdateManagerController $controller */
     public $controller;
 
     public $controllerName = 'ContextManagerController';

@@ -3,8 +3,10 @@
  * Update the RSS feed URLs to HTTPS
  */
 
+use MODX\Revolution\modSystemSetting;
+
 /** @var modSystemSetting $feed_modx_security */
-$feed_modx_security = $modx->getObject('modSystemSetting', array(
+$feed_modx_security = $modx->getObject(modSystemSetting::class, array(
     'key' => 'feed_modx_security',
     'value' => 'http://forums.modx.com/board.xml?board=294',
 ));
@@ -14,7 +16,7 @@ if ($feed_modx_security) {
 }
 
 /** @var modSystemSetting $feed_modx_news */
-$feed_modx_news = $modx->getObject('modSystemSetting', array(
+$feed_modx_news = $modx->getObject(modSystemSetting::class, array(
     'key' => 'feed_modx_news',
     'value' => 'http://feeds.feedburner.com/modx-announce',
 ));

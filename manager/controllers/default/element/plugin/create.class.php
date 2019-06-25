@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load create plugin page
  *
@@ -59,13 +62,14 @@ class ElementPluginCreateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = [])
+    {
+        $placeholders = [];
 
         /* grab category if preset */
         if (isset($scriptProperties['category'])) {
-            $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
-            if ($this->category != null) {
+            $this->category = $this->modx->getObject(modCategory::class, $scriptProperties['category']);
+            if ($this->category !== null) {
                 $placeholders['category'] = $this->category;
             }
         }

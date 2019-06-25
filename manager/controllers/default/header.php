@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modMenu;
+
 /**
  * Loads the main structure
  *
@@ -241,7 +244,7 @@ class TopMenu
 
         if ($menus == null || !is_array($menus)) {
             /** @var modMenu $menu */
-            $menu = $this->modx->newObject('modMenu');
+            $menu = $this->modx->newObject(modMenu::class);
             $menus = $menu->rebuildCache($name);
             unset($menu);
         }
@@ -311,7 +314,7 @@ class TopMenu
             if (!$this->hasPermission($menu['permissions'])) {
                 continue;
             }
-            
+
             $sub = (!empty($menu['children'])) ? ' class="sub"' : '';
             $smTpl = '<li id="'.$menu['id'].'"'.$sub.'>'."\n";
 

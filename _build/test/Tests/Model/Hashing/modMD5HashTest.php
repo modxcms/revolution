@@ -8,7 +8,12 @@
  * files found in the top-level directory of this distribution.
  *
  * @package modx-test
-*/
+ */
+namespace MODX\Revolution\Tests\Model\Hashing;
+
+
+use MODX\Revolution\Hashing\modMD5;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modMD5 class, a derivative of modHash.

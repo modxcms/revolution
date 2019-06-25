@@ -42,6 +42,11 @@ if (!defined('MODX_CORE_PATH'))
 
 require MODX_CORE_PATH . 'vendor/autoload.php';
 
+use MODX\Revolution\modContext;
+use MODX\Revolution\modNamespace;
+use MODX\Revolution\modWorkspace;
+use MODX\Revolution\Transport\modTransportProvider;
+use xPDO\Transport\xPDOFileVehicle;
 use xPDO\xPDO;
 use xPDO\Transport\xPDOTransport;
 
@@ -120,16 +125,10 @@ if (!file_exists($packageDirectory . 'core') && !file_exists($packageDirectory .
 $package = new xPDOTransport($xpdo, 'core', $packageDirectory);
 unset($packageDirectory);
 
-$xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
-$xpdo->loadClass('modAccess');
-$xpdo->loadClass('modAccessibleObject');
-$xpdo->loadClass('modAccessibleSimpleObject');
-$xpdo->loadClass('modPrincipal');
-
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Core transport package created.'); flush();
 
 /* core namespace */
-$namespace = $xpdo->newObject('modNamespace');
+$namespace = $xpdo->newObject(modNamespace::class);
 $namespace->set('name','core');
 $namespace->set('path','{core_path}');
 $namespace->set('assets_path','{assets_path}');
@@ -142,7 +141,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Core Namespace packaged.'); flush();
 
 /* modWorkspace */
 $collection = array ();
-$collection['1'] = $xpdo->newObject('modWorkspace');
+$collection['1'] = $xpdo->newObject(modWorkspace::class);
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'Default MODX workspace',
@@ -162,7 +161,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Default workspace packaged.'); flush();
 
 /* modx.com extras provisioner */
 $collection = array ();
-$collection['1'] = $xpdo->newObject('transport.modTransportProvider');
+$collection['1'] = $xpdo->newObject(modTransportProvider::class);
 $collection['1']->fromArray(array (
     'id' => 1,
     'name' => 'modx.com',
@@ -222,21 +221,6 @@ foreach ($collection as $c) {
 unset ($collection, $c, $attributes);
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modContentTypes.'); flush();
-
-/* modClassMap */
-$collection = array ();
-include MODX_BUILD_DIR . 'data/transport.core.classmap.php';
-$attributes = array (
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => false,
-    xPDOTransport::UNIQUE_KEY => 'class',
-);
-foreach ($collection as $c) {
-    $package->put($c, $attributes);
-}
-unset ($collection, $c, $attributes);
-
-$xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged all default modClassMap objects.'); flush();
 
 /* modEvent collection */
 $events = include MODX_BUILD_DIR . 'data/transport.core.events.php';
@@ -448,7 +432,7 @@ unset ($policies,$policy,$idx,$ct,$attributes);
 
 
 /* modContext = web */
-$c = $xpdo->newObject('modContext');
+$c = $xpdo->newObject(modContext::class);
 $c->fromArray(array (
     'key' => 'web',
     'name' => 'Website',
@@ -479,7 +463,7 @@ unset ($c, $attributes);
 $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in web context.'); flush();
 
 /* modContext = mgr */
-$c = $xpdo->newObject('modContext');
+$c = $xpdo->newObject(modContext::class);
 $c->fromArray(array (
     'key' => 'mgr',
     'name' => 'Manager',
@@ -526,7 +510,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO,'Packaged in mgr context.'); flush();
 
 /* connector file transport */
 $attributes = array (
-    'vehicle_class' => 'xPDO\\Transport\\xPDOFileVehicle',
+    'vehicle_class' => xPDOFileVehicle::class,
 );
 $files[] = array (
     'source' => MODX_BASE_PATH . 'connectors/system',

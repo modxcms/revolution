@@ -6,15 +6,17 @@
  * @package setup
  */
 
+use MODX\Revolution\modSystemSetting;
+
 $messageTemplate = '<p class="%s">%s</p>';
 
 $keys = ['upload_files','upload_images'];
 
 foreach ($keys as $key) {
     $success = false;
-    
+
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject('modSystemSetting', array('key' => $key));
+    $setting = $modx->getObject(modSystemSetting::class, array('key' => $key));
     if ($setting) {
         $value = $setting->get('value');
         $tmp = explode(',', $value);
@@ -27,7 +29,7 @@ foreach ($keys as $key) {
             }
         }
     }
-    
+
     if ($success) {
         $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,
             sprintf($messageTemplate, 'ok', $this->install->lexicon('system_setting_update_success', ['key' => $key])));

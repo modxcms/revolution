@@ -82,7 +82,7 @@ Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
         this.getStore().baseParams['namespace'] = rec.data['name'];
         this.getBottomToolbar().changePage(1);
     }
-    
+
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
@@ -156,7 +156,7 @@ MODx.window.CreateUGNamespace = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'hidden'
             ,name: 'context_key'

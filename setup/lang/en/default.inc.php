@@ -213,6 +213,7 @@ $_lang['transport_class_err_load'] = 'Error loading transport class.';
 $_lang['toggle'] = 'Toggle';
 $_lang['toggle_success'] = 'Toggle Success Messages';
 $_lang['toggle_warnings'] = 'Toggle Warnings';
+$_lang['upgrade_version_unsupported'] = 'Upgrading from MODX [[+version]] is not supported by this release. You will need to upgrade to MODX 2.6 or later before upgrading to this release.';
 $_lang['username_err_invchars'] = 'Your username may not contain any invalid characters, such as /, \\, &apos;, &quot;, or {}.';
 $_lang['username_err_ns'] = 'Username is invalid';
 $_lang['version'] = 'version';

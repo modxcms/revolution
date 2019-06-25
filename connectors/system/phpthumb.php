@@ -9,7 +9,7 @@
  */
 
 /**
- * @var modX $modx
+ * @var \MODX\Revolution\modX $modx
  * @package modx
  */
 session_cache_limiter('public');

@@ -12,7 +12,7 @@ MODx.panel.FCSet = function(config) {
             action: 'security/forms/set/update'
         }
         ,id: 'modx-panel-fc-set'
-        ,class_key: 'modFormCustomizationSet'
+        ,class_key: 'MODX\\Revolution\\modFormCustomizationSet'
         ,cls: 'container'
         ,items: [{
             html: _('set_edit')
@@ -83,7 +83,7 @@ MODx.panel.FCSet = function(config) {
                     xtype: 'hidden'
                     ,fieldLabel: _('constraint_class')
                     ,name: 'constraint_class'
-                    ,value: 'modResource'
+                    ,value: 'MODX\\Revolution\\modResource'
                     ,anchor: '100%'
                     ,allowBlank: true
                 },{

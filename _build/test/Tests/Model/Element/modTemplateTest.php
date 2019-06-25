@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Element;
+
+
+use MODX\Revolution\modTemplate;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modTemplate class.

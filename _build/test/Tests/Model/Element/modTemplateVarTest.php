@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Element;
+
+
+use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modTemplateVar class.
@@ -26,7 +31,7 @@ class modTemplateVarTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->tv = $this->modx->newObject('modTemplateVar');
+        $this->tv = $this->modx->newObject(modTemplateVar::class);
         $this->tv->fromArray(array(
             'id' => 12345,
             'name' => 'Unit Test Template Var',

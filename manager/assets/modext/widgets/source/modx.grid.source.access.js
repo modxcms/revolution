@@ -35,7 +35,7 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
     ,createAcl: function(itm,e) {
         var r = {
             target: this.config.source
-            ,principal_class: 'modUserGroup'
+            ,principal_class: 'MODX\\Revolution\\modUserGroup'
         };
         if (!this.windows.access_add) {
             this.windows.access_add = MODx.load({
@@ -146,7 +146,7 @@ MODx.window.CreateSourceAccess = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'hidden'
             ,name: 'context_key'

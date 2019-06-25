@@ -6,7 +6,9 @@
  * @package setup
  */
 
-$class = 'modUser';
+use MODX\Revolution\modUser;
+
+$class = modUser::class;
 $table = $modx->getTableName($class);
 
 /* modify modUser.password field */

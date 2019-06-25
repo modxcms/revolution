@@ -218,7 +218,7 @@ class modInstallCLIRequest extends modInstallRequest {
         }
         $this->install->settings->fromArray($settings);
 
-        $this->setDefaultSetting('processors_path',$this->install->settings->get('core_path').'model/modx/processors/');
+        $this->setDefaultSetting('processors_path',$this->install->settings->get('core_path').'src/Revolution/Processors/');
         $this->setDefaultSetting('connectors_path',$this->install->settings->get('context_connectors_path'));
         $this->setDefaultSetting('connectors_url',$this->install->settings->get('context_connectors_url'));
         $this->setDefaultSetting('mgr_path',$this->install->settings->get('context_mgr_path'));

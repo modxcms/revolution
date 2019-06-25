@@ -5,9 +5,11 @@
  * @package modx
  * @subpackage build
  */
+use MODX\Revolution\modAccessPolicy;
+
 $policies = array();
 
-$policies['1']= $xpdo->newObject('modAccessPolicy');
+$policies['1']= $xpdo->newObject(modAccessPolicy::class);
 $policies['1']->fromArray(array (
   'id' => 1,
   'name' => 'Resource',
@@ -18,7 +20,7 @@ $policies['1']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['2']= $xpdo->newObject('modAccessPolicy');
+$policies['2']= $xpdo->newObject(modAccessPolicy::class);
 $policies['2']->fromArray(array (
   'id' => 2,
   'name' => 'Administrator',
@@ -29,7 +31,7 @@ $policies['2']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['3']= $xpdo->newObject('modAccessPolicy');
+$policies['3']= $xpdo->newObject(modAccessPolicy::class);
 $policies['3']->fromArray(array (
   'id' => 3,
   'name' => 'Load Only',
@@ -40,7 +42,7 @@ $policies['3']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['4']= $xpdo->newObject('modAccessPolicy');
+$policies['4']= $xpdo->newObject(modAccessPolicy::class);
 $policies['4']->fromArray(array (
   'id' => 4,
   'name' => 'Load, List and View',
@@ -51,7 +53,7 @@ $policies['4']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['5']= $xpdo->newObject('modAccessPolicy');
+$policies['5']= $xpdo->newObject(modAccessPolicy::class);
 $policies['5']->fromArray(array (
   'id' => 5,
   'name' => 'Object',
@@ -62,7 +64,7 @@ $policies['5']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['6']= $xpdo->newObject('modAccessPolicy');
+$policies['6']= $xpdo->newObject(modAccessPolicy::class);
 $policies['6']->fromArray(array (
   'id' => 6,
   'name' => 'Element',
@@ -73,7 +75,7 @@ $policies['6']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['7']= $xpdo->newObject('modAccessPolicy');
+$policies['7']= $xpdo->newObject(modAccessPolicy::class);
 $policies['7']->fromArray(array (
   'id' => 7,
   'name' => 'Content Editor',
@@ -84,7 +86,7 @@ $policies['7']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['8']= $xpdo->newObject('modAccessPolicy');
+$policies['8']= $xpdo->newObject(modAccessPolicy::class);
 $policies['8']->fromArray(array (
   'id' => 8,
   'name' => 'Media Source Admin',
@@ -95,7 +97,7 @@ $policies['8']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['9']= $xpdo->newObject('modAccessPolicy');
+$policies['9']= $xpdo->newObject(modAccessPolicy::class);
 $policies['9']->fromArray(array (
   'id' => 9,
   'name' => 'Media Source User',
@@ -106,7 +108,7 @@ $policies['9']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['10']= $xpdo->newObject('modAccessPolicy');
+$policies['10']= $xpdo->newObject(modAccessPolicy::class);
 $policies['10']->fromArray(array (
   'id' => 10,
   'name' => 'Developer',
@@ -117,7 +119,7 @@ $policies['10']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['11']= $xpdo->newObject('modAccessPolicy');
+$policies['11']= $xpdo->newObject(modAccessPolicy::class);
 $policies['11']->fromArray(array (
   'id' => 11,
   'name' => 'Context',
@@ -128,7 +130,7 @@ $policies['11']->fromArray(array (
   'lexicon' => 'permissions',
 ), '', true, true);
 
-$policies['12']= $xpdo->newObject('modAccessPolicy');
+$policies['12']= $xpdo->newObject(modAccessPolicy::class);
 $policies['12']->fromArray(array (
     'id' => 12,
     'name' => 'Hidden Namespace',

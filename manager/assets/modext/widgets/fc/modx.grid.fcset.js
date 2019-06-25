@@ -370,7 +370,7 @@ MODx.window.CreateFCSet = function(config) {
             ,name: 'constraint_class'
             ,anchor: '100%'
             ,allowBlank: true
-            ,value: 'modResource'
+            ,value: 'MODX\\Revolution\\modResource'
         },{
             layout: 'column'
             ,border: false

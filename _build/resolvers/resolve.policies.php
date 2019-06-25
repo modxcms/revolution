@@ -1,7 +1,14 @@
 <?php
 /**
  * Resolve Default Policies to their PolicyTemplates
+ *
+ * @var xPDOTransport $transport
  */
+
+use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modAccessPolicyTemplate;
+use xPDO\xPDO;
+
 $success= false;
 
 /* map of Policy -> Template */
@@ -19,10 +26,10 @@ $map = array(
     'Hidden Namespace' => 'NamespaceTemplate',
 );
 
-$policies = $transport->xpdo->getCollection('modAccessPolicy');
+$policies = $transport->xpdo->getCollection(modAccessPolicy::class);
 foreach ($policies as $policy) {
     if (isset($map[$policy->get('name')])) {
-        $template = $transport->xpdo->getObject('modAccessPolicyTemplate',array('name' => $map[$policy->get('name')]));
+        $template = $transport->xpdo->getObject(modAccessPolicyTemplate::class,array('name' => $map[$policy->get('name')]));
         if ($template) {
             $policy->set('template',$template->get('id'));
             $success = $policy->save();

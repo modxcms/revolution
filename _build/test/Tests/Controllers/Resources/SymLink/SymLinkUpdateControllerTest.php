@@ -1,8 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\SymLink;
+
+
+use MODX\Revolution\Tests\Controllers\Resources\ResourceUpdateControllerTest;
 
 class SymLinkUpdateControllerTest extends ResourceUpdateControllerTest
 {
-    /** @var SymLinkUpdateManagerController $controller */
+    /** @var \SymLinkUpdateManagerController $controller */
     public $controller;
 
     public $controllerName = 'SymLinkUpdateManagerController';

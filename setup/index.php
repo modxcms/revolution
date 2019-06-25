@@ -97,7 +97,7 @@ $modInstall = new modInstall();
 if ($modInstall->getService('lexicon','modInstallLexicon')) {
     $modInstall->lexicon->load('default');
 }
-$modInstall->findCore();
+//$modInstall->findCore();
 $modInstall->doPreloadChecks();
 $requestClass = $isCommandLine ? 'request.modInstallCLIRequest' : 'request.modInstallRequest';
 $modInstall->getService('request',$requestClass);

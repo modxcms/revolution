@@ -13,8 +13,12 @@
  *
  * @package setup
  */
+
+use MODX\Revolution\modCacheManager;
+use MODX\Revolution\modX;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
+use xPDO\xPDOException;
 
 /**
  * Provides common functionality and data for installation and provisioning.
@@ -66,7 +70,7 @@ class modInstall {
             echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
             exit();
         }
-        require MODX_CORE_PATH . 'vendor/autoload.php';
+        require_once MODX_CORE_PATH . 'vendor/autoload.php';
     }
 
     /**
@@ -149,7 +153,9 @@ class modInstall {
      * Get an xPDO connection to the database.
      *
      * @param int $mode
-     * @return xPDO A copy of the xpdo object.
+     *
+     * @return xPDO|string A copy of the xpdo object.
+     * @throws xPDOException
      */
     public function getConnection($mode = 0) {
         if ($this->settings && empty($mode)) $mode = (int)$this->settings->get('installmode');
@@ -195,7 +201,10 @@ class modInstall {
                 )
             ));
             $this->xpdo->setLogLevel(xPDO::LOG_LEVEL_ERROR);
-            $this->xpdo->setPackage('modx', MODX_CORE_PATH . 'model/', $this->settings->get('table_prefix'));
+            $this->xpdo->setPackage('Revolution', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
+            $this->xpdo->addPackage('Revolution\Registry\Db', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
+            $this->xpdo->addPackage('Revolution\Sources', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
+            $this->xpdo->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/', $this->settings->get('table_prefix'));
         }
         return $this->xpdo;
     }
@@ -361,7 +370,7 @@ class modInstall {
         $errors = array ();
 
         /* instantiate the modX class */
-        if (@ require_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+        if (class_exists('MODX\Revolution\modX')) {
             $modx = new modX(MODX_CORE_PATH . 'config/');
             if (!is_object($modx) || !($modx instanceof modX)) {
                 $errors[] = '<p>'.$this->lexicon('modx_err_instantiate').'</p>';
@@ -371,10 +380,6 @@ class modInstall {
                 if (!$modx->isInitialized()) {
                     $errors[] = '<p>'.$this->lexicon('modx_err_instantiate_mgr').'</p>';
                 } else {
-                    $loaded = $modx->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-                    if (!$loaded)
-                        $errors[] = '<p>'.$this->lexicon('transport_class_err_load').'</p>';
-
                     $packageDirectory = MODX_CORE_PATH . 'packages/';
                     $packageState = (isset ($attributes[xPDOTransport::PACKAGE_STATE]) ? $attributes[xPDOTransport::PACKAGE_STATE] : xPDOTransport::STATE_PACKED);
                     $package = xPDOTransport :: retrieve($modx, $packageDirectory . $pkg . '.transport.zip', $packageDirectory, $packageState);
@@ -449,7 +454,8 @@ class modInstall {
      * Creates the database connection for the installation process.
      *
      * @access private
-     * @return xPDO The xPDO instance to be used by the installation.
+     * @return xPDO|string The xPDO instance to be used by the installation.
+     * @throws xPDOException
      */
     public function _connect($dsn, $user = '', $password = '', $prefix = '', array $options = array()) {
         require_once MODX_CORE_PATH . 'vendor/autoload.php';
@@ -484,7 +490,7 @@ class modInstall {
         $modx = null;
 
         /* to validate installation, instantiate the modX class and run a few tests */
-        if (include_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+        if (class_exists(modX::class)) {
             $modx = new modX(MODX_CORE_PATH . 'config/', array(
                 xPDO::OPT_SETUP => true,
             ));
@@ -515,12 +521,12 @@ class modInstall {
      * Finds the core directory, if possible. If core cannot be found, loads the
      * findcore controller.
      *
-     * @return Returns true if core directory is found.
+     * @return boolean Returns true if core directory is found.
      */
     public function findCore() {
         $exists = false;
         if (defined('MODX_CORE_PATH') && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
-            if (file_exists(MODX_CORE_PATH . 'vendor/xpdo/xpdo/src/xPDO/xPDO.php') && file_exists(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+            if (file_exists(MODX_CORE_PATH . 'vendor/xpdo/xpdo/src/xPDO/xPDO.php') && file_exists(MODX_CORE_PATH . 'model/src/modX.php')) {
                 $exists = true;
             }
         }

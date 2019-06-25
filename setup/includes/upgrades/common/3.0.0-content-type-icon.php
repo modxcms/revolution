@@ -6,7 +6,9 @@
  * @package setup
  */
 
-$class = 'modContentType';
+use MODX\Revolution\modContentType;
+
+$class = modContentType::class;
 $column = 'icon';
 
 $table = $modx->getTableName($class);

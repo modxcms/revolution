@@ -3,6 +3,8 @@
  * Remove obsolete system settings about compression
  */
 
+use MODX\Revolution\modSystemSetting;
+
 $settings = [
     'compress_js_max_files',
     'manager_js_zlib_output_compression'
@@ -12,7 +14,7 @@ $messageTemplate = '<p class="%s">%s</p>';
 
 foreach ($settings as $key) {
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject('modSystemSetting', ['key' => $key]);
+    $setting = $modx->getObject(modSystemSetting::class, ['key' => $key]);
     if ($setting instanceof modSystemSetting) {
         if ($setting->remove()) {
             $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,

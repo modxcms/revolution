@@ -42,7 +42,7 @@ if (!empty($_POST['proceed'])) {
     $settings['connectors_path'] = isset($_POST['context_connectors_path']) ? rtrim($_POST['context_connectors_path'],'/').'/' : MODX_INSTALL_PATH . 'connectors/';
     $settings['connectors_url_auto'] = isset ($_POST['context_connectors_url_toggle']) && $_POST['context_connectors_url_toggle'] ? 1 : 0;
     $settings['connectors_url'] = isset($_POST['context_connectors_url']) ? rtrim($_POST['context_connectors_url'],'/').'/' : $webUrl . 'connectors/';
-    $settings['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
+    $settings['processors_path'] = MODX_CORE_PATH . 'src/Revolution/Processors/';
     $settings['assets_path'] = $settings['web_path'] . 'assets/';
     $settings['assets_url'] = $settings['web_url'] . 'assets/';
     $install->settings->store($settings);

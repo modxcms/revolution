@@ -8,6 +8,15 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\modUser;
+use MODX\Revolution\modUserProfile;
+use MODX\Revolution\Processors\Security\User\Update;
+use MODX\Revolution\Processors\Security\User\Validation;
+use MODX\Revolution\Registry\modDbRegister;
+use MODX\Revolution\Registry\modRegistry;
+
 /**
  * Loads the login screen
  *
@@ -116,7 +125,7 @@ class SecurityLoginManagerController extends modManagerController
         $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
         $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
-        
+
 
         $this->checkForActiveInstallation();
         $this->checkForAllowManagerForgotPassword();
@@ -264,8 +273,8 @@ class SecurityLoginManagerController extends modManagerController
         if (!empty($_GET['modhash'])) {
             $hash = $this->modx->sanitizeString($_GET['modhash']);
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
-                ->getRegister('user', 'registry.modDbRegister');
+            $registry = $this->modx->getService('registry', modRegistry::class)
+                ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
             if (!empty($registry->read(['poll_limit' => 1, 'remove_read' => false]))) {
@@ -345,13 +354,13 @@ class SecurityLoginManagerController extends modManagerController
         $hash = $this->modx->sanitizeString($this->scriptProperties['modhash']);
         if (!empty($hash)) {
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
-                ->getRegister('user', 'registry.modDbRegister');
+            $registry = $this->modx->getService('registry', modRegistry::class)
+                ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
             $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
             /** @var modUser $user */
-            if (empty($record) || !$user = $this->modx->getObject('modUser', ['username' => reset($record)])) {
+            if (empty($record) || !$user = $this->modx->getObject(modUser::class, ['username' => reset($record)])) {
                 $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_activation_key_err'));
 
                 return;
@@ -363,15 +372,9 @@ class SecurityLoginManagerController extends modManagerController
             $this->scriptProperties['newPassword'] = true;
             $this->modx->lexicon->load('core:user');
 
-            if (!class_exists('modUserUpdateProcessor')) {
-                require(MODX_CORE_PATH . 'model/modx/processors/security/user/update.class.php');
-            }
-            $processor = new modUserUpdateProcessor($this->modx, $this->scriptProperties);
+            $processor = new Update($this->modx, $this->scriptProperties);
             $processor->modx->error->reset();
-            if (!class_exists('modUserValidation')) {
-                require(MODX_CORE_PATH . 'model/modx/processors/security/user/_validation.php');
-            }
-            $validator = new modUserValidation($processor, $user, $profile);
+            $validator = new Validation($processor, $user, $profile);
             $password = $validator->checkPassword();
             if ($processor->hasErrors()) {
                 $error = reset($processor->modx->error->getErrors(true))['msg'];
@@ -388,7 +391,7 @@ class SecurityLoginManagerController extends modManagerController
         }
 
         /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
+        $response = $this->modx->runProcessor(\MODX\Revolution\Processors\Security\Login::class, $this->scriptProperties);
         if (($response instanceof modProcessorResponse)) {
             if (!$response->isError()) {
                 $url = !empty($this->scriptProperties['returnUrl'])
@@ -411,7 +414,7 @@ class SecurityLoginManagerController extends modManagerController
      * @return void
      */
     public function handleForgotLogin() {
-        $c = $this->modx->newQuery('modUser');
+        $c = $this->modx->newQuery(modUser::class);
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
         $c->innerJoin('modUserProfile', 'Profile');
         $c->where([
@@ -419,14 +422,14 @@ class SecurityLoginManagerController extends modManagerController
             'OR:Profile.email:=' => $this->scriptProperties['username_reset'],
         ]);
         /** @var modUser $user */
-        $user = $this->modx->getObject('modUser', $c);
+        $user = $this->modx->getObject(modUser::class, $c);
         if ($user) {
             $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
 
             /** @var modRegistry $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry');
-            /** @var modRegister $register */
-            $register = $registry->getRegister('user', 'registry.modDbRegister');
+            $registry = $this->modx->getService('registry', modRegistry::class);
+            /** @var modDbRegister $register */
+            $register = $registry->getRegister('user', modDbRegister::class);
             $register->connect();
             $register->subscribe('/pwd/change/');
             $register->send('/pwd/change/', [$activationHash => $user->get('username')], ['ttl' => 86400]);

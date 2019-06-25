@@ -69,7 +69,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
     ,createAcl: function(itm,e) {
         var r = {
             target: this.config.context_key
-            ,principal_class: 'modUserGroup'
+            ,principal_class: 'MODX\\Revolution\\modUserGroup'
         };
         if (!this.windows.create_acl) {
             this.windows.create_acl = MODx.load({
@@ -154,7 +154,7 @@ MODx.window.CreateAccessContext = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'modx-combo-usergroup'
             ,fieldLabel: _('user_group')

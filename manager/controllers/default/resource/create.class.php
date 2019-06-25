@@ -8,6 +8,12 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modActionDom;
+use MODX\Revolution\modFormCustomizationProfile;
+use MODX\Revolution\modFormCustomizationProfileUserGroup;
+use MODX\Revolution\modFormCustomizationSet;
+use MODX\Revolution\modResource;
+
 require_once dirname(__FILE__) . '/resource.class.php';
 
 /**
@@ -75,14 +81,14 @@ class ResourceCreateManagerController extends ResourceManagerController
 
         // handle template inheritance
         if (!empty($this->scriptProperties['parent'])) {
-            $this->parent = $this->modx->getObject('modResource', $this->scriptProperties['parent']);
+            $this->parent = $this->modx->getObject(modResource::class, $this->scriptProperties['parent']);
             if (!$this->parent->checkPolicy('add_children')) {
                 $this->failure($this->modx->lexicon('resource_add_children_access_denied'));
 
                 return '';
             }
         } else {
-            $this->parent = $this->modx->newObject('modResource');
+            $this->parent = $this->modx->newObject(modResource::class);
             $this->parent->set('id', 0);
             $this->parent->set('template', $this->modx->getOption('default_template', null, 1));
         }
@@ -188,7 +194,7 @@ class ResourceCreateManagerController extends ResourceManagerController
                 $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($this->parent->get('pagetitle'));
             } else {
                 /** @var modResource $overriddenParent */
-                $overriddenParent = $this->modx->getObject('modResource', $this->resourceArray['parent']);
+                $overriddenParent = $this->modx->getObject(modResource::class, $this->resourceArray['parent']);
                 if ($overriddenParent) {
                     $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($overriddenParent->get('pagetitle'));
                 }
@@ -223,11 +229,11 @@ class ResourceCreateManagerController extends ResourceManagerController
                     break;
                 case 'sibling':
                     if (!empty($this->parent->id)) {
-                        $c = $this->modx->newQuery('modResource');
+                        $c = $this->modx->newQuery(modResource::class);
                         $c->where(['parent' => $this->parent->id, 'context_key' => $this->ctx]);
                         $c->sortby('id', 'DESC');
                         $c->limit(1);
-                        if ($siblings = $this->modx->getCollection('modResource', $c)) {
+                        if ($siblings = $this->modx->getCollection(modResource::class, $c)) {
                             /** @var modResource $sibling */
                             foreach ($siblings as $sibling) {
                                 $defaultTemplate = $sibling->get('template');
@@ -244,11 +250,11 @@ class ResourceCreateManagerController extends ResourceManagerController
             }
         }
         $userGroups = $this->modx->user->getUserGroups();
-        $c = $this->modx->newQuery('modActionDom');
-        $c->innerJoin('modFormCustomizationSet', 'FCSet');
-        $c->innerJoin('modFormCustomizationProfile', 'Profile', 'FCSet.profile = Profile.id');
-        $c->leftJoin('modFormCustomizationProfileUserGroup', 'ProfileUserGroup', 'Profile.id = ProfileUserGroup.profile');
-        $c->leftJoin('modFormCustomizationProfile', 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
+        $c = $this->modx->newQuery(modActionDom::class);
+        $c->innerJoin(modFormCustomizationSet::class, 'FCSet');
+        $c->innerJoin(modFormCustomizationProfile::class, 'Profile', 'FCSet.profile = Profile.id');
+        $c->leftJoin(modFormCustomizationProfileUserGroup::class, 'ProfileUserGroup', 'Profile.id = ProfileUserGroup.profile');
+        $c->leftJoin(modFormCustomizationProfile::class, 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
         $c->where([
             'modActionDom.action' => 'resource/create',
             'modActionDom.name' => 'template',
@@ -265,7 +271,7 @@ class ResourceCreateManagerController extends ResourceManagerController
             ]], 'OR:ProfileUserGroup.usergroup:=' => null,
         ], xPDOQuery::SQL_AND, null, 2);
         /** @var modActionDom $fcDt */
-        $fcDtColl = $this->modx->getCollection('modActionDom', $c);
+        $fcDtColl = $this->modx->getCollection(modActionDom::class, $c);
         if ($fcDtColl) {
             if ($this->parent) { /* ensure get all parents */
                 $p = $this->parent ? $this->parent->get('id') : 0;
