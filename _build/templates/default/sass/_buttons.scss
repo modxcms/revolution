@@ -17,7 +17,6 @@ button {
 .actions {
   bottom: 8px;
   margin: 0;
-  /*overflow: hidden;*/ /* cuts off box-shadows in FF */
   overflow: visible;
   position: absolute;
 
@@ -564,7 +563,6 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text {
 
       /* the resource trash button in the tree */
       & > em > button {
-        /*color: #96A9BB;*/
         /* not sure why the trash needs a different color when active? */
         font-size: 20px; /* trash icon is a bit smaller than the others at 18px */
       }

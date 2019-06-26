@@ -10,12 +10,10 @@
   margin-top: 15px;
 
   .crumbs {
-    /*border-bottom: 1px solid $borderColor;*/
     height: 34px;
     overflow: hidden; /* hide the overflow from the oversized arrows */
 
     li {
-      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
       color: $darkestGray;
       float: left;
       font-size: 12px;
@@ -32,7 +30,6 @@
         &:before {
           @extend %pseudo-font-x-btn;
 
-          /*background-color: $lightestGray;*/
           content: fa-content($fa-var-home);
           display: inline-block;
           font-size: 20px;
@@ -75,25 +72,9 @@
         }
       }
 
-      /*&:before {
-        content: '';
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent;      
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid $darkestGray;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;*/
-      /*margin-left: 1px;*/
-      /* uncomment to make the line thicker */
-      /*left: 100%;
-        z-index: 1;
-      }*/
+
 
       &:hover {
-        /*background-color: $colorSplash;*/
 
         button,
         span,

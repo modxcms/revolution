@@ -50,7 +50,6 @@
       font-weight: bold;
       padding: 8px;
       text-align: center;
-      /*z-index: 3;*/
     }
   }
 
@@ -68,9 +67,7 @@
 
   /* the window content wrapper */
   .x-window-bwrap {
-    /*background: $white;*/
     overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
-    /*z-index: 2;*/
 
     /* the window main container */
     .x-window-ml,
@@ -79,11 +76,8 @@
     }
 
     .x-window-mc {
-      /*background-color: $mainBg;*/
       border: 0;
-      /*padding: 15px;*/
       padding: 0;
-      /*z-index: 2;*/
 
       .x-panel-ml,
       .x-panel-mr,
@@ -97,12 +91,9 @@
     }
   }
 
-  /* .x-window-bwrap */
-
   .x-window-body {
     background-color: $winBodyBg !important; /* override extjs default theme transparent !important style from .x-window-plain */
     border: 0; /* override extjs default theme border for .x-window-plain */
-    /*overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     overflow-y: auto;
     padding: 15px;
   }
@@ -123,17 +114,12 @@
 
   .x-panel-bwrap {
     background: $winBodyBg;
-    /*box-shadow: $boxShadow;*/
-    /*border-radius: $borderRadius;*/
-    /*overflow-y: auto; /* make the content area of normal windows scrollable, fix always visible scrollbars with auto */
-    /*padding: 10px;*/
     padding: 0;
 
     /* inner panel body wraps */
     .x-panel-bwrap {
       background: transparent;
       box-shadow: none;
-      /*border-radius: 0;*/
       overflow: visible;
       padding: 0;
     }
@@ -151,7 +137,6 @@
     .x-panel-bwrap {
       background: transparent;
       box-shadow: none;
-      /*border-radius: 0;*/
       overflow: visible;
       padding: 0;
     }
@@ -163,7 +148,6 @@
 
   /* the window tab strip if available */
   .modx-tabs {
-    /*overflow-y: scroll;*/
 
     .x-tab-panel-header {
       .x-tab-strip-wrap {
@@ -180,14 +164,12 @@
   .x-tab-panel-bwrap {
     background: $white;
     box-shadow: $boxShadow;
-    /*padding: 10px 10px 6px 10px; /* take account for the 4px padding at the bottom of the last x-form-item */
     padding: 10px;
 
     .x-tab-panel-body {
       overflow-y: auto; /* tabs stay, content scrolls, but only show when necessary */
 
       .modx-panel {
-        /*overflow-y: scroll; /* tabs stay, content scrolls */
 
         .x-panel-bwrap {
           padding: 0;
@@ -203,7 +185,6 @@
   }
 
   .x-window-bc {
-    /*z-index: 1;*/
 
     .x-window-footer {
       background-color: $winFooterBg;
@@ -230,21 +211,11 @@
   /* the console window */
   &.modx-console {
 
-    /*.x-window-body {
-      background-color: $white;
-      padding: 0;
-
-      .x-panel-bwrap {
-        box-shadow: none;
-      }
-    }*/
-
     .modx-console-text {
       background-color: $white;
       border: none;
       font: 12px $codefonts;
       height: auto !important; /* override extjs default theme */
-      /*padding: 8px;*/
     }
 
     .debug {
@@ -362,8 +333,6 @@
 
 .ext-mb-content {
   display: block;
-  /*float: left;*/
-  /*margin-left: 40px !important; /* override extjs default theme style */
   margin-left: 0 !important;
 }
 
@@ -393,233 +362,3 @@
 .x-mask-loading div {
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
 }
-
-/*.ext-gecko .x-window-body .x-form-item {
-  overflow: hidden;
-}
-
-.x-window-tl .x-panel-icon {
-  background-position: 0 8px;
-}
-
-.x-window-dlg .x-msg-box-wait {
-  background-image: url($imgPath + 'modx-theme/grid/loading.gif');
-}
-.x-window-dlg .ext-mb-info {
-  background-image: url($imgPath + 'modx-theme/window/icon-info.gif');
-}
-.x-window-dlg .ext-mb-warning {
-  background-image: url($imgPath + 'modx-theme/window/icon-warning.gif');
-}
-.x-window-dlg .ext-mb-question {
-  background-image: url($imgPath + 'modx-theme/window/icon-question.gif');
-}
-.x-window-dlg .ext-mb-error {
-  background-image: url($imgPath + 'modx-theme/window/icon-error.gif');
-}
-
-.x-window-proxy {
-  background-color: #dcdcdc;
-  border-color: #d0d0d0;
-}
-
-.x-panel-ghost .x-window-tl {
-  border-bottom-color: #d0d0d0;
-}
-
-body.x-body-masked .x-window-plain .x-window-mc {
-  background-color: #e2e2e2;
-}
-.x-window h2 {
-  border-bottom: 1px solid #D6DFC3;
-  color: #5e5e5e;
-  font: $fontH3;
-  font-size: 18px;
-  margin: 0 0 11px;
-  padding: 8px 15px;
-  text-shadow: 0 1px 1px $white;
-}
-.x-window .x-panel-tl,
-.x-window .x-panel-ml,
-.x-window .x-panel-bl,
-.x-window .x-panel-mc,
-.x-window .x-panel-tr,
-.x-window .x-panel-mr,
-.x-window .x-panel-br {
-  background-color: $lighterGray;
-}
-
-.x-window .x-tab-strip {
-	margin-left:0;
-}
-.x-window .x-form-item label.x-form-item-label {
-  padding: 0;
-}
-.x-window .x-form-label-top .x-form-element {
-  padding-top: 0;
-}
-.x-window .x-form-cb-label {
-  color: #707070;
-  font-weight: bold;
-}
-.x-window .x-panel-mc {
-  border: 0 none;
-}
-.x-window .x-panel-ml {
-  border: 0 none;
-}
-.x-window .x-panel-bl.x-panel-nofooter,
-.x-window .x-panel-tl {
-  background-color: transparent;
-  background-image: none;
-  border: 0 none;
-  padding: 0;
-}
-.x-window .x-window-plain .x-panel-btns {
-  border-top: 0 none;
-}
-.x-window .x-window-plain .x-window-mc {
-  background-color: #f5f5f5;
-  border-color: 0 none !important;
-}
-.x-window-plain .x-window-body {
-  border: 0 none;
-}
-.x-window-body {
-  background-color: white;
-  border-bottom: 1px solid #D0D0D0;
-  border-top: 1px solid #F7F7F7;
-}
-.x-window-dlg .x-window-body {
-  background: none repeat scroll 0 0 $wildSand !important;
-  padding: 15px 15px 5px;
-}
-.x-window .x-window-bc .x-panel-btns {
-  background-color: #f7f8fa;
-  background: $alto;
-  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
-  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  border-bottom: 1px solid $alto;
-  border-top: 1px solid $white;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
-  padding: 8px;
-}
-.x-window-dlg .x-window-bc .x-panel-btns {
-  border-top: 0 none;
-}
-.x-window .x-window-bc .x-window-footer {
-  margin-bottom: 0;
-}
-.x-window .x-window-proxy {
-  background-color: #dcdcdc;
-  border-color: $alto;
-}
-.x-window .x-window-tl {
-  background-color: $white;
-  background-image: none;
-  border-radius: 3px 3px 0 0;
-  overflow: hidden;
-  padding-left: 0;
-}
-.x-window .x-window-tl .x-window-header {
-  background: #d0d0d0;
-  background: -moz-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  background: -o-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #d0d0d0));
-  background: -webkit-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  background: linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  border-bottom: 1px solid #ababab;
-  border-radius: 3px 3px 0 0;
-  color: #5e5e5e;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#d0d0d0,GradientType=0);
-  margin-top: 0;
-  padding: 8px;
-  text-align: center;
-  text-shadow: 0 1px 0 $white;
-}
-.x-window .x-window-bl {
-  background-color: $white;
-  background-image: none;
-  border-radius: 0 0 3px 3px;
-  overflow: hidden;
-  padding-left: 0;
-}
-.x-window .x-panel-nofooter {
-  background-color: #f7f8fa;
-  background: $alto;
-  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
-  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  border-bottom: 1px solid $alto;
-  border-top: 1px solid $white;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
-}
-.x-window .x-window-header-text {
-  color: #666666;
-}
-.x-window .x-window-dlg .ext-mb-text {
-  font-size: 12px;
-}
-.x-window .x-window-dlg .x-window-header-text {
-  font-size: 14px;
-}
-.x-window .x-window-dlg .x-window-body {
-  padding: 15px;
-}
-.x-window .x-window-dlg .x-panel-btns {
-  border-top: 0 none;
-}
-.x-window .x-window-tc,
-.x-window .x-window-bc {
-  background-image: none;
-}
-.x-window .x-window-tr,
-.x-window .x-window-br,
-.x-window .x-window-mr {
-  background-image: none;
-  padding-right: 0;
-}
-.x-window .x-window-tl,
-.x-window .x-window-ml {
-  background-image: none;
-  padding-left: 0;
-}
-.x-window .x-window-mc {
-  background-color: $white;
-  border-radius: 0 0  3px 3px;
-  border: 0 none;
-}
-.x-window .x-window-maximized .x-window-tc {
-  background-color: $white;
-}
-.x-window .x-window-bbar .x-toolbar,
-.x-window .x-window-bbar-noborder .x-toolbar {
-  background-color: #f7f8fa;
-  background: #d5dade;
-  background: -moz-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: -o-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eff0f4), color-stop(100%, #d5dade));
-  background: -webkit-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff0f4,endColorstr=#d5dade,GradientType=0);
-  border-radius: 0 0 3px 3px;
-  border-bottom: 0 none;
-  border-top: 1px solid #d4d9df;
-  padding: 8px;
-}
-.x-window .x-dlg-mask {
-  background-color: $silver;
-}
-.x-window-maximized .x-window-tc {
-  padding-left: 0;
-  padding-right: 0;
-}*/

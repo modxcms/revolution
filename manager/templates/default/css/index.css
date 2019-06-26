@@ -13429,21 +13429,6 @@ readers do not read off random characters that represent icons */
 @-moz-document url-prefix() { }
 
 /* Instead of writing the same code for every nav bar */
-/*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
-/*.x-item-disabled {
-  color: gray;
-}
-
-.x-item-disabled * {
-  color: gray !important;
-}*/
 .x-splitbar-proxy {
   background-color: #aaa; }
 
@@ -13458,22 +13443,6 @@ readers do not read off random characters that represent icons */
 .x-color-palette em {
   border-color: #aca899; }
 
-/* no more extjs shadows in 2.3 */
-/*.x-ie-shadow {
-  background-color: #777;
-}
-
-.x-shadow .xsmc {
-  background-image: none;
-}
-
-.x-shadow .xsml, .x-shadow .xsmr {
-  background-image: none;
-}
-
-.x-shadow .xstl, .x-shadow .xstc,  .x-shadow .xstr, .x-shadow .xsbl, .x-shadow .xsbc, .x-shadow .xsbr {
-  background-image: none;
-}*/
 .loading-indicator {
   background-image: url("../images/modx-theme/grid/loading.gif");
   font-size: 11px; }
@@ -13599,7 +13568,6 @@ readers do not read off random characters that represent icons */
 .x-grid3-row-over {
   background-color: #E0E8EF;
   background-image: none;
-  /*border: 0 none;*/
   border-bottom: 1px solid #D1D9DF; }
 
 .x-grid3-resize-proxy {
@@ -13858,48 +13826,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
     width: 14px;
     margin: 0 auto; }
 
-/*
-.x-grid3-check-col-td {
-  vertical-align: middle !important;
-}
-.x-grid3-check-col, .x-grid3-check-col-on {
-  height: 2em;
-  position: relative;
-  cursor: pointer;
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    height: 1.5em;
-    transition: all .2s ease;
-  }
-  &:before {
-    left: 0;
-    top: 0;
-    width: 3em;
-    border: 2px solid $lightGray;
-    background: $lightGray;
-    border-radius: 1.1em;
-    z-index: 10;
-  }
-  &:after {
-    left: .15em;
-    top: .125em;
-    background-color: $white
-    border-radius: 50%;
-    width: 1.5em;
-    z-index: 11;
-  }
-}
-.x-grid3-check-col-on {
-  &:after {
-    left: 1.65em;
-  }
-  &:before {
-    background-color: $green;
-    border-color: $green;
-  }
-}
-*/
 .x-grid-group,
 .x-grid-group-body,
 .x-grid-group-hd {
@@ -14190,7 +14116,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   overflow: visible; }
 
 .x-panel-body {
-  /*background-color: $white*/
   border: 0;
   border-radius: 3px;
   overflow: visible; }
@@ -14212,8 +14137,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-panel-tl .x-panel-header {
   color: #6A6A6A;
   font: normal 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  font-weight: bold;
-  /*text-shadow: 0 1px 0 $alabastersolid;*/ }
+  font-weight: bold; }
 
 .x-panel-tl .x-panel-icon {
   background-position: 0 8px; }
@@ -14249,8 +14173,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-panel-btns {
   background-color: transparent;
   padding: 15px 0 1px 0;
-  /* override extjs default theme rule, padding bottom 1px to not cut off buttons box-shadow */
-  /*border-top: 1px solid $alabastersolid;*/ }
+  /* override extjs default theme rule, padding bottom 1px to not cut off buttons box-shadow */ }
   .x-panel-btns td.x-toolbar-cell {
     padding: 0;
     /* override extjs default theme rule */ }
@@ -14356,104 +14279,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .x-tool.x-tool-plus:after {
     content: "\f067"; }
 
-/*.x-tool {
-  background-image: url($imgPath + 'modx-theme/panel/tool-sprites.png');
-  height: 16px;
-  margin: 1px 2px 0 0;
-  width: 16px;
-}
-.x-tool-toggle, .x-accordion-hd .x-tool-toggle {
-  background-position: left -48px;
-}
-.x-tool-toggle-over, .x-accordion-hd .x-tool-toggle-over {
-  background-position: right -48px;
-}
-.x-panel-collapsed .x-tool-toggle {
-  background-position: left -96px;
-}
-.x-panel-collapsed .x-tool-toggle-over {
-  background-position: right -96px;
-}
-.x-tool-close {
-  background-position: left 0;
-}
-.x-tool-close-over {
-  background-position: right 0;
-}
-.x-tool-minimize {
-  background-position: left -16px;
-}
-.x-tool-minimize-over {
-  background-position: right -16px;
-}
-.x-tool-maximize {
-  background-position: left -32px;
-}
-.x-tool-maximize-over {
-  background-position: right -32px;
-}
-.x-tool-restore {
-  background-position: left -112px;
-}
-.x-tool-restore-over {
-  background-position: right -112px;
-}
-.x-tool-gear {
-  background-position: left -200px;
-}
-.x-tool-gear-over {
-  background-position: right -200px;
-}
-.x-tool-pin {
-  background-position: left -200px;
-}
-.x-tool-pin-over {
-  background-position: right -200px;
-}
-.x-tool-unpin {
-  background-position: left -200px;
-}
-.x-tool-unpin-over {
-  background-position: right -200px;
-}
-.x-tool-right, .x-tool-expand-west {
-  background-position: left -80px;
-}
-.x-tool-right-over, .x-tool-expand-west-over {
-  background-position: right -80px;
-}
-.x-tool-left, .x-tool-expand-east {
-  background-position: left -64px;
-}
-.x-tool-left-over, .x-tool-expand-east-over {
-  background-position: right -64px;
-}
-.x-tool-up {
-  background-position: left -48px;
-}
-.x-tool-up-over {
-  background-position: right -48px;
-}
-.x-tool-down {
-  background-position: left -96px;
-}
-.x-tool-down-over {
-  background-position: right -96px;
-}
-.x-tool-minus {
-  background-position: left -224px;
-}
-.x-tool-minus-over {
-  background-position: right -224px;
-}
-.x-tool-plus {
-  background-position: left -208px;
-}
-.x-tool-plus-over {
-  background-position: right -208px;
-}
-.x-panel-collapsed {
-}*/
 .x-panel-dd-spacer {
   border-color: #DFDFDF; }
 
@@ -14467,23 +14292,11 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-panel-header {
   border-radius: 3px 3px 0 0;
-  /*background: #dddddd;
-  background: -moz-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  background: -o-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #dddddd));
-  background: -webkit-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  background: linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#dddddd,GradientType=0);
-  border-bottom: 1px solid #dddddd;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;*/
   border: 1px solid #c0c0c0;
   font-size: 14px;
   font-weight: bold;
   margin-top: 0;
-  padding: 10px 10px 8px;
-  /*text-shadow: 0 1px 1px $white;*/ }
+  padding: 10px 10px 8px; }
 
 .x-portal-space {
   border-bottom: 1px solid #afafaf;
@@ -17037,8 +16850,6 @@ button {
 .actions {
   bottom: 8px;
   margin: 0;
-  /*overflow: hidden;*/
-  /* cuts off box-shadows in FF */
   overflow: visible;
   position: absolute; }
   .actions li {
@@ -17627,7 +17438,6 @@ button {
 #modx-leftbar .x-toolbar-ct .x-toolbar-right .x-btn {
   /* the resource trash button in the tree */ }
   #modx-leftbar .x-toolbar-ct .x-toolbar-right .x-btn > em > button {
-    /*color: #96A9BB;*/
     /* not sure why the trash needs a different color when active? */
     font-size: 20px;
     /* trash icon is a bit smaller than the others at 18px */ }
@@ -18383,23 +18193,12 @@ input::-moz-focus-inner {
     .x-form-radio-group .x-column .x-form-item:last-child {
       padding: 0 0 4px 0; }
 
-/*.x-form-check-group-label {
-  border-bottom: 1px solid $borderColor;
-  color: $coreFieldLabelColor;
-}*/
-/*.x-form-radio {
-  margin-left: 1px;
-}*/
 /* superboxselect / multi-select field */
 .x-superboxselect {
-  /*display: block;*/
   height: auto !important;
   /* override the extjs default theme style of 18px */
   margin: 0;
   outline: 0;
-  /*overflow: hidden;*/
-  /*padding: 2px;*/
-  /*padding: 0 33px 0 0;*/
   padding: 0 5px 5px 5px;
   /* special padding because selected items need margin-top */
   position: relative;
@@ -18426,27 +18225,15 @@ input::-moz-focus-inner {
       margin: -5px 0 0 -5px;
       /* fix for superbox selects in toolbars */ }
     .x-superboxselect ul li {
-      /*color: $coreFieldLabelColor;*/
-      /*float: left;*/
-      /*line-height: 16px;*/
       margin: 5px 5px 0 0;
       padding: 0; }
       .x-superboxselect ul li.x-superboxselect-item {
-        /*@extend %secondary-button;*/
-        /*background-color: #DEE7F8;*/
-        /*border-radius: $borderRadius;*/
-        /*border: 1px solid #CAD8F3;*/
         cursor: default;
         /* don't make the selected options appear like full buttons */
         font-size: 12px;
         padding: 4px 18px 4px 4px !important;
         /* can somehow not override the extended rules */
         position: relative;
-        /* unnecessary as the hover styles are inherited from secondary-button */
-        /*&.x-superboxselect-item-hover {
-          background: #BBCEF1;
-          border: 1px solid #6D95E0;
-        }*/
         /* focus styles need to be defined as the item is an li element which normally doesn't get :focus */ }
         .x-superboxselect ul li.x-superboxselect-item.x-superboxselect-item-focus {
           background-color: #234368;
@@ -18541,35 +18328,6 @@ input::-moz-focus-inner {
     height: 20px !important;
     padding: 5px; }
 
-/*span.required {
-    color: #777;
-}*/
-/*.modx-tv {
-  margin: 0 0 4px 0;
-  padding-bottom: 4px;
-  width: 100%;
-}*/
-/*#modx-tv-tabs .tv-last {
-  border-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}*/
-/*.modx-tv-label {
-  display: inline-block;
-  float: left;
-  position: relative !important;
-  width: auto;
-}*/
-/*.modx-tv-label-title {
-  float: left;
-  display: inline-block;
-}*/
-/*.modx-tv-label-description {
-  display: inline-block;
-  float: left;
-  font-style: italic;
-  font-weight: normal;
-  padding-left: 5px;
-}*/
 /* cannot find this class anywhere, leaving it for savety, but most likely broken when it appears */
 .modx-tv-description {
   color: #515151;
@@ -18595,33 +18353,6 @@ input::-moz-focus-inner {
   font-size: 11px;
   font-weight: normal; }
 
-/*.modx-form .x-form-text,
-.modx-form .x-form-textarea {
-  font-size: 14px;
-}*/
-/*.modx-form .x-form-text {
-  height: 20px !important;
-  padding: 5px;
-}*/
-/*.modx-form .x-form-item label {
-  color: #505050;
-  font-size: 14px;
-}*/
-/*.x-form-check-wrap {
-  height: auto !important;
-}
-
-.x-form-check-wrap .x-form-cb-label {
-  color: #777;
-  font-weight: normal;
-}*/
-/*.x-form-field {
-  font: $baseText;
-}*/
-/*.x-form-select-one {
-  background-color: $white
-  border-color: #c5c5c5;
-}*/
 .x-editor .x-form-check-wrap {
   background-color: #FFFFFF; }
 
@@ -18636,60 +18367,6 @@ input::-moz-focus-inner {
   background-color: #FFFFFF;
   background-image: url("../images/modx-theme/form/trigger.png"); }
 
-/*.x-small-editor .x-form-field-wrap {
-  background: $lighterGray;
-  border-radius: $borderRadius;
-}*/
-/*.x-small-editor .x-form-field-wrap .x-form-trigger {
-  border: 0 none !important;
-  right: -3px;
-  height: 24px !important;
-  width: 32px;
-}*/
-/*.x-small-editor .x-form-field-wrap .x-form-trigger-over {
-  background-color: #f3f3f3;
-  background-position: right;
-}*/
-/*.x-small-editor .x-form-field-wrap .x-form-arrow-trigger {
-  background: url($imgPath + 'modx-theme/form/trigger.png') no-repeat scroll left center transparent;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-over {
-  background-position: center center;
-}
-
-.x-small-editor .x-form-field-wrap .x-form-trigger.x-form-trigger-click {
-  background-position: right center;
-}
-
-.x-form-field-wrap .x-form-date-trigger, .x-small-editor .x-form-field-wrap .x-form-date-trigger {
-  background-image: url($imgPath + 'modx-theme/form/calendar.png');
-}*/
-/*.x-form-field-wrap .x-form-clear-trigger {
-  background-image: url($imgPath + 'modx-theme/form/clear-trigger.gif');
-}
-
-.x-form-field-wrap .x-form-search-trigger {
-  background-image: url($imgPath + 'modx-theme/form/search-trigger.gif');
-}*/
-/*.ext-strict .x-small-editor .x-form-text {
-  border-radius: $borderRadius;
-  height: 20px !important;
-}*/
-/*.x-viewport .x-trigger-wrap-focus .x-form-focus {
-  outline: none !important;
-}*/
-/*.ext-gecko .x-form-text, .ext-ie8 .x-form-text {
-  padding: 5px;
-}*/
-/*.ext-safari .x-form-invalid {
-  background-color: #fee;
-  border-color: #ff7870;
-}*/
-/*.x-form-inner-invalid, textarea.x-form-inner-invalid {
-  background-color: $white
-  background-image: url($imgPath + 'modx-theme/grid/invalid_line.gif');
-}*/
 .x-form-grow-sizer {
   font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
@@ -18723,9 +18400,6 @@ input::-moz-focus-inner {
 .x-grid3 .x-small-editor .x-form-field-wrap {
   overflow: hidden; }
 
-/*.x-form-invalid-icon {
-  background-image: url($imgPath + 'modx-theme/form/exclamation.gif');
-}*/
 /* the following styles have to be outside of their component blocks as they are inserted at the end of the DOM */
 .x-combo-list {
   border: 0;
@@ -18854,16 +18528,9 @@ input::-moz-focus-inner {
   border-bottom-color: #bcbcbc;
   color: #464646; }
 
-/*.x-resizable-pinned .x-combo-list-inner {
-  border-bottom-color: transparent;
-}*/
 .x-combo-list-small {
   font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
-/* this is the dropdown list to select the options, it's outside of the main superboxselect wrapper */
-/*.x-superboxselect-list {
-
-}*/
 /* The date TV calendar styles */
 .x-date-picker,
 .x-date-mp {
@@ -19031,42 +18698,6 @@ td.x-date-mp-sep {
   color: black;
   font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
-/*.x-date-mp {
-  background-color: $white;
-}*/
-/*.x-date-mp td {
-  font: $fontSmall;
-}*/
-/*.x-date-mp-btns button {
-  background-color: #373737;
-  border-color: $doveGray #101010 #101010 $doveGray;
-  color: $white
-  font: $fontSmall;
-}*/
-/*.x-date-mp-btns {
-  background-color: #ebebeb;
-  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
-}*/
-/*.x-date-mp-btns td {
-  border-top-color: $alto;
-}*/
-/*td.x-date-mp-month a,
-td.x-date-mp-year a {
-  color: #464646;
-}*/
-/*td.x-date-mp-month a:hover,
-td.x-date-mp-year a:hover {
-  background-color: $alto;
-  color: #464646;
-}*/
-/*td.x-date-mp-sel a {
-  background-color: #ebebeb;
-  background-image: url($imgPath + 'modx-theme/shared/glass-bg.gif');
-  border-color: #afafaf;
-}*/
-/*.x-date-mp-ybtn a {
-  background-image: url($imgPath + 'modx-theme/panel/tool-sprites.gif');
-}*/
 .radio-version .x-form-check-wrap .x-form-cb-label {
   display: block; }
   .radio-version .x-form-check-wrap .x-form-cb-label .changelog {
@@ -19096,7 +18727,6 @@ td.x-date-mp-year a:hover {
 .x-tab-panel-header ul.x-tab-strip {
   background-color: transparent !important;
   /* override !important extjs default theme style */
-  /*border-bottom-color: $white;*/
   border: 0;
   /* prevent overflowing border, add to .x-tab-strip-wrap if necessary */
   margin: 0;
@@ -19109,8 +18739,7 @@ td.x-date-mp-year a:hover {
 .x-tab-panel-footer-plain .x-tab-strip-spacer {
   /*background-color: $white*/
   border: none;
-  height: 0;
-  /*margin: -2px 0 0 0; /* was -2px 0 0 -1px */ }
+  height: 0; }
 
 .x-tab-panel {
   /* take care of nested tab panels as seen in MIGX */ }
@@ -19121,7 +18750,6 @@ td.x-date-mp-year a:hover {
       padding-top: 0;
       /* do not add that padding to vertical tabs panels */ }
     .x-tab-panel .x-tab-panel .x-tab-strip-wrap {
-      /*background-color: $lighterGray;*/
       padding: 2px 0 0 0;
       /* revert padding from main tabs for nested ones */
       margin: 0;
@@ -19719,18 +19347,7 @@ ul.x-tab-strip-bottom {
   #modx-manager-search .x-form-field-wrap .x-form-empty-field {
     color: #6a747a; }
   #modx-manager-search .x-form-field-wrap .x-form-trigger {
-    display: none;
-    /*
-    color: $darkGray;
-    top: -2px;
-    right: -2px;
-    &:before {
-      content: fa-content($fa-var-chevron-right);
-    }
-    &.x-form-trigger-over,
-    &:hover {
-      color: rgba(255,255,255,1);
-    }*/ }
+    display: none; }
 
 /* this is an .x-combo-list element with special styles */
 .modx-manager-search-results {
@@ -19835,12 +19452,10 @@ ul.x-tab-strip-bottom {
   border-top: 1px solid #E4E4E4;
   margin-top: 15px; }
   .crumb_wrapper .crumbs {
-    /*border-bottom: 1px solid $borderColor;*/
     height: 34px;
     overflow: hidden;
     /* hide the overflow from the oversized arrows */ }
     .crumb_wrapper .crumbs li {
-      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
       color: #53595F;
       float: left;
       font-size: 12px;
@@ -19848,29 +19463,12 @@ ul.x-tab-strip-bottom {
       line-height: 12px;
       padding: 0 0 0 20px;
       position: relative;
-      z-index: 1;
-      /*&:before {
-        content: '';
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent;      
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid $darkestGray;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;*/
-      /*margin-left: 1px;*/
-      /* uncomment to make the line thicker */
-      /*left: 100%;
-        z-index: 1;
-      }*/ }
+      z-index: 1; }
       .crumb_wrapper .crumbs li.first {
         padding: 0;
         /* neutralize the normal li padding and give it to the inner element */
         /* the home breadcrumb with the house icon */ }
         .crumb_wrapper .crumbs li.first:before {
-          /*background-color: $lightestGray;*/
           content: "\f015";
           display: inline-block;
           font-size: 20px;
@@ -19903,24 +19501,22 @@ ul.x-tab-strip-bottom {
             display: none; }
           .crumb_wrapper .crumbs li.first .root:hover {
             background-color: transparent; }
-      .crumb_wrapper .crumbs li:hover {
-        /*background-color: $colorSplash;*/ }
-        .crumb_wrapper .crumbs li:hover button,
-        .crumb_wrapper .crumbs li:hover span,
-        .crumb_wrapper .crumbs li:hover span:after {
-          background-color: #515151;
-          color: #FFFFFF; }
-        .crumb_wrapper .crumbs li:hover span:after,
-        .crumb_wrapper .crumbs li:hover button:after {
-          border: 1px solid #FBFBFB;
-          border-left-color: #515151;
-          border-bottom-color: #515151; }
-        .crumb_wrapper .crumbs li:hover span:before,
-        .crumb_wrapper .crumbs li:hover button:before {
-          background-color: #515151; }
-        .crumb_wrapper .crumbs li:hover + li span:before,
-        .crumb_wrapper .crumbs li:hover + li button:before {
-          border-left-color: #515151; }
+      .crumb_wrapper .crumbs li:hover button,
+      .crumb_wrapper .crumbs li:hover span,
+      .crumb_wrapper .crumbs li:hover span:after {
+        background-color: #515151;
+        color: #FFFFFF; }
+      .crumb_wrapper .crumbs li:hover span:after,
+      .crumb_wrapper .crumbs li:hover button:after {
+        border: 1px solid #FBFBFB;
+        border-left-color: #515151;
+        border-bottom-color: #515151; }
+      .crumb_wrapper .crumbs li:hover span:before,
+      .crumb_wrapper .crumbs li:hover button:before {
+        background-color: #515151; }
+      .crumb_wrapper .crumbs li:hover + li span:before,
+      .crumb_wrapper .crumbs li:hover + li button:before {
+        border-left-color: #515151; }
       .crumb_wrapper .crumbs li button {
         background-color: transparent;
         border: 0;
@@ -20683,14 +20279,6 @@ ul.x-tab-strip-bottom {
   .icon-namespace:before {
     content: ' '; }
 
-/*.icon-propertyset {
-  background-image: url($imgPath + 'restyle/icons/property-set.png') !important;
-  @extend %hide-font-icon;
-}*/
-/*.icon-resourcegroup {
-  background: url($imgPath + 'restyle/icons/application_cascade.png') no-repeat left top !important;
-  @extend %hide-font-icon;
-}*/
 .icon-list-new {
   background-image: url("../images/restyle/icons/layout_add.png") !important;
   background-repeat: no-repeat !important;
@@ -21169,7 +20757,6 @@ ul.x-tab-strip-bottom {
   /* the window header bar */
   /* styles for a collapsed window */
   /* the window content wrapper */
-  /* .x-window-bwrap */
   /* .x-panel-bwrap */
   /* the window tab strip if available */
   /* the window form / content container */
@@ -21203,27 +20790,21 @@ ul.x-tab-strip-bottom {
       font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       font-weight: bold;
       padding: 8px;
-      text-align: center;
-      /*z-index: 3;*/ }
+      text-align: center; }
   .x-window.x-panel-collapsed .x-window-tl {
     border-bottom: 1px solid #DCDCDC; }
   .x-window.x-panel-collapsed .x-window-header {
     border-radius: 3px; }
   .x-window .x-window-bwrap {
-    /*background: $white;*/
     overflow: visible;
     /* prevent box-shadow from tabs and panel being cut off */
-    /*z-index: 2;*/
     /* the window main container */ }
     .x-window .x-window-bwrap .x-window-ml,
     .x-window .x-window-bwrap .x-window-mr {
       padding: 0; }
     .x-window .x-window-bwrap .x-window-mc {
-      /*background-color: $mainBg;*/
       border: 0;
-      /*padding: 15px;*/
-      padding: 0;
-      /*z-index: 2;*/ }
+      padding: 0; }
       .x-window .x-window-bwrap .x-window-mc .x-panel-ml,
       .x-window .x-window-bwrap .x-window-mc .x-panel-mr,
       .x-window .x-window-bwrap .x-window-mc .x-panel-mc,
@@ -21237,7 +20818,6 @@ ul.x-tab-strip-bottom {
     /* override extjs default theme transparent !important style from .x-window-plain */
     border: 0;
     /* override extjs default theme border for .x-window-plain */
-    /*overflow: visible; /* prevent box-shadow from tabs and panel being cut off */
     overflow-y: auto;
     padding: 15px; }
   .x-window.modx-window .x-window-body {
@@ -21246,16 +20826,11 @@ ul.x-tab-strip-bottom {
     padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFFFFF;
-    /*box-shadow: $boxShadow;*/
-    /*border-radius: $borderRadius;*/
-    /*overflow-y: auto; /* make the content area of normal windows scrollable, fix always visible scrollbars with auto */
-    /*padding: 10px;*/
     padding: 0;
     /* inner panel body wraps */ }
     .x-window .x-panel-bwrap .x-panel-bwrap {
       background: transparent;
       box-shadow: none;
-      /*border-radius: 0;*/
       overflow: visible;
       padding: 0; }
   .x-window .x-window-with-tabs .x-window-body {
@@ -21266,77 +20841,59 @@ ul.x-tab-strip-bottom {
   .x-window .x-window-with-tabs .x-panel-bwrap {
     background: transparent;
     box-shadow: none;
-    /*border-radius: 0;*/
     overflow: visible;
     padding: 0; }
   .x-window form.x-panel-body:first-of-type {
     overflow: visible !important;
     /* prevent box-shadow from tabs and panel being cut off */ }
-  .x-window .modx-tabs {
-    /*overflow-y: scroll;*/ }
-    .x-window .modx-tabs .x-tab-panel-header .x-tab-strip-wrap {
-      padding-top: 3px;
-      /* account for the 3px boxshadow for active tabs */ }
-      .x-window .modx-tabs .x-tab-panel-header .x-tab-strip-wrap .x-tab-strip {
-        border: 0;
-        /* override extjs default theme of 1px solid white */ }
+  .x-window .modx-tabs .x-tab-panel-header .x-tab-strip-wrap {
+    padding-top: 3px;
+    /* account for the 3px boxshadow for active tabs */ }
+    .x-window .modx-tabs .x-tab-panel-header .x-tab-strip-wrap .x-tab-strip {
+      border: 0;
+      /* override extjs default theme of 1px solid white */ }
   .x-window .x-tab-panel-bwrap {
     background: #FFFFFF;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-    /*padding: 10px 10px 6px 10px; /* take account for the 4px padding at the bottom of the last x-form-item */
     padding: 10px; }
     .x-window .x-tab-panel-bwrap .x-tab-panel-body {
       overflow-y: auto;
       /* tabs stay, content scrolls, but only show when necessary */ }
-      .x-window .x-tab-panel-bwrap .x-tab-panel-body .modx-panel {
-        /*overflow-y: scroll; /* tabs stay, content scrolls */ }
-        .x-window .x-tab-panel-bwrap .x-tab-panel-body .modx-panel .x-panel-bwrap {
-          padding: 0; }
+      .x-window .x-tab-panel-bwrap .x-tab-panel-body .modx-panel .x-panel-bwrap {
+        padding: 0; }
   .x-window .x-window-bl,
   .x-window .x-window-br {
     padding: 0; }
-  .x-window .x-window-bc {
-    /*z-index: 1;*/ }
-    .x-window .x-window-bc .x-window-footer {
-      background-color: #FFFFFF;
-      border-top: 1px solid #FFFFFF;
-      border-radius: 0 0 3px 3px;
-      box-sizing: border-box;
-      /* don't count padding in width: 100%; */
-      padding: 5px;
-      /* make sure the padding also stays when maximized */
-      width: 100% !important;
-      /* override fixed width set by extjs */ }
+  .x-window .x-window-bc .x-window-footer {
+    background-color: #FFFFFF;
+    border-top: 1px solid #FFFFFF;
+    border-radius: 0 0 3px 3px;
+    box-sizing: border-box;
+    /* don't count padding in width: 100%; */
+    padding: 5px;
+    /* make sure the padding also stays when maximized */
+    width: 100% !important;
+    /* override fixed width set by extjs */ }
   .x-window.x-window-maximized {
     margin: 0; }
     .x-window.x-window-maximized .x-window-tc {
       padding: 0; }
     .x-window.x-window-maximized .x-window-mc {
       padding: 0; }
-  .x-window.modx-console {
-    /*.x-window-body {
-      background-color: $white;
-      padding: 0;
-
-      .x-panel-bwrap {
-        box-shadow: none;
-      }
-    }*/ }
-    .x-window.modx-console .modx-console-text {
-      background-color: #FFFFFF;
-      border: none;
-      font: 12px SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      height: auto !important;
-      /* override extjs default theme */
-      /*padding: 8px;*/ }
-    .x-window.modx-console .debug {
-      color: #515151; }
-    .x-window.modx-console .success {
-      color: #6CB24A; }
-    .x-window.modx-console .warn {
-      color: #3697CD; }
-    .x-window.modx-console .error {
-      color: #CF1124; }
+  .x-window.modx-console .modx-console-text {
+    background-color: #FFFFFF;
+    border: none;
+    font: 12px SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    height: auto !important;
+    /* override extjs default theme */ }
+  .x-window.modx-console .debug {
+    color: #515151; }
+  .x-window.modx-console .success {
+    color: #6CB24A; }
+  .x-window.modx-console .warn {
+    color: #3697CD; }
+  .x-window.modx-console .error {
+    color: #CF1124; }
 
 /* .x-window */
 /* the progress bar (ex. saving a resource), usually in a window too */
@@ -21406,8 +20963,6 @@ ul.x-tab-strip-bottom {
 
 .ext-mb-content {
   display: block;
-  /*float: left;*/
-  /*margin-left: 40px !important; /* override extjs default theme style */
   margin-left: 0 !important; }
 
 /* this is the little box showing if a grid is locked, refreshing etc. */
@@ -21435,235 +20990,6 @@ ul.x-tab-strip-bottom {
 .x-mask-loading div {
   background-image: url("../images/modx-theme/grid/loading.gif"); }
 
-/*.ext-gecko .x-window-body .x-form-item {
-  overflow: hidden;
-}
-
-.x-window-tl .x-panel-icon {
-  background-position: 0 8px;
-}
-
-.x-window-dlg .x-msg-box-wait {
-  background-image: url($imgPath + 'modx-theme/grid/loading.gif');
-}
-.x-window-dlg .ext-mb-info {
-  background-image: url($imgPath + 'modx-theme/window/icon-info.gif');
-}
-.x-window-dlg .ext-mb-warning {
-  background-image: url($imgPath + 'modx-theme/window/icon-warning.gif');
-}
-.x-window-dlg .ext-mb-question {
-  background-image: url($imgPath + 'modx-theme/window/icon-question.gif');
-}
-.x-window-dlg .ext-mb-error {
-  background-image: url($imgPath + 'modx-theme/window/icon-error.gif');
-}
-
-.x-window-proxy {
-  background-color: #dcdcdc;
-  border-color: #d0d0d0;
-}
-
-.x-panel-ghost .x-window-tl {
-  border-bottom-color: #d0d0d0;
-}
-
-body.x-body-masked .x-window-plain .x-window-mc {
-  background-color: #e2e2e2;
-}
-.x-window h2 {
-  border-bottom: 1px solid #D6DFC3;
-  color: #5e5e5e;
-  font: $fontH3;
-  font-size: 18px;
-  margin: 0 0 11px;
-  padding: 8px 15px;
-  text-shadow: 0 1px 1px $white;
-}
-.x-window .x-panel-tl,
-.x-window .x-panel-ml,
-.x-window .x-panel-bl,
-.x-window .x-panel-mc,
-.x-window .x-panel-tr,
-.x-window .x-panel-mr,
-.x-window .x-panel-br {
-  background-color: $lighterGray;
-}
-
-.x-window .x-tab-strip {
-	margin-left:0;
-}
-.x-window .x-form-item label.x-form-item-label {
-  padding: 0;
-}
-.x-window .x-form-label-top .x-form-element {
-  padding-top: 0;
-}
-.x-window .x-form-cb-label {
-  color: #707070;
-  font-weight: bold;
-}
-.x-window .x-panel-mc {
-  border: 0 none;
-}
-.x-window .x-panel-ml {
-  border: 0 none;
-}
-.x-window .x-panel-bl.x-panel-nofooter,
-.x-window .x-panel-tl {
-  background-color: transparent;
-  background-image: none;
-  border: 0 none;
-  padding: 0;
-}
-.x-window .x-window-plain .x-panel-btns {
-  border-top: 0 none;
-}
-.x-window .x-window-plain .x-window-mc {
-  background-color: #f5f5f5;
-  border-color: 0 none !important;
-}
-.x-window-plain .x-window-body {
-  border: 0 none;
-}
-.x-window-body {
-  background-color: white;
-  border-bottom: 1px solid #D0D0D0;
-  border-top: 1px solid #F7F7F7;
-}
-.x-window-dlg .x-window-body {
-  background: none repeat scroll 0 0 $wildSand !important;
-  padding: 15px 15px 5px;
-}
-.x-window .x-window-bc .x-panel-btns {
-  background-color: #f7f8fa;
-  background: $alto;
-  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
-  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  border-bottom: 1px solid $alto;
-  border-top: 1px solid $white;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
-  padding: 8px;
-}
-.x-window-dlg .x-window-bc .x-panel-btns {
-  border-top: 0 none;
-}
-.x-window .x-window-bc .x-window-footer {
-  margin-bottom: 0;
-}
-.x-window .x-window-proxy {
-  background-color: #dcdcdc;
-  border-color: $alto;
-}
-.x-window .x-window-tl {
-  background-color: $white;
-  background-image: none;
-  border-radius: 3px 3px 0 0;
-  overflow: hidden;
-  padding-left: 0;
-}
-.x-window .x-window-tl .x-window-header {
-  background: #d0d0d0;
-  background: -moz-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  background: -o-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #d0d0d0));
-  background: -webkit-linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  background: linear-gradient(center bottom, #d0d0d0 0%, #eeeeee 100%);
-  border-bottom: 1px solid #ababab;
-  border-radius: 3px 3px 0 0;
-  color: #5e5e5e;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#d0d0d0,GradientType=0);
-  margin-top: 0;
-  padding: 8px;
-  text-align: center;
-  text-shadow: 0 1px 0 $white;
-}
-.x-window .x-window-bl {
-  background-color: $white;
-  background-image: none;
-  border-radius: 0 0 3px 3px;
-  overflow: hidden;
-  padding-left: 0;
-}
-.x-window .x-panel-nofooter {
-  background-color: #f7f8fa;
-  background: $alto;
-  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
-  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  border-bottom: 1px solid $alto;
-  border-top: 1px solid $white;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
-}
-.x-window .x-window-header-text {
-  color: #666666;
-}
-.x-window .x-window-dlg .ext-mb-text {
-  font-size: 12px;
-}
-.x-window .x-window-dlg .x-window-header-text {
-  font-size: 14px;
-}
-.x-window .x-window-dlg .x-window-body {
-  padding: 15px;
-}
-.x-window .x-window-dlg .x-panel-btns {
-  border-top: 0 none;
-}
-.x-window .x-window-tc,
-.x-window .x-window-bc {
-  background-image: none;
-}
-.x-window .x-window-tr,
-.x-window .x-window-br,
-.x-window .x-window-mr {
-  background-image: none;
-  padding-right: 0;
-}
-.x-window .x-window-tl,
-.x-window .x-window-ml {
-  background-image: none;
-  padding-left: 0;
-}
-.x-window .x-window-mc {
-  background-color: $white;
-  border-radius: 0 0  3px 3px;
-  border: 0 none;
-}
-.x-window .x-window-maximized .x-window-tc {
-  background-color: $white;
-}
-.x-window .x-window-bbar .x-toolbar,
-.x-window .x-window-bbar-noborder .x-toolbar {
-  background-color: #f7f8fa;
-  background: #d5dade;
-  background: -moz-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: -o-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eff0f4), color-stop(100%, #d5dade));
-  background: -webkit-linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  background: linear-gradient(center bottom, #d5dade 0%, #eff0f4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff0f4,endColorstr=#d5dade,GradientType=0);
-  border-radius: 0 0 3px 3px;
-  border-bottom: 0 none;
-  border-top: 1px solid #d4d9df;
-  padding: 8px;
-}
-.x-window .x-dlg-mask {
-  background-color: $silver;
-}
-.x-window-maximized .x-window-tc {
-  padding-left: 0;
-  padding-right: 0;
-}*/
 /* dashboard stuff */
 .dashboard {
   display: -ms-flexbox;
@@ -22124,7 +21450,6 @@ body.x-body-masked .x-window-plain .x-window-mc {
     padding: 0.4em;
     width: 70%; }
   #contactus input[type=submit] {
-    /*background: none;*/
     border: 0;
     cursor: pointer;
     font-size: 1.1em;
@@ -23167,9 +22492,6 @@ a.x-grid-link:focus {
 iframe[classname="x-hidden"] {
   visibility: hidden; }
 
-/*.modx-property-description {
-    padding: 8px 11px 3px;
-}*/
 /* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
   background: url("../images/restyle/fileup/file-add.gif") no-repeat left center !important; }
@@ -23213,21 +22535,6 @@ iframe[classname="x-hidden"] {
 .ext-ux-uploaddialog-state-3 {
   background-image: url("../images/restyle/fileup/file-uploading.gif"); }
 
-/* no more IE7 support */
-/*.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-bar .x-progress-text div {
-  display: none;
-}
-
-.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back {
-  left: 0;
-  position: absolute;
-  right: 0;
-}
-
-.ext-ie7 .ext-ux-uploaddialog-dialog .x-progress-text-back div {
-  white-space: nowrap;
-  width: auto !important;
-}*/
 /* tree grid */
 .tq-treegrid .tq-treegrid-col {
   border: none; }
@@ -23253,9 +22560,6 @@ iframe[classname="x-hidden"] {
   padding: 3px;
   white-space: pre-line; }
 
-/*.modx-policy-permissions-grid td {
-    cursor: pointer;
-}*/
 #modx-grid-policy-permissions .x-grid3-cell-inner,
 #modx-grid-policy-permissions .x-grid3-hd-inner,
 #modx-grid-template-permissions .x-grid3-cell-inner,
@@ -23311,30 +22615,6 @@ iframe[classname="x-hidden"] {
 .panel-desc p {
   padding: 0; }
 
-/* description panels in windows are styled by panel-desc styles, they seem to always have this class */
-/*.win-desc {
-  background: $alto;
-  background: -moz-linear-gradient(center bottom, $alto 0%, $wildSand 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -o-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $wildSand), color-stop(100%, $alto));
-  background: -webkit-linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  background: linear-gradient(center bottom, $alto 0%, $wildSand 100%);
-  border-bottom: 1px solid $silver !important;
-  border: 0 none;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$wildSand,endColorstr=$alto,GradientType=0);
-  margin-top: 0;
-  padding: 10px 0 0 !important;
-}
-
-.win-desc p {
-  color: #555;
-  font-size: 13px;
-  font-style: italic;
-  line-height: 1.4;
-  padding: 0 10px 10px;
-  text-shadow: 0 1px 0 $white
-}*/
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
   background-color: #FFFFFF;
@@ -23468,20 +22748,6 @@ iframe[classname="x-hidden"] {
     #modx-resource-settings .x-datetime-wrap table .x-form-field-trigger-wrap {
       width: 100% !important; }
 
-/*
-#modx-resource-settings .modx-tv-label,
-#modx-page-settings .modx-tv-label {
-  width: 216px;
-}
-*/
-/*.modx-tv .x-form-check-wrap {
-  line-height: 14px !important;
-}
-
-.modx-tv .x-form-cb-label {
-  font-weight: normal;
-  top: 0;
-}*/
 .tvs-wrapper {
   padding: 0; }
 
@@ -23694,7 +22960,6 @@ iframe[classname="x-hidden"] {
   text-decoration: none; }
 
 .home-panel ol li:hover button {
-  /*background: transparent url($imgPath + 'style/search.png') no-repeat scroll right center;*/
   color: #234368; }
   .home-panel ol li:hover button:before {
     content: "\f002";
@@ -23772,9 +23037,6 @@ iframe[classname="x-hidden"] {
   filter: alpha(opacity=50);
   /* for IE <= 8 */ }
 
-/*#package-browser-card-container {
-  margin: 0;
-}*/
 .one_half {
   float: left;
   margin-right: 3%;
@@ -23802,7 +23064,6 @@ iframe[classname="x-hidden"] {
 
 .aside-details {
   background-color: transparent;
-  /*background-color: #FDFDFD;*/
   border: 1px solid #E4E4E4;
   border-radius: 3px;
   margin-right: 0; }

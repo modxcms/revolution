@@ -1,19 +1,3 @@
-/*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
-
-/*.x-item-disabled {
-  color: gray;
-}
-
-.x-item-disabled * {
-  color: gray !important;
-}*/
 
 .x-splitbar-proxy {
   background-color: #aaa;
@@ -32,23 +16,6 @@
 .x-color-palette em {
   border-color: #aca899;
 }
-
-/* no more extjs shadows in 2.3 */
-/*.x-ie-shadow {
-  background-color: #777;
-}
-
-.x-shadow .xsmc {
-  background-image: none;
-}
-
-.x-shadow .xsml, .x-shadow .xsmr {
-  background-image: none;
-}
-
-.x-shadow .xstl, .x-shadow .xstc,  .x-shadow .xstr, .x-shadow .xsbl, .x-shadow .xsbc, .x-shadow .xsbr {
-  background-image: none;
-}*/
 
 .loading-indicator {
   background-image: url($imgPath + 'modx-theme/grid/loading.gif');
@@ -205,7 +172,6 @@
 .x-grid3-row-over {
   background-color: #E0E8EF;
   background-image: none;
-  /*border: 0 none;*/
   border-bottom: 1px solid #D1D9DF;
 }
 
@@ -530,48 +496,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   }
 }
 
-/*
-.x-grid3-check-col-td {
-  vertical-align: middle !important;
-}
-.x-grid3-check-col, .x-grid3-check-col-on {
-  height: 2em;
-  position: relative;
-  cursor: pointer;
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    height: 1.5em;
-    transition: all .2s ease;
-  }
-  &:before {
-    left: 0;
-    top: 0;
-    width: 3em;
-    border: 2px solid $lightGray;
-    background: $lightGray;
-    border-radius: 1.1em;
-    z-index: 10;
-  }
-  &:after {
-    left: .15em;
-    top: .125em;
-    background-color: $white
-    border-radius: 50%;
-    width: 1.5em;
-    z-index: 11;
-  }
-}
-.x-grid3-check-col-on {
-  &:after {
-    left: 1.65em;
-  }
-  &:before {
-    background-color: $green;
-    border-color: $green;
-  }
-}
-*/
 .x-grid-group,
 .x-grid-group-body,
 .x-grid-group-hd {
@@ -939,7 +863,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 }
 
 .x-panel-body {
-  /*background-color: $white*/
   border: 0;
   border-radius: $borderRadius;
   overflow: visible;
@@ -966,7 +889,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   color: #6A6A6A;
   font: $fontMedium;
   font-weight: bold;
-  /*text-shadow: 0 1px 0 $alabastersolid;*/
 }
 
 .x-panel-tl .x-panel-icon {
@@ -1011,7 +933,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-panel-btns {
   background-color: transparent;
   padding: 15px 0 1px 0; /* override extjs default theme rule, padding bottom 1px to not cut off buttons box-shadow */
-  /*border-top: 1px solid $alabastersolid;*/
 
   td.x-toolbar-cell {
     padding: 0; /* override extjs default theme rule */
@@ -1232,104 +1153,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   }
 }
 
-/*.x-tool {
-  background-image: url($imgPath + 'modx-theme/panel/tool-sprites.png');
-  height: 16px;
-  margin: 1px 2px 0 0;
-  width: 16px;
-}
-.x-tool-toggle, .x-accordion-hd .x-tool-toggle {
-  background-position: left -48px;
-}
-.x-tool-toggle-over, .x-accordion-hd .x-tool-toggle-over {
-  background-position: right -48px;
-}
-.x-panel-collapsed .x-tool-toggle {
-  background-position: left -96px;
-}
-.x-panel-collapsed .x-tool-toggle-over {
-  background-position: right -96px;
-}
-.x-tool-close {
-  background-position: left 0;
-}
-.x-tool-close-over {
-  background-position: right 0;
-}
-.x-tool-minimize {
-  background-position: left -16px;
-}
-.x-tool-minimize-over {
-  background-position: right -16px;
-}
-.x-tool-maximize {
-  background-position: left -32px;
-}
-.x-tool-maximize-over {
-  background-position: right -32px;
-}
-.x-tool-restore {
-  background-position: left -112px;
-}
-.x-tool-restore-over {
-  background-position: right -112px;
-}
-.x-tool-gear {
-  background-position: left -200px;
-}
-.x-tool-gear-over {
-  background-position: right -200px;
-}
-.x-tool-pin {
-  background-position: left -200px;
-}
-.x-tool-pin-over {
-  background-position: right -200px;
-}
-.x-tool-unpin {
-  background-position: left -200px;
-}
-.x-tool-unpin-over {
-  background-position: right -200px;
-}
-.x-tool-right, .x-tool-expand-west {
-  background-position: left -80px;
-}
-.x-tool-right-over, .x-tool-expand-west-over {
-  background-position: right -80px;
-}
-.x-tool-left, .x-tool-expand-east {
-  background-position: left -64px;
-}
-.x-tool-left-over, .x-tool-expand-east-over {
-  background-position: right -64px;
-}
-.x-tool-up {
-  background-position: left -48px;
-}
-.x-tool-up-over {
-  background-position: right -48px;
-}
-.x-tool-down {
-  background-position: left -96px;
-}
-.x-tool-down-over {
-  background-position: right -96px;
-}
-.x-tool-minus {
-  background-position: left -224px;
-}
-.x-tool-minus-over {
-  background-position: right -224px;
-}
-.x-tool-plus {
-  background-position: left -208px;
-}
-.x-tool-plus-over {
-  background-position: right -208px;
-}
-.x-panel-collapsed {
-}*/
 .x-panel-dd-spacer {
   border-color: $alto;
 }
@@ -1345,23 +1168,11 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-panel-header {
   border-radius: $borderRadius $borderRadius 0 0;
-  /*background: #dddddd;
-  background: -moz-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%) repeat scroll 0 0 transparent;
-  background: -ms-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  background: -o-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #dddddd));
-  background: -webkit-linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  background: linear-gradient(center bottom, #dddddd 0%, #eeeeee 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eeeeee,endColorstr=#dddddd,GradientType=0);
-  border-bottom: 1px solid #dddddd;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;*/
   border: 1px solid #c0c0c0;
   font-size: 14px;
   font-weight: bold;
   margin-top: 0;
   padding: 10px 10px 8px;
-  /*text-shadow: 0 1px 1px $white;*/
 }
 
 .x-portal-space {
