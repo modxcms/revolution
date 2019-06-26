@@ -143,7 +143,7 @@ class modRestClient {
         $this->host = $host;
         $response = $this->conn->request($this->host,$path,$method,$params,$options);
 
-        $responseClass = $this->modx->getOption(modRestClient::OPT_RESPONSE_CLASS,$this->config,'modRestResponse');
+        $responseClass = $this->modx->getOption(modRestClient::OPT_RESPONSE_CLASS, $this->config, modRestResponse::class);
         $this->response = new $responseClass($this,$response,$this->responseType);
 
         return $this->response;
