@@ -14,6 +14,7 @@ use MODX\Revolution\modNamespace;
 use MODX\Revolution\modObjectGetListProcessor;
 use MODX\Revolution\modSystemSetting;
 use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
 
 /**
  * Get a list of system settings
@@ -62,12 +63,13 @@ class GetList extends modObjectGetListProcessor
         $key = $this->getProperty('key', false);
         $data = [];
 
+        /** @var xPDOQuery $criteria */
         $criteria = $this->prepareCriteria();
         if (!empty($key)) {
             $criteria[] = [
-                $this->classKey . '.key:LIKE' => '%' . $key . '%',
+                $criteria->getAlias() . '.key:LIKE' => '%' . $key . '%',
                 'OR:Entry.value:LIKE' => '%' . $key . '%',
-                'OR:' . $this->classKey . '.value:LIKE' => '%' . $key . '%',
+                'OR:' . $criteria->getAlias() . '.value:LIKE' => '%' . $key . '%',
                 'OR:Description.value:LIKE' => '%' . $key . '%',
             ];
         }
