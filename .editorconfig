@@ -10,6 +10,9 @@ indent_style = space
 tab_width = 4
 max_line_length = off
 
+[**.scss]
+tab_width = 2
+
 [**.js]
 tab_width = 4
 
