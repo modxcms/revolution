@@ -120,4 +120,22 @@ $install->settings->store(array(
     'database_collation' => $data['collation'],
 ));
 
+/* test table prefix */
+$count = null;
+$database = $install->settings->get('dbase');
+$prefix = $install->settings->get('table_prefix');
+$stmt = $xpdo->query($install->driver->testTablePrefix($database,$prefix));
+if ($stmt) {
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+        $count = (integer) $row['ct'];
+    }
+    $stmt->closeCursor();
+}
+if ($mode === modInstall::MODE_NEW && $count !== null) {
+    $this->error->failure($install->lexicon('test_table_prefix_inuse'), $errors);
+} elseif (($mode === modInstall::MODE_UPGRADE_REVO || $mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) && $count === null) {
+    $this->error->failure($install->lexicon('test_table_prefix_nf'), $errors);
+}
+
 $this->error->success($install->lexicon('db_success'), $data);
