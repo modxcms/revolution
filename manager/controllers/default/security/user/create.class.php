@@ -9,6 +9,7 @@
  */
 
 use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
 
 /**
  * Loads the create user page
@@ -16,8 +17,10 @@ use MODX\Revolution\modManagerController;
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityUserCreateManagerController extends modManagerController {
+class SecurityUserCreateManagerController extends modManagerController
+{
     public $onUserFormRender;
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool

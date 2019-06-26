@@ -9,6 +9,7 @@
  */
 
 use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
 
 /**
  * Loads update user page
