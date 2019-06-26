@@ -730,6 +730,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,uploadFiles: function() {
         this.uploader.setBaseParams({source: this.getSource()});
+        this.uploader.browser = MODx.config.browserview;
         this.uploader.show();
     }
 

@@ -86,8 +86,9 @@ MODx.browser.View = function(config) {
                     this.lazyLoad();
                 }, this);
                 if (this.tree != undefined && this.tree.uploader != undefined) {
-                    this.tree.uploader.addDropZone(this.ownerCt);
+                    this.tree.uploader.addDropZone(this.ownerCt, this);
                 }
+                MODx.config.browserview = this;
             }, scope: this}
         }
         ,prepareData: this.formatData.createDelegate(this)
@@ -233,22 +234,24 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             text: _('file_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/remove_multiple'
-                ,files: Ext.util.JSON.encode(files)
+                action: 'browser/file/remove'
+                ,file: files.pop()
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
-                'success': {fn:function(r) {
-                    if (this.config.tree) {
-                        if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
-                            this.config.tree.refreshParentNode();
-                        } else {
-                            this.config.tree.refresh();
+                'success': {
+                    fn: function (r) {
+                        if (this.config.tree) {
+                            if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
+                                this.config.tree.refreshParentNode();
+                            } else {
+                                this.config.tree.refresh();
+                            }
                         }
-                    }
-                    this.run();
-                },scope:this}
+                        this.run();
+                    }, scope: this
+                }
             }
         });
     }
