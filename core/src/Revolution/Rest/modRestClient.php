@@ -89,7 +89,6 @@ class modRestClient {
      *
      * @param modX &$modx A reference to the modX instance.
      * @param array $config An array of configuration options.
-     * @return modRestClient
      */
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
@@ -112,9 +111,9 @@ class modRestClient {
     public function getConnection() {
         $className = false;
         if (function_exists('curl_init')) {
-            $className = $this->modx->loadClass('rest.modRestCurlClient','',false,true);
+            $className = modRestCurlClient::class;
         } else if (function_exists('fsockopen')) {
-            $className = $this->modx->loadClass('rest.modRestSockClient','',false,true);
+            $className = modRestSockClient::class;
         }
 
         if (!empty($className)) {

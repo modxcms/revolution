@@ -644,15 +644,13 @@ class modTransportPackage extends xPDOObject
         switch (strtolower($package)) {
             case 'php':
                 /* you must resolve php dependencies manually */
-                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "PHP version dependencies must be resolved manually", '',
-                    __METHOD__, __FILE__, __LINE__);
+                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "PHP version dependencies must be resolved manually", '', __METHOD__, __FILE__, __LINE__);
                 break;
             case 'modx':
             case 'revo':
             case 'revolution':
                 /* resolve core dependencies manually for now */
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "MODX core version dependencies must be resolved manually", '',
-                    __METHOD__, __FILE__, __LINE__);
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "MODX core version dependencies must be resolved manually", '', __METHOD__, __FILE__, __LINE__);
                 break;
             default:
                 /* TODO: scan for local packages to satisfy dependency */
@@ -665,10 +663,10 @@ class modTransportPackage extends xPDOObject
                 }
                 /* loop through active providers if all else fails */
                 if (empty($resolution)) {
-                    $query = $this->xpdo->newQuery('transport.modTransportProvider', $conditions);
+                    $query = $this->xpdo->newQuery(modTransportProvider::class, $conditions);
                     $query->sortby('priority', 'ASC');
                     /** @var modTransportProvider $p */
-                    foreach ($this->xpdo->getIterator('transport.modTransportProvider', $query) as $p) {
+                    foreach ($this->xpdo->getIterator(modTransportProvider::class, $query) as $p) {
                         $resolution = $p->latest($package, $constraint);
                         if ($resolution) {
                             $provider = $p;
@@ -677,9 +675,7 @@ class modTransportPackage extends xPDOObject
                     }
                 }
                 if (empty($resolution)) {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                        "Could not find package to satisfy dependency {$package} @ {$constraint} from your currently active providers",
-                        '', __METHOD__, __FILE__, __LINE__);
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not find package to satisfy dependency {$package} @ {$constraint} from your currently active providers", '', __METHOD__, __FILE__, __LINE__);
                 }
                 break;
         }
