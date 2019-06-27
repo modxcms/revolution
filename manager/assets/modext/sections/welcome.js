@@ -28,21 +28,21 @@ MODx.loadWelcomePanel = function(url) {
         ,modal: true
         ,layout: 'fit'
         ,items: [{
-            xtype: 'container',
-            layout: {
-                type: 'vbox',
-                align: 'stretch'
-            },
-            width: '100%',
-            height: '100%',
-            items: [{
+            xtype: 'container'
+            ,layout: {
+                type: 'vbox'
+                ,align: 'stretch'
+            }
+            ,width: '100%'
+            ,height: '100%'
+            ,items: [{
                 autoEl: {
-                    tag: 'iframe',
-                    src: url,
-                    width: '100%',
-                    height: '100%',
-                    frameBorder	: 0,
-                    onload: 'parent.MODx.helpWindow.getEl().unmask();'
+                    tag: 'iframe'
+                    ,src: url
+                    ,width: '100%'
+                    ,height: '100%'
+                    ,frameBorder	: 0
+                    ,onload: 'parent.MODx.helpWindow.getEl().unmask();'
                 }
             }]
         }]
