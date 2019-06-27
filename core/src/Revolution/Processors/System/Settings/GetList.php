@@ -67,9 +67,9 @@ class GetList extends modObjectGetListProcessor
         $criteria = $this->prepareCriteria();
         if (!empty($key)) {
             $criteria[] = [
-                $criteria->getAlias() . '.key:LIKE' => '%' . $key . '%',
+                $this->modx->getAlias($this->classKey) . '.key:LIKE' => '%' . $key . '%',
                 'OR:Entry.value:LIKE' => '%' . $key . '%',
-                'OR:' . $criteria->getAlias() . '.value:LIKE' => '%' . $key . '%',
+                'OR:' . $this->modx->getAlias($this->classKey) . '.value:LIKE' => '%' . $key . '%',
                 'OR:Description.value:LIKE' => '%' . $key . '%',
             ];
         }
