@@ -41,7 +41,7 @@ MODx.loadWelcomePanel = function(url) {
                     ,src: url
                     ,width: '100%'
                     ,height: '100%'
-                    ,frameBorder	: 0
+                    ,frameBorder: 0
                     ,onload: 'parent.MODx.helpWindow.getEl().unmask();'
                 }
             }]
