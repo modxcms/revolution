@@ -43,7 +43,7 @@ class modInstallRunnerWeb extends modInstallRunner {
             case modInstall::MODE_UPGRADE_REVO_ADVANCED :
                 $this->loadVersionInstaller();
 
-                if (version_compare($this->versioner->version, '2.6.0', '>=')) {
+                if (version_compare($this->versioner->version, '2.6.0', '<')) {
                     $this->addResult(modInstallRunner::RESULT_FAILURE, '<p class="notok">' . $this->install->lexicon('upgrade_unsupported_version', ['version' => $this->versioner->version]) . '</p>');
                     return $this->getResults();
                 }
