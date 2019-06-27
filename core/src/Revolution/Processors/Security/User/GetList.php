@@ -33,6 +33,8 @@ class GetList extends modObjectGetListProcessor
     public $permission = 'view_user';
     public $defaultSortField = 'username';
 
+    private $className;
+
     /**
      * @return bool
      */
@@ -47,7 +49,7 @@ class GetList extends modObjectGetListProcessor
             $this->setProperty('sort', 'username');
         }
         if ($this->getProperty('sort') === 'id') {
-            $this->setProperty('sort', $this->classKey . '.id');
+            $this->setProperty('sort', $this->getShortClassName() . '.id');
         }
         return $initialized;
     }
@@ -63,14 +65,14 @@ class GetList extends modObjectGetListProcessor
         $queryChunks = explode(':', $this->getProperty('query', ''));
         if (count($queryChunks) === 2) {
             list($field, $query) = $queryChunks;
-            if (in_array($field, array_keys($this->modx->getFields(modUserProfile::class)))) {
+            if (array_key_exists($field, $this->modx->getFields(modUserProfile::class))) {
                 $c->where(["Profile.$field:LIKE" => '%' . $query . '%']);
             }
         } else {
             $query = current($queryChunks);
             if (!empty($query)) {
                 $c->where([
-                    $this->classKey . '.username:LIKE' => '%' . $query . '%',
+                    $this->getShortClassName() . '.username:LIKE' => '%' . $query . '%',
                     'Profile.fullname:LIKE' => '%' . $query . '%',
                     'Profile.email:LIKE' => '%' . $query . '%'
                 ], xPDOQuery::SQL_OR);
@@ -102,7 +104,7 @@ class GetList extends modObjectGetListProcessor
 
         $id = $this->getProperty('id', 0);
         if (!empty($id)) {
-            $c->where([$this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id]);
+            $c->where([$this->getShortClassName() . '.id:IN' => is_string($id) ? explode(',', $id) : $id]);
         }
 
         return $c;
@@ -121,5 +123,21 @@ class GetList extends modObjectGetListProcessor
         unset($objectArray['password'], $objectArray['cachepwd'], $objectArray['salt']);
 
         return $objectArray;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    private function getShortClassName()
+    {
+        $namespaceSegments = explode('\\', $this->classKey);
+
+        if (!$this->className) {
+            $this->className = array_pop($namespaceSegments);
+        }
+
+        return $this->className;
+
     }
 }
