@@ -54,9 +54,9 @@ class GetNodes extends modObjectGetListProcessor
     {
         $c->leftJoin($this->classKey, 'Children');
         $c->where([
-            $this->classKey . '.parent' => $this->getProperty('id'),
+            $c->getAlias() . '.parent' => $this->getProperty('id'),
         ]);
-        $c->groupby($this->classKey . '.text');
+        $c->groupby($c->getAlias() . '.text');
 
         return parent::prepareQueryBeforeCount($c);
     }

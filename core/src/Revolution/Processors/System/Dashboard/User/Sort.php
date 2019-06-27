@@ -66,7 +66,7 @@ class Sort extends modObjectUpdateProcessor
         if ($from < $to) {
             $where['rank:<='] = $to;
             if ($from !== 0) {
-                $where[] = ["`{$this->classKey}`.`rank` > {$from} AND `{$this->classKey}`.`rank` > 0"];
+                $where[] = ["`{$this->modx->getAlias($this->classKey)}`.`rank` > {$from} AND `{$this->modx->getAlias($this->classKey)}`.`rank` > 0"];
             } else {
                 $where['rank:>'] = $from;
             }

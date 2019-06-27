@@ -50,7 +50,7 @@ class GetList extends modObjectGetListProcessor
             'User.id' => $this->getProperty('user'),
         ]);
         $c->where(['modUserGroupMember.member' => $this->getProperty('user')]);
-        
+
         return $c;
     }
 
@@ -68,7 +68,7 @@ class GetList extends modObjectGetListProcessor
         $id = $this->getProperty('id', 0);
         if (!empty($id)) {
             $c->where([
-                $this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+                $c->getAlias() . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
             ]);
         }
 

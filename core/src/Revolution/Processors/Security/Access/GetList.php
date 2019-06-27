@@ -61,7 +61,7 @@ class GetList extends modObjectGetListProcessor
      */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey));
+        $c->select($this->modx->getSelectColumns($this->classKey, $c->getAlias()));
 
         if ($this->getProperty('target')) {
             $c->where(['target' => $this->getProperty('target')]);

@@ -63,7 +63,7 @@ class GetList extends modObjectGetListProcessor
         $username = $this->getProperty('username', '');
         if (!empty($username)) {
             $c->where([
-                $this->classKey . '.username:LIKE' => '%' . $username . '%',
+                $c->getAlias() . '.username:LIKE' => '%' . $username . '%',
             ]);
         }
 
@@ -76,7 +76,7 @@ class GetList extends modObjectGetListProcessor
      */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
-        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey));
+        $c->select($this->modx->getSelectColumns($this->classKey, $c->getAlias()));
         $c->select([
             'usergroup' => 'UserGroup.id',
             'usergroup_name' => 'UserGroup.name',
@@ -99,7 +99,7 @@ class GetList extends modObjectGetListProcessor
     {
         $objectArray = $object->toArray();
         $objectArray['role_name'] .= ' - ' . $objectArray['authority'];
-        
+
         return $objectArray;
     }
 }

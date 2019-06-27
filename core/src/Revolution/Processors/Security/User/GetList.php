@@ -47,7 +47,7 @@ class GetList extends modObjectGetListProcessor
             $this->setProperty('sort', 'username');
         }
         if ($this->getProperty('sort') === 'id') {
-            $this->setProperty('sort', $this->classKey . '.id');
+            $this->setProperty('sort', $this->modx->getAlias($this->classKey) . '.id');
         }
         return $initialized;
     }
@@ -70,7 +70,7 @@ class GetList extends modObjectGetListProcessor
             $query = current($queryChunks);
             if (!empty($query)) {
                 $c->where([
-                    $this->classKey . '.username:LIKE' => '%' . $query . '%',
+                    $c->getAlias() . '.username:LIKE' => '%' . $query . '%',
                     'Profile.fullname:LIKE' => '%' . $query . '%',
                     'Profile.email:LIKE' => '%' . $query . '%'
                 ], xPDOQuery::SQL_OR);
@@ -102,7 +102,7 @@ class GetList extends modObjectGetListProcessor
 
         $id = $this->getProperty('id', 0);
         if (!empty($id)) {
-            $c->where([$this->classKey . '.id:IN' => is_string($id) ? explode(',', $id) : $id]);
+            $c->where([$c->getAlias() . '.id:IN' => is_string($id) ? explode(',', $id) : $id]);
         }
 
         return $c;

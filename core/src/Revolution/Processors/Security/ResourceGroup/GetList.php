@@ -39,7 +39,7 @@ class GetList extends modObjectGetListProcessor
 
         if (!empty($key)) {
             $c->where([
-                $this->classKey . '.id:IN' => is_string($key) ? explode(',', $key) : $key,
+                $c->getAlias() . '.id:IN' => is_string($key) ? explode(',', $key) : $key,
             ]);
         }
 

@@ -78,9 +78,9 @@ class GetList extends modObjectGetListProcessor
     {
         $c = $this->modx->newQuery($this->classKey);
         $c->leftJoin($this->classKey, 'Children');
-        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', ['id', 'context_key']));
+        $c->select($this->modx->getSelectColumns($this->classKey, $c->getAlias(), '', ['id', 'context_key']));
         $c->where([
-            $this->classKey . '.deleted' => true
+            $c->getAlias() . '.deleted' => true
         ]);
         if ($c->prepare() && $c->stmt->execute()) {
             $resources = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
