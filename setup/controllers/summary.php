@@ -12,9 +12,8 @@
  * @var modInstall $install
  * @var modInstallParser $parser
  * @var modInstallRequest $this
- *
- * @package setup
  */
+
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
     $install->settings->store($_POST);
@@ -23,23 +22,24 @@ if (!empty($_POST['proceed'])) {
 
 $mode = $install->settings->get('installmode');
 $results= $install->test($mode);
-$parser->set('test', $results);
 
-$failed= false;
+$failed = false;
 foreach ($results as $item) {
     if (isset($item['class']) && $item['class'] === 'testFailed') {
-        $failed= true;
+        $failed = true;
         break;
     }
 }
 
-if ($mode == modInstall::MODE_UPGRADE_REVO) {
+if ($mode === modInstall::MODE_UPGRADE_REVO) {
     $back = 'options';
 } else {
-    $back = MODX_SETUP_KEY == '@traditional@' ? 'database' : 'contexts';
+    $back = MODX_SETUP_KEY === '@traditional@' ? 'database' : 'contexts';
 }
 
+$parser->set('test', $results);
 $parser->set('failed', $failed);
 $parser->set('testClass', $failed ? 'error' : 'success');
-$parser->set('back',$back);
+$parser->set('back', $back);
+
 return $parser->render('summary.tpl');

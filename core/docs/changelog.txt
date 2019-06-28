@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Setup redesign [#14507]
 - Add widget welcome dashboard changes [#14607]
 - Media browser reload [#14570]
 - Fixed bug for checking the table prefix while installing MODX [#14543]

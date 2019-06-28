@@ -1,5 +1,5 @@
 <form id="install" action="?action=complete" method="post">
-<div>
+<div class="setup_body">
 	<h2>{$_lang.thank_installing}{$app_name}.</h2>
 
     {if $errors}
@@ -13,13 +13,15 @@
     {/if}
 	<p>{$_lang.please_select_login}</p>
 </div>
-<br />
 
-<div class="setup_navbar">
-    <label><input type="submit" id="modx-next" name="proceed" value="{$_lang.login}" autofocus="autofocus" /></label>
-    <br /><br />
+<div class="setup_navbar complete">
+    <label>
+        <input type="submit" id="modx-next" class="button" name="proceed" value="{$_lang.login}" autofocus="autofocus">
+    </label>
+    <br />
     <span class="cleanup">
-        <label><input type="checkbox" value="1" id="cleanup" name="cleanup"{if $cleanup} checked="checked"{/if} /> {$_lang.delete_setup_dir}</label>
+        <input type="checkbox" value="1" id="cleanup" name="cleanup"{if $cleanup} checked="checked"{/if} />
+        <label for="cleanup"><span class="cleanup_text">{$_lang.delete_setup_dir}</span></label>
     </span>
 </div>
 </form>

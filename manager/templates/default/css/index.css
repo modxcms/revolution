@@ -13433,7 +13433,7 @@ readers do not read off random characters that represent icons */
   background-color: #aaa; }
 
 .x-color-palette a {
-  border-color: #FFFFFF; }
+  border-color: #FFF; }
 
 .x-color-palette a:hover,
 .x-color-palette a.x-color-palette-sel {
@@ -13457,7 +13457,7 @@ readers do not read off random characters that represent icons */
   background-image: url("../images/modx-theme/grid/loading.gif"); }
 
 .x-statusbar .x-status-text-panel {
-  border-color: #DFDFDF #FFFFFF #FFFFFF #DFDFDF; }
+  border-color: #DFDFDF #FFF #FFF #DFDFDF; }
 
 .x-resizable-handle-southeast {
   bottom: 1px;
@@ -13499,7 +13499,7 @@ readers do not read off random characters that represent icons */
   border-color: #575757; }
 
 .x-resizable-overlay {
-  background-color: #FFFFFF; }
+  background-color: #FFF; }
 
 .x-grid3 {
   background-color: transparent;
@@ -13523,7 +13523,7 @@ readers do not read off random characters that represent icons */
   padding-left: 0; }
 
 .x-grid3-hd-row td {
-  border-left: 1px solid #FFFFFF;
+  border-left: 1px solid #FFF;
   border-right: none; }
 
 .x-grid3-hd-row td.x-grid3-cell-first,
@@ -13537,11 +13537,11 @@ readers do not read off random characters that represent icons */
   border-right: 0 none; }
 
 .x-grid-row-loading {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   background-image: url("../images/modx-theme/shared/loading-balls.gif"); }
 
 .x-grid3-row {
-  border-color: #FFFFFF #FFFFFF #EFEFEF; }
+  border-color: #FFF #FFF #EFEFEF; }
 
 .x-grid3-row-expanded .x-grid3-row-body {
   color: #888888;
@@ -13577,7 +13577,7 @@ readers do not read off random characters that represent icons */
   background-color: #777; }
 
 .x-grid3-header {
-  background: #FFFFFF;
+  background: #FFF;
   border-bottom: 1px solid #E4E9EE !important;
   padding: 0; }
 
@@ -13602,8 +13602,8 @@ td.x-grid3-hd-over,
 td.sort-desc,
 td.sort-asc,
 td.x-grid3-hd-menu-open {
-  border-left-color: #FFFFFF;
-  background: #FFFFFF; }
+  border-left-color: #FFF;
+  background: #FFF; }
 
 td.x-grid3-hd-over .x-grid3-hd-inner,
 td.sort-desc .x-grid3-hd-inner,
@@ -13618,7 +13618,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: url("../images/modx-theme/grid/sort_desc.gif"); }
 
 .x-panel-body-noheader .x-grid3-body {
-  background-color: #FFFFFF; }
+  background-color: #FFF; }
 
 .x-grid3-cell-text,
 .x-grid3-hd-text {
@@ -13667,7 +13667,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-color: #d7d9df !important;
   background-image: url("../images/modx-theme/grid/grid-hrow.gif") !important;
   border-right-color: #9c9c9c !important;
-  border-top-color: #FFFFFF;
+  border-top-color: #FFF;
   color: #515151; }
 
 .x-grid3-locked td.x-grid3-row-marker div,
@@ -13700,7 +13700,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   padding: 13px 18px 13px 5px; }
 
 .x-props-grid .x-grid3-body .x-grid3-td-name {
-  background-color: #FFFFFF !important;
+  background-color: #FFF !important;
   border-right-color: #EEEEEE; }
 
 .xg-hmenu-sort-asc .x-menu-item-icon {
@@ -13716,7 +13716,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: url("../images/modx-theme/grid/hmenu-unlock.gif"); }
 
 .x-grid3-hd-btn {
-  background-color: #FFFFFF; }
+  background-color: #FFF; }
 
 .x-grid3-hd-btn:before {
   content: "\f0d7";
@@ -13731,7 +13731,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   right: 0; }
 
 .x-grid3-hd-btn:hover {
-  background-color: #FFFFFF; }
+  background-color: #FFF; }
 
 .x-grid3-body .x-grid3-td-expander {
   background-image: none;
@@ -13879,7 +13879,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   border-top-color: #E4E4E4; }
 
 .x-dd-drag-ghost {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border-color: #ddd #bbb #bbb #DFDFDF;
   color: #515151;
   font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
@@ -13960,7 +13960,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: url("../images/modx-theme/qtip/tip-anchor-sprite.gif"); }
 
 .x-menu {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border: 1px solid #E4E4E4;
   border-radius: 3px;
   /* TODO: replace with $borderRadius when merged */
@@ -14025,7 +14025,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-image: none; }
 
 .x-menu-plain {
-  background-color: #FFFFFF !important; }
+  background-color: #FFF !important; }
 
 .x-cycle-menu .x-menu-item-checked {
   background-color: #DFDFDF;
@@ -14233,7 +14233,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
     width: 18px;
     height: 18px; }
   .x-tool:hover {
-    color: #FFFFFF;
+    color: #FFF;
     background: #234368; }
   .x-tool.x-tool-toggle:after {
     content: "\f077";
@@ -14331,7 +14331,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   background-color: #CCCCCC; }
 
 .x-html-editor-wrap {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border-color: #bcbcbc; }
 
 .x-panel-noborder .x-panel-header-noborder {
@@ -14464,7 +14464,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   transition: background-color .2s ease-out;
   background: #6CB24A;
   box-shadow: none;
-  color: #FFFFFF; }
+  color: #FFF; }
   .x-btn-focus.primary-button.x-btn, .actions button.x-btn-focus.primary-button,
   .x-btn-focus.primary-button.inline-button,
   .x-btn-focus.primary-button.x-superboxselect-item,
@@ -14483,7 +14483,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .primary-button.x-date-mp-cancel:hover {
     background: #528738;
     box-shadow: none;
-    color: #FFFFFF; }
+    color: #FFF; }
   .x-btn-click.primary-button.x-btn, .actions button.x-btn-click.primary-button,
   .x-btn-click.primary-button.inline-button,
   .x-btn-click.primary-button.x-superboxselect-item,
@@ -14497,7 +14497,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .primary-button.x-date-mp-cancel:active {
     background: #385c26;
     box-shadow: none;
-    color: #FFFFFF; }
+    color: #FFF; }
   .x-item-disabled.primary-button.x-btn, .actions button.x-item-disabled.primary-button,
   .x-item-disabled.primary-button.inline-button,
   .x-item-disabled.primary-button.x-superboxselect-item,
@@ -14516,7 +14516,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .x-item-disabled.primary-button.x-date-mp-cancel:active {
     background: #6CB24A;
     box-shadow: none;
-    color: #FFFFFF;
+    color: #FFF;
     opacity: .6;
     filter: alpha(opacity=60);
     /* for IE <= 8 */ }
@@ -14528,7 +14528,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .x-date-picker .x-btn,
 .x-date-mp-ok,
 .x-date-mp-cancel {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   background-repeat: no-repeat;
   /* prevent any background-images from repeating, extras compatibility */
   border: 0;
@@ -14667,7 +14667,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .x-item-disabled.x-form-trigger:active,
   .x-item-disabled.x-date-mp-ok:active,
   .x-item-disabled.x-date-mp-cancel:active {
-    background-color: #FFFFFF;
+    background-color: #FFF;
     color: #1e1e1e;
     box-shadow: 0 0 0 1px #E4E4E4;
     opacity: .6;
@@ -16933,7 +16933,7 @@ button {
   .x-date-mp-cancel.orange {
     background: #F0B429;
     box-shadow: 0 0 0 1px #F0B429;
-    color: #FFFFFF !important; }
+    color: #FFF !important; }
     .actions button.orange:hover, .actions button.orange:focus,
     .inline-button.orange:hover,
     .inline-button.orange:focus,
@@ -16967,7 +16967,7 @@ button {
   .x-date-mp-cancel.red {
     background: #CF1124;
     box-shadow: 0 0 0 1px #CF1124;
-    color: #FFFFFF !important; }
+    color: #FFF !important; }
     .actions button.red:hover, .actions button.red:focus,
     .inline-button.red:hover,
     .inline-button.red:focus,
@@ -17001,7 +17001,7 @@ button {
   .x-date-mp-cancel.green {
     background: #6CB24A;
     box-shadow: 0 0 0 1px #6CB24A;
-    color: #FFFFFF !important;
+    color: #FFF !important;
     /* override !important of .green class */ }
     .actions button.green:hover, .actions button.green:focus,
     .inline-button.green:hover,
@@ -17036,7 +17036,7 @@ button {
   .x-date-mp-cancel.blue {
     background: #3697CD;
     box-shadow: 0 0 0 1px #3697CD;
-    color: #FFFFFF !important;
+    color: #FFF !important;
     /* override !important of .green class */ }
     .actions button.blue:hover, .actions button.blue:focus,
     .inline-button.blue:hover,
@@ -17065,14 +17065,14 @@ button {
 
 /* Toolbar combo/text styled just like the buttons */
 .x-toolbar .x-form-field-trigger-wrap {
-  background: #FFFFFF;
+  background: #FFF;
   border: 0;
   border-radius: 3px;
   box-shadow: 0 0 0 1px #E4E4E4;
   cursor: pointer;
   line-height: 1; }
   .x-toolbar .x-form-field-trigger-wrap .x-form-text {
-    background: #FFFFFF;
+    background: #FFF;
     border: 0;
     margin: 0 !important; }
   .x-toolbar .x-form-field-trigger-wrap .x-form-trigger:before {
@@ -17355,7 +17355,7 @@ button {
   color: #5b7a98; }
 
 .x-btn-group .x-btn-click {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   background-image: none;
   box-shadow: 0 0 3px #AAAAAA inset;
   margin: 0 2px 0 0; }
@@ -17541,7 +17541,7 @@ textarea[name="introtext"],
 .x-form-text,
 textarea.x-form-field,
 .x-form-textarea {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   background-image: none;
   border-radius: 3px;
   border: 1px solid #E4E4E4;
@@ -17679,7 +17679,7 @@ input::-moz-focus-inner {
         width: 0;
         height: 0; }
       .x-form-item .modx-tag-list .modx-tag-opt:after {
-        background-color: #FFFFFF;
+        background-color: #FFF;
         border-radius: 50%;
         /* make a circle */
         content: '';
@@ -17828,7 +17828,7 @@ input::-moz-focus-inner {
   padding: 5px; }
 
 .x-form-field-wrap {
-  background: #FFFFFF;
+  background: #FFF;
   border: 1px solid #E4E4E4;
   border-radius: 3px;
   /*box-shadow: $shadowBorderField;*/
@@ -18143,7 +18143,7 @@ input::-moz-focus-inner {
       height: 1.3em;
       width: 1.3em;
       border-radius: 50%;
-      background-color: #FFFFFF;
+      background-color: #FFF;
       z-index: 11; }
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-form-cb-label:after,
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"]:checked + .x-fieldset-header-text:after,
@@ -18238,7 +18238,7 @@ input::-moz-focus-inner {
         .x-superboxselect ul li.x-superboxselect-item.x-superboxselect-item-focus {
           background-color: #234368;
           box-shadow: 0 0 0 1px #234368;
-          color: #FFFFFF; }
+          color: #FFF; }
         .x-superboxselect ul li.x-superboxselect-item .x-superboxselect-item-close {
           border: 0;
           color: inherit;
@@ -18317,7 +18317,7 @@ input::-moz-focus-inner {
     margin-bottom: 2px; }
   .inline-form input[type=text],
   .inline-form textarea {
-    background-color: #FFFFFF;
+    background-color: #FFF;
     background-image: none;
     border-radius: 3px;
     border: 1px solid #CCCCCC;
@@ -18354,7 +18354,7 @@ input::-moz-focus-inner {
   font-weight: normal; }
 
 .x-editor .x-form-check-wrap {
-  background-color: #FFFFFF; }
+  background-color: #FFF; }
 
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
@@ -18364,7 +18364,7 @@ input::-moz-focus-inner {
   background-color: transparent !important; }
 
 .x-grid-editor .x-form-field-wrap img {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   background-image: url("../images/modx-theme/form/trigger.png"); }
 
 .x-form-grow-sizer {
@@ -18411,7 +18411,7 @@ input::-moz-focus-inner {
   /* this information is important to understand the following code with uses sibling selectors for IE8 compat */
   /* the small resize handle bottom right */ }
   .x-combo-list .x-combo-list-inner {
-    background-color: #FFFFFF;
+    background-color: #FFF;
     border: 1px solid #999999;
     /* apply the border here as we move this element 1px left to be in line with the combobox border */
     border-radius: 0 0 3px 3px;
@@ -18624,7 +18624,7 @@ input::-moz-focus-inner {
 
 .x-date-inner td,
 .x-date-mp td {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border: 0;
   font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   padding: 1px; }
@@ -18672,7 +18672,7 @@ td.x-date-mp-year a:hover {
 td.x-date-mp-sel a {
   background-color: #234368;
   /*background-image: none;*/
-  border-color: #FFFFFF;
+  border-color: #FFF;
   color: #FFFFFF; }
 
 .x-date-inner .x-date-prevday a,
@@ -18715,7 +18715,7 @@ td.x-date-mp-sep {
   overflow: visible;
   /* background behind a button bar */ }
   .x-tab-panel-noborder .x-tab-panel-body-noborder {
-    background-color: #FFFFFF;
+    background-color: #FFF;
     border-radius: 3px; }
 
 /* main tabs */
@@ -18789,13 +18789,13 @@ ul.x-tab-strip li {
     color: black; }
   ul.x-tab-strip li.x-tab-strip-active {
     color: #234368;
-    background-color: #FFFFFF;
+    background-color: #FFF;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     cursor: default; }
     .vertical-tabs-header ul.x-tab-strip li.x-tab-strip-active {
       border-radius: 0; }
     ul.x-tab-strip li.x-tab-strip-active:hover {
-      background-color: #FFFFFF; }
+      background-color: #FFF; }
   ul.x-tab-strip li.x-tab-edge {
     height: 0;
     visibility: hidden;
@@ -18837,7 +18837,7 @@ ul.x-tab-strip-bottom {
     background-image: url("../images/modx-theme/tabs/tab-btm-inactive-left-bg.gif"); }
 
 .x-tab-panel-body {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border: 0;
   overflow: visible; }
 
@@ -18895,7 +18895,7 @@ ul.x-tab-strip-bottom {
 
 /* vertical tabs */
 .vertical-tabs-panel {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   margin: 0;
   /* remove top and bottom margin */
   overflow: hidden;
@@ -18904,7 +18904,7 @@ ul.x-tab-strip-bottom {
   .vertical-tabs-panel.wrapped {
     border: 1px solid #E4E4E4; }
   .vertical-tabs-panel .vertical-tabs-header {
-    background: #FFFFFF !important;
+    background: #FFF !important;
     /* ovverride extjs default theme */
     border-right: 1px solid #E4E4E4 !important;
     /* ovverride extjs default theme */
@@ -18946,11 +18946,11 @@ ul.x-tab-strip-bottom {
           padding: 10px 15px 10px 15px;
           transition: background-color .25s, color .25s; }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li:hover {
-            background: #FFFFFF; }
+            background: #FFF; }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active {
-            background: #FFFFFF;
+            background: #FFF;
             border-color: #234368;
-            border-right-color: #FFFFFF;
+            border-right-color: #FFF;
             box-shadow: none;
             /* removes the active tab strip on top */
             color: #234368;
@@ -18969,7 +18969,7 @@ ul.x-tab-strip-bottom {
             word-break: break-all;
             white-space: pre-wrap; }
     .vertical-tabs-panel .vertical-tabs-header h4 {
-      background: #FFFFFF;
+      background: #FFF;
       /*border-right: 1px solid $borderColor;*/
       border-bottom: 1px solid #E4E4E4;
       color: #53595F;
@@ -19011,7 +19011,7 @@ ul.x-tab-strip-bottom {
   display: none !important; }
 
 #modx-leftbar {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   z-index: 0;
   min-width: 288px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
@@ -19038,7 +19038,7 @@ ul.x-tab-strip-bottom {
       flex-direction: column;
   padding: 0 10px; }
   #modx-navbar .icon {
-    color: #FFFFFF;
+    color: #FFF;
     font-size: 20px;
     vertical-align: middle; }
   #modx-navbar li,
@@ -19051,7 +19051,7 @@ ul.x-tab-strip-bottom {
     text-align: center; }
   #modx-navbar a {
     cursor: pointer;
-    color: #FFFFFF;
+    color: #FFF;
     display: block;
     line-height: 12px;
     font-size: 10px;
@@ -19127,9 +19127,9 @@ ul.x-tab-strip-bottom {
   #modx-navbar #modx-site-info {
     font-size: 10px; }
     #modx-navbar #modx-site-info .site_name {
-      color: #FFFFFF; }
+      color: #FFF; }
     #modx-navbar #modx-site-info .full_appname {
-      color: #FFFFFF; }
+      color: #FFF; }
     #modx-navbar #modx-site-info > .info-item {
       white-space: nowrap;
       overflow: hidden;
@@ -19157,7 +19157,7 @@ ul.x-tab-strip-bottom {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-  background: #FFFFFF;
+  background: #FFF;
   display: block;
   box-sizing: border-box;
   list-style: none;
@@ -19169,7 +19169,7 @@ ul.x-tab-strip-bottom {
   #modx-footer .modx-subnav li {
     display: block;
     border-radius: 3px;
-    background: #FFFFFF;
+    background: #FFF;
     margin: 0;
     padding: 0;
     position: relative; }
@@ -19188,7 +19188,7 @@ ul.x-tab-strip-bottom {
     #modx-footer .modx-subnav li a {
       border-radius: 3px;
       text-align: left;
-      background-color: #FFFFFF;
+      background-color: #FFF;
       color: #515151;
       font-weight: bold;
       line-height: 1.5;
@@ -19222,7 +19222,7 @@ ul.x-tab-strip-bottom {
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
     border-radius: 3px;
-    background: #FFFFFF;
+    background: #FFF;
     display: none;
     list-style: none;
     position: absolute;
@@ -19232,7 +19232,7 @@ ul.x-tab-strip-bottom {
   #modx-footer .modx-subnav-arrow {
     right: 100%;
     border: 12px solid transparent;
-    border-right-color: #FFFFFF;
+    border-right-color: #FFF;
     content: ' ';
     position: absolute;
     pointer-events: none;
@@ -19312,7 +19312,7 @@ ul.x-tab-strip-bottom {
       margin-left: 1rem; }
   #modx-footer .modx-subnav-arrow {
     border-right-color: transparent;
-    border-bottom-color: #FFFFFF;
+    border-bottom-color: #FFF;
     margin-top: -12px;
     right: auto;
     top: -12px; }
@@ -19329,7 +19329,7 @@ ul.x-tab-strip-bottom {
   padding: 10px 10px 5px;
   height: 38px;
   min-width: 100px;
-  background: #FFFFFF;
+  background: #FFF;
   border-radius: 3px 3px 0 0; }
   #modx-manager-search .x-form-text {
     background: none; }
@@ -19373,7 +19373,7 @@ ul.x-tab-strip-bottom {
       content: "\f110";
       margin-right: 5px; }
   .modx-manager-search-results .x-combo-list-inner {
-    background: #FFFFFF;
+    background: #FFF;
     border: 0;
     margin: 0;
     overflow: auto;
@@ -19679,8 +19679,8 @@ ul.x-tab-strip-bottom {
   padding-top: 10px; }
   .modx-browser-rte-buttons .x-panel-bbar {
     /* style it like a window footer */
-    background-color: #FFFFFF;
-    border-top: 1px solid #FFFFFF;
+    background-color: #FFF;
+    border-top: 1px solid #FFF;
     padding: 5px; }
     .modx-browser-rte-buttons .x-panel-bbar .x-toolbar-layout-ct {
       width: auto !important;
@@ -19789,7 +19789,7 @@ ul.x-tab-strip-bottom {
   #modx-leftbar .x-tree-root-ct {
     padding: 6px; }
   #modx-leftbar .x-tree .x-panel-body {
-    background: #FFFFFF;
+    background: #FFF;
     border-radius: 0; }
 
 #modx-tree-usergroup .x-toolbar-left-row {
@@ -19956,7 +19956,7 @@ ul.x-tab-strip-bottom {
 
 .x-tree-node {
   position: relative;
-  background: #FFFFFF;
+  background: #FFF;
   color: #999999; }
   .x-tree-node .x-tree-node-disabled a span,
   .x-tree-node .x-tree-node-disabled i.icon,
@@ -20509,10 +20509,10 @@ ul.x-tab-strip-bottom {
   opacity: 1; }
 
 .modx-browser-rte {
-  background: #FFFFFF; }
+  background: #FFF; }
 
 .modx-browser-tree {
-  background: #FFFFFF;
+  background: #FFF;
   border-radius: 3px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
   .x-window .modx-browser-tree,
@@ -20522,7 +20522,7 @@ ul.x-tab-strip-bottom {
     box-shadow: none; }
 
 .modx-browser-view-ct {
-  background: #FFFFFF;
+  background: #FFF;
   border-radius: 3px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
@@ -20533,7 +20533,7 @@ ul.x-tab-strip-bottom {
 
 .modx-browser-thumb-wrap {
   border: 1px solid #E4E4E4;
-  background: #FFFFFF;
+  background: #FFF;
   float: left;
   margin: 4px 0 4px 4px;
   overflow: hidden;
@@ -20554,7 +20554,7 @@ ul.x-tab-strip-bottom {
   padding: 4px; }
 
 .modx-browser-thumb-wrap .x-view-selected .modx-browser-thumb {
-  background: #FFFFFF; }
+  background: #FFF; }
 
 .modx-browser-thumb-wrap .x-view-selected span {
   color: #234368; }
@@ -20672,7 +20672,7 @@ ul.x-tab-strip-bottom {
       height: 32px !important; }
 
 .modx-browser-details-ct {
-  background: #FFFFFF;
+  background: #FFF;
   border-radius: 3px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
   .x-window .modx-browser-details-ct,
@@ -20783,8 +20783,8 @@ ul.x-tab-strip-bottom {
   .x-window .x-window-tc {
     z-index: 1; }
     .x-window .x-window-tc .x-window-header {
-      background-color: #FFFFFF;
-      border-bottom: 1px solid #FFFFFF;
+      background-color: #FFF;
+      border-bottom: 1px solid #FFF;
       border-radius: 3px 3px 0 0;
       color: #515151;
       font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -20814,7 +20814,7 @@ ul.x-tab-strip-bottom {
         border: 0;
         padding: 0; }
   .x-window .x-window-body {
-    background-color: #FFFFFF !important;
+    background-color: #FFF !important;
     /* override extjs default theme transparent !important style from .x-window-plain */
     border: 0;
     /* override extjs default theme border for .x-window-plain */
@@ -20825,7 +20825,7 @@ ul.x-tab-strip-bottom {
   .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body {
     padding-top: 15px; }
   .x-window .x-panel-bwrap {
-    background: #FFFFFF;
+    background: #FFF;
     padding: 0;
     /* inner panel body wraps */ }
     .x-window .x-panel-bwrap .x-panel-bwrap {
@@ -20853,7 +20853,7 @@ ul.x-tab-strip-bottom {
       border: 0;
       /* override extjs default theme of 1px solid white */ }
   .x-window .x-tab-panel-bwrap {
-    background: #FFFFFF;
+    background: #FFF;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     padding: 10px; }
     .x-window .x-tab-panel-bwrap .x-tab-panel-body {
@@ -20865,8 +20865,8 @@ ul.x-tab-strip-bottom {
   .x-window .x-window-br {
     padding: 0; }
   .x-window .x-window-bc .x-window-footer {
-    background-color: #FFFFFF;
-    border-top: 1px solid #FFFFFF;
+    background-color: #FFF;
+    border-top: 1px solid #FFF;
     border-radius: 0 0 3px 3px;
     box-sizing: border-box;
     /* don't count padding in width: 100%; */
@@ -20881,7 +20881,7 @@ ul.x-tab-strip-bottom {
     .x-window.x-window-maximized .x-window-mc {
       padding: 0; }
   .x-window.modx-console .modx-console-text {
-    background-color: #FFFFFF;
+    background-color: #FFF;
     border: none;
     font: 12px SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     height: auto !important;
@@ -20913,7 +20913,7 @@ ul.x-tab-strip-bottom {
 
 /* the window modal mask, but also the mask that covers a grid when reloading for example */
 .ext-el-mask {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   opacity: 0;
   filter: alpha(opacity=0);
   /* for IE <= 8 */
@@ -20967,7 +20967,7 @@ ul.x-tab-strip-bottom {
 
 /* this is the little box showing if a grid is locked, refreshing etc. */
 .ext-el-mask-msg {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border: 1px solid #DCDCDC;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   border-radius: 3px;
@@ -21002,12 +21002,12 @@ ul.x-tab-strip-bottom {
     padding: 5px 20px;
     border: 1px solid #E4E4E4;
     border-radius: 3px;
-    background: #FFFFFF;
+    background: #FFF;
     text-decoration: none;
     display: inline-block; }
     .dashboard .dashboard-button-green {
       background: #6CB24A;
-      color: #FFFFFF;
+      color: #FFF;
       border-color: #6CB24A; }
     .dashboard .dashboard-button[disabled] {
       background-color: #E4E4E4; }
@@ -21016,7 +21016,7 @@ ul.x-tab-strip-bottom {
   .dashboard .dashboard-block {
     margin: 1rem 0 0 1rem; }
     .dashboard .dashboard-block:not(.headless) {
-      background-color: #FFFFFF;
+      background-color: #FFF;
       border-radius: 3px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
     .dashboard .dashboard-block.headless .body {
@@ -21093,7 +21093,7 @@ ul.x-tab-strip-bottom {
           align-items: center; }
       .dashboard .dashboard-block .title-wrapper .title {
         border-radius: 3px;
-        background: #FFFFFF;
+        background: #FFF;
         color: #515151;
         font-size: 12px;
         font-weight: bold;
@@ -21234,7 +21234,7 @@ ul.x-tab-strip-bottom {
     display: flex;
     -ms-flex-align: center;
         align-items: center;
-    background-color: #FFFFFF;
+    background-color: #FFF;
     border-radius: 3px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     margin: 1rem 0 0 1rem;
@@ -21291,7 +21291,7 @@ ul.x-tab-strip-bottom {
 .updates-widget .updates-updateable {
   display: inline-block;
   background: #3697CD;
-  color: #FFFFFF;
+  color: #FFF;
   border-radius: 20px;
   padding: 2px 8px;
   font-weight: bold; }
@@ -21299,7 +21299,7 @@ ul.x-tab-strip-bottom {
 .updates-widget .updates-ok,
 .updates-widget .updates-available {
   padding: 3px 8px;
-  color: #FFFFFF;
+  color: #FFF;
   border-radius: 3px;
   text-transform: uppercase;
   font-size: 10px; }
@@ -21375,7 +21375,7 @@ ul.x-tab-strip-bottom {
     padding-right: 0%; }
 
 #managerbuttons ul li a {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border-radius: 3px;
   border: 1px solid #E4E4E4;
   box-shadow: 0 1px 0 #E4E4E4;
@@ -21412,7 +21412,7 @@ ul.x-tab-strip-bottom {
 #helpBanner,
 #contactus {
   box-sizing: border-box;
-  background: #FFFFFF;
+  background: #FFF;
   border: 1px solid #E4E4E4;
   box-shadow: 0 1px 0 #E4E4E4;
   margin: 0.75em 0 1.75em;
@@ -21495,7 +21495,7 @@ ul.x-tab-strip-bottom {
     padding: 2px 4px; }
     #aboutMODX a:hover {
       background-color: #234368;
-      color: #FFFFFF;
+      color: #FFF;
       text-decoration: none; }
 
 .trashrow {
@@ -21506,14 +21506,14 @@ ul.x-tab-strip-bottom {
   .x-btn-purge-all:hover {
     background: #CF1124;
     box-shadow: 0 0 0 1px #CF1124;
-    color: #FFFFFF; }
+    color: #FFF; }
 
 .x-btn-restore-all {
   color: #6CB24A; }
   .x-btn-restore-all:hover {
     background: #6CB24A;
     box-shadow: 0 0 0 1px #6CB24A;
-    color: #FFFFFF; }
+    color: #FFF; }
 
 body {
   color: black;
@@ -21599,7 +21599,7 @@ hr {
   padding: 20px 10px 60px; }
 
 .padding {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   padding: 11px; }
 
 .dashed {
@@ -22042,7 +22042,7 @@ a.x-grid-link:focus {
   padding-right: 2px; }
 
 .x-portlet .x-panel-body {
-  background: #FFFFFF; }
+  background: #FFF; }
 
 .x-portlet .x-panel-mc {
   padding-top: 2px; }
@@ -22171,13 +22171,13 @@ a.x-grid-link:focus {
 
 .ux-row-action-item:hover {
   background: #DFDFDF;
-  background: linear-gradient(center bottom, #DFDFDF 0%, #FFFFFF 100%);
+  background: linear-gradient(center bottom, #DFDFDF 0%, #FFF 100%);
   border: 1px solid #9caf78;
   color: #636f4c !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$white, endColorstr=$alto, GradientType=0); }
 
 .ux-row-action-item:active {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   background-image: none;
   border-color: #CFCFCF #C0C0C0 #AAAAAA;
   box-shadow: 0 0 3px #AAAAAA inset;
@@ -22417,7 +22417,7 @@ a.x-grid-link:focus {
   border-radius: 3px;
   box-sizing: border-box;
   bottom: 20px;
-  color: #FFFFFF;
+  color: #FFF;
   max-width: 360px;
   padding: 15px 15px 15px 65px;
   position: fixed;
@@ -22430,7 +22430,7 @@ a.x-grid-link:focus {
   .modx-status-msg:before {
     position: relative; }
   .modx-status-msg:after {
-    background: #FFFFFF;
+    background: #FFF;
     border-radius: 50%;
     color: #6CB24A;
     content: "\f00c";
@@ -22449,7 +22449,7 @@ a.x-grid-link:focus {
   .modx-status-msg span {
     font-size: 14px; }
   .modx-status-msg h3 {
-    color: #FFFFFF;
+    color: #FFF;
     margin: 0; }
 
 .modx-status-msg .has-position-center-center {
@@ -22617,7 +22617,7 @@ iframe[classname="x-hidden"] {
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
 .main-wrapper {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   padding: 15px 15px 15px 15px; }
 
 .with-title .main-wrapper {
@@ -22718,7 +22718,7 @@ iframe[classname="x-hidden"] {
   background: #F2F2F2; }
   #modx-resource-settings #modx-resource-main-left {
     padding: 0 15px 15px 15px;
-    background: #FFFFFF;
+    background: #FFF;
     border-top-right-radius: 3px;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -22726,7 +22726,7 @@ iframe[classname="x-hidden"] {
     position: relative; }
   #modx-resource-settings #modx-resource-main-right .modx-resource-panel {
     padding: 15px;
-    background: #FFFFFF;
+    background: #FFF;
     border-radius: 3px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
     #modx-resource-settings #modx-resource-main-right .modx-resource-panel:not(:last-child) {
@@ -22790,7 +22790,7 @@ iframe[classname="x-hidden"] {
   border: medium none; }
 
 #ux-lightbox-outerImageContainer {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   height: 250px;
   margin: 0 auto;
   position: relative;
@@ -22850,7 +22850,7 @@ iframe[classname="x-hidden"] {
   width: 100%; }
 
 #ux-lightbox-dataContainer {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 10px;
   overflow: auto; }
@@ -23154,7 +23154,7 @@ iframe[classname="x-hidden"] {
   .thumb-wrapper * {
     box-sizing: border-box; }
   .thumb-wrapper .thumb {
-    background-color: #FFFFFF;
+    background-color: #FFF;
     border-bottom: 1px solid #CCCCCC;
     height: 170px;
     margin: 0 auto;
@@ -23175,7 +23175,7 @@ iframe[classname="x-hidden"] {
   .thumb-wrapper span.downloaded,
   .thumb-wrapper span.featured {
     background-color: #6CB24A;
-    color: #FFFFFF;
+    color: #FFF;
     font-weight: bold;
     padding: 5px 0;
     position: absolute;
@@ -23192,7 +23192,7 @@ iframe[classname="x-hidden"] {
     display: block;
     overflow: hidden;
     text-align: left;
-    text-shadow: 0 1px 0 #FFFFFF;
+    text-shadow: 0 1px 0 #FFF;
     margin: 0;
     text-overflow: ellipsis;
     white-space: nowrap; }
@@ -23224,7 +23224,7 @@ iframe[classname="x-hidden"] {
     padding: 8px 12px 0;
     text-align: center; }
   .thumb-wrapper.selected {
-    background-color: #FFFFFF;
+    background-color: #FFF;
     padding: 0 0 12px;
     border-color: #234368; }
     .thumb-wrapper.selected img {

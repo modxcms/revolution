@@ -85,7 +85,7 @@ body {
 
 .l-content {
   position: relative;
-  background: #FFFFFF;
+  background: #FFF;
   max-width: 100%;
   min-height: 100vh;
   overflow: hidden;
@@ -212,7 +212,7 @@ input[type="checkbox"] {
   background: #6CB24A;
   border: 1px solid #568e3b;
   border-radius: 3px;
-  color: #FFFFFF;
+  color: #FFF;
   text-align: center;
   font-size: 1rem;
   cursor: pointer; }
@@ -231,7 +231,7 @@ input[type="checkbox"] {
   #modx-fl-btn:hover,
   #modx-fl-btn:focus {
     background: #528738;
-    color: #FFFFFF;
+    color: #FFF;
     transition: background-color .2s ease-out; }
   #modx-login-btn:hover,
   #modx-fl-btn:hover {
@@ -273,7 +273,7 @@ input[type="checkbox"] {
       align-items: center;
   position: relative;
   margin-bottom: 1rem;
-  background: #FFFFFF; }
+  background: #FFF; }
 
 .c-languageselect {
   position: relative; }

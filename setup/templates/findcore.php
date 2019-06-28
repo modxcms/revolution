@@ -29,10 +29,11 @@ if ($posted) {
     $core_path = MODX_CORE_PATH;
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>MODX Revolution Core Finder</title>
+    <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" media="all" href="assets/css/reset.css" />
@@ -46,18 +47,6 @@ if ($posted) {
     <link href="assets/css/style.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="assets/js/ext-core.js"></script>
     <script type="text/javascript" src="assets/js/modx.setup.js"></script>
-    <!--[if lt IE 7]>
-        <script type="text/javascript" src="assets/js/inc/say.no.to.ie.6.js"></script>
-        <style type="text/css">
-        body {
-            behavior:url("assets/js/inc/csshover2.htc");
-        }
-        .pngfix {
-            behavior:url("assets/js/inc/iepngfix.htc");
-        }
-        </style>
-    <![endif]-->
-
 </head>
 
 <body>
