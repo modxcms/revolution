@@ -2439,7 +2439,12 @@ class modX extends xPDO {
             if (strpos($fqn, '.') !== false) {
                 $tmp = explode('.', $fqn);
                 $class = array_pop($tmp);
-                $class = implode('\\', array_map('ucfirst', $tmp)) . '\\' . $class;
+                if ($tmp[0] === 'modx') {
+                    array_shift($tmp);
+                }
+                if (count($tmp) > 0) {
+                    $class = implode('\\', array_map('ucfirst', $tmp)) . '\\' . $class;
+                }
             }
             $class = 'MODX\\Revolution\\' . $class;
             if (class_exists($class)) {
