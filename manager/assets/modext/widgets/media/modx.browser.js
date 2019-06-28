@@ -86,9 +86,8 @@ MODx.browser.View = function(config) {
                     this.lazyLoad();
                 }, this);
                 if (this.tree != undefined && this.tree.uploader != undefined) {
-                    this.tree.uploader.addDropZone(this.ownerCt, this);
+                    this.tree.uploader.addDropZone(this.ownerCt);
                 }
-                MODx.config.browserview = this;
             }, scope: this}
         }
         ,prepareData: this.formatData.createDelegate(this)
