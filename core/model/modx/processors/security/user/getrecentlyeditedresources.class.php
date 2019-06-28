@@ -91,7 +91,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
             return [];
         }
 
-        $resourceArray = $object->get(array('id','pagetitle','description','published','deleted','context_key'));
+        $resourceArray = $resource->get(array('id','pagetitle','description','published','deleted','context_key', 'editedon'));
         $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
         $row = array_merge($row, $resourceArray);
@@ -114,7 +114,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
             'text' => $this->modx->lexicon('resource_overview'),
             'params' => [
                 'a' => 'resource/data',
-                'id' => $object->get('item'),
+                'id' => $resource->get('id'),
                 'type' => 'view',
             ],
         ];
@@ -123,7 +123,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
                 'text' => $this->modx->lexicon('resource_edit'),
                 'params' => [
                     'a' => 'resource/update',
-                    'id' => $object->get('item'),
+                    'id' => $resource->get('id'),
                     'type' => 'edit',
                 ],
             ];
@@ -132,7 +132,7 @@ class modUserGetRecentlyEditedResourcesProcessor extends modObjectGetListProcess
         $row['menu'][] = [
             'text' => $this->modx->lexicon('resource_preview'),
             'params' => [
-                'url' => $this->modx->makeUrl($object->get('item'), null, '', 'full'),
+                'url' => $this->modx->makeUrl($resource->get('id'), null, '', 'full'),
                 'type' => 'open',
             ],
             'handler' => 'this.preview',
