@@ -266,7 +266,7 @@ class Create extends modObjectCreateProcessor
                 $scriptProperties['pub_date'] = 0;
             } else {
                 $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
-                if ($scriptProperties['pub_date'] < $now) $scriptProperties['published'] = 1;
+                if ($scriptProperties['pub_date'] <= $now) $scriptProperties['published'] = 1;
                 if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
             }
         }
