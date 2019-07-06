@@ -29,7 +29,7 @@ MODx.SearchBar = function(config) {
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 280
+        ,width: 380
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
