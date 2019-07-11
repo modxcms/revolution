@@ -20649,8 +20649,6 @@ ul.x-tab-strip-bottom {
       .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before {
         content: "\f328";
         font-size: 14px;
-        margin-top: -7px;
-        /* half of the height to center vertically with top 50% */
         opacity: .6;
         filter: alpha(opacity=60);
         /* for IE <= 8 */
