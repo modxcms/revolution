@@ -120,18 +120,8 @@
                 defaultcategoryname="${project.name}"
                 defaultpackagename="${project.name.fs}"
                 packageoutput="modx,xpdo">
-            <fileset dir="${core.dir}/xpdo">
-                <include name="**/*.php" />
-                <exclude name="**/*.map.inc.php" />
-                <exclude name="compression/pclzip.lib.php" />
-                <exclude name="json/**" />
-            </fileset>
-            <fileset dir="${core.dir}/model/modx">
+            <fileset dir="${core.dir}/src">
                 <include name="**.php" />
-                <exclude name="**/*.map.inc.php" />
-                <exclude name="**/*_mysql.class.php" />
-                <exclude name="mail/phpmailer/**" />
-                <exclude name="processors/**" />
             </fileset>
         </phpdoc>
     </target>
@@ -302,6 +292,7 @@
                 <include name="core/import/**" />
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
+                <include name="core/src/**" />
                 <include name="core/xpdo/**" />
                 <include name="core/packages/core.transport.zip" />
                 <include name="core/packages/core/manifest.php" />
@@ -370,6 +361,7 @@
                 <include name="core/import/**" />
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
+                <include name="core/src/**" />
                 <include name="core/xpdo/**" />
                 <include name="core/packages/core.transport.zip" />
             </fileset>
