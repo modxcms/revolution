@@ -386,7 +386,7 @@ class Update extends modObjectUpdateProcessor
             } else {
                 $strPubDate = $publishDate;
                 $publishDate = strtotime($publishDate);
-                if ($publishDate < $now) { /* if we're past publish date, publish resource */
+                if ($publishDate <= $now) { /* if we're past publish date, publish resource */
                     $this->setProperty('published', true);
                     $this->setProperty('publishedon', $strPubDate);
                     $publishDate = 0;
