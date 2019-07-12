@@ -8,9 +8,6 @@ use MODX\Revolution\modDashboardWidgetInterface;
  */
 class modDashboardWidgetShortcuts extends modDashboardWidgetInterface
 {
-    /** @var modX $modx */
-    public $modx;
-
     /**
      * An array containing all possible shortcuts.
      *
