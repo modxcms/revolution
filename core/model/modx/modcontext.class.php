@@ -230,7 +230,7 @@ class modContext extends modAccessibleObject {
             }
             if (is_object($this->xpdo->context) && $this->get('key') !== $this->xpdo->context->get('key')) {
                 $config = array_merge($this->xpdo->_systemConfig, $this->config, $this->xpdo->_userConfig, $options);
-                if ($scheme === -1 || $scheme === '' || strpos($scheme, 'abs') !== false) {
+                if ($scheme === -1 || $scheme === '-1' || $scheme === '' || strpos($scheme, 'abs') !== false) {
                     $scheme= 'full';
                 }
             } else {
@@ -239,7 +239,7 @@ class modContext extends modAccessibleObject {
 
             if ($config['friendly_urls'] == 1) {
                 if ((integer) $id === (integer) $config['site_start']) {
-                    $alias= ($scheme === '' || $scheme === -1) ? $config['base_url'] : '';
+                    $alias= ($scheme === '' || $scheme === -1 || $scheme === '-1') ? $config['base_url'] : '';
                     $found= true;
                 } else {
                     $alias= $this->getResourceURI($id);
