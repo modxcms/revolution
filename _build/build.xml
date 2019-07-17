@@ -46,12 +46,15 @@
     <target name="complete" description="--> Complete Build">
         <phingcall target="prepare-build-image" />
         <phingcall target="git-export-build-image" />
+        <phingcall target="composer-install-dependencies" />
         <!--<phingcall target="copy-core-transport" />-->
         <phingcall target="prepare-build-distrib" />
         <!--<phingcall target="generate-phpdocs" />-->
         <phingcall target="generate-core-transport" />
+        <phingcall target="copy-core-transport" />
         <phingcall target="build-sdk" />
         <phingcall target="generate-core-transport" />
+        <phingcall target="copy-core-transport" />
         <phingcall target="build-traditional" />
         <phingcall target="build-advanced" />
     </target>
@@ -75,6 +78,11 @@
               command="${git.command} archive -o ${absolute.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}"
               escape="false" />
         <unzip file="${build.image.dir}.zip" todir="${build.image.basedir}" />
+    </target>
+
+    <!-- Install all core dependencies via composer -->
+    <target name="composer-install-dependencies" description="" if="build.distrib">
+        <exec dir="${build.image.dir}" command="${composer.command} install --no-dev" escape="false" />
     </target>
 
     <!-- Run the core data generation script -->
@@ -294,6 +302,7 @@
                 <include name="core/model/**" />
                 <include name="core/src/**" />
                 <include name="core/xpdo/**" />
+                <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
                 <include name="core/packages/core/manifest.php" />
                 <include name="core/packages/core/*/*.vehicle" />
@@ -363,6 +372,7 @@
                 <include name="core/model/**" />
                 <include name="core/src/**" />
                 <include name="core/xpdo/**" />
+                <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
             </fileset>
         </zip>
