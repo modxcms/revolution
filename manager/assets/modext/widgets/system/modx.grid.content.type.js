@@ -254,7 +254,6 @@ MODx.window.CreateContentType = function(config) {
                     ,hiddenName: 'binary'
                     ,id: this.ident+'-binary'
                     ,anchor: '100%'
-                    ,checked: config.record.binary || false
                 },{
                     fieldLabel: _('description')
                     ,name: 'description'
