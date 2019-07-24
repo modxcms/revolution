@@ -90,7 +90,7 @@ class GetInputProperties extends modProcessor {
      */
     public function renderController() {
         $c = new TvInputPropertiesManagerController($this->modx);
-        $this->modx->controller = call_user_func_array(array($c,'getInstance'),array(&$this->modx,'TvInputPropertiesManagerController'));
+        $this->modx->controller = call_user_func_array(array($c,'getInstance'),array(&$this->modx,TvInputPropertiesManagerController::class));
         return $this->modx->controller->render();
     }
 
