@@ -72,8 +72,11 @@ class GetOnline extends modObjectGetListProcessor
 
         /** @var modUser $user */
         if ($user = $object->getOne('User')) {
-            $row = array_merge($row, $user->get(['username']), $user->Profile->get(['fullname', 'email', 'photo']),
-                ['gravatar' => $user->getGravatar(64)]);
+            $row = array_merge($row,
+                $user->get(['username']),
+                $user->Profile->get(['fullname', 'email']),
+                ['photo' => $user->getPhoto(64, 64)]
+            );
             /** @var modUserGroup $group */
             $row['group'] = ($group = $user->getOne('PrimaryGroup')) ? $group->get('name') : '';
         }
