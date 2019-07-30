@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
+- Check for default URL scheme value as string [#14643]
 - Fix notices regarding IMG_WEBP constants not being defined for PHP version where support for WEBP isn't advertised [#14494]
 - Fix an issue where an resource would not be published when the pub_date is equal to "now" [#14609]
 - Added default styles for scroll in webkit based browsers [#14553]
