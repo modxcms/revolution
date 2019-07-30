@@ -6,7 +6,7 @@
  * @subpackage lexicon
  * @language en
  */
-$_lang['dashboard'] = 'Панель виджетов';
+$_lang['dashboard'] = 'Панель управления';
 $_lang['dashboard_add'] = 'Добавить панель';
 $_lang['dashboard_create'] = 'Создать панель';
 $_lang['dashboard_desc_name'] = 'Название панели.';
@@ -33,7 +33,7 @@ $_lang['dashboard_usergroup_remove_confirm'] = 'Вы уверены, что хо
 $_lang['dashboard_usergroups.intro_msg'] = 'Список групп пользователей, использующих эту панель.';
 $_lang['dashboard_widget_err_placed'] = 'Этот виджет уже есть в этой панели!';
 $_lang['dashboard_widgets.intro_msg'] = 'Здесь вы можете добавлять, удалять, а также управлять виджетами для этой панели. Вы можете перетаскивать виджеты в таблице для изменения порядка их сортировки.';
-$_lang['dashboards'] = 'Панели виджетов';
+$_lang['dashboards'] = 'Панели управления';
 $_lang['dashboards.intro_msg'] = 'Здесь вы можете управлять всеми доступными панелями.';
 $_lang['rank'] = 'Сортировка';
 $_lang['user_group_filter'] = 'По группе пользователей';

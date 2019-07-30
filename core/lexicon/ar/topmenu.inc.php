@@ -14,7 +14,7 @@ $_lang['acls'] = 'قوائم تحكم الوصول';
 $_lang['acls_desc'] = 'إدارة الصلاحيات عبر المجموعات، سياسات الأدوار والوصول';
 $_lang['admin'] = 'المشرف';
 $_lang['api_docs'] = 'توثيق API';
-$_lang['api_docs_desc'] = 'توثيق API الكامل لمودكس الثوري.';
+$_lang['api_docs_desc'] = 'Complete API documentation for MODX Revolution';
 $_lang['bespoke_manager'] = 'إدارة التخصيص';
 $_lang['bespoke_manager_desc'] = 'إدارة مدراء مودكس المفصليين';
 $_lang['components'] = 'الإضافات';
@@ -30,9 +30,9 @@ $_lang['dashboards_desc'] = 'إدارة لوحات تحكم تسجيل الدخ�
 $_lang['edit_menu'] = 'القوائم';
 $_lang['edit_menu_desc'] = 'إدارة قائمة المدير العليا';
 $_lang['eventlog_viewer'] = 'سجل الخطأ';
-$_lang['eventlog_viewer_desc'] = 'عرض .error.log لمودكس';
+$_lang['eventlog_viewer_desc'] = 'View the MODX error log';
 $_lang['export_site'] = 'تصدير HTML الثابت';
-$_lang['export_site_desc'] = 'تصدير الموقع الحالي إلى صفحات HTML ثابتة.';
+$_lang['export_site_desc'] = 'Export the current site into static HTML pages';
 $_lang['file_browser'] = 'مستعرض الوسائط';
 $_lang['file_browser_desc'] = 'عرض، رفع وإدارة الوسائط';
 $_lang['flush_access'] = 'مسح صلاحياتك';
@@ -87,7 +87,7 @@ $_lang['propertysets_desc'] = 'إدارة مجموعات خصائص العنصر
 $_lang['refresh_site'] = 'مسح الذاكرة المؤقتة';
 $_lang['refresh_site_desc'] = 'حذف ملفات الذاكرة المؤقتة في كل السياقات';
 $_lang['refreshuris'] = 'تحديث URIs';
-$_lang['refreshuris_desc'] = 'إعادة توليد URIs مصدر النظام.';
+$_lang['refreshuris_desc'] = 'Regenerate system Resource URIs';
 $_lang['remove_locks'] = 'إزالة الأقفال';
 $_lang['remove_locks_desc'] = 'أزالة كل الأقفال عن صفحات المدير';
 $_lang['remove_locks_error'] = 'حصل خطأ أثناء محاولة إزالة الأقفال.';
@@ -96,7 +96,7 @@ $_lang['reports_desc'] = 'تقارير المشرف لتثبيت مودكس ال
 $_lang['resource_groups'] = 'مجموعات الموارد';
 $_lang['resource_groups_desc'] = 'إرفاق المصادر بالمجموعات';
 $_lang['search'] = 'بحث';
-$_lang['search_desc'] = 'البحث عن المصادر.';
+$_lang['search_desc'] = 'Search for resources';
 $_lang['search_resulttype_actions'] = 'الإجراءات';
 $_lang['search_resulttype_chunks'] = 'قطع';
 $_lang['search_resulttype_plugins'] = 'إضافات';
@@ -113,7 +113,7 @@ $_lang['sources_desc'] = 'مصادر الوسائط لاستخدام الوسا�
 $_lang['support'] = 'الدعم';
 $_lang['support_desc'] = '';
 $_lang['site_schedule'] = 'جدول الموقع';
-$_lang['site_schedule_desc'] = 'عرض المصادر مع التواريخ القادمة المنشورة وغير المنشورة.';
+$_lang['site_schedule_desc'] = 'View Resources with upcoming publish or unpublish dates';
 $_lang['system'] = 'نظام';
 $_lang['system_settings'] = 'إعدادات النظام';
 $_lang['system_settings_desc'] = 'تهيئة كل إعدادات النظام';
@@ -129,9 +129,9 @@ $_lang['user_management'] = 'إدارة المستخدمين';
 $_lang['user_management_desc'] = 'إدارة المستخدمين وصلاحياتهم';
 $_lang['user_group_management'] = 'قوائم تحكم الوصول';
 $_lang['user_group_management_desc'] = 'إدارة صلاحيات المستخدم من خلال المجموعات، الأدوار وسياسات الوصول';
-$_lang['view_logging'] = 'عمليات المدير';
-$_lang['view_logging_desc'] = 'عرض نشاط المدير الأخيرة.';
+$_lang['view_logging'] = 'Manager log';
+$_lang['view_logging_desc'] = 'View the recent manager activity';
 $_lang['view_sysinfo'] = 'معلومات النظام';
-$_lang['view_sysinfo_desc'] = 'عرض معلومات المخدم، مثل phpinfo، معلومات قاعدة البيانات، وغيرها.';
+$_lang['view_sysinfo_desc'] = 'View server information, such as phpinfo, database info, and more';
 $_lang['wiki'] = 'ويكي';
-$_lang['wiki_desc'] = 'تشغيل التوثيق الرسمي لمودكس.';
+$_lang['wiki_desc'] = 'Launch the official MODX documentation';
