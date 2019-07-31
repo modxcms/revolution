@@ -704,7 +704,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+node.attributes.pathRelative+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
