@@ -124,9 +124,12 @@ class ResourceUpdateManagerController extends ResourceManagerController {
         $this->resourceArray['cacheable'] = intval($this->resourceArray['cacheable']) == 1 ? true : false;
         $this->resourceArray['deleted'] = intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = intval($this->resourceArray['uri_override']) == 1 ? true : false;
-        $this->resourceArray['syncsite'] = isset($this->resourceArray['syncsite'])
-            ? intval($this->resourceArray['syncsite']) == 1 ? true : false
-            : intval($this->context->getOption('syncsite_default', 1, $this->modx->_userConfig)) == 1 ? true : false;
+        if (isset($this->resourceArray['syncsite'])) {
+            $this->resourceArray['syncsite'] = intval($this->resourceArray['syncsite']) == 1 ? true : false;
+        } else {
+            $syncsiteDefault = $this->context->getOption('syncsite_default', 1, $this->modx->_userConfig);
+            $this->resourceArray['syncsite'] = intval($syncsiteDefault) == 1 ? true : false;
+        }
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($this->parent->get('pagetitle'));
