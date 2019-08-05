@@ -140,7 +140,7 @@ abstract class modRestController {
 	    $missing = array();
 	    foreach ($fields as $field) {
 	        $value = $this->getProperty($field);
-	        if (empty($value)) {
+	        if (empty($value) && (is_int($value) && $value == 0)) {
 	            $missing[] = $field;
 	            if ($setFieldError) {
                     $this->addFieldError($field,$this->modx->lexicon('rest.err_field_required'));
