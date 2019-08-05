@@ -139,8 +139,12 @@ abstract class modRestController {
 	public function checkRequiredFields(array $fields = array(),$setFieldError = true) {
 	    $missing = array();
 	    foreach ($fields as $field) {
-	        $value = $this->getProperty($field);
-	        if (empty($value) && $value !== "0") {
+            $value = $this->getProperty($field);
+
+            $isEmptyString = empty($value) && $value !== "0";
+            $isNotBase = !is_int($value) && !is_bool($value);
+
+	        if ($isEmptyString && $isNotBase) {
 	            $missing[] = $field;
 	            if ($setFieldError) {
                     $this->addFieldError($field,$this->modx->lexicon('rest.err_field_required'));
