@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Lisa Context';
-$_lang['context_create'] = 'Loo Context';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Context-i Andmed';
 $_lang['context_duplicate'] = 'Dubleeri Context-i';
 $_lang['context_err_ae'] = 'Context selle nimega juba eksisteerib.';

@@ -36,7 +36,7 @@ $_lang['namespace'] = 'Jmenný prostor';
 $_lang['namespace_desc'] = 'Jmenný prostor, ke kterému tato položka nastavení patří. Výchozí téma slovníku bude načteno pro tento jmenný prostor při dotazu na nastavení.';
 $_lang['namespace_filter'] = 'Filtrovat dle jmenného prostoru...';
 $_lang['search_by_key'] = 'Hledat dle klíče...';
-$_lang['setting_create'] = 'Vytvořit novou položku konfigurace';
+$_lang['setting_create'] = 'Nové nastavení';
 $_lang['setting_err'] = 'Zkontrolujte údaje v těchto políčkách: ';
 $_lang['setting_err_ae'] = 'Položka konfigurace s tímto klíčem již existuje. Zadejte jiný název klíče.';
 $_lang['setting_err_nf'] = 'Položka konfigurace nenalezena.';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'Je-li toto nastavení aktivní, MODX bude 
 $_lang['setting_compress_js_groups'] = 'Použít seskupování při kompresi javaskriptů';
 $_lang['setting_compress_js_groups_desc'] = 'Seskupit javasckripty jádra MODX správce obsahu pomocí minifikačního groupsConfig. Nastavte na Ano používáteli suhosin nebo jiný limitující faktor.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximální práh komprese javaskriptových souborů';
-$_lang['setting_compress_js_max_files_desc'] = 'Maximální počet javaskriptových souborů, které se pokusí MODX zkomprimovat najednou pokud je aktivní compress_js. Nastavte na nižší číslo pokud máte problémy s Google Minifikací ve správci obsahu.';
-
 $_lang['setting_concat_js'] = 'Používat minimalizované javaskriptové knihovny';
 $_lang['setting_concat_js_desc'] = 'Je-li toto nastavení aktivní, MODX bude používat minimalizované verze javaskriptových knihoven ve správci obsahu. Toto nastavení značně urychluje běh správce obsahu. Deaktivujte pouze v případě, kdy upravujete elementy jádra.';
 
@@ -258,10 +255,6 @@ $_lang['setting_emailsender'] = 'Adresa odesílatele registračního e-mailu';
 $_lang['setting_emailsender_desc'] = 'Zadejte e-mailovou adresu, která se zobrazí jako odesílatel v e-mailu při odeslání uživatelských údajů po registraci.';
 $_lang['setting_emailsender_err'] = 'Zadejte e-mail.';
 
-$_lang['setting_emailsubject'] = 'Předmět registračního e-mailu';
-$_lang['setting_emailsubject_desc'] = 'Předmět e-mailu, který je poslán uživateli po jeho registraci.';
-$_lang['setting_emailsubject_err'] = 'Zadejte text předmětu e-mailu.';
-
 $_lang['setting_enable_dragdrop'] = 'Povolit přetahování ve stromu dokumentů a elementů';
 $_lang['setting_enable_dragdrop_desc'] = 'Je-li nastavení neaktivní, není možno upravovat dokumenty/elementy přetažením v rámci stromu.';
 
@@ -307,9 +300,6 @@ $_lang['setting_filemanager_url_desc'] = 'Deprecated - Používejte Zdroje médi
 
 $_lang['setting_filemanager_url_relative'] = 'Relativní URL pro správce souborů? (Deprecated)';
 $_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - Používejte Zdroje médií. Je-li URL nastavená v filemanager_url relativní vůči MODX base_url, nastavte tuto volbu na Ano. Je-li URL nastavená ve filemanager_url mimo webroot nastavte Ne.';
-
-$_lang['setting_forgot_login_email'] = 'E-mail zapomenutého přihlášení';
-$_lang['setting_forgot_login_email_desc'] = 'Šablona e-mailu, který je odeslán pokud uživatel zapomněl své přihlašovací údaje.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Pro přizpůsobení formulářů využit pravidla všech členských uživatelských skupiny';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Je-li nastaveno Ano, při aplikaci pravidel z přizpůsobení formulářů budou použita pravidla všech uživatelských skupin, do kterých je uživatel přiřazen. V opačném případě jsou použita pouze pravidla přiřazená k uživatelově primární skupině. Poznámka: volba Ano může zapříčinit chyby s konfliktními pravidly v jednotlivých uživatelských skupinách.';
@@ -444,23 +434,27 @@ $_lang['setting_manager_js_cache_max_age'] = 'Staří komprimované cache JS/CSS
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximální stáří (v sekundách) cache prohlížeče pro CSS/JS správce obsahu. Po uplynutí této doby bude prohlížeči poslán další podmíněný GET. Pro nižší trafic nastavte delší dobu.';
 $_lang['setting_manager_js_document_root'] = 'Document Root pro komprimované JS/CSS ve správci obsahu';
 $_lang['setting_manager_js_document_root_desc'] = 'Pokud Váš server nezpracovává proměnnou serveru DOCUMENT_ROOT a chcete používat možnost komprese JS/CSS ve správci obsahu nastavte jí zde manuálně. Pokud si nejste jist o co jde, pak toto nastavení neměňte.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Povolit zlib výstupní kompresy JS/CSS pro správce obsahu';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Zda-li použít či nikoli zlib výstupní kompresi komprimovaných CSS/JS pro správce obsahu. Nechte vypnuté pokud si nejste jistí, že může být nastavena PHP konfigurační proměnná zlib.output_compression na 1. MODX toto doporučuje neměnit.';
-
-$_lang['setting_manager_lang_attribute'] = 'HTML a XML jazykové atributy správce obsahu';
-$_lang['setting_manager_lang_attribute_desc'] = 'Zadejte jazykový kód, který nejlépe vystihuje zvolený jazyk správce obsahu, toto nastavení zajistí, že Vám prohlížeč zobrazí správně data.';
-
-$_lang['setting_manager_language'] = 'Jazyk správce obsahu';
-$_lang['setting_manager_language_desc'] = 'Zvolte jazyk pro MODX správce obsahu.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternativní URL pro Správce obsahu';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Alternativní URL, na kterou je přesměrován nepřihlášený uživatel, pokud se chce přihlásit do Správce obsahu.';
+
+$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
+
+$_lang['setting_login_help_button'] = 'Show Help Button';
+$_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Úvodní stránka po přihlášení do správce obsahu';
 $_lang['setting_manager_login_start_desc'] = 'Zadejte ID dokumentu, na která chcete přesměrovat uživatele po přihlášení do správce obsahu. <strong>Poznámka: ujistěte se, že ID patří existujícímu dokumentu, je publikován a je přístupný tomuto uživateli!</strong>';
 
 $_lang['setting_manager_theme'] = 'Vzhled správce obsahu';
 $_lang['setting_manager_theme_desc'] = 'Vyberte vzhled pro správce obsahu.';
+
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Formát času ve správci obsahu';
 $_lang['setting_manager_time_format_desc'] = 'Formátovací řetězec v PHP date() formátu, jak má být čas reprezentován ve správci obsahu.';
@@ -733,8 +727,8 @@ $_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate th
 $_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
 
-$_lang['setting_static_elements_default_category'] = 'Static elements default category';
-$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+$_lang['setting_static_elements_default_category'] = 'Výchozí kategorie pro statické prvky';
+$_lang['setting_static_elements_default_category_desc'] = 'Zvolte výchozí kategorii pro vytváření nových statických prvků.';
 
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
@@ -774,9 +768,6 @@ $_lang['setting_unauthorized_page_err'] = 'Zadejte ID zdroje pro stránku neauto
 $_lang['setting_upload_files'] = 'Povolené typy souborů';
 $_lang['setting_upload_files_desc'] = 'Zde můžete zadat seznam souborů, které mohou být nahrávány do "assets/files/" pomocí správce souborů. Zadejte přípony souborů pro typy souborů oddělené čárkami.';
 
-$_lang['setting_upload_flash'] = 'Povolené typy souborů flash';
-$_lang['setting_upload_flash_desc'] = 'Zde můžete zadat seznam souborů, které mohou být nahrávány do "assets/flash/" pomocí správce souborů. Zadejte přípony souborů pro typy flashů oddělené čárkami.';
-
 $_lang['setting_upload_images'] = 'Povolené typy obrázků';
 $_lang['setting_upload_images_desc'] = 'Zde můžete zadat seznam souborů, které mohou být nahrávány do "assets/images/" pomocí správce souborů. Zadejte přípony souborů pro typy obrázků oddělené čárkami.';
 
@@ -812,10 +803,6 @@ $_lang['setting_user_nav_parent_desc'] = 'Složka pro načítání všech polož
 $_lang['setting_webpwdreminder_message'] = 'E-mail pro vyžádání nového hesla';
 $_lang['setting_webpwdreminder_message_desc'] = 'Šablona zprávy, která se odešle pokud zažádá webový uživatel o zaslání nového hesla e-mailem. Správce obsahu mu odešle e-mail obsahující nové heslo a aktivační informace. <br /><strong>Poznámka:</strong> Následující placeholdery jsou nahrazeny správcem obsahu než je správa odeslána: <br /><br />[[+sname]] - Název portálu, <br />[[+saddr]] - E-mailová adresa portálu, <br />[[+surl]] - URL adresa portálu, <br />[[+uid]] - Jméno nebo ID uživatele, <br />[[+pwd]] - Heslo uživatele, <br />[[+ufn]] - Celé jméno uživatele. <br /><br /><strong>Ponechte placeholdery [[+uid]] a [[+pwd]] v e-mailu nebo nebude uživatelské jméno a heslo obsaženo v e-mailu a uživatel nebude znát své uživatelské jméno a heslo!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Dobrý den [[+uid]]\n\nPro aktivaci nového heslo klikněte na odkaz:\n\n[[+surl]]\n\nPokud vše proběhlo úspěšně můžete použít následující heslo pro přihlášení:\n\nHeslo:[[+pwd]]\n\nPokud jste o změnu hesla nežádali tak tento e-mail ignorujte.\n\nS pozdravem,\nadministrátor portálu.';
-
-$_lang['setting_websignupemail_message'] = 'E-mail po registraci z webu';
-$_lang['setting_websignupemail_message_desc'] = 'Šablona zprávy odesílané webovým uživatelům, pokud jim vytvoříte účet webového uživatele a necháte správce obsahu, aby jim odeslal e-mail obsahující jejich uživatelské jméno a heslo. <br /><strong>Poznámka:</strong> Následující placeholdery jsou nahrazeny správcem obsahu než je správa odeslána: <br /><br />[[+sname]] - Název portálu, <br />[[+saddr]] - E-mailová adresa portálu, <br />[[+surl]] - URL adresa portálu, <br />[[+uid]] - Jméno nebo ID uživatele, <br />[[+pwd]] - Heslo uživatele, <br />[[+ufn]] - Celé jméno uživatele. <br /><br /><strong>Ponechte placeholdery [[+uid]] a [[+pwd]] v e-mailu nebo nebude uživatelské jméno a heslo obsaženo v e-mailu a uživatel nebude znát své uživatelské jméno a heslo!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Dobrý den [[+uid]] \n\nZde jsou Vaše přihlašovací údaje pro portál [[+sname]]:\n\nUživatelské jméno: [[+uid]]\nHeslo: [[+pwd]]\n\nJakmile se přihlásíte na [[+sname]] ([[+surl]]) můžete si změnit své heslo.\n\nS pozdravem,\nadministrátor portálu.';
 
 $_lang['setting_welcome_screen'] = 'Zobrazit uvítací obrazovku';
 $_lang['setting_welcome_screen_desc'] = 'Je-li nastaveno na "Ano", uvítací obrazovka se zobrazí při dalším načtení úvodní stránky a pak se již nezobrazí.';

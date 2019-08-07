@@ -7,31 +7,35 @@
  * @subpackage lexicon
  */
 $_lang['database_charset'] = 'Adatbázis karakterkészlete';
-$_lang['database_name'] = 'Database name';
-$_lang['database_server'] = 'Database server';
+$_lang['database_name'] = 'Adatbázis neve';
+$_lang['database_server'] = 'Adatbázis-kiszolgáló';
 $_lang['database_tables'] = 'Database tables';
-$_lang['database_optimize'] = 'Optimize Database';
-$_lang['database_table_clickhere'] = 'Click here';
-$_lang['database_table_clickbackup'] = 'to backup &amp; download the selected tables';
-$_lang['database_table_datasize'] = 'Data size';
+$_lang['database_optimize'] = 'Adatbázis optimalizálása';
+$_lang['database_optimize_process'] = 'Most folyik a táblák optimalizálása.';
+$_lang['database_optimize_success'] = 'A táblák optimalizálása sikeresen megtörtént.';
+$_lang['database_optimize_error'] = 'Hiba történt az adatbázistáblák optimalizálása közben.';
+$_lang['database_optimize_processing'] = 'Optimalizálás...';
+$_lang['database_table_clickhere'] = 'Kattintson ide';
+$_lang['database_table_clickbackup'] = 'a kiválasztott táblák biztonsági másolásához és letöltéséhez';
+$_lang['database_table_datasize'] = 'Adat mérete';
 $_lang['database_table_droptablestatements'] = 'Generate DROP TABLE statements.';
-$_lang['database_table_effectivesize'] = 'Effective size';
-$_lang['database_table_indexsize'] = 'Index size';
+$_lang['database_table_effectivesize'] = 'Tényleges méret';
+$_lang['database_table_indexsize'] = 'Mutató mérete';
 $_lang['database_table_overhead'] = 'Overhead';
-$_lang['database_table_reserved'] = 'Reserved';//sqlsrv
-$_lang['database_table_records'] = 'Records';
-$_lang['database_table_tablename'] = 'Table name';
-$_lang['database_table_totalsize'] = 'Total size';
-$_lang['database_table_totals'] = 'Totals:';
-$_lang['database_table_unused'] = 'Unused';//sqlsrv
-$_lang['database_type'] = 'Database type';
-$_lang['database_version'] = 'Database version';
-$_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Version';
-$_lang['localtime'] = 'Local Time';
-$_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Version';
-$_lang['modx_version'] = 'MODX version';
+$_lang['database_table_reserved'] = 'Lefoglalt';//sqlsrv
+$_lang['database_table_records'] = 'Bejegyzések';
+$_lang['database_table_tablename'] = 'Tábla neve';
+$_lang['database_table_totalsize'] = 'Teljes méret';
+$_lang['database_table_totals'] = 'Összesen:';
+$_lang['database_table_unused'] = 'Nem használt';//sqlsrv
+$_lang['database_type'] = 'Adatbázis fajtája';
+$_lang['database_version'] = 'Adatbázis verzió';
+$_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> változat';
+$_lang['localtime'] = 'Helyi idő';
+$_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> változat';
+$_lang['modx_version'] = 'MODX változat';
 $_lang['onlineusers_action'] = 'Tevékenység';
-$_lang['onlineusers_actionid'] = 'Action ID';
+$_lang['onlineusers_actionid'] = 'Tevékenység azonosítója';
 $_lang['onlineusers_ipaddress'] = 'Felhasználó IP-címe';
 $_lang['onlineusers_lasthit'] = 'Utolsó találat';
 $_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes (current time is ';

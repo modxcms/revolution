@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'namespace';
-$_lang['namespace_create'] = 'Criar um espaço nominal';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'Ocorreu um erro ao tentar criar espaço nominal.';
 $_lang['namespace_err_nf'] = 'Espaço nominal não foi encontrado.';
 $_lang['namespace_err_nfs'] = 'Espaço nominal não foi encontrado com o nome: %s';

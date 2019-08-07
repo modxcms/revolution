@@ -1,3 +1,33 @@
 <?php
 
-$_lang['language_zh'] = '中文 (Zhōngwén)';
+$_lang['language_ar'] = '阿拉伯语';
+$_lang['language_be'] = 'Belarusian';
+$_lang['language_bg'] = 'Bulgarian';
+$_lang['language_cs'] = '捷克语';
+$_lang['language_da'] = '丹麦语';
+$_lang['language_de'] = '德语';
+$_lang['language_el'] = '希腊语';
+$_lang['language_en'] = '英语';
+$_lang['language_es'] = '西班牙语';
+$_lang['language_et'] = 'Estonian';
+$_lang['language_fa'] = 'Persian';
+$_lang['language_fi'] = '芬兰语';
+$_lang['language_fr'] = '法语';
+$_lang['language_he'] = 'Hebrew';
+$_lang['language_hi'] = 'Hindi';
+$_lang['language_hu'] = 'Hungarian';
+$_lang['language_id'] = '印度尼西亚语';
+$_lang['language_it'] = '意大利语';
+$_lang['language_ja'] = '日语';
+$_lang['language_nl'] = '荷兰语';
+$_lang['language_pl'] = '波兰语';
+$_lang['language_pt'] = 'Portuguese';
+$_lang['language_pt-br'] = 'Portuguese Brazilian';
+$_lang['language_ro'] = 'Romanian';
+$_lang['language_ru'] = '俄语';
+$_lang['language_sv'] = 'Swedish';
+$_lang['language_th'] = '泰语';
+$_lang['language_tr'] = '土耳其语';
+$_lang['language_uk'] = 'Ukrainian';
+$_lang['language_yo'] = 'Yoruba';
+$_lang['language_zh'] = '简体中文';

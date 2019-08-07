@@ -9,11 +9,11 @@
 $_lang['event'] = 'Esemény';
 $_lang['events'] = 'Events';
 $_lang['plugin'] = 'Plugin';
-$_lang['plugin_add'] = 'Add Plugin';
+$_lang['plugin_add'] = 'Beépülő hozzáadása';
 $_lang['plugin_add_to_event'] = 'Add Plugin to Event';
 $_lang['plugin_code'] = 'Plugin code (php)';
 $_lang['plugin_config'] = 'Plugin configuration';
-$_lang['plugin_desc'] = 'Description';
+$_lang['plugin_desc'] = 'Leírás';
 $_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
 $_lang['plugin_desc_description'] = 'A short description of this Plugin.';
 $_lang['plugin_desc_name'] = 'The name of this Plugin.';

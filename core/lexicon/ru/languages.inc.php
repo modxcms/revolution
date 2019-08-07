@@ -1,3 +1,33 @@
 <?php
 
-$_lang['language_ru'] = 'Русский язык';
+$_lang['language_ar'] = 'Арабский';
+$_lang['language_be'] = 'Белорусский';
+$_lang['language_bg'] = 'Болгарский';
+$_lang['language_cs'] = 'Чешский';
+$_lang['language_da'] = 'Датский';
+$_lang['language_de'] = 'Немецкий';
+$_lang['language_el'] = 'Греческий';
+$_lang['language_en'] = 'Английский';
+$_lang['language_es'] = 'Испанский';
+$_lang['language_et'] = 'Эстонский';
+$_lang['language_fa'] = 'Персидский';
+$_lang['language_fi'] = 'Финский';
+$_lang['language_fr'] = 'Французский';
+$_lang['language_he'] = 'Иврит';
+$_lang['language_hi'] = 'Хинди';
+$_lang['language_hu'] = 'Венгерский';
+$_lang['language_id'] = 'Индонезийский';
+$_lang['language_it'] = 'Итальянский';
+$_lang['language_ja'] = 'Японский';
+$_lang['language_nl'] = 'Голландский';
+$_lang['language_pl'] = 'Польский';
+$_lang['language_pt'] = 'Португальский';
+$_lang['language_pt-br'] = 'Португальский (Бразилия)';
+$_lang['language_ro'] = 'Румынский';
+$_lang['language_ru'] = 'Русский';
+$_lang['language_sv'] = 'Шведский';
+$_lang['language_th'] = 'Тайский';
+$_lang['language_tr'] = 'Турецкий';
+$_lang['language_uk'] = 'Украинский';
+$_lang['language_yo'] = 'Йоруба';
+$_lang['language_zh'] = 'Китайский (упрощенный)';

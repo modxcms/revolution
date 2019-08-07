@@ -36,7 +36,7 @@ $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['search_by_key'] = 'Search by key...';
-$_lang['setting_create'] = 'Create New Setting';
+$_lang['setting_create'] = 'Új beállítás';
 $_lang['setting_err'] = 'Please check your data for the following fields: ';
 $_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
 $_lang['setting_err_nf'] = 'Setting not found.';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'Ha engedélyezve van, a MODX a parancsáll
 $_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximum JavaScript Files Compression Threshold';
-$_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
-
 $_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
@@ -258,10 +255,6 @@ $_lang['setting_emailsender'] = 'Registration Email From Address';
 $_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
 
-$_lang['setting_emailsubject'] = 'Registration Email Subject';
-$_lang['setting_emailsubject_desc'] = 'The subject line for the default signup email when a User is registered.';
-$_lang['setting_emailsubject_err'] = 'Please state the subject line for the signup email.';
-
 $_lang['setting_enable_dragdrop'] = 'Enable Drag/Drop in Resource/Element Trees';
 $_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and dropping in Resource and Element trees.';
 
@@ -308,9 +301,6 @@ $_lang['setting_filemanager_url_desc'] = 'Deprecated - use Media Sources instead
 $_lang['setting_filemanager_url_relative'] = 'Is File Manager URL Relative? (Deprecated)';
 $_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_url setting is relative to the MODX base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
 
-$_lang['setting_forgot_login_email'] = 'Forgot Login Email';
-$_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
 
@@ -324,7 +314,7 @@ $_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maximum Length';
 $_lang['setting_friendly_alias_max_length_desc'] = 'If greater than zero, the maximum number of characters to allow in a Resource alias. Zero equals unlimited.';
 
 $_lang['setting_friendly_alias_realtime'] = 'Keresőbarát URL képzése valós időben';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Megadja, hogy az erőforrás hivatkozási neve azonnal létrejöjjön az oldal címének gépelése közben, vagy csak az erőforrás mentésekor (az automatic_alias engedélyezve kell legyen a működéséhez).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Alias Character Restriction Method';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'The method used to restrict characters used in a Resource alias. "pattern" allows a RegEx pattern to be provided, "legal" allows any legal URL characters, "alpha" allows only letters of the alphabet, and "alphanumeric" allows only letters and numbers.';
@@ -370,7 +360,7 @@ $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL létrehozásának mintája a [[~id]] címkéhez. Választható értékek <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">itt</a>.';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
@@ -427,7 +417,7 @@ $_lang['setting_mail_smtp_user'] = 'SMTP User';
 $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
 
 $_lang['setting_main_nav_parent'] = 'Főmenü szülője';
-$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+$_lang['setting_main_nav_parent_desc'] = 'A főmenü összes bejegyzésének tárolója.';
 
 $_lang['setting_manager_direction'] = 'Manager Text Direction';
 $_lang['setting_manager_direction_desc'] = 'Choose the direction that the text will be rendered in the Manager, left to right or right to left.';
@@ -444,23 +434,27 @@ $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache A
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
 $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
 $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Whether or not to enable zlib output compression for compressed CSS/JS in the manager. Do not turn this on unless you are sure the PHP config variable zlib.output_compression can be set to 1. MODX recommends leaving it off.';
-
-$_lang['setting_manager_lang_attribute'] = 'Manager HTML and XML Language Attribute';
-$_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
-
-$_lang['setting_manager_language'] = 'Manager Language';
-$_lang['setting_manager_language_desc'] = 'Select the language for the MODX Content Manager.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
+
+$_lang['setting_login_background_image'] = 'Bejelentkezési háttérkép';
+$_lang['setting_login_background_image_desc'] = 'Háttérkép a kezelő bejelentkezéshez. Önműködően igazodik a képernyő méretéhez.';
+
+$_lang['setting_login_logo'] = 'Bejelentkezési logó';
+$_lang['setting_login_logo_desc'] = 'A kezelő bal felső sarkában megjelenő logó. Ha üresen marad, a MODX logója jelenik meg.';
+
+$_lang['setting_login_help_button'] = 'Súgó gomb megjelenítése';
+$_lang['setting_login_help_button_desc'] = 'Engedélyezés esetén a bejelentkező képernyőn megjelenik egy segítség gomb. A következő szókészlet-bejegyzéseket módosítva változtatható a szövege a core/login alatt: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Manager Login Startup';
 $_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged into the manager. <strong>NOTE: make sure the ID you\'ve entered belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
 $_lang['setting_manager_theme'] = 'Manager Theme';
 $_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager.';
+
+$_lang['setting_manager_logo'] = 'Kezelő logója';
+$_lang['setting_manager_logo_desc'] = 'A tartalomkezelő fejlécében megjelenítendő logó.';
 
 $_lang['setting_manager_time_format'] = 'Manager Time Format';
 $_lang['setting_manager_time_format_desc'] = 'The format string, in PHP date() format, for the time settings represented in the manager.';
@@ -501,8 +495,8 @@ $_lang['setting_new_file_permissions_desc'] = 'When uploading a new file in the 
 $_lang['setting_new_folder_permissions'] = 'New Folder Permissions';
 $_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in the File Manager, the File Manager will attempt to change the folder permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
-$_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
+$_lang['setting_parser_recurse_uncacheable'] = 'A nem gyorsítótárazható értelmezés késleltetése';
+$_lang['setting_parser_recurse_uncacheable_desc'] = 'Ha nincs engedélyezve, a nem gyorsítótárazható elemek kimenete tárolva lehet a gyorsítótárazható elemek tartalmán belül. Csak akkor ne engedélyezze, ha gondok vannak az összetett egymásba ágyazott feldolgozással.';
 
 $_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
 $_lang['setting_password_generated_length_desc'] = 'The length of the auto-generated password for a User.';
@@ -774,9 +768,6 @@ $_lang['setting_unauthorized_page_err'] = 'Please specify a Resource ID for the 
 $_lang['setting_upload_files'] = 'Uploadable File Types';
 $_lang['setting_upload_files_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/files/\' using the Resource Manager. Please enter the extensions for the filetypes, seperated by commas.';
 
-$_lang['setting_upload_flash'] = 'Uploadable Flash Types';
-$_lang['setting_upload_flash_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/flash/\' using the Resource Manager. Please enter the extensions for the flash types, separated by commas.';
-
 $_lang['setting_upload_images'] = 'Uploadable Image Types';
 $_lang['setting_upload_images_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/images/\' using the Resource Manager. Please enter the extensions for the image types, separated by commas.';
 
@@ -797,8 +788,8 @@ $_lang['setting_use_editor'] = 'Enable Rich Text Editor';
 $_lang['setting_use_editor_desc'] = 'Do you want to enable the rich text editor? If you\'re more comfortable writing HTML, then you can turn the editor off using this setting. Note that this setting applies to all documents and all users!';
 $_lang['setting_use_editor_err'] = 'Please state whether or not you want to use an RTE editor.';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
+$_lang['setting_use_frozen_parent_uris'] = 'Használjon rögzített fölérendelt URI-kat';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Engedélyezésénél az alárendelt erőforrások URI-ja az egyik fölérendelt elem rögzített URI-jához képest viszonylagos lesz, tekintet nélkül a fában felül levő hivatkozási nevekre.';
 
 $_lang['setting_use_multibyte'] = 'Use Multibyte Extension';
 $_lang['setting_use_multibyte_desc'] = 'Set to true if you want to use the mbstring extension for multibyte characters in your MODX installation. Only set to true if you have the mbstring PHP extension installed.';
@@ -807,15 +798,11 @@ $_lang['setting_use_weblink_target'] = 'Use WebLink Target';
 $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MODX link tags and makeUrl() generate links as the target URL for WebLinks. Otherwise, the internal MODX URL will be generated by link tags and the makeUrl() method.';
 
 $_lang['setting_user_nav_parent'] = 'Felhasználói menü szülője';
-$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
+$_lang['setting_user_nav_parent_desc'] = 'A felhasználói menü összes bejegyzésének tárolója.';
 
 $_lang['setting_webpwdreminder_message'] = 'Web Reminder Email';
 $_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an email containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\n\nTo activate your new password, click the following link:\n\n[[+surl]]\n\nIf successful, you can use the following password to log in:\n\nPassword:[[+pwd]]\n\nIf you did not request this email, then please ignore it.\n\nRegrads,\nSite Administrator';
-
-$_lang['setting_websignupemail_message'] = 'Web Signup email';
-$_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]]:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Show Welcome Screen';
 $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will show on the next successful loading of the welcome page, and then not show after that.';

@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Действие';
 $_lang['onlineusers_actionid'] = 'ID действие';
 $_lang['onlineusers_ipaddress'] = 'Потребителски IP адрес';
 $_lang['onlineusers_lasthit'] = 'Последно действие';
-$_lang['onlineusers_message'] = 'Този списък показва всички активни потребители в последните 20 минути (текущото време е [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'Онлайн потребители';
 $_lang['onlineusers_user'] = 'Потребител';
 $_lang['onlineusers_userid'] = 'ID на потребителя';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Действие';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'Актуализация';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'Extras';
+
 $_lang['quicklinks'] = 'Бързи линкове';
 $_lang['security_notices'] = 'Известия за сигурност';
 $_lang['view_tree'] = 'Виж в дръвовиден изглед';

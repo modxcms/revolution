@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Környezet';
 $_lang['context_add'] = 'Környezet hozzáadása';
-$_lang['context_create'] = 'Környezet létrehozása';
+$_lang['context_create'] = 'Új környezet';
 $_lang['context_data'] = 'Környezeti adatok';
 $_lang['context_duplicate'] = 'Környezet kettőzése';
 $_lang['context_err_ae'] = 'Már létezik ilyen nevű környezet.';

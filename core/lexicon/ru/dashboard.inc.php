@@ -9,7 +9,7 @@
 $_lang['active_users_none'] = 'Сейчас нет пользователей онлайн.';
 $_lang['add_user'] = 'Добавить пользователя';
 $_lang['create_resource'] = 'Создать ресурс';
-$_lang['dashboard'] = 'Панель виджетов';
+$_lang['dashboard'] = 'Панель управления';
 $_lang['documentation'] = 'Документация';
 $_lang['file_bug'] = 'Сообщить об ошибке';
 $_lang['forums'] = 'Форумы';
@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Действие';
 $_lang['onlineusers_actionid'] = 'ID действия';
 $_lang['onlineusers_ipaddress'] = 'IP-адрес пользователя';
 $_lang['onlineusers_lasthit'] = 'Последний визит';
-$_lang['onlineusers_message'] = 'Этот список показывает всех активных пользователей за 20 минут (текущее время [[+curtime]])';
+$_lang['onlineusers_message'] = 'Список всех активных пользователей за последние 20 минут:';
 $_lang['onlineusers_title'] = 'Пользователи онлайн';
 $_lang['onlineusers_user'] = 'Пользователь';
 $_lang['onlineusers_userid'] = 'ID пользователя';
+
+$_lang['updates_sort'] = 'Сортировать';
+$_lang['updates_status'] = 'Статус';
+$_lang['updates_action'] = 'Действие';
+$_lang['updates_available'] = 'Доступны обновления';
+$_lang['updates_update'] = 'Обновить';
+$_lang['updates_ok'] = 'Актуальный';
+$_lang['updates_extras'] = 'Пакеты';
+
 $_lang['quicklinks'] = 'Быстрые ссылки';
 $_lang['security_notices'] = 'Безопасность';
 $_lang['view_tree'] = 'Смотреть дерево';

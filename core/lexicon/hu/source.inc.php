@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'A short description of the Media Source.';
 $_lang['source_duplicate'] = 'Duplicate Media Source';
 $_lang['source_err_ae_name'] = 'A Media Source with that name already exists! Please specify a new name.';
 $_lang['source_err_nf'] = 'Media Source not found!';
+$_lang['source_err_init'] = 'Nem sikerült a "[[+source]]" médiaforrást előkészíteni!';
 $_lang['source_err_nfs'] = 'No Media Source can be found with the id: [[+id]].';
 $_lang['source_err_ns'] = 'Please specify the Media Source.';
 $_lang['source_err_ns_name'] = 'Please specify a name for the Media Source.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'File System';
 $_lang['source_type.file_desc'] = 'A filesystem-based source that navigates your server\'s files.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket.';
+$_lang['source_type.ftp'] = 'Állományátviteli szabályrendszer (FTP)';
+$_lang['source_type.ftp_desc'] = 'Távoli FTP kiszolgáló kezelése.';
 $_lang['source_types'] = 'Source Types';
 $_lang['source_types.intro_msg'] = 'This is a list of all the installed Media Source Types you have on this MODX instance.';
 $_lang['source.access.intro_msg'] = 'Here you can restrict a Media Source to specific User Groups and apply policies for those User Groups. A Media Source with no User Groups attached to it is available to all manager users.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
+$_lang['prop_file.visibility_desc'] = 'Az új állományok és mappák alapértelmezett láthatósága.';
+$_lang['no_move_folder'] = 'A médiaforrás illesztője nem támogatja a mappák mozgatását most.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
-$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
 $_lang['prop_s3.region_desc'] = 'A vödör körzete. Például: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Elhagyható elérési út/mappa előtag';
+$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Kiszolgáló neve vagy IP címe';
+$_lang['prop_ftp.username_desc'] = 'Felhasználónév hitelesítéshez. Lehet "névtelen".';
+$_lang['prop_ftp.password_desc'] = 'A felhasználó jelszava. Névtelen felhasználóhoz hagyja üresen.';
+$_lang['prop_ftp.url_desc'] = 'Ha ennek az FTP kiszolgálónak van nyilvános webcíme, itt beírhatja. Ezzel a médiaböngészőben láthatók lesznek a képek előnézetei.';
+$_lang['prop_ftp.port_desc'] = 'A kiszolgáló portja, alapértelmezetten 21.';
+$_lang['prop_ftp.root_desc'] = 'Alapkönyvtár, kapcsolódás után lesz megnyitva';
+$_lang['prop_ftp.passive_desc'] = 'Passzív FTP mód engedélyezése vagy tiltása';
+$_lang['prop_ftp.ssl_desc'] = 'SSL kapcsolódás engedélyezése vagy tiltása';
+$_lang['prop_ftp.timeout_desc'] = 'Kapcsolódás időtúllépése másodpercben.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

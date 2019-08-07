@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Konteksti';
 $_lang['context_add'] = 'Lisää Konteksti';
-$_lang['context_create'] = 'Luo Konteksti';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Konteksti data';
 $_lang['context_duplicate'] = 'Kopioi Konteksti';
 $_lang['context_err_ae'] = 'Samanniminen Konteksti on jo olemassa.';

@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'İçerik';
 $_lang['context_add'] = 'İçerik Ekle';
-$_lang['context_create'] = 'İçerik Oluştur';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'İçerik Verisi';
 $_lang['context_duplicate'] = 'İçeriği Yinele';
 $_lang['context_err_ae'] = 'Bu isimde bir içerik zaten mevcut.';

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Namensraum';
-$_lang['namespace_create'] = 'Namensraum erstellen';
+$_lang['namespace_create'] = 'Neuer Namensraum';
 $_lang['namespace_err_create'] = 'Beim Versuch, den Namensraum zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['namespace_err_nf'] = 'Namensraum nicht gefunden.';
 $_lang['namespace_err_nfs'] = 'Namensraum mit der Bezeichnung %s nicht gefunden';

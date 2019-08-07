@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Namespace';
-$_lang['namespace_create'] = 'Opret Namespace';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'Der opstod en fejl under forsøget på at oprette et Namespace.';
 $_lang['namespace_err_nf'] = 'Namespace blev ikke fundet.';
 $_lang['namespace_err_nfs'] = 'Namespace med navnet "%s" blev ikke fundet';

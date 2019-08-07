@@ -36,7 +36,7 @@ $_lang['namespace'] = 'namespace';
 $_lang['namespace_desc'] = 'Espaço Nominal que esta configuração está associado. O tópico léxico padrão será carregado para este espaço nominal ao pegar Configurações.';
 $_lang['namespace_filter'] = 'Filtrar por espaço nominal...';
 $_lang['search_by_key'] = 'Pesquisa por chave...';
-$_lang['setting_create'] = 'Criar Nova Configuração';
+$_lang['setting_create'] = 'New Setting';
 $_lang['setting_err'] = 'Por favor verifique os dados para os seguintes campos:';
 $_lang['setting_err_ae'] = 'Configuração com essa chave já existe. Por favor, especifique outro nome de chave.';
 $_lang['setting_err_nf'] = 'Configuração não encontrada.';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'Quando essa opção estiver habilitada, MO
 $_lang['setting_compress_js_groups'] = 'Agrupar quando estiver comprimindo JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Agrupar JavaScript do núcleo do Gerenciador MODX usando o groupsConfig do minify. Defina Sim se estiver usando suhosin ou outros fatores de limitação.';
 
-$_lang['setting_compress_js_max_files'] = 'Limiar máximo de compressão de arquivos JavaScript';
-$_lang['setting_compress_js_max_files_desc'] = 'O número máximo de arquivos JavaScript que MODX tentará comprimir quando compress_js está ligado. Defina como um número menor, se você estiver enfrentando problemas com Google Minify no Gerenciador MODX.';
-
 $_lang['setting_concat_js'] = 'Usar Bibliotecas de Javascript Concatenadas';
 $_lang['setting_concat_js_desc'] = 'Quando essa opção estiver habilitada, o MODX usará uma versão compactada de suas folhas de estilo css na interface do Manager. Isto reduz a carga e o tempo de execução dentro do painel. Desative apenas se você estiver modificando elementos do núcleo.';
 
@@ -258,10 +255,6 @@ $_lang['setting_emailsender'] = 'Remetente do Email de Saudação de Registro';
 $_lang['setting_emailsender_desc'] = 'Aqui você pode especificar o e-mail endereço usado quando os Usuários recebem seus nomes de usuário e senhas.';
 $_lang['setting_emailsender_err'] = 'Por favor, indique o endereço de e-mail da administração.';
 
-$_lang['setting_emailsubject'] = 'Assunto do E-mail de Registo';
-$_lang['setting_emailsubject_desc'] = 'O assunto para o e-mail de inscrição padrão quando um usuário é cadastrado.';
-$_lang['setting_emailsubject_err'] = 'Por favor, indique a linha de assunto para o e-mail de inscrição.';
-
 $_lang['setting_enable_dragdrop'] = 'Habilitar Arrastar e Soltar em árvores de Elemento/Recurso';
 $_lang['setting_enable_dragdrop_desc'] = 'Se desabilitado, impedirá arrastar e soltar em árvores de Recurso e Elemento.';
 
@@ -307,9 +300,6 @@ $_lang['setting_filemanager_url_desc'] = 'Deprecated - use Media Sources instead
 
 $_lang['setting_filemanager_url_relative'] = 'O Gerenciador de Arquivos é de URL Relativa? (Obsoleto)';
 $_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_url setting is relative to the MODX base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
-
-$_lang['setting_forgot_login_email'] = 'Email para Login Esquecido';
-$_lang['setting_forgot_login_email_desc'] = 'The template for the email that is sent when a user has forgotten their MODX username and/or password.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
@@ -444,23 +434,27 @@ $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache A
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
 $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
 $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Permitir a saída de compressão de zlib para o JS/CSS do Gerenciador';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Whether or not to enable zlib output compression for compressed CSS/JS in the manager. Do not turn this on unless you are sure the PHP config variable zlib.output_compression can be set to 1. MODX recommends leaving it off.';
-
-$_lang['setting_manager_lang_attribute'] = 'Atributo de idioma HTML e XML do Gerenciador';
-$_lang['setting_manager_lang_attribute_desc'] = 'Enter the language code that best fits with your chosen manager language, this will ensure that the browser can present content in the best format for you.';
-
-$_lang['setting_manager_language'] = 'Idioma do Gerenciador';
-$_lang['setting_manager_language_desc'] = 'Selecione o idioma para o Gerenciador de Conteúdo de MODX.';
 
 $_lang['setting_manager_login_url_alternate'] = 'URL alternativa de Login no Gerenciador';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
+
+$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
+
+$_lang['setting_login_help_button'] = 'Show Help Button';
+$_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Página inicial do Gerenciador';
 $_lang['setting_manager_login_start_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged into the manager. <strong>NOTE: make sure the ID you\'ve entered belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
 $_lang['setting_manager_theme'] = 'Tema do Gerenciador';
 $_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager.';
+
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Manager Time Format';
 $_lang['setting_manager_time_format_desc'] = 'The format string, in PHP date() format, for the time settings represented in the manager.';
@@ -774,9 +768,6 @@ $_lang['setting_unauthorized_page_err'] = 'Please specify a Resource ID for the 
 $_lang['setting_upload_files'] = 'Uploadable File Types';
 $_lang['setting_upload_files_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/files/\' using the Resource Manager. Please enter the extensions for the filetypes, seperated by commas.';
 
-$_lang['setting_upload_flash'] = 'Uploadable Flash Types';
-$_lang['setting_upload_flash_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/flash/\' using the Resource Manager. Please enter the extensions for the flash types, separated by commas.';
-
 $_lang['setting_upload_images'] = 'Uploadable Image Types';
 $_lang['setting_upload_images_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/images/\' using the Resource Manager. Please enter the extensions for the image types, separated by commas.';
 
@@ -812,10 +803,6 @@ $_lang['setting_user_nav_parent_desc'] = 'O recipiente usado para puxar todos os
 $_lang['setting_webpwdreminder_message'] = 'E-mail de lembrete da Web';
 $_lang['setting_webpwdreminder_message_desc'] = 'Enter a message to be sent to your web users whenever they request a new password via email. The Content Manager will send an email containing their new password and activation information. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hello [[+uid]]\n\nTo activate your new password, click the following link:\n\n[[+surl]]\n\nIf successful, you can use the following password to log in:\n\nPassword:[[+pwd]]\n\nIf you did not request this email, then please ignore it.\n\nRegrads,\nSite Administrator';
-
-$_lang['setting_websignupemail_message'] = 'E-mail de inscrição Web';
-$_lang['setting_websignupemail_message_desc'] = 'Here you can set the message sent to your web users when you create a web account for them and let the Content Manager send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]]:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into [[+sname]] ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Mostrar tela de Boas Vindas';
 $_lang['setting_welcome_screen_desc'] = 'Se definido como true, a tela de boas-vindas será exibida no próximo carregamento sucesso da página de boas-vindas, e depois não vai aparecer depois disso.';

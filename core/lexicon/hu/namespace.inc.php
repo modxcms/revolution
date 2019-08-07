@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Namespace';
-$_lang['namespace_create'] = 'Névtér létrehozása';
+$_lang['namespace_create'] = 'Új névtér';
 $_lang['namespace_err_create'] = 'Hiba történt a névtér létrehozása közben.';
 $_lang['namespace_err_nf'] = 'Névtér nem található.';
 $_lang['namespace_err_nfs'] = 'A %s nevű névtér nem található';

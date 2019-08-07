@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'إجراء';
 $_lang['onlineusers_actionid'] = 'معرف الإجراء';
 $_lang['onlineusers_ipaddress'] = 'عنوان IP الخاص بالمستخدم';
 $_lang['onlineusers_lasthit'] = 'أخر ضغطة';
-$_lang['onlineusers_message'] = 'هذه اللائحة تعرض جميع المستخدمين النشطاء أخر ٢٠ دقيقة (الوقت الأن [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'المستخدمون المتواجدون الآن';
 $_lang['onlineusers_user'] = 'المستخدم';
 $_lang['onlineusers_userid'] = 'معرف المستخدم';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'الحالة';
+$_lang['updates_action'] = 'إجراء';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'ترقية';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'الإضافات';
+
 $_lang['quicklinks'] = 'روابط سريعة';
 $_lang['security_notices'] = 'ملاحظات الأمان';
 $_lang['view_tree'] = 'عرض الشجرة';

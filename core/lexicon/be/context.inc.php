@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Кантэкст';
 $_lang['context_add'] = 'Дадаць кантэкст';
-$_lang['context_create'] = 'Стварыць кантэкст';
+$_lang['context_create'] = 'Новы кантэкст';
 $_lang['context_data'] = 'Дадзеныя кантэксту';
 $_lang['context_duplicate'] = 'Дубляваць кантэкст';
 $_lang['context_err_ae'] = 'Кантэкст з такой назвай ужо існуе.';

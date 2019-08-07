@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'アクション';
 $_lang['onlineusers_actionid'] = 'アクションID';
 $_lang['onlineusers_ipaddress'] = 'IPアドレス';
 $_lang['onlineusers_lasthit'] = '最終アクセス';
-$_lang['onlineusers_message'] = '直近20分以内のアクティブなユーザー一覧を表示しています。（現在時刻 [[+curtime]]）';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'オンラインユーザー';
 $_lang['onlineusers_user'] = 'ユーザー';
 $_lang['onlineusers_userid'] = 'ユーザーID';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'ステータス';
+$_lang['updates_action'] = 'アクション';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = '更新';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'コンポーネント';
+
 $_lang['quicklinks'] = 'クイックリンク';
 $_lang['security_notices'] = 'セキュリティ通知';
 $_lang['view_tree'] = 'ツリーの閲覧';

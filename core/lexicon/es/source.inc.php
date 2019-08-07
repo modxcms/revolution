@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'Breve descripción del Origen Multimedia.';
 $_lang['source_duplicate'] = 'Duplicar Origen Multimedia';
 $_lang['source_err_ae_name'] = '¡Ya existe un Origen Multimedia con ese nombre! Por favor, especifica un nuevo nombre.';
 $_lang['source_err_nf'] = '¡Origen Multimedia no encontrado!';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'No se encontró un Origen Multimedia con el id: [[+id]].';
 $_lang['source_err_ns'] = 'Por favor, especifica el Origen Multimedia.';
 $_lang['source_err_ns_name'] = 'Por favor, especifica el nombre para el Origen Multimedia.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'Sistema de Archivos';
 $_lang['source_type.file_desc'] = 'Un Origen Multimedia basado en sistema de archivos para navegar por los archivos del servidor.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navegar a través de un "bucket" de Amazon S3.';
+$_lang['source_type.ftp'] = 'File Transfer Protocol';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'Tipos de Orígenes Multimedia';
 $_lang['source_types.intro_msg'] = 'Esta es una lista de todos los Tipos de Origen Multimedia disponibles en esta instalación de MODX.';
 $_lang['source.access.intro_msg'] = 'Aquí se puede restringir un Origen Multimedia a un Grupo de Usuarios y aplicar políticas para dichos Grupos de Usuarios. Un Origen Multimedia sin Grupo de Usuarios será accesible a todos los usuarios del panel de administración.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'La calidad de las miniaturas a generar, en una escala del 0 al 100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'El tipo de archivo de las miniaturas generadas.';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Depósito';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'Una lista separada por comas de archivos a o
 $_lang['prop_s3.thumbnailQuality_desc'] = 'La calidad de las miniaturas a generar, en una escala del 0 al 100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'El tipo de archivo de las miniaturas generadas.';
 $_lang['prop_s3.url_desc'] = 'La URL de la instancia de Amazon S3.';
-$_lang['s3_no_move_folder'] = 'El manejador de S3 no permitemover carpetas en este momento.';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'El manejador de S3 no permitemover carpetas en este momento.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

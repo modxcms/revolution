@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Konteks';
 $_lang['context_add'] = 'Menambahkan konteks';
-$_lang['context_create'] = 'Membuat konteks';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Konteks Data';
 $_lang['context_duplicate'] = 'Konteks duplikat';
 $_lang['context_err_ae'] = 'Konteks dengan nama tersebut sudah ada.';

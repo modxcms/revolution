@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Контекст';
 $_lang['context_add'] = 'Додати контекст';
-$_lang['context_create'] = 'Створити контекст';
+$_lang['context_create'] = 'Новий контекст';
 $_lang['context_data'] = 'Дані контексту';
 $_lang['context_duplicate'] = 'Дублювати контекст';
 $_lang['context_err_ae'] = 'Контекст з таким іменем вже існує.';

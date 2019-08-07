@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Context toevoegen';
-$_lang['context_create'] = 'Context maken';
+$_lang['context_create'] = 'Nieuwe Context';
 $_lang['context_data'] = 'Context gegevens';
 $_lang['context_duplicate'] = 'Dupliceer Context';
 $_lang['context_err_ae'] = 'Een Context met die naam bestaat al.';

@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = '对媒体源的简短描述。';
 $_lang['source_duplicate'] = '复制媒体源';
 $_lang['source_err_ae_name'] = '具有该名称的媒体源已经存在 ！请指定一个新名称。';
 $_lang['source_err_nf'] = '未找到媒体源！';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'No Media Source can be found with the id: [[+id]].';
 $_lang['source_err_ns'] = 'Please specify the Media Source.';
 $_lang['source_err_ns_name'] = 'Please specify a name for the Media Source.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'File System';
 $_lang['source_type.file_desc'] = 'A filesystem-based source that navigates your server\'s files.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket.';
+$_lang['source_type.ftp'] = '文件传输协议';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'Source Types';
 $_lang['source_types.intro_msg'] = 'This is a list of all the installed Media Source Types you have on this MODX instance.';
 $_lang['source.access.intro_msg'] = 'Here you can restrict a Media Source to specific User Groups and apply policies for those User Groups. A Media Source with no User Groups attached to it is available to all manager users.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
-$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = '服务器主机名或IP地址';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = '服务器端口，默认为21。';
+$_lang['prop_ftp.root_desc'] = '连接后根目录将打开';
+$_lang['prop_ftp.passive_desc'] = '启用或禁用FTP被动模式';
+$_lang['prop_ftp.ssl_desc'] = '启用或禁用ssl连接';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

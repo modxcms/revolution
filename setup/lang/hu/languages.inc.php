@@ -1,3 +1,33 @@
 <?php
 
-$_lang['language_hu'] = 'Magyar';
+$_lang['language_ar'] = 'arab';
+$_lang['language_be'] = 'fehérorosz';
+$_lang['language_bg'] = 'bolgár';
+$_lang['language_cs'] = 'cseh';
+$_lang['language_da'] = 'dán';
+$_lang['language_de'] = 'német';
+$_lang['language_el'] = 'görög';
+$_lang['language_en'] = 'angol';
+$_lang['language_es'] = 'spanyol';
+$_lang['language_et'] = 'észt';
+$_lang['language_fa'] = 'perzsa';
+$_lang['language_fi'] = 'finn';
+$_lang['language_fr'] = 'francia';
+$_lang['language_he'] = 'héber';
+$_lang['language_hi'] = 'hindi';
+$_lang['language_hu'] = 'magyar';
+$_lang['language_id'] = 'indonéz';
+$_lang['language_it'] = 'olasz';
+$_lang['language_ja'] = 'japán';
+$_lang['language_nl'] = 'holland';
+$_lang['language_pl'] = 'lengyel';
+$_lang['language_pt'] = 'portugál';
+$_lang['language_pt-br'] = 'brazíliai portugál';
+$_lang['language_ro'] = 'román';
+$_lang['language_ru'] = 'orosz';
+$_lang['language_sv'] = 'svéd';
+$_lang['language_th'] = 'thai';
+$_lang['language_tr'] = 'török';
+$_lang['language_uk'] = 'ukrán';
+$_lang['language_yo'] = 'joruba';
+$_lang['language_zh'] = 'egyszerűsített kínai';

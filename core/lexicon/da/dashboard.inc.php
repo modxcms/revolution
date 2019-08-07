@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Handling';
 $_lang['onlineusers_actionid'] = 'Handlings-ID';
 $_lang['onlineusers_ipaddress'] = 'Brugerens IP-adresse';
 $_lang['onlineusers_lasthit'] = 'Sidste hit';
-$_lang['onlineusers_message'] = 'Denne liste viser alle brugere som har været aktive i de seneste 20 minutter (nuværende tid er [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'Online brugere';
 $_lang['onlineusers_user'] = 'Bruger';
 $_lang['onlineusers_userid'] = 'Brugerens ID';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Handling';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'Opdatér';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'Extras';
+
 $_lang['quicklinks'] = 'Hurtige links';
 $_lang['security_notices'] = 'Sikkerhedsmeddelelser';
 $_lang['view_tree'] = 'Se navigationstræ';

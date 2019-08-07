@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Action';
 $_lang['onlineusers_actionid'] = 'شناسه‌ی عملیات';
 $_lang['onlineusers_ipaddress'] = 'آدرس IP کاربر';
 $_lang['onlineusers_lasthit'] = 'آخرین فعالیت';
-$_lang['onlineusers_message'] = 'این لیست شامل همه‌ی کاربران فعال از ۲۰ دقیقه‌ی پیش تا کنون است (زمان فعلی [[+curtime]] است)';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'کاربران آنلاین';
 $_lang['onlineusers_user'] = 'کاربر';
 $_lang['onlineusers_userid'] = 'شناسه‌ی کاربر';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Action';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'Update';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'افزونه‌ها';
+
 $_lang['quicklinks'] = 'Quicklinks';
 $_lang['security_notices'] = 'اعلانات امنیتی';
 $_lang['view_tree'] = 'View Tree';

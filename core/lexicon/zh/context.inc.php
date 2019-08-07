@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Add Context';
-$_lang['context_create'] = 'Create Context';
+$_lang['context_create'] = '新建站点';
 $_lang['context_data'] = 'Context Data';
 $_lang['context_duplicate'] = 'Duplicate Context';
 $_lang['context_err_ae'] = 'A Context with that name already exists.';

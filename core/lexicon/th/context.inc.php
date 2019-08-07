@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'บริบท';
 $_lang['context_add'] = 'เพิ่มบริบท';
-$_lang['context_create'] = 'สร้างบริบท';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'ข้อมูลบริบท';
 $_lang['context_duplicate'] = 'ทำสำเนาบริบท';
 $_lang['context_err_ae'] = 'บริบทชื่อนี้มีอยู่แล้ว';

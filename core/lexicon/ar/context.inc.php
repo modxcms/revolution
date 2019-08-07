@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'السياق';
 $_lang['context_add'] = 'إضافة سياق';
-$_lang['context_create'] = 'إنشاء سياق';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'بيانات السياق';
 $_lang['context_duplicate'] = 'تكرار السياق';
 $_lang['context_err_ae'] = 'يوجد سياق بهذا الاسم.';

@@ -21,7 +21,7 @@ $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Sessie en Cookie';
-$_lang['area_static_elements'] = 'Static Elements';
+$_lang['area_static_elements'] = 'Static Elementen';
 $_lang['area_lexicon_string'] = 'Gebied Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Vul hier een key in van een lexicon entry gebied. Indien er geen lexicon entry is, dan wordt de key van het gebied getoond.<br />Core gebieden:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Site';
@@ -36,7 +36,7 @@ $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'De Namespace waar deze Instelling bij hoort. Het "default" Lexicon Topic voor de Namespace zal beschikbaar zijn wanneer Instellingen worden geladen.';
 $_lang['namespace_filter'] = 'Filter op namespace...';
 $_lang['search_by_key'] = 'Zoek op key...';
-$_lang['setting_create'] = 'Maak nieuwe instelling';
+$_lang['setting_create'] = 'Nieuwe Instelling';
 $_lang['setting_err'] = 'Controleer jouw gegevens voor de volgende velden: ';
 $_lang['setting_err_ae'] = 'Instelling met deze key bestaat reeds. Definieer een andere keynaam.';
 $_lang['setting_err_nf'] = 'Instelling niet gevonden.';
@@ -96,8 +96,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Deze instelling op
 $_lang['setting_allow_tags_in_post'] = 'HTML tags in POST toestaan';
 $_lang['setting_allow_tags_in_post_desc'] = 'Indien onwaar, alle POST acties in de manager strippen elke html tag eruit. MODX beveelt aan om deze op waar te laten staan.';
 
-$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Eval inschakelen in TV bindings';
+$_lang['setting_allow_tv_eval_desc'] = 'Gebruik deze instelling om het gebruik van eval in TV bindings aan of uit te zetten. Als deze instelling uitstaat zal de code of waarde als gewone tekst geïnterpreteerd worden.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonieme sessies';
 $_lang['setting_anonymous_sessions_desc'] = 'Bij uitschakelen van deze optie hebben alleen geauthenticeerde gebruikers toegang tot een PHP sessie. Dit vermindert de impact van een anonieme gebruiker op een MODX site als ze geen toegang nodig hebben tot een unieke sessie. Als session_enabled uitgeschakeld is heeft dit geen effect aangezien sessies dan niet beschikbaar zijn.';
@@ -120,8 +120,8 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Indien ingeschakeld, gebruikers 
 $_lang['setting_automatic_alias'] = 'Automatisch aliassen genereren';
 $_lang['setting_automatic_alias_desc'] = 'Selecteer \'Ja\' om het systeem automatisch een alias te laten genereren aan de hand van de document titel bij het opslaan.';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment'] = 'Automatische template toewijzing';
+$_lang['setting_automatic_template_assignment_desc'] = 'Kies hoe templates worden toegewezen bij het aanmaken van nieuwe pagina\'s';
 
 $_lang['setting_base_help_url'] = 'Basis help URL';
 $_lang['setting_base_help_url_desc'] = 'De basis URL waarmee de Help links, rechtsboven van de manager pagina\'s gebouwd worden.';
@@ -160,8 +160,8 @@ $_lang['setting_cache_default_err'] = 'Vermeld of je standaard wilt dat document
 $_lang['setting_cache_expires'] = 'Verlooptijd van standaard Cache';
 $_lang['setting_cache_expires_desc'] = 'Deze waarde (in seconden) stelt de verlooptijd voor de laatste cache bestanden van de standaard in.';
 
-$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
-$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
+$_lang['setting_cache_resource_clear_partial'] = 'Wis gedeeltelijke pagina cache voor opgegeven contexten';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'Indien ingeschakeld dan zal MODX vernieuwen alleen de pagina cache wissen voor de opgegeven contexten.';
 
 $_lang['setting_cache_format'] = 'Te gebruiken caching formaat';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. Een van de formaten.';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'Indien ingeschakeld, MODX zal een gecompri
 $_lang['setting_compress_js_groups'] = 'Gebruik groepen bij compressie van JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Groepeer de core MODX JavaScript middels groupsConfig. Stel in op Ja indien je suhosin of andere limiet factoren gebruikt.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximale grens voor compressie van JavaScript bestanden';
-$_lang['setting_compress_js_max_files_desc'] = 'Het maximum aantal JavaScript bestanden dat MODX in 1x probeert te compressen als compress_js aan is. Stel lager in als je problemen ondervindt met Google Minify in de Manager.';
-
 $_lang['setting_concat_js'] = 'Gebruik Samengevoegde Javascript Libraries';
 $_lang['setting_concat_js_desc'] = 'Indien ingeschakeld, MODX zal een samengevoegde versie gebruiken van zijn Javascript libraries in de manager interface. Dit reduceert de laadtijd enorm in de manager. Schakel deze alleen uit als je aanpassingen verricht aan core elementen.';
 
@@ -239,8 +236,8 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'De standaard geselect
 $_lang['setting_default_media_source'] = 'Standaard Media bron';
 $_lang['setting_default_media_source_desc'] = 'De standaard te laden Media bron.';
 
-$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
-$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
+$_lang['setting_default_media_source_type'] = 'Standaard Mediabron type';
+$_lang['setting_default_media_source_type_desc'] = 'De standaard geselecteerde Mediabron type bij het maken van een nieuwe Mediabron.';
 
 $_lang['setting_default_template'] = 'Standaard Template';
 $_lang['setting_default_template_desc'] = 'Selecteer de standaard template welke je wilt gebruiken voor nieuwe documenten. Uiteraard kun je altijd nog een andere template kiezen in de document-editor, deze instelling selecteert er alvast een voor jou.';
@@ -257,10 +254,6 @@ $_lang['setting_editor_css_selectors_desc'] = 'Een komma-gescheiden lijst van CS
 $_lang['setting_emailsender'] = 'Registratie e-mail from adres';
 $_lang['setting_emailsender_desc'] = 'Vul hier het e-mailadres in dat gebruikt wordt voor het versturen van de gebruikers zijn gebruikersnaam en wachtwoord.';
 $_lang['setting_emailsender_err'] = 'Vermeld het e-mailadres voor het e-mail bericht aan gebruikers.';
-
-$_lang['setting_emailsubject'] = 'Registratie e-mail onderwerp';
-$_lang['setting_emailsubject_desc'] = 'Het onderwerp voor de standaard inschrijf e-mail wanneer een gebruiker zich aanmeldt.';
-$_lang['setting_emailsubject_err'] = 'Vermeld een onderwerp voor de inschrijf e-mail.';
 
 $_lang['setting_enable_dragdrop'] = 'Schakel drag/drop in voor document/element boomstructuren';
 $_lang['setting_enable_dragdrop_desc'] = 'Als uit, voorkom dan slepen en neerzetten in de document en element boomstructuur.';
@@ -308,9 +301,6 @@ $_lang['setting_filemanager_url_desc'] = 'Optioneel. Stel deze in als je een exp
 $_lang['setting_filemanager_url_relative'] = 'Is de bestandsmanager URL relatief?';
 $_lang['setting_filemanager_url_relative_desc'] = 'Indien filemanager_url instelling relatief is aan de MODX base_url, zet deze instelling dan op Ja. Indien jouw filemanager_url buiten de webroot valt, zet dit dan op Nee.';
 
-$_lang['setting_forgot_login_email'] = 'Inlog vergeten e-mail';
-$_lang['setting_forgot_login_email_desc'] = 'Het template voor de e-mail welke gestuurd wordt zodra een gebruiker zijn MODX gebruikersnaam/wachtwoord vergeten is';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Gebruik alle gebruikersgroep lidmaatschappen voor Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Indien Ja is ingesteld, zal FC *alle* sets op *alle* gebruikersgroepen met leden gebruiken. Anders, worden alleen de Sets gebruikt die behoren bij de primaire gebruikersgroep. Instellen op Ja kan voor problemen zorgen met conflicterende FC Sets.';
 
@@ -324,7 +314,7 @@ $_lang['setting_friendly_alias_max_length'] = 'FURL Maximale alias lengte';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Indien groter dan nul, het maximale aantal tekens dat gebruikt voor een document alias. Nul is gelijk aan ongelimiteerd.';
 
 $_lang['setting_friendly_alias_realtime'] = 'Real-time alias genereren';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Geeft aan of de alias van een document automatisch en in real time aangemaakt moet worden op basis van de pagina title. De automatic_alias instelling moet ook ingeschakeld zijn. Als automatic_alias ingeschakeld is, maar friendly_alias_realtime staat uit, dan zal de alias aangemaakt worden tijdens het opslaan van een document.';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Geeft aan of de alias van een document automatisch en in real time aangemaakt moet worden op basis van de pagina titel. De automatic_alias instelling moet ook ingeschakeld zijn. Als automatic_alias ingeschakeld is, maar friendly_alias_realtime staat uit, dan zal de alias aangemaakt worden tijdens het opslaan van een pagina.';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'FURL Beperking alias karakter methode';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'De methode wordt gebruikt om het aantal karakters te beperken in een document alias. "pattern" staat een RegEx patroon toe, "legal" staat elk geldig URL karakter toe, "alpha" staat alleen letters uit het alfabet toe en "alphanumeric" staat alleen letters en cijfers toe.';
@@ -384,8 +374,8 @@ $_lang['setting_log_level_desc'] = 'De standaard logging niveau. Hoe lager het n
 $_lang['setting_log_target'] = 'Logging doel';
 $_lang['setting_log_target_desc'] = 'De standaard loggin doel waar log meldingen geschreven worden. Mogelijkheden: \'FILE\', \'HTML\' of \'ECHO\'. Standaard is \'FILE\' indien niet opgegeven.';
 
-$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
-$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
+$_lang['setting_log_deprecated'] = 'Log verouderde functies';
+$_lang['setting_log_deprecated_desc'] = 'Inschakelen om meldingen in uw foutlog te ontvangen wanneer verouderde functies worden gebruikt.';
 
 $_lang['setting_mail_charset'] = 'Mail Karakterset';
 $_lang['setting_mail_charset_desc'] = 'Het (standaard) karakterset voor e-mails, bijv. \'iso-8859-1\' of \'UTF-8\'';
@@ -427,7 +417,7 @@ $_lang['setting_mail_smtp_user'] = 'SMTP Gebruiker';
 $_lang['setting_mail_smtp_user_desc'] = 'De gebruikersnaam voor de authenticatie voor de SMTP.';
 
 $_lang['setting_main_nav_parent'] = 'Bovenliggend hoofdmenu';
-$_lang['setting_main_nav_parent_desc'] = 'De container gebruikt om de records op te halen voor het belangrijkste menu.';
+$_lang['setting_main_nav_parent_desc'] = 'De container die gebruikt wordt om de records op te halen voor het hoofd menu.';
 
 $_lang['setting_manager_direction'] = 'Manager tekstrichting';
 $_lang['setting_manager_direction_desc'] = 'Kies de richting waarin de tekst getoond moet worden in de manager, van links naar rechts of van rechts naar links.';
@@ -444,17 +434,18 @@ $_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compressie Cache Le
 $_lang['setting_manager_js_cache_max_age_desc'] = 'De maximale leeftijd van browser cache van de manager CSS/JS compressie in seconden. Na deze periode, zal de browser een andere conditionele GET sturen. Gebruik lagere periode bij minder verkeerd.';
 $_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compressie Document Root';
 $_lang['setting_manager_js_document_root_desc'] = 'Als jouw server de DOCUMENT_ROOT niet beschikbaar heeft, stel deze hier expliciet in voor de manager CSS/JS compressie. Verander dit niet behalve als je weet wat je doet.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Schakel zlib Output Compression in voor Manager JS/CSS';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Het wel of niet inschakelen van zlib output compressie voor gecompresseerde CSS/JS in de manager. Schakel niet in behalve als je zeker weet dat de PHP config variabele zlib.output_compression 1 kan zijn. MODX beveelt aan deze uit te laten.';
-
-$_lang['setting_manager_lang_attribute'] = 'Manager HTML en XML taal attribuut';
-$_lang['setting_manager_lang_attribute_desc'] = 'Vul een taalcode in dat het beste past bij de gekozen manager taal, dit zal ervoor zorgen dat de browser de content in een zo goed mogelijk formaat kan tonen.';
-
-$_lang['setting_manager_language'] = 'Manager taal';
-$_lang['setting_manager_language_desc'] = 'Selecteer de taal voor de MODX content manager.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternatieve Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Een alternatieve URL om niet geauthoriseerde gebruikers heen te sturen als ze moeten inloggen. Het login formulier moet de gebruiker inloggen voor de "mgr" context, om dit te laten werken.';
+
+$_lang['setting_login_background_image'] = 'Login Achtergrond Afbeelding';
+$_lang['setting_login_background_image_desc'] = 'De achtergrond afbeelding die wordt gebruikt bij de manager login. De afbeelding wordt automatisch geschaald om het scherm te vullen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'Het logo wordt linksboven getoond bij de manager login. Wanneer deze niet wordt gevuld zal het MODX logo worden getoond.';
+
+$_lang['setting_login_help_button'] = 'Toon de help knop';
+$_lang['setting_login_help_button_desc'] = 'Wanneer deze optie is ingeschakeld vind je op het login scherm een help knop. Het is mogelijk om de informatie die daarin wordt getoond aan te passen via de volgende lexicon: core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Manager inlog start';
 $_lang['setting_manager_login_start_desc'] = 'Vul het ID in van het document waar de gebruiker naartoe gestuurd moet worden zodra hij/zij inlogt in de manager. <strong>Let op: controleer of het ID behoort tot een bestaand document en dat het gepubliceerd is en bereikbaar voor deze gebruiker!</strong>';
@@ -462,8 +453,8 @@ $_lang['setting_manager_login_start_desc'] = 'Vul het ID in van het document waa
 $_lang['setting_manager_theme'] = 'Manager Thema';
 $_lang['setting_manager_theme_desc'] = 'Selecteer een thema voor de content manager.';
 
-$_lang['setting_login_help_button'] = 'Toon Help Button';
-$_lang['setting_login_help_button_desc'] = 'Zet deze optie aan om een help-button te tonen op het login scherm. Het is mogelijk om de inhoud hiervan aan te passen naar je eigen wensen. Dit kun je via deze lexicons in core/login doen: login_help_button_text, login_help_title, and login_help_text.';
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'Het logo dat wordt getoond in de Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Manager Tijdsformaat';
 $_lang['setting_manager_time_format_desc'] = 'Het formaat, in PHP date(), voor de tijd instellingen getoond in de manager.';
@@ -474,8 +465,8 @@ $_lang['setting_manager_use_tabs_desc'] = 'Indien waar, de manager zal tabs gebr
 $_lang['setting_manager_week_start'] = 'Start van de Week';
 $_lang['setting_manager_week_start_desc'] = 'Definieer de startdag van de week. Gebruik 0 (of laat leeg) voor Zondag, 1 voor maandag enzovoorts...';
 
-$_lang['setting_mgr_tree_icon_context'] = 'Context boom icoon';
-$_lang['setting_mgr_tree_icon_context_desc'] = 'Definieer hier een CSS class welke gebruikt wordt om een Context icoon in de Context boom te tonen. Je kan deze instelling op elke Context toepassen om zo voor elke Context een ander icoon te gebruiken.';
+$_lang['setting_mgr_tree_icon_context'] = 'Context boomstructuur icoon';
+$_lang['setting_mgr_tree_icon_context_desc'] = 'Definieer hier een CSS class welke gebruikt wordt om een Context icoon in de Context boomstructuur te tonen. Je kan deze instelling op elke Context toepassen om zo voor elke Context een ander icoon te gebruiken.';
 
 $_lang['setting_mgr_source_icon'] = 'Media bron icoon';
 $_lang['setting_mgr_source_icon_desc'] = 'Geef middels deze CSS class aan welk icoon gebruikt wordt voor open folder iconen in de Media bronnen boom. Standaard "icon-folder-open-o"';
@@ -483,11 +474,11 @@ $_lang['setting_mgr_source_icon_desc'] = 'Geef middels deze CSS class aan welk i
 $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
-$_lang['setting_modx_browser_tree_hide_files'] = 'Media verkenner boom verborgen bestanden';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
+$_lang['setting_modx_browser_tree_hide_files'] = 'Media browser boomstructuur verborgen bestanden';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'Indien ingeschakeld zullen er geen bestanden in folders getoond worden in de Media browser boomstructuur.';
 
-$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media verkenner boom verberg tooltips';
-$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Indien ingeschakeld zullen er geen afbeelding ter voorvertoning weergegven worden wanneer er over een bestand in de Media verkenner bewogen wordt. Standaard ingeschakeld.';
+$_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media browser boomstructuur verberg tooltips';
+$_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'Indien ingeschakeld zullen er geen afbeelding ter voorvertoning weergegeven worden wanneer er over een bestand in de Media browser bewogen wordt. Standaard ingeschakeld.';
 
 $_lang['setting_modx_browser_default_sort'] = 'Bestand Browser Standaard Sortering';
 $_lang['setting_modx_browser_default_sort_desc'] = 'De standaard sortering voor pop bestand browser in de manager. Mogelijkheden zijn: name, size, lastmod (last modified).';
@@ -513,8 +504,8 @@ $_lang['setting_password_generated_length_desc'] = 'De lengte van de auto-gegene
 $_lang['setting_password_min_length'] = 'Minimale wachtwoord lengte';
 $_lang['setting_password_min_length_desc'] = 'De minimale lengte van een wachtwoord voor een gebruiker.';
 
-$_lang['setting_preserve_menuindex'] = 'Bewaar de menu-index bij het dupliceren van resources';
-$_lang['setting_preserve_menuindex_desc'] = 'Bij het dupliceren van resources zal de menu-index bewaard blijven.';
+$_lang['setting_preserve_menuindex'] = 'Behoud de menu-index bij het dupliceren van resources';
+$_lang['setting_preserve_menuindex_desc'] = 'Bij het dupliceren van resources zal de menu-index behouden blijven.';
 
 $_lang['setting_principal_targets'] = 'ACL doelen te laden';
 $_lang['setting_principal_targets_desc'] = 'Pas de ACL doelen voor MODX users aan.';
@@ -718,29 +709,29 @@ $_lang['setting_site_unavailable_page'] = 'Site niet beschikbaar pagina';
 $_lang['setting_site_unavailable_page_desc'] = 'Vul een ID van een document dat je wilt gebruiker als offline pagina. <strong>Let op: controleer dat dit ID een geldig document ID is en dat het document gepubliceerd is!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Vul een document ID in voor de niet beschikbaar pagina.';
 
-$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+$_lang['setting_static_elements_automate_templates'] = 'Automatiseren static elementen voor templates?';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Dit zal de afhandeling van static bestanden automatiseren, zoals het maken en verwijderen van static bestanden voor templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automatiseren static elementen voor templates?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Dit zal de afhandeling van static bestanden automatiseren, zoals het maken en verwijderen van static bestanden voor templates.';
 
-$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+$_lang['setting_static_elements_automate_chunks'] = 'Automatiseren static elementen voor templates?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Dit zal de afhandeling van static bestanden automatiseren, zoals het maken en verwijderen van static bestanden voor templates.';
 
-$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+$_lang['setting_static_elements_automate_snippets'] = 'Automatiseren static elementen voor templates?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Dit zal de afhandeling van static bestanden automatiseren, zoals het maken en verwijderen van static bestanden voor templates.';
 
-$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+$_lang['setting_static_elements_automate_plugins'] = 'Automatiseren static elementen voor templates?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Dit zal de afhandeling van static bestanden automatiseren, zoals het maken en verwijderen van static bestanden voor templates.';
 
-$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
-$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+$_lang['setting_static_elements_default_mediasource'] = 'Static elementen standaard mediabron';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'Geef een standaard mediabron op waar u de static elementen in wilt opslaan.';
 
-$_lang['setting_static_elements_default_category'] = 'Static elements default category';
-$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+$_lang['setting_static_elements_default_category'] = 'Static elementen standaard mediabron';
+$_lang['setting_static_elements_default_category_desc'] = 'Geef een standaard categorie op voor het maken van nieuwe static elementen.';
 
-$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
-$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+$_lang['setting_static_elements_basepath'] = 'Static elementen base-pad';
+$_lang['setting_static_elements_basepath_desc'] = 'Basepad waar u de static elementen bestanden wilt opslaan.';
 
 $_lang['setting_strip_image_paths'] = 'Herschrijf browser paden?';
 $_lang['setting_strip_image_paths_desc'] = 'Als dit op \'Nee\' gezet is, MODX zal bestandsmanager geschreven src\'s (afbeeldingen, bestanden, flash, etc.) als absolute URLs. Relatieve URLs zijn nuttig indien je wenst de MODX installatie te verplaatsen, bijv. van staging naar een productie omgeving. Indien je niet weet wat dit inhoudt laat dit dan staan op \'Ja\'.';
@@ -776,9 +767,6 @@ $_lang['setting_unauthorized_page_err'] = 'Vul een document ID in voor de onbevo
 
 $_lang['setting_upload_files'] = 'Uploadbare bestandstypen';
 $_lang['setting_upload_files_desc'] = 'Hier kun je een lijst van bestandstypen invullen welke geupload kunnen worden in \'assets/files/\' bij gebruik van de document manager. Vul de extenties van de bestandstypen in gescheiden door een komma.';
-
-$_lang['setting_upload_flash'] = 'Uploadbare Flashtypen';
-$_lang['setting_upload_flash_desc'] = 'Hier kun je een lijst van bestandstypen invullen welke geupload kunnen worden in \'assets/flash/\' bij gebruik van de document manager. Vul de extenties van de bestandstypen in gescheiden door een komma.';
 
 $_lang['setting_upload_images'] = 'Uploadbare afbeeldingstypen';
 $_lang['setting_upload_images_desc'] = 'Hier kun je een lijst van bestandstypen invullen welke geupload kunnen worden in \'assets/images/\' bij gebruik van de document manager. Vul de extenties van de bestandstypen in gescheiden door een komma.';
@@ -816,10 +804,6 @@ $_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
 $_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\n\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\n\n[[+surl]]\n\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\n\nWachtwoord: [[+pwd]]\n\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\n\nMet vriendelijke groet,\nSite beheerder';
 
-$_lang['setting_websignupemail_message'] = 'Web Inschrijf e-mail';
-$_lang['setting_websignupemail_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer je een account voor ze aanmaakt en MODX een e-mail laat sturen met de te gebruiken gebruikersnaam en wachtwoord.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Hallo [[+uid]] \n\nHier jouw login gegevens voor [[+sname]]:\n\nGebruikersnaam: [[+uid]]\nWachtwoord: [[+pwd]]\n\nEenmaal ingelogd op [[+sname]] ([[+surl]]), kun je je wachtwoord wijzigen.\n\nMet vriendelijke groet,\nSite Administrator';
-
 $_lang['setting_welcome_screen'] = 'Toon welkomstscherm';
 $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het welkomstscherm wordt getoond bij het laden van de welkomstpagina en daarna niet meer.';
 
@@ -856,8 +840,8 @@ $_lang['setting_manager_use_fullname_desc'] = 'Indien ingesteld op ja zal de vol
 $_lang['setting_log_snippet_not_found'] = 'Log niet gevonden snippets';
 $_lang['setting_log_snippet_not_found_desc'] = 'Indien ingeschakeld zullen snippets die aangeroepen worden, maar niet bestaan, naar het foutlog worden geschreven.';
 
-$_lang['setting_error_log_filename'] = 'Error log filename';
-$_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX error log file (includes file extension).';
+$_lang['setting_error_log_filename'] = 'Fout log bestandsnaam';
+$_lang['setting_error_log_filename_desc'] = 'Pas de bestandsnaam van het MODX fout log bestand aan (inclusief bestandsextensie).';
 
-$_lang['setting_error_log_filepath'] = 'Error log path';
-$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
+$_lang['setting_error_log_filepath'] = 'Fout log pad';
+$_lang['setting_error_log_filepath_desc'] = 'Optioneel een absoluut pad instellen van een aangepaste foutlog locatie. Je kunt placeholders gebruiken zoals {cache_path}.';

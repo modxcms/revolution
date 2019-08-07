@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'وصف مختصر لمصدر الوسائط
 $_lang['source_duplicate'] = 'تكرار مصدر الوسائط';
 $_lang['source_err_ae_name'] = 'يوجد مصدر وسائط بهذا الاسم مسبقاً! الرجاء تحديد اسم جديد.';
 $_lang['source_err_nf'] = 'لم يتم العثور على مصدر الوسائط!';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'لا يمكن العثور على مصدر وسائط مع المعرف: [[+id]].';
 $_lang['source_err_ns'] = 'الرجاء تحديد مصدر الوسائط.';
 $_lang['source_err_ns_name'] = 'الرجاء تحديد اسم لمصدر الوسائط.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'ملف نظام';
 $_lang['source_type.file_desc'] = 'مصدر معتمد على ملف النظام للبحث ضمن ملفات المخدم.';
 $_lang['source_type.s3'] = 'أمازون S3';
 $_lang['source_type.s3_desc'] = 'البحث ضمن حزمة أمازون S3.';
+$_lang['source_type.ftp'] = 'File Transfer Protocol';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'أنواع المصدر';
 $_lang['source_types.intro_msg'] = 'هذه لائحة بجميع أنواع مصدر الوسائط المثبتة التي تمتلكها ضمن نسخة مودكس الخاص بك.';
 $_lang['source.access.intro_msg'] = 'هنا يمكنك تقييد مصدر وسائط إلى مجموعات مستخدم محددة وتطبيق السياسات على مجموعات المستخدم هذه. مصدر الوسائط بدون مجموعات مستخدم مربوطة معه متاح لجميع مستخدمي المدير.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'جودة الصور المصغّرة';
 $_lang['prop_file.thumbnailQuality_desc'] = 'جودة الصورة المصغرة المعروضة، في نطاق 0-100.';
 $_lang['thumbnailType'] = 'نوع الصور المصغّرة';
 $_lang['prop_file.thumbnailType_desc'] = 'نوع الصورة لعرض الصور المصغرة على أساسه.';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'حزمة';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'سلسلة مفصولة. مودكس سوف �
 $_lang['prop_s3.thumbnailQuality_desc'] = 'جودة الصورة المصغرة المعروضة، في نطاق 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'نوع الصورة لعرض الصور المصغرة على أساسه.';
 $_lang['prop_s3.url_desc'] = 'URL نسخة Amazon S3.';
-$_lang['s3_no_move_folder'] = 'سواقة S3 لا تدعم تنقل المجلدات في هذا الوقت.';
 $_lang['prop_s3.region_desc'] = 'منطقة التخزين في أمازون s3. على سبيل المثال: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'سواقة S3 لا تدعم تنقل المجلدات في هذا الوقت.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

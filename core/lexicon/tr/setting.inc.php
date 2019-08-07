@@ -36,7 +36,7 @@ $_lang['namespace'] = 'İsim Alanı';
 $_lang['namespace_desc'] = 'Bu ayar ile ilişkili isim alanı. Ayarlar alınırken varsayılan Veri Sözlüğü Konusu bu İsim Alanı için yüklenecek.';
 $_lang['namespace_filter'] = 'İsim alanına göre filtrele...';
 $_lang['search_by_key'] = 'Anahtara göre ara...';
-$_lang['setting_create'] = 'Yeni ayar oluştur';
+$_lang['setting_create'] = 'New Setting';
 $_lang['setting_err'] = 'Lütfen aşağıda ki alanlar için verinizi kontrol edin: ';
 $_lang['setting_err_ae'] = 'Bu anahtar ile ayar zaten var. Lütfen başka anahtar ismi belirleyin.';
 $_lang['setting_err_nf'] = 'Ayar bulunamadı.';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'Bu etkin olduğunda, MODX çekirdek komut 
 $_lang['setting_compress_js_groups'] = 'JavaScript Sıkıştırılacağı Zaman Gruplandırma Kullan';
 $_lang['setting_compress_js_groups_desc'] = 'Minify\'ın groupsConfig\'i kullanarak çekirdek MODX yöneticisi JavaScript\'i gruplandırın. Suhosin veya diğer kısıtlayıcı faktörleri kullanıyorsanız Evet\'e ayarlayın.';
 
-$_lang['setting_compress_js_max_files'] = 'maksimum JavaScript dosyaları sıkıştırma eşiği';
-$_lang['setting_compress_js_max_files_desc'] = 'MODX, compress_js çalışmakta iken en fazla sıkıştırmayı yapacak maksimum JavaScript dosyası sayısını belirtir. İdareci olarak Google Minify ile ilgili sorunlarla karşılaşıyorsanız, daha düşük bir sayı seçin.';
-
 $_lang['setting_concat_js'] = 'Birleştirilmiş Javascript Kitaplıklarını kullan';
 $_lang['setting_concat_js_desc'] = 'Bu etkinleştirilmiş olduğu zaman, MODX yönetici arayüzü içerisinde ortak JavaScript kitaplıklarının birleştirilmiş bir sürümünü kullanacak. Bu, yöneticinin yükünü ve yürütme süresini büyük ölçüde azaltır. Sadece esas elementleri değiştiriyorsanız devre dışı bırakın.';
 
@@ -258,10 +255,6 @@ $_lang['setting_emailsender'] = 'e-posta adresinden kayıt';
 $_lang['setting_emailsender_desc'] = 'Burada, Kullanıcılara kullanıcı adlarını ve şifrelerini gönderirken kullanılan e-posta adresini belirtebilirsiniz.';
 $_lang['setting_emailsender_err'] = 'Lütfen yönetim e-posta adresini belirtin.';
 
-$_lang['setting_emailsubject'] = 'Kayıt E-postası Konusu';
-$_lang['setting_emailsubject_desc'] = 'Bir Kullanıcı kayıt olduğu zaman varsayılan kaydolma e-postası için konu satırı.';
-$_lang['setting_emailsubject_err'] = 'Lütfen kaydolma e-postasının konu satırını belirleyin.';
-
 $_lang['setting_enable_dragdrop'] = 'Kaynak / Element Ağaçlarında Sürükle / Bırak\'ı Etkinleştir';
 $_lang['setting_enable_dragdrop_desc'] = 'Kapalıysa, kaynak ve element ağaçlarında sürükleyip bırakmayı önleyecektir.';
 
@@ -307,9 +300,6 @@ $_lang['setting_filemanager_url_desc'] = 'Kullanımdan kaldırıldı - bunun yer
 
 $_lang['setting_filemanager_url_relative'] = 'Dosya Yöneticisi URL\'si Göreceli mi? (Kaldırıldı)';
 $_lang['setting_filemanager_url_relative_desc'] = 'Kullanımdan kaldırıldı - bunun yerine Medya Kaynakları\'nı kullanın.  filemanager_url ayarı MODX base_url\'ye göre ise, lütfen bu ayarı Evet olarak ayarlayın. Filemanager_url ana webroot\'un dışında ise, bunu Hayır olarak ayarlayın.';
-
-$_lang['setting_forgot_login_email'] = 'E-posta adresini unuttum';
-$_lang['setting_forgot_login_email_desc'] = 'Bir kullanıcı MODX kullanıcı adını ve/veya şifresini unuttuğunda gönderilen e-postanın şablonu.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Form Özelleştirme için Tüm Kullanıcı Grubu Üyeliğini Kullan';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'True olarak ayarlanırsa, FC üyesi, Form Özelleştirme Setlerini uygularken * üye * Gruplar için * tüm * Setleri kullanır. Aksi halde, yalnızca kullanıcının birincil grubuna ait kümeyi kullanır. Not: Bunu Evet olarak ayarlamak, çakışan FC Setleri ile hatalara neden olabilir.';
@@ -444,23 +434,27 @@ $_lang['setting_manager_js_cache_max_age'] = 'Yöneticisi JS / CSS Sıkıştırm
 $_lang['setting_manager_js_cache_max_age_desc'] = 'CSS / JS sıkıştırma yöneticisinin saniye olarak maksimum tarayıcı önbellek süresi. Bu süre geçtikten sonra tarayıcı başka koşullu GET gönderecektir. Daha düşük trafik için daha uzun bir süre kullanın.';
 $_lang['setting_manager_js_document_root'] = 'Yönetici JS / CSS Sıkıştırma Belgesi Kaynağı';
 $_lang['setting_manager_js_document_root_desc'] = 'Sunucunuz DOCUMENT_ROOT sunucu değişkenini işlemezse, yöneticinin CSS / JS sıkıştırmasını etkinleştirmek için açık olarak buraya ayarlayın.  Ne yaptığınızı bilmiyorsanız bunu değiştirmeyin.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Yönetici JS / CSS için zlib çıktı sıkıştırmasını etkinleştir';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Yöneticideki sıkıştırılmış CSS / JS için zlib çıktı sıkıştırmasını etkinleştirip desteklemeyeceğini belirtir. PHP yapılandırma değişkeni zlib.output_compression\'un 1 olarak ayarlanabildiğinden emin değilseniz bunu açmayın. MODX bunu bırakmanızı önerir.';
-
-$_lang['setting_manager_lang_attribute'] = 'Yönetici HTML ve XML dil niteliği';
-$_lang['setting_manager_lang_attribute_desc'] = 'Seçtiğiniz yöneticinin diliyle en iyi uyan dil kodunu girin; bu, tarayıcının içeriği sizin için en iyi biçimde sunmasını sağlayacaktır.';
-
-$_lang['setting_manager_language'] = 'Yönetici Dili';
-$_lang['setting_manager_language_desc'] = 'MODX İçerik Yöneticisi için dil seçin.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternatif yönetici oturum açma URL\'si';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Yönetici olarak giriş yapmaları gerektiğinde, kimliği doğrulanmamış bir kullanıcıya göndermek için alternatif bir URL. Buradaki giriş formunun çalışması için "mgr" bağlamında kullanıcı girmelidir.';
+
+$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
+
+$_lang['setting_login_help_button'] = 'Show Help Button';
+$_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Yönetici Girişini Çalıştırma';
 $_lang['setting_manager_login_start_desc'] = 'Yöneticiye giriş yaptıktan sonra kullanıcıyı göndermek istediğiniz belgenin kimliğini girin.<strong>NOT: Girdiğiniz kimliğin varolan bir belgeye ait olduğundan ve yayınlandığından ve bu kullanıcı tarafından erişilebilir olduğundan emin olun!</strong>';
 
 $_lang['setting_manager_theme'] = 'Tema Yöneticisi';
 $_lang['setting_manager_theme_desc'] = 'İçerik Yöneticisi için Tema\'yı seçmek.';
+
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Yönetici Zaman Formatı';
 $_lang['setting_manager_time_format_desc'] = 'Yöneticide belirtilen zaman ayarları için PHP date() biçimindeki biçim dizesi.';
@@ -776,9 +770,6 @@ $_lang['setting_unauthorized_page_err'] = 'Yetkilendirilmemiş sayfa için lütf
 $_lang['setting_upload_files'] = 'Yüklenebilir Dosya Türleri';
 $_lang['setting_upload_files_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \'asset/files/\' içine yüklenebilecek dosyalar listesini girebilirsiniz. Lütfen dosya türü uzantılarını virgül ile ayırarak girin.';
 
-$_lang['setting_upload_flash'] = 'Yüklenebilir Flash Türleri';
-$_lang['setting_upload_flash_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \'asset/flash/\' içine yüklenebilecek dosyalar listesini girebilirsiniz. Lütfen flash türü uzantılarını virgül ile ayırarak girin.';
-
 $_lang['setting_upload_images'] = 'Yüklenebilir Resim Türleri';
 $_lang['setting_upload_images_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \'asset/images/\' içine yüklenebilecek dosyalar listesini girebilirsiniz. Lütfen resim türü uzantılarını virgül ile ayırarak girin.';
 
@@ -814,10 +805,6 @@ $_lang['setting_user_nav_parent_desc'] = 'Kullanıcı menüsü için tüm kayıt
 $_lang['setting_webpwdreminder_message'] = 'Web Hatırlatıcı E-postası';
 $_lang['setting_webpwdreminder_message_desc'] = 'E-posta yoluyla yeni bir şifre istediklerinde web kullanıcılarına gönderilecek bir mesaj girin. İçerik Yöneticisi yeni şifrelerini ve etkinleştirme bilgilerini içeren bir e-posta gönderir. <br /><strong>Not:</strong> Mesaj gönderildiğinde aşağıdaki yer tutucuların yerini İçerik Yöneticisi alır: <br /><br />[[+sname]] - Web sitenizin adı, <br />[[+saddr]] - Web sitenizin e-posta adresidir, <br />[[+surl]] - Sitenizin URL\'si, <br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği, <br />[[+pwd]] - Kullanıcı şifresi, <br />[[+ufn]] - Kullanıcının tam adı. <br /><br /><strong>E-postada [[+uid]] ve [[+pwd]] bırakın, aksi takdirde kullanıcı adı ve parola postayla gönderilmez ve kullanıcılarınız kullanıcı adlarını veya şifrelerini öğrenin!</strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Merhaba[[+uid]]\n\nYeni şifrenizi etkinleştirmek için aşağıdaki bağlantıya tıklayın:\n\n[[+surl]]\n\nEğer etkinleştirme başarılı olursa, aşağıdaki şifreyi kullanarak oturum açabilirsiniz:\n\nŞifre[[+pwd]]\n\nEğer bu epostayı talep etmediyseniz, lütfen görmezden gelin.\n\nSaygılarımızla,\nSite Yöneticisi';
-
-$_lang['setting_websignupemail_message'] = 'Web Kayıt e-postası';
-$_lang['setting_websignupemail_message_desc'] = 'Buradan, kullanıcılarınıza bir web hesabı oluşturduğunuzda web kullanıcılarına gönderilecek mesajı ayaralayabilirsiniz ve İçerik Yöneticisinin kullanıcı adı ve şifre içeren bir eposta göndermesine izin verebilirsiniz. <br /><strong>Not:</strong> Mesaj gönderildiğinde aşağıdaki yer tutucular değiştirilir: <br /><br />[[+sname]] - Web sitenizin adı, <br />[[+saddr]] - Web sitenizin eposta adresi,<br />[[+surl]] - Sitenizin URL\'si,<br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği,<br />[[+pwd]] - Kullanıcı şifresi,<br />[[+ufn]] - Kullanıcının tam adı.<br /><br /><strong>[[+uid]] ve [[+pwd]]\'i boş bırakın aksi takdirde kullanıcı adı ve şifre posta içinde gönderilmez ve kullanıcılarınız kullanıcı adlarını ve şifrelerini bilemez!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Merhaba [[+uid]]\n\n[[+sname]] için oturum açma bilgileriniz: \n\n Kullanıcı adı: [[+uid]]\nParola: [[+pwd]]\n\n[[+sname]]([[+surl]]) oturumunda şifrenizi değiştirebilirsiniz. \n\nGerekler, \nSite Yöneticisi';
 
 $_lang['setting_welcome_screen'] = 'Karşılama Ekranını Göster';
 $_lang['setting_welcome_screen_desc'] = 'True olarak ayarlanırsa, hoş geldiniz ekranı karşılama sayfasının bir sonraki başarılı yüklenişinde gösterilir ve bundan sonra gösterilmez.';

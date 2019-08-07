@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'コンテキスト';
 $_lang['context_add'] = 'コンテキストを追加';
-$_lang['context_create'] = 'コンテキストを作成';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'コンテキストデータ';
 $_lang['context_duplicate'] = 'コンテキストの複製';
 $_lang['context_err_ae'] = '同じ名前のコンテキストが存在します。';

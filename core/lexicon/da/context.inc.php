@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Kontekst';
 $_lang['context_add'] = 'Tilføj kontekst';
-$_lang['context_create'] = 'Opret kontekst';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Kontekstdata';
 $_lang['context_duplicate'] = 'Kopier kontekst';
 $_lang['context_err_ae'] = 'Der findes allerede en kontekst med det navn.';

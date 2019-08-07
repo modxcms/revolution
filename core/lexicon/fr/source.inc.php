@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'Courte description du Media Source.';
 $_lang['source_duplicate'] = 'Dupliquer le Media Source';
 $_lang['source_err_ae_name'] = 'Un Media Source portant ce nom existe déjà! Veuillez indiquer un nouveau nom.';
 $_lang['source_err_nf'] = 'Media Source non trouvé!';
+$_lang['source_err_init'] = 'Impossible d\'initaliser la Media Source "[[+source]]" !';
 $_lang['source_err_nfs'] = 'Aucun Media Source avec l\'id « [[+id]] » ne peut être trouvé.';
 $_lang['source_err_ns'] = 'Veuillez indiquer le Media Source.';
 $_lang['source_err_ns_name'] = 'Veuillez indiquer un nom pour le Media Source.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'Système de fichiers';
 $_lang['source_type.file_desc'] = 'Une source basée sur le système de fichiers, affichant les fichiers de votre serveur.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Affiche les fichiers d\'un « Amazon S3 bucket ».';
+$_lang['source_type.ftp'] = 'Protocole de transfert de fichiers';
+$_lang['source_type.ftp_desc'] = 'Accède à un serveur distant FTP.';
 $_lang['source_types'] = 'Type de source';
 $_lang['source_types.intro_msg'] = 'Liste de tous les types de Media Source installés dans cette instance de MODX.';
 $_lang['source.access.intro_msg'] = 'Vous pouvez restreindre l\'accès a un Media Source pour certains groupes d\'utilisateurs et appliquer des règles affectant ces groupes d\'utilisateurs. Un Media Source sans groupe d\'utilisateurs lui étant rattaché est accessible par tous les utilisateurs du manager.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'La qualité de rendu des miniatures, dans une fourchette de 0 à 100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Le type d\'image à utiliser pour afficher les miniatures.';
+$_lang['prop_file.visibility_desc'] = 'Visibilité par défaut des nouveaux fichiers et dossiers.';
+$_lang['no_move_folder'] = 'Le pilote de la Source de média ne supporte pas le déplacement de dossiers actuellement.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'Une liste d\'extensions de fichiers séparé
 $_lang['prop_s3.thumbnailQuality_desc'] = 'La qualité de rendu des miniatures, dans une fourchette de 0 à 100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'Le type d\'image à utiliser pour afficher les miniatures.';
 $_lang['prop_s3.url_desc'] = 'L\'URL de l\'instance du Amazon S3.';
-$_lang['s3_no_move_folder'] = 'Le driver S3 ne supporte pas, pour le moment, le déplacement de dossiers.';
 $_lang['prop_s3.region_desc'] = 'Région du conteneur. Exemple : us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Préfixe facultatif du chemin d’accès /dossier';
+$_lang['s3_no_move_folder'] = 'Le driver S3 ne supporte pas, pour le moment, le déplacement de dossiers.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Nom du serveur ou adresse IP';
+$_lang['prop_ftp.username_desc'] = 'Nom d’utilisateur pour l’authentification. Peut être « anonyme ».';
+$_lang['prop_ftp.password_desc'] = 'Mot de passe utilisateur. Laissez vide pour utilisateur anonyme.';
+$_lang['prop_ftp.url_desc'] = 'Si ce FTP est a une URL publique, vous pouvez entrer son adresse publique http ici. Cela permettra également les aperçus d’image dans le navigateur multimédia.';
+$_lang['prop_ftp.port_desc'] = 'Port du serveur, par défaut 21.';
+$_lang['prop_ftp.root_desc'] = 'Le dossier racine, il sera ouvert après connexion';
+$_lang['prop_ftp.passive_desc'] = 'Activer ou désactiver le mode ftp passif';
+$_lang['prop_ftp.ssl_desc'] = 'Activer ou désactiver la connexion ssl';
+$_lang['prop_ftp.timeout_desc'] = 'Délai d’attente pour la connexion en secondes.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

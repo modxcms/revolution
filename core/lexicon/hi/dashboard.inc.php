@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Action';
 $_lang['onlineusers_actionid'] = 'Action-ID';
 $_lang['onlineusers_ipaddress'] = 'User\'s IP address';
 $_lang['onlineusers_lasthit'] = 'Last hit';
-$_lang['onlineusers_message'] = 'इस सूची users को सभी अंतिम 20 मिनट के भीतर सक्रिय शो (वर्तमान समय है [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'Online Users';
 $_lang['onlineusers_user'] = 'User';
 $_lang['onlineusers_userid'] = 'User\'s ID';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'स्थिति';
+$_lang['updates_action'] = 'Action';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'अद्यतन';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'Extras';
+
 $_lang['quicklinks'] = 'Quicklinks';
 $_lang['security_notices'] = 'सुरक्षा सूचनाएँ';
 $_lang['view_tree'] = 'View Tree';

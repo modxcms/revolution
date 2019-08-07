@@ -36,7 +36,7 @@ $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'Namespace ini berkaitan dengan pengaturan. Leksikon topik akan dimuat untuk Namespace ini ketika meraih pengaturan standar.';
 $_lang['namespace_filter'] = 'pilih berdasarkan namespace...';
 $_lang['search_by_key'] = 'Cari dengan kata kunci...';
-$_lang['setting_create'] = 'Buat pengaturan baru';
+$_lang['setting_create'] = 'New Setting';
 $_lang['setting_err'] = 'Silakan periksa data Anda untuk bidang-bidang berikut: ';
 $_lang['setting_err_ae'] = 'Pengaturan dengan kata kunci sudah ada. Silakan tentukan nama kunci lain.';
 $_lang['setting_err_nf'] = 'Pengaturan tidak ditemukan.';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'Ketika ini diaktifkan, MODX akan menggunak
 $_lang['setting_compress_js_groups'] = 'Menggunakan pengelompokan ketika mengompresi JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Kelompok inti MODX manajer JavaScript menggunakan pengecilan di groupsConfig. Diatur ke "ya" jika menggunakan suhosin atau faktor lain yang membatasi.';
 
-$_lang['setting_compress_js_max_files'] = 'Berkas permulaan kompresi maksimum JavaScript';
-$_lang['setting_compress_js_max_files_desc'] = 'Jumlah maksimum file JavaScript MODX akan berusaha untuk kompres sekaligus ketika compress_js aktif. Diatur ke jumlah yang lebih sedikit jika Anda mengalami masalah dengan Google Minify di manager.';
-
 $_lang['setting_concat_js'] = 'Gunakan Perpustakaan Javascript yang disatukan';
 $_lang['setting_concat_js_desc'] = 'Ketika ini diaktifkan, MODX akan menggunakan versi penyatuan pada perpustakaan java script di antarmuka manajer. Hal ini sangat mengurangi beban dan waktu pelaksanaan dalam pengelola. Menonaktifkan hanya jika Anda memodifikasi elemen inti.';
 
@@ -258,10 +255,6 @@ $_lang['setting_emailsender'] = 'Pendaftaran Email dari alamat';
 $_lang['setting_emailsender_desc'] = 'Di sini Anda dapat menentukan email alamat yang digunakan ketika mengirim pengguna username dan password.';
 $_lang['setting_emailsender_err'] = 'Mohon sebutkan alamat email administrasi.';
 
-$_lang['setting_emailsubject'] = 'Subjek Email pendaftaran';
-$_lang['setting_emailsubject_desc'] = 'Baris subjek email untuk email standar pendaftaran ketika pengguna sudah terdaftar.';
-$_lang['setting_emailsubject_err'] = 'Mohon sebutkan baris subjek untuk pendaftaran email.';
-
 $_lang['setting_enable_dragdrop'] = 'Mengaktifkan Drag/Drop di pohon-pohon sumber elemen';
 $_lang['setting_enable_dragdrop_desc'] = 'Jika off, akan mencegah penyeretan dan penjatuhan di Sumber Daya dan Elemen pohon.';
 
@@ -307,9 +300,6 @@ $_lang['setting_filemanager_url_desc'] = 'Usang - menggunakan sumber-sumber Medi
 
 $_lang['setting_filemanager_url_relative'] = 'Apakah manajer File URL relatif? (Sudah ditinggalkan)';
 $_lang['setting_filemanager_url_relative_desc'] = 'Usang - menggunakan sumber-sumber Media sebagai gantinya. Jika pengaturan filemanager_url Anda relatif terhadap MODX base_url, kemudian silakan set pengaturan ini ke ya. Jika Anda filemanager_url di luar webroot utama, pengaturan No.';
-
-$_lang['setting_forgot_login_email'] = 'Lupa Login Email';
-$_lang['setting_forgot_login_email_desc'] = 'Template untuk email yang dikirim saat pengguna lupa MODX username dan/atau password.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Gunakan semua grup sumber daya untuk bentuk kotumisasi';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Jika diatur ke benar, FC akan menggunakan * all * set untuk * all * kelompok pengguna anggota ketika menerapkan pengaturan bentuk kustomisasi. Jika tidak, itu hanya akan menggunakan pengaturan milik pengguna primer kelompok. Catatan: pengaturan ini ke Ya mungkin menyebabkan bug dengan bertentangan FC set.';
@@ -444,23 +434,27 @@ $_lang['setting_manager_js_cache_max_age'] = 'Manajer JS/CSS kompresi Cache umur
 $_lang['setting_manager_js_cache_max_age_desc'] = 'Maksimal usia cache browser manajer CSS/JS kompresi dalam hitungan detik. Setelah masa ini, peramban akan mengirim GET bersyarat yang lain. Gunakan lebih lama untuk lalu lintas rendah.';
 $_lang['setting_manager_js_document_root'] = 'Manajer JS/CSS kompresi Document Root';
 $_lang['setting_manager_js_document_root_desc'] = 'Jika server Anda tidak menangani variabel server DOCUMENT_ROOT, mengatur secara eksplisit di sini agar manajer CSS/JS kompresi. Jangan mengubah ini kecuali Anda tahu apa yang Anda lakukan.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Mengaktifkan zlib kompresi Output untuk manajer JS/CSS';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Apakah atau tidak untuk mengaktifkan zlib output kompresi untuk CSS/JS kompresi dalam manajer. Tidak menghidupkan ini kecuali Anda yakin zlib.output_compression variabel konfigurasi PHP dapat diatur ke 1. MODX merekomendasikan meninggalkannya.';
-
-$_lang['setting_manager_lang_attribute'] = 'Manajer HTML dan XML bahasa atribut';
-$_lang['setting_manager_lang_attribute_desc'] = 'Masukkan kode bahasa yang paling sesuai dengan bahasa Manajer pilihan Anda, ini akan memastikan bahwa browser dapat menyajikan konten dalam format terbaik untuk Anda.';
-
-$_lang['setting_manager_language'] = 'Bahasa pengaturan';
-$_lang['setting_manager_language_desc'] = 'Pilih bahasa untuk MODX Content Manager.';
 
 $_lang['setting_manager_login_url_alternate'] = 'URL alternatif manajer Login';
 $_lang['setting_manager_login_url_alternate_desc'] = 'URL alternatif untuk mengirim pengguna tidak terauthentikasi ke ketika mereka perlu login ke pengelola. Login form tidak harus login pengguna untuk konteks "mgr" untuk bekerja.';
+
+$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
+
+$_lang['setting_login_help_button'] = 'Show Help Button';
+$_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Manajer Login Startup';
 $_lang['setting_manager_login_start_desc'] = 'Masukkan ID dokumen Anda ingin mengirim pengguna setelah ia telah login ke pengelola. <strong>Catatan: Pastikan Anda telah memasukkan ID milik dokumen yang ada, dan bahwa ia telah diterbitkan dan dapat diakses oleh pengguna ini!</strong>';
 
 $_lang['setting_manager_theme'] = 'Pengaturan Tema';
 $_lang['setting_manager_theme_desc'] = 'Pilih tema untuk manajer konten.';
+
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Format waktu Manajer';
 $_lang['setting_manager_time_format_desc'] = 'Format string, dalam format date() pada PHP PHP, untuk pengaturan waktu yang diwakili dalam manajer.';
@@ -774,9 +768,6 @@ $_lang['setting_unauthorized_page_err'] = 'Silakan tentukan ID Sumber daya untuk
 $_lang['setting_upload_files'] = 'Jenis berkas yang dapat diunggah';
 $_lang['setting_upload_files_desc'] = 'Di sini Anda bisa memasukkan daftar berkas yang bisa diunggah ke \'assets/files/\' menggunakan Resource Manager. Harap masukkan ekstensi untuk tipe berkas, dipisahkan dengan koma.';
 
-$_lang['setting_upload_flash'] = 'Jenis Flash yang dapat diunggah';
-$_lang['setting_upload_flash_desc'] = 'Di sini Anda bisa memasukkan daftar berkas yang bisa diunggah ke \'assets/flash/\' menggunakan Resource Manager. Harap masukkan ekstensi untuk jenis flash, dipisahkan dengan koma.';
-
 $_lang['setting_upload_images'] = 'Jenis gambar yang dapat diunggah';
 $_lang['setting_upload_images_desc'] = 'Di sini Anda bisa memasukkan daftar berkas yang bisa diunggah menjadi \'asset/images/\' menggunakan Resource Manager. Harap masukkan ekstensi untuk jenis gambar, dipisahkan dengan tanda koma.';
 
@@ -812,10 +803,6 @@ $_lang['setting_user_nav_parent_desc'] = 'Wadah yang digunakan untuk menarik sem
 $_lang['setting_webpwdreminder_message'] = 'Pencarian pengingat email';
 $_lang['setting_webpwdreminder_message_desc'] = 'Masukkan pesan yang akan dikirim ke para pengguna web Anda setiap kali mereka meminta kata sandi baru melalui email. Pengelola Konten akan mengirim email berisi informasi sandi dan aktivasi baru mereka. <br/><strong>Catatan: </strong> Placeholder berikut digantikan oleh Pengelola Konten saat pesan dikirim:<br/>[[+sname]] - Nama situs pencarian Anda, <br/>[[+saddr]]- alamat email situs pencarian Anda, <br/>[[+surl]] - URL situs Anda, <br/>[[+uid]] - nama login pengguna atau identitas, <br />[[+pwd]] - Kata sandi pengguna, <br/>[[+ufn]] - Nama lengkap pengguna. <br/><br/><strong> Tinggalkan [[+uid]] dan [[+pwd]] di email, atau nama pengguna dan kata kunci tidak akan dikirim melalui email dan pengguna Anda tidak akan tahu nama pengguna atau kata sandi mereka! </strong>';
 $_lang['setting_webpwdreminder_message_default'] = 'Halo [[+uid]]\n\n Untuk mengaktifkan kata sandi baru Anda, klik link berikut:\n\n[[+surl]]\n\n Jika berhasil, Anda dapat menggunakan kata sandi berikut untuk login:\n\nPassword:[[+pwd]]\n\n Jika Anda tidak meminta email ini, mohon abaikan saja.\n\nRegrads,\nSite Administrator';
-
-$_lang['setting_websignupemail_message'] = 'Pencarian pendaftaran email';
-$_lang['setting_websignupemail_message_desc'] = 'Di sini Anda dapat mengatur pesan yang dikirim ke pengguna pencarian Anda saat Anda membuat akun pencarian untuknya dan membiarkan Pengelola Konten mengirimkan mereka sebuah email berisi nama pengguna dan kata sandi mereka. <br/><strong>Catatan:</strong> Placeholder berikut digantikan oleh Pengelola Konten saat pesan dikirim: <br/>[[+sname]] - Nama situs pencarian Anda, <br/>[[+saddr]] - alamat email situs pencarian Anda, <br/>[[+surl]] - URL situs Anda, <br/> [[+uid]] - nama login pengguna atau identitas, <br/>[[+pwd]] - Kata sandi pengguna, <br/>[[+ufn]] - Nama lengkap pengguna. <br/><br/><strong> Tinggalkan [[+uid]] dan [[+pwd]] di email, atau nama pengguna dan kata kunci tidak akan dikirim melalui pos dan pengguna Anda tidak akan tahu nama pengguna atau kata sandi mereka!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Halo [[+uid]]\n\n Berikut adalah info rinci untuk anda masuk [[+sname]]:\n\n Nama pengguna: [[+uid]]\nPassword: [[+pwd]]\n\n Setelah Anda masuk ke [[+sname]] ([[+surl]]), Anda dapat mengubah kata sandi Anda.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Tampilkan Layar Selamat Datang';
 $_lang['setting_welcome_screen_desc'] = 'Apabila aturan ke benar, layar selamat datang akan tampil pada pemuatan halaman selamat datang berikutnya, dan kemudian tidak muncul setelah itu.';

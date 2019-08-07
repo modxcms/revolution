@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['attributes'] = 'Attributes';
+$_lang['attributes'] = 'Tulajdonságok';
 $_lang['capitalize'] = 'Nagy kezdőbetű';
 $_lang['checkbox'] = 'Jelölőnégyzet';
 $_lang['checkbox_columns'] = 'Columns';
