@@ -180,7 +180,7 @@ $_lang['options_upgrade_advanced_note'] = 'For advanced database admins or movin
 $_lang['options_upgrade_existing'] = 'Meglevő telepítés frissítése';
 $_lang['options_upgrade_existing_note'] = 'Upgrade your current files and database.';
 $_lang['package_execute_err_retrieve'] = 'The install failed because MODX could not unpack the [[+path]]packages/core.transport.zip package. Make sure that the [[+path]]packages/core.transport.zip file exists and is writable, and that you have made the [[+path]]packages/ directory writable.';
-$_lang['package_err_install'] = 'Could not install package [[+package]].';
+$_lang['package_err_install'] = 'Nem sikerült a [[+package]] csomag telepítése.';
 $_lang['package_err_nf'] = 'Could not retrieve package [[+package]] installation.';
 $_lang['package_installed'] = 'Successfully installed package [[+package]].';
 $_lang['password_err_invchars'] = 'Your password may not contain any invalid characters, such as /, \\, &apos;, &quot;, (, ) or {}.';
@@ -241,10 +241,10 @@ $_lang['test_db_check_conn'] = 'Ellenőrizze a kapcsolódás részleteit és pr�
 $_lang['test_db_failed'] = 'Sikertelen kapcsolódás az adatbázishoz!';
 $_lang['test_db_setup_create'] = 'A telepítő megkísérli létrehozni az adatbázist.';
 $_lang['test_dependencies'] = 'A PHP ellenőrzése a zlib függőség miatt: ';
-$_lang['test_dependencies_fail_zlib'] = 'Your PHP installation does not have the "zlib" extension installed. This extension is necessary for MODX to run. Please enable it to continue.';
+$_lang['test_dependencies_fail_zlib'] = 'A telepített PHP nem tartalmazza a "zlib" kiterjesztést. Ez a kiterjesztés nélkülözhetetlen a MODX működéséhez. Kérjük, adja hozzá, mielőtt folytatja.';
 $_lang['test_directory_exists'] = 'Ellenőrzés, hogy <span class="mono">[[+dir]]</span> mappa létezik: ';
 $_lang['test_directory_writable'] = 'Ellenőrzés, hogy <span class="mono">[[+dir]]</span> mappa írható: ';
-$_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 24M: ';
+$_lang['test_memory_limit'] = 'Ellenőrizzük, hogy a memóriakorlát legalább 24M: ';
 $_lang['test_memory_limit_fail'] = 'A MODX a memory_limit beállításánál a javasolt 24M alatti értéket talált. A MODX próbálta beállítani a memory_limit értékét 24M-ra, de nem sikerült. Kérjük, hogy folytatás előtt állítsa a memory_limit értékét a php.ini állományban 24M vagy nagyobb értékre.';
 $_lang['test_php_version_fail'] = 'A PHP [[+version]] verziója fut, és a MODX Revolution működéséhez legalább PHP 4.3.0 szükséges';
 $_lang['test_php_version_sn'] = 'While MODX will work on your PHP version ([[+version]]), usage of MODX on this version is not recommended. Your version of PHP is vulnerable to numerous security holes. Please upgrade to PHP version is 4.3.11 or higher, which patches these holes. It is recommended you upgrade to this version for the security of your own website.';

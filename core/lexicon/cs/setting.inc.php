@@ -733,8 +733,8 @@ $_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate th
 $_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
 
-$_lang['setting_static_elements_default_category'] = 'Static elements default category';
-$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+$_lang['setting_static_elements_default_category'] = 'Výchozí kategorie pro statické prvky';
+$_lang['setting_static_elements_default_category_desc'] = 'Zvolte výchozí kategorii pro vytváření nových statických prvků.';
 
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';

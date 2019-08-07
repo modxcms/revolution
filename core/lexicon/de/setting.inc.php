@@ -96,8 +96,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Wenn Sie diese Ein
 $_lang['setting_allow_tags_in_post'] = 'Tags in POST-Requests erlauben';
 $_lang['setting_allow_tags_in_post_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt ist, werden HTML-Script-Tags, numerische HTML-Entities und MODX-Tags aus allen POST-Variablen entfernt. MODX empfiehlt, diese Einstellung für alle Kontexte auf "Nein" zu belassen, außer für den Kontext mgr, für den diese Einstellung standardmäßig auf "Ja" gesetzt ist.';
 
-$_lang['setting_allow_tv_eval'] = 'EVAL in TV-Bindings aktivieren';
-$_lang['setting_allow_tv_eval_desc'] = 'Wählen Sie diese Option, um EVAL in TV-Bindings zu aktivieren oder zu deaktivieren. Wenn diese Option auf „Nein“ gesetzt ist, wird der Code/Wert nur als normaler Text behandelt.';
+$_lang['setting_allow_tv_eval'] = 'EVAL in TV-Bindung aktivieren';
+$_lang['setting_allow_tv_eval_desc'] = 'Wählen Sie diese Option, um EVAL in TV-Bindungen zu aktivieren oder zu deaktivieren. Wenn diese Option auf „Nein“ gesetzt ist, wird der Code/Wert nur als normaler Text behandelt.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonyme Sessions';
 $_lang['setting_anonymous_sessions_desc'] = 'Wenn diese Einstellung deaktiviert ist, haben nur authentifizierte Benutzer Zugriff auf eine PHP-Session. Dies kann unnötigen Aufwand, den das System für anonyme Benutzer betreiben muss, vermeiden und die Last, die dadurch für die MODX-Site entsteht, reduzieren, wenn anonyme Benutzer keinen Zugriff auf eine eigene Session benötigen. Wenn session_enabled auf "Nein" steht, hat diese Einstellung keinen Effekt, da Sessions dann ohnehin nicht zur Verfügung stehen.';

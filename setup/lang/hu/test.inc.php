@@ -12,10 +12,10 @@ $_lang['test_db_check_conn'] = 'Ellenőrizze a kapcsolódás részleteit és pr�
 $_lang['test_db_failed'] = 'Sikertelen kapcsolódás az adatbázishoz!';
 $_lang['test_db_setup_create'] = 'A telepítő megkísérli létrehozni az adatbázist.';
 $_lang['test_dependencies'] = 'A PHP ellenőrzése a zlib függőség miatt: ';
-$_lang['test_dependencies_fail_zlib'] = 'Your PHP installation does not have the "zlib" extension installed. This extension is necessary for MODX to run. Please enable it to continue.';
+$_lang['test_dependencies_fail_zlib'] = 'A telepített PHP nem tartalmazza a "zlib" kiterjesztést. Ez a kiterjesztés nélkülözhetetlen a MODX működéséhez. Kérjük, adja hozzá, mielőtt folytatja.';
 $_lang['test_directory_exists'] = 'Ellenőrzés, hogy <span class="mono">[[+dir]]</span> mappa létezik: ';
 $_lang['test_directory_writable'] = 'Ellenőrzés, hogy <span class="mono">[[+dir]]</span> mappa írható: ';
-$_lang['test_memory_limit'] = 'Checking if memory limit is set to at least 24M: ';
+$_lang['test_memory_limit'] = 'Ellenőrizzük, hogy a memóriakorlát legalább 24M: ';
 $_lang['test_memory_limit_fail'] = 'A MODX a memory_limit beállításánál [[+memory]] értéket találta, a javasolt 24M érték alatt. A MODX próbálta beállítani a memory_limit értékét 24M-ra, de nem sikerült. Kérjük, állítsa a memory_limit értékét a php.ini állományban legalább 24M vagy nagyobb értékre, mielőtt folytatja. Ha így is gondok vannak (pl. üres fehér képernyőt lát telepítéskor), állítsa 32M, 64M vagy nagyobb értékre.';
 $_lang['test_memory_limit_success'] = 'Rendben! [[+memory]] beállítva';
 $_lang['test_mysql_version_5051'] = 'A MODX hibákat ad a betöltött MySQL verzión ([[+version]]) az ehhez tartozó PDO meghajtó számos hibája miatt. Frissítse a MySQL-t ezek megelőzésére. Még ha nem is a MODX használata mellett dönt, javasolt a frissítés a weboldala biztonsága és megbízható működése érdekében.';
