@@ -1731,9 +1731,9 @@ class phpthumb {
 					// for vector source formats only (WMF, PDF, etc)
 					if (is_array($getimagesize) && isset($getimagesize[2]) && ($getimagesize[2] == IMAGETYPE_PNG)) {
 						// explicitly exclude PNG from "-flatten" to make sure transparency is preserved
-						// https://github.com/JamesHeinrich/phpThumb/issues/65
-					} else {
+						// https://github.com/JamesHeinrich/phpThumb/issues/65#issuecomment-256454015
 						$commandline .= ' -flatten';
+					} else {
 						$commandline .= ' -density '.phpthumb_functions::escapeshellarg_replacement($this->dpi);
 					}
 				}
