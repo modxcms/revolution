@@ -11,7 +11,7 @@ MODx.tree.ResourceGroup = function(config) {
     Ext.applyIf(config,{
         title: _('resource_groups')
         ,url: MODx.config.connector_url
-        ,action: 'security/resourcegroup/getnodes'
+        ,action: 'Security/ResourceGroup/GetNodes'
         ,root_id: '0'
         ,root_name: _('resource_groups')
         ,enableDrag: false
@@ -89,7 +89,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             text: _('resource_group_access_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/resourcegroup/removeResource'
+                action: 'Security/ResourceGroup/RemoveResource'
                 ,resource: resourceId
                 ,resourceGroup: resourceGroupId
             }
@@ -107,7 +107,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             text: _('resource_group_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/resourcegroup/remove'
+                action: 'Security/ResourceGroup/Remove'
                 ,id: id
             }
             ,listeners: {
@@ -194,7 +194,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             ,params: {
                 resource: dropEvent.dropNode.attributes.id
                 ,resourceGroup: dropEvent.target.attributes.id
-                ,action: 'security/resourcegroup/updateResourcesIn'
+                ,action: 'Security/ResourceGroup/UpdateResourcesIn'
             }
             ,listeners: {
                 'success': {fn: function(r,o) {
@@ -224,7 +224,7 @@ MODx.window.CreateResourceGroup = function(config) {
         ,width: 600
         ,stateful: false
         ,url: MODx.config.connector_url
-        ,action: 'security/resourcegroup/create'
+        ,action: 'Security/ResourceGroup/Create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
@@ -340,7 +340,7 @@ MODx.window.UpdateResourceGroup = function(config) {
         // ,height: 150
         // ,width: 350
         ,url: MODx.config.connector_url
-        ,action: 'security/resourcegroup/update'
+        ,action: 'Security/ResourceGroup/Update'
         ,fields: [{
             name: 'id'
             ,xtype: 'hidden'

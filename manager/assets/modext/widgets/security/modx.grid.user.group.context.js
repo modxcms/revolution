@@ -10,7 +10,7 @@ MODx.grid.UserGroupContext = function(config) {
         id: 'modx-grid-user-group-contexts'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/context/getList'
+            action: 'security/access/usergroup/Context/GetList'
             ,usergroup: config.usergroup
         }
         ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
@@ -97,7 +97,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
                 if (m.length > 0) { m.push('-'); }
                 m.push({
                     text: _('access_context_remove')
-                    ,handler: this.remove.createDelegate(this,["confirm_remove","security/access/usergroup/context/remove"])
+                    ,handler: this.remove.createDelegate(this,["confirm_remove","security/access/usergroup/Context/Remove"])
                 });
             }
         }
@@ -174,7 +174,7 @@ MODx.window.CreateUGAccessContext = function(config) {
     Ext.applyIf(config,{
         title: _('ugc_mutate')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/context/create'
+        ,action: 'security/access/usergroup/Context/Create'
         // ,width: 600
         ,fields: [{
             xtype: 'hidden'
@@ -283,7 +283,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
     this.ident = config.ident || 'uugactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,action: 'security/access/usergroup/context/update'
+        ,action: 'security/access/usergroup/Context/Update'
     });
     MODx.window.UpdateUGAccessContext.superclass.constructor.call(this,config);
 };

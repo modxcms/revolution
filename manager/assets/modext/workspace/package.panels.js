@@ -315,7 +315,7 @@ MODx.grid.PackageDependencies = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-package-dependencies'
         ,baseParams: {
-            action: 'workspace/packages/getdependencies'
+            action: 'Workspace/Packages/GetDependencies'
             ,signature: config.pkgInfo.data.signature
         }
         ,fields: ['name', 'constraints', 'installed', 'parentSignature', 'signature', 'downloaded', 'actions']
@@ -391,7 +391,7 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
         Ext.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'workspace/packages/dependency/download'
+                action: 'Workspace/Packages/Dependency/Download'
                 ,signature: rec.data.parentSignature
                 ,name: rec.data.name
                 ,constraints: rec.data.constraints

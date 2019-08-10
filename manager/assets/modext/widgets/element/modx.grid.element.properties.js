@@ -119,7 +119,7 @@ MODx.grid.ElementProperties = function(config) {
             xtype: 'modx-combo-property-set'
             ,id: 'modx-combo-property-set'
             ,baseParams: {
-                action: 'element/propertyset/getList'
+                action: 'Element/PropertySet/GetList'
                 ,showAssociated: true
                 ,elementId: config.elementId
                 ,elementType: config.elementType
@@ -225,7 +225,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             return true;
         }
         var p = {
-            action: 'element/propertyset/updatefromelement'
+            action: 'Element/PropertySet/Updatefromelement'
             ,id: cb.getValue()
             ,data: d
         };
@@ -321,7 +321,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'element/propertyset/get'
+                action: 'Element/PropertySet/Get'
                 ,id: ps
                 ,elementId: this.config.elementId
                 ,elementType: this.config.elementType
@@ -1040,7 +1040,7 @@ MODx.combo.PropertySet = function(config) {
         ,hiddenName: 'propertyset'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/propertyset/getList'
+            action: 'Element/PropertySet/GetList'
         }
         ,displayField: 'name'
         ,valueField: 'id'
@@ -1066,7 +1066,7 @@ MODx.window.AddPropertySet = function(config) {
         title: _('propertyset_add')
         ,id: 'modx-window-element-property-set-add'
         ,url: MODx.config.connector_url
-        ,action: 'element/propertyset/associate'
+        ,action: 'Element/PropertySet/Associate'
         ,autoHeight: true // makes window grow when the fieldset is toggled
         ,fields: [{
             xtype: 'hidden'
@@ -1087,7 +1087,7 @@ MODx.window.AddPropertySet = function(config) {
             ,id: 'modx-aps-propertyset'
             ,anchor: '100%'
             ,baseParams: {
-                action: 'element/propertyset/getList'
+                action: 'Element/PropertySet/GetList'
                 ,showNotAssociated: true
                 ,elementId: config.record.elementId
                 ,elementType: config.record.elementType

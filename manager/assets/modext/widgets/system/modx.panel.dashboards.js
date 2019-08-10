@@ -51,12 +51,12 @@ MODx.grid.Dashboards = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/getlist'
+            action: 'System/Dashboard/GetList'
         }
         ,fields: ['id','name','description','cls']
         ,paging: true
         ,autosave: true
-        ,save_action: 'system/dashboard/updatefromgrid'
+        ,save_action: 'System/Dashboard/UpdateFromGrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
@@ -96,7 +96,7 @@ MODx.grid.Dashboards = function(config) {
             ,itemId: 'usergroup'
             ,emptyText: _('user_group_filter')+'...'
             ,baseParams: {
-                action: 'security/group/getlist'
+                action: 'Security/Group/GetList'
                 ,addAll: true
             }
             ,value: ''
@@ -189,7 +189,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             ,text: _('dashboard_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'system/dashboard/removeMultiple'
+                action: 'System/Dashboard/RemoveMultiple'
                 ,dashboards: cs
             }
             ,listeners: {
@@ -208,7 +208,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
             ,text: _('dashboard_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'system/dashboard/remove'
+                action: 'System/Dashboard/Remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -221,7 +221,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'system/dashboard/duplicate'
+                action: 'System/Dashboard/Duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {

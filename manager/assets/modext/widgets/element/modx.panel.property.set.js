@@ -73,7 +73,7 @@ MODx.grid.PropertySetProperties = function(config) {
             xtype: 'modx-combo-property-set'
             ,id: 'modx-combo-property-set'
             ,baseParams: {
-                action: 'element/propertyset/getList'
+                action: 'Element/PropertySet/GetList'
             }
             ,listeners: {
                 'select': {fn:function(cb) { Ext.getCmp('modx-grid-element-properties').changePropertySet(cb); },scope:this}
@@ -114,7 +114,7 @@ MODx.tree.PropertySets = function(config) {
         ,enableDD: false
         ,title: ''
         ,url: MODx.config.connector_url
-        ,action: 'element/propertyset/getNodes'
+        ,action: 'Element/PropertySet/GetNodes'
         ,tbar: ['->', {
             text: _('propertyset_new')
             ,cls: 'primary-button'
@@ -133,7 +133,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
             MODx.Ajax.request({
                 url: MODx.config.connector_url
                 ,params: {
-                    action: 'element/propertyset/getProperties'
+                    action: 'Element/PropertySet/GetProperties'
                     ,id: ar[1]
                 }
                 ,listeners: {
@@ -155,7 +155,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
             MODx.Ajax.request({
                 url: MODx.config.connector_url
                 ,params: {
-                    action: 'element/propertyset/getProperties'
+                    action: 'Element/PropertySet/GetProperties'
                     ,id: ar[1]
                     ,element: ar[2]
                     ,element_class: ar[3]
@@ -240,7 +240,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
             text: _('propertyset_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'element/propertyset/remove'
+                action: 'Element/PropertySet/Remove'
                 ,id: id
             }
             ,listeners: {
@@ -281,7 +281,7 @@ Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
             text: _('propertyset_element_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'element/propertyset/removeElement'
+                action: 'Element/PropertySet/RemoveElement'
                 ,element: d.pk
                 ,element_class: d.element_class
                 ,propertyset: d.propertyset
@@ -376,7 +376,7 @@ MODx.combo.ElementClass = function(config) {
         ,editable: false
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/getClasses'
+            action: 'Element/GetClasses'
         }
     });
     MODx.combo.ElementClass.superclass.constructor.call(this,config);
@@ -403,7 +403,7 @@ MODx.combo.Elements = function(config) {
         ,editable: false
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/getListByClass'
+            action: 'Element/GetListByClass'
             ,element_class: 'modSnippet'
         }
     });
@@ -424,7 +424,7 @@ MODx.window.CreatePropertySet = function(config) {
         title: _('propertyset_create')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/propertyset/create'
+            action: 'Element/PropertySet/Create'
         }
         ,autoHeight: true
         // ,width: 550
@@ -471,7 +471,7 @@ MODx.window.UpdatePropertySet = function(config) {
     Ext.applyIf(config,{
         title: _('propertyset_update')
         ,baseParams: {
-            action: 'element/propertyset/update'
+            action: 'Element/PropertySet/Update'
         }
         ,autoHeight: true
     });
@@ -494,7 +494,7 @@ MODx.window.DuplicatePropertySet = function(config) {
         title: _('propertyset_duplicate')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/propertyset/duplicate'
+            action: 'Element/PropertySet/Duplicate'
         }
         ,autoHeight: true
         // ,width: 550

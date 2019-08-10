@@ -81,7 +81,7 @@ Ext.extend(MODx.Console,Ext.Window,{
             ,url: MODx.config.connector_url
             ,interval: 1000
             ,baseParams: {
-                action: 'system/console'
+                action: 'System/Console'
                 ,register: this.config.register || ''
                 ,topic: this.config.topic || ''
                 ,clear: false
@@ -121,7 +121,7 @@ Ext.extend(MODx.Console,Ext.Window,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'system/downloadoutput'
+                action: 'System/DownloadOutput'
                 ,data: c
             }
             ,listeners: {

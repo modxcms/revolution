@@ -5,7 +5,7 @@ MODx.grid.ActiveResources = function(config) {
         ,id: 'modx-grid-resource-active'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/activeresource/getlist'
+            action: 'system/activeResource/GetList'
         }
 		,fields: ['id','pagetitle','username','editedon']
         ,columns: [{

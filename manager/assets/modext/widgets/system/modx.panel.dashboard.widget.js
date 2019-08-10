@@ -239,7 +239,7 @@ MODx.panel.DashboardWidget = function(config) {
         id: 'modx-panel-dashboard-widget'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget/update'
+            action: 'System/Dashboard/Widget/Update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }

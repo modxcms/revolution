@@ -9,7 +9,7 @@ MODx.panel.FCSet = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/forms/set/update'
+            action: 'Security/Forms/Set/Update'
         }
         ,id: 'modx-panel-fc-set'
         ,class_key: 'MODX\\Revolution\\modFormCustomizationSet'
@@ -64,7 +64,7 @@ MODx.panel.FCSet = function(config) {
                     ,lazyInit: false
                     ,lazyRender: false
                     ,baseParams: {
-                        action: 'element/template/getList'
+                        action: 'Element/Template/GetList'
                         ,combo: true
                     }
                     ,listeners: {

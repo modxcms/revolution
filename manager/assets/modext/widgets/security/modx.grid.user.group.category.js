@@ -149,7 +149,7 @@ MODx.window.CreateUGCat = function(config) {
     Ext.applyIf(config,{
         title: _('category_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/category/create'
+        ,action: 'Security/Access/UserGroup/Category/Create'
         // ,height: 250
         // ,width: 500
         ,fields: [{
@@ -277,7 +277,7 @@ MODx.window.UpdateUGCat = function(config) {
 
     Ext.applyIf(config,{
         title: _('access_category_update')
-        ,action: 'security/access/usergroup/category/update'
+        ,action: 'Security/Access/UserGroup/Category/Update'
     });
     MODx.window.UpdateUGCat.superclass.constructor.call(this,config);
 };

@@ -48,12 +48,12 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         id: 'modx-grid-access-policy-template'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/policy/template/getlist'
+            action: 'Security/Access/Policy/Template/GetList'
         }
         ,fields: ['id','name','description','template_group','template_group_name','total_permissions','cls']
         ,paging: true
         ,autosave: true
-        ,save_action: 'security/access/policy/template/updatefromgrid'
+        ,save_action: 'Security/Access/Policy/Template/UpdateFromGrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
@@ -148,7 +148,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
        // this.refresh();
     }
     ,editPolicyTemplate: function(itm,e) {
-        MODx.loadPage('security/access/policy/template/update', 'id='+this.menu.record.id);
+        MODx.loadPage('Security/Access/Policy/Template/Update', 'id='+this.menu.record.id);
     }
 
     ,createPolicyTemplate: function(btn,e) {
@@ -173,12 +173,12 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/access/policy/template/export'
+                action: 'Security/Access/Policy/Template/Export'
                 ,id: id
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = this.config.url+'?action=security/access/policy/template/export&download=1&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                    location.href = this.config.url+'?action=Security/Access/Policy/Template/Export&download=1&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });
@@ -222,7 +222,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
                 });
                 m.push({
                     text: _('policy_template_duplicate')
-                    ,handler: this.confirm.createDelegate(this,["security/access/policy/template/duplicate","policy_template_duplicate_confirm"])
+                    ,handler: this.confirm.createDelegate(this,["Security/Access/Policy/Template/Duplicate","policy_template_duplicate_confirm"])
                 });
             }
             if (m.length > 0) { m.push('-'); }
@@ -235,7 +235,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
                 if (m.length > 0) m.push('-');
                 m.push({
                     text: _('policy_template_remove')
-                    ,handler: this.confirm.createDelegate(this,["security/access/policy/template/remove","policy_template_remove_confirm"])
+                    ,handler: this.confirm.createDelegate(this,["Security/Access/Policy/Template/Remove","policy_template_remove_confirm"])
                 });
             }
         }
@@ -253,7 +253,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
             ,text: _('policy_template_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/access/policy/template/removeMultiple'
+                action: 'Security/Access/Policy/Template/RemoveMultiple'
                 ,templates: cs
             }
             ,listeners: {
@@ -283,7 +283,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
         // width: 500
         title: _('policy_template_create')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/policy/template/create'
+        ,action: 'Security/Access/Policy/Template/Create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
@@ -341,7 +341,7 @@ MODx.combo.AccessPolicyTemplateGroups = function(config) {
         // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/policy/template/group/getlist'
+            action: 'Security/Access/Policy/Template/Group/GetList'
         }
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
@@ -359,7 +359,7 @@ MODx.window.ImportPolicyTemplate = function(config) {
         title: _('policy_template_import')
         ,id: 'modx-window-policy-template-import'
         ,url: MODx.config.connector_url
-        ,action: 'security/access/policy/template/import'
+        ,action: 'Security/Access/Policy/Template/Import'
         ,fileUpload: true
         ,saveBtnText: _('import')
         ,fields: [{

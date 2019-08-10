@@ -12,11 +12,11 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         title: _('recent_docs')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/user/getRecentlyEditedResources'
+            action: 'Security/User/GetRecentlyEditedResources'
             ,user: config.user
         }
         ,autosave: true
-        ,save_action: 'resource/updatefromgrid'
+        ,save_action: 'Resource/UpdateFromGrid'
         ,pageSize: 10
         ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu', 'link']
         ,columns: [{

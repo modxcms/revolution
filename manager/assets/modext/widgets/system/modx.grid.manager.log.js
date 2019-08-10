@@ -13,7 +13,7 @@ MODx.grid.ManagerLog = function(config) {
         ,id: 'modx-grid-manager-log'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/log/getlist'
+            action: 'System/Log/GetList'
         }
         ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
         ,autosave: false
@@ -209,7 +209,7 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
             ,text: _('mgrlog_clear_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'system/log/truncate'
+                action: 'System/Log/Truncate'
             }
             ,listeners: {
                 'success': {fn:function() {

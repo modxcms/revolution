@@ -15,7 +15,7 @@ MODx.panel.Messages = function(config) {
         ,defaults: { collapsible: false ,autoHeight: true }
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/message/getlist'
+            action: 'Security/Message/GetList'
         }
         ,items: [{
             html: _('messages')
@@ -81,7 +81,7 @@ MODx.grid.Message = function(config) {
         ,id: 'modx-grid-message'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/message/getlist'
+            action: 'Security/Message/GetList'
         }
         ,fields: ['id','type','subject','message','sender','recipient','private'
             ,'date_sent','read','sender_name','recipient_name']
@@ -177,7 +177,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/message/read'
+                action: 'Security/Message/Read'
                 ,id: r.id
             }
             ,listeners: {
@@ -195,7 +195,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/message/unread'
+                action: 'Security/Message/Unread'
                 ,id: rec.data.id
             }
             ,listeners: {
@@ -227,7 +227,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         if (MODx.user.id != r.data.sender) {
             m.push({
                 text: _('delete')
-                ,handler: this.remove.createDelegate(this, ['message_remove_confirm', 'security/message/remove'])
+                ,handler: this.remove.createDelegate(this, ['message_remove_confirm', 'Security/Message/Remove'])
             });
         }
         return m;
@@ -299,7 +299,7 @@ MODx.window.CreateMessage = function(config) {
     Ext.applyIf(config,{
         title: _('message_create')
         ,url: MODx.config.connector_url
-        ,action: 'security/message/create'
+        ,action: 'Security/Message/Create'
         ,fields: this.getFields()
         ,keys: []
     });

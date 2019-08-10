@@ -11,12 +11,12 @@ MODx.page.UpdateFCProfile = function(config) {
 	Ext.applyIf(config,{
 	   formpanel: 'modx-panel-fc-profile'
 	   ,actions: {
-            'new': 'security/forms/profile/create'
-            ,edit: 'security/forms/profile/update'
+            'new': 'Security/Forms/Profile/Create'
+            ,edit: 'Security/Forms/Profile/Update'
             ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'security/forms/profile/update'
+            process: 'Security/Forms/Profile/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'

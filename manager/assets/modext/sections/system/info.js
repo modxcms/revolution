@@ -22,7 +22,7 @@ Ext.reg('modx-page-system-info',MODx.page.SystemInfo);
 
 
 var viewPHPInfo = function() {
-    window.open(MODx.config.connector_url+'?action=system/phpinfo&HTTP_MODAUTH='+MODx.siteId);
+    window.open(MODx.config.connector_url+'?action=System/PhpInfo&HTTP_MODAUTH='+MODx.siteId);
 };
 
 MODx.panel.SystemInfo = function(config) {
@@ -184,7 +184,7 @@ Ext.extend(MODx.panel.SystemInfo,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'system/info'
+                action: 'System/Info'
             }
             ,listeners: {
                 'success': {

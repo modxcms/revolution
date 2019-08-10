@@ -33,13 +33,13 @@ MODx.grid.User = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/user/getList'
+            action: 'Security/User/GetList'
             ,usergroup: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
         }
         ,fields: ['id','username','fullname','email','gender','blocked','role','active','cls']
         ,paging: true
         ,autosave: true
-        ,save_action: 'security/user/updatefromgrid'
+        ,save_action: 'Security/User/UpdateFromGrid'
         ,autosaveErrorMsg: _('user_err_save')
         ,remoteSort: true
         ,viewConfig: {
@@ -64,7 +64,7 @@ MODx.grid.User = function(config) {
             ,width: 150
             ,sortable: true
             ,renderer: function(value, p, record){
-                return String.format('<a href="?a=security/user/update&id={0}" title="{1}" class="x-grid-link">{2}</a>', record.id, _('user_update'), Ext.util.Format.htmlEncode( value ) );
+                return String.format('<a href="?a=Security/User/Update&id={0}" title="{1}" class="x-grid-link">{2}</a>', record.id, _('user_update'), Ext.util.Format.htmlEncode( value ) );
             }
         },{
             header: _('user_full_name')
@@ -210,7 +210,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,createUser: function() {
-        MODx.loadPage('security/user/create');
+        MODx.loadPage('Security/User/Create');
     }
 
     ,activateSelected: function() {
@@ -279,7 +279,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             ,text: _('user_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'security/user/delete'
+                action: 'Security/User/Delete'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -292,7 +292,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/user/duplicate'
+                action: 'Security/User/Duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -302,7 +302,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,updateUser: function() {
-        MODx.loadPage('security/user/update', 'id='+this.menu.record.id);
+        MODx.loadPage('Security/User/Update', 'id='+this.menu.record.id);
     }
 
     ,rendGender: function(d,c) {
@@ -329,7 +329,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
         this.getStore().baseParams = {
-            action: 'security/user/getList'
+            action: 'Security/User/GetList'
         };
         Ext.getCmp('modx-user-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();

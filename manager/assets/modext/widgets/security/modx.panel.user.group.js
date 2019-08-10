@@ -5,7 +5,7 @@ MODx.panel.UserGroup = function(config) {
 		,cls: 'container form-with-labels'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/group/update'
+            action: 'Security/Group/Update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -459,7 +459,7 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
             ,text: _('user_group_user_remove_confirm') || _('confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'security/group/user/remove'
+                action: 'Security/Group/User/Remove'
                 ,user: r.id
                 ,usergroup: this.config.usergroup
             }
@@ -477,7 +477,7 @@ MODx.window.UpdateUserGroupRole = function(config) {
         id: 'modx-window-user-group-role-update'
         ,title: _('user_group_user_update_role')
         ,url: MODx.config.connector_url
-        ,action: 'security/group/user/update'
+        ,action: 'Security/Group/User/Update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'usergroup'
@@ -507,7 +507,7 @@ MODx.window.AddUserToUserGroup = function(config) {
         // ,height: 150
         // ,width: 500
         ,url: MODx.config.connector_url
-        ,action: 'security/group/user/create'
+        ,action: 'Security/Group/User/Create'
         ,fields: [{
             fieldLabel: _('user')
             ,description: MODx.expandHelp ? '' : _('user_group_user_add_user_desc')

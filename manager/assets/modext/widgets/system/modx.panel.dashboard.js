@@ -4,7 +4,7 @@ MODx.panel.Dashboard = function(config) {
         id: 'modx-panel-dashboard'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/update'
+            action: 'System/Dashboard/Update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -478,7 +478,7 @@ MODx.combo.DashboardWidgets = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget/getlist'
+            action: 'System/Dashboard/Widget/GetList'
             ,combo: true
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'

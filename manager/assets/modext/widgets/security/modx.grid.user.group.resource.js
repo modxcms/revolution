@@ -149,7 +149,7 @@ MODx.window.CreateUGRG = function(config) {
     Ext.applyIf(config,{
         title: _('resource_group_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/resourcegroup/create'
+        ,action: 'Security/Access/UserGroup/ResourceGroup/Create'
         // ,height: 250
         // ,width: 600
         ,fields: [{
@@ -275,7 +275,7 @@ MODx.window.UpdateUGRG = function(config) {
     this.ident = config.ident || 'ugrgactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_rgroup_update')
-        ,action: 'security/access/usergroup/resourcegroup/update'
+        ,action: 'Security/Access/UserGroup/ResourceGroup/Update'
     });
     MODx.window.UpdateUGRG.superclass.constructor.call(this,config);
 };

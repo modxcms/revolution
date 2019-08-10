@@ -144,7 +144,7 @@ MODx.window.CreateUGSource = function(config) {
     Ext.applyIf(config,{
         title: _('source_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/source/create'
+        ,action: 'Security/Access/UserGroup/Source/Create'
         // ,height: 250
         // ,width: 500
         ,fields: [{
@@ -261,7 +261,7 @@ MODx.window.UpdateUGSource = function(config) {
     this.ident = config.ident || 'updugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_source_update')
-        ,action: 'security/access/usergroup/source/update'
+        ,action: 'Security/Access/UserGroup/Source/Update'
     });
     MODx.window.UpdateUGSource.superclass.constructor.call(this,config);
 };

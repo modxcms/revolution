@@ -53,10 +53,10 @@ MODx.grid.ContentType = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/contenttype/getlist'
+            action: 'System/ContentType/GetList'
         }
         ,autosave: true
-        ,save_action: 'system/contenttype/updatefromgrid'
+        ,save_action: 'System/ContentType/Updatefromgrid'
         ,fields: ['id','name','mime_type','file_extensions','icon','headers','binary','description']
         ,paging: true
         ,remoteSort: true
@@ -114,7 +114,7 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
             ,handler: function(btn, e) {
                 var window = new MODx.window.CreateContentType({
                     record: this.menu.record
-                    ,action: 'system/contenttype/update'
+                    ,action: 'System/ContentType/Update'
                     ,listeners: {
                         success: {
                             fn: this.refresh
@@ -129,7 +129,7 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
         });
         m.push({
             text: _('content_type_remove')
-            ,handler: this.confirm.createDelegate(this,['system/contenttype/remove',_('content_type_remove_confirm')])
+            ,handler: this.confirm.createDelegate(this,['System/ContentType/Remove',_('content_type_remove_confirm')])
         });
 
         return m;
@@ -168,7 +168,7 @@ MODx.window.CreateContentType = function(config) {
         title: _('content_type_new')
         ,width: 600
         ,url: MODx.config.connector_url
-        ,action: 'system/contenttype/create'
+        ,action: 'System/ContentType/Create'
         ,bwrapCssClass: 'x-window-with-tabs'
         ,fields: [{
             xtype: 'modx-tabs'

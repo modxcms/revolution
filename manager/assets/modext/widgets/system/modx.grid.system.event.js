@@ -12,7 +12,7 @@ MODx.grid.SystemEvent = function(config) {
         title: _('system_events')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/event/getlist'
+            action: 'System/Event/GetList'
         }
         ,fields: ['id','name','service','groupname','plugins']
         ,autosave: true
@@ -115,7 +115,7 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 			,text: _('system_events.remove_confirm', { name: this.menu.record.name })
 			,url: this.config.url
 			,params: {
-				action: 'system/event/remove'
+				action: 'System/Event/Remove'
 				,name: this.menu.record.name
 			}
 			,listeners: {
@@ -149,7 +149,7 @@ MODx.window.CreateUpdateEvent = function(config) {
         ,width: 450
 		,autoHeight: true
         ,url: config.url
-        ,action: 'system/event/create'
+        ,action: 'System/Event/Create'
         ,fields: [{
 			xtype: 'hidden'
 			,name: 'service'

@@ -276,7 +276,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		Ext.Ajax.request({
 			url : this.config.url
 			,params : {
-				action : 'workspace/packages/rest/download'
+				action : 'Workspace/Packages/Rest/Download'
 				,info : rec.location+'::'+rec.signature
 				,provider : MODx.provider
 			}
@@ -631,7 +631,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'workspace/packages/rest/download'
+                action: 'Workspace/Packages/Rest/Download'
                 ,info: data.location+'::'+data.signature
                 ,provider: MODx.provider || MODx.config.default_provider
             }
@@ -813,7 +813,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 		MODx.Ajax.request({
             url: this.url
             ,params: {
-                action: 'workspace/packages/rest/download'
+                action: 'Workspace/Packages/Rest/Download'
                 ,info: record.location+'::'+record.signature
                 ,provider: MODx.provider || MODx.config.default_provider
             }

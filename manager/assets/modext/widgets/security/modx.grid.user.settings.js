@@ -19,7 +19,7 @@ MODx.grid.UserSettings = function(config) {
         ,saveParams: {
             user: config.user
         }
-        ,save_action: 'security/user/setting/updatefromgrid'
+        ,save_action: 'Security/User/Setting/UpdateFromGrid'
         ,fk: config.user
         ,tbar: [{
             text: _('create_new')
@@ -29,7 +29,7 @@ MODx.grid.UserSettings = function(config) {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
                 ,baseParams: {
-                    action: 'security/user/setting/create'
+                    action: 'Security/User/Setting/Create'
                 }
                 ,keyField: {
                     xtype: 'modx-combo-setting-key'
@@ -77,7 +77,7 @@ Ext.extend(MODx.grid.UserSettings,MODx.grid.SettingsGrid, {
                 ,handler: this.updateSetting
             },'-',{
                 text: _('setting_remove')
-                ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'security/user/setting/remove'])
+                ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'Security/User/Setting/Remove'])
             });
         }
         if (m.length > 0) {
@@ -91,7 +91,7 @@ Ext.extend(MODx.grid.UserSettings,MODx.grid.SettingsGrid, {
         r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
         var uss = MODx.load({
             xtype: 'modx-window-setting-update'
-            ,action: 'security/user/setting/update'
+            ,action: 'Security/User/Setting/Update'
             ,record: r
             ,grid: this
             ,listeners: {

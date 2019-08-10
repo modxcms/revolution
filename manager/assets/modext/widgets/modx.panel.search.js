@@ -218,7 +218,7 @@ Ext.extend(MODx.panel.Search,MODx.FormPanel,{
 
     ,filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
-        p.action = 'resource/search';
+        p.action = 'Resource/Search';
 
         var g = Ext.getCmp('modx-grid-search');
         if (g) {
@@ -251,7 +251,7 @@ MODx.grid.Search = function(config) {
         ,id: 'modx-grid-search'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'resource/search'
+            action: 'Resource/Search'
         }
         ,fields: ['id','pagetitle','description','published','deleted','menu']
         ,paging: true

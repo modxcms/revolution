@@ -60,7 +60,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
             ,text: _('package_version_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'workspace/packages/version/remove'
+                action: 'Workspace/Packages/Version/Remove'
                 ,signature: r.signature
             }
             ,listeners: {
@@ -75,7 +75,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
 
     /* Purge old package versions */
     ,purgePackageVersions: function(btn,e) {
-        var topic = '/workspace/packages/purge/';
+        var topic = '/Workspace/Packages/Purge/';
 
         this.loadWindow(btn,e,{
             xtype: 'modx-window-package-versions-purge'
@@ -120,7 +120,7 @@ MODx.window.PurgePackageVersions = function(config) {
         title: _('package_versions_purge')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/packages/purge'
+            action: 'Workspace/Packages/Purge'
         }
         ,cls: 'modx-confirm'
         ,defaults: { border: false }
@@ -142,7 +142,7 @@ Ext.extend(MODx.window.PurgePackageVersions,MODx.Window,{
         if (this.fp.getForm().isValid()) {
             Ext.getCmp('modx-grid-package-versions').loadConsole(Ext.getBody(),r.topic);
             this.fp.getForm().baseParams = {
-                action: 'workspace/packages/purge'
+                action: 'Workspace/Packages/Purge'
                 ,register: 'mgr'
                 ,topic: r.topic
             };

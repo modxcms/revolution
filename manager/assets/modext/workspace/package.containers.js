@@ -107,7 +107,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
 
         // Grab the params to send to the install processor
         var params = {
-            action: 'workspace/packages/install'
+            action: 'Workspace/Packages/Install'
             ,signature: r.signature
             ,register: 'mgr'
             ,topic: topic

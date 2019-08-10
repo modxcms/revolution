@@ -40,7 +40,7 @@ MODx.page.CreateChunk = function(config) {
                 }]
             }
         },{
-            process: 'element/chunk/create'
+            process: 'Element/Chunk/Create'
             ,reload: true
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
