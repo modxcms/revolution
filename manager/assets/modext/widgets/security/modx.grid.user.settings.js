@@ -13,7 +13,7 @@ MODx.grid.UserSettings = function(config) {
         ,id: 'modx-grid-user-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/user/setting/getList'
+            action: 'Security/User/Setting/GetList'
             ,user: config.user
         }
         ,saveParams: {

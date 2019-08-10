@@ -13,7 +13,7 @@ MODx.grid.Lexicon = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
-            action: 'workspace/lexicon/getList'
+            action: 'Workspace/Lexicon/GetList'
             ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,topic: ''
             ,language: MODx.config.cultureKey || 'en'
@@ -63,7 +63,7 @@ MODx.grid.Lexicon = function(config) {
             ,value: 'default'
             ,width: 120
             ,baseParams: {
-                action: 'workspace/lexicon/topic/getList'
+                action: 'Workspace/Lexicon/Topic/GetList'
                 ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
                 ,'language': 'en'
             }
@@ -217,7 +217,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.store.baseParams = {
-            action: 'workspace/lexicon/getList'
+            action: 'Workspace/Lexicon/GetList'
             ,'namespace': 'core'
             ,topic: 'default'
             ,language: 'en'
@@ -318,7 +318,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     	MODx.Ajax.request({
     	   url: this.config.url
-    	   ,params: {action: 'workspace/lexicon/reloadFromBase' ,register: 'mgr' ,topic: topic}
+    	   ,params: {action: 'Workspace/Lexicon/ReloadFromBase' ,register: 'mgr' ,topic: topic}
     	   ,listeners: {
                 'success': {fn:function(r) {
                     this.refresh();

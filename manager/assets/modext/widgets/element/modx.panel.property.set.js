@@ -306,7 +306,7 @@ MODx.window.AddElementToPropertySet = function(config) {
         title: _('propertyset_element_add')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/propertyset/addElement'
+            action: 'Element/PropertySet/AddElement'
         }
         // ,width: 400
         ,fields: [{

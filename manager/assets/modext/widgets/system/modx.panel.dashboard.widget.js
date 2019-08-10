@@ -329,7 +329,7 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-widget-dashboards'
         ,url: MODx.config.connector_url
-        ,action: 'system/dashboard/getList'
+        ,action: 'System/Dashboard/GetList'
         ,fields: ['id','name','description']
         ,autoHeight: true
         ,primaryKey: 'widget'

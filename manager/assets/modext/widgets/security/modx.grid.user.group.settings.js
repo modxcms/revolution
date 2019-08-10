@@ -13,7 +13,7 @@ MODx.grid.GroupSettings = function(config) {
         ,id: 'modx-grid-group-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/group/setting/getList'
+            action: 'Security/Group/Setting/GetList'
             ,group: config.group
         }
         ,saveParams: {

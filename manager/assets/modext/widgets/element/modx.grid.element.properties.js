@@ -225,7 +225,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
             return true;
         }
         var p = {
-            action: 'Element/PropertySet/Updatefromelement'
+            action: 'Element/PropertySet/UpdateFromElement'
             ,id: cb.getValue()
             ,data: d
         };
@@ -437,7 +437,7 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
 
     ,exportProperties: function (btn,e) {
         var id = Ext.getCmp('modx-combo-property-set').getValue();
-        location.href = MODx.config.connector_url+'?action=element/exportProperties&download=1&id='+id+'&data='+this.encode()+'&HTTP_MODAUTH='+MODx.siteId;
+        location.href = MODx.config.connector_url+'?action=Element/ExportProperties&download=1&id='+id+'&data='+this.encode()+'&HTTP_MODAUTH='+MODx.siteId;
     }
 
     ,importProperties: function (btn,e) {
@@ -1142,7 +1142,7 @@ MODx.window.ImportProperties = function(config) {
         title: _('properties_import')
         ,id: 'modx-window-properties-import'
         ,url: MODx.config.connector_url
-        ,action: 'element/importProperties'
+        ,action: 'Element/ImportProperties'
         ,fileUpload: true
         ,saveBtnText: _('import')
         ,fields: [{

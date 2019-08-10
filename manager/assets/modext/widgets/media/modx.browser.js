@@ -103,7 +103,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         p = p || {};
         if (p.dir) { this.dir = p.dir; }
         Ext.applyIf(p,{
-            action: 'browser/directory/getFiles'
+            action: 'Browser/Directory/GetFiles'
             ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });

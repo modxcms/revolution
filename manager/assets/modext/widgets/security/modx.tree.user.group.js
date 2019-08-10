@@ -316,7 +316,7 @@ MODx.window.CreateUserGroup = function(config) {
                     },{
                         xtype: 'modx-combo-policy'
                         ,baseParams: {
-                            action: 'security/access/policy/getList'
+                            action: 'Security/Access/Policy/GetList'
                             ,group: 'Admin'
                             ,combo: '1'
                         }

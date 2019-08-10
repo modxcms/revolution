@@ -10,7 +10,7 @@ MODx.grid.UserGroupCategory = function(config) {
         id: 'modx-grid-user-group-categories'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/category/getList'
+            action: 'Security/Access/UserGroup/Category/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -63,7 +63,7 @@ MODx.grid.UserGroupCategory = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Object'
             }
             ,listeners: {
@@ -212,7 +212,7 @@ MODx.window.CreateUGCat = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Element,Object'
                 ,combo: '1'
             }

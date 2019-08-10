@@ -10,7 +10,7 @@ MODx.grid.UserGroupSource = function(config) {
         id: 'modx-grid-user-group-sources'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/source/getList'
+            action: 'Security/Access/UserGroup/Source/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -58,7 +58,7 @@ MODx.grid.UserGroupSource = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'MediaSource'
             }
             ,listeners: {
@@ -198,7 +198,7 @@ MODx.window.CreateUGSource = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'MediaSource'
             }
             ,anchor: '100%'

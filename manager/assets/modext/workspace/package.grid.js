@@ -329,7 +329,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
            ,text: _('package_search_local_confirm')
            ,url: MODx.config.connector_url
            ,params: {
-                action: 'workspace/packages/scanLocal'
+                action: 'Workspace/Packages/ScanLocal'
            }
            ,listeners: {
                 'success':{fn:function(r) {
@@ -346,7 +346,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'workspace/packages/scanLocal'
+                action: 'Workspace/Packages/ScanLocal'
             }
             ,listeners: {
                 'success':{fn:function(r) {

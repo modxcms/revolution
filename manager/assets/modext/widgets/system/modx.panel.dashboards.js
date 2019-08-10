@@ -249,7 +249,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'system/dashboard/getList'
+            action: 'System/Dashboard/GetList'
     	};
         Ext.getCmp('modx-dashboard-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();

@@ -10,7 +10,7 @@ MODx.grid.UserGroupContext = function(config) {
         id: 'modx-grid-user-group-contexts'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/Context/GetList'
+            action: 'Security/Access/UserGroup/Context/GetList'
             ,usergroup: config.usergroup
         }
         ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
@@ -59,7 +59,7 @@ MODx.grid.UserGroupContext = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Admin'
             }
             ,listeners: {
@@ -97,7 +97,7 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
                 if (m.length > 0) { m.push('-'); }
                 m.push({
                     text: _('access_context_remove')
-                    ,handler: this.remove.createDelegate(this,["confirm_remove","security/access/usergroup/Context/Remove"])
+                    ,handler: this.remove.createDelegate(this,["confirm_remove","Security/Access/UserGroup/Context/Remove"])
                 });
             }
         }
@@ -174,7 +174,7 @@ MODx.window.CreateUGAccessContext = function(config) {
     Ext.applyIf(config,{
         title: _('ugc_mutate')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/Context/Create'
+        ,action: 'Security/Access/UserGroup/Context/Create'
         // ,width: 600
         ,fields: [{
             xtype: 'hidden'
@@ -215,7 +215,7 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Admin,Object'
                 ,combo: '1'
             }
@@ -283,7 +283,7 @@ MODx.window.UpdateUGAccessContext = function(config) {
     this.ident = config.ident || 'uugactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('ugc_mutate')
-        ,action: 'security/access/usergroup/Context/Update'
+        ,action: 'Security/Access/UserGroup/Context/Update'
     });
     MODx.window.UpdateUGAccessContext.superclass.constructor.call(this,config);
 };

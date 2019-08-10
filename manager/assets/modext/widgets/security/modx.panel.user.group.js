@@ -101,7 +101,7 @@ MODx.panel.UserGroup = function(config) {
                                 ,anchor: '100%'
                                 ,disabled: config.record.id === 0
                                 ,baseParams: {
-                                    action: 'security/group/getList'
+                                    action: 'Security/Group/GetList'
                                     ,addNone: true
                                     ,exclude: config.record.id
                                 }
@@ -327,7 +327,7 @@ MODx.grid.UserGroupUsers = function(config) {
         ,id: 'modx-grid-user-group-users'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/group/user/getList'
+            action: 'Security/Group/User/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true

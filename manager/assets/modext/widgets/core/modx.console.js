@@ -126,7 +126,7 @@ Ext.extend(MODx.Console,Ext.Window,{
             }
             ,listeners: {
                 'success':{fn:function(r) {
-                    location.href = MODx.config.connector_url+'?action=system/downloadOutput&HTTP_MODAUTH='+MODx.siteId+'&download='+r.message;
+                    location.href = MODx.config.connector_url+'?action=System/DownloadOutput&HTTP_MODAUTH='+MODx.siteId+'&download='+r.message;
                 },scope:this}
             }
         });

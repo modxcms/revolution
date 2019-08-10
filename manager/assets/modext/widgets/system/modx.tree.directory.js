@@ -26,7 +26,7 @@ MODx.tree.Directory = function(config) {
             ,currentFile: MODx.request.file || ''
             ,source: config.source || 0
         }
-        ,action: 'browser/directory/getList'
+        ,action: 'Browser/Directory/GetList'
         ,primaryKey: 'dir'
         ,useDefaultToolbar: true
         ,autoExpandRoot: false

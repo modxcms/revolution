@@ -10,7 +10,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
         id: 'modx-grid-user-group-resource-groups'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/resourcegroup/getList'
+            action: 'Security/Access/UserGroup/ResourceGroup/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -62,7 +62,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,id: 'modx-ugrg-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Object'
             }
             ,allowBlank: true
@@ -212,7 +212,7 @@ MODx.window.CreateUGRG = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Resource,Object'
                 ,combo: '1'
             }

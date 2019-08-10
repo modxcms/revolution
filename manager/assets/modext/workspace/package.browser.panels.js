@@ -160,7 +160,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
 			provider: MODx.provider
-			,action: 'workspace/packages/rest/getList'
+			,action: 'Workspace/Packages/Rest/GetList'
 		}
         ,paging: true
         ,pageSize: 10
@@ -531,7 +531,7 @@ MODx.PackageBrowserThumbsView = function(config) {
                  ,'downloads','releasedon','screenshot','license','supports','location','version-compiled', 'featured'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,baseParams: {
-            action: 'workspace/packages/rest/getList'
+            action: 'Workspace/Packages/Rest/GetList'
             ,provider: MODx.provider
         }
         ,tpl: this.templates.thumb

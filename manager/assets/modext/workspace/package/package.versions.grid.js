@@ -10,7 +10,7 @@ MODx.grid.PackageVersions = function(config) {
         ,id: 'modx-grid-package-versions'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/packages/version/getList'
+            action: 'Workspace/Packages/Version/GetList'
             ,signature: config.signature
             ,package_name: MODx.request.package_name
         }

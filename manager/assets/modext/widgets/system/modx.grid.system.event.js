@@ -204,7 +204,7 @@ MODx.combo.SystemEventGroups = function(config) {
 		,pageSize: 10
 		,url: MODx.config.connector_url
 		,baseParams: {
-            action: 'system/event/groupList'
+            action: 'System/Event/GroupList'
 			,combo: true
         }
     });

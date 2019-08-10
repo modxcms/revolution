@@ -277,7 +277,7 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'security/message/getList'
+            action: 'Security/Message/GetList'
     	};
         Ext.getCmp('modx-messages-search').reset();
         Ext.getCmp('modx-messages-filter').reset();

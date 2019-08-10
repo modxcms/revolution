@@ -225,7 +225,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'source/getList'
+            action: 'Source/GetList'
     	};
         Ext.getCmp('modx-source-search').reset();
     	this.getBottomToolbar().changePage(1);

@@ -17,7 +17,7 @@ MODx.tree.Menu = function(config) {
         ,enableDrag: true
         ,enableDrop: true
         ,url: MODx.config.connector_url
-        ,action: 'system/menu/getNodes'
+        ,action: 'System/Menu/GetNodes'
         ,sortAction: 'System/Menu/Sort'
         ,primaryKey: 'text'
         ,useDefaultToolbar: true

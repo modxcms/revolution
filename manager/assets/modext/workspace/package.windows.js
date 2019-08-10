@@ -278,7 +278,7 @@ MODx.window.ChangeProvider = function(config) {
                 ,anchor: '100%'
 				,allowBlank: false
 				,baseParams: {
-                    action: 'workspace/providers/getList'
+                    action: 'Workspace/Providers/GetList'
                     ,showNone: false
                 }
 			}]
@@ -309,7 +309,7 @@ Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would cre
             if (tree.rendered) {
                 var loader = tree.getLoader();
                 loader.baseParams = {
-                    action: 'workspace/packages/rest/getNodes'
+                    action: 'Workspace/Packages/Rest/GetNodes'
                     ,provider: vs.provider
                 };
                 loader.load(tree.root);

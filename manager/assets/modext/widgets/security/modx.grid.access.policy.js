@@ -138,7 +138,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'security/access/policy/getList'
+            action: 'Security/Access/Policy/GetList'
     	};
         Ext.getCmp('modx-policy-search').reset();
     	this.getBottomToolbar().changePage(1);

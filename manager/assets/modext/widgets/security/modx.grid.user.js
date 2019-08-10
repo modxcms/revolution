@@ -119,7 +119,7 @@ MODx.grid.User = function(config) {
             ,itemId: 'usergroup'
             ,emptyText: _('user_group')+'...'
             ,baseParams: {
-                action: 'security/group/getList'
+                action: 'Security/Group/GetList'
                 ,addAll: true
             }
             ,value: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
@@ -220,7 +220,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/user/activateMultiple'
+                action: 'Security/User/ActivateMultiple'
                 ,users: cs
             }
             ,listeners: {
@@ -239,7 +239,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/user/deactivateMultiple'
+                action: 'Security/User/DeactivateMultiple'
                 ,users: cs
             }
             ,listeners: {
@@ -260,7 +260,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             ,text: _('user_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/user/removeMultiple'
+                action: 'Security/User/RemoveMultiple'
                 ,users: cs
             }
             ,listeners: {

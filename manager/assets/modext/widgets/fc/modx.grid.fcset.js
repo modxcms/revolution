@@ -182,7 +182,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'security/forms/set/getList'
+            action: 'Security/Forms/Set/GetList'
             ,profile: MODx.request.id
     	};
         Ext.getCmp('modx-fcs-search').reset();

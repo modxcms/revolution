@@ -56,7 +56,7 @@ MODx.grid.ContentType = function(config) {
             action: 'System/ContentType/GetList'
         }
         ,autosave: true
-        ,save_action: 'System/ContentType/Updatefromgrid'
+        ,save_action: 'System/ContentType/UpdateFromGrid'
         ,fields: ['id','name','mime_type','file_extensions','icon','headers','binary','description']
         ,paging: true
         ,remoteSort: true

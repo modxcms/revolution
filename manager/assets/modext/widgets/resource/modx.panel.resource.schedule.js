@@ -40,7 +40,7 @@ MODx.grid.ResourceSchedule = function(config) {
         title: _('site_schedule')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'resource/event/getList'
+            action: 'Resource/Event/GetList'
             ,mode: 'pub_date'
         }
         ,fields: ['id','pagetitle','class_key'

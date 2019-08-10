@@ -187,7 +187,7 @@ Ext.extend(MODx.panel.ManagerLog,MODx.FormPanel,{
     filter: function(tf,newValue,oldValue) {
         var p = this.getForm().getValues();
         var g = Ext.getCmp('modx-grid-manager-log');
-        p.action = 'system/log/getList';
+        p.action = 'System/Log/GetList';
         g.getStore().baseParams = p;
         g.getStore().load({
             params: p
