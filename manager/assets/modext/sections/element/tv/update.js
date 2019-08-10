@@ -59,7 +59,7 @@ Ext.extend(MODx.page.UpdateTV,MODx.Component, {
             text: _('tv_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'element/tv/remove'
+                action: 'Element/TemplateVar/Remove'
                 ,id: this.record.id
             }
             ,listeners: {
@@ -112,7 +112,7 @@ Ext.extend(MODx.page.UpdateTV,MODx.Component, {
             text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
         },{
-            process: 'element/tv/update'
+            process: 'Element/TemplateVar/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

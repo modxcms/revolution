@@ -733,7 +733,7 @@ MODx.window.QuickCreateTV = function(config) {
         title: _('quick_create_tv')
         ,width: 700
         ,url: MODx.config.connector_url
-        ,action: 'element/tv/create'
+        ,action: 'Element/TemplateVar/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -831,7 +831,7 @@ MODx.window.QuickUpdateTV = function(config) {
 
     Ext.applyIf(config,{
         title: _('quick_update_tv')
-        ,action: 'element/tv/update'
+        ,action: 'Element/TemplateVar/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this

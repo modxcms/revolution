@@ -19,7 +19,7 @@ MODx.grid.TemplateVarTemplate = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['id','templatename','category','category_name','description','access','menu']
         ,baseParams: {
-            action: 'element/tv/template/getList'
+            action: 'Element/TemplateVar/Template/GetList'
             ,tv: config.tv
         }
         ,saveParams: {
@@ -101,7 +101,7 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'element/tv/template/getList'
+            action: 'Element/TemplateVar/Template/GetList'
     	};
         Ext.getCmp('modx-tvtemp-filter-category').reset();
         Ext.getCmp('modx-tvtemp-search').setValue('');

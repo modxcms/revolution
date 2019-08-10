@@ -33,7 +33,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-tv'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
-                this.redirect('?a=element/tv/create');
+                this.redirect('?a=Element/TemplateVar/Create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
