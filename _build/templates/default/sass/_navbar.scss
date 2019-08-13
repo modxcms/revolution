@@ -121,6 +121,17 @@
   }
 }
 
+#modx-navbar .sub {
+  &:after {
+    border: 5px solid transparent;
+    border-left: 5px solid rgb(96,114,124);
+    position: absolute;
+    content: ' ';
+    right: 12px;
+    top: 24px;
+  }
+}
+
 #modx-user-menu li.top > a,
 #modx-topnav li.top > a {
   cursor: default;

@@ -6257,6 +6257,14 @@ ul.x-tab-strip-bottom {
     right: 12px;
     top: 26px; }
 
+#modx-navbar .sub:after {
+  border: 5px solid transparent;
+  border-left: 5px solid #60727c;
+  position: absolute;
+  content: ' ';
+  right: 12px;
+  top: 24px; }
+
 #modx-user-menu li.top > a,
 #modx-topnav li.top > a {
   cursor: default; }
