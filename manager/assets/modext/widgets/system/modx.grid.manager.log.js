@@ -39,6 +39,7 @@ MODx.grid.ManagerLog = function(config) {
             header: _('object')
             ,dataIndex: 'name'
             ,width: 300
+            ,renderer: Ext.util.Format.htmlEncode
         }]
         ,tbar: [{
             xtype: 'button'
@@ -85,7 +86,7 @@ MODx.panel.ManagerLog = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-            html: _('mgrlog_view')
+            html: _('manager_log')
             ,xtype: 'modx-header'
             ,id: 'manager-log-header'
         },MODx.getPageStructure([{

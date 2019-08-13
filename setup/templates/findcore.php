@@ -101,7 +101,7 @@ if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 } else {
 ?>
                         <span class="field_error">ERROR: Your MODX_CORE_PATH is invalid; please specify the correct path in the
-                        field above and click Submit.</span>
+                        field above and click Submit. The path has to contain a trailing slash.</span>
 <?php
 }
 ?>

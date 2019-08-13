@@ -3401,7 +3401,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   .x-column-inner > .x-column {
     margin-right: 0;
     overflow: visible; }
-  .x-column-inner > .x-column ~ .x-column {
+  .x-column-inner > .x-column:not(.x-hide-display) ~ .x-column {
     margin-right: 0;
     margin-left: 15px; }
 
@@ -5411,7 +5411,8 @@ input::-moz-focus-inner {
   color: #c0272b;
   font: normal 11px "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   margin-top: 2px;
-  position: relative; }
+  position: relative;
+  min-width: 95%; }
   .x-form-invalid-msg:before {
     content: "";
     /* : "\f071" */
@@ -6045,7 +6046,7 @@ ul.x-tab-strip-bottom {
     /* dirty hack to make vertical tabs container stretch to bottom */
     padding-bottom: 10000px !important;
     /* dirty hack to make vertical tabs container stretch to bottom */
-    width: 169px !important;
+    width: 168px !important;
     /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
     /* the "categories" text */ }
     .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap {
@@ -6086,7 +6087,7 @@ ul.x-tab-strip-bottom {
             box-shadow: none;
             /* removes the active tab strip on top */
             color: #1A7FB8;
-            width: 169px;
+            width: 168px;
             /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */ }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-edge {
             height: 0;
@@ -6098,8 +6099,8 @@ ul.x-tab-strip-bottom {
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li .x-tab-strip-text {
             line-height: 1.4;
             padding: 2px 0 2px 0;
-            white-space: normal;
-            /* prevent long category names from breaking out of the tab strip width */ }
+            word-break: break-all;
+            white-space: pre-wrap; }
     .vertical-tabs-panel .vertical-tabs-header h4 {
       background: #FFF;
       /*border-right: 1px solid $borderColor;*/
@@ -6587,6 +6588,7 @@ ul.x-tab-strip-bottom {
   #modx-manager-search .x-form-field-wrap .x-form-trigger {
     color: rgba(255, 255, 255, 0.25);
     transition: color 0.25s;
+    margin: 0;
     /* the following styles are already provided by the default combobox .x-form-trigger styles */
     /*cursor: default;
     height: 16px;
@@ -7142,7 +7144,7 @@ ul.x-tab-strip-bottom {
     #modx-leftbar .x-plain-body {
       height: auto !important; } }
   #modx-leftbar .x-tab-panel-noborder {
-    margin: 26px 10px 26px 26px; }
+    margin: 26px; }
   #modx-leftbar .x-panel-tbar {
     padding: 0; }
   #modx-leftbar .x-toolbar {
@@ -7201,11 +7203,11 @@ ul.x-tab-strip-bottom {
     background-repeat: no-repeat;
     background-position: center left;
     border-radius: 0 3px 3px 0;
-    left: -9px;
+    left: -25px;
     top: 68px;
     width: 11px;
     /* to have left and right 3px equal space from the arrow which is 5px */
-    height: 41px;
+    height: 39px;
     opacity: 0.5;
     filter: alpha(opacity=50);
     /* for IE <= 8 */
@@ -7219,7 +7221,7 @@ ul.x-tab-strip-bottom {
       position: absolute;
       content: ' ';
       right: 4px;
-      top: 16px; }
+      top: 14px; }
     .x-layout-split .x-layout-mini:hover:after,
     #modx-leftbar-tabs-xcollapsed .x-layout-mini:hover:after {
       border-right-color: #3697cd; }
@@ -9197,7 +9199,7 @@ jumping around */
 
 @media screen and (max-width: 640px) {
   .x-column-inner > .x-column ~ .x-column {
-    margin-left: 0; } }
+    margin-left: 0 !important; } }
 
 @media screen and (max-width: 640px) {
   .x-form-item label.x-form-item-label[for="modx-import-base-path"], .x-form-item label.x-form-item-label[for="modx-import-resource-class"], .x-form-item label.x-form-item-label[for="modx-import-element"], .x-form-item label.x-form-item-label[for="modx-import-parent"], .x-form-item label.x-form-item-label[for="modx-import-allowed-extensions"], #modx-import-base-path {
@@ -10049,7 +10051,15 @@ iframe[classname="x-hidden"] {
 .x-grid3-col-main {
   padding: 10px 5px 35px; }
 
-.x-grid3-cell-inner.x-grid3-col-main h3 {
+.x-grid3-col-main-constraint {
+  padding: 10px 5px 22px; }
+
+.x-grid3-col-main-installed {
+  padding: 10px 5px 5px; }
+
+.x-grid3-cell-inner.x-grid3-col-main h3,
+.x-grid3-cell-inner.x-grid3-col-main-installed h3,
+.x-grid3-cell-inner.x-grid3-col-main-constraint h3 {
   color: #555555;
   font: normal 13px/1.4 "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   font-size: 20px;
@@ -10456,3 +10466,19 @@ iframe[classname="x-hidden"] {
 
 .x-datetime-inline-editor .x-datetime-wrap {
   margin-top: 0 !important; }
+
+::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
+  width: 1rem;
+  height: 1rem;
+  border: .25rem solid transparent;
+  border-radius: .5rem;
+  background-color: transparent; }
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 1rem rgba(83, 89, 95, 0.2); }
+
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 0 1rem rgba(83, 89, 95, 0.3); }
+
+::-webkit-resizer, ::-webkit-scrollbar-corner {
+  background-color: transparent; }

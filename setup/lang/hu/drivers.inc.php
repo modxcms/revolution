@@ -5,16 +5,16 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['mysql_err_ext'] = 'MODX requires the mysql extension for PHP and it does not appear to be loaded.';
-$_lang['mysql_err_pdo'] = 'MODX requires the pdo_mysql driver when native PDO is being used and it does not appear to be loaded.';
-$_lang['mysql_version_5051'] = 'MODX will have issues on your MySQL version ([[+version]]), because of the many bugs related to the PDO drivers on this version. Please upgrade MySQL to patch these problems. Even if you choose not to use MODX, it is recommended you upgrade to this version for the security and stability of your own website.';
-$_lang['mysql_version_client_nf'] = 'MODX could not detect your MySQL client version via mysql_get_client_info(). Please manually make sure that your MySQL client version is at least 4.1.20 before proceeding.';
+$_lang['mysql_err_ext'] = 'A MODX megköveteli a PHP mysql kiterjesztését, és úgy tűnik, ez nincs betöltve.';
+$_lang['mysql_err_pdo'] = 'A MODX megköveteli a pdo_mysql vezérlőt, ha natív PDO van használatban, és úgy látszik, hogy ez nincs betöltve.';
+$_lang['mysql_version_5051'] = 'A MODX hibákat ad a betöltött MySQL verzión ([[+version]]) az ehhet tartozó PDO meghajtó számos hibája miatt. Frissítse a MySQL-t ezek megelőzésére. Még ha nem is a MODX használata mellett dönt, javasolt a frissítés a weboldala biztonsága és megbízható működése érdekében.';
+$_lang['mysql_version_client_nf'] = 'A MODX nem tudta felismerni a MySQL kliens verzióját a mysql_get_client_info() meghívásával. Kérjük, hogy továbblépés előtt győződjön meg róla, hogy a MySQL kliens verziója legalább 4.1.20.';
 $_lang['mysql_version_client_start'] = 'MySQL kliens verziójának ellenőrzése:';
-$_lang['mysql_version_client_old'] = 'MODX may have issues because you are using a very old MySQL client version ([[+version]]). MODX will allow installation using this MySQL client version, but we cannot guarantee all functionality will be available or work properly when using older versions of the MySQL client libraries.';
-$_lang['mysql_version_fail'] = 'You are running on MySQL [[+version]], and MODX Revolution requires MySQL 4.1.20 or later. Please upgrade MySQL to at least 4.1.20.';
-$_lang['mysql_version_server_nf'] = 'MODX could not detect your MySQL server version via mysql_get_server_info(). Please manually make sure that your MySQL server version is at least 4.1.20 before proceeding.';
+$_lang['mysql_version_client_old'] = 'A MODX hibákat adhat, mert nagyon régi MySQL kliens verziót ([[+version]]) használ. A MODX engedi a telepítést ezzel a MySQL kliens verzióval, de nem tudjuk biztosítani, hogy minden működés elérhető lesz vagy megfelelően fog működni, ha a MySQL kliens könyvtár régebbi verzióit használja.';
+$_lang['mysql_version_fail'] = 'A MySQL [[+version]] fut, és a MODX Revolution a MySQL 4.1.20 vagy újabb változatát igényli. Kérjük, frissítse a MySQL-t legalább 4.1.20-ra.';
+$_lang['mysql_version_server_nf'] = 'A MODX nem tudta felismerni a MySQL kiszolgáló verzióját a mysql_get_server_info() meghívásával. Kérjük, hogy továbblépés előtt győződjön meg róla, hogy a MySQL kiszolgáló verziója legalább 4.1.20.';
 $_lang['mysql_version_server_start'] = 'MySQL kiszolgáló verziójának ellenőrzése:';
 $_lang['mysql_version_success'] = 'Rendben! Fut a [[+version]] verzió';
 
-$_lang['sqlsrv_version_success'] = 'OK!';
-$_lang['sqlsrv_version_client_success'] = 'OK!';
+$_lang['sqlsrv_version_success'] = 'Rendben!';
+$_lang['sqlsrv_version_client_success'] = 'Rendben!';

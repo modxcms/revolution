@@ -362,7 +362,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             } else {
                 $strPubDate = $publishDate;
                 $publishDate = strtotime($publishDate);
-                if ($publishDate < $now) { /* if we're past publish date, publish resource */
+                if ($publishDate <= $now) { /* if we're past publish date, publish resource */
                     $this->setProperty('published',true);
                     $this->setProperty('publishedon',$strPubDate);
                     $publishDate = 0;
@@ -516,6 +516,11 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             return false;
         }
 
+        if ($targetResource->get('id') === $this->object->get('id')) {
+            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_self'));
+            return false;
+        }
+
         return true;
     }
 
@@ -537,6 +542,11 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
             $targetResource = $this->modx->getObject('modResource', $target);
             if (!$targetResource) {
                 $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_nf'));
+                return false;
+            }
+
+            if ($targetResource->get('id') === $this->object->get('id')) {
+                $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_self'));
                 return false;
             }
         }

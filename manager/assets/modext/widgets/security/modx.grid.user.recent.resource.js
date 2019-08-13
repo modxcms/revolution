@@ -18,7 +18,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         ,autosave: true
         ,save_action: 'resource/updatefromgrid'
         ,pageSize: 10
-        ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu']
+        ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu', 'link']
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -27,7 +27,6 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         },{
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
-            //,width: 150
         },{
             header: _('published')
             ,dataIndex: 'published'
@@ -46,7 +45,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
 };
 Ext.extend(MODx.grid.RecentlyEditedResourcesByUser,MODx.grid.Grid,{
     preview: function() {
-        window.open(MODx.config.base_url+'?id='+this.menu.record.id);
+        window.open(this.menu.record.link);
     }
     ,refresh: function() {
         var tree = Ext.getCmp('modx-resource-tree');

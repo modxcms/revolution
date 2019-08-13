@@ -280,7 +280,7 @@ class modX extends xPDO {
      *
      * @var array
      */
-    private $loggedDeprecatedFunctions = [];
+    private $loggedDeprecatedFunctions = array();
 
     /**
      * Harden the environment against common security flaws.
@@ -1123,6 +1123,19 @@ class modX extends xPDO {
     public function sendRedirect($url, $options= false, $type= '', $responseCode = '') {
         if (!$this->getResponse()) {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
+        }
+        if (!is_array($options)) {
+            $options = array('count_attempts' => (boolean) $options);
+        }
+        if ($type) {
+            $this->deprecated('2.0.5', 'Use type in options array instead.', 'sendRedirect method parameter $type');
+            $options['type'] = $type;
+            $type = '';
+        }
+        if ($responseCode) {
+            $this->deprecated('2.0.5', 'Use responseCode in options array instead.', 'sendRedirect method parameter $responseCode');
+            $options['responseCode'] = $responseCode;
+            $responseCode = '';
         }
         $this->response->sendRedirect($url, $options, $type, $responseCode);
     }

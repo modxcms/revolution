@@ -208,14 +208,14 @@ class phpthumb {
 	public $tempFilesToDelete = array();
 	public $cache_filename    = null;
 
-	public $AlphaCapableFormats = array( 'png', 'ico', 'gif');
+    public $AlphaCapableFormats = array( 'png', 'ico', 'gif', 'webp');
 	public $is_alpha = false;
 
 	public $iswindows        = null;
 	public $issafemode       = null;
 	public $php_memory_limit = null;
 
-	public $phpthumb_version = '1.7.15-201810050741';
+	public $phpthumb_version = '1.7.15-201902101903';
 
 	//////////////////////////////////////////////////////////////////////
 
@@ -465,6 +465,12 @@ class phpthumb {
 			$builtin_formats['jpg']  = (bool) ($imagetypes & IMG_JPG);
 			$builtin_formats['gif']  = (bool) ($imagetypes & IMG_GIF);
 			$builtin_formats['png']  = (bool) ($imagetypes & IMG_PNG);
+			if (defined('IMG_WEBP')) {
+				$builtin_formats['webp'] = (bool) ($imagetypes & IMG_WEBP); // PHP 5.6.25, 7.0.10
+			}
+			if (defined('IMG_BMP')) {
+				$builtin_formats['bmp']  = (bool) ($imagetypes & IMG_BMP);  // PHP 7.2.0
+			}
 		}
 
 		$this->DebugMessage('imageinterlace($this->gdimg_output, '. (int) $this->config_output_interlace .')', __FILE__, __LINE__);
@@ -479,7 +485,7 @@ class phpthumb {
 					ob_end_clean();
 					return false;
 				}
-				imagejpeg($this->gdimg_output, null, $this->thumbnailQuality);
+				imagewbmp($this->gdimg_output, null, $this->thumbnailQuality);
 				$this->outputImageData = ob_get_contents();
 				break;
 
@@ -534,7 +540,23 @@ class phpthumb {
 				$this->outputImageData = ob_get_contents();
 				break;
 
+			case 'webp':
+				if (empty($builtin_formats['webp'])) {
+					$this->DebugMessage('GD does not have required built-in support for WebP output', __FILE__, __LINE__);
+					ob_end_clean();
+					return false;
+				}
+				imagewebp($this->gdimg_output);
+				$this->outputImageData = ob_get_contents();
+				break;
+
 			case 'bmp':
+				if (!empty($builtin_formats['bmp'])) {
+					imagebmp($this->gdimg_output);
+					$this->outputImageData = ob_get_contents();
+					break;
+				}
+				$this->DebugMessage('GD does not have required built-in support for BMP output', __FILE__, __LINE__);
 				if (!@include_once __DIR__ .'/phpthumb.bmp.php' ) {
 					$this->DebugMessage('Error including "'. __DIR__ .'/phpthumb.bmp.php" which is required for BMP format output', __FILE__, __LINE__);
 					ob_end_clean();
@@ -648,12 +670,22 @@ class phpthumb {
 
 				case 'png':
 				case 'gif':
-					header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($this->thumbnailFormat));
+				case 'webp':
 					$ImageOutFunction = 'image'.$this->thumbnailFormat;
+					if (!function_exists($ImageOutFunction)) {
+						$this->DebugMessage($ImageOutFunction.' is not available', __FILE__, __LINE__);
+						return false;
+					}
+					header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($this->thumbnailFormat));
 					@$ImageOutFunction($this->gdimg_output);
 					break;
 
 				case 'bmp':
+					if (function_exists('imagebmp')) {
+						header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($this->thumbnailFormat));
+						imagebmp($this->gdimg_output);
+						break;
+					}
 					if (!@include_once __DIR__ .'/phpthumb.bmp.php' ) {
 						$this->DebugMessage('Error including "'. __DIR__ .'/phpthumb.bmp.php" which is required for BMP format output', __FILE__, __LINE__);
 						return false;
@@ -955,11 +987,15 @@ class phpthumb {
 				$this->thumbnailFormat         = 'jpeg';
 				$AvailableImageOutputFormats[] = 'jpeg';
 			}
+			if ($imagetypes & IMG_WEBP) {
+				$this->thumbnailFormat         = 'webp';
+				$AvailableImageOutputFormats[] = 'webp';
+			}
 		} else {
 			$this->DebugMessage('imagetypes() does not exist - GD support might not be enabled?',  __FILE__, __LINE__);
 		}
 		if ($this->ImageMagickVersion()) {
-			$IMformats = array('jpeg', 'png', 'gif', 'bmp', 'ico', 'wbmp');
+			$IMformats = array('jpeg', 'png', 'gif', 'bmp', 'ico', 'wbmp', 'webp');
 			$this->DebugMessage('Addding ImageMagick formats to $AvailableImageOutputFormats ('.implode(';', $AvailableImageOutputFormats).')', __FILE__, __LINE__);
 			foreach ($IMformats as $key => $format) {
 				$AvailableImageOutputFormats[] = $format;
@@ -1610,6 +1646,10 @@ class phpthumb {
 					case 'jpeg':
 						$ImageCreateFunction = 'imagecreatefromjpeg';
 						break;
+					case 'webp':
+						$ImageCreateFunction = 'imagecreatefromwebp';
+						$this->is_alpha = true;
+						break;
 					default:
 						$this->DebugMessage('Forcing output to PNG because $this->thumbnailFormat ('.$this->thumbnailFormat.' is not a GD-supported format)', __FILE__, __LINE__);
 						$outputFormat = 'png';
@@ -1618,7 +1658,7 @@ class phpthumb {
 						$this->useRawIMoutput = false;
 						break;
 				}
-				if (!function_exists(@$ImageCreateFunction)) {
+				if (!function_exists($ImageCreateFunction)) {
 					// ImageMagickThumbnailToGD() depends on imagecreatefrompng/imagecreatefromgif
 					//$this->DebugMessage('ImageMagickThumbnailToGD() aborting because '.@$ImageCreateFunction.'() is not available', __FILE__, __LINE__);
 					$this->useRawIMoutput = true;
@@ -1707,7 +1747,7 @@ class phpthumb {
 					if (!preg_match('#('.implode('|', $this->AlphaCapableFormats).')#i', $outputFormat)) {
 						// not a transparency-capable format
 						$commandline .= ' -background '.phpthumb_functions::escapeshellarg_replacement('#'.($this->bg ? $this->bg : 'FFFFFF'));
-						if ($getimagesize[2] == IMAGETYPE_GIF) {
+                        if (!stristr($commandline, ' -flatten')) {
 							$commandline .= ' -flatten';
 						}
 					} else {
@@ -2936,8 +2976,8 @@ if (false) {
 						@list($filename, $alignment, $opacity, $margin['x'], $margin['y'], $rotate_angle) = explode('|', $parameter, 6);
 						// $margin can be pixel margin or percent margin if $alignment is text, or max width/height if $alignment is position like "50x75"
 						$alignment    = ($alignment            ? $alignment            : 'BR');
-						$opacity      = ('' !== $opacity ? (int) $opacity : 50);
-						$rotate_angle = ('' !== $rotate_angle ? (int) $rotate_angle : 0);
+						$opacity      = ('' != $opacity ? (int) $opacity : 50);
+						$rotate_angle = ('' != $rotate_angle ? (int) $rotate_angle : 0);
 						if (!preg_match('#^([0-9\\.\\-]*)x([0-9\\.\\-]*)$#i', $alignment, $matches)) {
 							$margins = array('x', 'y');
 							foreach ($margins as $xy) {
@@ -2995,9 +3035,9 @@ if (false) {
 						$alignment  = ($alignment       ? $alignment  : 'BR');
 						$hex_color  = ($hex_color       ? $hex_color  : '000000');
 						$ttffont    = ($ttffont         ? $ttffont    : '');
-						$opacity    = ('' !== $opacity ? $opacity    : 50);
-						$margin     = ('' !== $margin ? $margin     : 5);
-						$angle      = ('' !== $angle ? $angle      : 0);
+						$opacity    = ('' != $opacity ? $opacity    : 50);
+						$margin     = ('' != $margin ? $margin     : 5);
+						$angle      = ('' != $angle ? $angle      : 0);
 						$bg_color   = ($bg_color        ? $bg_color   : false);
 						$bg_opacity = ($bg_opacity      ? $bg_opacity : 0);
 						$fillextend = ($fillextend      ? $fillextend : '');

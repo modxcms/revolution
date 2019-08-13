@@ -185,7 +185,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         MODx.msg.confirm({
             title: _('warning')
             ,text: _('remove_this_confirm',{
-                type: oar[0]
+                type: _(oar[0])
                 ,name: this.cm.activeNode.attributes.name
             })
             ,url: MODx.config.connector_url

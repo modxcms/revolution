@@ -49,7 +49,7 @@ class modFileHandler {
      * @param array $options Optional. An array of options for the object.
      * @param string $overrideClass Optional. If provided, will force creation
      * of the object as the specified class.
-     * @return mixed The appropriate modFile/modDirectory object
+     * @return modFile|modDirectory The appropriate modFile/modDirectory object
      */
     public function make($path, array $options = array(), $overrideClass = '') {
         $path = $this->sanitizePath($path);
@@ -155,7 +155,7 @@ class modFileHandler {
             return false;
         }
 
-        if (class_exists('\finfo')) {
+        if (filesize($file) > 0 && class_exists('\finfo')) {
             $finfo = new \finfo(FILEINFO_MIME);
 
             return substr($finfo->file($file), 0, 4) !== 'text';
@@ -496,8 +496,10 @@ class modFile extends modFileSystemResource {
 
         $results = false;
 
-        if ($this->fileHandler->modx->getService('archive', 'compression.xPDOZip', XPDO_CORE_PATH, $this->path)) {
-            $results = $this->fileHandler->modx->archive->unpack($to);
+        /** @var xPDOZip $archive */
+        $archive = $this->fileHandler->modx->getService('archive', 'compression.xPDOZip', XPDO_CORE_PATH, $this->path);
+        if ($archive) {
+            $results = $archive->unpack($to, $options);
         }
 
         return $results;

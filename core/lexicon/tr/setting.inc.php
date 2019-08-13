@@ -49,7 +49,7 @@ $_lang['setting_remove'] = 'Ayarı Sil';
 $_lang['setting_remove_confirm'] = 'Bu ayarı silmek istediğinizden emin misiniz? Bu MODX kurulumunu bozabilir.';
 $_lang['setting_update'] = 'Ayarları Güncelle';
 $_lang['settings_after_install'] = 'Bu yeni bir kurulum olduğu için bu ayarları kontrol etmeniz, ve istediğiniz ayarları değiştirmeniz gerekmektedir. Ayarları kontrol ettikten sonra, ayarlar veri tabanını güncelleştirmek için \'Kaydet\'e basınız.<br /><br />';
-$_lang['settings_desc'] = 'Burada genel tercihleri ve MODX yönetici arayüzü için yapılandırma ayarlarının yanısıra MODX sitenizin nasıl çalışacağını belirleyebilirsiniz. Kılavuz yolu ile dinamik anlamda düzenlemek için düzenlemek istediğiniz ayarın değer sütununa çift tıklayın, veya daha fazla seçenek için bir ayarı sağ tıklayın. Ayrıca ayarın tanımı için "+" işaretine de tıklayabilirsiniz.';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Kullanıcı Dostu URLler';
 $_lang['settings_misc'] = 'Diğer';
 $_lang['settings_site'] = 'Site';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'Rumuzu otomatik olarak üret';
 $_lang['setting_automatic_alias_desc'] = 'Kaydedilirken sistemin Kaynağın sayfa başlığını baz alarak otomatik bir rumuz oluşturmasını sağlamak için \'Evet\' i seçin.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'Temel Yardım URL\'si';
 $_lang['setting_base_help_url_desc'] = 'Yönetici içindeki sayfaların sağ üstünde Yardım bağlantıları ile oluşturmak için kullanılacak temel URL.';
@@ -370,7 +370,7 @@ $_lang['setting_inline_help'] = 'Alanlar için Satır İçi Yardım Metnini Gör
 $_lang['setting_inline_help_desc'] = 'Eğer \'Evet\'se, alanlar yardım metnini doğrudan alanın altında görüntüler. \'Hayır\' ise, tüm alanlarda araç ipucu tabanlı yardım alacaksınız.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Oluşturma Şeması';
-$_lang['setting_link_tag_scheme_desc'] = 'Etiket için [[~ id]] URL oluşturma şeması. Mevcut seçenekler<a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">işte</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Etiket için [[~ id]] URL oluşturma şeması. Mevcut seçenekler<a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">işte</a>.';
 
 $_lang['setting_locale'] = 'Yerel';
 $_lang['setting_locale_desc'] = 'Sistem için yerel ayar ayarla. Varsayılan olarak kullanmak için boş bırakın. Daha fazla bilgi için <a href="http://php.net/setlocale" target="_blank">PHP belgelerine</a> bakın.';
@@ -696,7 +696,7 @@ $_lang['setting_show_tv_categories_header_desc'] = '"Evet" ise, MODX bir Kaynakt
 
 $_lang['setting_signupemail_message'] = 'Kayıt e-postası';
 $_lang['setting_signupemail_message_desc'] = 'Burada, kullanıcılarınıza bir hesap oluştururken gönderdikleri mesajı ayarlayabilir ve MODX\'in kullanıcı adlarını ve şifrelerini içeren bir e-posta göndermesine izin verebilirsiniz.<br /><strong>Not:</strong>Iletinin gönderildiğinde aşağıdaki yer tutucuları içerik yöneticisi tarafından değiştirilir:<br /><br />[[+sname]]-Web sitenizin adı, <br />[[+saddr]] - Web sitesi e-posta adresi, <br />[[+surl]] - Sitenizin URL\'si, <br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği, <br />[[+pwd]] - Kullanıcı parolası, <br />[[+ufn]] - Kullanıcının tam adı. <br /><br /><strong>Bırakın[[+uid]] ve [[+pwd]] e-posta veya kullanıcı adı ve parola postayla gönderilmeyecek ve kullanıcılarınız kullanıcı adınızı veya şifrenizi bilmiyecek!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Merhaba [[+uid]] \\n\\n burada [[+sname]] içerik yöneticisi:\\n\\nusername: [[+uid]]\\npassword: [[+pwd]]\\n\\n \\ nsecure Manager ([[+surl]]), parolanızı değiştirebilirsiniz.\\n\\nRegards,\\nsite yöneticisi';
+$_lang['setting_signupemail_message_default'] = 'Merhaba [[+uid]] \n\n burada [[+sname]] içerik yöneticisi:\n\nusername: [[+uid]]\npassword: [[+pwd]]\n\n \ nsecure Manager ([[+surl]]), parolanızı değiştirebilirsiniz.\n\nRegards,\nsite yöneticisi';
 
 $_lang['setting_site_name'] = 'Site ismi';
 $_lang['setting_site_name_desc'] = 'Sitenizin adını buraya girin.';
@@ -813,11 +813,11 @@ $_lang['setting_user_nav_parent_desc'] = 'Kullanıcı menüsü için tüm kayıt
 
 $_lang['setting_webpwdreminder_message'] = 'Web Hatırlatıcı E-postası';
 $_lang['setting_webpwdreminder_message_desc'] = 'E-posta yoluyla yeni bir şifre istediklerinde web kullanıcılarına gönderilecek bir mesaj girin. İçerik Yöneticisi yeni şifrelerini ve etkinleştirme bilgilerini içeren bir e-posta gönderir. <br /><strong>Not:</strong> Mesaj gönderildiğinde aşağıdaki yer tutucuların yerini İçerik Yöneticisi alır: <br /><br />[[+sname]] - Web sitenizin adı, <br />[[+saddr]] - Web sitenizin e-posta adresidir, <br />[[+surl]] - Sitenizin URL\'si, <br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği, <br />[[+pwd]] - Kullanıcı şifresi, <br />[[+ufn]] - Kullanıcının tam adı. <br /><br /><strong>E-postada [[+uid]] ve [[+pwd]] bırakın, aksi takdirde kullanıcı adı ve parola postayla gönderilmez ve kullanıcılarınız kullanıcı adlarını veya şifrelerini öğrenin!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Merhaba[[+uid]]\\n\\nYeni şifrenizi etkinleştirmek için aşağıdaki bağlantıya tıklayın:\\n\\n[[+surl]]\\n\\nEğer etkinleştirme başarılı olursa, aşağıdaki şifreyi kullanarak oturum açabilirsiniz:\\n\\nŞifre[[+pwd]]\\n\\nEğer bu epostayı talep etmediyseniz, lütfen görmezden gelin.\\n\\nSaygılarımızla,\\nSite Yöneticisi';
+$_lang['setting_webpwdreminder_message_default'] = 'Merhaba[[+uid]]\n\nYeni şifrenizi etkinleştirmek için aşağıdaki bağlantıya tıklayın:\n\n[[+surl]]\n\nEğer etkinleştirme başarılı olursa, aşağıdaki şifreyi kullanarak oturum açabilirsiniz:\n\nŞifre[[+pwd]]\n\nEğer bu epostayı talep etmediyseniz, lütfen görmezden gelin.\n\nSaygılarımızla,\nSite Yöneticisi';
 
 $_lang['setting_websignupemail_message'] = 'Web Kayıt e-postası';
 $_lang['setting_websignupemail_message_desc'] = 'Buradan, kullanıcılarınıza bir web hesabı oluşturduğunuzda web kullanıcılarına gönderilecek mesajı ayaralayabilirsiniz ve İçerik Yöneticisinin kullanıcı adı ve şifre içeren bir eposta göndermesine izin verebilirsiniz. <br /><strong>Not:</strong> Mesaj gönderildiğinde aşağıdaki yer tutucular değiştirilir: <br /><br />[[+sname]] - Web sitenizin adı, <br />[[+saddr]] - Web sitenizin eposta adresi,<br />[[+surl]] - Sitenizin URL\'si,<br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği,<br />[[+pwd]] - Kullanıcı şifresi,<br />[[+ufn]] - Kullanıcının tam adı.<br /><br /><strong>[[+uid]] ve [[+pwd]]\'i boş bırakın aksi takdirde kullanıcı adı ve şifre posta içinde gönderilmez ve kullanıcılarınız kullanıcı adlarını ve şifrelerini bilemez!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Merhaba [[+uid]]\\n\\n[[+sname]] için oturum açma bilgileriniz: \\n\\n Kullanıcı adı: [[+uid]]\\nParola: [[+pwd]]\\n\\n[[+sname]]([[+surl]]) oturumunda şifrenizi değiştirebilirsiniz. \\n\\nGerekler, \\nSite Yöneticisi';
+$_lang['setting_websignupemail_message_default'] = 'Merhaba [[+uid]]\n\n[[+sname]] için oturum açma bilgileriniz: \n\n Kullanıcı adı: [[+uid]]\nParola: [[+pwd]]\n\n[[+sname]]([[+surl]]) oturumunda şifrenizi değiştirebilirsiniz. \n\nGerekler, \nSite Yöneticisi';
 
 $_lang['setting_welcome_screen'] = 'Karşılama Ekranını Göster';
 $_lang['setting_welcome_screen_desc'] = 'True olarak ayarlanırsa, hoş geldiniz ekranı karşılama sayfasının bir sonraki başarılı yüklenişinde gösterilir ve bundan sonra gösterilmez.';

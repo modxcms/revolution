@@ -8,7 +8,7 @@
  */
 $_lang['active_users_none'] = 'Momentan keine Benutzer aktiv.';
 $_lang['add_user'] = 'Benutzer hinzufügen';
-$_lang['create_resource'] = 'Resource erstellen';
+$_lang['create_resource'] = 'Ressource erstellen';
 $_lang['dashboard'] = 'Dashboard';
 $_lang['documentation'] = 'Dokumentation';
 $_lang['file_bug'] = 'Bug melden';
