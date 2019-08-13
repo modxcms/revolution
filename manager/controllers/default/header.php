@@ -312,7 +312,7 @@ class TopMenu
                 continue;
             }
             $sub = (!empty($menu['children'])) ? ' class="sub"' : '';
-            $smTpl = '<li id="'.$menu['id'].'">'."\n";
+            $smTpl = '<li id="'.$menu['id'].'"'.$sub.'>'."\n";
 
             $description = '';
             if ($this->showDescriptions && !empty($menu['description'])) {
