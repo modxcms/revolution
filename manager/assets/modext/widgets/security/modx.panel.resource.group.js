@@ -40,7 +40,7 @@ MODx.panel.ResourceGroups = function(config) {
                         ,id: 'modx-gr-tree-resource'
                         ,url: MODx.config.connector_url
                         ,baseParams: {
-                            action: 'resource/getNodes'
+                            action: 'Resource/GetNodes'
                             ,noMenu: true
                         }
                         ,ddGroup: 'rg2resource'

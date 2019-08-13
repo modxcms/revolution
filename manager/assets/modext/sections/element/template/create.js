@@ -40,7 +40,7 @@ MODx.page.CreateTemplate = function(config) {
                 }]
             }
         },{
-            process: 'element/template/create'
+            process: 'Element/Template/Create'
             ,reload: true
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'

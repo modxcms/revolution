@@ -239,7 +239,7 @@ MODx.panel.DashboardWidget = function(config) {
         id: 'modx-panel-dashboard-widget'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget/update'
+            action: 'System/Dashboard/Widget/Update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -329,7 +329,7 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-widget-dashboards'
         ,url: MODx.config.connector_url
-        ,action: 'system/dashboard/getList'
+        ,action: 'System/Dashboard/GetList'
         ,fields: ['id','name','description']
         ,autoHeight: true
         ,primaryKey: 'widget'

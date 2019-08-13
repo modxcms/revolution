@@ -58,7 +58,7 @@ Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
             text: _('snippet_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'element/snippet/remove'
+                action: 'Element/Snippet/Remove'
                 ,id: this.record.id
             }
             ,listeners: {
@@ -111,7 +111,7 @@ Ext.extend(MODx.page.UpdateSnippet,MODx.Component, {
             text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
         },{
-            process: 'element/snippet/update'
+            process: 'Element/Snippet/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

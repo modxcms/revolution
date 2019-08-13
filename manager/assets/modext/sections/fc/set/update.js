@@ -11,12 +11,12 @@ MODx.page.UpdateFCSet = function(config) {
 	Ext.applyIf(config,{
 	   formpanel: 'modx-panel-fc-set'
 	   ,actions: {
-            'new': 'security/forms/set/create'
-            ,edit: 'security/forms/set/update'
+            'new': 'Security/Forms/Set/Create'
+            ,edit: 'Security/Forms/Set/Update'
             ,cancel: 'security/forms'
         }
         ,buttons: [{
-            process: 'security/forms/set/update'
+            process: 'Security/Forms/Set/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'
@@ -30,7 +30,7 @@ MODx.page.UpdateFCSet = function(config) {
             process: 'cancel'
             ,text: _('cancel')
             ,id: 'modx-abtn-cancel'
-            ,params: {a:'security/forms/profile/update', id: config.record.profile}
+            ,params: {a:'Security/Forms/Profile/Update', id: config.record.profile}
         },{
             text: _('help_ex')
             ,id: 'modx-abtn-help'

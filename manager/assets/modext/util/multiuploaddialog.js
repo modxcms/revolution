@@ -52,7 +52,7 @@
             url: MODx.config.connector_url,
             permitted_extensions: permittedFileTypes,
             base_params: {
-                action: 'browser/file/upload',
+                action: 'Browser/File/Upload',
                 wctx: MODx.ctx || '',
                 source: 1,
             },

@@ -6,7 +6,7 @@ MODx.grid.Trash = function (config) {
     Ext.applyIf(config, {
         url: MODx.config.connector_url,
         baseParams: {
-            action: 'resource/trash/getlist'
+            action: 'Resource/Trash/GetList'
         },
         fields: [
             'id',
@@ -23,7 +23,7 @@ MODx.grid.Trash = function (config) {
         ],
         paging: true,
         autosave: true,
-        save_action: 'resource/updatefromgrid',
+        save_action: 'Resource/UpdateFromGrid',
         save_callback: this.refreshEverything,
         remoteSort: true,
         sm: this.sm,
@@ -199,7 +199,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/purge',
+                action: 'Resource/Trash/Purge',
                 ids: this.menu.record.id
             },
             listeners: {
@@ -232,7 +232,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/undelete',
+                action: 'Resource/Undelete',
                 id: this.menu.record.id
             },
             listeners: {
@@ -264,7 +264,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/purge',
+                action: 'Resource/Trash/Purge',
                 ids: cs
             },
             listeners: {
@@ -299,7 +299,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/restore',
+                action: 'Resource/Trash/Restore',
                 ids: cs
             },
             listeners: {
@@ -335,7 +335,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/purge',
+                action: 'Resource/Trash/Purge',
                 // we can't just purge everything, because it might happen that in
                 // the meantime something was deleted by another user which is not yet
                 // shown in the trash manager list because of missing reload.
@@ -382,7 +382,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/restore',
+                action: 'Resource/Trash/Restore',
                 // we can't just restore everything, because it might happen that in
                 // the meantime something was deleted by another user which is not yet
                 // shown in the trash manager list because of missing reload.

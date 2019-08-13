@@ -3,12 +3,12 @@ MODx.page.UpdateDashboard = function(config) {
 	Ext.applyIf(config,{
         formpanel: 'modx-panel-dashboard'
         ,actions: {
-            'new': 'system/dashboard/create'
-            ,edit: 'system/dashboard/update'
+            'new': 'System/Dashboard/Create'
+            ,edit: 'System/Dashboard/Update'
             ,cancel: 'system/dashboards'
         }
         ,buttons: [{
-            process: 'system/dashboard/update'
+            process: 'System/Dashboard/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

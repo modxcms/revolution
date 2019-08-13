@@ -13,7 +13,7 @@ MODx.combo.Provider = function(config) {
         ,hiddenName: 'provider'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/providers/getList'
+            action: 'Workspace/Providers/GetList'
             ,combo: true
         }
         ,editable: false

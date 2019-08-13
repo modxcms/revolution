@@ -4,7 +4,7 @@ MODx.panel.Source = function(config) {
         id: 'modx-panel-source'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'source/update'
+            action: 'Source/Update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
 		,cls: 'container form-with-labels'
@@ -202,7 +202,7 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
     }
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            MODx.loadPage('source/update', 'id='+o.result.object.id);
+            MODx.loadPage('Source/Update', 'id='+o.result.object.id);
         } else {
             Ext.getCmp('modx-abtn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-source-properties');

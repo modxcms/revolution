@@ -13,13 +13,13 @@ MODx.grid.GroupSettings = function(config) {
         ,id: 'modx-grid-group-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/group/setting/getList'
+            action: 'Security/Group/Setting/GetList'
             ,group: config.group
         }
         ,saveParams: {
             group: config.group
         }
-        ,save_action: 'security/group/setting/updatefromgrid'
+        ,save_action: 'Security/Group/Setting/UpdateFromGrid'
         ,fk: config.group
         ,tbar: [{
             text: _('create_new')
@@ -29,7 +29,7 @@ MODx.grid.GroupSettings = function(config) {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
                 ,baseParams: {
-                    action: 'security/group/setting/create'
+                    action: 'Security/Group/Setting/Create'
                 }
                 ,fk: config.group
             }
@@ -56,7 +56,7 @@ Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
                 ,handler: this.updateSetting
             },'-',{
                 text: _('setting_remove')
-                ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'security/group/setting/remove'])
+                ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'Security/Group/Setting/Remove'])
             });
         }
         if (m.length > 0) {
@@ -70,7 +70,7 @@ Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
         r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
         var uss = MODx.load({
             xtype: 'modx-window-setting-update'
-            ,action: 'security/group/setting/update'
+            ,action: 'Security/Group/Setting/Update'
             ,record: r
             ,grid: this
             ,listeners: {

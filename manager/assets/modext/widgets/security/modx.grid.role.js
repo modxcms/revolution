@@ -14,12 +14,12 @@ MODx.grid.Role = function(config) {
         ,id: 'modx-grid-role'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/role/getlist'
+            action: 'Security/Role/GetList'
         }
         ,fields: ['id','name','description','authority','perm']
         ,paging: true
         ,autosave: true
-        ,save_action: 'security/role/updatefromgrid'
+        ,save_action: 'Security/Role/UpdateFromGrid'
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -66,7 +66,7 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
         if (p.indexOf('remove') != -1) {
             m.push({
                 text: _('role_remove')
-                ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'security/role/remove'])
+                ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'Security/Role/Remove'])
             });
         }
         return m;
@@ -93,7 +93,7 @@ MODx.window.CreateRole = function(config) {
         // ,height: 150
         // ,width: 400
         ,url: MODx.config.connector_url
-        ,action: 'security/role/create'
+        ,action: 'Security/Role/Create'
         ,fields: [{
             name: 'name'
             ,fieldLabel: _('name')+'<span class="required">*</span>'
