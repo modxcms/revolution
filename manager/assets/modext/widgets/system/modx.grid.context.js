@@ -49,17 +49,17 @@ MODx.grid.Context = function(config) {
         },{
             header: _('description')
             ,dataIndex: 'description'
-            ,width: 600
+            ,width: 450
             ,sortable: false
             ,editor: { xtype: 'textfield' }
         },{
             header: _('rank')
             ,dataIndex: 'rank'
-            ,width: 100
+            ,width: 50
             ,sortable: true
             ,editor: { xtype: 'numberfield' }
         },{
-            width: 100
+            width: 50
             ,renderer: {
                 fn: this.buttonColumnRenderer,
                 scope: this
