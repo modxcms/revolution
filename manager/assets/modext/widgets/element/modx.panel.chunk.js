@@ -12,7 +12,7 @@ MODx.panel.Chunk = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/chunk/get'
+            action: 'Element/Chunk/Get'
         }
         ,id: 'modx-panel-chunk'
 		,cls: 'container form-with-labels'
@@ -71,7 +71,7 @@ MODx.panel.Chunk = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('chunk')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/chunk/create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'Element/Chunk/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title += ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -208,7 +208,7 @@ MODx.panel.Chunk = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }

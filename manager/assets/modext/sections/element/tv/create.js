@@ -40,7 +40,7 @@ MODx.page.CreateTV = function(config) {
                 }]
             }
         },{
-            process: 'element/tv/create'
+            process: 'Element/TemplateVar/Create'
             ,reload: true
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'

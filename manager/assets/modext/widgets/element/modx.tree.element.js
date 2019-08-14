@@ -14,8 +14,8 @@ MODx.tree.Element = function(config) {
         ,ddGroup: 'modx-treedrop-elements-dd'
         ,title: ''
         ,url: MODx.config.connector_url
-        ,action: 'element/getnodes'
-        ,sortAction: 'element/sort'
+        ,action: 'Element/GetNodes'
+        ,sortAction: 'Element/Sort'
         // ,useDefaultToolbar: false
         ,baseParams: {
             currentElement: MODx.request.id || 0
@@ -25,7 +25,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-template'
             ,tooltip: {text: _('new')+' '+_('template')}
             ,handler: function() {
-                this.redirect('?a=element/template/create');
+                this.redirect('?a=Element/Template/Create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_template ? false : true
@@ -33,7 +33,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-tv'
             ,tooltip: {text: _('new')+' '+_('tv')}
             ,handler: function() {
-                this.redirect('?a=element/tv/create');
+                this.redirect('?a=Element/TemplateVar/Create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_tv ? false : true
@@ -41,7 +41,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-chunk'
             ,tooltip: {text: _('new')+' '+_('chunk')}
             ,handler: function() {
-                this.redirect('?a=element/chunk/create');
+                this.redirect('?a=Element/Chunk/Create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_chunk ? false : true
@@ -49,7 +49,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-snippet'
             ,tooltip: {text: _('new')+' '+_('snippet')}
             ,handler: function() {
-                this.redirect('?a=element/snippet/create');
+                this.redirect('?a=Element/Snippet/Create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_snippet ? false : true
@@ -57,7 +57,7 @@ MODx.tree.Element = function(config) {
             cls: 'tree-new-plugin'
             ,tooltip: {text: _('new')+' '+_('plugin')}
             ,handler: function() {
-                this.redirect('?a=element/plugin/create');
+                this.redirect('?a=Element/Plugin/Create');
             }
             ,scope: this
             ,hidden: MODx.perm.new_plugin ? false : true
@@ -136,7 +136,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             ,text: _('category_confirm_delete')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'element/category/remove'
+                action: 'Element/Category/Remove'
                 ,id: id
             }
             ,listeners: {
@@ -222,7 +222,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'element/plugin/activate'
+                action: 'Element/Plugin/Activate'
                 ,id: oar[2]
             }
             ,listeners: {
@@ -239,7 +239,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'element/plugin/deactivate'
+                action: 'Element/Plugin/Deactivate'
                 ,id: oar[2]
             }
             ,listeners: {

@@ -14,7 +14,7 @@ MODx.panel.TV = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/tv/get'
+            action: 'Element/TemplateVar/Get'
         }
         ,id: 'modx-panel-tv'
 		,cls: 'container form-with-labels'
@@ -75,7 +75,7 @@ MODx.panel.TV = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('tv')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/tv/create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'Element/TemplateVar/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -222,7 +222,7 @@ MODx.panel.TV = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -568,7 +568,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'element/tv/renders/getInputProperties'
+                   'action': 'Element/TemplateVar/Renders/GetInputProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'
@@ -637,7 +637,7 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'element/tv/renders/getProperties'
+                   'action': 'Element/TemplateVar/Renders/GetProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'

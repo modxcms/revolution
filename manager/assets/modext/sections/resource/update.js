@@ -17,7 +17,7 @@ MODx.page.UpdateResource = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'resource/update'
+        ,action: 'Resource/Update'
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -83,7 +83,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 success: {fn:function(r) {
                     var response = Ext.decode(r.a.response.responseText);
                     if (response.object.redirect) {
-                        MODx.loadPage('resource/update', 'id='+response.object.id);
+                        MODx.loadPage('Resource/Update', 'id='+response.object.id);
                     } else if (node) {
                         node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
                         t.refreshNode(node.id);
@@ -101,12 +101,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/delete'
+                action: 'Resource/Delete'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('resource/update', 'id='+r.object.id);
+                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(true);
@@ -121,12 +121,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/undelete'
+                action: 'Resource/Undelete'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('resource/update', 'id='+r.object.id);
+                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(false);
@@ -230,7 +230,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         });
 
         btns.push({
-            process: 'resource/update'
+            process: 'Resource/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

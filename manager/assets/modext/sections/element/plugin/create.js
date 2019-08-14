@@ -40,7 +40,7 @@ MODx.page.CreatePlugin = function(config) {
                 }]
             }
         },{
-            process: 'element/plugin/create'
+            process: 'Element/Plugin/Create'
             ,reload: true
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'

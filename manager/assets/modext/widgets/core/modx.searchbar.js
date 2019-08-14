@@ -108,7 +108,7 @@ MODx.SearchBar = function(config) {
         ,store: new Ext.data.JsonStore({
             url: MODx.config.connector_url
             ,baseParams: {
-                action: 'search/search'
+                action: 'Search/Search'
             }
             ,root: 'results'
             ,totalProperty: 'total'

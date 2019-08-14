@@ -12,8 +12,8 @@ MODx.tree.UserGroup = function(config) {
         title: _('user_groups')
         ,id: 'modx-tree-usergroup'
         ,url: MODx.config.connector_url
-        ,action: 'security/group/getnodes'
-        ,sortAction: 'security/group/sort'
+        ,action: 'Security/Group/GetNodes'
+        ,sortAction: 'Security/Group/Sort'
         ,root_id: 'n_ug_0'
         ,root_name: _('user_groups')
         ,enableDrag: true
@@ -149,7 +149,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
             ,text: _('user_group_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/group/remove'
+                action: 'Security/Group/Remove'
                 ,id: id
             }
             ,listeners: {
@@ -168,7 +168,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
             ,text: _('user_group_user_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/group/user/remove'
+                action: 'Security/Group/User/Remove'
                 ,user: user_id
                 ,usergroup: group_id
             }
@@ -205,7 +205,7 @@ MODx.window.CreateUserGroup = function(config) {
         ,width: 700
         ,stateful: false
         ,url: MODx.config.connector_url
-        ,action: 'security/group/create'
+        ,action: 'Security/Group/Create'
         ,fields: [{
             name: 'parent'
             ,id: 'modx-'+this.ident+'-parent'
@@ -316,7 +316,7 @@ MODx.window.CreateUserGroup = function(config) {
                     },{
                         xtype: 'modx-combo-policy'
                         ,baseParams: {
-                            action: 'security/access/policy/getList'
+                            action: 'Security/Access/Policy/GetList'
                             ,group: 'Admin'
                             ,combo: '1'
                         }
@@ -366,7 +366,7 @@ MODx.window.AddUserToUserGroup = function(config) {
         // ,height: 150
         // ,width: 375
         ,url: MODx.config.connector_url
-        ,action: 'security/group/user/create'
+        ,action: 'Security/Group/User/Create'
         ,fields: [{
             fieldLabel: _('name')
             ,description: MODx.expandHelp ? '' : _('user_group_user_add_user_desc')

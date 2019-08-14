@@ -10,7 +10,7 @@ MODx.panel.AccessPolicy = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/policy/update'
+            action: 'Security/Access/Policy/Update'
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy'
@@ -217,7 +217,7 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/policy/template/getlist'
+            action: 'Security/Access/Policy/Template/GetList'
         }
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')

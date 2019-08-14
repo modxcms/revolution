@@ -5,7 +5,7 @@ MODx.panel.ErrorLog = function(config) {
         ,id: 'modx-panel-error-log'
         ,cls: 'container'
         ,baseParams: {
-            action: 'system/errorlog/clear'
+            action: 'System/ErrorLog/Clear'
         }
         // ,layout: 'form' // unnecessary and creates a wrong box shadow
         ,items: [{
@@ -67,7 +67,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         return true;
     }
     ,download: function() {
-        location.href = this.config.url+'?action=system/errorlog/download&HTTP_MODAUTH='+MODx.siteId;
+        location.href = this.config.url+'?action=System/ErrorLog/Download&HTTP_MODAUTH='+MODx.siteId;
     }
     /**
      * Set the textarea height to make use of the maximum "space" the client viewport allows

@@ -48,13 +48,13 @@ MODx.grid.Namespace = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/packageNamespace/getlist'
+            action: 'Workspace/PackageNamespace/GetList'
         }
         ,fields: ['id','name','path','assets_path','perm']
         ,anchor: '100%'
         ,paging: true
         ,autosave: true
-        ,save_action: 'workspace/packageNamespace/updatefromgrid'
+        ,save_action: 'Workspace/PackageNamespace/UpdateFromGrid'
         ,primaryKey: 'name'
         ,remoteSort: true
         ,sm: this.sm
@@ -132,7 +132,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1 && this.menu.record.name != 'core') {
                 m.push({
                     text: _('namespace_remove')
-                    ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','workspace/packageNamespace/remove'])
+                    ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','Workspace/PackageNamespace/Remove'])
                 });
             }
         }
@@ -163,7 +163,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'workspace/packageNamespace/getList'
+            action: 'Workspace/PackageNamespace/GetList'
     	};
         Ext.getCmp('modx-namespace-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -178,7 +178,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
             ,text: _('namespace_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'workspace/packageNamespace/removeMultiple'
+                action: 'Workspace/PackageNamespace/RemoveMultiple'
                 ,namespaces: cs
             }
             ,listeners: {

@@ -11,7 +11,7 @@ MODx.grid.DashboardWidgets = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget/getlist'
+            action: 'System/Dashboard/Widget/GetList'
         }
         ,fields: ['id','name','name_trans','description','description_trans','type','content','namespace','lexicon','size','cls']
         ,paging: true
@@ -128,7 +128,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             ,text: _('widget_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'system/dashboard/widget/removeMultiple'
+                action: 'System/Dashboard/Widget/RemoveMultiple'
                 ,widgets: cs
             }
             ,listeners: {
@@ -147,7 +147,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             ,text: _('widget_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'system/dashboard/widget/remove'
+                action: 'System/Dashboard/Widget/Remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -168,7 +168,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'system/dashboard/widget/getlist'
+            action: 'System/Dashboard/Widget/GetList'
     	};
         Ext.getCmp('modx-dashboard-widget-search').reset();
     	this.getBottomToolbar().changePage(1);

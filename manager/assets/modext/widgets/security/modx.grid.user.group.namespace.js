@@ -58,7 +58,7 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Namespace'
             }
             ,listeners: {
@@ -197,7 +197,7 @@ MODx.window.CreateUGNamespace = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Namespace'
             }
             ,anchor: '100%'

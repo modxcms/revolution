@@ -40,7 +40,7 @@ MODx.page.CreateSnippet = function(config) {
                 }]
             }
         },{
-            process: 'element/snippet/create'
+            process: 'Element/Snippet/Create'
             ,reload: true
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'

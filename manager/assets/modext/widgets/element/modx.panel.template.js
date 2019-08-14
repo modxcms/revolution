@@ -15,7 +15,7 @@ MODx.panel.Template = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/template/get'
+            action: 'Element/Template/Get'
         }
         ,id: 'modx-panel-template'
 		,cls: 'container form-with-labels'
@@ -74,7 +74,7 @@ MODx.panel.Template = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('template')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/template/create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'Element/Template/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -225,7 +225,7 @@ MODx.panel.Template = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -377,7 +377,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-template-which-editor').getValue();
-            MODx.request.a = 'element/template/update';
+            MODx.request.a = 'Element/Template/Update';
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();

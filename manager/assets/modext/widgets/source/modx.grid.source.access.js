@@ -93,7 +93,7 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
             ,text: _('source_access_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/access/removeAcl'
+                action: 'Security/Access/RemoveAcl'
                 ,id: this.menu.record.id
                 ,type: this.config.type || 'modAccessMediaSource'
             }
@@ -159,7 +159,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,hiddenName: 'principal'
             ,value: r.principal || ''
             ,baseParams: {
-                action: 'security/group/getList'
+                action: 'Security/Group/GetList'
                 ,combo: '1'
             }
             ,anchor: '100%'
@@ -177,7 +177,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,hiddenName: 'policy'
             ,value: r.policy || ''
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'MediaSource'
             }
             ,anchor: '100%'

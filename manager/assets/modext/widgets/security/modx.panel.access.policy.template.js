@@ -12,7 +12,7 @@ MODx.panel.AccessPolicyTemplate = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/policy/template/update'
+            action: 'Security/Access/Policy/Template/Update'
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy-template'

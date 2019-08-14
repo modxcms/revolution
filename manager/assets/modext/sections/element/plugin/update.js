@@ -58,7 +58,7 @@ Ext.extend(MODx.page.UpdatePlugin,MODx.Component, {
             text: _('plugin_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'element/plugin/remove'
+                action: 'Element/Plugin/Remove'
                 ,id: this.record.id
             }
             ,listeners: {
@@ -111,7 +111,7 @@ Ext.extend(MODx.page.UpdatePlugin,MODx.Component, {
             text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
         },{
-            process: 'element/plugin/update'
+            process: 'Element/Plugin/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

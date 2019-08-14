@@ -12,11 +12,11 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
         formpanel: 'modx-panel-access-policy-template'
         ,actions: {
             'new': 'security/access/policy/template'
-            ,edit: 'security/access/policy/template/update'
+            ,edit: 'Security/Access/Policy/Template/Update'
             ,cancel: 'security/permission'
         }
         ,buttons: [{
-            process: 'security/access/policy/template/update'
+            process: 'Security/Access/Policy/Template/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

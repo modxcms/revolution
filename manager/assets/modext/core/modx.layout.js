@@ -259,7 +259,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         MODx.Ajax.request({
                                 url: MODx.config.connector_url,
                                 params: {
-                                    action: 'resource/gettoolbar',
+                                    action: 'Resource/GetToolbar',
                                 },
                                 listeners: {
                                     success: {fn: function (res) {

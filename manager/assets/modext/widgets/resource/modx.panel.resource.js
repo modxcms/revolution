@@ -197,7 +197,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
-        if(this.getForm().baseParams.action == 'resource/create') {
+        if(this.getForm().baseParams.action == 'Resource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.disable(); }
         }
@@ -297,7 +297,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,failure: function(o) {
         this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'resource/create') {
+        if(this.getForm().baseParams.action == 'Resource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
@@ -321,7 +321,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             MODx.Ajax.request({
                 url: MODx.config.connector_url
                 ,params: {
-                    action: 'resource/translit'
+                    action: 'Resource/Translit'
                     ,string: string
                 }
                 ,listeners: {
@@ -353,7 +353,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 if (e == 'yes') {
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
-                    f.config.action = 'resource/reload';
+                    f.config.action = 'Resource/Reload';
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
@@ -471,7 +471,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     }
                     trail.push({
                         text: parents[i].pagetitle
-                        ,href: MODx.config.manager_url + '?a=resource/update&id=' + parents[i].id
+                        ,href: MODx.config.manager_url + '?a=Resource/Update&id=' + parents[i].id
                         ,cls: function(data) {
                             var cls = [];
                             if (!data.published) {
@@ -486,7 +486,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 } else {
                     trail.push({
                         text: parents[i].name || parents[i].key
-                        //,href: MODx.config.manager_url + '?a=context/update&key=' + parents[i].key
+                        //,href: MODx.config.manager_url + '?a=Context/Update&key=' + parents[i].key
                         ,href: false
                     });
                 }
@@ -645,7 +645,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     this.generateAliasRealTime(title);
 
                                 title = Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === true) {
+                                if (MODx.request.a !== 'Resource/Create' && MODx.perm.tree_show_resource_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
                                 Ext.getCmp('modx-resource-header').getEl().update(title);
@@ -828,7 +828,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,typeAheadDelay: 300
                 ,forceSelection: true
                 ,baseParams: {
-                    action: 'element/template/getList'
+                    action: 'Element/Template/GetList'
                     ,combo: '1'
                     ,limit: 0
                 }

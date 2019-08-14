@@ -14,7 +14,7 @@ MODx.grid.WhoIsOnline = function(config) {
     title: _('onlineusers_title')
     ,url: MODx.config.connector_url
     ,baseParams: {
-      action: 'security/user/getonline'
+      action: 'Security/User/GetOnline'
     }
     ,autosave: false
     ,save_action: ''

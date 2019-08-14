@@ -3,7 +3,7 @@ MODx.panel.ImportHTML = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/import/html'
+            action: 'System/Import/Html'
         }
         ,id: 'modx-panel-import-html'
 		,cls: 'container'
@@ -54,7 +54,7 @@ MODx.panel.ImportHTML = function(config) {
 					xtype: 'modx-tree-resource-simple'
 					,title: _('import_use_doc_tree')
 					,url: MODx.config.connector_url
-                    ,action: 'resource/getnodes'
+                    ,action: 'Resource/GetNodes'
 					,id: 'modx-ih-resource-tree'
 					,enableDrop: false
 					,rootVisible: false

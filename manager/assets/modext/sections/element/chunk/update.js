@@ -58,7 +58,7 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
             text: _('chunk_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'element/chunk/remove'
+                action: 'Element/Chunk/Remove'
                 ,id: this.record.id
             }
             ,listeners: {
@@ -111,7 +111,7 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
             text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
         },{
-            process: 'element/chunk/update'
+            process: 'Element/Chunk/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

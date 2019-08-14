@@ -13,7 +13,7 @@ MODx.page.CreateResource = function(config) {
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
-        ,action: 'resource/create'
+        ,action: 'Resource/Create'
     	,buttons: this.getButtons(config)
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
@@ -58,7 +58,7 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
             ,handler: MODx.loadHelpPane
         }];
         var save = {
-            process: 'resource/create'
+            process: 'Resource/Create'
             ,reload: true
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'

@@ -20,7 +20,7 @@ MODx.grid.TemplateTV = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['id','name','description','tv_rank','access','perm','category_name','category']
         ,baseParams: {
-            action: 'element/template/tv/getlist'
+            action: 'Element/Template/TemplateVar/GetList'
             ,template: config.template
             ,sort: 'tv_rank'
         }
@@ -130,7 +130,7 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
         return m;
     }
     ,updateTV: function(itm,e) {
-        MODx.loadPage('element/tv/update', 'id='+this.menu.record.id);
+        MODx.loadPage('Element/TemplateVar/Update', 'id='+this.menu.record.id);
     }
     ,filterByCategory: function(cb,rec,ri) {
         this.getStore().baseParams['category'] = cb.getValue();
@@ -147,7 +147,7 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'element/template/tv/getList'
+            action: 'Element/Template/TemplateVar/GetList'
             ,template: this.config.template
     	};
         Ext.getCmp('modx-temptv-filter-category').reset();
