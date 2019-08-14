@@ -59,7 +59,7 @@ MODx.grid.Context = function(config) {
             ,sortable: true
             ,editor: { xtype: 'numberfield' }
         },{
-            width: 50
+            width: 100
             ,renderer: {
                 fn: this.buttonColumnRenderer,
                 scope: this
@@ -232,6 +232,11 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             text: _('context_update')
         });
         b.push({
+            className: 'duplicate',
+            icon: 'files-o',
+            text: _('context_duplicate')
+        });
+        b.push({
             className: 'remove',
             icon: 'trash-o',
             text: _('context_remove')
@@ -250,6 +255,9 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             switch (act) {
                 case 'update':
                     this.updateContext(record, e);
+                    break;
+                case 'duplicate':
+                    this.duplicateContext(record, e);
                     break;
                 case 'remove':
                     this.remove(record, e);
