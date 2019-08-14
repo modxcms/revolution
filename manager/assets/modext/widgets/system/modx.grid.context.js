@@ -8,6 +8,17 @@
  */
 MODx.grid.Context = function(config) {
     config = config || {};
+    this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
+        + '<tpl if="action_buttons !== null">'
+        + '<ul class="x-grid-buttons">'
+        + '<tpl for="action_buttons">'
+        + '<li><i class="icon {className} icon-{icon}" title="{text}"></i></li>'
+        + '</tpl>'
+        + '</ul>'
+        + '</tpl>'
+        + '</tpl>', {
+        compiled: true
+    });
     Ext.applyIf(config,{
         title: _('contexts')
         ,id: 'modx-grid-context'
@@ -38,7 +49,7 @@ MODx.grid.Context = function(config) {
         },{
             header: _('description')
             ,dataIndex: 'description'
-            ,width: 575
+            ,width: 600
             ,sortable: false
             ,editor: { xtype: 'textfield' }
         },{
@@ -47,12 +58,18 @@ MODx.grid.Context = function(config) {
             ,width: 100
             ,sortable: true
             ,editor: { xtype: 'numberfield' }
+        },{
+            width: 50
+            ,renderer: {
+                fn: this.buttonColumnRenderer,
+                scope: this
+            }
         }]
         ,tbar: [{
             text: _('context_create')
             ,cls:'primary-button'
             ,handler: this.create
-			,scope: this
+            ,scope: this
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
@@ -111,7 +128,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             m.push({
                 text: _('context_remove')
                 ,handler: this.remove
-				,scope: this
+                ,scope: this
             });
         }
         return m;
@@ -146,67 +163,102 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         return true;
     }
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'context/getList'
-    	};
+        };
         Ext.getCmp('modx-ctx-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
-    
+
     ,create: function(btn, e) {
-		if (this.createWindow) {
-			this.createWindow.destroy();
-		}
-		
-		this.createWindow = MODx.load({
-			xtype		: 'modx-window-context-create',
-			closeAction	:'close',
-			listeners	: {
-			    'success'	: {
-			    	fn			: function() {
-						this.afterAction();
-					},
-			    	scope		: this
-			    }
-			}
-		});
-	        
-		this.createWindow.show(e.target);    
-    }
-    
-    ,remove: function(btn, e) {
-    	MODx.msg.confirm({
-        	title 		: _('warning'),
-        	text		: _('context_remove_confirm'),
-        	url			: this.config.url,
-        	params		: {
-            	action		: 'context/remove',
-            	key			: this.menu.record.key
-            },
+        if (this.createWindow) {
+            this.createWindow.destroy();
+        }
+
+        this.createWindow = MODx.load({
+            xtype		: 'modx-window-context-create',
+            closeAction	:'close',
             listeners	: {
-            	'success'	: {
-            		fn			: function() {
-	            		this.afterAction();
-            		},
-            		scope		: this
-            	}
+                'success'	: {
+                    fn			: function() {
+                        this.afterAction();
+                    },
+                    scope		: this
+                }
             }
-    	});
-    }
-    
-    ,afterAction: function() {
-	    var cmp = Ext.getCmp('modx-resource-tree');
-		
-		if (cmp) {
-    		cmp.refresh();
-		}
-		
-		this.getSelectionModel().clearSelections(true);
-		
-		this.refresh();
+        });
+
+        this.createWindow.show(e.target);
     }
 
+    ,remove: function(btn, e) {
+        MODx.msg.confirm({
+            title 		: _('warning'),
+            text		: _('context_remove_confirm'),
+            url			: this.config.url,
+            params		: {
+                action		: 'context/remove',
+                key			: this.menu.record.key
+            },
+            listeners	: {
+                'success'	: {
+                    fn			: function() {
+                        this.afterAction();
+                    },
+                    scope		: this
+                }
+            }
+        });
+    }
+
+    ,afterAction: function() {
+        var cmp = Ext.getCmp('modx-resource-tree');
+
+        if (cmp) {
+            cmp.refresh();
+        }
+
+        this.getSelectionModel().clearSelections(true);
+
+        this.refresh();
+    }
+
+    ,buttonColumnRenderer: function () {
+        var b = [];
+        b.push({
+            className: 'update',
+            icon: 'pencil-square-o',
+            text: _('context_update')
+        });
+        b.push({
+            className: 'remove',
+            icon: 'trash-o',
+            text: _('context_remove')
+        });
+        return this.buttonColumnTpl.apply({
+            action_buttons: b
+        });
+    },
+    onClick: function (e) {
+        var t = e.getTarget();
+        var elm = t.className.split(' ')[0];
+        if (elm === 'icon') {
+            var act = t.className.split(' ')[1];
+            var record = this.getSelectionModel().getSelected();
+            this.menu.record = record.data;
+            switch (act) {
+                case 'update':
+                    this.updateContext(record, e);
+                    break;
+                case 'remove':
+                    this.remove(record, e);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 });
 Ext.reg('modx-grid-contexts',MODx.grid.Context);
 
@@ -268,7 +320,7 @@ MODx.panel.Contexts = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-contexts'
-		,cls: 'container'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -282,7 +334,7 @@ MODx.panel.Contexts = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-contexts'
-				,cls:'main-wrapper'
+                ,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }]
