@@ -7,30 +7,30 @@
  * @subpackage lexicon
  */
 
-$_lang['events'] = 'Eventos';
-$_lang['system_event'] = 'Evento do Sistema';
-$_lang['system_events'] = 'Eventos do Sistema';
-$_lang['system_events.desc'] = 'Eventos do sistema são os eventos no MODX que são registrado para Plugins. Eles são "rodados" em todo o código MODX, permitindo Plugins para interagir com código MODX e adicionar funcionalidade personalizada sem pirataria código do núcleo. Você pode criar seus próprios eventos para seu projeto personalizado aqui também. Você não pode remover eventos principais, apenas seu próprio.';
-$_lang['system_events.search_by_name'] = 'Pesquisar por nome de evento';
-$_lang['system_events.create'] = 'Criar Novo Evento';
-$_lang['system_events.name_desc'] = 'O nome do evento. Que você deve usar em uma chamada &dollar;modx->invokeEvent(nome, Propriedades).';
-$_lang['system_events.groupname'] = 'Grupo';
-$_lang['system_events.groupname_desc'] = 'O nome do grupo onde pertence o novo evento. Selecione um existente ou digite um novo nome de grupo.';
+$_lang['events'] = 'Events';
+$_lang['system_event'] = 'System Event';
+$_lang['system_events'] = 'System Events';
+$_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot remove core events, only your own.';
+$_lang['system_events.search_by_name'] = 'Search by event name';
+$_lang['system_events.create'] = 'Create New Event';
+$_lang['system_events.name_desc'] = 'The name of the event. Which you should use in a &dollar;modx->invokeEvent(name, properties) call.';
+$_lang['system_events.groupname'] = 'Group';
+$_lang['system_events.groupname_desc'] = 'The name of the group where the new event belongs to. Select an existing one or type in a new group name.';
 $_lang['system_events.plugins'] = 'Plugins';
 $_lang['system_events.plugins_desc'] = 'The list of plugins attached to the event. Pick up plugins that should be attached to event.';
 
-$_lang['system_events.service'] = 'Serviço';
-$_lang['system_events.service_1'] = 'Eventos de Parser de Serviço';
-$_lang['system_events.service_2'] = 'Eventos de Acesso do Gerenciador';
-$_lang['system_events.service_3'] = 'Eventos do Serviço de Acesso Web';
-$_lang['system_events.service_4'] = 'Eventos do Serviço de Cache';
-$_lang['system_events.service_5'] = 'Eventos do Serviço de Template';
-$_lang['system_events.service_6'] = 'Eventos Definidos pelo Usuário';
+$_lang['system_events.service'] = 'Service';
+$_lang['system_events.service_1'] = 'Parser Service Events';
+$_lang['system_events.service_2'] = 'Manager Access Events';
+$_lang['system_events.service_3'] = 'Web Access Service Events';
+$_lang['system_events.service_4'] = 'Cache Service Events';
+$_lang['system_events.service_5'] = 'Template Service Events';
+$_lang['system_events.service_6'] = 'User Defined Events';
 
-$_lang['system_events.remove'] = 'Remover o Evento';
-$_lang['system_events.remove_confirm'] = 'Tem certeza que deseja remover o evento <b>[[+name]]</b>? Isso é irreversível!';
+$_lang['system_events.remove'] = 'Remove Event';
+$_lang['system_events.remove_confirm'] = 'Are you sure you want to remove the <b>[[+name]]</b> event? This is irreversible!';
 
-$_lang['system_events_err_ns'] = 'Nome do Evento do Sistema não especificado.';
-$_lang['system_events_err_ae'] = 'Nome do Evento do Sistema já existe.';
-$_lang['system_events_err_startint'] = 'Não é permitido começar o nome com um dígito.';
-$_lang['system_events_err_remove_not_allowed'] = 'Não pode remover este Evento do Sistema.';
+$_lang['system_events_err_ns'] = 'Name of the System Event not specified.';
+$_lang['system_events_err_ae'] = 'Name of the System Event already exists.';
+$_lang['system_events_err_startint'] = 'It\'s not allowed to start the name with a digit.';
+$_lang['system_events_err_remove_not_allowed'] = 'You\'re not allowed to remove this System Event.';
