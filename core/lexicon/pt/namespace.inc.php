@@ -6,23 +6,23 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['namespace'] = 'namespace';
-$_lang['namespace_create'] = 'Criar um espaço nominal';
-$_lang['namespace_err_create'] = 'Ocorreu um erro ao tentar criar espaço nominal.';
-$_lang['namespace_err_nf'] = 'Espaço nominal não foi encontrado.';
-$_lang['namespace_err_nfs'] = 'Espaço nominal não foi encontrado com o nome: %s';
-$_lang['namespace_err_ns'] = 'Espaço nominal não especificado.';
-$_lang['namespace_err_remove'] = 'Ocorreu um erro ao tentar remover o espaço.';
-$_lang['namespace_err_save'] = 'Ocorreu um erro ao tentar salvar o espaço nominal.';
-$_lang['namespace_assets_path'] = 'O Caminho de Assets ';
-$_lang['namespace_assets_path_desc'] = 'Especifique um caminho absoluto para os assets para este Espaço nominal aqui. Você pode usar espaços reservados como {assets_path}. Exemplo: {assets_path}components/democomponent/';
-$_lang['namespace_name_desc'] = 'Especifique um nome para o espaço nominal aqui.';
-$_lang['namespace_path'] = 'Diretório do Núcleo';
-$_lang['namespace_path_desc'] = 'Especifique o caminho absoluto aqui: (exemplo: MODX_CORE_PATH . "assets/democomponent")';
-$_lang['namespace_remove'] = 'Remover Espaço nominal';
-$_lang['namespace_remove_confirm'] = 'Você tem certeza que deseja remover este espaço e todo o conteúdo relacionado?';
-$_lang['namespace_remove_multiple'] = 'Apagar espaços nominais ';
-$_lang['namespace_remove_multiple_confirm'] = 'Você tem certeza que deseja excluir estes espaços nominais e todo o seu conteúdo relacionado?';
-$_lang['namespace_update'] = 'Atualizar Espaço nominal';
-$_lang['namespaces'] = 'Espaços nominais';
-$_lang['namespaces_desc'] = 'Espaços nominais são identificadores globais de pacotes e componentes, registrando seus veículos, as entradas de glossário e todos os recursos juntos.';
+$_lang['namespace'] = 'Namespace';
+$_lang['namespace_create'] = 'Create Namespace';
+$_lang['namespace_err_create'] = 'An error occurred while trying to create the namespace.';
+$_lang['namespace_err_nf'] = 'Namespace not found.';
+$_lang['namespace_err_nfs'] = 'Namespace not found with name: %s';
+$_lang['namespace_err_ns'] = 'Namespace not specified.';
+$_lang['namespace_err_remove'] = 'An error occurred while trying to remove the namespace.';
+$_lang['namespace_err_save'] = 'An error occurred while trying to save the namespace.';
+$_lang['namespace_assets_path'] = 'Assets Path';
+$_lang['namespace_assets_path_desc'] = 'Specify an absolute path to the assets for this Namespace here. You may use placeholders like {assets_path}. Example: {assets_path}components/democomponent/';
+$_lang['namespace_name_desc'] = 'Specify a name for the Namespace here.';
+$_lang['namespace_path'] = 'Core Path';
+$_lang['namespace_path_desc'] = 'Specify an absolute path to the core for this Namespace here. You may use placeholders like {core_path}. Example: {core_path}components/democomponent/';
+$_lang['namespace_remove'] = 'Delete Namespace';
+$_lang['namespace_remove_confirm'] = 'Are you sure you want to delete "[[+name]]" namespace and all related content?';
+$_lang['namespace_remove_multiple'] = 'Delete Namespaces';
+$_lang['namespace_remove_multiple_confirm'] = 'Are you sure you want to delete these namespaces and all their related content?';
+$_lang['namespace_update'] = 'Update Namespace';
+$_lang['namespaces'] = 'Namespaces';
+$_lang['namespaces_desc'] = 'Namespaces are global identifiers for packages and components, registering their vehicles, lexicon entries and resources all together.';
