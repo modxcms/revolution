@@ -15,15 +15,15 @@ $_lang['import_enter_root_element'] = 'Vul het root element in om te importeren:
 $_lang['import_files_found'] = '<strong>%s documenten gevonden om te importeren...</strong><p/>';
 $_lang['import_parent_document'] = 'Bovenliggend document:';
 $_lang['import_parent_document_message'] = 'Selecteer uit de hieronder getoonde documentstructuur om de bovenliggende locatie om de bestanden hierin te importeren.';
-$_lang['import_resource_class'] = '';
+$_lang['import_resource_class'] = 'Select a modResource class for import:<br /><small><em>Use modStaticResource to link to static files, or modDocument to copy the content to the database.</em></small>';
 $_lang['import_site_failed'] = '<span style="color:#990000">Mislukt!</span>';
 $_lang['import_site_html'] = 'Importeer site van HTML';
 $_lang['import_site_importing_document'] = 'Importeer bestand <strong>%s</strong> ';
 $_lang['import_site_maxtime'] = 'Max importeer tijd:';
 $_lang['import_site_maxtime_message'] = 'Specificeer hier het aantal seconden dat de Content Manager erover mag doen om de site te importeren (overschrijft PHP instellingen). Vul 0 in voor onbeperkte tijd. Let op, indien je 0 invult kan dit nare consequenties voor de server tot gevolg hebben en het is niet aanbevolen.';
-$_lang['import_site_message'] = '';
+$_lang['import_site_message'] = '<p>Using this tool you can import the content from a set of HTML files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import HTML\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, the page title as the document\'s title.</p>';
 $_lang['import_site_resource'] = 'Importeer resources vanuit statische bestanden';
-$_lang['import_site_resource_message'] = '';
+$_lang['import_site_resource_message'] = '<p>Using this tool you can import resources from a set of static files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import Resources\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, and, if HTML, the page title as the document\'s title.</p>';
 $_lang['import_site_skip'] = '<span style="color:#990000">Overgeslagen!</span>';
 $_lang['import_site_start'] = 'Start importeren';
 $_lang['import_site_success'] = '<span style="color:#009900">Succes!</span>';
