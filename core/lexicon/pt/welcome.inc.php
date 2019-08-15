@@ -6,12 +6,12 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['modx_news'] = 'Notícias MODx';
-$_lang['security_notices'] = 'Avisos de Segurança';
-$_lang['welcome_messages'] = 'Sua Caixa de Entrada contém <strong>%d</strong> mensagem(ns), das quais <strong>%s</strong> não foram lidas.';
-$_lang['welcome_title'] = 'Bem vindo ao seu gerenciador de conteúdo MODx';
-$_lang['yourinfo_message'] = 'Esta seção mostra algumas informações sobre você:';
-$_lang['yourinfo_previous_login'] = 'Seu último login:';
-$_lang['yourinfo_title'] = 'Sua informação';
-$_lang['yourinfo_total_logins'] = 'Número total de logins:';
-$_lang['yourinfo_username'] = 'Você entrou como:';
+$_lang['modx_news'] = 'MODX News';
+$_lang['security_notices'] = 'Security Notices';
+$_lang['welcome_messages'] = 'Your Inbox contains <strong>%d</strong> message(s), of which <strong>%s</strong> are unread.';
+$_lang['welcome_title'] = 'Welcome to your MODX Content Manager';
+$_lang['yourinfo_message'] = 'This section shows some information about you:';
+$_lang['yourinfo_previous_login'] = 'Your last login:';
+$_lang['yourinfo_title'] = 'Your info';
+$_lang['yourinfo_total_logins'] = 'Total number of logins:';
+$_lang['yourinfo_username'] = 'You are logged in as:';
