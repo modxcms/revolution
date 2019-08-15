@@ -837,7 +837,7 @@ $_lang['setting_default_username_desc'] = 'Standard-Benutzername für einen nich
 $_lang['setting_manager_use_fullname'] = 'Vollständigen Namen im Manager-Kopfbereich anzeigen';
 $_lang['setting_manager_use_fullname_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, wird im Kopfbereich des Managers der Inhalt des Feldes "Vollständiger Name" anstatt des Benutzernamens (Login-Namens) angezeigt.';
 
-$_lang['setting_log_snippet_not_found'] = 'Log-Snippets nicht gefunden';
+$_lang['setting_log_snippet_not_found'] = 'Nicht gefundene Snippets loggen';
 $_lang['setting_log_snippet_not_found_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Snippets, die aufgerufen, aber nicht gefunden werden, ins Fehlerprotokoll aufgenommen.';
 
 $_lang['setting_error_log_filename'] = 'Fehlerprotokoll-Dateiname';
