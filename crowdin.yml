@@ -3,3 +3,5 @@ files:
     translation: /core/lexicon/%two_letters_code%/%original_file_name%
   - source: /core/lexicon/country/en.inc.php
     translation: /core/lexicon/country/%two_letters_code%.inc.php
+  - source: /setup/lang/en/*.inc.php
+    translation: /setup/lang/%two_letters_code%/%original_file_name%
