@@ -19,17 +19,17 @@ $_lang['onlineusers_action'] = 'Akce';
 $_lang['onlineusers_actionid'] = 'ID akce';
 $_lang['onlineusers_ipaddress'] = 'IP adresa uživatele';
 $_lang['onlineusers_lasthit'] = 'Poslední klik';
-$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
+$_lang['onlineusers_message'] = 'Tento seznam zobrazuje všechny uživatele aktivní během posledních 20 minut:';
 $_lang['onlineusers_title'] = 'Online uživatelé';
 $_lang['onlineusers_user'] = 'Uživatel';
 $_lang['onlineusers_userid'] = 'ID uživatele';
 
-$_lang['updates_sort'] = 'Sort';
+$_lang['updates_sort'] = 'Řazení';
 $_lang['updates_status'] = 'Stav';
 $_lang['updates_action'] = 'Akce';
-$_lang['updates_available'] = 'Updates available';
+$_lang['updates_available'] = 'Jsou dostupné aktualizace';
 $_lang['updates_update'] = 'Aktualizovat';
-$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_ok'] = 'Aktuální';
 $_lang['updates_extras'] = 'Komponenty';
 
 $_lang['quicklinks'] = 'Rychlé odkazy';
