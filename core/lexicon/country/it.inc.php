@@ -197,7 +197,7 @@ $_country_lang["nz"] = 'Nuova Zealand'; // New Zealand
 $_country_lang["om"] = 'Oman'; // Oman
 
 $_country_lang["pa"] = 'Panama'; // Panama
-$_country_lang["pe"] = ''; // Peru
+$_country_lang["pe"] = 'Peru'; // Peru
 $_country_lang["pf"] = 'Polynesia Francese'; // French Polynesia
 $_country_lang["pg"] = 'Papua Nuova Guinea'; // Papua New Guinea
 $_country_lang["ph"] = 'Filippine'; // Philippines
@@ -265,7 +265,7 @@ $_country_lang["us"] = 'Stati Uniti'; // United States
 $_country_lang["uy"] = 'Uruguay'; // Uruguay
 $_country_lang["uz"] = 'Uzbekistan'; // Uzbekistan
 
-$_country_lang["va"] = ''; // Vatican City State (Holy See)
+$_country_lang["va"] = 'Vatican City State (Holy See)'; // Vatican City State (Holy See)
 $_country_lang["vc"] = 'Saint Vincent e Grenadines'; // Saint Vincent and the Grenadines
 $_country_lang["ve"] = 'Venezuela'; // Venezuela
 $_country_lang["vg"] = 'Isole Vergini (Britanniche)'; // Virgin Islands (British)
