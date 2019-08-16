@@ -90,7 +90,7 @@ $_country_lang["fm"] = 'Mikronesien'; // Micronesia, Federated States of
 $_country_lang["fo"] = 'Färöer'; // Faroe Islands
 $_country_lang["fr"] = 'Frankreich'; // France
 
-$_country_lang["ga"] = 'Gabon'; // Gabon
+$_country_lang["ga"] = 'Gabun'; // Gabon
 $_country_lang["gb"] = 'Großbritannien'; // United Kingdom
 $_country_lang["gd"] = 'Grenada'; // Grenada
 $_country_lang["ge"] = 'Georgien'; // Georgia
@@ -248,7 +248,7 @@ $_country_lang["tg"] = 'Togo'; // Togo
 $_country_lang["th"] = 'Thailand'; // Thailand
 $_country_lang["tj"] = 'Tadschikistan'; // Tajikistan
 $_country_lang["tk"] = 'Tokelau'; // Tokelau
-$_country_lang["tl"] = 'Timor-Leste'; // Timor-Leste, ex: East Timor
+$_country_lang["tl"] = 'Osttimor'; // Timor-Leste, ex: East Timor
 $_country_lang["tm"] = 'Turkmenistan'; // Turkmenistan
 $_country_lang["tn"] = 'Tunesien'; // Tunisia
 $_country_lang["to"] = 'Tonga'; // Tonga
