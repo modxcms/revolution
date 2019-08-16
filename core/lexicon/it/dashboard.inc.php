@@ -25,7 +25,7 @@ $_lang['onlineusers_user'] = 'Utente';
 $_lang['onlineusers_userid'] = 'ID utente';
 
 $_lang['updates_sort'] = 'Ordina';
-$_lang['updates_status'] = 'Status';
+$_lang['updates_status'] = 'Stato';
 $_lang['updates_action'] = 'Azione';
 $_lang['updates_available'] = 'Aggiornamenti disponibili';
 $_lang['updates_update'] = 'Aggiornamento';
