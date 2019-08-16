@@ -170,5 +170,5 @@ $_lang['weblink_response_code'] = 'Codice Risposta';
 $_lang['weblink_response_code_help'] = 'Il codice HTTP di risposta che dovrebbe essere inviato per il weblink.';
 
 $_lang['resource_right_top_title'] = 'Pubblicazione';
-$_lang['resource_right_middle_title'] = 'Template';
+$_lang['resource_right_middle_title'] = 'Modello';
 $_lang['resource_right_bottom_title'] = 'Comportamento nel menu';
