@@ -33,7 +33,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
             'context' => $this->getProperty('wctx')
         ));
         $this->unsetProperty('wctx');
-        error_reporting(E_ALL);
+        
         return true;
     }
 
