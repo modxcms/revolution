@@ -56,7 +56,12 @@ class Feed extends modProcessor
     {
         $feed = new \SimplePie();
 
-        $feed->set_cache_location($this->modx->getOption('core_path') . 'cache/rss/');
+        $cachePath = $this->modx->getOption('core_path') . 'cache/rss/';
+        if (!is_dir($cachePath)) {
+            $this->modx->cacheManager->writeTree($cachePath);
+        }
+
+        $feed->set_cache_location($cachePath);
         $feed->set_useragent($this->modx->getVersionData()['full_version']);
         $feed->set_feed_url($url);
         $feed->init();
