@@ -5,7 +5,7 @@
  * @package setup
  */
 $_lang['additional_css'] = '';
-$_lang['addons'] = 'Add-ons';
+$_lang['addons'] = 'Estensioni';
 $_lang['advanced_options'] = 'Opzioni Avanzate';
 $_lang['all'] = 'Tutti';
 $_lang['app_description'] = 'CMS and PHP Application Framework';
@@ -28,7 +28,7 @@ $_lang['config_key_change'] = 'Se vuoi cambiare la chiave di configurazione di M
 $_lang['config_key_override'] = 'Se vuoi eseguire il setup su una chiave di configurazione diversa da quella attualmente specificata nel file setup/includes/config.core.php specificala sotto.';
 $_lang['config_not_writable_err'] = 'Hai provato a cambiare un parametro di setup/includes/config.core.php ma il file non è scrivibile. Rendi il file scrivibile o modificalo manualmente prima di continuare.';
 $_lang['connection_character_set'] = 'Charset connessione:';
-$_lang['connection_collation'] = 'Collation:';
+$_lang['connection_collation'] = 'Ordinamento:';
 $_lang['connection_connection_and_login_information'] = 'Connessione al Database e dati login';
 $_lang['connection_connection_note'] = 'Inserisci il nome del database da usare o che vuoi creare per questa installazione MODx. Se il database non esiste, il programma di installazione proverà a crearlo. Questa operazione potrebbe non riuscire, infatti dipende dalla configurazione di MySql e dai permessi utente del database per il tuo dominio/sistema.';
 $_lang['connection_database_host'] = 'Host Database:';
