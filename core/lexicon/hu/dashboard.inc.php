@@ -25,12 +25,12 @@ $_lang['onlineusers_user'] = 'Felhasználó';
 $_lang['onlineusers_userid'] = 'Felhasználó ID';
 
 $_lang['updates_sort'] = 'Rendez';
-$_lang['updates_status'] = 'Status';
+$_lang['updates_status'] = 'Állapot';
 $_lang['updates_action'] = 'Tevékenység';
 $_lang['updates_available'] = 'Frissítések érhetők el';
-$_lang['updates_update'] = 'Update';
+$_lang['updates_update'] = 'Frissités';
 $_lang['updates_ok'] = 'Naprakész';
-$_lang['updates_extras'] = 'Extras';
+$_lang['updates_extras'] = 'Extrák';
 
 $_lang['quicklinks'] = 'Közvetlen hivatkozások';
 $_lang['security_notices'] = 'Biztonsági figyelmeztetések';

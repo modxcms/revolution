@@ -170,5 +170,5 @@ $_lang['weblink_response_code'] = 'Response Code';
 $_lang['weblink_response_code_help'] = 'The HTTP response code that should be sent for the weblink.';
 
 $_lang['resource_right_top_title'] = 'Közzététel';
-$_lang['resource_right_middle_title'] = 'Template';
+$_lang['resource_right_middle_title'] = 'Sablon';
 $_lang['resource_right_bottom_title'] = 'Viselkedés a menüben';
