@@ -49,5 +49,5 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Errore durante la rimozione dell
 $_lang['clipboard_flash_file_missing'] = 'La copia di file flash negli appunti è già stata rimossa.';
 $_lang['system_setting_cleanup_success'] = 'Impostazione di sistema \'[[+key]]\' rimossa.';
 $_lang['system_setting_cleanup_failed'] = 'Impostazione di sistema \'[[+key]]\' non può essere rimossa.';
-$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
-$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
+$_lang['system_setting_update_success'] = 'Impostazione sistema `[[+key]]` aggiornata.';
+$_lang['system_setting_update_failed'] = 'Impossibile aggiornare le impostazioni di sistema `[[+key]]`.';
