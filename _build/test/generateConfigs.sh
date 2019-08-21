@@ -29,7 +29,7 @@ then
     read -p "Enter your language [en]: " input
     MDXLANG=${input}
 
-    read -p "Enter your modx admin userinput [admin]: " input
+    read -p "Enter your modx admin user [admin]: " input
     MDXUSER=${input}
 
     read -s -p "Enter your modx admin password [admin]: " input
