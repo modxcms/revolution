@@ -1,8 +1,49 @@
 #!/bin/bash
 
-DBNAME="revo_test"
-DBUSER="root"
-DBPASS=""
+DBNAME=revo_test
+DBUSER=root
+DBPASS=
+MDXHOST=unit.modx.com
+MDXLANG=en
+MDXUSER=admin
+MDXPASS=admin
+MDXEMAIL=admin@modx.com
+
+if [[ "$1" != "auto" ]]
+then
+
+    echo "Please setup MODX in this prompt."
+
+    read -p "Enter your database [revo_test]: " input
+    DBNAME=${input}
+
+    read -p "Enter your database user [root]: " input
+    DBUSER=${input}
+
+    read -s -p "Enter your database password []: " input
+    DBPASS=${input}
+
+    read -p "Enter your host [unit.modx.com]: " input
+    MDXHOST=${input}
+
+    read -p "Enter your language [en]: " input
+    MDXLANG=${input}
+
+    read -p "Enter your modx admin user [admin]: " input
+    MDXUSER=${input}
+
+    read -s -p "Enter your modx admin password [admin]: " input
+    MDXPASS=${input}
+
+    read -p "Enter your modx admin email [admin@modx.com]: " input
+    MDXEMAIL=${input}
+
+else
+
+    echo "Script started without a prompt. Default values are used."
+
+fi
+
 CWD=`pwd`
 BUILDDIR=${TRAVIS_BUILD_DIR:=`echo $(dirname $(dirname "$CWD"))`}
 BUILDDIR=$BUILDDIR"/"
@@ -29,11 +70,11 @@ CONFIG=`cat revo_install.sample.xml`
 CONFIG="${CONFIG/\{\$dbName\}/$DBNAME}"
 CONFIG="${CONFIG/\{\$dbUser\}/$DBUSER}"
 CONFIG="${CONFIG/\{\$dbPass\}/$DBPASS}"
-CONFIG="${CONFIG/\{\$host\}/unit.modx.com}"
-CONFIG="${CONFIG/\{\$language\}/en}"
-CONFIG="${CONFIG/\{\$managerUser\}/admin}"
-CONFIG="${CONFIG/\{\$managerPass\}/admin}"
-CONFIG="${CONFIG/\{\$managerEmail\}/admin@modx.com}"
+CONFIG="${CONFIG/\{\$host\}/$MDXHOST}"
+CONFIG="${CONFIG/\{\$language\}/$MDXLANG}"
+CONFIG="${CONFIG/\{\$managerUser\}/$MDXUSER}"
+CONFIG="${CONFIG/\{\$managerPass\}/$MDXPASS}"
+CONFIG="${CONFIG/\{\$managerEmail\}/$MDXEMAIL}"
 CONFIG="${CONFIG/\{\$directory\}/$BUILDDIR}"
 CONFIG="${CONFIG/\{\$directory\}/$BUILDDIR}"
 CONFIG="${CONFIG/\{\$directory\}/$BUILDDIR}"
