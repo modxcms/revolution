@@ -41,6 +41,10 @@ On behalf of the entire MODX Team,
 
 Thank you for using MODX!
 
+### Security Issues in MODX
+
+For details read the [SECURITY](./SECURITY.md 'SECURITY')
+
 ### Copyright
 
 Copyright (c) MODX, LLC. All Rights Reserved.
