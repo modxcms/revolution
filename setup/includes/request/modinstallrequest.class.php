@@ -70,6 +70,7 @@ class modInstallRequest {
         $this->parser->set('_lang',$this->install->lexicon->fetch());
 
         $this->action= !empty($this->install->action) ? $this->install->action : 'language';
+
         $this->parser->set('action',$this->install->action);
 
         $output = $this->parser->fetch('header.tpl');

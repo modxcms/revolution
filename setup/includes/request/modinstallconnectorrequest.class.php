@@ -61,6 +61,9 @@ class modInstallConnectorRequest extends modInstallRequest {
      * @param string $action
      */
     public function handle($action = '') {
+        if ($this->install->isLocked()) {
+            $this->error->failure('MODX setup is locked!');
+        }
         if (empty($this->install->action)) {
             $this->error->failure('No processor specified!');
         }

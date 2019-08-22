@@ -21,6 +21,10 @@ if (!empty($_POST['proceed'])) {
     $this->proceed('complete');
 }
 
+if ($install->isLocked()) {
+    return $parser->render('locked.tpl');
+}
+
 $mode = $install->settings->get('installmode');
 $install->getService('runner','runner.modInstallRunnerWeb');
 $results = array();

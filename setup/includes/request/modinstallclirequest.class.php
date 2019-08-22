@@ -72,6 +72,10 @@ class modInstallCLIRequest extends modInstallRequest {
      * @param string $action
      */
     public function handle($action = '') {
+        if ($this->install->isLocked()) {
+            $this->end($this->install->lexicon('cli_install_locked'));
+        }
+
         $this->beginTimer();
         /* prepare the settings */
         $settings = $_REQUEST;

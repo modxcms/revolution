@@ -90,6 +90,8 @@ class modInstallRunnerWeb extends modInstallRunner {
             ),
         ));
 
+        $this->install->lock();
+
         $this->install->settings->store(array(
             'finished' => true,
         ));
