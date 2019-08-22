@@ -24,7 +24,7 @@
         <img src="assets/images/im_inst_upgrade.gif" width="32" height="32" alt=""/>
 
         <label>
-            <input type="radio" name="installmode" id="installmode1" value="1"{if $installmode LT 1} disabled="disabled"{/if}{if $installmode EQ 1} checked="checked" autofocus="autofocus"{/if} />
+            <input type="radio" name="installmode" id="installmode1" value="1" {if $installmode EQ 1} checked="checked" autofocus="autofocus"{/if} />
             {$_lang.options_upgrade_existing}
         </label>
     </th>
@@ -43,7 +43,7 @@
     <th>
         <img src="assets/images/im_inst_upgrade.gif" width="32" height="32" alt="" />
         <label>
-            <input type="radio" name="installmode" id="installmode3" value="3"{if $installmode LT 1} disabled="disabled"{/if}{if $installmode EQ 3} checked="checked" autofocus="autofocus"{/if} />
+            <input type="radio" name="installmode" id="installmode3" value="3" {if $installmode EQ 3} checked="checked" autofocus="autofocus"{/if} />
             {$_lang.options_upgrade_advanced}
         </label>
     </th>
