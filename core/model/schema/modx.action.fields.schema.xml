@@ -60,6 +60,8 @@
         <tab name="modx-resource-access-permissions" />
         <tab name="modx-resource-content">
             <field name="modx-resource-content" />
+            <field name="modx-symlink-content" />
+            <field name="modx-weblink-content" />
         </tab>
     </action>
 
