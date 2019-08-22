@@ -863,6 +863,7 @@
         <field key="longtitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="alias" dbtype="varchar" precision="191" phptype="string" null="true" default="" index="index" />
+        <field key="alias_visible" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" />
         <field key="link_attributes" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="published" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="pub_date" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" index="index" />

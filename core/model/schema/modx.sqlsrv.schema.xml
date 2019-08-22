@@ -816,6 +816,7 @@
         <field key="longtitle" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="description" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="alias" dbtype="nvarchar" precision="255" phptype="string" null="true" default="" index="index" />
+        <field key="alias_visible" dbtype="bit" phptype="boolean" null="false" default="1" />
         <field key="link_attributes" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="published" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="pub_date" dbtype="bigint" phptype="timestamp" null="false" default="0" index="index" />
