@@ -14,8 +14,9 @@ MODx.panel.ContentType = function(config) {
         ,items: [{
             html: _('content_types')
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('content_types')
+            ,layout: 'form'
             ,itemId: 'form'
             ,items: [{
                 html: '<p>'+_('content_type_desc')+'</p>'
@@ -26,7 +27,7 @@ MODx.panel.ContentType = function(config) {
 				,cls:'main-wrapper'
                 ,preventRender: true
             }]
-        }]
+        }])]
     });
     MODx.panel.ContentType.superclass.constructor.call(this,config);
 };

@@ -10,11 +10,11 @@ MODx.panel.User = function(config) {
         url: MODx.config.connector_url
         ,baseParams: {}
         ,id: 'modx-panel-user'
-		,cls: 'container'
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,bodyStyle: ''
         ,items: [{
-             html: _('user_new')
+            html: _('user_new')
             ,id: 'modx-user-header'
             ,xtype: 'modx-header'
         },{
@@ -25,8 +25,8 @@ MODx.panel.User = function(config) {
                 autoHeight: true
                 ,layout: 'form'
                 ,labelWidth: 150
-				,bodyCssClass: 'tab-panel-wrapper'
-				,layoutOnTabChange: true
+                ,bodyCssClass: 'tab-panel-wrapper'
+                ,layoutOnTabChange: true
             }
             ,items: this.getFields(config)
         }]
@@ -137,7 +137,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-user-settings'
-					,cls: 'main-wrapper'
+                    ,cls: 'main-wrapper'
                     ,preventRender: true
                     ,user: config.user
                     ,width: '97%'
@@ -157,7 +157,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-user-groups'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,title: ''
                 ,preventRender: true
                 ,user: config.user
@@ -181,7 +181,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'modx-description'
                 },{
                     layout: 'column'
-					,cls: 'main-wrapper'
+                    ,cls: 'main-wrapper'
                     ,items: [{
                         columnWidth: 0.4
                         ,title: _('attributes')
@@ -217,7 +217,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,xtype: 'modx-description'
             },{
                 layout: 'column'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,items: [{
                     columnWidth: 0.4
                     ,title: _('attributes')
@@ -231,9 +231,9 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,prefix: 'extended'
                         ,enableDD: true
                         ,listeners: {
-                        	'dragdrop': {fn:function() {
-                        		this.markDirty();
-                        	},scope:this}
+                            'dragdrop': {fn:function() {
+                                this.markDirty();
+                            },scope:this}
                         }
                     }
                 },{

@@ -17,8 +17,8 @@ MODx.panel.Search = function(config) {
             html: _('search')
             ,xtype: 'modx-header'
         },MODx.getPageStructure([{
-            layout: 'form'
-            ,title: _('search_criteria')
+            title: _('search_criteria')
+            ,layout: 'form'
             ,defaults: {
                 collapsible: false
                 ,autoHeight: true

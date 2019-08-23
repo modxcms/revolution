@@ -17,8 +17,9 @@ MODx.panel.Namespaces = function(config) {
             html: _('namespaces')
             ,id: 'modx-namespaces-header'
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('namespaces')
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('namespaces_desc')+'</p>'
                 ,xtype: 'modx-description'
@@ -27,7 +28,7 @@ MODx.panel.Namespaces = function(config) {
 				,cls:'main-wrapper'
                 ,preventRender: true
             }]
-        }]
+        }])]
     });
     MODx.panel.Namespaces.superclass.constructor.call(this,config);
 };
