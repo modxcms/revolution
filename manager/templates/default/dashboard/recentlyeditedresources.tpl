@@ -27,11 +27,11 @@
                         </td>
                         <td class="occurred">
                             {if $record.editedon}
-                                <div class="occurred-date">{$record.editedon|date_format:'%B %d, %Y'}</div>
-                                <div class="occurred-time">{$record.editedon|date_format:'%H:%M'}</div>
+                                <div class="occurred-date">{$record.editedon_date}</div>
+                                <div class="occurred-time">{$record.editedon_time}</div>
                             {elseif $record.createdon}
-                                <div class="occurred-date">{$record.createdon|date_format:'%B %d, %Y'}</div>
-                                <div class="occurred-time">{$record.createdon|date_format:'%H:%M'}</div>
+                                <div class="occurred-date">{$record.createdon_date}</div>
+                                <div class="occurred-time">{$record.createdon_time}</div>
                             {/if}
                         </td>
                         <td class="user-with-avatar">

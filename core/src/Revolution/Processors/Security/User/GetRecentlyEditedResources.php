@@ -92,6 +92,14 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
         $resourceArray = $resource->get(['id','pagetitle','description','published','deleted','context_key', 'editedon']);
         $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
+        $dateFormat = $this->modx->getOption('manager_date_format');
+        $timeFormat = $this->modx->getOption('manager_time_format');
+
+        $resourceArray['editedon_date'] = date($dateFormat, strtotime($resourceArray['editedon']));
+        $resourceArray['editedon_time'] = date($timeFormat, strtotime($resourceArray['editedon']));
+        $resourceArray['createdon_date'] = date($dateFormat, strtotime($resourceArray['createdon']));
+        $resourceArray['createdon_time'] = date($timeFormat, strtotime($resourceArray['createdon']));
+
         $row = array_merge($row, $resourceArray);
 
         /** @var modUser $user */
