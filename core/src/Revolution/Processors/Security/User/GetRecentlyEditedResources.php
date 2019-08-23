@@ -95,10 +95,13 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
         $dateFormat = $this->modx->getOption('manager_date_format');
         $timeFormat = $this->modx->getOption('manager_time_format');
 
-        $resourceArray['editedon_date'] = date($dateFormat, strtotime($resourceArray['editedon']));
-        $resourceArray['editedon_time'] = date($timeFormat, strtotime($resourceArray['editedon']));
-        $resourceArray['createdon_date'] = date($dateFormat, strtotime($resourceArray['createdon']));
-        $resourceArray['createdon_time'] = date($timeFormat, strtotime($resourceArray['createdon']));
+        $editedon = new \DateTimeImmutable($resourceArray['editedon']);
+        $createdon = new \DateTimeImmutable($resourceArray['createdon']);
+
+        $resourceArray['editedon_date'] = $editedon->format($dateFormat);
+        $resourceArray['editedon_time'] = $editedon->format($timeFormat);
+        $resourceArray['createdon_date'] = $createdon->format($dateFormat);
+        $resourceArray['createdon_time'] = $createdon->format($timeFormat);
 
         $row = array_merge($row, $resourceArray);
 
