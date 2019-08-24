@@ -1,3 +1,11 @@
+/**
+ * Loads a grid for managing Settings.
+ *
+ * @class MODx.grid.SettingsGrid
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-settings
+ */
 MODx.grid.SettingsGrid = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -18,7 +26,12 @@ MODx.grid.SettingsGrid = function(config) {
             }
         }];
     }
-    config.tbar.push('->',{
+    config.tbar.push(
+    '->'
+    ,{
+        xtype: 'tbtext'
+        ,text: _('namespace')+':'
+    },{
         xtype: 'modx-combo-namespace'
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
@@ -33,6 +46,9 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'select': {fn: this.filterByNamespace, scope:this}
         }
+    },{
+        xtype: 'tbtext'
+        ,text: _('area')+':'
     },{
         xtype: 'modx-combo-area'
         ,name: 'area'
@@ -75,7 +91,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'click': {fn: this.clearFilter, scope: this},
             'mouseout': { fn: function(evt){
-                   this.removeClass('x-btn-focus');
+                    this.removeClass('x-btn-focus');
                 }
             }
         }

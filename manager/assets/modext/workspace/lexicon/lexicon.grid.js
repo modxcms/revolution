@@ -42,6 +42,14 @@ MODx.grid.Lexicon = function(config) {
             ,renderer: this._renderLastModDate
         }]
         ,tbar: [{
+            xtype: 'button'
+            ,text: _('entry_create')
+            ,cls:'primary-button'
+            ,handler: this.createEntry
+            ,scope: this
+        },
+        '->'
+        ,{
             xtype: 'tbtext'
             ,text: _('namespace')+':'
         },{
@@ -49,7 +57,7 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
             ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : ''
-            ,width: 120
+            ,width: 150
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
             }
@@ -61,7 +69,7 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-topic'
             ,itemId: 'topic'
             ,value: 'default'
-            ,width: 120
+            ,width: 150
             ,baseParams: {
                 action: 'Workspace/Lexicon/Topic/GetList'
                 ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
@@ -87,22 +95,13 @@ MODx.grid.Lexicon = function(config) {
             ,listeners: {
                 'select': {fn:this.changeLanguage,scope:this}
             }
-        }
-        ,'->'
-        ,{
-            xtype: 'button'
-            ,text: _('entry_create')
-            ,cls:'primary-button'
-            ,handler: this.createEntry
-            ,scope: this
         },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-lexicon-filter-search'
             ,cls: 'x-form-filter'
             ,itemId: 'search'
-            ,width: 120
-            ,emptyText: _('search')+'...'
+            ,emptyText: _('search_by_key')
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
                 ,'render': {fn: function(cmp) {
