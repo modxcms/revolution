@@ -20,14 +20,14 @@
   }
 
   #modx-leftbar-tabpanel {
-    @include grid-media($mobile) {
+    @include grid-media($desktop) {
       width: auto !important;
       margin: 0 auto;
       padding: 0.5em;
     }
   }
 
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     position: relative !important;
     top: auto !important;
     left: auto !important;
@@ -42,7 +42,8 @@
   }
 
   .x-plain-body {
-    @include grid-media($mobile) {
+    @include grid-media($desktop) {
+      width: 100% !important;
       height: auto !important;
     }
   }
@@ -110,7 +111,7 @@
       border-right: 0;
       border-left: 5px solid $treeColor;
 
-      @include grid-media($mobile) {
+      @include grid-media($desktop) {
         border: none;
       }
     }

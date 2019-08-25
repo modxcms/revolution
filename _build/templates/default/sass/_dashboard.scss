@@ -366,6 +366,12 @@
   }
 }
 
+@include grid-media($tabletL) {
+  .x-panel-body {
+    width: 100% !important;
+  }
+}
+
 .dashboard-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -482,7 +488,7 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+@include grid-media($desktop) {
   .dashboard-buttons {
     .dashboard-button {
       flex-wrap: wrap;
@@ -498,7 +504,7 @@
   }
 }
 
-@media screen and (max-width: 640px) {
+@include grid-media($desktop) {
   .dashboard {
     .dashboard-block {
 
