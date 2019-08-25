@@ -13315,7 +13315,7 @@ readers do not read off random characters that represent icons */
     content: "";
     display: block; }
 
-.x-btn-icon.arrow_up button:before, .x-btn-icon.arrow_down button:before, .x-btn-icon.refresh button:before, , .x-btn-icon.icon-folder button:before, .x-btn-icon.icon-page_white button:before, .x-btn-icon.icon-file_upload button:before, .x-btn-icon.icon-file_manager button:before, .crumb_wrapper .crumbs li.first:before, .x-tbar-page-last:before, .x-tbar-page-next:before, .x-tbar-page-prev:before, .x-tbar-loading:before, .x-tbar-page-first:before, .x-grid3-hd-btn:before, .x-grid3-row-collapsed .x-grid3-row-expander:before, .x-grid3-row-expanded .x-grid3-row-expander:before, .x-grid3-row-checker:before,
+.x-btn-icon.arrow_up button:before, .x-btn-icon.arrow_down button:before, .x-btn-icon.refresh button:before, .crumb_wrapper .crumbs li.first:before, .x-tbar-page-last:before, .x-tbar-page-next:before, .x-tbar-page-prev:before, .x-tbar-loading:before, .x-tbar-page-first:before, .x-grid3-hd-btn:before, .x-grid3-row-collapsed .x-grid3-row-expander:before, .x-grid3-row-expanded .x-grid3-row-expander:before, .x-grid3-row-checker:before,
 .x-grid3-hd-checker:not(.x-grid3-hd-inner):before, .x-grid3-check-col:before, .x-grid3-check-col-on:before, .x-grid-group-hd div.x-grid-group-title:before, .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title:before, .x-tool:after, .x-btn .x-btn-split:before, .actions button .x-btn-split:before, .inline-button .x-btn-split:before, .x-superboxselect-item .x-btn-split:before, .x-form-trigger .x-btn-split:before, .x-date-mp-ok .x-btn-split:before, .x-date-mp-cancel .x-btn-split:before,
 .x-btn .x-btn-arrow:before,
 .actions button .x-btn-arrow:before,
@@ -17478,19 +17478,18 @@ button {
   left: 2px; }
 
 /* media browser tree toolbar */
-.x-btn-icon.icon-folder button:before {
-  content: "\f07b";
-  font-weight: 400; }
+.x-btn-icon .icon-folder button:before {
+  content: "\f07b"; }
 
-.x-btn-icon.icon-page_white button:before {
+.x-btn-icon .icon-page_white button:before {
   content: "\f15c";
   font-weight: 400; }
 
-.x-btn-icon.icon-file_upload button:before {
+.x-btn-icon .icon-file_upload button:before {
   content: "\f35b";
   font-weight: 400; }
 
-.x-btn-icon.icon-file_manager button:before {
+.x-btn-icon .icon-file_manager button:before {
   content: "\f14d";
   font-weight: 400; }
 
