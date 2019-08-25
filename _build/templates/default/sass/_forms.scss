@@ -29,6 +29,7 @@ textarea[name="introtext"],
 /* this screws up clear cache modal #shame */
 textarea.x-form-field,
 .x-form-textarea {
+  max-width: 100%;
   background-color: $coreFieldBg;
   background-image: none;
   border-radius: $borderRadius;
@@ -408,6 +409,7 @@ input::-moz-focus-inner {
 }
 
 .x-form-field-wrap {
+  max-width: 100%;
   background: $coreFieldBg;
   border: 1px solid $borderColor;
   border-radius: $borderRadius; /*box-shadow: $shadowBorderField;*/
