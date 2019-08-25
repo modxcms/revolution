@@ -217,17 +217,17 @@ $fontH2:     normal 25px $headfonts;
 $fontH3:     bold 15px $headfonts;
 
 /* Responsive breakpoints */
-$mobile:  (media: 'max-width 640px',  columns: 4);
-$tabletP: (media: 'max-width 768px',  columns: 12);
-$desktop: (media: 'max-width 960px',  columns: 12);
-$tabletL: (media: 'max-width 1024px', columns: 12);
-$cinema:  (media: 'max-width 1400px', columns: 12);
+$mobile:  (media: "screen and (max-width: 640px)", columns: 4);
+$tabletP: (media: "screen and (max-width: 768px)", columns: 12);
+$desktop: (media: "screen and (max-width: 960px)", columns: 12);
+$tabletL: (media: "screen and (max-width: 1024px)", columns: 12);
+$cinema:  (media: "screen and (max-width: 1400px)", columns: 12);
 
-$gtMobile:  (media: 'min-width 641px',  columns: 12);
-$gtTabletP: (media: 'min-width 769px',  columns: 12);
-$gtTabletL: (media: 'min-width 1025px', columns: 12);
-$gtDesktop: (media: 'min-width 961px',  columns: 12);
-$gtCinema:  (media: 'min-width 1401px', columns: 12);
+$gtMobile:  (media: "screen and (min-width: 641px)", columns: 12);
+$gtTabletP: (media: "screen and (min-width: 769px)", columns: 12);
+$gtDesktop: (media: "screen and (min-width: 961px)", columns: 12);
+$gtTabletL: (media: "screen and (min-width: 1025px)", columns: 12);
+$gtCinema:  (media: "screen and (min-width: 1401px)", columns: 12);
 
 /* Path for background-images */
 $imgPath: '../images/';
