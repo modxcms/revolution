@@ -21206,6 +21206,18 @@ ul.x-tab-strip-bottom {
 #modx-news-feed-container img {
   max-width: 100%; }
 
+#modx-resource-access-permissions .x-panel-body,
+#modx-panel-users .x-panel-body,
+#modx-panel-content-type .x-panel-body,
+#modx-panel-resource-groups .x-panel-body,
+#modx-panel-import-resources .x-panel-body,
+#modx-panel-import-html .x-panel-body,
+#modx-panel-property-sets .x-panel-body,
+#modx-panel-namespaces .x-panel-body,
+#modx-panel-actions .x-panel-body,
+#modx-panel-contexts .x-panel-body {
+  padding-top: 15px; }
+
 .dashboard-buttons {
   display: -ms-flexbox;
   display: flex;
@@ -22582,10 +22594,12 @@ iframe[classname="x-hidden"] {
 
 /* Panel description text */
 .panel-desc {
-  border-bottom: 1px solid #F0F0F0;
+  background-color: #F0F0F0;
+  border: none;
   border-radius: 0;
   color: #53595F;
   line-height: 1.5;
+  margin-top: 15px;
   padding: 15px !important; }
   .x-window .panel-desc {
     margin-top: 0;
@@ -22695,6 +22709,8 @@ iframe[classname="x-hidden"] {
 
 #modx-resource-tabs > .x-tab-panel-bwrap > .x-tab-panel-body > .x-panel:not(#modx-resource-settings) {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); }
+  #modx-resource-tabs > .x-tab-panel-bwrap > .x-tab-panel-body > .x-panel:not(#modx-resource-settings) .panel-desc {
+    margin-top: 0; }
 
 #modx-resource-settings {
   background: #F2F2F2; }
