@@ -286,113 +286,64 @@ textarea.x-form-field {
   }
 }
 
-#modx-resource-main-right {  
+#modx-resource-main-right {
   @include grid-media($desktop) {
     margin: 15px auto 0;
   }
 }
 
-#modx-grid-lexicon {
+@include grid-media($desktop) {
   .x-toolbar-ct {
-    @include grid-media($desktop) {
+    display: block;
+
+    tbody {
       display: block;
 
-      tbody {
+      tr {
         display: block;
 
-        tr {
+        td {
           display: block;
+          width: 100%;
 
-          td {
-            display: block;
+          table {
             width: 100%;
 
-            table {
-              width: 100%;
+            .x-form-field-wrap {
+              width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
 
-              .x-form-field-wrap {
-                width: 100% !important;
-                margin-bottom: 1em;
-              }
-
-              .x-btn,
-              .x-form-text {
-                width: 100% !important;
-                margin-bottom: 1em;
-                box-sizing: border-box;
-              }
+            .x-btn,
+            .x-form-text {
+              width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              box-sizing: border-box;
             }
           }
         }
       }
     }
   }
-}
 
-#modx-panel-contexts,
-#modx-panel-namespaces {
-  .main-wrapper {
-    >.x-panel-bwrap {
-      >.x-panel-tbar {
-        @include grid-media($desktop) {
-          width: auto !important;
-          @include responsive-table-bar;
-
-          #modx-ctx-search {
-            width: 100% !important;
-            box-sizing: border-box;
-            margin-left: 0;
-          }
-        }
-      }
-    }
-  }
-}
-
-#modx-panel-namespaces {
-  @include grid-media($desktop) {
-    .main-wrapper {
-      .x-toolbar-left {
-        margin-bottom: 0 !important;
-      }
-    }
-  }
-}
-
-#modx-namespace-search {
-  @include grid-media($desktop) {
+  .x-column {
     width: 100% !important;
-    margin-left: 0;
-    box-sizing: border-box;
-  }
-}
-
-#modx-filter-clear {
-  @include grid-media($desktop) {
-    width: 100% !important;
-    box-sizing: border-box;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none;
   }
 }
 
 #modx-tree-panel-usergroup {
   .main-wrapper {
     @include grid-media($desktop) {
-      position: relative;
-    }
-  }
-}
-
-#modx-property-set-form {
-  @include grid-media($desktop) {
-
-    .left-col,
-    .x-col {
-      float: none;
-    }
-
-    #right-column,
-    #modx-grid-element-properties {
       width: 100% !important;
+      max-width: 100%;
+      position: relative;
+      display: inline-block;
+      float: left;
     }
   }
 }
@@ -535,7 +486,6 @@ textarea.x-form-field {
 
   #modx-resource-main-left & {
     border-bottom: 0;
-    padding-top: 15px !important;
     right: 15px;
     position: absolute;
     z-index: 20;
@@ -598,6 +548,17 @@ a.x-grid-link:focus {
 }
 
 @include grid-media($gtDesktop) {
+  // Old header
+  #modx-content > .x-panel-bwrap > .x-panel-body {
+    .modx-page-header {
+      margin-top: 1.25rem;
+      box-sizing: border-box;
+
+      &+div {
+        margin: 1rem;
+      }
+    }
+  }
 
   // New header
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
@@ -607,8 +568,8 @@ a.x-grid-link:focus {
       margin-top: 1.25rem;
       font-weight: bold;
       box-sizing: border-box;
-      padding-left: 15px;
-      font-size: 16px;
+      padding-left: 18px;
+      font-size: 18px;
 
       &+div {
         margin: 1rem;
@@ -1472,6 +1433,26 @@ iframe[classname="x-hidden"] {
   padding-left: 15px;
 }
 
+/* Old Header */
+.modx-page-header {
+  order: 1;
+  font: normal 20px $bodyfonts;
+  color: $darkestGray;
+  margin: 0;
+  padding-left: 18px;
+
+  #modx-panel-welcome & {
+    padding-left: 0;
+  }
+
+  @include grid-media($desktop) {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+  }
+}
+
+/* New Header */
 #modx-resource-breadcrumbs {
   .breadcrumbs {
     display: flex;
@@ -1480,7 +1461,7 @@ iframe[classname="x-hidden"] {
 
     #modx-resource-header {
       order: 1;
-      font: 500 16px $bodyfonts;
+      font: normal 20px $bodyfonts;
       color: $darkestGray;
       margin: 0;
       padding-left: 0;
@@ -1500,11 +1481,11 @@ iframe[classname="x-hidden"] {
     align-items: center;
 
     li {
-      font: normal 16px $bodyfonts;
+      font: normal 18px $bodyfonts;
       color: $darkestGray;
 
       a {
-        font: normal 16px $bodyfonts;
+        font: normal 18px $bodyfonts;
         text-decoration: none;
 
         &.not_published {
@@ -1591,7 +1572,7 @@ iframe[classname="x-hidden"] {
   background: #F2F2F2;
 
   #modx-resource-main-left {
-    padding: 0 15px 15px 15px;
+    padding: 15px;
     background: $white;
     border-top-right-radius: $borderRadius;
     border-bottom-left-radius: $borderRadius;
