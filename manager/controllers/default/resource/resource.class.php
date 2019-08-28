@@ -259,8 +259,8 @@ abstract class ResourceManagerController extends modManagerController {
 
         /* get categories */
         $c = $this->modx->newQuery('modCategory');
-        $c->sortby('rank', 'ASC');
-        $c->sortby('category','ASC');
+        $c->sortby($this->modx->escape('rank'), 'ASC');
+        $c->sortby($this->modx->escape('category'),'ASC');
         $cats = $this->modx->getCollection('modCategory',$c);
         $categories = array();
         /** @var modCategory $cat */

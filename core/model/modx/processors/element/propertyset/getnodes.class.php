@@ -68,8 +68,8 @@ class modPropertySetGetNodesProcessor extends modObjectProcessor {
         $list = array();
 
         $c = $this->modx->newQuery('modCategory');
-        $c->sortby('rank', 'ASC');
-        $c->sortby('category', 'ASC');
+        $c->sortby($this->modx->escape('rank'), 'ASC');
+        $c->sortby($this->modx->escape('category'), 'ASC');
         $categories = $this->modx->getIterator('modCategory', $c);
 
         /** @var modCategory $category */

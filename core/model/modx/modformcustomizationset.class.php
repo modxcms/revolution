@@ -167,7 +167,7 @@ class modFormCustomizationSet extends xPDOSimpleObject {
             'action' => $baseAction,
             'type' => 'tab',
         ));
-        $c->sortby('rank','ASC');
+        $c->sortby($this->xpdo->escape('rank'), 'ASC');
         $tabs = $this->xpdo->getCollection('modActionField',$c);
 
         /** @var modActionField $tab */
