@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
+- Escape instances of new MySQL reserved word rank [#14701]
 - Check if modx-content is defined before calling doLayout [#14593]
 - Add additional .sub class in menu for nested li [#14671]
 - Update PHPMailer to 5.2.27 to address potential vulnerability [#14653]

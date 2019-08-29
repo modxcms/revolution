@@ -363,7 +363,7 @@ class modResourceSortProcessor extends modProcessor {
             'key:NOT IN' => array('mgr', $this->source->key, $this->target->key),
             'rank:>=' => $lastRank,
         ));
-        $c->sortby('rank', 'ASC');
+        $c->sortby($this->modx->escape('rank'), 'ASC');
 
         $contextsToSort = $this->modx->getIterator('modContext', $c);
         $lastRank = $lastRank + 2;

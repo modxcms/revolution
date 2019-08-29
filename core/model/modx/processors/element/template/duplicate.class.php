@@ -37,7 +37,7 @@ class modTemplateDuplicateProcessor extends modElementDuplicateProcessor {
         $c->where(array(
             'templateid' => $this->object->get('id'),
         ));
-        $c->sortby('rank','ASC');
+        $c->sortby($this->modx->escape('rank'),'ASC');
         $templateVarTemplates = $this->modx->getCollection('modTemplateVarTemplate',$c);
         /** @var modTemplateVarTemplate $templateVarTemplate */
         foreach ($templateVarTemplates as $templateVarTemplate) {
