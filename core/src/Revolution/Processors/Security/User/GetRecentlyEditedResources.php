@@ -89,9 +89,8 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
             return [];
         }
 
-        $resourceArray = $resource->get(['id', 'pagetitle', 'description', 'published', 'deleted', 'context_key', 'editedon']);
-        $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES,
-            $this->modx->getOption('modx_charset', null, 'UTF-8'));
+        $resourceArray = $resource->get(['id','pagetitle','description','published','deleted','context_key', 'editedon']);
+        $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
         $row = array_merge($row, $resourceArray);
 

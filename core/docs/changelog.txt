@@ -93,6 +93,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Remove nested menu items when deleting the parent [#14530]
 - Move deleted checkbox from Settings tab to Publishing section [#14501]
 - Add manager_tooltip_enable and manager_tooltip_delay settings to manage if/how long tooltip descriptions are shown [#12732]
+- In recently edited resources and online users widget, make sure user has "logs" permission before showing the link to more [#14522]
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
