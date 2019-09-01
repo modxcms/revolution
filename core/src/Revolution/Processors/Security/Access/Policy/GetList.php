@@ -42,7 +42,7 @@ class GetList extends modObjectGetListProcessor
     {
         $initialized = parent::initialize();
         $this->setDefaultProperties([
-            'sortAlias' => modAccessPolicy::class,
+            'sortAlias' => 'modAccessPolicy',
             'group' => false,
             'combo' => false,
             'query' => '',

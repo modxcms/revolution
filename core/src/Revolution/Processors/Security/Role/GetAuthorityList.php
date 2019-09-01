@@ -11,7 +11,6 @@
 namespace MODX\Revolution\Processors\Security\Role;
 
 
-use modUserGroupRoleGetListProcessor;
 use xPDO\Om\xPDOObject;
 
 /**
@@ -25,7 +24,7 @@ use xPDO\Om\xPDOObject;
  *
  * @package MODX\Revolution\Processors\Security\Role
  */
-class GetAuthorityList extends modUserGroupRoleGetListProcessor
+class GetAuthorityList extends GetList
 {
     /**
      * @param xPDOObject $object
