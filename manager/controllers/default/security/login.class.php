@@ -315,66 +315,6 @@ class SecurityLoginManagerController extends modManagerController
             $this->modx->lexicon->load('core:user');
 
             // create a temporary password and immediately use it once to login with the standard method
-            $password = uniqid("tmp-password-");
-            $user->set('password', $password);
-            $user->save();
-
-            $this->scriptProperties['username'] = $user->get('username');
-            $this->scriptProperties['password'] = $password;
-            $registry->read(['poll_limit' => 1, 'remove_read' => true]);
-
-            // we reset the activation hash to a random value here to instead of removing it to avoid security problems
-            $this->setActivationHash($user, $this->modx->getOption('passwordless_expiration'));
-
-            /** @var modProcessorResponse $response */
-            $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
-            if (($response instanceof modProcessorResponse)) {
-                if (!$response->isError()) {
-                    $url = !empty($this->scriptProperties['returnUrl'])
-                        ? $this->scriptProperties['returnUrl']
-                        : $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
-                    $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
-                        $this->modx->getOption('http_host', null, MODX_HTTP_HOST) . rtrim($url, '/');
-                    $this->modx->sendRedirect($url);
-                } else {
-                    $errors = $response->getAllErrors();
-                    $error_message = implode("\n", $errors);
-                    $this->setPlaceholder('error_message', $error_message);
-                }
-            }
-        }
-    }
-
-    /**
-     * Handle a magic login link, if existent.
-     *
-     * @return void
-     */
-    public function handleMagicLoginLink() {
-
-        if (!empty($_GET['magiclink'])) {
-            $hash = $this->modx->sanitizeString($_GET['magiclink']);
-            /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
-                ->getRegister('user', 'registry.modDbRegister');
-            $registry->connect();
-            $registry->subscribe('/pwd/magiclink/' . $hash);
-
-            $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
-
-            /** @var modUser $user */
-            if (empty($record) || !$user = $this->modx->getObject('modUser', ['username' => reset($record)])) {
-                $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_magiclink_err'));
-
-                return;
-            }
-
-            $this->scriptProperties['passwordgenmethod'] = 's';
-            $this->scriptProperties['passwordnotifymethod'] = 'no';
-            $this->scriptProperties['newPassword'] = true;
-            $this->modx->lexicon->load('core:user');
-
-            // create a temporary password and immediately use it once to login with the standard method
             $password = uniqid("tmp-password-", true);
             $user->set('password', $password);
             $user->save();
@@ -538,11 +478,7 @@ class SecurityLoginManagerController extends modManagerController
         /** @var modUser $user */
         $user = $this->modx->getObject(modUser::class, $c);
         if ($user) {
-<<<<<<< HEAD
             $activationHash = $this->setActivationHash($user);
-=======
-            $activationHash = $this->setActivationHash($user);
->>>>>>> upstream/pr/14351
 
             // Send activation email
             $message = $this->modx->lexicon('login_forgot_email');
@@ -574,99 +510,6 @@ class SecurityLoginManagerController extends modManagerController
             }
         } else {
             $this->setPlaceholder('success_message',$this->modx->lexicon('login_user_err_nf_email'));
-        }
-    }
-
-
-    /**
-     * Creates, sets and returns activation/magic-login hash for a user.
-     *
-     * @param $user
-     *
-     * @return string
-     */
-    private function setActivationHash($user, $ttl = 86400) {
-        $hash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
-
-        /** @var modRegistry $registry */
-        $registry = $this->modx->getService('registry', 'registry.modRegistry');
-        /** @var modRegister $register */
-        $register = $registry->getRegister('user', 'registry.modDbRegister');
-        $register->connect();
-        $register->subscribe('/pwd/magiclink/');
-
-        $register->send('/pwd/magiclink/', [
-            $hash => $user->get('username')
-        ], [
-            'ttl' => $ttl
-        ]);
-
-        return $hash;
-    }
-
-    /**
-     * Handles the action when a user requests a magic login link.
-     *
-     * @return void
-     * @throws Exception
-     */
-    public function handlePasswordlessLoginRequest()
-    {
-
-        $c = $this->modx->newQuery('modUser');
-        $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
-        $c->innerJoin('modUserProfile', 'Profile');
-        $c->where([
-            'Profile.email:=' => $this->scriptProperties['passwordless_login_email'],
-        ]);
-
-        /** @var modUser $user */
-        $user = $this->modx->getObject('modUser', $c);
-
-        if ($user) {
-            $this->modx->log(modX::LOG_LEVEL_DEBUG, "Sending out magic login link for user " . $user->get('id'));
-
-            // Create activation email
-            $placeholders = array_merge($this->modx->config, $user->toArray());
-
-            // create the magic login hash
-            $placeholders['hash'] = $this->setActivationHash($user, $this->modx->getOption('passwordless_expiration'));
-            $placeholders['expiration'] = $this->getLifetimeString($this->modx->getOption('passwordless_expiration')); //date('D, d M Y H:i',time() + $this->modx->getOption('passwordless_expiration'));
-            $message = $this->modx->lexicon('login_magiclink_email');
-
-            // Store previous placeholders
-            $ph = $this->modx->placeholders;
-            // now set those useful for modParser
-            $this->modx->setPlaceholders($placeholders);
-            $this->modx->getParser()->processElementTags('', $message, true, false, '[[', ']]', [], 10);
-            $this->modx->getParser()->processElementTags('', $message, true, true, '[[', ']]', [], 10);
-            // Then restore previous placeholders to prevent any breakage
-            $this->modx->placeholders = $ph;
-
-            $this->modx->smarty->assign('config', $this->modx->config);
-            $this->modx->smarty->assign('content', $message);
-            $message = $this->modx->smarty->fetch('email/default.tpl');
-            $sent = $user->sendEmail($message, [
-                'from' => $this->modx->getOption('emailsender'),
-                'fromName' => $this->modx->getOption('site_name'),
-                'sender' => $this->modx->getOption('emailsender'),
-                'subject' => $this->modx->lexicon('login_magiclink_subject'),
-                'html' => true,
-            ]);
-            if (!$sent) {
-                $this->setPlaceholder('error_message', $this->modx->lexicon('login_magiclink_error_msg'));
-            } else {
-                $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', array(
-                    'email' => $this->scriptProperties['passwordless_login_email']
-                )));
-            }
-        } else {
-            // this logline can be used to feed fail2ban to blog continuing failures from an IP
-            $this->modx->log(modX::LOG_LEVEL_WARN, "Magic login link failure. User with email '" .
-                $this->scriptProperties['passwordless_login_email'] . "' does not exist. IP: ".$_SERVER["REMOTE_ADDR"]);
-            $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', array(
-                'email' => $this->scriptProperties['passwordless_login_email'],
-            )));
         }
     }
 

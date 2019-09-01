@@ -2149,7 +2149,7 @@ $settings['error_log_filepath']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
-$settings['passwordless_activated']= $xpdo->newObject('modSystemSetting');
+$settings['passwordless_activated']= $xpdo->newObject(modSystemSetting::class);
 $settings['passwordless_activated']->fromArray(array (
     'key' => 'passwordless_activated',
     'value' => true,
@@ -2158,25 +2158,7 @@ $settings['passwordless_activated']->fromArray(array (
     'area' => 'authentication',
     'editedon' => null,
 ), '', true, true);
-$settings['passwordless_confirm_email']= $xpdo->newObject('modSystemSetting');
-$settings['passwordless_confirm_email']->fromArray(array (
-    'key' => 'passwordless_confirm_email',
-    'value' => 'Confirm message',
-    'xtype' => 'textarea',
-    'namespace' => 'core',
-    'area' => 'authentication',
-    'editedon' => null,
-), '', true, true);
-$settings['passwordless_login_email']= $xpdo->newObject('modSystemSetting');
-$settings['passwordless_login_email']->fromArray(array (
-    'key' => 'passwordless_confirm_email',
-    'value' => 'Login message',
-    'xtype' => 'textarea',
-    'namespace' => 'core',
-    'area' => 'authentication',
-    'editedon' => null,
-), '', true, true);
-$settings['passwordless_expiration']= $xpdo->newObject('modSystemSetting');
+$settings['passwordless_expiration']= $xpdo->newObject(modSystemSetting::class);
 $settings['passwordless_expiration']->fromArray(array (
     'key' => 'passwordless_expiration',
     'value' => '3600',
