@@ -13323,7 +13323,7 @@ readers do not read off random characters that represent icons */
 .x-superboxselect-item .x-btn-arrow:before,
 .x-form-trigger .x-btn-arrow:before,
 .x-date-mp-ok .x-btn-arrow:before,
-.x-date-mp-cancel .x-btn-arrow:before, .tree-new-resource > em > button:before, .tree-new-weblink > em > button:before, .tree-new-symlink > em > button:before, .tree-new-static-resource > em > button:before, .tree-trash > em > button:before, .x-btn-icon .icon-folder button:before, .x-btn-icon .icon-page_white button:before, .x-btn-icon .icon-file_upload button:before, .x-btn-icon .icon-file_manager button:before, .tree-new-template > em > button:before, .tree-new-tv > em > button:before, .tree-new-chunk > em > button:before, .tree-new-snippet > em > button:before, .tree-new-plugin > em > button:before, .tree-new-category > em > button:before, .x-form-item label.x-form-item-label .modx-tv-reset:before, .x-form-field-wrap .x-form-trigger:before, .x-form-check-wrap .x-form-cb-label:before,
+.x-date-mp-cancel .x-btn-arrow:before, .x-btn-icon.icon-folder button:before, .x-btn-icon.icon-page_white button:before, .x-btn-icon.icon-file_upload button:before, .x-btn-icon.icon-file_manager button:before, .tree-new-resource > em > button:before, .tree-new-weblink > em > button:before, .tree-new-symlink > em > button:before, .tree-new-static-resource > em > button:before, .tree-trash > em > button:before, .tree-new-template > em > button:before, .tree-new-tv > em > button:before, .tree-new-chunk > em > button:before, .tree-new-snippet > em > button:before, .tree-new-plugin > em > button:before, .tree-new-category > em > button:before, .x-form-item label.x-form-item-label .modx-tv-reset:before, .x-form-field-wrap .x-form-trigger:before, .x-form-check-wrap .x-form-cb-label:before,
 .x-form-check-wrap .x-fieldset-header-text:before,
 .x-fieldset-checkbox-toggle legend .x-form-cb-label:before,
 .x-fieldset-checkbox-toggle legend .x-fieldset-header-text:before, .x-superboxselect ul li.x-superboxselect-item .x-superboxselect-item-close:before, .x-superboxselect .x-superboxselect-btns .x-superboxselect-btn-clear:before, .x-form-invalid-msg:before, .x-date-right a:before,
@@ -17290,7 +17290,6 @@ button {
     margin-right: auto; } }
 
 .x-btn-icon button {
-  font-family: fontawesome;
   font-size: 18px;
   height: 18px;
   width: 18px;
@@ -17322,6 +17321,18 @@ button {
     content: "\f021";
     top: 1px;
     bottom: auto; }
+
+.x-btn-icon.icon-folder button:before {
+  content: "\f07b"; }
+
+.x-btn-icon.icon-page_white button:before {
+  content: "\f15c"; }
+
+.x-btn-icon.icon-file_upload button:before {
+  content: "\f35b"; }
+
+.x-btn-icon.icon-file_manager button:before {
+  content: "\f14d"; }
 
 .x-btn-text-icon button {
   padding-left: 20px !important; }
@@ -17482,22 +17493,6 @@ button {
 
 #modx-leftbar .x-toolbar-ct .x-btn .tree-new-weblink > em > button {
   left: 2px; }
-
-/* media browser tree toolbar */
-.x-btn-icon .icon-folder button:before {
-  content: "\f07b"; }
-
-.x-btn-icon .icon-page_white button:before {
-  content: "\f15c";
-  font-weight: 400; }
-
-.x-btn-icon .icon-file_upload button:before {
-  content: "\f35b";
-  font-weight: 400; }
-
-.x-btn-icon .icon-file_manager button:before {
-  content: "\f14d";
-  font-weight: 400; }
 
 /* element tree toolbar */
 .tree-new-template > em > button:before {

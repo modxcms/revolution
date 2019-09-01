@@ -360,7 +360,6 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text {
 }
 
 .x-btn-icon button {
-  font-family: fontawesome;
   font-size: 18px;
   height: 18px;
   width: 18px;
@@ -406,6 +405,42 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text {
         content: fa-content($fa-var-sync);
         top: 1px;
         bottom: auto;
+      }
+    }
+  }
+
+  &.icon-folder {
+    button {
+      &:before {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-folder);
+      }
+    }
+  }
+
+  &.icon-page_white {
+    button {
+      &:before {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-file-alt);
+      }
+    }
+  }
+
+  &.icon-file_upload {
+    button {
+      &:before {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-arrow-alt-circle-up);
+      }
+    }
+  }
+
+  &.icon-file_manager {
+    button {
+      &:before {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-share-square);
       }
     }
   }
@@ -622,30 +657,6 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text {
 
 #modx-leftbar .x-toolbar-ct .x-btn .tree-new-weblink > em > button {
   left: 2px;
-}
-
-/* media browser tree toolbar */
-.x-btn-icon .icon-folder button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder);
-}
-
-.x-btn-icon .icon-page_white button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-alt);
-  font-weight: 400;
-}
-
-.x-btn-icon .icon-file_upload button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-arrow-alt-circle-up);
-  font-weight: 400;
-}
-
-.x-btn-icon .icon-file_manager button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-share-square);
-  font-weight: 400;
 }
 
 /* element tree toolbar */
