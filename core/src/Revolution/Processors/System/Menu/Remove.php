@@ -26,12 +26,39 @@ class Remove extends modObjectRemoveProcessor
     public $objectType = 'menu';
     public $primaryKeyField = 'text';
 
+    /**
+     * @return bool
+     */
+    public function beforeRemove()
+    {
+        $this->removeNested($this->object);
+
+        return parent::beforeRemove();
+    }
+
+    /**
+     * @param modMenu $menu
+     */
+    public function removeNested(modMenu $menu)
+    {
+        $criteria = ['parent' => $menu->get('text')];
+
+        if (!$this->modx->getCount($this->classKey, $criteria)) {
+            return;
+        }
+
+        foreach ($this->modx->getIterator($this->classKey, $criteria) as $subMenu) {
+            $this->removeNested($subMenu);
+            $this->modx->runProcessor('system/menu/remove', ['text' => $subMenu->get('text')]);
+        }
+    }
+
     public function cleanup()
     {
         $cacheManager = $this->modx->getCacheManager();
-        $cacheManager->refresh([
-            'menu' => [],
-        ]);
+        $cacheManager->refresh(['menu' => []]);
         parent::cleanup();
     }
 }
+
+return modMenuRemoveProcessor::class;

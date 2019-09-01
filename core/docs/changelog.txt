@@ -90,6 +90,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Minor code style fixes [#14178]
 - Set manager favicon to the MODX logo by default [#14324]
 - Reorder tabs on the template and template variable panels [#14251]
+- Remove nested menu items when deleting the parent [#14530]
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
