@@ -292,18 +292,23 @@ button {
     }
   }
 
-  @include grid-media($mobile) {
-    background: $softGray;
+  @include grid-media($desktop) {
+    background: transparent;
+    padding: 0 15px;
     position: relative;
     top: auto;
     left: auto;
     right: auto;
     bottom: auto;
-    width: 100%;
+    max-width: 100%;
     border-radius: 0;
 
     table {
       @include responsive-table-bar;
+    }
+
+    #modx-panel-welcome & {
+      display: none;
     }
   }
 
@@ -314,7 +319,7 @@ button {
 }
 
 .tab-panel-wrapper .x-panel-tbar {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     @include responsive-table-bar;
 
     .x-toolbar-left,
@@ -330,13 +335,13 @@ button {
 }
 
 html.ext-strict body #modx-container .x-small-editor .x-form-text {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     height: auto !important;
   }
 }
 
 #modx-grid-element-properties {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     @include responsive-table-bar;
 
     .x-toolbar-left {

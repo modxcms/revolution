@@ -324,7 +324,7 @@
   }
 }
 
-@include grid-media($mobile) {
+@include grid-media($desktop) {
   #modx-header {
     position: relative;
     min-width: 100%;
@@ -342,6 +342,14 @@
       a {
         line-height: initial !important;
       }
+
+      img {
+        max-width: 35px;
+      }
+    }
+
+    #modx-leftbar-trigger {
+      display: none;
     }
 
     #modx-topnav {
@@ -396,12 +404,19 @@
 
   #modx-footer {
     .modx-subnav {
+      min-width: 300px;
+      top: 60px !important;
+
       .description {
         display: none;
       }
 
       li {
         border-radius: 0;
+
+        &.sub:after {
+          display: none;
+        }
 
         a {
           width: auto;
@@ -424,11 +439,7 @@
     }
 
     .modx-subnav-arrow {
-      border-right-color: transparent;
-      border-bottom-color: $subnavBg;
-      margin-top: -12px;
-      right: auto;
-      top: -12px;
+      display: none;
     }
 
     .modx-subnav-wrapper {

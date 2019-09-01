@@ -45,7 +45,7 @@
   height: auto !important;
   box-sizing: border-box;
 
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     left: 5px !important;
   }
 
@@ -71,7 +71,7 @@
     overflow: auto;
     width: 100% !important;
 
-    @include grid-media($mobile) {
+    @include grid-media($desktop) {
       height: auto !important;
       line-height: 4em;
 

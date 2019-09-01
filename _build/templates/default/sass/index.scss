@@ -237,12 +237,12 @@ textarea.x-form-field {
 }
 
 .x-viewport {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     overflow-y: auto;
   }
 
   body {
-    @include grid-media($mobile) {
+    @include grid-media($desktop) {
       height: auto;
     }
   }
@@ -253,7 +253,7 @@ textarea.x-form-field {
   width: 100%;
   background: $mainBg;
 
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     height: auto;
   }
 }
@@ -262,9 +262,10 @@ textarea.x-form-field {
 #modx-resource-main-right,
 #modx-page-settings-left,
 #modx-page-settings-right {
-  @include grid-media($mobile) {
+  @include grid-media($tabletL) {
     box-sizing: border-box;
     width: 100% !important;
+    margin: 0 auto 15px;
   }
 }
 
@@ -274,7 +275,7 @@ textarea.x-form-field {
 #modx-snippet-form,
 #modx-panel-plugin {
   .main-wrapper {
-    @include grid-media($mobile) {
+    @include grid-media($desktop) {
       width: 100% !important;
       padding: 0;
 
@@ -286,118 +287,69 @@ textarea.x-form-field {
 }
 
 #modx-resource-main-right {
-  @include grid-media($mobile) {
-    margin-top: 15px;
+  @include grid-media($desktop) {
+    margin: 15px auto 0;
   }
 }
 
-#modx-grid-lexicon {
+@include grid-media($desktop) {
   .x-toolbar-ct {
-    @include grid-media($mobile) {
+    display: block;
+
+    tbody {
       display: block;
 
-      tbody {
+      tr {
         display: block;
 
-        tr {
+        td {
           display: block;
+          width: 100%;
 
-          td {
-            display: block;
+          table {
             width: 100%;
 
-            table {
-              width: 100%;
+            .x-form-field-wrap {
+              width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
 
-              .x-form-field-wrap {
-                width: 100% !important;
-                margin-bottom: 1em;
-              }
-
-              .x-btn,
-              .x-form-text {
-                width: 100% !important;
-                margin-bottom: 1em;
-                box-sizing: border-box;
-              }
+            .x-btn,
+            .x-form-text {
+              width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              box-sizing: border-box;
             }
           }
         }
       }
     }
   }
-}
 
-#modx-panel-contexts,
-#modx-panel-namespaces {
-  .main-wrapper {
-    >.x-panel-bwrap {
-      >.x-panel-tbar {
-        @include grid-media($mobile) {
-          width: auto !important;
-          @include responsive-table-bar;
-
-          #modx-ctx-search {
-            width: 100% !important;
-            box-sizing: border-box;
-            margin-left: 0;
-          }
-        }
-      }
-    }
-  }
-}
-
-#modx-panel-namespaces {
-  @include grid-media($mobile) {
-    .main-wrapper {
-      .x-toolbar-left {
-        margin-bottom: 0 !important;
-      }
-    }
-  }
-}
-
-#modx-namespace-search {
-  @include grid-media($mobile) {
+  .x-column {
     width: 100% !important;
-    margin-left: 0;
-    box-sizing: border-box;
-  }
-}
-
-#modx-filter-clear {
-  @include grid-media($mobile) {
-    width: 100% !important;
-    box-sizing: border-box;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none;
   }
 }
 
 #modx-tree-panel-usergroup {
   .main-wrapper {
-    @include grid-media($mobile) {
-      position: relative;
-    }
-  }
-}
-
-#modx-property-set-form {
-  @include grid-media($mobile) {
-
-    .left-col,
-    .x-col {
-      float: none;
-    }
-
-    #right-column,
-    #modx-grid-element-properties {
+    @include grid-media($desktop) {
       width: 100% !important;
+      max-width: 100%;
+      position: relative;
+      display: inline-block;
+      float: left;
     }
   }
 }
 
 .x-window {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     width: auto !important;
     max-width: 100vh !important;
     left: 0.5em !important;
@@ -428,7 +380,7 @@ textarea.x-form-field {
 }
 
 .x-column-inner>.x-column~.x-column {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     margin-left: 0;
   }
 }
@@ -439,7 +391,7 @@ textarea.x-form-field {
 .x-form-item label.x-form-item-label[for="modx-import-parent"],
 .x-form-item label.x-form-item-label[for="modx-import-allowed-extensions"],
 #modx-import-base-path {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     width: auto !important;
     float: none;
   }
@@ -458,7 +410,7 @@ textarea.x-form-field {
 #x-form-el-modx-import-resource-class,
 #x-form-el-modx-import-allowed-extensions,
 #x-form-el-modx-import-element {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     width: 100% !important;
     padding-left: 0 !important;
   }
@@ -534,7 +486,6 @@ textarea.x-form-field {
 
   #modx-resource-main-left & {
     border-bottom: 0;
-    padding-top: 15px !important;
     right: 15px;
     position: absolute;
     z-index: 20;
@@ -592,23 +543,33 @@ a.x-grid-link:focus {
   background-color: transparent !important;
 
   #modx-panel-welcome & {
-    margin: 0 1rem 1rem 1rem;
+    margin: 1rem;
   }
 }
 
 @include grid-media($gtDesktop) {
+  // Old header
+  #modx-content > .x-panel-bwrap > .x-panel-body {
+    .modx-page-header {
+      margin-top: 1.25rem;
+      box-sizing: border-box;
+
+      &+div {
+        margin: 1rem;
+      }
+    }
+  }
 
   // New header
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
     margin: 0;
 
-    .modx-page-header,
     #modx-resource-breadcrumbs {
       margin-top: 1.25rem;
       font-weight: bold;
       box-sizing: border-box;
-      padding-left: 15px;
-      font-size: 16px;
+      padding-left: 18px;
+      font-size: 18px;
 
       &+div {
         margin: 1rem;
@@ -628,7 +589,7 @@ a.x-grid-link:focus {
 /* Error container */
 
 #modx-content {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     position: relative;
     width: auto !important;
     top: auto !important;
@@ -674,7 +635,7 @@ a.x-grid-link:focus {
   }
 
   .x-panel-body {
-    @include grid-media($mobile) {
+    @include grid-media($desktop) {
       height: auto !important;
       width: auto !important;
     }
@@ -1203,7 +1164,7 @@ a.x-grid-link:focus {
 
 /* status messages */
 .modx-status-msg {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     max-width: 100%;
   }
 
@@ -1287,7 +1248,7 @@ a.x-grid-link:focus {
 .modx-status-msg .has-position-center-center,
 .modx-status-msg .has-position-center-top,
 .modx-status-msg .has-position-right-top {
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     border-radius: 0;
     top: auto;
     bottom: 0;
@@ -1472,6 +1433,26 @@ iframe[classname="x-hidden"] {
   padding-left: 15px;
 }
 
+/* Old Header */
+.modx-page-header {
+  order: 1;
+  font: normal 20px $bodyfonts;
+  color: $darkestGray;
+  margin: 0;
+  padding-left: 18px;
+
+  #modx-panel-welcome & {
+    padding-left: 0;
+  }
+
+  @include grid-media($desktop) {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+  }
+}
+
+/* New Header */
 #modx-resource-breadcrumbs {
   .breadcrumbs {
     display: flex;
@@ -1480,14 +1461,13 @@ iframe[classname="x-hidden"] {
 
     #modx-resource-header {
       order: 1;
-      font: 500 16px $bodyfonts;
+      font: normal 20px $bodyfonts;
       color: $darkestGray;
       margin: 0;
       padding-left: 0;
 
-      @include grid-media($mobile) {
+      @include grid-media($desktop) {
         width: 100%;
-        margin-top: 15px;
         text-align: center;
         font-size: 2em;
       }
@@ -1501,11 +1481,11 @@ iframe[classname="x-hidden"] {
     align-items: center;
 
     li {
-      font: normal 16px $bodyfonts;
+      font: normal 18px $bodyfonts;
       color: $darkestGray;
 
       a {
-        font: normal 16px $bodyfonts;
+        font: normal 18px $bodyfonts;
         text-decoration: none;
 
         &.not_published {
@@ -1592,7 +1572,7 @@ iframe[classname="x-hidden"] {
   background: #F2F2F2;
 
   #modx-resource-main-left {
-    padding: 0 15px 15px 15px;
+    padding: 15px;
     background: $white;
     border-top-right-radius: $borderRadius;
     border-bottom-left-radius: $borderRadius;
