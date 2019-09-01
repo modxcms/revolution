@@ -456,7 +456,7 @@ template {
 .fa-10x {
   font-size: 10em; }
 
-.fa-fw {
+.fa-fw, #modx-abtn-menu-list .x-menu-item .x-menu-item-text .icon {
   text-align: center;
   width: 1.25em; }
 
