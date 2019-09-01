@@ -14,6 +14,7 @@ use MODX\Revolution\modChunk;
 use MODX\Revolution\modProcessor;
 use MODX\Revolution\modX;
 use SimplePie_Item;
+use xPDO\xPDO;
 
 /**
  * Class modDashboardWidgetFeedProcessor
@@ -56,7 +57,7 @@ class Feed extends modProcessor
     {
         $feed = new \SimplePie();
 
-        $cachePath = $this->modx->getOption('core_path') . 'cache/rss/';
+        $cachePath = $this->modx->getOption(xPDO::OPT_CACHE_PATH) . 'rss/';
         if (!is_dir($cachePath)) {
             $this->modx->cacheManager->writeTree($cachePath);
         }
