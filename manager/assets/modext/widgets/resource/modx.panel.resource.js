@@ -753,14 +753,28 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 return { collapsed: this.collapsed };
             }
             ,items: [{
-                xtype: 'xcheckbox'
-                ,boxLabel: _('resource_published')
-                ,hideLabel: true
-                ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
-                ,name: 'published'
-                ,id: 'modx-resource-published'
-                ,inputValue: 1
-                ,checked: parseInt(config.record.published)
+                layout: 'form'
+                ,border: false
+                ,items: [{
+                    xtype: 'xcheckbox'
+                    ,boxLabel: _('resource_published')
+                    ,hideLabel: true
+                    ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
+                    ,name: 'published'
+                    ,id: 'modx-resource-published'
+                    ,inputValue: 1
+                    ,checked: parseInt(config.record.published)
+                },{
+                    xtype: 'xcheckbox'
+                    ,boxLabel: _('deleted')
+                    ,description: '<b>[[*deleted]]</b>'
+                    ,hideLabel: true
+                    ,cls: 'danger'
+                    ,name: 'deleted'
+                    ,id: 'modx-resource-deleted'
+                    ,inputValue: 1
+                    ,checked: parseInt(config.record.deleted) || false
+                }]
             },{
                 xtype: 'xdatetime'
                 ,fieldLabel: _('resource_publishedon')
@@ -1101,17 +1115,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-syncsite'
             ,inputValue: 1
             ,checked: config.record.syncsite !== undefined && config.record.syncsite !== null ? parseInt(config.record.syncsite) : true
-
-        },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('deleted')
-            ,description: '<b>[[*deleted]]</b>'
-            ,hideLabel: true
-            ,cls: 'danger'
-            ,name: 'deleted'
-            ,id: 'modx-resource-deleted'
-            ,inputValue: 1
-            ,checked: parseInt(config.record.deleted) || false
         }];
     }
 
