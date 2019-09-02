@@ -37,6 +37,11 @@ $_lang['login_username_or_email'] = 'Имя пользователя или эл
 $_lang['login_username_password_incorrect'] = 'Неправильное имя пользователя или пароль. Пожалуйста, проверьте введённые данные и попытайтесь снова.';
 $_lang['login_user_inactive'] = 'Ваша учётная запись была заблокирована. Пожалуйста, свяжитесь администратором сайта для отмены блокировки.';
 $_lang['login_email_subject'] = 'Данные для входа';
+$_lang['login_magiclink_subject'] = 'Ваша одноразовая ссылка для входа';
+$_lang['login_magiclink_err'] = 'Ваша ссылка для входа недействительна. Пожалуйста, запросите новую.';
+$_lang['login_magiclink_email'] = '<h2>Одноразовая ссылка для входа</h2><p>Ваша ссылка для входа в систему управления MODX. Эта ссылка действительна для [[+expiration]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?magiclink=[[+hash]]" class="btn">Войти</a></p><p class="small">Если вы не отправляли этот запрос, пожалуйста, проигнорируйте это письмо.</p>';
+$_lang['login_magiclink_default_msg'] = 'Если ваш электронный ящик <i>[[+email]]</i> связан с учетной записью, вы получите письмо в ближайшее время.';
+$_lang['login_magiclink_error_msg'] = 'Система не смогла отправить ссылку для входа по электронной почте. Пожалуйста, свяжитесь с администратором сайта.';
 $_lang['login_forgot_email'] = '<h2>Забыли пароль?</h2><p>Мы получили запрос на изменение пароля вашего аккаунта. Вы можете сбросить пароль, нажав кнопку ниже и следуя инструкциям на экране.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Сбросить пароль</a></p><p class="small">Если вы не отправляли такого запроса, просто проигнорируйте это письмо.</p>';
 $_lang['login_signup_email'] = '<p>Здравствуйте, [[+username]]!</p><p>Ваш аккаунт был зарегистрирован на сайте <strong>[[++site_name]]</strong>. Если вы не знаете свой пароль, [[++allow_manager_login_forgot_password:is=`1`:then=`сбросьте его, нажав ссылку «Забыли пароль» на странице входа`:else=`свяжитесь с администрацией сайта`]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]" class="btn">Войти на сайт [[++site_name]]</a></p>';
 $_lang['login_greeting_morning'] = '<strong>Доброе утро</strong>, рады вас видеть!';
@@ -44,7 +49,12 @@ $_lang['login_greeting_afternoon'] = '<strong>Добрый день</strong>, р
 $_lang['login_greeting_evening'] = '<strong>Добрый вечер</strong>, рады вас видеть!';
 $_lang['login_greeting_night'] = '<strong>Доброй ночи</strong>, рады вас видеть!';
 $_lang['login_note'] = 'Пожалуйста, войдите, чтобы получить доступ к панели управления.';
+$_lang['login_note_passwordless'] = 'Пожалуйста, введите ваш адрес электронной почты, чтобы получить одноразовую ссылку для входа.';
+$_lang['login_magiclink_email_button'] = 'Отправить мне одноразовую ссылку для входа';
+$_lang['login_magiclink_email_placeholder'] = 'Электронная почта вашей учетной записи';
+$_lang['login_email'] = 'Электронная почта';
 $_lang['login_help_button_text'] = 'Помощь';
 $_lang['login_help_title'] = 'Нужна помощь с MODX';
 $_lang['login_help_text'] = '<p>Требуется поддержка профессионалов MODX? Мы создали справочник профессионалов MODX со всего мира, которые будут счастливы помочь вам. <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Найти профессионалов MODX">Получить помощь на modx.com</a>.</p>';
 $_lang['login_return_site'] = 'Вернуться на сайт';
+
