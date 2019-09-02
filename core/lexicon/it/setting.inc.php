@@ -438,6 +438,9 @@ $_lang['setting_manager_js_document_root_desc'] = 'NON MODIFICARE se non sai cos
 $_lang['setting_manager_login_url_alternate'] = 'URL di accesso Alternativo al Manager';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Un URL alternativo per inviare un utente non autenticato a quando hanno bisogno di accedere al manager. Il modulo di login ci deve login dell\'utente al contesto "mgr" al lavoro';
 
+$_lang['setting_manager_tooltip_enable'] = 'Abilita Tooltip Manager';
+$_lang['setting_manager_tooltip_delay'] = 'Tempo di ritardo per i Tooltip Manager';
+
 $_lang['setting_login_background_image'] = 'Immagine sfondo di Login';
 $_lang['setting_login_background_image_desc'] = 'L\'immagine di sfondo da utilizzare nel login manager. Questa sarà allargata automaticamente per riempire lo schermo.';
 
@@ -845,3 +848,9 @@ $_lang['setting_error_log_filename_desc'] = 'Personalizza il nome del file del f
 
 $_lang['setting_error_log_filepath'] = 'Percorso log degli errori';
 $_lang['setting_error_log_filepath_desc'] = 'Facoltativo, imposta un percorso assoluto del registro di errore personalizzato. È possibile utilizzare placehodlers come {cache_path}.';
+
+$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
