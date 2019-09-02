@@ -439,6 +439,9 @@ $_lang['setting_manager_js_document_root_desc'] = 'Калі ваш сервер 
 $_lang['setting_manager_login_url_alternate'] = 'URL альтэрнатыўнай старонкі для ўваходу ў сістэму кіравання';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Альтэрнатыўны URL, на які будуць накіраваны непацверджаныя карыстальнікі, калі ім неабходна ўвайсці ў сістэму кіравання. Форма ўваходу павінна аўтарызаваць карыстальнікаў у кантэкст "mgr", каб гэта працавала.';
 
+$_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
+$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
+
 $_lang['setting_login_background_image'] = 'Фонавы малюнак на старонцы ўваходу';
 $_lang['setting_login_background_image_desc'] = 'Фонавы малюнак для выкарыстання на старонцы ўваходу ў сістэму кіравання. Ён будзе аўтаматычна расцягвацца на ўвесь экран.';
 
@@ -847,3 +850,9 @@ $_lang['setting_error_log_filename_desc'] = 'Пазначце імя файла 
 
 $_lang['setting_error_log_filepath'] = 'Месцазнаходжанне лога памылак';
 $_lang['setting_error_log_filepath_desc'] = 'Па жаданні можна пазначыць абсалютны шлях да карыстацкага лога памылак. Вы можаце выкарыстоўваць запаўняльнікі падобныя да {cache_path}.';
+
+$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
