@@ -438,6 +438,9 @@ $_lang['setting_manager_js_document_root_desc'] = 'Wenn Ihr Server die Server-Va
 $_lang['setting_manager_login_url_alternate'] = 'Alternative Manager-Login-URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Eine alternative URL, zu der ein nicht authentifizierter Benutzer geschickt wird, wenn es nötig ist, dass er sich in den Manager einloggt. Das Login-Formular dort muss den Benutzer in den Kontext "mgr" einloggen, damit dies funktioniert.';
 
+$_lang['setting_manager_tooltip_enable'] = 'Manager-Tooltips aktivieren';
+$_lang['setting_manager_tooltip_delay'] = 'Verzögerung für Manager-Tooltips';
+
 $_lang['setting_login_background_image'] = 'Login-Hintergrundbild';
 $_lang['setting_login_background_image_desc'] = 'Das Hintergrundbild, das beim Manager-Login verwendet werden soll. Dieses dehnt sich automatisch aus, um den Bildschirm zu füllen.';
 
@@ -845,3 +848,9 @@ $_lang['setting_error_log_filename_desc'] = 'Passen Sie den Dateinamen der MODX-
 
 $_lang['setting_error_log_filepath'] = 'Fehlerprotokoll-Pfad';
 $_lang['setting_error_log_filepath_desc'] = 'Setzen Sie optional einen absoluten Pfad zum Speicherort eines benutzerdefinierten Fehlerprotokolls. Sie können Platzhalter wie {cache_path} verwenden.';
+
+$_lang['setting_passwordless_activated'] = 'Passwortlosen Login aktivieren';
+$_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer ihre E-Mail-Adresse ein, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
+$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
