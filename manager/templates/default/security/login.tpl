@@ -44,11 +44,11 @@
 
                         <p class="lead">{$_lang.login_note_passwordless}</p>
 
-                            {if $error_message}
-                                <p class="is-error">{$error_message|default}</p>
-                            {elseif $success_message}
-                                <p class="is-success">{$success_message|default}</p>
-                            {/if}
+                        {if $error_message}
+                            <p class="is-error">{$error_message|default}</p>
+                        {elseif $success_message}
+                            <p class="is-success">{$success_message|default}</p>
+                        {/if}
 
                         <label>
                             {$_lang.login_email}
