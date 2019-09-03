@@ -854,3 +854,9 @@ $_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasz
 
 $_lang['setting_passwordless_expiration'] = 'Jelszó nélküli bejelentkezés lejárata';
 $_lang['setting_passwordless_expiration_desc'] = 'Hány másodpercig érvényes egy egyszeri bejelentkezési hivatkozás.';
+
+$_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
+$_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';
+
+$_lang['setting_passwordless_expiration'] = 'Jelszó nélküli bejelentkezés lejárata';
+$_lang['setting_passwordless_expiration_desc'] = 'Hány másodpercig érvényes egy egyszeri bejelentkezési hivatkozás.';
