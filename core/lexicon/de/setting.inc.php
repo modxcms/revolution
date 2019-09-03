@@ -854,3 +854,9 @@ $_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer 
 
 $_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
 $_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
+
+$_lang['setting_passwordless_activated'] = 'Passwortlosen Login aktivieren';
+$_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer ihre E-Mail-Adresse ein, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
+$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
