@@ -854,3 +854,9 @@ $_lang['setting_passwordless_activated_desc'] = 'Если включено, по
 
 $_lang['setting_passwordless_expiration'] = 'Срок действия входа без пароля';
 $_lang['setting_passwordless_expiration_desc'] = 'Продолжительность времени в секундах, на которое действительна одноразовая ссылка для входа.';
+
+$_lang['setting_passwordless_activated'] = 'Включить вход без пароля';
+$_lang['setting_passwordless_activated_desc'] = 'Если включено, пользователи будут входить с помощью одноразовой ссылки, по адресу электронной почты, без ввода имени пользователя и пароля.';
+
+$_lang['setting_passwordless_expiration'] = 'Срок действия входа без пароля';
+$_lang['setting_passwordless_expiration_desc'] = 'Продолжительность времени в секундах, на которое действительна одноразовая ссылка для входа.';
