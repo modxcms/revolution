@@ -70,7 +70,7 @@ $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 
 /* s3 source type */
-$_lang['bucket'] = 'Bucket';
+$_lang['bucket'] = 'Vödör';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
 $_lang['prop_s3.key_desc'] = 'The Amazon key for authentication to the bucket.';
 $_lang['prop_s3.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
