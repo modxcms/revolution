@@ -112,7 +112,7 @@ Ext.extend(MODx.page.UpdateTV,MODx.Component, {
             text: _('cancel') + ' <i class="icon icon-times"></i>'
             ,id: 'modx-abtn-cancel'
         },{
-            process: 'Element/TemplateVar/Update'
+            process: 'Element/Tv/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
