@@ -438,6 +438,9 @@ $_lang['setting_manager_js_document_root_desc'] = 'Si votre serveur ne prend pas
 $_lang['setting_manager_login_url_alternate'] = 'URL alternative de connexion au manager';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Une URL alternative vers laquelle envoyer les utilisateurs non authentifiés auprès du manager. Le formulaire de connexion doit authentifier l\'utilisateur au contexte "mgr" pour fonctionner.';
 
+$_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
+$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
+
 $_lang['setting_login_background_image'] = 'Image de fond de connexion';
 $_lang['setting_login_background_image_desc'] = 'L’image d’arrière-plan à utiliser dans le gestionnaire de connexion. Elle sera automatiquement étirée pour remplir l’écran.';
 
@@ -845,3 +848,15 @@ $_lang['setting_error_log_filename_desc'] = 'Personnaliser le nom de fichier du 
 
 $_lang['setting_error_log_filepath'] = 'Chemin d’accès du journal des erreurs';
 $_lang['setting_error_log_filepath_desc'] = 'Éventuellement défini un chemin d’accès absolu pour l’emplacement du journal un message d’erreur personnalisé. Vous pouvez utiliser des placeholders comme {cache_path}.';
+
+$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
+
+$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
