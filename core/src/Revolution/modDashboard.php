@@ -104,7 +104,7 @@ class modDashboard extends xPDOSimpleObject
 
         // Get widgets
         $c = $this->xpdo->newQuery(modDashboardWidgetPlacement::class, $where);
-        $c->sortby('rank', 'ASC');
+        $c->sortby($this->xpdo->escape('rank'), 'ASC');
         if ($placements = $this->xpdo->getIterator(modDashboardWidgetPlacement::class, $c)) {
             /** @var modDashboardWidgetPlacement $placement */
             foreach ($placements as $placement) {
@@ -142,7 +142,7 @@ class modDashboard extends xPDOSimpleObject
                 'dashboard' => $this->id,
                 'user' => $user,
             ]);
-            $c->groupby('rank');
+            $c->groupby($this->xpdo->escape('rank'));
             $c->select('COUNT(rank) as idx');
             $c->sortby('idx', 'DESC');
             $c->limit(1);
