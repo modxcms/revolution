@@ -52,7 +52,7 @@ $_lang['login_note'] = 'Logga in för att komma till hanteraren.';
 $_lang['login_note_passwordless'] = 'Please enter your email address to receive a one-time login link.';
 $_lang['login_magiclink_email_button'] = 'Send me a one-time login link';
 $_lang['login_magiclink_email_placeholder'] = 'Your user account\'s email here';
-$_lang['login_email'] = 'Email';
+$_lang['login_email'] = 'E-post';
 $_lang['login_help_button_text'] = 'Hjälp';
 $_lang['login_help_title'] = 'Få hjälp med MODX';
 $_lang['login_help_text'] = '<p>Behöver du professionell support för MODX? Vi har valt ut ett antal proffs på MODX över hela världen som gärna hjälper till. <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Hitta MODX-proffs på MODX webbplats">Få snabb hjälp på modx.com</a>.</p>';
