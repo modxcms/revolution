@@ -438,8 +438,8 @@ $_lang['setting_manager_js_document_root_desc'] = 'Om din server inte kan hanter
 $_lang['setting_manager_login_url_alternate'] = 'Alternativ URL till hanterarens inloggning';
 $_lang['setting_manager_login_url_alternate_desc'] = 'En alternativ URL som oautentiserade användare skickas till när de behöver logga in i hanteraren. Inloggningsformuläret där måste logga in användaren till mgr-kontexten för att det ska fungera.';
 
-$_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
-$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
+$_lang['setting_manager_tooltip_enable'] = 'Aktivera inforutor i hanteraren';
+$_lang['setting_manager_tooltip_delay'] = 'Fördröjningstid för inforutor i hanteraren';
 
 $_lang['setting_login_background_image'] = 'Inloggningssidans bakgrundsbild';
 $_lang['setting_login_background_image_desc'] = 'Den bakgrundsbild som ska användas på hanterarens inloggningssida. Den kommer automatiskt att sträckas ut för att fylla skärmen.';
@@ -849,14 +849,14 @@ $_lang['setting_error_log_filename_desc'] = 'Anpassa filnamnet för MODX fellogg
 $_lang['setting_error_log_filepath'] = 'Felloggens sökväg';
 $_lang['setting_error_log_filepath_desc'] = 'Du kan ange en absolut sökväg till en anpassad plats för felloggen. Platshållare som {cache_path} kan användas.';
 
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+$_lang['setting_passwordless_activated'] = 'Aktivera inloggning utan lösenord';
+$_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan användare logga in genom att ange sin e-postadress och därefter få en engångs inloggningslänk, istället för att ange användarnamn och lösenord.';
 
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
+$_lang['setting_passwordless_expiration'] = 'Utgångstid för lösenordsfri inloggning';
+$_lang['setting_passwordless_expiration_desc'] = 'Anger i sekunder hur länge en engångs inloggningslänk gäller.';
 
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+$_lang['setting_passwordless_activated'] = 'Aktivera inloggning utan lösenord';
+$_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan användare logga in genom att ange sin e-postadress och därefter få en engångs inloggningslänk, istället för att ange användarnamn och lösenord.';
 
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
+$_lang['setting_passwordless_expiration'] = 'Utgångstid för lösenordsfri inloggning';
+$_lang['setting_passwordless_expiration_desc'] = 'Anger i sekunder hur länge en engångs inloggningslänk gäller.';
