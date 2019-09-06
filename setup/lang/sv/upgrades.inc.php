@@ -49,5 +49,5 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Ett fel inträffade när flash-f
 $_lang['clipboard_flash_file_missing'] = 'Flash-filen för kopiering till urklipp är redan borttagen.';
 $_lang['system_setting_cleanup_success'] = 'Systeminställningen `[[+key]]` togs bort.';
 $_lang['system_setting_cleanup_failed'] = 'Systeminställningen `[[+key]]` kunde inte tas bort.';
-$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
-$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
+$_lang['system_setting_update_success'] = 'Systeminställningen `[[+key]]` uppdaterades.';
+$_lang['system_setting_update_failed'] = 'Systeminställningen `[[+key]]` kunde inte uppdateras.';
