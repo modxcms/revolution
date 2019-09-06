@@ -137,7 +137,7 @@ $_country_lang["ke"] = 'Kenya'; // Kenya
 $_country_lang["kg"] = 'Kirgizistan'; // Kyrgyzstan
 $_country_lang["kh"] = 'Kambodja'; // Cambodia
 $_country_lang["ki"] = 'Kiribati'; // Kiribati
-$_country_lang["km"] = 'Comoros'; // Comoros
+$_country_lang["km"] = 'Komorerna'; // Comoros
 $_country_lang["kn"] = 'Saint Kitts och Nevis'; // Saint Kitts and Nevis
 $_country_lang["kp"] = 'Nordkorea'; // Korea, Democratic People&#39;s Republic of
 $_country_lang["kr"] = 'Sydkorea'; // Korea, Republic of
@@ -242,8 +242,8 @@ $_country_lang["sy"] = 'Syrien'; // Syrian Arab Republic
 $_country_lang["sz"] = 'Swaziland'; // Swaziland
 
 $_country_lang["tc"] = 'Turks- och Caicosöarna'; // Turks and Caicos Islands
-$_country_lang["td"] = 'Chad'; // Chad
-$_country_lang["tf"] = 'French Southern Territories'; // French Southern Territories
+$_country_lang["td"] = 'Tchad'; // Chad
+$_country_lang["tf"] = 'Franska södra territorierna'; // French Southern Territories
 $_country_lang["tg"] = 'Togo'; // Togo
 $_country_lang["th"] = 'Thailand'; // Thailand
 $_country_lang["tj"] = 'Tadzjikistan'; // Tajikistan
@@ -276,7 +276,7 @@ $_country_lang["vu"] = 'Vanuatu'; // Vanuatu
 $_country_lang["wf"] = 'Wallis- och Futunaöarna'; // Wallis and Futuna Islands
 $_country_lang["ws"] = 'Samoa'; // Samoa
 
-$_country_lang["ye"] = 'Yemen'; // Yemen
+$_country_lang["ye"] = 'Jemen'; // Yemen
 $_country_lang["yt"] = 'Mayotte'; // Mayotte
 
 $_country_lang["za"] = 'Sydafrika'; // South Africa
@@ -288,4 +288,4 @@ $_country_lang["zw"] = 'Zimbabwe'; // Zimbabwe
  */
 $_country_lang["an"] = 'Nederländska Antillerna'; // Netherlands Antilles
 $_country_lang["cs"] = 'Serbien och Montenegro'; // DEPRECATED: kept for backwards compatibility, Serbia and Montenegro
-$_country_lang["fx"] = 'France, Metropolitan'; // France, Metropolitan
+$_country_lang["fx"] = 'Frankrike, europeiska delen'; // France, Metropolitan
