@@ -325,7 +325,7 @@ class GetNodes extends modProcessor
                 'cls' => $class,
                 'iconCls' => $this->getNodeIcon('category'),
                 'page' => '',
-                'classKey' => 'modCategory',
+                'classKey' => 'MODX\\Revolution\\modCategory',
                 'type' => 'category',
             ];
         }

@@ -166,7 +166,7 @@ class Sort extends modProcessor
                 continue;
             }
 
-            if ($item['class'] == 'modCategory') {
+            if ($item['class'] == modCategory::class) {
                 /** @var modCategory $category */
                 $category = $this->modx->getObject(modCategory::class, $item['pk']);
                 if ($category) {

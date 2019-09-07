@@ -89,7 +89,7 @@ class GetNodes extends modObjectProcessor
         $c = $this->modx->newQuery(modCategory::class);
         $c->sortby($this->modx->escape('rank'), 'ASC');
         $c->sortby('category', 'ASC');
-        $categories = $this->modx->getIterator('modCategory', $c);
+        $categories = $this->modx->getIterator(modCategory::class, $c);
 
         /** @var modCategory $category */
         foreach ($categories as $category) {
@@ -108,7 +108,7 @@ class GetNodes extends modObjectProcessor
                 'cls' => 'icon-category',
                 'iconCls' => $this->getNodeIcon('category'),
                 'href' => '',
-                'class_key' => 'modCategory',
+                'class_key' => 'MODX\\Revolution\\modCategory',
                 'menu' => [],
             ];
 
