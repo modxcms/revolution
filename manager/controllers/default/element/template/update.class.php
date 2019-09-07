@@ -78,6 +78,10 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         if ($this->template == null) return $this->failure($this->modx->lexicon('template_err_nf'));
         if (!$this->template->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
+        if ($this->template->get('locked') && !$this->modx->hasPermission('edit_locked')) {
+            return $this->failure($this->modx->lexicon('template_err_locked'));
+        }
+
         /* get properties */
         $properties = $this->template->get('properties');
         if (!is_array($properties)) $properties = array();
