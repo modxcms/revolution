@@ -78,6 +78,10 @@ class ElementPluginUpdateManagerController extends modManagerController {
         if ($this->plugin == null) return $this->failure($this->modx->lexicon('plugin_err_nf'));
         if (!$this->plugin->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
+        if ($this->plugin->get('locked') && !$this->modx->hasPermission('edit_locked')) {
+            return $this->failure($this->modx->lexicon('plugin_err_locked'));
+        }
+
         /* get properties */
         $properties = $this->plugin->get('properties');
         if (!is_array($properties)) $properties = array();

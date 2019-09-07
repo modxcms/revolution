@@ -25,6 +25,7 @@ $_lang['plugin_err_create'] = 'An error occurred while creating the plugin.';
 $_lang['plugin_err_ae'] = 'A plugin already exists with the name "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Plugin name is invalid.';
 $_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
+$_lang['plugin_err_locked'] = 'Plugin is locked.';
 $_lang['plugin_err_nf'] = 'Plugin not found!';
 $_lang['plugin_err_ns'] = 'Plugin not specified.';
 $_lang['plugin_err_ns_name'] = 'Please specify a name for the plugin.';
