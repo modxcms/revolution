@@ -31,7 +31,7 @@ class modTemplateTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->template = $this->modx->newObject('modTemplate');
+        $this->template = $this->modx->newObject(modTemplate::class);
         $this->template->fromArray(array(
             'id' => 12345,
             'templatename' => 'Unit Test Template',
