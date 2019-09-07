@@ -79,6 +79,10 @@ class ElementTVUpdateManagerController extends modManagerController {
         if ($this->tv == null) return $this->failure($this->modx->lexicon('tv_err_nf'));
         if (!$this->tv->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
+        if ($this->tv->get('locked') && !$this->modx->hasPermission('edit_locked')) {
+            return $this->failure($this->modx->lexicon('tv_err_locked'));
+        }
+
         /* get properties */
         $properties = $this->tv->get('properties');
         if (!is_array($properties)) $properties = array();
