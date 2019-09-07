@@ -121,12 +121,7 @@ class modTemplateVarDuplicateProcessor extends modElementDuplicateProcessor {
      */
     public function getNewCaption()
     {
-        $caption = $this->getProperty($this->captionField);
-        $newCaption = !empty($caption)
-            ? $caption
-            : $this->modx->lexicon('duplicate_of', array('name' => $this->object->get($this->captionField)));
-
-        return $newCaption;
+        return $this->getProperty($this->captionField);
     }
 
     /**
