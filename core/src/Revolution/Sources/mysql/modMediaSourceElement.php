@@ -1,6 +1,7 @@
 <?php
 namespace MODX\Revolution\Sources\mysql;
 
+use MODX\Revolution\modTemplateVar;
 use xPDO\xPDO;
 
 class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceElement
@@ -11,16 +12,16 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
         'version' => '3.0',
         'table' => 'media_sources_elements',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'source' => 0,
-            'object_class' => 'modTemplateVar',
+            'object_class' => 'MODX\\Revolution\\modTemplateVar',
             'object' => 0,
             'context_key' => 'web',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'source' => 
+            'source' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -30,16 +31,16 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'object_class' => 
+            'object_class' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => 'modTemplateVar',
+                'default' => 'MODX\\Revolution\\modTemplateVar',
                 'index' => 'pk',
             ),
-            'object' => 
+            'object' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -49,7 +50,7 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -59,35 +60,35 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 'index' => 'pk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'source' => 
+                    'source' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'object' => 
+                    'object' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'object_class' => 
+                    'object_class' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -96,9 +97,9 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Source' => 
+            'Source' =>
             array (
                 'class' => 'MODX\\Revolution\\Sources\\modMediaSource',
                 'local' => 'source',
@@ -106,7 +107,7 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Element' => 
+            'Element' =>
             array (
                 'class' => 'MODX\\Revolution\\modElement',
                 'local' => 'object',
@@ -114,7 +115,7 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'context_key',

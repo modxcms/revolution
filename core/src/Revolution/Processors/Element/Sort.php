@@ -110,7 +110,7 @@ class Sort extends modProcessor
 
                 $className = 'mod' . ucfirst($elKey[1]);
                 if ($className == 'modTv') {
-                    $className = 'modTemplateVar';
+                    $className = modTemplateVar::class;
                 }
 
                 /** @var modElement $element */

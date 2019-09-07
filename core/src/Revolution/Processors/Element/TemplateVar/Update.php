@@ -212,7 +212,7 @@ class Update extends \MODX\Revolution\Processors\Element\Update
             if (is_array($sources)) {
                 $sourceElements = $this->modx->getCollection(modMediaSourceElement::class, [
                     'object' => $this->object->get('id'),
-                    'object_class' => 'modTemplateVar',
+                    'object_class' => modTemplateVar::class,
                 ]);
                 /** @var modMediaSourceElement $sourceElement */
                 foreach ($sourceElements as $sourceElement) {

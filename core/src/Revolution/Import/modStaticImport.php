@@ -19,6 +19,7 @@ use MODX\Revolution\modContentType;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modDocument;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modTemplateVar;
 use PDO;
 
 /**
@@ -369,7 +370,7 @@ class modStaticImport extends modImport
                 }
 
             } else {
-                $tv = $this->modx->getObject('modTemplateVar', ['name' => $field]);
+                $tv = $this->modx->getObject(modTemplateVar::class, ['name' => $field]);
                 if ($tv) {
                     $tvs[$field] = $this->getFieldValue($selector, $body, $xpath);
                 }

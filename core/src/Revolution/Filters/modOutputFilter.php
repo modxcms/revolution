@@ -14,6 +14,7 @@ namespace MODX\Revolution\Filters;
 use Exception;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modTag;
+use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modX;
 
@@ -710,7 +711,7 @@ class modOutputFilter
                             if (!empty($m_val) && strpos($name, $m_val) === 0) {
                                 $name = substr($name, strlen($m_val));
                             }
-                            $tv = $this->modx->getObject('modTemplateVar', ['name' => $name]);
+                            $tv = $this->modx->getObject(modTemplateVar::class, ['name' => $name]);
                             if (!$tv) {
                                 break;
                             }

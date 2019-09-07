@@ -167,12 +167,12 @@ class modTemplate extends modElement
     public function & getMany($alias, $criteria = null, $cacheFlag = true)
     {
         if (($alias === 'TemplateVars' || $alias === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
-            $c = $this->xpdo->newQuery('modTemplateVar');
+            $c = $this->xpdo->newQuery(modTemplateVar::class);
             $c->query['distinct'] = 'DISTINCT';
-            $c->select($this->xpdo->getSelectColumns('modTemplateVar'));
+            $c->select($this->xpdo->getSelectColumns(modTemplateVar::class));
             $c->select($this->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', ['rank']));
             $c->select([
-                'value' => $this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar', '', ['default_text']),
+                'value' => $this->xpdo->getSelectColumns(modTemplateVar::class, 'modTemplateVar', '', ['default_text']),
             ]);
             $c->innerJoin('modTemplateVarTemplate', 'tvtpl', [
                 'tvtpl.tmplvarid = modTemplateVar.id',
@@ -180,7 +180,7 @@ class modTemplate extends modElement
             ]);
             $c->sortby('tvtpl.rank,modTemplateVar.rank');
 
-            $collection = $this->xpdo->getCollection('modTemplateVar', $c, $cacheFlag);
+            $collection = $this->xpdo->getCollection(modTemplateVar::class, $c, $cacheFlag);
         } else {
             $collection = parent:: getMany($alias, $criteria, $cacheFlag);
         }
@@ -197,7 +197,7 @@ class modTemplate extends modElement
      */
     public function getTemplateVars()
     {
-        $c = $this->xpdo->newQuery('modTemplateVar');
+        $c = $this->xpdo->newQuery(modTemplateVar::class);
         $c->innerJoin('modTemplateVarTemplate', 'TemplateVarTemplates');
         $c->where([
             'TemplateVarTemplates.templateid' => $this->get('id'),
@@ -234,7 +234,7 @@ class modTemplate extends modElement
     public function hasTemplateVar($tvPk)
     {
         if (!is_int($tvPk) && !is_object($tvPk)) {
-            $tv = $this->xpdo->getObject('modTemplateVar', ['name' => $tvPk]);
+            $tv = $this->xpdo->getObject(modTemplateVar::class, ['name' => $tvPk]);
             if (empty($tv) || !is_object($tv) || !($tv instanceof modTemplateVar)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, 'modTemplate::hasTemplateVar - No TV: ' . $tvPk);
 
