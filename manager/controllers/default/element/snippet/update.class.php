@@ -77,6 +77,10 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         if ($this->snippet == null) return $this->failure($this->modx->lexicon('snippet_err_nf'));
         if (!$this->snippet->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
+        if ($this->snippet->get('locked') && !$this->modx->hasPermission('edit_locked')) {
+            return $this->failure($this->modx->lexicon('snippet_err_locked'));
+        }
+
         /* get properties */
         $properties = $this->snippet->get('properties');
         if (!is_array($properties)) $properties = array();
