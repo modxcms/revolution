@@ -13,12 +13,19 @@ MODx.tree.SimpleResource = function(config) {
         ,root_name: _('resources')
         ,enableDrag: true
         ,enableDrop: true
-        ,action: 'resource/getNodes'
+        ,action: 'Resource/GetNodes'
         ,baseParams: {
             nohref: true
         }
     });
     MODx.tree.SimpleResource.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.tree.SimpleResource,MODx.tree.Tree);
-Ext.reg('modx-tree-resource-simple',MODx.tree.SimpleResource);
+Ext.extend(MODx.tree.SimpleResource, MODx.tree.Tree, {
+    /**
+     * Renders the item text without any special formatting. The Resource/GetNodes processor already protects against XSS.
+     */
+    renderItemText: function(item) {
+        return item.text;
+    }
+});
+Ext.reg('modx-tree-resource-simple', MODx.tree.SimpleResource);

@@ -3,10 +3,10 @@ $colorSplash: #234368;
 $colorSplashLight: lighten($colorSplash, 50%);
 $colorSplashMedium: lighten($colorSplash, 75%);
 $colorSplashDark: darken($colorSplash, 20%);
-$colorSplashDesaturated: lighten(desaturate($colorSplash,100%), 20%); /* unused */
 $colorSplashContrast: #FFFFFF; /* needs much more adaption, should be used as text color for elements with $colorSplash background */
-$primary1: #32AB9A;
-$primary2: #00948E;
+$silver: #CCCCCC;
+$gallery: #EEEEEE;
+$wildSand: #F4F4F4;
 $lightestGray: #FBFBFB;
 $lighterGray: #F0F0F0;
 $lightGray: #E4E4E4;
@@ -14,11 +14,20 @@ $softGray: #DCDCDC;
 $mediumGray: #999999;
 $darkGray: #515151;
 $darkestGray: #53595F; /* a blueish dark gray */
+$osloGray: #868B8F;
+$doveGray: #686868;  ;
+$alabastersolid: #FAFAFA;
+$tundora: #444444;
+$scorpion: #606060;
+$mineShaft: #343434;
+$alto: #DFDFDF;
 $white: #FFF;
 $black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash */
+$darkBlack: #000;
 $lighterRed: #FFEEEE;
 $green: #6CB24A;
 $greener: darken($green, 12%);
+$lightGreen: lighten($green, 50%);
 $lighterGreen: #EFFCF6;
 $yellow: #FCE588;
 $orange: #F0B429;
@@ -155,9 +164,6 @@ $treeDivider: #404040;
 
 $navbarWidth: 80px;
 /* Top navigation colors */
-$navbarBg: $lighterGray; /* unused */
-$navbarHover: $softGray; /* unused */
-$navbarDrop: $navbarBg; /* unused */
 $navbarText: $white;
 $navbarBorder: rgba(255, 255, 255, .1);
 $subnavBg: $white;
@@ -193,15 +199,13 @@ $winFooterBg: $white;
 $winFooterBorderColor: $white;
 
 /* Font stacks */
-$bodyfonts: 'Helvetica Neue', Helvetica, Arial, Tahoma, sans-serif;
+$bodyfonts: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 $bodyFontSize: 13px;
-$altfonts: titilliumregular, $bodyfonts; /* unused */
-$altfontslight: titilliumlight, $bodyfonts; /* unused */
 $headfonts: $bodyfonts;
-$codefonts: "Courier New", Courier, monospace;
+$codefonts: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $tabFont: 14px $bodyfonts;
 $buttonfonts: $bodyfonts;
-$treePseudoRootFont: bold 14px/3 $headfonts;
+$treePseudoRootFont: 500 14px/3 $headfonts;
 $treeNodeFont: normal 14px/2.25 $bodyfonts;
 $baseText:   normal 13px/1.4 $bodyfonts;
 $baseTextHeight: 13px * 1.4;
@@ -213,17 +217,17 @@ $fontH2:     normal 25px $headfonts;
 $fontH3:     bold 15px $headfonts;
 
 /* Responsive breakpoints */
-$mobile:  (media: 'max-width 640px',  columns: 4);
-$tabletP: (media: 'max-width 768px',  columns: 12);
-$desktop: (media: 'max-width 960px',  columns: 12);
-$tabletL: (media: 'max-width 1024px', columns: 12);
-$cinema:  (media: 'max-width 1400px', columns: 12);
+$mobile:  (media: "screen and (max-width: 640px)", columns: 4);
+$tabletP: (media: "screen and (max-width: 768px)", columns: 12);
+$desktop: (media: "screen and (max-width: 960px)", columns: 12);
+$tabletL: (media: "screen and (max-width: 1024px)", columns: 12);
+$cinema:  (media: "screen and (max-width: 1400px)", columns: 12);
 
-$gtMobile:  (media: 'min-width 641px',  columns: 12);
-$gtTabletP: (media: 'min-width 769px',  columns: 12);
-$gtTabletL: (media: 'min-width 1025px', columns: 12);
-$gtDesktop: (media: 'min-width 961px',  columns: 12);
-$gtCinema:  (media: 'min-width 1401px', columns: 12);
+$gtMobile:  (media: "screen and (min-width: 641px)", columns: 12);
+$gtTabletP: (media: "screen and (min-width: 769px)", columns: 12);
+$gtDesktop: (media: "screen and (min-width: 961px)", columns: 12);
+$gtTabletL: (media: "screen and (min-width: 1025px)", columns: 12);
+$gtCinema:  (media: "screen and (min-width: 1401px)", columns: 12);
 
 /* Path for background-images */
 $imgPath: '../images/';

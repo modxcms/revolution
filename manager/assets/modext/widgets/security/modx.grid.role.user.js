@@ -15,7 +15,7 @@ MODx.grid.RoleUser = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['id','username','fullname','email']
         ,baseParams: {
-            action: 'security/role/getUsers'
+            action: 'Security/Role/GetUsers'
             ,role: config.role
         }
         ,autosave: true
@@ -41,7 +41,7 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
             ,text: _('role_user_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'security/role/removeUser'
+                action: 'Security/Role/RemoveUser'
                 ,user: this.menu.record.id
                 ,role: this.config.role
             }
@@ -65,7 +65,7 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
             ,listeners: {
                 'success': {fn:function(r) {
                     this.getStore().baseParams = {
-                        action: 'security/role/getUsers'
+                        action: 'Security/Role/GetUsers'
                         ,role: this.config.role
                     };
                     Ext.getCmp('rugrid-combo-usergroup').setValue('');
@@ -108,7 +108,7 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
                 ,listeners: {
                     'select': {fn:function(btn,e) {
                         this.store.baseParams = {
-                            action: 'security/role/getUsers'
+                            action: 'Security/Role/GetUsers'
                             ,role: this.config.role
                             ,group: Ext.getCmp('rugrid-combo-usergroup').getValue()
                         };
@@ -121,7 +121,7 @@ Ext.extend(MODx.grid.RoleUser,MODx.grid.Grid,{
 				,scope: this
 				,handler: function(btn,e) {
 					this.getStore().baseParams = { 
-						action: 'security/role/getUsers'
+						action: 'Security/Role/GetUsers'
 						,role: this.config.role
 					};
                     Ext.getCmp('rugrid-combo-usergroup').setValue('');

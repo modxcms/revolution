@@ -12,11 +12,11 @@ MODx.panel.Chunk = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/chunk/get'
+            action: 'Element/Chunk/Get'
         }
         ,id: 'modx-panel-chunk'
 		,cls: 'container form-with-labels'
-        ,class_key: 'modChunk'
+        ,class_key: 'MODX\\Revolution\\modChunk'
         ,chunk: ''
         ,bodyStyle: ''
         ,items: [{
@@ -71,7 +71,7 @@ MODx.panel.Chunk = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('chunk')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/chunk/create' && MODx.perm.tree_show_element_ids === 1) {
+                                if (MODx.request.a !== 'Element/Chunk/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title += ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -208,7 +208,7 @@ MODx.panel.Chunk = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -248,7 +248,7 @@ MODx.panel.Chunk = function(config) {
             xtype: 'modx-panel-element-properties'
             ,elementPanel: 'modx-panel-chunk'
             ,elementId: config.chunk
-            ,elementType: 'modChunk'
+            ,elementType: 'MODX\\Revolution\\modChunk'
             ,record: config.record
         }],{
             id: 'modx-chunk-tabs'
@@ -258,6 +258,12 @@ MODx.panel.Chunk = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(['modx-chunk-form'], 'modx-chunk-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Chunk.superclass.constructor.call(this,config);

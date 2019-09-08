@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Espace de noms';
-$_lang['namespace_create'] = 'Créer un espace de noms ';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'Une erreur s\'est produite en essayant de créer l\'espace de noms.';
 $_lang['namespace_err_nf'] = 'Espace de noms introuvable.';
 $_lang['namespace_err_nfs'] = 'Espace de noms: %s, introuvable';

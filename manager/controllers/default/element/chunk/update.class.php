@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modChunk;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load update chunk page
  *
@@ -69,7 +73,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('chunk_err_ns'));
         }
-        $this->chunk = $this->modx->getObject('modChunk', array('id' => $scriptProperties['id']));
+        $this->chunk = $this->modx->getObject(modChunk::class, array('id' => $scriptProperties['id']));
         if (empty($this->chunk)) return $this->failure($this->modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
         if (!$this->chunk->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
@@ -153,7 +157,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
      */
     public function loadRte() {
         $o = '';
-        if ($this->modx->getOption('use_editor') == 1) {
+        if ($this->modx->getOption('use_editor') === 1) {
             $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
                 'elements' => array('post'),
                 'chunk' => &$this->chunk,

@@ -50,7 +50,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/user/get'
+                action: 'Security/User/Get'
                 ,id: this.config.user
                 ,getGroups: true
             }
@@ -98,14 +98,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
                     if (userId == 0) {
-                        MODx.loadPage('security/user/update', 'id='+o.result.object.id);
+                        MODx.loadPage('Security/User/Update', 'id='+o.result.object.id);
                     }
                     return false;
                 }
             });
             this.clearDirty();
         } else if (userId == 0) {
-            MODx.loadPage('security/user/update', 'id='+o.result.object.id);
+            MODx.loadPage('Security/User/Update', 'id='+o.result.object.id);
         }
     }
 
@@ -535,7 +535,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,name: 'dob'
                     ,fieldLabel: _('user_dob')
                     ,xtype: 'datefield'
-                    ,anchor: '100%'
+                    ,width: 200
                     ,allowBlank: true
                     ,format: MODx.config.manager_date_format
                 }
@@ -547,7 +547,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,hiddenName: 'gender'
                     ,fieldLabel: _('user_gender')
                     ,xtype: 'modx-combo-gender'
-                    ,anchor: '100%'
+                    ,width: 200
                 }
             }]
         },{

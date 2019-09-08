@@ -53,6 +53,9 @@
             <!--<directory>Tests/Processors/System</directory>
             <directory>Tests/Processors/Resource</directory>-->
         </testsuite>
+        <testsuite name="Transport">
+            <directory>Tests/Transport</directory>
+        </testsuite>
         <testsuite name="Cases">
             <directory>Tests/Cases/Modx/</directory>
             <directory>Tests/Cases/Request/</directory>
@@ -63,7 +66,7 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">./../../core/model/modx/</directory>
+            <directory suffix=".php">./../../core/src/</directory>
         </whitelist>
     </filter>
 </phpunit>

@@ -9,6 +9,10 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Error;
+
+
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modErrorHandler class.

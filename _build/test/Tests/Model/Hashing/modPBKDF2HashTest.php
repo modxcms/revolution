@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Hashing;
+
+
+use MODX\Revolution\Hashing\modPBKDF2;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modPBKDF2 class, a derivative of modHash.

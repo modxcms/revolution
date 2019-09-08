@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Lisa Context';
-$_lang['context_create'] = 'Loo Context';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Context-i Andmed';
 $_lang['context_duplicate'] = 'Dubleeri Context-i';
 $_lang['context_err_ae'] = 'Context selle nimega juba eksisteerib.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Värskenda Context-i';
 $_lang['context_remove'] = 'Eemalda Context';
 $_lang['context_remove_confirm'] = 'Oled kindel, et soovid eemaldada selle Context-i? See on püsiv ja tühistamatu.';
 $_lang['context_settings'] = 'Context-i Seaded';
-$_lang['context_settings_desc'] = 'Siit saab muuta selle Context-i seaded. Context-i seaded kirjutavad üle kõik Süsteemi Seaded, mis on sama võtmega.';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_update'] = 'Uuenda Context-i';
 $_lang['context_with_key_not_found'] = 'Context-i võtmega %s ei leitud!';
 $_lang['contexts'] = 'Contexts';

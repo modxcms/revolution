@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Kontekst';
 $_lang['context_add'] = 'Tilføj kontekst';
-$_lang['context_create'] = 'Opret kontekst';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Kontekstdata';
 $_lang['context_duplicate'] = 'Kopier kontekst';
 $_lang['context_err_ae'] = 'Der findes allerede en kontekst med det navn.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Opdater kontekst';
 $_lang['context_remove'] = 'Slet kontekst';
 $_lang['context_remove_confirm'] = 'Er du sikker på at du vil fjerne denne kontekst? Det er permanent og uomgøreligt.';
 $_lang['context_settings'] = 'Kontekstindstillinger';
-$_lang['context_settings_desc'] = 'Her kan du angive indstillinger for denne kontekst. Kontekstindstillinger vil tilsidesætte systemindstillinger med samme nøgle.';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_update'] = 'Opdater kontekst';
 $_lang['context_with_key_not_found'] = 'Konteksten med nøglen %s blev ikke fundet!';
 $_lang['contexts'] = 'Kontekster';

@@ -35,7 +35,7 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
     ,createAcl: function(itm,e) {
         var r = {
             target: this.config.source
-            ,principal_class: 'modUserGroup'
+            ,principal_class: 'MODX\\Revolution\\modUserGroup'
         };
         if (!this.windows.access_add) {
             this.windows.access_add = MODx.load({
@@ -93,7 +93,7 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
             ,text: _('source_access_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/access/removeAcl'
+                action: 'Security/Access/RemoveAcl'
                 ,id: this.menu.record.id
                 ,type: this.config.type || 'modAccessMediaSource'
             }
@@ -146,7 +146,7 @@ MODx.window.CreateSourceAccess = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'hidden'
             ,name: 'context_key'
@@ -159,7 +159,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,hiddenName: 'principal'
             ,value: r.principal || ''
             ,baseParams: {
-                action: 'security/group/getList'
+                action: 'Security/Group/GetList'
                 ,combo: '1'
             }
             ,anchor: '100%'
@@ -177,7 +177,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,hiddenName: 'policy'
             ,value: r.policy || ''
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'MediaSource'
             }
             ,anchor: '100%'

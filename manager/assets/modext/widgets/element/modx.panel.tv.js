@@ -14,7 +14,7 @@ MODx.panel.TV = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/tv/get'
+            action: 'Element/TemplateVar/Get'
         }
         ,id: 'modx-panel-tv'
 		,cls: 'container form-with-labels'
@@ -75,7 +75,7 @@ MODx.panel.TV = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('tv')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/tv/create' && MODx.perm.tree_show_element_ids === 1) {
+                                if (MODx.request.a !== 'Element/TemplateVar/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -222,7 +222,7 @@ MODx.panel.TV = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -346,6 +346,12 @@ MODx.panel.TV = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(['modx-tv-form'], 'modx-tv-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.TV.superclass.constructor.call(this,config);
@@ -431,7 +437,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             t.refreshNode(u,true);
         }
     }
-
     ,changeEditor: function() {
         this.cleanupEditor();
         this.submit();
@@ -563,7 +568,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'element/tv/renders/getInputProperties'
+                   'action': 'Element/TemplateVar/Renders/GetInputProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'
@@ -632,7 +637,7 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'element/tv/renders/getProperties'
+                   'action': 'Element/TemplateVar/Renders/GetProperties'
                    ,'context': 'mgr'
                    ,'tv': this.config.record.id
                    ,'type': cb.getValue() || 'default'

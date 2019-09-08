@@ -101,7 +101,7 @@ MODx.panel.UpdateProfile = function(config) {
         ,id: 'modx-panel-profile-update'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/profile/update'
+            action: 'Security/Profile/Update'
             ,id: config.user
         }
         ,layout: 'column'
@@ -194,7 +194,7 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'security/profile/get'
+                action: 'Security/Profile/Get'
                 ,id: this.config.user
             }
             ,listeners: {
@@ -211,6 +211,42 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
             ,name: 'address'
             ,fieldLabel: _('address')
             ,xtype: 'textarea'
+        }]
+    }
+});
+Ext.reg('modx-panel-profile-update',MODx.panel.UpdateProfile);
+
+/**
+ * A panel for changing the user password
+ *
+ * @class MODx.panel.ChangeProfilePassword
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of config properties
+ * @xtype modx-panel-profile-password-change
+ */
+MODx.panel.ChangeProfilePassword = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        title: _('reset_password')
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'Security/Profile/ChangePassword'
+            ,id: config.user
+        }
+        // ,frame: true
+        ,layout: 'form'
+        ,buttonAlign: 'right'
+        ,labelAlign: 'top'
+        ,cls: 'container form-with-labels'
+        // ,cls: 'main-wrapper'
+        ,defaults: { border: false ,msgTarget: 'under' }
+        ,labelWidth: 150
+        ,items: [{
+            xtype: 'textfield'
+            ,fieldLabel: _('password_old')
+            ,name: 'password_old'
+            ,inputType: 'password'
+            ,maxLength: 255
             ,anchor: '100%'
             ,grow: true
         }, {
@@ -239,63 +275,63 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
             ,name: 'country'
             ,value: ''
             ,anchor: '100%'
-        }];
+        }]
+    });
 
-        if (MODx.perm.change_password) {
-            items.push({
-                id: 'modx-user-newpassword'
-                ,name: 'newpassword'
-                ,xtype: 'hidden'
-                ,value: false
-            }, {
-                id: 'modx-user-fs-newpassword'
-                ,title: _('password_new')
-                ,xtype: 'fieldset'
-                ,cls: 'x-fieldset-checkbox-toggle' // add a custom class for checkbox replacement
-                ,checkboxToggle: true
-                ,collapsed: (config.user ? true : false)
-                ,forceLayout: true
-                ,listeners: {
-                    'expand': {
-                        fn: function (p) {
-                            Ext.getCmp('modx-user-newpassword').setValue(true);
-                            this.markDirty();
-                        }, scope: this
-                    }
-                    ,'collapse': {
-                        fn: function (p) {
-                            Ext.getCmp('modx-user-newpassword').setValue(false);
-                            this.markDirty();
-                        }, scope: this
-                    }
+    if (MODx.perm.change_password) {
+        items.push({
+            id: 'modx-user-newpassword'
+            ,name: 'newpassword'
+            ,xtype: 'hidden'
+            ,value: false
+        }, {
+            id: 'modx-user-fs-newpassword'
+            ,title: _('password_new')
+            ,xtype: 'fieldset'
+            ,cls: 'x-fieldset-checkbox-toggle' // add a custom class for checkbox replacement
+            ,checkboxToggle: true
+            ,collapsed: (config.user ? true : false)
+            ,forceLayout: true
+            ,listeners: {
+                'expand': {
+                    fn: function (p) {
+                        Ext.getCmp('modx-user-newpassword').setValue(true);
+                        this.markDirty();
+                    }, scope: this
                 }
-                ,items: [{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('password_old')
-                    ,name: 'password_old'
-                    ,inputType: 'password'
-                    ,maxLength: 255
-                    ,anchor: '100%'
-                }, {
-                    xtype: 'textfield'
-                    ,fieldLabel: _('change_password_new')
-                    ,name: 'password_new'
-                    ,inputType: 'password'
-                    ,maxLength: 255
-                    ,anchor: '100%'
-                }, {
-                    xtype: 'textfield'
-                    ,fieldLabel: _('change_password_confirm')
-                    ,name: 'password_confirm'
-                    ,id: 'modx-password-confirm'
-                    ,inputType: 'password'
-                    ,maxLength: 255
-                    ,anchor: '100%'
-                }]
-            });
-        }
-
-        return items;
+                ,'collapse': {
+                    fn: function (p) {
+                        Ext.getCmp('modx-user-newpassword').setValue(false);
+                        this.markDirty();
+                    }, scope: this
+                }
+            }
+            ,items: [{
+                xtype: 'textfield'
+                ,fieldLabel: _('password_old')
+                ,name: 'password_old'
+                ,inputType: 'password'
+                ,maxLength: 255
+                ,anchor: '100%'
+            }, {
+                xtype: 'textfield'
+                ,fieldLabel: _('change_password_new')
+                ,name: 'password_new'
+                ,inputType: 'password'
+                ,maxLength: 255
+                ,anchor: '100%'
+            }, {
+                xtype: 'textfield'
+                ,fieldLabel: _('change_password_confirm')
+                ,name: 'password_confirm'
+                ,id: 'modx-password-confirm'
+                ,inputType: 'password'
+                ,maxLength: 255
+                ,anchor: '100%'
+            }]
+        });
     }
-});
+
+    return items;
+};
 Ext.reg('modx-panel-profile-update',MODx.panel.UpdateProfile);

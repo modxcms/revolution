@@ -10,7 +10,7 @@ MODx.grid.UserGroupSource = function(config) {
         id: 'modx-grid-user-group-sources'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/source/getList'
+            action: 'Security/Access/UserGroup/Source/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -58,7 +58,7 @@ MODx.grid.UserGroupSource = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'MediaSource'
             }
             ,listeners: {
@@ -144,7 +144,7 @@ MODx.window.CreateUGSource = function(config) {
     Ext.applyIf(config,{
         title: _('source_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/source/create'
+        ,action: 'Security/Access/UserGroup/Source/Create'
         // ,height: 250
         // ,width: 500
         ,fields: [{
@@ -157,7 +157,7 @@ MODx.window.CreateUGSource = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'hidden'
             ,name: 'context_key'
@@ -198,7 +198,7 @@ MODx.window.CreateUGSource = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'MediaSource'
             }
             ,anchor: '100%'
@@ -261,7 +261,7 @@ MODx.window.UpdateUGSource = function(config) {
     this.ident = config.ident || 'updugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_source_update')
-        ,action: 'security/access/usergroup/source/update'
+        ,action: 'Security/Access/UserGroup/Source/Update'
     });
     MODx.window.UpdateUGSource.superclass.constructor.call(this,config);
 };

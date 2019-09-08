@@ -36,7 +36,7 @@ $_lang['namespace'] = 'ネームスペース';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'ネームスペースで絞り込み';
 $_lang['search_by_key'] = 'キーで検索';
-$_lang['setting_create'] = 'キーを新規作成';
+$_lang['setting_create'] = 'New Setting';
 $_lang['setting_err'] = 'このフィールドの存在を確認してください：';
 $_lang['setting_err_ae'] = 'そのキーの設定はすでに存在します。ほかのキー名を指定してください。';
 $_lang['setting_err_nf'] = '設定が見つかりませんでした。';
@@ -49,7 +49,7 @@ $_lang['setting_remove'] = '設定を削除';
 $_lang['setting_remove_confirm'] = '設定を削除しますか？（MODXのインストール設定が消失します）';
 $_lang['setting_update'] = '設定を編集';
 $_lang['settings_after_install'] = '<p><strong style="color:red;">新規インストール直後のため、各種設定を確認し保存する必要があります。設定を確認した後、データベースを更新するために「保存」ボタンをクリックしてください。</strong></p><p>※この設定はいつでも自由に変更できます。</p>';
-$_lang['settings_desc'] = 'システム全体の設定（管理画面の設定も含む）を管理します。値をダブルクリックして直接編集するか、右クリックメニューから詳細設定ダイアログを開いて編集します。「＋」マークをクリックすると項目の説明を表示します。<br />複数サイトを管理する場合は「コンテキスト」でサイトごとのシステム設定を定義してください。';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'フレンドリーURL';
 $_lang['settings_misc'] = 'ファイルマネージャ';
 $_lang['settings_site'] = 'サイト';
@@ -121,7 +121,7 @@ $_lang['setting_automatic_alias'] = 'エイリアスの自動付加';
 $_lang['setting_automatic_alias_desc'] = '「はい」を選択すると、保存時にシステムがリソースのページタイトルからエイリアスを生成します。';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'ヘルプの基準URL';
 $_lang['setting_base_help_url_desc'] = '管理画面右上に表示される、ヘルプへのリンクの基準となるURL。';
@@ -202,9 +202,6 @@ $_lang['setting_compress_js_desc'] = 'このオプションが有効の場合、
 $_lang['setting_compress_js_groups'] = 'JavaScript圧縮時にグループを使用';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. suhosin その他の制限要因がある場合に、有効にします。';
 
-$_lang['setting_compress_js_max_files'] = 'JavaScriptファイル圧縮時最大ファイル数の閾値';
-$_lang['setting_compress_js_max_files_desc'] = 'compress_js設定が有効の場合、MODXはここに設定した数のJavaScriptファイルを一度に圧縮しようとします。<br />管理画面のGoogle Minifyで問題が発生した場合、小さな値を指定してください。';
-
 $_lang['setting_concat_js'] = '連結したJavaScriptライブラリを使用';
 $_lang['setting_concat_js_desc'] = '有効の場合、管理画面インターフェースでは、一般的なJavaScriptライブラリを連結して使用します。これにより、管理画面のロードと実行時間が短縮されます。<br />無効にするのは、コア要素の変更時のみにしてください。';
 
@@ -258,10 +255,6 @@ $_lang['setting_emailsender'] = '送信者メールアドレス';
 $_lang['setting_emailsender_desc'] = ' ユーザー名とパスワード送信時の、送信元メールアドレスを指定してください。';
 $_lang['setting_emailsender_err'] = '送信者メールアドレスを指定してください。';
 
-$_lang['setting_emailsubject'] = 'メールのタイトル';
-$_lang['setting_emailsubject_desc'] = 'サインアップメールのタイトルを指定してください。';
-$_lang['setting_emailsubject_err'] = 'サインアップメールのタイトルを指定してください。';
-
 $_lang['setting_enable_dragdrop'] = 'リソース・エレメントツリーでのドラッグ移動';
 $_lang['setting_enable_dragdrop_desc'] = '「いいえ」を選択した場合、リソース・エレメントのツリーでは要素をドラッグして移動できなくなります。';
 
@@ -307,9 +300,6 @@ $_lang['setting_filemanager_url_desc'] = '非推奨です。代わりにメデ�
 
 $_lang['setting_filemanager_url_relative'] = '（非推奨）相対的なファイルマネージャーURL';
 $_lang['setting_filemanager_url_relative_desc'] = '非推奨です。代わりにメディアソースを使用してください。<br />filemanager_urlに相対URLを指定している場合、「はい」を指定してください。filemanager_urlがメインのウェブルート外を指す場合、「いいえ」を指定してください。';
-
-$_lang['setting_forgot_login_email'] = 'ログイン情報送信メール';
-$_lang['setting_forgot_login_email_desc'] = 'ユーザーが自分のMODXアカウントまたはパスワードを忘れた場合に送信される、Eメールのテンプレート。';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets.<br />Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
@@ -370,7 +360,7 @@ $_lang['setting_inline_help'] = 'フィールドにインラインのヘルプ�
 $_lang['setting_inline_help_desc'] = '「はい」の場合、フィールドの下に直接ヘルプが表示されます。「いいえ」の場合、全てのフィールドのヘルプはツールチップベースになります。';
 
 $_lang['setting_link_tag_scheme'] = 'URL生成スキーム';
-$_lang['setting_link_tag_scheme_desc'] = '[[~id]]タグからURLを生成する際のスキームを指定。利用可能なオプションは<a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl（）">このページのmakeUrl（） の解説</a>を参照してください。';
+$_lang['setting_link_tag_scheme_desc'] = '[[~id]]タグからURLを生成する際のスキームを指定。利用可能なオプションは<a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl（）">このページのmakeUrl（） の解説</a>を参照してください。';
 
 $_lang['setting_locale'] = 'ロケール';
 $_lang['setting_locale_desc'] = 'システムロケールを設定します。空白の場合、システムのデフォルトが使用されます。詳細については <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> を参照してください。';
@@ -444,23 +434,30 @@ $_lang['setting_manager_js_cache_max_age'] = '管理画面のJS/CSS圧縮 キャ
 $_lang['setting_manager_js_cache_max_age_desc'] = '管理画面のJavaScriptとCSSを圧縮したキャッシュの、ブラウザでの保持時間を秒で指定します。指定時間を経過すると、ブラウザは異なるGETリクエストを送信します。トラフィックを抑えるため、長い時間が指定されます。';
 $_lang['setting_manager_js_document_root'] = '管理画面のJS/CSS圧縮 Document Root';
 $_lang['setting_manager_js_document_root_desc'] = 'サーバーがDOCUMENT_ROOTサーバー変数を提供しない場合、管理画面のJS/CSS圧縮に必要な指定を行います。<br />必ず影響をよく理解した上で変更してください。';
-$_lang['setting_manager_js_zlib_output_compression'] = '管理画面のJS/CSS圧縮 zlibの使用';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = '管理画面でのJS/CSS圧縮に、zlibの出力を使用するかを指定します。<br />PHPの設定で zlib.output_compression を 1 に確実に設定できない限り、この設定を有効にしないでください。「いいえ」を推奨します。';
-
-$_lang['setting_manager_lang_attribute'] = '管理画面の言語コード（HTMLとXML）';
-$_lang['setting_manager_lang_attribute_desc'] = '管理画面に選択した言語設定に合う言語コードを指定してください。<br />これにより、ブラウザが最適なコンテンツを提示します。';
-
-$_lang['setting_manager_language'] = '管理画面の言語';
-$_lang['setting_manager_language_desc'] = '管理画面の使用言語を選択してください';
 
 $_lang['setting_manager_login_url_alternate'] = '管理画面の代替URL';
 $_lang['setting_manager_login_url_alternate_desc'] = '管理画面へのアクセスを要求するユーザーに提示する、ログイン用URL。<br />管理画面にアクセスできるよう、"mgr"コンテキストへユーザーをログインする必要があります。';
+
+$_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
+$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
+
+$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
+
+$_lang['setting_login_help_button'] = 'Show Help Button';
+$_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'スタートページ';
 $_lang['setting_manager_login_start_desc'] = 'トップページとして使用するドキュメントのIDを入力してください。<br /><strong>注意: 既に存在するドキュメントのIDを入力してください。ドキュメントは公開されている必要があります</strong>';
 
 $_lang['setting_manager_theme'] = '管理画面のテーマ';
 $_lang['setting_manager_theme_desc'] = '管理画面で使用するデザインテーマを選択してください。';
+
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = '管理画面の時刻フォーマット';
 $_lang['setting_manager_time_format_desc'] = '管理画面内で用いる時刻の書式。PHPのdate関数のフォーマットを用いて指定します。';
@@ -694,7 +691,7 @@ $_lang['setting_show_tv_categories_header_desc'] = '「はい」を選択する�
 
 $_lang['setting_signupemail_message'] = 'サインアップメール';
 $_lang['setting_signupemail_message_desc'] = 'ユーザ管理画面でユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。<br /><strong>参考:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br /><br />[[+sname]] - サイトの名前,<br />[[+saddr]] - サイト管理者のメールアドレス,<br />[[+surl]] - サイトのURL,<br />[[+uid]] - ユーザーのログイン名,<br />[[+pwd]] - ユーザーのパスワード,<br />[[+ufn]] - ユーザーのフルネーム.<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
-$_lang['setting_signupemail_message_default'] = 'こんにちは[[+uid]]さん。 \\n\\n[[+sname]]の管理画面のログイン情報をお送りします。\\n\\nユーザ名: [[+uid]]\\nパスワード: [[+pwd]]\\n\\nOnce you log into the Content Manager （[[+surl]]）, you can change your password.\\n\\nRegards,\\nSite Administrator';
+$_lang['setting_signupemail_message_default'] = 'こんにちは[[+uid]]さん。 \n\n[[+sname]]の管理画面のログイン情報をお送りします。\n\nユーザ名: [[+uid]]\nパスワード: [[+pwd]]\n\nOnce you log into the Content Manager （[[+surl]]）, you can change your password.\n\nRegards,\nSite Administrator';
 
 $_lang['setting_site_name'] = 'サイト名';
 $_lang['setting_site_name_desc'] = 'サイト名を入力してください。';
@@ -774,9 +771,6 @@ $_lang['setting_unauthorized_page_err'] = '権限外告知に利用するドキ�
 $_lang['setting_upload_files'] = 'アップロード可能なファイルタイプ';
 $_lang['setting_upload_files_desc'] = 'ファイルブラウザを使用して「assets/files/」にアップロードできるメディアファイルの拡張子をカンマで区切って入力してください。';
 
-$_lang['setting_upload_flash'] = 'アップロード可能なFlash';
-$_lang['setting_upload_flash_desc'] = 'ファイルブラウザを使用して「assets/flash/」にアップロードできるFlashファイルの拡張子をカンマで区切って入力してください。';
-
 $_lang['setting_upload_images'] = 'アップロード可能な画像タイプ';
 $_lang['setting_upload_images_desc'] = 'ファイルブラウザを使用して「assets/images/」にアップロードできる画像ファイルの拡張子をカンマで区切って入力してください。';
 
@@ -811,11 +805,7 @@ $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records
 
 $_lang['setting_webpwdreminder_message'] = 'パスワード変更リクエストメール';
 $_lang['setting_webpwdreminder_message_desc'] = 'ウェブユーザが、メールで新しいパスワードを要求する場合に、常に送信されるメッセージを入力します。コンテント管理はそれらの新しいパスワードと有効化情報を含むメールを送信します。<br /><strong>ノート:</strong>コンテント管理は、メッセージを送るときに以下のプレースホルダを置き換えます。<br /><br />[[+sname]] - ウェブサイト名、<br />[[+saddr]] - ウェブサイトのメールアドレス、<br />[[+surl]] - サイトのURL、<br />[[+uid]] - ユーザーのログイン名またはID、<br />[[+pwd]] - ユーザーのパスワード、<br />[[+ufn]] - ユーザーのフルネーム。<br /><br /><strong>[[+uid]] と [[+pwd]] は必ず記載してください。記載しない場合はユーザー名とパスワードはメールで送られないため、ユーザーはユーザー名とパスワードを知ることができません。</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さん\\n\\nパスワードを有効化するために、下記のリンクをクリックしてください。:\\n\\n[[+surl]]\\n\\n有効化が完了後、下記のパスワードでログインできます。:\\n\\nパスワード:[[+pwd]]\\n\\nこのメール内容に心当たりがない場合は、破棄してください。\\n\\n\\n管理者';
-
-$_lang['setting_websignupemail_message'] = 'ウェブサインアップのメールアドレス';
-$_lang['setting_websignupemail_message_desc'] = 'ユーザー自らがウェブユーザーアカウントを作成した時に、ユーザー名とパスワードを記載したメールを送信することができます。このメールの内容を設定してください。<br /><strong>注意:</strong> 下記の差し込み文字列は送信時に自動的に置き換えられます。<br /><br />[[+sname]] - サイトの名前,<br />[[+saddr]] - サイト管理者のメールアドレス,<br />[[+surl]] - サイトのURL,<br />[[+uid]] - ユーザーのログイン名,<br />[[+pwd]] - ユーザーのパスワード,<br />[[+ufn]] - ユーザーのフルネーム.<br /><br /><strong>メールの文章を編集するときは、[[+uid]]と[[+pwd]]を残すようにしてください。記述されてないとユーザー名とパスワードが分からないため、ユーザーはログインできません。</strong>';
-$_lang['setting_websignupemail_message_default'] = 'こんにちは [[+uid]]さん \\n\\n[[+sname]] の管理画面へのログイン情報をお送りします。:\\n\\nユーザー名: [[+uid]]\\nパスワード: [[+pwd]]\\n\\n[[+sname]]（ [[+surl]] ）の管理画面へログイン後、パスワードを変更できます。\\n\\n管理者';
+$_lang['setting_webpwdreminder_message_default'] = 'こんにちは [[+uid]]さん\n\nパスワードを有効化するために、下記のリンクをクリックしてください。:\n\n[[+surl]]\n\n有効化が完了後、下記のパスワードでログインできます。:\n\nパスワード:[[+pwd]]\n\nこのメール内容に心当たりがない場合は、破棄してください。\n\n\n管理者';
 
 $_lang['setting_welcome_screen'] = 'ようこそ画面の表示';
 $_lang['setting_welcome_screen_desc'] = '「はい」を選択すると、読み込み完了後ようこそ画面を表示します。そしてそれ以降は表示しません。';
@@ -858,3 +848,15 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
+
+$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
+
+$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';

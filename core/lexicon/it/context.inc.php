@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Contesto';
 $_lang['context_add'] = 'Aggiungi Contesto';
-$_lang['context_create'] = 'Crea Contesto';
+$_lang['context_create'] = 'Nuovo Contesto';
 $_lang['context_data'] = 'Dati Contesto';
 $_lang['context_duplicate'] = 'Duplica Contesto';
 $_lang['context_err_ae'] = 'Un Contesto con lo stesso nome esiste già.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Aggiorna Contesto';
 $_lang['context_remove'] = 'Rimuovi Contesto';
 $_lang['context_remove_confirm'] = 'Sei sicuro di voler rimuovere questo Contesto? Questa azione è permanente e irreversibile.';
 $_lang['context_settings'] = 'Settaggi Contesto';
-$_lang['context_settings_desc'] = 'Qui puoi impostare settaggi specifici per questo Contesto. I settaggi del Contesto  andranno a sovrascrivere i settaggi di sistema che hanno la stessa Chiave.';
+$_lang['context_settings_desc'] = 'Qui è possibile impostare le impostazioni specifiche per questo Contesto. Le impostazioni del contesto sostituiranno tutte le Impostazioni di Sistema con la stessa chiave. <b>Ogni impostazione sarà disponibile tramite il segnaposto [[++key]].</b>';
 $_lang['context_update'] = 'Aggiornamento Contesto';
 $_lang['context_with_key_not_found'] = 'Contesto con Chiave %s non trovato!';
 $_lang['contexts'] = 'Contesti';

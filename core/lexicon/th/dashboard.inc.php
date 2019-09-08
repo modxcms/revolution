@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'แอ็กชัน';
 $_lang['onlineusers_actionid'] = 'หมายเลขแอ็กชัน';
 $_lang['onlineusers_ipaddress'] = 'IP address ของผู้ใช้';
 $_lang['onlineusers_lasthit'] = 'ที่นิยมล่าสุด';
-$_lang['onlineusers_message'] = 'รายการนี้จะแสดงรายชื่อผู้ใช้ที่เข้าใช้บริการล่าสุดในช่วง 20 นาทีมานี้ (ตอนนี้เวลา [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'ผู้ใช้ที่ออนไลน์';
 $_lang['onlineusers_user'] = 'ผู้ใช้';
 $_lang['onlineusers_userid'] = 'หมายเลยผู้ใช้';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'สถานะ';
+$_lang['updates_action'] = 'แอ็กชัน';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'อัปเดต';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'ส่วนประกอบ';
+
 $_lang['quicklinks'] = 'Quicklinks';
 $_lang['security_notices'] = 'แจ้งเตือนเรื่องความปลอดภัย';
 $_lang['view_tree'] = 'ดูแผนผังรายการ';

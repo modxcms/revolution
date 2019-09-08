@@ -7,10 +7,12 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
+use MODX\Revolution\modAccessPolicyTemplateGroup;
+
 $templateGroups = array();
 
 /* administrator group templates */
-$templateGroups['1']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['1']= $xpdo->newObject(modAccessPolicyTemplateGroup::class);
 $templateGroups['1']->fromArray(array(
     'id' => 1,
     'name' => 'Admin',
@@ -18,7 +20,7 @@ $templateGroups['1']->fromArray(array(
 ));
 
 /* Object group templates */
-$templateGroups['2']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['2']= $xpdo->newObject(modAccessPolicyTemplateGroup::class);
 $templateGroups['2']->fromArray(array(
     'id' => 2,
     'name' => 'Object',
@@ -26,7 +28,7 @@ $templateGroups['2']->fromArray(array(
 ));
 
 /* Resource group templates */
-$templateGroups['3']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['3']= $xpdo->newObject(modAccessPolicyTemplateGroup::class);
 $templateGroups['3']->fromArray(array(
     'id' => 3,
     'name' => 'Resource',
@@ -34,7 +36,7 @@ $templateGroups['3']->fromArray(array(
 ));
 
 /* Element group templates */
-$templateGroups['4']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['4']= $xpdo->newObject(modAccessPolicyTemplateGroup::class);
 $templateGroups['4']->fromArray(array(
     'id' => 4,
     'name' => 'Element',
@@ -42,7 +44,7 @@ $templateGroups['4']->fromArray(array(
 ));
 
 /* Media Source group templates */
-$templateGroups['5']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['5']= $xpdo->newObject(modAccessPolicyTemplateGroup::class);
 $templateGroups['5']->fromArray(array(
     'id' => 5,
     'name' => 'MediaSource',
@@ -50,7 +52,7 @@ $templateGroups['5']->fromArray(array(
 ));
 
 /* Namespace group templates */
-$templateGroups['6']= $xpdo->newObject('modAccessPolicyTemplateGroup');
+$templateGroups['6']= $xpdo->newObject(modAccessPolicyTemplateGroup::class);
 $templateGroups['6']->fromArray(array(
     'id' => 6,
     'name' => 'Namespace',

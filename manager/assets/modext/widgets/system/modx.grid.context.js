@@ -13,12 +13,12 @@ MODx.grid.Context = function(config) {
         ,id: 'modx-grid-context'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'context/getlist'
+            action: 'Context/GetList'
         }
         ,fields: ['key','name','description','perm', 'rank']
         ,paging: true
         ,autosave: true
-        ,save_action: 'context/updatefromgrid'
+        ,save_action: 'Context/UpdateFromGrid'
         ,remoteSort: true
         ,primaryKey: 'key'
         ,columns: [{
@@ -84,7 +84,7 @@ MODx.grid.Context = function(config) {
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     updateContext: function(itm,e) {
-        MODx.loadPage('context/update', 'key='+this.menu.record.key);
+        MODx.loadPage('Context/Update', 'key='+this.menu.record.key);
     }
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
@@ -144,7 +144,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'context/getList'
+            action: 'Context/GetList'
     	};
         Ext.getCmp('modx-ctx-search').reset();
     	this.getBottomToolbar().changePage(1);
@@ -178,7 +178,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         	text		: _('context_remove_confirm'),
         	url			: this.config.url,
         	params		: {
-            	action		: 'context/remove',
+            	action		: 'Context/Remove',
             	key			: this.menu.record.key
             },
             listeners	: {
@@ -220,7 +220,7 @@ MODx.window.CreateContext = function(config) {
     Ext.applyIf(config,{
         title: _('context_create')
         ,url: MODx.config.connector_url
-        ,action: 'context/create'
+        ,action: 'Context/Create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('context_key')

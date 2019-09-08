@@ -9,10 +9,10 @@ MODx.panel.FCSet = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/forms/set/update'
+            action: 'Security/Forms/Set/Update'
         }
         ,id: 'modx-panel-fc-set'
-        ,class_key: 'modFormCustomizationSet'
+        ,class_key: 'MODX\\Revolution\\modFormCustomizationSet'
         ,cls: 'container'
         ,items: [{
             html: _('set_edit')
@@ -64,7 +64,7 @@ MODx.panel.FCSet = function(config) {
                     ,lazyInit: false
                     ,lazyRender: false
                     ,baseParams: {
-                        action: 'element/template/getList'
+                        action: 'Element/Template/GetList'
                         ,combo: true
                     }
                     ,listeners: {
@@ -83,7 +83,7 @@ MODx.panel.FCSet = function(config) {
                     xtype: 'hidden'
                     ,fieldLabel: _('constraint_class')
                     ,name: 'constraint_class'
-                    ,value: 'modResource'
+                    ,value: 'MODX\\Revolution\\modResource'
                     ,anchor: '100%'
                     ,allowBlank: true
                 },{

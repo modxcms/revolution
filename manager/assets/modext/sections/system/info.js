@@ -12,6 +12,7 @@ MODx.page.SystemInfo = function(config) {
         components: [{
             xtype: 'modx-panel-system-info'
             ,data: config.data
+            ,version: config.version
         }]
     });
     MODx.page.SystemInfo.superclass.constructor.call(this,config);
@@ -21,7 +22,7 @@ Ext.reg('modx-page-system-info',MODx.page.SystemInfo);
 
 
 var viewPHPInfo = function() {
-    window.open(MODx.config.connector_url+'?action=system/phpinfo&HTTP_MODAUTH='+MODx.siteId);
+    window.open(MODx.config.connector_url+'?action=System/PhpInfo&HTTP_MODAUTH='+MODx.siteId);
 };
 
 MODx.panel.SystemInfo = function(config) {
@@ -56,11 +57,11 @@ MODx.panel.SystemInfo = function(config) {
     },{
         fieldLabel: _('smarty_version')
         ,name: 'smarty_version'
-        ,value: '3.1.27'
+        ,value: config.version.smarty
     },{
         fieldLabel: _('phpmailer_version')
         ,name: 'phpmailer_version'
-        ,value: '5.2.14'
+        ,value: config.version.PHPMailer
     },{
         fieldLabel: _('magpie_version')
         ,name: 'magpie_version'
@@ -183,7 +184,7 @@ Ext.extend(MODx.panel.SystemInfo,MODx.FormPanel,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'system/info'
+                action: 'System/Info'
             }
             ,listeners: {
                 'success': {

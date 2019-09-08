@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load create chunk page
  *
@@ -72,15 +75,17 @@ class ElementChunkCreateManagerController extends modManagerController {
 
     /**
      * Get the current category
-     *
      * @param array $scriptProperties
-     * @return void|modCategory
+     * @return \xPDO\Om\xPDOObject
      */
-    public function getCategory(array $scriptProperties = array()) {
+    public function getCategory(array $scriptProperties = [])
+    {
         /* grab default category if specified */
         if (isset($scriptProperties['category'])) {
-            $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
-        } else { $this->category = null; }
+            $this->category = $this->modx->getObject(modCategory::class, $scriptProperties['category']);
+        } else {
+            $this->category = null;
+        }
         return $this->category;
     }
 
@@ -88,13 +93,14 @@ class ElementChunkCreateManagerController extends modManagerController {
      * Invoke OnRichTextEditorInit event, loading the RTE
      * @return string
      */
-    public function loadRte() {
+    public function loadRte()
+    {
         $o = '';
-        if ($this->modx->getOption('use_editor') == 1) {
-            $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
-                'elements' => array('post'),
+        if ($this->modx->getOption('use_editor') === 1) {
+            $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit', [
+                'elements' => ['post'],
                 'mode' => modSystemEvent::MODE_NEW,
-            ));
+            ]);
             if (is_array($onRTEInit)) {
                 $onRTEInit = implode('', $onRTEInit);
             }

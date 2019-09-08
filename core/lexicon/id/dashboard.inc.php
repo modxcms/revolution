@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Aksi';
 $_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'Alamat IP pengguna';
 $_lang['onlineusers_lasthit'] = 'Hit terakhir';
-$_lang['onlineusers_message'] = 'Daftar ini menunjukkan semua pengguna aktif dalam jarak 20 menit terakhir (waktu saat ini adalah [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'Pengguna online';
 $_lang['onlineusers_user'] = 'Pengguna';
 $_lang['onlineusers_userid'] = 'ID pengguna';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Aksi';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'Update';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'Ekstra';
+
 $_lang['quicklinks'] = 'QuickLinks';
 $_lang['security_notices'] = 'Pemberitahuan keamanan';
 $_lang['view_tree'] = 'Lihat pohon';

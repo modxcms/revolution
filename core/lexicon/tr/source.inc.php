@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'Medya Kaynağının kısa bir açıklaması
 $_lang['source_duplicate'] = 'Medya Kaynağını kopyala';
 $_lang['source_err_ae_name'] = 'Bu isimde bir Medya Kaynağı zaten var. Lütfen yeni bir isim belirtin.';
 $_lang['source_err_nf'] = 'Medya Kaynağı bulunamadı!';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'Bu kimlikte bir Medya Kaynağı bulunamadı: [[+id]].';
 $_lang['source_err_ns'] = 'Lütfen bir Medya Kaynağı belirtin.';
 $_lang['source_err_ns_name'] = 'Medya Kaynağı için lütfen bir isim belirtin.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'Dosya sistemi';
 $_lang['source_type.file_desc'] = 'Sunucunuzun dosyalarında gezinen bir dosya sistemi tabanlı kaynak.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Bir Amazon S3 kovasını gezer.';
+$_lang['source_type.ftp'] = 'File Transfer Protocol';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'Kaynak Türleri';
 $_lang['source_types.intro_msg'] = 'Bu, bu MODX örneğinde sahip olduğunuz tüm yüklü Medya Kaynağı Türlerinin bir listesidir.';
 $_lang['source.access.intro_msg'] = 'Burada Medya Kaynağını belirli Kullanıcı Grupları ile sınırlandırabilir ve bu Kullanıcı Grupları için ilkeler uygulayabilirsiniz. Hiçbir kullanıcı grubu eklenmemiş bir medya kaynağı tüm yönetici kullanıcılar tarafından kullanılabilir.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = '0-100 arasında derecelendirilmiş halde, işlenmiş küçük resimlerin kalitesi.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'İşlenecek küçük resimlerin, resim türü.';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Kova';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'Virgüller ile ayrılmış bir liste. MODX, 
 $_lang['prop_s3.thumbnailQuality_desc'] = '0-100 arasında derecelendirilmiş halde, işlenmiş küçük resimlerin kalitesi.';
 $_lang['prop_s3.thumbnailType_desc'] = 'İşlenecek küçük resimlerin, resim türü.';
 $_lang['prop_s3.url_desc'] = 'Amazon S3 örneğinin URL\'si.';
-$_lang['s3_no_move_folder'] = 'S3 sürücüsü şu an için taşınan klasörleri desteklemiyor.';
 $_lang['prop_s3.region_desc'] = 'Kovanın bölgesi. Örnek: Abd-batı-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'S3 sürücüsü şu an için taşınan klasörleri desteklemiyor.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

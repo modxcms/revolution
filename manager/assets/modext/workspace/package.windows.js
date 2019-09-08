@@ -9,7 +9,7 @@ MODx.window.PackageUninstall = function(config) {
     Ext.applyIf(config,{
         title: _('package_uninstall')
         ,url: MODx.config.connector_url
-        ,action: 'workspace/packages/uninstall'
+        ,action: 'Workspace/Packages/Uninstall'
         // ,height: 400
         // ,width: 400
         ,id: 'modx-window-package-uninstall'
@@ -64,7 +64,7 @@ MODx.window.RemovePackage = function(config) {
         title: _('package_remove')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/packages/uninstall'
+            action: 'Workspace/Packages/Uninstall'
         }
         ,cls: 'modx-confirm'
         ,defaults: { border: false }
@@ -97,7 +97,7 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
         if (this.fp.getForm().isValid()) {
             Ext.getCmp('modx-package-grid').loadConsole(Ext.getBody(),r.topic);
             this.fp.getForm().baseParams = {
-                action: 'workspace/packages/remove'
+                action: 'Workspace/Packages/Remove'
                 ,signature: r.signature
                 ,register: 'mgr'
                 ,topic: r.topic
@@ -141,7 +141,7 @@ MODx.window.PurgePackages = function(config) {
         title: _('packages_purge')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'workspace/packages/purge'
+            action: 'Workspace/Packages/Purge'
         }
         ,cls: 'modx-confirm'
         ,defaults: { border: false }
@@ -163,7 +163,7 @@ Ext.extend(MODx.window.PurgePackages,MODx.Window,{
         if (this.fp.getForm().isValid()) {
             Ext.getCmp('modx-package-grid').loadConsole(Ext.getBody(),r.topic);
             this.fp.getForm().baseParams = {
-                action: 'workspace/packages/purge'
+                action: 'Workspace/Packages/Purge'
                 ,register: 'mgr'
                 ,topic: r.topic
             };
@@ -278,7 +278,7 @@ MODx.window.ChangeProvider = function(config) {
                 ,anchor: '100%'
 				,allowBlank: false
 				,baseParams: {
-                    action: 'workspace/providers/getList'
+                    action: 'Workspace/Providers/GetList'
                     ,showNone: false
                 }
 			}]
@@ -309,7 +309,7 @@ Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would cre
             if (tree.rendered) {
                 var loader = tree.getLoader();
                 loader.baseParams = {
-                    action: 'workspace/packages/rest/getNodes'
+                    action: 'Workspace/Packages/Rest/GetNodes'
                     ,provider: vs.provider
                 };
                 loader.load(tree.root);

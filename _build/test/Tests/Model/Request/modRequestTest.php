@@ -9,6 +9,14 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Request;
+
+
+use MODX\Revolution\Error\modError;
+use MODX\Revolution\modAction;
+use MODX\Revolution\modNamespace;
+use MODX\Revolution\modRequest;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modRequest class.
@@ -23,19 +31,16 @@ class modRequestTest extends MODxTestCase {
     /** @var modRequest $request */
     public $request;
 
-    /**
-     * @return void
-     */
     public function setUp() {
         parent::setUp();
         /** @var modNamespace $namespace */
-        $namespace = $this->modx->newObject('modNamespace');
+        $namespace = $this->modx->newObject(modNamespace::class);
         $namespace->set('name','unit-test');
         $namespace->set('path','{core_path}');
         $namespace->save();
 
         /** @var modAction $action */
-        $action = $this->modx->newObject('modAction');
+        $action = $this->modx->newObject(modAction::class);
         $action->fromArray(array(
             'namespace' => 'unit-test',
             'parent' => 0,
@@ -50,7 +55,6 @@ class modRequestTest extends MODxTestCase {
         $_GET['testGet'] = 2;
         $_COOKIE['testCookie'] = 3;
         $_REQUEST['testRequest'] = 4;
-        $this->modx->loadClass('modRequest',null,true,true);
         $this->request = new modRequest($this->modx);
     }
 
@@ -61,10 +65,10 @@ class modRequestTest extends MODxTestCase {
         parent::tearDown();
 
         /** @var modNamespace $namespace */
-        $namespace = $this->modx->getObject('modNamespace',array('name' => 'unit-test'));
+        $namespace = $this->modx->getObject(modNamespace::class,array('name' => 'unit-test'));
         if ($namespace) { $namespace->remove(); }
 
-        $actions = $this->modx->getCollection('modAction',array(
+        $actions = $this->modx->getCollection(modAction::class,array(
             'namespace' => 'unit-test',
         ));
         /** @var modAction $action */
@@ -163,7 +167,7 @@ class modRequestTest extends MODxTestCase {
      */
     public function testLoadErrorHandler() {
         $this->request->loadErrorHandler();
-        $this->assertInstanceOf('modError',$this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
+        $this->assertInstanceOf(modError::class, $this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
     }
 
     /**

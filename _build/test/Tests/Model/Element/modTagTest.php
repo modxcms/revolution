@@ -9,6 +9,10 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Element;
+
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\MODxTestHarness;
 
 /**
  * Tests related to the modTag class.
@@ -22,7 +26,6 @@
 class modTagTest extends MODxTestCase {
     public static function setUpBeforeClass() {
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
-        include dirname(__FILE__) . '/modtagelement.mock.php';
     }
 
     /**

@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Filters;
+
+
+use MODX\Revolution\modPlaceholderTag;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modOutputFilter class, including testing of core output filters.

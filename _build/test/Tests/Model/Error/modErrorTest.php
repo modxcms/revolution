@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Error;
+
+
+use MODX\Revolution\Error\modError;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modError class.
@@ -23,9 +28,6 @@ class modErrorTest extends MODxTestCase {
     /** @var modError $error */
     public $error;
 
-    /**
-     * Instantiate the modError instance for each test
-     */
     public function setUp() {
         parent::setUp();
         $this->error = $this->modx->getService('error','error.modError');

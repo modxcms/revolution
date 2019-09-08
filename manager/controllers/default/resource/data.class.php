@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modResource;
+
 require_once dirname(__FILE__) . '/resource.class.php';
 
 /**

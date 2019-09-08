@@ -321,7 +321,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
         Ext.applyIf(itm.params,o.baseParams);
         var url;
 
-        var process = itm.process.substr(itm.process.lastIndexOf('/') + 1);
+        var process = itm.process.substr(itm.process.lastIndexOf('/') + 1).toLowerCase();
         if ((process === 'create' || process === 'duplicate' || itm.reload) && res.object.id) {
             itm.params.id = res.object.id;
             if (MODx.request.parent) { itm.params.parent = MODx.request.parent; }
@@ -333,7 +333,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 action = o.actions.edit;
             } else {
                 // Else assume we want the 'update' controller
-                action = itm.process.replace('create', 'update');
+                action = itm.process.replace('create', 'update').replace('Create', 'Update');
             }
             MODx.loadPage(action, url);
 

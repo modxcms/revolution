@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\Transport\modTransportProvider;
+
 /**
  * Loads the workspace manager
  *
@@ -134,7 +137,7 @@ class WorkspacesManagerController extends modManagerController {
      */
     public function getDefaultProvider() {
         $default = $this->modx->getOption('default_provider');
-        $c = $this->modx->newQuery('transport.modTransportProvider');
+        $c = $this->modx->newQuery(modTransportProvider::class);
         if ($default) {
             $c->where(array(
                 'id' => $default,
@@ -146,7 +149,7 @@ class WorkspacesManagerController extends modManagerController {
             ));
         }
         /** @var modTransportProvider $provider */
-        $provider = $this->modx->getObject('transport.modTransportProvider',$c);
+        $provider = $this->modx->getObject(modTransportProvider::class, $c);
         if ($provider) {
             $this->providerId = $provider->get('id');
             $this->providerName = $provider->get('name');

@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'Popis zdroje médií.';
 $_lang['source_duplicate'] = 'Zkopírovat zdroj médií';
 $_lang['source_err_ae_name'] = 'Zdroj médií s tímto názvem již existuje! Zadejte jiný název.';
 $_lang['source_err_nf'] = 'Zdroj médií nenalezen!';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'Nebyl nalezen žádný zdroj médií s id: [[+id]].';
 $_lang['source_err_ns'] = 'Nevybrali jste zdroj médií.';
 $_lang['source_err_ns_name'] = 'Zadejte název zdroje médií.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'Souborový systém';
 $_lang['source_type.file_desc'] = 'Souborový systém na Vašem serveru.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Soubory v rámci služby Amazon S3.';
+$_lang['source_type.ftp'] = 'Protokol o přenosu souborů (FTP)';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'Typy zdrojů';
 $_lang['source_types.intro_msg'] = 'Seznam všech instalovaných typů zdrojů médií dostupných v této instanci MODX.';
 $_lang['source.access.intro_msg'] = 'Na tomto místě můžete omezit zdroj médií určitým uživatelským skupinám a aplikovat na ně přístupové právo. Zdroj médií bez omezení pro uživatelskou skupinu je dostupný všem uživatelům správce obsahu.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Kvalita vytvořených náhledů v měřítku 0 - 100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Typ obrázku, ve kterém budou vytvářeny náhledy.';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'Čárkou oddělený seznam. MODX vynechá a 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'Kvalita vytvořených náhledů v měřítku 0 - 100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'Typ obrázku, ve kterém budou vytvářeny náhledy.';
 $_lang['prop_s3.url_desc'] = 'URL instance Amazon S3.';
-$_lang['s3_no_move_folder'] = 'Ovladač Amazon S3 v tuto chvíli nepodporuje přesun složek.';
 $_lang['prop_s3.region_desc'] = 'Region S3 cloudu. Například: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'Ovladač Amazon S3 v tuto chvíli nepodporuje přesun složek.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

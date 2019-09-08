@@ -2,7 +2,7 @@ MODx.grid.SettingsGrid = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
-            '<p class="desc">{description_trans}</p>'
+            '<p class="desc">{description_trans:htmlEncode}</p>'
         )
     });
 
@@ -40,7 +40,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,emptyText: _('area_filter')
         ,value: MODx.request['area']
         ,baseParams: {
-            action: 'system/settings/getAreas'
+            action: 'System/Settings/GetAreas'
             ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         }
         ,width: 250
@@ -141,7 +141,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/settings/getList'
+            action: 'System/Settings/GetList'
             ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,area: MODx.request['area']
         }
@@ -154,7 +154,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,plugins: this.exp
         ,primaryKey: 'key'
         ,autosave: true
-        ,save_action: 'system/settings/updatefromgrid'
+        ,save_action: 'System/Settings/UpdateFromGrid'
         ,pageSize: parseInt(MODx.config.default_per_page) || 20
         ,paging: true
         ,collapseFirst: false
@@ -217,7 +217,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,removeSetting: function() {
-        return this.remove('setting_remove_confirm', 'system/settings/remove');
+        return this.remove('setting_remove_confirm', 'System/Settings/Remove');
     }
 
     ,updateSetting: function(btn,e) {
@@ -353,7 +353,7 @@ MODx.combo.Area = function(config) {
         ,fields: ['d','v']
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/settings/getAreas'
+            action: 'System/Settings/GetAreas'
         }
     });
     MODx.combo.Area.superclass.constructor.call(this,config);
@@ -369,7 +369,7 @@ MODx.window.CreateSetting = function(config) {
         title: _('setting_create')
         ,width: 600
         ,url: config.url
-        ,action: 'system/settings/create'
+        ,action: 'System/Settings/Create'
         ,autoHeight: true
         ,fields: [{
             layout: 'column'
@@ -533,7 +533,7 @@ MODx.window.UpdateSetting = function(config) {
         title: _('setting_update')
         ,width: 600
         ,url: config.grid.config.url
-        ,action: 'system/settings/update'
+        ,action: 'System/Settings/Update'
         ,autoHeight: true
         ,fields: [{
             layout: 'column'

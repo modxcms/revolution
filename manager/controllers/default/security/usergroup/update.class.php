@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modUserGroup;
+
 /**
  * Loads the usergroup update page
  *
@@ -58,11 +61,11 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
     public function process(array $scriptProperties = array()) {
         $placeholders = array();
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
-            $this->userGroup = $this->modx->newObject('modUserGroup');
+            $this->userGroup = $this->modx->newObject(modUserGroup::class);
             $this->userGroup->set('id',0);
             $this->userGroup->set('name',$this->modx->lexicon('anonymous'));
         } else {
-            $this->userGroup = $this->modx->getObject('modUserGroup', array('id' => $scriptProperties['id']));
+            $this->userGroup = $this->modx->getObject(modUserGroup::class, array('id' => $scriptProperties['id']));
             if (empty($this->userGroup)) {
                 $this->failure($this->modx->lexicon('usergroup_err_nf'));
             }

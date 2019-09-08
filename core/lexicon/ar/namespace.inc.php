@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'فضاء الأسماء';
-$_lang['namespace_create'] = 'إنشاء فضاء أسماء';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'حدث خطأ أثناء محاولة إنشاء فضاء الأسماء.';
 $_lang['namespace_err_nf'] = 'فضاء الأسماء غير موجود.';
 $_lang['namespace_err_nfs'] = 'فضاء الأسماء غير موجود بالاسم: %s';

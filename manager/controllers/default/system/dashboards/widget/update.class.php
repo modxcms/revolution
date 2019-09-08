@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
+use MODX\Revolution\modDashboardWidgetPlacement;
+use MODX\Revolution\modManagerController;
+
 /**
  * Loads the dashboard update page
  *
@@ -36,7 +41,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      */
     public function initialize() {
         if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
-            $this->widget = $this->modx->getObject('modDashboardWidget', array('id' => $this->scriptProperties['id']));
+            $this->widget = $this->modx->getObject(modDashboardWidget::class, array('id' => $this->scriptProperties['id']));
         }
     }
 
@@ -66,14 +71,14 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      */
     public function getDashboards($user = 0) {
         $list = array();
-        $c = $this->modx->newQuery('modDashboardWidgetPlacement');
-        $c->innerJoin('modDashboard','Dashboard');
+        $c = $this->modx->newQuery(modDashboardWidgetPlacement::class);
+        $c->innerJoin(modDashboard::class, 'Dashboard');
         $c->where(array(
             'widget' => $this->widget->get('id'),
             'user' => $user,
         ));
         $c->sortby('Dashboard.name','ASC');
-        $c->select($this->modx->getSelectColumns('modDashboardWidgetPlacement','modDashboardWidgetPlacement'));
+        $c->select($this->modx->getSelectColumns(modDashboardWidgetPlacement::class, 'modDashboardWidgetPlacement'));
         $c->select(array(
             'Dashboard.name',
             'Dashboard.description',

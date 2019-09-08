@@ -1,15 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Cases\Modx;
 
-class ReplaceReservedTest extends \PHPUnit\Framework\TestCase
+use MODX\Revolution\modX;
+use PHPUnit\Framework\TestCase;
+use stdClass;
+
+class ReplaceReservedTest extends TestCase
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        include_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/core/model/modx/modx.class.php';
-    }
-
     public function testEmptyString()
     {
         $this->assertEquals(

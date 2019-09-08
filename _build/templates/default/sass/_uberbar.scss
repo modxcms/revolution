@@ -6,6 +6,7 @@
   min-width: 100px;
   background: $searchResultsBg;
   border-radius: $borderRadius $borderRadius 0 0;
+
   .x-form-text {
     background: none;
   }
@@ -16,28 +17,20 @@
   color: #565353;
   font-size: 12px;
   outline: none !important;
+
   .x-form-text {
     color: $searchResultsColor;
     letter-spacing: 0;
     text-shadow: none;
     font-weight: normal;
   }
+
   .x-form-empty-field {
     color: #6a747a;
   }
+
   .x-form-trigger {
     display: none;
-    /*
-    color: $darkGray;
-    top: -2px;
-    right: -2px;
-    &:before {
-      content: fa-content($fa-var-chevron-right);
-    }
-    &.x-form-trigger-over,
-    &:hover {
-      color: rgba(255,255,255,1);
-    }*/
   }
 }
 
@@ -48,13 +41,14 @@
   border: 1px solid $subnavBorder;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
   position: relative;
-  width: 302px !important;
+  width: 402px !important;
   height: auto !important;
   box-sizing: border-box;
 
-  @include grid-media($mobile) {
+  @include grid-media($desktop) {
     left: 5px !important;
   }
+
   .loading-indicator {
     background: none;
     color: $searchResultsColor;
@@ -76,11 +70,13 @@
     margin: 0;
     overflow: auto;
     width: 100% !important;
-    @include grid-media($mobile) {
+
+    @include grid-media($desktop) {
       height: auto !important;
       line-height: 4em;
+
       .section {
-        > * {
+        >* {
           padding-top: .5em;
           padding-bottom: .5em;
         }
@@ -96,7 +92,8 @@
     width: auto; /* change to 100% to enable scrollable overflow */
   }
 
-  h3, .x-combo-list-item {
+  h3,
+  .x-combo-list-item {
     color: $searchResultsColor;
     line-height: 17px;
     margin: 0;
@@ -132,22 +129,36 @@
 
   em {
     font-style: normal;
-    opacity: 0.7;
+    opacity: .7;
   }
 
   /* we need the parent selector to override default combobox styles */
   .x-combo-list-item {
     overflow: visible;
     white-space: normal; /* allow wrapping for longer entries */
-    a { display: block; }
-    &.x-combo-selected, &:hover {
+
+    a {
+      display: block;
+    }
+
+    &.x-combo-selected,
+    &:hover {
       border: 0;
       background-color: $searchResultsBgHover;
       margin-left: 0;
       z-index: 10;
-      h3 { left: 0; }
-      p { border-left-color: transparent; }
-      a { color: $searchResultsColor; }
+
+      h3 {
+        left: 0;
+      }
+
+      p {
+        border-left-color: transparent;
+      }
+
+      a {
+        color: $searchResultsColor;
+      }
     }
   }
 

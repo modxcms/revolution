@@ -9,6 +9,12 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Mail;
+
+
+use MODX\Revolution\Mail\modMail;
+use MODX\Revolution\MODxTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Tests related to the modMail class.
@@ -21,14 +27,13 @@
  */
 class modMailTest extends MODxTestCase {
     /**
-     * @var modMail|PHPUnit_Framework_MockObject_MockObject $mail
+     * @var modMail|MockObject $mail
      */
     public $mail;
 
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('mail.modMail',MODX_CORE_PATH.'model/modx/',true,true);
-        $this->mail = $this->getMockForAbstractClass('modMail',array(&$this->modx));
+        $this->mail = $this->getMockForAbstractClass(modMail::class, array(&$this->modx));
         $this->mail->expects($this->any())
                    ->method('_getMailer')
                    ->will($this->returnValue(true));

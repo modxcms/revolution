@@ -11,7 +11,7 @@
 /**
  * Loads the lexicon into a JS-compatible function _()
  *
- * @var modX $modx
+ * @var \MODX\Revolution\modX $modx
  * @package modx
  * @subpackage lexicon
  */
@@ -30,7 +30,7 @@ $entries = $modx->lexicon->fetch();
 echo '
 MODx.lang = {';
 $s = '';
-while (list($k,$v) = each ($entries)) {
+foreach ($entries as $k => $v) {
     $s .= "'$k': ".'"'.esc($v).'",';
 }
 $s = trim($s,',');

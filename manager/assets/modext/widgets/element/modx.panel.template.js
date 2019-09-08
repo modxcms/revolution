@@ -15,7 +15,7 @@ MODx.panel.Template = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/template/get'
+            action: 'Element/Template/Get'
         }
         ,id: 'modx-panel-template'
 		,cls: 'container form-with-labels'
@@ -74,7 +74,7 @@ MODx.panel.Template = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('template')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/template/create' && MODx.perm.tree_show_element_ids === 1) {
+                                if (MODx.request.a !== 'Element/Template/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -108,7 +108,6 @@ MODx.panel.Template = function(config) {
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        // ,hideFiles: true
                         ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-template-static-file'
@@ -226,7 +225,7 @@ MODx.panel.Template = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -298,6 +297,12 @@ MODx.panel.Template = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(['modx-template-form'], 'modx-template-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Template.superclass.constructor.call(this,config);
@@ -372,7 +377,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-template-which-editor').getValue();
-            MODx.request.a = 'element/template/update';
+            MODx.request.a = 'Element/Template/Update';
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();

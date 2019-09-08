@@ -9,7 +9,11 @@
  *
  * @package modx-test
  */
-require_once dirname(__FILE__).'/../../MODxTestHarness.php';
+namespace MODX\Revolution\Tests\Model;
+
+
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\MODxTestHarness;
 
 /**
  * Tests related to the modParser class.
@@ -327,8 +331,10 @@ class modParserTest extends MODxTestCase {
      * Test modParser->parsePropertyString()
      *
      * @dataProvider providerParsePropertyString
-     * @param $expected
-     * @param $string
+     *
+     * @param array $expected
+     * @param string $string
+     * @param boolean $valuesOnly
      */
     public function testParsePropertyString($expected, $string, $valuesOnly) {
         $actual = $this->modx->parser->parsePropertyString($string, $valuesOnly);

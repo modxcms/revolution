@@ -25,7 +25,7 @@ MODx.panel.Resource = function(config) {
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
-    var ta = Ext.get('ta');
+    var ta = Ext.get(this.contentField);
     if (ta) { ta.on('keydown',this.fieldChangeEvent,this); }
     this.on('ready',this.onReady,this);
     var urio = Ext.getCmp('modx-resource-uri-override');
@@ -38,6 +38,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,classLexiconKey: 'document'
     ,rteElements: 'ta'
     ,rteLoaded: false
+    ,contentField: 'ta'
     ,warnUnsavedChanges: false
     ,setup: function() {
         if (!this.initialized) {
@@ -181,7 +182,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
 
     ,beforeSubmit: function(o) {
-        var ta = Ext.get('ta');
+        var ta = Ext.get(this.contentField);
         if (ta) {
             var v = ta.dom.value;
             var hc = Ext.getCmp('hiddenContent');
@@ -196,7 +197,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         if (ta) {
             this.cleanupEditor();
         }
-        if(this.getForm().baseParams.action == 'resource/create') {
+        if(this.getForm().baseParams.action == 'Resource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.disable(); }
         }
@@ -296,7 +297,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,failure: function(o) {
         this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'resource/create') {
+        if(this.getForm().baseParams.action == 'Resource/Create') {
             var btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.enable(); }
         }
@@ -320,7 +321,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             MODx.Ajax.request({
                 url: MODx.config.connector_url
                 ,params: {
-                    action: 'resource/translit'
+                    action: 'Resource/Translit'
                     ,string: string
                 }
                 ,listeners: {
@@ -335,6 +336,15 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             });
         }
     }
+    ,generateAliasRealTime: function(title) {
+        // check some system settings before doing real time alias transliteration
+        if (parseInt(MODx.config.friendly_alias_realtime) && parseInt(MODx.config.automatic_alias)) {
+            // handles the realtime-alias transliteration
+            if (this.config.aliaswasempty && title !== '') {
+                this.translitAlias(title);
+            }
+        }
+    }
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
@@ -343,7 +353,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 if (e == 'yes') {
                     var nt = t.getValue();
                     var f = Ext.getCmp('modx-page-update-resource');
-                    f.config.action = 'resource/reload';
+                    f.config.action = 'Resource/Reload';
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
@@ -461,7 +471,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     }
                     trail.push({
                         text: parents[i].pagetitle
-                        ,href: MODx.config.manager_url + '?a=resource/update&id=' + parents[i].id
+                        ,href: MODx.config.manager_url + '?a=Resource/Update&id=' + parents[i].id
                         ,cls: function(data) {
                             var cls = [];
                             if (!data.published) {
@@ -476,7 +486,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 } else {
                     trail.push({
                         text: parents[i].name || parents[i].key
-                        //,href: MODx.config.manager_url + '?a=context/update&key=' + parents[i].key
+                        //,href: MODx.config.manager_url + '?a=Context/Update&key=' + parents[i].key
                         ,href: false
                     });
                 }
@@ -629,11 +639,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     ,allowBlank: false
                     ,enableKeyEvents: true
                     ,listeners: {
-                        'keyup': {fn: function(f,e) {
-                                var titlePrefix = MODx.request.a == 'resource/create' ? _('new_document') : _('document');
+                'keyup': {fn: function(f) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
+
+                    this.generateAliasRealTime(title);
+
                                 title = Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === 1) {
+                                if (MODx.request.a !== 'Resource/Create' && MODx.perm.tree_show_resource_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
                                 Ext.getCmp('modx-resource-header').getEl().update(title);
@@ -651,13 +663,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         ,'blur': {fn: function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
 
-                                // check some system settings before doing real time alias transliteration
-                                if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
-                                    // handles the realtime-alias transliteration
-                                    if (this.config.aliaswasempty && title !== '') {
-                                        this.translitAlias(title);
-                                    }
-                                }
+                    this.generateAliasRealTime(title);
                             }, scope: this}
                     }
                 }]
@@ -747,14 +753,28 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 return { collapsed: this.collapsed };
             }
             ,items: [{
-                xtype: 'xcheckbox'
-                ,boxLabel: _('resource_published')
-                ,hideLabel: true
-                ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
-                ,name: 'published'
-                ,id: 'modx-resource-published'
-                ,inputValue: 1
-                ,checked: parseInt(config.record.published)
+                layout: 'form'
+                ,border: false
+                ,items: [{
+                    xtype: 'xcheckbox'
+                    ,boxLabel: _('resource_published')
+                    ,hideLabel: true
+                    ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
+                    ,name: 'published'
+                    ,id: 'modx-resource-published'
+                    ,inputValue: 1
+                    ,checked: parseInt(config.record.published)
+                },{
+                    xtype: 'xcheckbox'
+                    ,boxLabel: _('deleted')
+                    ,description: '<b>[[*deleted]]</b>'
+                    ,hideLabel: true
+                    ,cls: 'danger'
+                    ,name: 'deleted'
+                    ,id: 'modx-resource-deleted'
+                    ,inputValue: 1
+                    ,checked: parseInt(config.record.deleted) || false
+                }]
             },{
                 xtype: 'xdatetime'
                 ,fieldLabel: _('resource_publishedon')
@@ -822,7 +842,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,typeAheadDelay: 300
                 ,forceSelection: true
                 ,baseParams: {
-                    action: 'element/template/getList'
+                    action: 'Element/Template/GetList'
                     ,combo: '1'
                     ,limit: 0
                 }
@@ -992,26 +1012,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetRight(config)
             }]
-        },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('resource_uri_override')
-            ,description: _('resource_uri_override_help')
-            ,hideLabel: true
-            ,name: 'uri_override'
-            ,value: 1
-            ,checked: parseInt(config.record.uri_override) ? true : false
-            ,id: 'modx-resource-uri-override'
-
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('resource_uri')
-            ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
-            ,name: 'uri'
-            ,id: 'modx-resource-uri'
-            ,maxLength: 255
-            ,anchor: '70%'
-            ,value: config.record.uri || ''
-            ,hidden: !config.record.uri_override
         }];
     }
 
@@ -1115,17 +1115,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-syncsite'
             ,inputValue: 1
             ,checked: config.record.syncsite !== undefined && config.record.syncsite !== null ? parseInt(config.record.syncsite) : true
-
-        },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('deleted')
-            ,description: '<b>[[*deleted]]</b>'
-            ,hideLabel: true
-            ,cls: 'danger'
-            ,name: 'deleted'
-            ,id: 'modx-resource-deleted'
-            ,inputValue: 1
-            ,checked: parseInt(config.record.deleted) || false
         }];
     }
 

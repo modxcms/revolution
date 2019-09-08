@@ -10,15 +10,15 @@ MODx.tree.Resource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
-        ,action: 'resource/getNodes'
+        ,action: 'Resource/GetNodes'
         ,title: ''
         ,rootVisible: false
         ,expandFirst: true
         ,enableDD: (MODx.config.enable_dragdrop != '0') ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         // ,remoteToolbar: true
-        // ,remoteToolbarAction: 'resource/gettoolbar'
-        ,sortAction: 'resource/sort'
+        // ,remoteToolbarAction: 'Resource/GetToolbar'
+        ,sortAction: 'Resource/Sort'
         ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
         //    hidden: true
@@ -119,11 +119,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         } else {
             var m = [];
             switch (n.attributes.type) {
-                case 'modResource':
-                case 'modDocument':
+                case 'MODX\\Revolution\\modResource':
+                case 'MODX\\Revolution\\modDocument':
                     m = this._getModResourceMenu(n);
                     break;
-                case 'modContext':
+                case 'MODX\\Revolution\\modContext':
                     m = this._getModContextMenu(n);
                     break;
             }
@@ -149,12 +149,17 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,pagetitle: name
             ,hasChildren: node.attributes.hasChildren
             ,childCount: node.attributes.childCount
+            ,redirect: false
             ,listeners: {
-                'success': {fn:function() {
-                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
-                    this.refreshNode(node.id);
-                },scope:this
-                }
+                'success': {fn:function(r) {
+                    var response = Ext.decode(r.a.response.responseText);
+                    if (response.object.redirect) {
+                        MODx.loadPage('Resource/Update', 'id='+response.object.id);
+                    } else {
+                        node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                        this.refreshNode(node.id);
+                    }
+                },scope:this}
             }
         });
         w.config.hasChildren = node.attributes.hasChildren;
@@ -188,7 +193,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('context_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'context/remove'
+                action: 'Context/Remove'
                 ,key: key
             }
             ,listeners: {
@@ -218,7 +223,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/delete'
+                action: 'Resource/Delete'
                 ,id: id
             }
             ,listeners: {
@@ -230,7 +235,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });
                     }
 
                     var n = this.cm.activeNode;
@@ -259,7 +267,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/undelete'
+                action: 'Resource/Undelete'
                 ,id: id
             }
             ,listeners: {
@@ -271,7 +279,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });
                     }
 
                     var n = this.cm.activeNode;
@@ -302,7 +313,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_publish_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/publish'
+                action: 'Resource/Publish'
                 ,id: id
             }
             ,listeners: {
@@ -323,7 +334,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_unpublish_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/unpublish'
+                action: 'Resource/Unpublish'
                 ,id: id
             }
             ,listeners: {
@@ -377,12 +388,18 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['resource/update']) && dropNode.attributes.pk == MODx.request.id){
-            var parentFieldCmb = Ext.getCmp('modx-resource-parent');
-            var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
-            if(parentFieldCmb && parentFieldHidden){
-                parentFieldHidden.setValue(dropNode.parentNode.attributes.pk);
-                parentFieldCmb.setValue(dropNode.parentNode.attributes.text.replace(/(<([^>]+)>)/ig,""));
+        if((MODx.request.a == MODx.action['Resource/Update'])){
+		    if(dropNode.attributes.pk == MODx.request.id) {
+                var parentFieldCmb = Ext.getCmp('modx-resource-parent');
+                var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
+                if(parentFieldCmb && parentFieldHidden){
+                    parentFieldHidden.setValue(dropNode.parentNode.attributes.pk);
+                    parentFieldCmb.setValue(dropNode.parentNode.attributes.text.replace(/(<([^>]+)>)/ig,""));
+                }
+            }
+            var menuindexField = Ext.getCmp('modx-resource-menuindex');
+            if(menuindexField && o.result.object.menuindex !== undefined){
+                menuindexField.setValue(o.result.object.menuindex);
             }
         }
     }
@@ -474,7 +491,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/get'
+                action: 'Resource/Get'
                 ,id: this.cm.activeNode.attributes.pk
                 ,skipFormatDates: true
             }
@@ -495,7 +512,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
-                    w.title += ': <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
+                    w.title += ': <span dir="ltr">' + Ext.util.Format.htmlEncode(w.record.pagetitle) + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target,function() {
                         Ext.isSafari ? w.setPosition(null,30) : w.center();
@@ -521,7 +538,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: _('edit_context')
                 ,handler: function() {
                     var at = this.cm.activeNode.attributes;
-                    this.loadAction('a=context/update&key='+at.pk);
+                    this.loadAction('a=Context/Update&key='+at.pk);
                 }
             });
         }
@@ -557,13 +574,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
-    ,overviewResource: function() {this.loadAction('a=resource/data')}
+    ,overviewResource: function() {this.loadAction('a=Resource/Data')}
 
     ,quickUpdateResource: function(itm,e) {
         this.quickUpdate(itm,e,itm.classKey);
     }
 
-    ,editResource: function() {this.loadAction('a=resource/update');}
+    ,editResource: function() {this.loadAction('a=Resource/Update');}
 
     ,_getModResourceMenu: function(n) {
         var a = n.attributes;
@@ -660,7 +677,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
         this.loadAction(
-            'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
+            'a=Resource/Create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         );
     }
 
@@ -738,6 +755,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             url: this.config.url
             ,params: {
                 target: dropEvent.target.attributes.id
+                ,activeTarget: MODx.request.a == MODx.action['Resource/Update'] ? MODx.request.id : ''
                 ,source: dropEvent.source.dragData.node.attributes.id
                 ,point: dropEvent.point
                 ,data: encodeURIComponent(encNodes)
@@ -838,6 +856,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             classKey: 'modDocument'
         });
     }
+
+    /**
+     * Renders the item text without any special formatting. The Resource/GetNodes processor already protects against XSS.
+     */
+    ,renderItemText: function(item) {
+        return item.text;
+    }
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);
 
@@ -855,7 +880,7 @@ MODx.window.QuickCreateResource = function(config) {
         // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'resource/create'
+        ,action: 'Resource/Create'
         // ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -929,7 +954,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,editable: false
                             ,anchor: '100%'
                             ,baseParams: {
-                                action: 'element/template/getList'
+                                action: 'Element/Template/GetList'
                                 ,combo: '1'
                                 ,limit: 0
                             }
@@ -1011,7 +1036,7 @@ MODx.window.QuickUpdateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_resource')
         ,id: this.ident
-        ,action: 'resource/update'
+        ,action: 'Resource/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -1035,11 +1060,11 @@ Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 MODx.getQRContentField = function(id,cls) {
     id = id || 'qur';
-    cls = cls || 'modDocument';
+    cls = cls || 'MODX\\Revolution\\modDocument';
     var dm = Ext.getBody().getViewSize();
     var o = {};
     switch (cls) {
-        case 'modSymLink':
+        case 'MODX\\Revolution\\modSymLink':
             o = {
                 xtype: 'textfield'
                 ,fieldLabel: _('symlink')
@@ -1050,7 +1075,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,allowBlank: false
             };
             break;
-        case 'modWebLink':
+        case 'MODX\\Revolution\\modWebLink':
             o = {
                 xtype: 'textfield'
                 ,fieldLabel: _('weblink')
@@ -1062,7 +1087,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,allowBlank: false
             };
             break;
-        case 'modStaticResource':
+        case 'MODX\\Revolution\\modStaticResource':
             o = {
                 xtype: 'modx-combo-browser'
                 ,browserEl: 'modx-browser'
@@ -1084,8 +1109,8 @@ MODx.getQRContentField = function(id,cls) {
                 }
             };
             break;
-        case 'modResource':
-        case 'modDocument':
+        case 'MODX\\Revolution\\modResource':
+        case 'MODX\\Revolution\\modDocument':
         default:
             o = {
                 xtype: 'textarea'

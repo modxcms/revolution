@@ -10,7 +10,7 @@ MODx.grid.UserGroupCategory = function(config) {
         id: 'modx-grid-user-group-categories'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/category/getList'
+            action: 'Security/Access/UserGroup/Category/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -63,7 +63,7 @@ MODx.grid.UserGroupCategory = function(config) {
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Object'
             }
             ,listeners: {
@@ -149,7 +149,7 @@ MODx.window.CreateUGCat = function(config) {
     Ext.applyIf(config,{
         title: _('category_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/category/create'
+        ,action: 'Security/Access/UserGroup/Category/Create'
         // ,height: 250
         // ,width: 500
         ,fields: [{
@@ -162,7 +162,7 @@ MODx.window.CreateUGCat = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'modx-combo-category'
             ,fieldLabel: _('category')
@@ -212,7 +212,7 @@ MODx.window.CreateUGCat = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Element,Object'
                 ,combo: '1'
             }
@@ -277,7 +277,7 @@ MODx.window.UpdateUGCat = function(config) {
 
     Ext.applyIf(config,{
         title: _('access_category_update')
-        ,action: 'security/access/usergroup/category/update'
+        ,action: 'Security/Access/UserGroup/Category/Update'
     });
     MODx.window.UpdateUGCat.superclass.constructor.call(this,config);
 };

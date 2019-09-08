@@ -29,7 +29,7 @@ MODx.SearchBar = function(config) {
         ,minChars: 1
         ,displayField: 'name'
         ,valueField: '_action'
-        ,width: 280
+        ,width: 380
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
             '<tpl for=".">',
@@ -108,7 +108,7 @@ MODx.SearchBar = function(config) {
         ,store: new Ext.data.JsonStore({
             url: MODx.config.connector_url
             ,baseParams: {
-                action: 'search/search'
+                action: 'Search/Search'
             }
             ,root: 'results'
             ,totalProperty: 'total'

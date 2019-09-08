@@ -7,10 +7,12 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
+use MODX\Revolution\modAccessPolicyTemplate;
+
 $templates = array();
 
 /* administrator template/policy */
-$templates['1']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['1']= $xpdo->newObject(modAccessPolicyTemplate::class);
 $templates['1']->fromArray(array(
     'id' => 1,
     'name' => 'AdministratorTemplate',
@@ -23,7 +25,7 @@ if (is_array($permissions)) {
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Administrator Policy Template.'); }
 
 /* resource template/policy */
-$templates['2']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['2']= $xpdo->newObject(modAccessPolicyTemplate::class);
 $templates['2']->fromArray(array(
     'id' => 2,
     'name' => 'ResourceTemplate',
@@ -36,7 +38,7 @@ if (is_array($permissions)) {
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Resource Template Permissions.'); }
 
 /* object template and policies */
-$templates['3']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['3']= $xpdo->newObject(modAccessPolicyTemplate::class);
 $templates['3']->fromArray(array(
     'id' => 3,
     'name' => 'ObjectTemplate',
@@ -49,7 +51,7 @@ if (is_array($permissions)) {
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Object Template Permissions.'); }
 
 /* element template/policy */
-$templates['4']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['4']= $xpdo->newObject(modAccessPolicyTemplate::class);
 $templates['4']->fromArray(array(
     'id' => 4,
     'name' => 'ElementTemplate',
@@ -62,7 +64,7 @@ if (is_array($permissions)) {
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Element Template Permissions.'); }
 
 /* media source template/policy */
-$templates['5']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['5']= $xpdo->newObject(modAccessPolicyTemplate::class);
 $templates['5']->fromArray(array(
     'id' => 5,
     'name' => 'MediaSourceTemplate',
@@ -75,7 +77,7 @@ if (is_array($permissions)) {
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Media Source Template Permissions.'); }
 
 /* context template policies */
-$templates['6']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['6']= $xpdo->newObject(modAccessPolicyTemplate::class);
 $templates['6']->fromArray(array(
     'id' => 6,
     'name' => 'ContextTemplate',
@@ -88,7 +90,7 @@ if (is_array($permissions)) {
 } else { $xpdo->log(xPDO::LOG_LEVEL_ERROR,'Could not load Context Template Permissions.'); }
 
 /* namespace template/policy */
-$templates['7']= $xpdo->newObject('modAccessPolicyTemplate');
+$templates['7']= $xpdo->newObject(modAccessPolicyTemplate::class);
 $templates['7']->fromArray(array(
     'id' => 7,
     'name' => 'NamespaceTemplate',

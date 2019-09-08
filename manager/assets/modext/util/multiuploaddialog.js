@@ -52,7 +52,7 @@
             url: MODx.config.connector_url,
             permitted_extensions: permittedFileTypes,
             base_params: {
-                action: 'browser/file/upload',
+                action: 'Browser/File/Upload',
                 wctx: MODx.ctx || '',
                 source: 1,
             },
@@ -78,7 +78,7 @@
             document.getElementsByTagName('body')[0].appendChild(this.input_file);
         },
 
-        addDropZone: function(dnd) {
+        addDropZone: function(dnd, browser) {
             var el = dnd.getEl().dom;
             var upload = this;
             el.className += ' drag-n-drop';
@@ -91,7 +91,7 @@
                     el.className = el.className.replace(' drag-over', '');
                 }
             }, function (files) {
-                upload.startUpload(files);
+                upload.startUpload(files, browser);
             });
         },
 
@@ -107,10 +107,10 @@
         onInputFileChange: function (e) {
             var files = FileAPI.getFiles(e);
             this.input_file.value = '';
-            this.startUpload(files);
+            this.startUpload(files, this.browser);
         },
 
-        startUpload: function (files) {
+        startUpload: function (files, browser) {
             var upload = this;
             var approved = [];
             this.fireEvent('beforeupload', files);
@@ -165,6 +165,10 @@
                         upload.fireEvent('uploadsuccess');
                         if (upload.progress) {
                             upload.progress.hide();
+                        }
+                        // Reload the modx-browser tree/dataview
+                        if (typeof browser !== "undefined" && typeof browser.run !== "undefined") {
+                            browser.run();
                         }
                     } else {
                         upload.fireEvent('uploadfailed', xhr);

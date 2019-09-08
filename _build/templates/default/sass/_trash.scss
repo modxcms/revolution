@@ -1,21 +1,23 @@
 .trashrow {
-  background-color: silver !important;
+  background-color: $silver !important;
 }
 
 .x-btn-purge-all {
   color: $red;
+
   &:hover {
     background: $red;
     box-shadow: 0 0 0 1px $red;
-    color: white;
+    color: $white;
   }
 }
 
 .x-btn-restore-all {
   color: $green;
+
   &:hover {
     background: $green;
     box-shadow: 0 0 0 1px $green;
-    color: white;
+    color: $white;
   }
 }

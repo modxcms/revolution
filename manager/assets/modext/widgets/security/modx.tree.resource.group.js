@@ -1,6 +1,6 @@
 /**
  * Generates the Resource Group Tree in Ext
- * 
+ *
  * @class MODx.tree.ResourceGroup
  * @extends MODx.tree.Tree
  * @param {Object} config An object of options.
@@ -11,7 +11,7 @@ MODx.tree.ResourceGroup = function(config) {
     Ext.applyIf(config,{
         title: _('resource_groups')
         ,url: MODx.config.connector_url
-        ,action: 'security/resourcegroup/getnodes'
+        ,action: 'Security/ResourceGroup/GetNodes'
         ,root_id: '0'
         ,root_name: _('resource_groups')
         ,enableDrag: false
@@ -38,7 +38,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
     ,getMenu: function() {
         var n = this.cm.activeNode;
         var m = [];
-        if (n.attributes.type == 'modResourceGroup') {
+        if (n.attributes.type == 'MODX\\Revolution\\modResourceGroup') {
             m.push({
                 text: _('resource_group_create')
                 ,handler: this.createResourceGroup
@@ -53,7 +53,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
                 text: _('resource_group_remove')
                 ,handler: this.removeResourceGroup
             });
-        } else if (n.attributes.type == 'modResource' || n.attributes.type == 'modDocument') {
+        } else if (n.attributes.type == 'MODX\\Revolution\\modResource' || n.attributes.type == 'MODX\\Revolution\\modDocument') {
             m.push({
                 text: _('resource_group_access_remove')
                 ,handler: this.removeResource
@@ -89,7 +89,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             text: _('resource_group_access_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/resourcegroup/removeResource'
+                action: 'Security/ResourceGroup/RemoveResource'
                 ,resource: resourceId
                 ,resourceGroup: resourceGroupId
             }
@@ -107,7 +107,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             text: _('resource_group_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/resourcegroup/remove'
+                action: 'Security/ResourceGroup/Remove'
                 ,id: id
             }
             ,listeners: {
@@ -115,7 +115,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             }
         });
     }
-	
+
     ,createResourceGroup: function(itm,e) {
         if (!this.windows.create) {
             this.windows.create = MODx.load({
@@ -127,7 +127,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
         }
         this.windows.create.show(e.target);
     }
-	
+
     ,_handleDrop: function(e){
         var n = e.dropNode;
 
@@ -144,19 +144,19 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
         }
         return false;
     }
-	
+
     ,isDocCopy: function(e, n) {
         var a = e.target.attributes;
         var docid = n.attributes.id.split('_'); docid = 'n_'+docid[1];
 
         if (e.target.findChild('id',docid) !== null) { return false; }
-        if (n.attributes.type != 'modResource' && n.attributes.type != 'modDocument') { return false; }
+        if (n.attributes.type != 'MODX\\Revolution\\modResource' && n.attributes.type != 'MODX\\Revolution\\modDocument') { return false; }
         if (e.point != 'append') { return false; }
-        if (a.type != 'modResourceGroup') { return false; }
+        if (a.type != 'MODX\\Revolution\\modResourceGroup') { return false; }
         return a.leaf !== true;
 
     }
-	
+
     ,createDGD: function(n, text){
         var cnode = this.getNodeById(n.attributes.cmpId);
 
@@ -173,7 +173,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
 
         return node;
     }
-    
+
     ,_handleDrag: function(dropEvent) {
         Ext.Msg.show({
             title: _('please_wait')
@@ -194,7 +194,7 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             ,params: {
                 resource: dropEvent.dropNode.attributes.id
                 ,resourceGroup: dropEvent.target.attributes.id
-                ,action: 'security/resourcegroup/updateResourcesIn'
+                ,action: 'Security/ResourceGroup/UpdateResourcesIn'
             }
             ,listeners: {
                 'success': {fn: function(r,o) {
@@ -224,7 +224,7 @@ MODx.window.CreateResourceGroup = function(config) {
         ,width: 600
         ,stateful: false
         ,url: MODx.config.connector_url
-        ,action: 'security/resourcegroup/create'
+        ,action: 'Security/ResourceGroup/Create'
         ,fields: [{
             fieldLabel: _('name')
             ,name: 'name'
@@ -340,7 +340,7 @@ MODx.window.UpdateResourceGroup = function(config) {
         // ,height: 150
         // ,width: 350
         ,url: MODx.config.connector_url
-        ,action: 'security/resourcegroup/update'
+        ,action: 'Security/ResourceGroup/Update'
         ,fields: [{
             name: 'id'
             ,xtype: 'hidden'

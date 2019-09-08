@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  *
  */
+namespace MODX\Revolution\Tests\Cases\Request;
+
+use MODX\Revolution\modDocument;
+use MODX\Revolution\modResource;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to verifying and setting up the test environment.
@@ -23,7 +28,7 @@ class MakeUrlTest extends MODxTestCase {
         parent::setUp();
 
         /** @var modResource $resource */
-        $resource = $this->modx->newObject('modResource');
+        $resource = $this->modx->newObject(modResource::class);
         $resource->fromArray(array(
             'id' => 12345,
             'pagetitle' => 'Unit Test Resource',
@@ -43,13 +48,13 @@ class MakeUrlTest extends MODxTestCase {
             'deleted' => false,
             'menutitle' => 'Unit Test Resource',
             'hidemenu' => false,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
             'context_key' => 'web',
             'content_type' => 1,
         ),'',true,true);
         $resource->save();
 
-        $resource = $this->modx->newObject('modResource');
+        $resource = $this->modx->newObject(modResource::class);
         $resource->fromArray(array(
             'id' => 12346,
             'parent' => 12345,
@@ -69,7 +74,7 @@ class MakeUrlTest extends MODxTestCase {
             'deleted' => false,
             'menutitle' => 'Unit Test Child Resource',
             'hidemenu' => false,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
             'context_key' => 'web',
             'content_type' => 1,
         ),'',true,true);
@@ -85,9 +90,9 @@ class MakeUrlTest extends MODxTestCase {
     public function tearDown() {
         parent::tearDown();
         /** @var modResource $resource */
-        $resource = $this->modx->getObject('modResource',array('pagetitle' => 'Unit Test Resource'));
+        $resource = $this->modx->getObject(modResource::class,array('pagetitle' => 'Unit Test Resource'));
         if ($resource) $resource->remove();
-        $resource = $this->modx->getObject('modResource',array('pagetitle' => 'Unit Test Child Resource'));
+        $resource = $this->modx->getObject(modResource::class,array('pagetitle' => 'Unit Test Child Resource'));
         if ($resource) $resource->remove();
     }
 

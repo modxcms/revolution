@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modWorkspace;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
 
@@ -89,7 +90,7 @@ abstract class modInstallRunner {
     public function updateWorkspace() {
         $updated = false;
         /* @var modWorkspace $workspace set default workspace path */
-        $workspace = $this->install->xpdo->getObject('modWorkspace', array (
+        $workspace = $this->install->xpdo->getObject(modWorkspace::class, array (
             'active' => 1
         ));
         if ($workspace) {
@@ -117,8 +118,6 @@ abstract class modInstallRunner {
      */
     public function installPackage() {
         /* add required core data */
-        $this->install->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-
         $packageDirectory = MODX_CORE_PATH . 'packages/';
         $packageState = $this->install->settings->get('unpacked') == 1 ? xPDOTransport::STATE_UNPACKED : xPDOTransport::STATE_PACKED;
         $package = xPDOTransport :: retrieve($this->install->xpdo, $packageDirectory . 'core.transport.zip', $packageDirectory, $packageState);

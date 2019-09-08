@@ -7,7 +7,10 @@
  */
 
 /* modify modResource.description field */
-$class = 'modResource';
+
+use MODX\Revolution\modResource;
+
+$class = modResource::class;
 $table = $modx->getTableName($class);
 
 $description = $this->install->lexicon('alter_column',array('column' => 'description','table' => $table));

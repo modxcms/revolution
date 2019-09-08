@@ -18,11 +18,20 @@ $_lang['modx_news'] = 'MODX Nieuws';
 $_lang['onlineusers_action'] = 'Actie';
 $_lang['onlineusers_actionid'] = 'Actie-ID';
 $_lang['onlineusers_ipaddress'] = 'Gebruiker\'s IP adres';
-$_lang['onlineusers_lasthit'] = 'Laatste hit';
-$_lang['onlineusers_message'] = 'Alle gebruikers die in de afgelopen 20 minuten actief geweest zijn in de manager (het is nu [[+curtime]])';
+$_lang['onlineusers_lasthit'] = 'Datum';
+$_lang['onlineusers_message'] = 'In deze lijst staan alle gebruikers die actief zijn geweest in de laatste 20 minuten:';
 $_lang['onlineusers_title'] = 'Online gebruikers';
 $_lang['onlineusers_user'] = 'Gebruiker';
 $_lang['onlineusers_userid'] = 'Gebruiker\'s ID';
+
+$_lang['updates_sort'] = 'Sorteer';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Actie';
+$_lang['updates_available'] = 'Updates beschikbaar';
+$_lang['updates_update'] = 'Bewerken';
+$_lang['updates_ok'] = 'Actueel';
+$_lang['updates_extras'] = 'Componenten';
+
 $_lang['quicklinks'] = 'Snelkoppelingen';
 $_lang['security_notices'] = 'Beveiligings opmerkingen';
 $_lang['view_tree'] = 'Bekijk Tree';

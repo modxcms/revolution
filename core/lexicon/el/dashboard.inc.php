@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Action';
 $_lang['onlineusers_actionid'] = 'ID της ενέργειας';
 $_lang['onlineusers_ipaddress'] = 'IP διεύθυνση του χρήστη';
 $_lang['onlineusers_lasthit'] = 'Πιο πρόσφατη επίσκεψη';
-$_lang['onlineusers_message'] = 'Λίστα όλων των χρηστών που ήταν συνδεδεμένοι τα τελευταία 20 λεπτά (η ώρα τώρα είναι [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'Συνδεδεμένοι χρήστες';
 $_lang['onlineusers_user'] = 'Χρήστης';
 $_lang['onlineusers_userid'] = 'ID Χρήστη';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Action';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'Ενημέρωση';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'Πρόσθετα';
+
 $_lang['quicklinks'] = 'Σύνδεσμοι';
 $_lang['security_notices'] = 'Σημειώσεις σχετικά με την ασφάλεια';
 $_lang['view_tree'] = 'Δείτε την δενδρική δομή';

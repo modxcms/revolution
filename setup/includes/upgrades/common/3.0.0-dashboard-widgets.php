@@ -7,14 +7,16 @@
  * @package setup
  */
 
-/* add modResource.alias_visible field */
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
+use MODX\Revolution\modDashboardWidgetPlacement;
 
-$class = 'modDashboard';
+$class = modDashboard::class;
 $table = $modx->getTableName($class);
 $description = $this->install->lexicon('add_column', ['column' => 'customizable', 'table' => $table]);
 $this->processResults($class, $description, [$modx->manager, 'addField'], [$class, 'customizable']);
 
-$class = 'modDashboardWidget';
+$class = modDashboardWidget::class;
 $table = $modx->getTableName($class);
 $description = $this->install->lexicon('add_column', ['column' => 'permission', 'table' => $table]);
 $this->processResults($class, $description, [$modx->manager, 'addField'], [$class, 'permission']);
@@ -22,7 +24,7 @@ $this->processResults($class, $description, [$modx->manager, 'addField'], [$clas
 $description = $this->install->lexicon('add_column', ['column' => 'properties', 'table' => $table]);
 $this->processResults($class, $description, [$modx->manager, 'addField'], [$class, 'properties']);
 
-$class = 'modDashboardWidgetPlacement';
+$class = modDashboardWidgetPlacement::class;
 $table = $modx->getTableName($class);
 $description = $this->install->lexicon('add_column', ['column' => 'user', 'table' => $table]);
 $this->processResults($class, $description, [$modx->manager, 'addField'], [$class, 'user']);

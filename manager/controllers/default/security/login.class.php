@@ -8,6 +8,15 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\modUser;
+use MODX\Revolution\modUserProfile;
+use MODX\Revolution\Processors\Security\User\Update;
+use MODX\Revolution\Processors\Security\User\Validation;
+use MODX\Revolution\Registry\modDbRegister;
+use MODX\Revolution\Registry\modRegistry;
+
 /**
  * Loads the login screen
  *
@@ -44,6 +53,7 @@ class SecurityLoginManagerController extends modManagerController
      */
     public function process(array $scriptProperties = array()) {
         $this->handleForgotLoginHash();
+        $this->handleMagicLoginLink();
         $this->preserveReturnUrl();
 
         if (!empty($this->scriptProperties)) {
@@ -116,7 +126,7 @@ class SecurityLoginManagerController extends modManagerController
         $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
         $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
-        
+
 
         $this->checkForActiveInstallation();
         $this->checkForAllowManagerForgotPassword();
@@ -253,19 +263,13 @@ class SecurityLoginManagerController extends modManagerController
      *
      * @return void
      */
-    public function handleForgotLoginHash()
-    {
-        // Legacy workaround
-        if (!empty($_GET['modahsh'])) {
-            $_GET['modhash'] = $_GET['modahsh'];
-        }
-
+    public function handleForgotLoginHash() {
         // Handle new password form
         if (!empty($_GET['modhash'])) {
             $hash = $this->modx->sanitizeString($_GET['modhash']);
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
-                ->getRegister('user', 'registry.modDbRegister');
+            $registry = $this->modx->getService('registry', modRegistry::class)
+                ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
             if (!empty($registry->read(['poll_limit' => 1, 'remove_read' => false]))) {
@@ -277,6 +281,63 @@ class SecurityLoginManagerController extends modManagerController
                 $this->modx->smarty->assign('_lang', $this->placeholders['_lang']);
             } else {
                 $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_activation_key_err'));
+            }
+        }
+    }
+
+    /**
+     * Handle a magic login link, if existent.
+     *
+     * @return void
+     */
+    public function handleMagicLoginLink() {
+
+        if (!empty($_GET['magiclink'])) {
+            $hash = $this->modx->sanitizeString($_GET['magiclink']);
+            /** @var modDbRegister $registry */
+            $registry = $this->modx->getService('registry', 'registry.modRegistry')
+                ->getRegister('user', 'registry.modDbRegister');
+            $registry->connect();
+            $registry->subscribe('/pwd/magiclink/' . $hash);
+
+            $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
+
+            /** @var modUser $user */
+            if (empty($record) || !$user = $this->modx->getObject('modUser', ['username' => reset($record)])) {
+                $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_magiclink_err'));
+
+                return;
+            }
+
+            $this->scriptProperties['passwordgenmethod'] = 's';
+            $this->scriptProperties['passwordnotifymethod'] = 'no';
+            $this->scriptProperties['newPassword'] = true;
+            $this->modx->lexicon->load('core:user');
+
+            // create a temporary password and immediately use it once to login with the standard method
+            $password = uniqid("tmp-password-", true);
+            $user->set('password', $password);
+            $user->save();
+
+            $this->scriptProperties['username'] = $user->get('username');
+            $this->scriptProperties['password'] = $password;
+            $registry->read(['poll_limit' => 1, 'remove_read' => true]);
+
+            /** @var modProcessorResponse $response */
+            $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
+            if (($response instanceof modProcessorResponse)) {
+                if (!$response->isError()) {
+                    $url = !empty($this->scriptProperties['returnUrl'])
+                        ? $this->scriptProperties['returnUrl']
+                        : $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+                    $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
+                        $this->modx->getOption('http_host', null, MODX_HTTP_HOST) . rtrim($url, '/');
+                    $this->modx->sendRedirect($url);
+                } else {
+                    $errors = $response->getAllErrors();
+                    $error_message = implode("\n", $errors);
+                    $this->setPlaceholder('error_message', $error_message);
+                }
             }
         }
     }
@@ -330,6 +391,8 @@ class SecurityLoginManagerController extends modManagerController
             $this->handleLogin();
         } else if (!empty($this->scriptProperties['forgotlogin']) && $this->modx->getOption('allow_manager_login_forgot_password',null,true)) {
             $this->handleForgotLogin();
+        } else if (!empty($this->scriptProperties['passwordless_login_email']) && $this->modx->getOption('passwordless_activated', null, false)) {
+            $this->handlePasswordlessLoginRequest();
         }
         $this->setPlaceholder('_post',$this->scriptProperties);
     }
@@ -345,13 +408,13 @@ class SecurityLoginManagerController extends modManagerController
         $hash = $this->modx->sanitizeString($this->scriptProperties['modhash']);
         if (!empty($hash)) {
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
-                ->getRegister('user', 'registry.modDbRegister');
+            $registry = $this->modx->getService('registry', modRegistry::class)
+                ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
             $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
             /** @var modUser $user */
-            if (empty($record) || !$user = $this->modx->getObject('modUser', ['username' => reset($record)])) {
+            if (empty($record) || !$user = $this->modx->getObject(modUser::class, ['username' => reset($record)])) {
                 $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_activation_key_err'));
 
                 return;
@@ -363,15 +426,9 @@ class SecurityLoginManagerController extends modManagerController
             $this->scriptProperties['newPassword'] = true;
             $this->modx->lexicon->load('core:user');
 
-            if (!class_exists('modUserUpdateProcessor')) {
-                require(MODX_CORE_PATH . 'model/modx/processors/security/user/update.class.php');
-            }
-            $processor = new modUserUpdateProcessor($this->modx, $this->scriptProperties);
+            $processor = new Update($this->modx, $this->scriptProperties);
             $processor->modx->error->reset();
-            if (!class_exists('modUserValidation')) {
-                require(MODX_CORE_PATH . 'model/modx/processors/security/user/_validation.php');
-            }
-            $validator = new modUserValidation($processor, $user, $profile);
+            $validator = new Validation($processor, $user, $profile);
             $password = $validator->checkPassword();
             if ($processor->hasErrors()) {
                 $error = reset($processor->modx->error->getErrors(true))['msg'];
@@ -388,7 +445,7 @@ class SecurityLoginManagerController extends modManagerController
         }
 
         /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
+        $response = $this->modx->runProcessor(\MODX\Revolution\Processors\Security\Login::class, $this->scriptProperties);
         if (($response instanceof modProcessorResponse)) {
             if (!$response->isError()) {
                 $url = !empty($this->scriptProperties['returnUrl'])
@@ -411,7 +468,7 @@ class SecurityLoginManagerController extends modManagerController
      * @return void
      */
     public function handleForgotLogin() {
-        $c = $this->modx->newQuery('modUser');
+        $c = $this->modx->newQuery(modUser::class);
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
         $c->innerJoin('modUserProfile', 'Profile');
         $c->where([
@@ -419,17 +476,9 @@ class SecurityLoginManagerController extends modManagerController
             'OR:Profile.email:=' => $this->scriptProperties['username_reset'],
         ]);
         /** @var modUser $user */
-        $user = $this->modx->getObject('modUser', $c);
+        $user = $this->modx->getObject(modUser::class, $c);
         if ($user) {
-            $activationHash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
-
-            /** @var modRegistry $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry');
-            /** @var modRegister $register */
-            $register = $registry->getRegister('user', 'registry.modDbRegister');
-            $register->connect();
-            $register->subscribe('/pwd/change/');
-            $register->send('/pwd/change/', [$activationHash => $user->get('username')], ['ttl' => 86400]);
+            $activationHash = $this->setActivationHash($user);
 
             // Send activation email
             $message = $this->modx->lexicon('login_forgot_email');
@@ -461,6 +510,99 @@ class SecurityLoginManagerController extends modManagerController
             }
         } else {
             $this->setPlaceholder('success_message',$this->modx->lexicon('login_user_err_nf_email'));
+        }
+    }
+
+
+    /**
+     * Creates, sets and returns activation/magic-login hash for a user.
+     *
+     * @param $user
+     *
+     * @return string
+     */
+    private function setActivationHash($user, $ttl = 86400, $topic = '/pwd/change/') {
+        $hash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
+
+        /** @var modRegistry $registry */
+        $registry = $this->modx->getService('registry', modRegistry::class);
+        /** @var modDbRegister $register */
+        $register = $registry->getRegister('user', modDbRegister::class);
+        $register->connect();
+        $register->subscribe($topic);
+
+        $register->send($topic, [
+            $hash => $user->get('username')
+        ], [
+            'ttl' => $ttl
+        ]);
+
+        return $hash;
+    }
+
+    /**
+     * Handles the action when a user requests a magic login link.
+     *
+     * @return void
+     * @throws Exception
+     */
+    public function handlePasswordlessLoginRequest()
+    {
+
+        $c = $this->modx->newQuery('modUser');
+        $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
+        $c->innerJoin('modUserProfile', 'Profile');
+        $c->where([
+            'Profile.email:=' => $this->scriptProperties['passwordless_login_email'],
+        ]);
+
+        /** @var modUser $user */
+        $user = $this->modx->getObject('modUser', $c);
+
+        if ($user) {
+            $this->modx->log(modX::LOG_LEVEL_DEBUG, "Sending out magic login link for user " . $user->get('id'));
+
+            // Create activation email
+            $placeholders = array_merge($this->modx->config, $user->toArray());
+
+            // create the magic login hash
+            $placeholders['hash'] = $this->setActivationHash($user, $this->modx->getOption('passwordless_expiration'), '/pwd/magiclink/');
+            $placeholders['expiration'] = $this->getLifetimeString($this->modx->getOption('passwordless_expiration')); //date('D, d M Y H:i',time() + $this->modx->getOption('passwordless_expiration'));
+            $message = $this->modx->lexicon('login_magiclink_email', $placeholders);
+
+            // Store previous placeholders
+            $ph = $this->modx->placeholders;
+            // now set those useful for modParser
+            $this->modx->setPlaceholders($placeholders);
+            $this->modx->getParser()->processElementTags('', $message, true, false, '[[', ']]', [], 10);
+            $this->modx->getParser()->processElementTags('', $message, true, true, '[[', ']]', [], 10);
+            // Then restore previous placeholders to prevent any breakage
+            $this->modx->placeholders = $ph;
+
+            $this->modx->smarty->assign('config', $this->modx->config);
+            $this->modx->smarty->assign('content', $message);
+            $message = $this->modx->smarty->fetch('email/default.tpl');
+            $sent = $user->sendEmail($message, [
+                'from' => $this->modx->getOption('emailsender'),
+                'fromName' => $this->modx->getOption('site_name'),
+                'sender' => $this->modx->getOption('emailsender'),
+                'subject' => $this->modx->lexicon('login_magiclink_subject'),
+                'html' => true,
+            ]);
+            if (!$sent) {
+                $this->setPlaceholder('error_message', $this->modx->lexicon('login_magiclink_error_msg'));
+            } else {
+                $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', array(
+                    'email' => $this->scriptProperties['passwordless_login_email']
+                )));
+            }
+        } else {
+            // this logline can be used to feed fail2ban to blog continuing failures from an IP
+            $this->modx->log(modX::LOG_LEVEL_WARN, "Magic login link failure. User with email '" .
+                $this->scriptProperties['passwordless_login_email'] . "' does not exist. IP: ".$_SERVER["REMOTE_ADDR"]);
+            $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', array(
+                'email' => $this->scriptProperties['passwordless_login_email'],
+            )));
         }
     }
 

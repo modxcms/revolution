@@ -1,8 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\SymLink;
+
+
+use MODX\Revolution\Tests\Controllers\Resources\ResourceCreateControllerTest;
 
 class SymLinkCreateControllerTest extends ResourceCreateControllerTest
 {
-    /** @var SymLinkCreateManagerController $controller */
+    /** @var \SymLinkCreateManagerController $controller */
     public $controller;
 
     public $controllerName = 'SymLinkCreateManagerController';

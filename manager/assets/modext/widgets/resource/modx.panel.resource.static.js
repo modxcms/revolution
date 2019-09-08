@@ -19,6 +19,7 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
     defaultClassKey: 'modStaticResource'
     ,classLexiconKey: 'static_resource'
     ,rteElements: false
+    ,contentField: 'modx-resource-content-static'
 
     ,getContentField: function(config) {
         return {

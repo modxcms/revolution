@@ -8,12 +8,9 @@ MODx.panel.FCProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/forms/profile/get'
-        }
         ,id: 'modx-panel-fc-profile'
 		,cls: 'container'
-        ,class_key: 'modFormCustomizationProfile'
+        ,class_key: 'MODX\\Revolution\\modFormCustomizationProfile'
         ,bodyStyle: ''
         ,items: [{
             html: _('profile_new')
@@ -77,7 +74,7 @@ MODx.panel.FCProfile = function(config) {
                 xtype: 'modx-grid-fc-set'
 				,cls:'main-wrapper'
                 ,baseParams: {
-                    action: 'security/forms/set/getList'
+                    action: 'Security/Forms/Set/GetList'
                     ,profile: config.record.id
                 }
                 ,preventRender: true

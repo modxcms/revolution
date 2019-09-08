@@ -1,8 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\StaticResource;
+
+
+use MODX\Revolution\MODxControllerTestCase;
 
 class StaticResourceDataControllerTest extends MODxControllerTestCase
 {
-    /** @var StaticResourceDataManagerController $controller */
+    /** @var \StaticResourceDataManagerController $controller */
     public $controller;
 
     public $controllerName = 'StaticResourceDataManagerController';

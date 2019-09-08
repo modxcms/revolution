@@ -1,8 +1,12 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\WebLink;
+
+
+use MODX\Revolution\MODxControllerTestCase;
 
 class WebLinkDataControllerTest extends MODxControllerTestCase
 {
-    /** @var WebLinkDataManagerController $controller */
+    /** @var \WebLinkDataManagerController $controller */
     public $controller;
 
     public $controllerName = 'WebLinkDataManagerController';

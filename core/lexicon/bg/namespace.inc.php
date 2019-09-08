@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Пространство от имена';
-$_lang['namespace_create'] = 'Създаване на пространство от имена';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'Възникна грешка при опита за създавне на пространство от имена.';
 $_lang['namespace_err_nf'] = 'Не е намерено пространство от имена.';
 $_lang['namespace_err_nfs'] = 'Не е намерено пространство от имена с име: %s';

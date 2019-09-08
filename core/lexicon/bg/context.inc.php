@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Контекст';
 $_lang['context_add'] = 'Добавете Контекст';
-$_lang['context_create'] = 'Създайте Контекст';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Контекст Данни';
 $_lang['context_duplicate'] = 'Дублирайте Контекст';
 $_lang['context_err_ae'] = 'Контекст с това име вече съществува.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Обновете Контекста';
 $_lang['context_remove'] = 'Изтрийте Контекст';
 $_lang['context_remove_confirm'] = 'Сигурни ли сте, че искате да премахнете този Контекст? Това действие е постоянно и необратимо.';
 $_lang['context_settings'] = 'Контекст настройки';
-$_lang['context_settings_desc'] = 'Тук можете да зададете специфични настройките за този Контекст. Контекст Настройките ще заместят всички Системни Настройки със същия ключ.';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_update'] = 'Актуализиране на Контекст';
 $_lang['context_with_key_not_found'] = 'Не е намерен Контекст с ключ %s !';
 $_lang['contexts'] = 'Контексти';

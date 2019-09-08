@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Toiminto';
 $_lang['onlineusers_actionid'] = 'Toiminnon ID';
 $_lang['onlineusers_ipaddress'] = 'Käyttäjän IP-osoite';
 $_lang['onlineusers_lasthit'] = 'Viimeisin osuma';
-$_lang['onlineusers_message'] = 'Tässä luettelossa näkyvät kaikki käyttäjät, jotka ovat olleet aktiivia viimeisen 20 minuutin aikana (Tämänhetkinen aika on [[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'Online käyttäjät';
 $_lang['onlineusers_user'] = 'Käyttäjä';
 $_lang['onlineusers_userid'] = 'Käyttäjän ID';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'Tila';
+$_lang['updates_action'] = 'Toiminto';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'Päivitä';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'Ekstrat';
+
 $_lang['quicklinks'] = 'Pikalinkit';
 $_lang['security_notices'] = 'Turvallisuusilmoitukset';
 $_lang['view_tree'] = 'Näytä hakemistopuu';

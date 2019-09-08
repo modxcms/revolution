@@ -16,7 +16,11 @@
                 <tr>
                     <td class="user-with-avatar">
                         <div class="user-avatar">
-                            <img src="{(!empty($record.photo)) ? $record.photo : $record.gravatar}" width="32" height="32">
+                            {if $record.photo}
+                                <img src="{$record.photo}" width="32" height="32">
+                            {else}
+                                <i class="icon icon-user icon-2x"></i>
+                            {/if}
                         </div>
                         <div class="user-data">
                             <div class="user-name">{$record.fullname}</div>
@@ -36,7 +40,9 @@
     {else}
         <div class="no-results">{$_lang.w_no_data}</div>
     {/if}
-    <div class="widget-footer">
-        <a href="{$_config.manager_url}?a=system/logs">{$_lang.w_view_all} &rarr;</a>
-    </div>
+    {if $can_view_logs}
+        <div class="widget-footer">
+            <a href="{$_config.manager_url}?a=system/logs">{$_lang.w_view_all} &rarr;</a>
+        </div>
+     {/if}
 </div>

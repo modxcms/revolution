@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modContext;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Loads the view context preview page.
  *

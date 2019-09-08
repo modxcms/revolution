@@ -42,7 +42,7 @@ class modRevolutionConfigReader extends modConfigReader {
             $this->config['context_web_url'] = MODX_BASE_URL;
 
             $this->config['core_path'] = MODX_CORE_PATH;
-            $this->config['processors_path'] = MODX_CORE_PATH.'model/modx/processors/';
+            $this->config['processors_path'] = MODX_CORE_PATH.'src/Revolution/Processors/';
             $this->config['assets_path'] = MODX_ASSETS_PATH;
             $this->config['assets_url'] = MODX_ASSETS_URL;
 

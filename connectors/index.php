@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modConnectorRequest;
+use MODX\Revolution\modX;
+use xPDO\xPDO;
+
 /**
  * @package modx
  * @subpackage connectors
@@ -28,8 +32,8 @@ if (!defined('MODX_CORE_PATH')) {
     }
 }
 
-/* include modX class - return error on failure */
-if (!include_once(MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+/* include autoloader - return error on failure */
+if (!require_once(MODX_CORE_PATH . 'vendor/autoload.php')) {
     header("Content-Type: application/json; charset=UTF-8");
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     echo json_encode(array(
@@ -69,7 +73,7 @@ if ($ctx == 'mgr') {
 }
 
 /* handle the request */
-$connectorRequestClass = $modx->getOption('modConnectorRequest.class', null, 'modConnectorRequest');
+$connectorRequestClass = $modx->getOption('modConnectorRequest.class', null, modConnectorRequest::class);
 $modx->config['modRequest.class'] = $connectorRequestClass;
 $modx->getRequest();
 $modx->request->sanitizeRequest();

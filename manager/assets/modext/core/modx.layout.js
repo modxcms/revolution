@@ -221,8 +221,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
             ,split: true
-            ,width: 270
-            ,minSize: 270
+            ,width: 310
+            ,minSize: 288
             ,autoScroll: true
             ,unstyled: true
             ,useSplitTips: true
@@ -259,7 +259,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         MODx.Ajax.request({
                                 url: MODx.config.connector_url,
                                 params: {
-                                    action: 'resource/gettoolbar',
+                                    action: 'Resource/GetToolbar',
                                 },
                                 listeners: {
                                     success: {fn: function (res) {
@@ -310,7 +310,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             if (tab.tabEl.classList.contains('active')) {
                                 var tree = Ext.getCmp('modx-resource-tree');
                                 if (tree) {
-                                    tree[tab.handler.replace(/this./, '')]();
+                                    tree.redirect("?a=resource/trash");
                                 }
                             }
                             return false;
@@ -631,7 +631,7 @@ MODx.LayoutMgr = function() {
                 var e = window.event;
 
                 var middleMouseButtonClick = (e && (e.button === 4 || e.which === 2));
-                var keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === 1 || e.metaKey === 1 || e.shiftKey === 1));
+                var keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === true || e.metaKey === true || e.shiftKey === true));
                 if (middleMouseButtonClick || keyboardKeyPressed) {
                     // Middle mouse button click or keyboard key pressed,
                     // let the browser handle the way it should be opened (new tab/window)

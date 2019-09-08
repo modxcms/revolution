@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboardWidgetInterface;
+use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\Security\User\GetOnline;
+use MODX\Revolution\Smarty\modSmarty;
+
 /**
  * @package modx
  * @subpackage dashboard
@@ -21,7 +26,7 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface
     public function render()
     {
         /** @var modProcessorResponse $res */
-        $res = $this->modx->runProcessor('security/user/getonline', [
+        $res = $this->modx->runProcessor(GetOnline::class, [
             'limit' => 10,
         ]);
         $data = [];
@@ -31,8 +36,9 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface
                 $data = json_decode($data, true);
             }
         }
-        $this->modx->getService('smarty', 'smarty.modSmarty');
+        $this->modx->getService('smarty', modSmarty::class);
         $this->modx->smarty->assign('data', $data);
+        $this->modx->smarty->assign('can_view_logs', $this->modx->hasPermission('logs'));
 
         return $this->modx->smarty->fetch('dashboard/onlineusers.tpl');
     }

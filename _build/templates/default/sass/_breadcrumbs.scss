@@ -2,6 +2,7 @@
 .breadcrumbs .panel-desc {
   margin-top: 0;
 }
+
 .crumb_wrapper {
   background: $lightestGray;
   border-bottom: 1px solid $borderColor;
@@ -9,12 +10,10 @@
   margin-top: 15px;
 
   .crumbs {
-    /*border-bottom: 1px solid $borderColor;*/
     height: 34px;
     overflow: hidden; /* hide the overflow from the oversized arrows */
 
     li {
-      /*background: url($imgPath + 'style/crumbs-bg.png') no-repeat scroll right center transparent;*/
       color: $darkestGray;
       float: left;
       font-size: 12px;
@@ -24,14 +23,6 @@
       position: relative;
       z-index: 1;
 
-      /*&.first {
-        padding: 0;
-
-        button {
-          padding: 8px 16px 8px 20px;
-        }
-      }*/
-
       &.first {
         padding: 0; /* neutralize the normal li padding and give it to the inner element */
 
@@ -39,12 +30,13 @@
         &:before {
           @extend %pseudo-font-x-btn;
 
-          /*background-color: $lightestGray;*/
           content: fa-content($fa-var-home);
           display: inline-block;
           font-size: 20px;
           line-height: 34px;
-          position: absolute; top: 0; left: 6px;
+          position: absolute;
+          top: 0;
+          left: 6px;
           text-align: center;
           text-indent: 0;
           z-index: 2; /* put the icon above the triangle :after element */
@@ -55,7 +47,7 @@
         }
 
         &:hover {
-          background-color: $colorSplash;
+          background-color: $darkGray;
         }
 
         .root {
@@ -80,55 +72,33 @@
         }
       }
 
-      /*&:before {
-        content: '';
-        display: block;
-        width: 0;
-        height: 0;
-        border-top: 50px solid transparent;      
-        border-bottom: 50px solid transparent;
-        border-left: 30px solid $darkestGray;
-        position: absolute;
-        top: 50%;
-        margin-top: -50px;*/
-        /*margin-left: 1px;*/ /* uncomment to make the line thicker */
-        /*left: 100%;
-        z-index: 1;
-      }*/
+
 
       &:hover {
-        /*background-color: $colorSplash;*/
 
         button,
         span,
         span:after {
-          background-color: $colorSplash;
+          background-color: $darkGray;
           color: $colorSplashContrast;
         }
 
         span:after,
         button:after {
           border: 1px solid $lightestGray;
-          border-left-color: $colorSplash;
-          border-bottom-color: $colorSplash;
+          border-left-color: $darkGray;
+          border-bottom-color: $darkGray;
         }
 
         span:before,
         button:before {
-          background-color: $colorSplash;
+          background-color: $darkGray;
         }
 
         + li span:before,
         + li button:before {
-          border-left-color: $colorSplash;
+          border-left-color: $darkGray;
         }
-      }
-
-      &:hover:after {
-        /*border-left-color: $colorSplash;*/
-      }
-      &:hover:before {
-        /*border-left-color: $white;*/
       }
 
       button {
@@ -160,15 +130,18 @@
           display: inline-block;
           width: 0;
           height: 0;
-          border-top: 50px solid rgba(0,0,0,0); /* no transparent, breaks anti-aliasing in FF */
-          border-bottom: 50px solid rgba(0,0,0,0);/* no transparent, breaks anti-aliasing in FF */
+          border-top: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
+          border-bottom: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
           border-left: 30px solid $lightestGray;
           padding-right: 3px;
-          position: absolute; top: 50%; left: -33px;
+          position: absolute;
+          top: 50%;
+          left: -33px;
           margin-top: -50px;
           transform: scale(0.99999); /* fix blurry edges in FF */
           z-index: -1;
         }
+
         /* the triangle shape and line to the right of each crumb */
         &:after {
           background-color: $lightestGray;
@@ -178,8 +151,11 @@
           border-radius: $borderRadius;
           content: '';
           display: inline-block;
-          width: 34px; height: 34px; /* + 2px border = 36px */
-          position: absolute; top: 0; right: -22px;
+          width: 34px;
+          height: 34px; /* + 2px border = 36px */
+          position: absolute;
+          top: 0;
+          right: -22px;
           transform: scaleX(0.6) rotate(45deg);
           z-index: -1;
         }

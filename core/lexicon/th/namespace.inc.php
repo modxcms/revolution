@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'เนมสเปซ';
-$_lang['namespace_create'] = 'สร้างเนมสเปซ';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'เกิดข้อผิดพลาดขณะที่พยายามสร้างเนมสเปซ';
 $_lang['namespace_err_nf'] = 'ไม่พบเนมสเปซ';
 $_lang['namespace_err_nfs'] = 'ไม่พบเนมสเปซที่ชื่อ: %s';

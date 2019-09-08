@@ -12,7 +12,7 @@ MODx.grid.AccessContext = function(config) {
         id: 'modx-grid-access-context'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/getList'
+            action: 'Security/Access/GetList'
             ,type: config.type || 'modAccessContext'
             ,target: config.context_key
         }
@@ -69,7 +69,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
     ,createAcl: function(itm,e) {
         var r = {
             target: this.config.context_key
-            ,principal_class: 'modUserGroup'
+            ,principal_class: 'MODX\\Revolution\\modUserGroup'
         };
         if (!this.windows.create_acl) {
             this.windows.create_acl = MODx.load({
@@ -114,7 +114,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
             ,text: _('access_confirm_remove')
             ,url: this.config.url
             ,params: {
-                action: 'security/access/removeAcl'
+                action: 'Security/Access/RemoveAcl'
                 ,id: this.menu.record.id
                 ,type: this.config.type || 'modAccessContext'
             }
@@ -136,7 +136,7 @@ MODx.window.CreateAccessContext = function(config) {
         title: _('ugc_mutate')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/addAcl'
+            action: 'Security/Access/AddAcl'
             ,type: config.type || 'modAccessContext'
         }
         // ,height: 250
@@ -154,7 +154,7 @@ MODx.window.CreateAccessContext = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'modx-combo-usergroup'
             ,fieldLabel: _('user_group')
@@ -163,7 +163,7 @@ MODx.window.CreateAccessContext = function(config) {
             ,anchor: '100%'
             ,value: r.principal || ''
             ,baseParams: {
-                action: 'security/group/getList'
+                action: 'Security/Group/GetList'
                 ,combo: true
             }
         },{
@@ -194,7 +194,7 @@ MODx.window.UpdateAccessContext = function(config) {
     Ext.applyIf(config,{
         title: _('ugc_mutate')
         ,baseParams: {
-            action: 'security/access/updateAcl'
+            action: 'Security/Access/UpdateAcl'
             ,type: config.type || 'modAccessContext'
         }
     });

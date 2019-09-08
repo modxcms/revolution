@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Прастора імёнаў';
-$_lang['namespace_create'] = 'Стварыць прастору імёнаў';
+$_lang['namespace_create'] = 'Новая прастора імёнаў';
 $_lang['namespace_err_create'] = 'Адбылася памылка пры спробе стварыць прастору імёнаў.';
 $_lang['namespace_err_nf'] = 'Прастора імёнаў не знойдзена.';
 $_lang['namespace_err_nfs'] = 'Не знойдзена прастора імёнаў з імем: %s';

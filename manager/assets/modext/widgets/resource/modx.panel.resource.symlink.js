@@ -29,6 +29,7 @@ Ext.extend(MODx.panel.SymLink,MODx.panel.Resource,{
     defaultClassKey: 'modSymLink'
     ,classLexiconKey: 'symlink'
     ,rteElements: false
+    ,contentField: 'modx-symlink-content'
 
     ,getContentField: function(config) {
         return {

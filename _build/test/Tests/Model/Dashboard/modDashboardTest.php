@@ -9,6 +9,13 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Dashboard;
+
+
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\MODxTestCase;
+use xPDO\xPDOException;
 
 /**
  * Tests related to the modDashboard class.
@@ -22,13 +29,12 @@
 class modDashboardTest extends MODxTestCase {
     /**
      * Load some utility classes this case uses
+     *
      * @return void
+     * @throws xPDOException
      */
     public function setUp() {
         parent::setUp();
-        $this->modx->loadClass('modDashboard');
-        $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
-        $this->modx->loadClass('modManagerControllerDeprecated',MODX_CORE_PATH.'model/modx/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
     }
 
@@ -38,7 +44,7 @@ class modDashboardTest extends MODxTestCase {
     public function testGetDefaultDashboard() {
         /** @var modDashboard $dashboard */
         $dashboard = modDashboard::getDefaultDashboard($this->modx);
-        $this->assertInstanceOf('modDashboard',$dashboard);
+        $this->assertInstanceOf(modDashboard::class,$dashboard);
     }
 
     /**
@@ -46,7 +52,7 @@ class modDashboardTest extends MODxTestCase {
      */
     public function testRender() {
         /** @var modManagerController $controller Fake running the welcome controller */
-        $controller = new WelcomeManagerController($this->modx,array(
+        $controller = new \WelcomeManagerController($this->modx,array(
             'namespace' => 'core',
             'namespace_name' => 'core',
             'namespace_path' => MODX_MANAGER_PATH,
