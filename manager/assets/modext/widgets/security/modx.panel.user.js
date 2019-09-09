@@ -415,6 +415,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             }
             ,items: [{
                 xtype: 'radiogroup'
+                ,hidden: true
                 ,fieldLabel: _('password_method')
                 ,columns: 1
                 ,items: [{
@@ -460,20 +461,20 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,border: false
                 ,autoHeight: true
                 ,style: 'padding-top: 15px' // nested form, add padding-top as the label will not have it
+                ,defaults: {
+                    msgTarget: 'under'
+                    ,anchor: '100%'
+                    ,inputType: 'password'
+                    ,xtype: 'textfield'
+                }
                 ,items: [{
                     id: 'modx-user-specifiedpassword'
                     ,name: 'specifiedpassword'
                     ,fieldLabel: _('change_password_new')
-                    ,xtype: 'textfield'
-                    ,inputType: 'password'
-                    ,anchor: '100%'
                 },{
                     id: 'modx-user-confirmpassword'
                     ,name: 'confirmpassword'
                     ,fieldLabel: _('change_password_confirm')
-                    ,xtype: 'textfield'
-                    ,inputType: 'password'
-                    ,anchor: '100%'
                 }]
             }]
         }]);
