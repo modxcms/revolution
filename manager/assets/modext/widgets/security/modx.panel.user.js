@@ -535,7 +535,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,name: 'dob'
                     ,fieldLabel: _('user_dob')
                     ,xtype: 'datefield'
-                    ,width: 200
+                    ,anchor: '100%'
                     ,allowBlank: true
                     ,format: MODx.config.manager_date_format
                 }
@@ -547,7 +547,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,hiddenName: 'gender'
                     ,fieldLabel: _('user_gender')
                     ,xtype: 'modx-combo-gender'
-                    ,width: 200
+                    ,anchor: '100%'
                 }
             }]
         },{
