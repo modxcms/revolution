@@ -42,16 +42,6 @@ use xPDO\xPDOException;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\Om\xPDOObject;
 
-class_alias('xPDO\xPDO', 'xPDO');
-class_alias('\xPDO\Om\xPDOCriteria', 'xPDOCriteria');
-class_alias('\xPDO\Om\xPDOSimpleObject', 'xPDOSimpleObject');
-class_alias('\xPDO\Om\xPDOQuery', 'xPDOQuery');
-class_alias('\xPDO\Om\xPDOObject', 'xPDOObject');
-class_alias('\xPDO\Cache\xPDOCacheManager', 'xPDOCacheManager');
-class_alias('\xPDO\Cache\xPDOFileCache', 'xPDOFileCache');
-class_alias('\xPDO\Transport\xPDOTransport', 'xPDOTransport');
-class_alias('\xPDO\Transport\xPDOObjectVehicle', 'xPDOObjectVehicle');
-
 /**
  * This is the MODX gateway class.
  *

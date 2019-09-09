@@ -23,4 +23,3 @@ if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
 }
 require MODX_CORE_PATH . 'vendor/autoload.php';
 
-class_alias('MODX\Revolution\modX', 'modX');
