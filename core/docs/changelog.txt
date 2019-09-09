@@ -97,6 +97,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - In recently edited resources and online users widget, make sure user has "logs" permission before showing the link to more [#14522]
 - Add passwordless login to the manager [#14351]
 - Add edit date to the list of recently edited resources in the user panel [#11264]
+- Fix xtype for settings: auto_check_pkg_updates_cache_expire, blocked_minutes, cache_db_expires, cache_db_session_lifetime, cache_expires, cache_format, cache_resource_expires, debug, error_page, failed_login_attempts, friendly_alias_max_length, log_level, lock_ttl, mail_smtp_port, mail_smtp_timeout, manager_js_cache_max_age, manager_week_start, proxy_port, password_generated_length, password_min_length, phpthumb_cache_maxage, phpthumb_cache_maxsize, phpthumb_cache_maxfiles, phpthumb_error_fontsize, server_offset_time, session_cookie_lifetime, site_start, site_unavailable_page, unauthorized_page, upload_maxsize [#12284]
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================

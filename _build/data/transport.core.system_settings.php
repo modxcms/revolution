@@ -85,7 +85,7 @@ $settings['archive_with']->fromArray(array (
 $settings['auto_menuindex']= $xpdo->newObject(modSystemSetting::class);
 $settings['auto_menuindex']->fromArray(array (
   'key' => 'auto_menuindex',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -94,7 +94,7 @@ $settings['auto_menuindex']->fromArray(array (
 $settings['auto_check_pkg_updates']= $xpdo->newObject(modSystemSetting::class);
 $settings['auto_check_pkg_updates']->fromArray(array (
   'key' => 'auto_check_pkg_updates',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -104,7 +104,7 @@ $settings['auto_check_pkg_updates_cache_expire']= $xpdo->newObject(modSystemSett
 $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
   'key' => 'auto_check_pkg_updates_cache_expire',
   'value' => 15,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -112,7 +112,7 @@ $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
 $settings['automatic_alias']= $xpdo->newObject(modSystemSetting::class);
 $settings['automatic_alias']->fromArray(array (
   'key' => 'automatic_alias',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -139,8 +139,8 @@ $settings['base_help_url']->fromArray(array (
 $settings['blocked_minutes']= $xpdo->newObject(modSystemSetting::class);
 $settings['blocked_minutes']->fromArray(array (
   'key' => 'blocked_minutes',
-  'value' => '60',
-  'xtype' => 'textfield',
+  'value' => 60,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -148,7 +148,7 @@ $settings['blocked_minutes']->fromArray(array (
 $settings['cache_action_map']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_action_map']->fromArray(array (
   'key' => 'cache_action_map',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -157,7 +157,7 @@ $settings['cache_action_map']->fromArray(array (
 $settings['cache_alias_map']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_alias_map']->fromArray(array (
     'key' => 'cache_alias_map',
-    'value' => '1',
+    'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'caching',
@@ -166,7 +166,7 @@ $settings['cache_alias_map']->fromArray(array (
 $settings['use_context_resource_table']= $xpdo->newObject(modSystemSetting::class);
 $settings['use_context_resource_table']->fromArray(array (
     'key' => 'use_context_resource_table',
-    'value' => '1',
+    'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'caching',
@@ -175,7 +175,7 @@ $settings['use_context_resource_table']->fromArray(array (
 $settings['cache_context_settings']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_context_settings']->fromArray(array (
   'key' => 'cache_context_settings',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -184,7 +184,7 @@ $settings['cache_context_settings']->fromArray(array (
 $settings['cache_db']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_db']->fromArray(array (
   'key' => 'cache_db',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -193,8 +193,8 @@ $settings['cache_db']->fromArray(array (
 $settings['cache_db_expires']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_db_expires']->fromArray(array (
   'key' => 'cache_db_expires',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -202,7 +202,7 @@ $settings['cache_db_expires']->fromArray(array (
 $settings['cache_db_session']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_db_session']->fromArray(array (
   'key' => 'cache_db_session',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -212,7 +212,7 @@ $settings['cache_db_session_lifetime']= $xpdo->newObject(modSystemSetting::class
 $settings['cache_db_session_lifetime']->fromArray(array (
   'key' => 'cache_db_session_lifetime',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -220,7 +220,7 @@ $settings['cache_db_session_lifetime']->fromArray(array (
 $settings['cache_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_default']->fromArray(array (
   'key' => 'cache_default',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -229,8 +229,8 @@ $settings['cache_default']->fromArray(array (
 $settings['cache_expires']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_expires']->fromArray(array (
   'key' => 'cache_expires',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -238,8 +238,8 @@ $settings['cache_expires']->fromArray(array (
 $settings['cache_format']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_format']->fromArray(array (
   'key' => 'cache_format',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -256,7 +256,7 @@ $settings['cache_handler']->fromArray(array (
 $settings['cache_lang_js']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_lang_js']->fromArray(array (
   'key' => 'cache_lang_js',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -265,7 +265,7 @@ $settings['cache_lang_js']->fromArray(array (
 $settings['cache_lexicon_topics']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_lexicon_topics']->fromArray(array (
   'key' => 'cache_lexicon_topics',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -274,7 +274,7 @@ $settings['cache_lexicon_topics']->fromArray(array (
 $settings['cache_noncore_lexicon_topics']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_noncore_lexicon_topics']->fromArray(array (
   'key' => 'cache_noncore_lexicon_topics',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -283,7 +283,7 @@ $settings['cache_noncore_lexicon_topics']->fromArray(array (
 $settings['cache_resource']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_resource']->fromArray(array (
   'key' => 'cache_resource',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -292,8 +292,8 @@ $settings['cache_resource']->fromArray(array (
 $settings['cache_resource_expires']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_resource_expires']->fromArray(array (
   'key' => 'cache_resource_expires',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
@@ -301,7 +301,7 @@ $settings['cache_resource_expires']->fromArray(array (
 $settings['cache_resource_clear_partial']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_resource_clear_partial']->fromArray(array (
     'key' => 'cache_resource_clear_partial',
-    'value' => 0,
+    'value' => false,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'caching',
@@ -310,7 +310,7 @@ $settings['cache_resource_clear_partial']->fromArray(array (
 $settings['cache_scripts']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_scripts']->fromArray(array (
   'key' => 'cache_scripts',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -319,7 +319,7 @@ $settings['cache_scripts']->fromArray(array (
 $settings['clear_cache_refresh_trees']= $xpdo->newObject(modSystemSetting::class);
 $settings['clear_cache_refresh_trees']->fromArray(array (
   'key' => 'clear_cache_refresh_trees',
-  'value' => 0,
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'caching',
@@ -410,7 +410,7 @@ $settings['debug']= $xpdo->newObject(modSystemSetting::class);
 $settings['debug']->fromArray(array (
   'key' => 'debug',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -463,7 +463,7 @@ $settings['default_context']->fromArray(array (
 $settings['default_template']= $xpdo->newObject(modSystemSetting::class);
 $settings['default_template']->fromArray(array (
   'key' => 'default_template',
-  'value' => '1',
+  'value' => 1,
   'xtype' => 'modx-combo-template',
   'namespace' => 'core',
   'area' => 'site',
@@ -472,7 +472,7 @@ $settings['default_template']->fromArray(array (
 $settings['default_content_type']= $xpdo->newObject(modSystemSetting::class);
 $settings['default_content_type']->fromArray(array (
   'key' => 'default_content_type',
-  'value' => '1',
+  'value' => 1,
   'xtype' => 'modx-combo-content-type',
   'namespace' => 'core',
   'area' => 'site',
@@ -517,8 +517,8 @@ $settings['enable_dragdrop']->fromArray(array (
 $settings['error_page']= $xpdo->newObject(modSystemSetting::class);
 $settings['error_page']->fromArray(array (
   'key' => 'error_page',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -526,8 +526,8 @@ $settings['error_page']->fromArray(array (
 $settings['failed_login_attempts']= $xpdo->newObject(modSystemSetting::class);
 $settings['failed_login_attempts']->fromArray(array (
   'key' => 'failed_login_attempts',
-  'value' => '5',
-  'xtype' => 'textfield',
+  'value' => 5,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -553,7 +553,7 @@ $settings['feed_modx_news']->fromArray(array (
 $settings['feed_modx_news_enabled']= $xpdo->newObject(modSystemSetting::class);
 $settings['feed_modx_news_enabled']->fromArray(array (
   'key' => 'feed_modx_news_enabled',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -571,7 +571,7 @@ $settings['feed_modx_security']->fromArray(array (
 $settings['feed_modx_security_enabled']= $xpdo->newObject(modSystemSetting::class);
 $settings['feed_modx_security_enabled']->fromArray(array (
   'key' => 'feed_modx_security_enabled',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -634,7 +634,7 @@ $settings['forward_merge_excludes']->fromArray(array (
 $settings['friendly_alias_lowercase_only']= $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_alias_lowercase_only']->fromArray(array (
   'key' => 'friendly_alias_lowercase_only',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -643,8 +643,8 @@ $settings['friendly_alias_lowercase_only']->fromArray(array (
 $settings['friendly_alias_max_length']= $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_alias_max_length']->fromArray(array (
   'key' => 'friendly_alias_max_length',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'furls',
   'editedon' => null,
@@ -652,7 +652,7 @@ $settings['friendly_alias_max_length']->fromArray(array (
 $settings['friendly_alias_realtime']= $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_alias_realtime']->fromArray(array (
   'key' => 'friendly_alias_realtime',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -679,7 +679,7 @@ $settings['friendly_alias_restrict_chars_pattern']->fromArray(array (
 $settings['friendly_alias_strip_element_tags']= $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_alias_strip_element_tags']->fromArray(array (
   'key' => 'friendly_alias_strip_element_tags',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -742,7 +742,7 @@ $settings['friendly_alias_word_delimiters']->fromArray(array (
 $settings['friendly_urls']= $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_urls']->fromArray(array (
   'key' => 'friendly_urls',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -751,7 +751,7 @@ $settings['friendly_urls']->fromArray(array (
 $settings['friendly_urls_strict']= $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_urls_strict']->fromArray(array (
   'key' => 'friendly_urls_strict',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -760,7 +760,7 @@ $settings['friendly_urls_strict']->fromArray(array (
 $settings['use_frozen_parent_uris']= $xpdo->newObject(modSystemSetting::class);
 $settings['use_frozen_parent_uris']->fromArray(array (
   'key' => 'use_frozen_parent_uris',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -769,7 +769,7 @@ $settings['use_frozen_parent_uris']->fromArray(array (
 $settings['global_duplicate_uri_check']= $xpdo->newObject(modSystemSetting::class);
 $settings['global_duplicate_uri_check']->fromArray(array (
   'key' => 'global_duplicate_uri_check',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -778,7 +778,7 @@ $settings['global_duplicate_uri_check']->fromArray(array (
 $settings['hidemenu_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['hidemenu_default']->fromArray(array (
   'key' => 'hidemenu_default',
-  'value' => 0,
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -805,8 +805,8 @@ $settings['locale']->fromArray(array (
 $settings['log_level']= $xpdo->newObject(modSystemSetting::class);
 $settings['log_level']->fromArray(array (
   'key' => 'log_level',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -823,7 +823,7 @@ $settings['log_target']->fromArray(array (
 $settings['log_deprecated']= $xpdo->newObject(modSystemSetting::class);
 $settings['log_deprecated']->fromArray(array (
   'key' => 'log_deprecated',
-  'value' => 1,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -842,7 +842,7 @@ $settings['lock_ttl']= $xpdo->newObject(modSystemSetting::class);
 $settings['lock_ttl']->fromArray(array (
   'key' => 'lock_ttl',
   'value' => 360,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -922,8 +922,8 @@ $settings['mail_smtp_pass']->fromArray(array (
 $settings['mail_smtp_port']= $xpdo->newObject(modSystemSetting::class);
 $settings['mail_smtp_port']->fromArray(array (
   'key' => 'mail_smtp_port',
-  'value' => '587',
-  'xtype' => 'textfield',
+  'value' => 587,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
@@ -949,8 +949,8 @@ $settings['mail_smtp_single_to']->fromArray(array (
 $settings['mail_smtp_timeout']= $xpdo->newObject(modSystemSetting::class);
 $settings['mail_smtp_timeout']->fromArray(array (
   'key' => 'mail_smtp_timeout',
-  'value' => '10',
-  'xtype' => 'textfield',
+  'value' => 10,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
@@ -995,7 +995,7 @@ $settings['manager_js_cache_max_age']= $xpdo->newObject(modSystemSetting::class)
 $settings['manager_js_cache_max_age']->fromArray(array (
   'key' => 'manager_js_cache_max_age',
   'value' => 3600,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -1103,7 +1103,7 @@ $settings['manager_week_start']= $xpdo->newObject(modSystemSetting::class);
 $settings['manager_week_start']->fromArray(array (
   'key' => 'manager_week_start',
   'value' => 0,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'manager',
   'editedon' => null,
@@ -1193,7 +1193,7 @@ $settings['proxy_port']= $xpdo->newObject(modSystemSetting::class);
 $settings['proxy_port']->fromArray(array (
   'key' => 'proxy_port',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'proxy',
   'editedon' => null,
@@ -1210,8 +1210,8 @@ $settings['proxy_username']->fromArray(array (
 $settings['password_generated_length']= $xpdo->newObject(modSystemSetting::class);
 $settings['password_generated_length']->fromArray(array (
   'key' => 'password_generated_length',
-  'value' => '10',
-  'xtype' => 'textfield',
+  'value' => 10,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -1219,8 +1219,8 @@ $settings['password_generated_length']->fromArray(array (
 $settings['password_min_length']= $xpdo->newObject(modSystemSetting::class);
 $settings['password_min_length']->fromArray(array (
   'key' => 'password_min_length',
-  'value' => '8',
-  'xtype' => 'textfield',
+  'value' => 8,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
   'editedon' => null,
@@ -1239,7 +1239,7 @@ $settings['phpthumb_cache_maxage']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_cache_maxage']->fromArray(array (
   'key' => 'phpthumb_cache_maxage',
   'value' => 30, // 30 days
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1248,7 +1248,7 @@ $settings['phpthumb_cache_maxsize']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_cache_maxsize']->fromArray(array (
   'key' => 'phpthumb_cache_maxsize',
   'value' => 100, // 100MB
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1257,7 +1257,7 @@ $settings['phpthumb_cache_maxfiles']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_cache_maxfiles']->fromArray(array (
   'key' => 'phpthumb_cache_maxfiles',
   'value' => 10000, // 10k files
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1302,7 +1302,7 @@ $settings['phpthumb_error_fontsize']= $xpdo->newObject(modSystemSetting::class);
 $settings['phpthumb_error_fontsize']->fromArray(array (
   'key' => 'phpthumb_error_fontsize',
   'value' => 1,
-  'xtype' => 'textfield',
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'phpthumb',
   'editedon' => null,
@@ -1464,7 +1464,7 @@ $settings['request_controller']->fromArray(array (
 $settings['request_method_strict']= $xpdo->newObject(modSystemSetting::class);
 $settings['request_method_strict']->fromArray(array (
   'key' => 'request_method_strict',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'gateway',
@@ -1491,7 +1491,7 @@ $settings['request_param_id']->fromArray(array (
 $settings['resolve_hostnames']= $xpdo->newObject(modSystemSetting::class);
 $settings['resolve_hostnames']->fromArray(array (
   'key' => 'resolve_hostnames',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -1527,7 +1527,7 @@ $settings['resource_tree_node_tooltip']->fromArray(array (
 $settings['richtext_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['richtext_default']->fromArray(array (
   'key' => 'richtext_default',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1536,7 +1536,7 @@ $settings['richtext_default']->fromArray(array (
 $settings['search_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['search_default']->fromArray(array (
   'key' => 'search_default',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -1545,8 +1545,8 @@ $settings['search_default']->fromArray(array (
 $settings['server_offset_time']= $xpdo->newObject(modSystemSetting::class);
 $settings['server_offset_time']->fromArray(array (
   'key' => 'server_offset_time',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
@@ -1590,8 +1590,8 @@ $settings['anonymous_sessions']->fromArray(array (
 $settings['session_cookie_lifetime']= $xpdo->newObject(modSystemSetting::class);
 $settings['session_cookie_lifetime']->fromArray(array (
   'key' => 'session_cookie_lifetime',
-  'value' => '604800',
-  'xtype' => 'textfield',
+  'value' => 604800,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'session',
   'editedon' => null,
@@ -1653,7 +1653,7 @@ $settings['session_name']->fromArray(array (
 $settings['set_header']= $xpdo->newObject(modSystemSetting::class);
 $settings['set_header']->fromArray(array (
   'key' => 'set_header',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
@@ -1662,7 +1662,7 @@ $settings['set_header']->fromArray(array (
 $settings['send_poweredby_header']= $xpdo->newObject(modSystemSetting::class);
 $settings['send_poweredby_header']->fromArray(array (
     'key' => 'send_poweredby_header',
-    'value' => '0',
+    'value' => false,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'system',
@@ -1689,8 +1689,8 @@ $settings['site_name']->fromArray(array (
 $settings['site_start']= $xpdo->newObject(modSystemSetting::class);
 $settings['site_start']->fromArray(array (
   'key' => 'site_start',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -1698,7 +1698,7 @@ $settings['site_start']->fromArray(array (
 $settings['site_status']= $xpdo->newObject(modSystemSetting::class);
 $settings['site_status']->fromArray(array (
   'key' => 'site_status',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -1716,8 +1716,8 @@ $settings['site_unavailable_message']->fromArray(array (
 $settings['site_unavailable_page']= $xpdo->newObject(modSystemSetting::class);
 $settings['site_unavailable_page']->fromArray(array (
   'key' => 'site_unavailable_page',
-  'value' => '0',
-  'xtype' => 'textfield',
+  'value' => 0,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -1725,7 +1725,7 @@ $settings['site_unavailable_page']->fromArray(array (
 $settings['static_elements_automate_templates']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_automate_templates']->fromArray(array (
   'key' => 'static_elements_automate_templates',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1734,7 +1734,7 @@ $settings['static_elements_automate_templates']->fromArray(array (
 $settings['static_elements_automate_tvs']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_automate_tvs']->fromArray(array (
   'key' => 'static_elements_automate_tvs',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1743,7 +1743,7 @@ $settings['static_elements_automate_tvs']->fromArray(array (
 $settings['static_elements_automate_chunks']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_automate_chunks']->fromArray(array (
   'key' => 'static_elements_automate_chunks',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1752,7 +1752,7 @@ $settings['static_elements_automate_chunks']->fromArray(array (
 $settings['static_elements_automate_snippets']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_automate_snippets']->fromArray(array (
   'key' => 'static_elements_automate_snippets',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1761,7 +1761,7 @@ $settings['static_elements_automate_snippets']->fromArray(array (
 $settings['static_elements_automate_plugins']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_automate_plugins']->fromArray(array (
   'key' => 'static_elements_automate_plugins',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1770,7 +1770,7 @@ $settings['static_elements_automate_plugins']->fromArray(array (
 $settings['static_elements_default_mediasource']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_default_mediasource']->fromArray(array (
   'key' => 'static_elements_default_mediasource',
-  'value' => '0',
+  'value' => 0,
   'xtype' => 'modx-combo-source',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1779,7 +1779,7 @@ $settings['static_elements_default_mediasource']->fromArray(array (
 $settings['static_elements_default_category']= $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_default_category']->fromArray(array (
   'key' => 'static_elements_default_category',
-  'value' => '0',
+  'value' => 0,
   'xtype' => 'modx-combo-category',
   'namespace' => 'core',
   'area' => 'static_elements',
@@ -1797,7 +1797,7 @@ $settings['static_elements_basepath']->fromArray(array (
 $settings['strip_image_paths']= $xpdo->newObject(modSystemSetting::class);
 $settings['strip_image_paths']->fromArray(array (
   'key' => 'strip_image_paths',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
@@ -1806,7 +1806,7 @@ $settings['strip_image_paths']->fromArray(array (
 $settings['symlink_merge_fields']= $xpdo->newObject(modSystemSetting::class);
 $settings['symlink_merge_fields']->fromArray(array (
   'key' => 'symlink_merge_fields',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -1815,7 +1815,7 @@ $settings['symlink_merge_fields']->fromArray(array (
 $settings['syncsite_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['syncsite_default']->fromArray(array (
     'key' => 'syncsite_default',
-    'value' => '1',
+    'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'caching',
@@ -1824,7 +1824,7 @@ $settings['syncsite_default']->fromArray(array (
 $settings['topmenu_show_descriptions']= $xpdo->newObject(modSystemSetting::class);
 $settings['topmenu_show_descriptions']->fromArray(array (
   'key' => 'topmenu_show_descriptions',
-  'value' => 1,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1842,7 +1842,7 @@ $settings['tree_default_sort']->fromArray(array (
 $settings['tree_root_id']= $xpdo->newObject(modSystemSetting::class);
 $settings['tree_root_id']->fromArray(array (
   'key' => 'tree_root_id',
-  'value' => '0',
+  'value' => 0,
   'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1851,7 +1851,7 @@ $settings['tree_root_id']->fromArray(array (
 $settings['tvs_below_content']= $xpdo->newObject(modSystemSetting::class);
 $settings['tvs_below_content']->fromArray(array (
   'key' => 'tvs_below_content',
-  'value' => 0,
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1869,8 +1869,8 @@ $settings['udperms_allowroot']->fromArray(array (
 $settings['unauthorized_page']= $xpdo->newObject(modSystemSetting::class);
 $settings['unauthorized_page']->fromArray(array (
   'key' => 'unauthorized_page',
-  'value' => '1',
-  'xtype' => 'textfield',
+  'value' => 1,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'site',
   'editedon' => null,
@@ -1896,8 +1896,8 @@ $settings['upload_images']->fromArray(array (
 $settings['upload_maxsize']= $xpdo->newObject(modSystemSetting::class);
 $settings['upload_maxsize']->fromArray(array (
   'key' => 'upload_maxsize',
-  'value' => '1048576',
-  'xtype' => 'textfield',
+  'value' => 1048576,
+  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'file',
   'editedon' => null,
@@ -1914,7 +1914,7 @@ $settings['upload_media']->fromArray(array (
 $settings['use_alias_path']= $xpdo->newObject(modSystemSetting::class);
 $settings['use_alias_path']->fromArray(array (
   'key' => 'use_alias_path',
-  'value' => '0',
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -1923,7 +1923,7 @@ $settings['use_alias_path']->fromArray(array (
 $settings['use_browser']= $xpdo->newObject(modSystemSetting::class);
 $settings['use_browser']->fromArray(array (
   'key' => 'use_browser',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
@@ -1932,7 +1932,7 @@ $settings['use_browser']->fromArray(array (
 $settings['use_editor']= $xpdo->newObject(modSystemSetting::class);
 $settings['use_editor']->fromArray(array (
   'key' => 'use_editor',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'editor',
@@ -1981,7 +1981,7 @@ $settings['webpwdreminder_message']->fromArray(array (
 $settings['welcome_screen']= $xpdo->newObject(modSystemSetting::class);
 $settings['welcome_screen']->fromArray(array (
   'key' => 'welcome_screen',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'manager',

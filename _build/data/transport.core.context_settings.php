@@ -5,7 +5,7 @@ $collection['0']= $xpdo->newObject(modContextSetting::class);
 $collection['0']->fromArray(array (
   'context_key' => 'mgr',
   'key' => 'allow_tags_in_post',
-  'value' => '1',
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'system',
