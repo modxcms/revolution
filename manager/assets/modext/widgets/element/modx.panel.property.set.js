@@ -12,8 +12,9 @@ MODx.panel.PropertySet = function(config) {
         ,items: [{
             html: _('propertysets')
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('propertysets')
+            ,layout: 'form'
             ,id: 'modx-property-set-form'
             ,border: true
             ,items: [{
@@ -43,7 +44,7 @@ MODx.panel.PropertySet = function(config) {
                     ,items: []
                 }]
             }]
-        }]
+        }])]
     });
     MODx.panel.PropertySet.superclass.constructor.call(this,config);
 

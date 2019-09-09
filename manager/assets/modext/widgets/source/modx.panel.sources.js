@@ -1,3 +1,11 @@
+/**
+ * Loads the Sources panel
+ *
+ * @class MODx.panel.Sources
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration options
+ * @xtype modx-panel-sources
+ */
 MODx.panel.Sources = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -10,8 +18,8 @@ MODx.panel.Sources = function(config) {
             ,id: 'modx-sources-header'
             ,xtype: 'modx-header'
         },MODx.getPageStructure([{
-            layout: 'form'
-            ,title: _('sources')
+            title: _('sources')
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('sources.intro_msg')+'</p>'
                 ,xtype: 'modx-description'
@@ -45,6 +53,14 @@ MODx.panel.Sources = function(config) {
 Ext.extend(MODx.panel.Sources,MODx.FormPanel);
 Ext.reg('modx-panel-sources',MODx.panel.Sources);
 
+/**
+ * Loads a grid of Sources.
+ *
+ * @class MODx.grid.Sources
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-sources
+ */
 MODx.grid.Sources = function(config) {
     config = config || {};
 
@@ -173,9 +189,11 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
             }
         });
     }
+
     ,createSource: function() {
         MODx.loadPage('system/Source/Create');
     }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -208,7 +226,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
                 ,id: this.menu.record.id
             }
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
@@ -224,11 +242,11 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         return true;
     }
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'Source/GetList'
-    	};
+        };
         Ext.getCmp('modx-source-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
 });
@@ -276,7 +294,6 @@ MODx.window.CreateSource = function(config) {
 };
 Ext.extend(MODx.window.CreateSource,MODx.Window);
 Ext.reg('modx-window-source-create',MODx.window.CreateSource);
-
 
 MODx.grid.SourceTypes = function(config) {
     config = config || {};

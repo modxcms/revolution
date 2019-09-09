@@ -1388,12 +1388,10 @@ iframe[classname="x-hidden"] {
 
 /* Panel description text */
 .panel-desc {
-  background-color: $white;
-  border: none;
+  border-bottom: 1px solid $lighterGray;
   border-radius: 0;
   color: $darkestGray;
   line-height: 1.5;
-  margin-top: 15px;
   padding: 15px !important;
 
   .x-window & {
@@ -1557,12 +1555,6 @@ iframe[classname="x-hidden"] {
   .x-tab-panel-bwrap,
   .x-tab-panel-body {
     overflow: visible !important;
-  }
-
-  & > .x-tab-panel-bwrap > .x-tab-panel-body > .x-panel:not(#modx-resource-settings) {
-    .panel-desc {
-      margin-top: 0;
-    }
   }
 }
 

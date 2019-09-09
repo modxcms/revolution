@@ -16,9 +16,10 @@ MODx.panel.Actions = function(config) {
         ,items: [{
             html: _('topmenu')
             ,xtype: 'modx-header'
-        },{
-            itemId: 'form-menu'
-            ,bwrapCssClass: 'shadowbox'
+        },MODx.getPageStructure([{
+            title: _('topmenu')
+            ,layout: 'form'
+            ,itemId: 'form-menu'
             ,items: [{
                 html: '<p>'+_('topmenu_desc')+'</p>'
                 ,xtype: 'modx-description'
@@ -28,7 +29,7 @@ MODx.panel.Actions = function(config) {
                 ,id: 'modx-tree-menu'
                 ,cls: 'main-wrapper'
             }]
-        }]
+        }])]
     });
     MODx.panel.Actions.superclass.constructor.call(this,config);
 };

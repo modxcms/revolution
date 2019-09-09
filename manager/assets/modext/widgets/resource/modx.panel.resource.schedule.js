@@ -1,3 +1,11 @@
+/**
+ * Loads the Resource Schedule panel
+ *
+ * @class MODx.panel.ResourceSchedule
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration options
+ * @xtype modx-panel-resource-schedule
+ */
 MODx.panel.ResourceSchedule = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -9,8 +17,9 @@ MODx.panel.ResourceSchedule = function(config) {
             html: _('site_schedule')
             ,id: 'modx-resource-schedule-header'
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('site_schedule')
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('site_schedule_desc')+'</p>'
                 ,xtype: 'modx-description'
@@ -19,7 +28,7 @@ MODx.panel.ResourceSchedule = function(config) {
 				,cls:'main-wrapper'
                 ,preventRender: true
             }]
-        }]
+        }])]
     });
     MODx.panel.ResourceSchedule.superclass.constructor.call(this,config);
 };

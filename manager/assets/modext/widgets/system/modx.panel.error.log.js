@@ -1,3 +1,11 @@
+/**
+ * Loads the ErrorLog panel
+ *
+ * @class MODx.panel.ErrorLog
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration options
+ * @xtype modx-panel-error-log
+ */
 MODx.panel.ErrorLog = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -12,8 +20,9 @@ MODx.panel.ErrorLog = function(config) {
             html: _('error_log')
             ,id: 'modx-error-log-header'
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('error_log')
+            ,layout: 'form'
             ,hideLabels: true
             ,autoHeight: true
             ,border: true
@@ -51,7 +60,7 @@ MODx.panel.ErrorLog = function(config) {
                     ,scope: this
                 }]
             }]
-        }]
+        }])]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
     this.setup();

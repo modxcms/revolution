@@ -1,3 +1,11 @@
+/**
+ * Loads the Users panel
+ *
+ * @class MODx.panel.Users
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration options
+ * @xtype modx-panel-users
+ */
 MODx.panel.Users = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -9,8 +17,9 @@ MODx.panel.Users = function(config) {
             html: _('users')
             ,id: 'modx-users-header'
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('users')
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('user_management_msg')+'</p>'
                 ,xtype: 'modx-description'
@@ -19,13 +28,21 @@ MODx.panel.Users = function(config) {
                 ,cls:'main-wrapper'
                 ,preventRender: true
             }]
-        }]
+        }])]
     });
     MODx.panel.Users.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.Users,MODx.FormPanel);
 Ext.reg('modx-panel-users',MODx.panel.Users);
 
+/**
+ * Loads a grid of User.
+ *
+ * @class MODx.grid.User
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-user
+ */
 MODx.grid.User = function(config) {
     config = config || {};
 

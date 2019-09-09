@@ -1,3 +1,11 @@
+/**
+ * Loads a grid for managing Settings.
+ *
+ * @class MODx.grid.SettingsGrid
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-settings
+ */
 MODx.grid.SettingsGrid = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -18,7 +26,9 @@ MODx.grid.SettingsGrid = function(config) {
             }
         }];
     }
-    config.tbar.push('->',{
+    config.tbar.push(
+    '->'
+    ,{
         xtype: 'modx-combo-namespace'
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
@@ -75,7 +85,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'click': {fn: this.clearFilter, scope: this},
             'mouseout': { fn: function(evt){
-                   this.removeClass('x-btn-focus');
+                    this.removeClass('x-btn-focus');
                 }
             }
         }
@@ -137,7 +147,7 @@ MODx.grid.SettingsGrid = function(config) {
     });
 
     Ext.applyIf(config, {
-         cm: this.cm
+        cm: this.cm
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -258,7 +268,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         this.getStore().baseParams.area = area;
         this.getStore().baseParams.key = '';
 
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
        // this.refresh();
     }
     ,filterByKey: function(tf,newValue,oldValue) {
