@@ -58,8 +58,13 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
      */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
+        $user = $this->getProperty('user');
         $q = $this->modx->newQuery($this->classKey, ['classKey:IN' => $this->classKeys]);
         $q->select('MAX(id), item');
+        if (!empty($user)) {
+            $q->where(['user' => $user]);
+            $c->where(['user' => $user]);
+        }
         $q->groupby('item');
         $q->limit($this->getProperty('limit', 10));
         if ($q->prepare() && $q->stmt->execute()) {

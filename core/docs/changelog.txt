@@ -96,6 +96,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Add manager_tooltip_enable and manager_tooltip_delay settings to manage if/how long tooltip descriptions are shown [#12732]
 - In recently edited resources and online users widget, make sure user has "logs" permission before showing the link to more [#14522]
 - Add passwordless login to the manager [#14351]
+- Add edit date to the list of recently edited resources in the user panel [#11264]
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================

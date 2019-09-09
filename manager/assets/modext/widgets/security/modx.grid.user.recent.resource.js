@@ -8,6 +8,7 @@
  */
 MODx.grid.RecentlyEditedResourcesByUser = function(config) {
     config = config || {};
+    var dateFormat = MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format;
     Ext.applyIf(config,{
         title: _('recent_docs')
         ,url: MODx.config.connector_url
@@ -18,7 +19,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         ,autosave: true
         ,save_action: 'Resource/UpdateFromGrid'
         ,pageSize: 10
-        ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu', 'link']
+        ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu', 'link', 'occurred']
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -27,6 +28,10 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         },{
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
+        },{
+            header: _('editedon')
+            ,dataIndex: 'occurred'
+            ,renderer : Ext.util.Format.dateRenderer(dateFormat)
         },{
             header: _('published')
             ,dataIndex: 'published'
