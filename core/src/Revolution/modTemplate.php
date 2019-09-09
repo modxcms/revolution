@@ -221,7 +221,7 @@ class modTemplate extends modElement
      */
     public function getTemplateVarList(array $sort = ['name' => 'ASC'], $limit = 0, $offset = 0, array $conditions = [])
     {
-        return $this->xpdo->call('modTemplate', 'listTemplateVars', [&$this, $sort, $limit, $offset, $conditions]);
+        return $this->xpdo->call(modTemplate::class, 'listTemplateVars', [&$this, $sort, $limit, $offset, $conditions]);
     }
 
     /**

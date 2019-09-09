@@ -1162,7 +1162,7 @@ class modTemplateVar extends modElement
     public function hasTemplate($templatePk)
     {
         if (!is_int($templatePk) && !is_object($templatePk)) {
-            $template = $this->xpdo->getObject('modTemplate', ['templatename' => $templatePk]);
+            $template = $this->xpdo->getObject(modTemplate::class, ['templatename' => $templatePk]);
             if (empty($template) || !is_object($template) || !($template instanceof modTemplate)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, 'modTemplateVar::hasTemplate - No template: ' . $templatePk);
 
