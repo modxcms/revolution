@@ -37,6 +37,11 @@ $_lang['login_username_or_email'] = 'Nom d\'utilisateur ou E-mail';
 $_lang['login_username_password_incorrect'] = 'L\'identifiant ou le mot de passe saisi est incorrect. Veuillez vérifier l\'identifiant, entrer à nouveau le mot de passe, puis réessayer.';
 $_lang['login_user_inactive'] = 'Votre compte utilisateur a été désactivé. Veuillez contacter votre administrateur système pour activer le compte.';
 $_lang['login_email_subject'] = 'Vos informations de connexion';
+$_lang['login_magiclink_subject'] = 'Your one-time login link';
+$_lang['login_magiclink_err'] = 'Your login link is not valid. Please request a new one.';
+$_lang['login_magiclink_email'] = '<h2>One-time Login Link</h2><p>Here is your link to get logged in to the MODX manager. This link is valid for the next [[+expiration]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?magiclink=[[+hash]]" class="btn">Log me in</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+$_lang['login_magiclink_default_msg'] = 'If your email <i>[[+email]]</i> is registered with an account, you’ll receive an email shortly.';
+$_lang['login_magiclink_error_msg'] = 'The system was not able to send a login link via email. Please contact the site administrator if this error is permanent.';
 $_lang['login_forgot_email'] = '<h2>vous avez oublié votre mot de passe ?</h2><p>nous avons reçu une demande de changement de votre mot de passe de MODX Revolution. Vous pouvez réinitialiser votre mot de passe en cliquant sur le bouton ci-dessous et en suivant les instructions à l’écran.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">réinitialiser mon mot de passe</a></p><p class="small">Si vous n’avez pas envoyé cette demande, Merci d\'ignorer ce message.</p>';
 $_lang['login_signup_email'] = '<p>Bonjour, [[+username]]!</p><p>Un compte a été enregistré pour vous sur le site web <strong>[[++ site_name]]</strong>. Si vous ne connaissez pas votre mot de passe, [[++ allow_manager_login_forgot_password:is=`1`:then=`réinitialiser le à l’aide du lien mot de passe publié sur l’écran de connexion`:else= `demandez à votre administrateur de site`]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]" class="btn">Connectez-vous à [[++ site_name]]</a></p>';
 $_lang['login_greeting_morning'] = '<strong>Bonjour</strong>, Bienvenue !';
@@ -44,7 +49,12 @@ $_lang['login_greeting_afternoon'] = '<strong>Bon après-midi</strong>, Bienvenu
 $_lang['login_greeting_evening'] = '<strong>Bonsoir</strong>, Bienvenue !';
 $_lang['login_greeting_night'] = '<strong>Bonne nuit</strong>, Bienvenue !';
 $_lang['login_note'] = 'Connectez-vous pour accéder au gestionnaire.';
+$_lang['login_note_passwordless'] = 'Please enter your email address to receive a one-time login link.';
+$_lang['login_magiclink_email_button'] = 'Send me a one-time login link';
+$_lang['login_magiclink_email_placeholder'] = 'Your user account\'s email here';
+$_lang['login_email'] = 'Email';
 $_lang['login_help_button_text'] = 'Aide';
 $_lang['login_help_title'] = 'Obtenir de l’aide sur MODX';
 $_lang['login_help_text'] = '<p>avez-vous besoin de support professionnel MODX ? Nous avons créé un répertoire de professionnels MODX du monde entier qui seront heureux de vous aider. <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="FTrouver des professionnels sur le site web de MODX">Trouver de l’aide sur modx.com</a>.</p>';
 $_lang['login_return_site'] = 'Retourner au site';
+

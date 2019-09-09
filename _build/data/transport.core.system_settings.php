@@ -1036,6 +1036,24 @@ $settings['manager_login_url_alternate']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
+$settings['manager_tooltip_enable']= $xpdo->newObject(modSystemSetting::class);
+$settings['manager_tooltip_enable']->fromArray(array (
+  'namespace' => 'core',
+  'key' => 'manager_tooltip_enable',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['manager_tooltip_delay']= $xpdo->newObject(modSystemSetting::class);
+$settings['manager_tooltip_delay']->fromArray(array (
+  'key' => 'manager_tooltip_delay',
+  'value' => 2300,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['login_background_image']= $xpdo->newObject(modSystemSetting::class);
 $settings['login_background_image']->fromArray(array (
   'key' => 'login_background_image',
@@ -2131,4 +2149,41 @@ $settings['error_log_filepath']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
+$settings['passwordless_activated']= $xpdo->newObject(modSystemSetting::class);
+$settings['passwordless_activated']->fromArray(array (
+    'key' => 'passwordless_activated',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'authentication',
+    'editedon' => null,
+), '', true, true);
+$settings['passwordless_expiration']= $xpdo->newObject(modSystemSetting::class);
+$settings['passwordless_expiration']->fromArray(array (
+    'key' => 'passwordless_expiration',
+    'value' => '3600',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'authentication',
+    'editedon' => null,
+), '', true, true);
+$settings['passwordless_activated']= $xpdo->newObject(modSystemSetting::class);
+$settings['passwordless_activated']->fromArray(array (
+    'key' => 'passwordless_activated',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'authentication',
+    'editedon' => null,
+), '', true, true);
+$settings['passwordless_expiration']= $xpdo->newObject(modSystemSetting::class);
+$settings['passwordless_expiration']->fromArray(array (
+    'key' => 'passwordless_expiration',
+    'value' => '3600',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'authentication',
+    'editedon' => null,
+), '', true, true);
+
 return $settings;

@@ -37,6 +37,11 @@ $_lang['login_username_or_email'] = 'Імя карыстальніка або em
 $_lang['login_username_password_incorrect'] = 'Няправільнае імя карыстальніка або пароль. Калі ласка, праверце уведзеныя дадзеныя і паспрабуйце зноў.';
 $_lang['login_user_inactive'] = 'Ваш улiковы запiс быў заблакаваны. Калі ласка, звяжыцеся з вашым сістэмным адміністратарам для адмены блакіроўкі.';
 $_lang['login_email_subject'] = 'Вашы дадзеныя для ўваходу';
+$_lang['login_magiclink_subject'] = 'Your one-time login link';
+$_lang['login_magiclink_err'] = 'Your login link is not valid. Please request a new one.';
+$_lang['login_magiclink_email'] = '<h2>One-time Login Link</h2><p>Here is your link to get logged in to the MODX manager. This link is valid for the next [[+expiration]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?magiclink=[[+hash]]" class="btn">Log me in</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+$_lang['login_magiclink_default_msg'] = 'If your email <i>[[+email]]</i> is registered with an account, you’ll receive an email shortly.';
+$_lang['login_magiclink_error_msg'] = 'The system was not able to send a login link via email. Please contact the site administrator if this error is permanent.';
 $_lang['login_forgot_email'] = '<h2>Забыліся на пароль?</h2><p>Мы атрымалі запыт на змену вашага пароля ў MODX. Вы можаце скінуць ваш пароль шляхам кліку па кнопцы ніжэй і прытрымліваючыся інструкцый на экране.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Скінуць пароль</a></p><p class="small">Калі вы не адпраўлялі гэты запыт, калі ласка, ігнаруйце гэты ліст.</p>';
 $_lang['login_signup_email'] = '<p>Прывітанне, [[+username]]!</p><p>Уліковы запіс быў зарэгістраваны для вас на сайце <strong>[[++site_name]]</strong>. Калі вы не ведаеце свой пароль, [[++allow_manager_login_forgot_password:is=`1`:then=`скіньце яго, выкарыстоўваючы спасылку аднаўлення пароля на старонцы ўваходу`:else=`спытайцеся ў адміністратара сайта`]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]" class="btn">Увайсці ў [[++site_name]]</a></p>';
 $_lang['login_greeting_morning'] = '<strong>Добрай раніцы</strong>, з вяртаннем!';
@@ -44,7 +49,12 @@ $_lang['login_greeting_afternoon'] = '<strong>Добры дзень</strong>, з
 $_lang['login_greeting_evening'] = '<strong>Добры вечар</strong>, з вяртаннем!';
 $_lang['login_greeting_night'] = '<strong>Добрай ночы</strong>, з вяртаннем!';
 $_lang['login_note'] = 'Калі ласка, увайдзіце, каб атрымаць доступ да сістэмы кіравання.';
+$_lang['login_note_passwordless'] = 'Please enter your email address to receive a one-time login link.';
+$_lang['login_magiclink_email_button'] = 'Send me a one-time login link';
+$_lang['login_magiclink_email_placeholder'] = 'Your user account\'s email here';
+$_lang['login_email'] = 'Email';
 $_lang['login_help_button_text'] = 'Дапамога';
 $_lang['login_help_title'] = 'Атрымаць дапамогу па MODX';
 $_lang['login_help_text'] = '<p>Вам патрэбна прафесійная падтрымка з MODX? Мы адабралі спіс прафесіяналаў па MODX з усяго міру, якія рады дапамагчы.<a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Знайсці прафесіяналаў MODX на сайце MODX">Атрымаць хуткую дапамогу на modx.com</a>.</p>';
 $_lang['login_return_site'] = 'Вярнуцца да сайту';
+

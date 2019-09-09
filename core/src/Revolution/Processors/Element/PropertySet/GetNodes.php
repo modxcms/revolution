@@ -87,7 +87,7 @@ class GetNodes extends modObjectProcessor
         $list = [];
 
         $c = $this->modx->newQuery(modCategory::class);
-        $c->sortby('rank', 'ASC');
+        $c->sortby($this->modx->escape('rank'), 'ASC');
         $c->sortby('category', 'ASC');
         $categories = $this->modx->getIterator('modCategory', $c);
 

@@ -438,6 +438,9 @@ $_lang['setting_manager_js_document_root_desc'] = 'If your server does not handl
 $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
 
+$_lang['setting_manager_tooltip_enable'] = 'Kezelő elemleírások engedélyezése';
+$_lang['setting_manager_tooltip_delay'] = 'A kezelő elemleírásainak késleltetési ideje';
+
 $_lang['setting_login_background_image'] = 'Bejelentkezési háttérkép';
 $_lang['setting_login_background_image_desc'] = 'Háttérkép a kezelő bejelentkezéshez. Önműködően igazodik a képernyő méretéhez.';
 
@@ -845,3 +848,15 @@ $_lang['setting_error_log_filename_desc'] = 'Állítsa be a MODX hibanapló áll
 
 $_lang['setting_error_log_filepath'] = 'Hibanapló állomány útvonala';
 $_lang['setting_error_log_filepath_desc'] = 'Megadhatja a saját hibanapló helyének teljes elérési útját. Használhat helyettesítőket, mint {cache_path}.';
+
+$_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
+$_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';
+
+$_lang['setting_passwordless_expiration'] = 'Jelszó nélküli bejelentkezés lejárata';
+$_lang['setting_passwordless_expiration_desc'] = 'Hány másodpercig érvényes egy egyszeri bejelentkezési hivatkozás.';
+
+$_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
+$_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';
+
+$_lang['setting_passwordless_expiration'] = 'Jelszó nélküli bejelentkezés lejárata';
+$_lang['setting_passwordless_expiration_desc'] = 'Hány másodpercig érvényes egy egyszeri bejelentkezési hivatkozás.';

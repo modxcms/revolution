@@ -399,7 +399,7 @@ class Sort extends modProcessor
             'key:NOT IN' => ['mgr', $this->source->key, $this->target->key],
             'rank:>=' => $lastRank,
         ]);
-        $c->sortby('rank', 'ASC');
+        $c->sortby($this->modx->escape('rank'), 'ASC');
 
         $contextsToSort = $this->modx->getIterator(modContext::class, $c);
         $lastRank = $lastRank + 2;

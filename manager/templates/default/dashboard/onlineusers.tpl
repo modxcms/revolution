@@ -40,7 +40,9 @@
     {else}
         <div class="no-results">{$_lang.w_no_data}</div>
     {/if}
-    <div class="widget-footer">
-        <a href="{$_config.manager_url}?a=system/logs">{$_lang.w_view_all} &rarr;</a>
-    </div>
+    {if $can_view_logs}
+        <div class="widget-footer">
+            <a href="{$_config.manager_url}?a=system/logs">{$_lang.w_view_all} &rarr;</a>
+        </div>
+     {/if}
 </div>
