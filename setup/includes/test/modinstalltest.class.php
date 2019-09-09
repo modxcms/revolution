@@ -425,7 +425,7 @@ abstract class modInstallTest {
      */
     protected function warn($key,$title,$message = '',$messageTitle = '') {
         if (empty($title)) $title = $this->install->lexicon('warning');
-        $msg = '<span class="notok">'.$title.'</span></p>';
+        $msg = '<p class="notok">'.$title.'</p>';
         if (!empty($message)) {
             $msg .= '<div class="notes">';
             if (!empty($messageTitle)) $msg .= '<h3>'.$messageTitle.'</h3>';
@@ -457,7 +457,7 @@ abstract class modInstallTest {
      */
     protected function fail($key,$title = '',$message = '') {
         if (empty($title)) $title = $this->install->lexicon('failed');
-        $msg = '<span class="notok">'.$title.'</span></p>';
+        $msg = '<p class="notok">'.$title.'</p>';
         if (!empty($message)) {
             $msg .= '<p><strong>'.$message.'</strong></p>';
         }
