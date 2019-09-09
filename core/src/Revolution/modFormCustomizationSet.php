@@ -90,7 +90,7 @@ class modFormCustomizationSet extends xPDOSimpleObject
         /* get TVs */
         if ($this->get('template')) {
             $c = $this->xpdo->newQuery('modTemplateVar');
-            $c->leftJoin('modCategory', 'Category');
+            $c->leftJoin(modCategory::class, 'Category');
             $c->innerJoin('modTemplateVarTemplate', 'TemplateVarTemplates');
             $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
             $c->select([
@@ -105,7 +105,7 @@ class modFormCustomizationSet extends xPDOSimpleObject
 
         } else {
             $c = $this->xpdo->newQuery('modTemplateVar');
-            $c->leftJoin('modCategory', 'Category');
+            $c->leftJoin(modCategory::class, 'Category');
             $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
             $c->select([
                 'Category.category AS category_name',
