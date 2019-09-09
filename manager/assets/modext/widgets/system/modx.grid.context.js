@@ -8,17 +8,6 @@
  */
 MODx.grid.Context = function(config) {
     config = config || {};
-    this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
-        + '<tpl if="action_buttons !== null">'
-        + '<ul class="x-grid-buttons">'
-        + '<tpl for="action_buttons">'
-        + '<li><i class="icon {className} icon-{icon}" title="{text}"></i></li>'
-        + '</tpl>'
-        + '</ul>'
-        + '</tpl>'
-        + '</tpl>', {
-        compiled: true
-    });
     Ext.applyIf(config,{
         title: _('contexts')
         ,id: 'modx-grid-context'
@@ -162,6 +151,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         //this.refresh();
         return true;
     }
+
     ,clearFilter: function() {
         this.getStore().baseParams = {
             action: 'context/getList'
@@ -224,24 +214,31 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         this.refresh();
     }
 
-    ,buttonColumnRenderer: function () {
+    ,buttonColumnRenderer: function (a,id,row,ri) {
+        var p = row.data.perm;
         var b = [];
-        b.push({
-            className: 'update',
-            icon: 'pencil-square-o',
-            text: _('context_update')
-        });
-        b.push({
-            className: 'duplicate',
-            icon: 'files-o',
-            text: _('context_duplicate')
-        });
-        b.push({
-            className: 'remove',
-            icon: 'trash-o',
-            text: _('context_remove')
-        });
-        return this.buttonColumnTpl.apply({
+        if (p.indexOf('pedit') != -1) {
+            b.push({
+                className: 'update',
+                icon: 'pencil-square-o',
+                text: _('context_update')
+            });
+        }
+        if (p.indexOf('pnew') != -1) {
+            b.push({
+                className: 'duplicate',
+                icon: 'files-o',
+                text: _('context_duplicate')
+            });
+        }
+        if (p.indexOf('premove') != -1) {
+            b.push({
+                className: 'remove',
+                icon: 'trash-o',
+                text: _('context_remove')
+            });
+        }
+        return this.getButtonColumnTpl().apply({
             action_buttons: b
         });
     },
