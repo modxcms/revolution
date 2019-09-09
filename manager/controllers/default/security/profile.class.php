@@ -59,7 +59,11 @@ class SecurityProfileManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('profile');
+        if($this->modx->user == null) {
+            return $this->modx->lexicon('user_err_nf');
+        } else {
+            return $this->modx->lexicon('profile').': '.htmlentities($this->modx->user->get('username'));
+        }
     }
 
     /**
