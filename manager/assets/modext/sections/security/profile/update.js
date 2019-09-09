@@ -138,6 +138,7 @@ MODx.panel.UpdateProfile = function(config) {
                 ,fieldLabel: _('user_dob')
                 ,name: 'dob'
                 ,anchor: '100%'
+                ,format: MODx.config.manager_date_format
             }, {
                 id: 'modx-user-gender'
                 ,name: 'gender'
