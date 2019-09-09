@@ -1280,7 +1280,7 @@ MODx.getQRSettings = function(id,va) {
                 ,name: 'show_in_tree'
                 ,id: 'modx-'+id+'-show_in_tree'
                 ,inputValue: 1
-                ,checked: va['show_in_tree'] !== undefined ? (va['show_in_tree'] ? 1 : 0) : (MODx.config.show_in_tree_default == '1' ? 1 : 0)
+                ,checked: va['show_in_tree'] != undefined ? va['show_in_tree'] : 1
             },{
                 xtype: 'xcheckbox'
                 ,boxLabel: _('resource_hide_children_in_tree')
