@@ -349,10 +349,10 @@ class GetNodes extends modProcessor
         /* first handle subcategories */
         $c = $this->modx->newQuery(modCategory::class);
         $c->select($this->modx->getSelectColumns(modCategory::class, 'modCategory'));
-        $c->select('COUNT(DISTINCT ' . $elementClassKey . '.id) AS elementCount');
+        $c->select('COUNT(DISTINCT ' . $elementType . '.id) AS elementCount');
         $c->select('COUNT(DISTINCT ' . $this->modx->getSelectColumns(modCategory::class, 'Children', '',
                 ['id']) . ') AS childrenCount');
-        $c->leftJoin($elementClassKey, $elementClassKey, $elementClassKey . '.category = modCategory.id');
+        $c->leftJoin($elementClassKey, $elementType, $elementType . '.category = modCategory.id');
         $c->leftJoin(modCategory::class, 'Children');
         $c->where([
             'parent' => $categoryId,
@@ -577,12 +577,12 @@ class GetNodes extends modProcessor
         $c = $this->modx->newQuery(modCategory::class);
         $c->select($this->modx->getSelectColumns(modCategory::class, 'modCategory'));
         $c->select('
-            COUNT(DISTINCT ' . $this->modx->getSelectColumns($elementClassKey, $elementClassKey, '', ['id']) . ') AS elementCount,
+            COUNT(DISTINCT ' . $this->modx->getSelectColumns($elementClassKey, $elementType, '', ['id']) . ') AS elementCount,
             COUNT(DISTINCT ' . $this->modx->getSelectColumns(modCategory::class, 'Children', '', ['id']) . ') AS childrenCount
         ');
-        $c->leftJoin($elementClassKey, $elementClassKey,
-            $this->modx->getSelectColumns($elementClassKey, $elementClassKey, '',
-                ['category']) . ' = ' . $this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['id']));
+        $c->leftJoin($elementClassKey, $elementType,
+            $this->modx->getSelectColumns($elementClassKey, $elementType, '', ['category'])
+            . ' = ' . $this->modx->getSelectColumns(modCategory::class, 'modCategory', '', ['id']));
         $c->leftJoin(modCategory::class, 'Children');
         $c->where([
             'modCategory.parent' => 0,
@@ -725,13 +725,15 @@ class GetNodes extends modProcessor
             'parent' => $categoryId,
         ]);
 
+        $elementType = array_search($elementClassKey, $this->typeMap, true);
+
         foreach ($categories as $category) {
             $c = $this->modx->newQuery(modCategory::class);
             $c->select($this->modx->getSelectColumns(modCategory::class, 'modCategory'));
-            $c->select('COUNT(DISTINCT ' . $elementClassKey . '.id) AS elementCount');
+            $c->select('COUNT(DISTINCT ' . $elementType . '.id) AS elementCount');
             $c->select('COUNT(DISTINCT ' . $this->modx->getSelectColumns(modCategory::class, 'Children', '',
                     ['id']) . ') AS childrenCount');
-            $c->leftJoin($elementClassKey, $elementClassKey, $elementClassKey . '.category = modCategory.id');
+            $c->leftJoin($elementClassKey, $elementType, $elementType . '.category = modCategory.id');
             $c->leftJoin(modCategory::class, 'Children');
             $c->where([
                 'id' => $category->get('id'),
