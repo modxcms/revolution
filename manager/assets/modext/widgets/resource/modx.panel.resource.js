@@ -9,7 +9,7 @@ MODx.panel.Resource = function(config) {
         ,class_key: 'modDocument'
         ,resource: ''
         ,bodyStyle: ''
-		,cls: 'container form-with-labels'
+        ,cls: 'container form-with-labels'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: this.getFields(config)
@@ -371,7 +371,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
     ,onFieldChange: function(o) {
-    	//a11y - Set Active Input
+        //a11y - Set Active Input
         if (o && o.field) {
             Ext.state.Manager.set('curFocus', o.field.id);
 
@@ -767,7 +767,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 },{
                     xtype: 'xcheckbox'
                     ,boxLabel: _('deleted')
-                    ,description: '<b>[[*deleted]]</b>'
+                    ,description: '<b>[[*deleted]]</b><br />'+_('resource_delete')
                     ,hideLabel: true
                     ,cls: 'danger'
                     ,name: 'deleted'
@@ -1027,6 +1027,16 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.isfolder) || 0
         },{
             xtype: 'xcheckbox'
+            ,boxLabel: _('resource_show_in_tree')
+            ,description: '<b>[[*show_in_tree]]</b><br />'+_('resource_show_in_tree_help')
+            ,hideLabel: true
+            ,name: 'show_in_tree'
+            ,id: 'modx-resource-show-in-tree'
+            ,inputValue: 1
+            ,checked: parseInt(config.record.show_in_tree)
+
+        },{
+            xtype: 'xcheckbox'
             ,boxLabel: _('resource_hide_children_in_tree')
             ,description: '<b>[[*hide_children_in_tree]]</b><br />'+_('resource_hide_children_in_tree_help')
             ,hideLabel: true
@@ -1044,15 +1054,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-alias-visible'
             ,inputValue: 1
             ,checked: parseInt(config.record.alias_visible) || 1
-        },{
-            xtype: 'xcheckbox'
-            ,boxLabel: _('resource_richtext')
-            ,description: '<b>[[*richtext]]</b><br />'+_('resource_richtext_help')
-            ,hideLabel: true
-            ,name: 'richtext'
-            ,id: 'modx-resource-richtext'
-            ,inputValue: 1
-            ,checked: parseInt(config.record.richtext)
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_uri_override')
@@ -1079,14 +1080,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,getSettingRightFieldsetRight: function(config) {
         return [{
             xtype: 'xcheckbox'
-            ,boxLabel: _('resource_cacheable')
-            ,description: '<b>[[*cacheable]]</b><br />'+_('resource_cacheable_help')
+            ,boxLabel: _('resource_richtext')
+            ,description: '<b>[[*richtext]]</b><br />'+_('resource_richtext_help')
             ,hideLabel: true
-            ,name: 'cacheable'
-            ,id: 'modx-resource-cacheable'
+            ,name: 'richtext'
+            ,id: 'modx-resource-richtext'
             ,inputValue: 1
-            ,checked: parseInt(config.record.cacheable)
-
+            ,checked: parseInt(config.record.richtext)
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_searchable')
@@ -1098,13 +1098,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.searchable)
         },{
             xtype: 'xcheckbox'
-            ,boxLabel: _('resource_show_in_tree')
-            ,description: '<b>[[*show_in_tree]]</b><br />'+_('resource_show_in_tree_help')
+            ,boxLabel: _('resource_cacheable')
+            ,description: '<b>[[*cacheable]]</b><br />'+_('resource_cacheable_help')
             ,hideLabel: true
-            ,name: 'show_in_tree'
-            ,id: 'modx-resource-show-in-tree'
+            ,name: 'cacheable'
+            ,id: 'modx-resource-cacheable'
             ,inputValue: 1
-            ,checked: config.record.show_in_tree
+            ,checked: parseInt(config.record.cacheable)
 
         },{
             xtype: 'xcheckbox'
