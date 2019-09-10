@@ -2430,11 +2430,26 @@ class modX extends xPDO {
     }
 
 
+    /**
+     * Load a class by fully qualified name.
+     *
+     * As of MODX 3.0, this is no longer necessary and deprecated. Instead of using loadClass, use the PSR-4 class
+     * references that are available through the autoloader.
+     *
+     * @param string $fqn
+     * @param string $path
+     * @param bool $ignorePkg
+     * @param bool $transient
+     * @return bool|string
+     * @deprecated Since 3.0
+     */
     public function loadClass($fqn, $path = '', $ignorePkg = false, $transient = false)
     {
         if (strpos($fqn, '\\') !== false && class_exists($fqn)) {
             return $fqn;
-        } elseif (empty($path)) {
+        }
+
+        if (empty($path)) {
             $class = $fqn;
             if (strpos($fqn, '.') !== false) {
                 $tmp = explode('.', $fqn);
@@ -2452,12 +2467,12 @@ class modX extends xPDO {
                     class_alias($class, $fqn);
                 }
 
-                $this->deprecated('3.0', "Replace references to class {$fqn} with {$class} to take advantage of PSR-4 autoloading.");
+                $this->deprecated('3.0', "Replace references to class {$fqn} with {$class} to take advantage of PSR-4 autoloading.", $fqn);
 
                 return $class;
-            } else {
-                $this->log(MODX::LOG_LEVEL_WARN, "Could not find legacy class {$fqn} after converting to {$class}");
             }
+
+            $this->log(self::LOG_LEVEL_WARN, "Could not find legacy class {$fqn} after converting to {$class}");
         }
 
         return parent::loadClass($fqn, $path, $ignorePkg, $transient);
