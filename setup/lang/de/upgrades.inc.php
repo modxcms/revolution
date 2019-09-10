@@ -49,5 +49,7 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Fehler beim Entfernen der Flash-
 $_lang['clipboard_flash_file_missing'] = 'Flash-Datei für die \'In die Zwischenablage kopieren\'-Funktion bereits entfernt.';
 $_lang['system_setting_cleanup_success'] = 'System Einstellung `[[+key]]` entfernt.';
 $_lang['system_setting_cleanup_failed'] = 'System Einstellung `[[+key]]` konnte nicht entfernt werden.';
+$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
+$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'System Einstellung `[[+key]]` aktualisiert.';
 $_lang['system_setting_update_failed'] = 'System Einstellung `[[+key]]` konnte nicht aktualisiert werden.';
