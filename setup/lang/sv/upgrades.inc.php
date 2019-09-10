@@ -49,5 +49,7 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Ett fel inträffade när flash-f
 $_lang['clipboard_flash_file_missing'] = 'Flash-filen för kopiering till urklipp är redan borttagen.';
 $_lang['system_setting_cleanup_success'] = 'Systeminställningen `[[+key]]` togs bort.';
 $_lang['system_setting_cleanup_failed'] = 'Systeminställningen `[[+key]]` kunde inte tas bort.';
+$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
+$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'Systeminställningen `[[+key]]` uppdaterades.';
 $_lang['system_setting_update_failed'] = 'Systeminställningen `[[+key]]` kunde inte uppdateras.';

@@ -49,5 +49,7 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'A vágólapra másoló flash ál
 $_lang['clipboard_flash_file_missing'] = 'A vágólapra másoló flash állományt már eltávolítottuk.';
 $_lang['system_setting_cleanup_success'] = 'Rendszerbeállítás \'[[+key]]\' eltávolítva.';
 $_lang['system_setting_cleanup_failed'] = 'Rendszerbeállítást \'[[+key]]\' nem sikerült eltávolítani.';
+$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
+$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = '\'[[+key]]\' rendszerbeállítás módosítva.';
 $_lang['system_setting_update_failed'] = '\'[[+key]]\' rendszerbeállítást nem sikerült módosítani.';

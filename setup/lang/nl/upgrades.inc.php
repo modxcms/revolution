@@ -49,5 +49,7 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Fout bij het verwijderen van het
 $_lang['clipboard_flash_file_missing'] = 'Flash bestand voor kopieer naar klembord is reeds verwijderd.';
 $_lang['system_setting_cleanup_success'] = 'Systeem instelling `[[+key]]` is verwijderd.';
 $_lang['system_setting_cleanup_failed'] = 'Systeem instelling `[[+key]]` kan niet worden verwijderd.';
+$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
+$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
 $_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';

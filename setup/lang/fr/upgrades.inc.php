@@ -49,5 +49,7 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Erreur de suppression de la copi
 $_lang['clipboard_flash_file_missing'] = 'La copie dans un fichier de presse-papiers express a déjà été supprimée.';
 $_lang['system_setting_cleanup_success'] = 'Réglage système de `[[+key]]` supprimé.';
 $_lang['system_setting_cleanup_failed'] = 'Le réglage système de `[[+key]]` ne peut être supprimé.';
+$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
+$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
 $_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
