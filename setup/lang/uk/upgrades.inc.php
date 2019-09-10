@@ -49,5 +49,7 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Помилка видаленн�
 $_lang['clipboard_flash_file_missing'] = 'Флеш-файл буфера обміну вже видалений.';
 $_lang['system_setting_cleanup_success'] = 'Системні налаштування `[[+key]]` видалені.';
 $_lang['system_setting_cleanup_failed'] = 'Системні налаштування `[[+key]]` не можуть буди видалені.';
+$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
+$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
 $_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
