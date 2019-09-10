@@ -49,5 +49,7 @@ $_lang['clipboard_flash_file_unlink_failed'] = 'Error removing the copy to clipb
 $_lang['clipboard_flash_file_missing'] = 'The copy to clipboard flash file has already been removed.';
 $_lang['system_setting_cleanup_success'] = '`[[+key]]`系统设置已删除。';
 $_lang['system_setting_cleanup_failed'] = '无法删除`[[+key]]`系统设置。';
+$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
+$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
 $_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
