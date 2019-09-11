@@ -277,3 +277,58 @@
     background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
   }
 }
+
+@include grid-media($desktop) {
+  .modx-browser {
+    top: 15px !important;
+    max-height: 100% !important;
+    overflow-y: scroll;
+  }
+
+  .modx-browser-panel {
+    width: 100% !important;
+    min-height: 700px;
+    margin: 15px 0 !important;
+    background-color: $white !important;
+  }
+
+  .modx-browser-tree, .modx-browser-view-ct, .modx-browser-details-ct {
+    width: 30% !important;
+    max-width: 30% !important;
+    padding: 0 5px;
+    display: inline-block !important;
+    position: relative !important;
+    float: left;
+    left: 0 !important;
+  }
+
+  .modx-browser .x-toolbar-ct tbody tr td {
+    display: table-cell;
+  }
+
+  .modx-browser .x-panel-tbar-noheader, .modx-browser .x-toolbar, .modx-browser-view-ct .x-panel-tbar-noheader, .modx-browser-view-ct .x-panel-tbar, .modx-browser-view-ct .x-panel-tbar .x-toolbar, .modx-browser-view-ct .x-panel-body {
+    width: 100% !important;
+  }
+
+  .modx-browser-view-ct .x-panel-tbar .x-toolbar-cell label {
+    line-height: 2.2;
+  }
+
+  .modx-browser-thumb-wrap {
+    width: 24%;
+    margin: 5px;
+    padding: 5px;
+  }
+
+  .modx-browser-thumb {
+    max-width: 100%;
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .modx-browser-thumb img {
+    max-width: 100%;
+  }
+}
