@@ -292,9 +292,9 @@
     background-color: $white !important;
   }
 
-  .modx-browser-tree, .modx-browser-view-ct, .modx-browser-details-ct {
-    width: 30% !important;
-    max-width: 30% !important;
+  .modx-browser-tree, .modx-browser-view-ct {
+    width: 35% !important;
+    max-width: 35% !important;
     padding: 0 5px;
     display: inline-block !important;
     position: relative !important;
@@ -302,7 +302,25 @@
     left: 0 !important;
   }
 
-  .modx-browser .x-toolbar-ct tbody tr td {
+  .modx-browser-details-ct {
+    width: 20% !important;
+    max-width: 20% !important;
+    padding: 0 5px;
+    display: inline-block !important;
+    position: relative !important;
+    float: left;
+    left: 0 !important;
+  }
+
+  .modx-browser-tree *, .modx-browser-view-ct *, .modx-browser-details-ct * {
+    font-size: 12px !important;
+  }
+
+  .modx-browser-tree input, .modx-browser-view-ct input, .modx-browser-details-ct input {
+    padding: 5px !important;
+  }
+
+  .modx-browser-tree .x-toolbar-ct tbody tr td {
     display: table-cell;
   }
 
@@ -330,5 +348,13 @@
 
   .modx-browser-thumb img {
     max-width: 100%;
+  }
+
+  .modx-browser-placeholder {
+    height: 50px;
+  }
+
+  .modx-browser-details-info {
+    padding: 5px;
   }
 }
