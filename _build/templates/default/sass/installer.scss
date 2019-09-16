@@ -713,6 +713,13 @@ header {
                 font-weight: 500;
             }
 
+            &.testWarn {
+                background-color: $lighterRed;
+                padding: 5px 15px;
+                margin: 0 -15px 0 -18px;
+                border-left: 3px solid darken($red, 25%);
+            }
+
         }
 
         &.failed {
