@@ -76,8 +76,8 @@
         "psr-4": {
             "MODX\\": "core/src/"
         },
-        "classmap": [
-            "core/xpdo/"
+        "files": [
+          "core/include/deprecated.php"
         ]
     },
     "autoload-dev": {

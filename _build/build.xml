@@ -298,10 +298,10 @@
                 <include name="core/error/**" />
                 <include name="core/export/**" />
                 <include name="core/import/**" />
+                <include name="core/include/**" />
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
                 <include name="core/src/**" />
-                <include name="core/xpdo/**" />
                 <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
                 <include name="core/packages/core/manifest.php" />
@@ -368,10 +368,10 @@
                 <include name="core/error/**" />
                 <include name="core/export/**" />
                 <include name="core/import/**" />
+                <include name="core/include/**" />
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
                 <include name="core/src/**" />
-                <include name="core/xpdo/**" />
                 <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
             </fileset>
