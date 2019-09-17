@@ -16,7 +16,6 @@ $_lang['cache_manager_err'] = 'MODX\'s Cache Manager could not be loaded.';
 $_lang['choose_language'] = 'Choose Language';
 $_lang['cleanup_errors_title'] = 'Important Note:';
 $_lang['cli_install_failed'] = 'Installation Failed! Errors: [[+errors]]';
-$_lang['cli_install_locked'] = 'MODX Setup is locked. You will need to remove the setup/.locked/ directory in order to proceed.';
 $_lang['cli_no_config_file'] = 'MODX could not find a configuration file (such as config.xml) for your CLI install. To run MODX Setup from the command line, you must provide a config xml file. See the official documentation for more information.';
 $_lang['cli_tests_failed'] = 'Pre-Install Tests Failed! Errors: [[+errors]]';
 $_lang['close'] = 'close';
