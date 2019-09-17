@@ -144,6 +144,8 @@ $_lang['license'] = '<p class="title">MODX Licensavtal</p>
 $_lang['license_agree'] = 'Jag godkänner villkoren i denna licens.';
 $_lang['license_agreement'] = 'Licensavtal';
 $_lang['license_agreement_error'] = 'Du måste godkänna licensen innan installationen kan fortsätta.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Inloggning';
 $_lang['modx_class_err_nf'] = 'Kunde inte inkludera MODX-klassens fil.';
 $_lang['modx_configuration_file'] = 'MODX konfigurationsfil';
@@ -197,6 +199,7 @@ $_lang['retry'] = 'Försök igen';
 $_lang['security_notice'] = 'Säkerhetsnotis';
 $_lang['select'] = 'Välj';
 $_lang['settings_handler_err_nf'] = 'MODX kunde inte hitta klassen modInstallSettings vid: [[+path]]. Kontrollera att du har laddat upp alla filerna.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Ett fel inträffade när installationskatalogen skulle tas bort.';
 $_lang['setup_err_assets'] = 'Din assets-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
 $_lang['setup_err_assets_comp'] = 'Din assets/components-katalog skapades inte vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';
