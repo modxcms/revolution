@@ -15,6 +15,10 @@
  *
  * @package setup
  */
+if ($install->isLocked()) {
+    return $parser->render('locked.tpl');
+}
+
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
     $install->settings->store($_POST);

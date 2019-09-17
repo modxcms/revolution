@@ -14,6 +14,10 @@
  * @var modInstallRequest $this
  * @package setup
  */
+if ($install->isLocked()) {
+    return $parser->render('locked.tpl');
+}
+
 /* parse language selection */
 if (!empty($_POST['proceed'])) {
     $language = 'en';

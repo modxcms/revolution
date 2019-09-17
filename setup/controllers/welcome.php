@@ -15,6 +15,10 @@
  *
  * @package setup
  */
+if ($install->isLocked()) {
+    return $parser->render('locked.tpl');
+}
+
 $install->settings->check();
 $proceed = false;
 $writable = is_writable(MODX_SETUP_PATH . 'includes/config.core.php');
