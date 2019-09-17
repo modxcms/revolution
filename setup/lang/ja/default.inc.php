@@ -144,6 +144,8 @@ $_lang['license'] = '<p class="title">You must agree to the License before conti
 $_lang['license_agree'] = 'はい。このライセンス条文に合意しました。';
 $_lang['license_agreement'] = 'ライセンス契約';
 $_lang['license_agreement_error'] = 'あなたはインストールを続ける前にライセンス文書を読み、その内容に合意する必要があります。';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'ログイン';
 $_lang['modx_class_err_nf'] = 'MODXクラスの読み込みに失敗しました。';
 $_lang['modx_configuration_file'] = 'MODX設定ファイル';
@@ -197,6 +199,7 @@ $_lang['retry'] = '再試行';
 $_lang['security_notice'] = 'セキュリティー情報';
 $_lang['select'] = '選択';
 $_lang['settings_handler_err_nf'] = 'modInstallSettingsクラスが [[+path]] 内に見つかりません。全てのファイルがアップロードされているか、確認して下さい。';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'セットアップディレクトリの削除中にエラーが発生しました。';
 $_lang['setup_err_assets'] = '[[+path]] に assets/ ディレクトリがありません。<br />このディレクトリは拡張機能の追加と管理に必要です。';
 $_lang['setup_err_assets_comp'] = '[[+path]] に assets/components/ ディレクトリがありません。<br />このディレクトリは拡張機能の追加と管理に必要です。';
