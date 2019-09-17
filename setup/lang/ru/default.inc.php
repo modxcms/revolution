@@ -100,6 +100,8 @@ $_lang['license'] = '<p class="title">Для продолжения устано
 $_lang['license_agree'] = 'Я согласен с условиями лицензионного соглашения.';
 $_lang['license_agreement'] = 'Лицензионное соглашение';
 $_lang['license_agreement_error'] = 'Для продолжения установки вам необходимо согласится с условиями лицензионного соглашения. Установите галочку напротив «Я согласен с условиями лицензионного соглашения» для принятия условий и нажмите кнопку «Далее».';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Войти';
 $_lang['modx_class_err_nf'] = 'Не удалось подключить файл класса MODX.';
 $_lang['modx_configuration_file'] = 'Конфигурационный файл MODX';
@@ -153,6 +155,7 @@ $_lang['retry'] = 'Повторить';
 $_lang['security_notice'] = 'Уведомление о безопасности';
 $_lang['select'] = 'Выбрать';
 $_lang['settings_handler_err_nf'] = 'MODX не может найти класс "modInstallSettings" в: [[+path]]. Пожалуйста, проверьте, что все необходимые файлы были загружены.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Произошла ошибка при попытке удалить каталог с файлами установки.';
 $_lang['setup_err_assets'] = 'Каталог assets/ не был создан в: [[+path]]<br />Необходимо создать этот каталог и сделать его доступным для записи, если вы хотите использовать «Менеджер пакетов» и дополнительные компоненты.';
 $_lang['setup_err_assets_comp'] = 'Каталог assets/components/ не был создан в: [[+path]] <br />Необходимо создать этот каталог и сделать его доступным для записи, если вы хотите использовать «Менеджер пакетов» и дополнительные компоненты.';
