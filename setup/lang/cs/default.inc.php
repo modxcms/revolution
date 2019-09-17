@@ -144,6 +144,8 @@ $_lang['license'] = '<p class="title">Před pokračováním v instalaci musíte 
 $_lang['license_agree'] = 'Souhlasím s podmínkami stanovenými v této licenci.';
 $_lang['license_agreement'] = 'Licenční smlouva';
 $_lang['license_agreement_error'] = 'Před pokračováním v instalaci musíte souhlasit s licenčními podmínkami.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Přihlásit';
 $_lang['modx_class_err_nf'] = 'Nepodařilo se načíst soubor třídy MODX.';
 $_lang['modx_configuration_file'] = 'MODX konfigurační soubor';
@@ -197,6 +199,7 @@ $_lang['retry'] = 'Znovu';
 $_lang['security_notice'] = 'Bezpečnostní oznámení';
 $_lang['select'] = 'Vybrat';
 $_lang['settings_handler_err_nf'] = 'MODX nemohl nalézt třídu modInstallSettings v umístění: [[+path]]. Ujistěte se, že na server byly nahrány všechny soubory.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Nastala chyba při odstraňování instalačního adresáře.';
 $_lang['setup_err_assets'] = 'Adresář "./assets" nebyl vytvořen v umístění: [[+path]] <br />Vytvořte tento adresář ručně a nastavte jej pro zápis (pomocí atributů), aby jste mohli používat Správce balíčků nebo komponenty třetích stran.';
 $_lang['setup_err_assets_comp'] = 'Adresář "./assets/components" nebyl vytvořen v umístění: [[+path]] <br />Vytvořte tento adresář ručně a nastavte jej pro zápis (pomocí atributů), aby jste mohli používat Správce balíčků nebo komponenty třetích stran.';
