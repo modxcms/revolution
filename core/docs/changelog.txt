@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Generate sortable tag signature with serialized array values [#14689]
 - Escape instances of new MySQL reserved word rank [#14705]
 - Fix broken avatar when default media source is modified [#14544]
 - Define IMG_WEBP constant in version of PHP without it [#14647]
