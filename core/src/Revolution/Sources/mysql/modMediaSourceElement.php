@@ -1,6 +1,7 @@
 <?php
 namespace MODX\Revolution\Sources\mysql;
 
+use MODX\Revolution\modTemplateVar;
 use xPDO\xPDO;
 
 class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceElement
@@ -14,7 +15,7 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
         'fields' => 
         array (
             'source' => 0,
-            'object_class' => 'modTemplateVar',
+            'object_class' => 'MODX\\Revolution\\modTemplateVar',
             'object' => 0,
             'context_key' => 'web',
         ),
@@ -36,7 +37,7 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => 'modTemplateVar',
+                'default' => 'MODX\\Revolution\\modTemplateVar',
                 'index' => 'pk',
             ),
             'object' => 

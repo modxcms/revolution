@@ -92,7 +92,7 @@ class modFormCustomizationSet extends xPDOSimpleObject
             $c = $this->xpdo->newQuery('modTemplateVar');
             $c->leftJoin(modCategory::class, 'Category');
             $c->innerJoin('modTemplateVarTemplate', 'TemplateVarTemplates');
-            $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+            $c->select($this->xpdo->getSelectColumns(modTemplateVar::class, 'modTemplateVar'));
             $c->select([
                 'Category.category AS category_name',
             ]);
@@ -101,18 +101,18 @@ class modFormCustomizationSet extends xPDOSimpleObject
             ]);
             $c->sortby('Category.category', 'ASC');
             $c->sortby('TemplateVarTemplates.rank', 'ASC');
-            $tvs = $this->xpdo->getCollection('modTemplateVar', $c);
+            $tvs = $this->xpdo->getCollection(modTemplateVar::class, $c);
 
         } else {
-            $c = $this->xpdo->newQuery('modTemplateVar');
+            $c = $this->xpdo->newQuery(modTemplateVar::class);
             $c->leftJoin(modCategory::class, 'Category');
-            $c->select($this->xpdo->getSelectColumns('modTemplateVar', 'modTemplateVar'));
+            $c->select($this->xpdo->getSelectColumns(modTemplateVar::class, 'modTemplateVar'));
             $c->select([
                 'Category.category AS category_name',
             ]);
             $c->sortby('Category.category', 'ASC');
             $c->sortby('modTemplateVar.name', 'ASC');
-            $tvs = $this->xpdo->getCollection('modTemplateVar', $c);
+            $tvs = $this->xpdo->getCollection(modTemplateVar::class, $c);
         }
         /** @var modTemplateVar $tv */
         foreach ($tvs as $tv) {

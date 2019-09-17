@@ -114,7 +114,7 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
     {
         $sourceElements = $this->modx->getCollection(modMediaSourceElement::class, [
             'object' => $this->object->get('id'),
-            'object_class' => 'modTemplateVar',
+            'object_class' => modTemplateVar::class,
         ]);
         if (is_array($sourceElements) && !empty($sourceElements)) {
             /** @var modMediaSourceElement $sourceElement */
@@ -123,7 +123,7 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
                 $newSourceElement = $this->modx->newObject(modMediaSourceElement::class);
                 $newSourceElement->fromArray([
                     'object' => $this->newObject->get('id'),
-                    'object_class' => 'modTemplateVar',
+                    'object_class' => modTemplateVar::class,
                     'context_key' => $sourceElement->get('context_key'),
                     'source' => $sourceElement->get('source'),
                 ], '', true, true);

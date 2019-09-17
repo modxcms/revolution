@@ -103,7 +103,7 @@ class GetInputProperties extends modProcessor {
         $tvId = $this->getProperty('tv');
         if (!empty($tvId)) {
             /** @var modTemplateVar $tv */
-            $tv = $this->modx->getObject('modTemplateVar',$tvId);
+            $tv = $this->modx->getObject(modTemplateVar::class,$tvId);
             if (is_object($tv) && $tv instanceof modTemplateVar) {
                 $settings = $tv->get($this->propertiesKey);
 

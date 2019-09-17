@@ -480,7 +480,7 @@ class modParser
                         $elementOutput= $element->process($tagPropString);
                     }
                     else {
-                        $element = $this->getElement('modTemplateVar', $tagName);
+                        $element = $this->getElement(modTemplateVar::class, $tagName);
 
                         // If our element tag was not found (e.i. not an existing TV), create a new instance of
                         // modFieldTag. We do this to make it possible to use output modifiers such as default. This

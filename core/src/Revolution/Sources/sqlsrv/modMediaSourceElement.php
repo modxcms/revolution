@@ -15,7 +15,7 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
         array (
             'source' => 0,
             'object' => 0,
-            'object_class' => 'modTemplateVar',
+            'object_class' => 'MODX\\Revolution\\modTemplateVar',
             'context_key' => 'web',
         ),
         'fieldMeta' => 
@@ -42,7 +42,7 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
-                'default' => 'modTemplateVar',
+                'default' => 'MODX\\Revolution\\modTemplateVar',
                 'index' => 'pk',
             ),
             'context_key' => 

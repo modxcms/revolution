@@ -67,7 +67,7 @@
     <object class="modMediaSourceElement" table="media_sources_tvs" extends="xPDO\Om\xPDOObject">
         <field key="source" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
         <field key="object" dbtype="int" phptype="integer" null="false" default="0" index="pk" />
-        <field key="object_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="modTemplateVar" index="pk" />
+        <field key="object_class" dbtype="nvarchar" precision="100" phptype="string" null="false" default="MODX\Revolution\modTemplateVar" index="pk" />
         <field key="context_key" dbtype="nvarchar" precision="100" phptype="string" null="false" default="web" index="pk" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
