@@ -120,6 +120,8 @@ $_lang['license'] = '<p class="title"> E\' necessario accettare la licenza prima
 $_lang['license_agree'] = 'Accetto i termini di questa licenza (I agree to the terms set out in this license).';
 $_lang['license_agreement'] = 'Contratto Licenza';
 $_lang['license_agreement_error'] = 'Devi accettare i termini prima di continuare (You must agree to the License before continuing installation).';
+$_lang['locked'] = 'MODX Setup è bloccato!';
+$_lang['locked_message'] = '<p>Devi rimuovere la directory di setup/.locked/ per procedere.</p>';
 $_lang['login'] = 'Accedi';
 $_lang['modx_class_err_nf'] = 'Non è stato possibile includere il MODx class file.';
 $_lang['modx_configuration_file'] = 'file di configurazione di MODx';
@@ -173,6 +175,7 @@ $_lang['retry'] = 'Riprova';
 $_lang['security_notice'] = 'Avviso di Sicurezza';
 $_lang['select'] = 'Seleziona';
 $_lang['settings_handler_err_nf'] = 'MODx non ha potuto trovare la classe modInstallSettings in: [[+path]]. Assicurati di aver caricato tutti i files.';
+$_lang['setup_err_lock'] = 'Si è verificato un errore durante il tentativo di configurazione del blocco. Impossibile creare la sottodirectory .locked all\'interno della directory di configurazione.';
 $_lang['setup_err_remove'] = 'Si è verificato un errore durante il tentativo di rimozione della directory di setup.';
 $_lang['setup_err_assets'] = 'La directory assets/ non è stata creata in: [[+path]] <br />Dovrai creare questa directory e renderla scrivibile se vuoi usare il Gestore di Pacchetti o Componenti di terze Parti.';
 $_lang['setup_err_assets_comp'] = 'La directory assets/components/ non è stata creata in: [[+path]] <br />Dovrai creare questa directory e renderla scrivibile se vuoi usare il Gestore di Pacchetti o Componenti di terze Parti.';
