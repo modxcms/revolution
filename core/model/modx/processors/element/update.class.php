@@ -20,6 +20,15 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     /** @var modElement $object */
     public $object;
 
+    public function beforeSet() {
+        // Make sure the element isn't locked
+        if ($this->object->get('locked') && !$this->modx->hasPermission('edit_locked')) {
+            return $this->modx->lexicon($this->objectType.'_err_locked');
+        }
+
+        return parent::beforeSet();
+    }
+
     public function beforeSave() {
         $locked = $this->getProperty('locked');
         if (!is_null($locked)) {
@@ -27,18 +36,13 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
         }
 
         /* make sure a name was specified */
-        $nameField = $this->classKey == 'modTemplate' ? 'templatename' : 'name';
+        $nameField = $this->classKey === 'modTemplate' ? 'templatename' : 'name';
         $name = $this->getProperty($nameField,'');
         if (empty($name)) {
             $this->addFieldError($nameField,$this->modx->lexicon($this->objectType.'_err_ns_name'));
         } else if ($this->alreadyExists($name)) {
             /* if changing name, but new one already exists */
             $this->modx->error->addField($nameField,$this->modx->lexicon($this->objectType.'_err_ae',array('name' => $name)));
-        }
-
-        /* if element is locked */
-        if ($this->object->get('locked') && $this->modx->hasPermission('edit_locked') == false) {
-            $this->addFieldError($nameField,$this->modx->lexicon($this->objectType.'_err_locked'));
         }
 
         /* category */
@@ -64,7 +68,7 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     }
 
     public function alreadyExists($name) {
-        $nameField = $this->classKey == 'modTemplate' ? 'templatename' : 'name';
+        $nameField = $this->classKey === 'modTemplate' ? 'templatename' : 'name';
         return $this->modx->getCount($this->classKey,array(
             'id:!=' => $this->object->get('id'),
             $nameField => $name,
