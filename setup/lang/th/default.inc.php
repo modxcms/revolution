@@ -130,6 +130,8 @@ $_lang['license'] = '<p class="title">คุณต้องยอมรับข
 $_lang['license_agree'] = 'ฉันเห็นด้วยกับเงื่อนไขของข้อตกลงในใบอนุญาตนี้';
 $_lang['license_agreement'] = 'สัญญาอนุญาต';
 $_lang['license_agreement_error'] = 'เพื่อดำเนินการติดตั้งต่อคุณต้องยอมรับเงื่อนไขของข้อตกลงใบอนุญาต';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'ลงชื่อเข้า';
 $_lang['modx_class_err_nf'] = 'ไม่สามารถรวบรวมไฟล์คลาสของ MODXได้';
 $_lang['modx_configuration_file'] = 'ไฟล์การตั้งค่าของ MODX';
@@ -183,6 +185,7 @@ $_lang['retry'] = 'Retry';
 $_lang['security_notice'] = 'การแจ้งเตือนความปลอดภัย';
 $_lang['select'] = 'เลือก';
 $_lang['settings_handler_err_nf'] = 'MODX ไม่สามารถค้นหาคลาส modInstallSettings ที่: [[+path]] ได้ กรุณาตรวจสอบดูว่าคุณได้ทำการอัปโหลดไฟล์ครบทั้งหมดแล้ว';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'เกิดข้อผิดพลาดขณะที่พยายามจะลบโฟลเดอร์ setup';
 $_lang['setup_err_assets'] = 'โฟลเดอร์ assets ไม่ได้ถูกสร้างที่: [[+path]] <br />คุณจะต้องสร้างโฟลเดอร์นี้และทำให้สามารถเขียนได้ถ้าคุณต้องการใช้งานตัวจัดการแพ็คเกจหรือองค์ประกอบอื่นๆ ของบุคคลภายนอก';
 $_lang['setup_err_assets_comp'] = 'โฟลเดอร์ assets/components/ ไม่ได้ถูกสร้างที่: [[+path]] <br />คุณจะต้องสร้างโฟลเดอร์นี้และทำให้สามารถเขียนได้ถ้าคุณต้องการใช้งานตัวจัดการแพ็คเกจหรือองค์ประกอบอื่นๆ ของบุคคลภายนอก';
