@@ -134,6 +134,8 @@ href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); ret
 $_lang['license_agree'] = 'Saya menyetujui persyaratan yang tercantum dalam lisensi ini.';
 $_lang['license_agreement'] = 'Naskah Lisensi';
 $_lang['license_agreement_error'] = 'Anda harus menyetujui Lisensi sebelum melanjutkan penginstalan.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Login';
 $_lang['modx_class_err_nf'] = 'Tidak dapat menyertakan file kelas MODX.';
 $_lang['modx_configuration_file'] = 'File konfigurasi MODX';
@@ -187,6 +189,7 @@ $_lang['retry'] = 'Mencoba kembali';
 $_lang['security_notice'] = 'Ihwal Keamanan';
 $_lang['select'] = 'Pilih';
 $_lang['settings_handler_err_nf'] = 'MODx tidak bisa menemukan kelas modInstallSettings di: [[+path]]. Pastikan Anda telah mengunggah semua file.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Terjadi kesalahan saat mencoba menghapus direktori penyiapan.';
 $_lang['setup_err_assets'] = 'Aset / direktori Anda tidak dibuat di: [[+path]] <br /> Anda perlu membuat direktori ini dan membuatnya dapat ditulis jika Anda ingin menggunakan Package Management atau 3rd-Party Components.';
 $_lang['setup_err_assets_comp'] = 'Aset / komponen / direktori Anda tidak dibuat di: [[+path]] <br /> Anda perlu membuat direktori ini dan membuatnya dapat ditulis jika Anda ingin menggunakan Package Management atau 3rd-Party Components.';
