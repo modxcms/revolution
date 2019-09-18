@@ -13,6 +13,9 @@
  * @var modInstallParser $parser
  * @var modInstallRequest $this
  */
+if ($install->isLocked()) {
+    return $parser->render('locked.tpl');
+}
 
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);

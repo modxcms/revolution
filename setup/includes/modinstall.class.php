@@ -638,4 +638,32 @@ class modInstall {
         }
         return !empty($className);
     }
+
+    public function lock() {
+        $errors = [];
+
+        $modx = $this->_modx($errors);
+        if ($modx) {
+            /** @var modCacheManager $cacheManager */
+            $cacheManager = $modx->getCacheManager();
+            if ($cacheManager) {
+                if (!$cacheManager->writeTree(MODX_SETUP_PATH . '.locked')) {
+                    $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon('setup_err_lock'));
+                }
+            } else {
+                $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon('cache_manager_err'));
+            }
+        } else {
+            $modx->log(modX::LOG_LEVEL_ERROR,$this->lexicon('modx_object_err'));
+        }
+        return $errors;
+    }
+
+    public function isLocked() {
+        if (file_exists(MODX_SETUP_PATH . '.locked')) {
+            return true;
+        }
+
+        return false;
+    }
 }
