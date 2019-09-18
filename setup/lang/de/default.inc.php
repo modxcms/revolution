@@ -147,6 +147,8 @@ $_lang['license'] = '<p class="title">Sie müssen der Lizenzvereinbarung zustimm
 $_lang['license_agree'] = 'Ich stimme den Bedingungen dieser Lizenzvereinbarung zu.';
 $_lang['license_agreement'] = 'Lizenzvereinbarung';
 $_lang['license_agreement_error'] = 'Sie müssen der Lizenzvereinbarung zustimmen, bevor Sie mit der Installation fortfahren.';
+$_lang['locked'] = 'MODX Setup ist gesperrt!';
+$_lang['locked_message'] = '<p>Sie müssen das \'setup/.gesperrt/\' Verzeichnis entfernen, um fortzufahren.</p>';
 $_lang['login'] = 'Login';
 $_lang['modx_class_err_nf'] = 'Konnte die MODX-Klassendatei nicht inkludieren.';
 $_lang['modx_configuration_file'] = 'MODX-Konfigurationsdatei';
@@ -200,6 +202,7 @@ $_lang['retry'] = 'Erneut versuchen';
 $_lang['security_notice'] = 'Sicherheitshinweis';
 $_lang['select'] = 'Auswählen';
 $_lang['settings_handler_err_nf'] = 'MODX konnte die Klasse modInstallSettings in [[+path]] nicht finden. Bitte stellen Sie sicher, dass alle Dateien hochgeladen wurden.';
+$_lang['setup_err_lock'] = 'Beim Versuch der Sperrung des Setups ist ein Fehler aufgetreten. Das Unterverzeichnis \'.locked\' konnte im Setup-Verzeichnis nicht angelegt werden.';
 $_lang['setup_err_remove'] = 'Beim Versuch, das Setup-Verzeichnis zu löschen, ist ein Fehler aufgetreten.';
 $_lang['setup_err_assets'] = 'Das Verzeichnis assets/ konnte nicht in [[+path]] angelegt werden.<br />Sie müssen dieses Verzeichnis anlegen und dafür sorgen, dass es beschreibbar ist, wenn Sie die Package-Verwaltung oder Komponenten von Drittanbietern verwenden möchten.';
 $_lang['setup_err_assets_comp'] = 'Das Verzeichnis assets/components/ konnte nicht in [[+path]] angelegt werden.<br />Sie müssen dieses Verzeichnis anlegen und dafür sorgen, dass es beschreibbar ist, wenn Sie die Package-Verwaltung oder Komponenten von Drittanbietern verwenden möchten.';
