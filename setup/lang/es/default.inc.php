@@ -147,6 +147,8 @@ $_lang['license'] = '<p class="title">Debes estar de acuerdo con la Licencia ant
 $_lang['license_agree'] = 'Estoy de acuerdo con los términos establecidos en esta licencia.';
 $_lang['license_agreement'] = 'Acuerdo de Licencia';
 $_lang['license_agreement_error'] = 'Debes estar de acuerdo con la Licencia antes de continuar con la instalación.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Entrar';
 $_lang['modx_class_err_nf'] = 'No se pudo incluir el archivo de la clase MODX.';
 $_lang['modx_configuration_file'] = 'Archivo de configuración de MODX';
@@ -200,6 +202,7 @@ $_lang['retry'] = 'Reintentar';
 $_lang['security_notice'] = 'Nota de Seguridad';
 $_lang['select'] = 'Seleccionar';
 $_lang['settings_handler_err_nf'] = 'MODX no pudo encontrar la clase modInstallSettings en: [[+path]]. Por favor, asegúrate de haber subido todos los archivos.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Ocurrió un error mientras se trataba de eliminar el directorio de instalación.';
 $_lang['setup_err_assets'] = 'El directorio assets/ no pudo ser creado en: [[+path]] <br />Se necesitará crear este directorio y permitir la escritura en el mismo para utilizar el Administrador de Paquetes o Componentes de Terceros.';
 $_lang['setup_err_assets_comp'] = 'El directorio assets/components/ no pudo ser creado en: [[+path]] <br />Se necesitará crear este directorio y permitir la escritura en el mismo para utilizar el Administrador de Paquetes o Componentes de Terceros.';
