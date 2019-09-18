@@ -148,6 +148,8 @@ Genel Kamu
 $_lang['license_agree'] = 'Bu lisansta belirtilen koşulları kabul ediyorum.';
 $_lang['license_agreement'] = 'Lisans Sözleşmesi';
 $_lang['license_agreement_error'] = 'Kuruluma devam etmeden önce lisansı onaylamanız gerekiyor.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Oturum aç';
 $_lang['modx_class_err_nf'] = 'MODX sınıf doyası dahil edilemiyor.';
 $_lang['modx_configuration_file'] = 'MODX yapılandırma dosyası';
@@ -201,6 +203,7 @@ $_lang['retry'] = 'Tekrar dene';
 $_lang['security_notice'] = 'Güvenlik uyarısı';
 $_lang['select'] = 'Seç';
 $_lang['settings_handler_err_nf'] = 'MODX modInstallSettings sınıfını bu yolda:[[+path]] bulamadı. Lütfen bütün dosyaların yüklendiğinden emin olun.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Kurulum dizini kaldırılmaya çalışılırken bir hata oluştu.';
 $_lang['setup_err_assets'] = 'assets/ dizini bu yolda: [[+path]] oluşturulamadı. <br />Eğer Paket Yöneticisi veya 3.Parti Bileşenler kullanmak isterseniz bu dizini oluşturmanız ve yazılabilir olmasını sağlamanız gerekir.';
 $_lang['setup_err_assets_comp'] = 'assets/components dizini bu yolda: [[+path]] oluşturulamadı. <br />Eğer Paket Yöneticisi veya 3.Parti Bileşenler kullanmak isterseniz bu dizini oluşturmanız ve yazılabilir olmasını sağlamanız gerekir.';
