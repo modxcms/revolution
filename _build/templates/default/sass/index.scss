@@ -540,6 +540,12 @@ a.x-grid-link:focus {
   cursor: pointer;
   &:hover, &:focus {
     color: $colorSplash;
+    > div::after {
+      @include awesome-font;
+      content: fa-content($fa-var-pen);
+      margin-left: 0.5em;
+      color: $colorSplash;
+    }
   }
 }
 
