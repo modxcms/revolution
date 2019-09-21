@@ -120,64 +120,108 @@ MODx.panel.UpdateProfile = function(config) {
         ,items: [{
             columnWidth: .5
             ,items: [{
-                xtype: 'textfield'
-                ,fieldLabel: _('user_full_name')
+                id: 'modx-user-fullname'
                 ,name: 'fullname'
-                ,maxLength: 255
+                ,fieldLabel: _('user_full_name')
+                ,xtype: 'textfield'
                 ,allowBlank: false
                 ,anchor: '100%'
-            }, {
-                xtype: 'textfield'
-                ,fieldLabel: _('email')
+                ,maxLength: 255
+            },{
+                id: 'modx-user-email'
                 ,name: 'email'
+                ,fieldLabel: _('user_email')
+                ,xtype: 'textfield'
                 ,vtype: 'email'
                 ,allowBlank: false
                 ,anchor: '100%'
+                ,maxLength: 255
             },{
-                xtype: 'datefield'
-                ,fieldLabel: _('user_dob')
-                ,name: 'dob'
-                ,anchor: '100%'
-                ,format: MODx.config.manager_date_format
-            }, {
-                id: 'modx-user-gender'
-                ,name: 'gender'
-                ,hiddenName: 'gender'
-                ,fieldLabel: _('user_gender')
-                ,xtype: 'modx-combo-gender'
-                ,anchor: '100%'
-            }, {
-                fieldLabel: _('user_photo')
-                ,name: 'photo'
+                name: 'photo'
+                ,fieldLabel: _('user_photo')
                 ,xtype: 'modx-combo-browser'
                 ,hideFiles: true
                 ,source: MODx.config['photo_profile_source'] || MODx.config.default_media_source
                 ,hideSourceCombo: true
                 ,anchor: '100%'
-            }, {
-                xtype: 'textfield'
-                ,fieldLabel: _('user_phone')
-                ,name: 'phone'
-                ,anchor: '100%'
-            }, {
-                xtype: 'textfield'
-                ,fieldLabel: _('user_mobile')
-                ,name: 'mobilephone'
-                ,anchor: '100%'
-            }, {
-                xtype: 'textfield'
-                ,fieldLabel: _('user_fax')
-                ,name: 'fax'
-                ,anchor: '100%'
-            }, {
+            },{
+                layout: 'column'
+                ,border: false
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,labelSeparator: ''
+                    ,anchor: '100%'
+                    ,border: false
+                }
+                ,items: [{
+                    columnWidth: .5
+                    ,items: {
+                        id: 'modx-user-dob'
+                        ,name: 'dob'
+                        ,fieldLabel: _('user_dob')
+                        ,xtype: 'datefield'
+                        ,anchor: '100%'
+                        ,format: MODx.config.manager_date_format
+                    }
+                },{
+                    columnWidth: .5
+                    ,items: {
+                        id: 'modx-user-gender'
+                        ,name: 'gender'
+                        ,hiddenName: 'gender'
+                        ,fieldLabel: _('user_gender')
+                        ,xtype: 'modx-combo-gender'
+                        ,anchor: '100%'
+                    }
+                }]
+            },{
                 id: 'modx-user-website'
                 ,name: 'website'
                 ,fieldLabel: _('user_website')
                 ,xtype: 'textfield'
                 ,anchor: '100%'
                 ,maxLength: 255
+            },{
+                layout: 'column'
+                ,border: false
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,labelSeparator: ''
+                    ,anchor: '100%'
+                    ,border: false
+                }
+                ,items: [{
+                    columnWidth: .5
+                    ,items: {
+                        id: 'modx-user-phone'
+                        ,name: 'phone'
+                        ,fieldLabel: _('user_phone')
+                        ,xtype: 'textfield'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                    }
+                },{
+                    columnWidth: .5
+                    ,items: {
+                        id: 'modx-user-mobilephone'
+                        ,name: 'mobilephone'
+                        ,fieldLabel: _('user_mobile')
+                        ,xtype: 'textfield'
+                        ,anchor: '100%'
+                        ,maxLength: 255
+                    }
+                }]
+            },{
+                id: 'modx-user-fax'
+                ,name: 'fax'
+                ,fieldLabel: _('user_fax')
+                ,xtype: 'textfield'
+                ,anchor: '100%'
+                ,maxLength: 255
             }]
-        }, {
+        },{
             columnWidth: .5
             ,defaults: {
                 msgTarget: 'under'
@@ -208,38 +252,60 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
     },
     getItemsRight: function (config) {
         var items = [{
+            id: 'modx-user-country'
+            ,name: 'country'
+            ,fieldLabel: _('user_country')
+            ,xtype: 'modx-combo-country'
+            ,anchor: '100%'
+            ,value: ''
+        },{
+            layout: 'column'
+            ,border: false
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,labelSeparator: ''
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .3
+                ,items: {
+                    id: 'modx-user-state'
+                    ,name: 'state'
+                    ,fieldLabel: _('user_state')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 100
+                }
+            },{
+                columnWidth: .4
+                ,items: {
+                    id: 'modx-user-city'
+                    ,name: 'city'
+                    ,fieldLabel: _('city')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 255
+                }
+            },{
+                columnWidth: .3
+                ,items: {
+                    id: 'modx-user-zip'
+                    ,name: 'zip'
+                    ,fieldLabel: _('user_zip')
+                    ,xtype: 'textfield'
+                    ,anchor: '100%'
+                    ,maxLength: 25
+                }
+            }]
+        },{
             id: 'modx-user-address'
             ,name: 'address'
             ,fieldLabel: _('address')
             ,xtype: 'textarea'
             ,anchor: '100%'
             ,grow: true
-        }, {
-            xtype: 'textfield'
-            ,fieldLabel: _('user_zip')
-            ,name: 'zip'
-            ,maxLength: 20
-            ,anchor: '100%'
-        }, {
-            id: 'modx-user-city'
-            ,name: 'city'
-            ,fieldLabel: _('city')
-            ,xtype: 'textfield'
-            ,anchor: '100%'
-            ,maxLength: 255
-        }, {
-            xtype: 'textfield'
-            ,fieldLabel: _('user_state')
-            ,name: 'state'
-            ,maxLength: 50
-            ,anchor: '100%'
-        }, {
-            id: 'modx-user-country'
-            ,fieldLabel: _('user_country')
-            ,xtype: 'modx-combo-country'
-            ,name: 'country'
-            ,value: ''
-            ,anchor: '100%'
         }];
 
         if (MODx.perm.change_password) {
@@ -248,7 +314,7 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
                 ,name: 'newpassword'
                 ,xtype: 'hidden'
                 ,value: false
-            }, {
+            },{
                 id: 'modx-user-fs-newpassword'
                 ,title: _('password_new')
                 ,xtype: 'fieldset'
@@ -280,14 +346,14 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
                     ,inputType: 'password'
                     ,maxLength: 255
                     ,anchor: '100%'
-                }, {
+                },{
                     xtype: 'textfield'
                     ,fieldLabel: _('change_password_new')
                     ,name: 'password_new'
                     ,inputType: 'password'
                     ,maxLength: 255
                     ,anchor: '100%'
-                }, {
+                },{
                     xtype: 'textfield'
                     ,fieldLabel: _('change_password_confirm')
                     ,name: 'password_confirm'
@@ -298,7 +364,7 @@ Ext.extend(MODx.panel.UpdateProfile,MODx.FormPanel,{
                 }]
             });
         }
-    
+
         return items;
     }
 });
