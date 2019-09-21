@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
+- Prevent users without edit_locked permission from editing locked elements [#14739]
 - Lock setup after it is successfully executed [#14692]
 - Allow an empty caption when duplicating a Template Variable [#14386]
 - Escape instances of new MySQL reserved word rank [#14701]

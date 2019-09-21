@@ -75,10 +75,6 @@ class ElementChunkUpdateManagerController extends modManagerController {
         if (empty($this->chunk)) return $this->failure($this->modx->lexicon('chunk_err_nfs',array('id' => $scriptProperties['id'])));
         if (!$this->chunk->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
-        if ($this->chunk->get('locked') && !$this->modx->hasPermission('edit_locked')) {
-            return $this->failure($this->modx->lexicon('chunk_err_locked'));
-        }
-
         /* grab category for chunk, assign to parser */
         $placeholders['chunk'] = $this->chunk;
 
