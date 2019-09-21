@@ -351,7 +351,7 @@ textarea.x-form-field {
 .x-window {
   @include grid-media($desktop) {
     width: auto !important;
-    max-width: 100vh !important;
+    max-width: 100% !important;
     left: 0.5em !important;
     right: 0.5em !important;
 
@@ -637,7 +637,9 @@ a.x-grid-link:focus {
   .x-panel-body {
     @include grid-media($desktop) {
       height: auto !important;
+      max-height: 100% !important;
       width: auto !important;
+      max-width: 100% !important;
     }
   }
 }
