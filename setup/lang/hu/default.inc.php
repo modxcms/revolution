@@ -96,21 +96,17 @@ $_lang['install_success'] = 'Az alaptelepítés sikerült. Kattintson a tovább 
 $_lang['install_summary'] = 'Telepítési összefoglaló';
 $_lang['install_update'] = 'Telepítés/Frissítés';
 $_lang['installation_finished'] = 'A telepítés elkészült [[+time]] alatt';
-$_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
-    <p>Usage of this software is subject to the GPL license. To help you understand
-    what the GPL licence is and how it affects your ability to use the software, we
-    have provided the following summary:</p>
-    <h4>The GNU General Public License is a Free Software license.</h4>
-    <p>Like any Free Software license, it grants to you the four following freedoms:</p>
+$_lang['license'] = '<p class="title">A telepítés folytatása előtt el kell fogadnia a felhasználói engedélyezést.</p>
+    <p>A program használata a GPL engedélyhez kötött. A következő összefoglalással segíteni szeretnénk, hogy megértse, mi a GPL engedély és milyen hatással van a program használhatóságára:</p>
+    <h4>A GNU General Public License egy szabad szoftver engedély.</h4>
+    <p>Mint minden szabad szoftver engedély, a következőkre ad szabadságot:</p>
     <ul>
-        <li>The freedom to run the program for any purpose. </li>
-        <li>The freedom to study how the program works and adapt it to your needs. </li>
-        <li>The freedom to redistribute copies so you can help your neighbor. </li>
-        <li>The freedom to improve the program and release your improvements to the
-        public, so that the whole community benefits. </li>
+        <li>A program bármilyen célú futtatása. </li>
+        <li>A program működésének szabad tanulmányozása és a szükségleteihez való igazítása.</li>
+        <li>A program szabad továbbadása, hogy segíthessen felebarátjának.</li>
+        <li>A program szabad javítása és a javítások közzététele az egész közösség előnyére.</li>
     </ul>
-    <p>You may exercise the freedoms specified here provided that you comply with
-    the express conditions of this license. The principal conditions are:</p>
+    <p>Gyakorolhatja az itt meghatározott lehetőségeket, amennyiben megfelel az ezen engedélyben kifejezett feltételeknek. Az alapvető feltételek:</p>
     <ul>
         <li>You must conspicuously and appropriately publish on each copy distributed an
         appropriate copyright notice and disclaimer of warranty and keep intact all the
