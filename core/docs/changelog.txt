@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Prevent users without edit_locked permission from editing locked elements [#14739]
 - Lock setup after it is successfully executed [#14692]
 - Generate sortable tag signature with serialized array values [#14689]
 - Escape instances of new MySQL reserved word rank [#14705]
