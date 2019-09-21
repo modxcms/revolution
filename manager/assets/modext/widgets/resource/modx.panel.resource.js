@@ -1133,7 +1133,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,id: 'ta'
                 ,fieldLabel: _('resource_content')
                 ,anchor: '100%'
-                ,height: 451
+                ,height: 468
                 ,grow: false
                 ,value: (config.record.content || config.record.ta) || ''
             },{
