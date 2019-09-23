@@ -27,62 +27,52 @@
 }
 
 .modx-browser-thumb-wrap {
-  border: 1px solid $brandHover;
-  background: $white;
   float: left;
-  margin: 4px 0 4px 4px;
+  margin: 5px;
   overflow: hidden;
-  padding: 4px;
   cursor: pointer;
   user-select: none;
-}
+  text-align: center;
 
-.modx-browser-thumb-wrap .x-view-over {
-  border: 1px solid $brandSelectedColor;
-  padding: 4px;
-}
+  &.x-view-over {
+    .modx-browser-thumb {
+    border: 1px solid $brandSelectedColor;
+    }
+  }
 
-.modx-browser-thumb-wrap .x-view-selected {
-  background: $brandSelectedBg;
-  border: 1px solid $brandSelectedColor;
-  padding: 4px;
-}
+  &.x-view-selected {
+    .modx-browser-placeholder {
+      color: $brandSelectedColor;
+    }
 
-.modx-browser-thumb-wrap .x-view-selected .modx-browser-thumb {
-  background: $white;
-}
-
-.modx-browser-thumb-wrap .x-view-selected span {
-  color: $brandSelectedColor;
+    .modx-browser-thumb {
+    border: 1px solid $brandSelectedColor;
+    }
+  }
 }
 
 .modx-browser-thumb {
+  background: $white;
   border: 1px solid $borderColor;
   height: 100px;
   line-height: 100px;
   padding: 5px;
-  text-align: center;
   width: 100px;
-}
 
-.modx-browser-thumb img {
-  vertical-align: middle;
-  background-color: $silver;
-  background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
-}
-
-.modx-browser-thumb-wrap span {
-  display: block;
-  overflow: hidden;
-  text-align: center;
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+    background-color: $silver;
+    background-image: url($imgPath + 'modx-theme/transparency-pattern.png');
+  }
 }
 
 .modx-browser-placeholder {
   font-size: 14px;
-  font-weight: bold;
   color: $softGray;
 
   .details & {
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,44 +85,52 @@
 
 .modx-browser-list-item {
   padding: 0 5px 0 5px;
-}
 
-.modx-browser-list-item .x-view-over>span {
-  background: $brandHover;
-}
+  .x-view-over {
+    >span {
+      background: $brandHover;
+    }
+  }
 
-.modx-browser-list-item .x-view-selected>span {
-  background: $brandSelectedBg;
-  border-bottom: 1px solid $brandSelectedColor;
-  color: $brandSelectedColor;
-}
+  .x-view-selected {
+    >span {
+      background: $brandSelectedBg;
+      border-bottom: 1px solid $brandSelectedColor;
+      color: $brandSelectedColor;
+    }
+  }
 
-.modx-browser-list-item>span {
-  background-position: center left !important;
-  border-bottom: 1px solid $borderColor;
-  clear: both;
-  display: block;
-  min-height: 16px;
-  padding: 5px 0 5px 20px;
-  position: relative;
-}
+  >span {
+    background-position: center left !important;
+    border-bottom: 1px solid $borderColor;
+    clear: both;
+    display: block;
+    min-height: 16px;
+    padding: 5px 0 5px 20px;
+    position: relative;
 
-.modx-browser-list-item > span:before {
-  font-size: 14px;
-  position: absolute;
-  left: 2px;
-}
+    &:before {
+      font-size: 14px;
+      position: absolute;
+      left: 2px;
+    }
 
-.modx-browser-list-item > span span {
-  display: inline-block;
-  font: $fontSmall;
-  padding-top: 2px;
-}
+    span {
+      display: inline-block;
+      font: $fontSmall;
+      padding-top: 2px;
+    }
 
-.modx-browser-list-item > span span.file-size,
-.modx-browser-list-item > span span.image-size {
-  float: right;
-  width: 13%;
+    span.file-size {
+      float: right;
+      width: 13%;
+    }
+
+    span.image-size {
+      float: right;
+      width: 13%;
+    }
+  }
 }
 
 .modx-browser-view-ct .loading-indicator {
