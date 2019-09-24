@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Language';
 $_lang['login_activation_key_err'] = 'Az aktivációs kulcs nem stimmel. Kérjük ellenőrizze a kiküldött aktivációs e-mailt!';
-$_lang['login_blocked_admin'] = 'Az Ön felhasználói fiókját a rendszeradminisztrátor letiltotta.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'A bejelentkezése átmenetileg korlátozva van. Kérjük próbálja meg később.';
 $_lang['login_blocked_ip'] = 'Önnek nem engedélyezett a belépés a jelenlegi IP címéről.';
 $_lang['login_blocked_time'] = 'Önnek nem engedélyezett a belépés ebben az időpontban. Próbálja meg máskor.';
