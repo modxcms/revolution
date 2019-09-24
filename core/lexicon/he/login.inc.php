@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'שפה';
 $_lang['login_activation_key_err'] = 'מפתח ההפעלה אינו תואם! נא לבדוק את מייל ההפעלה ולודא שטענת ה-URL הנכון.';
-$_lang['login_blocked_admin'] = 'You have been blocked from the manager by an administrator.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'You are temporarily blocked and cannot log in. Please try again later.';
 $_lang['login_blocked_ip'] = 'You are not allowed to login from your current IP address.';
 $_lang['login_blocked_time'] = 'You are not allowed to login at this time. Please try again later.';
