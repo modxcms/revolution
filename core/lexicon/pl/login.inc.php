@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Język';
 $_lang['login_activation_key_err'] = 'Token aktywacji jest niepoprawny! Sprawdź wiadomość z aktywacją konta i upewnij się, że podałeś prawidłowy adres URL.';
-$_lang['login_blocked_admin'] = 'Twoje konto użytkownika zostało zablokowane przez administratora.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Twoje konto użytkownika zostało czasowo zablokowane. Spróbuj ponownie później.';
 $_lang['login_blocked_ip'] = 'Logowanie z Twojego aktualnego adrsu IP zostało zablokowane.';
 $_lang['login_blocked_time'] = 'W tej chwili Twoje konto jest czasowo zablokowane. Spróbuj ponownie później.';
