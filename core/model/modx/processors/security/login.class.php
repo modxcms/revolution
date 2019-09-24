@@ -139,23 +139,35 @@ class modSecurityLoginProcessor extends modProcessor {
 
         /** @var modUserProfile $profile */
         $profile = $this->user->Profile;
+        $flc = $profile->get('failedlogincount');
 
-        if ($profile->get('failed_logins') >= $this->modx->getOption('failed_login_attempts') &&
-            $profile->get('blockeduntil') > time()) {
-            return $this->modx->lexicon('login_blocked_too_many_attempts');
-        }
-
-        if ($profile->get('failedlogincount') >= $this->modx->getOption('failed_login_attempts')) {
-            $profile->set('failedlogincount', 0);
-            $profile->set('blocked', 1);
-            $profile->set('blockeduntil', time() + (60 * $this->modx->getOption('blocked_minutes')));
-            $profile->save();
-        }
-        if ($profile->get('blockeduntil') != 0 && $profile->get('blockeduntil') < time()) {
-            $profile->set('failedlogincount', 0);
-            $profile->set('blocked', 0);
+        /* Update block state */
+        if ($profile->get('blockeduntil') < time()) {
+            if ($profile->get('blockeduntil') > 0) {
+                $profile->set('failedlogincount', 0);
+                $flc = 0;
+            }
             $profile->set('blockeduntil', 0);
             $profile->save();
+        }
+        if ($this->user->passwordMatches($this->givenPassword) && $profile->get('blockeduntil') < time()) {
+            $profile->set('failedlogincount', 0);
+            $profile->save();
+            $flc = 0;
+        }
+        else {
+            $flc++;
+        }
+        if ($flc >= $this->modx->getOption('failed_login_attempts') &&
+            $profile->get('blockeduntil') < time()) {
+                $profile->set('blockeduntil', time() + (60 * $this->modx->getOption('blocked_minutes')));
+                $profile->save();
+        }
+        
+        /* Validate block state */
+        if ($flc >= $this->modx->getOption('failed_login_attempts') &&
+            $profile->get('blockeduntil') > time()) {
+            return $this->modx->lexicon('login_blocked_too_many_attempts');
         }
         if ($profile->get('blocked')) {
             return $this->modx->lexicon('login_blocked_admin');
@@ -167,7 +179,7 @@ class modSecurityLoginProcessor extends modProcessor {
             return $this->modx->lexicon('login_blocked_error');
         }
 
-        return false;
+        return false;    
     }
 
     /**
