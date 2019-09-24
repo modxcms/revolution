@@ -147,6 +147,8 @@ $_lang['license'] = '<p class="title">You must agree to the License before conti
 $_lang['license_agree'] = 'Я погоджуюся з умовами ліцензійної угоди.';
 $_lang['license_agreement'] = 'Ліцензійна угода';
 $_lang['license_agreement_error'] = 'Для продовження встановлення Вам необхідно погодитися з умовами ліцензійної угоди.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Увійти';
 $_lang['modx_class_err_nf'] = 'Не вдалося підключити файл класу MODX.';
 $_lang['modx_configuration_file'] = 'Конфігураційний файл MODX';
@@ -200,6 +202,7 @@ $_lang['retry'] = 'Повторити';
 $_lang['security_notice'] = 'Зауваження щодо безпеки';
 $_lang['select'] = 'Вибрати';
 $_lang['settings_handler_err_nf'] = 'MODX не може знайти клас modInstallSettings у: [[+path]]. Будь ласка, переконайтеся, що Ви завантажили всі файли.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'An error occurred while trying to remove the setup directory.';
 $_lang['setup_err_assets'] = 'Your assets/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
 $_lang['setup_err_assets_comp'] = 'Your assets/components/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';

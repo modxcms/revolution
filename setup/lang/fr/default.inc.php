@@ -152,6 +152,8 @@ $_lang['license'] = '<p class="title">Vous devez accepter la Licence avant de po
 $_lang['license_agree'] = 'J\'accepte les termes et conditions de la licence.';
 $_lang['license_agreement'] = 'Accord de Licence';
 $_lang['license_agreement_error'] = 'Vous devez accepter la licence avant de poursuivre l\'installation.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Connexion';
 $_lang['modx_class_err_nf'] = 'Impossible d\'inclure la classe de fichier MODX.';
 $_lang['modx_configuration_file'] = 'Fichier de configuration de MODX';
@@ -205,6 +207,7 @@ $_lang['retry'] = 'Rééssayer';
 $_lang['security_notice'] = 'Notice de sécurité';
 $_lang['select'] = 'Sélectionner';
 $_lang['settings_handler_err_nf'] = 'MODX ne trouve pas la classe modInstallSettings dans : [[+path]]. Veuillez vérifier que vous avez bien déposé tous les fichiers.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Une erreur est survenue lors de la suppression du répertoire d\'installation.';
 $_lang['setup_err_assets'] = 'Votre répertoire assets/ n\'a pas été créé dans: [[+path]] <br />Vous allez devoir créer ce répertoire et le rendre accessible en écriture si vous souahitez utiliser le Gestionnaire de Paquets ou des Composants tierces.';
 $_lang['setup_err_assets_comp'] = 'Votre répertoire assets/components/ n\'a pas été créé dans: [[+path]] <br />Vous allez devoir créer ce répertoire et le rendre accessible en écriture si vous souahitez utiliser le Gestionnaire de Paquets ou des Composants tierces.';

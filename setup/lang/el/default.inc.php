@@ -126,6 +126,8 @@ $_lang['license'] = '<p class="title">Πρέπει να συμφωνήσετε �
 $_lang['license_agree'] = 'I agree to the terms set out in this license.';
 $_lang['license_agreement'] = 'Συμφωνία Άδειας Χρήσης';
 $_lang['license_agreement_error'] = 'Πρέπει να συμφωνήσετε με την άδεια πριν προχωρήσετε στην εγκατάσταση.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Σύνδεση';
 $_lang['modx_class_err_nf'] = 'Could not include the MODX class file.';
 $_lang['modx_configuration_file'] = 'MODX configuration file';
@@ -179,6 +181,7 @@ $_lang['retry'] = 'Retry';
 $_lang['security_notice'] = 'Security Notice';
 $_lang['select'] = 'Select';
 $_lang['settings_handler_err_nf'] = 'MODX could not find the modInstallSettings class at: [[+path]]. Please ensure you have uploaded all the files.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'An error occurred while trying to remove the setup directory.';
 $_lang['setup_err_assets'] = 'Your assets/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
 $_lang['setup_err_assets_comp'] = 'Your assets/components/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
