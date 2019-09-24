@@ -117,6 +117,38 @@ MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
 });
 Ext.reg('staticboolean',MODx.StaticBoolean);
 
+// This method strips not allowed html tags/attributes, html comments and php tags,
+// replaces javascript invocation in a href attribute and masks html event attributes
+// in an input string - assuming the result is safe to be displayed by a browser
+MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
+    var strip = function(input, allowedTags, allowedAttributes) {
+        return input.replace(tags, function ($0, $1) {
+            return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+        }).replace(attributes, function ($0, $1) {
+            return allowedAttributes.indexOf($1.toLowerCase() + ',') > -1 ? $0 : '';
+        });
+    };
+    allowedTags = (((allowedTags || '<a><br><i><em><b><strong>') + '')
+        .toLowerCase()
+        .match(/<[a-z][a-z0-9]*>/g) || [])
+        .join(''); // making sure the allowedTags arg is a string containing only tags in lowercase (<a><b><c>)
+    allowedAttributes = (((allowedAttributes || 'href,class') + '')
+        .toLowerCase()
+        .match(/[a-z\-,]*/g) || [])
+        .join('').concat(','); // making sure the allowedAttributes arg is a comma separated string containing only attributes in lowercase (a,b,c)
+    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+        attributes = /([a-z][a-z0-9]*)\s*=\s*".*?"/gi,
+        eventAttributes = /on([a-z][a-z0-9]*\s*=)/gi,
+        commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi,
+        hrefJavascript = /href(\s*?=\s*?(["'])javascript:.*?\2|\s*?=\s*?javascript:.*?(?![^> ]))/gi,
+        length;
+    input = input.replace(commentsAndPhpTags, '').replace(hrefJavascript, 'href="javascript:void(0)"');
+    do {
+        length = input.length;
+        input = strip(input, allowedTags, allowedAttributes);
+    } while (length !== input.length);
+    return input.replace(eventAttributes, 'on&#8203;$1');
+};
 
 /****************************************************************************
  *    Ext-specific overrides/extensions                                     *
