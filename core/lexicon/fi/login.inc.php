@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Kieli';
 $_lang['login_activation_key_err'] = 'Aktivoimis avain ei täsmää! Tarkista aktivointisähköpostisi ja varmista, että olet ladannut oikean URL-osoitteen.';
-$_lang['login_blocked_admin'] = 'Järjestelmänvalvoja on estänyt kirjautumisesi.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Tilapäisesti sisäänkirjautuminen ei onnistu. Yritä myöhemmin uudelleen.';
 $_lang['login_blocked_ip'] = 'Kirjautumista nykyisestä IP-osoiteestasi ei sallita.';
 $_lang['login_blocked_time'] = 'Et voi kirjautua sisään tähän aikaan. Yritä myöhemmin uudelleen.';
