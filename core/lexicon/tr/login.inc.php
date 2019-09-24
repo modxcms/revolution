@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Dil';
 $_lang['login_activation_key_err'] = 'Aktivasyon anahtarı uyuşmuyor! Lütfen aktivasyon e-postanızı kontrol edin ve doğru URL\'yi yüklediğinizden emin olun.';
-$_lang['login_blocked_admin'] = 'Menajerden bir yönetici tarafından engellendiniz.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Geçici olarak engellendiniz ve giriş yapamıyorsunuz. Lütfen daha sonra tekrar deneyin.';
 $_lang['login_blocked_ip'] = 'Geçerli IP adresinizden giriş yapmanıza izin verilmiyor.';
 $_lang['login_blocked_time'] = 'Şu anda giriş yapmanıza izin verilmiyor. Lütfen daha sonra tekrar deneyiniz.';
