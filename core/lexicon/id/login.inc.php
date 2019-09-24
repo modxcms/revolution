@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Bahasa';
 $_lang['login_activation_key_err'] = 'Kunci aktivasi tidak cocok! Silahkan periksa email aktivasi Anda dan pastikan Anda dimuat URL yang benar.';
-$_lang['login_blocked_admin'] = 'Anda telah diblokir dari manajer oleh administrator.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Anda sementara diblokir dan tidak dapat masuk. Harap coba lagi nanti.';
 $_lang['login_blocked_ip'] = 'Anda tidak diperbolehkan untuk login dari alamat IP Anda saat ini.';
 $_lang['login_blocked_time'] = 'Anda tidak diperbolehkan untuk login pada saat ini. Harap coba lagi nanti.';
