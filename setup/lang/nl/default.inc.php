@@ -144,6 +144,8 @@ $_lang['license'] = '<p class="title">Je moet akkoord gaan met de licentie voord
 $_lang['license_agree'] = 'Ik ga akkoord met de voorwaarden vermeld in de licentie.';
 $_lang['license_agreement'] = 'Licentie Overeenkomst';
 $_lang['license_agreement_error'] = 'Je moet akkoord gaan met de licentie voordat je verder kunt met de installatie.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Aanmelden';
 $_lang['modx_class_err_nf'] = 'Kan het MODX class bestand niet inladen.';
 $_lang['modx_configuration_file'] = 'MODX configuratiebestand';
@@ -197,6 +199,7 @@ $_lang['retry'] = 'Opnieuw';
 $_lang['security_notice'] = 'Beveiligingsmelding';
 $_lang['select'] = 'Selecteer';
 $_lang['settings_handler_err_nf'] = 'MODX kon de modInstallSettings class niet vinden in: [[+path]]. Controleer of alle bestanden geupload zijn.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van de setup/ map.';
 $_lang['setup_err_assets'] = 'Jouw assets/ map was niet gemaakt in: [[+path]] <br />Je zult deze map zelf moeten aanmaken en schrijfbaar moeten maken als je de Pakket Manager of componenten van derden wilt gebruiken.';
 $_lang['setup_err_assets_comp'] = 'Jouw assets/components/ map was niet gemaakt in: [[+path]] <br />Je zult deze map zelf moeten aanmaken en schrijfbaar moeten maken als je de Pakket Manager of componenten van derden wilt gebruiken.';
