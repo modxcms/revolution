@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================
+- Resolve 0 integer values marked as undefined when required [#14658]
 - Fix transparency in .png for Template Variables [#14664]
 - Prevent users without edit_locked permission from editing locked elements [#14739]
 - Lock setup after it is successfully executed [#14692]
