@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'اللغة';
 $_lang['login_activation_key_err'] = 'مفتاح التفعيل غير صحيح! الرجاء التحقق من بريد التنشيط الخاص بك، وتأكد من فتح الرابط الصحيح.';
-$_lang['login_blocked_admin'] = 'تم منعك من الإدارة  بواسطة المسؤول.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'تم حظر حسابك بشكل مؤقت ولاتستطيع تسجيل الدخول. يرجى المحاولة لاحقاً.';
 $_lang['login_blocked_ip'] = 'غير مسموح لك تسجيل الدخول من عنوان IP الحالي.';
 $_lang['login_blocked_time'] = 'غير مسموح لك تسجيل الدخول في هذا الوقت. الرجاء المحاولة مرة أخرى لاحقاً.';
