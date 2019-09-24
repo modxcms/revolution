@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Língua';
 $_lang['login_activation_key_err'] = 'Chave de ativação não combina! Por favor, verifique seu e-mail de ativação e verifique se você carregou a URL correta.';
-$_lang['login_blocked_admin'] = 'Você foi bloqueado do gerenciador por um administrador.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Você está temporariamente bloqueado e não pode entrar. Por favor, tente novamente mais tarde.';
 $_lang['login_blocked_ip'] = 'Você não tem permissão para fazer login do seu endereço IP atual.';
 $_lang['login_blocked_time'] = 'Você não tem permissão para fazer login no momento. Por favor, tente novamente mais tarde.';
