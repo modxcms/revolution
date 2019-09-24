@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Keel';
 $_lang['login_activation_key_err'] = 'Aktiveerimise võti ei klapi! Palun kontrolli oma aktiveerimise emaili j ole kindel, et oled avanud õige aadressi.';
-$_lang['login_blocked_admin'] = 'Teid on blokeeritud manageri kasutamisest administraatori poolt.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Teid on ajutiselt blokeeritud ja sisse ei saa logida. Palun proovige hiljem uuesti.';
 $_lang['login_blocked_ip'] = 'Praeguselt IP aadressilt ei ole lubatud teil sisse logida.';
 $_lang['login_blocked_time'] = 'Praegu pole teil sisse logimine lubatud. Palun proovige hiljem uuesti. ';
