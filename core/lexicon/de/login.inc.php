@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Sprache';
 $_lang['login_activation_key_err'] = 'Der Aktivierungs-Schlüssel ist nicht korrekt! Bitte überprüfen Sie Ihre Aktivierungs-E-Mail und stellen Sie sicher, dass Sie die richtige URL aufgerufen haben.';
-$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
+$_lang['login_blocked_admin'] = 'Sie wurden von einem Administrator gesperrt.';
 $_lang['login_blocked_error'] = 'Sie wurden temporär geblockt und können sich nicht einloggen. Bitte versuchen Sie es später noch einmal.';
 $_lang['login_blocked_ip'] = 'Sie dürfen sich von Ihrer aktuellen IP-Adresse aus nicht einloggen.';
 $_lang['login_blocked_time'] = 'Sie dürfen sich momentan nicht einloggen. Bitte versuchen Sie es später noch einmal.';
