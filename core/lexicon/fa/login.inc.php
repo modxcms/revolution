@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Language';
 $_lang['login_activation_key_err'] = 'کلید فعال سازی درست نیست! لطفا ایمیل فعال سازی را بررسی نمایید و اطمینان پیدا کنید که دقیقا همان URL را ملاحظه میکنید.';
-$_lang['login_blocked_admin'] = 'دسترسی شما توسط مدیران سیستم، مسدود گردیده است.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'دسترسی شما موقتا مسدود شده است و نميتوانيد وارد شويد. لطفا بعدا دوباره تلاش کنید.';
 $_lang['login_blocked_ip'] = 'شما مجاز به ورود با آدرس IP فعلیتان نیستید.';
 $_lang['login_blocked_time'] = 'شما در حال حاضر مجاز به ورود نیستید. لطفا بعدا دوباره تلاش کنید.';

@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = '言語';
 $_lang['login_activation_key_err'] = '認証キーが一致しません。認証メールを確認し、正しいURLにアクセスしているか確認してください。';
-$_lang['login_blocked_admin'] = '管理画面へのアクセスを制限されています。';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = '一時的にログインを制限されています。しばらくたってから再度ログインしてください。';
 $_lang['login_blocked_ip'] = 'このIPアドレスからのログインは制限されています。';
 $_lang['login_blocked_time'] = 'このアカウントではこの時間帯のログインを許可されていません。後ほど、もしくは後日ログインしてください。';

@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Sprog';
 $_lang['login_activation_key_err'] = 'Aktiveringnøglen stemmer ikke! Kontroller din aktiveringsmail og sørg for, at du har indlæst den rigtige URL.';
-$_lang['login_blocked_admin'] = 'Du er blevet blokeret fra manageren af en administrator.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Du er midlertidigt blokeret og ikke kan logge ind. Prøv igen senere.';
 $_lang['login_blocked_ip'] = 'Du er ikke tilladt at logge ind fra din aktuelle IP-adresse.';
 $_lang['login_blocked_time'] = 'Du er ikke tilladt at logge ind lige nu. Prøv igen senere.';

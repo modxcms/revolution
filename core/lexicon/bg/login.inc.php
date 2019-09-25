@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Език';
 $_lang['login_activation_key_err'] = 'Ключа за активиране на съвпада! Моля проверете вашия активиращ имейл и се уверете, че сте заредили правилния URL адрес.';
-$_lang['login_blocked_admin'] = 'Вие сте блокиран за влизане в мениджъра от администратора.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Временно сте блокиран и не можете да влезете. Моля опитайте по-късно.';
 $_lang['login_blocked_ip'] = 'Не е разрешено да влизате от текущия IP адрес.';
 $_lang['login_blocked_time'] = 'Не е разрешено да влизате в този момент. Моля опитайте по-късно.';

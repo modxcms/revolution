@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Idioma';
 $_lang['login_activation_key_err'] = '¡La clave de activación no es correcta! Por favor, comprueba el email de activación y comprueba que la URL es correcta.';
-$_lang['login_blocked_admin'] = 'La cuenta ha sido bloqueada por un administrador.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Cuenta temporalmente bloqueada. Por favor inténtalo nuevamente más tarde.';
 $_lang['login_blocked_ip'] = 'La dirección IP desde la cual estás intentando iniciar sesión está bloqueada.';
 $_lang['login_blocked_time'] = 'No tienes permiso para acceder en este momento. Por favor inténtalo nuevamente más tarde.';

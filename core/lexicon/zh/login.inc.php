@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = '语言';
 $_lang['login_activation_key_err'] = '邀请密钥不匹配！请检查收到的密钥邮件并确认登录地址正确。';
-$_lang['login_blocked_admin'] = '您的账户已被系统管理员锁住。';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = '您的账户被临时锁住，请稍后再尝试登录。';
 $_lang['login_blocked_ip'] = '您当前的IP地址不能登录。';
 $_lang['login_blocked_time'] = '现在无法登录，请您稍后再做尝试。';

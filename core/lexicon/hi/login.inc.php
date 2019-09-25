@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'भाषा';
 $_lang['login_activation_key_err'] = 'Activation key से मेल नहीं खाता! अपने activation email की जाँच करें और आप सही URL लोड सुनिश्चित करें।';
-$_lang['login_blocked_admin'] = 'आप manager से किसी administrator द्वारा अवरुद्ध किया गया है।';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'आप अस्थायी रूप से अवरुद्ध हैं और log in नहीं कर सकता। कृपया बाद में पुन: प्रयास करें।';
 $_lang['login_blocked_ip'] = 'आप अपने वर्तमान IP address से लॉगइन करने के लिए अनुमति नहीं है।';
 $_lang['login_blocked_time'] = 'आप इस समय में login करने की अनुमति नहीं है। कृपया बाद में पुन: प्रयास करें।';

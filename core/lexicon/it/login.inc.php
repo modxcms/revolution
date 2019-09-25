@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Lingua';
 $_lang['login_activation_key_err'] = 'Chiave di Attivazione non corrispondente! Per favore controlla la mail di attivazione e accertati di aver caricato l\' URL corretto.';
-$_lang['login_blocked_admin'] = 'Sei stato bloccato nella gestione da un amministratore.';
+$_lang['login_blocked_admin'] = 'Sei stato bloccato da un amministratore.';
 $_lang['login_blocked_error'] = 'Sei stato temporaneamente bloccato e non puoi accedere. Riprova più tardi.';
 $_lang['login_blocked_ip'] = 'Non sei autorizzato ad accedere dal tuo attuale indirizzo IP.';
 $_lang['login_blocked_time'] = 'Non sei autorizzato ad accedere in questo momento. Riprova più tardi.';

@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Jazyk';
 $_lang['login_activation_key_err'] = 'Aktivační klíč neodpovídá! Zkontrolujte si aktivační e-mail a ujistěte se, že jste použili správný odkaz.';
-$_lang['login_blocked_admin'] = 'Váš účet byl uzamčen administrátorem.';
+$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
 $_lang['login_blocked_error'] = 'Váš účet byl dočasně zablokován a bylo Vám znemožněno přihlášení. Zkuste to později znovu.';
 $_lang['login_blocked_ip'] = 'Nemáte oprávnění se přihlášet z aktuálně Vámi používané IP adresy.';
 $_lang['login_blocked_time'] = 'Nemáte oprávnění se přihlásit v tento čas. Zkuste to později znovu.';
