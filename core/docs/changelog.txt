@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.7.2-pl (TBD)
+MODX Revolution 2.7.2-pl (September 26, 2019)
 ====================================
 - Allow safe html in system setting description [#14453]
 - Fix incorrect password behavior and message [#14085]
@@ -27,7 +27,7 @@ MODX Revolution 2.7.2-pl (TBD)
 - Fix for thumbnails not rendering for media sources with spaces in URL's [#14301]
 - The default RSS feed URLs `feed_modx_security` and `feed_modx_news` now use HTTPS [#14392]
 - The value for the preview tooltip in the trash manager is now properly encoded [#14401]
-- Change icon to propper one for descending sort order [#14413]
+- Change icon to proper one for descending sort order [#14413]
 - Don't execute the upgrade script for the last installed version again [#14396]
 - Fix friendly_alias_realtime system setting not working as expected [#14438]
 - Fix deprecated create_function() calls in modProcessor and modConnectorResponse [#14399]
