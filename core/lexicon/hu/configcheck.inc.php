@@ -8,9 +8,9 @@
  */
 $_lang['configcheck_admin'] = 'Kérjük, forduljon a rendszergazdához, és figyelmeztesse őket erre az üzenetre!';
 $_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post környezeti beállítás engedélyezve van a `mgr` részen kívül';
-$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'The allow_tags_in_post Context Setting is enabled in your installation outside the mgr Context. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. This should generally be disabled except in the mgr Context.';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'Az allow_tags_in_post környezeti beállítás engedélyezett a telepítőben a mgr környezeten kívül. A MODX ennek tiltását javasolja, hacsak nem kifejezetten engedni akarja a felhasználókat MODX címkék, számok, vagy HTML script kódok beküldésére POST eljáráson keresztül az oldalán található űrlapokba. Javasolt általánosan tiltani a mgr környezeten kívül.';
 $_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post rendszerbeállítás engedélyezve van';
-$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'The allow_tags_in_post System Setting is enabled in your installation. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. It is better to enable this via Context Settings for specific Contexts.';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'Az allow_tags_in_post rendszerbeállítás engedélyezett a telepítésében. A MODX ennek tiltását javasolja, hacsak nem kifejezetten engedni akarja a felhasználókat MODX címkék, számok, vagy HTML script kódok beküldésére POST eljáráson keresztül az oldalán található űrlapokba. Javasolt a környezeti beállításokon keresztül engedélyezni az egyes környezetekre.';
 $_lang['configcheck_cache'] = 'Gyorsítótár mappa nem írható';
 $_lang['configcheck_cache_msg'] = 'A MODX nem tud írni a gyorsítótár mappába. A MODX ettől még rendben működik, de nem gyorsítótáraz. A gyorsítótárazáshoz tegye írhatóvá a /_cache/ mappát.';
 $_lang['configcheck_configinc'] = 'A beállítási állomány még írható!';
