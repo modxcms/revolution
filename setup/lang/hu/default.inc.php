@@ -98,44 +98,23 @@ $_lang['install_update'] = 'Telepítés/Frissítés';
 $_lang['installation_finished'] = 'A telepítés elkészült [[+time]] alatt';
 $_lang['license'] = '<p class="title">A telepítés folytatása előtt el kell fogadnia a felhasználói engedélyezést.</p>
     <p>A program használata a GPL engedélyhez kötött. A következő összefoglalással segíteni szeretnénk, hogy megértse, mi a GPL engedély és milyen hatással van a program használhatóságára:</p>
-    <h4>A GNU General Public License egy szabad szoftver engedély.</h4>
+    <h4>A GNU General Public License egy szabad szoftverengedély.</h4>
     <p>Mint minden szabad szoftver engedély, a következőkre ad szabadságot:</p>
     <ul>
         <li>A program bármilyen célú futtatása. </li>
         <li>A program működésének szabad tanulmányozása és a szükségleteihez való igazítása.</li>
         <li>A program szabad továbbadása, hogy segíthessen felebarátjának.</li>
-        <li>A program szabad javítása és a javítások közzététele az egész közösség előnyére.</li>
+        <li>A program szabad javítása és a javítások közzététele az egész közösség javára.</li>
     </ul>
     <p>Gyakorolhatja az itt meghatározott lehetőségeket, amennyiben megfelel az ezen engedélyben kifejezett feltételeknek. Az alapvető feltételek:</p>
     <ul>
-        <li>You must conspicuously and appropriately publish on each copy distributed an
-        appropriate copyright notice and disclaimer of warranty and keep intact all the
-        notices that refer to this License and to the absence of any warranty; and give
-        any other recipients of the Program a copy of the GNU General Public License
-        along with the Program. Any translation of the GNU General Public License must
-        be accompanied by the GNU General Public License.</li>
-
-        <li>If you modify your copy or copies of the program or any portion of it, or
-        develop a program based upon it, you may distribute the resulting work provided
-        you do so under the GNU General Public License. Any translation of the GNU
-        General Public License must be accompanied by the GNU General Public License. </li>
-
-        <li>If you copy or distribute the program, you must accompany it with the
-        complete corresponding machine-readable source code or with a written offer,
-        valid for at least three years, to furnish the complete corresponding
-        machine-readable source code.</li>
-
-        <li>Any of these conditions can be waived if you get permission from the
-        copyright holder.</li>
-
-        <li>Your fair use and other rights are in no way affected by the above.</li>
+        <li>Minden közzétett példányon jól észrevehetően és megfelelően meg kell jelenítenie a szerzői jogi megjegyzést és a jótállási feltételeket, és változatlan formában megtartani azokat a megjegyzéseket, amelyek erre az engedélyre és minden jótállás elutasítására hivatkoznak; és a program minden átvevőjének átadni a GNU General Public License egy példányát a programmal együtt. A GNU General Public License bármely fordításához mellékelni kell a GNU General Public License-t.</li>
+        <li>Ha a program egy példányát vagy példányait, vagy annak bármely részét módosítja, vagy erre alapozva új programot fejleszt, a létrejött munkát a GNU General Public License alapján teheti közzé.A GNU General Public License bármely fordításához mellékelni kell a GNU General Public License-t.</li>
+        <li>Ha lemásolja vagy közzéteszi a programot, hozzá kell adnia a teljes megfelelő gép által olvasható forráskódot vagy egy írásos ajánlatot legalább három évi érvényességgel a teljes gép által olvasható forráskód átadására.</li>
+        <li>Mindezen feltételek felfüggeszthetők a szerzői jog tulajdonosának engedélyével.</li>
+        <li>A tisztességes használathoz vagy máshoz való jogait a fentiek semmilyen módon nem befolyásolhatják.</li>
     </ul>
-    <p>The above is a summary of the GNU General Public License. By proceeding, you
-    are agreeing to the GNU General Public Licence, not the above. The above is
-    simply a summary of the GNU General Public Licence, and its accuracy is not
-    guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-    License</a> in full before proceeding, which can also be found in the license
-    file distributed with this package.</p>
+    <p>A fentiek összefoglalása a GNU General Public License-nek. A továbblépéssel a GNU General Public Licence-t fogadja el, nem a fentieket. A fentiek csupán a GNU General Public License összefoglalása, aminek a pontossága nem szavatolt. Továbblépés előtt erősen ajánlott a <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public License</a> teljes szövegének elolvasása, ami az ezzel a csomaggal közreadott engedély-állományban is megtalálható.</p>
 ';
 $_lang['license_agree'] = 'Elfogadom az ebben az engedélyben leírt feltételeket.';
 $_lang['license_agreement'] = 'Licencszerződés';
