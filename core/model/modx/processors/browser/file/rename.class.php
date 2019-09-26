@@ -40,19 +40,22 @@ class modBrowserFileRenameProcessor extends modProcessor {
         }
 
         $oldFile = $this->getProperty('path');
-        $oldlocale = setlocale(LC_ALL, 0);
-        setlocale(LC_ALL,'C.UTF-8');
         $pathinfo = pathinfo($oldFile);
+        if ($pathinfo['dirname'].DIRECTORY_SEPARATOR.$pathinfo['basename'] != $oldFile) {
+            $this->modx->log (modX::LOG_LEVEL_ERROR, 'Could not prepare the filepath ' . $oldFile . '. Please set a valid UTF8 capable locale in the MODX system setting "locale".');
+        }
         $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars($pathinfo['dirname']));
         $name = htmlspecialchars($pathinfo['basename']);
         $oldFile = $directory.DIRECTORY_SEPARATOR.$name;
 
         $newFile = $this->getProperty('name');
         $pathinfo = pathinfo($newFile);
+        if ($pathinfo['basename'] != $newFile) {
+            $this->modx->log (modX::LOG_LEVEL_ERROR, 'Could not prepare the filepath ' . $newFile . '. Please set a valid UTF8 capable locale in the MODX system setting "locale".');
+        }
         $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars($pathinfo['dirname']));
         $name = htmlspecialchars($pathinfo['basename']);
         $newFile = $directory.DIRECTORY_SEPARATOR.$name;
-        setlocale(LC_ALL,$oldlocale);
         $success = $this->source->renameObject($oldFile, $newFile);
 
         if (empty($success)) {

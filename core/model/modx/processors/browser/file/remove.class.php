@@ -33,10 +33,10 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (empty($file)) {
             return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
         }
-        $oldlocale = setlocale(LC_ALL, 0);
-        setlocale(LC_ALL,'C.UTF-8');
         $pathinfo = pathinfo($file);
-        setlocale(LC_ALL,$oldlocale);
+        if ($pathinfo['dirname'].DIRECTORY_SEPARATOR.$pathinfo['basename'] != $file) {
+            $this->modx->log (modX::LOG_LEVEL_ERROR, 'Could not prepare the filepath ' . $file . '. Please set a valid UTF8 capable locale in the MODX system setting "locale".');
+        }
         $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars($pathinfo['dirname']));
         $name = htmlspecialchars($pathinfo['basename']);
         $path = $directory.DIRECTORY_SEPARATOR.$name;
