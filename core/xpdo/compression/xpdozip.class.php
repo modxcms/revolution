@@ -37,7 +37,6 @@ class xPDOZip {
     const CREATE = 'create';
     const OVERWRITE = 'overwrite';
     const ZIP_TARGET = 'zip_target';
-    const ALLOWED_EXTENSIONS = 'allowed_extensions';
 
     public $xpdo = null;
     protected $_filename = '';
@@ -143,24 +142,13 @@ class xPDOZip {
      *
      * @param string $target The path of the target location to unpack the files.
      * @param array $options An array of options for the operation.
-     * @return bool|array An array of results for the operation.
+     * @return array An array of results for the operation.
      */
     public function unpack($target, $options = array()) {
         $results = false;
         if ($this->_archive) {
             if (is_dir($target) && is_writable($target)) {
-                if (is_array($options[self::ALLOWED_EXTENSIONS])) {
-                    $fileIndex = array();
-                    for ($i = 0; $i < $this->_archive->numFiles; $i++) {
-                        $filename = $this->_archive->getNameIndex($i);
-                        if ($this->checkFiletype($filename, $options[self::ALLOWED_EXTENSIONS])) {
-                            $fileIndex[] = $filename;
-                        }
-                    }
-                    $results = $this->_archive->extractTo($target, $fileIndex);
-                } else {
-                    $results = $this->_archive->extractTo($target);
-                }
+                $results = $this->_archive->extractTo($target);
             }
         }
         return $results;
@@ -220,25 +208,5 @@ class xPDOZip {
      */
     public function getErrors() {
         return $this->_errors;
-    }
-
-    /**
-     * Check that the filename has a file type extension that is allowed
-     *
-     * @param string $filename The filename
-     * @param array $allowedExtensions The allowed file type extensions
-     * @return bool
-     */
-    private function checkFiletype($filename, $allowedExtensions)
-    {
-        if (is_array($allowedExtensions)) {
-            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            $ext = strtolower($ext);
-            if (!in_array($ext, $allowedExtensions)) {
-                $this->xpdo->log(XPDO::LOG_LEVEL_WARN, $filename .' can\'t be extracted, because the file type is not allowed.');
-                return false;
-            }
-        }
-        return true;
     }
 }
