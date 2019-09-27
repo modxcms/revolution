@@ -28,10 +28,6 @@ html {
   outline: 0;
 }
 
-*:focus {
-  box-shadow: 0 0 0 0.125rem $blue;
-}
-
 body,
 h1,
 h2,
@@ -46,7 +42,11 @@ form {
   margin: 0;
   padding: 0;
   font-weight: normal;
-  color: $black;
+  color: $mineShaft;
+}
+
+strong {
+  font-weight: 600;
 }
 
 body {
@@ -160,16 +160,31 @@ a {
 }
 
 input {
+  display: inline-block;
+  width: 100%;
+  background: $lightestGray;
+  border-radius: $borderRadius;
+  outline-color: $green;
   font-size: 1rem;
   padding: 1rem;
   box-shadow: none;
   border: 1px solid $lightGray;
 }
 
+input[type="checkbox"] {
+  width: auto;
+  margin: 0 0.5rem 0 0;
+  position: relative;
+  top: 0;
+}
+
+input:focus {
+  border: 1px solid $blue;
+}
+
 label {
   display: block;
   margin: 1.25rem 0;
-  color: $darkestGray;
   cursor: pointer;
   font-weight: 500;
 
@@ -184,22 +199,8 @@ label#rememberme-checkbox {
   align-items: center;
 }
 
-input {
-  display: inline-block;
-  width: 100%;
-  border-radius: $borderRadius;
-  outline-color: $green;
-}
-
 label > input {
   margin-top: 0.25rem;
-}
-
-input[type="checkbox"] {
-  width: auto;
-  margin: 0 0.5rem 0 0;
-  position: relative;
-  top: 0;
 }
 
 /**
@@ -238,16 +239,6 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.c-button--ghost {
-  color: $blue;
-  background: transparent;
-  border: none;
-
-  .c-arrow {
-    stroke: $blue;
-  }
-}
-
 #modx-login-btn,
 #modx-fl-btn {
   border: 1px solid transparent;
@@ -275,7 +266,6 @@ input[type="checkbox"] {
   margin-bottom: 10px;
   width: 100%;
 }
-
 
 .c-helplink {
   margin-left: 2rem;
@@ -327,7 +317,7 @@ input[type="checkbox"] {
   z-index: 1;
   display: block;
   position: absolute;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   right: 0;
   width: 0;
@@ -337,15 +327,34 @@ input[type="checkbox"] {
   border-color: $darkestGray transparent transparent transparent;
 }
 
+.c-button--ghost {
+  color: $blue;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  .c-arrow {
+    stroke: $blue;
+  }
+
+  :hover > & {
+    left: -0.5rem;
+    right: 0;
+  }
+}
+
 .c-arrow {
-  stroke: $black;
+  stroke: $mineShaft;
   vertical-align: middle;
   position: relative;
   top: -2px;
   transition: left .4s ease-in-out, right .4s ease-in-out;
   right: 0;
 
-  a:hover > & {
+  .c-button:hover > & {
     right: -0.5rem;
   }
 
@@ -353,7 +362,7 @@ input[type="checkbox"] {
     transform: rotate(180deg);
     left: 0;
 
-    a:hover > & {
+    .c-button:hover > & {
       left: -0.5rem;
       right: 0;
     }
