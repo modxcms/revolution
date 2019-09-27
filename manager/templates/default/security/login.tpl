@@ -8,11 +8,11 @@
         <meta name="robots" content="noindex, nofollow">
 
         {if $_config.manager_favicon_url}
-            <link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}" />
+            <link rel="shortcut icon" type="image/x-icon" href="{$_config.manager_favicon_url}">
             <link rel="apple-touch-icon" href="{$_config.manager_favicon_url}">
         {/if}
 
-        <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css" />
+        <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css">
     </head>
     <body id="login">
         {$onManagerLoginFormPrerender}
@@ -117,19 +117,26 @@
                             <form action="" method="post" id="modx-forgot-login-form" class="c-form can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
                                 <p class="lead">{$_lang.login_forget_your_login_note}</p>
 
-                                    {if $error_message}
-                                        <p class="is-error">{$error_message|default}</p>
-                                    {elseif $success_message}
-                                        <p class="is-success">{$success_message|default}</p>
-                                    {/if}
+                                {if $error_message}
+                                    <p class="is-error">{$error_message|default}</p>
+                                {elseif $success_message}
+                                    <p class="is-success">{$success_message|default}</p>
+                                {/if}
 
-                                    <label>
-                                        {$_lang.login_username_or_email}
-                                        <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}" required>
-                                    </label>
+                                <label>
+                                    {$_lang.login_username_or_email}
+                                    <input type="text" id="modx-login-username-reset" name="username_reset" value="{$_post.username_reset|default}" required>
+                                </label>
 
-                                    <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
-                                    <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--ghost">{$_lang.login_back_to_login}</button>
+                                <button class="c-button" name="forgotlogin" type="submit" value="1" id="modx-fl-btn">{$_lang.login_send_activation_email}</button>
+                                <button name="modx-fl-back-to-login-link" id="modx-fl-back-to-login-link" class="c-button c-button--ghost">
+                                    <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                        <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                            <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                                        </g>
+                                    </svg>
+                                    {$_lang.login_back_to_login}
+                                </button>
                             </form>
                         {/if}
                     {else}
@@ -155,7 +162,14 @@
                             {$onManagerLoginFormRender}
 
                             <button class="c-button" name="login" type="submit" value="1">{$_lang.login_button}</button>
-                            <a href="{$_config.manager_url}" class="c-button c-button--ghost">{$_lang.login_back_to_login}</a>
+                            <a href="{$_config.manager_url}" class="c-button c-button--ghost">
+                                <svg class="c-arrow c-arrow--left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                    <g fill="none" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                        <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                                    </g>
+                                </svg>
+                                {$_lang.login_back_to_login}
+                            </a>
                         </form>
                     {/if}
                 {/if}
