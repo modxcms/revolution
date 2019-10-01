@@ -341,11 +341,14 @@
 }
 
 #modx-site-info {
-  padding: 13px 5px 0 5px !important;
+  padding: 12px 5px 0 !important;
   border-right: 0 !important;
-  width: 175px;
 
-  @include media($desktop) {
+  @include media($gtTabletL) {
+    width: 175px;
+  }
+
+  @include media($tabletL) {
     display: none
   }
 
