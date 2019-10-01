@@ -239,97 +239,70 @@ jumping around */
 	}
 }
 
-#modx-grid-lexicon {
-	.x-toolbar-ct {
-		@include media($mobile) {
-			display:block;
-			tbody {
-				display:block;
-				tr {
-					display:block;
-					td {
-						display:block;
-						width:100%;
-						table {
-							width:100%;
-							.x-form-field-wrap {
-								width:100% !important;
-								margin-bottom:1em;
-							}
-							.x-btn, .x-form-text {
-								width:100% !important;
-								margin-bottom:1em;
-								box-sizing:border-box;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
+@include media($mobile) {
+  .x-toolbar-ct {
+    display: block;
 
-#modx-panel-contexts, #modx-panel-namespaces {
-	.main-wrapper {
-		> .x-panel-bwrap {
-			> .x-panel-tbar {
-				@include media($mobile) {
-					width:auto !important;
-					@include responsive-table-bar;
+    tbody {
+      display: block;
 
-					#modx-ctx-search {
-						width:100% !important;
-						box-sizing:border-box;
-						margin-left:0;
-					}
-				}
-			}
-		}
-	}
-}
+      tr {
+        display: block;
 
-#modx-panel-namespaces {
-	@include media($mobile) {
-		.main-wrapper {
-			.x-toolbar-left {
-				margin-bottom:0 !important;
-			}
-		}
-	}
-}
+        td {
+          display: block;
+          width: 100%;
 
-#modx-namespace-search {
-	@include media($mobile) {
-		width:100% !important;
-		margin-left:0;
-		box-sizing:border-box;
-	}
-}
+          #modx-resource-tree & {
+            width: 150px;
+            display: table-cell;
+          }
 
-#modx-filter-clear {
-	@include media($mobile) {
-		width:100% !important;
-		box-sizing:border-box;
-	}
+          #modx-tree-element & {
+            width: 250px;
+            display: table-cell;
+          }
+
+          table {
+            width: 100%;
+
+            .x-form-field-wrap {
+              width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
+
+            .x-btn,
+            .x-form-text {
+              width: 100% !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              box-sizing: border-box;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .x-column {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none;
+  }
 }
 
 #modx-tree-panel-usergroup {
-	.main-wrapper {
-		@include media($mobile) {
-			position:relative;
-		}
-	}
-}
-
-#modx-property-set-form {
-	@include media($mobile) {
-		.left-col, .x-col {
-			float:none;
-		}
-		#right-column, #modx-grid-element-properties {
-			width:100% !important;
-		}
-	}
+  .main-wrapper {
+    @include media($mobile) {
+      width: 100% !important;
+      max-width: 100%;
+      position: relative;
+      display: inline-block;
+      float: left;
+    }
+  }
 }
 
 .x-window {

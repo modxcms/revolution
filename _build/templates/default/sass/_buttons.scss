@@ -269,16 +269,17 @@ button {
   z-index: 11; /* prevent panel collaps arrows from overlapping */
 
   @include media($mobile) {
-	  position: relative;
-	  top: auto;
-	  left: auto;
-	  right: auto;
-	  bottom: auto;
-	  width: 100%;
-	  
-	  table {
-	  	@include responsive-table-bar;
-	  }
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    background: none;
+
+    table {
+      @include responsive-table-bar;
+    }
   }
 
   .x-toolbar-left {
@@ -288,40 +289,40 @@ button {
 }
 
 .tab-panel-wrapper .x-panel-tbar {
-	@include media($mobile) {
-	    @include responsive-table-bar;
-		.x-toolbar-left, .x-toolbar-right {
-		    input {
-		  	  height:auto !important;
-		  	  width:100%;
-		  	  box-sizing:border-box;
-			  margin-left:0;
-		    }
-		}
-	}
+  @include media($mobile) {
+      @include responsive-table-bar;
+    .x-toolbar-left, .x-toolbar-right {
+        input {
+          height:auto !important;
+          width:100%;
+          box-sizing:border-box;
+        margin-left:0;
+        }
+    }
+  }
 }
 
 html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
-	@include media($mobile) {
-		height:auto !important;
-	}
+  @include media($mobile) {
+    height:auto !important;
+  }
 }
 
 #modx-grid-element-properties {
-	@include media($mobile) {
-		@include responsive-table-bar;
-		.x-toolbar-left {
-			margin-bottom:0;
-		}
-		.x-toolbar-cell {
-			> * {
-				width:100% !important;
-				box-sizing:border-box;
-				margin-left:auto;
-				margin-right:auto;
-			}
-		}
-	}
+  @include media($mobile) {
+    @include responsive-table-bar;
+    .x-toolbar-left {
+      margin-bottom:0;
+    }
+    .x-toolbar-cell {
+      > * {
+        width:100% !important;
+        box-sizing:border-box;
+        margin-left:auto;
+        margin-right:auto;
+      }
+    }
+  }
 }
 
 /*.x-window-footer {
