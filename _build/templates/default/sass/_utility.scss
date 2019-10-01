@@ -182,9 +182,10 @@
         @include display(flex);
         @include flex-wrap(wrap);
         td {
+          width:auto;
           display:inline-block;
           float:left;
-          margin:5px 0;
+          margin:5px;
           padding:0;
         @include flex-grow(1);
         &:first-of-type {
