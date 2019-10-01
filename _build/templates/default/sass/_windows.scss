@@ -240,6 +240,7 @@
 
 /* the progress bar (ex. saving a resource), usually in a window too */
 .x-progress-wrap {
+  width: 100% !important;
   border: 1px solid $green;
 
   .x-progress-inner {
