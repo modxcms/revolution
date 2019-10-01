@@ -32,7 +32,7 @@ oldal 403 (hozzáférés megtagadva) vagy még inkább 404 (nem található) hib
 $_lang['configcheck_images'] = 'Képek mappa nem írható';
 $_lang['configcheck_images_msg'] = 'A képek mappa nem írható, vagy nem létezik. Emiatt a képkezelő működés nem használható a szerkesztőben!';
 $_lang['configcheck_installer'] = 'A telepítő még nincs törölve';
-$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to remove this folder from your server. It is located at: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'A setup/ mappában megtalálható a MODX telepítője. Képzelje csak el, hogy mi történhetne, ha egy rossz szándékú személy megtalálja ezt a mappát és futtatja a telepítőt! Valószínűleg nem jutna messzire, mert meg kell adnia az adatbázis hozzáférési adatait, de legjobb eltávolítani ezt a mappát a kiszolgálóról. Az elérhetősége: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Helytelen számú bejegyzés a nyelvi állományban';
 $_lang['configcheck_lang_difference_msg'] = 'A jelenleg kiválasztott nyelvben eltérő számú bejegyzés szerepel, mint az alapértelmezettben. Habár ez nem feltétlen okoz hibát, jelentheti azt, hogy frissíteni kell a nyelvi állományt.';
 $_lang['configcheck_notok'] = 'Egy vagy több beállítás nincs rendben: ';
