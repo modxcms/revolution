@@ -9469,6 +9469,11 @@ header {
     #install ul.checklist li .notok {
       color: #590710;
       font-weight: 500; }
+    #install ul.checklist li.testWarn {
+      background-color: #FFEEEE;
+      padding: 5px 15px;
+      margin: 0 -15px 0 -18px;
+      border-left: 3px solid #590710; }
   #install ul.checklist.failed {
     background-color: rgba(228, 228, 228, 0.2);
     border-color: #E4E4E4;

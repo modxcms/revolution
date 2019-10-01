@@ -20742,6 +20742,59 @@ ul.x-tab-strip-bottom {
     background-color: #CCCCCC;
     background-image: url("../images/modx-theme/transparency-pattern.png"); }
 
+@media screen and (max-width: 960px) {
+  .modx-browser {
+    top: 15px !important;
+    max-height: 100% !important;
+    overflow-y: scroll; }
+  .modx-browser-panel {
+    width: 100% !important;
+    min-height: 700px;
+    margin: 15px 0 !important;
+    background-color: #FFF !important; }
+  .modx-browser-tree, .modx-browser-view-ct {
+    width: 35% !important;
+    max-width: 35% !important;
+    padding: 0 5px;
+    display: inline-block !important;
+    position: relative !important;
+    float: left;
+    left: 0 !important; }
+  .modx-browser-details-ct {
+    width: 20% !important;
+    max-width: 20% !important;
+    padding: 0 5px;
+    display: inline-block !important;
+    position: relative !important;
+    float: left;
+    left: 0 !important; }
+  .modx-browser-tree *, .modx-browser-view-ct *, .modx-browser-details-ct * {
+    font-size: 12px !important; }
+  .modx-browser-tree input, .modx-browser-view-ct input, .modx-browser-details-ct input {
+    padding: 5px !important; }
+  .modx-browser-tree .x-toolbar-ct tbody tr td {
+    display: table-cell; }
+  .modx-browser .x-panel-tbar-noheader, .modx-browser .x-toolbar, .modx-browser-view-ct .x-panel-tbar-noheader, .modx-browser-view-ct .x-panel-tbar, .modx-browser-view-ct .x-panel-tbar .x-toolbar, .modx-browser-view-ct .x-panel-body {
+    width: 100% !important; }
+  .modx-browser-view-ct .x-panel-tbar .x-toolbar-cell label {
+    line-height: 2.2; }
+  .modx-browser-thumb-wrap {
+    width: 24%;
+    margin: 5px;
+    padding: 5px; }
+  .modx-browser-thumb {
+    max-width: 100%;
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+    padding: 0; }
+  .modx-browser-thumb img {
+    max-width: 100%; }
+  .modx-browser-placeholder {
+    height: 50px; }
+  .modx-browser-details-info {
+    padding: 5px; } }
+
 .x-window {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -21725,7 +21778,7 @@ textarea.x-form-field {
 @media screen and (max-width: 960px) {
   .x-window {
     width: auto !important;
-    max-width: 100vh !important;
+    max-width: 100% !important;
     left: 0.5em !important;
     right: 0.5em !important; }
     .x-window .x-window-body {
@@ -21929,7 +21982,9 @@ a.x-grid-link:focus {
 @media screen and (max-width: 960px) {
   #modx-content .x-panel-body {
     height: auto !important;
-    width: auto !important; } }
+    max-height: 100% !important;
+    width: auto !important;
+    max-width: 100% !important; } }
 
 /* TODO: remove it */
 #modx-mainpanel {
