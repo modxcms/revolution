@@ -36,6 +36,7 @@ class_alias('xPDO\xPDO', 'xPDO');
 class_alias('\xPDO\Om\xPDOCriteria', 'xPDOCriteria');
 class_alias('\xPDO\Om\xPDOSimpleObject', 'xPDOSimpleObject');
 class_alias('\xPDO\Om\xPDOQuery', 'xPDOQuery');
+class_alias('\xPDO\Om\xPDOQueryCondition', 'xPDOQueryCondition');
 class_alias('\xPDO\Om\xPDOObject', 'xPDOObject');
 class_alias('\xPDO\Cache\xPDOCacheManager', 'xPDOCacheManager');
 class_alias('\xPDO\Cache\xPDOFileCache', 'xPDOFileCache');
