@@ -292,6 +292,11 @@ button {
     }
   }
 
+  .x-toolbar-left {
+    width: auto !important;
+    zoom: 1;
+  }
+
   @include grid-media($desktop) {
     background: transparent;
     padding: 0 15px;
@@ -310,11 +315,11 @@ button {
     #modx-panel-welcome & {
       display: none;
     }
-  }
 
-  .x-toolbar-left {
-    width: auto !important;
-    zoom: 1;
+    .x-toolbar-cell {
+      width: auto;
+      margin: 5px;
+    }
   }
 }
 

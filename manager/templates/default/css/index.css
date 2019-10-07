@@ -17175,6 +17175,9 @@ button {
     #modx-action-buttons #modx-abtn-menu .x-btn-split .x-btn-text {
       padding: 0;
       border: none; }
+  #modx-action-buttons .x-toolbar-left {
+    width: auto !important;
+    zoom: 1; }
   @media screen and (max-width: 960px) {
     #modx-action-buttons {
       background: transparent;
@@ -17213,10 +17216,10 @@ button {
                 margin-left: 3px;
                 margin-right: 3px; }
       #modx-panel-welcome #modx-action-buttons {
-        display: none; } }
-  #modx-action-buttons .x-toolbar-left {
-    width: auto !important;
-    zoom: 1; }
+        display: none; }
+      #modx-action-buttons .x-toolbar-cell {
+        width: auto;
+        margin: 5px; } }
 
 @media screen and (max-width: 960px) {
   .tab-panel-wrapper .x-panel-tbar table {
@@ -18853,7 +18856,7 @@ ul.x-tab-strip-bottom {
     color: #515151;
     content: '';
     font-size: 28px;
-    margin-top: -14px;
+    margin-top: -20px;
     /* half of the height to center vertically with top 50% */
     opacity: 1;
     filter: alpha(opacity=100);
@@ -18919,6 +18922,9 @@ ul.x-tab-strip-bottom {
     width: 168px !important;
     /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
     /* the "categories" text */ }
+    @media screen and (max-width: 960px) {
+      .vertical-tabs-panel .vertical-tabs-header {
+        width: 80px !important; } }
     .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap {
       background-color: transparent;
       /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
@@ -18948,6 +18954,10 @@ ul.x-tab-strip-bottom {
           overflow: hidden;
           padding: 10px 15px 10px 15px;
           transition: background-color .25s, color .25s; }
+          @media screen and (max-width: 960px) {
+            .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li {
+              font-size: 12px;
+              padding: 8px; } }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li:hover {
             background: #FFF; }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active {
@@ -18959,6 +18969,9 @@ ul.x-tab-strip-bottom {
             color: #234368;
             width: 168px;
             /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */ }
+          @media screen and (max-width: 960px) {
+            .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active {
+              width: 80px !important; } }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-edge {
             height: 0;
             visibility: hidden;
@@ -20933,6 +20946,7 @@ ul.x-tab-strip-bottom {
 /* .x-window */
 /* the progress bar (ex. saving a resource), usually in a window too */
 .x-progress-wrap {
+  width: 100% !important;
   border: 1px solid #6CB24A; }
   .x-progress-wrap .x-progress-inner {
     background-color: #fdfefd; }
