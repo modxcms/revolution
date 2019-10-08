@@ -10,7 +10,7 @@ MODx.grid.FCSet = function(config) {
         ,fields: ['id','profile','action','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
         ,paging: true
         ,autosave: true
-        ,save_action: 'security/forms/set/updatefromgrid'
+        ,save_action: 'Security/Forms/Set/UpdateFromGrid'
         ,sm: this.sm
         ,remoteSort: true
         ,autoExpandColumn: 'controller'
