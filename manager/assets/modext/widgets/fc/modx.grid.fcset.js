@@ -10,6 +10,7 @@ MODx.grid.FCSet = function(config) {
         ,fields: ['id','profile','action','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'Security/Forms/Set/UpdateFromGrid'
         ,sm: this.sm
         ,remoteSort: true
         ,autoExpandColumn: 'controller'
@@ -22,7 +23,7 @@ MODx.grid.FCSet = function(config) {
             header: _('action')
             ,dataIndex: 'action'
             ,width: 200
-            ,editable: false
+            ,editable: true
             ,sortable: true
             ,editor: {
                 xtype: 'modx-combo-fc-action',
@@ -34,17 +35,40 @@ MODx.grid.FCSet = function(config) {
             ,width: 200
             ,editable: true
             ,sortable: true
+            ,editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
         },{
             header: _('template')
-            ,dataIndex: 'templatename'
+            ,dataIndex: 'template'
             ,width: 150
             ,sortable: true
+            ,editable: true
+            ,editor: {
+                xtype: 'modx-combo-template',
+                renderer: true
+            }
+        },{
+            header: _('constraint_field')
+            ,dataIndex: 'constraint_field'
+            ,width: 200
+            ,editable: true
+            ,sortable: false
+            ,editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
         },{
             header: _('constraint')
-            ,dataIndex: 'constraint_data'
+            ,dataIndex: 'constraint'
             ,width: 200
-            ,editable: false
+            ,editable: true
             ,sortable: false
+            ,editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
         }]
         ,viewConfig: {
             forceFit:true
