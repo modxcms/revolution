@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Zarządzaj uprawnieniami grup, rolami i zasadami dostępu
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'Dokumentacja API';
 $_lang['api_docs_desc'] = 'Wyświetl dokumentację API dla MODX Revolution.';
-$_lang['bespoke_manager'] = 'Dostosowywanie menedżera';
-$_lang['bespoke_manager_desc'] = 'Manage bespoke MODX Managers';
 $_lang['components'] = 'Rozszerzenia';
 $_lang['content_types'] = 'Formaty zawartości';
 $_lang['content_types_desc'] = 'Zarządzaj <var title="Content Types">formatami zawartości</var> dla zasobów.';
