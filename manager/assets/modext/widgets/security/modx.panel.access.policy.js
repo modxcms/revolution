@@ -54,7 +54,7 @@ MODx.panel.AccessPolicy = function(config) {
                         ,value: config.plugin
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('policy_desc_name')
                         ,name: 'name'
                         ,maxLength: 255
