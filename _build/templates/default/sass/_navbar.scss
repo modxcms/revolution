@@ -22,7 +22,7 @@
   background: $colorSplash;
   max-width: $navbarWidth;
   position: absolute;
-  z-index: 2;
+  z-index: 99999;
   height: 100%;
 }
 
