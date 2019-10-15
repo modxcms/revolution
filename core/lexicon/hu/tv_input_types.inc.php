@@ -7,8 +7,8 @@
  * @subpackage lexicon
  */
 $_lang['autotag'] = 'Önműködő címkézés';
-$_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
+$_lang['text'] = 'Szöveg';
+$_lang['textarea'] = 'Szövegmező';
 $_lang['textareamini'] = 'Szövegmező (mini)';
 $_lang['richtext'] = 'Formázott szöveg';
 $_lang['dropdown'] = 'Legördülő menü';
@@ -18,9 +18,9 @@ $_lang['list-multiple-legacy'] = 'Korábbi többszörös felsorolás';
 $_lang['option'] = 'Választókapcsoló';
 $_lang['checkbox'] = 'Jelölőnégyzet';
 $_lang['image'] = 'Kép';
-$_lang['file'] = 'File';
+$_lang['file'] = 'Állomány';
 $_lang['url'] = 'Webcím';
-$_lang['email'] = 'Email';
+$_lang['email'] = 'E-mail';
 $_lang['number'] = 'Szám';
-$_lang['date'] = 'Date';
-$_lang['tag'] = 'Tag';
+$_lang['date'] = 'Dátum';
+$_lang['tag'] = 'Címke';
