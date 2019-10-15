@@ -84,7 +84,7 @@ $_country_lang["es"] = 'Espanha'; // Spain
 $_country_lang["et"] = 'Etiópia'; // Ethiopia
 
 $_country_lang["fi"] = 'Finlândia'; // Finland
-$_country_lang["fj"] = 'Fiji'; // Fiji
+$_country_lang["fj"] = 'Ilhas Fiji'; // Fiji
 $_country_lang["fk"] = 'Ilhas Malvinas (Falkland)'; // Falkland Islands (Malvinas)
 $_country_lang["fm"] = 'Estados Federados da Micronésia'; // Micronesia, Federated States of
 $_country_lang["fo"] = 'Ilhas Faroé'; // Faroe Islands
@@ -106,7 +106,7 @@ $_country_lang["gq"] = 'Guiné Equatorial'; // Equatorial Guinea
 $_country_lang["gr"] = 'Grécia'; // Greece
 $_country_lang["gs"] = 'Geórgia do Sul e Ilhas Sandwich do Sul'; // South Georgia and the South Sandwich Islands
 $_country_lang["gt"] = 'Guatemala'; // Guatemala
-$_country_lang["gu"] = 'Guam'; // Guam
+$_country_lang["gu"] = 'Guão'; // Guam
 $_country_lang["gw"] = 'Guiné-Bissau'; // Guinea-bissau
 $_country_lang["gy"] = 'Guiana'; // Guyana
 
@@ -172,7 +172,7 @@ $_country_lang["mo"] = 'Macau'; // Macao, ex: Macau
 $_country_lang["mp"] = 'Ilhas Marianas do Norte'; // Northern Mariana Islands
 $_country_lang["mq"] = 'Martinica'; // Martinique
 $_country_lang["mr"] = 'Mauritânia'; // Mauritania
-$_country_lang["ms"] = 'Montserrat'; // Montserrat
+$_country_lang["ms"] = 'Monserrate'; // Montserrat
 $_country_lang["mt"] = 'Malta'; // Malta
 $_country_lang["mu"] = 'Ilhas Maurícias'; // Mauritius
 $_country_lang["mv"] = 'Maldivas'; // Maldives

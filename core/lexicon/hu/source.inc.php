@@ -75,7 +75,7 @@ $_lang['prop_file.visibility_desc'] = 'Az új állományok és mappák alapérte
 $_lang['no_move_folder'] = 'A médiaforrás illesztője nem támogatja a mappák mozgatását most.';
 
 /* s3 source type */
-$_lang['bucket'] = 'Bucket';
+$_lang['bucket'] = 'Vödör';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
 $_lang['prop_s3.key_desc'] = 'The Amazon key for authentication to the bucket.';
 $_lang['prop_s3.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';

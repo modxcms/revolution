@@ -8,9 +8,9 @@
  */
 $_lang['configcheck_admin'] = 'Kérjük, forduljon a rendszergazdához, és figyelmeztesse őket erre az üzenetre!';
 $_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post környezeti beállítás engedélyezve van a `mgr` részen kívül';
-$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'The allow_tags_in_post Context Setting is enabled in your installation outside the mgr Context. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. This should generally be disabled except in the mgr Context.';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'Az allow_tags_in_post környezeti beállítás engedélyezett a telepítőben a mgr környezeten kívül. A MODX ennek tiltását javasolja, hacsak nem kifejezetten engedni akarja a felhasználókat MODX címkék, számok, vagy HTML script kódok beküldésére POST eljáráson keresztül az oldalán található űrlapokba. Javasolt általánosan tiltani a mgr környezeten kívül.';
 $_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post rendszerbeállítás engedélyezve van';
-$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'The allow_tags_in_post System Setting is enabled in your installation. MODX recommends this setting be disabled unless you need to explicitly allow users to submit MODX tags, numeric entities, or HTML script tags via the POST method to a form in your site. It is better to enable this via Context Settings for specific Contexts.';
+$_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'Az allow_tags_in_post rendszerbeállítás engedélyezett a telepítésében. A MODX ennek tiltását javasolja, hacsak nem kifejezetten engedni akarja a felhasználókat MODX címkék, számok, vagy HTML script kódok beküldésére POST eljáráson keresztül az oldalán található űrlapokba. Javasolt a környezeti beállításokon keresztül engedélyezni az egyes környezetekre.';
 $_lang['configcheck_cache'] = 'Gyorsítótár mappa nem írható';
 $_lang['configcheck_cache_msg'] = 'A MODX nem tud írni a gyorsítótár mappába. A MODX ettől még rendben működik, de nem gyorsítótáraz. A gyorsítótárazáshoz tegye írhatóvá a /_cache/ mappát.';
 $_lang['configcheck_configinc'] = 'A beállítási állomány még írható!';
@@ -32,9 +32,9 @@ oldal 403 (hozzáférés megtagadva) vagy még inkább 404 (nem található) hib
 $_lang['configcheck_images'] = 'Képek mappa nem írható';
 $_lang['configcheck_images_msg'] = 'A képek mappa nem írható, vagy nem létezik. Emiatt a képkezelő működés nem használható a szerkesztőben!';
 $_lang['configcheck_installer'] = 'A telepítő még nincs törölve';
-$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to remove this folder from your server. It is located at: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'A setup/ mappában megtalálható a MODX telepítője. Képzelje csak el, hogy mi történhetne, ha egy rossz szándékú személy megtalálja ezt a mappát és futtatja a telepítőt! Valószínűleg nem jutna messzire, mert meg kell adnia az adatbázis hozzáférési adatait, de legjobb eltávolítani ezt a mappát a kiszolgálóról. Az elérhetősége: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Helytelen számú bejegyzés a nyelvi állományban';
-$_lang['configcheck_lang_difference_msg'] = 'The currently selected language has a different number of entries than the default language. While not necessarily a problem, this may mean the language file needs to be updated.';
+$_lang['configcheck_lang_difference_msg'] = 'A jelenleg kiválasztott nyelvben eltérő számú bejegyzés szerepel, mint az alapértelmezettben. Habár ez nem feltétlen okoz hibát, jelentheti azt, hogy frissíteni kell a nyelvi állományt.';
 $_lang['configcheck_notok'] = 'Egy vagy több beállítás nincs rendben: ';
 $_lang['configcheck_ok'] = 'Az ellenőrzés nem talált hibát.';
 $_lang['configcheck_phpversion'] = 'A PHP verziója elavult';
