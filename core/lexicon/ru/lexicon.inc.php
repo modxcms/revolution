@@ -31,5 +31,5 @@ $_lang['lexicon_management_desc'] = 'Здесь вы можете управля
 $_lang['lexicon_rlfb_msg'] = 'Строки успешно восстановлены ([[+num]] шт.).';
 $_lang['reload_from_base'] = 'Восстановить записи словаря';
 $_lang['reload_success'] = 'Записи успешно перезагружены ([[+total]] шт.).';
-$_lang['search_by_key'] = 'Искать по ключу:';
+$_lang['search_by_key'] = 'Поиск по ключу...';
 $_lang['topic'] = 'Тема';
