@@ -19274,8 +19274,6 @@ ul.x-tab-strip-bottom {
         line-height: initial !important; }
       #modx-navbar #modx-headnav img {
         max-width: 35px; }
-    #modx-navbar #modx-leftbar-trigger {
-      display: none; }
     #modx-navbar #modx-topnav {
       width: 100%;
       -ms-flex-order: 0;
