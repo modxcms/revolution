@@ -43,7 +43,7 @@ Ext.extend(MODx.TreeDrop,Ext.Component,{
             ,notifyEnter: function(ddSource, e, data) {
                 if (ddTarget.getEl) {
                     var el = ddTarget.getEl();
-                    if (el) {
+                    if (el && el.isVisible()) {
                         el.frame();
                         el.focus();
                     }
