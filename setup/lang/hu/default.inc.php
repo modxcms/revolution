@@ -99,63 +99,38 @@ $_lang['install_success'] = 'Az alaptelepítés sikerült. Kattintson a tovább 
 $_lang['install_summary'] = 'Telepítési összefoglaló';
 $_lang['install_update'] = 'Telepítés/Frissítés';
 $_lang['installation_finished'] = 'A telepítés elkészült [[+time]] alatt';
-$_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
-    <p>Usage of this software is subject to the GPL license. To help you understand
-    what the GPL licence is and how it affects your ability to use the software, we
-    have provided the following summary:</p>
-    <h4>The GNU General Public License is a Free Software license.</h4>
-    <p>Like any Free Software license, it grants to you the four following freedoms:</p>
+$_lang['license'] = '<p class="title">A telepítés folytatása előtt el kell fogadnia a felhasználói engedélyezést.</p>
+    <p>A program használata a GPL engedélyhez kötött. A következő összefoglalással segíteni szeretnénk, hogy megértse, mi a GPL engedély és milyen hatással van a program használhatóságára:</p>
+    <h4>A GNU General Public License egy szabad szoftverengedély.</h4>
+    <p>Mint minden szabad szoftver engedély, a következőkre ad szabadságot:</p>
     <ul>
-        <li>The freedom to run the program for any purpose. </li>
-        <li>The freedom to study how the program works and adapt it to your needs. </li>
-        <li>The freedom to redistribute copies so you can help your neighbor. </li>
-        <li>The freedom to improve the program and release your improvements to the
-        public, so that the whole community benefits. </li>
+        <li>A program bármilyen célú futtatása. </li>
+        <li>A program működésének szabad tanulmányozása és a szükségleteihez való igazítása.</li>
+        <li>A program szabad továbbadása, hogy segíthessen felebarátjának.</li>
+        <li>A program szabad javítása és a javítások közzététele az egész közösség javára.</li>
     </ul>
-    <p>You may exercise the freedoms specified here provided that you comply with
-    the express conditions of this license. The principal conditions are:</p>
+    <p>Gyakorolhatja az itt meghatározott lehetőségeket, amennyiben megfelel az ezen engedélyben kifejezett feltételeknek. Az alapvető feltételek:</p>
     <ul>
-        <li>You must conspicuously and appropriately publish on each copy distributed an
-        appropriate copyright notice and disclaimer of warranty and keep intact all the
-        notices that refer to this License and to the absence of any warranty; and give
-        any other recipients of the Program a copy of the GNU General Public License
-        along with the Program. Any translation of the GNU General Public License must
-        be accompanied by the GNU General Public License.</li>
-
-        <li>If you modify your copy or copies of the program or any portion of it, or
-        develop a program based upon it, you may distribute the resulting work provided
-        you do so under the GNU General Public License. Any translation of the GNU
-        General Public License must be accompanied by the GNU General Public License. </li>
-
-        <li>If you copy or distribute the program, you must accompany it with the
-        complete corresponding machine-readable source code or with a written offer,
-        valid for at least three years, to furnish the complete corresponding
-        machine-readable source code.</li>
-
-        <li>Any of these conditions can be waived if you get permission from the
-        copyright holder.</li>
-
-        <li>Your fair use and other rights are in no way affected by the above.</li>
+        <li>Minden közzétett példányon jól észrevehetően és megfelelően meg kell jelenítenie a szerzői jogi megjegyzést és a jótállási feltételeket, és változatlan formában megtartani azokat a megjegyzéseket, amelyek erre az engedélyre és minden jótállás elutasítására hivatkoznak; és a program minden átvevőjének átadni a GNU General Public License egy példányát a programmal együtt. A GNU General Public License bármely fordításához mellékelni kell a GNU General Public License-t.</li>
+        <li>Ha a program egy példányát vagy példányait, vagy annak bármely részét módosítja, vagy erre alapozva új programot fejleszt, a létrejött munkát a GNU General Public License alapján teheti közzé.A GNU General Public License bármely fordításához mellékelni kell a GNU General Public License-t.</li>
+        <li>Ha lemásolja vagy közzéteszi a programot, hozzá kell adnia a teljes megfelelő gép által olvasható forráskódot vagy egy írásos ajánlatot legalább három évi érvényességgel a teljes gép által olvasható forráskód átadására.</li>
+        <li>Mindezen feltételek felfüggeszthetők a szerzői jog tulajdonosának engedélyével.</li>
+        <li>A tisztességes használathoz vagy máshoz való jogait a fentiek semmilyen módon nem befolyásolhatják.</li>
     </ul>
-    <p>The above is a summary of the GNU General Public License. By proceeding, you
-    are agreeing to the GNU General Public Licence, not the above. The above is
-    simply a summary of the GNU General Public Licence, and its accuracy is not
-    guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-    License</a> in full before proceeding, which can also be found in the license
-    file distributed with this package.</p>
+    <p>A fentiek összefoglalása a GNU General Public License-nek. A továbblépéssel a GNU General Public Licence-t fogadja el, nem a fentieket. A fentiek csupán a GNU General Public License összefoglalása, aminek a pontossága nem szavatolt. Továbblépés előtt erősen ajánlott a <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public License</a> teljes szövegének elolvasása, ami az ezzel a csomaggal közreadott engedély-állományban is megtalálható.</p>
 ';
 $_lang['license_agree'] = 'Elfogadom az ebben az engedélyben leírt feltételeket.';
 $_lang['license_agreement'] = 'Licencszerződés';
 $_lang['license_agreement_error'] = 'A telepítés folytatása előtt el kell fogadnia a felhasználói engedélyezést.';
-$_lang['locked'] = 'MODX Setup is locked!';
-$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
+$_lang['locked'] = 'A MODX telepítője zárolva van!';
+$_lang['locked_message'] = '<p>A folytatáshoz el kell távolítania a setup/.locked/ mappát.</p>';
 $_lang['login'] = 'Belépés';
 $_lang['modx_class_err_nf'] = 'Nem sikerült betölteni a MODX osztály állományát.';
 $_lang['modx_configuration_file'] = 'MODX beállítási állomány';
 $_lang['modx_err_instantiate'] = 'Nem sikerült példányosítani a MODX osztályt.';
 $_lang['modx_err_instantiate_mgr'] = 'Nem sikerült előkészíteni a MODX kezelői környezetet.';
 $_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> tartalomkezelő keretrendszer (CMF) projekt. Minden jog fenntartva. A MODX használata a GNU GPL alapján engedélyezett.';
-$_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
+$_lang['modx_footer2'] = 'A MODX ingyenes szoftver. Bátorítjuk arra, hogy legyen kreatív és használja tetszőlegesen saját céljaira, de ne felejtse, hogy ha megváltoztatja és közzé teszi a módosított MODX-et, a forráskód ingyenes maradjon!';
 $_lang['modx_install'] = 'MODX telepítés';
 $_lang['modx_install_complete'] = 'MODX telepítése befejezve';
 $_lang['modx_object_err'] = 'A MODX objektum nem tölthető be.';
@@ -163,9 +138,9 @@ $_lang['next'] = 'Következő';
 $_lang['none'] = 'Egyik sem';
 $_lang['ok'] = 'Rendben!';
 $_lang['options_core_inplace'] = 'Az állományok már a tárhelyen vannak<br /><small>(Megosztott kiszolgálókra telepítésnél ajánlott.)</small>';
-$_lang['options_core_inplace_note'] = 'Check this if you are using MODX from Git or extracted it from the full MODX package to the server prior to installation.';
+$_lang['options_core_inplace_note'] = 'Jelölje itt, ha a MODX-et a Git-ről telepíti, vagy a teljes MODX csomagot csomagolta ki a kiszolgálóra a telepítés előtt.';
 $_lang['options_core_unpacked'] = 'Az alapcsomag kézzel ki lett csomagolva<br /><small>(Megosztott kiszolgálókra telepítésnél ajánlott.)</small>';
-$_lang['options_core_unpacked_note'] = 'Check this if you have manually extracted the core package from the file core/packages/core.transport.zip. This will reduce the time it takes for the installation process on systems that do not allow the PHP time_limit and Apache script execution time settings to be altered.';
+$_lang['options_core_unpacked_note'] = 'Jelölje itt, ha kézzel csomagolta ki az alapcsomagot a core/packages/core.transport.zip állományból. Ez lerövidíti a telepítés idejét olyan rendszereken, amelyeken nem engedélyezett a PHP time_limit és az Apache programfuttatási idő beállításainak módosítása.';
 $_lang['options_install_new_copy'] = 'Telepítsen egy új példányt: ';
 $_lang['options_install_new_note'] = 'Ne feledje, ez a beállítás bármilyen adatot felülírhat az adatbázisban.';
 $_lang['options_important_upgrade'] = 'Fontos frissítési megjegyzés';
@@ -176,12 +151,12 @@ $_lang['options_new_folder_permissions'] = 'Új mappaengedélyek';
 $_lang['options_new_folder_permissions_note'] = 'Felülírhatja a MODX által létrehozott mappák jogosultságait, pl. 0775 vagy 0777.';
 $_lang['options_new_installation'] = 'Új telepítés';
 $_lang['options_nocompress'] = 'CSS/JS tömörítés kikapcsolása';
-$_lang['options_nocompress_note'] = 'Check this if the manager does not work with CSS/JS compression on.';
+$_lang['options_nocompress_note'] = 'Jelölje itt, ha a kezelő nem működik bekapcsolt CSS/JS tömörítéssel.';
 $_lang['options_send_poweredby_header'] = 'X-Powered-By fejlécet küld';
 $_lang['options_send_poweredby_header_note'] = 'Ha engedélyezve van, a MODX "X-Powered-By" fejlécet küld, amivel megadja, hogy ez a weboldal MODX-re épül. Ez segíti a MODX használatának globális követését a weboldalát elemző külső nyomkövetők számára. Mivel ezzel könnyebb felismerni, hogy a weboldala mire épül, kissé növeli a kockázatot, ha egy biztonsági rést találnak a MODX-en.';
 $_lang['options_title'] = 'Telepítési beállítások';
-$_lang['options_upgrade_advanced'] = 'Advanced Upgrade Install<br /><small>(edit database config)</small>';
-$_lang['options_upgrade_advanced_note'] = 'For advanced database admins or moving to servers with a different database connection character set. <strong>You will need to know your full database name, user, password and connection/collation details.</strong>';
+$_lang['options_upgrade_advanced'] = 'Frissítés haladó telepítése<br /><small>(adatbázis beállításainak módosítása)</small>';
+$_lang['options_upgrade_advanced_note'] = 'Haladó adatbázis-kezelőkhöz vagy különböző karakterkészlettel kapcsolódó kiszolgálók közötti költöztetéshez. <strong>Ismernie kell az adatbázis teljes nevét, felhasználóját, jelszavát és a kapcsolódás/egybevetés részleteit.</strong>';
 $_lang['options_upgrade_existing'] = 'Meglevő telepítés frissítése';
 $_lang['options_upgrade_existing_note'] = 'A jelenlegi állományok és adatbázis frissítése.';
 $_lang['package_execute_err_retrieve'] = 'The install failed because MODX could not unpack the [[+path]]packages/core.transport.zip package. Make sure that the [[+path]]packages/core.transport.zip file exists and is writable, and that you have made the [[+path]]packages/ directory writable.';
@@ -202,7 +177,7 @@ $_lang['retry'] = 'Újra';
 $_lang['security_notice'] = 'Biztonsági figyelmeztetés';
 $_lang['select'] = 'Válasszon';
 $_lang['settings_handler_err_nf'] = 'MODX could not find the modInstallSettings class at: [[+path]]. Please ensure you have uploaded all the files.';
-$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
+$_lang['setup_err_lock'] = 'Hiba történt a telepítő zárolása közben. Nem sikerült létrehozni a .locked almappát a setup mappán belül.';
 $_lang['setup_err_remove'] = 'Hiba történt a telepítési könyvtár eltávolítása közben.';
 $_lang['setup_err_assets'] = 'Your assets/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
 $_lang['setup_err_assets_comp'] = 'Your assets/components/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
@@ -225,7 +200,7 @@ $_lang['test_version_class_nf'] = 'Nem található a telepítő tesztelő válto
 $_lang['thank_installing'] = 'Köszönjük, hogy telepítette a(z) ';
 $_lang['transport_class_err_load'] = 'Hiba az átviteli osztály betöltésekor.';
 $_lang['toggle'] = 'Váltás';
-$_lang['toggle_success'] = 'Toggle Success Messages';
+$_lang['toggle_success'] = 'Visszajelző üzenetek átkapcsolása';
 $_lang['toggle_warnings'] = 'Figyelmeztetések váltása';
 $_lang['upgrade_version_unsupported'] = 'A MODX [[+version]] változatáról kiinduló frissítést ez a kiadás nem támogatja. A MODX 2.6 vagy későbbi változatra kell frissítenie, mielőtt erre a kiadásra vált.';
 $_lang['username_err_invchars'] = 'A felhasználóneve nem tartalmazhat érvénytelen karaktereket, mint /, \\, &apos;, &quot;, vagy {}.';
