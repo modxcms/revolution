@@ -96,7 +96,7 @@ MODx.window.CreateRole = function(config) {
         ,action: 'Security/Role/Create'
         ,fields: [{
             name: 'name'
-            ,fieldLabel: _('name')+'<span class="required">*</span>'
+            ,fieldLabel: _('name')
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,allowBlank: false

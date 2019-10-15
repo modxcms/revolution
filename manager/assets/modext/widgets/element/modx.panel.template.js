@@ -18,7 +18,7 @@ MODx.panel.Template = function(config) {
             action: 'Element/Template/Get'
         }
         ,id: 'modx-panel-template'
-		,cls: 'container form-with-labels'
+        ,cls: 'container form-with-labels'
         ,class_key: 'modTemplate'
         ,template: ''
         ,bodyStyle: ''
@@ -61,7 +61,7 @@ MODx.panel.Template = function(config) {
                         ,value: config.record.props || null
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('template_desc_name')
                         ,name: 'templatename'
                         ,id: 'modx-template-templatename'
@@ -245,41 +245,41 @@ MODx.panel.Template = function(config) {
                         ,hideMode: 'offsets'
                     }]
                 }]
-			},{
-				xtype: 'panel'
-				,border: false
-				,layout: 'form'
-				,cls:'main-wrapper'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('template_code')
-					,name: 'content'
-					,id: 'modx-template-content'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.content || ''
-				}]
-			}]
+            },{
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls:'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('template_code')
+                    ,name: 'content'
+                    ,id: 'modx-template-content'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.content || ''
+                }]
+            }]
         },{
             title: _('template_variables')
             ,itemId: 'form-template'
             ,defaults: { autoHeight: true }
-			,layout: 'form'
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('template_tv_msg')+'</p>'
                 ,xtype: 'modx-description'
             },{
-               xtype: 'modx-grid-template-tv'
-			   ,cls:'main-wrapper'
-               ,preventRender: true
-               ,anchor: '100%'
-               ,template: config.template
-               ,listeners: {
+                xtype: 'modx-grid-template-tv'
+                ,cls:'main-wrapper'
+                ,preventRender: true
+                ,anchor: '100%'
+                ,template: config.template
+                ,listeners: {
                     'rowclick': {fn:this.markDirty,scope:this}
                     ,'afterEdit': {fn:this.markDirty,scope:this}
                     ,'afterRemoveRow': {fn:this.markDirty,scope:this}
-               }
+                }
             }]
         },{
             xtype: 'modx-panel-element-properties'

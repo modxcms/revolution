@@ -59,7 +59,7 @@ MODx.panel.Snippet = function(config) {
                         ,value: config.record.props || null
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('snippet_desc_name')
                         ,name: 'name'
                         ,id: 'modx-snippet-name'

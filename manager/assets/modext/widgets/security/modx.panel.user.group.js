@@ -2,14 +2,14 @@ MODx.panel.UserGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-user-group'
-		,cls: 'container form-with-labels'
+        ,cls: 'container form-with-labels'
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'Security/Group/Update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: _('user_group_new')
+            html: _('user_group_new')
             ,id: 'modx-user-group-header'
             ,xtype: 'modx-header'
         },{
@@ -36,13 +36,13 @@ MODx.panel.UserGroup = function(config) {
                 ,labelAlign: 'top'
                 ,labelSeparator: ''
                 ,items: [{
-					xtype: 'panel'
-					,border: false
-					,cls:'main-wrapper'
-					,layout: 'form'
-					,items: [{
-					    layout: 'column'
-					    ,border: false
+                    xtype: 'panel'
+                    ,border: false
+                    ,cls:'main-wrapper'
+                    ,layout: 'form'
+                    ,items: [{
+                        layout: 'column'
+                        ,border: false
                         ,defaults: {
                             layout: 'form'
                             ,labelAlign: 'top'
@@ -50,7 +50,7 @@ MODx.panel.UserGroup = function(config) {
                             ,anchor: '100%'
                             ,border: false
                         }
-					    ,items: [{
+                        ,items: [{
                             columnWidth: .6
                             ,items: [{
                                 xtype: 'hidden'
@@ -61,7 +61,7 @@ MODx.panel.UserGroup = function(config) {
                                 name: 'name'
                                 ,id: 'modx-usergroup-name'
                                 ,xtype: config.record && (config.record.name == 'Administrator' || config.record.id == 0) ? 'statictextfield' : 'textfield'
-                                ,fieldLabel: _('name')+'<span class="required">*</span>'
+                                ,fieldLabel: _('name')
                                 ,allowBlank: false
                                 ,enableKeyEvents: true
                                 ,disabled: config.record.id === 0
@@ -91,7 +91,7 @@ MODx.panel.UserGroup = function(config) {
                             }]
                         },{
                             columnWidth: .4
-					        ,items: [{
+                            ,items: [{
                                 name: 'parent'
                                 ,hiddenName: 'parent'
                                 ,id: 'modx-usergroup-parent'
@@ -124,18 +124,18 @@ MODx.panel.UserGroup = function(config) {
                             }]
                         }]
                     }]
-				}]
+                }]
             },{
                 title: _('users')
                 ,hideMode: 'offsets'
-				,layout: 'form'
-				,id: 'modx-usergroup-users-panel'
+                ,layout: 'form'
+                ,id: 'modx-usergroup-users-panel'
                 ,items: [{
                     html: '<p>'+_('user_group_user_access_msg')+'</p>'
                     ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-user-group-users'
-					,cls:'main-wrapper'
+                    ,cls:'main-wrapper'
                     ,preventRender: true
                     ,usergroup: config.record.id
                     ,autoHeight: true

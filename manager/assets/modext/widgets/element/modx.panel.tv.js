@@ -62,7 +62,7 @@ MODx.panel.TV = function(config) {
                         ,value: config.record.props || null
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('tv_desc_name')
                         ,name: 'name'
                         ,id: 'modx-tv-name'
@@ -556,7 +556,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
     ,showInputProperties: function(cb,rc,i) {
         var element = Ext.getCmp('modx-tv-elements');
         if (element) {
-          element.show();
+            element.show();
         }
 
         this.markPanelDirty();
@@ -568,10 +568,10 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'Element/TemplateVar/Renders/GetInputProperties'
-                   ,'context': 'mgr'
-                   ,'tv': this.config.record.id
-                   ,'type': cb.getValue() || 'default'
+                    'action': 'Element/TemplateVar/Renders/GetInputProperties'
+                    ,'context': 'mgr'
+                    ,'tv': this.config.record.id
+                    ,'type': cb.getValue() || 'default'
                 }
                 ,scripts: true
             });
@@ -637,10 +637,10 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 url: MODx.config.connector_url
                 ,method: 'GET'
                 ,params: {
-                   'action': 'Element/TemplateVar/Renders/GetProperties'
-                   ,'context': 'mgr'
-                   ,'tv': this.config.record.id
-                   ,'type': cb.getValue() || 'default'
+                    'action': 'Element/TemplateVar/Renders/GetProperties'
+                    ,'context': 'mgr'
+                    ,'tv': this.config.record.id
+                    ,'type': cb.getValue() || 'default'
                 }
                 ,scripts: true
             });

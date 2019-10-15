@@ -912,7 +912,7 @@ MODx.window.QuickCreateResource = function(config) {
                             xtype: 'textfield'
                             ,name: 'pagetitle'
                             ,id: 'modx-'+this.ident+'-pagetitle'
-                            ,fieldLabel: _('resource_pagetitle')+'<span class="required">*</span>'
+                            ,fieldLabel: _('resource_pagetitle')
                             ,description: '<b>[[*pagetitle]]</b><br />'+_('resource_pagetitle_help')
                             ,anchor: '100%'
                             ,allowBlank: false

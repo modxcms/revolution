@@ -60,7 +60,7 @@ MODx.panel.Plugin = function(config) {
                         ,value: config.record.props || null
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('plugin_desc_name')
                         ,name: 'name'
                         ,id: 'modx-plugin-name'
