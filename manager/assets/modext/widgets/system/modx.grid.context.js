@@ -69,18 +69,27 @@ MODx.grid.Context = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,renderer: function(value, p, record){
+                return String.format('<a href="?a=context/update&key={0}" title="{1}" class="x-grid-link">{2}</a>', record.data.key, _('context_update'), Ext.util.Format.htmlEncode( value ) );
+            }
         },{
             header: _('description')
             ,dataIndex: 'description'
-            ,width: 575
+            ,width: 550
             ,sortable: false
             ,editor: { xtype: 'textfield' }
         },{
             header: _('rank')
             ,dataIndex: 'rank'
-            ,width: 100
+            ,width: 50
             ,sortable: true
             ,editor: { xtype: 'numberfield' }
+        },{
+            width: 50
+            ,renderer: {
+                fn: this.buttonColumnRenderer,
+                scope: this
+            }
         }]
         ,tbar: [{
             text: _('context_create')
@@ -120,9 +129,71 @@ MODx.grid.Context = function(config) {
     MODx.grid.Context.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
-    updateContext: function(itm,e) {
+
+    create: function(btn, e) {
+        if (this.createWindow) {
+            this.createWindow.destroy();
+        }
+        this.createWindow = MODx.load({
+            xtype		: 'modx-window-context-create',
+            closeAction	:'close',
+            listeners	: {
+                'success'	: {
+                    fn			: function() {
+                        this.afterAction();
+                    },
+                    scope		: this
+                }
+            }
+        });
+        this.createWindow.show(e.target);
+    }
+
+    ,updateContext: function(itm,e) {
         MODx.loadPage('Context/Update', 'key='+this.menu.record.key);
     }
+
+    ,duplicateContext: function() {
+        var r = {
+            key: this.menu.record.key
+            ,newkey: ''
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-context-duplicate'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {
+                    this.refresh();
+                    var tree = Ext.getCmp('modx-resource-tree');
+                    if (tree) {
+                        tree.refresh();
+                    }
+                },scope:this}
+            }
+        });
+        w.show();
+    }
+
+    ,remove: function(btn, e) {
+        MODx.msg.confirm({
+            title 		: _('warning'),
+            text		: _('context_remove_confirm'),
+            url			: this.config.url,
+            params		: {
+                action		: 'Context/Remove',
+                key			: this.menu.record.key
+            },
+            listeners	: {
+                'success'	: {
+                    fn			: function() {
+                        this.afterAction();
+                    },
+                    scope		: this
+                }
+            }
+        });
+    }
+
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm;
@@ -151,25 +222,53 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         return m;
     }
 
-    ,duplicateContext: function() {
-        var r = {
-            key: this.menu.record.key
-            ,newkey: ''
-        };
-        var w = MODx.load({
-            xtype: 'modx-window-context-duplicate'
-            ,record: r
-            ,listeners: {
-                'success': {fn:function() {
-                    this.refresh();
-                    var tree = Ext.getCmp('modx-resource-tree');
-                    if (tree) {
-                        tree.refresh();
-                    }
-                },scope:this}
-            }
+    ,buttonColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        var p = record.data.perm;
+        var b = [];
+        if (p.indexOf('pedit') != -1) {
+            b.push({
+                className: 'update',
+                icon: 'pencil-square-o',
+                text: _('context_update')
+            });
+        }
+        if (p.indexOf('pnew') != -1) {
+            b.push({
+                className: 'duplicate',
+                icon: 'files-o',
+                text: _('context_duplicate')
+            });
+        }
+        b.push({
+            className: 'context',
+            icon: 'gear'
         });
-        w.show();
+        return this.getButtonColumnTpl().apply({
+            action_buttons: b
+        });
+    },
+    onClick: function (e) {
+        var t = e.getTarget();
+        var elm = t.className.split(' ')[0];
+        if (elm === 'icon') {
+            var act = t.className.split(' ')[1];
+            var record = this.getSelectionModel().getSelected();
+            var ri = this.store.indexOf(record);
+            this.menu.record = record.data;
+            switch (act) {
+                case 'update':
+                    this.updateContext(record, e);
+                    break;
+                case 'duplicate':
+                    this.duplicateContext(record, e);
+                    break;
+                case 'context':
+                    this._showMenu(this, ri, e);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     ,search: function(tf,newValue,oldValue) {
@@ -189,45 +288,6 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         //this.refresh();
     }
 
-    ,create: function(btn, e) {
-        if (this.createWindow) {
-            this.createWindow.destroy();
-        }
-        this.createWindow = MODx.load({
-            xtype		: 'modx-window-context-create',
-            closeAction	:'close',
-            listeners	: {
-                'success'	: {
-                    fn			: function() {
-                        this.afterAction();
-                    },
-                    scope		: this
-                }
-            }
-        });
-        this.createWindow.show(e.target);
-    }
-
-    ,remove: function(btn, e) {
-        MODx.msg.confirm({
-            title 		: _('warning'),
-            text		: _('context_remove_confirm'),
-            url			: this.config.url,
-            params		: {
-                action		: 'Context/Remove',
-                key			: this.menu.record.key
-            },
-            listeners	: {
-                'success'	: {
-                    fn			: function() {
-                        this.afterAction();
-                    },
-                    scope		: this
-                }
-            }
-        });
-    }
-
     ,afterAction: function() {
         var cmp = Ext.getCmp('modx-resource-tree');
         if (cmp) {
@@ -236,6 +296,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         this.getSelectionModel().clearSelections(true);
         this.refresh();
     }
+
 });
 Ext.reg('modx-grid-contexts',MODx.grid.Context);
 
