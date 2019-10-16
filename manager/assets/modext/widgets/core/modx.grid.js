@@ -232,7 +232,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             ,url: this.config.url
             ,params: p
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
@@ -255,7 +255,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,url: this.config.url
                 ,params: p
                 ,listeners: {
-                	'success': {fn:function() {
+                    'success': {fn:function() {
                         this.removeActiveRow(r);
                     },scope:this}
                 }
@@ -314,10 +314,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                    }
                 }
             });
         } else {
@@ -330,10 +330,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,remoteSort: this.config.remoteSort || false
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                    }
                 }
             });
         }
@@ -426,6 +426,20 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
     }
 
+    ,getButtonColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="action_buttons !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="action_buttons">'
+            + '<li><i class="icon {className:htmlEncode} icon-{icon:htmlEncode}" title="{text:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    }
+
     ,refresh: function() {
         this.getStore().reload();
     }
@@ -472,8 +486,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,editorYesNo: function(r) {
-    	r = r || {};
-    	Ext.applyIf(r,{
+        r = r || {};
+        Ext.applyIf(r,{
             store: new Ext.data.SimpleStore({
                 fields: ['d','v']
                 ,data: [[_('yes'),true],[_('no'),false]]
@@ -582,14 +596,14 @@ MODx.grid.LocalGrid = function(config) {
 
     if (config.grouping) {
         Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView({
-            forceFit: true
-            ,scrollOffset: 0
-            ,hideGroupedColumn: config.hideGroupedColumn ? true : false
-            ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
-                +(config.pluralText || _('records')) + '" : "'
-                +(config.singleText || _('record'))+'"]})' )
-          })
+            view: new Ext.grid.GroupingView({
+                forceFit: true
+                ,scrollOffset: 0
+                ,hideGroupedColumn: config.hideGroupedColumn ? true : false
+                ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
+                    +(config.pluralText || _('records')) + '" : "'
+                    +(config.singleText || _('record'))+'"]})' )
+            })
         });
     }
     if (config.tbar) {
@@ -787,6 +801,19 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         }
     }
 
+    ,getButtonColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="action_buttons !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="action_buttons">'
+            + '<li><i class="icon {className:htmlEncode} icon-{icon:htmlEncode}" title="{text:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    }
 
     ,remove: function(config) {
         if (this.destroying) {
@@ -812,9 +839,9 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             r = s.getAt(j).data;
             r.menu = null;
             if (this.config.encodeAssoc) {
-               rs[r[this.config.encodeByPk || 'id']] = r;
+                rs[r[this.config.encodeByPk || 'id']] = r;
             } else {
-               rs.push(r);
+                rs.push(r);
             }
         }
 
