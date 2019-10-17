@@ -304,10 +304,7 @@
                 <include name="core/src/**" />
                 <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
-                <include name="core/packages/core/manifest.php" />
-                <include name="core/packages/core/*/*.vehicle" />
-                <include name="core/packages/core/*/*.validator" />
-                <include name="core/packages/core/*/*.resolver" />
+                <include name="core/packages/core/**" />
             </fileset>
         </zip>
         <exec dir="${project.basedir}" command="${php.command} fixzip.php ${build.distrib.dir}/${distrib.name}.zip" />
