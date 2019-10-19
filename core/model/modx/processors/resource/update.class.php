@@ -153,7 +153,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         }
         $this->checkDeletedStatus();
 
-        // If we are changing an existing modResource that is not already a symlink/weblink, it does not make 
+        // If we are changing an existing modResource that is not already a symlink/weblink, it does not make
         // much sense to run this check, as it would attempt to validate the existing content of the content field
         if ($properties['class_key'] === 'modSymLink' && $this->object->get('class_key') === 'modSymLink') {
             $this->checkSymLinkTarget();
@@ -216,8 +216,10 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
      */
     public function trimPageTitle() {
         $pageTitle = $this->getProperty('pagetitle',null);
+        $pageTitle = preg_replace('|\s+|', ' ', $pageTitle);
+
         if ($pageTitle != null && !$this->getProperty('reloadOnly',false)) {
-            if ($pageTitle === '') {
+            if ($pageTitle === '' || $pageTitle == ' ') {
                 $pageTitle = $this->modx->lexicon('resource_untitled');
             }
             $pageTitle = trim($pageTitle);

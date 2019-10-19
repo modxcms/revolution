@@ -335,9 +335,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      */
     public function preparePageTitle() {
         $pageTitle = $this->getProperty('pagetitle','');
-        if (!empty($pageTitle)) {
-            $pageTitle = trim($pageTitle);
-        }
+        $pageTitle = trim($pageTitle);
 
         /* default pagetitle if not reloading template */
         if (!$this->getProperty('reloadOnly',false)) {
