@@ -2,7 +2,7 @@
 #modx-manager-search-icon{
   a{
     padding-left: 0;
-    @include media($desktop) {
+    @include media($tabletL) {
       padding-left:10px; padding-right: 10px;
     }
   }
@@ -27,40 +27,40 @@
   position: absolute;
   top: 55px;
   left: 26px;
-  
+
   &.visible {
-  	visibility: visible;
+    visibility: visible;
   }
-  
+
   @include media($mobile) {
-	  padding-right:25px;
-	  top:auto;
-	  left:0;
-	  right:0;
-	  min-width:0;
-	  &.visible {
-	  	position: relative;
-	  }
+    padding-right:25px;
+    top:auto;
+    left:0;
+    right:0;
+    min-width:0;
+    &.visible {
+      position: relative;
+    }
   }
-  
+
   .x-form-field-wrap {
-	  @include media($mobile) {
-		  width:auto !important;
-		  @include display(flex);
-		  #modx-uberbar {
-			  @include flex-grow(1);
-		  }
-		  .x-form-arrow-trigger {
-			  position:relative;
-			  top:auto;
-			  &:before {
-				  position: relative;
-				  margin-top:0;
-				  top:auto;
-				  line-height:30px;
-			  }
-		  }
-	  }
+    @include media($mobile) {
+      width:auto !important;
+      @include display(flex);
+      #modx-uberbar {
+        @include flex-grow(1);
+      }
+      .x-form-arrow-trigger {
+        position:relative;
+        top:auto;
+        &:before {
+          position: relative;
+          margin-top:0;
+          top:auto;
+          line-height:30px;
+        }
+      }
+    }
   }
 
   /* up arrow connecting modx-manager-search-icon to the search field */
@@ -70,7 +70,7 @@
     position: absolute;
     top: -20px;
     left: 235px;
-    @include media($desktop) {
+    @include media($tabletL) {
       left: 60px;
     }
     @include media($mobile) {
@@ -93,9 +93,9 @@
   }*/
   .x-form-text {
     background: none; /* prevent white searchfield background */
-	@include media($mobile) {
-		width:auto !important;
-	}
+  @include media($mobile) {
+    width:auto !important;
+  }
   }
 }
 
@@ -167,7 +167,7 @@
   z-index: 15 !important; /* show beneath subnav and modals */
 
   @include media($mobile) {
-	  left:0 !important;
+    left:0 !important;
   }
   .loading-indicator{
     background: none;
@@ -191,16 +191,16 @@
     margin: 12px 0 0;
     overflow: auto;
     width: 100% !important;
-	@include media($mobile) {
-		height:auto !important;
-		line-height:4em;
-		.section {
-			> * {
-				padding-top:1em;
-				padding-bottom:1em;
-			}
-		}
-	}
+  @include media($mobile) {
+    height:auto !important;
+    line-height:4em;
+    .section {
+      > * {
+        padding-top:1em;
+        padding-bottom:1em;
+      }
+    }
+  }
   }
 
     .section {
