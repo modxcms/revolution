@@ -8,19 +8,19 @@
  */
 $_lang['perm.about_desc'] = 'Névjegy oldal.';
 $_lang['perm.access_permissions_desc'] = 'Any Access Permission-related pages and actions.';
-$_lang['perm.actions_desc'] = 'The Actions page.';
+$_lang['perm.actions_desc'] = 'Műveletek oldal.';
 $_lang['perm.add_children_desc'] = 'To add any Resources as children of the specified Resource or Elements to a Category.';
 $_lang['perm.change_password_desc'] = 'User can change their user password.';
 $_lang['perm.change_profile_desc'] = 'User can change their profile.';
-$_lang['perm.charsets_desc'] = 'To view a list of charsets.';
+$_lang['perm.charsets_desc'] = 'Karakterkészletek megtekintése.';
 $_lang['perm.class_map_desc'] = 'To view a list of classes in the Class Map.';
 $_lang['perm.components_desc'] = 'To view the Extras menu.';
-$_lang['perm.content_types_desc'] = 'The Content Types page.';
-$_lang['perm.copy_desc'] = 'The ability to copy an object.';
-$_lang['perm.countries_desc'] = 'To view a list of countries.';
+$_lang['perm.content_types_desc'] = 'A tartalomfajták oldal.';
+$_lang['perm.copy_desc'] = 'Objektum másolásának lehetősége.';
+$_lang['perm.countries_desc'] = 'Országok felsorolásának megtekintése.';
 $_lang['perm.create_desc'] = 'Basic "create" access on new objects.';
-$_lang['perm.credits_desc'] = 'View the Credits page.';
-$_lang['perm.customize_forms_desc'] = 'View and manage the Form Customization page.';
+$_lang['perm.credits_desc'] = 'Készítők oldal megtekintése.';
+$_lang['perm.customize_forms_desc'] = 'Űrlapok testreszabási oldalának megtekintése és kezelése.';
 $_lang['perm.dashboards_desc'] = 'View and manage Custom Dashboards.';
 $_lang['perm.database_desc'] = 'The System Info page.';
 $_lang['perm.database_truncate_desc'] = 'The ability to truncate a database table.';
