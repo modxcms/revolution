@@ -6263,7 +6263,9 @@ ul.x-tab-strip-bottom {
   position: absolute;
   content: ' ';
   right: 12px;
-  top: 24px; }
+  top: 50%;
+  -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
 
 #modx-user-menu li.top > a,
 #modx-topnav li.top > a {

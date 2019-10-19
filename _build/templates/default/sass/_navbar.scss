@@ -128,7 +128,8 @@
     position: absolute;
     content: ' ';
     right: 12px;
-    top: 24px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 

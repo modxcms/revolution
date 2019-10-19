@@ -73,6 +73,12 @@ body {
     background-color:#777;
 }
 
+.x-shadow {
+    display: block!important;
+    background: red !important;
+    border: 1px solid red!important;;
+}
+
 .x-shadow .xsmc {
     background-image: url(../images/default/shadow-c.png);
 }
