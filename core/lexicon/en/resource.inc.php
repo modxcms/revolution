@@ -156,7 +156,6 @@ $_lang['symlink_help'] = 'The address of the object you wish to reference with t
 $_lang['symlink_message'] = 'A symlink is a symbolic link to another resource in your site which is forwarded to without changing the URL.';
 $_lang['symlink_new'] = 'New Symlink';
 $_lang['template_variables'] = 'Template Variables';
-$_lang['untitled_resource'] = 'Untitled Resource';
 $_lang['weblink'] = 'Weblink';
 $_lang['weblink_create'] = 'Create Weblink';
 $_lang['weblink_create_here'] = 'Weblink';
