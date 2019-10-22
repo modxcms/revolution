@@ -924,7 +924,7 @@ class modCacheManager extends xPDOCacheManager
             $contexts = $ctxQuery->stmt->fetchAll(PDO::FETCH_COLUMN);
             if ($contexts) {
                 $serialized = serialize($contexts);
-                if ($this->modx->exec("UPDATE {$this->modx->getTableName('modUser')} SET {$this->modx->escape('session_stale')} = {$this->modx->quote($serialized)}") !== false) {
+                if ($this->modx->exec("UPDATE {$this->modx->getTableName(modUser::class)} SET {$this->modx->escape('session_stale')} = {$this->modx->quote($serialized)}") !== false) {
                     return true;
                 }
             }

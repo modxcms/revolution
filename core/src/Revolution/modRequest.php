@@ -84,7 +84,7 @@ class modRequest
         if (!$this->modx->checkSiteStatus()) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
             if (!$this->modx->getOption('site_unavailable_page', null, 1)) {
-                $this->modx->resource = $this->modx->newObject('modDocument');
+                $this->modx->resource = $this->modx->newObject(modDocument::class);
                 $this->modx->resource->template = 0;
                 $this->modx->resource->content = $this->modx->getOption('site_unavailable_message');
             } else {
@@ -600,7 +600,7 @@ class modRequest
         if (!empty($namespace)) {
             $c['namespace'] = $namespace;
         }
-        $actions = $this->modx->getCollection('modAction', $c);
+        $actions = $this->modx->getCollection(modAction::class, $c);
 
         $actionList = [];
         /** @var modAction $action */
@@ -711,7 +711,7 @@ class modRequest
         $as = [];
         foreach ($actions as $action) {
             /** @var modAction $actionObject */
-            $actionObject = $this->modx->getObject('modAction', [
+            $actionObject = $this->modx->getObject(modAction::class, [
                 'namespace' => $namespace,
                 'controller' => $action,
             ]);

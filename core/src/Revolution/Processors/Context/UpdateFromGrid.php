@@ -52,7 +52,7 @@ class UpdateFromGrid extends modProcessor
         if (empty($record['key'])) {
             return $this->modx->error->failure($this->modx->lexicon('context_err_ns'));
         }
-        $this->context = $this->modx->getObject('modContext', $record['key']);
+        $this->context = $this->modx->getObject(modContext::class, $record['key']);
         if (empty($this->context)) {
             return $this->modx->lexicon('context_err_nf');
         }

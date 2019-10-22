@@ -1870,7 +1870,7 @@ class modX extends xPDO {
     public function runSnippet($snippetName, array $params= array ()) {
         $output= '';
         if ($this->getParser()) {
-            $snippet= $this->parser->getElement('modSnippet', $snippetName);
+            $snippet= $this->parser->getElement(modSnippet::class, $snippetName);
             if ($snippet instanceof modSnippet) {
                 $snippet->setCacheable(false);
                 $output= $snippet->process($params);

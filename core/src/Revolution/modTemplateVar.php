@@ -222,7 +222,7 @@ class modTemplateVar extends modElement
             } elseif ($resourceId === (integer)$this->get('resourceId') && array_key_exists('value', $this->_fields)) {
                 $value = $this->get('value');
             } else {
-                $resource = $this->xpdo->getObject('modTemplateVarResource', [
+                $resource = $this->xpdo->getObject(modTemplateVarResource::class, [
                     'tmplvarid' => $this->get('id'),
                     'contentid' => $resourceId,
                 ], true);
@@ -251,13 +251,13 @@ class modTemplateVar extends modElement
     public function setValue($resourceId = 0, $value = null)
     {
         if (intval($resourceId)) {
-            $templateVarResource = $this->xpdo->getObject('modTemplateVarResource', [
+            $templateVarResource = $this->xpdo->getObject(modTemplateVarResource::class, [
                 'tmplvarid' => $this->get('id'),
                 'contentid' => $resourceId,
             ], true);
 
             if (!$templateVarResource) {
-                $templateVarResource = $this->xpdo->newObject('modTemplateVarResource');
+                $templateVarResource = $this->xpdo->newObject(modTemplateVarResource::class);
             }
 
             if ($value !== $this->get('default_text')) {
@@ -1171,7 +1171,7 @@ class modTemplateVar extends modElement
         } else {
             $template =& $templatePk;
         }
-        $templateVarTemplate = $this->xpdo->getObject('modTemplateVarTemplate', [
+        $templateVarTemplate = $this->xpdo->getObject(modTemplateVarTemplate::class, [
             'tmplvarid' => $this->get('id'),
             'templateid' => is_object($template) ? $template->get('id') : $template,
         ]);
@@ -1191,12 +1191,12 @@ class modTemplateVar extends modElement
     {
         $context = !empty($context) ? $context : '';
 
-        $c = $this->xpdo->newQuery('modResourceGroup');
-        $c->innerJoin('modTemplateVarResourceGroup', 'TemplateVarResourceGroups', [
+        $c = $this->xpdo->newQuery(modResourceGroup::class);
+        $c->innerJoin(modTemplateVarResourceGroup::class, 'TemplateVarResourceGroups', [
             'TemplateVarResourceGroups.documentgroup = modResourceGroup.id',
             'TemplateVarResourceGroups.tmplvarid' => $this->get('id'),
         ]);
-        $resourceGroups = $this->xpdo->getCollection('modResourceGroup', $c);
+        $resourceGroups = $this->xpdo->getCollection(modResourceGroup::class, $c);
         $hasAccess = true;
         if (!empty($resourceGroups)) {
             $hasAccess = false;

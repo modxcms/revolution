@@ -71,7 +71,7 @@ class Create extends modObjectCreateProcessor
      */
     public function alreadyExists($key)
     {
-        return $this->modx->getCount('modContext', $key) > 0;
+        return $this->modx->getCount(modContext::class, $key) > 0;
     }
 
     /**

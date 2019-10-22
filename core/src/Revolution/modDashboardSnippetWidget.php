@@ -21,7 +21,7 @@ class modDashboardSnippetWidget extends modDashboardWidgetInterface
     public function render()
     {
         /** @var modSnippet $snippet */
-        $snippet = $this->modx->getObject('modSnippet',array(
+        $snippet = $this->modx->getObject(modSnippet::class,array(
             'name' => $this->widget->get('content'),
         ));
         if ($snippet) {

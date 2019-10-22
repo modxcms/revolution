@@ -37,7 +37,7 @@ class modNativeHashTest extends MODxTestCase {
     public function testHash($string) {
         $this->modx->getService('hashing', 'hashing.modHashing');
         /** @var modNative $hasher */
-        $hasher = $this->modx->hashing->getHash('modNative', 'hashing.modNative');
+        $hasher = $this->modx->hashing->getHash(modNative::class, 'hashing.modNative');
 
         $generated = $hasher->hash($string);
         $this->assertNotEmpty($generated);

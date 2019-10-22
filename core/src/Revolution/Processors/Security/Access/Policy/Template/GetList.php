@@ -77,7 +77,7 @@ class GetList extends modObjectGetListProcessor
             'modAccessPermission.template = modAccessPolicyTemplate.id',
         ]);
         $subQuery->prepare();
-        $c->select($this->modx->getSelectColumns('modAccessPolicyTemplate', 'modAccessPolicyTemplate'));
+        $c->select($this->modx->getSelectColumns(modAccessPolicyTemplate::class, 'modAccessPolicyTemplate'));
         $c->select(['template_group_name' => 'TemplateGroup.name']);
         $c->select('(' . $subQuery->toSql() . ') AS ' . $this->modx->escape('total_permissions'));
         $id = $this->getProperty('id', '');

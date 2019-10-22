@@ -497,7 +497,7 @@ class modParser
                     break;
                 default:
                     $tagName= substr($tagName, $tokenOffset);
-                    if ($element= $this->getElement('modSnippet', $tagName)) {
+                    if ($element= $this->getElement(modSnippet::class, $tagName)) {
                         $element->set('name', $tagName);
                         $element->setTag($outerTag);
                         $element->setCacheable($cacheable);

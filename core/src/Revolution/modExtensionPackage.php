@@ -34,7 +34,7 @@ class modExtensionPackage extends xPDOSimpleObject
         }
         $saved = parent::save($cacheFlag);
         if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modExtensionPackage', 'clearCache', [&$this->xpdo]);
+            $this->xpdo->call(modExtensionPackage::class, 'clearCache', [&$this->xpdo]);
         }
 
         return $saved;
@@ -44,7 +44,7 @@ class modExtensionPackage extends xPDOSimpleObject
     {
         $removed = parent::remove($ancestors);
         if ($removed && !$this->getOption(xPDO::OPT_SETUP)) {
-            $this->xpdo->call('modExtensionPackage', 'clearCache', [&$this->xpdo]);
+            $this->xpdo->call(modExtensionPackage::class, 'clearCache', [&$this->xpdo]);
         }
 
         return $removed;

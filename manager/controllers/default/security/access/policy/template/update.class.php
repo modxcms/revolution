@@ -36,7 +36,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      */
     public function initialize() {
         if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
-            $this->template = $this->modx->getObject('modAccessPolicyTemplate', array('id' => $this->scriptProperties['id']));
+            $this->template = $this->modx->getObject(modAccessPolicyTemplate::class, array('id' => $this->scriptProperties['id']));
         }
     }
 
@@ -74,7 +74,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
 
         /* get permissions */
         $this->templateArray = $this->template->toArray();
-        $c = $this->modx->newQuery('modAccessPermission');
+        $c = $this->modx->newQuery(modAccessPermission::class);
         $c->sortby('name','ASC');
         $permissions = $this->template->getMany('Permissions',$c);
         /** @var modAccessPermission $permission */

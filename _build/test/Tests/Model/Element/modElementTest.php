@@ -36,7 +36,7 @@ class modElementTest extends MODxTestCase {
      */
     public function testGetProperties($name, $properties, $addProperties, $expected) {
         /** @var modElement $element */
-        $element = $this->modx->newObject('modElement');
+        $element = $this->modx->newObject(modElement::class);
         $element->set('name', $name);
         $element->setProperties($properties);
         $actual = $element->getProperties($addProperties);
@@ -96,7 +96,7 @@ class modElementTest extends MODxTestCase {
      */
     public function testProcess($name, $tag, $properties, $content, $expected) {
         /** @var modElement $element */
-        $element = $this->modx->newObject('modElement');
+        $element = $this->modx->newObject(modElement::class);
         $element->set('name', $name);
         $element->process($properties, $content);
         $result = array(

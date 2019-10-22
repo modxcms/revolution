@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Tests\Model\Registry;
 
 
+use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\MODxTestHarness;
 use MODX\Revolution\Registry\modDbRegister;
@@ -30,7 +31,7 @@ use MODX\Revolution\Registry\modRegister;
 class modRegistryTest extends MODxTestCase {
     public static function setUpBeforeClass() {
         parent::setUpBeforeClass();
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
     }
 

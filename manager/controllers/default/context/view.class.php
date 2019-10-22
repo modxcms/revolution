@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modContext;
 use MODX\Revolution\modManagerController;
 
 /**
@@ -48,7 +49,7 @@ class ContextViewManagerController extends modManagerController {
      */
     public function process(array $scriptProperties = array()) {
         /* get context by key */
-        $context= $this->modx->getObjectGraph('modContext', '{"ContextSettings":{}}', $scriptProperties['key']);
+        $context= $this->modx->getObjectGraph(modContext::class, '{"ContextSettings":{}}', $scriptProperties['key']);
         if ($context == null) {
             return $this->failure($this->modx->lexicon('context_with_key_not_found',array('key' =>  $scriptProperties['key'])));
         }

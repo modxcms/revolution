@@ -233,7 +233,7 @@ class ResourceUpdateManagerController extends ResourceManagerController
         if (!empty($lockedBy) && $lockedBy !== true) {
             $this->canSave = false;
             $this->locked = true;
-            $locker = $this->modx->getObject('modUser', $lockedBy);
+            $locker = $this->modx->getObject(modUser::class, $lockedBy);
             if ($locker) {
                 $lockedBy = $locker->get('username');
             }

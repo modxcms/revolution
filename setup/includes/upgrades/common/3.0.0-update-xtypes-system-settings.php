@@ -160,7 +160,7 @@ $messageTemplate = '<p class="%s">%s</p>';
 
 foreach ($xtypeSettingsMap as $setting) {
     /** @var modSystemSetting $systemSetting */
-    $systemSetting = $modx->getObject('modSystemSetting', [
+    $systemSetting = $modx->getObject(modSystemSetting::class, [
         'key' => $setting['key'],
         'xtype' => $setting['old_xtype']
     ]);
