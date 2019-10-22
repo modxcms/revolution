@@ -120,6 +120,37 @@ MODx.panel.UpdateProfile = function(config) {
         ,items: [{
             columnWidth: .5
             ,items: [{
+                layout: 'column'
+                ,border: false
+                ,defaults: {
+                    layout: 'form'
+                    ,labelAlign: 'top'
+                    ,labelSeparator: ''
+                    ,anchor: '100%'
+                    ,border: false
+                }
+                ,items: [{
+                    columnWidth: .5
+                    ,items: {
+                        id: 'modx-user-first-name'
+                        ,name: 'first_name'
+                        ,fieldLabel: _('user_first_name')
+                        ,xtype: 'textfield'
+                        ,anchor: '100%'
+                        ,maxLength: 50
+                    }
+                },{
+                    columnWidth: .5
+                    ,items: {
+                        id: 'modx-user-last-name'
+                        ,name: 'last_name'
+                        ,fieldLabel: _('user_last_name')
+                        ,xtype: 'textfield'
+                        ,anchor: '100%'
+                        ,maxLength: 50
+                    }
+                }]
+            },{
                 id: 'modx-user-fullname'
                 ,name: 'fullname'
                 ,fieldLabel: _('user_full_name')
