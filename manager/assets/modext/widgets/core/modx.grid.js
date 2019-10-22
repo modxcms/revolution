@@ -610,7 +610,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
-        var actions = this.getActions.apply(this, arguments);
+        var actions = this.getActions.apply(this, [record, rowIndex, colIndex, store]);
         if (this.config.disableContextMenuAction !== true) {
             actions.push({
                 text: _('context_menu'),
@@ -624,7 +624,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
     }
 
-    ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
+    ,getActions: function(record, rowIndex, colIndex, store) {
         return [];
     }
 

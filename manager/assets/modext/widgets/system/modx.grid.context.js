@@ -239,7 +239,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         this.refresh();
     }
 
-    ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
+    ,getActions: function(record, rowIndex, colIndex, store) {
         var permissions = record.data.perm;
         var actions = [];
 
