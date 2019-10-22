@@ -512,6 +512,10 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text { // #janky
       display: inline-block;
       position: relative;
 
+      @include media($mobile) {
+        width: 30px !important;
+      }
+
       & > em > button {
         /*color: $buttonColor;*/
         font-size: 18px;

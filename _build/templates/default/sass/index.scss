@@ -253,13 +253,7 @@ jumping around */
           display: block;
           width: 100%;
 
-          #modx-resource-tree & {
-            width: 150px;
-            display: table-cell;
-          }
-
-          #modx-tree-element & {
-            width: 250px;
+          #modx-resource-tree &, #modx-tree-element & {
             display: table-cell;
           }
 
