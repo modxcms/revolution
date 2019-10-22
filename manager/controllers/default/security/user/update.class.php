@@ -81,7 +81,7 @@ Ext.onReady(function() {
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('user_err_ns'));
         }
-        $this->user = $this->modx->getObject('modUser', array('id' => $scriptProperties['id']));
+        $this->user = $this->modx->getObject(modUse::class, array('id' => $scriptProperties['id']));
         if ($this->user == null) return $this->failure($this->modx->lexicon('user_err_nf'));
 
         /* process remote data, if existent */

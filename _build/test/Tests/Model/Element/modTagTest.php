@@ -11,6 +11,7 @@
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
+use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\MODxTestHarness;
 
@@ -25,7 +26,7 @@ use MODX\Revolution\MODxTestHarness;
  */
 class modTagTest extends MODxTestCase {
     public static function setUpBeforeClass() {
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
     }
 
     /**

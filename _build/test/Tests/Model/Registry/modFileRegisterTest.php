@@ -29,14 +29,14 @@ use MODX\Revolution\MODxTestHarness;
 class modFileRegisterTest extends MODxTestCase {
     public static function setUpBeforeClass() {
         /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->registry->addRegister('register', 'registry.modFileRegister', array('directory' => 'register'));
     }
 
     public static function tearDownAfterClass() {
         /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->registry->removeRegister('register');
     }

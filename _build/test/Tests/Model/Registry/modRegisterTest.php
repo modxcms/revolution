@@ -28,7 +28,7 @@ use MODX\Revolution\MODxTestHarness;
 class modRegisterTest extends MODxTestCase {
     public static function setUpBeforeClass() {
         /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->loadClass('registry.modRegister', '', false, true);
         $modx->registry->addRegister('register', modMemoryRegister::class, array('directory' => 'register'));
@@ -36,7 +36,7 @@ class modRegisterTest extends MODxTestCase {
 
     public static function tearDownAfterClass() {
         /** @var modX $modx */
-        $modx =& MODxTestHarness::getFixture('modX', 'modx');
+        $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->registry->removeRegister('register');
     }

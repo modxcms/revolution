@@ -551,7 +551,7 @@ class modUser extends modPrincipal
             $criteria['messageread'] = $read;
         }
 
-        return $this->xpdo->getCount('modUserMessage', $criteria);
+        return $this->xpdo->getCount(modUserMessage::class, $criteria);
     }
 
     /**

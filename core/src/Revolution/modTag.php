@@ -525,14 +525,14 @@ abstract class modTag
                 $this->set('name', $name);
             }
             if (!empty($psName)) {
-                $psObj = $this->modx->getObject('modPropertySet', ['name' => $psName]);
+                $psObj = $this->modx->getObject(modPropertySet::class, ['name' => $psName]);
                 if ($psObj) {
                     $propertySet = $this->modx->parser->parseProperties($psObj->get('properties'));
                 }
             }
         }
         if (!empty($setName)) {
-            $propertySetObj = $this->modx->getObject('modPropertySet', ['name' => $setName]);
+            $propertySetObj = $this->modx->getObject(modPropertySet::class, ['name' => $setName]);
             if ($propertySetObj) {
                 if (is_array($propertySet)) {
                     $propertySet = array_merge($propertySet,

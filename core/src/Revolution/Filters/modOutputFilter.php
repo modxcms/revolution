@@ -133,7 +133,7 @@ class modOutputFilter
                             }
                             $grps = (strlen($m_val) > 0) ? explode(',', $m_val) : [];
                             /** @var $user modUser */
-                            $user = $this->modx->getObject('modUser', $output);
+                            $user = $this->modx->getObject(modUser::class, $output);
                             if ($user && is_object($user) && $user instanceof modUser) {
                                 $condition[] = (int)$user->isMember($grps);
                             } else {
@@ -612,7 +612,7 @@ class modOutputFilter
                                 $key = (!empty($m_val)) ? $m_val : 'username';
                                 $userInfo = null;
                                 /** @var modUser $user */
-                                if ($user = $this->modx->getObjectGraph('modUser', '{"Profile":{}}', $output)) {
+                                if ($user = $this->modx->getObjectGraph(modUser::class, '{"Profile":{}}', $output)) {
                                     $userData = array_merge($user->toArray(), $user->Profile->toArray());
                                     unset($userData['cachepwd'], $userData['salt'], $userData['sessionid'], $userData['password'], $userData['session_stale']);
                                     if (strpos($key, 'extended.') === 0 && isset($userData['extended'][substr($key,

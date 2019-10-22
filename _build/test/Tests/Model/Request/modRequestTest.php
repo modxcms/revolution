@@ -203,11 +203,11 @@ class modRequestTest extends MODxTestCase {
     public function testGetAllActionIDs() {
         // @todo : refactor to take care of modAction deprecation
 //        $actions = $this->request->getAllActionIDs();
-//        $total = $this->modx->getCount('modAction');
+//        $total = $this->modx->getCount(modAction::class);
 //        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not get all of the Actions that exist.');
 
         $actions = $this->request->getAllActionIDs('unit-test');
-        $total = $this->modx->getCount('modAction',array('namespace' => 'unit-test'));
+        $total = $this->modx->getCount(modAction::class,array('namespace' => 'unit-test'));
         $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not filter down by namespace when grabbing actions.');
     }
 

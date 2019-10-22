@@ -170,11 +170,11 @@ class modTemplate extends modElement
             $c = $this->xpdo->newQuery(modTemplateVar::class);
             $c->query['distinct'] = 'DISTINCT';
             $c->select($this->xpdo->getSelectColumns(modTemplateVar::class));
-            $c->select($this->xpdo->getSelectColumns('modTemplateVarTemplate', 'tvtpl', '', ['rank']));
+            $c->select($this->xpdo->getSelectColumns(modTemplateVarTemplate::class, 'tvtpl', '', ['rank']));
             $c->select([
                 'value' => $this->xpdo->getSelectColumns(modTemplateVar::class, 'modTemplateVar', '', ['default_text']),
             ]);
-            $c->innerJoin('modTemplateVarTemplate', 'tvtpl', [
+            $c->innerJoin(modTemplateVarTemplate::class, 'tvtpl', [
                 'tvtpl.tmplvarid = modTemplateVar.id',
                 'tvtpl.templateid' => $this->get('id'),
             ]);
@@ -198,13 +198,13 @@ class modTemplate extends modElement
     public function getTemplateVars()
     {
         $c = $this->xpdo->newQuery(modTemplateVar::class);
-        $c->innerJoin('modTemplateVarTemplate', 'TemplateVarTemplates');
+        $c->innerJoin(modTemplateVarTemplate::class, 'TemplateVarTemplates');
         $c->where([
             'TemplateVarTemplates.templateid' => $this->get('id'),
         ]);
         $c->sortby('TemplateVarTemplates.rank', 'ASC');
 
-        return $this->xpdo->getCollection('modTemplateVar', $c);
+        return $this->xpdo->getCollection(modTemplateVar::class, $c);
     }
 
     /**
@@ -243,7 +243,7 @@ class modTemplate extends modElement
         } else {
             $tv =& $tvPk;
         }
-        $templateVarTemplate = $this->xpdo->getObject('modTemplateVarTemplate', [
+        $templateVarTemplate = $this->xpdo->getObject(modTemplateVarTemplate::class, [
             'tmplvarid' => is_object($tv) ? $tv->get('id') : $tv,
             'templateid' => $this->get('id'),
         ]);

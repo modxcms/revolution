@@ -35,7 +35,7 @@ abstract class MODxTestCase extends TestCase {
      * @throws xPDOException
      */
     public function setUp() {
-        $this->modx = MODxTestHarness::getFixture('modX', 'modx');
+        $this->modx = MODxTestHarness::getFixture(modX::class, 'modx');
         if ($this->modx->request) {
             $this->modx->request->loadErrorHandler();
             $this->modx->error->reset();

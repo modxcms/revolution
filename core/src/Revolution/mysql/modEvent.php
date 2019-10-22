@@ -11,15 +11,15 @@ class modEvent extends \MODX\Revolution\modEvent
         'version' => '3.0',
         'table' => 'system_eventnames',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'service' => 0,
             'groupname' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '50',
@@ -27,7 +27,7 @@ class modEvent extends \MODX\Revolution\modEvent
                 'null' => false,
                 'index' => 'pk',
             ),
-            'service' => 
+            'service' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '4',
@@ -36,7 +36,7 @@ class modEvent extends \MODX\Revolution\modEvent
                 'null' => false,
                 'default' => 0,
             ),
-            'groupname' => 
+            'groupname' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '20',
@@ -45,17 +45,17 @@ class modEvent extends \MODX\Revolution\modEvent
                 'default' => '',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -64,9 +64,9 @@ class modEvent extends \MODX\Revolution\modEvent
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'PluginEvents' => 
+            'PluginEvents' =>
             array (
                 'class' => 'MODX\\Revolution\\modPluginEvent',
                 'local' => 'name',
@@ -85,21 +85,21 @@ class modEvent extends \MODX\Revolution\modEvent
         $limit = 0,
         $offset = 0
     ) {
-        $c = $xpdo->newQuery('modEvent');
-        $count = $xpdo->getCount('modEvent', $c);
-        $c->select($xpdo->getSelectColumns('modEvent', 'modEvent'));
+        $c = $xpdo->newQuery(modEvent::class);
+        $count = $xpdo->getCount(modEvent::class, $c);
+        $c->select($xpdo->getSelectColumns(modEvent::class, 'modEvent'));
         $c->select([
             'IF(ISNULL(modPluginEvent.pluginid),0,1) AS enabled',
             'modPluginEvent.priority AS priority',
             'modPluginEvent.propertyset AS propertyset',
         ]);
-        $c->leftJoin('modPluginEvent', 'modPluginEvent', '
+        $c->leftJoin(modPluginEvent::class, 'modPluginEvent', '
             modPluginEvent.event = modEvent.name
             AND modPluginEvent.pluginid = ' . $plugin . '
         ');
         $c->where($criteria);
         foreach ($sort as $field => $dir) {
-            $c->sortby($xpdo->getSelectColumns('modEvent', 'modEvent', '', [$field]), $dir);
+            $c->sortby($xpdo->getSelectColumns(modEvent::class, 'modEvent', '', [$field]), $dir);
         }
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);
@@ -107,7 +107,7 @@ class modEvent extends \MODX\Revolution\modEvent
 
         return [
             'count' => $count,
-            'collection' => $xpdo->getCollection('modEvent', $c),
+            'collection' => $xpdo->getCollection(modEvent::class, $c),
         ];
     }
 }

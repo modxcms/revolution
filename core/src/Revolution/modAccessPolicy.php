@@ -38,7 +38,7 @@ class modAccessPolicy extends xPDOSimpleObject
         }
 
         /* get permissions for policy */
-        $c = $this->xpdo->newQuery('modAccessPermission');
+        $c = $this->xpdo->newQuery(modAccessPermission::class);
         $c->sortby('name', 'ASC');
         $permissions = $template->getMany('Permissions', $c);
 

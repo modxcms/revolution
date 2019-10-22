@@ -40,9 +40,9 @@ class modFormCustomizationSet extends xPDOSimpleObject
         }
 
         /* get fields */
-        $c = $this->xpdo->newQuery('modActionField');
-        $c->innerJoin('modActionField', 'Tab', 'Tab.name = modActionField.tab');
-        $c->select($this->xpdo->getSelectColumns('modActionField', 'modActionField'));
+        $c = $this->xpdo->newQuery(modActionField::class);
+        $c->innerJoin(modActionField::class, 'Tab', 'Tab.name = modActionField.tab');
+        $c->select($this->xpdo->getSelectColumns(modActionField::class, 'modActionField'));
         $c->select([
             'tab_rank' => 'Tab.rank',
         ]);
@@ -52,7 +52,7 @@ class modFormCustomizationSet extends xPDOSimpleObject
         ]);
         $c->sortby('Tab.rank', 'ASC');
         $c->sortby('modActionField.rank', 'ASC');
-        $fields = $this->xpdo->getCollection('modActionField', $c);
+        $fields = $this->xpdo->getCollection(modActionField::class, $c);
 
         /** @var modActionField $field */
         foreach ($fields as $field) {
@@ -89,9 +89,9 @@ class modFormCustomizationSet extends xPDOSimpleObject
 
         /* get TVs */
         if ($this->get('template')) {
-            $c = $this->xpdo->newQuery('modTemplateVar');
+            $c = $this->xpdo->newQuery(modTemplateVar::class);
             $c->leftJoin(modCategory::class, 'Category');
-            $c->innerJoin('modTemplateVarTemplate', 'TemplateVarTemplates');
+            $c->innerJoin(modTemplateVarTemplate::class, 'TemplateVarTemplates');
             $c->select($this->xpdo->getSelectColumns(modTemplateVar::class, 'modTemplateVar'));
             $c->select([
                 'Category.category AS category_name',
@@ -163,13 +163,13 @@ class modFormCustomizationSet extends xPDOSimpleObject
         }
 
         /* get tabs */
-        $c = $this->xpdo->newQuery('modActionField');
+        $c = $this->xpdo->newQuery(modActionField::class);
         $c->where([
             'action' => $baseAction,
             'type' => 'tab',
         ]);
         $c->sortby($this->xpdo->escape('rank'), 'ASC');
-        $tabs = $this->xpdo->getCollection('modActionField', $c);
+        $tabs = $this->xpdo->getCollection(modActionField::class, $c);
 
         /** @var modActionField $tab */
         foreach ($tabs as $tab) {

@@ -303,7 +303,7 @@ class SecurityLoginManagerController extends modManagerController
             $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
 
             /** @var modUser $user */
-            if (empty($record) || !$user = $this->modx->getObject('modUser', ['username' => reset($record)])) {
+            if (empty($record) || !$user = $this->modx->getObject(modUser::class, ['username' => reset($record)])) {
                 $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_magiclink_err'));
 
                 return;
@@ -470,7 +470,7 @@ class SecurityLoginManagerController extends modManagerController
     public function handleForgotLogin() {
         $c = $this->modx->newQuery(modUser::class);
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
-        $c->innerJoin('modUserProfile', 'Profile');
+        $c->innerJoin(modUserProfile::class, 'Profile');
         $c->where([
             'modUser.username' => $this->scriptProperties['username_reset'],
             'OR:Profile.email:=' => $this->scriptProperties['username_reset'],
@@ -549,15 +549,15 @@ class SecurityLoginManagerController extends modManagerController
     public function handlePasswordlessLoginRequest()
     {
 
-        $c = $this->modx->newQuery('modUser');
+        $c = $this->modx->newQuery(modUser::class);
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
-        $c->innerJoin('modUserProfile', 'Profile');
+        $c->innerJoin(modUserProfile::class, 'Profile');
         $c->where([
             'Profile.email:=' => $this->scriptProperties['passwordless_login_email'],
         ]);
 
         /** @var modUser $user */
-        $user = $this->modx->getObject('modUser', $c);
+        $user = $this->modx->getObject(modUser::class, $c);
 
         if ($user) {
             $this->modx->log(modX::LOG_LEVEL_DEBUG, "Sending out magic login link for user " . $user->get('id'));

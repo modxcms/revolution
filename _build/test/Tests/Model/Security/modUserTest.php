@@ -30,7 +30,7 @@ class modUserTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->user = $this->modx->newObject('modUser');
+        $this->user = $this->modx->newObject(modUser::class);
         $this->user->fromArray(array(
             'id' => 123456,
             'username' => 'unit-test-user',

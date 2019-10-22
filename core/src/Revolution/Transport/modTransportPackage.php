@@ -523,7 +523,7 @@ class modTransportPackage extends xPDOObject
                     );
                     $latestQuery->sortby('installed', 'DESC');
                     /** @var modTransportPackage $latest */
-                    $latest = $this->xpdo->getObject('modTransportPackage', $latestQuery);
+                    $latest = $this->xpdo->getObject(modTransportPackage::class, $latestQuery);
                     if ($latest) {
                         $latest->parseSignature();
                         if (xPDOTransport::satisfies($latest->version, $constraint)) {
@@ -560,7 +560,7 @@ class modTransportPackage extends xPDOObject
             );
             $latestQuery->sortby('installed', 'DESC');
             /** @var modTransportPackage $latest */
-            $latest = $this->xpdo->getObject('modTransportPackage', $latestQuery);
+            $latest = $this->xpdo->getObject(modTransportPackage::class, $latestQuery);
             if ($latest) {
                 $latest->parseSignature();
                 if (xPDOTransport::satisfies($latest->version, $constraint)) {

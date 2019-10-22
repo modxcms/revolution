@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Tests\Model;
 
 
+use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\MODxTestHarness;
 
@@ -27,14 +28,14 @@ class modParserTest extends MODxTestCase {
     public static $scope = array();
 
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::getFixture('modX', 'modx', true);
+        $modx = MODxTestHarness::getFixture(modX::class, 'modx', true);
         $placeholders = array('tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2');
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
 
     public static function tearDownAfterClass() {
         if (!empty(self::$scope)) {
-            $modx = MODxTestHarness::getFixture('modX', 'modx');
+            $modx = MODxTestHarness::getFixture(modX::class, 'modx');
             if (array_key_exists('keys', self::$scope)) {
                 $modx->unsetPlaceholder(self::$scope['keys']);
             }

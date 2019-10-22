@@ -711,7 +711,7 @@ class modElement extends modAccessibleSimpleObject
                 $this->set('name', $name);
             }
             if (!empty($psName)) {
-                $psObj = $this->xpdo->getObjectGraph('modPropertySet', '{"Elements":{}}', [
+                $psObj = $this->xpdo->getObjectGraph(modPropertySet::class, '{"Elements":{}}', [
                     'Elements.element' => $this->id,
                     'Elements.element_class' => $this->_class,
                     'modPropertySet.name' => $psName,
@@ -722,7 +722,7 @@ class modElement extends modAccessibleSimpleObject
             }
         }
         if (!empty($setName)) {
-            $propertySetObj = $this->xpdo->getObjectGraph('modPropertySet', '{"Elements":{}}', [
+            $propertySetObj = $this->xpdo->getObjectGraph(modPropertySet::class, '{"Elements":{}}', [
                 'Elements.element' => $this->id,
                 'Elements.element_class' => $this->_class,
                 'modPropertySet.name' => $setName,
@@ -838,10 +838,10 @@ class modElement extends modAccessibleSimpleObject
         $added = false;
         if (!empty($propertySet)) {
             if (is_string($propertySet)) {
-                $propertySet = $this->xpdo->getObject('modPropertySet', ['name' => $propertySet]);
+                $propertySet = $this->xpdo->getObject(modPropertySet::class, ['name' => $propertySet]);
             }
             if (is_object($propertySet) && $propertySet instanceof modPropertySet) {
-                if (!$this->isNew() && !$propertySet->isNew() && $this->xpdo->getCount('modElementPropertySet', [
+                if (!$this->isNew() && !$propertySet->isNew() && $this->xpdo->getCount(modElementPropertySet::class, [
                         'element' => $this->get('id'),
                         'element_class' => $this->_class,
                         'property_set' => $propertySet->get('id'),
@@ -852,7 +852,7 @@ class modElement extends modAccessibleSimpleObject
                         $propertySet->save();
                     }
                     /** @var modElementPropertySet $link */
-                    $link = $this->xpdo->newObject('modElementPropertySet');
+                    $link = $this->xpdo->newObject(modElementPropertySet::class);
                     $link->set('element', $this->get('id'));
                     $link->set('element_class', $this->_class);
                     $link->set('property_set', $propertySet->get('id'));
@@ -879,10 +879,10 @@ class modElement extends modAccessibleSimpleObject
         $removed = false;
         if (!empty($propertySet)) {
             if (is_string($propertySet)) {
-                $propertySet = $this->xpdo->getObject('modPropertySet', ['name' => $propertySet]);
+                $propertySet = $this->xpdo->getObject(modPropertySet::class, ['name' => $propertySet]);
             }
             if (is_object($propertySet) && $propertySet instanceof modPropertySet) {
-                $removed = $this->xpdo->removeObject('modElementPropertySet', [
+                $removed = $this->xpdo->removeObject(modElementPropertySet::class, [
                     'element' => $this->get('id'),
                     'element_class' => $this->_class,
                     'property_set' => $propertySet->get('id'),
