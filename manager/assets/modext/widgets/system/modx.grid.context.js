@@ -134,12 +134,14 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
                 ,scope: this
             });
         }
+
         if (p.indexOf('pedit') != -1) {
             m.push({
                 text: _('context_update')
                 ,handler: this.updateContext
             });
         }
+
         if (p.indexOf('premove') != -1) {
             m.push('-');
             m.push({
@@ -235,6 +237,29 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         }
         this.getSelectionModel().clearSelections(true);
         this.refresh();
+    }
+
+    ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
+        var permissions = record.data.perm;
+        var actions = [];
+
+        if (~permissions.indexOf('pedit')) {
+            actions.push({
+                action: 'updateContext',
+                icon: 'pencil-square-o',
+                text: _('context_update')
+            });
+        }
+
+        if (~permissions.indexOf('premove')) {
+            actions.push({
+                action: 'remove',
+                icon: 'trash-o',
+                text: _('context_remove')
+            });
+        }
+
+        return actions;
     }
 });
 Ext.reg('modx-grid-contexts',MODx.grid.Context);

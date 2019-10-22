@@ -22,6 +22,7 @@ MODx.grid.SystemEvent = function(config) {
         ,groupBy: 'groupname'
         ,singleText: _('system_event')
         ,pluralText: _('system_events')
+        ,showActionsColumn: false
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
