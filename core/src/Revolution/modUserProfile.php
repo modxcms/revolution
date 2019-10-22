@@ -9,6 +9,8 @@ use xPDO\Om\xPDOSimpleObject;
  *
  * @property int     $internalKey      The ID of the modUser record related to this User
  * @property string  $fullname         A full name for the User
+ * @property string  $first_name       The first name for the User
+ * @property string  $last_name        The last name for the User
  * @property string  $email            An email address for the User
  * @property string  $phone            A phone number for the User
  * @property string  $mobilephone      A mobile phone number for the User

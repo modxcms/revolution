@@ -1373,6 +1373,8 @@
     <object class="modUserProfile" table="user_attributes" extends="xPDO\Om\xPDOSimpleObject">
         <field key="internalKey" dbtype="int" precision="10" phptype="integer" null="false" index="unique" />
         <field key="fullname" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="first_name" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
+        <field key="last_name" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
         <field key="email" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="phone" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="mobilephone" dbtype="varchar" precision="100" phptype="string" null="false" default="" />

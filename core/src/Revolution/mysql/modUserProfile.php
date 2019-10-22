@@ -15,6 +15,8 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
         array (
             'internalKey' => NULL,
             'fullname' => '',
+            'first_name' => '',
+            'last_name' => '',
             'email' => '',
             'phone' => '',
             'mobilephone' => '',
@@ -53,6 +55,22 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
+                'phptype' => 'string',
+                'null' => false,
+                'default' => '',
+            ),
+            'first_name' => 
+            array (
+                'dbtype' => 'varchar',
+                'precision' => '50',
+                'phptype' => 'string',
+                'null' => false,
+                'default' => '',
+            ),
+            'last_name' => 
+            array (
+                'dbtype' => 'varchar',
+                'precision' => '50',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
