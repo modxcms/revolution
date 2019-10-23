@@ -94,19 +94,24 @@ class GetRecentlyEditedResources extends modObjectGetListProcessor
             return [];
         }
 
-        $resourceArray = $resource->get(['id','pagetitle','description','published','deleted','context_key', 'editedon']);
+        $resourceArray = $resource->get(['id','pagetitle','description','published','deleted','context_key', 'createdon', 'editedon']);
         $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
         $dateFormat = $this->modx->getOption('manager_date_format');
         $timeFormat = $this->modx->getOption('manager_time_format');
 
-        $editedon = new \DateTimeImmutable($resourceArray['editedon']);
         $createdon = new \DateTimeImmutable($resourceArray['createdon']);
-
-        $resourceArray['editedon_date'] = $editedon->format($dateFormat);
-        $resourceArray['editedon_time'] = $editedon->format($timeFormat);
         $resourceArray['createdon_date'] = $createdon->format($dateFormat);
         $resourceArray['createdon_time'] = $createdon->format($timeFormat);
+
+        $resourceArray['editedon_date'] = $resourceArray['createdon_date'];
+        $resourceArray['editedon_time'] = $resourceArray['createdon_time'];
+
+        if (!empty($resourceArray['editedon'])) {
+            $editedon = new \DateTimeImmutable($resourceArray['editedon']);
+            $resourceArray['editedon_date'] = $editedon->format($dateFormat);
+            $resourceArray['editedon_time'] = $editedon->format($timeFormat);
+        }
 
         $row = array_merge($row, $resourceArray);
 
