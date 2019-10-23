@@ -174,7 +174,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         var groupUsers = Ext.getCmp('modx-usergroup-users');
         var userGroupPanel = Ext.getCmp('modx-tree-panel-usergroup');
 
-        if (tree && groupUsers && userGroupPanel) {
+        if (tree.rendered && groupUsers.rendered && userGroupPanel.rendered) {
             var treeEl = tree.getEl();
             var treeH = treeEl.getHeight();
             var cHeight = groupUsers.getHeight(); // .main-wrapper
