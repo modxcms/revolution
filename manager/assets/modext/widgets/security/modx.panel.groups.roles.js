@@ -170,13 +170,19 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's
-        var treeEl = Ext.getCmp('modx-tree-usergroup').getEl();
-        var treeH = treeEl.getHeight();
-        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight(); // .main-wrapper
-        var maxH = (treeH > cHeight) ? treeH : cHeight;
-        maxH = maxH > 500 ? maxH : 500;
-        Ext.getCmp('modx-tree-panel-usergroup').setHeight(maxH);
-        Ext.getCmp('modx-content').doLayout();
+        var tree = Ext.getCmp('modx-tree-usergroup');
+        var groupUsers = Ext.getCmp('modx-usergroup-users');
+        var userGroupPanel = Ext.getCmp('modx-tree-panel-usergroup');
+
+        if (tree && groupUsers && userGroupPanel) {
+            var treeEl = tree.getEl();
+            var treeH = treeEl.getHeight();
+            var cHeight = groupUsers.getHeight(); // .main-wrapper
+            var maxH = (treeH > cHeight) ? treeH : cHeight;
+            maxH = maxH > 500 ? maxH : 500;
+            userGroupPanel.setHeight(maxH);
+            Ext.getCmp('modx-content').doLayout();
+        }
     }
 });
 Ext.reg('modx-panel-groups-roles',MODx.panel.GroupsRoles);
