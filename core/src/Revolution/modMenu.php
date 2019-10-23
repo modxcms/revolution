@@ -106,6 +106,7 @@ class modMenu extends modAccessibleObject
                 'action' => 'language',
                 'params' => '&switch=' . $code,
                 'namespace' => 'core',
+                'permissions' => ''
             ];
         }
 
