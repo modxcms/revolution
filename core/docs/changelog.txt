@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 MODX Revolution 2.7.3-pl (TBD)
 ====================================
 - Fix the position of the right caret when `Show Descriptions in Top Menu` is set to `No` [#14778]
+- Update node-sass to a version that supports macOS Catalina [#14789]
 
 MODX Revolution 2.7.2-pl (September 26, 2019)
 ====================================
