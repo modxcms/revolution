@@ -48,8 +48,6 @@ _build/templates/default/sass/font-awesome
 
 # ignore composer files
 composer.phar
-#composer.json
-composer.lock
 
 # ignore composer vendor dir
 /vendor

@@ -453,6 +453,16 @@ $attributes['resolve'][] = array (
     'target' => "return MODX_BASE_PATH;",
 );
 $attributes['resolve'][] = array (
+    'type' => 'file',
+    'source' => MODX_BASE_PATH . 'composer.json',
+    'target' => "return MODX_BASE_PATH;",
+);
+$attributes['resolve'][] = array (
+    'type' => 'file',
+    'source' => MODX_BASE_PATH . 'composer.lock',
+    'target' => "return MODX_BASE_PATH;",
+);
+$attributes['resolve'][] = array (
     'type' => 'php',
     'source' => MODX_BUILD_DIR . 'resolvers/resolve.core.php',
     'target' => "return MODX_BASE_PATH . 'config.core.php';",
