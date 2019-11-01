@@ -19,3 +19,20 @@ class_alias(\xPDO\Transport\xPDOTransport::class, \xPDOTransport::class);
 class_alias(\xPDO\Transport\xPDOObjectVehicle::class, \xPDOObjectVehicle::class);
 
 class_alias(\MODX\Revolution\modX::class, \modX::class);
+
+// Processors
+class_alias(\MODX\Revolution\modProcessor::class, \modProcessor::class);
+class_alias(\MODX\Revolution\modObjectProcessor::class, \modObjectProcessor::class);
+class_alias(\MODX\Revolution\modObjectCreateProcessor::class, \modObjectCreateProcessor::class);
+class_alias(\MODX\Revolution\modObjectExportProcessor::class, \modObjectExportProcessor::class);
+class_alias(\MODX\Revolution\modObjectGetListProcessor::class, \modObjectGetListProcessor::class);
+class_alias(\MODX\Revolution\modObjectGetProcessor::class, \modObjectGetProcessor::class);
+class_alias(\MODX\Revolution\modObjectImportProcessor::class, \modObjectImportProcessor::class);
+class_alias(\MODX\Revolution\modObjectRemoveProcessor::class, \modObjectRemoveProcessor::class);
+class_alias(\MODX\Revolution\modObjectSoftRemoveProcessor::class, \modObjectSoftRemoveProcessor::class);
+class_alias(\MODX\Revolution\modObjectUpdateProcessor::class, \modObjectUpdateProcessor::class);
+class_alias(\MODX\Revolution\modParsedManagerController::class, \modParsedManagerController::class);
+class_alias(\MODX\Revolution\modObjectDuplicateProcessor::class, \modObjectDuplicateProcessor::class);
+
+class_alias(\MODX\Revolution\modExtraManagerController::class, \modExtraManagerController::class);
+class_alias(\MODX\Revolution\modResource::class, \modResource::class);
