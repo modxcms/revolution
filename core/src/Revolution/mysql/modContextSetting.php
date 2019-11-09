@@ -131,6 +131,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
     ) {
         /* build query */
         $c = $xpdo->newQuery(\MODX\Revolution\modContextSetting::class);
+        $c->distinct();
         $c->select([
             $xpdo->getSelectColumns(\MODX\Revolution\modContextSetting::class, 'modContextSetting'),
         ]);
