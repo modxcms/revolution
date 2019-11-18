@@ -306,7 +306,7 @@ class modPackageBuilder {
      * @access public
      * @param array $attributes An array of attributes to set in the
      * manifest of the package being built.
-     * @return null
+     * @return void
      */
     public function setPackageAttributes(array $attributes = []) {
         if ($this->package !== null) {
