@@ -1,22 +1,28 @@
 <?php
+
 namespace MODX\Revolution\Transport;
 
 use MODX\Revolution\modWorkspace;
 use MODX\Revolution\modX;
 
-class modTransportManager {
+class modTransportManager
+{
+
     /**
      * @var modX A reference to the MODX object.
      */
     public $modx = null;
+
     /**
      * @var array The configuration array for the TransportManager.
      */
     public $config = [];
+
     /**
      * @var array An array of active providers.
      */
     public $providers = [];
+
     /**
      * @var modWorkspace The active MODX workspace.
      */
@@ -25,42 +31,24 @@ class modTransportManager {
     /**
      * Creates an instance of the modTransportManager class.
      *
-     * @param modX $modx A reference to a modX instance.
+     * @param  modX  $modx  A reference to a modX instance.
      */
-    function __construct(modX &$modx) {
+    public function __construct(modX &$modx)
+    {
         $this->modx = &$modx;
         $this->getActiveWorkspace();
     }
 
-	/**
-	 * Get a list of providers for the transports.
-	 *
+    /**
+     * Get the active workspace for the MODX installation.
+     *
      * @access public
-	 * @param boolean $refresh If true, refresh the list of providers. Defaults
-	 * to false.
-	 * @return modTransportProvider[] A list of providers.
-	 */
-    public function getProviders($refresh = false) {
-        if (empty($this->providers) || $refresh) {
-            $this->providers = $this->modx->getCollection(modTransportProvider::class, [
-                'disabled' => false,
-            ]);
-            if (!$this->providers) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not find any active transport providers.");
-            }
-        }
-        return $this->providers;
-    }
-
-	/**
-	 * Get the active workspace for the MODX installation.
-	 *
-     * @access public
-	 * @return modWorkspace
-	 */
-    public function getActiveWorkspace() {
+     * @return modWorkspace
+     */
+    public function getActiveWorkspace()
+    {
         if ($this->workspace == null) {
-            $this->workspace = $this->modx->getObject(modWorkspace::class,['active' => true]);
+            $this->workspace = $this->modx->getObject(modWorkspace::class, ['active' => true]);
             if (!$this->workspace) {
                 $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not find an active workspace!");
             }
@@ -68,14 +56,17 @@ class modTransportManager {
         return $this->workspace;
     }
 
-	/**
-	 * Change the active workspace in MODX.
-	 *
+    /**
+     * Change the active workspace in MODX.
+     *
      * @access public
-	 * @param integer $workspaceId The PK of the modWorkspace.
-	 * @return modWorkspace
-	 */
-    public function changeActiveWorkspace($workspaceId) {
+     *
+     * @param  int  $workspaceId  The PK of the modWorkspace.
+     *
+     * @return modWorkspace
+     */
+    public function changeActiveWorkspace($workspaceId)
+    {
         /** @var modWorkspace $workspace */
         $workspace = $this->modx->getObject(modWorkspace::class, $workspaceId);
         if ($workspace) {
@@ -92,13 +83,14 @@ class modTransportManager {
         return $this->workspace;
     }
 
-	/**
-	 * Scans all providers for a list of updates for all packages.
-	 *
+    /**
+     * Scans all providers for a list of updates for all packages.
+     *
      * @access public
-	 * @return array An array of updates for packages.
-	 */
-    public function scanForUpdates() {
+     * @return array An array of updates for packages.
+     */
+    public function scanForUpdates()
+    {
         $updates = [];
         $this->getProviders();
         foreach ($this->providers as $providerId => $provider) {
@@ -109,13 +101,34 @@ class modTransportManager {
         return $updates;
     }
 
-	/**
-	 * Scans all providers for a list of packages.
-	 *
+    /**
+     * Get a list of providers for the transports.
+     *
      * @access public
-	 * @return array An array of packages.
-	 */
-    public function scanForPackages() {
+     *
+     * @param  bool  $refresh  If true, refresh the list of providers. Defaults to false.
+     *
+     * @return modTransportProvider[] A list of providers.
+     */
+    public function getProviders($refresh = false)
+    {
+        if (empty($this->providers) || $refresh) {
+            $this->providers = $this->modx->getCollection(modTransportProvider::class, ['disabled' => false]);
+            if (!$this->providers) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "Could not find any active transport providers.");
+            }
+        }
+        return $this->providers;
+    }
+
+    /**
+     * Scans all providers for a list of packages.
+     *
+     * @access public
+     * @return array An array of packages.
+     */
+    public function scanForPackages()
+    {
         $packages = [];
         $this->getProviders();
         foreach ($this->providers as $providerId => $provider) {
@@ -125,4 +138,5 @@ class modTransportManager {
         }
         return $packages;
     }
+
 }
