@@ -120,7 +120,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('dashboards');
+        return $this->modx->lexicon('widget').': '.$this->widgetArray['name'];
     }
 
     /**
