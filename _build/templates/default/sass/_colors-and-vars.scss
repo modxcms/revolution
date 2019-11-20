@@ -145,13 +145,14 @@ $treeItemBg: $white;
 $treeItemColor: $mediumGray;
 
 $iconColor: $treeText;
-$unpublished: $treeText;
 
 $deactivatedTextColor: lighten($treeColor, 35%); // do not use 50% here - makes base color nearly invisible
 $disabledTextColor: $deactivatedTextColor;
 
-$hidden: lighten($treeText, 10%) !important;
-$unpubText: italic;
+$unpublished: lighten($treeText, 10%) !important;
+$hidden: $treeText;
+$unpubText: normal;
+$hiddenText: italic;
 /* locked is already signaled with lock-icon, no need to use other semantic style here
    as italic is used for "unpublished" */
 $lockedText: inherit; //italic;
