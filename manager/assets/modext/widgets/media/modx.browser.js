@@ -268,6 +268,31 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.select(0);
     }
 
+    ,setVisibility: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+
+        var r = {
+            path: decodeURIComponent(data.pathRelative)
+            ,visibility: data.visibility
+            ,source: this.config.source
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-set-visibility'
+            ,record: r
+            ,listeners: {
+                'success':{
+                    fn: function() {
+                        this.run();
+                    },
+                    scope:this
+                }
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
+    }
+
     ,sortStore: function() {
         var v = MODx.config.modx_browser_default_sort || 'name'
         this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
