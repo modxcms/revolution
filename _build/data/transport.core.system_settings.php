@@ -436,7 +436,7 @@ $settings['default_media_source']->fromArray(array (
 $settings['default_media_source_type']= $xpdo->newObject(modSystemSetting::class);
 $settings['default_media_source_type']->fromArray(array (
     'key' => 'default_media_source_type',
-    'value' => 'MODX\Revolution\Sources\modFileMediaSource',
+    'value' => MODX\Revolution\Sources\modFileMediaSource::class,
     'xtype' => 'modx-combo-source-type',
     'namespace' => 'core',
     'area' => 'manager',

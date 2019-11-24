@@ -10,10 +10,10 @@ $defaultMediaSourceType = $modx->getObject(modSystemSetting::class, [
 if ($defaultMediaSourceType) {
     switch($defaultMediaSourceType->get('value')) {
         case 'sources.modFileMediaSource':
-            $defaultMediaSourceType->set('value', 'MODX\Revolution\Sources\modFileMediaSource');
+            $defaultMediaSourceType->set('value', MODX\Revolution\Sources\modFileMediaSource::class);
             break;
         case 'sources.modS3MediaSource':
-        $defaultMediaSourceType->set('value', 'MODX\Revolution\Sources\modS3MediaSource');
+        $defaultMediaSourceType->set('value', MODX\Revolution\Sources\modS3MediaSource::class);
             break;
     }
 
