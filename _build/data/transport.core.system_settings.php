@@ -1857,15 +1857,6 @@ $settings['tvs_below_content']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['udperms_allowroot']= $xpdo->newObject(modSystemSetting::class);
-$settings['udperms_allowroot']->fromArray(array (
-  'key' => 'udperms_allowroot',
-  'value' => false,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'authentication',
-  'editedon' => null,
-), '', true, true);
 $settings['unauthorized_page']= $xpdo->newObject(modSystemSetting::class);
 $settings['unauthorized_page']->fromArray(array (
   'key' => 'unauthorized_page',
@@ -1954,28 +1945,6 @@ $settings['use_weblink_target']->fromArray(array (
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
-  'editedon' => null,
-), '', true, true);
-$settings['webpwdreminder_message']= $xpdo->newObject(modSystemSetting::class);
-$settings['webpwdreminder_message']->fromArray(array (
-  'key' => 'webpwdreminder_message',
-  'value' => "<p>Hello [[+uid]],</p>
-
-    <p>To activate your new password click the following link:</p>
-
-    <p>[[+surl]]</p>
-
-    <p>If successful you can use the following password to login:</p>
-
-    <p><strong>Password:</strong> [[+pwd]]</p>
-
-    <p>If you did not request this email then please ignore it.</p>
-
-    <p>Regards,<br />
-    Site Administrator</p>",
-  'xtype' => 'textarea',
-  'namespace' => 'core',
-  'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
 $settings['welcome_screen']= $xpdo->newObject(modSystemSetting::class);
