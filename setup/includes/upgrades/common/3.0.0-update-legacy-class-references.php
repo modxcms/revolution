@@ -85,4 +85,7 @@ $modx->updateCollection($class, ['class_key' => modS3MediaSource::class], ['clas
 $class = modContextSetting::class;
 $table = $modx->getTableName($class);
 
-$modx->updateCollection($class, ['value' => modManagerRequest::class], ['key' => 'modRequest.class']);
+$modx->updateCollection($class, ['value' => modManagerRequest::class], [
+    'key' => 'modRequest.class',
+    'value' => 'modManagerRequest'
+]);
