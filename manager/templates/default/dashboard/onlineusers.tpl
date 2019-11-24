@@ -17,7 +17,7 @@
                     <td class="user-with-avatar">
                         <div class="user-avatar">
                             {if $record.photo}
-                                <img src="{$record.photo}" width="32" height="32">
+                                <img src="{$record.photo}">
                             {else}
                                 <i class="icon icon-user icon-2x"></i>
                             {/if}
