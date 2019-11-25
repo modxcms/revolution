@@ -17,7 +17,9 @@ use MODX\Revolution\Hashing\modMD5;
 use MODX\Revolution\Hashing\modNative;
 use MODX\Revolution\Hashing\modPBKDF2;
 use MODX\Revolution\modAccess;
+use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modDocument;
+use MODX\Revolution\modManagerRequest;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modStaticResource;
 use MODX\Revolution\modSymLink;
@@ -78,3 +80,12 @@ $this->processResults($class, $classKey, [$modx->manager, 'alterField'], [$class
 $modx->updateCollection($class, ['class_key' => modFileMediaSource::class], ['class_key' => 'sources.modFileMediaSource']);
 $modx->updateCollection($class, ['class_key' => modFTPMediaSource::class], ['class_key' => 'sources.modFTPMediaSource']);
 $modx->updateCollection($class, ['class_key' => modS3MediaSource::class], ['class_key' => 'sources.modS3MediaSource']);
+
+/* modify core class references in modContextSettings */
+$class = modContextSetting::class;
+$table = $modx->getTableName($class);
+
+$modx->updateCollection($class, ['value' => modManagerRequest::class], [
+    'key' => 'modRequest.class',
+    'value' => 'modManagerRequest'
+]);
