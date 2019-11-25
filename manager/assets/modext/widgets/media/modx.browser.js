@@ -143,7 +143,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                     var r = {
                         file: data.pathRelative
                         ,name: data.name
-                        ,path: data.pathRelative
+                        ,path: decodeURIComponent(data.pathRelative)
                         ,source: this.config.source
                         ,content: response.object.content
                     };
