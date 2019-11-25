@@ -85,9 +85,9 @@ class modEvent extends \MODX\Revolution\modEvent
         $limit = 0,
         $offset = 0
     ) {
-        $c = $xpdo->newQuery(modEvent::class);
-        $count = $xpdo->getCount(modEvent::class, $c);
-        $c->select($xpdo->getSelectColumns(modEvent::class, 'modEvent'));
+        $c = $xpdo->newQuery(\MODX\Revolution\modEvent::class);
+        $count = $xpdo->getCount(\MODX\Revolution\modEvent::class, $c);
+        $c->select($xpdo->getSelectColumns(\MODX\Revolution\modEvent::class, 'modEvent'));
         $c->select([
             'IF(ISNULL(modPluginEvent.pluginid),0,1) AS enabled',
             'modPluginEvent.priority AS priority',
@@ -99,7 +99,7 @@ class modEvent extends \MODX\Revolution\modEvent
         ');
         $c->where($criteria);
         foreach ($sort as $field => $dir) {
-            $c->sortby($xpdo->getSelectColumns(modEvent::class, 'modEvent', '', [$field]), $dir);
+            $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modEvent::class, 'modEvent', '', [$field]), $dir);
         }
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);
@@ -107,7 +107,7 @@ class modEvent extends \MODX\Revolution\modEvent
 
         return [
             'count' => $count,
-            'collection' => $xpdo->getCollection(modEvent::class, $c),
+            'collection' => $xpdo->getCollection(\MODX\Revolution\modEvent::class, $c),
         ];
     }
 }
