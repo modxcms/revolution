@@ -478,24 +478,6 @@ $settings['default_content_type']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
-$settings['editor_css_path']= $xpdo->newObject(modSystemSetting::class);
-$settings['editor_css_path']->fromArray(array (
-  'key' => 'editor_css_path',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'editor',
-  'editedon' => null,
-), '', true, true);
-$settings['editor_css_selectors']= $xpdo->newObject(modSystemSetting::class);
-$settings['editor_css_selectors']->fromArray(array (
-  'key' => 'editor_css_selectors',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'editor',
-  'editedon' => null,
-), '', true, true);
 $settings['emailsender']= $xpdo->newObject(modSystemSetting::class);
 $settings['emailsender']->fromArray(array (
   'key' => 'emailsender',
