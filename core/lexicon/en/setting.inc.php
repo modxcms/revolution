@@ -847,6 +847,3 @@ $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter 
 
 $_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
 $_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
