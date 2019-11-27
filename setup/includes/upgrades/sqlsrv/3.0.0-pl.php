@@ -19,5 +19,6 @@ include dirname(__DIR__) . '/common/3.0.0-content-type-icon.php';
 include dirname(__DIR__) . '/common/3.0.0-update-xtypes-system-settings.php';
 include dirname(__DIR__) . '/common/3.0.0-update-upload_files-upload_images.php';
 include dirname(__DIR__) . '/common/3.0.0-trim-gender-field-size.php';
+include dirname(__DIR__) . '/common/3.0.0-update-legacy-class-references.php';
 include dirname(__DIR__) . '/common/3.0.0-update-menu-entries.php';
 include dirname(__DIR__) . '/common/3.0.0-update-default-media-source-setting.php';
