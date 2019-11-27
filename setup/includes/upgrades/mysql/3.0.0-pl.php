@@ -12,6 +12,7 @@ include dirname(__DIR__) . '/common/3.0-cleanup-files.php';
 include dirname(__DIR__) . '/common/3.0.0-dashboard-widgets.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-copy-to-clipboard.php';
 include dirname(__DIR__) . '/common/3.0.0-cleanup-system-settings.php';
+include dirname(__DIR__) . '/common/3.0.0-cleanup-richtext-editor-system-settings.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-tv-eval-system-setting.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-upload-flash-system-setting.php';
 include dirname(__DIR__) . '/common/3.0.0-content-type-icon.php';
