@@ -21202,12 +21202,9 @@ ul.x-tab-strip-bottom {
       display: block;
       padding-bottom: 5px;
       padding-top: 5px;
-      color: #3697CD;
       font-size: 14px;
-      font-weight: bold;
       text-decoration: none;
-      text-align: center;
-      text-transform: uppercase; }
+      text-align: center; }
   .dashboard .widget-actions a {
     display: inline-block;
     padding: 3px 5px;
@@ -21234,9 +21231,10 @@ ul.x-tab-strip-bottom {
     -ms-flex-align: center;
         align-items: center; }
     .dashboard .user-with-avatar .user-avatar {
-      margin-right: 5px; }
+      margin-right: 10px; }
       .dashboard .user-with-avatar .user-avatar img {
-        border-radius: 30px; }
+        width: 35px;
+        border-radius: 50%; }
     .dashboard .user-with-avatar .user-name {
       color: #234368;
       font-weight: 500; }

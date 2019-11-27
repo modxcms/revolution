@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Fix stretched user avatars in dashboard widgets [#14840]
 - Set autocomplete to off on username in user edit form [#14839]
 - Fix limit for context settings [#14819]
 - Allow in-line editing in FC sets grid [#14781]
