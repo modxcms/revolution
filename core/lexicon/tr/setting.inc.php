@@ -763,9 +763,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Kaynakları düzenlerken Şablon De�
 $_lang['setting_ui_debug_mode'] = 'UI Hata Ayıklama Modu';
 $_lang['setting_ui_debug_mode_desc'] = 'Varsayılan yönetici teması için kullanıcı arayüzünü kullanırken hata ayıklama iletileri çıkartmak için Evet olarak ayarlayın. Console.log dosyasını destekleyen bir tarayıcı kullanmalısınız.';
 
-$_lang['setting_udperms_allowroot'] = 'Köke izin ver';
-$_lang['setting_udperms_allowroot_desc'] = 'Kullanıcılarınızın sitenin kökünde yeni Kaynaklar oluşturmasına izin vermek istiyor musunuz?';
-
 $_lang['setting_unauthorized_page'] = 'Yetkisiz sayfa';
 $_lang['setting_unauthorized_page_desc'] = 'Kullanıcılar, güvenli veya yetkisiz bir Kaynak talep ettiyse, göndermek istediğiniz Kaynak Kimliğini girin. <strong> NOT: Girdiğiniz kimliğin mevcut bir Kaynağa ait olduğundan ve yayınlandığından ve herkese açık olduğundan emin olun! </strong>';
 $_lang['setting_unauthorized_page_err'] = 'Yetkilendirilmemiş sayfa için lütfen bir kaynak ID belirleyin.';
@@ -804,10 +801,6 @@ $_lang['setting_use_weblink_target_desc'] = 'MODX bağlantı etiketlerine sahip 
 
 $_lang['setting_user_nav_parent'] = 'Kullanıcı Ana menüsü';
 $_lang['setting_user_nav_parent_desc'] = 'Kullanıcı menüsü için tüm kayıtları çekmek için kullanılan kapsayıcı.';
-
-$_lang['setting_webpwdreminder_message'] = 'Web Hatırlatıcı E-postası';
-$_lang['setting_webpwdreminder_message_desc'] = 'E-posta yoluyla yeni bir şifre istediklerinde web kullanıcılarına gönderilecek bir mesaj girin. İçerik Yöneticisi yeni şifrelerini ve etkinleştirme bilgilerini içeren bir e-posta gönderir. <br /><strong>Not:</strong> Mesaj gönderildiğinde aşağıdaki yer tutucuların yerini İçerik Yöneticisi alır: <br /><br />[[+sname]] - Web sitenizin adı, <br />[[+saddr]] - Web sitenizin e-posta adresidir, <br />[[+surl]] - Sitenizin URL\'si, <br />[[+uid]] - Kullanıcının oturum açma adı veya kimliği, <br />[[+pwd]] - Kullanıcı şifresi, <br />[[+ufn]] - Kullanıcının tam adı. <br /><br /><strong>E-postada [[+uid]] ve [[+pwd]] bırakın, aksi takdirde kullanıcı adı ve parola postayla gönderilmez ve kullanıcılarınız kullanıcı adlarını veya şifrelerini öğrenin!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Merhaba[[+uid]]\n\nYeni şifrenizi etkinleştirmek için aşağıdaki bağlantıya tıklayın:\n\n[[+surl]]\n\nEğer etkinleştirme başarılı olursa, aşağıdaki şifreyi kullanarak oturum açabilirsiniz:\n\nŞifre[[+pwd]]\n\nEğer bu epostayı talep etmediyseniz, lütfen görmezden gelin.\n\nSaygılarımızla,\nSite Yöneticisi';
 
 $_lang['setting_welcome_screen'] = 'Karşılama Ekranını Göster';
 $_lang['setting_welcome_screen_desc'] = 'True olarak ayarlanırsa, hoş geldiniz ekranı karşılama sayfasının bir sonraki başarılı yüklenişinde gösterilir ve bundan sonra gösterilmez.';
