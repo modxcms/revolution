@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move Template Var
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Set this to Yes to output debug messages when using the UI for the default manager theme. You must use a browser that supports console.log.';
 
-$_lang['setting_udperms_allowroot'] = 'Allow root';
-$_lang['setting_udperms_allowroot_desc'] = 'Do you want to allow your users to create new Resources in the root of the site?';
-
 $_lang['setting_unauthorized_page'] = 'Unauthorized page';
 $_lang['setting_unauthorized_page_desc'] = 'Masukkan Sumber ID yang ingin Anda kirimi pengguna jika mereka meminta Sumber yang aman atau tidak sah. <strong>CATATAN: Pastikan ID yang Anda masukkan milik sumber yang ada, dan itu telah dipublikasikan dan dapat diakses publik!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Silakan tentukan ID Sumber daya untuk halaman yang tidak sah.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Atur ke benar jika Anda ingin memil
 
 $_lang['setting_user_nav_parent'] = 'Menu user induk';
 $_lang['setting_user_nav_parent_desc'] = 'Wadah yang digunakan untuk menarik semua catatan untuk menu pengguna.';
-
-$_lang['setting_webpwdreminder_message'] = 'Pencarian pengingat email';
-$_lang['setting_webpwdreminder_message_desc'] = 'Masukkan pesan yang akan dikirim ke para pengguna web Anda setiap kali mereka meminta kata sandi baru melalui email. Pengelola Konten akan mengirim email berisi informasi sandi dan aktivasi baru mereka. <br/><strong>Catatan: </strong> Placeholder berikut digantikan oleh Pengelola Konten saat pesan dikirim:<br/>[[+sname]] - Nama situs pencarian Anda, <br/>[[+saddr]]- alamat email situs pencarian Anda, <br/>[[+surl]] - URL situs Anda, <br/>[[+uid]] - nama login pengguna atau identitas, <br />[[+pwd]] - Kata sandi pengguna, <br/>[[+ufn]] - Nama lengkap pengguna. <br/><br/><strong> Tinggalkan [[+uid]] dan [[+pwd]] di email, atau nama pengguna dan kata kunci tidak akan dikirim melalui email dan pengguna Anda tidak akan tahu nama pengguna atau kata sandi mereka! </strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Halo [[+uid]]\n\n Untuk mengaktifkan kata sandi baru Anda, klik link berikut:\n\n[[+surl]]\n\n Jika berhasil, Anda dapat menggunakan kata sandi berikut untuk login:\n\nPassword:[[+pwd]]\n\n Jika Anda tidak meminta email ini, mohon abaikan saja.\n\nRegrads,\nSite Administrator';
 
 $_lang['setting_welcome_screen'] = 'Tampilkan Layar Selamat Datang';
 $_lang['setting_welcome_screen_desc'] = 'Apabila aturan ke benar, layar selamat datang akan tampil pada pemuatan halaman selamat datang berikutnya, dan kemudian tidak muncul setelah itu.';

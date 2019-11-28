@@ -762,9 +762,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move Template Var
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Set this to Yes to output debug messages when using the UI for the default manager theme. You must use a browser that supports console.log.';
 
-$_lang['setting_udperms_allowroot'] = 'Luba root';
-$_lang['setting_udperms_allowroot_desc'] = 'Kas soovite lubada kasutajatel luua uusi Ressursse lehe root-i? ';
-
 $_lang['setting_unauthorized_page'] = 'Authoriseerimata lehte';
 $_lang['setting_unauthorized_page_desc'] = 'Sisestage Ressurssi ID, mida soovite saata kasutajatele, kui nad pärivad turvatud või autoriseerimata Ressurssi. <strong>MÄRKUS: olge kindel, et IS kuulub olemasolevale Ressurssile ja et see oleks avalikustatud ja on avalikult juurdepääsetav!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Palun määrake Ressurssi ID authoriseerimata lehe jaoks.';
@@ -803,10 +800,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MOD
 
 $_lang['setting_user_nav_parent'] = 'User menu parent';
 $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
-
-$_lang['setting_webpwdreminder_message'] = 'Veebi Parooli Meeletuletuse e-mail';
-$_lang['setting_webpwdreminder_message_desc'] = 'Sisetage sõnum, mis saadetakse kasutajatele, kui nad tellivad uu parooli e-posti kaudu. Sisu Haldus saadab e-maili, mis sisaldab nende uut parooli ja aktiveerimise informatsiooni. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Tere [[+uid]]\n\nUue parooli aktiveerimiseks, klikkige sellel lingil:\n\n[[+surl]]\n\nKui edukas, siis saate sisselogimiseks kasutada järgnevad parooli:\n\nParool:[[+pwd]]\n\nKui teie ei tellinud seda e-maili, siis palun ignoreerige seda.\n\nParimat,\nLahe Administraator';
 
 $_lang['setting_welcome_screen'] = 'Näita Tervitus Ekraani';
 $_lang['setting_welcome_screen_desc'] = 'Kui on true, tervitus ekraan ilmub järgmise eduka laadimise avaleheküljele ja siis ei näidata pärast seda.';

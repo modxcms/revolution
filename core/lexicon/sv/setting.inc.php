@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Sätt denna till "Ja" för att flytt
 $_lang['setting_ui_debug_mode'] = 'UI-debuggningsläge';
 $_lang['setting_ui_debug_mode_desc'] = 'Sätt denna till "Ja" för att skriva ut debuggningsmeddelanden när UI:n för hanterarens standardtema används. Du måste använda en webbläsare som stödjer console.log.';
 
-$_lang['setting_udperms_allowroot'] = 'Tillåt rot';
-$_lang['setting_udperms_allowroot_desc'] = 'Vill du tillåta dina användare att skapa nya resurser i roten på webbplatsen? ';
-
 $_lang['setting_unauthorized_page'] = 'Otillåten-sida';
 $_lang['setting_unauthorized_page_desc'] = 'Ange ID till den resurs som du vill skicka användare till om de har frågat efter en säker eller otillåten resurs.<br /><strong>OBS: Se till att det ID du anger tillhör en existerande resurs, att den har blivit publicerad och kan kommas åt av alla!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Ange ett resurs-ID för otillåten-sidan.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Om du aktiverar den här inställni
 
 $_lang['setting_user_nav_parent'] = 'Användarmenyns förälder';
 $_lang['setting_user_nav_parent_desc'] = 'Den behållare som används för att hämta alla uppgifter till användarmenyn.';
-
-$_lang['setting_webpwdreminder_message'] = 'E-post för webbpåminnelse';
-$_lang['setting_webpwdreminder_message_desc'] = 'Skriv ett meddelande som skickas till dina webbanvändare när de begärt ett nytt lösenord via e-post. Innehållshanteraren kommer att skicka ett e-postmeddelande med deras nya lösenord och aktiveringsinformation.<br /><strong>Notera:</strong> Följande platshållare ersätts av innehållshanteraren när ett meddelande skickas:<br /><br />[[+sname]] - Namnet på din webbplats<br />[[+saddr]] - E-postadressen till din webbplats<br />[[+surl]] - Adressen till din webbplats<br />[[+uid]] - Användarens inloggningsnamn eller ID<br />[[+pwd]] - Användarens lösenord<br />[[+ufn]] - Användarens namn<br /><br /><b>Lämna [[+uid]] och [[+pwd]] i meddelandet, annars får inte mottagaren av e-posten reda på sitt nya användarnamn och lösenord!</b>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hej [[+uid]]\n\nKlicka på följande länk för att aktivera ditt nya lösenord:\n\n[[+surl]]\n\nOm allt går bra använder du följande lösenord för att logga in:\n\nLösenord:[[+pwd]]\n\nOm du inte har bett om det här brevet så kan du strunta i det.\n\nVänliga hälsningar\nWebmastern';
 
 $_lang['setting_welcome_screen'] = 'Visa välkomstmeddelande';
 $_lang['setting_welcome_screen_desc'] = 'Om denna sätts till "Ja" kommer ett välkomstmeddelande att visas vid nästa laddning av välkomstsidan och sedan inte visas mer efter det.';

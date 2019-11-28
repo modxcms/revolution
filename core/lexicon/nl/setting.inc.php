@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Stel in op Ja om Template Variabelen
 $_lang['setting_ui_debug_mode'] = 'UI Debug Modus';
 $_lang['setting_ui_debug_mode_desc'] = 'Stel in op Ja om debug meldingen te tonen wanneer u de standaard manager theme gebruikt. Je moet een browser gebruiken die console.log ondersteunt.';
 
-$_lang['setting_udperms_allowroot'] = 'Root toestaan';
-$_lang['setting_udperms_allowroot_desc'] = 'Wil je gebruikers toestaan om nieuwe documenten te maken in de root van jouw site?';
-
 $_lang['setting_unauthorized_page'] = 'Onbevoegde pagina';
 $_lang['setting_unauthorized_page_desc'] = 'Vul het ID in van het document waar je gebruikers naar toe wilt sturen als ze een beveiligde of onbevoegde pagina opvragen. <strong>Let op: controleer of dit document ID bestaat en gepubliceerd is en toegankelijk is voor deze gebruiker!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Vul een document ID in voor de onbevoegde pagina.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Stel in als Ja als je wilt dat MODX
 
 $_lang['setting_user_nav_parent'] = 'Gebruikersmenu parent';
 $_lang['setting_user_nav_parent_desc'] = 'De menu container welke gebruikt wordt om het gebruikersmenu te tonen. ';
-
-$_lang['setting_webpwdreminder_message'] = 'Web herinneringsbericht';
-$_lang['setting_webpwdreminder_message_desc'] = 'Hier kun je het e-mailbericht opstellen welke gestuurd wordt naar gebruikers wanneer ze een nieuw wachtwoord aanvragen. De Content Managr zal een e-mail sturen met het nieuwe wachtwoord en activatie informatie.<br /><strong>Let op:</strong> de volgende placeholders worden vervangen door de Content Manager wanneer het bericht verstuurd wordt:<br /><br />[[+sname]] - Naam van jouw website<br />[[+saddr]] - Het standaard e-mailadres<br />[[+surl]] - Website URL<br />[[+uid]] - Gebruikers loginnaam of id<br />[[+pwd]] - Gebruikerswachtwoord<br />[[+ufn]] - Gebruikers volledige naam<br /><br />Laat de [[+uid]] en [[+pwd]] in het e-mailbericht, want anders wordt er geen gebruikersnaam en wachtwoord gestuurd en weet de gebruiker niet hoe hij/zij moet inloggen!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]]\n\nOm je nieuwe wachtwoord te activeren, klik op de volgende link:\n\n[[+surl]]\n\nAls dit succesvol is kun je het volgende wachtwoord gebruiken om in te loggen:\n\nWachtwoord: [[+pwd]]\n\nAls je niet om een nieuw wachtwoord gevraagd hebt dan kun je dit bericht negeren.\n\nMet vriendelijke groet,\nSite beheerder';
 
 $_lang['setting_welcome_screen'] = 'Toon welkomstscherm';
 $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het welkomstscherm wordt getoond bij het laden van de welkomstpagina en daarna niet meer.';

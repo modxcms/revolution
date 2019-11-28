@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Activez cette option pour afficher l
 $_lang['setting_ui_debug_mode'] = 'Mode debug de l\'UI';
 $_lang['setting_ui_debug_mode_desc'] = 'Activez cette option pour afficher les messages de debug lors de l\'utilisation du thème de manager par défaut. Vous devez utiliser un navigateur qui supporte la fonction console.log().';
 
-$_lang['setting_udperms_allowroot'] = 'Accès racine';
-$_lang['setting_udperms_allowroot_desc'] = 'Voulez-vous autoriser vos utilisateurs à créer de nouvelles ressources à la racine du site ?';
-
 $_lang['setting_unauthorized_page'] = 'Page pour accès non autorisée';
 $_lang['setting_unauthorized_page_desc'] = 'Entrez l\'ID de la ressource vers laquelle vous souhaitez rediriger les utilisateurs qui ont demandé à accéder à une ressource sécurisée ou non autorisée. <strong>Note : assurez-vous que l\'ID que vous avez indiqué est celle d\'une ressource existante, publiée et accessible publiquement !</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Veuillez spécifier un ID de ressource de la page pour accès non autorisé.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Activez cette option si vous désir
 
 $_lang['setting_user_nav_parent'] = 'Conteneur du menu utilisateur';
 $_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour générer le contenu du menu utilisateur.';
-
-$_lang['setting_webpwdreminder_message'] = 'E-mail de rappel web';
-$_lang['setting_webpwdreminder_message_desc'] = 'Entrez un message qui sera envoyé aux utilisateurs web lorsqu\'ils demanderont un nouveau mot de passe par e-mail. Le gestionnaire de contenu enverra un e-mail contenant leur nouveau mot de passe et les informations d\'activation. <br /><strong>Note :</strong> Les placeholders sont remplacés par le gestionnaire de contenu lors de l\'envoi du message : <br /><br />[[+sname]] - Nom de votre site web, <br />[[+saddr]] - Addresse email du site web, <br />[[+surl]] - URL du site web, <br />[[+uid]] - Identifiant ou ID de l\'utilisateur, <br />[[+pwd]] - Mot de passe de l\'utilisateur, <br />[[+ufn]] - Nom complet de l\'utilisateur. <br /><br /><strong>Laissez [[+uid]] et [[+pwd]] dans l\'e-mail ou l\'identifiant et le mot de passe ne seront pas envoyés et vos utilisateurs ne pourront se connecter !</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Bonjour [[+uid]]\n\nPour activer votre nouveau mot de passe veuillez vous rendre à l\'adresse :\n\n[[+surl]]\n\nEn cas de réussite vous pourrez utiliser le mot de passe suivant pour vous connecter :\n\nPassword :[[+pwd]]\n\nSi vous n\'avez pas demandé cet e-mail, veuillez alors l\'ignorer.\n\nCordialement,\nL\'administrateur du site';
 
 $_lang['setting_welcome_screen'] = 'Afficher l\'écran de bienvenue';
 $_lang['setting_welcome_screen_desc'] = 'Coché, l\'écran de bienvenue sera affiché au prochain chargement de la page et ne s\'affichera plus par la suite.';

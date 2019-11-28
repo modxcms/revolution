@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Nastavte toto na "Ano", pokud chcete
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Nastavte na "Ano" pro výpis ladících zpráv používáte-li UI pro výchozí téma správce obsahu. Musíte používat prohlížeč podporující console.log.';
 
-$_lang['setting_udperms_allowroot'] = 'Povolit kořenovou složku';
-$_lang['setting_udperms_allowroot_desc'] = 'Chcete uživatelům povolit vytváření nových dokumentů v kořenové složce portálu? ';
-
 $_lang['setting_unauthorized_page'] = 'Stránka neautorizovaného přístupu';
 $_lang['setting_unauthorized_page_desc'] = 'Zadejte ID zdroje, na který chcete přesměrovat uživatele pokud se pokusili přistoupit ke stránce, pro kterou nemají oprávnění. <strong>Poznámka: ujistěte se, že zadané ID patří existujícího zdroji, který je publikován a je přístupný veřejnosti!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Zadejte ID zdroje pro stránku neautorizovaného přístupu.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Nastavte na "Ano" pokud chcete, aby
 
 $_lang['setting_user_nav_parent'] = 'Složka uživatelského menu';
 $_lang['setting_user_nav_parent_desc'] = 'Složka pro načítání všech položek uživatelského menu.';
-
-$_lang['setting_webpwdreminder_message'] = 'E-mail pro vyžádání nového hesla';
-$_lang['setting_webpwdreminder_message_desc'] = 'Šablona zprávy, která se odešle pokud zažádá webový uživatel o zaslání nového hesla e-mailem. Správce obsahu mu odešle e-mail obsahující nové heslo a aktivační informace. <br /><strong>Poznámka:</strong> Následující placeholdery jsou nahrazeny správcem obsahu než je správa odeslána: <br /><br />[[+sname]] - Název portálu, <br />[[+saddr]] - E-mailová adresa portálu, <br />[[+surl]] - URL adresa portálu, <br />[[+uid]] - Jméno nebo ID uživatele, <br />[[+pwd]] - Heslo uživatele, <br />[[+ufn]] - Celé jméno uživatele. <br /><br /><strong>Ponechte placeholdery [[+uid]] a [[+pwd]] v e-mailu nebo nebude uživatelské jméno a heslo obsaženo v e-mailu a uživatel nebude znát své uživatelské jméno a heslo!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Dobrý den [[+uid]]\n\nPro aktivaci nového heslo klikněte na odkaz:\n\n[[+surl]]\n\nPokud vše proběhlo úspěšně můžete použít následující heslo pro přihlášení:\n\nHeslo:[[+pwd]]\n\nPokud jste o změnu hesla nežádali tak tento e-mail ignorujte.\n\nS pozdravem,\nadministrátor portálu.';
 
 $_lang['setting_welcome_screen'] = 'Zobrazit uvítací obrazovku';
 $_lang['setting_welcome_screen_desc'] = 'Je-li nastaveno na "Ano", uvítací obrazovka se zobrazí při dalším načtení úvodní stránky a pak se již nezobrazí.';

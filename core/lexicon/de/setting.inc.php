@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf "Ja
 $_lang['setting_ui_debug_mode'] = 'Benutzerschnittstellen-Debug-Modus';
 $_lang['setting_ui_debug_mode_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Debug-Meldungen auszugeben, wenn Sie die Benutzerschnittstelle für das Standard-Manager-Theme verwenden. Sie müssen einen Browser verwenden, der console.log unterstützt.';
 
-$_lang['setting_udperms_allowroot'] = 'Benutzer-Ressourcen im Site-Root zulassen';
-$_lang['setting_udperms_allowroot_desc'] = 'Möchten Sie Ihren Benutzern erlauben, neue Ressourcen im Wurzelverzeichnis der Website zu erstellen?';
-
 $_lang['setting_unauthorized_page'] = 'Seite für unautorisierte Zugriffe';
 $_lang['setting_unauthorized_page_desc'] = 'Geben Sie die ID der Ressource ein, die angezeigt werden soll, wenn eine geschützte Ressource aufgerufen wurde oder eine, für die dem Benutzer die Berechtigung fehlt. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einer existierenden Ressource gehört, dass diese veröffentlicht wurde und öffentlich zugänglich ist!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Seite für unautorisierte Zugriffe ein.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Setzen Sie diese Einstellung auf "J
 
 $_lang['setting_user_nav_parent'] = 'Eltern-Element des Benutzer-Menüs';
 $_lang['setting_user_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Benutzer-Menü zu erstellen.';
-
-$_lang['setting_webpwdreminder_message'] = 'E-Mail nach Passwort-Anforderung';
-$_lang['setting_webpwdreminder_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn er eine neues Passwort anfordert. Der MODX-Manager sendet eine E-Mail an den Benutzer, die dessen neues Passwort und Aktivierungs-Informationen enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hallo [[+uid]],\n\num Ihr neues Passwort zu aktivieren, klicken Sie bitte auf den folgenden Link:\n\n[[+surl]]\n\nNach erfolgreicher Aktivierung können Sie folgendes Passwort verwenden, um sich einzuloggen:\n\nPasswort: [[+pwd]]\n\nFalls Sie diese E-Mail nicht angefordert haben sollten, ignorieren Sie sie bitte einfach.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
 
 $_lang['setting_welcome_screen'] = 'Willkommens-Bildschirm anzeigen';
 $_lang['setting_welcome_screen_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, wird der Willkommens-Bildschirm beim nächsten erfolgreichen Laden der Manager-Startseite einmalig angezeigt, danach nicht mehr.';

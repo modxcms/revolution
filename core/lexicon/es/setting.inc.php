@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Configurar como "Sí" para mover las
 $_lang['setting_ui_debug_mode'] = 'Modo de Depuración en la Interfaz de Usuario';
 $_lang['setting_ui_debug_mode_desc'] = 'Configurar como "Sí" para mostrar mensajes de depuración al utilizar la interfaz gráfic de la plantilla predeterminada del panel de administración. El navegador debe soportar "console.log".';
 
-$_lang['setting_udperms_allowroot'] = 'Permitir Crear Elementos en la Raíz';
-$_lang['setting_udperms_allowroot_desc'] = '¿Quieres permitir que tus usuarios creen nuevos Recursos en la raíz de tu sitio? ';
-
 $_lang['setting_unauthorized_page'] = 'Página de Acceso No Autorizado';
 $_lang['setting_unauthorized_page_desc'] = 'Introduce el ID del Recurso que quieres mostrar a los usuarios cuando solicitan un Recurso seguro o no autorizado. <strong>NOTA: ¡Asegúrate de que el ID introducido pertenece a un Recurso existente que ha sido publicado y que es públicamente accesible!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Por favor, especifíca un ID de Recurso para la página de Acceso No Autorizado.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Activar para que las etiquetas de e
 
 $_lang['setting_user_nav_parent'] = 'User menu parent';
 $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
-
-$_lang['setting_webpwdreminder_message'] = 'Email de Recuperación de Contraseña';
-$_lang['setting_webpwdreminder_message_desc'] = 'Introduce el mensaje que será enviado a los usuarios cuando soliciten una contraseña nueva a través de email. El Administrador de Contenido enviará un email conteniendo la nueva contraseña e información para activarla. <br /><strong>NOTA:</strong> Las siguientes variables son reemplazadas por el Administrador de Contenido cuando el mensaje es enviado: <br /><br />[[+sname]] - Nombre del sitio web, <br />[[+saddr]] - La dirección de email de contacto del sitio web, <br />[[+surl]] - La URL del sitio, <br />[[+uid]] - El nombre o ID del usuario, <br />[[+pwd]] - La contraseña del usuario, <br />[[+ufn]] - El nombre completo del usuario. <br /><br /><strong>¡Deja los campos [[+uid]] y [[+pwd]] en el email, o el nombre de usuario y la contraseña no serán enviados en el email y los usuarios no conocerán sus credenciales!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Hola [[+uid]]\n\nPara activar tu nueva contraseña haz clic en el siguiente enlace:\n\n[[+surl]]\n\nSi la activación se realiza con éxito, tus datos de acceso serán los siguientes:\n\nContraseña:[[+pwd]]\n\nSi no solicitaste este email entonces por favor ignóralo.\n\nSaludos,\nEl Administrador del Sitio';
 
 $_lang['setting_welcome_screen'] = 'Mostrar la Página de Bienvenida';
 $_lang['setting_welcome_screen_desc'] = 'Si se activa, se mostrará la página de bienvenida la próxima vez que se cargue el sitio.';
