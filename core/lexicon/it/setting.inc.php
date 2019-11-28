@@ -761,9 +761,6 @@ $_lang['setting_tvs_below_content_desc'] = 'Impostato su "SI" sposta le Variabil
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode (Interfaccia Utente)';
 $_lang['setting_ui_debug_mode_desc'] = 'Impostare su "SI" per i messaggi di debug in uscita quando si usa UI (Interfaccia Utente) per il tema di default del manager. E\' necessario utilizzare un browser che supporti console.log.';
 
-$_lang['setting_udperms_allowroot'] = 'Consenti in Radice';
-$_lang['setting_udperms_allowroot_desc'] = 'Vuoi permettere ai tuoi utenti di creare nuove risorse nella radice principale del sito? ';
-
 $_lang['setting_unauthorized_page'] = 'Pagina Non Autorizzata';
 $_lang['setting_unauthorized_page_desc'] = 'Inserisci l\'ID della Risorsa che vuoi mostrare agli utenti se questi provano ad accedere a una pagina non autorizzata o di Sicurezza. <strong>NOTA: assicurati che questo ID appartenga a una Risorsa esistente, pubblicata e pubblicamente accessibile!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Specifica l\'ID di una Risorsa da mostare come pagina senza autorizzazione.';
@@ -802,10 +799,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Imposta su "SI" se vuoi che i tags 
 
 $_lang['setting_user_nav_parent'] = 'Genitore menu utente';
 $_lang['setting_user_nav_parent_desc'] = 'Il contenitore usato per prendere tutti i records per il menu utente.';
-
-$_lang['setting_webpwdreminder_message'] = 'E-mail Recupero Dati Accesso';
-$_lang['setting_webpwdreminder_message_desc'] = 'Inserisci il messaggio da inviare tramite mail, quando gli utenti chiedono una nuova password via email. Il Manager invierà loro una e-mail contenente la nuova password e le informazioni di attivazione. <br /><strong>Nota:</strong> I seguenti identificatori saranno sostituiti coi relativi valori dal Manager quando il messaggio verrà inviato:<br /><br /> [[+sname]] - Nome del sito, <br />[[+saddr]] - Indirizzo email del sito, <br />[[+surl]] - Url del sito, <br />[[+uid]] - Login o id dell\'utente, <br />[[+pwd]] - Password utente, <br />[[+ufn]] - Nome completo dell\'utente.<br /><br /><strong>Lasciate [[+uid]] e [[+pwd]] nella e-mail, altrimenti il nome utente e la password non verranno inviati!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Salve [[+uid]]\n\nPer attivare la tua password clicca sul link sottostante:\n\n[[+surl]]\n\nIn seguito potrai usare la seguente password per eseguire il login:\n\nPassword:[[+pwd]]\n\nSe non hai richiesto questa mail, ignorala.\n\nCordiali Saluti, l\'amministratore del Sito';
 
 $_lang['setting_welcome_screen'] = 'Mostra Schermata Benvenuto';
 $_lang['setting_welcome_screen_desc'] = 'Se impostato su \'SI\', la schermata di benvenuto verrà mostrata al prossimo caricamento della pagina di benvenuto, e non verrà mostrato successivamente.';
