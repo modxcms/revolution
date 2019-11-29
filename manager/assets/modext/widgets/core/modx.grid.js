@@ -453,7 +453,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 value = renderer(value, metaData, record, rowIndex, colIndex, store);
             }
             metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
-            metaData.attr = ['ext:qtip="' + _('editable_field') + '"', metaData.attr || ''].join(' ');
 
             return value;
         }
