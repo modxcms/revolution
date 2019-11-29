@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parametry';
 $_lang['parameters_desc'] = 'Jakákoliv GET parametry, které chcete přidat na konec URL po kliknutí na položku menu. (Například: &expire=1)';
 $_lang['permissions'] = 'Oprávnění';
 $_lang['permissions_desc'] = 'Klíč oprávnění potřebný k načtení této položky menu.';
-$_lang['topmenu'] = 'Horní menu';
-$_lang['topmenu_desc'] = 'Toto umožňuje propojení akcí s položkami menu v horním menu MODX správce obsahu. Jednoduše umístěte akci na místo, kde by jste jej chtěli v menu mít.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
