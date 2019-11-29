@@ -4,7 +4,6 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
-- Remove unused system settings `udperms_allowroot` and `webpwdreminder_message` [#14841]
 - Fix stretched user avatars in dashboard widgets [#14840]
 - Set autocomplete to off on username in user edit form [#14839]
 - Fix limit for context settings [#14819]
@@ -77,7 +76,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Fix Regex validation for TV's of the input type "Text" [#13916]
 - Change the result from type "warning" to type "success" and change the message for the install summary [#13897]
 - Remove @EVAL binding from TVs to prevent arbitrary code execution by admins [#13865]
-- Removed obsolete system settings [#13859]
+- Removed obsolete system settings: compress_js_max_files and manager_js_zlib_output_compression [#13859], udperms_allowroot and webpwdreminder_message [#14841], editor_css_path and editor_css_selectors [#14843]
 - Added missed upgrading script to database related upgrading files [#13870]
 - Support of Markdown in package attributes (changelog, readme, license) [#13853]
 - New class-based ConfigCheck processor [#13864]
