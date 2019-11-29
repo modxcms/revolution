@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Dasbor';
 $_lang['dashboards'] = 'Dashboard';
 $_lang['dashboards_desc'] = 'Mengelola login kustom dashboard';
 $_lang['edit_menu'] = 'Menu';
-$_lang['edit_menu_desc'] = 'Mengelola menu atas pengaturan';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Log kesalahan';
 $_lang['eventlog_viewer_desc'] = 'Lihat MODX error.log.';
 $_lang['export_site'] = 'Ekspor HTML statis';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Pengaturan sistem';
 $_lang['system_settings_desc'] = 'Mengkonfigurasi semua pengaturan sistem';
 $_lang['tools'] = 'Alat';
 $_lang['tools_desc'] = 'Kegunaan untuk menjaga situs Anda tersortir';
-$_lang['topnav'] = 'Navigasi teratas';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Pengguna';
 $_lang['usernav'] = 'Navigasi Pengguna';
