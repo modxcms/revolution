@@ -241,7 +241,8 @@
           content: fa-content($fa-var-caret-right);
           font-size: 14px;
           margin-top: 0;
-          top: 20px;
+          top: 50%;
+          transform: translateY(-50%);
           right: 10px;
         }
       }

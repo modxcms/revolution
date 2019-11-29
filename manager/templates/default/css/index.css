@@ -19197,7 +19197,9 @@ ul.x-tab-strip-bottom {
       content: "\f0da";
       font-size: 14px;
       margin-top: 0;
-      top: 20px;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
       right: 10px; }
     #modx-footer .modx-subnav li a {
       border-radius: 3px;
