@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards_desc'] = 'Benutzerdefinierte Login-Dashboards verwalten.';
 $_lang['edit_menu'] = 'Menüs';
-$_lang['edit_menu_desc'] = 'Das Manager-Hauptmenü anpassen.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Fehlerprotokoll';
 $_lang['eventlog_viewer_desc'] = 'MODX-Fehlerprotokoll anzeigen.';
 $_lang['export_site'] = 'Statisches HTML exportieren';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Systemeinstellungen';
 $_lang['system_settings_desc'] = 'Alle Systemeinstellungen konfigurieren.';
 $_lang['tools'] = 'Tools';
 $_lang['tools_desc'] = 'Werkzeuge, die Ihnen bei der Verwaltung Ihrer Site helfen';
-$_lang['topnav'] = 'Hauptmenü';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Benutzer';
 $_lang['usernav'] = 'Benutzer-Menü';
