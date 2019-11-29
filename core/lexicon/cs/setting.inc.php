@@ -746,8 +746,8 @@ $_lang['setting_syncsite_default'] = 'Výchozí stav smazání cache po uložen�
 $_lang['setting_syncsite_default_desc'] = 'Vyberte "Ano" pokud chcete ve výchozím stavu smazat cache dokumentu po jeho uložení.';
 $_lang['setting_syncsite_default_err'] = 'Prosím zvolte, zda chcete ve výchozím nastavení smazat cache po uložení dokumentu.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Výchozí řazení dokumentů ve stromu dokumentů';
 $_lang['setting_tree_default_sort_desc'] = 'Políčko, které se má použít pro výchozí řazení dokumentů v rámci stromu dokumentů.';
@@ -841,12 +841,6 @@ $_lang['setting_error_log_filename_desc'] = 'Přizpůsobte si název souboru pro
 
 $_lang['setting_error_log_filepath'] = 'Cesta k protokolu chyb';
 $_lang['setting_error_log_filepath_desc'] = 'Volitelně nastavit absolutní cestu umístění protokolu chyb. Můžete použít placehodery jako např. {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
