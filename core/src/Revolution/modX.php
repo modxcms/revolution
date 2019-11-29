@@ -29,7 +29,6 @@ use Exception;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
 use MODX\Revolution\Mail\modMail;
-use MODX\Revolution\Processors\DeprecatedProcessor;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
@@ -1703,88 +1702,90 @@ class modX extends xPDO {
     /**
      * Loads and runs a specific processor.
      *
-     * @param string $action The processor to run, eg: context/update
+     * @param string $action The processor to run, eg: context/update, or the processor class name (\MODX\Revolution\Processors\Context\Update::class)
      * @param array $scriptProperties Optional. An array of parameters to pass to the processor.
      * @param array $options Optional. An array of options for running the processor, such as:
-     *
      * - processors_path - If specified, will override the default MODX processors path.
-     * - location - A prefix to load processor files from, will prepend to the action parameter
-     * (Note: location will be deprecated in future Revolution versions.)
      *
      * @return mixed The result of the processor.
      */
     public function runProcessor($action = '', $scriptProperties = array(), $options = array()) {
         $result = null;
 
-        if (class_exists($action)) {
+        // Make sure the required services are loaded before initialising a processor
+        if (!$this->lexicon) {
+            $this->services->get('lexicon');
+        }
+        if (!$this->error) {
+            $this->services->get('error');
+        }
+
+        // First check if the processor can be found directly as a class name provided to $action
+        // We're limiting to subclasses of Processor to prevent instantiating arbitrary classes
+        if (class_exists($action) && is_subclass_of($action, Processor::class, true)) {
             /** @var Processor $processor */
             $processor = new $action($this, $scriptProperties);
 
             return $processor->run();
         }
 
+        // Check if we're dealing with an action like "context/update", which we transform into the 3.0+ class name
         $legacyAction = 'MODX\\Revolution\\Processors\\' . implode('\\', array_map('ucfirst', explode('/', $action)));
+
+        // Special case for TVs, for which the directory is named differently from how it was called in the past
         if (strpos($legacyAction, '\\Tv\\') !== false) {
             $legacyAction = str_replace('\\Tv\\', '\\TemplateVar\\', $legacyAction);
         }
-        if (class_exists($legacyAction)) {
+        if (class_exists($legacyAction) && is_subclass_of($legacyAction, Processor::class, true)) {
             /** @var Processor $processor */
             $processor = new $legacyAction($this, $scriptProperties);
 
             return $processor->run();
         }
 
-        /* calculate processor file path from options and action */
-        $isClass = true;
+        // If we don't have a processor yet, we're dealing with a custom processor. See if we have been provided a path to look in.
         $processorsPath = isset($options['processors_path']) && !empty($options['processors_path']) ? $options['processors_path'] : $this->config['processors_path'];
-        if (isset($options['location']) && !empty($options['location'])) $processorsPath .= ltrim($options['location'],'/') . '/';
 
         // Prevent path traversal through the action
         $action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($action));
 
-        // Find the processor file, preferring class based processors over old-style processors
-        $processorFile = $processorsPath.ltrim($action . '.class.php','/');
+        // Find a matching processor file
+        $processorFile = $processorsPath . ltrim($action . '.class.php','/');
+
         if (!file_exists($processorFile)) {
-            $processorFile = $processorsPath.ltrim($action . '.php','/');
-            $isClass = false;
+            $this->log(modX::LOG_LEVEL_ERROR, "Unable to load processor for action \"{$action}\", it does not exist as an autoloadable class that extends \MODX\Revolution\Processors\Processor, and also not as a file in \"{$processorFile}\"");
+            return '';
         }
 
-        // Prepare a response
-        $response = '';
-        if (file_exists($processorFile)) {
-            if (!isset($this->lexicon)) $this->services->get('lexicon');
-            if (!isset($this->error)) $this->services->get('error');
+        // Check if we already know the name for the class (meaning we've loaded it before in this request)
+        if (array_key_exists($processorFile,$this->processors)) {
+            $className = $this->processors[$processorFile];
+        }
+        // Load the file. The file is expected to return (as a string) the name of its class.
+        else {
+            $className = include_once $processorFile;
+            // include_once returns 1 if there was no return value in the file, or true if it was already loaded before
+            // In both cases we can guess the class name based on the provided action
+            if ($className == 1) {
+                $section = explode('/', $action);
+                $pieces = [];
+                foreach ($section as $k) {
+                    $pieces[] = ucfirst(str_replace(array('.', '_', '-'), '', $k));
+                }
+                // This is an older construct, introduced in MODX 2.2. It's better to be explicit and return the name of your class in the processor
+                $className = 'mod' . implode('', $pieces) . 'Processor';
+            }
 
-            if ($isClass) {
-                /* ensure processor file is only included once if run multiple times in a request */
-                if (!array_key_exists($processorFile,$this->processors)) {
-                    $className = include_once $processorFile;
-                    /* handle already included core classes */
-                    if ($className == 1) {
-                        $s = explode('/',$action);
-                        $o = array();
-                        foreach ($s as $k) {
-                            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
-                        }
-                        $className = 'mod'.implode('',$o).'Processor';
-                    }
-                    $this->processors[$processorFile] = $className;
-                } else {
-                    $className = $this->processors[$processorFile];
-                }
-                if (!empty($className)) {
-                    $processor = call_user_func_array(array($className,'getInstance'),array(&$this,$className,$scriptProperties));
-                }
-            }
-            if (empty($processor)) {
-                $processor = new DeprecatedProcessor($this, $scriptProperties);
-            }
+            $this->processors[$processorFile] = $className;
+        }
+        if (class_exists($className) && is_subclass_of($className, Processor::class, true)) {
+            $processor = call_user_func_array([$className, 'getInstance'], [&$this, $className, $scriptProperties]);
             $processor->setPath($processorFile);
-            $response = $processor->run();
-        } else {
-            $this->log(modX::LOG_LEVEL_ERROR, "Processor {$processorFile} does not exist; " . print_r($options, true));
+            return $processor->run();
         }
-        return $response;
+
+        $this->log(modX::LOG_LEVEL_ERROR, "Unable to load processor for action \"{$action}\". Its file in \"{$processorFile}\" exists, but does not return the processor class name and the class name could not be automatically inferred from the action.");
+        return '';
     }
 
     /**
