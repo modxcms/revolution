@@ -746,8 +746,8 @@ $_lang['setting_syncsite_default'] = 'Empty Cache default';
 $_lang['setting_syncsite_default_desc'] = 'Pilih \'Ya\' untuk mengosongkan cache setelah Anda menyimpan sumber daya secara standar.';
 $_lang['setting_syncsite_default_err'] = 'Tolong nyatakan apakah Anda ingin mengosongkan cache setelah menyimpan sumber daya secara standar.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Tampilkan Deskripsi di Menu Atas';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from top menu items in the manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
 $_lang['setting_tree_default_sort_desc'] = 'The default sort field for the Resource tree when loading the manager.';
@@ -841,12 +841,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
