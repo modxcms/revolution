@@ -751,8 +751,8 @@ $_lang['setting_syncsite_default'] = 'إفراغ محتوى ذاكرة التخ�
 $_lang['setting_syncsite_default_desc'] = 'اختر \'نعم\' لإفراغ ذاكرة التخزين المؤقت بعد حفظ مصدر كافتراضي.';
 $_lang['setting_syncsite_default_err'] = 'يرجى ذكر إذا كنت تريد أو لا تريد إفراغ ذاكرة التخزين الؤقت بعد حفظ مصدر كافتراضي.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'إظهار الوصف في القائمة العليا';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'إذا كانت مضبوطة إلى ’لا’، سيقوم مودكس بإخفاء الوصف من عناصر القائمة العليا في المدير.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'حقل الفرز الافتراضي لشجرة المصدر';
 $_lang['setting_tree_default_sort_desc'] = 'حقل الفرز الافتراضي لشجرة المصدر عند تحميل المدير.';
@@ -846,12 +846,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
