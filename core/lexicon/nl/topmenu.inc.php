@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards_desc'] = 'Beheer de dashboard configuratie';
 $_lang['edit_menu'] = 'Menu\'s';
-$_lang['edit_menu_desc'] = 'Beheer de bovenste menu\'s';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Fout Log';
 $_lang['eventlog_viewer_desc'] = 'Bekijk het error.log van MODX';
 $_lang['export_site'] = 'Exporteer Statische HTML';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Systeem Instellingen';
 $_lang['system_settings_desc'] = 'Configureer alle systeem instellingen';
 $_lang['tools'] = 'Gereedschappen';
 $_lang['tools_desc'] = 'Hulpprogramma\'s om de site bij te houden';
-$_lang['topnav'] = 'Top navigatie';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Gebruiker';
 $_lang['usernav'] = 'Gebruikersnavigatie';
