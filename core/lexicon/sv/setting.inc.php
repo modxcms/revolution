@@ -746,8 +746,8 @@ $_lang['setting_syncsite_default'] = 'Töm cachen som standard';
 $_lang['setting_syncsite_default_desc'] = 'Sätt till "Ja" för att tömma cachen efter att du sparat en resurs som standard.';
 $_lang['setting_syncsite_default_err'] = 'Ange om du vill tömma cachen efter att ha sparat en resurs som standard eller inte.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Visa beskrivningar i toppmenyn';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Om denna sätts till "Nej" kommer MODX att dölja beskrivningarna för menyposter i hanterarens toppmeny.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Standardfält för sortering av resursträdet';
 $_lang['setting_tree_default_sort_desc'] = 'Det resursfält som används som standard för sortering av resursträdet när hanteraren laddas.';
@@ -841,12 +841,6 @@ $_lang['setting_error_log_filename_desc'] = 'Anpassa filnamnet för MODX fellogg
 
 $_lang['setting_error_log_filepath'] = 'Felloggens sökväg';
 $_lang['setting_error_log_filepath_desc'] = 'Du kan ange en absolut sökväg till en anpassad plats för felloggen. Platshållare som {cache_path} kan användas.';
-
-$_lang['setting_passwordless_activated'] = 'Aktivera inloggning utan lösenord';
-$_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan användare logga in genom att ange sin e-postadress och därefter få en engångs inloggningslänk, istället för att ange användarnamn och lösenord.';
-
-$_lang['setting_passwordless_expiration'] = 'Utgångstid för lösenordsfri inloggning';
-$_lang['setting_passwordless_expiration_desc'] = 'Anger i sekunder hur länge en engångs inloggningslänk gäller.';
 
 $_lang['setting_passwordless_activated'] = 'Aktivera inloggning utan lösenord';
 $_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan användare logga in genom att ange sin e-postadress och därefter få en engångs inloggningslänk, istället för att ange användarnamn och lösenord.';
