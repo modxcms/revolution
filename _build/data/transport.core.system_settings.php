@@ -514,15 +514,6 @@ $settings['failed_login_attempts']->fromArray(array (
   'area' => 'authentication',
   'editedon' => null,
 ), '', true, true);
-$settings['fe_editor_lang']= $xpdo->newObject(modSystemSetting::class);
-$settings['fe_editor_lang']->fromArray(array (
-  'key' => 'fe_editor_lang',
-  'value' => 'en',
-  'xtype' => 'modx-combo-language',
-  'namespace' => 'core',
-  'area' => 'language',
-  'editedon' => null,
-), '', true, true);
 $settings['feed_modx_news']= $xpdo->newObject(modSystemSetting::class);
 $settings['feed_modx_news']->fromArray(array (
   'key' => 'feed_modx_news',
