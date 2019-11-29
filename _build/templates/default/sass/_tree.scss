@@ -164,48 +164,6 @@
   width: 12px;
 }
 
-/* icons for the various tree elements */
-.tree-context:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-globe);
-}
-
-.x-tree-node-expanded .tree-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder-open);
-}
-
-.x-tree-node-collapsed .tree-folder:before,
-.x-tree-node .tree-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder);
-}
-
-.x-tree-node .locked-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-lock);
-}
-
-.tree-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file);
-}
-
-.tree-static-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-alt);
-}
-
-.tree-weblink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-link);
-}
-
-.tree-symlink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-copy);
-}
-
 /* tree states */
 .x-tree-node-el {
   color: $treeColor;
@@ -427,7 +385,6 @@
     }
   }
 }
-
 
 .x-tree-elbow,
 .x-tree-elbow-end {
@@ -807,6 +764,49 @@
 .x-tree-node-loading a span {
   color: $tundora;
   font-style: italic;
+}
+
+/* icons for the various tree elements */
+.tree-context:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-globe);
+}
+
+.tree-resource:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-file);
+}
+
+.tree-static-resource:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-file-alt);
+}
+
+.tree-weblink:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-link);
+}
+
+.tree-symlink:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-copy);
+}
+
+.parent-resource:before,
+.icon-folder:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-folder);
+}
+
+.x-tree-node-expanded .parent-resource:before,
+.x-tree-node-expanded .icon-folder:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-folder-open);
+}
+
+.locked-resource:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-lock) !important;
 }
 
 .ext-ie .x-tree-node-el input {

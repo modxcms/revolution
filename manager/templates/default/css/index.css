@@ -13331,8 +13331,7 @@ readers do not read off random characters that represent icons */
 .x-date-mp-ybtn a.x-date-mp-prev:before,
 .x-date-mp-ybtn a.x-date-mp-next:before, .x-tab-scroller-left:before,
 .x-tab-scroller-right:before, #modx-footer .modx-subnav li.sub:after, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before, .tree-context:before, .x-tree-node-expanded .tree-folder:before, .x-tree-node-collapsed .tree-folder:before,
-.x-tree-node .tree-folder:before, .x-tree-node .locked-resource:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .icon-rss:before, .icon-cal:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before, .icon-rss:before, .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
 .icon-vcs:before, .icon-db:before,
@@ -13390,7 +13389,9 @@ readers do not read off random characters that represent icons */
 .icon-coffeescript:before, .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
-.icon-styl:before, .icon-lock, .x-tree-arrows .x-tree-elbow-plus:before,
+.icon-styl:before, .icon-lock, .tree-context:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .parent-resource:before,
+.icon-folder:before, .x-tree-node-expanded .parent-resource:before,
+.x-tree-node-expanded .icon-folder:before, .locked-resource:before, .x-tree-arrows .x-tree-elbow-plus:before,
 .x-tree-arrows .x-tree-elbow-end-plus:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, #modx-resource-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -19879,32 +19880,6 @@ ul.x-tab-strip-bottom {
   padding-left: 4px;
   width: 12px; }
 
-/* icons for the various tree elements */
-.tree-context:before {
-  content: "\f0ac"; }
-
-.x-tree-node-expanded .tree-folder:before {
-  content: "\f07c"; }
-
-.x-tree-node-collapsed .tree-folder:before,
-.x-tree-node .tree-folder:before {
-  content: "\f07b"; }
-
-.x-tree-node .locked-resource:before {
-  content: "\f023"; }
-
-.tree-resource:before {
-  content: "\f15b"; }
-
-.tree-static-resource:before {
-  content: "\f15c"; }
-
-.tree-weblink:before {
-  content: "\f0c1"; }
-
-.tree-symlink:before {
-  content: "\f0c5"; }
-
 /* tree states */
 .x-tree-node-el {
   color: #515151;
@@ -20386,6 +20361,33 @@ ul.x-tab-strip-bottom {
 .x-tree-node-loading a span {
   color: #444444;
   font-style: italic; }
+
+/* icons for the various tree elements */
+.tree-context:before {
+  content: "\f0ac"; }
+
+.tree-resource:before {
+  content: "\f15b"; }
+
+.tree-static-resource:before {
+  content: "\f15c"; }
+
+.tree-weblink:before {
+  content: "\f0c1"; }
+
+.tree-symlink:before {
+  content: "\f0c5"; }
+
+.parent-resource:before,
+.icon-folder:before {
+  content: "\f07b"; }
+
+.x-tree-node-expanded .parent-resource:before,
+.x-tree-node-expanded .icon-folder:before {
+  content: "\f07c"; }
+
+.locked-resource:before {
+  content: "\f023" !important; }
 
 .ext-ie .x-tree-node-el input {
   height: 15px;
