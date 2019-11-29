@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parameter';
 $_lang['parameters_desc'] = 'Beliebige Request-Parameter, die an die Ergebnis-URL angehängt werden sollen, wenn dieser Menüpunkt angeklickt wird (z.B.: &expire=1).';
 $_lang['permissions'] = 'Zugriffsberechtigung';
 $_lang['permissions_desc'] = 'Ein Zugangsschlüssel, der abgefragt werden soll, wenn dieser Menüpunkt aufgerufen wird.';
-$_lang['topmenu'] = 'Hauptmenü';
-$_lang['topmenu_desc'] = 'Dies erlaubt Ihnen, Aktionen mit Elementen des Hauptmenüs des MODX-Managers zu verknüpfen. Platzieren Sie die Menüpunkte einfach dort, wo Sie sie gern hätten.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
