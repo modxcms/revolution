@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = '工作台';
 $_lang['dashboards'] = '工作台';
 $_lang['dashboards_desc'] = '管理自定义登录工作台';
 $_lang['edit_menu'] = '菜单';
-$_lang['edit_menu_desc'] = '管理顶级管理器菜单';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Error Log';
 $_lang['eventlog_viewer_desc'] = '查看MODX错误日志。';
 $_lang['export_site'] = '导出静态 HTML';
@@ -120,7 +120,7 @@ $_lang['system_settings'] = 'System Settings';
 $_lang['system_settings_desc'] = '配置所有系统设置';
 $_lang['tools'] = '工具';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = '用户';
 $_lang['usernav'] = 'User Navigation';
