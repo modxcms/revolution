@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parametrit';
 $_lang['parameters_desc'] = 'Any request parameters you want appended to the result URL when clicking this menu. (Ex: &expire=1)';
 $_lang['permissions'] = 'Käyttöoikeus';
 $_lang['permissions_desc'] = 'A permission key required to load this menu item.';
-$_lang['topmenu'] = 'Päävalikko';
-$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the top menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
