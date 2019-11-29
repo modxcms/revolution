@@ -7,7 +7,14 @@ use MODX\Revolution\modSystemSetting;
 
 $settings = [
     'compress_js_max_files',
-    'manager_js_zlib_output_compression'
+    'manager_js_zlib_output_compression',
+    'editor_css_path',
+    'editor_css_selectors',
+    'fe_editor_lang',
+    'udperms_allowroot',
+    'webpwdreminder_message',
+    'allow_tv_eval',
+    'upload_flash',
 ];
 
 $messageTemplate = '<p class="%s">%s</p>';
