@@ -109,6 +109,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Update the layout for editing users and your own account [#13988]
 - Rename "Top Menu" to "Main Menu" now that it is no longer at the top [#14852]
 - Change styling of resources in the tree: unpublished resources are now dimmed, with italics indicating menu visibility [#13969]
+- Add name of edited media source, form customisation profile, dashboard, and dashboard widget to the title in the browser [#14830]
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================

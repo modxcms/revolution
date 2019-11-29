@@ -137,7 +137,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('dashboards');
+        return $this->modx->lexicon('dashboards').': '.$this->dashboardArray['name'];
     }
 
     /**

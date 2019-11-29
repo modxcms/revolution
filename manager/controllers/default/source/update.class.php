@@ -159,7 +159,7 @@ class SourceUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('source_update');
+        return $this->modx->lexicon('source').': '.$this->sourceArray['name'];
     }
 
     /**
