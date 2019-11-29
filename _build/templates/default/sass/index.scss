@@ -1487,19 +1487,28 @@ iframe[classname="x-hidden"] {
         font: normal 18px $bodyfonts;
         text-decoration: none;
 
-        &.not_published {
-          font-style: $unpubText;
+        &.menu_hidden {
+          font-style: $hiddenText;
 
           &:hover {
             color: darken($colorSplash, 10%);
           }
         }
 
-        &.menu_hidden {
-          color: $hidden;
+        &.not_published {
+          color: $unpublished;
 
           &:hover {
-            color: darken($colorSplash, 10%) !important;
+            color: darken($colorSplash, 10%);
+          }
+        }
+
+        &.deleted {
+          color: $delTextColor;
+          text-decoration: $delTextDeco;
+
+          &:hover {
+            color: darken($colorSplash, 10%);
           }
         }
       }

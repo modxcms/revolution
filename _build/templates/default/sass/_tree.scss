@@ -260,6 +260,7 @@
 
   i.icon,
   i.icon-large {
+    color: $unpublished;
     font-style: normal;
   }
 }
@@ -267,12 +268,7 @@
 .hidemenu,
 .hidemenu a span {
   color: $hidden;
-  font-style: normal;
-
-  &.unpublished,
-  &.unpublished a span {
-    font-style: $unpubText;
-  }
+  font-style: $hiddenText;
 
   i.icon,
   i.icon-large {
@@ -286,7 +282,8 @@
 
   i.icon,
   i.icon-large {
-    color: $delTextColor; // font-style: normal;
+    color: $delTextColor;
+    font-style: normal;
   }
 
   a span {

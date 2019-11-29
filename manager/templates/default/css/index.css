@@ -19934,35 +19934,32 @@ ul.x-tab-strip-bottom {
 
 .unpublished,
 .unpublished a span {
-  color: #999999;
-  font-style: italic; }
+  color: #b3b2b2 !important;
+  font-style: normal; }
   .unpublished i.icon,
   .unpublished i.icon-large,
   .unpublished a span i.icon,
   .unpublished a span i.icon-large {
+    color: #b3b2b2 !important;
     font-style: normal; }
 
 .hidemenu,
 .hidemenu a span {
-  color: #b3b2b2 !important;
-  font-style: normal; }
-  .hidemenu.unpublished,
-  .hidemenu.unpublished a span,
-  .hidemenu a span.unpublished,
-  .hidemenu a span.unpublished a span {
-    font-style: italic; }
+  color: #999999;
+  font-style: italic; }
   .hidemenu i.icon,
   .hidemenu i.icon-large,
   .hidemenu a span i.icon,
   .hidemenu a span i.icon-large {
-    color: #b3b2b2 !important;
+    color: #999999;
     font-style: normal; }
 
 .deleted {
   color: rgba(175, 90, 98, 0.5) !important; }
   .deleted i.icon,
   .deleted i.icon-large {
-    color: rgba(175, 90, 98, 0.5) !important; }
+    color: rgba(175, 90, 98, 0.5) !important;
+    font-style: normal; }
   .deleted a span {
     color: rgba(175, 90, 98, 0.5) !important;
     text-decoration: line-through;
@@ -22661,14 +22658,19 @@ iframe[classname="x-hidden"] {
     #modx-resource-breadcrumbs ul li a {
       font: normal 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       text-decoration: none; }
-      #modx-resource-breadcrumbs ul li a.not_published {
+      #modx-resource-breadcrumbs ul li a.menu_hidden {
         font-style: italic; }
+        #modx-resource-breadcrumbs ul li a.menu_hidden:hover {
+          color: #162a42; }
+      #modx-resource-breadcrumbs ul li a.not_published {
+        color: #b3b2b2 !important; }
         #modx-resource-breadcrumbs ul li a.not_published:hover {
           color: #162a42; }
-      #modx-resource-breadcrumbs ul li a.menu_hidden {
-        color: #b3b2b2 !important; }
-        #modx-resource-breadcrumbs ul li a.menu_hidden:hover {
-          color: #162a42 !important; }
+      #modx-resource-breadcrumbs ul li a.deleted {
+        color: rgba(175, 90, 98, 0.5) !important;
+        text-decoration: line-through; }
+        #modx-resource-breadcrumbs ul li a.deleted:hover {
+          color: #162a42; }
     #modx-resource-breadcrumbs ul li:after {
       content: "\f054";
       padding: 0 10px;
