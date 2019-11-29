@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards_desc'] = 'Gestire le impostazioni delle dashboard.';
 $_lang['edit_menu'] = 'Menus';
-$_lang['edit_menu_desc'] = 'Gestione delle Azioni e della struttura del Top Menu.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Log Errori';
 $_lang['eventlog_viewer_desc'] = 'Mostra error.log di MODX.';
 $_lang['export_site'] = 'Esportazione HTML Statico';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Impostazioni Sistema';
 $_lang['system_settings_desc'] = 'Modifica o crea le varie impostazioni di sistema.';
 $_lang['tools'] = 'Strumenti';
 $_lang['tools_desc'] = 'Utilities per mantenere il tuo sito in ordine';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Utente';
 $_lang['usernav'] = 'User Navigation';
