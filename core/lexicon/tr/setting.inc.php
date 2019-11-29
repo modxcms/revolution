@@ -748,8 +748,8 @@ $_lang['setting_syncsite_default'] = 'Varsayılan Boş Önbellek';
 $_lang['setting_syncsite_default_desc'] = 'Bir kaynağı varsayılan olarak kaydettikten sonra önbelleği boşaltmak için \'Evet\' seçeneğini belirleyin.';
 $_lang['setting_syncsite_default_err'] = 'Bir kaynağı varsayılan olarak kaydettikten sonra lütfen önbelleği boşaltmak isteyip istemediğinizi belirtin.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Açıklamaları Üst Menüde Göster';
-$_lang['setting_topmenu_show_descriptions_desc'] = '\'Hayır\' olarak ayarlanırsa, MODX yöneticideki en üstteki menü öğelerindeki açıklamaları gizler.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Kaynak Ağacı Varsayılan Sıralama Alanı';
 $_lang['setting_tree_default_sort_desc'] = 'Yöneticiyi yüklerken Kaynak ağacı için varsayılan sıralama alanı.';
@@ -843,12 +843,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
