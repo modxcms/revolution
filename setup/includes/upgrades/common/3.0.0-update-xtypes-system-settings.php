@@ -3,6 +3,8 @@
  * Update the xtype's for system settings
  */
 
+use MODX\Revolution\modSystemSetting;
+
 $xtypeSettingsMap = [
     [
         'key' => 'auto_check_pkg_updates_cache_expire',
