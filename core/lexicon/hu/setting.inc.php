@@ -746,8 +746,8 @@ $_lang['setting_syncsite_default'] = 'Gyorsítótár ürítésének alapértéke
 $_lang['setting_syncsite_default_desc'] = 'Válassza az \'igen\'-t a gyorsítótár alapértelmezett ürítéséhez az erőforrás mentése után.';
 $_lang['setting_syncsite_default_err'] = 'Kérjük, adja meg, hogy akarja-e a gyorsítótár ürítését alapértelmezetten egy erőforrás mentése után.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Top Menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from top menu items in the manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
 $_lang['setting_tree_default_sort_desc'] = 'The default sort field for the Resource tree when loading the manager.';
@@ -841,12 +841,6 @@ $_lang['setting_error_log_filename_desc'] = 'Állítsa be a MODX hibanapló áll
 
 $_lang['setting_error_log_filepath'] = 'Hibanapló állomány útvonala';
 $_lang['setting_error_log_filepath_desc'] = 'Megadhatja a saját hibanapló helyének teljes elérési útját. Használhat helyettesítőket, mint {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
-$_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';
-
-$_lang['setting_passwordless_expiration'] = 'Jelszó nélküli bejelentkezés lejárata';
-$_lang['setting_passwordless_expiration_desc'] = 'Hány másodpercig érvényes egy egyszeri bejelentkezési hivatkozás.';
 
 $_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
 $_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';
