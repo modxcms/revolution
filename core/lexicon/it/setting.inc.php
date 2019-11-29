@@ -746,8 +746,8 @@ $_lang['setting_syncsite_default'] = 'Svuota cache di default';
 $_lang['setting_syncsite_default_desc'] = 'Seleziona "yes" per svuotare la cache dopo il salvataggio di una risorsa in modo predefinito.';
 $_lang['setting_syncsite_default_err'] = 'Indica se desideri o no svuotare la cache dopo aver salvato una risorsa per impostazione predefinita.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Mostra Descrizioni Top Menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Se impostato su \'NO\', MODX nasconderà le descrizioni dagli oggetti del top menu del manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Campo per Ordinamento Predefinito Albero Risorse';
 $_lang['setting_tree_default_sort_desc'] = 'Quale campo della Risorsa usare per l\'ordinamento predefinito dell\'albero delle risorse durante il caricamento del manager. Normalmente menuindex';
@@ -841,12 +841,6 @@ $_lang['setting_error_log_filename_desc'] = 'Personalizza il nome del file del f
 
 $_lang['setting_error_log_filepath'] = 'Percorso log degli errori';
 $_lang['setting_error_log_filepath_desc'] = 'Facoltativo, imposta un percorso assoluto del registro di errore personalizzato. È possibile utilizzare placehodlers come {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
