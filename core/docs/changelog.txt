@@ -110,6 +110,7 @@ MODX Revolution 3.0.0-beta1  (TBD)
 - Rename "Top Menu" to "Main Menu" now that it is no longer at the top [#14852]
 - Change styling of resources in the tree: unpublished resources are now dimmed, with italics indicating menu visibility [#13969]
 - Add name of edited media source, form customisation profile, dashboard, and dashboard widget to the title in the browser [#14830]
+- Add a gear icon to all grids by default to access the context menu [#14806]
 
 MODX Revolution 2.7.2-pl (TBD)
 ====================================

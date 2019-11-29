@@ -21903,6 +21903,19 @@ a.x-grid-link:hover,
 a.x-grid-link:focus {
   text-decoration: underline; }
 
+.x-grid-buttons {
+  text-align: center; }
+
+.x-grid-buttons li {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.1em;
+  line-height: .7;
+  margin-right: 10px; }
+
+.x-grid-buttons li:last-child {
+  margin-right: 0; }
+
 /* panel stylings */
 .modx-page-header,
 .modx-page-header div {

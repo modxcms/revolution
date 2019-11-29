@@ -21,6 +21,9 @@ MODx.grid.Grid = function(config) {
         ,preventSaveRefresh: true
         ,showPerPage: true
         ,stateful: false
+        ,showActionsColumn: true
+        ,actionsColumnWidth: 50
+        ,disableContextMenuAction: false
         ,menuConfig: {
             defaultAlign: 'tl-b?'
             ,enableScrolling: false
@@ -91,6 +94,23 @@ MODx.grid.Grid = function(config) {
             if (!itm.scope) { itm.scope = this; }
         }
     }
+
+    if (config.showActionsColumn) {
+        if (config.columns && Array.isArray(config.columns)) {
+            config.columns.push({
+                width: config.actionsColumnWidth || 50
+                ,renderer: this.actionsColumnRenderer.bind(this)
+            });
+        }
+
+        if (config.cm && config.cm.columns && Array.isArray(config.cm.columns)) {
+            config.cm.columns.push({
+                width: config.actionsColumnWidth || 50
+                ,renderer: this.actionsColumnRenderer.bind(this)
+            });
+        }
+    }
+
     MODx.grid.Grid.superclass.constructor.call(this,config);
     this._loadMenu(config);
     this.addEvents('beforeRemoveRow','afterRemoveRow','afterAutoSave');
@@ -574,6 +594,63 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 
         return plugins[index];
     }
+
+    ,_getActionsColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="actions !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="actions">'
+            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    }
+
+    ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        var actions = this.getActions.apply(this, [record, rowIndex, colIndex, store]);
+        if (this.config.disableContextMenuAction !== true) {
+            actions.push({
+                text: _('context_menu'),
+                action: 'contextMenu',
+                icon: 'gear'
+            });
+        }
+
+        return this._getActionsColumnTpl().apply({
+            actions: actions
+        });
+    }
+
+    ,getActions: function(record, rowIndex, colIndex, store) {
+        return [];
+    }
+
+    ,onClick: function(e) {
+        var target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) return;
+        if (!target.dataset.action) return;
+
+        var actionHandler = 'action' + target.dataset.action.charAt(0).toUpperCase() + target.dataset.action.slice(1);
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
+            }
+        }
+
+        var record = this.getSelectionModel().getSelected();
+        var recordIndex = this.store.indexOf(record);
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
+    },
+
+    actionContextMenu: function(record, recordIndex, e) {
+        this._showMenu(this, recordIndex, e);
+    }
 });
 
 /* local grid */
@@ -611,6 +688,9 @@ MODx.grid.LocalGrid = function(config) {
         ,enableColumnMove: true
         ,header: false
         ,cls: 'modx-grid'
+        ,showActionsColumn: true
+        ,actionsColumnWidth: 50
+        ,disableContextMenuAction: false
         ,viewConfig: {
             forceFit: true
             ,enableRowBody: true
@@ -625,6 +705,17 @@ MODx.grid.LocalGrid = function(config) {
     this.menu = new Ext.menu.Menu(config.menuConfig);
     this.config = config;
     this._loadColumnModel();
+
+    if (config.showActionsColumn && config.columns && Array.isArray(config.columns)) {
+        config.columns.push({
+            width: config.actionsColumnWidth || 50
+            ,renderer: {
+                fn: this.actionsColumnRenderer,
+                scope: this
+            }
+        });
+    }
+
     MODx.grid.LocalGrid.superclass.constructor.call(this,config);
     this.addEvents({
         beforeRemoveRow: true
@@ -909,6 +1000,64 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             z = z+'*';
         }
         return z;
+    }
+
+    ,_getActionsColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="actions !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="actions">'
+            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    }
+
+    ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        var actions = this.getActions.apply(this, arguments);
+
+        if (this.config.disableContextMenuAction !== true) {
+            actions.push({
+                text: _('context_menu'),
+                action: 'contextMenu',
+                icon: 'gear'
+            });
+        }
+
+        return this._getActionsColumnTpl().apply({
+            actions: actions
+        });
+    }
+
+    ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
+        return [];
+    }
+
+    ,onClick: function(e) {
+        var target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) return;
+        if (!target.dataset.action) return;
+
+        var actionHandler = 'action' + target.dataset.action.charAt(0).toUpperCase() + target.dataset.action.slice(1);
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
+            }
+        }
+
+        var record = this.getSelectionModel().getSelected();
+        var recordIndex = this.store.indexOf(record);
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
+    },
+
+    actionContextMenu: function(record, recordIndex, e) {
+        this._showMenu(this, recordIndex, e);
     }
 });
 Ext.reg('grid-local',MODx.grid.LocalGrid);
