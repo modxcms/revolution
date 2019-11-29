@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Paramètres';
 $_lang['parameters_desc'] = 'Tous les paramètres que vous souhaitez ajouter à l\'URL quand le lien est cliqué (ex. &expire=1)';
 $_lang['permissions'] = 'Permission';
 $_lang['permissions_desc'] = 'Clef de permission requise pour voir cet item de menu.';
-$_lang['topmenu'] = 'Barre de menu';
-$_lang['topmenu_desc'] = 'Ceci vous permet d\'associer des actions au menu Navigation de MODX. Placez simplement les actions où vous les désirez.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
