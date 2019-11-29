@@ -746,8 +746,8 @@ $_lang['setting_syncsite_default'] = 'खाली कैश डिफ़ॉल�
 $_lang['setting_syncsite_default_desc'] = '\'हाँ\' आप डिफ़ॉल्ट रूप से एक संसाधन को सहेजने के बाद कैश को खाली करने के लिए का चयन करें।';
 $_lang['setting_syncsite_default_err'] = 'आप डिफ़ॉल्ट रूप से एक संसाधन की बचत के बाद कैश खाली करना चाहते हैं या नहीं, बताएं।';
 
-$_lang['setting_topmenu_show_descriptions'] = 'शीर्ष मेनू में विवरण दिखाएँ';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'यदि सेट करने के लिए \'नहीं\', MODX विवरण के manager के शीर्ष मेनू आइटम्स से छिपा होगा।';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'संसाधन ट्री डिफ़ॉल्ट सॉर्ट फ़ील्ड';
 $_lang['setting_tree_default_sort_desc'] = 'Resource tree के लिए डिफ़ॉल्ट सॉर्ट क्षेत्र manager लोड हो रहा है।';
@@ -841,12 +841,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
