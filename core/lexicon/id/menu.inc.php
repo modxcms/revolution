@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parameter';
 $_lang['parameters_desc'] = 'Parameter permintaan apapun Anda ingin ditambahkan ke URL hasil ketika mengklik menu ini. (Ex: & berakhir = 1)';
 $_lang['permissions'] = 'Izin';
 $_lang['permissions_desc'] = 'Kunci izin yang diperlukan untuk me-load item menu ini.';
-$_lang['topmenu'] = 'Top Menu';
-$_lang['topmenu_desc'] = 'Hal ini memungkinkan Anda untuk mengasosiasikan tindakan dengan menu item dalam menu bar bagian atas dari manajer MODX. Masukkan menu di mana Anda ingin mereka dalam posisi mereka masing-masing.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
