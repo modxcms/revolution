@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parameters';
 $_lang['parameters_desc'] = 'Request parameters die je aan het einde van de URL wilt toevoegen wanneer op dit menu item wordt geklikt. (voorbeeld: &expire=1)';
 $_lang['permissions'] = 'Permissie';
 $_lang['permissions_desc'] = 'Een permissie die nodig is om dit menu item te laden.';
-$_lang['topmenu'] = 'Top Menu';
-$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the top menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
