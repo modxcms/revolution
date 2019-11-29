@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'แดชบอร์ด';
 $_lang['dashboards'] = 'แดชบอร์ด';
 $_lang['dashboards_desc'] = 'จัดการการกำหนดค่าของแดชบอร์ดทั้งหมด';
 $_lang['edit_menu'] = 'Menus';
-$_lang['edit_menu_desc'] = 'จัดการแอ็กชันและโครงสร้างของท็อปเมนู';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'บันทึกข้อผิดพลาด';
 $_lang['eventlog_viewer_desc'] = 'ดูไฟล์บันทึกข้อผิดพลาดของ MODX';
 $_lang['export_site'] = 'ส่งออกสแตติก HTML';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'ตั้งค่าระบบ';
 $_lang['system_settings_desc'] = 'เปลี่ยนหรือสร้างการตั้งค่าระบบที่ใช้ทั่วเว็บไซต์';
 $_lang['tools'] = 'เครื่องมือ';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'ผู้ใช้';
 $_lang['usernav'] = 'User Navigation';
