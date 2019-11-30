@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Action';
+$_lang['action'] = 'Akcia';
 $_lang['action_confirm_remove'] = 'Voulez-vous vraiment supprimer cette action? Cela pourrait rendre votre gestionnaire MODX partiellement ou totalement inutilisable.';
 $_lang['action_create'] = 'Créer une action';
 $_lang['action_create_here'] = 'Créer une action ici';
