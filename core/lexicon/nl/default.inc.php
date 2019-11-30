@@ -535,6 +535,7 @@ $_lang['recently_updated'] = 'Onlangs bijgewerkt';
 $_lang['newest'] = 'Nieuwste';
 $_lang['oldest'] = 'Oudste';
 $_lang['constraints'] = 'Beperkingen';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Januari';
 $_lang['february'] = 'Februari';
