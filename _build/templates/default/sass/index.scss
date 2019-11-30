@@ -536,6 +536,18 @@ a.x-grid-link:hover,
 a.x-grid-link:focus {
   text-decoration: underline;
 }
+.x-editable-column {
+  cursor: pointer;
+  &:hover, &:focus {
+    color: $colorSplash;
+    > div::after {
+      @include awesome-font;
+      content: fa-content($fa-var-pen);
+      margin-left: 0.5em;
+      color: $colorSplash;
+    }
+  }
+}
 
 .x-grid-buttons {
   text-align: center;

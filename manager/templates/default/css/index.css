@@ -21907,6 +21907,23 @@ a.x-grid-link:hover,
 a.x-grid-link:focus {
   text-decoration: underline; }
 
+.x-editable-column {
+  cursor: pointer; }
+  .x-editable-column:hover, .x-editable-column:focus {
+    color: #234368; }
+    .x-editable-column:hover > div::after, .x-editable-column:focus > div::after {
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Brands';
+      font-weight: 900;
+      content: "\f304";
+      margin-left: 0.5em;
+      color: #234368; }
+
 .x-grid-buttons {
   text-align: center; }
 

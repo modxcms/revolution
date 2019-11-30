@@ -307,13 +307,13 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         var f;
         if (r.xtype == 'combo-boolean' || r.xtype == 'modx-combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'datefield') {
             f = Ext.util.Format.dateRenderer(MODx.config.manager_date_format);
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'text-password' || r.xtype == 'modx-text-password') {
             f = MODx.grid.Grid.prototype.rendPassword;
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,10) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
@@ -327,9 +327,9 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ed.store.isLoaded = true;
             }
             f = Ext.util.Format.comboRenderer(ed.field,v);
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         }
-        return v;
+        return this.renderEditableColumn()(v,md,rec,ri,ci,s,g);
     }
 
     /**
