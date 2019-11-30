@@ -72,7 +72,7 @@ $_lang['widget_type'] = 'Tipo di Widget';
 $_lang['widget_type_desc'] = 'Indica il Tipo di Widget. "Snippet" widgets, sono Snippets che vengono eseguiti e restituiscono propri output. "HTML" widgets, sono solo puro HTML. "File" widgets, sono caricati direttamente da files, restituoiscono propri output oppure il nome della classe da caricare modDashboardWidgetClass-extended. "Inline PHP" widgets, sono widget con puro PHP nel contenuto, come gli Snippet.';
 $_lang['widget_unplace'] = 'Rimuovere Widget dalla Dashboard';
 $_lang['widget_update'] = 'Aggiorna Widget';
-$_lang['widgets'] = 'Widgets';
+$_lang['widgets'] = 'Widget';
 $_lang['widgets.intro_msg'] = 'Di seguito e\' riportato un elenco di tutti i widget installati.';
 
 $_lang['w_configcheck'] = 'Controllo Configurazione';
