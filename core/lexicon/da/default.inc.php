@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Nyligt opdaterede';
 $_lang['newest'] = 'Nyeste';
 $_lang['oldest'] = 'Ældste';
 $_lang['constraints'] = 'Constraints';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'januar';
 $_lang['february'] = 'februar';
