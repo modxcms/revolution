@@ -8,8 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
+
+use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\Processors\ModelProcessor;
 
 /**
  * A utility abstract class for defining get-based processors
@@ -18,7 +21,7 @@ namespace MODX\Revolution;
  *
  * @package MODX\Revolution
  */
-abstract class modObjectGetProcessor extends modObjectProcessor
+abstract class GetProcessor extends ModelProcessor
 {
     /** @var boolean $checkViewPermission If set to true, will check the view permission on modAccessibleObjects */
     public $checkViewPermission = true;

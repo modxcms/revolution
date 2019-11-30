@@ -13,13 +13,13 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\AccessNamespace;
 use MODX\Revolution\modAccessNamespace;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\AccessNamespace
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modAccessNamespace::class;
     public $objectType = 'access_namespace';

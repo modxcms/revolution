@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\System;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Output data to a file for downloading
  * @package MODX\Revolution\Processors\System
  */
-class DownloadOutput extends modProcessor
+class DownloadOutput extends Processor
 {
     /**
      * @return array|string

@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\Plugin\Event;
 
 
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\modPluginEvent;
 
 /**
@@ -22,7 +22,7 @@ use MODX\Revolution\modPluginEvent;
  *
  * @package MODX\Revolution\Processors\Element\Plugin\Event
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modPluginEvent::class;
     public $objectType = 'plugin_event';

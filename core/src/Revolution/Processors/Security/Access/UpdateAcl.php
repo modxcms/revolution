@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Access;
 
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Update an ACL.
@@ -23,7 +23,7 @@ use MODX\Revolution\modObjectUpdateProcessor;
  * @param string $context_key (optional) The context to assign this ACL to.
  * @package MODX\Revolution\Processors\Security\Access
  */
-class UpdateAcl extends modObjectUpdateProcessor
+class UpdateAcl extends UpdateProcessor
 {
     public $objectType = 'access';
     public $permission = 'access_permissions';

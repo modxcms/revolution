@@ -13,7 +13,7 @@ namespace MODX\Revolution\Tests\Processors\Context;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Context\Create;
 use MODX\Revolution\Processors\Context\Duplicate;
@@ -68,7 +68,7 @@ class ContextProcessorsTest extends MODxTestCase {
      */
     public function testContextCreate($ctx,$description = '') {
         if (empty($ctx)) return;
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Create::class,array(
             'key' => $ctx,
             'description' => $description,
@@ -167,7 +167,7 @@ class ContextProcessorsTest extends MODxTestCase {
     public function testContextUpdate($ctx,$description = '') {
         if (empty($ctx)) return;
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Update::class,array(
             'key' => $ctx,
             'description' => $description,
@@ -200,7 +200,7 @@ class ContextProcessorsTest extends MODxTestCase {
     public function testContextGet($ctx) {
         if (empty($ctx)) return false;
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Get::class,array(
             'key' => $ctx,
         ));
@@ -233,7 +233,7 @@ class ContextProcessorsTest extends MODxTestCase {
     public function testContextGetInvalid($ctx,$description = '') {
         if (empty($ctx)) return false;
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Get::class,array(
             'key' => $ctx,
         ));

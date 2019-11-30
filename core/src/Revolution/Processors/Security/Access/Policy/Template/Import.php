@@ -13,13 +13,13 @@ namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicyTemplate;
 use MODX\Revolution\modAccessPolicyTemplateGroup;
-use MODX\Revolution\modObjectImportProcessor;
+use MODX\Revolution\Processors\Model\ImportProcessor;
 
 /**
  * Import a policy template.
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
-class Import extends modObjectImportProcessor
+class Import extends ImportProcessor
 {
     public $classKey = modAccessPolicyTemplate::class;
     public $objectType = 'policy_template';

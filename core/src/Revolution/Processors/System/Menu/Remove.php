@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\Menu;
 
 use MODX\Revolution\modMenu;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Remove a menu item
  * @param string $text The ID of the menu item
  * @package MODX\Revolution\Processors\System\Menu
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modMenu::class;
     public $languageTopics = ['action', 'menu'];

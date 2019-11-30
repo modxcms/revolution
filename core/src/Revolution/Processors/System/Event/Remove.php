@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\Event;
 
 use MODX\Revolution\modEvent;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Remove a system even
  * @param string $name The name of the event
  * @package MODX\Revolution\Processors\System\Event
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modEvent::class;
     public $languageTopics = ['events'];

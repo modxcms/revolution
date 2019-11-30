@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\ContentType;
 
 use MODX\Revolution\modContentType;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\System\ContentType
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modContentType::class;
     public $languageTopics = ['content_type'];

@@ -12,7 +12,7 @@
 namespace MODX\Revolution\Tests\Processors\Element;
 
 
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\modPropertySet;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Element\PropertySet\Create;
@@ -61,7 +61,7 @@ class PropertySetProcessorsTest extends MODxTestCase {
      * @dataProvider providerPropertySetCreate
      */
     public function testPropertySetCreate($shouldPass,$propertySetPk) {
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Create::class,array(
             'name' => $propertySetPk,
         ));

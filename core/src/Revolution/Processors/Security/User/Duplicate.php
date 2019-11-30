@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\User;
 
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modUserProfile;
@@ -22,7 +22,7 @@ use MODX\Revolution\modUserSetting;
  * @param string $new_username The name of the new user.
  * @package MODX\Revolution\Processors\Security\User
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modUser::class;
     public $languageTopics = ['user'];

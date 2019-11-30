@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use MODX\Revolution\Transport\modTransportPackage;
 
@@ -19,7 +19,7 @@ use MODX\Revolution\Transport\modTransportPackage;
  * @param integer $id The ID of the chunk.
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class Update extends modProcessor
+class Update extends Processor
 {
     /** @var modTransportPackage $package */
     public $package;

@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element;
 
 
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 
 /**
  * Abstract class for Duplicate Element processors. To be extended for each derivative element type.
@@ -20,7 +20,7 @@ use MODX\Revolution\modObjectDuplicateProcessor;
  *
  * @package MODX\Revolution\Processors\Element
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public function cleanup()
     {

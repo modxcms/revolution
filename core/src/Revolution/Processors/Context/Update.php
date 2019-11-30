@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Context;
 
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modLexiconEntry;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Updates a context.
@@ -23,7 +23,7 @@ use MODX\Revolution\modObjectUpdateProcessor;
  *
  * @package MODX\Revolution\Processors\Context
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = 'modContext';
     public $languageTopics = ['context'];

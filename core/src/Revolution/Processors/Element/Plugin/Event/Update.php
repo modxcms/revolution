@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\Plugin\Event;
 
 
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modPluginEvent;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modPluginEvent;
  *
  * @package MODX\Revolution\Processors\Element\Plugin\Event
  */
-class Update extends modObjectProcessor
+class Update extends ModelProcessor
 {
     public $classKey = modPluginEvent::class;
     public $objectType = 'plugin_event';

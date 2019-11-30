@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\Menu;
 
 use MODX\Revolution\modMenu;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Sort menu items for a tree
  * @param string $data
  * @package MODX\Revolution\Processors\System\Menu
  */
-class Sort extends modProcessor
+class Sort extends Processor
 {
     /**
      * @return bool

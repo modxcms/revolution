@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System;
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use PDO;
 
@@ -19,7 +19,7 @@ use PDO;
  * Refreshes the site cache
  * @package MODX\Revolution\Processors\System
  */
-class ClearCache extends modProcessor
+class ClearCache extends Processor
 {
     /**
      * @return bool

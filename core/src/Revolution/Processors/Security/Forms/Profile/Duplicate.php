@@ -14,13 +14,13 @@ use MODX\Revolution\modActionDom;
 use MODX\Revolution\modFormCustomizationProfile;
 use MODX\Revolution\modFormCustomizationProfileUserGroup;
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 
 /**
  * Duplicate a FC Profile
  * @package MODX\Revolution\Processors\Security\Forms\Profile
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modFormCustomizationProfile::class;
     public $languageTopics = ['formcustomization'];

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Registry\modFileRegister;
 use MODX\Revolution\Registry\modRegistry;
 
@@ -28,7 +28,7 @@ use MODX\Revolution\Registry\modRegistry;
  * @param boolean $show_filename (optional) If true, will show the filename in the message. Defaults to false.
  * @package MODX\Revolution\Processors\System
  */
-class Console extends modProcessor
+class Console extends Processor
 {
     /**
      * @return bool

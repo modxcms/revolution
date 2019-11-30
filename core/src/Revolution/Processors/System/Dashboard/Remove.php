@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\Dashboard;
 
 use MODX\Revolution\modDashboard;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Removes a Dashboard
  * @param integer $id The ID of the dashboard
  * @package MODX\Revolution\Processors\System\Dashboard
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modDashboard::class;
     public $languageTopics = ['dashboards'];

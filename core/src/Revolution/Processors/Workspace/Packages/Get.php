@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Transport\modTransportProvider;
 use xPDO\Transport\xPDOTransport;
@@ -20,7 +20,7 @@ use xPDO\Transport\xPDOTransport;
  * @param integer $id The ID of the chunk.
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modTransportPackage::class;
     public $languageTopics = ['workspace'];

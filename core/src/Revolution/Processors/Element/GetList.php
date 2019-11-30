@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  *
  * @package MODX\Revolution\Processors\Element
  */
-abstract class GetList extends modObjectGetListProcessor
+abstract class GetList extends GetListProcessor
 {
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages\Dependency;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Transport\modTransportProvider;
 
@@ -18,7 +18,7 @@ use MODX\Revolution\Transport\modTransportProvider;
  * Download a package by resolving dependent package constraints
  * @package MODX\Revolution\Processors\Workspace\Packages\Dependency
  */
-class Download extends modProcessor
+class Download extends Processor
 {
     /** @var modTransportProvider $provider */
     public $provider;

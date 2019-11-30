@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System;
 
 use MODX\Revolution\modContextSetting;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modSystemSetting;
 use PDO;
@@ -20,7 +20,7 @@ use PDO;
  * Runs a config check
  * @package MODX\Revolution\Processors\System
  */
-class ConfigCheck extends modProcessor
+class ConfigCheck extends Processor
 {
     protected $warnings = [];
 

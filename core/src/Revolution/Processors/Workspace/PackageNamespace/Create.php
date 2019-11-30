@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Workspace\PackageNamespace;
 
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Creates a namespace
@@ -19,7 +19,7 @@ use MODX\Revolution\modObjectCreateProcessor;
  * @param string $path (optional) The path of the namespace
  * @package MODX\Revolution\Processors\Workspace\PackageNamespace
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modNamespace::class;
     public $languageTopics = ['namespace'];

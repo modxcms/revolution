@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\File\modFileHandler;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Export properties and output url to download to browser
  *
  * @package MODX\Revolution\Processors\Element
  */
-class ExportProperties extends modProcessor
+class ExportProperties extends Processor
 {
     public function checkPermissions()
     {

@@ -12,8 +12,8 @@ namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\modDocument;
-use MODX\Revolution\modObjectUpdateProcessor;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modResourceGroupResource;
@@ -70,7 +70,7 @@ use MODX\Revolution\modX;
  * save.
  * @return array
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
@@ -111,7 +111,7 @@ class Update extends modObjectUpdateProcessor
      * @param modX $modx
      * @param string $className
      * @param array $properties
-     * @return modProcessor
+     * @return Processor
      */
     public static function getInstance(modX &$modx, $className, $properties = [])
     {
@@ -125,7 +125,7 @@ class Update extends modObjectUpdateProcessor
                 $className = Update::class;
             }
         }
-        /** @var modProcessor $processor */
+        /** @var Processor $processor */
         $processor = new $className($modx, $properties);
         return $processor;
     }

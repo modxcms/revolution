@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Forms\Profile;
 
 use MODX\Revolution\modFormCustomizationProfile;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 
 /**
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOObject;
  * @param string $dir (optional) The direction of the sort. Default action.
  * @package MODX\Revolution\Processors\Security\Forms\Profile
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modFormCustomizationProfile::class;
     public $languageTopics = ['formcustomization'];

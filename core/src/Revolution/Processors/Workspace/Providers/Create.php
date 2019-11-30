@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Providers;
 
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\Transport\modTransportProvider;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\Transport\modTransportProvider;
  * @param string $service_url The URL the provider is hosted under
  * @package MODX\Revolution\Processors\Workspace\Providers
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modTransportProvider::class;
     public $languageTopics = ['workspace'];

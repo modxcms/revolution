@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Context;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 
 /**
  * Grabs a context
@@ -21,7 +21,7 @@ use MODX\Revolution\modObjectGetProcessor;
  *
  * @package MODX\Revolution\Processors\Context
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modContext::class;
     public $languageTopics = ['context'];

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Group\User;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -23,7 +23,7 @@ use MODX\Revolution\modUserGroupRole;
  * @param integer $role The ID of the role
  * @package MODX\Revolution\Processors\Security\Group\User
  */
-class Create extends modProcessor
+class Create extends Processor
 {
     /** @var modUser $user */
     public $user;

@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element;
 
 
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 
 /**
  * Abstract class for Get Element processors. To be extended for each derivative element type.
@@ -20,7 +20,7 @@ use MODX\Revolution\modObjectGetProcessor;
  *
  * @package MODX\Revolution\Processors\Element
  */
-abstract class Get extends modObjectGetProcessor
+abstract class Get extends GetProcessor
 {
     /**
      * Used for adding custom data in derivative types

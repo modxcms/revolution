@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\System\Event;
 
 use MODX\Revolution\modEvent;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Create a system event
  * @package MODX\Revolution\Processors\System\Event
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modEvent::class;
     public $languageTopics = ['events'];

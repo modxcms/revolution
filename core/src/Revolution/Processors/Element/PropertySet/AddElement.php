@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\PropertySet;
 
 
 use MODX\Revolution\modElementPropertySet;
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modPropertySet;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modPropertySet;
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class AddElement extends modObjectProcessor
+class AddElement extends ModelProcessor
 {
     public $classKey = modElementPropertySet::class;
     public $objectType = 'propertyset';

@@ -13,14 +13,14 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\Context;
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
  * Update ACL for Context
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Context
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modAccessContext::class;
     public $objectType = 'access_context';

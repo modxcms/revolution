@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Element\PropertySet;
 
 use MODX\Revolution\modElement;
 use MODX\Revolution\modElementPropertySet;
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 use MODX\Revolution\modPropertySet;
 
 /**
@@ -21,7 +21,7 @@ use MODX\Revolution\modPropertySet;
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modPropertySet::class;
     public $objectType = 'propertyset';

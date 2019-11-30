@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use MODX\Revolution\Transport\modTransportPackage;
 use xPDO\Transport\xPDOTransport;
@@ -21,7 +21,7 @@ use xPDO\xPDO;
  * @param string $signature The signature of the package.
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class Install extends modProcessor
+class Install extends Processor
 {
     /** @var modTransportPackage $package */
     public $package;

@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\Event;
 
 use MODX\Revolution\modEvent;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use PDO;
 
 /**
  * Create a system setting
  * @package MODX\Revolution\Processors\System\Event
  */
-class GroupList extends modProcessor
+class GroupList extends Processor
 {
     /**
      * @return bool

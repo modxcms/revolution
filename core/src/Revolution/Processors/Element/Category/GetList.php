@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Category;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -27,7 +27,7 @@ use xPDO\Om\xPDOQuery;
  *
  * @package MODX\Revolution\Processors\Element\Category
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modCategory::class;
     public $languageTopics = ['category'];

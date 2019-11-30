@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\ResourceGroup;
 
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessResourceGroup;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modUserGroup;
 
 /**
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\ResourceGroup
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modAccessResourceGroup::class;
     public $objectType = 'access_rgroup';

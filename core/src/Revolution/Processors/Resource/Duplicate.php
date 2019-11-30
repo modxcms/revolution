@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modX;
 
@@ -26,7 +26,7 @@ use MODX\Revolution\modX;
  * @var modX $this ->modx
  * @var array $scriptProperties
  */
-class Duplicate extends modProcessor
+class Duplicate extends Processor
 {
     /** @var modResource $oldResource */
     public $oldResource;

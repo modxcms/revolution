@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\modElement;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modPropertySet;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modSnippet;
@@ -23,7 +23,7 @@ use MODX\Revolution\modTemplateVar;
  *
  * @package MODX\Revolution\Processors\Element
  */
-class GetInsertProperties extends modProcessor
+class GetInsertProperties extends Processor
 {
     /** @var modElement $element */
     public $element;

@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\ResourceGroup;
 
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessResourceGroup;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modUserGroup;
 
 /**
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\ResourceGroup
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modAccessResourceGroup::class;
     public $objectType = 'access_rgroup';

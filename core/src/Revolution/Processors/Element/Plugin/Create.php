@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Plugin;
 
 
 use MODX\Revolution\modPlugin;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\modX;
 use MODX\Revolution\Processors\Element\Plugin\Event\Update;
 
@@ -78,7 +78,7 @@ class Create extends \MODX\Revolution\Processors\Element\Create
                     'plugin' => $this->object->get('id'),
                     'event' => $event['name'],
                 ]);
-                /** @var modProcessorResponse $response */
+                /** @var ProcessorResponse $response */
                 $response = $this->modx->runProcessor(Update::class, $properties);
                 if ($response->isError()) {
                     $this->modx->log(modX::LOG_LEVEL_ERROR, $response->getMessage() . print_r($properties, true));

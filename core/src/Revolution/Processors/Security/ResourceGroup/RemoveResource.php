@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\ResourceGroup;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modResourceGroupResource;
@@ -21,7 +21,7 @@ use MODX\Revolution\modResourceGroupResource;
  * @param integer $resource The ID of the resource
  * @package MODX\Revolution\Processors\Security\ResourceGroup
  */
-class RemoveResource extends modProcessor
+class RemoveResource extends Processor
 {
     /** @var modResourceGroup $resourceGroup */
     public $resourceGroup;

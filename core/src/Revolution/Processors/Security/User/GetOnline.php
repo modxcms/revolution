@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Security\User;
 use DateInterval;
 use DateTime;
 use MODX\Revolution\modManagerLog;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use PDO;
@@ -24,7 +24,7 @@ use xPDO\Om\xPDOObject;
  * Gets a list of all users who are online
  * @package MODX\Revolution\Processors\Security\User
  */
-class GetOnline extends modObjectGetListProcessor
+class GetOnline extends GetListProcessor
 {
     public $classKey = modManagerLog::class;
     public $defaultSortField = 'occurred';

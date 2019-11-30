@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\ContentType;
 
 use MODX\Revolution\modContentType;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
@@ -26,7 +26,7 @@ use MODX\Revolution\modResource;
  * @param boolean $binary If true, will be sent as binary data
  * @package MODX\Revolution\Processors\System\ContentType
  */
-class UpdateFromGrid extends modProcessor
+class UpdateFromGrid extends Processor
 {
     /** @var array $records */
     public $records;

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Providers;
 
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\Transport\modTransportProvider;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\Transport\modTransportProvider;
  * @param integer $id The provider ID
  * @package MODX\Revolution\Processors\Workspace\Providers
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modTransportProvider::class;
     public $languageTopics = ['workspace'];

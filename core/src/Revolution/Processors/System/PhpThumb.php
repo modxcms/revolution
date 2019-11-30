@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\System;
 
 use MODX\Revolution\File\modFileHandler;
 use MODX\Revolution\modPhpThumb;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
@@ -21,7 +21,7 @@ use MODX\Revolution\Sources\modMediaSource;
  * Generate a thumbnail
  * @package MODX\Revolution\Processors\System
  */
-class PhpThumb extends modProcessor
+class PhpThumb extends Processor
 {
     /** @var modPhpThumb $phpThumb */
     public $phpThumb;

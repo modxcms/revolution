@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\PropertySet;
 
 
 use MODX\Revolution\modElementPropertySet;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modPropertySet;
 use xPDO\Om\xPDOQuery;
 
@@ -32,7 +32,7 @@ use xPDO\Om\xPDOQuery;
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modPropertySet::class;
     public $objectType = 'propertyset';

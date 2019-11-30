@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Source;
 
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 use MODX\Revolution\Sources\modMediaSource;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\Sources\modMediaSource;
  * @param string $name The name of the new source.
  * @package MODX\Revolution\Processors\Source
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modMediaSource::class;
     public $languageTopics = ['source'];

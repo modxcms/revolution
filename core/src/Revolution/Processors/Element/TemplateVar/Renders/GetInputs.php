@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Element\TemplateVar\Renders;
 
 use DirectoryIterator;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\Element\TemplateVar\Renders\Controllers\TvInputManagerController;
 use UnexpectedValueException;
 
@@ -25,7 +25,7 @@ use UnexpectedValueException;
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\Renders
  */
-class GetInputs extends modProcessor {
+class GetInputs extends Processor {
     public function checkPermissions() {
         return $this->modx->hasPermission('view_tv');
     }

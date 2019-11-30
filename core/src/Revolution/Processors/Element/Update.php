@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Element;
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modTemplate;
 
 /**
@@ -23,7 +23,7 @@ use MODX\Revolution\modTemplate;
  *
  * @package MODX\Revolution\Processors\Element
  */
-abstract class Update extends modObjectUpdateProcessor
+abstract class Update extends UpdateProcessor
 {
     public $previousCategory;
     /** @var modElement $object */

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Message;
 
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -30,7 +30,7 @@ use xPDO\xPDOIterator;
  * @param integer $group (optional)
  * @package MODX\Revolution\Processors\Security\Message
  */
-class Create extends modObjectProcessor
+class Create extends ModelProcessor
 {
     public $classKey = modUserMessage::class;
     public $objectType = 'message';

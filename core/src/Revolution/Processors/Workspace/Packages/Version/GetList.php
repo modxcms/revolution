@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages\Version;
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\Transport\modTransportPackage;
 use xPDO\Om\xPDOObject;
 use xPDO\Transport\xPDOTransport;
@@ -19,7 +19,7 @@ use xPDO\Transport\xPDOTransport;
  * Gets a list of package versions for a package
  * @package MODX\Revolution\Processors\Workspace\Packages\Version
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $primaryKeyField = 'signature';
     public $classKey = modTransportPackage::class;

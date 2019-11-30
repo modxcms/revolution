@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Access;
 
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Remove an ACL.
@@ -18,7 +18,7 @@ use MODX\Revolution\modObjectRemoveProcessor;
  * @param string $id The ID of the ACL.
  * @package MODX\Revolution\Processors\Security\Access
  */
-class RemoveAcl extends modObjectRemoveProcessor
+class RemoveAcl extends RemoveProcessor
 {
     public $objectType = 'access';
     public $permission = 'access_permissions';

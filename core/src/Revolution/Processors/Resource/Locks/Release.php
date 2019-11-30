@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\Resource\Locks;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
  * Release a lock on a resource
  */
-class Release extends modProcessor
+class Release extends Processor
 {
     public function checkPermissions()
     {

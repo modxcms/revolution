@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modResource;
  * @param string $string The string to transliterate
  * @return string
  */
-class Translit extends modProcessor
+class Translit extends Processor
 {
     public function checkPermissions()
     {

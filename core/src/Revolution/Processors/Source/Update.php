@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Source;
 
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\Sources\modAccessMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 
@@ -19,7 +19,7 @@ use MODX\Revolution\Sources\modMediaSource;
  * @param integer $id The ID of the Source
  * @package MODX\Revolution\Processors\Source
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modMediaSource::class;
     public $languageTopics = ['source'];

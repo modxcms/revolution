@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\PropertySet;
 
 
 use MODX\Revolution\modElement;
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 use MODX\Revolution\modPropertySet;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modPropertySet;
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modPropertySet::class;
     public $objectType = 'propertyset';

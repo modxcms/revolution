@@ -14,7 +14,7 @@ use MODX\Revolution\modActionDom;
 use MODX\Revolution\modActionField;
 use MODX\Revolution\modFormCustomizationProfile;
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modObjectImportProcessor;
+use MODX\Revolution\Processors\Model\ImportProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
@@ -24,7 +24,7 @@ use MODX\Revolution\modX;
  * Import a Form Customization Set from an XML file
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class Import extends modObjectImportProcessor
+class Import extends ImportProcessor
 {
     public $objectType = 'set';
     public $classKey = modFormCustomizationSet::class;

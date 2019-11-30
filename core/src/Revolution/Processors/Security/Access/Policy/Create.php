@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Security\Access\Policy;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Create an access policy.
@@ -24,7 +24,7 @@ use MODX\Revolution\modObjectCreateProcessor;
  * @param string $data The JSON-encoded policy data
  * @package MODX\Revolution\Processors\Security\Access\Policy
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modAccessPolicy::class;
     public $languageTopics = ['policy'];

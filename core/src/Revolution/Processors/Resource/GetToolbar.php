@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
  * Gets a dynamic toolbar for the Resource tree.
  */
-class GetToolbar extends modProcessor
+class GetToolbar extends Processor
 {
     public function checkPermissions()
     {

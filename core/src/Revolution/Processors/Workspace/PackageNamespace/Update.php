@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Workspace\PackageNamespace;
 
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Updates a namespace from a grid
@@ -19,7 +19,7 @@ use MODX\Revolution\modObjectUpdateProcessor;
  * @param string $path An absolute path
  * @package MODX\Revolution\Processors\Workspace\PackageNamespace
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modNamespace::class;
     public $languageTopics = ['workspace', 'namespace', 'lexicon'];

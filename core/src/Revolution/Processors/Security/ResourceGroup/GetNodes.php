@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\ResourceGroup;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
 
@@ -19,7 +19,7 @@ use MODX\Revolution\modResourceGroup;
  * @param string $id The ID of the parent node
  * @package MODX\Revolution\Processors\Security\ResourceGroup
  */
-class GetNodes extends modProcessor
+class GetNodes extends Processor
 {
     /**
      * @return bool

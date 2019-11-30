@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Category;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Deletes a category. Resets all elements with that category to 0.
@@ -21,7 +21,7 @@ use MODX\Revolution\modObjectRemoveProcessor;
  *
  * @package MODX\Revolution\Processors\Element\Category
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modCategory::class;
     public $languageTopics = ['category'];

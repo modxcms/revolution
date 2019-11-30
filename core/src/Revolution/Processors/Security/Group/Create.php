@@ -15,7 +15,7 @@ use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessResourceGroup;
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
@@ -28,7 +28,7 @@ use MODX\Revolution\modUserGroupRole;
  * @param integer $parent (optional) The ID of the parent user group. Defaults to 0.
  * @package MODX\Revolution\Processors\Security\Group
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modUserGroup::class;
     public $languageTopics = ['user'];

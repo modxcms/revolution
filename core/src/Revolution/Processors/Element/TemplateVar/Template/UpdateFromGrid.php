@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\TemplateVar\Template;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modTemplateVarTemplate;
 
 /**
@@ -24,7 +24,7 @@ use MODX\Revolution\modTemplateVarTemplate;
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\Template
  */
-class UpdateFromGrid extends modProcessor
+class UpdateFromGrid extends Processor
 {
     public function checkPermissions()
     {

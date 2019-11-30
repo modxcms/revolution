@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Menu;
 
 use MODX\Revolution\modMenu;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Creates a menu item
@@ -23,7 +23,7 @@ use MODX\Revolution\modObjectCreateProcessor;
  * @param integer $parent (optional) The parent menu to create from. Defaults to 0.
  * @package MODX\Revolution\Processors\System\Menu
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modMenu::class;
     public $languageTopics = ['action', 'menu'];

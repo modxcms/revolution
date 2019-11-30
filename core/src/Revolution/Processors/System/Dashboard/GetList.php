@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Dashboard;
 
 use MODX\Revolution\modDashboard;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUserGroup;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -25,7 +25,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\System\Dashboard
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modDashboard::class;
     public $languageTopics = ['dashboards'];

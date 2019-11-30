@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System\Derivatives;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use xPDO\Om\xPDOObject;
 
@@ -18,7 +18,7 @@ use xPDO\Om\xPDOObject;
  * Gets a list of derivative classes for a class
  * @package MODX\Revolution\Processors\System\Derivatives
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return bool

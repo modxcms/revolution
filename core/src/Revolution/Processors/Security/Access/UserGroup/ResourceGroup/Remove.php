@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Access\UserGroup\ResourceGroup;
 
 use MODX\Revolution\modAccessResourceGroup;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Remove a Resource Group ACL for a user group
  * @param integer $id The ID of the ACL
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\ResourceGroup
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modAccessResourceGroup::class;
     public $objectType = 'access_rgroup';

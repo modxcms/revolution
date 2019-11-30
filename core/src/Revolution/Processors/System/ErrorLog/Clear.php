@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\ErrorLog;
 
 use MODX\Revolution\modCacheManager;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use xPDO\Cache\xPDOCacheManager;
 
 /**
  * Clear the error log
  * @package MODX\Revolution\Processors\System\ErrorLog
  */
-class Clear extends modProcessor
+class Clear extends Processor
 {
     /**
      * @return mixed

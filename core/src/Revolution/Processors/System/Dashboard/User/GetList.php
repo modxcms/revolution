@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\System\Dashboard\User;
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\modDashboardWidgetPlacement;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use PDO;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  * Class GetList
  * @package MODX\Revolution\Processors\System\Dashboard\User
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modDashboardWidget::class;
     public $languageTopics = ['dashboards'];

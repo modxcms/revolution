@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Forms\Profile;
 
 use MODX\Revolution\modFormCustomizationProfile;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 
 /**
  * Remove multiple FC profiles
  * @package MODX\Revolution\Processors\Security\Forms\Profile
  */
-class RemoveMultiple extends modProcessor
+class RemoveMultiple extends Processor
 {
     /**
      * @return bool

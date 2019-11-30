@@ -8,10 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
 
 use MODX\Revolution\File\modFileHandler;
+use MODX\Revolution\modCacheManager;
 use XMLWriter;
 
 /**
@@ -21,7 +22,7 @@ use XMLWriter;
  *
  * @package MODX\Revolution
  */
-abstract class modObjectExportProcessor extends modObjectGetProcessor
+abstract class ExportProcessor extends GetProcessor
 {
     /** @var string $downloadProperty */
     public $downloadProperty = 'download';

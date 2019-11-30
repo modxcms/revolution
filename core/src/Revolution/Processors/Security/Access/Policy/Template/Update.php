@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Updates a policy template
@@ -23,7 +23,7 @@ use MODX\Revolution\modObjectUpdateProcessor;
  * @param string $data The JSON-encoded policy permissions
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modAccessPolicyTemplate::class;
     public $languageTopics = ['policy'];

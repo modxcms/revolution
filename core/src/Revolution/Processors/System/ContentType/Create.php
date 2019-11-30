@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\ContentType;
 
 use MODX\Revolution\modContentType;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Create a content type
@@ -23,7 +23,7 @@ use MODX\Revolution\modObjectCreateProcessor;
  * @param boolean $binary If true, will be sent as binary data
  * @package MODX\Revolution\Processors\System\ContentType
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modContentType::class;
     public $languageTopics = ['content_type'];

@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Element\TemplateVar\Renders;
 
 use DirectoryIterator;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use UnexpectedValueException;
 
 /**
@@ -23,7 +23,7 @@ use UnexpectedValueException;
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\Renders
  */
-class GetOutputs extends modProcessor {
+class GetOutputs extends Processor {
 
     /**
      * Check permissions to view TV

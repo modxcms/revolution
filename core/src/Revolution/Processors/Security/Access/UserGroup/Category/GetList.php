@@ -14,7 +14,7 @@ use MODX\Revolution\modAccessCategory;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessResourceGroup;
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupRole;
 use xPDO\Om\xPDOObject;
@@ -32,7 +32,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Category
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modAccessCategory::class;
     public $languageTopics = ['access'];

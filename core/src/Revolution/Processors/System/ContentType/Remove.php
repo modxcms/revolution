@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\ContentType;
 
 use MODX\Revolution\modContentType;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\modResource;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modResource;
  * @param integer $id The ID of the content type
  * @package MODX\Revolution\Processors\System\ContentType
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modContentType::class;
     public $languageTopics = ['content_type'];

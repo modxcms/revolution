@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages\Version;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use MODX\Revolution\Transport\modTransportPackage;
 use xPDO\xPDO;
@@ -22,7 +22,7 @@ use xPDO\xPDO;
  * uninstall fails. Defaults to false.
  * @package MODX\Revolution\Processors\Workspace\Packages\Version
  */
-class Remove extends modProcessor
+class Remove extends Processor
 {
     /** @var modTransportPackage $package */
     public $package;

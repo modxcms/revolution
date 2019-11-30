@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\ContentType;
 
 use MODX\Revolution\modContentType;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modResource;
 
 /**
@@ -26,7 +26,7 @@ use MODX\Revolution\modResource;
  * @param boolean $binary If true, will be sent as binary data
  * @package MODX\Revolution\Processors\System\ContentType
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modContentType::class;
     public $languageTopics = ['content_type'];

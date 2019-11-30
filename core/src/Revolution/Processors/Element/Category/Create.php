@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Category;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Create a category.
@@ -21,7 +21,7 @@ use MODX\Revolution\modObjectCreateProcessor;
  *
  * @package MODX\Revolution\Processors\Element\Category
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modCategory::class;
     public $languageTopics = ['category'];

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modX;
 
@@ -18,7 +18,7 @@ use MODX\Revolution\modX;
  * Regenerate the system's Resource URIs in the database
  * @package MODX\Revolution\Processors\System
  */
-class RefreshUris extends modProcessor
+class RefreshUris extends Processor
 {
     /**
      * @return bool

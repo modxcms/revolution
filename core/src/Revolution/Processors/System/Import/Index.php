@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\System\Import;
 
 use MODX\Revolution\Import\modStaticImport;
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modStaticResource;
 
 /**
  * @package MODX\Revolution\Processors\System\Import
  */
-class Index extends modObjectProcessor
+class Index extends ModelProcessor
 {
     public $permission = 'import_static';
     public $languageTopics = ['import'];

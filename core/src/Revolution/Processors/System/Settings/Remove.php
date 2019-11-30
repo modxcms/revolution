@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Settings;
 
 use MODX\Revolution\modLexiconEntry;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\modSystemSetting;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modSystemSetting;
  * @property string $key The key of the setting
  * @package MODX\Revolution\Processors\System\Settings
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modSystemSetting::class;
     public $languageTopics = ['setting', 'namespace'];

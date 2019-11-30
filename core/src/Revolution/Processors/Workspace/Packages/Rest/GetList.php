@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages\Rest;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Transport\modTransportProvider;
 
 /**
  * @package MODX\Revolution\Processors\Workspace\Packages\Rest
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /** @var modTransportProvider $provider */
     public $provider;

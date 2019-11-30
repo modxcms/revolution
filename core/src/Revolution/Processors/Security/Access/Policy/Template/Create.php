@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Create an access policy template
@@ -19,7 +19,7 @@ use MODX\Revolution\modObjectCreateProcessor;
  * @param string $description (optional) A short description
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modAccessPolicyTemplate::class;
     public $languageTopics = ['policy'];

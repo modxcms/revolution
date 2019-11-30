@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\TemplateVar\Renders;
 
 
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\Processors\Element\TemplateVar\Renders\Controllers\TvInputPropertiesManagerController;
 
@@ -27,7 +27,7 @@ use MODX\Revolution\Processors\Element\TemplateVar\Renders\Controllers\TvInputPr
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\Renders
  */
-class GetInputProperties extends modProcessor {
+class GetInputProperties extends Processor {
 
     public $propertiesKey = 'input_properties';
     public $renderDirectory = 'inputproperties';

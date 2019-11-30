@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Security\Forms\Profile;
 
 use MODX\Revolution\modFormCustomizationProfile;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Create a FC Profile
  * @package MODX\Revolution\Processors\Security\Forms\Profile
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modFormCustomizationProfile::class;
     public $languageTopics = ['formcustomization'];

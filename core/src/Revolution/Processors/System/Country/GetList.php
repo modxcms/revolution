@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\System\Country;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Gets a list of country codes
  * @package MODX\Revolution\Processors\System\Country
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return mixed

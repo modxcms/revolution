@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Providers;
 
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\Transport\modTransportProvider;
 
 /**
@@ -21,7 +21,7 @@ use MODX\Revolution\Transport\modTransportProvider;
  * @param string $service_url The URL which the provider is hosted under
  * @package MODX\Revolution\Processors\Workspace\Providers
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modTransportProvider::class;
     public $languageTopics = ['workspace'];

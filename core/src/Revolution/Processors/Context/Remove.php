@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Context;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modTemplateVarResource;
 
@@ -23,7 +23,7 @@ use MODX\Revolution\modTemplateVarResource;
  *
  * @package MODX\Revolution\Processors\Context
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modContext::class;
     public $languageTopics = ['context'];

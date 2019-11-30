@@ -12,7 +12,7 @@
 namespace MODX\Revolution\Tests\Processors\Resource;
 
 
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
@@ -81,7 +81,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
             $this->modx->setOption($k,$v);
         }
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Create::class,$fields);
         if (empty($result)) {
             $this->fail('Could not load '.Create::class.' processor');

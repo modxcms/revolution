@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Security\Access;
 
 use MODX\Revolution\modAccess;
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modResourceGroup;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modResourceGroup;
  * @param string $id The parent ID.
  * @package MODX\Revolution\Processors\Security\Access
  */
-class GetNodes extends modObjectProcessor
+class GetNodes extends ModelProcessor
 {
     public $permission = 'access_permissions';
     public $languageTopics = ['access'];

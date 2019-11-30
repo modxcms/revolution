@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\User;
 
 
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modX;
@@ -31,7 +31,7 @@ class Validation {
     /** @var modUserProfile $profile */
     public $profile;
 
-    function __construct(modObjectProcessor &$processor,modUser &$user,modUserProfile &$profile) {
+    function __construct(ModelProcessor &$processor,modUser &$user,modUserProfile &$profile) {
         $this->processor =& $processor;
         $this->modx =& $processor->modx;
         $this->user =& $user;

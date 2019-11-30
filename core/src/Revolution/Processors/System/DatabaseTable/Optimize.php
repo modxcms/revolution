@@ -24,7 +24,7 @@ class Optimize extends OptimizeAbstract
     protected $concreteProcessor;
 
     /**
-     * Creates a modProcessor object.
+     * Creates a Processor object.
      *
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
@@ -33,7 +33,7 @@ class Optimize extends OptimizeAbstract
     {
         parent::__construct($modx, $properties);
 
-        $this->concreteProcessor = self::getInstance($modx, GetList::class, $properties);
+        $this->concreteProcessor = self::getInstance($modx, Optimize::class, $properties);
 
         return $this->concreteProcessor;
     }

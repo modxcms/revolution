@@ -16,7 +16,7 @@ use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modDocument;
 use MODX\Revolution\modMenu;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modManagerLog;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modStaticResource;
@@ -38,7 +38,7 @@ use xPDO\Om\xPDOObject;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\System\Log
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return bool

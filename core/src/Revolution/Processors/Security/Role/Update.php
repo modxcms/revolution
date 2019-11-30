@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Role;
 
 
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modUserGroupRole;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modUserGroupRole;
  * @param integer $id The ID of the role
  * @package MODX\Revolution\Processors\Security\Role
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modUserGroupRole::class;
     public $languageTopics = ['user'];

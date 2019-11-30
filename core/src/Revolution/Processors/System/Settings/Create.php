@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\System\Settings;
 
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modSystemSetting;
 
 /**
@@ -26,7 +26,7 @@ use MODX\Revolution\modSystemSetting;
  * @param string $description The lexicon description for the setting
  * @package MODX\Revolution\Processors\System\Settings
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modSystemSetting::class;
     public $languageTopics = ['setting', 'namespace'];

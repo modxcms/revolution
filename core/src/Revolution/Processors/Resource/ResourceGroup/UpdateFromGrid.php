@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource\ResourceGroup;
 
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modResourceGroupResource;
@@ -23,7 +23,7 @@ use MODX\Revolution\modResourceGroupResource;
  * @param boolean $access Either true or false whether the resource has access
  * to the group specified.
  */
-class UpdateFromGrid extends modObjectProcessor
+class UpdateFromGrid extends ModelProcessor
 {
     /** @var array $languageTopics */
     public $languageTopics = ['save_document'];
@@ -111,7 +111,7 @@ class UpdateFromGrid extends modObjectProcessor
             return $this->modx->lexicon('resource_err_ns');
         }
         $this->resource = $this->modx->getObject(modResource::class, $resource_id);
-        if (empty($resourcegroup)) {
+        if (!$this->resource) {
             return $this->modx->lexicon('resource_err_nf');
         }
         /* check access */

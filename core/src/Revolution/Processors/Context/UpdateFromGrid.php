@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Context;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Update a context from a grid. Passed as JSON data.
  *
  * @package MODX\Revolution\Processors\Context
  */
-class UpdateFromGrid extends modProcessor
+class UpdateFromGrid extends Processor
 {
     /** @var modContext $context */
     public $context;

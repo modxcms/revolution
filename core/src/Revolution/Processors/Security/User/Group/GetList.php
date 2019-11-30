@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\User\Group;
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -21,7 +21,7 @@ use xPDO\Om\xPDOQuery;
  * Gets a list of groups for a user
  * @package MODX\Revolution\Processors\Security\User\Group
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modUserGroupMember::class;
     public $languageTopics = ['user'];

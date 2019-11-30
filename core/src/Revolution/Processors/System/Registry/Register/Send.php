@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System\Registry\Register;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Registry\modFileRegister;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
@@ -29,7 +29,7 @@ use MODX\Revolution\Registry\modRegistry;
  * @param integer $kill (optional) Defaults to false.
  * @package MODX\Revolution\Processors\System\Registry\Register
  */
-class Send extends modProcessor
+class Send extends Processor
 {
     /** @var modRegister */
     public $register;

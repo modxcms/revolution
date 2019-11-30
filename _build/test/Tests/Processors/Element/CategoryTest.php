@@ -13,7 +13,7 @@ namespace MODX\Revolution\Tests\Processors\Element;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Element\Category\Create;
 use MODX\Revolution\Processors\Element\Category\Get;
@@ -66,7 +66,7 @@ class CategoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerCategoryCreate
      */
     public function testCategoryCreate($shouldPass,$categoryPk) {
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Create::class,array(
             'category' => $categoryPk,
         ));
@@ -110,7 +110,7 @@ class CategoryProcessorsTest extends MODxTestCase {
             return false;
         }
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Get::class,array(
             'id' => $category ? $category->get('id') : $categoryPk,
         ));
@@ -146,7 +146,7 @@ class CategoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerCategoryGetList
      */
     public function testCategoryGetList($shouldPass,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(GetList::class,array(
             'sort' => $sort,
             'dir' => $dir,
@@ -188,7 +188,7 @@ class CategoryProcessorsTest extends MODxTestCase {
             return false;
         }
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Remove::class,array(
             'id' => $category ? $category->get('id') : $categoryPk,
         ));

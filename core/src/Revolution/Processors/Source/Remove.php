@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Source;
 
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\Sources\modMediaSource;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\Sources\modMediaSource;
  * @param integer $id The ID of the source
  * @package MODX\Revolution\Processors\Source
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modMediaSource::class;
     public $languageTopics = ['source'];

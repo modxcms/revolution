@@ -10,12 +10,12 @@
 
 namespace MODX\Revolution\Processors\System\DatabaseTable;
 
-use MODX\Revolution\modDriverSpecificProcessor;
+use MODX\Revolution\Processors\DriverSpecificProcessor;
 
 /**
  * @package MODX\Revolution\Processors\System\DatabaseTable
  */
-abstract class OptimizeDatabaseAbstract extends modDriverSpecificProcessor
+abstract class OptimizeDatabaseAbstract extends DriverSpecificProcessor
 {
     /**
      * @return bool

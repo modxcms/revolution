@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 
 /**
  * Duplicates a policy template
  * @param integer $id The ID of the policy template
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modAccessPolicyTemplate::class;
     public $languageTopics = ['policy'];

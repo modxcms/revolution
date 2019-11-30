@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Access;
 
 use MODX\Revolution\modAccessContext;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUserGroup;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -29,7 +29,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Security\Access
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $permission = 'access_permissions';
     public $languageTopics = ['access'];

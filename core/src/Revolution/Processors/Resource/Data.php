@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modUser;
@@ -23,7 +23,7 @@ use xPDO\xPDO;
  * @param integer $id The ID of the resource
  * @return array
  */
-class Data extends modProcessor
+class Data extends Processor
 {
     /** @var modResource $resource */
     public $resource;

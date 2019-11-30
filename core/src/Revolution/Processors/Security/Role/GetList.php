@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Role;
 
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUserGroupRole;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -26,7 +26,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Security\Role
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modUserGroupRole::class;
     public $languageTopics = ['user'];

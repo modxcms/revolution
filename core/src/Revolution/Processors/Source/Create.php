@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Source;
 
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 
@@ -18,7 +18,7 @@ use MODX\Revolution\Sources\modMediaSource;
  * Creates a Media Source
  * @package MODX\Revolution\Processors\Source
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modMediaSource::class;
     public $languageTopics = ['source'];

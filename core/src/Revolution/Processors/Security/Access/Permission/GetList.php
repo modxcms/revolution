@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Security\Access\Permission;
 
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
 /**
  * @package MODX\Revolution\Processors\Security\Access\Permission
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modAccessPermission::class;
     public $checkListPermission = false;

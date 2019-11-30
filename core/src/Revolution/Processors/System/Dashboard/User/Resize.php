@@ -13,13 +13,13 @@ namespace MODX\Revolution\Processors\System\Dashboard\User;
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\modDashboardWidgetPlacement;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Class Resize
  * @package MODX\Revolution\Processors\System\Dashboard\User
  */
-class Resize extends modObjectUpdateProcessor
+class Resize extends UpdateProcessor
 {
     public $classKey = modDashboardWidgetPlacement::class;
     public $languageTopics = ['dashboards'];

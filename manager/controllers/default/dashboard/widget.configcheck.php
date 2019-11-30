@@ -9,7 +9,7 @@
  */
 
 use MODX\Revolution\modDashboardWidgetInterface;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\System\ConfigCheck;
 use MODX\Revolution\Smarty\modSmarty;
 
@@ -29,7 +29,7 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface
      */
     public function render()
     {
-        /** @var modProcessorResponse $response */
+        /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(ConfigCheck::class);
 
         $this->modx->getService('smarty', modSmarty::class);

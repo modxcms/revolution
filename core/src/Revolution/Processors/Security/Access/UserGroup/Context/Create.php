@@ -13,13 +13,13 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\Context;
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Context
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modAccessContext::class;
     public $objectType = 'access_context';

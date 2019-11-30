@@ -8,19 +8,20 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors;
 
 
+use MODX\Revolution\modAccessibleObject;
 use xPDO\Om\xPDOObject;
 
 /**
- * Base class for object-specific processors
+ * Base class for model-specific processors, simplifying any interactions with your xPDO model objects.
  *
  * @abstract
  *
  * @package MODX\Revolution
  */
-abstract class modObjectProcessor extends modProcessor
+abstract class ModelProcessor extends Processor
 {
     /** @var xPDOObject|modAccessibleObject $object The object being grabbed */
     public $object;

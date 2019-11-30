@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\System\Event;
 use MODX\Revolution\modEvent;
 use MODX\Revolution\modPlugin;
 use MODX\Revolution\modPluginEvent;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Gets a list of system events
@@ -23,7 +23,7 @@ use MODX\Revolution\modProcessor;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\System\Event
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return bool

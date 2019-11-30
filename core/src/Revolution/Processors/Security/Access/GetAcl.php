@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Access;
 
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 
 /**
  * Gets an ACL.
@@ -18,7 +18,7 @@ use MODX\Revolution\modObjectGetProcessor;
  * @param string $id The ID of the ACL.
  * @package MODX\Revolution\Processors\Security\Access
  */
-class GetAcl extends modObjectGetProcessor
+class GetAcl extends GetProcessor
 {
     public $objectType = 'access';
     public $permission = 'access_permissions';

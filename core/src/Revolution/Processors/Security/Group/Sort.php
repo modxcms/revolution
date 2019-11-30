@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Group;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -21,7 +21,7 @@ use MODX\Revolution\modX;
  * @param string $data The encoded in JSON tree data
  * @package MODX\Revolution\Processors\Security\Group
  */
-class Sort extends modProcessor
+class Sort extends Processor
 {
     /**
      * @return bool

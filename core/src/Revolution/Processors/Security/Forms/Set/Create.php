@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Forms\Set;
 
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResource;
 
 /**
  * Create a FC Set
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modFormCustomizationSet::class;
     public $languageTopics = ['formcustomization'];

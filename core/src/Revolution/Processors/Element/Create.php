@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Element;
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\Validation\modValidator;
 
@@ -24,7 +24,7 @@ use MODX\Revolution\Validation\modValidator;
  *
  * @package MODX\Revolution\Processors\Element
  */
-abstract class Create extends modObjectCreateProcessor
+abstract class Create extends CreateProcessor
 {
     /** @var modElement $object */
     public $object;

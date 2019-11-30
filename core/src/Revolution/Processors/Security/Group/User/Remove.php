@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Group\User;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -21,7 +21,7 @@ use MODX\Revolution\modUserGroupMember;
  * @param integer $user The ID of the user
  * @package MODX\Revolution\Processors\Security\Group\User
  */
-class Remove extends modProcessor
+class Remove extends Processor
 {
     /** @var modUserGroupMember $membership */
     public $membership;

@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Security\Forms\Profile;
 
 use MODX\Revolution\modFormCustomizationProfile;
 use MODX\Revolution\modFormCustomizationProfileUserGroup;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
  * Update a FC Profile
  * @package MODX\Revolution\Processors\Security\Forms\Profile
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modFormCustomizationProfile::class;
     public $languageTopics = ['formcustomization'];

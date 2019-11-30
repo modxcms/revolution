@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Message;
 
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modUserMessage;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\modUserMessage;
  * @param integer $id The ID of the message
  * @package MODX\Revolution\Processors\Security\Message
  */
-class Read extends modObjectUpdateProcessor
+class Read extends UpdateProcessor
 {
     public $classKey = modUserMessage::class;
     public $objectType = 'message';

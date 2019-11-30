@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Access\UserGroup\Source;
 
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\Sources\modAccessMediaSource;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\Sources\modAccessMediaSource;
  * @param integer $id The ID of the ACL
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Source
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modAccessMediaSource::class;
     public $languageTopics = ['source', 'access', 'user'];

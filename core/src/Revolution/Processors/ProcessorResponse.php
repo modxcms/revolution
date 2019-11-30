@@ -8,15 +8,16 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors;
 
+use MODX\Revolution\modX;
 
 /**
  * Response class for Processor executions
  *
  * @package MODX\Revolution
  */
-class modProcessorResponse
+class ProcessorResponse
 {
     /**
      * When there is only a general error
@@ -66,22 +67,22 @@ class modProcessorResponse
      * @param modX  $modx     A reference to the modX object.
      * @param array $response The array response from the modX.runProcessor method
      */
-    function __construct(modX &$modx, $response = [])
+    public function __construct(modX $modx, $response = [])
     {
         $this->modx =& $modx;
         $this->response = $response;
         if ($this->isError()) {
             if (!empty($response['errors']) && is_array($response['errors'])) {
                 foreach ($response['errors'] as $error) {
-                    $this->errors[] = new modProcessorResponseError($error);
+                    $this->errors[] = new ProcessorResponseError($error);
                 }
                 if (!empty($response['message'])) {
-                    $this->error_type = modProcessorResponse::ERROR_BOTH;
+                    $this->error_type = self::ERROR_BOTH;
                 } else {
-                    $this->error_type = modProcessorResponse::ERROR_FIELD;
+                    $this->error_type = self::ERROR_FIELD;
                 }
             } else {
-                $this->error_type = modProcessorResponse::ERROR_GENERAL;
+                $this->error_type = self::ERROR_GENERAL;
             }
         }
     }

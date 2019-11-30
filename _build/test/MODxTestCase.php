@@ -11,6 +11,7 @@
 */
 namespace MODX\Revolution;
 
+use MODX\Revolution\Processors\ProcessorResponse;
 use PHPUnit\Framework\TestCase;
 use xPDO\xPDOException;
 
@@ -54,18 +55,18 @@ abstract class MODxTestCase extends TestCase {
     /**
      * Check a MODX return result for a success flag
      *
-     * @param modProcessorResponse $result The result response
+     * @param ProcessorResponse $result The result response
      * @return boolean
      */
     public function checkForSuccess(&$result) {
-        if (empty($result) || !($result instanceof modProcessorResponse)) return false;
+        if (empty($result) || !($result instanceof ProcessorResponse)) return false;
         return !$result->isError();
     }
 
     /**
      * Check a MODX processor response and return results
      *
-     * @param modProcessorResponse $result The response
+     * @param ProcessorResponse $result The response
      * @return array
      */
     public function getResults(&$result) {

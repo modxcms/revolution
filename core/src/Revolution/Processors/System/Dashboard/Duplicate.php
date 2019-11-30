@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\System\Dashboard;
 
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modDashboardWidgetPlacement;
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 
 /**
  * Duplicates a dashboard.
@@ -20,7 +20,7 @@ use MODX\Revolution\modObjectDuplicateProcessor;
  * @param string $name The name of the new chunk.
  * @package MODX\Revolution\Processors\System\Dashboard
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modDashboard::class;
     public $languageTopics = ['dashboards'];

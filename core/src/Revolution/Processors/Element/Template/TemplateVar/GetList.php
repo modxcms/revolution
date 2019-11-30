@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\Template\TemplateVar;
 
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modTemplate;
 use xPDO\Om\xPDOObject;
 
@@ -28,7 +28,7 @@ use xPDO\Om\xPDOObject;
  *
  * @package MODX\Revolution\Processors\Element\Template\TemplateVar
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modTemplate::class;
     public $primaryKeyField = 'template';

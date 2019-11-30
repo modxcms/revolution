@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Forms\Set;
 
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 
 /**
  * Remove multiple FC sets
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class RemoveMultiple extends modProcessor
+class RemoveMultiple extends Processor
 {
     /**
      * @return bool

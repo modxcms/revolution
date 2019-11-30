@@ -11,8 +11,8 @@
 namespace MODX\Revolution\Processors\Security\User;
 
 
-use MODX\Revolution\modObjectUpdateProcessor;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
@@ -28,7 +28,7 @@ use MODX\Revolution\modX;
  * @package modx
  * @subpackage processors.security.user
  */
-class Update extends modObjectUpdateProcessor {
+class Update extends UpdateProcessor {
     public $classKey = modUser::class;
     public $languageTopics = array('user');
     public $permission = 'save_user';
@@ -58,7 +58,7 @@ class Update extends modObjectUpdateProcessor {
      * @param modX $modx
      * @param string $className
      * @param array $properties
-     * @return modProcessor
+     * @return Processor
      */
     public static function getInstance(modX &$modx,$className,$properties = array()) {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modUser::class;
@@ -70,7 +70,7 @@ class Update extends modObjectUpdateProcessor {
                 $className = static::class;
             }
         }
-        /** @var modProcessor $processor */
+        /** @var Processor $processor */
         $processor = new $className($modx,$properties);
         return $processor;
     }

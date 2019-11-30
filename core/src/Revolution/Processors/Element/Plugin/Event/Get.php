@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\Plugin\Event;
 
 
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 use MODX\Revolution\modPluginEvent;
 
 /**
@@ -22,7 +22,7 @@ use MODX\Revolution\modPluginEvent;
  *
  * @package MODX\Revolution\Processors\Element\Plugin\Event
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modPluginEvent::class;
     public $objectType = 'plugin_event';

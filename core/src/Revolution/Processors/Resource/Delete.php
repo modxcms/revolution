@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modX;
@@ -20,7 +20,7 @@ use MODX\Revolution\modX;
  *
  * @param integer $id The ID of the resource
  */
-class Delete extends modProcessor
+class Delete extends Processor
 {
     /** @var modResource $resource */
     public $resource;

@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\ClassMap;
 
 use MODX\Revolution\modClassMap;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\System\ClassMap
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modClassMap::class;
     public $permission = 'class_map';

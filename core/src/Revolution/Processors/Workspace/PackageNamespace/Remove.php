@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Workspace\PackageNamespace;
 
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Removes a namespace.
  * @param string $name The name of the namespace.
  * @package MODX\Revolution\Processors\Workspace\PackageNamespace
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modNamespace::class;
     public $languageTopics = ['namespace', 'workspace', 'lexicon'];

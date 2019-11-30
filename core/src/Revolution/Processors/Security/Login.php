@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Security;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modUserSetting;
@@ -20,7 +20,7 @@ use MODX\Revolution\modUserSetting;
 /**
  * Properly log in the user and set up the session.
  */
-class Login extends modProcessor
+class Login extends Processor
 {
 
     /** @var modUser */

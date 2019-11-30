@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Group;
 
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\modUserGroup;
  * @param integer $id The ID of the user group
  * @package MODX\Revolution\Processors\Security\Group
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modUserGroup::class;
     public $languageTopics = ['user'];

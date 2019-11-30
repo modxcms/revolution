@@ -10,12 +10,12 @@
 
 namespace MODX\Revolution\Processors\System\DatabaseTable;
 
-use MODX\Revolution\modDriverSpecificProcessor;
+use MODX\Revolution\Processors\DriverSpecificProcessor;
 
 /**
  * @package MODX\Revolution\Processors\System\DatabaseTable
  */
-abstract class TruncateAbstract extends modDriverSpecificProcessor
+abstract class TruncateAbstract extends DriverSpecificProcessor
 {
     /**
      * @return bool

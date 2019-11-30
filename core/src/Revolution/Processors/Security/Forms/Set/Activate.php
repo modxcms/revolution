@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Security\Forms\Set;
 
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Activate a FC Set
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class Activate extends modObjectUpdateProcessor
+class Activate extends UpdateProcessor
 {
     public $classKey = modFormCustomizationSet::class;
     public $objectType = 'set';

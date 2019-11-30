@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Resource\Locks;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
  * Steal a lock on a resource
  */
-class Steal extends modProcessor
+class Steal extends Processor
 {
     public function checkPermissions()
     {

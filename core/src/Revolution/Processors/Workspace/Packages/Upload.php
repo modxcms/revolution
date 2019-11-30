@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Sources\modMediaSource;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\Sources\modMediaSource;
  * @param string $file The transport package to upload
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class Upload extends modProcessor
+class Upload extends Processor
 {
     /** @var modMediaSource $source */
     public $source;
