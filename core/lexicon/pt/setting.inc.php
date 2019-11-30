@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Select the default Template you wish 
 $_lang['setting_default_per_page'] = 'Padrão de Por Página';
 $_lang['setting_default_per_page_desc'] = 'O número padrão de resultados para mostrar em grades em todo o Gerenciador.';
 
-$_lang['setting_editor_css_path'] = 'Caminho para o arquivo CSS';
-$_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that you wish to use within a richtext editor. The best way to enter the path is to enter the path from the root of your server, for example: /assets/site/style.css. If you do not wish to load a style sheet into a richtext editor, leave this field blank.';
-
-$_lang['setting_editor_css_selectors'] = 'Seletores CSS para o Editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Uma lista separada por vírgulas de seletores CSS para um editor texto formatado.';
-
 $_lang['setting_emailsender'] = 'Remetente do Email de Saudação de Registro';
 $_lang['setting_emailsender_desc'] = 'Aqui você pode especificar o e-mail endereço usado quando os Usuários recebem seus nomes de usuário e senhas.';
 $_lang['setting_emailsender_err'] = 'Por favor, indique o endereço de e-mail da administração.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Se ativo, Gravatar será usado como um
 
 $_lang['setting_failed_login_attempts'] = 'Tentativas Frustradas de Login';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Idioma do Editor Front-end';
-$_lang['setting_fe_editor_lang_desc'] = 'Escolha um idioma para o editor para usar quando usado como um editor no front-end.';
 
 $_lang['setting_feed_modx_news'] = 'URL do Feed de Notícias do MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Defina o URL do feed RSS para o painel de notícias do MODX no Gerenciador.';
