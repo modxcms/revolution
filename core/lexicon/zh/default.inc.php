@@ -534,6 +534,7 @@ $_lang['recently_updated'] = '最近更新';
 $_lang['newest'] = '最新的';
 $_lang['oldest'] = '最旧的';
 $_lang['constraints'] = 'Constraints';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = '一月';
 $_lang['february'] = '二月';
