@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Selecteer de standaard template welke
 $_lang['setting_default_per_page'] = 'Standaard Per Pagina';
 $_lang['setting_default_per_page_desc'] = 'Het standaard aantal rijen per pagina dat gebruikt wordt in overzichten in de manager.';
 
-$_lang['setting_editor_css_path'] = 'Pad naar CSS bestand';
-$_lang['setting_editor_css_path_desc'] = 'Vul een pad in naar jouw CSS bestand dat je wilt gebruiken in een richtekst editor. De beste manier om het pad in te voeren is vanaf de root van jouw installatie, bijvoorbeeld: /assets/site/style.css. Indien je geen CSS wilt laden in de richtekst editor, laat dit veld dan leeg.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS Selectors voor de editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Een komma-gescheiden lijst van CSS selectors voor de richtext editor.';
-
 $_lang['setting_emailsender'] = 'Registratie e-mail from adres';
 $_lang['setting_emailsender_desc'] = 'Vul hier het e-mailadres in dat gebruikt wordt voor het versturen van de gebruikers zijn gebruikersnaam en wachtwoord.';
 $_lang['setting_emailsender_err'] = 'Vermeld het e-mailadres voor het e-mail bericht aan gebruikers.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Indien je dit activeert, dan wordt je 
 
 $_lang['setting_failed_login_attempts'] = 'Mislukte inlog pogingen';
 $_lang['setting_failed_login_attempts_desc'] = 'Het aantal foutieve inlogpogingen waarna een gebruiker \'geblokkeerd\' wordt.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end editor taal';
-$_lang['setting_fe_editor_lang_desc'] = 'Kies een taal voor de editor wanneer je een front-end editor gebruikt.';
 
 $_lang['setting_feed_modx_news'] = 'MODX Nieuws Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Stel de URL in voor de RSS feed voor het MODX Nieuws paneel in de manager.';
