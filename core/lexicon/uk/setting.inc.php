@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Select the default Template you wish 
 $_lang['setting_default_per_page'] = 'Default Per Page';
 $_lang['setting_default_per_page_desc'] = 'The default number of results to show in grids throughout the manager.';
 
-$_lang['setting_editor_css_path'] = 'Path to CSS file';
-$_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that you wish to use within a richtext editor. The best way to enter the path is to enter the path from the root of your server, for example: /assets/site/style.css. If you do not wish to load a style sheet into a richtext editor, leave this field blank.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS Selectors for Editor';
-$_lang['setting_editor_css_selectors_desc'] = 'A comma-separated list of CSS selectors for a richtext editor.';
-
 $_lang['setting_emailsender'] = 'Registration Email From Address';
 $_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'Ліміт спроб авторизації';
 $_lang['setting_failed_login_attempts_desc'] = 'Кількість невдалих спроб входу до системи, при перевищенні якої користувача буде заблоковано.';
-
-$_lang['setting_fe_editor_lang'] = 'Мова редактора фронт-енду';
-$_lang['setting_fe_editor_lang_desc'] = 'Виберіть мову, яка використовуватиметься у текстовому редакторі фронт-енду сайту.';
 
 $_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
