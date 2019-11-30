@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Son Güncellenen';
 $_lang['newest'] = 'En yeni';
 $_lang['oldest'] = 'En Eski';
 $_lang['constraints'] = 'Kısıtlamalar';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Ocak';
 $_lang['february'] = 'Şubat';
