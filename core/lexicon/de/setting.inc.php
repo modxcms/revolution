@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Wählen Sie das Standard-Template, da
 $_lang['setting_default_per_page'] = 'Standardanzahl der Einträge pro Seite';
 $_lang['setting_default_per_page_desc'] = 'Standardanzahl der Einträge pro Seite in den Tabellen im gesamten Manager.';
 
-$_lang['setting_editor_css_path'] = 'Pfad zur CSS-Datei';
-$_lang['setting_editor_css_path_desc'] = 'Geben Sie den Pfad zu Ihrer CSS-Datei ein, die Sie im von Ihnen verwendeten Rich-Text-Editor benutzen möchten. Der beste Weg, den Pfad anzugeben, ist, den Pfad vom Server-Root aus einzugeben, z.B. /assets/site/style.css. Wenn Sie kein Stylesheet in den Editor laden möchten, lassen Sie dieses Feld leer.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS-Selektoren für den Editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Eine kommaseparierte Liste von CSS-Selektoren für den von Ihnen verwendeten Rich-Text-Editor.';
-
 $_lang['setting_emailsender'] = 'Absender-E-Mail-Adresse für Registrierungsbestätigungen';
 $_lang['setting_emailsender_desc'] = 'Hier können Sie die E-Mail-Adresse angeben, die verwendet wird, wenn Benutzern ihre Benutzernamen und Passwörter zugeschickt werden.';
 $_lang['setting_emailsender_err'] = 'Bitte geben Sie die Administrations-E-Mail-Adresse an.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Wenn diese Einstellung aktiviert ist, 
 
 $_lang['setting_failed_login_attempts'] = 'Fehlgeschlagene Login-Versuche';
 $_lang['setting_failed_login_attempts_desc'] = 'Geben Sie an, wie viele fehlgeschlagene Login-Versuche erlaubt sein sollen, bevor der Benutzer geblockt wird.';
-
-$_lang['setting_fe_editor_lang'] = 'Frontend-Editor-Sprache';
-$_lang['setting_fe_editor_lang_desc'] = 'Wählen Sie eine Sprache aus, die im Editor benutzt werden soll, wenn er als Frontent-Editor (also innerhalb der eigentlichen Website) verwendet wird.';
 
 $_lang['setting_feed_modx_news'] = 'URL des MODX-Newsfeeds';
 $_lang['setting_feed_modx_news_desc'] = 'Geben Sie die URL des RSS-Feeds für das MODX-News-Fenster im Manager an.';
