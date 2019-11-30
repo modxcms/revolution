@@ -51,6 +51,7 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
@@ -59,6 +60,7 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,

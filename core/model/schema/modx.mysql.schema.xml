@@ -288,7 +288,7 @@
     </object>
 
     <object class="modActiveUser" table="active_users" extends="xPDO\Om\xPDOObject">
-        <field key="internalKey" dbtype="int" precision="9" phptype="integer" null="false" default="0" index="pk" />
+        <field key="internalKey" dbtype="int" precision="9" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="username" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
         <field key="lasthit" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
         <field key="id" dbtype="int" precision="10" phptype="integer" null="true" />
@@ -864,7 +864,6 @@
 
     <object class="modResource" table="site_content" extends="MODX\Revolution\modAccessibleSimpleObject" inherit="single">
         <field key="type" dbtype="varchar" precision="20" phptype="string" null="false" default="document" />
-        <field key="contentType" dbtype="varchar" precision="50" phptype="string" null="false" default="text/html" />
         <field key="pagetitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="longtitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
@@ -873,7 +872,7 @@
         <field key="published" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="pub_date" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" index="index" />
         <field key="unpub_date" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" index="index" />
-        <field key="parent" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="isfolder" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="introtext" dbtype="text" phptype="string" index="fulltext" indexgrp="content_ft_idx" />
         <field key="content" dbtype="mediumtext" phptype="string" index="fulltext" indexgrp="content_ft_idx" />
@@ -892,9 +891,6 @@
         <field key="publishedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
         <field key="publishedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="menutitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
-        <field key="donthit" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
-        <field key="privateweb" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
-        <field key="privatemgr" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="content_dispo" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="hidemenu" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="MODX\Revolution\modDocument" index="index" />
@@ -1185,13 +1181,13 @@
         <composite alias="TemplateVarResourceGroups" class="MODX\Revolution\modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?!\s)$/" message="tv_err_invalid_name" />
-            <rule field="name" name="reserved" type="preg_match" rule="/^(?!(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree)$)/" message="tv_err_reserved_name" />
+            <rule field="name" name="reserved" type="preg_match" rule="/^(?!(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree)$)/" message="tv_err_reserved_name" />
         </validation>
     </object>
 
     <object class="modTemplateVarResource" table="site_tmplvar_contentvalues" extends="xPDO\Om\xPDOSimpleObject">
-        <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
-        <field key="contentid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="contentid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="value" dbtype="mediumtext" phptype="string" null="false" />
 
         <index alias="tmplvarid" name="tmplvarid" primary="false" unique="false" type="BTREE">
@@ -1210,7 +1206,7 @@
     </object>
 
     <object class="modTemplateVarResourceGroup" table="site_tmplvar_access" extends="xPDO\Om\xPDOSimpleObject">
-        <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="documentgroup" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 
         <index alias="tmplvar_template" name="tmplvar_template" type="BTREE">
@@ -1223,8 +1219,8 @@
     </object>
 
     <object class="modTemplateVarTemplate" table="site_tmplvar_templates" extends="xPDO\Om\xPDOObject">
-        <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="pk" />
-        <field key="templateid" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+        <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
+        <field key="templateid" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
@@ -1360,8 +1356,8 @@
         <field key="type" dbtype="varchar" precision="15" phptype="string" null="false" default="" />
         <field key="subject" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="message" dbtype="text" phptype="string" null="false" default="" />
-        <field key="sender" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
-        <field key="recipient" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="sender" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="recipient" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="private" dbtype="tinyint" precision="4" phptype="integer" null="false" default="0" />
         <field key="date_sent" dbtype="datetime" phptype="datetime" null="true" default="NULL" />
         <field key="read" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
@@ -1371,7 +1367,7 @@
     </object>
 
     <object class="modUserProfile" table="user_attributes" extends="xPDO\Om\xPDOSimpleObject">
-        <field key="internalKey" dbtype="int" precision="10" phptype="integer" null="false" index="unique" />
+        <field key="internalKey" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="unique" />
         <field key="fullname" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="email" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="phone" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
@@ -1405,7 +1401,7 @@
     </object>
 
     <object class="modUserSetting" table="user_settings" extends="xPDO\Om\xPDOObject">
-        <field key="user" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
+        <field key="user" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="pk" />
         <field key="value" dbtype="text" phptype="string" />
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
