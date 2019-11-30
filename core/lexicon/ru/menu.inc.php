@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Параметры';
 $_lang['parameters_desc'] = 'Любые параметры запроса, которые вы хотите добавить к ссылке, когда нажимаете по ней в меню. (Прим.: &expire=1)';
 $_lang['permissions'] = 'Привилегии';
 $_lang['permissions_desc'] = 'Ключ привилегии необходимый для загрузки этого элемента меню.';
-$_lang['topmenu'] = 'Main Menu';
-$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
+$_lang['topmenu'] = 'Главное меню';
+$_lang['topmenu_desc'] = 'Здесь вы можете связать «действия» с пунктами главного меню системы управления. Просто переместите меню на соответствующие позиции.';
