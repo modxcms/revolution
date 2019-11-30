@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Nedávno aktualizované';
 $_lang['newest'] = 'Nejnovější';
 $_lang['oldest'] = 'Nejstarší';
 $_lang['constraints'] = 'Omezení';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Leden';
 $_lang['february'] = 'Únor';
