@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Välj den standarmall du vill använd
 $_lang['setting_default_per_page'] = 'Antal per sida';
 $_lang['setting_default_per_page_desc'] = 'Det antal resultat som visas i rutnät som standard.';
 
-$_lang['setting_editor_css_path'] = 'Sökväg till CSS-fil';
-$_lang['setting_editor_css_path_desc'] = 'Skriv in sökvägen till den CSS-fil du vill använda i en richtext-editor. Det bästa sättet att ange sökvägen är att göra det från serverns rot, tex /assets/site/style.css. Lämna fältet tomt om du inte vill ladda en stilmall i en richtext-editor.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS-selektorer för editor';
-$_lang['setting_editor_css_selectors_desc'] = 'En kommaseparerad lista med CSS-selektorer för en richtext-editor.';
-
 $_lang['setting_emailsender'] = 'Avsändaradress i registreringsmeddelande';
 $_lang['setting_emailsender_desc'] = 'Här kan du ange e-postadressen som används för att skicka användarnamn och lösenord till en användare.';
 $_lang['setting_emailsender_err'] = 'Ange e-postadressen för administrationen.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Om den här aktiveras kommer Gravatar 
 
 $_lang['setting_failed_login_attempts'] = 'Misslyckade inloggningsförsök';
 $_lang['setting_failed_login_attempts_desc'] = 'Antalet misslyckade inloggningsförsök en användare kan göra innan den blir "blockerad".';
-
-$_lang['setting_fe_editor_lang'] = 'Editorns språk';
-$_lang['setting_fe_editor_lang_desc'] = 'Här kan du ange språk för editorn som används.';
 
 $_lang['setting_feed_modx_news'] = 'URL för MODX nyhetsflöde';
 $_lang['setting_feed_modx_news_desc'] = 'Ange URL:en till RSS-flödet för MODX nyhetspanel i hanteraren.';
