@@ -246,12 +246,6 @@ $_lang['setting_default_template_desc'] = 'Valige vaikimisi Template, mida soovi
 $_lang['setting_default_per_page'] = 'Vaikimisi Lehe kohta';
 $_lang['setting_default_per_page_desc'] = 'Vaikimisi number tulemusi, mida näidta tabelis kogu manageris.';
 
-$_lang['setting_editor_css_path'] = 'Sihtkoht CSS failile';
-$_lang['setting_editor_css_path_desc'] = 'Sisestage sihtkoht CSS failile, mida soovite kasutada võimalustega tekstiredakoris (richtext editor). Parim viis on sihtkoht sisestada nõnda, et server root kataloogist, nagu näiteks: /assets/site/style.css. Kui ei soovi laadida stiili richtext editori, jätke see väli tühjaks.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS Selectorid Editori jaoks';
-$_lang['setting_editor_css_selectors_desc'] = 'Koma eraldatud list CSS selectoritega richtext editori jaoks.';
-
 $_lang['setting_emailsender'] = 'Registreerumise E-maili From Aadress';
 $_lang['setting_emailsender_desc'] = 'Siit saate määrata, e-maili aadressi, mida kasutatakse kautajanime ja parooli e-postide saatmisel kasutajatele.';
 $_lang['setting_emailsender_err'] = 'Palun määrake administratiooni emaili aadress.';
@@ -274,9 +268,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'Ebaõnnestunud Sisselogimise Katseid';
 $_lang['setting_failed_login_attempts_desc'] = 'Arv läbikukkunud sisselogimise katseid, mida kasutaja saab sootatada, enne kui ta \'blokeeritakse\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end Editori Keel';
-$_lang['setting_fe_editor_lang_desc'] = 'Valige keel editorile, kui seda kasutatakse front-endis.';
 
 $_lang['setting_feed_modx_news'] = 'MODX Uudiste Feed';
 $_lang['setting_feed_modx_news_desc'] = 'Määrake URL RSS feed-ile, et kuvada MODX uundiseid manageris.';
