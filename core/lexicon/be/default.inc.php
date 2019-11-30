@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Нядаўна абноўленыя';
 $_lang['newest'] = 'Спачатку новыя';
 $_lang['oldest'] = 'Спачатку старыя';
 $_lang['constraints'] = 'Абмежаванні';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Студзень';
 $_lang['february'] = 'Люты';
