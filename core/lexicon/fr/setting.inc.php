@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Sélectionnez le modèle par défaut 
 $_lang['setting_default_per_page'] = 'Eléments par page';
 $_lang['setting_default_per_page_desc'] = 'Nombre de résultats par page à afficher dans les grilles du manager.';
 
-$_lang['setting_editor_css_path'] = 'Chemin vers le fichier CSS';
-$_lang['setting_editor_css_path_desc'] = 'Indiquez le chemin vers le fichier CSS que vous souhaitez utiliser à l\'intérieur de votre éditeur de texte riche. Le meilleur moyen est d\'entrer le chemin depuis la racine de votre serveur, par exemple : /assets/site/style.css. Si vous ne souhaitez pas charger une feuille de style dans votre éditeur de texte riche, laissez ce champ vide.';
-
-$_lang['setting_editor_css_selectors'] = 'Sélecteurs CSS pour l\'éditeur';
-$_lang['setting_editor_css_selectors_desc'] = 'Une liste des sélecteurs CSS, séparés par une virgule, pour l\'éditeur de texte riche.';
-
 $_lang['setting_emailsender'] = 'Adresse e-mail d\'inscription';
 $_lang['setting_emailsender_desc'] = 'Ici vous pouvez indiquer l\'adresse email utilisée lors de l\'envoi des noms et mots de passe des utilisateurs.';
 $_lang['setting_emailsender_err'] = 'Veuillez indiquer l\'adresse e-mail d\'administration.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Activez cette option afin d\'utiliser 
 
 $_lang['setting_failed_login_attempts'] = 'Tentatives d\'identification échouées';
 $_lang['setting_failed_login_attempts_desc'] = 'Nombre d\'échecs de connexion utilisateur autorisés avant d\'être \'bloqué\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Langue de l\'éditeur de Front-end';
-$_lang['setting_fe_editor_lang_desc'] = 'Choisissez une langue à utiliser pour dans l\'éditeur de front-end.';
 
 $_lang['setting_feed_modx_news'] = 'URL du flux d\'actualités de MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Défini l\'URL du flux d\'actualités du panneau de MODX dans le manager.';
