@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Pilih Template standar yang ingin And
 $_lang['setting_default_per_page'] = 'Default Per halaman';
 $_lang['setting_default_per_page_desc'] = 'Menjadi nomor standar hasil untuk menunjukkan di grid seluruh manajer.';
 
-$_lang['setting_editor_css_path'] = 'Path ke CSS file';
-$_lang['setting_editor_css_path_desc'] = 'Masukkan path ke file CSS Anda yang ingin Anda gunakan dalam sebuah editor rich text editor. Cara terbaik untuk memasuki jalan adalah untuk memasuki jalan dari akar dari server Anda, misalnya: /assets/site/style.css. Jika Anda tidak ingin memuat sebuah style sheet ke editor editor richtext, biarkan bidang ini kosong.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS penyeleksi untuk Editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Daftar comma separated CSS penyeleksi untuk editor richtext editor.';
-
 $_lang['setting_emailsender'] = 'Pendaftaran Email dari alamat';
 $_lang['setting_emailsender_desc'] = 'Di sini Anda dapat menentukan email alamat yang digunakan ketika mengirim pengguna username dan password.';
 $_lang['setting_emailsender_err'] = 'Mohon sebutkan alamat email administrasi.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Jika diaktifkan, Gravatar akan digunak
 
 $_lang['setting_failed_login_attempts'] = 'Upaya login gagal';
 $_lang['setting_failed_login_attempts_desc'] = 'Jumlah usaha gagal login pengguna diperbolehkan sebelum \'diblokir\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end Editor bahasa';
-$_lang['setting_fe_editor_lang_desc'] = 'Pilih bahasa untuk editor untuk digunakan ketika digunakan sebagai front-end editor.';
 
 $_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Menetapkan URL untuk RSS feed untuk panel MODX berita di manager.';
