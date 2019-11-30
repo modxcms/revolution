@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Vyberte výchozí šablonu, která bu
 $_lang['setting_default_per_page'] = 'Počet výsledků na stránce';
 $_lang['setting_default_per_page_desc'] = 'Výchozí počet zobrazených výsledků na stránce v rámci celého správce obsahu.';
 
-$_lang['setting_editor_css_path'] = 'Cesta k CSS souboru';
-$_lang['setting_editor_css_path_desc'] = 'Zadejte cestu k CSS souboru, který chcete použít v rámci WYSIWYG editoru. Nejlepší je zadat cestu od kořene portálu, například: /assets/site/style.css. Pokud nechcete používat ve WYSIWYG editoru CSS styly ponechte toto políčko prázdné.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS selektory pro editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Čárkou oddělený seznam CSS selektorů pro WYSIWYG editor.';
-
 $_lang['setting_emailsender'] = 'Adresa odesílatele registračního e-mailu';
 $_lang['setting_emailsender_desc'] = 'Zadejte e-mailovou adresu, která se zobrazí jako odesílatel v e-mailu při odeslání uživatelských údajů po registraci.';
 $_lang['setting_emailsender_err'] = 'Zadejte e-mail.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Je-li povoleno, jako profilový obráz
 
 $_lang['setting_failed_login_attempts'] = 'Počet neúspěšných přihlášení';
 $_lang['setting_failed_login_attempts_desc'] = 'Počet neúspěšných pokusů o přihlášení předtím než bude uživatel zablokován.';
-
-$_lang['setting_fe_editor_lang'] = 'Jazyk frontend editoru';
-$_lang['setting_fe_editor_lang_desc'] = 'Vyberte jazyk použitý v editoru na frontendu, pokud je použit.';
 
 $_lang['setting_feed_modx_news'] = 'MODX RSS URL novinek';
 $_lang['setting_feed_modx_news_desc'] = 'Zadejte URL pro RSS feed nesoucí novinky.';
