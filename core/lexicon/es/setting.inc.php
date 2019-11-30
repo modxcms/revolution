@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Selecciona la Plantilla predeterminad
 $_lang['setting_default_per_page'] = 'Elementos por Página';
 $_lang['setting_default_per_page_desc'] = 'El número predeterminado de resultados a mostrar en cada página en la cuadrícula de todas las páginas del panel de administración.';
 
-$_lang['setting_editor_css_path'] = 'Ruta al archivo CSS';
-$_lang['setting_editor_css_path_desc'] = 'Introduce la ruta a la hoja de estilos CSS que deseas utilizar dentro del editor de texto enriquecido. La mejor manera de de introducirla es mediante una ruta absoluta desde la raíz del servidor, por ejemplo: /assets/site/style.css. Si no deseas cargar una hoja de estilos en el editor de texto enriquecido, deja este campo en blanco.';
-
-$_lang['setting_editor_css_selectors'] = 'Selectores de CSS para el Editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Una lista separada por comas de selectores de CSS para el editor de texto formateado.';
-
 $_lang['setting_emailsender'] = 'Remitente del Email de Registro';
 $_lang['setting_emailsender_desc'] = 'Aquí puedes especificar la dirección de email usada cuando se le envíen a los usuarios sus credenciales de acceso.';
 $_lang['setting_emailsender_err'] = 'Por favor indica la dirección de email de la administración.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'Intentos de Inicio de Sesión Fallidos';
 $_lang['setting_failed_login_attempts_desc'] = 'El número de intentos de inicio de sesión fallidos que un usuario tiene permitidos antes de ser "bloqueado".';
-
-$_lang['setting_fe_editor_lang'] = 'Idioma del Editor del Front-end';
-$_lang['setting_fe_editor_lang_desc'] = 'Escoge un idioma para el editor cuando sea usado como editor del Front-end.';
 
 $_lang['setting_feed_modx_news'] = 'URL del Feed de Noticias de MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Configura la URL para el feed de RSS para el panel de noticias de MODX en el panel de administración.';
