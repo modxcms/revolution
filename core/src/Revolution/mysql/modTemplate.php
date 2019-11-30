@@ -1,6 +1,8 @@
 <?php
 namespace MODX\Revolution\mysql;
 
+use xPDO\xPDO;
+
 class modTemplate extends \MODX\Revolution\modTemplate
 {
 

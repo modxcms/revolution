@@ -154,6 +154,7 @@ class modResource extends \MODX\Revolution\modResource
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,

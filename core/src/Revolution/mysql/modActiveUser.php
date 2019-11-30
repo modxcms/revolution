@@ -26,6 +26,7 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
             array (
                 'dbtype' => 'int',
                 'precision' => '9',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,

@@ -45,6 +45,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'index' => 'unique',
