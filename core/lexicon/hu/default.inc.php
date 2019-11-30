@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Legutóbb frissített';
 $_lang['newest'] = 'Legújabb';
 $_lang['oldest'] = 'Legrégibb';
 $_lang['constraints'] = 'Megszorítások';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'január';
 $_lang['february'] = 'február';
