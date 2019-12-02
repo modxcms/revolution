@@ -737,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Gyorsítótár ürítésének alapértéke
 $_lang['setting_syncsite_default_desc'] = 'Válassza az \'igen\'-t a gyorsítótár alapértelmezett ürítéséhez az erőforrás mentése után.';
 $_lang['setting_syncsite_default_err'] = 'Kérjük, adja meg, hogy akarja-e a gyorsítótár ürítését alapértelmezetten egy erőforrás mentése után.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Mutassa a leírásokat a főmenüben';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Ha a beállítás \'Nem\', a MODX kezelő nem mutatja a leírásokat a főmenüben.';
 
 $_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
 $_lang['setting_tree_default_sort_desc'] = 'The default sort field for the Resource tree when loading the manager.';
