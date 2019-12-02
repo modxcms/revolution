@@ -1,3 +1,9 @@
+/**
+ * @class MODx.panel.Dashboard
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-panel-dashboard
+ */
 MODx.panel.Dashboard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -9,7 +15,7 @@ MODx.panel.Dashboard = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: _('dashboard')
+            html: _('dashboard')
             ,id: 'modx-dashboard-header'
             ,xtype: 'modx-header'
         },{
@@ -191,6 +197,12 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
 });
 Ext.reg('modx-panel-dashboard',MODx.panel.Dashboard);
 
+/**
+ * @class MODx.grid.DashboardWidgetPlacements
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-dashboard-widget-placements
+ */
 MODx.grid.DashboardWidgetPlacements = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -218,6 +230,12 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
             header: _('widget')
             ,dataIndex: 'name_trans'
             ,width: 600
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=system/dashboards/widget/update&id=' + record.data.widget
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('rank')
             ,dataIndex: 'rank'
@@ -300,8 +318,12 @@ Ext.extend(MODx.grid.DashboardWidgetPlacements,MODx.grid.LocalGrid,{
 });
 Ext.reg('modx-grid-dashboard-widget-placements',MODx.grid.DashboardWidgetPlacements);
 
-
-
+/**
+ * @class MODx.window.DashboardWidgetPlace
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-dashboard-widget-place
+ */
 MODx.window.DashboardWidgetPlace = function(config) {
     config = config || {};
     this.ident = config.ident || 'dbugadd'+Ext.id();
@@ -365,7 +387,6 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
 });
 Ext.reg('modx-window-dashboard-widget-place',MODx.window.DashboardWidgetPlace);
 
-
 /*
 MODx.grid.DashboardUserGroups = function(config) {
     config = config || {};
@@ -404,13 +425,13 @@ Ext.extend(MODx.grid.DashboardUserGroups,MODx.grid.LocalGrid,{
 
     ,addUserGroup: function(btn,e) {
         this.loadWindow(btn,e,{
-           xtype: 'modx-window-dashboard-usergroup-add'
-           ,listeners: {
+            xtype: 'modx-window-dashboard-usergroup-add'
+            ,listeners: {
                 'success': {fn:function(vs) {
                     var rec = new this.propRecord(vs);
                     this.getStore().add(rec);
                 },scope:this}
-           }
+            }
         });
         var w = Ext.getCmp('modx-window-dashboard-usergroup-add');
         w.reset();
@@ -421,7 +442,6 @@ Ext.extend(MODx.grid.DashboardUserGroups,MODx.grid.LocalGrid,{
     }
 });
 Ext.reg('modx-grid-dashboard-usergroups',MODx.grid.DashboardUserGroups);
-
 
 MODx.window.DashboardUserGroupAdd = function(config) {
     config = config || {};
@@ -464,7 +484,12 @@ Ext.extend(MODx.window.DashboardUserGroupAdd,MODx.Window,{
 Ext.reg('modx-window-dashboard-usergroup-add',MODx.window.DashboardUserGroupAdd);
 */
 
-
+/**
+ * @class MODx.combo.DashboardWidgets
+ * @extends MODx.combo.ComboBox
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-dashboard-widgets
+ */
 MODx.combo.DashboardWidgets = function(config) {
     config = config || {};
     Ext.applyIf(config,{

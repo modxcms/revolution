@@ -1,3 +1,9 @@
+/**
+ * @class MODx.grid.DashboardWidget
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-dashboard-widget-form
+ */
 MODx.panel.DashboardWidget = function(config) {
     config = config || {};
 
@@ -170,7 +176,7 @@ MODx.panel.DashboardWidget = function(config) {
                 html: '<h4>'+_('widget_content')+'</h4>'
                 ,border: false
                 ,anchor: '100%'
-             },*/{
+            },*/{
                 xtype: 'textarea'
                 ,name: 'content'
                 ,fieldLabel: _('widget_content')
@@ -244,7 +250,7 @@ MODx.panel.DashboardWidget = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: _('widget_new')
+            html: _('widget_new')
             ,id: 'modx-dashboard-widget-header'
             ,xtype: 'modx-header'
         },{
@@ -275,6 +281,7 @@ MODx.panel.DashboardWidget = function(config) {
 };
 Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.initialized) { return false; }
         if (Ext.isEmpty(this.config.record.id)) {
@@ -296,6 +303,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
         if (g) {
@@ -311,6 +319,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             });
         }
     }
+
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             MODx.loadPage('system/dashboards/widget/update', 'id='+o.result.object.id);
@@ -323,7 +332,12 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
 });
 Ext.reg('modx-panel-dashboard-widget',MODx.panel.DashboardWidget);
 
-
+/**
+ * @class MODx.grid.DashboardWidgetDashboards
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of options.
+ * @xtype modx-grid-dashboard-widget-dashboards
+ */
 MODx.grid.DashboardWidgetDashboards = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -337,6 +351,12 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
             header: _('dashboard')
             ,dataIndex: 'name'
             ,width: 200
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=system/dashboards/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -349,8 +369,13 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
 Ext.extend(MODx.grid.DashboardWidgetDashboards,MODx.grid.LocalGrid);
 Ext.reg('modx-grid-dashboard-widget-dashboards',MODx.grid.DashboardWidgetDashboards);
 
-
-/* seems unused */
+/**
+ * SEEMS UNUSED
+ * @class MODx.window.WidgetAddDashboard
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-widget-add-dashboard
+ */
 MODx.window.WidgetAddDashboard = function(config) {
     config = config || {};
     this.ident = config.ident || 'dbugadd'+Ext.id();
@@ -402,6 +427,12 @@ Ext.extend(MODx.window.WidgetAddDashboard,MODx.Window,{
 });
 Ext.reg('modx-window-widget-add-dashboard',MODx.window.WidgetAddDashboard);
 
+/**
+ * @class MODx.combo.DashboardWidgetType
+ * @extends MODx.combo.ComboBox
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-dashboard-widget-type
+ */
 MODx.combo.DashboardWidgetType = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -431,7 +462,12 @@ MODx.combo.DashboardWidgetType = function(config) {
 Ext.extend(MODx.combo.DashboardWidgetType,MODx.combo.ComboBox);
 Ext.reg('modx-combo-dashboard-widget-type',MODx.combo.DashboardWidgetType);
 
-
+/**
+ * @class MODx.combo.DashboardWidgetSize
+ * @extends MODx.combo.ComboBox
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-dashboard-widget-size
+ */
 MODx.combo.DashboardWidgetSize = function(config) {
     config = config || {};
     Ext.applyIf(config,{

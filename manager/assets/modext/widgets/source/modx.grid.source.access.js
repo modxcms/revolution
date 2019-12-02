@@ -11,13 +11,39 @@ MODx.grid.MediaSourceAccess = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-source-access'
         ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','authority_name','policy','policy_name','context_key']
-		,type: 'modAccessMediaSource'
-		,paging: true
-        ,columns: [
-            { header: _('user_group') ,dataIndex: 'principal_name' ,width: 120 }
-            ,{ header: _('minimum_role') ,dataIndex: 'authority_name' ,width: 50 }
-            ,{ header: _('policy') ,dataIndex: 'policy_name' ,width: 175 }
-        ]
+        ,type: 'modAccessMediaSource'
+        ,paging: true
+        ,columns: [{
+            header: _('user_group')
+            ,dataIndex: 'principal_name'
+            ,width: 120
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/usergroup/update&id=' + record.data.principal
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        },{
+            header: _('minimum_role')
+            ,dataIndex: 'authority_name'
+            ,width: 50
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/permission'
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        },{
+            header: _('policy')
+            ,dataIndex: 'policy_name'
+            ,width: 175
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/access/policy/update&id=' + record.data.policy
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        }]
         ,tbar: [{
             text: _('source_access_add')
             ,cls: 'primary-button'
@@ -31,6 +57,25 @@ MODx.grid.MediaSourceAccess = function(config) {
 Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
     combos: {}
     ,windows: {}
+
+    ,getMenu: function() {
+        var menu = [];
+        if (this.menu.record.id) {
+            menu.push({
+                text: _('source_access_update')
+                ,handler: this.editAcl
+            });
+        }
+        menu.push({
+            text: _('source_access_remove')
+            ,handler: this.remove.createDelegate(this,[{
+                title: _('source_access_remove')
+                ,text: _('source_access_remove_confirm')
+            }])
+        });
+
+        return menu;
+    }
 
     ,createAcl: function(itm,e) {
         var r = {
@@ -98,33 +143,19 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
                 ,type: this.config.type || 'modAccessMediaSource'
             }
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
-    ,getMenu: function() {
-        var menu = [];
-        if (this.menu.record.id) {
-            menu.push({
-                text: _('source_access_update')
-                ,handler: this.editAcl
-            });
-        }
-        menu.push({
-            text: _('source_access_remove')
-            ,handler: this.remove.createDelegate(this,[{
-                title: _('source_access_remove')
-                ,text: _('source_access_remove_confirm')
-            }])
-        });
-
-        return menu;
-    }
-
 });
 Ext.reg('modx-grid-source-access',MODx.grid.MediaSourceAccess);
 
-
+/**
+ * @class MODx.window.CreateSourceAccess
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-source-access-create
+ */
 MODx.window.CreateSourceAccess = function(config) {
     config = config || {};
     var r = config.record;
@@ -210,6 +241,12 @@ Ext.extend(MODx.window.CreateSourceAccess,MODx.Window,{
 });
 Ext.reg('modx-window-source-access-create',MODx.window.CreateSourceAccess);
 
+/**
+ * @class MODx.window.UpdateSourceAccess
+ * @extends MODx.window.CreateSourceAccess
+ * @param {Object} config An object of options.
+ * @xtype modx-window-source-access-update
+ */
 MODx.window.UpdateSourceAccess = function(config) {
     config = config || {};
     var r = config.record;

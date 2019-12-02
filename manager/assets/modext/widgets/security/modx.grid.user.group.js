@@ -27,10 +27,22 @@ MODx.grid.UserGroups = function(config) {
             header: _('user_group')
             ,dataIndex: 'name'
             ,width: 175
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/usergroup/update&id=' + record.data.usergroup
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('role')
             ,dataIndex: 'rolename'
             ,width: 175
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/permission'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('rank')
             ,dataIndex: 'rank'
@@ -58,8 +70,29 @@ MODx.grid.UserGroups = function(config) {
     this.addEvents('beforeUpdateRole','afterUpdateRole','beforeAddGroup','afterAddGroup','beforeReorderGroup','afterReorderGroup');
 };
 Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
+    _showMenu: function(g,ri,e) {
+        e.stopEvent();
+        e.preventDefault();
+        var m = this.menu;
+        m.recordIndex = ri;
+        m.record = this.getStore().getAt(ri).data;
+        if (!this.getSelectionModel().isSelected(ri)) {
+            this.getSelectionModel().selectRow(ri);
+        }
+        m.removeAll();
+        m.add({
+            text: _('user_role_update')
+            ,handler: this.updateRole
+            ,scope: this
+        },'-',{
+            text: _('user_group_user_remove')
+            ,handler: this.remove.createDelegate(this,[{text: _('user_group_remove_confirm')}])
+            ,scope: this
+        });
+        m.showAt(e.xy);
+    }
 
-    onBeforeRowMove: function(dt,sri,ri,sels) {
+    ,onBeforeRowMove: function(dt,sri,ri,sels) {
         if (!this.fireEvent('beforeReorderGroup',{dt:dt,sri:sri,ri:ri,sels:sels})) {
             return false;
         }
@@ -87,6 +120,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
         this.fireEvent('afterReorderGroup');
         return true;
     }
+
     ,updateRole: function(btn,e) {
         var r = this.menu.record;
         r.user = this.config.user;
@@ -107,6 +141,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
             }
         });
     }
+
     ,addGroup: function(btn,e) {
         var r = {member:this.config.user};
         this.fireEvent('beforeUpdateRole',r);
@@ -124,33 +159,15 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
             }
         });
     }
-
-    ,_showMenu: function(g,ri,e) {
-        e.stopEvent();
-        e.preventDefault();
-        var m = this.menu;
-        m.recordIndex = ri;
-        m.record = this.getStore().getAt(ri).data;
-        if (!this.getSelectionModel().isSelected(ri)) {
-            this.getSelectionModel().selectRow(ri);
-        }
-        m.removeAll();
-        m.add({
-            text: _('user_role_update')
-            ,handler: this.updateRole
-            ,scope: this
-        },'-',{
-            text: _('user_group_user_remove')
-            ,handler: this.remove.createDelegate(this,[{text: _('user_group_remove_confirm')}])
-            ,scope: this
-        });
-        m.showAt(e.xy);
-    }
 });
 Ext.reg('modx-grid-user-groups',MODx.grid.UserGroups);
 
-
-
+/**
+ * @class MODx.window.AddGroupToUser
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-addgroup
+ */
 MODx.window.AddGroupToUser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -208,8 +225,12 @@ Ext.extend(MODx.window.AddGroupToUser,MODx.Window,{
 });
 Ext.reg('modx-window-user-addgroup',MODx.window.AddGroupToUser);
 
-
-
+/**
+ * @class MODx.window.UpdateUserGroupsRole
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-groups-role-update
+ */
 MODx.window.UpdateUserGroupsRole = function(config) {
     config = config || {};
     Ext.applyIf(config,{

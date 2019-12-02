@@ -19,12 +19,35 @@ MODx.grid.AccessContext = function(config) {
         ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','policy','policy_name','cls']
         ,type: 'modAccessContext'
         ,paging: true
-        ,columns: [
-            { header: _('context') ,dataIndex: 'target_name' ,width: 100 }
-            ,{ header: _('user_group') ,dataIndex: 'principal_name' ,width: 120 }
-            ,{ header: _('authority') ,dataIndex: 'authority' ,width: 50 }
-            ,{ header: _('policy') ,dataIndex: 'policy_name' ,width: 175 }
-        ]
+        ,columns: [{
+            header: _('context')
+            ,dataIndex: 'target_name'
+            ,width: 100
+        },{
+            header: _('user_group')
+            ,dataIndex: 'principal_name'
+            ,width: 120
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/usergroup/update&id=' + record.data.principal
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        },{
+            header: _('authority')
+            ,dataIndex: 'authority'
+            ,width: 50
+        },{
+            header: _('policy')
+            ,dataIndex: 'policy_name'
+            ,width: 175
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/access/policy/update&id=' + record.data.policy
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        }]
         ,tbar: [{
             text: _('acl_add')
             ,cls: 'primary-button'
@@ -119,15 +142,19 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
                 ,type: this.config.type || 'modAccessContext'
             }
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
-
 });
 Ext.reg('modx-grid-access-context',MODx.grid.AccessContext);
 
-
+/**
+ * @class MODx.window.CreateAccessContext
+ * @extends MODx.window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-access-context-create
+ */
 MODx.window.CreateAccessContext = function(config) {
     config = config || {};
     var r = config.record;
@@ -187,6 +214,12 @@ MODx.window.CreateAccessContext = function(config) {
 Ext.extend(MODx.window.CreateAccessContext,MODx.Window);
 Ext.reg('modx-window-access-context-create',MODx.window.CreateAccessContext);
 
+/**
+ * @class MODx.window.UpdateAccessContext
+ * @extends MODx.window.CreateAccessContext
+ * @param {Object} config An object of options.
+ * @xtype modx-window-access-context-update
+ */
 MODx.window.UpdateAccessContext = function(config) {
     config = config || {};
     var r = config.record;

@@ -1,4 +1,9 @@
-
+/**
+ * @class MODx.grid.DashboardWidgets
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-dashboard-widgets
+ */
 MODx.grid.DashboardWidgets = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -29,6 +34,11 @@ MODx.grid.DashboardWidgets = function(config) {
             ,width: 150
             ,sortable: true
             ,editable: false
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=system/dashboards/widget/update&id=' + record.data.id
+                });
+            }, scope: this }
         },{
             header: _('widget_type')
             ,dataIndex: 'type'
@@ -119,6 +129,26 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
     ,createDashboard: function() {
         MODx.loadPage('system/dashboards/widget/create');
     }
+
+    ,updateWidget: function() {
+        MODx.loadPage('system/dashboards/widget/update', 'id='+this.menu.record.id);
+    }
+
+    ,removeWidget: function() {
+        MODx.msg.confirm({
+            title: _('widget_remove')
+            ,text: _('widget_remove_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'System/Dashboard/Widget/Remove'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -141,24 +171,6 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
         return true;
     }
 
-    ,removeWidget: function() {
-        MODx.msg.confirm({
-            title: _('widget_remove')
-            ,text: _('widget_remove_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'System/Dashboard/Widget/Remove'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,updateWidget: function() {
-        MODx.loadPage('system/dashboards/widget/update', 'id='+this.menu.record.id);
-    }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -166,12 +178,13 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
         //this.refresh();
         return true;
     }
+
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'System/Dashboard/Widget/GetList'
-    	};
+        };
         Ext.getCmp('modx-dashboard-widget-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
 });

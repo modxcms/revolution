@@ -1,17 +1,23 @@
+/**
+ * @class MODx.panel.FCProfiles
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration options
+ * @xtype modx-panel-fc-profiles
+ */
 MODx.panel.FCProfiles = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-fc-profiles'
-		,cls: 'container'
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: _('form_customization')
+            html: _('form_customization')
             ,id: 'modx-fcp-header'
             ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('profiles')
             ,autoHeight: true
-			,layout: "form"
+            ,layout: "form"
             ,items: [{
                 html: '<p>'+_('form_customization_msg')+'</p>'
                 ,xtype: 'modx-description'
@@ -19,7 +25,7 @@ MODx.panel.FCProfiles = function(config) {
                 title: ''
                 ,preventRender: true
                 ,xtype: 'modx-grid-fc-profile'
-				,cls:'main-wrapper'
+                ,cls:'main-wrapper'
             }]
         }],{
             id: 'modx-form-customization-tabs'
@@ -30,6 +36,12 @@ MODx.panel.FCProfiles = function(config) {
 Ext.extend(MODx.panel.FCProfiles,MODx.FormPanel);
 Ext.reg('modx-panel-fc-profiles',MODx.panel.FCProfiles);
 
+/**
+ * @class MODx.grid.FCProfile
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-fc-profile
+ */
 MODx.grid.FCProfile = function(config) {
     config = config || {};
     this.sm = new Ext.grid.CheckboxSelectionModel();
@@ -56,6 +68,11 @@ MODx.grid.FCProfile = function(config) {
             ,width: 200
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/forms/profile/update&id=' + record.data.id
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -187,21 +204,6 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         }
     }
 
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getBottomToolbar().changePage(1);
-        //this.refresh();
-        return true;
-    }
-    ,clearFilter: function() {
-    	this.getStore().baseParams = {
-            action: 'Security/Forms/Profile/GetList'
-    	};
-        Ext.getCmp('modx-fcp-search').reset();
-    	this.getBottomToolbar().changePage(1);
-    }
-
     ,createProfile: function(btn,e) {
         if (!this.windows.cpro) {
             this.windows.cpro = MODx.load({
@@ -221,6 +223,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         var r = this.menu.record;
         location.href = '?a=Security/Forms/Profile/Update&id='+r.id;
     }
+
     ,duplicateProfile: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
@@ -266,6 +269,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         });
         return true;
     }
+
     ,deactivateProfile: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
@@ -278,6 +282,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             }
         });
     }
+
     ,deactivateSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -297,6 +302,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         });
         return true;
     }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -318,10 +324,31 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         });
         return true;
     }
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        //this.refresh();
+        return true;
+    }
+
+    ,clearFilter: function() {
+        this.getStore().baseParams = {
+            action: 'Security/Forms/Profile/GetList'
+        };
+        Ext.getCmp('modx-fcp-search').reset();
+        this.getBottomToolbar().changePage(1);
+    }
 });
 Ext.reg('modx-grid-fc-profile',MODx.grid.FCProfile);
 
-
+/**
+ * @class MODx.window.CreateFCProfile
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-fc-profile-create
+ */
 MODx.window.CreateFCProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{

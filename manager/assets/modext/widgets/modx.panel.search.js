@@ -10,7 +10,7 @@ MODx.panel.Search = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-search'
-		,cls: 'container form-with-labels'
+        ,cls: 'container form-with-labels'
         ,labelAlign: 'top'
         ,autoHeight: true
         ,items: [{
@@ -265,6 +265,12 @@ MODx.grid.Search = function(config) {
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=resource/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'

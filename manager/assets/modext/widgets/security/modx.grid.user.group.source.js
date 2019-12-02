@@ -1,4 +1,9 @@
-
+/**
+ * @class MODx.grid.UserGroupSource
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-user-group-sources
+ */
 MODx.grid.UserGroupSource = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -29,14 +34,32 @@ MODx.grid.UserGroupSource = function(config) {
             ,dataIndex: 'name'
             ,width: 120
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=source/update&id=' + record.data.target
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 100
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/permission'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 200
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/access/policy/update&id=' + record.data.policy
+                    ,target: '_blank'
+                });
+            }, scope: this }
         }]
         ,tbar: [{
             text: _('source_add')
@@ -83,6 +106,7 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
@@ -97,6 +121,7 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,createAcl: function(itm,e) {
         var r = {
             principal: this.config.usergroup
@@ -116,6 +141,7 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
         this.windows.createAcl.setValues(r);
         this.windows.createAcl.show(e.target);
     }
+
     ,updateAcl: function(itm,e) {
         var r = this.menu.record;
 
@@ -137,7 +163,12 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-user-group-source',MODx.grid.UserGroupSource);
 
-
+/**
+ * @class MODx.window.CreateUGSource
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-source-create
+ */
 MODx.window.CreateUGSource = function(config) {
     config = config || {};
     this.ident = config.ident || 'cugsrc'+Ext.id();
@@ -255,7 +286,12 @@ Ext.extend(MODx.window.CreateUGSource,MODx.Window,{
 });
 Ext.reg('modx-window-user-group-source-create',MODx.window.CreateUGSource);
 
-
+/**
+ * @class MODx.window.UpdateUGSource
+ * @extends MODx.window.CreateUGSource
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-source-update
+ */
 MODx.window.UpdateUGSource = function(config) {
     config = config || {};
     this.ident = config.ident || 'updugsrc'+Ext.id();

@@ -1,4 +1,9 @@
-
+/**
+ * @class MODx.grid.UserGroupNamespace
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-user-group-namespace
+ */
 MODx.grid.UserGroupNamespace = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -29,14 +34,32 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,dataIndex: 'name'
             ,width: 120
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=workspaces/namespace'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 100
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/permission'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 200
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/access/policy/update&id=' + record.data.policy
+                    ,target: '_blank'
+                });
+            }, scope: this }
         }]
         ,tbar: [{
             text: _('namespace_add')
@@ -96,6 +119,7 @@ Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,createAcl: function(itm,e) {
         var r = {
             principal: this.config.usergroup
@@ -115,6 +139,7 @@ Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
         this.windows.createAcl.setValues(r);
         this.windows.createAcl.show(e.target);
     }
+
     ,updateAcl: function(itm,e) {
         var r = this.menu.record;
 
@@ -136,7 +161,12 @@ Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-user-group-namespace',MODx.grid.UserGroupNamespace);
 
-
+/**
+ * @class MODx.window.CreateUGNamespace
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-namespace-create
+ */
 MODx.window.CreateUGNamespace = function(config) {
     config = config || {};
     this.ident = config.ident || 'cugnamespace'+Ext.id();
@@ -254,7 +284,12 @@ Ext.extend(MODx.window.CreateUGNamespace,MODx.Window,{
 });
 Ext.reg('modx-window-user-group-namespace-create',MODx.window.CreateUGNamespace);
 
-
+/**
+ * @class MODx.window.UpdateUGNamespace
+ * @extends MODx.window.CreateUGNamespace
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-namespace-update
+ */
 MODx.window.UpdateUGNamespace = function(config) {
     config = config || {};
     this.ident = config.ident || 'updugsrc'+Ext.id();

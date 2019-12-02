@@ -1,3 +1,9 @@
+/**
+ * @class MODx.panel.Dashboards
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-panel-dashboards
+ */
 MODx.panel.Dashboards = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -44,6 +50,12 @@ MODx.panel.Dashboards = function(config) {
 Ext.extend(MODx.panel.Dashboards,MODx.FormPanel);
 Ext.reg('modx-panel-dashboards',MODx.panel.Dashboards);
 
+/**
+ * @class MODx.grid.Dashboards
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-dashboards
+ */
 MODx.grid.Dashboards = function(config) {
     config = config || {};
 
@@ -70,6 +82,11 @@ MODx.grid.Dashboards = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=system/dashboards/update&id=' + record.data.id
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -180,6 +197,39 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
     ,createDashboard: function() {
         MODx.loadPage('system/dashboards/create');
     }
+
+    ,updateDashboard: function() {
+        MODx.loadPage('system/dashboards/update', 'id='+this.menu.record.id);
+    }
+
+    ,duplicateDashboard: function(btn,e) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'System/Dashboard/Duplicate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
+    ,removeDashboard: function() {
+        MODx.msg.confirm({
+            title: _('dashboard_remove')
+            ,text: _('dashboard_remove_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'System/Dashboard/Remove'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -202,44 +252,13 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
         return true;
     }
 
-    ,removeDashboard: function() {
-        MODx.msg.confirm({
-            title: _('dashboard_remove')
-            ,text: _('dashboard_remove_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'System/Dashboard/Remove'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,duplicateDashboard: function(btn,e) {
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'System/Dashboard/Duplicate'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,updateDashboard: function() {
-        MODx.loadPage('system/dashboards/update', 'id='+this.menu.record.id);
-    }
-
     ,filterUsergroup: function(cb,nv,ov) {
         this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
         this.getBottomToolbar().changePage(1);
         //this.refresh();
         return true;
     }
+
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -247,13 +266,14 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
         //this.refresh();
         return true;
     }
+
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'System/Dashboard/GetList'
-    	};
+        };
         Ext.getCmp('modx-dashboard-search').reset();
         Ext.getCmp('modx-user-filter-usergroup').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
 });

@@ -1,3 +1,9 @@
+/**
+ * @class MODx.grid.ResourceSecurity
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-resource-security
+ */
 MODx.grid.ResourceSecurity = function(config) {
     config = config || {};
     var ac = new Ext.ux.grid.CheckColumn({
@@ -19,6 +25,12 @@ MODx.grid.ResourceSecurity = function(config) {
             ,dataIndex: 'name'
             ,width: 200
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.rendLink(v, {
+                    href: '?a=security/resourcegroup'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },ac]
     });
     MODx.grid.ResourceSecurity.superclass.constructor.call(this,config);
