@@ -737,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Cache standardmäßig leeren';
 $_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja", um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
 $_lang['setting_syncsite_default_err'] = 'Bitte geben Sie an, ob der Cache nach dem Speichern einer Ressource standardmäßig geleert werden soll.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODX-Manager-Hauptmenüs nicht angezeigt.';
 
 $_lang['setting_tree_default_sort'] = 'Feld, nach dem der Ressourcen-Baum standardmäßig sortiert wird';
 $_lang['setting_tree_default_sort_desc'] = 'Das Feld, nach dem der Ressourcen-Baum standardmäßig beim Öffnen des Managers sortiert wird.';
