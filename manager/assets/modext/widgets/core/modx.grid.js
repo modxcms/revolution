@@ -252,7 +252,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             ,url: this.config.url
             ,params: p
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
@@ -275,7 +275,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,url: this.config.url
                 ,params: p
                 ,listeners: {
-                	'success': {fn:function() {
+                    'success': {fn:function() {
                         this.removeActiveRow(r);
                     },scope:this}
                 }
@@ -334,10 +334,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                    }
                 }
             });
         } else {
@@ -350,10 +350,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,remoteSort: this.config.remoteSort || false
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                    }
                 }
             });
         }
@@ -512,8 +512,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,editorYesNo: function(r) {
-    	r = r || {};
-    	Ext.applyIf(r,{
+        r = r || {};
+        Ext.applyIf(r,{
             store: new Ext.data.SimpleStore({
                 fields: ['d','v']
                 ,data: [[_('yes'),true],[_('no'),false]]
@@ -644,6 +644,17 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
     }
 
+    ,rendLink: function(v,attr) {
+        var el = new Ext.Element(document.createElement('a'));
+        el.addClass('x-grid-link');
+        el.dom.title = _('edit');
+        for (var i in attr) {
+            el.dom[i] = attr[i];
+        }
+        el.dom.innerHTML = Ext.util.Format.htmlEncode(v);
+        return el.dom.outerHTML;
+    }
+
     ,getActions: function(record, rowIndex, colIndex, store) {
         return [];
     }
@@ -679,14 +690,14 @@ MODx.grid.LocalGrid = function(config) {
 
     if (config.grouping) {
         Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView({
-            forceFit: true
-            ,scrollOffset: 0
-            ,hideGroupedColumn: config.hideGroupedColumn ? true : false
-            ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
-                +(config.pluralText || _('records')) + '" : "'
-                +(config.singleText || _('record'))+'"]})' )
-          })
+            view: new Ext.grid.GroupingView({
+                forceFit: true
+                ,scrollOffset: 0
+                ,hideGroupedColumn: config.hideGroupedColumn ? true : false
+                ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
+                    +(config.pluralText || _('records')) + '" : "'
+                    +(config.singleText || _('record'))+'"]})' )
+            })
         });
     }
     if (config.tbar) {
@@ -1050,6 +1061,17 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         return this._getActionsColumnTpl().apply({
             actions: actions
         });
+    }
+
+    ,rendLink: function(v,attr) {
+        var el = new Ext.Element(document.createElement('a'));
+        el.addClass('x-grid-link');
+        el.dom.title = _('edit');
+        for (var i in attr) {
+            el.dom[i] = attr[i];
+        }
+        el.dom.innerHTML = Ext.util.Format.htmlEncode(v);
+        return el.dom.outerHTML;
     }
 
     ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
