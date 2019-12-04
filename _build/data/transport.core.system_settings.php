@@ -190,15 +190,6 @@ $settings['cache_db']->fromArray(array (
   'area' => 'caching',
   'editedon' => null,
 ), '', true, true);
-$settings['cache_db_expires']= $xpdo->newObject(modSystemSetting::class);
-$settings['cache_db_expires']->fromArray(array (
-  'key' => 'cache_db_expires',
-  'value' => 0,
-  'xtype' => 'numberfield',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-), '', true, true);
 $settings['cache_db_session']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_db_session']->fromArray(array (
   'key' => 'cache_db_session',
@@ -222,24 +213,6 @@ $settings['cache_default']->fromArray(array (
   'key' => 'cache_default',
   'value' => true,
   'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-), '', true, true);
-$settings['cache_expires']= $xpdo->newObject(modSystemSetting::class);
-$settings['cache_expires']->fromArray(array (
-  'key' => 'cache_expires',
-  'value' => 0,
-  'xtype' => 'numberfield',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-), '', true, true);
-$settings['cache_format']= $xpdo->newObject(modSystemSetting::class);
-$settings['cache_format']->fromArray(array (
-  'key' => 'cache_format',
-  'value' => 0,
-  'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'caching',
   'editedon' => null,
