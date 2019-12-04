@@ -17,22 +17,7 @@ $xtypeSettingsMap = [
         'new_xtype' => 'numberfield',
     ],
     [
-        'key' => 'cache_db_expires',
-        'old_xtype' => 'textfield',
-        'new_xtype' => 'numberfield',
-    ],
-    [
         'key' => 'cache_db_session_lifetime',
-        'old_xtype' => 'textfield',
-        'new_xtype' => 'numberfield',
-    ],
-    [
-        'key' => 'cache_expires',
-        'old_xtype' => 'textfield',
-        'new_xtype' => 'numberfield',
-    ],
-    [
-        'key' => 'cache_format',
         'old_xtype' => 'textfield',
         'new_xtype' => 'numberfield',
     ],
