@@ -357,7 +357,7 @@ MODx.grid.UserGroupUsers = function(config) {
             ,width: 175
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/user/update&id=' + record.data.id
                     ,target: '_blank'
                 });
@@ -368,7 +368,7 @@ MODx.grid.UserGroupUsers = function(config) {
             ,width: 175
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/permission'
                     ,target: '_blank'
                 });

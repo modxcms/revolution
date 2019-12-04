@@ -266,7 +266,7 @@ MODx.grid.Search = function(config) {
             ,dataIndex: 'pagetitle'
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=resource/update&id=' + record.data.id
                     ,target: '_blank'
                 });

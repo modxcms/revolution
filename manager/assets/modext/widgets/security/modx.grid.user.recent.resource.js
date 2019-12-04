@@ -29,7 +29,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=resource/update&id=' + record.data.id
                     ,target: '_blank'
                 });

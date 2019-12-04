@@ -26,7 +26,7 @@ MODx.grid.ResourceSecurity = function(config) {
             ,width: 200
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/resourcegroup'
                     ,target: '_blank'
                 });

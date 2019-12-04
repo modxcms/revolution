@@ -644,7 +644,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
     }
 
-    ,rendLink: function(v,attr) {
+    ,renderLink: function(v,attr) {
         var el = new Ext.Element(document.createElement('a'));
         el.addClass('x-grid-link');
         el.dom.title = _('edit');
@@ -1063,7 +1063,7 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         });
     }
 
-    ,rendLink: function(v,attr) {
+    ,renderLink: function(v,attr) {
         var el = new Ext.Element(document.createElement('a'));
         el.addClass('x-grid-link');
         el.dom.title = _('edit');

@@ -35,7 +35,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,width: 120
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/resourcegroup'
                     ,target: '_blank'
                 });
@@ -45,7 +45,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,dataIndex: 'authority_name'
             ,width: 100
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/permission'
                     ,target: '_blank'
                 });
@@ -55,7 +55,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,dataIndex: 'policy_name'
             ,width: 200
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/access/policy/update&id=' + record.data.policy
                     ,target: '_blank'
                 });
@@ -66,7 +66,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,width: 150
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=context/update&key=' + record.data.context_key
                     ,target: '_blank'
                 });

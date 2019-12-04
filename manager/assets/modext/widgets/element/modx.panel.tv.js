@@ -681,7 +681,7 @@ MODx.grid.ElementSources = function(config) {
             header: _('context')
             ,dataIndex: 'context_key'
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=context/update&key=' + v
                     ,target: '_blank'
                 });

@@ -18,7 +18,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             ,dataIndex: 'principal_name'
             ,width: 120
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/usergroup/update&id=' + record.data.principal
                     ,target: '_blank'
                 });
@@ -28,7 +28,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             ,dataIndex: 'authority_name'
             ,width: 50
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/permission'
                     ,target: '_blank'
                 });
@@ -38,7 +38,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             ,dataIndex: 'policy_name'
             ,width: 175
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/access/policy/update&id=' + record.data.policy
                     ,target: '_blank'
                 });

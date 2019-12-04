@@ -35,7 +35,7 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,width: 120
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=workspaces/namespace'
                     ,target: '_blank'
                 });
@@ -45,7 +45,7 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,dataIndex: 'authority_name'
             ,width: 100
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/permission'
                     ,target: '_blank'
                 });
@@ -55,7 +55,7 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,dataIndex: 'policy_name'
             ,width: 200
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/access/policy/update&id=' + record.data.policy
                     ,target: '_blank'
                 });

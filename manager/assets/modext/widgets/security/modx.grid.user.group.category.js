@@ -39,7 +39,7 @@ MODx.grid.UserGroupCategory = function(config) {
             ,dataIndex: 'authority_name'
             ,width: 100
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/permission'
                     ,target: '_blank'
                 });
@@ -49,7 +49,7 @@ MODx.grid.UserGroupCategory = function(config) {
             ,dataIndex: 'policy_name'
             ,width: 200
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/access/policy/update&id=' + record.data.policy
                     ,target: '_blank'
                 });
@@ -60,7 +60,7 @@ MODx.grid.UserGroupCategory = function(config) {
             ,width: 150
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=context/update&key=' + record.data.context_key
                     ,target: '_blank'
                 });

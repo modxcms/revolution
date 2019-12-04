@@ -352,7 +352,7 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
             ,dataIndex: 'name'
             ,width: 200
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=system/dashboards/update&id=' + record.data.id
                     ,target: '_blank'
                 });

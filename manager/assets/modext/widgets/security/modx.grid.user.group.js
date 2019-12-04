@@ -28,7 +28,7 @@ MODx.grid.UserGroups = function(config) {
             ,dataIndex: 'name'
             ,width: 175
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/usergroup/update&id=' + record.data.usergroup
                     ,target: '_blank'
                 });
@@ -38,7 +38,7 @@ MODx.grid.UserGroups = function(config) {
             ,dataIndex: 'rolename'
             ,width: 175
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/permission'
                     ,target: '_blank'
                 });

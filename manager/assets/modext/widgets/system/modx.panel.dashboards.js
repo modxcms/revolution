@@ -83,7 +83,7 @@ MODx.grid.Dashboards = function(config) {
             ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=system/dashboards/update&id=' + record.data.id
                 });
             }, scope: this }

@@ -70,7 +70,7 @@ MODx.grid.Context = function(config) {
             ,sortable: true
             ,editor: { xtype: 'textfield' }
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=context/update&key=' + record.data.key
                 });
             }, scope: this }

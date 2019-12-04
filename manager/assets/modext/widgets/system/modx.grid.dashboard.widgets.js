@@ -35,7 +35,7 @@ MODx.grid.DashboardWidgets = function(config) {
             ,sortable: true
             ,editable: false
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=system/dashboards/widget/update&id=' + record.data.id
                 });
             }, scope: this }

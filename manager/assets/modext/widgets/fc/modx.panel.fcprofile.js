@@ -149,7 +149,7 @@ MODx.grid.FCProfileUserGroups = function(config) {
             header: _('name')
             ,dataIndex: 'name'
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/usergroup/update&id=' + record.data.id
                     ,target: '_blank'
                 });

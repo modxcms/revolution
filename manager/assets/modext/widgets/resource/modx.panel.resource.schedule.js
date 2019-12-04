@@ -72,7 +72,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,dataIndex: 'pagetitle'
             ,width: 40
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=resource/update&id=' + record.data.id
                     ,target: '_blank'
                 });

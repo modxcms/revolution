@@ -231,7 +231,7 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
             ,dataIndex: 'name_trans'
             ,width: 600
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=system/dashboards/widget/update&id=' + record.data.widget
                     ,target: '_blank'
                 });

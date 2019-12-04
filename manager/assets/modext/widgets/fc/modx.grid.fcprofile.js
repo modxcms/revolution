@@ -69,7 +69,7 @@ MODx.grid.FCProfile = function(config) {
             ,sortable: true
             ,editor: { xtype: 'textfield' }
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/forms/profile/update&id=' + record.data.id
                 });
             }, scope: this }

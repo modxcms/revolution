@@ -35,7 +35,7 @@ MODx.grid.UserGroupContext = function(config) {
             ,width: 120
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=context/update&key=' + record.data.target
                     ,target: '_blank'
                 });
@@ -46,7 +46,7 @@ MODx.grid.UserGroupContext = function(config) {
             ,width: 100
             ,sortable: false
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/permission'
                     ,target: '_blank'
                 });
@@ -57,7 +57,7 @@ MODx.grid.UserGroupContext = function(config) {
             ,width: 200
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/access/policy/update&id=' + record.data.policy
                     ,target: '_blank'
                 });

@@ -63,7 +63,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,editor: { xtype: 'textfield' ,allowBlank: false }
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/access/policy/template/update&id=' + record.data.id
                 });
             }, scope: this }

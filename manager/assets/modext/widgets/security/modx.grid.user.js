@@ -81,7 +81,7 @@ MODx.grid.User = function(config) {
             ,width: 150
             ,sortable: true
             ,renderer: { fn: function(v,md,record) {
-                return this.rendLink(v, {
+                return this.renderLink(v, {
                     href: '?a=security/user/update&id=' + record.data.id
                 });
             }, scope: this }
