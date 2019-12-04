@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Nástěnka';
 $_lang['dashboards'] = 'Nástěnky';
 $_lang['dashboards_desc'] = 'Správa nastavení všech nástěnek.';
 $_lang['edit_menu'] = 'Menu';
-$_lang['edit_menu_desc'] = 'Správa akcí a struktury horního menu.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Chybové zprávy';
 $_lang['eventlog_viewer_desc'] = 'Zobrazení MODX chybových zpráv.';
 $_lang['export_site'] = 'Exportovat statické HTML';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Konfigurace systému';
 $_lang['system_settings_desc'] = 'Změna nebo vytvoření systémového nastavení v rámci celého portálu.';
 $_lang['tools'] = 'Nástroje';
 $_lang['tools_desc'] = 'Nástroje pro údržbu vašich stránek';
-$_lang['topnav'] = 'Hlavní menu';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Uživatel';
 $_lang['usernav'] = 'Uživatelské menu';

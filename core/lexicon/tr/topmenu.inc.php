@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Kontrol Paneli';
 $_lang['dashboards'] = 'Panolar';
 $_lang['dashboards_desc'] = 'Özel kontrol Panelleri girişini yönetme';
 $_lang['edit_menu'] = 'Menüler';
-$_lang['edit_menu_desc'] = 'Üst yönetici menüsünü yönetme';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Hata Günlüğü';
 $_lang['eventlog_viewer_desc'] = 'MODX error.log dosyasını görüntüleyin.';
 $_lang['export_site'] = 'Static HTML\'yi dışa aktar';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Sistem Ayarları';
 $_lang['system_settings_desc'] = 'Tüm sistem ayarlarını yapılandır';
 $_lang['tools'] = 'Araçlar';
 $_lang['tools_desc'] = 'Sitenizi sıralamaya devam ettirecek araçlar';
-$_lang['topnav'] = 'Üst Gezinme';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Kullanıcı';
 $_lang['usernav'] = 'Kullanıcı Arayüzü';

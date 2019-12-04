@@ -9,11 +9,11 @@
 $_lang['help_page_title'] = 'Aide & Support';
 $_lang['help_main_head'] = 'MODX est là pour vous';
 $_lang['help_main_subhead'] = 'Voir ci-dessous pour obtenir de l\'aide pour votre projet MODX<br>Plus de détails sur <a href="http://modx.com/support">modx.com/support</a> ou appeler le +1 (469) 777-6639';
-$_lang['forums'] = 'Forums';
+$_lang['forums'] = 'Fórum';
 $_lang['forums_title'] = 'Forum de la communauté MODX';
 $_lang['forums_description'] = 'Aide de la communauté';
-$_lang['forums_link'] = 'http://forums.modx.com/';
-$_lang['docs'] = 'Documentation';
+$_lang['forums_link'] = 'https://forums.modx.com/';
+$_lang['docs'] = 'Dokumentácia';
 $_lang['docs_title'] = 'Lire le Fabuleux Manuel MODX';
 $_lang['docs_description'] = 'Lire la documentation officielle de MODX';
 $_lang['docs_link'] = 'https://docs.modx.com/';

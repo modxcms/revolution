@@ -535,6 +535,7 @@ $_lang['recently_updated'] = 'مرقّى مؤخراً';
 $_lang['newest'] = 'الأحدث';
 $_lang['oldest'] = 'الأقدم';
 $_lang['constraints'] = 'القيود';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'كانون الثاني';
 $_lang['february'] = 'شباط';

@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Наскоро актуализирани';
 $_lang['newest'] = 'Най-нови';
 $_lang['oldest'] = 'Най-стари';
 $_lang['constraints'] = 'Constraints';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Януари';
 $_lang['february'] = 'Фрвруари';

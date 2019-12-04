@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = '新規リソース作成時にデフ�
 $_lang['setting_default_per_page'] = 'デフォルトのページあたり表示数（管理画面）';
 $_lang['setting_default_per_page_desc'] = '管理画面で一覧される各種要素の、ページあたり表示数のデフォルトを指定します。';
 
-$_lang['setting_editor_css_path'] = 'リッチテキストエディタ用CSSファイルのパス';
-$_lang['setting_editor_css_path_desc'] = 'リッチテキストエディタでの編集中に使用する、CSSファイルのパスを入力します。パスはサーバールートからの絶対パスでの入力をおすすめします。例：/assets/site/style.css<br />リッチテキストエディタにCSSを適用したくない場合には、この設定を空白にします。';
-
-$_lang['setting_editor_css_selectors'] = 'CSSセレクタ（RTE用）';
-$_lang['setting_editor_css_selectors_desc'] = 'リッチテキストエディタ用のCSSセレクタを、カンマ区切りで指定します。';
-
 $_lang['setting_emailsender'] = '送信者メールアドレス';
 $_lang['setting_emailsender_desc'] = ' ユーザー名とパスワード送信時の、送信元メールアドレスを指定してください。';
 $_lang['setting_emailsender_err'] = '送信者メールアドレスを指定してください。';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'ログイン失敗許可数';
 $_lang['setting_failed_login_attempts_desc'] = 'ユーザーが \'blocked\' 状態になるまでに、何回のログイン失敗を許容するか指定します。';
-
-$_lang['setting_fe_editor_lang'] = 'エディタの言語';
-$_lang['setting_fe_editor_lang_desc'] = 'フロントエンドで使用されるエディタの言語を選択します。';
 
 $_lang['setting_feed_modx_news'] = 'MODXニュースフィードURL';
 $_lang['setting_feed_modx_news_desc'] = '管理画面のMODXニュースパネルが表示するRSSフィードのURLを指定します。';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Empty Cache default';
 $_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
 $_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'トップメニューの説明を表示';
-$_lang['setting_topmenu_show_descriptions_desc'] = '「いいえ」とすると、管理画面上部のトップメニューで、説明が非表示になります。';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'リソースツリーのデフォルトソートフィールド';
 $_lang['setting_tree_default_sort_desc'] = '管理画面ロード時にリソースツリーのソートを行うフィールド。';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

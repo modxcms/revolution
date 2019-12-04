@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Baru saja diperbarui';
 $_lang['newest'] = 'Terbaru';
 $_lang['oldest'] = 'Tertua';
 $_lang['constraints'] = 'Pembatasan';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Januari';
 $_lang['february'] = 'Februari';

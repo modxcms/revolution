@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'لوحة التحكم';
 $_lang['dashboards'] = 'لوحات التحكم';
 $_lang['dashboards_desc'] = 'إدارة لوحات تحكم تسجيل الدخول المخصصة';
 $_lang['edit_menu'] = 'القوائم';
-$_lang['edit_menu_desc'] = 'إدارة قائمة المدير العليا';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'سجل الخطأ';
 $_lang['eventlog_viewer_desc'] = 'عرض .error.log لمودكس';
 $_lang['export_site'] = 'تصدير HTML الثابت';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'إعدادات النظام';
 $_lang['system_settings_desc'] = 'تهيئة كل إعدادات النظام';
 $_lang['tools'] = 'الأدوات';
 $_lang['tools_desc'] = 'الأدوات المساعدة للحفاظ على ترتيب الموقع الخاص بك';
-$_lang['topnav'] = 'القائمة العلوية';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'المستخدم';
 $_lang['usernav'] = 'قائمة المستخدم';

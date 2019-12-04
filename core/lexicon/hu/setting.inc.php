@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Select the default Template you wish 
 $_lang['setting_default_per_page'] = 'Default Per Page';
 $_lang['setting_default_per_page_desc'] = 'The default number of results to show in grids throughout the manager.';
 
-$_lang['setting_editor_css_path'] = 'Path to CSS file';
-$_lang['setting_editor_css_path_desc'] = 'Enter the path to your CSS file that you wish to use within a richtext editor. The best way to enter the path is to enter the path from the root of your server, for example: /assets/site/style.css. If you do not wish to load a style sheet into a richtext editor, leave this field blank.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS Selectors for Editor';
-$_lang['setting_editor_css_selectors_desc'] = 'A comma-separated list of CSS selectors for a richtext editor.';
-
 $_lang['setting_emailsender'] = 'Registration Email From Address';
 $_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end Editor Language';
-$_lang['setting_fe_editor_lang_desc'] = 'Choose a language for the editor to use when used as a front-end editor.';
 
 $_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Gyorsítótár ürítésének alapértéke
 $_lang['setting_syncsite_default_desc'] = 'Válassza az \'igen\'-t a gyorsítótár alapértelmezett ürítéséhez az erőforrás mentése után.';
 $_lang['setting_syncsite_default_err'] = 'Kérjük, adja meg, hogy akarja-e a gyorsítótár ürítését alapértelmezetten egy erőforrás mentése után.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Top Menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from top menu items in the manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Mutassa a leírásokat a főmenüben';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Ha a beállítás \'Nem\', a MODX kezelő nem mutatja a leírásokat a főmenüben.';
 
 $_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
 $_lang['setting_tree_default_sort_desc'] = 'The default sort field for the Resource tree when loading the manager.';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Állítsa be a MODX hibanapló áll
 
 $_lang['setting_error_log_filepath'] = 'Hibanapló állomány útvonala';
 $_lang['setting_error_log_filepath_desc'] = 'Megadhatja a saját hibanapló helyének teljes elérési útját. Használhat helyettesítőket, mint {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
-$_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';
-
-$_lang['setting_passwordless_expiration'] = 'Jelszó nélküli bejelentkezés lejárata';
-$_lang['setting_passwordless_expiration_desc'] = 'Hány másodpercig érvényes egy egyszeri bejelentkezési hivatkozás.';
 
 $_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
 $_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';

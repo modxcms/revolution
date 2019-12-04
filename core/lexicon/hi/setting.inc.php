@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'डिफ़ॉल्ट टेम्
 $_lang['setting_default_per_page'] = 'प्रति पृष्ठ डिफ़ॉल्ट';
 $_lang['setting_default_per_page_desc'] = 'डिफ़ॉल्ट manager भर में ग्रिड में दिखाने के लिए परिणामों की संख्या।';
 
-$_lang['setting_editor_css_path'] = 'CSS फ़ाइल का पथ';
-$_lang['setting_editor_css_path_desc'] = 'आप के भीतर एक richtext संपादक का उपयोग करना चाहते हैं कि आपके CSS फ़ाइल के लिए पथ दर्ज करें। उदाहरण के लिए अपने सर्वर की रुट से पथ दर्ज करने के लिए पथ दर्ज करने के लिए सबसे अच्छा तरीका है: /assets/site/style.css. यदि आप एक शैली पत्रक एक richtext संपादक में लोड करने की इच्छा नहीं, तो यह फ़ील्ड रिक्त छोड़ें।';
-
-$_lang['setting_editor_css_selectors'] = 'संपादक के लिए CSS चयनकर्ताओं';
-$_lang['setting_editor_css_selectors_desc'] = 'एक richtext संपादक के लिए CSS चयनकर्ताओं की एक कॉमा सेपरेटेड सूची।';
-
 $_lang['setting_emailsender'] = 'ईमेल पते से Registration';
 $_lang['setting_emailsender_desc'] = 'यहाँ आप users अपने username और पासवर्ड को भेजते समय इस्तेमाल किया ईमेल पते निर्दिष्ट कर सकते हैं।';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'अगर (users प्रोफ़ा
 
 $_lang['setting_failed_login_attempts'] = 'लॉगिन का प्रयास विफल हुआ';
 $_lang['setting_failed_login_attempts_desc'] = 'किसी user की अनुमति दी है \'अवरुद्ध होता जा रहा से पहले\' असफल लॉगिन का प्रयास की संख्या।';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end संपादक भाषा';
-$_lang['setting_fe_editor_lang_desc'] = 'जब एक front-end संपादक के रूप में प्रयोग का उपयोग करने के लिए संपादक के लिए एक भाषा का चयन करें।';
 
 $_lang['setting_feed_modx_news'] = 'MODX समाचार फ़ीड URL';
 $_lang['setting_feed_modx_news_desc'] = 'MODX News panel manager में लिए CSS फ़ीड के लिए URL सेट।';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'खाली कैश डिफ़ॉल�
 $_lang['setting_syncsite_default_desc'] = '\'हाँ\' आप डिफ़ॉल्ट रूप से एक संसाधन को सहेजने के बाद कैश को खाली करने के लिए का चयन करें।';
 $_lang['setting_syncsite_default_err'] = 'आप डिफ़ॉल्ट रूप से एक संसाधन की बचत के बाद कैश खाली करना चाहते हैं या नहीं, बताएं।';
 
-$_lang['setting_topmenu_show_descriptions'] = 'शीर्ष मेनू में विवरण दिखाएँ';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'यदि सेट करने के लिए \'नहीं\', MODX विवरण के manager के शीर्ष मेनू आइटम्स से छिपा होगा।';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'संसाधन ट्री डिफ़ॉल्ट सॉर्ट फ़ील्ड';
 $_lang['setting_tree_default_sort_desc'] = 'Resource tree के लिए डिफ़ॉल्ट सॉर्ट क्षेत्र manager लोड हो रहा है।';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

@@ -535,6 +535,7 @@ $_lang['recently_updated'] = 'Äskettäin päivitetty';
 $_lang['newest'] = 'Uusin';
 $_lang['oldest'] = 'Vanhin';
 $_lang['constraints'] = 'Rajoitukset';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Tammikuu';
 $_lang['february'] = 'Helmikuu';

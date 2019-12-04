@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'เลือกแม่แบบป�
 $_lang['setting_default_per_page'] = 'จำนวนต่อหน้าปริยาย';
 $_lang['setting_default_per_page_desc'] = 'ค่าตัวเลขปริยายของผลลัพธ์ที่จะแสดงในกริดทั้งหมดของเมเนเจอร์';
 
-$_lang['setting_editor_css_path'] = 'เส้นทางของไฟล์ CSS';
-$_lang['setting_editor_css_path_desc'] = 'ป้อนเส้นทางของไฟล์ CSS ที่คุณต้องการใช้ภายใน richtext อิดิเตอร์ ทางที่ดีที่สุดในการป้อนเส้นทางคือป้อนเริ่มจากเส้นทางหลักของเซิร์ฟเวอร์ ตัวอย่าง: /assets/site/style.css ถ้าคุณไม่ต้องการโหลดสไตล์ชีทสู่ richtext อิดิเตอร์ ปล่อยให้ฟิลด์นี้ว่างไว้';
-
-$_lang['setting_editor_css_selectors'] = 'ตัวเลือก CSS สำหรับอิดิเตอร์';
-$_lang['setting_editor_css_selectors_desc'] = 'รายการคั่นด้วยเครื่องหมายจุลภาคของตัวเลือก CSS สำหรับ richtext อิดิเตอร์';
-
 $_lang['setting_emailsender'] = 'ลงทะเบียนอีเมล์จากที่อยู่';
 $_lang['setting_emailsender_desc'] = 'คุณสามารถระบุที่อยู่อีเมล์ที่จะใช้เมื่อจะส่งชื่อผู้ใช้และรหัสผ่านให้กับผู้ใช้';
 $_lang['setting_emailsender_err'] = 'กรุณากำหนดที่อยู่อีเมล์ของผู้ดูแลระบบเว็บไซต์';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'ความพยายามในการเข้าสู่ระบบล้มเหลว';
 $_lang['setting_failed_login_attempts_desc'] = 'จำนวนของการพยายามเข้าสู่ระบบล้มเหลวของผู้ใช้ที่ยอมให้ก่อนที่จะ \'ถูกบล็อก\'';
-
-$_lang['setting_fe_editor_lang'] = 'ภาษาของอิดิเตอร์ส่วนหน้า';
-$_lang['setting_fe_editor_lang_desc'] = 'เลือกภาษาสำหรับอิดิเตอร์เพื่อใช้เมื่อใช้เป็นอิดิเตอร์ส่วนหน้า';
 
 $_lang['setting_feed_modx_news'] = 'URL ฟีดข่าวของ MODX';
 $_lang['setting_feed_modx_news_desc'] = 'ตั้ง URL ของ RSS ฟีด สำหรับข่าวของ MODX ที่แผงควบคุมของเมเนเจอร์';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Empty Cache default';
 $_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
 $_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'แสดงคำอธิยบายในท็อปเมนู';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'ถ้าตั้งเป็น \'ไม่\' MODX จะซ่อนคำอธิบายของไอเท็มของท็อปเมนูในส่วนของเมเนเจอร์';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'ฟิลด์จัดเรียงปริยายของแผนผังรีซอร์ส';
 $_lang['setting_tree_default_sort_desc'] = 'ฟิลด์จัดเรียงปริยายสำหรับแผนผังรีซอร์สเมื่อเรียกใช้เมเนเจอร์';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

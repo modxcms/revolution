@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parametre';
 $_lang['parameters_desc'] = 'De request-parametre der skal føjes til URL-adressen, når du klikker på denne menu. (Fx: &expire=1)';
 $_lang['permissions'] = 'Rettighed';
 $_lang['permissions_desc'] = 'En rettighedsnøgle der kræves for at indlæse dette menupunkt.';
-$_lang['topmenu'] = 'Topmenu';
-$_lang['topmenu_desc'] = 'Dette gør det muligt at knytte handlinger til menupunkter i den øverste menubjælke af MODX manager\'en. Du skal blot placere menuer, hvor du vil have dem, i deres respektive positioner.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';

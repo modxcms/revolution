@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parametreler';
 $_lang['parameters_desc'] = 'Bu menü tıklandığında sonuç URL\'sine eklenmesini istediğiniz tüm istek parametreleri. (Ex: &expire=1)';
 $_lang['permissions'] = 'İzin';
 $_lang['permissions_desc'] = 'Bu menü öğesini yüklemek için bir izin anahtarı gerekiyor.';
-$_lang['topmenu'] = 'Üst Menü';
-$_lang['topmenu_desc'] = 'Bu eylemleri, MODX Yöneticisinin üst menü çubuğunda menü öğeleriyle ilişkilendirmenizi sağlar. Basitçe menüleri kendi konumlarına istediğiniz yerlere yerleştirin.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';

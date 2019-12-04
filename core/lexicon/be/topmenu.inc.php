@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Панэль кіравання';
 $_lang['dashboards'] = 'Панэлі кіравання';
 $_lang['dashboards_desc'] = 'Кіраванне карыстацкімі панелямі';
 $_lang['edit_menu'] = 'Меню';
-$_lang['edit_menu_desc'] = 'Кіраванне верхнім меню сістэмы';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Лог памылак';
 $_lang['eventlog_viewer_desc'] = 'Прагляд журнала памылак MODX.';
 $_lang['export_site'] = 'Экспарт у статычны HTML';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Сістэмныя налады';
 $_lang['system_settings_desc'] = 'Налады ўсіх параметраў сістэмы';
 $_lang['tools'] = 'Інструменты';
 $_lang['tools_desc'] = 'Утыліты для захавання вашага сайту ў парадку';
-$_lang['topnav'] = 'Верхняе меню';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Карыстальнік';
 $_lang['usernav'] = 'Меню карыстальніка';

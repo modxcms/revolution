@@ -35,5 +35,5 @@ $_lang['parameters'] = 'Parameters';
 $_lang['parameters_desc'] = 'किसी भी अनुरोध parameter आप जब इस मेनू क्लिक करके परिणाम URL को appended चाहते। (Ex: &expire=1)';
 $_lang['permissions'] = 'Permission';
 $_lang['permissions_desc'] = 'इस मेनू आइटम को लोड करने के लिए आवश्यक permission key।';
-$_lang['topmenu'] = 'Top Menu';
-$_lang['topmenu_desc'] = 'यह आपको ModX manager के top menu bar में मेनू आइटम के साथ कार्यों को संबद्ध करने के लिए अनुमति देता है। बस आपको अपने संबंधित पदों में उन्हें पसंद करेंगे जहां मेनू जगह है।';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';

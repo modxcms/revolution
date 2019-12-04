@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Vyberte výchozí šablonu, která bu
 $_lang['setting_default_per_page'] = 'Počet výsledků na stránce';
 $_lang['setting_default_per_page_desc'] = 'Výchozí počet zobrazených výsledků na stránce v rámci celého správce obsahu.';
 
-$_lang['setting_editor_css_path'] = 'Cesta k CSS souboru';
-$_lang['setting_editor_css_path_desc'] = 'Zadejte cestu k CSS souboru, který chcete použít v rámci WYSIWYG editoru. Nejlepší je zadat cestu od kořene portálu, například: /assets/site/style.css. Pokud nechcete používat ve WYSIWYG editoru CSS styly ponechte toto políčko prázdné.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS selektory pro editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Čárkou oddělený seznam CSS selektorů pro WYSIWYG editor.';
-
 $_lang['setting_emailsender'] = 'Adresa odesílatele registračního e-mailu';
 $_lang['setting_emailsender_desc'] = 'Zadejte e-mailovou adresu, která se zobrazí jako odesílatel v e-mailu při odeslání uživatelských údajů po registraci.';
 $_lang['setting_emailsender_err'] = 'Zadejte e-mail.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Je-li povoleno, jako profilový obráz
 
 $_lang['setting_failed_login_attempts'] = 'Počet neúspěšných přihlášení';
 $_lang['setting_failed_login_attempts_desc'] = 'Počet neúspěšných pokusů o přihlášení předtím než bude uživatel zablokován.';
-
-$_lang['setting_fe_editor_lang'] = 'Jazyk frontend editoru';
-$_lang['setting_fe_editor_lang_desc'] = 'Vyberte jazyk použitý v editoru na frontendu, pokud je použit.';
 
 $_lang['setting_feed_modx_news'] = 'MODX RSS URL novinek';
 $_lang['setting_feed_modx_news_desc'] = 'Zadejte URL pro RSS feed nesoucí novinky.';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Výchozí stav smazání cache po uložen�
 $_lang['setting_syncsite_default_desc'] = 'Vyberte "Ano" pokud chcete ve výchozím stavu smazat cache dokumentu po jeho uložení.';
 $_lang['setting_syncsite_default_err'] = 'Prosím zvolte, zda chcete ve výchozím nastavení smazat cache po uložení dokumentu.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Výchozí řazení dokumentů ve stromu dokumentů';
 $_lang['setting_tree_default_sort_desc'] = 'Políčko, které se má použít pro výchozí řazení dokumentů v rámci stromu dokumentů.';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Přizpůsobte si název souboru pro
 
 $_lang['setting_error_log_filepath'] = 'Cesta k protokolu chyb';
 $_lang['setting_error_log_filepath_desc'] = 'Volitelně nastavit absolutní cestu umístění protokolu chyb. Můžete použít placehodery jako např. {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

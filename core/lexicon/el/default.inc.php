@@ -534,6 +534,7 @@ $_lang['recently_updated'] = 'Πρόσφατες ενημερώσεις';
 $_lang['newest'] = 'Νεότερα';
 $_lang['oldest'] = 'Παλαιότερα';
 $_lang['constraints'] = 'Περιορισμοί';
+$_lang['context_menu'] = 'Context Menu';
 
 $_lang['january'] = 'Ιανουαρίου';
 $_lang['february'] = 'Φεβρουαρίου';

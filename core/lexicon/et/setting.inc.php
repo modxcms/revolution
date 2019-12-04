@@ -246,12 +246,6 @@ $_lang['setting_default_template_desc'] = 'Valige vaikimisi Template, mida soovi
 $_lang['setting_default_per_page'] = 'Vaikimisi Lehe kohta';
 $_lang['setting_default_per_page_desc'] = 'Vaikimisi number tulemusi, mida näidta tabelis kogu manageris.';
 
-$_lang['setting_editor_css_path'] = 'Sihtkoht CSS failile';
-$_lang['setting_editor_css_path_desc'] = 'Sisestage sihtkoht CSS failile, mida soovite kasutada võimalustega tekstiredakoris (richtext editor). Parim viis on sihtkoht sisestada nõnda, et server root kataloogist, nagu näiteks: /assets/site/style.css. Kui ei soovi laadida stiili richtext editori, jätke see väli tühjaks.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS Selectorid Editori jaoks';
-$_lang['setting_editor_css_selectors_desc'] = 'Koma eraldatud list CSS selectoritega richtext editori jaoks.';
-
 $_lang['setting_emailsender'] = 'Registreerumise E-maili From Aadress';
 $_lang['setting_emailsender_desc'] = 'Siit saate määrata, e-maili aadressi, mida kasutatakse kautajanime ja parooli e-postide saatmisel kasutajatele.';
 $_lang['setting_emailsender_err'] = 'Palun määrake administratiooni emaili aadress.';
@@ -274,9 +268,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'Ebaõnnestunud Sisselogimise Katseid';
 $_lang['setting_failed_login_attempts_desc'] = 'Arv läbikukkunud sisselogimise katseid, mida kasutaja saab sootatada, enne kui ta \'blokeeritakse\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end Editori Keel';
-$_lang['setting_fe_editor_lang_desc'] = 'Valige keel editorile, kui seda kasutatakse front-endis.';
 
 $_lang['setting_feed_modx_news'] = 'MODX Uudiste Feed';
 $_lang['setting_feed_modx_news_desc'] = 'Määrake URL RSS feed-ile, et kuvada MODX uundiseid manageris.';
@@ -747,8 +738,8 @@ $_lang['setting_syncsite_default'] = 'Empty Cache default';
 $_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
 $_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Näita kirjeldusi Põhi Menüüs';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Kui \'Ei\', siis MODX peidab kirjeldused põhi menüü linkidelt manageris.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Ressurssi Puu Vaikimisi Sorteeritav Väli';
 $_lang['setting_tree_default_sort_desc'] = 'Vaikimisi väli mille järgi soreeritakse Ressurssi puu, kui manager laetakse.';
@@ -842,12 +833,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

@@ -250,12 +250,6 @@ $_lang['setting_default_template_desc'] = 'حدد القالب الافتراض�
 $_lang['setting_default_per_page'] = 'الافتراضي في الصفحة الواحدة';
 $_lang['setting_default_per_page_desc'] = 'الرقم الافتراضي من النتائج للعرض في الشبكة عن طريق المدير.';
 
-$_lang['setting_editor_css_path'] = 'المسار إلى ملف CSS';
-$_lang['setting_editor_css_path_desc'] = 'أدخل المسار إلى ملف CSS الخاص بك الذي ترغب في استخدامه في محرر نص منسق. أفضل طريقة لإدخال المسار هي إدخال المسار من جذر المخدم الخاص بك، على سبيل المثال  /assets/site/style.css. إذا كنت لا ترغب في تحميل  صفحة انماط (style sheet) في محرر نص منسق، اترك هذا الحقل فارغاً.';
-
-$_lang['setting_editor_css_selectors'] = 'محددات CSS للتحرير';
-$_lang['setting_editor_css_selectors_desc'] = 'سلسلة مفصولة بفواصل من محددات CSS لتحرير نص منسق.';
-
 $_lang['setting_emailsender'] = 'تسجيل البريد الإلكتروني عن طريق العنوان';
 $_lang['setting_emailsender_desc'] = 'هنا تستطيع تحديد عنوان البريد المستخدم عندما يقوم المستخدمين بإرسال أسماء المستخدمين وكلمات المرور.';
 $_lang['setting_emailsender_err'] = 'الرجاء توضيح عنوان البريد الالكتروني الخاص بالإدارة.';
@@ -278,9 +272,6 @@ $_lang['setting_enable_gravatar_desc'] = 'اذا تم التفعيل سيتم ا
 
 $_lang['setting_failed_login_attempts'] = 'محاولات تسجيل الدخول الفاشلة';
 $_lang['setting_failed_login_attempts_desc'] = 'عدد محاولات تسجيل الدخول الفاشلة المسموحة للمستخدم قبل أن يصبح \'محظور\'.';
-
-$_lang['setting_fe_editor_lang'] = 'الواجهة الأمامية لمحرر اللغة';
-$_lang['setting_fe_editor_lang_desc'] = 'اختار لغة من أجل أن يستخدمها المحرر عندما يستخدم كمحرر واجهة أمامية.';
 
 $_lang['setting_feed_modx_news'] = 'URL مزود أخبار مودكس';
 $_lang['setting_feed_modx_news_desc'] = 'ضبط URL من أجل مزود RSS من أجل لوحة أخبار مودكس في المدير.';
@@ -751,8 +742,8 @@ $_lang['setting_syncsite_default'] = 'إفراغ محتوى ذاكرة التخ�
 $_lang['setting_syncsite_default_desc'] = 'اختر \'نعم\' لإفراغ ذاكرة التخزين المؤقت بعد حفظ مصدر كافتراضي.';
 $_lang['setting_syncsite_default_err'] = 'يرجى ذكر إذا كنت تريد أو لا تريد إفراغ ذاكرة التخزين الؤقت بعد حفظ مصدر كافتراضي.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'إظهار الوصف في القائمة العليا';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'إذا كانت مضبوطة إلى ’لا’، سيقوم مودكس بإخفاء الوصف من عناصر القائمة العليا في المدير.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'حقل الفرز الافتراضي لشجرة المصدر';
 $_lang['setting_tree_default_sort_desc'] = 'حقل الفرز الافتراضي لشجرة المصدر عند تحميل المدير.';
@@ -846,12 +837,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

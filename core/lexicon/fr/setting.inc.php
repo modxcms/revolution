@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Sélectionnez le modèle par défaut 
 $_lang['setting_default_per_page'] = 'Eléments par page';
 $_lang['setting_default_per_page_desc'] = 'Nombre de résultats par page à afficher dans les grilles du manager.';
 
-$_lang['setting_editor_css_path'] = 'Chemin vers le fichier CSS';
-$_lang['setting_editor_css_path_desc'] = 'Indiquez le chemin vers le fichier CSS que vous souhaitez utiliser à l\'intérieur de votre éditeur de texte riche. Le meilleur moyen est d\'entrer le chemin depuis la racine de votre serveur, par exemple : /assets/site/style.css. Si vous ne souhaitez pas charger une feuille de style dans votre éditeur de texte riche, laissez ce champ vide.';
-
-$_lang['setting_editor_css_selectors'] = 'Sélecteurs CSS pour l\'éditeur';
-$_lang['setting_editor_css_selectors_desc'] = 'Une liste des sélecteurs CSS, séparés par une virgule, pour l\'éditeur de texte riche.';
-
 $_lang['setting_emailsender'] = 'Adresse e-mail d\'inscription';
 $_lang['setting_emailsender_desc'] = 'Ici vous pouvez indiquer l\'adresse email utilisée lors de l\'envoi des noms et mots de passe des utilisateurs.';
 $_lang['setting_emailsender_err'] = 'Veuillez indiquer l\'adresse e-mail d\'administration.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Activez cette option afin d\'utiliser 
 
 $_lang['setting_failed_login_attempts'] = 'Tentatives d\'identification échouées';
 $_lang['setting_failed_login_attempts_desc'] = 'Nombre d\'échecs de connexion utilisateur autorisés avant d\'être \'bloqué\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Langue de l\'éditeur de Front-end';
-$_lang['setting_fe_editor_lang_desc'] = 'Choisissez une langue à utiliser pour dans l\'éditeur de front-end.';
 
 $_lang['setting_feed_modx_news'] = 'URL du flux d\'actualités de MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Défini l\'URL du flux d\'actualités du panneau de MODX dans le manager.';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Vider le cache par défaut';
 $_lang['setting_syncsite_default_desc'] = 'Sélectionnez « Oui » pour vider le cache après avoir enregistré une ressource.';
 $_lang['setting_syncsite_default_err'] = 'Prière d\'indiquer si vous voulez ou non par défaut vider le cache après avoir sauvé une ressource.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Afficher les descriptions dans la navigation principale';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Sélectionnez non pour que MODX cache les descriptions dans la navigation principale du manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Champ de classement de l\'arborescence';
 $_lang['setting_tree_default_sort_desc'] = 'Le champ par défaut utilisé pour classer les ressources dans l\'arborescence lors du chargement du manager.';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Personnaliser le nom de fichier du 
 
 $_lang['setting_error_log_filepath'] = 'Chemin d’accès du journal des erreurs';
 $_lang['setting_error_log_filepath_desc'] = 'Éventuellement défini un chemin d’accès absolu pour l’emplacement du journal un message d’erreur personnalisé. Vous pouvez utiliser des placeholders comme {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

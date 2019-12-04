@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Selecteer de standaard template welke
 $_lang['setting_default_per_page'] = 'Standaard Per Pagina';
 $_lang['setting_default_per_page_desc'] = 'Het standaard aantal rijen per pagina dat gebruikt wordt in overzichten in de manager.';
 
-$_lang['setting_editor_css_path'] = 'Pad naar CSS bestand';
-$_lang['setting_editor_css_path_desc'] = 'Vul een pad in naar jouw CSS bestand dat je wilt gebruiken in een richtekst editor. De beste manier om het pad in te voeren is vanaf de root van jouw installatie, bijvoorbeeld: /assets/site/style.css. Indien je geen CSS wilt laden in de richtekst editor, laat dit veld dan leeg.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS Selectors voor de editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Een komma-gescheiden lijst van CSS selectors voor de richtext editor.';
-
 $_lang['setting_emailsender'] = 'Registratie e-mail from adres';
 $_lang['setting_emailsender_desc'] = 'Vul hier het e-mailadres in dat gebruikt wordt voor het versturen van de gebruikers zijn gebruikersnaam en wachtwoord.';
 $_lang['setting_emailsender_err'] = 'Vermeld het e-mailadres voor het e-mail bericht aan gebruikers.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Indien je dit activeert, dan wordt je 
 
 $_lang['setting_failed_login_attempts'] = 'Mislukte inlog pogingen';
 $_lang['setting_failed_login_attempts_desc'] = 'Het aantal foutieve inlogpogingen waarna een gebruiker \'geblokkeerd\' wordt.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end editor taal';
-$_lang['setting_fe_editor_lang_desc'] = 'Kies een taal voor de editor wanneer je een front-end editor gebruikt.';
 
 $_lang['setting_feed_modx_news'] = 'MODX Nieuws Feed URL';
 $_lang['setting_feed_modx_news_desc'] = 'Stel de URL in voor de RSS feed voor het MODX Nieuws paneel in de manager.';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Automatisch Cache Legen ';
 $_lang['setting_syncsite_default_desc'] = 'Schakel deze instelling in om de cache standaard te legen wanneer een document wordt opgeslagen.';
 $_lang['setting_syncsite_default_err'] = 'Geef aan of je wel of niet wilt dat de cache standaard wordt geleegd bij het opslaan van een document.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Toon omschrijvingen in het topmenu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Als op \'No\' ingesteld is, MODX zal de omschrijvingen verbergen in het menu bovenin de manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Document structuur standaard sorteerveld';
 $_lang['setting_tree_default_sort_desc'] = 'Het standaard sorteerveld voor de document structuur wanneer de manager geladen wordt.';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

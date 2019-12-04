@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'Infopanel';
 $_lang['dashboards'] = 'Infopaneler';
 $_lang['dashboards_desc'] = 'Hantera alla konfigurationer för infopaneler.';
 $_lang['edit_menu'] = 'Menyer';
-$_lang['edit_menu_desc'] = 'Hantera toppmenyns struktur.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Fellogg';
 $_lang['eventlog_viewer_desc'] = 'Visa MODX fellogg.';
 $_lang['export_site'] = 'Exportera statisk HTML';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Systeminställningar';
 $_lang['system_settings_desc'] = 'Ändra eller skapa systeminställningar för hela webbplatsen.';
 $_lang['tools'] = 'Verktyg';
 $_lang['tools_desc'] = 'Verktyg för att hålla ordning på din webbplats';
-$_lang['topnav'] = 'Toppnavigering';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Användare';
 $_lang['usernav'] = 'Användarnavigering';

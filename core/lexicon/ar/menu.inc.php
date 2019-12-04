@@ -35,5 +35,5 @@ $_lang['parameters'] = 'بارامترات';
 $_lang['parameters_desc'] = 'أي معلمات طلب تريد بعنوان انترنت "URL" عند النقر فوق هذه القائمة. (مثال : &expire = 1)';
 $_lang['permissions'] = 'الصلاحيّة';
 $_lang['permissions_desc'] = 'مفتاح إذن مطلوب لتحميل عنصر القائمة هذا.';
-$_lang['topmenu'] = 'القائمة العليا';
-$_lang['topmenu_desc'] = 'يسمح لك بربط الإجراءات مع عناصر القائمة في شريط القوائم العليا من مدير MODX. ببساطة قم  بوضع القوائم في المكان الذي تريده على حسب موقعها.';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';

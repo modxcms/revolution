@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Selecciona la Plantilla predeterminad
 $_lang['setting_default_per_page'] = 'Elementos por Página';
 $_lang['setting_default_per_page_desc'] = 'El número predeterminado de resultados a mostrar en cada página en la cuadrícula de todas las páginas del panel de administración.';
 
-$_lang['setting_editor_css_path'] = 'Ruta al archivo CSS';
-$_lang['setting_editor_css_path_desc'] = 'Introduce la ruta a la hoja de estilos CSS que deseas utilizar dentro del editor de texto enriquecido. La mejor manera de de introducirla es mediante una ruta absoluta desde la raíz del servidor, por ejemplo: /assets/site/style.css. Si no deseas cargar una hoja de estilos en el editor de texto enriquecido, deja este campo en blanco.';
-
-$_lang['setting_editor_css_selectors'] = 'Selectores de CSS para el Editor';
-$_lang['setting_editor_css_selectors_desc'] = 'Una lista separada por comas de selectores de CSS para el editor de texto formateado.';
-
 $_lang['setting_emailsender'] = 'Remitente del Email de Registro';
 $_lang['setting_emailsender_desc'] = 'Aquí puedes especificar la dirección de email usada cuando se le envíen a los usuarios sus credenciales de acceso.';
 $_lang['setting_emailsender_err'] = 'Por favor indica la dirección de email de la administración.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'Intentos de Inicio de Sesión Fallidos';
 $_lang['setting_failed_login_attempts_desc'] = 'El número de intentos de inicio de sesión fallidos que un usuario tiene permitidos antes de ser "bloqueado".';
-
-$_lang['setting_fe_editor_lang'] = 'Idioma del Editor del Front-end';
-$_lang['setting_fe_editor_lang_desc'] = 'Escoge un idioma para el editor cuando sea usado como editor del Front-end.';
 
 $_lang['setting_feed_modx_news'] = 'URL del Feed de Noticias de MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Configura la URL para el feed de RSS para el panel de noticias de MODX en el panel de administración.';
@@ -746,8 +737,8 @@ $_lang['setting_syncsite_default'] = 'Empty Cache default';
 $_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
 $_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Mostrar Descripciones en el Menú Superior';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Si se configura a "No", MODX ocultará las descripciones de los artículos del menú superior del Panel de Administración.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Campo para Ordenar por Defecto los Elementos del Árbol de Recursos';
 $_lang['setting_tree_default_sort_desc'] = 'El campo utilizado por defecto para ordenar los elementos del Árbol de Recursos del Panel de Administración.';
@@ -841,12 +832,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

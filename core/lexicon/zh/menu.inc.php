@@ -35,5 +35,5 @@ $_lang['parameters'] = '参数';
 $_lang['parameters_desc'] = '当点击菜单时，任何你要加在URL后的请求参数。';
 $_lang['permissions'] = '权限';
 $_lang['permissions_desc'] = '加载此菜单项所需的许可密钥。';
-$_lang['topmenu'] = '顶级菜单';
-$_lang['topmenu_desc'] = '这将允许你将动作和后台顶部菜单栏中的菜单项相关联。将菜单按你所好放到各自位置。';
+$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';

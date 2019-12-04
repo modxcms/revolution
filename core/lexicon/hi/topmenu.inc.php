@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -26,7 +26,7 @@ $_lang['dashboard'] = 'डैशबोर्ड';
 $_lang['dashboards'] = 'डैशबोर्ड्स';
 $_lang['dashboards_desc'] = 'कस्टम लॉगिन डैशबोर्ड्स प्रबंधित करें';
 $_lang['edit_menu'] = 'मेनूज़';
-$_lang['edit_menu_desc'] = 'शीर्ष प्रबंधक मेनू का प्रबंधन';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'त्रुटि लॉग';
 $_lang['eventlog_viewer_desc'] = 'MODX error.log देखें।';
 $_lang['export_site'] = 'स्थैतिक HTML निर्यात करें';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'सिस्टम सेटिंग्स';
 $_lang['system_settings_desc'] = 'सभी सिस्टम सेटिंग्स कॉन्फ़िगर करें';
 $_lang['tools'] = 'उपकरण';
 $_lang['tools_desc'] = 'आपकी साइट सॉर्ट की गई रखने के लिए उपयोगिताएँ';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'User';
 $_lang['usernav'] = 'User Navigation';

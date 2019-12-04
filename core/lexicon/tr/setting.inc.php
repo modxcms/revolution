@@ -245,12 +245,6 @@ $_lang['setting_default_template_desc'] = 'Yeni Kaynaklar için kullanmak istedi
 $_lang['setting_default_per_page'] = 'Sayfa başına varsayılan';
 $_lang['setting_default_per_page_desc'] = 'Yöneticideki kılavuzlarda gösterilecek varsayılan sonuç sayısı.';
 
-$_lang['setting_editor_css_path'] = 'CSS dosyası yolu';
-$_lang['setting_editor_css_path_desc'] = 'Bir zengin metin düzenleyicisi içinde kullanmak istediğiniz CSS dosyanızın yolunu girin. Yolu girmenin en iyi şekli sunucunuzun kök dizininden gelen yolu girmektir, örneğin: /assets/site/style.css. Eğer zengin metin düzenleyicisine bir biçim sayfası yüklemek istemiyorsanız, bu alanı boş bırakın.';
-
-$_lang['setting_editor_css_selectors'] = 'Düzenleyici için CSS Seçiciler';
-$_lang['setting_editor_css_selectors_desc'] = 'Bir zengin metin düzenleyicisi için CSS seçicilerinin virgülle ayrılmış bir listesi.';
-
 $_lang['setting_emailsender'] = 'e-posta adresinden kayıt';
 $_lang['setting_emailsender_desc'] = 'Burada, Kullanıcılara kullanıcı adlarını ve şifrelerini gönderirken kullanılan e-posta adresini belirtebilirsiniz.';
 $_lang['setting_emailsender_err'] = 'Lütfen yönetim e-posta adresini belirtin.';
@@ -273,9 +267,6 @@ $_lang['setting_enable_gravatar_desc'] = 'Eğer etkinleştirilirse, Gravatar bir
 
 $_lang['setting_failed_login_attempts'] = 'Başarısız Giriş Denemeleri';
 $_lang['setting_failed_login_attempts_desc'] = 'Bir kullanıcının \'engellenmeden\' önce izin verdiği başarısız oturum açma girişimi sayısı.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end Editör Dili';
-$_lang['setting_fe_editor_lang_desc'] = 'Düzenleyicinin front-end editörü olarak kullanıldığında kullanacağı bir dil seçin.';
 
 $_lang['setting_feed_modx_news'] = 'MODX Haber Kaynağı URL\'si';
 $_lang['setting_feed_modx_news_desc'] = 'Yönetici içindeki MODX Haber paneli için RSS yayınının URL\'sini ayarlayın.';
@@ -748,8 +739,8 @@ $_lang['setting_syncsite_default'] = 'Varsayılan Boş Önbellek';
 $_lang['setting_syncsite_default_desc'] = 'Bir kaynağı varsayılan olarak kaydettikten sonra önbelleği boşaltmak için \'Evet\' seçeneğini belirleyin.';
 $_lang['setting_syncsite_default_err'] = 'Bir kaynağı varsayılan olarak kaydettikten sonra lütfen önbelleği boşaltmak isteyip istemediğinizi belirtin.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Açıklamaları Üst Menüde Göster';
-$_lang['setting_topmenu_show_descriptions_desc'] = '\'Hayır\' olarak ayarlanırsa, MODX yöneticideki en üstteki menü öğelerindeki açıklamaları gizler.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Kaynak Ağacı Varsayılan Sıralama Alanı';
 $_lang['setting_tree_default_sort_desc'] = 'Yöneticiyi yüklerken Kaynak ağacı için varsayılan sıralama alanı.';
@@ -843,12 +834,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
-
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
-
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
