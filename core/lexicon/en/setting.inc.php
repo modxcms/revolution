@@ -144,9 +144,6 @@ $_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings 
 $_lang['setting_cache_db'] = 'Enable Database Cache';
 $_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
 
-$_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
-$_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
-
 $_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
 $_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
 
@@ -157,14 +154,8 @@ $_lang['setting_cache_default'] = 'Cacheable default';
 $_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
 $_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
 
-$_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
-$_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
-
 $_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
 $_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
-
-$_lang['setting_cache_format'] = 'Caching Format to Use';
-$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
 
 $_lang['setting_cache_handler'] = 'Caching Handler Class';
 $_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching.';
