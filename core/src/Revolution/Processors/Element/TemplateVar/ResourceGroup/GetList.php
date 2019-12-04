@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\TemplateVar\ResourceGroup;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modTemplateVarResourceGroup;
 
@@ -28,7 +28,7 @@ use MODX\Revolution\modTemplateVarResourceGroup;
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\ResourceGroup
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     public function checkPermissions()
     {

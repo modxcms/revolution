@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource\Event;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\modResource;
  *
  * @param json $data A JSON array of data to update with.
  */
-class UpdateFromGrid extends modProcessor
+class UpdateFromGrid extends Processor
 {
     /** @var modResource $resource */
     public $resource;

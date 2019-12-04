@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Lexicon\Topic;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Gets a list of lexicon topics
@@ -20,7 +20,7 @@ use MODX\Revolution\modProcessor;
  * @param integer $limit (optional) The number of records to limit to. Defaults to 10.
  * @package MODX\Revolution\Processors\Workspace\Lexicon\Topic
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return mixed

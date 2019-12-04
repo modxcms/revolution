@@ -8,30 +8,31 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors;
 
+use MODX\Revolution\modX;
 use ReflectionClass;
 
 /**
  * A utility class used for defining driver-specific processors
  * @package MODX\Revolution
  */
-abstract class modDriverSpecificProcessor extends modProcessor
+abstract class DriverSpecificProcessor extends Processor
 {
     /**
      * @param modX $modx
      * @param string $className
      * @param array $properties
-     * @return modProcessor
+     * @return Processor
      * @throws \ReflectionException
      */
-    public static function getInstance(modX &$modx, $className, $properties = [])
+    public static function getInstance(modX $modx, $className, $properties = [])
     {
         $class = new ReflectionClass($className);
         $namespace = $class->getNamespaceName();
         $className = implode('\\', [$namespace, $modx->getOption('dbtype'), $class->getShortName()]);
 
-        /** @var modProcessor $processor */
+        /** @var Processor $processor */
         $processor = new $className($modx, $properties);
 
         return $processor;

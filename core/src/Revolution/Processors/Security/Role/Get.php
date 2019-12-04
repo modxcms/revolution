@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Role;
 
 
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 use MODX\Revolution\modUserGroupRole;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modUserGroupRole;
  * @param integer $id The ID of the role
  * @package MODX\Revolution\Processors\Security\Role
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modUserGroupRole::class;
     public $languageTopics = ['user'];

@@ -14,7 +14,7 @@ namespace MODX\Revolution\Processors\Context;
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\Sources\modMediaSourceElement;
 
@@ -26,7 +26,7 @@ use MODX\Revolution\Sources\modMediaSourceElement;
  *
  * @package MODX\Revolution\Processors\Context
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modContext::class;
     public $languageTopics = ['context'];

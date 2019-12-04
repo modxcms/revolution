@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Access\UserGroup\Context;
 
 use MODX\Revolution\modAccessContext;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Remove a context ACL for a user group
  * @param integer $id The ID of the ACL
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Context
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modAccessContext::class;
     public $objectType = 'access_context';

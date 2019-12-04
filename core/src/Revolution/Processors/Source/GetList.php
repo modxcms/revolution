@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Source;
 
 use MODX\Revolution\modAccessibleObject;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\Sources\modMediaSource;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -24,7 +24,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Source
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modMediaSource::class;
     public $languageTopics = ['source'];

@@ -13,7 +13,7 @@ namespace MODX\Revolution\Tests\Processors\Browser;
 
 
 use Exception;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Browser\Directory\Create;
@@ -169,7 +169,7 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @param boolean $shouldWork True if the directory list should not be empty.
      */
     public function testGetDirectoryList($dir,$shouldWork = true) {
-        /** @var modProcessorResponse $response */
+        /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(GetList::class,array(
             'id' => $dir,
         ));

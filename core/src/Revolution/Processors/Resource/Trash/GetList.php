@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Resource\Trash;
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use PDO;
@@ -28,7 +28,7 @@ use xPDO\Om\xPDOQuery;
  *
  * @return array An array of modResources
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modResource::class;
 

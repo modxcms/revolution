@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\ResourceGroup;
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modResourceGroup;
 use xPDO\Om\xPDOQuery;
 
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Security\ResourceGroup
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modResourceGroup::class;
     public $languageTopics = ['access'];

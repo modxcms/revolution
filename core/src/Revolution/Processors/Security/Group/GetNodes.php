@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Group;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUserGroup;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\modUserGroup;
  * @param string $id The parent ID
  * @package MODX\Revolution\Processors\Security\Group
  */
-class GetNodes extends modProcessor
+class GetNodes extends Processor
 {
     /** @var string $id */
     public $id;

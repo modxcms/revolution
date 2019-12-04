@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Browser;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Sources\modMediaSource;
 
 /**
@@ -21,7 +21,7 @@ use MODX\Revolution\Sources\modMediaSource;
  *
  * @package MODX\Revolution\Processors\Browser
  */
-abstract class Browser extends modProcessor
+abstract class Browser extends Processor
 {
     /** @var modMediaSource $source */
     public $source;

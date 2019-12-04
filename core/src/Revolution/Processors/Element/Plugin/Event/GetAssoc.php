@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\Plugin\Event;
 
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modPlugin;
 use MODX\Revolution\modPluginEvent;
 use xPDO\Om\xPDOObject;
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  *
  * @package MODX\Revolution\Processors\Element\Plugin\Event
  */
-class GetAssoc extends modObjectGetListProcessor
+class GetAssoc extends GetListProcessor
 {
     public $classKey = modPlugin::class;
     public $languageTopics = ['plugin'];

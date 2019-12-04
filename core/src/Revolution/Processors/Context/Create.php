@@ -14,7 +14,7 @@ namespace MODX\Revolution\Processors\Context;
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
@@ -24,7 +24,7 @@ use MODX\Revolution\modUserGroup;
  *
  * @package MODX\Revolution\Processors\Context
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modContext::class;
     public $languageTopics = ['context'];

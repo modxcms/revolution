@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\PropertySet;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modPropertySet;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modPropertySet;
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modPropertySet::class;
     public $languageTopics = ['propertyset', 'category'];

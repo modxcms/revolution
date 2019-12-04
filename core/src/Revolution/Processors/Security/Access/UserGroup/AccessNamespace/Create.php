@@ -14,13 +14,13 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\AccessNamespace;
 use MODX\Revolution\modAccessNamespace;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\AccessNamespace
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modAccessNamespace::class;
     public $objectType = 'access_namespace';

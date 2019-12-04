@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Settings;
 
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modSystemSetting;
 
@@ -26,7 +26,7 @@ use MODX\Revolution\modSystemSetting;
  * @property string $description The lexicon description for the setting
  * @package MODX\Revolution\Processors\Context\Setting
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modSystemSetting::class;
     public $languageTopics = ['setting', 'namespace'];

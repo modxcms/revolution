@@ -8,9 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
 
+use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\Sources\modFileMediaSource;
 use xPDO\Om\xPDOObject;
 
@@ -21,7 +23,7 @@ use xPDO\Om\xPDOObject;
  *
  * @package MODX\Revolution
  */
-class modObjectDuplicateProcessor extends modObjectProcessor
+abstract class DuplicateProcessor extends ModelProcessor
 {
     /** @var boolean $checkSavePermission Whether or not to check the save permission on modAccessibleObjects */
     public $checkSavePermission = true;
@@ -29,7 +31,8 @@ class modObjectDuplicateProcessor extends modObjectProcessor
     public $newObject;
     public $nameField = 'name';
     public $staticfileField = 'static_file';
-    /** @var string $newNameField The name of field that used for filling new name of object.
+    /**
+     * @var string $newNameField The name of field that used for filling new name of object.
      * If defined, duplication error will be attached to field with this name
      */
     public $newNameField;

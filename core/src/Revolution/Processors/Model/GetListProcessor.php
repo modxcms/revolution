@@ -8,9 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
 
+use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\Processors\ModelProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -21,7 +23,7 @@ use xPDO\Om\xPDOQuery;
  *
  * @package MODX\Revolution
  */
-abstract class modObjectGetListProcessor extends modObjectProcessor
+abstract class GetListProcessor extends ModelProcessor
 {
     /** @var string $defaultSortField The default field to sort by */
     public $defaultSortField = 'name';
@@ -136,8 +138,8 @@ abstract class modObjectGetListProcessor extends modObjectProcessor
     public function getData()
     {
         $data = [];
-        $limit = intval($this->getProperty('limit'));
-        $start = intval($this->getProperty('start'));
+        $limit = (int)$this->getProperty('limit');
+        $start = (int)$this->getProperty('start');
 
         /* query for chunks */
         $c = $this->modx->newQuery($this->classKey);

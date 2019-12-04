@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Workspace\Lexicon;
 
 use MODX\Revolution\modLexiconEntry;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Updates a lexicon entry from a grid
  * @package MODX\Revolution\Processors\Workspace\Lexicon
  */
-class UpdateFromGrid extends modProcessor
+class UpdateFromGrid extends Processor
 {
     /** @var modLexiconEntry $entry */
     public $entry;

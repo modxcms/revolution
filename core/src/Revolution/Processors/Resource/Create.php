@@ -59,7 +59,7 @@ namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\modDocument;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modResourceGroupResource;
@@ -71,7 +71,7 @@ use MODX\Revolution\modTemplateVarResource;
 use MODX\Revolution\modWebLink;
 use MODX\Revolution\modX;
 
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
@@ -96,7 +96,7 @@ class Create extends modObjectCreateProcessor
      * @param modX $modx
      * @param $className
      * @param array $properties
-     * @return modObjectCreateProcessor
+     * @return CreateProcessor
      */
     public static function getInstance(modX &$modx, $className, $properties = [])
     {
@@ -109,7 +109,7 @@ class Create extends modObjectCreateProcessor
                 $className = Create::class;
             }
         }
-        /** @var modObjectCreateProcessor $processor */
+        /** @var CreateProcessor $processor */
         $processor = new $className($modx, $properties);
         return $processor;
     }

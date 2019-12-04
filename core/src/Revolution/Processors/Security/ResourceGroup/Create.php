@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Security\ResourceGroup;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessResourceGroup;
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
@@ -24,7 +24,7 @@ use PDO;
  * @param string $name The name of the new resource group
  * @package MODX\Revolution\Processors\Security\ResourceGroup
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modResourceGroup::class;
     public $languageTopics = ['access'];

@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Access\UserGroup\AccessNamespace;
 
 use MODX\Revolution\modAccessNamespace;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Remove a Resource Group ACL for a user group
  * @param integer $id The ID of the ACL
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\AccessNamespace
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modAccessNamespace::class;
     public $objectType = 'access_namespace';

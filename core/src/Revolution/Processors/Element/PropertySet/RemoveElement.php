@@ -13,14 +13,14 @@ namespace MODX\Revolution\Processors\Element\PropertySet;
 
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\modElementPropertySet;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Removes an element from a Property Set
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class RemoveElement extends modObjectRemoveProcessor
+class RemoveElement extends RemoveProcessor
 {
     public $classKey = modElementPropertySet::class;
     public $objectType = 'propertyset';

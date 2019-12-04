@@ -15,7 +15,7 @@ use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResource;
 
 /**
@@ -33,7 +33,7 @@ use MODX\Revolution\modResource;
  *
  * @package MODX\Revolution\Processors\Context\Setting
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modContextSetting::class;
     public $languageTopics = ['setting', 'namespace'];

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Source\Type;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Sources\modMediaSource;
 use xPDO\Om\xPDOObject;
 
@@ -18,7 +18,7 @@ use xPDO\Om\xPDOObject;
  * Gets a list of media source types
  * @package MODX\Revolution\Processors\Source\Type
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return bool

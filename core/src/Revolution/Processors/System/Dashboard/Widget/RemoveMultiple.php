@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
 use MODX\Revolution\modDashboardWidget;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 
 /**
  * Removes multiple Dashboard Widgets
  * @package MODX\Revolution\Processors\System\Dashboard\Widget
  */
-class RemoveMultiple extends modProcessor
+class RemoveMultiple extends Processor
 {
     /**
      * @return bool

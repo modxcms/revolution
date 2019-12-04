@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Category;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Update a category.
@@ -22,7 +22,7 @@ use MODX\Revolution\modObjectUpdateProcessor;
  *
  * @package MODX\Revolution\Processors\Element\Category
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modCategory::class;
     public $languageTopics = ['category'];

@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\PropertySet;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modPropertySet;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modPropertySet;
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modPropertySet::class;
     public $languageTopics = ['propertyset'];

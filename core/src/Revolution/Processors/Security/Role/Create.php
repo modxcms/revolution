@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Role;
 
 
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroupRole;
 
 /**
  * Creates a role from a POST request.
  * @package MODX\Revolution\Processors\Security\Role
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modUserGroupRole::class;
     public $languageTopics = ['user'];

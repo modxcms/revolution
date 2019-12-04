@@ -10,14 +10,14 @@
 
 namespace MODX\Revolution\Processors\System\DatabaseTable;
 
-use MODX\Revolution\modDriverSpecificProcessor;
+use MODX\Revolution\Processors\DriverSpecificProcessor;
 
 /**
  * Gets a list of database tables
  * @package modx
  * @subpackage processors.system.databasetable
  */
-abstract class GetListAbstract extends modDriverSpecificProcessor
+abstract class GetListAbstract extends DriverSpecificProcessor
 {
     /**
      * @return bool

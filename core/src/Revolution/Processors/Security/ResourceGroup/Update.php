@@ -10,14 +10,14 @@
 
 namespace MODX\Revolution\Processors\Security\ResourceGroup;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResourceGroup;
 
 /**
  * Update a resource group
  * @package MODX\Revolution\Processors\Security\ResourceGroup
  */
-class Update extends modProcessor
+class Update extends Processor
 {
     /** @var modResourceGroup $resourceGroup */
     public $resourceGroup;

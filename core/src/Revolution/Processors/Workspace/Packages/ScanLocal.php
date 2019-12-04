@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modWorkspace;
 use MODX\Revolution\Transport\modTransportPackage;
 
@@ -19,7 +19,7 @@ use MODX\Revolution\Transport\modTransportPackage;
  * @param integer $workspace The workspace to add to. Defaults to 1.
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class ScanLocal extends modProcessor
+class ScanLocal extends Processor
 {
     /** @var modWorkspace $workspace */
     public $workspace;

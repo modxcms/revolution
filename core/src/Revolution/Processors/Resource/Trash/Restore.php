@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource\Trash;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 
@@ -21,7 +21,7 @@ use MODX\Revolution\modUser;
  * @package    modx
  * @subpackage processors.resource
  */
-class Restore extends modProcessor
+class Restore extends Processor
 {
     /** @var modResource[] $resources */
     private $resources;

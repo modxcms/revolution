@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Settings;
 
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modSystemSetting;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -26,7 +26,7 @@ use xPDO\Om\xPDOQuery;
  * @package modx
  * @subpackage processors.system.settings
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modSystemSetting::class;
     public $languageTopics = ['setting', 'namespace'];

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\User;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modX;
 
@@ -18,7 +18,7 @@ use MODX\Revolution\modX;
  * Deactivate multiple users
  * @package MODX\Revolution\Processors\Security\User
  */
-class DeactivateMultiple extends modProcessor
+class DeactivateMultiple extends Processor
 {
     /**
      * @return bool

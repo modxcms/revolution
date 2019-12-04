@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Plugin\Event;
 
 
 use MODX\Revolution\modEvent;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modPluginEvent;
 
 /**
@@ -23,7 +23,7 @@ use MODX\Revolution\modPluginEvent;
  *
  * @package MODX\Revolution\Processors\Element\Plugin\Event
  */
-class Associate extends modObjectUpdateProcessor
+class Associate extends UpdateProcessor
 {
     public $classKey = modEvent::class;
     public $primaryKeyField = 'name';

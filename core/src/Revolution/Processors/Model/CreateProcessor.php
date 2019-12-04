@@ -8,9 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
 
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\Validation\modValidator;
 
 /**
@@ -20,7 +22,7 @@ use MODX\Revolution\Validation\modValidator;
  *
  * @package MODX\Revolution
  */
-abstract class modObjectCreateProcessor extends modObjectProcessor
+abstract class CreateProcessor extends ModelProcessor
 {
     /** @var string $beforeSaveEvent The name of the event to fire before saving */
     public $beforeSaveEvent = '';
@@ -77,7 +79,7 @@ abstract class modObjectCreateProcessor extends modObjectProcessor
         }
 
         /* save element */
-        if ($this->saveObject() == false) {
+        if ($this->saveObject() === false) {
             $this->modx->error->checkValidation($this->object);
 
             return $this->failure($this->modx->lexicon($this->objectType . '_err_save'));

@@ -8,8 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
-
+namespace MODX\Revolution\Processors;
 
 /**
  * A utility class for pre-2.2-style, or flat file, processors.
@@ -18,7 +17,7 @@ namespace MODX\Revolution;
  *
  * @package MODX\Revolution
  */
-class modDeprecatedProcessor extends modProcessor
+class DeprecatedProcessor extends Processor
 {
     /**
      * Rather than load a class for processing, include the processor file directly.

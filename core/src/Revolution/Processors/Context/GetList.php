@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Context;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -27,7 +27,7 @@ use xPDO\Om\xPDOQuery;
  *
  * @package MODX\Revolution\Processors\Context
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modContext::class;
     public $permission = 'view_context';

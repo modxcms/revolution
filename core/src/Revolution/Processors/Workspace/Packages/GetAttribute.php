@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Transport\modTransportPackage;
 use Parsedown;
 use xPDO\Transport\xPDOTransport;
@@ -21,7 +21,7 @@ use xPDO\Transport\xPDOTransport;
  * @param string $attr The attribute to select
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class GetAttribute extends modProcessor
+class GetAttribute extends Processor
 {
     /** @var modTransportPackage $package */
     public $package;

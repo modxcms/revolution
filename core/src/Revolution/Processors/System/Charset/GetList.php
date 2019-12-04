@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\System\Charset;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Gets a list of charsets
  * @package MODX\Revolution\Processors\System\Charset
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return bool

@@ -13,13 +13,13 @@ namespace MODX\Revolution\Processors\System\Dashboard\User;
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\modDashboardWidgetPlacement;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 
 /**
  * Class Create
  * @package MODX\Revolution\Processors\System\Dashboard\User
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modDashboardWidgetPlacement::class;
     public $languageTopics = ['dashboards'];

@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Security\Forms\Profile;
 
 use MODX\Revolution\modFormCustomizationProfile;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Activate a FC Profile
  * @package MODX\Revolution\Processors\Security\Forms\Profile
  */
-class Activate extends modObjectUpdateProcessor
+class Activate extends UpdateProcessor
 {
     public $classKey = modFormCustomizationProfile::class;
     public $objectType = 'profile';

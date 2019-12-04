@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Context\Setting;
 
 
 use MODX\Revolution\modContextSetting;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modX;
 use xPDO\Om\xPDOObject;
 
@@ -28,7 +28,7 @@ use xPDO\Om\xPDOObject;
  *
  * @package MODX\Revolution\Processors\Context\Setting
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modContextSetting::class;
     public $languageTopics = ['setting', 'namespace'];

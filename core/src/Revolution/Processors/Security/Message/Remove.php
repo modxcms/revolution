@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Message;
 
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\modUserMessage;
 
 /**
@@ -18,7 +18,7 @@ use MODX\Revolution\modUserMessage;
  * @param integer $id The ID of the message
  * @package MODX\Revolution\Processors\Security\Message
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modUserMessage::class;
     public $objectType = 'message';

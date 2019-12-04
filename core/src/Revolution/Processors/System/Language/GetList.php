@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System\Language;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Grabs a list of lexicon languages
@@ -18,7 +18,7 @@ use MODX\Revolution\modProcessor;
  * @param integer $limit (optional) The number of records to limit to. Defaults to 10.
  * @package MODX\Revolution\Processors\System\Language
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /**
      * @return mixed

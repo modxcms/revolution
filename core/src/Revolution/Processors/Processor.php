@@ -8,15 +8,16 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors;
 
+use MODX\Revolution\modX;
 
 /**
  * Abstracts a MODX processor, handling its response and error formatting.
  *
  * @package MODX\Revolution
  */
-abstract class modProcessor {
+abstract class Processor {
     /**
      * A reference to the modX object.
      * @var modX $modx
@@ -39,7 +40,7 @@ abstract class modProcessor {
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    function __construct(modX & $modx,array $properties = array()) {
+    public function __construct(modX $modx,array $properties = array()) {
         $this->modx =& $modx;
         $this->setProperties($properties);
     }
@@ -142,10 +143,10 @@ abstract class modProcessor {
      * @param modX $modx A reference to the modX object.
      * @param string $className The name of the class that is being requested.
      * @param array $properties An array of properties being run with the processor
-     * @return modProcessor The class specified by $className
+     * @return Processor The class specified by $className
      */
-    public static function getInstance(modX &$modx,$className,$properties = array()) {
-        /** @var modProcessor $processor */
+    public static function getInstance(modX $modx,$className,$properties = array()) {
+        /** @var Processor $processor */
         $processor = new $className($modx,$properties);
         return $processor;
     }
@@ -159,8 +160,8 @@ abstract class modProcessor {
     abstract public function process();
 
     /**
-     * Run the processor, returning a modProcessorResponse object.
-     * @return modProcessorResponse
+     * Run the processor, returning a ProcessorResponse object.
+     * @return ProcessorResponse
      */
     public function run() {
         if (!$this->checkPermissions()) {
@@ -178,7 +179,7 @@ abstract class modProcessor {
                 $o = $this->process();
             }
         }
-        $response = new modProcessorResponse($this->modx,$o);
+        $response = new ProcessorResponse($this->modx,$o);
         return $response;
     }
 

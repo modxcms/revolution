@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modX;
  *
  * @package MODX\Revolution\Processors\Element
  */
-class ImportProperties extends modProcessor
+class ImportProperties extends Processor
 {
     public $file = [];
 

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource\Trash;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroupResource;
 use MODX\Revolution\modTemplateVarResource;
@@ -21,7 +21,7 @@ use MODX\Revolution\modX;
  *
  * @return boolean
  */
-class Purge extends modProcessor
+class Purge extends Processor
 {
 
     /** @var modResource[] $resources */

@@ -12,8 +12,8 @@ namespace MODX\Revolution\Processors\Security\User;
 
 
 use Exception;
-use MODX\Revolution\modObjectCreateProcessor;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -29,7 +29,7 @@ use MODX\Revolution\Smarty\modSmarty;
  *
  * @package MODX\Revolution\Processors\Security\User
  */
-class Create extends modObjectCreateProcessor {
+class Create extends CreateProcessor {
     public $classKey = modUser::class;
     public $languageTopics = array('user', 'login');
     public $permission = 'new_user';
@@ -52,7 +52,7 @@ class Create extends modObjectCreateProcessor {
      * @param modX $modx
      * @param $className
      * @param array $properties
-     * @return modProcessor
+     * @return Processor
      */
     public static function getInstance(modX &$modx,$className,$properties = array()) {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modUser::class;
@@ -64,7 +64,7 @@ class Create extends modObjectCreateProcessor {
                 $className = static::class;
             }
         }
-        /** @var modProcessor $processor */
+        /** @var Processor $processor */
         $processor = new $className($modx,$properties);
         return $processor;
     }

@@ -13,14 +13,14 @@ namespace MODX\Revolution\Processors\System\Dashboard\User;
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\modDashboardWidgetPlacement;
-use MODX\Revolution\modObjectRemoveProcessor;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
+use MODX\Revolution\Processors\ProcessorResponse;
 
 /**
  * Class Remove
  * @package MODX\Revolution\Processors\System\Dashboard\User
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modDashboardWidgetPlacement::class;
     public $languageTopics = ['dashboards'];
@@ -61,7 +61,7 @@ class Remove extends modObjectRemoveProcessor
 
         $new_widgets = 0;
         $this->modx->error->reset();
-        /** @var modProcessorResponse $res */
+        /** @var ProcessorResponse $res */
         $res = $this->modx->runProcessor(GetList::class, [
             'dashboard' => $this->object->get('dashboard'),
             'combo' => true,

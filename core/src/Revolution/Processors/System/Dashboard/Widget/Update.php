@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
 use MODX\Revolution\modDashboardWidget;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Updates a Dashboard Widget
  * @param integer $id The ID of the dashboard widget
  * @package MODX\Revolution\Processors\System\Dashboard\Widget
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modDashboardWidget::class;
     public $languageTopics = ['dashboards'];

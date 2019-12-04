@@ -12,14 +12,14 @@ namespace MODX\Revolution\Processors\Security\Forms\Set;
 
 use MODX\Revolution\modActionDom;
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modObjectDuplicateProcessor;
+use MODX\Revolution\Processors\Model\DuplicateProcessor;
 use MODX\Revolution\modResource;
 
 /**
  * Duplicate a FC Set
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class Duplicate extends modObjectDuplicateProcessor
+class Duplicate extends DuplicateProcessor
 {
     public $classKey = modFormCustomizationSet::class;
     public $languageTopics = ['formcustomization'];

@@ -25,7 +25,7 @@ class GetList extends GetListAbstract
     protected $concreteProcessor;
 
     /**
-     * Creates a modProcessor object.
+     * Creates a Processor object.
      *
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modResource;
 use xPDO\Om\xPDOObject;
 
@@ -24,7 +24,7 @@ use xPDO\Om\xPDOObject;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @return array An array of modResources
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];

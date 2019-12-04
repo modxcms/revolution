@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Security\Access\Policy;
 
 use MODX\Revolution\modAccessPolicy;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Removes a policy
  * @param integer $id The ID of the policy
  * @package MODX\Revolution\Processors\Security\Access\Policy
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modAccessPolicy::class;
     public $languageTopics = ['policy'];

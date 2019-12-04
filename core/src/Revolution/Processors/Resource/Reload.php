@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Resource;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\Registry\modRegister;
 
 /**
  * save resource form data for reload
  */
-class Reload extends modProcessor
+class Reload extends Processor
 {
     public function checkPermissions()
     {

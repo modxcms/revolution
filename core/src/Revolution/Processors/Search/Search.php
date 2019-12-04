@@ -15,7 +15,7 @@ use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modPlugin;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
@@ -26,7 +26,7 @@ use MODX\Revolution\modUserProfile;
 /**
  * Searches for elements, resources and users
  **/
-class Search extends modProcessor
+class Search extends Processor
 {
     const TYPE_TEMPLATE = 'template';
     const TYPE_TV = 'tv';

@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Access\UserGroup\Source;
 
 use MODX\Revolution\modAccessPolicy;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Sources\modAccessMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
@@ -19,7 +19,7 @@ use MODX\Revolution\Sources\modMediaSource;
 /**
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Source
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modAccessMediaSource::class;
     public $languageTopics = ['source', 'access', 'user'];

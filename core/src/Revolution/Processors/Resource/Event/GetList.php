@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource\Event;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use xPDO\Om\xPDOObject;
 
@@ -24,7 +24,7 @@ use xPDO\Om\xPDOObject;
  * to 10.
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     public function checkPermissions()
     {

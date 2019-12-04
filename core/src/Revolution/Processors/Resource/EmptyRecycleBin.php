@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroupResource;
 use MODX\Revolution\modTemplateVarResource;
@@ -20,7 +20,7 @@ use MODX\Revolution\modTemplateVarResource;
  *
  * @return boolean
  */
-class EmptyRecycleBin extends modProcessor
+class EmptyRecycleBin extends Processor
 {
     public function checkPermissions()
     {

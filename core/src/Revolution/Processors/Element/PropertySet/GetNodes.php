@@ -15,7 +15,7 @@ use MODX\Revolution\modCategory;
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modElementPropertySet;
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modPlugin;
 use MODX\Revolution\modPropertySet;
 use MODX\Revolution\modSnippet;
@@ -29,7 +29,7 @@ use MODX\Revolution\modTemplateVar;
  *
  * @package MODX\Revolution\Processors\Element\PropertySet
  */
-class GetNodes extends modObjectProcessor
+class GetNodes extends ModelProcessor
 {
     public $classKey = modPropertySet::class;
     public $objectType = 'propertyset';

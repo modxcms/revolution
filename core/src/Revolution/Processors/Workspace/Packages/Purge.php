@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use MODX\Revolution\Transport\modTransportPackage;
 use xPDO\xPDO;
@@ -20,7 +20,7 @@ use xPDO\xPDO;
  * @param string $package_name The name of the package, could be set to * to purge all old packages
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class Purge extends modProcessor
+class Purge extends Processor
 {
     /** @var modTransportPackage[] $package */
     public $packages;

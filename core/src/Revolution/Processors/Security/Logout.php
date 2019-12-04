@@ -10,12 +10,12 @@
 
 namespace MODX\Revolution\Processors\Security;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Properly log out the user, running any events and flushing the session.
  */
-class Logout extends modProcessor
+class Logout extends Processor
 {
     public $loginContext;
 

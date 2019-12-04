@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\System;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
@@ -24,7 +24,7 @@ use MODX\Revolution\modResource;
  * custom context by its action
  * @package MODX\Revolution\Processors\System
  */
-class ConfigJs extends modProcessor
+class ConfigJs extends Processor
 {
     /**
      * @return mixed|string

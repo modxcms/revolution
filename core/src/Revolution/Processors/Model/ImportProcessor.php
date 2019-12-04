@@ -8,9 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
 
+use MODX\Revolution\Processors\ModelProcessor;
 use SimpleXMLElement;
 
 /**
@@ -20,7 +21,7 @@ use SimpleXMLElement;
  *
  * @package MODX\Revolution
  */
-abstract class modObjectImportProcessor extends modObjectProcessor
+abstract class ImportProcessor extends ModelProcessor
 {
     /** @var string $nameField The name, or unique, field for the object */
     public $nameField = 'name';
@@ -37,7 +38,7 @@ abstract class modObjectImportProcessor extends modObjectProcessor
         if (empty($file) || !isset($file['tmp_name'])) {
             return $this->modx->lexicon('import_err_upload');
         }
-        if ($file['error'] != 0) {
+        if ($file['error'] !== 0) {
             return $this->modx->lexicon('import_err_upload');
         }
         if (!file_exists($file['tmp_name'])) {

@@ -9,7 +9,7 @@
  */
 
 use MODX\Revolution\modDashboardWidgetInterface;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\Security\User\GetOnline;
 use MODX\Revolution\Smarty\modSmarty;
 
@@ -25,7 +25,7 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface
      */
     public function render()
     {
-        /** @var modProcessorResponse $res */
+        /** @var ProcessorResponse $res */
         $res = $this->modx->runProcessor(GetOnline::class, [
             'limit' => 10,
         ]);

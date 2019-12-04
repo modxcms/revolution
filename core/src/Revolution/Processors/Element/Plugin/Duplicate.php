@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Element\Plugin;
 
 use MODX\Revolution\modPlugin;
 use MODX\Revolution\modPluginEvent;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\Element\Plugin\Event\Update;
 
 /**
@@ -47,7 +47,7 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
                 $properties = $event->toArray();
                 $properties['plugin'] = $this->newObject->get('id');
                 $properties['enabled'] = 1;
-                /** @var modProcessorResponse $response */
+                /** @var ProcessorResponse $response */
                 $response = $this->modx->runProcessor(Update::class, $properties);
                 if ($response->isError()) {
                     $this->newObject->remove();

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Group;
 
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -21,7 +21,7 @@ use MODX\Revolution\modUserGroupMember;
  * @param string $name The new name of the user group
  * @package MODX\Revolution\Processors\Security\Group
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modUserGroup::class;
     public $languageTopics = ['user'];

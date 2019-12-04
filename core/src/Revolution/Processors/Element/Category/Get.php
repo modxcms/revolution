@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Category;
 
 
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 
 /**
  * Gets a category.
@@ -21,7 +21,7 @@ use MODX\Revolution\modObjectGetProcessor;
  *
  * @package MODX\Revolution\Processors\Element\Category
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modCategory::class;
     public $languageTopics = ['category'];

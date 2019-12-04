@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Resource;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modResource;
  *
  * @param string $data The encoded tree data
  */
-class Sort extends modProcessor
+class Sort extends Processor
 {
     public $nodes = [];
     public $nodesAffected = [];

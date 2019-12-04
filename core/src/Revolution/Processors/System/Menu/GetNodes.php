@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Menu;
 
 use MODX\Revolution\modMenu;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  * @param integer $limit (optional) The number of records to limit to. Defaults to 10.
  * @package MODX\Revolution\Processors\System\Menu
  */
-class GetNodes extends modObjectGetListProcessor
+class GetNodes extends GetListProcessor
 {
     public $classKey = modMenu::class;
     public $objectType = 'menu';

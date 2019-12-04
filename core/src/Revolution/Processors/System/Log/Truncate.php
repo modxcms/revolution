@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\System\Log;
 
 use MODX\Revolution\modManagerLog;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Clears the manager log actions
  * @package MODX\Revolution\Processors\System\Log
  */
-class Truncate extends modProcessor
+class Truncate extends Processor
 {
     /**
      * @return bool

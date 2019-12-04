@@ -10,14 +10,14 @@
 
 namespace MODX\Revolution\Processors\System;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use PDO;
 
 /**
  * Removes locks on all objects
  * @package MODX\Revolution\Processors\System
  */
-class Info extends modProcessor
+class Info extends Processor
 {
     /**
      * @return mixed

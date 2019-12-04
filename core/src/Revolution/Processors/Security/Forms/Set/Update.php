@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Security\Forms\Set;
 use MODX\Revolution\modActionDom;
 use MODX\Revolution\modActionField;
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modTemplateVar;
 
@@ -25,7 +25,7 @@ use MODX\Revolution\modTemplateVar;
  * @param string $dir (optional) The direction of the sort. Default action.
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modFormCustomizationSet::class;
     public $languageTopics = ['formcustomization'];

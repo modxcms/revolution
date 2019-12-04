@@ -9,7 +9,7 @@
  */
 
 use MODX\Revolution\modDashboardWidgetInterface;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\Security\User\GetRecentlyEditedResources;
 use MODX\Revolution\Smarty\modSmarty;
 
@@ -27,7 +27,7 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
      */
     public function render()
     {
-        /** @var modProcessorResponse $res */
+        /** @var ProcessorResponse $res */
         $res = $this->modx->runProcessor(GetRecentlyEditedResources::class, [
             'limit' => 10,
             'user' => $this->modx->user->get('id'),

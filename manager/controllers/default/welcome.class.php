@@ -10,7 +10,7 @@
 
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modManagerController;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\modSystemSetting;
 use MODX\Revolution\modUserSetting;
 use MODX\Revolution\Processors\System\Dashboard\User\GetList;
@@ -64,7 +64,7 @@ class WelcomeManagerController extends modManagerController
 
         $new_widgets = 0;
         if ($this->dashboard->get('customizable')) {
-            /** @var modProcessorResponse $res */
+            /** @var ProcessorResponse $res */
             $res = $this->modx->runProcessor(GetList::class, [
                 'dashboard' => $this->dashboard->get('id'),
                 'combo' => true,

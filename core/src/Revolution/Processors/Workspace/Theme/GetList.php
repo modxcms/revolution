@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Workspace\Theme;
 
 use DirectoryIterator;
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 
 /**
  * Grabs a list of manager themes
  * @package MODX\Revolution\Processors\Workspace\Theme
  */
-class GetList extends modObjectProcessor
+class GetList extends ModelProcessor
 {
     public $permission = 'settings';
 

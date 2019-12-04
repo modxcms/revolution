@@ -8,17 +8,20 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
+
+use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\Processors\ModelProcessor;
 
 /**
- * A utility abstract class for defining remove-based processors
+ * A utility abstract class for defining soft remove-based processors
  *
  * @abstract
  *
  * @package MODX\Revolution
  */
-abstract class modObjectRemoveProcessor extends modObjectProcessor
+abstract class SoftRemoveProcessor extends ModelProcessor
 {
     /** @var boolean $checkRemovePermission If set to true, will check the remove permission on modAccessibleObjects */
     public $checkRemovePermission = true;
@@ -26,6 +29,18 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor
     public $beforeRemoveEvent = '';
     /** @var string $afterRemoveEvent The name of the event to fire after removal */
     public $afterRemoveEvent = '';
+    /** @var bool $userDeletedOn To use or not deleted on field */
+    public $useDeletedOn = true;
+    /** @var string $deletedOnField Name of deleted on field */
+    public $deletedOnField = 'deletedon';
+    /** @var bool $userDeleted To use or not deleted field */
+    public $useDeleted = true;
+    /** @var string $deletedField Name of deleted field */
+    public $deletedField = 'deleted';
+    /** @var bool $userDeletedBy To use or not deleted by field */
+    public $useDeletedBy = true;
+    /** @var string $deletedByField Name of deleted by field */
+    public $deletedByField = 'deletedby';
 
     public function initialize()
     {
@@ -42,6 +57,23 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor
             return $this->modx->lexicon('access_denied');
         }
 
+        if (!$this->useDeleted && !$this->useDeletedOn && !$this->useDeletedBy) {
+            return $this->modx->lexicon($this->objectType . '_err_dt_ns');
+        }
+
+        if ($this->useDeleted && ($this->deletedField == null)) {
+            return $this->modx->lexicon($this->objectType . '_err_df_ns');
+        }
+
+        if ($this->useDeletedOn && ($this->deletedOnField == null)) {
+            return $this->modx->lexicon($this->objectType . '_err_dof_ns');
+        }
+
+        if ($this->useDeletedBy && ($this->deletedByField == null)) {
+            return $this->modx->lexicon($this->objectType . '_err_dbf_ns');
+        }
+
+
         return parent::initialize();
     }
 
@@ -56,9 +88,23 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor
             return $this->failure($preventRemoval);
         }
 
-        if ($this->removeObject() == false) {
-            return $this->failure($this->modx->lexicon($this->objectType . '_err_remove'));
+
+        if ($this->useDeleted) {
+            $this->object->set($this->deletedField, true);
         }
+
+        if ($this->useDeletedOn) {
+            $this->object->set($this->deletedOnField, time());
+        }
+
+        if ($this->useDeletedBy) {
+            $this->object->set($this->deletedByField, $this->modx->user->id);
+        }
+
+        if ($this->saveObject() === false) {
+            return $this->failure($this->modx->lexicon($this->objectType . '_err_soft_remove'));
+        }
+
         $this->afterRemove();
         $this->fireAfterRemoveEvent();
         $this->logManagerAction();
@@ -68,14 +114,14 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor
     }
 
     /**
-     * Abstract the removing of the object out to allow for transient and non-persistent object updating in derivative
+     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
      * classes
      *
      * @return boolean
      */
-    public function removeObject()
+    public function saveObject()
     {
-        return $this->object->remove();
+        return $this->object->save();
     }
 
     /**
@@ -105,7 +151,7 @@ abstract class modObjectRemoveProcessor extends modObjectProcessor
      */
     public function logManagerAction()
     {
-        $this->modx->logManagerAction($this->objectType . '_delete', $this->classKey,
+        $this->modx->logManagerAction($this->objectType . '_soft_delete', $this->classKey,
             $this->object->get($this->primaryKeyField));
     }
 

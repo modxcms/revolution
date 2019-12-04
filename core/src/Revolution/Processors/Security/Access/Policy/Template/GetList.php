@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicyTemplate;
 use MODX\Revolution\modAccessPolicyTemplateGroup;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -26,7 +26,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Default
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modAccessPolicyTemplate::class;
     public $checkListPermission = false;

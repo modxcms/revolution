@@ -29,6 +29,8 @@ use Exception;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
 use MODX\Revolution\Mail\modMail;
+use MODX\Revolution\Processors\DeprecatedProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
 use MODX\Revolution\Rest\modRestClient;
@@ -1715,7 +1717,7 @@ class modX extends xPDO {
         $result = null;
 
         if (class_exists($action)) {
-            /** @var modProcessor $processor */
+            /** @var Processor $processor */
             $processor = new $action($this, $scriptProperties);
 
             return $processor->run();
@@ -1726,7 +1728,7 @@ class modX extends xPDO {
             $legacyAction = str_replace('\\Tv\\', '\\TemplateVar\\', $legacyAction);
         }
         if (class_exists($legacyAction)) {
-            /** @var modProcessor $processor */
+            /** @var Processor $processor */
             $processor = new $legacyAction($this, $scriptProperties);
 
             return $processor->run();
@@ -1775,7 +1777,7 @@ class modX extends xPDO {
                 }
             }
             if (empty($processor)) {
-                $processor = new modDeprecatedProcessor($this, $scriptProperties);
+                $processor = new DeprecatedProcessor($this, $scriptProperties);
             }
             $processor->setPath($processorFile);
             $response = $processor->run();

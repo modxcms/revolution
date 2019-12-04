@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Profile;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 
 /**
@@ -22,7 +22,7 @@ use MODX\Revolution\modUser;
  * @param string $password_confirm A confirmed version of the new password
  * @package MODX\Revolution\Processors\Security\Profile
  */
-class ChangePassword extends modProcessor
+class ChangePassword extends Processor
 {
     public function checkPermissions()
     {

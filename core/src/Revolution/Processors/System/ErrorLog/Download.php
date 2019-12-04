@@ -10,14 +10,14 @@
 
 namespace MODX\Revolution\Processors\System\ErrorLog;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use xPDO\Cache\xPDOCacheManager;
 
 /**
  * Grab and download the error log
  * @package MODX\Revolution\Processors\System\ErrorLog
  */
-class Download extends modProcessor
+class Download extends Processor
 {
     /**
      * @return mixed

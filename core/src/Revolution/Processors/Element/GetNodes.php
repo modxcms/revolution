@@ -15,7 +15,7 @@ use MODX\Revolution\modCategory;
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modPlugin;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
@@ -27,7 +27,7 @@ use MODX\Revolution\modTemplateVar;
  *
  * @package MODX\Revolution\Processors\Element
  */
-class GetNodes extends modProcessor
+class GetNodes extends Processor
 {
     public $typeMap = [
         'template' => modTemplate::class,

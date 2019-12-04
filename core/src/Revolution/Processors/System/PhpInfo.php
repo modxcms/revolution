@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\System;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Display phpinfo()
  * @package MODX\Revolution\Processors\System
  */
-class PhpInfo extends modProcessor
+class PhpInfo extends Processor
 {
     /**
      * @return mixed

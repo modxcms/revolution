@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Profile;
 
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
 
@@ -19,7 +19,7 @@ use MODX\Revolution\modUserProfile;
  * Update a user profile
  * @package MODX\Revolution\Processors\Security\Profile
  */
-class Update extends modProcessor
+class Update extends Processor
 {
     /** @var modUserProfile $profile */
     public $profile;

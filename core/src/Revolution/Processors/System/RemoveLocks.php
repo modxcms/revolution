@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Registry\modDbRegister;
 use MODX\Revolution\Registry\modRegistry;
 
@@ -18,7 +18,7 @@ use MODX\Revolution\Registry\modRegistry;
  * Removes locks on all objects
  * @package MODX\Revolution\Processors\System
  */
-class RemoveLocks extends modProcessor
+class RemoveLocks extends Processor
 {
     /**
      * @return bool

@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Menu;
 
 use MODX\Revolution\modMenu;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Update a menu item
@@ -23,7 +23,7 @@ use MODX\Revolution\modObjectUpdateProcessor;
  * @param integer $parent (optional) The parent menu to create from. Defaults to 0.
  * @package MODX\Revolution\Processors\System\Menu
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modMenu::class;
     public $objectType = 'menu';

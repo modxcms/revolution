@@ -8,9 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors\Model;
 
 
+use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\Validation\modValidator;
 
 /**
@@ -20,7 +23,7 @@ use MODX\Revolution\Validation\modValidator;
  *
  * @package MODX\Revolution
  */
-abstract class modObjectUpdateProcessor extends modObjectProcessor
+abstract class UpdateProcessor extends ModelProcessor
 {
     public $checkSavePermission = true;
     /** @var string $beforeSaveEvent The name of the event to fire before saving */
@@ -83,7 +86,7 @@ abstract class modObjectUpdateProcessor extends modObjectProcessor
             return $this->failure($preventSave);
         }
 
-        if ($this->saveObject() == false) {
+        if ($this->saveObject() === false) {
             return $this->failure($this->modx->lexicon($this->objectType . '_err_save'));
         }
         $this->afterSave();

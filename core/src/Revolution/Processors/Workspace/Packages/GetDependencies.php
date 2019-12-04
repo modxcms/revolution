@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\Transport\modTransportPackage;
 use xPDO\Transport\xPDOTransport;
 
@@ -23,7 +23,7 @@ use xPDO\Transport\xPDOTransport;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Workspace\Packages
  */
-class GetDependencies extends modObjectGetListProcessor
+class GetDependencies extends GetListProcessor
 {
     public $classKey = modTransportPackage::class;
     public $checkListPermission = false;

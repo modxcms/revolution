@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Element\Plugin;
 
 
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modPlugin;
 
 /**
@@ -21,7 +21,7 @@ use MODX\Revolution\modPlugin;
  *
  * @package MODX\Revolution\Processors\Element\Plugin
  */
-class Deactivate extends modObjectUpdateProcessor
+class Deactivate extends UpdateProcessor
 {
     public $classKey = modPlugin::class;
     public $languageTopics = ['plugin', 'category', 'element'];

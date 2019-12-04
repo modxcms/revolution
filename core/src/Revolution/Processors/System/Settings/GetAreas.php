@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System\Settings;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modSystemSetting;
 use PDO;
 use xPDO\Om\xPDOQuery;
@@ -22,7 +22,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\System\Settings
  */
-class GetAreas extends modProcessor
+class GetAreas extends Processor
 {
     /**
      * @return mixed

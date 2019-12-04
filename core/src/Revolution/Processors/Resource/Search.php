@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Resource;
 
 
 use MODX\Revolution\modContext;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modResource;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -26,7 +26,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir The direction to sort
  * @return array An array of modResources
  */
-class Search extends modObjectGetListProcessor
+class Search extends GetListProcessor
 {
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];

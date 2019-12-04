@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Profile;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -21,7 +21,7 @@ use MODX\Revolution\modUserGroupRole;
  * @param integer $id The ID of the user
  * @package MODX\Revolution\Processors\Security\Profile
  */
-class Get extends modProcessor
+class Get extends Processor
 {
     /** @var modUser $user */
     public $user;

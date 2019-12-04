@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modX;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modX;
  * @param integer $templates A comma-separated list of policy templates
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
-class RemoveMultiple extends modObjectProcessor
+class RemoveMultiple extends ModelProcessor
 {
     public $languageTopics = ['policy'];
     public $permission = 'policy_template_delete';

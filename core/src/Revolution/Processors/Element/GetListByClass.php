@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\modElement;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modTemplate;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modTemplate;
  *
  * @package MODX\Revolution\Processors\Element
  */
-class GetListByClass extends modProcessor
+class GetListByClass extends Processor
 {
     public function checkPermissions()
     {

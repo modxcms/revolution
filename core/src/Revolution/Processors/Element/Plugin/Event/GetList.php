@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element\Plugin\Event;
 
 
 use MODX\Revolution\modEvent;
-use MODX\Revolution\modObjectProcessor;
+use MODX\Revolution\Processors\ModelProcessor;
 use MODX\Revolution\modPluginEvent;
 
 /**
@@ -20,7 +20,7 @@ use MODX\Revolution\modPluginEvent;
  *
  * @package MODX\Revolution\Processors\Element\Plugin\Event
  */
-class GetList extends modObjectProcessor
+class GetList extends ModelProcessor
 {
     public $classKey = modPluginEvent::class;
     public $languageTopics = ['plugin', 'system_events'];

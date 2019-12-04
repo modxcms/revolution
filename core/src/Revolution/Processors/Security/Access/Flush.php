@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\Security\Access;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Flushes permissions for the logged in user.
  * @package MODX\Revolution\Processors\Security\Access
  */
-class Flush extends modProcessor
+class Flush extends Processor
 {
     /**
      * @return array

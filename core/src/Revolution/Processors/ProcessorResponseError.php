@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution;
+namespace MODX\Revolution\Processors;
 
 
 /**
@@ -16,7 +16,7 @@ namespace MODX\Revolution;
  *
  * @package MODX\Revolution
  */
-class modProcessorResponseError
+class ProcessorResponseError
 {
     /**
      * @var array The error data itself
@@ -36,7 +36,7 @@ class modProcessorResponseError
      *
      * @param array $error An array error response
      */
-    function __construct($error = [])
+    public function __construct($error = [])
     {
         $this->error = $error;
         if (isset($error['id']) && !empty($error['id'])) {

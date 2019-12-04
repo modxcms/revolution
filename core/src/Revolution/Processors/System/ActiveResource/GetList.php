@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\System\ActiveResource;
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use xPDO\Om\xPDOObject;
@@ -26,7 +26,7 @@ use xPDO\Om\xPDOQuery;
  * editedon date to. Defaults to: %b %d, %Y %I:%M %p
  * @package MODX\Revolution\Processors\System\ActiveResource
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];

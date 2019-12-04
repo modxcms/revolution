@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\modClassMap;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Outputs a list of Element subclasses
@@ -21,7 +21,7 @@ use MODX\Revolution\modProcessor;
  *
  * @package    MODX\Revolution\Processors\Element
  */
-class GetClasses extends modProcessor
+class GetClasses extends Processor
 {
     public function checkPermissions()
     {

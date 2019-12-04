@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Security\Forms\Profile;
 
 use MODX\Revolution\modFormCustomizationProfile;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 
 /**
  * Remove FC Profile
  * @package MODX\Revolution\Processors\Security\Forms\Profile
  */
-class Remove extends modObjectRemoveProcessor
+class Remove extends RemoveProcessor
 {
     public $classKey = modFormCustomizationProfile::class;
     public $languageTopics = ['formcustomization'];

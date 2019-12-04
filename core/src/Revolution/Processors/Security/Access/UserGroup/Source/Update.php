@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\Source;
 
 use MODX\Revolution\modAccessCategory;
 use MODX\Revolution\modAccessPolicy;
-use MODX\Revolution\modObjectUpdateProcessor;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Sources\modAccessMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
@@ -20,7 +20,7 @@ use MODX\Revolution\Sources\modMediaSource;
 /**
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Source
  */
-class Update extends modObjectUpdateProcessor
+class Update extends UpdateProcessor
 {
     public $classKey = modAccessMediaSource::class;
     public $languageTopics = ['source', 'access', 'user'];

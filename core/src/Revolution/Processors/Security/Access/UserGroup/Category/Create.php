@@ -13,14 +13,14 @@ namespace MODX\Revolution\Processors\Security\Access\UserGroup\Category;
 use MODX\Revolution\modAccessCategory;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modCategory;
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
  * Class Create
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Category
  */
-class Create extends modObjectCreateProcessor
+class Create extends CreateProcessor
 {
     public $classKey = modAccessCategory::class;
     public $objectType = 'access_category';

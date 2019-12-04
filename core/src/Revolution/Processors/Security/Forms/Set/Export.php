@@ -11,13 +11,13 @@
 namespace MODX\Revolution\Processors\Security\Forms\Set;
 
 use MODX\Revolution\modFormCustomizationSet;
-use MODX\Revolution\modObjectExportProcessor;
+use MODX\Revolution\Processors\Model\ExportProcessor;
 
 /**
  * Export a form customization set.
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class Export extends modObjectExportProcessor
+class Export extends ExportProcessor
 {
     public $objectType = 'set';
     public $classKey = modFormCustomizationSet::class;

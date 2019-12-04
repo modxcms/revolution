@@ -9,7 +9,7 @@
  */
 
 use MODX\Revolution\modManagerController;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\Processors\Security\User\Update;
@@ -323,9 +323,9 @@ class SecurityLoginManagerController extends modManagerController
             $this->scriptProperties['password'] = $password;
             $registry->read(['poll_limit' => 1, 'remove_read' => true]);
 
-            /** @var modProcessorResponse $response */
+            /** @var ProcessorResponse $response */
             $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
-            if (($response instanceof modProcessorResponse)) {
+            if (($response instanceof ProcessorResponse)) {
                 if (!$response->isError()) {
                     $url = !empty($this->scriptProperties['returnUrl'])
                         ? $this->scriptProperties['returnUrl']
@@ -444,9 +444,9 @@ class SecurityLoginManagerController extends modManagerController
             $registry->read(['poll_limit' => 1, 'remove_read' => true]);
         }
 
-        /** @var modProcessorResponse $response */
+        /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(\MODX\Revolution\Processors\Security\Login::class, $this->scriptProperties);
-        if (($response instanceof modProcessorResponse)) {
+        if (($response instanceof ProcessorResponse)) {
             if (!$response->isError()) {
                 $url = !empty($this->scriptProperties['returnUrl'])
                     ? $this->scriptProperties['returnUrl']

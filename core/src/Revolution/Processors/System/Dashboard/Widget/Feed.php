@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
 use MODX\Revolution\modChunk;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use SimplePie_Item;
 use xPDO\xPDO;
@@ -22,7 +22,7 @@ use xPDO\xPDO;
  * (i.e. HTML) is returned in object->html.
  * @package MODX\Revolution\Processors\System\Dashboard\Widget
  */
-class Feed extends modProcessor
+class Feed extends Processor
 {
     /**
      * @return array|mixed|string

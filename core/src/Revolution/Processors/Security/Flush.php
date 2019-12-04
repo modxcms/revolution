@@ -10,14 +10,14 @@
 
 namespace MODX\Revolution\Processors\Security;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modSession;
 use MODX\Revolution\modSessionHandler;
 
 /**
  * Flush all sessions
  */
-class Flush extends modProcessor
+class Flush extends Processor
 {
     public function checkPermissions()
     {

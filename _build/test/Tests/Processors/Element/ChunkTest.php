@@ -14,7 +14,7 @@ namespace MODX\Revolution\Tests\Processors\Element;
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modChunk;
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Element\Chunk\Create;
 use MODX\Revolution\Processors\Element\Chunk\Duplicate;
@@ -133,7 +133,7 @@ class ChunkProcessorsTest extends MODxTestCase {
         }
         $this->modx->lexicon->load('default');
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Duplicate::class,array(
             'id' => $chunk ? $chunk->get('id') : $chunkPk,
             'name' => $newName,
@@ -189,7 +189,7 @@ class ChunkProcessorsTest extends MODxTestCase {
         $data['id'] = $chunk ? $chunk->get('id') : $chunkPk;
         $data['name'] = $chunkPk;
 
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Update::class,$data);
         $passed = $this->checkForSuccess($result);
         if ($passed) {

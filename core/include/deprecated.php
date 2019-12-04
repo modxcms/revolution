@@ -21,18 +21,21 @@ class_alias(\xPDO\Transport\xPDOObjectVehicle::class, \xPDOObjectVehicle::class)
 class_alias(\MODX\Revolution\modX::class, \modX::class);
 
 // Processors
-class_alias(\MODX\Revolution\modProcessor::class, \modProcessor::class);
-class_alias(\MODX\Revolution\modObjectProcessor::class, \modObjectProcessor::class);
-class_alias(\MODX\Revolution\modObjectCreateProcessor::class, \modObjectCreateProcessor::class);
-class_alias(\MODX\Revolution\modObjectExportProcessor::class, \modObjectExportProcessor::class);
-class_alias(\MODX\Revolution\modObjectGetListProcessor::class, \modObjectGetListProcessor::class);
-class_alias(\MODX\Revolution\modObjectGetProcessor::class, \modObjectGetProcessor::class);
-class_alias(\MODX\Revolution\modObjectImportProcessor::class, \modObjectImportProcessor::class);
-class_alias(\MODX\Revolution\modObjectRemoveProcessor::class, \modObjectRemoveProcessor::class);
-class_alias(\MODX\Revolution\modObjectSoftRemoveProcessor::class, \modObjectSoftRemoveProcessor::class);
-class_alias(\MODX\Revolution\modObjectUpdateProcessor::class, \modObjectUpdateProcessor::class);
+class_alias(\MODX\Revolution\Processors\Processor::class, \modProcessor::class);
+class_alias(\MODX\Revolution\Processors\ModelProcessor::class, \modObjectProcessor::class);
+class_alias(\MODX\Revolution\Processors\DriverSpecificProcessor::class, \modDriverSpecificProcessor::class);
+class_alias(\MODX\Revolution\Processors\ProcessorResponse::class, \modProcessorResponse::class);
+class_alias(\MODX\Revolution\Processors\ProcessorResponseError::class, \modProcessorResponseError::class);
+class_alias(\MODX\Revolution\Processors\Model\CreateProcessor::class, \modObjectCreateProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\DuplicateProcessor::class, \modObjectDuplicateProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\ExportProcessor::class, \modObjectExportProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\GetListProcessor::class, \modObjectGetListProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\GetProcessor::class, \modObjectGetProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\ImportProcessor::class, \modObjectImportProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\RemoveProcessor::class, \modObjectRemoveProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\SoftRemoveProcessor::class, \modObjectSoftRemoveProcessor::class);
+class_alias(\MODX\Revolution\Processors\Model\UpdateProcessor::class, \modObjectUpdateProcessor::class);
 class_alias(\MODX\Revolution\modParsedManagerController::class, \modParsedManagerController::class);
-class_alias(\MODX\Revolution\modObjectDuplicateProcessor::class, \modObjectDuplicateProcessor::class);
 
 class_alias(\MODX\Revolution\modExtraManagerController::class, \modExtraManagerController::class);
 class_alias(\MODX\Revolution\modResource::class, \modResource::class);

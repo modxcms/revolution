@@ -12,7 +12,7 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\modChunk;
-use MODX\Revolution\modObjectRemoveProcessor;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
 use MODX\Revolution\modPlugin;
 use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
@@ -25,7 +25,7 @@ use MODX\Revolution\modTemplateVar;
  *
  * @package MODX\Revolution\Processors\Element
  */
-abstract class Remove extends modObjectRemoveProcessor
+abstract class Remove extends RemoveProcessor
 {
     public $staticFilePath;
     public $staticFile;

@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 use MODX\Revolution\modResource;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modResource;
  * @param integer $id The ID of the resource to grab
  * @return modResource
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];

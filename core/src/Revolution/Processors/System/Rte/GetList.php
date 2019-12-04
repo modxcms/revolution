@@ -10,13 +10,13 @@
 
 namespace MODX\Revolution\Processors\System\Rte;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Get a list of registered RTEs
  * @package MODX\Revolution\Processors\System\Rte
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     public function process()
     {

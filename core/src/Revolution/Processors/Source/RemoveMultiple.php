@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Source;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 use MODX\Revolution\Sources\modMediaSource;
 
@@ -18,7 +18,7 @@ use MODX\Revolution\Sources\modMediaSource;
  * Removes multiple Media Sources
  * @package MODX\Revolution\Processors\Source
  */
-class RemoveMultiple extends modProcessor
+class RemoveMultiple extends Processor
 {
     /** @var modMediaSource $source */
     public $source;

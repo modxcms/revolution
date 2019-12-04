@@ -12,7 +12,7 @@
 namespace MODX\Revolution\Tests\Processors\Element;
 
 
-use MODX\Revolution\modProcessorResponse;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Element\Template\Create;
@@ -168,7 +168,7 @@ class TemplateProcessorsTest extends MODxTestCase {
             $this->fail('No Template found "'.$templatePk.'" as specified in test provider.');
             return;
         }
-        /** @var modProcessorResponse $result */
+        /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(Remove::class,array(
             'id' => $template ? $template->get('id') : $templatePk,
         ));

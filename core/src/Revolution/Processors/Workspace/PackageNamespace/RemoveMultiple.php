@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Workspace\PackageNamespace;
 
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 
 /**
@@ -19,7 +19,7 @@ use MODX\Revolution\modX;
  * @param string $name The name of the namespace.
  * @package MODX\Revolution\Processors\Workspace\PackageNamespace
  */
-class RemoveMultiple extends modProcessor
+class RemoveMultiple extends Processor
 {
     /** @var modNamespace $namespace */
     public $namespace;

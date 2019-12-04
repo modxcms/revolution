@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\ResourceGroup;
 
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modResourceGroupResource;
@@ -19,7 +19,7 @@ use MODX\Revolution\modResourceGroupResource;
  * Update documents in a resource group
  * @package MODX\Revolution\Processors\Security\ResourceGroup
  */
-class UpdateResourcesIn extends modObjectCreateProcessor
+class UpdateResourcesIn extends CreateProcessor
 {
     public $classKey = modResourceGroupResource::class;
     public $objectType = 'resource_group_resource';

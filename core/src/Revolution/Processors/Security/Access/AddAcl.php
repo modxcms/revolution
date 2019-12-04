@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Security\Access;
 
-use MODX\Revolution\modObjectCreateProcessor;
+use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroup;
 
 /**
@@ -24,7 +24,7 @@ use MODX\Revolution\modUserGroup;
  * @param string $context_key (optional) The context to assign this ACL to.
  * @package MODX\Revolution\Processors\Security\Access
  */
-class AddAcl extends modObjectCreateProcessor
+class AddAcl extends CreateProcessor
 {
     public $objectType = 'access';
     public $permission = 'access_permissions';

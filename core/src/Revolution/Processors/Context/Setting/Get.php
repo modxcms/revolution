@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Context\Setting;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;
-use MODX\Revolution\modObjectGetProcessor;
+use MODX\Revolution\Processors\Model\GetProcessor;
 
 /**
  * Gets a context setting
@@ -23,7 +23,7 @@ use MODX\Revolution\modObjectGetProcessor;
  *
  * @package MODX\Revolution\Processors\Context\Setting
  */
-class Get extends modObjectGetProcessor
+class Get extends GetProcessor
 {
     public $classKey = modContextSetting::class;
     public $languageTopics = ['setting'];

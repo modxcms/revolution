@@ -12,13 +12,13 @@ namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modObjectExportProcessor;
+use MODX\Revolution\Processors\Model\ExportProcessor;
 
 /**
  * Export a policy template.
  * @package MODX\Revolution\Processors\Security\Access\Policy\Template
  */
-class Export extends modObjectExportProcessor
+class Export extends ExportProcessor
 {
     public $classKey = modAccessPolicyTemplate::class;
     public $objectType = 'policy_template';

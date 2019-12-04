@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Resource\ResourceGroup;
 
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
 use MODX\Revolution\modResourceGroupResource;
@@ -25,7 +25,7 @@ use MODX\Revolution\modResourceGroupResource;
  * @param string $sort (optional) The column to sort by. Defaults to name.
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  */
-class GetList extends modProcessor
+class GetList extends Processor
 {
     /** @var modResource $resource */
     public $resource;

@@ -11,14 +11,14 @@
 namespace MODX\Revolution\Processors\Workspace\Lexicon;
 
 use MODX\Revolution\modLexiconEntry;
-use MODX\Revolution\modProcessor;
+use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
 
 /**
  * Regenerates strings from the base lexicon files, resetting any customizations.
  * @package MODX\Revolution\Processors\Workspace\Lexicon
  */
-class ReloadFromBase extends modProcessor
+class ReloadFromBase extends Processor
 {
     /**
      * @return bool

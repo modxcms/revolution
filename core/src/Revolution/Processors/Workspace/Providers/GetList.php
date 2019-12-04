@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Providers;
 
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\Transport\modTransportProvider;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -23,7 +23,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Workspace\Providers
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modTransportProvider::class;
     public $languageTopics = ['workspace'];

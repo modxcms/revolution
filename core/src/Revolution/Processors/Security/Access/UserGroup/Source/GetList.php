@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Access\UserGroup\Source;
 
 use MODX\Revolution\modAccessPolicy;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupRole;
 use MODX\Revolution\Sources\modAccessMediaSource;
@@ -31,7 +31,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Security\Access\UserGroup\Source
  */
-class GetList extends modObjectGetListProcessor
+class GetList extends GetListProcessor
 {
     public $classKey = modAccessMediaSource::class;
     public $languageTopics = ['access', 'source'];

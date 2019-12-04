@@ -11,7 +11,7 @@
 namespace MODX\Revolution\Processors\Security\User;
 
 use MODX\Revolution\modManagerLog;
-use MODX\Revolution\modObjectGetListProcessor;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
@@ -28,7 +28,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @package MODX\Revolution\Processors\Security\User
  */
-class GetRecentlyEditedResources extends modObjectGetListProcessor
+class GetRecentlyEditedResources extends GetListProcessor
 {
     public $classKey = modManagerLog::class;
     public $permission = 'view_document';
