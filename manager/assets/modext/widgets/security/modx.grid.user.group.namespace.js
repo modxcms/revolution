@@ -10,7 +10,7 @@ MODx.grid.UserGroupNamespace = function(config) {
         id: 'modx-grid-user-group-namespace'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/namespace/getList'
+            action: 'Security/Access/UserGroup/AccessNamespace/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -143,7 +143,7 @@ MODx.window.CreateUGNamespace = function(config) {
     Ext.applyIf(config,{
         title: _('namespace_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/namespace/create'
+        ,action: 'Security/Access/UserGroup/AccessNamespace/Create'
         // ,height: 250
         // ,width: 500
         ,fields: [{
@@ -260,7 +260,7 @@ MODx.window.UpdateUGNamespace = function(config) {
     this.ident = config.ident || 'updugsrc'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_namespace_update')
-        ,action: 'security/access/usergroup/namespace/update'
+        ,action: 'Security/Access/UserGroup/AccessNamespace/Update'
     });
     MODx.window.UpdateUGNamespace.superclass.constructor.call(this,config);
 };

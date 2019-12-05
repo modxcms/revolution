@@ -142,7 +142,7 @@ class GetList extends GetListProcessor
             '-',
             [
                 'text' => $this->modx->lexicon('access_namespace_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["security/access/usergroup/namespace/remove"])',
+                'handler' => 'this.confirm.createDelegate(this,["Security/Access/UserGroup/AccessNamespace/Remove"])',
             ],
         ];
 
