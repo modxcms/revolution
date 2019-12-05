@@ -1722,7 +1722,7 @@ class modX extends xPDO {
 
         // First check if the processor can be found directly as a class name provided to $action
         // We're limiting to subclasses of Processor to prevent instantiating arbitrary classes
-        if (class_exists($action) && is_subclass_of($action, Processor::class, true)) {
+        if (static::isProcessorClass($action)) {
             /** @var Processor $processor */
             $processor = new $action($this, $scriptProperties);
 
@@ -1736,7 +1736,7 @@ class modX extends xPDO {
         if (strpos($legacyAction, '\\Tv\\') !== false) {
             $legacyAction = str_replace('\\Tv\\', '\\TemplateVar\\', $legacyAction);
         }
-        if (class_exists($legacyAction) && is_subclass_of($legacyAction, Processor::class, true)) {
+        if (static::isProcessorClass($legacyAction)) {
             /** @var Processor $processor */
             $processor = new $legacyAction($this, $scriptProperties);
 
@@ -1778,7 +1778,7 @@ class modX extends xPDO {
 
             $this->processors[$processorFile] = $className;
         }
-        if (class_exists($className) && is_subclass_of($className, Processor::class, true)) {
+        if (static::isProcessorClass($className)) {
             $processor = call_user_func_array([$className, 'getInstance'], [&$this, $className, $scriptProperties]);
             $processor->setPath($processorFile);
             return $processor->run();
@@ -1786,6 +1786,15 @@ class modX extends xPDO {
 
         $this->log(modX::LOG_LEVEL_ERROR, "Unable to load processor for action \"{$action}\". Its file in \"{$processorFile}\" exists, but does not return the processor class name and the class name could not be automatically inferred from the action.");
         return '';
+    }
+
+    /**
+     * @param string $className
+     * @return bool
+     */
+    private static function isProcessorClass(string $className): bool
+    {
+        return class_exists($className) && is_subclass_of($className, Processor::class, true);
     }
 
     /**
