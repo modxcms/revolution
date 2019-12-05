@@ -1,6 +1,6 @@
 /**
  * Loads a grid of all the database tables in the modx database.
- * 
+ *
  * @class MODx.grid.DatabaseTables
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -16,6 +16,7 @@ MODx.grid.DatabaseTables = function(config) {
             action: 'System/DatabaseTable/GetList'
         }
         ,fields: ['Name','Rows','Reserved','Data_size','Index_length','Data_free']
+        ,showActionsColumn: false
         ,paging: false
         ,columns: [{
             header: _('database_table_tablename')

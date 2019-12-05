@@ -16,6 +16,7 @@ MODx.grid.ResourceSecurity = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-resource-security'
         ,fields: ['id','name','access']
+        ,showActionsColumn: false
         ,paging: false
         ,remoteSort: false
         ,autoHeight: true

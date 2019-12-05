@@ -18,6 +18,7 @@ MODx.grid.TemplateVarTemplate = function(config) {
         id: 'modx-grid-tv-template'
         ,url: MODx.config.connector_url
         ,fields: ['id','templatename','category','category_name','description','access','menu']
+        ,showActionsColumn: false
         ,baseParams: {
             action: 'Element/TemplateVar/Template/GetList'
             ,tv: config.tv

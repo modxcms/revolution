@@ -157,6 +157,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
                  ,'downloads','releasedon','screenshot','license','location','version-compiled'
                  ,'supports_db','minimum_supports','breaks_at','featured','audited','changelog'
                  ,'downloaded','dlaction-text','dlaction-icon']
+        ,showActionsColumn: false
         ,url: MODx.config.connector_url
         ,baseParams: {
 			provider: MODx.provider

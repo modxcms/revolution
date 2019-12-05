@@ -1,6 +1,6 @@
 /**
  * Loads a grid for managing languages.
- * 
+ *
  * @class MODx.grid.Language
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -16,6 +16,7 @@ MODx.grid.Language = function(config) {
             action: 'System/Language/GetList'
         }
         ,fields: ['id','name','menu']
+        ,showActionsColumn: false
         ,width: '97%'
         ,paging: true
         ,autosave: true
@@ -28,13 +29,13 @@ MODx.grid.Language = function(config) {
         }]
         ,tbar: [{
             text: _('language_create')
-            ,handler: { 
+            ,handler: {
                 xtype: 'modx-window-language-create'
                 ,listeners: {
                     'success':{fn:function(o) {
                         var r = o.a.result.object;
                         this.refresh();
-                        
+
                         var g = Ext.getCmp('modx-grid-lexicon');
                         if (g) {
                             g.setFilterParams(null,null,r.name);
@@ -72,7 +73,7 @@ Ext.reg('modx-grid-language',MODx.grid.Language);
 
 /**
  * Generates the create language window.
- *  
+ *
  * @class MODx.window.CreateLanguage
  * @extends MODx.Window
  * @param {Object} config An object of options.
