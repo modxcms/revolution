@@ -30,6 +30,7 @@ use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
 use MODX\Revolution\Mail\modMail;
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
 use MODX\Revolution\Rest\modRestClient;
@@ -1704,10 +1705,9 @@ class modX extends xPDO {
      *
      * @param string $action The processor to run, eg: context/update, or the processor class name (\MODX\Revolution\Processors\Context\Update::class)
      * @param array $scriptProperties Optional. An array of parameters to pass to the processor.
-     * @param array $options Optional. An array of options for running the processor, such as:
-     * - processors_path - If specified, will override the default MODX processors path.
+     * @param array $options Optional. An array of options for running the processor, only supports "processors_path" to set a custom path
      *
-     * @return mixed The result of the processor.
+     * @return ProcessorResponse|mixed The result of the processor. Typically a ProcessorResponse object, but may be different for specific processors.
      */
     public function runProcessor($action = '', $scriptProperties = array(), $options = array()) {
         $result = null;
@@ -1754,7 +1754,10 @@ class modX extends xPDO {
 
         if (!file_exists($processorFile)) {
             $this->log(modX::LOG_LEVEL_ERROR, "Unable to load processor for action \"{$action}\", it does not exist as an autoloadable class that extends \MODX\Revolution\Processors\Processor, and also not as a file in \"{$processorFile}\"");
-            return '';
+            return new ProcessorResponse($this, [
+                'success' => false,
+                'message' => 'Requested processor not found',
+            ]);
         }
 
         // Check if we already know the name for the class (meaning we've loaded it before in this request)
@@ -1785,7 +1788,10 @@ class modX extends xPDO {
         }
 
         $this->log(modX::LOG_LEVEL_ERROR, "Unable to load processor for action \"{$action}\". Its file in \"{$processorFile}\" exists, but does not return the processor class name and the class name could not be automatically inferred from the action.");
-        return '';
+        return new ProcessorResponse($this, [
+            'success' => false,
+            'message' => 'Requested processor is invalid.',
+        ]);
     }
 
     /**
