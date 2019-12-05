@@ -1766,7 +1766,7 @@ class modX extends xPDO {
             $className = include_once $processorFile;
             // include_once returns 1 if there was no return value in the file, or true if it was already loaded before
             // In both cases we can guess the class name based on the provided action
-            if ($className == 1) {
+            if ($className === 1 || $className === true) {
                 $section = explode('/', $action);
                 $pieces = [];
                 foreach ($section as $k) {
