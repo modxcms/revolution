@@ -955,33 +955,6 @@ $settings['manager_favicon_url']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
-$settings['manager_js_cache_file_locking']= $xpdo->newObject(modSystemSetting::class);
-$settings['manager_js_cache_file_locking']->fromArray(array (
-  'key' => 'manager_js_cache_file_locking',
-  'value' => true,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
-$settings['manager_js_cache_max_age']= $xpdo->newObject(modSystemSetting::class);
-$settings['manager_js_cache_max_age']->fromArray(array (
-  'key' => 'manager_js_cache_max_age',
-  'value' => 3600,
-  'xtype' => 'numberfield',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
-$settings['manager_js_document_root']= $xpdo->newObject(modSystemSetting::class);
-$settings['manager_js_document_root']->fromArray(array (
-  'key' => 'manager_js_document_root',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-), '', true, true);
 $settings['manager_time_format']= $xpdo->newObject(modSystemSetting::class);
 $settings['manager_time_format']->fromArray(array (
   'key' => 'manager_time_format',
