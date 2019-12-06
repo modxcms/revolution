@@ -110,14 +110,14 @@ MODx.panel.EditFile = function(config) {
                     ,name: 'last_accessed'
                     ,id: 'modx-file-last-accessed'
                     ,anchor: '98%'
-                    ,value: config.record.last_accessed || ''
+                    ,value: ((new Date(parseInt(config.record.last_accessed) * 1000)).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)) || ''
                 },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('file_last_modified')
                     ,name: 'last_modified'
                     ,id: 'modx-file-last-modified'
                     ,anchor: '98%'
-                    ,value: config.record.last_modified || ''
+                    ,value: ((new Date(parseInt(config.record.last_modified) * 1000)).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)) || ''
                 },{
                     xtype: 'textarea'
                     ,hideLabel: true
