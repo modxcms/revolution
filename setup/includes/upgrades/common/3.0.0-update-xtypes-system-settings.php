@@ -82,11 +82,6 @@ $xtypeSettingsMap = [
         'new_xtype' => 'numberfield',
     ],
     [
-        'key' => 'manager_js_cache_max_age',
-        'old_xtype' => 'textfield',
-        'new_xtype' => 'numberfield',
-    ],
-    [
         'key' => 'manager_week_start',
         'old_xtype' => 'textfield',
         'new_xtype' => 'numberfield',

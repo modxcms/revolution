@@ -6,15 +6,18 @@
 use MODX\Revolution\modSystemSetting;
 
 $settings = [
+    'allow_tv_eval',
     'compress_js_max_files',
-    'manager_js_zlib_output_compression',
     'editor_css_path',
     'editor_css_selectors',
     'fe_editor_lang',
+    'manager_js_cache_file_locking',
+    'manager_js_cache_max_age',
+    'manager_js_document_root',
+    'manager_js_zlib_output_compression',
     'udperms_allowroot',
-    'webpwdreminder_message',
-    'allow_tv_eval',
     'upload_flash',
+    'webpwdreminder_message',
 ];
 
 $messageTemplate = '<p class="%s">%s</p>';
