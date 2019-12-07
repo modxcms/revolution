@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = '管理画面内で用いる日付�
 $_lang['setting_manager_favicon_url'] = '管理画面のfavicon URL';
 $_lang['setting_manager_favicon_url_desc'] = '設定したURLの画像が、管理画面のfaviconとして使用されます。値はmanagerディレクトリに対する相対URLか、絶対URLで指定する必要があります。';
 
-$_lang['setting_manager_js_cache_file_locking'] = '管理画面用JS/CSS キャッシュファイルのロックを有効化';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'キャッシュファイルをロックします。ファイルシステムにNFSを使用している場合、この設定は「いいえ」を指定してください。';
-$_lang['setting_manager_js_cache_max_age'] = '管理画面のJS/CSS圧縮 キャッシュ有効期間';
-$_lang['setting_manager_js_cache_max_age_desc'] = '管理画面のJavaScriptとCSSを圧縮したキャッシュの、ブラウザでの保持時間を秒で指定します。指定時間を経過すると、ブラウザは異なるGETリクエストを送信します。トラフィックを抑えるため、長い時間が指定されます。';
-$_lang['setting_manager_js_document_root'] = '管理画面のJS/CSS圧縮 Document Root';
-$_lang['setting_manager_js_document_root_desc'] = 'サーバーがDOCUMENT_ROOTサーバー変数を提供しない場合、管理画面のJS/CSS圧縮に必要な指定を行います。<br />必ず影響をよく理解した上で変更してください。';
-
 $_lang['setting_manager_login_url_alternate'] = '管理画面の代替URL';
 $_lang['setting_manager_login_url_alternate_desc'] = '管理画面へのアクセスを要求するユーザーに提示する、ログイン用URL。<br />管理画面にアクセスできるよう、"mgr"コンテキストへユーザーをログインする必要があります。';
 
