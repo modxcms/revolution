@@ -1,4 +1,5 @@
 Ext.namespace('MODx.util.Progress');
+Ext.namespace('MODx.util.Format');
 /**
  * A JSON Reader specific to MODExt
  *
@@ -414,6 +415,28 @@ MODx.util.Clipboard = function() {
         }
     };
 }();
+
+MODx.util.Format = {
+    dateFromTimestamp: function(timestamp, date = true, time = true, defaultValue = '') {
+        timestamp = parseInt(timestamp);
+        if (!(timestamp > 0)) return defaultValue;
+
+        if (timestamp.toString().length === 10) {
+            timestamp *= 1000;
+        }
+
+        var format = [];
+
+        if (date === true) format.push(MODx.config.manager_date_format);
+        if (time === true) format.push(MODx.config.manager_time_format);
+
+        if (format.length === 0) return defaultValue;
+
+        format = format.join(' ');
+
+        return (new Date(timestamp).format(format));
+    }
+};
 
 
 Ext.util.Format.trimCommas = function(s) {
