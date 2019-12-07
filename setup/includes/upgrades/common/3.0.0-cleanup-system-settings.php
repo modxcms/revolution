@@ -15,6 +15,8 @@ $settings = [
     'manager_js_cache_max_age',
     'manager_js_document_root',
     'manager_js_zlib_output_compression',
+    'resolve_hostnames',
+    'server_protocol',
     'udperms_allowroot',
     'upload_flash',
     'webpwdreminder_message',
