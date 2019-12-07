@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'Het formaat, in PHP date() formaat
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Indien gezet, dan zal deze URL als favicon voor de manager geladen worden. Moet een relatieve URL zijn ten opzichte van de manager/ map of een absolute URL.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Schakel Bestandsvergrendeling voor Manager JS/CSS Cache in';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache bestandsvergrendeling. Stel in op Nee als bestandssysteem NFS is.';
-$_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compressie Cache Leeftijd';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'De maximale leeftijd van browser cache van de manager CSS/JS compressie in seconden. Na deze periode, zal de browser een andere conditionele GET sturen. Gebruik lagere periode bij minder verkeerd.';
-$_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compressie Document Root';
-$_lang['setting_manager_js_document_root_desc'] = 'Als jouw server de DOCUMENT_ROOT niet beschikbaar heeft, stel deze hier expliciet in voor de manager CSS/JS compressie. Verander dit niet behalve als je weet wat je doet.';
-
 $_lang['setting_manager_login_url_alternate'] = 'Alternatieve Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Een alternatieve URL om niet geauthoriseerde gebruikers heen te sturen als ze moeten inloggen. Het login formulier moet de gebruiker inloggen voor de "mgr" context, om dit te laten werken.';
 
