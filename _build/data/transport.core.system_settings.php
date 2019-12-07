@@ -1434,15 +1434,6 @@ $settings['request_param_id']->fromArray(array (
   'area' => 'gateway',
   'editedon' => null,
 ), '', true, true);
-$settings['resolve_hostnames']= $xpdo->newObject(modSystemSetting::class);
-$settings['resolve_hostnames']->fromArray(array (
-  'key' => 'resolve_hostnames',
-  'value' => false,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'system',
-  'editedon' => null,
-), '', true, true);
 $settings['resource_tree_node_name']= $xpdo->newObject(modSystemSetting::class);
 $settings['resource_tree_node_name']->fromArray(array (
   'key' => 'resource_tree_node_name',
@@ -1493,15 +1484,6 @@ $settings['server_offset_time']->fromArray(array (
   'key' => 'server_offset_time',
   'value' => 0,
   'xtype' => 'numberfield',
-  'namespace' => 'core',
-  'area' => 'system',
-  'editedon' => null,
-), '', true, true);
-$settings['server_protocol']= $xpdo->newObject(modSystemSetting::class);
-$settings['server_protocol']->fromArray(array (
-  'key' => 'server_protocol',
-  'value' => 'http',
-  'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',
   'editedon' => null,
