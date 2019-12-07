@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'Formateringssträngen, i PHP:s dat
 $_lang['setting_manager_favicon_url'] = 'URL för hanterarens favicon';
 $_lang['setting_manager_favicon_url_desc'] = 'Om du anger en URL här kommer den att laddas som hanteraren favicon. Måste vara en relativ URL i förhållande till katalogen /manager eller en absolut URL.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Aktivera fillåsning för hanterarens JS/CSS-cache';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Fillåsning för cachen. Sätt till "Nej" om filsystemet är NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Livslängd för hanterarens cachning av komprimerad JS/CSS';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Maximal livslängd i webbläsarens cache av komprimerad JS/CSS i hanteraren i sekunder. När tiden gått ut kommer webbläsaren att skicka en ny villkorad GET. Använd längre tidsperiod för lägre trafik.';
-$_lang['setting_manager_js_document_root'] = 'Dokumentrot för komprimering av JS/CSS i hanteraren';
-$_lang['setting_manager_js_document_root_desc'] = 'Om din server inte kan hantera servervariabeln DOCUMENT_ROOT anger du den uttryckligen här för att göra det möjligt att komprimera hanterarens JS/CSS. Ändra inte den här om du inte vet vad du håller på med.';
-
 $_lang['setting_manager_login_url_alternate'] = 'Alternativ URL till hanterarens inloggning';
 $_lang['setting_manager_login_url_alternate_desc'] = 'En alternativ URL som oautentiserade användare skickas till när de behöver logga in i hanteraren. Inloggningsformuläret där måste logga in användaren till mgr-kontexten för att det ska fungera.';
 
