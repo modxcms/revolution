@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'La stringa, nel formato PHP date()
 $_lang['setting_manager_favicon_url'] = 'Favicon URL Manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Se impostata, caricherà questa URL come favicon per il manager di MODX. Deve essere una URL relativa alla directory manager/ , o un URL assoluto.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Abilita il File Locking per la Cache JS/CSS del Manager';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Blocco File Cache. Setta a  NO se il filesytem e\' NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Durata della Compressione della Cache JS/CSS del Manager';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Durata Massima espressa in secondi della cache della compressione CSS/JS del manager per il browser. Dopo questo periodo, il browser mandera\' un altro GET condizionale. Usa una "durata" piu\' alta per un traffico minore.';
-$_lang['setting_manager_js_document_root'] = 'Radice Documenti per Compressione JS/CSS del Manager';
-$_lang['setting_manager_js_document_root_desc'] = 'NON MODIFICARE se non sai cosa stai facendo! Se il tuo server non gestisce la variabile DOCUMENT_ROOT, impostala esplicitamente qui per abilitare la compressione CSS/JS del manager.';
-
 $_lang['setting_manager_login_url_alternate'] = 'URL di accesso Alternativo al Manager';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Un URL alternativo per inviare un utente non autenticato a quando hanno bisogno di accedere al manager. Il modulo di login ci deve login dell\'utente al contesto "mgr" al lavoro';
 

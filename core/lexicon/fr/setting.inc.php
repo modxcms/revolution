@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'La chaine de caractères, au forma
 $_lang['setting_manager_favicon_url'] = 'URL du favicon du manager';
 $_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour le manager de MODX. Doit être relatif au répertoire manager/ ou bien une URL absolue.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Activer le verrouillage des fichiers JS/CSS du manager';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Mettre en cache le verrouillage des fichiers. Sélectionnez non si votre système de fichier est NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Durée du cache des JS/CSS compressés';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Durée maximale du cache navigateur pour les fichiers CSS/JS du manager, en secondes. Au-delà de ctte période, le navigateur enverra un GET "conditionnel". Utilisez une valeur élevée pour moins de trafic.';
-$_lang['setting_manager_js_document_root'] = 'Compression JS/CSS à la racine';
-$_lang['setting_manager_js_document_root_desc'] = 'Si votre serveur ne prend pas en compte la variable serveur DOCUMENT_ROOT, définissez-la ici pour activer la compression CSS/JS du manager. Ne configurez cette option que si vous savez ce que vous faites.';
-
 $_lang['setting_manager_login_url_alternate'] = 'URL alternative de connexion au manager';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Une URL alternative vers laquelle envoyer les utilisateurs non authentifiés auprès du manager. Le formulaire de connexion doit authentifier l\'utilisateur au contexte "mgr" pour fonctionner.';
 

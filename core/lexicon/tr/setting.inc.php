@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'Yöneticide temsil edilen tarihler
 $_lang['setting_manager_favicon_url'] = 'Yönetici Favicon URL\'si';
 $_lang['setting_manager_favicon_url_desc'] = 'Eğer ayarlanırsa, bu URL\'yi MODX yöneticisi için bir site iconu olarak yükleyecektir. Yönetici/dizine göreli bir URL, veya mutlak URL olmalı.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Yöneticisi JS/CSS önbellek için Dosya kilitleme Etkinleştir';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Önbellek dosyası kilitleme. Dosya sistemi NFS ise Hayır olarak ayarlayın.';
-$_lang['setting_manager_js_cache_max_age'] = 'Yöneticisi JS / CSS Sıkıştırma Önbellek Yaşı';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'CSS / JS sıkıştırma yöneticisinin saniye olarak maksimum tarayıcı önbellek süresi. Bu süre geçtikten sonra tarayıcı başka koşullu GET gönderecektir. Daha düşük trafik için daha uzun bir süre kullanın.';
-$_lang['setting_manager_js_document_root'] = 'Yönetici JS / CSS Sıkıştırma Belgesi Kaynağı';
-$_lang['setting_manager_js_document_root_desc'] = 'Sunucunuz DOCUMENT_ROOT sunucu değişkenini işlemezse, yöneticinin CSS / JS sıkıştırmasını etkinleştirmek için açık olarak buraya ayarlayın.  Ne yaptığınızı bilmiyorsanız bunu değiştirmeyin.';
-
 $_lang['setting_manager_login_url_alternate'] = 'Alternatif yönetici oturum açma URL\'si';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Yönetici olarak giriş yapmaları gerektiğinde, kimliği doğrulanmamış bir kullanıcıya göndermek için alternatif bir URL. Buradaki giriş formunun çalışması için "mgr" bağlamında kullanıcı girmelidir.';
 

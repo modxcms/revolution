@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'Format string, dalam format date()
 $_lang['setting_manager_favicon_url'] = 'Manajer Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'Jika diatur, akan memuat URL ini sebagai favicon untuk manajer MODX. Harus sebuah URL relatif untuk manajer / direktori, atau URL absolut.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Mengaktifkan mengunci file untuk manajer JS/CSS Cache';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file penguncian. Diatur ke tidak jika filesystem NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Manajer JS/CSS kompresi Cache umur';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Maksimal usia cache browser manajer CSS/JS kompresi dalam hitungan detik. Setelah masa ini, peramban akan mengirim GET bersyarat yang lain. Gunakan lebih lama untuk lalu lintas rendah.';
-$_lang['setting_manager_js_document_root'] = 'Manajer JS/CSS kompresi Document Root';
-$_lang['setting_manager_js_document_root_desc'] = 'Jika server Anda tidak menangani variabel server DOCUMENT_ROOT, mengatur secara eksplisit di sini agar manajer CSS/JS kompresi. Jangan mengubah ini kecuali Anda tahu apa yang Anda lakukan.';
-
 $_lang['setting_manager_login_url_alternate'] = 'URL alternatif manajer Login';
 $_lang['setting_manager_login_url_alternate_desc'] = 'URL alternatif untuk mengirim pengguna tidak terauthentikasi ke ketika mereka perlu login ke pengelola. Login form tidak harus login pengguna untuk konteks "mgr" untuk bekerja.';
 

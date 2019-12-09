@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'A formato seqüência de caractere
 $_lang['setting_manager_favicon_url'] = 'URL do Favicon do Gerenciador';
 $_lang['setting_manager_favicon_url_desc'] = 'Se definido, carregará essa URL como um favicon para o Gerenciador MODX. Deve ser um URL relativo para o diretório manager/, ou uma URL absoluta.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Arquivo de cache bloqueado. Definida para Não, se o sistema de arquivos for NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
-$_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
-$_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
-
 $_lang['setting_manager_login_url_alternate'] = 'URL alternativa de Login no Gerenciador';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
 

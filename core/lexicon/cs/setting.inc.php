@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'Formátovací řetězec v PHP date
 $_lang['setting_manager_favicon_url'] = 'URL favikony pro správce obsahu';
 $_lang['setting_manager_favicon_url_desc'] = 'Je-li tato volba nastavena, bude její hodnota použita pro načtení favikony pro správce obsahu. Cesta musí být zadána absolutně nebo relativně vůči adresáři /manager.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Povolit uzamykání JS/CSS cache souborů správce obsahu';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Uzamykání souborů cache. Nastavte na "Ne" používáte-li souborový systém NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Staří komprimované cache JS/CSS pro správce obsahu';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Maximální stáří (v sekundách) cache prohlížeče pro CSS/JS správce obsahu. Po uplynutí této doby bude prohlížeči poslán další podmíněný GET. Pro nižší trafic nastavte delší dobu.';
-$_lang['setting_manager_js_document_root'] = 'Document Root pro komprimované JS/CSS ve správci obsahu';
-$_lang['setting_manager_js_document_root_desc'] = 'Pokud Váš server nezpracovává proměnnou serveru DOCUMENT_ROOT a chcete používat možnost komprese JS/CSS ve správci obsahu nastavte jí zde manuálně. Pokud si nejste jist o co jde, pak toto nastavení neměňte.';
-
 $_lang['setting_manager_login_url_alternate'] = 'Alternativní URL pro Správce obsahu';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Alternativní URL, na kterou je přesměrován nepřihlášený uživatel, pokud se chce přihlásit do Správce obsahu.';
 

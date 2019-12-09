@@ -424,13 +424,6 @@ $_lang['setting_manager_date_format_desc'] = 'سلسلة محارف التنسي
 $_lang['setting_manager_favicon_url'] = 'Favicon URL للمدير';
 $_lang['setting_manager_favicon_url_desc'] = 'إذا كانت مضبوطة، سيتم تحميل هذا الـ URL كـ Favicon من أجل مدير مودكس. يجب أن يكون URL ذو صلة بالمدير/ الدليل، أو URL مطلق.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'تفعيل قفل الملف من أجل ذاكرة التخزين المؤقت JS/CSS للمدير';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'التخزين المؤقت لقفل الملف. اضبط إلى لا إذا كان نظام الملفات هو NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'ذاكرة التخزين المؤقت لضغط  JS/CSS للمدير';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'العمر الأعظمي لذاكرة التخزين المؤقت للمتصفح لضغط JS/CSS للمدير مقدرة بالثواني. بعد انقضاء هذه المدة، سيقوم المتصفح بإرسال GET شرطية أخرى. استخدم مدة اطول من اجل حركة مرور أقل.';
-$_lang['setting_manager_js_document_root'] = 'جذر المستند لضغط JS/CSS للمدير';
-$_lang['setting_manager_js_document_root_desc'] = 'إذا كان مخدمك لا يعالج متحول المخدم DOCUMENT_ROOT، قم بتعيينه بشكل صريح هنا لتفعيل ضغط CSS/JS للمدير. لا تقم بتغيير هذا إلا إذا كنت تعرف ما تقوم به.';
-
 $_lang['setting_manager_login_url_alternate'] = 'URL تسجيل الدخول الديل للمدير';
 $_lang['setting_manager_login_url_alternate_desc'] = 'الـ URL البديل لإرسال المستخدمين غير المصرح بهم إليه عندما يحتاجون إلى تسجيل الدخول إلى المدير. نموذج تسجيل الدخول هناك يجب أن يقوم بتسجيل دخول المستخدم إلى السياق "mgr" ليعمل.';
 

@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'Строка в формате PHP
 $_lang['setting_manager_favicon_url'] = 'URL фавиконки системы управления';
 $_lang['setting_manager_favicon_url_desc'] = 'Если задано, будет использоваться в качестве URL фавиконки системы управления MODX. Необходимо указать либо URL относительно директории /manager/, либо абсолютный URL.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Включить блокировку файлов JS/CSS-кэша';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Блокировка файлов кэша. Выберите «Нет» если используется файловая система NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Время жизни кэша JS/CSS-файлов системы управления';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Максимальное время жизни (в секундах) кэша браузера для сжатых JS/CSS-файлов системы управления. Используйте большее значение для уменьшения расхода трафика.';
-$_lang['setting_manager_js_document_root'] = 'Корневая директория для сжатия JS/CSS';
-$_lang['setting_manager_js_document_root_desc'] = 'Если ваш сервер не определяет переменную "DOCUMENT_ROOT", укажите её явно здесь для включения сжатия CSS/JS-файлов системы управления. Не изменяйте, если вы не понимаете, что означает эта настройка.';
-
 $_lang['setting_manager_login_url_alternate'] = 'Альтернативный URL страницы входа в систему управления';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Альтернативный URL, на который будет направлен неавторизованный пользователь при необходимости авторизации в системе управления. Форма входа должна авторизовать пользователя в контексте "mgr".';
 

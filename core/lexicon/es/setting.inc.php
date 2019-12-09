@@ -419,13 +419,6 @@ $_lang['setting_manager_date_format_desc'] = 'El formato de fecha, en formato de
 $_lang['setting_manager_favicon_url'] = 'URL del Favicon del Panel de Administración';
 $_lang['setting_manager_favicon_url_desc'] = 'Si está configurado, cargará el favicon para el Panel de Administración de MODX desde esta URL. Debe de ser una URL relativa al directorio "manager/", o una URL absoluta.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Habilitar Bloqueo de Archivos para la Caché de CSS/JS del Panel de Administración';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Bloqueo de Archivos de la Caché. Configurar a "No" si el sistema de archivos es NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Tiempo de Vida de la Caché de CSS/JS del Panel de Administración';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'El número de segundos que permanecerán los ficheros CSS/JS del panel de administración en la caché del navegador. Superado este período, el navegador mandará otra solicitud condicional GET. Aumenta este valor para reducir el tráfico del sitio.';
-$_lang['setting_manager_js_document_root'] = 'Directorio Principal para la Compresión de Archivos CSS/JS del Panel de Administración';
-$_lang['setting_manager_js_document_root_desc'] = 'Si el servidor da problemas al utilizar la variable DOCUMENT_ROOT, configúrala explícitamente aquí para permitir la compresión de los archivos CSS/JS del Panel de Administración. Cambiar sólo si se sabe lo que se hace.';
-
 $_lang['setting_manager_login_url_alternate'] = 'URL Alternativa de Inicio de Sesión en el Panel de Administración';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Una URL alternativa a la que dirigir al usuario cuando necesita iniciar sesión en el panel de administración. El formulario debe identificar al usuario en el contexto "mgr" para funcionar.';
 
