@@ -22,7 +22,6 @@ MODx.grid.Grid = function(config) {
         ,showPerPage: true
         ,stateful: false
         ,showActionsColumn: true
-        ,actionsColumnWidth: 50
         ,disableContextMenuAction: false
         ,menuConfig: {
             defaultAlign: 'tl-b?'
@@ -96,16 +95,41 @@ MODx.grid.Grid = function(config) {
     }
 
     if (config.showActionsColumn) {
+        var defaultActionsColumnWidth = 50;
+
+        var isPercentage = function(columns) {
+            for (var i = 0; i < columns.length; i++) {
+                if (columns[i].width && (columns[i].width > 1)) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
         if (config.columns && Array.isArray(config.columns)) {
+            if (config.actionsColumnWidth === undefined) {
+
+                if (isPercentage(config.columns)) {
+                    defaultActionsColumnWidth = 0.1;
+                }
+            }
+
             config.columns.push({
-                width: config.actionsColumnWidth || 50
+                width: config.actionsColumnWidth || defaultActionsColumnWidth
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
 
         if (config.cm && config.cm.columns && Array.isArray(config.cm.columns)) {
+            if (config.actionsColumnWidth === undefined) {
+                if (isPercentage(config.cm.columns)) {
+                    defaultActionsColumnWidth = 0.1;
+                }
+            }
+
             config.cm.columns.push({
-                width: config.actionsColumnWidth || 50
+                width: config.actionsColumnWidth || defaultActionsColumnWidth
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
