@@ -20,6 +20,7 @@ MODx.grid.WhoIsOnline = function(config) {
     ,save_action: ''
     ,pageSize: 10
     ,fields: ['user','username','occurred','action']
+    ,showActionsColumn: false
     ,columns: [{
       header: _('onlineusers_userid')
       ,dataIndex: 'user'

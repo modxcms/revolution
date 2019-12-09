@@ -167,6 +167,7 @@ MODx.grid.ManagerLog = function(config) {
             action: 'System/Log/GetList'
         }
         ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
+        ,showActionsColumn: false
         ,autosave: false
         ,paging: true
         ,remoteSort: true

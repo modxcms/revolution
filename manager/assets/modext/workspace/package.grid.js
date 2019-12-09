@@ -87,6 +87,7 @@ MODx.grid.Package = function(config) {
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
                  ,'provider','provider_name','disabled','source','attributes','readme','menu'
                  ,'install','textaction','iconaction','updateable']
+        ,showActionsColumn: false
         ,plugins: [this.exp]
         ,pageSize: Math.min(parseInt(MODx.config.default_per_page), 25)
         ,disableContextMenuAction: true

@@ -17,6 +17,7 @@ MODx.grid.TVSecurity = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-tv-security'
         ,url: MODx.config.connector_url
+        ,showActionsColumn: false
         ,fields: ['id','name','access','menu']
         ,baseParams: {
             action: 'Element/TemplateVar/ResourceGroup/GetList'

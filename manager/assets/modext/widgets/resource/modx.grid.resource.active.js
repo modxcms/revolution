@@ -8,6 +8,7 @@ MODx.grid.ActiveResources = function(config) {
             action: 'System/ActiveResource/GetList'
         }
 		,fields: ['id','pagetitle','username','editedon']
+        ,showActionsColumn: false
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'

@@ -310,6 +310,7 @@ MODx.grid.SourceTypes = function(config) {
             action: 'Source/Type/GetList'
         }
         ,fields: ['class','name','description']
+        ,showActionsColumn: false
         ,paging: true
         ,remoteSort: true
         ,columns: [{

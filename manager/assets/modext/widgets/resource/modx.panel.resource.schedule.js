@@ -60,6 +60,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,{name: 'unpub_date', type:'date'}
             ,'menu'
         ]
+        ,showActionsColumn: false
         ,paging: true
         ,save_action: 'Resource/Event/UpdateFromGrid'
         ,autosave: true

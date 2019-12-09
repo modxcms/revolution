@@ -16,6 +16,7 @@ MODx.grid.DatabaseTables = function(config) {
             action: 'System/DatabaseTable/GetList'
         }
         ,fields: ['Name','Rows','Data_size','Data_free','Effective_size','Index_length','Total_size']
+        ,showActionsColumn: false
         ,paging: false
         ,columns: [{
             header: _('database_table_tablename')

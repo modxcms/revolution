@@ -675,6 +675,7 @@ MODx.grid.ElementSources = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-element-sources'
         ,fields: ['context_key','source','name']
+        ,showActionsColumn: false
         ,autoHeight: true
         ,primaryKey: 'id'
         ,columns: [{

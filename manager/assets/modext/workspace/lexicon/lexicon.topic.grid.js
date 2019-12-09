@@ -1,6 +1,6 @@
 /**
  * Loads a grid for managing lexicon topics.
- * 
+ *
  * @class MODx.grid.LexiconTopic
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
@@ -13,6 +13,7 @@ MODx.grid.LexiconTopic = function(config) {
         ,id: 'modx-grid-lexicon-topic'
         ,url: MODx.config.connector_url
         ,fields: ['id','name','namespace','menu']
+        ,showActionsColumn: false
         ,baseParams: {
             action: 'Workspace/Lexicon/Topic/GetList'
             ,'namespace': 'core'
@@ -33,7 +34,7 @@ MODx.grid.LexiconTopic = function(config) {
             ,dataIndex: 'namespace'
             ,width: 500
             ,sortable: false
-            ,editor: { 
+            ,editor: {
                 xtype: 'modx-combo-namespace'
                 ,renderer: true
             }
@@ -58,7 +59,7 @@ MODx.grid.LexiconTopic = function(config) {
                 'change': {fn:this.filter.createDelegate(this,['name'],true),scope:this}
                 ,'render': {fn:function(tf) {
                     tf.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-                        tf.fireEvent('change'); 
+                        tf.fireEvent('change');
                     },this);
                 }}
             }
@@ -74,11 +75,11 @@ MODx.grid.LexiconTopic = function(config) {
                         'success':{fn:function(o) {
                             var r = o.a.result.object;
                             this.setNamespace(r['namespace']);
-                            
+
                             var g = Ext.getCmp('modx-grid-lexicon');
                             if (g) {
                                 g.setFilterParams(r['namespace'],r.id);
-                            }                
+                            }
                         },scope: this}
                     }
                 }],true)
@@ -91,7 +92,7 @@ MODx.grid.LexiconTopic = function(config) {
                         'success':{fn:function(o) {
                             var r = o.a.result.object;
                             this.setNamespace(r.name);
-                            
+
                             var g = Ext.getCmp('modx-grid-lexicon');
                             if (g) {
                                 g.setFilterParams(r.name);
@@ -119,12 +120,12 @@ Ext.extend(MODx.grid.LexiconTopic,MODx.grid.Grid,{
         };
         this.loadWindow(btn,e,o);
     }
-    
+
     ,setNamespace: function(ns) {
         var ncb = this.getTopToolbar().getComponent('namespace');
         if (ncb) { ncb.setValue(ns); }
         this.config.saveParams['namespace'] = ns;
-        
+
         this.getBottomToolbar().changePage(1);
         this.getStore().baseParams['namespace'] = ns;
         //this.refresh();
@@ -134,7 +135,7 @@ Ext.reg('modx-grid-lexicon-topic',MODx.grid.LexiconTopic);
 
 /**
  * Generates the create lexicon topic window.
- *  
+ *
  * @class MODx.window.CreateLexiconTopic
  * @extends MODx.Window
  * @param {Object} config An object of options.
