@@ -1,3 +1,9 @@
+/**
+ * @class MODx.panel.UserGroup
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-panel-user-group
+ */
 MODx.panel.UserGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -320,6 +326,12 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
 });
 Ext.reg('modx-panel-user-group',MODx.panel.UserGroup);
 
+/**
+ * @class MODx.grid.FCProfileUserGroups
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-user-group-users
+ */
 MODx.grid.UserGroupUsers = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -344,11 +356,23 @@ MODx.grid.UserGroupUsers = function(config) {
             ,dataIndex: 'username'
             ,width: 175
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/user/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('role')
             ,dataIndex: 'role_name'
             ,width: 175
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/permission'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         }]
         ,tbar: [{
             text: _('user_group_user_add')
@@ -386,7 +410,6 @@ MODx.grid.UserGroupUsers = function(config) {
     this.addEvents('updateRole','addMember');
 };
 Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
-
     getMenu: function() {
         var m = [];
         if (MODx.perm.usergroup_user_edit) {
@@ -402,6 +425,7 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
         }
         return m;
     }
+
     ,searchUser: function(tf,nv,ov) {
         this.getStore().baseParams['username'] = Ext.getCmp('modx-ugu-filter-username').getValue();
         this.getBottomToolbar().changePage(1);
@@ -431,6 +455,7 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
             }
         });
     }
+
     ,addMember: function(btn,e) {
         var r = {usergroup:this.config.usergroup};
 
@@ -450,8 +475,8 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
 
         this.windows['modx-window-user-group-adduser'].setValues(r);
         this.windows['modx-window-user-group-adduser'].show(e.target);
-
     }
+
     ,removeUser: function(btn,e) {
         var r = this.menu.record;
         MODx.msg.confirm({
@@ -471,6 +496,12 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-user-group-users',MODx.grid.UserGroupUsers);
 
+/**
+ * @class MODx.window.UpdateUserGroupRole
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-role-update
+ */
 MODx.window.UpdateUserGroupRole = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -498,7 +529,12 @@ MODx.window.UpdateUserGroupRole = function(config) {
 Ext.extend(MODx.window.UpdateUserGroupRole,MODx.Window);
 Ext.reg('modx-window-user-group-role-update',MODx.window.UpdateUserGroupRole);
 
-
+/**
+ * @class MODx.window.AddUserToUserGroup
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-adduser
+ */
 MODx.window.AddUserToUserGroup = function(config) {
     config = config || {};
     this.ident = config.ident || 'auug'+Ext.id();

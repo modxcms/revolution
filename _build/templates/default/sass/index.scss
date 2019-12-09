@@ -528,14 +528,15 @@ textarea.x-form-field {
 }
 
 a.x-grid-link {
-  color: $mainText;
-  text-decoration: none;
+  color: $colorSplash;
+  text-decoration: underline;
 }
 
 a.x-grid-link:hover,
 a.x-grid-link:focus {
-  text-decoration: underline;
+  text-decoration: none;
 }
+
 .x-editable-column {
   cursor: pointer;
   &:hover, &:focus {
@@ -552,6 +553,7 @@ a.x-grid-link:focus {
 .x-grid-buttons {
   text-align: center;
 }
+
 .x-grid-buttons li {
   cursor: pointer;
   display: inline-block;

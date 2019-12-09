@@ -10,7 +10,7 @@ MODx.panel.Sources = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-sources'
-		,cls: 'container'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -25,7 +25,7 @@ MODx.panel.Sources = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-sources'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         },{
@@ -36,7 +36,7 @@ MODx.panel.Sources = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-source-types'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         }],{
@@ -87,7 +87,11 @@ MODx.grid.Sources = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
-            ,renderer: Ext.util.Format.htmlEncode
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=source/update&id=' + record.data.id
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -177,6 +181,14 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         }
     }
 
+    ,createSource: function() {
+        MODx.loadPage('system/Source/Create');
+    }
+
+    ,updateSource: function() {
+        MODx.loadPage('Source/Update', 'id='+this.menu.record.id);
+    }
+
     ,duplicateSource: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
@@ -190,8 +202,19 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         });
     }
 
-    ,createSource: function() {
-        MODx.loadPage('system/Source/Create');
+    ,removeSource: function() {
+        MODx.msg.confirm({
+            title: _('source_remove')
+            ,text: _('source_remove_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'Source/Remove'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
     }
 
     ,removeSelected: function() {
@@ -216,24 +239,6 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         return true;
     }
 
-    ,removeSource: function() {
-        MODx.msg.confirm({
-            title: _('source_remove')
-            ,text: _('source_remove_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'Source/Remove'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,updateSource: function() {
-        MODx.loadPage('Source/Update', 'id='+this.menu.record.id);
-    }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -241,6 +246,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         //this.refresh();
         return true;
     }
+
     ,clearFilter: function() {
         this.getStore().baseParams = {
             action: 'Source/GetList'

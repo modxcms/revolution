@@ -80,9 +80,11 @@ MODx.grid.User = function(config) {
             ,dataIndex: 'username'
             ,width: 150
             ,sortable: true
-            ,renderer: function(value, p, record){
-                return String.format('<a href="?a=Security/User/Update&id={0}" title="{1}" class="x-grid-link">{2}</a>', record.id, _('user_update'), Ext.util.Format.htmlEncode( value ) );
-            }
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/user/update&id=' + record.data.id
+                });
+            }, scope: this }
         },{
             header: _('user_full_name')
             ,dataIndex: 'fullname'
@@ -230,6 +232,38 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         MODx.loadPage('Security/User/Create');
     }
 
+    ,updateUser: function() {
+        MODx.loadPage('Security/User/Update', 'id='+this.menu.record.id);
+    }
+
+    ,duplicateUser: function() {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'Security/User/Duplicate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
+    ,removeUser: function() {
+        MODx.msg.confirm({
+            title: _('user_remove')
+            ,text: _('user_confirm_remove')
+            ,url: this.config.url
+            ,params: {
+                action: 'Security/User/Delete'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
     ,activateSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -249,6 +283,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         });
         return true;
     }
+
     ,deactivateSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -268,6 +303,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         });
         return true;
     }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -290,38 +326,6 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         return true;
     }
 
-    ,removeUser: function() {
-        MODx.msg.confirm({
-            title: _('user_remove')
-            ,text: _('user_confirm_remove')
-            ,url: this.config.url
-            ,params: {
-                action: 'Security/User/Delete'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,duplicateUser: function() {
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'Security/User/Duplicate'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,updateUser: function() {
-        MODx.loadPage('Security/User/Update', 'id='+this.menu.record.id);
-    }
-
     ,rendGender: function(d,c) {
         switch(d.toString()) {
             case '0':
@@ -338,12 +342,14 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         return true;
     }
+
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
         return true;
     }
+
     ,clearFilter: function() {
         this.getStore().baseParams = {
             action: 'Security/User/GetList'

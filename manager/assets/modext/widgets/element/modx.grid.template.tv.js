@@ -50,8 +50,13 @@ MODx.grid.TemplateTV = function(config) {
             header: _('name')
             ,dataIndex: 'name'
             ,width: 150
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=element/tv/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('category')
             ,dataIndex: 'category_name'
@@ -61,7 +66,6 @@ MODx.grid.TemplateTV = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 350
-            ,editor: { xtype: 'textfield' }
             ,sortable: false
         },tt,{
             header: _('rank')
@@ -129,14 +133,43 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
         }
         return m;
     }
+
     ,updateTV: function(itm,e) {
-        MODx.loadPage('Element/TemplateVar/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('element/tv/update', 'id='+this.menu.record.id);
     }
+
+    ,sortTVs: function(sourceNode, targetNode) {
+        var store = this.getStore();
+        var sourceIdx = store.indexOf(sourceNode);
+        var targetIdx = store.indexOf(targetNode);
+
+        // Insert the selection to the target (and remove original selection)
+        store.removeAt(sourceIdx);
+        store.insert(targetIdx, sourceNode);
+
+        // Extract the store items with the same category_name as the sourceNode to start the index at 0 for each category
+        var filteredStore = store.queryBy(function(rec, id) {
+            if (rec.get('category_name') === sourceNode.get('category_name')) {
+                return true;
+            }
+            return false;
+        }, this);
+
+        // Loop trough the filtered store and re-apply the re-calculated ranks to the store records
+        Ext.each(filteredStore.items, function(item, index, allItems) {
+            if (sourceNode.get('category_name') === item.get('category_name')) {
+                var record = store.getById(item.id);
+                record.set('tv_rank', index);
+            }
+        }, this);
+    }
+
     ,filterByCategory: function(cb,rec,ri) {
         this.getStore().baseParams['category'] = cb.getValue();
         this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -145,16 +178,18 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
         //this.refresh();
         return true;
     }
+
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'Element/Template/TemplateVar/GetList'
             ,template: this.config.template
-    	};
+        };
         Ext.getCmp('modx-temptv-filter-category').reset();
         Ext.getCmp('modx-temptv-search').setValue('');
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,prepareDDSort: function(grid) {
         this.dropTarget = new Ext.dd.DropTarget(grid.getView().mainBody, {
             ddGroup: 'template-tvs-ddsort'
@@ -190,31 +225,6 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
                 }
             }
         });
-    }
-    ,sortTVs: function(sourceNode, targetNode) {
-        var store = this.getStore();
-        var sourceIdx = store.indexOf(sourceNode);
-        var targetIdx = store.indexOf(targetNode);
-
-        // Insert the selection to the target (and remove original selection)
-        store.removeAt(sourceIdx);
-        store.insert(targetIdx, sourceNode);
-
-        // Extract the store items with the same category_name as the sourceNode to start the index at 0 for each category
-        var filteredStore = store.queryBy(function(rec, id) {
-            if (rec.get('category_name') === sourceNode.get('category_name')) {
-                return true;
-            }
-            return false;
-        }, this);
-
-        // Loop trough the filtered store and re-apply the re-calculated ranks to the store records
-        Ext.each(filteredStore.items, function(item, index, allItems) {
-            if (sourceNode.get('category_name') === item.get('category_name')) {
-                var record = store.getById(item.id);
-                record.set('tv_rank', index);
-            }
-        }, this);
     }
 });
 Ext.reg('modx-grid-template-tv',MODx.grid.TemplateTV);

@@ -62,6 +62,11 @@ MODx.grid.AccessPolicy = function(config) {
             ,width: 200
             ,editor: { xtype: 'textfield' ,allowBlank: false }
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/access/policy/update&id=' + record.data.id
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -71,6 +76,12 @@ MODx.grid.AccessPolicy = function(config) {
             header: _('policy_template')
             ,dataIndex: 'template_name'
             ,width: 375
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/access/policy/template/update&id=' + record.data.template
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('active_permissions')
             ,dataIndex: 'active_of'
@@ -137,11 +148,11 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         return true;
     }
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'Security/Access/Policy/GetList'
-    	};
+        };
         Ext.getCmp('modx-policy-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
 
@@ -335,7 +346,12 @@ MODx.window.CreateAccessPolicy = function(config) {
 Ext.extend(MODx.window.CreateAccessPolicy,MODx.Window);
 Ext.reg('modx-window-access-policy-create',MODx.window.CreateAccessPolicy);
 
-
+/**
+ * @class MODx.window.AccessPolicyTemplate
+ * @extends MODx.combo.ComboBox
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-access-policy-template
+ */
 MODx.combo.AccessPolicyTemplate = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -360,6 +376,12 @@ MODx.combo.AccessPolicyTemplate = function(config) {
 Ext.extend(MODx.combo.AccessPolicyTemplate,MODx.combo.ComboBox);
 Ext.reg('modx-combo-access-policy-template',MODx.combo.AccessPolicyTemplate);
 
+/**
+ * @class MODx.window.ImportPolicy
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-policy-import
+ */
 MODx.window.ImportPolicy = function(config) {
     config = config || {};
     this.ident = config.ident || 'imppol-'+Ext.id();

@@ -69,6 +69,11 @@ MODx.grid.Context = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' }
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=context/update&key=' + record.data.key
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -120,10 +125,7 @@ MODx.grid.Context = function(config) {
     MODx.grid.Context.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
-    updateContext: function(itm,e) {
-        MODx.loadPage('Context/Update', 'key='+this.menu.record.key);
-    }
-    ,getMenu: function() {
+    getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm;
         var m = [];
@@ -153,6 +155,29 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         return m;
     }
 
+    ,create: function(btn, e) {
+        if (this.createWindow) {
+            this.createWindow.destroy();
+        }
+        this.createWindow = MODx.load({
+            xtype		: 'modx-window-context-create',
+            closeAction	:'close',
+            listeners	: {
+                'success'	: {
+                    fn			: function() {
+                        this.afterAction();
+                    },
+                    scope		: this
+                }
+            }
+        });
+        this.createWindow.show(e.target);
+    }
+
+    ,updateContext: function(itm,e) {
+        MODx.loadPage('Context/Update', 'key='+this.menu.record.key);
+    }
+
     ,duplicateContext: function() {
         var r = {
             key: this.menu.record.key
@@ -174,42 +199,6 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         w.show();
     }
 
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getBottomToolbar().changePage(1);
-        //this.refresh();
-        return true;
-    }
-
-    ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Context/GetList'
-        };
-        Ext.getCmp('modx-ctx-search').reset();
-        this.getBottomToolbar().changePage(1);
-        //this.refresh();
-    }
-
-    ,create: function(btn, e) {
-        if (this.createWindow) {
-            this.createWindow.destroy();
-        }
-        this.createWindow = MODx.load({
-            xtype		: 'modx-window-context-create',
-            closeAction	:'close',
-            listeners	: {
-                'success'	: {
-                    fn			: function() {
-                        this.afterAction();
-                    },
-                    scope		: this
-                }
-            }
-        });
-        this.createWindow.show(e.target);
-    }
-
     ,remove: function(btn, e) {
         MODx.msg.confirm({
             title 		: _('warning'),
@@ -228,6 +217,23 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
                 }
             }
         });
+    }
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        //this.refresh();
+        return true;
+    }
+
+    ,clearFilter: function() {
+        this.getStore().baseParams = {
+            action: 'Context/GetList'
+        };
+        Ext.getCmp('modx-ctx-search').reset();
+        this.getBottomToolbar().changePage(1);
+        //this.refresh();
     }
 
     ,afterAction: function() {

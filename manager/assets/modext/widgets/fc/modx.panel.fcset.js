@@ -164,6 +164,7 @@ MODx.panel.FCSet = function(config) {
 };
 Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (!this.initialized) {this.getForm().setValues(this.config.record);}
         if (!Ext.isEmpty(this.config.record.controller)) {
@@ -176,6 +177,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
         MODx.fireEvent('ready');
         return true;
     }
+
     ,beforeSubmit: function(o) {
         Ext.apply(o.form.baseParams,{
             fields: Ext.getCmp('modx-grid-fc-set-fields').encode()
@@ -186,6 +188,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
             values: this.getForm().getValues()
         });
     }
+
     ,success: function(r) {
         this.getForm().setValues(r.result.object);
 
@@ -212,7 +215,12 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
 });
 Ext.reg('modx-panel-fc-set',MODx.panel.FCSet);
 
-
+/**
+ * @class MODx.grid.FCSetFields
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-fc-set-fields
+ */
 MODx.grid.FCSetFields = function(config) {
     config = config || {};
     this.vcb = new Ext.ux.grid.CheckColumn({
@@ -274,7 +282,12 @@ MODx.grid.FCSetFields = function(config) {
 Ext.extend(MODx.grid.FCSetFields,MODx.grid.LocalGrid);
 Ext.reg('modx-grid-fc-set-fields',MODx.grid.FCSetFields);
 
-
+/**
+ * @class MODx.grid.FCSetTabs
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-fc-set-tabs
+ */
 MODx.grid.FCSetTabs = function(config) {
     config = config || {};
     this.vcb = new Ext.ux.grid.CheckColumn({
@@ -319,7 +332,19 @@ MODx.grid.FCSetTabs = function(config) {
     this.propRecord = Ext.data.Record.create(config.fields);
 };
 Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
-    createTab: function(btn,e) {
+    getMenu: function(g,ri) {
+        var rec = this.getStore().getAt(ri);
+        if (rec.data.type == 'new') {
+            return [{
+                text: _('tab_remove')
+                ,handler: this.removeTab
+                ,scope: this
+            }];
+        }
+        return [];
+    }
+
+    ,createTab: function(btn,e) {
         if (!this.windows.ctab) {
             this.windows.ctab = MODx.load({
                 xtype: 'modx-window-fc-set-add-tab'
@@ -335,17 +360,6 @@ Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
         this.windows.ctab.reset();
         this.windows.ctab.show(e.target);
     }
-    ,getMenu: function(g,ri) {
-        var rec = this.getStore().getAt(ri);
-        if (rec.data.type == 'new') {
-            return [{
-                text: _('tab_remove')
-                ,handler: this.removeTab
-                ,scope: this
-            }];
-        }
-        return [];
-    }
 
     ,removeTab: function(btn,e) {
         var rec = this.getSelectionModel().getSelected();
@@ -358,7 +372,93 @@ Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
 });
 Ext.reg('modx-grid-fc-set-tabs',MODx.grid.FCSetTabs);
 
+/**
+ * @class MODx.grid.FCSetTVs
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-fc-set-tvs
+ */
+MODx.grid.FCSetTVs = function(config) {
+    config = config || {};
+    this.vcb = new Ext.ux.grid.CheckColumn({
+        header: _('visible')
+        ,dataIndex: 'visible'
+        ,width: 40
+        ,sortable: false
+    });
+    Ext.applyIf(config,{
+        id: 'modx-grid-fc-set-tvs'
+        ,fields: ['id','name','tab','rank','visible','label','default_value','category','default_text']
+        ,autoHeight: true
+        ,grouping: true
+        ,groupBy: 'category'
+        ,sortBy: 'rank'
+        ,sortDir: 'ASC'
+        ,stateful: false
+        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('tvs')+'" : "'+_('tv')+'"]})'
+        ,plugins: [this.vcb]
+        ,hideGroupedColumn: true
+        ,columns: [{
+            header: _('category')
+            ,dataIndex: 'category'
+        },{
+            header: _('tv_name')
+            ,dataIndex: 'name'
+            ,width: 200
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=element/tv/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        },this.vcb,{
+            header: _('label')
+            ,dataIndex: 'label'
+            ,editor: { xtype: 'textfield' }
+        },{
+            header: _('default_value')
+            ,dataIndex: 'default_value'
+            ,editor: { xtype: 'textfield' }
+            ,renderer: function(v) { return Ext.util.Format.htmlEncode(v); }
+        },{
+            header: _('original_value')
+            ,dataIndex: 'default_text'
+            ,editable: false
+        },{
+            header: _('region')
+            ,dataIndex: 'tab'
+            ,width: 100
+            ,editor: { xtype: 'textfield' }
+        },{
+            header: _('tab_rank')
+            ,dataIndex: 'rank'
+            ,width: 70
+            ,editor: { xtype: 'textfield' }
+        }]
+        ,viewConfig: {
+            forceFit:true
+            ,enableRowBody:true
+            ,scrollOffset: 0
+            ,autoFill: true
+            ,showPreview: true
+            ,getRowClass : function(rec, ri, p){
+                return rec.data.visible ? 'grid-row-active' : 'grid-row-inactive';
+            }
+        }
+    });
+    MODx.grid.FCSetTVs.superclass.constructor.call(this,config);
+    this.propRecord = Ext.data.Record.create(config.fields);
+};
+Ext.extend(MODx.grid.FCSetTVs,MODx.grid.LocalGrid,{
+});
+Ext.reg('modx-grid-fc-set-tvs',MODx.grid.FCSetTVs);
 
+/**
+ * @class MODx.window.AddTabToSet
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-fc-set-add-tab
+ */
 MODx.window.AddTabToSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -416,72 +516,3 @@ Ext.extend(MODx.window.AddTabToSet,MODx.Window,{
     }
 });
 Ext.reg('modx-window-fc-set-add-tab',MODx.window.AddTabToSet);
-
-MODx.grid.FCSetTVs = function(config) {
-    config = config || {};
-    this.vcb = new Ext.ux.grid.CheckColumn({
-        header: _('visible')
-        ,dataIndex: 'visible'
-        ,width: 40
-        ,sortable: false
-    });
-    Ext.applyIf(config,{
-        id: 'modx-grid-fc-set-tvs'
-        ,fields: ['id','name','tab','rank','visible','label','default_value','category','default_text']
-        ,autoHeight: true
-        ,grouping: true
-        ,groupBy: 'category'
-        ,sortBy: 'rank'
-        ,sortDir: 'ASC'
-        ,stateful: false
-        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('tvs')+'" : "'+_('tv')+'"]})'
-        ,plugins: [this.vcb]
-        ,hideGroupedColumn: true
-        ,columns: [{
-            header: _('category')
-            ,dataIndex: 'category'
-        },{
-            header: _('tv_name')
-            ,dataIndex: 'name'
-            ,width: 200
-        },this.vcb,{
-            header: _('label')
-            ,dataIndex: 'label'
-            ,editor: { xtype: 'textfield' }
-        },{
-            header: _('default_value')
-            ,dataIndex: 'default_value'
-            ,editor: { xtype: 'textfield' }
-            ,renderer: function(v) { return Ext.util.Format.htmlEncode(v); }
-        },{
-            header: _('original_value')
-            ,dataIndex: 'default_text'
-            ,editable: false
-        },{
-            header: _('region')
-            ,dataIndex: 'tab'
-            ,width: 100
-            ,editor: { xtype: 'textfield' }
-        },{
-            header: _('tab_rank')
-            ,dataIndex: 'rank'
-            ,width: 70
-            ,editor: { xtype: 'textfield' }
-        }]
-        ,viewConfig: {
-            forceFit:true
-            ,enableRowBody:true
-            ,scrollOffset: 0
-            ,autoFill: true
-            ,showPreview: true
-            ,getRowClass : function(rec, ri, p){
-                return rec.data.visible ? 'grid-row-active' : 'grid-row-inactive';
-            }
-        }
-    });
-    MODx.grid.FCSetTVs.superclass.constructor.call(this,config);
-    this.propRecord = Ext.data.Record.create(config.fields);
-};
-Ext.extend(MODx.grid.FCSetTVs,MODx.grid.LocalGrid,{
-});
-Ext.reg('modx-grid-fc-set-tvs',MODx.grid.FCSetTVs);

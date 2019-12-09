@@ -21900,12 +21900,12 @@ textarea.x-form-field {
   color: #999 !important; }
 
 a.x-grid-link {
-  color: black;
-  text-decoration: none; }
+  color: #234368;
+  text-decoration: underline; }
 
 a.x-grid-link:hover,
 a.x-grid-link:focus {
-  text-decoration: underline; }
+  text-decoration: none; }
 
 .x-editable-column {
   cursor: pointer; }

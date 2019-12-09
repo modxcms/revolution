@@ -1,4 +1,9 @@
-
+/**
+ * @class MODx.grid.UserGroupCategory
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-user-group-categories
+ */
 MODx.grid.UserGroupCategory = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -33,15 +38,33 @@ MODx.grid.UserGroupCategory = function(config) {
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 100
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/permission'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 200
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/access/policy/update&id=' + record.data.policy
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('context')
             ,dataIndex: 'context_key'
             ,width: 150
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=context/update&key=' + record.data.context_key
+                    ,target: '_blank'
+                });
+            }, scope: this }
         }]
         ,tbar: [{
             text: _('category_add')
@@ -88,6 +111,7 @@ Ext.extend(MODx.grid.UserGroupCategory,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         this.refresh();
     }
+
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
@@ -102,6 +126,7 @@ Ext.extend(MODx.grid.UserGroupCategory,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,createAcl: function(itm,e) {
         var r = {
             principal: this.config.usergroup
@@ -121,6 +146,7 @@ Ext.extend(MODx.grid.UserGroupCategory,MODx.grid.Grid,{
         this.windows.createAcl.setValues(r);
         this.windows.createAcl.show(e.target);
     }
+
     ,updateAcl: function(itm,e) {
         var r = this.menu.record;
 
@@ -142,7 +168,12 @@ Ext.extend(MODx.grid.UserGroupCategory,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-user-group-category',MODx.grid.UserGroupCategory);
 
-
+/**
+ * @class MODx.window.CreateUGCat
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-category-create
+ */
 MODx.window.CreateUGCat = function(config) {
     config = config || {};
     this.ident = config.ident || 'cugcat'+Ext.id();
@@ -270,7 +301,12 @@ Ext.extend(MODx.window.CreateUGCat,MODx.Window,{
 });
 Ext.reg('modx-window-user-group-category-create',MODx.window.CreateUGCat);
 
-
+/**
+ * @class MODx.window.UpdateUGCat
+ * @extends MODx.window.CreateUGCat
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-category-update
+ */
 MODx.window.UpdateUGCat = function(config) {
     config = config || {};
     this.ident = config.ident || 'updugcat'+Ext.id();
@@ -281,5 +317,5 @@ MODx.window.UpdateUGCat = function(config) {
     });
     MODx.window.UpdateUGCat.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.window.UpdateUGCat, MODx.window.CreateUGCat);
+Ext.extend(MODx.window.UpdateUGCat,MODx.window.CreateUGCat);
 Ext.reg('modx-window-user-group-category-update',MODx.window.UpdateUGCat);
