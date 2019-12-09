@@ -417,7 +417,11 @@ MODx.util.Clipboard = function() {
 }();
 
 MODx.util.Format = {
-    dateFromTimestamp: function(timestamp, date = true, time = true, defaultValue = '') {
+    dateFromTimestamp: function(timestamp, date, time, defaultValue) {
+        if (date === undefined) date = true;
+        if (time === undefined) time = true;
+        if (defaultValue === undefined) defaultValue = '';
+
         timestamp = parseInt(timestamp);
         if (!(timestamp > 0)) return defaultValue;
 
