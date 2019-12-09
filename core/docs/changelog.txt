@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-beta1  (TBD)
 ====================================
+- Format timestamp to date & time in edit file panel [#14883]
 - Add links to grid items in manager [#14864]
 - Fix stretched user avatars in dashboard widgets [#14840]
 - Set autocomplete to off on username in user edit form [#14839]
