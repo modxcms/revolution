@@ -470,7 +470,14 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     ,renderEditableColumn: function(renderer) {
         return function(value, metaData, record, rowIndex, colIndex, store) {
             if (renderer) {
-                value = renderer(value, metaData, record, rowIndex, colIndex, store);
+                if (typeof renderer.fn === 'function') {
+                    var scope = (renderer.scope) ? renderer.scope : false;
+                    renderer = renderer.fn.bind(scope);
+                }
+
+                if (typeof renderer === 'function') {
+                    value = renderer(value, metaData, record, rowIndex, colIndex, store);
+                }
             }
             metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
 
