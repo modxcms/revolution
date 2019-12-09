@@ -98,8 +98,8 @@ MODx.grid.Grid = function(config) {
         var defaultActionsColumnWidth = 50;
 
         var isPercentage = function(columns) {
-            for (var column of config.columns) {
-                if (column.width && (column.width > 1)) {
+            for (var i = 0; i < columns.length; i++) {
+                if (columns[i].width && (columns[i].width > 1)) {
                     return false;
                 }
             }
