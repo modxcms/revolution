@@ -608,9 +608,6 @@ $_lang['setting_request_param_alias_desc'] = 'FURL\'ler ile yönlendirirken Kayn
 $_lang['setting_request_param_id'] = 'Kimlik Parametresi İste';
 $_lang['setting_request_param_id_desc'] = 'FURLs kullanırken Kaynak KİMLİKLERİ tanımlamak için Get parametresinin adı.';
 
-$_lang['setting_resolve_hostnames'] = 'Sunucu adlarını çözümle';
-$_lang['setting_resolve_hostnames_desc'] = 'MODX\'in siteniz ziyaret edildiğinde ziyaretçilerin bilgisayar adını çözmeyi denemesini istiyor musunuz? Bunu ziyaretçilerin hiçbir şekilde fark etmeyecek olmasına rağmen, bilgisayar adları çözme işlemi bazı ek sunucu yüklemeleri yaratabilir.';
-
 $_lang['setting_resource_tree_node_name'] = 'Kaynak Ağacı Düğüm Alanı';
 $_lang['setting_resource_tree_node_name_desc'] = 'Kaynak ağacındaki düğümlerin oluşturulurken kullanılacak kaynak alanını belirtin. Menütitle, takma ad, uzun metni vb. Gibi herhangi bir Kaynak alanı kullanılabilir olmasına rağmen varsayılan olarak sayfa başlığına geçer.';
 
@@ -629,12 +626,6 @@ $_lang['setting_search_default_err'] = 'Lütfen belgelerin varsayılan olarak ar
 
 $_lang['setting_server_offset_time'] = 'Sunucu ofset zamanı';
 $_lang['setting_server_offset_time_desc'] = 'Bulunduğunuz yer ile sunucunun bulunduğu yer arasındaki saat farkı sayısını seçin.';
-
-$_lang['setting_server_protocol'] = 'Sunucu türü';
-$_lang['setting_server_protocol_desc'] = 'Siteniz bir https bağlantısında ise lütfen burada belirtin.';
-$_lang['setting_server_protocol_err'] = 'Lütfen sitenizin güvenli bir site olup olmadığını belirtin.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Oturum Tanımlama Bilgisi';
 $_lang['setting_session_cookie_domain_desc'] = 'Oturum tanımlama bilgisi alan adını özelleştirmek için bu ayarı kullanın. Geçerli alanı kullanmak için boş bırakın.';
