@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'Název GET parametru identifikují
 $_lang['setting_request_param_id'] = 'Název ID parametru požadavku';
 $_lang['setting_request_param_id_desc'] = 'Název GET parametru identifikujícího ID dokumnetu pokud nejsou použity přátelské URL.';
 
-$_lang['setting_resolve_hostnames'] = 'Získavat hostname návštěvníků';
-$_lang['setting_resolve_hostnames_desc'] = 'Chcete, aby se MODX pokoušel získávat hostname návštěvníků portálu? Získávání hostname může způsobit zatížení serveru navíc, ale návštěvníky to neovlivní.';
-
 $_lang['setting_resource_tree_node_name'] = 'Zdroj názvu dokumentu ve stromu dokumentů';
 $_lang['setting_resource_tree_node_name_desc'] = 'Zadejte název políčka, kterého obsah se má zobrazovat jako název dokumentu ve stromu dokumentů. Výchozí hodnotou je "pagetitle", ale může zde být použito jakékoliv políčko jako např. "menutitle", "alias", "longtitle" atd.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Zvolte zda mají být dokumenty ve vých
 
 $_lang['setting_server_offset_time'] = 'Rozdíl času serveru';
 $_lang['setting_server_offset_time_desc'] = 'Nastavte počet hodin, který je rozdílem mezi Vaším místem a místem, kde je umístěn server.';
-
-$_lang['setting_server_protocol'] = 'Typ serveru';
-$_lang['setting_server_protocol_desc'] = 'Pokud Váš portál používá spojení https, vyberte jej zde.';
-$_lang['setting_server_protocol_err'] = 'Vyberte zda je Váš portál zabezpečený pomocí https nebo ne.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Doména session cookie';
 $_lang['setting_session_cookie_domain_desc'] = 'Toto nastavení použijte pro přizpůsobení domény pro session cookie.';
