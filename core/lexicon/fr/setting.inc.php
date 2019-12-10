@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'Nom du paramètre GET pour identif
 $_lang['setting_request_param_id'] = 'Paramètre de requête pour les ID';
 $_lang['setting_request_param_id_desc'] = 'Nom du paramètre GET pour identifier les IDs des ressources quand les URL simples ne sont pas utilisées.';
 
-$_lang['setting_resolve_hostnames'] = 'Résolution des noms de domaines';
-$_lang['setting_resolve_hostnames_desc'] = 'Souhaitez-vous que MODX essai de résoudre les noms de domaines de vos visiteurs quand ils visitent votre site ? Résoudre les noms de domaines peut créer une charge supplémentaire du serveur, mais vos visiteurs ne le ressentiront pas.';
-
 $_lang['setting_resource_tree_node_name'] = 'Valeur des noeuds de l\'arbre des ressources';
 $_lang['setting_resource_tree_node_name_desc'] = 'Indiquez le champ de ressource à utiliser lors de l\'affichage des noeuds dans l\'arborescence. "pagetitle" par défaut, mais n\'importe quel champ de ressource peut être utilisé, tels que menutitle, alias, longtitle, etc.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Veuillez indiquer si vous désirez ou no
 
 $_lang['setting_server_offset_time'] = 'Décalage horaire du serveur';
 $_lang['setting_server_offset_time_desc'] = 'Indiquez le nombre d\'heures de décalage entre vous et votre serveur.';
-
-$_lang['setting_server_protocol'] = 'Type de serveur';
-$_lang['setting_server_protocol_desc'] = 'Si votre site utilise une connexion sécurisée (https), veuillez l\'indiquer ici.';
-$_lang['setting_server_protocol_err'] = 'Veuillez indiquer si votre site utilise ou non une connexion sécurisée.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Cookie de session de domaine';
 $_lang['setting_session_cookie_domain_desc'] = 'Utilisez cette option pour personnaliser le domaine de session de cookie.';
