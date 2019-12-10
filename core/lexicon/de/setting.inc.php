@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'Der Name des GET-Parameters für R
 $_lang['setting_request_param_id'] = 'Request-ID-Parameter';
 $_lang['setting_request_param_id_desc'] = 'Der Name des GET-Parameters für Ressourcen-IDs, wenn keine suchmaschinenfreundlichen URLs verwendet werden.';
 
-$_lang['setting_resolve_hostnames'] = 'Hostnamen auflösen';
-$_lang['setting_resolve_hostnames_desc'] = 'Möchten Sie, dass MODX versucht, die Hostnamen Ihrer Besucher aufzulösen, wenn diese Ihre Website besuchen? Das Auflösen von Hostnamen kann zusätzliche Server-Last erzeugen; Ihre Besucher werden dies im Normalfall jedoch nicht bemerken.';
-
 $_lang['setting_resource_tree_node_name'] = 'Feld zur Benennung der Knoten im Ressourcen-Baum';
 $_lang['setting_resource_tree_node_name_desc'] = 'Geben Sie das Ressourcen-Feld an, das zur Darstellung der Knoten im Ressourcen-Baum verwendet werden soll. Standardmäßig wird das Feld pagetitle verwendet, es kann aber jedes Ressourcen-Feld verwendet werden, z.B. menutitle, alias, longtitle etc.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Bitte geben Sie an, ob neue Dokumente st
 
 $_lang['setting_server_offset_time'] = 'Server-Zeit-Offset';
 $_lang['setting_server_offset_time_desc'] = 'Geben Sie die Zeitdifferenz zwischen Ihrem Standort und dem des Servers in Stunden an.';
-
-$_lang['setting_server_protocol'] = 'Servertyp';
-$_lang['setting_server_protocol_desc'] = 'Wenn Ihre Website über eine HTTPS-Verbindung aufgerufen werden soll, geben Sie hier bitte "https" ein, sonst "http".';
-$_lang['setting_server_protocol_err'] = 'Bitte geben Sie an, ob Ihre Website komplett SSL-gesichert ist (also alle Seiten über HTTPS aufgerufen werden) oder nicht.';
-$_lang['setting_server_protocol_http'] = 'HTTP';
-$_lang['setting_server_protocol_https'] = 'HTTPS';
 
 $_lang['setting_session_cookie_domain'] = 'Session-Cookie-Domain';
 $_lang['setting_session_cookie_domain_desc'] = 'Verwenden Sie diese Einstellung, um die Session-Cookie-Domain anzupassen. Lassen Sie das Feld leer, wenn die aktuelle Domain verwendet werden soll.';
