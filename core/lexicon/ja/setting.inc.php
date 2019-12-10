@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'リソースのフレンドリーU
 $_lang['setting_request_param_id'] = 'IDを受け取るパラメータ';
 $_lang['setting_request_param_id_desc'] = 'フレンドリーURLを使用しない場合に、リソースIDを受け取るGETパラメーターの名前を指定します。';
 
-$_lang['setting_resolve_hostnames'] = 'ホスト名の解決';
-$_lang['setting_resolve_hostnames_desc'] = 'サイト表示時に、閲覧者のホストを名前解決しますか？　サーバーに少し負荷が増えますが、閲覧者が意識することはありません（訳注：アクセスログに於ける逆引きのことか？）。';
-
 $_lang['setting_resource_tree_node_name'] = 'リソースツリーのノード用フィールド';
 $_lang['setting_resource_tree_node_name_desc'] = 'リソースツリーでノードを表示する際に使用するフィールドを指定します。<br />デフォルトは pagetitle ですが、menutitle や alias、longtitle など任意のリソースフィールドも指定できます。';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'リソースをデフォルトで検索�
 
 $_lang['setting_server_offset_time'] = 'サーバの時間補正';
 $_lang['setting_server_offset_time_desc'] = 'サーバーの時間を補正するための、数値を指定します。';
-
-$_lang['setting_server_protocol'] = 'サーバータイプ';
-$_lang['setting_server_protocol_desc'] = 'このサイトがSSL接続を使用している場合は、httpsを選択してください。';
-$_lang['setting_server_protocol_err'] = 'サーバータイプをhttp・httpsのどちらかで選んでください。';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'セッションCookieのドメイン';
 $_lang['setting_session_cookie_domain_desc'] = 'セッションCookieのドメインをカスタマイズします。';
