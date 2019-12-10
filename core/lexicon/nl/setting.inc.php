@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'De naam van de GET parameter om do
 $_lang['setting_request_param_id'] = 'Request ID Parameter';
 $_lang['setting_request_param_id_desc'] = 'De naam van de GET parameter om document aliassen te identificeren zonder gebruik van FURLs.';
 
-$_lang['setting_resolve_hostnames'] = 'Achterhalen hostnamen';
-$_lang['setting_resolve_hostnames_desc'] = 'Wil je dat MODX probeert de hostnamen van jouw bezoekers te achterhalen wanneer deze jouw site bezoeken? Hostnamen achterhalen kan wellicht extra laadtijd veroorzaken, hoewel jouw bezoekers op geen enkele wijze bericht hiervan krijgen.';
-
 $_lang['setting_resource_tree_node_name'] = 'Document structuur node veld';
 $_lang['setting_resource_tree_node_name_desc'] = 'Specificeer het te gebruiken document veld bij het renderen van de nodes in de document structuur. Standaard pagetitle, maar elk veld kan gebruikt worden, zoals menutitle, alias, longtitle, etc.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Geef aan of documenten standaard doorzoe
 
 $_lang['setting_server_offset_time'] = 'Server offset tijd';
 $_lang['setting_server_offset_time_desc'] = 'Selecteer het aantal uren in tijdsverschil in waar jij bent en waar de server is.';
-
-$_lang['setting_server_protocol'] = 'Server Type';
-$_lang['setting_server_protocol_desc'] = 'Als jouw site op een http verbinding draait, specificeer het hier.';
-$_lang['setting_server_protocol_err'] = 'Geef aan of jouw site wel of niet een beveiligde site is';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Sessie cookie domein';
 $_lang['setting_session_cookie_domain_desc'] = 'Gebruik deze instelling om de sessie cookie domein aan te passen.';
