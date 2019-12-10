@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'The name of the GET parameter to i
 $_lang['setting_request_param_id'] = 'Request ID Parameter';
 $_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to identify Resource IDs when not using FURLs.';
 
-$_lang['setting_resolve_hostnames'] = 'Resolve hostnames';
-$_lang['setting_resolve_hostnames_desc'] = 'Do you want MODX to try to resolve your visitors\' hostnames when they visit your site? Resolving hostnames may create some extra server load, although your visitors won\'t notice this in any way.';
-
 $_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
 $_lang['setting_resource_tree_node_name_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Defaults to pagetitle, although any Resource field can be used, such as menutitle, alias, longtitle, etc.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Please specify whether or not you want d
 
 $_lang['setting_server_offset_time'] = 'Server offset time';
 $_lang['setting_server_offset_time_desc'] = 'Select the number of hours time difference between where you are and where the server is.';
-
-$_lang['setting_server_protocol'] = 'Server type';
-$_lang['setting_server_protocol_desc'] = 'If your site is on a https connection, please specify so here.';
-$_lang['setting_server_protocol_err'] = 'Please specify whether or not your site is a secure site.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Session Cookie Domain';
 $_lang['setting_session_cookie_domain_desc'] = 'Use this setting to customize the session cookie domain. Leave blank to use the current domain.';

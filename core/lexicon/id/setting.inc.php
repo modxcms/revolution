@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'Nama parameter GET untuk mengident
 $_lang['setting_request_param_id'] = 'Permintaan Parameter ID';
 $_lang['setting_request_param_id_desc'] = 'Nama parameter dari GET untuk mengidentifikasi sumber IDs bila tidak menggunakan FURLs.';
 
-$_lang['setting_resolve_hostnames'] = 'Atur hostnames';
-$_lang['setting_resolve_hostnames_desc'] = 'Apakah anda ingin MODX untuk mencoba untuk menyelesaikan anda pengunjung\' hostname ketika mereka mengunjungi situs anda? Menyelesaikan nama host yang mungkin membuat beberapa tambahan beban server, meskipun pengunjung anda tidak akan melihat ini dalam cara apapun.';
-
 $_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
 $_lang['setting_resource_tree_node_name_desc'] = 'Menentukan Sumber daya yang digunakan ketika rendering node di Pokok Sumber. Default untuk pagetitle, meskipun setiap bidang Sumberdaya dapat digunakan, seperti menutitle, alias, longtitle, dll.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Harap tentukan apakah dokumen Anda ingin
 
 $_lang['setting_server_offset_time'] = 'Server offset time';
 $_lang['setting_server_offset_time_desc'] = 'Pilih jumlah perbedaan waktu jam di antara lokasi Anda dan di mana server berada.';
-
-$_lang['setting_server_protocol'] = 'Server type';
-$_lang['setting_server_protocol_desc'] = 'Jika situs Anda terhubung ke https, sebutkan di sini.';
-$_lang['setting_server_protocol_err'] = 'Tentukan apakah situs Anda adalah situs yang aman atau tidak.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Session Cookie Domain';
 $_lang['setting_session_cookie_domain_desc'] = 'Gunakan setelan ini untuk menyesuaikan domain cookie sesi. Biarkan kosong untuk menggunakan domain saat ini.';

@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'Il nome del parametro GET per iden
 $_lang['setting_request_param_id'] = 'Parametro Richiesta ID';
 $_lang['setting_request_param_id_desc'] = 'Il nome del parametro GET per identificare gli IDs delle Risorse quando non vengono usati FURLs.';
 
-$_lang['setting_resolve_hostnames'] = 'Identifica Nomi Hosts';
-$_lang['setting_resolve_hostnames_desc'] = 'Vuoi che MODX provi ad identificare i nome degli hosts dei tuoi visitatori quando visitano il tuo sito? Tale azione può causare un po\' di lavoro extra per il caricamento del server, anche se i tuoi visitatori non si accorgeranno in alcun modo di questo.';
-
 $_lang['setting_resource_tree_node_name'] = 'Campo Risorsa Nodi Albero';
 $_lang['setting_resource_tree_node_name_desc'] = 'Specifica quale campo della Risorsa visualizzare come nome per i nodi dell\'Albero delle Risorse. Di default è il titolo della pagina (pagetitle), ma può essere usato qualsiasi campo, come il titolo del menu, alias, titolo esteso, ecc.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Per favore specifica se vuoi o no che i 
 
 $_lang['setting_server_offset_time'] = 'Offset Orario Server';
 $_lang['setting_server_offset_time_desc'] = 'Seleziona il numero di ore di differenza (+/-) fra l\'orario di dove ti trovi e quello dove si trova il server.';
-
-$_lang['setting_server_protocol'] = 'Tipo Server';
-$_lang['setting_server_protocol_desc'] = 'Se il tuo sito usa una connessione https, specificalo qui.';
-$_lang['setting_server_protocol_err'] = 'Per favore specifica se il tuo sito usa una connessione sicura (https) o no (http).';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Dominio Cookie Sessione';
 $_lang['setting_session_cookie_domain_desc'] = 'Usa questa impostazione per personalizzare la voce: dominio dei cookie della sessione.';

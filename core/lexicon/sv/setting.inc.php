@@ -606,9 +606,6 @@ $_lang['setting_request_param_alias_desc'] = 'Namnet på GET-parametern som iden
 $_lang['setting_request_param_id'] = 'ID-parameter för anrop';
 $_lang['setting_request_param_id_desc'] = 'Namnet på GET-parametern som identifierar resurs-ID:n när vänliga URL:er inte används.';
 
-$_lang['setting_resolve_hostnames'] = 'Gör namnuppslag';
-$_lang['setting_resolve_hostnames_desc'] = 'Vill du att MODX ska försöka göra namnuppslag på dina besökares värddatornamn när de besöker din webbplats? Namnuppslag kan skapa extra belastning för servern, men dina besökare kommer inte att märka av det på något sätt.';
-
 $_lang['setting_resource_tree_node_name'] = 'Resursträdets nodfält';
 $_lang['setting_resource_tree_node_name_desc'] = 'Ange det resursfält som ska användas när noder i resursträdet ska visas. pagetitle används som standard, men vilket resursfält som helst kan användas, tex menutitle, alias, longtitle etc.';
 
@@ -627,12 +624,6 @@ $_lang['setting_search_default_err'] = 'Ange om du vill att dokument ska vara s�
 
 $_lang['setting_server_offset_time'] = 'Serverns tidsskillnad';
 $_lang['setting_server_offset_time_desc'] = 'Välj det antal timmar som skiljer mellan dig och servern.';
-
-$_lang['setting_server_protocol'] = 'Servertyp';
-$_lang['setting_server_protocol_desc'] = 'Specificera här om din sida använder en http- eller en https-anslutning.';
-$_lang['setting_server_protocol_err'] = 'Ange om din webbplats är säker eller inte (http/https).';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Sessionscookiens domän';
 $_lang['setting_session_cookie_domain_desc'] = 'Använd den här inställningen för att anpassa domänen för sessionscookien. Lämna tom för att använda den nuvarande domänen.';

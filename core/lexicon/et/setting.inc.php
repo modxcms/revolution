@@ -607,9 +607,6 @@ $_lang['setting_request_param_alias_desc'] = 'GET parameeteri nimi, millega iden
 $_lang['setting_request_param_id'] = 'Päringu ID Parameeter';
 $_lang['setting_request_param_id_desc'] = 'GET parameeteri nimi, millega idenfitseerida Ressurssi ID-sid, kui FURL-id ei ole kasutusel.';
 
-$_lang['setting_resolve_hostnames'] = 'Lahenda hostinimed';
-$_lang['setting_resolve_hostnames_desc'] = 'kas soovite, et MODX üritaks lahendada külastajte hostinimesid, kui nad külastavad teie lehte? Hostinimede lahendamine võib põhjustada lisa koormust teie serverile, kuigi külastajatele jääb see märkamatuks.';
-
 $_lang['setting_resource_tree_node_name'] = 'Ressurssi Puu Üksuse Väli';
 $_lang['setting_resource_tree_node_name_desc'] = 'Määra Ressurssi väli, mida kasutada üksutse kuvamisel Ressurssi Puus. Vaikimisi Kasutatakse pagetitle välja, kui suvalist Ressurssi välja on võimalk kasutada, nagu näiteks menutitle, alias, longtitle, jne.';
 
@@ -628,12 +625,6 @@ $_lang['setting_search_default_err'] = 'Palun määrake kas soovite, et dokumend
 
 $_lang['setting_server_offset_time'] = 'Server offset time';
 $_lang['setting_server_offset_time_desc'] = 'Valige tundide erinevus, mis on teie ja serveri asukoha vahel.';
-
-$_lang['setting_server_protocol'] = 'Serveri Tüüp';
-$_lang['setting_server_protocol_desc'] = 'Kui teie leht kasutab https ühendust, siis määrake see siin.';
-$_lang['setting_server_protocol_err'] = 'Palun määrake kas teil on turva leht võit mitte.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Session Küpsise Domeen';
 $_lang['setting_session_cookie_domain_desc'] = 'Kasutage seda seadet, et muuta sessiooni küpsise domeeni.';
