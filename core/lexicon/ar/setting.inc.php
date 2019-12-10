@@ -611,9 +611,6 @@ $_lang['setting_request_param_alias_desc'] = 'اسم بارامتر GET لتعر
 $_lang['setting_request_param_id'] = 'طلب متحول المعرف';
 $_lang['setting_request_param_id_desc'] = 'اسم بارامتر GET لتعريف معرفات المصدر عند عدم استخدام FURLs.';
 
-$_lang['setting_resolve_hostnames'] = 'حل أسماء المضيفين';
-$_lang['setting_resolve_hostnames_desc'] = 'هل تريد أن يحاول مودكس حل أسماء المضيفين لزوارك عندما يقومون بزيارة موقعك؟ من الممكن أن يخلق حل أسماء المضيفين بعض الحمل الزائد على المخدم، مع ذلك لن يلاحظ زوارك هذا بأي شكل من الأشكال.';
-
 $_lang['setting_resource_tree_node_name'] = 'حقل عقده شجرة المصدر';
 $_lang['setting_resource_tree_node_name_desc'] = 'حدد حقل المصدر الذي تود استخدامه عند إعادة رسم العقد في شجرة المصدر. الافتراضي إلى اسم الصفحة، مع ذلك يمكن استخدام أي حقل مصدر، مثل اسم القائمة، الاسم المستعار، العنوان الطويل، وغيرها.';
 
@@ -632,12 +629,6 @@ $_lang['setting_search_default_err'] = 'الرجاء حدد فيما إذا كن
 
 $_lang['setting_server_offset_time'] = 'وقت إزاحة المخدم';
 $_lang['setting_server_offset_time_desc'] = 'اختر عدد ساعات فرق التوقيت بين مكان وجودك ومكان وجود المخدم.';
-
-$_lang['setting_server_protocol'] = 'نوع المخدم';
-$_lang['setting_server_protocol_desc'] = 'إذا كان موقعك على اتصال https، الرجاء تحديد ذلك هنا.';
-$_lang['setting_server_protocol_err'] = 'الرجاء تحديد فيما إذا كان أو لم يكن موقعك آمن.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'نطاق كوكي الجلسة';
 $_lang['setting_session_cookie_domain_desc'] = 'استخدم هذا الإعداد لتخصيص نطاق كوكي الجلسة. اتركه فارغا لاستخدام النطاق الحالي.';
