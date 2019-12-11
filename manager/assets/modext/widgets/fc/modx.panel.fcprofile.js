@@ -8,6 +8,9 @@ MODx.panel.FCProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'Security/Forms/Profile/Update'
+        }
         ,id: 'modx-panel-fc-profile'
         ,cls: 'container'
         ,class_key: 'MODX\\Revolution\\modFormCustomizationProfile'
@@ -48,7 +51,7 @@ MODx.panel.FCProfile = function(config) {
                     ,value: config.record.name
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-fcp-header').getEl().update(_('profile')+': '+f.getValue());
+                            Ext.getCmp('modx-fcp-header').getEl().update(_('profile') + ': ' + Ext.util.Format.htmlEncode(f.getValue()));
                         }}
                     }
                 },{
@@ -108,7 +111,7 @@ Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
         if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.name)) {
             Ext.defer(function() {
-                Ext.getCmp('modx-fcp-header').update(_('profile')+': '+this.config.record.name);
+                Ext.getCmp('modx-fcp-header').update(_('profile') + ': ' + Ext.util.Format.htmlEncode(this.config.record.name));
             }, 250, this);
         }
         this.fireEvent('ready',this.config.record);
