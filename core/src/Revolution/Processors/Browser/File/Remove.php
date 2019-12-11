@@ -17,8 +17,6 @@ use MODX\Revolution\Processors\Browser\Browser;
  * Removes a file.
  *
  * @property string  $file        The name of the file.
- * @property boolean $prependPath If true, will prepend the rb_base_dir to the file
- * name.
  *
  * @package MODX\Revolution\Processors\Browser\File
  */

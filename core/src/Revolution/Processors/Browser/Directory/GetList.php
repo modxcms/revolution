@@ -18,8 +18,6 @@ use MODX\Revolution\Processors\Browser\Browser;
  * then alphanumerically.
  *
  * @property string  $id          The path to grab a list from
- * @property boolean $prependPath (optional) If true, will prepend rb_base_dir to
- * the final path
  * @property boolean $hideFiles   (optional) If true, will not display files.
  * Defaults to false.
  *

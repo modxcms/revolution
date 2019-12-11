@@ -18,8 +18,6 @@ use MODX\Revolution\Processors\Browser\Browser;
  *
  * @property string  $name        The name of the directory to create
  * @property string  $parent      The parent directory
- * @property boolean $prependPath (optional) If true, will prepend rb_base_dir to
- * the final path
  *
  * @package MODX\Revolution\Processors\Browser\Directory
  */

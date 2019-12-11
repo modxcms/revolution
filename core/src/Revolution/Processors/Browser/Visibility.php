@@ -16,8 +16,6 @@ namespace MODX\Revolution\Processors\Browser;
  *
  * @property string  $mode        The mode to chmod to
  * @property string  $dir         The absolute path of the dir
- * @property boolean $prependPath (optional) If true, will prepend rb_base_dir to
- * the final path
  *
  * @package MODX\Revolution\Processors\Browser
  */
