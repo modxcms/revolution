@@ -13,23 +13,22 @@ MODx.panel.User = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,bodyStyle: ''
-        ,items: [{
-            html: _('user_new')
-            ,id: 'modx-user-header'
-            ,xtype: 'modx-header'
-        },{
-            xtype: 'modx-tabs'
-            ,id: 'modx-user-tabs'
-            ,deferredRender: false
-            ,defaults: {
-                autoHeight: true
-                ,layout: 'form'
-                ,labelWidth: 150
-                ,bodyCssClass: 'tab-panel-wrapper'
-                ,layoutOnTabChange: true
+        ,items: [
+            MODx.util.getHeaderBreadCrumbs('modx-user-header', [{text: _('users'), href: MODx.getPage('security/user')}]),
+            {
+                xtype: 'modx-tabs'
+                ,id: 'modx-user-tabs'
+                ,deferredRender: false
+                ,defaults: {
+                    autoHeight: true
+                    ,layout: 'form'
+                    ,labelWidth: 150
+                    ,bodyCssClass: 'tab-panel-wrapper'
+                    ,layoutOnTabChange: true
+                }
+                ,items: this.getFields(config)
             }
-            ,items: this.getFields(config)
-        }]
+        ]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -44,6 +43,7 @@ MODx.panel.User = function(config) {
 Ext.extend(MODx.panel.User,MODx.FormPanel,{
     setup: function() {
         if (this.config.user === '' || this.config.user === 0) {
+            Ext.get('modx-user-header').update(_('user_new'));
             this.fireEvent('ready');
             return false;
         }
@@ -64,7 +64,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         var s = g.getStore();
                         if (s) { s.loadData(d); }
                     }
-                    Ext.get('modx-user-header').update(_('user')+': '+r.object.username);
+                    Ext.get('modx-user-header').update(r.object.username);
                     this.fireEvent('ready',r.object);
                     MODx.fireEvent('ready');
                 },scope:this}
