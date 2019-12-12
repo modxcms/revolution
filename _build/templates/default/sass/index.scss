@@ -593,7 +593,7 @@ a.x-grid-link:focus {
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
     margin: 0;
 
-    #modx-resource-breadcrumbs {
+    .modx-header-breadcrumbs {
       margin-top: 1.25rem;
       font-weight: bold;
       box-sizing: border-box;
@@ -605,7 +605,7 @@ a.x-grid-link:focus {
       }
     }
 
-    #modx-resource-breadcrumbs {
+    .modx-header-breadcrumbs {
       width: 100% !important;
     }
   }
@@ -1481,13 +1481,13 @@ iframe[classname="x-hidden"] {
 }
 
 /* New Header */
-#modx-resource-breadcrumbs {
+.modx-header-breadcrumbs {
   .breadcrumbs {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
 
-    #modx-resource-header {
+    h2 {
       order: 1;
       font: normal 20px $bodyfonts;
       color: $darkestGray;

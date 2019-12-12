@@ -457,11 +457,12 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-header'
             ,xtype: 'modx-header'
         };
-        var items = [];
+
         // Add breadcrumbs with parents
         if (config.record['parents'] && config.record['parents'].length) {
             var parents = config.record['parents'];
             var trail = [];
+
             for (var i = 0; i < parents.length; i++) {
                 if (parents[i].id) {
                     if (parents[i].parent && i == 1) {
@@ -492,28 +493,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     });
                 }
             }
-            items.push({
-                xtype: 'modx-breadcrumbs-panel'
-                ,id: 'modx-resource-breadcrumbs'
-                ,desc: ''
-                ,bdMarkup: '<ul><tpl for="trail"><li>' +
-                        '<tpl if="href"><a href="{href}" class="{cls}">{text}</a></tpl>' +
-                        '<tpl if="!href">{text}</tpl>' +
-                    '</li></tpl></ul>'
-                ,init: function() {
-                    this.tpl = new Ext.XTemplate(this.bdMarkup, {compiled: true});
-                }
-                ,listeners: {
-                    afterrender: function() {
-                        this.tpl.overwrite(this.body, {trail: trail});
-                    }
-                }, items: [header]
-            });
-        } else {
-            items.push(header);
+
+            return MODx.util.getHeaderBreadCrumbs(header, trail);
         }
 
-        return items;
+        return header;
     }
 
     ,getTemplateVariablesPanel: function(config) {

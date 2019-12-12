@@ -613,8 +613,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
 MODx.LayoutMgr = function() {
     var _activeMenu = 'menu0';
     return {
-        loadPage: function(action, parameters) {
-            // Handles url, passed as first argument
+        getPage: function(action, parameters) {
             var parts = [];
             if (action) {
                 if (isNaN(parseInt(action)) && (action.substr(0,1) == '?' || (action.substr(0, "index.php?".length) == 'index.php?'))) {
@@ -624,9 +623,21 @@ MODx.LayoutMgr = function() {
                 }
             }
             if (parameters) {
-                parts.push(parameters);
+                if (typeof parameters === 'object') {
+                    for (var name in parameters) {
+                        if (parameters.hasOwnProperty(name)) {
+                            parts.push(name + '=' + parameters[name]);
+                        }
+                    }
+                } else {
+                    parts.push(parameters);
+                }
             }
-            var url = parts.join('&');
+            return parts.join('&');
+        },
+        loadPage: function(action, parameters) {
+            // Handles url, passed as first argument
+            var url = MODx.LayoutMgr.getPage(action, parameters);
             if (MODx.fireEvent('beforeLoadPage', url)) {
                 var e = window.event;
 
@@ -655,6 +666,7 @@ MODx.LayoutMgr = function() {
 }();
 
 /* aliases for quicker reference */
+MODx.getPage = MODx.LayoutMgr.getPage;
 MODx.loadPage = MODx.LayoutMgr.loadPage;
 MODx.showDashboard = MODx.LayoutMgr.showDashboard;
 MODx.hideDashboard = MODx.LayoutMgr.hideDashboard;

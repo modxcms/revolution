@@ -8,11 +8,7 @@ MODx.panel.Source = function(config) {
         }
         ,defaults: { collapsible: false ,autoHeight: true }
 		,cls: 'container form-with-labels'
-        ,items: [{
-             html: _('source')
-            ,id: 'modx-source-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -162,7 +158,7 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
         }
         this.getForm().setValues(this.config.record);
 		/* The component rendering is deferred since we are not using renderTo */
-        Ext.getCmp('modx-source-header').html = _('source')+': '+this.config.record.name;
+        Ext.getCmp('modx-source-header').html = this.config.record.name;
 
         var g,d;
         if (!Ext.isEmpty(this.config.record.properties)) {
@@ -210,6 +206,13 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
             var ag = Ext.getCmp('modx-grid-source-access');
             if (ag) { ag.getStore().commitChanges(); }
         }
+    }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-source-header', [{
+            text: _('sources'),
+            href: MODx.getPage('source')
+        }]);
     }
 });
 Ext.reg('modx-panel-source',MODx.panel.Source);
