@@ -274,7 +274,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         /* replace one or more instances of word delimiters with word delimiter */
         $delimiterTokens = [];
         for ($d = 0; $d < strlen($delimiters); $d++) {
-            $delimiterTokens[] = preg_quote($delimiters{$d}, '/');
+            $delimiterTokens[] = preg_quote($delimiters[$d], '/');
         }
         if (!empty($delimiterTokens)) {
             $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
