@@ -494,7 +494,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,autoCreate: {tag: "input", type: "text", size: "20", autocomplete: "off", msgTarget: "under"}
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    Ext.getCmp('modx-user-header').getEl().update(_('user')+': '+Ext.util.Format.htmlEncode(f.getValue()));
+                    Ext.getCmp('modx-user-header').getEl().update(Ext.util.Format.htmlEncode(f.getValue()));
                 }}
             }
         },{

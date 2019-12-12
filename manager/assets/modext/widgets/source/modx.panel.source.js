@@ -64,7 +64,7 @@ MODx.panel.Source = function(config) {
                                 ,anchor: '100%'
                                 ,listeners: {
                                     'keyup': {scope:this,fn:function(f,e) {
-                                        Ext.getCmp('modx-source-header').getEl().update(_('source')+': '+f.getValue());
+                                        Ext.getCmp('modx-source-header').getEl().update(f.getValue());
                                     }}
                                 }
                             },{
