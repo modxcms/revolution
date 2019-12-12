@@ -286,7 +286,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         /* replace one or more instances of word delimiters with word delimiter */
         $delimiterTokens = array();
         for ($d = 0; $d < strlen($delimiters); $d++) {
-            $delimiterTokens[] = preg_quote($delimiters{$d}, '/');
+            $delimiterTokens[] = preg_quote($delimiters[$d], '/');
         }
         if (!empty($delimiterTokens)) {
             $delimiterPattern = '/[' . implode('|', $delimiterTokens) . ']+/';
@@ -462,7 +462,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         # 3. Parse uncacheable elements.
         $this->parseContent();
     }
-    
+
     /**
      * Process a resource, transforming source content to output.
      *
@@ -524,7 +524,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $this->_jscripts       = $this->xpdo->jscripts;
         $this->_sjscripts      = $this->xpdo->sjscripts;
         $this->_loadedjscripts = $this->xpdo->loadedjscripts;
-    }    
+    }
     /**
      * Gets the raw, unprocessed source content for a resource.
      *

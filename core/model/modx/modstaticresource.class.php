@@ -203,7 +203,7 @@ class modStaticResource extends modResource implements modResourceInterface {
      */
     protected function _bytes($value) {
         $value = trim($value);
-        $modifier = strtolower($value{strlen($value)-1});
+        $modifier = strtolower($value[strlen($value)-1]);
         switch($modifier) {
             case 'g':
                 $value *= 1024;
