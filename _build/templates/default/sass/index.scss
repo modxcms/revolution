@@ -1491,7 +1491,7 @@ iframe[classname="x-hidden"] {
       order: 1;
       font: normal 20px $bodyfonts;
       color: $darkestGray;
-      margin: 0;
+      margin: 0 !important;
       padding-left: 0;
 
       @include grid-media($desktop) {
