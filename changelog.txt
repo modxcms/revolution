@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+- Fix PHP 7.4 deprecation warnings for array and string offset access with curly braces
+
 xPDO 2.7.0-pl (May 2, 2018)
 ====================================
 - Fix xPDOIterator failure when fetch returns null due to object hydration
