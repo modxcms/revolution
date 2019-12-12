@@ -163,7 +163,7 @@ class xPDOCacheManager {
                     break;
                 }
                 if ($cachePath) {
-                    if ($cachePath{strlen($cachePath) - 1} != '/') $cachePath .= '/';
+                    if ($cachePath[strlen($cachePath) - 1] != '/') $cachePath .= '/';
                     $cachePath .= '.xpdo-cache';
                 }
             }
@@ -177,7 +177,7 @@ class xPDOCacheManager {
             $perms = $this->getOption('new_folder_permissions', null, $this->getFolderPermissions());
             if (is_string($perms)) $perms = octdec($perms);
             if (@ $this->writeTree($cachePath, $perms)) {
-                if ($cachePath{strlen($cachePath) - 1} != '/') $cachePath .= '/';
+                if ($cachePath[strlen($cachePath) - 1] != '/') $cachePath .= '/';
                 if (!is_writeable($cachePath)) {
                     @ chmod($cachePath, $perms);
                 }
@@ -331,7 +331,7 @@ class xPDOCacheManager {
             $mode = $this->getOption('new_folder_permissions', $options, $this->getFolderPermissions());
             if (is_string($mode)) $mode = octdec($mode);
             $dirname= strtr(trim($dirname), '\\', '/');
-            if ($dirname{strlen($dirname) - 1} == '/') $dirname = substr($dirname, 0, strlen($dirname) - 1);
+            if ($dirname[strlen($dirname) - 1] == '/') $dirname = substr($dirname, 0, strlen($dirname) - 1);
             if (is_dir($dirname) || (is_writable(dirname($dirname)) && @mkdir($dirname, $mode))) {
                 $written= true;
             } elseif (!$this->writeTree(dirname($dirname), $options)) {
@@ -404,8 +404,8 @@ class xPDOCacheManager {
         $copied= false;
         $source= strtr($source, '\\', '/');
         $target= strtr($target, '\\', '/');
-        if ($source{strlen($source) - 1} == '/') $source = substr($source, 0, strlen($source) - 1);
-        if ($target{strlen($target) - 1} == '/') $target = substr($target, 0, strlen($target) - 1);
+        if ($source[strlen($source) - 1] == '/') $source = substr($source, 0, strlen($source) - 1);
+        if ($target[strlen($target) - 1] == '/') $target = substr($target, 0, strlen($target) - 1);
         if (is_dir($source . '/')) {
             if (!is_array($options)) $options = is_scalar($options) && !is_bool($options) ? array('new_folder_permissions' => $options) : array();
             if (func_num_args() === 4) $options['new_file_permissions'] = func_get_arg(3);
