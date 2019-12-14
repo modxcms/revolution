@@ -13,7 +13,6 @@ namespace MODX\Revolution\Mail;
 
 use Exception;
 use MODX\Revolution\modX;
-use Pelago\Emogrifier;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
@@ -219,12 +218,6 @@ class modPHPMailer extends modMail
 
         $sent = false;
         try {
-            if (strpos($this->mailer->ContentType, 'html') !== false) {
-                if (!empty($this->mailer->Body)) {
-                    $emogrifier = new Emogrifier($this->mailer->Body);
-                    $this->mailer->Body = $emogrifier->emogrify();
-                }
-            }
             $sent = $this->mailer->send();
         } catch (Exception $e) {
             $this->error = $this->modx->getService('error.modError');
