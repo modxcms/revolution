@@ -47,6 +47,7 @@ $fa-css-prefix: fa;
 @import "dashboard";
 @import "help";
 @import "trash";
+@import "dark-theme";
 
 .icon {
   @extend %pseudo-font;
