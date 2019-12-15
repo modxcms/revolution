@@ -15,7 +15,6 @@ class modResource extends \MODX\Revolution\modResource
         'fields' => 
         array (
             'type' => 'document',
-            'contentType' => 'text/html',
             'pagetitle' => '',
             'longtitle' => '',
             'description' => '',
@@ -43,9 +42,6 @@ class modResource extends \MODX\Revolution\modResource
             'publishedon' => 0,
             'publishedby' => 0,
             'menutitle' => '',
-            'donthit' => 0,
-            'privateweb' => 0,
-            'privatemgr' => 0,
             'content_dispo' => 0,
             'hidemenu' => 0,
             'class_key' => 'MODX\\Revolution\\modDocument',
@@ -67,14 +63,6 @@ class modResource extends \MODX\Revolution\modResource
                 'phptype' => 'string',
                 'null' => false,
                 'default' => 'document',
-            ),
-            'contentType' => 
-            array (
-                'dbtype' => 'varchar',
-                'precision' => '50',
-                'phptype' => 'string',
-                'null' => false,
-                'default' => 'text/html',
             ),
             'pagetitle' => 
             array (
@@ -311,33 +299,6 @@ class modResource extends \MODX\Revolution\modResource
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
-            ),
-            'donthit' => 
-            array (
-                'dbtype' => 'tinyint',
-                'precision' => '1',
-                'attributes' => 'unsigned',
-                'phptype' => 'boolean',
-                'null' => false,
-                'default' => 0,
-            ),
-            'privateweb' => 
-            array (
-                'dbtype' => 'tinyint',
-                'precision' => '1',
-                'attributes' => 'unsigned',
-                'phptype' => 'boolean',
-                'null' => false,
-                'default' => 0,
-            ),
-            'privatemgr' => 
-            array (
-                'dbtype' => 'tinyint',
-                'precision' => '1',
-                'attributes' => 'unsigned',
-                'phptype' => 'boolean',
-                'null' => false,
-                'default' => 0,
             ),
             'content_dispo' => 
             array (
