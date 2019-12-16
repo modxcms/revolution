@@ -52,7 +52,7 @@
         "smarty/smarty": "^3.1",
         "james-heinrich/phpthumb": "^1.7",
         "erusev/parsedown": "^1.7",
-        "pelago/emogrifier": "^2.0",
+        "inlinestyle/inlinestyle": "^1.2",
         "simplepie/simplepie": "^1.5",
         "ext-curl": "*",
         "ext-dom": "*",
