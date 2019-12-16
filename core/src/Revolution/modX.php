@@ -14,7 +14,7 @@ namespace MODX\Revolution;
  * This is the main file to include in your scripts to use MODX.
  */
 if (!defined('MODX_CORE_PATH')) {
-    define('MODX_CORE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
+    define('MODX_CORE_PATH', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
 }
 
 if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
