@@ -11,6 +11,10 @@ class modSession extends \MODX\Revolution\modSession
         'version' => '3.0',
         'table' => 'session',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'id' => '',

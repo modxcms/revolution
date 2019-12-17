@@ -11,6 +11,10 @@ class modAccessResource extends \MODX\Revolution\modAccessResource
         'version' => '3.0',
         'table' => 'access_resources',
         'extends' => 'MODX\\Revolution\\modAccess',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'context_key' => '',

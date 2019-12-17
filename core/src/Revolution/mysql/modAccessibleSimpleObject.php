@@ -10,6 +10,10 @@ class modAccessibleSimpleObject extends \MODX\Revolution\modAccessibleSimpleObje
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'MODX\\Revolution\\modAccessibleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'id' => NULL,

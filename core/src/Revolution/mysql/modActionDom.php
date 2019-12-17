@@ -11,6 +11,10 @@ class modActionDom extends \MODX\Revolution\modActionDom
         'version' => '3.0',
         'table' => 'actiondom',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'set' => 0,

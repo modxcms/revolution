@@ -11,6 +11,10 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
         'version' => '3.0',
         'table' => 'fc_sets',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'profile' => 0,

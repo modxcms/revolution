@@ -11,6 +11,10 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
         'version' => '3.0',
         'table' => 'membergroup_names',
         'extends' => 'MODX\\Revolution\\modPrincipal',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

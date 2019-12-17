@@ -12,6 +12,10 @@ class modContext extends \MODX\Revolution\modContext
         'version' => '3.0',
         'table' => 'context',
         'extends' => 'MODX\\Revolution\\modAccessibleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'key' => NULL,

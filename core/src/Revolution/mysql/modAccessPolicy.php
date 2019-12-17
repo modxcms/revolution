@@ -11,6 +11,10 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
         'version' => '3.0',
         'table' => 'access_policies',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => NULL,

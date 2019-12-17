@@ -11,6 +11,10 @@ class modSnippet extends \MODX\Revolution\modSnippet
         'version' => '3.0',
         'table' => 'site_snippets',
         'extends' => 'MODX\\Revolution\\modScript',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'cache_type' => 0,

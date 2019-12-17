@@ -11,6 +11,10 @@ class modActionField extends \MODX\Revolution\modActionField
         'version' => '3.0',
         'table' => 'actions_fields',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'action' => '',

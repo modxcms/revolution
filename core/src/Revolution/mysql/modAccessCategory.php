@@ -11,6 +11,10 @@ class modAccessCategory extends \MODX\Revolution\modAccessCategory
         'version' => '3.0',
         'table' => 'access_category',
         'extends' => 'MODX\\Revolution\\modAccess',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'context_key' => '',

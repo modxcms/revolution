@@ -11,6 +11,10 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
         'version' => '3.0',
         'table' => 'transport_providers',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => NULL,
@@ -195,4 +199,5 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
             ),
         ),
     );
+
 }

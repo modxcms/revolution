@@ -11,6 +11,10 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
         'version' => '3.0',
         'table' => 'user_group_roles',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => NULL,

@@ -11,6 +11,10 @@ class modResourceGroupResource extends \MODX\Revolution\modResourceGroupResource
         'version' => '3.0',
         'table' => 'document_groups',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'document_group' => 0,

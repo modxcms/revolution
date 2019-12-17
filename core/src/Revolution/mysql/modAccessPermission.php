@@ -11,6 +11,10 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
         'version' => '3.0',
         'table' => 'access_permissions',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'template' => 0,

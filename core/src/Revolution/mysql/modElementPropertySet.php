@@ -11,6 +11,10 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
         'version' => '3.0',
         'table' => 'element_property_sets',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'element' => 0,

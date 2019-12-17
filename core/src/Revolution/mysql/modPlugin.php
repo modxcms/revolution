@@ -11,6 +11,10 @@ class modPlugin extends \MODX\Revolution\modPlugin
         'version' => '3.0',
         'table' => 'site_plugins',
         'extends' => 'MODX\\Revolution\\modScript',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'cache_type' => 0,

@@ -9,6 +9,10 @@ class modTemplate extends \MODX\Revolution\modTemplate
         'version' => '3.0',
         'table' => 'site_templates',
         'extends' => 'MODX\\Revolution\\modElement',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'templatename' => '',

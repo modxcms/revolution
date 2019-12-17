@@ -11,6 +11,10 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
         'version' => '3.0',
         'table' => 'site_tmplvar_templates',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'tmplvarid' => 0,

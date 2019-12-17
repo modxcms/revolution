@@ -11,6 +11,10 @@ class modAccessMediaSource extends \MODX\Revolution\Sources\modAccessMediaSource
         'version' => '3.0',
         'table' => 'access_media_source',
         'extends' => 'MODX\\Revolution\\modAccess',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'context_key' => '',

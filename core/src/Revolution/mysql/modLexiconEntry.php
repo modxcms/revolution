@@ -11,6 +11,10 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
         'version' => '3.0',
         'table' => 'lexicon_entries',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

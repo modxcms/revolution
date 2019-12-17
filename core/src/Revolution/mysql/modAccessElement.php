@@ -11,6 +11,10 @@ class modAccessElement extends \MODX\Revolution\modAccessElement
         'version' => '3.0',
         'table' => 'access_elements',
         'extends' => 'MODX\\Revolution\\modAccess',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'context_key' => '',

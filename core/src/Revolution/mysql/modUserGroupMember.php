@@ -11,6 +11,10 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
         'version' => '3.0',
         'table' => 'member_groups',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'user_group' => 0,

@@ -11,6 +11,10 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
         'version' => '3.0',
         'table' => 'active_users',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'internalKey' => 0,

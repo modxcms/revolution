@@ -5,12 +5,17 @@ use MODX\Revolution\modX;
 
 class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
 {
+
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\Transport',
         'version' => '3.0',
         'table' => 'transport_packages',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' =>
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
+        'fields' => 
         array (
             'signature' => NULL,
             'created' => NULL,
@@ -31,9 +36,9 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
             'release' => '',
             'release_index' => 0,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'signature' =>
+            'signature' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -41,24 +46,24 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'null' => false,
                 'index' => 'pk',
             ),
-            'created' =>
+            'created' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => false,
             ),
-            'updated' =>
+            'updated' => 
             array (
                 'dbtype' => 'timestamp',
                 'phptype' => 'timestamp',
                 'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
-            'installed' =>
+            'installed' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
             ),
-            'state' =>
+            'state' => 
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -67,7 +72,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'null' => false,
                 'default' => 1,
             ),
-            'workspace' =>
+            'workspace' => 
             array (
                 'dbtype' => 'integer',
                 'precision' => '10',
@@ -77,7 +82,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'default' => 0,
                 'index' => 'fk',
             ),
-            'provider' =>
+            'provider' => 
             array (
                 'dbtype' => 'integer',
                 'precision' => '10',
@@ -87,7 +92,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'default' => 0,
                 'index' => 'fk',
             ),
-            'disabled' =>
+            'disabled' => 
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -97,22 +102,22 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'default' => 0,
                 'index' => 'index',
             ),
-            'source' =>
+            'source' => 
             array (
                 'dbtype' => 'tinytext',
                 'phptype' => 'string',
             ),
-            'manifest' =>
+            'manifest' => 
             array (
                 'dbtype' => 'text',
                 'phptype' => 'array',
             ),
-            'attributes' =>
+            'attributes' => 
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'array',
             ),
-            'package_name' =>
+            'package_name' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -120,12 +125,12 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'null' => false,
                 'index' => 'index',
             ),
-            'metadata' =>
+            'metadata' => 
             array (
                 'dbtype' => 'text',
                 'phptype' => 'array',
             ),
-            'version_major' =>
+            'version_major' => 
             array (
                 'dbtype' => 'smallint',
                 'attributes' => 'unsigned',
@@ -134,7 +139,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'default' => 0,
                 'index' => 'index',
             ),
-            'version_minor' =>
+            'version_minor' => 
             array (
                 'dbtype' => 'smallint',
                 'attributes' => 'unsigned',
@@ -143,7 +148,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'default' => 0,
                 'index' => 'index',
             ),
-            'version_patch' =>
+            'version_patch' => 
             array (
                 'dbtype' => 'smallint',
                 'attributes' => 'unsigned',
@@ -152,7 +157,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'default' => 0,
                 'index' => 'index',
             ),
-            'release' =>
+            'release' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -161,7 +166,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'default' => '',
                 'index' => 'index',
             ),
-            'release_index' =>
+            'release_index' => 
             array (
                 'dbtype' => 'smallint',
                 'attributes' => 'unsigned',
@@ -171,17 +176,17 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'index' => 'index',
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'signature' =>
+                    'signature' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -189,15 +194,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'workspace' =>
+            'workspace' => 
             array (
                 'alias' => 'workspace',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'workspace' =>
+                    'workspace' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -205,15 +210,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'provider' =>
+            'provider' => 
             array (
                 'alias' => 'provider',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'provider' =>
+                    'provider' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -221,15 +226,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'disabled' =>
+            'disabled' => 
             array (
                 'alias' => 'disabled',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'disabled' =>
+                    'disabled' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -237,15 +242,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'package_name' =>
+            'package_name' => 
             array (
                 'alias' => 'package_name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'package_name' =>
+                    'package_name' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -253,15 +258,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'version_major' =>
+            'version_major' => 
             array (
                 'alias' => 'version_major',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'version_major' =>
+                    'version_major' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -269,15 +274,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'version_minor' =>
+            'version_minor' => 
             array (
                 'alias' => 'version_minor',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'version_minor' =>
+                    'version_minor' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -285,15 +290,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'version_patch' =>
+            'version_patch' => 
             array (
                 'alias' => 'version_patch',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'version_patch' =>
+                    'version_patch' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -301,15 +306,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'release' =>
+            'release' => 
             array (
                 'alias' => 'release',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'release' =>
+                    'release' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -317,15 +322,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                     ),
                 ),
             ),
-            'release_index' =>
+            'release_index' => 
             array (
                 'alias' => 'release_index',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'release_index' =>
+                    'release_index' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -334,9 +339,9 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'Workspace' =>
+            'Workspace' => 
             array (
                 'class' => 'MODX\\Revolution\\modWorkspace',
                 'local' => 'workspace',
@@ -344,7 +349,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Provider' =>
+            'Provider' => 
             array (
                 'class' => 'MODX\\Revolution\\Transport\\modTransportProvider',
                 'local' => 'provider',

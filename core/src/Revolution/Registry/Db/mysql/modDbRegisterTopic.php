@@ -11,6 +11,10 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
         'version' => '3.0',
         'table' => 'register_topics',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'queue' => NULL,
@@ -114,4 +118,5 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
             ),
         ),
     );
+
 }

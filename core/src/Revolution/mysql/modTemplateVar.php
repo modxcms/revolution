@@ -11,6 +11,10 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
         'version' => '3.0',
         'table' => 'site_tmplvars',
         'extends' => 'MODX\\Revolution\\modElement',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'type' => '',

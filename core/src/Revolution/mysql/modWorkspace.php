@@ -11,6 +11,10 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
         'version' => '3.0',
         'table' => 'workspaces',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

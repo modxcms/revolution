@@ -11,6 +11,10 @@ class modFormCustomizationProfileUserGroup extends \MODX\Revolution\modFormCusto
         'version' => '3.0',
         'table' => 'fc_profiles_usergroups',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'usergroup' => 0,
