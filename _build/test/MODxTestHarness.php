@@ -61,8 +61,12 @@ class MODxTestHarness {
             $driver= self::$properties['xpdo_driver'];
             switch ($class) {
                 case 'modX':
+                case modX::class:
                     if (!defined('MODX_REQP')) {
                         define('MODX_REQP',false);
+                    }
+                    if (!defined('MODX_CORE_PATH')) {
+                        define('MODX_CORE_PATH', array_key_exists('core_path', self::$properties) ? self::$properties['core_path'] : dirname(__DIR__, 2) . '/core/');
                     }
                     if (!defined('MODX_CONFIG_KEY')) {
                         define('MODX_CONFIG_KEY', array_key_exists('config_key', self::$properties) ? self::$properties['config_key'] : 'test');
@@ -92,6 +96,7 @@ class MODxTestHarness {
                     }
                     break;
                 case 'xPDO':
+                case xPDO::class:
                     $fixture = new xPDO(
                         self::$properties["{$driver}_string_dsn_test"],
                         self::$properties["{$driver}_string_username"],

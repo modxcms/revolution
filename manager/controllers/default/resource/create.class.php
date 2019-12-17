@@ -13,6 +13,7 @@ use MODX\Revolution\modFormCustomizationProfile;
 use MODX\Revolution\modFormCustomizationProfileUserGroup;
 use MODX\Revolution\modFormCustomizationSet;
 use MODX\Revolution\modResource;
+use xPDO\Om\xPDOQuery;
 
 require_once dirname(__FILE__) . '/resource.class.php';
 
