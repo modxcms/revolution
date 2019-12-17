@@ -75,10 +75,7 @@
     "autoload": {
         "psr-4": {
             "MODX\\": "core/src/"
-        },
-        "files": [
-          "core/include/deprecated.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

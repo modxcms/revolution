@@ -8,17 +8,15 @@
  * files found in the top-level directory of this distribution.
  */
 
-use MODX\Revolution\modX;
-use xPDO\xPDO;
-
 /**
  * Initializes the modx manager
  *
  * @package modx
  * @subpackage manager
  */
-@include dirname(__FILE__) . '/config.core.php';
+@include(dirname(__FILE__) . '/config.core.php');
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
+if (!defined('MODX_CONFIG_KEY')) define('MODX_CONFIG_KEY', 'config');
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
@@ -43,9 +41,9 @@ if (!(require_once MODX_CORE_PATH . 'vendor/autoload.php')) {
     die('Site temporarily unavailable!');
 }
 
-/* @var modX $modx create the modX object */
-$modx= new modX('', array(xPDO::OPT_CONN_INIT => array(xPDO::OPT_CONN_MUTABLE => true)));
-if (!is_object($modx) || !($modx instanceof modX)) {
+/* @var \MODX\Revolution\modX $modx create the modX object */
+$modx= new \MODX\Revolution\modX('', array(\xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true)));
+if (!is_object($modx) || !($modx instanceof \MODX\Revolution\modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
