@@ -27,6 +27,7 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,

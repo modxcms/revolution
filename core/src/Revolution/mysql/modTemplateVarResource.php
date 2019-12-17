@@ -23,6 +23,7 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
@@ -32,6 +33,7 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
+                'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
