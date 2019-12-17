@@ -40,6 +40,14 @@
     border-bottom: 1px solid #313452 !important;
   }
 
+  .desc-under {
+    color: #b1b1b5 !important;
+  }
+
+  .x-grid-empty {
+    color: #b1b1b5 !important;
+  }
+
   .x-grid3 {
     background-color: transparent;
     border: 1px solid #313452 !important;
@@ -61,6 +69,11 @@
     }
   }
 
+  .x-grid3-row-checker:before,
+  .x-grid3-hd-checker:not(.x-grid3-hd-inner):before {
+    color: #b1b1b5 !important;
+  }
+
   td.x-grid3-hd-over .x-grid3-hd-inner,
   td.sort-desc .x-grid3-hd-inner,
   td.sort-asc .x-grid3-hd-inner,
@@ -73,8 +86,33 @@
     background-color: #26293b !important;
   }
 
-  .x-panel-body-noheader .x-grid3-body {
-    background-color: #26293b !important;
+  .x-grid3-check-col:before,
+  .x-grid3-check-col-on:before {
+    color: #b1b1b5 !important;
+  }
+
+  .x-panel-body-noheader {
+    .x-grid3-row-alt {
+      background: transparent !important;
+      border-bottom: 1px solid #313452 !important;
+      border-top: 1px solid #313452 !important;
+    }
+
+    .x-grid3-body {
+      background-color: #26293b !important;
+    }
+  }
+
+  .x-menu-list {
+    background: #26293b !important;
+
+    li.x-menu-item-active {
+      background-color: transparent;
+    }
+  }
+
+  .x-menu-floating {
+    border-color: #313452 !important;
   }
 
   .x-toolbar .x-form-field-trigger-wrap {
@@ -108,6 +146,14 @@
   .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded span,
   .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded>.icon {
     color: #b1b1b5 !important
+  }
+
+  .tree-pseudoroot-node.x-tree-node-el.x-tree-node-collapsed {
+    border-bottom: 1px solid #313452 !important;
+  }
+
+  .tree-pseudoroot-node.x-tree-node-el>.icon {
+    color: #b1b1b5 !important;
   }
 
   #modx-container {
@@ -452,7 +498,7 @@
       color: #b1b1b5 !important;
     }
 
-    .x-window .x-window-bc .x-window-footer {
+    .x-window-bc .x-window-footer {
       background-color: #26293b !important;
       border-top: 1px solid #313452 !important;
     }
@@ -474,10 +520,6 @@
   }
 
   #modx-resource-tabs {
-    ul.x-tab-strip li.x-tab-strip-active {
-      background: #313452 !important;
-    }
-
     .x-panel-header {
       border-bottom: 1px solid #313452 !important;
       color: #b1b1b5 !important;
@@ -495,5 +537,16 @@
       height: 1.6em;
       background: #b1b1b5;
     }
+  }
+
+  // Elements
+  #modx-content {
+    ul.x-tab-strip li.x-tab-strip-active {
+      background: #313452 !important;
+    }
+  }
+
+  .ext-el-mask {
+    background-color: transparent !important;
   }
 }
