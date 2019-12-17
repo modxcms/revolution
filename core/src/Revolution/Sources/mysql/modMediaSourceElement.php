@@ -12,6 +12,10 @@ class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceEleme
         'version' => '3.0',
         'table' => 'media_sources_elements',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'source' => 0,

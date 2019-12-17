@@ -11,6 +11,10 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
         'version' => '3.0',
         'table' => 'user_attributes',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'internalKey' => NULL,

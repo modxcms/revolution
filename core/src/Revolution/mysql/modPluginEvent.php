@@ -11,6 +11,10 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
         'version' => '3.0',
         'table' => 'site_plugin_events',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'pluginid' => 0,

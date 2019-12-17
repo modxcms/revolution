@@ -11,6 +11,10 @@ class modClassMap extends \MODX\Revolution\modClassMap
         'version' => '3.0',
         'table' => 'class_map',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'class' => '',

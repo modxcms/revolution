@@ -11,6 +11,10 @@ class modScript extends \MODX\Revolution\modScript
         'version' => '3.0',
         'table' => 'site_script',
         'extends' => 'MODX\\Revolution\\modElement',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

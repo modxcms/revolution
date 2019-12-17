@@ -11,6 +11,10 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
         'version' => '3.0',
         'table' => 'system_settings',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'key' => '',

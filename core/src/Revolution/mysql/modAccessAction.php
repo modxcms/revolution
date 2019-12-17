@@ -11,6 +11,10 @@ class modAccessAction extends \MODX\Revolution\modAccessAction
         'version' => '3.0',
         'table' => 'access_actions',
         'extends' => 'MODX\\Revolution\\modAccess',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
         ),

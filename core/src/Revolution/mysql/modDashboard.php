@@ -11,6 +11,10 @@ class modDashboard extends \MODX\Revolution\modDashboard
         'version' => '3.0',
         'table' => 'dashboard',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

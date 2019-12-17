@@ -11,6 +11,10 @@ class modContextResource extends \MODX\Revolution\modContextResource
         'version' => '3.0',
         'table' => 'context_resource',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'context_key' => NULL,

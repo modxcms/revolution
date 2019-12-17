@@ -11,6 +11,10 @@ class modNamespace extends \MODX\Revolution\modNamespace
         'version' => '3.0',
         'table' => 'namespaces',
         'extends' => 'MODX\\Revolution\\modAccessibleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

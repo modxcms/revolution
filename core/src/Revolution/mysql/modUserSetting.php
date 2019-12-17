@@ -11,6 +11,10 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
         'version' => '3.0',
         'table' => 'user_settings',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'user' => 0,

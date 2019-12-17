@@ -11,6 +11,10 @@ class modContentType extends \MODX\Revolution\modContentType
         'version' => '3.0',
         'table' => 'content_type',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => NULL,

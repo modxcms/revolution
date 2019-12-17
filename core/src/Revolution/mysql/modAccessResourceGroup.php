@@ -11,6 +11,10 @@ class modAccessResourceGroup extends \MODX\Revolution\modAccessResourceGroup
         'version' => '3.0',
         'table' => 'access_resource_groups',
         'extends' => 'MODX\\Revolution\\modAccess',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'context_key' => '',

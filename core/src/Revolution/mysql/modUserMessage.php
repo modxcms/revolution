@@ -11,6 +11,10 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
         'version' => '3.0',
         'table' => 'user_messages',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'type' => '',

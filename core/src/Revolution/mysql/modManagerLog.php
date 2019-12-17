@@ -11,6 +11,10 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
         'version' => '3.0',
         'table' => 'manager_log',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'user' => 0,

@@ -11,6 +11,10 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
         'version' => '3.0',
         'table' => 'context_setting',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'context_key' => NULL,

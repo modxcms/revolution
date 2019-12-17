@@ -11,6 +11,10 @@ class modAction extends \MODX\Revolution\modAction
         'version' => '3.0',
         'table' => 'actions',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'namespace' => 'core',

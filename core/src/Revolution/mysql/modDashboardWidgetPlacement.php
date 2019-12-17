@@ -11,6 +11,10 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
         'version' => '3.0',
         'table' => 'dashboard_widget_placement',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'user' => 0,

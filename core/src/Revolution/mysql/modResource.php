@@ -12,6 +12,10 @@ class modResource extends \MODX\Revolution\modResource
         'table' => 'site_content',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
         'inherit' => 'single',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'type' => 'document',

@@ -11,6 +11,10 @@ class modElement extends \MODX\Revolution\modElement
         'version' => '3.0',
         'table' => 'site_element',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'source' => 0,

@@ -11,6 +11,10 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
         'version' => '3.0',
         'table' => 'user_group_settings',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'group' => 0,

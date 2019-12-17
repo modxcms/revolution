@@ -11,6 +11,10 @@ class modUser extends \MODX\Revolution\modUser
         'version' => '3.0',
         'table' => 'users',
         'extends' => 'MODX\\Revolution\\modPrincipal',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'username' => '',

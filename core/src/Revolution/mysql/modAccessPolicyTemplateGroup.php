@@ -11,6 +11,10 @@ class modAccessPolicyTemplateGroup extends \MODX\Revolution\modAccessPolicyTempl
         'version' => '3.0',
         'table' => 'access_policy_template_groups',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

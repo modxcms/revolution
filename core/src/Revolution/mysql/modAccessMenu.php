@@ -11,6 +11,10 @@ class modAccessMenu extends \MODX\Revolution\modAccessMenu
         'version' => '3.0',
         'table' => 'access_menus',
         'extends' => 'MODX\\Revolution\\modAccess',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
         ),

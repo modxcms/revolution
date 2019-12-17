@@ -11,6 +11,10 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
         'version' => '3.0',
         'table' => 'extension_packages',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'namespace' => 'core',

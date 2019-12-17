@@ -11,6 +11,10 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
         'version' => '3.0',
         'table' => 'dashboard_widget',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

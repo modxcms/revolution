@@ -11,6 +11,10 @@ class modDbRegisterQueue extends \MODX\Revolution\Registry\Db\modDbRegisterQueue
         'version' => '3.0',
         'table' => 'register_queues',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => NULL,
@@ -63,4 +67,5 @@ class modDbRegisterQueue extends \MODX\Revolution\Registry\Db\modDbRegisterQueue
             ),
         ),
     );
+
 }

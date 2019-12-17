@@ -11,6 +11,10 @@ class modCategory extends \MODX\Revolution\modCategory
         'version' => '3.0',
         'table' => 'categories',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'parent' => 0,

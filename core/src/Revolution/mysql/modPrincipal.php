@@ -10,6 +10,10 @@ class modPrincipal extends \MODX\Revolution\modPrincipal
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
         ),

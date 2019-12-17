@@ -11,6 +11,10 @@ class modChunk extends \MODX\Revolution\modChunk
         'version' => '3.0',
         'table' => 'site_htmlsnippets',
         'extends' => 'MODX\\Revolution\\modElement',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

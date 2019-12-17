@@ -11,6 +11,10 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
         'version' => '3.0',
         'table' => 'documentgroup_names',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'name' => '',

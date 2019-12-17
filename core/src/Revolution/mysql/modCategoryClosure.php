@@ -11,6 +11,10 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
         'version' => '3.0',
         'table' => 'categories_closure',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'ancestor' => 0,

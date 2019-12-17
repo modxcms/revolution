@@ -11,6 +11,10 @@ class modMediaSourceContext extends \MODX\Revolution\Sources\modMediaSourceConte
         'version' => '3.0',
         'table' => 'media_sources_contexts',
         'extends' => 'xPDO\\Om\\xPDOObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'source' => 0,

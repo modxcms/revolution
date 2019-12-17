@@ -11,6 +11,10 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
         'version' => '3.0',
         'table' => 'site_tmplvar_access',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
+        'tableMeta' => 
+        array (
+            'engine' => 'InnoDB',
+        ),
         'fields' => 
         array (
             'tmplvarid' => 0,
