@@ -10,6 +10,8 @@
 
 use MODX\Revolution\modManagerController;
 use MODX\Revolution\modMenu;
+use xPDO\xPDO;
+use xPDO\Cache\xPDOCacheManager;
 
 /**
  * Loads the main structure

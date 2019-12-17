@@ -5,6 +5,7 @@ use MODX\Revolution\modDashboardWidgetInterface;
 use MODX\Revolution\Processors\Workspace\Packages\GetList;
 use MODX\Revolution\Smarty\modSmarty;
 use MODX\Revolution\Transport\modTransportPackage;
+use xPDO\xPDO;
 
 /**
  * @package modx
