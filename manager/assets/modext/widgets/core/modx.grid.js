@@ -164,6 +164,8 @@ MODx.grid.Grid = function(config) {
     });
     this.getStore().on('exception',this.onStoreException,this);
     this.config = config;
+
+    this.on('click', this.onClickHandler, this);
 };
 Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     windows: {}
@@ -690,7 +692,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         return [];
     }
 
-    ,onClick: function(e) {
+    ,onClickHandler: function(e) {
         var target = e.getTarget();
         if (!target.classList.contains('x-grid-action')) return;
         if (!target.dataset.action) return;
