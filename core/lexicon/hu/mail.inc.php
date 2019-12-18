@@ -7,6 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['mail_err_address_ns'] = 'Meg kell adnia egy e-mail címet.';
-$_lang['mail_err_derive_getmailer'] = 'Attempt to call abstract function _getMailer() in modMail class. You must implement this function in a derivative of modMail.';
+$_lang['mail_err_derive_getmailer'] = 'A _getMailer() absztrakt függvény hívása történt a modMail osztályban. Létre kell hoznia ezt a függvényt a modMail egy származékában.';
 $_lang['mail_err_attr_nv'] = '[[+attr]] érvénytelen PHPMailer attribútum, ezért figyelmen kívül hagyásra kerül.';
-$_lang['mail_err_unset_spec'] = 'modPHPMailer does not support unsetting specific addresses. Use reset() to clear all recipients and add back the ones you want to send to.';
+$_lang['mail_err_unset_spec'] = 'A modPHPMailer nem támogatja egyes címek üresre állítását. Használja a reset() függvényt az összes címzett törlésére, majd adja hozzá azokat, amelyekre el akarja küldeni.';
