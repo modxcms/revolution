@@ -5,7 +5,7 @@
 
   /* the main container + bg behind the tabs */
   .x-tab-panel-noborder {
-    margin: 0;
+    margin: 0 12px;
   }
 
   .x-tab-panel-bwrap {
@@ -46,10 +46,6 @@
       width: 100% !important;
       height: auto !important;
     }
-  }
-
-  & .x-tab-panel-noborder {
-    margin: 0;
   }
 
   /* the toolbars just below the tabs */
