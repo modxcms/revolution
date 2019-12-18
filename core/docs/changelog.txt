@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fixed transparency in .png for TV [#14906]
 - Add missing unsigned attribute to integer foreign key fields in mysql schema [#14902]
 
 MODX Revolution 3.0.0-alpha1  (December 12, 2019)
