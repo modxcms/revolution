@@ -13,7 +13,7 @@ namespace MODX\Revolution\Mail;
 
 use Exception;
 use MODX\Revolution\modX;
-use Pelago\Emogrifier;
+use InlineStyle\InlineStyle;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
@@ -221,8 +221,10 @@ class modPHPMailer extends modMail
         try {
             if (strpos($this->mailer->ContentType, 'html') !== false) {
                 if (!empty($this->mailer->Body)) {
-                    $emogrifier = new Emogrifier($this->mailer->Body);
-                    $this->mailer->Body = $emogrifier->emogrify();
+                    $html = new InlineStyle($this->mailer->Body);
+                    /** @noinspection PhpParamsInspection */
+                    $html->applyStylesheet($html->extractStylesheets());
+                    $this->mailer->Body = $html->getHTML();
                 }
             }
             $sent = $this->mailer->send();
