@@ -54,6 +54,7 @@
         "erusev/parsedown": "^1.7",
         "inlinestyle/inlinestyle": "^1.2",
         "simplepie/simplepie": "^1.5",
+        "pimple/pimple": "^3.0",
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-gd": "*",
