@@ -12,6 +12,7 @@ namespace MODX\Revolution;
 
 
 use Exception;
+use MODX\Revolution\Controllers\Error;
 use MODX\Revolution\Controllers\Exceptions\AccessDeniedException;
 use MODX\Revolution\Controllers\Exceptions\NotFoundException;
 
@@ -95,7 +96,10 @@ class modManagerResponse extends modResponse
             return $this->send();
         }
         catch (NotFoundException $e) {
-            $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
+            $controller = new Error($this->modx);
+            $controller->setErrorMessage($this->modx->lexicon('action_err_ns'));
+            $controller->addError($e->getMessage());
+            $this->body = $controller->render();
             return $this->send();
         }
         catch (AccessDeniedException $e) {
@@ -103,7 +107,11 @@ class modManagerResponse extends modResponse
             if ($this->_requiresPermission) {
                 $message .= ' (' . $message . ')';
             }
-            $this->body = $this->modx->error->failure($message);
+            $controller = new Error($this->modx);
+            $controller->setErrorMessage($message);
+            $controller->addError($e->getMessage());
+
+            $this->body = $controller->render();
             return $this->send();
         }
     }
