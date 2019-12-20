@@ -171,14 +171,6 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
         ),
         'aggregates' => 
         array (
-            'Action' => 
-            array (
-                'class' => 'MODX\\Revolution\\modAction',
-                'local' => 'action',
-                'foreign' => 'id',
-                'cardinality' => 'one',
-                'owner' => 'foreign',
-            ),
             'Template' => 
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',

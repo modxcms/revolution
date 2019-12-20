@@ -263,14 +263,6 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Action' => 
-            array (
-                'class' => 'MODX\\Revolution\\modAction',
-                'local' => 'action',
-                'foreign' => 'id',
-                'cardinality' => 'one',
-                'owner' => 'foreign',
-            ),
         ),
     );
 

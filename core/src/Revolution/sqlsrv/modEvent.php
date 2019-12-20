@@ -11,15 +11,15 @@ class modEvent extends \MODX\Revolution\modEvent
         'version' => '3.0',
         'table' => 'system_eventnames',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' =>
+        'fields' => 
         array (
             'name' => NULL,
             'service' => 0,
             'groupname' => '',
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'name' =>
+            'name' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '50',
@@ -27,7 +27,7 @@ class modEvent extends \MODX\Revolution\modEvent
                 'null' => false,
                 'index' => 'pk',
             ),
-            'service' =>
+            'service' => 
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '4',
@@ -35,7 +35,7 @@ class modEvent extends \MODX\Revolution\modEvent
                 'null' => false,
                 'default' => 0,
             ),
-            'groupname' =>
+            'groupname' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '20',
@@ -44,17 +44,17 @@ class modEvent extends \MODX\Revolution\modEvent
                 'default' => '',
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'name' =>
+                    'name' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -63,9 +63,9 @@ class modEvent extends \MODX\Revolution\modEvent
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'PluginEvents' =>
+            'PluginEvents' => 
             array (
                 'class' => 'MODX\\Revolution\\modPluginEvent',
                 'local' => 'name',

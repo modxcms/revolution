@@ -12,6 +12,8 @@ namespace MODX\Revolution;
 
 
 use Exception;
+use MODX\Revolution\Controllers\Exceptions\AccessDeniedException;
+use MODX\Revolution\Controllers\Exceptions\NotFoundException;
 
 /**
  * Encapsulates an HTTP response from the MODX manager.
@@ -24,16 +26,17 @@ class modManagerResponse extends modResponse
 {
     /** @var array A cached array of the current modAction object */
     public $action = [];
-
     public $namespace = 'core';
     public $namespaces = [];
+
+    private $_requiresPermission;
 
     protected function _loadNamespaces()
     {
         $loaded = false;
-        $cache = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
-        if ($cache) {
-            $this->namespaces = $cache;
+        $namespaces = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
+        if ($namespaces) {
+            $this->namespaces = $namespaces;
             $loaded = true;
         }
 
@@ -47,18 +50,15 @@ class modManagerResponse extends modResponse
      */
     public function outputContent(array $options = [])
     {
-        $route = $this->modx->request->action;
-        $this->namespace = $this->modx->request->namespace;
+        $this->namespace = (string)$this->modx->request->namespace;
+        $route = (string)$this->modx->request->action;
         if (empty($route)) {
-            $route = $this->namespace == 'core' ? 'welcome' : 'index';
+            $route = $this->namespace === 'core' ? 'welcome' : 'index';
         }
         $this->modx->lexicon->load('dashboard', 'topmenu', 'file', 'action');
         $this->_loadNamespaces();
 
-        if (!array_key_exists($this->namespace, $this->namespaces)) {
-            $this->namespace = 'core';
-            $this->action = [];
-        } else {
+        if (array_key_exists($this->namespace, $this->namespaces)) {
             $namespace = $this->namespaces[$this->namespace];
             $this->action['namespace'] = $this->namespace;
             $this->action['namespace_name'] = $namespace['name'];
@@ -67,32 +67,50 @@ class modManagerResponse extends modResponse
             $this->action['lang_topics'] = '';
             $this->action['controller'] = $route;
         }
-
-        $isDeprecated = false;
-        /* handle 2.2< controllers */
-        if (intval($route) > 0) {
-            $this->modx->request->loadActionMap();
-            $this->action = !empty($this->modx->actionMap[$route]) ? $this->modx->actionMap[$route] : [];
-            $this->namespace = !empty($this->action['namespace']) ? $this->action['namespace'] : 'core';
-            $this->modx->deprecated('2.3.0',
-                'Support for modAction has been replaced with routing based on a namespace and action name. Please update the extra with the namespace ' . $this->namespace . ' to the routing based system.',
-                'modAction support');
-            $isDeprecated = true;
+        else {
+            $this->namespace = 'core';
+            $this->action = [];
         }
 
-        $isLoggedIn = $this->validateAuthentication();
-        if ($isLoggedIn && !$this->checkForMenuPermissions($route)) {
-            $this->body = $this->modx->error->failure($this->modx->lexicon('access_denied'));
-        } else {
-            $className = $this->loadControllerClass(!$isDeprecated);
-            $this->instantiateController($className, $isDeprecated ? 'getInstanceDeprecated' : 'getInstance');
+
+        try {
+            if (!$this->validateAuthentication()) {
+                throw new AccessDeniedException('Not logged in.');
+            }
+
+            if (!$this->checkForMenuPermissions($route)) {
+                throw new AccessDeniedException('Menu permission is required');
+            }
+
+            $className = $this->getControllerClassName($route);
+
+            /** @var modManagerController $controller */
+            $controller = $className::getInstance($this->modx, $className, $this->action);
+            $controller->setProperties(array_merge($_GET,$_POST));
+            $controller->initialize();
+
+            $this->modx->controller = $controller;
+
             $this->body = $this->modx->controller->render();
+            return $this->send();
         }
-        if (empty($this->body)) {
+        catch (NotFoundException $e) {
             $this->body = $this->modx->error->failure($this->modx->lexicon('action_err_ns'));
+            return $this->send();
         }
+        catch (AccessDeniedException $e) {
+            $message = $this->modx->lexicon('access_denied');
+            if ($this->_requiresPermission) {
+                $message .= ' (' . $message . ')';
+            }
+            $this->body = $this->modx->error->failure($message);
+            return $this->send();
+        }
+    }
 
-        return $this->send();
+    private static function isControllerClass(string $className): bool
+    {
+        return class_exists($className) && is_subclass_of($className, modManagerController::class, true);
     }
 
     /**
@@ -117,16 +135,15 @@ class modManagerResponse extends modResponse
             $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH);
             $this->action['lang_topics'] = 'login';
             $this->action['controller'] = 'security/login';
-        } else {
-            if (!$this->modx->hasPermission('frames')) {
-                $this->namespace = 'core';
-                $this->action['namespace'] = 'core';
-                $this->action['namespace_name'] = 'core';
-                $this->action['namespace_path'] = $this->modx->getOption('manager_path', null, MODX_MANAGER_PATH);
-                $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH);
-                $this->action['lang_topics'] = 'login';
-                $this->action['controller'] = 'security/logout';
-            }
+        }
+        elseif (!$this->modx->hasPermission('frames')) {
+            $this->namespace = 'core';
+            $this->action['namespace'] = 'core';
+            $this->action['namespace_name'] = 'core';
+            $this->action['namespace_path'] = $this->modx->getOption('manager_path', null, MODX_MANAGER_PATH);
+            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH);
+            $this->action['lang_topics'] = 'login';
+            $this->action['controller'] = 'security/logout';
         }
 
         return $isLoggedIn;
@@ -152,81 +169,6 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Include the correct controller class for the action
-     *
-     * @param bool $prefixNamespace Whether or not to prefix the Namespace name to the class. Default for 2.3+
-     *                              controllers, set to false for 2.2< deprecated controllers.
-     *
-     * @return string
-     */
-    public function loadControllerClass($prefixNamespace = true)
-    {
-        $theme = $this->modx->getOption('manager_theme', null, 'default');
-        $paths = $this->getNamespacePath($theme);
-        $f = $this->action['controller'];
-        $className = $this->getControllerClassName();
-        if (!class_exists($className) && $this->namespace != 'core' && $prefixNamespace) {
-            $className = ucfirst($this->namespace) . $className;
-        }
-        if (!class_exists($className)) {
-            $classFile = strtolower($f) . '.class.php';
-            $classPath = null;
-
-            foreach ($paths as $controllersPath) {
-                if (!file_exists($controllersPath . $classFile)) {
-                    if (file_exists($controllersPath . strtolower($f) . '/index.class.php')) {
-                        $classPath = $controllersPath . strtolower($f) . '/index.class.php';
-                    }
-                } else {
-                    $classPath = $controllersPath . $classFile;
-                    break;
-                }
-            }
-
-            /* handle Revo <2.2 controllers */
-            if (empty($classPath)) {
-                $className = 'modManagerControllerDeprecated';
-                $classPath = MODX_CORE_PATH . 'model/modx/modmanagercontrollerdeprecated.class.php';
-            }
-
-            if (!file_exists($classPath)) {
-                if (file_exists(strtolower($f) . '/index.class.php')) {
-                    $classPath = strtolower($f) . '/index.class.php';
-                } else { /* handle Revo <2.2 controllers */
-                    $className = 'modManagerControllerDeprecated';
-                    $classPath = MODX_CORE_PATH . 'model/modx/modmanagercontrollerdeprecated.class.php';
-                }
-            }
-
-            ob_start();
-            require_once $classPath;
-            ob_end_clean();
-        }
-
-        return $className;
-    }
-
-    public function instantiateController($className, $getInstanceMethod = 'getInstance')
-    {
-        try {
-            $c = new $className($this->modx, $this->action);
-            if (!($c instanceof modExtraManagerController) && $getInstanceMethod == 'getInstanceDeprecated') {
-                $getInstanceMethod = 'getInstance';
-            }
-            /* this line allows controller derivatives to decide what instance they want to return (say, for derivative class_key types) */
-            $this->modx->controller = call_user_func_array([$c, $getInstanceMethod],
-                [&$this->modx, $className, $this->action]);
-            $this->modx->controller->setProperties($c instanceof \SecurityLoginManagerController ? $_POST : array_merge($_GET,
-                $_POST));
-            $this->modx->controller->initialize();
-        } catch (Exception $e) {
-            die($e->getMessage());
-        }
-
-        return $this->modx->controller;
-    }
-
-    /**
      * If this action has a menu item, ensure user has access to menu
      *
      * @param string $action
@@ -247,6 +189,7 @@ class modManagerResponse extends modResponse
                 $permissions = explode(',', $permissions);
                 foreach ($permissions as $permission) {
                     if (!$this->modx->hasPermission($permission)) {
+                        $this->_requiresPermission = $permission;
                         return false;
                     }
                 }
@@ -257,20 +200,64 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Gets the controller class name from the active modAction object
+     * Gets the controller class name from the active action
      *
+     * @param string $action
      * @return string
+     * @throws NotFoundException
      */
-    public function getControllerClassName()
+    public function getControllerClassName(string $action): string
     {
-        $className = $this->action['controller'] . (!empty($this->action['class_postfix']) ? $this->action['class_postfix'] : 'ManagerController');
-        $className = explode('/', $className);
-        $o = [];
-        foreach ($className as $k) {
-            $o[] = ucfirst(str_replace(['.', '_', '-'], '', $k));
+        // Check for an autoloadable controller (3.0+)
+        $name = '\\MODX\\Revolution\\Controllers\\' . $action;
+        if (static::isControllerClass($name)) {
+            return $name;
         }
 
-        return implode('', $o);
+        $theme = $this->modx->getOption('manager_theme', null, 'default');
+        $paths = $this->getNamespacePath($theme);
+
+        $name = $this->namespace !== 'core' ? ucfirst($this->namespace) : '';
+        $name .= $this->action['controller'] . 'ManagerController';
+        $name = explode('/', $name);
+        $o = [];
+        foreach ($name as $k) {
+            $o[] = ucfirst(str_replace(['.', '_', '-'], '', $k));
+        }
+        $name = implode('', $o);
+
+        if (static::isControllerClass($name)) {
+            return $name;
+        }
+
+        // Look for the controller based on the action name provided
+        $filename = strtolower($action) . '.class.php';
+        $fullPath = null;
+        foreach ($paths as $controllersPath) {
+            if (file_exists($controllersPath . $filename)) {
+                $fullPath = $controllersPath . $filename;
+                break;
+            }
+
+            if (file_exists($controllersPath . strtolower($action) . '/index.class.php')) {
+                $fullPath = $controllersPath . strtolower($action) . '/index.class.php';
+                break;
+            }
+        }
+
+        // If the file exists, require it, while discarding any content from it
+        if (file_exists($fullPath) && is_readable($fullPath)) {
+            ob_start();
+            require_once $fullPath;
+            ob_end_clean();
+        }
+
+        // Available now?
+        if (static::isControllerClass($name)) {
+            return $name;
+        }
+
+        throw new NotFoundException();
     }
 
     /**
@@ -282,26 +269,25 @@ class modManagerResponse extends modResponse
      */
     public function getNamespacePath($theme = 'default')
     {
-        $namespace = array_key_exists($this->namespace,
-            $this->namespaces) ? $this->namespaces[$this->namespace] : $this->namespaces['core'];
+        $namespace = array_key_exists($this->namespace, $this->namespaces) ? $this->namespaces[$this->namespace] : $this->namespaces['core'];
         /* find context path */
-        if (isset($namespace['name']) && $namespace['name'] != 'core') {
+        if (isset($namespace['name']) && $namespace['name'] !== 'core') {
             $paths[] = $namespace['path'] . 'controllers/' . trim($theme, '/') . '/';
-            if ($theme != 'default') {
+            if ($theme !== 'default') {
                 $paths[] = $namespace['path'] . 'controllers/default/';
             }
             $paths[] = $namespace['path'] . 'controllers/';
 
             /* deprecated old usage */
             $paths[] = $namespace['path'] . trim($theme, '/');
-            if ($theme != 'default') {
+            if ($theme !== 'default') {
                 $paths[] = $namespace['path'] . 'default/';
             }
             $paths[] = $namespace['path'];
 
         } else {
             $paths[] = $namespace['path'] . 'controllers/' . trim($theme, '/') . '/';
-            if ($theme != 'default') {
+            if ($theme !== 'default') {
                 $paths[] = $namespace['path'] . 'controllers/default/';
             }
             $paths[] = $namespace['path'] . 'controllers/';

@@ -193,14 +193,6 @@ class modMenu extends \MODX\Revolution\modMenu
         ),
         'aggregates' => 
         array (
-            'Action' => 
-            array (
-                'class' => 'MODX\\Revolution\\modAction',
-                'local' => 'action',
-                'foreign' => 'id',
-                'owner' => 'foreign',
-                'cardinality' => 'one',
-            ),
             'Parent' => 
             array (
                 'class' => 'MODX\\Revolution\\modMenu',

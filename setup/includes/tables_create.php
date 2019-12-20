@@ -34,7 +34,6 @@ $classes= [
     \MODX\Revolution\modAccessResourceGroup::class,
     \MODX\Revolution\modAccessTemplateVar::class,
     \MODX\Revolution\modAccessNamespace::class,
-    \MODX\Revolution\modAction::class,
     \MODX\Revolution\modActionDom::class,
     \MODX\Revolution\modActionField::class,
     \MODX\Revolution\modActiveUser::class,

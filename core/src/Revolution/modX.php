@@ -111,10 +111,6 @@ class modX extends xPDO {
      */
     public $eventMap= null;
     /**
-     * @var array A map of actions registered to the manager interface.
-     */
-    public $actionMap= null;
-    /**
      * @var array A map of already processed Elements.
      */
     public $elementCache= [];

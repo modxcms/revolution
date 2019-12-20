@@ -198,20 +198,6 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Test the getAllActionIDs method
-     */
-    public function testGetAllActionIDs() {
-        // @todo : refactor to take care of modAction deprecation
-//        $actions = $this->request->getAllActionIDs();
-//        $total = $this->modx->getCount(modAction::class);
-//        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not get all of the Actions that exist.');
-
-        $actions = $this->request->getAllActionIDs('unit-test');
-        $total = $this->modx->getCount(modAction::class, ['namespace' => 'unit-test']);
-        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not filter down by namespace when grabbing actions.');
-    }
-
-    /**
      * Test the getParameters method, getting various types of request data, and asking for specific keys
      */
     public function testGetParameters() {

@@ -113,10 +113,6 @@ class ConfigJs extends Processor
         $o .= $this->modx->toJSON($c);
         $o .= '; MODx.perm = {};';
 
-        // Load actions for backwards compatibility (DEPRECATED)
-        $actions = $this->modx->request->getAllActionIDs();
-        $o .= 'MODx.action = ' . $this->modx->toJSON($actions) . ';';
-
         if ($this->modx->user) {
             $accessPermissionsQuery = $this->modx->newQuery(modAccessPermission::class);
             $accessPermissionsQuery->select('name');

@@ -11,7 +11,7 @@ class modMenu extends \MODX\Revolution\modMenu
         'version' => '3.0',
         'table' => 'menus',
         'extends' => 'MODX\\Revolution\\modAccessibleObject',
-        'fields' =>
+        'fields' => 
         array (
             'text' => '',
             'parent' => '',
@@ -24,9 +24,9 @@ class modMenu extends \MODX\Revolution\modMenu
             'permissions' => '',
             'namespace' => 'core',
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'text' =>
+            'text' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -35,7 +35,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'default' => '',
                 'index' => 'pk',
             ),
-            'parent' =>
+            'parent' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -44,7 +44,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'default' => '',
                 'index' => 'index',
             ),
-            'action' =>
+            'action' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -53,7 +53,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' =>
+            'description' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -61,7 +61,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'null' => false,
                 'default' => '',
             ),
-            'icon' =>
+            'icon' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -69,14 +69,14 @@ class modMenu extends \MODX\Revolution\modMenu
                 'null' => false,
                 'default' => '',
             ),
-            'menuindex' =>
+            'menuindex' => 
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'params' =>
+            'params' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -84,7 +84,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'null' => false,
                 'default' => '',
             ),
-            'handler' =>
+            'handler' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -92,7 +92,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'null' => false,
                 'default' => '',
             ),
-            'permissions' =>
+            'permissions' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -100,7 +100,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'null' => false,
                 'default' => '',
             ),
-            'namespace' =>
+            'namespace' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -110,17 +110,17 @@ class modMenu extends \MODX\Revolution\modMenu
                 'index' => 'index',
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'text' =>
+                    'text' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -128,15 +128,15 @@ class modMenu extends \MODX\Revolution\modMenu
                     ),
                 ),
             ),
-            'parent' =>
+            'parent' => 
             array (
                 'alias' => 'parent',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'parent' =>
+                    'parent' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -144,15 +144,15 @@ class modMenu extends \MODX\Revolution\modMenu
                     ),
                 ),
             ),
-            'action' =>
+            'action' => 
             array (
                 'alias' => 'action',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'action' =>
+                    'action' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -160,15 +160,15 @@ class modMenu extends \MODX\Revolution\modMenu
                     ),
                 ),
             ),
-            'namespace' =>
+            'namespace' => 
             array (
                 'alias' => 'namespace',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'namespace' =>
+                    'namespace' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -177,9 +177,9 @@ class modMenu extends \MODX\Revolution\modMenu
                 ),
             ),
         ),
-        'composites' =>
+        'composites' => 
         array (
-            'Acls' =>
+            'Acls' => 
             array (
                 'class' => 'MODX\\Revolution\\modAccessMenu',
                 'local' => 'text',
@@ -188,17 +188,9 @@ class modMenu extends \MODX\Revolution\modMenu
                 'cardinality' => 'many',
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'Action' =>
-            array (
-                'class' => 'MODX\\Revolution\\modAction',
-                'local' => 'action',
-                'foreign' => 'id',
-                'owner' => 'foreign',
-                'cardinality' => 'one',
-            ),
-            'Parent' =>
+            'Parent' => 
             array (
                 'class' => 'MODX\\Revolution\\modMenu',
                 'local' => 'parent',
@@ -206,7 +198,7 @@ class modMenu extends \MODX\Revolution\modMenu
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'Children' =>
+            'Children' => 
             array (
                 'class' => 'MODX\\Revolution\\modMenu',
                 'local' => 'text',

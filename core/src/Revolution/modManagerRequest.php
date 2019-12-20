@@ -55,7 +55,7 @@ class modManagerRequest extends modRequest
      *
      * @param modX $modx
      */
-    function __construct(modX & $modx)
+    public function __construct(modX $modx)
     {
         parent:: __construct($modx);
         $this->initialize();
@@ -70,10 +70,6 @@ class modManagerRequest extends modRequest
     public function initialize()
     {
         $this->sanitizeRequest();
-
-        if (!defined('MODX_INCLUDES_PATH')) {
-            define('MODX_INCLUDES_PATH', $this->modx->getOption('manager_path') . 'includes/');
-        }
 
         /* load smarty template engine */
         $theme = $this->modx->getOption('manager_theme', null, 'default');
@@ -160,34 +156,6 @@ class modManagerRequest extends modRequest
             'register_class' => modFileRegister::class,
         ]);
         $this->registerLogging($data);
-    }
-
-    /**
-     * Loads the actionMap, and generates a cache file if necessary.
-     *
-     * @access public
-     * @return boolean True if successful.
-     */
-    public function loadActionMap()
-    {
-        $loaded = false;
-        $cacheKey = $this->modx->context->get('key') . '/actions';
-        $map = $this->modx->cacheManager->get($cacheKey, [
-            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_action_map_key', null, 'action_map'),
-            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_action_map_handler', null,
-                $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->modx->getOption('cache_action_map_format', null,
-                $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-        ]);
-        if (!$map) {
-            $map = $this->modx->cacheManager->generateActionMap($cacheKey);
-        }
-        if ($map) {
-            $this->modx->actionMap = $map;
-            $loaded = true;
-        }
-
-        return $loaded;
     }
 
     /**

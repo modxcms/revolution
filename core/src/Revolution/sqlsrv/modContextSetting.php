@@ -11,7 +11,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
         'version' => '3.0',
         'table' => 'context_setting',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' =>
+        'fields' => 
         array (
             'context_key' => NULL,
             'key' => NULL,
@@ -21,9 +21,9 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
             'area' => '',
             'editedon' => NULL,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'context_key' =>
+            'context_key' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -31,7 +31,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'index' => 'pk',
             ),
-            'key' =>
+            'key' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '50',
@@ -39,13 +39,13 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'index' => 'pk',
             ),
-            'value' =>
+            'value' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'xtype' =>
+            'xtype' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '75',
@@ -53,7 +53,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'default' => 'textfield',
             ),
-            'namespace' =>
+            'namespace' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '40',
@@ -61,7 +61,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'default' => 'core',
             ),
-            'area' =>
+            'area' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -69,28 +69,28 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'default' => '',
             ),
-            'editedon' =>
+            'editedon' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => true,
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
-                'columns' =>
+                'columns' => 
                 array (
-                    'context_key' =>
+                    'context_key' => 
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'key' =>
+                    'key' => 
                     array (
                         'collation' => 'A',
                         'null' => false,
@@ -98,9 +98,9 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'Context' =>
+            'Context' => 
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'key' => 'context_key',
@@ -109,7 +109,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'SystemSetting' =>
+            'SystemSetting' => 
             array (
                 'class' => 'MODX\\Revolution\\modSystemSetting',
                 'key' => 'key',

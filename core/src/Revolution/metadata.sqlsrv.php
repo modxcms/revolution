@@ -32,19 +32,18 @@ $xpdo_meta_map = array (
             22 => 'MODX\\Revolution\\modUserProfile',
             23 => 'MODX\\Revolution\\modWorkspace',
         ),
-        'MODX\\Revolution\\modAccess' => 
-        array (
-            0 => 'MODX\\Revolution\\modAccessAction',
-            1 => 'MODX\\Revolution\\modAccessContext',
-            2 => 'MODX\\Revolution\\modAccessElement',
-            3 => 'MODX\\Revolution\\modAccessMenu',
-            4 => 'MODX\\Revolution\\modAccessResource',
-            5 => 'MODX\\Revolution\\modAccessResourceGroup',
-        ),
         'modAccess' => 
         array (
             0 => 'MODX\\Revolution\\modAccessActionDom',
             1 => 'MODX\\Revolution\\modAccessCategory',
+        ),
+        'MODX\\Revolution\\modAccess' => 
+        array (
+            0 => 'MODX\\Revolution\\modAccessContext',
+            1 => 'MODX\\Revolution\\modAccessElement',
+            2 => 'MODX\\Revolution\\modAccessMenu',
+            3 => 'MODX\\Revolution\\modAccessResource',
+            4 => 'MODX\\Revolution\\modAccessResourceGroup',
         ),
         'MODX\\Revolution\\modAccessElement' => 
         array (
@@ -78,12 +77,11 @@ $xpdo_meta_map = array (
         ),
         'MODX\\Revolution\\modAccessibleSimpleObject' => 
         array (
-            0 => 'MODX\\Revolution\\modAction',
-            1 => 'MODX\\Revolution\\modCategory',
-            2 => 'MODX\\Revolution\\modElement',
-            3 => 'MODX\\Revolution\\modActionDom',
-            4 => 'MODX\\Revolution\\modResource',
-            5 => 'MODX\\Revolution\\modResourceGroup',
+            0 => 'MODX\\Revolution\\modCategory',
+            1 => 'MODX\\Revolution\\modElement',
+            2 => 'MODX\\Revolution\\modActionDom',
+            3 => 'MODX\\Revolution\\modResource',
+            4 => 'MODX\\Revolution\\modResourceGroup',
         ),
         'MODX\\Revolution\\modElement' => 
         array (
