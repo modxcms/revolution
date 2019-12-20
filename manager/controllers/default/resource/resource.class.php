@@ -71,7 +71,7 @@ abstract class ResourceManagerController extends modManagerController
      *
      * @return modManagerController The proper controller class
      */
-    public static function getInstance(modX &$modx, $className, array $config = [])
+    public static function getInstance(modX $modx, $className, array $config = [])
     {
         $resourceClass = modDocument::class;
         $isDerivative = false;

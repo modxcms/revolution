@@ -98,7 +98,7 @@ class Create extends CreateProcessor
      * @param array $properties
      * @return CreateProcessor
      */
-    public static function getInstance(modX &$modx, $className, $properties = [])
+    public static function getInstance(modX $modx, $className, $properties = [])
     {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modDocument::class;
         $object = $modx->newObject($classKey);
