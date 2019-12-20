@@ -148,7 +148,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             if (deleteChk) {
                 deleteChk.setValue(deleted);
             }
-            this.updateTree();
         }
     }
 
@@ -211,7 +210,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         var g = Ext.getCmp('modx-grid-resource-security');
         if (g) { g.getStore().commitChanges(); }
 
-        this.updateTree();
         var object = o.result.object;
         // object.parent is undefined on template changing.
         if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
@@ -226,6 +224,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.handlePreview(object.deleted);
                 this.handleDeleted(object.deleted);
             }
+
+            this.updateTree();
+
             this.record = object;
             this.getForm().setValues(object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;

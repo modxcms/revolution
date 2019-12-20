@@ -8,6 +8,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Change the way deprecated class aliases are included [#14912]
 - Make sure processors are instantiated with getInstance for derivative logic [#14921]
 - Add updated DI Container and add support for namespaces to define a bootstrap.php file to init/register services [#14920]
+- Fix resources showing twice in the tree when marking a resource as deleted from the resource panel [#14893]
 
 MODX Revolution 3.0.0-alpha1  (December 12, 2019)
 ====================================
