@@ -1724,7 +1724,7 @@ class modX extends xPDO {
         // We're limiting to subclasses of Processor to prevent instantiating arbitrary classes
         if (static::isProcessorClass($action)) {
             /** @var Processor $processor */
-            $processor = call_user_func_array([$action, 'getInstance'], [&$this, $action, $scriptProperties]);
+            $processor = $action::getInstance($this, $action, $scriptProperties);
 
             return $processor->run();
         }
@@ -1738,7 +1738,7 @@ class modX extends xPDO {
         }
         if (static::isProcessorClass($legacyAction)) {
             /** @var Processor $processor */
-            $processor = call_user_func_array([$legacyAction, 'getInstance'], [&$this, $legacyAction, $scriptProperties]);
+            $processor = $legacyAction::getInstance($this, $legacyAction, $scriptProperties);
 
             return $processor->run();
         }
