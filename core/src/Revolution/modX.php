@@ -10,21 +10,6 @@
 
 namespace MODX\Revolution;
 
-/**
- * This is the main file to include in your scripts to use MODX.
- */
-if (!defined('MODX_CORE_PATH')) {
-    define('MODX_CORE_PATH', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
-}
-
-if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
-    $errorMessage = 'Site temporarily unavailable; missing dependencies.';
-    @include(MODX_CORE_PATH . 'error/unavailable.include.php');
-    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
-    exit();
-}
-require_once MODX_CORE_PATH . 'vendor/autoload.php';
-
 use Exception;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
@@ -477,10 +462,10 @@ class modX extends xPDO {
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
             }
-            $this->setPackage('Revolution', MODX_CORE_PATH . 'src/');
-            $this->addPackage('Revolution\Registry\Db', MODX_CORE_PATH . 'src/');
-            $this->addPackage('Revolution\Sources', MODX_CORE_PATH . 'src/');
-            $this->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
+            $this->setPackage('MODX\Revolution', MODX_CORE_PATH . 'src/', null, 'MODX\\');
+            $this->addPackage('MODX\Revolution\Registry\Db', MODX_CORE_PATH . 'src/', null, 'MODX\\');
+            $this->addPackage('MODX\Revolution\Sources', MODX_CORE_PATH . 'src/', null, 'MODX\\');
+            $this->addPackage('MODX\Revolution\Transport', MODX_CORE_PATH . 'src/', null, 'MODX\\');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', array('error_message' => $xe->getMessage()));
         } catch (Exception $e) {
@@ -526,6 +511,7 @@ class modX extends xPDO {
                     xPDO::OPT_VALIDATE_ON_SAVE => true,
                     'cache_system_settings' => true,
                     'cache_system_settings_key' => 'system_settings',
+                    'load_deprecated_global_class_aliases' => true,
                 ),
                 $config_options,
                 $data
@@ -545,6 +531,9 @@ class modX extends xPDO {
             array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
             if (!empty($site_id)) $this->site_id = $site_id;
             if (!empty($uuid)) $this->uuid = $uuid;
+            if ((boolean)$data['load_deprecated_global_class_aliases']) {
+                include_once MODX_CORE_PATH . 'include/deprecated.php';
+            }
 
             $container = new Container();
             $container['config'] = $data;

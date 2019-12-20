@@ -19,6 +19,7 @@ if (!defined('MODX_API_MODE')) {
 /* include custom core config and define core path */
 @include(dirname(__FILE__) . '/config.core.php');
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__FILE__) . '/core/');
+if (!defined('MODX_CONFIG_KEY')) define('MODX_CONFIG_KEY', 'config');
 
 /* include the autoloader */
 if (!@require_once (MODX_CORE_PATH . "vendor/autoload.php")) {
