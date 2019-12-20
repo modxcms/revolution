@@ -226,13 +226,6 @@ class modMenu extends \MODX\Revolution\modMenu
         $c = $this->xpdo->newQuery(\MODX\Revolution\modMenu::class);
         $c->select($this->xpdo->getSelectColumns(\MODX\Revolution\modMenu::class, 'modMenu'));
 
-        /* 2.2 and earlier support */
-        $c->leftJoin(\MODX\Revolution\modAction::class, 'Action', 'CAST(Action.id AS nvarchar) = modMenu.action');
-        $c->select([
-            'action_controller' => 'Action.controller',
-            'action_namespace' => 'Action.namespace',
-        ]);
-
         $c->where([
             'modMenu.parent' => $start,
         ]);
@@ -250,18 +243,13 @@ class modMenu extends \MODX\Revolution\modMenu
             $action = $menu->get('action');
             $namespace = $menu->get('namespace');
 
-            // allow 2.2 and earlier actions
-            $deprecatedNamespace = $menu->get('action_namespace');
-            if (!empty($deprecatedNamespace)) {
-                $namespace = $deprecatedNamespace;
-            }
-            if ($namespace != 'core') {
+            if ($namespace !== 'core') {
                 $this->xpdo->lexicon->load($namespace . ':default');
             }
 
             /* if 3rd party menu item, load proper text */
             if (!empty($action)) {
-                if (!empty($namespace) && $namespace != 'core') {
+                if (!empty($namespace) && $namespace !== 'core') {
                     $ma['text'] = $menu->get('text') === 'user'
                         ? $this->xpdo->lexicon($menu->get('text'), ['username' => $this->xpdo->getLoginUserName()])
                         : $this->xpdo->lexicon($menu->get('text'));
