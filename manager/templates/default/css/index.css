@@ -19031,6 +19031,9 @@ ul.x-tab-strip-bottom {
   background-color: #FFF;
   z-index: 0;
   min-width: 288px; }
+  @media screen and (min-width: 961px) {
+    #modx-leftbar {
+      max-width: 50%; } }
   #modx-leftbar .x-toolbar {
     padding: 0 !important;
     border: 0; }
@@ -19773,7 +19776,7 @@ ul.x-tab-strip-bottom {
   /* root box containing a context or category */
   /* just the actual nodes */ }
   #modx-leftbar .x-tab-panel-noborder {
-    margin: 0; }
+    margin: 0 12px; }
   #modx-leftbar .x-tab-panel-bwrap {
     border-radius: 0 0 3px 3px;
     position: relative;
@@ -19801,8 +19804,6 @@ ul.x-tab-strip-bottom {
     #modx-leftbar .x-plain-body {
       width: 100% !important;
       height: auto !important; } }
-  #modx-leftbar .x-tab-panel-noborder {
-    margin: 0; }
   #modx-leftbar .x-panel-tbar {
     padding: 0; }
   #modx-leftbar .x-toolbar {
