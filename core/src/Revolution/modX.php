@@ -26,6 +26,7 @@ if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
 require_once MODX_CORE_PATH . 'vendor/autoload.php';
 
 use Exception;
+use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
 use MODX\Revolution\Mail\modMail;
@@ -74,6 +75,10 @@ class modX extends xPDO {
      * @const SESSION_STATE_EXTERNAL
      */
     const SESSION_STATE_EXTERNAL = 2;
+    /**
+     * @var Container The DI services container.
+     */
+    public $services;
     /**
      * @var modContext The Context represents a unique section of the site which
      * this modX instance is controlling.
@@ -490,7 +495,7 @@ class modX extends xPDO {
      * @param array  $data          Data provided to initialize the instance with, overriding config file entries.
      * @param null   $driverOptions Driver options for the primary connection.
      *
-     * @return array The merged config data ready for use by the modX::__construct() method.
+     * @return Container A DI container containing the config data ready for use by the modX::__construct() method.
      * @throws xPDOException
      */
     protected function loadConfig($configPath = '', $data = array(), $driverOptions = null) {
@@ -540,10 +545,14 @@ class modX extends xPDO {
             array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
             if (!empty($site_id)) $this->site_id = $site_id;
             if (!empty($uuid)) $this->uuid = $uuid;
+
+            $container = new Container();
+            $container['config'] = $data;
+
+            return $container;
         } else {
             throw new xPDOException("Could not load MODX config file.");
         }
-        return $data;
     }
 
     /**
@@ -566,6 +575,7 @@ class modX extends xPDO {
 
             $this->getCacheManager();
             $this->getConfig();
+            $this->_initNamespaces();
             $this->_initContext($contextKey, false, $options);
             $this->_loadExtensionPackages($options);
             $this->_initSession($options);
@@ -590,6 +600,19 @@ class modX extends xPDO {
             $this->_initialized= true;
         }
         return $this->_initialized;
+    }
+
+    /**
+     * Initialize namespaces.
+     */
+    protected function _initNamespaces() {
+        $namespaces = $this->call(modNamespace::class, 'loadCache', [&$this]);
+        $modx =& $this;
+        foreach ($namespaces as $namespace) {
+            if (is_readable($namespace['path'] . 'bootstrap.php')) {
+                require $namespace['path'] . 'bootstrap.php';
+            }
+        }
     }
 
     /**
