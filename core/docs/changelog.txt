@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 - Fixed transparency in .png for TV [#14906]
 - Add missing unsigned attribute to integer foreign key fields in mysql schema [#14902]
+- Remove legacy grids: workspace/lexicon/lexicon.topic.grid.js, workspace/lexicon/language.grid.js, widgets/security/modx.grid.role.user.js, widgets/resource/modx.grid.resource.security.js [#14875]
+- Change the way deprecated class aliases are included [#14912]
+- Make sure processors are instantiated with getInstance for derivative logic [#14921]
+- Add updated DI Container and add support for namespaces to define a bootstrap.php file to init/register services [#14920]
 
 MODX Revolution 3.0.0-alpha1  (December 12, 2019)
 ====================================

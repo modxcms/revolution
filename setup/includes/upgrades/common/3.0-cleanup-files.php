@@ -136,6 +136,10 @@ $cleanup = array(
     ),
     'manager' => array(
         'min/',
+        'assets/modext/widgets/resource/modx.grid.resource.security.js',
+        'assets/modext/widgets/security/modx.grid.role.user.js',
+        'assets/modext/workspace/lexicon/language.grid.js',
+        'assets/modext/workspace/lexicon/lexicon.topic.grid.js',
     ),
 );
 
