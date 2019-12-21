@@ -11,7 +11,7 @@ Only English lexicon changes are handled in GitHub. If you want to update anythi
 ### Other
  * Did you find an issue in xPDO? Please submit it in [xPDO repository](https://github.com/modxcms/xpdo).
  * Did you find an issue in a MODX Extra? Please submit it to that component's repository or contact the author.
- * Looking for advise or help? Please search the [MODX documentation](https://docs.modx.com/), the [MODX Community](https://community.modx.com/), join to #modx or #xpdo room on IRC FreeNode server (irc.freenode.net) or join the [MODX Community on Slack](https://modx.org/).
+ * Looking for advice or help? Please search the [MODX documentation](https://docs.modx.com/), the [MODX Community](https://community.modx.com/), join to #modx or #xpdo room on IRC FreeNode server (irc.freenode.net) or join the [MODX Community on Slack](https://modx.org/).
 
 ## Submit a bug report
 
