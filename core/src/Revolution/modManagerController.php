@@ -149,13 +149,7 @@ abstract class modManagerController
      */
     public function render()
     {
-        if (!$this->checkPermissions()) {
-            return $this->modx->error->failure($this->modx->lexicon('access_denied'));
-        }
-
-        $this->modx->invokeEvent('OnBeforeManagerPageInit', [
-            'action' => $this->config,
-        ]);
+        $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
 
         $this->theme = $this->modx->getOption('manager_theme', null, 'default', true);
 

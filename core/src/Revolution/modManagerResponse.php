@@ -25,10 +25,9 @@ use MODX\Revolution\Controllers\Exceptions\NotFoundException;
  */
 class modManagerResponse extends modResponse
 {
-    /** @var array A cached array of the current modAction object */
-    public $action = [];
-    public $namespace = 'core';
-    public $namespaces = [];
+    protected $route = 'index';
+    protected $namespace = 'core';
+    protected $namespaces = [];
 
     private $_requiresPermission;
 
@@ -51,31 +50,25 @@ class modManagerResponse extends modResponse
      */
     public function outputContent(array $options = [])
     {
-        $this->namespace = (string)$this->modx->request->namespace;
-        $route = (string)$this->modx->request->action;
-        if (empty($route)) {
-            $route = $this->namespace === 'core' ? 'welcome' : 'index';
-        }
-        $this->modx->lexicon->load('dashboard', 'topmenu', 'file', 'action');
+        // Grab the namespace
         $this->_loadNamespaces();
-
-        if (array_key_exists($this->namespace, $this->namespaces)) {
-            $namespace = $this->namespaces[$this->namespace];
-            $this->action['namespace'] = $this->namespace;
-            $this->action['namespace_name'] = $namespace['name'];
-            $this->action['namespace_path'] = $namespace['path'];
-            $this->action['namespace_assets_path'] = $namespace['assets_path'];
-            $this->action['lang_topics'] = '';
-            $this->action['controller'] = $route;
-        }
-        else {
+        $this->namespace = (string)$this->modx->request->namespace;
+        if (!array_key_exists($this->namespace, $this->namespaces)) {
             $this->namespace = 'core';
-            $this->action = [];
         }
 
+        // Grab the route (action)
+        $this->route = (string)$this->modx->request->action;
+        if (empty($this->route)) {
+            $this->route = $this->namespace === 'core' ? 'welcome' : 'index';
+        }
+
+        $this->modx->lexicon->load('dashboard', 'topmenu', 'file', 'action');
+
+        // Only authenticated users are allowed to use a **Manager** Controller
         if (!$this->modx->user->isAuthenticated('mgr')) {
             $this->namespace = 'core';
-            $route = 'security/login';
+            $this->route = 'security/login';
 
             // Support single sign on solutions
             $alternateLogin = $this->modx->getOption('manager_login_url_alternate', null, '');
@@ -87,26 +80,28 @@ class modManagerResponse extends modResponse
 
 
         try {
-            if ($route !== 'security/login') {
+            if ($this->route !== 'security/login') {
                 if (!$this->modx->hasPermission('frames')) {
                     $this->modx->user->endSession();
                     throw new AccessDeniedException('You don\'t have permission to access the manager.');
                 }
 
-                if (!$this->checkForMenuPermissions($route)) {
-                    throw new AccessDeniedException('Menu permission is required');
-                }
+                $this->checkForMenuPermissions($this->route);
             }
 
-            $className = $this->getControllerClassName($route);
+            $className = $this->getControllerClassName($this->route);
 
             /** @var modManagerController $controller */
             $controller = $className::getInstance($this->modx, $className, [
                 'namespace' => $this->namespace,
-                'action' => $route,
+                'action' => $this->route,
             ]);
             $controller->setProperties(array_merge($_GET,$_POST));
             $controller->initialize();
+
+            if (!$controller->checkPermissions()) {
+                throw new AccessDeniedException('Not allowed to access this controller.');
+            }
 
             $this->modx->controller = $controller;
 
@@ -171,10 +166,10 @@ class modManagerResponse extends modResponse
      * @param string $action
      *
      * @return bool
+     * @throws AccessDeniedException
      */
-    public function checkForMenuPermissions($action)
+    public function checkForMenuPermissions($action): bool
     {
-        $canAccess = true;
         /** @var modMenu $menu */
         $menu = $this->modx->getObject(modMenu::class, [
             'action' => $action,
@@ -186,14 +181,13 @@ class modManagerResponse extends modResponse
                 $permissions = explode(',', $permissions);
                 foreach ($permissions as $permission) {
                     if (!$this->modx->hasPermission($permission)) {
-                        $this->_requiresPermission = $permission;
-                        return false;
+                        throw new AccessDeniedException($permission . ' permission is required');
                     }
                 }
             }
         }
 
-        return $canAccess;
+        return true;
     }
 
     /**
