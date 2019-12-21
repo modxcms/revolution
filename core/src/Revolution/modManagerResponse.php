@@ -115,8 +115,6 @@ class modManagerResponse extends modResponse
                     $e->getMessage()
                 ]
             ]);
-            $this->body = $controller->render();
-            return $this->send();
         }
         catch (AccessDeniedException $e) {
             $message = $this->modx->lexicon('access_denied');
@@ -130,10 +128,44 @@ class modManagerResponse extends modResponse
                     $e->getMessage()
                 ]
             ]);
-
-            $this->body = $controller->render();
-            return $this->send();
         }
+        catch (\Exception $e) {
+            $controller = new Error($this->modx, [
+                'message' => get_class($e) . ': ' . $e->getMessage(),
+                'errors' => $this->_formatTrace($e->getTrace())
+            ]);
+        }
+        catch (\Error $e) {
+            $controller = new Error($this->modx, [
+                'message' => get_class($e) . ': ' . $e->getMessage(),
+                'errors' => $this->_formatTrace($e->getTrace())
+            ]);
+        }
+        $this->body = $controller->render();
+        return $this->send();
+    }
+
+    private function _formatTrace(array $trace): array
+    {
+        $return = [];
+        foreach ($trace as $entry) {
+            $line = $entry['class'] . $entry['type'] . $entry['function'] . '(';
+            $args = [];
+            foreach ($entry['args'] as $arg) {
+                if (is_array($arg)) {
+                    $args[] = print_r($arg, true);
+                }
+                elseif (is_scalar($arg)) {
+                    $args[] = gettype($arg) . ' "' . $arg . '"';
+                }
+                else {
+                    $args[] = gettype($arg);
+                }
+            }
+            $line .= implode(', ', $args) . ')';
+            $return[] = htmlentities($line, ENT_QUOTES, 'UTF-8');
+        }
+        return $return;
     }
 
     private static function isControllerClass(string $className): bool
