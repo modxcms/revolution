@@ -73,20 +73,38 @@ class modManagerResponse extends modResponse
             $this->action = [];
         }
 
+        if (!$this->modx->user->isAuthenticated('mgr')) {
+            $this->namespace = 'core';
+            $route = 'security/login';
+
+            // Support single sign on solutions
+            $alternateLogin = $this->modx->getOption('manager_login_url_alternate', null, '');
+            if (!empty($alternateLogin)) {
+                $this->modx->sendRedirect($alternateLogin);
+                return '';
+            }
+        }
+
 
         try {
-            if (!$this->validateAuthentication()) {
-                throw new AccessDeniedException('Not logged in.');
-            }
+            if ($route !== 'security/login') {
+                if (!$this->modx->hasPermission('frames')) {
+                    $this->modx->user->endSession();
+                    throw new AccessDeniedException('You don\'t have permission to access the manager.');
+                }
 
-            if (!$this->checkForMenuPermissions($route)) {
-                throw new AccessDeniedException('Menu permission is required');
+                if (!$this->checkForMenuPermissions($route)) {
+                    throw new AccessDeniedException('Menu permission is required');
+                }
             }
 
             $className = $this->getControllerClassName($route);
 
             /** @var modManagerController $controller */
-            $controller = $className::getInstance($this->modx, $className, $this->action);
+            $controller = $className::getInstance($this->modx, $className, [
+                'namespace' => $this->namespace,
+                'action' => $route,
+            ]);
             $controller->setProperties(array_merge($_GET,$_POST));
             $controller->initialize();
 
@@ -96,9 +114,12 @@ class modManagerResponse extends modResponse
             return $this->send();
         }
         catch (NotFoundException $e) {
-            $controller = new Error($this->modx);
-            $controller->setErrorMessage($this->modx->lexicon('action_err_ns'));
-            $controller->addError($e->getMessage());
+            $controller = new Error($this->modx, [
+                'message' => $this->modx->lexicon('action_err_ns'),
+                'errors' => [
+                    $e->getMessage()
+                ]
+            ]);
             $this->body = $controller->render();
             return $this->send();
         }
@@ -107,9 +128,13 @@ class modManagerResponse extends modResponse
             if ($this->_requiresPermission) {
                 $message .= ' (' . $message . ')';
             }
-            $controller = new Error($this->modx);
-            $controller->setErrorMessage($message);
-            $controller->addError($e->getMessage());
+
+            $controller = new Error($this->modx, [
+                'message' => $message,
+                'errors' => [
+                    $e->getMessage()
+                ]
+            ]);
 
             $this->body = $controller->render();
             return $this->send();
@@ -119,42 +144,6 @@ class modManagerResponse extends modResponse
     private static function isControllerClass(string $className): bool
     {
         return class_exists($className) && is_subclass_of($className, modManagerController::class, true);
-    }
-
-    /**
-     * Ensure the user has access to the manager
-     *
-     * @return bool|string
-     */
-    public function validateAuthentication()
-    {
-        $isLoggedIn = $this->modx->user->isAuthenticated('mgr');
-        if (!$isLoggedIn) {
-            $alternateLogin = $this->modx->getOption('manager_login_url_alternate', null, '');
-            if (!empty($alternateLogin)) {
-                $this->modx->sendRedirect($alternateLogin);
-
-                return '';
-            }
-            $this->namespace = 'core';
-            $this->action['namespace'] = 'core';
-            $this->action['namespace_name'] = 'core';
-            $this->action['namespace_path'] = $this->modx->getOption('manager_path', null, MODX_MANAGER_PATH);
-            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH);
-            $this->action['lang_topics'] = 'login';
-            $this->action['controller'] = 'security/login';
-        }
-        elseif (!$this->modx->hasPermission('frames')) {
-            $this->namespace = 'core';
-            $this->action['namespace'] = 'core';
-            $this->action['namespace_name'] = 'core';
-            $this->action['namespace_path'] = $this->modx->getOption('manager_path', null, MODX_MANAGER_PATH);
-            $this->action['namespace_assets_path'] = $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH);
-            $this->action['lang_topics'] = 'login';
-            $this->action['controller'] = 'security/logout';
-        }
-
-        return $isLoggedIn;
     }
 
     /**
@@ -226,7 +215,7 @@ class modManagerResponse extends modResponse
         $paths = $this->getNamespacePath($theme);
 
         $name = $this->namespace !== 'core' ? ucfirst($this->namespace) : '';
-        $name .= $this->action['controller'] . 'ManagerController';
+        $name .= $action . 'ManagerController';
         $name = explode('/', $name);
         $o = [];
         foreach ($name as $k) {

@@ -7,25 +7,6 @@ use MODX\Revolution\modManagerController;
 final class Error extends modManagerController
 {
     /**
-     * @var array Individual errors to note
-     */
-    private $errors = [];
-    /**
-     * @var string
-     */
-    private $message;
-
-    public function setErrorMessage(string $message)
-    {
-        $this->message = $message;
-    }
-
-    public function addError(string $error)
-    {
-        $this->errors[] = $error;
-    }
-
-    /**
      * Do permission checking in this method. Returning false will present a "permission denied" message.
      *
      * @return boolean
@@ -47,8 +28,8 @@ final class Error extends modManagerController
     {
         return [
             '_e' => [
-                'message' => $this->message,
-                'errors' => $this->errors,
+                'message' => $this->config['message'] ?? 'unknown error',
+                'errors' => $this->config['errors'] ? array_filter($this->config['errors']) : [],
             ]
         ];
     }
