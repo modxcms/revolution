@@ -15,12 +15,12 @@ use MODX\Revolution\modTemplateVarInputRender;
  * @subpackage processors.element.tv.renders.mgr.input
  */
 class modTemplateVarInputRenderOption extends modTemplateVarInputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $default = $this->tv->get('default_text');
 
         // handles radio buttons
         $options = $this->getInputOptions();
-        $items = array();
+        $items = [];
         $defaultIndex = '';
         $i = 0;
         foreach ($options as $option) {
@@ -44,11 +44,11 @@ class modTemplateVarInputRenderOption extends modTemplateVarInputRender {
                 $opt[1] = '"'.str_replace('"','\"',$opt[1]).'"';
             }
 
-            $items[] = array(
+            $items[] = [
                 'text' => htmlspecialchars($opt[0],ENT_COMPAT,'UTF-8'),
                 'value' => $opt[1],
                 'checked' => $checked,
-            );
+            ];
 
             $i++;
         }

@@ -15,7 +15,7 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderDelim extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $value= $this->tv->parseInput($value, "||");
         $p= isset($params['delimiter']) ? $params['delimiter'] : ',';
 

@@ -14,7 +14,7 @@ class LanguageManagerController extends modParsedManagerController
         return $this->modx->hasPermission('language');
     }
 
-    public function process(array $scriptProperties = array())
+    public function process(array $scriptProperties = [])
     {
         $targetLanguage = $this->modx->getOption('switch', $scriptProperties, 'en');
 

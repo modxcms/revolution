@@ -33,12 +33,12 @@ class modMediaSourceTest extends MODxTestCase {
         parent::setUp();
 
         $this->source = $this->modx->newObject(modMediaSource::class);
-        $this->source->fromArray(array(
+        $this->source->fromArray([
             'name' => 'UnitTestSource',
             'description' => '',
             'class_key' => modFileMediaSource::class,
-            'properties' => array(),
-        ),'',true);
+            'properties' => [],
+        ],'',true);
     }
     public function tearDown() {
         parent::tearDown();

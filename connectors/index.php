@@ -33,15 +33,15 @@ if (!defined('MODX_CORE_PATH')) {
 if (!require_once(MODX_CORE_PATH . 'vendor/autoload.php')) {
     header("Content-Type: application/json; charset=UTF-8");
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-    echo json_encode(array(
+    echo json_encode([
         'success' => false,
         'code' => 404,
-    ));
+    ]);
     die();
 }
 
 /* load modX instance */
-$modx = new \MODX\Revolution\modX('', array(\xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true)));
+$modx = new \MODX\Revolution\modX('', [\xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true]]);
 
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) && is_string($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
@@ -52,10 +52,10 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
 } else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
     header($_SERVER['SERVER_PROTOCOL'] . ' 401 Not Authorized');
-    echo json_encode(array(
+    echo json_encode([
         'success' => false,
         'code' => 401,
-    ));
+    ]);
     @session_write_close();
     die();
 }

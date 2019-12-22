@@ -60,7 +60,7 @@ class modRestClient {
      * @var array $config The configuration array.
      * @access public
      */
-    public $config = array();
+    public $config = [];
     /**
      * @var modRestClient $conn The client connection instance to use.
      * @access public
@@ -90,14 +90,14 @@ class modRestClient {
      * @param modX &$modx A reference to the modX instance.
      * @param array $config An array of configuration options.
      */
-    function __construct(modX &$modx,array $config = array()) {
+    function __construct(modX &$modx,array $config = []) {
         $this->modx =& $modx;
-        $this->config = array_merge(array(
+        $this->config = array_merge([
             modRestClient::OPT_PORT => 80,
             modRestClient::OPT_TIMEOUT => 30,
             modRestClient::OPT_PATH => '/',
             modRestClient::OPT_USERAGENT => "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Media Center PC 4.0)"
-        ),$config);
+        ],$config);
         $this->modx->deprecated('2.3.0', 'Use the modRest classes instead.');
     }
 
@@ -134,7 +134,7 @@ class modRestClient {
      * @param array $options An array of options to pass to the request.
      * @return modRestResponse The response object.
      */
-    public function request($host,$path,$method = 'GET',array $params = array(),array $options = array()) {
+    public function request($host,$path,$method = 'GET',array $params = [],array $options = []) {
         if (!is_object($this->conn)) {
             $loaded = $this->getConnection();
             if (!$loaded) return false;
@@ -171,9 +171,9 @@ class modRestClient {
         foreach ($children as $elementName => $node)
         {
             $nextIdx = count($arr);
-            $arr[$nextIdx] = array();
+            $arr[$nextIdx] = [];
             $arr[$nextIdx]['name'] = strtolower((string)$elementName);
-            $arr[$nextIdx]['attributes'] = array();
+            $arr[$nextIdx]['attributes'] = [];
             $attributes = $node->attributes();
             foreach ($attributes as $attributeName => $attributeValue) {
                 $attribName = strtolower(trim((string)$attributeName));
@@ -185,7 +185,7 @@ class modRestClient {
             if (strlen($text) > 0) {
                 $arr[$nextIdx]['text'] = $text;
             }
-            $arr[$nextIdx]['children'] = array();
+            $arr[$nextIdx]['children'] = [];
             $this->xml2array($node, $arr[$nextIdx]['children']);
         }
         return true;

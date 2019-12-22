@@ -45,7 +45,7 @@ class modError
     /**
      * @var array An array of objects to validate against
      */
-    protected $_objects = array();
+    protected $_objects = [];
 
     /**
      * @param modX $modx A reference to the modX instance
@@ -60,7 +60,7 @@ class modError
         } else {
             $this->message = '';
         }
-        $this->errors = array ();
+        $this->errors = [];
     }
 
     /**
@@ -84,7 +84,7 @@ class modError
      * add to the validation queue.
      * @return string The validation message returned.
      */
-    public function checkValidation($objs= array()) {
+    public function checkValidation($objs= []) {
         if (is_object($objs)) {
             $this->addObjectToValidate($objs);
         }
@@ -110,10 +110,10 @@ class modError
             if ($validator= $obj->getValidator()) {
                 $messages= $validator->getMessages();
                 if (!empty($messages)) {
-                    $fields = array();
+                    $fields = [];
                     foreach ($messages as $message) {
                         $s .= $message['message'].'<br />'."\n";
-                        if (!isset($fields[$message['field']])) $fields[$message['field']] = array();
+                        if (!isset($fields[$message['field']])) $fields[$message['field']] = [];
                         $fields[$message['field']][$message['name']] = $message['message'];
                     }
                     foreach ($fields as $fieldKey => $field) {
@@ -151,7 +151,7 @@ class modError
         if ($message != '') {
             $this->message = $message;
         }
-        $objarray = array ();
+        $objarray = [];
         if (is_array($object)) {
             $obj = reset($object);
             if (is_object($obj) && $obj instanceof xPDOObject) {
@@ -160,13 +160,13 @@ class modError
             unset ($obj);
         }
         $objarray = $this->toArray($object);
-        return array (
+        return [
             'success' => $status,
             'message' => $this->message,
             'total' => isset ($this->total) && $this->total != 0 ? $this->total : count($this->errors),
             'errors' => $this->errors,
             'object' => $objarray,
-        );
+        ];
     }
 
     /**
@@ -176,10 +176,10 @@ class modError
      * @param string $error The error message.
      */
     public function addField($name, $error) {
-        $this->errors[] = array (
+        $this->errors[] = [
             'id' => $name,
             'msg' => $error
-        );
+        ];
     }
 
     /**
@@ -188,8 +188,8 @@ class modError
      * @return array An array of errors for specific fields.
      */
     public function getFields() {
-        $f = array ();
-        $errors = array_values(array_filter($this->errors, array($this, 'isFieldError')));
+        $f = [];
+        $errors = array_values(array_filter($this->errors, [$this, 'isFieldError']));
         foreach ($errors as $fi) {
             $f[] = $fi['msg'];
         }
@@ -214,7 +214,7 @@ class modError
     public function getErrors($includeFields = false) {
         $errors = $this->errors;
         if (!$includeFields) {
-            $errors = array_values(array_filter($this->errors, array($this, 'isNotFieldError')));
+            $errors = array_values(array_filter($this->errors, [$this, 'isNotFieldError']));
         }
         return $errors;
     }
@@ -280,7 +280,7 @@ class modError
      * @return array Returns an array representation of the object(s).
      */
     public function toArray($object) {
-        $array = array ();
+        $array = [];
         if (is_array($object)) {
             foreach ($object as $key => $value) {
                 if (!is_resource($value)) {
@@ -308,7 +308,7 @@ class modError
      * Resets the error messages.
      */
     public function reset() {
-        $this->errors = array();
+        $this->errors = [];
         $this->message = '';
         $this->total = 0;
         $this->status = true;

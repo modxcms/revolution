@@ -58,9 +58,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             return;
         }
 
-        $result = $this->modx->runProcessor(Create::class,array(
+        $result = $this->modx->runProcessor(Create::class, [
             'name' => $dir,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '. Create::class .' processor');
         }
@@ -72,10 +72,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerCreateDirectory() {
-        return array(
-            array('assets/test2'),
-            array('assets/test3'),
-        );
+        return [
+            ['assets/test2'],
+            ['assets/test3'],
+        ];
     }
 
     /**
@@ -101,10 +101,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             $this->fail('Old directory could not be created for test: '.$adir);
         }
 
-        $result = $this->modx->runProcessor(Update::class,array(
+        $result = $this->modx->runProcessor(Update::class, [
             'dir' => $oldDirectory,
             'name' => $this->modx->getOption('base_path').$newDirectory,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Update::class.' processor');
         }
@@ -116,9 +116,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerUpdateDirectory() {
-        return array(
-            array('assets/test3/','assets/test4'),
-        );
+        return [
+            ['assets/test3/','assets/test4'],
+        ];
     }
 
     /**
@@ -141,9 +141,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             $this->fail('Old directory could not be created for test: '.$adir);
         }
 
-        $result = $this->modx->runProcessor(Remove::class,array(
+        $result = $this->modx->runProcessor(Remove::class, [
             'dir' => $dir,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Remove::class.' processor');
         }
@@ -155,10 +155,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerRemoveDirectory() {
-        return array(
-            array('assets/test2'),
-            array('assets/test4'),
-        );
+        return [
+            ['assets/test2'],
+            ['assets/test4'],
+        ];
     }
 
     /**
@@ -170,9 +170,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      */
     public function testGetDirectoryList($dir,$shouldWork = true) {
         /** @var ProcessorResponse $response */
-        $response = $this->modx->runProcessor(GetList::class,array(
+        $response = $this->modx->runProcessor(GetList::class, [
             'id' => $dir,
-        ));
+        ]);
         if (empty($response)) {
             $this->fail('Could not load '.GetList::class.' processor');
         }
@@ -191,10 +191,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerGetDirectoryList() {
-        return array(
-            array('manager/',true),
-            array('manager/assets',true),
-            array('fakedirectory/',false),
-        );
+        return [
+            ['manager/',true],
+            ['manager/assets',true],
+            ['fakedirectory/',false],
+        ];
     }
 }

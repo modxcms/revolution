@@ -46,12 +46,12 @@ abstract class modInstallError {
      * @var boolean Indicates failure or success.
      */
     public $status = false;
-    protected $_objects = array();
+    protected $_objects = [];
 
     function __construct(&$modx, $message = '') {
         $this->modx =& $modx;
         $this->message = $message;
-        $this->errors = array ();
+        $this->errors = [];
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class modInstallError {
      * add to the validation queue.
      * @return string The validation message returned.
      */
-    public function checkValidation($objs= array()) {
+    public function checkValidation($objs= []) {
         if (is_object($objs)) {
             $this->addObjectToValidate($objs);
         }
@@ -128,7 +128,7 @@ abstract class modInstallError {
         if ($message != '') {
             $this->message = $message;
         }
-        $objarray = array ();
+        $objarray = [];
         if (is_array($object)) {
             $obj = reset($object);
             if (is_object($obj) && $obj instanceof xPDOObject) {
@@ -147,10 +147,10 @@ abstract class modInstallError {
      * @param string $error The error message.
      */
     public function addField($name, $error) {
-        $this->errors[] = array (
+        $this->errors[] = [
             'id' => $name,
             'msg' => $error
-        );
+        ];
     }
 
     /**
@@ -159,7 +159,7 @@ abstract class modInstallError {
      * @return array An array of errors for specific fields.
      */
     public function getFields() {
-        $f = array ();
+        $f = [];
         foreach ($this->errors as $fi)
             $f[] = $fi['msg'];
 
@@ -204,7 +204,7 @@ abstract class modInstallError {
      * @return array Returns an array representation of the object(s).
      */
     public function toArray($object) {
-        $array = array ();
+        $array = [];
         if (is_array($object)) {
             foreach ($object as $key => $value) {
                 if (!is_resource($value)) {

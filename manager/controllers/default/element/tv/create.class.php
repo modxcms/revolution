@@ -66,8 +66,8 @@ Ext.onReady(function() {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         /* grab category if preset */
         if (isset($scriptProperties['category'])) {
@@ -85,23 +85,23 @@ Ext.onReady(function() {
 
     public function getElementSources() {
         $c = $this->modx->newQuery(modContext::class);
-        $c->where(array(
+        $c->where([
             'key:!=' => 'mgr',
-        ));
+        ]);
         $c->sortby($this->modx->escape('rank'));
         $c->sortby($this->modx->escape('key'),'DESC');
         $contexts = $this->modx->getCollection(modContext::class, $c);
-        $list = array();
+        $list = [];
         $this->modx->loadClass('sources.modMediaSource');
         /** @var $source modMediaSource */
         $source = modMediaSource::getDefaultSource($this->modx);
         /** @var modContext $context */
         foreach ($contexts as $context) {
-            $list[] = array(
+            $list[] = [
                 $context->get('key'),
                 $source->get('id'),
                 $source->get('name'),
-            );
+            ];
         }
         return $list;
     }
@@ -113,10 +113,10 @@ Ext.onReady(function() {
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->onTVFormPrerender = $this->modx->invokeEvent('OnTVFormPrerender',array(
+        $this->onTVFormPrerender = $this->modx->invokeEvent('OnTVFormPrerender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($this->onTVFormPrerender)) $this->onTVFormPrerender = implode('',$this->onTVFormPrerender);
         $this->setPlaceholder('onTVFormPrerender', $this->onTVFormPrerender);
     }
@@ -126,12 +126,12 @@ Ext.onReady(function() {
      * @return string
      */
     public function fireRenderEvent() {
-        $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender',array(
+        $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($this->onTVFormRender)) $this->onTVFormRender = implode('',$this->onTVFormRender);
-        $this->onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTVFormRender);
+        $this->onTVFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onTVFormRender);
         return $this->onTVFormRender;
     }
 
@@ -157,7 +157,7 @@ Ext.onReady(function() {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('tv','category','tv_widget','propertyset','element');
+        return ['tv','category','tv_widget','propertyset','element'];
     }
 
     /**

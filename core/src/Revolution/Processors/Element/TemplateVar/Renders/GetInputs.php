@@ -30,7 +30,7 @@ class GetInputs extends Processor {
         return $this->modx->hasPermission('view_tv');
     }
     public function getLanguageTopics() {
-        return array('tv_widget','tv_input_types');
+        return ['tv_widget','tv_input_types'];
     }
 
     public function initialize() {
@@ -50,16 +50,16 @@ class GetInputs extends Processor {
         $renderDirectories = [__DIR__ . '/' . $context . '/input/'];
 
         /* allow for custom directories */
-        $pluginResult = $this->modx->invokeEvent('OnTVInputRenderList',array(
+        $pluginResult = $this->modx->invokeEvent('OnTVInputRenderList', [
             'context' => $context,
-        ));
-        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
+        ]);
+        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = [$pluginResult]; }
         if (!empty($pluginResult)) {
             $renderDirectories = array_merge($renderDirectories,$pluginResult);
         }
 
         /* load namespace caches */
-        $cache = $this->modx->call(modNamespace::class,'loadCache',array(&$this->modx));
+        $cache = $this->modx->call(modNamespace::class,'loadCache', [&$this->modx]);
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {
                 $inputDir = rtrim($namespace['path'],'/').'/tv/input/';
@@ -70,25 +70,25 @@ class GetInputs extends Processor {
         }
 
         /* search directories */
-        $types = array();
+        $types = [];
         foreach ($renderDirectories as $renderDirectory) {
             if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
             try {
                 $dirIterator = new DirectoryIterator($renderDirectory);
                 foreach ($dirIterator as $file) {
                     if (!$file->isReadable() || !$file->isFile()) continue;
-                    $type = str_replace(array('.php','.class','.class.php'),'',$file->getFilename());
-                    $types[$type] = array(
+                    $type = str_replace(['.php','.class','.class.php'],'',$file->getFilename());
+                    $types[$type] = [
                         'name' => $this->modx->lexicon($type),
                         'value' => $type,
-                    );
+                    ];
                 }
             } catch (UnexpectedValueException $e) {}
         }
 
         /* sort types */
         asort($types);
-        $otypes = array();
+        $otypes = [];
         foreach ($types as $type) {
             $otypes[] = $type;
         }

@@ -9,8 +9,8 @@
  */
 
 if (!empty($scriptProperties['fail'])) {
-    return $modx->error->failure('A failure message.',array('bad' => true));
+    return $modx->error->failure('A failure message.', ['bad' => true]);
 }
 
-return $modx->error->success('Success!',array('id' => 123));
- 
+return $modx->error->success('Success!', ['id' => 123]);
+

@@ -47,7 +47,7 @@ var _ = function(s,v) {
 }';
 
 function esc($s) {
-    return strtr($s,array('\\'=>'\\\\',"'"=>"\\'",'"'=>'\\"',"\r"=>'\\r',"\n"=>'\\n','</'=>'<\/'));
+    return strtr($s, ['\\'=>'\\\\',"'"=>"\\'",'"'=>'\\"',"\r"=>'\\r',"\n"=>'\\n','</'=>'<\/']);
 }
 
 /* gather output from buffer */

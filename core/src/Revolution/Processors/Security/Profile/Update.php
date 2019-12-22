@@ -81,9 +81,9 @@ class Update extends Processor
 
             $this->modx->logManagerAction('change_profile_password', modUser::class, $this->modx->user->get('id'));
 
-            return $this->success($this->modx->lexicon('user_password_changed', array(
+            return $this->success($this->modx->lexicon('user_password_changed', [
                 'password' => $this->getProperty('password_new')
-            )));
+            ]));
         }
 
         return $this->success($this->modx->lexicon('success'), $this->profile->toArray());

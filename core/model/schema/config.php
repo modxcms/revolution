@@ -20,18 +20,18 @@ return [
         \xPDO\xPDO::OPT_HYDRATE_FIELDS => true,
         \xPDO\xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
         \xPDO\xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
-        \xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true),
-        \xPDO\xPDO::OPT_CONNECTIONS => array(
-            array(
+        \xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true],
+        \xPDO\xPDO::OPT_CONNECTIONS => [
+            [
                 'dsn' => $properties['mysql_string_dsn_test'],
                 'username' => $properties['mysql_string_username'],
                 'password' => $properties['mysql_string_password'],
-                'options' => array(
+                'options' => [
                     \xPDO\xPDO::OPT_CONN_MUTABLE => true,
-                ),
+                ],
                 'driverOptions' => [],
-            ),
-        ),
+            ],
+        ],
         'log_target' => 'ECHO',
         'log_level' => \xPDO\xPDO::LOG_LEVEL_WARN,
     ],
@@ -40,18 +40,18 @@ return [
         \xPDO\xPDO::OPT_HYDRATE_FIELDS => true,
         \xPDO\xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
         \xPDO\xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
-        \xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true),
-        \xPDO\xPDO::OPT_CONNECTIONS => array(
-            array(
+        \xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true],
+        \xPDO\xPDO::OPT_CONNECTIONS => [
+            [
                 'dsn' => $properties['sqlsrv_string_dsn_test'],
                 'username' => $properties['sqlsrv_string_username'],
                 'password' => $properties['sqlsrv_string_password'],
-                'options' => array(
+                'options' => [
                     \xPDO\xPDO::OPT_CONN_MUTABLE => true,
-                ),
+                ],
                 'driverOptions' => [],
-            ),
-        ),
+            ],
+        ],
         'log_target' => 'ECHO',
         'log_level' => \xPDO\xPDO::LOG_LEVEL_WARN,
     ]

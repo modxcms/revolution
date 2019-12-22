@@ -12,13 +12,13 @@ $class = modUser::class;
 $table = $modx->getTableName($class);
 
 /* modify modUser.password field */
-$password = $this->install->lexicon('alter_column',array('column' => 'password','table' => $table));
-$this->processResults($class, $password, array($modx->manager, 'alterField'), array($class, 'password'));
+$password = $this->install->lexicon('alter_column', ['column' => 'password','table' => $table]);
+$this->processResults($class, $password, [$modx->manager, 'alterField'], [$class, 'password']);
 
 /* modify modUser.cachepwd field */
-$cachepwd = $this->install->lexicon('alter_column',array('column' => 'cachepwd','table' => $table));
-$this->processResults($class, $cachepwd, array($modx->manager, 'alterField'), array($class, 'cachepwd'));
+$cachepwd = $this->install->lexicon('alter_column', ['column' => 'cachepwd','table' => $table]);
+$this->processResults($class, $cachepwd, [$modx->manager, 'alterField'], [$class, 'cachepwd']);
 
 /* modify modUser.hash_class field */
-$hash_class = $this->install->lexicon('alter_column',array('column' => 'hash_class','table' => $table));
-$this->processResults($class, $hash_class, array($modx->manager, 'alterField'), array($class, 'hash_class'));
+$hash_class = $this->install->lexicon('alter_column', ['column' => 'hash_class','table' => $table]);
+$this->processResults($class, $hash_class, [$modx->manager, 'alterField'], [$class, 'hash_class']);

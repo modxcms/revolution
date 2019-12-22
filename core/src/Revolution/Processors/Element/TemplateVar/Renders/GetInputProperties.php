@@ -37,7 +37,7 @@ class GetInputProperties extends Processor {
         return $this->modx->hasPermission('view_tv');
     }
     public function getLanguageTopics() {
-        return array('tv_widget','tv_input_types');
+        return ['tv_widget','tv_input_types'];
     }
 
     public function initialize() {
@@ -48,9 +48,9 @@ class GetInputProperties extends Processor {
         if (empty($context)) {
             $this->setProperty('context',$this->modx->context->get('key'));
         }
-        $this->setDefaultProperties(array(
+        $this->setDefaultProperties([
             'type' => 'default',
-        ));
+        ]);
         return true;
     }
 
@@ -90,7 +90,8 @@ class GetInputProperties extends Processor {
      */
     public function renderController() {
         $c = new TvInputPropertiesManagerController($this->modx);
-        $this->modx->controller = call_user_func_array(array($c,'getInstance'),array(&$this->modx,TvInputPropertiesManagerController::class));
+        $this->modx->controller = call_user_func_array([$c,'getInstance'],
+            [&$this->modx,TvInputPropertiesManagerController::class]);
         return $this->modx->controller->render();
     }
 
@@ -99,7 +100,7 @@ class GetInputProperties extends Processor {
      * @return array
      */
     public function getInputProperties() {
-        $settings = array();
+        $settings = [];
         $tvId = $this->getProperty('tv');
         if (!empty($tvId)) {
             /** @var modTemplateVar $tv */
@@ -120,12 +121,12 @@ class GetInputProperties extends Processor {
      * @return array
      */
     public function fireOnTVPropertiesListEvent() {
-        $pluginResult = $this->modx->invokeEvent($this->onPropertiesListEvent, array(
+        $pluginResult = $this->modx->invokeEvent($this->onPropertiesListEvent, [
             'context' => $this->getProperty('context'),
-        ));
-        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
+        ]);
+        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = [$pluginResult]; }
 
-        return !empty($pluginResult) ? $pluginResult : array();
+        return !empty($pluginResult) ? $pluginResult : [];
     }
 
     /**
@@ -133,8 +134,8 @@ class GetInputProperties extends Processor {
      * @return array
      */
     public function loadNamespaceCache() {
-        $cache = $this->modx->call(modNamespace::class, 'loadCache', array(&$this->modx));
-        $cachedDirs = array();
+        $cache = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
+        $cachedDirs = [];
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {
                 $inputDir = rtrim($namespace['path'],'/').'/tv/'.$this->renderDirectory.'/';
@@ -151,9 +152,9 @@ class GetInputProperties extends Processor {
      */
     public function getRenderDirectories() {
         /* handle dynamic paths */
-        $renderDirectories = array(
+        $renderDirectories = [
             dirname(__FILE__).'/'.$this->getProperty('context').'/'.$this->renderDirectory.'/',
-        );
+        ];
 
         $pluginResult = $this->fireOnTVPropertiesListEvent();
         $cached = $this->loadNamespaceCache();

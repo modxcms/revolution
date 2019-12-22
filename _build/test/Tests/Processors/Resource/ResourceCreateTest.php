@@ -31,11 +31,11 @@ use MODX\Revolution\Processors\Resource\Create;
 class ResourceCreateProcessorTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
-        $this->modx->eventMap = array();
+        $this->modx->eventMap = [];
         if ($this->modx instanceof modX) {
-            $resources = $this->modx->getCollection(modResource::class,array(
+            $resources = $this->modx->getCollection(modResource::class, [
                 'pagetitle:LIKE' => '%Unit Test Resource%'
-            ));
+            ]);
             /** @var modResource $resource */
             foreach ($resources as $resource) {
                 $resource->remove();
@@ -49,9 +49,9 @@ class ResourceCreateProcessorTest extends MODxTestCase {
     public function tearDown() {
         parent::tearDown();
         if ($this->modx instanceof modX) {
-            $resources = $this->modx->getCollection(modResource::class,array(
+            $resources = $this->modx->getCollection(modResource::class, [
                 'pagetitle:LIKE' => '%Unit Test Resource%'
-            ));
+            ]);
             /** @var modResource $resource */
             foreach ($resources as $resource) {
                 $resource->remove();
@@ -69,7 +69,8 @@ class ResourceCreateProcessorTest extends MODxTestCase {
      * @param array $settings
      * @dataProvider providerCreate
      */
-    public function testCreate($shouldPass = true,$pageTitle = '',array $fields = array(),array $expectedFieldsToCheck = array(),array $settings = array()) {
+    public function testCreate($shouldPass = true,$pageTitle = '',array $fields = [],array $expectedFieldsToCheck = [],array $settings = []
+    ) {
         if (empty($pageTitle)) {
             $this->fail('No pagetitle specified in test condition!');
             return;
@@ -90,7 +91,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
         if ($shouldPass) {
             if ($s) {
                 /** @var modResource $resource */
-                $resource = $this->modx->getObject(modResource::class,array('pagetitle' => $pageTitle));
+                $resource = $this->modx->getObject(modResource::class, ['pagetitle' => $pageTitle]);
                 $this->assertNotEmpty($resource,'Resource not found, although processor returned true: `'.$pageTitle.'`: '.$result->getMessage());
                 if ($resource) {
                     foreach ($expectedFieldsToCheck as $k => $v) {
@@ -109,108 +110,108 @@ class ResourceCreateProcessorTest extends MODxTestCase {
      * @return array
      */
     public function providerCreate() {
-        return array(
-            array( /* test basic resource creation */
+        return [
+            [ /* test basic resource creation */
                 true,
                 'Unit Test Resource 1',
-                array(
+                [
                     'alias' => 'unit-test-1',
                     'template' => 0,
                     'published' => true,
-                ),
-                array(
+                ],
+                [
                     'alias' => 'unit-test-1',
                     'published' => true,
                     'template' => 0,
-                )
-            ),
-            array( /* test resource creation with parent */
+                ]
+            ],
+            [ /* test resource creation with parent */
                 true,
                 'Unit Test Resource 2',
-                array(
+                [
                     'parent' => 1,
-                ),
-                array(
+                ],
+                [
                     'parent' => 1,
-                )
-            ),
-            array( /* test resource creation with parent as context */
+                ]
+            ],
+            [ /* test resource creation with parent as context */
                 true,
                 'Unit Test Resource 3',
-                array(
+                [
                     'parent' => 'web',
-                ),
-                array(
+                ],
+                [
                     'parent' => 0,
-                )
-            ),
-            array( /* test resource creation with invalid parent */
+                ]
+            ],
+            [ /* test resource creation with invalid parent */
                 false,
                 'Unit Test Resource 4',
-                array(
+                [
                     'parent' => 999999999,
-                ),
-            ),
-            array( /* test resource creation with invalid context_key */
+                ],
+            ],
+            [ /* test resource creation with invalid context_key */
                 false,
                 'Unit Test Resource 5',
-                array(
+                [
                     'context_key' => 'never-would-exist-ever-you-hear-me',
-                ),
-            ),
-            array( /* test resource creation with a template */
+                ],
+            ],
+            [ /* test resource creation with a template */
                 true,
                 'Unit Test Resource 6',
-                array(
+                [
                     'template' => 1,
-                ),
-                array(
+                ],
+                [
                     'template' => 1,
-                )
-            ),
-            array( /* test resource creation with no template passed, but using a default_template System Setting */
+                ]
+            ],
+            [ /* test resource creation with no template passed, but using a default_template System Setting */
                 true,
                 'Unit Test Resource 7',
-                array(
-                ),
-                array(
+                [
+                ],
+                [
                     'template' => 10,
-                ),
-                array(
+                ],
+                [
                     'default_template' => 10,
-                ),
-            ),
-            array( /* test resource creation with pagetitle with whitespace at end, should trim it */
+                ],
+            ],
+            [ /* test resource creation with pagetitle with whitespace at end, should trim it */
                 true,
                 'Unit Test Resource 8  ',
-                array(
-                ),
-                array(
+                [
+                ],
+                [
                     'pagetitle' => 'Unit Test Resource 8',
-                ),
-            ),
-            array( /* test resource creation with manual menuindex */
+                ],
+            ],
+            [ /* test resource creation with manual menuindex */
                 true,
                 'Unit Test Resource 9',
-                array(
+                [
                     'menuindex' => 100,
-                ),
-                array(
+                ],
+                [
                     'menuindex' => 100,
-                ),
-            ),
-            array( /* test resource creation with auto_menuindex off and no menuindex passed */
+                ],
+            ],
+            [ /* test resource creation with auto_menuindex off and no menuindex passed */
                 true,
                 'Unit Test Resource 10',
-                array(
-                ),
-                array(
+                [
+                ],
+                [
                     'menuindex' => 0,
-                ),
-                array(
+                ],
+                [
                     'auto_menuindex' => false,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

@@ -40,12 +40,12 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      *
      * @return array
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
             $this->failure($this->modx->lexicon('dashboard_err_ns'));
             return [];
         }
-        $this->dashboard = $this->modx->getObject(modDashboard::class, array('id' => $this->scriptProperties['id']));
+        $this->dashboard = $this->modx->getObject(modDashboard::class, ['id' => $this->scriptProperties['id']]);
         if (empty($this->dashboard)) {
             $this->failure($this->modx->lexicon('dashboard_err_nf'));
             return [];
@@ -64,13 +64,13 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      */
     public function getWidgets() {
         $c = $this->modx->newQuery(modDashboardWidgetPlacement::class);
-        $c->where(array(
+        $c->where([
             'dashboard' => $this->dashboard->get('id'),
             'user' => 0,
-        ));
+        ]);
         $c->sortby('modDashboardWidgetPlacement.rank','ASC');
         $placements = $this->modx->getCollection(modDashboardWidgetPlacement::class, $c);
-        $list = array();
+        $list = [];
         /** @var modDashboardWidgetPlacement $placement */
         foreach ($placements as $placement) {
             $placement->getOne('Widget');
@@ -83,7 +83,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
                 $this->modx->lexicon->load($placement->Widget->get('lexicon'));
             }
             $widgetArray = $placement->Widget->toArray();
-            $list[] = array(
+            $list[] = [
                 $placement->get('dashboard'),
                 $placement->get('widget'),
                 $placement->get('rank'),
@@ -91,7 +91,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
                 $widgetArray['name_trans'],
                 $widgetArray['description'],
                 $widgetArray['description_trans'],
-            );
+            ];
         }
         return $list;
     }
@@ -153,7 +153,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('dashboards','user');
+        return ['dashboards','user'];
     }
 
     /**

@@ -62,8 +62,8 @@ class ElementTemplateCreateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         /* grab category if preset */
         if (isset($scriptProperties['category'])) {
@@ -86,10 +86,10 @@ class ElementTemplateCreateManagerController extends modManagerController {
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->onTempFormPrerender = $this->modx->invokeEvent('OnTempFormPrerender',array(
+        $this->onTempFormPrerender = $this->modx->invokeEvent('OnTempFormPrerender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($this->onTempFormPrerender)) $this->onTempFormPrerender = implode('',$this->onTempFormPrerender);
         $this->setPlaceholder('onTempFormPrerender', $this->onTempFormPrerender);
     }
@@ -99,12 +99,12 @@ class ElementTemplateCreateManagerController extends modManagerController {
      * @return string
      */
     public function fireRenderEvent() {
-        $this->onTempFormRender = $this->modx->invokeEvent('OnTempFormRender',array(
+        $this->onTempFormRender = $this->modx->invokeEvent('OnTempFormRender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($this->onTempFormRender)) $this->onTempFormRender = implode('',$this->onTempFormRender);
-        $this->onTempFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTempFormRender);
+        $this->onTempFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onTempFormRender);
         return $this->onTempFormRender;
     }
 
@@ -130,7 +130,7 @@ class ElementTemplateCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('template','category','propertyset','element','tv');
+        return ['template','category','propertyset','element','tv'];
     }
 
     /**

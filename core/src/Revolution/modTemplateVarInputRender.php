@@ -17,7 +17,7 @@ namespace MODX\Revolution;
  * @package MODX\Revolution
  */
 abstract class modTemplateVarInputRender extends modTemplateVarRender {
-    public function render($value,array $params = array()) {
+    public function render($value,array $params = []) {
         $this->setPlaceholder('tv',$this->tv);
         $this->setPlaceholder('id',$this->tv->get('id'));
         $this->setPlaceholder('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');

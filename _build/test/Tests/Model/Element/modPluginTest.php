@@ -33,7 +33,7 @@ class modPluginTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         $this->plugin = $this->modx->newObject(modPlugin::class);
-        $this->plugin->fromArray(array(
+        $this->plugin->fromArray([
             'id' => 12345,
             'name' => 'Unit Test Plugin',
             'description' => 'A plugin for unit testing.',
@@ -41,8 +41,8 @@ class modPluginTest extends MODxTestCase {
             'category' => 0,
             'locked' => false,
             'disabled' => false,
-        ),'',true,true);
-        $this->plugin->setProperties(array('name' => 'John'));
+        ],'',true,true);
+        $this->plugin->setProperties(['name' => 'John']);
         $this->plugin->setCacheable(false);
     }
     public function tearDown() {
@@ -70,9 +70,9 @@ class modPluginTest extends MODxTestCase {
      * @return array
      */
     public function providerSetContent() {
-        return array(
-            array('return "Goodbye.";'),
-        );
+        return [
+            ['return "Goodbye.";'],
+        ];
     }
 
 }

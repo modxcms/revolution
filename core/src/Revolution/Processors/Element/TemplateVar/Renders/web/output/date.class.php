@@ -19,11 +19,11 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderDate extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         /* default properties */
         $params['format'] = !empty($params['format']) ? $params['format'] : "%A %d, %B %Y";
         /* fix for 2.0.0-pl bug where 1=yes and 0=no */
-        $params['default'] = !empty($params['default']) && in_array($params['default'],array('yes',1,'1')) ? 1 : 0;
+        $params['default'] = !empty($params['default']) && in_array($params['default'], ['yes',1,'1']) ? 1 : 0;
 
         $value= $this->tv->parseInput($value);
 

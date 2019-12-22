@@ -32,27 +32,27 @@ class SystemInfoManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return array
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         $pi = $this->getPhpInfo(INFO_GENERAL);
         $m = $this->parsePHPModules();
         $dbtype_mysql = $this->modx->config['dbtype'] == 'mysql';
         $dbtype_sqlsrv = $this->modx->config['dbtype'] == 'sqlsrv';
-        if ($dbtype_mysql && !empty($m['mysql'])) $pi = array_merge($pi,array('mysql' => $m['mysql']));
-        if ($dbtype_mysql && !empty($m['mysqlnd'])) $pi = array_merge($pi,array('pdo' => $m['mysqlnd']));
-        if ($dbtype_sqlsrv && !empty($m['sqlsrv'])) $pi = array_merge($pi,array('sqlsrv' => $m['sqlsrv']));
-        if (!empty($m['PDO'])) $pi = array_merge($pi,array('pdo' => $m['PDO']));
-        if ($dbtype_mysql && !empty($m['pdo_mysql'])) $pi = array_merge($pi,array('pdo_mysql' => $m['pdo_mysql']));
-        if ($dbtype_sqlsrv && !empty($m['pdo_sqlsrv'])) $pi = array_merge($pi,array('pdo_sqlsrv' => $m['pdo_sqlsrv']));
-        if (!empty($m['zip'])) $pi = array_merge($pi,array('zip' => $m['zip']));
+        if ($dbtype_mysql && !empty($m['mysql'])) $pi = array_merge($pi, ['mysql' => $m['mysql']]);
+        if ($dbtype_mysql && !empty($m['mysqlnd'])) $pi = array_merge($pi, ['pdo' => $m['mysqlnd']]);
+        if ($dbtype_sqlsrv && !empty($m['sqlsrv'])) $pi = array_merge($pi, ['sqlsrv' => $m['sqlsrv']]);
+        if (!empty($m['PDO'])) $pi = array_merge($pi, ['pdo' => $m['PDO']]);
+        if ($dbtype_mysql && !empty($m['pdo_mysql'])) $pi = array_merge($pi, ['pdo_mysql' => $m['pdo_mysql']]);
+        if ($dbtype_sqlsrv && !empty($m['pdo_sqlsrv'])) $pi = array_merge($pi, ['pdo_sqlsrv' => $m['pdo_sqlsrv']]);
+        if (!empty($m['zip'])) $pi = array_merge($pi, ['zip' => $m['zip']]);
         $this->version = [
             'smarty'=> $this->modx->smarty->_version,
             'PHPMailer'=> PHPMailer\PHPMailer\PHPMailer::VERSION
         ];
 
         $this->pi = array_merge($pi,$this->getPhpInfo(INFO_CONFIGURATION));
-        return array(
+        return [
             'pi' => $this->pi,
-        );
+        ];
 
     }
 
@@ -97,7 +97,7 @@ class SystemInfoManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('system_info');
+        return ['system_info'];
     }
 
     public function getPhpInfo($type = -1) {
@@ -105,26 +105,30 @@ class SystemInfoManagerController extends modManagerController {
          phpinfo($type);
 
          $pi = preg_replace(
-         array('#^.*<body>(.*)</body>.*$#ms', '#<h2>PHP License</h2>.*$#ms',
+         [
+             '#^.*<body>(.*)</body>.*$#ms', '#<h2>PHP License</h2>.*$#ms',
          '#<h1>Configuration</h1>#',  "#\r?\n#", "#</(h1|h2|h3|tr)>#", '# +<#',
          "#[ \t]+#", '#&nbsp;#', '#  +#', '# class=".*?"#', '%&#039;%',
           '#<tr>(?:.*?)" src="(?:.*?)=(.*?)" alt="PHP Logo" /></a>'
           .'<h1>PHP Version (.*?)</h1>(?:\n+?)</td></tr>#',
           '#<h1><a href="(?:.*?)\?=(.*?)">PHP Credits</a></h1>#',
           '#<tr>(?:.*?)" src="(?:.*?)=(.*?)"(?:.*?)Zend Engine (.*?),(?:.*?)</tr>#',
-          "# +#", '#<tr>#', '#</tr>#'),
-         array('$1', '', '', '', '</$1>' . "\n", '<', ' ', ' ', ' ', '', ' ',
+          "# +#", '#<tr>#', '#</tr>#'
+         ],
+         [
+             '$1', '', '', '', '</$1>' . "\n", '<', ' ', ' ', ' ', '', ' ',
           '<h2>PHP Configuration</h2>'."\n".'<tr><td>PHP Version</td><td>$2</td></tr>'.
           "\n".'<tr><td>PHP Egg</td><td>$1</td></tr>',
           '<tr><td>PHP Credits Egg</td><td>$1</td></tr>',
           '<tr><td>Zend Engine</td><td>$2</td></tr>' . "\n" .
-          '<tr><td>Zend Egg</td><td>$1</td></tr>', ' ', '%S%', '%E%'),
+          '<tr><td>Zend Egg</td><td>$1</td></tr>', ' ', '%S%', '%E%'
+         ],
          ob_get_clean());
 
          $sections = explode('<h2>', strip_tags($pi, '<h2><th><td>'));
          unset($sections[0]);
 
-         $pi = array();
+         $pi = [];
          foreach($sections as $section){
            $n = substr($section, 0, strpos($section, '</h2>'));
            preg_match_all(
@@ -146,7 +150,7 @@ class SystemInfoManagerController extends modManagerController {
         $s = preg_replace('/<th[^>]*>([^<]+)<\/th>/',"<info>\\1</info>",$s);
         $s = preg_replace('/<td[^>]*>([^<]+)<\/td>/',"<info>\\1</info>",$s);
         $vTmp = preg_split('/(<h2>[^<]+<\/h2>)/',$s,-1,PREG_SPLIT_DELIM_CAPTURE);
-        $vModules = array();
+        $vModules = [];
         for ($i=1;$i<count($vTmp);$i++) {
             if (preg_match('/<h2>([^<]+)<\/h2>/',$vTmp[$i],$vMat)) {
                 $vName = trim($vMat[1]);
@@ -156,7 +160,7 @@ class SystemInfoManagerController extends modManagerController {
                     $vPat3 = "/$vPat\s*$vPat\s*$vPat/";
                     $vPat2 = "/$vPat\s*$vPat/";
                     if (preg_match($vPat3,$vOne,$vMat)) { // 3cols
-                        $vModules[$vName][trim($vMat[1])] = array(trim($vMat[2]),trim($vMat[3]));
+                        $vModules[$vName][trim($vMat[1])] = [trim($vMat[2]),trim($vMat[3])];
                     } elseif (preg_match($vPat2,$vOne,$vMat)) { // 2cols
                         $vModules[$vName][trim($vMat[1])] = trim($vMat[2]);
                     }

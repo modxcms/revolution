@@ -70,7 +70,7 @@ if ($saved) {
     }
     if ($saved) {
         /** @var modSystemSetting $emailSender */
-        $emailSender = $modx->getObject(modSystemSetting::class, array('key' => 'emailsender'));
+        $emailSender = $modx->getObject(modSystemSetting::class, ['key' => 'emailsender']);
         if ($emailSender) {
             $emailSender->set('value', $settings->get('cmsadminemail'));
             $saved = $emailSender->save();
@@ -102,19 +102,19 @@ if ($install->settings->get('new_file_permissions')) {
 /* setup load only anonymous ACL*/
 
 /** @var modAccessPolicy $loadOnly */
-$loadOnly = $modx->getObject(modAccessPolicy::class,array(
+$loadOnly = $modx->getObject(modAccessPolicy::class, [
     'name' => 'Load Only',
-));
+]);
 if ($loadOnly) {
     /** @var modAccessContext $access */
     $access= $modx->newObject(modAccessContext::class);
-    $access->fromArray(array(
+    $access->fromArray([
       'target' => 'web',
       'principal_class' => modUserGroup::class,
       'principal' => 0,
       'authority' => 9999,
       'policy' => $loadOnly->get('id'),
-    ));
+    ]);
     $access->save();
     unset($access);
 }
@@ -124,34 +124,34 @@ unset($loadOnly);
 /* setup default admin ACLs*/
 
 /** @var modAccessPolicy $adminPolicy */
-$adminPolicy = $modx->getObject(modAccessPolicy::class,array(
+$adminPolicy = $modx->getObject(modAccessPolicy::class, [
     'name' => 'Administrator',
-));
+]);
 /** @var modUserGroup $adminGroup */
-$adminGroup = $modx->getObject(modUserGroup::class,array(
+$adminGroup = $modx->getObject(modUserGroup::class, [
     'name' => 'Administrator',
-));
+]);
 if ($adminPolicy && $adminGroup) {
     /** @var modAccessContext $access */
     $access= $modx->newObject(modAccessContext::class);
-    $access->fromArray(array(
+    $access->fromArray([
       'target' => 'mgr',
       'principal_class' => modUserGroup::class,
       'principal' => $adminGroup->get('id'),
       'authority' => 0,
       'policy' => $adminPolicy->get('id'),
-    ));
+    ]);
     $access->save();
     unset($access);
 
     $access= $modx->newObject(modAccessContext::class);
-    $access->fromArray(array(
+    $access->fromArray([
       'target' => 'web',
       'principal_class' => modUserGroup::class,
       'principal' => $adminGroup->get('id'),
       'authority' => 0,
       'policy' => $adminPolicy->get('id'),
-    ));
+    ]);
     $access->save();
     unset($access);
 }
@@ -161,24 +161,24 @@ unset($adminPolicy,$adminGroup);
 $templateContent = file_get_contents(dirname(__DIR__) . '/templates/base_template.tpl');
 /** @var modTemplate $template */
 $template = $modx->newObject(modTemplate::class);
-$template->fromArray(array(
+$template->fromArray([
     'templatename' => $install->lexicon('base_template'),
     'content' => $templateContent,
-));
+]);
 if ($template->save()) {
 
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject(modSystemSetting::class,array(
+    $setting = $modx->getObject(modSystemSetting::class, [
         'key' => 'default_template',
-    ));
+    ]);
     if (!$setting) {
         $setting = $modx->newObject(modSystemSetting::class);
-        $setting->fromArray(array(
+        $setting->fromArray([
             'key' => 'default_template',
             'namespace' => 'core',
             'xtype' => 'modx-combo-template',
             'area' => 'site',
-        ));
+        ]);
     }
     $setting->set('value', $template->get('id'));
     $setting->save();
@@ -186,7 +186,7 @@ if ($template->save()) {
     $resourceContent = file_get_contents(dirname(__DIR__) . '/templates/base_resource.tpl');
     /** @var modResource $resource */
     $resource = $modx->newObject(modResource::class);
-    $resource->fromArray(array(
+    $resource->fromArray([
         'pagetitle' => $install->lexicon('home'),
         'longtitle' => $install->lexicon('congratulations'),
         'alias' => 'index',
@@ -202,22 +202,22 @@ if ($template->save()) {
         'class_key' => modDocument::class,
         'context_key' => 'web',
         'content_type' => 1,
-    ));
+    ]);
 
     if ($resource->save()) {
 
          /* site_start */
-        $setting = $modx->getObject(modSystemSetting::class,array(
+        $setting = $modx->getObject(modSystemSetting::class, [
             'key' => 'site_start',
-        ));
+        ]);
         if (!$setting) {
             $setting = $modx->newObject(modSystemSetting::class);
-            $setting->fromArray(array(
+            $setting->fromArray([
                 'key' => 'site_start',
                 'namespace' => 'core',
                 'xtype' => 'textfield',
                 'area' => 'site',
-            ));
+            ]);
         }
         $setting->set('value', $resource->get('id'));
         $setting->save();
@@ -230,17 +230,17 @@ if ($template->save()) {
 $usemb = function_exists('mb_strlen');
 if ($usemb) {
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject(modSystemSetting::class,array(
+    $setting = $modx->getObject(modSystemSetting::class, [
         'key' => 'use_multibyte',
-    ));
+    ]);
     if (!$setting) {
         $setting = $modx->newObject(modSystemSetting::class);
-        $setting->fromArray(array(
+        $setting->fromArray([
             'key' => 'use_multibyte',
             'namespace' => 'core',
             'xtype' => 'combo-boolean',
             'area' => 'language',
-        ));
+        ]);
     }
     $setting->set('value',1);
     $setting->save();
@@ -250,17 +250,17 @@ if ($usemb) {
 $language = $settings->get('language','en');
 if ($language != 'en') {
     // cultureKey
-    $setting = $modx->getObject(modSystemSetting::class,array(
+    $setting = $modx->getObject(modSystemSetting::class, [
         'key' => 'cultureKey',
-    ));
+    ]);
     if (!$setting) {
         $setting = $modx->newObject(modSystemSetting::class);
-        $setting->fromArray(array(
+        $setting->fromArray([
             'key' => 'cultureKey',
             'namespace' => 'core',
             'xtype' => 'textfield',
             'area' => 'language',
-        ));
+        ]);
     }
     $setting->set('value',$language);
     $setting->save();
@@ -270,13 +270,13 @@ if ($language != 'en') {
 if ('sdk' === trim($currentVersion['distro'], '@')) {
     $setting = $modx->newObject(modSystemSetting::class);
     $setting->fromArray(
-        array(
+        [
             'key' => 'ext_debug',
             'namespace' => 'core',
             'xtype' => 'combo-boolean',
             'area' => 'system',
             'value' => false
-        ),
+        ],
         '',
         true
     );
@@ -296,16 +296,16 @@ switch ($last) {
         $maxFileSize *= 1024;
 }
 
-$settings_maxFileSize = $modx->getObject(modSystemSetting::class, array('key' => 'upload_maxsize'));
+$settings_maxFileSize = $modx->getObject(modSystemSetting::class, ['key' => 'upload_maxsize']);
 if (!$settings_maxFileSize) {
     $settings_maxFileSize = $modx->newObject(modSystemSetting::class);
     $settings_maxFileSize->fromArray(
-        array(
+        [
             'key' => 'upload_maxsize',
             'namespace' => 'core',
             'area' => 'system',
             'xtype' => 'textfield'
-        ),
+        ],
         '',
         true
     );

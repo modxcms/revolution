@@ -28,7 +28,7 @@ if (!empty($_POST['proceed'])) {
     $install->settings->store($_POST);
     $mode = $install->settings->get('installmode');
 
-    $errors = array();
+    $errors = [];
 
     $install->getConnection();
 
@@ -64,7 +64,7 @@ if (!empty($_POST['proceed'])) {
         } else {
             $minlength = 8;
             if (strlen($_POST['cmspassword']) < $minlength) {
-                $errors['cmspassword'] = $install->lexicon('password_err_short', array('length' => $minlength));
+                $errors['cmspassword'] = $install->lexicon('password_err_short', ['length' => $minlength]);
             }
 
             $found = false;
@@ -98,7 +98,7 @@ if (!empty($_POST['proceed'])) {
         switch (MODX_SETUP_KEY) {
             case '@traditional@':
                 $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
-                $settings = array();
+                $settings = [];
 
                 if ($mode == modInstall::MODE_NEW) {
                     $settings['core_path'] = MODX_CORE_PATH;

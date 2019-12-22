@@ -27,12 +27,12 @@ class GetList extends ModelProcessor
     public function process()
     {
         $themePath = $this->modx->config['manager_path'] . 'templates/';
-        $themes = array();
+        $themes = [];
 
         $dir = new DirectoryIterator($themePath);
         foreach ($dir as $fileInfo) {
             if ($fileInfo->isDir() && !$fileInfo->isDot()) {
-                $themes[] = array('theme' => $fileInfo->getFilename());
+                $themes[] = ['theme' => $fileInfo->getFilename()];
             }
         }
 

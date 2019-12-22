@@ -24,7 +24,7 @@ $proceed = false;
 $writable = is_writable(MODX_SETUP_PATH . 'includes/config.core.php');
 $writableError = false;
 $config_key = isset($_POST['config_key']) && !empty($_POST['config_key'])
-    ? str_replace(array('{','}',"'",'"','\$'), '', $_POST['config_key'])
+    ? str_replace(['{','}',"'",'"','\$'], '', $_POST['config_key'])
     : MODX_CONFIG_KEY;
 if (!empty($_POST['proceed'])) {
     if ($config_key !== MODX_CONFIG_KEY) {

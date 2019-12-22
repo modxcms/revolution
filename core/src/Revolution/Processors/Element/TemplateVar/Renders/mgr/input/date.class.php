@@ -15,7 +15,7 @@ use MODX\Revolution\modTemplateVarInputRender;
  * @subpackage processors.element.tv.renders.mgr.input
  */
 class modTemplateVarInputRenderDate extends modTemplateVarInputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $v = $value;
         if ($v != '' && $v != '0' && $v != '0000-00-00 00:00:00') {
             $v = strftime('%Y-%m-%d %H:%M:%S',strtotime($v));

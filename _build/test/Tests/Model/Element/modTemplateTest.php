@@ -32,15 +32,15 @@ class modTemplateTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         $this->template = $this->modx->newObject(modTemplate::class);
-        $this->template->fromArray(array(
+        $this->template->fromArray([
             'id' => 12345,
             'templatename' => 'Unit Test Template',
             'description' => 'A template for unit testing.',
             'content' => '<p>Hello, [[+name]]!</p>',
             'category' => 0,
             'locked' => 0,
-        ),'',true,true);
-        $this->template->setProperties(array('name' => 'John'));
+        ],'',true,true);
+        $this->template->setProperties(['name' => 'John']);
         $this->template->setCacheable(false);
     }
     public function tearDown() {
@@ -68,9 +68,9 @@ class modTemplateTest extends MODxTestCase {
      * @return array
      */
     public function providerSetContent() {
-        return array(
-            array('Test content.'),
-        );
+        return [
+            ['Test content.'],
+        ];
     }
 
     /**
@@ -79,7 +79,7 @@ class modTemplateTest extends MODxTestCase {
      * @param null|string $content
      * @dataProvider providerProcess
      */
-    public function testProcess($expected,array $properties = array(),$content = null) {
+    public function testProcess($expected,array $properties = [],$content = null) {
         $result = $this->template->process($properties,$content);
         $this->assertEquals($expected,$result);
     }
@@ -87,11 +87,11 @@ class modTemplateTest extends MODxTestCase {
      * @return array
      */
     public function providerProcess() {
-        return array(
-            array('<p>Hello, John!</p>'),
-            array('<p>Hello, Mark!</p>',array('name' => 'Mark')),
-            array('<p>Having fun.</p>',array(),'<p>Having fun.</p>'),
-            array('<p>Test 1</p>',array('number' => 1),'<p>Test [[+number]]</p>'),
-        );
+        return [
+            ['<p>Hello, John!</p>'],
+            ['<p>Hello, Mark!</p>', ['name' => 'Mark']],
+            ['<p>Having fun.</p>', [],'<p>Having fun.</p>'],
+            ['<p>Test 1</p>', ['number' => 1],'<p>Test [[+number]]</p>'],
+        ];
     }
 }

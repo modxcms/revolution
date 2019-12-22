@@ -25,10 +25,10 @@ class TvInputManagerController extends modManagerController {
         return $this->modx->hasPermission('view_tv');
     }
     public function loadCustomCssJs() {}
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = []) {}
     public function getPageTitle() {return '';}
     public function getTemplateFile() {
         return 'empty.tpl';
     }
-    public function getLanguageTopics() {return array();}
+    public function getLanguageTopics() {return [];}
 }

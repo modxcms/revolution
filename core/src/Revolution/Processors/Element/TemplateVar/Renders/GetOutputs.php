@@ -38,7 +38,7 @@ class GetOutputs extends Processor {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('tv_widget');
+        return ['tv_widget'];
     }
 
     /**
@@ -47,12 +47,12 @@ class GetOutputs extends Processor {
      * @return array
      */
     public function fireOnTVOutputRenderListEvent($context) {
-        $pluginResult = $this->modx->invokeEvent('OnTVOutputRenderList',array(
+        $pluginResult = $this->modx->invokeEvent('OnTVOutputRenderList', [
             'context' => $context,
-        ));
-        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = array($pluginResult); }
+        ]);
+        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = [$pluginResult]; }
 
-        return !empty($pluginResult) ? $pluginResult : array();
+        return !empty($pluginResult) ? $pluginResult : [];
     }
 
     /**
@@ -60,8 +60,8 @@ class GetOutputs extends Processor {
      * @return array
      */
     public function loadNamespaceCache() {
-        $cache = $this->modx->call(modNamespace::class, 'loadCache', array(&$this->modx));
-        $cachedDirs = array();
+        $cache = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
+        $cachedDirs = [];
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {
                 $inputDir = rtrim($namespace['path'],'/').'/tv/output/';
@@ -80,9 +80,9 @@ class GetOutputs extends Processor {
     public function getRenderDirectories() {
         $context = $this->getProperty('context', 'web');
 
-        $renderDirectories = array(
+        $renderDirectories = [
             dirname(__FILE__).'/'.$context.'/output/',
-        );
+        ];
 
         $pluginResult = $this->fireOnTVOutputRenderListEvent($context);
         $cached = $this->loadNamespaceCache();
@@ -97,18 +97,18 @@ class GetOutputs extends Processor {
      * @return array
      */
     public function iterate(array $data) {
-        $types = array();
+        $types = [];
         foreach ($data as $renderDirectory) {
             if (empty($renderDirectory) || !is_dir($renderDirectory)) continue;
             try {
                 $dirIterator = new DirectoryIterator($renderDirectory);
                 foreach ($dirIterator as $file) {
                     if (!$file->isReadable() || !$file->isFile()) continue;
-                    $type = str_replace(array('.php', '.class', '.class.php'), '', $file->getFilename());
-                    $types[$type] = array(
+                    $type = str_replace(['.php', '.class', '.class.php'], '', $file->getFilename());
+                    $types[$type] = [
                         'name' => $this->modx->lexicon($type),
                         'value' => $type,
-                    );
+                    ];
                 }
             } catch (UnexpectedValueException $e) {}
         }

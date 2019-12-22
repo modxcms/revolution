@@ -16,7 +16,7 @@ foreach ($keys as $key) {
     $success = false;
 
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject(modSystemSetting::class, array('key' => $key));
+    $setting = $modx->getObject(modSystemSetting::class, ['key' => $key]);
     if ($setting) {
         $value = $setting->get('value');
         $tmp = explode(',', $value);

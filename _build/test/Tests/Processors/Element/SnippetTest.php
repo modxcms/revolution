@@ -34,7 +34,7 @@ class SnippetProcessorsTest extends MODxTestCase {
         parent::setUp();
         /** @var modSnippet $snippet */
         $snippet = $this->modx->newObject(modSnippet::class);
-        $snippet->fromArray(array('name' => 'UnitTestSnippet'));
+        $snippet->fromArray(['name' => 'UnitTestSnippet']);
         $snippet->save();
     }
 
@@ -42,7 +42,7 @@ class SnippetProcessorsTest extends MODxTestCase {
      * Cleanup data after this test.
      */
     public function tearDown() {
-        $snippets = $this->modx->getCollection(modSnippet::class,array('name:LIKE' => '%UnitTest%'));
+        $snippets = $this->modx->getCollection(modSnippet::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modSnippet $snippet */
         foreach ($snippets as $snippet) {
             $snippet->remove();
@@ -59,14 +59,14 @@ class SnippetProcessorsTest extends MODxTestCase {
      */
     public function testSnippetCreate($shouldPass,$snippetPk) {
         if (empty($snippetPk)) return;
-        $result = $this->modx->runProcessor(Create::class,array(
+        $result = $this->modx->runProcessor(Create::class, [
             'name' => $snippetPk,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Create::class.' processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount(modSnippet::class,array('name' => $snippetPk));
+        $ct = $this->modx->getCount(modSnippet::class, ['name' => $snippetPk]);
         $passed = $s && $ct > 0;
         $passed = $shouldPass ? $passed : !$passed;
         $this->assertTrue($passed,'Could not create Snippet: `'.$snippetPk.'`: '.$result->getMessage());
@@ -76,11 +76,11 @@ class SnippetProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerSnippetCreate() {
-        return array(
-            array(true,'UnitTestSnippet2'),
-            array(true,'UnitTestSnippet3'),
-            array(false,'UnitTestSnippet'),
-        );
+        return [
+            [true,'UnitTestSnippet2'],
+            [true,'UnitTestSnippet3'],
+            [false,'UnitTestSnippet'],
+        ];
     }
 
     /**
@@ -92,15 +92,15 @@ class SnippetProcessorsTest extends MODxTestCase {
     public function testSnippetGet($shouldPass,$snippetPk) {
         if (empty($snippetPk)) return;
 
-        $snippet = $this->modx->getObject(modSnippet::class,array('name' => $snippetPk));
+        $snippet = $this->modx->getObject(modSnippet::class, ['name' => $snippetPk]);
         if (empty($snippet) && $shouldPass) {
             $this->fail('No Snippet found "'.$snippetPk.'" as specified in test provider.');
             return;
         }
 
-        $result = $this->modx->runProcessor(Get::class,array(
+        $result = $this->modx->runProcessor(Get::class, [
             'id' => $snippet ? $snippet->get('id') : $snippetPk,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Get::class.' processor');
         }
@@ -113,10 +113,10 @@ class SnippetProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerSnippetGet() {
-        return array(
-            array(true,'UnitTestSnippet'),
-            array(false,234),
-        );
+        return [
+            [true,'UnitTestSnippet'],
+            [false,234],
+        ];
     }
 
     /**
@@ -129,12 +129,12 @@ class SnippetProcessorsTest extends MODxTestCase {
      * @dataProvider providerSnippetGetList
      */
     public function testSnippetGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(GetList::class,array(
+        $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
             'start' => $start,
-        ));
+        ]);
         $results = $this->getResults($result);
         $this->assertTrue(!empty($results),'Could not get list of Snippets: '.$result->getMessage());
     }
@@ -143,9 +143,9 @@ class SnippetProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerSnippetGetList() {
-        return array(
-            array('name','ASC',5,0),
-        );
+        return [
+            ['name','ASC',5,0],
+        ];
     }
 
     /**
@@ -158,15 +158,15 @@ class SnippetProcessorsTest extends MODxTestCase {
     public function testSnippetRemove($shouldPass,$snippetPk) {
         if (empty($snippetPk)) return;
 
-        $snippet = $this->modx->getObject(modSnippet::class,array('name' => $snippetPk));
+        $snippet = $this->modx->getObject(modSnippet::class, ['name' => $snippetPk]);
         if (empty($snippet) && $shouldPass) {
             $this->fail('No Snippet found "'.$snippetPk.'" as specified in test provider.');
             return;
         }
 
-        $result = $this->modx->runProcessor(Remove::class,array(
+        $result = $this->modx->runProcessor(Remove::class, [
             'id' => $snippet ? $snippet->get('id') : $snippetPk,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Remove::class.' processor');
         }
@@ -179,9 +179,9 @@ class SnippetProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerSnippetRemove() {
-        return array(
-            array(true,'UnitTestSnippet'),
-            array(false,234),
-        );
+        return [
+            [true,'UnitTestSnippet'],
+            [false,234],
+        ];
     }
 }

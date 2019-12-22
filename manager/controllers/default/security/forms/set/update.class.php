@@ -19,7 +19,7 @@ use MODX\Revolution\modTemplate;
  * @subpackage manager.controllers
  */
 class SecurityFormsSetUpdateManagerController extends modManagerController {
-    public $setArray = array();
+    public $setArray = [];
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -55,32 +55,32 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         /* get profile */
         if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('set_err_ns'));
         $c = $this->modx->newQuery(modFormCustomizationSet::class);
         $c->leftJoin(modTemplate::class,'Template');
         $c->select($this->modx->getSelectColumns(modFormCustomizationSet::class,'modFormCustomizationSet'));
-        $c->select(array(
+        $c->select([
             'Template.templatename',
-        ));
-        $c->where(array(
+        ]);
+        $c->where([
             'id' => $scriptProperties['id'],
-        ));
+        ]);
         /** @var modFormCustomizationSet $set */
         $set = $this->modx->getObject(modFormCustomizationSet::class, $c);
-        if (empty($set)) return $this->failure($this->modx->lexicon('set_err_nfs',array('id' => $scriptProperties['id'])));
+        if (empty($set)) return $this->failure($this->modx->lexicon('set_err_nfs', ['id' => $scriptProperties['id']]));
 
         $this->setArray = $set->toArray();
         $setData = $set->getData();
 
         /* format fields */
-        $this->setArray['fields'] = array();
+        $this->setArray['fields'] = [];
         if (!empty($setData['fields'])) {
             foreach ($setData['fields'] as $field) {
-                $this->setArray['fields'][] = array(
+                $this->setArray['fields'][] = [
                     $field['id'],
                     $field['action'],
                     $field['name'],
@@ -91,15 +91,15 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
                     (boolean)$field['visible'],
                     $field['label'],
                     $field['default_value'],
-                );
+                ];
             }
         }
 
         /* format tabs */
-        $this->setArray['tabs'] = array();
+        $this->setArray['tabs'] = [];
         if (!empty($setData['tabs'])) {
             foreach ($setData['tabs'] as $tab) {
-                $this->setArray['tabs'][] = array(
+                $this->setArray['tabs'][] = [
                     (int)$tab['id'],
                     $tab['action'],
                     $tab['name'],
@@ -110,15 +110,15 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
                     $tab['label'],
                     $tab['type'],
                     'core',
-                );
+                ];
             }
         }
 
         /* format tvs */
-        $this->setArray['tvs'] = array();
+        $this->setArray['tvs'] = [];
         if (!empty($setData['tvs'])) {
             foreach ($setData['tvs'] as $tv) {
-                $this->setArray['tvs'][] = array(
+                $this->setArray['tvs'][] = [
                     (int)$tv['id'],
                     $tv['name'],
                     $tv['tab'],
@@ -128,7 +128,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
                     $tv['default_value'],
                     !empty($tv['category_name']) ? $tv['category_name'] : $this->modx->lexicon('none'),
                     htmlspecialchars($tv['default_text'],null,$this->modx->getOption('modx_charset',null,'UTF-8')),
-                );
+                ];
             }
         }
 
@@ -161,7 +161,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','access','policy','formcustomization');
+        return ['user','access','policy','formcustomization'];
     }
 
     /**

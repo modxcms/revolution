@@ -45,7 +45,7 @@ class SystemActionManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = []) {}
 
     /**
      * Return the pagetitle
@@ -69,7 +69,7 @@ class SystemActionManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('topmenu','menu','namespace');
+        return ['topmenu','menu','namespace'];
     }
 
     public function getHelpUrl() {

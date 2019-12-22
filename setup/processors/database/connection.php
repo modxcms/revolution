@@ -34,7 +34,7 @@ if (!$install->driver->verifyPDOExtension()) {
 /* get an instance of xPDO using the install settings */
 $xpdo = $install->getConnection($mode);
 
-$errors = array();
+$errors = [];
 $dbExists = false;
 if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
     if (is_bool($xpdo)) {
@@ -43,10 +43,12 @@ if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
         $this->error->failure($xpdo);
     }
 }
-$xpdo->setLogTarget(array(
+$xpdo->setLogTarget(
+    [
     'target' => 'ARRAY'
-    ,'options' => array('var' => & $errors)
-));
+    ,'options' => ['var' => & $errors]
+    ]
+);
 
 /* try to get a connection to the actual database */
 $dbExists = $xpdo->connect();
@@ -64,17 +66,19 @@ if (!$dbExists) {
         if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
             $this->error->failure($install->lexicon('xpdo_err_ins'), $errors);
         }
-        $xpdo->setLogTarget(array(
+        $xpdo->setLogTarget(
+            [
             'target' => 'ARRAY'
-            ,'options' => array('var' => & $errors)
-        ));
+            ,'options' => ['var' => & $errors]
+            ]
+        );
         if (!$xpdo->connect()) {
             $this->error->failure($install->lexicon('db_err_connect_server'), $errors);
         }
     }
 }
 
-$data = array();
+$data = [];
 
 /* verify database versions */
 $server = $install->driver->verifyServerVersion();
@@ -114,11 +118,13 @@ if ($dbCharsets === null) {
 }
 $data['charsets'] = array_values($dbCharsets);
 
-$install->settings->store(array(
+$install->settings->store(
+    [
     'database_charset' => $data['charset'],
     'database_connection_charset' => $data['connection_charset'],
     'database_collation' => $data['collation'],
-));
+    ]
+);
 
 /* test table prefix */
 $count = null;

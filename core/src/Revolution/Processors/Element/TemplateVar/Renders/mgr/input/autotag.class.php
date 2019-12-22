@@ -22,7 +22,7 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
     public function getTemplate() {
         return 'element/tv/renders/input/autotag.tpl';
     }
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         if (empty($params['parent_resources'])) $params['parent_resources'] = '';
         $value = explode(",",$value);
 
@@ -34,11 +34,11 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
         $c = $this->modx->newQuery(modTemplateVarResource::class);
         $c->innerJoin(modTemplateVar::class,'TemplateVar');
         $c->innerJoin(modResource::class,'Resource');
-        $c->where(array(
+        $c->where([
             'tmplvarid' => $this->tv->get('id'),
-        ));
+        ]);
         if (!empty($params['parent_resources'])) {
-            $ids = array();
+            $ids = [];
             $parents = explode(',',$params['parent_resources']);
 
             $currCtx = 'web';
@@ -51,19 +51,19 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
                     $currCtx = $r->get('context_key');
                 }
                 if ($r) {
-                    $pids = $this->modx->getChildIds($id,10,array('context' => $r->get('context_key')));
+                    $pids = $this->modx->getChildIds($id,10, ['context' => $r->get('context_key')]);
                     $ids = array_merge($ids,$pids);
                 }
                 $ids[] = $id;
             }
             $this->modx->switchContext('mgr');
             $ids = array_unique($ids);
-            $c->where(array(
+            $c->where([
                 'Resource.id:IN' => $ids,
-            ));
+            ]);
         }
         $tags = $this->modx->getCollection(modTemplateVarResource::class,$c);
-        $options = array();
+        $options = [];
         /** @var modTemplateVarResource $tag */
         foreach ($tags as $tag) {
             $vs = explode(',',$tag->get('value'));
@@ -71,8 +71,8 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
         }
         $options = array_unique($options);
         sort($options);
-        $opts = array();
-        $defaults = array();
+        $opts = [];
+        $defaults = [];
         $i = 0;
         foreach ($options as $tag) {
             $checked = false;
@@ -82,10 +82,10 @@ class modTemplateVarInputRenderAutoTag extends modTemplateVarInputRender {
                 $defaults[] = 'tv'.$this->tv->get('id').'-'.$i;
             }
 
-            $opts[] = array(
+            $opts[] = [
                 'value' => htmlspecialchars($tag,ENT_COMPAT,'UTF-8'),
                 'checked' => $checked,
-            );
+            ];
             $i++;
         }
 

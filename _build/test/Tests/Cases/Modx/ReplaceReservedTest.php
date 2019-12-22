@@ -41,29 +41,29 @@ class ReplaceReservedTest extends TestCase
         );
 
         $this->assertEquals(
-            array($replacing => $replacing),
-            modX::replaceReserved(array(
+            [$replacing => $replacing],
+            modX::replaceReserved([
                 $source => $source
-            ))
+            ])
         );
 
         $this->assertEquals(
-            array(
-                $replacing => array(
+            [
+                $replacing => [
                     $replacing => $replacing
-                )
-            ),
-            modX::replaceReserved(array(
-                $source => array(
+                ]
+            ],
+            modX::replaceReserved([
+                $source => [
                     $source => $source
-                )
-            ))
+                ]
+            ])
         );
     }
 
     public function testChangingProperty()
     {
-        $property = array('[' => '', ']' => '&#93;');
+        $property = ['[' => '', ']' => '&#93;'];
 
         $this->assertEquals(
             'clear string',
@@ -79,27 +79,27 @@ class ReplaceReservedTest extends TestCase
         );
 
         $this->assertEquals(
-            array($replacing => $replacing),
+            [$replacing => $replacing],
             modX::replaceReserved(
-                array(
+                [
                     $source => $source
-                ),
+                ],
                 $property
             )
         );
 
         $this->assertEquals(
-            array(
-                $replacing => array(
+            [
+                $replacing => [
                     $replacing => $replacing
-                )
-            ),
+                ]
+            ],
             modX::replaceReserved(
-                array(
-                    $source => array(
+                [
+                    $source => [
                         $source => $source
-                    )
-                ),
+                    ]
+                ],
                 $property
             )
         );

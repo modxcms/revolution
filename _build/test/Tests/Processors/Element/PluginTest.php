@@ -35,15 +35,15 @@ class PluginProcessorsTest extends MODxTestCase {
         parent::setUp();
         /** @var modPlugin $plugin */
         $plugin = $this->modx->newObject(modPlugin::class);
-        $plugin->fromArray(array(
+        $plugin->fromArray([
             'name' => 'UnitTestPlugin'
-        ));
+        ]);
         $plugin->save();
     }
 
     public function tearDown() {
         parent::tearDown();
-        $plugins = $this->modx->getCollection(modPlugin::class,array('name:LIKE' => '%UnitTest%'));
+        $plugins = $this->modx->getCollection(modPlugin::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modPlugin $plugin */
         foreach ($plugins as $plugin) {
             $plugin->remove();
@@ -58,14 +58,14 @@ class PluginProcessorsTest extends MODxTestCase {
      * @dataProvider providerPluginCreate
      */
     public function testPluginCreate($shouldPass,$pluginPk) {
-        $result = $this->modx->runProcessor(Create::class,array(
+        $result = $this->modx->runProcessor(Create::class, [
             'name' => $pluginPk,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Create::class.' processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount(modPlugin::class,array('name' => $pluginPk));
+        $ct = $this->modx->getCount(modPlugin::class, ['name' => $pluginPk]);
         $passed = $s && $ct > 0;
         $passed = $shouldPass ? $passed : !$passed;
         $this->assertTrue($passed,'Could not create Plugin: `'.$pluginPk.'`: '.$result->getMessage());
@@ -75,12 +75,12 @@ class PluginProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerPluginCreate() {
-        return array(
-            array(true,'UnitTestPlugin2'), /* pass: 1st plugin */
-            array(true,'UnitTestPlugin3'), /* pass: 2nd plugin */
-            array(false,'UnitTestPlugin'), /* fail: already exists */
-            array(false,''), /* fail: no data */
-        );
+        return [
+            [true,'UnitTestPlugin2'], /* pass: 1st plugin */
+            [true,'UnitTestPlugin3'], /* pass: 2nd plugin */
+            [false,'UnitTestPlugin'], /* fail: already exists */
+            [false,''], /* fail: no data */
+        ];
     }
 
 
@@ -92,25 +92,25 @@ class PluginProcessorsTest extends MODxTestCase {
      * @dataProvider providerPluginDuplicate
      */
     public function testPluginDuplicate($shouldPass,$pluginPk,$newName) {
-        $plugin = $this->modx->getObject(modPlugin::class,array('name' => $pluginPk));
+        $plugin = $this->modx->getObject(modPlugin::class, ['name' => $pluginPk]);
         if (empty($plugin) && $shouldPass) {
             $this->fail('No Plugin found "'.$pluginPk.'" as specified in test provider.');
             return;
         }
         $this->modx->lexicon->load('default');
 
-        $result = $this->modx->runProcessor(Duplicate::class,array(
+        $result = $this->modx->runProcessor(Duplicate::class, [
             'id' => $plugin ? $plugin->get('id') : $pluginPk,
             'name' => $newName,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Duplicate::class.' processor');
         }
         $s = $this->checkForSuccess($result);
         if (empty($newName) && $plugin) {
-            $newName = $this->modx->lexicon('duplicate_of',array('name' => $plugin->get('name')));
+            $newName = $this->modx->lexicon('duplicate_of', ['name' => $plugin->get('name')]);
         }
-        $ct = $this->modx->getObject(modPlugin::class,array('name' => $newName));
+        $ct = $this->modx->getObject(modPlugin::class, ['name' => $newName]);
         $passed = $s && $ct;
         $passed = $shouldPass ? $passed : !$passed;
         if ($ct) { /* remove test data */
@@ -123,12 +123,12 @@ class PluginProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerPluginDuplicate() {
-        return array(
-            array(true,'UnitTestPlugin','UnitTestPlugin3'), /* pass: standard name */
-            array(true,'UnitTestPlugin',''), /* pass: with blank name */
-            array(false,'',''), /* fail: no data */
-            array(false,'','UnitTestPlugin3'), /* fail: blank plugin to duplicate */
-        );
+        return [
+            [true,'UnitTestPlugin','UnitTestPlugin3'], /* pass: standard name */
+            [true,'UnitTestPlugin',''], /* pass: with blank name */
+            [false,'',''], /* fail: no data */
+            [false,'','UnitTestPlugin3'], /* fail: blank plugin to duplicate */
+        ];
     }
     /**
      * Tests the element/plugin/get processor, which gets a Plugin
@@ -137,15 +137,15 @@ class PluginProcessorsTest extends MODxTestCase {
      * @dataProvider providerPluginGet
      */
     public function testPluginGet($shouldPass,$pluginPk) {
-        $plugin = $this->modx->getObject(modPlugin::class,array('name' => $pluginPk));
+        $plugin = $this->modx->getObject(modPlugin::class, ['name' => $pluginPk]);
         if (empty($plugin) && $shouldPass) {
             $this->fail('No Plugin found "'.$pluginPk.'" as specified in test provider.');
             return;
         }
 
-        $result = $this->modx->runProcessor(Get::class,array(
+        $result = $this->modx->runProcessor(Get::class, [
             'id' => $plugin ? $plugin->get('id') : $pluginPk,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Get::class.' processor');
         }
@@ -158,11 +158,11 @@ class PluginProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerPluginGet() {
-        return array(
-            array(true,'UnitTestPlugin'), /* pass: get first plugin */
-            array(false,234), /* fail: invalid ID */
-            array(false,''), /* fail: no data */
-        );
+        return [
+            [true,'UnitTestPlugin'], /* pass: get first plugin */
+            [false,234], /* fail: invalid ID */
+            [false,''], /* fail: no data */
+        ];
     }
 
     /**
@@ -176,12 +176,12 @@ class PluginProcessorsTest extends MODxTestCase {
      * @dataProvider providerPluginGetList
      */
     public function testPluginGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(GetList::class,array(
+        $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
             'start' => $start,
-        ));
+        ]);
         $results = $this->getResults($result);
         $passed = !empty($results);
         $passed = $shouldPass ? $passed : !$passed;
@@ -192,12 +192,12 @@ class PluginProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerPluginGetList() {
-        return array(
-            array(true,'name','ASC',5,0), /* pass: get first 5 sorted by name ASC */
-            array(true,'name','DESC',5,0), /* pass: get first 5 sorted by name DESC */
-            array(false,'zzz','ASC',5,0), /* fail: invalid sort column */
-            array(false,'name','ASC',5,5), /* fail: start beyond the total # of plugins */
-        );
+        return [
+            [true,'name','ASC',5,0], /* pass: get first 5 sorted by name ASC */
+            [true,'name','DESC',5,0], /* pass: get first 5 sorted by name DESC */
+            [false,'zzz','ASC',5,0], /* fail: invalid sort column */
+            [false,'name','ASC',5,5], /* fail: start beyond the total # of plugins */
+        ];
     }
 
     /**
@@ -208,15 +208,15 @@ class PluginProcessorsTest extends MODxTestCase {
      * @dataProvider providerPluginRemove
      */
     public function testPluginRemove($shouldPass,$pluginPk) {
-        $plugin = $this->modx->getObject(modPlugin::class,array('name' => $pluginPk));
+        $plugin = $this->modx->getObject(modPlugin::class, ['name' => $pluginPk]);
         if (empty($plugin) && $shouldPass) {
             $this->fail('No Plugin found "'.$pluginPk.'" as specified in test provider.');
             return;
         }
 
-        $result = $this->modx->runProcessor(Remove::class,array(
+        $result = $this->modx->runProcessor(Remove::class, [
             'id' => $plugin ? $plugin->get('id') : $pluginPk,
-        ));
+        ]);
         if (empty($result)) {
             $this->fail('Could not load '.Remove::class.' processor');
         }
@@ -229,10 +229,10 @@ class PluginProcessorsTest extends MODxTestCase {
      * Data provider for element/plugin/remove processor test.
      */
     public function providerPluginRemove() {
-        return array(
-            array(true,'UnitTestPlugin'), /* pass: remove first plugin */
-            array(false,234), /* fail: invalid ID */
-            array(false,''), /* fail: no data */
-        );
+        return [
+            [true,'UnitTestPlugin'], /* pass: remove first plugin */
+            [false,234], /* fail: invalid ID */
+            [false,''], /* fail: no data */
+        ];
     }
 }

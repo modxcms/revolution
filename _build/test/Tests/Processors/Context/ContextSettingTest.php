@@ -46,9 +46,9 @@ class ContextSettingProcessorsTest extends MODxTestCase {
         $ctx = $this->modx->getObject(modContext::class,'unittest');
         if ($ctx) $ctx->remove();
 
-        $settings = $this->modx->getCollection(modContextSetting::class,array(
+        $settings = $this->modx->getCollection(modContextSetting::class, [
             'context_key' => 'unittest',
-        ));
+        ]);
         /** @var modContextSetting $setting */
         foreach ($settings as $setting) {
             $setting->remove();
@@ -85,8 +85,8 @@ class ContextSettingProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerContextSettingCreate() {
-        return array(
-            array('unittest','unittest_setting',''),
-        );
+        return [
+            ['unittest','unittest_setting',''],
+        ];
     }
 }

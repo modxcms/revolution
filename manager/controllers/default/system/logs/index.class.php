@@ -43,7 +43,7 @@ class SystemLogsManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = []) {}
 
     /**
      * Return the pagetitle
@@ -67,6 +67,6 @@ class SystemLogsManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('manager_log');
+        return ['manager_log'];
     }
 }

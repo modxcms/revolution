@@ -15,7 +15,7 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderDefault extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $value= $this->tv->parseInput($value);
         if ($this->tv->get('type') == 'checkbox' || $this->tv->get('type') == 'listbox-multiple') {
             // remove delimiter from checkbox and listbox-multiple TVs

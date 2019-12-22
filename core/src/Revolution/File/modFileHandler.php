@@ -24,7 +24,7 @@ class modFileHandler {
      * An array of configuration properties for the class
      * @var array $config
      */
-    public $config = array();
+    public $config = [];
     /**
      * The current context in which this File Manager instance should operate
      * @var modContext|null $context
@@ -37,7 +37,7 @@ class modFileHandler {
      * @param modX &$modx A reference to the modX object.
      * @param array $config An array of options.
      */
-    function __construct(modX &$modx, array $config = array()) {
+    function __construct(modX &$modx, array $config = []) {
         $this->modx =& $modx;
         $this->config = array_merge($this->config, $this->modx->_userConfig, $config);
         if (!isset($this->config['context'])) {
@@ -57,7 +57,7 @@ class modFileHandler {
      * of the object as the specified class.
      * @return mixed The appropriate modFile/modDirectory object
      */
-    public function make($path, array $options = array(), $overrideClass = '') {
+    public function make($path, array $options = [], $overrideClass = '') {
         $path = $this->sanitizePath($path);
 
         if (!empty($overrideClass)) {
@@ -82,15 +82,15 @@ class modFileHandler {
     public function getBasePath() {
         $basePath = $this->context->getOption('filemanager_path', '', $this->config);
         /* expand placeholders */
-        $basePath = str_replace(array(
+        $basePath = str_replace([
             '{base_path}',
             '{core_path}',
             '{assets_path}',
-        ), array(
+        ], [
             $this->context->getOption('base_path', MODX_BASE_PATH, $this->config),
             $this->context->getOption('core_path', MODX_CORE_PATH, $this->config),
             $this->context->getOption('assets_path', MODX_ASSETS_PATH, $this->config),
-        ), $basePath);
+        ], $basePath);
         return !empty($basePath) ? $this->postfixSlash($basePath) : $basePath;
     }
 
@@ -103,15 +103,15 @@ class modFileHandler {
         $baseUrl = $this->context->getOption('filemanager_url', $this->context->getOption('rb_base_url', MODX_BASE_URL, $this->config), $this->config);
 
         /* expand placeholders */
-        $baseUrl = str_replace(array(
+        $baseUrl = str_replace([
             '{base_url}',
             '{core_url}',
             '{assets_url}',
-        ), array(
+        ], [
             $this->context->getOption('base_url', MODX_BASE_PATH, $this->config),
             $this->context->getOption('core_url', MODX_CORE_PATH, $this->config),
             $this->context->getOption('assets_url', MODX_ASSETS_PATH, $this->config),
-        ), $baseUrl);
+        ], $baseUrl);
         return !empty($baseUrl) ? $this->postfixSlash($baseUrl) : $baseUrl;
     }
 
@@ -122,7 +122,7 @@ class modFileHandler {
      * @return string The sanitized path
      */
     public function sanitizePath($path) {
-        return preg_replace(array("/\.*[\/|\\\]/i", "/[\/|\\\]+/i"), array('/', '/'), $path);
+        return preg_replace(["/\.*[\/|\\\]/i", "/[\/|\\\]+/i"], ['/', '/'], $path);
     }
 
     /**

@@ -2,7 +2,7 @@
 use MODX\Revolution\modContentType;
 
 $collection['1']= $xpdo->newObject(modContentType::class);
-$collection['1']->fromArray(array (
+$collection['1']->fromArray([
   'id' => 1,
   'name' => 'HTML',
   'description' => 'HTML content',
@@ -11,9 +11,9 @@ $collection['1']->fromArray(array (
   'icon' => '',
   'headers' => 'NULL',
   'binary' => 0,
-), '', true, true);
+], '', true, true);
 $collection['2']= $xpdo->newObject(modContentType::class);
-$collection['2']->fromArray(array (
+$collection['2']->fromArray([
   'id' => 2,
   'name' => 'XML',
   'description' => 'XML content',
@@ -22,9 +22,9 @@ $collection['2']->fromArray(array (
   'icon' => 'icon-xml',
   'headers' => 'NULL',
   'binary' => 0,
-), '', true, true);
+], '', true, true);
 $collection['3']= $xpdo->newObject(modContentType::class);
-$collection['3']->fromArray(array (
+$collection['3']->fromArray([
   'id' => 3,
   'name' => 'Text',
   'description' => 'Plain text content',
@@ -33,9 +33,9 @@ $collection['3']->fromArray(array (
   'icon' => 'icon-txt',
   'headers' => 'NULL',
   'binary' => 0,
-), '', true, true);
+], '', true, true);
 $collection['4']= $xpdo->newObject(modContentType::class);
-$collection['4']->fromArray(array (
+$collection['4']->fromArray([
   'id' => 4,
   'name' => 'CSS',
   'description' => 'CSS content',
@@ -44,9 +44,9 @@ $collection['4']->fromArray(array (
   'icon' => 'icon-css',
   'headers' => 'NULL',
   'binary' => 0,
-), '', true, true);
+], '', true, true);
 $collection['5']= $xpdo->newObject(modContentType::class);
-$collection['5']->fromArray(array (
+$collection['5']->fromArray([
   'id' => 5,
   'name' => 'JavaScript',
   'description' => 'JavaScript content',
@@ -55,9 +55,9 @@ $collection['5']->fromArray(array (
   'icon' => 'icon-js',
   'headers' => 'NULL',
   'binary' => 0,
-), '', true, true);
+], '', true, true);
 $collection['6']= $xpdo->newObject(modContentType::class);
-$collection['6']->fromArray(array (
+$collection['6']->fromArray([
   'id' => 6,
   'name' => 'RSS',
   'description' => 'For RSS feeds',
@@ -66,9 +66,9 @@ $collection['6']->fromArray(array (
   'icon' => 'icon-rss',
   'headers' => 'NULL',
   'binary' => 0,
-), '', true, true);
+], '', true, true);
 $collection['7']= $xpdo->newObject(modContentType::class);
-$collection['7']->fromArray(array (
+$collection['7']->fromArray([
   'id' => 7,
   'name' => 'JSON',
   'description' => 'JSON',
@@ -77,9 +77,9 @@ $collection['7']->fromArray(array (
   'icon' => 'icon-json',
   'headers' => 'NULL',
   'binary' => 0,
-), '', true, true);
+], '', true, true);
 $collection['8']= $xpdo->newObject(modContentType::class);
-$collection['8']->fromArray(array (
+$collection['8']->fromArray([
   'id' => 8,
   'name' => 'PDF',
   'description' => 'PDF Files',
@@ -88,4 +88,4 @@ $collection['8']->fromArray(array (
   'icon' => 'icon-pdf',
   'headers' => 'NULL',
   'binary' => 1,
-), '', true, true);
+], '', true, true);

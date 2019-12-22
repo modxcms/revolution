@@ -198,12 +198,12 @@ class Search extends Processor
         $collection = $this->modx->getIterator(modUser::class, $c);
 
         foreach ($collection as $record) {
-            $this->results[] = array(
+            $this->results[] = [
                 'name' => $record->get('username'),
                 'description' => $record->get('fullname') .' / '. $record->get('email'),
                 '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
-            );
+            ];
         }
     }
 }

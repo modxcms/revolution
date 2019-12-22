@@ -21,14 +21,18 @@ class modDashboardSnippetWidget extends modDashboardWidgetInterface
     public function render()
     {
         /** @var modSnippet $snippet */
-        $snippet = $this->modx->getObject(modSnippet::class,array(
+        $snippet = $this->modx->getObject(modSnippet::class,
+                                          [
             'name' => $this->widget->get('content'),
-        ));
+                                          ]
+        );
         if ($snippet) {
             $snippet->setCacheable(false);
-            $content = $snippet->process(array(
+            $content = $snippet->process(
+                [
                 'controller' => $this->controller,
-            ));
+                ]
+            );
         } else {
             $content = '';
         }

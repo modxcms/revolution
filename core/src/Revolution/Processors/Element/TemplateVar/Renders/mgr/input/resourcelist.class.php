@@ -20,15 +20,15 @@ use MODX\Revolution\modTemplateVarInputRender;
  * @subpackage processors.element.tv.renders.mgr.input
  */
 class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $parents = $this->getInputOptions();
         $params['parents'] = isset($params['parents']) ? $params['parents'] : '';
         $parents = !empty($params['parents']) || $params['parents'] === '0' ? explode(',',$params['parents']) : $parents;
         $params['depth'] = !empty($params['depth']) ? $params['depth'] : 10;
         if (empty($parents) || (empty($parents[0]) && $parents[0] !== '0')) {
-            $parents = array();
+            $parents = [];
         }
-        $parentList = array();
+        $parentList = [];
         foreach ($parents as $parent) {
             /** @var modResource $parent */
             $parent = $this->modx->getObject(modResource::class,$parent);
@@ -36,13 +36,13 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
         }
 
         /* get all children */
-        $ids = array();
+        $ids = [];
         if (!empty($parentList)) {
             foreach ($parentList as $parent) {
                 if (!empty($params['includeParent'])) $ids[] = $parent->get('id');
-                $children = $this->modx->getChildIds($parent->get('id'),$params['depth'],array(
+                $children = $this->modx->getChildIds($parent->get('id'),$params['depth'], [
                     'context' => $parent->get('context_key'),
-                ));
+                ]);
                 $ids = array_merge($ids,$children);
             }
             $ids = array_unique($ids);
@@ -51,9 +51,9 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
         $c = $this->modx->newQuery(modResource::class);
         $c->leftJoin(modResource::class,'Parent');
         if (!empty($ids)) {
-            $c->where(array('modResource.id:IN' => $ids));
+            $c->where(['modResource.id:IN' => $ids]);
         } else if (!empty($parents) && $parents[0] == 0) {
-            $c->where(array('modResource.parent' => 0));
+            $c->where(['modResource.parent' => 0]);
         }
         if (!empty($params['where'])) {
             $params['where'] = $this->modx->fromJSON($params['where']);
@@ -61,7 +61,7 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
         }
         if (!empty($params['limitRelatedContext']) && ($params['limitRelatedContext'] == 1 || $params['limitRelatedContext'] == 'true')) {
             $context_key = $this->modx->resource->get('context_key');
-            $c->where(array('modResource.context_key' => $context_key));
+            $c->where(['modResource.context_key' => $context_key]);
         }
         $c->sortby('Parent.menuindex,modResource.menuindex','ASC');
         if (!empty($params['limit'])) {
@@ -70,18 +70,18 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
         $resources = $this->modx->getCollection(modResource::class, $c);
 
         /* iterate */
-        $opts = array();
+        $opts = [];
         if (!empty($params['showNone'])) {
-            $opts[] = array('value' => '','text' => '-','selected' => $this->tv->get('value') == '');
+            $opts[] = ['value' => '','text' => '-','selected' => $this->tv->get('value') == ''];
         }
         /** @var modResource $resource */
         foreach ($resources as $resource) {
             $selected = $resource->get('id') == $this->tv->get('value');
-            $opts[] = array(
+            $opts[] = [
                 'value' => $resource->get('id'),
                 'text' => $resource->get('pagetitle').' ('.$resource->get('id').')',
                 'selected' => $selected,
-            );
+            ];
         }
         $this->setPlaceholder('opts',$opts);
     }

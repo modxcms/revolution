@@ -33,7 +33,7 @@ class modMailTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->mail = $this->getMockForAbstractClass(modMail::class, array(&$this->modx));
+        $this->mail = $this->getMockForAbstractClass(modMail::class, [&$this->modx]);
         $this->mail->expects($this->any())
                    ->method('_getMailer')
                    ->will($this->returnValue(true));
@@ -52,10 +52,10 @@ class modMailTest extends MODxTestCase {
      * @return array
      */
     public function providerSet() {
-        return array(
-            array('mail_use_smtp',true),
-            array('mail_use_smtp',false),
-        );
+        return [
+            ['mail_use_smtp',true],
+            ['mail_use_smtp',false],
+        ];
     }
 
     /**
@@ -73,10 +73,10 @@ class modMailTest extends MODxTestCase {
      * @return array
      */
     public function providerGet() {
-        return array(
-            array('mail_use_smtp',true),
-            array('mail_use_smtp',false),
-        );
+        return [
+            ['mail_use_smtp',true],
+            ['mail_use_smtp',false],
+        ];
     }
 
     /**
@@ -102,10 +102,10 @@ class modMailTest extends MODxTestCase {
      * @return array
      */
     public function providerAttach() {
-        return array(
-            array('test/file.txt'),
-            array(array('tmp_name' => 'test/file.txt','error' => 0,'name' => 'file.txt')),
-        );
+        return [
+            ['test/file.txt'],
+            [['tmp_name' => 'test/file.txt','error' => 0,'name' => 'file.txt']],
+        ];
     }
 
     /**
@@ -131,9 +131,9 @@ class modMailTest extends MODxTestCase {
      * @return array
      */
     public function providerHeader() {
-        return array(
-            array('Content-type:text/html','Content-type','text/html'),
-        );
+        return [
+            ['Content-type:text/html','Content-type','text/html'],
+        ];
     }
 
 }

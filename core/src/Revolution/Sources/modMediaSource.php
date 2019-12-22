@@ -1175,7 +1175,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      *
      * @return string
      */
-    public function getOpenTo($value,array $parameters = array()) {
+    public function getOpenTo($value,array $parameters = []) {
         $dirname = dirname($value);
         return $dirname == '.' ? '' : $dirname . '/';
     }

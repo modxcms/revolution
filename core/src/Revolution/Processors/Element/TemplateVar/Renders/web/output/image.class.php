@@ -15,7 +15,7 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderImage extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $images= $this->tv->parseInput($value, '||', 'array');
         $o= '';
         foreach ($images as $image) {
@@ -24,14 +24,14 @@ class modTemplateVarOutputRenderImage extends modTemplateVarOutputRender {
             }
             $src= $image[0];
             if ($src) {
-                $attributes = array();
-                $attr = array(
+                $attributes = [];
+                $attr = [
                     'class' => $params['class'],
                     'src' => $src,
                     'id' => ($params['id'] ? $params['id'] : ''),
                     'alt' => htmlspecialchars($params['alttext']),
                     'style' => $params['style']
-                );
+                ];
                 foreach ($attr as $k => $v) {
                     if (!empty($v)) {
                         $attributes[] = $k.'="'.$v.'"';

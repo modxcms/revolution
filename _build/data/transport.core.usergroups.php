@@ -1,8 +1,8 @@
 <?php
 use MODX\Revolution\modUserGroup;
 $collection['1']= $xpdo->newObject(modUserGroup::class);
-$collection['1']->fromArray(array (
+$collection['1']->fromArray([
   'id' => 1,
   'name' => 'Administrator',
   'parent' => 0,
-), '', true, true);
+], '', true, true);

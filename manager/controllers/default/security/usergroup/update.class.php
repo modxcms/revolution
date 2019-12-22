@@ -58,14 +58,14 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             $this->userGroup = $this->modx->newObject(modUserGroup::class);
             $this->userGroup->set('id',0);
             $this->userGroup->set('name',$this->modx->lexicon('anonymous'));
         } else {
-            $this->userGroup = $this->modx->getObject(modUserGroup::class, array('id' => $scriptProperties['id']));
+            $this->userGroup = $this->modx->getObject(modUserGroup::class, ['id' => $scriptProperties['id']]);
             if (empty($this->userGroup)) {
                 $this->failure($this->modx->lexicon('usergroup_err_nf'));
             }
@@ -96,7 +96,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','access','policy','context','setting');
+        return ['user','access','policy','context','setting'];
     }
 
     /**

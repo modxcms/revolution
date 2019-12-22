@@ -47,6 +47,6 @@ class HelpManagerController extends modParsedManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('about');
+        return ['about'];
     }
 }

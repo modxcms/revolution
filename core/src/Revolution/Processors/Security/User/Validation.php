@@ -65,10 +65,12 @@ class Validation {
     }
 
     public function alreadyExists($name) {
-        return $this->modx->getCount(modUser::class,array(
+        return $this->modx->getCount(modUser::class,
+                                     [
                 'username' => $name,
                 'id:!=' => $this->user->get('id'),
-            )) > 0;
+                                     ]
+            ) > 0;
     }
 
     public function checkPassword() {
@@ -112,7 +114,7 @@ class Validation {
 
         if (!$this->modx->getOption('allow_multiple_emails',null,true)) {
             /** @var modUserProfile $emailExists */
-            $emailExists = $this->modx->getObject(modUserProfile::class,array('email' => $email));
+            $emailExists = $this->modx->getObject(modUserProfile::class, ['email' => $email]);
             if ($emailExists) {
                 if ($emailExists->get('internalKey') != $this->processor->getProperty('id')) {
                     $this->processor->addFieldError('email',$this->modx->lexicon('user_err_already_exists_email'));
