@@ -37,7 +37,7 @@ use xPDO\xPDO;
  * @property array $properties
  * @property boolean $is_stream
  *
- * @property \MODX\Revolution\Sources\modMediaSourceElement $SourceElement
+ * @property modMediaSourceElement $SourceElement
  *
  * @package MODX\Revolution\Sources
  */
@@ -387,7 +387,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                         'sid' => $this->get('id'),
                         'text' => $file_name,
                         'cls' => implode(' ', $cls),
-                        'iconCls' => 'icon ' . ($visibility == \League\Flysystem\AdapterInterface::VISIBILITY_PRIVATE
+                        'iconCls' => 'icon ' . ($visibility == AdapterInterface::VISIBILITY_PRIVATE
                                 ? 'icon-eye-slash' : 'icon-folder'),
                         'type' => 'dir',
                         'leaf' => false,
@@ -544,7 +544,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         try {
             /** @var File $file */
             $file = $this->filesystem->get($path);
-        } catch (\League\Flysystem\FileNotFoundException $e) {
+        } catch (FileNotFoundException $e) {
             $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
 
             return [];

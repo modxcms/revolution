@@ -277,7 +277,7 @@ class modInstallCLIRequest extends modInstallRequest {
 
         /* get an instance of xPDO using the install settings */
         $xpdo = $this->install->getConnection($mode);
-        if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
+        if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
             $this->end($this->install->lexicon('xpdo_err_ins'));
         }
 
@@ -302,7 +302,7 @@ class modInstallCLIRequest extends modInstallRequest {
                     $this->end($this->install->lexicon('db_err_create_database'));
                 } else {
                     $xpdo = $this->install->getConnection($mode);
-                    if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
+                    if (!is_object($xpdo) || !($xpdo instanceof xPDO)) {
                         $this->end($this->install->lexicon('xpdo_err_ins'));
                     }
                 }
