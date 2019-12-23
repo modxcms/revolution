@@ -74,7 +74,8 @@
   #modx-manager-search-icon a,
   #modx-leftbar-trigger a,
   #modx-user-menu a {
-    padding: 12px 0;
+    width: auto;
+    padding: 12px;
   }
 
   #modx-topnav {
@@ -142,9 +143,7 @@
     }
 
     #limenu-user a {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      line-height: 0;
     }
   }
 
@@ -215,6 +214,7 @@
     box-sizing: border-box;
     list-style: none;
     position: absolute;
+    left: 0;
     z-index: 10000;
     opacity: 0;
     visibility: hidden;
@@ -310,13 +310,23 @@
     }
 
     &-arrow {
-      right: 100%;
+      right: calc(100% - 80px);
       border: 12px solid transparent;
       border-right-color: $subnavBg;
       content: ' ';
-      position: absolute;
+      position: fixed;
       pointer-events: none;
       margin-top: -6px;
+    }
+
+    &-overlay {
+      position: absolute;
+      left: 80px;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      z-index: -1;
+      background-color: rgba(0,0,0,.5);
     }
   }
 
@@ -334,14 +344,32 @@
     height: auto !important;
   }
 
+  #modx-headnav,
+  #modx-topnav,
+  #modx-user-menu {
+    >li:not(#modx-home-dashboard) {
+      >a {
+        padding: 12px 0 !important;
+        width: 35px !important;
+        font-size: 0;
+      }
+    }
+  }
+
   #modx-navbar {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 
     #modx-headnav {
-      order: 1;
-      width: 50%;
+      flex-wrap: nowrap;
 
+      >li:not(#modx-home-dashboard) {
+        >a {
+          width: 35px;
+          padding: 12px 0;
+        }
+      }
       a {
         line-height: initial !important;
       }
@@ -352,21 +380,19 @@
     }
 
     #modx-topnav {
-      width: 100%;
-      order: 0;
+      >li {
+        border: none !important;
+      }
     }
 
     #modx-user-menu {
       flex-direction: row-reverse;
       flex-wrap: nowrap;
-      width: 50%;
-      order: 2;
       margin-top: 0;
     }
 
     &>ul {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
 
@@ -381,7 +407,7 @@
 
     #modx-home-dashboard {
       margin: 0;
-      padding: 5px;
+      padding: 12px 0;
     }
   }
 
@@ -404,7 +430,7 @@
   #modx-footer {
     .modx-subnav {
       min-width: 300px;
-      top: 60px !important;
+      top: 0 !important;
 
       .description {
         display: none;
@@ -441,8 +467,9 @@
       display: none;
     }
 
-    .modx-subnav-wrapper {
-      max-height: 400px;
+    .modx-subnav-overlay {
+      top: 64px;
+      left: 0;
       overflow-y: auto;
     }
   }

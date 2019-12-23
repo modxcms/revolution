@@ -401,6 +401,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     flip: {
                         enabled: false
                     },
+                    offset: {
+                        offset: window.innerWidth > 640 ? '0,-70' : '',
+                    },
                     applyStyle: {
                         enabled: true,
                         fn: function(data) {
@@ -410,8 +413,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                         ? data.offsets.popper[i] + 'px'
                                         : data.offsets.popper[i];
                                 }
-                                if (data.offsets.arrow.top !== '') {
-                                    data.arrowElement.style.top = data.offsets.arrow.top + 'px';
+                                if (data.offsets.arrow.top !== '' && data.offsets.popper.top !== '') {
+                                    data.arrowElement.style.top = data.offsets.arrow.top + data.offsets.popper.top + 'px';
                                 }
                                 if (data.offsets.arrow.left) {
                                     data.arrowElement.style.left = data.offsets.arrow.left + 'px';
@@ -441,15 +444,18 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         var submenu = document.getElementById(el.id + '-submenu');
         if (submenu.classList.contains('active')) {
             submenu.classList.remove('active');
+            submenu.parentElement.style.zIndex = -1;
         } else {
             this.hideMenu();
             submenu.classList.add('active');
+            submenu.parentElement.style.zIndex = 200;
         }
     }
     ,hideMenu: function() {
         var submenus = document.getElementsByClassName('modx-subnav');
         for (var i = 0; i < submenus.length; i++) {
             submenus[i].classList.remove('active');
+            submenus[i].parentElement.style.zIndex = -1;
         }
     }
 

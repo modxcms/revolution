@@ -2,9 +2,11 @@
     <!-- #modx-content-->
     <div id="modx-footer">
         {if $_search}
-            <div class="modx-subnav" id="modx-manager-search-icon-submenu">
-                <div class="modx-subnav-arrow"></div>
-                <div id="modx-manager-search" role="search"></div>
+            <div class="modx-subnav-overlay">
+                <div class="modx-subnav" id="modx-manager-search-icon-submenu">
+                    <div class="modx-subnav-arrow"></div>
+                    <div id="modx-manager-search" role="search"></div>
+                </div>
             </div>
         {/if}
         {eval var=$navb_submenus}
