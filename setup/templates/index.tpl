@@ -32,7 +32,7 @@
     </tr>
     <tr class="fancyRow2">
       <td class="border-top-bottom smallText" colspan="2">
-        <p style="padding: 5px 10px;">&copy; 2005-{'Y'|date} the <a href="http://www.modx.com/" target="_blank" style="color: green; text-decoration:underline">MODX</a> Content Mangement Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+        <p style="padding: 5px 10px;">&copy; 2005-{'Y'|date} the <a href="https://modx.com/" target="_blank" style="color: green; text-decoration:underline">MODX</a> Content Mangement Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
         <p style="padding: 5px 10px;">MODX is free software. We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!</p>
       </td>
     </tr>

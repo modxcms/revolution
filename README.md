@@ -14,7 +14,7 @@ For details read the [complete changelog](./core/docs/changelog.txt "complete ch
 
 Here's what you need to get started installing or upgrading MODX Revoluton:
 
-+ [Download MODX Revolution](http://modx.com/download/ "Download MODX")
++ [Download MODX Revolution](https://modx.com/download)
 + [What's required to run MODX Revolution](https://docs.modx.com/3.x/en/getting-started/server-requirements)
 + [How to install MODX Revolution](https://docs.modx.com/3.x/en/getting-started/installation)
 + [Install MODX via git](https://docs.modx.com/3.x/en/getting-started/installation/git)
@@ -23,7 +23,7 @@ Here's what you need to get started installing or upgrading MODX Revoluton:
 
 ### Other Important Stuff
 
-MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](https://github.com/modxcms/revolution/issues "MODX Github Issues"). Make sure you [read the documentation](https://docs.modx.com/3.x/en/index), [post feedback and share your successes](http://forums.modx.com/board/?board=264 "MODX :: Revolution 2.2") in the MODX community forums. To join us in the quest for *Creative Freedom*, [become a Contributor](http://rtfm.modx.com/community/). You can [contribute using GitHub](https://docs.modx.com/current/en/contribute/code/git-github)
+MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](https://github.com/modxcms/revolution/issues "MODX Github Issues"). Make sure you [read the documentation](https://docs.modx.com/3.x/en/index), [post feedback and share your successes](https://community.modx.com) in the MODX community forums. To join us in the quest for *Creative Freedom*, [become a Contributor](https://docs.modx.org/3.x/en/contribute). You can [contribute using GitHub](https://docs.modx.com/current/en/contribute/code/git-github)
 
 On behalf of the entire MODX Team,
 

@@ -113,7 +113,7 @@ if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 <div id="footer">
     <div id="footer-inner">
     <div class="container_12">
-        <p>&copy; 2005-<?php echo date('Y'); ?> the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+        <p>&copy; 2005-<?php echo date('Y'); ?> the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
         <p>MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!</p>
     </div>
     </div>

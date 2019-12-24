@@ -239,7 +239,7 @@
 </head>
 <body>
 
-<a href="http://www.modx.com" title="Modx" class="logo" target="_blank">MODX</a>
+<a href="https://modx.com" title="Modx" class="logo" target="_blank">MODX</a>
 
 <div class="container">
     <section>
@@ -253,24 +253,24 @@
             <li><a href="https://docs.modx.com/3.x/en/index">Official&nbsp;Documentation</a></li>
             <li><a href="https://docs.modx.com/3.x/en/getting-started/friendly-urls">Using Friendly&nbsp;URLs</a></li>
             <li><a href="https://docs.modx.com/current/en/building-sites/extras">Package&nbsp;Management</a></li>
-            <li><a href="http://modx.com/blog/">Official MODX&nbsp;Blog</a></li>
+            <li><a href="https://modx.com/blog/">Official MODX&nbsp;Blog</a></li>
             <li><a href="http://www.discovermodx.com/">Discover&nbsp;MODX</a></li>
             <li><a href="https://modx.today">MODX.today</a></li>
         </ul>
 
         <h3>Get help!</h3>
         <ul>
-            <li><a href="http://forums.modx.com/">Official MODX&nbsp;Forums</a></li>
+            <li><a href="https://community.modx.com">Official MODX&nbsp;Forums</a></li>
             <li><a href="https://modx.org/">MODX on&nbsp;Slack</a></li>
             <li><a href="https://twitter.com/modx">MODX on&nbsp;Twitter</a></li>
             <li><a href="https://www.facebook.com/modxcms">MODX on&nbsp;Facebook</a></li>
-            <li><a href="http://modx.com/professionals/">Find a MODX&nbsp;Professional</a></li>
+            <li><a href="https://modx.com/professionals/">Find a MODX&nbsp;Professional</a></li>
         </ul>
     </aside>
     <div class="companies">
         <h3>Extend MODX with&nbsp;Extras</h3>
         <ul>
-            <li class="modxextras"><a href="http://modx.com/extras/" title="MODX extras" target="_blank">MODX&nbsp;extras</a></li>
+            <li class="modxextras"><a href="https://modx.com/extras/" title="MODX extras" target="_blank">MODX&nbsp;extras</a></li>
             <li class="modmore"><a href="https://www.modmore.com/extras/" title="modmore.com" target="_blank">modmore.com</a></li>
             <li class="modstore"><a href="https://modstore.pro/" title="modstore.pro" target="_blank">modstore.pro</a></li>
             <li class="extrasio"><a href="https://extras.io/extras/" title="Extras.io" target="_blank">Extras.io</a></li>
@@ -278,7 +278,7 @@
     </div>
 </div>
 <footer class="disclaimer">
-    <p>&copy; 2005-present the <a href="http://www.modx.com/" target="_blank">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU&nbsp;GPL.</p>
+    <p>&copy; 2005-present the <a href="https://modx.com" target="_blank">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU&nbsp;GPL.</p>
 </footer>
 
 <script>
