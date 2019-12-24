@@ -250,9 +250,9 @@
         <a href="[[++manager_url]]" title="Your MODX manager" class="cta-button">Go to the&nbsp;manager</a>
         <h3>Learn more about&nbsp;MODX</h3>
         <ul>
-            <li><a href="https://rtfm.modx.com/revolution/2.x/">Official&nbsp;Documentation</a></li>
-            <li><a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/using-friendly-urls">Using Friendly&nbsp;URLs</a></li>
-            <li><a href="https://rtfm.modx.com/revolution/2.x/developing-in-modx/advanced-development/package-management/">Package&nbsp;Management</a></li>
+            <li><a href="https://docs.modx.com/3.x/en/index">Official&nbsp;Documentation</a></li>
+            <li><a href="https://docs.modx.com/3.x/en/getting-started/friendly-urls">Using Friendly&nbsp;URLs</a></li>
+            <li><a href="https://docs.modx.com/current/en/building-sites/extras">Package&nbsp;Management</a></li>
             <li><a href="http://modx.com/blog/">Official MODX&nbsp;Blog</a></li>
             <li><a href="http://www.discovermodx.com/">Discover&nbsp;MODX</a></li>
             <li><a href="https://modx.today">MODX.today</a></li>
