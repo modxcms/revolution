@@ -136,6 +136,7 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             this.initialized = true;
         }
     }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-policy-permissions');
         Ext.apply(o.form.baseParams,{
@@ -149,8 +150,13 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
 });
 Ext.reg('modx-panel-access-policy',MODx.panel.AccessPolicy);
 
-
-
+/**
+ * @class MODx.grid.PolicyPermissions
+ * @extends MODx.grid.LocalGrid
+ * @constructor
+ * @param {Object} config An object of options.
+ * @xtype modx-grid-policy-permissions
+ */
 MODx.grid.PolicyPermissions = function(config) {
     config = config || {};
     var ac = new Ext.ux.grid.CheckColumn({
@@ -161,6 +167,7 @@ MODx.grid.PolicyPermissions = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-policy-permissions'
+        ,showActionsColumn: false
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'security/access/policy/getAttributes'
@@ -202,7 +209,13 @@ Ext.extend(MODx.grid.PolicyPermissions,MODx.grid.LocalGrid,{
 });
 Ext.reg('modx-grid-policy-permissions',MODx.grid.PolicyPermissions);
 
-
+/**
+ * @class MODx.combo.AccessPolicyTemplate
+ * @extends MODx.combo.ComboBox
+ * @constructor
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-access-policy-template
+ */
 MODx.combo.AccessPolicyTemplate = function(config) {
     config = config || {};
     Ext.applyIf(config,{
