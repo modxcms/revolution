@@ -231,6 +231,7 @@ MODx.grid.FCSetFields = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set-fields'
+        ,showActionsColumn: false
         ,fields: ['id','action','name','tab','tab_rank','other','rank','visible','label','default_value']
         ,autoHeight: true
         ,grouping: true
@@ -298,6 +299,7 @@ MODx.grid.FCSetTabs = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set-tabs'
+        ,showActionsColumn: false
         ,fields: ['id','action','name','form','other','rank','visible','label','type']
         ,autoHeight: true
         ,plugins: [this.vcb]
@@ -388,6 +390,7 @@ MODx.grid.FCSetTVs = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set-tvs'
+        ,showActionsColumn: false
         ,fields: ['id','name','tab','rank','visible','label','default_value','category','default_text']
         ,autoHeight: true
         ,grouping: true
