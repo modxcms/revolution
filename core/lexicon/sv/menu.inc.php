@@ -36,4 +36,4 @@ $_lang['parameters_desc'] = 'De anropsparametrar du vill lägga till URL:en när
 $_lang['permissions'] = 'Behörighet';
 $_lang['permissions_desc'] = 'En behörighetsnyckel som krävs för att ladda den här menyposten.';
 $_lang['topmenu'] = 'Huvudmeny';
-$_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
+$_lang['topmenu_desc'] = 'Det här låter dig associera åtgärder med menyposter i hanterarens huvudmeny. Placera helt enkelt menyerna där du vill ha dom i deras respektive positioner.';
