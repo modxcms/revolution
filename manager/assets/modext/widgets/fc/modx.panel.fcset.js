@@ -307,7 +307,7 @@ MODx.grid.FCSetTabs = function(config) {
         ,columns: [{
             header: _('tab_id')
             ,dataIndex: 'name'
-            ,width: 200
+            ,width: 100
         },this.vcb,{
             header: _('tab_title')
             ,dataIndex: 'label'
