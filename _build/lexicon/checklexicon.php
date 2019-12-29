@@ -109,9 +109,15 @@ if ($language !== 'en') {
     }
 }
 
+/* excluded folders can be defined for excluding specific folders with a comma separated list */
+$excluded = '';
+if (!empty($argv) && $argc > 2) {
+    $excluded = $argv[2];
+}
+
 $checkLexicon = new CheckLexicon($xpdo, array(
     'language' => $language,
-    'excludedFolders' => 'develop'
+    'excludedFolders' => $excluded
 ));
 $result = $checkLexicon->process();
 $xpdo->log(($result['success']) ? xPDO::LOG_LEVEL_INFO : xPDO::LOG_LEVEL_ERROR, $result['message']);
