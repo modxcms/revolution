@@ -257,7 +257,7 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in php files: modx->lexicon('packageprefix.whatever'
+     * Add lexicon calls in php files: modx->lexicon('whatever'
      *
      * @param string $filename
      */
@@ -284,7 +284,7 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in javascript files: _('packageprefix.whatever'
+     * Add lexicon calls in javascript files: _('whatever'
      *
      * @param string $filename
      */
@@ -311,7 +311,7 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in chunk files: [[%packageprefix.whatever
+     * Add lexicon calls in chunk files: [[%whatever
      *
      * @param string $filename
      */
@@ -411,7 +411,7 @@ class CheckLexicon
     }
 
     /**
-     * Write missing/superfluous keys to the file _missing.php/_superfluous.php in the language folder
+     * Write missing/superfluous/variable keys to the file _missing.php/_superfluous.php/_variable.php in the _build/lexicon folder
      *
      * @param string $type
      * @return bool|string
