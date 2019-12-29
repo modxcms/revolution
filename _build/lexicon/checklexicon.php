@@ -274,7 +274,8 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in php files: modx->lexicon('whatever'
+     * Add lexicon calls in php files:
+     * modx->lexicon('whatever'
      *
      * @param string $filename
      */
@@ -301,7 +302,8 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in javascript files: _('whatever'
+     * Add lexicon calls in javascript files:
+     * _('whatever'
      *
      * @param string $filename
      */
@@ -328,7 +330,8 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in chunk files: [[%whatever
+     * Add lexicon calls in chunk files:
+     * [[%whatever
      *
      * @param string $filename
      */
@@ -355,7 +358,8 @@ class CheckLexicon
     }
 
     /**
-     * Add _lang calls in smarty template files: {$_lang.whatever}
+     * Add _lang calls in smarty template files:
+     * {$_lang.whatever
      *
      * @param string $filename
      */
