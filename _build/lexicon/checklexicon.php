@@ -129,6 +129,7 @@ class CheckLexicon
 {
     public $scanPath = null;
     public $lexiconPath = null;
+    public $setupLexiconPath = null;
 
     private $language = null;
     private $excludedFolders = array('_build', 'cache', 'packages', 'node_modules', 'components', 'vendor');
@@ -147,6 +148,7 @@ class CheckLexicon
         $this->excludedFolders = array_merge($this->excludedFolders, isset($options['excludedFolders']) ? array_map('trim', explode(',', $options['excludedFolders'])) : array());
         $this->scanPath = isset($options['scanPath']) ? $options['scanPath'] : MODX_BASE_PATH;
         $this->lexiconPath = MODX_CORE_PATH . 'lexicon/';
+        $this->setupLexiconPath = MODX_BASE_PATH . 'setup/lang/';
     }
 
     public function process()
@@ -154,10 +156,10 @@ class CheckLexicon
         $this->addKeys();
 
         $lexiconEntries = $this->loadLexicons();
-        if ($lexiconEntries === false) {
+        if (!is_array($lexiconEntries)) {
             return array(
                 'success' => false,
-                'message' => 'Could not load the lexicons in the language folder "' . $this->lexiconPath . $this->language . '/' . '"!'
+                'message' => $lexiconEntries
             );
         }
 
@@ -196,8 +198,9 @@ class CheckLexicon
      */
     private function loadLexicons()
     {
+        $_lang = array();
+
         if (file_exists($this->lexiconPath . $this->language . '/')) {
-            $_lang = array();
             $iterator = new \DirectoryIterator($this->lexiconPath . $this->language . '/');
             foreach ($iterator as $path => $current) {
                 if (strpos($current->getFilename(), 'inc.php') !== false) {
@@ -208,10 +211,26 @@ class CheckLexicon
                     }
                 }
             }
-            return $_lang;
         } else {
-            return false;
+            return 'Could not load the lexicons in the language folder "' . $this->lexiconPath . $this->language . '/' . '"!';
         }
+
+        if (file_exists($this->setupLexiconPath . $this->language . '/')) {
+            $iterator = new \DirectoryIterator($this->setupLexiconPath . $this->language . '/');
+            foreach ($iterator as $path => $current) {
+                if (strpos($current->getFilename(), 'inc.php') !== false) {
+                    try {
+                        include $current->getRealPath();
+                    } catch (Exception $e) {
+                        $this->invalidLexicons[] = $current->getFilename();
+                    }
+                }
+            }
+        } else {
+            return 'Could not load the lexicons in the setup language folder "' . $this->setupLexiconPath . $this->language . '/' . '"!';
+        }
+
+        return $_lang;
     }
 
     /**
