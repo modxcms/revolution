@@ -352,7 +352,7 @@ class CheckLexicon
     {
         $fileContent = file_get_contents($filename);
         $results = array();
-        preg_match_all('/\$_lang\.(.*?)\}/m', $fileContent, $results);
+        preg_match_all('/\$_lang\.(.*?)[ }]/m', $fileContent, $results);
         if (is_array($results[1])) {
             foreach ($results[1] as $result) {
                 // Don't add lexicon keys that ends with a dot or an underscore
