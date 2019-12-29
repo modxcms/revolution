@@ -100,14 +100,6 @@ $language = 'en';
 if (!empty($argv) && $argc > 1) {
     $language = $argv[1];
 }
-/* if language is other than en, check for the existance of the language folder */
-if ($language !== 'en') {
-    if (!file_exists(MODX_CORE_PATH . '/lexicon/' . $language)) {
-        $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'The lexicon folder "' . MODX_CORE_PATH . '/lexicon/' . $language . '" does not exist');
-        flush();
-        exit(1);
-    }
-}
 
 /* excluded folders can be defined for excluding specific folders with a comma separated list */
 $excluded = '';
