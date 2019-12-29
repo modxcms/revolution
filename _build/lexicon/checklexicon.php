@@ -304,6 +304,7 @@ class CheckLexicon
     /**
      * Add lexicon calls in javascript files:
      * _('whatever'
+     * createDelegate(this, ['whatever'
      *
      * @param string $filename
      */
@@ -314,6 +315,22 @@ class CheckLexicon
         preg_match_all('/_\(([\'"])(.*?)\1\s*[,\)]/m', $fileContent, $results);
         if (is_array($results[2])) {
             foreach ($results[2] as $result) {
+                // Don't add lexicon keys that ends with a dot or an underscore or that key is concatenated
+                if (substr($result, -1) !== '.' &&
+                    substr($result, -1) !== '_'
+                ) {
+                    if (strpos($result, '+') === false
+                    ) {
+                        $this->languageKeys[] = $result;
+                    } else {
+                        $this->variableKeys[] = $result;
+                    }
+                }
+            }
+        }
+        preg_match_all('/(createDelegate)\(.*?, \[([\'"])(.*?)\2/m', $fileContent, $results);
+        if (is_array($results[3])) {
+            foreach ($results[3] as $result) {
                 // Don't add lexicon keys that ends with a dot or an underscore or that key is concatenated
                 if (substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
