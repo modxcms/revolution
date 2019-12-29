@@ -95,7 +95,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO, 'Start lexicon check...');
 flush();
 
 /* language can be defined for checking language specific lexicons
-    en default means checks the english lexicons */
+   en default means checks the english lexicons */
 $language = 'en';
 if (!empty($argv) && $argc > 1) {
     $language = $argv[1];
