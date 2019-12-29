@@ -90,6 +90,8 @@ $xpdo = new xPDO(XPDO_DSN, XPDO_DB_USER, XPDO_DB_PASS,
 $cacheManager = $xpdo->getCacheManager();
 $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 $xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
+$xpdo->setPackage('modx', MODX_CORE_PATH . 'model/');
+$xpdo->loadClass('modAccessibleObject');
 
 $xpdo->log(xPDO::LOG_LEVEL_INFO, 'Start lexicon check...');
 flush();
@@ -254,7 +256,10 @@ class CheckLexicon
                         $pathinfo['extension'] == 'html' ||
                         $pathinfo['extension'] == 'tpl' ||
                         $pathinfo['basename'] == 'config.json'
-                    ) && strpos($pathinfo['basename'], 'min.js') === false) ? true : false;
+                    ) &&
+                    strpos($pathinfo['basename'], 'min.js') === false &&
+                    strpos($pathinfo['basename'], 'ext-') !== 0
+                ) ? true : false;
             }
         });
         $iterator = new \RecursiveIteratorIterator($filter);
@@ -268,6 +273,7 @@ class CheckLexicon
         $this->addSettingKeys();
         $this->addMenuKeys();
         $this->addWidgetKeys();
+        $this->addPermissionKeys();
 
         $this->languageKeys = array_unique($this->languageKeys);
         sort($this->languageKeys);
@@ -402,18 +408,20 @@ class CheckLexicon
      */
     private function addSettingKeys()
     {
-        /** @todo add all existing modx system settings */
-        // $settings = $this->config->getSettings();
         $settings = array();
+        $xpdo = &$this->modx;
+        if (file_exists(MODX_BASE_PATH . '_build/data/transport.core.system_settings.php')) {
+            $settings = include MODX_BASE_PATH . '_build/data/transport.core.system_settings.php';
+        }
 
         foreach ($settings as $setting) {
-            $this->languageKeys[] = 'setting_' . $setting->getNamespacedKey();
-            $this->languageKeys[] = 'setting_' . $setting->getNamespacedKey() . '_desc';
-            if (!in_array($setting->getArea(), array(
+            $this->languageKeys[] = 'setting_' . $setting->get('key');
+            $this->languageKeys[] = 'setting_' . $setting->get('key') . '_desc';
+            if (!in_array($setting->get('area'), array(
                 'authentication', 'caching', 'file', 'furls', 'gateway',
                 'language', 'manager', 'session', 'site', 'system'
             ))) {
-                $this->languageKeys[] = 'area_' . $setting->getArea();
+                $this->languageKeys[] = 'area_' . $setting->get('area');
             }
         }
     }
@@ -423,13 +431,28 @@ class CheckLexicon
      */
     private function addMenuKeys()
     {
-        /** @todo add all existing modx menu entries */
-        // $menus = $this->config->getMenus();
         $menus = array();
+        $xpdo = &$this->modx;
+        if (file_exists(MODX_BASE_PATH . '_build/data/transport.core.menus.php')) {
+            $menus = include MODX_BASE_PATH . '_build/data/transport.core.menus.php';
+        }
 
         foreach ($menus as $menu) {
-            $this->languageKeys[] = $menu->getText();
-            $this->languageKeys[] = $menu->getDescription();
+            $this->addMenuKey($menu);
+        }
+    }
+
+    /**
+     * Recursive add menu language key
+     * @param modMenu $menu
+     */
+    private function addMenuKey(modMenu $menu)
+    {
+        $this->languageKeys[] = $menu->get('text');
+        $this->languageKeys[] = $menu->get('description');
+        $children = $menu->getMany('Children');
+        foreach ($children as $child) {
+            $this->addMenuKey($child);
         }
     }
 
@@ -438,13 +461,52 @@ class CheckLexicon
      */
     private function addWidgetKeys()
     {
-        /** @todo add all existing modx core widgets */
-        // $widgets = $this->config->getElements('widgets');
         $widgets = array();
+        $xpdo = &$this->modx;
+        if (file_exists(MODX_BASE_PATH . '_build/data/transport.core.dashboard_widgets.php')) {
+            $widgets = include MODX_BASE_PATH . '_build/data/transport.core.dashboard_widgets.php';
+        }
+
 
         foreach ($widgets as $widget) {
-            $this->languageKeys[] = $widget->getName();
-            $this->languageKeys[] = $widget->getDescription();
+            $this->languageKeys[] = $widget->get('name');
+            $this->languageKeys[] = $widget->get('description');
+        }
+    }
+
+    /**
+     * Add permission language keys
+     */
+    private function addPermissionKeys()
+    {
+        $directory = new \RecursiveDirectoryIterator(MODX_BASE_PATH . '_build/data/permissions/', \RecursiveDirectoryIterator::SKIP_DOTS);
+        $filter = new \RecursiveCallbackFilterIterator($directory, function ($current, $key, $iterator) {
+            /** @var \RecursiveDirectoryIterator $current */
+            if ($current->getFilename()[0] === '.') {
+                return false;
+            }
+            if ($current->isDir()) {
+                return !in_array($current->getFilename(), $this->excludedFolders);
+            } else {
+                $pathinfo = pathinfo($current->getFilename());
+                return ($current->isFile() && isset($pathinfo['extension']) &&
+                    $pathinfo['extension'] == 'php'
+                ) ? true : false;
+            }
+        });
+        $iterator = new \RecursiveIteratorIterator($filter);
+
+        $xpdo = &$this->modx;
+        foreach ($iterator as $path => $current) {
+            try {
+                $permissions = include $current->getRealPath();
+            } catch (Exception $e) {
+                $permissions = array();
+            }
+            foreach ($permissions as $permission) {
+                $this->languageKeys[] = $permission->get('description');
+            }
+
         }
     }
 
@@ -472,12 +534,15 @@ class CheckLexicon
                 $keysFile = '_missing.php';
                 break;
         }
+        sort($keys);
         if (!empty($keys)) {
             $handle = fopen($folder . '/' . $keysFile, 'w');
             if ($handle) {
                 fwrite($handle, "<?php\n");
                 foreach ($keys as $key) {
-                    fwrite($handle, "\$_lang['{$key}'] = '';\n");
+                    if ($key != '') {
+                        fwrite($handle, "\$_lang['{$key}'] = '';\n");
+                    }
                 }
                 fclose($handle);
             } else {
