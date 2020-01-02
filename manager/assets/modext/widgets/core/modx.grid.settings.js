@@ -508,6 +508,7 @@ MODx.combo.xType = function(config) {
                 ,[_('source'),'modx-combo-source']
                 ,[_('source_type'),'modx-combo-source-type']
                 ,[_('setting_manager_theme'),'modx-combo-manager-theme']
+                ,[_('json_grid'),'modx-grid-json']
             ]
         })
         ,displayField: 'd'
