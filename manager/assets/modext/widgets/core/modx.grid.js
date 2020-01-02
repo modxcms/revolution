@@ -1154,6 +1154,22 @@ Ext.ns('Ext.ux.grid');Ext.ux.grid.CheckColumn=function(a){Ext.apply(this,a);if(!
 Ext.grid.PropertyColumnModel=function(a,b){var g=Ext.grid,f=Ext.form;this.grid=a;g.PropertyColumnModel.superclass.constructor.call(this,[{header:this.nameText,width:50,sortable:true,dataIndex:'name',id:'name',menuDisabled:true},{header:this.valueText,width:50,resizable:false,dataIndex:'value',id:'value',menuDisabled:true}]);this.store=b;var c=new f.Field({autoCreate:{tag:'select',children:[{tag:'option',value:'true',html:'true'},{tag:'option',value:'false',html:'false'}]},getValue:function(){return this.el.dom.value=='true'}});this.editors={'date':new g.GridEditor(new f.DateField({selectOnFocus:true})),'string':new g.GridEditor(new f.TextField({selectOnFocus:true})),'number':new g.GridEditor(new f.NumberField({selectOnFocus:true,style:'text-align:left;'})),'boolean':new g.GridEditor(c)};this.renderCellDelegate=this.renderCell.createDelegate(this);this.renderPropDelegate=this.renderProp.createDelegate(this)};Ext.extend(Ext.grid.PropertyColumnModel,Ext.grid.ColumnModel,{nameText:'Name',valueText:'Value',dateFormat:'m/j/Y',renderDate:function(a){return a.dateFormat(this.dateFormat)},renderBool:function(a){return a?'true':'false'},isCellEditable:function(a,b){return a==1},getRenderer:function(a){return a==1?this.renderCellDelegate:this.renderPropDelegate},renderProp:function(v){return this.getPropertyName(v)},renderCell:function(a){var b=a;if(Ext.isDate(a)){b=this.renderDate(a)}else if(typeof a=='boolean'){b=this.renderBool(a)}return Ext.util.Format.htmlEncode(b)},getPropertyName:function(a){var b=this.grid.propertyNames;return b&&b[a]?b[a]:a},getCellEditor:function(a,b){var p=this.store.getProperty(b),n=p.data.name,val=p.data.value;if(this.grid.customEditors[n]){return this.grid.customEditors[n]}if(Ext.isDate(val)){return this.editors.date}else if(typeof val=='number'){return this.editors.number}else if(typeof val=='boolean'){return this.editors['boolean']}else{return this.editors.string}},destroy:function(){Ext.grid.PropertyColumnModel.superclass.destroy.call(this);for(var a in this.editors){Ext.destroy(a)}}});
 /**
  * MODx JSON Grid
+ * Local grid with inline editing, it converts the grid value from/to JSON and submits the JSON in a hidden field.
+ * The grid could be sorted by drag & drop, new values could be added with a button and each row could be deleted.
+ *
+ * It could be configured with the fieldConfig property, containing an array of field configs:
+ *
+ * fieldConfig: [{
+ *    name: 'whatever', // required
+ *    width: 100, // defaults to 100
+ *    xtype: 'textfield', // defaults to textfield
+ *    allowBlank: true, // defaults to true
+ *    header: _('whatever') // defaults to the lexicon entry of name value of the current field config
+ * }];
+ *
+ * If there is no fieldConfig property set, the following default fieldConfig is used:
+ *
+ * [{name: 'key'}, {name: 'value'}]
  */
 MODx.grid.JsonGrid = function (config) {
     config = config || {};
@@ -1162,7 +1178,7 @@ MODx.grid.JsonGrid = function (config) {
         + '<tpl if="action_buttons !== null">'
         + '<ul class="action-buttons">'
         + '<tpl for="action_buttons">'
-        + '<li><i class="icon {className} icon-{icon}" title="{text}"></i></li>'
+        + '<li><i class="icon {className:htmlEncode} icon-{icon:htmlEncode}" title="{text:htmlEncode}"></i></li>'
         + '</tpl>'
         + '</ul>'
         + '</tpl>'
@@ -1181,7 +1197,8 @@ MODx.grid.JsonGrid = function (config) {
         this.fieldColumns.push({
             header: el.header || _(el.name),
             dataIndex: el.name,
-            editable: true, editor: {
+            editable: true,
+            editor: {
                 xtype: el.xtype || 'textfield',
                 allowBlank: el.allowBlank || true,
                 listeners: {
