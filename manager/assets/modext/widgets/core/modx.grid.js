@@ -1160,7 +1160,7 @@ Ext.grid.PropertyColumnModel=function(a,b){var g=Ext.grid,f=Ext.form;this.grid=a
  * It could be configured with the fieldConfig property, containing an array of field configs:
  *
  * fieldConfig: [{
- *    name: 'whatever', // required
+ *    name: 'whatever', // required, name 'id' is reserved and can't be used
  *    width: 100, // defaults to 100
  *    xtype: 'textfield', // defaults to textfield
  *    allowBlank: true, // defaults to true
@@ -1190,6 +1190,7 @@ MODx.grid.JsonGrid = function (config) {
         hidden: true
     });
     this.fieldConfig = config.fieldConfig || [{name: 'key'}, {name: 'value'}];
+    this.fieldConfig.push({name: 'id', hidden: true});
     this.fieldColumns = [];
     this.fieldNames = [];
     Ext.each(this.fieldConfig, function (el) {
@@ -1198,6 +1199,7 @@ MODx.grid.JsonGrid = function (config) {
             header: el.header || _(el.name),
             dataIndex: el.name,
             editable: true,
+            hidden: el.hidden || false,
             editor: {
                 xtype: el.xtype || 'textfield',
                 allowBlank: el.allowBlank || true,
@@ -1225,7 +1227,7 @@ MODx.grid.JsonGrid = function (config) {
         autoHeight: true,
         store: new Ext.data.JsonStore({
             fields: this.fieldNames,
-            data: Ext.util.JSON.decode(config.value)
+            data: this.loadValue(config.value)
         }),
         enableDragDrop: true,
         ddGroup: this.ident + '-json-grid-dd',
@@ -1261,7 +1263,8 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
         Ext.each(this.fieldNames, function (fieldname) {
             row[fieldname] = '';
         });
-        this.getStore().insert(0, new ds.recordType(row));
+        row['id'] = this.getStore().getCount();
+        this.getStore().insert(this.getStore().getCount(), new ds.recordType(row));
         this.getView().refresh();
         this.getSelectionModel().selectRow(0);
     },
@@ -1275,7 +1278,7 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
                 }
                 for (var i = 0; i < rows.length; i++) {
                     var id = rows[i].id;
-                    var index = ds.findBy(function (record, id) {
+                    var index = ds.findBy(function (record) {
                         if (record.id === id) {
                             return true;
                         }
@@ -1340,12 +1343,21 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
             }
         }
     },
+    loadValue: function (value) {
+        value = Ext.util.JSON.decode(value);
+        Ext.each(value, function (record, idx) {
+            value[idx]['id'] = idx;
+        });
+        return value;
+    },
     saveValue: function () {
         var value = [];
         Ext.each(this.getStore().getRange(), function (record) {
             var row = {};
             Ext.each(this.fieldNames, function (fieldname) {
-                row[fieldname] = record.data[fieldname];
+                if (fieldname !== 'id') {
+                    row[fieldname] = record.data[fieldname];
+                }
             });
             value.push(row);
         }, this);
