@@ -119,7 +119,11 @@
       content: fa-content($fa-var-cube);
     }
 
-    #limenu-manage > a:before {
+    #limenu-access > a:before {
+      content: fa-content($fa-var-user-lock);
+    }
+
+    #limenu-manager > a:before {
       content: fa-content($fa-var-sliders-h);
     }
   }
@@ -321,8 +325,8 @@
   }
 
   // custom styles for language menu
-  #limenu-user-submenu #language .modx-subsubnav {
-    max-height: 86vh;
+  #language .modx-subsubnav {
+    max-height: 55vh;
     overflow-y: auto;
   }
 }
