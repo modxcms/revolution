@@ -19,7 +19,7 @@ namespace MODX\Revolution;
  *
  * @package MODX\Revolution
  */
-class modActionDom extends \MODX\Revolution\modAccessibleSimpleObject
+class modActionDom extends modAccessibleSimpleObject
 {
     /**
      * Apply the rule to the current page.
