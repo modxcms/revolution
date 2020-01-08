@@ -16,7 +16,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
     /** @var modX $modx */
     public $modx;
     public $latest_url = 'https://raw.githubusercontent.com/modxcms/revolution/3.x/_build/build.xml';
-    public $download_url = 'http://modx.com/download/latest/';
+    public $download_url = 'https://modx.com/download/latest';
     public $updatesCacheExpire = 3600;
 
 
