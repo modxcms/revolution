@@ -332,7 +332,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
     ,_handleDrop: function(e) {
         var target = e.target;
         if (e.point == 'above' || e.point == 'below') {return false;}
-        if (target.attributes.classKey != 'modCategory' && target.attributes.classKey != 'root') { return false; }
+        if (target.attributes.classKey != 'MODX\\Revolution\\modCategory' && target.attributes.classKey != 'root') { return false; }
 
         if (!this.isCorrectType(e.dropNode,target)) {return false;}
         if (target.attributes.type == 'category' && e.point == 'append') {return true;}
@@ -374,7 +374,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 case 'root':
                     m = this._getRootMenu(n);
                     break;
-                case 'modCategory':
+                case 'MODX\\Revolution\\modCategory':
                     m = this._getCategoryMenu(n);
                     break;
                 default:
