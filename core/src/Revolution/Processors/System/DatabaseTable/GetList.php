@@ -30,7 +30,7 @@ class GetList extends GetListAbstract
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    public function __construct(modX &$modx, array $properties = [])
+    public function __construct(modX $modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
 

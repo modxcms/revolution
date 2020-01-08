@@ -113,7 +113,7 @@ class Update extends UpdateProcessor
      * @param array $properties
      * @return Processor
      */
-    public static function getInstance(modX &$modx, $className, $properties = [])
+    public static function getInstance(modX $modx, $className, $properties = [])
     {
         /** @var modResource $object */
         $object = $modx->getObject(modResource::class, $properties['id']);

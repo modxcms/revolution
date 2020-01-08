@@ -95,7 +95,7 @@ abstract class modManagerController
      *
      * @return modManagerController The class specified by $className
      */
-    public static function getInstance(modX &$modx, $className, array $config = [])
+    public static function getInstance(modX $modx, $className, array $config = [])
     {
         /** @var modManagerController $controller */
         $controller = new $className($modx, $config);

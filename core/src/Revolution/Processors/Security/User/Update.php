@@ -60,7 +60,7 @@ class Update extends UpdateProcessor {
      * @param array $properties
      * @return Processor
      */
-    public static function getInstance(modX &$modx,$className,$properties = array()) {
+    public static function getInstance(modX $modx,$className,$properties = array()) {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modUser::class;
         $object = $modx->newObject($classKey);
 
