@@ -18,7 +18,7 @@ if ($posted) {
     if (is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
         $content = file_get_contents(MODX_SETUP_PATH . 'includes/config.core.php');
         $pattern = "/define\s*\(\s*'MODX_CORE_PATH'\s*,.*\);/";
-        $core_path = str_replace(array('{','}',"'",'"','\$'), '', $core_path);
+        $core_path = str_replace(['{','}',"'",'"','\$'], '', $core_path);
         $replacement = "define ('MODX_CORE_PATH', '{$core_path}');";
         $content = preg_replace($pattern, $replacement, $content);
         file_put_contents(MODX_SETUP_PATH . 'includes/config.core.php', $content);

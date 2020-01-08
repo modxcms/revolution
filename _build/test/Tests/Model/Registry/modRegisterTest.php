@@ -31,7 +31,7 @@ class modRegisterTest extends MODxTestCase {
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->loadClass('registry.modRegister', '', false, true);
-        $modx->registry->addRegister('register', modMemoryRegister::class, array('directory' => 'register'));
+        $modx->registry->addRegister('register', modMemoryRegister::class, ['directory' => 'register']);
     }
 
     public static function tearDownAfterClass() {
@@ -60,13 +60,13 @@ class modRegisterTest extends MODxTestCase {
         $this->assertTrue(in_array($topic, $this->modx->registry->register->subscriptions), "Could not subscribe to register topic {$topic}");
     }
     public function providerSubscribe() {
-        return array(
-            array('/food'),
-            array('/food/'),
-            array('/beer/'),
-            array('/beer'),
-            array('/food/beer/'),
-        );
+        return [
+            ['/food'],
+            ['/food/'],
+            ['/beer/'],
+            ['/beer'],
+            ['/food/beer/'],
+        ];
     }
 
     /**
@@ -81,11 +81,11 @@ class modRegisterTest extends MODxTestCase {
         $this->assertEquals($expected, $this->modx->registry->register->getCurrentTopic(), "Could not set current topic.");
     }
     public function providerSetCurrentTopic() {
-        return array(
-            array('/', ''),
-            array('/food/', 'food'),
-            array('/beer/', '/beer'),
-            array('/food/beer/', '/food/beer/'),
-        );
+        return [
+            ['/', ''],
+            ['/food/', 'food'],
+            ['/beer/', '/beer'],
+            ['/food/beer/', '/food/beer/'],
+        ];
     }
 }

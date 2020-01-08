@@ -21,8 +21,8 @@ if($mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) {
     $settings = array_merge($settings, $install->request->getConfig($mode));
 }
 
-$data = array();
-$errors = array();
+$data = [];
+$errors = [];
 
 /* get an instance of xPDO using the install settings */
 $xpdo = $install->getConnection($mode);
@@ -31,10 +31,12 @@ if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
     $this->error->failure($install->lexicon('xpdo_err_ins'));
 }
 
-$xpdo->setLogTarget(array(
+$xpdo->setLogTarget(
+    [
     'target' => 'ARRAY'
-    ,'options' => array('var' => & $errors)
-));
+    ,'options' => ['var' => & $errors]
+    ]
+);
 
 /* try to get a connection to the actual database */
 $dbExists = $xpdo->connect();
@@ -44,16 +46,17 @@ if (!$dbExists) {
     } elseif ($xpdo->getManager()) {
         /* otherwise try to create the database */
         $dbExists = $xpdo->manager->createSourceContainer(
-            array(
+            [
                 'dbname' => $install->settings->get('dbase')
                 ,'host' => $install->settings->get('database_server')
-            )
-            ,$install->settings->get('database_user')
-            ,$install->settings->get('database_password')
-            ,array(
+            ]
+            , $install->settings->get('database_user')
+            , $install->settings->get('database_password')
+            ,
+            [
                 'charset' => $install->settings->get('database_connection_charset')
                 ,'collation' => $install->settings->get('database_collation')
-            )
+            ]
         );
         if (!$dbExists) {
             $this->error->failure($install->lexicon('db_err_create_database'), $errors);
@@ -62,10 +65,12 @@ if (!$dbExists) {
             if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
                 $this->error->failure($install->lexicon('xpdo_err_ins'), $errors);
             }
-            $xpdo->setLogTarget(array(
+            $xpdo->setLogTarget(
+                [
                 'target' => 'ARRAY'
-                ,'options' => array('var' => & $errors)
-            ));
+                ,'options' => ['var' => & $errors]
+                ]
+            );
         }
     } else {
         $this->error->failure($install->lexicon('db_err_connect_server'), $errors);

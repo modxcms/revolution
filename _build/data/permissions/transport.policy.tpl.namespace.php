@@ -6,21 +6,21 @@
  */
 use MODX\Revolution\modAccessPermission;
 
-$permissions = array();
-$permissions[] = $xpdo->newObject(modAccessPermission::class,array(
+$permissions = [];
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'list',
     'description' => 'perm.list_desc',
     'value' => true,
-));
-$permissions[] = $xpdo->newObject(modAccessPermission::class,array(
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'load',
     'description' => 'perm.load_desc',
     'value' => true,
-));
-$permissions[] = $xpdo->newObject(modAccessPermission::class,array(
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'view',
     'description' => 'perm.view_desc',
     'value' => true,
-));
+]);
 
 return $permissions;

@@ -38,9 +38,9 @@ abstract class MODxControllerTestCase extends MODxTestCase {
 
         /* load smarty template engine */
         $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
-        $this->modx->getService('smarty', modSmarty::class, '', array(
+        $this->modx->getService('smarty', modSmarty::class, '', [
             'template_dir' => $templatePath,
-        ));
+        ]);
         $this->modx->smarty->setCachePath('mgr/smarty/default/');
         $this->modx->smarty->assign('_config',$this->modx->config);
         $this->modx->smarty->assignByRef('modx',$this->modx);
@@ -49,12 +49,12 @@ abstract class MODxControllerTestCase extends MODxTestCase {
         $className = $this->controllerName;
 
         if (!empty($className)) {
-            $this->controller = new $className($this->modx,array(
+            $this->controller = new $className($this->modx, [
                 'namespace' => 'core',
                 'namespace_name' => 'core',
                 'namespace_path' => MODX_MANAGER_PATH,
                 'controller' => $this->controllerPath,
-            ));
+            ]);
             $this->controller->setProperties($_REQUEST);
         }
     }

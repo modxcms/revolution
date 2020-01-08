@@ -15,11 +15,11 @@
  * @subpackage tests
  */
 abstract class modInstallTest {
-    public $results = array(
-        'pass' => array(),
-        'fail' => array(),
-        'warn' => array(),
-    );
+    public $results = [
+        'pass' => [],
+        'fail' => [],
+        'warn' => [],
+    ];
     /** @var modInstall $install */
     public $install;
     public $mode;
@@ -36,7 +36,7 @@ abstract class modInstallTest {
      * @return array An array of result messages collected during the process.
      */
     public function run($mode = modInstall::MODE_NEW) {
-        $this->results = array();
+        $this->results = [];
         $this->mode = $mode;
 
         $this->_checkPHPVersion();
@@ -85,14 +85,14 @@ abstract class modInstallTest {
 
         /* -1 if left is less, 0 if equal, +1 if left is higher */
         if (!$php_ver_comp) {
-            $this->fail('php_version','',$this->install->lexicon('test_php_version_fail',array(
+            $this->fail('php_version','',$this->install->lexicon('test_php_version_fail', [
                  'version' => $phpVersion
                 ,'required' => $required_version
                 ,'recommended' => $recommended_version
-            )));
+            ]));
 
         } else {
-            $this->pass('php_version',$this->install->lexicon('test_php_version_success',array('version' => $phpVersion)));
+            $this->pass('php_version',$this->install->lexicon('test_php_version_success', ['version' => $phpVersion]));
         }
     }
 
@@ -113,9 +113,9 @@ abstract class modInstallTest {
 
         $this->title('memory_limit',$this->install->lexicon('test_memory_limit').' ');
         if ($success) {
-            $this->pass('memory_limit',$this->install->lexicon('test_memory_limit_success',array('memory' => $ml)));
+            $this->pass('memory_limit',$this->install->lexicon('test_memory_limit_success', ['memory' => $ml]));
         } else {
-            $this->fail('memory_limit','',$this->install->lexicon('test_memory_limit_fail',array('memory' => $ml)));
+            $this->fail('memory_limit','',$this->install->lexicon('test_memory_limit_fail', ['memory' => $ml]));
         }
     }
 
@@ -188,7 +188,8 @@ abstract class modInstallTest {
      */
     protected function _checkCache() {
         /* cache exists? */
-        $this->title('cache_exists',$this->install->lexicon('test_directory_exists',array('dir' => MODX_CORE_PATH . 'cache')));
+        $this->title('cache_exists',$this->install->lexicon('test_directory_exists',
+            ['dir' => MODX_CORE_PATH . 'cache']));
         if (!file_exists(MODX_CORE_PATH . 'cache')) {
             $this->fail('cache_exists');
         } else {
@@ -196,7 +197,8 @@ abstract class modInstallTest {
         }
 
         /* cache writable? */
-        $this->title('cache_writable',$this->install->lexicon('test_directory_writable',array('dir' => MODX_CORE_PATH . 'cache')));
+        $this->title('cache_writable',$this->install->lexicon('test_directory_writable',
+            ['dir' => MODX_CORE_PATH . 'cache']));
         if (!$this->is_writable2(MODX_CORE_PATH . 'cache')) {
             $this->fail('cache_writable');
         } else {
@@ -209,7 +211,8 @@ abstract class modInstallTest {
      */
     protected function _checkExport() {
         /* export exists? */
-        $this->title('assets_export_exists',$this->install->lexicon('test_directory_exists',array('dir' => MODX_CORE_PATH . 'export')));
+        $this->title('assets_export_exists',$this->install->lexicon('test_directory_exists',
+            ['dir' => MODX_CORE_PATH . 'export']));
         if (!file_exists(MODX_CORE_PATH . 'export')) {
             $this->fail('assets_export_exists');
         } else {
@@ -217,7 +220,8 @@ abstract class modInstallTest {
         }
 
         /* export writable? */
-        $this->title('assets_export_writable',$this->install->lexicon('test_directory_writable',array('dir' => MODX_CORE_PATH . 'export')));
+        $this->title('assets_export_writable',$this->install->lexicon('test_directory_writable',
+            ['dir' => MODX_CORE_PATH . 'export']));
         if (!$this->is_writable2(MODX_CORE_PATH . 'export')) {
             $this->fail('assets_export_writable');
         } else {
@@ -230,7 +234,8 @@ abstract class modInstallTest {
      */
     protected function _checkPackages() {
         /* core/packages exists? */
-        $this->title('core_packages_exists',$this->install->lexicon('test_directory_exists',array('dir' => MODX_CORE_PATH . 'packages')));
+        $this->title('core_packages_exists',$this->install->lexicon('test_directory_exists',
+            ['dir' => MODX_CORE_PATH . 'packages']));
         if (!file_exists(MODX_CORE_PATH . 'packages')) {
             $this->fail('core_packages_exists');
         } else {
@@ -238,7 +243,8 @@ abstract class modInstallTest {
         }
 
         /* packages writable? */
-        $this->title('core_packages_writable',$this->install->lexicon('test_directory_writable',array('dir' => MODX_CORE_PATH . 'packages')));
+        $this->title('core_packages_writable',$this->install->lexicon('test_directory_writable',
+            ['dir' => MODX_CORE_PATH . 'packages']));
         if (!$this->is_writable2(MODX_CORE_PATH . 'packages')) {
             $this->fail('core_packages_writable');
         } else {
@@ -253,7 +259,8 @@ abstract class modInstallTest {
         $coreConfigsExist = false;
         if ($this->install->settings->get('inplace')) {
             /* web_path */
-            $this->title('context_web_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('context_web_path'))));
+            $this->title('context_web_exists',$this->install->lexicon('test_directory_exists',
+                ['dir' => $this->install->settings->get('context_web_path')]));
             if (!file_exists($this->install->settings->get('context_web_path'))) {
                 $this->fail('context_web_exists');
             } else {
@@ -261,7 +268,8 @@ abstract class modInstallTest {
             }
 
             /* mgr_path */
-            $this->title('context_mgr_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('context_mgr_path'))));
+            $this->title('context_mgr_exists',$this->install->lexicon('test_directory_exists',
+                ['dir' => $this->install->settings->get('context_mgr_path')]));
             if (!file_exists($this->install->settings->get('context_mgr_path'))) {
                 $this->fail('context_mgr_exists');
             } else {
@@ -269,7 +277,8 @@ abstract class modInstallTest {
             }
 
             /* connectors_path */
-            $this->title('context_connectors_exists',$this->install->lexicon('test_directory_exists',array('dir' => $this->install->settings->get('context_connectors_path'))));
+            $this->title('context_connectors_exists',$this->install->lexicon('test_directory_exists',
+                ['dir' => $this->install->settings->get('context_connectors_path')]));
             if (!file_exists($this->install->settings->get('context_connectors_path'))) {
                 $this->fail('context_connectors_exists');
             } else {
@@ -289,7 +298,7 @@ abstract class modInstallTest {
     protected function _checkConfig() {
         $configFileDisplay= 'config/' . MODX_CONFIG_KEY . '.inc.php';
         $configFilePath= MODX_CORE_PATH . $configFileDisplay;
-        $this->title('config_writable',$this->install->lexicon('test_config_file',array('file' => $configFilePath)));
+        $this->title('config_writable',$this->install->lexicon('test_config_file', ['file' => $configFilePath]));
         if (!file_exists($configFilePath)) {
             /* make an attempt to create the file */
             @ $hnd = fopen($configFilePath, 'w');
@@ -298,7 +307,8 @@ abstract class modInstallTest {
         }
         $isWriteable = @is_writable($configFilePath);
         if (!$isWriteable) {
-            $this->fail('config_writable',$this->install->lexicon('failed'),$this->install->lexicon('test_config_file_nw',array('key' => MODX_CONFIG_KEY)));
+            $this->fail('config_writable',$this->install->lexicon('failed'),$this->install->lexicon('test_config_file_nw',
+                ['key' => MODX_CONFIG_KEY]));
         } else {
             $this->pass('config_writable');
         }
@@ -389,7 +399,7 @@ abstract class modInstallTest {
      * @param string $title The title of the check
      */
     protected function title($key,$title) {
-        if (!isset($this->results[$key])) $this->results[$key] = array();
+        if (!isset($this->results[$key])) $this->results[$key] = [];
         $this->results[$key]['msg'] = '<p>'.$title;
     }
 
@@ -402,12 +412,12 @@ abstract class modInstallTest {
     protected function pass($key,$message = '') {
         if (empty($message)) $message = $this->install->lexicon('ok');
 
-        if (!isset($this->results[$key])) $this->results[$key] = array();
+        if (!isset($this->results[$key])) $this->results[$key] = [];
         if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
         $this->results[$key]['msg'] .= '<span class="ok">'.$message.'</span></p>';
         $this->results[$key]['class'] = 'testPassed';
 
-        if (!isset($this->results['pass'][$key])) $this->results['pass'][$key] = array();
+        if (!isset($this->results['pass'][$key])) $this->results['pass'][$key] = [];
         if (!isset($this->results['pass'][$key]['msg'])) $this->results['pass'][$key]['msg'] = '';
         $this->results['pass'][$key]['msg'] .= '<span class="ok">'.$message.'</span></p>';
         $this->results['pass'][$key]['class'] = 'testPassed';
@@ -431,13 +441,13 @@ abstract class modInstallTest {
             if (!empty($messageTitle)) $msg .= '<h3>'.$messageTitle.'</h3>';
             $msg .= '<p>'.$message.'</p></div>';
         }
-        if (!isset($this->results[$key])) $this->results[$key] = array();
+        if (!isset($this->results[$key])) $this->results[$key] = [];
         if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
 
         $this->results[$key]['msg'] .= $msg;
         $this->results[$key]['class'] = 'testWarn';
 
-        if (!isset($this->results['warn'][$key])) $this->results['warn'][$key] = array();
+        if (!isset($this->results['warn'][$key])) $this->results['warn'][$key] = [];
         if (!isset($this->results['warn'][$key]['msg'])) $this->results['warn'][$key]['msg'] = '';
         $this->results['warn'][$key]['msg'] .= $msg;
         $this->results['warn'][$key]['class'] = 'testPassed';
@@ -461,13 +471,13 @@ abstract class modInstallTest {
         if (!empty($message)) {
             $msg .= '<p><strong>'.$message.'</strong></p>';
         }
-        if (!isset($this->results[$key])) $this->results[$key] = array();
+        if (!isset($this->results[$key])) $this->results[$key] = [];
         if (!isset($this->results[$key]['msg'])) $this->results[$key]['msg'] = '';
         $this->results[$key]['msg'] .= $msg;
         $this->results[$key]['class'] = 'testFailed';
 
 
-        if (!isset($this->results['fail'][$key])) $this->results['fail'][$key] = array();
+        if (!isset($this->results['fail'][$key])) $this->results['fail'][$key] = [];
         if (!isset($this->results['fail'][$key]['msg'])) $this->results['fail'][$key]['msg'] = '';
         $this->results['fail'][$key]['msg'] .= $msg;
         $this->results['fail'][$key]['class'] = 'testFailed';

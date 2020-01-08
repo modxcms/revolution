@@ -18,8 +18,8 @@
  * @package setup
  */
 
-$results= array ();
-$classes= array (
+$results= [];
+$classes= [
     \MODX\Revolution\modAccessAction::class,
     \MODX\Revolution\modAccessActionDom::class,
     \MODX\Revolution\modAccessCategory::class,
@@ -91,7 +91,7 @@ $classes= array (
     \MODX\Revolution\Sources\modMediaSource::class,
     \MODX\Revolution\Sources\modMediaSourceElement::class,
     \MODX\Revolution\Sources\modMediaSourceContext::class,
-);
+];
 
 $modx->getManager();
 $connected= $modx->connect();
@@ -108,22 +108,28 @@ if (!$connected) {
     $containerOptions['collation']= $install->settings->get('database_collation', 'utf8_general_ci');
     $created = $modx->manager->createSourceContainer($dsnArray, $modx->config['username'], $modx->config['password'], $containerOptions);
     if (!$created) {
-        $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">'.$install->lexicon('db_err_create').'</p>');
+        $results[]= ['class' => 'failed', 'msg' => '<p class="notok">'.$install->lexicon('db_err_create').'</p>'];
     }
     else {
         $connected= $modx->connect();
     }
     if ($connected) {
-        $results[]= array ('class' => 'success', 'msg' => '<p class="ok">'.$install->lexicon('db_created').'</p>');
+        $results[]= ['class' => 'success', 'msg' => '<p class="ok">'.$install->lexicon('db_created').'</p>'];
     }
 }
 if ($connected) {
     ob_start();
     foreach ($classes as $class) {
         if (!$dbcreated= $modx->manager->createObjectContainer($class)) {
-            $results[]= array ('class' => 'failed', 'msg' => '<p class="notok">' . $install->lexicon('table_err_create',array('class' => $class)) . '</p>');
+            $results[]= [
+                'class' => 'failed', 'msg' => '<p class="notok">' . $install->lexicon('table_err_create',
+                        ['class' => $class]) . '</p>'
+            ];
         } else {
-            $results[]= array ('class' => 'success', 'msg' => '<p class="ok">' . $install->lexicon('table_created',array('class' => $class)) . '</p>');
+            $results[]= [
+                'class' => 'success', 'msg' => '<p class="ok">' . $install->lexicon('table_created',
+                        ['class' => $class]) . '</p>'
+            ];
         }
     }
     ob_end_clean();

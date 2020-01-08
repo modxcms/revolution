@@ -32,7 +32,7 @@ class modTemplateVarTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         $this->tv = $this->modx->newObject(modTemplateVar::class);
-        $this->tv->fromArray(array(
+        $this->tv->fromArray([
             'id' => 12345,
             'name' => 'Unit Test Template Var',
             'caption' => 'UTTV',
@@ -40,8 +40,8 @@ class modTemplateVarTest extends MODxTestCase {
             'default_text' => '<p>Hello, [[+name]]!</p>',
             'category' => 0,
             'locked' => 0,
-        ),'',true,true);
-        $this->tv->setProperties(array('name' => 'John'));
+        ],'',true,true);
+        $this->tv->setProperties(['name' => 'John']);
         $this->tv->setCacheable(false);
     }
     public function tearDown() {
@@ -69,9 +69,9 @@ class modTemplateVarTest extends MODxTestCase {
      * @return array
      */
     public function providerSetContent() {
-        return array(
-            array('Test content.'),
-        );
+        return [
+            ['Test content.'],
+        ];
     }
 
     /**
@@ -80,7 +80,7 @@ class modTemplateVarTest extends MODxTestCase {
      * @param null|string $content
      * @dataProvider providerProcess
      */
-    public function testProcess($expected,array $properties = array(),$content = null) {
+    public function testProcess($expected,array $properties = [],$content = null) {
         $result = $this->tv->process($properties,$content);
         $this->assertEquals($expected,$result);
     }
@@ -88,11 +88,11 @@ class modTemplateVarTest extends MODxTestCase {
      * @return array
      */
     public function providerProcess() {
-        return array(
-            array('<p>Hello, John!</p>'),
-            array('<p>Hello, Mark!</p>',array('name' => 'Mark')),
+        return [
+            ['<p>Hello, John!</p>'],
+            ['<p>Hello, Mark!</p>', ['name' => 'Mark']],
             //array('<p>Having fun.</p>',array(),'<p>Having fun.</p>'),
             //array('<p>Test 1</p>',array('number' => 1),'<p>Test [[+number]]</p>'),
-        );
+        ];
     }
 }

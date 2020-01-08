@@ -66,7 +66,7 @@ class modInstallLexicon
      * @param array $placeholders An array of placeholders
      * @return string
      */
-    public function parse($str = '',array $placeholders = array()) {
+    public function parse($str = '',array $placeholders = []) {
         if (empty($str)) return '';
         if (empty($placeholders) || !is_array($placeholders)) return $str;
 
@@ -96,7 +96,7 @@ class modInstallLexicon
      */
     public function fetch($prefix = '',$removePrefix = false) {
         if (!empty($prefix)) {
-            $lex = array();
+            $lex = [];
             $lang = $this->lexicon;
             foreach ($lang as $k => $v) {
                 if (strpos($k,$prefix) !== false) {

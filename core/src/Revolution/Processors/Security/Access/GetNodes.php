@@ -58,7 +58,7 @@ class GetNodes extends ModelProcessor
                 'leaf' => 0,
                 'type' => 'modAccessContext',
             ];
-            $da[] = array(
+            $da[] = [
                 'text' => $this->modx->lexicon('resource_groups'),
                 'id' => 'n_modResourceGroup_0',
                 'cls' => 'icon-resourcegroup folder',
@@ -66,7 +66,7 @@ class GetNodes extends ModelProcessor
                 'target_cls' => modResourceGroup::class,
                 'leaf' => 0,
                 'type' => 'modAccessResourceGroup',
-            );
+            ];
         } else {
             $targets = $this->modx->getCollection($targetClass);
             /** @var modAccess $target */

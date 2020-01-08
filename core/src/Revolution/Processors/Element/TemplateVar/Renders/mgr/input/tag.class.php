@@ -22,11 +22,11 @@ class modTemplateVarInputRenderTag extends modTemplateVarInputRender
      * @param array $params
      * @return mixed|void
      */
-    public function process($value, array $params = array())
+    public function process($value, array $params = [])
     {
         $value = is_array($value) ? $value : explode(',', $value);
 
-        $options = array();
+        $options = [];
 
         foreach ($this->getInputOptions() as $option) {
             if (!$option) { continue; }
@@ -35,11 +35,11 @@ class modTemplateVarInputRenderTag extends modTemplateVarInputRender
                 $option[] = $option[0];
             }
             list($inputOptionText, $inputOptionValue) = $option;
-            $options[] = array(
+            $options[] = [
                 'value' => htmlspecialchars($inputOptionValue, ENT_COMPAT, 'UTF-8'),
                 'text' => htmlspecialchars($inputOptionText,ENT_COMPAT,'UTF-8'),
                 'checked' => in_array($inputOptionValue, $value, false),
-            );
+            ];
         }
 
         $this->setPlaceholder('options', $options);

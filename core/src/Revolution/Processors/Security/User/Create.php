@@ -31,7 +31,7 @@ use MODX\Revolution\Smarty\modSmarty;
  */
 class Create extends CreateProcessor {
     public $classKey = modUser::class;
-    public $languageTopics = array('user', 'login');
+    public $languageTopics = ['user', 'login'];
     public $permission = 'new_user';
     public $objectType = 'user';
     public $beforeSaveEvent = 'OnBeforeUserFormSave';
@@ -54,11 +54,11 @@ class Create extends CreateProcessor {
      * @param array $properties
      * @return Processor
      */
-    public static function getInstance(modX $modx,$className,$properties = array()) {
+    public static function getInstance(modX $modx,$className,$properties = []) {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modUser::class;
         $object = $modx->newObject($classKey);
 
-        if (!in_array($classKey,array(modUser::class,''))) {
+        if (!in_array($classKey, [modUser::class,''])) {
             $className = $classKey.'CreateProcessor';
             if (!class_exists($className)) {
                 $className = static::class;
@@ -70,11 +70,13 @@ class Create extends CreateProcessor {
     }
 
     public function initialize() {
-        $this->setDefaultProperties(array(
+        $this->setDefaultProperties(
+            [
             'class_key' => $this->classKey,
             'blocked' => false,
             'active' => false,
-        ));
+            ]
+        );
         $this->classKey = $this->getProperty('class_key', modUser::class);
         $this->setProperty('blocked',$this->getProperty('blocked') ? true : false);
         return parent::initialize();
@@ -106,12 +108,12 @@ class Create extends CreateProcessor {
      */
     public function setUserGroups()
     {
-        $memberships = array();
+        $memberships = [];
         $groups = $this->getProperty('groups', null);
         if ($groups !== null) {
             $primaryGroupId = 0;
             $groups = is_array($groups) ? $groups : json_decode($groups, true);
-            $groupsAdded = array();
+            $groupsAdded = [];
             $idx = 0;
             foreach ($groups as $group) {
                 if (in_array($group['usergroup'], $groupsAdded)) {
@@ -120,23 +122,26 @@ class Create extends CreateProcessor {
 
                 /** @var modUserGroupMember $membership */
                 $membership = $this->modx->newObject(modUserGroupMember::class);
-                $membership->fromArray(array(
+                $membership->fromArray(
+                    [
                     'user_group' => $group['usergroup'],
                     'role' => $group['role'],
                     'member' => $this->object->get('id'),
                     'rank' => isset($group['rank']) ? $group['rank'] : $idx
-                ));
+                    ]
+                );
                 if (empty($group['rank'])) {
                     $primaryGroupId = $group['usergroup'];
                 }
 
                 $usergroup = $this->modx->getObject(modUserGroup::class, $group['usergroup']);
                 /* invoke OnUserBeforeAddToGroup event */
-                $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', array(
+                $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', [
                     'user' => &$this->object,
                     'usergroup' => &$usergroup,
                     'membership' => &$membership,
-                ));
+                ]
+                );
                 $canSave = $this->processEventResponse($OnUserBeforeAddToGroup);
                 if (!empty($canSave)) {
                     $this->object->save();
@@ -151,11 +156,12 @@ class Create extends CreateProcessor {
                 }
 
                 /* invoke OnUserAddToGroup event */
-                $this->modx->invokeEvent('OnUserAddToGroup', array(
+                $this->modx->invokeEvent('OnUserAddToGroup', [
                     'user' => &$this->object,
                     'usergroup' => &$usergroup,
                     'membership' => &$membership,
-                ));
+                ]
+                );
 
                 $groupsAdded[] = $group['usergroup'];
                 $idx++;

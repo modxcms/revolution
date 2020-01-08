@@ -22,7 +22,7 @@ class SecurityResourceGroupManagerController extends modManagerController {
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission(array('resourcegroup_resource_list' => true,'resourcegroup_resource_edit' => true));
+        return $this->modx->hasPermission(['resourcegroup_resource_list' => true,'resourcegroup_resource_edit' => true]);
     }
 
     /**
@@ -46,7 +46,7 @@ class SecurityResourceGroupManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = []) {}
 
     /**
      * Return the pagetitle
@@ -70,7 +70,7 @@ class SecurityResourceGroupManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','access');
+        return ['user','access'];
     }
 
     /**

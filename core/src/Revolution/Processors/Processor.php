@@ -32,7 +32,7 @@ abstract class Processor {
      * The array of properties being passed to this processor
      * @var array $properties
      */
-    public $properties = array();
+    public $properties = [];
 
     /**
      * Creates a modProcessor object.
@@ -40,7 +40,7 @@ abstract class Processor {
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    public function __construct(modX $modx,array $properties = array()) {
+    public function __construct(modX $modx,array $properties = []) {
         $this->modx =& $modx;
         $this->setProperties($properties);
     }
@@ -94,7 +94,7 @@ abstract class Processor {
      * @return array
      */
     public function getLanguageTopics() {
-        return array();
+        return [];
     }
 
     /**
@@ -145,7 +145,7 @@ abstract class Processor {
      * @param array $properties An array of properties being run with the processor
      * @return Processor The class specified by $className
      */
-    public static function getInstance(modX $modx,$className,$properties = array()) {
+    public static function getInstance(modX $modx,$className,$properties = []) {
         /** @var Processor $processor */
         $processor = new $className($modx,$properties);
         return $processor;
@@ -235,7 +235,7 @@ abstract class Processor {
      * @param array $properties
      * @return array The newly merged properties array
      */
-    public function setDefaultProperties(array $properties = array()) {
+    public function setDefaultProperties(array $properties = []) {
         $this->properties = array_merge($properties,$this->properties);
         return $this->properties;
     }
@@ -253,14 +253,16 @@ abstract class Processor {
      */
     public function outputArray(array $array,$count = false) {
         if ($count === false) { $count = count($array); }
-        $output = json_encode(array(
+        $output = json_encode(
+            [
             'success' => true,
             'total' => $count,
             'results' => $array
-        ));
+            ]
+        );
         if ($output === false) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, 'Processor failed creating output array due to JSON error '.json_last_error());
-            return json_encode(array('success' => false));
+            return json_encode(['success' => false]);
         }
         return $output;
     }
@@ -277,7 +279,7 @@ abstract class Processor {
      */
     public function toJSON($data) {
         if (is_array($data)) {
-            array_walk_recursive($data, array(&$this, '_encodeLiterals'));
+            array_walk_recursive($data, [&$this, '_encodeLiterals']);
         }
         return $this->_decodeLiterals($this->modx->toJSON($data));
     }

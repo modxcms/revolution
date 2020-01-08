@@ -30,7 +30,7 @@ class modUserGroupSetting extends xPDOObject
      * @param array $options An array of options for the update
      * @return bool
      */
-    public function updateTranslation($key,$value = '',array $options = array()) {
+    public function updateTranslation($key,$value = '',array $options = []) {
         if (!is_array($options) || empty($options)) return false;
 
         $options['namespace'] = $this->xpdo->getOption('namespace',$options,'core');
@@ -40,12 +40,13 @@ class modUserGroupSetting extends xPDOObject
 
         $entries = $this->xpdo->lexicon->getFileTopic($options['cultureKey'],$options['namespace'],$options['topic']);
         /** @var modLexiconEntry $entry */
-        $entry = $this->xpdo->getObject(modLexiconEntry::class, array(
+        $entry = $this->xpdo->getObject(modLexiconEntry::class, [
             'name' => $key,
             'namespace' => $options['namespace'],
             'language' => $options['cultureKey'],
             'topic' => $options['topic'],
-        ));
+        ]
+        );
         if ((!empty($entries[$key]) && $entries[$key] == $value) || strcmp($key,$value) == 0 || empty($value)) {
             if ($entry) {
                 $saved = $entry->remove();

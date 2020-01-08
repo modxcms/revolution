@@ -20,7 +20,7 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderUrl extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         if (empty($value)) return $value;
 
         $value= $this->tv->parseInput($value, "||", "array");
@@ -50,13 +50,13 @@ class modTemplateVarOutputRenderUrl extends modTemplateVarOutputRender {
                 if($o) $o.='<br />';
                 $attributes = '';
                 /* setup the link attributes */
-                $attr = array(
+                $attr = [
                     'href' => $url,
                     'title' => !empty($params['title']) ? htmlspecialchars($params['title']) : $name,
                     'class' => !empty($params['class']) ? $params['class'] : null,
                     'style' => !empty($params['style']) ? $params['style'] : null,
                     'target' => !empty($params['target']) ? $params['target'] : null,
-                );
+                ];
                 foreach ($attr as $k => $v) $attributes .= ($v ? ' '.$k.'="'.$v.'"' : '');
                 if (!empty($params['attrib'])) {
                     $attributes .= ' '.$params['attrib']; /* add extra */

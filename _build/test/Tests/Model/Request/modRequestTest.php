@@ -41,13 +41,13 @@ class modRequestTest extends MODxTestCase {
 
         /** @var modAction $action */
         $action = $this->modx->newObject(modAction::class);
-        $action->fromArray(array(
+        $action->fromArray([
             'namespace' => 'unit-test',
             'parent' => 0,
             'controller' => 'index',
             'haslayout' => 1,
             'lang_topics' => '',
-        ));
+        ]);
         $action->save();
 
 
@@ -65,12 +65,12 @@ class modRequestTest extends MODxTestCase {
         parent::tearDown();
 
         /** @var modNamespace $namespace */
-        $namespace = $this->modx->getObject(modNamespace::class,array('name' => 'unit-test'));
+        $namespace = $this->modx->getObject(modNamespace::class, ['name' => 'unit-test']);
         if ($namespace) { $namespace->remove(); }
 
-        $actions = $this->modx->getCollection(modAction::class,array(
+        $actions = $this->modx->getCollection(modAction::class, [
             'namespace' => 'unit-test',
-        ));
+        ]);
         /** @var modAction $action */
         foreach ($actions as $action) {
             $action->remove();
@@ -116,13 +116,13 @@ class modRequestTest extends MODxTestCase {
      * @return array
      */
     public function providerGetResourceMethod() {
-        return array(
-            array('id','id',123),
-            array('id','idx',123,null,'idx'),
-            array('alias','p',2112,'p'),
-            array('alias','q','test.html'),
-            array('alias','page','test.html','page'),
-        );
+        return [
+            ['id','id',123],
+            ['id','idx',123,null,'idx'],
+            ['alias','p',2112,'p'],
+            ['alias','q','test.html'],
+            ['alias','page','test.html','page'],
+        ];
     }
 
     /**
@@ -150,16 +150,16 @@ class modRequestTest extends MODxTestCase {
      * @return array
      */
     public function providerGetResourceIdentifier() {
-        return array(
-            array('test.html','q','test.html','alias'),
-            array('test.html','qz','test.html','alias','qz'),
-            array('','no','test.html','alias'),
-            array(123,'id',123,'id'),
-            array(123,'idx',123,'id',null,'idx'),
-            array('1',null,null,''),
-            array('1','qq','test.html',''),
-            array('1','idx',123,''),
-        );
+        return [
+            ['test.html','q','test.html','alias'],
+            ['test.html','qz','test.html','alias','qz'],
+            ['','no','test.html','alias'],
+            [123,'id',123,'id'],
+            [123,'idx',123,'id',null,'idx'],
+            ['1',null,null,''],
+            ['1','qq','test.html',''],
+            ['1','idx',123,''],
+        ];
     }
 
     /**
@@ -175,7 +175,7 @@ class modRequestTest extends MODxTestCase {
      * @return void
      */
     public function testRetrieveRequest() {
-        if (empty($_SESSION)) $_SESSION = array();
+        if (empty($_SESSION)) $_SESSION = [];
         $_SESSION['modx.request.unit-test'] = $_REQUEST;
         $request = $this->request->retrieveRequest('unit-test');
         $this->assertNotEmpty($request,'modRequest.retrieveRequest did not correctly retrieve the REQUEST data.');
@@ -189,7 +189,7 @@ class modRequestTest extends MODxTestCase {
      * @depends testRetrieveRequest
      */
     public function testPreserveRequest() {
-        if (empty($_SESSION)) $_SESSION = array();
+        if (empty($_SESSION)) $_SESSION = [];
         $this->request->preserveRequest('unit-test');
         $request = $this->request->retrieveRequest('unit-test');
         $this->assertNotEmpty($request,'modRequest.preserveRequest did not correctly preserve the REQUEST data.');
@@ -207,7 +207,7 @@ class modRequestTest extends MODxTestCase {
 //        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not get all of the Actions that exist.');
 
         $actions = $this->request->getAllActionIDs('unit-test');
-        $total = $this->modx->getCount(modAction::class,array('namespace' => 'unit-test'));
+        $total = $this->modx->getCount(modAction::class, ['namespace' => 'unit-test']);
         $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not filter down by namespace when grabbing actions.');
     }
 
@@ -217,17 +217,17 @@ class modRequestTest extends MODxTestCase {
     public function testGetParameters() {
         $parameters = $this->request->getParameters();
         $this->assertEquals(2,$parameters['testGet']);
-        $parameters = $this->request->getParameters(array(),'POST');
+        $parameters = $this->request->getParameters([],'POST');
         $this->assertEquals(1,$parameters['testPost']);
-        $parameters = $this->request->getParameters(array(),'COOKIE');
+        $parameters = $this->request->getParameters([],'COOKIE');
         $this->assertEquals(3,$parameters['testCookie']);
-        $parameters = $this->request->getParameters(array(),'REQUEST');
+        $parameters = $this->request->getParameters([],'REQUEST');
         $this->assertEquals(4,$parameters['testRequest']);
 
-        $parameters = $this->request->getParameters(array('testRequest'),'REQUEST');
+        $parameters = $this->request->getParameters(['testRequest'],'REQUEST');
         $this->assertEquals(4,$parameters['testRequest']);
 
-        $parameters = $this->request->getParameters(array('testShouldNotExist'),'REQUEST');
+        $parameters = $this->request->getParameters(['testShouldNotExist'],'REQUEST');
         $this->assertEmpty($parameters);
     }
 
@@ -250,19 +250,19 @@ class modRequestTest extends MODxTestCase {
      * @return array
      */
     public function providerGetClientIp() {
-        return array(
-            array('123.45.67.100','REMOTE_ADDR'),
-            array('123.45.67.100','HTTP_X_FORWARDED_FOR'),
-            array('123.45.67.100','HTTP_X_FORWARDED'),
-            array('123.45.67.100','HTTP_X_CLUSTER_CLIENT_IP'),
-            array('123.45.67.100','HTTP_X_COMING_FROM'),
-            array('123.45.67.100','HTTP_FORWARDED_FOR'),
-            array('123.45.67.100','HTTP_FORWARDED'),
-            array('123.45.67.100','HTTP_COMING_FROM'),
-            array('123.45.67.100','HTTP_CLIENT_IP'),
-            array('123.45.67.100','HTTP_FROM'),
-            array('123.45.67.100','HTTP_VIA'),
-        );
+        return [
+            ['123.45.67.100','REMOTE_ADDR'],
+            ['123.45.67.100','HTTP_X_FORWARDED_FOR'],
+            ['123.45.67.100','HTTP_X_FORWARDED'],
+            ['123.45.67.100','HTTP_X_CLUSTER_CLIENT_IP'],
+            ['123.45.67.100','HTTP_X_COMING_FROM'],
+            ['123.45.67.100','HTTP_FORWARDED_FOR'],
+            ['123.45.67.100','HTTP_FORWARDED'],
+            ['123.45.67.100','HTTP_COMING_FROM'],
+            ['123.45.67.100','HTTP_CLIENT_IP'],
+            ['123.45.67.100','HTTP_FROM'],
+            ['123.45.67.100','HTTP_VIA'],
+        ];
     }
 
     /**
@@ -286,12 +286,12 @@ class modRequestTest extends MODxTestCase {
      * @return array
      */
     public function providerCleanResourceIdentifier() {
-        return array(
-            array('test.html','alias',true),
-            array('the-cake-is-a-lie.png','alias',true),
-            array('fail.html','id',false),
-            array('','id'),
-        );
+        return [
+            ['test.html','alias',true],
+            ['the-cake-is-a-lie.png','alias',true],
+            ['fail.html','id',false],
+            ['','id'],
+        ];
     }
 
     /**
@@ -315,15 +315,17 @@ class modRequestTest extends MODxTestCase {
      * @return array
      */
     public function providerSanitizeRequest() {
-        return array(
-            array('A test string','A test string'),
-            array('MODX [[fakeSnippet]] Tags','MODX  Tags'),
-            array("MODX [[\$chunk? &property=`test`\n &across=`lines
+        return [
+            ['A test string','A test string'],
+            ['MODX [[fakeSnippet]] Tags','MODX  Tags'],
+            [
+                "MODX [[\$chunk? &property=`test`\n &across=`lines
 
-` &test=1]] Tags",'MODX  Tags'),
-            array('Javascript! <script>alert(\'test\');</script> Yay.','Javascript!  Yay.'),
-            array("Javascript line break! <script>alert('test');\n</script>Yay.","Javascript line break! Yay."),
-            array('Testing entities &#123;kthx','Testing entities kthx'),
-        );
+` &test=1]] Tags",'MODX  Tags'
+            ],
+            ['Javascript! <script>alert(\'test\');</script> Yay.','Javascript!  Yay.'],
+            ["Javascript line break! <script>alert('test');\n</script>Yay.","Javascript line break! Yay."],
+            ['Testing entities &#123;kthx','Testing entities kthx'],
+        ];
     }
 }

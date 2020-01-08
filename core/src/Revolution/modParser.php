@@ -179,7 +179,7 @@ class modParser
      * returned by prior passes, 0 by default.
      * @return int The number of processed tags
      */
-    public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= array (), $depth= 0) {
+    public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= [], $depth= 0) {
         if ($processUncacheable) {
             $this->_startedProcessingUncacheable = true;
         }
@@ -191,14 +191,14 @@ class modParser
         $this->_removingUnprocessed = (boolean) $removeUnprocessed;
         $depth = $depth > 0 ? $depth - 1 : 0;
         $processed= 0;
-        $tags= array ();
+        $tags= [];
         /* invoke OnParseDocument event */
         $this->modx->documentOutput = $content;
-        $this->modx->invokeEvent('OnParseDocument', array('content' => &$content));
+        $this->modx->invokeEvent('OnParseDocument', ['content' => &$content]);
         $content = $this->modx->documentOutput;
         unset($this->modx->documentOutput);
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
-            $tagMap= array ();
+            $tagMap= [];
             foreach ($tags as $tag) {
                 $token= substr($tag[1], 0, 1);
                 if (!$processUncacheable && $token === '!') {
@@ -260,7 +260,7 @@ class modParser
      * the property string or array definition.
      */
     public function parseProperties($propSource) {
-        $properties= array ();
+        $properties= [];
         if (!empty ($propSource)) {
             if (is_string($propSource)) {
                 $properties = $this->parsePropertyString($propSource, true);
@@ -286,7 +286,7 @@ class modParser
      * @return array The processed properties in array format
      */
     public function parsePropertyString($string, $valuesOnly = false) {
-        $properties = array();
+        $properties = [];
         $tagProps= xPDO :: escSplit("&", $string);
         foreach ($tagProps as $prop) {
             $property= xPDO :: escSplit('=', $prop);
@@ -298,7 +298,7 @@ class modParser
                 $propValue= $property[1];
                 $propType= 'textfield';
                 $propDesc= '';
-                $propOptions= array();
+                $propOptions= [];
                 $pvTmp= xPDO :: escSplit(';', $propValue);
                 if ($pvTmp && isset ($pvTmp[1])) {
                     $propDesc= $pvTmp[0];
@@ -307,7 +307,7 @@ class modParser
                             $propType = modParser::_XType($pvTmp[1]);
                             $options = explode(',', $pvTmp[2]);
                             if ($options) {
-                                foreach ($options as $option) $propOptions[] = array('name' => ucfirst($option), 'value' => $option);
+                                foreach ($options as $option) $propOptions[] = ['name' => ucfirst($option), 'value' => $option];
                             }
                         }
                         $propValue = $pvTmp[3];
@@ -328,13 +328,13 @@ class modParser
                 if ($valuesOnly) {
                     $properties[$propName]= $propValue;
                 } else {
-                    $properties[$propName]= array(
+                    $properties[$propName]= [
                         'name' => $propName,
                         'desc' => $propDesc,
                         'type' => $propType,
                         'options' => $propOptions,
                         'value' => $propValue
-                    );
+                    ];
                 }
             }
         }
@@ -366,7 +366,8 @@ class modParser
             case 'list':
                 break;
             default:
-                if (!in_array($xtype, array('checkbox', 'combo', 'datefield', 'numberfield', 'radio', 'textarea', 'textfield', 'timefield'))) {
+                if (!in_array($xtype, ['checkbox', 'combo', 'datefield', 'numberfield', 'radio', 'textarea', 'textfield', 'timefield']
+                )) {
                     $xtype = 'textfield';
                 }
                 break;
@@ -550,24 +551,25 @@ class modParser
             }
         } else {
             /** @var modElement $element */
-            $element = $this->modx->getObjectGraph($class,array('Source' => array()),array('name' => $realname), true);
+            $element = $this->modx->getObjectGraph($class, ['Source' => []], ['name' => $realname], true);
             if ($element && array_key_exists($class, $this->modx->sourceCache)) {
-                $this->modx->sourceCache[$class][$realname] = array(
+                $this->modx->sourceCache[$class][$realname] = [
                     'fields' => $element->toArray(),
                     'policies' => $element->getPolicies(),
-                    'source' => $element->Source ? $element->Source->toArray() : array(),
-                );
+                    'source' => $element->Source ? $element->Source->toArray() : [],
+                ];
             }
             elseif(!$element) {
-                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', array('class' => $class, 'name' => $realname));
+                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', ['class' => $class, 'name' => $realname]);
                 $element = false;
                 if ($evtOutput != false) {
                     foreach ((array) $evtOutput as $elm) {
                         if (!empty($elm) && is_string($elm)) {
-                            $element = $this->modx->newObject($class, array(
+                            $element = $this->modx->newObject($class, [
                                 'name' => $realname,
                                 'snippet' => $elm
-                            ));
+                            ]
+                            );
                         }
                         elseif ($elm instanceof modElement ) {
                             $element = $elm;

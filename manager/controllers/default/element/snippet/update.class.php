@@ -67,35 +67,35 @@ class ElementSnippetUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         /* load snippet */
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('snippet_err_ns'));
         }
-        $this->snippet = $this->modx->getObject(modSnippet::class, array('id' => $scriptProperties['id']));
+        $this->snippet = $this->modx->getObject(modSnippet::class, ['id' => $scriptProperties['id']]);
         if ($this->snippet == null) return $this->failure($this->modx->lexicon('snippet_err_nf'));
         if (!$this->snippet->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
         /* get properties */
         $properties = $this->snippet->get('properties');
-        if (!is_array($properties)) $properties = array();
+        if (!is_array($properties)) $properties = [];
 
-        $data = array();
+        $data = [];
         foreach ($properties as $property) {
-            $data[] = array(
+            $data[] = [
                 $property['name'],
                 $property['desc'],
                 !empty($property['type']) ? $property['type'] : 'textfield',
-                !empty($property['options']) ? $property['options'] : array(),
+                !empty($property['options']) ? $property['options'] : [],
                 $property['value'],
                 !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
                 $property['desc_trans'],
                 !empty($property['area']) ? $property['area'] : '',
                 !empty($property['area_trans']) ? $property['area_trans'] : '',
-            );
+            ];
         }
         $this->snippetArray = $this->snippet->toArray();
         $this->snippetArray['properties'] = $data;
@@ -136,11 +136,11 @@ class ElementSnippetUpdateManagerController extends modManagerController {
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender',array(
+        $this->onSnipFormPrerender = $this->modx->invokeEvent('OnSnipFormPrerender', [
             'id' => $this->snippetArray['id'],
             'snippet' => &$this->snippet,
             'mode' => modSystemEvent::MODE_UPD,
-        ));
+        ]);
         if (is_array($this->onSnipFormPrerender)) $this->onSnipFormPrerender = implode('',$this->onSnipFormPrerender);
         $this->setPlaceholder('onSnipFormPrerender', $this->onSnipFormPrerender);
     }
@@ -150,13 +150,13 @@ class ElementSnippetUpdateManagerController extends modManagerController {
      * @return string
      */
     public function fireRenderEvent() {
-        $this->onSnipFormRender = $this->modx->invokeEvent('OnSnipFormRender',array(
+        $this->onSnipFormRender = $this->modx->invokeEvent('OnSnipFormRender', [
             'id' => $this->snippetArray['id'],
             'snippet' => &$this->snippet,
             'mode' => modSystemEvent::MODE_UPD,
-        ));
+        ]);
         if (is_array($this->onSnipFormRender)) $this->onSnipFormRender = implode('',$this->onSnipFormRender);
-        $this->onSnipFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onSnipFormRender);
+        $this->onSnipFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onSnipFormRender);
         return $this->onSnipFormRender;
     }
 
@@ -182,7 +182,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('snippet','category','system_events','propertyset','element');
+        return ['snippet','category','system_events','propertyset','element'];
     }
 
     /**

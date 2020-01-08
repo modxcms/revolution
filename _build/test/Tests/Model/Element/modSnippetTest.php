@@ -34,14 +34,14 @@ class modSnippetTest extends MODxTestCase {
     public function setUp() {
         parent::setUp();
         $this->snippet = $this->modx->newObject(modSnippet::class);
-        $this->snippet->fromArray(array(
+        $this->snippet->fromArray([
             'name' => 'Unit Test Snippet',
             'description' => 'A snippet for unit testing.',
             'snippet' => str_replace('<?php','',file_get_contents(MODX_BASE_PATH.'_build/test/data/snippets/modSnippetTest/modSnippetTest.snippet.php')),
             'category' => 0,
             'locked' => false,
-        ),'',true,true);
-        $this->snippet->setProperties(array('name' => 'John'));
+        ],'',true,true);
+        $this->snippet->setProperties(['name' => 'John']);
         $this->snippet->setCacheable(false);
         $this->snippet->save();
         $this->modx->event= new modSystemEvent();
@@ -72,9 +72,9 @@ class modSnippetTest extends MODxTestCase {
      * @return array
      */
     public function providerSetContent() {
-        return array(
-            array('return "Goodbye.";'),
-        );
+        return [
+            ['return "Goodbye.";'],
+        ];
     }
 
 
@@ -92,9 +92,9 @@ class modSnippetTest extends MODxTestCase {
      * @return array
      */
     public function providerProcess() {
-        return array(
-            array('Hello, John'),
-            array('Hello, Mark',array('name' => 'Mark')),
-        );
+        return [
+            ['Hello, John'],
+            ['Hello, Mark', ['name' => 'Mark']],
+        ];
     }
 }

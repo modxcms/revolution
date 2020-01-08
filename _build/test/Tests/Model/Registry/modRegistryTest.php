@@ -57,14 +57,14 @@ class modRegistryTest extends MODxTestCase {
         }
     }
     public function providerGetRegister() {
-        return array(
-            array(true, 'testFileRegister', modFileRegister::class, array('directory' => 'testFileRegister')),
-            array(true, 'testFileRegister2', modFileRegister::class, array('directory' => 'testFileRegister2')),
-            array(true, 'testDbRegister', modDbRegister::class, array('directory' => 'testDbRegister')),
-            array(true, 'testDbRegister2', modDbRegister::class, array('directory' => 'testDbRegister2')),
-            array(false, 'testDbRegister3', '\MODX\Revolution\Registry\modDbRegister3', array('directory' => 'testDbRegister3')),
-            array(false, 'modx', modFileRegister::class, array('directory' => 'modx')),
-        );
+        return [
+            [true, 'testFileRegister', modFileRegister::class, ['directory' => 'testFileRegister']],
+            [true, 'testFileRegister2', modFileRegister::class, ['directory' => 'testFileRegister2']],
+            [true, 'testDbRegister', modDbRegister::class, ['directory' => 'testDbRegister']],
+            [true, 'testDbRegister2', modDbRegister::class, ['directory' => 'testDbRegister2']],
+            [false, 'testDbRegister3', '\MODX\Revolution\Registry\modDbRegister3', ['directory' => 'testDbRegister3']],
+            [false, 'modx', modFileRegister::class, ['directory' => 'modx']],
+        ];
     }
 
     /**
@@ -89,14 +89,14 @@ class modRegistryTest extends MODxTestCase {
         }
     }
     public function providerAddRegister() {
-        return array(
-            array(true, 'testFileRegister', modFileRegister::class, array('directory' => 'testFileRegister')),
-            array(true, 'testFileRegister2', modFileRegister::class, array('directory' => 'testFileRegister2')),
-            array(true, 'testDbRegister', modDbRegister::class, array('directory' => 'testDbRegister')),
-            array(true, 'testDbRegister2', modDbRegister::class, array('directory' => 'testDbRegister2')),
-            array(false, 'testDbRegister3', '\MODX\Revolution\Registry\modDbRegister3', array('directory' => 'testDbRegister3')),
-            array(false, 'modx', modFileRegister::class, array('directory' => 'modx')),
-        );
+        return [
+            [true, 'testFileRegister', modFileRegister::class, ['directory' => 'testFileRegister']],
+            [true, 'testFileRegister2', modFileRegister::class, ['directory' => 'testFileRegister2']],
+            [true, 'testDbRegister', modDbRegister::class, ['directory' => 'testDbRegister']],
+            [true, 'testDbRegister2', modDbRegister::class, ['directory' => 'testDbRegister2']],
+            [false, 'testDbRegister3', '\MODX\Revolution\Registry\modDbRegister3', ['directory' => 'testDbRegister3']],
+            [false, 'modx', modFileRegister::class, ['directory' => 'modx']],
+        ];
     }
 
     /**
@@ -110,14 +110,14 @@ class modRegistryTest extends MODxTestCase {
         $this->assertNotInstanceOf(modRegister::class, $this->modx->registry->$name, "Could not remove register with key {$name}");
     }
     public function providerRemoveRegister() {
-        return array(
-            array('testFileRegister'),
-            array('testFileRegister2'),
-            array('testDbRegister'),
-            array('testDbRegister2'),
-            array('testDbRegister3'),
-            array('modx'),
-        );
+        return [
+            ['testFileRegister'],
+            ['testFileRegister2'],
+            ['testDbRegister'],
+            ['testDbRegister2'],
+            ['testDbRegister3'],
+            ['modx'],
+        ];
     }
 
     public function testSetLogging() {

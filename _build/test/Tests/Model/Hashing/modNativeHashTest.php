@@ -47,11 +47,11 @@ class modNativeHashTest extends MODxTestCase {
     }
 
     public function providerHash() {
-        return array(
-            array('password123'),
-            array('123456'),
-            array('what do you think of this?'),
-            array('letmein'),
-        );
+        return [
+            ['password123'],
+            ['123456'],
+            ['what do you think of this?'],
+            ['letmein'],
+        ];
     }
 }

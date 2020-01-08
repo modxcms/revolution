@@ -47,9 +47,9 @@ HTML
     /**
      * @inherit
      */
-    public function process(array $scriptProperties = array())
+    public function process(array $scriptProperties = [])
     {
-        return array();
+        return [];
     }
 
     /**
@@ -73,6 +73,6 @@ HTML
      */
     public function getLanguageTopics()
     {
-        return array('file');
+        return ['file'];
     }
 }

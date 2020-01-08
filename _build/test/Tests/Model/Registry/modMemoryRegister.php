@@ -11,7 +11,7 @@ class modMemoryRegister extends modRegister {
      * @param array $options An array of general or protocol specific options.
      * @return mixed The resulting message from the register.
      */
-    public function read(array $options = array()) {
+    public function read(array $options = []) {
         // TODO: Implement read() method.
         return null;
     }
@@ -28,7 +28,7 @@ class modMemoryRegister extends modRegister {
      * specific message properties.
      * @return boolean Indicates if the message was recorded.
      */
-    public function send($topic, $message, array $options = array()) {
+    public function send($topic, $message, array $options = []) {
         // TODO: Implement send() method.
         return true;
     }
@@ -40,7 +40,7 @@ class modMemoryRegister extends modRegister {
      * connection to the register.
      * @return boolean Indicates if the connection was successful.
      */
-    public function connect(array $attributes = array()) {
+    public function connect(array $attributes = []) {
         return true;
     }
 

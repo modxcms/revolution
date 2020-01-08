@@ -43,17 +43,17 @@ class modHashingTest extends MODxTestCase {
         $this->assertEquals($expected, $actual, "Did not get the expected option value.");
     }
     public function providerGetOption() {
-        return array(
-            array('option1', array(), array(), array('hashing_option1' => 'modx'), 'modx'),
-            array('option2', array(), array('option2' => 'hashing'), array(), 'hashing'),
-            array('option3', array('option3' => 'local'), array(), array(), 'local'),
-            array('option4', array('option4' => 'local'), array('option4' => 'hashing'), array('hashing_option4' => 'modx'), 'local'),
-            array('option5', array('option99' => 'local'), array('option5' => 'hashing'), array('hashing_option5' => 'modx'), 'hashing'),
-            array('option6', null, null, array('hashing_option6' => 'modx'), 'modx'),
-            array('option7', array(), null, array('hashing_option7' => 'modx'), 'modx'),
-            array('option8', null, null, array(), null),
-            array('option8', array(), null, array(), null),
-            array('option8', null, array(), array(), null),
-        );
+        return [
+            ['option1', [], [], ['hashing_option1' => 'modx'], 'modx'],
+            ['option2', [], ['option2' => 'hashing'], [], 'hashing'],
+            ['option3', ['option3' => 'local'], [], [], 'local'],
+            ['option4', ['option4' => 'local'], ['option4' => 'hashing'], ['hashing_option4' => 'modx'], 'local'],
+            ['option5', ['option99' => 'local'], ['option5' => 'hashing'], ['hashing_option5' => 'modx'], 'hashing'],
+            ['option6', null, null, ['hashing_option6' => 'modx'], 'modx'],
+            ['option7', [], null, ['hashing_option7' => 'modx'], 'modx'],
+            ['option8', null, null, [], null],
+            ['option8', [], null, [], null],
+            ['option8', null, [], [], null],
+        ];
     }
 }

@@ -15,7 +15,7 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderRichText extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $id = 'tv'.$this->tv->get('name');
         $value= $this->tv->parseInput($value);
         $w= !empty($params['w']) ? $params['w'] : '100%';
@@ -24,19 +24,19 @@ class modTemplateVarOutputRenderRichText extends modTemplateVarOutputRender {
         $o= '<div class="MODX_RichTextWidget"><textarea id="' . $id . '" name="' . $id . '" style="width:' . $w . '; height:' . $h . ';">';
         $o .= htmlspecialchars($value);
         $o .= '</textarea></div>';
-        $replace_richtext= array (
+        $replace_richtext= [
             $id
-        );
+        ];
         // setup editors
         if (!empty ($replace_richtext) && !empty ($richtexteditor)) {
             // invoke OnRichTextEditorInit event
-            $evtOut= $this->modx->invokeEvent('OnRichTextEditorInit', array (
+            $evtOut= $this->modx->invokeEvent('OnRichTextEditorInit', [
                 'editor' => $richtexteditor,
                 'elements' => $replace_richtext,
                 'forfrontend' => 1,
                 'width' => $w,
                 'height' => $h
-            ));
+            ]);
             if (is_array($evtOut))
                 $o .= implode('', $evtOut);
         }

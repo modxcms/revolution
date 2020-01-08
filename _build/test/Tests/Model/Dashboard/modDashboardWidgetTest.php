@@ -42,7 +42,7 @@ class modDashboardWidgetTest extends MODxTestCase {
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
 
         $this->widget = $this->modx->newObject(modDashboardWidget::class);
-        $this->widget->fromArray(array(
+        $this->widget->fromArray([
             'name' => 'w_recentlyeditedresources',
             'description' => 'w_recentlyeditedresources_desc',
             'type' => 'file',
@@ -50,7 +50,7 @@ class modDashboardWidgetTest extends MODxTestCase {
             'content' => '[[++manager_path]]controllers/default/dashboard/widget.grid-rer.php',
             'namespace' => 'core',
             'lexicon' => 'core:dashboards',
-        ));
+        ]);
     }
 
     /**
@@ -58,13 +58,13 @@ class modDashboardWidgetTest extends MODxTestCase {
      */
     public function testGetContent() {
         /** @var modManagerController $controller Fake running the welcome controller */
-        $controller = new \WelcomeManagerController($this->modx,array(
+        $controller = new \WelcomeManagerController($this->modx, [
             'namespace' => 'core',
             'namespace_name' => 'core',
             'namespace_path' => MODX_MANAGER_PATH,
             'lang_topics' => 'dashboards',
             'controller' => 'system/dashboards',
-        ));
+        ]);
         /** @var modDashboard $dashboard */
         $output = $this->widget->getContent($controller);
         $this->assertNotEmpty($output);

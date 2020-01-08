@@ -26,9 +26,9 @@ use xPDO\xPDOException;
  */
 class MODxTestHarness {
     /** @var array $fixtures */
-    protected static $fixtures = array();
+    protected static $fixtures = [];
     /** @var array $properties */
-    protected static $properties = array();
+    protected static $properties = [];
     /** @var boolean $debug */
     protected static $debug = false;
 
@@ -45,11 +45,11 @@ class MODxTestHarness {
      * @return object|null An instance of the specified fixture class or null on failure.
      * @throws xPDOException
      */
-    public static function &getFixture($class, $name, $new = false, array $options = array()) {
+    public static function &getFixture($class, $name, $new = false, array $options = []) {
         if (!$new && array_key_exists($name, self::$fixtures) && self::$fixtures[$name] instanceof $class) {
             $fixture =& self::$fixtures[$name];
         } else {
-            $properties = array();
+            $properties = [];
             include_once dirname(dirname(__DIR__)) . '/core/model/modx/modx.class.php';
             include dirname(__FILE__) . '/properties.inc.php';
             self::$properties = $properties;

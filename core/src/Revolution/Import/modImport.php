@@ -27,11 +27,11 @@ class modImport {
     /**
      * @var array A collection of results in an array
      */
-    public $results = array();
+    public $results = [];
     /**
      * @var array A collection of properties that are being used in this import
      */
-    public $properties = array ();
+    public $properties = [];
 
     /**
      * @param modX $modx A reference to the modX instance
@@ -47,7 +47,7 @@ class modImport {
      * @param int $count The current count iteration
      * @return array
      */
-    public function getFiles(& $filesfound, $directory, $listing= array (), $count= 0) {
+    public function getFiles(& $filesfound, $directory, $listing= [], $count= 0) {
         if ($directory[-1] !== '/') {
             $directory.= '/';
         }
@@ -60,7 +60,7 @@ class modImport {
                     if ($h= @ opendir($directory . $file . '/')) {
                         @ closedir($h);
                         $count= -1;
-                        $listing["$file"]= $this->getFiles($filesfound, $directory . $file, array (), $count +1);
+                        $listing["$file"]= $this->getFiles($filesfound, $directory . $file, [], $count +1);
                     } else {
                         $listing[$dummy]= $file;
                         $dummy= $dummy +1;
@@ -99,9 +99,9 @@ class modImport {
      * @return string The content-type of the file
      */
     public function getFileContentType($extension) {
-        if (!$contentType= $this->modx->getObject(modContentType::class, array('file_extensions:LIKE' => '%'.$extension.'%'))) {
+        if (!$contentType= $this->modx->getObject(modContentType::class, ['file_extensions:LIKE' => '%'.$extension.'%'])) {
             $this->log("Could not find content type for extension '$extension'; using <samp>text/plain</samp>.");
-            $contentType= $this->modx->getObject(modContentType::class, array('mime_type' => 'text/plain'));
+            $contentType= $this->modx->getObject(modContentType::class, ['mime_type' => 'text/plain']);
         }
         return $contentType;
     }

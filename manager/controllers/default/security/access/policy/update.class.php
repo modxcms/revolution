@@ -17,7 +17,7 @@ use MODX\Revolution\modManagerController;
  * @subpackage manager.controllers
  */
 class SecurityAccessPolicyUpdateManagerController extends modManagerController {
-    public $policyArray = array();
+    public $policyArray = [];
 
     /**
      * Check for any permissions or requirements to load page
@@ -54,18 +54,18 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('access_policy_err_ns'));
         }
-        $policy = $this->modx->getObject(modAccessPolicy::class, array('id' => $scriptProperties['id']));
+        $policy = $this->modx->getObject(modAccessPolicy::class, ['id' => $scriptProperties['id']]);
         if (empty($policy)) return $this->failure($this->modx->lexicon('access_policy_err_nf'));
         $placeholders['policy'] = $policy;
 
         /* setup policy array */
-        $this->policyArray = $policy->get(array(
+        $this->policyArray = $policy->get([
             'id',
             'name',
             'description',
@@ -73,7 +73,7 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
             'class',
             'template',
             'parent',
-        ));
+        ]);
         $this->policyArray['permissions'] = $policy->getPermissions();
         $placeholders['policy'] = $this->policyArray;
 
@@ -102,7 +102,7 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','access','policy','context');
+        return ['user','access','policy','context'];
     }
 
     /**

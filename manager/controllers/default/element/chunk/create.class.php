@@ -61,8 +61,8 @@ class ElementChunkCreateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         $placeholders['category'] = $this->getCategory($scriptProperties);
 
@@ -114,13 +114,13 @@ class ElementChunkCreateManagerController extends modManagerController {
      * @return mixed
      */
     public function fireRenderEvent() {
-        $this->onChunkFormRender = $this->modx->invokeEvent('OnChunkFormRender',array(
+        $this->onChunkFormRender = $this->modx->invokeEvent('OnChunkFormRender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
             'chunk' => null,
-        ));
+        ]);
         if (is_array($this->onChunkFormRender)) $this->onChunkFormRender = implode('', $this->onChunkFormRender);
-        $this->onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onChunkFormRender);
+        $this->onChunkFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onChunkFormRender);
         return $this->onChunkFormRender;
     }
 
@@ -131,11 +131,11 @@ class ElementChunkCreateManagerController extends modManagerController {
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender',array(
+        $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
             'chunk' => null,
-        ));
+        ]);
         if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }
         $this->setPlaceholder('onChunkFormPrerender', $this->onChunkFormPrerender);
     }
@@ -162,7 +162,7 @@ class ElementChunkCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('chunk','category','propertyset','element');
+        return ['chunk','category','propertyset','element'];
     }
 
     /**

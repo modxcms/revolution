@@ -52,13 +52,13 @@ class modDashboardTest extends MODxTestCase {
      */
     public function testRender() {
         /** @var modManagerController $controller Fake running the welcome controller */
-        $controller = new \WelcomeManagerController($this->modx,array(
+        $controller = new \WelcomeManagerController($this->modx, [
             'namespace' => 'core',
             'namespace_name' => 'core',
             'namespace_path' => MODX_MANAGER_PATH,
             'lang_topics' => 'dashboards',
             'controller' => 'system/dashboards',
-        ));
+        ]);
         /** @var modDashboard $dashboard */
         $dashboard = modDashboard::getDefaultDashboard($this->modx);
         $output = $dashboard->render($controller);

@@ -94,7 +94,7 @@ class modInstallRequest {
      * @param array $config An array of config attributes.
      * @return array A copy of the config attributes array.
      */
-    public function getConfig($mode = 0, array $config = array ()) {
+    public function getConfig($mode = 0, array $config = []) {
         switch ($mode) {
             case modInstall::MODE_UPGRADE_EVO :
                 $this->loadConfigReader('config.modEvolutionConfigReader');
@@ -123,10 +123,10 @@ class modInstallRequest {
      * @param array $config
      * @return array
      */
-    public function setDefaultPaths(array $config = array()) {
+    public function setDefaultPaths(array $config = []) {
         $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
         $webUrl= rtrim($webUrl,'/').'/';
-        $defaults = array();
+        $defaults = [];
         $defaults['context_web_path'] = rtrim(MODX_INSTALL_PATH,'/').'/';
         $defaults['context_web_url'] = $webUrl;
         $defaults['context_mgr_path'] = rtrim(MODX_INSTALL_PATH,'/') . '/manager/';

@@ -96,36 +96,36 @@ class modInstallRunnerWeb extends modInstallRunner {
         $this->install->xpdo->exec($this->install->driver->truncate($tableName));
 
         /* clear cache */
-        $this->install->xpdo->cacheManager->deleteTree(MODX_CORE_PATH.'cache/',array(
+        $this->install->xpdo->cacheManager->deleteTree(MODX_CORE_PATH.'cache/', [
             'skipDirs' => false,
-            'extensions' => array(
+            'extensions' => [
                 '.cache.php',
                 '.tpl.php',
-            ),
-        ));
+            ],
+        ]);
 
         $this->install->lock();
 
-        $this->install->settings->store(array(
+        $this->install->settings->store([
             'finished' => true,
-        ));
+        ]);
     }
 
     public function postRun() {
         $compressJs = $this->install->settings->get('compress_js');
         if ($compressJs === 0) {
             /** @var modSystemSetting $setting */
-            $setting = $this->install->xpdo->getObject(modSystemSetting::class,array(
+            $setting = $this->install->xpdo->getObject(modSystemSetting::class, [
                 'key' => 'compress_js',
-            ));
+            ]);
             if (empty($setting)) {
                 $setting = $this->install->xpdo->newObject(modSystemSetting::class);
-                $setting->fromArray(array(
+                $setting->fromArray([
                     'key' => 'compress_js',
                     'xtype' => 'combo-boolean',
                     'namespace' => 'core',
                     'area' => 'manager',
-                ),'',true);
+                ],'',true);
             }
             $setting->set('value',0);
             $setting->save();
@@ -133,17 +133,17 @@ class modInstallRunnerWeb extends modInstallRunner {
         $compressCss = $this->install->settings->get('compress_css');
         if ($compressCss === 0) {
             /** @var modSystemSetting $setting */
-            $setting = $this->install->xpdo->getObject(modSystemSetting::class,array(
+            $setting = $this->install->xpdo->getObject(modSystemSetting::class, [
                 'key' => 'compress_css',
-            ));
+            ]);
             if (empty($setting)) {
                 $setting = $this->install->xpdo->newObject(modSystemSetting::class);
-                $setting->fromArray(array(
+                $setting->fromArray([
                     'key' => 'compress_css',
                     'xtype' => 'combo-boolean',
                     'namespace' => 'core',
                     'area' => 'manager',
-                ),'',true);
+                ],'',true);
             }
             $setting->set('value',0);
             $setting->save();
@@ -153,9 +153,9 @@ class modInstallRunnerWeb extends modInstallRunner {
         // The setting is installed disabled by default, so we don't have to force it off if unchecked
         $sendPoweredByHeader = $this->install->settings->get('send_poweredby_header');
         if (!empty($sendPoweredByHeader)) {
-            $setting = $this->install->xpdo->getObject(modSystemSetting::class,array(
+            $setting = $this->install->xpdo->getObject(modSystemSetting::class, [
                 'key' => 'send_poweredby_header',
-            ));
+            ]);
             if ($setting instanceof modSystemSetting) {
                 $setting->set('value', 1);
                 $setting->save();

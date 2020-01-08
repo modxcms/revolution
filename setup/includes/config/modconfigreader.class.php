@@ -21,14 +21,14 @@ abstract class modConfigReader {
     /** @var xPDO $xpdo */
     public $xpdo;
     /** @var array $config */
-    public $config = array();
+    public $config = [];
 
-    function __construct(modInstall $install,array $config = array()) {
+    function __construct(modInstall $install,array $config = []) {
         $this->install =& $install;
         $this->xpdo =& $install->xpdo;
-        $this->config = array_merge(array(
+        $this->config = array_merge([
 
-        ),$config);
+        ],$config);
     }
 
     /**
@@ -36,17 +36,17 @@ abstract class modConfigReader {
      * @abstract
      * @param array $config
      */
-    abstract public function read(array $config = array());
+    abstract public function read(array $config = []);
 
     /**
      * Load defaults for a configuration file if one does not exist; used in new installations
      * @param array $config
      * @return array
      */
-    public function loadDefaults(array $config = array()) {
+    public function loadDefaults(array $config = []) {
         $this->getHttpHost();
 
-        $this->config = array_merge($this->config,array(
+        $this->config = array_merge($this->config, [
             'database_type' => isset ($_POST['databasetype']) ? $_POST['databasetype'] : 'mysql',
             'database_server' => isset ($_POST['databasehost']) ? $_POST['databasehost'] : 'localhost',
             'database_connection_charset' => 'utf8',
@@ -58,9 +58,9 @@ abstract class modConfigReader {
             'site_sessionname' => 'SN' . uniqid(''),
             'inplace' => isset ($_POST['inplace']) ? 1 : 0,
             'unpacked' => isset ($_POST['unpacked']) ? 1 : 0,
-            'config_options' => array(),
-            'driver_options' => array(),
-        ),$config);
+            'config_options' => [],
+            'driver_options' => [],
+        ],$config);
         return $this->config;
     }
 

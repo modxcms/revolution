@@ -15,7 +15,7 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderString extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $value= $this->tv->parseInput($value);
         $format= !empty($params['format']) ? strtolower($params['format']) : '';
         switch ($format) {

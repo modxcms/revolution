@@ -51,7 +51,7 @@ class SecurityLoginManagerController extends modManagerController
      * @param array $scriptProperties
      * @return void
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         $this->handleForgotLoginHash();
         $this->handleMagicLoginLink();
         $this->preserveReturnUrl();
@@ -125,7 +125,7 @@ class SecurityLoginManagerController extends modManagerController
 
         $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
-        $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
+        $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', ['lifetime' => $this->getLifetimeString($lifetime)]));
 
 
         $this->checkForActiveInstallation();
@@ -160,7 +160,7 @@ class SecurityLoginManagerController extends modManagerController
         if ($minutes) $diff = $diff % 60;
 
         $diff = intval($diff);
-        $agoTS = array(
+        $agoTS = [
             'years' => $years,
             'months' => $months,
             'weeks' => $weeks,
@@ -168,29 +168,31 @@ class SecurityLoginManagerController extends modManagerController
             'hours' => $hours,
             'minutes' => $minutes,
             'seconds' => $diff,
-        );
+        ];
 
-        $ago = array();
+        $ago = [];
         if (!empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'),array('time' => $agoTS['years']));
+            $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'), ['time' => $agoTS['years']]);
         }
         if (!empty($agoTS['months'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),array('time' => $agoTS['months']));
+            $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),
+                ['time' => $agoTS['months']]);
         }
         if (!empty($agoTS['weeks']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'),array('time' => $agoTS['weeks']));
+            $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'), ['time' => $agoTS['weeks']]);
         }
         if (!empty($agoTS['days']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'),array('time' => $agoTS['days']));
+            $ago[] = $this->modx->lexicon(($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'), ['time' => $agoTS['days']]);
         }
         if (!empty($agoTS['hours']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),array('time' => $agoTS['hours']));
+            $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'), ['time' => $agoTS['hours']]);
         }
         if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,array('time' => $agoTS['minutes']));
+            $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,
+                ['time' => $agoTS['minutes']]);
         }
         if (empty($ago)) { /* handle <1 min */
-            $ago[] = $this->modx->lexicon('ago_seconds',array('time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0));
+            $ago[] = $this->modx->lexicon('ago_seconds', ['time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0]);
         }
         $output = implode(', ',$ago);
         return $output;
@@ -348,7 +350,7 @@ class SecurityLoginManagerController extends modManagerController
      */
     public function preserveReturnUrl() {
         if (!empty($_SERVER['REQUEST_URI'])) {
-            $chars = array("'",'"','(',')',';','>','<','!');
+            $chars = ["'",'"','(',')',';','>','<','!'];
             $returnUrl = str_replace($chars,'',$_SERVER['REQUEST_URI']);
             $this->setPlaceholder('returnUrl',$returnUrl);
         }
@@ -376,12 +378,12 @@ class SecurityLoginManagerController extends modManagerController
      * @return void
      */
     public function handlePost() {
-        $san = array("'",'"','(',')',';','>','<','../');
+        $san = ["'",'"','(',')',';','>','<','../'];
         foreach ($this->scriptProperties as $k => $v) {
-            if (!in_array($k,array('returnUrl'))) {
+            if (!in_array($k, ['returnUrl'])) {
                 $this->scriptProperties[$k] = str_replace($san,'',$v);
             } else {
-                $chars = array("'",'"','(',')',';','>','<','!','../');
+                $chars = ["'",'"','(',')',';','>','<','!','../'];
                 $this->scriptProperties[$k] = str_replace($chars,'',$v);
             }
         }
@@ -592,17 +594,17 @@ class SecurityLoginManagerController extends modManagerController
             if (!$sent) {
                 $this->setPlaceholder('error_message', $this->modx->lexicon('login_magiclink_error_msg'));
             } else {
-                $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', array(
+                $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', [
                     'email' => $this->scriptProperties['passwordless_login_email']
-                )));
+                ]));
             }
         } else {
             // this logline can be used to feed fail2ban to blog continuing failures from an IP
             $this->modx->log(modX::LOG_LEVEL_WARN, "Magic login link failure. User with email '" .
                 $this->scriptProperties['passwordless_login_email'] . "' does not exist. IP: ".$_SERVER["REMOTE_ADDR"]);
-            $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', array(
+            $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', [
                 'email' => $this->scriptProperties['passwordless_login_email'],
-            )));
+            ]));
         }
     }
 
@@ -629,6 +631,6 @@ class SecurityLoginManagerController extends modManagerController
      * @return array
      */
     public function getLanguageTopics() {
-        return array('login');
+        return ['login'];
     }
 }

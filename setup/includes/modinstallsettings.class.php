@@ -13,13 +13,13 @@
  */
 class modInstallSettings {
     public $install = null;
-    public $config = array();
+    public $config = [];
     public $fileName = '';
-    public $settings = array();
+    public $settings = [];
 
-    function __construct(modInstall &$install,array $config = array()) {
+    function __construct(modInstall &$install,array $config = []) {
         $this->install =& $install;
-        $this->config = array_merge(array(),$config);
+        $this->config = array_merge([],$config);
 
         $this->fileName = $this->getCachePath().'settings.cache.php';
         $this->load();
@@ -63,7 +63,7 @@ class modInstallSettings {
      */
     public function set($k,$v) {
         $this->settings[$k] = $v;
-        if (in_array($k, array('database_type', 'database_server', 'dbase', 'database_connection_charset'))) {
+        if (in_array($k, ['database_type', 'database_server', 'dbase', 'database_connection_charset'])) {
             $this->rebuildDSN();
         }
     }
@@ -74,7 +74,7 @@ class modInstallSettings {
      * @return mixed
      */
     public function get($k,$default = null) {
-        if (in_array($k, array('database_dsn', 'server_dsn'))) {
+        if (in_array($k, ['database_dsn', 'server_dsn'])) {
             $this->rebuildDSN();
         }
         return isset($this->settings[$k]) ? $this->settings[$k] : $default;
@@ -136,7 +136,7 @@ class modInstallSettings {
      * @param int $expire
      * @return bool|int
      */
-    public function store(array $settings = array(),$expire = 900) {
+    public function store(array $settings = [],$expire = 900) {
         $this->settings = array_merge($this->settings,$settings);
         $this->rebuildDSN();
         $written = false;

@@ -15,7 +15,7 @@ use MODX\Revolution\modTemplateVarOutputRender;
  * @subpackage processors.element.tv.renders.mgr.output
  */
 class modTemplateVarOutputRenderHtmlTag extends modTemplateVarOutputRender {
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $value= $this->tv->parseInput($value, "||", "array");
         $tagid = !empty($params['tagid']) ? $params['tagid'] : '';
         $tagname = !empty($params['tagname']) ? $params['tagname'] : 'div';
@@ -31,11 +31,11 @@ class modTemplateVarOutputRenderHtmlTag extends modTemplateVarOutputRender {
             $domId .= count($value) > 1 ? $i : '';
 
             $attributes = '';
-            $attr = array(
+            $attr = [
                 'id' => $domId, /* 'tv' already added to id */
                 'class' => !empty($params['class']) ? $params['class'] : null,
                 'style' => !empty($params['style']) ? $params['style'] : null,
-            );
+            ];
             foreach ($attr as $k => $v) $attributes.= ($v ? ' '.$k.'="'.$v.'"' : '');
             if (!empty($params['attrib'])) {
                 $attributes .= ' '.$params['attrib'];
@@ -46,10 +46,10 @@ class modTemplateVarOutputRenderHtmlTag extends modTemplateVarOutputRender {
         }
         if (empty($o)) {
             $attributes = '';
-            $attr = array(
+            $attr = [
                 'class' => !empty($params['class']) ? $params['class'] : null,
                 'style' => !empty($params['style']) ? $params['style'] : null,
-            );
+            ];
             foreach ($attr as $k => $v) $attributes.= ($v ? ' '.$k.'="'.$v.'"' : '');
             if (!empty($params['attrib'])) {
                 $attributes .= ' '.$params['attrib']; /* add extra */

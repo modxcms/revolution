@@ -20,7 +20,7 @@ use MODX\Revolution\modUserGroup;
  * @subpackage manager.controllers
  */
 class SecurityFormsProfileUpdateManagerController extends modManagerController {
-    public $profileArray = array();
+    public $profileArray = [];
 
     /**
      * Check for any permissions or requirements to load page
@@ -58,31 +58,32 @@ class SecurityFormsProfileUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('profile_err_ns'));
         }
-        $profile = $this->modx->getObject(modFormCustomizationProfile::class, array('id' => $scriptProperties['id']));
-        if (empty($profile)) return $this->failure($this->modx->lexicon('profile_err_nfs',array('id' => $scriptProperties['id'])));
+        $profile = $this->modx->getObject(modFormCustomizationProfile::class, ['id' => $scriptProperties['id']]);
+        if (empty($profile)) return $this->failure($this->modx->lexicon('profile_err_nfs',
+            ['id' => $scriptProperties['id']]));
 
         $this->profileArray = $profile->toArray();
 
         $c = $this->modx->newQuery(modUserGroup::class);
         $c->innerJoin(modFormCustomizationProfileUserGroup::class,'FormCustomizationProfiles');
-        $c->where(array(
+        $c->where([
             'FormCustomizationProfiles.profile' => $profile->get('id'),
-        ));
+        ]);
         $c->sortby('name','ASC');
         $usergroups = $this->modx->getCollection(modUserGroup::class, $c);
 
-        $this->profileArray['usergroups'] = array();
+        $this->profileArray['usergroups'] = [];
         foreach ($usergroups as $usergroup) {
-            $this->profileArray['usergroups'][] = array(
+            $this->profileArray['usergroups'][] = [
                 $usergroup->get('id'),
                 $usergroup->get('name'),
-            );
+            ];
         }
 
         $placeholders['profile'] = $this->profileArray;
@@ -112,7 +113,7 @@ class SecurityFormsProfileUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','access','policy','formcustomization');
+        return ['user','access','policy','formcustomization'];
     }
 
     /**

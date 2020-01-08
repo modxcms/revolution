@@ -25,7 +25,7 @@ class ElementTVUpdateManagerController extends modManagerController {
     /** @var modTemplateVar $tv */
     public $tv;
     /** @var array $tvArray */
-    public $tvArray = array();
+    public $tvArray = [];
     /** @var string $onTVFormRender */
     public $onTVFormRender = '';
     /** @var string $onTVFormPrerender */
@@ -71,35 +71,35 @@ class ElementTVUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         /* load tv */
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('tv_err_ns'));
         }
-        $this->tv = $this->modx->getObject(modTemplateVar::class, array('id' => $scriptProperties['id']));
+        $this->tv = $this->modx->getObject(modTemplateVar::class, ['id' => $scriptProperties['id']]);
         if ($this->tv == null) return $this->failure($this->modx->lexicon('tv_err_nf'));
         if (!$this->tv->checkPolicy('view')) return $this->failure($this->modx->lexicon('access_denied'));
 
         /* get properties */
         $properties = $this->tv->get('properties');
-        if (!is_array($properties)) $properties = array();
+        if (!is_array($properties)) $properties = [];
 
-        $data = array();
+        $data = [];
         foreach ($properties as $property) {
-            $data[] = array(
+            $data[] = [
                 $property['name'],
                 $property['desc'],
                 !empty($property['type']) ? $property['type'] : 'textfield',
-                !empty($property['options']) ? $property['options'] : array(),
+                !empty($property['options']) ? $property['options'] : [],
                 $property['value'],
                 !empty($property['lexicon']) ? $property['lexicon'] : '',
                 false, /* overridden set to false */
                 $property['desc_trans'],
                 !empty($property['area']) ? $property['area'] : '',
                 !empty($property['area_trans']) ? $property['area_trans'] : '',
-            );
+            ];
         }
         $this->tvArray = $this->tv->toArray();
         $this->tvArray['properties'] = $data;
@@ -185,13 +185,13 @@ class ElementTVUpdateManagerController extends modManagerController {
      * @return string
      */
     public function fireRenderEvent() {
-        $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender',array(
+        $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender', [
             'id' => $this->tvArray['id'],
             'tv' => &$this->tv,
             'mode' => modSystemEvent::MODE_UPD,
-        ));
+        ]);
         if (is_array($this->onTVFormRender)) $this->onTVFormRender = implode('',$this->onTVFormRender);
-        $this->onTVFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onTVFormRender);
+        $this->onTVFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onTVFormRender);
         return $this->onTVFormRender;
     }
 
@@ -217,7 +217,7 @@ class ElementTVUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('tv','category','tv_widget','propertyset','element');
+        return ['tv','category','tv_widget','propertyset','element'];
     }
 
     /**

@@ -72,6 +72,6 @@ abstract class MODxTestCase extends TestCase {
     public function getResults(&$result) {
         $response = ltrim(rtrim($result->response,')'),'(');
         $response = json_decode($response, true);
-        return !empty($response['results']) ? $response['results'] : array();
+        return !empty($response['results']) ? $response['results'] : [];
     }
 }

@@ -49,8 +49,8 @@ class BrowserFileProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerGet() {
-        return array(
-            array('manager/index.php'),
-        );
+        return [
+            ['manager/index.php'],
+        ];
     }
 }

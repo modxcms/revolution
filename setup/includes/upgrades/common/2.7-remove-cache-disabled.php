@@ -8,4 +8,4 @@
 
 use MODX\Revolution\modSystemSetting;
 
-$modx->removeObject(modSystemSetting::class, array('key' => 'cache_disabled'));
+$modx->removeObject(modSystemSetting::class, ['key' => 'cache_disabled']);

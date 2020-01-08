@@ -45,7 +45,7 @@ class SystemImportHtmlManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = []) {}
 
     /**
      * Return the pagetitle
@@ -69,6 +69,6 @@ class SystemImportHtmlManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('import');
+        return ['import'];
     }
 }

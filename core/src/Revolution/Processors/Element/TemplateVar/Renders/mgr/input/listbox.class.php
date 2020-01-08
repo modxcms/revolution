@@ -18,9 +18,9 @@ class modTemplateVarInputRenderListbox extends modTemplateVarInputRender {
     public function getTemplate() {
         return 'element/tv/renders/input/listbox-single.tpl';
     }
-    public function process($value,array $params = array()) {
+    public function process($value,array $params = []) {
         $options = $this->getInputOptions();
-        $items = array();
+        $items = [];
 
         $found = false;
         foreach ($options as $option) {
@@ -32,19 +32,19 @@ class modTemplateVarInputRenderListbox extends modTemplateVarInputRender {
                 $found = true;
             }
 
-            $items[] = array(
+            $items[] = [
                 'text' => htmlspecialchars($opt[0],ENT_COMPAT,'UTF-8'),
                 'value' => htmlspecialchars($opt[1],ENT_COMPAT,'UTF-8'),
                 'selected' => $selected,
-            );
+            ];
         }
 
         if (!empty($value) && $found === false) {
-            $items[] = array(
+            $items[] = [
                 'text' => htmlspecialchars($value,ENT_COMPAT,'UTF-8'),
                 'value' => htmlspecialchars($value,ENT_COMPAT,'UTF-8'),
                 'selected' => 1,
-            );
+            ];
         }
 
         $this->setPlaceholder('opts',$items);

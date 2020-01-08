@@ -42,11 +42,11 @@ class modMD5HashTest extends MODxTestCase {
         $this->assertEquals($expected, $actual, "Expected hash value not generated.");
     }
     public function providerHash() {
-        return array(
-            array('password', array(), md5('password')),
-            array('password', null, md5('password')),
-            array('what do you think of this?', array(), md5('what do you think of this?')),
-            array('what do you think of this?', null, md5('what do you think of this?')),
-        );
+        return [
+            ['password', [], md5('password')],
+            ['password', null, md5('password')],
+            ['what do you think of this?', [], md5('what do you think of this?')],
+            ['what do you think of this?', null, md5('what do you think of this?')],
+        ];
     }
 }

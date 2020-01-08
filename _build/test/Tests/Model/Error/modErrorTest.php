@@ -53,10 +53,10 @@ class modErrorTest extends MODxTestCase {
         $this->assertTrue($this->error->errors[0] == $errorMsg,'modError.addError failed to insert the correct error.');
     }
     public function providerTestAddError() {
-        return array(
-            array('A test error'),
-            array(''), /* should this work? does now... */
-        );
+        return [
+            ['A test error'],
+            [''], /* should this work? does now... */
+        ];
     }
 
     /**
@@ -72,11 +72,11 @@ class modErrorTest extends MODxTestCase {
         $this->assertEquals($message,$this->error->errors[0]['msg'],'modError.addField failed to insert the correct error message.');
     }
     public function providerTestAddField() {
-        return array(
-            array('name','Please enter a valid name.'),
-            array('score',0),
-            array('empty',''),
-        );
+        return [
+            ['name','Please enter a valid name.'],
+            ['score',0],
+            ['empty',''],
+        ];
     }
 
     /**
@@ -121,12 +121,12 @@ class modErrorTest extends MODxTestCase {
         $this->assertEquals($shouldPass,$passed);
     }
     public function providerTestIsFieldError() {
-        return array(
-            array(array('id' => 'name','msg' => 'Please enter a name.'),true),
-            array(array('id' => 'fake'),false),
-            array(array('msg' => 'A bad error'),false),
-            array('An invalid error',false),
-        );
+        return [
+            [['id' => 'name','msg' => 'Please enter a name.'],true],
+            [['id' => 'fake'],false],
+            [['msg' => 'A bad error'],false],
+            ['An invalid error',false],
+        ];
     }
 
     /**
@@ -140,12 +140,12 @@ class modErrorTest extends MODxTestCase {
         $this->assertEquals($shouldPass,$passed);
     }
     public function providerTestIsNotFieldError() {
-        return array(
-            array('A standard error',true),
-            array(array('id' => 'fake'),true),
-            array(array('msg' => 'A bad error'),true),
-            array(array('id' => 'name','msg' => 'Please enter a name.'),false),
-        );
+        return [
+            ['A standard error',true],
+            [['id' => 'fake'],true],
+            [['msg' => 'A bad error'],true],
+            [['id' => 'name','msg' => 'Please enter a name.'],false],
+        ];
     }
 
     /**
@@ -195,16 +195,16 @@ class modErrorTest extends MODxTestCase {
      * @dataProvider providerTestSuccess
      */
     public function testSuccess($message,$id) {
-        $response = $this->error->success($message,array('id' => $id));
+        $response = $this->error->success($message, ['id' => $id]);
 
         $this->assertTrue($response['success']);
         $this->assertEquals($message,$response['message']);
         $this->assertEquals($id,$response['object']['id']);
     }
     public function providerTestSuccess() {
-        return array(
-            array('A win occurred!',456),
-        );
+        return [
+            ['A win occurred!',456],
+        ];
     }
 
     /**
@@ -214,7 +214,7 @@ class modErrorTest extends MODxTestCase {
     public function testFailure() {
         $generalErrorMessage = 'Please check the values in your form.';
         $this->error->addField('name','Name is required.');
-        $response = $this->error->failure($generalErrorMessage,array('id' => 123));
+        $response = $this->error->failure($generalErrorMessage, ['id' => 123]);
 
         $this->assertFalse($response['success']);
         $this->assertEquals($generalErrorMessage,$response['message']);

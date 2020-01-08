@@ -32,8 +32,8 @@ class SystemDashboardsCreateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return array
      */
-    public function process(array $scriptProperties = array()) {
-        return array();
+    public function process(array $scriptProperties = []) {
+        return [];
 
     }
 
@@ -71,7 +71,7 @@ class SystemDashboardsCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('dashboards','user');
+        return ['dashboards','user'];
     }
 
     /**

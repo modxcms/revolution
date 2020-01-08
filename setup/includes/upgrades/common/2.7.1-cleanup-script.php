@@ -6,25 +6,25 @@
  *
  * @package setup
  */
-$paths = array(
+$paths = [
     'assets' => $modx->getOption('assets_path', null, MODX_ASSETS_PATH),
     'base' => $modx->getOption('base_path', null, MODX_BASE_PATH),
     'connectors' => $modx->getOption('connectors_path', null, MODX_CONNECTORS_PATH),
     'core' => $modx->getOption('core_path', null, MODX_CORE_PATH),
     'manager' => $modx->getOption('manager_path', null, MODX_MANAGER_PATH),
     'processors' => $modx->getOption('processors_path', null, MODX_PROCESSORS_PATH),
-);
+];
 
-$cleanup = array(
-    'assets' => array(),
-    'base' => array(),
-    'connectors' => array(),
-    'core' => array(),
-    'manager' => array(),
-    'processors' => array(
+$cleanup = [
+    'assets' => [],
+    'base' => [],
+    'connectors' => [],
+    'core' => [],
+    'manager' => [],
+    'processors' => [
         'system/config.js.php',
-    ),
-);
+    ],
+];
 
 $removedFiles = 0;
 $removedDirs = 0;
@@ -32,7 +32,7 @@ $removedDirs = 0;
 if (!function_exists('recursiveRemoveDir')) {
     function recursiveRemoveDir($dir)
     {
-        $files = array_diff(scandir($dir), array('.', '..'));
+        $files = array_diff(scandir($dir), ['.', '..']);
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? recursiveRemoveDir("$dir/$file") : unlink("$dir/$file");
         }
@@ -62,5 +62,5 @@ foreach ($cleanup as $folder => $files) {
 $this->runner->addResult(
     modInstallRunner::RESULT_SUCCESS,
     '<p class="ok">'.$this->install->lexicon('legacy_cleanup_complete').
-    '<br /><small>'.$this->install->lexicon('legacy_cleanup_count', array('files' => $removedFiles, 'folders' => $removedDirs)).'</small></p>'
+    '<br /><small>'.$this->install->lexicon('legacy_cleanup_count', ['files' => $removedFiles, 'folders' => $removedDirs]).'</small></p>'
 );

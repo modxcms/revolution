@@ -1022,13 +1022,13 @@ class modUser extends modPrincipal
         /** @var modMediaSource $source */
         $source = modMediaSource::getDefaultSource($this->xpdo, $this->xpdo->getOption('photo_profile_source'));
 
-        $thumb_param = array(
+        $thumb_param = [
             "zc" => 1,
             "h" => $height,
             "w" => $width,
             "src" => $this->Profile->photo,
             "source" => $source->id
-        );
+        ];
 
         return $this->xpdo->getOption('connectors_url', null, MODX_CONNECTORS_URL)
             . "system/phpthumb.php?" . http_build_query($thumb_param);

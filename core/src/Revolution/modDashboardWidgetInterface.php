@@ -119,7 +119,7 @@ abstract class modDashboardWidgetInterface
      * @param array $placeholders
      * @return string
      */
-    public function getFileChunk($tpl,array $placeholders = array()) {
+    public function getFileChunk($tpl,array $placeholders = []) {
         $output = '';
         $file = $tpl;
         if (!file_exists($file)) {

@@ -32,7 +32,7 @@ if (!empty($_POST['proceed'])) {
     $_POST['context_connectors_url'] = !empty($_POST['context_connectors_url']) ? rtrim($_POST['context_connectors_url'],'/').'/' : $webUrl . 'connectors/';
     $install->settings->store($_POST);
 
-    $settings = array();
+    $settings = [];
     $settings['core_path'] = MODX_CORE_PATH;
     $settings['web_path_auto'] = isset ($_POST['context_web_path_toggle']) && $_POST['context_web_path_toggle'] ? 1 : 0;
     $settings['web_path'] = isset($_POST['context_web_path']) ? rtrim($_POST['context_web_path'],'/').'/' : MODX_INSTALL_PATH;

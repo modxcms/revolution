@@ -1,5 +1,5 @@
 <?php
-$v= array ();
+$v= [];
 $v['version']= '3'; // Current version.
 $v['major_version']= '0'; // Current major version.
 $v['minor_version']= '0'; // Current minor version.
