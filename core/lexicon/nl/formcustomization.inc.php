@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filter op regel...';
 $_lang['filter_by_search'] = 'Zoek...';
 $_lang['for_parent'] = 'Voor bovenliggende';
 $_lang['for_parent_desc'] = 'Vink dit aan wanneer je deze regel wilt toepassen op de bovenliggende. Alleen gebruiken met documenten of objecten met een `parent` veld. Handig voor de "maak" pagina van documenten.';
-$_lang['form_customization_msg'] = 'Hier is een lijst met huidig toegepaste regels. Meer informatie over regels en Form Customization kan <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">hier</a> gevonden worden. Noteer dat onjuiste regels in jouw installatie van MODX Revolution wellicht problemen veroorzaken. Gedeactiveerde regels zijn grijs uitgefade.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Formulier regels';
 $_lang['import'] = 'Importeer';
 $_lang['import_from_xml'] = 'Importeer nieuwe set vanuit XML';
