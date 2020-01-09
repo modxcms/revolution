@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'فلترة حسب القاعدة...';
 $_lang['filter_by_search'] = 'بحث...';
 $_lang['for_parent'] = 'من أجل الحاوي';
 $_lang['for_parent_desc'] = 'اختر هذه عندما تريد أن يتم تطبيق هذه القاعدة على الحاول. فقط استخدم المصادر أو الكائنات مع حقل `الحاوي`. تفيد في حالة إنشاء صفحة من المصادر.';
-$_lang['form_customization_msg'] = 'هنا قائمة بالقواعد المطبقة حاليا. يمكن الاطلاع على مزيد من المعلومات حول القواعد و تخصيص النموذج<a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank"> هنا</a>. يرجى ملاحظة أن القواعد الغير سليمة قد تسبب مشاكل مع تثبيت مودكس الخاص بك. القواعد الغير نشطة ملونة باللون الرمادي.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'قواعد النموذج';
 $_lang['import'] = 'استيراد';
 $_lang['import_from_xml'] = 'استيراد مجموعة جديدة من XML';
