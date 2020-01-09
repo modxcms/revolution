@@ -154,7 +154,7 @@ $_lang['modx_class_err_nf'] = 'Kan het MODX class bestand niet inladen.';
 $_lang['modx_configuration_file'] = 'MODX configuratiebestand';
 $_lang['modx_err_instantiate'] = 'Kan geen instantie van de MODX class maken.';
 $_lang['modx_err_instantiate_mgr'] = 'Kan de MODX manager context niet initialiseren.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] Het <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Alle rechten zijn voorbehouden. MODX is gelicentieerd onder de GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is gratis software. Wij moedigen je aan om creatief te zijn en gebruik te maken van MODX op de manier die past bij jou. Maar wees je er van bewust dat als je aanpassingen maakt en besluit deze te verspreiden, dat de broncode gratis blijft!';
 $_lang['modx_install'] = 'MODX Installatie';
 $_lang['modx_install_complete'] = 'MODX Installatie Afgerond';
