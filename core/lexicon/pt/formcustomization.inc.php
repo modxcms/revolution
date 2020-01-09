@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filtrar por Regra...';
 $_lang['filter_by_search'] = 'Busca...';
 $_lang['for_parent'] = 'Para o pai';
 $_lang['for_parent_desc'] = 'Marque isso quando você quer que esta regra se aplique para o pai. Somente utilize Recuross ou objetos com um campo `pai`. Útil para o "criar" de página de Recurosos.';
-$_lang['form_customization_msg'] = 'Aqui está uma lista de Regras atualmente aplicadas. Mais informação sobre Regras e Personalização de Formulários pode ser encontradas <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">aqui</a>. Repare que as Regras impróprias devem causar problemas com a instalação do MODx Revolution. Regras inativas são mescladas para cinza.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Regras de Formulário';
 $_lang['import'] = 'Importar';
 $_lang['import_from_xml'] = 'Importar Novo Set do XML';
