@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'คุณไม่ได้รับอนุญ
 $_lang['login_blocked_too_many_attempts'] = 'คุณถูกบล็อกเนื่องมาจากคุณล้มเหลวในการพยายามทำการเข้าสู่ระบบหลายครั้งเกินไป';
 $_lang['login_button'] = 'ลงชื่อเข้า';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] จาก<a href="http://modx.com/about/" target="_blank">MODX, LLC</a> MODX Revolution&trade; ได้อนุญาตให้ใช้งานซอร์ฟแวร์ภายใต้ GPLv2 หรือถัดมา';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'บัญชีอีมล์:';
 $_lang['login_err_unknown'] = 'เกิดข้อผิดพลาดขณะกำลังลงชื่อเข้าสู่ระบบ';
 $_lang['login_forget_your_login'] = 'Forgot your password?';
