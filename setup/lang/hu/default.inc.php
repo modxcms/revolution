@@ -129,7 +129,7 @@ $_lang['modx_class_err_nf'] = 'Nem sikerült betölteni a MODX osztály állomá
 $_lang['modx_configuration_file'] = 'MODX beállítási állomány';
 $_lang['modx_err_instantiate'] = 'Nem sikerült példányosítani a MODX osztályt.';
 $_lang['modx_err_instantiate_mgr'] = 'Nem sikerült előkészíteni a MODX kezelői környezetet.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> tartalomkezelő keretrendszer (CMF) projekt. Minden jog fenntartva. A MODX használata a GNU GPL alapján engedélyezett.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'A MODX ingyenes szoftver. Bátorítjuk arra, hogy legyen kreatív és használja tetszőlegesen saját céljaira, de ne felejtse, hogy ha megváltoztatja és közzé teszi a módosított MODX-et, a forráskód ingyenes maradjon!';
 $_lang['modx_install'] = 'MODX telepítés';
 $_lang['modx_install_complete'] = 'MODX telepítése befejezve';
