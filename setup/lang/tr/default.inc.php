@@ -155,7 +155,7 @@ $_lang['modx_class_err_nf'] = 'MODX sınıf doyası dahil edilemiyor.';
 $_lang['modx_configuration_file'] = 'MODX yapılandırma dosyası';
 $_lang['modx_err_instantiate'] = 'MODX sınıfı örneklemesi yapılamadı.';
 $_lang['modx_err_instantiate_mgr'] = 'MODX yönetici bağlamı başlatılamadı.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Içerik Yönetimi Çerçevesi (CMF) Projesi. Her hakkı saklıdır.MODX, GNU GPL kapsamında lisanslanmıştır.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX bedava bir yazılımdır. MODX\'i size en iyi uyan yolla kullanmanız ve yaratıcı olmanız konusunda sizi teşvik ediyoruz. MODX\'inizde değişikler yapıp onu dağıtmak isterseniz aklınızda bulunsun, kaynak kodu bedavaya sizde kalabilir!';
 $_lang['modx_install'] = 'MODX kurulumu';
 $_lang['modx_install_complete'] = 'MODX kurulumu tamamlandı';
