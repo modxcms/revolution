@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Η πρόσβασή σας είναι προσω
 $_lang['login_blocked_too_many_attempts'] = 'Έχετε αποκλειστεί, λόγω πολλών αποτυχημένων απόπειρων σύνδεσης.';
 $_lang['login_button'] = 'Σύνδεση';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] από τη <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. Το MODX Revolution&trade; καλύπτεται από τη γενική δημόσια άδεια GPLv2 ή πιο πρόσφατη.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Email λογαριασμού:';
 $_lang['login_err_unknown'] = 'Άγνωστο σφάλμα κάτα την προσπάθεια σύνδεσης.';
 $_lang['login_forget_your_login'] = 'Forgot your password?';
