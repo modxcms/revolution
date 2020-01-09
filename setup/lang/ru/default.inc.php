@@ -110,7 +110,7 @@ $_lang['modx_class_err_nf'] = 'Не удалось подключить файл
 $_lang['modx_configuration_file'] = 'Конфигурационный файл MODX';
 $_lang['modx_err_instantiate'] = 'Не удалось создать объект класса MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Не удалось инициализировать контекст системы управления MODX.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Mangement Framework (CMF) . Все права защищены. MODX лицензирован GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] проект <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF). Все права защищены. MODX распространяется под GNU GPL.';
 $_lang['modx_footer2'] = 'MODX — свободное ПО. Мы приветствуем творчество и предлагаем использовать MODX так, как вы считаете целесообразным. Но если вы внесете изменения и решите распространять ваш измененный MODX, вы должны распространять исходный код бесплатно!';
 $_lang['modx_install'] = 'Установка MODX';
 $_lang['modx_install_complete'] = 'Установка MODX завершена';
@@ -137,7 +137,7 @@ $_lang['options_send_poweredby_header'] = 'Отправлять заголово
 $_lang['options_send_poweredby_header_note'] = 'Если выбрано «Да», MODX будет отправлять заголовок "X-Powered-By", чтобы обозначить этот сайт как созданный на MODX. Это помогает отследить глобальное использование MODX с помощью сторонних трекеров, проверяющих ваш сайт. Поскольку это облегчает определение системы, на которой создан ваш сайт, это может несколько увеличить риски с точки зрения безопасности в том случае, если в MODX будет найдена уязвимость.';
 $_lang['options_title'] = 'Параметры установки';
 $_lang['options_upgrade_advanced'] = 'Расширенное обновление<br /><small>(с настройкой параметров базы данных)</small>';
-$_lang['options_upgrade_advanced_note'] = 'Для детальной настройки данных о подключении к базе данных или при переходе на сервер с другой кодировкой базы данных. <strong>Вы должны знать полное название вашей базы данных, имя пользователя, пароль, кодировку и сопоставление.</strong>';
+$_lang['options_upgrade_advanced_note'] = 'Для детальной настройки данных о подключении к базе данных или при переходе на сервер с другой кодировкой базы данных. <strong>Вы должны знать имя вашей базы данных, имя пользователя, пароль, кодировку и сопоставление.</strong>';
 $_lang['options_upgrade_existing'] = 'Обновление существующей установки';
 $_lang['options_upgrade_existing_note'] = 'Обновление ваших файлов и базы данных.';
 $_lang['package_execute_err_retrieve'] = 'Не удалось установить MODX, поскольку MODX не смог распаковать пакет [[+path]]packages/core.transport.zip. Проверьте, что файл [[+path]]packages/core.transport.zip существует, доступен для записи, и возможна запись в каталог [[+path]]packages/.';
@@ -204,7 +204,7 @@ $_lang['preload_err_pdo'] = 'MODX требует расширение "PDO" пр
 $_lang['preload_err_pdo_mysql'] = 'MODX требует драйвер "pdo_mysql", когда используется PHP с собственным PDO, и он не был загружен.';
 
 $_lang['test_config_file'] = 'Проверка существования и возможности записи в файл <span class="mono">[[+file]]</span>: ';
-$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с именем <span class="mono">[[+file]].inc.php</span> в каталоге <span class="mono">config</span>. Установите ему права на запись для PHP (обычно 0666).';
+$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с названием <span class="mono">[[+file]].inc.php</span> в каталоге <span class="mono">config</span>. Установите ему права на запись для PHP (обычно 0666).';
 $_lang['test_db_check'] = 'Создание подключения к базе данных: ';
 $_lang['test_db_check_conn'] = 'Проверьте параметры соединения и повторите попытку.';
 $_lang['test_db_failed'] = 'Связь с базой данных не установлена!';
