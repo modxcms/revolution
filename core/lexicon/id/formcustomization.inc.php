@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filter menurut aturan...';
 $_lang['filter_by_search'] = 'Cari...';
 $_lang['for_parent'] = 'Untuk Induk';
 $_lang['for_parent_desc'] = 'Periksalah bila Anda ingin aturan ini berlaku untuk induk. Hanya menggunakan sumber daya atau objek dengan bidang \'induk\'. Berguna untuk "menciptakan" halaman sumber daya.';
-$_lang['form_customization_msg'] = 'Berikut ini adalah daftar aturan yang diterapkan saat ini. Informasi lebih lanjut tentang aturan dan bentuk kustomisasi dapat ditemukan <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank"> di sini</a>. Harap dicatat bahwa aturan-aturan yang tidak tepat dapat menyebabkan masalah dengan instalasi MODX revolusi. Aturan-aturan yang tidak aktif memudar abu-abu.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Bentuk aturan';
 $_lang['import'] = 'Impor';
 $_lang['import_from_xml'] = 'Mengimpor Set baru dari XML';
