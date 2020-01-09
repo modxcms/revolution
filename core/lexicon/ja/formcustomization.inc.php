@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'ルールで絞込み...';
 $_lang['filter_by_search'] = '検索...';
 $_lang['for_parent'] = 'For Parent';
 $_lang['for_parent_desc'] = 'このルールを親リソースに適用させたい場合はチェックしてください。Only use with Resources or objects with a `parent` field. Useful for the "create" page of Resources.';
-$_lang['form_customization_msg'] = 'フォームカスタマイズのプロファイルは、カスタマイズルールのセットと対象グループをまとめたものです。不適切なルールはMODXに問題を起こす場合もあるので、注意して利用してください。<br />無効化されているプロファイルは、グレーアウトして表示されます。';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'フォームのルール';
 $_lang['import'] = 'インポート';
 $_lang['import_from_xml'] = 'XMLファイルからセットをインポート';
