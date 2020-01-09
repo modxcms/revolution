@@ -21,11 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Ini berarti bahwa halaman kes
 $_lang['configcheck_errorpage_unpublished'] = 'Kesalahan halaman pada situs Anda tidak dipublikasikan atau tidak ada.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Ini berarti bahwa kesalahan halaman Anda tidak dapat diakses umum. Mempublikasikan halaman atau pastikan diberikan dokumen yang ada di pohon situs Anda dalam sistem &gt; sistem pengaturan menu.';
 $_lang['configcheck_htaccess'] = 'Folder core dapat diakses publik';
-$_lang['configcheck_htaccess_msg'] = '<p>MODX mendeteksi bahwa folder <b>core</b> (sebagian) dapat diakses oleh publik. <strong>Hal ini tidak dianjurkan dan mengundang risiko keamanan.</strong> Pada instalasi MODX di server Apache, setidaknya Anda harus membuat file .htaccess di dalam folder core <em>[[+fileLocation]]</em>. Ini dapat dengan mudah dilakukan dengan mengubah contoh ht.access yang tersedia menjadi .htaccess. </p>
-
-<p>Untuk server yang berbeda terdapat pendekatan yang berbeda pula untuk mengamankan folder core, sebagaimana dapat Anda baca pada <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution" target="_blank">Hardening MODX Guide</a> untuk mendapatkan informasi lebih lanjut untuk mengamankan instalasi MODX.</p>
-
-<p>Jika perubahan sudah dilakukan, anda dapat mencoba memeriksanya dengan browsing ke halaman <a href="[[+checkUrl]]" target="_blank"> Changelog</a>, dimana URL tersebut harus menampilkan notifikasi 403 permission denied) atau 404 (not found). Jika Anda masih dapat masuk ke halaman changelog tersebut, artinya terjadi kesalahan pengaturan dan Anda perlu mengkonfigurasi ulang atau memanggil ahli untuk memecahkan masalah tersebut.</p>';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Direktori gambar tidak bisa ditulisi';
 $_lang['configcheck_images_msg'] = 'Direktori gambar tidak bisa ditulisi, atau tidak ada. Ini berarti fungsi manajer gambar dalam editor tidak akan bekerja!';
 $_lang['configcheck_installer'] = 'Installer masih ada';
