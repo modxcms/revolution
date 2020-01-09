@@ -154,7 +154,7 @@ $_lang['modx_class_err_nf'] = 'Nepodařilo se načíst soubor třídy MODX.';
 $_lang['modx_configuration_file'] = 'MODX konfigurační soubor';
 $_lang['modx_err_instantiate'] = 'Nepodařilo se inicializovat třídu MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Nepodařilo se inicializovat kontext pro MODX správce obsahu.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. Všechna práva vyhrazena. MODX je licencován pod GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX je free software. Doporučujeme Vám být kreativní a používat MODX jak jen uznáte za vhodné. Pouze se ujistěte, že pokud uděláte nějaké změny a budete chtít upravený MODX distribuovat dál, musí být zdrojové kódy volně přístupné!';
 $_lang['modx_install'] = 'Instalace MODX';
 $_lang['modx_install_complete'] = 'Instalace MODX dokončena';
