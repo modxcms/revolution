@@ -134,7 +134,7 @@ $_lang['modx_class_err_nf'] = 'Не може да включи MODX клас ф�
 $_lang['modx_configuration_file'] = 'MODX конфигурационен файл';
 $_lang['modx_err_instantiate'] = 'Не може да инстанциира MODX клас.';
 $_lang['modx_err_instantiate_mgr'] = 'Не може да се инициализира контекста на MODX мениджъра.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) проект. Всички права запазени. MODX е лицензиран под GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX е свободен софтуер. Съветваме ви да бъдете креативни и да направите използването на MODX по начина, по който го виждате. Просто се уверете, че ако правите промени и решите да редистрибутирате вашия променен MODX, ще оставите изходния код свободен!';
 $_lang['modx_install'] = 'MODX инсталация';
 $_lang['modx_install_complete'] = 'Инсталацията на MODX приключи';
