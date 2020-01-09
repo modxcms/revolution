@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Kurala göre filtrele...';
 $_lang['filter_by_search'] = 'Aranıyor...';
 $_lang['for_parent'] = 'Ebeveynler için';
 $_lang['for_parent_desc'] = 'Bu kuralı kaynağa uygulamak istediğiniz zaman bunu kontrol edin. Yalnızca Kaynaklarla veya bir `ana` alanı olan nesnelerle kullanın. Kaynakların sayfasını yaratmak için kullanışlı.';
-$_lang['form_customization_msg'] = 'Uygulanmış Kuralların bir listesi. Kurallar ve form özelleştirme hakkında daha fazla bilgiyi <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank"> adresinde bulabilirsiniz.</a>. Uygunsuz kuralların MODX Revolution kurulumunda hatalara sebep olabileceğini lütfen not edin. Aktif olmayan kurallar soluk gri şekilde görünür.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Forum Kuralları';
 $_lang['import'] = 'İçe aktar';
 $_lang['import_from_xml'] = 'XMD\'den Yeni Kümeyi İçe Aktar';
