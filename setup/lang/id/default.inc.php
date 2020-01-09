@@ -141,7 +141,7 @@ $_lang['modx_class_err_nf'] = 'Tidak dapat menyertakan file kelas MODX.';
 $_lang['modx_configuration_file'] = 'File konfigurasi MODX';
 $_lang['modx_err_instantiate'] = 'Tidak bisa memberi contoh kelas MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Tidak dapat menginisialisasi konteks manajer MODX.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Kerangka Pengelolaan Konten (CMF). Seluruh hak cipta. MODX dilisensikan di bawah GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX adalah perangkat lunak bebas. Kami mendorong Anda untuk menjadi kreatif dan menggunakan MODX sesuai keinginan Anda. Pastikan bahwa jika Anda membuat perubahan dan memutuskan untuk mendistribusikan ulang MODX yang dimodifikasi Anda, Anda menyimpan kode sumbernya secara gratis!';
 $_lang['modx_install'] = 'Instalasi MODXs';
 $_lang['modx_install_complete'] = 'Instalasi MODX Lengkap';
