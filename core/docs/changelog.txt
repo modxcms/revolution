@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.3-pl (TBD)
 ====================================
+- Make MODX Browser work on mobile screens [#14774]
 - Fix deprecation warnings on curly brace string offset access syntax for PHP 7.4 compatibility [#14863]
 - Set autocomplete to off on username in user edit form [#14838]
 - Fix the position of the right caret when `Show Descriptions in Top Menu` is set to `No` [#14778]

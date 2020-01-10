@@ -4117,7 +4117,8 @@ button {
       left: auto;
       right: auto;
       bottom: auto;
-      width: 100%; }
+      width: 100%;
+      background: none; }
       #modx-action-buttons table table {
         display: block; }
         #modx-action-buttons table table  tbody {
@@ -4143,9 +4144,11 @@ button {
               content: "";
               display: table; }
             #modx-action-buttons table table  tbody tr td {
+              width: auto;
               display: inline-block;
               float: left;
-              margin-bottom: 1em;
+              margin: 5px;
+              padding: 0;
               -webkit-flex-grow: 1;
               -moz-flex-grow: 1;
               flex-grow: 1;
@@ -4186,9 +4189,11 @@ button {
           content: "";
           display: table; }
         .tab-panel-wrapper .x-panel-tbar table  tbody tr td {
+          width: auto;
           display: inline-block;
           float: left;
-          margin-bottom: 1em;
+          margin: 5px;
+          padding: 0;
           -webkit-flex-grow: 1;
           -moz-flex-grow: 1;
           flex-grow: 1;
@@ -4235,9 +4240,11 @@ button {
           content: "";
           display: table; }
         #modx-grid-element-properties table  tbody tr td {
+          width: auto;
           display: inline-block;
           float: left;
-          margin-bottom: 1em;
+          margin: 5px;
+          padding: 0;
           -webkit-flex-grow: 1;
           -moz-flex-grow: 1;
           flex-grow: 1;
@@ -4403,6 +4410,9 @@ button {
   /* for IE <= 8 */
   display: inline-block;
   position: relative; }
+  @media screen and (max-width: 640px) {
+    #modx-leftbar .x-toolbar-ct .x-btn {
+      width: 30px !important; } }
   #modx-leftbar .x-toolbar-ct .x-btn > em > button {
     /*color: $buttonColor;*/
     font-size: 18px;
@@ -6049,6 +6059,9 @@ ul.x-tab-strip-bottom {
     width: 168px !important;
     /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
     /* the "categories" text */ }
+    @media screen and (max-width: 640px) {
+      .vertical-tabs-panel .vertical-tabs-header {
+        width: 80px !important; } }
     .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap {
       background-color: transparent;
       /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
@@ -6078,6 +6091,9 @@ ul.x-tab-strip-bottom {
           overflow: hidden;
           padding: 10px 15px 10px 15px;
           transition: background-color 0.25s, color 0.25s; }
+          @media screen and (max-width: 640px) {
+            .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li {
+              padding: 8px; } }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li:hover {
             background: #FFF; }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active {
@@ -6089,6 +6105,9 @@ ul.x-tab-strip-bottom {
             color: #1A7FB8;
             width: 168px;
             /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */ }
+          @media screen and (max-width: 640px) {
+            .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li {
+              width: 80px !important; } }
           .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-edge {
             height: 0;
             visibility: hidden;
@@ -8147,6 +8166,59 @@ ul.x-tab-strip-bottom {
     background-color: #ccc;
     background-image: url("../images/modx-theme/transparency-pattern.png"); }
 
+@media screen and (max-width: 640px) {
+  .modx-browser {
+    top: 15px !important;
+    max-height: 100% !important;
+    overflow-y: scroll; }
+  .modx-browser-panel {
+    width: 100% !important;
+    min-height: 700px;
+    margin: 15px 0 !important;
+    background-color: #FFF !important; }
+  .modx-browser-tree, .modx-browser-view-ct {
+    width: 35% !important;
+    max-width: 35% !important;
+    padding: 0 5px;
+    display: inline-block !important;
+    position: relative !important;
+    float: left;
+    left: 0 !important; }
+  .modx-browser-details-ct {
+    width: 20% !important;
+    max-width: 20% !important;
+    padding: 0 5px;
+    display: inline-block !important;
+    position: relative !important;
+    float: left;
+    left: 0 !important; }
+  .modx-browser-tree *, .modx-browser-view-ct *, .modx-browser-details-ct * {
+    font-size: 12px !important; }
+  .modx-browser-tree input, .modx-browser-view-ct input, .modx-browser-details-ct input {
+    padding: 5px !important; }
+  .modx-browser-tree .x-toolbar-ct tbody tr td {
+    display: table-cell; }
+  .modx-browser .x-panel-tbar-noheader, .modx-browser .x-toolbar, .modx-browser-view-ct .x-panel-tbar-noheader, .modx-browser-view-ct .x-panel-tbar, .modx-browser-view-ct .x-panel-tbar .x-toolbar, .modx-browser-view-ct .x-panel-body {
+    width: 100% !important; }
+  .modx-browser-view-ct .x-panel-tbar .x-toolbar-cell label {
+    line-height: 2.2; }
+  .modx-browser-thumb-wrap {
+    width: 24%;
+    margin: 5px;
+    padding: 5px; }
+  .modx-browser-thumb {
+    max-width: 100%;
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+    padding: 0; }
+  .modx-browser-thumb img {
+    max-width: 100%; }
+  .modx-browser-placeholder {
+    height: 50px; }
+  .modx-browser-details-info {
+    padding: 5px; } }
+
 .x-window {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -8339,6 +8411,7 @@ ul.x-tab-strip-bottom {
 /* .x-window */
 /* the progress bar (ex. saving a resource), usually in a window too */
 .x-progress-wrap {
+  width: 100% !important;
   border: 1px solid #3697cd; }
   .x-progress-wrap .x-progress-inner {
     background-color: #e4f1f8;
@@ -9097,95 +9170,42 @@ jumping around */
       padding: 1em; } }
 
 @media screen and (max-width: 640px) {
-  #modx-grid-lexicon .x-toolbar-ct {
+  .x-toolbar-ct {
     display: block; }
-    #modx-grid-lexicon .x-toolbar-ct tbody {
+    .x-toolbar-ct tbody {
       display: block; }
-      #modx-grid-lexicon .x-toolbar-ct tbody tr {
+      .x-toolbar-ct tbody tr {
         display: block; }
-        #modx-grid-lexicon .x-toolbar-ct tbody tr td {
+        .x-toolbar-ct tbody tr td {
           display: block;
           width: 100%; }
-          #modx-grid-lexicon .x-toolbar-ct tbody tr td table {
+          #modx-resource-tree .x-toolbar-ct tbody tr td, #modx-tree-element .x-toolbar-ct tbody tr td {
+            display: table-cell; }
+          .x-toolbar-ct tbody tr td table {
             width: 100%; }
-            #modx-grid-lexicon .x-toolbar-ct tbody tr td table .x-form-field-wrap {
+            .x-toolbar-ct tbody tr td table .x-form-field-wrap {
               width: 100% !important;
-              margin-bottom: 1em; }
-            #modx-grid-lexicon .x-toolbar-ct tbody tr td table .x-btn, #modx-grid-lexicon .x-toolbar-ct tbody tr td table .x-form-text {
+              margin-left: 0 !important;
+              margin-right: 0 !important; }
+            .x-toolbar-ct tbody tr td table .x-btn,
+            .x-toolbar-ct tbody tr td table .x-form-text {
               width: 100% !important;
-              margin-bottom: 1em;
-              box-sizing: border-box; } }
-
-@media screen and (max-width: 640px) {
-  #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar {
-    width: auto !important; }
-    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table , #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table {
-      display: block; }
-      #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody {
-        display: block; }
-        #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr {
-          display: block;
-          max-width: 1200px;
-          margin-left: auto;
-          margin-right: auto;
-          display: -webkit-box;
-          display: -moz-box;
-          display: box;
-          display: -moz-flex;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-lines: multiple;
-          -moz-box-lines: multiple;
-          box-lines: multiple;
-          -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr::after, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr::after {
-            clear: both;
-            content: "";
-            display: table; }
-          #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr td, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr td {
-            display: inline-block;
-            float: left;
-            margin-bottom: 1em;
-            -webkit-flex-grow: 1;
-            -moz-flex-grow: 1;
-            flex-grow: 1;
-            -ms-flex-positive: 1; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr td:first-of-type, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr td:first-of-type {
-              flex-basis: 100%;
-              -ms-flex-preferred-size: 100%; }
-            #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr td .x-btn, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar table  tbody tr td .x-btn {
-              margin-left: 3px;
-              margin-right: 3px; }
-    #modx-panel-contexts .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search, #modx-panel-namespaces .main-wrapper > .x-panel-bwrap > .x-panel-tbar #modx-ctx-search {
-      width: 100% !important;
-      box-sizing: border-box;
-      margin-left: 0; } }
-
-@media screen and (max-width: 640px) {
-  #modx-panel-namespaces .main-wrapper .x-toolbar-left {
-    margin-bottom: 0 !important; } }
-
-@media screen and (max-width: 640px) {
-  #modx-namespace-search {
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              box-sizing: border-box; }
+  .x-column {
     width: 100% !important;
-    margin-left: 0;
-    box-sizing: border-box; } }
-
-@media screen and (max-width: 640px) {
-  #modx-filter-clear {
-    width: 100% !important;
-    box-sizing: border-box; } }
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none; } }
 
 @media screen and (max-width: 640px) {
   #modx-tree-panel-usergroup .main-wrapper {
-    position: relative; } }
-
-@media screen and (max-width: 640px) {
-  #modx-property-set-form .left-col, #modx-property-set-form .x-col {
-    float: none; }
-  #modx-property-set-form #right-column, #modx-property-set-form #modx-grid-element-properties {
-    width: 100% !important; } }
+    width: 100% !important;
+    max-width: 100%;
+    position: relative;
+    display: inline-block;
+    float: left; } }
 
 @media screen and (max-width: 640px) {
   .x-window {
