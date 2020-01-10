@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Önnek nem engedélyezett a belépés ebben az i
 $_lang['login_blocked_too_many_attempts'] = 'Az Ön felhasználói fiókját letiltottuk a túl sok sikertelen bejelentkezési kísérlet miatt.';
 $_lang['login_button'] = 'Belépés';
 $_lang['login_cannot_locate_account'] = 'A felhasználónév vagy a jelszó nem megfelelő. Ellenőrizze a felhasználónevet, írja be újra a jelszót, majd próbálja újra.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a> által. MODX Revolution&trade; a GPLv2 vagy újabb által engedélyezve.';
 $_lang['login_email_label'] = 'A fiókhoz tartozó e-mail cím:';
 $_lang['login_err_unknown'] = 'Ismeretlen hiba történt a bejelentkezés során.';
 $_lang['login_forget_your_login'] = 'Elfelejtette a jelszavát?';
