@@ -21,16 +21,9 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Detta betyder att din felsida
 $_lang['configcheck_errorpage_unpublished'] = 'Felsidan för din webbplats är inte publicerad eller existerar inte.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Detta betyder att din felsida inte är tillgänglig för allmänheten. Publicera sidan eller kontrollera i systeminställningarna att den refererade sidan är ett existerande dokument i webbplatsens dokumentträd.';
 $_lang['configcheck_htaccess'] = 'Core-mappen är tillgänglig från webben';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
-<strong>This is not recommended and a security risk.</strong>
-If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
-This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
-for further information about securing your site.</p>
-If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
-should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
-there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
+$_lang['configcheck_htaccess_msg'] = 'MODX upptäckte att din core-mapp är (delvis) tillgänglig för allmänheten.<strong>Det här är en säkerhetsrisk och rekommenderas inte.</strong> Om din webbapplikation körs på en Apache-server bör du åtminstone aktivera en .htaccess-fil i core-mappen <em>[[+fileLocation]]</em>. Det görs enkelt genom att ändra namnet på exempelfilen ht.access till .htaccess.
+<p>Det finns andra metoder och webbservrar som du kan använda. Läs <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a> För mer information om hur du säkrar upp din webbplats.</p>
+Om du har ställt in allt rätt ska du, när du surfar till <a href="[[+checkUrl]]" target="_blank">ändringsloggen</a>, få upp 403 (åtkomst nekad) eller 404 (kunde inte hittas). Om du ser ändringsloggen i webbläsaren så är något fortfarande fel och behöver rättas till av dig eller en expert.';
 $_lang['configcheck_images'] = 'Bildkatalogen är inte skrivbar';
 $_lang['configcheck_images_msg'] = 'Bildkatalogen är inte skrivbar eller finns inte. Detta betyder att bildhanteringsfunktionerna i editorn inte kommer att fungera!';
 $_lang['configcheck_installer'] = 'Installationsprogrammet är fortfarande kvar';
