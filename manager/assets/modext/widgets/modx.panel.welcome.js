@@ -87,19 +87,17 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                     success: {
                         fn: function (response) {
                             if (response.success) {
-                                container.innerHTML = response.object.html;
+                                container.update(MODx.util.safeHtml(response.object.html, '<h1><h2><h3><h4><span><div><ul><li><p><ol><dl><dd><dt><img><a><br><i><em><b><strong>'));
                             }
                             else if (response.message.length > 0) {
-                                container.innerHTML = '<p class="error">' + response.message + '</p>';
+                                container.update('<p class="error">' + MODx.util.safeHtml(response.message) + '</p>');
                             }
                         }, scope: this
-                    },
-                    failure: {
-                        fn: function (response) {
-                            var message = response.message.length > 0
-                                ? response.message
-                                : _('error_loading_feed');
-                            container.innerHTML = '<p class="error">' + message + '</p>';
+                    }
+                    ,failure: {
+                        fn: function(response) {
+                            var message = response.message.length > 0 ? response.message : _('error_loading_feed');
+                            container.update('<p class="error">' + MODx.util.safeHtml(message) + '</p>');
                         }, scope: this
                     }
                 }

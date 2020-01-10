@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Apply `MODx.util.safeHtml` to feed dashboards [#14946]
 - Fixed transparency in .png for TV [#14906]
 - Add missing unsigned attribute to integer foreign key fields in mysql schema [#14902]
 - Remove legacy grids: workspace/lexicon/lexicon.topic.grid.js, workspace/lexicon/language.grid.js, widgets/security/modx.grid.role.user.js, widgets/resource/modx.grid.resource.security.js [#14875]
