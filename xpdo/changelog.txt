@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Fix invalid datetime value being used when formatting with regex
 - Fix xPDOFileCache->delete() when a directory with same cache key exists
 - Fix PHP 7.4 deprecation warnings for array and string offset access with curly braces
 

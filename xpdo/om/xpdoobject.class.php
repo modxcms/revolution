@@ -1017,7 +1017,7 @@ class xPDOObject {
                             if ($ts !== false && !empty($value)) {
                                 if (is_string($format) && !empty ($format)) {
                                     if (strpos($format, 're:') === 0) {
-                                        $value= date('Y-m-d H:M:S', $ts);
+                                        $value= date('Y-m-d H:i:S', $ts);
                                         if (!empty ($formatTemplate) && is_string($formatTemplate)) {
                                             $value= preg_replace(substr($format, 3), $formatTemplate, $value);
                                         }
