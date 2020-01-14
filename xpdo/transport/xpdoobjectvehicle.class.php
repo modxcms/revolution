@@ -470,6 +470,11 @@ class xPDOObjectVehicle extends xPDOVehicle {
                                 $relatedObjects[$rAlias] = array ();
                             $guid = md5(uniqid(rand(), true));
                             $relatedObjects[$rAlias][$guid] = array ();
+                            if (isset($payloadElement['related_object_attributes'][$rAlias]) && is_array($payloadElement['related_object_attributes'][$rAlias])) {
+                                $relatedObjects[$rAlias][$guid] = $payloadElement['related_object_attributes'][$rAlias];
+                            } elseif (isset ($payloadElement['related_object_attributes'][$rObj->_class]) && is_array($payloadElement['related_object_attributes'][$rObj->_class])) {
+                                $relatedObjects[$rAlias][$guid] = $payloadElement['related_object_attributes'][$rObj->_class];
+                            }
                             $this->_putRelated($transport, $rAlias, $rObj, $relatedObjects[$rAlias][$guid]);
                         }
                     }
@@ -478,6 +483,11 @@ class xPDOObjectVehicle extends xPDOVehicle {
                             $relatedObjects[$rAlias] = array ();
                         $guid = md5(uniqid(rand(), true));
                         $relatedObjects[$rAlias][$guid] = array ();
+                        if (isset($payloadElement['related_object_attributes'][$rAlias]) && is_array($payloadElement['related_object_attributes'][$rAlias])) {
+                            $relatedObjects[$rAlias][$guid] = $payloadElement['related_object_attributes'][$rAlias];
+                        } elseif (isset ($payloadElement['related_object_attributes'][$rObj->_class]) && is_array($payloadElement['related_object_attributes'][$rObj->_class])) {
+                            $relatedObjects[$rAlias][$guid] = $payloadElement['related_object_attributes'][$rObj->_class];
+                        }
                         $this->_putRelated($transport, $rAlias, $related, $relatedObjects[$rAlias][$guid]);
                     }
                 }

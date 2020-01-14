@@ -1,5 +1,6 @@
 This file shows the changes in this release of xPDO.
 
+- Load related object attributes correctly into nested relations
 - Add option to restrict extraction of files by extension to xPDOZip
 - Fix invalid datetime value being used when formatting with regex
 - Fix xPDOFileCache->delete() when a directory with same cache key exists
