@@ -485,8 +485,8 @@ class xPDOObjectVehicle extends xPDOVehicle {
                         $relatedObjects[$rAlias][$guid] = array ();
                         if (isset($payloadElement['related_object_attributes'][$rAlias]) && is_array($payloadElement['related_object_attributes'][$rAlias])) {
                             $relatedObjects[$rAlias][$guid] = $payloadElement['related_object_attributes'][$rAlias];
-                        } elseif (isset ($payloadElement['related_object_attributes'][$rObj->_class]) && is_array($payloadElement['related_object_attributes'][$rObj->_class])) {
-                            $relatedObjects[$rAlias][$guid] = $payloadElement['related_object_attributes'][$rObj->_class];
+                        } elseif (isset ($payloadElement['related_object_attributes'][$related->_class]) && is_array($payloadElement['related_object_attributes'][$related->_class])) {
+                            $relatedObjects[$rAlias][$guid] = $payloadElement['related_object_attributes'][$related->_class];
                         }
                         $this->_putRelated($transport, $rAlias, $related, $relatedObjects[$rAlias][$guid]);
                     }
