@@ -272,8 +272,9 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
                 $scriptProperties['publishedon'] = $scriptProperties['published'] ? time() : 0;
             } else {
                 $time = strtotime($scriptProperties['publishedon']);
-                $format = date('Y-m-d',$time);
+                $format = date($modx->getOption('manager_date_format'),$time);
                 $scriptProperties['publishedon'] = $format;
+                
             }
             $scriptProperties['publishedby'] = $scriptProperties['published'] ? !empty($scriptProperties['publishedby']) ? $scriptProperties['publishedby'] : $this->modx->user->get('id') : 0;
         }
