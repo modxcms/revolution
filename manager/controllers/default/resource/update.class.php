@@ -180,17 +180,8 @@ class ResourceUpdateManagerController extends ResourceManagerController {
      * @return string
      */
     public function getPreviewUrl() {
-        if (!$this->resource->get('deleted')) {
-            $this->modx->setOption('cache_alias_map', false);
-            $sessionEnabled = '';
-            $ctxSetting = $this->modx->getObject('modContextSetting', array('context_key' => $this->resource->get('context_key'), 'key' => 'session_enabled'));
+        $this->previewUrl = $this->resource->getPreviewUrl();
 
-            if ($ctxSetting) {
-                $sessionEnabled = $ctxSetting->get('value') == 0 ? array('preview' => 'true') : '';
-            }
-
-            $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'), $this->resource->get('context_key'), $sessionEnabled, 'full', array('xhtml_urls' => false));
-        }
         return $this->previewUrl;
     }
 
