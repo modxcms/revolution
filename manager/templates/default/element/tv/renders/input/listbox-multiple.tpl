@@ -44,7 +44,8 @@ Ext.onReady(function() {
         {if $params.listEmptyText|default}
             ,listEmptyText: '{$params.listEmptyText|default}'
         {/if}
-        ,forceSelection: true
+        ,allowAddNewData: {if $params.forceSelection|default && $params.forceSelection|default != 'false'}false{else}true{/if}
+        ,addNewDataOnBlur: true
         ,stackItems: {if $params.stackItems|default && $params.stackItems|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
 
