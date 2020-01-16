@@ -54,7 +54,10 @@ Ext.onReady(function() {
             'select': {fn:MODx.fireResourceFormChange, scope:this}
             ,'beforeadditem': {fn:MODx.fireResourceFormChange, scope:this}
             ,'newitem': {fn:function(bs,v,f) {
-                bs.addNewItem({"id": v,"text": v});
+                var item = {};
+                item[bs.valueField] = v;
+                item[bs.displayField] = v;
+                bs.addNewItem(item);
                 MODx.fireResourceFormChange();
                 return true;
             },scope:this}
