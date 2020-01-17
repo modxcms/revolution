@@ -25,7 +25,7 @@ $_lang['configcheck_htaccess_msg'] = 'MODX érzékelte, hogy az alapkönyvtár (
 <strong>Ezt nem javasoljuk, biztonsági kockázatot jelent.</strong>
 Ha a MODX telepítése Apache webkiszolgálón fut, legalább a .htaccess állományt állítsa be az alapkönyvtárban <em>[[+fileLocation]]</em>.
 Ehhez csak át kell neveznie a ht.access mintaállományt .htaccess-re.
-<p>Használhat más megoldásokat vagy webkiszolgálókat, kérjük, olvassa el az <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Útmutató a MODX megerősítésére</a>
+<p>Használhat más megoldásokat vagy webkiszolgálókat, kérjük, olvassa el az <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Útmutató a MODX megerősítésére</a>
 leírást az oldalának biztonságossá tételéhez.</p>
 Helyes beállításoknál pl. a <a href="[[+checkUrl]]" target="_blank">Változási napló</a>
 oldal 403 (hozzáférés megtagadva) vagy még inkább 404 (nem található) hibát kellene adjon. Ha látja a változási naplót a böngészőben, akkor még szükség van a beállítások módosítására, vagy szakértői segítségre.';

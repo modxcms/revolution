@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Şu anda giriş yapmanıza izin verilmiyor. Lüt
 $_lang['login_blocked_too_many_attempts'] = 'Başarısız birçok giriş denemesi yüzünden engellendiniz.';
 $_lang['login_button'] = 'Oturum aç';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; GÖLcük2 veya sonrası lisanslıdır.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Hesap E-posta Adresi:';
 $_lang['login_err_unknown'] = 'Giriş yapmaya çalışırken bilinmeyen bir hata oluştu.';
 $_lang['login_forget_your_login'] = 'Forgot your password?';

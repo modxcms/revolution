@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filtrera efter regel...';
 $_lang['filter_by_search'] = 'Sök...';
 $_lang['for_parent'] = 'För förälder';
 $_lang['for_parent_desc'] = 'Markera här om du vill att denna regel ska gälla för föräldern. Använd bara med resurser eller objekt som har ett "föräldrafält". Användbart för resursers "skapasida".';
-$_lang['form_customization_msg'] = 'Här är en lista på de regler som används för närvarande. Du kan hitta mer information om regler och formuläranpassningar <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">här</a>. Notera att felaktiga regler kan ställa till med problem för din MODX-installation. Inaktiverade regler visas som blekt grå.';
+$_lang['form_customization_msg'] = 'Här är en lista på de regler som används för närvarande. Du kan hitta mer information om regler och formuläranpassningar <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">här</a>. Notera att felaktiga regler kan ställa till med problem för din MODX-installation. Inaktiverade regler visas som blekt grå.';
 $_lang['form_rules'] = 'Formulärregler';
 $_lang['import'] = 'Importera';
 $_lang['import_from_xml'] = 'Importera ny uppsättning från XML';

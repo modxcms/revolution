@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'กรองตามกฎ...';
 $_lang['filter_by_search'] = 'ค้นหา...';
 $_lang['for_parent'] = 'สำหรับแพเรนต์';
 $_lang['for_parent_desc'] = 'ทำเครื่องหมายตรงนี้เมื่อคุณต้องการให้กฎนี้ถูกนำไปใช้กับแพเรนต์ ใช้กับแค่แหล่งข้อมูลหรืออ็อบเจกต์ที่อยู่ในแพเรนต์ฟิลด์ มีประโยชน์สำหรับ "การสร้าง" หน้าของแหล่งข้อมูล';
-$_lang['form_customization_msg'] = 'นี่คือรายการของกฎที่ประยุกต์ใช้ในตอนนี้ ข้อมูลเพิ่มเติมของกฎและรูปแบบการปรับแต่ง ดูได้ <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">ที่นี่</a> กรุณาระลึกว่ากฎที่ไม่ถูกต้องอาจจะเป็นต้นเหตุของปัญหาการติดตั้ง MODX Revolution ของคุณ กฎที่ไม่ได้ใช้งานจะเป็นสีเทาจางๆ';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'รูปแบบกฎ';
 $_lang['import'] = 'นำเข้า';
 $_lang['import_from_xml'] = 'นำเข้าชุดใหม่จาก XML';

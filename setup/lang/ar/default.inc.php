@@ -153,7 +153,7 @@ $_lang['modx_class_err_nf'] = 'لا يمكن تضمين ملف صف مودكس.'
 $_lang['modx_configuration_file'] = 'ملف تهيئة مودكس';
 $_lang['modx_err_instantiate'] = 'لا يمكن إنشاء مثيل لصف مودكس.';
 $_lang['modx_err_instantiate_mgr'] = 'تعذر تهيئة سياق مدير مودكس.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">مودكس</a> مشروع بيئة إدارة المحتوى (CMF). جميع الحقوق محفوظة. مودكس مرخص تحت GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'مودكس هو برمجيات حرة.  ونحن نشجعك على أن تكون خلاق وتثوم بالاستفادة من مودكس بأية طريقة تراها مناسبة. فقط تأكد من أنك إذا قمت بإجراء تغييرات و قررت إعادة توزيع نسخة مودكس المعدلة الخاصة بك، أنه يمكنك الاحتفاظ بمصدر التعليمات البرمجية مجاناً!';
 $_lang['modx_install'] = 'تثبيت مودكس';
 $_lang['modx_install_complete'] = 'تم الانتهاء من تثبيت مودكس';

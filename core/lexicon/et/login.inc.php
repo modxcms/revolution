@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Praegu pole teil sisse logimine lubatud. Palun p
 $_lang['login_blocked_too_many_attempts'] = 'Liiga palju läbikukkunud sisse logimise katseid, teid on blokeeritud.';
 $_lang['login_button'] = 'Logi sisse';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] <a href="http://modxcms.com/" target="_blank">MODX Team</a>. <strong>MODX</strong>&trade; on GPLv2 või hilisema litsentsi all';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Konto Email:';
 $_lang['login_err_unknown'] = 'Tekkis teadmata viga sisse logimisel..';
 $_lang['login_forget_your_login'] = 'Forgot your password?';

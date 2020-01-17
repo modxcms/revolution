@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filtrer par règle…';
 $_lang['filter_by_search'] = 'Rechercher…';
 $_lang['for_parent'] = 'Pour le parent';
 $_lang['for_parent_desc'] = 'Cochez ceci lorsque vous souhaitez que la règle s\'applique au parent. À n\'utiliser qu\'avec des ressources ou objets ayant un champ "parent". Utile pour la page de "création" de ressources.';
-$_lang['form_customization_msg'] = 'Voici la liste des règles actuellement appliquées. Des informations supplémentaires sur les règles de personnalisation des formulaires peuvent être consultées <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">sur la documentation de MODX (Ang.)</a> . Veuillez noter que des règles incorrectes peuvent provoquer des problèmes avec votre installation de MODX Revolution. Les règles inactives sont grisées.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Règles de formulaire';
 $_lang['import'] = 'Importer';
 $_lang['import_from_xml'] = 'Importer un nouveau jeu depuis XML';

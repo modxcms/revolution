@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filtreeri reegli järgi...';
 $_lang['filter_by_search'] = 'Search...';
 $_lang['for_parent'] = 'Parentile';
 $_lang['for_parent_desc'] = 'Valige see, kui soovite, et see reegel kehtiks parentile. Kasuta ainult Ressurssidega või objektidega, millel on `parent` väli. Kasulik Ressurssi "loo" lehel.';
-$_lang['form_customization_msg'] = 'Siin on nimekiri pragu kasutuses olevatest reeglitest. Rohkem informatsiooni Reeglite ja Vormide kohandamise kohta leiab <a href="http://svn.modxcms.com/docs/display/revolution/Form+Customization" target="_blank">siit</a>. Palun panetähele, et ebakorrketsed Reeglid võivad põhjustada probleeme sinu MODX Revolution installatsiooniga. Mitteaktiivsed Reeglid on hallid.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Vormi reeglid';
 $_lang['import'] = 'Import';
 $_lang['import_from_xml'] = 'Impordi uus kogum XML-ist';

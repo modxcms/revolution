@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filter by Rule...';
 $_lang['filter_by_search'] = 'खोज़े ...';
 $_lang['for_parent'] = 'For Parent';
 $_lang['for_parent_desc'] = 'जब आप इस नियम को पैरेंट के लिए लागू करने के लिए चाहते हैं इस की जाँच करें। केवल Resources  या एक \'parent\' फ़ील्ड वस्तुओं के साथ उपयोग करे। Resources page "बनाने" के लिए उपयोगी है।';
-$_lang['form_customization_msg'] = 'यहाँ वर्तमान में लागू नियमों की एक सूची है। नियमों और प्रपत्र अनुकूलन पर अधिक जानकारी पाया जा सकता है <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank"> यहाँ</a>। कृपया ध्यान दें कि अनुचित नियम आपके MODX क्रांति स्थापना के साथ समस्याओं के कारण हो सकता है। Inactive Rules are faded gray.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Form नियम';
 $_lang['import'] = 'आयात';
 $_lang['import_from_xml'] = 'नया सेट XML से Import करें';

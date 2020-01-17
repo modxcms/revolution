@@ -127,7 +127,7 @@ $_lang['modx_class_err_nf'] = 'MODX class फ़ाइल शामिल नह
 $_lang['modx_configuration_file'] = 'MODX configuration file';
 $_lang['modx_err_instantiate'] = 'ModX class इन्स्तांत नहीं किया जा सका।';
 $_lang['modx_err_instantiate_mgr'] = 'ModX manager context को प्रारंभ नहीं किया जा सका।';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> MODX</a> Content Management Framework (CMF&copy;&copy;) परियोजना। सभी अधिकार सुरक्षित। MODX GNU GPL के अंतर्गत लाइसेंस प्राप्त है।';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'MODX मुफ्त सॉफ्टवेयर है।  हम आप रचनात्मक किया जा करने के लिए प्रोत्साहित करते हैं और किसी भी तरह से आप फिट देख MODX का उपयोग कर। यदि आप परिवर्तन करें और अपने संशोधित MODX, कि आप स्रोत कोड मुक्त रखें फिर से विभाजित करने का निर्णय सिर्फ सुनिश्चित करें कि!';
 $_lang['modx_install'] = 'MODX स्थापना';
 $_lang['modx_install_complete'] = 'MODX स्थापना पूर्ण हो गई';

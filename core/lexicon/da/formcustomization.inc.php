@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filtrér efter regel...';
 $_lang['filter_by_search'] = 'Søg...';
 $_lang['for_parent'] = 'For overordnet';
 $_lang['for_parent_desc'] = 'Afkryds denne når du ønsker, at denne regel skal gælde for det overordnede element. Brug kun med ressourcer eller objekter med et \'parent\'-felt. Nyttigt for siden "Opret" for ressourcer.';
-$_lang['form_customization_msg'] = 'Her er en liste over aktuelt anvendte regler. Mere information om regler og formulartilpasning kan findes <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">her</a>. Bemærk venligst at forkerte regler kan forårsage problemer med din MODX Revolution installation. Inaktive regler er falmet grå.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Formularregler';
 $_lang['import'] = 'Importér';
 $_lang['import_from_xml'] = 'Importér nyt sæt fra XML';

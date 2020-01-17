@@ -21,7 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Isto significa que sua págin
 $_lang['configcheck_errorpage_unpublished'] = 'A página de erro do seu website não está publicada ou não existe.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Isto siginifica que a sua página de Erro não está acessível ao público geral. Publique a sua página ou tenha certeza que está associado a um documento existente em sua árvore do site no menu Sistema &gt; Opções de Sistema.';
 $_lang['configcheck_htaccess'] = 'Pasta \'core\' é acessível pela web';
-$_lang['configcheck_htaccess_msg'] = 'MODX detectou que sua pasta do núcleo (core) é (parcialmente) acessível ao público. <strong>Isso não é recomendado e é um risco de segurança.</strong> Se sua instalação de MODX está sendo executado em um servidor Web Apache você deve configurar pelo menos o arquivo .htaccess dentro o pasta núcleo <em>[[+fileLocation]]</em>. Isto pode ser feito facilmente, renomeando o arquivo de exemplo ht.access para .htaccess.<p>Existem outros métodos e servidores Web, caso utilize, por favor leia o <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Guia MODX de solidez</a> para mais informações sobre como proteger seu site.</p>Se você configurar tudo corretamente, por exemplo, navegando para o <a href="[[+checkUrl]]" target="_blank">Changelog</a> deve dar-lhe um 403 (permissão negada) ou melhor um 404 (não encontrado). Se você pode ver o changelog lá no navegador, algo está errado e você precisa reconfigurar ou chamar um especialista para resolver isso.';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Diretório de imagens não tem permissão de escrita';
 $_lang['configcheck_images_msg'] = 'O diretório de imagens não tem permissões para escrita, ou não existe. Isto siginifica que as funções do Gerenciador de Imagens não funcionaram no editor!';
 $_lang['configcheck_installer'] = 'Instalador ainda presente.';

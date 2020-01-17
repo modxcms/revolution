@@ -21,7 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Cela signifie que votre page 
 $_lang['configcheck_errorpage_unpublished'] = 'La page d\'erreur de votre site n\'est pas publiée ou n\'existe pas.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Cela signifie que votre page d\'erreur n\'est pas accessible pour les visiteurs. Publiez la page ou assurez-vous qu\'elle soit assignée à un document existant dans l\'arborescence de votre site dans le menu Système &gt; Paramètres du système.';
 $_lang['configcheck_htaccess'] = 'Le dossier "Core" est accessible depuis le web';
-$_lang['configcheck_htaccess_msg'] = '<p>MODX a détecté que votre dossier "Core" est (partiellement) accessible au public. <strong>Ceci n\'est pas recommandé et présente un risque de sécurité.</strong> Si votre installation MODX est exécutée sur un serveur Web Apache vous devez définir au moins un fichier .htaccess dans le dossier de base <em>[[+fileLocation]]</em>. Ceci peut être facilement fait en renommant le fichier existant ht.access fourni pour exemple en .htaccess</p><p>Il existe d\'autres méthodes pour Apache et les autres serveurs Web, veuillez consulter le <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a> pour plus d\'informations sur la sécurisation de votre site.</p><p>Si vous configurer tout correctement, l\'accès au <a href="[[+checkUrl]]" target="_blank">Changelog</a> doit vous retourner une 403 ("permission denied") ou mieux une erreur 404 ("not found"). Si vous pouvez voir le "Changelog" dans votre navigateur, quelque chose ne fonctionne toujours pas et vous devez reconfigurer ou contacter un expert pour résoudre ce problème.</p>';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Répertoire d\'images non accessible en écriture';
 $_lang['configcheck_images_msg'] = 'Le répertoire d\'images n\'est pas accessible en écriture ou n\'existe pas. Cela signifie que les fonctions du gestionnaire d\'images dans l\'éditeur ne fonctionneront pas!';
 $_lang['configcheck_installer'] = 'Répertoire d\'installation toujours présent';

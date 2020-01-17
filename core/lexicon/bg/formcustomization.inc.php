@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Филтриране по Правило...';
 $_lang['filter_by_search'] = 'Търсене...';
 $_lang['for_parent'] = 'За родителски елемент';
 $_lang['for_parent_desc'] = 'Отметни това, когато искаш това правило да се приложи за родителския елемент. Използвай само с Ресурси или обекти с `parent` поле. Полезно за "създаване" на страница от Ресурси.';
-$_lang['form_customization_msg'] = 'Списък с прилаганите в момента правила. Повече инфорамция за Правила и Персонализиране на Форми може да бъде намерено <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">тук</a>. Моля, имайте предвид, че неправилни Правила могат да причинят проблеми с инсталацията на MODX Revolution. Неактивните Правила са в бледо сив цвят.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Форма Правила';
 $_lang['import'] = 'Импорт';
 $_lang['import_from_xml'] = 'Импортиране на нов набор от XML';

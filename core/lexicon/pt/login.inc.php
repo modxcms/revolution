@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Você não tem permissão para fazer login no mo
 $_lang['login_blocked_too_many_attempts'] = 'Você foi bloqueado devido a muitas tentativas de login.';
 $_lang['login_button'] = 'Entrar';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] pela <a href="http://modxcms.com/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; está licenciado sob a GPLv2 ou posterior.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Email da Conta:';
 $_lang['login_err_unknown'] = 'Ocorreu um erro desconhecido ao tentar para entrar.';
 $_lang['login_forget_your_login'] = 'Forgot your password?';

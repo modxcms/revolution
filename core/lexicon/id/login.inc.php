@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Anda tidak diperbolehkan untuk login pada saat i
 $_lang['login_blocked_too_many_attempts'] = 'Anda telah diblokir karena terlalu banyak login gagal usaha.';
 $_lang['login_button'] = 'Login';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; dilisensikan di bawah GPLv2 atau nanti.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Akun email:';
 $_lang['login_err_unknown'] = 'Kesalahan yang tidak dikenal terjadi ketika mencoba untuk log in.';
 $_lang['login_forget_your_login'] = 'Forgot your password?';
