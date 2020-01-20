@@ -28,6 +28,7 @@ class modManagerResponse extends modResponse
     protected $route = 'index';
     protected $namespace = 'core';
     protected $namespaces = [];
+    protected $namespacePath = '';
 
     private $_requiresPermission;
 
@@ -53,7 +54,10 @@ class modManagerResponse extends modResponse
         // Grab the namespace
         $this->_loadNamespaces();
         $this->namespace = (string)$this->modx->request->namespace;
-        if (!array_key_exists($this->namespace, $this->namespaces)) {
+        if (array_key_exists($this->namespace, $this->namespaces)) {
+            $this->namespacePath = $this->namespaces[$this->namespace]['path'];
+        }
+        else {
             $this->namespace = 'core';
         }
 
@@ -94,6 +98,7 @@ class modManagerResponse extends modResponse
             /** @var modManagerController $controller */
             $controller = $className::getInstance($this->modx, $className, [
                 'namespace' => $this->namespace,
+                'namespace_path' => $this->namespacePath,
                 'action' => $this->route,
             ]);
             $controller->setProperties(array_merge($_GET,$_POST));
@@ -269,7 +274,7 @@ class modManagerResponse extends modResponse
         }
 
         // If the file exists, require it, while discarding any content from it
-        if (file_exists($fullPath) && is_readable($fullPath)) {
+        if (is_readable($fullPath)) {
             ob_start();
             require_once $fullPath;
             ob_end_clean();
