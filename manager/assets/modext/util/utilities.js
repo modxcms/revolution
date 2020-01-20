@@ -528,6 +528,14 @@ MODx.util.getHeaderBreadCrumbs = function(header, trail) {
             this.renderTrail();
             return true;
         },
+        updateHeader: function(text) {
+            if (!this.rendered) {
+                Ext.getCmp(header.id).html = text;
+                return;
+            }
+
+            Ext.getCmp(header.id).getEl().update(text);
+        },
         items: [header]
     };
 };

@@ -47,10 +47,7 @@ MODx.panel.DashboardWidget = function(config) {
                         'keyup': {scope:this,fn:function(f,e) {
                             var s = _(f.getValue());
                             if (s == undefined) { s = f.getValue(); }
-                            Ext.getCmp('modx-dashboard-widget-name-trans').setValue(s);
-                            if (!Ext.isEmpty(s)) {
-                                Ext.getCmp('modx-dashboard-widget-header').getEl().update(_('widget')+': '+s);
-                            }
+                                Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(s));
                         }}
                     }
                 },{
@@ -249,11 +246,7 @@ MODx.panel.DashboardWidget = function(config) {
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('widget_new')
-            ,id: 'modx-dashboard-widget-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -289,9 +282,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.defer(function() {
-            Ext.get('modx-dashboard-widget-header').update(_('widget')+': '+this.config.record.name_trans);
-        }, 250, this);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(this.config.record.name_trans);
 
         var d = this.config.record.dashboards;
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
@@ -328,6 +319,15 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
             if (g) { g.getStore().commitChanges(); }
         }
+    }
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-dashboard-widget-header', [{
+            text: _('dashboards'),
+            href: MODx.getPage('system/dashboards')
+        }, {
+            text: _('widget'),
+            href: null
+        }]);
     }
 });
 Ext.reg('modx-panel-dashboard-widget',MODx.panel.DashboardWidget);
