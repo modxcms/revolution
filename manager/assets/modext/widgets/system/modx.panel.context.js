@@ -16,11 +16,7 @@ MODx.panel.Context = function(config) {
         ,class_key: 'modContext'
         ,plugin: ''
         ,bodyStyle: ''
-        ,items: [{
-            html: _('context')+': '+config.context
-            ,id: 'modx-context-name'
-            ,xtype: 'modx-header'
-        },MODx.getPageStructure([{
+        ,items: [this.getPageHeader(config), MODx.getPageStructure([{
             title: _('general_information')
             ,autoHeight: true
             ,layout: 'form'
@@ -122,8 +118,7 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
             ,listeners: {
             	'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
-                    var el = Ext.getCmp('modx-context-name');
-                    if (el) { el.getEl().update(_('context')+': '+r.object.key); }
+                    Ext.getCmp('modx-header-breadcrumbs').updateHeader(r.object.key);
                     this.fireEvent('ready');
                     MODx.fireEvent('ready');
                     this.initialized = true;
@@ -145,6 +140,12 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
 
         var t = parent.Ext.getCmp('modx-resource-tree');
         if (t) { t.refresh(); }
+    }
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-context-name', [{
+            text: _('contexts'),
+            href: MODx.getPage('context')
+        }]);
     }
 });
 Ext.reg('modx-panel-context',MODx.panel.Context);

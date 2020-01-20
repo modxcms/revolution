@@ -64,7 +64,8 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         var s = g.getStore();
                         if (s) { s.loadData(d); }
                     }
-                    Ext.get('modx-user-header').update(r.object.username);
+
+                    Ext.getCmp('modx-header-breadcrumbs').updateHeader(r.object.username);
                     this.fireEvent('ready',r.object);
                     MODx.fireEvent('ready');
                 },scope:this}
@@ -494,7 +495,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,autoCreate: {tag: "input", type: "text", size: "20", autocomplete: "off", msgTarget: "under"}
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
-                    Ext.getCmp('modx-user-header').getEl().update(Ext.util.Format.htmlEncode(f.getValue()));
+                    Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
                 }}
             }
         },{

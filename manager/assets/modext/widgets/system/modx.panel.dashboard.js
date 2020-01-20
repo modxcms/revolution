@@ -14,11 +14,7 @@ MODx.panel.Dashboard = function(config) {
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('dashboard')
-            ,id: 'modx-dashboard-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -69,7 +65,7 @@ MODx.panel.Dashboard = function(config) {
                             ,anchor: '100%'
                             ,listeners: {
                                 'keyup': {scope:this,fn:function(f,e) {
-                                    Ext.getCmp('modx-dashboard-header').getEl().update(_('dashboard')+': '+f.getValue());
+                                    Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
                                 }}
                             }
                         },{
@@ -155,9 +151,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.defer(function() {
-            Ext.getCmp('modx-dashboard-header').update(_('dashboard')+': '+this.config.record.name);
-        }, 250, this);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(this.config.record.name);
 
         /*
         var d = this.config.record.usergroups;
@@ -193,6 +187,12 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             if (wg) { wg.getStore().commitChanges(); }
 
         }
+    }
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-dashboard-header', [{
+            text: _('dashboards'),
+            href: MODx.getPage('system/dashboards')
+        }]);
     }
 });
 Ext.reg('modx-panel-dashboard',MODx.panel.Dashboard);
