@@ -68,7 +68,7 @@ abstract class modManagerController
      * @param modX  $modx   A reference to the modX object.
      * @param array $config A configuration array of options related to this controller's action object.
      */
-    function __construct(modX &$modx, $config = [])
+    public function __construct(modX $modx, $config = [])
     {
         $this->modx =& $modx;
         $this->config = !empty($config) && is_array($config) ? $config : [];
