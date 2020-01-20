@@ -205,7 +205,7 @@ class modManagerResponse extends modResponse
      * @return bool
      * @throws AccessDeniedException
      */
-    public function checkForMenuPermissions($action): bool
+    public function checkForMenuPermissions(string $action): bool
     {
         /** @var modMenu $menu */
         $menu = $this->modx->getObject(modMenu::class, [
