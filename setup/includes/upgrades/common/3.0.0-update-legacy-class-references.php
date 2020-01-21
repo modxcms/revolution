@@ -63,12 +63,12 @@ $this->processResults($class, $classKey, [$modx->manager, 'alterField'], [$class
 
 $modx->updateCollection($class, ['class_key' => modUser::class], ['class_key' => 'modUser']);
 
-$hashingClass = $this->install->lexicon('alter_column', ['column' => 'hashing_class', 'table' => $table]);
-$this->processResults($class, $hashingClass, [$modx->manager, 'alterField'], [$class, 'hashing_class']);
+$hashingClass = $this->install->lexicon('alter_column', ['column' => 'hash_class', 'table' => $table]);
+$this->processResults($class, $hashingClass, [$modx->manager, 'alterField'], [$class, 'hash_class']);
 
-$modx->updateCollection($class, ['hashing_class' => modNative::class], ['hashing_class' => 'hashing.modNative']);
-$modx->updateCollection($class, ['hashing_class' => modMD5::class], ['hashing_class' => 'hashing.modMD5']);
-$modx->updateCollection($class, ['hashing_class' => modPBKDF2::class], ['hashing_class' => 'hashing.modPBKDF2']);
+$modx->updateCollection($class, ['hash_class' => modNative::class], ['hash_class' => 'hashing.modNative']);
+$modx->updateCollection($class, ['hash_class' => modMD5::class], ['hash_class' => 'hashing.modMD5']);
+$modx->updateCollection($class, ['hash_class' => modPBKDF2::class], ['hash_class' => 'hashing.modPBKDF2']);
 
 /* modify default values and core class references in modMediaSource.class_key column */
 $class = modMediaSource::class;
