@@ -10,8 +10,6 @@
 
 namespace MODX\Revolution;
 
-
-use Exception;
 use MODX\Revolution\Controllers\Error;
 use MODX\Revolution\Controllers\Exceptions\AccessDeniedException;
 use MODX\Revolution\Controllers\Exceptions\NotFoundException;
@@ -32,6 +30,12 @@ class modManagerResponse extends modResponse
 
     private $_requiresPermission;
 
+    public function __construct(modX $modx)
+    {
+        parent::__construct($modx);
+        $this->_loadNamespaces();
+    }
+
     protected function _loadNamespaces()
     {
         $loaded = false;
@@ -51,8 +55,6 @@ class modManagerResponse extends modResponse
      */
     public function outputContent(array $options = [])
     {
-        // Grab the namespace
-        $this->_loadNamespaces();
         $this->namespace = (string)$this->modx->request->namespace;
         if (array_key_exists($this->namespace, $this->namespaces)) {
             $this->namespacePath = $this->namespaces[$this->namespace]['path'];
@@ -173,7 +175,7 @@ class modManagerResponse extends modResponse
         return $return;
     }
 
-    private static function isControllerClass(string $className): bool
+    public static function isControllerClass(string $className): bool
     {
         return class_exists($className) && is_subclass_of($className, modManagerController::class, true);
     }

@@ -48,7 +48,7 @@ class modResponse
     /**
      * @param modX $modx A reference to the modX instance
      */
-    function __construct(modX &$modx)
+    public function __construct(modX $modx)
     {
         $this->modx = &$modx;
     }

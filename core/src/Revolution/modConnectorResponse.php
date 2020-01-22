@@ -78,7 +78,7 @@ class modConnectorResponse extends modResponse
      *
      * {@inheritdoc}
      */
-    function __construct(modX & $modx)
+    public function __construct(modX $modx)
     {
         parent:: __construct($modx);
         $this->setDirectory();
