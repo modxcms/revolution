@@ -7,6 +7,7 @@ use MODX\Revolution\modSystemSetting;
 
 $settings = [
     'allow_tv_eval',
+    'cache_action_map',
     'compress_js_max_files',
     'editor_css_path',
     'editor_css_selectors',

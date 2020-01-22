@@ -145,15 +145,6 @@ $settings['blocked_minutes']->fromArray([
   'area' => 'authentication',
   'editedon' => null,
 ], '', true, true);
-$settings['cache_action_map']= $xpdo->newObject(modSystemSetting::class);
-$settings['cache_action_map']->fromArray([
-  'key' => 'cache_action_map',
-  'value' => true,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-], '', true, true);
 $settings['cache_alias_map']= $xpdo->newObject(modSystemSetting::class);
 $settings['cache_alias_map']->fromArray([
     'key' => 'cache_alias_map',

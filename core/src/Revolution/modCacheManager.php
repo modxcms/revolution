@@ -585,7 +585,6 @@ class modCacheManager extends xPDOCacheManager
                 'default' => [],
                 'resource' => ['contexts' => array_diff($contexts, ['mgr'])],
                 'menu' => [],
-                'action_map' => [],
             ];
         }
         $cleared = [];
