@@ -23,4 +23,10 @@ use MODX\Revolution\MODxTestCase;
  * @group Resource
  * @group modResource
  */
-class modResourceTest extends MODxTestCase {}
+class modResourceTest extends MODxTestCase {
+
+    public function testIncomplete()
+    {
+        $this->markTestIncomplete( 'This test has not been implemented yet.');
+    }
+}
