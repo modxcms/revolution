@@ -141,6 +141,7 @@ $cleanup = [
         'src/Revolution/mysql/modAccessAction.php',
         'src/Revolution/sqlsrv/modAction.php',
         'src/Revolution/sqlsrv/modAccessAction.php',
+        'src/Revolution/modManagerControllerDeprecated.php',
     ],
     'manager' => [
         'min/',
