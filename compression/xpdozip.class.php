@@ -235,7 +235,7 @@ class xPDOZip {
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $ext = strtolower($ext);
             if (!in_array($ext, $allowedExtensions)) {
-                $this->xpdo->log(XPDO::LOG_LEVEL_WARN, $filename .' can\'t be extracted, because the file type is not allowed.');
+                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, $filename .' can\'t be extracted, because the file type is not allowed.');
                 return false;
             }
         }
