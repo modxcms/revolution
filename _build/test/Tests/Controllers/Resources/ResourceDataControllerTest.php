@@ -2,6 +2,7 @@
 namespace MODX\Revolution\Tests\Controllers\Resources;
 
 
+use MODX\Revolution\modDocument;
 use MODX\Revolution\MODxControllerTestCase;
 
 class ResourceDataControllerTest extends MODxControllerTestCase
@@ -17,7 +18,7 @@ class ResourceDataControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => -1,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
         ]);
         $this->controller->process();
         $this->assertEmpty($this->controller->resource);
@@ -28,7 +29,7 @@ class ResourceDataControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
         ]);
         $this->controller->process();
         $this->assertNotEmpty($this->controller->resource);
@@ -39,7 +40,7 @@ class ResourceDataControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
         ]);
         $this->controller->render();
         $this->assertNotEmpty($this->controller->head['js']);

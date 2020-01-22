@@ -2,6 +2,7 @@
 namespace MODX\Revolution\Tests\Controllers\Resources\SymLink;
 
 
+use MODX\Revolution\modSymLink;
 use MODX\Revolution\Tests\Controllers\Resources\ResourceUpdateControllerTest;
 
 class SymLinkUpdateControllerTest extends ResourceUpdateControllerTest
@@ -17,7 +18,7 @@ class SymLinkUpdateControllerTest extends ResourceUpdateControllerTest
     {
         $this->controller->setProperties([
             'id' => -1,
-            'class_key' => 'modSymlink',
+            'class_key' => modSymlink::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertNotTrue($response);
@@ -28,7 +29,7 @@ class SymLinkUpdateControllerTest extends ResourceUpdateControllerTest
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modSymlink',
+            'class_key' => modSymlink::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertTrue($response);

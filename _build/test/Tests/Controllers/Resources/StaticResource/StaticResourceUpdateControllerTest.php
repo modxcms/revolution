@@ -2,6 +2,7 @@
 namespace MODX\Revolution\Tests\Controllers\Resources\StaticResource;
 
 
+use MODX\Revolution\modStaticResource;
 use MODX\Revolution\Tests\Controllers\Resources\ResourceUpdateControllerTest;
 
 class StaticResourceUpdateControllerTest extends ResourceUpdateControllerTest
@@ -17,7 +18,7 @@ class StaticResourceUpdateControllerTest extends ResourceUpdateControllerTest
     {
         $this->controller->setProperties([
             'id' => -1,
-            'class_key' => 'modStaticResource',
+            'class_key' => modStaticResource::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertNotTrue($response);
@@ -28,7 +29,7 @@ class StaticResourceUpdateControllerTest extends ResourceUpdateControllerTest
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modStaticResource',
+            'class_key' => modStaticResource::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertTrue($response);
