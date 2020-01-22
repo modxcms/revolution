@@ -57,6 +57,7 @@ abstract class MODxControllerTestCase extends MODxTestCase {
             ]);
             $this->controller->setProperties($_REQUEST);
         }
+        $this->modx->controller = $this->controller;
     }
 
     public function tearDown() {
