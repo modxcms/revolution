@@ -22,19 +22,40 @@
             <file>Tests/modXSetupTest.php</file>
         </testsuite>
         <testsuite name="Model">
-            <directory>Tests/Model</directory>
+            <file>Tests/Model/modXTest.php</file>
+            <file>Tests/Model/modParserTest.php</file>
+            <directory>Tests/Model/Dashboard</directory>
+            <directory>Tests/Model/Element</directory>
+            <directory>Tests/Model/Error</directory>
+            <directory>Tests/Model/FormCustomization</directory>
+            <directory>Tests/Model/Filters</directory>
+            <directory>Tests/Model/Lexicon</directory>
+            <directory>Tests/Model/Hashing</directory>
+            <directory>Tests/Model/Mail</directory>
+            <directory>Tests/Model/Registry</directory>
+            <directory>Tests/Model/Request</directory>
+            <directory>Tests/Model/Resource</directory>
+            <directory>Tests/Model/Security</directory>
+            <directory>Tests/Model/Sources</directory>
+            <directory>Tests/Model/Transport</directory>
+            <directory>Tests/Model/Validation</directory>
         </testsuite>
         <testsuite name="Controllers">
-            <directory>Tests/Controllers</directory>
+            <directory>Tests/Controllers/</directory>
+            <directory>Tests/Controllers/Context/</directory>
         </testsuite>
         <testsuite name="Processors">
-            <directory>Tests/Processors</directory>
+            <directory>Tests/Processors/Browser</directory>
+            <directory>Tests/Processors/Context</directory>
+            <directory>Tests/Processors/Element</directory>
+            <directory>Tests/Processors/Resource</directory>
         </testsuite>
         <testsuite name="Transport">
             <directory>Tests/Transport</directory>
         </testsuite>
         <testsuite name="Cases">
-            <directory>Tests/Cases</directory>
+            <directory>Tests/Cases/Modx/</directory>
+            <directory>Tests/Cases/Request/</directory>
         </testsuite>
         <testsuite name="Teardown">
             <file>Tests/modXTeardownTest.php</file>
