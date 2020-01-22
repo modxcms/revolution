@@ -37,6 +37,7 @@ class xPDOZip {
     const CREATE = 'create';
     const OVERWRITE = 'overwrite';
     const ZIP_TARGET = 'zip_target';
+    const ALLOWED_EXTENSIONS = 'allowed_extensions';
 
     public $xpdo = null;
     protected $_filename = '';
@@ -148,11 +149,11 @@ class xPDOZip {
         $results = false;
         if ($this->_archive) {
             if (is_dir($target) && is_writable($target)) {
-                if ($this->getOption('check_filetype', $options, false)) {
+                if (isset($options[self::ALLOWED_EXTENSIONS]) && is_array($options[self::ALLOWED_EXTENSIONS])) {
                     $fileIndex = array();
                     for ($i = 0; $i < $this->_archive->numFiles; $i++) {
                         $filename = $this->_archive->getNameIndex($i);
-                        if ($this->checkFiletype($filename)) {
+                        if ($this->checkFiletype($filename, $options[self::ALLOWED_EXTENSIONS])) {
                             $fileIndex[] = $filename;
                         }
                     }
@@ -224,27 +225,19 @@ class xPDOZip {
     /**
      * Check that the filename has a file type extension that is allowed
      *
-     * @param $filename
+     * @param string $filename The filename
+     * @param array $allowedExtensions The allowed file type extensions
      * @return bool
      */
-    private function checkFiletype($filename)
+    private function checkFiletype($filename, $allowedExtensions)
     {
-        if ($this->xpdo->getOption('allowedFileTypes')) {
-            $allowedFileTypes = $this->getOption('allowedFileTypes');
-            $allowedFileTypes = (!is_array($allowedFileTypes)) ? explode(',', $allowedFileTypes) : $allowedFileTypes;
-        } else {
-            $allowedFiles = $this->xpdo->getOption('upload_files') ? explode(',', $this->xpdo->getOption('upload_files')) : array();
-            $allowedImages = $this->xpdo->getOption('upload_images') ? explode(',', $this->xpdo->getOption('upload_images')) : array();
-            $allowedMedia = $this->xpdo->getOption('upload_media') ? explode(',', $this->xpdo->getOption('upload_media')) : array();
-            $allowedFlash = $this->xpdo->getOption('upload_flash') ? explode(',', $this->xpdo->getOption('upload_flash')) : array();
-            $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia, $allowedFlash));
-            $this->xpdo->setOption('allowedFileTypes', $allowedFileTypes);
-        }
-        $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $ext = strtolower($ext);
-        if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
-            $this->xpdo->log(XPDO::LOG_LEVEL_WARN, $filename .' can\'t be extracted, because the file type is not allowed');
-            return false;
+        if (is_array($allowedExtensions)) {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $ext = strtolower($ext);
+            if (!in_array($ext, $allowedExtensions)) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, $filename .' can\'t be extracted, because the file type is not allowed.');
+                return false;
+            }
         }
         return true;
     }

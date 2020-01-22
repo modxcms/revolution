@@ -1012,17 +1012,18 @@ class xPDOFileCache extends xPDOCache {
 
     public function delete($key, $options= array()) {
         $deleted= false;
-        $cacheKey= $this->getCacheKey($key, array_merge($options, array('cache_ext' => '')));
-        if (file_exists($cacheKey) && is_dir($cacheKey)) {
-            $results = $this->xpdo->cacheManager->deleteTree($cacheKey, array_merge(array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php')), $options));
-            if ($results !== false) {
-                $deleted = true;
+        if ($this->getOption('multiple_object_delete', $options, true)) {
+            $cacheKey= $this->getCacheKey($key, array_merge($options, array('cache_ext' => '')));
+            if (file_exists($cacheKey) && is_dir($cacheKey)) {
+                $results = $this->xpdo->cacheManager->deleteTree($cacheKey, array_merge(array('deleteTop' => false, 'skipDirs' => false, 'extensions' => array('.cache.php')), $options));
+                if ($results !== false) {
+                    $deleted = true;
+                }
             }
-        } else {
-            $cacheKey= $this->getCacheKey($key, $options);
-            if (file_exists($cacheKey)) {
-                $deleted= @ unlink($cacheKey);
-            }
+        }
+        $cacheKey= $this->getCacheKey($key, $options);
+        if (file_exists($cacheKey)) {
+            $deleted= @ unlink($cacheKey);
         }
         return $deleted;
     }
