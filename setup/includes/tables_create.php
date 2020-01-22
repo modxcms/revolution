@@ -20,7 +20,6 @@
 
 $results= [];
 $classes= [
-    \MODX\Revolution\modAccessAction::class,
     \MODX\Revolution\modAccessActionDom::class,
     \MODX\Revolution\modAccessCategory::class,
     \MODX\Revolution\modAccessContext::class,

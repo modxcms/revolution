@@ -133,6 +133,14 @@ $cleanup = [
         'model/modx/modcontextresource.class.php',
         'model/phpthumb/',
         'model/smarty/',
+
+        // were present in alpha1, but removed in alpha2
+        'src/Revolution/modAction.php',
+        'src/Revolution/modAccessAction.php',
+        'src/Revolution/mysql/modAction.php',
+        'src/Revolution/mysql/modAccessAction.php',
+        'src/Revolution/sqlsrv/modAction.php',
+        'src/Revolution/sqlsrv/modAccessAction.php',
     ],
     'manager' => [
         'min/',
