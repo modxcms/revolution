@@ -18,7 +18,7 @@ class SymLinkCreateControllerTest extends ResourceCreateControllerTest
         parent::setUp();
         $this->controller->setProperties([
             'id' => 0,
-            'class_key' => 'modSymlink',
+            'class_key' => modSymlink::class,
             'parent' => 0,
             'context_key' => 'web',
         ]);

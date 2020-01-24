@@ -36,7 +36,7 @@ class modUserTest extends MODxTestCase {
             'username' => 'unit-test-user',
             'password' => md5('boogles'),
             'cachepwd' => '',
-            'class_key' => 'modUser',
+            'class_key' => modUser::class,
             'active' => true,
             'remote_key' => '',
             'remote_data' => [],
