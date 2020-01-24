@@ -11,6 +11,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Add updated DI Container and add support for namespaces to define a bootstrap.php file to init/register services [#14920]
 - Fix resources showing twice in the tree when marking a resource as deleted from the resource panel [#14893]
 - Remove actions icon for the list of permissions in a policy [#14936]
+- Fix invalid media source path causing root to be shown [#14024, #14038]
 
 MODX Revolution 3.0.0-alpha1  (December 12, 2019)
 ====================================
