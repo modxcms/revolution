@@ -275,7 +275,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $bases['path'] = $properties['basePath']['value'];
         $bases['pathIsRelative'] = false;
         if (!empty($properties['basePathRelative']['value'])) {
-            $bases['pathAbsolute'] = realpath("{$this->ctx->getOption('base_path',MODX_BASE_PATH)}{$bases['path']}") . DIRECTORY_SEPARATOR;
+            $realpath = realpath($this->ctx->getOption('base_path', MODX_BASE_PATH) . $bases['path']);
+            $bases['pathAbsolute'] = ($realpath !== false) ? $realpath . '/' : '';
             $bases['pathIsRelative'] = true;
         } else {
             $bases['pathAbsolute'] = $bases['path'];
