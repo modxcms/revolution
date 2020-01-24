@@ -13392,7 +13392,7 @@ readers do not read off random characters that represent icons */
 .icon-styl:before, .icon-lock, .tree-context:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .parent-resource:before,
 .icon-folder:before, .x-tree-node-expanded .parent-resource:before,
 .x-tree-node-expanded .icon-folder:before, .locked-resource:before, .x-tree-arrows .x-tree-elbow-plus:before,
-.x-tree-arrows .x-tree-elbow-end-plus:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, #modx-resource-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
+.x-tree-arrows .x-tree-elbow-end-plus:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, .modx-header-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -21954,15 +21954,15 @@ a.x-grid-link:focus {
       margin: 1rem; }
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
     margin: 0; }
-    #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel #modx-resource-breadcrumbs {
+    #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs {
       margin-top: 1.25rem;
       font-weight: bold;
       box-sizing: border-box;
       padding-left: 18px;
       font-size: 18px; }
-      #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel #modx-resource-breadcrumbs + div {
+      #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs + div {
         margin: 1rem; }
-    #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel #modx-resource-breadcrumbs {
+    #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs {
       width: 100% !important; } }
 
 #modx-content form.x-panel-body {
@@ -22658,27 +22658,27 @@ iframe[classname="x-hidden"] {
       font-size: 2em; } }
 
 /* New Header */
-#modx-resource-breadcrumbs .breadcrumbs {
+.modx-header-breadcrumbs .breadcrumbs {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -ms-flex-align: baseline;
       align-items: baseline; }
-  #modx-resource-breadcrumbs .breadcrumbs #modx-resource-header {
+  .modx-header-breadcrumbs .breadcrumbs h2 {
     -ms-flex-order: 1;
         order: 1;
     font: normal 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: #53595F;
-    margin: 0;
+    margin: 0 !important;
     padding-left: 0; }
     @media screen and (max-width: 960px) {
-      #modx-resource-breadcrumbs .breadcrumbs #modx-resource-header {
+      .modx-header-breadcrumbs .breadcrumbs h2 {
         width: 100%;
         text-align: center;
         font-size: 2em; } }
 
-#modx-resource-breadcrumbs ul {
+.modx-header-breadcrumbs ul {
   -ms-flex-order: 0;
       order: 0;
   display: -ms-flexbox;
@@ -22687,26 +22687,26 @@ iframe[classname="x-hidden"] {
       flex-wrap: wrap;
   -ms-flex-align: center;
       align-items: center; }
-  #modx-resource-breadcrumbs ul li {
+  .modx-header-breadcrumbs ul li {
     font: normal 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: #53595F; }
-    #modx-resource-breadcrumbs ul li a {
+    .modx-header-breadcrumbs ul li a {
       font: normal 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       text-decoration: none; }
-      #modx-resource-breadcrumbs ul li a.menu_hidden {
+      .modx-header-breadcrumbs ul li a.menu_hidden {
         font-style: italic; }
-        #modx-resource-breadcrumbs ul li a.menu_hidden:hover {
+        .modx-header-breadcrumbs ul li a.menu_hidden:hover {
           color: #162a42; }
-      #modx-resource-breadcrumbs ul li a.not_published {
+      .modx-header-breadcrumbs ul li a.not_published {
         color: #b3b2b2 !important; }
-        #modx-resource-breadcrumbs ul li a.not_published:hover {
+        .modx-header-breadcrumbs ul li a.not_published:hover {
           color: #162a42; }
-      #modx-resource-breadcrumbs ul li a.deleted {
+      .modx-header-breadcrumbs ul li a.deleted {
         color: rgba(175, 90, 98, 0.5) !important;
         text-decoration: line-through; }
-        #modx-resource-breadcrumbs ul li a.deleted:hover {
+        .modx-header-breadcrumbs ul li a.deleted:hover {
           color: #162a42; }
-    #modx-resource-breadcrumbs ul li:after {
+    .modx-header-breadcrumbs ul li:after {
       content: "\f054";
       padding: 0 10px;
       color: #999999;
