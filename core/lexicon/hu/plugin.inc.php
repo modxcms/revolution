@@ -7,8 +7,8 @@
  * @subpackage lexicon
  */
 $_lang['event'] = 'Esemény';
-$_lang['events'] = 'Events';
-$_lang['plugin'] = 'Plugin';
+$_lang['events'] = 'Események';
+$_lang['plugin'] = 'Beépülő';
 $_lang['plugin_add'] = 'Beépülő hozzáadása';
 $_lang['plugin_add_to_event'] = 'Add Plugin to Event';
 $_lang['plugin_code'] = 'Plugin code (php)';
@@ -49,4 +49,4 @@ $_lang['plugin_priority'] = 'Edit Plugin Execution Order by Event';
 $_lang['plugin_properties'] = 'Plugin Properties';
 $_lang['plugin_title'] = 'Create/edit plugin';
 $_lang['plugin_untitled'] = 'Untitled plugin';
-$_lang['plugins'] = 'Plugins';
+$_lang['plugins'] = 'Beépülők';
