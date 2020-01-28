@@ -71,7 +71,7 @@ if (file_exists(MODX_CORE_PATH . 'packages/core/manifest.php')) {
 }
 
 $unpacked= 0;
-if ($manifest && file_exists(MODX_CORE_PATH . 'packages/core/modWorkspace/')) {
+if ($manifest && file_exists(MODX_CORE_PATH . 'packages/core/MODX/Revolution/modWorkspace/')) {
     $unpacked= 1;
 }
 
