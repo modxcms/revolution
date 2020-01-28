@@ -119,8 +119,14 @@ class GetList extends GetListProcessor
         $parent = $objectArray['parent'];
 
         while ($parent != 0) {
-            $parents[] = $this->modx->getObject(modResource::class, $parent);
-            $parent = end($parents)->get('parent');
+            $parentObject = $this->modx->getObject(modResource::class, $parent);
+            if ($parentObject) {
+                $parents[] = $parentObject;
+                $parent = $parentObject->get('parent');
+            } 
+            else {
+                break;
+            }
         }
 
         $parentPath = "";
