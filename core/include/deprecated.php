@@ -35,7 +35,25 @@ class_alias(\MODX\Revolution\Processors\Model\ImportProcessor::class, \modObject
 class_alias(\MODX\Revolution\Processors\Model\RemoveProcessor::class, \modObjectRemoveProcessor::class);
 class_alias(\MODX\Revolution\Processors\Model\SoftRemoveProcessor::class, \modObjectSoftRemoveProcessor::class);
 class_alias(\MODX\Revolution\Processors\Model\UpdateProcessor::class, \modObjectUpdateProcessor::class);
-class_alias(\MODX\Revolution\modParsedManagerController::class, \modParsedManagerController::class);
 
+// Resource processors, used by custom resource types
+class_alias(\MODX\Revolution\Processors\Resource\Create::class, modResourceCreateProcessor::class);
+class_alias(\MODX\Revolution\Processors\Resource\Update::class, modResourceUpdateProcessor::class);
+
+// Generic controllers
+class_alias(\MODX\Revolution\modManagerController::class, \modManagerController::class);
+class_alias(\MODX\Revolution\modParsedManagerController::class, \modParsedManagerController::class);
 class_alias(\MODX\Revolution\modExtraManagerController::class, \modExtraManagerController::class);
 class_alias(\MODX\Revolution\modResource::class, \modResource::class);
+
+// Services
+class_alias(\MODX\Revolution\modParser::class, \modParser::class);
+class_alias(\MODX\Revolution\Mail\modMail::class, \modMail::class);
+class_alias(\MODX\Revolution\Mail\modPHPMailer::class, \modPHPMailer::class);
+
+// Misc
+class_alias(\MODX\Revolution\modDashboardWidgetInterface::class, \modDashboardWidgetInterface::class);
+class_alias(\MODX\Revolution\modTemplateVarInputRender::class, \modTemplateVarInputRender::class);
+class_alias(\MODX\Revolution\modTemplateVarOutputRender::class, \modTemplateVarOutputRender::class);
+class_alias(\MODX\Revolution\modSystemEvent::class, \modSystemEvent::class);
+class_alias(\MODX\Revolution\Sources\modMediaSource::class, \modMediaSource::class);
