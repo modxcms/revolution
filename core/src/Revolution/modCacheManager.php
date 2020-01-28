@@ -415,65 +415,6 @@ class modCacheManager extends xPDOCacheManager
         return $entries;
     }
 
-    /**
-     * Generates a cache file for the manager actions.
-     *
-     * @access public
-     *
-     * @param string $cacheKey The key to use when caching the action map.
-     * @param array  $options  An array of options
-     *
-     * @return array An array representing the action map.
-     */
-    public function generateActionMap($cacheKey, array $options = [])
-    {
-        $results = [];
-        $c = $this->modx->newQuery(modAction::class);
-        $c->select([
-            $this->modx->getSelectColumns(modAction::class, 'modAction'),
-            $this->modx->getSelectColumns(modNamespace::class, 'Namespace', 'namespace_', ['name', 'path', 'assets_path']),
-        ]);
-        $c->innerJoin(modNamespace::class, 'Namespace');
-        $c->sortby('namespace', 'ASC');
-        $c->sortby('controller', 'ASC');
-        if ($c->prepare() && $c->stmt->execute()) {
-            $actions = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach ($actions as $action) {
-                if (empty($action['namespace_path']) || $action['namespace_name'] == 'core') {
-                    $action['namespace_path'] = $this->modx->getOption('manager_path');
-                }
-
-                if ($action['namespace_name'] != 'core') {
-                    $nsPath = $action['namespace_path'];
-                    if (!empty($nsPath)) {
-                        $nsPath = $this->modx->call(modNamespace::class, 'translatePath', [&$this->modx, $nsPath]);
-                        $action['namespace_path'] = $nsPath;
-                    }
-                }
-                $results[$action['id']] = $action;
-            }
-        }
-        if (!empty($results) && $this->getOption('cache_action_map', $options, true)) {
-            $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_action_map_key', $options, 'action_map');
-            $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_action_map_handler', $options,
-                $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_action_map_format', $options,
-                $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_action_map_attempts', $options,
-                $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
-            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_action_map_attempt_delay',
-                $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-            $lifetime = (integer)$this->getOption('cache_action_map_expires', $options,
-                $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
-            if (!$this->set($cacheKey, $results, $lifetime, $options)) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR, "Error caching action map {$cacheKey}");
-            }
-        }
-
-        return $results;
-    }
-
     public function generateNamespacesCache($cacheKey, array $options = [])
     {
         $results = [];
@@ -644,7 +585,6 @@ class modCacheManager extends xPDOCacheManager
                 'default' => [],
                 'resource' => ['contexts' => array_diff($contexts, ['mgr'])],
                 'menu' => [],
-                'action_map' => [],
             ];
         }
         $cleared = [];

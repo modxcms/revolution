@@ -131,13 +131,6 @@ class modMenu extends modAccessibleObject
         $c = $this->xpdo->newQuery(modMenu::class);
         $c->select($this->xpdo->getSelectColumns(modMenu::class, 'modMenu'));
 
-        /* 2.2 and earlier support */
-        $c->leftJoin(modAction::class, 'Action');
-        $c->select([
-            'action_controller' => 'Action.controller',
-            'action_namespace' => 'Action.namespace',
-        ]);
-
         $c->where([
             'modMenu.parent' => $start,
         ]);
@@ -155,21 +148,13 @@ class modMenu extends modAccessibleObject
             $action = $menu->get('action');
             $namespace = $menu->get('namespace');
 
-            // allow 2.2 and earlier actions
-            $deprecatedNamespace = $menu->get('action_namespace');
-            if (!empty($deprecatedNamespace)) {
-                $this->xpdo->deprecated('2.3.0',
-                    'Support for modAction has been replaced with routing based on a namespace and action name. Please update the extra with the namespace ' . $deprecatedNamespace . ' to the routing based system.',
-                    'modAction support');
-                $namespace = $deprecatedNamespace;
-            }
-            if ($namespace != 'core') {
+            if ($namespace !== 'core') {
                 $this->xpdo->lexicon->load($namespace . ':default');
             }
 
             /* if 3rd party menu item, load proper text */
             if (!empty($action)) {
-                if (!empty($namespace) && $namespace != 'core') {
+                if (!empty($namespace) && $namespace !== 'core') {
                     $ma['text'] = $menu->get('text') === 'user'
                         ? $this->xpdo->lexicon($menu->get('text'), ['username' => $this->xpdo->getLoginUserName()])
                         : $this->xpdo->lexicon($menu->get('text'));

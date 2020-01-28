@@ -37,7 +37,7 @@ class ConfigJs extends Processor
         }
         $this->modx->getVersionData();
 
-        $wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+        $wctx = (string)$this->getProperty('wctx');
         if (!empty($wctx)) {
             $workingContext = $this->modx->getContext($wctx);
             if (!$workingContext) {
@@ -92,17 +92,13 @@ class ConfigJs extends Processor
             $c['default_site_url'] = $ctx->makeUrl($ctx->getOption('site_start'));
         }
 
-        /* if custom context, load into MODx.config */
-        if (isset($scriptProperties['action'], $this->modx->actionMap[$scriptProperties['action']]) && $scriptProperties['action'] !== '') {
-
-            $namespace = $this->modx->getOption('namespace', $scriptProperties, 'core');
-            /** @var modNamespace $namespace */
-            $namespace = $this->modx->getObject(modNamespace::class, $namespace);
-            if ($namespace) {
-                $c['namespace'] = $namespace->get('name');
-                $c['namespace_path'] = $namespace->get('path');
-                $c['namespace_assets_path'] = $namespace->get('assets_url');
-            }
+        $namespace = (string)$this->getProperty('namespace','core');
+        /** @var modNamespace $namespace */
+        $namespace = $this->modx->getObject(modNamespace::class, $namespace);
+        if ($namespace) {
+            $c['namespace'] = $namespace->get('name');
+            $c['namespace_path'] = $namespace->get('path');
+            $c['namespace_assets_path'] = $namespace->get('assets_url');
         }
 
         $c = array_merge($this->modx->config, $workingContext->config, $this->modx->_userConfig, $c);
@@ -112,10 +108,6 @@ class ConfigJs extends Processor
         $o = "Ext.namespace('MODx'); MODx.config = ";
         $o .= $this->modx->toJSON($c);
         $o .= '; MODx.perm = {};';
-
-        // Load actions for backwards compatibility (DEPRECATED)
-        $actions = $this->modx->request->getAllActionIDs();
-        $o .= 'MODx.action = ' . $this->modx->toJSON($actions) . ';';
 
         if ($this->modx->user) {
             $accessPermissionsQuery = $this->modx->newQuery(modAccessPermission::class);

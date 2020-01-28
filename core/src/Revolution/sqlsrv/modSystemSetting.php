@@ -11,7 +11,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
         'version' => '3.0',
         'table' => 'system_settings',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' =>
+        'fields' => 
         array (
             'key' => '',
             'value' => '',
@@ -20,9 +20,9 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
             'area' => '',
             'editedon' => NULL,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'key' =>
+            'key' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '50',
@@ -31,7 +31,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
                 'default' => '',
                 'index' => 'pk',
             ),
-            'value' =>
+            'value' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -39,7 +39,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
                 'null' => false,
                 'default' => '',
             ),
-            'xtype' =>
+            'xtype' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '75',
@@ -47,7 +47,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
                 'null' => false,
                 'default' => 'textfield',
             ),
-            'namespace' =>
+            'namespace' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '40',
@@ -55,7 +55,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
                 'null' => false,
                 'default' => 'core',
             ),
-            'area' =>
+            'area' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -63,24 +63,24 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
                 'null' => false,
                 'default' => '',
             ),
-            'editedon' =>
+            'editedon' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => true,
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'key' =>
+                    'key' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -89,9 +89,9 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'ContextSetting' =>
+            'ContextSetting' => 
             array (
                 'class' => 'MODX\\Revolution\\modContextSetting',
                 'local' => 'key',
@@ -99,7 +99,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
                 'cardinality' => 'one',
                 'owner' => 'local',
             ),
-            'Namespace' =>
+            'Namespace' => 
             array (
                 'class' => 'MODX\\Revolution\\modNamespace',
                 'local' => 'namespace',

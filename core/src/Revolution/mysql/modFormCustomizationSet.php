@@ -39,7 +39,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
             ),
             'action' => 
             array (
-                'dbtype' => 'nvarchar',
+                'dbtype' => 'varchar',
                 'precision' => '191',
                 'phptype' => 'string',
                 'null' => false,
@@ -176,14 +176,6 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
         ),
         'aggregates' => 
         array (
-            'Action' => 
-            array (
-                'class' => 'MODX\\Revolution\\modAction',
-                'local' => 'action',
-                'foreign' => 'id',
-                'cardinality' => 'one',
-                'owner' => 'foreign',
-            ),
             'Template' => 
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',

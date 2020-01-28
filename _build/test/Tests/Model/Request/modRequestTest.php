@@ -39,18 +39,6 @@ class modRequestTest extends MODxTestCase {
         $namespace->set('path','{core_path}');
         $namespace->save();
 
-        /** @var modAction $action */
-        $action = $this->modx->newObject(modAction::class);
-        $action->fromArray([
-            'namespace' => 'unit-test',
-            'parent' => 0,
-            'controller' => 'index',
-            'haslayout' => 1,
-            'lang_topics' => '',
-        ]);
-        $action->save();
-
-
         $_POST['testPost'] = 1;
         $_GET['testGet'] = 2;
         $_COOKIE['testCookie'] = 3;
@@ -68,13 +56,6 @@ class modRequestTest extends MODxTestCase {
         $namespace = $this->modx->getObject(modNamespace::class, ['name' => 'unit-test']);
         if ($namespace) { $namespace->remove(); }
 
-        $actions = $this->modx->getCollection(modAction::class, [
-            'namespace' => 'unit-test',
-        ]);
-        /** @var modAction $action */
-        foreach ($actions as $action) {
-            $action->remove();
-        }
         $this->modx->setOption('request_param_alias','q');
         $this->modx->setOption('request_param_id','id');
         $this->modx->setOption('site_start',1);
@@ -195,20 +176,6 @@ class modRequestTest extends MODxTestCase {
         $this->assertNotEmpty($request,'modRequest.preserveRequest did not correctly preserve the REQUEST data.');
         $this->assertArrayHasKey('testRequest',$request,'modRequest.preserveRequest did not preserve the correct REQUEST data, as it does not contain a valid REQUEST field.');
         unset($_SESSION['modx.request.unit-test']);
-    }
-
-    /**
-     * Test the getAllActionIDs method
-     */
-    public function testGetAllActionIDs() {
-        // @todo : refactor to take care of modAction deprecation
-//        $actions = $this->request->getAllActionIDs();
-//        $total = $this->modx->getCount(modAction::class);
-//        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not get all of the Actions that exist.');
-
-        $actions = $this->request->getAllActionIDs('unit-test');
-        $total = $this->modx->getCount(modAction::class, ['namespace' => 'unit-test']);
-        $this->assertTrue(count($actions) == $total,'The getAllActionIDs method did not filter down by namespace when grabbing actions.');
     }
 
     /**

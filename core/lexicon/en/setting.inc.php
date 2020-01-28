@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help 
 $_lang['setting_blocked_minutes'] = 'Blocked Minutes';
 $_lang['setting_blocked_minutes_desc'] = 'Here you can enter the number of minutes that a user will be blocked for if they reach their maximum number of allowed failed login attempts. Please enter this value as numbers only (no commas, spaces etc.)';
 
-$_lang['setting_cache_action_map'] = 'Enable Action Map Cache';
-$_lang['setting_cache_action_map_desc'] = 'When enabled, actions (or controller maps) will be cached to reduce manager page load times.';
-
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
 

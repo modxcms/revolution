@@ -26,21 +26,6 @@ $cacheManager= $modx->getCacheManager();
 $modx->setLogLevel(\xPDO\xPDO::LOG_LEVEL_ERROR);
 $modx->setLogTarget('ECHO');
 
-
-// Get all Actions
-$content= "<?php\n";
-$query= $modx->newQuery(\MODX\Revolution\modAction::class);
-$query->where(['namespace' => 'core']);
-$query->sortby('id');
-
-$collection= $modx->getCollection(\MODX\Revolution\modAction::class, $query);
-foreach ($collection as $key => $c) {
-    $content.= $cacheManager->generateObject($c, "collection['{$key}']", false, false, 'xpdo');
-}
-$cacheManager->writeFile(dirname(__FILE__) . '/data/transport.core.actions.php', $content);
-unset($content, $collection, $key, $c);
-
-
 // Get all Menus
 $content= "<?php\n";
 $query= $modx->newQuery(\MODX\Revolution\modMenu::class);

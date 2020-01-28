@@ -226,9 +226,6 @@ class GetList extends Processor
             case modDocument::class:
                 $field = 'pagetitle';
                 break;
-            case modAction::class:
-                $field = 'controller';
-                break;
             case modCategory::class:
                 $field = 'category';
                 break;

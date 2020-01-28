@@ -158,10 +158,6 @@ class ClearCache extends Processor
             $partitions['menu'] = [];
         }
 
-        if ($this->getProperty('action_map', false)) {
-            $partitions['action_map'] = [];
-        }
-
         return $partitions;
     }
 

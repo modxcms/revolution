@@ -114,14 +114,6 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 'owner' => 'local',
                 'cardinality' => 'many',
             ),
-            'Actions' => 
-            array (
-                'class' => 'MODX\\Revolution\\modAction',
-                'local' => 'name',
-                'foreign' => 'namespace',
-                'cardinality' => 'many',
-                'owner' => 'local',
-            ),
         ),
     );
 

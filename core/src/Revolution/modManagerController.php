@@ -68,7 +68,7 @@ abstract class modManagerController
      * @param modX  $modx   A reference to the modX object.
      * @param array $config A configuration array of options related to this controller's action object.
      */
-    function __construct(modX &$modx, $config = [])
+    public function __construct(modX $modx, $config = [])
     {
         $this->modx =& $modx;
         $this->config = !empty($config) && is_array($config) ? $config : [];
@@ -149,13 +149,7 @@ abstract class modManagerController
      */
     public function render()
     {
-        if (!$this->checkPermissions()) {
-            return $this->modx->error->failure($this->modx->lexicon('access_denied'));
-        }
-
-        $this->modx->invokeEvent('OnBeforeManagerPageInit', [
-            'action' => $this->config,
-        ]);
+        $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
 
         $this->theme = $this->modx->getOption('manager_theme', null, 'default', true);
 

@@ -49,10 +49,6 @@
         <aggregate alias="MinimumRole" class="MODX\Revolution\modUserGroupRole" local="authority" foreign="authority" owner="local" cardinality="one" />
     </object>
 
-    <object class="modAccessAction" table="access_actions" extends="MODX\Revolution\modAccess">
-        <aggregate alias="Target" class="MODX\Revolution\modAction" local="target" foreign="id" owner="foreign" cardinality="one" />
-    </object>
-
     <object class="modAccessActionDom" table="access_actiondom" extends="modAccess">
         <aggregate alias="Target" class="MODX\Revolution\modActionDom" local="target" foreign="id" owner="foreign" cardinality="one" />
     </object>
@@ -182,29 +178,6 @@
 
         <aggregate alias="Target" class="MODX\Revolution\modResourceGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
-    </object>
-
-    <!-- deprecated 2.3, will be removed in 2.4/3.0 -->
-    <object class="modAction" table="actions" extends="MODX\Revolution\modAccessibleSimpleObject">
-        <field key="namespace" dbtype="nvarchar" precision="100" phptype="string" null="false" default="core" index="index" />
-        <field key="controller" dbtype="nvarchar" precision="255" phptype="string" null="false" index="index" />
-        <field key="haslayout" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
-        <field key="lang_topics" dbtype="nvarchar" precision="max" phptype="string" null="false" />
-        <field key="assets" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
-        <field key="help_url" dbtype="nvarchar" precision="max" phptype="string" null="false" default="" />
-
-        <index alias="namespace" name="namespace" primary="false" unique="false" type="BTREE">
-            <column key="namespace" length="" collation="A" null="false" />
-        </index>
-        <index alias="controller" name="controller" primary="false" unique="false" type="BTREE">
-            <column key="controller" length="" collation="A" null="false" />
-        </index>
-
-        <aggregate alias="Namespace" class="MODX\Revolution\modNamespace" local="namespace" foreign="name" owner="foreign" cardinality="one" />
-        <composite alias="Menus" class="MODX\Revolution\modMenu" local="id" foreign="action" owner="local" cardinality="many" />
-        <composite alias="Acls" class="MODX\Revolution\modAccessAction" local="id" foreign="target" owner="local" cardinality="many" />
-        <composite alias="Fields" class="MODX\Revolution\modActionField" local="id" foreign="action" owner="local" cardinality="many" />
-        <composite alias="DOM" class="MODX\Revolution\modActionDom" local="id" foreign="action" owner="local" cardinality="many" />
     </object>
 
     <object class="modActiveUser" table="active_users" extends="xPDO\Om\xPDOObject">
@@ -516,6 +489,10 @@
         <aggregate alias="PluginEvents" class="MODX\Revolution\modPluginEvent" local="name" foreign="event" cardinality="many" owner="local" />
     </object>
 
+    <!--
+        Form customisation
+        Defines rules (like, hide/move a field) that are applied on a specific action (controller, like resource/update)
+    -->
     <object class="modActionDom" table="actiondom" extends="MODX\Revolution\modAccessibleSimpleObject">
         <field key="set" dbtype="int" phptype="integer" null="false" default="0" index="index" />
         <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
@@ -552,7 +529,6 @@
         </index>
 
         <aggregate alias="FCSet" class="MODX\Revolution\modFormCustomizationSet" local="set" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Action" class="MODX\Revolution\modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Access" class="MODX\Revolution\modAccessActionDom" local="id" foreign="target" cardinality="many" owner="local" />
     </object>
 
@@ -611,12 +587,15 @@
             <column key="template" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Action" class="MODX\Revolution\modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Template" class="MODX\Revolution\modTemplate" local="template" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Profile" class="MODX\Revolution\modFormCustomizationProfile" local="profile" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Rules" class="MODX\Revolution\modActionDom" local="id" foreign="set" cardinality="many" owner="local" />
     </object>
 
+    <!--
+        Form customisation
+        Defines the fields that are available on an action (controller, like resource/update) that can be manipulated
+    -->
     <object class="modActionField" table="actions_fields" extends="xPDO\Om\xPDOSimpleObject">
         <field key="action" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
@@ -699,7 +678,6 @@
             <column key="namespace" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Action" class="MODX\Revolution\modAction" local="action" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Parent" class="MODX\Revolution\modMenu" local="parent" foreign="text" owner="foreign" cardinality="one" />
         <aggregate alias="Children" class="MODX\Revolution\modMenu" local="text" foreign="parent" owner="local" cardinality="many" />
         <composite alias="Acls" class="MODX\Revolution\modAccessMenu" local="text" foreign="target" owner="local" cardinality="many" />
@@ -718,7 +696,6 @@
         <composite alias="SystemSettings" class="MODX\Revolution\modSystemSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="ContextSettings" class="MODX\Revolution\modContextSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
         <composite alias="UserSettings" class="MODX\Revolution\modUserSetting" local="name" foreign="namespace" cardinality="many" owner="local" />
-        <composite alias="Actions" class="MODX\Revolution\modAction" local="name" foreign="namespace" cardinality="many" owner="local" />
     </object>
 
     <!--

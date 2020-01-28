@@ -11,7 +11,7 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
         'version' => '3.0',
         'table' => 'user_settings',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' =>
+        'fields' => 
         array (
             'user' => 0,
             'key' => '',
@@ -21,9 +21,9 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
             'area' => '',
             'editedon' => NULL,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'user' =>
+            'user' => 
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -31,7 +31,7 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'key' =>
+            'key' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '50',
@@ -40,13 +40,13 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
                 'default' => '',
                 'index' => 'pk',
             ),
-            'value' =>
+            'value' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'xtype' =>
+            'xtype' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '75',
@@ -54,7 +54,7 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
                 'null' => false,
                 'default' => 'textfield',
             ),
-            'namespace' =>
+            'namespace' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '40',
@@ -62,7 +62,7 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
                 'null' => false,
                 'default' => 'core',
             ),
-            'area' =>
+            'area' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -70,30 +70,30 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
                 'null' => false,
                 'default' => '',
             ),
-            'editedon' =>
+            'editedon' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => true,
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'user' =>
+                    'user' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'key' =>
+                    'key' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -102,9 +102,9 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'User' =>
+            'User' => 
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'user',
@@ -112,7 +112,7 @@ class modUserSetting extends \MODX\Revolution\modUserSetting
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Namespace' =>
+            'Namespace' => 
             array (
                 'class' => 'MODX\\Revolution\\modNamespace',
                 'local' => 'namespace',

@@ -49,10 +49,6 @@ class modConnectorRequest extends modManagerRequest
         /* load default core cache file of lexicon strings */
         $this->modx->lexicon->load('core:default');
 
-        if ($this->modx->actionMap === null || !is_array($this->modx->actionMap)) {
-            $this->loadActionMap();
-        }
-
         return true;
     }
 
