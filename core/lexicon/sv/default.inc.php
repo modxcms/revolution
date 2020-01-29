@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Snabbuppdatera mallvariabel';
 $_lang['rank'] = 'Rang';
 $_lang['recent_docs'] = 'Senaste dokument';
 $_lang['redirecting'] = 'Omdirigerar...';
-$_lang['refresh_action_map'] = 'Rensar cachen för åtgärdskartan';
 $_lang['refresh_auto_publish'] = 'Bearbetar automatiska publiceringsdatum';
 $_lang['refresh_context_settings'] = 'Omskapar kontextcacharna';
 $_lang['refresh_db'] = 'Rensar databasens resultatcache';
