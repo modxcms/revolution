@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'TV  schnell bearbeiten';
 $_lang['rank'] = 'Rang';
 $_lang['recent_docs'] = 'Letzte Dokumente';
 $_lang['redirecting'] = 'Leite weiter...';
-$_lang['refresh_action_map'] = 'Leere den Aktionen-Map-Cache';
 $_lang['refresh_auto_publish'] = 'Verarbeite automatische Veröffentlichungsdaten';
 $_lang['refresh_context_settings'] = 'Erstelle die Kontext-Caches neu';
 $_lang['refresh_db'] = 'Leere den Datenbank-Abfrageergebnis-Cache';
