@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'L\'URL di base da cui costruire i colleg
 $_lang['setting_blocked_minutes'] = 'Minuti Blocco';
 $_lang['setting_blocked_minutes_desc'] = 'Qui puoi inserire il numero di minuti che un utente dovrebbe restare bloccato, dopo aver raggiunto il numero massimo di tentativi di login falliti. Inserisci solo numeri (senza virgole, spazi etc.)';
 
-$_lang['setting_cache_action_map'] = 'Abilita la Cache della "Mappa Azioni"';
-$_lang['setting_cache_action_map_desc'] = 'Se impostata su "SI", le azioni (o le mappe dei controlli) saranno inserite in cache per ridurre il tempo di caricamento delle pagine del manager.';
-
 $_lang['setting_cache_alias_map'] = 'Abilita Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'Quando abilitato, tutti gli URIs delle Risorse sono inseriti nella cache del Contesto. Abilitalo su siti pi&ugrave; piccoli e disabilitalo su siti pi&ugrave; grandi per avere prestazioni migliori.';
 
