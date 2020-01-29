@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = '管理画面右上に表示される、�
 $_lang['setting_blocked_minutes'] = 'ブロックする時間';
 $_lang['setting_blocked_minutes_desc'] = 'ユーザーがログイン失敗許可数を超過した場合にブロックを行う時間を数値で指定できます。<br />この値は数値のみを入力してください（カンマやスペース等は使えません）。';
 
-$_lang['setting_cache_action_map'] = 'アクションマップキャッシュを有効';
-$_lang['setting_cache_action_map_desc'] = '「はい」を選択すると、アクション（またはコントローラーマップ）をキャッシュして、管理画面のページ読み込み時間を減らします。';
-
 $_lang['setting_cache_alias_map'] = 'コンテキストのエイリアスマップキャッシュを有効';
 $_lang['setting_cache_alias_map_desc'] = '有効にすると、すべてのリソースのURIは、コンテキストにキャッシュされます。小規模なサイトで有効にして、パフォーマンスを向上させるために大規模なサイトでは無効にします。';
 
