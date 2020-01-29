@@ -367,7 +367,6 @@ $_lang['quick_update_tv'] = 'ترقية سريعة لعنصر قالب';
 $_lang['rank'] = 'ترتيب';
 $_lang['recent_docs'] = 'الوثائق الأخيرة';
 $_lang['redirecting'] = 'إعادة توجيه...';
-$_lang['refresh_action_map'] = 'مسح ذاكرة التخزين المؤقت لمخطط العمل';
 $_lang['refresh_auto_publish'] = 'معالجة تواريخ النشر التلقائية';
 $_lang['refresh_context_settings'] = 'إعادة توليد الذواكر المخبئية للسياق';
 $_lang['refresh_db'] = 'مسح نتائج قاعدة المعطيات في الذاكرة المؤقتة';

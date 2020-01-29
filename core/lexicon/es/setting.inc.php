@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'La URL base con la cual construir los en
 $_lang['setting_blocked_minutes'] = 'Minutos Bloqueado';
 $_lang['setting_blocked_minutes_desc'] = 'Aquí puedes determinar el número de minutos que un usuario será bloqueado si supera el máximo de intentos de inicio de sesión. Por favor, introduce un valor numérico (sin comas, espacios etc.)';
 
-$_lang['setting_cache_action_map'] = 'Habilitar Cache de Mapa de Acciones';
-$_lang['setting_cache_action_map_desc'] = 'Cuando esté activado, las acciones (o mapas de controlador) serán almacenados en caché para reducir los tiempos de carga de las páginas del panel de administración.';
-
 $_lang['setting_cache_alias_map'] = 'Activar Caché de Alias';
 $_lang['setting_cache_alias_map_desc'] = 'Al activar, las URIs de los recursos se almacenan en la caché del Contexto. Activar para sitios pequeños y desactivar para sitios más grandes para un mejor rendimiento.';
 

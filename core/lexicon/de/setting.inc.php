@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'Die Basis-URL für die Hilfe-Links oben 
 $_lang['setting_blocked_minutes'] = 'Anzahl Minuten für Sperrung';
 $_lang['setting_blocked_minutes_desc'] = 'Hier können Sie die Anzahl der Minuten eingeben, für die ein Benutzer geblockt wird, wenn er die maximal erlaubte Anzahl an fehlgeschlagenen Login-Versuchen erreicht hat. Bitte geben Sie hier nur ganze Zahlen ein (keine Kommata, Leerzeichen etc.)';
 
-$_lang['setting_cache_action_map'] = 'Aktionen-Cache aktivieren';
-$_lang['setting_cache_action_map_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Aktionen (bzw. Controller-Maps) gecacht, um die Ladezeiten von Manager-Seiten zu reduzieren.';
-
 $_lang['setting_cache_alias_map'] = 'Kontext-Alias-Cache aktivieren';
 $_lang['setting_cache_alias_map_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Ressourcen-URIs in den Kontext gecacht. Diese Einstellung sollte für kleinere Sites aktiviert und für größere Sites deaktiviert werden, um die Performance zu verbessern.';
 

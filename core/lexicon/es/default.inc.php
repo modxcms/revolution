@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Actualización Rápida de VdP';
 $_lang['rank'] = 'Posición';
 $_lang['recent_docs'] = 'Documentos Recientes';
 $_lang['redirecting'] = 'Redireccionando...';
-$_lang['refresh_action_map'] = 'Limpiando la caché del mapa de Acciones';
 $_lang['refresh_auto_publish'] = 'Procesando fechas de publicación automáticas';
 $_lang['refresh_context_settings'] = 'Regenerando la caché de los contextos';
 $_lang['refresh_db'] = 'Limpiando la caché de la base de datos';

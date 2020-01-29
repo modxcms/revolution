@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'त्वरित अद्यतन टी वी
 $_lang['rank'] = 'Rank';
 $_lang['recent_docs'] = 'हाल के दस्तावेज़';
 $_lang['redirecting'] = 'Redirecting...';
-$_lang['refresh_action_map'] = 'Action नक्शा कैश साफ़ करना';
 $_lang['refresh_auto_publish'] = 'Processing automatic publishing dates';
 $_lang['refresh_context_settings'] = 'Regenerating the context caches';
 $_lang['refresh_db'] = 'Clearing the database result set cache';

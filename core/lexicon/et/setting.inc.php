@@ -130,9 +130,6 @@ $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help 
 $_lang['setting_blocked_minutes'] = 'Blokeeritud Minutid';
 $_lang['setting_blocked_minutes_desc'] = 'Siit saate sisestada mitu minutit kasutaja on blokeeritud, peale läbikukkunud sisse logimise katsed on ületatud. Palun sisesta väärtus ainult numbrina (ilma komadeta, tühikuteda jne.)';
 
-$_lang['setting_cache_action_map'] = 'Luba Tegevuste Map-i Puhver';
-$_lang['setting_cache_action_map_desc'] = 'Kui lubatud, tegevused (või kontrollerite mapid) puhverdatakse, et vähendada manageri lehetede laadimise aega.';
-
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
 

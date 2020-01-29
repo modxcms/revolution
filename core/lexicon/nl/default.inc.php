@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'TV snel bewerken';
 $_lang['rank'] = 'Rang';
 $_lang['recent_docs'] = 'Recente pagina\'s';
 $_lang['redirecting'] = 'Doorsturen...';
-$_lang['refresh_action_map'] = 'Leeg de Action map cache';
 $_lang['refresh_auto_publish'] = 'Verwerking automatische publicatie datums';
 $_lang['refresh_context_settings'] = 'Hergenereer de context caches';
 $_lang['refresh_db'] = 'Leeg de database resultaat set cache';

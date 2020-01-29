@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Hurtig-opdatér TV';
 $_lang['rank'] = 'Rang';
 $_lang['recent_docs'] = 'Seneste dokumenter';
 $_lang['redirecting'] = 'Omdirigerer...';
-$_lang['refresh_action_map'] = 'Rydder cachen for handlinger';
 $_lang['refresh_auto_publish'] = 'Behandler automatiske udgivelsesdatoer';
 $_lang['refresh_context_settings'] = 'Regenererer kontekstcachen';
 $_lang['refresh_db'] = 'Rydder cachen for database-resultatsæt';

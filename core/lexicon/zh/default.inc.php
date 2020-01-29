@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = '快速更新模板变量';
 $_lang['rank'] = '排名';
 $_lang['recent_docs'] = '最近的文档';
 $_lang['redirecting'] = '重定向...';
-$_lang['refresh_action_map'] = '清除动作映射缓存';
 $_lang['refresh_auto_publish'] = '处理自动发布日期';
 $_lang['refresh_context_settings'] = '重新生成上下文缓存';
 $_lang['refresh_db'] = '清除数据库结果集缓存';

@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'L\'URL de base à partir de laquelle la 
 $_lang['setting_blocked_minutes'] = 'Durée de blocage';
 $_lang['setting_blocked_minutes_desc'] = 'Entrez ici le nombre de minutes de blocage d\'un utilisateur s\'il atteint le nombre maximal de tentatives de connexions. Veuillez n\'entrer qu\'un nombre (pas de virgule, espace, etc.)';
 
-$_lang['setting_cache_action_map'] = 'Activer la mise en cache des actions';
-$_lang['setting_cache_action_map_desc'] = 'Activé, les actions seront mises en cache pour réduire le temps de chargement des pages du manager.';
-
 $_lang['setting_cache_alias_map'] = 'Activer la mise en cache des Alias';
 $_lang['setting_cache_alias_map_desc'] = 'Activé, les URI des ressources seront mises en cache dans le Contexte. Pour des raisons de performance il est conseillé de n\'activer cette option que pour de "petits" sites.';
 

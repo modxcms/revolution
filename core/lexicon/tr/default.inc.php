@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Hızlı Güncelleme Yığını';
 $_lang['rank'] = 'Rütbe';
 $_lang['recent_docs'] = 'Son Çalışılan Belgeler';
 $_lang['redirecting'] = 'Yönlendiriliyor...';
-$_lang['refresh_action_map'] = 'Eylem haritası önbelleğini temizleme';
 $_lang['refresh_auto_publish'] = 'Otomatik yayınlanma tarihlerini işleme koyma';
 $_lang['refresh_context_settings'] = 'Bağlam önbelleklerini yeniden oluşturma';
 $_lang['refresh_db'] = 'Veritabanı sonuç kümesi önbelleğini temizleme';

@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'อัปเดตตัวแปรแม่แบ
 $_lang['rank'] = 'อันดับ';
 $_lang['recent_docs'] = 'เอกสารล่าสุด';
 $_lang['redirecting'] = 'เปลี่ยนเส้นทาง...';
-$_lang['refresh_action_map'] = 'ล้างแอ็กชันแม็ปแคช';
 $_lang['refresh_auto_publish'] = 'การประมวลผลวันที่เผยแพร่โดยอัตโนมัติ';
 $_lang['refresh_context_settings'] = 'สร้างแคชบริบทขึ้นมาใหม่';
 $_lang['refresh_db'] = 'ล้างแคชการตั้งผลลัพธ์ฐานข้อมูล';

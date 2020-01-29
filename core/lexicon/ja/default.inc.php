@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'クイック編集';
 $_lang['rank'] = 'ランク';
 $_lang['recent_docs'] = '最近のドキュメント';
 $_lang['redirecting'] = 'リダイレクトしています。';
-$_lang['refresh_action_map'] = 'Action mapキャッシュを初期化';
 $_lang['refresh_auto_publish'] = '自動公開処理を実行中・・・';
 $_lang['refresh_context_settings'] = 'コンテキストキャッシュを初期化中・・・';
 $_lang['refresh_db'] = 'データベースの結果セットキャッシュを初期化';

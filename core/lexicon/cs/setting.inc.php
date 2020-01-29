@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'Základní URL pro odkazy Nápovědy v p
 $_lang['setting_blocked_minutes'] = 'Doba blokování uživatele';
 $_lang['setting_blocked_minutes_desc'] = 'Počet minut, po které bude uživatel blokován, pokud překročí maximální počet pokusů pro přihlášení. Zadávejte pouze čísla (žádné čárky, mezery atd.)';
 
-$_lang['setting_cache_action_map'] = 'Povolit cache mapy akcí';
-$_lang['setting_cache_action_map_desc'] = 'Je-li nastaveno "Ano", akce (nebo kontrolní mapy) budou ukládány do cache a tím se zkrátí doba načítání správce obsahu.';
-
 $_lang['setting_cache_alias_map'] = 'Povolit cache mapy aliasů v rámci kontextu';
 $_lang['setting_cache_alias_map_desc'] = 'Je-li nastaveno "Ano", URI všech dokumentů jsou ukládány do cache kontextu. Pro lepší výkon toto povolte na menších a zakažte na rozsáhlejších portálech.';
 

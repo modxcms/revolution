@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Perbarui cepat TV';
 $_lang['rank'] = 'Peringkat';
 $_lang['recent_docs'] = 'Dokumen terkini';
 $_lang['redirecting'] = 'Mengarahkan...';
-$_lang['refresh_action_map'] = 'Mengosongkan cache peta aksi';
 $_lang['refresh_auto_publish'] = 'Pemrosesan otomatis tanggal penerbitan';
 $_lang['refresh_context_settings'] = 'Regenerasi konteks cache';
 $_lang['refresh_db'] = 'Kliring hasil database mengatur cache';
