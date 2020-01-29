@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'עדכן מהר שדה';
 $_lang['rank'] = 'Rank';
 $_lang['recent_docs'] = 'מסמכים אחרונים';
 $_lang['redirecting'] = 'מפנה מחדש...';
-$_lang['refresh_action_map'] = 'ניקוי מטמון מפת הפעולה';
 $_lang['refresh_auto_publish'] = 'עיבוד תאריכי פרסום אוטומטיים';
 $_lang['refresh_context_settings'] = 'חידוש מטמוני הקשר';
 $_lang['refresh_db'] = 'ניקוי מטמון סט תוצאות מסד הנתונים';
