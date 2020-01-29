@@ -144,7 +144,9 @@ class CheckLexicon
 
     private $invalidLexicons = array();
 
-    public function __construct($modx, $options)
+    private $modx = null;
+
+    public function __construct(xPDO $modx, $options)
     {
         $this->modx = $modx;
         $this->language = isset($options['language']) ? $options['language'] : 'en';
@@ -438,9 +440,11 @@ class CheckLexicon
             $menus = include MODX_BASE_PATH . '_build/data/transport.core.menus.php';
         }
 
+        $xpdo->setLogLevel(xPDO::LOG_LEVEL_FATAL);
         foreach ($menus as $menu) {
             $this->addMenuKey($menu);
         }
+        $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
     }
 
     /**
