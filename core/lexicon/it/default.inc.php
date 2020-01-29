@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Modifica rapida TV';
 $_lang['rank'] = 'Rango';
 $_lang['recent_docs'] = 'Documenti recenti';
 $_lang['redirecting'] = 'Reindirizzamento...';
-$_lang['refresh_action_map'] = 'Sto ripulendo la cache della mappa delle Azioni';
 $_lang['refresh_auto_publish'] = 'Sto processando le date di pubblicazione automatica';
 $_lang['refresh_context_settings'] = 'Sto rigenerando le cache dei contesti';
 $_lang['refresh_db'] = 'Sto pulendo i cache dei set risultati del database';
