@@ -1609,6 +1609,10 @@ iframe[classname="x-hidden"] {
     position: relative;
   }
 
+  .x-panel-collapsed {
+    min-height: 18px;
+  }
+
   #modx-resource-main-right {
     .modx-resource-panel {
       &:not(:last-child) {
