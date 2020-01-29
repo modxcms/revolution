@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Upravit template variable v okně';
 $_lang['rank'] = 'Pořadí';
 $_lang['recent_docs'] = 'Naposledy upravované dokumenty';
 $_lang['redirecting'] = 'Přesměrovávám...';
-$_lang['refresh_action_map'] = 'Vyprázdňuji cache pro mapu akcí';
 $_lang['refresh_auto_publish'] = 'Probíhá zpracování automaticky publikovaných dokumentů:';
 $_lang['refresh_context_settings'] = 'Vyprazdňuji cache pro kontexty:';
 $_lang['refresh_db'] = 'Vyprázdňuji cache databázových výsledků';
