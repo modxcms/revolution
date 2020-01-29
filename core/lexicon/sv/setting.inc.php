@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'Den standard-URL som ska användas för 
 $_lang['setting_blocked_minutes'] = 'Blockeringstid';
 $_lang['setting_blocked_minutes_desc'] = 'Här kan du ange hur många minuter en användare blir blockerad efter att ha gjort för många misslyckade inloggningsförsök. Ange värdet som ett tal (inga kommatecken, mellanslag etc).';
 
-$_lang['setting_cache_action_map'] = 'Aktivera cachning av händelsekartor';
-$_lang['setting_cache_action_map_desc'] = 'När denna är aktiverad kommer händelser (eller controller-kartor) att cachas för att minska laddningstiderna i hanteraren.';
-
 $_lang['setting_cache_alias_map'] = 'Aktivera cachning av kontexts aliaskarta';
 $_lang['setting_cache_alias_map_desc'] = 'När denna är aktiverad cachas alla resurs-URI:er till kontexten. Aktivera på mindre webbplatser och inaktivera på större webbplatser för bättre prestande.';
 
