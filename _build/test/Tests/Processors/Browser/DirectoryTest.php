@@ -130,10 +130,6 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      */
     public function testRemoveDirectory($dir = '') {
         if (empty($dir)) return;
-        $this->modx->setOption('filemanager_path','');
-        $this->modx->setOption('filemanager_url','');
-        $this->modx->setOption('rb_base_dir','');
-        $this->modx->setOption('rb_base_url','');
 
         $adir = $this->modx->getOption('base_path').$dir;
         @mkdir($adir);

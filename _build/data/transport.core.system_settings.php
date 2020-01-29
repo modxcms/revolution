@@ -541,42 +541,6 @@ $settings['feed_modx_security_enabled']->fromArray([
   'area' => 'system',
   'editedon' => null,
 ], '', true, true);
-$settings['filemanager_path']= $xpdo->newObject(modSystemSetting::class);
-$settings['filemanager_path']->fromArray([
-  'key' => 'filemanager_path',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
-$settings['filemanager_path_relative']= $xpdo->newObject(modSystemSetting::class);
-$settings['filemanager_path_relative']->fromArray([
-  'key' => 'filemanager_path_relative',
-  'value' => true,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
-$settings['filemanager_url']= $xpdo->newObject(modSystemSetting::class);
-$settings['filemanager_url']->fromArray([
-  'key' => 'filemanager_url',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
-$settings['filemanager_url_relative']= $xpdo->newObject(modSystemSetting::class);
-$settings['filemanager_url_relative']->fromArray([
-  'key' => 'filemanager_url_relative',
-  'value' => true,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
 $settings['form_customization_use_all_groups']= $xpdo->newObject(modSystemSetting::class);
 $settings['form_customization_use_all_groups']->fromArray([
   'key' => 'form_customization_use_all_groups',
@@ -1361,7 +1325,6 @@ $settings['phpthumb_zoomcrop']->fromArray([
   'area' => 'phpthumb',
   'editedon' => null,
 ], '', true, true);
-
 $settings['publish_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['publish_default']->fromArray([
   'key' => 'publish_default',
@@ -1369,24 +1332,6 @@ $settings['publish_default']->fromArray([
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
-  'editedon' => null,
-], '', true, true);
-$settings['rb_base_dir']= $xpdo->newObject(modSystemSetting::class);
-$settings['rb_base_dir']->fromArray([
-  'key' => 'rb_base_dir',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
-$settings['rb_base_url']= $xpdo->newObject(modSystemSetting::class);
-$settings['rb_base_url']->fromArray([
-  'key' => 'rb_base_url',
-  'value' => '',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
   'editedon' => null,
 ], '', true, true);
 $settings['request_controller']= $xpdo->newObject(modSystemSetting::class);
@@ -1713,15 +1658,6 @@ $settings['static_elements_basepath']->fromArray([
   'area' => 'static_elements',
   'editedon' => null,
 ], '', true, true);
-$settings['strip_image_paths']= $xpdo->newObject(modSystemSetting::class);
-$settings['strip_image_paths']->fromArray([
-  'key' => 'strip_image_paths',
-  'value' => true,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
 $settings['symlink_merge_fields']= $xpdo->newObject(modSystemSetting::class);
 $settings['symlink_merge_fields']->fromArray([
   'key' => 'symlink_merge_fields',
@@ -1828,15 +1764,6 @@ $settings['use_alias_path']->fromArray([
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
-  'editedon' => null,
-], '', true, true);
-$settings['use_browser']= $xpdo->newObject(modSystemSetting::class);
-$settings['use_browser']->fromArray([
-  'key' => 'use_browser',
-  'value' => true,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'file',
   'editedon' => null,
 ], '', true, true);
 $settings['use_editor']= $xpdo->newObject(modSystemSetting::class);

@@ -80,7 +80,8 @@ class modFileHandler {
      * @return string The base path
      */
     public function getBasePath() {
-        $basePath = $this->context->getOption('filemanager_path', '', $this->config);
+        $basePath = '';
+
         /* expand placeholders */
         $basePath = str_replace([
             '{base_path}',
@@ -100,7 +101,7 @@ class modFileHandler {
      * @return string The base URL
      */
     public function getBaseUrl() {
-        $baseUrl = $this->context->getOption('filemanager_url', $this->context->getOption('rb_base_url', MODX_BASE_URL, $this->config), $this->config);
+        $baseUrl = '';
 
         /* expand placeholders */
         $baseUrl = str_replace([
