@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'De basis URL waarmee de Help links, rech
 $_lang['setting_blocked_minutes'] = 'Geblokkeerde minuten';
 $_lang['setting_blocked_minutes_desc'] = 'Hier kun je het aantal minuten definieren dat een gebruiker geblokkeerd is na het bereiken van het maximale aantal foutieve inlogpogingen. Vul alleen cijfers in (geen komma\'s, spaties etc.)';
 
-$_lang['setting_cache_action_map'] = 'Actie Map Cache inschakelen';
-$_lang['setting_cache_action_map_desc'] = 'Indien ingeschakeld, acties (of controller maps) worden gecached om de laadtijd van de manager te beforderen.';
-
 $_lang['setting_cache_alias_map'] = 'Context Alias Map Cache inschakelen';
 $_lang['setting_cache_alias_map_desc'] = 'Indien ingeschakeld zullen alle Document URIs per context gecached worden. Bij grote (10.000+ documenten) websites kan er mogelijk verbeterde performance worden behaald door dit uit te zetten.';
 
