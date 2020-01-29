@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Бързо актуализиране на TV';
 $_lang['rank'] = 'Ранг';
 $_lang['recent_docs'] = 'Последни документи';
 $_lang['redirecting'] = 'Пренасочване...';
-$_lang['refresh_action_map'] = 'Изчистване кеша на Картата за действие';
 $_lang['refresh_auto_publish'] = 'Обработка на дати за автоматично публикуване';
 $_lang['refresh_context_settings'] = 'Регенериране на контекст кеша';
 $_lang['refresh_db'] = 'Изчистване кеша на резулатите от базата данни ';
