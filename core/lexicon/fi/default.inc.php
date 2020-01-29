@@ -367,7 +367,6 @@ $_lang['quick_update_tv'] = 'Sivupohjan muuttujan pikapäivitys';
 $_lang['rank'] = 'Luokitus';
 $_lang['recent_docs'] = 'Viimeisimmät dokumentit';
 $_lang['redirecting'] = 'Ohjataan edelleen...';
-$_lang['refresh_action_map'] = 'Tyhjennetään toimintakartan välimuisti';
 $_lang['refresh_auto_publish'] = 'Käsittellään automaattisia julkaisupäivämääriä';
 $_lang['refresh_context_settings'] = 'Uudistetaan kontekstien välimuisteja';
 $_lang['refresh_db'] = 'Tyhjennetään tietokannan tulos välimuisti';
