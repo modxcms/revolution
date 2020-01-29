@@ -129,9 +129,6 @@ $_lang['setting_base_help_url_desc'] = 'Yönetici içindeki sayfaların sağ üs
 $_lang['setting_blocked_minutes'] = 'Engellenen Dakikalar';
 $_lang['setting_blocked_minutes_desc'] = 'Burada, bir kullanıcının izinli başarısız oturum açma girişimlerine maksimum sayıda erişmesi durumunda, kullanıcının engelleneceği dakika sayısını girebilirsiniz. Lütfen bu değeri yalnızca sayılar olarak girin (virgül, boşluk vb.)';
 
-$_lang['setting_cache_action_map'] = 'Eylem Haritası Önbelleğini Etkinleştirme';
-$_lang['setting_cache_action_map_desc'] = 'Etkinleştirildiği zaman, eylemler (veya kontrolör haritaları) yönetici sayfa yükleme sürelerini azaltmak için önbellekte saklanır.';
-
 $_lang['setting_cache_alias_map'] = 'Bağlam Rumuzu Harita Önbelleğini Etkinleştirme';
 $_lang['setting_cache_alias_map_desc'] = 'Etkinleştirildiğinde, tüm Kaynak URI\'leri Bağlam içine önbelleğe alınır. Daha küçük sitelerde etkinleştirin ve daha iyi performans için daha büyük sitelerde devre dışı bırakın.';
 
