@@ -366,7 +366,6 @@ $_lang['quick_update_tv'] = 'Швидко змінити змінну шабло
 $_lang['rank'] = 'Порядок';
 $_lang['recent_docs'] = 'Останні документи';
 $_lang['redirecting'] = 'Перенаправлення...';
-$_lang['refresh_action_map'] = 'Очищення кешу карти дій';
 $_lang['refresh_auto_publish'] = 'Обробка дат автоматичної публікації';
 $_lang['refresh_context_settings'] = 'Повторне створення кешу контекстів';
 $_lang['refresh_db'] = 'Очищення кешу запитів до бази даних';
