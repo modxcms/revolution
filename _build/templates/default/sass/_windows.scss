@@ -105,7 +105,8 @@
 
     &.modx-console,
     &.modx-alert,
-    &.modx-confirm {
+    &.modx-confirm,
+    & .x-window-with-tabs {
       .x-window-body {
         padding-top: 15px;
       }
