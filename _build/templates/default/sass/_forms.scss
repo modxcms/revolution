@@ -83,7 +83,6 @@ input::-moz-focus-inner {
 
     .modx-tv-label-title {
       display: inline-block;
-      padding-right: 5px;
     }
 
     .modx-tv-label-description {
@@ -98,7 +97,7 @@ input::-moz-focus-inner {
       height: 16px;
       opacity: 0;
       filter: alpha(opacity=0); /* for IE <= 8 */
-      padding: 17px 8px 0 0;
+      padding: 3px;
       position: relative;
       top: 0;
       right: 0;
@@ -111,11 +110,10 @@ input::-moz-focus-inner {
         box-sizing: border-box;
         color: $coreFieldLabelColor;
         content: fa-content($fa-var-sync);
-        font-size: 16px;
+        font-size: 14px;
         position: relative;
-        bottom: 0;
+        bottom: 3px;
         left: 0;
-        padding-left: 4px;
         text-align: center;
         vertical-align: middle;
         width: 16px;
@@ -263,12 +261,6 @@ input::-moz-focus-inner {
     /* targets .x-form-item */
     padding: 0; /* override the .x-form-label-left rule */
     padding-bottom: 0; /* override extjs default theme styles */
-
-    &:first-of-type {
-      .modx-tv-reset {
-        padding: 2px 8px 0 0;
-      }
-    }
 
     label.x-form-item-label {
       display: inline-block; /* override extjs default theme styles */
