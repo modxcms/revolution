@@ -19,11 +19,7 @@ MODx.panel.AccessPolicy = function(config) {
         ,plugin: ''
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('policy')+(config.record ? ': '+config.record.name : '')
-            ,id: 'modx-policy-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -63,8 +59,8 @@ MODx.panel.AccessPolicy = function(config) {
                         ,anchor: '100%'
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                    Ext.getCmp('modx-policy-header').getEl().update(_('policy')+': '+f.getValue());
-                                }}
+                                Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
+                            }}
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -128,6 +124,8 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             var r = this.config.record;
 
             this.getForm().setValues(r);
+            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.name));
+
             var g = Ext.getCmp('modx-grid-policy-permissions');
             if (g) { g.getStore().loadData(r.permissions); }
 
@@ -146,6 +144,13 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
 
     ,success: function(o) {
         Ext.getCmp('modx-grid-policy-permissions').getStore().commitChanges();
+    }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-policy-header', [{
+            text: _('user_group_management'),
+            href: MODx.getPage('security/permission')
+        }]);
     }
 });
 Ext.reg('modx-panel-access-policy',MODx.panel.AccessPolicy);
