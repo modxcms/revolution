@@ -144,6 +144,7 @@ MODx.panel.Dashboard = function(config) {
 };
 Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.initialized) { return false; }
         if (Ext.isEmpty(this.config.record.id)) {
@@ -151,7 +152,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.getCmp('modx-header-breadcrumbs').updateHeader(this.config.record.name);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(this.config.record.name));
 
         /*
         var d = this.config.record.usergroups;
@@ -170,6 +171,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
     ,beforeSubmit: function(o) {
         var bp = {};
         var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
@@ -178,6 +180,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         }
         Ext.apply(o.form.baseParams,bp);
     }
+
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             MODx.loadPage('system/dashboards/update', 'id='+o.result.object.id);
@@ -188,6 +191,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
 
         }
     }
+
     ,getPageHeader: function(config) {
         return MODx.util.getHeaderBreadCrumbs('modx-dashboard-header', [{
             text: _('dashboards'),
