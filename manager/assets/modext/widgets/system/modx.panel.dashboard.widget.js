@@ -47,7 +47,7 @@ MODx.panel.DashboardWidget = function(config) {
                         'keyup': {scope:this,fn:function(f,e) {
                             var s = _(f.getValue());
                             if (s == undefined) { s = f.getValue(); }
-                                Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(s));
+                            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(s));
                         }}
                     }
                 },{
@@ -282,7 +282,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.getCmp('modx-header-breadcrumbs').updateHeader(this.config.record.name_trans);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(this.config.record.name_trans));
 
         var d = this.config.record.dashboards;
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
@@ -320,6 +320,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             if (g) { g.getStore().commitChanges(); }
         }
     }
+
     ,getPageHeader: function(config) {
         return MODx.util.getHeaderBreadCrumbs('modx-dashboard-widget-header', [{
             text: _('dashboards'),
