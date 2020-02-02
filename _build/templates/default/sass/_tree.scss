@@ -148,23 +148,31 @@
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
-  padding-left: 6px;
-  margin: 0 0 0 -16px;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: center;
+  margin: 0;
+}
+
+.x-tree-arrows .x-tree-elbow-plus:before,
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-plus:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before {
+  @extend %pseudo-font;
+  content: fa-content($fa-var-caret-right);
 }
 
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
   @extend %pseudo-font;
   content: fa-content($fa-var-caret-down);
-  padding-left: 4px;
-  width: 12px;
 }
 
 /* tree states */
 .x-tree-node-el {
   color: $treeColor;
   font: $treeNodeFont;
-  padding-left: 6px;
+  padding: 0 0 0 8px;
 
   &.is_folder {
     background: $treeFolderBg;
@@ -292,7 +300,7 @@
     top: 0;
     right: 6px;
     bottom: 0;
-    line-height: 30px;
+    line-height: 34px;
     opacity: 0;
     transition: opacity .4s ease-in;
 
@@ -818,34 +826,6 @@
 
 .x-tree-root-node {
   margin: 0;
-}
-
-.x-tree-arrows .x-tree-elbow-plus,
-.x-tree-arrows .x-tree-elbow-minus,
-.x-tree-arrows .x-tree-elbow-end-plus,
-.x-tree-arrows .x-tree-elbow-end-minus {
-  background: none;
-}
-
-.x-tree-arrows .x-tree-elbow-plus:before,
-.x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-plus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-caret-right);
-  background: transparent 0 0;
-  display: inline-block;
-  width: 10px;
-  padding-left: 6px;
-  margin: 0;
-}
-
-.x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-caret-down);
-  padding-left: 4px;
-  width: 12px;
 }
 
 .x-tree-node {
