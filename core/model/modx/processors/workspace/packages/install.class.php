@@ -46,6 +46,11 @@ class modPackageInstallProcessor extends modProcessor {
     }
 
     public function process() {
+        $this->package->parseSignature();
+        $identifiers = $this->modx->getOption('package_install_identifiers', null, array());
+        $identifiers[] = $this->package->identifier;
+        $this->modx->setOption('package_install_identifiers', $identifiers);
+
         $this->modx->log(xPDO::LOG_LEVEL_INFO,$this->modx->lexicon('package_install_info_found'));
 
         $installed = $this->package->install($this->getProperties());
