@@ -4,7 +4,7 @@
   height: 55px;
   max-height: 55px;
   @include media($mobile) {
-	  height:auto !important;
+    height:auto !important;
   }
 }
 #modx-navbar {
@@ -14,7 +14,7 @@
   position: relative;
   z-index: 20;
   @include media($mobile) {
-	  box-shadow:none;
+    box-shadow:none;
   }
 }
 
@@ -35,7 +35,7 @@
   margin: 0;
   padding: 0;
   @include media($mobile) {
-	  float:none;
+    float:none;
   }
   li {
     border-right: 1px solid $navbarBorder;
@@ -342,12 +342,12 @@
 }
 
 #modx-site-info {
-  padding: 13px 5px 0 5px !important;
+  padding: 12px 5px 0 !important;
   border-right: 0 !important;
   width: 175px;
 
-  @include media($desktop) {
-    display: none
+  @include media($tabletL) {
+    display: none;
   }
 
   .site_name { color:#fff }

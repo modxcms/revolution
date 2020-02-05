@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.3-pl (TBD)
 ====================================
+- Fix display of #modx-site-info depending on width [#14779]
 - Limit deprecated modAction message to current package during install/uninstall [#14303]
 - Apply `MODx.util.safeHtml` to feed dashboards [#14946]
 - Make MODX Browser work on mobile screens [#14774]
