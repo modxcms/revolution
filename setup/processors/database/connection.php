@@ -37,7 +37,7 @@ $xpdo = $install->getConnection($mode);
 $errors = [];
 $dbExists = false;
 if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
-    if (is_bool($xpdo)) {
+    if (is_bool($xpdo) || is_null($xpdo)) {
         $this->error->failure($install->lexicon('xpdo_err_ins'));
     } else {
         $this->error->failure($xpdo);
