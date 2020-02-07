@@ -20914,7 +20914,7 @@ ul.x-tab-strip-bottom {
     border-radius: 0 0 3px 3px;
     box-sizing: border-box;
     /* don't count padding in width: 100%; */
-    padding: 5px;
+    padding: 5px 15px 15px;
     /* make sure the padding also stays when maximized */
     width: 100% !important;
     /* override fixed width set by extjs */ }
@@ -20980,16 +20980,17 @@ ul.x-tab-strip-bottom {
   display: inline-block;
   float: left;
   position: relative;
-  width: 36px !important;
+  width: 40px !important;
   /* override extjs default theme style */ }
   .ext-mb-icon:before {
     color: #3697CD;
     content: '';
     font-size: 32px;
-    margin-top: -14px;
-    /* half of the height to center vertically with top 50% */
     position: absolute;
     top: 50%;
+    -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    /* center vertically with top 50% */
     right: 0;
     text-align: left;
     width: 100%; }
