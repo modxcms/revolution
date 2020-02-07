@@ -193,8 +193,8 @@ $tabTextHover: $darkestGray;
 $leftbarTabActiveBg: $mainBg;
 
 /* Windows */
-$winHeaderBg: $white;
-$winHeaderBorderColor: $white;
+$winHeaderBg: $wildSand;
+$winHeaderBorderColor: $wildSand;
 $winBodyBg: $white;
 $winFooterBg: $white;
 $winFooterBorderColor: $white;
@@ -215,7 +215,7 @@ $fontMedium: normal 12px $bodyfonts;
 $fontNormal: normal $bodyFontSize $bodyfonts;
 $fontNavbar: normal $bodyFontSize $headfonts;
 $fontH2:     normal 25px $headfonts;
-$fontH3:     bold 15px $headfonts;
+$fontH3:     550 15px $headfonts;
 
 /* Responsive breakpoints */
 $mobile:  (media: "screen and (max-width: 640px)", columns: 4);

@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 - Fix package dependency restrictions not working [#14904]
 - Fix fatal error when updating a git alpha1 install without running composer update [#14996]
+- Fix positioning of reset-to-default button on TVs [#14686]
+- Change style for uninstalled packages in the package manager [#14686]
 
 MODX Revolution 3.0.0-alpha2 (January 28, 2020)
 ====================================

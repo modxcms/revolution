@@ -14563,8 +14563,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
     height: 16px;
     min-width: 100%;
     padding: 0;
-    /* override extjs default theme styles */
-    vertical-align: middle; }
+    /* override extjs default theme styles */ }
     .ext-ie8 .x-btn button, .ext-ie8 .actions button button, .actions .ext-ie8 button button, .ext-ie8 .inline-button button, .ext-ie8 .x-superboxselect-item button, .ext-ie8 .x-form-trigger button, .ext-ie8 .x-date-mp-ok button, .ext-ie8 .x-date-mp-cancel button {
       padding-top: 0;
       /* fix IE < 9 (overriding extjs default style) */ }
@@ -17605,8 +17604,7 @@ input::-moz-focus-inner {
     position: relative;
     /* boundary for absolutely positioned elements */ }
     .x-form-item label.x-form-item-label .modx-tv-label-title {
-      display: inline-block;
-      padding-right: 5px; }
+      display: inline-block; }
     .x-form-item label.x-form-item-label .modx-tv-label-description {
       display: inline-block;
       font-style: italic;
@@ -17618,7 +17616,7 @@ input::-moz-focus-inner {
       opacity: 0;
       filter: alpha(opacity=0);
       /* for IE <= 8 */
-      padding: 17px 8px 0 0;
+      padding: 3px;
       position: relative;
       top: 0;
       right: 0;
@@ -17628,11 +17626,10 @@ input::-moz-focus-inner {
         box-sizing: border-box;
         color: #515151;
         content: "\f021";
-        font-size: 16px;
+        font-size: 14px;
         position: relative;
-        bottom: 0;
+        bottom: 3px;
         left: 0;
-        padding-left: 4px;
         text-align: center;
         vertical-align: middle;
         width: 16px;
@@ -17736,8 +17733,6 @@ input::-moz-focus-inner {
     /* override the .x-form-label-left rule */
     padding-bottom: 0;
     /* override extjs default theme styles */ }
-    .x-form-label-top .x-form-item:first-of-type .modx-tv-reset {
-      padding: 2px 8px 0 0; }
     .x-form-label-top .x-form-item label.x-form-item-label {
       display: inline-block;
       /* override extjs default theme styles */
@@ -20831,8 +20826,8 @@ ul.x-tab-strip-bottom {
   .x-window .x-window-tc {
     z-index: 1; }
     .x-window .x-window-tc .x-window-header {
-      background-color: #FFF;
-      border-bottom: 1px solid #FFF;
+      background-color: #F4F4F4;
+      border-bottom: 1px solid #F4F4F4;
       border-radius: 3px 3px 0 0;
       color: #515151;
       font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -20870,7 +20865,8 @@ ul.x-tab-strip-bottom {
     padding: 15px; }
   .x-window.modx-window .x-window-body {
     padding-top: 0; }
-  .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body {
+  .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body,
+  .x-window.modx-window .x-window-with-tabs .x-window-body {
     padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFF;
@@ -21566,7 +21562,7 @@ h3 {
   /* align main titles with treetabs and left panel edge */ }
 
 h3 {
-  font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
+  font: 550 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 strong {
   font-weight: bold; }
@@ -21599,8 +21595,12 @@ hr {
 .bold {
   font-weight: bold; }
 
+.installed {
+  color: #515151; }
+
 .not-installed {
-  color: #CF1124; }
+  color: #999999;
+  font-style: italic; }
 
 .yellow {
   color: #FCE588 !important; }
@@ -22751,6 +22751,8 @@ iframe[classname="x-hidden"] {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     position: relative; }
+  #modx-resource-settings .x-panel-collapsed {
+    min-height: 18px; }
   #modx-resource-settings #modx-resource-main-right .modx-resource-panel {
     padding: 15px;
     background: #FFF;
@@ -22936,9 +22938,6 @@ iframe[classname="x-hidden"] {
   font-size: 20px;
   line-height: 1;
   margin: 0 0 5px 0; }
-
-.x-grid3-cell-inner .x-grid3-col-main .not-installed {
-  color: #999999; }
 
 .package-installed {
   color: #515151;
@@ -23306,12 +23305,18 @@ iframe[classname="x-hidden"] {
   .meta-wrapper ul {
     list-style: disc inside;
     padding-left: 15px; }
-  .meta-wrapper h1,
-  .meta-wrapper h2,
-  .meta-wrapper h3,
-  .meta-wrapper h4,
+  .meta-wrapper h1 {
+    font-size: 1.2em; }
+  .meta-wrapper h2 {
+    font-size: 1.15em; }
+  .meta-wrapper h3 {
+    font-size: 1.1em; }
+  .meta-wrapper h4 {
+    font-size: 1.05em; }
   .meta-wrapper h5 {
-    margin-top: 5px; }
+    font-size: 1em; }
+  .meta-wrapper h6 {
+    font-size: .95em; }
 
 .window-no-padding .x-panel-mc {
   padding: 0 !important; }
