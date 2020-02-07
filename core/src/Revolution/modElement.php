@@ -546,30 +546,65 @@ class modElement extends modAccessibleSimpleObject
      *
      * @param array $options An array of options.
      *
-     * @return string|boolean The absolute path to the static source file or false if not static.
+     * @return string|boolean The absolute path to the static source file (if streamable), a relative path (if needs to be loaded through media source) or false if not static/available.
      */
     public function getSourceFile(array $options = [])
     {
-        if ($this->isStatic() && (empty($this->_sourceFile) || $this->getOption('recalculate_source_file', $options,
-                    $this->staticSourceChanged()))) {
-            $filename = $this->get('static_file');
-            if (!empty($filename)) {
-                $array = [];
-                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
-                    $this->xpdo->parser->processElementTags('', $filename);
-                }
-            }
-            /** @var modMediaSource $source */
-            if ($source = $this->getSource()) {
-                $this->_sourceFile = !$source->getMetaData($filename) && $this->get('source') < 1
-                    ? $this->getSourcePath($options) . $filename
-                    : $filename;
-            } else {
-                return false;
+        // Only static files have a source file
+        if (!$this->isStatic()) {
+            return false;
+        }
+
+        // Cache the path calculation - unless provided otherwise
+        $recalculate = $this->getOption('recalculate_source_file', $options, $this->staticSourceChanged());
+        if (!empty($this->_sourceFile) && !$recalculate) {
+            return $this->_sourceFile;
+        }
+
+        $result = false;
+
+        // Grab the filename and parse tags within it
+        $filename = $this->get('static_file');
+        if (!empty($filename)) {
+            $array = [];
+            if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
+                $this->xpdo->parser->processElementTags('', $filename);
             }
         }
 
-        return $this->isStatic() ? $this->_sourceFile : false;
+        // If a media source is assigned, fetch it
+        if ($this->get('source') > 0) {
+            /** @var modMediaSource $source */
+            $source = $this->getSource();
+            if ($source) {
+                // Streaming source? Init and return the full path to be read.
+                if ($source->get('is_stream')) {
+                    $source->initialize();
+                    $result = $source->getBasePath() . $filename;
+                }
+
+                // If we can find a file relative to the source, return just the relative path
+                elseif ($source->getMetaData($filename)) {
+                    $result = $filename;
+                }
+            }
+            else {
+                $result = false;
+            }
+        }
+
+        // If the file is a fully qualified path we can access, use it
+        elseif (is_readable($filename)) {
+            $result = $filename;
+        }
+
+        // If the file is located and accessible in the sources (components) path, use that
+        elseif (($sourcePath = $this->getSourcePath()) && is_readable($sourcePath . $filename)) {
+            $result = $sourcePath . $filename;
+        }
+
+        $this->_sourceFile = $result;
+        return $result;
     }
 
 
@@ -589,7 +624,7 @@ class modElement extends modAccessibleSimpleObject
             $this->xpdo->parser->processElementTags('', $this->_sourcePath);
         }
 
-        return str_replace(MODX_CORE_PATH, '', $this->_sourcePath);
+        return $this->_sourcePath;
     }
 
 
@@ -604,10 +639,16 @@ class modElement extends modAccessibleSimpleObject
     {
         $content = false;
         if ($this->isStatic() && $sourceFile = $this->getSourceFile($options)) {
-            if ($source = $this->getSource()) {
-                if ($file = $source->getObjectContents($sourceFile)) {
-                    return $file['content'];
-                }
+            // If the sourceFile is read/streamable, we can fetch it directly
+            if (is_readable($sourceFile)) {
+                $content = file_get_contents($sourceFile);
+            }
+            // Otherwise fetch the relative path through the media source
+            elseif (($this->get('source') > 0)
+                && ($source = $this->getSource())
+                && $file = $source->getObjectContents($sourceFile)
+            ) {
+                $content = $file['content'];
             }
         }
 
