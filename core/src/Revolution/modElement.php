@@ -563,14 +563,8 @@ class modElement extends modAccessibleSimpleObject
 
         $result = false;
 
-        // Grab the filename and parse tags within it
-        $filename = $this->get('static_file');
-        if (!empty($filename)) {
-            $array = [];
-            if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
-                $this->xpdo->parser->processElementTags('', $filename);
-            }
-        }
+        // Grab the static file name
+        $filename = $this->getStaticFileName();
 
         // If a media source is assigned, fetch it
         if ($this->get('source') > 0) {
@@ -667,15 +661,21 @@ class modElement extends modAccessibleSimpleObject
     public function setFileContent($content, array $options = [])
     {
         $set = false;
-        if ($this->isStatic() && $sourceFile = $this->getSourceFile($options)) {
-            if ($source = $this->getSource()) {
+        if ($this->isStatic()) {
+            $sourceFile = $this->getStaticFileName();
+            if (($this->get('source') > 0) && $source = $this->getSource()) {
+                $source->initialize();
                 if ($source->getMetaData($sourceFile)) {
                     $set = (bool)$source->updateObject($sourceFile, $content);
-                } else {
+                }
+                else {
                     $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
                     $file = array_pop($path);
                     $set = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, $content);
                 }
+            }
+            else {
+                $set = file_put_contents($sourceFile, $content) > 0;
             }
         }
 
@@ -1153,5 +1153,17 @@ class modElement extends modAccessibleSimpleObject
         }
 
         return $isValid;
+    }
+
+    private function getStaticFileName()
+    {
+        $filename = $this->get('static_file');
+        if (!empty($filename)) {
+            $array = [];
+            if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
+                $this->xpdo->parser->processElementTags('', $filename);
+            }
+        }
+        return $filename;
     }
 }
