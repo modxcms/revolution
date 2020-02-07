@@ -21,7 +21,7 @@
 
     <!-- Set the project version -->
     <property name="modx.core.version" value="3.0.0" />
-    <property name="modx.core.release" value="alpha2" />
+    <property name="modx.core.release" value="alpha3" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}" />
