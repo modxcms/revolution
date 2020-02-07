@@ -16,21 +16,17 @@ MODx.panel.AccessPolicyTemplate = function(config) {
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy-template'
-		,cls: 'container form-with-labels'
+        ,cls: 'container form-with-labels'
         ,class_key: 'modAccessPolicyTemplate'
         ,plugin: ''
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('policy_template')+(config.record ? ': '+config.record.name : '')
-            ,id: 'modx-policy-template-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
                 ,border: true
-				,bodyCssClass: 'tab-panel-wrapper'
+                ,bodyCssClass: 'tab-panel-wrapper'
             }
             ,forceLayout: true
             ,deferredRender: false
@@ -41,58 +37,58 @@ MODx.panel.AccessPolicyTemplate = function(config) {
                     html: '<p>'+_('policy_template.desc')+'</p>'
                     ,xtype: 'modx-description'
                 },{
-					xtype: 'panel'
-					,border: false
-					,cls:'main-wrapper'
-					,layout: 'form'
-					,defaults:{ anchor: '100%' }
-					,labelAlign: 'top'
-					,labelSeparator: ''
-					,items: [{
-						xtype: 'hidden'
-						,name: 'id'
-					},{
-						xtype: 'textfield'
-						,fieldLabel: _('name')
-						,description: MODx.expandHelp ? '' : _('policy_template_desc_name')
-						,name: 'name'
-						,id: 'modx-policy-template-name'
-						,maxLength: 255
-						,enableKeyEvents: true
-						,allowBlank: false
-						,listeners: {
-							'keyup': {scope:this,fn:function(f,e) {
-								Ext.getCmp('modx-policy-template-header').getEl().update(_('policy')+': '+f.getValue());
-							}}
-						}
-					},{
+                    xtype: 'panel'
+                    ,border: false
+                    ,cls:'main-wrapper'
+                    ,layout: 'form'
+                    ,defaults:{ anchor: '100%' }
+                    ,labelAlign: 'top'
+                    ,labelSeparator: ''
+                    ,items: [{
+                        xtype: 'hidden'
+                        ,name: 'id'
+                    },{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('name')
+                        ,description: MODx.expandHelp ? '' : _('policy_template_desc_name')
+                        ,name: 'name'
+                        ,id: 'modx-policy-template-name'
+                        ,maxLength: 255
+                        ,enableKeyEvents: true
+                        ,allowBlank: false
+                        ,listeners: {
+                            'keyup': {scope:this,fn:function(f,e) {
+                                Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
+                            }}
+                        }
+                    },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-policy-template-name'
                         ,html: _('policy_template_desc_name')
                         ,cls: 'desc-under'
 
                     },{
-						xtype: 'textarea'
-						,fieldLabel: _('description')
-						,description: MODx.expandHelp ? '' : _('policy_template_desc_description')
-						,name: 'description'
-						,id: 'modx-policy-template-description'
-						,grow: true
-					},{
+                        xtype: 'textarea'
+                        ,fieldLabel: _('description')
+                        ,description: MODx.expandHelp ? '' : _('policy_template_desc_description')
+                        ,name: 'description'
+                        ,id: 'modx-policy-template-description'
+                        ,grow: true
+                    },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-policy-template-description'
                         ,html: _('policy_template_desc_description')
                         ,cls: 'desc-under'
 
                     },{
-						xtype: 'textfield'
-						,fieldLabel: _('lexicon')
-						,description: MODx.expandHelp ? '' : _('policy_template_desc_lexicon')
-						,name: 'lexicon'
-						,id: 'modx-policy-template-lexicon'
-						,allowBlank: true
-						,value: 'permissions'
-					},{
+                        xtype: 'textfield'
+                        ,fieldLabel: _('lexicon')
+                        ,description: MODx.expandHelp ? '' : _('policy_template_desc_lexicon')
+                        ,name: 'lexicon'
+                        ,id: 'modx-policy-template-lexicon'
+                        ,allowBlank: true
+                        ,value: 'permissions'
+                    },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-policy-template-lexicon'
                         ,html: _('policy_template_desc_lexicon')
@@ -103,7 +99,7 @@ MODx.panel.AccessPolicyTemplate = function(config) {
                     ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-template-permissions'
-					,cls:'main-wrapper'
+                    ,cls:'main-wrapper'
                     ,policy: MODx.request.id
                     ,autoHeight: true
                     ,preventRender: true
@@ -129,6 +125,7 @@ Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
         var r = this.config.record;
 
         this.getForm().setValues(r);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.name));
 
         var g = Ext.getCmp('modx-grid-template-permissions');
         if (g && r.permissions) { g.getStore().loadData(r.permissions); }
@@ -147,11 +144,23 @@ Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
     ,success: function(o) {
         Ext.getCmp('modx-grid-template-permissions').getStore().commitChanges();
     }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-policy-template-header', [{
+            text: _('user_group_management'),
+            href: MODx.getPage('security/permission')
+        }]);
+    }
 });
 Ext.reg('modx-panel-access-policy-template',MODx.panel.AccessPolicyTemplate);
 
-
-
+/**
+ * @class MODx.grid.TemplatePermissions
+ * @extends MODx.grid.LocalGrid
+ * @constructor
+ * @param {Object} config An object of options.
+ * @xtype modx-grid-template-permissions
+ */
 MODx.grid.TemplatePermissions = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -232,7 +241,12 @@ Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
 });
 Ext.reg('modx-grid-template-permissions',MODx.grid.TemplatePermissions);
 
-
+/**
+ * @class MODx.window.NewTemplatePermission
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-template-permission-create
+ */
 MODx.window.NewTemplatePermission = function(config) {
     config = config || {};
     this.ident = config.ident || 'polpc'+Ext.id();

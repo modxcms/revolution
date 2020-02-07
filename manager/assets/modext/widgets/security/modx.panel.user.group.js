@@ -14,11 +14,7 @@ MODx.panel.UserGroup = function(config) {
             action: 'Security/Group/Update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('user_group_new')
-            ,id: 'modx-user-group-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -74,7 +70,7 @@ MODx.panel.UserGroup = function(config) {
                                 ,anchor: '100%'
                                 ,listeners: {
                                     'keyup': {scope:this,fn:function(f,e) {
-                                        Ext.getCmp('modx-user-group-header').getEl().update('<h2>'+_('user_group')+': '+Ext.util.Format.htmlEncode(f.getValue())+'</h2>');
+                                        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
                                     }}
                                 }
                             },{
@@ -313,9 +309,7 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
         }
         var r = this.config.record;
         this.getForm().setValues(r);
-        Ext.defer(function() {
-            Ext.get('modx-user-group-header').update('<h2>'+_('user_group')+': '+Ext.util.Format.htmlEncode(r.name)+'</h2>');
-        }, 250, this);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.name));
 
         this.fireEvent('ready',r);
         MODx.fireEvent('ready');
@@ -323,6 +317,12 @@ Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
     }
     ,beforeSubmit: function(o) {}
     ,success: function(o) {}
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-user-group-header', [{
+            text: _('user_group_management'),
+            href: MODx.getPage('security/permission')
+        }]);
+    }
 });
 Ext.reg('modx-panel-user-group',MODx.panel.UserGroup);
 

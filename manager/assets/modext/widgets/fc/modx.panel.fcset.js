@@ -14,11 +14,7 @@ MODx.panel.FCSet = function(config) {
         ,id: 'modx-panel-fc-set'
         ,class_key: 'MODX\\Revolution\\modFormCustomizationSet'
         ,cls: 'container'
-        ,items: [{
-            html: _('set_edit')
-            ,id: 'modx-fcs-header'
-            ,xtype: 'modx-header'
-        },MODx.getPageStructure([{
+        ,items: [this.getPageHeader(config), MODx.getPageStructure([{
             title: _('set_and_fields')
             ,xtype: 'panel'
             ,border: false
@@ -49,7 +45,7 @@ MODx.panel.FCSet = function(config) {
                     ,value: config.record.action
                     ,listeners: {
                         'select': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-fcs-header').getEl().update(_('set')+': '+f.getRawValue());
+                            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getRawValue()));
                         }}
                     }
                 },{
@@ -167,9 +163,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
 
     ,setup: function() {
         if (!this.initialized) {this.getForm().setValues(this.config.record);}
-        if (!Ext.isEmpty(this.config.record.controller)) {
-            Ext.getCmp('modx-fcs-header').update(_('set')+': '+this.config.record.controller);
-        }
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(_('set'));
 
         this.fireEvent('ready',this.config.record);
         this.clearDirty();
@@ -211,6 +205,17 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
             },this);
         }
         return false;
+    }
+
+    ,getPageHeader: function(config) {
+        var profile = config.record.profile;
+        return MODx.util.getHeaderBreadCrumbs('modx-fcs-header', [{
+            text: _('form_customization'),
+            href: MODx.getPage('security/forms')
+        },{
+            text: _('profile'),
+            href: MODx.getPage('security/forms/profile/update&id='+profile)
+        }]);
     }
 });
 Ext.reg('modx-panel-fc-set',MODx.panel.FCSet);

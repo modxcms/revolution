@@ -145,7 +145,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('form_customization');
+        return $this->modx->lexicon('form_customization').': '.$this->modx->lexicon('set');
     }
 
     /**

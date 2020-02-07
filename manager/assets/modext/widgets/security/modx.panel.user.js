@@ -13,22 +13,19 @@ MODx.panel.User = function(config) {
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,bodyStyle: ''
-        ,items: [
-            MODx.util.getHeaderBreadCrumbs('modx-user-header', [{text: _('users'), href: MODx.getPage('security/user')}]),
-            {
-                xtype: 'modx-tabs'
-                ,id: 'modx-user-tabs'
-                ,deferredRender: false
-                ,defaults: {
-                    autoHeight: true
-                    ,layout: 'form'
-                    ,labelWidth: 150
-                    ,bodyCssClass: 'tab-panel-wrapper'
-                    ,layoutOnTabChange: true
-                }
-                ,items: this.getFields(config)
+        ,items: [this.getPageHeader(config),{
+            xtype: 'modx-tabs'
+            ,id: 'modx-user-tabs'
+            ,deferredRender: false
+            ,defaults: {
+                autoHeight: true
+                ,layout: 'form'
+                ,labelWidth: 150
+                ,bodyCssClass: 'tab-panel-wrapper'
+                ,layoutOnTabChange: true
             }
-        ]
+            ,items: this.getFields(config)
+        }]
         ,useLoadingMask: true
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -65,13 +62,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         if (s) { s.loadData(d); }
                     }
 
-                    Ext.getCmp('modx-header-breadcrumbs').updateHeader(r.object.username);
+                    Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.object.username));
                     this.fireEvent('ready',r.object);
                     MODx.fireEvent('ready');
                 },scope:this}
             }
         });
     }
+
     ,beforeSubmit: function(o) {
         var d = {};
         var g = Ext.getCmp('modx-grid-user-settings');
@@ -682,6 +680,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             html: MODx.onUserFormRender
             ,border: false
         }];
+    }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-user-header', [{
+            text: _('users'),
+            href: MODx.getPage('security/user')
+        }]);
     }
 });
 Ext.reg('modx-panel-user',MODx.panel.User);

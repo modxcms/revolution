@@ -15,11 +15,7 @@ MODx.panel.FCProfile = function(config) {
         ,cls: 'container'
         ,class_key: 'MODX\\Revolution\\modFormCustomizationProfile'
         ,bodyStyle: ''
-        ,items: [{
-            html: _('profile_new')
-            ,id: 'modx-fcp-header'
-            ,xtype: 'modx-header'
-        },MODx.getPageStructure([{
+        ,items: [this.getPageHeader(config), MODx.getPageStructure([{
             title: _('profile')
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
@@ -51,7 +47,7 @@ MODx.panel.FCProfile = function(config) {
                     ,value: config.record.name
                     ,listeners: {
                         'keyup': {scope:this,fn:function(f,e) {
-                            Ext.getCmp('modx-fcp-header').getEl().update(_('profile') + ': ' + Ext.util.Format.htmlEncode(f.getValue()));
+                            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
                         }}
                     }
                 },{
@@ -107,12 +103,11 @@ MODx.panel.FCProfile = function(config) {
 };
 Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (!this.initialized) { this.getForm().setValues(this.config.record); }
         if (!Ext.isEmpty(this.config.record.name)) {
-            Ext.defer(function() {
-                Ext.getCmp('modx-fcp-header').update(_('profile') + ': ' + Ext.util.Format.htmlEncode(this.config.record.name));
-            }, 250, this);
+            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(this.config.record.name));
         }
         this.fireEvent('ready',this.config.record);
         this.clearDirty();
@@ -120,6 +115,7 @@ Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
         MODx.fireEvent('ready');
         return true;
     }
+
     ,beforeSubmit: function(o) {
         Ext.apply(o.form.baseParams,{
             usergroups: Ext.getCmp('modx-grid-fc-profile-usergroups').encode()
@@ -128,9 +124,17 @@ Ext.extend(MODx.panel.FCProfile,MODx.FormPanel,{
             values: this.getForm().getValues()
         });
     }
+
     ,success: function(r) {
         Ext.getCmp('modx-grid-fc-profile-usergroups').getStore().commitChanges();
         this.getForm().setValues(r.result.object);
+    }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-fcp-header', [{
+            text: _('form_customization'),
+            href: MODx.getPage('security/forms')
+        }]);
     }
 });
 Ext.reg('modx-panel-fc-profile',MODx.panel.FCProfile);
