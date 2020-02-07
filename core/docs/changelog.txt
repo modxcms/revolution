@@ -2,13 +2,14 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.0.0-alpha2 (January 28, 2019)
+MODX Revolution 3.0.0-alpha2 (January 28, 2020)
 ====================================
+- Add header breadcrumbs throughout manager [#14890]
 - Remove modAction and legacy controller support [#14927]
 - Apply `MODx.util.safeHtml` to feed dashboards [#14946]
 - Fixed transparency in .png for TV [#14906]
 - Add missing unsigned attribute to integer foreign key fields in mysql schema [#14902]
-- Remove legacy grids: workspace/lexicon/lexicon.topic.grid.js, workspace/lexicon/language.grid.js, widgets/security/modx.grid.role.user.js, widgets/resource/modx.grid.resource.security.js [#14875]
+- Remove legacy grids [#14875]
 - Change the way deprecated class aliases are included [#14912]
 - Make sure processors are instantiated with getInstance for derivative logic [#14921]
 - Add updated DI Container and add support for namespaces to define a bootstrap.php file to init/register services [#14920]
@@ -57,7 +58,7 @@ MODX Revolution 3.0.0-alpha1 (December 12, 2019)
 - Protect system directories from removing and renaming [#14374]
 - Prevent Google Chrome translations at the admin panel [#14414]
 - Improve the file preview in the media manager [#14372]
-- A new option "redirect to duplicate" has been added when duplicating resources and elements (Templates, TVs, Chunks, Snippets and Plugins)
+- Add "redirect to duplicate" option when duplicating resources and elements
 - Protect MODx.grid.Grid against XSS vulnerabilities by default [#14344]
 - Using (single) square brackets around MODX tags is now possible [#13904]
 - The default manager time format (`manager_time_format`) for new installations is set to the 24-hour clock format [#14325]
@@ -84,16 +85,16 @@ MODX Revolution 3.0.0-alpha1 (December 12, 2019)
 - Remove unused and outdated xmlrpc and jsonrpc and related classes [#14033]
 - Changed appearance and position of status message after saving action [#14003]
 - Resource and Media Browser CSS Improvements [#13998]
-- Custom manager logo in the manager and design tweaks #13934
-- Added active/selected row color for resource tree and media browser #13995
-- Sidebar styles glitches improvements #13996
-- Fixed error log line wrapping problem in Firefox. #13966
+- Custom manager logo in the manager and design tweaks [#13934]
+- Added active/selected row color for resource tree and media browser [#13995]
+- Sidebar styles glitches improvements [#13996]
+- Fixed error log line wrapping problem in Firefox. [#13966]
 - Various UI improvements on Resource controllers [#13875]
 - Various Media Browser improvements for uploading and deleting files [#13851]
 - Fix Regex validation for TV's of the input type "Text" [#13916]
 - Change the result from type "warning" to type "success" and change the message for the install summary [#13897]
 - Remove @EVAL binding from TVs to prevent arbitrary code execution by admins [#13865]
-- Removed obsolete system settings: compress_js_max_files and manager_js_zlib_output_compression [#13859], udperms_allowroot and webpwdreminder_message [#14841], editor_css_path and editor_css_selectors [#14843], fe_editor_lang [#14848], manager_js_cache_file_locking, manager_js_cache_max_age, manager_js_document_root [#14868]
+- Removed obsolete system settings [#13859, #14841, #14843, #14848, #14868]
 - Added missed upgrading script to database related upgrading files [#13870]
 - Support of Markdown in package attributes (changelog, readme, license) [#13853]
 - New class-based ConfigCheck processor [#13864]
@@ -121,7 +122,7 @@ MODX Revolution 3.0.0-alpha1 (December 12, 2019)
 - In recently edited resources and online users widget, make sure user has "logs" permission before showing the link to more [#14522]
 - Add passwordless login to the manager [#14351]
 - Add edit date to the list of recently edited resources in the user panel [#11264]
-- Fix xtype for settings: auto_check_pkg_updates_cache_expire, blocked_minutes, cache_db_expires, cache_db_session_lifetime, cache_expires, cache_format, cache_resource_expires, debug, error_page, failed_login_attempts, friendly_alias_max_length, log_level, lock_ttl, mail_smtp_port, mail_smtp_timeout, manager_js_cache_max_age, manager_week_start, proxy_port, password_generated_length, password_min_length, phpthumb_cache_maxage, phpthumb_cache_maxsize, phpthumb_cache_maxfiles, phpthumb_error_fontsize, server_offset_time, session_cookie_lifetime, site_start, site_unavailable_page, unauthorized_page, upload_maxsize [#12284]
+- Fix xtype for various settings [#12284]
 - Update the layout for editing users and your own account [#13988]
 - Rename "Top Menu" to "Main Menu" now that it is no longer at the top [#14852]
 - Change styling of resources in the tree: unpublished resources are now dimmed, with italics indicating menu visibility [#13969]
