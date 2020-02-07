@@ -336,7 +336,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            MODx.loadPage(r.result.object.action, 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
+                            MODx.loadPage(r.result.object.action, 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key + '&context_key='+ r.result.object.context_key);
                         },scope:this}
                     },{
                         bypassValidCheck: true
