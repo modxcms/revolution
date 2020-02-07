@@ -576,10 +576,10 @@ class modElement extends modAccessibleSimpleObject
         if ($this->get('source') > 0) {
             /** @var modMediaSource $source */
             $source = $this->getSource();
+            $source->initialize();
             if ($source) {
                 // Streaming source? Init and return the full path to be read.
                 if ($source->get('is_stream')) {
-                    $source->initialize();
                     $result = $source->getBasePath() . $filename;
                 }
 
