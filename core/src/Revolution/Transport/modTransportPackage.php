@@ -513,7 +513,7 @@ class modTransportPackage extends xPDOObject
                 default:
                     /* get latest installed package version */
                     $latestQuery = $this->xpdo->newQuery(
-                        'modTransportPackage',
+                        modTransportPackage::class,
                         [
                             [
                                 "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})",
@@ -549,7 +549,7 @@ class modTransportPackage extends xPDOObject
 
             /* get latest installed package version */
             $latestQuery = $this->xpdo->newQuery(
-                'modTransportPackage',
+                modTransportPackage::class,
                 [
                     [
                         "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})",
