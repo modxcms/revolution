@@ -2467,18 +2467,19 @@ class modX extends xPDO {
                 : $deprecatedMethod['function'];
         }
 
-        $deprecation = $this->_getDeprecatedMethod($deprecatedDef, $recommendation);
+        $deprecation = $this->_getDeprecatedMethod($since, $deprecatedDef, $recommendation);
         $deprecation->addCaller($caller['class'] ?? '', $caller['function'], $deprecatedMethod['file'], $deprecatedMethod['line']);
     }
 
     /**
      *
      * Gets an (in-memory cached) modDeprecatedMethod instance.
+     * @param $since
      * @param $callerDef
      * @param $recommendation
      * @return modDeprecatedMethod
      */
-    private function _getDeprecatedMethod($callerDef, $recommendation): modDeprecatedMethod
+    private function _getDeprecatedMethod($since, $callerDef, $recommendation): modDeprecatedMethod
     {
         if (array_key_exists($callerDef, $this->_deprecations)) {
             return $this->_deprecations[$callerDef];
@@ -2492,7 +2493,9 @@ class modX extends xPDO {
             $deprecation = $this->newObject(modDeprecatedMethod::class);
             $deprecation->set('definition', $callerDef);
         }
+        // Exact messages may change from time-to-time, keep updated
         $deprecation->set('recommendation', $recommendation);
+        $deprecation->set('since', $since);
         // We don't save it here - we do that at the end of the request
 
         $this->_deprecations[$callerDef] = $deprecation;

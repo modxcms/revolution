@@ -1404,7 +1404,7 @@
 
     <object class="modDeprecatedMethod" table="deprecated_method" extends="xPDO\Om\xPDOSimpleObject">
         <field key="definition" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
-        <field key="message" dbtype="varchar" precision="1024" phptype="string" null="false" default="" />
+        <field key="since" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="recommendation" dbtype="varchar" precision="1024" phptype="string" null="false" default="" />
 
         <index alias="definition" name="definition" primary="false" unique="false" type="BTREE">
@@ -1437,6 +1437,8 @@
         <index alias="caller_line" name="caller_line" primary="false" unique="false" type="BTREE">
             <column key="caller_line" length="" collation="A" null="false" />
         </index>
+
+        <aggregate alias="Method" class="MODX\Revolution\modDeprecatedMethod" local="method" foreign="id" cardinality="one" owner="foreign" />
     </object>
     <!-- MOVE DEPRECATED OBJECT DEFINITIONS BELOW HERE -->
 </model>

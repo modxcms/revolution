@@ -153,6 +153,17 @@ class modDeprecatedCall extends \MODX\Revolution\modDeprecatedCall
                 ),
             ),
         ),
+        'aggregates' => 
+        array (
+            'Method' => 
+            array (
+                'class' => 'MODX\\Revolution\\modDeprecatedMethod',
+                'local' => 'method',
+                'foreign' => 'id',
+                'cardinality' => 'one',
+                'owner' => 'foreign',
+            ),
+        ),
     );
 
 }
