@@ -31,8 +31,8 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      */
     ,hiddenFormat:'Y-m-d H:i:s'
     /**
-     * @cfg {String} hiddenFormat Format of datetime used to store value in hidden field
-     * and submitted to server (defaults to 'Y-m-d H:i:s' that is mysql format)
+     * @cfg {String} hiddenFormatForTimeHidden Format of datetime used to store value in hidden field
+     * and submitted to server when `hideTime` is set to `true` (defaults to 'Y-m-d 00:00:00' that is mysql format)
      */
     ,hiddenFormatForTimeHidden:'Y-m-d 00:00:00'
     /**
