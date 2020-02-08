@@ -12,9 +12,7 @@ namespace MODX\Revolution\Processors\System\DeprecatedLog;
 
 use MODX\Revolution\modDeprecatedCall;
 use MODX\Revolution\modDeprecatedMethod;
-use MODX\Revolution\modNamespace;
 use MODX\Revolution\Processors\Model\GetListProcessor;
-use MODX\Revolution\modSystemSetting;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
