@@ -40,9 +40,8 @@ if ($isCommandLine) {
 
 /* check for compatible PHP version */
 define('MODX_SETUP_PHP_VERSION', phpversion());
-$php_ver_comp = version_compare(MODX_SETUP_PHP_VERSION, '5.6.0');
-if ($php_ver_comp < 0) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODX requires version 5.4.0 or higher.</p></body></html>');
+if (version_compare(MODX_SETUP_PHP_VERSION, '7.0.0', '<')) {
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>Wrong PHP version! You\'re using PHP version '.MODX_SETUP_PHP_VERSION.', and MODX requires version 7.0 or higher.</p></body></html>');
 }
 
 /* make sure json extension is available */
