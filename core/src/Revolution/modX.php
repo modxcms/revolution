@@ -288,7 +288,7 @@ class modX extends xPDO {
      *
      * @var array
      */
-    private $loggedDeprecatedFunctions = [];
+    private $_deprecations = [];
 
     /**
      * Harden the environment against common security flaws.
@@ -2448,6 +2448,13 @@ class modX extends xPDO {
             return;
         }
 
+        // At the end of the request, save deprecations with their callers in one go
+        register_shutdown_function(function () {
+            foreach ($this->_deprecations as $deprecation) {
+                $deprecation->save();
+            }
+        });
+
         // We use the trace to identify both the method that is deprecated, and the caller
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         $deprecatedMethod = isset($trace[1]) ? $trace[1] : [];
@@ -2459,19 +2466,37 @@ class modX extends xPDO {
                 ? $deprecatedMethod['class'] . '::' . $deprecatedMethod['function']
                 : $deprecatedMethod['function'];
         }
-        $callerDef = isset($caller['class']) ? $caller['class']  . '::' . $caller['function'] : '';
 
-        // The message that gets logged
-        $msg = $deprecatedDef . ' is deprecated since version ' . $since . '. ' . $recommendation;
+        $deprecation = $this->_getDeprecatedMethod($deprecatedDef, $recommendation);
+        $deprecation->addCaller($caller['class'] ?? '', $caller['function'], $deprecatedMethod['file'], $deprecatedMethod['line']);
+    }
 
-        // Only log deprecated functions once - even when called many times in a single request.
-        if (in_array($msg.$callerDef, $this->loggedDeprecatedFunctions, true)) {
-            return;
+    /**
+     *
+     * Gets an (in-memory cached) modDeprecatedMethod instance.
+     * @param $callerDef
+     * @param $recommendation
+     * @return modDeprecatedMethod
+     */
+    private function _getDeprecatedMethod($callerDef, $recommendation): modDeprecatedMethod
+    {
+        if (array_key_exists($callerDef, $this->_deprecations)) {
+            return $this->_deprecations[$callerDef];
         }
-        $this->loggedDeprecatedFunctions[] = $msg.$callerDef;
 
-        // Send to the standard log, providing also the file and line the deprecated method was called from
-        $this->log(self::LOG_LEVEL_ERROR, $msg, '', $callerDef, $deprecatedMethod['file'], $deprecatedMethod['line']);
+        /** @var modDeprecatedMethod $deprecation */
+        $deprecation = $this->getObject(modDeprecatedMethod::class, [
+            'definition' => $callerDef,
+        ]);
+        if (!$deprecation) {
+            $deprecation = $this->newObject(modDeprecatedMethod::class);
+            $deprecation->set('definition', $callerDef);
+        }
+        $deprecation->set('recommendation', $recommendation);
+        // We don't save it here - we do that at the end of the request
+
+        $this->_deprecations[$callerDef] = $deprecation;
+        return $deprecation;
     }
 
 

@@ -1402,5 +1402,41 @@
         <composite alias="Packages" class="MODX\Revolution\Transport\modTransportPackage" local="id" foreign="workspace" cardinality="many" owner="local" />
     </object>
 
+    <object class="modDeprecatedMethod" table="deprecated_method" extends="xPDO\Om\xPDOSimpleObject">
+        <field key="definition" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="message" dbtype="varchar" precision="1024" phptype="string" null="false" default="" />
+        <field key="recommendation" dbtype="varchar" precision="1024" phptype="string" null="false" default="" />
+
+        <index alias="definition" name="definition" primary="false" unique="false" type="BTREE">
+            <column key="definition" length="" collation="A" null="false" />
+        </index>
+
+        <composite alias="Callers" class="MODX\Revolution\modDeprecatedCall" local="id" foreign="method" cardinality="many" owner="local" />
+    </object>
+
+    <object class="modDeprecatedCall" table="deprecated_call" extends="xPDO\Om\xPDOSimpleObject">
+        <field key="method" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="call_count" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
+
+        <field key="caller" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="caller_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="caller_line" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
+
+        <index alias="method" name="method" primary="false" unique="false" type="BTREE">
+            <column key="method" length="" collation="A" null="false" />
+        </index>
+        <index alias="call_count" name="call_count" primary="false" unique="false" type="BTREE">
+            <column key="call_count" length="" collation="A" null="false" />
+        </index>
+        <index alias="caller" name="caller" primary="false" unique="false" type="BTREE">
+            <column key="caller" length="" collation="A" null="false" />
+        </index>
+        <index alias="caller_file" name="caller_file" primary="false" unique="false" type="BTREE">
+            <column key="caller_file" length="" collation="A" null="false" />
+        </index>
+        <index alias="caller_line" name="caller_line" primary="false" unique="false" type="BTREE">
+            <column key="caller_line" length="" collation="A" null="false" />
+        </index>
+    </object>
     <!-- MOVE DEPRECATED OBJECT DEFINITIONS BELOW HERE -->
 </model>

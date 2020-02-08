@@ -31,6 +31,8 @@ $xpdo_meta_map = array (
             21 => 'MODX\\Revolution\\modUserMessage',
             22 => 'MODX\\Revolution\\modUserProfile',
             23 => 'MODX\\Revolution\\modWorkspace',
+            24 => 'MODX\\Revolution\\modDeprecatedMethod',
+            25 => 'MODX\\Revolution\\modDeprecatedCall',
         ),
         'MODX\\Revolution\\modAccess' => 
         array (
