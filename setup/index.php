@@ -54,7 +54,7 @@ if (empty($phptz)) {
     date_default_timezone_set('UTC');
 }
 if (!date_default_timezone_get()) {
-    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>To use PHP 5.6.0+, you must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding. A list can be found <a href="http://us.php.net/manual/en/timezones.php">here</a>.</p></body></html>');
+    die('<html><head><title></title></head><body><h1>FATAL ERROR: MODX Setup cannot continue.</h1><p>You must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding. A list can be found <a href="https://www.php.net/timezones" target="_blank">here</a>.</p></body></html>');
 }
 
 if (!$isCommandLine) {
