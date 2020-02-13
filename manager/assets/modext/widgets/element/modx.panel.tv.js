@@ -562,9 +562,14 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
     }
 
     ,showInputProperties: function(cb,rc,i) {
+        /**
+         * Hide "Input Option Values" by default
+         */
         var element = Ext.getCmp('modx-tv-elements');
+        var element_label = Ext.select('label[for="' + element.id + '"]');
         if (element) {
-            element.show();
+            element.hide();
+            element_label.hide();
         }
 
         this.markPanelDirty();
