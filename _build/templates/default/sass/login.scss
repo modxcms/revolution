@@ -193,12 +193,6 @@ label {
   }
 }
 
-label#rememberme-checkbox {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
 label > input {
   margin-top: 0.25rem;
 }
@@ -258,6 +252,58 @@ label > input {
 #modx-login-username,
 #modx-login-username-reset {
   margin-top: 10px;
+}
+
+#rememberme-checkbox {
+  & input[type="checkbox"] {
+    width: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  & label {
+    position: relative;
+    display: inline-block;
+    padding-left: 22px;
+
+    &:before, &:after {
+        position: absolute;
+        content: "";
+        display: inline-block;
+    }
+
+    &:before {
+        width: 18px;
+        height: 18px;
+        background: $lightestGray;
+        border: 1px solid $lightGray;
+        border-radius: $borderRadius;
+        left: -3px;
+    }
+
+    &:after {
+      height: 5px;
+      width: 10px;
+      border-left: 2px solid;
+      border-bottom: 2px solid;
+      transform: rotate(-45deg);
+      left: 1px;
+      top: 5px;
+    }
+  }
+
+  & input[type="checkbox"] + label::after {
+    content: none;
+  }
+
+  & input[type="checkbox"]:checked + label::after {
+    content: "";
+  }
+
+  & input[type="checkbox"]:focus + label::before {
+    border: 1px solid $blue;
+  }
 }
 
 .c-password-label {
