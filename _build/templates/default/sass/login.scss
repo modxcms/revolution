@@ -152,6 +152,10 @@ a {
   &:hover {
     opacity: .8;
   }
+
+  &:focus {
+    color: $red;
+  }
 }
 
 .lead {
@@ -357,6 +361,18 @@ label > input {
   direction: rtl;
   padding-right: 1.2rem;
   color: $darkestGray;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:focus {
+    color: $red;
+  }
+
+  &:focus option {
+    color: $darkestGray;
+  }
 }
 
 .c-languageselect__arrow {
@@ -380,6 +396,10 @@ label > input {
 
   &:hover {
     opacity: .8;
+  }
+
+  &:focus {
+    color: $red;
   }
 
   .c-arrow {
