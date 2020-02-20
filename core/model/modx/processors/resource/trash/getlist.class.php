@@ -108,9 +108,14 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
         $parents = array();
         $parent = $objectArray['parent'];
 
-        while ($parent!=0) {
-            $parents[] = $this->modx->getObject('modResource', $parent);
-            $parent = end($parents)->get('parent');
+        while ($parent != 0) {
+            $parentObj = $this->modx->getObject('modResource', $parent);
+            if ($parentObj) {
+                $parents[] = $parentObj;
+                $parent = end($parents)->get('parent');
+            } else {
+                $parent = 0;
+            }
         }
 
         $parentPath = "";
