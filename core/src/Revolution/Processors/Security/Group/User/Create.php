@@ -81,10 +81,29 @@ class Create extends Processor
         $rank = $this->getNewRank();
         $membership->set('rank', $rank);
 
+        /* invoke OnUserBeforeAddToGroup event */
+        $OnUserBeforeAddToGroup = $this->modx->invokeEvent('OnUserBeforeAddToGroup', [
+            'user' => &$this->user,
+            'usergroup' => &$this->userGroup,
+            'membership' => &$membership,
+        ]);
+        $canSave = $this->processEventResponse($OnUserBeforeAddToGroup);
+
+        if (!empty($canSave)) {
+            return $this->failure($canSave);
+        }
+
         /* save membership */
         if ($membership->save() === false) {
             return $this->failure($this->modx->lexicon('user_group_member_err_save'));
         }
+
+        /* invoke OnUserAddToGroup event */
+        $this->modx->invokeEvent('OnUserAddToGroup', [
+            'user' => &$this->user,
+            'usergroup' => &$this->userGroup,
+            'membership' => &$membership,
+        ]);
 
         /* set as primary group if the only group for user */
         if ($rank === 0) {
