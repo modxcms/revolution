@@ -144,6 +144,8 @@ a {
   text-decoration: none; }
   a:hover {
     opacity: .8; }
+  a:focus {
+    color: #CF1124; }
 
 .lead {
   font-size: 1rem;
@@ -176,14 +178,6 @@ label {
   font-weight: 500; }
   label a {
     font-weight: 400; }
-
-label#rememberme-checkbox {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: left;
-      justify-content: left;
-  -ms-flex-align: center;
-      align-items: center; }
 
 label > input {
   margin-top: 0.25rem; }
@@ -234,6 +228,46 @@ label > input {
 #modx-login-username,
 #modx-login-username-reset {
   margin-top: 10px; }
+
+#rememberme-checkbox input[type="checkbox"] {
+  width: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0; }
+
+#rememberme-checkbox label {
+  position: relative;
+  display: inline-block;
+  padding-left: 22px; }
+  #rememberme-checkbox label:before, #rememberme-checkbox label:after {
+    position: absolute;
+    content: "";
+    display: inline-block; }
+  #rememberme-checkbox label:before {
+    width: 18px;
+    height: 18px;
+    background: #FBFBFB;
+    border: 1px solid #E4E4E4;
+    border-radius: 3px;
+    left: -3px; }
+  #rememberme-checkbox label:after {
+    height: 5px;
+    width: 10px;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    left: 1px;
+    top: 5px; }
+
+#rememberme-checkbox input[type="checkbox"] + label::after {
+  content: none; }
+
+#rememberme-checkbox input[type="checkbox"]:checked + label::after {
+  content: ""; }
+
+#rememberme-checkbox input[type="checkbox"]:focus + label::before {
+  border: 1px solid #3697CD; }
 
 .c-password-label {
   display: -ms-flexbox;
@@ -290,6 +324,12 @@ label > input {
   direction: rtl;
   padding-right: 1.2rem;
   color: #53595F; }
+  .c-languageselect__select:hover {
+    opacity: .8; }
+  .c-languageselect__select:focus {
+    color: #CF1124; }
+  .c-languageselect__select:focus option {
+    color: #53595F; }
 
 .c-languageselect__arrow {
   z-index: 1;
@@ -311,6 +351,8 @@ label > input {
   border: none; }
   .c-button--ghost:hover {
     opacity: .8; }
+  .c-button--ghost:focus {
+    color: #CF1124; }
   .c-button--ghost .c-arrow {
     stroke: #3697CD; }
   :hover > .c-button--ghost {

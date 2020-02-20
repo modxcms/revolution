@@ -95,10 +95,12 @@
                                 <input type="password" id="modx-login-password" name="password" autocomplete="on" required>
                             </label>
 
-                            <label id="rememberme-checkbox">
+                            <div id="rememberme-checkbox">
                                 <input type="checkbox" id="modx-login-rememberme" name="rememberme" autocomplete="on" {if $_post.rememberme|default}checked="checked"{/if} value="1">
-                                {$rememberme}
-                            </label>
+                                <label for="modx-login-rememberme">
+                                    {$rememberme}
+                                </label>
+                            </div>
 
                             {$onManagerLoginFormRender}
 
