@@ -205,23 +205,32 @@ class CheckLexicon
     {
         $lexicons = [];
 
-        if (file_exists($this->lexiconPath . $this->language . '/')) {
-            $iterator = new \DirectoryIterator($this->lexiconPath . $this->language . '/');
-            foreach ($iterator as $path => $current) {
-                if (strpos($current->getFilename(), 'inc.php') !== false) {
-                    try {
-                        include $current->getRealPath();
-                    } catch (Exception $e) {
-                        $this->invalidLexicons[] = $current->getFilename();
-                    }
-                }
-            }
-        } else {
+        if (!$lexicon = $this->loadLexiconFiles($this->lexiconPath . $this->language . '/')) {
             return 'Could not load the lexicons in the language folder "' . $this->lexiconPath . $this->language . '/' . '"!';
+        } else {
+            $lexicons = array_merge($lexicons, $lexicon);
         }
 
-        if (file_exists($this->setupLexiconPath . $this->language . '/')) {
-            $iterator = new \DirectoryIterator($this->setupLexiconPath . $this->language . '/');
+        if (!$lexicon = $this->loadLexiconFiles($this->setupLexiconPath . $this->language . '/')) {
+            return 'Could not load the lexicons in the setup language folder "' . $this->lexiconPath . $this->language . '/' . '"!';
+        } else {
+            $lexicons = array_merge($lexicons, $lexicon);
+        }
+
+        return $lexicons;
+    }
+
+    /**
+     * Load lexicon files
+     *
+     * @param $path string
+     * @return array|bool
+     */
+    private function loadLexiconFiles($path)
+    {
+        if (file_exists($path)) {
+            $iterator = new \DirectoryIterator($path);
+            $_lang = [];
             foreach ($iterator as $path => $current) {
                 if (strpos($current->getFilename(), 'inc.php') !== false) {
                     try {
@@ -231,11 +240,10 @@ class CheckLexicon
                     }
                 }
             }
+            return $_lang;
         } else {
-            return 'Could not load the lexicons in the setup language folder "' . $this->setupLexiconPath . $this->language . '/' . '"!';
+            return false;
         }
-
-        return $_lang;
     }
 
     /**
