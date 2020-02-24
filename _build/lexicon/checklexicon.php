@@ -188,10 +188,10 @@ class CheckLexicon
             $msg = implode("\n", $msg);
         }
 
-        return array(
+        return [
             'success' => true,
             'message' => $msg
-        );
+        ];
 
     }
 
@@ -203,7 +203,7 @@ class CheckLexicon
      */
     private function loadLexicons()
     {
-        $_lang = array();
+        $lexicons = [];
 
         if (file_exists($this->lexiconPath . $this->language . '/')) {
             $iterator = new \DirectoryIterator($this->lexiconPath . $this->language . '/');
@@ -291,8 +291,8 @@ class CheckLexicon
     private function addPhpKeys($filename)
     {
         $fileContent = file_get_contents($filename);
-        $results = array();
         preg_match_all('/(modx|xpdo)->lexicon\((["\'])(.*?)\2\s*[,\)]/m', $fileContent, $results);
+        $results = [];
         if (is_array($results[3])) {
             foreach ($results[3] as $result) {
                 // Don't add lexicon keys that ends with a dot or an underscore or that contain a variable
@@ -320,8 +320,8 @@ class CheckLexicon
     private function addJsKeys($filename)
     {
         $fileContent = file_get_contents($filename);
-        $results = array();
         preg_match_all('/_\(([\'"])(.*?)\1\s*[,\)]/m', $fileContent, $results);
+        $results = [];
         if (is_array($results[2])) {
             foreach ($results[2] as $result) {
                 // Don't add lexicon keys that ends with a dot or an underscore or that key is concatenated
@@ -364,7 +364,7 @@ class CheckLexicon
     private function addChunkKeys($filename)
     {
         $fileContent = file_get_contents($filename);
-        $results = array();
+        $results = [];
         preg_match_all('/\[\[%(.*?)[?\]]/m', $fileContent, $results);
         if (is_array($results[1])) {
             foreach ($results[1] as $result) {
@@ -392,7 +392,7 @@ class CheckLexicon
     private function addSmartyKeys($filename)
     {
         $fileContent = file_get_contents($filename);
-        $results = array();
+        $results = [];
         preg_match_all('/\$_lang\.(.*?)[ |}]/m', $fileContent, $results);
         if (is_array($results[1])) {
             foreach ($results[1] as $result) {
@@ -411,7 +411,7 @@ class CheckLexicon
      */
     private function addSettingKeys()
     {
-        $settings = array();
+        $settings = [];
         $xpdo = &$this->modx;
         if (file_exists(MODX_BASE_PATH . '_build/data/transport.core.system_settings.php')) {
             $settings = include MODX_BASE_PATH . '_build/data/transport.core.system_settings.php';
@@ -420,10 +420,10 @@ class CheckLexicon
         foreach ($settings as $setting) {
             $this->languageKeys[] = 'setting_' . $setting->get('key');
             $this->languageKeys[] = 'setting_' . $setting->get('key') . '_desc';
-            if (!in_array($setting->get('area'), array(
+            if (!in_array($setting->get('area'), [
                 'authentication', 'caching', 'file', 'furls', 'gateway',
                 'language', 'manager', 'session', 'site', 'system'
-            ))) {
+            ])) {
                 $this->languageKeys[] = 'area_' . $setting->get('area');
             }
         }
@@ -434,7 +434,7 @@ class CheckLexicon
      */
     private function addMenuKeys()
     {
-        $menus = array();
+        $menus = [];
         $xpdo = &$this->modx;
         if (file_exists(MODX_BASE_PATH . '_build/data/transport.core.menus.php')) {
             $menus = include MODX_BASE_PATH . '_build/data/transport.core.menus.php';
@@ -466,7 +466,7 @@ class CheckLexicon
      */
     private function addWidgetKeys()
     {
-        $widgets = array();
+        $widgets = [];
         $xpdo = &$this->modx;
         if (file_exists(MODX_BASE_PATH . '_build/data/transport.core.dashboard_widgets.php')) {
             $widgets = include MODX_BASE_PATH . '_build/data/transport.core.dashboard_widgets.php';
@@ -506,7 +506,7 @@ class CheckLexicon
             try {
                 $permissions = include $current->getRealPath();
             } catch (Exception $e) {
-                $permissions = array();
+                $permissions = [];
             }
             foreach ($permissions as $permission) {
                 $this->languageKeys[] = $permission->get('description');
