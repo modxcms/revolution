@@ -189,14 +189,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
             ,listeners: {
                 'success': {fn:function() {
-	            	var cmp = Ext.getCmp('modx-grid-context');
+                    var cmp = Ext.getCmp('modx-grid-context');
 
-	            	if (cmp) {
-		            	cmp.refresh();
-	            	}
+                    if (cmp) {
+                        cmp.refresh();
+                    }
 
-	                this.refresh();
-	            },scope:this}
+                    this.refresh();
+                },scope:this}
             }
         });
     }
@@ -392,11 +392,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (targetParent.findChild('id',dropNode.attributes.id) !== null) {return false;}
 
         if (dropNode.attributes.type == 'modContext' && (targetParent.getDepth() > 1 || (targetParent.attributes.id == targetParent.attributes.pk + '_0' && e.point == 'append'))) {
-        	return false;
+            return false;
         }
 
         if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
-        	return false;
+            return false;
         }
 
         if (MODx.config.resource_classes_drop[targetParent.attributes.classKey] == undefined) {
@@ -706,9 +706,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
         if (ui && ui.hasClass('pqcreate')) {
             m.push({
-               text: _('quick_create')
+                text: _('quick_create')
                 ,handler: function() {return false;}
-               ,menu: {items: qct}
+                ,menu: {items: qct}
             });
         }
 
@@ -998,7 +998,7 @@ MODx.window.QuickCreateResource = function(config) {
                 ,items: MODx.getQRSettings(this.ident,config.record)
             }]
         }]
-       ,keys: [{
+        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
             ,fn: this.submit
@@ -1052,7 +1052,6 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,anchor: '100%'
                 ,maxLength: 255
-                ,allowBlank: false
             };
             break;
         case 'modWebLink':
@@ -1064,7 +1063,6 @@ MODx.getQRContentField = function(id,cls) {
                 ,anchor: '100%'
                 ,maxLength: 255
                 ,value: 'http://'
-                ,allowBlank: false
             };
             break;
         case 'modStaticResource':

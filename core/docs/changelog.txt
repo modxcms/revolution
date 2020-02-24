@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.7.3-pl (TBD)
 ====================================
+- Remove "allowBlank: false" for symlink/weblink in quick update [#14981]
 - Add missing AddToGroup events in modSecurityGroupUserCreateProcessor [#15021]
 - Use single-quotes in MySQL queries for modTransportPackage for ANSI_QUOTES compatibility [#15011]
 - Add context key to reload URL when switching templates [#14998]
