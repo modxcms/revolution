@@ -1081,7 +1081,6 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,anchor: '100%'
                 ,maxLength: 255
-                ,allowBlank: false
             };
             break;
         case 'MODX\\Revolution\\modWebLink':
@@ -1093,7 +1092,6 @@ MODx.getQRContentField = function(id,cls) {
                 ,anchor: '100%'
                 ,maxLength: 255
                 ,value: 'http://'
-                ,allowBlank: false
             };
             break;
         case 'MODX\\Revolution\\modStaticResource':

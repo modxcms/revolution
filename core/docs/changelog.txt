@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Remove "allowBlank: false" for symlink/weblink in quick update [#14981]
 - Improve styles for login [#15018]
 - Add missing AddToGroup events in Security/Group/User/Create processor [#15022]
 - Use single-quotes in MySQL queries for modTransportPackage for ANSI_QUOTES compatibility [#15011]
