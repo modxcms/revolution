@@ -252,25 +252,19 @@ class CheckLexicon
     private function addKeys()
     {
         $directory = new \RecursiveDirectoryIterator($this->scanPath, \RecursiveDirectoryIterator::SKIP_DOTS);
+        // Filter files ...
         $filter = new \RecursiveCallbackFilterIterator($directory, function ($current, $key, $iterator) {
             /** @var \RecursiveDirectoryIterator $current */
+            // ... for files starting with a dot
             if ($current->getFilename()[0] === '.') {
                 return false;
             }
             if ($current->isDir()) {
+                // ... for excluded folders
                 return !in_array($current->getFilename(), $this->excludedFolders);
             } else {
-                $pathinfo = pathinfo($current->getFilename());
-                return ($current->isFile() && isset($pathinfo['extension']) && (
-                        $pathinfo['extension'] == 'php' ||
-                        $pathinfo['extension'] == 'js' ||
-                        $pathinfo['extension'] == 'html' ||
-                        $pathinfo['extension'] == 'tpl' ||
-                        $pathinfo['basename'] == 'config.json'
-                    ) &&
-                    strpos($pathinfo['basename'], 'min.js') === false &&
-                    strpos($pathinfo['basename'], 'ext-') !== 0
-                ) ? true : false;
+                // ... for allowed file types
+                return $this->allowedFiletype($current);
             }
         });
         $iterator = new \RecursiveIteratorIterator($filter);
@@ -288,6 +282,27 @@ class CheckLexicon
 
         $this->languageKeys = array_unique($this->languageKeys);
         sort($this->languageKeys);
+    }
+
+    /**
+     * Check for allowed file types
+     *
+     * @param \RecursiveDirectoryIterator $file
+     * @return bool
+     */
+    private function allowedFiletype($file)
+    {
+        $pathinfo = pathinfo($file->getFilename());
+        return ($file->isFile() && isset($pathinfo['extension']) && (
+                $pathinfo['extension'] == 'php' ||
+                $pathinfo['extension'] == 'js' ||
+                $pathinfo['extension'] == 'html' ||
+                $pathinfo['extension'] == 'tpl' ||
+                $pathinfo['basename'] == 'config.json'
+            ) &&
+            strpos($pathinfo['basename'], 'min.js') === false &&
+            strpos($pathinfo['basename'], 'ext-') !== 0
+        ) ? true : false;
     }
 
     /**
