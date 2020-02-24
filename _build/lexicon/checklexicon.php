@@ -292,21 +292,22 @@ class CheckLexicon
 
     /**
      * Add lexicon calls in php files:
-     * modx->lexicon('whatever'
+     * modx->lexicon('whatever',
      *
      * @param string $filename
      */
     private function addPhpKeys($filename)
     {
         $fileContent = file_get_contents($filename);
-        preg_match_all('/(modx|xpdo)->lexicon\((["\'])(.*?)\2\s*[,\)]/m', $fileContent, $results);
         $results = [];
+        preg_match_all('/(modx|xpdo)->lexicon\((?<quote>["\'])(.*?)\k<quote>\s*[,)]/m', $fileContent, $results);
         if (is_array($results[3])) {
             foreach ($results[3] as $result) {
-                // Don't add lexicon keys that ends with a dot or an underscore or that contain a variable
+                // Don't add lexicon keys that end with a dot or an underscore
                 if (substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
+                    // Check, if the key contains a variable
                     if (strpos($result, '$') === false
                     ) {
                         $this->languageKeys[] = $result;
@@ -320,7 +321,7 @@ class CheckLexicon
 
     /**
      * Add lexicon calls in javascript files:
-     * _('whatever'
+     * _('whatever',
      * createDelegate(this, ['whatever'
      *
      * @param string $filename
@@ -328,14 +329,15 @@ class CheckLexicon
     private function addJsKeys($filename)
     {
         $fileContent = file_get_contents($filename);
-        preg_match_all('/_\(([\'"])(.*?)\1\s*[,\)]/m', $fileContent, $results);
         $results = [];
+        preg_match_all('/_\((?<quote>[\'"])(.*?)\k<quote>\s*[,)]/m', $fileContent, $results);
         if (is_array($results[2])) {
             foreach ($results[2] as $result) {
-                // Don't add lexicon keys that ends with a dot or an underscore or that key is concatenated
+                // Don't add lexicon keys that ends with a dot or an underscore
                 if (substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
+                    // Check, if the key is concatenated
                     if (strpos($result, '+') === false
                     ) {
                         $this->languageKeys[] = $result;
@@ -345,13 +347,14 @@ class CheckLexicon
                 }
             }
         }
-        preg_match_all('/(createDelegate)\(.*?, \[([\'"])(.*?)\2/m', $fileContent, $results);
+        preg_match_all('/(createDelegate)\(.*?,\s+\[(?<quote>[\'"])(.*?)\k<quote>/m', $fileContent, $results);
         if (is_array($results[3])) {
             foreach ($results[3] as $result) {
-                // Don't add lexicon keys that ends with a dot or an underscore or that key is concatenated
+                // Don't add lexicon keys that ends with a dot or an underscore
                 if (substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
+                    // Check, if the key is concatenated
                     if (strpos($result, '+') === false
                     ) {
                         $this->languageKeys[] = $result;
@@ -376,10 +379,11 @@ class CheckLexicon
         preg_match_all('/\[\[%(.*?)[?\]]/m', $fileContent, $results);
         if (is_array($results[1])) {
             foreach ($results[1] as $result) {
-                // Don't add lexicon keys that ends with a dot or an underscore or that key contains a setting tag
+                // Don't add lexicon keys that ends with a dot or an underscore
                 if (substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
+                    // Check, if the key contains a setting tag
                     if (strpos($result, '[[+') === false
                     ) {
                         $this->languageKeys[] = $result;
