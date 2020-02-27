@@ -1,5 +1,7 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.8.0-pl (February 27, 2020)
+====================================
 - Load related object attributes correctly into nested relations
 - Add option to restrict extraction of files by extension to xPDOZip
 - Fix invalid datetime value being used when formatting with regex
