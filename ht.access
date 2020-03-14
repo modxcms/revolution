@@ -19,7 +19,7 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 
 
 # Prevent rewrite the .well-known directory used by LetsEncrypt by rules below of this rule
-RewriteRule "^\.well-known" - [L]
+RewriteRule "^\.well-known/" - [L]
 
 
 # Rewrite www.example.com -> example.com -- used with SEO Strict URLs plugin
