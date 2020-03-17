@@ -725,7 +725,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
                 return false;
             }
-            $this->xpdo->loadClass('sources.modMediaSource');
             /** @var modMediaSource $toSource */
             $toSource = modMediaSource::getDefaultSource($this->xpdo, $to_source);
             if (!$toSource->getWorkingContext()) {

@@ -77,7 +77,6 @@ abstract class Browser extends Processor
     public function getSource()
     {
         $source = $this->getProperty('source', 1);
-        $this->modx->loadClass('sources.modMediaSource');
         $this->source = modMediaSource::getDefaultSource($this->modx, $source);
         if (!$this->source->getWorkingContext()) {
             return $this->modx->lexicon('permission_denied');

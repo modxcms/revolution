@@ -121,7 +121,6 @@ class SystemFileEditManagerController extends modManagerController
     public function getSource()
     {
         /** @var modMediaSource|modFileMediaSource $source */
-        $this->modx->loadClass(modMediaSource::class);
         $source = $this->modx->getOption('source', $this->scriptProperties, false);
         if (!empty($source)) {
             $source = $this->modx->getObject(modMediaSource::class, $source);
