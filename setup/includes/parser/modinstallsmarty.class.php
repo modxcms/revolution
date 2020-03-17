@@ -70,7 +70,7 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         $written= false;
         if (!empty ($dirname)) {
             $dirname= strtr(trim($dirname), '\\', '/');
-            if ($dirname{strlen($dirname) - 1} == '/') $dirname = substr($dirname, 0, strlen($dirname) - 1);
+            if ($dirname[strlen($dirname) - 1] == '/') $dirname = substr($dirname, 0, strlen($dirname) - 1);
             if (is_dir($dirname) || (is_writable(dirname($dirname)) && mkdir($dirname))) {
                 $written= true;
             } elseif (!$this->writeTree(dirname($dirname))) {

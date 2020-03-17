@@ -356,7 +356,7 @@ class modPhpThumb extends phpthumb
             //$AbsoluteFilename = $filename;
             return $filename;
 
-        } elseif ($this->iswindows && isset($filename{1}) && ($filename{1} == ':')) {
+        } elseif ($this->iswindows && isset($filename[1]) && ($filename[1] == ':')) {
 
             // absolute pathname (Windows)
             $AbsoluteFilename = $filename;
@@ -366,14 +366,14 @@ class modPhpThumb extends phpthumb
             // absolute pathname (Windows)
             $AbsoluteFilename = $filename;
 
-        } elseif ($filename{0} == '/') {
+        } elseif ($filename[0] == '/') {
 
             if (@is_readable($filename) && !@is_readable($this->config_document_root . $filename)) {
 
                 // absolute filename (*nix)
                 $AbsoluteFilename = $filename;
 
-            } elseif (isset($filename{1}) && ($filename{1} == '~')) {
+            } elseif (isset($filename[1]) && ($filename[1] == '~')) {
 
                 // /~user/path
                 if ($ApacheLookupURIarray = phpthumb_functions::ApacheLookupURIarray($filename)) {
