@@ -140,7 +140,7 @@ p {
   line-height: 1.4; }
 
 a {
-  color: #3697CD;
+  color: #4A90E2;
   text-decoration: none; }
   a:hover {
     opacity: .8; }
@@ -169,7 +169,7 @@ input[type="checkbox"] {
   top: 0; }
 
 input:focus {
-  border: 1px solid #3697CD; }
+  border: 1px solid #4A90E2; }
 
 label {
   display: block;
@@ -267,7 +267,7 @@ label > input {
   content: ""; }
 
 #rememberme-checkbox input[type="checkbox"]:focus + label::before {
-  border: 1px solid #3697CD; }
+  border: 1px solid #4A90E2; }
 
 .c-password-label {
   display: -ms-flexbox;
@@ -346,7 +346,7 @@ label > input {
   border-color: #53595F transparent transparent transparent; }
 
 .c-button--ghost {
-  color: #3697CD;
+  color: #4A90E2;
   background: transparent;
   border: none; }
   .c-button--ghost:hover {
@@ -354,7 +354,7 @@ label > input {
   .c-button--ghost:focus {
     color: #CF1124; }
   .c-button--ghost .c-arrow {
-    stroke: #3697CD; }
+    stroke: #4A90E2; }
   :hover > .c-button--ghost {
     left: -0.5rem;
     right: 0; }

@@ -8934,8 +8934,7 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after, .modx-installer-steps li.active span.icon::after {
+[type="checkbox"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before, .modx-installer-steps li.active span.icon::after {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -8955,20 +8954,20 @@ body {
   height: 100%; }
 
 body {
-  color: #333333;
+  color: #343434;
   font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
-  background: #f1f2f7;
+  background: #F4F4F4;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column; }
   body a {
-    color: #3697CD;
+    color: #4A90E2;
     text-decoration: none;
     transition: all .2s ease-in; }
     body a:hover {
-      color: #297aa7; }
+      color: #2275d7; }
 
 .button {
   display: inline-block;
@@ -8981,7 +8980,7 @@ body {
   cursor: pointer;
   line-height: 1;
   font-size: 18px;
-  padding: 13px 25px;
+  padding: 15px 30px;
   width: 170px;
   transition: background-color .2s ease-out;
   background: #6CB24A;
@@ -9036,7 +9035,7 @@ body {
     .languages .language .wrap {
       display: block;
       padding: .5rem .7rem;
-      border: 2px solid #DCDCDC;
+      border: 1px solid #DCDCDC;
       margin: 5px;
       background-color: #FBFBFB;
       border-radius: 3px;
@@ -9050,11 +9049,11 @@ body {
       text-transform: uppercase; }
     .languages .language:hover input ~ .wrap,
     .languages .language:focus input ~ .wrap {
-      border-color: #3697CD; }
+      border-color: #4A90E2; }
     .languages .language input:checked ~ .wrap,
     .languages .language input:focus ~ .wrap {
-      border-color: #3697CD;
-      background-color: #eef6fb; }
+      border-color: #4A90E2;
+      background-color: #f1f6fd; }
 
 [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
   position: absolute;
@@ -9067,66 +9066,33 @@ body {
   cursor: pointer;
   margin: 0 auto; }
 
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
-  content: '';
+[type="checkbox"]:disabled + label:before {
+  opacity: .5; }
+
+.cleanup [type="checkbox"]:not(:checked) + label,
+.cleanup [type="checkbox"]:checked + label {
+  padding-left: 0; }
+
+[type="checkbox"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before {
   position: absolute;
   left: 0;
-  top: -13px;
-  width: 2em;
-  height: 2em;
-  border: 1px solid #CCCCCC;
-  background: white;
-  border-radius: 4px; }
+  top: 50%;
+  -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px; }
 
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
-  content: "\f00c";
-  position: absolute;
-  top: -10px;
-  left: 5px;
-  font-size: 1.8em;
-  line-height: 0.8;
-  color: #6CB24A;
-  transition: all .2s; }
+[type="checkbox"]:not(:checked) + label:before {
+  content: "\f0c8";
+  color: #DCDCDC; }
 
-[type="checkbox"]:not(:checked) + label:after {
-  opacity: 0;
-  -ms-transform: scale(0);
-      transform: scale(0); }
-
-[type="checkbox"]:checked + label:after {
-  opacity: 1;
-  -ms-transform: scale(1);
-      transform: scale(1); }
-
-[type="checkbox"]:disabled:not(:checked) + label:before {
-  box-shadow: none;
-  border-color: #BBBBBB;
-  background-color: #DFDFDF; }
-
-[type="checkbox"]:disabled:checked + label:before {
-  box-shadow: none;
-  border-color: #BBBBBB;
-  background-color: #DFDFDF; }
-
-[type="checkbox"]:disabled:checked + label:after {
-  color: #999999; }
-
-[type="checkbox"]:disabled + label {
-  color: #AAAAAA; }
-
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-  border: 1px solid #6CB24A; }
+[type="checkbox"]:checked + label:before {
+  content: "\f14a";
+  color: #4A90E2; }
 
 /* hover style just for information */
-label:hover:before {
-  border: 1px solid #6CB24A !important; }
-
-#install .labelHolder .col-3 label {
-  top: 6px; }
-
 #modx-next {
   background-color: #6CB24A;
   color: #FFF; }
@@ -9153,7 +9119,7 @@ label:hover:before {
 
 .steps-outer {
   width: 100%;
-  max-width: 500px;
+  max-width: 750px;
   margin: 0 auto; }
 
 .modx-installer-steps {
@@ -9174,7 +9140,7 @@ label:hover:before {
     .modx-installer-steps li::after, .modx-installer-steps li::before {
       content: "";
       height: 2px;
-      background-color: #D6D6D6;
+      background-color: #DCDCDC;
       position: absolute;
       top: 13px;
       z-index: -1;
@@ -9190,10 +9156,10 @@ label:hover:before {
       position: relative;
       width: 25px;
       height: 25px;
+      background: #E4E4E4;
       border-radius: 50%;
-      border: 2px solid #D6D6D6;
-      margin: 0 auto 10px;
-      background-color: #F6F6F6;
+      border: 2px solid #DCDCDC;
+      margin: 1px auto 10px;
       z-index: 4;
       box-sizing: border-box;
       font-size: 15px;
@@ -9215,7 +9181,16 @@ label:hover:before {
       background-color: #6CB24A;
       border-color: #FFF;
       border-width: 7px;
-      box-shadow: 0 0 7px rgba(0, 0, 0, 0.2); }
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: #FBFBFB;
+  border: 1px solid #E4E4E4;
+  border-radius: 3px;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  padding: 10px 20px; }
 
 input[type="submit"],
 input[type="button"] {
@@ -9275,26 +9250,26 @@ header {
             flex-wrap: wrap; }
         #content .content-inside .wrapper .content_header_title {
           width: 100%;
-          font: bold 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-          color: #000;
-          padding-bottom: 15px; }
+          font: 600 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+          color: #343434;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #DCDCDC; }
       #content .content-inside .wrapper form {
-        margin-top: 15px;
+        margin-top: 25px;
         display: block; }
         #content .content-inside .wrapper form .content-wrap {
           min-height: calc(430px - 80px); }
           #content .content-inside .wrapper form .content-wrap h2 {
-            font-weight: 700;
+            font-weight: 500;
             font-size: 22px; }
           #content .content-inside .wrapper form .content-wrap p {
             font-size: 16px; }
           #content .content-inside .wrapper form .content-wrap .title {
-            font-weight: 700; }
+            font-weight: 500; }
       #content .content-inside .wrapper .setup_navbar {
         width: 100%;
         display: inline-block;
-        padding-top: 15px;
-        margin-top: 15px; }
+        padding-top: 25px; }
         #content .content-inside .wrapper .setup_navbar #modx-back {
           float: left; }
         #content .content-inside .wrapper .setup_navbar #modx-next {
@@ -9312,7 +9287,7 @@ header {
         align-items: center;
     padding: 25px 40px 25px 0;
     cursor: pointer;
-    min-height: 140px;
+    min-height: 120px;
     margin-bottom: 10px;
     position: relative; }
     .options-wrap .option-item-note {
@@ -9323,10 +9298,10 @@ header {
       padding: 25px 40px;
       min-height: 140px;
       margin-bottom: 10px;
-      border-left: 0.2rem solid #3697CD;
-      background-color: rgba(54, 151, 205, 0.3);
-      border-color: #3697CD;
-      color: #010203; }
+      border-left: 0.2rem solid #4A90E2;
+      background-color: rgba(74, 144, 226, 0.3);
+      border-color: #4A90E2;
+      color: #061527; }
     .options-wrap .option-item-input {
       -ms-flex-preferred-size: 130px;
           flex-basis: 130px;
@@ -9335,18 +9310,12 @@ header {
       -ms-flex-negative: 0;
           flex-shrink: 0; }
       .options-wrap .option-item-input input {
-        background-color: #FBFBFB;
         margin: 0 auto;
-        display: block;
-        font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        display: block; }
       .options-wrap .option-item-input input[type="text"] {
         font-size: 14px;
         padding: 8px 15px;
-        text-align: center;
-        font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        background-color: #FBFBFB;
-        border: 1px solid #DFDFDF;
-        border-radius: 3px; }
+        text-align: center; }
     .options-wrap .option-item-desc {
       -ms-flex: 1 1 0;
           flex: 1 1 0;
@@ -9359,9 +9328,13 @@ header {
         font-size: 16px;
         line-height: 25px;
         color: #606060; }
+    .options-wrap .option-item .fa {
+      color: #DFDFDF; }
+    .options-wrap .option-item input:checked ~ .fa {
+      color: #4A90E2; }
     .options-wrap .option-item span {
       display: block;
-      border: 2px solid #DFDFDF;
+      border: 1px solid #DFDFDF;
       padding: 20px;
       position: absolute;
       top: 0;
@@ -9369,14 +9342,13 @@ header {
       right: 0;
       bottom: 0; }
     .options-wrap .option-item input:checked ~ span {
-      border: 2px solid #3697CD; }
+      border-color: #4A90E2; }
 
 .advanced_options .option-item {
   padding: 10px 40px 10px 0;
-  border: 2px solid #DFDFDF;
+  border: 1px solid #DFDFDF;
   min-height: 70px; }
   .advanced_options .option-item-input {
-    background-color: #FBFBFB;
     -ms-flex-preferred-size: 130px;
         flex-basis: 130px;
     display: -ms-flexbox;
@@ -9400,15 +9372,11 @@ header {
   display: none !important; }
 
 .fa {
-  color: #3697CD;
+  color: #4A90E2;
   font-size: 3em;
   margin: 0 auto; }
 
 #welcome input#config_key {
-  background-color: #FBFBFB;
-  border: 1px solid #DFDFDF;
-  border-radius: 3px;
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 16px;
   padding: 10px 20px;
   margin-left: 10px; }
@@ -9462,36 +9430,26 @@ header {
     #install ul.checklist li p {
       color: #333333;
       font-size: 14px;
-      line-height: 14px; }
+      line-height: 14px;
+      margin: 0; }
+    #install ul.checklist li .ok, #install ul.checklist li .notok {
+      font-weight: 700; }
     #install ul.checklist li .ok {
-      color: #355825;
-      font-weight: 500; }
+      color: #355825; }
     #install ul.checklist li .notok {
-      color: #590710;
-      font-weight: 500; }
-    #install ul.checklist li.testWarn {
-      background-color: #FFEEEE;
-      padding: 5px 15px;
-      margin: 0 -15px 0 -18px;
-      border-left: 3px solid #590710; }
-  #install ul.checklist.failed {
-    background-color: rgba(228, 228, 228, 0.2);
-    border-color: #E4E4E4;
-    border-left: 0.2rem solid #E4E4E4; }
-  #install ul.checklist.success,
-  #install ul.checklist .failed,
-  #install ul.checklist .success {
-    padding: 5px 15px;
+      color: #590710; }
+  #install ul.checklist .warning, #install ul.checklist .testWarn, #install ul.checklist .success, #install ul.checklist .testPassed, #install ul.checklist .failed, #install ul.checklist .testFailed {
+    padding: 10px;
+    border-left: 0.2rem solid; }
+  #install ul.checklist .warning, #install ul.checklist .testWarn {
+    background-color: rgba(240, 180, 41, 0.2);
+    border-color: #F0B429; }
+  #install ul.checklist .success, #install ul.checklist .testPassed {
     background-color: rgba(108, 178, 74, 0.2);
-    border-color: #6CB24A;
-    border-left: 0.2rem solid #6CB24A; }
-  #install ul.checklist .failed,
-  #install ul.checklist .success {
-    margin-bottom: 1rem; }
-  #install ul.checklist .failed {
+    border-color: #6CB24A; }
+  #install ul.checklist .failed, #install ul.checklist .testFailed {
     background-color: rgba(207, 17, 36, 0.2);
-    border-color: #CF1124;
-    border-left: 0.2rem solid #CF1124; }
+    border-color: #CF1124; }
 
 #install .labelHolder {
   margin-bottom: 10px;
@@ -9518,10 +9476,6 @@ header {
     #install .labelHolder .col input[type="text"],
     #install .labelHolder .col input[type="email"],
     #install .labelHolder .col input[type="password"] {
-      background-color: #FBFBFB;
-      border: 1px solid #DFDFDF;
-      border-radius: 3px;
-      font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 16px;
       padding: 10px 20px;
       width: 260px; }
@@ -9550,10 +9504,6 @@ header {
     #install .labelHolder .col-3 input[type="text"],
     #install .labelHolder .col-3 input[type="email"],
     #install .labelHolder .col-3 input[type="password"] {
-      background-color: #FBFBFB;
-      border: 1px solid #DFDFDF;
-      border-radius: 3px;
-      font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 16px;
       padding: 10px 20px;
       width: 100%; }
@@ -9588,13 +9538,13 @@ header {
   #install #modx-db-step2-msg span.connect-msg,
   #install #modx-db-step2-msg span.result {
     background-color: #EFFCF6;
-    border-left: 0.2rem solid #6CB24A;
-    border-radius: 3px;
-    color: #528738;
+    border-left: 0.2rem solid;
+    border-color: #6CB24A;
+    color: #355825;
     display: block;
     font-size: 16px;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    padding: 1rem 1.2rem; }
+    padding: 10px; }
     #install #modx-db-step1-msg span.connect-msg p,
     #install #modx-db-step1-msg span.result p,
     #install #modx-db-step2-msg span.connect-msg p,
@@ -9612,25 +9562,19 @@ header {
       #install #modx-db-step2-msg span.result p:last-child {
         -webkit-margin-after: 0;
                 margin-block-end: 0; }
-
-#install #modx-db-step1-msg.error span.connect-msg,
-#install #modx-db-step1-msg.error span.result,
-#install #modx-db-step2-msg.error span.connect-msg,
-#install #modx-db-step2-msg.error span.result {
-  background-color: #FFEEEE;
-  border-radius: 3px;
-  border-left: 0.2rem solid #CF1124 !important;
-  display: block;
-  font-size: 14px;
-  padding: 1rem 1.2rem; }
-  #install #modx-db-step1-msg.error span.connect-msg p,
-  #install #modx-db-step1-msg.error span.result p,
-  #install #modx-db-step2-msg.error span.connect-msg p,
-  #install #modx-db-step2-msg.error span.result p {
-    color: #CF1124 !important; }
+  #install #modx-db-step1-msg.error span.connect-msg,
+  #install #modx-db-step1-msg.error span.result,
+  #install #modx-db-step2-msg.error span.connect-msg,
+  #install #modx-db-step2-msg.error span.result {
+    background-color: rgba(207, 17, 36, 0.2);
+    border-color: #CF1124; }
+    #install #modx-db-step1-msg.error span.connect-msg p,
+    #install #modx-db-step1-msg.error span.result p,
+    #install #modx-db-step2-msg.error span.connect-msg p,
+    #install #modx-db-step2-msg.error span.result p {
+      color: #590710; }
 
 #install #modx-db-info span {
-  color: #234368;
   display: block;
   margin-bottom: 5px;
   font-weight: 500; }
@@ -9659,14 +9603,9 @@ header {
 
 .cleanup [type="checkbox"]:not(:checked) + label:before,
 .cleanup [type="checkbox"]:checked + label:before {
-  top: -5px; }
-
-.cleanup [type="checkbox"]:not(:checked) + label:after,
-.cleanup [type="checkbox"]:checked + label:after {
-  top: -1px; }
-
-.cleanup_text {
-  margin-left: 10px; }
+  position: relative;
+  margin: 10px 10px 0 0;
+  float: left; }
 
 footer {
   background: #FFF;
@@ -9677,8 +9616,8 @@ footer {
     display: none; }
   .button {
     font-size: 14px;
-    padding: 13px 10px;
-    width: 130px; }
+    padding: 15px 10px;
+    width: 140px; }
   #content .content-inside .wrapper {
     padding: 20px; }
     #content .content-inside .wrapper form .content-wrap h2 {
@@ -9696,22 +9635,6 @@ footer {
     font-size: 14px;
     margin-left: 0;
     margin-top: 5px; }
-  .options-wrap .option-item {
-    -ms-flex-direction: column;
-        flex-direction: column;
-    padding: 25px 25px; }
-    .options-wrap .option-item .option-item-input {
-      -ms-flex-preferred-size: auto;
-          flex-basis: auto;
-      margin-bottom: 20px; }
-    .options-wrap .option-item .option-item-desc {
-      text-align: center; }
-      .options-wrap .option-item .option-item-desc .label {
-        font-size: 16px;
-        margin-bottom: 5px; }
-      .options-wrap .option-item .option-item-desc .desc {
-        font-size: 14px;
-        line-height: normal; }
   #install .labelHolder {
     -ms-flex-direction: column;
         flex-direction: column; }

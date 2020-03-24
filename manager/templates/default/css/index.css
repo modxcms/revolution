@@ -17036,8 +17036,8 @@ button {
   .x-date-picker .x-btn.blue,
   .x-date-mp-ok.blue,
   .x-date-mp-cancel.blue {
-    background: #3697CD;
-    box-shadow: 0 0 0 1px #3697CD;
+    background: #4A90E2;
+    box-shadow: 0 0 0 1px #4A90E2;
     color: #FFF !important;
     /* override !important of .green class */ }
     .actions button.blue:hover, .actions button.blue:focus,
@@ -17053,8 +17053,8 @@ button {
     .x-date-mp-ok.blue:focus,
     .x-date-mp-cancel.blue:hover,
     .x-date-mp-cancel.blue:focus {
-      background: #2f89bb;
-      box-shadow: 0 0 0 1px #2f89bb; }
+      background: #3483de;
+      box-shadow: 0 0 0 1px #3483de; }
     .actions button.blue:active,
     .inline-button.blue:active,
     .x-superboxselect-item.blue:active,
@@ -17062,8 +17062,8 @@ button {
     .x-date-picker .x-btn.blue:active,
     .x-date-mp-ok.blue:active,
     .x-date-mp-cancel.blue:active {
-      background: #297aa7;
-      box-shadow: 0 0 0 1px #297aa7; }
+      background: #2275d7;
+      box-shadow: 0 0 0 1px #2275d7; }
 
 /* Toolbar combo/text styled just like the buttons */
 .x-toolbar .x-form-field-trigger-wrap {
@@ -20935,7 +20935,7 @@ ul.x-tab-strip-bottom {
   .x-window.modx-console .success {
     color: #6CB24A; }
   .x-window.modx-console .warn {
-    color: #3697CD; }
+    color: #4A90E2; }
   .x-window.modx-console .error {
     color: #CF1124; }
 
@@ -20983,7 +20983,7 @@ ul.x-tab-strip-bottom {
   width: 40px !important;
   /* override extjs default theme style */ }
   .ext-mb-icon:before {
-    color: #3697CD;
+    color: #4A90E2;
     content: '';
     font-size: 32px;
     position: absolute;
@@ -20995,10 +20995,10 @@ ul.x-tab-strip-bottom {
     text-align: left;
     width: 100%; }
   .ext-mb-icon.ext-mb-info:before {
-    color: #3697CD;
+    color: #4A90E2;
     content: "\f05a"; }
   .ext-mb-icon.ext-mb-question:before {
-    color: #3697CD;
+    color: #4A90E2;
     content: "\f059"; }
   .ext-mb-icon.ext-mb-warning:before {
     color: #F0B429;
@@ -21320,7 +21320,7 @@ ul.x-tab-strip-bottom {
 
 .updates-widget .updates-updateable {
   display: inline-block;
-  background: #3697CD;
+  background: #4A90E2;
   color: #FFF;
   border-radius: 20px;
   padding: 2px 8px;
@@ -21617,7 +21617,7 @@ hr {
   color: #6CB24A !important; }
 
 .blue {
-  color: #3697CD !important; }
+  color: #4A90E2 !important; }
 
 .primary {
   color: #6CB24A !important; }
