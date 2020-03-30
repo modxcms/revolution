@@ -698,7 +698,7 @@ class modX extends xPDO {
                 parent :: setDebug(false);
             }
             else {
-                $debug = (is_int($debug) ? $debug : defined($debug) ? intval(constant($debug)) : 0);
+                $debug = (is_int($debug) ? $debug : (defined($debug) ? intval(constant($debug)) : 0));
                 if ($debug) {
                     error_reporting($debug);
                     parent :: setLogLevel(xPDO::LOG_LEVEL_INFO);
