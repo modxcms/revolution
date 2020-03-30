@@ -92,7 +92,6 @@ Ext.onReady(function() {
         $c->sortby($this->modx->escape('key'),'DESC');
         $contexts = $this->modx->getCollection(modContext::class, $c);
         $list = [];
-        $this->modx->loadClass('sources.modMediaSource');
         /** @var $source modMediaSource */
         $source = modMediaSource::getDefaultSource($this->modx);
         /** @var modContext $context */

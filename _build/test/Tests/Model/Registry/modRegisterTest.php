@@ -30,7 +30,6 @@ class modRegisterTest extends MODxTestCase {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
-        $modx->loadClass('registry.modRegister', '', false, true);
         $modx->registry->addRegister('register', modMemoryRegister::class, ['directory' => 'register']);
     }
 

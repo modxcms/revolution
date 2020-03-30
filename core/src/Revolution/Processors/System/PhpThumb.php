@@ -97,7 +97,6 @@ class PhpThumb extends Processor
     public function getSource($sourceId)
     {
         /** @var modMediaSource|modFileMediaSource $source */
-        $this->modx->loadClass(modMediaSource::class);
         $this->source = modMediaSource::getDefaultSource($this->modx, $sourceId, false);
         if ($this->source === null) {
             return false;
