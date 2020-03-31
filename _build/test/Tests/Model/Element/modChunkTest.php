@@ -93,6 +93,10 @@ class modChunkTest extends MODxTestCase {
             ['<p>Hello, Mark!</p>', ['name' => 'Mark']],
             ['<p>Having fun.</p>', [],'<p>Having fun.</p>'],
             ['<p>Test 1</p>', ['number' => 1],'<p>Test [[+number]]</p>'],
+            ['1', ['id' => '1'], '[[+id:is=`1`:then=`[[+id]]`:else=`[[+id:is=`2`:then=`[[+id]]`:else=`[[+id:is=`3`:then=`[[+id]]`:else=`More`]]`]]`]]'],
+            ['2', ['id' => '2'], '[[+id:is=`1`:then=`[[+id]]`:else=`[[+id:is=`2`:then=`[[+id]]`:else=`[[+id:is=`3`:then=`[[+id]]`:else=`More`]]`]]`]]'],
+            ['3', ['id' => '3'], '[[+id:is=`1`:then=`[[+id]]`:else=`[[+id:is=`2`:then=`[[+id]]`:else=`[[+id:is=`3`:then=`[[+id]]`:else=`More`]]`]]`]]'],
+            ['More', ['id' => '4'], '[[+id:is=`1`:then=`[[+id]]`:else=`[[+id:is=`2`:then=`[[+id]]`:else=`[[+id:is=`3`:then=`[[+id]]`:else=`More`]]`]]`]]'],
         ];
     }
 }
