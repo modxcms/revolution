@@ -70,10 +70,8 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
         $resources = $this->modx->getCollection(modResource::class, $c);
 
         /* iterate */
-        $opts = [];
-        if (!empty($params['showNone'])) {
-            $opts[] = ['value' => '','text' => '-','selected' => $this->tv->get('value') == ''];
-        }
+        $opts[] = ['value' => '','text' => '-','selected' => $this->tv->get('value') == ''];
+
         /** @var modResource $resource */
         foreach ($resources as $resource) {
             $selected = $resource->get('id') == $this->tv->get('value');
