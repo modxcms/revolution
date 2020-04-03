@@ -1324,7 +1324,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
             $list[$property['name']] = $value;
         }
-        $list = array_merge($list, $this->properties);
+        $list = array_merge($this->properties, $list);
 
         return $list;
     }
