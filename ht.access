@@ -33,7 +33,14 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 
 
 
-# Rewrite secure requests properly to prevent SSL cert warnings, e.g. prevent 
+# Rewrite with index.(php|html|htm) -> /
+# Search engines will index each page (index.php, index.html, index.htm, etc.) and will react poorly to duplicate content.
+# RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.(php|html|htm)\ HTTP/
+# RewriteRule ^(.*)index\.(php|html|htm)$ $1 [R=301,L]
+
+
+
+# Rewrite secure requests properly to prevent SSL cert warnings, e.g. prevent
 # https://www.example.com when your cert only allows https://secure.example.com
 #RewriteCond %{SERVER_PORT} !^443
 #RewriteRule (.*) https://example.com/$1 [R=301,L]
