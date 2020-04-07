@@ -47,7 +47,7 @@ MODx.browser.View = function(config) {
             ,'menu', 'visibility'
         ]
         ,baseParams: {
-            action: 'browser/directory/getfiles'
+            action: 'Browser/Directory/GetFiles'
             ,prependPath: config.prependPath || null
             ,prependUrl: config.prependUrl || null
             ,source: config.source || 1
@@ -86,8 +86,9 @@ MODx.browser.View = function(config) {
                     this.lazyLoad();
                 }, this);
                 if (this.tree != undefined && this.tree.uploader != undefined) {
-                    this.tree.uploader.addDropZone(this.ownerCt);
+                    this.tree.uploader.addDropZone(this.ownerCt, this);
                 }
+                MODx.config.browserview = this;
             }, scope: this}
         }
         ,prepareData: this.formatData.createDelegate(this)
@@ -102,7 +103,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         p = p || {};
         if (p.dir) { this.dir = p.dir; }
         Ext.applyIf(p,{
-            action: 'browser/directory/getFiles'
+            action: 'Browser/Directory/GetFiles'
             ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
@@ -132,7 +133,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/get'
+                action: 'Browser/File/Get'
                 ,file:  data.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.config.source
@@ -142,7 +143,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                     var r = {
                         file: data.pathRelative
                         ,name: data.name
-                        ,path: data.pathRelative
+                        ,path: decodeURIComponent(data.pathRelative)
                         ,source: this.config.source
                         ,content: response.object.content
                     };
@@ -190,7 +191,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/download'
+                action: 'Browser/File/Download'
                 ,file: data.pathRelative
                 ,wctx: MODx.ctx || ''
                 ,source: this.config.source
@@ -198,7 +199,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,listeners: {
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=browser/file/download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
+                        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
                     }
                 },scope:this}
             }
@@ -233,22 +234,24 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             text: _('file_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'browser/file/remove_multiple'
-                ,files: Ext.util.JSON.encode(files)
+                action: 'Browser/File/Remove'
+                ,file: files.pop()
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
             ,listeners: {
-                'success': {fn:function(r) {
-                    if (this.config.tree) {
-                        if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
-                            this.config.tree.refreshParentNode();
-                        } else {
-                            this.config.tree.refresh();
+                'success': {
+                    fn: function (r) {
+                        if (this.config.tree) {
+                            if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
+                                this.config.tree.refreshParentNode();
+                            } else {
+                                this.config.tree.refresh();
+                            }
                         }
-                    }
-                    this.run();
-                },scope:this}
+                        this.run();
+                    }, scope: this
+                }
             }
         });
     }
@@ -265,6 +268,31 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.select(0);
     }
 
+    ,setVisibility: function(item,e) {
+        var node = this.cm.activeNode;
+        var data = this.lookup[node.id];
+
+        var r = {
+            path: decodeURIComponent(data.pathRelative)
+            ,visibility: data.visibility
+            ,source: this.config.source
+        };
+        var w = MODx.load({
+            xtype: 'modx-window-set-visibility'
+            ,record: r
+            ,listeners: {
+                'success':{
+                    fn: function() {
+                        this.run();
+                    },
+                    scope:this
+                }
+                ,'hide':{fn:function() {this.destroy();}}
+            }
+        });
+        w.show(e.target);
+    }
+
     ,sortStore: function() {
         var v = MODx.config.modx_browser_default_sort || 'name'
         this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
@@ -275,8 +303,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         var node = this.getSelectedNodes();
         var detailPanel = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
         var okBtn = Ext.getCmp(this.ident+'-ok-btn');
+		var keys = Object.keys(node);
         if (node && node.length > 0) {
-            node = node[0];
+            node = node[keys[keys.length - 1]];
             if (okBtn) {
                 okBtn.enable();
             }
@@ -344,9 +373,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,formatData: function(data) {
         var formatSize = function(size){
             if(size < 1024) {
-                return size + " bytes";
+                return size + " " + _('file_size_bytes');
             } else {
-                return (Math.round(((size*10) / 1024))/10) + " KB";
+                return (Math.round(((size * 10) / 1024)) / 10) + " " + _('file_size_kilobytes');
             }
         };
         data.shortName = Ext.util.Format.ellipsis(data.name,18);
@@ -362,10 +391,17 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
                 ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
+            	,'<tpl if="preview === 1">'
                 ,'  <div class="modx-browser-thumb">'
                 ,'      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" ' +
                             'data-src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
                 ,'  </div>'
+                ,'</tpl>'
+            	,'<tpl if="preview === 0">'
+                ,'  <div class="modx-browser-thumb">'
+                ,' 	  <div class="modx-browser-placeholder">.{ext}</div>'
+                ,'  </div>'
+                ,'</tpl>'
                 ,'  <span>{shortName}</span>'
                 ,'</div>'
             ,'</tpl>'
@@ -399,7 +435,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  </tpl>'
             ,'  <tpl if="preview === 0">'
             ,'      <div class="modx-browser-detail-thumb">'
-            ,'          <img src="{image}" alt="" />'
+            ,'        <div class="modx-browser-placeholder">.{ext}</div>'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <div class="modx-browser-details-info">'
@@ -414,7 +450,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'      <span>{imageSizeString}</span>'
             ,'  </tpl>'
             ,'  <tpl if="dateString !== 0">'
-            ,'      <b>'+_('last_modified')+':</b>'
+            ,'      <b>'+_('file_last_modified')+':</b>'
             ,'      <span>{dateString}</span>'
             ,'  </tpl>'
             ,'  <tpl if="visibility">'
@@ -479,6 +515,7 @@ MODx.browser.Window = function(config) {
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
+        ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
         ,rootName: _('files')
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
@@ -863,6 +900,7 @@ MODx.Media = function(config) {
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
+        ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
         ,rootName: _('files')
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)
@@ -1210,6 +1248,7 @@ MODx.browser.RTE = function(config) {
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
         ,openTo: config.openTo || ''
         ,ident: this.ident
+        ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
         ,rootName: _('files')
         ,rootVisible: config.rootVisible == undefined || !Ext.isEmpty(config.rootId)

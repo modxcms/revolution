@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+
 /**
  * Loads the Import by HTML page
  *
@@ -43,7 +45,7 @@ class SystemImportHtmlManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = []) {}
 
     /**
      * Return the pagetitle
@@ -67,6 +69,6 @@ class SystemImportHtmlManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('import');
+        return ['import'];
     }
 }

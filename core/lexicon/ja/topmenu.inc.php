@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Polic
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'APIドキュメント';
 $_lang['api_docs_desc'] = 'MODX Revolution APIドキュメント（英語）を表示';
-$_lang['bespoke_manager'] = 'Manager Customization';
-$_lang['bespoke_manager_desc'] = 'Manage bespoke MODX Managers';
 $_lang['components'] = 'コンポーネント';
 $_lang['content_types'] = 'コンテントタイプ';
 $_lang['content_types_desc'] = 'リソースのコンテントタイプを管理。フレンドリーURL設定時に付加される拡張子もここで設定';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'ダッシュボード';
 $_lang['dashboards'] = 'ダッシュボード';
 $_lang['dashboards_desc'] = 'ダッシュボードの管理';
 $_lang['edit_menu'] = 'Menus';
-$_lang['edit_menu_desc'] = '管理画面トップメニュー構成の管理';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'エラーログ';
 $_lang['eventlog_viewer_desc'] = 'エラーログを表示';
 $_lang['export_site'] = 'サイトのエクスポート';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'サイトのインポート';
 $_lang['import_site_desc'] = 'HTMLファイルの一括インポート';
 $_lang['installer'] = 'Installer';
 $_lang['installer_desc'] = 'Manage Add-ons and Distributions';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'レキシコン管理';
 $_lang['lexicon_management_desc'] = 'レキシコン（辞書機能・従来の言語ファイルに相当）を管理';
 $_lang['logout'] = 'ログアウト';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'システム設定';
 $_lang['system_settings_desc'] = 'サイト全体の設定変更';
 $_lang['tools'] = 'ツール';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'ユーザー';
 $_lang['usernav'] = 'User Navigation';

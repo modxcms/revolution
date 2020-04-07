@@ -8,10 +8,10 @@ MODx.panel.ResourceData = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'resource/data'
+            action: 'Resource/Data'
         }
         ,id: 'modx-panel-resource-data'
-        ,class_key: 'modResource'
+        ,class_key: 'MODX\\Revolution\\modResource'
         ,cls: 'container form-with-labels'
         ,resource: ''
         ,defaults: { collapsible: false ,autoHeight: true }
@@ -142,9 +142,9 @@ MODx.panel.ResourceData = function(config) {
                 ,preventRender: true
                 ,formpanel: 'modx-panel-manager-log'
                 ,baseParams: {
-                    action: 'system/log/getlist'
+                    action: 'System/Log/GetList'
                     ,item: MODx.request.id
-                    ,classKey: 'modResource'
+                    ,classKey: 'MODX\\Revolution\\modResource'
                 }
                 ,tbar: []
             }]
@@ -193,7 +193,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/data'
+                action: 'Resource/Data'
                 ,id: this.config.resource
                 ,class_key: this.config.class_key
             }
@@ -215,7 +215,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             ,id: 'modx-resource-header'
             ,xtype: 'modx-header'
         };
-        var items = [];
+
         // Add breadcrumbs with parents
         if (config.record['parents'] && config.record['parents'].length) {
             var parents = config.record['parents'];
@@ -230,7 +230,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
                     }
                     trail.push({
                         text: parents[i].pagetitle
-                        ,href: MODx.config.manager_url + '?a=resource/data&id=' + parents[i].id
+                        ,href: MODx.config.manager_url + '?a=Resource/Data&id=' + parents[i].id
                         ,cls: function(data) {
                             var cls = [];
                             if (!data.published) {
@@ -245,33 +245,16 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
                 } else {
                     trail.push({
                         text: '<i class="icon icon-globe"></i> ' + (parents[i].name || parents[i].key)
-                        //,href: MODx.config.manager_url + '?a=context/update&key=' + parents[i].key
+                        //,href: MODx.config.manager_url + '?a=Context/Update&key=' + parents[i].key
                         ,href: false
                     });
                 }
             }
-            items.push({
-                xtype: 'modx-breadcrumbs-panel'
-                ,id: 'modx-resource-breadcrumbs'
-                ,desc: ''
-                ,bdMarkup: '<ul><tpl for="trail"><li>' +
-                        '<tpl if="href"><a href="{href}" class="{cls}">{text}</a></tpl>' +
-                        '<tpl if="!href">{text}</tpl>' +
-                    '</li></tpl></ul>'
-                ,init: function() {
-                    this.tpl = new Ext.XTemplate(this.bdMarkup, {compiled: true});
-                }
-                ,listeners: {
-                    afterrender: function() {
-                        this.tpl.overwrite(this.body, {trail: trail});
-                    }
-                }, items: [header]
-            });
-        } else {
-            items.push(header);
-        }
 
-        return items;
+            return MODx.util.getHeaderBreadCrumbs(header, trail);
+        } else {
+            return header;
+        }
     }
 });
 Ext.reg('modx-panel-resource-data',MODx.panel.ResourceData);

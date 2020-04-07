@@ -9,32 +9,31 @@
  */
 
 /**
- * modLexicon
- *
- * @package modx
-*/
-
-/**
  * The lexicon handling class for setup.
- *
  * @package modx
  */
-class modInstallLexicon {
-    /**
-     * @var modInstall $install Reference to the modInstall instance.
-     */
-    public $install = null;
-    /**
-     * @var array $_lexicon The translated lexicon array
-     */
-    protected $_lexicon = array();
+class modInstallLexicon
+{
+    const OPTION_LEXICON_PATH = 'lexicon_path';
 
+    /** @var modInstall $install Reference to the modInstall instance. */
+    public $install;
 
-    function __construct(modInstall &$install,array $config = array()) {
-        $this->install =& $install;
-        $this->config = array_merge(array(
-            'lexiconPath' => dirname(__DIR__).'/lang/',
-        ),$config);
+    /** @var array Installer config */
+    protected $config = [];
+
+    /** @var array $lexicon The translated lexicon array */
+    protected $lexicon = [];
+
+    /**
+     * modInstallLexicon constructor.
+     * @param modInstall $install
+     * @param array $config
+     */
+    public function __construct(modInstall $install, array $config = [])
+    {
+        $this->install = $install;
+        $this->config = array_merge([self::OPTION_LEXICON_PATH => dirname(__DIR__) . '/lang/'], $config);
     }
 
     /**
@@ -43,12 +42,9 @@ class modInstallLexicon {
      * @param array $placeholders Any values to replace placeholders with
      * @return string The translated key.
      */
-    public function get($key,array $placeholders = array()) {
-        $v = '';
-        if ($this->exists($key)) {
-            $v = $this->parse($this->_lexicon[$key],$placeholders);
-        }
-        return $v;
+    public function get(string $key, array $placeholders = []): string
+    {
+        return $this->exists($key) ? $this->parse($this->lexicon[$key], $placeholders) : '';
     }
 
     /**
@@ -57,8 +53,10 @@ class modInstallLexicon {
      * @param string $value The value to set.
      * @return string The set value.
      */
-    public function set($key,$value = '') {
-        $this->_lexicon[$key] = $value;
+    public function set(string $key, string $value = ''): string
+    {
+        $this->lexicon[$key] = $value;
+
         return $value;
     }
 
@@ -68,7 +66,7 @@ class modInstallLexicon {
      * @param array $placeholders An array of placeholders
      * @return string
      */
-    public function parse($str = '',array $placeholders = array()) {
+    public function parse($str = '',array $placeholders = []) {
         if (empty($str)) return '';
         if (empty($placeholders) || !is_array($placeholders)) return $str;
 
@@ -77,14 +75,15 @@ class modInstallLexicon {
         }
         return $str;
     }
+
     /**
      * Checks if a key exists in the currently loaded lexicon
-     *
      * @param string $key
      * @return boolean True if key is found
      */
-    public function exists($key) {
-        return array_key_exists($key,$this->_lexicon);
+    public function exists(string $key): bool
+    {
+        return array_key_exists($key, $this->lexicon);
     }
 
     /**
@@ -97,8 +96,8 @@ class modInstallLexicon {
      */
     public function fetch($prefix = '',$removePrefix = false) {
         if (!empty($prefix)) {
-            $lex = array();
-            $lang = $this->_lexicon;
+            $lex = [];
+            $lang = $this->lexicon;
             foreach ($lang as $k => $v) {
                 if (strpos($k,$prefix) !== false) {
                     $key = $removePrefix ? str_replace($prefix,'',$k) : $k;
@@ -107,7 +106,8 @@ class modInstallLexicon {
             }
             return $lex;
         }
-        return $this->_lexicon;
+
+        return $this->lexicon;
     }
 
     /**
@@ -156,22 +156,24 @@ class modInstallLexicon {
 
     /**
      * Get a list of available languages.
-     *
      * @return array An array of available languages
      */
-    public function getLanguageList() {
-        $path = dirname(__DIR__).'/lang/';
-        $languages = array();
+    public function getLanguageList(): array
+    {
+        $languages = [];
         /** @var DirectoryIterator $file */
-        foreach (new DirectoryIterator($path) as $file) {
+        foreach (new DirectoryIterator($this->config[self::OPTION_LEXICON_PATH]) as $file) {
             $basename = $file->getFilename();
-            if (!in_array($basename, array('.', '..','.htaccess','.svn','.git')) && $file->isDir()) {
-                if (file_exists($file->getPathname().'/default.inc.php')) {
-                    $languages[] = $basename;
-                }
+            if (!in_array($basename, ['.', '..', '.htaccess', '.svn', '.git'])
+                && $file->isDir()
+                && file_exists($file->getPathname() . '/default.inc.php')
+            ) {
+                $languages[] = $basename;
             }
         }
+
         sort($languages);
+
         return $languages;
     }
 
@@ -181,25 +183,34 @@ class modInstallLexicon {
      * @param string/array $topics A string name of a topic (or an array of topic names)
      * @return boolean True if successful.
      */
-    public function load($topics) {
-        $loaded = false;
-        $language = $this->getLanguage();
+    public function load($topics): bool
+    {
+        $currentLanguage = $this->getLanguage();
+
         if (!is_array($topics)) {
-            $topics = array($topics);
+            $topics = [$topics];
         }
+
+        $loaded = false;
+
         foreach ($topics as $topic) {
-            $topicFile = $this->config['lexiconPath'].$language.'/'.$topic.'.inc.php';
+            $parts = explode(':', $topic);
+            if (count($parts) > 1) {
+                list($currentLanguage, $topic) = $parts;
+            }
+            $topicFile = $this->config[self::OPTION_LEXICON_PATH] . $currentLanguage . '/' . $topic . '.inc.php';
             if (file_exists($topicFile)) {
-                $_lang = array();
+                $_lang = [];
                 include $topicFile;
                 if (is_array($_lang) && !empty($_lang)) {
-                    $this->_lexicon = array_merge($this->_lexicon,$_lang);
+                    $this->lexicon = array_merge($this->lexicon, $_lang);
                     $loaded = true;
                 } else {
                     $loaded = false;
                 }
             }
         }
+
         return $loaded;
     }
 }

@@ -5,7 +5,7 @@
  * @extends MODx.grid.Grid
  * @constructor
  * @param {Object} config An object of options.
- * @xtype grid-role
+ * @xtype modx-grid-role
  */
 MODx.grid.Role = function(config) {
     config = config || {};
@@ -14,12 +14,12 @@ MODx.grid.Role = function(config) {
         ,id: 'modx-grid-role'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/role/getlist'
+            action: 'Security/Role/GetList'
         }
         ,fields: ['id','name','description','authority','perm']
         ,paging: true
         ,autosave: true
-        ,save_action: 'security/role/updatefromgrid'
+        ,save_action: 'Security/Role/UpdateFromGrid'
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -66,11 +66,12 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
         if (p.indexOf('remove') != -1) {
             m.push({
                 text: _('role_remove')
-                ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'security/role/remove'])
+                ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'Security/Role/Remove'])
             });
         }
         return m;
     }
+
     ,createRole: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-role-create'
@@ -84,7 +85,12 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-role',MODx.grid.Role);
 
-
+/**
+ * @class MODx.window.CreateRole
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-role-create
+ */
 MODx.window.CreateRole = function(config) {
     config = config || {};
     this.ident = config.ident || 'crole'+Ext.id();
@@ -93,10 +99,10 @@ MODx.window.CreateRole = function(config) {
         // ,height: 150
         // ,width: 400
         ,url: MODx.config.connector_url
-        ,action: 'security/role/create'
+        ,action: 'Security/Role/Create'
         ,fields: [{
             name: 'name'
-            ,fieldLabel: _('name')+'<span class="required">*</span>'
+            ,fieldLabel: _('name')
             ,id: 'modx-'+this.ident+'-name'
             ,xtype: 'textfield'
             ,allowBlank: false

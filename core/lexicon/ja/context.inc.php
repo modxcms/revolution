@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'コンテキスト';
 $_lang['context_add'] = 'コンテキストを追加';
-$_lang['context_create'] = 'コンテキストを作成';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'コンテキストデータ';
 $_lang['context_duplicate'] = 'コンテキストの複製';
 $_lang['context_err_ae'] = '同じ名前のコンテキストが存在します。';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'コンテキストの再読み込み';
 $_lang['context_remove'] = 'コンテキストを削除';
 $_lang['context_remove_confirm'] = '本当にこのコンテキストを削除しますか？　復活できません。';
 $_lang['context_settings'] = 'コンテキスト設定';
-$_lang['context_settings_desc'] = 'サイトごとのコンテキストを設定します。コンテキストは、サイト単位の「システム設定」のようなものです。たとえばsite_start ・base_url・http_host・site_urlなどをここで設定します。定義しない値に関してはグローバルのシステム設定の値が継承されます。';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_update'] = 'コンテキストを編集';
 $_lang['context_with_key_not_found'] = 'キー %s のコンテキストが見つかりません。';
 $_lang['contexts'] = 'コンテキスト';

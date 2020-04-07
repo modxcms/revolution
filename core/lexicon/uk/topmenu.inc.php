@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Управління дозволами через гру
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'Документація по API';
 $_lang['api_docs_desc'] = 'Complete API documentation for MODX Revolution.';
-$_lang['bespoke_manager'] = 'Налаштування Менеджера';
-$_lang['bespoke_manager_desc'] = 'Управління користувацькими налаштуваннями адміністративної панелі';
 $_lang['components'] = 'Додатки';
 $_lang['content_types'] = 'Типи вмісту';
 $_lang['content_types_desc'] = 'Додавання нових типів вмісту для ресурсів, таких як .html, .js тощо.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Панель управління';
 $_lang['dashboards'] = 'Панелі';
 $_lang['dashboards_desc'] = 'Управління панелями та віджетами Менеджера';
 $_lang['edit_menu'] = 'Меню';
-$_lang['edit_menu_desc'] = 'Управління діями та структурою верхнього меню Менеджера';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Журнал помилок';
 $_lang['eventlog_viewer_desc'] = 'Перегляд файлу error.log MODX.';
 $_lang['export_site'] = 'Export Static HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Імпорт HTML';
 $_lang['import_site_desc'] = 'Імпортування ресурсів з HTML-файлів';
 $_lang['installer'] = 'Встановник додатків';
 $_lang['installer_desc'] = 'Управління доповненнями та репозитаріями';
+$_lang['language'] = 'Перемкнути мову';
+$_lang['language_desc'] = 'Виберіть відповідну мову адміністративній частині сайту (мова адмінки)';
 $_lang['lexicon_management'] = 'Словники';
 $_lang['lexicon_management_desc'] = 'Редагування мовних рядків у Менеджері';
 $_lang['logout'] = 'Вийти';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'System Settings';
 $_lang['system_settings_desc'] = 'Налаштування усіх параметрів системи';
 $_lang['tools'] = 'Tools';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Користувач';
 $_lang['usernav'] = 'User Navigation';

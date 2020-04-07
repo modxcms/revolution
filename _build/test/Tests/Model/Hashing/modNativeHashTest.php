@@ -1,26 +1,20 @@
 <?php
-/**
- * MODX Revolution
+/*
+ * This file is part of the MODX Revolution package.
  *
- * Copyright 2006-2014 by MODX, LLC.
- * All rights reserved.
+ * Copyright (c) MODX, LLC
  *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  *
  * @package modx-test
  */
+namespace MODX\Revolution\Tests\Model\Hashing;
+
+
+use MODX\Revolution\Hashing\modNative;
+use MODX\Revolution\MODxTestCase;
+
 /**
  * Tests related to the modNative class, a derivative of modHash.
  *
@@ -43,7 +37,7 @@ class modNativeHashTest extends MODxTestCase {
     public function testHash($string) {
         $this->modx->getService('hashing', 'hashing.modHashing');
         /** @var modNative $hasher */
-        $hasher = $this->modx->hashing->getHash('modNative', 'hashing.modNative');
+        $hasher = $this->modx->hashing->getHash(modNative::class, 'hashing.modNative');
 
         $generated = $hasher->hash($string);
         $this->assertNotEmpty($generated);
@@ -53,11 +47,11 @@ class modNativeHashTest extends MODxTestCase {
     }
 
     public function providerHash() {
-        return array(
-            array('password123'),
-            array('123456'),
-            array('what do you think of this?'),
-            array('letmein'),
-        );
+        return [
+            ['password123'],
+            ['123456'],
+            ['what do you think of this?'],
+            ['letmein'],
+        ];
     }
 }

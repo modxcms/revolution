@@ -54,10 +54,10 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
         $collations = null;
         $stmt = $this->xpdo->query("SELECT * FROM sys.fn_helpcollations()");
         if ($stmt && $stmt instanceof PDOStatement) {
-            $collations = array();
+            $collations = [];
             if (empty($collation)) $collation = $this->getCollation();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $col = array();
+                $col = [];
                 $col['selected'] = ($row['name']==$collation ? ' selected="selected"' : '');
                 $col['value'] = $row['name'];
                 $col['name'] = $row['name'];
@@ -88,11 +88,13 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
         if (empty($charset)) {
             $charset = $this->getCharset();
         }
-        return array($charset => array(
+        return [
+            $charset => [
             'selected' => ' selected="selected"',
             'value' => $charset,
             'name' => $charset
-        ));
+            ]
+        ];
     }
 
     /**
@@ -119,22 +121,30 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
      * {@inheritDoc}
      */
     public function verifyServerVersion() {
-        return array('result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success',array('version' => '')));
+        return [
+            'result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success', ['version' => ''])
+        ];
 
         $handler = @sqlsrv_connect($this->install->settings->get('database_server'),$this->install->settings->get('database_user'),$this->install->settings->get('database_password'));
         $serverInfo = @sqlsrv_server_info($handler);
         $sqlsrvVersion = $serverInfo['SQLServerVersion'];
         $sqlsrvVersion = $this->_sanitizeVersion($sqlsrvVersion);
         if (empty($sqlsrvVersion)) {
-            return array('result' => 'warning', 'message' => $this->install->lexicon('sqlsrv_version_server_nf'),'version' => $sqlsrvVersion);
+            return ['result' => 'warning', 'message' => $this->install->lexicon('sqlsrv_version_server_nf'),'version' => $sqlsrvVersion];
         }
 
         $sqlsrv_ver_comp = version_compare($sqlsrvVersion,'10.50.0','>=');
 
         if (!$sqlsrv_ver_comp) { /* ancient driver warning */
-            return array('result' => 'failure','message' => $this->install->lexicon('sqlsrv_version_fail',array('version' => $sqlsrvVersion)),'version' => $sqlsrvVersion);
+            return [
+                'result' => 'failure','message' => $this->install->lexicon('sqlsrv_version_fail',
+                    ['version' => $sqlsrvVersion]),'version' => $sqlsrvVersion
+            ];
         } else {
-            return array('result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success',array('version' => $sqlsrvVersion)),'version' => $sqlsrvVersion);
+            return [
+                'result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success',
+                    ['version' => $sqlsrvVersion]),'version' => $sqlsrvVersion
+            ];
         }
     }
 
@@ -146,20 +156,29 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
      * {@inheritDoc}
      */
     public function verifyClientVersion() {
-        return array('result' => 'success', 'message' => $this->install->lexicon('sqlsrv_version_client_success',array('version' => '')));
+        return [
+            'result' => 'success', 'message' => $this->install->lexicon('sqlsrv_version_client_success',
+                ['version' => ''])
+        ];
 
         $clientInfo = @sqlsrv_client_info();
         $sqlsrvVersion = $clientInfo['DriverVer'];
         $sqlsrvVersion = $this->_sanitizeVersion($sqlsrvVersion);
         if (empty($sqlsrvVersion)) {
-            return array('result' => 'warning','message' => $this->install->lexicon('sqlsrv_version_client_nf'),'version' => $sqlsrvVersion);
+            return ['result' => 'warning','message' => $this->install->lexicon('sqlsrv_version_client_nf'),'version' => $sqlsrvVersion];
         }
 
         $sqlsrv_ver_comp = version_compare($sqlsrvVersion,'10.50.0','>=');
         if (!$sqlsrv_ver_comp) {
-            return array('result' => 'warning','message' => $this->install->lexicon('sqlsrv_version_client_old',array('version' => $sqlsrvVersion)),'version' => $sqlsrvVersion);
+            return [
+                'result' => 'warning','message' => $this->install->lexicon('sqlsrv_version_client_old',
+                    ['version' => $sqlsrvVersion]),'version' => $sqlsrvVersion
+            ];
         } else {
-            return array('result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success',array('version' => $sqlsrvVersion)),'version' => $sqlsrvVersion);
+            return [
+                'result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success',
+                    ['version' => $sqlsrvVersion]),'version' => $sqlsrvVersion
+            ];
         }
     }
 

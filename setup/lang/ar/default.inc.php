@@ -10,10 +10,13 @@ $_lang['advanced_options'] = 'خيارات متقدمة';
 $_lang['all'] = 'جميع';
 $_lang['app_description'] = 'بيئة عمل تطبيقات CMS و PHP';
 $_lang['app_motto'] = 'مودكس الإبداع وفعل الكثير من القليل';
-$_lang['back'] = 'عودة';
+$_lang['back'] = 'Previous';
+$_lang['btn_test'] = 'Test';
 $_lang['base_template'] = 'القالب الرئيسي';
 $_lang['cache_manager_err'] = 'لا يمكن تحميل مدير الذاكرة المؤقتة لمودكس.';
 $_lang['choose_language'] = 'اختار لغة';
+$_lang['all_languages'] = 'All languages';
+$_lang['only_popular'] = 'Only popular';
 $_lang['cleanup_errors_title'] = 'ملاحظة هامة:';
 $_lang['cli_install_failed'] = 'فشل التثبيت! الأخطاء: [[+errors]]';
 $_lang['cli_no_config_file'] = 'تعذر على مودكس العثور على ملف التهيئة (مثل config.xml) لتثبيت CLI الخاص بك. لتشغيل برنامج الإعداد لمودكس من سطر الأوامر، يجب عليك توفير ملف تهيئة xml. انظر إلى التوثيق الرسمي للحصول على مزيد من المعلومات.';
@@ -25,7 +28,7 @@ $_lang['config_file_perms_set'] = 'تم ترقية صلاحيات ملف الت�
 $_lang['config_file_written'] = 'تم كتابة ملف التهئية بنجاح.';
 $_lang['config_key'] = 'مفتاح التهيئة لمودكس';
 $_lang['config_key_change'] = 'اذا أردت تغيير مفتاح التهيئة لمودكس، <a id="cck-href" href="javascript:void(0);">الرجاء الضغط هنا.</a>';
-$_lang['config_key_override'] = 'اذا كنت ترغب في تشغيل برنامج الإعداد على مفتاح تهيئة غير المستخدم حالياً ضمن setup/includes/config.core.php، الرجاء تحديد ذلك أدناه.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
 $_lang['config_not_writable_err'] = 'لقد حاولت تغيير إعداد ضمن setup/includes/config.core.php، لكن الملف غير قابل للكتابة. تأكد أن الملف قابل للكتابة أو عدل الملف يدوياً قبل المتابعة.';
 $_lang['connection_character_set'] = 'اتصال مجموعة الأحرف:';
 $_lang['connection_collation'] = 'الترتيب:';
@@ -143,12 +146,14 @@ $_lang['license'] = '<p class="title">يجب عليك أن توافق على ا�
 $_lang['license_agree'] = 'أوافق على الشروط الواردة في هذا الترخيص.';
 $_lang['license_agreement'] = 'اتفاقية الترخيص';
 $_lang['license_agreement_error'] = 'يجب عليك الموافقة على الترخيص قبل متابعة التثبيت.';
+$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'تسجيل الدخول';
 $_lang['modx_class_err_nf'] = 'لا يمكن تضمين ملف صف مودكس.';
 $_lang['modx_configuration_file'] = 'ملف تهيئة مودكس';
 $_lang['modx_err_instantiate'] = 'لا يمكن إنشاء مثيل لصف مودكس.';
 $_lang['modx_err_instantiate_mgr'] = 'تعذر تهيئة سياق مدير مودكس.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">مودكس</a> مشروع بيئة إدارة المحتوى (CMF). جميع الحقوق محفوظة. مودكس مرخص تحت GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
 $_lang['modx_footer2'] = 'مودكس هو برمجيات حرة.  ونحن نشجعك على أن تكون خلاق وتثوم بالاستفادة من مودكس بأية طريقة تراها مناسبة. فقط تأكد من أنك إذا قمت بإجراء تغييرات و قررت إعادة توزيع نسخة مودكس المعدلة الخاصة بك، أنه يمكنك الاحتفاظ بمصدر التعليمات البرمجية مجاناً!';
 $_lang['modx_install'] = 'تثبيت مودكس';
 $_lang['modx_install_complete'] = 'تم الانتهاء من تثبيت مودكس';
@@ -196,11 +201,20 @@ $_lang['retry'] = 'إعادة المحاولة';
 $_lang['security_notice'] = 'إشعار الأمن';
 $_lang['select'] = 'اختيار';
 $_lang['settings_handler_err_nf'] = 'لم يتمكن مودكس من العثور على الصف modInstallSettings عند: [[+path]]. الرجاء تأكد من أنك قمت برفع كل الملفات.';
+$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
 $_lang['setup_err_remove'] = 'حصل خطأ أثناء محاولة إزالة دليل التنصيب.';
 $_lang['setup_err_assets'] = 'لم يتم إنشاء الدليل assets/ الخاص بك عند [[+path]]<br />ستحتاج غلى أن تنشئ هذا الدليل وتجعله قابل للكتابة إذا كنت تريد استخدام إدارة الحزمة أو مكونات طرف ثالث.';
 $_lang['setup_err_assets_comp'] = 'لم يتم إنشاء الدليل assets/components/ الخاص بك عند: [[+path]] <br />ستحتاج إلى إنشاء هذا الدليل وجعله قابلا للكتابة إذا كنت تريد استخدام إدارة الحزمة أو مكونات طرف ثالث.';
 $_lang['setup_err_core_comp'] = 'لم يتم إنشاء الدليل core/components/ الخاص بك عند: [[+path]] <br />ستحتاج إلى إنشاء هذا الدليل وجعله قابلا للكتابة إذا كنت تريد استخدام إدارة الحزمة أو مكونات طرف ثالث.';
 $_lang['skip_to_bottom'] = 'التمرير للأسفل';
+$_lang['step_welcome'] = 'Welcome';
+$_lang['step_options'] = 'خيارات';
+$_lang['step_connect'] = 'Connect';
+$_lang['step_test'] = 'Test';
+$_lang['step_contexts'] = 'السياقات';
+$_lang['step_install'] = 'تركيب';
+$_lang['step_complete'] = 'Complete';
+$_lang['modx_installer'] = 'MODX Installer';
 $_lang['success'] = 'نجاح';
 $_lang['table_created'] = 'نجاح إنشاء جدول للصف [[+class]]';
 $_lang['table_err_create'] = 'خطأ في إنشاء الجدول للصف [[+class]]';
@@ -212,6 +226,7 @@ $_lang['transport_class_err_load'] = 'خطأ في تحميل صف النقل.';
 $_lang['toggle'] = 'تبديل الحالة';
 $_lang['toggle_success'] = 'رسائل النجاح المتناوبة';
 $_lang['toggle_warnings'] = 'التحذيرات المتناوبة';
+$_lang['upgrade_version_unsupported'] = 'Upgrading from MODX [[+version]] is not supported by this release. You will need to upgrade to MODX 2.6 or later before upgrading to this release.';
 $_lang['username_err_invchars'] = 'اسم المستخدم لديك يجب أن لا يحوي أية أحرف غير صالحة، مثل \\،/،&apos;،&quot;، أو {}.';
 $_lang['username_err_ns'] = 'اسم المستخدم غير صالح';
 $_lang['version'] = 'الإصدار';

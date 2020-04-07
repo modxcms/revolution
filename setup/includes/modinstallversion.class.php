@@ -20,7 +20,7 @@
  * @package setup
  */
 class modInstallVersion {
-    public $results = array();
+    public $results = [];
     public $version = '';
 
     function __construct(modInstallRunner &$runner) {
@@ -45,10 +45,12 @@ class modInstallVersion {
             return $dbcreated;
         } else {
             if (!$dbcreated = $this->install->xpdo->manager->createObjectContainer($class)) {
-                $this->runner->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">' . $this->install->lexicon('table_err_create',array('class' => $class)) . '</p>');
+                $this->runner->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">' . $this->install->lexicon('table_err_create',
+                        ['class' => $class]) . '</p>');
                 return false;
             } else {
-                $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">' . $this->install->lexicon('table_created',array('class' => $class)) . '</p>');
+                $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">' . $this->install->lexicon('table_created',
+                        ['class' => $class]) . '</p>');
                 return true;
             }
         }
@@ -61,7 +63,7 @@ class modInstallVersion {
      * @return array An array of results
      */
     public function install() {
-        $this->results = array();
+        $this->results = [];
 
         $connected = $this->install->xpdo->connect();
         if ($connected) {
@@ -92,7 +94,7 @@ class modInstallVersion {
      * @param array $params Optional parameters to be passed to a callable function.
      * @return boolean True if successful
      */
-    public function processResults($class,$description,$callable,array $params=array()) {
+    public function processResults($class,$description,$callable,array $params= []) {
         $result = false;
         if (is_callable($callable)) {
             $result = call_user_func_array($callable, $params);
@@ -100,10 +102,12 @@ class modInstallVersion {
             $result = $this->install->xpdo->exec($callable);
         }
         if ($result === false) {
-            $this->runner->addResult(modInstallRunner::RESULT_WARNING,'<p class="notok">'.$this->install->lexicon('err_update_table',array('class' => $class)).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>');
+            $this->runner->addResult(modInstallRunner::RESULT_WARNING,'<p class="notok">'.$this->install->lexicon('err_update_table',
+                    ['class' => $class]).'<br /><small>' . nl2br(print_r($this->install->xpdo->errorInfo(), true)) . '</small></p>');
             return false;
         } else {
-            $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('table_updated',array('class' => $class)).'<br /><small>' . $description . '</small></p>');
+            $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('table_updated',
+                    ['class' => $class]).'<br /><small>' . $description . '</small></p>');
             return true;
         }
     }
@@ -116,7 +120,7 @@ class modInstallVersion {
      * @return array An array of script filenames to load
      */
     private function _getUpgradeScripts() {
-        $scripts = array();
+        $scripts = [];
         $path = dirname(__FILE__).'/upgrades/'.$this->install->settings->get('database_type','mysql').'/';
         $sc = '';
         if (is_dir($path)) {
@@ -125,7 +129,7 @@ class modInstallVersion {
                 if (is_dir($path.$script)) continue;
                 $sc = str_replace('.php','',$script);
 
-                if (version_compare($this->version,$sc,'<=')) {
+                if (version_compare($this->version,$sc,'<')) {
                     $scripts[] = $path.$sc.'.php';
                 }
             }
@@ -141,9 +145,9 @@ class modInstallVersion {
      */
     private function _getVersion() {
         $installVersion = '2.0.0-alpha-1';
-        if ($settings_version = $this->install->xpdo->getObject('modSystemSetting', array(
+        if ($settings_version = $this->install->xpdo->getObject(modSystemSetting::class, [
                 'key' => 'settings_version'
-            ))) {
+        ])) {
             $installVersion = $settings_version->get('value');
         }
         $this->version = $installVersion;

@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'En kort beskrivning av mediakällan.';
 $_lang['source_duplicate'] = 'Duplicera mediakälla';
 $_lang['source_err_ae_name'] = 'Det finns redan en mediakälla med det namnet! Ange ett annat namn.';
 $_lang['source_err_nf'] = 'Mediakällan kunde inte hittas!';
+$_lang['source_err_init'] = 'Det gick inte att initialisera mediakällan "[[+source]]"!';
 $_lang['source_err_nfs'] = 'Kan inte hitta mediakällan med id: [[+id]].';
 $_lang['source_err_ns'] = 'Ange mediakällan.';
 $_lang['source_err_ns_name'] = 'Ange ett namn för mediakällan.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'Filsystem';
 $_lang['source_type.file_desc'] = 'En filsystembaserad källa som navigerar bland din servers filer.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigerar en Amazon S3-hink.';
+$_lang['source_type.ftp'] = 'Filöverföringsprotokoll';
+$_lang['source_type.ftp_desc'] = 'Navigerar på en FTP-fjärrserver.';
 $_lang['source_types'] = 'Källtyper';
 $_lang['source_types.intro_msg'] = 'Det här är en lista med alla de installerade typer av mediakällor som du har i denna MODX-instans.';
 $_lang['source.access.intro_msg'] = 'Här kan du begränsa en mediakälla till specifika användargrupper och ange policyer för dessa användargrupper. En mediakälla som inte är ihopkopplad med några användargrupper är tillgänglig för alla användare av hanteraren.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Kvalitén på de renderade tumnaglarna på en skala från 0-100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Den bildtyp som tumnaglarna ska renderas som.';
+$_lang['prop_file.visibility_desc'] = 'Standardsynlighet för nya filer och mappar.';
+$_lang['no_move_folder'] = 'Drivern för mediakällan stödjer inte flyttningar av mappar än.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Hink';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'En kommaseparerad lista. MODX kommer att hop
 $_lang['prop_s3.thumbnailQuality_desc'] = 'Kvalitén på de renderade tumnaglarna på en skala från 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'Den bildtyp som tumnaglarna ska renderas som.';
 $_lang['prop_s3.url_desc'] = 'URL:en för Amazon S3-instansen.';
-$_lang['s3_no_move_folder'] = 'S3-drivrutinen stödjer än så länge inte flyttning av mappar.';
 $_lang['prop_s3.region_desc'] = 'Hinkens region, exempel: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Valfritt prefix för sökväg/mapp';
+$_lang['s3_no_move_folder'] = 'S3-drivrutinen stödjer än så länge inte flyttning av mappar.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Serverns värdnamn eller IP-adress';
+$_lang['prop_ftp.username_desc'] = 'Användarnamn för autentisering. Kan vara "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Användarens lösenord. Lämna tomt för anonyma användare.';
+$_lang['prop_ftp.url_desc'] = 'Om den här FTP:n har en publik URL så kan du ange dess publika http-adress här. Det här kommer även att aktivera förhandsvisning av bilder i medialäsaren.';
+$_lang['prop_ftp.port_desc'] = 'Serverns portnummer, standard är 21.';
+$_lang['prop_ftp.root_desc'] = 'Rotmappen som kommer att öppnas efter anslutning';
+$_lang['prop_ftp.passive_desc'] = 'Aktivera eller inaktivera passivt FTP-läge';
+$_lang['prop_ftp.ssl_desc'] = 'Aktivera eller inaktivera SSL-anslutning';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout för anslutningen i sekunder.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

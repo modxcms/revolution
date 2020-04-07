@@ -8,11 +8,11 @@
  */
 $_lang['help_page_title'] = 'Допомога і підтримка';
 $_lang['help_main_head'] = 'MODX до Ваших послуг';
-$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/community/free-support-options">modx.com/community/free-support-options</a> or call +1 (469) 777-6639';
+$_lang['help_main_subhead'] = 'Дивіться нижче, щоб отримати необхідну вам допомогу по вашому проекту MODX <br> отримайте більш детальну інформацію на <a href="http://modx.com/support"> modx.com/support </a> або зателефонуйте +1 (469 ) 777-6639';
 $_lang['forums'] = 'Форуми';
 $_lang['forums_title'] = 'Форуми спільноти MODX';
 $_lang['forums_description'] = 'Безкоштовна допомога від спільноти';
-$_lang['forums_link'] = 'http://forums.modx.com/';
+$_lang['forums_link'] = 'https://community.modx.com/';
 $_lang['docs'] = 'Документація';
 $_lang['docs_title'] = 'Читайте неймовірний посібник MODX';
 $_lang['docs_description'] = 'Читайте офіційне керівництво MODX';
@@ -33,5 +33,5 @@ $_lang['social_follows'] = 'Також Ви можете <b>стежити за 
 $_lang['follow'] = 'Стежити за MODX';
 $_lang['like'] = 'Вподобати MODX';
 $_lang['circle'] = 'Додати до кола MODX';
-$_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/services/" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
+$_lang['help_about'] = 'Програмне забезпечення MODX® що ви використовуєте є результатом співпраці з дивовижною спільнотою користувачів, прихильників і розробників. З 2004 року команда MODX спонсорується і керується командою розробників, фінансування поточної роботи здійснюється через комерційну підтримку і розробку платних функцій. Ви можете <a href="http://modx.com/support/" class="supportTicket"> оплатити підтримку від розробників</a> щоб отримати годину екстреної підтримки (або можна обрати двогодинну не пріорітетну підтримку). Або <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">напишіть нам</a> якщо у вас є інші питання про MODX в цілому.';
 $_lang['help_credit'] = 'MODX це програмне забезпечення з відкритим програмним кодом, що поширюється за ліцензією <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL version 2.0</a> та пізнішими версіями даного документу. Авторські права 2005-[[+current_year]] від MODX, LLC. “MODX” є зареєстрованою торговою маркою. Будь-ласка не видаляйте та не змінюйте цю та іншу інформацію на даній сторінці.';

@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modContext;
+use MODX\Revolution\modManagerController;
+
 /**
  * Loads the view context preview page.
  *
@@ -44,11 +47,12 @@ class ContextViewManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         /* get context by key */
-        $context= $this->modx->getObjectGraph('modContext', '{"ContextSettings":{}}', $scriptProperties['key']);
+        $context= $this->modx->getObjectGraph(modContext::class, '{"ContextSettings":{}}', $scriptProperties['key']);
         if ($context == null) {
-            return $this->failure($this->modx->lexicon('context_with_key_not_found',array('key' =>  $scriptProperties['key'])));
+            return $this->failure($this->modx->lexicon('context_with_key_not_found',
+                ['key' =>  $scriptProperties['key']]));
         }
         if (!$context->checkPolicy('view')) return $this->failure($this->modx->lexicon('permission_denied'));
 
@@ -58,7 +62,7 @@ class ContextViewManagerController extends modManagerController {
         }
 
         /* assign context and display */
-        $placeholders = array();
+        $placeholders = [];
         $placeholders['context'] = $context;
         $placeholders['_ctx'] = $context->get('key');
         $this->contextKey = $context->get('key');
@@ -87,7 +91,7 @@ class ContextViewManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('context');
+        return ['context'];
     }
 
     /**

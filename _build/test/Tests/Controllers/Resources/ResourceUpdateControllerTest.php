@@ -1,8 +1,13 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources;
+
+
+use MODX\Revolution\modDocument;
+use MODX\Revolution\MODxControllerTestCase;
 
 class ResourceUpdateControllerTest extends MODxControllerTestCase
 {
-    /** @var ResourceUpdateManagerController $controller */
+    /** @var \ResourceUpdateManagerController $controller */
     public $controller;
 
     public $controllerName = 'ResourceUpdateManagerController';
@@ -13,7 +18,7 @@ class ResourceUpdateControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => -1,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertNotTrue($response);
@@ -24,7 +29,7 @@ class ResourceUpdateControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertTrue($response);

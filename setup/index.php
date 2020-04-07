@@ -33,7 +33,7 @@ if ($isCommandLine) {
         define('MODX_CORE_PATH',$_REQUEST['core_path']);
     }
     if (!empty($_REQUEST['config_key'])) {
-        $_REQUEST['config_key'] = str_replace(array('{','}',"'",'"','\$'), '', $_REQUEST['config_key']);
+        $_REQUEST['config_key'] = str_replace(['{','}',"'",'"','\$'], '', $_REQUEST['config_key']);
         define('MODX_CONFIG_KEY',$_REQUEST['config_key']);
     }
 }
@@ -97,7 +97,7 @@ $modInstall = new modInstall();
 if ($modInstall->getService('lexicon','modInstallLexicon')) {
     $modInstall->lexicon->load('default');
 }
-$modInstall->findCore();
+//$modInstall->findCore();
 $modInstall->doPreloadChecks();
 $requestClass = $isCommandLine ? 'request.modInstallCLIRequest' : 'request.modInstallRequest';
 $modInstall->getService('request',$requestClass);

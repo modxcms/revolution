@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Polic
 $_lang['admin'] = 'مدیر سیستم';
 $_lang['api_docs'] = 'مستندات API';
 $_lang['api_docs_desc'] = 'مستندات کامل API برای نسخه‌ی Revolution مادایکس.';
-$_lang['bespoke_manager'] = 'سفارشی کردن بخش مدیریت';
-$_lang['bespoke_manager_desc'] = 'Manage bespoke MODX Managers';
 $_lang['components'] = 'افزونه‌ها';
 $_lang['content_types'] = 'Content Types';
 $_lang['content_types_desc'] = 'Add content types for resources, such as .html, .js, etc.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'پیشخوان';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards_desc'] = 'Manage custom login Dashboards';
 $_lang['edit_menu'] = 'Menus';
-$_lang['edit_menu_desc'] = 'Manage the top Manager menu';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'سابقه‌ی وقایع';
 $_lang['eventlog_viewer_desc'] = 'View the MODX error.log.';
 $_lang['export_site'] = 'Export Static HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Import HTML';
 $_lang['import_site_desc'] = 'Import HTML files to Resources';
 $_lang['installer'] = 'Installer';
 $_lang['installer_desc'] = 'Manage Add-ons and Distributions';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Lexicons';
 $_lang['lexicon_management_desc'] = 'Edit Manager language strings';
 $_lang['logout'] = 'خروج';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'تنظیمات سیستم';
 $_lang['system_settings_desc'] = 'Configure all system settings';
 $_lang['tools'] = 'Tools';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'کاربر';
 $_lang['usernav'] = 'User Navigation';

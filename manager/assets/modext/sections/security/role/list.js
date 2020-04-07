@@ -19,7 +19,7 @@ MODx.page.ListRoles = function(config) {
             ,id: 'modx-abtn-new'
             ,cls: 'primary-button'
             ,params: {
-                a:'security/role/create'
+                a:'Security/Role/Create'
             }
         },{
             text: _('cancel')

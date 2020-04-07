@@ -11,11 +11,12 @@ MODx.panel.ResourceGroups = function(config) {
 		,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
-             html: _('resource_groups')
+            html: _('resource_groups')
             ,id: 'modx-resource-groups-header'
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('resource_groups')
+            ,layout: 'form'
             ,defaults: { border: false ,autoHeight: true }
             ,items: [{
                 html: '<p>'+_('rrg_drag')+'</p>'
@@ -40,7 +41,7 @@ MODx.panel.ResourceGroups = function(config) {
                         ,id: 'modx-gr-tree-resource'
                         ,url: MODx.config.connector_url
                         ,baseParams: {
-                            action: 'resource/getNodes'
+                            action: 'Resource/GetNodes'
                             ,noMenu: true
                         }
                         ,ddGroup: 'rg2resource'
@@ -52,10 +53,9 @@ MODx.panel.ResourceGroups = function(config) {
                     }]
                 }]
             }]
-        }]
+        }])]
     });
     MODx.panel.ResourceGroups.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.ResourceGroups,MODx.FormPanel);
 Ext.reg('modx-panel-resource-groups',MODx.panel.ResourceGroups);
-

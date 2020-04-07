@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Gestire le autorizzazioni attraverso gruppi, ruoli e crit
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'Documentazione API di MODX';
 $_lang['api_docs_desc'] = 'Documentazione phpDocumentor-driven delle API di MODX Revolution.';
-$_lang['bespoke_manager'] = 'Personalizzazione del Manager';
-$_lang['bespoke_manager_desc'] = 'Configura i Managers di MODX su misura';
 $_lang['components'] = 'Componenti';
 $_lang['content_types'] = 'Tipi di Contenuto';
 $_lang['content_types_desc'] = 'Aggiungi tipi di contenuto per le risorse, per esempio .html, .js, etc.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards_desc'] = 'Gestire le impostazioni delle dashboard.';
 $_lang['edit_menu'] = 'Menus';
-$_lang['edit_menu_desc'] = 'Gestione delle Azioni e della struttura del Top Menu.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Log Errori';
 $_lang['eventlog_viewer_desc'] = 'Mostra error.log di MODX.';
 $_lang['export_site'] = 'Esportazione HTML Statico';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Importa HTML';
 $_lang['import_site_desc'] = 'Importa un lotto di file HTML dentro al Sito.';
 $_lang['installer'] = 'Installatore';
 $_lang['installer_desc'] = 'Gestire componenti aggiuntivi e distribuzioni';
+$_lang['language'] = 'Attiva/disattiva lingua';
+$_lang['language_desc'] = 'Seleziona la lingua appropriata per l\'area manager';
 $_lang['lexicon_management'] = 'Gestione Linguaggio';
 $_lang['lexicon_management_desc'] = 'Modifca qualsiasi stringa della lingua presente nel manager.';
 $_lang['logout'] = 'Esci';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Impostazioni Sistema';
 $_lang['system_settings_desc'] = 'Modifica o crea le varie impostazioni di sistema.';
 $_lang['tools'] = 'Strumenti';
 $_lang['tools_desc'] = 'Utilities per mantenere il tuo sito in ordine';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Utente';
 $_lang['usernav'] = 'User Navigation';

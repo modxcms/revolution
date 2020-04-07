@@ -1,23 +1,25 @@
+/**
+ * @class MODx.panel.Source
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-panel-source
+ */
 MODx.panel.Source = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-source'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'source/update'
+            action: 'Source/Update'
         }
         ,defaults: { collapsible: false ,autoHeight: true }
-		,cls: 'container form-with-labels'
-        ,items: [{
-             html: _('source')
-            ,id: 'modx-source-header'
-            ,xtype: 'modx-header'
-        },{
+        ,cls: 'container form-with-labels'
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
                 ,border: true
-				,bodyCssClass: 'tab-panel-wrapper'
+                ,bodyCssClass: 'tab-panel-wrapper'
             }
             ,id: 'modx-source-tabs'
             ,forceLayout: true
@@ -30,26 +32,26 @@ MODx.panel.Source = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-				,defaults: { border: false, msgTarget: 'side' }
+                ,defaults: { border: false, msgTarget: 'side' }
                 ,layout: 'form'
                 ,id: 'modx-dashboard-form'
                 ,labelWidth: 150
                 ,items: [{
-					xtype: 'panel'
-					,border: false
-					,cls: 'main-wrapper'
-					,layout: 'form'
-					,labelAlign: 'top'
-					,items: [{
-					    layout: 'column'
-					    ,border: false
+                    xtype: 'panel'
+                    ,border: false
+                    ,cls: 'main-wrapper'
+                    ,layout: 'form'
+                    ,labelAlign: 'top'
+                    ,items: [{
+                        layout: 'column'
+                        ,border: false
                         ,defaults: {
                             layout: 'form'
                             ,labelAlign: 'top'
                             ,anchor: '100%'
                             ,border: false
                         }
-					    ,items: [{
+                        ,items: [{
                             columnWidth: .65
                             ,cls: 'main-content'
                             ,items: [{
@@ -68,7 +70,7 @@ MODx.panel.Source = function(config) {
                                 ,anchor: '100%'
                                 ,listeners: {
                                     'keyup': {scope:this,fn:function(f,e) {
-                                        Ext.getCmp('modx-source-header').getEl().update(_('source')+': '+f.getValue());
+                                        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
                                     }}
                                 }
                             },{
@@ -107,7 +109,6 @@ MODx.panel.Source = function(config) {
                                 ,html: _('source_type_desc')
                                 ,cls: 'desc-under'
                             }]
-
                         }]
                     }]
                 },{
@@ -154,6 +155,7 @@ MODx.panel.Source = function(config) {
 };
 Ext.extend(MODx.panel.Source,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.initialized) { return false; }
         if (Ext.isEmpty(this.config.record.id)) {
@@ -161,8 +163,8 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-		/* The component rendering is deferred since we are not using renderTo */
-        Ext.getCmp('modx-source-header').html = _('source')+': '+this.config.record.name;
+        /* The component rendering is deferred since we are not using renderTo */
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(this.config.record.name));
 
         var g,d;
         if (!Ext.isEmpty(this.config.record.properties)) {
@@ -188,6 +190,7 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
     ,beforeSubmit: function(o) {
         var bp = {};
         var sp = Ext.getCmp('modx-grid-source-properties');
@@ -200,9 +203,10 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
         }
         Ext.apply(o.form.baseParams,bp);
     }
+
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
-            MODx.loadPage('source/update', 'id='+o.result.object.id);
+            MODx.loadPage('Source/Update', 'id='+o.result.object.id);
         } else {
             Ext.getCmp('modx-abtn-save').setDisabled(false);
             var wg = Ext.getCmp('modx-grid-source-properties');
@@ -211,6 +215,12 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
             if (ag) { ag.getStore().commitChanges(); }
         }
     }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-source-header', [{
+            text: _('sources'),
+            href: MODx.getPage('source')
+        }]);
+    }
 });
 Ext.reg('modx-panel-source',MODx.panel.Source);
-

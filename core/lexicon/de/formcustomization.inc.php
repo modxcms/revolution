@@ -20,7 +20,7 @@ $_lang['containing_panel_desc'] = 'Die ID des Formulars, das das Feld enthält. 
 $_lang['deactivate'] = 'Deaktivieren';
 $_lang['default_value'] = 'Standardwert';
 $_lang['export'] = 'Exportieren';
-$_lang['fc.action_create'] = 'Resource erstellen';
+$_lang['fc.action_create'] = 'Ressource erstellen';
 $_lang['fc.action_update'] = 'Ressource bearbeiten';
 $_lang['fc.action_resource_wildcard'] = 'Ressource erstellen & bearbeiten';
 $_lang['field'] = 'Feld';
@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Nach Regel filtern...';
 $_lang['filter_by_search'] = 'Suche...';
 $_lang['for_parent'] = 'Für Eltern-Element';
 $_lang['for_parent_desc'] = 'Aktivieren Sie diese Option, wenn Sie möchten, dass diese Regel auf das Eltern-Element angewendet wird. Verwenden Sie dies nur mit Ressourcen oder Objekten mit einem mit einem "parent"-Feld. Nützlich für die "Erstellen"-Seite von Ressourcen.';
-$_lang['form_customization_msg'] = 'Hier ist eine Liste der momentan angewendeten Regeln. Weitere Informationen über Regeln und Formular-Anpassung finden Sie <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">hier</a>. Bitte beachten Sie, dass ungeeignete Regeln Probleme mit Ihrer MODX-Installation verursachen können. Inaktive Regeln werden ausgegraut dargestellt.';
+$_lang['form_customization_msg'] = 'Hier ist eine Liste der momentan angewendeten Regeln. Weitere Informationen über Regeln und Formular-Anpassung finden Sie <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">hier</a>. Bitte beachten Sie, dass ungeeignete Regeln Probleme mit Ihrer MODX-Installation verursachen können. Inaktive Regeln werden ausgegraut dargestellt.';
 $_lang['form_rules'] = 'Formular-Regeln';
 $_lang['import'] = 'Importieren';
 $_lang['import_from_xml'] = 'Neues Set aus XML-Datei importieren';

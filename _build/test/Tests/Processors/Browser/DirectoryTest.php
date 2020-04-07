@@ -9,6 +9,17 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Processors\Browser;
+
+
+use Exception;
+use MODX\Revolution\Processors\ProcessorResponse;
+use MODX\Revolution\modX;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\Browser\Directory\Create;
+use MODX\Revolution\Processors\Browser\Directory\GetList;
+use MODX\Revolution\Processors\Browser\Directory\Remove;
+use MODX\Revolution\Processors\Browser\Directory\Update;
 
 /**
  * Tests related to browser/directory/ processors
@@ -19,8 +30,6 @@
  * @group BrowserProcessors
  */
 class BrowserDirectoryProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'browser/directory/';
-
     public static function setUpBeforeClass() {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
@@ -36,12 +45,8 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
     public function setUp() {
         parent::setUp();
-        try {
-
-        } catch (Exception $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
-        }
     }
+
     /**
      * Tests the browser/directory/create processor, which creates a directory
      * @param string $dir
@@ -53,24 +58,24 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             return;
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+        $result = $this->modx->runProcessor(Create::class, [
             'name' => $dir,
-        ));
+        ]);
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
+            $this->fail('Could not load '. Create::class .' processor');
         }
         $s = $this->checkForSuccess($result);
-        $this->assertTrue($s,'Could not create directory '.$dir.' in browser/directory/create test: '.$result->getMessage());
+        $this->assertTrue($s,'Could not create directory '.$dir.' in ' . Create::class . ' test: '.$result->getMessage());
     }
     /**
      * Data provider for create processor test.
      * @return array
      */
     public function providerCreateDirectory() {
-        return array(
-            array('assets/test2'),
-            array('assets/test3'),
-        );
+        return [
+            ['assets/test2'],
+            ['assets/test3'],
+        ];
     }
 
     /**
@@ -84,10 +89,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerUpdateDirectory
      */
     public function testUpdateDirectory($oldDirectory = '',$newDirectory = '') {
-	    $this->markTestSkipped(
-		    'The test is skipped - testUpdateDirectory.'
-	    );
-	    return;
+        $this->markTestSkipped(
+            'The test is skipped - testUpdateDirectory.'
+        );
+        return;
         if (empty($oldDirectory) || empty($newDirectory)) return;
 
         $adir = $this->modx->getOption('base_path').$oldDirectory;
@@ -96,24 +101,24 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             $this->fail('Old directory could not be created for test: '.$adir);
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'update',array(
+        $result = $this->modx->runProcessor(Update::class, [
             'dir' => $oldDirectory,
             'name' => $this->modx->getOption('base_path').$newDirectory,
-        ));
+        ]);
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'update processor');
+            $this->fail('Could not load '.Update::class.' processor');
         }
         $s = $this->checkForSuccess($result);
-        $this->assertTrue($s,'Could not rename directory '.$oldDirectory.' to '.$newDirectory.' in browser/directory/update test: '.$result->getMessage());
+        $this->assertTrue($s,'Could not rename directory '.$oldDirectory.' to '.$newDirectory.' in ' . Update::class . ' test: '.$result->getMessage());
     }
     /**
      * Data provider for update processor test
      * @return array
      */
     public function providerUpdateDirectory() {
-        return array(
-            array('assets/test3/','assets/test4'),
-        );
+        return [
+            ['assets/test3/','assets/test4'],
+        ];
     }
 
     /**
@@ -136,11 +141,11 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             $this->fail('Old directory could not be created for test: '.$adir);
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+        $result = $this->modx->runProcessor(Remove::class, [
             'dir' => $dir,
-        ));
+        ]);
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'remove processor');
+            $this->fail('Could not load '.Remove::class.' processor');
         }
         $s = $this->checkForSuccess($result);
         $this->assertTrue($s,'Could not remove directory: `'.$dir.'`: '.$result->getMessage());
@@ -150,10 +155,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerRemoveDirectory() {
-        return array(
-            array('assets/test2'),
-            array('assets/test4'),
-        );
+        return [
+            ['assets/test2'],
+            ['assets/test4'],
+        ];
     }
 
     /**
@@ -164,14 +169,14 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @param boolean $shouldWork True if the directory list should not be empty.
      */
     public function testGetDirectoryList($dir,$shouldWork = true) {
-        /** @var modProcessorResponse $response */
-        $response = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
+        /** @var ProcessorResponse $response */
+        $response = $this->modx->runProcessor(GetList::class, [
             'id' => $dir,
-        ));
+        ]);
         if (empty($response)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'getlist processor');
+            $this->fail('Could not load '.GetList::class.' processor');
         }
-        $dirs = $this->modx->fromJSON($response->getResponse());
+        $dirs = json_decode($response->getResponse(), true);
 
         /* ensure correct test result */
         if ($shouldWork) {
@@ -179,17 +184,17 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         } else {
             $success = empty($dirs);
         }
-        $this->assertTrue($success,'Could not get list of files and dirs for '.$dir.' in browser/directory/getList test');
+        $this->assertTrue($success,'Could not get list of files and dirs for '.$dir.' in '.GetList::class.' test');
     }
     /**
      * Test data provider for getList processor
      * @return array
      */
     public function providerGetDirectoryList() {
-        return array(
-            array('manager/',true),
-            array('manager/assets',true),
-            array('fakedirectory/',false),
-        );
+        return [
+            ['manager/',true],
+            ['manager/assets',true],
+            ['fakedirectory/',false],
+        ];
     }
 }

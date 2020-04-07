@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Кіраванне дазволамі праз групы
 $_lang['admin'] = 'Адміністратар';
 $_lang['api_docs'] = 'Дакументацыя па API';
 $_lang['api_docs_desc'] = 'Поўная дакументацыя аб API MODx Revolution.';
-$_lang['bespoke_manager'] = 'Налады форм';
-$_lang['bespoke_manager_desc'] = 'Кіраванне карыстацкімі наладамі MODX';
 $_lang['components'] = 'Кампаненты';
 $_lang['content_types'] = 'Тыпы кантэнту';
 $_lang['content_types_desc'] = 'Даданне тыпаў кантэнту для рэсурсаў, такіх як .html, .js і інш.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Панэль кіравання';
 $_lang['dashboards'] = 'Панэлі кіравання';
 $_lang['dashboards_desc'] = 'Кіраванне карыстацкімі панелямі';
 $_lang['edit_menu'] = 'Меню';
-$_lang['edit_menu_desc'] = 'Кіраванне верхнім меню сістэмы';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Лог памылак';
 $_lang['eventlog_viewer_desc'] = 'Прагляд журнала памылак MODX.';
 $_lang['export_site'] = 'Экспарт у статычны HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Імпарт HTML';
 $_lang['import_site_desc'] = 'Імпарт HTML файлаў у рэсурсы';
 $_lang['installer'] = 'Усталёўшчык';
 $_lang['installer_desc'] = 'Кіраванне пакетамі і правайдэрамі';
+$_lang['language'] = 'Змяніць мову';
+$_lang['language_desc'] = 'Выберыце неабходную мову сістэмы кіравання';
 $_lang['lexicon_management'] = 'Слоўнікі';
 $_lang['lexicon_management_desc'] = 'Рэдагаванне моўных радкоў сістэмы кіравання';
 $_lang['logout'] = 'Выйсці';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Сістэмныя налады';
 $_lang['system_settings_desc'] = 'Налады ўсіх параметраў сістэмы';
 $_lang['tools'] = 'Інструменты';
 $_lang['tools_desc'] = 'Утыліты для захавання вашага сайту ў парадку';
-$_lang['topnav'] = 'Верхняе меню';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Карыстальнік';
 $_lang['usernav'] = 'Меню карыстальніка';

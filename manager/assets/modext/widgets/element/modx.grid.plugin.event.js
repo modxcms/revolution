@@ -21,7 +21,7 @@ MODx.grid.PluginEvent = function(config) {
         ,id: 'modx-grid-plugin-event'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/plugin/event/getList'
+            action: 'Element/Plugin/Event/GetList'
             ,plugin: config.plugin
             ,limit: 0
         }
@@ -61,7 +61,7 @@ MODx.grid.PluginEvent = function(config) {
                 xtype: 'modx-combo-property-set'
                 ,renderer: true
                 ,baseParams: {
-                    action: 'element/propertyset/getList'
+                    action: 'Element/PropertySet/GetList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -169,7 +169,7 @@ MODx.window.UpdatePluginEvent = function(config) {
         title: _('plugin_event_update')
         ,id: 'modx-window-plugin-event-update'
         ,url: MODx.config.connector_url
-        ,action: 'element/plugin/event/associate'
+        ,action: 'Element/Plugin/Event/Associate'
         ,autoHeight: true // needed here or the window will always show a scrollbar
         ,width: 600
         ,fields: [{
@@ -195,7 +195,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'element/plugin/event/getAssoc'
+                action: 'Element/Plugin/Event/GetAssoc'
                 ,'event': evt
             }
             ,listeners: {
@@ -213,7 +213,7 @@ Ext.extend(MODx.window.UpdatePluginEvent,MODx.Window,{
     }
     ,beforeSubmit: function(vs) {
         this.fp.getForm().baseParams = {
-            action: 'element/plugin/event/associate'
+            action: 'Element/Plugin/Event/Associate'
             ,plugins: Ext.getCmp('modx-grid-'+this.ident+'-assoc').encode()
         };
     }
@@ -229,7 +229,7 @@ MODx.grid.PluginEventAssoc = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/plugin/event/getPlugins'
+            action: 'Element/Plugin/Event/GetPlugins'
             ,plugin: config.plugin
         }
         ,saveParams: {
@@ -257,7 +257,7 @@ MODx.grid.PluginEventAssoc = function(config) {
                 xtype: 'modx-combo-property-set'
                 ,renderer: true
                 ,baseParams: {
-                    action: 'element/propertyset/getList'
+                    action: 'Element/PropertySet/GetList'
                     ,showAssociated: true
                     ,elementId: config.plugin
                     ,elementType: 'modPlugin'
@@ -377,7 +377,7 @@ MODx.combo.Plugin = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/plugin/getlist'
+            action: 'Element/Plugin/GetList'
         }
         ,fields: ['id','name','description']
         ,name: 'plugin'

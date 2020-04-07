@@ -1,5 +1,12 @@
 <?php
 
+use MODX\Revolution\modX;
+use MODX\Revolution\modDashboardWidgetInterface;
+use MODX\Revolution\Processors\Workspace\Packages\GetList;
+use MODX\Revolution\Smarty\modSmarty;
+use MODX\Revolution\Transport\modTransportPackage;
+use xPDO\xPDO;
+
 /**
  * @package modx
  * @subpackage dashboard
@@ -9,7 +16,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
     /** @var modX $modx */
     public $modx;
     public $latest_url = 'https://raw.githubusercontent.com/modxcms/revolution/3.x/_build/build.xml';
-    public $download_url = 'http://modx.com/download/latest/';
+    public $download_url = 'https://modx.com/download/latest';
     public $updatesCacheExpire = 3600;
 
 
@@ -19,13 +26,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
      */
     public function render()
     {
-        if (!class_exists('modPackageGetListProcessor')) {
-            if (!class_exists('modObjectGetListProcessor')) {
-                require MODX_CORE_PATH . '/model/modx/modprocessor.class.php';
-            }
-            require MODX_CORE_PATH . 'model/modx/processors/workspace/packages/getlist.class.php';
-        }
-        $processor = new modPackageGetListProcessor($this->modx);
+        $processor = new GetList($this->modx);
 
         $updateCacheKey = 'mgr/providers/updates/modx-core';
         $updateCacheOptions = [
@@ -70,7 +71,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
                 }
             }
 
-            $packages = $this->modx->call('transport.modTransportPackage', 'listPackages', [$this->modx, 1, 11, 0]);
+            $packages = $this->modx->call(modTransportPackage::class, 'listPackages', [$this->modx, 1, 11, 0]);
             /** @var modTransportPackage $package */
             foreach ($packages['collection'] as $package) {
                 $tmp = [];
@@ -84,7 +85,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
             $this->modx->cacheManager->set($updateCacheKey, $data, $this->updatesCacheExpire, $updateCacheOptions);
         }
 
-        $this->modx->getService('smarty', 'smarty.modSmarty');
+        $this->modx->getService('smarty', modSmarty::class);
         foreach ($data as $key => $value) {
             $this->modx->smarty->assign($key, $value);
         }

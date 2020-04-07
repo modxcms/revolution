@@ -7,8 +7,11 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
+
+use MODX\Revolution\modManagerController;
+
 class SystemEventManagerController extends modManagerController {
-    public $logArray = array();
+    public $logArray = [];
 
     /**
      * Check for any permissions or requirements to load page
@@ -42,10 +45,10 @@ class SystemEventManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         $logTarget = $this->modx->getLogTarget();
         if (!is_array($logTarget)) {
-            $logTarget = array('options' => array());
+            $logTarget = ['options' => []];
         }
         $filename = $this->modx->getOption('filename', $logTarget['options'], 'error.log', true);
         $filepath = $this->modx->getOption('filepath', $logTarget['options'], $this->modx->getCachePath() . xPDOCacheManager::LOG_DIR, true);
@@ -85,6 +88,6 @@ class SystemEventManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('system_events');
+        return ['system_events'];
     }
 }

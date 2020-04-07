@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+
 /**
  * Loads the MODx.Browser page
  *
@@ -45,8 +47,8 @@ MODx.ctx = "'.$this->ctx.'";
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         $scriptProperties['ctx'] = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'web';
 
@@ -87,6 +89,6 @@ MODx.ctx = "'.$this->ctx.'";
      * @return array
      */
     public function getLanguageTopics() {
-        return array('file');
+        return ['file'];
     }
 }

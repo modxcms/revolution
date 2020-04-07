@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Zarządzaj uprawnieniami grup, rolami i zasadami dostępu
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'Dokumentacja API';
 $_lang['api_docs_desc'] = 'Wyświetl dokumentację API dla MODX Revolution.';
-$_lang['bespoke_manager'] = 'Dostosowywanie menedżera';
-$_lang['bespoke_manager_desc'] = 'Manage bespoke MODX Managers';
 $_lang['components'] = 'Rozszerzenia';
 $_lang['content_types'] = 'Formaty zawartości';
 $_lang['content_types_desc'] = 'Zarządzaj <var title="Content Types">formatami zawartości</var> dla zasobów.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Kokpit';
 $_lang['dashboards'] = 'Kokpity';
 $_lang['dashboards_desc'] = 'Zarządzaj konfiguracjami pulpitów.';
 $_lang['edit_menu'] = 'Zakładki';
-$_lang['edit_menu_desc'] = 'Zarządzaj strukturą głównego menu.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Dziennik Błędów';
 $_lang['eventlog_viewer_desc'] = 'Wyświetl dziennik błędów MODX.';
 $_lang['export_site'] = 'Eksport statycznego HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Importowanie Dokumentów';
 $_lang['import_site_desc'] = 'Zaimportuj pliki HTML i utwórz z nich dokumenty w serwisie.';
 $_lang['installer'] = 'Instalator';
 $_lang['installer_desc'] = 'Zarządzanie dodatkami i dystrybucjami';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Leksykon';
 $_lang['lexicon_management_desc'] = 'Zmodyfikuj dowolny fragment opisu panelu administracyjnego MODX.';
 $_lang['logout'] = 'Wyloguj';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Ustawienia Systemowe';
 $_lang['system_settings_desc'] = 'Zarządzaj ustawieniami systemowymi dla całego serwisu.';
 $_lang['tools'] = 'Narzędzia';
 $_lang['tools_desc'] = 'Narzędzia do porządkowania witryny';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Użytkownik';
 $_lang['usernav'] = 'Nawigacja użytkownika';

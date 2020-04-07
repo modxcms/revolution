@@ -7,6 +7,9 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
+
+use MODX\Revolution\modManagerController;
+
 class SecurityLogoutManagerController extends modManagerController {
     /**
      * Check for any permissions or requirements to load page
@@ -27,7 +30,7 @@ class SecurityLogoutManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         $this->modx->runProcessor('security/logout');
         $url = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->modx->sendRedirect($url);
@@ -55,6 +58,6 @@ class SecurityLogoutManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('access','user');
+        return ['access','user'];
     }
 }

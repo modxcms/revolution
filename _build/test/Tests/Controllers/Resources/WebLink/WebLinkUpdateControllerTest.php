@@ -1,8 +1,13 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\WebLink;
+
+
+use MODX\Revolution\modWebLink;
+use MODX\Revolution\Tests\Controllers\Resources\ResourceUpdateControllerTest;
 
 class WebLinkUpdateControllerTest extends ResourceUpdateControllerTest
 {
-    /** @var WebLinkUpdateManagerController $controller */
+    /** @var \WebLinkUpdateManagerController $controller */
     public $controller;
 
     public $controllerName = 'WebLinkUpdateManagerController';
@@ -13,7 +18,7 @@ class WebLinkUpdateControllerTest extends ResourceUpdateControllerTest
     {
         $this->controller->setProperties([
             'id' => -1,
-            'class_key' => 'modWeblink',
+            'class_key' => modWeblink::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertNotTrue($response);
@@ -24,7 +29,7 @@ class WebLinkUpdateControllerTest extends ResourceUpdateControllerTest
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modWeblink',
+            'class_key' => modWeblink::class,
         ]);
         $response = $this->controller->getResource();
         $this->assertTrue($response);

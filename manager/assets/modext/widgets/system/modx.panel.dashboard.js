@@ -1,18 +1,20 @@
+/**
+ * @class MODx.panel.Dashboard
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-panel-dashboard
+ */
 MODx.panel.Dashboard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-dashboard'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/update'
+            action: 'System/Dashboard/Update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-             html: _('dashboard')
-            ,id: 'modx-dashboard-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -63,7 +65,7 @@ MODx.panel.Dashboard = function(config) {
                             ,anchor: '100%'
                             ,listeners: {
                                 'keyup': {scope:this,fn:function(f,e) {
-                                    Ext.getCmp('modx-dashboard-header').getEl().update(_('dashboard')+': '+f.getValue());
+                                    Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
                                 }}
                             }
                         },{
@@ -142,6 +144,7 @@ MODx.panel.Dashboard = function(config) {
 };
 Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.initialized) { return false; }
         if (Ext.isEmpty(this.config.record.id)) {
@@ -149,9 +152,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.defer(function() {
-            Ext.getCmp('modx-dashboard-header').update(_('dashboard')+': '+this.config.record.name);
-        }, 250, this);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(this.config.record.name));
 
         /*
         var d = this.config.record.usergroups;
@@ -170,6 +171,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
     ,beforeSubmit: function(o) {
         var bp = {};
         var wg = Ext.getCmp('modx-grid-dashboard-widget-placements');
@@ -178,6 +180,7 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         }
         Ext.apply(o.form.baseParams,bp);
     }
+
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             MODx.loadPage('system/dashboards/update', 'id='+o.result.object.id);
@@ -188,9 +191,22 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
 
         }
     }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-dashboard-header', [{
+            text: _('dashboards'),
+            href: MODx.getPage('system/dashboards')
+        }]);
+    }
 });
 Ext.reg('modx-panel-dashboard',MODx.panel.Dashboard);
 
+/**
+ * @class MODx.grid.DashboardWidgetPlacements
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-dashboard-widget-placements
+ */
 MODx.grid.DashboardWidgetPlacements = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -218,6 +234,12 @@ MODx.grid.DashboardWidgetPlacements = function(config) {
             header: _('widget')
             ,dataIndex: 'name_trans'
             ,width: 600
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=system/dashboards/widget/update&id=' + record.data.widget
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('rank')
             ,dataIndex: 'rank'
@@ -300,8 +322,12 @@ Ext.extend(MODx.grid.DashboardWidgetPlacements,MODx.grid.LocalGrid,{
 });
 Ext.reg('modx-grid-dashboard-widget-placements',MODx.grid.DashboardWidgetPlacements);
 
-
-
+/**
+ * @class MODx.window.DashboardWidgetPlace
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-dashboard-widget-place
+ */
 MODx.window.DashboardWidgetPlace = function(config) {
     config = config || {};
     this.ident = config.ident || 'dbugadd'+Ext.id();
@@ -365,7 +391,6 @@ Ext.extend(MODx.window.DashboardWidgetPlace,MODx.Window,{
 });
 Ext.reg('modx-window-dashboard-widget-place',MODx.window.DashboardWidgetPlace);
 
-
 /*
 MODx.grid.DashboardUserGroups = function(config) {
     config = config || {};
@@ -404,13 +429,13 @@ Ext.extend(MODx.grid.DashboardUserGroups,MODx.grid.LocalGrid,{
 
     ,addUserGroup: function(btn,e) {
         this.loadWindow(btn,e,{
-           xtype: 'modx-window-dashboard-usergroup-add'
-           ,listeners: {
+            xtype: 'modx-window-dashboard-usergroup-add'
+            ,listeners: {
                 'success': {fn:function(vs) {
                     var rec = new this.propRecord(vs);
                     this.getStore().add(rec);
                 },scope:this}
-           }
+            }
         });
         var w = Ext.getCmp('modx-window-dashboard-usergroup-add');
         w.reset();
@@ -421,7 +446,6 @@ Ext.extend(MODx.grid.DashboardUserGroups,MODx.grid.LocalGrid,{
     }
 });
 Ext.reg('modx-grid-dashboard-usergroups',MODx.grid.DashboardUserGroups);
-
 
 MODx.window.DashboardUserGroupAdd = function(config) {
     config = config || {};
@@ -464,7 +488,12 @@ Ext.extend(MODx.window.DashboardUserGroupAdd,MODx.Window,{
 Ext.reg('modx-window-dashboard-usergroup-add',MODx.window.DashboardUserGroupAdd);
 */
 
-
+/**
+ * @class MODx.combo.DashboardWidgets
+ * @extends MODx.combo.ComboBox
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-dashboard-widgets
+ */
 MODx.combo.DashboardWidgets = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -478,7 +507,7 @@ MODx.combo.DashboardWidgets = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget/getlist'
+            action: 'System/Dashboard/Widget/GetList'
             ,combo: true
         }
         ,tpl: new Ext.XTemplate('<tpl for=".">'

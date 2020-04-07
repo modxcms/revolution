@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Legen Sie Berechtigungen mit Hilfe von Gruppen, Rollen un
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'API-Dokumentation';
 $_lang['api_docs_desc'] = 'Komplette API-Dokumentation für MODX Revolution.';
-$_lang['bespoke_manager'] = 'Manager-Anpassung';
-$_lang['bespoke_manager_desc'] = 'MODX-Manager-Anpassungen verwalten.';
 $_lang['components'] = 'Extras';
 $_lang['content_types'] = 'Inhaltstypen';
 $_lang['content_types_desc'] = 'Fügen Sie Inhaltstypen für Ressourcen hinzu, wie z.B. .html, .js etc.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards_desc'] = 'Benutzerdefinierte Login-Dashboards verwalten.';
 $_lang['edit_menu'] = 'Menüs';
-$_lang['edit_menu_desc'] = 'Das Manager-Hauptmenü anpassen.';
+$_lang['edit_menu_desc'] = 'Das Manager-Hauptmenü anpassen';
 $_lang['eventlog_viewer'] = 'Fehlerprotokoll';
 $_lang['eventlog_viewer_desc'] = 'MODX-Fehlerprotokoll anzeigen.';
 $_lang['export_site'] = 'Statisches HTML exportieren';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'HTML importieren';
 $_lang['import_site_desc'] = 'Importieren Sie HTML-Dateien in Ressourcen.';
 $_lang['installer'] = 'Package-Verwaltung';
 $_lang['installer_desc'] = 'Add-ons und Distributionen verwalten.';
+$_lang['language'] = 'Sprache umschalten';
+$_lang['language_desc'] = 'Wählen Sie die passende Manager-Sprache';
 $_lang['lexicon_management'] = 'Lexikon-Verwaltung';
 $_lang['lexicon_management_desc'] = 'Bearbeiten Sie die Texte des MODX-Managers.';
 $_lang['logout'] = 'Logout';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Systemeinstellungen';
 $_lang['system_settings_desc'] = 'Alle Systemeinstellungen konfigurieren.';
 $_lang['tools'] = 'Tools';
 $_lang['tools_desc'] = 'Werkzeuge, die Ihnen bei der Verwaltung Ihrer Site helfen';
-$_lang['topnav'] = 'Hauptmenü';
+$_lang['topnav'] = 'Hauptnavigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Benutzer';
 $_lang['usernav'] = 'Benutzer-Menü';

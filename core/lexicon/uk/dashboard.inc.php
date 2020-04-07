@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Дія';
 $_lang['onlineusers_actionid'] = 'ID дії';
 $_lang['onlineusers_ipaddress'] = 'IP-адреса користувача';
 $_lang['onlineusers_lasthit'] = 'Останній візит';
-$_lang['onlineusers_message'] = 'Цей список відображає усіх активних користувачів за останні 20 хвилин (поточний час [[+curtime]])';
+$_lang['onlineusers_message'] = 'У цьому списку вказані всі активні користувачі за останні 20 хвилин:';
 $_lang['onlineusers_title'] = 'Користувачі онлайн';
 $_lang['onlineusers_user'] = 'Користувач';
 $_lang['onlineusers_userid'] = 'ID користувача';
+
+$_lang['updates_sort'] = 'Сортувати';
+$_lang['updates_status'] = 'Стан ресурсу';
+$_lang['updates_action'] = 'Дія';
+$_lang['updates_available'] = 'Доступні оновлення';
+$_lang['updates_update'] = 'Оновити';
+$_lang['updates_ok'] = 'До теперішнього часу';
+$_lang['updates_extras'] = 'Додатки';
+
 $_lang['quicklinks'] = 'Швидкі посилання';
 $_lang['security_notices'] = 'Повідомлення щодо безпеки';
 $_lang['view_tree'] = 'Переглянути дерево';

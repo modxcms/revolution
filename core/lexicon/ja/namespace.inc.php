@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'ネームスペース';
-$_lang['namespace_create'] = 'ネームスペースを作成';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'ネームスペースの作成時に、エラーが発生しました。';
 $_lang['namespace_err_nf'] = 'ネームスペースは見つかりません。';
 $_lang['namespace_err_nfs'] = 'ネームスペース「%s」は見つかりません。';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Hantera rättigheter med grupper, roller och åtkomstpoli
 $_lang['admin'] = 'Administration';
 $_lang['api_docs'] = 'API-dokumentation';
 $_lang['api_docs_desc'] = 'Komplett API-dokumentation för MODx Revolution.';
-$_lang['bespoke_manager'] = 'Anpassa hanteraren';
-$_lang['bespoke_manager_desc'] = 'Hantera anpassningar av MODX hanterare';
 $_lang['components'] = 'Komponenter';
 $_lang['content_types'] = 'Innehållstyper';
 $_lang['content_types_desc'] = 'Lägg till innehållstyper för resurser, tex .html, .js, etc.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Infopanel';
 $_lang['dashboards'] = 'Infopaneler';
 $_lang['dashboards_desc'] = 'Hantera alla konfigurationer för infopaneler.';
 $_lang['edit_menu'] = 'Menyer';
-$_lang['edit_menu_desc'] = 'Hantera toppmenyns struktur.';
+$_lang['edit_menu_desc'] = 'Hantera huvudmenyns struktur';
 $_lang['eventlog_viewer'] = 'Fellogg';
 $_lang['eventlog_viewer_desc'] = 'Visa MODX fellogg.';
 $_lang['export_site'] = 'Exportera statisk HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Importera HTML';
 $_lang['import_site_desc'] = 'Importera en uppsättning HTML-filer till webbplatsen.';
 $_lang['installer'] = 'Installerare';
 $_lang['installer_desc'] = 'Hantera tillägg och distributioner';
+$_lang['language'] = 'Växla språk';
+$_lang['language_desc'] = 'Välj lämpligt språk för hanteraren';
 $_lang['lexicon_management'] = 'Lexikonhantering';
 $_lang['lexicon_management_desc'] = 'Redigera språksträngarna i MODX hanterare.';
 $_lang['logout'] = 'Logga ut';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Systeminställningar';
 $_lang['system_settings_desc'] = 'Ändra eller skapa systeminställningar för hela webbplatsen.';
 $_lang['tools'] = 'Verktyg';
 $_lang['tools_desc'] = 'Verktyg för att hålla ordning på din webbplats';
-$_lang['topnav'] = 'Toppnavigering';
+$_lang['topnav'] = 'Huvudnavigering';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Användare';
 $_lang['usernav'] = 'Användarnavigering';

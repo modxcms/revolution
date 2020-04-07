@@ -9,6 +9,9 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution;
+
+use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * Abstract class extending MODxTestCase for controller-specific testing
@@ -35,26 +38,26 @@ abstract class MODxControllerTestCase extends MODxTestCase {
 
         /* load smarty template engine */
         $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
-        $this->modx->getService('smarty', 'smarty.modSmarty', '', array(
+        $this->modx->getService('smarty', modSmarty::class, '', [
             'template_dir' => $templatePath,
-        ));
+        ]);
         $this->modx->smarty->setCachePath('mgr/smarty/default/');
         $this->modx->smarty->assign('_config',$this->modx->config);
         $this->modx->smarty->assignByRef('modx',$this->modx);
 
-        $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);
         require_once MODX_MANAGER_PATH.'controllers/default/'.$this->controllerPath.'.class.php';
         $className = $this->controllerName;
 
         if (!empty($className)) {
-            $this->controller = new $className($this->modx,array(
+            $this->controller = new $className($this->modx, [
                 'namespace' => 'core',
                 'namespace_name' => 'core',
                 'namespace_path' => MODX_MANAGER_PATH,
                 'controller' => $this->controllerPath,
-            ));
+            ]);
             $this->controller->setProperties($_REQUEST);
         }
+        $this->modx->controller = $this->controller;
     }
 
     public function tearDown() {

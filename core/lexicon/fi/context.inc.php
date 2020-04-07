@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Konteksti';
 $_lang['context_add'] = 'Lisää Konteksti';
-$_lang['context_create'] = 'Luo Konteksti';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Konteksti data';
 $_lang['context_duplicate'] = 'Kopioi Konteksti';
 $_lang['context_err_ae'] = 'Samanniminen Konteksti on jo olemassa.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Virkistä Konteksti';
 $_lang['context_remove'] = 'Poista Konteksti';
 $_lang['context_remove_confirm'] = 'Oletko varma, että haluat poistaa tämän Kontekstin? Tämä poistetaan lopullisesti eikä poistoa voi perua.';
 $_lang['context_settings'] = 'Konteksti-asetukset';
-$_lang['context_settings_desc'] = 'Täällä voit tehdä asetukset tälle Kontekstille. Konteksti-asetukset syrjäyttää Järjestelmäasetusten vastaavalla avaimella tehdyt asetukset.';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_update'] = 'Päivitä Konteksti';
 $_lang['context_with_key_not_found'] = 'Kontekstia avaimella %s ei löydy!';
 $_lang['contexts'] = 'Contexts';

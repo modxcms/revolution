@@ -21,6 +21,8 @@ MODx.grid.Grid = function(config) {
         ,preventSaveRefresh: true
         ,showPerPage: true
         ,stateful: false
+        ,showActionsColumn: true
+        ,disableContextMenuAction: false
         ,menuConfig: {
             defaultAlign: 'tl-b?'
             ,enableScrolling: false
@@ -91,6 +93,48 @@ MODx.grid.Grid = function(config) {
             if (!itm.scope) { itm.scope = this; }
         }
     }
+
+    if (config.showActionsColumn) {
+        var defaultActionsColumnWidth = 50;
+
+        var isPercentage = function(columns) {
+            for (var i = 0; i < columns.length; i++) {
+                if (columns[i].width && (columns[i].width > 1)) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        if (config.columns && Array.isArray(config.columns)) {
+            if (config.actionsColumnWidth === undefined) {
+
+                if (isPercentage(config.columns)) {
+                    defaultActionsColumnWidth = 0.1;
+                }
+            }
+
+            config.columns.push({
+                width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,renderer: this.actionsColumnRenderer.bind(this)
+            });
+        }
+
+        if (config.cm && config.cm.columns && Array.isArray(config.cm.columns)) {
+            if (config.actionsColumnWidth === undefined) {
+                if (isPercentage(config.cm.columns)) {
+                    defaultActionsColumnWidth = 0.1;
+                }
+            }
+
+            config.cm.columns.push({
+                width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,renderer: this.actionsColumnRenderer.bind(this)
+            });
+        }
+    }
+
     MODx.grid.Grid.superclass.constructor.call(this,config);
     this._loadMenu(config);
     this.addEvents('beforeRemoveRow','afterRemoveRow','afterAutoSave');
@@ -120,6 +164,8 @@ MODx.grid.Grid = function(config) {
     });
     this.getStore().on('exception',this.onStoreException,this);
     this.config = config;
+
+    this.on('click', this.onClickHandler, this);
 };
 Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     windows: {}
@@ -232,7 +278,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             ,url: this.config.url
             ,params: p
             ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
+                'success': {fn:this.refresh,scope:this}
             }
         });
     }
@@ -245,7 +291,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         text = text || 'confirm_remove';
         var p = this.config.saveParams || {};
         Ext.apply(p,{ action: action || 'remove' });
-        //console.log(action, p);
         var k = this.config.primaryKey || 'id';
         p[k] = r[k];
 
@@ -256,7 +301,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,url: this.config.url
                 ,params: p
                 ,listeners: {
-                	'success': {fn:function() {
+                    'success': {fn:function() {
                         this.removeActiveRow(r);
                     },scope:this}
                 }
@@ -315,10 +360,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                    }
                 }
             });
         } else {
@@ -331,10 +376,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,remoteSort: this.config.remoteSort || false
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-				,listeners:{
+                ,listeners:{
                     load: function(){
-						Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
-					}
+                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                    }
                 }
             });
         }
@@ -379,6 +424,15 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                  */
                 if (Ext.isEmpty(c[i].renderer)) {
                     c[i].renderer = Ext.util.Format.htmlEncode;
+                }
+
+                /**
+                 * When the field has an editor defined, wrap the (optional) renderer with
+                 * a special renderer that applies a class and tooltip to indicate the
+                 * column is editable.
+                 */
+                if (c[i].editor) {
+                    c[i].renderer = this.renderEditableColumn(c[i].renderer);
                 }
             }
             this.cm = new Ext.grid.ColumnModel(c);
@@ -439,6 +493,24 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         return z;
     }
 
+    ,renderEditableColumn: function(renderer) {
+        return function(value, metaData, record, rowIndex, colIndex, store) {
+            if (renderer) {
+                if (typeof renderer.fn === 'function') {
+                    var scope = (renderer.scope) ? renderer.scope : false;
+                    renderer = renderer.fn.bind(scope);
+                }
+
+                if (typeof renderer === 'function') {
+                    value = renderer(value, metaData, record, rowIndex, colIndex, store);
+                }
+            }
+            metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
+
+            return value;
+        }
+    }
+
     ,rendYesNo: function(v,md) {
         if (v === 1 || v == '1') { v = true; }
         if (v === 0 || v == '0') { v = false; }
@@ -473,8 +545,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,editorYesNo: function(r) {
-    	r = r || {};
-    	Ext.applyIf(r,{
+        r = r || {};
+        Ext.applyIf(r,{
             store: new Ext.data.SimpleStore({
                 fields: ['d','v']
                 ,data: [[_('yes'),true],[_('no'),false]]
@@ -575,6 +647,74 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 
         return plugins[index];
     }
+
+    ,_getActionsColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="actions !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="actions">'
+            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    }
+
+    ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        var actions = this.getActions.apply(this, [record, rowIndex, colIndex, store]);
+        if (this.config.disableContextMenuAction !== true) {
+            actions.push({
+                text: _('context_menu'),
+                action: 'contextMenu',
+                icon: 'gear'
+            });
+        }
+
+        return this._getActionsColumnTpl().apply({
+            actions: actions
+        });
+    }
+
+    ,renderLink: function(v,attr) {
+        var el = new Ext.Element(document.createElement('a'));
+        el.addClass('x-grid-link');
+        el.dom.title = _('edit');
+        for (var i in attr) {
+            el.dom[i] = attr[i];
+        }
+        el.dom.innerHTML = Ext.util.Format.htmlEncode(v);
+        return el.dom.outerHTML;
+    }
+
+    ,getActions: function(record, rowIndex, colIndex, store) {
+        return [];
+    }
+
+    ,onClickHandler: function(e) {
+        var target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) return;
+        if (!target.dataset.action) return;
+
+        var actionHandler = 'action' + target.dataset.action.charAt(0).toUpperCase() + target.dataset.action.slice(1);
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
+            }
+        }
+
+        var record = this.getSelectionModel().getSelected();
+        var recordIndex = this.store.indexOf(record);
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
+    },
+
+    actionContextMenu: function(record, recordIndex, e) {
+        this._showMenu(this, recordIndex, e);
+    }
 });
 
 /* local grid */
@@ -583,14 +723,14 @@ MODx.grid.LocalGrid = function(config) {
 
     if (config.grouping) {
         Ext.applyIf(config,{
-          view: new Ext.grid.GroupingView({
-            forceFit: true
-            ,scrollOffset: 0
-            ,hideGroupedColumn: config.hideGroupedColumn ? true : false
-            ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
-                +(config.pluralText || _('records')) + '" : "'
-                +(config.singleText || _('record'))+'"]})' )
-          })
+            view: new Ext.grid.GroupingView({
+                forceFit: true
+                ,scrollOffset: 0
+                ,hideGroupedColumn: config.hideGroupedColumn ? true : false
+                ,groupTextTpl: config.groupTextTpl || ('{text} ({[values.rs.length]} {[values.rs.length > 1 ? "'
+                    +(config.pluralText || _('records')) + '" : "'
+                    +(config.singleText || _('record'))+'"]})' )
+            })
         });
     }
     if (config.tbar) {
@@ -612,6 +752,9 @@ MODx.grid.LocalGrid = function(config) {
         ,enableColumnMove: true
         ,header: false
         ,cls: 'modx-grid'
+        ,showActionsColumn: true
+        ,actionsColumnWidth: 50
+        ,disableContextMenuAction: false
         ,viewConfig: {
             forceFit: true
             ,enableRowBody: true
@@ -626,6 +769,17 @@ MODx.grid.LocalGrid = function(config) {
     this.menu = new Ext.menu.Menu(config.menuConfig);
     this.config = config;
     this._loadColumnModel();
+
+    if (config.showActionsColumn && config.columns && Array.isArray(config.columns)) {
+        config.columns.push({
+            width: config.actionsColumnWidth || 50
+            ,renderer: {
+                fn: this.actionsColumnRenderer,
+                scope: this
+            }
+        });
+    }
+
     MODx.grid.LocalGrid.superclass.constructor.call(this,config);
     this.addEvents({
         beforeRemoveRow: true
@@ -911,6 +1065,75 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
         }
         return z;
     }
+
+    ,_getActionsColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="actions !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="actions">'
+            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    }
+
+    ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        var actions = this.getActions.apply(this, arguments);
+
+        if (this.config.disableContextMenuAction !== true) {
+            actions.push({
+                text: _('context_menu'),
+                action: 'contextMenu',
+                icon: 'gear'
+            });
+        }
+
+        return this._getActionsColumnTpl().apply({
+            actions: actions
+        });
+    }
+
+    ,renderLink: function(v,attr) {
+        var el = new Ext.Element(document.createElement('a'));
+        el.addClass('x-grid-link');
+        el.dom.title = _('edit');
+        for (var i in attr) {
+            el.dom[i] = attr[i];
+        }
+        el.dom.innerHTML = Ext.util.Format.htmlEncode(v);
+        return el.dom.outerHTML;
+    }
+
+    ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
+        return [];
+    }
+
+    ,onClick: function(e) {
+        var target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) return;
+        if (!target.dataset.action) return;
+
+        var actionHandler = 'action' + target.dataset.action.charAt(0).toUpperCase() + target.dataset.action.slice(1);
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
+            }
+        }
+
+        var record = this.getSelectionModel().getSelected();
+        var recordIndex = this.store.indexOf(record);
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
+    },
+
+    actionContextMenu: function(record, recordIndex, e) {
+        this._showMenu(this, recordIndex, e);
+    }
 });
 Ext.reg('grid-local',MODx.grid.LocalGrid);
 Ext.reg('modx-grid-local',MODx.grid.LocalGrid);
@@ -1158,9 +1381,51 @@ Ext.preg('rowexpander', Ext.ux.grid.RowExpander);
 //backwards compat
 Ext.grid.RowExpander = Ext.ux.grid.RowExpander;
 
-Ext.ns('Ext.ux.grid');Ext.ux.grid.CheckColumn=function(a){Ext.apply(this,a);if(!this.id){this.id=Ext.id()}this.renderer=this.renderer.createDelegate(this)};Ext.ux.grid.CheckColumn.prototype={init:function(b){this.grid=b;this.grid.on('render',function(){var a=this.grid.getView();a.mainBody.on('mousedown',this.onMouseDown,this)},this);this.grid.on('destroy',this.onDestroy,this)},onMouseDown:function(e,t){this.grid.fireEvent('rowclick');if(t.className&&t.className.indexOf('x-grid3-cc-'+this.id)!=-1){e.stopEvent();var a=this.grid.getView().findRowIndex(t);var b=this.grid.store.getAt(a);b.set(this.dataIndex,!b.data[this.dataIndex]);this.grid.fireEvent('afteredit')}},renderer:function(v,p,a){p.css+=' x-grid3-check-col-td';return'<div class="x-grid3-check-col'+(v?'-on':'')+' x-grid3-cc-'+this.id+'">&#160;</div>'},onDestroy:function(){var mainBody = this.grid.getView().mainBody;
-        if(mainBody){
+Ext.ns('Ext.ux.grid');
+
+Ext.ux.grid.CheckColumn = function (a) {
+    Ext.apply(this, a);
+    if (!this.id) {
+        this.id = Ext.id()
+    }
+    this.renderer = this.renderer.createDelegate(this)
+};
+Ext.ux.grid.CheckColumn.prototype = {
+    init: function (b) {
+        this.grid = b;
+        this.grid.on('render', function () {
+            var a = this.grid.getView();
+            a.mainBody.on('mousedown', this.onMouseDown, this)
+        }, this);
+        this.grid.on('destroy', this.onDestroy, this)
+    }, onMouseDown: function (e, t) {
+        this.grid.fireEvent('rowclick');
+        if (t.className && t.className.indexOf('x-grid3-cc-' + this.id) != -1) {
+            e.stopEvent();
+            var a = this.grid.getView().findRowIndex(t);
+            var b = this.grid.store.getAt(a);
+            var sv = b.data[this.dataIndex];
+            b.set(this.dataIndex, !sv);
+            this.grid.fireEvent('afteredit', {
+                grid: this.grid,
+                record: b,
+                field: this.dataIndex,
+                originalValue: sv,
+                value: b.data[this.dataIndex],
+                cancel: false
+            });
+        }
+    }, renderer: function (v, p, a) {
+        p.css += ' x-grid3-check-col-td';
+        return '<div class="x-grid3-check-col' + (v ? '-on' : '') + ' x-grid3-cc-' + this.id + '">&#160;</div>'
+    }, onDestroy: function () {
+        var mainBody = this.grid.getView().mainBody;
+        if (mainBody) {
             mainBody.un('mousedown', this.onMouseDown, this);
-        }}};Ext.preg('checkcolumn',Ext.ux.grid.CheckColumn);Ext.grid.CheckColumn=Ext.ux.grid.CheckColumn;
+        }
+    }
+};
+Ext.preg('checkcolumn', Ext.ux.grid.CheckColumn);
+Ext.grid.CheckColumn = Ext.ux.grid.CheckColumn;
 
 Ext.grid.PropertyColumnModel=function(a,b){var g=Ext.grid,f=Ext.form;this.grid=a;g.PropertyColumnModel.superclass.constructor.call(this,[{header:this.nameText,width:50,sortable:true,dataIndex:'name',id:'name',menuDisabled:true},{header:this.valueText,width:50,resizable:false,dataIndex:'value',id:'value',menuDisabled:true}]);this.store=b;var c=new f.Field({autoCreate:{tag:'select',children:[{tag:'option',value:'true',html:'true'},{tag:'option',value:'false',html:'false'}]},getValue:function(){return this.el.dom.value=='true'}});this.editors={'date':new g.GridEditor(new f.DateField({selectOnFocus:true})),'string':new g.GridEditor(new f.TextField({selectOnFocus:true})),'number':new g.GridEditor(new f.NumberField({selectOnFocus:true,style:'text-align:left;'})),'boolean':new g.GridEditor(c)};this.renderCellDelegate=this.renderCell.createDelegate(this);this.renderPropDelegate=this.renderProp.createDelegate(this)};Ext.extend(Ext.grid.PropertyColumnModel,Ext.grid.ColumnModel,{nameText:'Name',valueText:'Value',dateFormat:'m/j/Y',renderDate:function(a){return a.dateFormat(this.dateFormat)},renderBool:function(a){return a?'true':'false'},isCellEditable:function(a,b){return a==1},getRenderer:function(a){return a==1?this.renderCellDelegate:this.renderPropDelegate},renderProp:function(v){return this.getPropertyName(v)},renderCell:function(a){var b=a;if(Ext.isDate(a)){b=this.renderDate(a)}else if(typeof a=='boolean'){b=this.renderBool(a)}return Ext.util.Format.htmlEncode(b)},getPropertyName:function(a){var b=this.grid.propertyNames;return b&&b[a]?b[a]:a},getCellEditor:function(a,b){var p=this.store.getProperty(b),n=p.data.name,val=p.data.value;if(this.grid.customEditors[n]){return this.grid.customEditors[n]}if(Ext.isDate(val)){return this.editors.date}else if(typeof val=='number'){return this.editors.number}else if(typeof val=='boolean'){return this.editors['boolean']}else{return this.editors.string}},destroy:function(){Ext.grid.PropertyColumnModel.superclass.destroy.call(this);for(var a in this.editors){Ext.destroy(a)}}});

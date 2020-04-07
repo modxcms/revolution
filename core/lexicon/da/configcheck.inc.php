@@ -26,7 +26,7 @@ $_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (pa
 If your MODX installation is running on a Apache webserver
 you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
 This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Guide</a>
+<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
 for further information about securing your site.</p>
 If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
 should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog

@@ -15,6 +15,10 @@
  *
  * @package setup
  */
+if ($install->isLocked()) {
+    return $parser->render('locked.tpl');
+}
+
 $install->settings->check();
 $default_folder_permissions = sprintf("%04o", 0777 & (0777 - umask()));
 $default_file_permissions = sprintf("%04o", 0666 & (0666 - umask()));
@@ -41,7 +45,7 @@ if (!empty($_POST['proceed'])) {
     $install->settings->store($settings);
 
     $installmode = $install->settings->get('installmode');
-    if (in_array($installmode,array(modInstall::MODE_UPGRADE_REVO_ADVANCED,modInstall::MODE_NEW))) {
+    if (in_array($installmode, [modInstall::MODE_UPGRADE_REVO_ADVANCED,modInstall::MODE_NEW])) {
         $this->proceed('database');
     } else {
         $this->proceed('summary');
@@ -67,7 +71,7 @@ if (file_exists(MODX_CORE_PATH . 'packages/core/manifest.php')) {
 }
 
 $unpacked= 0;
-if ($manifest && file_exists(MODX_CORE_PATH . 'packages/core/modWorkspace/')) {
+if ($manifest && file_exists(MODX_CORE_PATH . 'packages/core/MODX/Revolution/modWorkspace/')) {
     $unpacked= 1;
 }
 

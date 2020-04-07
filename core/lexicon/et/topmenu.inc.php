@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Polic
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'API Dokumentatsioon';
 $_lang['api_docs_desc'] = 'phpDocumentor poolt genereeritud Revolution API dokumentatsioon.';
-$_lang['bespoke_manager'] = 'Manager Customization';
-$_lang['bespoke_manager_desc'] = 'Manage bespoke MODX Managers';
 $_lang['components'] = 'Komponendid';
 $_lang['content_types'] = 'Content Type-id';
 $_lang['content_types_desc'] = 'Lisa content types ressurssidele nagu näiteks .html, .js jne.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Töölaud';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards_desc'] = 'Manage custom login Dashboards';
 $_lang['edit_menu'] = 'Menus';
-$_lang['edit_menu_desc'] = 'Halda Tegevusi ja Pea Menüü struktuuri.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Veateadete logi';
 $_lang['eventlog_viewer_desc'] = 'Vaata MODX-i error.log.';
 $_lang['export_site'] = 'Ekpordi Staatiline HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Impordi HTML';
 $_lang['import_site_desc'] = 'Impordi hulgi HTML faile lehele.';
 $_lang['installer'] = 'Installer';
 $_lang['installer_desc'] = 'Manage Add-ons and Distributions';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Lexiconi Haldus';
 $_lang['lexicon_management_desc'] = 'Muuda kõiki keele stringe üle kogu MODX manageri.';
 $_lang['logout'] = 'Logi välja';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Süsteemi Seaded';
 $_lang['system_settings_desc'] = 'Muuda või loo kogu lehele mõjuvaid süsteemi seadeid.';
 $_lang['tools'] = 'Tööriistad';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Kasutaja';
 $_lang['usernav'] = 'User Navigation';

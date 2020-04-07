@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'إدارة الصلاحيات عبر المجموعات،
 $_lang['admin'] = 'المشرف';
 $_lang['api_docs'] = 'توثيق API';
 $_lang['api_docs_desc'] = 'توثيق API الكامل لمودكس الثوري.';
-$_lang['bespoke_manager'] = 'إدارة التخصيص';
-$_lang['bespoke_manager_desc'] = 'إدارة مدراء مودكس المفصليين';
 $_lang['components'] = 'الإضافات';
 $_lang['content_types'] = 'أنواع المحتوى';
 $_lang['content_types_desc'] = 'إضافة أنواع المحتوى للمصادر، مثل html ،.js.، وغيرها.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'لوحة التحكم';
 $_lang['dashboards'] = 'لوحات التحكم';
 $_lang['dashboards_desc'] = 'إدارة لوحات تحكم تسجيل الدخول المخصصة';
 $_lang['edit_menu'] = 'القوائم';
-$_lang['edit_menu_desc'] = 'إدارة قائمة المدير العليا';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'سجل الخطأ';
 $_lang['eventlog_viewer_desc'] = 'عرض .error.log لمودكس';
 $_lang['export_site'] = 'تصدير HTML الثابت';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'استيراد HTML';
 $_lang['import_site_desc'] = 'استيراد ملفات HTML إلى المصادر';
 $_lang['installer'] = 'برنامج التثبيت';
 $_lang['installer_desc'] = 'إدارة الإضافات والتوزيعات';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'المعاجم';
 $_lang['lexicon_management_desc'] = 'تعديل سلاسل محارف اللغة للمدير';
 $_lang['logout'] = 'تسجيل الخروج';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'إعدادات النظام';
 $_lang['system_settings_desc'] = 'تهيئة كل إعدادات النظام';
 $_lang['tools'] = 'الأدوات';
 $_lang['tools_desc'] = 'الأدوات المساعدة للحفاظ على ترتيب الموقع الخاص بك';
-$_lang['topnav'] = 'القائمة العلوية';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'المستخدم';
 $_lang['usernav'] = 'قائمة المستخدم';

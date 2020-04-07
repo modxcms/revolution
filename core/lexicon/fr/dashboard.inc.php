@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Action';
 $_lang['onlineusers_actionid'] = 'ID de l\'action';
 $_lang['onlineusers_ipaddress'] = 'Adresse IP de l\'utilisateur';
 $_lang['onlineusers_lasthit'] = 'Dernier hit';
-$_lang['onlineusers_message'] = 'Liste des utilisateurs actifs durant les 20 dernières minutes (il est actuellement [[+curtime]])';
+$_lang['onlineusers_message'] = 'Cette liste affiche tous les utilisateurs actifs dans les vingt dernières minutes :';
 $_lang['onlineusers_title'] = 'Utilisateurs en ligne';
 $_lang['onlineusers_user'] = 'Utilisateur';
 $_lang['onlineusers_userid'] = 'ID de l\'utilisateur';
+
+$_lang['updates_sort'] = 'Trier';
+$_lang['updates_status'] = 'État';
+$_lang['updates_action'] = 'Action';
+$_lang['updates_available'] = 'Mises à jour disponibles';
+$_lang['updates_update'] = 'Mettre à jour';
+$_lang['updates_ok'] = 'À jour';
+$_lang['updates_extras'] = 'Extensions';
+
 $_lang['quicklinks'] = 'Liens rapides';
 $_lang['security_notices'] = 'Notices de sécurité';
 $_lang['view_tree'] = 'Voir l\'arbre';

@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modWorkspace;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
 
@@ -26,21 +27,21 @@ abstract class modInstallRunner {
     /** @var xPDO $xpdo */
     public $xpdo;
     /** @var array $config */
-    public $config = array();
+    public $config = [];
 
     public $success = false;
 
     /** @var modInstallVersion $versioner */
     public $versioner;
     /** @var array $results */
-    public $results = array();
+    public $results = [];
 
-    function __construct(modInstall $install,array $config = array()) {
+    function __construct(modInstall $install,array $config = []) {
         $this->install =& $install;
         $this->xpdo =& $install->xpdo;
-        $this->config = array_merge(array(
+        $this->config = array_merge([
 
-        ),$config);
+        ],$config);
     }
 
     public function run($mode) {
@@ -53,10 +54,10 @@ abstract class modInstallRunner {
     }
 
     public function addResult($type,$message) {
-        $this->results[] = array(
+        $this->results[] = [
             'class' => $type,
             'msg' => $message,
-        );
+        ];
     }
 
     public function getResults() {
@@ -77,7 +78,7 @@ abstract class modInstallRunner {
             $this->versioner = new $className($this);
             return $this->versioner;
         } else {
-            $this->install->_fatalError($this->install->lexicon('versioner_err_nf',array('path' => $path)));
+            $this->install->_fatalError($this->install->lexicon('versioner_err_nf', ['path' => $path]));
         }
         return $this->versioner;
     }
@@ -89,9 +90,9 @@ abstract class modInstallRunner {
     public function updateWorkspace() {
         $updated = false;
         /* @var modWorkspace $workspace set default workspace path */
-        $workspace = $this->install->xpdo->getObject('modWorkspace', array (
+        $workspace = $this->install->xpdo->getObject(modWorkspace::class, [
             'active' => 1
-        ));
+        ]);
         if ($workspace) {
             $path = $workspace->get('path');
             if (!empty($path)) {
@@ -117,13 +118,12 @@ abstract class modInstallRunner {
      */
     public function installPackage() {
         /* add required core data */
-        $this->install->xpdo->loadClass('transport.xPDOTransport', XPDO_CORE_PATH, true, true);
-
         $packageDirectory = MODX_CORE_PATH . 'packages/';
         $packageState = $this->install->settings->get('unpacked') == 1 ? xPDOTransport::STATE_UNPACKED : xPDOTransport::STATE_PACKED;
         $package = xPDOTransport :: retrieve($this->install->xpdo, $packageDirectory . 'core.transport.zip', $packageDirectory, $packageState);
         if (!is_object($package) || !($package instanceof xPDOTransport)) {
-            $this->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">'.$this->install->lexicon('package_execute_err_retrieve',array('path' => $this->install->settings->get('core_path'))).'</p>');
+            $this->addResult(modInstallRunner::RESULT_FAILURE,'<p class="notok">'.$this->install->lexicon('package_execute_err_retrieve',
+                    ['path' => $this->install->settings->get('core_path')]).'</p>');
             return false;
         }
 
@@ -149,11 +149,11 @@ abstract class modInstallRunner {
         if (!defined('MODX_CONNECTORS_URL'))
             define('MODX_CONNECTORS_URL', $this->install->settings->get('context_connectors_url'));
 
-        return $package->install(array (
+        return $package->install([
             xPDOTransport::RESOLVE_FILES => ($this->install->settings->get('inplace') == 0 ? 1 : 0)
             ,xPDOTransport::INSTALL_FILES => ($this->install->settings->get('inplace') == 0 ? 1 : 0)
             , xPDOTransport::PREEXISTING_MODE => xPDOTransport::REMOVE_PREEXISTING
-        ));
+        ]);
     }
 
 
@@ -190,7 +190,7 @@ abstract class modInstallRunner {
                 $content = @ fread($tplHandle, filesize($configTpl));
                 @ fclose($tplHandle);
                 if ($content) {
-                    $replace = array ();
+                    $replace = [];
                     foreach ($settings as $key => $value) {
                         if (is_scalar($value)) {
                             $replace['{' . $key . '}'] = "{$value}";

@@ -9,7 +9,12 @@
  *
  * @package modx-test
  */
-require_once dirname(__FILE__).'/../../MODxTestHarness.php';
+namespace MODX\Revolution\Tests\Model;
+
+
+use MODX\Revolution\modX;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\MODxTestHarness;
 
 /**
  * Tests related to the modParser class.
@@ -20,17 +25,17 @@ require_once dirname(__FILE__).'/../../MODxTestHarness.php';
  * @group modParser
  */
 class modParserTest extends MODxTestCase {
-    public static $scope = array();
+    public static $scope = [];
 
     public static function setUpBeforeClass() {
-        $modx = MODxTestHarness::getFixture('modX', 'modx', true);
-        $placeholders = array('tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2');
+        $modx = MODxTestHarness::getFixture(modX::class, 'modx', true);
+        $placeholders = ['tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2'];
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
 
     public static function tearDownAfterClass() {
         if (!empty(self::$scope)) {
-            $modx = MODxTestHarness::getFixture('modX', 'modx');
+            $modx = MODxTestHarness::getFixture(modX::class, 'modx');
             if (array_key_exists('keys', self::$scope)) {
                 $modx->unsetPlaceholder(self::$scope['keys']);
             }
@@ -48,7 +53,7 @@ class modParserTest extends MODxTestCase {
      * @param $expected
      */
     public function testCollectElementTags($input, $prefix, $suffix, $expectedMatches, $expectedCount) {
-        $matches = array();
+        $matches = [];
         $tagCount = $this->modx->parser->collectElementTags($input, $matches, $prefix, $suffix);
         $this->assertEquals($expectedMatches, $matches, "Did not collect expected tags.");
         $this->assertEquals($expectedCount, $tagCount, "Did not collect expected number of tags.");
@@ -57,29 +62,35 @@ class modParserTest extends MODxTestCase {
      * dataProvider for testCollectElementTags
      */
     public function providerCollectElementTags() {
-        return array(
-            array("", '[[', ']]', array(), 0),
-            array("[[tag]]", '[[', ']]', array(array("[[tag]]", "tag")), 1),
-            array("<title>[[*pagetitle]] - [[++site_name]]</title><body>[something]</body>", '[[', ']]', array(array("[[*pagetitle]]", "*pagetitle"), array("[[++site_name]]", "++site_name")), 2),
-            array("[[[[*field:is=`0`:then=`Tag`:else=`Tag`]]]]", '[[', ']]', array(array("[[[[*field:is=`0`:then=`Tag`:else=`Tag`]]]]", "[[*field:is=`0`:then=`Tag`:else=`Tag`]]")), 1),
-            array("[[!+fi.successMessage:empty=`
+        return [
+            ["", '[[', ']]', [], 0],
+            ["[[tag]]", '[[', ']]', [["[[tag]]", "tag"]], 1],
+            ["<title>[[*pagetitle]] - [[++site_name]]</title><body>[something]</body>", '[[', ']]', [["[[*pagetitle]]", "*pagetitle"], ["[[++site_name]]", "++site_name"]], 2],
+            ["[[[[*field:is=`0`:then=`Tag`:else=`Tag`]]]]", '[[', ']]', [["[[[[*field:is=`0`:then=`Tag`:else=`Tag`]]]]", "[[*field:is=`0`:then=`Tag`:else=`Tag`]]"]], 1],
+            [
+                "[[!+fi.successMessage:empty=`
     test[]
 	[[~[[*id]]]]
-`]]", '[[', ']]', array(array("[[!+fi.successMessage:empty=`
+`]]", '[[', ']]', [
+                [
+                    "[[!+fi.successMessage:empty=`
     test[]
 	[[~[[*id]]]]
 `]]", "!+fi.successMessage:empty=`
     test[]
 	[[~[[*id]]]]
-`")), 1),
-            array("items[[[tag]]]", '[[', ']]', array(array("[[tag]]", "tag")), 1),
-            array("[[tag]][[tag2]]", '[[', ']]', array(array("[[tag]]", "tag"), array("[[tag2]]", "tag2")), 2),
-            array("[[tag[[tag2]]]]", '[[', ']]', array(array("[[tag[[tag2]]]]", "tag[[tag2]]")), 1),
-            array("[[tag[[tag2[[tag3]]]]]]", '[[', ']]', array(array("[[tag[[tag2[[tag3]]]]]]", "tag[[tag2[[tag3]]]]")), 1),
-            array("[[tag\n?food=`beer`\n[[tag2]]]]", '[[', ']]', array(array("[[tag\n?food=`beer`\n[[tag2]]]]", "tag\n?food=`beer`\n[[tag2]]")), 1),
-            array("\n[[ tag? &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', array(array("[[ tag? &food=`beer` [[tag2]][[tag3]]]]", " tag? &food=`beer` [[tag2]][[tag3]]")), 1),
+`"
+                ]
+            ], 1
+            ],
+            ["items[[[tag]]]", '[[', ']]', [["[[tag]]", "tag"]], 1],
+            ["[[tag]][[tag2]]", '[[', ']]', [["[[tag]]", "tag"], ["[[tag2]]", "tag2"]], 2],
+            ["[[tag[[tag2]]]]", '[[', ']]', [["[[tag[[tag2]]]]", "tag[[tag2]]"]], 1],
+            ["[[tag[[tag2[[tag3]]]]]]", '[[', ']]', [["[[tag[[tag2[[tag3]]]]]]", "tag[[tag2[[tag3]]]]"]], 1],
+            ["[[tag\n?food=`beer`\n[[tag2]]]]", '[[', ']]', [["[[tag\n?food=`beer`\n[[tag2]]]]", "tag\n?food=`beer`\n[[tag2]]"]], 1],
+            ["\n[[ tag? &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', [["[[ tag? &food=`beer` [[tag2]][[tag3]]]]", " tag? &food=`beer` [[tag2]][[tag3]]"]], 1],
             /*array("\n[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', array(array("[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", " tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]")), 1),*/
-        );
+        ];
     }
 
     /**
@@ -101,337 +112,339 @@ class modParserTest extends MODxTestCase {
             $params['tokens'],
             $params['depth']
         );
-        $actual = array(
+        $actual = [
             'processed' => $processed,
             'content' => $content
-        );
+        ];
         $this->assertEquals($expected, $actual, "Did not get expected results from tag parsing.");
     }
     /**
      * dataProvider for testProcessElementTags.
      */
     public function providerProcessElementTags() {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'processed' => 0,
                     'content' => ""
-                ),
+                ],
                 "",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => false,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 0,
                     'content' => "[[!doNotCacheMe]]"
-                ),
+                ],
                 "[[!doNotCacheMe]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => false,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 0,
                     'content' => "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]"
-                ),
+                ],
                 "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => false,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 0,
                     'content' => "[[!doNotCacheMe]]"
-                ),
+                ],
                 "[[!doNotCacheMe]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => true,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 1,
                     'content' => ""
-                ),
+                ],
                 "[[!doNotCacheMe]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => true,
                     'removeUnprocessed' => true,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 0,
                     'content' => "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]"
-                ),
+                ],
                 "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => false,
                     'removeUnprocessed' => true,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 1,
                     'content' => ""
-                ),
+                ],
                 "[[!doNotCacheMe? &but=`[[youCanCacheMe]]`]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => true,
                     'removeUnprocessed' => true,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 1,
                     'content' => "[[!doNotCacheMe? &but=`Tag`]]"
-                ),
+                ],
                 "[[!doNotCacheMe? &but=`[[+tag]]`]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => false,
                     'removeUnprocessed' => true,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 2,
                     'content' => "[[!doNotCacheMe? &but=`Tag`]]Tag2"
-                ),
+                ],
                 "[[!doNotCacheMe? &but=`[[+tag]]`]][[+tag2]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => false,
                     'removeUnprocessed' => true,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 2,
                     'content' => "[[!+tag1? &but=`Tag`]]Tag2[[!+tag1]]"
-                ),
+                ],
                 "[[!+tag1? &but=`[[+tag]]`]][[+tag2]][[!+tag1]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => false,
                     'removeUnprocessed' => true,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 3,
                     'content' => "Tag1Tag2Tag1"
-                ),
+                ],
                 "[[!+tag1? &but=`[[+tag]]`]][[+tag2]][[!+tag1]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => true,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 3,
                     'content' => "[[+notATag? &but=`Tag`]]Tag2Tag1"
-                ),
+                ],
                 "[[+notATag? &but=`[[+tag]]`]][[+tag2]][[!+tag1]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => true,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'processed' => 3,
                     'content' => "[[+notATag? &but=`Tag2`]]Tag2Tag1"
-                ),
+                ],
                 "[[+notATag? &but=`[[+tag2]]`]][[+tag2]][[!+tag1]]",
-                array(
+                [
                     'parentTag' => '',
                     'processUncacheable' => true,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
-                    'tokens' => array(),
+                    'tokens' => [],
                     'depth' => 0
-                )
-            ),
-        );
+                ]
+            ],
+        ];
     }
 
     /**
      * Test modParser->parsePropertyString()
      *
      * @dataProvider providerParsePropertyString
-     * @param $expected
-     * @param $string
+     *
+     * @param array $expected
+     * @param string $string
+     * @param boolean $valuesOnly
      */
     public function testParsePropertyString($expected, $string, $valuesOnly) {
         $actual = $this->modx->parser->parsePropertyString($string, $valuesOnly);
         $this->assertEquals($expected, $actual, "Property string not parsed properly");
     }
     public function providerParsePropertyString() {
-        return array(
-            array(
-                array(),
+        return [
+            [
+                [],
                 "",
                 false
-            ),
-            array(
-                array(
-                    'property' => array(
+            ],
+            [
+                [
+                    'property' => [
                         'name' => 'property',
                         'desc' => '',
                         'type' => 'textfield',
-                        'options' => array(),
+                        'options' => [],
                         'value' => 'value'
-                    )
-                ),
+                    ]
+                ],
                 "&property=value",
                 false
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value'
-                ),
+                ],
                 "&property=value",
                 true
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value'
-                ),
+                ],
                 " &property=value ",
                 true
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value',
                     'property2' => 'value2',
-                ),
+                ],
                 " &property=value &property2=value2 ",
                 true
-            ),
-            array(
-                array(
-                    'property' => array(
+            ],
+            [
+                [
+                    'property' => [
                         'name' => 'property',
                         'desc' => '',
                         'type' => 'textfield',
-                        'options' => array(),
+                        'options' => [],
                         'value' => 'value'
-                    ),
-                    'property2' => array(
+                    ],
+                    'property2' => [
                         'name' => 'property2',
                         'desc' => '',
                         'type' => 'textfield',
-                        'options' => array(),
+                        'options' => [],
                         'value' => 'value2'
-                    ),
-                ),
+                    ],
+                ],
                 " &property=value &property2=value2 ",
                 false
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value&value=value',
-                ),
+                ],
                 "property=`value&value=value`",
                 true
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value? &value=`value` ',
-                ),
+                ],
                 "property=`value? &value=`value` `",
                 true
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value? &value=`value`',
-                ),
+                ],
                 "property=`value? &value=``value```",
                 true
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value with ` nested backticks',
-                ),
+                ],
                 " &property=`value with `` nested backticks`",
                 true
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'property' => 'value with nested backticks`',
-                ),
+                ],
                 " &property=`value with nested backticks```",
                 true
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -449,19 +462,19 @@ class modParserTest extends MODxTestCase {
      * dataProvider for testRealname.
      */
     public function providerTestRealname() {
-        return array(
-            array("", ""),
-            array("name", "name"),
-            array("name", "name:"),
-            array("name", "name:filter"),
-            array("name", "name@propset:filter"),
-            array("name", "name@propset:filter=`name@propset:filter`"),
-        );
+        return [
+            ["", ""],
+            ["name", "name"],
+            ["name", "name:"],
+            ["name", "name:filter"],
+            ["name", "name@propset:filter"],
+            ["name", "name@propset:filter=`name@propset:filter`"],
+        ];
     }
 
     public function testDefaultNonExistingTvValue() {
         $output = "[[*foo:default=`bar`]]";
-        $this->modx->parser->processElementTags('', $output, true, false, '[[', ']]', array(), 10);
+        $this->modx->parser->processElementTags('', $output, true, false, '[[', ']]', [], 10);
         $this->assertEquals($output, "bar", "Did not parse non-existing TV with default modifier correctly");
 
     }

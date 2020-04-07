@@ -1,8 +1,14 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\SymLink;
+
+
+use MODX\Revolution\modStaticResource;
+use MODX\Revolution\modSymLink;
+use MODX\Revolution\MODxControllerTestCase;
 
 class SymLinkDataControllerTest extends MODxControllerTestCase
 {
-    /** @var SymLinkDataManagerController $controller */
+    /** @var \SymLinkDataManagerController $controller */
     public $controller;
 
     public $controllerName = 'SymLinkDataManagerController';
@@ -13,7 +19,7 @@ class SymLinkDataControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => -1,
-            'class_key' => 'modSymlink',
+            'class_key' => modSymlink::class,
         ]);
         $this->controller->process();
         $this->assertEmpty($this->controller->resource);
@@ -24,7 +30,7 @@ class SymLinkDataControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modSymlink',
+            'class_key' => modSymlink::class,
         ]);
         $this->controller->process();
         $this->assertNotEmpty($this->controller->resource);
@@ -35,7 +41,7 @@ class SymLinkDataControllerTest extends MODxControllerTestCase
     {
         $this->controller->setProperties([
             'id' => 1,
-            'class_key' => 'modStaticResource',
+            'class_key' => modStaticResource::class,
         ]);
         $this->controller->render();
         $this->assertNotEmpty($this->controller->head['js']);

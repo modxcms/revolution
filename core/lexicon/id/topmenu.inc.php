@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Mengelola Permissions melalui kelompok, peran dan kebijak
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'Dokumentasi API';
 $_lang['api_docs_desc'] = 'Dokumentasi API lengkap MODX revolusi.';
-$_lang['bespoke_manager'] = 'Manajer kustomisasi';
-$_lang['bespoke_manager_desc'] = 'Mengelola dipesan lebih dahulu MODX Manajer';
 $_lang['components'] = 'Ekstra';
 $_lang['content_types'] = 'Jenis konten';
 $_lang['content_types_desc'] = 'Menambahkan konten jenis sumber daya, seperti .html, .js, dll.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Dasbor';
 $_lang['dashboards'] = 'Dashboard';
 $_lang['dashboards_desc'] = 'Mengelola login kustom dashboard';
 $_lang['edit_menu'] = 'Menu';
-$_lang['edit_menu_desc'] = 'Mengelola menu atas pengaturan';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Log kesalahan';
 $_lang['eventlog_viewer_desc'] = 'Lihat MODX error.log.';
 $_lang['export_site'] = 'Ekspor HTML statis';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Impor HTML';
 $_lang['import_site_desc'] = 'Impor file HTML untuk sumber daya';
 $_lang['installer'] = 'Installer';
 $_lang['installer_desc'] = 'Mengelola Pengaya dan distribusi';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Leksikon';
 $_lang['lexicon_management_desc'] = 'Mengedit pengaturan rangkaian bahasa';
 $_lang['logout'] = 'Logout';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Pengaturan sistem';
 $_lang['system_settings_desc'] = 'Mengkonfigurasi semua pengaturan sistem';
 $_lang['tools'] = 'Alat';
 $_lang['tools_desc'] = 'Kegunaan untuk menjaga situs Anda tersortir';
-$_lang['topnav'] = 'Navigasi teratas';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Pengguna';
 $_lang['usernav'] = 'Navigasi Pengguna';

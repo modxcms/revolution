@@ -17,7 +17,7 @@ MODx.page.UpdateResource = function(config) {
         ,which_editor: 'none'
         ,formpanel: 'modx-panel-resource'
         ,id: 'modx-page-update-resource'
-        ,action: 'resource/update'
+        ,action: 'Resource/Update'
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -55,19 +55,44 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
     }
 
     ,duplicateResource: function(btn,e) {
-        MODx.msg.confirm({
-            text: _('resource_duplicate_confirm')
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'resource/duplicate'
-                ,id: this.config.resource
-            }
+        var t = Ext.getCmp('modx-resource-tree');
+        var id = this.config.resource;
+        var node = t.getNodeById(this.config.record.context_key + '_' + id);
+
+        var r = {
+            resource: id
+            ,pagetitle: this.config.record.pagetitle
+            ,hasChildren: false
+            ,is_folder: this.config.record.isfolder
+        };
+
+        if (node) {
+            r.pagetitle = node.ui.textNode.innerText;
+            r.hasChildren = node.attributes.hasChildren;
+            r.childCount = node.attributes.childCount;
+            r.is_folder = node.getUI().hasClass('folder');
+        }
+        var w = MODx.load({
+            xtype: 'modx-window-resource-duplicate'
+            ,resource: id
+            ,pagetitle: r.pagetitle
+            ,hasChildren: r.hasChildren
+            ,childCount: r.childCount
+            ,redirect: true
             ,listeners: {
                 success: {fn:function(r) {
-                    MODx.loadPage('resource/update', 'id='+r.object.id);
+                    var response = Ext.decode(r.a.response.responseText);
+                    if (response.object.redirect) {
+                        MODx.loadPage('Resource/Update', 'id='+response.object.id);
+                    } else if (node) {
+                        node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                        t.refreshNode(node.id);
+                    }
                 },scope:this}
             }
         });
+        w.setValues(r);
+        w.show(e.target);
     }
 
     ,deleteResource: function(btn,e) {
@@ -76,12 +101,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/delete'
+                action: 'Resource/Delete'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('resource/update', 'id='+r.object.id);
+                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(true);
@@ -96,12 +121,12 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/undelete'
+                action: 'Resource/Undelete'
                 ,id: this.config.resource
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('resource/update', 'id='+r.object.id);
+                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(false);
@@ -205,7 +230,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         });
 
         btns.push({
-            process: 'resource/update'
+            process: 'Resource/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'

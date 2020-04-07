@@ -12,11 +12,11 @@ MODx.panel.Chunk = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/chunk/get'
+            action: 'Element/Chunk/Get'
         }
         ,id: 'modx-panel-chunk'
-		,cls: 'container form-with-labels'
-        ,class_key: 'modChunk'
+        ,cls: 'container form-with-labels'
+        ,class_key: 'MODX\\Revolution\\modChunk'
         ,chunk: ''
         ,bodyStyle: ''
         ,items: [{
@@ -58,7 +58,7 @@ MODx.panel.Chunk = function(config) {
                         ,value: config.record.props || null
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('chunk_desc_name')
                         ,name: 'name'
                         ,id: 'modx-chunk-name'
@@ -71,7 +71,7 @@ MODx.panel.Chunk = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('chunk')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/chunk/create' && MODx.perm.tree_show_element_ids === 1) {
+                                if (MODx.request.a !== 'Element/Chunk/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title += ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -208,7 +208,7 @@ MODx.panel.Chunk = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -228,27 +228,27 @@ MODx.panel.Chunk = function(config) {
                         ,hideMode: 'offsets'
                     }]
                 }]
-			},{
-				xtype: 'panel'
-				,border: false
-				,layout: 'form'
-				,cls:'main-wrapper'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('chunk_code')
-					,name: 'snippet'
-					,id: 'modx-chunk-snippet'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.snippet || ''
-				}]
-			}]
+            },{
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls:'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('chunk_code')
+                    ,name: 'snippet'
+                    ,id: 'modx-chunk-snippet'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.snippet || ''
+                }]
+            }]
         },{
             xtype: 'modx-panel-element-properties'
             ,elementPanel: 'modx-panel-chunk'
             ,elementId: config.chunk
-            ,elementType: 'modChunk'
+            ,elementType: 'MODX\\Revolution\\modChunk'
             ,record: config.record
         }],{
             id: 'modx-chunk-tabs'
@@ -258,6 +258,12 @@ MODx.panel.Chunk = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(['modx-chunk-form'], 'modx-chunk-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Chunk.superclass.constructor.call(this,config);
@@ -321,9 +327,9 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         var n = c !== '' && c !== null && c != 0 ? 'n_chunk_category_'+c : 'n_type_chunk';
         var t = Ext.getCmp('modx-tree-element');
         if (t) {
-        	var node = t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category);
-        	if (node) node.destroy();
-        	t.refreshNode(n,true);
+            var node = t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category);
+            if (node) node.destroy();
+            t.refreshNode(n,true);
         }
     }
 

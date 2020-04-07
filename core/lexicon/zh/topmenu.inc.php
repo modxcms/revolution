@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = '通过组、 角色和访问策略管理权限';
 $_lang['admin'] = '管理员';
 $_lang['api_docs'] = 'API 文档';
 $_lang['api_docs_desc'] = 'MODX Revolution的完整API 文档。';
-$_lang['bespoke_manager'] = '自定义管理器';
-$_lang['bespoke_manager_desc'] = '管理自定义MODX管理器';
 $_lang['components'] = '插件';
 $_lang['content_types'] = 'Content Types';
 $_lang['content_types_desc'] = '添加资源的内容类型，如.html、.js 等。';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = '工作台';
 $_lang['dashboards'] = '工作台';
 $_lang['dashboards_desc'] = '管理自定义登录工作台';
 $_lang['edit_menu'] = '菜单';
-$_lang['edit_menu_desc'] = '管理顶级管理器菜单';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Error Log';
 $_lang['eventlog_viewer_desc'] = '查看MODX错误日志。';
 $_lang['export_site'] = '导出静态 HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = '导入 HTML';
 $_lang['import_site_desc'] = '将 HTML 文件导入到资源';
 $_lang['installer'] = '安装器';
 $_lang['installer_desc'] = '管理加载项和分发';
+$_lang['language'] = '切换语言';
+$_lang['language_desc'] = '选择后台应用语言';
 $_lang['lexicon_management'] = '词汇';
 $_lang['lexicon_management_desc'] = '编辑管理器语言字符串';
 $_lang['logout'] = '注销';
@@ -120,7 +120,7 @@ $_lang['system_settings'] = 'System Settings';
 $_lang['system_settings_desc'] = '配置所有系统设置';
 $_lang['tools'] = '工具';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = '用户';
 $_lang['usernav'] = 'User Navigation';

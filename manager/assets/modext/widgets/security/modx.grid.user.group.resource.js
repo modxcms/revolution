@@ -1,4 +1,9 @@
-
+/**
+ * @class MODx.grid.UserGroupResourceGroup
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-user-group-resource-groups
+ */
 MODx.grid.UserGroupResourceGroup = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
@@ -10,7 +15,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
         id: 'modx-grid-user-group-resource-groups'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/usergroup/resourcegroup/getList'
+            action: 'Security/Access/UserGroup/ResourceGroup/GetList'
             ,usergroup: config.usergroup
         }
         ,paging: true
@@ -29,19 +34,43 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,dataIndex: 'name'
             ,width: 120
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/resourcegroup'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 100
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/permission'
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 200
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=security/access/policy/update&id=' + record.data.policy
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('context')
             ,dataIndex: 'context_key'
             ,width: 150
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=context/update&key=' + record.data.context_key
+                    ,target: '_blank'
+                });
+            }, scope: this }
         }]
         ,tbar: [{
             text: _('resource_group_add')
@@ -62,7 +91,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,id: 'modx-ugrg-policy-filter'
             ,emptyText: _('filter_by_policy')
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Object'
             }
             ,allowBlank: true
@@ -102,6 +131,7 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,createAcl: function(itm,e) {
         var r = {
             principal: this.config.usergroup
@@ -121,6 +151,7 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
         this.windows.createAcl.setValues(r);
         this.windows.createAcl.show(e.target);
     }
+
     ,updateAcl: function(itm,e) {
         var r = this.menu.record;
 
@@ -142,14 +173,19 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-user-group-resource-group',MODx.grid.UserGroupResourceGroup);
 
-
+/**
+ * @class MODx.window.CreateUGRG
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-resourcegroup-create
+ */
 MODx.window.CreateUGRG = function(config) {
     config = config || {};
     this.ident = config.ident || 'crgactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('resource_group_add')
         ,url: MODx.config.connector_url
-        ,action: 'security/access/usergroup/resourcegroup/create'
+        ,action: 'Security/Access/UserGroup/ResourceGroup/Create'
         // ,height: 250
         // ,width: 600
         ,fields: [{
@@ -162,7 +198,7 @@ MODx.window.CreateUGRG = function(config) {
         },{
             xtype: 'hidden'
             ,name: 'principal_class'
-            ,value: 'modUserGroup'
+            ,value: 'MODX\\Revolution\\modUserGroup'
         },{
             xtype: 'modx-combo-resourcegroup'
             ,fieldLabel: _('resource_group')
@@ -212,7 +248,7 @@ MODx.window.CreateUGRG = function(config) {
             ,name: 'policy'
             ,hiddenName: 'policy'
             ,baseParams: {
-                action: 'security/access/policy/getList'
+                action: 'Security/Access/Policy/GetList'
                 ,group: 'Resource,Object'
                 ,combo: '1'
             }
@@ -269,13 +305,18 @@ Ext.extend(MODx.window.CreateUGRG,MODx.Window,{
 });
 Ext.reg('modx-window-user-group-resourcegroup-create',MODx.window.CreateUGRG);
 
-
+/**
+ * @class MODx.window.UpdateUGRG
+ * @extends MODx.window.CreateUGRG
+ * @param {Object} config An object of options.
+ * @xtype modx-window-user-group-resourcegroup-update
+ */
 MODx.window.UpdateUGRG = function(config) {
     config = config || {};
     this.ident = config.ident || 'ugrgactx'+Ext.id();
     Ext.applyIf(config,{
         title: _('access_rgroup_update')
-        ,action: 'security/access/usergroup/resourcegroup/update'
+        ,action: 'Security/Access/UserGroup/ResourceGroup/Update'
     });
     MODx.window.UpdateUGRG.superclass.constructor.call(this,config);
 };

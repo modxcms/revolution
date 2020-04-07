@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Jmenný prostor';
-$_lang['namespace_create'] = 'Vytvořit jmenný prostor';
+$_lang['namespace_create'] = 'Nový jmenný prostor';
 $_lang['namespace_err_create'] = 'Nastala chyba při vytváření jmenného prostoru.';
 $_lang['namespace_err_nf'] = 'Jmenný prostor nenalezen.';
 $_lang['namespace_err_nfs'] = 'Jmenný prostor se názvem: %s nenalezen.';

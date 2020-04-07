@@ -10,8 +10,8 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
-<model package="modx.transport" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="transport" version="1.1">
-    <object class="modTransportProvider" table="transport_providers" extends="xPDOSimpleObject">
+<model package="MODX\Revolution\Transport" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution\Transport" version="3.0">
+    <object class="modTransportProvider" table="transport_providers" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="service_url" dbtype="tinytext" phptype="string" />
@@ -39,9 +39,9 @@
             <column key="priority" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Packages" class="transport.modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />
+        <aggregate alias="Packages" class="MODX\Revolution\Transport\modTransportPackage" local="id" foreign="provider" cardinality="many" owner="local" />
     </object>
-    <object class="modTransportPackage" table="transport_packages" extends="xPDOObject">
+    <object class="modTransportPackage" table="transport_packages" extends="xPDO\Om\xPDOObject">
         <field key="signature" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" />
         <field key="created" dbtype="datetime" phptype="datetime" null="false" />
         <field key="updated" dbtype="timestamp" phptype="timestamp" attributes="ON UPDATE CURRENT_TIMESTAMP" />
@@ -92,7 +92,7 @@
             <column key="release_index" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Workspace" class="modWorkspace" local="workspace" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Provider" class="transport.modTransportProvider" local="provider" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Workspace" class="MODX\Revolution\modWorkspace" local="workspace" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Provider" class="MODX\Revolution\Transport\modTransportProvider" local="provider" foreign="id" cardinality="one" owner="foreign" />
     </object>
 </model>

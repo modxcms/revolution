@@ -5,6 +5,9 @@
  * @var modX $modx
  * @var xPDOTransport $transport
  */
+
+use MODX\Revolution\modActionField;
+
 $success= true;
 
 $xmlFile = MODX_CORE_PATH.'model/schema/modx.action.fields.schema.xml';
@@ -17,7 +20,7 @@ $xml = @simplexml_load_string($xml);
 
 if (empty($modx)) $modx =& $transport->xpdo;
 
-$actionFields = $modx->getCollection('modActionField');
+$actionFields = $modx->getCollection(modActionField::class);
 foreach ($actionFields as $actionField) {
     $actionField->remove();
 }
@@ -27,14 +30,14 @@ foreach ($xml->action as $action) {
     foreach ($action->tab as $tab) {
         $tabName = (string)$tab['name'];
         if ($tabName != 'modx-resource-content') {
-            $tabObj = $modx->getObject('modActionField',array(
+            $tabObj = $modx->getObject(modActionField::class, [
                 'action' => (string)$action['controller'],
                 'name' => $tabName,
                 'type' => 'tab',
-            ));
+            ]);
             if (!$tabObj) {
-                $tabObj = $modx->newObject('modActionField');
-                $tabObj->fromArray(array(
+                $tabObj = $modx->newObject(modActionField::class);
+                $tabObj->fromArray([
                     'action' => (string)$action['controller'],
                     'name' => $tabName,
                     'type' => 'tab',
@@ -42,21 +45,21 @@ foreach ($xml->action as $action) {
                     'form' => (string)$action['form'],
                     'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
                     'rank' => $tabIdx,
-                ));
+                ]);
                 $success = $tabObj->save();
             }
         }
 
         $fieldIdx = 0;
         foreach ($tab->field as $field) {
-            $fieldObj = $modx->getObject('modActionField',array(
+            $fieldObj = $modx->getObject(modActionField::class, [
                 'action' => (string)$action['controller'],
                 'name' => (string)$field['name'],
                 'type' => 'field',
-            ));
+            ]);
             if (!$fieldObj) {
-                $fieldObj = $modx->newObject('modActionField');
-                $fieldObj->fromArray(array(
+                $fieldObj = $modx->newObject(modActionField::class);
+                $fieldObj->fromArray([
                     'action' => (string)$action['controller'],
                     'name' => (string)$field['name'],
                     'type' => 'field',
@@ -64,7 +67,7 @@ foreach ($xml->action as $action) {
                     'form' => (string)$action['form'],
                     'other' => !empty($tab['other']) ? (string)$tab['other'] : '',
                     'rank' => $fieldIdx,
-                ));
+                ]);
                 $success = $fieldObj->save();
             }
             $fieldIdx++;

@@ -1,8 +1,16 @@
+/**
+ * Loads a grid for managing Settings.
+ *
+ * @class MODx.grid.SettingsGrid
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-settings
+ */
 MODx.grid.SettingsGrid = function(config) {
     config = config || {};
     this.exp = new Ext.grid.RowExpander({
-        tpl : new Ext.Template(
-            '<p class="desc">{description_trans}</p>'
+        tpl : new Ext.XTemplate(
+            '<p class="desc">{[MODx.util.safeHtml(values.description_trans)]}</p>'
         )
     });
 
@@ -18,7 +26,9 @@ MODx.grid.SettingsGrid = function(config) {
             }
         }];
     }
-    config.tbar.push('->',{
+    config.tbar.push(
+    '->'
+    ,{
         xtype: 'modx-combo-namespace'
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
@@ -40,7 +50,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,emptyText: _('area_filter')
         ,value: MODx.request['area']
         ,baseParams: {
-            action: 'system/settings/getAreas'
+            action: 'System/Settings/GetAreas'
             ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
         }
         ,width: 250
@@ -75,7 +85,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'click': {fn: this.clearFilter, scope: this},
             'mouseout': { fn: function(evt){
-                   this.removeClass('x-btn-focus');
+                    this.removeClass('x-btn-focus');
                 }
             }
         }
@@ -137,11 +147,11 @@ MODx.grid.SettingsGrid = function(config) {
     });
 
     Ext.applyIf(config, {
-         cm: this.cm
+        cm: this.cm
         ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/settings/getList'
+            action: 'System/Settings/GetList'
             ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,area: MODx.request['area']
         }
@@ -154,7 +164,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,plugins: this.exp
         ,primaryKey: 'key'
         ,autosave: true
-        ,save_action: 'system/settings/updatefromgrid'
+        ,save_action: 'System/Settings/UpdateFromGrid'
         ,pageSize: parseInt(MODx.config.default_per_page) || 20
         ,paging: true
         ,collapseFirst: false
@@ -217,7 +227,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,removeSetting: function() {
-        return this.remove('setting_remove_confirm', 'system/settings/remove');
+        return this.remove('setting_remove_confirm', 'System/Settings/Remove');
     }
 
     ,updateSetting: function(btn,e) {
@@ -258,7 +268,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         this.getStore().baseParams.area = area;
         this.getStore().baseParams.key = '';
 
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
        // this.refresh();
     }
     ,filterByKey: function(tf,newValue,oldValue) {
@@ -297,13 +307,13 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         var f;
         if (r.xtype == 'combo-boolean' || r.xtype == 'modx-combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'datefield') {
             f = Ext.util.Format.dateRenderer(MODx.config.manager_date_format);
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'text-password' || r.xtype == 'modx-text-password') {
             f = MODx.grid.Grid.prototype.rendPassword;
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,10) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
@@ -317,9 +327,9 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
                 ed.store.isLoaded = true;
             }
             f = Ext.util.Format.comboRenderer(ed.field,v);
-            return f(v,md,rec,ri,ci,s,g);
+            return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         }
-        return v;
+        return this.renderEditableColumn()(v,md,rec,ri,ci,s,g);
     }
 
     /**
@@ -353,7 +363,7 @@ MODx.combo.Area = function(config) {
         ,fields: ['d','v']
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/settings/getAreas'
+            action: 'System/Settings/GetAreas'
         }
     });
     MODx.combo.Area.superclass.constructor.call(this,config);
@@ -369,7 +379,7 @@ MODx.window.CreateSetting = function(config) {
         title: _('setting_create')
         ,width: 600
         ,url: config.url
-        ,action: 'system/settings/create'
+        ,action: 'System/Settings/Create'
         ,autoHeight: true
         ,fields: [{
             layout: 'column'
@@ -533,7 +543,7 @@ MODx.window.UpdateSetting = function(config) {
         title: _('setting_update')
         ,width: 600
         ,url: config.grid.config.url
-        ,action: 'system/settings/update'
+        ,action: 'System/Settings/Update'
         ,autoHeight: true
         ,fields: [{
             layout: 'column'

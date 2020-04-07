@@ -9,6 +9,13 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Sources;
+
+
+use League\Flysystem\Filesystem;
+use MODX\Revolution\modContext;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Sources\modFileMediaSource;
 
 /**
  * Tests related to the modFileMediaSource class.
@@ -23,21 +30,16 @@ class modFileMediaSourceTest extends MODxTestCase {
     /** @var modFileMediaSource $source */
     public $source;
 
-    /**
-     * @return void
-     */
     public function setUp() {
         parent::setUp();
 
-        $this->modx->loadClass('sources.modMediaSource');
-        $this->modx->loadClass('sources.modFileMediaSource');
-        $this->source = $this->modx->newObject('sources.modFileMediaSource');
-        $this->source->fromArray(array(
+        $this->source = $this->modx->newObject(modFileMediaSource::class);
+        $this->source->fromArray([
             'name' => 'UnitTestFileSource',
             'description' => '',
-            'class_key' => 'sources.modFileMediaSource',
-            'properties' => array(),
-        ),'',true);
+            'class_key' => modFileMediaSource::class,
+            'properties' => [],
+        ],'',true);
     }
     public function tearDown() {
         parent::tearDown();
@@ -47,7 +49,7 @@ class modFileMediaSourceTest extends MODxTestCase {
     public function testInitialize() {
         $this->source->initialize();
 
-        /** @var League\Flysystem\Filesystem $filesystem */
+        /** @var Filesystem $filesystem */
         $filesystem = $this->source->getFilesystem();
 
         /** @var modContext $context */
@@ -56,7 +58,7 @@ class modFileMediaSourceTest extends MODxTestCase {
         $this->assertNotEmpty($filesystem);
         $this->assertInstanceOf('League\Flysystem\Filesystem', $filesystem);
         $this->assertNotEmpty($context);
-        $this->assertInstanceOf('modContext', $context);
+        $this->assertInstanceOf(modContext::class, $context);
     }
 
     /**

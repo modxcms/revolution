@@ -8,14 +8,19 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Loads the create user page
  *
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityUserCreateManagerController extends modManagerController {
+class SecurityUserCreateManagerController extends modManagerController
+{
     public $onUserFormRender;
+
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -51,24 +56,24 @@ class SecurityUserCreateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         /* invoke OnUserFormPrerender event */
-        $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', array(
+        $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($onUserFormPrerender)) $onUserFormPrerender = implode('',$onUserFormPrerender);
         $placeholders['OnUserFormPrerender'] = $onUserFormPrerender;
 
         /* invoke OnUserFormRender event */
-        $this->onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', array(
+        $this->onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($this->onUserFormRender)) $this->onUserFormRender = implode('',$this->onUserFormRender);
-        $this->onUserFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onUserFormRender);
+        $this->onUserFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onUserFormRender);
 
         $placeholders['OnUserFormRender'] = $this->onUserFormRender;
 
@@ -97,7 +102,7 @@ class SecurityUserCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','setting','access');
+        return ['user','setting','access'];
     }
 
     /**

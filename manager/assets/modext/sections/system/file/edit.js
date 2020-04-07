@@ -11,7 +11,7 @@ MODx.page.EditFile = function(config) {
     var btns = [];
     if (config.canSave) {
         btns.push({
-            process: 'browser/file/update'
+            process: 'Browser/File/Update'
             ,text: _('save')
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
@@ -55,7 +55,7 @@ MODx.panel.EditFile = function(config) {
         id: 'modx-panel-file-edit'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'browser/file/update'
+            action: 'Browser/File/Update'
             ,file: config.file
             ,wctx: MODx.request.wctx
         }
@@ -110,14 +110,14 @@ MODx.panel.EditFile = function(config) {
                     ,name: 'last_accessed'
                     ,id: 'modx-file-last-accessed'
                     ,anchor: '98%'
-                    ,value: config.record.last_accessed || ''
+                    ,value: MODx.util.Format.dateFromTimestamp(config.record.last_accessed)
                 },{
                     xtype: 'statictextfield'
                     ,fieldLabel: _('file_last_modified')
                     ,name: 'last_modified'
                     ,id: 'modx-file-last-modified'
                     ,anchor: '98%'
-                    ,value: config.record.last_modified || ''
+                    ,value: MODx.util.Format.dateFromTimestamp(config.record.last_modified)
                 },{
                     xtype: 'textarea'
                     ,hideLabel: true

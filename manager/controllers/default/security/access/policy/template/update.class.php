@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+
 /**
  * Loads the policy template page
  *
@@ -18,7 +20,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
     /** @var modAccessPolicyTemplate $template */
     public $template;
     /** @var array $templateArray */
-    public $templateArray = array();
+    public $templateArray = [];
 
     /**
      * Check for any permissions or requirements to load page
@@ -34,7 +36,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      */
     public function initialize() {
         if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
-            $this->template = $this->modx->getObject('modAccessPolicyTemplate', array('id' => $this->scriptProperties['id']));
+            $this->template = $this->modx->getObject(modAccessPolicyTemplate::class, ['id' => $this->scriptProperties['id']]);
         }
     }
 
@@ -65,14 +67,14 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         if (empty($this->template)) return $this->failure($this->modx->lexicon('policy_template_err_nf'));
 
-        $placeholders = array();
+        $placeholders = [];
 
         /* get permissions */
         $this->templateArray = $this->template->toArray();
-        $c = $this->modx->newQuery('modAccessPermission');
+        $c = $this->modx->newQuery(modAccessPermission::class);
         $c->sortby('name','ASC');
         $permissions = $this->template->getMany('Permissions',$c);
         /** @var modAccessPermission $permission */
@@ -86,12 +88,12 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
                 }
                 $desc = $this->modx->lexicon($desc);
             }
-            $this->templateArray['permissions'][] = array(
+            $this->templateArray['permissions'][] = [
                 $permission->get('name'),
                 $permission->get('description'),
                 $desc,
                 $permission->get('value'),
-            );
+            ];
         }
 
         $placeholders['template'] = $this->templateArray;
@@ -121,7 +123,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','access','policy','context');
+        return ['user','access','policy','context'];
     }
 
     /**

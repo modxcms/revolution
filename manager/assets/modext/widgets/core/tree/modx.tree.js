@@ -709,7 +709,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
     ,refreshParentNode: function () {
         if (this.cm.activeNode) {
-            this.getLoader().load(this.cm.activeNode.parentNode,this.cm.activeNode.expand);
+            this.getLoader().load(this.cm.activeNode.parentNode || this.cm.activeNode, this.cm.activeNode.expand);
         } else {
             this.refresh();
         }

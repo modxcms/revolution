@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Åtgärd';
 $_lang['onlineusers_actionid'] = 'Handlings-ID';
 $_lang['onlineusers_ipaddress'] = 'Användarens IP-adress';
 $_lang['onlineusers_lasthit'] = 'Senaste träff';
-$_lang['onlineusers_message'] = 'Denna lista visar alla användare som varit aktiva de senaste 20 minuterna (klockan är nu [[+curtime]])';
+$_lang['onlineusers_message'] = 'Denna lista visar alla användare som varit aktiva de senaste 20 minuterna:';
 $_lang['onlineusers_title'] = 'Användare online';
 $_lang['onlineusers_user'] = 'Användare';
 $_lang['onlineusers_userid'] = 'Användarens ID';
+
+$_lang['updates_sort'] = 'Sortera';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Åtgärd';
+$_lang['updates_available'] = 'Uppdateringar tillgängliga';
+$_lang['updates_update'] = 'Uppdatera';
+$_lang['updates_ok'] = 'Uppdaterad';
+$_lang['updates_extras'] = 'Komponenter';
+
 $_lang['quicklinks'] = 'Snabblänkar';
 $_lang['security_notices'] = 'Säkerhetsnotiser';
 $_lang['view_tree'] = 'Visa träd';

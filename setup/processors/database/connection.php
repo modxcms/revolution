@@ -34,19 +34,21 @@ if (!$install->driver->verifyPDOExtension()) {
 /* get an instance of xPDO using the install settings */
 $xpdo = $install->getConnection($mode);
 
-$errors = array();
+$errors = [];
 $dbExists = false;
 if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
-    if (is_bool($xpdo)) {
+    if (is_bool($xpdo) || is_null($xpdo)) {
         $this->error->failure($install->lexicon('xpdo_err_ins'));
     } else {
         $this->error->failure($xpdo);
     }
 }
-$xpdo->setLogTarget(array(
+$xpdo->setLogTarget(
+    [
     'target' => 'ARRAY'
-    ,'options' => array('var' => & $errors)
-));
+    ,'options' => ['var' => & $errors]
+    ]
+);
 
 /* try to get a connection to the actual database */
 $dbExists = $xpdo->connect();
@@ -64,17 +66,19 @@ if (!$dbExists) {
         if (!is_object($xpdo) || !($xpdo instanceof \xPDO\xPDO)) {
             $this->error->failure($install->lexicon('xpdo_err_ins'), $errors);
         }
-        $xpdo->setLogTarget(array(
+        $xpdo->setLogTarget(
+            [
             'target' => 'ARRAY'
-            ,'options' => array('var' => & $errors)
-        ));
+            ,'options' => ['var' => & $errors]
+            ]
+        );
         if (!$xpdo->connect()) {
             $this->error->failure($install->lexicon('db_err_connect_server'), $errors);
         }
     }
 }
 
-$data = array();
+$data = [];
 
 /* verify database versions */
 $server = $install->driver->verifyServerVersion();
@@ -114,10 +118,30 @@ if ($dbCharsets === null) {
 }
 $data['charsets'] = array_values($dbCharsets);
 
-$install->settings->store(array(
+$install->settings->store(
+    [
     'database_charset' => $data['charset'],
     'database_connection_charset' => $data['connection_charset'],
     'database_collation' => $data['collation'],
-));
+    ]
+);
+
+/* test table prefix */
+$count = null;
+$database = $install->settings->get('dbase');
+$prefix = $install->settings->get('table_prefix');
+$stmt = $xpdo->query($install->driver->testTablePrefix($database,$prefix));
+if ($stmt) {
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+        $count = (integer) $row['ct'];
+    }
+    $stmt->closeCursor();
+}
+if ($mode === modInstall::MODE_NEW && $count !== null) {
+    $this->error->failure($install->lexicon('test_table_prefix_inuse'), $errors);
+} elseif (($mode === modInstall::MODE_UPGRADE_REVO || $mode === modInstall::MODE_UPGRADE_REVO_ADVANCED) && $count === null) {
+    $this->error->failure($install->lexicon('test_table_prefix_nf'), $errors);
+}
 
 $this->error->success($install->lexicon('db_success'), $data);

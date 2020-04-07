@@ -21,20 +21,32 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
   outline: 0;
 }
 
-*:focus {
-  box-shadow: 0 0 0 0.125rem $blue;
-}
-
-body, h1, h2, h3, h4, h5, h6, p, ol, ul, form {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+form {
   margin: 0;
   padding: 0;
   font-weight: normal;
-  color: $black;
+  color: $mineShaft;
+}
+
+strong {
+  font-weight: 600;
 }
 
 body {
@@ -56,7 +68,7 @@ body {
   width: calc(100% - 30rem);
   background: $lightGray no-repeat center center;
   background-size: cover;
-  opacity: 0.8;
+  opacity: .8;
 }
 
 .l-main {
@@ -136,8 +148,13 @@ p {
 a {
   color: $blue;
   text-decoration: none;
+
   &:hover {
-    opacity: 0.8;
+    opacity: .8;
+  }
+
+  &:focus {
+    color: $red;
   }
 }
 
@@ -147,38 +164,15 @@ a {
 }
 
 input {
+  display: inline-block;
+  width: 100%;
+  background: $lightestGray;
+  border-radius: $borderRadius;
+  outline-color: $green;
   font-size: 1rem;
   padding: 1rem;
   box-shadow: none;
   border: 1px solid $lightGray;
-}
-
-label {
-  display: block;
-  margin: 1.25rem 0;
-  color: $darkestGray;
-  cursor: pointer;
-  font-weight: 500;
-  a {
-    font-weight: 400;
-  }
-}
-
-label#rememberme-checkbox {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-input {
-  display: inline-block;
-  width: 100%;
-  border-radius: $borderRadius;
-  outline-color: $green;
-}
-
-label > input {
-  margin-top: 0.25rem;
 }
 
 input[type="checkbox"] {
@@ -186,6 +180,25 @@ input[type="checkbox"] {
   margin: 0 0.5rem 0 0;
   position: relative;
   top: 0;
+}
+
+input:focus {
+  border: 1px solid $blue;
+}
+
+label {
+  display: block;
+  margin: 1.25rem 0;
+  cursor: pointer;
+  font-weight: 500;
+
+  a {
+    font-weight: 400;
+  }
+}
+
+label > input {
+  margin-top: 0.25rem;
 }
 
 /**
@@ -224,23 +237,17 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.c-button--ghost {
-  color: $blue;
-  background: transparent;
-  border: none;
-  .c-arrow {
-    stroke: $blue;
-  }
-}
-
 #modx-login-btn,
 #modx-fl-btn {
   border: 1px solid transparent;
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     background: $greener;
     color: $buttonColorPrimaryHover;
     transition: background-color .2s ease-out;
   }
+
   &:hover {
     box-shadow: none;
   }
@@ -251,13 +258,64 @@ input[type="checkbox"] {
   margin-top: 10px;
 }
 
+#rememberme-checkbox {
+  & input[type="checkbox"] {
+    width: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  & label {
+    position: relative;
+    display: inline-block;
+    padding-left: 22px;
+
+    &:before, &:after {
+        position: absolute;
+        content: "";
+        display: inline-block;
+    }
+
+    &:before {
+        width: 18px;
+        height: 18px;
+        background: $lightestGray;
+        border: 1px solid $lightGray;
+        border-radius: $borderRadius;
+        left: -3px;
+    }
+
+    &:after {
+      height: 5px;
+      width: 10px;
+      border-left: 2px solid;
+      border-bottom: 2px solid;
+      transform: rotate(-45deg);
+      left: 1px;
+      top: 5px;
+    }
+  }
+
+  & input[type="checkbox"] + label::after {
+    content: none;
+  }
+
+  & input[type="checkbox"]:checked + label::after {
+    content: "";
+  }
+
+  & input[type="checkbox"]:focus + label::before {
+    border: 1px solid $blue;
+  }
+}
+
 .c-password-label {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
   width: 100%;
 }
-
 
 .c-helplink {
   margin-left: 2rem;
@@ -270,19 +328,16 @@ input[type="checkbox"] {
   border: 0.125rem solid $green;
   padding: 0 1rem;
   border-radius: $borderRadius;
+
   &.is-visible {
     display: block;
   }
 }
 
 .l-footer {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -ms-flex-pack: justify;
   justify-content: flex-end;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   margin-bottom: 1rem;
@@ -297,12 +352,7 @@ input[type="checkbox"] {
   background: transparent;
   border: none;
   border-radius: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   cursor: pointer;
   font-family: inherit;
@@ -311,13 +361,25 @@ input[type="checkbox"] {
   direction: rtl;
   padding-right: 1.2rem;
   color: $darkestGray;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:focus {
+    color: $red;
+  }
+
+  &:focus option {
+    color: $darkestGray;
+  }
 }
 
 .c-languageselect__arrow {
   z-index: 1;
   display: block;
   position: absolute;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   right: 0;
   width: 0;
@@ -327,15 +389,38 @@ input[type="checkbox"] {
   border-color: $darkestGray transparent transparent transparent;
 }
 
+.c-button--ghost {
+  color: $blue;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:focus {
+    color: $red;
+  }
+
+  .c-arrow {
+    stroke: $blue;
+  }
+
+  :hover > & {
+    left: -0.5rem;
+    right: 0;
+  }
+}
+
 .c-arrow {
-  stroke: $black;
+  stroke: $mineShaft;
   vertical-align: middle;
   position: relative;
   top: -2px;
-  transition: left 0.4s ease-in-out, right 0.4s ease-in-out;
+  transition: left .4s ease-in-out, right .4s ease-in-out;
   right: 0;
 
-  a:hover > & {
+  .c-button:hover > & {
     right: -0.5rem;
   }
 
@@ -343,7 +428,7 @@ input[type="checkbox"] {
     transform: rotate(180deg);
     left: 0;
 
-    a:hover > & {
+    .c-button:hover > & {
       left: -0.5rem;
       right: 0;
     }
@@ -357,13 +442,13 @@ input[type="checkbox"] {
 .can-toggle {
   max-height: 50rem;
   overflow: hidden;
-  transition: max-height 0.4s ease-in-out;
+  transition: max-height .4s ease-in-out;
 }
 
 .is-hidden {
   max-height: 0;
   visibility: hidden;
-  transition: max-height 0.4s ease-in-out, 0s visibility 0.7s;
+  transition: max-height .4s ease-in-out, 0s visibility .7s;
 }
 
 .is-error {

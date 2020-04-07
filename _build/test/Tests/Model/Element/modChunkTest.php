@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Element;
+
+
+use MODX\Revolution\modChunk;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modChunk class.
@@ -27,16 +32,16 @@ class modChunkTest extends MODxTestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->chunk = $this->modx->newObject('modChunk');
-        $this->chunk->fromArray(array(
+        $this->chunk = $this->modx->newObject(modChunk::class);
+        $this->chunk->fromArray([
             'id' => 12345,
             'name' => 'Unit Test Chunk',
             'description' => 'A chunk for unit testing.',
             'snippet' => '<p>Hello, [[+name]]!</p>',
             'category' => 0,
             'locked' => 0,
-        ),'',true,true);
-        $this->chunk->setProperties(array('name' => 'John'));
+        ],'',true,true);
+        $this->chunk->setProperties(['name' => 'John']);
         $this->chunk->setCacheable(false);
     }
     public function tearDown() {
@@ -64,9 +69,9 @@ class modChunkTest extends MODxTestCase {
      * @return array
      */
     public function providerSetContent() {
-        return array(
-            array('Test content.'),
-        );
+        return [
+            ['Test content.'],
+        ];
     }
 
     /**
@@ -75,7 +80,7 @@ class modChunkTest extends MODxTestCase {
      * @param null|string $content
      * @dataProvider providerProcess
      */
-    public function testProcess($expected,array $properties = array(),$content = null) {
+    public function testProcess($expected,array $properties = [],$content = null) {
         $result = $this->chunk->process($properties,$content);
         $this->assertEquals($expected,$result);
     }
@@ -83,11 +88,11 @@ class modChunkTest extends MODxTestCase {
      * @return array
      */
     public function providerProcess() {
-        return array(
-            array('<p>Hello, John!</p>'),
-            array('<p>Hello, Mark!</p>',array('name' => 'Mark')),
-            array('<p>Having fun.</p>',array(),'<p>Having fun.</p>'),
-            array('<p>Test 1</p>',array('number' => 1),'<p>Test [[+number]]</p>'),
-        );
+        return [
+            ['<p>Hello, John!</p>'],
+            ['<p>Hello, Mark!</p>', ['name' => 'Mark']],
+            ['<p>Having fun.</p>', [],'<p>Having fun.</p>'],
+            ['<p>Test 1</p>', ['number' => 1],'<p>Test [[+number]]</p>'],
+        ];
     }
 }

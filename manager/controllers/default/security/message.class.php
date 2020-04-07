@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+
 /**
  * Loads message management
  *
@@ -44,7 +46,7 @@ class SecurityMessageManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {}
+    public function process(array $scriptProperties = []) {}
 
     /**
      * Return the pagetitle
@@ -68,6 +70,6 @@ class SecurityMessageManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','messages');
+        return ['user','messages'];
     }
 }

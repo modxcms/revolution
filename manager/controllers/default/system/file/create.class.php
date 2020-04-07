@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\Sources\modFileMediaSource;
+use MODX\Revolution\Sources\modMediaSource;
+
 /**
  * Loads the edit file page
  *
@@ -99,10 +104,9 @@ class SystemFileCreateManagerController extends modManagerController
     public function getSource()
     {
         /** @var modMediaSource|modFileMediaSource $source */
-        $this->modx->loadClass('sources.modMediaSource');
         $source = $this->modx->getOption('source', $this->scriptProperties, false);
         if (!empty($source)) {
-            $source = $this->modx->getObject('source.modMediaSource', $source);
+            $source = $this->modx->getObject(modMediaSource::class, $source);
         }
         if (empty($source)) {
             $source = modMediaSource::getDefaultSource($this->modx);

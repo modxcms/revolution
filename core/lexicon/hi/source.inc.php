@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'मीडिया के स्रोत �
 $_lang['source_duplicate'] = 'डुप्लिकेट मीडिया स्रोत';
 $_lang['source_err_ae_name'] = 'इस नाम के साथ एक मीडिया स्रोत पहले से मौजूद है! कृपया कोई नया नाम निर्दिष्ट करें।';
 $_lang['source_err_nf'] = 'मीडिया स्रोत नहीं पाया!';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'कोई मीडिया स्रोत आईडी के साथ पाया जा सकता है: [[+id]]।';
 $_lang['source_err_ns'] = 'कृपया मीडिया स्रोत निर्दिष्ट करें।';
 $_lang['source_err_ns_name'] = 'कृपया मीडिया के स्रोत के लिए कोई नाम निर्दिष्ट करें।';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'फ़ाइल सिस्टम';
 $_lang['source_type.file_desc'] = 'आपके सर्वर की फ़ाइलों navigates कि एक फाइल सिस्टम आधारित स्रोत है।';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'एक Amazon S3 बाल्टी Navigates';
+$_lang['source_type.ftp'] = 'File Transfer Protocol';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'स्रोत प्रकार';
 $_lang['source_types.intro_msg'] = 'यह आपको इस ModX उदाहरण पर है सभी स्थापित मीडिया स्रोत प्रकार की एक सूची है।';
 $_lang['source.access.intro_msg'] = 'यहाँ आप विशिष्ट User Groups के लिए एक मीडिया स्रोत प्रतिबंधित कर सकते हैं और उन User Groups के लिए नीतियाँ लागू करें। एक मीडिया स्रोत के साथ कोई User Groups से जुड़ी सभी manager users के लिए उपलब्ध है।';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = '0-100 से पैमाने में रेंडर किए गए थंबनेल की गुणवत्ता।';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'छवि प्रकार थंबनेल के रूप में रेंडर करने के लिए।';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'बाल्टी';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'एक अल्पविराम-पृथ
 $_lang['prop_s3.thumbnailQuality_desc'] = '0-100 से पैमाने में रेंडर किए गए थंबनेल की गुणवत्ता।';
 $_lang['prop_s3.thumbnailType_desc'] = 'छवि प्रकार थंबनेल के रूप में रेंडर करने के लिए।';
 $_lang['prop_s3.url_desc'] = 'अमेज़न S3 इंस्टेंस का URL.';
-$_lang['s3_no_move_folder'] = 'फ़ोल्डर्स के इस समय में चलती S3 ड्रायवर समर्थन नहीं करता।';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'फ़ोल्डर्स के इस समय में चलती S3 ड्रायवर समर्थन नहीं करता।';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

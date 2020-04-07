@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Gestionar Permisos a través de Grupos, Roles y Política
 $_lang['admin'] = 'Administrador';
 $_lang['api_docs'] = 'Documentación del API';
 $_lang['api_docs_desc'] = 'Documentación creada por phpDocumentor del API de MODX Revolution.';
-$_lang['bespoke_manager'] = 'Personalización del Panel de Administración';
-$_lang['bespoke_manager_desc'] = 'Gestionar personalización del Panel de Administración de MODX';
 $_lang['components'] = 'Componentes';
 $_lang['content_types'] = 'Tipos de Contenido';
 $_lang['content_types_desc'] = 'Añadir tipos de contenido para recursos, como .html, .js, etc.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Resumen';
 $_lang['dashboards'] = 'Tableros';
 $_lang['dashboards_desc'] = 'Gestionar la configuración de los resúmenes.';
 $_lang['edit_menu'] = 'Menús';
-$_lang['edit_menu_desc'] = 'Administrar acciones y la estructura del menú principal.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Historial de Errores';
 $_lang['eventlog_viewer_desc'] = 'Ver el fichero error.log de MODX.';
 $_lang['export_site'] = 'Exportar HTML Estático';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Importar HTML';
 $_lang['import_site_desc'] = 'Importar un lote de archivos HTML a este sitio.';
 $_lang['installer'] = 'Instalador';
 $_lang['installer_desc'] = 'Gestionar Complementos y Distribuciones';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Administración del Idioma';
 $_lang['lexicon_management_desc'] = 'Gestión, creación y edición de los archivos de idioma de MODX';
 $_lang['logout'] = 'Salir';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Configuración del Sistema';
 $_lang['system_settings_desc'] = 'Cambiar o crear configuración de sistema para todo el sitio.';
 $_lang['tools'] = 'Herramientas';
 $_lang['tools_desc'] = 'Utilidades para mantener el sitio ordenado';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Usuario';
 $_lang['usernav'] = 'User Navigation';

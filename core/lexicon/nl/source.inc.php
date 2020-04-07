@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'Een korte beschrijving van de Media Source.
 $_lang['source_duplicate'] = 'Dupliceer Media Source';
 $_lang['source_err_ae_name'] = 'Er bestaat al een Media Source met die naam! Probeer het opnieuw met een andere naam.';
 $_lang['source_err_nf'] = 'Media Source niet gevonden!';
+$_lang['source_err_init'] = 'Kan de Mediabron "[[+source]]" niet initialiseren!';
 $_lang['source_err_nfs'] = 'Geen Media Source gevonden met id: [[+id]].';
 $_lang['source_err_ns'] = 'Kies alsjeblieft een Media Source.';
 $_lang['source_err_ns_name'] = 'Specificeer een naam voor de Media Source.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'Bestandssysteem';
 $_lang['source_type.file_desc'] = 'Een bestandsserver gebaseerde Source welke de bestanden op je server weergeeft.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Geeft een Amazon S3 bucket weer.';
+$_lang['source_type.ftp'] = 'File Transfer Protocol (FTP)';
+$_lang['source_type.ftp_desc'] = 'Navigeert een externe FTP-server.';
 $_lang['source_types'] = 'Brontypes';
 $_lang['source_types.intro_msg'] = 'Dit is een lijst van de geïnstalleerde Media bron types.';
 $_lang['source.access.intro_msg'] = 'Hier kan je aangeven welke Gebruikersgroepen een Media Source kan gebruiken aan de hand van een toegangsbeleid. Een Media Source zonder geässocieerde Gebruikersgroepen is beschikbaar voor alle Manager gebruikers.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'De kwaliteit van de getoonde thumbnails, tusssen 1 en 100 waarbij 100 de hoogste kwaliteit is.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Afbeeldingstype om de thumbnails in te maken.';
+$_lang['prop_file.visibility_desc'] = 'Standaard zichtbaarheid voor nieuwe bestanden en mappen.';
+$_lang['no_move_folder'] = 'De Mediabron driver ondersteunt op dit moment het verplaatsen van mappen niet.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'Een komma gescheiden lijst van bestanden en 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'De kwaliteit van de getoonde thumbnails, tusssen 1 en 100 waarbij 100 de hoogste kwaliteit is.';
 $_lang['prop_s3.thumbnailType_desc'] = 'Afbeeldingstype om de thumbnails in te maken.';
 $_lang['prop_s3.url_desc'] = 'De URL van de Amazon S3 instantie.';
-$_lang['s3_no_move_folder'] = 'De S3 driver ondersteund op dit moment het verplaatsen van mappen niet.';
 $_lang['prop_s3.region_desc'] = 'Regio van de bucket. Voorbeeld: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optioneel pad/map voorvoegsel';
+$_lang['s3_no_move_folder'] = 'De S3 driver ondersteund op dit moment het verplaatsen van mappen niet.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Hostnaam of IP-adres';
+$_lang['prop_ftp.username_desc'] = 'Gebruikersnaam voor authenticatie. Kan "anoniem" zijn.';
+$_lang['prop_ftp.password_desc'] = 'Wachtwoord van de gebruiker. Laat leeg voor anonieme gebruiker.';
+$_lang['prop_ftp.url_desc'] = 'Als deze FTP een openbare URL heeft, kunt u hier het openbare http-adres invullen. Dit zal ook afbeeldingen previews in de media browser inschakelen.';
+$_lang['prop_ftp.port_desc'] = 'Poort van de server, standaard is 21.';
+$_lang['prop_ftp.root_desc'] = 'De root-map, deze wordt geopend na verbinding';
+$_lang['prop_ftp.passive_desc'] = 'Passieve FTP-modus in- of uitschakelen';
+$_lang['prop_ftp.ssl_desc'] = 'SSL verbinding in- of uitschakelen';
+$_lang['prop_ftp.timeout_desc'] = 'Time-out voor verbinding in seconden.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

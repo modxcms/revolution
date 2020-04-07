@@ -34,8 +34,7 @@
             <directory>Tests/Model/Mail</directory>
             <directory>Tests/Model/Registry</directory>
             <directory>Tests/Model/Request</directory>
-            <!-- @TODO <directory>Tests/Model/Resource</directory>-->
-            <directory>Tests/Model/REST</directory>
+            <directory>Tests/Model/Resource</directory>
             <directory>Tests/Model/Security</directory>
             <directory>Tests/Model/Sources</directory>
             <directory>Tests/Model/Transport</directory>
@@ -46,12 +45,13 @@
             <directory>Tests/Controllers/Context/</directory>
         </testsuite>
         <testsuite name="Processors">
-            <!--<directory>Tests/Processors/</directory>-->
             <directory>Tests/Processors/Browser</directory>
             <directory>Tests/Processors/Context</directory>
             <directory>Tests/Processors/Element</directory>
-            <!--<directory>Tests/Processors/System</directory>
-            <directory>Tests/Processors/Resource</directory>-->
+            <directory>Tests/Processors/Resource</directory>
+        </testsuite>
+        <testsuite name="Transport">
+            <directory>Tests/Transport</directory>
         </testsuite>
         <testsuite name="Cases">
             <directory>Tests/Cases/Modx/</directory>
@@ -63,7 +63,7 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">./../../core/model/modx/</directory>
+            <directory suffix=".php">./../../core/src/</directory>
         </whitelist>
     </filter>
 </phpunit>

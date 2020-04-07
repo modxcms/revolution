@@ -1,11 +1,18 @@
 <?php
 /**
  * Resolve Default Policies to their PolicyTemplates
+ *
+ * @var xPDOTransport $transport
  */
+
+use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modAccessPolicyTemplate;
+use xPDO\xPDO;
+
 $success= false;
 
 /* map of Policy -> Template */
-$map = array(
+$map = [
     'Resource' => 'ResourceTemplate',
     'Administrator' => 'AdministratorTemplate',
     'Content Editor' => 'AdministratorTemplate',
@@ -17,12 +24,12 @@ $map = array(
     'Media Source Admin' => 'MediaSourceTemplate',
     'Media Source User' => 'MediaSourceTemplate',
     'Hidden Namespace' => 'NamespaceTemplate',
-);
+];
 
-$policies = $transport->xpdo->getCollection('modAccessPolicy');
+$policies = $transport->xpdo->getCollection(modAccessPolicy::class);
 foreach ($policies as $policy) {
     if (isset($map[$policy->get('name')])) {
-        $template = $transport->xpdo->getObject('modAccessPolicyTemplate',array('name' => $map[$policy->get('name')]));
+        $template = $transport->xpdo->getObject(modAccessPolicyTemplate::class, ['name' => $map[$policy->get('name')]]);
         if ($template) {
             $policy->set('template',$template->get('id'));
             $success = $policy->save();

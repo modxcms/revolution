@@ -9,6 +9,19 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Processors\Element;
+
+
+use MODX\Revolution\modCategory;
+use MODX\Revolution\modChunk;
+use MODX\Revolution\Processors\ProcessorResponse;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\Element\Chunk\Create;
+use MODX\Revolution\Processors\Element\Chunk\Duplicate;
+use MODX\Revolution\Processors\Element\Chunk\Get;
+use MODX\Revolution\Processors\Element\Chunk\GetList;
+use MODX\Revolution\Processors\Element\Chunk\Remove;
+use MODX\Revolution\Processors\Element\Chunk\Update;
 
 /**
  * Tests related to element/chunk/ processors
@@ -21,21 +34,16 @@
  * @group ChunkProcessors
  */
 class ChunkProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'element/chunk/';
-
-    /**
-     * Setup some basic data for this test.
-     */
     public function setUp() {
         parent::setUp();
         $this->modx->lexicon->load('chunk');
         /** @var modChunk $chunk */
-        $chunk = $this->modx->newObject('modChunk');
-        $chunk->fromArray(array('name' => 'UnitTestChunk'));
+        $chunk = $this->modx->newObject(modChunk::class);
+        $chunk->fromArray(['name' => 'UnitTestChunk']);
         $chunk->save();
 
         /** @var modCategory $category */
-        $category = $this->modx->newObject('modCategory');
+        $category = $this->modx->newObject(modCategory::class);
         $category->set('id',1);
         $category->set('category','UnitTestChunks');
         $category->save();
@@ -46,14 +54,14 @@ class ChunkProcessorsTest extends MODxTestCase {
      */
     public function tearDown() {
         parent::tearDown();
-        $chunks = $this->modx->getCollection('modChunk',array('name:LIKE' => '%UnitTest%'));
+        $chunks = $this->modx->getCollection(modChunk::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modChunk $chunk */
         foreach ($chunks as $chunk) {
             $chunk->remove();
         }
 
         /** @var modCategory $category */
-        $category = $this->modx->getObject('modCategory',array('category' => 'UnitTestChunks'));
+        $category = $this->modx->getObject(modCategory::class, ['category' => 'UnitTestChunks']);
         if ($category) {
             $category->remove();
         }
@@ -68,14 +76,14 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @param array $properties
      * @dataProvider providerChunkCreate
      */
-    public function testChunkCreate($shouldPass,$chunkPk,array $properties = array()) {
+    public function testChunkCreate($shouldPass,$chunkPk,array $properties = []) {
         $properties['name'] = $chunkPk;
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',$properties);
+        $result = $this->modx->runProcessor(Create::class,$properties);
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'create processor');
+            $this->fail('Could not load '.Create::class.' processor');
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modChunk',array('name' => $chunkPk));
+        $ct = $this->modx->getCount(modChunk::class, ['name' => $chunkPk]);
         $passed = $s && $ct > 0;
         $passed = $shouldPass ? $passed : !$passed;
         $this->assertTrue($passed,'Could not create Chunk: `'.$chunkPk.'`: '.$result->getMessage());
@@ -85,25 +93,31 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerChunkCreate() {
-        return array(
+        return [
             /* pass: straight up chunk */
-            array(true,'UnitTestChunk2'),
+            [true,'UnitTestChunk2'],
             /* pass: another chunk with valid other fields */
-            array(true,'UnitTestChunk3',array(
+            [
+                true,'UnitTestChunk3',
+                [
                 'description' => '2nd Unit Testing chunk',
                 'snippet' => '<p>Test</p>',
                 'locked' => false,
                 'category' => 1,
-            )),
+                ]
+            ],
             /* fail: invalid category */
-            array(false,'UnitTestChunk3',array(
+            [
+                false,'UnitTestChunk3',
+                [
                 'category' => 123,
-            )),
+                ]
+            ],
             /* fail: already exists */
-            array(false,'UnitTestChunk'),
+            [false,'UnitTestChunk'],
             /* fail: no data */
-            array(false,''),
-        );
+            [false,''],
+        ];
     }
 
 
@@ -118,27 +132,27 @@ class ChunkProcessorsTest extends MODxTestCase {
      */
     public function testChunkDuplicate($shouldPass,$chunkPk,$newName) {
         /** @var modChunk $chunk */
-        $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
         if (empty($chunk) && $shouldPass) {
             $this->fail('No Chunk found "'.$chunkPk.'" as specified in test provider.');
             return false;
         }
         $this->modx->lexicon->load('default');
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'duplicate',array(
+        /** @var ProcessorResponse $result */
+        $result = $this->modx->runProcessor(Duplicate::class, [
             'id' => $chunk ? $chunk->get('id') : $chunkPk,
             'name' => $newName,
-        ));
+        ]);
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'duplicate processor');
+            $this->fail('Could not load '.Duplicate::class.' processor');
         }
         $s = $this->checkForSuccess($result);
         if (empty($newName) && $chunk) {
-            $newName = $this->modx->lexicon('duplicate_of',array('name' => $chunk->get('name')));
+            $newName = $this->modx->lexicon('duplicate_of', ['name' => $chunk->get('name')]);
         }
         /** @var modChunk $ct */
-        $ct = $this->modx->getObject('modChunk',array('name' => $newName));
+        $ct = $this->modx->getObject(modChunk::class, ['name' => $newName]);
         $passed = $s && $ct;
         $passed = $shouldPass ? $passed : !$passed;
         if ($ct) { /* remove test data */
@@ -152,12 +166,12 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerChunkDuplicate() {
-        return array(
-            array(true,'UnitTestChunk','UnitTestChunk3'), /* pass: standard name */
-            array(true,'UnitTestChunk',''), /* pass: with blank name */
-            array(false,'',''), /* fail: no data */
-            array(false,'','UnitTestChunk3'), /* fail: blank chunk to duplicate */
-        );
+        return [
+            [true,'UnitTestChunk','UnitTestChunk3'], /* pass: standard name */
+            [true,'UnitTestChunk',''], /* pass: with blank name */
+            [false,'',''], /* fail: no data */
+            [false,'','UnitTestChunk3'], /* fail: blank chunk to duplicate */
+        ];
     }
 
     /**
@@ -170,9 +184,9 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkUpdate
      * @depends testChunkCreate
      */
-    public function testChunkUpdate($shouldPass,$chunkPk,array $properties = array()) {
+    public function testChunkUpdate($shouldPass,$chunkPk,array $properties = []) {
         /** @var modChunk $chunk */
-        $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
         if (empty($chunk) && $shouldPass) {
             $this->fail('No Chunk found "'.$chunkPk.'" as specified in test provider.');
             return false;
@@ -181,8 +195,8 @@ class ChunkProcessorsTest extends MODxTestCase {
         $data['id'] = $chunk ? $chunk->get('id') : $chunkPk;
         $data['name'] = $chunkPk;
 
-        /** @var modProcessorResponse $result */
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'update',$data);
+        /** @var ProcessorResponse $result */
+        $result = $this->modx->runProcessor(Update::class,$data);
         $passed = $this->checkForSuccess($result);
         if ($passed) {
             $r = $result->getObject();
@@ -199,32 +213,47 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerChunkUpdate() {
-        return array(
+        return [
             /* pass: change the description/locked */
-            array(true,'UnitTestChunk',array(
+            [
+                true,'UnitTestChunk',
+                [
                 'name' => 'UnitTestChunk',
                 'description' => 'Changing the description of our test chunk.',
                 'locked' => false,
-            )),
+                ]
+            ],
             /* pass: change the category */
-            array(true,'UnitTestChunk',array(
+            [
+                true,'UnitTestChunk',
+                [
                 'name' => 'UnitTestChunk',
                 'category' => 1,
-            )),
+                ]
+            ],
             /* fail: change to invalid category */
-            array(false,'UnitTestChunk',array(
+            [
+                false,'UnitTestChunk',
+                [
                 'name' => 'UnitTestChunk',
                 'category' => 9999,
-            )),
+                ]
+            ],
             /* fail: no data */
-            array(false,'',array(
+            [
+                false,'',
+                [
                 'name' => 'UnitTestChunk',
-            )),
+                ]
+            ],
             /* fail: invalid ID */
-            array(false,9999,array(
+            [
+                false,9999,
+                [
                 'name' => 'UnitTestChunk',
-            )),
-        );
+                ]
+            ],
+        ];
     }
 
 
@@ -233,17 +262,17 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkGet
      */
     public function testChunkGet($shouldPass,$chunkPk) {
-        $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
         if (empty($chunk) && $shouldPass) {
             $this->fail('No Chunk found "'.$chunkPk.'" as specified in test provider.');
             return false;
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
+        $result = $this->modx->runProcessor(Get::class, [
             'id' => $chunk ? $chunk->get('id') : $chunkPk,
-        ));
+        ]);
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'get processor');
+            $this->fail('Could not load '.Get::class.' processor');
         }
         $passed = $this->checkForSuccess($result);
         $passed = $shouldPass ? $passed : !$passed;
@@ -253,11 +282,11 @@ class ChunkProcessorsTest extends MODxTestCase {
      * Data provider for element/chunk/create processor test.
      */
     public function providerChunkGet() {
-        return array(
-            array(true,'UnitTestChunk'), /* pass: get chunk from create test */
-            array(false,9999), /* fail: invalid ID */
-            array(false,''), /* fail: no data */
-        );
+        return [
+            [true,'UnitTestChunk'], /* pass: get chunk from create test */
+            [false,9999], /* fail: invalid ID */
+            [false,''], /* fail: no data */
+        ];
     }
 
     /**
@@ -266,12 +295,12 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkGetList
      */
     public function testChunkGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'getlist',array(
+        $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
             'dir' => $dir,
             'limit' => $limit,
             'start' => $start,
-        ));
+        ]);
         $results = $this->getResults($result);
         $passed = !empty($results);
         $passed = $shouldPass ? $passed : !$passed;
@@ -282,12 +311,12 @@ class ChunkProcessorsTest extends MODxTestCase {
      * Data provider for element/chunk/getlist processor test.
      */
     public function providerChunkGetList() {
-        return array(
-            array(true,'name','ASC',5,0), /* pass: sort 5 by name asc */
-            array(true,'name','DESC',5,0), /* pass: sort 5 by name desc */
-            array(false,'name','ASC',5,5), /* fail: start beyond what exists */
-            array(false,'badname','ASC',5,5), /* fail: invalid sort column */
-        );
+        return [
+            [true,'name','ASC',5,0], /* pass: sort 5 by name asc */
+            [true,'name','DESC',5,0], /* pass: sort 5 by name desc */
+            [false,'name','ASC',5,5], /* fail: start beyond what exists */
+            [false,'badname','ASC',5,5], /* fail: invalid sort column */
+        ];
     }
 
     /**
@@ -295,17 +324,17 @@ class ChunkProcessorsTest extends MODxTestCase {
      * @dataProvider providerChunkRemove
      */
     public function testChunkRemove($shouldPass,$chunkPk) {
-        $chunk = $this->modx->getObject('modChunk',array('name' => $chunkPk));
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
         if (empty($chunk) && $shouldPass) {
             $this->fail('No Chunk found "'.$chunkPk.'" as specified in test provider.');
             return false;
         }
 
-        $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'remove',array(
+        $result = $this->modx->runProcessor(Remove::class, [
             'id' => $chunk ? $chunk->get('id') : $chunkPk,
-        ));
+        ]);
         if (empty($result)) {
-            $this->fail('Could not load '.self::PROCESSOR_LOCATION.'remove processor');
+            $this->fail('Could not load '.Remove::class.' processor');
         }
         $passed = $this->checkForSuccess($result);
         $passed = $shouldPass ? $passed : !$passed;
@@ -315,10 +344,10 @@ class ChunkProcessorsTest extends MODxTestCase {
      * Data provider for element/chunk/remove processor test.
      */
     public function providerChunkRemove() {
-        return array(
-            array(true,'UnitTestChunk'), /* pass: remove chunk from create test */
-            array(false,9999), /* fail: invalid ID */
-            array(false,''), /* fail: no data */
-        );
+        return [
+            [true,'UnitTestChunk'], /* pass: remove chunk from create test */
+            [false,9999], /* fail: invalid ID */
+            [false,''], /* fail: no data */
+        ];
     }
 }

@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Kontext';
 $_lang['context_add'] = 'Přidat kontext';
-$_lang['context_create'] = 'Vytvořit kontext';
+$_lang['context_create'] = 'Nový kontext';
 $_lang['context_data'] = 'Data kontextu';
 $_lang['context_duplicate'] = 'Kopírovat kontext';
 $_lang['context_err_ae'] = 'Kontext s tímto názvem již existuje.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Obnovit kontext';
 $_lang['context_remove'] = 'Odstranit kontext';
 $_lang['context_remove_confirm'] = 'Opravdu chcete odstranit kontext? Odstranění je nevratné.';
 $_lang['context_settings'] = 'Nastavení kontextu';
-$_lang['context_settings_desc'] = 'V této části můžete definovat specifické nastavení pro tento kontext. Tato kontextová nastavení nahradí ta systémová nastavení, která budou mít shodný klíč.';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_update'] = 'Upravit kontext';
 $_lang['context_with_key_not_found'] = 'Kontext s klíčem %s nenalezen!';
 $_lang['contexts'] = 'Kontexty';

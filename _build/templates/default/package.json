@@ -13,14 +13,15 @@
     "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-notify": "^0.4.5",
     "grunt-imageoptim": "^1.4.4",
+    "grunt-notify": "^0.4.5",
     "grunt-sass": "^3.0.2",
-    "node-sass": "^4.9.4"
+    "node-sass": "^4.13.0"
   },
   "dependencies": {
     "bourbon": "^5.1.0",
     "bourbon-neat": "^3.0.0",
-    "@fortawesome/fontawesome-free": "^5.7.0"
+    "@fortawesome/fontawesome-free": "^5.7.0",
+    "normalize-scss": "^7.0.1"
   }
 }

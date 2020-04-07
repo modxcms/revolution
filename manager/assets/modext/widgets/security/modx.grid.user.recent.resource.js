@@ -8,17 +8,18 @@
  */
 MODx.grid.RecentlyEditedResourcesByUser = function(config) {
     config = config || {};
+    var dateFormat = MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format;
     Ext.applyIf(config,{
         title: _('recent_docs')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/user/getRecentlyEditedResources'
+            action: 'Security/User/GetRecentlyEditedResources'
             ,user: config.user
         }
         ,autosave: true
-        ,save_action: 'resource/updatefromgrid'
+        ,save_action: 'Resource/UpdateFromGrid'
         ,pageSize: 10
-        ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu']
+        ,fields: ['id','pagetitle','description','editedon','deleted','published','context_key','menu', 'link', 'occurred']
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -27,7 +28,16 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         },{
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
-            //,width: 150
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=resource/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        },{
+            header: _('editedon')
+            ,dataIndex: 'occurred'
+            ,renderer : Ext.util.Format.dateRenderer(dateFormat)
         },{
             header: _('published')
             ,dataIndex: 'published'
@@ -46,7 +56,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
 };
 Ext.extend(MODx.grid.RecentlyEditedResourcesByUser,MODx.grid.Grid,{
     preview: function() {
-        window.open(MODx.config.base_url+'?id='+this.menu.record.id);
+        window.open(this.menu.record.link);
     }
     ,refresh: function() {
         var tree = Ext.getCmp('modx-resource-tree');

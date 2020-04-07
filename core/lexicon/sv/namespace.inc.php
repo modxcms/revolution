@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Namnrymd';
-$_lang['namespace_create'] = 'Skapa namnrymd';
+$_lang['namespace_create'] = 'Ny namnrymd';
 $_lang['namespace_err_create'] = 'Ett fel inträffade när namnrymden skulle skapas.';
 $_lang['namespace_err_nf'] = 'Namnrymden kunde inte hittas.';
 $_lang['namespace_err_nfs'] = 'Kunde inte hitta namnrymden vid namn: %s';

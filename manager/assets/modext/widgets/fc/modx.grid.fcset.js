@@ -5,11 +5,12 @@ MODx.grid.FCSet = function(config) {
         id: 'modx-grid-fc-set'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/forms/set/getlist'
+            action: 'Security/Forms/Set/GetList'
         }
         ,fields: ['id','profile','action','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
         ,paging: true
         ,autosave: true
+        ,save_action: 'Security/Forms/Set/UpdateFromGrid'
         ,sm: this.sm
         ,remoteSort: true
         ,autoExpandColumn: 'controller'
@@ -22,7 +23,7 @@ MODx.grid.FCSet = function(config) {
             header: _('action')
             ,dataIndex: 'action'
             ,width: 200
-            ,editable: false
+            ,editable: true
             ,sortable: true
             ,editor: {
                 xtype: 'modx-combo-fc-action',
@@ -34,17 +35,40 @@ MODx.grid.FCSet = function(config) {
             ,width: 200
             ,editable: true
             ,sortable: true
+            ,editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
         },{
             header: _('template')
-            ,dataIndex: 'templatename'
+            ,dataIndex: 'template'
             ,width: 150
             ,sortable: true
+            ,editable: true
+            ,editor: {
+                xtype: 'modx-combo-template',
+                renderer: true
+            }
+        },{
+            header: _('constraint_field')
+            ,dataIndex: 'constraint_field'
+            ,width: 200
+            ,editable: true
+            ,sortable: false
+            ,editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
         },{
             header: _('constraint')
-            ,dataIndex: 'constraint_data'
+            ,dataIndex: 'constraint'
             ,width: 200
-            ,editable: false
+            ,editable: true
             ,sortable: false
+            ,editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
         }]
         ,viewConfig: {
             forceFit:true
@@ -162,7 +186,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
                     text: _('remove')
-                    ,handler: this.confirm.createDelegate(this,['security/forms/set/remove','set_remove_confirm'])
+                    ,handler: this.confirm.createDelegate(this,['Security/Forms/Set/Remove','set_remove_confirm'])
                 });
             }
         }
@@ -182,7 +206,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'security/forms/set/getList'
+            action: 'Security/Forms/Set/GetList'
             ,profile: MODx.request.id
     	};
         Ext.getCmp('modx-fcs-search').reset();
@@ -195,12 +219,12 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/set/export'
+                action: 'Security/Forms/Set/Export'
                 ,id: id
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    location.href = this.config.url+'?action=security/forms/set/export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
+                    location.href = this.config.url+'?action=Security/Forms/Set/Export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
                 },scope:this}
             }
         });
@@ -249,13 +273,13 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
 
     ,updateSet: function(btn,e) {
         var r = this.menu.record;
-        location.href = '?a=security/forms/set/update&id='+r.id;
+        location.href = '?a=Security/Forms/Set/Update&id='+r.id;
     }
     ,duplicateSet: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/set/duplicate'
+                action: 'Security/Forms/Set/Duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -268,7 +292,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/set/activate'
+                action: 'Security/Forms/Set/Activate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -284,7 +308,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/set/activateMultiple'
+                action: 'Security/Forms/Set/ActivateMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -300,7 +324,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/set/deactivate'
+                action: 'Security/Forms/Set/Deactivate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -315,7 +339,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'security/forms/set/deactivateMultiple'
+                action: 'Security/Forms/Set/DeactivateMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -336,7 +360,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             ,text: _('set_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'security/forms/set/removeMultiple'
+                action: 'Security/Forms/Set/RemoveMultiple'
                 ,sets: cs
             }
             ,listeners: {
@@ -357,7 +381,7 @@ MODx.window.CreateFCSet = function(config) {
     Ext.applyIf(config,{
         title: _('set_create')
         ,url: MODx.config.connector_url
-        ,action: 'security/forms/set/create'
+        ,action: 'Security/Forms/Set/Create'
         // ,height: 150
         ,width: 600
         ,fields: [{
@@ -370,7 +394,7 @@ MODx.window.CreateFCSet = function(config) {
             ,name: 'constraint_class'
             ,anchor: '100%'
             ,allowBlank: true
-            ,value: 'modResource'
+            ,value: 'MODX\\Revolution\\modResource'
         },{
             layout: 'column'
             ,border: false
@@ -418,7 +442,7 @@ MODx.window.CreateFCSet = function(config) {
                     ,description: MODx.expandHelp ? '' : _('set_template_desc')
                     ,id: 'modx-fcsc-template'
                     ,anchor: '100%'
-                    ,baseParams: { action: 'element/template/getList', combo: true }
+                    ,baseParams: { action: 'Element/Template/GetList', combo: true }
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-fcsc-template'
@@ -470,7 +494,7 @@ MODx.window.ImportFCSet = function(config) {
         title: _('import_from_xml')
         ,id: 'modx-window-fc-set-import'
         ,url: MODx.config.connector_url
-        ,action: 'security/forms/set/import'
+        ,action: 'Security/Forms/Set/Import'
         ,fileUpload: true
         ,saveBtnText: _('import')
         ,fields: [{

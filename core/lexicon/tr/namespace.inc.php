@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'İsim Alanı';
-$_lang['namespace_create'] = 'İsim Alanı oluşturmak';
+$_lang['namespace_create'] = 'New Namespace';
 $_lang['namespace_err_create'] = 'İsim Alani oluşturulmaya çalışılırken bir hata meydana geldi.';
 $_lang['namespace_err_nf'] = 'İsim Alanı bulunamadı.';
 $_lang['namespace_err_nfs'] = 'İsim alanı ismiyle birlikte bulunamadı: %s';

@@ -13,7 +13,7 @@ MODx.grid.Lexicon = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
-            action: 'workspace/lexicon/getList'
+            action: 'Workspace/Lexicon/GetList'
             ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
             ,topic: ''
             ,language: MODx.config.cultureKey || 'en'
@@ -21,7 +21,7 @@ MODx.grid.Lexicon = function(config) {
         ,width: '98%'
         ,paging: true
         ,autosave: true
-        ,save_action: 'workspace/lexicon/updatefromgrid'
+        ,save_action: 'Workspace/Lexicon/UpdateFromGrid'
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -42,6 +42,14 @@ MODx.grid.Lexicon = function(config) {
             ,renderer: this._renderLastModDate
         }]
         ,tbar: [{
+            xtype: 'button'
+            ,text: _('entry_create')
+            ,cls:'primary-button'
+            ,handler: this.createEntry
+            ,scope: this
+        },
+        '->'
+        ,{
             xtype: 'tbtext'
             ,text: _('namespace')+':'
         },{
@@ -49,7 +57,7 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-namespace'
             ,itemId: 'namespace'
             ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : ''
-            ,width: 120
+            ,width: 150
             ,listeners: {
                 'select': {fn: this.changeNamespace,scope:this}
             }
@@ -61,9 +69,9 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-topic'
             ,itemId: 'topic'
             ,value: 'default'
-            ,width: 120
+            ,width: 150
             ,baseParams: {
-                action: 'workspace/lexicon/topic/getList'
+                action: 'Workspace/Lexicon/Topic/GetList'
                 ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
                 ,'language': 'en'
             }
@@ -81,28 +89,19 @@ MODx.grid.Lexicon = function(config) {
             ,value: MODx.config.cultureKey || 'en'
             ,width: 100
             ,baseParams: {
-                action: 'system/language/getlist'
+                action: 'System/Language/GetList'
                 ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
             }
             ,listeners: {
                 'select': {fn:this.changeLanguage,scope:this}
             }
-        }
-        ,'->'
-        ,{
-            xtype: 'button'
-            ,text: _('entry_create')
-            ,cls:'primary-button'
-            ,handler: this.createEntry
-            ,scope: this
         },{
             xtype: 'textfield'
             ,name: 'name'
             ,id: 'modx-lexicon-filter-search'
             ,cls: 'x-form-filter'
             ,itemId: 'search'
-            ,width: 120
-            ,emptyText: _('search')+'...'
+            ,emptyText: _('search_by_key')
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
                 ,'render': {fn: function(cmp) {
@@ -217,7 +216,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.store.baseParams = {
-            action: 'workspace/lexicon/getList'
+            action: 'Workspace/Lexicon/GetList'
             ,'namespace': 'core'
             ,topic: 'default'
             ,language: 'en'
@@ -318,7 +317,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     	MODx.Ajax.request({
     	   url: this.config.url
-    	   ,params: {action: 'workspace/lexicon/reloadFromBase' ,register: 'mgr' ,topic: topic}
+    	   ,params: {action: 'Workspace/Lexicon/ReloadFromBase' ,register: 'mgr' ,topic: topic}
     	   ,listeners: {
                 'success': {fn:function(r) {
                     this.refresh();
@@ -329,7 +328,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
     ,revertEntry: function() {
         var p = this.menu.record;
-        p.action = 'workspace/lexicon/revert';
+        p.action = 'Workspace/Lexicon/Revert';
 
     	MODx.Ajax.request({
     	   url: this.config.url
@@ -451,7 +450,7 @@ MODx.window.LexiconEntryCreate = function(config) {
     Ext.applyIf(config,{
         title: _('entry_create')
         ,url: MODx.config.connector_url
-        ,action: 'workspace/lexicon/create'
+        ,action: 'Workspace/Lexicon/Create'
         ,fileUpload: true
         ,fields: [{
             xtype: 'textfield'

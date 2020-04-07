@@ -10,15 +10,15 @@ MODx.tree.Resource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
-        ,action: 'resource/getNodes'
+        ,action: 'Resource/GetNodes'
         ,title: ''
         ,rootVisible: false
         ,expandFirst: true
         ,enableDD: (MODx.config.enable_dragdrop != '0') ? true : false
         ,ddGroup: 'modx-treedrop-dd'
         // ,remoteToolbar: true
-        // ,remoteToolbarAction: 'resource/gettoolbar'
-        ,sortAction: 'resource/sort'
+        // ,remoteToolbarAction: 'Resource/GetToolbar'
+        ,sortAction: 'Resource/Sort'
         ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
         //    hidden: true
@@ -119,11 +119,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         } else {
             var m = [];
             switch (n.attributes.type) {
-                case 'modResource':
-                case 'modDocument':
+                case 'MODX\\Revolution\\modResource':
+                case 'MODX\\Revolution\\modDocument':
                     m = this._getModResourceMenu(n);
                     break;
-                case 'modContext':
+                case 'MODX\\Revolution\\modContext':
                     m = this._getModContextMenu(n);
                     break;
             }
@@ -149,12 +149,17 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,pagetitle: name
             ,hasChildren: node.attributes.hasChildren
             ,childCount: node.attributes.childCount
+            ,redirect: false
             ,listeners: {
-                'success': {fn:function() {
-                    node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
-                    this.refreshNode(node.id);
-                },scope:this
-                }
+                'success': {fn:function(r) {
+                    var response = Ext.decode(r.a.response.responseText);
+                    if (response.object.redirect) {
+                        MODx.loadPage('Resource/Update', 'id='+response.object.id);
+                    } else {
+                        node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
+                        this.refreshNode(node.id);
+                    }
+                },scope:this}
             }
         });
         w.config.hasChildren = node.attributes.hasChildren;
@@ -188,19 +193,19 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('context_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'context/remove'
+                action: 'Context/Remove'
                 ,key: key
             }
             ,listeners: {
                 'success': {fn:function() {
-	            	var cmp = Ext.getCmp('modx-grid-context');
+                    var cmp = Ext.getCmp('modx-grid-context');
 
-	            	if (cmp) {
-		            	cmp.refresh();
-	            	}
+                    if (cmp) {
+                        cmp.refresh();
+                    }
 
-	                this.refresh();
-	            },scope:this}
+                    this.refresh();
+                },scope:this}
             }
         });
     }
@@ -218,7 +223,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/delete'
+                action: 'Resource/Delete'
                 ,id: id
             }
             ,listeners: {
@@ -230,7 +235,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });
                     }
 
                     var n = this.cm.activeNode;
@@ -259,7 +267,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/undelete'
+                action: 'Resource/Undelete'
                 ,id: id
             }
             ,listeners: {
@@ -271,7 +279,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         } else {
                             trashButton.tabEl.classList.add('active');
                         }
-                        trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount}));
+                        trashButton.tooltip = new Ext.ToolTip({
+                            target: trashButton.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
+                        });
                     }
 
                     var n = this.cm.activeNode;
@@ -302,7 +313,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_publish_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/publish'
+                action: 'Resource/Publish'
                 ,id: id
             }
             ,listeners: {
@@ -323,7 +334,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,text: _('resource_unpublish_confirm')
             ,url: MODx.config.connector_url
             ,params: {
-                action: 'resource/unpublish'
+                action: 'Resource/Unpublish'
                 ,id: id
             }
             ,listeners: {
@@ -377,12 +388,18 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['resource/update']) && dropNode.attributes.pk == MODx.request.id){
-            var parentFieldCmb = Ext.getCmp('modx-resource-parent');
-            var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
-            if(parentFieldCmb && parentFieldHidden){
-                parentFieldHidden.setValue(dropNode.parentNode.attributes.pk);
-                parentFieldCmb.setValue(dropNode.parentNode.attributes.text.replace(/(<([^>]+)>)/ig,""));
+        if((MODx.request.a === 'Resource/Update')){
+            if(dropNode.attributes.pk == MODx.request.id) {
+                var parentFieldCmb = Ext.getCmp('modx-resource-parent');
+                var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
+                if(parentFieldCmb && parentFieldHidden){
+                    parentFieldHidden.setValue(dropNode.parentNode.attributes.pk);
+                    parentFieldCmb.setValue(dropNode.parentNode.attributes.text.replace(/(<([^>]+)>)/ig,""));
+                }
+            }
+            var menuindexField = Ext.getCmp('modx-resource-menuindex');
+            if(menuindexField && o.result.object.menuindex !== undefined){
+                menuindexField.setValue(o.result.object.menuindex);
             }
         }
     }
@@ -394,11 +411,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (targetParent.findChild('id',dropNode.attributes.id) !== null) {return false;}
 
         if (dropNode.attributes.type == 'modContext' && (targetParent.getDepth() > 1 || (targetParent.attributes.id == targetParent.attributes.pk + '_0' && e.point == 'append'))) {
-        	return false;
+            return false;
         }
 
         if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
-        	return false;
+            return false;
         }
 
         if (MODx.config.resource_classes_drop[targetParent.attributes.classKey] == undefined) {
@@ -474,7 +491,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'resource/get'
+                action: 'Resource/Get'
                 ,id: this.cm.activeNode.attributes.pk
                 ,skipFormatDates: true
             }
@@ -495,7 +512,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
-                    w.title += ': <span dir="ltr">' + w.record.pagetitle + ' ('+ w.record.id + ')</span>';
+                    w.title += ': <span dir="ltr">' + Ext.util.Format.htmlEncode(w.record.pagetitle) + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target,function() {
                         Ext.isSafari ? w.setPosition(null,30) : w.center();
@@ -521,7 +538,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 text: _('edit_context')
                 ,handler: function() {
                     var at = this.cm.activeNode.attributes;
-                    this.loadAction('a=context/update&key='+at.pk);
+                    this.loadAction('a=Context/Update&key='+at.pk);
                 }
             });
         }
@@ -557,13 +574,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         return m;
     }
 
-    ,overviewResource: function() {this.loadAction('a=resource/data')}
+    ,overviewResource: function() {this.loadAction('a=Resource/Data')}
 
     ,quickUpdateResource: function(itm,e) {
         this.quickUpdate(itm,e,itm.classKey);
     }
 
-    ,editResource: function() {this.loadAction('a=resource/update');}
+    ,editResource: function() {this.loadAction('a=Resource/Update');}
 
     ,_getModResourceMenu: function(n) {
         var a = n.attributes;
@@ -660,7 +677,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var at = this.cm.activeNode.attributes;
         var p = itm.usePk ? itm.usePk : at.pk;
         this.loadAction(
-            'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
+            'a=Resource/Create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         );
     }
 
@@ -708,9 +725,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         });
         if (ui && ui.hasClass('pqcreate')) {
             m.push({
-               text: _('quick_create')
+                text: _('quick_create')
                 ,handler: function() {return false;}
-               ,menu: {items: qct}
+                ,menu: {items: qct}
             });
         }
 
@@ -738,6 +755,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             url: this.config.url
             ,params: {
                 target: dropEvent.target.attributes.id
+                ,activeTarget: MODx.request.a === 'Resource/Update' ? MODx.request.id : ''
                 ,source: dropEvent.source.dragData.node.attributes.id
                 ,point: dropEvent.point
                 ,data: encodeURIComponent(encNodes)
@@ -838,6 +856,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             classKey: 'modDocument'
         });
     }
+
+    /**
+     * Renders the item text without any special formatting. The Resource/GetNodes processor already protects against XSS.
+     */
+    ,renderItemText: function(item) {
+        return item.text;
+    }
 });
 Ext.reg('modx-tree-resource',MODx.tree.Resource);
 
@@ -855,7 +880,7 @@ MODx.window.QuickCreateResource = function(config) {
         // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
-        ,action: 'resource/create'
+        ,action: 'Resource/Create'
         // ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
@@ -887,7 +912,7 @@ MODx.window.QuickCreateResource = function(config) {
                             xtype: 'textfield'
                             ,name: 'pagetitle'
                             ,id: 'modx-'+this.ident+'-pagetitle'
-                            ,fieldLabel: _('resource_pagetitle')+'<span class="required">*</span>'
+                            ,fieldLabel: _('resource_pagetitle')
                             ,description: '<b>[[*pagetitle]]</b><br />'+_('resource_pagetitle_help')
                             ,anchor: '100%'
                             ,allowBlank: false
@@ -929,7 +954,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,editable: false
                             ,anchor: '100%'
                             ,baseParams: {
-                                action: 'element/template/getList'
+                                action: 'Element/Template/GetList'
                                 ,combo: '1'
                                 ,limit: 0
                             }
@@ -967,13 +992,22 @@ MODx.window.QuickCreateResource = function(config) {
                             ,checked: MODx.config.hidemenu_default == '1' ? 1 : 0
                         },{
                             xtype: 'xcheckbox'
-                            ,name: 'published'
-                            ,id: 'modx-'+this.ident+'-published'
                             ,boxLabel: _('resource_published')
                             ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
                             ,hideLabel: true
+                            ,name: 'published'
+                            ,id: 'modx-'+this.ident+'-published'
                             ,inputValue: 1
                             ,checked: MODx.config.publish_default == '1' ? 1 : 0
+                        },{
+                            xtype: 'xcheckbox'
+                            ,boxLabel: _('deleted')
+                            ,description: '<b>[[*deleted]]</b><br />'+_('resource_delete')
+                            ,hideLabel: true
+                            ,name: 'deleted'
+                            ,id: 'modx-'+this.ident+'-deleted'
+                            ,inputValue: 1
+                            ,checked: MODx.config.deleted_default == '1' ? 1 : 0
                         }]
                     }]
                 },MODx.getQRContentField(this.ident,config.record.class_key)]
@@ -993,7 +1027,7 @@ MODx.window.QuickCreateResource = function(config) {
                 ,items: MODx.getQRSettings(this.ident,config.record)
             }]
         }]
-       ,keys: [{
+        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
             ,fn: this.submit
@@ -1011,7 +1045,7 @@ MODx.window.QuickUpdateResource = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_resource')
         ,id: this.ident
-        ,action: 'resource/update'
+        ,action: 'Resource/Update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -1035,11 +1069,11 @@ Ext.reg('modx-window-quick-update-modResource',MODx.window.QuickUpdateResource);
 
 MODx.getQRContentField = function(id,cls) {
     id = id || 'qur';
-    cls = cls || 'modDocument';
+    cls = cls || 'MODX\\Revolution\\modDocument';
     var dm = Ext.getBody().getViewSize();
     var o = {};
     switch (cls) {
-        case 'modSymLink':
+        case 'MODX\\Revolution\\modSymLink':
             o = {
                 xtype: 'textfield'
                 ,fieldLabel: _('symlink')
@@ -1047,10 +1081,9 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,anchor: '100%'
                 ,maxLength: 255
-                ,allowBlank: false
             };
             break;
-        case 'modWebLink':
+        case 'MODX\\Revolution\\modWebLink':
             o = {
                 xtype: 'textfield'
                 ,fieldLabel: _('weblink')
@@ -1059,10 +1092,9 @@ MODx.getQRContentField = function(id,cls) {
                 ,anchor: '100%'
                 ,maxLength: 255
                 ,value: 'http://'
-                ,allowBlank: false
             };
             break;
-        case 'modStaticResource':
+        case 'MODX\\Revolution\\modStaticResource':
             o = {
                 xtype: 'modx-combo-browser'
                 ,browserEl: 'modx-browser'
@@ -1084,8 +1116,8 @@ MODx.getQRContentField = function(id,cls) {
                 }
             };
             break;
-        case 'modResource':
-        case 'modDocument':
+        case 'MODX\\Revolution\\modResource':
+        case 'MODX\\Revolution\\modDocument':
         default:
             o = {
                 xtype: 'textarea'
@@ -1240,50 +1272,22 @@ MODx.getQRSettings = function(id,va) {
                 ,checked: va['isfolder'] != undefined ? va['isfolder'] : false
             },{
                 xtype: 'xcheckbox'
-                ,boxLabel: _('resource_richtext')
-                ,description: _('resource_richtext_help')
+                ,boxLabel: _('resource_show_in_tree')
+                ,description: _('resource_show_in_tree_help')
                 ,hideLabel: true
-                ,name: 'richtext'
-                ,id: 'modx-'+id+'-richtext'
+                ,name: 'show_in_tree'
+                ,id: 'modx-'+id+'-show_in_tree'
                 ,inputValue: 1
-                ,checked: va['richtext'] !== undefined ? (va['richtext'] ? 1 : 0) : (MODx.config.richtext_default == '1' ? 1 : 0)
+                ,checked: va['show_in_tree'] != undefined ? va['show_in_tree'] : 1
             },{
                 xtype: 'xcheckbox'
-                ,boxLabel: _('resource_searchable')
-                ,description: _('resource_searchable_help')
+                ,boxLabel: _('resource_hide_children_in_tree')
+                ,description: _('resource_hide_children_in_tree_help')
                 ,hideLabel: true
-                ,name: 'searchable'
-                ,id: 'modx-'+id+'-searchable'
+                ,name: 'hide_children_in_tree'
+                ,id: 'modx-'+id+'-hide_children_in_tree'
                 ,inputValue: 1
-                ,checked: va['searchable'] != undefined ? va['searchable'] : (MODx.config.search_default == '1' ? 1 : 0)
-                ,listeners: {'check': {fn:MODx.handleQUCB}}
-            },{
-                xtype: 'xcheckbox'
-                ,boxLabel: _('resource_cacheable')
-                ,description: _('resource_cacheable_help')
-                ,hideLabel: true
-                ,name: 'cacheable'
-                ,id: 'modx-'+id+'-cacheable'
-                ,inputValue: 1
-                ,checked: va['cacheable'] != undefined ? va['cacheable'] : (MODx.config.cache_default == '1' ? 1 : 0)
-            },{
-                xtype: 'xcheckbox'
-                ,name: 'clearCache'
-                ,id: 'modx-'+id+'-clearcache'
-                ,boxLabel: _('clear_cache_on_save')
-                ,description: _('clear_cache_on_save_msg')
-                ,hideLabel: true
-                ,inputValue: 1
-                ,checked: true
-            },{
-                xtype: 'xcheckbox'
-                ,boxLabel: _('deleted')
-                ,description: _('resource_delete')
-                ,hideLabel: true
-                ,name: 'deleted'
-                ,id: 'modx-'+id+'-deleted'
-                ,inputValue: 1
-                ,checked: va['deleted'] != undefined ? va['deleted'] : 0
+                ,checked: va['hide_children_in_tree'] != undefined ? va['hide_children_in_tree'] : false
             },{
                 xtype: 'xcheckbox'
                 ,boxLabel: _('resource_alias_visible')
@@ -1313,10 +1317,48 @@ MODx.getQRSettings = function(id,va) {
                 ,anchor: '100%'
                 ,value: va['uri'] || ''
                 ,hidden: !va['uri_override']
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_richtext')
+                ,description: _('resource_richtext_help')
+                ,hideLabel: true
+                ,name: 'richtext'
+                ,id: 'modx-'+id+'-richtext'
+                ,inputValue: 1
+                ,checked: va['richtext'] !== undefined ? (va['richtext'] ? 1 : 0) : (MODx.config.richtext_default == '1' ? 1 : 0)
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_searchable')
+                ,description: _('resource_searchable_help')
+                ,hideLabel: true
+                ,name: 'searchable'
+                ,id: 'modx-'+id+'-searchable'
+                ,inputValue: 1
+                ,checked: va['searchable'] !== undefined ? (va['searchable'] ? 1 : 0) : (MODx.config.search_default == '1' ? 1 : 0)
+                ,listeners: {'check': {fn:MODx.handleQUCB}}
+            },{
+                xtype: 'xcheckbox'
+                ,boxLabel: _('resource_cacheable')
+                ,description: _('resource_cacheable_help')
+                ,hideLabel: true
+                ,name: 'cacheable'
+                ,id: 'modx-'+id+'-cacheable'
+                ,inputValue: 1
+                ,checked: va['cacheable'] !== undefined ? (va['cacheable'] ? 1 : 0) : (MODx.config.cache_default == '1' ? 1 : 0)
+            },{
+                xtype: 'xcheckbox'
+                ,name: 'clearCache'
+                ,id: 'modx-'+id+'-clearcache'
+                ,boxLabel: _('resource_syncsite')
+                ,description: _('resource_syncsite_help')
+                ,hideLabel: true
+                ,inputValue: 1
+                ,checked: va['clearCache'] !== undefined ? (va['clearCache'] ? 1 : 0) : (MODx.config.syncsite_default == '1' ? 1 : 0)
             }]
         }]
     }];
 };
+
 MODx.handleQUCB = function(cb) {
     var h = Ext.getCmp(cb.id+'-hd');
     if (cb.checked && h) {

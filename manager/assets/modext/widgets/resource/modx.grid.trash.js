@@ -6,7 +6,7 @@ MODx.grid.Trash = function (config) {
     Ext.applyIf(config, {
         url: MODx.config.connector_url,
         baseParams: {
-            action: 'resource/trash/getlist'
+            action: 'Resource/Trash/GetList'
         },
         fields: [
             'id',
@@ -23,7 +23,7 @@ MODx.grid.Trash = function (config) {
         ],
         paging: true,
         autosave: true,
-        save_action: 'resource/updatefromgrid',
+        save_action: 'Resource/UpdateFromGrid',
         save_callback: this.refreshEverything,
         remoteSort: true,
         sm: this.sm,
@@ -199,7 +199,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/purge',
+                action: 'Resource/Trash/Purge',
                 ids: this.menu.record.id
             },
             listeners: {
@@ -232,7 +232,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/undelete',
+                action: 'Resource/Undelete',
                 id: this.menu.record.id
             },
             listeners: {
@@ -264,7 +264,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/purge',
+                action: 'Resource/Trash/Purge',
                 ids: cs
             },
             listeners: {
@@ -299,7 +299,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/restore',
+                action: 'Resource/Trash/Restore',
                 ids: cs
             },
             listeners: {
@@ -335,7 +335,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/purge',
+                action: 'Resource/Trash/Purge',
                 // we can't just purge everything, because it might happen that in
                 // the meantime something was deleted by another user which is not yet
                 // shown in the trash manager list because of missing reload.
@@ -382,7 +382,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             }),
             url: this.config.url,
             params: {
-                action: 'resource/trash/restore',
+                action: 'Resource/Trash/Restore',
                 // we can't just restore everything, because it might happen that in
                 // the meantime something was deleted by another user which is not yet
                 // shown in the trash manager list because of missing reload.
@@ -428,18 +428,23 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
     },
 
     refreshRecycleBinButton: function (total) {
-        var t = Ext.getCmp('modx-resource-tree');
-        var trashButton = t.getTopToolbar().findById('emptifier');
+        var trashButton = Ext.getCmp('modx-trash-link');
 
         if (total !== undefined) {
             // if no resource is deleted, we disable the icon.
             // otherwise we have to update the tooltip
             if (total = 0) {
                 trashButton.disable();
-                trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip'));
+                trashButton.tooltip = new Ext.ToolTip({
+                    target: trashButton.tabEl,
+                    title: _('trash.manage_recycle_bin_tooltip')
+                });
             } else {
                 trashButton.enable();
-                trashButton.setTooltip(_('trash.manage_recycle_bin_tooltip', total));
+                trashButton.tooltip = new Ext.ToolTip({
+                    target: trashButton.tabEl,
+                    title: _('trash.manage_recycle_bin_tooltip', {count: total})
+                });
             }
         }
     },
@@ -469,6 +474,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 + ((record.json.longtitle) ? '<p><strong>' + _('long_title') + ':</strong> ' + record.json.longtitle + '</p>' : '')
                 + ((record.data.parentPath) ? '<p><strong>' + _('trash.parent_path') + ':</strong> ' + record.data.parentPath + '</p>' : '')
                 + ((record.json.content) ? '<p><strong>' + _('content') + ':</strong> ' + Ext.util.Format.ellipsis(record.json.content.replace(/<\/?[^>]+>/gi, ''), 100) + '</p>' : '');
+            preview = Ext.util.Format.htmlEncode(preview);
             return '<div ext:qtip="' + preview + '">' + value + '</div>';
         } else {
             return '';

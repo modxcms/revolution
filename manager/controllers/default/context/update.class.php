@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modContext;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Loads the view context preview page.
  *
@@ -44,7 +48,7 @@ class ContextUpdateManagerController extends modManagerController {
      * @return void
      */
     public function initialize() {
-        $this->context= $this->modx->getObjectGraph('modContext', '{"ContextSettings":{}}', array('key' => $this->scriptProperties['key']));
+        $this->context= $this->modx->getObjectGraph(modContext::class, '{"ContextSettings":{}}', ['key' => $this->scriptProperties['key']]);
         if ($this->context) {
             $this->contextKey = $this->context->get('key');
         }
@@ -77,11 +81,11 @@ class ContextUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         if (empty($this->context)) {
             return $this->failure(sprintf($this->modx->lexicon('context_with_key_not_found'), $this->scriptProperties['key']));
         }
-        if (!$this->context->checkPolicy(array('view' => true, 'save' => true))) {
+        if (!$this->context->checkPolicy(['view' => true, 'save' => true])) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
         /* prepare context data for display */
@@ -106,11 +110,11 @@ class ContextUpdateManagerController extends modManagerController {
      * @return mixed
      */
     public function onPreRender() {
-        $onContextFormPrerender = $this->modx->invokeEvent('OnContextFormPrerender',array(
+        $onContextFormPrerender = $this->modx->invokeEvent('OnContextFormPrerender', [
             'key' => $this->context->get('key'),
             'context' => &$this->context,
             'mode' => modSystemEvent::MODE_UPD,
-        ));
+        ]);
         if (is_array($onContextFormPrerender)) $onContextFormPrerender = implode('',$onContextFormPrerender);
         return $onContextFormPrerender;
     }
@@ -119,13 +123,13 @@ class ContextUpdateManagerController extends modManagerController {
      * @return mixed
      */
     public function onRender() {
-        $this->onContextFormRender = $this->modx->invokeEvent('OnContextFormRender',array(
+        $this->onContextFormRender = $this->modx->invokeEvent('OnContextFormRender', [
             'key' => $this->context->get('key'),
             'context' => &$this->context,
             'mode' => modSystemEvent::MODE_UPD,
-        ));
+        ]);
         if (is_array($this->onContextFormRender)) $this->onContextFormRender = implode('',$this->onContextFormRender);
-        $this->onContextFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onContextFormRender);
+        $this->onContextFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onContextFormRender);
         return $this->onContextFormRender;
     }
 
@@ -151,7 +155,7 @@ class ContextUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('context','setting','access','policy','user');
+        return ['context','setting','access','policy','user'];
     }
 
     /**

@@ -1,6 +1,6 @@
 /**
  * Loads a grid of all the database tables in the modx database.
- * 
+ *
  * @class MODx.grid.DatabaseTables
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -13,9 +13,10 @@ MODx.grid.DatabaseTables = function(config) {
         ,id: 'modx-grid-dbtable'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/databasetable/getlist'
+            action: 'System/DatabaseTable/GetList'
         }
         ,fields: ['Name','Rows','Reserved','Data_size','Index_length','Data_free']
+        ,showActionsColumn: false
         ,paging: false
         ,columns: [{
             header: _('database_table_tablename')
@@ -60,7 +61,7 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'system/databasetable/truncate'
+                action: 'System/DatabaseTable/Truncate'
                 ,t: table
             }
             ,listeners: {
@@ -77,7 +78,7 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'system/databasetable/optimize'
+                action: 'System/DatabaseTable/Optimize'
                 ,t: table
             }
             ,listeners: {
@@ -87,13 +88,44 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         return false;
     }
     ,optimizeDatabase: function(table) {
+        Ext.Msg.show({
+            title: _('please_wait')
+            ,msg: _('database_optimize_process')
+            ,wait: true
+            ,waitConfig :
+                {
+                    interval: 400,
+                    text : _('database_optimize_processing'),
+                }
+            ,width: 240
+            ,progress: true
+            ,closable: false
+        });
+
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'system/databasetable/optimizeDatabase'
+                action: 'System/DatabaseTable/OptimizeDatabase'
             }
             ,listeners: {
-                'success': {fn:this.refresh,scope:this}
+                'success': {
+                    fn: function(r) {
+                        this.refresh();
+                        Ext.Msg.hide();
+                        MODx.msg.status({
+                            title: _('success')
+                            ,message: _('database_optimize_success')
+                        });
+                    }
+                    ,scope: this
+                }
+                ,'failure': {
+                    fn: function(r) {
+                        Ext.Msg.hide();
+                        MODx.msg.alert(_('error'),_('database_optimize_error'));
+                    }
+                    ,scope: this
+                }
             }
         });
         return false;

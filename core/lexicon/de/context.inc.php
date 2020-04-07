@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Kontext';
 $_lang['context_add'] = 'Kontext hinzufügen';
-$_lang['context_create'] = 'Kontext erstellen';
+$_lang['context_create'] = 'Neuer Kontext';
 $_lang['context_data'] = 'Kontext-Daten';
 $_lang['context_duplicate'] = 'Kontext duplizieren';
 $_lang['context_err_ae'] = 'Ein Kontext mit diesem Namen existiert bereits.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Kontext aktualisieren';
 $_lang['context_remove'] = 'Kontext löschen';
 $_lang['context_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Kontext löschen möchten? Der Kontext wird dauerhaft gelöscht und kann nicht wiederhergestellt werden.';
 $_lang['context_settings'] = 'Kontext-Einstellungen';
-$_lang['context_settings_desc'] = 'Hier können Sie Einstellungen vornehmen, die spezifisch für diesen Kontext sind. Kontext-Einstellungen haben grundsätzlich Vorrang vor Systemeinstellungen mit dem gleichen Schlüssel.';
+$_lang['context_settings_desc'] = 'Hier können Sie die Einstellungen für diesen Kontext festlegen. Kontext-Einstellungen überschreiben alle System-Einstellungen mit dem gleichen Schlüssel. <b>Jede Einstellung ist mit dem [[++key]]-Platzhalter verfügbar.</b>';
 $_lang['context_update'] = 'Kontext bearbeiten';
 $_lang['context_with_key_not_found'] = 'Kontext mit dem Schlüssel %s nicht gefunden!';
 $_lang['contexts'] = 'Kontexte';

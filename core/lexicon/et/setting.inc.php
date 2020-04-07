@@ -36,7 +36,7 @@ $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filtreeri nimeruumi järgi...';
 $_lang['search_by_key'] = 'Otsi võtme järgi...';
-$_lang['setting_create'] = 'Loo Uus Seade';
+$_lang['setting_create'] = 'New Setting';
 $_lang['setting_err'] = 'Palun kontrollige järgnevate väljade andmeid: ';
 $_lang['setting_err_ae'] = 'Sellise võtmeg seade juba eksisteerib. Palun kasutage teistsugust nime.';
 $_lang['setting_err_nf'] = 'Seadet ei leitud.';
@@ -50,7 +50,7 @@ $_lang['setting_remove_confirm'] = 'Olete kindel, et soovite eemaldada selle sea
 $_lang['setting_update'] = 'Muuda Seadet';
 $_lang['settings_after_install'] = 'Kuna MODX on hetkel värske install, peate kontrollima neid seaded ja muutma neid seadeid mida soovite. P
 Pärast seadete kontrollimist, vajutage \'Salvesta\', uuendamaks seadete andmebaasi<br /><br />';
-$_lang['settings_desc'] = 'Siit saate muuta MODX manageri liidese üldiseid eelistusi ja konfiguratsiooni seadistusi ja ka kuidas leht töötab. Tehke topelt-klikk väärtustel, mid soovite muuta tabelis või parem-klikkige seade peal rohkemateks valikuteks. Samuti saate klikkida ka "+" märgil, et näha seade kirjeldust.';
+$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Sõbralikud URL-id';
 $_lang['settings_misc'] = 'Mitmesugust';
 $_lang['settings_site'] = 'Sait';
@@ -122,16 +122,13 @@ $_lang['setting_automatic_alias'] = 'Automaatselt genereeri alias';
 $_lang['setting_automatic_alias_desc'] = 'Kui \'Jah\', siis süsteem salvestamisel automaatselt genereerib aliase ressurssi lehe tiitel väljast.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
 $_lang['setting_base_help_url'] = 'Base Help URL';
 $_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
 
 $_lang['setting_blocked_minutes'] = 'Blokeeritud Minutid';
 $_lang['setting_blocked_minutes_desc'] = 'Siit saate sisestada mitu minutit kasutaja on blokeeritud, peale läbikukkunud sisse logimise katsed on ületatud. Palun sisesta väärtus ainult numbrina (ilma komadeta, tühikuteda jne.)';
-
-$_lang['setting_cache_action_map'] = 'Luba Tegevuste Map-i Puhver';
-$_lang['setting_cache_action_map_desc'] = 'Kui lubatud, tegevused (või kontrollerite mapid) puhverdatakse, et vähendada manageri lehetede laadimise aega.';
 
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
@@ -203,9 +200,6 @@ $_lang['setting_compress_js_desc'] = 'Kui lubatud, MODX kasutab kokkusurutud ver
 $_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
 $_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
 
-$_lang['setting_compress_js_max_files'] = 'Maximum JavaScript Files Compression Threshold';
-$_lang['setting_compress_js_max_files_desc'] = 'The maximum number of JavaScript files MODX will attempt to compress at once when compress_js is on. Set to a lower number if you are experiencing issues with Google Minify in the manager.';
-
 $_lang['setting_concat_js'] = 'Kasuta Ühendatud Javascript Teeke';
 $_lang['setting_concat_js_desc'] = 'Kui lubatud, siis MODX kasutab ühendatud (kõik failid on liidetud üheks) versiooni oma JavaScript teekidest manageri liideses. See vähendab märgatavalt laadimise ja käivitamise aega manageris. Keela ainult juhul, kui muudad core elemente.';
 
@@ -249,19 +243,9 @@ $_lang['setting_default_template_desc'] = 'Valige vaikimisi Template, mida soovi
 $_lang['setting_default_per_page'] = 'Vaikimisi Lehe kohta';
 $_lang['setting_default_per_page_desc'] = 'Vaikimisi number tulemusi, mida näidta tabelis kogu manageris.';
 
-$_lang['setting_editor_css_path'] = 'Sihtkoht CSS failile';
-$_lang['setting_editor_css_path_desc'] = 'Sisestage sihtkoht CSS failile, mida soovite kasutada võimalustega tekstiredakoris (richtext editor). Parim viis on sihtkoht sisestada nõnda, et server root kataloogist, nagu näiteks: /assets/site/style.css. Kui ei soovi laadida stiili richtext editori, jätke see väli tühjaks.';
-
-$_lang['setting_editor_css_selectors'] = 'CSS Selectorid Editori jaoks';
-$_lang['setting_editor_css_selectors_desc'] = 'Koma eraldatud list CSS selectoritega richtext editori jaoks.';
-
 $_lang['setting_emailsender'] = 'Registreerumise E-maili From Aadress';
 $_lang['setting_emailsender_desc'] = 'Siit saate määrata, e-maili aadressi, mida kasutatakse kautajanime ja parooli e-postide saatmisel kasutajatele.';
 $_lang['setting_emailsender_err'] = 'Palun määrake administratiooni emaili aadress.';
-
-$_lang['setting_emailsubject'] = 'Registreerimise E-maili Subject';
-$_lang['setting_emailsubject_desc'] = 'Kasutaja registreerumise e-maili vaikimisi subject.';
-$_lang['setting_emailsubject_err'] = 'Palun määrake subject registreerumise emailile.';
 
 $_lang['setting_enable_dragdrop'] = 'Luba Drag/Drop Ressurssi/Elemendi Puus';
 $_lang['setting_enable_dragdrop_desc'] = 'Kui off, siis välditakse Ressurssi ja Elemendi Puus draggimist ja droppimist.';
@@ -281,9 +265,6 @@ $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a
 
 $_lang['setting_failed_login_attempts'] = 'Ebaõnnestunud Sisselogimise Katseid';
 $_lang['setting_failed_login_attempts_desc'] = 'Arv läbikukkunud sisselogimise katseid, mida kasutaja saab sootatada, enne kui ta \'blokeeritakse\'.';
-
-$_lang['setting_fe_editor_lang'] = 'Front-end Editori Keel';
-$_lang['setting_fe_editor_lang_desc'] = 'Valige keel editorile, kui seda kasutatakse front-endis.';
 
 $_lang['setting_feed_modx_news'] = 'MODX Uudiste Feed';
 $_lang['setting_feed_modx_news_desc'] = 'Määrake URL RSS feed-ile, et kuvada MODX uundiseid manageris.';
@@ -308,9 +289,6 @@ $_lang['setting_filemanager_url_desc'] = 'Valikuline. Määra juhul, kui soovite
 
 $_lang['setting_filemanager_url_relative'] = 'On Faili Manager URL Relatiivne?';
 $_lang['setting_filemanager_url_relative_desc'] = 'Kui teie filemanager_url seade on relatiivne MODX base_url suhtes, siis palun määrake see seade jah asendisse. Kui teie filemanager_url on väljaspool põhi webroot-i, määrakse see Ei asendisse.';
-
-$_lang['setting_forgot_login_email'] = 'Ununenud kasutajatunnuste Email';
-$_lang['setting_forgot_login_email_desc'] = 'Template emailile, mis saadetakse kasutajale, kui nad on unustanud oma MODX kasutajanime ja/või parooli';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
@@ -371,7 +349,7 @@ $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\\modX::makeUrl()" target="_blank">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Locale';
 $_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
@@ -439,29 +417,29 @@ $_lang['setting_manager_date_format_desc'] = 'PHP date() funktsiooni formaat, ku
 $_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
 $_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
 
-$_lang['setting_manager_js_cache_file_locking'] = 'Enable File Locking for Manager JS/CSS Cache';
-$_lang['setting_manager_js_cache_file_locking_desc'] = 'Cache file locking. Set to No if filesystem is NFS.';
-$_lang['setting_manager_js_cache_max_age'] = 'Manager JS/CSS Compression Cache Age';
-$_lang['setting_manager_js_cache_max_age_desc'] = 'Maximum age of browser cache of manager CSS/JS compression in seconds. After this period, the browser will send another conditional GET. Use a longer period for lower traffic.';
-$_lang['setting_manager_js_document_root'] = 'Manager JS/CSS Compression Document Root';
-$_lang['setting_manager_js_document_root_desc'] = 'If your server does not handle the DOCUMENT_ROOT server variable, set it explicitly here to enable the manager CSS/JS compression. Do not change this unless you know what you are doing.';
-$_lang['setting_manager_js_zlib_output_compression'] = 'Enable zlib Output Compression for Manager JS/CSS';
-$_lang['setting_manager_js_zlib_output_compression_desc'] = 'Whether or not to enable zlib output compression for compressed CSS/JS in the manager. Do not turn this on unless you are sure the PHP config variable zlib.output_compression can be set to 1. MODX recommends leaving it off.';
-
-$_lang['setting_manager_lang_attribute'] = 'Manageri HTML ja XML Keele Atribuut';
-$_lang['setting_manager_lang_attribute_desc'] = 'Sisestage keele kood, mis sobib paremini valitud manageri keelega, see kindlustab, et brauser saab esitada sisu parimas teile sobilikus formaadis.';
-
-$_lang['setting_manager_language'] = 'Manageri Keel';
-$_lang['setting_manager_language_desc'] = 'Valige keel MODX Sihuhaldussüsteemi Managerile.';
-
 $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
+
+$_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
+$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
+
+$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
+
+$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
+
+$_lang['setting_login_help_button'] = 'Show Help Button';
+$_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Manageri Login Startup';
 $_lang['setting_manager_login_start_desc'] = 'Sisestage dokumendi ID, mida soovite saata kasutajale pärast kui nad on sisse loginud manageri. <strong>Märge: olge kindel, et ID kuulub olemasolevale dokumendile ja et see on avalikustatud ning juudepääsetav kasutaja poolt!</strong>';
 
 $_lang['setting_manager_theme'] = 'Manager Theme';
 $_lang['setting_manager_theme_desc'] = 'Valige Theme Managerile.';
+
+$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Manager Aja Formaat';
 $_lang['setting_manager_time_format_desc'] = 'PHP date() funktsiooni formaat, kuidas kellaaja seaded esitatakse manageris.';
@@ -626,9 +604,6 @@ $_lang['setting_request_param_alias_desc'] = 'GET parameeteri nimi, millega iden
 $_lang['setting_request_param_id'] = 'Päringu ID Parameeter';
 $_lang['setting_request_param_id_desc'] = 'GET parameeteri nimi, millega idenfitseerida Ressurssi ID-sid, kui FURL-id ei ole kasutusel.';
 
-$_lang['setting_resolve_hostnames'] = 'Lahenda hostinimed';
-$_lang['setting_resolve_hostnames_desc'] = 'kas soovite, et MODX üritaks lahendada külastajte hostinimesid, kui nad külastavad teie lehte? Hostinimede lahendamine võib põhjustada lisa koormust teie serverile, kuigi külastajatele jääb see märkamatuks.';
-
 $_lang['setting_resource_tree_node_name'] = 'Ressurssi Puu Üksuse Väli';
 $_lang['setting_resource_tree_node_name_desc'] = 'Määra Ressurssi väli, mida kasutada üksutse kuvamisel Ressurssi Puus. Vaikimisi Kasutatakse pagetitle välja, kui suvalist Ressurssi välja on võimalk kasutada, nagu näiteks menutitle, alias, longtitle, jne.';
 
@@ -647,12 +622,6 @@ $_lang['setting_search_default_err'] = 'Palun määrake kas soovite, et dokumend
 
 $_lang['setting_server_offset_time'] = 'Server offset time';
 $_lang['setting_server_offset_time_desc'] = 'Valige tundide erinevus, mis on teie ja serveri asukoha vahel.';
-
-$_lang['setting_server_protocol'] = 'Serveri Tüüp';
-$_lang['setting_server_protocol_desc'] = 'Kui teie leht kasutab https ühendust, siis määrake see siin.';
-$_lang['setting_server_protocol_err'] = 'Palun määrake kas teil on turva leht võit mitte.';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
 
 $_lang['setting_session_cookie_domain'] = 'Session Küpsise Domeen';
 $_lang['setting_session_cookie_domain_desc'] = 'Kasutage seda seadet, et muuta sessiooni küpsise domeeni.';
@@ -695,7 +664,7 @@ $_lang['setting_show_tv_categories_header_desc'] = 'If "Yes", MODX will show the
 
 $_lang['setting_signupemail_message'] = 'Registreerumise e-mail';
 $_lang['setting_signupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetekase kasutajatele, kui loote neidle konto, ning lubate MODX-il saata neile e-maili, mis sisaldab nende kasutajanime ja parooli. <br /><strong>MÄRKUS:</strong> Järgnevad placeholders asendatakse Sisu Halduse poolt sõnumi saatmisel: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise nimi või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täis nimi. <br /><br /><strong>Jätke [[+uid]] ja [[+pwd]] e-maili või muidu kasutajanime ja parooli ei saadeta ja kasutajad ei tea oma kasutajatunnust ja prooli!</strong>';
-$_lang['setting_signupemail_message_default'] = 'Tere [[+uid]] \\n\\nSiin on teie sisselogimise detailid [[+sname]] Sisuhaldus Süsteemi:\\n\\nKasutajanimi: [[+uid]]\\nParool: [[+pwd]]\\n\\nKui olete sisse loginud Sisuhaldusesse ([[+surl]]), on teil võimalk muuta oma parooli.\\n\\nParimat,\\nLehe Administraator';
+$_lang['setting_signupemail_message_default'] = 'Tere [[+uid]] \n\nSiin on teie sisselogimise detailid [[+sname]] Sisuhaldus Süsteemi:\n\nKasutajanimi: [[+uid]]\nParool: [[+pwd]]\n\nKui olete sisse loginud Sisuhaldusesse ([[+surl]]), on teil võimalk muuta oma parooli.\n\nParimat,\nLehe Administraator';
 
 $_lang['setting_site_name'] = 'Lahe Nimi';
 $_lang['setting_site_name_desc'] = 'Sisestage oma lehe nimi siia.';
@@ -750,8 +719,8 @@ $_lang['setting_syncsite_default'] = 'Empty Cache default';
 $_lang['setting_syncsite_default_desc'] = 'Select \'Yes\' to empty the cache after you save a resource by default.';
 $_lang['setting_syncsite_default_err'] = 'Please state whether or not you want to empty the cache after saving a resource by default.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Näita kirjeldusi Põhi Menüüs';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'Kui \'Ei\', siis MODX peidab kirjeldused põhi menüü linkidelt manageris.';
+$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'Ressurssi Puu Vaikimisi Sorteeritav Väli';
 $_lang['setting_tree_default_sort_desc'] = 'Vaikimisi väli mille järgi soreeritakse Ressurssi puu, kui manager laetakse.';
@@ -765,18 +734,12 @@ $_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move Template Var
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Set this to Yes to output debug messages when using the UI for the default manager theme. You must use a browser that supports console.log.';
 
-$_lang['setting_udperms_allowroot'] = 'Luba root';
-$_lang['setting_udperms_allowroot_desc'] = 'Kas soovite lubada kasutajatel luua uusi Ressursse lehe root-i? ';
-
 $_lang['setting_unauthorized_page'] = 'Authoriseerimata lehte';
 $_lang['setting_unauthorized_page_desc'] = 'Sisestage Ressurssi ID, mida soovite saata kasutajatele, kui nad pärivad turvatud või autoriseerimata Ressurssi. <strong>MÄRKUS: olge kindel, et IS kuulub olemasolevale Ressurssile ja et see oleks avalikustatud ja on avalikult juurdepääsetav!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Palun määrake Ressurssi ID authoriseerimata lehe jaoks.';
 
 $_lang['setting_upload_files'] = 'Uploadable File Types';
 $_lang['setting_upload_files_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/files/\' using the Resource Manager. Please enter the extensions for the filetypes, seperated by commas.';
-
-$_lang['setting_upload_flash'] = 'Üleslaetavad Flashi Tüübid';
-$_lang['setting_upload_flash_desc'] = 'Siit saate sisestada nimekirja failidest, mida saab üleslaadida \'assets/flash/\' kasuta, kasutades Ressurssi Manageri. Palun sisestage faililaiendid flashi tüüpidele, eraldatud komadega.';
 
 $_lang['setting_upload_images'] = 'Üleslaetavad Piltide Tüübid';
 $_lang['setting_upload_images_desc'] = 'Siit saate sisestada nimekirja failidest, mida saab üleslaadida \'assets/images/\' kasuta, kasutades Ressurssi Manageri. Palun sisestage faililaiendid piltide tüüpidele, eraldatud komadega.';
@@ -809,14 +772,6 @@ $_lang['setting_use_weblink_target_desc'] = 'Set to true if you want to have MOD
 
 $_lang['setting_user_nav_parent'] = 'User menu parent';
 $_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
-
-$_lang['setting_webpwdreminder_message'] = 'Veebi Parooli Meeletuletuse e-mail';
-$_lang['setting_webpwdreminder_message_desc'] = 'Sisetage sõnum, mis saadetakse kasutajatele, kui nad tellivad uu parooli e-posti kaudu. Sisu Haldus saadab e-maili, mis sisaldab nende uut parooli ja aktiveerimise informatsiooni. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
-$_lang['setting_webpwdreminder_message_default'] = 'Tere [[+uid]]\\n\\nUue parooli aktiveerimiseks, klikkige sellel lingil:\\n\\n[[+surl]]\\n\\nKui edukas, siis saate sisselogimiseks kasutada järgnevad parooli:\\n\\nParool:[[+pwd]]\\n\\nKui teie ei tellinud seda e-maili, siis palun ignoreerige seda.\\n\\nParimat,\\nLahe Administraator';
-
-$_lang['setting_websignupemail_message'] = 'Veebi Registreerumise e-mail';
-$_lang['setting_websignupemail_message_desc'] = 'Siit saate määrata sõnumi, mis saadetakse teie kasutajatele, kui nad loovad veebi konto ja lasete  Content Manager saata neile e-maili, mis sisaldab nende kasutajatunnust ja parooli. <br /><strong>Märkus:</strong> Järgnevad placeholder-id asendatakse Content Manageri poolt, kui sõnum saadetakse: <br /><br />[[+sname]] - Veebilehe nimi, <br />[[+saddr]] - Veebilehe e-maili aadress, <br />[[+surl]] - Veebilehe aadress, <br />[[+uid]] - Kasutaja sisselogimise tunnus või id, <br />[[+pwd]] - Kasutaja parool, <br />[[+ufn]] - Kasutaja täisnimi. <br /><br /><strong>Jätke [[+uid]] aja [[+pwd]] e-maili või mudiu kasutajanime ja prooli ei saadeta ja kasutajad ei tea omaenda kasutajanime või parooli!</strong>';
-$_lang['setting_websignupemail_message_default'] = 'Tere [[+uid]] \\n\\nSiin on teie sisselogimise detailid [[+sname]] jaoks:\\n\\nKasutajatunnus: [[+uid]]\\nParool: [[+pwd]]\\n\\nKui olete siseloginud [[+sname]] ([[+surl]]), on teil võimalus parooli muuta.\\n\\nParimat,\\nLehe Administraator';
 
 $_lang['setting_welcome_screen'] = 'Näita Tervitus Ekraani';
 $_lang['setting_welcome_screen_desc'] = 'Kui on true, tervitus ekraan ilmub järgmise eduka laadimise avaleheküljele ja siis ei näidata pärast seda.';
@@ -859,3 +814,9 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
+
+$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+
+$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';

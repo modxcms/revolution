@@ -8,7 +8,7 @@
  */
 $_lang['active_users_none'] = 'Momentan keine Benutzer aktiv.';
 $_lang['add_user'] = 'Benutzer hinzufügen';
-$_lang['create_resource'] = 'Resource erstellen';
+$_lang['create_resource'] = 'Ressource erstellen';
 $_lang['dashboard'] = 'Dashboard';
 $_lang['documentation'] = 'Dokumentation';
 $_lang['file_bug'] = 'Bug melden';
@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Aktion';
 $_lang['onlineusers_actionid'] = 'Aktions-ID';
 $_lang['onlineusers_ipaddress'] = 'IP-Adresse des Benutzers';
 $_lang['onlineusers_lasthit'] = 'Letzter Zugriff';
-$_lang['onlineusers_message'] = 'Diese Liste zeigt alle Benutzer, die in den letzten 20 Minuten aktiv waren (die aktuelle Zeit ist [[+curtime]] Uhr)';
+$_lang['onlineusers_message'] = 'Diese Liste zeigt alle Benutzer, die in den letzten 20 Minuten aktiv waren:';
 $_lang['onlineusers_title'] = 'Benutzer online';
 $_lang['onlineusers_user'] = 'Benutzer';
 $_lang['onlineusers_userid'] = 'ID des Benutzers';
+
+$_lang['updates_sort'] = 'Sortieren';
+$_lang['updates_status'] = 'Status';
+$_lang['updates_action'] = 'Aktion';
+$_lang['updates_available'] = 'Updates verfügbar';
+$_lang['updates_update'] = 'Update';
+$_lang['updates_ok'] = 'Auf dem neuesten Stand';
+$_lang['updates_extras'] = 'Extras';
+
 $_lang['quicklinks'] = 'Schnell-Links';
 $_lang['security_notices'] = 'Sicherheitshinweise';
 $_lang['view_tree'] = 'Baum anzeigen';

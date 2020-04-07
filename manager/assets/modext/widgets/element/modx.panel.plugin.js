@@ -13,7 +13,7 @@ MODx.panel.Plugin = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'element/plugin/get'
+            action: 'Element/Plugin/Get'
         }
         ,id: 'modx-panel-plugin'
 		,cls: 'container form-with-labels'
@@ -60,7 +60,7 @@ MODx.panel.Plugin = function(config) {
                         ,value: config.record.props || null
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('plugin_desc_name')
                         ,name: 'name'
                         ,id: 'modx-plugin-name'
@@ -73,7 +73,7 @@ MODx.panel.Plugin = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('plugin')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'element/plugin/create' && MODx.perm.tree_show_element_ids === 1) {
+                                if (MODx.request.a !== 'Element/Plugin/Create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -235,7 +235,7 @@ MODx.panel.Plugin = function(config) {
                         ,hidden: !config.record['static']
                         ,hideMode: 'offsets'
                         ,baseParams: {
-                            action: 'source/getList'
+                            action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
                         }
@@ -303,6 +303,12 @@ MODx.panel.Plugin = function(config) {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(['modx-plugin-form'], 'modx-plugin-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Plugin.superclass.constructor.call(this,config);
@@ -377,7 +383,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-plugin-which-editor').getValue();
-            MODx.request.a = 'element/plugin/update';
+            MODx.request.a = 'Element/Plugin/Update';
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();

@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'คำอธิบายสั้นๆข�
 $_lang['source_duplicate'] = 'ทำสำเนาแหล่งข้อมูลมีเดีย';
 $_lang['source_err_ae_name'] = 'แหล่งข้อมูลมีเดียชื่อนี้มีอยู่แล้ว! โปรดระบุชื่อใหม่';
 $_lang['source_err_nf'] = 'ไม่พบแหล่งข้อมูลมีเดีย!';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'ไม่มีแหล่งข้อมูลมีเดียที่สามารถค้นหาด้วยไอดี: [[+id]]';
 $_lang['source_err_ns'] = 'กรุณาระบุแหล่งข้อมูลมีเดีย';
 $_lang['source_err_ns_name'] = 'กรุณาระบุชื่อสำหรับแหล่งข้อมูลมีเดีย';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'ระบบไฟล์';
 $_lang['source_type.file_desc'] = 'A filesystem-based แหล่งข้อมูลที่ใช้ระะบไฟล์ที่นำทางไฟล์ของเซิร์ฟเวอร์ของคุณ';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket';
+$_lang['source_type.ftp'] = 'File Transfer Protocol';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'ประเภทแหล่งข้อมูล';
 $_lang['source_types.intro_msg'] = 'นี่คือรายการทั้งหมดของประเภทแหล่งข้อมูลมีเดียที่ติดตั้งบน MODX นี้';
 $_lang['source.access.intro_msg'] = 'คุณสามารถจำกัดแหล่งข้อมูลมีเดียเพื่อระบุกลุ่มผู้ใช้และการประยุกต์นโยบายสำหรับกลุ่มผู้ใช้เหล่านั้น แหล่งข้อมูลมีเดียที่ไม่มีการแนบกลุ่มผู้ใช้ใดเลยจะสามารถใช้ได้กับทุกผู้ใช้ที่เป็นเมเนเจอร์';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'คุณภาพของการเรนเดอร์รูปขนาดย่อในอัตราส่วนจาก 0-100';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'ประเภทรูปภาพเพื่อจะเรนเดอร์รูปขนาดย่อเป็น';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'รายการคั่นด้วย�
 $_lang['prop_s3.thumbnailQuality_desc'] = 'คุณภาพของการเรนเดอร์รูปขนาดย่อในอัตราส่วนจาก 0-100';
 $_lang['prop_s3.thumbnailType_desc'] = 'ประเภทรูปภาพเพื่อจะเรนเดอร์รูปขนาดย่อเป็น';
 $_lang['prop_s3.url_desc'] = 'URL ของ Amazon S3 instance';
-$_lang['s3_no_move_folder'] = 'ไดรเวอร์ของ S3 ไม่สนับสนุนการย้ายโฟลเดอร์ในเวลานี้';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'ไดรเวอร์ของ S3 ไม่สนับสนุนการย้ายโฟลเดอร์ในเวลานี้';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Простір імен';
-$_lang['namespace_create'] = 'Створити простір імен';
+$_lang['namespace_create'] = 'Новий простір імен';
 $_lang['namespace_err_create'] = 'Сталася помилка при спробі створити простір імен.';
 $_lang['namespace_err_nf'] = 'Простір імен не знайдено.';
 $_lang['namespace_err_nfs'] = 'Не знайдено простору імен з ім\'ям: %s';

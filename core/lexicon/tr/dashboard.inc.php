@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = 'Eylem';
 $_lang['onlineusers_actionid'] = 'Eylem - Kimliği';
 $_lang['onlineusers_ipaddress'] = 'Kullanıcının IP adresi';
 $_lang['onlineusers_lasthit'] = 'Son vuruş';
-$_lang['onlineusers_message'] = 'Bu liste son 20 dakika içinde aktif olan tüm kullanıcıları gösterir (şu an[[+curtime]])';
+$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
 $_lang['onlineusers_title'] = 'Çevrimiçi kullanıcılar';
 $_lang['onlineusers_user'] = 'Kullanıcı';
 $_lang['onlineusers_userid'] = 'Kullanıcı Kimliği';
+
+$_lang['updates_sort'] = 'Sort';
+$_lang['updates_status'] = 'Durum';
+$_lang['updates_action'] = 'Eylem';
+$_lang['updates_available'] = 'Updates available';
+$_lang['updates_update'] = 'Güncelleştirme';
+$_lang['updates_ok'] = 'Up to date';
+$_lang['updates_extras'] = 'Ekstralar';
+
 $_lang['quicklinks'] = 'Hızlı Linkler';
 $_lang['security_notices'] = 'Güvenlik uyarıları';
 $_lang['view_tree'] = 'Ağacı Görüntüle';

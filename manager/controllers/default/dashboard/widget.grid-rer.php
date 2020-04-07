@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboardWidgetInterface;
+use MODX\Revolution\Processors\ProcessorResponse;
+use MODX\Revolution\Processors\Security\User\GetRecentlyEditedResources;
+use MODX\Revolution\Smarty\modSmarty;
+
 /**
  * Renders a grid of recently edited resources by the active user
  *
@@ -22,8 +27,8 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
      */
     public function render()
     {
-        /** @var modProcessorResponse $res */
-        $res = $this->modx->runProcessor('security/user/getrecentlyeditedresources', [
+        /** @var ProcessorResponse $res */
+        $res = $this->modx->runProcessor(GetRecentlyEditedResources::class, [
             'limit' => 10,
             'user' => $this->modx->user->get('id'),
         ]);
@@ -34,8 +39,9 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
                 $data = json_decode($data, true);
             }
         }
-        $this->modx->getService('smarty', 'smarty.modSmarty');
+        $this->modx->getService('smarty', modSmarty::class);
         $this->modx->smarty->assign('data', $data);
+        $this->modx->smarty->assign('can_view_logs', $this->modx->hasPermission('logs'));
 
         return $this->modx->smarty->fetch('dashboard/recentlyeditedresources.tpl');
     }

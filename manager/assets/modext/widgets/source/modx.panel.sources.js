@@ -1,8 +1,16 @@
+/**
+ * Loads the Sources panel
+ *
+ * @class MODx.panel.Sources
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration options
+ * @xtype modx-panel-sources
+ */
 MODx.panel.Sources = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-sources'
-		,cls: 'container'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -10,14 +18,14 @@ MODx.panel.Sources = function(config) {
             ,id: 'modx-sources-header'
             ,xtype: 'modx-header'
         },MODx.getPageStructure([{
-            layout: 'form'
-            ,title: _('sources')
+            title: _('sources')
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('sources.intro_msg')+'</p>'
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-sources'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         },{
@@ -28,7 +36,7 @@ MODx.panel.Sources = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-source-types'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
         }],{
@@ -45,6 +53,14 @@ MODx.panel.Sources = function(config) {
 Ext.extend(MODx.panel.Sources,MODx.FormPanel);
 Ext.reg('modx-panel-sources',MODx.panel.Sources);
 
+/**
+ * Loads a grid of Sources.
+ *
+ * @class MODx.grid.Sources
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-sources
+ */
 MODx.grid.Sources = function(config) {
     config = config || {};
 
@@ -52,12 +68,12 @@ MODx.grid.Sources = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'source/getlist'
+            action: 'Source/GetList'
         }
         ,fields: ['id','name','description','class_key','cls']
         ,paging: true
         ,autosave: true
-        ,save_action: 'source/updatefromgrid'
+        ,save_action: 'Source/UpdateFromGrid'
         ,remoteSort: true
         ,sm: this.sm
         ,columns: [this.sm,{
@@ -71,12 +87,18 @@ MODx.grid.Sources = function(config) {
             ,width: 150
             ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=source/update&id=' + record.data.id
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
             ,editor: { xtype: 'textarea' }
+            ,renderer: Ext.util.Format.htmlEncode
         }]
         ,tbar: [{
             text: _('source_create')
@@ -159,11 +181,19 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         }
     }
 
+    ,createSource: function() {
+        MODx.loadPage('system/Source/Create');
+    }
+
+    ,updateSource: function() {
+        MODx.loadPage('Source/Update', 'id='+this.menu.record.id);
+    }
+
     ,duplicateSource: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'source/duplicate'
+                action: 'Source/Duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -171,9 +201,22 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
             }
         });
     }
-    ,createSource: function() {
-        MODx.loadPage('system/source/create');
+
+    ,removeSource: function() {
+        MODx.msg.confirm({
+            title: _('source_remove')
+            ,text: _('source_remove_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'Source/Remove'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
     }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -183,7 +226,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
             ,text: _('source_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'source/removeMultiple'
+                action: 'Source/RemoveMultiple'
                 ,sources: cs
             }
             ,listeners: {
@@ -196,24 +239,6 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         return true;
     }
 
-    ,removeSource: function() {
-        MODx.msg.confirm({
-            title: _('source_remove')
-            ,text: _('source_remove_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'source/remove'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-            	'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,updateSource: function() {
-        MODx.loadPage('source/update', 'id='+this.menu.record.id);
-    }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -221,12 +246,13 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         //this.refresh();
         return true;
     }
+
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
-            action: 'source/getList'
-    	};
+        this.getStore().baseParams = {
+            action: 'Source/GetList'
+        };
         Ext.getCmp('modx-source-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
 });
@@ -246,7 +272,7 @@ MODx.window.CreateSource = function(config) {
         title: _('source_create')
         ,url: MODx.config.connector_url
         ,autoHeight: true
-        ,action: 'source/create'
+        ,action: 'Source/Create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -275,16 +301,16 @@ MODx.window.CreateSource = function(config) {
 Ext.extend(MODx.window.CreateSource,MODx.Window);
 Ext.reg('modx-window-source-create',MODx.window.CreateSource);
 
-
 MODx.grid.SourceTypes = function(config) {
     config = config || {};
 
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'source/type/getlist'
+            action: 'Source/Type/GetList'
         }
         ,fields: ['class','name','description']
+        ,showActionsColumn: false
         ,paging: true
         ,remoteSort: true
         ,columns: [{
@@ -292,11 +318,13 @@ MODx.grid.SourceTypes = function(config) {
             ,dataIndex: 'name'
             ,width: 150
             ,sortable: true
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
+            ,renderer: Ext.util.Format.htmlEncode
         }]
     });
     MODx.grid.SourceTypes.superclass.constructor.call(this,config);

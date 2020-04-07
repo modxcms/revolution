@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'メディアソースの説明文を設定�
 $_lang['source_duplicate'] = 'メディアソースの複製';
 $_lang['source_err_ae_name'] = '指定された名前のメディアソースは既に存在しています。別の名前を指定してください。';
 $_lang['source_err_nf'] = 'メディアソースが見つかりませんでした。';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = '指定されたIDのメディアソースは存在しません: [[+id]]';
 $_lang['source_err_ns'] = 'メディアソースを指定してください。';
 $_lang['source_err_ns_name'] = 'メディアソースの名前を指定してください。';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'ファイルシステム';
 $_lang['source_type.file_desc'] = 'メディアの取得元としてサーバーのファイルシステムを使用します。';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'メディアの取得元としてAmazon S3のバケットを使用します。';
+$_lang['source_type.ftp'] = 'File Transfer Protocol';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'ソースタイプの管理';
 $_lang['source_types.intro_msg'] = 'お使いのMODX環境で使用できるメディアソースの種類は以下の通りです。';
 $_lang['source.access.intro_msg'] = 'メディアソースにはユーザーグループごとにアクセスポリシーを強制することができます。ユーザーグループの指定を省略すると、管理画面を使用できる全てのユーザーに同じ設定が適用されます。';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'サムネイル画像の品質を0-100の間で設定します。';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'サムネイル画像の種類を設定します。';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'バケット';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = '表示しないファイル名のリスト�
 $_lang['prop_s3.thumbnailQuality_desc'] = 'サムネイル画像の品質を0-100の間で設定します。';
 $_lang['prop_s3.thumbnailType_desc'] = 'サムネイル画像の種類を設定します。';
 $_lang['prop_s3.url_desc'] = 'Amazon S3インスタンスのURL。';
-$_lang['s3_no_move_folder'] = 'S3ドライバは、現時点ではフォルダの移動をサポートしていません。';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'S3ドライバは、現時点ではフォルダの移動をサポートしていません。';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

@@ -7,13 +7,13 @@
  * @subpackage lexicon
  */
 $_lang['event'] = 'Esemény';
-$_lang['events'] = 'Events';
-$_lang['plugin'] = 'Plugin';
-$_lang['plugin_add'] = 'Add Plugin';
+$_lang['events'] = 'Események';
+$_lang['plugin'] = 'Beépülő';
+$_lang['plugin_add'] = 'Beépülő hozzáadása';
 $_lang['plugin_add_to_event'] = 'Add Plugin to Event';
 $_lang['plugin_code'] = 'Plugin code (php)';
 $_lang['plugin_config'] = 'Plugin configuration';
-$_lang['plugin_desc'] = 'Description';
+$_lang['plugin_desc'] = 'Leírás';
 $_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
 $_lang['plugin_desc_description'] = 'A short description of this Plugin.';
 $_lang['plugin_desc_name'] = 'The name of this Plugin.';
@@ -24,7 +24,7 @@ $_lang['plugin_duplicate_confirm'] = 'Are you sure you want to duplicate this pl
 $_lang['plugin_err_create'] = 'An error occurred while creating the plugin.';
 $_lang['plugin_err_ae'] = 'A plugin already exists with the name "[[+name]]".';
 $_lang['plugin_err_invalid_name'] = 'Plugin name is invalid.';
-$_lang['plugin_err_duplicate'] = 'An error occurred while trying to duplicate the plugin.';
+$_lang['plugin_err_duplicate'] = 'Hiba történt a beépülő kettőzésekor.';
 $_lang['plugin_err_nf'] = 'Plugin not found!';
 $_lang['plugin_err_ns'] = 'Plugin not specified.';
 $_lang['plugin_err_ns_name'] = 'Please specify a name for the plugin.';
@@ -49,4 +49,4 @@ $_lang['plugin_priority'] = 'Edit Plugin Execution Order by Event';
 $_lang['plugin_properties'] = 'Plugin Properties';
 $_lang['plugin_title'] = 'Create/edit plugin';
 $_lang['plugin_untitled'] = 'Untitled plugin';
-$_lang['plugins'] = 'Plugins';
+$_lang['plugins'] = 'Beépülők';

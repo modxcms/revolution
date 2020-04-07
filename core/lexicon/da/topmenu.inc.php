@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Administrer rettigheder gennem Grupper, Roller og Adgangs
 $_lang['admin'] = 'Administrator';
 $_lang['api_docs'] = 'API-dokumentation';
 $_lang['api_docs_desc'] = 'Komplet API-dokumentation for MODX Revolution.';
-$_lang['bespoke_manager'] = 'Manager tilpasning';
-$_lang['bespoke_manager_desc'] = 'Administrer tilpassede MODX Managere';
 $_lang['components'] = 'Extras';
 $_lang['content_types'] = 'Indholdstyper';
 $_lang['content_types_desc'] = 'Tilføj indholdstyper for ressourcer, som f.eks. .html, .js, osv.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Betjeningspanel';
 $_lang['dashboards'] = 'Betjeningspaneler';
 $_lang['dashboards_desc'] = 'Administrér brugerdefinerede betjeningspaneler';
 $_lang['edit_menu'] = 'Menuer';
-$_lang['edit_menu_desc'] = 'Administrér Managerens topmenu';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Fejlloggen';
 $_lang['eventlog_viewer_desc'] = 'Se fejlloggen (error.log) for MODX.';
 $_lang['export_site'] = 'Eksporter statisk HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Importer HTML';
 $_lang['import_site_desc'] = 'Importér HTML-filer til ressourcer';
 $_lang['installer'] = 'Installation';
 $_lang['installer_desc'] = 'Administrér tilføjelser og distributioner';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Leksika';
 $_lang['lexicon_management_desc'] = 'Rediger Manager sprogtekster';
 $_lang['logout'] = 'Log ud';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Systemindstillinger';
 $_lang['system_settings_desc'] = 'Konfigurer alle systemindstillinger';
 $_lang['tools'] = 'Værktøjer';
 $_lang['tools_desc'] = 'Værktøjer til at holde dit websted ordenligt';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Bruger';
 $_lang['usernav'] = 'User Navigation';

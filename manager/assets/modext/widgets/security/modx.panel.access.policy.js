@@ -10,7 +10,7 @@ MODx.panel.AccessPolicy = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/policy/update'
+            action: 'Security/Access/Policy/Update'
             ,id: MODx.request.id
         }
         ,id: 'modx-panel-access-policy'
@@ -19,11 +19,7 @@ MODx.panel.AccessPolicy = function(config) {
         ,plugin: ''
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('policy')+(config.record ? ': '+config.record.name : '')
-            ,id: 'modx-policy-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -45,13 +41,16 @@ MODx.panel.AccessPolicy = function(config) {
                     ,layout: 'form'
                     ,labelAlign: 'top'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                    }
                     ,items: [{
                         xtype: 'hidden'
                         ,name: 'id'
                         ,value: config.plugin
                     },{
                         xtype: 'textfield'
-                        ,fieldLabel: _('name')+'<span class="required">*</span>'
+                        ,fieldLabel: _('name')
                         ,description: MODx.expandHelp ? '' : _('policy_desc_name')
                         ,name: 'name'
                         ,maxLength: 255
@@ -60,8 +59,8 @@ MODx.panel.AccessPolicy = function(config) {
                         ,anchor: '100%'
                         ,listeners: {
                             'keyup': {scope:this,fn:function(f,e) {
-                                    Ext.getCmp('modx-policy-header').getEl().update(_('policy')+': '+f.getValue());
-                                }}
+                                Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
+                            }}
                         }
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -125,6 +124,8 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             var r = this.config.record;
 
             this.getForm().setValues(r);
+            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.name));
+
             var g = Ext.getCmp('modx-grid-policy-permissions');
             if (g) { g.getStore().loadData(r.permissions); }
 
@@ -133,6 +134,7 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
             this.initialized = true;
         }
     }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-policy-permissions');
         Ext.apply(o.form.baseParams,{
@@ -143,11 +145,23 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
     ,success: function(o) {
         Ext.getCmp('modx-grid-policy-permissions').getStore().commitChanges();
     }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-policy-header', [{
+            text: _('user_group_management'),
+            href: MODx.getPage('security/permission')
+        }]);
+    }
 });
 Ext.reg('modx-panel-access-policy',MODx.panel.AccessPolicy);
 
-
-
+/**
+ * @class MODx.grid.PolicyPermissions
+ * @extends MODx.grid.LocalGrid
+ * @constructor
+ * @param {Object} config An object of options.
+ * @xtype modx-grid-policy-permissions
+ */
 MODx.grid.PolicyPermissions = function(config) {
     config = config || {};
     var ac = new Ext.ux.grid.CheckColumn({
@@ -158,6 +172,7 @@ MODx.grid.PolicyPermissions = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-grid-policy-permissions'
+        ,showActionsColumn: false
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'security/access/policy/getAttributes'
@@ -199,7 +214,13 @@ Ext.extend(MODx.grid.PolicyPermissions,MODx.grid.LocalGrid,{
 });
 Ext.reg('modx-grid-policy-permissions',MODx.grid.PolicyPermissions);
 
-
+/**
+ * @class MODx.combo.AccessPolicyTemplate
+ * @extends MODx.combo.ComboBox
+ * @constructor
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-access-policy-template
+ */
 MODx.combo.AccessPolicyTemplate = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -214,7 +235,7 @@ MODx.combo.AccessPolicyTemplate = function(config) {
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'security/access/policy/template/getlist'
+            action: 'Security/Access/Policy/Template/GetList'
         }
         ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
             ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')

@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Processors\Browser;
+
+
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\Browser\File\Get;
 
 /**
  * Tests related to browser/file/ processors
@@ -20,8 +25,6 @@
  * @group BrowserFileProcessors
  */
 class BrowserFileProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'browser/file/';
-
     /**
      * Tests the browser/file/get processor, which grabs a file
      * @dataProvider providerGet
@@ -35,7 +38,7 @@ class BrowserFileProcessorsTest extends MODxTestCase {
         /**
          * @TODO Configure test to work with media sources
          */
-        /*$result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'get',array(
+/*        $result = $this->modx->runProcessor(Get::class,array(
            'file' => $file,
         ));
         $this->assertTrue($this->checkForSuccess($result));*/
@@ -46,8 +49,8 @@ class BrowserFileProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerGet() {
-        return array(
-            array('manager/index.php'),
-        );
+        return [
+            ['manager/index.php'],
+        ];
     }
 }

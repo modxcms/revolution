@@ -6,30 +6,31 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['access'] = 'Access Permissions';
-$_lang['base_path'] = 'Base Path';
-$_lang['base_path_relative'] = 'Base Path Relative?';
-$_lang['base_url'] = 'Base URL';
-$_lang['base_url_relative'] = 'Base URL Relative?';
-$_lang['minimum_role'] = 'Minimum Role';
-$_lang['path_options'] = 'Path Options';
-$_lang['policy'] = 'Policy';
-$_lang['source'] = 'Media Source';
-$_lang['source_access_add'] = 'Add User Group';
-$_lang['source_access_remove'] = 'Remove Access';
-$_lang['source_access_remove_confirm'] = 'Are you sure you want to remove Access to this Source for this User Group?';
-$_lang['source_access_update'] = 'Update Access';
-$_lang['source_create'] = 'Create New Media Source';
-$_lang['source_description_desc'] = 'A short description of the Media Source.';
-$_lang['source_duplicate'] = 'Duplicate Media Source';
-$_lang['source_err_ae_name'] = 'A Media Source with that name already exists! Please specify a new name.';
-$_lang['source_err_nf'] = 'Media Source not found!';
-$_lang['source_err_nfs'] = 'No Media Source can be found with the id: [[+id]].';
-$_lang['source_err_ns'] = 'Please specify the Media Source.';
-$_lang['source_err_ns_name'] = 'Please specify a name for the Media Source.';
-$_lang['source_name_desc'] = 'The name of the Media Source.';
-$_lang['source_properties.intro_msg'] = 'Manage the properties for this Source below.';
-$_lang['source_remove'] = 'Delete Media Source';
+$_lang['access'] = 'Hozzáférési engedélyek';
+$_lang['base_path'] = 'Alap elérési út';
+$_lang['base_path_relative'] = 'Alap elérési út viszonylagos?';
+$_lang['base_url'] = 'Alap webcím';
+$_lang['base_url_relative'] = 'Alap webcím viszonylagos?';
+$_lang['minimum_role'] = 'Legkisebb szükséges szerep';
+$_lang['path_options'] = 'Elérési út beállításai';
+$_lang['policy'] = 'Házirend';
+$_lang['source'] = 'Médiaforrás';
+$_lang['source_access_add'] = 'Felhasználócsoport hozzáadása';
+$_lang['source_access_remove'] = 'Hozzáférés eltávolítása';
+$_lang['source_access_remove_confirm'] = 'Biztosan eltávolítja ennek a felhasználói csoportnak a hozzáférését ehhez a forráshoz?';
+$_lang['source_access_update'] = 'Hozzáférés frissítése';
+$_lang['source_create'] = 'Új médiaforrás létrehozása';
+$_lang['source_description_desc'] = 'A médiaforrás rövid leírása.';
+$_lang['source_duplicate'] = 'A médiaforrás kettőzése';
+$_lang['source_err_ae_name'] = 'Már létezik ezzel a névvel médiaforrás! Kérjük, adjon meg másik nevet.';
+$_lang['source_err_nf'] = 'A médiaforrás nem található!';
+$_lang['source_err_init'] = 'Nem sikerült a "[[+source]]" médiaforrást előkészíteni!';
+$_lang['source_err_nfs'] = 'Nem található médiaforrás [[+id]] azonosítóval.';
+$_lang['source_err_ns'] = 'Kérjük, adja meg a médiaforrást.';
+$_lang['source_err_ns_name'] = 'Kérjük, adja meg a médiaforrás nevét.';
+$_lang['source_name_desc'] = 'A médiaforrás neve.';
+$_lang['source_properties.intro_msg'] = 'Alább kezelheti a forrás tulajdonságait.';
+$_lang['source_remove'] = 'A médiaforrás törlése';
 $_lang['source_remove_confirm'] = 'Are you sure you want to remove this Media Source? This might break any TVs you have assigned to this source.';
 $_lang['source_remove_multiple'] = 'Delete Multiple Media Sources';
 $_lang['source_remove_multiple_confirm'] = 'Are you sure you want to delete these Media Sources? This might break any TVs you have assigned to these sources.';
@@ -40,12 +41,14 @@ $_lang['source_type.file'] = 'File System';
 $_lang['source_type.file_desc'] = 'A filesystem-based source that navigates your server\'s files.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigates an Amazon S3 bucket.';
-$_lang['source_types'] = 'Source Types';
+$_lang['source_type.ftp'] = 'Állományátviteli szabályrendszer (FTP)';
+$_lang['source_type.ftp_desc'] = 'Távoli FTP kiszolgáló kezelése.';
+$_lang['source_types'] = 'Forrásfajták';
 $_lang['source_types.intro_msg'] = 'This is a list of all the installed Media Source Types you have on this MODX instance.';
 $_lang['source.access.intro_msg'] = 'Here you can restrict a Media Source to specific User Groups and apply policies for those User Groups. A Media Source with no User Groups attached to it is available to all manager users.';
-$_lang['sources'] = 'Media Sources';
-$_lang['sources.intro_msg'] = 'Manage all your Media Sources here.';
-$_lang['user_group'] = 'User Group';
+$_lang['sources'] = 'Médiaforrások';
+$_lang['sources.intro_msg'] = 'Kezelje itt az összes médiaforrást.';
+$_lang['user_group'] = 'Felhasználócsoport';
 
 /* file source type */
 $_lang['allowedFileTypes'] = 'allowedFileTypes';
@@ -68,9 +71,11 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
+$_lang['prop_file.visibility_desc'] = 'Az új állományok és mappák alapértelmezett láthatósága.';
+$_lang['no_move_folder'] = 'A médiaforrás illesztője nem támogatja a mappák mozgatását most.';
 
 /* s3 source type */
-$_lang['bucket'] = 'Bucket';
+$_lang['bucket'] = 'Vödör';
 $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
 $_lang['prop_s3.key_desc'] = 'The Amazon key for authentication to the bucket.';
 $_lang['prop_s3.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
-$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
 $_lang['prop_s3.region_desc'] = 'A vödör körzete. Például: us-west-1';
+$_lang['prop_s3.prefix_desc'] = 'Elhagyható elérési út/mappa előtag';
+$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Kiszolgáló neve vagy IP címe';
+$_lang['prop_ftp.username_desc'] = 'Felhasználónév hitelesítéshez. Lehet "névtelen".';
+$_lang['prop_ftp.password_desc'] = 'A felhasználó jelszava. Névtelen felhasználóhoz hagyja üresen.';
+$_lang['prop_ftp.url_desc'] = 'Ha ennek az FTP kiszolgálónak van nyilvános webcíme, itt beírhatja. Ezzel a médiaböngészőben láthatók lesznek a képek előnézetei.';
+$_lang['prop_ftp.port_desc'] = 'A kiszolgáló portja, alapértelmezetten 21.';
+$_lang['prop_ftp.root_desc'] = 'Alapkönyvtár, kapcsolódás után lesz megnyitva';
+$_lang['prop_ftp.passive_desc'] = 'Passzív FTP mód engedélyezése vagy tiltása';
+$_lang['prop_ftp.ssl_desc'] = 'SSL kapcsolódás engedélyezése vagy tiltása';
+$_lang['prop_ftp.timeout_desc'] = 'Kapcsolódás időtúllépése másodpercben.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

@@ -1,8 +1,13 @@
 <?php
+namespace MODX\Revolution\Tests\Controllers\Resources\StaticResource;
+
+
+use MODX\Revolution\modStaticResource;
+use MODX\Revolution\Tests\Controllers\Resources\ResourceCreateControllerTest;
 
 class StaticResourceCreateControllerTest extends ResourceCreateControllerTest
 {
-    /** @var StaticResourceCreateManagerController $controller */
+    /** @var \StaticResourceCreateManagerController $controller */
     public $controller;
 
     public $controllerName = 'StaticResourceCreateManagerController';
@@ -14,7 +19,7 @@ class StaticResourceCreateControllerTest extends ResourceCreateControllerTest
         parent::setUp();
         $this->controller->setProperties([
             'id' => 0,
-            'class_key' => 'modStaticResource',
+            'class_key' => modStaticResource::class,
             'parent' => 0,
             'context_key' => 'web',
         ]);

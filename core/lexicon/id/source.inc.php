@@ -24,6 +24,7 @@ $_lang['source_description_desc'] = 'Deskripsi singkat dari sumber Media.';
 $_lang['source_duplicate'] = 'Sumber Media duplikat';
 $_lang['source_err_ae_name'] = 'Sumber Media dengan nama itu sudah ada! Silakan tentukan nama baru.';
 $_lang['source_err_nf'] = 'Media sumber tidak ditemukan!';
+$_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'Ada sumber Media dapat ditemukan dengan id: [[+id]].';
 $_lang['source_err_ns'] = 'Silakan tentukan sumber Media.';
 $_lang['source_err_ns_name'] = 'Silakan tentukan nama untuk sumber Media.';
@@ -40,6 +41,8 @@ $_lang['source_type.file'] = 'Sistem berkas';
 $_lang['source_type.file_desc'] = 'Sumber berbasis filesystem yang menavigasi file server Anda.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Menavigasi Amazon S3.';
+$_lang['source_type.ftp'] = 'File Transfer Protocol';
+$_lang['source_type.ftp_desc'] = 'Navigates an FTP remote server.';
 $_lang['source_types'] = 'Jenis Sumber';
 $_lang['source_types.intro_msg'] = 'Ini adalah daftar semua jenis diinstal Media sumber Anda memiliki contoh MODX ini.';
 $_lang['source.access.intro_msg'] = 'Di sini Anda dapat membatasi sumber Media grup pengguna tertentu dan menerapkan kebijakan untuk kelompok pengguna tersebut. Sumber Media dengan kelompok pengguna tidak melekat padanya tersedia untuk semua pengguna pengelola.';
@@ -68,6 +71,8 @@ $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'Kualitas thumbnail diberikan, dalam skala dari 0-100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Jenis gambar dibuat sebagai thumbnail.';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -79,8 +84,20 @@ $_lang['prop_s3.skipFiles_desc'] = 'Daftar yang dipisahkan oleh koma. MODX akan 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'Kualitas thumbnail diberikan, dalam skala dari 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'Jenis gambar dibuat sebagai thumbnail.';
 $_lang['prop_s3.url_desc'] = 'URL adalah contoh Amazon S3.';
-$_lang['s3_no_move_folder'] = 'Pemindahan folder saat ini tidak didukung oleh S3 driver.';
 $_lang['prop_s3.region_desc'] = 'Daerah ember. Contoh: kami-barat-1';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['s3_no_move_folder'] = 'Pemindahan folder saat ini tidak didukung oleh S3 driver.';
+
+/* ftp source type */
+$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
+$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
+$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
+$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
+$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
 
 /* file type */
 $_lang['PNG'] = 'PNG';

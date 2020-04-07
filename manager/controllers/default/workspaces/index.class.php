@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\Transport\modTransportProvider;
+
 /**
  * Loads the workspace manager
  *
@@ -15,7 +18,7 @@
  * @subpackage manager.controllers
  */
 class WorkspacesManagerController extends modManagerController {
-    public $errors = array();
+    public $errors = [];
     /**
      * The template file for this controller
      * @var string $templateFile
@@ -75,14 +78,14 @@ class WorkspacesManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         /* ensure directories for Package Management are created */
         /** @var modCacheManager $cacheManager */
         $cacheManager = $this->modx->getCacheManager();
-        $directoryOptions = array(
+        $directoryOptions = [
             'new_folder_permissions' => $this->modx->getOption('new_folder_permissions',null,0775),
-        );
-        $errors = array();
+        ];
+        $errors = [];
 
         /* create assets/ */
         $assetsPath = $this->modx->getOption('assets_path',null,MODX_ASSETS_PATH);
@@ -90,7 +93,7 @@ class WorkspacesManagerController extends modManagerController {
             $cacheManager->writeTree($assetsPath,$directoryOptions);
         }
         if (!is_dir($assetsPath) || !is_writable($assetsPath)) {
-            $errors[] = $this->modx->lexicon('dir_err_assets',array('path' => $assetsPath));
+            $errors[] = $this->modx->lexicon('dir_err_assets', ['path' => $assetsPath]);
         }
         unset($assetsPath);
 
@@ -100,7 +103,7 @@ class WorkspacesManagerController extends modManagerController {
             $cacheManager->writeTree($assetsCompPath,$directoryOptions);
         }
         if (!is_dir($assetsCompPath) || !is_writable($assetsCompPath)) {
-            $errors[] = $this->modx->lexicon('dir_err_assets_comp',array('path' => $assetsCompPath));
+            $errors[] = $this->modx->lexicon('dir_err_assets_comp', ['path' => $assetsCompPath]);
         }
         unset($assetsCompPath);
 
@@ -110,7 +113,7 @@ class WorkspacesManagerController extends modManagerController {
             $cacheManager->writeTree($coreCompPath,$directoryOptions);
         }
         if (!is_dir($coreCompPath) || !is_writable($coreCompPath)) {
-            $errors[] = $this->modx->lexicon('dir_err_core_comp',array('path' => $coreCompPath));
+            $errors[] = $this->modx->lexicon('dir_err_core_comp', ['path' => $coreCompPath]);
         }
 
         if (!function_exists('curl_init') || !in_array('curl',get_loaded_extensions())) {
@@ -134,19 +137,19 @@ class WorkspacesManagerController extends modManagerController {
      */
     public function getDefaultProvider() {
         $default = $this->modx->getOption('default_provider');
-        $c = $this->modx->newQuery('transport.modTransportProvider');
+        $c = $this->modx->newQuery(modTransportProvider::class);
         if ($default) {
-            $c->where(array(
+            $c->where([
                 'id' => $default,
-            ));
+            ]);
         } else {
-            $c->where(array(
+            $c->where([
                 'name:=' => 'modxcms.com',
                 'OR:name:=' => 'modx.com',
-            ));
+            ]);
         }
         /** @var modTransportProvider $provider */
-        $provider = $this->modx->getObject('transport.modTransportProvider',$c);
+        $provider = $this->modx->getObject(modTransportProvider::class, $c);
         if ($provider) {
             $this->providerId = $provider->get('id');
             $this->providerName = $provider->get('name');
@@ -178,7 +181,7 @@ class WorkspacesManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('workspace','namespace');
+        return ['workspace','namespace'];
     }
 
     /**

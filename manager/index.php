@@ -14,8 +14,9 @@
  * @package modx
  * @subpackage manager
  */
-@include dirname(__FILE__) . '/config.core.php';
+@include(dirname(__FILE__) . '/config.core.php');
 if (!defined('MODX_CORE_PATH')) define('MODX_CORE_PATH', dirname(__DIR__) . '/core/');
+if (!defined('MODX_CONFIG_KEY')) define('MODX_CONFIG_KEY', 'config');
 
 /* define this as true in another entry file, then include this file to simply access the API
  * without executing the MODX request handler */
@@ -24,9 +25,9 @@ if (!defined('MODX_API_MODE')) {
 }
 
 /* check for correct version of php */
-$php_ver_comp = version_compare(phpversion(),'5.6');
+$php_ver_comp = version_compare(phpversion(),'7.0');
 if ($php_ver_comp < 0) {
-    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODX Revolution only works on 5.6 or higher.');
+    die('Wrong php version! You\'re using PHP version "'.phpversion().'", and MODX Revolution only works on 7.0 or higher.');
 }
 
 /* set the document_root */
@@ -35,14 +36,14 @@ if(!isset($_SERVER['DOCUMENT_ROOT']) || empty($_SERVER['DOCUMENT_ROOT'])) {
 }
 
 /* include the modX class */
-if (!(include_once MODX_CORE_PATH . 'model/modx/modx.class.php')) {
+if (!(require_once MODX_CORE_PATH . 'vendor/autoload.php')) {
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     die('Site temporarily unavailable!');
 }
 
-/* @var modX $modx create the modX object */
-$modx= new modX('', array(\xPDO\xPDO::OPT_CONN_INIT => array(\xPDO\xPDO::OPT_CONN_MUTABLE => true)));
-if (!is_object($modx) || !($modx instanceof modX)) {
+/* @var \MODX\Revolution\modX $modx create the modX object */
+$modx= new \MODX\Revolution\modX('', [\xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true]]);
+if (!is_object($modx) || !($modx instanceof \MODX\Revolution\modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
     header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');

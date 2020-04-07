@@ -8,8 +8,12 @@
  * files found in the top-level directory of this distribution.
  *
  */
-require_once dirname(__FILE__).'/MODxTestCase.php';
-require_once dirname(__FILE__).'/MODxControllerTestCase.php';
+namespace MODX\Revolution;
+
+require_once dirname(__FILE__).'/../../core/vendor/autoload.php';
+
+use xPDO\xPDO;
+use xPDO\xPDOException;
 
 /**
  * Main MODX test harness.
@@ -22,9 +26,9 @@ require_once dirname(__FILE__).'/MODxControllerTestCase.php';
  */
 class MODxTestHarness {
     /** @var array $fixtures */
-    protected static $fixtures = array();
+    protected static $fixtures = [];
     /** @var array $properties */
-    protected static $properties = array();
+    protected static $properties = [];
     /** @var boolean $debug */
     protected static $debug = false;
 
@@ -33,17 +37,19 @@ class MODxTestHarness {
      *
      * The instances can be reused by multiple tests and test suites.
      *
-     * @param string $class A fixture class to get an instance of.
-     * @param string $name A unique identifier for the fixture.
+     * @param string  $class   A fixture class to get an instance of.
+     * @param string  $name    A unique identifier for the fixture.
      * @param boolean $new
-     * @param array $options An array of configuration options for the fixture.
+     * @param array   $options An array of configuration options for the fixture.
+     *
      * @return object|null An instance of the specified fixture class or null on failure.
+     * @throws xPDOException
      */
-    public static function &getFixture($class, $name, $new = false, array $options = array()) {
+    public static function &getFixture($class, $name, $new = false, array $options = []) {
         if (!$new && array_key_exists($name, self::$fixtures) && self::$fixtures[$name] instanceof $class) {
             $fixture =& self::$fixtures[$name];
         } else {
-            $properties = array();
+            $properties = [];
             include_once dirname(dirname(__DIR__)) . '/core/model/modx/modx.class.php';
             include dirname(__FILE__) . '/properties.inc.php';
             self::$properties = $properties;
@@ -55,8 +61,12 @@ class MODxTestHarness {
             $driver= self::$properties['xpdo_driver'];
             switch ($class) {
                 case 'modX':
+                case modX::class:
                     if (!defined('MODX_REQP')) {
                         define('MODX_REQP',false);
+                    }
+                    if (!defined('MODX_CORE_PATH')) {
+                        define('MODX_CORE_PATH', array_key_exists('core_path', self::$properties) ? self::$properties['core_path'] : dirname(__DIR__, 2) . '/core/');
                     }
                     if (!defined('MODX_CONFIG_KEY')) {
                         define('MODX_CONFIG_KEY', array_key_exists('config_key', self::$properties) ? self::$properties['config_key'] : 'test');
@@ -76,7 +86,7 @@ class MODxTestHarness {
 
                         $fixture->initialize(self::$properties['context']);
 
-                        $fixture->user = $fixture->newObject('modUser');
+                        $fixture->user = $fixture->newObject(modUser::class);
                         $fixture->user->set('id',$fixture->getOption('modx.test.user.id', null, 1));
                         $fixture->user->set('username',$fixture->getOption('modx.test.user.username', null, 'test'));
 
@@ -86,6 +96,7 @@ class MODxTestHarness {
                     }
                     break;
                 case 'xPDO':
+                case xPDO::class:
                     $fixture = new xPDO(
                         self::$properties["{$driver}_string_dsn_test"],
                         self::$properties["{$driver}_string_username"],

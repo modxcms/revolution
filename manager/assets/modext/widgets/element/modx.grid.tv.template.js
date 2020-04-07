@@ -18,8 +18,9 @@ MODx.grid.TemplateVarTemplate = function(config) {
         id: 'modx-grid-tv-template'
         ,url: MODx.config.connector_url
         ,fields: ['id','templatename','category','category_name','description','access','menu']
+        ,showActionsColumn: false
         ,baseParams: {
-            action: 'element/tv/template/getList'
+            action: 'Element/TemplateVar/Template/GetList'
             ,tv: config.tv
         }
         ,saveParams: {
@@ -34,6 +35,12 @@ MODx.grid.TemplateVarTemplate = function(config) {
             ,dataIndex: 'templatename'
             ,width: 150
             ,sortable: true
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=element/template/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('category')
             ,dataIndex: 'category_name'
@@ -91,6 +98,7 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
+
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
@@ -99,13 +107,14 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
         //this.refresh();
         return true;
     }
+
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
-            action: 'element/tv/template/getList'
-    	};
+        this.getStore().baseParams = {
+            action: 'Element/TemplateVar/Template/GetList'
+        };
         Ext.getCmp('modx-tvtemp-filter-category').reset();
         Ext.getCmp('modx-tvtemp-search').setValue('');
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
 });

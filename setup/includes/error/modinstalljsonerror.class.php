@@ -22,7 +22,7 @@ class modInstallJSONError extends modInstallError {
 
     function __construct(&$modx, $message= '', $type= 'error') {
         $this->message= $message;
-        $this->fields= array ();
+        $this->fields= [];
         $this->type= $type;
         parent :: __construct($modx, $message);
     }
@@ -32,24 +32,24 @@ class modInstallJSONError extends modInstallError {
         @header("Content-Type: text/json; charset=UTF-8");
         if ($message != '') $this->message= $message;
 
-        return json_encode(array (
+        return json_encode([
             'message' => $this->message,
             'fields' => $this->fields,
             'type' => $this->type,
             'object' => $objarray,
             'success' => $status,
-        ));
+        ]);
     }
 
     public function addField($name, $error) {
-        $this->fields[]= array (
+        $this->fields[]= [
             'name' => $name,
             'error' => $error
-        );
+        ];
     }
 
     public function getFields() {
-        $f= array ();
+        $f= [];
         foreach ($this->fields as $fi) $f[]= $fi['name'];
         return $f;
     }

@@ -15,6 +15,10 @@
  *
  * @package setup
  */
+if ($install->isLocked()) {
+    return $parser->render('locked.tpl');
+}
+
 $install->settings->check();
 if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
@@ -28,7 +32,7 @@ if (!empty($_POST['proceed'])) {
     $_POST['context_connectors_url'] = !empty($_POST['context_connectors_url']) ? rtrim($_POST['context_connectors_url'],'/').'/' : $webUrl . 'connectors/';
     $install->settings->store($_POST);
 
-    $settings = array();
+    $settings = [];
     $settings['core_path'] = MODX_CORE_PATH;
     $settings['web_path_auto'] = isset ($_POST['context_web_path_toggle']) && $_POST['context_web_path_toggle'] ? 1 : 0;
     $settings['web_path'] = isset($_POST['context_web_path']) ? rtrim($_POST['context_web_path'],'/').'/' : MODX_INSTALL_PATH;
@@ -42,7 +46,7 @@ if (!empty($_POST['proceed'])) {
     $settings['connectors_path'] = isset($_POST['context_connectors_path']) ? rtrim($_POST['context_connectors_path'],'/').'/' : MODX_INSTALL_PATH . 'connectors/';
     $settings['connectors_url_auto'] = isset ($_POST['context_connectors_url_toggle']) && $_POST['context_connectors_url_toggle'] ? 1 : 0;
     $settings['connectors_url'] = isset($_POST['context_connectors_url']) ? rtrim($_POST['context_connectors_url'],'/').'/' : $webUrl . 'connectors/';
-    $settings['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
+    $settings['processors_path'] = MODX_CORE_PATH . 'src/Revolution/Processors/';
     $settings['assets_path'] = $settings['web_path'] . 'assets/';
     $settings['assets_url'] = $settings['web_url'] . 'assets/';
     $install->settings->store($settings);

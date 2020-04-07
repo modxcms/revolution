@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load create chunk page
  *
@@ -58,8 +61,8 @@ class ElementChunkCreateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         $placeholders['category'] = $this->getCategory($scriptProperties);
 
@@ -72,15 +75,17 @@ class ElementChunkCreateManagerController extends modManagerController {
 
     /**
      * Get the current category
-     *
      * @param array $scriptProperties
-     * @return void|modCategory
+     * @return \xPDO\Om\xPDOObject
      */
-    public function getCategory(array $scriptProperties = array()) {
+    public function getCategory(array $scriptProperties = [])
+    {
         /* grab default category if specified */
         if (isset($scriptProperties['category'])) {
-            $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
-        } else { $this->category = null; }
+            $this->category = $this->modx->getObject(modCategory::class, $scriptProperties['category']);
+        } else {
+            $this->category = null;
+        }
         return $this->category;
     }
 
@@ -88,13 +93,14 @@ class ElementChunkCreateManagerController extends modManagerController {
      * Invoke OnRichTextEditorInit event, loading the RTE
      * @return string
      */
-    public function loadRte() {
+    public function loadRte()
+    {
         $o = '';
-        if ($this->modx->getOption('use_editor') == 1) {
-            $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
-                'elements' => array('post'),
+        if ($this->modx->getOption('use_editor') === 1) {
+            $onRTEInit = $this->modx->invokeEvent('OnRichTextEditorInit', [
+                'elements' => ['post'],
                 'mode' => modSystemEvent::MODE_NEW,
-            ));
+            ]);
             if (is_array($onRTEInit)) {
                 $onRTEInit = implode('', $onRTEInit);
             }
@@ -108,13 +114,13 @@ class ElementChunkCreateManagerController extends modManagerController {
      * @return mixed
      */
     public function fireRenderEvent() {
-        $this->onChunkFormRender = $this->modx->invokeEvent('OnChunkFormRender',array(
+        $this->onChunkFormRender = $this->modx->invokeEvent('OnChunkFormRender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
             'chunk' => null,
-        ));
+        ]);
         if (is_array($this->onChunkFormRender)) $this->onChunkFormRender = implode('', $this->onChunkFormRender);
-        $this->onChunkFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onChunkFormRender);
+        $this->onChunkFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onChunkFormRender);
         return $this->onChunkFormRender;
     }
 
@@ -125,11 +131,11 @@ class ElementChunkCreateManagerController extends modManagerController {
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender',array(
+        $this->onChunkFormPrerender = $this->modx->invokeEvent('OnChunkFormPrerender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
             'chunk' => null,
-        ));
+        ]);
         if (is_array($this->onChunkFormPrerender)) { $this->onChunkFormPrerender = implode('',$this->onChunkFormPrerender); }
         $this->setPlaceholder('onChunkFormPrerender', $this->onChunkFormPrerender);
     }
@@ -156,7 +162,7 @@ class ElementChunkCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('chunk','category','propertyset','element');
+        return ['chunk','category','propertyset','element'];
     }
 
     /**

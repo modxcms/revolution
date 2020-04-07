@@ -20,11 +20,11 @@ $_lang['system_events.plugins'] = 'Plugins';
 $_lang['system_events.plugins_desc'] = 'La lista dei plugin collegati all\'evento. Controlla i plugin che dovrebbero essere collegati all\'evento.';
 
 $_lang['system_events.service'] = 'Servizio';
-$_lang['system_events.service_1'] = 'Parser Service Events';
-$_lang['system_events.service_2'] = 'Manager Access Events';
-$_lang['system_events.service_3'] = 'Web Access Service Events';
-$_lang['system_events.service_4'] = 'Cache Service Events';
-$_lang['system_events.service_5'] = 'Template Service Events';
+$_lang['system_events.service_1'] = 'Eventi del parser';
+$_lang['system_events.service_2'] = 'Eventi di accesso del Manager';
+$_lang['system_events.service_3'] = 'Eventi del Servizio Accesso Web';
+$_lang['system_events.service_4'] = 'Eventi Servizio Cache';
+$_lang['system_events.service_5'] = 'Eventi del Servizio Template';
 $_lang['system_events.service_6'] = 'Eventi definiti dall\'utente';
 
 $_lang['system_events.remove'] = 'Rimuovi evento';

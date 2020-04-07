@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modParsedManagerController;
+
 /**
  * Loads the help page
  *
@@ -45,6 +47,6 @@ class HelpManagerController extends modParsedManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('about');
+        return ['about'];
     }
 }

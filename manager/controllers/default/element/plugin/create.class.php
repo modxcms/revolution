@@ -8,6 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+
 /**
  * Load create plugin page
  *
@@ -59,13 +62,14 @@ class ElementPluginCreateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = [])
+    {
+        $placeholders = [];
 
         /* grab category if preset */
         if (isset($scriptProperties['category'])) {
-            $this->category = $this->modx->getObject('modCategory',$scriptProperties['category']);
-            if ($this->category != null) {
+            $this->category = $this->modx->getObject(modCategory::class, $scriptProperties['category']);
+            if ($this->category !== null) {
                 $placeholders['category'] = $this->category;
             }
         }
@@ -83,10 +87,10 @@ class ElementPluginCreateManagerController extends modManagerController {
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
-        $this->onPluginFormPrerender = $this->modx->invokeEvent('OnPluginFormPrerender',array(
+        $this->onPluginFormPrerender = $this->modx->invokeEvent('OnPluginFormPrerender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($this->onPluginFormPrerender)) $this->onPluginFormPrerender = implode('',$this->onPluginFormPrerender);
         $this->setPlaceholder('onPluginFormPrerender', $this->onPluginFormPrerender);
     }
@@ -96,12 +100,12 @@ class ElementPluginCreateManagerController extends modManagerController {
      * @return string
      */
     public function fireRenderEvent() {
-        $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender',array(
+        $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender', [
             'id' => 0,
             'mode' => modSystemEvent::MODE_NEW,
-        ));
+        ]);
         if (is_array($this->onPluginFormRender)) $this->onPluginFormRender = implode('',$this->onPluginFormRender);
-        $this->onPluginFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$this->onPluginFormRender);
+        $this->onPluginFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$this->onPluginFormRender);
         return $this->onPluginFormRender;
     }
 
@@ -127,7 +131,7 @@ class ElementPluginCreateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('plugin','category','system_events','propertyset','element');
+        return ['plugin','category','system_events','propertyset','element'];
     }
 
     /**

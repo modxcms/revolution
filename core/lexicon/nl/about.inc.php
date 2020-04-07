@@ -9,10 +9,10 @@
 $_lang['help_page_title'] = 'Help & Ondersteuning';
 $_lang['help_main_head'] = 'MODX is hier voor jou';
 $_lang['help_main_subhead'] = 'Kijk hieronder hoe je ondersteuning voor je MODX project kunt krijgen.<br>Meer details op <a href="https://modx.com/community/free-support-options">http://modx.com/community/free-support-options</a> of bel +1 (469) 777-6639';
-$_lang['forums'] = 'Forums';
-$_lang['forums_title'] = 'MODX Community Forums';
+$_lang['forums'] = 'Fora';
+$_lang['forums_title'] = 'MODX Community Fora';
 $_lang['forums_description'] = 'Gratis ondersteuning door de Community';
-$_lang['forums_link'] = 'http://forums.modx.com';
+$_lang['forums_link'] = 'https://community.modx.com/';
 $_lang['docs'] = 'Documentatie';
 $_lang['docs_title'] = 'Bekijk de (engelstalige) (MODX) handleiding';
 $_lang['docs_description'] = 'Bekijk de officiele handleidingen';

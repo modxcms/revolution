@@ -27,7 +27,25 @@ MODx.loadWelcomePanel = function(url) {
         ,height: 500
         ,modal: true
         ,layout: 'fit'
-        ,html: '<iframe onload="parent.MODx.helpWindow.getEl().unmask();" src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
+        ,items: [{
+            xtype: 'container'
+            ,layout: {
+                type: 'vbox'
+                ,align: 'stretch'
+            }
+            ,width: '100%'
+            ,height: '100%'
+            ,items: [{
+                autoEl: {
+                    tag: 'iframe'
+                    ,src: url
+                    ,width: '100%'
+                    ,height: '100%'
+                    ,frameBorder: 0
+                    ,onload: 'parent.MODx.helpWindow.getEl().unmask();'
+                }
+            }]
+        }]
     });
     MODx.helpWindow.show(Ext.getBody());
 };

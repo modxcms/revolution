@@ -3,11 +3,14 @@
  * Default Media Sources
  * @var xPDO $xpdo
  */
-$collection[1]= $xpdo->newObject('sources.modMediaSource');
-$collection[1]->fromArray(array (
+
+use MODX\Revolution\Sources\modMediaSource;
+
+$collection[1]= $xpdo->newObject(modMediaSource::class);
+$collection[1]->fromArray([
   'id' => 1,
   'name' => 'Filesystem',
   'description' => '',
-  'class_key' => 'sources.modFileMediaSource',
-  'properties' => array(),
-), '', true, true);
+  'class_key' => 'MODX\Revolution\Sources\modFileMediaSource',
+  'properties' => [],
+], '', true, true);

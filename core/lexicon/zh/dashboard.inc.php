@@ -19,10 +19,19 @@ $_lang['onlineusers_action'] = '行为';
 $_lang['onlineusers_actionid'] = '行为ID';
 $_lang['onlineusers_ipaddress'] = '用户 IP 地址';
 $_lang['onlineusers_lasthit'] = '最后点击';
-$_lang['onlineusers_message'] = '此列表显示最近20分钟内的活动用户（当前时间是 [[+curtime]]）';
+$_lang['onlineusers_message'] = '此列表显示在过去20分钟内处于活动状态的所有用户:';
 $_lang['onlineusers_title'] = '在线用户';
 $_lang['onlineusers_user'] = '用户';
 $_lang['onlineusers_userid'] = '用户ID';
+
+$_lang['updates_sort'] = '排序';
+$_lang['updates_status'] = '状态';
+$_lang['updates_action'] = '行为';
+$_lang['updates_available'] = '更新可用';
+$_lang['updates_update'] = '更新';
+$_lang['updates_ok'] = '最新';
+$_lang['updates_extras'] = '插件';
+
 $_lang['quicklinks'] = '快速链接';
 $_lang['security_notices'] = '安全通知';
 $_lang['view_tree'] = '视图树';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Polic
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'เอกสารประกอบของ API';
 $_lang['api_docs_desc'] = 'เอกสารประกอบของ MODX Revolution API';
-$_lang['bespoke_manager'] = 'Manager Customization';
-$_lang['bespoke_manager_desc'] = 'Manage bespoke MODX Managers';
 $_lang['components'] = 'ส่วนประกอบ';
 $_lang['content_types'] = 'ประเภทเนื้อหา';
 $_lang['content_types_desc'] = 'เพิ่มประเภทเนื้อหาให้กับรีซอร์ส เช่น .html, .js และอื่นๆ';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'แดชบอร์ด';
 $_lang['dashboards'] = 'แดชบอร์ด';
 $_lang['dashboards_desc'] = 'จัดการการกำหนดค่าของแดชบอร์ดทั้งหมด';
 $_lang['edit_menu'] = 'Menus';
-$_lang['edit_menu_desc'] = 'จัดการแอ็กชันและโครงสร้างของท็อปเมนู';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'บันทึกข้อผิดพลาด';
 $_lang['eventlog_viewer_desc'] = 'ดูไฟล์บันทึกข้อผิดพลาดของ MODX';
 $_lang['export_site'] = 'ส่งออกสแตติก HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'นำเข้า HTML';
 $_lang['import_site_desc'] = 'นำเข้ากลุ่มไฟล์ HTML สู่เว็บไซต์';
 $_lang['installer'] = 'Installer';
 $_lang['installer_desc'] = 'Manage Add-ons and Distributions';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'ตัวจัดการ Lexicon';
 $_lang['lexicon_management_desc'] = 'แก้ไขสตริงของภาษาต่างๆภายใน MODX เมเนเจอร์';
 $_lang['logout'] = 'ลงชื่อออก';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'ตั้งค่าระบบ';
 $_lang['system_settings_desc'] = 'เปลี่ยนหรือสร้างการตั้งค่าระบบที่ใช้ทั่วเว็บไซต์';
 $_lang['tools'] = 'เครื่องมือ';
 $_lang['tools_desc'] = 'Utilities to keep your site sorted';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'ผู้ใช้';
 $_lang['usernav'] = 'User Navigation';

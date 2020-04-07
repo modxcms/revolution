@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Kontext';
 $_lang['context_add'] = 'Lägg till kontext';
-$_lang['context_create'] = 'Skapa kontext';
+$_lang['context_create'] = 'Ny kontext';
 $_lang['context_data'] = 'Kontextdata';
 $_lang['context_duplicate'] = 'Duplicera kontext';
 $_lang['context_err_ae'] = 'En kontext med det namnet finns redan.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Uppdatera kontext';
 $_lang['context_remove'] = 'Ta bort kontext';
 $_lang['context_remove_confirm'] = 'Är du säker på att du vill ta bort den här kontexten? Borttagningen är permanent och går inte att ångra.';
 $_lang['context_settings'] = 'Kontextinställningar';
-$_lang['context_settings_desc'] = 'Här kan du göra inställningar för denna kontext. Kontextinställningar åsidosätter systeminställningar med samma nyckel.';
+$_lang['context_settings_desc'] = 'Här kan du göra inställningar som är specifika för den här kontexten. Kontextinställningar åsidosätter systeminställningar med samma nyckel. <b>Varje inställning blir tillgänglig via platshållaren [[++key]].</b>';
 $_lang['context_update'] = 'Uppdatera kontext';
 $_lang['context_with_key_not_found'] = 'Kontexten med nyckeln %s kunde inte hittas!';
 $_lang['contexts'] = 'Kontexter';

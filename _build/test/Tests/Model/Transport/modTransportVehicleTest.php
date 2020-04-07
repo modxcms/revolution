@@ -9,6 +9,10 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Transport;
+
+
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modTransportVehicle class.

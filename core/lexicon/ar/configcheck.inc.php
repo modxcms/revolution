@@ -21,7 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'هذا يعني أن صفحة
 $_lang['configcheck_errorpage_unpublished'] = 'صفحة الخطأ الخاصة بموقعك غير منشورة أو غير موجودة.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'هذا يعني أن صفحة الخطأ الخاص بك غير قابلة للوصول إلى الجمهور العام. انشر الصفحة أو تأكد من أن يتم إسنادها إلى مستند موجود في شجرة الموقع الخاص بك في النظام &gt; قائمة إعدادات النظام.';
 $_lang['configcheck_htaccess'] = 'المجلد الأساسي يمكن الوصول إليه عن طريق شبكة الإنترنت';
-$_lang['configcheck_htaccess_msg'] = 'MODX كشف عن أن المجلد الأساسي الخاص بك (جزئيا) متاحة للجمهور. <strong>هذا غير مستحسن ومخاطره في الأمان.</strong> إذا كان التثبيت MODX الخاص بك قيد التشغيل على خادم ويب أباتشي فينبغي على الأقل إعداد الملف.htaccess داخل الأساسية المجلد <em>[[+fileLocation]]</em>. وهذا يمكن أن يتم بسهولة بإعادة تسمية الملف ht.access المثال الموجود هناك إلى.htaccess. <p>هناك أساليب أخرى ومزودات الويب يمكنك استخدام، يرجى قراءة <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution"> دليل MODX تصلب</a> لمزيد من المعلومات حول تأمين موقع الويب الخاص بك.</p> إذا كان يمكنك إعداد كل شيء بشكل صحيح، التصفح مثلاً ل <a href="[[+checkUrl]]" target="_blank"> التغيير</a> ينبغي أن تعطيك من 403 (تم رفض الإذن) أو أفضل من 404 (لم يتم العثور على). إذا كان يمكنك أن ترى أن التغيير هناك في المستعرض، شيئا ما لا يزال خطأ وتحتاج إلى إعادة تكوين أو الاتصال بخبير لحل هذه المشكلة.';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'دليل الصور غير قابل للكتابة';
 $_lang['configcheck_images_msg'] = 'دليل الصور غير قابل للكتابة، أوغير موجود. هذا يعني أن وظائف الصور في المدير لن تعمل!';
 $_lang['configcheck_installer'] = 'التركيب مازال حاضر';

@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  *
  */
+namespace MODX\Revolution\Tests\Cases\Request;
+
+use MODX\Revolution\modDocument;
+use MODX\Revolution\modResource;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to verifying and setting up the test environment.
@@ -23,8 +28,8 @@ class MakeUrlTest extends MODxTestCase {
         parent::setUp();
 
         /** @var modResource $resource */
-        $resource = $this->modx->newObject('modResource');
-        $resource->fromArray(array(
+        $resource = $this->modx->newObject(modResource::class);
+        $resource->fromArray([
             'id' => 12345,
             'pagetitle' => 'Unit Test Resource',
             'type' => 'document',
@@ -43,14 +48,14 @@ class MakeUrlTest extends MODxTestCase {
             'deleted' => false,
             'menutitle' => 'Unit Test Resource',
             'hidemenu' => false,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
             'context_key' => 'web',
             'content_type' => 1,
-        ),'',true,true);
+        ],'',true,true);
         $resource->save();
 
-        $resource = $this->modx->newObject('modResource');
-        $resource->fromArray(array(
+        $resource = $this->modx->newObject(modResource::class);
+        $resource->fromArray([
             'id' => 12346,
             'parent' => 12345,
             'pagetitle' => 'Unit Test Child Resource',
@@ -69,10 +74,10 @@ class MakeUrlTest extends MODxTestCase {
             'deleted' => false,
             'menutitle' => 'Unit Test Child Resource',
             'hidemenu' => false,
-            'class_key' => 'modDocument',
+            'class_key' => modDocument::class,
             'context_key' => 'web',
             'content_type' => 1,
-        ),'',true,true);
+        ],'',true,true);
         $resource->save();
 
         $this->modx->setOption('friendly_urls', true);
@@ -85,9 +90,9 @@ class MakeUrlTest extends MODxTestCase {
     public function tearDown() {
         parent::tearDown();
         /** @var modResource $resource */
-        $resource = $this->modx->getObject('modResource',array('pagetitle' => 'Unit Test Resource'));
+        $resource = $this->modx->getObject(modResource::class, ['pagetitle' => 'Unit Test Resource']);
         if ($resource) $resource->remove();
-        $resource = $this->modx->getObject('modResource',array('pagetitle' => 'Unit Test Child Resource'));
+        $resource = $this->modx->getObject(modResource::class, ['pagetitle' => 'Unit Test Child Resource']);
         if ($resource) $resource->remove();
     }
 
@@ -106,12 +111,12 @@ class MakeUrlTest extends MODxTestCase {
      * @return array
      */
     public function providerSingleParameter() {
-        return array(
+        return [
             // Dummy data to pass on first makeUrl
-            array(12345, ''),
-            array(12345, 'unit-test/'),
-            array(12346, 'unit-test/child.html'),
-        );
+            [12345, ''],
+            [12345, 'unit-test/'],
+            [12346, 'unit-test/child.html'],
+        ];
     }
 
     /**
@@ -132,12 +137,12 @@ class MakeUrlTest extends MODxTestCase {
      * @return array
      */
     public function providerArguments() {
-        return array(
-            array(12345,array(),'unit-test/'),
-            array(12345,array('one' => 1),'unit-test/?one=1'),
-            array(12345,array('one' => 1,'two' => 2),'unit-test/?one=1&two=2'),
-            array(12345,array('one' => 1,'two' => 2),'unit-test/?one=1&amp;two=2',true),
-        );
+        return [
+            [12345, [],'unit-test/'],
+            [12345, ['one' => 1],'unit-test/?one=1'],
+            [12345, ['one' => 1,'two' => 2],'unit-test/?one=1&two=2'],
+            [12345, ['one' => 1,'two' => 2],'unit-test/?one=1&amp;two=2',true],
+        ];
     }
 
     /**
@@ -156,12 +161,12 @@ class MakeUrlTest extends MODxTestCase {
      * @return array
      */
     public function providerScheme() {
-        return array(
-            array(12345,'','unit-test/'),
-            array(12345,'abs','/unit-test/'),
-            array(12345,'full','http://unit.modx.com/unit-test/'),
-            array(12345,'http','http://unit.modx.com/unit-test/'),
-            array(12345,'https','https://unit.modx.com/unit-test/'),
-        );
+        return [
+            [12345,'','unit-test/'],
+            [12345,'abs','/unit-test/'],
+            [12345,'full','http://unit.modx.com/unit-test/'],
+            [12345,'http','http://unit.modx.com/unit-test/'],
+            [12345,'https','https://unit.modx.com/unit-test/'],
+        ];
     }
 }

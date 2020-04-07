@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modMenu;
+use xPDO\xPDO;
+use xPDO\Cache\xPDOCacheManager;
+
 /**
  * Loads the main structure
  *
@@ -107,10 +112,10 @@ class TopMenu
         if (empty($username)) {
             $username = $this->modx->getLoginUserName();
         }
-        $placeholders = array(
+        $placeholders = [
             'username' => $username,
             'userImage' => $this->getUserImage(),
-        );
+        ];
 
         $this->controller->setPlaceholders($placeholders);
     }
@@ -225,7 +230,7 @@ class TopMenu
     {
         $key = $this->getCacheKey($name);
 
-        $menus = $this->modx->cacheManager->get($key, array(
+        $menus = $this->modx->cacheManager->get($key, [
             xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_menu_key', null, 'menu'),
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption(
                 'cache_menu_handler',
@@ -237,11 +242,11 @@ class TopMenu
                 null,
                 $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
             ),
-        ));
+        ]);
 
         if ($menus == null || !is_array($menus)) {
             /** @var modMenu $menu */
-            $menu = $this->modx->newObject('modMenu');
+            $menu = $this->modx->newObject(modMenu::class);
             $menus = $menu->rebuildCache($name);
             unset($menu);
         }
@@ -288,7 +293,7 @@ class TopMenu
         if (empty($perms)) {
             return true;
         }
-        $permissions = array();
+        $permissions = [];
         $exploded = explode(',', $perms);
         foreach ($exploded as $permission) {
             $permissions[trim($permission)] = true;
@@ -305,13 +310,13 @@ class TopMenu
      *
      * @return void
      */
-    public function processSubMenus(&$output, array $menus = array())
+    public function processSubMenus(&$output, array $menus = [])
     {
         foreach ($menus as $menu) {
             if (!$this->hasPermission($menu['permissions'])) {
                 continue;
             }
-            
+
             $sub = (!empty($menu['children'])) ? ' class="sub"' : '';
             $smTpl = '<li id="'.$menu['id'].'"'.$sub.'>'."\n";
 

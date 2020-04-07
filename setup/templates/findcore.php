@@ -18,7 +18,7 @@ if ($posted) {
     if (is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
         $content = file_get_contents(MODX_SETUP_PATH . 'includes/config.core.php');
         $pattern = "/define\s*\(\s*'MODX_CORE_PATH'\s*,.*\);/";
-        $core_path = str_replace(array('{','}',"'",'"','\$'), '', $core_path);
+        $core_path = str_replace(['{','}',"'",'"','\$'], '', $core_path);
         $replacement = "define ('MODX_CORE_PATH', '{$core_path}');";
         $content = preg_replace($pattern, $replacement, $content);
         file_put_contents(MODX_SETUP_PATH . 'includes/config.core.php', $content);
@@ -29,10 +29,11 @@ if ($posted) {
     $core_path = MODX_CORE_PATH;
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>MODX Revolution Core Finder</title>
+    <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" media="all" href="assets/css/reset.css" />
@@ -46,18 +47,6 @@ if ($posted) {
     <link href="assets/css/style.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="assets/js/ext-core.js"></script>
     <script type="text/javascript" src="assets/js/modx.setup.js"></script>
-    <!--[if lt IE 7]>
-        <script type="text/javascript" src="assets/js/inc/say.no.to.ie.6.js"></script>
-        <style type="text/css">
-        body {
-            behavior:url("assets/js/inc/csshover2.htc");
-        }
-        .pngfix {
-            behavior:url("assets/js/inc/iepngfix.htc");
-        }
-        </style>
-    <![endif]-->
-
 </head>
 
 <body>
@@ -101,7 +90,7 @@ if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 } else {
 ?>
                         <span class="field_error">ERROR: Your MODX_CORE_PATH is invalid; please specify the correct path in the
-                        field above and click Submit.</span>
+                        field above and click Submit. The path has to contain a trailing slash.</span>
 <?php
 }
 ?>
@@ -124,7 +113,7 @@ if (!is_writable(MODX_SETUP_PATH . 'includes/config.core.php')) {
 <div id="footer">
     <div id="footer-inner">
     <div class="container_12">
-        <p>&copy; 2005-<?php echo date('Y'); ?> the <a href="http://www.modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
+        <p>&copy; 2005-<?php echo date('Y'); ?> the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"  style="color: green; text-decoration:underline">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.</p>
         <p>MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!</p>
     </div>
     </div>

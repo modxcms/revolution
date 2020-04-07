@@ -70,6 +70,7 @@ class modInstallRequest {
         $this->parser->set('_lang',$this->install->lexicon->fetch());
 
         $this->action= !empty($this->install->action) ? $this->install->action : 'language';
+
         $this->parser->set('action',$this->install->action);
 
         $output = $this->parser->fetch('header.tpl');
@@ -93,7 +94,7 @@ class modInstallRequest {
      * @param array $config An array of config attributes.
      * @return array A copy of the config attributes array.
      */
-    public function getConfig($mode = 0, array $config = array ()) {
+    public function getConfig($mode = 0, array $config = []) {
         switch ($mode) {
             case modInstall::MODE_UPGRADE_EVO :
                 $this->loadConfigReader('config.modEvolutionConfigReader');
@@ -122,10 +123,10 @@ class modInstallRequest {
      * @param array $config
      * @return array
      */
-    public function setDefaultPaths(array $config = array()) {
+    public function setDefaultPaths(array $config = []) {
         $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
         $webUrl= rtrim($webUrl,'/').'/';
-        $defaults = array();
+        $defaults = [];
         $defaults['context_web_path'] = rtrim(MODX_INSTALL_PATH,'/').'/';
         $defaults['context_web_url'] = $webUrl;
         $defaults['context_mgr_path'] = rtrim(MODX_INSTALL_PATH,'/') . '/manager/';
@@ -153,7 +154,7 @@ class modInstallRequest {
         $defaults['mgr_url_auto'] = 0;
         $defaults['connectors_path_auto'] = 0;
         $defaults['connectors_url_auto'] = 0;
-        $defaults['processors_path'] = MODX_CORE_PATH . 'model/modx/processors/';
+        $defaults['processors_path'] = MODX_CORE_PATH . 'src/Revolution/Processors/';
         $defaults['assets_path'] = $defaults['web_path'] . 'assets/';
         $defaults['assets_url'] = $defaults['web_url'] . 'assets/';
 

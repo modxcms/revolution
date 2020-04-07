@@ -8,6 +8,13 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modUserGroup;
+use MODX\Revolution\modUserGroupRole;
+use MODX\Revolution\Sources\modAccessMediaSource;
+use MODX\Revolution\Sources\modMediaSource;
+
 /**
  * Loads the Media Sources page
  *
@@ -18,9 +25,9 @@ class SourceUpdateManagerController extends modManagerController {
     /** @var modMediaSource $source */
     public $source;
     /** @var array $sourceArray An array of fields for the source */
-    public $sourceArray = array();
+    public $sourceArray = [];
     /** @var array $sourceDefaultProperties The default properties on the source */
-    public $sourceDefaultProperties = array();
+    public $sourceDefaultProperties = [];
     /**
      * Check for any permissions or requirements to load page
      * @return bool
@@ -52,11 +59,11 @@ class SourceUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('source_err_ns'));
         }
-        $this->source = $this->modx->getObject('sources.modMediaSource', array('id' => $this->scriptProperties['id']));
+        $this->source = $this->modx->getObject('sources.modMediaSource', ['id' => $this->scriptProperties['id']]);
         if (empty($this->source)) return $this->failure($this->modx->lexicon('source_err_nf'));
 
         $this->sourceArray = $this->source->toArray();
@@ -65,24 +72,24 @@ class SourceUpdateManagerController extends modManagerController {
 
         $this->getDefaultProperties();
 
-        return array();
+        return [];
     }
 
     public function getProperties() {
         $properties = $this->source->getProperties();
-        $data = array();
+        $data = [];
         foreach ($properties as $property) {
-            $data[] = array(
+            $data[] = [
                 $property['name'],
                 !empty($property['desc']) ? $property['desc'] : '',
                 !empty($property['type']) ? $property['type'] : 'textfield',
-                !empty($property['options']) ? $property['options'] : array(),
+                !empty($property['options']) ? $property['options'] : [],
                 $property['value'],
                 !empty($property['lexicon']) ? $property['lexicon'] : '',
                 !empty($property['overridden']) ? $property['overridden'] : 0,
                 !empty($property['desc_trans']) ? $property['desc_trans'] : '',
                 !empty($property['name_trans']) ? $property['name_trans'] : '',
-            );
+            ];
         }
         $this->sourceArray['properties'] = $data;
     }
@@ -90,45 +97,45 @@ class SourceUpdateManagerController extends modManagerController {
     public function getDefaultProperties() {
         $default = $this->source->getDefaultProperties();
         $default = $this->source->prepareProperties($default);
-        $data = array();
+        $data = [];
         foreach ($default as $property) {
-            $data[] = array(
+            $data[] = [
                 $property['name'],
                 !empty($property['desc']) ? $property['desc'] : '',
                 !empty($property['type']) ? $property['type'] : 'textfield',
-                !empty($property['options']) ? $property['options'] : array(),
+                !empty($property['options']) ? $property['options'] : [],
                 $property['value'],
                 !empty($property['lexicon']) ? $property['lexicon'] : '',
                 0,
                 !empty($property['desc_trans']) ? $property['desc_trans'] : '',
                 !empty($property['name_trans']) ? $property['name_trans'] : '',
-            );
+            ];
         }
         $this->sourceDefaultProperties = $data;
         return $data;
     }
 
     public function getAccess() {
-        $c = $this->modx->newQuery('sources.modAccessMediaSource');
-        $c->innerJoin('sources.modMediaSource','Target');
-        $c->innerJoin('modAccessPolicy','Policy');
-        $c->innerJoin('modUserGroup','Principal');
-        $c->innerJoin('modUserGroupRole','MinimumRole');
-        $c->where(array(
+        $c = $this->modx->newQuery(modAccessMediaSource::class);
+        $c->innerJoin(modMediaSource::class, 'Target');
+        $c->innerJoin(modAccessPolicy::class, 'Policy');
+        $c->innerJoin(modUserGroup::class, 'Principal');
+        $c->innerJoin(modUserGroupRole::class, 'MinimumRole');
+        $c->where([
             'target' => $this->source->get('id'),
-        ));
-        $c->select($this->modx->getSelectColumns('sources.modAccessMediaSource','modAccessMediaSource'));
-        $c->select(array(
+        ]);
+        $c->select($this->modx->getSelectColumns(modAccessMediaSource::class, 'modAccessMediaSource'));
+        $c->select([
             'target_name' => 'Target.name',
             'principal_name' => 'Principal.name',
             'policy_name' => 'Policy.name',
             'authority_name' => 'MinimumRole.name',
-        ));
-        $acls = $this->modx->getCollection('sources.modAccessMediaSource',$c);
-        $access = array();
+        ]);
+        $acls = $this->modx->getCollection(modAccessMediaSource::class,$c);
+        $access = [];
         /** @var modAccessMediaSource $acl */
         foreach ($acls as $acl) {
-            $access[] = array(
+            $access[] = [
                 $acl->get('id'),
                 $acl->get('target'),
                 $acl->get('target_name'),
@@ -140,7 +147,7 @@ class SourceUpdateManagerController extends modManagerController {
                 $acl->get('policy'),
                 $acl->get('policy_name'),
                 $acl->get('context_key'),
-            );
+            ];
         }
 
         $this->sourceArray['access'] = $this->modx->toJSON($access);
@@ -152,7 +159,7 @@ class SourceUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('source_update');
+        return $this->modx->lexicon('source').': '.$this->sourceArray['name'];
     }
 
     /**
@@ -168,7 +175,7 @@ class SourceUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('source','namespace','propertyset');
+        return ['source','namespace','propertyset'];
     }
 
     /**

@@ -157,10 +157,11 @@ MODx.grid.PackageBrowserGrid = function(config) {
                  ,'downloads','releasedon','screenshot','license','location','version-compiled'
                  ,'supports_db','minimum_supports','breaks_at','featured','audited','changelog'
                  ,'downloaded','dlaction-text','dlaction-icon']
+        ,showActionsColumn: false
         ,url: MODx.config.connector_url
         ,baseParams: {
 			provider: MODx.provider
-			,action: 'workspace/packages/rest/getList'
+			,action: 'Workspace/Packages/Rest/GetList'
 		}
         ,paging: true
         ,pageSize: 10
@@ -249,7 +250,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
     }
 
 	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
-		var values = { name: value, actions: null };
+		var values = { name: value, actions: null, message: null };
 		var h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
@@ -276,7 +277,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		Ext.Ajax.request({
 			url : this.config.url
 			,params : {
-				action : 'workspace/packages/rest/download'
+				action : 'Workspace/Packages/Rest/Download'
 				,info : rec.location+'::'+rec.signature
 				,provider : MODx.provider
 			}
@@ -531,7 +532,7 @@ MODx.PackageBrowserThumbsView = function(config) {
                  ,'downloads','releasedon','screenshot','license','supports','location','version-compiled', 'featured'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,baseParams: {
-            action: 'workspace/packages/rest/getList'
+            action: 'Workspace/Packages/Rest/GetList'
             ,provider: MODx.provider
         }
         ,tpl: this.templates.thumb
@@ -631,7 +632,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'workspace/packages/rest/download'
+                action: 'Workspace/Packages/Rest/Download'
                 ,info: data.location+'::'+data.signature
                 ,provider: MODx.provider || MODx.config.default_provider
             }
@@ -813,7 +814,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 		MODx.Ajax.request({
             url: this.url
             ,params: {
-                action: 'workspace/packages/rest/download'
+                action: 'Workspace/Packages/Rest/Download'
                 ,info: record.location+'::'+record.signature
                 ,provider: MODx.provider || MODx.config.default_provider
             }

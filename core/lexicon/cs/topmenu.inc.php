@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'Správa oprávnění prostřednictvím skupin, rolí a p�
 $_lang['admin'] = 'Admin';
 $_lang['api_docs'] = 'API dokumentace';
 $_lang['api_docs_desc'] = 'Kompletní API dokumentace pro MODX Revolution.';
-$_lang['bespoke_manager'] = 'Přizpůsobení manageru';
-$_lang['bespoke_manager_desc'] = 'Správa přizpůsobení MODX manageru';
 $_lang['components'] = 'Komponenty';
 $_lang['content_types'] = 'Typy obsahů';
 $_lang['content_types_desc'] = 'Správa typů obsahů pro dokumenty, např. .html, .js, atd.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Nástěnka';
 $_lang['dashboards'] = 'Nástěnky';
 $_lang['dashboards_desc'] = 'Správa nastavení všech nástěnek.';
 $_lang['edit_menu'] = 'Menu';
-$_lang['edit_menu_desc'] = 'Správa akcí a struktury horního menu.';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Chybové zprávy';
 $_lang['eventlog_viewer_desc'] = 'Zobrazení MODX chybových zpráv.';
 $_lang['export_site'] = 'Exportovat statické HTML';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'Importovat HTML';
 $_lang['import_site_desc'] = 'Dávkové importování HTML souborů do portálu.';
 $_lang['installer'] = 'Instalátor';
 $_lang['installer_desc'] = 'Spravovat doplňky a distribuce';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Správce slovníků';
 $_lang['lexicon_management_desc'] = 'Úprava všech jazykových záznamů pro MODX.';
 $_lang['logout'] = 'Odhlásit';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Konfigurace systému';
 $_lang['system_settings_desc'] = 'Změna nebo vytvoření systémového nastavení v rámci celého portálu.';
 $_lang['tools'] = 'Nástroje';
 $_lang['tools_desc'] = 'Nástroje pro údržbu vašich stránek';
-$_lang['topnav'] = 'Hlavní menu';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Uživatel';
 $_lang['usernav'] = 'Uživatelské menu';

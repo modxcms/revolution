@@ -9,6 +9,14 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Processors\Context;
+
+
+use Exception;
+use MODX\Revolution\modContext;
+use MODX\Revolution\modContextSetting;
+use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\Context\Setting\Create;
 
 /**
  * Tests related to context/setting/ processors
@@ -23,32 +31,24 @@
  * @group modContextSetting
  */
 class ContextSettingProcessorsTest extends MODxTestCase {
-    const PROCESSOR_LOCATION = 'context/setting/';
-
-    /**
-     * Setup some basic data for this test.
-     */
     public function setUp() {
         parent::setUp();
         /** @var modContext $ctx */
-        $ctx = $this->modx->newObject('modContext');
+        $ctx = $this->modx->newObject(modContext::class);
         $ctx->set('key','unittest');
         $ctx->set('description','The unit test context for context settings.');
         $ctx->save();
     }
 
-    /**
-     * Cleanup data after this test.
-     */
     public function tearDown() {
         parent::tearDown();
         /** @var modContext $ctx */
-        $ctx = $this->modx->getObject('modContext','unittest');
+        $ctx = $this->modx->getObject(modContext::class,'unittest');
         if ($ctx) $ctx->remove();
 
-        $settings = $this->modx->getCollection('modContextSetting',array(
+        $settings = $this->modx->getCollection(modContextSetting::class, [
             'context_key' => 'unittest',
-        ));
+        ]);
         /** @var modContextSetting $setting */
         foreach ($settings as $setting) {
             $setting->remove();
@@ -66,9 +66,9 @@ class ContextSettingProcessorsTest extends MODxTestCase {
         if (empty($ctx)) return;
         $this->assertTrue(true);
         return;
-        /*
-        try {
-            $result = $this->modx->runProcessor(self::PROCESSOR_LOCATION.'create',array(
+
+        /*try {
+            $result = $this->modx->runProcessor(Create::class,array(
                 'ctx' => $ctx,
                 'key' => $key,
                 'description' => $description,
@@ -77,7 +77,7 @@ class ContextSettingProcessorsTest extends MODxTestCase {
             $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
         }
         $s = $this->checkForSuccess($result);
-        $ct = $this->modx->getCount('modContext',$ctx);
+        $ct = $this->modx->getCount(modContext::class,$ctx);
         $this->assertTrue($s && $ct > 0,'Could not create context: `'.$ctx.'`: '.$result['message']);*/
     }
     /**
@@ -85,8 +85,8 @@ class ContextSettingProcessorsTest extends MODxTestCase {
      * @return array
      */
     public function providerContextSettingCreate() {
-        return array(
-            array('unittest','unittest_setting',''),
-        );
+        return [
+            ['unittest','unittest_setting',''],
+        ];
     }
 }

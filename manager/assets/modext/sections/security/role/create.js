@@ -15,8 +15,8 @@ MODx.page.CreateRole = function(config) {
 	Ext.applyIf(config,{
 		form: 'mutate_role'
 		,actions: {
-            'new': 'security/role/create'
-            ,edit: 'security/role/update'
+            'new': 'Security/Role/Create'
+            ,edit: 'Security/Role/Update'
             ,cancel: 'security/role'
         }
         ,buttons: [{

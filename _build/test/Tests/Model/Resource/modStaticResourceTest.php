@@ -9,6 +9,10 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Resource;
+
+
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modStaticResource class.
@@ -19,4 +23,10 @@
  * @group Resource
  * @group modStaticResource
  */
-class modStaticResourceTest extends MODxTestCase {}
+class modStaticResourceTest extends MODxTestCase {
+
+    public function testIncomplete()
+    {
+        $this->markTestIncomplete( 'This test has not been implemented yet.');
+    }
+}

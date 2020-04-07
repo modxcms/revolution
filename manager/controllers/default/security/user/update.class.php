@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\modUser;
+
 /**
  * Loads update user page
  *
@@ -18,9 +22,9 @@ class SecurityUserUpdateManagerController extends modManagerController {
     /** @var string $onUserFormRender */
     public $onUserFormRender = '';
     /** @var array $extendedFields */
-    public $extendedFields = array();
+    public $extendedFields = [];
     /** @var array $remoteFields */
-    public $remoteFields = array();
+    public $remoteFields = [];
     /** @var modUser $user */
     public $user;
 
@@ -71,18 +75,18 @@ Ext.onReady(function() {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = array()) {
-        $placeholders = array();
+    public function process(array $scriptProperties = []) {
+        $placeholders = [];
 
         /* get user */
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('user_err_ns'));
         }
-        $this->user = $this->modx->getObject('modUser', array('id' => $scriptProperties['id']));
+        $this->user = $this->modx->getObject(modUser::class, ['id' => $scriptProperties['id']]);
         if ($this->user == null) return $this->failure($this->modx->lexicon('user_err_nf'));
 
         /* process remote data, if existent */
-        $this->remoteFields = array();
+        $this->remoteFields = [];
         $remoteData = $this->user->get('remote_data');
         if (!empty($remoteData)) {
             $this->remoteFields = $this->_parseCustomData($remoteData);
@@ -91,7 +95,7 @@ Ext.onReady(function() {
         /* parse extended data, if existent */
         $this->user->getOne('Profile');
         if ($this->user->Profile) {
-            $this->extendedFields = array();
+            $this->extendedFields = [];
             $extendedData = $this->user->Profile->get('extended');
             if (!empty($extendedData)) {
                 $this->extendedFields = $this->_parseCustomData($extendedData);
@@ -99,41 +103,41 @@ Ext.onReady(function() {
         }
 
         /* invoke OnUserFormPrerender event */
-        $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', array(
+        $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', [
             'id' => $this->user->get('id'),
             'user' => &$this->user,
             'mode' => modSystemEvent::MODE_UPD,
-        ));
+        ]);
         if (is_array($onUserFormPrerender)) {
             $onUserFormPrerender = implode('',$onUserFormPrerender);
         }
         $placeholders['OnUserFormPrerender'] = $onUserFormPrerender;
 
         /* invoke OnUserFormRender event */
-        $onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', array(
+        $onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', [
             'id' => $this->user->get('id'),
             'user' => &$this->user,
             'mode' => modSystemEvent::MODE_UPD,
-        ));
+        ]);
         if (is_array($onUserFormRender)) $onUserFormRender = implode('',$onUserFormRender);
-        $this->onUserFormRender = str_replace(array('"',"\n","\r"),array('\"','',''),$onUserFormRender);
+        $this->onUserFormRender = str_replace(['"',"\n","\r"], ['\"','',''],$onUserFormRender);
         $placeholders['OnUserFormRender'] = $this->onUserFormRender;
 
         return $placeholders;
     }
 
-    private function _parseCustomData(array $remoteData = array(),$path = '') {
+    private function _parseCustomData(array $remoteData = [],$path = '') {
         $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte',null,false);
         $encoding = $this->modx->getOption('modx_charset',null,'UTF-8');
-        $fields = array();
+        $fields = [];
         foreach ($remoteData as $key => $value) {
-            $field = array(
+            $field = [
                 'name' => $key,
                 'id' => (!empty($path) ? $path.'.' : '').$key,
-            );
+            ];
             if (is_array($value)) {
                 $field['iconCls'] = 'icon-folder';
-                $field['text'] = $key;
+                $field['text'] = htmlentities($key,ENT_QUOTES,$encoding);
                 $field['leaf'] = false;
                 $field['children'] = $this->_parseCustomData($value,$key);
             } else {
@@ -147,7 +151,7 @@ Ext.onReady(function() {
                     $v = substr($v,0,30).'...';
                 }
                 $field['iconCls'] = 'icon-terminal';
-                $field['text'] = $key.' - <i>'.htmlentities($v,ENT_QUOTES,$encoding).'</i>';
+                $field['text'] = htmlentities($key,ENT_QUOTES,$encoding).' - <i>'.htmlentities($v,ENT_QUOTES,$encoding).'</i>';
                 $field['leaf'] = true;
                 $field['value'] = $value;
             }
@@ -163,9 +167,9 @@ Ext.onReady(function() {
      */
     public function getPageTitle() {
         if($this->user == null) {
-                return $this->modx->lexicon('user_err_nf');
+            return $this->modx->lexicon('user_err_nf');
         } else {
-                return $this->modx->lexicon('user').': '.$this->user->get('username');
+            return $this->modx->lexicon('user').': '.htmlentities($this->user->get('username'));
         }
     }
 
@@ -182,7 +186,7 @@ Ext.onReady(function() {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('user','setting','access');
+        return ['user','setting','access'];
     }
 
     /**

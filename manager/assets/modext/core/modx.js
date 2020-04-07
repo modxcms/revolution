@@ -36,6 +36,7 @@ Ext.extend(MODx,Ext.Component,{
 
     ,startup: function() {
         this.initQuickTips();
+        this.initMarkRequiredFields();
         this.request = this.getURLParameters();
         this.Ajax = this.load({ xtype: 'modx-ajax' });
         Ext.override(Ext.form.Field,{
@@ -93,6 +94,38 @@ Ext.extend(MODx,Ext.Component,{
             dismissDelay: 2300
             ,interceptTitles: true
         });
+    }
+
+    ,initMarkRequiredFields: function() {
+        var markdom = '<span class=\"field-required-mark\">*</span> ';
+            
+        var MarkRequiredFieldPlugin = function (config) { 
+            config = config || {};
+            Ext.apply(config, {
+                init: function(cmp) {
+                    if (cmp.allowBlank !== false) return;
+
+                    var applyTo = cmp.applyTo;
+                    if (!applyTo) {
+                        var label = cmp.fieldLabel;
+                        cmp.fieldLabel = markdom+label;
+                    } else if (applyTo && applyTo.match(/^tv[\d]*$/i)) { 
+                        var label = document.getElementById(applyTo+'-caption');
+                        var html = markdom+label.innerHTML;
+                        label.innerHTML = html;
+                    }
+                }
+            });
+            MarkRequiredFieldPlugin.superclass.constructor.call(this, config); 
+        }
+        Ext.extend(MarkRequiredFieldPlugin, Ext.BoxComponent); 
+        Ext.ComponentMgr.registerPlugin('markrequiredfields',MarkRequiredFieldPlugin);
+        
+        if (!Array.isArray(Ext.form.Field.prototype.plugins)) {
+            Ext.form.Field.prototype.plugins = [];
+        }
+        var plugins = Ext.form.Field.prototype.plugins;
+        Ext.form.Field.prototype.plugins = Ext.form.Field.prototype.plugins.concat(['markrequiredfields'], plugins);
     }
 
     ,getURLParameters: function() {
@@ -169,7 +202,7 @@ Ext.extend(MODx,Ext.Component,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'system/clearcache'
+                action: 'System/ClearCache'
                 ,register: 'mgr'
                 ,topic: topic
                 ,media_sources: true
@@ -195,7 +228,7 @@ Ext.extend(MODx,Ext.Component,{
         MODx.Ajax.request({
             url: MODx.config.connector_url
             ,params: {
-                action: 'system/refreshuris'
+                action: 'System/RefreshUris'
                 ,register: 'mgr'
                 ,topic: topic
                 ,menu: true
@@ -218,7 +251,7 @@ Ext.extend(MODx,Ext.Component,{
             MODx.Ajax.request({
                 url: MODx.config.connector_url
                 ,params: {
-                    action: 'resource/locks/release'
+                    action: 'Resource/Locks/Release'
                     ,id: id
                 }
                 ,listeners: {
@@ -233,7 +266,7 @@ Ext.extend(MODx,Ext.Component,{
 			,text: _('confirm_remove_locks')
 			,url: MODx.config.connectors_url
 			,params: {
-				action: 'system/remove_locks'
+				action: 'System/RemoveLocks'
 			}
 			,listeners: {
 				'success': {
@@ -273,7 +306,7 @@ Ext.extend(MODx,Ext.Component,{
                 ,text: _('logout_confirm')
                 ,url: MODx.config.connector_url
                 ,params: {
-                    action: 'security/logout'
+                    action: 'Security/Logout'
                     ,login_context: 'mgr'
                 }
                 ,listeners: {
@@ -847,7 +880,7 @@ MODx.HttpProvider = function(config) {
             ,topic: ''
         }
         ,writeBaseParams: {
-            action: 'system/registry/register/send'
+            action: 'System/Registry/Register/Send'
             ,message: ''
             ,message_key: ''
             ,message_format: 'json'
@@ -856,7 +889,7 @@ MODx.HttpProvider = function(config) {
             ,kill: 0
         }
         ,readBaseParams: {
-            action: 'system/registry/register/read'
+            action: 'System/Registry/Register/Read'
             ,format: 'json'
             ,poll_limit: 1
             ,poll_interval: 1

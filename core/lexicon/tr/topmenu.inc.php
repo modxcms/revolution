@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'İzinleri Gruplar, Roller ve Erişim ilkeleri aracılığ
 $_lang['admin'] = 'Yönetici';
 $_lang['api_docs'] = 'API Dökümantasyonu';
 $_lang['api_docs_desc'] = 'MODX Devrimi için komple API dokümantasyonu.';
-$_lang['bespoke_manager'] = 'Yönetici Kişiselleştirme';
-$_lang['bespoke_manager_desc'] = 'Özel MODX Yöneticilerini yönetin';
 $_lang['components'] = 'Ekstralar';
 $_lang['content_types'] = 'İçerik Türü';
 $_lang['content_types_desc'] = 'Kaynaklar için .html, .js gibi içerik türleri ekleyin.';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'Kontrol Paneli';
 $_lang['dashboards'] = 'Panolar';
 $_lang['dashboards_desc'] = 'Özel kontrol Panelleri girişini yönetme';
 $_lang['edit_menu'] = 'Menüler';
-$_lang['edit_menu_desc'] = 'Üst yönetici menüsünü yönetme';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'Hata Günlüğü';
 $_lang['eventlog_viewer_desc'] = 'MODX error.log dosyasını görüntüleyin.';
 $_lang['export_site'] = 'Static HTML\'yi dışa aktar';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'HTML\'i içe aktar';
 $_lang['import_site_desc'] = 'HTML Kaynaklarını içe Aktar';
 $_lang['installer'] = 'Yükleyici';
 $_lang['installer_desc'] = 'Eklentileri ve Dağıtımları Yönetin';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Sözlük';
 $_lang['lexicon_management_desc'] = 'Yöneticinin dil dizelerini düzenleme';
 $_lang['logout'] = 'Oturumu kapat';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'Sistem Ayarları';
 $_lang['system_settings_desc'] = 'Tüm sistem ayarlarını yapılandır';
 $_lang['tools'] = 'Araçlar';
 $_lang['tools_desc'] = 'Sitenizi sıralamaya devam ettirecek araçlar';
-$_lang['topnav'] = 'Üst Gezinme';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'Kullanıcı';
 $_lang['usernav'] = 'Kullanıcı Arayüzü';

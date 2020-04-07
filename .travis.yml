@@ -1,18 +1,18 @@
-dist: trusty
-sudo: required
 language: php
 script:
-  - phpunit --version
-  - "phpunit -c ./phpunit.xml"
+  - "../../core/vendor/bin/phpunit --version"
+  - "../../core/vendor/bin/phpunit -c ./phpunit.xml"
 
 # Set php versions
 php:
+  - 7.4
   - 7.3
   - 7.2
   - 7.1
   - 7.0
-  - 5.6
   - nightly
+
+services: mysql
 
 matrix:
   allow_failures:
@@ -24,8 +24,6 @@ mysql:
   username: root
   encoding: utf8
 
-before_script: 'composer install -n && cd _build/test && ./generateConfigs.sh'
-
-before_install:
-  -  if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then curl -sL -o ~/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-4.8.phar; chmod +x ~/.phpenv/versions/5.5/bin/phpunit; fi
-  -  if [[ "(7.0 7.1 7.2 7.3 nightly)" =~ $(phpenv version-name) ]]; then curl -sL -o ~/.phpenv/versions/$(phpenv version-name)/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar; chmod +x ~/.phpenv/versions/$(phpenv version-name)/bin/phpunit; fi
+before_script:
+  - 'composer install -n && cd _build/test && ./generateConfigs.sh'
+  - phpenv config-add test.ini

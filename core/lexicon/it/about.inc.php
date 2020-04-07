@@ -6,13 +6,13 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['help_page_title'] = 'Help & Support';
+$_lang['help_page_title'] = 'Aiuto & Supporto';
 $_lang['help_main_head'] = 'MODX è qui per voi';
 $_lang['help_main_subhead'] = 'Leggete sotto per ottenere l\'aiuto necessario per il vostro progetto MODX <br>Potete avere maggiori dettagli su <a href="https://modx.com/community/free-support-options">modx.com/community/free-support-options</a> o chiamando il + 1 (469) 777-6639';
-$_lang['forums'] = 'Forums';
-$_lang['forums_title'] = 'MODX Community Forums';
+$_lang['forums'] = 'Forum';
+$_lang['forums_title'] = 'Forum della Comunità MODX';
 $_lang['forums_description'] = 'Aiuto gratuito da parte della Community';
-$_lang['forums_link'] = 'http://forums.modx.com/';
+$_lang['forums_link'] = 'https://community.modx.com/';
 $_lang['docs'] = 'Documentazione';
 $_lang['docs_title'] = 'Leggi il Fantastico Manuale (di MODX)';
 $_lang['docs_description'] = 'Leggi i manuali ufficiali di MODX';
@@ -30,7 +30,7 @@ $_lang['email_sub'] = 'Rimani aggiornato con MODX';
 $_lang['email_sub_description'] = 'Iscriviti alla <b>Newsletter di MODX</b> per ricevere tutte le notizie importanti su MODX. Scrivi la tua email qui sotto, vi promettiamo di non inviare mai spam.';
 $_lang['email_sub_button'] = 'Registrati';
 $_lang['social_follows'] = 'È inoltre possibile <b>seguire MODX</b> su questi canali.';
-$_lang['follow'] = 'Follow MODX';
+$_lang['follow'] = 'Segui MODX';
 $_lang['like'] = 'Mi Piace MODX';
 $_lang['circle'] = 'Aggiungi MODX alle tue cerchie';
 $_lang['help_about'] = 'Il software MODX ® che stai utilizzando è il risultato della collaborazione con un\'incredibile comunità di utenti, sostenitori e sviluppatori. Dal 2004, la squadra dietro MODX lo ha sponsorizzato e gestito, finanziando i lavori in corso attraverso il supporto commerciale e le richieste commissionate. È possibile <a href="https://modx.com/services/" class="supportTicket">acquistare il supporto dall\'origine</a>, per ottenere un\'ora del supporto di emergenza (utilizzabile anche per due ore di supporto non-prioritario). O <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry"> scriveteci</a> se avete un\'altra domanda su MODX in generale.';

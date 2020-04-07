@@ -7,30 +7,30 @@
  * @subpackage lexicon
  */
 
-$_lang['events'] = 'Events';
-$_lang['system_event'] = 'System Event';
+$_lang['events'] = 'Események';
+$_lang['system_event'] = 'Rendszeresemény';
 $_lang['system_events'] = 'Rendszeresemények';
-$_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot remove core events, only your own.';
-$_lang['system_events.search_by_name'] = 'Search by event name';
-$_lang['system_events.create'] = 'Create New Event';
-$_lang['system_events.name_desc'] = 'The name of the event. Which you should use in a &dollar;modx->invokeEvent(name, properties) call.';
-$_lang['system_events.groupname'] = 'Group';
-$_lang['system_events.groupname_desc'] = 'The name of the group where the new event belongs to. Select an existing one or type in a new group name.';
-$_lang['system_events.plugins'] = 'Plugins';
+$_lang['system_events.desc'] = 'A rendszeresemények olyan események a MODX-ben, amelyekhez a beépülők be vannak jegyezve. A MODX futása indítja el őket, hogy a beépülők kapcsolódhassanak a MODX kódjához, és egyedi működéseket adjanak hozzá az alapkód módosítása nélkül. Itt adhat hozzá saját eseményeket is a saját fejlesztéséhez. A rendszereseményeket nem távolíthatja el, csak a sajátjait.';
+$_lang['system_events.search_by_name'] = 'Keresés esemény neve szerint';
+$_lang['system_events.create'] = 'Új esemény létrehozása';
+$_lang['system_events.name_desc'] = 'Az esemény neve, amit &dollar;modx->invokeEvent(név, tulajdonságok) formában hívhat meg.';
+$_lang['system_events.groupname'] = 'Csoport';
+$_lang['system_events.groupname_desc'] = 'A csoport neve, ahová az új esemény tartozik. Válasszon egy meglevőt, vagy írjon be egy új csoportnevet.';
+$_lang['system_events.plugins'] = 'Beépülők';
 $_lang['system_events.plugins_desc'] = 'Az eseményhez csatolt beépülők felsorolása. Válassza ki azokat a beépülőket, amelyeket hozzá akar kapcsolni az eseményhez.';
 
-$_lang['system_events.service'] = 'Service';
-$_lang['system_events.service_1'] = 'Parser Service Events';
-$_lang['system_events.service_2'] = 'Manager Access Events';
-$_lang['system_events.service_3'] = 'Web Access Service Events';
-$_lang['system_events.service_4'] = 'Cache Service Events';
-$_lang['system_events.service_5'] = 'Template Service Events';
-$_lang['system_events.service_6'] = 'User Defined Events';
+$_lang['system_events.service'] = 'Szolgáltatás';
+$_lang['system_events.service_1'] = 'Feldolgozó-szolgáltatási események';
+$_lang['system_events.service_2'] = 'Kezelő-hozzáférési események';
+$_lang['system_events.service_3'] = 'Webes elérési szolgáltatási események';
+$_lang['system_events.service_4'] = 'Gyorsítótár-szolgáltatási események';
+$_lang['system_events.service_5'] = 'Sablonszolgáltatási események';
+$_lang['system_events.service_6'] = 'Felhasználó által létrehozott események';
 
-$_lang['system_events.remove'] = 'Remove Event';
-$_lang['system_events.remove_confirm'] = 'Are you sure you want to remove the <b>[[+name]]</b> event? This is irreversible!';
+$_lang['system_events.remove'] = 'Esemény eltávolítása';
+$_lang['system_events.remove_confirm'] = 'Biztosan eltávolítja a <b>[[+name]]</b> eseményt? A törlés végleges!';
 
-$_lang['system_events_err_ns'] = 'Name of the System Event not specified.';
-$_lang['system_events_err_ae'] = 'Name of the System Event already exists.';
-$_lang['system_events_err_startint'] = 'It\'s not allowed to start the name with a digit.';
-$_lang['system_events_err_remove_not_allowed'] = 'You\'re not allowed to remove this System Event.';
+$_lang['system_events_err_ns'] = 'A rendszeresemény neve nincs megadva.';
+$_lang['system_events_err_ae'] = 'A rendszeresemény neve már létezik.';
+$_lang['system_events_err_startint'] = 'Az elnevezés nem kezdődhet számmal.';
+$_lang['system_events_err_remove_not_allowed'] = 'Nincs jogosultsága a rendszeresemény eltávolítására.';

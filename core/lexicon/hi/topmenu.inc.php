@@ -1,6 +1,6 @@
 <?php
 /**
- * Top Menu English lexicon topic
+ * Main Menu English lexicon topic
  *
  * @language en
  * @package modx
@@ -15,8 +15,6 @@ $_lang['acls_desc'] = 'समूहों, भूमिकाओं और प�
 $_lang['admin'] = 'व्यवस्थापक';
 $_lang['api_docs'] = 'एपीआई दस्तावेज़ीकरण';
 $_lang['api_docs_desc'] = 'MODX Revolutionके लिए पूरी एपीआई प्रलेखन।';
-$_lang['bespoke_manager'] = 'प्रबंधक अनुकूलन';
-$_lang['bespoke_manager_desc'] = 'Bespoke MODX Managers का प्रबंधन';
 $_lang['components'] = 'Extras';
 $_lang['content_types'] = 'Content Types';
 $_lang['content_types_desc'] = 'Content प्रकार के लिए resources,. html,. js, आदि के रूप में जोड़ें।';
@@ -28,7 +26,7 @@ $_lang['dashboard'] = 'डैशबोर्ड';
 $_lang['dashboards'] = 'डैशबोर्ड्स';
 $_lang['dashboards_desc'] = 'कस्टम लॉगिन डैशबोर्ड्स प्रबंधित करें';
 $_lang['edit_menu'] = 'मेनूज़';
-$_lang['edit_menu_desc'] = 'शीर्ष प्रबंधक मेनू का प्रबंधन';
+$_lang['edit_menu_desc'] = 'Manage the main Manager menu';
 $_lang['eventlog_viewer'] = 'त्रुटि लॉग';
 $_lang['eventlog_viewer_desc'] = 'MODX error.log देखें।';
 $_lang['export_site'] = 'स्थैतिक HTML निर्यात करें';
@@ -54,6 +52,8 @@ $_lang['import_site'] = 'आयात HTML';
 $_lang['import_site_desc'] = 'HTML फ़ाइलों को आयात करने के लिए Resources';
 $_lang['installer'] = 'इंस्टॉलर';
 $_lang['installer_desc'] = 'Add-ons और वितरण का प्रबंधन';
+$_lang['language'] = 'Toggle language';
+$_lang['language_desc'] = 'Select the appropriate manager language';
 $_lang['lexicon_management'] = 'Lexicons';
 $_lang['lexicon_management_desc'] = 'प्रबंधक भाषा स्ट्रिंग्स को संपादित करें';
 $_lang['logout'] = 'लॉग आउट';
@@ -119,7 +119,7 @@ $_lang['system_settings'] = 'सिस्टम सेटिंग्स';
 $_lang['system_settings_desc'] = 'सभी सिस्टम सेटिंग्स कॉन्फ़िगर करें';
 $_lang['tools'] = 'उपकरण';
 $_lang['tools_desc'] = 'आपकी साइट सॉर्ट की गई रखने के लिए उपयोगिताएँ';
-$_lang['topnav'] = 'Top Navigation';
+$_lang['topnav'] = 'Main Navigation';
 $_lang['topnav_desc'] = '';
 $_lang['user'] = 'User';
 $_lang['usernav'] = 'User Navigation';

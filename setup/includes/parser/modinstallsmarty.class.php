@@ -24,16 +24,16 @@ class modInstallSmarty extends Smarty implements modInstallParser {
     public $_blocks;
     public $_derived;
 
-    function __construct(array $params= array ()) {
+    function __construct(array $params= []) {
         parent :: __construct();
 
         /* Set up configuration variables for Smarty. */
         $this->template_dir = MODX_SETUP_PATH . 'templates/';
         $this->compile_dir  = MODX_CORE_PATH . 'cache/' . (MODX_CONFIG_KEY == 'config' ? '' : MODX_CONFIG_KEY . '/') . 'setup/smarty/';
         $this->config_dir   = MODX_CORE_PATH . 'model/smarty/configs';
-        $this->plugins_dir  = array(
+        $this->plugins_dir  = [
             MODX_CORE_PATH . 'vendor/smarty/smarty/libs/plugins'
-        );
+        ];
         $this->caching = false;
 
         foreach ($params as $paramKey => $paramValue) {
@@ -44,7 +44,7 @@ class modInstallSmarty extends Smarty implements modInstallParser {
 
         $this->set('app_name','MODX');
 
-        $this->_blocks = array();
+        $this->_blocks = [];
         $this->_derived = null;
     }
 
@@ -70,7 +70,7 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         $written= false;
         if (!empty ($dirname)) {
             $dirname= strtr(trim($dirname), '\\', '/');
-            if ($dirname{strlen($dirname) - 1} == '/') $dirname = substr($dirname, 0, strlen($dirname) - 1);
+            if ($dirname[strlen($dirname) - 1] == '/') $dirname = substr($dirname, 0, strlen($dirname) - 1);
             if (is_dir($dirname) || (is_writable(dirname($dirname)) && mkdir($dirname))) {
                 $written= true;
             } elseif (!$this->writeTree(dirname($dirname))) {

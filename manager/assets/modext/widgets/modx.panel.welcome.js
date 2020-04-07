@@ -80,26 +80,24 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
         MODx.Ajax.request({
                 url: MODx.config.connector_url,
                 params: {
-                    action: 'system/dashboard/widget/feed',
+                    action: 'System/Dashboard/Widget/Feed',
                     feed: feed
                 },
                 listeners: {
                     success: {
                         fn: function (response) {
                             if (response.success) {
-                                container.innerHTML = response.object.html;
+                                container.innerHTML = MODx.util.safeHtml(response.object.html, '<h1><h2><h3><h4><span><div><ul><li><p><ol><dl><dd><dt><img><a><br><i><em><b><strong>');
                             }
                             else if (response.message.length > 0) {
-                                container.innerHTML = '<p class="error">' + response.message + '</p>';
+                                container.innerHTML = '<p class="error">' + MODx.util.safeHtml(response.message) + '</p>';
                             }
                         }, scope: this
-                    },
-                    failure: {
-                        fn: function (response) {
-                            var message = response.message.length > 0
-                                ? response.message
-                                : _('error_loading_feed');
-                            container.innerHTML = '<p class="error">' + message + '</p>';
+                    }
+                    ,failure: {
+                        fn: function(response) {
+                            var message = response.message.length > 0 ? response.message : _('error_loading_feed');
+                            container.innerHTML = '<p class="error">' + MODx.util.safeHtml(message) + '</p>';
                         }, scope: this
                     }
                 }
@@ -128,7 +126,7 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                 MODx.Ajax.request({
                     url: MODx.config.connector_url,
                     params: {
-                        action: 'system/dashboard/user/sort',
+                        action: 'System/Dashboard/User/Sort',
                         widget: e.item.getAttribute('data-id'),
                         dashboard: dashboard.id,
                         from: e.oldIndex,
@@ -244,7 +242,7 @@ MODx.window.DashboardWidgetAdd = function (config) {
         id: this.ident,
         url: MODx.config.connector_url,
         baseParams: {
-            action: 'system/dashboard/user/create',
+            action: 'System/Dashboard/User/Create',
             dashboard: config.dashboard.id,
         },
         modal: true,
@@ -282,11 +280,16 @@ Ext.extend(MODx.window.DashboardWidgetAdd, MODx.Window, {
 
     getFields: function (config) {
         return [{
+            hideLabel: true,
+            xtype: 'displayfield',
+            html: _('widget_add_desc'),
+            anchor: '100%'
+        }, {
             fieldLabel: _('widget_add'),
             id: this.ident + '-widget',
             xtype: 'modx-combo-dashboard-widgets',
             baseParams: {
-                action: 'system/dashboard/user/getlist',
+                action: 'System/Dashboard/User/GetList',
                 dashboard: config.dashboard.id,
                 combo: true
             },
@@ -309,21 +312,11 @@ Ext.extend(MODx.window.DashboardWidgetAdd, MODx.Window, {
                 }
             }
         }, {
-            hideLabel: true,
-            xtype: 'displayfield',
-            html: _('widget_add_desc'),
-            anchor: '100%'
-        }, {
             fieldLabel: _('widget_size'),
             id: this.ident + '-size',
             xtype: 'modx-combo-dashboard-widget-size',
             name: 'size',
             value: 'half',
-            anchor: '100%'
-        }, {
-            hideLabel: true,
-            xtype: 'displayfield',
-            html: _('widget_size_desc'),
             anchor: '100%'
         }];
     },

@@ -8,7 +8,7 @@
  */
 $_lang['context'] = 'Konteks';
 $_lang['context_add'] = 'Menambahkan konteks';
-$_lang['context_create'] = 'Membuat konteks';
+$_lang['context_create'] = 'New Context';
 $_lang['context_data'] = 'Konteks Data';
 $_lang['context_duplicate'] = 'Konteks duplikat';
 $_lang['context_err_ae'] = 'Konteks dengan nama tersebut sudah ada.';
@@ -28,7 +28,7 @@ $_lang['context_refresh'] = 'Menyegarkan konteks';
 $_lang['context_remove'] = 'Menghapus konteks';
 $_lang['context_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus konteks ini? Ini tetap dan ireversibel.';
 $_lang['context_settings'] = 'Konteks pengaturan';
-$_lang['context_settings_desc'] = 'Di sini Anda dapat mengatur pengaturan spesifik untuk konteks ini. Konteks pengaturan akan menimpa pengaturan sistem dengan tombol yang sama.';
+$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_update'] = 'Memperbarui konteks';
 $_lang['context_with_key_not_found'] = 'Konteks dengan kunci %s tidak ditemukan!';
 $_lang['contexts'] = 'Konteks';

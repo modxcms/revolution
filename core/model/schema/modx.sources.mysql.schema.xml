@@ -10,23 +10,23 @@
  */
  -->
 <!-- The following xPDO model represents an object-relational map structure of the MODX db registry package -->
-<model package="modx.sources" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="modx" phpdoc-subpackage="sources" version="1.1">
+<model package="MODX\Revolution\Sources" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution\Sources" version="3.0">
 
-    <object class="modAccessMediaSource" table="access_media_source" extends="modAccess">
+    <object class="modAccessMediaSource" table="access_media_source" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
             <column key="context_key" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Target" class="sources.modMediaSource" local="target" foreign="id" owner="foreign" cardinality="one" />
-        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+        <aggregate alias="Target" class="MODX\Revolution\Sources\modMediaSource" local="target" foreign="id" owner="foreign" cardinality="one" />
+        <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modMediaSource" table="media_sources" extends="modAccessibleObject">
+    <object class="modMediaSource" table="media_sources" extends="MODX\Revolution\modAccessibleSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index"/>
         <field key="description" dbtype="text" phptype="string" null="true" />
-        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="sources.modFileMediaSource" index="index" />
+        <field key="class_key" dbtype="varchar" precision="100" phptype="string" null="false" default="MODX\Revolution\Sources\modFileMediaSource" index="index" />
         <field key="properties" dbtype="mediumtext" phptype="array" null="true" />
         <field key="is_stream" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" />
 
@@ -40,18 +40,18 @@
             <column key="is_stream" length="" collation="A" null="false" />
         </index>
 
-        <composite alias="SourceElement" class="sources.modMediaSourceElement" local="id" foreign="source" cardinality="one" owner="local" />
-        <aggregate alias="Chunks" class="modChunk" local="id" foreign="source" cardinality="many" owner="local" />
-        <aggregate alias="Plugins" class="modPlugin" local="id" foreign="source" cardinality="many" owner="local" />
-        <aggregate alias="Snippets" class="modSnippet" local="id" foreign="source" cardinality="many" owner="local" />
-        <aggregate alias="Templates" class="modTemplate" local="id" foreign="source" cardinality="many" owner="local" />
-        <aggregate alias="TemplateVars" class="modTemplateVar" local="id" foreign="source" cardinality="many" owner="local" />
+        <composite alias="SourceElement" class="MODX\Revolution\Sources\modMediaSourceElement" local="id" foreign="source" cardinality="one" owner="local" />
+        <aggregate alias="Chunks" class="MODX\Revolution\modChunk" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Plugins" class="MODX\Revolution\modPlugin" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Snippets" class="MODX\Revolution\modSnippet" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="Templates" class="MODX\Revolution\modTemplate" local="id" foreign="source" cardinality="many" owner="local" />
+        <aggregate alias="TemplateVars" class="MODX\Revolution\modTemplateVar" local="id" foreign="source" cardinality="many" owner="local" />
     </object>
-    <object class="modFileMediaSource" extends="modMediaSource" />
-    <object class="modS3MediaSource" extends="modMediaSource" />
-    <object class="modFTPMediaSource" extends="modMediaSource" />
+    <object class="modFileMediaSource" extends="MODX\Revolution\Sources\modMediaSource" />
+    <object class="modS3MediaSource" extends="MODX\Revolution\Sources\modMediaSource" />
+    <object class="modFTPMediaSource" extends="MODX\Revolution\Sources\modMediaSource" />
 
-    <object class="modMediaSourceContext" table="media_sources_contexts" extends="xPDOObject">
+    <object class="modMediaSourceContext" table="media_sources_contexts" extends="xPDO\Om\xPDOObject">
         <field key="source" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="web" index="pk" />
 
@@ -60,13 +60,13 @@
             <column key="context_key" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Source" class="sources.modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+        <aggregate alias="Source" class="MODX\Revolution\Sources\modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modMediaSourceElement" table="media_sources_elements" extends="xPDOObject">
+    <object class="modMediaSourceElement" table="media_sources_elements" extends="xPDO\Om\xPDOObject">
         <field key="source" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
-        <field key="object_class" dbtype="varchar" precision="100" phptype="string" null="false" default="modTemplateVar" index="pk" />
+        <field key="object_class" dbtype="varchar" precision="100" phptype="string" null="false" default="MODX\Revolution\modTemplateVar" index="pk" />
         <field key="object" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="web" index="pk" />
 
@@ -77,8 +77,8 @@
             <column key="context_key" length="" collation="A" null="false" />
         </index>
 
-        <aggregate alias="Source" class="sources.modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Element" class="modElement" local="object" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Context" class="modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
+        <aggregate alias="Source" class="MODX\Revolution\Sources\modMediaSource" local="source" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Element" class="MODX\Revolution\modElement" local="object" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 </model>

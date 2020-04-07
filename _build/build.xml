@@ -21,7 +21,7 @@
 
     <!-- Set the project version -->
     <property name="modx.core.version" value="3.0.0" />
-    <property name="modx.core.release" value="dev" />
+    <property name="modx.core.release" value="alpha3" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}" />
@@ -46,12 +46,15 @@
     <target name="complete" description="--> Complete Build">
         <phingcall target="prepare-build-image" />
         <phingcall target="git-export-build-image" />
+        <phingcall target="composer-install-dependencies" />
         <!--<phingcall target="copy-core-transport" />-->
         <phingcall target="prepare-build-distrib" />
         <!--<phingcall target="generate-phpdocs" />-->
         <phingcall target="generate-core-transport" />
+<!--        <phingcall target="copy-core-transport" />-->
         <phingcall target="build-sdk" />
         <phingcall target="generate-core-transport" />
+<!--        <phingcall target="copy-core-transport" />-->
         <phingcall target="build-traditional" />
         <phingcall target="build-advanced" />
     </target>
@@ -75,6 +78,11 @@
               command="${git.command} archive -o ${absolute.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}"
               escape="false" />
         <unzip file="${build.image.dir}.zip" todir="${build.image.basedir}" />
+    </target>
+
+    <!-- Install all core dependencies via composer -->
+    <target name="composer-install-dependencies" description="" if="build.distrib">
+        <exec dir="${build.image.dir}" command="${composer.command} install --no-dev" escape="false" />
     </target>
 
     <!-- Run the core data generation script -->
@@ -120,18 +128,8 @@
                 defaultcategoryname="${project.name}"
                 defaultpackagename="${project.name.fs}"
                 packageoutput="modx,xpdo">
-            <fileset dir="${core.dir}/xpdo">
-                <include name="**/*.php" />
-                <exclude name="**/*.map.inc.php" />
-                <exclude name="compression/pclzip.lib.php" />
-                <exclude name="json/**" />
-            </fileset>
-            <fileset dir="${core.dir}/model/modx">
+            <fileset dir="${core.dir}/src">
                 <include name="**.php" />
-                <exclude name="**/*.map.inc.php" />
-                <exclude name="**/*_mysql.class.php" />
-                <exclude name="mail/phpmailer/**" />
-                <exclude name="processors/**" />
             </fileset>
         </phpdoc>
     </target>
@@ -300,14 +298,13 @@
                 <include name="core/error/**" />
                 <include name="core/export/**" />
                 <include name="core/import/**" />
+                <include name="core/include/**" />
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
-                <include name="core/xpdo/**" />
+                <include name="core/src/**" />
+                <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
-                <include name="core/packages/core/manifest.php" />
-                <include name="core/packages/core/*/*.vehicle" />
-                <include name="core/packages/core/*/*.validator" />
-                <include name="core/packages/core/*/*.resolver" />
+                <include name="core/packages/core/**" />
             </fileset>
         </zip>
         <exec dir="${project.basedir}" command="${php.command} fixzip.php ${build.distrib.dir}/${distrib.name}.zip" />
@@ -368,9 +365,11 @@
                 <include name="core/error/**" />
                 <include name="core/export/**" />
                 <include name="core/import/**" />
+                <include name="core/include/**" />
                 <include name="core/lexicon/**" />
                 <include name="core/model/**" />
-                <include name="core/xpdo/**" />
+                <include name="core/src/**" />
+                <include name="core/vendor/**" />
                 <include name="core/packages/core.transport.zip" />
             </fileset>
         </zip>

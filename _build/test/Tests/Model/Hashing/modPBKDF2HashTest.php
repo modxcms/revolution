@@ -9,6 +9,11 @@
  *
  * @package modx-test
 */
+namespace MODX\Revolution\Tests\Model\Hashing;
+
+
+use MODX\Revolution\Hashing\modPBKDF2;
+use MODX\Revolution\MODxTestCase;
 
 /**
  * Tests related to the modPBKDF2 class, a derivative of modHash.
@@ -37,11 +42,11 @@ class modPBKDF2HashTest extends MODxTestCase {
         $this->assertEquals($expected, $actual, "Expected hash value not generated.");
     }
     public function providerHash() {
-        return array(
-            array('password', array('salt' => '123'), 'VCIGwMm0t9bKMa8xeOKMG6BZ0wNadGAikev95fnnkkQ='),
-            array('password', array('salt' => 'abc'), 'e/+7RSuHvTHideDuZkpvFXtq65+oHM9xONAsEVJaV6s='),
-            array('what do you think of this?', array('salt' => 'abc123'), 'Pgf+nVGBXjkX6kqWsSYvyn8kWsf0jeArBJW8V50wUoE='),
-            array('what do you think of this?', array('salt' => '123abc'), 'zh7hBkVxmK9JZ8RKqRJCrLr9wkRn48O+g0igHi+H2WY='),
-        );
+        return [
+            ['password', ['salt' => '123'], 'VCIGwMm0t9bKMa8xeOKMG6BZ0wNadGAikev95fnnkkQ='],
+            ['password', ['salt' => 'abc'], 'e/+7RSuHvTHideDuZkpvFXtq65+oHM9xONAsEVJaV6s='],
+            ['what do you think of this?', ['salt' => 'abc123'], 'Pgf+nVGBXjkX6kqWsSYvyn8kWsf0jeArBJW8V50wUoE='],
+            ['what do you think of this?', ['salt' => '123abc'], 'zh7hBkVxmK9JZ8RKqRJCrLr9wkRn48O+g0igHi+H2WY='],
+        ];
     }
 }

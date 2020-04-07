@@ -7,6 +7,10 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
+
+use MODX\Revolution\modContextSetting;
+use MODX\Revolution\modResource;
+
 require_once dirname(__FILE__) . '/resource.class.php';
 
 /**
@@ -139,14 +143,18 @@ class ResourceUpdateManagerController extends ResourceManagerController
         foreach ($fields as $field) {
             $this->resourceArray[$field] = !empty($this->resourceArray[$field]);
         }
-        $this->resourceArray['syncsite'] = isset($this->resourceArray['syncsite'])
-            ? !empty($this->resourceArray['syncsite'])
-            : !empty($this->context->getOption('syncsite_default', 1, $this->modx->_userConfig));
+        if (isset($this->resourceArray['syncsite'])) {
+            $this->resourceArray['syncsite'] = !empty($this->resourceArray['syncsite']);
+        } else {
+            $syncsiteDefault = $this->context->getOption('syncsite_default', 1,
+                $this->modx->_userConfig);
+            $this->resourceArray['syncsite'] = !empty($syncsiteDefault);
+        }
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($this->parent->get('pagetitle'));
             } else {
-                $overriddenParent = $this->modx->getObject('modResource', $this->resourceArray['parent']);
+                $overriddenParent = $this->modx->getObject(modResource::class, $this->resourceArray['parent']);
                 if ($overriddenParent) {
                     $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($overriddenParent->get('pagetitle'));
                 }
@@ -196,7 +204,7 @@ class ResourceUpdateManagerController extends ResourceManagerController
         if (!$this->resource->get('deleted')) {
             $this->modx->setOption('cache_alias_map', false);
             $sessionEnabled = '';
-            $ctxSetting = $this->modx->getObject('modContextSetting', [
+            $ctxSetting = $this->modx->getObject(modContextSetting::class, [
                 'context_key' => $this->resource->get('context_key'),
                 'key' => 'session_enabled',
             ]);
@@ -225,7 +233,7 @@ class ResourceUpdateManagerController extends ResourceManagerController
         if (!empty($lockedBy) && $lockedBy !== true) {
             $this->canSave = false;
             $this->locked = true;
-            $locker = $this->modx->getObject('modUser', $lockedBy);
+            $locker = $this->modx->getObject(modUser::class, $lockedBy);
             if ($locker) {
                 $lockedBy = $locker->get('username');
             }

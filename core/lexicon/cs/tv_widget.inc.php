@@ -45,7 +45,7 @@ $_lang['disabled_dates_desc'] = 'Čárkou oddělený seznam datumů, které maj�
 - Kontrolovat pouze začátky (Užitečné pokud používáte krátký zápis roku): ^03-08<br />
 - Zakázání každého dne v březnu 2006: 03-..-2006<br />
 - Zakázání všech dní v březnu každý rok: ^03<br />
-Pozor na to, že formát zadávaných dat musí korespondovat s formátem nastaveným v konfiguraci systému. Pokud obsahuje požadovaný formát data tečku ".", je nutné ji vždy eskejpovat "\\.", jinak by došlo k problémům při vyhodnocování regulárního výrazu.';
+Pozor na to, že formát zadávaných dat musí korespondovat s formátem nastaveným v konfiguraci systému. Pokud obsahuje požadovaný formát data tečku ".", je nutné ji vždy eskejpovat "\.", jinak by došlo k problémům při vyhodnocování regulárního výrazu.';
 $_lang['disabled_days'] = 'Zakázané dny';
 $_lang['disabled_days_desc'] = 'Čárkou oddělený seznam dnů, které mají být zakázané, počítáno od 0 (výchozí hodnota je prázdné pole). Například:<br />
 - Zakázaná neděle a sobota: 0,6<br />
@@ -59,7 +59,7 @@ $_lang['email'] = 'E-mail';
 $_lang['file'] = 'Soubor';
 $_lang['height'] = 'Výška';
 $_lang['hidden'] = 'Skryté';
-$_lang['htmlarea'] = 'HTML Area';
+$_lang['htmlarea'] = 'Oblast HTML';
 $_lang['htmltag'] = 'HTML tag';
 $_lang['image'] = 'Obrázek';
 $_lang['image_align'] = 'Zarovnat';

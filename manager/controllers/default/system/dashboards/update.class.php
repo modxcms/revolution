@@ -8,6 +8,12 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
+use MODX\Revolution\modDashboardWidgetPlacement;
+use MODX\Revolution\modManagerController;
+use MODX\Revolution\modUserGroup;
+
 /**
  * Loads the dashboard update page
  *
@@ -34,12 +40,12 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      *
      * @return array
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
             $this->failure($this->modx->lexicon('dashboard_err_ns'));
             return [];
         }
-        $this->dashboard = $this->modx->getObject('modDashboard', array('id' => $this->scriptProperties['id']));
+        $this->dashboard = $this->modx->getObject(modDashboard::class, ['id' => $this->scriptProperties['id']]);
         if (empty($this->dashboard)) {
             $this->failure($this->modx->lexicon('dashboard_err_nf'));
             return [];
@@ -57,14 +63,14 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getWidgets() {
-        $c = $this->modx->newQuery('modDashboardWidgetPlacement');
-        $c->where(array(
+        $c = $this->modx->newQuery(modDashboardWidgetPlacement::class);
+        $c->where([
             'dashboard' => $this->dashboard->get('id'),
             'user' => 0,
-        ));
+        ]);
         $c->sortby('modDashboardWidgetPlacement.rank','ASC');
-        $placements = $this->modx->getCollection('modDashboardWidgetPlacement',$c);
-        $list = array();
+        $placements = $this->modx->getCollection(modDashboardWidgetPlacement::class, $c);
+        $list = [];
         /** @var modDashboardWidgetPlacement $placement */
         foreach ($placements as $placement) {
             $placement->getOne('Widget');
@@ -77,7 +83,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
                 $this->modx->lexicon->load($placement->Widget->get('lexicon'));
             }
             $widgetArray = $placement->Widget->toArray();
-            $list[] = array(
+            $list[] = [
                 $placement->get('dashboard'),
                 $placement->get('widget'),
                 $placement->get('rank'),
@@ -85,7 +91,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
                 $widgetArray['name_trans'],
                 $widgetArray['description'],
                 $widgetArray['description_trans'],
-            );
+            ];
         }
         return $list;
     }
@@ -96,12 +102,12 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      */
     public function getUserGroups() {
         $list = [];
-        $c = $this->modx->newQuery('modUserGroup');
+        $c = $this->modx->newQuery(modUserGroup::class);
         $c->where([
             'dashboard' => $this->dashboard->get('id'),
         ]);
         $c->sortby('name', 'ASC');
-        $usergroups = $this->modx->getIterator('modUserGroup', $c);
+        $usergroups = $this->modx->getIterator(modUserGroup::class, $c);
         /** @var modUserGroup $usergroup */
         foreach ($usergroups as $usergroup) {
             $list[] = [$usergroup->get('id'), $usergroup->get('name')];
@@ -131,7 +137,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('dashboards');
+        return $this->modx->lexicon('dashboards').': '.$this->dashboardArray['name'];
     }
 
     /**
@@ -147,7 +153,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return array
      */
     public function getLanguageTopics() {
-        return array('dashboards','user');
+        return ['dashboards','user'];
     }
 
     /**

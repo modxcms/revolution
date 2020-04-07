@@ -1,3 +1,9 @@
+/**
+ * @class MODx.grid.DashboardWidget
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-dashboard-widget-form
+ */
 MODx.panel.DashboardWidget = function(config) {
     config = config || {};
 
@@ -41,10 +47,7 @@ MODx.panel.DashboardWidget = function(config) {
                         'keyup': {scope:this,fn:function(f,e) {
                             var s = _(f.getValue());
                             if (s == undefined) { s = f.getValue(); }
-                            Ext.getCmp('modx-dashboard-widget-name-trans').setValue(s);
-                            if (!Ext.isEmpty(s)) {
-                                Ext.getCmp('modx-dashboard-widget-header').getEl().update(_('widget')+': '+s);
-                            }
+                            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(s));
                         }}
                     }
                 },{
@@ -170,7 +173,7 @@ MODx.panel.DashboardWidget = function(config) {
                 html: '<h4>'+_('widget_content')+'</h4>'
                 ,border: false
                 ,anchor: '100%'
-             },*/{
+            },*/{
                 xtype: 'textarea'
                 ,name: 'content'
                 ,fieldLabel: _('widget_content')
@@ -239,15 +242,11 @@ MODx.panel.DashboardWidget = function(config) {
         id: 'modx-panel-dashboard-widget'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'system/dashboard/widget/update'
+            action: 'System/Dashboard/Widget/Update'
         }
         ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-             html: _('widget_new')
-            ,id: 'modx-dashboard-widget-header'
-            ,xtype: 'modx-header'
-        },{
+        ,items: [this.getPageHeader(config),{
             xtype: 'modx-tabs'
             ,defaults: {
                 autoHeight: true
@@ -275,6 +274,7 @@ MODx.panel.DashboardWidget = function(config) {
 };
 Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.initialized) { return false; }
         if (Ext.isEmpty(this.config.record.id)) {
@@ -282,9 +282,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             return false;
         }
         this.getForm().setValues(this.config.record);
-        Ext.defer(function() {
-            Ext.get('modx-dashboard-widget-header').update(_('widget')+': '+this.config.record.name_trans);
-        }, 250, this);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(this.config.record.name_trans));
 
         var d = this.config.record.dashboards;
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
@@ -296,6 +294,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-dashboard-widget-dashboards');
         if (g) {
@@ -311,6 +310,7 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             });
         }
     }
+
     ,success: function(o) {
         if (Ext.isEmpty(this.config.record) || Ext.isEmpty(this.config.record.id)) {
             MODx.loadPage('system/dashboards/widget/update', 'id='+o.result.object.id);
@@ -320,16 +320,31 @@ Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
             if (g) { g.getStore().commitChanges(); }
         }
     }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-dashboard-widget-header', [{
+            text: _('dashboards'),
+            href: MODx.getPage('system/dashboards')
+        }, {
+            text: _('widget'),
+            href: null
+        }]);
+    }
 });
 Ext.reg('modx-panel-dashboard-widget',MODx.panel.DashboardWidget);
 
-
+/**
+ * @class MODx.grid.DashboardWidgetDashboards
+ * @extends MODx.grid.LocalGrid
+ * @param {Object} config An object of options.
+ * @xtype modx-grid-dashboard-widget-dashboards
+ */
 MODx.grid.DashboardWidgetDashboards = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-widget-dashboards'
         ,url: MODx.config.connector_url
-        ,action: 'system/dashboard/getList'
+        ,action: 'System/Dashboard/GetList'
         ,fields: ['id','name','description']
         ,autoHeight: true
         ,primaryKey: 'widget'
@@ -337,6 +352,12 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
             header: _('dashboard')
             ,dataIndex: 'name'
             ,width: 200
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=system/dashboards/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -349,8 +370,13 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
 Ext.extend(MODx.grid.DashboardWidgetDashboards,MODx.grid.LocalGrid);
 Ext.reg('modx-grid-dashboard-widget-dashboards',MODx.grid.DashboardWidgetDashboards);
 
-
-/* seems unused */
+/**
+ * SEEMS UNUSED
+ * @class MODx.window.WidgetAddDashboard
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-widget-add-dashboard
+ */
 MODx.window.WidgetAddDashboard = function(config) {
     config = config || {};
     this.ident = config.ident || 'dbugadd'+Ext.id();
@@ -402,6 +428,12 @@ Ext.extend(MODx.window.WidgetAddDashboard,MODx.Window,{
 });
 Ext.reg('modx-window-widget-add-dashboard',MODx.window.WidgetAddDashboard);
 
+/**
+ * @class MODx.combo.DashboardWidgetType
+ * @extends MODx.combo.ComboBox
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-dashboard-widget-type
+ */
 MODx.combo.DashboardWidgetType = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -431,7 +463,12 @@ MODx.combo.DashboardWidgetType = function(config) {
 Ext.extend(MODx.combo.DashboardWidgetType,MODx.combo.ComboBox);
 Ext.reg('modx-combo-dashboard-widget-type',MODx.combo.DashboardWidgetType);
 
-
+/**
+ * @class MODx.combo.DashboardWidgetSize
+ * @extends MODx.combo.ComboBox
+ * @param {Object} config An object of options.
+ * @xtype modx-combo-dashboard-widget-size
+ */
 MODx.combo.DashboardWidgetSize = function(config) {
     config = config || {};
     Ext.applyIf(config,{

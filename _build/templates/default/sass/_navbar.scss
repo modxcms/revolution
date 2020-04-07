@@ -3,6 +3,7 @@
     background: transparent;
   }
 }
+
 #modx-leftbar-tabs-xcollapsed {
   display: none !important;
 }
@@ -10,8 +11,12 @@
 #modx-leftbar {
   background-color: $white;
   z-index: 0;
-  min-width: 270px;
-  box-shadow: $boxShadow;
+  min-width: 288px;
+
+  @include grid-media($gtDesktop) {
+    max-width: 50%;
+  }
+
   .x-toolbar {
     padding: 0 !important;
     border: 0;
@@ -24,7 +29,6 @@
   position: absolute;
   z-index: 2;
   height: 100%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 #modx-navbar {
@@ -35,12 +39,15 @@
   display: flex;
   flex-direction: column;
   padding: 0 10px;
+
   .icon {
     color: $white;
     font-size: 20px;
     vertical-align: middle;
   }
-  li, a {
+
+  li,
+  a {
     background: transparent;
     margin: 0;
     padding: 0;
@@ -48,6 +55,7 @@
     width: 100%;
     text-align: center;
   }
+
   a {
     cursor: pointer;
     color: $navbarText;
@@ -56,15 +64,17 @@
     font-size: 10px;
     text-decoration: none;
   }
+
   li {
     a:hover {
       opacity: .7;
     }
   }
+
   #modx-manager-search-icon a,
   #modx-leftbar-trigger a,
   #modx-user-menu a {
-      padding: 12px 0;
+    padding: 12px 0;
   }
 
   #modx-topnav {
@@ -72,14 +82,17 @@
     list-style: none;
     margin: 0;
     padding: 0;
+
     .top:not(#modx-manager-search-icon) {
       border-top: 1px solid $navbarBorder;
     }
-    > li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) {
-      > a {
+
+    >li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) {
+      >a {
         display: block;
         position: relative;
         padding: 12px 0;
+
         &:before {
           @include absolute-corners;
           @include awesome-font;
@@ -91,14 +104,33 @@
         }
       }
     }
-    #limenu-site > a:before { content: fa-content($fa-var-file-alt); font-weight: 300 !important; }
-    #limenu-media > a:before { content: fa-content($fa-var-file-image); font-weight: 300 !important; }
-    #limenu-components > a:before { content: fa-content($fa-var-cube); }
-    #limenu-manage > a:before { content: fa-content($fa-var-sliders-h); }
+
+    #limenu-site > a:before {
+      content: fa-content($fa-var-file-alt);
+      font-weight: 300 !important;
+    }
+
+    #limenu-media > a:before {
+      content: fa-content($fa-var-file-image);
+      font-weight: 300 !important;
+    }
+
+    #limenu-components > a:before {
+      content: fa-content($fa-var-cube);
+    }
+
+    #limenu-manage > a:before {
+      content: fa-content($fa-var-sliders-h);
+    }
   }
+
   #modx-user-menu {
     margin-top: auto;
-    #user-username { display: none; }
+
+    #user-username {
+      display: none;
+    }
+
     #user-avatar {
       img {
         border-radius: 20px;
@@ -108,12 +140,14 @@
         margin: auto;
       }
     }
+
     #limenu-user a {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
   }
+
   #modx-home-dashboard {
     border-radius: $borderRadius;
     width: 40px;
@@ -121,13 +155,19 @@
     line-height: 40px;
     padding: 10px;
   }
+
   #modx-site-info {
     font-size: 10px;
-    .site_name { color: #fff }
+
+    .site_name {
+      color: $white;
+    }
+
     .full_appname {
       color: $white;
     }
-    > .info-item {
+
+    >.info-item {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -151,11 +191,13 @@
 
 #modx-leftbar-trigger {
   transition: all .2s ease;
+
   .icon {
     &:before {
       content: fa-content($fa-var-arrow-left);
     }
   }
+
   &.collapsed {
     .icon:before {
       content: fa-content($fa-var-arrow-right) !important;
@@ -177,6 +219,7 @@
     opacity: 0;
     visibility: hidden;
     transition: all .15s ease;
+
     li {
       display: block;
       border-radius: $borderRadius;
@@ -184,14 +227,17 @@
       margin: 0;
       padding: 0;
       position: relative;
+
       &:not(:first-child) {
         border-top: 1px solid $subnavSepBorder;
       }
+
       &:hover {
         &:after {
           border-right-color: $subnavBgHover;
         }
       }
+
       &.sub {
         &:after {
           @extend %pseudo-font;
@@ -200,10 +246,12 @@
           content: fa-content($fa-var-caret-right);
           font-size: 14px;
           margin-top: 0;
-          top: 20px;
+          top: 50%;
+          transform: translateY(-50%);
           right: 10px;
         }
       }
+
       a {
         border-radius: $borderRadius;
         text-align: left;
@@ -218,6 +266,7 @@
         display: block;
         text-decoration: none;
         cursor: pointer;
+
         span {
           color: $subnavDescriptionColor;
           display: block;
@@ -228,21 +277,25 @@
           margin-top: 6px;
           width: 100%;
         }
+
         &:hover {
           background: $subnavBgHover;
           border-top-color: $subnavBorder;
           border-bottom-color: $subnavBorder;
           color: $darkestGray;
+
           .description {
             color: darken($subnavDescriptionColor, 16%);
           }
         }
       }
     }
+
     &.active {
       opacity: 1;
       visibility: visible;
     }
+
     .modx-subsubnav {
       border: 1px solid $navbarBorder;
       box-shadow: $boxShadowBig;
@@ -255,6 +308,7 @@
       bottom: 0;
       z-index: 24;
     }
+
     &-arrow {
       right: 100%;
       border: 12px solid transparent;
@@ -265,33 +319,43 @@
       margin-top: -6px;
     }
   }
+
   // custom styles for language menu
   #limenu-user-submenu #language .modx-subsubnav {
-      max-height: 86vh;
-      overflow-y: auto;
+    max-height: 86vh;
+    overflow-y: auto;
   }
 }
 
-@include grid-media($mobile) {
+@include grid-media($desktop) {
   #modx-header {
     position: relative;
     min-width: 100%;
     height: auto !important;
   }
+
   #modx-navbar {
     flex-direction: row;
     flex-wrap: wrap;
+
     #modx-headnav {
       order: 1;
       width: 50%;
+
       a {
         line-height: initial !important;
       }
+
+      img {
+        max-width: 35px;
+      }
     }
+
     #modx-topnav {
       width: 100%;
       order: 0;
     }
+
     #modx-user-menu {
       flex-direction: row-reverse;
       flex-wrap: nowrap;
@@ -300,46 +364,65 @@
       margin-top: 0;
     }
 
-    & > ul {
+    &>ul {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      > li {
+
+      >li {
         flex-basis: 50px;
       }
     }
+
     #modx-site-info {
       display: none;
     }
+
     #modx-home-dashboard {
       margin: 0;
       padding: 5px;
     }
   }
+
   #modx-leftbar-trigger {
     .icon {
       padding: 3px 4px;
+
       &:before {
         content: fa-content($fa-var-arrow-up);
       }
     }
+
     &.collapsed {
       .icon:before {
         content: fa-content($fa-var-arrow-down) !important;
       }
     }
   }
+
   #modx-footer {
     .modx-subnav {
-      .description { display: none; }
+      min-width: 300px;
+      top: 60px !important;
+
+      .description {
+        display: none;
+      }
+
       li {
         border-radius: 0;
+
+        &.sub:after {
+          display: none;
+        }
+
         a {
           width: auto;
           white-space: nowrap;
         }
       }
+
       .modx-subsubnav {
         position: initial;
         left: auto;
@@ -347,18 +430,17 @@
         display: block;
         max-height: initial !important;
         overflow-y: initial !important;
-        li > a {
+
+        li>a {
           margin-left: 1rem;
         }
       }
     }
+
     .modx-subnav-arrow {
-      border-right-color: transparent;
-      border-bottom-color: $subnavBg;
-      margin-top: -12px;
-      right: auto;
-      top: -12px;
+      display: none;
     }
+
     .modx-subnav-wrapper {
       max-height: 400px;
       overflow-y: auto;
@@ -369,7 +451,9 @@
 @media (max-height: 520px) {
   #modx-footer {
     .modx-subnav {
-      .description { display: none; }
+      .description {
+        display: none;
+      }
     }
   }
 }

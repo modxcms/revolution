@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modResource;
+use xPDO\xPDO;
+use xPDO\Cache\xPDOCacheManager;
+
 require_once dirname(__FILE__) . '/resource.class.php';
 
 /**

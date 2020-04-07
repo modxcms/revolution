@@ -8,6 +8,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
+use MODX\Revolution\modDashboardWidgetPlacement;
+use MODX\Revolution\modManagerController;
+
 /**
  * Loads the dashboard update page
  *
@@ -20,7 +25,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
     /** @var modDashboardWidget $widget */
     public $widget;
     /** @var array $widgetArray */
-    public $widgetArray = array();
+    public $widgetArray = [];
 
     /**
      * Check for any permissions or requirements to load page
@@ -36,7 +41,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      */
     public function initialize() {
         if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
-            $this->widget = $this->modx->getObject('modDashboardWidget', array('id' => $this->scriptProperties['id']));
+            $this->widget = $this->modx->getObject(modDashboardWidget::class, ['id' => $this->scriptProperties['id']]);
         }
     }
 
@@ -46,7 +51,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @param array $scriptProperties
      * @return array
      */
-    public function process(array $scriptProperties = array()) {
+    public function process(array $scriptProperties = []) {
         if (empty($this->widget)) {
             return $this->failure($this->modx->lexicon('widget_err_nf'));
         }
@@ -65,27 +70,27 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return array
      */
     public function getDashboards($user = 0) {
-        $list = array();
-        $c = $this->modx->newQuery('modDashboardWidgetPlacement');
-        $c->innerJoin('modDashboard','Dashboard');
-        $c->where(array(
+        $list = [];
+        $c = $this->modx->newQuery(modDashboardWidgetPlacement::class);
+        $c->innerJoin(modDashboard::class, 'Dashboard');
+        $c->where([
             'widget' => $this->widget->get('id'),
             'user' => $user,
-        ));
+        ]);
         $c->sortby('Dashboard.name','ASC');
-        $c->select($this->modx->getSelectColumns('modDashboardWidgetPlacement','modDashboardWidgetPlacement'));
-        $c->select(array(
+        $c->select($this->modx->getSelectColumns(modDashboardWidgetPlacement::class, 'modDashboardWidgetPlacement'));
+        $c->select([
             'Dashboard.name',
             'Dashboard.description',
-        ));
+        ]);
         $placements = $this->widget->getMany('Placements',$c);
         /** @var modDashboardWidgetPlacement $placement */
         foreach ($placements as $placement) {
-            $list[] = array(
+            $list[] = [
                 $placement->get('dashboard'),
                 $placement->get('name'),
                 $placement->get('description'),
-            );
+            ];
         }
         return $list;
     }
@@ -115,7 +120,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('dashboards');
+        return $this->modx->lexicon('widget').': '.$this->widgetArray['name'];
     }
 
     /**
@@ -131,7 +136,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return array
      */
     public function getLanguageTopics() {
-        $topics = array('dashboards','user');
+        $topics = ['dashboards','user'];
         if ($this->widget) {
             $lexicon = $this->widget->get('lexicon');
             if (!empty($lexicon) && $lexicon != 'core:dashboards') {

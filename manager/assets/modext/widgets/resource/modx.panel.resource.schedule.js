@@ -1,3 +1,11 @@
+/**
+ * Loads the Resource Schedule panel
+ *
+ * @class MODx.panel.ResourceSchedule
+ * @extends MODx.FormPanel
+ * @param {Object} config An object of configuration options
+ * @xtype modx-panel-resource-schedule
+ */
 MODx.panel.ResourceSchedule = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -9,8 +17,9 @@ MODx.panel.ResourceSchedule = function(config) {
             html: _('site_schedule')
             ,id: 'modx-resource-schedule-header'
             ,xtype: 'modx-header'
-        },{
-            layout: 'form'
+        },MODx.getPageStructure([{
+            title: _('site_schedule')
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('site_schedule_desc')+'</p>'
                 ,xtype: 'modx-description'
@@ -19,7 +28,7 @@ MODx.panel.ResourceSchedule = function(config) {
 				,cls:'main-wrapper'
                 ,preventRender: true
             }]
-        }]
+        }])]
     });
     MODx.panel.ResourceSchedule.superclass.constructor.call(this,config);
 };
@@ -40,43 +49,58 @@ MODx.grid.ResourceSchedule = function(config) {
         title: _('site_schedule')
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'resource/event/getList'
+            action: 'Resource/Event/GetList'
             ,mode: 'pub_date'
         }
-        ,fields: ['id','pagetitle','class_key'
+        ,fields: [
+            'id'
+            ,'pagetitle'
+            ,'class_key'
             ,{name: 'pub_date', type: 'date'}
             ,{name: 'unpub_date', type:'date'}
-            ,'menu']
-        ,paging: true
-        ,save_action: 'resource/event/updatefromgrid'
-        ,autosave: true
-        ,columns: [
-            { header: _('id') ,dataIndex: 'id' ,width: 40 }
-            ,{ header: _('pagetitle') ,dataIndex: 'pagetitle' ,width: 40 }
-            ,{
-                header: _('publish_date')
-                ,dataIndex: 'pub_date'
-                ,width: 150
-                ,editor: {
-                    xtype: 'xdatetime'
-                    ,dateFormat: MODx.config.manager_date_format
-                    ,timeFormat: MODx.config.manager_time_format
-                    ,ctCls: 'x-datetime-inline-editor'
-                }
-                ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
-            },{
-                header: _('unpublish_date')
-                ,dataIndex: 'unpub_date'
-                ,width: 150
-                ,editor: {
-                    xtype: 'xdatetime'
-                    ,dateFormat: MODx.config.manager_date_format
-                    ,timeFormat: MODx.config.manager_time_format
-                    ,ctCls: 'x-datetime-inline-editor'
-                }
-                ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
-            }
+            ,'menu'
         ]
+        ,showActionsColumn: false
+        ,paging: true
+        ,save_action: 'Resource/Event/UpdateFromGrid'
+        ,autosave: true
+        ,columns: [{
+            header: _('id')
+            ,dataIndex: 'id'
+            ,width: 40
+        },{
+            header: _('pagetitle')
+            ,dataIndex: 'pagetitle'
+            ,width: 40
+            ,renderer: { fn: function(v,md,record) {
+                return this.renderLink(v, {
+                    href: '?a=resource/update&id=' + record.data.id
+                    ,target: '_blank'
+                });
+            }, scope: this }
+        },{
+            header: _('publish_date')
+            ,dataIndex: 'pub_date'
+            ,width: 150
+            ,editor: {
+                xtype: 'xdatetime'
+                ,dateFormat: MODx.config.manager_date_format
+                ,timeFormat: MODx.config.manager_time_format
+                ,ctCls: 'x-datetime-inline-editor'
+            }
+            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+        },{
+            header: _('unpublish_date')
+            ,dataIndex: 'unpub_date'
+            ,width: 150
+            ,editor: {
+                xtype: 'xdatetime'
+                ,dateFormat: MODx.config.manager_date_format
+                ,timeFormat: MODx.config.manager_time_format
+                ,ctCls: 'x-datetime-inline-editor'
+            }
+            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+        }]
         ,tbar: [{
             text: _('showing_pub')
             ,scope: this
