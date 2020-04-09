@@ -115,8 +115,10 @@ class modSystemEvent {
     /**
      * Reset the event instance for reuse.
      */
-    public function resetEventObject(){
-        $this->returnedValues = null;
+    public function resetEventObject($resetData = false){
+        if ($resetData) {
+            $this->returnedValues = null;
+        }
         $this->name = '';
         $this->_output = '';
         $this->_propagate = true;
