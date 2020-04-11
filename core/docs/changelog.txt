@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.8.0-pl (TBD)
+====================================
+- Fix a Fatal Error when upgrading from MODX Revolution 2.5.x or earlier [#15053]
+
 MODX Revolution 2.7.3-pl (February 27, 2020)
 ====================================
 - Prevent reserved modResource fields `alias_visible` and `properties` to be used as Template Variable names [#15035]
