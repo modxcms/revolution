@@ -181,7 +181,7 @@ a {
   position: relative;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 640px) {
     #container {
         margin: 50px auto 0;
         width: calc(100% - 30px);
@@ -189,11 +189,10 @@ a {
 
     #modx-login-logo {
         margin: 0 auto 20px;
-    }
-
-    #modx-login-logo img {
-        margin: 0 auto;
-        display: block;
+        img {
+            margin: 0 auto;
+            display: block;
+        }
     }
 
     #modx-panel-login-div{
