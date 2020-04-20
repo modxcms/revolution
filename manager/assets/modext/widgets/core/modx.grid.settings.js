@@ -124,7 +124,21 @@ MODx.grid.SettingsGrid = function(config) {
             ,sortable: true
             ,hidden: true
             ,editable: false
-        }]
+        }],
+        isCellEditable: function(col, row) {
+            var record = config.store.getAt(row);
+            if (record.get('xtype') === 'modx-grid-json' || record.get('xtype') === 'grid-json') {
+                Ext.MessageBox.show({
+                    title: _('info')
+                    ,msg:  _('setting_err_not_editable')
+                    ,buttons: Ext.MessageBox.OK
+                    ,icon: Ext.MessageBox.INFO
+                    ,modal: true
+                });
+                return false;
+            }
+            return Ext.grid.ColumnModel.prototype.isCellEditable.call(this, col, row);
+        }
         /* Editors are pushed here. I think that they should be in general grid
          * definitions (modx.grid.js) and activated via a config property (loadEditor: true) */
         ,getCellEditor: function(colIndex, rowIndex) {
@@ -305,7 +319,9 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         var r = s.getAt(ri).data;
         v = Ext.util.Format.htmlEncode(v);
         var f;
-        if (r.xtype == 'combo-boolean' || r.xtype == 'modx-combo-boolean') {
+        if (r.xtype === 'grid-json' || r.xtype === 'modx-grid-json') {
+            return v;
+        } else if (r.xtype === 'combo-boolean' || r.xtype === 'modx-combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
             return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'datefield') {
@@ -518,6 +534,7 @@ MODx.combo.xType = function(config) {
                 ,[_('source'),'modx-combo-source']
                 ,[_('source_type'),'modx-combo-source-type']
                 ,[_('setting_manager_theme'),'modx-combo-manager-theme']
+                ,[_('json_grid'),'modx-grid-json']
             ]
         })
         ,displayField: 'd'

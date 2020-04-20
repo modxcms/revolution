@@ -234,6 +234,7 @@ $_lang['installed'] = 'Installed';
 $_lang['integer'] = 'Integer';
 $_lang['introtext'] = 'Introtext';
 $_lang['invalid_data'] = 'Invalid data';
+$_lang['json_grid'] = 'JSON Grid';
 $_lang['key'] = 'Key';
 $_lang['keyword'] = 'Keyword';
 $_lang['keywords'] = 'Keywords';
