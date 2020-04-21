@@ -49,26 +49,11 @@ abstract class modInstallTest {
         $this->_checkContexts();
         $this->_checkConfig();
         $this->_checkDatabase();
-        $this->_checkSafeMode();
         $this->_checkSuhosin();
         $this->_checkNoCompress();
         $this->_checkDocumentRoot();
 
         return $this->results;
-    }
-
-    /**
-     * Ensures safe_mode is off
-     */
-    protected function _checkSafeMode() {
-        $this->title('safe_mode',$this->install->lexicon('test_safe_mode_start').' ');
-        $safeMode = @ini_get('safe_mode');
-        $safeMode = (intval($safeMode) == 1 || strtolower($safeMode) == 'on') && strtolower($safeMode) != 'off' ? true : false;
-        if ($safeMode) {
-            $this->fail('safe_mode','',$this->install->lexicon('test_safe_mode_fail'));
-        } else {
-            $this->pass('safe_mode');
-        }
     }
 
     /**
