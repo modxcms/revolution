@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Remove references to safe_mode and related lexicons [#15058]
 - Fix nested output filters [#14458]
 - Add JSON Grid xtype [#14959]
 - Fix `allowedFileTypes` being ignored in the Media Browser [#15046]

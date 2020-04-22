@@ -75,9 +75,6 @@ if ($manifest && file_exists(MODX_CORE_PATH . 'packages/core/MODX/Revolution/mod
     $unpacked= 1;
 }
 
-$safe_mode= @ ini_get('safe_mode');
-$parser->set('safe_mode', ($safe_mode ? 1 : 0));
-
 $settings = $install->settings->fetch();
 $nfop = !empty($settings['new_folder_permissions']) ? $settings['new_folder_permissions'] : $default_folder_permissions;
 $nfip = !empty($settings['new_file_permissions']) ? $settings['new_file_permissions'] : $default_file_permissions;
