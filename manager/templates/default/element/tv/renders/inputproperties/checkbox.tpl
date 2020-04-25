@@ -23,7 +23,7 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,width: 200
+        ,anchor: '100%'
         ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
@@ -40,7 +40,7 @@ MODx.load({
         ,name: 'inopt_columns'
         ,id: 'inopt_columns{/literal}{$tv|default}{literal}'
         ,value: params['columns'] || 1
-        ,width: 300
+        ,anchor: '100%'
         ,listeners: oc
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
