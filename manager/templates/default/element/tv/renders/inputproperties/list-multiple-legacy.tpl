@@ -23,7 +23,7 @@ MODx.load({
         ,name: 'inopt_allowBlank'
         ,hiddenName: 'inopt_allowBlank'
         ,id: 'inopt_allowBlank{/literal}{$tv|default}{literal}'
-        ,width: 200
+        ,anchor: '100%'
         ,value: (params['allowBlank']) ? !(params['allowBlank'] === 0 || params['allowBlank'] === 'false') : true
         ,listeners: oc
     },{
@@ -32,33 +32,50 @@ MODx.load({
         ,html: _('required_desc')
         ,cls: 'desc-under'
     },{
-        xtype: 'textfield'
-        ,fieldLabel: _('combo_listwidth')
-        ,description: MODx.expandHelp ? '' : _('combo_listwidth_desc')
-        ,name: 'inopt_listWidth'
-        ,id: 'inopt_listWidth{/literal}{$tv|default}{literal}'
-        ,value: params['listWidth'] || ''
-        ,width: 200
-        ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_listWidth{/literal}{$tv|default}{literal}'
-        ,html: _('combo_listwidth_desc')
-        ,cls: 'desc-under'
-    },{
-        xtype: 'textfield'
-        ,fieldLabel: _('combo_listheight')
-        ,description: MODx.expandHelp ? '' : _('combo_listheight_desc')
-        ,name: 'inopt_listHeight'
-        ,id: 'inopt_listHeight{/literal}{$tv|default}{literal}'
-        ,value: params['listHeight'] || ''
-        ,width: 200
-        ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_listHeight{/literal}{$tv|default}{literal}'
-        ,html: _('combo_listheight_desc')
-        ,cls: 'desc-under'
+        layout: 'column'
+        ,border: false
+        ,defaults: {
+            layout: 'form'
+            ,labelAlign: 'top'
+            ,labelSeparator: ''
+            ,anchor: '100%'
+            ,border: false
+        }
+        ,items: [{
+            columnWidth: .5
+            ,items: [{
+                xtype: 'textfield'
+                ,fieldLabel: _('combo_listwidth')
+                ,description: MODx.expandHelp ? '' : _('combo_listwidth_desc')
+                ,name: 'inopt_listWidth'
+                ,id: 'inopt_listWidth{/literal}{$tv|default}{literal}'
+                ,value: params['listWidth'] || ''
+                ,anchor: '100%'
+                ,listeners: oc
+            },{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,forId: 'inopt_listWidth{/literal}{$tv|default}{literal}'
+                ,html: _('combo_listwidth_desc')
+                ,cls: 'desc-under'
+            }]
+        },{
+            columnWidth: .5
+            ,items: [{
+                xtype: 'textfield'
+                ,fieldLabel: _('combo_listheight')
+                ,description: MODx.expandHelp ? '' : _('combo_listheight_desc')
+                ,name: 'inopt_listHeight'
+                ,id: 'inopt_listHeight{/literal}{$tv|default}{literal}'
+                ,value: params['listHeight'] || ''
+                ,anchor: '100%'
+                ,listeners: oc
+            },{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,forId: 'inopt_listHeight{/literal}{$tv|default}{literal}'
+                ,html: _('combo_listheight_desc')
+                ,cls: 'desc-under'
+            }]
+        }]
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
 });
