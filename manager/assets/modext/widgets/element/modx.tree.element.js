@@ -563,6 +563,28 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             });
         }
 
+        if (n.hasChildNodes()) {
+            m.push('-');
+
+            if (n.isExpanded()) {
+                m.push({
+                    text: _('collapse_all')
+                    ,handler: function() {
+                        n.collapseChildNodes();
+                    }
+                });
+            }
+
+            m.push({
+                text: _('expand_all')
+                ,handler: function() {
+                    if (n.isExpandable()) {
+                        n.expand(true);
+                    }
+                }
+            });
+        }
+
         return m;
     }
 
