@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Date TV improvements [#15000]
 - Improve navigation styles in element tree [#14989]
 - Prevent overwriting apache_request_headers() in modRestServiceRequest [#15060]
 - Fix checkbox toggling for custom context paths in setup [#15008]
