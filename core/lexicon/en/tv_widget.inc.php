@@ -113,8 +113,6 @@ $_lang['resourcelist_where'] = 'Where Conditions';
 $_lang['resourcelist_where_desc'] = 'A JSON object of where conditions to filter by in the query that grabs the list of Resources. (Does not support TV searching.)<br/>Examples: [{"template:=":"4"}], [{"pagetitle:!=":"Home"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'RichText';
 $_lang['sentence_case'] = 'Sentence Case';
-$_lang['shownone'] = 'Allow Empty Choice';
-$_lang['shownone_desc'] = 'Allow the user to select an empty choice which is a blank value.';
 $_lang['start_day'] = 'Start Day';
 $_lang['start_day_desc'] = 'Day index at which the week should begin, 0-based (defaults to 0, which is Sunday)';
 $_lang['string'] = 'String';
