@@ -13330,7 +13330,9 @@ readers do not read off random characters that represent icons */
 .x-date-left a:before,
 .x-date-mp-ybtn a.x-date-mp-prev:before,
 .x-date-mp-ybtn a.x-date-mp-next:before, .x-tab-scroller-left:before,
-.x-tab-scroller-right:before, #modx-footer .modx-subnav li.sub:after, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-minus:before,
+.x-tab-scroller-right:before, #modx-footer .modx-subnav li.sub:after, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-plus:before,
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before, .icon-rss:before, .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
@@ -13391,8 +13393,7 @@ readers do not read off random characters that represent icons */
 .icon-less:before,
 .icon-styl:before, .icon-lock, .tree-context:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .parent-resource:before,
 .icon-folder:before, .x-tree-node-expanded .parent-resource:before,
-.x-tree-node-expanded .icon-folder:before, .locked-resource:before, .x-tree-arrows .x-tree-elbow-plus:before,
-.x-tree-arrows .x-tree-elbow-end-plus:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, .modx-header-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
+.x-tree-node-expanded .icon-folder:before, .locked-resource:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, .modx-header-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -19867,20 +19868,26 @@ ul.x-tab-strip-bottom {
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
-  padding-left: 6px;
-  margin: 0 0 0 -16px; }
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: center;
+  margin: 0; }
+
+.x-tree-arrows .x-tree-elbow-plus:before,
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-plus:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before {
+  content: "\f0da"; }
 
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: "\f0d7";
-  padding-left: 4px;
-  width: 12px; }
+  content: "\f0d7"; }
 
 /* tree states */
 .x-tree-node-el {
   color: #515151;
   font: normal 14px/2.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  padding-left: 6px;
+  padding: 0 0 0 8px;
   /* For legacy icons */
   background-repeat: no-repeat;
   background-position: 5px; }
@@ -19970,7 +19977,7 @@ ul.x-tab-strip-bottom {
   top: 0;
   right: 6px;
   bottom: 0;
-  line-height: 30px;
+  line-height: 34px;
   opacity: 0;
   transition: opacity .4s ease-in; }
   .x-tree-node-el .modx-tree-node-btn-create .x-btn {
@@ -20396,29 +20403,6 @@ ul.x-tab-strip-bottom {
 
 .x-tree-root-node {
   margin: 0; }
-
-.x-tree-arrows .x-tree-elbow-plus,
-.x-tree-arrows .x-tree-elbow-minus,
-.x-tree-arrows .x-tree-elbow-end-plus,
-.x-tree-arrows .x-tree-elbow-end-minus {
-  background: none; }
-
-.x-tree-arrows .x-tree-elbow-plus:before,
-.x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-plus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: "\f0da";
-  background: transparent 0 0;
-  display: inline-block;
-  width: 10px;
-  padding-left: 6px;
-  margin: 0; }
-
-.x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: "\f0d7";
-  padding-left: 4px;
-  width: 12px; }
 
 .x-tree-node {
   color: #515151; }
