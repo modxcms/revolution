@@ -563,26 +563,30 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             });
         }
 
-        if (n.hasChildNodes()) {
-            m.push('-');
+        if (n.isLoaded()) {
+            var childNodes = n.childNodes;
 
-            if (n.isExpanded()) {
+            if (childNodes.some(function(child) { return !child.leaf; })) { // If any childNode has own children
+                m.push('-');
+    
+                if (n.isExpanded() && childNodes.some(function(child) { return child.isExpanded(); })) { // If any childNode is expanded
+                    m.push({
+                        text: _('collapse_all')
+                        ,handler: function() {
+                            n.collapseChildNodes();
+                        }
+                    });
+                }
+    
                 m.push({
-                    text: _('collapse_all')
+                    text: _('expand_all')
                     ,handler: function() {
-                        n.collapseChildNodes();
+                        if (n.isExpandable()) {
+                            n.expand(true);
+                        }
                     }
                 });
             }
-
-            m.push({
-                text: _('expand_all')
-                ,handler: function() {
-                    if (n.isExpandable()) {
-                        n.expand(true);
-                    }
-                }
-            });
         }
 
         return m;
