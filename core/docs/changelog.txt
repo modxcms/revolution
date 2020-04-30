@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Update PHPMailer to 5.2.28 [#15041]
 - Fix a Fatal Error when upgrading from MODX Revolution 2.5.x or earlier [#15053]
 
 MODX Revolution 2.7.3-pl (February 27, 2020)
