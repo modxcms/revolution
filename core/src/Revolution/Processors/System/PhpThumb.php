@@ -70,6 +70,8 @@ class PhpThumb extends Processor
             return '';
         }
 
+        $this->unsetProperty('t');
+
         $this->loadPhpThumb();
         /* set source and generate thumbnail */
         $this->phpThumb->set($src);
