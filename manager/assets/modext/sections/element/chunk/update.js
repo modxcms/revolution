@@ -55,6 +55,7 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
             ,type: 'chunk'
             ,name: _('duplicate_of',{name: this.record.name})
             ,source: this.record.source
+            ,openTo: this.record.openTo
             ,static: this.record.static
             ,static_file: this.record.static_file
             ,category: this.record.category

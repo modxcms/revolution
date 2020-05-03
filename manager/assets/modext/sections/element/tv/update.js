@@ -56,6 +56,7 @@ Ext.extend(MODx.page.UpdateTV,MODx.Component, {
             ,name: _('duplicate_of',{name: this.record.name})
             ,caption: _('duplicate_of',{name: this.record.caption})
             ,source: this.record.source
+            ,openTo: this.record.openTo
             ,static: this.record.static
             ,static_file: this.record.static_file
             ,category: this.record.category

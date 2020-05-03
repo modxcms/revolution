@@ -55,6 +55,7 @@ Ext.extend(MODx.page.UpdateTemplate,MODx.Component, {
             ,type: 'template'
             ,name: _('duplicate_of',{name: this.record.templatename})
             ,source: this.record.source
+            ,openTo: this.record.openTo
             ,static: this.record.static
             ,static_file: this.record.static_file
             ,category: this.record.category
