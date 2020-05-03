@@ -391,7 +391,7 @@ class phpthumb_bmp {
 						case 1:
 							for ($row = ($thisfile_bmp_header_raw['height'] - 1); $row >= 0; $row--) {
 								for ($col = 0; $col < $thisfile_bmp_header_raw['width']; $col = $col) {
-									$paletteindexbyte = ord($BMPpixelData{$pixeldataoffset++});
+									$paletteindexbyte = ord($BMPpixelData[$pixeldataoffset++]);
 									for ($i = 7; $i >= 0; $i--) {
 										$paletteindex = ($paletteindexbyte & (0x01 << $i)) >> $i;
 										$thisfile_bmp['data'][$row][$col] = $thisfile_bmp['palette'][$paletteindex];
@@ -408,7 +408,7 @@ class phpthumb_bmp {
 						case 4:
 							for ($row = ($thisfile_bmp_header_raw['height'] - 1); $row >= 0; $row--) {
 								for ($col = 0; $col < $thisfile_bmp_header_raw['width']; $col = $col) {
-									$paletteindexbyte = ord($BMPpixelData{$pixeldataoffset++});
+									$paletteindexbyte = ord($BMPpixelData[$pixeldataoffset++]);
 									for ($i = 1; $i >= 0; $i--) {
 										$paletteindex = ($paletteindexbyte & (0x0F << (4 * $i))) >> (4 * $i);
 										$thisfile_bmp['data'][$row][$col] = $thisfile_bmp['palette'][$paletteindex];
@@ -425,7 +425,7 @@ class phpthumb_bmp {
 						case 8:
 							for ($row = ($thisfile_bmp_header_raw['height'] - 1); $row >= 0; $row--) {
 								for ($col = 0; $col < $thisfile_bmp_header_raw['width']; $col++) {
-									$paletteindex = ord($BMPpixelData{$pixeldataoffset++});
+									$paletteindex = ord($BMPpixelData[$pixeldataoffset++]);
 									$thisfile_bmp['data'][$row][$col] = $thisfile_bmp['palette'][$paletteindex];
 								}
 								while (($pixeldataoffset % 4) != 0) {
@@ -438,7 +438,7 @@ class phpthumb_bmp {
 						case 24:
 							for ($row = ($thisfile_bmp_header_raw['height'] - 1); $row >= 0; $row--) {
 								for ($col = 0; $col < $thisfile_bmp_header_raw['width']; $col++) {
-									$thisfile_bmp['data'][$row][$col] = (ord($BMPpixelData{$pixeldataoffset+2}) << 16) | (ord($BMPpixelData{$pixeldataoffset+1}) << 8) | ord($BMPpixelData{$pixeldataoffset});
+									$thisfile_bmp['data'][$row][$col] = (ord($BMPpixelData[$pixeldataoffset+2]) << 16) | (ord($BMPpixelData[$pixeldataoffset+1]) << 8) | ord($BMPpixelData[$pixeldataoffset]);
 									$pixeldataoffset += 3;
 								}
 								while (($pixeldataoffset % 4) != 0) {
@@ -451,7 +451,7 @@ class phpthumb_bmp {
 						case 32:
 							for ($row = ($thisfile_bmp_header_raw['height'] - 1); $row >= 0; $row--) {
 								for ($col = 0; $col < $thisfile_bmp_header_raw['width']; $col++) {
-									$thisfile_bmp['data'][$row][$col] = (ord($BMPpixelData{$pixeldataoffset+3}) << 24) | (ord($BMPpixelData{$pixeldataoffset+2}) << 16) | (ord($BMPpixelData{$pixeldataoffset+1}) << 8) | ord($BMPpixelData{$pixeldataoffset});
+									$thisfile_bmp['data'][$row][$col] = (ord($BMPpixelData[$pixeldataoffset+3]) << 24) | (ord($BMPpixelData[$pixeldataoffset+2]) << 16) | (ord($BMPpixelData[$pixeldataoffset+1]) << 8) | ord($BMPpixelData[$pixeldataoffset]);
 									$pixeldataoffset += 4;
 								}
 								while (($pixeldataoffset % 4) != 0) {
@@ -814,7 +814,7 @@ class phpthumb_bmp {
 		$byteword = strrev($byteword);
 		$bytewordlen = strlen($byteword);
 		for ($i = 0; $i < $bytewordlen; $i++) {
-			$intvalue += ord($byteword{$i}) * pow(256, $bytewordlen - 1 - $i);
+			$intvalue += ord($byteword[$i]) * pow(256, $bytewordlen - 1 - $i);
 		}
 		return $intvalue;
 	}
@@ -827,7 +827,7 @@ class phpthumb_bmp {
 		$binvalue = '';
 		$bytewordlen = strlen($byteword);
 		for ($i = 0; $i < $bytewordlen; $i++) {
-			$binvalue .= str_pad(decbin(ord($byteword{$i})), 8, '0', STR_PAD_LEFT);
+			$binvalue .= str_pad(decbin(ord($byteword[$i])), 8, '0', STR_PAD_LEFT);
 		}
 		return $binvalue;
 	}
@@ -840,7 +840,7 @@ class phpthumb_bmp {
 	public function Bin2Dec($binstring, $signed=false) {
 		$signmult = 1;
 		if ($signed) {
-			if ($binstring{0} == '1') {
+			if ($binstring[0] == '1') {
 				$signmult = -1;
 			}
 			$binstring = substr($binstring, 1);

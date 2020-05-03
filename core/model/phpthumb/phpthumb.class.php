@@ -9,12 +9,16 @@
 //                                                         ///
 //////////////////////////////////////////////////////////////
 
-ob_start();
-if (!include_once __DIR__ .'/phpthumb.functions.php' ) {
-	ob_end_flush();
-	die('failed to include_once("'. __DIR__ .'/phpthumb.functions.php")');
+if (!class_exists('phpthumb_functions'))
+{
+	ob_start();
+	if(!include_once __DIR__ . '/phpthumb.functions.php')
+	{
+		ob_end_flush();
+		die('failed to include_once("' . __DIR__ . '/phpthumb.functions.php")');
+	}
+	ob_end_clean();
 }
-ob_end_clean();
 
 class phpthumb {
 
@@ -208,14 +212,14 @@ class phpthumb {
 	public $tempFilesToDelete = array();
 	public $cache_filename    = null;
 
-    public $AlphaCapableFormats = array( 'png', 'ico', 'gif', 'webp');
+	public $AlphaCapableFormats = array( 'png', 'ico', 'gif', 'webp');
 	public $is_alpha = false;
 
 	public $iswindows        = null;
 	public $issafemode       = null;
 	public $php_memory_limit = null;
 
-	public $phpthumb_version = '1.7.15-201902101903';
+	public $phpthumb_version = '1.7.15-202004301145';
 
 	//////////////////////////////////////////////////////////////////////
 
@@ -604,7 +608,7 @@ class phpthumb {
 		// render thumbnail to this file only, do not cache, do not output to browser
 		//$renderfilename = $this->ResolveFilenameToAbsolute(dirname($filename)).DIRECTORY_SEPARATOR.basename($filename);
 		$renderfilename = $filename;
-		if (($filename{0} != '/') && ($filename{0} != '\\') && ($filename{1} != ':')) {
+		if (($filename[0] != '/') && ($filename[0] != '\\') && ($filename[1] != ':')) {
 			$renderfilename = $this->ResolveFilenameToAbsolute($renderfilename);
 		}
 		if (!@is_writable(dirname($renderfilename))) {
@@ -979,6 +983,10 @@ class phpthumb {
 				$this->thumbnailFormat         = 'gif';
 				$AvailableImageOutputFormats[] = 'gif';
 			}
+			if ($imagetypes & IMG_WEBP) {
+				$this->thumbnailFormat         = 'webp';
+				$AvailableImageOutputFormats[] = 'webp';
+			}
 			if ($imagetypes & IMG_PNG) {
 				$this->thumbnailFormat         = 'png';
 				$AvailableImageOutputFormats[] = 'png';
@@ -986,10 +994,6 @@ class phpthumb {
 			if ($imagetypes & IMG_JPG) {
 				$this->thumbnailFormat         = 'jpeg';
 				$AvailableImageOutputFormats[] = 'jpeg';
-			}
-			if ($imagetypes & IMG_WEBP) {
-				$this->thumbnailFormat         = 'webp';
-				$AvailableImageOutputFormats[] = 'webp';
 			}
 		} else {
 			$this->DebugMessage('imagetypes() does not exist - GD support might not be enabled?',  __FILE__, __LINE__);
@@ -1286,7 +1290,7 @@ class phpthumb {
 			return false;
 		}
 
-		if (preg_match('#^[a-z0-9]+\:/{1,2}#i', $filename)) {
+		if (preg_match('#^[a-z0-9]+\\:/{1,2}#i', $filename)) {
 			// eg: http://host/path/file.jpg (HTTP URL)
 			// eg: ftp://host/path/file.jpg  (FTP URL)
 			// eg: data1:/path/file.jpg      (Netware path)
@@ -1294,7 +1298,7 @@ class phpthumb {
 			//$AbsoluteFilename = $filename;
 			return $filename;
 
-		} elseif ($this->iswindows && isset($filename{1}) && ($filename{1} == ':')) {
+		} elseif ($this->iswindows && isset($filename[1]) && ($filename[1] == ':')) {
 
 			// absolute pathname (Windows)
 			$AbsoluteFilename = $filename;
@@ -1304,14 +1308,14 @@ class phpthumb {
 			// absolute pathname (Windows)
 			$AbsoluteFilename = $filename;
 
-		} elseif ($filename{0} == '/') {
+		} elseif ($filename[0] == '/') {
 
 			if (@is_readable($filename) && !@is_readable($this->config_document_root.$filename)) {
 
 				// absolute filename (*nix)
 				$AbsoluteFilename = $filename;
 
-			} elseif (isset($filename{1}) && ($filename{1} == '~')) {
+			} elseif (isset($filename[1]) && ($filename[1] == '~')) {
 
 				// /~user/path
 				if ($ApacheLookupURIarray = phpthumb_functions::ApacheLookupURIarray($filename)) {
@@ -1471,7 +1475,7 @@ class phpthumb {
 				$which_convert = $this->ImageMagickWhichConvert();
 				$IMversion     = $this->ImageMagickVersion();
 
-				if ($which_convert && ($which_convert{0} == '/') && $this->file_exists_ignoreopenbasedir($which_convert)) {
+				if ($which_convert && ($which_convert[0] == '/') && $this->file_exists_ignoreopenbasedir($which_convert)) {
 
 					// `which convert` *should* return the path if "convert" exist, or nothing if it doesn't
 					// other things *may* get returned, like "sh: convert: not found" or "no convert in /usr/local/bin /usr/sbin /usr/bin /usr/ccs/bin"
@@ -1731,7 +1735,7 @@ class phpthumb {
 					// for vector source formats only (WMF, PDF, etc)
 					if (is_array($getimagesize) && isset($getimagesize[2]) && ($getimagesize[2] == IMAGETYPE_PNG)) {
 						// explicitly exclude PNG from "-flatten" to make sure transparency is preserved
-						// https://github.com/JamesHeinrich/phpThumb/issues/65#issuecomment-256454015
+						// https://github.com/JamesHeinrich/phpThumb/issues/65
 					} else {
 						$commandline .= ' -flatten';
 						$commandline .= ' -density '.phpthumb_functions::escapeshellarg_replacement($this->dpi);
@@ -1747,7 +1751,7 @@ class phpthumb {
 					if (!preg_match('#('.implode('|', $this->AlphaCapableFormats).')#i', $outputFormat)) {
 						// not a transparency-capable format
 						$commandline .= ' -background '.phpthumb_functions::escapeshellarg_replacement('#'.($this->bg ? $this->bg : 'FFFFFF'));
-                        if (!stristr($commandline, ' -flatten')) {
+						if (!stristr($commandline, ' -flatten')) {
 							$commandline .= ' -flatten';
 						}
 					} else {
@@ -1874,7 +1878,11 @@ if (false) {
 
 								$commandline .= ' -'.$IMresizeParameter.' '.phpthumb_functions::escapeshellarg_replacement(phpthumb_functions::nonempty_min($this->w, $getimagesize[0]).'x'.phpthumb_functions::nonempty_min($this->h, $getimagesize[1]));
 								$commandline .= ' -gravity center';
-								$commandline .= ' -background '.phpthumb_functions::escapeshellarg_replacement('#'.$this->bg);
+								if ($this->bg) {
+									$commandline .= ' -background ' . phpthumb_functions::escapeshellarg_replacement('#' . $this->bg);
+								} else {
+									$commandline .= ' -background none';
+								}
 								$commandline .= ' -extent '.phpthumb_functions::escapeshellarg_replacement($this->w.'x'.$this->h);
 
 							} else {
@@ -2608,8 +2616,9 @@ if (false) {
 		}
 		switch ($this->thumbnailFormat) {
 			case 'png':
+			case 'webp':
 			case 'ico':
-				// image has alpha transparency, but output as PNG or ICO which can handle it
+				// image has alpha transparency, but output as PNG, WEBP or ICO which can handle it
 				$this->DebugMessage('skipping AlphaChannelFlatten() because ($this->thumbnailFormat == "'.$this->thumbnailFormat.'")', __FILE__, __LINE__);
 				return false;
 				break;
