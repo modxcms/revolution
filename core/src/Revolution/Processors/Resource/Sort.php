@@ -31,6 +31,7 @@ class Sort extends Processor
     public $target;
     public $activeTarget;
     public $menuindex;
+    public $isFolder;
     public $point;
 
     public $autoIsFolder = true;
@@ -62,7 +63,6 @@ class Sort extends Processor
         $this->fireBeforeSort();
 
         $target = $this->getProperty('target', '');
-        $activeTarget = (int) $this->getProperty('activeTarget', '');
         $source = $this->getProperty('source', '');
         $point = $this->getProperty('point', '');
 
@@ -79,6 +79,7 @@ class Sort extends Processor
         }
 
         $this->point = $point;
+        $this->activeTarget = (int) $this->getProperty('activeTarget', '');
         $this->parseNodes($source, $target);
 
         $sorted = $this->sort();
@@ -98,14 +99,14 @@ class Sort extends Processor
             $this->getProperty('source_pk')
         );
 
-        if (!empty($activeTarget)) {
-            $resource = $this->modx->getObject(modResource::class, $activeTarget);
+        if (!empty($this->activeTarget)) {
+            $resource = $this->modx->getObject(modResource::class, $this->activeTarget);
             if ($resource instanceof modResource) {
                 $this->menuindex = $resource->get('menuindex');
             }
         }
 
-        return $this->success('', ['menuindex' => $this->menuindex]);
+        return $this->success('', ['menuindex' => $this->menuindex, 'isfolder' => $this->isFolder]);
     }
 
     protected function getNodesFormatted($currentLevel, $parent = 0)
@@ -181,12 +182,20 @@ class Sort extends Processor
             if ($oldParentChildrenCount <= 0 || $oldParentChildrenCount == null) {
                 $oldParent->set('isfolder', false);
                 $oldParent->save();
+
+                if (!empty($this->activeTarget) && $this->activeTarget == $oldParent->get('id')) {
+                    $this->isFolder = false;
+                }
             }
         }
 
         if (!empty($newParent)) {
             $newParent->set('isfolder', true);
             $newParent->save();
+
+            if (!empty($this->activeTarget) && $this->activeTarget == $newParent->get('id')) {
+                $this->isFolder = true;
+            }
         }
     }
 
