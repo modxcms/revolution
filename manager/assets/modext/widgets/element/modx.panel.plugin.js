@@ -73,7 +73,7 @@ MODx.panel.Plugin = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('plugin')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'Element/Plugin/Create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'element/plugin/create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -383,7 +383,7 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-plugin-which-editor').getValue();
-            MODx.request.a = 'Element/Plugin/Update';
+            MODx.request.a = 'element/plugin/update';
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
