@@ -87,13 +87,13 @@ $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Hieronder is een lijst met alle geinstalleerde Dashboard Widgets.';
 
 $_lang['action_new_resource'] = 'Nieuwe pagina';
-$_lang['action_new_resource_desc'] = 'Maak een nieuwe pagina voor uw website.';
+$_lang['action_new_resource_desc'] = 'Maak een nieuwe pagina voor je website.';
 $_lang['action_view_website'] = 'Website tonen';
-$_lang['action_view_website_desc'] = 'Open uw website in een nieuw venster.';
+$_lang['action_view_website_desc'] = 'Open je website in een nieuw venster.';
 $_lang['action_advanced_search'] = 'Geavanceerd zoeken';
-$_lang['action_advanced_search_desc'] = 'Geavanceerd zoeken binnen uw website.';
+$_lang['action_advanced_search_desc'] = 'Geavanceerd zoeken binnen je website.';
 $_lang['action_manage_users'] = 'Gebruikers beheren';
-$_lang['action_manage_users_desc'] = 'Alle uw website en manager gebruikers beheren.';
+$_lang['action_manage_users_desc'] = 'Alle website en manager gebruikers beheren.';
 
 $_lang['w_buttons'] = 'Knoppen';
 $_lang['w_buttons_desc'] = 'Toont een rij knoppen op basis van gespecificeerde eigenschappen.';

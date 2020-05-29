@@ -1,6 +1,6 @@
-
 # ignore all .htaccess
 .htaccess
+/extras/
 
 # ignore all IIS files
 web.config
