@@ -43,8 +43,10 @@ class modInstallSettings {
                     $server_dsn = "{$this->settings['database_type']}:server={$this->settings['database_server']}";
                     break;
                 case 'mysql':
-                    $database_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']};dbname={$this->settings['dbase']};charset={$this->settings['database_connection_charset']}";
-                    $server_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']};charset={$this->settings['database_connection_charset']}";
+                    $server = explode(':', $this->settings['database_server']);
+                    $port = !empty($server[1]) ? "port={$server[1]};" : '';
+                    $database_dsn = "{$this->settings['database_type']}:host={$server[0]};{$port}dbname={$this->settings['dbase']};charset={$this->settings['database_connection_charset']}";
+                    $server_dsn = "{$this->settings['database_type']}:host={$server[0]};{$port}charset={$this->settings['database_connection_charset']}";
                     break;
                 default:
                     $database_dsn = '';

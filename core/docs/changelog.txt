@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Fix DSN creation during an update with an existing port [#15083]
 - Update phpThumb 1.7.15 [#15071]
 - Clear phpThumb connector properties [#15055]
 - Update PHPMailer to 5.2.28 [#15041]
