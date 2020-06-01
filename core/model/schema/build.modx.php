@@ -5,11 +5,11 @@ $mtime= $mtime[1] + $mtime[0];
 $tstart= $mtime;
 
 $properties = array();
-include_once (dirname(dirname(__DIR__)) . '/xpdo/xpdo.class.php');
-require_once (dirname(dirname(dirname(__DIR__))) . '/config.core.php');
-require_once (dirname(dirname(dirname(__DIR__))) . '/_build/build.properties.php');
+include_once (dirname(dirname(dirname(__FILE__))) . '/xpdo/xpdo.class.php');
+require_once (dirname(dirname(dirname(dirname(__FILE__)))) . '/config.core.php');
+require_once (dirname(dirname(dirname(dirname(__FILE__)))) . '/_build/build.properties.php');
 
-foreach (array('mysql', 'sqlsrv') as $driver) {
+foreach (array('mysql', 'sqlsrv', 'sqlite') as $driver){
     $xpdo= new xPDO(
         $properties["{$driver}_string_dsn_nodb"],
         $properties["{$driver}_string_username"],
@@ -28,8 +28,7 @@ foreach (array('mysql', 'sqlsrv') as $driver) {
 /**
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
-*/
-
+ */
 /**
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
@@ -43,7 +42,7 @@ EOD;
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]
  */
-require_once (dirname(__DIR__) . '/[+class-lowercase+].class.php');
+require_once (dirname(dirname(__FILE__)) . '/[+class-lowercase+].class.php');
 /**
  * [+phpdoc-package+]
  * [+phpdoc-subpackage+]

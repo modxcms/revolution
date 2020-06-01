@@ -1,13 +1,8 @@
 <?php
-/*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
+/**
+ * @package modx
+ * @subpackage transport
  */
-
 /**
  * Represents an xPDOTransport package as required for MODX Providers and package installation
  *
@@ -344,7 +339,7 @@ class modTransportPackage extends xPDOObject {
                 $this->save();
             } else {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('package_err_uninstall',array(
-                    'signature' => $this->get('signature'),
+                    'signature' => $this->package->get('signature'),
                 )));
             }
         } else {
@@ -472,7 +467,7 @@ class modTransportPackage extends xPDOObject {
                         'modTransportPackage',
                         array(
                             array(
-                                "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})"
+                                "UPPER({$this->xpdo->escape('package_name')}) LIKE UPPER({$this->xpdo->quote($package)})"
                             ),
                             'installed:IS NOT' => null,
                         )
@@ -484,7 +479,7 @@ class modTransportPackage extends xPDOObject {
                         $latest->parseSignature();
                         if (xPDOTransport::satisfies($latest->version, $constraint)) {
                             unset($latest);
-                            break;
+                            continue;
                         }
                     }
                     $unsatisfied[$package] = $constraint;
@@ -497,15 +492,14 @@ class modTransportPackage extends xPDOObject {
     public function checkDownloadedDependencies(array $dependencies) {
         $satisfied = array();
         foreach ($dependencies as $package => $constraint) {
-            if (strtolower($package) === strtolower($this->identifier) || $package === 'php' || $package === 'modx') continue;
+            if (strtolower($package) === strtolower($this->identifier)) continue;
 
             /* get latest installed package version */
             $latestQuery = $this->xpdo->newQuery(
                 'modTransportPackage',
                 array(
                     array(
-                        "UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($package)})",
-                        'OR:signature:LIKE' => $package . '-%'
+                        "UPPER({$this->xpdo->escape('package_name')}) LIKE UPPER({$this->xpdo->quote($package)})"
                     ),
                     'installed:IS' => null,
                 )
@@ -607,7 +601,7 @@ class modTransportPackage extends xPDOObject {
                     $resolution = $provider->latest($package, $constraint);
                 }
                 /* loop through active providers if all else fails */
-                if (empty($resolution)) {
+                if ($resolution === false) {
                     $query = $this->xpdo->newQuery('transport.modTransportProvider', $conditions);
                     $query->sortby('priority', 'ASC');
                     /** @var modTransportProvider $p */
@@ -619,7 +613,7 @@ class modTransportPackage extends xPDOObject {
                         }
                     }
                 }
-                if (empty($resolution)) {
+                if ($resolution === false) {
                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not find package to satisfy dependency {$package} @ {$constraint} from your currently active providers", '', __METHOD__, __FILE__, __LINE__);
                 }
                 break;
@@ -731,7 +725,7 @@ class modTransportPackage extends xPDOObject {
      */
     public function previousVersionInstalled() {
         $this->parseSignature();
-        $count = $this->xpdo->getCount('transport.modTransportPackage', array(array("UCASE({$this->xpdo->escape('package_name')}) LIKE UCASE({$this->xpdo->quote($this->identifier)})"), 'installed:IS NOT' => null, 'signature:!=' => $this->get('signature')));
+        $count = $this->xpdo->getCount('transport.modTransportPackage', array(array("UPPER({$this->xpdo->escape('package_name')}) LIKE UPPER({$this->xpdo->quote($this->identifier)})"), 'installed:IS NOT' => null, 'signature:!=' => $this->get('signature')));
         return $count > 0;
     }
 }
