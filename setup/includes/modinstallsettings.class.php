@@ -1,13 +1,4 @@
 <?php
-/*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
-
 /**
  * @package setup
  */
@@ -43,11 +34,16 @@ class modInstallSettings {
                     $server_dsn = "{$this->settings['database_type']}:server={$this->settings['database_server']}";
                     break;
                 case 'mysql':
-                    $server = explode(':', $this->settings['database_server']);
-                    $port = !empty($server[1]) ? "port={$server[1]};" : '';
-                    $database_dsn = "{$this->settings['database_type']}:host={$server[0]};{$port}dbname={$this->settings['dbase']};charset={$this->settings['database_connection_charset']}";
-                    $server_dsn = "{$this->settings['database_type']}:host={$server[0]};{$port}charset={$this->settings['database_connection_charset']}";
+                    $database_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']};dbname={$this->settings['dbase']};charset={$this->settings['database_connection_charset']}";
+                    $server_dsn = "{$this->settings['database_type']}:host={$this->settings['database_server']};charset={$this->settings['database_connection_charset']}";
                     break;
+                case 'sqlite':
+                    $database_name = explode('.',preg_replace('[^A-Za-z0-9.]', '', $this->settings['dbase']));
+                    $this->settings['dbase'] = $database_name[0];
+                    $database_fullpath = MODX_CORE_PATH.'data/'.$this->settings['dbase'].'.db3';
+                    $database_dsn = "{$this->settings['database_type']}:{$database_fullpath}";
+                    $server_dsn = "{$this->settings['database_type']}:charset={$this->settings['database_connection_charset']}"; /*NOT IMPLEMENT*/                   
+                    break;                  
                 default:
                     $database_dsn = '';
                     $server_dsn = '';
@@ -91,7 +87,7 @@ class modInstallSettings {
             $this->settings[$k] = $v;
         }
     }
-
+    
     /**
      * @return void
      */

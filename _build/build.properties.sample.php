@@ -31,6 +31,21 @@ $properties['sqlsrv_array_options']= array(
 );
 $properties['sqlsrv_array_driverOptions']= array(/*PDO::SQLSRV_ATTR_DIRECT_QUERY => false*/);
 
+/* sqlite */
+$properties['sqlite_string_dsn_test']= 'sqlite:/core/data/modx.db3';
+$properties['sqlite_string_dsn_nodb']= 'sqlite:/core/data/modx.db3';
+$properties['sqlite_string_dsn_error']= 'sqlite-err:nodb';
+$properties['sqlite_string_username']= '';  /*NEXT DRIVER*/
+$properties['sqlite_string_password']= '';  /*NEXT DRIVER*/
+$properties['sqlite_array_options']= array(
+    xPDO::OPT_CACHE_PATH => $properties['cache_path'],
+    xPDO::OPT_HYDRATE_FIELDS => true,
+    xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
+    xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
+);
+$properties['sqlite_array_driverOptions']= array(/*NEXT DRIVER*/);
+
+
 /* PHPUnit test config */
 $properties['xpdo_driver']= 'mysql';
 $properties['logLevel']= xPDO::LOG_LEVEL_INFO;

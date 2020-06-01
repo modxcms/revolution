@@ -1,13 +1,4 @@
 <?php
-/*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
-
 /**
  * Get a list of setting areas
  *
@@ -94,7 +85,7 @@ class modSystemSettingsGetAreasProcessor extends modProcessor {
             'COUNT(settingsCount.' . $this->modx->escape('key') . ') AS num_settings'
         ));
         $c->groupby('settingsArea.' . $this->modx->escape('area') . ', settingsArea.' . $this->modx->escape('namespace'));
-        $c->sortby($this->modx->escape('area'),$this->getProperty('dir','ASC'));
+        $c->sortby('settingsArea.' .$this->modx->escape('area'),$this->getProperty('dir','ASC'));
         return $c;
     }
 }
