@@ -263,56 +263,63 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearFilter: function() {
+        var s = this.getStore();
         var ns = MODx.request['ns'] ? MODx.request['ns'] : Ext.getCmp('modx-filter-namespace').getValue();
-        var area = MODx.request['area'] ? MODx.request['area'] : '';
+        s.baseParams = this.initialConfig.baseParams;
 
-        this.getStore().baseParams = this.initialConfig.baseParams;
-
-        var acb = Ext.getCmp('modx-filter-area');
-        if (acb) {
-            acb.store.baseParams['namespace'] = ns;
-            acb.store.load();
-            acb.reset();
-        }
-
+        s.baseParams.namespace = ns;
+        s.baseParams.area = '';
+        s.baseParams.key = '';
         Ext.getCmp('modx-filter-namespace').setValue(ns);
         Ext.getCmp('modx-filter-key').reset();
-
-        this.getStore().baseParams.namespace = ns;
-        this.getStore().baseParams.area = area;
-        this.getStore().baseParams.key = '';
-
+        this.clearArea();
+        if (history.replaceState) {
+            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
+        }
         this.getBottomToolbar().changePage(1);
-       // this.refresh();
-    }
-    ,filterByKey: function(tf,newValue,oldValue) {
-        this.getStore().baseParams.key = newValue;
-        this.getStore().baseParams.namespace = '';
-        this.getBottomToolbar().changePage(1);
-        //this.refresh();
-        return true;
     }
 
-    ,filterByNamespace: function(cb,rec,ri) {
-        this.getStore().baseParams['namespace'] = rec.data['name'];
-        this.getStore().baseParams['area'] = '';
-        this.getBottomToolbar().changePage(1);
-        //this.refresh();
-
+    ,clearArea: function () {
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
-            var s = acb.store;
-            s.baseParams['namespace'] = rec.data.name;
-            s.removeAll();
-            s.load();
+            acb.store.baseParams.namespace = this.getStore().baseParams.namespace;
+            acb.store.removeAll();
+            acb.store.load();
             acb.setValue('');
         }
     }
 
-    ,filterByArea: function(cb,rec,ri) {
-        this.getStore().baseParams['area'] = rec.data['v'];
+    ,filterByKey: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.key = newValue;
+        s.baseParams.namespace = '';
+        s.baseParams.area = '';
+        this.clearArea();
+        if (history.replaceState) {
+            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
+        }
         this.getBottomToolbar().changePage(1);
-       // this.refresh();
+    }
+
+    ,filterByNamespace: function(cb,rec,ri) {
+        var s = this.getStore();
+        s.baseParams.namespace = rec.data.name;
+        s.baseParams.area = '';
+        this.getBottomToolbar().changePage(1);
+
+        this.clearArea();
+        if (history.replaceState) {
+            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
+        }
+    }
+
+    ,filterByArea: function(cb,rec,ri) {
+        var s = this.getStore();
+        s.baseParams['area'] = rec.data['v'];
+        this.getBottomToolbar().changePage(1);
+        if (history.replaceState) {
+            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
+        }
     }
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
@@ -364,6 +371,23 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         return value;
         // JavaScripts time is in milliseconds
         //return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
+    }
+    ,makeUrl : function () {
+        var s = this.getStore();
+        var p = {
+            a: MODx.request['a']
+        }
+        if (s.baseParams['namespace']) {
+            p.ns = s.baseParams['namespace'];
+        }
+        if (s.baseParams['area']) {
+            p.area = s.baseParams['area'];
+        }
+        if (s.baseParams['key']) {
+            p.key = s.baseParams['key'];
+        }
+        return Ext.urlAppend(MODx.config.manager_url, Ext.urlEncode(p).replace('%2F','/'));
+
     }
 });
 Ext.reg('modx-grid-settings',MODx.grid.SettingsGrid);
