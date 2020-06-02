@@ -302,7 +302,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         s.baseParams.area = '';
         s.baseParams.key = '';
         Ext.getCmp('modx-filter-namespace').setValue(ns);
-        Ext.getCmp('modx-filter-key').reset();
+        Ext.getCmp('modx-filter-key').setValue('');
         this.clearArea();
         if (history.replaceState) {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
