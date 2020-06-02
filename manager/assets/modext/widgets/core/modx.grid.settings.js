@@ -335,10 +335,15 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,filterByNamespace: function(cb,rec,ri) {
         var s = this.getStore();
         s.baseParams.namespace = rec.data.name;
-        s.baseParams.area = '';
-        this.getBottomToolbar().changePage(1);
+        if (!MODx.request['area']) {
+            s.baseParams.area = '';
+            this.getBottomToolbar().changePage(1);
 
-        this.clearArea();
+            this.clearArea();
+        } else {
+            s.baseParams.area = MODx.request['area'];
+            MODx.request['area'] = '';
+        }
         if (history.replaceState) {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
         }
