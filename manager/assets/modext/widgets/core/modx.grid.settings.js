@@ -41,7 +41,14 @@ MODx.grid.SettingsGrid = function(config) {
         ,queryParam: 'search'
         ,width: 150
         ,listeners: {
-            'select': {fn: this.filterByNamespace, scope:this}
+            'select': {
+                fn: function (cb, rec, ri) {
+                    if (!MODx.request['key']) {
+                        this.filterByNamespace(cb, rec, ri)
+                    }
+                }
+                ,scope:this
+            }
         }
     },{
         xtype: 'modx-combo-area'
@@ -59,7 +66,14 @@ MODx.grid.SettingsGrid = function(config) {
         ,typeAhead: true
         ,forceSelection: true
         ,listeners: {
-            'select': {fn: this.filterByArea, scope:this}
+            'select': {
+                fn: function (cb, rec, ri) {
+                    if (!MODx.request['key']) {
+                        this.filterByArea(cb, rec, ri);
+                    }
+                }
+                ,scope:this
+            }
         }
     },{
         xtype: 'textfield'
@@ -67,15 +81,32 @@ MODx.grid.SettingsGrid = function(config) {
         ,id: 'modx-filter-key'
         ,cls: 'x-form-filter'
         ,emptyText: _('search_by_key')
+        ,value: MODx.request['key']
         ,listeners: {
-            'change': {fn: this.filterByKey, scope: this}
-            ,'render': {fn: function(cmp) {
-                new Ext.KeyMap(cmp.getEl(), {
-                    key: Ext.EventObject.ENTER
-                    ,fn: this.blur
-                    ,scope: cmp
-                });
-            },scope:this}
+            'change': {
+                fn: function (cb, rec, ri) {
+                    this.filterByKey(cb, rec, ri);
+                }
+                ,scope: this
+            },
+            'afterrender': {
+                fn: function (cb){
+                    if (MODx.request['key']) {
+                        this.filterByKey(cb, cb.value);
+                    }
+                }
+                ,scope: this
+            }
+            ,'render': {
+                fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: this.blur
+                        ,scope: cmp
+                    });
+                }
+                ,scope: this
+            }
         }
     },{
         xtype: 'button'
@@ -83,8 +114,8 @@ MODx.grid.SettingsGrid = function(config) {
         ,cls: 'x-form-filter-clear'
         ,text: _('filter_clear')
         ,listeners: {
-            'click': {fn: this.clearFilter, scope: this},
-            'mouseout': { fn: function(evt){
+            'click': { fn: this.clearFilter, scope: this },
+            'mouseout': { fn: function(evt) {
                     this.removeClass('x-btn-focus');
                 }
             }
