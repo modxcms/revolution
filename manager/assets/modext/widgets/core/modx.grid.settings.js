@@ -33,7 +33,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
-        ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+        ,preselectValue: (MODx.request.ns) ? MODx.request.ns : 'core'
         ,allowBlank: false
         ,editable: true
         ,typeAhead: true
@@ -43,7 +43,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'select': {
                 fn: function (cb, rec, ri) {
-                    if (!MODx.request['key']) {
+                    if (!MODx.request.key) {
                         this.filterByNamespace(cb, rec, ri)
                     }
                 }
@@ -55,10 +55,10 @@ MODx.grid.SettingsGrid = function(config) {
         ,name: 'area'
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
-        ,value: MODx.request['area']
+        ,value: MODx.request.area
         ,baseParams: {
             action: 'System/Settings/GetAreas'
-            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            ,namespace: MODx.request.ns ? MODx.request.ns : 'core'
         }
         ,width: 250
         ,allowBlank: true
@@ -68,7 +68,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'select': {
                 fn: function (cb, rec, ri) {
-                    if (!MODx.request['key']) {
+                    if (!MODx.request.key) {
                         this.filterByArea(cb, rec, ri);
                     }
                 }
@@ -81,7 +81,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,id: 'modx-filter-key'
         ,cls: 'x-form-filter'
         ,emptyText: _('search_by_key')
-        ,value: MODx.request['key']
+        ,value: MODx.request.key
         ,listeners: {
             'change': {
                 fn: function (cb, rec, ri) {
@@ -91,7 +91,7 @@ MODx.grid.SettingsGrid = function(config) {
             },
             'afterrender': {
                 fn: function (cb){
-                    if (MODx.request['key']) {
+                    if (MODx.request.key) {
                         this.filterByKey(cb, cb.value);
                         MODx.request.key = '';
                     }
@@ -198,8 +198,8 @@ MODx.grid.SettingsGrid = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Settings/GetList'
-            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
-            ,area: MODx.request['area']
+            ,namespace: MODx.request.ns ? MODx.request.ns : 'core'
+            ,area: MODx.request.area
         }
         ,clicksToEdit: 2
         ,grouping: true
@@ -296,12 +296,14 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
     ,clearFilter: function() {
         var s = this.getStore();
-        var ns = MODx.request['ns'] ? MODx.request['ns'] : Ext.getCmp('modx-filter-namespace').getValue();
+        var ns = MODx.request.ns ? MODx.request.ns : Ext.getCmp('modx-filter-namespace').getValue();
         s.baseParams = this.initialConfig.baseParams;
 
         s.baseParams.namespace = ns;
         s.baseParams.area = '';
         s.baseParams.key = '';
+        MODx.request.ns = '';
+        MODx.request.key = '';
         Ext.getCmp('modx-filter-namespace').setValue(ns);
         Ext.getCmp('modx-filter-key').setValue('');
         this.clearArea();
@@ -336,14 +338,14 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,filterByNamespace: function(cb,rec,ri) {
         var s = this.getStore();
         s.baseParams.namespace = rec.data.name;
-        if (!MODx.request['area']) {
+        if (!MODx.request.area) {
             s.baseParams.area = '';
             this.getBottomToolbar().changePage(1);
 
             this.clearArea();
         } else {
-            s.baseParams.area = MODx.request['area'];
-            MODx.request['area'] = '';
+            s.baseParams.area = MODx.request.area;
+            MODx.request.area = '';
         }
         if (history.replaceState) {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
@@ -352,7 +354,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
     ,filterByArea: function(cb,rec,ri) {
         var s = this.getStore();
-        s.baseParams['area'] = rec.data['v'];
+        s.baseParams.area = rec.data.v;
         this.getBottomToolbar().changePage(1);
         if (history.replaceState) {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
@@ -412,16 +414,16 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,makeUrl : function () {
         var s = this.getStore();
         var p = {
-            a: MODx.request['a']
+            a: MODx.request.a
         }
-        if (s.baseParams['namespace']) {
-            p.ns = s.baseParams['namespace'];
+        if (s.baseParams.namespace) {
+            p.ns = s.baseParams.namespace;
         }
-        if (s.baseParams['area']) {
-            p.area = s.baseParams['area'];
+        if (s.baseParams.area) {
+            p.area = s.baseParams.area;
         }
-        if (s.baseParams['key']) {
-            p.key = s.baseParams['key'];
+        if (s.baseParams.key) {
+            p.key = s.baseParams.key;
         }
         return Ext.urlAppend(MODx.config.manager_url, Ext.urlEncode(p).replace('%2F','/'));
 
