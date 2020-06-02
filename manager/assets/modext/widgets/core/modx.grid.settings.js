@@ -93,6 +93,7 @@ MODx.grid.SettingsGrid = function(config) {
                 fn: function (cb){
                     if (MODx.request['key']) {
                         this.filterByKey(cb, cb.value);
+                        MODx.request.key = '';
                     }
                 }
                 ,scope: this
