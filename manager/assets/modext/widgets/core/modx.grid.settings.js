@@ -296,7 +296,9 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
     ,clearFilter: function() {
         var s = this.getStore();
-        var ns = MODx.request.ns ? MODx.request.ns : Ext.getCmp('modx-filter-namespace').getValue();
+        var filterNs = Ext.getCmp('modx-filter-namespace');
+        var filterKey = Ext.getCmp('modx-filter-key');
+        var ns = MODx.request.ns ? MODx.request.ns : 'core';
         s.baseParams = this.initialConfig.baseParams;
 
         s.baseParams.namespace = ns;
@@ -304,8 +306,9 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         s.baseParams.key = '';
         MODx.request.ns = '';
         MODx.request.key = '';
-        Ext.getCmp('modx-filter-namespace').setValue(ns);
-        Ext.getCmp('modx-filter-key').setValue('');
+        filterNs.preselectValue = ns;
+        filterNs.setValue(ns);
+        filterKey.setValue('');
         this.clearArea();
         if (history.replaceState) {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
@@ -325,9 +328,16 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
     ,filterByKey: function(tf,newValue,oldValue) {
         var s = this.getStore();
+        var filterNs = Ext.getCmp('modx-filter-namespace');
+        var ns = MODx.request.ns ? MODx.request.ns : 'core';
+        if (newValue) {
+            ns = '';
+        }
         s.baseParams.key = newValue;
-        s.baseParams.namespace = '';
+        s.baseParams.namespace = ns;
         s.baseParams.area = '';
+        filterNs.preselectValue = (ns) ? ns : false;
+        filterNs.setValue(ns);
         this.clearArea();
         if (history.replaceState) {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
