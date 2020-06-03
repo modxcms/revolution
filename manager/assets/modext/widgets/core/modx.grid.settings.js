@@ -317,12 +317,12 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearArea: function () {
-        var acb = Ext.getCmp('modx-filter-area');
-        if (acb) {
-            acb.store.baseParams.namespace = this.getStore().baseParams.namespace;
-            acb.store.removeAll();
-            acb.store.load();
-            acb.setValue('');
+        var filterArea = Ext.getCmp('modx-filter-area');
+        if (filterArea) {
+            filterArea.store.baseParams.namespace = this.getStore().baseParams.namespace;
+            filterArea.store.removeAll();
+            filterArea.store.load();
+            filterArea.setValue('');
         }
     }
 
