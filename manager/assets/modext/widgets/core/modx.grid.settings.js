@@ -310,7 +310,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         filterNs.setValue(ns);
         filterKey.setValue('');
         this.clearArea();
-        if (history.replaceState) {
+        if (typeof window.history.replaceState !== 'undefined') {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
         }
         this.getBottomToolbar().changePage(1);
@@ -339,7 +339,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         filterNs.preselectValue = (ns) ? ns : false;
         filterNs.setValue(ns);
         this.clearArea();
-        if (history.replaceState) {
+        if (typeof window.history.replaceState !== 'undefined') {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
         }
         this.getBottomToolbar().changePage(1);
@@ -357,7 +357,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             s.baseParams.area = MODx.request.area;
             MODx.request.area = '';
         }
-        if (history.replaceState) {
+        if (typeof window.history.replaceState !== 'undefined') {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
         }
     }
@@ -366,7 +366,7 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         var s = this.getStore();
         s.baseParams.area = rec.data.v;
         this.getBottomToolbar().changePage(1);
-        if (history.replaceState) {
+        if (typeof window.history.replaceState !== 'undefined') {
             window.history.replaceState(s.baseParams, document.title, this.makeUrl());
         }
     }
