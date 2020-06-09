@@ -494,6 +494,7 @@ MODx.combo.xType = function(config) {
             fields: ['d','v']
             ,data: [[_('textfield'),'textfield']
                 ,[_('textarea'),'textarea']
+                ,[_('numberfield'),'numberfield']
                 ,[_('yesno'),'combo-boolean']
                 ,[_('password'),'text-password']
                 ,[_('category'),'modx-combo-category']
