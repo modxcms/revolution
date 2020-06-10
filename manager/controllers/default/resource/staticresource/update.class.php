@@ -42,6 +42,7 @@ Ext.onReady(function() {
         ,show_tvs: '.(!empty($this->tvCounts) ? 1 : 0).'
     });
 });
+MODx.perm.tree_show_resource_ids = '.($this->modx->hasPermission('tree_show_resource_ids') ? 1 : 0).';
 // ]]>
 </script>');
         /* load RTE */
