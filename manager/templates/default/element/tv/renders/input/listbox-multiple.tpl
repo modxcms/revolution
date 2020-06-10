@@ -44,7 +44,8 @@ Ext.onReady(function() {
         {if $params.listEmptyText|default}
             ,listEmptyText: '{$params.listEmptyText|default}'
         {/if}
-        ,forceSelection: true
+        ,allowAddNewData: {if $params.forceSelection|default && $params.forceSelection|default != 'false'}false{else}true{/if}
+        ,addNewDataOnBlur: true
         ,stackItems: {if $params.stackItems|default && $params.stackItems|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
 
@@ -53,7 +54,10 @@ Ext.onReady(function() {
             'select': {fn:MODx.fireResourceFormChange, scope:this}
             ,'beforeadditem': {fn:MODx.fireResourceFormChange, scope:this}
             ,'newitem': {fn:function(bs,v,f) {
-                bs.addNewItem({"id": v,"text": v});
+                var item = {};
+                item[bs.valueField] = v;
+                item[bs.displayField] = v;
+                bs.addNewItem(item);
                 MODx.fireResourceFormChange();
                 return true;
             },scope:this}
