@@ -619,7 +619,7 @@ MODx.LayoutMgr = function() {
                 if (isNaN(parseInt(action)) && (action.substr(0,1) == '?' || (action.substr(0, "index.php?".length) == 'index.php?'))) {
                     parts.push(action);
                 } else {
-                    parts.push('?a=' + action);
+                    parts.push('?a=' + ("" + action).toLowerCase());
                 }
             }
             if (parameters) {
