@@ -12,6 +12,9 @@ RewriteEngine On
 RewriteBase /
 
 
+# Prevent rewrite the .well-known directory used by LetsEncrypt by rules below of this rule
+RewriteRule "^\.well-known/" - [L]
+
 
 # Prevent dot directories (hidden directories like .git) to be exposed to the public
 # Except for the .well-known directory used by LetsEncrypt a.o

@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Prevent rewrite of .well-known directory used by LetsEncrypt [#15033]
 - Allow custom values in Listbox (Multi-Select) TV [#14957]
 - Fix DSN creation during an update with an existing port [#15083]
 - Clear phpThumb connector properties [#15068]
