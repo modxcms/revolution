@@ -75,9 +75,6 @@ h2 {
   float: right;
   font-size: 12px;
 
-  &:hover {
-  }
-
   &:active {
     margin: 3px 2px 1px;
   }
@@ -182,4 +179,46 @@ a {
   background: #eee;
   border: 1px solid #aaa;
   position: relative;
+}
+
+@media (max-width: 640px) {
+    #container {
+        margin: 50px auto 0;
+        width: calc(100% - 30px);
+    }
+
+    #modx-login-logo {
+        margin: 0 auto 20px;
+        img {
+            margin: 0 auto;
+            display: block;
+        }
+    }
+
+    #modx-panel-login-div {
+        padding: 25px;
+    }
+
+    .login-form-element .x-form-text {
+        width: -webkit-fill-available;
+    }
+
+    .login-cb-col {
+        float: none;
+        width: 100%;
+    }
+
+    #modx-login-btn {
+        float: none;
+        margin: 20px auto 0;
+        display: block;
+    }
+
+    .x-form-check-wrap.modx-login-rm-cb {
+        float: none;
+    }
+
+    .loginLicense {
+        width: calc(100% - 30px);
+    }
 }

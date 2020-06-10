@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Add responsive styles for login screen [#15048]
 - Prevent rewrite of .well-known directory used by LetsEncrypt [#15033]
 - Allow custom values in Listbox (Multi-Select) TV [#14957]
 - Fix DSN creation during an update with an existing port [#15083]
