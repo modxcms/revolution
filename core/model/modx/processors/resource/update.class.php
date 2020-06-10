@@ -153,7 +153,7 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         }
         $this->checkDeletedStatus();
 
-        // If we are changing an existing modResource that is not already a symlink/weblink, it does not make 
+        // If we are changing an existing modResource that is not already a symlink/weblink, it does not make
         // much sense to run this check, as it would attempt to validate the existing content of the content field
         if ($properties['class_key'] === 'modSymLink' && $this->object->get('class_key') === 'modSymLink') {
             $this->checkSymLinkTarget();
@@ -506,18 +506,18 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         }
 
         if (filter_var($target, FILTER_VALIDATE_INT) === false) {
-            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_invalid'));
+            $this->addFieldError('content', $this->modx->lexicon('resource_err_symlink_target_invalid'));
             return false;
         }
 
         $targetResource = $this->modx->getObject('modResource', $target);
         if (!$targetResource) {
-            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_nf'));
+            $this->addFieldError('content', $this->modx->lexicon('resource_err_symlink_target_nf'));
             return false;
         }
 
         if ($targetResource->get('id') === $this->object->get('id')) {
-            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_self'));
+            $this->addFieldError('content', $this->modx->lexicon('resource_err_symlink_target_self'));
             return false;
         }
 
@@ -541,12 +541,12 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         if (filter_var($target, FILTER_VALIDATE_INT) !== false) {
             $targetResource = $this->modx->getObject('modResource', $target);
             if (!$targetResource) {
-                $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_nf'));
+                $this->addFieldError('content', $this->modx->lexicon('resource_err_weblink_target_nf'));
                 return false;
             }
 
             if ($targetResource->get('id') === $this->object->get('id')) {
-                $this->addFieldError('modx-weblink-content', $this->modx->lexicon('resource_err_weblink_target_self'));
+                $this->addFieldError('content', $this->modx->lexicon('resource_err_weblink_target_self'));
                 return false;
             }
         }
