@@ -157,7 +157,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
     }
 
     ,editPolicy: function(itm,e) {
-        MODx.loadPage('Security/Access/Policy/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('security/access/policy/update', 'id='+this.menu.record.id);
     }
 
     ,createPolicy: function(btn,e) {

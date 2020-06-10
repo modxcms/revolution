@@ -154,7 +154,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 'success': {fn:function(r) {
                     var response = Ext.decode(r.a.response.responseText);
                     if (response.object.redirect) {
-                        MODx.loadPage('Resource/Update', 'id='+response.object.id);
+                        MODx.loadPage('resource/update', 'id='+response.object.id);
                     } else {
                         node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
                         this.refreshNode(node.id);

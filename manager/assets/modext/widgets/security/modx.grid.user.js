@@ -229,11 +229,11 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
     }
 
     ,createUser: function() {
-        MODx.loadPage('Security/User/Create');
+        MODx.loadPage('security/user/create');
     }
 
     ,updateUser: function() {
-        MODx.loadPage('Security/User/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('security/user/update', 'id='+this.menu.record.id);
     }
 
     ,duplicateUser: function() {

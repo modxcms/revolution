@@ -83,7 +83,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 success: {fn:function(r) {
                     var response = Ext.decode(r.a.response.responseText);
                     if (response.object.redirect) {
-                        MODx.loadPage('Resource/Update', 'id='+response.object.id);
+                        MODx.loadPage('resource/update', 'id='+response.object.id);
                     } else if (node) {
                         node.parentNode.attributes.childCount = parseInt(node.parentNode.attributes.childCount) + 1;
                         t.refreshNode(node.id);
@@ -106,7 +106,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
+                    //MODx.loadPage('resource/update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(true);
@@ -126,7 +126,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
+                    //MODx.loadPage('resource/update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(false);

@@ -232,7 +232,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
     }
 
     ,editPolicyTemplate: function(itm,e) {
-        MODx.loadPage('Security/Access/Policy/Template/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('security/access/policy/template/update', 'id='+this.menu.record.id);
     }
 
     ,removeSelected: function() {
