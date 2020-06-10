@@ -340,17 +340,35 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        var flds = ['modx-chunk-static-file','modx-chunk-static-file-help','modx-chunk-static-source','modx-chunk-static-source-help'];
-        var fld,i;
+        var flds = ['modx-chunk-static-file','modx-chunk-static-source'];
+        var fld;
+        var i;
+        var fldHelp;
         if (cb.checked) {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.show(); }
+                if (fld) {
+                    fld.show();
+                    fld.updateBox(fld.getResizeEl().parent().getBox());
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.show();
+                    }
+
+                }
             }
         } else {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.hide(); }
+                if (fld) {
+                    fld.hide();
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.hide();
+                    }
+                }
             }
         }
     }
