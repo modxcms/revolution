@@ -107,12 +107,13 @@ abstract class modManagerController
      * Sets the properties array for this controller
      *
      * @param array $properties
+     * @param bool $merge Indicates if properties should be merged with existing ones
      *
      * @return void
      */
-    public function setProperties(array $properties)
+    public function setProperties(array $properties, $merge = false)
     {
-        $this->scriptProperties = $properties;
+        $this->scriptProperties = $merge ? array_merge($this->scriptProperties, $properties) : $properties;
     }
 
     /**

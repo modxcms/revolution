@@ -57,11 +57,13 @@ abstract class Processor {
     /**
      * Set the runtime properties for the processor
      * @param array $properties The properties, in array and key-value form, to run on this processor
+     * @param bool $merge Indicates if properties should be merged with existing ones
+     *
      * @return void
      */
-    public function setProperties($properties) {
+    public function setProperties($properties, $merge = true) {
         unset($properties['HTTP_MODAUTH']);
-        $this->properties = array_merge($this->properties,$properties);
+        $this->properties = $merge ? array_merge($this->properties,$properties) : $properties;
     }
 
     /**
