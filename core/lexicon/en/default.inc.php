@@ -294,6 +294,7 @@ $_lang['no_action'] = 'No Action';
 $_lang['no_category'] = 'uncategorized';
 $_lang['no_records_found'] = 'No records found.';
 $_lang['no_results'] = 'No results found';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Offline';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Old Key';
