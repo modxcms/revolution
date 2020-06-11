@@ -106,13 +106,17 @@ Ext.extend(MODx,Ext.Component,{
                     if (cmp.allowBlank !== false) return;
 
                     var applyTo = cmp.applyTo;
+                    var label = cmp.fieldLabel;
                     if (!applyTo) {
-                        var label = cmp.fieldLabel;
-                        cmp.fieldLabel = markdom+label;
-                    } else if (applyTo && applyTo.match(/^tv[\d]*$/i)) { 
-                        var label = document.getElementById(applyTo+'-caption');
-                        var html = markdom+label.innerHTML;
-                        label.innerHTML = html;
+                        if (label) {
+                            cmp.fieldLabel = markdom + label;
+                        } else if (cmp.caption && document.getElementById(cmp.caption)) {
+                            label = document.getElementById(cmp.caption);
+                            label.innerHTML = markdom + label.innerHTML;
+                        }
+                    } else if (applyTo && applyTo.match(/^tv[\d]*$/i)) {
+                        label = document.getElementById(applyTo+'-caption');
+                        label.innerHTML = markdom+label.innerHTML;
                     }
                 }
             });

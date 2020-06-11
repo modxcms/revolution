@@ -1,6 +1,6 @@
 /**
  * Renders an input for an image TV
- * 
+ *
  * @class MODx.panel.ImageTV
  * @extends MODx.Panel
  * @param {Object} config An object of configuration properties
@@ -23,16 +23,20 @@ MODx.panel.ImageTV = function(config) {
             ,name: 'tv'+config.tv
             ,id: 'tv'+config.tv
             ,value: config.value
+            ,allowBlank: config.allowBlank
         },{
             xtype: 'modx-combo-browser'
             ,browserEl: 'tvbrowser'+config.tv
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv
+            ,caption: 'tv'+config.tv+'-caption'
             ,triggerClass: 'x-form-image-trigger'
             ,value: config.relativeValue
             // ,hideFiles: true
             ,source: config.source || 1
+            ,allowBlank: config.allowBlank
             ,allowedFileTypes: config.allowedFileTypes || ''
+            ,msgTarget: config.msgTarget
             ,openTo: config.openTo || ''
             ,hideSourceCombo: true
             ,listeners: {
@@ -49,7 +53,7 @@ MODx.panel.ImageTV = function(config) {
                     });
                 },scope:this}
             }
-        }] 
+        }]
     });
     MODx.panel.ImageTV.superclass.constructor.call(this,config);
     this.addEvents({select: true});
@@ -57,6 +61,14 @@ MODx.panel.ImageTV = function(config) {
 Ext.extend(MODx.panel.ImageTV,MODx.Panel);
 Ext.reg('modx-panel-tv-image',MODx.panel.ImageTV);
 
+/**
+ * Renders an input for an file TV
+ *
+ * @class MODx.panel.FileTV
+ * @extends MODx.Panel
+ * @param {Object} config An object of configuration properties
+ * @xtype panel-tv-file
+ */
 MODx.panel.FileTV = function(config) {
     config = config || {};
     config.filemanager_url = MODx.config.filemanager_url;
@@ -74,15 +86,19 @@ MODx.panel.FileTV = function(config) {
             ,name: 'tv'+config.tv
             ,id: 'tv'+config.tv
             ,value: config.value
+            ,allowBlank: config.allowBlank
         },{
             xtype: 'modx-combo-browser'
             ,browserEl: 'tvbrowser'+config.tv
             ,name: 'tvbrowser'+config.tv
             ,id: 'tvbrowser'+config.tv
+            ,caption: 'tv'+config.tv+'-caption'
             ,value: config.relativeValue
             // ,hideFiles: true
             ,source: config.source || 1
+            ,allowBlank: config.allowBlank
             ,allowedFileTypes: config.allowedFileTypes || ''
+            ,msgTarget: config.msgTarget
             ,wctx: config.wctx || 'web'
             ,openTo: config.openTo || ''
             ,hideSourceCombo: true
@@ -100,7 +116,7 @@ MODx.panel.FileTV = function(config) {
                     });
                 },scope:this}
             }
-        }] 
+        }]
     });
     MODx.panel.FileTV.superclass.constructor.call(this,config);
     this.addEvents({select: true});
@@ -110,5 +126,5 @@ Ext.reg('modx-panel-tv-file',MODx.panel.FileTV);
 
 MODx.checkTV = function(id) {
     var cb = Ext.get('tv'+id);
-    Ext.get('tvh'+id).dom.value = cb.dom.checked ? cb.dom.value : '';     
+    Ext.get('tvh'+id).dom.value = cb.dom.checked ? cb.dom.value : '';
 };

@@ -33,15 +33,19 @@ Ext.onReady(function() {
         ,relativeValue: '{$tv->value|escape}'
         ,width: 400
         ,msgTarget: 'under'
-        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,source: '{$source}'
-
-        {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
         ,wctx: '{if $params.wctx|default}{$params.wctx}{else}web{/if}'
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+        {if $params.allowedFileTypes},allowedFileTypes: '{$params.allowedFileTypes}'{/if}
         {if $params.openTo|default},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}
-
     {literal}
-        ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {'select': {fn:MODx.fireResourceFormChange, scope:this}}
+        ,validate: function () {
+            var value = Ext.getCmp('tv{/literal}{$tv->id}{literal}').value;
+            return !(!this.allowBlank && (value.length < 1));
+        }
+        ,markInvalid : Ext.emptyFn
+        ,clearInvalid : Ext.emptyFn
     });
     MODx.makeDroppable(Ext.get('tvpanel{/literal}{$tv->id}{literal}'),function(v) {
         var cb = Ext.getCmp('tvbrowser{/literal}{$tv->id}{literal}');
@@ -51,6 +55,7 @@ Ext.onReady(function() {
         }
         return '';
     });
+    Ext.getCmp('modx-panel-resource').getForm().add(fld{/literal}{$tv->id}{literal});
 });
 {/literal}
 // ]]>
