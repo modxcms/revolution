@@ -388,7 +388,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a === 'Resource/Update')){
+        if((MODx.request.a === 'resource/update')){
             if(dropNode.attributes.pk == MODx.request.id) {
                 var parentFieldCmb = Ext.getCmp('modx-resource-parent');
                 var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
@@ -755,7 +755,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             url: this.config.url
             ,params: {
                 target: dropEvent.target.attributes.id
-                ,activeTarget: MODx.request.a === 'Resource/Update' ? MODx.request.id : ''
+                ,activeTarget: MODx.request.a === 'resource/update' ? MODx.request.id : ''
                 ,source: dropEvent.source.dragData.node.attributes.id
                 ,point: dropEvent.point
                 ,data: encodeURIComponent(encNodes)

@@ -71,7 +71,7 @@ MODx.panel.Chunk = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('chunk')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'Element/Chunk/Create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'element/chunk/create' && MODx.perm.tree_show_element_ids === true) {
                                     title += ' <small>('+this.config.record.id+')</small>';
                                 }
 
