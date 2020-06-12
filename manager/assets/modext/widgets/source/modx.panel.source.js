@@ -34,7 +34,7 @@ MODx.panel.Source = function(config) {
                 title: _('general_information')
                 ,defaults: { border: false, msgTarget: 'side' }
                 ,layout: 'form'
-                ,id: 'modx-dashboard-form'
+                ,id: 'modx-source-form'
                 ,labelWidth: 150
                 ,items: [{
                     xtype: 'panel'
