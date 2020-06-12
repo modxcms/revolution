@@ -60,10 +60,6 @@ MODx.panel.ResourceData = function(config) {
                 ,fieldLabel: _('context')
                 ,xtype: 'statictextfield'
             },{
-                name: 'status'
-                ,fieldLabel: _('resource_status')
-                ,description: _('resource_status_help')
-            },{
                 name: 'deleted'
                 ,fieldLabel: _('deleted')
                 ,xtype: 'staticboolean'
@@ -71,10 +67,12 @@ MODx.panel.ResourceData = function(config) {
                 name: 'pub_date'
                 ,fieldLabel: _('resource_publishdate')
                 ,description: _('resource_publishdate_help')
+                ,xtype: 'statictextfield'
             },{
                 name: 'unpub_date'
                 ,fieldLabel: _('resource_unpublishdate')
                 ,description: _('resource_unpublishdate_help')
+                ,xtype: 'statictextfield'
             },{
                 name: 'cacheable'
                 ,fieldLabel: _('resource_cacheable')
@@ -94,10 +92,12 @@ MODx.panel.ResourceData = function(config) {
                 name: 'menutitle'
                 ,fieldLabel: _('resource_menutitle')
                 ,description: _('resource_menutitle_help')
+                ,xtype: 'statictextfield'
             },{
                 name: 'menuindex'
                 ,fieldLabel: _('resource_menuindex')
                 ,description: _('resource_menuindex_help')
+                ,xtype: 'statictextfield'
             },{
                 name: 'richtext'
                 ,fieldLabel: _('resource_richtext')
