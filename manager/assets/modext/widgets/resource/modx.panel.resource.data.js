@@ -24,13 +24,22 @@ MODx.panel.ResourceData = function(config) {
             ,labelWidth: 150
             ,defaults: df
             ,items: [{
-                name: 'pagetitle'
-                ,fieldLabel: _('resource_pagetitle')
-                ,description: _('resource_pagetitle_help')
+                name: 'context_key'
+                ,fieldLabel: _('context')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'alias'
+                ,fieldLabel: _('resource_alias')
+                ,description: _('resource_alias_help')
                 ,xtype: 'statictextfield'
             },{
                 name: 'template_name'
                 ,fieldLabel: _('resource_template')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'pagetitle'
+                ,fieldLabel: _('resource_pagetitle')
+                ,description: _('resource_pagetitle_help')
                 ,xtype: 'statictextfield'
             },{
                 name: 'longtitle'
@@ -46,20 +55,6 @@ MODx.panel.ResourceData = function(config) {
                 ,xtype: 'statictextfield'
                 ,width: 500
             },{
-                name: 'class_key'
-                ,fieldLabel: _('class_key')
-                ,description: _('resource_class_key_help')
-                ,xtype: 'statictextfield'
-            },{
-                name: 'alias'
-                ,fieldLabel: _('resource_alias')
-                ,description: _('resource_alias_help')
-                ,xtype: 'statictextfield'
-            },{
-                name: 'context_key'
-                ,fieldLabel: _('context')
-                ,xtype: 'statictextfield'
-            },{
                 name: 'deleted'
                 ,fieldLabel: _('deleted')
                 ,xtype: 'staticboolean'
@@ -73,16 +68,6 @@ MODx.panel.ResourceData = function(config) {
                 ,fieldLabel: _('resource_unpublishdate')
                 ,description: _('resource_unpublishdate_help')
                 ,xtype: 'statictextfield'
-            },{
-                name: 'cacheable'
-                ,fieldLabel: _('resource_cacheable')
-                ,description: _('resource_cacheable_help')
-                ,xtype: 'staticboolean'
-            },{
-                name: 'searchable'
-                ,fieldLabel: _('resource_searchable')
-                ,description: _('resource_searchable_help')
-                ,xtype: 'staticboolean'
             },{
                 name: 'hidemenu'
                 ,fieldLabel: _('resource_hide_from_menus')
@@ -99,14 +84,29 @@ MODx.panel.ResourceData = function(config) {
                 ,description: _('resource_menuindex_help')
                 ,xtype: 'statictextfield'
             },{
+                name: 'class_key'
+                ,fieldLabel: _('class_key')
+                ,description: _('resource_class_key_help')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'isfolder'
+                ,fieldLabel: _('resource_folder')
+                ,description: _('resource_folder_help')
+                ,xtype: 'staticboolean'
+            },{
                 name: 'richtext'
                 ,fieldLabel: _('resource_richtext')
                 ,description: _('resource_richtext_help')
                 ,xtype: 'staticboolean'
             },{
-                name: 'isfolder'
-                ,fieldLabel: _('resource_folder')
-                ,description: _('resource_folder_help')
+                name: 'searchable'
+                ,fieldLabel: _('resource_searchable')
+                ,description: _('resource_searchable_help')
+                ,xtype: 'staticboolean'
+            },{
+                name: 'cacheable'
+                ,fieldLabel: _('resource_cacheable')
+                ,description: _('resource_cacheable_help')
                 ,xtype: 'staticboolean'
             }]
         },{
@@ -125,17 +125,17 @@ MODx.panel.ResourceData = function(config) {
                 name: 'createdon_by'
                 ,fieldLabel: _('resource_createdby')
             },{
-                name: 'editedon_adjusted'
-                ,fieldLabel: _('resource_editedon')
-            },{
-                name: 'editedon_by'
-                ,fieldLabel: _('resource_editedby')
-            },{
                 name: 'publishedon_adjusted'
                 ,fieldLabel: _('resource_publishedon')
             },{
                 name: 'publishedon_by'
                 ,fieldLabel: _('resource_publishedby')
+            },{
+                name: 'editedon_adjusted'
+                ,fieldLabel: _('resource_editedon')
+            },{
+                name: 'editedon_by'
+                ,fieldLabel: _('resource_editedby')
             },{
                 xtype: 'modx-grid-manager-log'
                 ,anchor: '100%'
