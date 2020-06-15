@@ -48,13 +48,13 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
         var xtype = this.config.dynProperty;
         if (!r[xtype] || r[xtype] == 'combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
-            oz = f(v == 1,md);
+            return this.renderEditableColumn(f)(Ext.util.Format.htmlEncode(v),md,rec,ri,ci,s,g);
         } else if (r[xtype] === 'datefield') {
             f = Ext.util.Format.dateRenderer('Y-m-d');
-            oz = f(v);
+            return this.renderEditableColumn(f)(Ext.util.Format.htmlEncode(v),md,rec,ri,ci,s,g);
         } else if (r[xtype] === 'password') {
             f = this.rendPassword;
-            oz = f(v,md);
+            return this.renderEditableColumn(f)(Ext.util.Format.htmlEncode(v),md,rec,ri,ci,s,g);
         } else if (r[xtype].substr(0,5) == 'combo' || r[xtype] == 'list' || r[xtype].substr(0,9) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
@@ -69,7 +69,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
             }
             if (r[xtype] != 'list') {
                 f = Ext.util.Format.comboRenderer(ed.field);
-                oz = f(v);
+                return this.renderEditableColumn(f)(Ext.util.Format.htmlEncode(v),md,rec,ri,ci,s,g);
             } else if (cb) {
                 idx = cb.getStore().find(cb.valueField,v);
                 rec = cb.getStore().getAt(idx);
@@ -81,7 +81,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
             }
         }
 
-        return this.renderEditableColumn(f)(Ext.util.Format.htmlEncode(oz),md,rec,ri,ci,s,g);
+        return this.renderEditableColumn()(Ext.util.Format.htmlEncode(oz),md,rec,ri,ci,s,g);
     }
 
     ,createCombo: function(p) {
