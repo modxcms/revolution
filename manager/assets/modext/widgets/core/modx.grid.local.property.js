@@ -19,7 +19,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
             this.startEditing(ri,ci);
         }
     }
-    
+
     ,initEditor: function(cm,ci,ri,r) {
         cm.setEditable(ci,true);
         var xtype = this.config.dynProperty;
@@ -40,7 +40,7 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
         cm.setEditor(ci,ed);
         return ed;
     }
-    
+
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
         var r = s.getAt(ri).data;
         var f,idx;
@@ -80,9 +80,10 @@ Ext.extend(MODx.grid.LocalProperty,MODx.grid.LocalGrid,{
                 }
             }
         }
-        return Ext.util.Format.htmlEncode(oz);
+
+        return this.renderEditableColumn(f)(Ext.util.Format.htmlEncode(oz),md,rec,ri,ci,s,g);
     }
-    
+
     ,createCombo: function(p) {
         var obj;
         try {
