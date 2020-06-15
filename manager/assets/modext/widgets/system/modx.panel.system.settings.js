@@ -31,6 +31,7 @@ MODx.panel.SystemSettings = function(config) {
                     ,xtype: 'modx-description'
 				},{
 					xtype: 'modx-grid-system-settings'
+                    ,urlFilters: ['namespace', 'area', 'query']
 					,cls: 'main-wrapper'
 					,preventSaveRefresh: true
 				},{

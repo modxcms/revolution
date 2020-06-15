@@ -30,7 +30,6 @@ MODx.grid.SettingsGrid = function(config) {
     '->'
     ,{
         xtype: 'modx-combo-namespace'
-        ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
         ,preselectValue: (MODx.request.ns) ? MODx.request.ns : 'core'
@@ -43,7 +42,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'select': {
                 fn: function (cb, rec, ri) {
-                    if (!MODx.request.key) {
+                    if (!MODx.request.query) {
                         this.filterByNamespace(cb, rec, ri)
                     }
                 }
@@ -52,7 +51,6 @@ MODx.grid.SettingsGrid = function(config) {
         }
     },{
         xtype: 'modx-combo-area'
-        ,name: 'area'
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
         ,value: MODx.request.area
@@ -68,7 +66,7 @@ MODx.grid.SettingsGrid = function(config) {
         ,listeners: {
             'select': {
                 fn: function (cb, rec, ri) {
-                    if (!MODx.request.key) {
+                    if (!MODx.request.query) {
                         this.filterByArea(cb, rec, ri);
                     }
                 }
@@ -77,23 +75,22 @@ MODx.grid.SettingsGrid = function(config) {
         }
     },{
         xtype: 'textfield'
-        ,name: 'filter_key'
-        ,id: 'modx-filter-key'
+        ,id: 'modx-filter-query'
         ,cls: 'x-form-filter'
         ,emptyText: _('search_by_key')
-        ,value: MODx.request.key
+        ,value: MODx.request.query
         ,listeners: {
             'change': {
                 fn: function (cb, rec, ri) {
-                    this.filterByKey(cb, rec, ri);
+                    this.filterByQuery(cb, rec, ri);
                 }
                 ,scope: this
             },
             'afterrender': {
                 fn: function (cb){
-                    if (MODx.request.key) {
-                        this.filterByKey(cb, cb.value);
-                        MODx.request.key = '';
+                    if (MODx.request.query) {
+                        this.filterByQuery(cb, cb.value);
+                        MODx.request.query = '';
                     }
                 }
                 ,scope: this
@@ -297,22 +294,20 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,clearFilter: function() {
         var s = this.getStore();
         var filterNs = Ext.getCmp('modx-filter-namespace');
-        var filterKey = Ext.getCmp('modx-filter-key');
+        var filterQuery = Ext.getCmp('modx-filter-query');
         var ns = MODx.request.ns ? MODx.request.ns : 'core';
         s.baseParams = this.initialConfig.baseParams;
 
         s.baseParams.namespace = ns;
         s.baseParams.area = '';
-        s.baseParams.key = '';
+        s.baseParams.query = '';
         MODx.request.ns = '';
-        MODx.request.key = '';
+        MODx.request.query = '';
         filterNs.preselectValue = ns;
         filterNs.setValue(ns);
-        filterKey.setValue('');
+        filterQuery.setValue('');
         this.clearArea();
-        if (typeof window.history.replaceState !== 'undefined') {
-            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
-        }
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
@@ -326,22 +321,20 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         }
     }
 
-    ,filterByKey: function(tf,newValue,oldValue) {
+    ,filterByQuery: function(tf,newValue,oldValue) {
         var s = this.getStore();
         var filterNs = Ext.getCmp('modx-filter-namespace');
         var ns = MODx.request.ns ? MODx.request.ns : 'core';
         if (newValue) {
             ns = '';
         }
-        s.baseParams.key = newValue;
+        s.baseParams.query = newValue;
         s.baseParams.namespace = ns;
         s.baseParams.area = '';
         filterNs.preselectValue = (ns) ? ns : false;
         filterNs.setValue(ns);
         this.clearArea();
-        if (typeof window.history.replaceState !== 'undefined') {
-            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
-        }
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
@@ -357,18 +350,14 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             s.baseParams.area = MODx.request.area;
             MODx.request.area = '';
         }
-        if (typeof window.history.replaceState !== 'undefined') {
-            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
-        }
+        this.replaceState();
     }
 
     ,filterByArea: function(cb,rec,ri) {
         var s = this.getStore();
         s.baseParams.area = rec.data.v;
         this.getBottomToolbar().changePage(1);
-        if (typeof window.history.replaceState !== 'undefined') {
-            window.history.replaceState(s.baseParams, document.title, this.makeUrl());
-        }
+        this.replaceState();
     }
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
@@ -420,23 +409,6 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         return value;
         // JavaScripts time is in milliseconds
         //return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
-    }
-    ,makeUrl : function () {
-        var s = this.getStore();
-        var p = {
-            a: MODx.request.a
-        }
-        if (s.baseParams.namespace) {
-            p.ns = s.baseParams.namespace;
-        }
-        if (s.baseParams.area) {
-            p.area = s.baseParams.area;
-        }
-        if (s.baseParams.key) {
-            p.key = s.baseParams.key;
-        }
-        return Ext.urlAppend(MODx.config.manager_url, Ext.urlEncode(p).replace('%2F','/'));
-
     }
 });
 Ext.reg('modx-grid-settings',MODx.grid.SettingsGrid);

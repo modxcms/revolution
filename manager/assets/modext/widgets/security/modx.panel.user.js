@@ -136,6 +136,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-user-settings'
+                    ,urlFilters: ['namespace', 'area', 'query']
                     ,cls: 'main-wrapper'
                     ,preventRender: true
                     ,user: config.user
