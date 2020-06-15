@@ -868,8 +868,35 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                 if (Ext.isEmpty(c[i].renderer)) {
                     c[i].renderer = Ext.util.Format.htmlEncode;
                 }
+
+                /**
+                 * When the field has an editor defined, wrap the (optional) renderer with
+                 * a special renderer that applies a class and tooltip to indicate the
+                 * column is editable.
+                 */
+                if (c[i].editor) {
+                    c[i].renderer = this.renderEditableColumn(c[i].renderer);
+                }
             }
             this.cm = new Ext.grid.ColumnModel(c);
+        }
+    }
+
+    ,renderEditableColumn: function(renderer) {
+        return function(value, metaData, record, rowIndex, colIndex, store) {
+            if (renderer) {
+                if (typeof renderer.fn === 'function') {
+                    var scope = (renderer.scope) ? renderer.scope : false;
+                    renderer = renderer.fn.bind(scope);
+                }
+
+                if (typeof renderer === 'function') {
+                    value = renderer(value, metaData, record, rowIndex, colIndex, store);
+                }
+            }
+            metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
+
+            return value;
         }
     }
 
