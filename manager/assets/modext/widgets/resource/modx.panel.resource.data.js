@@ -55,9 +55,28 @@ MODx.panel.ResourceData = function(config) {
                 ,xtype: 'statictextfield'
                 ,width: 500
             },{
+                name: 'introtext'
+                ,fieldLabel: _('resource_summary')
+                ,description: _('resource_summary_help')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'content'
+                ,fieldLabel: _('resource_content')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'published'
+                ,fieldLabel: _('resource_published')
+                ,description: _('resource_published_help')
+                ,xtype: 'staticboolean'
+            },{
                 name: 'deleted'
                 ,fieldLabel: _('deleted')
                 ,xtype: 'staticboolean'
+            },{
+                name: 'publishedon'
+                ,fieldLabel: _('resource_publishedon')
+                ,description: _('resource_publishedon_help')
+                ,xtype: 'statictextfield'
             },{
                 name: 'pub_date'
                 ,fieldLabel: _('resource_publishdate')
@@ -84,15 +103,60 @@ MODx.panel.ResourceData = function(config) {
                 ,description: _('resource_menuindex_help')
                 ,xtype: 'statictextfield'
             },{
+                name: 'link_attributes'
+                ,fieldLabel: _('resource_link_attributes')
+                ,description: _('resource_link_attributes_help')
+                ,xtype: 'statictextfield'
+            },{
                 name: 'class_key'
                 ,fieldLabel: _('class_key')
                 ,description: _('resource_class_key_help')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'content_type'
+                ,fieldLabel: _('resource_content_type')
+                ,description: _('resource_content_type_help')
                 ,xtype: 'statictextfield'
             },{
                 name: 'isfolder'
                 ,fieldLabel: _('resource_folder')
                 ,description: _('resource_folder_help')
                 ,xtype: 'staticboolean'
+            },{
+                name: 'show_in_tree'
+                ,fieldLabel: _('resource_show_in_tree')
+                ,description: _('resource_show_in_tree_help')
+                ,xtype: 'staticboolean'
+            },{
+                name: 'hide_children_in_tree'
+                ,fieldLabel: _('resource_hide_children_in_tree')
+                ,description: _('resource_hide_children_in_tree_help')
+                ,xtype: 'staticboolean'
+            },{
+                name: 'alias_visible'
+                ,fieldLabel: _('resource_alias_visible')
+                ,description: _('resource_alias_visible_help')
+                ,xtype: 'staticboolean'
+            },{
+                name: 'uri_override'
+                ,fieldLabel: _('resource_uri_override')
+                ,description: _('resource_uri_override_help')
+                ,xtype: 'staticboolean'
+            },{
+                name: 'uri'
+                ,fieldLabel: _('resource_uri')
+                ,description: _('resource_uri_help')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'parent'
+                ,fieldLabel: _('resource_parent')
+                ,description: _('resource_parent_help')
+                ,xtype: 'statictextfield'
+            },{
+                name: 'content_dispo'
+                ,fieldLabel: _('resource_contentdispo')
+                ,description: _('resource_contentdispo_help')
+                ,xtype: 'statictextfield'
             },{
                 name: 'richtext'
                 ,fieldLabel: _('resource_richtext')
