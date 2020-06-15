@@ -115,7 +115,7 @@ class Data extends Processor
             $resourceArray['editedon_by'] = $this->modx->lexicon('none');
         }
         if (!empty($resourceArray['publishedon']) && $resourceArray['publishedon'] != $emptyDate) {
-            $resourceArray['publishedon_adjusted'] = date($format, strtotime($this->resource->get('editedon')) + $server_offset_time);
+            $resourceArray['publishedon_adjusted'] = date($format, strtotime($this->resource->get('publishedon')) + $server_offset_time);
             $resourceArray['publishedon_by'] = $this->resource->get('publisher');
         } else {
             $resourceArray['publishedon_adjusted'] = $this->modx->lexicon('none');
