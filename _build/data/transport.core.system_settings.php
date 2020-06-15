@@ -1904,7 +1904,7 @@ $settings['unauthorized_page']->fromArray(array (
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot,scss,less,css.map',
+  'value' => 'txt,html,htm,xml,js,css,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,odt,ods,odp,odb,odg,odf,md,ttf,woff,eot,scss,less,css.map,webp',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
@@ -1922,7 +1922,7 @@ $settings['upload_flash']->fromArray(array (
 $settings['upload_images']= $xpdo->newObject('modSystemSetting');
 $settings['upload_images']->fromArray(array (
   'key' => 'upload_images',
-  'value' => 'jpg,jpeg,png,gif,psd,ico,bmp,tiff,svg,svgz',
+  'value' => 'jpg,jpeg,png,gif,psd,ico,bmp,tiff,svg,svgz,webp',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
