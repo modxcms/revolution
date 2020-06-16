@@ -569,7 +569,7 @@ input::-moz-focus-inner {
     display: inline-block; /* make line-height apply */
     font-weight: normal;
     margin: 0;
-    padding-left: 20px;
+    padding-left: 1.9em;
     position: relative;
     top: 0; /* override extjs default style */
 
@@ -681,7 +681,7 @@ input::-moz-focus-inner {
       &+.x-form-cb-label,
       &+.x-fieldset-header-text {
         position: relative;
-        padding-left: 4em;
+        padding-left: 3.6em;
         padding-top: .2em;
         margin-left: 0;
         cursor: pointer;
@@ -769,10 +769,6 @@ input::-moz-focus-inner {
     .x-form-item {
       &:first-child {
         padding: 4px 0 0 0;
-      }
-
-      &:last-child {
-        padding: 0 0 4px 0;
       }
     }
   }
