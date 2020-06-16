@@ -717,7 +717,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,makeUrl: function () {
-        if (typeof this.config.urlFilters !== "undefined" && this.config.urlFilters !== null && this.config.urlFilters.length !== null && this.config.urlFilters.length > 0) {
+        if (Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0) {
             var s = this.getStore();
             var p = {
                 a: MODx.request.a
@@ -743,7 +743,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 
     ,replaceState: function () {
         if (typeof window.history.replaceState !== 'undefined' &&
-            typeof this.config.urlFilters !== "undefined" && this.config.urlFilters !== null && this.config.urlFilters.length !== null && this.config.urlFilters.length > 0
+            Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0
         ) {
             window.history.replaceState(this.getStore().baseParams, document.title, this.makeUrl());
         }
