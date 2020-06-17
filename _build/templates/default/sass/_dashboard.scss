@@ -202,6 +202,36 @@
     }
   }
 
+  /* news articles */
+  .news_article {
+    border-bottom: 1px solid $alto;
+    padding: 10px 0 33px;
+  }
+
+  .news_article h2 {
+    font-size: 17px;
+  }
+
+  .news_article .content {
+    color: $tundora;
+  }
+
+  .news_article a {
+    color: #535d6c;
+    text-decoration: none;
+  }
+
+  .news_article a:hover {
+    color: #90b1b9;
+  }
+
+  .news_article .date_stamp {
+    color: #535d6c;
+    float: right;
+    font-size: 11px;
+    font-style: italic;
+  }
+
   .table-wrapper {
     width: 100%;
     overflow: auto;
