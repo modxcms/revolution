@@ -35,20 +35,6 @@ MODx.load({
         ,html: _('required_desc')
         ,cls: 'desc-under'
     },{
-        xtype: 'combo-boolean'
-        ,fieldLabel: _('number_allownegative')
-        ,name: 'inopt_allowNegative'
-        ,hiddenName: 'inopt_allowNegative'
-        ,id: 'inopt_allowNegative{/literal}{$tv|default}{literal}'
-        ,anchor: '100%'
-        ,value: (params['allowNegative']) ? !(params['allowNegative'] === 0 || params['allowNegative'] === 'false') : true
-        ,listeners: oc
-    },{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_allowNegative{/literal}{$tv|default}{literal}'
-        ,html: _('allownegative_desc')
-        ,cls: 'desc-under'
-    },{
         layout: 'column'
         ,border: false
         ,defaults: {
