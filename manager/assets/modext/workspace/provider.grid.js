@@ -32,7 +32,7 @@ MODx.grid.Provider = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
-            ,editor: { xtype: 'textarea' }
+            ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
             text: _('provider_add')
