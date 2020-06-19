@@ -97,7 +97,7 @@ MODx.grid.Sources = function(config) {
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
-            ,editor: { xtype: 'textarea' }
+            ,editor: { xtype: 'textfield' }
             ,renderer: Ext.util.Format.htmlEncode
         }]
         ,tbar: [{
