@@ -92,7 +92,7 @@ MODx.grid.Dashboards = function(config) {
             ,dataIndex: 'description'
             ,width: 300
             ,sortable: false
-            ,editor: { xtype: 'textarea' }
+            ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
             text: _('dashboard_create')
