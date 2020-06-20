@@ -703,7 +703,7 @@ MODx.grid.ComboBoxRenderer = function(combo, gridId) {
                     if (grid) {
                         grid.getView().refresh();
                     }
-                },{single: true}
+                }, this, {single: true}
             );
             return value;
         }
