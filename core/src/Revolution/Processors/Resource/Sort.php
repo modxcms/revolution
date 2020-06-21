@@ -171,7 +171,7 @@ class Sort extends Processor
         $oldParent = $this->modx->getObject(modResource::class, $nodeObject->parent);
 
         /** @var modResource $newParent */
-        $newParent = $this->modx->getObject(modResource::class, $node->parent);
+        $newParent = $this->modx->getObject(modResource::class, $this->target->id);
 
         if (empty($oldParent) && empty($newParent)) return;
         if ($oldParent->id == $newParent->id) return;
