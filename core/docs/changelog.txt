@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Fix combocolumn grid refresh [#15122]
 - Will add the image format `webp` to the list of allowed `Uploadable File Types` and `Uploadable Image Types` [#15114]
 - Add "Allow Blank" setting to URL, RichText, Image & File Template Variables [#15106]
 - New lexicon for edit content type [#15095]
