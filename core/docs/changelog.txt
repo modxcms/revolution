@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Add "Allow Blank" setting to URL, RichText, Image & File Template Variables [#15106]
 - New lexicon for edit content type [#15095]
 - Add numberfield as Field Type option for system settings [#15092]
 - Add responsive styles for login screen [#15048]
