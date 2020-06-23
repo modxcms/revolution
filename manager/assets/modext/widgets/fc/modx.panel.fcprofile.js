@@ -19,7 +19,7 @@ MODx.panel.FCProfile = function(config) {
             title: _('profile')
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
-            ,id: 'modx-chunk-form'
+            ,id: 'modx-fcp-form'
             ,labelWidth: 150
             ,items: [{
                 html: '<p>'+_('profile_msg')+'</p>'
