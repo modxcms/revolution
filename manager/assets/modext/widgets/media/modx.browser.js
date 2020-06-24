@@ -485,7 +485,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 return false;
             }
             this._addContextMenuItem(menu);
-            m.show(n,'tl-c?');
+            m.showAt(e.xy);
         }
         m.activeNode = n;
     }
