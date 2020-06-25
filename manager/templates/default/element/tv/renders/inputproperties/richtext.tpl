@@ -10,11 +10,6 @@ var params = {
 };
 var oc = {'change':{fn:function(){Ext.getCmp('modx-panel-tv').markDirty();},scope:this}};
 
-var element = Ext.getCmp('modx-tv-elements');
-if (element) {
-  element.hide();
-}
-
 MODx.load({
     xtype: 'panel'
     ,layout: 'form'

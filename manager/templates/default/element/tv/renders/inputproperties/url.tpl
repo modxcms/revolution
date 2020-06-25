@@ -9,6 +9,7 @@ var params = {
 {/foreach}{literal}
 };
 var oc = {'change':{fn:function(){Ext.getCmp('modx-panel-tv').markDirty();},scope:this}};
+
 MODx.load({
     xtype: 'panel'
     ,layout: 'form'
