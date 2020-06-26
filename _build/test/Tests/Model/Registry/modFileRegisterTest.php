@@ -130,6 +130,12 @@ class modFileRegisterTest extends MODxTestCase {
                 ['a' => 1, 'b' => 2.0, 'c' => 3.25, 'd' => 4.1390, 'e' => 5],
                 []
             ],
+            [
+                false,
+                '/topic5/',
+                ['../../invalidMessageKey' => 'invalid'],
+                []
+            ],
         ];
     }
 
@@ -205,6 +211,13 @@ class modFileRegisterTest extends MODxTestCase {
             [
                 [1, 2.0, 3.25, 4.1390, 5],
                 '/topic4/',
+                [
+                    'poll_limit' => 1,
+                ]
+            ],
+            [
+                [],
+                '/topic5/',
                 [
                     'poll_limit' => 1,
                 ]
