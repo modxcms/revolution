@@ -280,13 +280,13 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                         ,listeners: {
                             'success':{fn:function(r) {
                                 this.refreshNode(this.cm.activeNode.id);
-                                var newTitle = '<span dir="ltr">' + r.f.findField(nameField).getValue() + ' (' + w.record.id + ')</span>';
+                                var newTitle = '<span dir="ltr">' + Ext.util.Format.htmlEncode(r.f.findField(nameField).getValue()) + ' (' + w.record.id + ')</span>';
                                 w.setTitle(w.title.replace(/<span.*\/span>/, newTitle));
                             },scope:this}
                             ,'hide':{fn:function() {this.destroy();}}
                         }
                     });
-                    w.title += ': <span dir="ltr">' + w.record[nameField] + ' ('+ w.record.id + ')</span>';
+                    w.title += ': <span dir="ltr">' + Ext.util.Format.htmlEncode(w.record[nameField]) + ' ('+ w.record.id + ')</span>';
                     w.setValues(r.object);
                     w.show(e.target);
                 },scope:this}
