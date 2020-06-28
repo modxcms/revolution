@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Fix login screen PHP notice [#15140]
 - Prevent XSS on Template's name [#15137]
 - Prevent path traversal when sending registry message [#15134]
 - Fix combocolumn grid refresh [#15122]
