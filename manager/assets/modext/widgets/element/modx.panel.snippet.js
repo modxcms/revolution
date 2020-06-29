@@ -44,6 +44,9 @@ MODx.panel.Snippet = function(config) {
                     ,border: false
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                    }
                 }
 				,items: [{
                     columnWidth: .6
@@ -168,20 +171,30 @@ MODx.panel.Snippet = function(config) {
                     },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('snippet_lock')
-                        ,description: _('snippet_lock_msg')
+                        ,description: MODx.expandHelp ? '' : _('snippet_lock_msg')
                         ,name: 'locked'
                         ,id: 'modx-snippet-locked'
                         ,inputValue: 1
                         ,checked: config.record.locked || 0
                     },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-snippet-locked'
+                        ,html: _('snippet_lock_msg')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('clear_cache_on_save')
-                        ,description: _('clear_cache_on_save_msg')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_msg')
                         ,hideLabel: true
                         ,name: 'clearCache'
                         ,id: 'modx-snippet-clear-cache'
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-snippet-clear-cache'
+                        ,html: _('clear_cache_on_save_msg')
+                        ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
                         ,hideLabel: true
@@ -258,6 +271,7 @@ MODx.panel.Snippet = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {

@@ -45,6 +45,9 @@ MODx.panel.Plugin = function(config) {
                     ,border: false
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                    }
                 }
                 ,items: [{
                     columnWidth: .6
@@ -302,6 +305,7 @@ MODx.panel.Plugin = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {

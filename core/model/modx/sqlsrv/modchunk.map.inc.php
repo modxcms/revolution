@@ -8,7 +8,7 @@ $xpdo_meta_map['modChunk']= array (
   'version' => '1.1',
   'table' => 'site_htmlsnippets',
   'extends' => 'modElement',
-  'fields' => 
+  'fields' =>
   array (
     'name' => '',
     'description' => 'Chunk',
@@ -21,9 +21,9 @@ $xpdo_meta_map['modChunk']= array (
     'static' => 0,
     'static_file' => '',
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => '50',
@@ -32,7 +32,7 @@ $xpdo_meta_map['modChunk']= array (
       'default' => '',
       'index' => 'unique',
     ),
-    'description' => 
+    'description' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => '255',
@@ -40,14 +40,14 @@ $xpdo_meta_map['modChunk']= array (
       'null' => false,
       'default' => 'Chunk',
     ),
-    'editor_type' => 
+    'editor_type' =>
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
     ),
-    'category' => 
+    'category' =>
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
@@ -55,7 +55,7 @@ $xpdo_meta_map['modChunk']= array (
       'default' => 0,
       'index' => 'fk',
     ),
-    'cache_type' => 
+    'cache_type' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -63,13 +63,13 @@ $xpdo_meta_map['modChunk']= array (
       'null' => false,
       'default' => 0,
     ),
-    'snippet' => 
+    'snippet' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => 'max',
       'phptype' => 'string',
     ),
-    'locked' => 
+    'locked' =>
     array (
       'dbtype' => 'bit',
       'phptype' => 'boolean',
@@ -77,14 +77,14 @@ $xpdo_meta_map['modChunk']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'properties' => 
+    'properties' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => 'max',
       'phptype' => 'array',
       'null' => true,
     ),
-    'static' => 
+    'static' =>
     array (
       'dbtype' => 'bit',
       'phptype' => 'boolean',
@@ -92,7 +92,7 @@ $xpdo_meta_map['modChunk']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'static_file' => 
+    'static_file' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => '255',
@@ -101,21 +101,21 @@ $xpdo_meta_map['modChunk']= array (
       'default' => '',
     ),
   ),
-  'fieldAliases' => 
+  'fieldAliases' =>
   array (
     'content' => 'snippet',
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'alias' => 'name',
       'primary' => false,
       'unique' => true,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'name' => 
+        'name' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -123,15 +123,15 @@ $xpdo_meta_map['modChunk']= array (
         ),
       ),
     ),
-    'category' => 
+    'category' =>
     array (
       'alias' => 'category',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'category' => 
+        'category' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -139,15 +139,15 @@ $xpdo_meta_map['modChunk']= array (
         ),
       ),
     ),
-    'locked' => 
+    'locked' =>
     array (
       'alias' => 'locked',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'locked' => 
+        'locked' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -155,15 +155,15 @@ $xpdo_meta_map['modChunk']= array (
         ),
       ),
     ),
-    'static' => 
+    'static' =>
     array (
       'alias' => 'static',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'static' => 
+        'static' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -172,27 +172,27 @@ $xpdo_meta_map['modChunk']= array (
       ),
     ),
   ),
-  'composites' => 
+  'composites' =>
   array (
-    'PropertySets' => 
+    'PropertySets' =>
     array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
       'owner' => 'local',
       'cardinality' => 'many',
-      'criteria' => 
+      'criteria' =>
       array (
-        'foreign' => 
+        'foreign' =>
         array (
           'element_class' => 'modChunk',
         ),
       ),
     ),
   ),
-  'aggregates' => 
+  'aggregates' =>
   array (
-    'Category' => 
+    'Category' =>
     array (
       'class' => 'modCategory',
       'key' => 'id',
@@ -202,16 +202,16 @@ $xpdo_meta_map['modChunk']= array (
       'owner' => 'foreign',
     ),
   ),
-  'validation' => 
+  'validation' =>
   array (
-    'rules' => 
+    'rules' =>
     array (
-      'name' => 
+      'name' =>
       array (
-        'invalid' => 
+        'invalid' =>
         array (
           'type' => 'preg_match',
-          'rule' => '/^(?!\\s)[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff-_\\s]+(?!\\s)$/',
+          'rule' => '/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/',
           'message' => 'chunk_err_invalid_name',
         ),
       ),

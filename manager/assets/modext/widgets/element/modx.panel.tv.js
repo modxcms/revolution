@@ -10,7 +10,6 @@ MODx.panel.TV = function(config) {
     config = config || {};
     config.record = config.record || {};
     config = MODx.setStaticElementsConfig(config, 'tv');
-
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
@@ -27,7 +26,11 @@ MODx.panel.TV = function(config) {
             ,xtype: 'modx-header'
         },MODx.getPageStructure([{
             title: _('general_information')
-            ,defaults: {border: false ,msgTarget: 'side', layout: 'form'}
+            ,defaults: {
+                border: false
+                ,msgTarget: 'side'
+                ,layout: 'form'
+            }
             ,layout: 'form'
             ,id: 'modx-tv-form'
             ,itemId: 'form-tv'
@@ -47,6 +50,9 @@ MODx.panel.TV = function(config) {
                     ,border: false
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                    }
                 }
                 ,items: [{
                     columnWidth: .6
@@ -180,22 +186,37 @@ MODx.panel.TV = function(config) {
                     },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('tv_lock')
-                        ,description: _('tv_lock_msg')
+                        ,description: MODx.expandHelp ? '' : _('tv_lock_msg')
                         ,name: 'locked'
                         ,id: 'modx-tv-locked'
                         ,inputValue: 1
                         ,checked: config.record.locked || false
                     },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-tv-locked'
+                        ,id: 'modx-tv-locked-help'
+                        ,html: _('tv_lock_msg')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'xcheckbox'
-                        ,boxLabel: _('clear_cache_on_save')
-                        ,description: _('clear_cache_on_save_msg')
                         ,hideLabel: true
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_msg')
                         ,name: 'clearCache'
                         ,id: 'modx-tv-clear-cache'
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
 
-                    },{border: false, html: '<br style="line-height: 25px;"/>'},{
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-tv-clear-cache'
+                        ,id: 'modx-tv-clear-cache-help'
+                        ,html: _('clear_cache_on_save_msg')
+                        ,cls: 'desc-under'
+                    },{
+                    //     border: false,
+                    //     html: '<br style="line-height: 25px;"/>'
+                    // },{
                         xtype: 'xcheckbox'
                         ,hideLabel: true
                         ,boxLabel: _('is_static')
@@ -345,6 +366,7 @@ MODx.panel.TV = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
@@ -360,6 +382,7 @@ MODx.panel.TV = function(config) {
 };
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.initialized) { this.clearDirty(); return true; }
         this.getForm().setValues(this.config.record);
@@ -421,6 +444,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             ,stay: MODx.config.stay
         });
     }
+
     ,success: function(r) {
         Ext.getCmp('modx-grid-tv-template').getStore().commitChanges();
         Ext.getCmp('modx-grid-tv-security').getStore().commitChanges();
@@ -437,16 +461,19 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             t.refreshNode(u,true);
         }
     }
+
     ,changeEditor: function() {
         this.cleanupEditor();
         this.submit();
     }
+
     ,cleanupEditor: function() {
         if (MODx.onSaveEditor) {
             var fld = Ext.getCmp('modx-tv-default-text');
             MODx.onSaveEditor(fld);
         }
     }
+
     ,toggleStaticFile: function(cb) {
         var flds = ['modx-tv-static-file','modx-tv-static-file-help','modx-tv-static-source','modx-tv-static-source-help'];
         var fld,i;

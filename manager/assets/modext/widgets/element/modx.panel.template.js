@@ -46,6 +46,9 @@ MODx.panel.Template = function(config) {
                     ,border: false
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                    }
                 }
                 ,items: [{
                     columnWidth: .6
@@ -125,7 +128,6 @@ MODx.panel.Template = function(config) {
                                     return _('static_file_ns');
                                 }
                             }
-
                             return true;
                         }
                     },{
@@ -184,20 +186,30 @@ MODx.panel.Template = function(config) {
                     },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('template_lock')
-                        ,description: _('template_lock_msg')
+                        ,description: MODx.expandHelp ? '' : _('template_lock_msg')
                         ,name: 'locked'
                         ,id: 'modx-template-locked'
                         ,inputValue: 1
                         ,checked: config.record.locked || false
                     },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-template-locked'
+                        ,html: _('template_lock_msg')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('clear_cache_on_save')
-                        ,description: _('clear_cache_on_save_msg')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_msg')
                         ,hideLabel: true
                         ,name: 'clearCache'
                         ,id: 'modx-template-clear-cache'
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-template-clear-cache'
+                        ,html: _('clear_cache_on_save_msg')
+                        ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
                         ,hideLabel: true
@@ -296,6 +308,7 @@ MODx.panel.Template = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {

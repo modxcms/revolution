@@ -43,6 +43,9 @@ MODx.panel.Chunk = function(config) {
                     ,border: false
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                    }
                 }
                 ,items: [{
                     columnWidth: .6
@@ -172,6 +175,11 @@ MODx.panel.Chunk = function(config) {
                         ,inputValue: true
                         ,checked: config.record.locked || 0
                     },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-chunk-locked'
+                        ,html: _('chunk_lock_msg')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('clear_cache_on_save')
                         ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_msg')
@@ -181,6 +189,11 @@ MODx.panel.Chunk = function(config) {
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
 
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-chunk-clear-cache'
+                        ,html: _('clear_cache_on_save_msg')
+                        ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
                         ,hideLabel: true
@@ -257,6 +270,7 @@ MODx.panel.Chunk = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
