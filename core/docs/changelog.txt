@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Fix typeAhead parameter check [#15069]
 - Prevent XSS on template name in TV template access grid [#15142]
 - Fix login screen PHP notice [#15140]
 - Prevent XSS on Template's name [#15137]
