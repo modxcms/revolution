@@ -16,9 +16,21 @@ Ext.onReady(function() {
         ,triggerAction: 'all'
         ,width: 400
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        ,editable: false
-        ,typeAhead: false
-        ,forceSelection: false
+
+        {if $params.title|default},title: '{$params.title}'{/if}
+        {if $params.listWidth|default},listWidth: {$params.listWidth}{/if}
+        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
+        {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
+            ,typeAhead: true
+            ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
+        {else}
+            ,editable: false
+            ,typeAhead: false
+        {/if}
+        {if $params.listEmptyText|default}
+            ,listEmptyText: '{$params.listEmptyText}'
+        {/if}
+        ,forceSelection: {if $params.forceSelection|default && $params.forceSelection != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
 
         {if $params.allowBlank == 1 || $params.allowBlank == 'true'}
