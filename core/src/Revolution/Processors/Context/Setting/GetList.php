@@ -58,17 +58,17 @@ class GetList extends GetListProcessor
      */
     public function getData()
     {
-        $key = $this->getProperty('key', false);
+        $query = $this->getProperty('query', false);
         $data = [];
 
         $criteria = [];
         $criteria[] = ['context_key' => $this->getProperty('context_key')];
-        if (!empty($key)) {
+        if (!empty($query)) {
             $criteria[] = [
-                'modContextSetting.key:LIKE' => '%' . $key . '%',
-                'OR:Entry.value:LIKE' => '%' . $key . '%',
-                'OR:modContextSetting.value:LIKE' => '%' . $key . '%',
-                'OR:Description.value:LIKE' => '%' . $key . '%',
+                'modContextSetting.key:LIKE' => '%' . $query . '%',
+                'OR:Entry.value:LIKE' => '%' . $query . '%',
+                'OR:modContextSetting.value:LIKE' => '%' . $query . '%',
+                'OR:Description.value:LIKE' => '%' . $query . '%',
             ];
         }
 

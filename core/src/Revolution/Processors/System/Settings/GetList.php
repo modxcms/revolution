@@ -60,17 +60,17 @@ class GetList extends GetListProcessor
      */
     public function getData()
     {
-        $key = $this->getProperty('key', false);
+        $query = $this->getProperty('query', false);
         $data = [];
 
         /** @var xPDOQuery $criteria */
         $criteria = $this->prepareCriteria();
-        if (!empty($key)) {
+        if (!empty($query)) {
             $criteria[] = [
-                $this->modx->getAlias($this->classKey) . '.key:LIKE' => '%' . $key . '%',
-                'OR:Entry.value:LIKE' => '%' . $key . '%',
-                'OR:' . $this->modx->getAlias($this->classKey) . '.value:LIKE' => '%' . $key . '%',
-                'OR:Description.value:LIKE' => '%' . $key . '%',
+                $this->modx->getAlias($this->classKey) . '.key:LIKE' => '%' . $query . '%',
+                'OR:Entry.value:LIKE' => '%' . $query . '%',
+                'OR:' . $this->modx->getAlias($this->classKey) . '.value:LIKE' => '%' . $query . '%',
+                'OR:Description.value:LIKE' => '%' . $query . '%',
             ];
         }
 

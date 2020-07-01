@@ -715,6 +715,39 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     actionContextMenu: function(record, recordIndex, e) {
         this._showMenu(this, recordIndex, e);
     }
+
+    ,makeUrl: function () {
+        if (Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0) {
+            var s = this.getStore();
+            var p = {
+                a: MODx.request.a
+            }
+            if (MODx.request.id) {
+                p['id'] = MODx.request.id;
+            }
+            if (MODx.request.key) {
+                p['key'] = MODx.request.key;
+            }
+            for (var i = 0; i < this.config.urlFilters.length; ++i) {
+                if (s.baseParams.hasOwnProperty(this.config.urlFilters[i]) && s.baseParams[this.config.urlFilters[i]]) {
+                    if (this.config.urlFilters[i] === 'namespace') {
+                        p['ns'] = s.baseParams[this.config.urlFilters[i]];
+                    } else {
+                        p[this.config.urlFilters[i]] = s.baseParams[this.config.urlFilters[i]];
+                    }
+                }
+            }
+            return Ext.urlAppend(MODx.config.manager_url, Ext.urlEncode(p).replace(/%2F/g, '/'));
+        }
+    }
+
+    ,replaceState: function () {
+        if (typeof window.history.replaceState !== 'undefined' &&
+            Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0
+        ) {
+            window.history.replaceState(this.getStore().baseParams, document.title, this.makeUrl());
+        }
+    }
 });
 
 /* local grid */
