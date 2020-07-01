@@ -401,6 +401,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             if(menuindexField && o.result.object.menuindex !== undefined){
                 menuindexField.setValue(o.result.object.menuindex);
             }
+            var isfolderFieldCmb = Ext.getCmp('modx-resource-isfolder');
+            if(isfolderFieldCmb && typeof o.result.object.isfolder === 'boolean'){
+                isfolderFieldCmb.setValue(o.result.object.isfolder);
+            }
         }
     }
 
