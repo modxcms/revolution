@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Load tree_show_resource_ids permission [#15101]
 - Set error message by field name instead of id [#15099]
 - Fix typeAhead parameter check [#15069]
 - Prevent XSS on template name in TV template access grid [#15142]
