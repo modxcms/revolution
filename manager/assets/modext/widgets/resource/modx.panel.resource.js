@@ -55,7 +55,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             this.errorHandlingIgnoreTabs = ['modx-resource-access-permissions'];
 
             this.getForm().setValues(this.config.record);
-            
+
             var tpl = this.getForm().findField('modx-resource-template');
             if (tpl) {
                 tpl.originalValue = this.config.record.template;
@@ -121,7 +121,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = false;
             }
         }
-        // console.log("MODx.panel.Resource::setup, isDirty?", this.isDirty());
+        
         this.fireEvent('ready');
         this.initialized = true;
 
