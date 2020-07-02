@@ -374,6 +374,7 @@ $_lang['refresh_db'] = 'Clearing the database result set cache';
 $_lang['refresh_default'] = 'Clearing the default cache';
 $_lang['refresh_failure'] = 'Refresh failed! (NOTE: this cache partition may just be empty)';
 $_lang['refresh_lexicon_topics'] = 'Clearing the lexicon topics cache';
+$_lang['refresh_media_sources'] = 'Clearing the media sources cache';
 $_lang['refresh_menu'] = 'Clearing the menu cache';
 $_lang['refresh_published'] = '<strong>[[+num]]</strong> documents were published.';
 $_lang['refresh_resource'] = 'Clearing the Resource cache';
