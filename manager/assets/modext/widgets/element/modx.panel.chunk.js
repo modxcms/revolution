@@ -45,6 +45,8 @@ MODx.panel.Chunk = function(config) {
                     ,labelSeparator: ''
                     ,defaults: {
                         msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
                     }
                 }
                 ,items: [{
@@ -288,8 +290,20 @@ MODx.panel.Chunk = function(config) {
 Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
+
+        if (!this.initialized) {
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-chunk-form'];
+            this.errorHandlingIgnoreTabs = ['modx-panel-element-properties'];
+
+            this.getForm().setValues(this.config.record);
+        }
+
         if (this.initialized) { this.clearDirty(); return true; }
-        this.getForm().setValues(this.config.record);
+
         if (!Ext.isEmpty(this.config.record.name)) {
             var title = _('chunk')+': '+this.config.record.name;
             if (MODx.perm.tree_show_element_ids === 1) {

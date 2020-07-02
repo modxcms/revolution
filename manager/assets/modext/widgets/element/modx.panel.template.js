@@ -48,6 +48,8 @@ MODx.panel.Template = function(config) {
                     ,labelSeparator: ''
                     ,defaults: {
                         msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
                     }
                 }
                 ,items: [{
@@ -325,8 +327,20 @@ MODx.panel.Template = function(config) {
 Ext.extend(MODx.panel.Template,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
+
+        if (!this.initialized) {
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-template-form'];
+            this.errorHandlingIgnoreTabs = ['modx-panel-element-properties','form-template'];
+
+            this.getForm().setValues(this.config.record);
+        }
+
         if (this.initialized) { this.clearDirty(); return true; }
-        this.getForm().setValues(this.config.record);
+
         if (!Ext.isEmpty(this.config.record.templatename)) {
             var title = _('template')+': '+this.config.record.templatename;
             if (MODx.perm.tree_show_element_ids === 1) {

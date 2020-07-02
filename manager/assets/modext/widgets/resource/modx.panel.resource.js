@@ -22,12 +22,10 @@ MODx.panel.Resource = function(config) {
             ,'fieldChange': {fn:this.onFieldChange,scope:this}
             ,'failureSubmit': {
                 fn: function () {
-                    // console.log("MODx.panel.Resource::constructor::listeners (failureSubmit), this", this);
-                    this.showErroredTab(['modx-resource-settings','modx-page-settings','modx-panel-resource-tv'], 'modx-resource-tabs')
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-resource-tabs')
                 },
                 scope: this
             }
-
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
@@ -45,10 +43,19 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,rteElements: 'ta'
     ,rteLoaded: false
     ,warnUnsavedChanges: false
-    
+
     ,setup: function() {
         if (!this.initialized) {
+
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-resource-settings','modx-page-settings','modx-panel-resource-tv'];
+            this.errorHandlingIgnoreTabs = ['modx-resource-access-permissions'];
+
             this.getForm().setValues(this.config.record);
+            
             var tpl = this.getForm().findField('modx-resource-template');
             if (tpl) {
                 tpl.originalValue = this.config.record.template;
@@ -85,6 +92,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
             this.defaultValues = this.config.record || {};
+
             if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
                 this.markDirty();
             }
@@ -413,20 +421,23 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,anchor: '100%'
             ,id: 'modx-resource-main-columns'
             ,defaults: {
-                labelSeparator: ''
+                layout: 'form'
                 ,labelAlign: 'top'
+                ,labelSeparator: ''
                 ,border: false
-                ,msgTarget: 'under'
+                ,defaults: {
+                    msgTarget: 'under'
+                    ,validationEvent: 'change'
+                    ,validateOnBlur: false
+                }
             }
             ,items:[{
                 columnWidth: .67
-                ,layout: 'form'
                 ,id: 'modx-resource-main-left'
                 ,defaults: { msgTarget: 'under' }
                 ,items: this.getMainLeftFields(config)
             },{
                 columnWidth: .33
-                ,layout: 'form'
                 ,labelWidth: 0
                 ,border: false
                 ,id: 'modx-resource-main-right'
@@ -633,21 +644,23 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
+                layout: 'form'
                 ,labelAlign: 'top'
+                ,labelSeparator: ''
                 ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
+                ,defaults: {
+                    msgTarget: 'under'
+                    ,validationEvent: 'change'
+                    ,validateOnBlur: false
+                }
             }
             ,items:[{
                 columnWidth: .5
                 ,id: 'modx-page-settings-left'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingLeftFields(config)
             },{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFields(config)
             }]
         }];
@@ -682,7 +695,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-content-type'
             ,anchor: '100%'
             ,value: config.record.content_type || (MODx.config.default_content_type || 1)
-
         },{
             xtype: 'modx-combo-content-disposition'
             ,fieldLabel: _('resource_contentdispo')
@@ -692,7 +704,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-content-dispo'
             ,anchor: '100%'
             ,value: config.record.content_dispo || 0
-
         },{
             xtype: 'numberfield'
             ,fieldLabel: _('resource_menuindex')
@@ -760,21 +771,23 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
+                layout: 'form'
                 ,labelAlign: 'top'
+                ,labelSeparator: ''
                 ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
+                ,defaults: {
+                    msgTarget: 'under'
+                    ,validationEvent: 'change'
+                    ,validateOnBlur: false
+                }
             }
             ,items: [{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right-box-left'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetLeft(config)
             },{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right-box-right'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetRight(config)
             }]
         }];
@@ -790,7 +803,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-isfolder'
             ,inputValue: 1
             ,checked: parseInt(config.record.isfolder) || 0
-
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_searchable')

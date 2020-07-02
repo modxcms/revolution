@@ -69,6 +69,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,defaultValues: []
     ,initialized: false
 
+    /*
+        Use these errorHandling properties to specify which tab components
+        should and should not be inspected for field errors
+    */
+    ,errorHandlingTabs: []
+    ,errorHandlingIgnoreTabs: []
+
     ,submit: function(o) {
         var fm = this.getForm();
         if (fm.isValid() || o.bypassValidCheck) {
@@ -308,56 +315,111 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     /**
+     * Get tab ids for use in further processing
+     *
+     * @param {Object} map - the items.map object of the primary tabs panel
+     * @param {Array} keys - an array of keys matching those in the tabsObj items.keys
+     */
+    ,getTabIdsFromKeys: function(map, keys) {
+
+        let tabIds = [];
+
+        if (typeof map == 'object') {
+            if (Array.isArray(keys) && keys.length > 0) {
+                keys.forEach(function(key) {
+                    if(map.hasOwnProperty(key) && typeof map[key].id == 'string') {
+                        tabIds.push(map[key].id);
+                    } else if (key == 'modx-panel-resource-tv' && MODx.config.tvs_below_content == 1) {
+                        /*
+                            When evaluating a resource panel with TVs moved below content,
+                            the panel id needs to be added explicitly as, in this case, the TV panel
+                            is not part of the main tabs component
+                        */
+                        tabIds.push(key);
+                    }
+                });
+            }
+        }
+        return tabIds;
+    }
+
+    /**
      * Find errored field in the panel and activates the tab where the first error was found.
      *
-     * @param {Array} targetForms - array of forms where we should find errors
-     * @param {String} tabsId - id of tab component for a given panel
+     * @param {Array} targetForms - array of form tab itemIds to search for errors
+     * @param {String} tabsId - id of primary tab component for a given panel
      */
     ,showErroredTab: function(targetForms, tabsId) {
-        var tabName = null, tabIndex = null;
-        for (var i = 0; i < targetForms.length; i++) {
-            var component = Ext.getCmp(targetForms[i]);
+
+        const mainTabs = Ext.getCmp(tabsId);
+        let searchTabs = this.getTabIdsFromKeys(mainTabs.items.map, targetForms),
+            mainTabName = null,
+            mainTabIndex = null,
+            component,
+            erroredNode = null
+            ;
+        /*
+            Add any custom panels, created on the fly via manager customization or CMPs,
+            to the searchTabs
+        */
+        if (mainTabs.items.length > mainTabs.initialConfig.items.length) {
+            mainTabs.items.keys.forEach(function(key) {
+                if (mainTabs.items.map[key].hasOwnProperty('id')) {
+                    if(this.errorHandlingIgnoreTabs.indexOf(mainTabs.items.map[key].id) === -1 && searchTabs.indexOf(mainTabs.items.map[key].id) === -1) {
+                        searchTabs.push(mainTabs.items.map[key].id);
+                    }
+                }
+            }, this);
+        }
+
+        for (let i = 0; i < searchTabs.length; i++) {
+            component = Ext.getCmp(searchTabs[i]);
             if (component && component.el && component.el.dom) {
-                if (this.detectErrors(component.el.dom)) {
-                    tabName = component.itemId ? component.itemId : targetForms[i];
+                erroredNode = this.detectErrors(component.el.dom);
+                if (erroredNode !== false) {
+                    mainTabName = component.itemId ? component.itemId : searchTabs[i];
                     break;
                 }
             }
         }
 
-        if (tabName === null) {
-            return;
+        if (mainTabName !== null) {
+
+            const errFld = document.getElementById(erroredNode);
+
+            if (mainTabs && mainTabs.items && mainTabs.items.keys) {
+                mainTabIndex = mainTabs.items.keys.indexOf(mainTabName);
+                if (component.id == 'modx-panel-resource-tv' && MODx.config.tvs_below_content == 0 || component.id != 'modx-panel-resource-tv') {
+                    if (mainTabs.items.items[mainTabIndex].hidden) {
+                        mainTabs.activate(mainTabName);
+                    }
+                }
+            }
+
+            if (component.id == 'modx-panel-resource-tv') {
+                const errFldPanelId = errFld.closest('.x-panel').id,
+                    tvTabs = Ext.getCmp('modx-resource-vtabs')
+                    ;
+                if (tvTabs && tvTabs.items && tvTabs.items.keys) {
+                    const tvTabIndex = tvTabs.items.keys.indexOf(errFldPanelId);
+                    if (tvTabs.items.items[tvTabIndex].hidden)  {
+                        tvTabs.activate(errFldPanelId);
+                    }
+                }
+            }
+            errFld.focus();
         }
-
-        var tabs = Ext.getCmp(tabsId);
-
-        if (tabs && tabs.items && tabs.items.keys) {
-            tabIndex = tabs.items.keys.indexOf(tabName);
-        }
-
-        if (!tabs.items.items[tabIndex].hidden)  {
-            return;
-        }
-
-        tabs.activate(tabName);
     }
 
     ,detectErrors: function(node) {
-        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
-            return true;
-        }
-
-        if (typeof node.children == 'undefined') {
+        let erroredFlds = document.getElementById(node.id).querySelectorAll('.x-form-invalid'),
+            numErrors = erroredFlds.length
+            ;
+        if (numErrors > 0) {
+            return erroredFlds[0].id;
+        } else {
             return false;
         }
-
-        for (var i = 0; i < node.children.length; i++) {
-            if (this.detectErrors(node.children[i])) {
-                return true;
-            }
-        }
-
-        return false;
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);

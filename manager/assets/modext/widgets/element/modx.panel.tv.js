@@ -52,6 +52,8 @@ MODx.panel.TV = function(config) {
                     ,labelSeparator: ''
                     ,defaults: {
                         msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
                     }
                 }
                 ,items: [{
@@ -206,7 +208,6 @@ MODx.panel.TV = function(config) {
                         ,id: 'modx-tv-clear-cache'
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
-
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-tv-clear-cache'
@@ -214,9 +215,6 @@ MODx.panel.TV = function(config) {
                         ,html: _('clear_cache_on_save_msg')
                         ,cls: 'desc-under'
                     },{
-                    //     border: false,
-                    //     html: '<br style="line-height: 25px;"/>'
-                    // },{
                         xtype: 'xcheckbox'
                         ,hideLabel: true
                         ,boxLabel: _('is_static')
@@ -370,7 +368,7 @@ MODx.panel.TV = function(config) {
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
-                    this.showErroredTab(['modx-tv-form'], 'modx-tv-tabs')
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-tv-tabs')
                 },
                 scope: this
             }
@@ -384,8 +382,20 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
 
     ,setup: function() {
+
+        if (!this.initialized) {
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['form-tv'];
+            this.errorHandlingIgnoreTabs = ['panel-properties','form-template','form-access','form-sources'];
+
+            this.getForm().setValues(this.config.record);
+        }
+
         if (this.initialized) { this.clearDirty(); return true; }
-        this.getForm().setValues(this.config.record);
+
         if (!Ext.isEmpty(this.config.record.name)) {
             var title = _('tv')+': '+this.config.record.name;
             if (MODx.perm.tree_show_element_ids === 1) {
@@ -501,7 +511,15 @@ MODx.panel.TVInputProperties = function(config) {
         ,title: _('tv_input_options')
         ,header: false
 		,border: false
-        ,defaults: { border: false }
+        ,defaults: {
+            border: false
+            ,defaults: {
+                labelSeparator: ''
+                ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
+            }
+        }
         ,cls: 'form-with-labels'
         ,items: [{
             html: _('tv_input_options_msg')
@@ -608,7 +626,6 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
 Ext.reg('modx-panel-tv-input-properties',MODx.panel.TVInputProperties);
 
 
-
 MODx.panel.TVOutputProperties = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -617,7 +634,15 @@ MODx.panel.TVOutputProperties = function(config) {
         ,header: false
         ,layout: 'form'
         ,cls: 'form-with-labels'
-        ,defaults: {border: false}
+        ,defaults: {
+            border: false
+            ,defaults: {
+                labelSeparator: ''
+                ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
+            }
+        }
         ,items: [{
             html: _('tv_output_options_msg')
             ,itemId: 'desc-tv-output-properties'
