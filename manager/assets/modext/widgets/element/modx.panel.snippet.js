@@ -348,17 +348,35 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        var flds = ['modx-snippet-static-file','modx-snippet-static-file-help','modx-snippet-static-source','modx-snippet-static-source-help'];
-        var fld,i;
+        var flds = ['modx-snippet-static-file','modx-snippet-static-source'];
+        var fld;
+        var i;
+        var fldHelp;
         if (cb.checked) {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.show(); }
+                if (fld) {
+                    fld.show();
+                    fld.updateBox(fld.getResizeEl().parent().getBox());
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.show();
+                    }
+
+                }
             }
         } else {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.hide(); }
+                if (fld) {
+                    fld.hide();
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.hide();
+                    }
+                }
             }
         }
     }
