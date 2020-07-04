@@ -611,6 +611,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                     fn: function (r) {
                         var el = dropEvent.dropNode.getUI().getTextEl();
                         if (el) {
+                            if(dropEvent.target.childNodes.length === 1) dropEvent.dropNode.ensureVisible();
+
                             Ext.get(el).frame();
                         }
                         this.fireEvent('afterSort',{event: dropEvent,result: r});
