@@ -58,7 +58,6 @@ class Upload extends Processor
      */
     public function getSource()
     {
-        $this->modx->loadClass(modMediaSource::class);
         $this->source = modMediaSource::getDefaultSource($this->modx);
         if ($this->source === null || !$this->source->getWorkingContext()) {
             return false;

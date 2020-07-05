@@ -74,7 +74,7 @@ MODx.panel.Template = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('template')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'Element/Template/Create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'element/template/create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -377,7 +377,7 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         this.on('success',function(o) {
             var id = o.result.object.id;
             var w = Ext.getCmp('modx-template-which-editor').getValue();
-            MODx.request.a = 'Element/Template/Update';
+            MODx.request.a = 'element/template/update';
             location.href = '?'+Ext.urlEncode(MODx.request)+'&which_editor='+w+'&id='+id;
         });
         this.submit();
@@ -389,17 +389,35 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        var flds = ['modx-template-static-file','modx-template-static-file-help','modx-template-static-source','modx-template-static-source-help'];
-        var fld,i;
+        var flds = ['modx-template-static-file','modx-template-static-source'];
+        var fld;
+        var i;
+        var fldHelp;
         if (cb.checked) {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.show(); }
+                if (fld) {
+                    fld.show();
+                    fld.updateBox(fld.getResizeEl().parent().getBox());
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.show();
+                    }
+
+                }
             }
         } else {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.hide(); }
+                if (fld) {
+                    fld.hide();
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.hide();
+                    }
+                }
             }
         }
     }

@@ -171,10 +171,9 @@ class modRestCurlClient extends modRestClient
         curl_setopt($ch, CURLOPT_FRESH_CONNECT,
             !empty($options['curlopt_fresh_connect']) ? $options['curlopt_fresh_connect'] : 0);
 
-        /* can only use follow location if safe_mode and open_basedir are off */
-        $safeMode = ini_get('safe_mode');
+        /* can only use follow location if open_basedir is off */
         $openBasedir = ini_get('open_basedir');
-        if (empty($safeMode) && empty($openBasedir)) {
+        if (empty($openBasedir)) {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,
                 !empty($options['curlopt_followlocation']) ? $options['curlopt_followlocation'] : 1);
         }

@@ -542,7 +542,6 @@ class modParser
             if (!empty($this->modx->sourceCache[$class][$realname]['source'])) {
                 if (!empty($this->modx->sourceCache[$class][$realname]['source']['class_key'])) {
                     $sourceClassKey = $this->modx->sourceCache[$class][$realname]['source']['class_key'];
-                    $this->modx->loadClass('sources.modMediaSource');
                     /* @var modMediaSource $source */
                     $source = $this->modx->newObject($sourceClassKey);
                     $source->fromArray($this->modx->sourceCache[$class][$realname]['source'],'',true,true);

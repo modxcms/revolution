@@ -437,9 +437,8 @@ class modTransportPackage extends xPDOObject
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 180);
-                $safeMode = @ini_get('safe_mode');
                 $openBasedir = @ini_get('open_basedir');
-                if (empty($safeMode) && empty($openBasedir)) {
+                if (empty($openBasedir)) {
                     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
                 }
 
@@ -702,7 +701,7 @@ class modTransportPackage extends xPDOObject
     protected function _bytes($value)
     {
         $value = trim($value);
-        $modifier = strtolower($value{strlen($value) - 1});
+        $modifier = strtolower($value[strlen($value) - 1]);
         switch ($modifier) {
             case 'g':
                 $value *= 1024;

@@ -358,7 +358,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
                         success: {fn:function(r) {
-                            MODx.loadPage(r.result.object.action, 'id='+r.result.object.id+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key);
+                            MODx.loadPage(r.result.object.action, 'id='+(r.result.object.id || 0)+'&reload='+r.result.object.reload + '&class_key='+ r.result.object.class_key + '&context_key='+ r.result.object.context_key);
                         },scope:this}
                     },{
                         bypassValidCheck: true
@@ -630,7 +630,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     this.generateAliasRealTime(title);
 
                                 title = Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'Resource/Create' && MODx.perm.tree_show_resource_ids === true) {
+                                if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
                                 Ext.getCmp('modx-header-breadcrumbs').updateHeader(title);

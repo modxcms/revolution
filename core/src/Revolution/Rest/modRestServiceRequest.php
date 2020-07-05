@@ -105,13 +105,14 @@ class modRestServiceRequest
     {
         if (empty($headers)) {
             if (function_exists('apache_request_headers')) {
-                $this->headers = apache_request_headers();
-            }
-            $headers = [];
-            $keys = preg_grep('{^HTTP_}i', array_keys($_SERVER));
-            foreach ($keys as $val) {
-                $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($val, 5)))));
-                $headers[$key] = $_SERVER[$val];
+                $headers = apache_request_headers();
+            } else {
+                $headers = [];
+                $keys = preg_grep('{^HTTP_}i', array_keys($_SERVER));
+                foreach ($keys as $val) {
+                    $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($val, 5)))));
+                    $headers[$key] = $_SERVER[$val];
+                }
             }
         }
         array_walk_recursive($headers, ['modRestServiceRequest', '_trimString']);

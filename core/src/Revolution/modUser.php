@@ -1018,7 +1018,6 @@ class modUser extends modPrincipal
         if (empty($this->Profile->photo)) {
             return '';
         }
-        $this->xpdo->loadClass('sources.modMediaSource');
         /** @var modMediaSource $source */
         $source = modMediaSource::getDefaultSource($this->xpdo, $this->xpdo->getOption('photo_profile_source'));
 

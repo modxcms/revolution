@@ -1,14 +1,24 @@
 <div id="tv-input-properties-form{$tv|default}"></div>
-{literal}
 
+{literal}
 <script type="text/javascript">
 // <![CDATA[
 var params = {
-{/literal}{foreach from=$params key=k item=v name='p'}
- '{$k}': '{$v|escape:"javascript"}'{if NOT $smarty.foreach.p.last},{/if}
-{/foreach}{literal}
+{/literal}
+{foreach from=$params key=k item=v name='p'}
+    '{$k}': '{$v|escape:"javascript"}'{if NOT $smarty.foreach.p.last},{/if}
+{/foreach}
+{literal}
 };
 var oc = {'change':{fn:function(){Ext.getCmp('modx-panel-tv').markDirty();},scope:this}};
+// Show "Input Option Values"
+var element = Ext.getCmp('modx-tv-elements');
+var element_label = Ext.select('label[for="' + element.id + '"]');
+if (element) {
+    element.show();
+    element_label.show();
+}
+
 MODx.load({
     xtype: 'panel'
     ,layout: 'form'
@@ -87,6 +97,21 @@ MODx.load({
         xtype: MODx.expandHelp ? 'label' : 'hidden'
         ,forId: 'inopt_typeAheadDelay{/literal}{$tv|default}{literal}'
         ,html: _('typeahead_delay_desc')
+        ,cls: 'desc-under'
+    },{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('combo_forceselection')
+        ,description: MODx.expandHelp ? '' : _('combo_forceselection_desc')
+        ,name: 'inopt_forceSelection'
+        ,hiddenName: 'inopt_forceSelection'
+        ,id: 'inopt_forceSelection{/literal}{$tv|default}{literal}'
+        ,width: 200
+        ,value: (params['forceSelection']) ? !(params['forceSelection'] === 0 || params['forceSelection'] === 'false') : false
+        ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_forceSelection{/literal}{$tv|default}{literal}'
+        ,html: _('combo_forceselection_multi_desc')
         ,cls: 'desc-under'
     },{
         xtype: 'textfield'

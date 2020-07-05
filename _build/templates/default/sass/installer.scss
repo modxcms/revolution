@@ -48,10 +48,10 @@ body {
 }
 
 body {
-    color: #333333;
+    color: $mineShaft;
     font: $baseText;
     -webkit-font-smoothing: antialiased;
-    background: #f1f2f7;
+    background: $wildSand;
     display: flex;
     flex-direction: column;
 
@@ -76,7 +76,7 @@ body {
     cursor: pointer;
     line-height: 1;
     font-size: 18px;
-    padding: 13px 25px;
+    padding: 15px 30px;
     width: 170px;
     transition: background-color .2s ease-out;
     background: $green;
@@ -137,7 +137,7 @@ body {
         .wrap {
             display: block;
             padding: .5rem .7rem;
-            border: 2px solid $softGray;// $blue
+            border: 1px solid $softGray;// $blue
             margin: 5px;
             background-color: $lightestGray;
             border-radius: 3px;
@@ -162,10 +162,9 @@ body {
         input:checked ~ .wrap,
         input:focus ~ .wrap {
             border-color: $blue;
-            background-color: lighten($blue, 45%);
+            background-color: lighten($blue, 38%);
         }
     }
-
 }
 
 [type="checkbox"] {
@@ -183,81 +182,39 @@ body {
         margin: 0 auto;
     }
 
-    &:not(:checked)+label:before,
-    &:checked+label:before {
-        content: '';
+    &:disabled+label:before {
+        opacity: .5;
+    }
+
+    .cleanup &:not(:checked)+label,
+    .cleanup &:checked+label {
+        padding-left: 0;
+    }
+
+    &:not(:checked)+label:before, &:checked+label:before {
+        @extend %pseudo-font;
         position: absolute;
         left: 0;
-        top: -13px;
-        width: 2em;
-        height: 2em;
-        border: 1px solid #CCCCCC;
-        background: white;
-        border-radius: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
     }
 
-    &:not(:checked)+label:after,
-    &:checked+label:after {
-        content: fa-content($fa-var-check);
-        position: absolute;
-        top: -10px;
-        left: 5px;
-        font-size: 1.8em;
-        line-height: 0.8;
-        color: $green;
-        transition: all .2s;
-        @extend %pseudo-font;
+    &:not(:checked)+label:before {
+        content: fa-content($fa-var-square);
+        color: $softGray;
     }
 
-    &:not(:checked)+label:after {
-        opacity: 0;
-        transform: scale(0);
-    }
-
-    &:checked+label:after {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    &:disabled {
-        &:not(:checked)+label:before {
-            box-shadow: none;
-            border-color: #BBBBBB;
-            background-color: $alto;
-        }
-
-        &:checked+label {
-            &:before {
-                box-shadow: none;
-                border-color: #BBBBBB;
-                background-color: $alto;
-            }
-
-            &:after {
-                color: #999999;
-            }
-        }
-
-        +label {
-            color: #AAAAAA;
-        }
-    }
-
-    &:checked:focus+label:before,
-    &:not(:checked):focus+label:before {
-        border: 1px solid $green;
+    &:checked+label:before {
+        content: fa-content($fa-var-check-square);
+        color: $blue;
     }
 }
 
 /* hover style just for information */
-label:hover:before {
-    border: 1px solid $green !important;
-}
-
-#install .labelHolder .col-3 label {
-    top: 6px;
-}
-
 #modx-next {
     background-color: $green;
     color: $white;
@@ -290,7 +247,7 @@ label:hover:before {
 
 .steps-outer {
     width: 100%;
-    max-width: 500px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
@@ -316,7 +273,7 @@ label:hover:before {
         &::before {
             content: "";
             height: 2px;
-            background-color: #D6D6D6;
+            background-color: $softGray;
             position: absolute;
             top: 13px;
             z-index: -1;
@@ -338,10 +295,10 @@ label:hover:before {
             position: relative;
             width: 25px;
             height: 25px;
+            background: $lightGray;
             border-radius: 50%;
-            border: 2px solid #D6D6D6;
-            margin: 0 auto 10px;
-            background-color: #F6F6F6;
+            border: 2px solid $softGray;
+            margin: 1px auto 10px;
             z-index: 4;
             box-sizing: border-box;
             font-size: 15px;
@@ -379,10 +336,20 @@ label:hover:before {
                 background-color: $green;
                 border-color: $white;
                 border-width: 7px;
-                box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             }
         }
     }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    background-color: $lightestGray;
+    border: 1px solid $lightGray;
+    border-radius: 3px;
+    font-family: $codefonts;
+    padding: 10px 20px;
 }
 
 input[type="submit"],
@@ -452,21 +419,22 @@ header {
 
                 &_title {
                     width: 100%;
-                    font: bold 30px $headfonts;
-                    color: $darkBlack;
+                    font: 600 30px $headfonts;
+                    color: $mineShaft;
                     padding-bottom: 15px;
+                    border-bottom: 1px solid $softGray;
                 }
             }
 
             form {
-                margin-top: 15px;
+                margin-top: 25px;
                 display: block;
 
                 .content-wrap {
                     min-height: calc(430px - 80px);
 
                     h2 {
-                        font-weight: 700;
+                        font-weight: 500;
                         font-size: 22px;
                     }
 
@@ -475,7 +443,7 @@ header {
                     }
 
                     .title {
-                        font-weight: 700;
+                        font-weight: 500;
                     }
                 }
             }
@@ -483,8 +451,7 @@ header {
             .setup_navbar {
                 width: 100%;
                 display: inline-block;
-                padding-top: 15px;
-                margin-top: 15px;
+                padding-top: 25px;
 
                 #modx-back {
                     float: left;
@@ -512,7 +479,7 @@ header {
             align-items: center;
             padding: 25px 40px 25px 0;
             cursor: pointer;
-            min-height: 140px;
+            min-height: 120px;
             margin-bottom: 10px;
             position: relative;
 
@@ -534,20 +501,14 @@ header {
                 flex-shrink: 0;
 
                 input {
-                    background-color: $lightestGray;
                     margin: 0 auto;
                     display: block;
-                    font-family: $codefonts;
                 }
 
                 input[type="text"] {
                     font-size: 14px;
                     padding: 8px 15px;
                     text-align: center;
-                    font-family: $codefonts;
-                    background-color: #FBFBFB;
-                    border: 1px solid #DFDFDF;
-                    border-radius: 3px;
                 }
             }
 
@@ -568,9 +529,17 @@ header {
                 }
             }
 
+            & .fa {
+                color: $alto;
+            }
+
+            & input:checked~.fa {
+                color: $blue;
+            }
+
             span {
                 display: block;
-                border: 2px solid $alto;
+                border: 1px solid $alto;
                 padding: 20px;
                 position: absolute;
                 top: 0;
@@ -580,7 +549,7 @@ header {
             }
 
             & input:checked~span {
-                border: 2px solid $blue;
+                border-color: $blue;
             }
         }
     }
@@ -589,11 +558,10 @@ header {
 .advanced_options {
     .option-item {
         padding: 10px 40px 10px 0;
-        border: 2px solid $alto;
+        border: 1px solid $alto;
         min-height: 70px;
 
         &-input {
-            background-color: $lightestGray;
             flex-basis: 130px;
             display: flex;
             flex-shrink: 0;
@@ -630,10 +598,6 @@ header {
 
 #welcome {
     input#config_key {
-        background-color: $lightestGray;
-        border: 1px solid $alto;
-        border-radius: 3px;
-        font-family: $codefonts;
         font-size: 16px;
         padding: 10px 20px;
         margin-left: 10px;
@@ -701,51 +665,40 @@ header {
                 color: #333333;
                 font-size: 14px;
                 line-height: 14px;
+                margin: 0;
+            }
+
+            .ok, .notok {
+                font-weight: 700;
             }
 
             .ok {
                 color: darken($green, 25%);
-                font-weight: 500;
             }
 
             .notok {
                 color: darken($red, 25%);
-                font-weight: 500;
             }
-
-            &.testWarn {
-                background-color: $lighterRed;
-                padding: 5px 15px;
-                margin: 0 -15px 0 -18px;
-                border-left: 3px solid darken($red, 25%);
-            }
-
         }
 
-        &.failed {
-            background-color: rgba($lightGray, 0.2);
-            border-color: $lightGray;
-            border-left: 0.2rem solid $lightGray;
+        & .warning, & .testWarn, & .success, & .testPassed, & .failed, & .testFailed {
+            padding: 10px;
+            border-left: 0.2rem solid;
         }
 
-        &.success,
-        & .failed,
-        & .success {
-            padding: 5px 15px;
+        & .warning, & .testWarn {
+            background-color: rgba($orange, 0.2);
+            border-color: $orange;
+        }
+
+        & .success, & .testPassed {
             background-color: rgba($green, 0.2);
             border-color: $green;
-            border-left: 0.2rem solid $green;
         }
 
-        & .failed,
-        & .success {
-            margin-bottom: 1rem;
-        }
-
-        & .failed {
+        & .failed, & .testFailed {
             background-color: rgba($red, 0.2);
             border-color: $red;
-            border-left: 0.2rem solid $red;
         }
     }
 
@@ -776,10 +729,6 @@ header {
             input[type="text"],
             input[type="email"],
             input[type="password"] {
-                background-color: $lightestGray;
-                border: 1px solid $alto;
-                border-radius: 3px;
-                font-family: $codefonts;
                 font-size: 16px;
                 padding: 10px 20px;
                 width: 260px;
@@ -810,10 +759,6 @@ header {
             input[type="text"],
             input[type="email"],
             input[type="password"] {
-                background-color: $lightestGray;
-                border: 1px solid $alto;
-                border-radius: 3px;
-                font-family: $codefonts;
                 font-size: 16px;
                 padding: 10px 20px;
                 width: 100%;
@@ -856,13 +801,13 @@ header {
         span.connect-msg,
         span.result {
             background-color: $lighterGreen;
-            border-left: 0.2rem solid $green;
-            border-radius: $borderRadius;
-            color: $greener;
+            border-left: 0.2rem solid;
+            border-color: $green;
+            color: darken($green, 25%);
             display: block;
             font-size: 16px;
             font-family: $codefonts;
-            padding: 1rem 1.2rem;
+            padding: 10px;
 
             p {
                 font-size: 14px;
@@ -876,29 +821,20 @@ header {
                 }
             }
         }
-    }
 
-    #modx-db-step1-msg.error,
-    #modx-db-step2-msg.error {
-
-        span.connect-msg,
-        span.result {
-            background-color: $lighterRed;
-            border-radius: $borderRadius;
-            border-left: 0.2rem solid $red !important;
-            display: block;
-            font-size: 14px;
-            padding: 1rem 1.2rem;
+        &.error span.connect-msg,
+        &.error span.result {
+            background-color: rgba($red, 0.2);
+            border-color: $red;
 
             p {
-                color: $red !important;
+                color: darken($red, 25%);
             }
         }
     }
 
     #modx-db-info {
         span {
-            color: $colorSplash;
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
@@ -937,19 +873,11 @@ header {
 }
 
 .cleanup {
-
     [type="checkbox"]:not(:checked)+label:before,
     [type="checkbox"]:checked+label:before {
-        top: -5px;
-    }
-
-    [type="checkbox"]:not(:checked)+label:after,
-    [type="checkbox"]:checked+label:after {
-        top: -1px;
-    }
-
-    &_text {
-        margin-left: 10px;
+        position: relative;
+        margin: 10px 10px 0 0;
+        float: left;
     }
 }
 
@@ -967,8 +895,8 @@ footer {
 
     .button {
         font-size: 14px;
-        padding: 13px 10px;
-        width: 130px;
+        padding: 15px 10px;
+        width: 140px;
     }
 
     #content .content-inside .wrapper {
@@ -1000,32 +928,6 @@ footer {
         font-size: 14px;
         margin-left: 0;
         margin-top: 5px;
-    }
-
-    .options-wrap {
-        .option-item {
-            flex-direction: column;
-            padding: 25px 25px;
-
-            .option-item-input {
-                flex-basis: auto;
-                margin-bottom: 20px;
-            }
-
-            .option-item-desc {
-                text-align: center;
-
-                .label {
-                    font-size: 16px;
-                    margin-bottom: 5px;
-                }
-
-                .desc {
-                    font-size: 14px;
-                    line-height: normal;
-                }
-            }
-        }
     }
 
     #install {
@@ -1099,7 +1001,6 @@ footer {
     }
 
     .cleanup {
-
         [type="checkbox"]:not(:checked)+label:before,
         [type="checkbox"]:checked+label:before {
             top: 5px !important;
@@ -1115,6 +1016,7 @@ footer {
         font-size: 12px;
         padding: 0;
     }
+
     .select_lang {
         .toggle {
             width: 100%;
@@ -1123,6 +1025,7 @@ footer {
             display: block;
         }
     }
+
     .languages {
         .language{
             max-width: 100%;

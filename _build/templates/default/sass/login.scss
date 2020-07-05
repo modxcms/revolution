@@ -152,6 +152,10 @@ a {
   &:hover {
     opacity: .8;
   }
+
+  &:focus {
+    color: $red;
+  }
 }
 
 .lead {
@@ -191,12 +195,6 @@ label {
   a {
     font-weight: 400;
   }
-}
-
-label#rememberme-checkbox {
-  display: flex;
-  justify-content: left;
-  align-items: center;
 }
 
 label > input {
@@ -260,6 +258,58 @@ label > input {
   margin-top: 10px;
 }
 
+#rememberme-checkbox {
+  & input[type="checkbox"] {
+    width: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  & label {
+    position: relative;
+    display: inline-block;
+    padding-left: 22px;
+
+    &:before, &:after {
+        position: absolute;
+        content: "";
+        display: inline-block;
+    }
+
+    &:before {
+        width: 18px;
+        height: 18px;
+        background: $lightestGray;
+        border: 1px solid $lightGray;
+        border-radius: $borderRadius;
+        left: -3px;
+    }
+
+    &:after {
+      height: 5px;
+      width: 10px;
+      border-left: 2px solid;
+      border-bottom: 2px solid;
+      transform: rotate(-45deg);
+      left: 1px;
+      top: 5px;
+    }
+  }
+
+  & input[type="checkbox"] + label::after {
+    content: none;
+  }
+
+  & input[type="checkbox"]:checked + label::after {
+    content: "";
+  }
+
+  & input[type="checkbox"]:focus + label::before {
+    border: 1px solid $blue;
+  }
+}
+
 .c-password-label {
   display: flex;
   justify-content: space-between;
@@ -311,6 +361,18 @@ label > input {
   direction: rtl;
   padding-right: 1.2rem;
   color: $darkestGray;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:focus {
+    color: $red;
+  }
+
+  &:focus option {
+    color: $darkestGray;
+  }
 }
 
 .c-languageselect__arrow {
@@ -334,6 +396,10 @@ label > input {
 
   &:hover {
     opacity: .8;
+  }
+
+  &:focus {
+    color: $red;
   }
 
   .c-arrow {

@@ -30,10 +30,9 @@ MODx.grid.SettingsGrid = function(config) {
     '->'
     ,{
         xtype: 'modx-combo-namespace'
-        ,name: 'namespace'
         ,id: 'modx-filter-namespace'
         ,emptyText: _('namespace_filter')
-        ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+        ,preselectValue: (MODx.request.ns) ? MODx.request.ns : 'core'
         ,allowBlank: false
         ,editable: true
         ,typeAhead: true
@@ -41,17 +40,23 @@ MODx.grid.SettingsGrid = function(config) {
         ,queryParam: 'search'
         ,width: 150
         ,listeners: {
-            'select': {fn: this.filterByNamespace, scope:this}
+            'select': {
+                fn: function (cb, rec, ri) {
+                    if (!MODx.request.query) {
+                        this.filterByNamespace(cb, rec, ri)
+                    }
+                }
+                ,scope:this
+            }
         }
     },{
         xtype: 'modx-combo-area'
-        ,name: 'area'
         ,id: 'modx-filter-area'
         ,emptyText: _('area_filter')
-        ,value: MODx.request['area']
+        ,value: MODx.request.area
         ,baseParams: {
             action: 'System/Settings/GetAreas'
-            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
+            ,namespace: MODx.request.ns ? MODx.request.ns : 'core'
         }
         ,width: 250
         ,allowBlank: true
@@ -59,23 +64,47 @@ MODx.grid.SettingsGrid = function(config) {
         ,typeAhead: true
         ,forceSelection: true
         ,listeners: {
-            'select': {fn: this.filterByArea, scope:this}
+            'select': {
+                fn: function (cb, rec, ri) {
+                    if (!MODx.request.query) {
+                        this.filterByArea(cb, rec, ri);
+                    }
+                }
+                ,scope:this
+            }
         }
     },{
         xtype: 'textfield'
-        ,name: 'filter_key'
-        ,id: 'modx-filter-key'
+        ,id: 'modx-filter-query'
         ,cls: 'x-form-filter'
         ,emptyText: _('search_by_key')
+        ,value: MODx.request.query
         ,listeners: {
-            'change': {fn: this.filterByKey, scope: this}
-            ,'render': {fn: function(cmp) {
-                new Ext.KeyMap(cmp.getEl(), {
-                    key: Ext.EventObject.ENTER
-                    ,fn: this.blur
-                    ,scope: cmp
-                });
-            },scope:this}
+            'change': {
+                fn: function (cb, rec, ri) {
+                    this.filterByQuery(cb, rec, ri);
+                }
+                ,scope: this
+            },
+            'afterrender': {
+                fn: function (cb){
+                    if (MODx.request.query) {
+                        this.filterByQuery(cb, cb.value);
+                        MODx.request.query = '';
+                    }
+                }
+                ,scope: this
+            }
+            ,'render': {
+                fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: this.blur
+                        ,scope: cmp
+                    });
+                }
+                ,scope: this
+            }
         }
     },{
         xtype: 'button'
@@ -83,8 +112,8 @@ MODx.grid.SettingsGrid = function(config) {
         ,cls: 'x-form-filter-clear'
         ,text: _('filter_clear')
         ,listeners: {
-            'click': {fn: this.clearFilter, scope: this},
-            'mouseout': { fn: function(evt){
+            'click': { fn: this.clearFilter, scope: this },
+            'mouseout': { fn: function(evt) {
                     this.removeClass('x-btn-focus');
                 }
             }
@@ -124,7 +153,21 @@ MODx.grid.SettingsGrid = function(config) {
             ,sortable: true
             ,hidden: true
             ,editable: false
-        }]
+        }],
+        isCellEditable: function(col, row) {
+            var record = config.store.getAt(row);
+            if (record.get('xtype') === 'modx-grid-json' || record.get('xtype') === 'grid-json') {
+                Ext.MessageBox.show({
+                    title: _('info')
+                    ,msg:  _('setting_err_not_editable')
+                    ,buttons: Ext.MessageBox.OK
+                    ,icon: Ext.MessageBox.INFO
+                    ,modal: true
+                });
+                return false;
+            }
+            return Ext.grid.ColumnModel.prototype.isCellEditable.call(this, col, row);
+        }
         /* Editors are pushed here. I think that they should be in general grid
          * definitions (modx.grid.js) and activated via a config property (loadEditor: true) */
         ,getCellEditor: function(colIndex, rowIndex) {
@@ -152,8 +195,8 @@ MODx.grid.SettingsGrid = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Settings/GetList'
-            ,namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core'
-            ,area: MODx.request['area']
+            ,namespace: MODx.request.ns ? MODx.request.ns : 'core'
+            ,area: MODx.request.area
         }
         ,clicksToEdit: 2
         ,grouping: true
@@ -249,63 +292,81 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     ,clearFilter: function() {
-        var ns = MODx.request['ns'] ? MODx.request['ns'] : Ext.getCmp('modx-filter-namespace').getValue();
-        var area = MODx.request['area'] ? MODx.request['area'] : '';
+        var s = this.getStore();
+        var filterNs = Ext.getCmp('modx-filter-namespace');
+        var filterQuery = Ext.getCmp('modx-filter-query');
+        var ns = MODx.request.ns ? MODx.request.ns : 'core';
+        s.baseParams = this.initialConfig.baseParams;
 
-        this.getStore().baseParams = this.initialConfig.baseParams;
-
-        var acb = Ext.getCmp('modx-filter-area');
-        if (acb) {
-            acb.store.baseParams['namespace'] = ns;
-            acb.store.load();
-            acb.reset();
-        }
-
-        Ext.getCmp('modx-filter-namespace').setValue(ns);
-        Ext.getCmp('modx-filter-key').reset();
-
-        this.getStore().baseParams.namespace = ns;
-        this.getStore().baseParams.area = area;
-        this.getStore().baseParams.key = '';
-
+        s.baseParams.namespace = ns;
+        s.baseParams.area = '';
+        s.baseParams.query = '';
+        MODx.request.ns = '';
+        MODx.request.query = '';
+        filterNs.preselectValue = ns;
+        filterNs.setValue(ns);
+        filterQuery.setValue('');
+        this.clearArea();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-       // this.refresh();
     }
-    ,filterByKey: function(tf,newValue,oldValue) {
-        this.getStore().baseParams.key = newValue;
-        this.getStore().baseParams.namespace = '';
+
+    ,clearArea: function () {
+        var filterArea = Ext.getCmp('modx-filter-area');
+        if (filterArea) {
+            filterArea.store.baseParams.namespace = this.getStore().baseParams.namespace;
+            filterArea.store.removeAll();
+            filterArea.store.load();
+            filterArea.setValue('');
+        }
+    }
+
+    ,filterByQuery: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        var filterNs = Ext.getCmp('modx-filter-namespace');
+        var ns = MODx.request.ns ? MODx.request.ns : 'core';
+        if (newValue) {
+            ns = '';
+        }
+        s.baseParams.query = newValue;
+        s.baseParams.namespace = ns;
+        s.baseParams.area = '';
+        filterNs.preselectValue = (ns) ? ns : false;
+        filterNs.setValue(ns);
+        this.clearArea();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
-        return true;
     }
 
     ,filterByNamespace: function(cb,rec,ri) {
-        this.getStore().baseParams['namespace'] = rec.data['name'];
-        this.getStore().baseParams['area'] = '';
-        this.getBottomToolbar().changePage(1);
-        //this.refresh();
+        var s = this.getStore();
+        s.baseParams.namespace = rec.data.name;
+        if (!MODx.request.area) {
+            s.baseParams.area = '';
+            this.getBottomToolbar().changePage(1);
 
-        var acb = Ext.getCmp('modx-filter-area');
-        if (acb) {
-            var s = acb.store;
-            s.baseParams['namespace'] = rec.data.name;
-            s.removeAll();
-            s.load();
-            acb.setValue('');
+            this.clearArea();
+        } else {
+            s.baseParams.area = MODx.request.area;
+            MODx.request.area = '';
         }
+        this.replaceState();
     }
 
     ,filterByArea: function(cb,rec,ri) {
-        this.getStore().baseParams['area'] = rec.data['v'];
+        var s = this.getStore();
+        s.baseParams.area = rec.data.v;
         this.getBottomToolbar().changePage(1);
-       // this.refresh();
+        this.replaceState();
     }
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
         var r = s.getAt(ri).data;
         v = Ext.util.Format.htmlEncode(v);
         var f;
-        if (r.xtype == 'combo-boolean' || r.xtype == 'modx-combo-boolean') {
+        if (r.xtype === 'grid-json' || r.xtype === 'modx-grid-json') {
+            return v;
+        } else if (r.xtype === 'combo-boolean' || r.xtype === 'modx-combo-boolean') {
             f = MODx.grid.Grid.prototype.rendYesNo;
             return this.renderEditableColumn(f)(v,md,rec,ri,ci,s,g);
         } else if (r.xtype === 'datefield') {
@@ -504,6 +565,7 @@ MODx.combo.xType = function(config) {
             fields: ['d','v']
             ,data: [[_('textfield'),'textfield']
                 ,[_('textarea'),'textarea']
+                ,[_('numberfield'),'numberfield']
                 ,[_('yesno'),'combo-boolean']
                 ,[_('password'),'text-password']
                 ,[_('category'),'modx-combo-category']
@@ -518,6 +580,7 @@ MODx.combo.xType = function(config) {
                 ,[_('source'),'modx-combo-source']
                 ,[_('source_type'),'modx-combo-source-type']
                 ,[_('setting_manager_theme'),'modx-combo-manager-theme']
+                ,[_('json_grid'),'modx-grid-json']
             ]
         })
         ,displayField: 'd'

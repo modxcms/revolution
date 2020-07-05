@@ -71,7 +71,7 @@ MODx.panel.Chunk = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('chunk')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'Element/Chunk/Create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'element/chunk/create' && MODx.perm.tree_show_element_ids === true) {
                                     title += ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -340,17 +340,35 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        var flds = ['modx-chunk-static-file','modx-chunk-static-file-help','modx-chunk-static-source','modx-chunk-static-source-help'];
-        var fld,i;
+        var flds = ['modx-chunk-static-file','modx-chunk-static-source'];
+        var fld;
+        var i;
+        var fldHelp;
         if (cb.checked) {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.show(); }
+                if (fld) {
+                    fld.show();
+                    fld.updateBox(fld.getResizeEl().parent().getBox());
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.show();
+                    }
+
+                }
             }
         } else {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.hide(); }
+                if (fld) {
+                    fld.hide();
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.hide();
+                    }
+                }
             }
         }
     }

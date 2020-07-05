@@ -119,8 +119,13 @@ hr {
   font-weight: bold;
 }
 
+.installed {
+  color: $darkGray;
+}
+
 .not-installed {
-  color: $red;
+  color: $mediumGray;
+  font-style: $hiddenText;
 }
 
 .yellow {
@@ -1609,6 +1614,10 @@ iframe[classname="x-hidden"] {
     position: relative;
   }
 
+  .x-panel-collapsed {
+    min-height: 18px;
+  }
+
   #modx-resource-main-right {
     .modx-resource-panel {
       &:not(:last-child) {
@@ -1843,10 +1852,6 @@ iframe[classname="x-hidden"] {
   font-size: 20px;
   line-height: 1;
   margin: 0 0 5px 0;
-}
-
-.x-grid3-cell-inner .x-grid3-col-main .not-installed {
-  color: #999999;
 }
 
 .package-installed {
@@ -2301,12 +2306,28 @@ iframe[classname="x-hidden"] {
     padding-left: 15px;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
+  h1 {
+    font-size: 1.2em;
+  }
+
+  h2 {
+    font-size: 1.15em;
+  }
+
+  h3 {
+    font-size: 1.1em;
+  }
+
+  h4 {
+    font-size: 1.05em;
+  }
+
   h5 {
-    margin-top: 5px;
+    font-size: 1em;
+  }
+
+  h6 {
+    font-size: .95em;
   }
 }
 

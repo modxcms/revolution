@@ -13330,7 +13330,9 @@ readers do not read off random characters that represent icons */
 .x-date-left a:before,
 .x-date-mp-ybtn a.x-date-mp-prev:before,
 .x-date-mp-ybtn a.x-date-mp-next:before, .x-tab-scroller-left:before,
-.x-tab-scroller-right:before, #modx-footer .modx-subnav li.sub:after, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-minus:before,
+.x-tab-scroller-right:before, #modx-footer .modx-subnav li.sub:after, .modx-manager-search-results .loading-indicator:before, .x-tree-arrows .x-tree-elbow-plus:before,
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before, .icon-rss:before, .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
@@ -13391,8 +13393,7 @@ readers do not read off random characters that represent icons */
 .icon-less:before,
 .icon-styl:before, .icon-lock, .tree-context:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .parent-resource:before,
 .icon-folder:before, .x-tree-node-expanded .parent-resource:before,
-.x-tree-node-expanded .icon-folder:before, .locked-resource:before, .x-tree-arrows .x-tree-elbow-plus:before,
-.x-tree-arrows .x-tree-elbow-end-plus:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, .modx-header-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
+.x-tree-node-expanded .icon-folder:before, .locked-resource:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, .modx-header-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -14563,8 +14564,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
     height: 16px;
     min-width: 100%;
     padding: 0;
-    /* override extjs default theme styles */
-    vertical-align: middle; }
+    /* override extjs default theme styles */ }
     .ext-ie8 .x-btn button, .ext-ie8 .actions button button, .actions .ext-ie8 button button, .ext-ie8 .inline-button button, .ext-ie8 .x-superboxselect-item button, .ext-ie8 .x-form-trigger button, .ext-ie8 .x-date-mp-ok button, .ext-ie8 .x-date-mp-cancel button {
       padding-top: 0;
       /* fix IE < 9 (overriding extjs default style) */ }
@@ -17037,8 +17037,8 @@ button {
   .x-date-picker .x-btn.blue,
   .x-date-mp-ok.blue,
   .x-date-mp-cancel.blue {
-    background: #3697CD;
-    box-shadow: 0 0 0 1px #3697CD;
+    background: #4A90E2;
+    box-shadow: 0 0 0 1px #4A90E2;
     color: #FFF !important;
     /* override !important of .green class */ }
     .actions button.blue:hover, .actions button.blue:focus,
@@ -17054,8 +17054,8 @@ button {
     .x-date-mp-ok.blue:focus,
     .x-date-mp-cancel.blue:hover,
     .x-date-mp-cancel.blue:focus {
-      background: #2f89bb;
-      box-shadow: 0 0 0 1px #2f89bb; }
+      background: #3483de;
+      box-shadow: 0 0 0 1px #3483de; }
     .actions button.blue:active,
     .inline-button.blue:active,
     .x-superboxselect-item.blue:active,
@@ -17063,8 +17063,8 @@ button {
     .x-date-picker .x-btn.blue:active,
     .x-date-mp-ok.blue:active,
     .x-date-mp-cancel.blue:active {
-      background: #297aa7;
-      box-shadow: 0 0 0 1px #297aa7; }
+      background: #2275d7;
+      box-shadow: 0 0 0 1px #2275d7; }
 
 /* Toolbar combo/text styled just like the buttons */
 .x-toolbar .x-form-field-trigger-wrap {
@@ -17605,8 +17605,7 @@ input::-moz-focus-inner {
     position: relative;
     /* boundary for absolutely positioned elements */ }
     .x-form-item label.x-form-item-label .modx-tv-label-title {
-      display: inline-block;
-      padding-right: 5px; }
+      display: inline-block; }
     .x-form-item label.x-form-item-label .modx-tv-label-description {
       display: inline-block;
       font-style: italic;
@@ -17618,7 +17617,7 @@ input::-moz-focus-inner {
       opacity: 0;
       filter: alpha(opacity=0);
       /* for IE <= 8 */
-      padding: 17px 8px 0 0;
+      padding: 3px;
       position: relative;
       top: 0;
       right: 0;
@@ -17628,11 +17627,10 @@ input::-moz-focus-inner {
         box-sizing: border-box;
         color: #515151;
         content: "\f021";
-        font-size: 16px;
+        font-size: 14px;
         position: relative;
-        bottom: 0;
+        bottom: 3px;
         left: 0;
-        padding-left: 4px;
         text-align: center;
         vertical-align: middle;
         width: 16px;
@@ -17736,8 +17734,6 @@ input::-moz-focus-inner {
     /* override the .x-form-label-left rule */
     padding-bottom: 0;
     /* override extjs default theme styles */ }
-    .x-form-label-top .x-form-item:first-of-type .modx-tv-reset {
-      padding: 2px 8px 0 0; }
     .x-form-label-top .x-form-item label.x-form-item-label {
       display: inline-block;
       /* override extjs default theme styles */
@@ -19872,20 +19868,26 @@ ul.x-tab-strip-bottom {
   background: transparent 0 0;
   display: inline-block;
   width: 10px;
-  padding-left: 6px;
-  margin: 0 0 0 -16px; }
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: center;
+  margin: 0; }
+
+.x-tree-arrows .x-tree-elbow-plus:before,
+.x-tree-arrows .x-tree-elbow-minus:before,
+.x-tree-arrows .x-tree-elbow-end-plus:before,
+.x-tree-arrows .x-tree-elbow-end-minus:before {
+  content: "\f0da"; }
 
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: "\f0d7";
-  padding-left: 4px;
-  width: 12px; }
+  content: "\f0d7"; }
 
 /* tree states */
 .x-tree-node-el {
   color: #515151;
   font: normal 14px/2.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  padding-left: 6px;
+  padding: 0 0 0 8px;
   /* For legacy icons */
   background-repeat: no-repeat;
   background-position: 5px; }
@@ -19975,7 +19977,7 @@ ul.x-tab-strip-bottom {
   top: 0;
   right: 6px;
   bottom: 0;
-  line-height: 30px;
+  line-height: 34px;
   opacity: 0;
   transition: opacity .4s ease-in; }
   .x-tree-node-el .modx-tree-node-btn-create .x-btn {
@@ -20402,29 +20404,6 @@ ul.x-tab-strip-bottom {
 .x-tree-root-node {
   margin: 0; }
 
-.x-tree-arrows .x-tree-elbow-plus,
-.x-tree-arrows .x-tree-elbow-minus,
-.x-tree-arrows .x-tree-elbow-end-plus,
-.x-tree-arrows .x-tree-elbow-end-minus {
-  background: none; }
-
-.x-tree-arrows .x-tree-elbow-plus:before,
-.x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-plus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: "\f0da";
-  background: transparent 0 0;
-  display: inline-block;
-  width: 10px;
-  padding-left: 6px;
-  margin: 0; }
-
-.x-tree-arrows .x-tree-elbow-minus:before,
-.x-tree-arrows .x-tree-elbow-end-minus:before {
-  content: "\f0d7";
-  padding-left: 4px;
-  width: 12px; }
-
 .x-tree-node {
   color: #515151; }
 
@@ -20831,8 +20810,8 @@ ul.x-tab-strip-bottom {
   .x-window .x-window-tc {
     z-index: 1; }
     .x-window .x-window-tc .x-window-header {
-      background-color: #FFF;
-      border-bottom: 1px solid #FFF;
+      background-color: #F4F4F4;
+      border-bottom: 1px solid #F4F4F4;
       border-radius: 3px 3px 0 0;
       color: #515151;
       font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -20870,7 +20849,8 @@ ul.x-tab-strip-bottom {
     padding: 15px; }
   .x-window.modx-window .x-window-body {
     padding-top: 0; }
-  .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body {
+  .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body,
+  .x-window.modx-window .x-window-with-tabs .x-window-body {
     padding-top: 15px; }
   .x-window .x-panel-bwrap {
     background: #FFF;
@@ -20918,7 +20898,7 @@ ul.x-tab-strip-bottom {
     border-radius: 0 0 3px 3px;
     box-sizing: border-box;
     /* don't count padding in width: 100%; */
-    padding: 5px;
+    padding: 5px 15px 15px;
     /* make sure the padding also stays when maximized */
     width: 100% !important;
     /* override fixed width set by extjs */ }
@@ -20939,7 +20919,7 @@ ul.x-tab-strip-bottom {
   .x-window.modx-console .success {
     color: #6CB24A; }
   .x-window.modx-console .warn {
-    color: #3697CD; }
+    color: #4A90E2; }
   .x-window.modx-console .error {
     color: #CF1124; }
 
@@ -20984,24 +20964,25 @@ ul.x-tab-strip-bottom {
   display: inline-block;
   float: left;
   position: relative;
-  width: 36px !important;
+  width: 40px !important;
   /* override extjs default theme style */ }
   .ext-mb-icon:before {
-    color: #3697CD;
+    color: #4A90E2;
     content: '';
     font-size: 32px;
-    margin-top: -14px;
-    /* half of the height to center vertically with top 50% */
     position: absolute;
     top: 50%;
+    -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    /* center vertically with top 50% */
     right: 0;
     text-align: left;
     width: 100%; }
   .ext-mb-icon.ext-mb-info:before {
-    color: #3697CD;
+    color: #4A90E2;
     content: "\f05a"; }
   .ext-mb-icon.ext-mb-question:before {
-    color: #3697CD;
+    color: #4A90E2;
     content: "\f059"; }
   .ext-mb-icon.ext-mb-warning:before {
     color: #F0B429;
@@ -21323,7 +21304,7 @@ ul.x-tab-strip-bottom {
 
 .updates-widget .updates-updateable {
   display: inline-block;
-  background: #3697CD;
+  background: #4A90E2;
   color: #FFF;
   border-radius: 20px;
   padding: 2px 8px;
@@ -21400,7 +21381,7 @@ ul.x-tab-strip-bottom {
   margin: 0;
   padding: 0 1%;
   position: relative;
-  width: 25%;
+  width: 20%;
   box-sizing: border-box; }
   #managerbuttons ul li:first-child {
     padding-left: 0%; }
@@ -21566,7 +21547,7 @@ h3 {
   /* align main titles with treetabs and left panel edge */ }
 
 h3 {
-  font: bold 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
+  font: 550 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
 
 strong {
   font-weight: bold; }
@@ -21599,8 +21580,12 @@ hr {
 .bold {
   font-weight: bold; }
 
+.installed {
+  color: #515151; }
+
 .not-installed {
-  color: #CF1124; }
+  color: #999999;
+  font-style: italic; }
 
 .yellow {
   color: #FCE588 !important; }
@@ -21616,7 +21601,7 @@ hr {
   color: #6CB24A !important; }
 
 .blue {
-  color: #3697CD !important; }
+  color: #4A90E2 !important; }
 
 .primary {
   color: #6CB24A !important; }
@@ -22751,6 +22736,8 @@ iframe[classname="x-hidden"] {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     position: relative; }
+  #modx-resource-settings .x-panel-collapsed {
+    min-height: 18px; }
   #modx-resource-settings #modx-resource-main-right .modx-resource-panel {
     padding: 15px;
     background: #FFF;
@@ -22936,9 +22923,6 @@ iframe[classname="x-hidden"] {
   font-size: 20px;
   line-height: 1;
   margin: 0 0 5px 0; }
-
-.x-grid3-cell-inner .x-grid3-col-main .not-installed {
-  color: #999999; }
 
 .package-installed {
   color: #515151;
@@ -23306,12 +23290,18 @@ iframe[classname="x-hidden"] {
   .meta-wrapper ul {
     list-style: disc inside;
     padding-left: 15px; }
-  .meta-wrapper h1,
-  .meta-wrapper h2,
-  .meta-wrapper h3,
-  .meta-wrapper h4,
+  .meta-wrapper h1 {
+    font-size: 1.2em; }
+  .meta-wrapper h2 {
+    font-size: 1.15em; }
+  .meta-wrapper h3 {
+    font-size: 1.1em; }
+  .meta-wrapper h4 {
+    font-size: 1.05em; }
   .meta-wrapper h5 {
-    margin-top: 5px; }
+    font-size: 1em; }
+  .meta-wrapper h6 {
+    font-size: .95em; }
 
 .window-no-padding .x-panel-mc {
   padding: 0 !important; }

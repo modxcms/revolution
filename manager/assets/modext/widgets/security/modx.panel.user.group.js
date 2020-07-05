@@ -158,6 +158,7 @@ MODx.panel.UserGroup = function(config) {
                     ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-group-settings'
+                    ,urlFilters: ['namespace', 'area', 'query']
                     ,cls: 'main-wrapper'
                     ,preventRender: true
                     ,group: config.record.id

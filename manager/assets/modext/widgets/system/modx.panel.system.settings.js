@@ -22,15 +22,16 @@ MODx.panel.SystemSettings = function(config) {
             ,autoHeight: true
             ,layout: 'form'
             ,defaults: { border: false ,msgTarget: 'side' }
-			,items:[{
-				layout: 'form'
-				,autoHeight: true
-				,defaults: { border: false }
-				,items: [{
-					html: '<p>'+_('settings_desc')+'</p>'
+            ,items:[{
+                layout: 'form'
+                ,autoHeight: true
+                ,defaults: { border: false }
+                ,items: [{
+                    html: '<p>'+_('settings_desc')+'</p>'
                     ,xtype: 'modx-description'
 				},{
 					xtype: 'modx-grid-system-settings'
+                    ,urlFilters: ['namespace', 'area', 'query']
 					,cls: 'main-wrapper'
 					,preventSaveRefresh: true
 				},{
@@ -42,21 +43,21 @@ MODx.panel.SystemSettings = function(config) {
             ,autoHeight: true
             ,layout: 'form'
             ,defaults: { border: false ,msgTarget: 'side' }
-			,items:[{
-				layout: 'form'
-				,autoHeight: true
-				,defaults: { border: false }
-				,items: [{
-					html: '<p>'+_('system_events.desc')+'</p>'
+            ,items:[{
+                layout: 'form'
+                ,autoHeight: true
+                ,defaults: { border: false }
+                ,items: [{
+                    html: '<p>'+_('system_events.desc')+'</p>'
                     ,xtype: 'modx-description'
-				},{
-					xtype: 'modx-grid-system-event'
-					,cls: 'main-wrapper'
-					,preventSaveRefresh: true
-				}]
-			}]
-		}],{
-            id: 'modx-context-tabs'
+                },{
+                    xtype: 'modx-grid-system-event'
+                    ,cls: 'main-wrapper'
+                    ,preventSaveRefresh: true
+                }]
+            }]
+        }],{
+            id: 'modx-system-settings-tabs'
         })]
     });
     MODx.panel.SystemSettings.superclass.constructor.call(this,config);

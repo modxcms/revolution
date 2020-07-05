@@ -111,10 +111,11 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
     getMenu: function() {
         var m = [];
         m.push({
-            text: _('edit')
+            text: _('content_type_edit')
             ,handler: function(btn, e) {
                 var window = new MODx.window.CreateContentType({
                     record: this.menu.record
+                    ,title: _('content_type_edit')
                     ,action: 'System/ContentType/Update'
                     ,listeners: {
                         success: {

@@ -71,7 +71,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 375
-            ,editor: { xtype: 'textfield' }
+            ,editor: { xtype: 'textarea' }
             ,sortable: true
         },{
             header: _('template_group')

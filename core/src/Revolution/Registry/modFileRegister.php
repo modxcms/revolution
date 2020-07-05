@@ -281,6 +281,10 @@ class modFileRegister extends modRegister
                             $expires = isset($options['ttl']) && !empty($options['ttl']) ? time() + intval($options['ttl']) : 0;
                             $kill = isset($options['kill']) ? (boolean)$options['kill'] : false;
                             if (!is_int($msgIdx)) {
+                                if (strpos($msgIdx, '../') !== false) {
+                                    $this->modx->log(modX::LOG_LEVEL_ERROR, "Directory traversal attempt in register message key; message skipped with key {$msgIdx}");
+                                    break;
+                                }
                                 $msgKey = $msgIdx;
                             } else {
                                 $msgKey = strftime('%Y%m%dT%H%M%S', $timestamp) . '-' . sprintf("%03d", $msgIdx);

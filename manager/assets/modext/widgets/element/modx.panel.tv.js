@@ -75,7 +75,7 @@ MODx.panel.TV = function(config) {
                             'keyup': {scope:this,fn:function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
                                 title = _('tv')+': '+Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'Element/TemplateVar/Create' && MODx.perm.tree_show_element_ids === true) {
+                                if (MODx.request.a !== 'element/tv/create' && MODx.perm.tree_show_element_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
 
@@ -451,17 +451,35 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     }
 
     ,toggleStaticFile: function(cb) {
-        var flds = ['modx-tv-static-file','modx-tv-static-file-help','modx-tv-static-source','modx-tv-static-source-help'];
-        var fld,i;
+        var flds = ['modx-tv-static-file','modx-tv-static-source'];
+        var fld;
+        var i;
+        var fldHelp;
         if (cb.checked) {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.show(); }
+                if (fld) {
+                    fld.show();
+                    fld.updateBox(fld.getResizeEl().parent().getBox());
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.show();
+                    }
+
+                }
             }
         } else {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) { fld.hide(); }
+                if (fld) {
+                    fld.hide();
+
+                    fldHelp = Ext.getCmp(flds[i] + '-help');
+                    if (fldHelp) {
+                        fldHelp.hide();
+                    }
+                }
             }
         }
     }
@@ -562,9 +580,14 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
     }
 
     ,showInputProperties: function(cb,rc,i) {
+        /**
+         * Hide "Input Option Values" by default
+         */
         var element = Ext.getCmp('modx-tv-elements');
+        var element_label = Ext.select('label[for="' + element.id + '"]');
         if (element) {
-            element.show();
+            element.hide();
+            element_label.hide();
         }
 
         this.markPanelDirty();

@@ -78,7 +78,7 @@ MODx.grid.FCProfile = function(config) {
             ,dataIndex: 'description'
             ,width: 250
             ,sortable: true
-            ,editor: { xtype: 'textfield' }
+            ,editor: { xtype: 'textarea' }
         },{
             header: _('usergroups')
             ,dataIndex: 'usergroups'

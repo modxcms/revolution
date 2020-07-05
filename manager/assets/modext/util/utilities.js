@@ -680,11 +680,11 @@ MODx.grid.ComboColumn = Ext.extend(Ext.grid.Column,{
     gridId: undefined
     ,constructor: function(cfg){
         MODx.grid.ComboColumn.superclass.constructor.call(this, cfg);
-        this.renderer = (this.editor && this.editor.triggerAction) ? MODx.grid.ComboBoxRenderer(this.editor,this.gridId) : function(value) {return value;};
+        this.renderer = (this.editor && this.editor.triggerAction) ? MODx.grid.ComboBoxRenderer(this.editor,this.gridId, cfg.renderer) : function(value) {return value;};
     }
 });
 Ext.grid.Column.types['combocolumn'] = MODx.grid.ComboColumn;
-MODx.grid.ComboBoxRenderer = function(combo, gridId) {
+MODx.grid.ComboBoxRenderer = function(combo, gridId, currentRenderer) {
     var getValue = function(value) {
         var idx = combo.store.find(combo.valueField, value);
         var rec = combo.store.getAt(idx);
@@ -694,7 +694,18 @@ MODx.grid.ComboBoxRenderer = function(combo, gridId) {
         return value;
     };
 
-    return function(value) {
+    return function(value, metaData, record, rowIndex, colIndex, store) {
+        if (currentRenderer) {
+            if (typeof currentRenderer.fn === 'function') {
+                var scope = (currentRenderer.scope) ? currentRenderer.scope : false;
+                currentRenderer = currentRenderer.fn.bind(scope);
+            }
+
+            if (typeof currentRenderer === 'function') {
+                value = currentRenderer(value, metaData, record, rowIndex, colIndex, store);
+            }
+        }
+
         if (combo.store.getCount() == 0 && gridId) {
             combo.store.on(
                 'load',
@@ -703,7 +714,7 @@ MODx.grid.ComboBoxRenderer = function(combo, gridId) {
                     if (grid) {
                         grid.getView().refresh();
                     }
-                },{single: true}
+                }, this, {single: true}
             );
             return value;
         }

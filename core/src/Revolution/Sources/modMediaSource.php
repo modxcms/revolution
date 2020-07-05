@@ -725,7 +725,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
                 return false;
             }
-            $this->xpdo->loadClass('sources.modMediaSource');
             /** @var modMediaSource $toSource */
             $toSource = modMediaSource::getDefaultSource($this->xpdo, $to_source);
             if (!$toSource->getWorkingContext()) {
@@ -1303,7 +1302,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
             $list[$property['name']] = $value;
         }
-        $list = array_merge($list, $this->properties);
+        $list = array_merge($this->properties, $list);
 
         return $list;
     }

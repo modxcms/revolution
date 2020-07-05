@@ -715,6 +715,39 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     actionContextMenu: function(record, recordIndex, e) {
         this._showMenu(this, recordIndex, e);
     }
+
+    ,makeUrl: function () {
+        if (Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0) {
+            var s = this.getStore();
+            var p = {
+                a: MODx.request.a
+            }
+            if (MODx.request.id) {
+                p['id'] = MODx.request.id;
+            }
+            if (MODx.request.key) {
+                p['key'] = MODx.request.key;
+            }
+            for (var i = 0; i < this.config.urlFilters.length; ++i) {
+                if (s.baseParams.hasOwnProperty(this.config.urlFilters[i]) && s.baseParams[this.config.urlFilters[i]]) {
+                    if (this.config.urlFilters[i] === 'namespace') {
+                        p['ns'] = s.baseParams[this.config.urlFilters[i]];
+                    } else {
+                        p[this.config.urlFilters[i]] = s.baseParams[this.config.urlFilters[i]];
+                    }
+                }
+            }
+            return Ext.urlAppend(MODx.config.manager_url, Ext.urlEncode(p).replace(/%2F/g, '/'));
+        }
+    }
+
+    ,replaceState: function () {
+        if (typeof window.history.replaceState !== 'undefined' &&
+            Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0
+        ) {
+            window.history.replaceState(this.getStore().baseParams, document.title, this.makeUrl());
+        }
+    }
 });
 
 /* local grid */
@@ -868,8 +901,35 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                 if (Ext.isEmpty(c[i].renderer)) {
                     c[i].renderer = Ext.util.Format.htmlEncode;
                 }
+
+                /**
+                 * When the field has an editor defined, wrap the (optional) renderer with
+                 * a special renderer that applies a class and tooltip to indicate the
+                 * column is editable.
+                 */
+                if (c[i].editor) {
+                    c[i].renderer = this.renderEditableColumn(c[i].renderer);
+                }
             }
             this.cm = new Ext.grid.ColumnModel(c);
+        }
+    }
+
+    ,renderEditableColumn: function(renderer) {
+        return function(value, metaData, record, rowIndex, colIndex, store) {
+            if (renderer) {
+                if (typeof renderer.fn === 'function') {
+                    var scope = (renderer.scope) ? renderer.scope : false;
+                    renderer = renderer.fn.bind(scope);
+                }
+
+                if (typeof renderer === 'function') {
+                    value = renderer(value, metaData, record, rowIndex, colIndex, store);
+                }
+            }
+            metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
+
+            return value;
         }
     }
 
@@ -1429,3 +1489,189 @@ Ext.preg('checkcolumn', Ext.ux.grid.CheckColumn);
 Ext.grid.CheckColumn = Ext.ux.grid.CheckColumn;
 
 Ext.grid.PropertyColumnModel=function(a,b){var g=Ext.grid,f=Ext.form;this.grid=a;g.PropertyColumnModel.superclass.constructor.call(this,[{header:this.nameText,width:50,sortable:true,dataIndex:'name',id:'name',menuDisabled:true},{header:this.valueText,width:50,resizable:false,dataIndex:'value',id:'value',menuDisabled:true}]);this.store=b;var c=new f.Field({autoCreate:{tag:'select',children:[{tag:'option',value:'true',html:'true'},{tag:'option',value:'false',html:'false'}]},getValue:function(){return this.el.dom.value=='true'}});this.editors={'date':new g.GridEditor(new f.DateField({selectOnFocus:true})),'string':new g.GridEditor(new f.TextField({selectOnFocus:true})),'number':new g.GridEditor(new f.NumberField({selectOnFocus:true,style:'text-align:left;'})),'boolean':new g.GridEditor(c)};this.renderCellDelegate=this.renderCell.createDelegate(this);this.renderPropDelegate=this.renderProp.createDelegate(this)};Ext.extend(Ext.grid.PropertyColumnModel,Ext.grid.ColumnModel,{nameText:'Name',valueText:'Value',dateFormat:'m/j/Y',renderDate:function(a){return a.dateFormat(this.dateFormat)},renderBool:function(a){return a?'true':'false'},isCellEditable:function(a,b){return a==1},getRenderer:function(a){return a==1?this.renderCellDelegate:this.renderPropDelegate},renderProp:function(v){return this.getPropertyName(v)},renderCell:function(a){var b=a;if(Ext.isDate(a)){b=this.renderDate(a)}else if(typeof a=='boolean'){b=this.renderBool(a)}return Ext.util.Format.htmlEncode(b)},getPropertyName:function(a){var b=this.grid.propertyNames;return b&&b[a]?b[a]:a},getCellEditor:function(a,b){var p=this.store.getProperty(b),n=p.data.name,val=p.data.value;if(this.grid.customEditors[n]){return this.grid.customEditors[n]}if(Ext.isDate(val)){return this.editors.date}else if(typeof val=='number'){return this.editors.number}else if(typeof val=='boolean'){return this.editors['boolean']}else{return this.editors.string}},destroy:function(){Ext.grid.PropertyColumnModel.superclass.destroy.call(this);for(var a in this.editors){Ext.destroy(a)}}});
+
+/**
+ * MODx JSON Grid
+ * Local grid with inline editing, it converts the grid value from/to JSON and submits the JSON in a hidden field.
+ * The grid could be sorted by drag & drop, new values could be added with a button and each row could be deleted.
+ *
+ * It could be configured with the fieldConfig property, containing an array of field configs:
+ *
+ * fieldConfig: [{
+ *    name: 'whatever', // required, name 'id' is reserved and can't be used
+ *    width: 100, // defaults to 100
+ *    xtype: 'textfield', // defaults to textfield
+ *    allowBlank: true, // defaults to true
+ *    header: _('whatever') // defaults to the lexicon entry of name value of the current field config
+ * }];
+ *
+ * If there is no fieldConfig property set, the following default fieldConfig is used:
+ *
+ * [{name: 'key'}, {name: 'value'}]
+ */
+MODx.grid.JsonGrid = function (config) {
+    config = config || {};
+    this.ident = config.ident || 'jsongrid-mecitem' + Ext.id();
+    this.hiddenField = new Ext.form.TextArea({
+        name: config.hiddenName || config.name,
+        hidden: true
+    });
+    this.fieldConfig = config.fieldConfig || [{name: 'key'}, {name: 'value'}];
+    this.fieldConfig.push({name: 'id', hidden: true});
+    this.fieldColumns = [];
+    this.fieldNames = [];
+    Ext.each(this.fieldConfig, function (el) {
+        this.fieldNames.push(el.name);
+        this.fieldColumns.push({
+            header: el.header || _(el.name),
+            dataIndex: el.name,
+            editable: true,
+            hidden: el.hidden || false,
+            editor: {
+                xtype: el.xtype || 'textfield',
+                allowBlank: el.allowBlank || true,
+                listeners: {
+                    change: {
+                        fn: this.saveValue,
+                        scope: this
+                    }
+                }
+            },
+            renderer: function(value, metadata) {
+                metadata.css += 'x-editable-column ';
+                return value;
+            },
+            width: el.width || 100
+        });
+    }, this);
+    Ext.applyIf(config, {
+        id: this.ident + '-json-grid',
+        fields: this.fieldNames,
+        autoHeight: true,
+        store: new Ext.data.JsonStore({
+            fields: this.fieldNames,
+            data: this.loadValue(config.value)
+        }),
+        enableDragDrop: true,
+        ddGroup: this.ident + '-json-grid-dd',
+        labelStyle: 'position: absolute',
+        columns: this.fieldColumns,
+        disableContextMenuAction: true,
+        tbar: ['->', {
+            text: '<i class="icon icon-plus"></i> ' + _('add'),
+            cls: 'primary-button',
+            handler: this.addElement,
+            scope: this
+        }],
+        listeners: {
+            render: {
+                fn: this.renderListener,
+                scope: this
+            }
+        }
+    });
+    MODx.grid.JsonGrid.superclass.constructor.call(this, config)
+};
+Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
+    getMenu: function () {
+        var m = [];
+        m.push({
+            text: _('remove'),
+            handler: this.removeElement
+        });
+        return m;
+    },
+    getActions: function () {
+        return [{
+            action: 'removeElement',
+            icon: 'trash-o',
+            text: _('remove')
+        }]
+    },
+    addElement: function () {
+        var ds = this.getStore();
+        var row = {};
+        Ext.each(this.fieldNames, function (fieldname) {
+            row[fieldname] = '';
+        });
+        row['id'] = this.getStore().getCount();
+        this.getStore().insert(this.getStore().getCount(), new ds.recordType(row));
+        this.getView().refresh();
+        this.getSelectionModel().selectRow(0);
+    },
+    removeElement: function () {
+        Ext.Msg.confirm(_('remove') || '', _('confirm_remove') || '', function (e) {
+            if (e === 'yes') {
+                var ds = this.getStore();
+                var rows = this.getSelectionModel().getSelections();
+                if (!rows.length) {
+                    return false;
+                }
+                for (var i = 0; i < rows.length; i++) {
+                    var id = rows[i].id;
+                    var index = ds.findBy(function (record) {
+                        if (record.id === id) {
+                            return true;
+                        }
+                    });
+                    ds.removeAt(index);
+                }
+                this.getView().refresh();
+                this.saveValue();
+            }
+        }, this);
+    },
+    renderListener: function (grid) {
+        new Ext.dd.DropTarget(grid.container, {
+            copy: false,
+            ddGroup: this.ident + '-json-grid-dd',
+            notifyDrop: function (dd, e, data) {
+                var ds = grid.store;
+                var sm = grid.getSelectionModel();
+                var rows = sm.getSelections();
+
+                var dragData = dd.getDragData(e);
+                if (dragData) {
+                    var cindex = dragData.rowIndex;
+                    if (typeof (cindex) !== "undefined") {
+                        for (var i = 0; i < rows.length; i++) {
+                            ds.remove(ds.getById(rows[i].id));
+                        }
+                        ds.insert(cindex, data.selections);
+                        sm.clearSelections();
+                    }
+                }
+                grid.getView().refresh();
+                grid.saveValue();
+            }
+        });
+        this.add(this.hiddenField);
+        this.saveValue();
+    },
+    loadValue: function (value) {
+        value = Ext.util.JSON.decode(value);
+        if (value && Array.isArray(value)) {
+            Ext.each(value, function (record, idx) {
+                value[idx]['id'] = idx;
+            });
+        } else {
+            value = [];
+        }
+        return value;
+    },
+    saveValue: function () {
+        var value = [];
+        Ext.each(this.getStore().getRange(), function (record) {
+            var row = {};
+            Ext.each(this.fieldNames, function (fieldname) {
+                if (fieldname !== 'id') {
+                    row[fieldname] = record.data[fieldname];
+                }
+            });
+            value.push(row);
+        }, this);
+        this.hiddenField.setValue(Ext.util.JSON.encode(value));
+    }
+});
+Ext.reg('grid-json', MODx.grid.JsonGrid);
+Ext.reg('modx-grid-json', MODx.grid.JsonGrid);

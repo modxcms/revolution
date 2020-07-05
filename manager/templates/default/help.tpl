@@ -30,6 +30,13 @@
                 </a>
             </li>
             <li>
+                <a href="[[%localization_link]]" target="_blank" title="[[%localization_title]]">
+                    <span class="icon"><i class="icon icon-language icon-3x"></i></span>
+                    <span class="headline">[[%localization]]</span>
+                    <span class="subline">[[%localization_description]]</span>
+                </a>
+            </li>
+            <li>
                 <a href="[[%support_link]]" target="_blank" class="supportTicket" title="[[%support_title]]">
                     <span class="icon"><i class="icon icon-credit-card icon-3x"></i></span>
                     <span class="headline">[[%support]]</span>

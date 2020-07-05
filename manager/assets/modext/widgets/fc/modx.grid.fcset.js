@@ -36,7 +36,7 @@ MODx.grid.FCSet = function(config) {
             ,editable: true
             ,sortable: true
             ,editor: {
-                xtype: 'textfield',
+                xtype: 'textarea',
                 renderer: true
             }
         },{

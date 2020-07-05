@@ -31,6 +31,11 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      */
     ,hiddenFormat:'Y-m-d H:i:s'
     /**
+     * @cfg {String} hiddenFormatForTimeHidden Format of datetime used to store value in hidden field
+     * and submitted to server when `hideTime` is set to `true` (defaults to 'Y-m-d 00:00:00' that is mysql format)
+     */
+    ,hiddenFormatForTimeHidden:'Y-m-d 00:00:00'
+    /**
      * @cfg {Boolean} otherToNow Set other field to now() if not explicly filled in (defaults to true)
      */
     ,otherToNow:true
@@ -87,6 +92,10 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         // offset time
         if (!this.hasOwnProperty('offset_time') || isNaN(this.offset_time)) {
             this.offset_time = 0;
+        }
+
+        if (this.hideTime) {
+            this.hiddenFormat = this.hiddenFormatForTimeHidden;
         }
 
         // create DateField

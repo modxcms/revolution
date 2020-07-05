@@ -388,7 +388,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ui.addClass('haschildren');
             ui.removeClass('icon-resource');
         }
-        if((MODx.request.a == MODx.action['Resource/Update'])){
+        if((MODx.request.a === 'resource/update')){
             if(dropNode.attributes.pk == MODx.request.id) {
                 var parentFieldCmb = Ext.getCmp('modx-resource-parent');
                 var parentFieldHidden = Ext.getCmp('modx-resource-parent-hidden');
@@ -400,6 +400,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             var menuindexField = Ext.getCmp('modx-resource-menuindex');
             if(menuindexField && o.result.object.menuindex !== undefined){
                 menuindexField.setValue(o.result.object.menuindex);
+            }
+            var isfolderFieldCmb = Ext.getCmp('modx-resource-isfolder');
+            if(isfolderFieldCmb && typeof o.result.object.isfolder === 'boolean'){
+                isfolderFieldCmb.setValue(o.result.object.isfolder);
             }
         }
     }
@@ -755,7 +759,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             url: this.config.url
             ,params: {
                 target: dropEvent.target.attributes.id
-                ,activeTarget: MODx.request.a == MODx.action['Resource/Update'] ? MODx.request.id : ''
+                ,activeTarget: MODx.request.a === 'resource/update' ? MODx.request.id : ''
                 ,source: dropEvent.source.dragData.node.attributes.id
                 ,point: dropEvent.point
                 ,data: encodeURIComponent(encNodes)
@@ -1081,7 +1085,6 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,anchor: '100%'
                 ,maxLength: 255
-                ,allowBlank: false
             };
             break;
         case 'MODX\\Revolution\\modWebLink':
@@ -1093,7 +1096,6 @@ MODx.getQRContentField = function(id,cls) {
                 ,anchor: '100%'
                 ,maxLength: 255
                 ,value: 'http://'
-                ,allowBlank: false
             };
             break;
         case 'MODX\\Revolution\\modStaticResource':
