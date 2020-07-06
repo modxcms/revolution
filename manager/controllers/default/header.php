@@ -128,7 +128,7 @@ class TopMenu
     public function getUserImage()
     {
         // Default to FontAwesome
-        $output = '<i class="icon icon-user icon-large"></i>&nbsp;';
+        $output = '<i class="icon icon-user icon-large"></i>';
         $img = $this->modx->user->getPhoto(128, 128);
 
         if (!empty($img)) {
@@ -163,41 +163,36 @@ class TopMenu
                 continue;
             }
 
+            $label = '';
             $description = '';
+            $title = ' title="' . $menu['description'] .'"';
+
+            if (!empty($menu['icon'])) {
+                $label = $menu['icon'];
+            } else {
+                $label = '<i class="icon-link icon icon-large"></i>'."\n";
+            }
+            $label .= '<span class="label">'.$menu['text'].'</span>'."\n";
+
             if ($this->showDescriptions && !empty($menu['description'])) {
                 $description = '<span class="description">'.$menu['description'].'</span>'."\n";
             }
 
-            $label = $menu['text'];
-            $title = ' title="' . $menu['description'] .'"';
-            $icon = false;
-            if (!empty($menu['icon'])) {
-                $icon = true;
-                // Use the icon as label
-                $label = $menu['icon'];
-                // Reset the description (which is set as text in $title)
-                $description = '';
-            }
-
             $top = !empty($menu['children']) ? ' top' : '';
             $position = $idx <= 2 && $placeholder == 'navb' ? 'down' : 'up';
-            $menuTpl = '<li id="limenu-'.$menu['id'].'"class="menu-'.$position.$top.'">'."\n";
 
+            $menuTpl = '<li id="limenu-'.$menu['id'].'"class="menu-'.$position.$top.'">'."\n";
             if (!empty($menu['action'])) {
                 if ($menu['namespace'] != 'core') {
                     // Handle the namespace
                     $menu['action'] .= '&namespace='.$menu['namespace'];
                 }
-                if (!$icon) {
-                    // No icon, no title property
-                    $title = '';
-                }
                 $onclick = (!empty($menu['handler'])) ? ' onclick="'.str_replace('"','\'',$menu['handler']).'"' : '';
                 $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'"'.( $top ? ' class="top-link"': '' ).$onclick.$title.'>'.$label.$description.'</a>'."\n";
             } elseif (!empty($menu['handler'])) {
-                $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'">'.$label.'</a>'."\n";
+                $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'"'.$title.'>'.$label.$description.'</a>'."\n";
             } else {
-                $menuTpl .= '<a href="javascript:;">'.$label.'</a>'."\n";
+                $menuTpl .= '<a href="javascript:;"'.$title.'>'.$label.$description.'</a>'."\n";
             }
             $menuTpl .= '</li>'."\n";
 
