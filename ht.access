@@ -35,12 +35,9 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 #RewriteRule ^(.*)$ https://www.%1/$1 [R=301,L] .
 
 
-
-# Rewrite secure requests properly to prevent SSL cert warnings, e.g. prevent 
-# https://www.example.com when your cert only allows https://secure.example.com
-#RewriteCond %{SERVER_PORT} !^443
-#RewriteRule (.*) https://example.com/$1 [R=301,L]
-
+# Force rewrite to https for every host
+#RewriteCond %{HTTPS} !=on [OR]
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 
 # Redirect the manager to a specific domain - don't rename the ht.access file
