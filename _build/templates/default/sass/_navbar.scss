@@ -43,6 +43,7 @@
   .icon {
     color: $white;
     font-size: 20px;
+    line-height: 20px;
     vertical-align: middle;
   }
 
@@ -63,12 +64,26 @@
     line-height: 12px;
     font-size: 10px;
     text-decoration: none;
+
+    & .description {
+      font-size: 9px;
+      opacity: .7;
+    }
+
+    & .icon, & .label, & .description {
+      width: 100%;
+      display: block;
+    }
   }
 
   li {
     a:hover {
       opacity: .7;
     }
+  }
+
+  #modx-user-menu a .label, #modx-user-menu a .description, #modx-user-menu a #user-username {
+    display: none;
   }
 
   #modx-manager-search-icon a,
@@ -92,44 +107,12 @@
         display: block;
         position: relative;
         padding: 12px 0;
-
-        &:before {
-          @include absolute-corners;
-          @include awesome-font;
-          text-align: center;
-          font-size: 20px;
-          margin: 5px 0;
-          width: 100%;
-          position: static;
-        }
       }
-    }
-
-    #limenu-site > a:before {
-      content: fa-content($fa-var-file-alt);
-      font-weight: 300 !important;
-    }
-
-    #limenu-media > a:before {
-      content: fa-content($fa-var-file-image);
-      font-weight: 300 !important;
-    }
-
-    #limenu-components > a:before {
-      content: fa-content($fa-var-cube);
-    }
-
-    #limenu-manage > a:before {
-      content: fa-content($fa-var-sliders-h);
     }
   }
 
   #modx-user-menu {
     margin-top: auto;
-
-    #user-username {
-      display: none;
-    }
 
     #user-avatar {
       img {
@@ -321,7 +304,7 @@
   }
 
   // custom styles for language menu
-  #limenu-user-submenu #language .modx-subsubnav {
+  #language .modx-subsubnav {
     max-height: 86vh;
     overflow-y: auto;
   }
