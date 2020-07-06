@@ -37,6 +37,7 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 
 # Force rewrite to https for every host
 #RewriteCond %{HTTPS} !=on [OR]
+#RewriteCond %{SERVER_PORT} !^443
 #RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 
