@@ -418,7 +418,7 @@ $settings['default_duplicate_publish_option']->fromArray([
 $settings['default_media_source']= $xpdo->newObject(modSystemSetting::class);
 $settings['default_media_source']->fromArray([
   'key' => 'default_media_source',
-  'value' => 1,
+  'value' => 2,
   'xtype' => 'modx-combo-source',
   'namespace' => 'core',
   'area' => 'manager',
