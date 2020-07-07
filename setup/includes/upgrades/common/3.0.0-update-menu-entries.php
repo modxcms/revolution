@@ -16,10 +16,17 @@ if ($formCustomization) {
     $newData['text'] = 'form_customization';
     $newData['description'] = 'form_customization_desc';
 
-    $formCustomization->remove();
+    $created = true;
+    $newFormCustomization = $modx->getObject(modMenu::class, ['text' => 'form_customization']);
+    if (!$newFormCustomization) {
+        $newFormCustomization = $modx->newObject(modMenu::class);
+        $newFormCustomization->fromArray($newData, '', true, true);
 
-    $newFormCustomization = $modx->newObject(modMenu::class);
-    $newFormCustomization->fromArray($newData, '', true, true);
-    $newFormCustomization->save();
+        $created = $newFormCustomization->save();
+    }
+
+    if ($created) {
+        $formCustomization->remove();
+    }
 }
 
