@@ -102,7 +102,7 @@ class modSecurityAccessGetListProcessor extends modObjectGetListProcessor {
     public function prepareRow(xPDOObject $object) {
         $principal = $this->modx->getObject($object->get('principal_class'), $object->get('principal'));
         if (!$principal) {
-            $principal = $this->modx->newObject($object->get('principal_class'), array('name' => '(anonymous)'));
+            $principal = $this->modx->newObject($object->get('principal_class'), array('name' => $this->getAnonymName()));
         }
 
         $policyName = !empty($object->Policy) ? $object->Policy->get('name') : $this->modx->lexicon('no_policy_option');
@@ -110,7 +110,7 @@ class modSecurityAccessGetListProcessor extends modObjectGetListProcessor {
         if ($object->Target) {
             $targetName = ($this->classKey == 'modAccessContext') ? $object->Target->get('key') : $object->Target->get('name');
         } else {
-            $targetName = '(anonymous)';
+            $targetName = $this->getAnonymName();
         }
 
         $objArray = array(
@@ -134,6 +134,15 @@ class modSecurityAccessGetListProcessor extends modObjectGetListProcessor {
             ($policyName == 'Administrator') && ($object->get('authority') == 0)) ? '' : 'pedit premove';
 
         return $objArray;
+    }
+    
+    /**
+     * Return formatted and translated string for anonymous value.
+     * @return string
+     */
+    protected function getAnonymName()
+    {
+        return '(' . $this->modx->lexicon('anonymous') . ')';
     }
 }
 
