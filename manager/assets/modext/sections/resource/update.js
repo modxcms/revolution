@@ -106,7 +106,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('resource/update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(true);
@@ -126,7 +125,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('resource/update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(false);
