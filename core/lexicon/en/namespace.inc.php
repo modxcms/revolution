@@ -23,6 +23,6 @@ $_lang['namespace_remove'] = 'Delete Namespace';
 $_lang['namespace_remove_confirm'] = 'Are you sure you want to delete "[[+name]]" namespace and all related content?';
 $_lang['namespace_remove_multiple'] = 'Delete Namespaces';
 $_lang['namespace_remove_multiple_confirm'] = 'Are you sure you want to delete these namespaces and all their related content?';
-$_lang['namespace_update'] = 'Update Namespace';
+$_lang['namespace_update'] = 'Edit Namespace';
 $_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces_desc'] = 'Namespaces are global identifiers for packages and components, registering their vehicles, lexicon entries and resources all together.';

@@ -20,7 +20,7 @@ $_lang['dashboard_remove'] = 'Delete Dashboard';
 $_lang['dashboard_remove_confirm'] = 'Are you sure you want to delete this Dashboard?';
 $_lang['dashboard_remove_multiple'] = 'Delete Dashboards';
 $_lang['dashboard_remove_multiple_confirm'] = 'Are you sure you want to delete the selected Dashboards?';
-$_lang['dashboard_update'] = 'Update Dashboard';
+$_lang['dashboard_update'] = 'Edit Dashboard';
 $_lang['dashboard_err_ae_name'] = 'A dashboard with the name "[[+name]]" already exists! Please try another name.';
 $_lang['dashboard_err_duplicate'] = 'An error occurred while trying to duplicate the dashboard.';
 $_lang['dashboard_err_nf'] = 'Dashboard not found.';
@@ -82,7 +82,7 @@ $_lang['widget_snippet'] = 'Snippet';
 $_lang['widget_type'] = 'Widget Type';
 $_lang['widget_type_desc'] = 'The type of widget this is. "Snippet" widgets are MODX Snippets that are run and return their output. "HTML" widgets are just straight HTML. "File" widgets are loaded directly from files, which can either return their output or the name of the modDashboardWidgetClass-extended class to load. "Inline PHP" Widgets are widgets that are straight PHP in the widget content, similar to a Snippet.';
 $_lang['widget_unplace'] = 'Delete Widget from Dashboard';
-$_lang['widget_update'] = 'Update Widget';
+$_lang['widget_update'] = 'Edit Widget';
 $_lang['widgets'] = 'Widgets';
 $_lang['widgets.intro_msg'] = 'Below is a list of all the installed Dashboard Widgets you have.';
 
