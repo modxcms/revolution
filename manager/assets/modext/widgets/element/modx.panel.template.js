@@ -6,7 +6,6 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-template
  */
-
 MODx.panel.Template = function(config) {
     config = config || {record:{}};
     config.record = config.record || {};
