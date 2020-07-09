@@ -158,20 +158,6 @@
   }
 }
 
-// Submenus show & hide
-#modx-footer ul.modx-subnav li:hover ul ul,
-#modx-footer ul.modx-subnav ul li:hover ul ul,
-#modx-footer ul.modx-subnav ul ul li:hover ul ul {
-  display: none;
-}
-
-#modx-footer ul.modx-subnav li:hover ul,
-#modx-footer ul.modx-subnav ul li:hover ul,
-#modx-footer ul.modx-subnav ul ul li:hover ul,
-#modx-footer ul.modx-subnav ul ul ul li:hover ul {
-  display: block;
-}
-
 #modx-leftbar-trigger {
   transition: all .2s ease;
 
@@ -250,6 +236,13 @@
         text-decoration: none;
         cursor: pointer;
 
+        .icon {
+          display: inline-block;
+          font-size: 18px;
+          opacity: .07;
+          padding-left: 5px;
+        }
+
         span {
           color: $subnavDescriptionColor;
           display: block;
@@ -272,6 +265,19 @@
           }
         }
       }
+    }
+
+    & li:hover ul ul,
+    & ul li:hover ul ul,
+    & ul ul li:hover ul ul {
+      display: none;
+    }
+
+    & li:hover ul,
+    & ul li:hover ul,
+    & ul ul li:hover ul,
+    & ul ul ul li:hover ul {
+      display: block;
     }
 
     &.active {

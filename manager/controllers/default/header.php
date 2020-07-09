@@ -330,7 +330,7 @@ class TopMenu
             if (!empty($menu['handler'])) {
                 $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
             }
-            $smTpl .= '<a'.$attributes.'>'.$menu['text'].$description.'</a>'."\n";
+            $smTpl .= '<a'.$attributes.'>'.$menu['text'].$menu['icon'].$description.'</a>'."\n";
 
             if (!empty($menu['children'])) {
                 $smTpl .= '<ul class="modx-subsubnav">'."\n";
