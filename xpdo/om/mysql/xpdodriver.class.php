@@ -47,6 +47,7 @@ class xPDODriver_mysql extends xPDODriver {
     public $_currentTimestamps= array (
         'CURRENT_TIMESTAMP',
         'CURRENT_TIMESTAMP()',
+        'current_timestamp()',
         'NOW()',
         'LOCALTIME',
         'LOCALTIME()',
