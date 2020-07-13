@@ -11,7 +11,7 @@
     <property name="project.build.dir" value="${project.root.dir}/build" />
 
     <!-- Set the project version -->
-    <property name="xpdo.core.version" value="2.8.0" />
+    <property name="xpdo.core.version" value="2.8.1" />
     <property name="xpdo.core.release" value="pl" />
 
     <!-- Set some common build properties -->
