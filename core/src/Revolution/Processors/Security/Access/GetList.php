@@ -124,7 +124,7 @@ class GetList extends GetListProcessor
     {
         $principal = $this->modx->getObject($object->get('principal_class'), $object->get('principal'));
         if (!$principal) {
-            $principal = $this->modx->newObject($object->get('principal_class'), ['name' => '(anonymous)']);
+            $principal = $this->modx->newObject($object->get('principal_class'), ['name' => $this->getAnonymName()]);
         }
 
         $policyName = !empty($object->Policy) ? $object->Policy->get('name') : $this->modx->lexicon('no_policy_option');
@@ -132,7 +132,7 @@ class GetList extends GetListProcessor
         if ($object->Target) {
             $targetName = ($this->classKey === modAccessContext::class) ? $object->Target->get('key') : $object->Target->get('name');
         } else {
-            $targetName = '(anonymous)';
+            $targetName = $this->getAnonymName();
         }
 
         $objArray = [
@@ -155,5 +155,14 @@ class GetList extends GetListProcessor
         $objArray['cls'] = (($object->get('target') === 'mgr') && ($principal->get('name') === 'Administrator') && ($policyName === 'Administrator') && ($object->get('authority') === 0)) ? '' : 'pedit premove';
 
         return $objArray;
+    }
+
+    /**
+     * Return formatted and translated string for anonymous value.
+     * @return string
+     */
+    protected function getAnonymName()
+    {
+        return '(' . $this->modx->lexicon('anonymous') . ')';
     }
 }
