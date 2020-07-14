@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Update xPDO to 2.8.1
 - Use 0 if id is undefined [#15103]
 - Load tree_show_resource_ids permission [#15101]
 - Set error message by field name instead of id [#15099]
