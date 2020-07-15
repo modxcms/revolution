@@ -101,6 +101,8 @@ class modMenu extends modAccessibleObject {
         $c->where(array(
             'modMenu.parent' => $start,
         ));
+        // make sure installer is always on top
+        $c->sortby('FIELD(modMenu.text, "installer")','DESC');
         $c->sortby($this->xpdo->getSelectColumns('modMenu','modMenu','',array('menuindex')),'ASC');
         $menus = $this->xpdo->getCollection('modMenu',$c);
         if (count($menus) < 1) return array();
