@@ -64,31 +64,6 @@ RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 #AddType text/x-component .htc
 
 
-
-# If your server is not already configured as such, the following directive
-# should be uncommented in order to set PHP's register_globals option to OFF.
-# This closes a major security hole that is abused by most XSS (cross-site
-# scripting) attacks. For more information: http://php.net/register_globals
-#
-# To verify that this option has been set to OFF, open the Manager and choose
-# Reports -> System Info and then click the phpinfo() link. Do a Find on Page
-# for "register_globals". The Local Value should be OFF. If the Master Value
-# is OFF then you do not need this directive here.
-#
-# IF REGISTER_GLOBALS DIRECTIVE CAUSES 500 INTERNAL SERVER ERRORS :
-#
-# Your server does not allow PHP directives to be set via .htaccess. In that
-# case you must make this change in your php.ini file instead. If you are
-# using a commercial web host, contact the administrators for assistance in
-# doing this. Not all servers allow local php.ini files, and they should
-# include all PHP configurations (not just this one), or you will effectively
-# reset everything to PHP defaults. Consult www.php.net for more detailed
-# information about setting PHP directives.
-
-#php_flag register_globals Off
-
-
-
 # For servers that support output compression, you should pick up a bit of
 # speed by un-commenting the following lines.
 
