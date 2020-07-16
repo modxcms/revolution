@@ -45,10 +45,6 @@
   height: auto !important;
   box-sizing: border-box;
 
-  @include grid-media($desktop) {
-    left: 5px !important;
-  }
-
   .loading-indicator {
     background: none;
     color: $searchResultsColor;
@@ -86,8 +82,9 @@
 
   .section {
     border-left: 1px solid darken($searchResultsBg, 7%);
-    font-size: 13px;
-    margin-left: 95px;
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: 100px;
     position: relative;
     width: auto; /* change to 100% to enable scrollable overflow */
   }
@@ -95,16 +92,17 @@
   h3,
   .x-combo-list-item {
     color: $searchResultsColor;
-    line-height: 17px;
+    line-height: 18px;
     margin: 0;
-    padding: 4px 8px;
+    padding: 4px 6px;
   }
 
   h3 {
     color: $searchResultsHeadingColor;
-    font-size: 13px;
+    font-size: 11px;
+    line-height: 11px;
     font-weight: normal;
-    left: -116px;
+    left: -108px;
     position: absolute;
     text-align: right;
     top: 0;
@@ -114,7 +112,7 @@
   a {
     cursor: pointer;
     display: inline-block;
-    padding-left: 18px;
+    padding-left: 20px;
     position: relative;
     color: inherit;
     text-decoration: none;
@@ -124,7 +122,7 @@
     color: $colorSplash;
     left: 0;
     position: absolute;
-    top: 2px;
+    top: 4px;
   }
 
   em {

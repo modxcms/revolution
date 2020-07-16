@@ -37,9 +37,6 @@ class Search extends Processor
     const TYPE_USER = 'user';
     const TYPE_RESOURCE = 'resource';
 
-    /** @deprecated todo: move hardcoded value to settings */
-    public $maxResults = 5;
-
     protected $query;
 
     public $results = [];
@@ -58,7 +55,15 @@ class Search extends Processor
      */
     protected function getMaxResults()
     {
-        return $this->maxResults;
+        return (int)$this->modx->getOption('quick_search_result_max', null, 10);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function searchInContent()
+    {
+        return (boolean)$this->modx->getOption('quick_search_in_content', null, true);
     }
 
     /**
@@ -72,19 +77,19 @@ class Search extends Processor
                 $this->searchResources();
             }
             if ($this->modx->hasPermission('edit_chunk')) {
-                $this->searchElements(modChunk::class, static::TYPE_CHUNK);
+                $this->searchElements(modChunk::class, static::TYPE_CHUNK, 'name', 'description', 'snippet');
             }
             if ($this->modx->hasPermission('edit_template')) {
-                $this->searchElements(modTemplate::class, static::TYPE_TEMPLATE, 'templatename');
+                $this->searchElements(modTemplate::class, static::TYPE_TEMPLATE, 'templatename', 'description', 'content');
             }
             if ($this->modx->hasPermission('edit_tv')) {
-                $this->searchElements(modTemplateVar::class, static::TYPE_TV, 'name', 'caption');
+                $this->searchElements(modTemplateVar::class, static::TYPE_TV, 'name', 'caption', 'default_text');
             }
             if ($this->modx->hasPermission('edit_snippet')) {
-                $this->searchElements(modSnippet::class, static::TYPE_SNIPPET);
+                $this->searchElements(modSnippet::class, static::TYPE_SNIPPET, 'name', 'description', 'snippet');
             }
             if ($this->modx->hasPermission('edit_plugin')) {
-                $this->searchElements(modPlugin::class, static::TYPE_PLUGIN);
+                $this->searchElements(modPlugin::class, static::TYPE_PLUGIN, 'name', 'description', 'plugincode');
             }
             if ($this->modx->hasPermission('edit_user')) {
                 $this->searchUsers();
@@ -108,21 +113,24 @@ class Search extends Processor
         $c = $this->modx->newQuery(modResource::class);
         $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
         $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
-
         $c->select('modTemplate.icon as icon');
-        $c->where([
-            [
-                'modResource.pagetitle:LIKE' => '%' . $this->query .'%',
-                'OR:modResource.longtitle:LIKE' => '%' . $this->query .'%',
-                'OR:modResource.alias:LIKE' => '%' . $this->query .'%',
-                'OR:modResource.description:LIKE' => '%' . $this->query .'%',
-                'OR:modResource.introtext:LIKE' => '%' . $this->query .'%',
-                'OR:modResource.id:=' => $this->query,
-            ],
-            [
-                'modResource.context_key:IN' => $contextKeys,
-            ]
-        ]);
+
+        $querySearch = [
+            'modResource.pagetitle:LIKE' => '%' . $this->query .'%',
+            'OR:modResource.longtitle:LIKE' => '%' . $this->query .'%',
+            'OR:modResource.alias:LIKE' => '%' . $this->query .'%',
+            'OR:modResource.description:LIKE' => '%' . $this->query .'%',
+            'OR:modResource.introtext:LIKE' => '%' . $this->query .'%',
+        ];
+        if ($this->searchInContent()) {
+            $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query .'%';
+        }
+        $querySearch['OR:modResource.id:='] = $this->query;
+        $queryContext = [
+            'modResource.context_key:IN' => $contextKeys,
+        ];
+        $c->where($querySearch, $queryContext);
+
         $c->sortby('modResource.createdon', 'DESC');
 
         $c->limit($this->getMaxResults());
@@ -149,15 +157,20 @@ class Search extends Processor
      * @param string $type
      * @param string $nameField
      * @param string $descriptionField
+     * @param string $contentField
      */
-    protected function searchElements($class, $type = '', $nameField = 'name', $descriptionField = 'description')
+    protected function searchElements($class, $type = '', $nameField = 'name', $descriptionField = 'description', $contentField = '')
     {
         $c = $this->modx->newQuery($class);
-        $c->where([
+        $querySearch = [
             $nameField . ':LIKE' => '%' . $this->query . '%',
             'OR:' . $descriptionField . ':LIKE' => '%' . $this->query .'%',
-            'OR:id:=' => $this->query,
-        ]);
+        ];
+        if ($this->searchInContent() && !empty($contentField)) {
+            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query .'%';
+        }
+        $querySearch['OR:id:='] = $this->query;
+        $c->where($querySearch);
 
         $c->limit($this->getMaxResults());
 
@@ -166,8 +179,8 @@ class Search extends Processor
         /** @var modElement $record */
         foreach ($collection as $record) {
             $this->results[] = [
-                $nameField => $record->get($nameField),
-                $descriptionField => $record->get($descriptionField),
+                'name' => $record->get($nameField),
+                'description' => $record->get($descriptionField),
                 '_action' => 'element/' . $type . '/update&id=' . $record->get('id'),
                 'type' => $type . 's'
             ];
