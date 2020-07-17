@@ -367,11 +367,16 @@ MODx.grid.UserGroupUsers = function(config) {
             }, scope: this }
         }]
         ,tbar: [{
+            text: _('user_group_update')
+            ,cls:'primary-button'
+            ,handler: this.updateUserGroup
+            ,hidden: (MODx.perm.usergroup_edit == 0 || config.ownerCt.id != 'modx-tree-panel-usergroup')
+        },'->',{
             text: _('user_group_user_add')
             ,cls:'primary-button'
             ,handler: this.addMember
             ,hidden: MODx.perm.usergroup_user_edit == 0
-        },'->',{
+        },{
             xtype: 'textfield'
             ,id: 'modx-ugu-filter-username'
             ,cls: 'x-form-filter'
@@ -444,6 +449,11 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
                 },scope:this}
             }
         });
+    }
+
+    ,updateUserGroup: function() {
+        var id = this.config.usergroup;
+        MODx.loadPage('security/usergroup/update', 'id=' + id);
     }
 
     ,addMember: function(btn,e) {
