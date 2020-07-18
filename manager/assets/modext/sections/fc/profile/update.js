@@ -21,7 +21,6 @@ MODx.page.UpdateFCProfile = function(config) {
             ,id: 'modx-abtn-save'
             ,cls:'primary-button'
             ,method: 'remote'
-            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
@@ -39,7 +38,6 @@ MODx.page.UpdateFCProfile = function(config) {
         ,components: [{
             xtype: 'modx-panel-fc-profile'
             ,record: config.record || {}
-            //,baseParams: { action: 'update' ,id: config.id }
         }]
 	});
 	MODx.page.UpdateFCProfile.superclass.constructor.call(this,config);

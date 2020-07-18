@@ -116,7 +116,6 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
             ,method: 'remote'
-            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true

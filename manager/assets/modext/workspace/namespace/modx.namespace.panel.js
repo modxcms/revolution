@@ -159,7 +159,6 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -168,7 +167,6 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-namespace-search').reset();
     	this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();

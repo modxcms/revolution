@@ -18,7 +18,6 @@ MODx.page.Profile = function(config) {
             ,cls: 'primary-button'
             ,redirect: false
             ,method: 'remote'
-            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true

@@ -329,7 +329,6 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
         return true;
     }
 
@@ -355,8 +354,6 @@ MODx.window.CreateFCProfile = function(config) {
         title: _('profile_create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Profile/Create'
-        // ,height: 150
-        // ,width: 375
         ,fields: [{
             xtype: 'textfield'
             ,name: 'name'

@@ -154,13 +154,6 @@ Ext.extend(MODx.panel.Dashboard,MODx.FormPanel,{
         this.getForm().setValues(this.config.record);
         Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(this.config.record.name));
 
-        /*
-        var d = this.config.record.usergroups;
-        var g = Ext.getCmp('modx-grid-dashboard-usergroups');
-        if (d && g) {
-            g.getStore().loadData(d);
-        }*/
-
         var d = this.config.record.widgets;
         var g = Ext.getCmp('modx-grid-dashboard-widget-placements');
         if (d && g) {
@@ -333,7 +326,6 @@ MODx.window.DashboardWidgetPlace = function(config) {
     this.ident = config.ident || 'dbugadd'+Ext.id();
     Ext.applyIf(config,{
         title: _('widget_place')
-        // ,frame: true
         ,id: 'modx-window-dashboard-widget-place'
         ,fields: [{
             xtype: 'modx-combo-dashboard-widgets'
@@ -503,7 +495,6 @@ MODx.combo.DashboardWidgets = function(config) {
         ,editable: true
         ,valueField: 'id'
         ,fields: ['id','name','name_trans','description','description_trans']
-        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {

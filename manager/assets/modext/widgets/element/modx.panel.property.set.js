@@ -309,7 +309,6 @@ MODx.window.AddElementToPropertySet = function(config) {
         ,baseParams: {
             action: 'Element/PropertySet/AddElement'
         }
-        // ,width: 400
         ,fields: [{
             xtype: 'hidden'
             ,name: 'propertyset'
@@ -372,7 +371,6 @@ MODx.combo.ElementClass = function(config) {
         ,displayField: 'name'
         ,valueField: 'name'
         ,fields: ['name']
-        // ,listWidth: 300
         ,pageSize: 20
         ,editable: false
         ,url: MODx.config.connector_url
@@ -399,7 +397,6 @@ MODx.combo.Elements = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name']
-        // ,listWidth: 300
         ,pageSize: 20
         ,editable: false
         ,url: MODx.config.connector_url
@@ -428,7 +425,6 @@ MODx.window.CreatePropertySet = function(config) {
             action: 'Element/PropertySet/Create'
         }
         ,autoHeight: true
-        // ,width: 550
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -498,7 +494,6 @@ MODx.window.DuplicatePropertySet = function(config) {
             action: 'Element/PropertySet/Duplicate'
         }
         ,autoHeight: true
-        // ,width: 550
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -513,7 +508,6 @@ MODx.window.DuplicatePropertySet = function(config) {
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('propertyset_duplicate_copyels')
-            // ,labelSeparator: ''
             ,hideLabel: true
             ,name: 'copyels'
             ,id: 'modx-dpropset-copyels'

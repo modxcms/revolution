@@ -16,12 +16,9 @@ MODx.tree.Resource = function(config) {
         ,expandFirst: true
         ,enableDD: (MODx.config.enable_dragdrop != '0') ? true : false
         ,ddGroup: 'modx-treedrop-dd'
-        // ,remoteToolbar: true
-        // ,remoteToolbarAction: 'Resource/GetToolbar'
         ,sortAction: 'Resource/Sort'
         ,sortBy: this.getDefaultSortBy(config)
         ,tbarCfg: {
-        //    hidden: true
             id: config.id ? config.id+'-tbar' : 'modx-tree-resource-tbar'
         }
         ,baseParams: {
@@ -68,43 +65,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             }
         }
     }
-
-    /*,addSearchToolbar: function() {
-        this.searchField = new Ext.form.TextField({
-            emptyText: _('search_ellipsis')
-            ,listeners: {
-                'change': {fn: this.search,scope:this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        });
-        this.searchBar = new Ext.Toolbar({
-            renderTo: this.tbar
-            ,id: 'modx-resource-searchbar'
-            ,items: [this.searchField]
-        });
-        this.on('resize', function(){
-            this.searchField.setWidth(this.getWidth() - 12);
-        }, this);
-    }
-
-    ,search: function(nv) {
-        Ext.state.Manager.set(this.treestate_id+'-search',nv);
-        this.config.search = nv;
-        this.getLoader().baseParams = {
-            action: this.config.action
-            ,search: this.config.search
-        };
-        this.refresh();
-    }*/
 
     /**
      * Shows the current context menu.
@@ -880,12 +840,9 @@ MODx.window.QuickCreateResource = function(config) {
         ,id: this.ident
         ,bwrapCssClass: 'x-window-with-tabs'
         ,width: 700
-        //,height: ['modSymLink', 'modWebLink', 'modStaticResource'].indexOf(config.record.class_key) == -1 ? 640 : 498
-        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Resource/Create'
-        // ,shadow: false
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
@@ -898,7 +855,6 @@ MODx.window.QuickCreateResource = function(config) {
                 title: _('resource')
                 ,layout: 'form'
                 ,cls: 'modx-panel'
-                // ,bodyStyle: { background: 'transparent', padding: '10px' } // we handle this in CSS
                 ,autoHeight: false
                 ,anchor: '100% 100%'
                 ,labelWidth: 100
@@ -1027,7 +983,6 @@ MODx.window.QuickCreateResource = function(config) {
                     autoHeight: true
                     ,border: false
                 }
-                // ,bodyStyle: { padding: '10px' } // we handle this in CSS
                 ,items: MODx.getQRSettings(this.ident,config.record)
             }]
         }]
@@ -1104,7 +1059,6 @@ MODx.getQRContentField = function(id,cls) {
                 ,browserEl: 'modx-browser'
                 ,prependPath: false
                 ,prependUrl: false
-                // ,hideFiles: true
                 ,fieldLabel: _('static_resource')
                 ,name: 'content'
                 ,id: 'modx-'+id+'-content'
@@ -1127,7 +1081,6 @@ MODx.getQRContentField = function(id,cls) {
                 xtype: 'textarea'
                 ,name: 'content'
                 ,id: 'modx-'+id+'-content'
-                // ,hideLabel: true
                 ,fieldLabel: _('content')
                 ,labelSeparator: ''
                 ,anchor: '100%'

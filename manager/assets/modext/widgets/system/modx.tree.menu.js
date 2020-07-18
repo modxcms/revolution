@@ -134,7 +134,6 @@ MODx.window.CreateMenu = function(config) {
     Ext.applyIf(config,{
         title: _('menu_create')
         ,width: 600
-        // ,height: 400
         ,url: MODx.config.connector_url
         ,action: 'System/Menu/Create'
         ,fields: [{
@@ -167,7 +166,6 @@ MODx.window.CreateMenu = function(config) {
                     ,allowBlank: false
                     ,anchor: '100%'
                     ,id: this.ident+'-text'
-                    //,readOnly: config.update ? true : false
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: this.ident+'-text'
@@ -222,7 +220,6 @@ MODx.window.CreateMenu = function(config) {
                     ,xtype: 'textfield'
                     ,anchor: '100%'
                     ,id: this.ident+'-action-id'
-                    //,allowBlank: false
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: this.ident+'-action-id'
@@ -317,7 +314,6 @@ MODx.combo.Menu = function(config) {
         ,fields: ['text','text_lex']
         ,displayField: 'text_lex'
         ,valueField: 'text'
-        // ,listWidth: 300
         ,editable: false
     });
     MODx.combo.Menu.superclass.constructor.call(this,config);

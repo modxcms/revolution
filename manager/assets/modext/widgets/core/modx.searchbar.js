@@ -145,19 +145,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
     // Initialize the keyboard shortcuts to focus the bar (ctrl + alt + /) and hide it (esc)
     setKeyMap: function() {
-        // This keymap is conflicting with typing certain characters, see #11974
-        /*new Ext.KeyMap(document, {
-            key: [191, 0]
-            ,ctrl: true
-            ,alt: true
-            ,handler: function() {
-                this.hideBar();
-                this.toggle();
-            }
-            ,scope: this
-            ,stopEvent: true
-        });*/
-
         // Escape to hide SearchBar
         new Ext.KeyMap(document, {
             key: 27
@@ -232,12 +219,6 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
                 deferEmptyText: false
             });
 
-            // Original view listeners
-            // this.mon(this.view, {
-            //    containerclick : this.onViewClick,
-            //    click : this.onViewClick,
-            //    scope :this
-            // });
             this.view.on('click', function(view, index, node, vent) {
                 /**
                  * Force node selection to make sure it is available in onViewClick
@@ -291,44 +272,13 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
         MODx.loadPage(target);
     }
-    /**
-     * Toggle the search drawer visibility
-     *
-     * @param {Boolean} hide Whether or not to force-hide MODx.SearchBar
-     */
-    /*
-    ,toggle: function(hide) {
-        var uberbar = Ext.get( this.container.id );
-        if (uberbar.hasClass('visible') || hide) {
-            this.blurBar();
-            uberbar.removeClass('visible');
-        } else {
-            uberbar.addClass('visible');
-            this.focusBar();
-        }
-    }
-    */
     ,hideBar: function() {
-        // this.toggle(true);
     }
     ,focusBar: function() {
         this.selectText();
-        // this.animate();
     }
     ,blurBar: function() {
-        // this.animate(true);
     }
-    /**
-     * Animate the input "grow"
-     *
-     * @param {Boolean} blur Whether or not the input loses focus (to "minimize" the input width)
-     */
-    /*
-    ,animate: function(blur) {
-        var to = blur ? this.width : this.maxWidth;
-        this.wrap.setWidth(to, true);
-        this.el.setWidth(to - this.getTriggerWidth(), true);
-    }*/
     /**
      * Compute the available max height so results could be scrollable if required
      *

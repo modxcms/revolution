@@ -164,9 +164,6 @@ MODx.panel.UserGroup = function(config) {
                     ,group: config.record.id
                     ,autoHeight: true
                     ,width: '97%'
-//                    ,listeners: {
-//                        'afterAutoSave':{fn:this.markDirty,scope:this}
-//                    }
                 }]
             },{
                 title: _('permissions')
@@ -277,12 +274,6 @@ MODx.panel.UserGroup = function(config) {
                             ,usergroup: config.record.id
                             ,autoHeight: true
                             ,width: '97%'
-                            //,listeners: {
-                            //    'afterRemoveRow': {fn:this.markDirty,scope:this}
-                            //    ,'afteredit': {fn:this.markDirty,scope:this}
-                            //    ,'updateAcl': {fn:this.markDirty,scope:this}
-                            //    ,'createAcl': {fn:this.markDirty,scope:this}
-                            //}
                         }]
                     }]
                 }]
@@ -430,14 +421,12 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
     ,searchUser: function(tf,nv,ov) {
         this.getStore().baseParams['username'] = Ext.getCmp('modx-ugu-filter-username').getValue();
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
         Ext.getCmp('modx-ugu-filter-username').setValue('');
         this.getStore().baseParams['username'] = '';
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,updateRole: function(btn,e) {
@@ -541,8 +530,6 @@ MODx.window.AddUserToUserGroup = function(config) {
     this.ident = config.ident || 'auug'+Ext.id();
     Ext.applyIf(config,{
         title: _('user_group_user_add')
-        // ,height: 150
-        // ,width: 500
         ,url: MODx.config.connector_url
         ,action: 'Security/Group/User/Create'
         ,fields: [{

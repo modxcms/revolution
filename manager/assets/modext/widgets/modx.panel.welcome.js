@@ -9,7 +9,6 @@ MODx.panel.Welcome = function (config) {
     Ext.applyIf(config, {
         id: 'modx-panel-welcome',
         cls: 'container',
-        // baseCls: 'modx-formpanel',
         layout: 'auto',
         defaults: {
             collapsible: false,
@@ -133,7 +132,6 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                         to: e.newIndex,
                     },
                     listeners: {
-                        //failure: {fn: function() {}, scope: this}
                     }
                 });
             },
@@ -209,7 +207,6 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                                         }
                                     }, scope: this
                                 },
-                                //failure: {fn: function() {}, scope: this}
                             }
                         });
                     }

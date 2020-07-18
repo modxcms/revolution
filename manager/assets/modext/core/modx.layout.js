@@ -330,7 +330,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 }
                 if (animate && window.innerWidth > 640) {
                     var tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
-                    // tree.dom.style.visibility = 'hidden';
                     tree.dom.style.opacity = 0;
                     this.el.dom.style.left = '-' + this.el.dom.style.width;
                 } else {

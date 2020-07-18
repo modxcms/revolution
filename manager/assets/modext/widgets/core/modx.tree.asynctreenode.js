@@ -11,6 +11,5 @@ MODx.tree.AsyncTreeNode = function(config) {
 Ext.extend(MODx.tree.AsyncTreeNode,Ext.tree.AsyncTreeNode,{
 
 });
-//Ext.tree.AsyncTreeNode = MODx.tree.AsyncTreeNode;
 Ext.reg('modx-tree-asynctreenode',MODx.tree.AsyncTreeNode);
 

@@ -16,60 +16,10 @@ MODx.tree.Element = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'Element/GetNodes'
         ,sortAction: 'Element/Sort'
-        // ,useDefaultToolbar: false
         ,baseParams: {
             currentElement: MODx.request.id || 0
             ,currentAction: MODx.request.a || 0
-        }/*
-        ,tbar: [{
-            cls: 'tree-new-template'
-            ,tooltip: {text: _('new')+' '+_('template')}
-            ,handler: function() {
-                this.redirect('?a=Element/Template/Create');
-            }
-            ,scope: this
-            ,hidden: MODx.perm.new_template ? false : true
-        },{
-            cls: 'tree-new-tv'
-            ,tooltip: {text: _('new')+' '+_('tv')}
-            ,handler: function() {
-                this.redirect('?a=Element/TemplateVar/Create');
-            }
-            ,scope: this
-            ,hidden: MODx.perm.new_tv ? false : true
-        },{
-            cls: 'tree-new-chunk'
-            ,tooltip: {text: _('new')+' '+_('chunk')}
-            ,handler: function() {
-                this.redirect('?a=Element/Chunk/Create');
-            }
-            ,scope: this
-            ,hidden: MODx.perm.new_chunk ? false : true
-        },{
-            cls: 'tree-new-snippet'
-            ,tooltip: {text: _('new')+' '+_('snippet')}
-            ,handler: function() {
-                this.redirect('?a=Element/Snippet/Create');
-            }
-            ,scope: this
-            ,hidden: MODx.perm.new_snippet ? false : true
-        },{
-            cls: 'tree-new-plugin'
-            ,tooltip: {text: _('new')+' '+_('plugin')}
-            ,handler: function() {
-                this.redirect('?a=Element/Plugin/Create');
-            }
-            ,scope: this
-            ,hidden: MODx.perm.new_plugin ? false : true
-        },{
-            cls: 'tree-new-category'
-            ,tooltip: {text: _('new_category')}
-            ,handler: function() {
-                this.createCategory(null,{target: this.getEl()});
-            }
-            ,scope: this
-            ,hidden: MODx.perm.new_category ? false : true
-        }]*/
+        }
     });
     MODx.tree.Element.superclass.constructor.call(this,config);
     this.on('afterSort',this.afterSort);
@@ -568,7 +518,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
             if (childNodes.some(function(child) { return !child.leaf; })) { // If any childNode has own children
                 m.push('-');
-    
+
                 if (n.isExpanded() && childNodes.some(function(child) { return child.isExpanded(); })) { // If any childNode is expanded
                     m.push({
                         text: _('collapse_all')
@@ -577,7 +527,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                         }
                     });
                 }
-    
+
                 m.push({
                     text: _('expand_all')
                     ,handler: function() {

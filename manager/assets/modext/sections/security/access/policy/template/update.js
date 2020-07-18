@@ -21,7 +21,6 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
             ,method: 'remote'
-            // ,checkDirty: false
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
@@ -36,7 +35,7 @@ MODx.page.UpdateAccessPolicyTemplate = function(config) {
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-        ,components: [{ 
+        ,components: [{
             xtype: 'modx-panel-access-policy-template'
             ,template: config.template
             ,record: config.record || {}

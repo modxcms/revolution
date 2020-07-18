@@ -10,7 +10,7 @@ Ext.ns('Ext.ux.tree');Ext.ux.tree.ColumnTree=Ext.extend(Ext.tree.TreePanel,{line
 MODx.tree.ColumnTree = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        
+
         rootVisible: false
         ,autoScroll: true
         ,autoHeight: true
@@ -48,17 +48,16 @@ MODx.tree.ColumnTree = function(config) {
 };
 Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
     windows: {}
-    
+
     /**
      * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} node The 
+     * @param {Ext.tree.TreeNode} node The
      * @param {Ext.EventObject} e The event object run.
      */
     ,_showContextMenu: function(node,e) {
         node.select();
         this.cm.activeNode = node;
         this.cm.record = node.attributes;
-        /*this.cm.record.id = node.attributes.pk;*/
         this.cm.removeAll();
         if (node.attributes.menu && node.attributes.menu.items) {
             this._addContextMenuItem(node.attributes.menu.items);
@@ -67,7 +66,7 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
     }
     /**
      * Add context menu items to the tree.
-     * @param {Object, Array} items Either an Object config or array of Object configs.  
+     * @param {Object, Array} items Either an Object config or array of Object configs.
      */
     ,_addContextMenuItem: function(items) {
         var a = items, l = a.length;
@@ -76,8 +75,8 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
             this.cm.add(a[i]);
         }
     }
-    
-    
+
+
     /**
      * Handles all drag events into the tree.
      * @param {Object} dropEvent The node dropped on the parent node.
@@ -90,12 +89,12 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
             ,progress:true
             ,closable:false
         });
-        
+
         MODx.util.Progress.reset();
         for(var i = 1; i < 20; i++) {
             setTimeout('MODx.util.Progress.time('+i+','+MODx.util.Progress.id+')',i*1000);
         }
-        
+
         /**
          * Simplify nodes into JSON format.
          * @param {Object} node
@@ -131,20 +130,20 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
             }
         });
     }
-    
+
     ,reloadNode: function(n) {
         this.getLoader().load(n);
         n.expand();
     }
-    
+
     /**
      * Abstract definition to handle drop events.
      */
     ,_handleDrop: function() { }
-    
+
     ,loadWindow: function(btn,e,win) {
         var r = win.record || this.cm.record;
-        if (!this.windows[win.xtype]) {  
+        if (!this.windows[win.xtype]) {
             Ext.applyIf(win,{
                 record: win.blankValues ? {} : r
                 ,grid: this
@@ -159,8 +158,8 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
         }
         this.windows[win.xtype].show(e.target);
     }
-    
-    
+
+
     ,refresh: function(func,scope,args) {
         this.getLoader().baseParams = this.config.baseParams;
         this.getRootNode().reload();
@@ -172,7 +171,7 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
         }
         return true;
     }
-    
+
     ,refreshActiveNode: function() {
         if (this.cm.activeNode) {
             this.getLoader().load(this.cm.activeNode);
@@ -188,9 +187,9 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
             n.expand();
         }
     }
-    
-    
-    
+
+
+
     ,_getToolbar: function() {
         var iu = MODx.config.template_url+'images/restyle/icons/';
         return [{
@@ -201,10 +200,10 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
             ,scope: this
         }];
     }
-    
+
     /**
      * Render the row to a colored Yes/No value.
-     * 
+     *
      * @access public
      * @param {Object} d The data record
      * @param {Object} c The dom properties

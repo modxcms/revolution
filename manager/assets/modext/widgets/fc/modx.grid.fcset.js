@@ -201,7 +201,6 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -211,7 +210,6 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-fcs-search').reset();
     	this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,exportSet: function(btn,e) {
@@ -382,7 +380,6 @@ MODx.window.CreateFCSet = function(config) {
         title: _('set_create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Set/Create'
-        // ,height: 150
         ,width: 600
         ,fields: [{
             xtype: 'hidden'
@@ -513,7 +510,6 @@ MODx.window.ImportFCSet = function(config) {
             ,name: 'file'
             ,id: 'modx-impset-file'
             ,anchor: '100%'
-            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportFCSet.superclass.constructor.call(this,config);

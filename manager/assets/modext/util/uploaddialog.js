@@ -18,10 +18,10 @@ Ext.ux.Utils.EventQueue = function(handler, scope) {
   this.scope = scope || window;
   this.queue = [];
   this.is_processing = false;
-  
+
   /**
    * Posts event into the queue.
-   * 
+   *
    * @access public
    * @param mixed event Event identificator.
    * @param mixed data  Event data.
@@ -33,11 +33,11 @@ Ext.ux.Utils.EventQueue = function(handler, scope) {
       this.process();
     }
   }
-  
+
   this.flushEventQueue = function() {
     this.queue = [];
   },
-  
+
   /**
    * @access private
    */
@@ -53,7 +53,7 @@ Ext.ux.Utils.EventQueue = function(handler, scope) {
 
 /**
  * This class implements Mili's finite state automata behaviour.
- *  
+ *
  *  Transition / output table format:
  *  {
  *    'state_1' : {
@@ -65,9 +65,9 @@ Ext.ux.Utils.EventQueue = function(handler, scope) {
  *          a|action: function|array, // Transition action, optional, default to Ext.emptyFn.
  *                                    // If array then methods will be called sequentially.
  *                                    // Action signature is (data, event, this).
- *          s|state: 'state_x',       // New state - transition destination, optional, default to 
+ *          s|state: 'state_x',       // New state - transition destination, optional, default to
  *                                    // current state.
- *          scope: object             // Predicate and action scope, optional, default to 
+ *          scope: object             // Predicate and action scope, optional, default to
  *                                    // trans_table_scope or window.
  *        }
  *      ]
@@ -91,19 +91,19 @@ Ext.ux.Utils.FSA = function(initial_state, trans_table, trans_table_scope) {
 };
 Ext.extend(Ext.ux.Utils.FSA, Ext.ux.Utils.EventQueue,{
   current_state : null,
-  trans_table : null,  
+  trans_table : null,
   trans_table_scope : null,
-  
+
   /**
    * Returns current state
-   * 
+   *
    * @access public
    * @return mixed Current state.
    */
   state : function() {
     return this.current_state;
   },
-  
+
   /**
    * @access public
    */
@@ -119,33 +119,33 @@ Ext.extend(Ext.ux.Utils.FSA, Ext.ux.Utils.EventQueue,{
       var action = transition.action || transition.a || Ext.emptyFn;
       var new_state = transition.state || transition.s || this.current_state;
       var scope = transition.scope || this.trans_table_scope;
-      
+
       if (this.computePredicate(predicate, scope, data, event)) {
         this.callAction(action, scope, data, event);
-        this.current_state = new_state; 
+        this.current_state = new_state;
         return;
       }
     }
-    
+
     throw "State '" + this.current_state + "' has no transition for event '" + event + "' in current context";
   },
-  
+
   /**
    * @access private
    */
   currentStateEventTransitions : function(event) {
-    return this.trans_table[this.current_state] ? 
+    return this.trans_table[this.current_state] ?
       this.trans_table[this.current_state][event] || false
       :
       false;
   },
-  
+
   /**
    * @access private
    */
   computePredicate : function(predicate, scope, data, event) {
-    var result = false; 
-    
+    var result = false;
+
     switch (Ext.type(predicate)) {
      case 'function':
        result = predicate.call(scope, data, event, this);
@@ -183,7 +183,7 @@ Ext.extend(Ext.ux.Utils.FSA, Ext.ux.Utils.EventQueue,{
     }
     return result;
   },
-  
+
   /**
    * @access private
    */
@@ -223,8 +223,6 @@ Ext.extend(Ext.ux.Utils.FSA, Ext.ux.Utils.EventQueue,{
   }
 });
 
-// ---------------------------------------------------------------------------------------------- //
-
 /**
  * Ext.ux.UploadDialog namespace.
  */
@@ -234,16 +232,16 @@ Ext.namespace('Ext.ux.UploadDialog');
  * File upload browse button.
  *
  * @class Ext.ux.UploadDialog.BrowseButton
- */ 
+ */
 Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
   input_name : 'file',
-  
+
   input_file : null,
-  
+
   original_handler : null,
-  
+
   original_scope : null,
-  
+
   /**
    * @access private
    */
@@ -255,7 +253,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
     this.handler = null;
     this.scope = null;
   },
-  
+
   /**
    * @access private
    */
@@ -264,7 +262,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
     Ext.ux.UploadDialog.BrowseButton.superclass.onRender.call(this, ct, position);
     this.createInputFile();
   },
-  
+
   /**
    * @access private
    */
@@ -272,7 +270,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
   {
     var button_container = this.el;
         button_container.position('relative');
-       this.wrap = this.el.wrap({cls:'tbody'});    
+       this.wrap = this.el.wrap({cls:'tbody'});
        this.input_file = this.wrap.createChild({
            tag: 'input',
             type: 'file',
@@ -281,7 +279,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
             style: "position: absolute; display: block; border: none; cursor: pointer"
         });
         this.input_file.setOpacity(0.0);
-    
+
     var button_box = button_container.getBox();
     this.input_file.setStyle('font-size', (button_box.width * 0.5) + 'px');
 
@@ -290,38 +288,38 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
     if (Ext.isIE) {
       adj = {x: 0, y: 3}
     }
-    
+
     this.input_file.setLeft(button_box.width - input_box.width + adj.x + 'px');
     this.input_file.setTop(button_box.height - input_box.height + adj.y + 'px');
     this.input_file.setOpacity(0.0);
-        
+
     if (this.handleMouseEvents) {
       this.input_file.on('mouseover', this.onMouseOver, this);
         this.input_file.on('mousedown', this.onMouseDown, this);
     }
-    
+
     if(this.tooltip){
       if(typeof this.tooltip == 'object'){
         Ext.QuickTips.register(Ext.apply({target: this.input_file}, this.tooltip));
-      } 
+      }
       else {
         this.input_file.dom[this.tooltipType] = this.tooltip;
         }
       }
-    
+
     this.input_file.on('change', this.onInputFileChange, this);
-    this.input_file.on('click', function(e) { e.stopPropagation(); }); 
+    this.input_file.on('click', function(e) { e.stopPropagation(); });
   },
-  
+
   /**
    * @access public
    */
   detachInputFile : function(no_create)
   {
     var result = this.input_file;
-    
+
     no_create = no_create || false;
-    
+
     if (typeof this.tooltip == 'object') {
       Ext.QuickTips.unregister(this.input_file);
     }
@@ -330,13 +328,13 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
     }
     this.input_file.removeAllListeners();
     this.input_file = null;
-    
+
     if (!no_create) {
       this.createInputFile();
     }
     return result;
   },
-  
+
   /**
    * @access public
    */
@@ -344,16 +342,16 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
   {
     return this.input_file;
   },
-  
+
   /**
    * @access public
    */
   disable : function()
   {
-    Ext.ux.UploadDialog.BrowseButton.superclass.disable.call(this);  
+    Ext.ux.UploadDialog.BrowseButton.superclass.disable.call(this);
     this.input_file.dom.disabled = true;
   },
-  
+
   /**
    * @access public
    */
@@ -362,7 +360,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
     Ext.ux.UploadDialog.BrowseButton.superclass.enable.call(this);
     this.input_file.dom.disabled = false;
   },
-  
+
   /**
    * @access public
    */
@@ -371,9 +369,9 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
     var input_file = this.detachInputFile(true);
     input_file.remove();
     input_file = null;
-    Ext.ux.UploadDialog.BrowseButton.superclass.destroy.call(this);      
+    Ext.ux.UploadDialog.BrowseButton.superclass.destroy.call(this);
   },
-  
+
   /**
    * @access private
    */
@@ -382,7 +380,7 @@ Ext.ux.UploadDialog.BrowseButton = Ext.extend(Ext.Button,{
     if (this.original_handler) {
       this.original_handler.call(this.original_scope, this);
     }
-  }  
+  }
 });
 
 /**
@@ -403,7 +401,7 @@ Ext.ux.UploadDialog.TBBrowseButton = Ext.extend(Ext.ux.UploadDialog.BrowseButton
 /**
  * Record type for dialogs grid.
  *
- * @class Ext.ux.UploadDialog.FileRecord 
+ * @class Ext.ux.UploadDialog.FileRecord
  */
 Ext.ux.UploadDialog.FileRecord = Ext.data.Record.create([
   {name: 'filename'},
@@ -427,7 +425,6 @@ Ext.ux.UploadDialog.Dialog = function(config) {
     border: false,
     width: 600,
     height: 350,
-    // minWidth: 450,
     minHeight: 350,
     plain: true,
     constrainHeader: true,
@@ -436,14 +433,13 @@ Ext.ux.UploadDialog.Dialog = function(config) {
     maximizable: false,
     minimizable: false,
     resizable: true,
-    
+
         layout:'fit',
         region:'center',
     autoDestroy: true,
     closeAction: 'hide',
     title: this.i18n.title,
     cls: 'ext-ux-uploaddialog-dialog',
-    // --------
     url: '',
     base_params: {},
     permitted_extensions: [],
@@ -455,39 +451,36 @@ Ext.ux.UploadDialog.Dialog = function(config) {
   };
   config = Ext.applyIf(config || {}, default_config);
   config.layout = 'absolute';
-  
+
   Ext.ux.UploadDialog.Dialog.superclass.constructor.call(this, config);
 };
 
 Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
   fsa : null,
-  
+
   state_tpl : null,
-  
+
   form : null,
-  
+
   grid_panel : null,
-  
+
   progress_bar : null,
-  
+
   is_uploading : false,
-  
+
   initial_queued_count : 0,
-  
+
   upload_frame : null,
-  
+
   /**
    * @access private
    */
-  //--------------------------------------------------------------------------------------------- //
   initComponent : function() {
     Ext.ux.UploadDialog.Dialog.superclass.initComponent.call(this);
-    
+
     // Setting automata protocol
     var tt = {
-      // --------------
       'created' : {
-      // --------------
         'window-render' : [
           {
             action: [this.createForm, this.createProgressBar, this.createGrid],
@@ -501,9 +494,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           }
         ]
       },
-      // --------------
       'rendering' : {
-      // --------------
         'grid-render' : [
           {
             action: [this.fillToolbar, this.updateToolbar],
@@ -517,9 +508,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           }
         ]
       },
-      // --------------
       'ready' : {
-      // --------------
         'file-selected' : [
           {
             predicate: [this.fireFileTestEvent, this.isPermittedFile],
@@ -549,7 +538,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           {
             predicate: this.hasUnuploadedFiles,
             action: [
-              this.setUploadingFlag, this.saveInitialQueuedCount, this.updateToolbar, 
+              this.setUploadingFlag, this.saveInitialQueuedCount, this.updateToolbar,
               this.updateProgressBar, this.prepareNextUploadTask, this.fireUploadStartEvent
             ],
             state: 'uploading'
@@ -560,7 +549,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
         ],
         'stop-upload' : [
           {
-            // We are not uploading, do nothing. Can be posted by user only at this state. 
+            // We are not uploading, do nothing. Can be posted by user only at this state.
           }
         ],
         'hide' : [
@@ -579,14 +568,12 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           }
         ]
       },
-      // --------------
       'adding-file' : {
-      // --------------
         'file-added' : [
           {
             predicate: this.isUploading,
             action: [this.incInitialQueuedCount, this.updateProgressBar, this.fireFileAddEvent],
-            state: 'uploading' 
+            state: 'uploading'
           },
           {
             predicate: this.getUploadAutostart,
@@ -599,9 +586,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           }
         ]
       },
-      // --------------
       'uploading' : {
-      // --------------
         'file-selected' : [
           {
             predicate: [this.fireFileTestEvent, this.isPermittedFile],
@@ -619,21 +604,21 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
         ],
         'start-upload' : [
           {
-            // Can be posted only by user in this state. 
+            // Can be posted only by user in this state.
           }
         ],
         'stop-upload' : [
           {
             predicate: this.hasUnuploadedFiles,
             action: [
-              this.resetUploadingFlag, this.abortUpload, this.updateToolbar, 
+              this.resetUploadingFlag, this.abortUpload, this.updateToolbar,
               this.updateProgressBar, this.fireUploadStopEvent
             ],
             state: 'ready'
           },
           {
             action: [
-              this.resetUploadingFlag, this.abortUpload, this.updateToolbar, 
+              this.resetUploadingFlag, this.abortUpload, this.updateToolbar,
               this.updateProgressBar, this.fireUploadStopEvent, this.fireUploadCompleteEvent
             ],
             state: 'ready'
@@ -648,14 +633,14 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           {
             predicate: this.hasUnuploadedFiles,
             action: [
-              this.resetUploadFrame, this.updateRecordState, this.updateProgressBar, 
+              this.resetUploadFrame, this.updateRecordState, this.updateProgressBar,
               this.prepareNextUploadTask, this.fireUploadSuccessEvent
             ]
           },
           {
             action: [
-              this.resetUploadFrame, this.resetUploadingFlag, this.updateRecordState, 
-              this.updateToolbar, this.updateProgressBar, this.fireUploadSuccessEvent, 
+              this.resetUploadFrame, this.resetUploadingFlag, this.updateRecordState,
+              this.updateToolbar, this.updateProgressBar, this.fireUploadSuccessEvent,
               this.fireUploadCompleteEvent
             ],
             state: 'ready'
@@ -665,14 +650,14 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           {
             predicate: this.hasUnuploadedFiles,
             action: [
-              this.resetUploadFrame, this.updateRecordState, this.updateProgressBar, 
+              this.resetUploadFrame, this.updateRecordState, this.updateProgressBar,
               this.prepareNextUploadTask, this.fireUploadErrorEvent
             ]
           },
           {
             action: [
-              this.resetUploadFrame, this.resetUploadingFlag, this.updateRecordState, 
-              this.updateToolbar, this.updateProgressBar, this.fireUploadErrorEvent, 
+              this.resetUploadFrame, this.resetUploadingFlag, this.updateRecordState,
+              this.updateToolbar, this.updateProgressBar, this.fireUploadErrorEvent,
               this.fireUploadCompleteEvent
             ],
             state: 'ready'
@@ -682,14 +667,14 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
           {
             predicate: this.hasUnuploadedFiles,
             action: [
-              this.resetUploadFrame, this.updateRecordState, this.updateProgressBar, 
+              this.resetUploadFrame, this.updateRecordState, this.updateProgressBar,
               this.prepareNextUploadTask, this.fireUploadFailedEvent
             ]
           },
           {
             action: [
-              this.resetUploadFrame, this.resetUploadingFlag, this.updateRecordState, 
-              this.updateToolbar, this.updateProgressBar, this.fireUploadFailedEvent, 
+              this.resetUploadFrame, this.resetUploadingFlag, this.updateRecordState,
+              this.updateToolbar, this.updateProgressBar, this.fireUploadFailedEvent,
               this.fireUploadCompleteEvent
             ],
             state: 'ready'
@@ -717,18 +702,16 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
             action: [
               this.resetUploadingFlag, this.abortUpload,
               this.fireUploadStopEvent, this.fireUploadCompleteEvent, this.flushEventQueue
-            ], 
+            ],
             state: 'destroyed'
           }
         ]
       },
-      // --------------
       'destroyed' : {
-      // --------------
       }
     };
     this.fsa = new Ext.ux.Utils.FSA('created', tt, this);
-    
+
     // Registering dialog events.
     this.addEvents({
       'filetest': true
@@ -743,19 +726,19 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       ,'uploadcomplete' : true
       ,'fileuploadstart' : true
     });
-    
+
     // Attaching to window events.
     this.on('render', this.onWindowRender, this);
     this.on('beforehide', this.onWindowBeforeHide, this);
     this.on('hide', this.onWindowHide, this);
     this.on('destroy', this.onWindowDestroy, this);
-    
+
     // Compiling state template.
     this.state_tpl = new Ext.Template(
       "<div class='ext-ux-uploaddialog-state ext-ux-uploaddialog-state-{state}'> </div>"
     ).compile();
   },
-  
+
   createForm : function()
   {
     this.form = Ext.DomHelper.append(this.body, {
@@ -765,7 +748,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       style: 'position: absolute; left: -100px; top: -100px; width: 100px; height: 100px; clear: both;'
     });
   },
-  
+
   createProgressBar : function()
   {
     this.progress_bar = this.add(
@@ -778,7 +761,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       })
     );
   },
-  
+
   createGrid : function()
   {
     var store = new Ext.data.Store({
@@ -787,7 +770,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       sortInfo: {field: 'state', direction: 'DESC'},
       pruneModifiedRecords: true
     });
-    
+
     var cm = new Ext.grid.ColumnModel([
       {
         header: this.i18n.state_col_title,
@@ -806,7 +789,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       },
       {
         header: this.i18n.note_col_title,
-        width: this.i18n.note_col_width, 
+        width: this.i18n.note_col_width,
         dataIndex: 'note',
         sortable: true,
         renderer: this.renderNoteCell.createDelegate(this)
@@ -821,26 +804,26 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       x: 0,
       y: 22,
       border: true,
-      
+
         viewConfig: {
         autoFill: true,
           forceFit: true
         },
-      
+
       bbar : new Ext.Toolbar()
     });
     this.grid_panel.on('render', this.onGridRender, this);
-    
+
     this.add(this.grid_panel);
-    
+
     this.grid_panel.getSelectionModel().on('selectionchange', this.onGridSelectionChange, this);
   },
-  
+
   fillToolbar : function()
   {
     var tb = this.grid_panel.getBottomToolbar();
     tb.x_buttons = {}
-    
+
     tb.x_buttons.add = tb.addItem(new Ext.ux.UploadDialog.TBBrowseButton({
       input_name: this.post_var_name,
       text: this.i18n.add_btn_text,
@@ -855,7 +838,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       iconCls: 'ext-ux-uploaddialog-removebtn',
       handler: this.onRemoveButtonClick,
       scope: this
-    }); 
+    });
     tb.x_buttons.reset = tb.addButton({
       text: this.i18n.reset_btn_text,
       tooltip: this.i18n.reset_btn_tip,
@@ -877,12 +860,12 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       scope: this
     });
   },
-  
+
   renderStateCell : function(data, cell, record, row_index, column_index, store)
   {
     return this.state_tpl.apply({state: data});
   },
-  
+
   renderFilenameCell : function(data, cell, record, row_index, column_index, store)
   {
     var view = this.grid_panel.getView();
@@ -898,7 +881,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     f.defer(1000);
     return data;
   },
-  
+
   renderNoteCell : function(data, cell, record, row_index, column_index, store)
   {
     var view = this.grid_panel.getView();
@@ -914,7 +897,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     f.defer(1000);
     return data;
   },
-  
+
   getFileExtension : function(filename)
   {
     var result = null;
@@ -924,7 +907,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     }
     return result;
   },
-  
+
   isPermittedFileType : function(filename)
   {
     var result = true;
@@ -938,13 +921,13 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
   {
     var result = false;
     var filename = browse_btn.getInputFile().dom.value;
-    
+
     if (this.isPermittedFileType(filename)) {
       result = true;
     }
     else {
       Ext.Msg.alert(
-        this.i18n.error_msgbox_title, 
+        this.i18n.error_msgbox_title,
         String.format(
           this.i18n.err_file_type_not_permitted,
           filename,
@@ -953,23 +936,23 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       );
       result = false;
     }
-    
+
     return result;
   },
-  
+
   fireFileTestEvent : function(browse_btn)
   {
     return this.fireEvent('filetest', this, browse_btn.getInputFile().dom.value) !== false;
   },
-  
+
   addFileToUploadQueue : function(browse_btn)
   {
     var input_file = browse_btn.detachInputFile();
-    
+
     input_file.appendTo(this.form);
     input_file.setStyle('width', '100px');
     input_file.dom.disabled = true;
-    
+
     var store = this.grid_panel.getStore();
     var fileApi = input_file.dom.files;
     var filename = (typeof fileApi != 'undefined') ? fileApi[0].name : input_file.dom.value.replace("C:\\fakepath\\", "");
@@ -981,12 +964,12 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     }));
     this.fsa.postEvent('file-added', input_file.dom.value);
   },
-  
+
   fireFileAddEvent : function(filename)
   {
     this.fireEvent('fileadd', this, filename);
   },
-  
+
   updateProgressBar : function()
   {
     if (this.is_uploading) {
@@ -998,7 +981,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       this.progress_bar.updateProgress(0, this.i18n.progress_waiting_text);
     }
   },
-  
+
   updateToolbar : function() {
     var tb = this.grid_panel.getBottomToolbar();
     if (this.is_uploading) {
@@ -1020,21 +1003,21 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       tb.x_buttons.close.enable();
       tb.x_buttons.upload.setIconClass('ext-ux-uploaddialog-uploadstartbtn');
       tb.x_buttons.upload.setText(this.i18n.upload_btn_start_text);
-      
+
       if (this.getQueuedCount() > 0) {
         tb.x_buttons.upload.enable();
       }
       else {
-        tb.x_buttons.upload.disable();      
+        tb.x_buttons.upload.disable();
       }
-      
+
       if (this.grid_panel.getSelectionModel().hasSelection()) {
         tb.x_buttons.remove.enable();
       }
       else {
         tb.x_buttons.remove.disable();
       }
-      
+
       if (this.grid_panel.getStore().getCount() > 0) {
         tb.x_buttons.reset.enable();
       }
@@ -1043,22 +1026,22 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       }
     }
   },
-  
+
   saveInitialQueuedCount : function()
   {
     this.initial_queued_count = this.getQueuedCount();
   },
-  
+
   incInitialQueuedCount : function()
   {
     this.initial_queued_count++;
   },
-  
+
   setUploadingFlag : function()
   {
     this.is_uploading = true;
-  }, 
-  
+  },
+
   resetUploadingFlag : function()
   {
     this.is_uploading = false;
@@ -1069,7 +1052,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     // Searching for first unuploaded file.
     var store = this.grid_panel.getStore();
     var record = null;
-    
+
     store.each(function(r) {
       if (!record && r.get('state') == Ext.ux.UploadDialog.FileRecord.STATE_QUEUE) {
         record = r;
@@ -1078,20 +1061,20 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
         r.get('input_element').dom.disabled = true;
       }
     });
-    
+
     record.get('input_element').dom.disabled = false;
     record.set('state', Ext.ux.UploadDialog.FileRecord.STATE_PROCESSING);
     record.set('note', this.i18n.note_processing);
     record.commit();
-    
+
     this.fsa.postEvent('file-upload-start', record);
   },
-   
+
   fireUploadStartEvent : function()
   {
     this.fireEvent('uploadstart', this);
   },
-  
+
   removeFiles : function(file_records)
   {
     var store = this.grid_panel.getStore();
@@ -1101,14 +1084,14 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       store.remove(r);
     }
   },
-  
+
   fireFileRemoveEvent : function(file_records)
   {
     for (var i = 0, len = file_records.length; i < len; i++) {
       this.fireEvent('fileremove', this, file_records[i].get('filename'));
     }
   },
-  
+
   resetQueue : function() {
     var store = this.grid_panel.getStore();
     store.each(function(r) {
@@ -1116,11 +1099,11 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     });
     store.removeAll();
   },
-  
+
   fireResetQueueEvent : function() {
     this.fireEvent('resetqueue', this);
   }
-  
+
   ,uploadFile : function(record) {
     Ext.Ajax.request({
       url: this.url
@@ -1134,12 +1117,12 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       ,record: record
     });
   },
-   
+
   fireFileUploadStartEvent : function(record)
   {
     this.fireEvent('fileuploadstart', this, record.get('filename'));
   },
-  
+
   updateRecordState : function(data)
   {
     if ('success' in data.response && data.response.success) {
@@ -1154,40 +1137,40 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
         'note', data.response.message || data.response.error || this.i18n.note_upload_error
       );
     }
-    
+
     data.record.commit();
   },
-  
+
   fireUploadSuccessEvent : function(data)
   {
     this.fireEvent('uploadsuccess', this, data.record.get('filename'), data.response);
   },
-  
+
   fireUploadErrorEvent : function(data)
   {
     this.fireEvent('uploaderror', this, data.record.get('filename'), data.response);
   },
-  
+
   fireUploadFailedEvent : function(data)
   {
     this.fireEvent('uploadfailed', this, data.record.get('filename'));
   },
-  
+
   fireUploadCompleteEvent : function()
   {
     this.fireEvent('uploadcomplete', this);
   },
-  
-  findUploadFrame : function() 
+
+  findUploadFrame : function()
   {
     this.upload_frame = Ext.getBody().child('iframe.x-hidden:last');
   },
-  
+
   resetUploadFrame : function()
   {
     this.upload_frame = null;
   },
-  
+
   removeUploadFrame : function()
   {
     if (this.upload_frame) {
@@ -1197,11 +1180,11 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     }
     this.upload_frame = null;
   },
-  
+
   abortUpload : function()
   {
     this.removeUploadFrame();
-    
+
     var store = this.grid_panel.getStore();
     var record = null;
     store.each(function(r) {
@@ -1210,66 +1193,65 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
         return false;
       }
     });
-    
+
     record.set('state', Ext.ux.UploadDialog.FileRecord.STATE_FAILED);
     record.set('note', this.i18n.note_aborted);
     record.commit();
   },
-  
+
   fireUploadStopEvent : function()
   {
     this.fireEvent('uploadstop', this);
   },
-  
+
   repostHide : function()
   {
     this.fsa.postEvent('hide');
   },
-  
+
   flushEventQueue : function()
   {
     this.fsa.flushEventQueue();
   },
-  
+
   /**
    * @access private
    */
-  // -------------------------------------------------------------------------------------------- //
   onWindowRender : function()
   {
     this.fsa.postEvent('window-render');
   },
-  
+
   onWindowBeforeHide : function()
   {
     return this.isUploading() ? this.getAllowCloseOnUpload() : true;
   },
-  
+
   onWindowHide : function()
   {
     this.fsa.postEvent('hide');
   },
-  
+
   onWindowDestroy : function()
   {
     this.fsa.postEvent('destroy');
   },
-  
+
   onGridRender : function()
   {
     this.fsa.postEvent('grid-render');
   },
-  
+
   onGridSelectionChange : function()
   {
     this.fsa.postEvent('grid-selection-change');
   },
-  
+
   onAddButtonFileSelected : function(btn)
   {
     this.fsa.postEvent('file-selected', btn);
   },
-  
+
   onUploadButtonClick : function()
   {
     if (this.is_uploading) {
@@ -1279,18 +1261,18 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       this.fsa.postEvent('start-upload');
     }
   },
-  
+
   onRemoveButtonClick : function()
   {
     var selections = this.grid_panel.getSelectionModel().getSelections();
     this.fsa.postEvent('remove-files', selections);
   },
-  
+
   onResetButtonClick : function()
   {
     this.fsa.postEvent('reset-queue');
   },
-  
+
   onCloseButtonClick : function()
   {
     this[this.closeAction].call(this);
@@ -1298,27 +1280,27 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
         document.location.reload();
    }
   },
-  
+
   onAjaxSuccess : function(response, options) {
     var json_response = {
       'success' : false,
       'error' : this.i18n.note_upload_error
     }
-    try { 
+    try {
         var rt = response.responseText;
         var filter = rt.match(/^<pre>((?:.|\n)*)<\/pre>$/i);
         if (filter) {
             rt = filter[1];
         }
-        json_response = Ext.util.JSON.decode(rt); 
-    } 
+        json_response = Ext.util.JSON.decode(rt);
+    }
     catch (e) {}
-    
+
     var data = {
       record: options.record,
       response: json_response
     }
-    
+
     if ('success' in json_response && json_response.success) {
       this.fsa.postEvent('file-upload-success', data);
     }
@@ -1326,7 +1308,7 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
       this.fsa.postEvent('file-upload-error', data);
     }
   },
-  
+
   onAjaxFailure : function(response, options)
   {
     var data = {
@@ -1339,97 +1321,96 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
 
     this.fsa.postEvent('file-upload-failed', data);
   },
-  
+
   /**
    * @access public
    */
-  // -------------------------------------------------------------------------------------------- //
   startUpload : function()
   {
     this.fsa.postEvent('start-upload');
   },
-  
+
   stopUpload : function()
   {
     this.fsa.postEvent('stop-upload');
   },
-  
+
   getUrl : function()
   {
     return this.url;
   },
-  
+
   setUrl : function(url)
   {
     this.url = url;
   },
-  
+
   getBaseParams : function()
   {
     return this.base_params;
   },
-  
+
   setBaseParams : function(params)
   {
     this.base_params = params;
   },
-  
+
   getUploadAutostart : function()
   {
     return this.upload_autostart;
   },
-  
+
   setUploadAutostart : function(value)
   {
     this.upload_autostart = value;
   },
-  
+
   ///////////EIGENE ERWEITERUNG RELOAD EXT//////////////////////
-  
+
   getMakeReload : function()
   {
     return this.Make_Reload;
   },
-  
+
   setMakeReload : function(value)
   {
     this.Make_Reload = value;
   }
-  
+
   ///////////EIGENE ERWEITERUNG RELOAD EXT//////////////////////
-   
+
   ,getAllowCloseOnUpload : function() {
     return this.allow_close_on_upload;
   }
-  
+
   ,setAllowCloseOnUpload : function(value) {
     this.allow_close_on_upload;
   }
-  
+
   ,getResetOnHide : function() {
     return this.reset_on_hide;
   }
-  
+
   ,setResetOnHide : function(value) {
     this.reset_on_hide = value;
   }
-  
+
   ,getPermittedExtensions : function() {
     return this.permitted_extensions;
   }
-  
+
   ,setPermittedExtensions : function(value) {
     this.permitted_extensions = value;
   }
-  
+
   ,isUploading : function() {
     return this.is_uploading;
   }
-  
+
   ,isNotEmptyQueue : function() {
     return this.grid_panel.getStore().getCount() > 0;
   }
-  
+
   ,getQueuedCount : function(count_processing) {
     var count = 0;
     var store = this.grid_panel.getStore();
@@ -1443,13 +1424,11 @@ Ext.extend(Ext.ux.UploadDialog.Dialog, Ext.Window,{
     });
     return count;
   }
-  
+
   ,hasUnuploadedFiles : function() {
     return this.getQueuedCount() > 0;
   }
 });
-
-// ---------------------------------------------------------------------------------------------- //
 
 var p = Ext.ux.UploadDialog.Dialog.prototype;
 p.i18n = {

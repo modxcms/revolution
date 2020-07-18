@@ -166,8 +166,6 @@ MODx.window.CreateAccessContext = function(config) {
             action: 'Security/Access/AddAcl'
             ,type: config.type || 'modAccessContext'
         }
-        // ,height: 250
-        // ,width: 350
         ,type: 'modAccessContext'
         ,acl: 0
         ,fields: [{
@@ -204,7 +202,6 @@ MODx.window.CreateAccessContext = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('authority')
             ,name: 'authority'
-            // ,width: 75
             ,anchor: '100%'
             ,value: r.authority || ''
         }]

@@ -117,7 +117,6 @@ Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
         Ext.getCmp('modx-ugnamespace-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,createAcl: function(itm,e) {
@@ -174,8 +173,6 @@ MODx.window.CreateUGNamespace = function(config) {
         title: _('namespace_add')
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/UserGroup/AccessNamespace/Create'
-        // ,height: 250
-        // ,width: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

@@ -264,15 +264,12 @@ MODx.window.InsertElement = function(config) {
         },{
             xtype: 'fieldset'
             ,title: _('properties')
-            // ,autoHeight: true
             ,height: Ext.getBody().getViewSize().height * 0.6
             ,collapsible: true
             ,autoScroll: true
             ,items: [{
                 html: '<div id="modx-iprops-form"></div>'
                 ,id: 'modx-iprops-container'
-                // ,height: 400
-                // ,autoScroll: true
             }]
         }]
         ,modps: []

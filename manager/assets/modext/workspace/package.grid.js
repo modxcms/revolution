@@ -181,7 +181,6 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
         return true;
     }
 
@@ -191,7 +190,6 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     	};
         Ext.getCmp('modx-package-search').reset();
     	this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
 
@@ -501,8 +499,6 @@ MODx.window.PackageUpdate = function(config) {
         title: _('package_update')
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Packages/Rest/Download'
-        // ,height: 400
-        // ,width: 400
         ,id: 'modx-window-package-update'
         ,saveBtnText: _('update')
         ,fields: this.setupOptions(config.packages,config.record)

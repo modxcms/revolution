@@ -247,18 +247,6 @@
                 style: "cursor: pointer; display: inline-block; opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%;",
                 multiple: true
             });
-            // this can all be done via the inline css above
-            // doing it like this prevents a too big hidden file field creating weird hover behavoir on the buttons
-            // this.input_file.setOpacity(0.0);
-
-            // var button_box = this.el.getBox();
-            // this.input_file.setStyle('font-size', (button_box.height * 1) + 'px');
-
-            // var adj = {x: -3, y: -3};
-
-            // this.input_file.setLeft(adj.x + 'px');
-            // this.input_file.setTop(adj.y + 'px');
-            // this.input_file.setOpacity(0.0);
 
             if (this.handleMouseEvents) {
                 this.input_file.on('mouseover', this.onMouseOver, this);

@@ -289,7 +289,6 @@ Ext.override(Ext.tree.TreeNodeUI,{
             iconMarkup = '<i class="icon'+(a.icon ? " x-tree-node-inline-icon" : "")+(a.iconCls ? " "+a.iconCls : "")+'" unselectable="on"></i>',
             elbowMarkup = n.attributes.pseudoroot ?
                 '<i class="icon-sort-down expanded-icon"></i>' :
-                //'<img alt="" src="'+ this.emptyIcon+ '" class="x-tree-ec-icon x-tree-elbow" />',
                 '<i class="x-tree-ec-icon x-tree-elbow"></i>',
 
             buf =  ['<li class="x-tree-node"><div ext:tree-node-id="',n.id,'" class="x-tree-node-el x-tree-node-leaf x-unselectable ', a.cls,'" unselectable="on">',

@@ -104,13 +104,11 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
     ,filterSource: function(cb,rec,ri) {
         this.getStore().baseParams['source'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
@@ -119,7 +117,6 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
         Ext.getCmp('modx-ugsource-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,createAcl: function(itm,e) {
@@ -176,8 +173,6 @@ MODx.window.CreateUGSource = function(config) {
         title: _('source_add')
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/UserGroup/Source/Create'
-        // ,height: 250
-        // ,width: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

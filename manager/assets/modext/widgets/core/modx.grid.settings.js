@@ -407,8 +407,6 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
 
         // Return formatted date (server side)
         return value;
-        // JavaScripts time is in milliseconds
-        //return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
     }
 });
 Ext.reg('modx-grid-settings',MODx.grid.SettingsGrid);

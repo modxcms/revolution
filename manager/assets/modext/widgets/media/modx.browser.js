@@ -627,7 +627,6 @@ MODx.browser.Window = function(config) {
             ,cls: 'modx-browser-view-ct'
             ,region: 'center'
             ,autoScroll: true
-            //,width: 635
             ,border: false
             ,items: this.view
             ,tbar: this.getToolbar()
@@ -1015,7 +1014,6 @@ MODx.Media = function(config) {
             ,id: this.ident+'-img-detail-panel'
             ,cls: 'modx-browser-details-ct'
             ,split: true
-            //,collapsed: true
         }]
     });
     MODx.Media.superclass.constructor.call(this, config);
@@ -1379,7 +1377,6 @@ MODx.browser.RTE = function(config) {
                 ,minWidth: 75
                 ,handler: this.onCancel
                 ,scope: this
-                // ,width: 200
             },{
                 xtype: 'button'
                 ,id: this.ident+'-ok-btn'
@@ -1388,7 +1385,6 @@ MODx.browser.RTE = function(config) {
                 ,minWidth: 75
                 ,handler: this.onSelect
                 ,scope: this
-                // ,width: 200
             }]
         }]
     });

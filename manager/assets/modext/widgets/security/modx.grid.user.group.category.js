@@ -115,7 +115,6 @@ Ext.extend(MODx.grid.UserGroupCategory,MODx.grid.Grid,{
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
@@ -124,7 +123,6 @@ Ext.extend(MODx.grid.UserGroupCategory,MODx.grid.Grid,{
         Ext.getCmp('modx-ugcat-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,createAcl: function(itm,e) {
@@ -181,8 +179,6 @@ MODx.window.CreateUGCat = function(config) {
         title: _('category_add')
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/UserGroup/Category/Create'
-        // ,height: 250
-        // ,width: 500
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
