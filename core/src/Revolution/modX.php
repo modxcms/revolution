@@ -192,6 +192,7 @@ class modX extends xPDO {
     public $virtualDir;
     /**
      * @var modErrorHandler|object An error_handler for the modX instance.
+     * @deprecated Use the service/DI container to access the `error_handler` service.
      */
     public $errorHandler= null;
     /**
@@ -2626,18 +2627,36 @@ class modX extends xPDO {
      * @param array|null $options An array of options for the errorHandler.
      */
     protected function _initErrorHandler($options = null) {
-        if ($this->errorHandler == null || !is_object($this->errorHandler)) {
+        if (!$this->services->has('errorHandler') && $this->errorHandler !== null && is_object($this->errorHandler)) {
+            $this->services->add('errorHandler', $this->errorHandler);
+        }
+
+        if (!$this->services->has('errorHandler')) {
             if ($ehClass = $this->getOption('error_handler_class', $options, modErrorHandler::class, true)) {
                 $ehPath = $this->getOption('error_handler_path', $options, '', true);
                 if ($ehClass = $this->loadClass($ehClass, $ehPath, false, true)) {
-                    if ($this->errorHandler = new $ehClass($this)) {
-                        $result = set_error_handler([$this->errorHandler, 'handleError'], $this->getOption('error_handler_types', $options, error_reporting(), true));
-                        if ($result === false) {
-                            $this->log(modX::LOG_LEVEL_ERROR, 'Could not set error handler.  Make sure your class has a function called handleError(). Result: ' . print_r($result, true));
-                        }
-                    }
+                    $errorHandler = new $ehClass($this);
                 }
             }
+            if (!$ehClass || !$errorHandler) {
+                $errorHandler = new modErrorHandler($this);
+            }
+            $this->services->add('errorHandler', $errorHandler);
+        }
+
+        try {
+            $services = $this->services;
+            $this->errorHandler = $services->get('errorHandler');
+            $setErrorHandler = function($errno, $errstr, $errfile = null, $errline = null, $errcontext = null) use ($services) {
+                return $services->get('errorHandler')->handleError($errno, $errstr, $errfile, $errline, $errcontext);
+            };
+
+            $result = set_error_handler($setErrorHandler, $this->getOption('error_handler_types', $options, error_reporting(), true));
+            if ($result === false) {
+                $this->log(modX::LOG_LEVEL_ERROR, 'Could not set error handler. Make sure your class has a function called handleError(). Result: ' . print_r($result, true));
+            }
+        } catch (\Exception $exception) {
+            $this->log(modX::LOG_LEVEL_ERROR, 'Error handler not found: ' . $exception->getMessage());
         }
     }
 
