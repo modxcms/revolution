@@ -1730,7 +1730,7 @@ class modX extends xPDO {
             $this->services->get('lexicon');
         }
         if (!$this->error) {
-            $this->services->get('error');
+            $this->getService('error', 'error.modError');
         }
 
         // First check if the processor can be found directly as a class name provided to $action
