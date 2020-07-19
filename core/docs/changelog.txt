@@ -4,6 +4,16 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Localize anonymous in context interface [#15153]
+- Update xPDO to 2.8.1
+- Use 0 if id is undefined [#15103]
+- Load tree_show_resource_ids permission [#15101]
+- Set error message by field name instead of id [#15099]
+- Fix typeAhead parameter check [#15069]
+- Prevent XSS on template name in TV template access grid [#15142]
+- Fix login screen PHP notice [#15140]
+- Prevent XSS on Template's name [#15137]
+- Prevent path traversal when sending registry message [#15134]
 - Fix combocolumn grid refresh [#15122]
 - Will add the image format `webp` to the list of allowed `Uploadable File Types` and `Uploadable Image Types` [#15114]
 - Add "Allow Blank" setting to URL, RichText, Image & File Template Variables [#15106]

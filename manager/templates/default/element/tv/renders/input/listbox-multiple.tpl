@@ -34,7 +34,7 @@ Ext.onReady(function() {
         {if $params.title|default},title: '{$params.title|default}'{/if}
         {if $params.listWidth|default},listWidth: {$params.listWidth|default}{/if}
         ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight|default}{else}300{/if}
-        {if $params.typeAhead|default}
+        {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
             ,typeAhead: true
             ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
             ,editable: true

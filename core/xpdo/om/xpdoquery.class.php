@@ -80,7 +80,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         'MIN(',
         'AVG('
     );
-    protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time', 'json', 'array');
+    protected $_quotable= array ('string', 'password', 'date', 'datetime', 'timestamp', 'time', 'json', 'array', 'float');
     protected $_class= null;
     protected $_alias= null;
     protected $_tableClass = null;
