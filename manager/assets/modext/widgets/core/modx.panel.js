@@ -29,7 +29,8 @@ MODx.FormPanel = function(config) {
         ,useLoadingMask: false
         ,defaults: { collapsible: false ,autoHeight: true, border: false }
     });
-    if (config.items) { this.addChangeEvent(config.items); }
+    // NOTE: Playing with whether this is really needed
+    // if (config.items) { this.addChangeEvent(config.items); }
 
     MODx.FormPanel.superclass.constructor.call(this,config);
     this.config = config;
@@ -62,6 +63,11 @@ MODx.FormPanel = function(config) {
     if (this.fireEvent('setup',config)) {
         this.clearDirty();
     }
+    if (MODx.config.confirm_navigation == 1) {
+        Ext.EventManager.addListener(window, 'beforeunload', this.onBeforeUnload, this, {
+            normalized: false
+        });
+    }
     this.focusFirstField();
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
@@ -69,6 +75,8 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,defaultValues: []
     ,initialized: false
 
+    ,numDirtyFields: 0
+    ,overrideUnsavedChangesWarning: false
     /*
         Use these errorHandling properties to specify which tab components
         should and should not be inspected for field errors
@@ -205,12 +213,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,fieldChangeEvent: function(fld,nv,ov,f) {
         if (!this.isReady) { return false; }
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
+        /*
         this.fireEvent('fieldChange',{
             field: fld
             ,nv: nv
             ,ov: ov
             ,form: f
         });
+        */
     }
 
     ,markDirty: function() {
@@ -224,7 +234,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 
     ,clearDirty: function() {
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
-    	return f.clearDirty();
+        // clearDirty() doesn't return a value or bool, so no need to return a val here
+    	// return f.clearDirty();
+        f.clearDirty();
     }
 
     ,onReady: function(r) {
@@ -234,6 +246,54 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             this.mask.hide();
         }
         this.fireEvent('postReady');
+    }
+
+    // Notify user of unsaved changes (applies to any form constructed via or as an extension of MODx.FormPanel)
+    ,onBeforeUnload: function(e) {
+
+        const flds = this.getForm().items,
+              rteFindBogus = 'data-mce-bogus="1"',
+              msg = _('unsaved_changes')
+              ;
+        let origVal,
+            currVal
+            ;
+        this.numDirtyFields = typeof MODx.request.reload === 'string' && !this.initialized ? this.numDirtyFields : 0 ;
+
+        /*
+            Richtext fields require special handling to assess their dirty state.
+
+            Note that, when the component is a richtext field, the white space ends up being different (by one character)
+            between the originalValue (has extra char) and that fetched from getValue(); thus trim both to
+            ensure the two are evaluated properly for equality.
+        */
+        flds.each(function(fld) {
+            if(fld.xtype == "textarea"){
+                origVal = fld.originalValue.trim();
+                currVal = fld.getValue().trim();
+                if (currVal.indexOf(rteFindBogus) !== -1) {
+                    if (origVal.length > 0) {
+                        this.numDirtyFields++;
+                    }
+                } else {
+                    if (currVal != origVal) {
+                        this.numDirtyFields++;
+                    }
+                }
+            } else if (fld.isDirty()) {
+                this.numDirtyFields++;
+            }
+        }, this);
+
+        if(this.numDirtyFields > 0 && this.overrideUnsavedChangesWarning === false) {
+            if (e) {
+                e.returnValue = msg;
+            }
+            if (window.event) {
+                window.event.returnValue = msg;
+            }
+            return msg;
+        }
     }
 
     ,loadDropZones: function() {

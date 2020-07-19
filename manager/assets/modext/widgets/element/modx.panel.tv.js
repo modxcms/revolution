@@ -388,7 +388,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
                 The itemId (not id) of each form tab to be included/excluded; these correspond to the
                 keys in each tab component's items property
             */
-            this.errorHandlingTabs = ['form-tv'];
+            this.errorHandlingTabs = ['form-tv','modx-panel-tv-input-properties','modx-panel-tv-output-properties'];
             this.errorHandlingIgnoreTabs = ['panel-properties','form-template','form-access','form-sources'];
 
             this.getForm().setValues(this.config.record);
@@ -499,6 +499,134 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             }
         }
     }
+
+    /*
+        NOTE: The validatorRefMap object provides an easy way to map differently named fields to a
+        streamlined validator method, by tv type, without the need to pass in variables to the target method
+        from the field item's validator config
+    */
+    ,validatorRefMap: {
+        text: {
+            minLtMax: {
+                compareTo: "inopt_maxLength",
+                errMsg: _("ext_minlenmaxfield")
+            },
+            maxGtMin: {
+                compareTo: "inopt_minLength",
+                errMsg: _("ext_maxlenminfield")
+            }
+        },
+        email: {
+            minLtMax: {
+                compareTo: "inopt_maxLength",
+                errMsg: _("ext_minlenmaxfield")
+            },
+            maxGtMin: {
+                compareTo: "inopt_minLength",
+                errMsg: _("ext_maxlenminfield")
+            }
+        },
+        number: {
+            minLtMax: {
+                compareTo: "inopt_maxValue",
+                errMsg: _("ext_minvalmaxfield")
+            },
+            maxGtMin: {
+                compareTo: "inopt_minValue",
+                errMsg: _("ext_maxvalminfield")
+            }
+        }
+    }
+
+    ,tvOptsValidators: function(tvId, type) {
+        // Here, 'this' refers to the current class (MODx.panel.TV)
+        const me = this;
+
+        // Within each validator, 'this' refers to the input element triggering the given method
+        let ov = {
+            minLtMax: function (v) {
+                const maxFld = me.validatorRefMap[type][this.validator.name].compareTo + tvId;
+                let max = Ext.getCmp(maxFld),
+                    maxVal = Number(max.getValue())
+                    ;
+                if(maxVal > 0){
+                    if (Number(v) > maxVal) {
+                        return me.validatorRefMap[type][this.validator.name].errMsg;
+                    }
+                    max.clearInvalid();
+                }
+                return true;
+            },
+            maxGtMin: function(v) {
+                const minFld = me.validatorRefMap[type][this.validator.name].compareTo + tvId;
+                let min = Ext.getCmp(minFld),
+                    minVal = Number(min.getValue())
+                    ;
+                if(minVal > 0){
+                    if (v && Number(v) < minVal) {
+                        return me.validatorRefMap[type][this.validator.name].errMsg;
+                    }
+                    min.clearInvalid();
+                }
+                return true;
+            }
+        };
+        return ov;
+    }
+    /*
+        NOTE: dirtyOnChange() is a replacement for how the change event is currently applied. However,
+        I expect the use of this method to be unnecessary as Ext JS's tracking of fields' dirty
+        states seems better-suited to evaluating whether there are really new form values to be saved. I suspect
+        that the primary reason MODx set up it's own dirty marking routines was to overcome issues caused by
+        RTEs dynamically inserting dummy content initially to empty RTE fields to allow them to be clickable (TinyMCE
+        definitely does this by design when its RTE is assigned to a textarea [as opposed to a non-form element such as a div]).
+        This causes forms under these conditions to ALWAYS be dirty.
+
+        The proposed change that overcomes this particluar issue is handled with the new onBeforeUnload() method and
+        its associated listener in the MODx.FormPanel class (see modx.panel.js).
+    */
+    ,tvOptsListeners: function(tvId, s) {
+        const me = this;
+        let ol = {
+            dirtyOnChange: {
+                "change": {
+                    fn: function(){
+                        // this.markPanelDirty();
+                    },
+                    scope: s
+                }
+            }
+        };
+        return ol;
+    }
+
+    /*
+        Declare the standard built-in tv types so we can automate transformations and visibility
+        properties for the core types and allow custom tv types to specify their own requirements
+        (such as whether or not to show Input Option Values and the Default Value fields)
+    */
+    ,tvInputTypes: [
+        'autotag',
+        'checkbox',
+        'date',
+        'email',
+        'file',
+        'hidden',
+        'image',
+        'list-multiple-legacy',
+        'listbox-multiple',
+        'listbox',
+        'number',
+        'option', // radio option, would like deprecate and change key to radio
+        'radio',
+        'resourcelist',
+        'richtext',
+        'tag',
+        'text',
+        'textarea',
+        'url'
+    ]
+
 });
 Ext.reg('modx-panel-tv',MODx.panel.TV);
 
@@ -559,68 +687,364 @@ MODx.panel.TVInputProperties = function(config) {
 				,grow: true
 				,maxHeight: 160
 				,value: config.record.elements || ''
-				,listeners: {
-					'change': {fn:this.markPanelDirty,scope:this}
-				}
 			},{
                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                 ,forId: 'modx-tv-elements'
                 ,html: _('tv_elements_desc')
                 ,cls: 'desc-under'
             },{
-				xtype: 'textarea'
-				,fieldLabel: _('tv_default')
-				,description: MODx.expandHelp ? '' : _('tv_default_desc')
-				,name: 'default_text'
+                // Reducing this item's initial config to bare bones minimum, as it will be dynamically replaced below
+                xtype: 'textarea'
 				,id: 'modx-tv-default-text'
 				,itemId: 'fld-default_text'
-				,anchor: '100%'
-				,grow: true
-				,maxHeight: 250
-				,value: config.record.default_text || ''
-				,listeners: {
-					'change': {fn:this.markPanelDirty,scope:this}
-				}
 			},{
                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                 ,forId: 'modx-tv-default-text'
                 ,html: _('tv_default_desc')
                 ,cls: 'desc-under'
             },{
-				id: 'modx-input-props'
+                xtype: 'fieldset',
+                itemId: 'input-options-fs',
+                autoHeight: true,
+                style: 'border:0',
+                bodyStyle: 'padding:0',
+                labelSeparator: '',
+                defaults: {
+                    xtype: 'textfield'
+                    ,msgTarget: 'under'
+                },
+                items: []
+    		},{
+				id: 'legacy-input-options'
 				,autoHeight: true
 			}]
-		}]
+        }]
     });
     MODx.panel.TVInputProperties.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
     markPanelDirty: function() {
-        Ext.getCmp('modx-panel-tv').markDirty();
+        // Ext.getCmp('modx-panel-tv').markDirty();
     }
+
+    ,getDefaultValueItem: function(type, value) {
+
+        value = typeof value !== 'undefined' ? value : '' ;
+        // Set default type to Text TV
+        type = typeof type === 'undefined' ? 'text' : type ;
+
+        // Establish the default value item properties common to all tv types
+        const defaultProps = {
+                xtype: 'textfield'
+                ,fieldLabel: _('tv_default')
+                ,description: MODx.expandHelp ? '' : _('tv_default_desc')
+                ,name: 'default_text'
+                ,id: 'modx-tv-default-text'
+                ,itemId: 'fld-default_text'
+                ,anchor: '100%'
+                ,value: value
+            };
+        let typeProps = {},
+            item
+            ;
+
+        switch (type) {
+
+            case 'checkbox':
+                typeProps = {
+                    fieldLabel: _('tv_default_option')
+                };
+                break;
+
+            case 'email':
+                typeProps = {
+                    fieldLabel: _('tv_default_email')
+                    ,vtype: 'email'
+                };
+                break;
+
+            case 'date':
+                typeProps = {
+                    xtype: 'xdatetime'
+                    ,fieldLabel: _('tv_default_datetime')
+                    ,allowBlank: true
+                    ,anchor: '50%'
+                };
+                break;
+
+
+            case 'file':
+                typeProps = {
+                    xtype: 'modx-combo-browser'
+                    ,browserEl: 'modx-browser'
+                    ,fieldLabel: _('tv_default_file')
+                    ,openTo: this.record.openTo || ''
+                    ,triggerClass: 'x-form-code-trigger'
+                    ,maxLength: 255
+                    ,hideMode: 'offsets'
+                    ,anchor: '50%'
+                };
+                break;
+
+            // TBD: Would be nice to provide preview
+            case 'image':
+                typeProps = {
+                    xtype: 'modx-combo-browser'
+                    ,browserEl: 'modx-browser'
+                    ,fieldLabel: _('tv_default_image')
+                    ,openTo: this.record.openTo || ''
+                    ,triggerClass: 'x-form-code-trigger'
+                    ,maxLength: 255
+                    ,hideMode: 'offsets'
+                    ,anchor: '50%'
+                };
+                break;
+
+            case 'listbox':
+                typeProps = {
+                    fieldLabel: _('tv_default_option')
+                };
+                break;
+
+            case 'listbox-multiple':
+            case 'listbox-multiple-legacy':
+                typeProps = {
+                    fieldLabel: _('tv_default_options')
+                };
+                break;
+
+            case 'number':
+                typeProps = {
+                    xtype: 'numberfield'
+                    ,width: 200
+                    ,anchor: ''
+                };
+                break;
+
+            case 'option':
+            case 'radio':
+                typeProps = {
+                    fieldLabel: _('tv_default_option')
+                };
+                break;
+
+            case 'resourcelist':
+                typeProps = {
+                    xtype: 'numberfield'
+                    ,fieldLabel: _('tv_default_resource')
+                };
+                break;
+
+            case 'richtext':
+                typeProps = {
+                    xtype: 'textarea'
+                    ,fieldLabel: _('tv_default_text')
+                    ,grow: true
+                    ,maxHeight: 250
+                };
+                break;
+
+            case 'tag':
+                typeProps = {
+                    fieldLabel: _('tv_default_tag')
+                };
+                break;
+
+            case 'text':
+                typeProps = {
+                    fieldLabel: _('tv_default_text')
+                };
+                break;
+
+            case 'textarea':
+                typeProps = {
+                    xtype: 'textarea'
+                    ,fieldLabel: _('tv_default_text')
+                    ,grow: true
+                    ,maxHeight: 250
+                };
+                break;
+
+            case 'url':
+                typeProps = {
+                    vtype: 'url'
+                    ,fieldLabel: _('tv_default_url')
+                };
+                break;
+
+            default:
+        }
+        item = Object.assign({}, defaultProps, typeProps);
+        return item;
+    }
+
     ,showInputProperties: function(cb,rc,i) {
-        var element = Ext.getCmp('modx-tv-elements');
-        if (element) {
-          element.show();
+
+        /*
+            NOTE: The ext property 'startValue' gets applied to a component only after its has been changed, and
+            is thus the most direct way of assessing whether the tvtype has been chosen and/or changed
+        */
+        const   formCmp = this.getComponent(1),
+                tvPanel = Ext.getCmp('modx-panel-tv'),
+                typeChanged = cb.hasOwnProperty('startValue') ? true : false ,
+                type = cb.getValue(),
+                tvId = this.config.record.id || '',
+                optListeners = tvPanel.tvOptsListeners(tvId, this),
+                optValidators = tvPanel.tvOptsValidators(tvId, type),
+                optsFieldset = formCmp.getComponent('input-options-fs'),
+                legacyOpts = Ext.get('legacy-input-options'),
+                useLegacyLoader = tvPanel.tvInputTypes.indexOf(type) === -1 ? true : false,
+                inputOptValsItem = Ext.getCmp('modx-tv-elements'),
+                inputDefaultValItem = Ext.getCmp('modx-tv-default-text'),
+                inputDefaultValItemVal = typeChanged ? inputDefaultValItem.getValue() : this.config.record.default_text,
+                hideInputOptValsItemFor = ['autotag','date','email','file','hidden','image','number','resourcelist','richtext','text','textarea','url','migx','migxdb'],
+                hideInputDefaultValItemFor = ['autotag','migx','migxdb']
+            ;
+
+        if(inputOptValsItem){
+            if(hideInputOptValsItemFor.indexOf(type) !== -1){
+                inputOptValsItem.hide().nextSibling().hide();
+            } else {
+                inputOptValsItem.show().nextSibling().show();
+            }
+        }
+        if(inputDefaultValItem){
+            if(hideInputDefaultValItemFor.indexOf(type) !== -1){
+                inputDefaultValItem.hide().nextSibling().hide();
+            } else {
+                inputDefaultValItem.clearInvalid();
+                /*
+                    For cases where the default value field (and its help text) was previously hidden,
+                    show the help component here before destroying the item it references
+                */
+                inputDefaultValItem.nextSibling().show();
+
+                const   container = inputDefaultValItem.ownerCt,
+                        key = container.items.keys.indexOf('fld-default_text')
+                        ;
+
+                let newDefaultInput = this.getDefaultValueItem(type, inputDefaultValItemVal);
+
+                inputDefaultValItem.destroy();
+                container.insert(key, newDefaultInput);
+                formCmp.doLayout();
+            }
         }
 
-        this.markPanelDirty();
-        var pu = Ext.get('modx-input-props').getUpdater();
-        pu.loadScripts = true;
+        if (useLegacyLoader) {
 
-        try {
-            pu.update({
-                url: MODx.config.connector_url
-                ,method: 'GET'
-                ,params: {
-                   'action': 'element/tv/renders/getInputProperties'
-                   ,'context': 'mgr'
-                   ,'tv': this.config.record.id
-                   ,'type': cb.getValue() || 'default'
-                }
-                ,scripts: true
-            });
-        } catch(e) {MODx.debug(e);}
+            let pu = legacyOpts.getUpdater();
+            pu.loadScripts = true;
+            optsFieldset.removeAll();
+            try {
+                pu.update({
+                    url: MODx.config.connector_url
+                    ,method: 'GET'
+                    ,params: {
+                       action: 'element/tv/renders/getInputProperties'
+                       ,context: 'mgr'
+                       ,tv: this.config.record.id
+                       ,type: type || 'default'
+                    }
+                    ,scripts: true
+                    // ,discardUrl: true
+                });
+            } catch(e) {
+                MODx.debug(e);
+            }
+
+        } else {
+
+            legacyOpts.update('');
+            try {
+                MODx.Ajax.request({
+                    url: MODx.config.connector_url
+                    ,params: {
+                       action: 'element/tv/configs/getInputConfigs'
+                       ,context: 'mgr'
+                       ,tv: this.config.record.id
+                       ,type: type || 'default'
+                       ,expandHelp: MODx.expandHelp
+                   }
+                   ,listeners: {
+                        "success": {
+                            fn: function(r) {
+
+                                if (inputOptValsItem && r.hasOwnProperty('hideInputOptValsItem') && (r.hideInputOptValsItem == "true" || r.hideInputOptValsItem == 1)) {
+                                    inputOptValsItem.hide().nextSibling().hide();
+                                }
+                                if (inputDefaultValItem && r.hasOwnProperty('hideInputDefaultValItem') && (r.hideInputDefaultValItem == "true" || r.hideInputDefaultValItem == 1)) {
+                                    inputDefaultValItem.hide().nextSibling().hide();
+                                }
+
+                                // Make adjustments to returned config
+                                if (r.hasOwnProperty("optsItems") && r.optsItems.length > 0) {
+                                    Ext.each(r.optsItems, function(obj, i){
+
+                                        // Replace named listener(s) with its/their associated class method(s)
+                                        if (this.hasOwnProperty("listeners")) {
+                                            let fsl = this.listeners.replace(/\s/g, "");
+                                            if(fsl.indexOf(",") > 0){
+                                                fsl = fsl.split(",");
+                                                let listenerList = [];
+                                                fsl.forEach(function(itm, i){
+                                                    if(optListeners.hasOwnProperty(itm)){
+                                                        listenerList.push(optListeners[itm]);
+                                                    }
+                                                });
+                                                this.listeners = Object.assign({}, ...listenerList);
+                                            } else {
+                                                this.listeners = optListeners.hasOwnProperty(fsl) ? optListeners[fsl] : null ;
+                                            }
+                                        }
+
+                                        // Replace named validator with its associated class method
+                                        if(this.hasOwnProperty("validator")){
+                                            let fsv = this.validator.trim();
+                                            this.validator = optValidators.hasOwnProperty(fsv) ? optValidators[fsv] : null ;
+                                        }
+
+                                        // Transform all regex type property values from string to usable expression
+                                        if(this.hasOwnProperty("regex")){
+                                            let rx = this.regex.trim();
+                                            this.regex = new RegExp(rx);
+                                        }
+                                        if(this.hasOwnProperty("maskRe")){
+                                            let mr = this.maskRe.trim();
+                                            this.maskRe = new RegExp(mr);
+                                        }
+                                    });
+
+                                    if(typeChanged){
+                                        optsFieldset.removeAll();
+                                    }
+                                    optsFieldset.add(r.optsItems);
+
+                                // No option items exist for certain fields (file, hidden, etc.),
+                                } else {
+                                    if(typeChanged){
+                                        optsFieldset.removeAll();
+                                    }
+                                }
+                                if(typeChanged){
+                                    // this.markPanelDirty();
+                                    formCmp.doLayout();
+                                }
+                            }
+                            ,scope: this
+                        }
+                        ,"failure": {
+                            fn: function(r) {
+                                // TBD
+                            }
+                            ,scope: this
+                        }
+                    }
+                });
+            } catch(e) {
+                MODx.debug(e);
+            }
+        }
     }
 });
 Ext.reg('modx-panel-tv-input-properties',MODx.panel.TVInputProperties);
@@ -683,7 +1107,6 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
         Ext.getCmp('modx-panel-tv').markDirty();
         var pu = Ext.get('modx-widget-props').getUpdater();
         pu.loadScripts = true;
-
         try {
             pu.update({
                 url: MODx.config.connector_url
