@@ -11,13 +11,9 @@
 /**
  * Outputs the $modx->config to JSON
  *
- * @param string $action If set with context, will output the context info for a
- * custom context by the action
- * @param string $context If set with action, will output the context info for a
- * custom context by its action
+ * @param string $action If action is set, load the action namespace into MODx.config
+ * @param string $wctx If wctx is set, load the context settings of wctx into MODx.config
  *
- * @var modX $modx
- * @var array $scriptProperties
  * @package modx
  * @subpackage processors.system
  */
@@ -31,10 +27,12 @@ class modConfigJsProcessor extends modProcessor
         }
         $this->modx->getVersionData();
 
-        $wctx = isset($scriptProperties['wctx']) && !empty($scriptProperties['wctx']) ? $scriptProperties['wctx'] : '';
+        $wctx = $this->getProperty('wctx', '');
         if (!empty($wctx)) {
             $workingContext = $this->modx->getContext($wctx);
-            if (!$workingContext) {
+            if ($workingContext instanceof modContext) {
+                $workingContext->prepare();
+            } else {
                 return $this->modx->error->failure($this->modx->error->failure($this->modx->lexicon('permission_denied')));
             }
         } else {
@@ -82,18 +80,18 @@ class modConfigJsProcessor extends modProcessor
             $c['default_site_url'] = $ctx->makeUrl($ctx->getOption('site_start'));
         }
 
-        /* if custom context, load into MODx.config */
-        if (isset($scriptProperties['action']) && $scriptProperties['action'] != '' && isset($this->modx->actionMap[$scriptProperties['action']])) {
+        /* if action is set, load the action namespace into MODx.config */
+        $action = $this->getProperty('action');
+        if ($action != '' && isset($this->modx->actionMap[$action])) {
 
             /* pre-2.3 actions */
-            if (intval($scriptProperties['action']) > 0) {
-                $action = $this->modx->actionMap[$scriptProperties['action']];
-                $c['namespace'] = $action['namespace'];
-                $c['namespace_path'] = $action['namespace_path'];
-                $c['namespace_assets_path'] = $action['namespace_assets_path'];
-                $c['help_url'] = ltrim($action['help_url'], '/');
+            if (intval($action) > 0) {
+                $c['namespace'] = $this->modx->actionMap['namespace'];
+                $c['namespace_path'] = $this->modx->actionMap['namespace_path'];
+                $c['namespace_assets_path'] = $this->modx->actionMap['namespace_assets_path'];
+                $c['help_url'] = ltrim($this->modx->actionMap['help_url'], '/');
             } else {
-                $namespace = $this->modx->getOption('namespace', $scriptProperties, 'core');
+                $namespace = $this->modx->getOption('namespace', $this->getProperties(), 'core');
                 /** @var modNamespace $namespace */
                 $namespace = $this->modx->getObject('modNamespace', $namespace);
                 if ($namespace) {
