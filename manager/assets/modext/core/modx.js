@@ -457,7 +457,7 @@ Ext.extend(MODx,Ext.Component,{
 					}
 				}]
 			}]
-        });w
+        });
         MODx.helpWindow.show(b);
         return true;
     }
