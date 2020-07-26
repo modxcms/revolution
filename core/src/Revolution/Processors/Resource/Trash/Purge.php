@@ -115,7 +115,6 @@ class Purge extends Processor
         // fire before empty trash event
         $this->modx->invokeEvent('OnBeforeEmptyTrash', [
             'ids' => &$this->ids,
-            'resources' => &$this->resources,
         ]);
 
         // we track success and failure independently, as we don't want
@@ -162,9 +161,8 @@ class Purge extends Processor
         }
 
         $this->modx->invokeEvent('OnEmptyTrash', [
+	        'ids' => &$success,
             'num_deleted' => count($success),
-            'resources' => &$this->resources,
-            'ids' => &$success,
         ]);
 
         $this->modx->logManagerAction('empty_trash', modResource::class, implode(',', $success));
