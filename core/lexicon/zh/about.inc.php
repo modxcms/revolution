@@ -22,6 +22,10 @@ $_lang['bugs_title'] = '报告 Bug & 功能请求';
 $_lang['bugs_description'] = '发现一个问题吗？让我们知道 ！';
 $_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues
 ';
+$_lang['localization'] = 'MODX localization';
+$_lang['localization_title'] = 'MODX localization';
+$_lang['localization_description'] = 'Help us with MODX localization';
+$_lang['localization_link'] = 'https://crowdin.com/project/modx-revolution';
 $_lang['support'] = '商业支持';
 $_lang['support_title'] = '购买紧急支持票';
 $_lang['support_description'] = '从源码中优先支持';
