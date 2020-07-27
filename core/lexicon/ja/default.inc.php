@@ -293,6 +293,7 @@ $_lang['no_action'] = 'アクション指定なし';
 $_lang['no_category'] = 'カテゴリーなし';
 $_lang['no_records_found'] = 'レコードはありません。';
 $_lang['no_results'] = '結果がありません。';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'オフライン';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = '複製元のキー名';
