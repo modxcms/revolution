@@ -35,7 +35,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Папка выяваў недаступная для запісу';
 $_lang['configcheck_images_msg'] = 'Каталог для выяваў недаступны для запісу або не існуе. Гэта азначае, што кіраванне выявамі працаваць не будзе!';
 $_lang['configcheck_installer'] = 'Не выдалена папка з файламі ўсталёўкі';
-$_lang['configcheck_installer_msg'] = 'Каталог "setup/" утрымлівае файлы ўсталёўкі MODX. Толькі ўявіце сабе, што можа адбыцца, калі злаўмыснік знойдзе яе і запусціць ўсталёўку! Ён, верагодна, не прасунецца далёка, таму што павінен будзе ўвесці некаторую карыстальнiцкую інфармацыю для базы дадзеных, але ўсё ж такі лепш выдаліць гэтую папку з вашага сервера. Яна размешчана ў: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Няправільная колькасць запісаў у моўным файле';
 $_lang['configcheck_lang_difference_msg'] = 'Колькасць запісаў у абранай мове адрозніваецца ад колькасці запісаў у мове па змаўчанні. Гэта не з\'яўляецца крытычнай памылкай, аднак гэта падстава для абнаўлення моўных файлаў.';
 $_lang['configcheck_notok'] = 'У наладах сістэмы прысутнічаюць памылкі: ';
