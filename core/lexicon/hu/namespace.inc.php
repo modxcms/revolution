@@ -7,12 +7,12 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Névtér';
-$_lang['namespace_create'] = 'Új névtér';
+$_lang['namespace_create'] = 'Névtér létrehozása';
 $_lang['namespace_err_create'] = 'Hiba történt a névtér létrehozása közben.';
 $_lang['namespace_err_nf'] = 'Névtér nem található.';
 $_lang['namespace_err_nfs'] = 'A %s nevű névtér nem található';
 $_lang['namespace_err_ns'] = 'Névtér nincs megadva.';
-$_lang['namespace_err_remove'] = 'Hiba történt a névtér eltávolítása közben.';
+$_lang['namespace_err_remove'] = 'An error occurred while trying to delete the namespace.';
 $_lang['namespace_err_save'] = 'Hiba történt a névtér mentése közben.';
 $_lang['namespace_assets_path'] = 'Eszközök elérési útja';
 $_lang['namespace_assets_path_desc'] = 'Adja meg itt ezen névtér összetevőinek teljes elérési útját. Használhat helyettesítőket, mint {assets_path}. Például: {assets_path}components/democomponent/';
@@ -23,6 +23,6 @@ $_lang['namespace_remove'] = 'Névtér törlése';
 $_lang['namespace_remove_confirm'] = 'Biztosan törli "[[+name]]" névteret és minden kapcsolódó tartalmat?';
 $_lang['namespace_remove_multiple'] = 'Névterek törlése';
 $_lang['namespace_remove_multiple_confirm'] = 'Biztosan törli ezeket a névtereket és minden hozzájuk kapcsolódó tartalmat?';
-$_lang['namespace_update'] = 'Névtér módosítása';
+$_lang['namespace_update'] = 'Edit Namespace';
 $_lang['namespaces'] = 'Névterek';
 $_lang['namespaces_desc'] = 'A névterek rendszerszintű azonosítók csomagok és összetevők számára, a közvetítők, szókészletek és erőforrások közös bejegyzésére.';
