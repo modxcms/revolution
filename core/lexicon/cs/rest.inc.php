@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['error'] = 'Chyba!';
-$_lang['rest.err_class_remove'] = 'Došlo k chybě při pokusu odebrat [[+class_key]]';
+$_lang['rest.err_class_remove'] = 'An error occurred while trying to delete the [[+class_key]]';
 $_lang['rest.err_class_save'] = 'Došlo k chybě při pokusu uložit [[+class_key]]';
 $_lang['rest.err_field_ns'] = '[[+field]] nebylo určeno!';
 $_lang['rest.err_field_required'] = 'Tento údaj je povinný.';
