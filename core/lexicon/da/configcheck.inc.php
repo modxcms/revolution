@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Images-mappen er ikke skrivbar';
 $_lang['configcheck_images_msg'] = 'Mappen images er ikke skrivbar eller eksisterer ikke. Dette betyder, at mediehåndteringsfunktioner i editoren ikke vil virke!';
 $_lang['configcheck_installer'] = 'Installationsmappen findes stadig';
-$_lang['configcheck_installer_msg'] = 'Mappen /setup/ indeholder installationsprogrammet for MODX. Prøv at forestille dig hvad der kunne ske hvis en ondsindet person fandt denne mappe og kørte installationsprogrammet. De kan sikkert ikke komme langt fordi der skal indtastes bruger og kode til databasen, men det er stadig bedst at slette denne mappe fra din server. Den er placeret her: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Ukorrekt antal linier i sprogfilen';
 $_lang['configcheck_lang_difference_msg'] = 'Det valgte sprog har et andet antal linier end standardsproget. Det er ikke nødvendigvis et problem med det kan betyde at sprogfilen skal opdateres.';
 $_lang['configcheck_notok'] = 'Der var en eller flere konfigurationstjek som ikke var OK: ';
