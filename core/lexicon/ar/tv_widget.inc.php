@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'السماح بإضافة عناصر جديد
 $_lang['combo_allowaddnewdata_desc'] = 'عند الموافقة، تسمح للعناصر الغير موجودة مسبقاً بالقائمة أن تضاف . الافتراضي هو لا.';
 $_lang['combo_forceselection'] = 'أجبار التحديد على السلسلة';
 $_lang['combo_forceselection_desc'] = 'عند استخدام النوع "للأمام"، اذا كانت مضبوطة على نعم، تسمح فقط بإدخال عناصر ضمن القائمة.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'إفراغ سلسلة النص';
 $_lang['combo_listempty_text_desc'] = 'عندما يكون النوع هو "للأمام"، ويقوم المستخدم بطباعة قيمة ليست ضمن القائمة، اعرض هذا النص.';
 $_lang['combo_listheight'] = 'ارتفاع السلسلة';
