@@ -36,18 +36,19 @@ $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filtreeri nimeruumi järgi...';
 $_lang['search_by_key'] = 'Otsi võtme järgi...';
-$_lang['setting_create'] = 'New Setting';
+$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'Palun kontrollige järgnevate väljade andmeid: ';
 $_lang['setting_err_ae'] = 'Sellise võtmeg seade juba eksisteerib. Palun kasutage teistsugust nime.';
 $_lang['setting_err_nf'] = 'Seadet ei leitud.';
 $_lang['setting_err_ns'] = 'Seadet ei olenud määratud';
-$_lang['setting_err_remove'] = 'Tekkis viga seade eemaldamisel.';
+$_lang['setting_err_not_editable'] = 'This setting can\'t be edited in the grid. Please use the gear/context menu to edit the value!';
+$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
 $_lang['setting_err_save'] = 'Tekkis viga seade salvestamisel.';
 $_lang['setting_err_startint'] = 'Seaded ei või alata numbriga.';
 $_lang['setting_err_invalid_document'] = 'Dokumenti ID-ga %d ei ole olemas. Palun määrake olemasolev dokument.';
 $_lang['setting_remove'] = 'Eemalda Seade';
 $_lang['setting_remove_confirm'] = 'Olete kindel, et soovite eemaldada selle seade? See võib teie MODX installatsiooni katki teha.';
-$_lang['setting_update'] = 'Muuda Seadet';
+$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'Kuna MODX on hetkel värske install, peate kontrollima neid seaded ja muutma neid seadeid mida soovite. P
 Pärast seadete kontrollimist, vajutage \'Salvesta\', uuendamaks seadete andmebaasi<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
@@ -686,19 +687,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Sisestage Ressurssi ID, mida soo
 $_lang['setting_site_unavailable_page_err'] = 'Palun määrake dokumendi ID \'leht pole saadaval\' lehele.';
 
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
