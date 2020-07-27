@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Дозволити додавати нові 
 $_lang['combo_allowaddnewdata_desc'] = 'Якщо вибрано "Так", дозволяє додавати елементи, яких ще немає у списку. За замовчуванням - "Ні".';
 $_lang['combo_forceselection'] = 'Вибір лише зі списку';
 $_lang['combo_forceselection_desc'] = 'Якщо вибрано "Так" і увімкнене автозавершення, буде дозволено введення значень лише зі списку.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Текст для порожнього списку';
 $_lang['combo_listempty_text_desc'] = 'Якщо автозавершення увімкнене, а користувач вводить значення, якого немає у списку, буде відображений даний текст.';
 $_lang['combo_listheight'] = 'Висота списку';
