@@ -26,8 +26,8 @@ $_lang['filter_by_type'] = 'Türe göre filtrele...';
 
 $_lang['message'] = 'İleti';
 $_lang['message_create'] = 'Mesaj Oluştur';
-$_lang['message_new'] = 'Yeni Mesaj';
-$_lang['message_remove_confirm'] = 'Bu mesajı tamamen silmek istediğinizden emin misiniz?';
+$_lang['message_new'] = 'Mesaj Oluştur';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'E-posta gönder';
 $_lang['message_err_nfs'] = 'Mesaj bulunamadı.';
 $_lang['message_err_not_specified_subject'] = 'Konu belirtilmemiş!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Bu mesajı silmek için yetkiniz yok.';
 $_lang['message_err_save'] = 'Mesaj kaydedilirken bir hata meydana geldi.';
 
 $_lang['messages'] = 'Mesajlar';
-$_lang['messages_desc'] = 'Burada diğer kullanıcılar tarafından veya sizin tarafınızdan gönderilen mesajları yönetebilirsiniz. Yanıtlayabilir, mesajları iletebilir, ayrıca belirtilen mesajları okundu olarak işaretleyebilir veya kaldırabilirsiniz.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'Tüm Kişiler';
 $_lang['messages_compose'] = 'Mesaj oluştur';
 $_lang['messages_forward'] = 'İleri';
