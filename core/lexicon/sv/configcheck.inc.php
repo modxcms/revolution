@@ -28,7 +28,7 @@ Om du har ställt in allt rätt ska du få upp 403 (åtkomst nekad) eller 404 (k
 $_lang['configcheck_images'] = 'Bildkatalogen är inte skrivbar';
 $_lang['configcheck_images_msg'] = 'Bildkatalogen är inte skrivbar eller finns inte. Detta betyder att bildhanteringsfunktionerna i editorn inte kommer att fungera!';
 $_lang['configcheck_installer'] = 'Installationsprogrammet är fortfarande kvar';
-$_lang['configcheck_installer_msg'] = 'Katalogen setup/ innehåller installationsprogrammet för MODX. Tänk vad som kan hända om en elak människa hittar katalogen och kör installationen! Hen kommer förhoppningsvis inte så långt eftersom databasen kräver inloggningsuppgifter, men det är ändå bäst att ta bort katalogen från servern. Du hittar den här: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Fel antal fraser i språkfilen';
 $_lang['configcheck_lang_difference_msg'] = 'Språket som för närvarande är valt har ett annat antal fraser än standardspråket. Detta behöver inte vara ett problem, men kan betyda att språkfilen behöver uppdateras.';
 $_lang['configcheck_notok'] = 'En eller flera konfigurationsdetaljer är inte korrekta: ';
