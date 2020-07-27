@@ -10,12 +10,12 @@
 $_lang['events'] = 'События';
 $_lang['system_event'] = 'Системное событие';
 $_lang['system_events'] = 'Системные события';
-$_lang['system_events.desc'] = '<b>Системные события</b> — это события, регистрируемые MODX с помощью <i>плагинов</i>. Они могут «реагировать» внутри самого кода MODX, позволяя <i>плагинам</i> взаимодействовать с исходным кодом MODX и добавлять дополнительный функционал без изменения кода ядра. Вы также можете создавать собственные события для своего проекта. Системные события ядра MODX нельзя удалить, можно только созданные вами.';
+$_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot delete core events, only your own.';
 $_lang['system_events.search_by_name'] = 'Поиск по названию события';
-$_lang['system_events.create'] = 'Создать новое событие';
-$_lang['system_events.name_desc'] = 'Имя события, которое вы должны использовать в вызове &dollar;modx->invoiceEvent(name, properties).';
+$_lang['system_events.create'] = 'Create Event';
+$_lang['system_events.name_desc'] = 'Название события, которое вы должны использовать в вызове &dollar;modx->invoiceEvent(name, properties).';
 $_lang['system_events.groupname'] = 'Группа';
-$_lang['system_events.groupname_desc'] = 'Имя группы, которой принадлежит новое событие. Выберите существующее или создайте новое имя группы.';
+$_lang['system_events.groupname_desc'] = 'The name of the group where the event belongs to. Select an existing one or type a new group name.';
 $_lang['system_events.plugins'] = 'Плагины';
 $_lang['system_events.plugins_desc'] = 'Список плагинов, подключенных к событию. Выберите плагины, которые должны быть подключены к событию.';
 
@@ -27,10 +27,10 @@ $_lang['system_events.service_4'] = 'События службы кэша';
 $_lang['system_events.service_5'] = 'События службы шаблонов';
 $_lang['system_events.service_6'] = 'События определенные пользователем';
 
-$_lang['system_events.remove'] = 'Удалить событие';
-$_lang['system_events.remove_confirm'] = 'Вы уверены, что хотите удалить событие <b>[[+name]]</b>? Это действие нельзя отменить!';
+$_lang['system_events.remove'] = 'Delete Event';
+$_lang['system_events.remove_confirm'] = 'Are you sure you want to delete the <b>[[+name]]</b> event? This is irreversible!';
 
-$_lang['system_events_err_ns'] = 'Не указано имя системного события.';
-$_lang['system_events_err_ae'] = 'Такое имя системного события уже существует.';
-$_lang['system_events_err_startint'] = 'Имя не должно начинаться с цифры.';
-$_lang['system_events_err_remove_not_allowed'] = 'Вы не можете удалить это системное событие.';
+$_lang['system_events_err_ns'] = 'Не указано название системного события.';
+$_lang['system_events_err_ae'] = 'Такое название системного события уже существует.';
+$_lang['system_events_err_startint'] = 'Название не должно начинаться с цифры.';
+$_lang['system_events_err_remove_not_allowed'] = 'You\'re not allowed to delete this System Event.';
