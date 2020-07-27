@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Eylem yok';
 $_lang['no_category'] = 'kategorilenmemiş';
 $_lang['no_records_found'] = 'Hiç kayıt bulunamadı.';
 $_lang['no_results'] = 'Sonuç bulunamadı';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Çevrimdışı';
 $_lang['ok'] = 'Tamam';
 $_lang['old_key'] = 'Eski Anahtar';
