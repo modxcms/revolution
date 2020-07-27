@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Yeni Öge Eklemeye İzin Ver';
 $_lang['combo_allowaddnewdata_desc'] = 'Evet ise, listede bulunmayan nesneleri eklenmesini sağlar. Varsayılanlar Hayır. ';
 $_lang['combo_forceselection'] = 'Seçilenleri listelemeye zorla';
 $_lang['combo_forceselection_desc'] = 'Eğer Type-Ahead kullanılıyorsa ve eğer bu Evet olarak ayarlanırsa, yalnızca listedeki maddelerin girişine izin verir.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Boş Liste Metni';
 $_lang['combo_listempty_text_desc'] = 'Type-ahead açıksa ve kullanıcı listede olmayan bir değer yazıyorsa, bu metni görüntüler.';
 $_lang['combo_listheight'] = 'Liste Yüksekliği';
