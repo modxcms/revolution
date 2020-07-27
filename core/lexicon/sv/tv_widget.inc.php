@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Tillåt nya poster';
 $_lang['combo_allowaddnewdata_desc'] = 'Om denna sätts till "Ja" kan nya poster, som inte redan finns i listan, läggas till. Standard är "Nej".';
 $_lang['combo_forceselection'] = 'Tvinga urval till lista';
 $_lang['combo_forceselection_desc'] = 'Om ifyllning är aktiverad och om denna sätts till "Ja" kommer bara värden som finns i listan att tillåtas.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Text vid tom lista';
 $_lang['combo_listempty_text_desc'] = 'Om ifyllning är aktiverad och användaren skriver in något som inte finns i listan visas denna text.';
 $_lang['combo_listheight'] = 'Listhöjd';
