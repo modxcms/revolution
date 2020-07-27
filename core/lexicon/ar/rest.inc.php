@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['error'] = 'خطأ!';
-$_lang['rest.err_class_remove'] = 'حدث خطأ أثناء محاولة إزالة [[+class_key]]';
+$_lang['rest.err_class_remove'] = 'An error occurred while trying to delete the [[+class_key]]';
 $_lang['rest.err_class_save'] = 'حدث خطأ أثناء محاولة حفظ [[+class_key]]';
 $_lang['rest.err_field_ns'] = '[[+field]]غير محدد!';
 $_lang['rest.err_field_required'] = 'هذا الحقل مطلوب.';
