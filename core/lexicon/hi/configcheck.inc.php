@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Images directory लिखने योग्य नहीं';
 $_lang['configcheck_images_msg'] = 'images directory लिखने योग्य नहीं है, या मौजूद नहीं है। इसका मतलब यह Image Manager कार्य संपादक में काम नहीं करेगा!';
 $_lang['configcheck_installer'] = 'इंस्टॉलर अभी भी मौजूद';
-$_lang['configcheck_installer_msg'] = 'setup/ directory MODX के लिए installer होता है। जरा सोचो क्या हो सकता है यदि एक दुष्ट व्यक्ति इस फ़ोल्डर को पाता है और installer चलाता है! वे शायद क्योंकि वे कुछ उपयोगकर्ता जानकारी के लिए databaseमें प्रवेश करने की आवश्यकता होगी, लेकिन यह अभी भी यह फ़ोल्डर अपने server से निकालने के लिए सबसे अच्छा है, बहुत दूर प्राप्त नहीं होगा। यह स्थित है: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'language file में entries की ग़लत संख्या';
 $_lang['configcheck_lang_difference_msg'] = 'वर्तमान में चयनित भाषा डिफ़ॉल्ट भाषा से प्रविष्टियों का एक अलग संख्या है। जरूरी नहीं कि एक समस्या है जबकि, यह मतलब हो सकता है language file अद्यतन की जरूरत है।';
 $_lang['configcheck_notok'] = 'एक या एक से अधिक configuration details ठीक बाहर की जाँच नहीं किया: ';
