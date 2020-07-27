@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Algemeen';
 $_lang['content_type_header_tab'] = 'Custom Headers';
 $_lang['content_type_header_title'] = 'Header maken/bewerken';
 $_lang['content_type_new'] = 'Nieuw Content Type';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Verwijder Content Type';
 $_lang['content_type_remove_confirm'] = 'Weet u zeker dat u dit content type wilt verwijderen?';
 $_lang['content_types'] = 'Content Typen';
