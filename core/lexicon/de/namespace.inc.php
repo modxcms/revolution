@@ -7,12 +7,12 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Namensraum';
-$_lang['namespace_create'] = 'Neuer Namensraum';
+$_lang['namespace_create'] = 'Namensraum erstellen';
 $_lang['namespace_err_create'] = 'Beim Versuch, den Namensraum zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['namespace_err_nf'] = 'Namensraum nicht gefunden.';
 $_lang['namespace_err_nfs'] = 'Namensraum mit der Bezeichnung %s nicht gefunden';
 $_lang['namespace_err_ns'] = 'Namensraum nicht angegeben.';
-$_lang['namespace_err_remove'] = 'Beim Versuch, den Namensraum zu löschen, ist ein Fehler aufgetreten.';
+$_lang['namespace_err_remove'] = 'An error occurred while trying to delete the namespace.';
 $_lang['namespace_err_save'] = 'Beim Versuch, den Namensraum zu speichern, ist ein Fehler aufgetreten.';
 $_lang['namespace_assets_path'] = 'Assets-Pfad';
 $_lang['namespace_assets_path_desc'] = 'Geben Sie hier einen absoluten Pfad zu den Assets für diesen Namensraum an (als "Assets" bezeichnet man in diesem Zusammenhang CSS- und JavaScript-Dateien, Bilder etc.). Sie können Platzhalter wie z.B. {assets_path} verwenden. Beispiel: {assets_path}components/demokomponente/';
@@ -23,6 +23,6 @@ $_lang['namespace_remove'] = 'Namensraum löschen';
 $_lang['namespace_remove_confirm'] = 'Sind Sie sicher, dass Sie den Namensraum "[[+name]]" und alle mit ihm verknüpften Inhalte löschen möchten?';
 $_lang['namespace_remove_multiple'] = 'Namensräume löschen';
 $_lang['namespace_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Namensräume und alle mit ihnen verknüpften Inhalte löschen möchten?';
-$_lang['namespace_update'] = 'Namensraum bearbeiten';
+$_lang['namespace_update'] = 'Edit Namespace';
 $_lang['namespaces'] = 'Namensräume';
 $_lang['namespaces_desc'] = 'Namensräume sind globale Bezeichner für Packages und Komponenten, in denen Ihre Transport-Vehikel, Lexikon-Einträge und Ressourcen gemeinsam registriert werden.';
