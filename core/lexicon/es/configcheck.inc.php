@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Sin derechos de escritura sobre el directorio de imágenes';
 $_lang['configcheck_images_msg'] = 'MODX no tiene derechos de escritura sobre el directorio de imágenes o no existe. ¡Las funciones del Administrador de Imágenes en el editor no funcionarán!';
 $_lang['configcheck_installer'] = 'El script de instalación aún está presente';
-$_lang['configcheck_installer_msg'] = 'El directorio "setup/" contiene el instalador de MODX. ¡Sólo imagina lo que podría pasar si alguien activara el instalador! Probablemente no llegue muy lejos, porque necesitará introducir los datos de acceso a la base de datos, pero es mejor prevenir y eliminar la carpeta de tu servidor.';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Número incorrecto de entradas en el archivo de idioma';
 $_lang['configcheck_lang_difference_msg'] = 'El archivo de idioma configurado actualmente tiene un número diferente de entradas que el archivo de idioma por defecto. A pesar de que esto no supone necesariamente un problema, puede significar que el archivo de idioma necesita ser actualizado.';
 $_lang['configcheck_notok'] = 'Uno o más detalles de configuración no están correctos: ';
