@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Асноўнае';
 $_lang['content_type_header_tab'] = 'Карыстацкія загалоўкі';
 $_lang['content_type_header_title'] = 'Стварыць/рэдагаваць загаловак ';
 $_lang['content_type_new'] = 'Новы тып змесціва';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Выдаліць тып змесціва';
 $_lang['content_type_remove_confirm'] = 'Вы сапраўды жадаеце выдаліць гэты тып змесцiва?';
 $_lang['content_types'] = 'Тыпы кантэнту';
