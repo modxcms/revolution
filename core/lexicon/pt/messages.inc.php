@@ -26,8 +26,8 @@ $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'Mensagem';
 $_lang['message_create'] = 'Criar Mensagem';
-$_lang['message_new'] = 'Nova Mensagem';
-$_lang['message_remove_confirm'] = 'Tem certeza que deseja remover esta mensagem completamente?';
+$_lang['message_new'] = 'Criar Mensagem';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Enviar E-mail';
 $_lang['message_err_nfs'] = 'Mensagem não foi encontrado.';
 $_lang['message_err_not_specified_subject'] = 'Assunto não especificado';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Você não está autorizado a excluir est
 $_lang['message_err_save'] = 'Ocorreu um erro ao salvar a mensagem.';
 
 $_lang['messages'] = 'Mensagens';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can remove or mark as read specified messages.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'Todos';
 $_lang['messages_compose'] = 'Compor uma mensagem';
 $_lang['messages_forward'] = 'Encaminhar';
