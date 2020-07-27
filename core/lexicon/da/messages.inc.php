@@ -26,8 +26,8 @@ $_lang['filter_by_type'] = 'Filtrer efter type...';
 
 $_lang['message'] = 'Besked';
 $_lang['message_create'] = 'Opret besked';
-$_lang['message_new'] = 'Ny besked';
-$_lang['message_remove_confirm'] = 'Er du sikker på, at du vil fjerne denne besked helt?';
+$_lang['message_new'] = 'Opret besked';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'Beskeden blev ikke fundet.';
 $_lang['message_err_not_specified_subject'] = 'Emnet ikke angivet!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Du har ikke tilladelse til at slette denn
 $_lang['message_err_save'] = 'Der opstod en fejl under lagring af beskeden.';
 
 $_lang['messages'] = 'Beskeder';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can remove or mark as read specified messages.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'Alle';
 $_lang['messages_compose'] = 'Skriv en besked';
 $_lang['messages_forward'] = 'Videresend';
