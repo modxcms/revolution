@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Nieuwe items toevoegen toestaan';
 $_lang['combo_allowaddnewdata_desc'] = 'Wanneer Ja, dan is het mogelijk om items toe te voegen welke nog niet bestaan. Standaard op Nee.';
 $_lang['combo_forceselection'] = 'Forceer selectie voor lijst';
 $_lang['combo_forceselection_desc'] = 'Indien Type-Ahead is gebruikt en deze is op Ja gezet, alleen items in de lijst zijn toegestaan.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Lege lijst tekst';
 $_lang['combo_listempty_text_desc'] = 'Indien Type-Ahead aanstaat en de gebruiker typt een waarde welke niet in de lijst voorkomt, toon deze tekst.';
 $_lang['combo_listheight'] = 'Lijst Hoogte';
