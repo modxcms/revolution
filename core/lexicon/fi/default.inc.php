@@ -294,6 +294,7 @@ $_lang['no_action'] = 'Ei toimintoa';
 $_lang['no_category'] = 'Luokittelematon';
 $_lang['no_records_found'] = 'Tuloksia ei löytynyt.';
 $_lang['no_results'] = 'Tuloksia ei löytynyt';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Poissa';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Vanha avain';
