@@ -293,6 +293,7 @@ $_lang['no_action'] = 'No Action';
 $_lang['no_category'] = 'לא מקוטלג';
 $_lang['no_records_found'] = 'לא נמצאו רשומות.';
 $_lang['no_results'] = 'לא נמצאו תוצאות';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'לא מחובר';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'מפתח ישן';
