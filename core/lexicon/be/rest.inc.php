@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['error'] = 'Памылка!';
-$_lang['rest.err_class_remove'] = 'Адбылася памылка пры спробе выдаліць [[+class_key]]';
+$_lang['rest.err_class_remove'] = 'An error occurred while trying to delete the [[+class_key]]';
 $_lang['rest.err_class_save'] = 'Адбылася памылка пры спробе захаваць [[+class_key]]';
 $_lang['rest.err_field_ns'] = 'Поле [[+field]] не пазначана!';
 $_lang['rest.err_field_required'] = 'Гэта поле абавязковае.';
