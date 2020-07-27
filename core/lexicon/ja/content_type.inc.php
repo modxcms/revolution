@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Main';
 $_lang['content_type_header_tab'] = 'Custom headers';
 $_lang['content_type_header_title'] = 'Create/edit header';
 $_lang['content_type_new'] = '新しいコンテントタイプ';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'コンテントタイプの削除';
 $_lang['content_type_remove_confirm'] = 'このコンテントタイプを削除してよろしいですか？';
 $_lang['content_types'] = 'コンテントタイプ';
