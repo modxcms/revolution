@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Répertoire d\'images non accessible en écriture';
 $_lang['configcheck_images_msg'] = 'Le répertoire d\'images n\'est pas accessible en écriture ou n\'existe pas. Cela signifie que les fonctions du gestionnaire d\'images dans l\'éditeur ne fonctionneront pas!';
 $_lang['configcheck_installer'] = 'Répertoire d\'installation toujours présent';
-$_lang['configcheck_installer_msg'] = 'Le répertoire setup/ contient les scripts d\'installation de MODX. Imaginez ce qui se passerait si une personne mal intentionnée trouvait ce répertoire et lançait le processus d\'installation! Il n\'ira certainement pas loin puisqu\'il aura besoin des informations de connexion à la base de données, mais il est toujours préférable de supprimer ce répertoire de votre serveur. Le fichier en question est situé dans [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Nombre incorrect d\'entrées dans votre fichier de langue';
 $_lang['configcheck_lang_difference_msg'] = 'La langue actuelle a un nombre différent d\'entrées par rapport à la langue par défaut. Bien que cela ne soit pas un problème, cela peut signifier que votre fichier de langue a besoin d\'être mis à jour.';
 $_lang['configcheck_notok'] = 'Un ou plusieurs détails de configuration n\'ont pas été validés: ';
