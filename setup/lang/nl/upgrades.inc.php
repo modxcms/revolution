@@ -44,3 +44,5 @@ $_lang['update_table_column_data'] = 'Data in kolom [[+column]] van tabel [[+tab
 $_lang['iso_country_code_converted'] = 'Land namen van gebruikersprofiel zijn succesvol omgezet naar ISO codes.';
 $_lang['legacy_cleanup_complete'] = 'Oude bestanden zijn opgeschoond.';
 $_lang['legacy_cleanup_count'] = '[[+files]] bestand(en) en [[+folders]] map(pen) zijn verwijderd.';
+$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
+$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
