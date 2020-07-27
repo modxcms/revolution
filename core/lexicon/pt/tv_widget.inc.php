@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Permitir adicionar novos itens';
 $_lang['combo_allowaddnewdata_desc'] = 'Quando Sim, permite que os itens a serem adicionados que já não existem na lista. O padrão é Não. ';
 $_lang['combo_forceselection'] = 'Seleção Força para List';
 $_lang['combo_forceselection_desc'] = 'Se você estiver usando Type-Ahead, se isso for definido como Sim, só permitem a introdução de itens na lista.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'vazio Lista texto';
 $_lang['combo_listempty_text_desc'] = 'Se Type-Ahead é, e o usuário digita um valor não está na lista, mostrar este texto.';
 $_lang['combo_listheight'] = 'Altura da Lista';
