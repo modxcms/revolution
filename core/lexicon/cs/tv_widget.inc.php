@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Povolit přidání nových položek';
 $_lang['combo_allowaddnewdata_desc'] = 'Pokud Ano, pak lze přidat nové položky, které dosud nejsou v seznamu. Výchozí nastavení je Ne.';
 $_lang['combo_forceselection'] = 'Pouze položky ze seznamu';
 $_lang['combo_forceselection_desc'] = 'Je-li aktivní našeptávač a tato volba nastavena na Ano, pak lze vybrat pouze položku ze seznamu.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Text pokud není nápověda';
 $_lang['combo_listempty_text_desc'] = 'Je-li aktivní našeptávač a uživatel zadá hodnotu, která není v seznamu zobrazí se mu tento text.';
 $_lang['combo_listheight'] = 'Výška seznamu';
