@@ -21,7 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Это означает, чт
 $_lang['configcheck_errorpage_unpublished'] = 'Страница ошибки 404 «Документ не найден», указанная в настройках системы, не опубликована или не существует.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Это означает, что страница 404 ошибки «Документ не найден» недоступна для посетителей вашего сайта. Опубликуйте эту страницу или проверьте, что ID страницы «Документ не найден» правильно указан в настройках системы.';
 $_lang['configcheck_htaccess'] = 'Каталог ядра в открытом доступе';
-$_lang['configcheck_htaccess_msg'] = 'MODX обнаружил, что ваш основной каталог (частично) доступен для общественности. <strong>Это не рекомендуется из соображений безопасности.</strong><br /> Если ваша установка MODX выполняется на веб-сервер Apache, вам следует по крайней мере настроить файл .htaccess внутри каталога с файлами ядра: <em>[[+fileLocation]]</em>. Это можно легко сделать, переименовав уже имеющийся там файл ht.access в .htaccess.<br /> Существуют другие методы и серверы, вы можете их использовать, ознакомившись с <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution" target="_blank">Руководством по «закалке» MODX</a> для получения дополнительной информации о безопасности вашего сайта.<br /> Если вы настроили всё правильно, то при открытии <a href="[[+checkUrl]]" target="_blank">списка изменений</a> страница должна вернуть вам ошибку 403 (доступ запрещен), а лучше ошибку 404 (страница не найдена).<br />Если же вы можете открыть этот список изменений в браузере, что-то еще не настроено как следует, и вам следует проверить настройки или обратиться к экспертам, чтобы решить эту проблему.';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/current/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Папка изображений недоступна для записи';
 $_lang['configcheck_images_msg'] = 'Папка изображений недоступна для записи или не существует на сервере. Из этого следует, что управление изображениями работать не будет!';
 $_lang['configcheck_installer'] = 'Не удалена папка с файлами, использовавшимися в процессе установки';
