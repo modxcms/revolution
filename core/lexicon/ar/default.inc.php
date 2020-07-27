@@ -294,6 +294,7 @@ $_lang['no_action'] = 'لا يوجد إجراء';
 $_lang['no_category'] = 'غير مصنّف';
 $_lang['no_records_found'] = 'لم يتم العثور على سجلات.';
 $_lang['no_results'] = 'لم يتم العثورعلى نتائج';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'غير متصل';
 $_lang['ok'] = 'موافق';
 $_lang['old_key'] = 'مفتاح قديم';
