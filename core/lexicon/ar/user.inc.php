@@ -43,7 +43,7 @@ $_lang['role_err_nf'] = 'لم يتم العثور على الدور.';
 $_lang['role_err_nfs'] = 'لم يتم العثور على الدور ذو المعرف: [[+role]]';
 $_lang['role_err_ns'] = 'الدور غير محدد!';
 $_lang['role_err_ns_name'] = 'يرجى تحديد اسم للدور.';
-$_lang['role_err_remove'] = 'حصل خطأ أثناء محاولة إزالة الدور.';
+$_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'الدور الذي تحاول حذفه هو دور المشرف. لا يمكن حذف هذا الدور!';
 $_lang['role_remove'] = 'حذف الدور';
 $_lang['role_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف هذا الدور؟';
@@ -51,10 +51,10 @@ $_lang['roles'] = 'أدوار';
 $_lang['rrg_drag'] = 'اسحب المصادر داخل مجموعات المصدر هنا.';
 $_lang['ugc_mutate'] = 'وصول مجموعة المستخدم إلى السياق';
 $_lang['ugc_grid_title'] = 'وصول مجموعة المستخدم إلى السياقات';
-$_lang['ugc_remove'] = 'إزالة وصول مجموعة المستخدم إلى هذا السياق';
+$_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'وصول مجموعة المستخدم إلى مجموعات المصدر';
 $_lang['ugrg_mutate'] = 'وصول مجموعة المستخدم إلى مجموعة المصدر';
-$_lang['ugrg_remove'] = 'إزالة وصول مجموعة المستخدم إلى مجموعة المصدر هذه';
+$_lang['ugrg_remove'] = 'Delete User Group Access to this Resource Group';
 $_lang['user'] = 'المستخدم';
 $_lang['user_active_desc'] = 'فيما إذا كان أو لم يكن هذا المستخدم نشط. إذا لم يكن المستخدم نشط، لن يكون باستطاعتهم تسجيل الدخول إلى أي سياق أو إلى المدير.';
 $_lang['user_add_group'] = 'إضافة مجموعة مستخدم إلى المستخدم';
@@ -68,7 +68,7 @@ $_lang['user_blockeduntil_desc'] = 'إذا تم الضبط، سيتم حظر ا�
 $_lang['user_changeddata'] = 'تم تغيير بياناتك. الرجاء تسجيل الدخول مرة ثانية.';
 $_lang['user_class_key_desc'] = 'مفتاح صف مودكس لهذا المستخدم. لا تقم بتغيير هذا إلا في حالة معرفتك بما تقوم به.';
 $_lang['user_created_password_message'] = 'تم إنشاء المستخدم. كلمة المرور هي:  [[+password]]';
-$_lang['user_confirm_remove'] = 'هل أنت متأكد من أنك تريد إزالة هذا المستخدم بشكل دائم؟';
+$_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete this user?';
 $_lang['user_country'] = 'البلد';
 $_lang['user_dob'] = 'تاريخ الميلاد';
 $_lang['user_doesnt_exist'] = 'المستخدم غير موجود';
@@ -79,7 +79,7 @@ $_lang['user_err_access_permissions_save'] = 'حصل خطأ أثناء حفظ س
 $_lang['user_err_ae_group'] = 'المستخدم موجود مسبقا في هذه المجموعة!';
 $_lang['user_err_already_exists'] = 'اسم المستخدم مستخدم مسبقا!';
 $_lang['user_err_already_exists_email'] = 'البريد الإلكتروني مستخدم مسبقا!';
-$_lang['user_err_cannot_delete_last_admin'] = 'لا يمكنك إزالة المستخدم الأخير في مجموعة المسؤول، لأن ذلك سيؤدي إلى منع الإدارة من موقع الويب الخاص بك.';
+$_lang['user_err_cannot_delete_last_admin'] = 'You cannot delete the last User in the Administrator group, as this will prevent administration of your site.';
 $_lang['user_err_cannot_delete_self'] = 'لا يمكنك حذف نفسك!';
 $_lang['user_err_nf'] = 'لم يتم العثور على المستخدم.';
 $_lang['user_err_not_specified'] = 'لم يتم تحديد مستخدم!';
@@ -105,7 +105,7 @@ $_lang['user_err_password_invalid'] = 'لا يمكن أن تحوي كلمة ال
 $_lang['user_err_password_invalid_old'] = 'كلمة المرور القديمة غير صحيحة.';
 $_lang['user_err_password_too_short'] = 'كلمة المرور قصيرة جداً!';
 $_lang['user_err_password_no_match'] = 'كلمات المرور غير متطابقة.';
-$_lang['user_err_remove'] = 'حصل خطأ أثناء محاولة إزلة المستخدم.';
+$_lang['user_err_remove'] = 'An error occurred while trying to delete the user.';
 $_lang['user_err_resource_subdirectory'] = 'الدليل الذي قمت بتحديده لا يحتوي على الأدلة %s.';
 $_lang['user_err_save'] = 'حصل خطأ أثناء حفظ المستخدم.';
 $_lang['user_err_username_invalid'] = 'اسم المستخدم المحدد غير صالح.';
@@ -132,29 +132,29 @@ $_lang['user_group_err_not_found'] = 'لم يتم العثور على مجموع
 $_lang['user_group_err_not_specified'] = 'لا يوجد مجموعة مستخدم محددة!';
 $_lang['user_group_err_ns'] = 'مجموعة المستخدم غير محددة!';
 $_lang['user_group_err_ns_name'] = 'الرجاء تحديد اسم لمجموعة المستخدم هذه.';
-$_lang['user_group_err_remove'] = 'حصل خطأ أثناء محاولة إزالة مجموعة المستخدم.';
-$_lang['user_group_err_remove_admin'] = 'لا يمكنك إزالة مجموعة المسؤول.';
+$_lang['user_group_err_remove'] = 'An error occurred while trying to delete the user group.';
+$_lang['user_group_err_remove_admin'] = 'You cannot delete the Administrator group.';
 $_lang['user_group_err_save'] = 'حصل خطأ أثناء محاولة حفظ مجموعة المستخدم.';
 $_lang['user_group_management_msg'] = 'إدارة عضويات المستخدم  في المجموعات وتطبيق الأدوار.';
 $_lang['user_group_member_err_already_in'] = 'المستخدم موجود مسبقا في مجموعة المستخدم هذه!';
 $_lang['user_group_member_err_create'] = 'حصل خطأ أثناء محاولة إضافة المستخدم إلى مجموعة المستخدم.';
 $_lang['user_group_member_err_nf'] = 'المستخدم غير موجود في مجموعة المستخدم هذه!';
-$_lang['user_group_member_err_remove'] = 'حصل خطأ أثناء محاولة إزالة المستخدم من المجموعة.';
+$_lang['user_group_member_err_remove'] = 'An error occurred while trying to delete the user from the group.';
 $_lang['user_group_member_err_save'] = 'حصل خطأ أثناء محاولة إضافة المستخدم إلى المجموعة.';
-$_lang['user_group_new'] = 'مجموعة مستخدم جديدة';
+$_lang['user_group_new'] = 'إنشاء مجموعة المستخدمين';
 $_lang['user_group_parent'] = 'المجموعة الحاوية';
 $_lang['user_group_remove'] = 'حذف مجموعة المستخدم';
 $_lang['user_group_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف مجموعة المستخدم هذه؟';
 $_lang['user_group_settings'] = 'إعدادات مجموعة المستخدم';
 $_lang['user_group_settings_desc'] = 'إدارة الإعدادات لمجموعة المستخدم';
 $_lang['user_group_untitled'] = 'مجموعة المستخدم غير معنونة';
-$_lang['user_group_update'] = 'ترقية مجموعة المستخدم';
+$_lang['user_group_update'] = 'Edit User Group';
 $_lang['user_group_user_add'] = 'إضافة مستخدم إلى مجموعة';
 $_lang['user_group_user_add_user_desc'] = 'اسم المستخدم للمستخدم لإضافته إلى مجموعة المستخدم';
 $_lang['user_group_user_add_role_desc'] = 'الدور الذي يجب أن يملكه المستخدم في المجموعة. من الممكن أن يؤثر هذا على الصلاحيات الممنوحة للمستخدم.';
-$_lang['user_group_user_remove'] = 'إزالة مستخدم من مجموعة';
-$_lang['user_group_user_remove_confirm'] = 'هل أنت متأكد من أنك تريد إزالة هذا المستخدم من المجموعة؟';
-$_lang['user_group_user_update_role'] = 'ترقية دور المستخدم في مجموعة المستخدم';
+$_lang['user_group_user_remove'] = 'Delete User from Group';
+$_lang['user_group_user_remove_confirm'] = 'Are you sure you want to delete this user from the group?';
+$_lang['user_group_user_update_role'] = 'Edit Role for User in Usergroup';
 $_lang['user_groups'] = 'مجموعات المستخدم';
 $_lang['user_gender'] = 'الجنس';
 $_lang['user_grid_empty'] = 'لا يوجد مستخدمين لعرضهم';
@@ -165,7 +165,7 @@ $_lang['user_logincount_desc'] = 'إجمالي عدد مرات تسجيل دخو
 $_lang['user_male'] = 'ذكر';
 $_lang['user_management_msg'] = 'هنا يمكنك اختيار المستخدم الذي ترغب في تعديله.';
 $_lang['user_mobile'] = 'رقم الهاتف الجوال';
-$_lang['user_new'] = 'مستخدم جديد';
+$_lang['user_new'] = 'Create User';
 $_lang['user_password_changed'] = 'تم تغيير كلمة المرور بنجاح إلى: [[+password]]';
 $_lang['user_phone'] = 'رقم الهاتف';
 $_lang['user_photo'] = 'صورة المستخدم';
@@ -179,8 +179,8 @@ $_lang['user_remove_confirm'] = 'هل أنت متأكد من أنك تريد ح�
 $_lang['user_remove_multiple'] = 'حذف مستخدمين متعددين';
 $_lang['user_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد حذف هؤلاء المستخدمين؟ لا يمكن التراجع عن هذا!';
 $_lang['user_remote_data_msg'] = 'تعديل التحكم في بيانات المستخدم هنا.';
-$_lang['user_role_update'] = 'ترقية دور المستخدم';
-$_lang['user_setting_err_remove'] = 'حصل خطأ أثناء إزالة إعدادات المستخدم.';
+$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'حصل خطأ أثناء حفظ إعدادات المستخدم.';
 $_lang['user_settings'] = 'إعدادات المستخدم';
 $_lang['user_settings_desc'] = 'You can override any of the MODX system settings on a per-user base, or you can create new settings available only to this user';
@@ -189,7 +189,7 @@ $_lang['user_sudo'] = 'المستخدم المسؤول';
 $_lang['user_sudo_desc'] = 'إذا تم الاختيار، سيملك هذا المستخدم وصول كامل لكل الموقع كما سيتجاوز أي صلاحيات وصول مختارة. *لا تقم* بالاختيار إلا إذا كنت تقصد أن تفعل ذلك!';
 $_lang['user_title'] = 'إنشاء/تعديل المستخدم';
 $_lang['user_other'] = 'آخر';
-$_lang['user_update'] = 'ترقية المستخدم';
+$_lang['user_update'] = 'Edit User';
 $_lang['user_updated_password_message'] = 'تمت ترقية المستخدم.كلمة المرور هي: [[+password]]';
 $_lang['user_upload_message'] = 'إذا رغبت في إيقاف هذا المستخدم من رفع أي نوع من الملفات في هذا التصنيف، قم بالتأكد من أن صندوق الاختيار \'استخدم إعدادات التهيئة الرئيسية\' غير معلم واترك الحقل فارغ.';
 $_lang['user_use_config'] = 'استخدام إعدادات تهيئة النظام';

@@ -36,18 +36,19 @@ $_lang['namespace'] = 'Espacio de Nombres';
 $_lang['namespace_desc'] = 'El Espacio de Nombres al que esta configuración estará asociado. Se cargará el Tópico por defecto del Archivo de Idioma para este Espacio de Nombres al tomar la configuración.';
 $_lang['namespace_filter'] = 'Filtrar por espacio de nombres...';
 $_lang['search_by_key'] = 'Buscar por clave...';
-$_lang['setting_create'] = 'New Setting';
+$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'Por favor, revisa los siguientes campos: ';
 $_lang['setting_err_ae'] = 'La configuración con esa clave ya existe. Por favor, especifíca otro nombre de clave.';
 $_lang['setting_err_nf'] = 'Configuración no encontrada.';
 $_lang['setting_err_ns'] = 'Configuración no especificada';
-$_lang['setting_err_remove'] = 'Ocurrió un error mientras se trataba de eliminar la configuración.';
+$_lang['setting_err_not_editable'] = 'This setting can\'t be edited in the grid. Please use the gear/context menu to edit the value!';
+$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
 $_lang['setting_err_save'] = 'Ocurrió un error mientras se trataba de guardar la configuración.';
 $_lang['setting_err_startint'] = 'Las configuraciones no pueden comenzar con un número.';
 $_lang['setting_err_invalid_document'] = 'No existe ningún documento con ID %d. Por favor especifíca un documento válido.';
 $_lang['setting_remove'] = 'Eliminar Configuración';
 $_lang['setting_remove_confirm'] = '¿Estás seguro de que quieres eliminar esta configuración? Esto puede romper tu instalación de MODX.';
-$_lang['setting_update'] = 'Actualizar Configuración';
+$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'Como esta es una instalación nueva, deberás revisar la configuración y modificar las que creas convenientes. Después de modificar la configuración, pulsa "Guardar" para actualizar la base de datos con la nueva configuración.<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'URLs Amigables';
@@ -685,19 +686,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Introduce el ID del Recurso que 
 $_lang['setting_site_unavailable_page_err'] = 'Por favor, especifíca el ID del Recurso utilizado como página a mostrar cuando el sitio no esté disponible.';
 
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';

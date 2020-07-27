@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Kuvat -hakemisto ei ole kirjoitettavissa';
 $_lang['configcheck_images_msg'] = 'Kuvat -hakemisto ei ole kirjoitettavissa tai sitä ei ole olemassa. Tämä tarkoittaa, että Manager -toiminnot editorissa eivät toimi!';
 $_lang['configcheck_installer'] = 'Asennus -hakemisto edelleen olemassa';
-$_lang['configcheck_installer_msg'] = 'Järjestelmän asennustiedostot ovat yhä palvelimen kansiossa:  [[+path]]. On suositeltavaa poistaa kansio: [[+path]].';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Virheellinen määrä merkintöjä kielitiedostossa';
 $_lang['configcheck_lang_difference_msg'] = 'Valittuna olevassa kielessä on eri määrä merkintöjä kuin oletuskielessä. Vaikka tämä ei välttämättä aiheuta ongelmia, voi olla että kielitiedosto pitää päivittää.';
 $_lang['configcheck_notok'] = 'Yksi tai useampi yksittäinen asetus ei läpäissyt tarkistusta: ';

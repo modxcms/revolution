@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['error'] = 'Fejl!';
-$_lang['rest.err_class_remove'] = 'Der opstod en fejl under forsøget på at fjerne [[+class_key]] objektet';
+$_lang['rest.err_class_remove'] = 'An error occurred while trying to delete the [[+class_key]]';
 $_lang['rest.err_class_save'] = 'Der opstod en fejl under forsøget på at gemme [[+class_key]] objektet';
 $_lang['rest.err_field_ns'] = '[[+field]] ikke angivet!';
 $_lang['rest.err_field_required'] = 'Dette felt er obligatorisk.';

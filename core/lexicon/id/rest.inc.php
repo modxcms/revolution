@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['error'] = 'Kesalahan!';
-$_lang['rest.err_class_remove'] = 'Terjadi kesalahan saat mencoba untuk menghapus [[+class_key]]';
+$_lang['rest.err_class_remove'] = 'An error occurred while trying to delete the [[+class_key]]';
 $_lang['rest.err_class_save'] = 'Terjadi kesalahan saat mencoba untuk menyimpan [[+class_key]]';
 $_lang['rest.err_field_ns'] = '[[+field]] tidak ditentukan!';
 $_lang['rest.err_field_required'] = 'Bidang ini diperlukan.';

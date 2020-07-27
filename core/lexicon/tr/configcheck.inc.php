@@ -34,8 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Resimler dizini yazılabilir değil';
 $_lang['configcheck_images_msg'] = 'Resimler dizini yazılabilir değil, veya mevcut değil. Bu düzenleyicideki yönetici işlevleri çalışmayacak anlamına gelir!';
 $_lang['configcheck_installer'] = 'Yükleyici hala mevcut';
-$_lang['configcheck_installer_msg'] = 'Kurulum/ dizininde MODX için yükleyici bulunur. Eğer kötü bir kişi bu klasörü bulup yükleyiciyi çalıştırırsa ne olacağını hayal edin! Muhtemelen çok ileri gidemeyecekler, çünkü veritabanı için bazı kullanıcı bilgilerini girmeleri gerekir, ancak bu klasörü sunucudan kaldırmak hala en iyisidir.
-Bulunduğu yer: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Dil dosyasındaki girdilerin sayısı yanlış';
 $_lang['configcheck_lang_difference_msg'] = 'Seçili dil varsayılan dilden farklı sayıda girdi içeriyor. Her ne kadar bir sorun değilse de, bu dil dosyasının güncelleneceği anlamına gelebilir.';
 $_lang['configcheck_notok'] = 'Bir veya birkaç yapılandırma detayları kontrol edilmedi:';

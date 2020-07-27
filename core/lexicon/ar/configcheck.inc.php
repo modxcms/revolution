@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'دليل الصور غير قابل للكتابة';
 $_lang['configcheck_images_msg'] = 'دليل الصور غير قابل للكتابة، أوغير موجود. هذا يعني أن وظائف الصور في المدير لن تعمل!';
 $_lang['configcheck_installer'] = 'التركيب مازال حاضر';
-$_lang['configcheck_installer_msg'] = 'التنصيب/ يحتوي على الدليل المثبت لمودكس. لكم أن تتخيلوا ماذا يمكن أن يحدث إذا رأى كان شخص سيء هذا المجلد وتشغيل المثبت! أنها ربما لن تذهب بعيداً جداً، نظراً لأنها سوف تحتاج إلى إدخال بعض معلومات المستخدم لقاعدة البيانات، إلا أنه لا يزال من الأفضل إزالة هذا المجلد من المهدم الخاص بك. ويقع في: [[path+]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'عدد غير صحيح من المدخلات ضمن ملف اللغة';
 $_lang['configcheck_lang_difference_msg'] = 'اللغة المحددة حاليا تحتوي على عدد مختلف من الإدخالات عن اللغة الافتراضية. إنها ليست بالضرورة مشكلة، قد يعني هذا أن ملف اللغة بحاجة إلى ترقية.';
 $_lang['configcheck_notok'] = 'يوجد واحد أوكثر من تفاصيل التهيئة لم يتم فحصهن بشكل جيد: ';

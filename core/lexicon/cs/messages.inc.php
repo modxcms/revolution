@@ -27,7 +27,7 @@ $_lang['filter_by_type'] = 'Filtrovat dle typu...';
 $_lang['message'] = 'Zpráva';
 $_lang['message_create'] = 'Vytvořit zprávu';
 $_lang['message_new'] = 'Vytvořit zprávu';
-$_lang['message_remove_confirm'] = 'Opravdu chcete odstranit tuto zprávu?';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Poslat E-mail';
 $_lang['message_err_nfs'] = 'Zpráva nenalezena.';
 $_lang['message_err_not_specified_subject'] = 'Předmět e-mailu není vyplněn!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Nejste oprávněn k odstranění této zp
 $_lang['message_err_save'] = 'Nastala chyba při ukládání zprávy.';
 
 $_lang['messages'] = 'Zprávy';
-$_lang['messages_desc'] = 'Zde můžete spravovat zprávy, které byly jste odeslali nebo které jste obdrželi o ostatních uživatelů. Můžete odpovědět, předat zprávu, také můžete zprávu odstranit nebo označit jako přečtenou.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'Všem';
 $_lang['messages_compose'] = 'Vytvořit zprávu';
 $_lang['messages_forward'] = 'Přeposlat';

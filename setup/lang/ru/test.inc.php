@@ -6,7 +6,7 @@
  * @subpackage lexicon
  */
 $_lang['test_config_file'] = 'Проверка существования и возможности записи в файл <span class="mono">[[+file]]</span>: ';
-$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с именем <span class="mono">[[+key]].inc.php</span> в каталоге <span class="mono">config/</span> с правами доступа, позволяющими веб-серверу его изменять.';
+$_lang['test_config_file_nw'] = 'Для новой установки на Linux/Unix системах, создайте пустой файл с названием <span class="mono">[[+key]].inc.php</span> в каталоге <span class="mono">config/</span> с правами доступа, позволяющими веб-серверу его изменять.';
 $_lang['test_db_check'] = 'Создание подключения к базе данных: ';
 $_lang['test_db_check_conn'] = 'Проверьте параметры соединения и повторите попытку.';
 $_lang['test_db_failed'] = 'Связь с базой данных не установлена!';
@@ -35,8 +35,6 @@ $_lang['test_nocompress_skip'] = 'Не выбрано, пропускаем те
 $_lang['test_php_version_fail'] = 'Используется PHP [[+version]], а для работы MODX Revolution необходим PHP [[+required]] или выше. Обновите PHP до версии не ниже [[+required]]. MODX рекомендует обновление до [[+recommended]].';
 $_lang['test_php_version_start'] = 'Проверка версии PHP: ';
 $_lang['test_php_version_success'] = 'OK! Работает: [[+version]]';
-$_lang['test_safe_mode_start'] = 'Проверка того, что директива "safe_mode" выключена (off): ';
-$_lang['test_safe_mode_fail'] = 'MODX обнаружил, что директива safe_mode  включена. Для продолжения установки вы должны отключить safe_mode в вашей конфигурации PHP.';
 $_lang['test_sessions_start'] = 'Проверка настроек сессий: ';
 $_lang['test_simplexml'] = 'Проверка SimpleXML: ';
 $_lang['test_simplexml_nf'] = 'Не удалось найти SimpleXML!';

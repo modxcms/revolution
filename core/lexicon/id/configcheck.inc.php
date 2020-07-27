@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Direktori gambar tidak bisa ditulisi';
 $_lang['configcheck_images_msg'] = 'Direktori gambar tidak bisa ditulisi, atau tidak ada. Ini berarti fungsi manajer gambar dalam editor tidak akan bekerja!';
 $_lang['configcheck_installer'] = 'Installer masih ada';
-$_lang['configcheck_installer_msg'] = 'Setup / direktori berisi installer untuk MODX. Bayangkan apa yang mungkin terjadi jika orang jahat menemukan folder ini dan menjalankan installer! Mereka mungkin tidak akan mendapatkan terlalu jauh, karena mereka akan perlu untuk memasukkan beberapa pengguna informasi untuk database, tapi masih terbaik untuk menghapus folder ini dari server Anda. Terletak di: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Jumlah entri dalam file bahasa';
 $_lang['configcheck_lang_difference_msg'] = 'Bahasa yang dipilih saat ini memiliki nomor yang berbeda dari entri dari bahasa default. Sementara tidak masalah, ini mungkin berarti file bahasa yang perlu dimutakhirkan.';
 $_lang['configcheck_notok'] = 'Satu atau lebih rincian konfigurasi tidak memeriksa OK: ';

@@ -28,7 +28,7 @@ ist etwas nicht korrekt, und Sie sollten die Konfiguration ändern oder einen Fa
 $_lang['configcheck_images'] = 'Bilderverzeichnis nicht beschreibbar';
 $_lang['configcheck_images_msg'] = 'Das Bilderverzeichnis ist nicht beschreibbar oder existiert nicht. Das bedeutet, dass die Bildmanager-Funktionen im Editor nicht funktionieren!';
 $_lang['configcheck_installer'] = 'Installationsskript noch vorhanden';
-$_lang['configcheck_installer_msg'] = 'Das Verzeichnis setup/ enthält das Installationsskript für MODX. Stellen Sie sich nur einmal vor, was passieren könnte, wenn ein böser Mensch dieses Verzeichnis findet und die Installationsroutine startet! Er würde zwar vermutlich nicht allzu weit kommen, weil er Zugangsdaten für die Datenbank eingeben müsste, aber es ist dennoch am besten, dieses Verzeichnis von Ihrem Server zu löschen. Es befindet sich hier: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Inkorrekte Anzahl von Einträgen in der Sprachdatei';
 $_lang['configcheck_lang_difference_msg'] = 'Die momentan ausgewählte Sprache hat eine andere Anzahl von Einträgen als die Standardsprache. Das muss nicht notwendigerweise ein Problem sein, kann aber bedeuten, dass die Sprachdatei aktualisiert werden muss.';
 $_lang['configcheck_notok'] = 'Ein oder mehrere Konfigurationsdetails haben die Prüfung nicht bestanden: ';

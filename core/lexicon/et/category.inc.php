@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['categories'] = 'Kategooriad';
-$_lang['category_confirm_delete'] = 'Oled kindel, et soovid eemaldada selle kategooria? Kõik elemendid selles kategoorias liigitatakse siis mitte-kategoriseerituks.';
+$_lang['category_confirm_delete'] = 'Are you sure you want to delete this category? All elements in this category will be filed to uncategorized.';
 $_lang['category_create'] = 'Loo Kategooria';
 $_lang['category_err_ae'] = 'A category already exists with that name. Please try a different name.';
 $_lang['category_err_create'] = 'Tekkis viga kategooria loogmisel.';
@@ -16,7 +16,7 @@ $_lang['category_err_nf'] = 'Kategooriat ei leitud.';
 $_lang['category_err_nfs'] = 'Kategooriat võtmega %s ei leitud';
 $_lang['category_err_ns'] = 'Kategooria ei olnud täpsustatud.';
 $_lang['category_err_ns_name'] = 'Palun määra korrektne kategooria nimi.';
-$_lang['category_err_remove'] = 'Tekkis viga kategooria eemaldamisel.';
+$_lang['category_err_remove'] = 'An error occurred while trying to delete the category.';
 $_lang['category_err_save'] = 'Tekkis viga kategooria salvestamisel.';
 $_lang['category_existing'] = 'Olemasolev Kategooria';
 $_lang['category_heading'] = 'Kategooria';
@@ -27,4 +27,4 @@ $_lang['category_no_snippets'] = 'Snippet-eid ei ole selles kategoorias.';
 $_lang['category_no_templates'] = 'Template-sid ei ole selles kategoorias.';
 $_lang['category_no_template_variables'] = 'Template muutujaid ei ole selles kategoorias.';
 $_lang['category_rename'] = 'Nimeta ümber Kategooria';
-$_lang['category_remove'] = 'Eemalda Kategooria';
+$_lang['category_remove'] = 'Delete Category';

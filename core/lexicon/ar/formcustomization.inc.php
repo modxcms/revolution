@@ -21,8 +21,8 @@ $_lang['deactivate'] = 'تبطيل';
 $_lang['default_value'] = 'القيمة الافتراضية';
 $_lang['export'] = 'تصدير';
 $_lang['fc.action_create'] = 'أنشاء مصدر';
-$_lang['fc.action_update'] = 'ترقية المصدر';
-$_lang['fc.action_resource_wildcard'] = 'Create & Update Resource';
+$_lang['fc.action_update'] = 'Edit Resource';
+$_lang['fc.action_resource_wildcard'] = 'Create & Edit Resource';
 $_lang['field'] = 'الحقل';
 $_lang['field_desc'] = 'هذا الحقل الذي سيتأثر. قد يكون أيضاً علامة تبويب، أو عنصر قالب. اذا كانت عنصر قالب، الرجاء تحديد التنسيق: "#tv"، حيث # هي المعرف لعنصر القالب.';
 $_lang['field_default'] = 'القيمة الافتراضية للحقل';
@@ -38,21 +38,21 @@ $_lang['for_parent_desc'] = 'اختر هذه عندما تريد أن يتم ت�
 $_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/3.x/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'قواعد النموذج';
 $_lang['import'] = 'استيراد';
-$_lang['import_from_xml'] = 'استيراد مجموعة جديدة من XML';
+$_lang['import_from_xml'] = 'Import Set from XML';
 $_lang['label'] = 'علامة';
 $_lang['original_value'] = 'القيمة الأصلية';
 $_lang['profile'] = 'ملف شخصي';
-$_lang['profile_create'] = 'إنشاء ملف شخصي جديد';
+$_lang['profile_create'] = 'Create Profile';
 $_lang['profile_err_nfs'] = 'نموذج الملف الشخصي المخصص غير موجود مع المعرف [[id+]].';
 $_lang['profile_err_ns'] = 'لم يتم تخصيص نموذج الملف الشخصي!';
-$_lang['profile_err_remove'] = 'حدث خطأ أثناء محاولة إزالة الملف الشخصي.';
+$_lang['profile_err_remove'] = 'An error occurred while trying to delete the Profile.';
 $_lang['profile_err_save'] = 'حدث خطأ أثناء محاولة حفظ الملف الشخصي.';
-$_lang['profile_msg'] = 'هنا يمكنك تحديد مجموعات لهذا الملف الشخصي. المجموعة عبارة عن مجموعة من القواعد التي يمكن تطبيقها لصفحة معينة (تحديث أو إنشاء مصادر). يمكن أيضاً أن تكون مقيدة لقوالب معينة، أو قيم حقول أخرى في المصدر. القيود من أجل إنشاء مجموعات المصدر سوف يتم تنفيذها اعتماداً على الحاوي لقيم المصدر المنشأة حديثاً.';
-$_lang['profile_new'] = 'نموذج ملف شخصي مخصص جديد';
+$_lang['profile_msg'] = 'Here you can specify Sets for this Profile. A Set is a collection of Rules that apply for a given page (Edit or Create Resource). They can also be restricted to certain Templates, or other field values on the Resource. Constraints for the Create Resource Sets will execute based on the parent of the newly created Resource\'s value.';
+$_lang['profile_new'] = 'Create Form Customizaton Profile';
 $_lang['profile_remove'] = 'حذف ملف شخصي';
-$_lang['profile_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف الملف الشخصي بشكل كامل؟ هذه العملية غير قابلة للعودة.';
+$_lang['profile_remove_confirm'] = 'Are you sure you want to completely delete this Profile? This is irreversible.';
 $_lang['profile_remove_multiple'] = 'حذف عدة ملفات شخصية';
-$_lang['profile_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد حذف الملفات الشخصية بشكل كامل؟ هذه العملية غير قابلة للعودة.';
+$_lang['profile_remove_multiple_confirm'] = 'Are you sure you want to completely delete these Profiles? This is irreversible.';
 $_lang['profile_usergroup_err_ae'] = 'مجموعة المستخدم مسندة مسبقاً إلى هذا الملف الشخصي!';
 $_lang['profile_usergroups_msg'] = 'هنا يمكنك تعيين مجموعات المستخدم التي سوف تستخدم الملف الشخصي هذا. اذا لم يتم تعيين أي مجموعات مستخدم، سوف يستخدم جميع المستخدمين الملف الشخصي هذا.';
 $_lang['profiles'] = 'نموذج الملفات الشخصية المخصصة';
@@ -69,13 +69,13 @@ $_lang['rule_err_ae'] = 'القاعدو موجودة مسبقاً لهذا ال�
 $_lang['rule_err_duplicate'] = 'حدث خطأ أثناء محاولة تكرار القاعدة.';
 $_lang['rule_err_nf'] = 'القاعدة غير موجودة.';
 $_lang['rule_err_ns'] = 'القاعدة غير محددة.';
-$_lang['rule_err_remove'] = 'حدث خطأ أثناء محاولة إزالة القاعدة.';
+$_lang['rule_err_remove'] = 'An error occurred while trying to delete the rule.';
 $_lang['rule_err_save'] = 'حدث خطأ أثناء محاولة حفظ القاعدة.';
 $_lang['rule_remove'] = 'حذف القاعدة';
-$_lang['rule_remove_confirm'] = 'هل أنت متأكد أنك تريد حذف هذه القاعدة؟';
+$_lang['rule_remove_confirm'] = 'Are you sure you want to delete this Rule?';
 $_lang['rule_remove_multiple'] = 'حذف عدة قواعد';
-$_lang['rule_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد إزالة هذه القواعد؟ وهذه العملية غير قابلة للتراجع.';
-$_lang['rule_update'] = 'ترقية القاعدة';
+$_lang['rule_remove_multiple_confirm'] = 'Are you sure you want to delete these Rules? This is irreversible.';
+$_lang['rule_update'] = 'Edit Rule';
 $_lang['rule_value_desc'] = 'القيمة التي سيتم تعيينها في القاعدة.';
 $_lang['rules'] = 'القواعد';
 $_lang['set'] = 'ضبط';
@@ -84,7 +84,7 @@ $_lang['set_change_template'] = 'تغيير القالب لمجموعة';
 $_lang['set_change_template_confirm'] = 'هل أنت متأكد من أنك تريد القيام بهذا؟ سيؤدي ذلك إلى تغيير القالب الذي يتم تطبيق هذه القواعد عليه. مودكس أولاً سوف يحفظ التغييرات الخاصة بك قبل إعادة تحميل الصفحة لتحديث عناصر القالب الجديدة للقالب الجديد.';
 $_lang['set_constraint_field_desc'] = 'تعيين حقل القيد سوف يمنع القواعد في هذه المجموعة من التنفيذ ما لم يطابق الحقل لهذا المصدر قيمة "القيد".';
 $_lang['set_constraint_desc'] = 'تعيين قيمة الحقل (المحددة أعلاه) لتقييد القواعد في هذه المجموعة من التنفيذ ما لم يكن المصدر يمتلك هذه القيمة في حقل القيد المحدد.';
-$_lang['set_create'] = 'إنشاء مجموعة جديدة';
+$_lang['set_create'] = 'Create Set';
 $_lang['set_err_nfs'] = 'لم يتم العثور على مجموعة مع المعرف [[id+]]';
 $_lang['set_err_ns'] = 'لا يوجد مجموعة محددة.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';
@@ -93,12 +93,12 @@ $_lang['set_import_err_xml'] = 'حدث خطأ أثناء استيراد ملف X
 $_lang['set_import_msg'] = 'حدد ملف XML لاستيراد مجموعة نموذج مخصص منه. يجب أن يكون بتنسيق XML الصحيح لنموذج التخصيص.';
 $_lang['set_import_template_err_nf'] = 'لم يتم العثور على القالب أثناء استيراد مجموعة تخصيص النموذج.';
 $_lang['set_msg'] = 'هنا يمكنك ضبط أي الحقول، علامات التبويب وعناصر القالب سوف تظهر على هذه الصفحة، وكذلك العناوين والقيم الافتراضية. فقط انقر نقراً مزدوجاً فوق العمود لتعديل القيمة الخاصة به. يمكنك أيضا استخدام المفتاح tab للتجول ضمن الشبكة. اترك الحقل فارغاً لاستخدام الإعداد الافتراضي.';
-$_lang['set_new'] = 'إنشاء مجموعة جديدة';
+$_lang['set_new'] = 'Create Set';
 $_lang['set_edit'] = 'تحرير مجموعة';
 $_lang['set_remove'] = 'حذف مجموعة';
-$_lang['set_remove_confirm'] = 'هل أنت متأكد من أنك تريد إزالة هذه المجموعة بشكل دائم؟ هذه العملية غير قابلة للعودة.';
+$_lang['set_remove_confirm'] = 'Are you sure you want to permanently delete this set? This is irreversable.';
 $_lang['set_remove_multiple'] = 'حذف مجموعات متعددة';
-$_lang['set_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد إزالة هذه المجموعات بشكل دائم؟ هذه العملية غير قابلة للعودة.';
+$_lang['set_remove_multiple_confirm'] = 'Are you sure you want to permanently delete these sets? This is irreversable.';
 $_lang['set_tab_err_ae'] = 'علامة تبويب موجود مسبقاً مع هذا المعرف. الرجاء تحديد معرف آخر.';
 $_lang['set_tabs_msg'] = 'Here you adjust the tabs and regions for this page, including their visibility and title. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';
 $_lang['set_template_desc'] = 'اختيار قالب سيحد من القواعد في المجموعة من التنفيذ ما لم يكن المصدر يمتلك القالب المحدد.';
@@ -106,11 +106,11 @@ $_lang['set_tvs_msg'] = 'هنا يمكنك تعيين قابلية الرؤية�
 $_lang['sets'] = 'مجموعات التخصيص الخاص بالنموذج';
 $_lang['simplexml_err_nf'] = 'مودكس يتطلب لاحقة SimpleXML PHP لكي تستخدم هذه الميزة. الرجاء التأكد من أن اللاحقة مثبتة قبل المتابعة.';
 $_lang['tab'] = 'علامة التبويب';
-$_lang['tab_create'] = 'إنشاء علامة تبويب جديدة';
+$_lang['tab_create'] = 'Create Tab';
 $_lang['tab_id'] = 'المعرف';
 $_lang['tab_name'] = 'اسم علامة التبويب';
 $_lang['tab_title'] = 'عنوان';
-$_lang['tab_new'] = 'علامة تبويب جديدة';
+$_lang['tab_new'] = 'Create Tab';
 $_lang['tab_rank'] = 'ترتيب المنطقة';
 $_lang['tab_remove'] = 'حذف علامة تبويب';
 $_lang['tab_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف علامة التبويب هذه؟';
@@ -124,9 +124,9 @@ $_lang['tv_move'] = 'نقل عنصر القالب إلى علامة تبويب';
 $_lang['tv_visible'] = 'عنصر القالب مرئي';
 $_lang['tvs'] = 'عناصر القالب';
 $_lang['usergroup'] = 'مجموعة المستخدم';
-$_lang['usergroup_create'] = 'إضافة مجموعة مستخدم';
+$_lang['usergroup_create'] = 'Create User Group';
 $_lang['usergroup_desc'] = 'اختياري. في حالة الضبط، سيتم تقييد الملف الشخصي هذا فقط للمستخدمين في مجموعة المستخدم المحددة فقط.';
-$_lang['usergroup_remove'] = 'إزالة مجموعة المستخدم من الملف الشخصي';
+$_lang['usergroup_remove'] = 'Delete User Group From Profile';
 $_lang['usergroup_remove_confirm'] = 'هل أنت متأكد من أنك تريد عدم تطبيق الملف الشخصي هذا على المستخدمين في مجموعة المستخدم هذه؟';
 $_lang['usergroups'] = 'مجموعات المستخدم';
 $_lang['visible'] = 'مرئي';

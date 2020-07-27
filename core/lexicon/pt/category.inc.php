@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['categories'] = 'Categorias';
-$_lang['category_confirm_delete'] = 'Você tem certeza que deseja remover esta categoria? Todos elementos nesta categoria serão movidos para "não categorizado".';
+$_lang['category_confirm_delete'] = 'Are you sure you want to delete this category? All elements in this category will be filed to uncategorized.';
 $_lang['category_create'] = 'Criar Categoria';
 $_lang['category_err_ae'] = 'Uma categoria já existe com esse nome. Por favor, tente um nome diferente.';
 $_lang['category_err_create'] = 'Um erro ocorreu enquanto tentava criar a categoria.';
@@ -16,7 +16,7 @@ $_lang['category_err_nf'] = 'Categoria não encontrada.';
 $_lang['category_err_nfs'] = 'Categoria não encontrada com a chave: %s';
 $_lang['category_err_ns'] = 'Categoria não especificada.';
 $_lang['category_err_ns_name'] = 'Por favor especifique um nome válido para categoria.';
-$_lang['category_err_remove'] = 'Ocorreu um erro ao tentar remover a categoria.';
+$_lang['category_err_remove'] = 'An error occurred while trying to delete the category.';
 $_lang['category_err_save'] = 'Ocorreu um erro ao tentar salvar a categoria.';
 $_lang['category_existing'] = 'Categoria Existente';
 $_lang['category_heading'] = 'Categoria';
@@ -27,4 +27,4 @@ $_lang['category_no_snippets'] = 'Sem Snippets para esta categoria.';
 $_lang['category_no_templates'] = 'Sem Templates para esta categoria.';
 $_lang['category_no_template_variables'] = 'Sem Variáveis de Template para esta categoria.';
 $_lang['category_rename'] = 'Renomear Categoria';
-$_lang['category_remove'] = 'Remover Categoria';
+$_lang['category_remove'] = 'Delete Category';

@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Do složky pro obrázky nelze zapisovat';
 $_lang['configcheck_images_msg'] = 'Složka pro obrázky je pouze pro čtení nebo neexistuje. To znamená, že správce obrázků nebude pracovat správně!';
 $_lang['configcheck_installer'] = 'Instalátor stále existuje!';
-$_lang['configcheck_installer_msg'] = 'Hlavní složka stále obsahuje složku "setup" obsahující instalátor systému MODX. Mohlo by dojít k narušení bezpečnosti systému pokud by neoprávněná osoba spustila instalátor, který je umístěn zde: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Nesprávný počet záznamů v jazykovém souboru';
 $_lang['configcheck_lang_difference_msg'] = 'Aktuálně vybraný jazyk má rozdílný počet záznamů než výchozí jazyk angličtina. Mělo by dojít k aktualizaci jazykového souboru pro tuto verzi MODX.';
 $_lang['configcheck_notok'] = 'Jeden nebo více konfiguračních údajů není správně nastaveno: ';

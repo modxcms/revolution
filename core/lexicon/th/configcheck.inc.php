@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'โฟลเดอร์รูปภาพไม่สามารถเขียนได้';
 $_lang['configcheck_images_msg'] = 'โฟลเดอร์รูปภาพไม่สามารถเขียนได้หรือไม่มีอยู่  นี่หมายความว่าฟังก์ชันตัวจัดการรูปภาพในอิดิเตอร์จะไม่ทำงาน!';
 $_lang['configcheck_installer'] = 'ตัวติดตั้งยังคงทำงานอยู่';
-$_lang['configcheck_installer_msg'] = 'โฟลเดอร์ setup/ ที่บรรจุตัวติดตั้งสำหรับ MODX ยังคงอยู่ ลองจินตนาการถึงสิ่งที่อาจเกิดขึ้นถ้าผู้โจมตีสามารถหาโฟลเดอร์นี้และเริ่มการติดตั้ง! อาจจะไม่ยากเกินไปในการติดตั้งใหม่ เพราะเพียงแค่เขารู้ข้อมูลของฐานข้อมูลเท่านั้น แต่จะดีกว่าถ้าคุณลบโฟลเดอร์นี้ออกจากเซิร์ฟเวอร์ของคุณ มันตั้งอยู่ที่: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'ตัวเลขของเอนทรีในไฟล์ภาษาไม่ถูกต้อง';
 $_lang['configcheck_lang_difference_msg'] = 'การเลือกภาษาในตอนนี้มีหมายเลขของเอนทรีกับภาษาปริยาย แต่ที่ไม่ได้เป็นปัญหาที่สำคัญ นี่หมายความว่าไฟล์ภาษาจำเป็นต้องถูกอัปเดต';
 $_lang['configcheck_notok'] = 'มีหนึ่งหรือมากกว่าของรายละเอียดการตั้งค่าได้แจ้งว่าไม่เรียบร้อย: ';

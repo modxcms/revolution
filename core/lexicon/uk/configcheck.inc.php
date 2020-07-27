@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Каталог зображень недоступний для запису';
 $_lang['configcheck_images_msg'] = 'Каталог зображень недоступний для запису або не існує. Це означає, що функції управління зображеннями не працюватимуть!';
 $_lang['configcheck_installer'] = 'Каталог з програмою установки не був видалений';
-$_lang['configcheck_installer_msg'] = 'Каталог setup/ містить файли установки для MODX. Тільки уявіть, що може трапитись, якщо якась лиха людина знайде цей каталог і запустить програму встановлення! Вона, скоріш за все, не просунеться далеко, бо їй знадобиться ввести інформацію для авторизації у базі даних, але все ж краще видалити цей каталог з Вашого серверу. Його місцезнаходження: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Неправильна кількість записів у мовному файлі';
 $_lang['configcheck_lang_difference_msg'] = 'Кількість записів у вибраній мові відрізняється від кількості записів у мові за замовчуванням. Хоча це не обов\'язково може бути проблемою, але це привід для оновлення мовних файлів.';
 $_lang['configcheck_notok'] = 'У налаштуванні системи присутні помилки: ';

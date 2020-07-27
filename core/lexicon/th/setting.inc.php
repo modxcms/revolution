@@ -36,18 +36,19 @@ $_lang['namespace'] = 'เนมสเปซ';
 $_lang['namespace_desc'] = 'เนมสเปซที่การตั้งค่านี้เกี่ยวข้องด้วย หัวข้อ Lexicon ปริยายจะถูกเรียกขึ้นมาสำหรับเนมสเปซนี้เมื่อกำลังตั้งค่า';
 $_lang['namespace_filter'] = 'กรองด้วยเนมสเปซ...';
 $_lang['search_by_key'] = 'ค้นหาด้วยคีย์...';
-$_lang['setting_create'] = 'New Setting';
+$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'กรุณาตรวจสอบข้อมูลในฟิลด์ตามข้างล่างนี้: ';
 $_lang['setting_err_ae'] = 'การตั้งค่าด้วยคีย์นี้มีอยู่แล้ว กรุณาระบุชื่อคีย์ใหม่';
 $_lang['setting_err_nf'] = 'ไม่พบการตั้งค่า';
 $_lang['setting_err_ns'] = 'ไม่ระบุการตั้งค่า';
-$_lang['setting_err_remove'] = 'เกิดข้อผิดพลาดขณะที่พยายามลบการตั้งค่า';
+$_lang['setting_err_not_editable'] = 'This setting can\'t be edited in the grid. Please use the gear/context menu to edit the value!';
+$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
 $_lang['setting_err_save'] = 'เกิดข้อผิดพลาดขณะที่พยายามบันทึกการตั้งค่า';
 $_lang['setting_err_startint'] = 'การตั้งค่าไม่ควรเริ่มต้นด้วยตัวเลข';
 $_lang['setting_err_invalid_document'] = 'ไม่มีเอกสารที่มีไอดี %d กรุณาระบุเอกสารที่มีอยู่จริง';
 $_lang['setting_remove'] = 'ลบการตั้งค่า';
 $_lang['setting_remove_confirm'] = 'คุณแน่ใจว่าต้องการลบการตั้งค่านี้หรือไม่? นี่อาจจะเป็นการสร้างความเสียหายให้กับการติดตั้ง MODX ของคุณ';
-$_lang['setting_update'] = 'อัปเดตการตั้งค่า';
+$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'สำหรับการติดตั้งใหม่ คุณต้องตรวจสอบการตั้งค่าที่ป้อนและหากจำเป็นต้องเปลี่ยนแปลง เมื่อคุณทำเสร็จสินแล้วให้กด \'บันทึก\' เพื่ออัปเดตการตั้งค่าลงฐานข้อมูล<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Friendly URLs';
@@ -685,19 +686,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'ป้อนไอดีขอ�
 $_lang['setting_site_unavailable_page_err'] = 'กรุณาระบุไอดีเอกสารสำหรับหน้าเว็บไซต์ไม่พร้อมใช้งาน';
 
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';

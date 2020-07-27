@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['export_site_cacheable'] = 'Включать некэшируемые файлы:';
+$_lang['export_site_cacheable'] = 'Включать не кэшируемые файлы:';
 $_lang['export_site_exporting_document'] = 'Экспортируется файл <strong>%s</strong> из <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $_lang['export_site_failed'] = '<span style="color:#990000">Ошибка!</span>';
 $_lang['export_site_html'] = 'Экспортировать сайт в HTML';

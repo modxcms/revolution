@@ -26,8 +26,8 @@ $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'پیام';
 $_lang['message_create'] = 'ایجاد پیام';
-$_lang['message_new'] = 'New Message';
-$_lang['message_remove_confirm'] = 'آیا از حذف کامل این پیام اطمینان دارید؟';
+$_lang['message_new'] = 'ایجاد پیام';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'پیام پیدا نشد.';
 $_lang['message_err_not_specified_subject'] = 'موضوع مشخص نشده!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='شما مجاز به حذف این پیا
 $_lang['message_err_save'] = 'خطایی هنگام زخیره این پیام رخ داده است.';
 
 $_lang['messages'] = 'پیام';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can remove or mark as read specified messages.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'همه';
 $_lang['messages_compose'] = 'نوشتن پیام';
 $_lang['messages_forward'] = 'ارسال به دیگری';

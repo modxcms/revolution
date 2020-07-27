@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Директорията с изборажения не е записваема';
 $_lang['configcheck_images_msg'] = 'Директорията с изображения не е записваема или не съществува. Това означава, че функциите на Мениджъра за Изображение в редактора няма да работят!';
 $_lang['configcheck_installer'] = 'Инсталатора все още съществува';
-$_lang['configcheck_installer_msg'] = 'Setup/ директорията съдържа инсталатора за MODX. Само си представете какво може да се случи ако зъл човек намери тази папка и изпълни инсталиращата програма! Те вероятно няма да отидат твърде далеч, тъй като ще трябва да въведат потребителска информация за базата данни, но е най-добре да премахнете тази папка от вашия сървър. Той се намира в: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Неправилен брой записи в езиков файл';
 $_lang['configcheck_lang_difference_msg'] = 'Избраният език има различен брой записи от езика по подразбиране. Докато не е непременно голям проблем това може да означава, че езиковия файл трябва да бъде актуализиран.';
 $_lang['configcheck_notok'] = 'Един или повече конфигурационни детайли не излезнаха OK: ';

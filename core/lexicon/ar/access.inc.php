@@ -10,21 +10,21 @@ $_lang['access_category_management_msg'] = 'إدارة سماحية وصول ع�
 $_lang['access_category_err_ae'] = 'ACL لذلك الصنف موجودة بالفعل!';
 $_lang['access_category_err_nf'] = 'صنف ACL غير موجود.';
 $_lang['access_category_err_ns'] = 'صنف ACL غير محدد.';
-$_lang['access_category_err_remove'] = 'حدث خطأ أثناء محاولة حذف صنف ACL.';
-$_lang['access_category_remove'] = 'إزالة الوصول إلى الصنف';
-$_lang['access_category_update'] = 'تحديث الوصول إلى الصنف';
-$_lang['access_confirm_remove'] = 'هل أنت متأكد من أنك تريد إزالة سجل عنصر تحكم وصول الأمان؟';
+$_lang['access_category_err_remove'] = 'An error occurred while trying to delete the Category ACL.';
+$_lang['access_category_remove'] = 'Delete Category Access';
+$_lang['access_category_update'] = 'Edit Category Access';
+$_lang['access_confirm_remove'] = 'Are you sure you want to delete this security access control record?';
 $_lang['access_context_management_msg'] = 'إدارة وصول العضوية لمجموعة المستخدم إلى السياق والموافقة اختيارياً على سياسات الوصول.';
 $_lang['access_context_err_ae'] = 'يوجد مسبقاً ACL لهذا السياق!';
 $_lang['access_context_err_nf'] = 'ACL السياق غير موجود.';
 $_lang['access_context_err_ns'] = 'ACL السياق غير محدد.';
-$_lang['access_context_err_remove'] = 'حصل خطأ أثناء محاولة حذف ACL السياق.';
-$_lang['access_context_remove'] = 'حذف الوصول إلى السياق';
-$_lang['access_context_update'] = 'ترقية الوصول إلى السياق';
+$_lang['access_context_err_remove'] = 'An error occurred while trying to delete the Context ACL.';
+$_lang['access_context_remove'] = 'Delete Context Access';
+$_lang['access_context_update'] = 'Edit Context Access';
 $_lang['access_err_ae'] = 'يوجد ACL مسبقا!';
 $_lang['access_err_create_md'] = 'لا يمكن إنشاء ACL: بيانات ضائعة!';
 $_lang['access_err_nf'] = 'لم يتم العثور على ACL المحدد!';
-$_lang['access_err_remove'] = 'خطأ أثناء حذف ACL!';
+$_lang['access_err_remove'] = 'An error occurred while trying to delete the ACL!';
 $_lang['access_err_save'] = 'خطأ في حفظ ACL!';
 $_lang['access_grid_empty'] = 'لا يوجد ACL للعرض';
 $_lang['access_grid_paginate'] = 'ACLs المعروضة {0} - {1} من {2}  ';
@@ -32,16 +32,16 @@ $_lang['access_permissions'] = 'صلاحيات الوصول';
 $_lang['access_permissions_add_document_group'] = 'إنشاء مجموعة ملف جديدة';
 $_lang['access_permissions_add_user_group'] = 'إنشاء مجموعة مستخدم جديدة';
 $_lang['access_permissions_documents_in_group'] = '<strong>الوثائق في المجموعة:</strong> ';
-$_lang['access_permissions_documents_tab'] = 'هنا تستطيع أن ترى مجموعات الوثائق التي تم تجهيزها. تستطيع أيضا إنشاء مجموعات جديدة, إعادة تسمية المجموعات, حذف المجموعات وأن ترى الوثائق الموجودة في المجموعات المختلفة (لوح بالمؤشر فوق معرف الوثيقة لكي ترى الاسم). لكي تضيف وثيقة إلى مجموعة أو ان تحذف وثيقة من مجموعة، عدل الوثيقة مباشرة.';
+$_lang['access_permissions_documents_tab'] = 'Here you can see which document groups have been set up. You can also create new groups, rename groups, delete groups and see which documents are in the different groups (hover over the id of the document to see its name). To add a document to a group or delete a document from a group, edit the document directly.';
 $_lang['access_permissions_document_groups'] = 'مجموعات الوثائق';
 $_lang['access_permissions_introtext'] = 'هنا تستطيع إدارة مجموعات المستخدم ومجموعات الوثائق المستخدمة للوصول إلى الصلاحيات. لكي تضيف مجموعة مستخدم جديدة أو أن تضيف مستخدمين إلى مجموعة مستخدم، استخدم الشجرة على اليسار وإضغط بالزر اليمين. لكي تقوم بربط مجموعة مستخدم إلى مجموعة وثيقةـ ببساطة اسحب مجموعات المستخدم من الشجرة على اليسار إلى مجموعات الوثيقة في الشجرة اليمينة.';
 $_lang['access_permissions_links'] = 'روابط مجموعة مستخدم/وثيقة';
-$_lang['access_permissions_links_tab'] = 'هنا نقوم بتحديد أي مجموعات المستخدم سوف تعطة وصولية (مثال: تستطيع أن تعدل أو أن تنشئ أولاد) من أجل مجموعات الوثيقة. لكي تصل مجموعة الوثيقة بمجموعة مستخدمـ حدد المجموعة من القائمة المنسدلةـ ثم اضغط على \'وصل\'. لكي تحذف وصلة من أجل مجموعة محددة، اضغط على \'حذف ->\'. هذا سوف يحذف الرابط فوراً.';
+$_lang['access_permissions_links_tab'] = 'This is where we specify which user groups are given access (i.e. can edit or create children) for the document groups. To link a document group to a user group, select the group from the dropdown, and click on \'Link\'. To delete the link for a certain group, press \'Delete ->\'. This will immediately delete the link.';
 $_lang['access_permissions_no_documents_in_group'] = 'لاشيء.';
 $_lang['access_permissions_no_users_in_group'] = 'لاشيء.';
 $_lang['access_permissions_off'] = '<span class="warning">صلاحيات الوصول ليست مفعلة</span>. هذا يعني أن أي تغيير يحصل هنا لن يؤثر على شيء حتى يتم تفعيل صلاحيات الوصول.';
 $_lang['access_permissions_users_in_group'] = '<strong>المستخدمين في المجموعة:</strong> ';
-$_lang['access_permissions_users_tab'] = 'هنا تستطيع مشاهد أي مجموعات المستخدم تم تفعيلها. تستطيع أيضا أن تقوم بإنشاء مجموعات جديدة، إعادة تسمية المجموعات، حذف المجموعات وأن ترى من هم المستخدمين الأعضاء في المجموعات المختلفة. لكي تقوم بإضافة مستخدم جديد إلى مجموعة أو حذف مستخدم من مجموعة، قم بتعديل المستخدم مباشرة.';
+$_lang['access_permissions_users_tab'] = 'Here you can see which user groups have been set up. You can also create new groups, rename groups, delete groups and see which users are members of the different groups. To add a new user to a group or to delete a user from a group, edit the user directly.';
 $_lang['access_permissions_user_group'] = 'مجموعة مستخدم:';
 $_lang['access_permissions_user_groups'] = 'مجموعات المستخدم';
 $_lang['access_permissions_user_group_access'] = 'مجموعات المصادر التي مجموعة المستخدم هذه لها وصول إليها:';
@@ -56,16 +56,16 @@ $_lang['access_resourcegroup_management_msg'] = 'إدارة وصول أعضاء 
 $_lang['access_rgroup_err_ae'] = 'يوجد ACL مسبقا من أجل مجموعة المصادر هذه!';
 $_lang['access_rgroup_err_nf'] = 'ACL مجموعة المصدر غير موجودة.';
 $_lang['access_rgroup_err_ns'] = 'ACL مجموعة المصدر غير محددة.';
-$_lang['access_rgroup_err_remove'] = 'حصل خطأ أثناء محاولة حذف ACL مجموعة المصدر.';
-$_lang['access_rgroup_remove'] = 'حذف وصولية مجموعة المصدر';
-$_lang['access_rgroup_update'] = 'ترقية وصولية مجموعة المصدر';
+$_lang['access_rgroup_err_remove'] = 'An error occurred while trying to delete the Resource Group ACL.';
+$_lang['access_rgroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_rgroup_update'] = 'Edit Resource Group Access';
 $_lang['access_source_err_ae'] = 'يوجد ACL مسبقا من أجل مصدر الوسائط هذا.';
-$_lang['access_source_remove'] = 'حذف وصولية مصدر الوسائط';
-$_lang['access_source_update'] = 'ترقية وصولية مصدر الوسائط';
+$_lang['access_source_remove'] = 'Delete Media Source Access';
+$_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'الوصول إلى السياقات';
 $_lang['access_to_resource_groups'] = 'الوصول إلى مجموعات المصادر';
 $_lang['access_type_err_ns'] = 'نمط الهدف أو المعرف غير محدد!';
-$_lang['acl_add'] = 'إضافة تحكم الوصول';
+$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'السلطة';
 $_lang['authority_err_ns'] = 'الرجاء تحديد دور أصغري.';
 $_lang['category'] = 'الصنف';
@@ -79,25 +79,25 @@ $_lang['no_policy_option'] = ' (لا سياسة) ';
 $_lang['permissions_in_policy'] = 'الصلاحيات ضمن السياسة المختارة';
 $_lang['resource_group'] = 'مجموعة المصدر';
 $_lang['resource_group_add'] = 'إضافة مجموعة مصدر';
-$_lang['resource_group_access_remove'] = 'حسب مصدر من المجموعة';
-$_lang['resource_group_access_remove_confirm'] = 'هل أنت متأكد من أنك تريد حسب المصدر من مجموعة المصدر؟';
-$_lang['resource_group_create'] = 'New Resource Group';
+$_lang['resource_group_access_remove'] = 'Delete Resource from Group';
+$_lang['resource_group_access_remove_confirm'] = 'Are you sure you want to delete this resource from the resource group?';
+$_lang['resource_group_create'] = 'إنشاء مجموعة مصدر';
 $_lang['resource_group_err_ae'] = 'مجموعة مصدر بهذا الاسم موجود مسبقا.';
 $_lang['resource_group_err_create'] = 'حصل خطأ أثناء محاولة إنشاء مجموعة مصدر.';
 $_lang['resource_group_err_nf'] = 'مجموعة المصدر غير موجودة.';
 $_lang['resource_group_err_ns'] = 'مجموعة المصدر غير محددة.';
-$_lang['resource_group_err_remove'] = 'حصل خطأ أثناء محاولة حذف مجموعة المصدر.';
+$_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'حذف مجموعة المصدر';
-$_lang['resource_group_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف مجموعة المصدر هذه؟';
+$_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete this resource group?';
 $_lang['resource_group_resource_err_ae'] = 'المصدر هو بالأصل جزء من مجموعة المصدر هذه.';
 $_lang['resource_group_resource_err_create'] = 'حصل خطأ أثناء محاولة وضع المصدر ضمن مجموعة المصدر.';
 $_lang['resource_group_resource_err_nf'] = 'المصدر ليس جزء من مجموعة المصدر.';
-$_lang['resource_group_resource_err_remove'] = 'حصل خطأ أثناء محاولة حذف المصدر من مجموعة المصدر.';
+$_lang['resource_group_resource_err_remove'] = 'An error occurred while trying to delete the resource from the resource group.';
 $_lang['resource_group_untitled'] = 'مجموعة مصدر غير معنونة';
-$_lang['resource_group_update'] = 'ترقية مجموعة المصدر';
+$_lang['resource_group_update'] = 'Edit Resource Group';
 $_lang['resource_group_access_contexts'] = 'قائمة مفصولة بفواصل من السياقات التي ينبغي على مجموعة المصدر أن تتصل بها من أجل الخيارات التالية.';
 $_lang['resource_group_automatic_access'] = 'معالج الوصول';
-$_lang['resource_group_automatic_access_desc'] = 'انتبه: قد تحتاج لومض الجلسات بعد إضافة مجموعة المصدر اذا كنت قد أضفت أي من الخصائص بالأسفل.';
+$_lang['resource_group_automatic_access_desc'] = 'Note: You may have to flush sessions after creating the Resource Group if you check any of the options below.';
 $_lang['resource_group_access_admin'] = 'إعطاء وصولية مجموعة المدير أوتوماتيكيا';
 $_lang['resource_group_access_admin_desc'] = 'اذا كان محدد، سوف يتم منح مجموعة المدير وصولية العرض والتعديل لمجموعة المصدر هذه من أجل السياق في الأعلى.';
 $_lang['resource_group_access_anon'] = 'أتوماتيكياص قم بمنح صلاحية مجهولة';
@@ -110,12 +110,12 @@ $_lang['roles_msg'] = 'الدور هو، حسب التعريف، وضع أو ح�
 ضمن المجموعة نفسها، وجميع الأدوار مع سلطة أعلى من 1.';
 $_lang['source_add'] = 'إضافة مورد وسائط';
 $_lang['namespace_add'] = 'إضافة مساحة الاسم';
-$_lang['access_namespace_update'] = 'تحديث وصول مساحة الاسم';
-$_lang['access_namespace_remove'] = 'إزالة الوصول إلى مساحة الاسم';
+$_lang['access_namespace_update'] = 'Edit Namespace Access';
+$_lang['access_namespace_remove'] = 'Delete Namespace Access';
 $_lang['filter_by_namespace'] = 'فلترة حسب مساحة الاسم...';
 
 $_lang['user_group_aw'] = 'معالج الوصول';
-$_lang['user_group_aw_desc'] = 'انتبه: قد تحتاج لومض الجلسات بعد إضافة مجموعة مستخدم اذا كنت قد قمت بتحديد اي من الخيارات بالأسفل.';
+$_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after creating the User Group if you check any of the options below.';
 $_lang['user_group_aw_contexts'] = 'السياقات';
 $_lang['user_group_aw_contexts_desc'] = 'قائمة من السياقات مفصولة بفاصلة والتي من المفترض أن تكون مجموعة المستخدم قادرة على عرضها.';
 $_lang['user_group_aw_manager_policy'] = 'مدير السياسة';
@@ -136,28 +136,28 @@ $_lang['user_group_category_category_desc'] = 'الصنف الذي سيتم من
 $_lang['user_group_category_context_desc'] = 'السياق الهدف للعناصر مع الارتباط مع الصنف أعلاه معهم.';
 $_lang['user_group_category_err_ae'] = 'مجموعة المستخدم لها حق الوصول لهذا التصنيف مسبقاً.';
 $_lang['user_group_category_policy_desc'] = 'السياسة المراد تطبيقها لهذا السياق مع العناصر ضمن الصنف من أجل مجموعة المستخدم هذه. سوف تعطى الصلاحية إلى جميع المستخدمين ضمن مجموعة المستخدم هذه مع الدور الأدنى المختار مع جميع الأذونات ضمن السياسة.';
-$_lang['user_group_category_remove_confirm'] = 'هل أنت متأكد أنك تريد حذف هذا التصنيف من مجموعة المستخدم هذه؟';
+$_lang['user_group_category_remove_confirm'] = 'Are you sure you want to delete this Category from this User Group?';
 $_lang['user_group_context_access'] = 'الوصول إلى السياق';
 $_lang['user_group_context_access_msg'] = 'هنا تستطيع وضع السياقات التي مجموعة المستخدم تستطيع الوصول إليها.';
 $_lang['user_group_context_authority_desc'] = 'الدور الأدني الذي سوف يمتلك حق الوصول إلى الأذونات في السياسة المختارة من أجل هذا السياق. الأدوار التي تمتلك السلطة الأقوى (الأرقام الأدني) سوف يرث حق الوصول هذا أيضاً. في معظم الحالات تستطيع ترك الدور إلى "عضو".';
 $_lang['user_group_context_context_desc'] = 'السياق الذي سوف يمنح الوصول إليه.';
 $_lang['user_group_context_policy_desc'] = 'السياسة التي سوف توضع لهذا السياق من أجل مجموعة المستخدم هذه. هذا سوف يمنح جميع المستخدمين ضمن مجموعة المستخدم هذه الدور الأدنى المحدد لجميع الأذونات في هذه السياسة.';
 $_lang['user_group_context_err_ae'] = 'مجموعة المستخدم لها وصولية مسبقاً على السياق.';
-$_lang['user_group_context_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف هذا السياق من مجموعة المستخدم؟';
+$_lang['user_group_context_remove_confirm'] = 'Are you sure you want to delete this Context from this User Group?';
 $_lang['user_group_resourcegroup_access'] = 'الوصول إلى مجموعة المصدر';
 $_lang['user_group_resourcegroup_access_msg'] = 'هنا تستطيع تحديد مجموعات المصدر التي تستطيع مجموعة المستخدم الوصول إليها.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'الدور الأدني الذي سوف يمتلك حق الوصول إلى الأذونات في السياسة المختارة من أجل هذا السياق. الأدوار التي تمتلك السلطة الأقوى (الأرقام الأدني) سوف يرث حق الوصول هذا أيضاً. في معظم الحالات تستطيع ترك الدور إلى "عضو".';
 $_lang['user_group_resourcegroup_context_desc'] = 'السياق الهدف من أجل العناصر مربوط مع مجموعة المصدر أعلاه.';
 $_lang['user_group_resourcegroup_err_ae'] = 'مجموعة المستخدم لديها وصولية مسبقاً إلى مجموعة المصدر.';
 $_lang['user_group_resourcegroup_policy_desc'] = 'السياسة المراد تطبيقها لهذا السياق مع الموارد ضمن مجموعة المورد من أجل مجموعة المستخدم هذه. سوف تعطى الصلاحية إلى جميع المستخدمين ضمن مجموعة المستخدم هذه مع الدور الأدنى المختار مع جميع الأذونات ضمن السياسة.';
-$_lang['user_group_resourcegroup_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف مجموعة المصدر هذه من مجموعة المستخدم؟';
+$_lang['user_group_resourcegroup_remove_confirm'] = 'Are you sure you want to delete this Resource Group from this User Group?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'مجموعة المصدر المراد منح الوصول إليها.';
 $_lang['user_group_source_access'] = 'الوصول إلى مصدر الوسائط';
 $_lang['user_group_source_access_msg'] = 'هنا تستطيع وضع موارد الوسائط التي تستطيع مجموعة المستخدم الوصول إليها.';
 $_lang['user_group_source_authority_desc'] = 'دور الحد الأدنى الذي سيكون له الوصول إلى الأذونات في السياسة المحددة. الأدوار مع السلطة الأقوى (الأرقام الأدنى) سوف ترث هذا الوصول أيضاً. معظم الحالات يمكن ترك هذا إلى "عضو".';
 $_lang['user_group_source_err_ae'] = 'مجموعة المستخدم لها وصولية مسبقاً إلى مصدر الوسائط هذا.';
 $_lang['user_group_source_policy_desc'] = 'السياسة التي سوف توضع لمجموعة الوسائط من أجل مجموعة المستخدم هذه. هذا سوف يمنح جميع المستخدمين ضمن مجموعة المستخدم هذه الدور الأدنى المحدد لجميع الأذونات في هذه السياسة.';
-$_lang['user_group_source_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف مجموعة المستخدم هذه؟';
+$_lang['user_group_source_remove_confirm'] = 'Are you sure you want to delete this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'مصدر الوسائط الذي سيتم منح الوصولية إليه.';
 $_lang['user_group_user_access_msg'] = 'حدد المستخدمين الذين تريدهم ضمن مجموعة المستخدم هذه.';
 $_lang['user_group_namespace_access'] = 'الوصول لمساحة الاسم';

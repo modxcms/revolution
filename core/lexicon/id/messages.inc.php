@@ -26,8 +26,8 @@ $_lang['filter_by_type'] = 'Filter menurut jenis...';
 
 $_lang['message'] = 'Pesan';
 $_lang['message_create'] = 'Membuat pesan';
-$_lang['message_new'] = 'Pesan Baru';
-$_lang['message_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus pesan ini sepenuhnya?';
+$_lang['message_new'] = 'Membuat pesan';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Kirim Email';
 $_lang['message_err_nfs'] = 'Pesan tidak ditemukan.';
 $_lang['message_err_not_specified_subject'] = 'Subjek tidak ditentukan!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Anda tidak diizinkan untuk menghapus pesa
 $_lang['message_err_save'] = 'Terjadi kesalahan saat menyimpan pesan.';
 
 $_lang['messages'] = 'Pesan';
-$_lang['messages_desc'] = 'Di sini Anda dapat mengatur pesan yang dikirim oleh Anda atau yang dikirim oleh pengguna lain kepada Anda. Anda bisa membalas, meneruskan pesan, juga bisa Anda hapus atau tandai sebagai pesan yang telah ditentukan.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'Semua orang';
 $_lang['messages_compose'] = 'Menulis pesan';
 $_lang['messages_forward'] = 'Teruskan';

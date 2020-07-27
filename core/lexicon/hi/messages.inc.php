@@ -26,8 +26,8 @@ $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'Message';
 $_lang['message_create'] = 'Message बनाएँ';
-$_lang['message_new'] = 'नया Message';
-$_lang['message_remove_confirm'] = 'आप सुनिश्चित हैं कि आप इस Message को पूरी तरह निकालने के लिए चाहते हैं?';
+$_lang['message_new'] = 'Message बनाएँ';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'ईमेल भेजें';
 $_lang['message_err_nfs'] = 'Message नहीं मिला।';
 $_lang['message_err_not_specified_subject'] = 'विषय निर्दिष्ट नहीं किया गया!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='आप इस Message को हटान
 $_lang['message_err_save'] = 'Message सहेजते समय एक त्रुटि उत्पन्न हुई।';
 
 $_lang['messages'] = 'Messages';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can remove or mark as read specified messages.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'हर कोई';
 $_lang['messages_compose'] = 'एक Message लिखें';
 $_lang['messages_forward'] = 'फॉरवर्ड';

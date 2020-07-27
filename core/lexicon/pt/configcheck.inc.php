@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Diretório de imagens não tem permissão de escrita';
 $_lang['configcheck_images_msg'] = 'O diretório de imagens não tem permissões para escrita, ou não existe. Isto siginifica que as funções do Gerenciador de Imagens não funcionaram no editor!';
 $_lang['configcheck_installer'] = 'Instalador ainda presente.';
-$_lang['configcheck_installer_msg'] = 'O diretório setup/ ainda tem o instalador do MODx. Imagine o que pode acontecer se alguma pessoa má encontra esta pasta e roda o indalador! Ele provavelmente não vai conseguir ir muito longe porque ele terá que informar algumas informações de usuários presentes na base de dados, mas de qualquer maneira é melhor remover esta pasta do seu servidor.';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Número de entradas incorreto no arquivo de linguagem';
 $_lang['configcheck_lang_difference_msg'] = 'A língua selecionada tem um número diferente de entradas que a língua padrão. Isto não é necessáriamente um problem, mas pode significar que o arquivo de linguagem deve ser atualizado.';
 $_lang['configcheck_notok'] = 'Um ou mais detalhes de configuração não estão de acordo:';

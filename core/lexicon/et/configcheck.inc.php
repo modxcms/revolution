@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Piltide (Images) kaust ei ole kirjutatav';
 $_lang['configcheck_images_msg'] = 'Piltide kaust ei ole kirjutatav või ei ekisteeri. See tähendab, et Image Manager funktsioonid ei tööta!';
 $_lang['configcheck_installer'] = 'Installer ikka eksiteerib';
-$_lang['configcheck_installer_msg'] = 'Kataloog setup/ sisaldab MODX installerit. Kujuta ette, mis võib juhtuda, kui võõras leiab selle kausta ja jooksutab installerit! Ta arvatavasti ei jõuaks kaugele, kuna ta peab sisestama informatsiooni andmebaasi kasutaja kohta aga ikkagi parim oleks eemaldada see kaust serverist.';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Ebakorrketne arv sissekanded keele failis';
 $_lang['configcheck_lang_difference_msg'] = 'Hetkel valitud keelel on erinev arv sissekanded kui põhikeele failis. See ei pruugi olla probleem, kuid see võib tähendada, et keele fail vajab uuendust.';
 $_lang['configcheck_notok'] = 'Mõned konfiguratiooni detailid vajavad tähelepanu: ';

@@ -10,12 +10,12 @@
 $_lang['events'] = 'Události';
 $_lang['system_event'] = 'Systémová událost';
 $_lang['system_events'] = 'Systémové události';
-$_lang['system_events.desc'] = 'Systémové události jsou události v MODX, na které jsou registrovány pluginy. Ty jsou "spouštěny" v rámci MODX kódu, umožňují pluginům interakci s MODX kódem a umožňují přidat vlastní funkce bez zásahu do zdrojového kódu MODX. Můžete zde také vytvořit vlastní události pro váš vlastní projekt. Výchozí události MODX nelze odstranit, odstranit lze pouze vaše vlastní události.';
+$_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot delete core events, only your own.';
 $_lang['system_events.search_by_name'] = 'Hledat podle názvu události';
-$_lang['system_events.create'] = 'Vytvořit novou událost';
+$_lang['system_events.create'] = 'Create Event';
 $_lang['system_events.name_desc'] = 'Název události. Který byste měli použít v rámci volání &dollar;modx->invokeEvent(název, vlastnosti).';
 $_lang['system_events.groupname'] = 'Skupina';
-$_lang['system_events.groupname_desc'] = 'Název skupiny, kam tato událost patří. Vyberte existující nebo zadejte nový název skupiny.';
+$_lang['system_events.groupname_desc'] = 'The name of the group where the event belongs to. Select an existing one or type a new group name.';
 $_lang['system_events.plugins'] = 'Pluginy';
 $_lang['system_events.plugins_desc'] = 'Seznam pluginů připojených k události. Vyzvedněte pluginy, které by měly být připojeny k události.';
 
@@ -27,10 +27,10 @@ $_lang['system_events.service_4'] = 'Události cache';
 $_lang['system_events.service_5'] = 'Události šablon';
 $_lang['system_events.service_6'] = 'Uživatelem definované události';
 
-$_lang['system_events.remove'] = 'Odstranit událost';
-$_lang['system_events.remove_confirm'] = 'Opravdu chcete odstranit událost <b>[[+name]]</b>? Odstranění je nevratné!';
+$_lang['system_events.remove'] = 'Delete Event';
+$_lang['system_events.remove_confirm'] = 'Are you sure you want to delete the <b>[[+name]]</b> event? This is irreversible!';
 
 $_lang['system_events_err_ns'] = 'Název systémové události není zadán.';
 $_lang['system_events_err_ae'] = 'Název systémové události již existuje.';
 $_lang['system_events_err_startint'] = 'Název nesmí začínat číslicí.';
-$_lang['system_events_err_remove_not_allowed'] = 'Nejste oprávněn odstranit tuto systémovou událost.';
+$_lang['system_events_err_remove_not_allowed'] = 'You\'re not allowed to delete this System Event.';

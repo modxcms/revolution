@@ -26,8 +26,8 @@ $_lang['filter_by_type'] = 'Фільтр па тыпу...';
 
 $_lang['message'] = 'Паведамленне';
 $_lang['message_create'] = 'Стварыць паведамленне';
-$_lang['message_new'] = 'Новае паведамленне';
-$_lang['message_remove_confirm'] = 'Вы сапраўды жадаеце цалкам выдаліць гэтае паведамленне?';
+$_lang['message_new'] = 'Стварыць паведамленне';
+$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Даслаць еmail';
 $_lang['message_err_nfs'] = 'Паведамленне не знойдзена.';
 $_lang['message_err_not_specified_subject'] = 'Тэма не пазначана!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='У вас недастаткова пра
 $_lang['message_err_save'] = 'Адбылася памылка пры захаванні паведамлення.';
 
 $_lang['messages'] = 'Паведамленні';
-$_lang['messages_desc'] = 'Тут вы можаце кіраваць паведамленнямі, якія былі адасланыя вамі або адасланыя іншымі карыстальнікамі вам. Вы можаце адказваць, перасылаць паведамленні, таксама вы можаце выдаліць ці адзначыць як прачытаныя абраныя паведамленні.';
+$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
 $_lang['messages_all'] = 'Хто заўгодна';
 $_lang['messages_compose'] = 'Напісаць паведамленне';
 $_lang['messages_forward'] = 'Пераслаць';

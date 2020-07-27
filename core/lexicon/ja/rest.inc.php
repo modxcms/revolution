@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['error'] = 'エラー';
-$_lang['rest.err_class_remove'] = '[[+class_key]] の削除時にエラーが発生しました。';
+$_lang['rest.err_class_remove'] = 'An error occurred while trying to delete the [[+class_key]]';
 $_lang['rest.err_class_save'] = '[[+class_key]] の保存時にエラーが発生しました。';
 $_lang['rest.err_field_ns'] = '[[+field]] が指定されていません。';
 $_lang['rest.err_field_required'] = 'このフィールドは入力必須です。';

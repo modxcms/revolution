@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'دایرکتوری تصاویر (images) دارای مجوز نوشتن نیست';
 $_lang['configcheck_images_msg'] = 'دایرکتوری تصاویر (images) یا موجود نیست و یا دارای مجوز نوشتن نیست. این بدین معناست که امکانات ابزار «مدیریت تصاویر» در ویرایشگر، قابل استفاده نخواهد بود!';
 $_lang['configcheck_installer'] = 'نصب کننده‌ی مادایکس همچنان قابل دسترسی است';
-$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to remove this folder from your server. It is located at: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'فایل زبان دارای تعداد نادرستی از کلیدهاست';
 $_lang['configcheck_lang_difference_msg'] = 'The currently selected language has a different number of entries than the default language. While not necessarily a problem, this may mean the language file needs to be updated.';
 $_lang['configcheck_notok'] = 'برخی از موارد پیکربندی به درستی بررسی نشدند: ';
