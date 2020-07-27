@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Nincs művelet';
 $_lang['no_category'] = 'uncategorized';
 $_lang['no_records_found'] = 'Nem található bejegyzés.';
 $_lang['no_results'] = 'Nincs találat';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Kapcsolat nélkül';
 $_lang['ok'] = 'Rendben';
 $_lang['old_key'] = 'Old Key';

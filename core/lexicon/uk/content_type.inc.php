@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Основне';
 $_lang['content_type_header_tab'] = 'Користувацькі заголовки';
 $_lang['content_type_header_title'] = 'Створити/редагувати заголовок';
 $_lang['content_type_new'] = 'Новий тип вмісту';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Видалити тип вмісту';
 $_lang['content_type_remove_confirm'] = 'Ви впевнені, що хочете видалити цей тип вмісту?';
 $_lang['content_types'] = 'Типи вмісту';

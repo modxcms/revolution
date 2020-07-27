@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Autorise l\'ajout de nouveaux éléments';
 $_lang['combo_allowaddnewdata_desc'] = 'Autorise l\'ajout de nouveaux éléments n\'existant pas déjà dans la liste. Non par défaut.';
 $_lang['combo_forceselection'] = 'Forcer la sélection depuis la liste';
 $_lang['combo_forceselection_desc'] = 'Si vous utilisez l\'auto-complétion et activez cette option, cela n\'autorisera que l\'entrée d\'éléments existant déjà dans la liste.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = '« Texte de liste vide »';
 $_lang['combo_listempty_text_desc'] = 'Si vous utilisez l\'auto-complétion et que l\'utilisateur saisi une valeur n\'existant pas dans la liste, cela affichera ce texte.';
 $_lang['combo_listheight'] = 'Largeur de liste';

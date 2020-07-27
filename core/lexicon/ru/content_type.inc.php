@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Основное';
 $_lang['content_type_header_tab'] = 'Пользовательские заголовки';
 $_lang['content_type_header_title'] = 'Создать/редактировать заголовок';
 $_lang['content_type_new'] = 'Новый тип содержимого';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Удалить тип содержимого';
 $_lang['content_type_remove_confirm'] = 'Вы уверены, что хотите удалить этот тип содержимого?';
 $_lang['content_types'] = 'Типы содержимого';

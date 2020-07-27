@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = '新たな項目の追加を許可';
 $_lang['combo_allowaddnewdata_desc'] = '「はい」を選ぶと、リストに存在しない項目の追加を許可します。デフォルトは「いいえ」です。';
 $_lang['combo_forceselection'] = 'オプション値からの入力を強制';
 $_lang['combo_forceselection_desc'] = '「はい」を指定すると、オプション値からの入力が強制されます。一致するものがオプション値にない場合、入力は無視され元の値に戻ります。';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'オプション値と不一致時のメッセージ';
 $_lang['combo_listempty_text_desc'] = '入力した値がオプション値に含まれていない場合、ここで指定した値がリストの代わりに表示されます。';
 $_lang['combo_listheight'] = 'List Height';

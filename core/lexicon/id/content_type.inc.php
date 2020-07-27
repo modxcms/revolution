@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Utama';
 $_lang['content_type_header_tab'] = 'Header kustom';
 $_lang['content_type_header_title'] = 'Membuat/mengedit header';
 $_lang['content_type_new'] = 'Jenis konten baru';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Menghapus jenis konten';
 $_lang['content_type_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus jenis konten ini?';
 $_lang['content_types'] = 'Jenis konten';

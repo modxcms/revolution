@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Główny';
 $_lang['content_type_header_tab'] = 'Niestandardowe nagłówki';
 $_lang['content_type_header_title'] = 'Utwórz/Edytuj nagłówek';
 $_lang['content_type_new'] = 'Nowy typ zawartości';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Usuń typ zawartości';
 $_lang['content_type_remove_confirm'] = 'Czy na pewno chcesz usunąć ten typ zawartości?';
 $_lang['content_types'] = 'Formaty zawartości';

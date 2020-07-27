@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'नए आइटम जोड़ने की
 $_lang['combo_allowaddnewdata_desc'] = 'हाँ, की अनुमति देता है जब आइटम सूची में पहले से मौजूद नहीं है कि जोड़ा जाएगा। डिफ़ॉल्ट पर सं.';
 $_lang['combo_forceselection'] = 'चुनाव में फोर्स सूची में';
 $_lang['combo_forceselection_desc'] = 'इस हाँ करने के लिए सेट कर दिया जाता है, तो टाइप-आगे का उपयोग अगर, केवल सूची में आइटम्स की inputting अनुमति देते हैं।';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Empty List Text';
 $_lang['combo_listempty_text_desc'] = 'प्रकार आगे-सूची में कोई मान नहीं रही है, और user types के हैं, तो इस पाठ प्रदर्शित करते हैं।';
 $_lang['combo_listheight'] = 'सूची ऊँचाई';

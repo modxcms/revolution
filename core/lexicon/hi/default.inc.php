@@ -293,6 +293,7 @@ $_lang['no_action'] = 'कोई Action नहीं';
 $_lang['no_category'] = 'uncategorized';
 $_lang['no_records_found'] = 'रिकॉर्ड नहीं मिला।';
 $_lang['no_results'] = 'कोई परिणाम नहीं मिला';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'ऑफ़लाइन';
 $_lang['ok'] = 'ठीक है';
 $_lang['old_key'] = 'पुरानी Key';

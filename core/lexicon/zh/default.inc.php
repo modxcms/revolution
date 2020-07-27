@@ -293,6 +293,7 @@ $_lang['no_action'] = '无行为';
 $_lang['no_category'] = '未分类';
 $_lang['no_records_found'] = '未找到记录';
 $_lang['no_results'] = '未找到结果';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = '离线';
 $_lang['ok'] = '确定';
 $_lang['old_key'] = '旧键';

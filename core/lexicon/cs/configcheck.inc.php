@@ -21,7 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'To znamená, že chybová str
 $_lang['configcheck_errorpage_unpublished'] = 'Chybová stránka portálu není publikována nebo neexistuje.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Znamená, že chybová stránka není dostupná pro návštěvníky webu. Publikujte tuto stránku a ujistěte se, že je chybová stránka definována v menu "Systém &gt; Konfigurace systému".';
 $_lang['configcheck_htaccess'] = 'Složka "core" je přístupná z webu';
-$_lang['configcheck_htaccess_msg'] = 'MODX zjistil, že složka "core" je (částečně) přístupná veřejnosti. <strong>To není doporučeno a jedná se o bezpečnostní riziko.</strong> Pokud vaše instalace MODX běží na webserveru Apache měli by jste alespoň nastavit soubor .htaccess uvnitř složky "core" <em>[[+fileLocation]]</em>. To lze snadno provést přejmenování existujícího příkladového souboru ht.access na soubor .htaccess. <p>Pro další informace jak zlepšit zabezpečení MODX si přečtěte článek <a href="https://rtfm.modx.com/revolution/2.x/administering-your-site/security/hardening-modx-revolution">Hardening MODX Revolution [en]</a>.</p> Pokud máte vše správně nastaveno, pak by například otevření odkazu <a href="[[+checkUrl]]" target="_blank"> Changelog</a> mělo zobrazit hlášení 403 (Přístup odepřen) nebo ještě lépe 404 (Stránka nenalezena). Pokud se zobrazí obsah changelog souboru v prohlížeči, pak je stále něco nesprávně nastaveno a je třeba upravit konfiguraci, nejlépe zavolejte odborníka.';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+<strong>This is not recommended and a security risk.</strong>
+If your MODX installation is running on a Apache webserver
+you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+This can be easily done by renaming the existing ht.access example file there to .htaccess.
+<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/current/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
+for further information about securing your site.</p>
+If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
+there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
 $_lang['configcheck_images'] = 'Do složky pro obrázky nelze zapisovat';
 $_lang['configcheck_images_msg'] = 'Složka pro obrázky je pouze pro čtení nebo neexistuje. To znamená, že správce obrázků nebude pracovat správně!';
 $_lang['configcheck_installer'] = 'Instalátor stále existuje!';

@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Pää';
 $_lang['content_type_header_tab'] = 'Mukautetut ylätunnisteet';
 $_lang['content_type_header_title'] = 'Luo ja Muokkaa ylätunnistetta';
 $_lang['content_type_new'] = 'Uusi Sisältötyyppi';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Poista Sisältötyyppi';
 $_lang['content_type_remove_confirm'] = 'Oletko varma, että haluat poistaa tämän Sisältötyypin?';
 $_lang['content_types'] = 'Sisältötyypit';
