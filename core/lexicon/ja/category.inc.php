@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['categories'] = 'カテゴリー';
-$_lang['category_confirm_delete'] = 'カテゴリーを削除しますか？　このカテゴリーに属している全てのエレメントは「カテゴリーなし」に分類されます。';
+$_lang['category_confirm_delete'] = 'Are you sure you want to delete this category? All elements in this category will be filed to uncategorized.';
 $_lang['category_create'] = 'カテゴリーを作成';
 $_lang['category_err_ae'] = '同じ名前のカテゴリーが既に存在するため、このカテゴリーを保存できませんでした。';
 $_lang['category_err_create'] = 'カテゴリーの作成中にエラーが発生しました。';
@@ -16,7 +16,7 @@ $_lang['category_err_nf'] = 'カテゴリーが見つかりませんでした。
 $_lang['category_err_nfs'] = '%sに関連するカテゴリーは見つかりませんでした。';
 $_lang['category_err_ns'] = 'カテゴリーが指定されていません。';
 $_lang['category_err_ns_name'] = '正しいカテゴリー名を指定してください。';
-$_lang['category_err_remove'] = 'カテゴリーの削除中にエラーが発生しました。';
+$_lang['category_err_remove'] = 'An error occurred while trying to delete the category.';
 $_lang['category_err_save'] = 'カテゴリーの保存中にエラーが発生しました。';
 $_lang['category_existing'] = '存在するカテゴリー';
 $_lang['category_heading'] = 'カテゴリー';
@@ -27,4 +27,4 @@ $_lang['category_no_snippets'] = 'このカテゴリーに関するスニペッ�
 $_lang['category_no_templates'] = 'このカテゴリーに属するテンプレートはありません。';
 $_lang['category_no_template_variables'] = 'このカテゴリーに属するテンプレート変数はありません。';
 $_lang['category_rename'] = 'カテゴリー名の変更';
-$_lang['category_remove'] = 'カテゴリーの削除';
+$_lang['category_remove'] = 'Delete Category';
