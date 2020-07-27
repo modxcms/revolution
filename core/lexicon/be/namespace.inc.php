@@ -7,12 +7,12 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Прастора імёнаў';
-$_lang['namespace_create'] = 'Новая прастора імёнаў';
+$_lang['namespace_create'] = 'Стварыць прастору імёнаў';
 $_lang['namespace_err_create'] = 'Адбылася памылка пры спробе стварыць прастору імёнаў.';
 $_lang['namespace_err_nf'] = 'Прастора імёнаў не знойдзена.';
 $_lang['namespace_err_nfs'] = 'Не знойдзена прастора імёнаў з імем: %s';
 $_lang['namespace_err_ns'] = 'Прастора імёнаў не пазначана.';
-$_lang['namespace_err_remove'] = 'Адбылася памылка пры спробе выдаліць прастору імёнаў.';
+$_lang['namespace_err_remove'] = 'An error occurred while trying to delete the namespace.';
 $_lang['namespace_err_save'] = 'Адбылася памылка пры спробе захаваць прастору імёнаў.';
 $_lang['namespace_assets_path'] = 'Шлях да актываў (assets)';
 $_lang['namespace_assets_path_desc'] = 'Пазначце тут абсалютны шлях да актываў для гэтай прасторы імёнаў. Мы можаце выкарыстоўваць запаўняльнікі накшталт {assets_path}. Прыклад:
@@ -25,6 +25,6 @@ $_lang['namespace_remove'] = 'Выдаліць прастору імёнаў';
 $_lang['namespace_remove_confirm'] = 'Вы сапраўды жадаеце выдаліць прастору імёнаў "[[+name]]" і ўвесь звязаны з ім змест?';
 $_lang['namespace_remove_multiple'] = 'Выдаліць прасторы імёнаў';
 $_lang['namespace_remove_multiple_confirm'] = 'Вы сапраўды жадаеце выдаліць гэтыя прасторы імёнаў і ўвесь звязаны з імі змест?';
-$_lang['namespace_update'] = 'Абнавіць прастору імёнаў';
+$_lang['namespace_update'] = 'Edit Namespace';
 $_lang['namespaces'] = 'Прасторы імёнаў';
 $_lang['namespaces_desc'] = 'Прасторы імёнаў з\'яўляюцца глабальнымі ідэнтыфікатарамі для пакетаў і кампанентаў, якія рэгіструюць аб\'екты пакетаў, запісы слоўнікаў і рэсурсы ўсе разам.';
