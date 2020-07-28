@@ -27,7 +27,7 @@ $_lang['filter_by_type'] = 'Фильтр по типу...';
 $_lang['message'] = 'Сообщение';
 $_lang['message_create'] = 'Создать сообщение';
 $_lang['message_new'] = 'Создать сообщение';
-$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
+$_lang['message_remove_confirm'] = 'Вы уверены, что хотите удалить это сообщение?';
 $_lang['message_send_email'] = 'Отправить письмо';
 $_lang['message_err_nfs'] = 'Сообщение не найдено.';
 $_lang['message_err_not_specified_subject'] = 'Не указана тема!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='У вас недостаточно пра
 $_lang['message_err_save'] = 'Произошла ошибка при сохранении сообщения.';
 
 $_lang['messages'] = 'Сообщения';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
+$_lang['messages_desc'] = 'Здесь вы можете управлять сообщениями, которые были отправлены вами или которые были отправлены другими пользователями вам. Вы можете ответить, переслать сообщения, удалить или пометить выбранные сообщения как прочитанные.';
 $_lang['messages_all'] = 'Кто угодно';
 $_lang['messages_compose'] = 'Написать сообщение';
 $_lang['messages_forward'] = 'Переслать';
