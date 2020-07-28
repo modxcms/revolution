@@ -36,19 +36,19 @@ $_lang['namespace'] = 'Namnrymd';
 $_lang['namespace_desc'] = 'Den namnrymd som denna inställning är associerad med. Standardlexikonämnet kommer att laddas för denna namnrymd när inställningar hämtas.';
 $_lang['namespace_filter'] = 'Filtrera efter namnrymd...';
 $_lang['search_by_key'] = 'Sök på nyckel...';
-$_lang['setting_create'] = 'Create Setting';
+$_lang['setting_create'] = 'Skapa inställning';
 $_lang['setting_err'] = 'Kontrollera dina uppgifter i följande fält: ';
 $_lang['setting_err_ae'] = 'Det finns redan en inställning med den nyckeln. Ange ett annat nyckelnamn.';
 $_lang['setting_err_nf'] = 'Inställningen kunde inte hittas.';
 $_lang['setting_err_ns'] = 'Inställningen är inte specificerad';
 $_lang['setting_err_not_editable'] = 'Den här inställningen kan inte redigeras i rutnätet. Använd kugghjuls/snabbmenyn för att redigera värdet!';
-$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
+$_lang['setting_err_remove'] = 'Ett fel inträffade när inställningen skulle tas bort.';
 $_lang['setting_err_save'] = 'Ett fel inträffade när inställningen skulle sparas.';
 $_lang['setting_err_startint'] = 'Inställningar får inte börja med en siffra.';
 $_lang['setting_err_invalid_document'] = 'Det finns inget dokument som har ID %d. Ange ett existerande dokument.';
 $_lang['setting_remove'] = 'Ta bort inställning';
 $_lang['setting_remove_confirm'] = 'Är du säker på att du vill ta bort den här inställningen? Det kan innebära att din MODX-installation slutar fungera.';
-$_lang['setting_update'] = 'Edit Setting';
+$_lang['setting_update'] = 'Redigera inställning';
 $_lang['settings_after_install'] = 'Eftersom detta är en ny installation, måste du gå igenom dessa inställningar och ändra det du vill. När du är klar med kontrollen av alla inställningar, klicka på \'Spara\' för att uppdatera inställningsdatabasen.<br /><br />';
 $_lang['settings_desc'] = 'Här gör du allmänna inställningar och konfigurationer för användargränssnittet i MODX hanterare, samt för hur din MODX-webbplats fungerar. <b>Varje inställning blir tillgänglig via platshållaren [[++key]].</b><br />Dubbelklicka i värdekolumnen för den inställning som du vill redigera för att göra ändringarna dynamiskt i rutnätet eller högerklicka på en inställning för att se fler val. Du kan också klicka på plustecknet för att få en beskrivning av inställningen.';
 $_lang['settings_furls'] = 'Vänliga URL:er';
@@ -686,19 +686,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Ange ID för den resurs du vill 
 $_lang['setting_site_unavailable_page_err'] = 'Ange ett dokument-ID för sidan som visas när webbplatsen inte är tillgänglig.';
 
 $_lang['setting_static_elements_automate_templates'] = 'Automatisera statiska element för mallar?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för mallar.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Automatisera statiska element för mallvariabler?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för mallvariabler.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automatisera statiska element för chunks?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för chunks.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Automatisera statiska element för snippets?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för snippets.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Automatisera statiska element för plugins?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Detta kommer att automatisera hanteringen av statiska filer, till exempel skapa och ta bort statiska filer för plugins.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Standardmediakällan för statiska element';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Ange en standardmediakälla som du vill spara de statiska elementen i.';

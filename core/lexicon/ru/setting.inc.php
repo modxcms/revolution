@@ -36,19 +36,19 @@ $_lang['namespace'] = 'Пространство имён';
 $_lang['namespace_desc'] = 'Пространство имён, с которым этот параметр связан. Тема словаря «default» для этого пространства имён будет использована при просмотре.';
 $_lang['namespace_filter'] = 'Отбор по пространству имён...';
 $_lang['search_by_key'] = 'Поиск по ключу...';
-$_lang['setting_create'] = 'Create Setting';
+$_lang['setting_create'] = 'Создать настройку';
 $_lang['setting_err'] = 'Пожалуйста, проверьте данные для следующих полей: ';
 $_lang['setting_err_ae'] = 'Параметр с таким ключом уже есть. Пожалуйста, укажите другой ключ.';
 $_lang['setting_err_nf'] = 'Параметр не найден.';
 $_lang['setting_err_ns'] = 'Параметр не указан';
 $_lang['setting_err_not_editable'] = 'Этот параметр не может быть отредактирован в сетке. Пожалуйста, используйте меню передачи/контекста для редактирования значения!';
-$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
+$_lang['setting_err_remove'] = 'Произошла ошибка при попытке удалить настройку.';
 $_lang['setting_err_save'] = 'При попытке сохранения параметра произошла ошибка.';
 $_lang['setting_err_startint'] = 'Название параметра не может начинаться с цифры.';
 $_lang['setting_err_invalid_document'] = 'Документ с ID %d не существует. Пожалуйста, укажите существующий документ.';
 $_lang['setting_remove'] = 'Удалить параметр';
 $_lang['setting_remove_confirm'] = 'Вы уверены, что хотите удалить этот параметр? Это может нарушить работу MODX.';
-$_lang['setting_update'] = 'Edit Setting';
+$_lang['setting_update'] = 'Редактировать настройку';
 $_lang['settings_after_install'] = 'В случае новой установки вам необходимо проконтролировать введенные настройки, и, при необходимости, изменить их. После того, как вы проверите настройки, нажмите «Сохранить» для обновления настроек базы данных.<br /><br />';
 $_lang['settings_desc'] = 'Здесь вы можете изменить основные опции и настройки системы управления MODX, а также сайта. <b>Каждая настройка будет доступна через плейсхолдер [[++key]].</b><br />Дважды нажмите по параметру в колонке «Значение» для редактирования, или нажмите правой кнопкой мыши для других действий. Чтобы увидеть описание настройки, нажмите на «+».';
 $_lang['settings_furls'] = 'Дружественные URL';
@@ -686,19 +686,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Введите ID ресурса
 $_lang['setting_site_unavailable_page_err'] = 'Пожалуйста, укажите ID ресурса для страницы ошибки 503 «Сайт недоступен».';
 
 $_lang['setting_static_elements_automate_templates'] = 'Автоматизировать статические элементы для шаблонов?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Это автоматизирует обработку статических файлов, таких как создание и удаление статических файлов для шаблонов.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Автоматизировать статические элементы для TV?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Это автоматизирует обработку статических файлов, таких как создание и удаление статических файлов для TV.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Автоматизировать статические элементы для чанков?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Это автоматизирует обработку статических файлов, таких как создание и удаление статических файлов для чанков.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Автоматизировать статические элементы для сниппетов?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Это автоматизирует обработку статических файлов, таких как создание и удаление статических файлов для сниппетов.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Автоматизировать статические элементы для плагинов?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Это автоматизирует обработку статических файлов, таких как создание и удаление статических файлов для плагинов.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Источник файлов для статических элементов по умолчанию';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Укажите источник файлов по умолчанию, где будут храниться статические элементы.';

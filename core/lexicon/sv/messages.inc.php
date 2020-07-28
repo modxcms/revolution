@@ -27,7 +27,7 @@ $_lang['filter_by_type'] = 'Filtrera efter typ...';
 $_lang['message'] = 'Meddelande';
 $_lang['message_create'] = 'Skapa meddelande';
 $_lang['message_new'] = 'Skapa meddelande';
-$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
+$_lang['message_remove_confirm'] = 'Är du säker på att du vill ta bort detta meddelande helt och hållet?';
 $_lang['message_send_email'] = 'Skicka e-post';
 $_lang['message_err_nfs'] = 'Kunde inte hitta meddelandet.';
 $_lang['message_err_not_specified_subject'] = 'Inget ämne angivet!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Du har inte behörighet att ta bort det h
 $_lang['message_err_save'] = 'Ett fel inträffade när meddelandet sparades.';
 
 $_lang['messages'] = 'Meddelanden';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
+$_lang['messages_desc'] = 'Här kan du hantera meddelanden som skickats av dig eller som skickats av andra användare till dig. Du kan besvara eller vidarebefordra meddelanden. Du kan också ta bort eller markera meddelanden som lästa.';
 $_lang['messages_all'] = 'Alla';
 $_lang['messages_compose'] = 'Skapa ett meddelande';
 $_lang['messages_forward'] = 'Vidarebefordra';
