@@ -18,13 +18,18 @@ class LanguageManagerController extends modParsedManagerController
     {
         $targetLanguage = $this->modx->getOption('switch', $scriptProperties, 'en');
 
+        $targetPage = MODX_MANAGER_URL;
+        if (!empty($scriptProperties['page'])) {
+            $targetPage = urldecode($scriptProperties['page']);
+        }
+
         if (!in_array($targetLanguage, $this->modx->lexicon->getLanguageList())) {
             return;
         }
 
         $_SESSION['manager_language'] = $targetLanguage;
 
-        $this->modx->sendRedirect(MODX_MANAGER_URL);
+        $this->modx->sendRedirect($targetPage);
     }
 
     public function getPageTitle()
