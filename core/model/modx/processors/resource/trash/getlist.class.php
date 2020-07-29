@@ -59,7 +59,11 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
         if (!empty($context)) {
             $c->where(array('modResource.context_key' => $context));
         }
-        $c->where(array('modResource.id:IN' => $this->getDeleted()));
+        if ($deleted = $this->getDeleted()) {
+            $c->where(array('modResource.id:IN' => $deleted));
+        } else {
+            $c->where(array('modResource.deleted' => true));
+        }
 
         return $c;
     }
@@ -67,7 +71,6 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
     public function getDeleted()
     {
         $c = $this->modx->newQuery($this->classKey);
-        $c->leftJoin($this->classKey, 'Children');
         $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', array('id', 'context_key')));
         $c->where(array(
             $this->classKey . '.deleted' => true
