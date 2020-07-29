@@ -20,11 +20,11 @@ $_lang['configcheck_errorpage_unavailable'] = 'Your site\'s Error page is not av
 $_lang['configcheck_errorpage_unavailable_msg'] = 'This means that your Error page is not accessible to normal web surfers or does not exist. This can lead to a recursive looping condition and many errors in your site logs. Make sure there are no webuser groups assigned to the page.';
 $_lang['configcheck_errorpage_unpublished'] = 'Your site\'s Error page is not published or does not exist.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'This means that your Error page is inaccessible to the general public. Publish the page or make sure it is assigned to an existing document in your site tree in the System &gt; System Settings menu.';
-$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
+$_lang['configcheck_htaccess'] = 'Core directory is accessible by web';
+$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core directory is (partially) accessible to the public.
 <strong>This is not recommended and a security risk.</strong>
 If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
+you should at least set up the .htaccess file inside the core directory <em>[[+fileLocation]]</em>.
 This can be easily done by renaming the existing ht.access example file there to .htaccess.
 <p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
 for further information about securing your site.</p>
@@ -34,7 +34,7 @@ there in the browser, something is still wrong and you need to reconfigure or ca
 $_lang['configcheck_images'] = 'Images directory not writable';
 $_lang['configcheck_images_msg'] = 'The images directory isn\'t writable, or doesn\'t exist. This means the Image Manager functions in the editor will not work!';
 $_lang['configcheck_installer'] = 'Installer still present';
-$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this directory and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this directory from your server. It is located at: [[+path]]';
 $_lang['configcheck_lang_difference'] = 'Incorrect number of entries in language file';
 $_lang['configcheck_lang_difference_msg'] = 'The currently selected language has a different number of entries than the default language. While not necessarily a problem, this may mean the language file needs to be updated.';
 $_lang['configcheck_notok'] = 'One or more configuration details didn\'t check out OK: ';

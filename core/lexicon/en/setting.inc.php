@@ -451,7 +451,7 @@ $_lang['setting_modRequest.class'] = 'Request Handler Class';
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'Media Browser Tree Hide Files';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside directories are not displayed in the Media Browser source tree.';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
@@ -468,8 +468,8 @@ $_lang['setting_modx_charset_desc'] = 'Please select which character encoding yo
 $_lang['setting_new_file_permissions'] = 'New File Permissions';
 $_lang['setting_new_file_permissions_desc'] = 'When uploading a new file in the File Manager, the File Manager will attempt to change the file permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
 
-$_lang['setting_new_folder_permissions'] = 'New Folder Permissions';
-$_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in the File Manager, the File Manager will attempt to change the folder permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
+$_lang['setting_new_folder_permissions'] = 'New Directory Permissions';
+$_lang['setting_new_folder_permissions_desc'] = 'When creating a new directory in the File Manager, the File Manager will attempt to change the directory permissions to those entered in this setting. This may not work on some setups, such as IIS, in which case you will need to manually change the permissions.';
 
 $_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
