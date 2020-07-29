@@ -94,6 +94,11 @@ class modMenu extends modAccessibleObject
 
         $this->xpdo->lexicon->load('core:languages');
 
+        $currentPage = '';
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            $currentPage = '&page=' . urlencode($_SERVER['REQUEST_URI']);
+        }
+
         foreach ($languages as $code => &$language) {
             $language = [
                 'id' => $code,
@@ -104,7 +109,7 @@ class modMenu extends modAccessibleObject
                 ),
                 'parent' => 'language',
                 'action' => 'language',
-                'params' => '&switch=' . $code,
+                'params' => '&switch=' . $code . $currentPage,
                 'namespace' => 'core',
                 'permissions' => ''
             ];
