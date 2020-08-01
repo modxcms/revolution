@@ -182,11 +182,11 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
 
     ,createSource: function() {
-        MODx.loadPage('system/Source/Create');
+        MODx.loadPage('system/source/create');
     }
 
     ,updateSource: function() {
-        MODx.loadPage('Source/Update', 'id='+this.menu.record.id);
+        MODx.loadPage('source/update', 'id='+this.menu.record.id);
     }
 
     ,duplicateSource: function(btn,e) {

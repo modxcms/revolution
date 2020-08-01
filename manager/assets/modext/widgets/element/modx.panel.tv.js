@@ -450,35 +450,17 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     }
 
     ,toggleStaticFile: function(cb) {
-        var flds = ['modx-tv-static-file','modx-tv-static-source'];
-        var fld;
-        var i;
-        var fldHelp;
+        var flds = ['modx-tv-static-file','modx-tv-static-file-help','modx-tv-static-source','modx-tv-static-source-help'];
+        var fld,i;
         if (cb.checked) {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) {
-                    fld.show();
-                    fld.updateBox(fld.getResizeEl().parent().getBox());
-
-                    fldHelp = Ext.getCmp(flds[i] + '-help');
-                    if (fldHelp) {
-                        fldHelp.show();
-                    }
-
-                }
+                if (fld) { fld.show(); }
             }
         } else {
             for (i in flds) {
                 fld = Ext.getCmp(flds[i]);
-                if (fld) {
-                    fld.hide();
-
-                    fldHelp = Ext.getCmp(flds[i] + '-help');
-                    if (fldHelp) {
-                        fldHelp.hide();
-                    }
-                }
+                if (fld) { fld.hide(); }
             }
         }
     }
@@ -579,14 +561,9 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
     }
 
     ,showInputProperties: function(cb,rc,i) {
-        /**
-         * Hide "Input Option Values" by default
-         */
         var element = Ext.getCmp('modx-tv-elements');
-        var element_label = Ext.select('label[for="' + element.id + '"]');
         if (element) {
-            element.hide();
-            element_label.hide();
+            element.show();
         }
 
         this.markPanelDirty();

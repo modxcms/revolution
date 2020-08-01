@@ -97,14 +97,14 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                 ,buttons: Ext.Msg.OK
                 ,fn: function(btn) {
                     if (userId == 0) {
-                        MODx.loadPage('Security/User/Update', 'id='+o.result.object.id);
+                        MODx.loadPage('security/user/update', 'id='+o.result.object.id);
                     }
                     return false;
                 }
             });
             this.clearDirty();
         } else if (userId == 0) {
-            MODx.loadPage('Security/User/Update', 'id='+o.result.object.id);
+            MODx.loadPage('security/user/update', 'id='+o.result.object.id);
         }
     }
 

@@ -153,7 +153,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,{
                     text: _('update')
                     ,handler: function() {
-                        MODx.loadPage('Source/Update', 'id=' + node.ownerTree.source);
+                        MODx.loadPage('source/update', 'id=' + node.ownerTree.source);
                     }
                 }
             ])
