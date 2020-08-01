@@ -1,6 +1,6 @@
 /**
  * Loads the create snippet page
- * 
+ *
  * @class MODx.page.CreateSnippet
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -46,7 +46,6 @@ MODx.page.CreateSnippet = function(config) {
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
             ,method: 'remote'
-            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true

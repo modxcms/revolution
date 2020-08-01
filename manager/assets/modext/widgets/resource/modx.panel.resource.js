@@ -90,8 +90,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     if (panel.warnUnsavedChanges) return _('unsaved_changes');
                 };
             }
-            //this.handlePreview(this.config.record.deleted);
-            //this.handleDeleted(this.config.record.deleted);
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             var f = this.getForm().findField('richtext');
@@ -488,7 +486,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 } else {
                     trail.push({
                         text: parents[i].name || parents[i].key
-                        //,href: MODx.config.manager_url + '?a=Context/Update&key=' + parents[i].key
                         ,href: false
                     });
                 }

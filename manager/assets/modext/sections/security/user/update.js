@@ -1,6 +1,6 @@
 /**
  * Loads the update user page
- * 
+ *
  * @class MODx.page.UpdateUser
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -21,7 +21,6 @@ MODx.page.UpdateUser = function(config) {
             ,id: 'modx-abtn-save'
             ,cls: 'primary-button'
             ,method: 'remote'
-            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true

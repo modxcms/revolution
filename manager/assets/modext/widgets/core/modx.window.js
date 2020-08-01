@@ -32,7 +32,6 @@ Ext.override(Ext.Window, {
         }, 300);
     }
     ,animHide: function() {
-        //this.el.hide(); // dont hide the window here, we'll do that onHide when the animation is finished!
         this.afterHide();
 
     }
@@ -123,7 +122,6 @@ MODx.Window = function(config) {
         ,resizable: true
         ,collapsible: true
         ,maximizable: true
-        // ,autoHeight: true // this messes up many windows on smaller screens (e.g. too much height), ex. macbook air 11"
         ,autoHeight: false
         ,autoScroll: true
         ,allowDrop: true

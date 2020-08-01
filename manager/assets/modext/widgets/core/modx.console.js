@@ -5,7 +5,6 @@ MODx.Console = function(config) {
         title: _('console')
         ,modal: Ext.isIE ? false : true
         ,closeAction: 'hide'
-        // ,shadow: true
         ,resizable: false
         ,collapsible: false
         ,closable: true
@@ -62,7 +61,6 @@ MODx.Console = function(config) {
             } catch (e) {}
         }
         this.fireEvent('shutdown');
-        //this.getComponent('body').el.update('');
         this.destroy();
     });
     this.on('complete',this.onComplete,this);

@@ -457,7 +457,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         var selections = this.getSelectionModel().getSelections();
         var text = [], t;
         selections.forEach(function (selection) {
-            //t = selection.data.pagetitle + " (" + selection.data.id + ")";
             t = selection.data.parentPath + "<strong>" + selection.data.pagetitle + " (" + selection.data.id + ")" + "</strong>";
             if (selection.data.published) {
                 t = '<em>' + t + '</em>';

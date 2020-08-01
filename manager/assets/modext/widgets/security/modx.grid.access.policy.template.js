@@ -261,7 +261,6 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
-       // this.refresh();
         return true;
     }
 
@@ -271,7 +270,6 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         };
         Ext.getCmp('modx-policy-template-search').reset();
         this.getBottomToolbar().changePage(1);
-       // this.refresh();
     }
 });
 Ext.reg('modx-grid-access-policy-templates',MODx.grid.AccessPolicyTemplate);
@@ -292,7 +290,6 @@ MODx.combo.AccessPolicyTemplateGroups = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'Security/Access/Policy/Template/Group/GetList'
@@ -317,7 +314,6 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacpt'+Ext.id();
     Ext.applyIf(config,{
-        // width: 500
         title: _('policy_template_create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/Policy/Template/Create'
@@ -392,7 +388,6 @@ MODx.window.ImportPolicyTemplate = function(config) {
             ,name: 'file'
             ,id: this.ident+'-file'
             ,anchor: '100%'
-            // ,inputType: 'file'
         }]
     });
     MODx.window.ImportPolicyTemplate.superclass.constructor.call(this,config);

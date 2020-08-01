@@ -62,7 +62,6 @@ MODx.combo.ComboBox = function(config,getStore) {
             action: 'GetList'
         }
         ,width: 150
-        // ,listWidth: 300
         ,editable: false
         ,resizable: true
         ,typeAhead: false
@@ -257,7 +256,6 @@ MODx.combo.UserGroup = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['name','id','description']
-        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -388,7 +386,6 @@ MODx.combo.Template = function(config) {
             action: 'Element/Template/GetList'
             ,combo: 1
         }
-        // ,listWidth: 350
         ,allowBlank: true
     });
     MODx.combo.Template.superclass.constructor.call(this,config);
@@ -441,7 +438,6 @@ MODx.combo.Language = function(config) {
         ,minChars: 1
         ,editable: true
         ,allowBlank: true
-        // ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Language/GetList'
@@ -464,7 +460,6 @@ MODx.combo.Charset = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Charset/GetList'
@@ -487,7 +482,6 @@ MODx.combo.RTE = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        // ,listWidth: 300
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Rte/GetList'
@@ -507,7 +501,6 @@ MODx.combo.Role = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -529,7 +522,6 @@ MODx.combo.ContentType = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -601,7 +593,6 @@ MODx.combo.ClassDerivatives = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        // ,listWidth: 300
         ,pageSize: 20
     });
     MODx.combo.ClassDerivatives.superclass.constructor.call(this,config);
@@ -620,7 +611,6 @@ MODx.combo.Namespace = function(config) {
         ,editable: true
         ,allowBlank: true
         ,preselectValue: false
-        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -682,7 +672,6 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
             return false;
         }
 
-        //if (this.browser === null) {
             this.browser = MODx.load({
                 xtype: 'modx-browser'
                 ,closeAction: 'close'
@@ -703,7 +692,6 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
                     },scope:this}
                 }
             });
-        //}
         this.browser.show(btn);
         return true;
     }
@@ -946,7 +934,6 @@ MODx.combo.Dashboard = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name','description']
-        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -971,7 +958,6 @@ MODx.combo.MediaSource = function(config) {
         ,displayField: 'name'
         ,valueField: 'id'
         ,fields: ['id','name','description']
-        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -996,7 +982,6 @@ MODx.combo.MediaSourceType = function(config) {
         ,displayField: 'name'
         ,valueField: 'class'
         ,fields: ['id','class','name','description']
-        // ,listWidth: 400
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -1023,7 +1008,6 @@ MODx.combo.Authority = function(config) {
         ,typeAhead: false
         ,editable: false
         ,allowBlank: false
-        // ,listWidth: 300
         ,pageSize: 20
         ,url: MODx.config.connector_url
         ,baseParams: {

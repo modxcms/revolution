@@ -334,8 +334,6 @@ MODx.window.CreateSourceProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_create')
         ,id: 'modx-window-source-property-create'
-        // ,height: 250
-        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')
@@ -430,8 +428,6 @@ MODx.window.UpdateSourceProperty = function(config) {
     Ext.applyIf(config,{
         title: _('property_update')
         ,id: 'modx-window-source-property-update'
-        // ,height: 250
-        // ,width: 450
         ,saveBtnText: _('done')
         ,forceLayout: true
         ,fields: [{
@@ -548,8 +544,6 @@ MODx.window.CreateSourcePropertyOption = function(config) {
     Ext.applyIf(config,{
         title: _('property_option_create')
         ,id: 'modx-window-source-property-option-create'
-        // ,height: 250
-        // ,width: 450
         ,saveBtnText: _('done')
         ,fields: [{
             fieldLabel: _('name')

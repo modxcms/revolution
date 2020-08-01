@@ -245,7 +245,6 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
                 } else {
                     trail.push({
                         text: '<i class="icon icon-globe"></i> ' + (parents[i].name || parents[i].key)
-                        //,href: MODx.config.manager_url + '?a=Context/Update&key=' + parents[i].key
                         ,href: false
                     });
                 }

@@ -98,8 +98,8 @@ Ext.extend(MODx,Ext.Component,{
 
     ,initMarkRequiredFields: function() {
         var markdom = '<span class=\"field-required-mark\">*</span> ';
-            
-        var MarkRequiredFieldPlugin = function (config) { 
+
+        var MarkRequiredFieldPlugin = function (config) {
             config = config || {};
             Ext.apply(config, {
                 init: function(cmp) {
@@ -120,11 +120,11 @@ Ext.extend(MODx,Ext.Component,{
                     }
                 }
             });
-            MarkRequiredFieldPlugin.superclass.constructor.call(this, config); 
+            MarkRequiredFieldPlugin.superclass.constructor.call(this, config);
         }
-        Ext.extend(MarkRequiredFieldPlugin, Ext.BoxComponent); 
+        Ext.extend(MarkRequiredFieldPlugin, Ext.BoxComponent);
         Ext.ComponentMgr.registerPlugin('markrequiredfields',MarkRequiredFieldPlugin);
-        
+
         if (!Array.isArray(Ext.form.Field.prototype.plugins)) {
             Ext.form.Field.prototype.plugins = [];
         }
@@ -275,23 +275,23 @@ Ext.extend(MODx,Ext.Component,{
 			,listeners: {
 				'success': {
 					fn:function() {
-						var tree = Ext.getCmp("modx-resource-tree"); 
-						
+						var tree = Ext.getCmp("modx-resource-tree");
+
 						if (tree && tree.rendered) {
 							tree.refresh();
 						}
 
 						var cmp = Ext.getCmp("modx-panel-resource");
-						
+
 						if (cmp) {
 							Ext.getCmp('modx-abtn-locked').hide();
-							Ext.getCmp('modx-abtn-save').show();	
+							Ext.getCmp('modx-abtn-save').show();
 						}
 					},
 					scope:this
 				}
 			}
-		});  
+		});
     }
 
     ,sleep: function(ms) {
@@ -457,7 +457,6 @@ Ext.extend(MODx,Ext.Component,{
 					}
 				}]
 			}]
-			//,html: '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>'
         });
         MODx.helpWindow.show(b);
         return true;
@@ -924,7 +923,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
     initState: function(state) {
         if (state instanceof Object) {
             Ext.iterate(state, function(name, value, o) {
-                this.state[name] = value;//this.decodeValue(value);
+                this.state[name] = value;
             }, this)
         } else {
             this.state = {};

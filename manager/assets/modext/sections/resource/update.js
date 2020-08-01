@@ -106,7 +106,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(true);
@@ -126,7 +125,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    //MODx.loadPage('Resource/Update', 'id='+r.object.id);
                     var panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(false);
@@ -236,7 +234,6 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,cls: 'primary-button'
             ,method: 'remote'
             ,hidden: !(config.canSave == 1)
-            //,checkDirty: MODx.request.reload ? false : true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true

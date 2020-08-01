@@ -80,11 +80,8 @@ MODx.tree.Directory = function(config) {
         el.createChild({tag: 'div', id: this.config.id+'_filter'});
         this.addSourceToolbar();
 
-//        this.getRootNode().pseudoroot = true
-//        console.log(this.getRootNode())
 
     },this);
-    //this.addSourceToolbar();
     this.on('show',function() {
         if (!this.config.hideSourceCombo) {
             try { this.sourceCombo.show(); } catch (e) {}
@@ -161,14 +158,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 }
             ])
         }
-
-//        if (MODx.perm.file_manager) {
-//            menu.push({
-//                text: _('modx_browser')
-//                ,handler: this.loadFileManager
-//                ,scope: this
-//            });
-//        }
 
         return menu;
     }
@@ -356,7 +345,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 'success': {fn:function(r) {
                     var el = dropEvent.dropNode.getUI().getTextEl();
                     if (el) {Ext.get(el).frame();}
-                    // this.refreshParentNode();
                     this.fireEvent('afterSort',{event:dropEvent,result:r});
                 },scope:this}
                 ,'failure': {fn:function(r) {
@@ -490,7 +478,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 xtype: 'modx-browser'
                 ,hideFiles: MODx.config.modx_browser_tree_hide_files
                 ,rootId: '/' // prevent JS error because ui.node.elNode is undefined when this is
-                // ,rootVisible: false
                 ,wctx: MODx.ctx
                 ,source: this.config.baseParams.source
                 ,listeners: {
@@ -564,7 +551,6 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             xtype: 'modx-window-file-rename'
             ,record: r
             ,listeners: {
-                // 'success':{fn:this.refreshParentNode,scope:this}
                 'success': {fn:function(r) {
                     this.fireEvent('afterRename');
                     this.refreshParentNode();
@@ -791,8 +777,6 @@ MODx.window.CreateDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('file_folder_create')
-        // width: 430
-        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'Browser/Directory/Create'
         ,fields: [{
@@ -879,8 +863,6 @@ MODx.window.RenameDirectory = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('rename')
-        // ,width: 430
-        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'Browser/Directory/Rename'
         ,fields: [{
@@ -926,8 +908,6 @@ MODx.window.RenameFile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         title: _('rename')
-        // ,width: 430
-        // ,height: 200
         ,url: MODx.config.connector_url
         ,action: 'Browser/File/Rename'
         ,fields: [{
@@ -977,8 +957,6 @@ MODx.window.QuickUpdateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_update')
         ,width: 600
-        // ,height: 640
-        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Browser/File/Update'
@@ -1048,8 +1026,6 @@ MODx.window.QuickCreateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_create')
         ,width: 600
-        // ,height: 640
-        // ,autoHeight: false
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Browser/File/Create'
@@ -1085,16 +1061,6 @@ MODx.window.QuickCreateFile = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
-        /* this is the default config found also in widgets/core/modx.window.js, no need to redeclare here */
-        /*,buttons: [{
-            text: config.cancelBtnText || _('cancel')
-            ,scope: this
-            ,handler: function() { this.hide(); }
-        },{
-            text: config.saveBtnText || _('save')
-            ,scope: this
-            ,handler: this.submit
-        }]*/
     });
     MODx.window.QuickCreateFile.superclass.constructor.call(this,config);
 };

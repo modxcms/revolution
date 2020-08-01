@@ -96,8 +96,6 @@ MODx.window.CreateRole = function(config) {
     this.ident = config.ident || 'crole'+Ext.id();
     Ext.applyIf(config,{
         title: _('role_create')
-        // ,height: 150
-        // ,width: 400
         ,url: MODx.config.connector_url
         ,action: 'Security/Role/Create'
         ,fields: [{
@@ -120,7 +118,6 @@ MODx.window.CreateRole = function(config) {
             ,allowBlank: false
             ,allowNegative: false
             ,value: 0
-            // ,width: 75
             ,anchor: '100%'
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'

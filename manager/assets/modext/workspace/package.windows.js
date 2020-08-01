@@ -10,16 +10,12 @@ MODx.window.PackageUninstall = function(config) {
         title: _('package_uninstall')
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Packages/Uninstall'
-        // ,height: 400
-        // ,width: 400
         ,id: 'modx-window-package-uninstall'
         ,cls: 'modx-confirm'
         ,saveBtnText: _('uninstall')
         ,fields: [{
             html: _('preexisting_mode_select')
             ,cls: 'win-desc panel-desc'
-            // ,border: false
-            // ,autoHeight: true
         },{
             xtype: 'radio'
             ,name: 'preexisting_mode'
@@ -270,7 +266,6 @@ MODx.window.ChangeProvider = function(config) {
 			xtype: 'form'
 			,id: 'change-provider-form'
 			,border: false
-			// ,bodyCssClass: 'main-wrapper'
 			,items:[{
 				fieldLabel: _('provider')
 				,xtype: 'modx-combo-provider'

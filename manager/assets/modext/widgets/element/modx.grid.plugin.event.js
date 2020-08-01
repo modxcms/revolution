@@ -330,8 +330,6 @@ MODx.window.AddPluginToEvent = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/event/addplugin'
         ,autoHeight: true
-        // ,height: 250
-        // ,width: 600
         ,fields: [{
             xtype: 'modx-combo-plugin'
             ,fieldLabel: _('plugin')

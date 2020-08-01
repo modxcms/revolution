@@ -15,7 +15,6 @@ MODx.panel.ErrorLog = function(config) {
         ,baseParams: {
             action: 'System/ErrorLog/Clear'
         }
-        // ,layout: 'form' // unnecessary and creates a wrong box shadow
         ,items: [{
             html: _('error_log')
             ,id: 'modx-error-log-header'

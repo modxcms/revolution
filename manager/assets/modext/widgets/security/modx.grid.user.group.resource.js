@@ -115,12 +115,10 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
     ,filterResourceGroup: function(cb,rec,ri) {
         this.getStore().baseParams['resourceGroup'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
     ,filterPolicy: function(cb,rec,ri) {
         this.getStore().baseParams['policy'] = rec.data['id'];
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,clearFilter: function(btn,e) {
@@ -129,7 +127,6 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
         Ext.getCmp('modx-ugrg-policy-filter').setValue('');
         this.getStore().baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,createAcl: function(itm,e) {
@@ -186,8 +183,6 @@ MODx.window.CreateUGRG = function(config) {
         title: _('resource_group_add')
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/UserGroup/ResourceGroup/Create'
-        // ,height: 250
-        // ,width: 600
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

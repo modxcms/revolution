@@ -41,12 +41,12 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     ,_handleClick: function (n,e) {
         e.stopEvent();
         e.preventDefault();
-        
+
         if (this.disableHref) {return true;}
         if (e.ctrlKey) {return true;}
         return true;
     }
-    
+
     ,addUser: function(item,e) {
         var n = this.cm.activeNode;
         var ug = n.id.substr(2).split('_');ug = ug[1];
@@ -201,7 +201,6 @@ MODx.window.CreateUserGroup = function(config) {
     Ext.applyIf(config,{
         title: _('create_user_group')
         ,id: this.ident
-        // ,height: 150
         ,width: 700
         ,stateful: false
         ,url: MODx.config.connector_url
@@ -363,8 +362,6 @@ MODx.window.AddUserToUserGroup = function(config) {
     Ext.applyIf(config,{
         title: _('user_group_user_add')
         ,id: this.ident
-        // ,height: 150
-        // ,width: 375
         ,url: MODx.config.connector_url
         ,action: 'Security/Group/User/Create'
         ,fields: [{

@@ -96,7 +96,6 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
     filterByCategory: function(cb,rec,ri) {
         this.getStore().baseParams['category'] = cb.getValue();
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 
     ,search: function(tf,newValue,oldValue) {
@@ -104,7 +103,6 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         Ext.getCmp('modx-tvtemp-filter-category').setValue('');
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
         return true;
     }
 
@@ -115,7 +113,6 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
         Ext.getCmp('modx-tvtemp-filter-category').reset();
         Ext.getCmp('modx-tvtemp-search').setValue('');
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
 });
 Ext.reg('modx-grid-tv-template',MODx.grid.TemplateVarTemplate);

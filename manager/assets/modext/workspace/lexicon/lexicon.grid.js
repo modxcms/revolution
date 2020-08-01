@@ -130,58 +130,7 @@ MODx.grid.Lexicon = function(config) {
             text: _('reload_from_base')
             ,handler: this.reloadFromBase
             ,scope: this
-        }
-        /*
-        ,{
-            xtype: 'button'
-            ,id: 'modx-lexicon-import-btn'
-            ,text: _('lexicon_import')
-            ,handler: function(btn,e) {
-                this.loadWindow2(btn,e,{
-                    xtype: 'modx-window-lexicon-import'
-                    ,listeners: {
-                        'success': {fn:function(o) {
-                            var r = o.a.result.object;
-                            this.setFilterParams(r['namespace'],r.topic);
-                        },scope:this}
-                        ,'show': {fn:function() {
-                            var w = this.windows['modx-window-lexicon-import'];
-                            if (w) {
-                                var tf = w.fp.getComponent('topic');
-                                var tb = this.getTopToolbar();
-                                if (tf && tb) {
-                                    tf.setValue(tb.getComponent('topic').getRawValue());
-                                }
-                            }
-                        },scope: this}
-                    }
-                });
-            }
-            ,scope: this
-        },{
-            xtype: 'button'
-            ,id: 'modx-lexicon-export-btn'
-            ,text: _('lexicon_export')
-            ,handler: function(btn,e) {
-                this.loadWindow2(btn,e,{
-                    xtype: 'modx-window-lexicon-export'
-                    ,listeners: {
-                        'success': {fn:function(o) {
-                            location.href = MODx.config.connector_url+'?action=workspace/lexicon/export&HTTP_MODAUTH='+MODx.siteId+'&download='+o.a.result.message;
-                        },scope:this}
-                        ,'show': {fn:function() {
-                            var w = this.windows['modx-window-lexicon-export'];
-                            var cb = w.fp.getComponent('topic');
-                            if (cb) {
-                                var tb = this.getTopToolbar();
-                                cb.setNamespace(tb.getComponent('namespace').getValue(),tb.getComponent('topic').getValue());
-                            }
-                        },scope: this}
-                    }
-                });
-            }
-            ,scope: this
-        }*/]
+        }]
     });
     MODx.grid.Lexicon.superclass.constructor.call(this,config);
 };
@@ -211,7 +160,6 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	if (!name) {return false;}
     	this.store.baseParams[name] = cb.getValue();
     	this.getBottomToolbar().changePage(1);
-    	//this.refresh();
         return true;
     }
     ,clearFilter: function() {
@@ -236,7 +184,6 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         tcl.setValue('en');
 
         tb.getComponent('search').setValue('');
-    	//this.refresh();
     }
     ,changeNamespace: function(cb,nv,ov) {
         this.setFilterParams(cb.getValue(),'default','en');
@@ -288,7 +235,6 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             s.removeAll();
         }
         this.getBottomToolbar().changePage(1);
-        //this.refresh();
     }
     ,loadWindow2: function(btn,e,o) {
         var tb = this.getTopToolbar();

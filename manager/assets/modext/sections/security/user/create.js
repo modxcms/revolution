@@ -1,6 +1,6 @@
 /**
- * Loads the create user page 
- * 
+ * Loads the create user page
+ *
  * @class MODx.page.CreateUser
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -18,7 +18,6 @@ MODx.page.CreateUser = function(config) {
             ,cls: 'primary-button'
             ,redirect: false
             ,method: 'remote'
-            // ,checkDirty: true
             ,keys: [{
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true

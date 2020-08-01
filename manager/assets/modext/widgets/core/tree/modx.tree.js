@@ -226,7 +226,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         if (Ext.isEmpty(treeState) && this.root) {
             this.root.expand();
             if (this.root.firstChild && this.config.expandFirst) {
-                //this.root.firstChild.select();
                 this.root.firstChild.expand();
             }
         } else {
@@ -595,7 +594,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
 
         var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root))
             ,source = dropEvent.dropNode;
-        //var target = dropEvent.target;
 
         this.fireEvent('beforeSort',encNodes);
         MODx.Ajax.request({

@@ -12,7 +12,6 @@ MODx.window.DuplicateResource = function(config) {
     Ext.applyIf(config,{
         title: config.pagetitle ? _('duplicate') + ' ' + config.pagetitle : _('duplication_options')
         ,id: this.ident
-        // ,width: 500
     });
     MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };
@@ -238,8 +237,6 @@ MODx.window.CreateCategory = function(config) {
     Ext.applyIf(config,{
         title: _('new_category')
         ,id: this.ident
-        // ,height: 150
-        // ,width: 350
         ,url: MODx.config.connector_url
         ,action: 'Element/Category/Create'
         ,fields: [{
@@ -281,8 +278,6 @@ MODx.window.RenameCategory = function(config) {
     this.ident = config.ident || 'rencat-'+Ext.id();
     Ext.applyIf(config,{
         title: _('category_rename')
-        // ,height: 150
-        // ,width: 350
         ,url: MODx.config.connector_url
         ,action: 'Element/Category/Update'
         ,fields: [{
@@ -389,8 +384,6 @@ MODx.window.QuickCreateChunk = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_chunk')
         ,width: 600
-        //,height: 640
-        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Chunk/Create'
@@ -412,7 +405,6 @@ MODx.window.QuickCreateChunk = function(config) {
             ,name: 'description'
             ,fieldLabel: _('description')
             ,anchor: '100%'
-            //,rows: 2
         },{
             xtype: 'textarea'
             ,name: 'snippet'
@@ -473,7 +465,6 @@ MODx.window.QuickCreateTemplate = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_template')
         ,width: 600
-        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Template/Create'
@@ -556,7 +547,6 @@ MODx.window.QuickCreateSnippet = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_snippet')
         ,width: 600
-        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Snippet/Create'
@@ -640,7 +630,6 @@ MODx.window.QuickCreatePlugin = function(config) {
     Ext.applyIf(config,{
         title: _('quick_create_plugin')
         ,width: 600
-        // ,autoHeight: true
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Plugin/Create'
@@ -862,7 +851,6 @@ MODx.window.DuplicateContext = function(config) {
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'Context/Duplicate'
-        // ,width: 400
         ,fields: [{
             xtype: 'statictextfield'
             ,id: 'modx-'+this.ident+'-key'
@@ -929,7 +917,6 @@ MODx.window.Login = function(config) {
         ,id: this.ident
         ,url: MODx.config.connectors_url
         ,action: 'Security/Login'
-        // ,width: 400
         ,fields: [{
             html: '<p>'+_('session_logging_out')+'</p>'
             ,xtype: 'modx-description'

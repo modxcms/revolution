@@ -106,7 +106,6 @@ MODx.panel.Snippet = function(config) {
                         ,fieldLabel: _('static_file')
                         ,description: MODx.expandHelp ? '' : _('static_file_msg')
                         ,name: 'static_file'
-                        // ,hideFiles: true
                         ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-snippet-static-file'

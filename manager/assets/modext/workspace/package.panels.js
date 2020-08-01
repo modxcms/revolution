@@ -11,24 +11,6 @@ MODx.panel.PackageMetaPanel = function(config) {
 
 	Ext.applyIf(config,{
 		cls: 'vertical-tabs-panel wrapped'
-		// same as in parent class
-		// ,headerCfg: { tag: 'div', cls: 'x-tab-panel-header vertical-tabs-header' }
-		// ,bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' }
-		// ,defaults: {
-		// 	bodyCssClass: 'vertical-tabs-body'
-		// 	,autoScroll: true
-		// 	,autoHeight: true
-		// 	,autoWidth: true
-		// }
-		// ,layoutOnTabChange: true
-		// ,listeners:{
-			// tabchange: function(tb, pnl){
-			// 	w = this.bwrap.getWidth();
-			// 	this.body.setWidth(w);
-			// 	this.doLayout();
-			// }
-			// ,scope: this
-		// }
 		,items: []
 	});
 	MODx.panel.PackageMetaPanel.superclass.constructor.call(this,config);
