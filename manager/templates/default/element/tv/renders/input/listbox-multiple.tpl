@@ -4,12 +4,10 @@
     onchange="MODx.fireResourceFormChange();"
     size="8"
 >
-{foreach from=$opts item=item}
-    <option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>
-{/foreach}
+    {foreach from=$opts item=item}
+        <option value="{$item.value}" {if $item.selected} selected="selected"{/if}>{$item.text}</option>
+    {/foreach}
 </select>
-
-
 
 <script type="text/javascript">
 // <![CDATA[
@@ -26,20 +24,21 @@ Ext.onReady(function() {
         ,expandBtnCls: 'x-form-trigger'
         ,clearBtnCls: 'x-form-trigger'
         ,width: 400
+        ,maxHeight: 300
         ,displayField: "text"
         ,valueField: "value"
         ,resizable: true
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-
-        {if $params.title|default},title: '{$params.title|default}'{/if}
-        {if $params.listWidth|default},listWidth: {$params.listWidth|default}{/if}
-        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight|default}{else}300{/if}
         {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
             ,typeAhead: true
             ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
             ,editable: true
         {else}
             ,typeAhead: false
+            ,editable: false
+        {/if}
+        {if $params.title|default}
+            ,title: '{$params.title|default}'
         {/if}
         {if $params.listEmptyText|default}
             ,listEmptyText: '{$params.listEmptyText|default}'
