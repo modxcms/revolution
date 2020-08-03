@@ -22,10 +22,10 @@ MODx.grid.UserSettings = function(config) {
         ,save_action: 'Security/User/Setting/UpdateFromGrid'
         ,fk: config.user
         ,tbar: [{
-            text: _('create_new')
+            text: _('setting_create')
             ,cls: 'primary-button'
             ,scope: this
-            ,handler: { 
+            ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: MODx.config.connector_url
                 ,baseParams: {

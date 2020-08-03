@@ -22,7 +22,7 @@ MODx.grid.GroupSettings = function(config) {
         ,save_action: 'Security/Group/Setting/UpdateFromGrid'
         ,fk: config.group
         ,tbar: [{
-            text: _('create_new')
+            text: _('setting_create')
             ,cls:'primary-button'
             ,scope: this
             ,handler: {
