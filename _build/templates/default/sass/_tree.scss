@@ -907,6 +907,14 @@
     &:focus {
       color: $colorSplash;
     }
+
+    &:after {
+      @extend %pseudo-font;
+      content: fa-content($fa-var-eye);
+      margin-left: 5px;
+      font-size: 14px;
+      opacity: 0.5;
+    }
   }
 
   img+a {
