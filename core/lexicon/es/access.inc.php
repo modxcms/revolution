@@ -111,7 +111,7 @@ $_lang['source_add'] = 'Añadir Recursos Multimedia';
 $_lang['namespace_add'] = 'Añadir espacio de nombres';
 $_lang['access_namespace_update'] = 'Edit Namespace Access';
 $_lang['access_namespace_remove'] = 'Delete Namespace Access';
-$_lang['filter_by_namespace'] = 'Filter by Namespace...';
+$_lang['filter_by_namespace'] = 'Filtrar por espacio de nombres...';
 
 $_lang['user_group_aw'] = 'Asistente de Acceso';
 $_lang['user_group_aw_desc'] = 'Note: You may have to flush sessions after creating the User Group if you check any of the options below.';
@@ -159,5 +159,5 @@ $_lang['user_group_source_policy_desc'] = 'La política a aplicar a este Origen 
 $_lang['user_group_source_remove_confirm'] = 'Are you sure you want to delete this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'El Origen Multimedia al que otorgar acceso.';
 $_lang['user_group_user_access_msg'] = 'Selecciona qué usuarios quieres que pertenezcan a este Grupo de Usuarios.';
-$_lang['user_group_namespace_access'] = 'Namespace access';
-$_lang['user_group_namespace_access_desc'] = 'Here you can set which Namespaces this User Group can access.';
+$_lang['user_group_namespace_access'] = 'Acceso a espacio de nombres';
+$_lang['user_group_namespace_access_desc'] = 'Aquí puedes establecer a qué espacios de nombres puede acceder este grupo de usuarios.';
