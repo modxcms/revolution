@@ -14,24 +14,24 @@ MODx.grid.Package = function(config) {
         )
     });
 
-	/* Package name + action button renderer */
-	this.mainColumnTpl = new Ext.XTemplate('<tpl for=".">'
-		+'<h3 class="main-column{state:defaultValue("")}">{name}</h3>'
-		+'<tpl if="actions !== null">'
-			+'<ul class="actions">'
-				+'<tpl for="actions">'
-					+'<li><button type="button" class="controlBtn {className}">{text}</button></li>'
-				+'</tpl>'
-			+'</ul>'
-		+'</tpl>'
-		+'<tpl if="message !== null">'
+    /* Package name + action button renderer */
+    this.mainColumnTpl = new Ext.XTemplate('<tpl for=".">'
+        +'<h3 class="main-column{state:defaultValue("")}">{name}</h3>'
+        +'<tpl if="actions !== null">'
+            +'<ul class="actions">'
+                +'<tpl for="actions">'
+                    +'<li><button type="button" class="controlBtn {className}">{text}</button></li>'
+                +'</tpl>'
+            +'</ul>'
+        +'</tpl>'
+        +'<tpl if="message !== null">'
             +'<tpl for="message">'
                 +'<div class="{className}">{text}</div>'
             +'</tpl>'
         +'</tpl>'
-	+'</tpl>', {
-		compiled: true
-	});
+    +'</tpl>', {
+        compiled: true
+    });
 
     var cols = [];
     cols.push(this.exp);
@@ -44,24 +44,24 @@ MODx.grid.Package = function(config) {
     if (MODx.curlEnabled) {
         dlbtn = {
             text: _('download_extras')
-			,xtype: 'splitbutton'
-			,cls:'primary-button'
+            ,xtype: 'splitbutton'
+            ,cls:'primary-button'
             ,handler: this.onDownloadMoreExtra
-			,menu: {
-				items:[{
-					text: _('provider_select')
-					,handler: this.changeProvider
-					,scope: this
-				},{
-					text: _('package_search_local_title')
-					,handler: this.searchLocal
-					,scope: this
-				},{
+            ,menu: {
+                items:[{
+                    text: _('provider_select')
+                    ,handler: this.changeProvider
+                    ,scope: this
+                },{
+                    text: _('package_search_local_title')
+                    ,handler: this.searchLocal
+                    ,scope: this
+                },{
                     text: _('transport_package_upload')
                     ,handler: this.uploadTransportPackage
                     ,scope: this
                 }]
-			}
+            }
         };
     } else {
         dlbtn = {
@@ -104,15 +104,33 @@ MODx.grid.Package = function(config) {
             ,id: 'modx-package-search'
             ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
+            ,value: MODx.request.search
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(pnl) {
-                    new Ext.KeyMap(pnl.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: pnl
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.packageSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.search) {
+                            this.packageSearch(cb, cb.value);
+                            MODx.request.search = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -148,10 +166,10 @@ MODx.grid.Package = function(config) {
             this.searchLocalWithoutPrompt();
         }, this);
     }, this);
-	this.on('click', this.onClick, this);
+    this.on('click', this.onClick, this);
 };
 Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
-	console: null
+    console: null
 
     ,activate: function() {
         var west = Ext.getCmp('modx-leftbar-tabs')
@@ -168,42 +186,45 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         this.updateBreadcrumbs(_('packages_desc'));
     }
 
-	,updateBreadcrumbs: function(msg, highlight){
-		msg = Ext.getCmp('packages-breadcrumbs').desc;
+    ,updateBreadcrumbs: function(msg, highlight){
+        msg = Ext.getCmp('packages-breadcrumbs').desc;
         if(highlight){
-			msg.text = msg;
-			msg.className = 'highlight';
-		}
-		Ext.getCmp('packages-breadcrumbs').reset(msg);
-	}
+            msg.text = msg;
+            msg.className = 'highlight';
+        }
+        Ext.getCmp('packages-breadcrumbs').reset(msg);
+    }
 
-	,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+    ,packageSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.search = newValue;
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
 
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        var s = this.getStore();
+        var packageSearch = Ext.getCmp('modx-package-search');
+        s.baseParams = {
             action: 'Workspace/Packages/GetList'
-    	};
-        Ext.getCmp('modx-package-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        };
+        MODx.request.search = '';
+        packageSearch.setValue('');
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
     }
 
+    /* Main column renderer */
+    ,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
+        var rec = record.data;
+        var state = (rec.installed !== null) ? ' installed' : ' not-installed';
+        var values = { name: value, state: state, actions: null, message: null };
 
-	/* Main column renderer */
-	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
-		var rec = record.data;
-		var state = (rec.installed !== null) ? ' installed' : ' not-installed';
-		var values = { name: value, state: state, actions: null, message: null };
-
-		var h = [];
-		if(rec.installed !== null) {
-			h.push({ className:'uninstall', text: rec.textaction });
-			h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
-		} else {
+        var h = [];
+        if(rec.installed !== null) {
+            h.push({ className:'uninstall', text: rec.textaction });
+            h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
+        } else {
             h.push({ className:'install primary-button', text: rec.textaction });
         }
         if (rec.updateable) {
@@ -215,9 +236,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         }
         h.push({ className:'remove', text: _('package_remove_action_button') });
         h.push({ className:'details', text: _('view_details') });
-		values.actions = h;
-		return this.mainColumnTpl.apply(values);
-	}
+        values.actions = h;
+        return this.mainColumnTpl.apply(values);
+    }
 
     ,dateColumnRenderer: function(d,c) {
         switch(d) {
@@ -231,89 +252,89 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         }
     }
 
-	,onClick: function(e){
-		var t = e.getTarget();
-		var elm = t.className.split(' ')[0];
-		if(elm == 'controlBtn'){
-			var act = t.className.split(' ')[1];
-			var record = this.getSelectionModel().getSelected();
-			this.menu.record = record.data;
-			switch (act) {
+    ,onClick: function(e){
+        var t = e.getTarget();
+        var elm = t.className.split(' ')[0];
+        if(elm == 'controlBtn'){
+            var act = t.className.split(' ')[1];
+            var record = this.getSelectionModel().getSelected();
+            this.menu.record = record.data;
+            switch (act) {
                 case 'remove':
                     this.remove(record, e);
                     break;
                 case 'install':
                 case 'reinstall':
-					this.install(record);
+                    this.install(record);
                     break;
                 case 'uninstall':
-					this.uninstall(record, e);
+                    this.uninstall(record, e);
                     break;
-				case 'update':
-				case 'checkupdate':
+                case 'update':
+                case 'checkupdate':
                     this.update(record, e);
                     break;
-				case 'details':
+                case 'details':
                     this.viewPackage(record, e);
                     break;
-				default:
-					break;
+                default:
+                    break;
             }
-		}
-	}
+        }
+    }
 
-	/* Install a package */
-	,install: function( record ){
-		Ext.Ajax.request({
-			url : MODx.config.connector_url
-			,params : {
-				action : 'Workspace/Packages/GetAttribute'
-				,attributes: 'license,readme,changelog,setup-options,requires'
-				,signature: record.data.signature
-			}
-			,method: 'GET'
-			,scope: this
-			,success: function ( result, request ) {
-				this.processResult( result.responseText, record );
-			}
-			,failure: function ( result, request) {
-				Ext.MessageBox.alert(_('failed'), result.responseText);
-			}
-		});
-	}
+    /* Install a package */
+    ,install: function( record ){
+        Ext.Ajax.request({
+            url : MODx.config.connector_url
+            ,params : {
+                action : 'Workspace/Packages/GetAttribute'
+                ,attributes: 'license,readme,changelog,setup-options,requires'
+                ,signature: record.data.signature
+            }
+            ,method: 'GET'
+            ,scope: this
+            ,success: function ( result, request ) {
+                this.processResult( result.responseText, record );
+            }
+            ,failure: function ( result, request) {
+                Ext.MessageBox.alert(_('failed'), result.responseText);
+            }
+        });
+    }
 
-	/* Go through the install process */
-	,processResult: function( response, record ){
-		var data = Ext.util.JSON.decode( response );
+    /* Go through the install process */
+    ,processResult: function( response, record ){
+        var data = Ext.util.JSON.decode( response );
 
-		if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){
-			/* Show license/changelog panel */
-			p = Ext.getCmp('modx-package-beforeinstall');
-			p.activate();
-			p.updatePanel( data.object, record );
-		}
-		else if ( data.object['setup-options'] !== null ) {
-			/* No license/changelog, show setup-options */
+        if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){
+            /* Show license/changelog panel */
+            p = Ext.getCmp('modx-package-beforeinstall');
+            p.activate();
+            p.updatePanel( data.object, record );
+        }
+        else if ( data.object['setup-options'] !== null ) {
+            /* No license/changelog, show setup-options */
             Ext.getCmp('package-show-setupoptions-btn').signature = record.data.signature;
-			Ext.getCmp('modx-panel-packages').onSetupOptions();
-		} else {
-			/* No license/changelog, no setup-options, install directly */
+            Ext.getCmp('modx-panel-packages').onSetupOptions();
+        } else {
+            /* No license/changelog, no setup-options, install directly */
             Ext.getCmp('package-install-btn').signature = record.data.signature;
-			Ext.getCmp('modx-panel-packages').install();
-		}
-	}
+            Ext.getCmp('modx-panel-packages').install();
+        }
+    }
 
-	/* Launch Package Browser */
-	,onDownloadMoreExtra: function(btn,e){
-	    MODx.provider = MODx.defaultProvider;
-		Ext.getCmp('modx-panel-packages-browser').activate();
-	}
+    /* Launch Package Browser */
+    ,onDownloadMoreExtra: function(btn,e){
+        MODx.provider = MODx.defaultProvider;
+        Ext.getCmp('modx-panel-packages-browser').activate();
+    }
 
-	,changeProvider: function(btn, e){
-		this.loadWindow(btn,e,{
+    ,changeProvider: function(btn, e){
+        this.loadWindow(btn,e,{
             xtype: 'modx-package-changeprovider'
         });
-	}
+    }
 
     /**
      * Open a window allowing user to upload a transport package directly
@@ -323,19 +344,19 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         this.uploader.show();
     }
 
-	,searchLocal: function() {
+    ,searchLocal: function() {
         MODx.msg.confirm({
-           title: _('package_search_local_title')
-           ,text: _('package_search_local_confirm')
-           ,url: MODx.config.connector_url
-           ,params: {
+            title: _('package_search_local_title')
+            ,text: _('package_search_local_confirm')
+            ,url: MODx.config.connector_url
+            ,params: {
                 action: 'Workspace/Packages/ScanLocal'
-           }
-           ,listeners: {
+            }
+            ,listeners: {
                 'success':{fn:function(r) {
                     this.getStore().reload();
                 },scope:this}
-           }
+            }
         });
     }
 
@@ -356,12 +377,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         })
     }
 
-	/* Go to package details @TODO : Stay on the same page */
+    /* Go to package details @TODO : Stay on the same page */
     ,viewPackage: function(btn,e) {
         MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature+'&package_name='+this.menu.record.name);
     }
 
-	/* Search for a package update - only for installed package */
+    /* Search for a package update - only for installed package */
     ,update: function(btn,e) {
         if (this.windows['modx-window-package-update']) {
             this.windows['modx-window-package-update'].destroy();
@@ -396,8 +417,8 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }
 
-	/* Uninstall a package */
-	,uninstall: function(btn,e) {
+    /* Uninstall a package */
+    ,uninstall: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-package-uninstall'
             ,listeners: {
@@ -440,12 +461,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }
 
-	/* Remove a package entirely */
+    /* Remove a package entirely */
     ,remove: function(btn,e) {
         if (this.destroying) {
             return MODx.grid.Package.superclass.remove.apply(this, arguments);
         }
-    	var r = this.menu.record;
+        var r = this.menu.record;
         var topic = '/workspace/package/remove/'+r.signature+'/';
 
         this.loadWindow(btn,e,{
@@ -477,12 +498,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         });
     }
 
-	/* Load the console */
+    /* Load the console */
     ,loadConsole: function(btn,topic) {
         this.console = MODx.load({
-           xtype: 'modx-console'
-           ,register: 'mgr'
-           ,topic: topic
+            xtype: 'modx-console'
+            ,register: 'mgr'
+            ,topic: topic
         });
         this.console.show(btn);
     }
@@ -493,6 +514,13 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 });
 Ext.reg('modx-package-grid',MODx.grid.Package);
 
+/**
+ * @class MODx.window.PackageUpdate
+ * @extends MODx.Window
+ * @constructor
+ * @param {Object} config An object of options.
+ * @xtype modx-window-package-update
+ */
 MODx.window.PackageUpdate = function(config) {
     config = config || {};
     Ext.applyIf(config,{
