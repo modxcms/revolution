@@ -194,6 +194,14 @@ button {
     .x-form-filter {
       border-radius: $borderRadius 0 0 $borderRadius;
       z-index: 1; /* prevent clear filter button from overlapping the textfield */
+
+      &:not(.x-form-empty-field) {
+        border-color: $darkBlack;
+      }
+
+      &.x-form-focus {
+        border-color: $mediumGray;
+      }
     }
 
     .x-form-filter-clear {
