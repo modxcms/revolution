@@ -71,6 +71,7 @@ MODx.panel.FCProfile = function(config) {
                 }]
             },{
                 xtype: 'modx-grid-fc-set'
+                ,urlFilters: ['search']
                 ,cls:'main-wrapper'
                 ,baseParams: {
                     action: 'Security/Forms/Set/GetList'
@@ -173,7 +174,15 @@ MODx.grid.FCProfileUserGroups = function(config) {
     this.fcugRecord = Ext.data.Record.create(config.fields);
 };
 Ext.extend(MODx.grid.FCProfileUserGroups,MODx.grid.LocalGrid,{
-    addUserGroup: function(btn,e) {
+    getMenu: function(g,ri) {
+        return [{
+            text: _('usergroup_remove')
+            ,handler: this.removeUserGroup
+            ,scope: this
+        }];
+    }
+
+    ,addUserGroup: function(btn,e) {
         this.loadWindow(btn,e,{
             xtype: 'modx-window-fc-profile-add-usergroup'
             ,listeners: {
@@ -184,14 +193,6 @@ Ext.extend(MODx.grid.FCProfileUserGroups,MODx.grid.LocalGrid,{
                 },scope:this}
             }
         });
-    }
-
-    ,getMenu: function(g,ri) {
-        return [{
-            text: _('usergroup_remove')
-            ,handler: this.removeUserGroup
-            ,scope: this
-        }];
     }
 
     ,removeUserGroup: function(btn,e) {
