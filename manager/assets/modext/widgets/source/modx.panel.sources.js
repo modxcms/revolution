@@ -25,6 +25,7 @@ MODx.panel.Sources = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-sources'
+                ,urlFilters: ['query']
                 ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
@@ -117,15 +118,33 @@ MODx.grid.Sources = function(config) {
             ,id: 'modx-source-search'
             ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
+            ,value: MODx.request.query
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.sourceSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.query) {
+                            this.sourceSearch(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -239,18 +258,22 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         return true;
     }
 
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+    ,sourceSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.query = newValue;
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
 
     ,clearFilter: function() {
-        this.getStore().baseParams = {
+        var s = this.getStore();
+        var sourceSearch = Ext.getCmp('modx-source-search');
+        s.baseParams = {
             action: 'Source/GetList'
         };
-        Ext.getCmp('modx-source-search').reset();
+        MODx.request.query = '';
+        sourceSearch.setValue('');
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 });
