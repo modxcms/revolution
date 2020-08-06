@@ -25,6 +25,7 @@ MODx.panel.FCProfiles = function(config) {
                 title: ''
                 ,preventRender: true
                 ,xtype: 'modx-grid-fc-profile'
+                ,urlFilters: ['search']
                 ,cls:'main-wrapper'
             }]
         }],{
@@ -120,18 +121,33 @@ MODx.grid.FCProfile = function(config) {
             ,id: 'modx-fcp-search'
             ,cls: 'x-form-filter'
             ,emptyText: _('filter_by_search')
+            ,value: MODx.request.search
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.fcpSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.search) {
+                            this.fcpSearch(cb, cb.value);
+                            MODx.request.search = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -250,6 +266,19 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         });
     }
 
+    ,deactivateProfile: function(btn,e) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'Security/Forms/Profile/Deactivate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
     ,activateSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -268,19 +297,6 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             }
         });
         return true;
-    }
-
-    ,deactivateProfile: function(btn,e) {
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'Security/Forms/Profile/Deactivate'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
     }
 
     ,deactivateSelected: function() {
@@ -325,18 +341,22 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         return true;
     }
 
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+    ,fcpSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.search = newValue;
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
 
     ,clearFilter: function() {
-        this.getStore().baseParams = {
+        var s = this.getStore();
+        var fcpSearch = Ext.getCmp('modx-fcp-search');
+        s.baseParams = {
             action: 'Security/Forms/Profile/GetList'
         };
-        Ext.getCmp('modx-fcp-search').reset();
+        MODx.request.search = '';
+        fcpSearch.setValue('');
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 });
@@ -361,14 +381,12 @@ MODx.window.CreateFCProfile = function(config) {
             ,id: 'modx-fccp-name'
             ,allowBlank: false
             ,anchor: '100%'
-
         },{
             xtype: 'textarea'
             ,name: 'description'
             ,fieldLabel: _('description')
             ,id: 'modx-fccp-description'
             ,anchor: '100%'
-
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('active')
