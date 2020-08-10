@@ -8,7 +8,7 @@
 $_lang['element'] = 'Elemento';
 $_lang['element_err_nf'] = 'Elemento no encontrado.';
 $_lang['element_err_ns'] = 'Elemento no especificado.';
-$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
+$_lang['element_err_staticfile_exists'] = 'Ya existe un archivo estático en de la ruta especificada.';
 $_lang['element_static_source_immutable'] = '¡El archivo estático especificado como fuente no es editable! No puedes modificar el contenido de este Elemento.';
 $_lang['element_static_source_protected_invalid'] = 'No puedes hacer que tu Elemento apunte al directorio de configuración de MODX; es un directorio protegido y no accesible.';
 $_lang['is_static'] = 'Es Estático';

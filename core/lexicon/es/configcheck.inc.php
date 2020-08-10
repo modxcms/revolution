@@ -20,7 +20,7 @@ $_lang['configcheck_errorpage_unavailable'] = 'Página de Error del sitio no dis
 $_lang['configcheck_errorpage_unavailable_msg'] = 'Esto significa que la página de Error no es accesible a través del navegador o no existe. Esto puede llevar a un bucle y colapsar el registro de errores. Asegúrate que no haya grupos de usuarios asignados a la página de error.';
 $_lang['configcheck_errorpage_unpublished'] = 'La página de Error del sitio no está publicada o no existe.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Esto significa que la página de Error no es accesible públicamente. Publica la página o asegúrate de que esté asignada a un documento existente en tu árbol de recursos del sitio en el menú Sistema &gt; Configuración del Sistema.';
-$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess'] = 'La carpeta core es accesible por la web.';
 $_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
 <strong>This is not recommended and a security risk.</strong>
 If your MODX installation is running on a Apache webserver
@@ -39,8 +39,8 @@ $_lang['configcheck_lang_difference'] = 'Número incorrecto de entradas en el ar
 $_lang['configcheck_lang_difference_msg'] = 'El archivo de idioma configurado actualmente tiene un número diferente de entradas que el archivo de idioma por defecto. A pesar de que esto no supone necesariamente un problema, puede significar que el archivo de idioma necesita ser actualizado.';
 $_lang['configcheck_notok'] = 'Uno o más detalles de configuración no están correctos: ';
 $_lang['configcheck_ok'] = 'La revisión fue exitosa - sin advertencias que mostrar.';
-$_lang['configcheck_phpversion'] = 'PHP version is outdated';
-$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
+$_lang['configcheck_phpversion'] = 'La versión de PHP está desactualizada';
+$_lang['configcheck_phpversion_msg'] = 'Los desarrolladores de PHP ya no mantienen tu versión de PHP [[+phpversion]], lo que significa que no hay actualizaciones de seguridad disponibles. También es probable que MODX o un paquete adicional, ahora o en el futuro cercano, ya no admitan esta versión. Actualiza tu entorno al menos a PHP [[+phprequired]] lo antes posible para asegurar tu sitio.';
 $_lang['configcheck_register_globals'] = '"register_globals" está activado en el archivo de configuración php.ini';
 $_lang['configcheck_register_globals_msg'] = 'Esta configuración hace el sitio más vulnerable a ataques del tipo Cross Site Scripting (XSS). Si el servidor no es propio, el proveedor del servicio de alojamiento del sitio web deberá deshabilitar esta configuración.';
 $_lang['configcheck_title'] = 'Prueba de Configuración';
