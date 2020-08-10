@@ -298,7 +298,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             var el = document.createElement('a');
                             el.href = MODx.config.default_site_url || MODx.config.site_url;
                             el.title = MODx.config.site_name;
-                            el.innerText = MODx.config.site_name;
+                            el.innerText = Ext.util.Format.ellipsis(MODx.config.site_name, 45, true);
                             el.target = '_blank';
 
                             html += el.outerHTML;

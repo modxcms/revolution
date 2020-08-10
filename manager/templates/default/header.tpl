@@ -41,7 +41,7 @@
             <ul id="modx-headnav">
                 <li id="modx-home-dashboard">
                     <a href="?" title="{$_config.site_name|strip_tags|escape}">
-                        <img src="{$_config.manager_url}templates/{$_config.manager_theme}/images/modx-icon-color.svg" title="{$_config.site_name}">
+                        <img src="{$_config.manager_url}templates/{$_config.manager_theme}/images/modx-icon-color.svg" title="{$_config.site_name|strip_tags|escape}">
                     </a>
                 </li>
                 <li id="modx-site-info">

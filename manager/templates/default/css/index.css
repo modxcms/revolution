@@ -13393,7 +13393,7 @@ readers do not read off random characters that represent icons */
 .icon-less:before,
 .icon-styl:before, .icon-lock, .tree-context:before, .tree-resource:before, .tree-static-resource:before, .tree-weblink:before, .tree-symlink:before, .parent-resource:before,
 .icon-folder:before, .x-tree-node-expanded .parent-resource:before,
-.x-tree-node-expanded .icon-folder:before, .locked-resource:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, .modx-header-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
+.x-tree-node-expanded .icon-folder:before, .locked-resource:before, #modx-leftbar-header a:after, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, .modx-browser-detail-thumb.preview:before, .ext-mb-icon:before, .icon, .modx-status-msg:after, .modx-header-breadcrumbs ul li:after, .home-panel ol li:hover button:before {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -20467,6 +20467,11 @@ ul.x-tab-strip-bottom {
     font-size: 16px; }
     #modx-leftbar-header a:hover, #modx-leftbar-header a:focus {
       color: #234368; }
+    #modx-leftbar-header a:after {
+      content: "\f06e";
+      margin-left: 5px;
+      font-size: 14px;
+      opacity: 0.5; }
   #modx-leftbar-header img + a {
     padding-left: 0.67rem; }
 
