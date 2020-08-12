@@ -59,6 +59,7 @@ class modInstallRequest {
 
         $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
 
+        $this->parser->set('base_url', str_replace('index.php', '', MODX_SETUP_URL));
         $this->parser->set('app_name', 'MODX '.$currentVersion['code_name']);
         $this->parser->set('app_version', $currentVersion['full_version']);
 

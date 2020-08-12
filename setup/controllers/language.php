@@ -35,7 +35,9 @@ if (!empty($_POST['proceed'])) {
     $settings = $install->request->getConfig();
     $settings = array_merge($settings, $_POST);
     $install->settings->store($settings);
-    $this->proceed('welcome');
+
+    $nextAction = (MODX_SETUP_KEY === '@traditional@') ? 'options' : 'welcome';
+    $this->proceed($nextAction);
 }
 
 $install->settings->erase();
