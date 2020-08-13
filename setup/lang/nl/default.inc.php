@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'De rechten van je configuratiebestand zijn aa
 $_lang['config_file_written'] = 'Configuratiebestand met succes geschreven.';
 $_lang['config_key'] = 'MODX Configuratiesleutel';
 $_lang['config_key_change'] = 'Indien je de MODX configuratiesleutel wilt aanpassen, <a id="cck-href" href="javascript:void(0);">klik hier.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'Je hebt geprobeerd om een instelling te veranderen in setup/includes/config.core.php maar het bestand is niet schrijfbaar. Maak het bestand schrijfbaar of wijzig het handmatig voordat u doorgaat.';
 $_lang['connection_character_set'] = 'Verbindingskarakterset:';
 $_lang['connection_collation'] = 'Vergelijking:';
