@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Atributy konfiguračního souboru aktualizov�
 $_lang['config_file_written'] = 'Konfigurační soubor byl zapsán.';
 $_lang['config_key'] = 'MODX konfigurační klíč';
 $_lang['config_key_change'] = 'Pokud chcete změnit MODX konfigurační klíč, <a id="cck-href" href="javascript:void(0);">klikněte zde</a>.';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'Pokusil jste se změnit nastavení v souboru "setup/includes/config.core.php", ten je ale nasteven atributem pouze pro čtení. Změňte atributy souboru nebo upravte soubor manuálně, jinak nelze pokračovat.';
 $_lang['connection_character_set'] = 'Znaková sada připojení:';
 $_lang['connection_collation'] = 'Porovnání:';
