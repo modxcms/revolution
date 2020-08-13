@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Permissões de arquivo de Configuração atua
 $_lang['config_file_written'] = 'Arquivo Configuração gravado com êxito.';
 $_lang['config_key'] = 'Chave de configuração do MODX';
 $_lang['config_key_change'] = 'Se você gostaria de mudar a chave de configuração de MODX, <a id="cck-href" href="javascript:void(0);">por favor clique aqui.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'Você tentou alterar uma configuração no setup/includes/config.core.php, mas o arquivo não é gravável. Faça com que o arquivo seja gravável ou edite o arquivo manualmente antes de continuar.';
 $_lang['connection_character_set'] = 'Conjunto de caracteres de conexão:';
 $_lang['connection_collation'] = 'Agrupamento:';
