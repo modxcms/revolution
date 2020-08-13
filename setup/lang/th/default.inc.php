@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'สิทธิ์การเข้าถึ
 $_lang['config_file_written'] = 'ไฟล์การตั้งค่าถูกเขียนเรียบร้อยแล้ว';
 $_lang['config_key'] = 'คีย์การตั้งค่าของ MODX';
 $_lang['config_key_change'] = 'ถ้าคุณต้องการเปลี่ยนการตั้งค่าคีย์ของ MODX <a id="cck-href" href="javascript:void(0);">กรุณาคลิ๊กที่นี่</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'คุณพยายามบันทึกการเปลี่ยนแปลงการตั้งค่าใน setup/includes/config.core.php แต่ไฟล์ไม่สามารถเขียนได้ คุณต้องทำให้ ไฟล์สามารถเขียนได้หรือแก้ไขด้วยตนเองก่อนดำเนินการต่อ';
 $_lang['connection_character_set'] = 'ชุดตัวอักษรการเชื่อมต่อ:';
 $_lang['connection_collation'] = 'การตรวจเทียบ:';
