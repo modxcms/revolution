@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Config -tiedoston käyttöoikeudet on päivit
 $_lang['config_file_written'] = 'Config-tiedosto on kirjoitettu onnistuneesti.';
 $_lang['config_key'] = 'MODX kokoonpanoavain';
 $_lang['config_key_change'] = 'Jos haluat muuttaa MODX-kokoonpanoavainta <a id="cck-href" href="javascript:void(0);"> klikkaa tästä.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'Jos haluat suorittaa asennusohjelman muulla kuin tämän hetkisellä määritysavaimella hakemistossa setup/includes/config.core.php, määritä se alla.';
 $_lang['config_not_writable_err'] = 'You have attempted to change a setting in setup/includes/config.core.php, but the file is not writable. Make the file writable or edit the file manually before continuing.';
 $_lang['connection_character_set'] = 'Connection character set:';
 $_lang['connection_collation'] = 'Collation:';
