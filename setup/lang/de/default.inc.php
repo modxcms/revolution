@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Dateirechte der Konfigurationsdatei erfolgrei
 $_lang['config_file_written'] = 'Konfigurationsdatei erfolgreich gespeichert.';
 $_lang['config_key'] = 'MODX-Konfigurationsschlüssel';
 $_lang['config_key_change'] = 'Wenn Sie den MODX-Konfigurationsschlüssel ändern möchten, <a id="cck-href" href="javascript:void(0);">klicken Sie bitte hier.</a>';
-$_lang['config_key_override'] = 'Wenn Sie das Setup mit einem anderen Konfigurationsschlüssel durchführen wollen, als mit dem, der derzeit in <pre>setup/includes/config.php</pre> hinterlegt ist, dann geben Sie ihn unten an.';
+$_lang['config_key_override'] = 'Wenn Sie die Installation mit einem anderen Konfigurationsschlüssel durchführen möchten als dem, der momentan in der Datei <code>setup/includes/config.core.php</code> angegeben ist, geben Sie ihn bitte unten ein.';
 $_lang['config_not_writable_err'] = 'Sie haben versucht, eine Einstellung in der Datei setup/includes/config.core.php zu ändern, aber diese Datei ist nicht beschreibbar. Bitte sorgen Sie dafür, dass die Datei beschreibbar ist, oder ändern Sie sie manuell, bevor Sie fortfahren.';
 $_lang['connection_character_set'] = 'Zeichensatz der Datenbankverbindung:';
 $_lang['connection_collation'] = 'Collation:';
