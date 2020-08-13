@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Yapılandırma dosyası izinleri başarılı 
 $_lang['config_file_written'] = 'Yapılandırma dosyası başarıyla yazıldı.';
 $_lang['config_key'] = 'MODX Yapılandırma Anaharı';
 $_lang['config_key_change'] = 'MODX yapılandırma anahtarını değiştirmek için, <a id="cck-href" href="javascript:void(0);"> lütfen buraya tıklayın.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'setup/includes/config.core.php içinde bir ayarı değiştirme girişiminde bulundunuz, ama dosya yazılabilir değil. Devam etmeden önce dosyayı yazılabilir yapın veya dosyayı el ile düzenleyin.';
 $_lang['connection_character_set'] = 'Bağlantı karakter seti:';
 $_lang['connection_collation'] = 'Karşılaştırma:';
