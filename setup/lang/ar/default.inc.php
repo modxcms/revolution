@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'تم ترقية صلاحيات ملف الت�
 $_lang['config_file_written'] = 'تم كتابة ملف التهئية بنجاح.';
 $_lang['config_key'] = 'مفتاح التهيئة لمودكس';
 $_lang['config_key_change'] = 'اذا أردت تغيير مفتاح التهيئة لمودكس، <a id="cck-href" href="javascript:void(0);">الرجاء الضغط هنا.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'لقد حاولت تغيير إعداد ضمن setup/includes/config.core.php، لكن الملف غير قابل للكتابة. تأكد أن الملف قابل للكتابة أو عدل الملف يدوياً قبل المتابعة.';
 $_lang['connection_character_set'] = 'اتصال مجموعة الأحرف:';
 $_lang['connection_collation'] = 'الترتيب:';
