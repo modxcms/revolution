@@ -271,13 +271,13 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
 
     ,updateSet: function(btn,e) {
         var r = this.menu.record;
-        location.href = '?a=Security/Forms/Set/Update&id='+r.id;
+        location.href = '?a=security/forms/set/update&id='+r.id;
     }
     ,duplicateSet: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'Security/Forms/Set/Duplicate'
+                action: 'security/forms/set/duplicate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
