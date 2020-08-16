@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'A beállítási állomány jogosultságai sik
 $_lang['config_file_written'] = 'A beállítási állomány írása sikeres.';
 $_lang['config_key'] = 'MODX beállítási kulcs';
 $_lang['config_key_change'] = 'A MODX beállítási kulcs módosításához <a id="cck-href" href="javascript:void(0);">kattintson ide.</a>';
-$_lang['config_key_override'] = 'Ha másik beállítási kulccsal szeretné futtatni a telepítést, mint a <pre>setup/includes/config.core.php</pre> állományban megadott, adja meg alább.';
+$_lang['config_key_override'] = 'Ha másik beállítási kulccsal szeretné futtatni a telepítést, mint a <code>setup/includes/config.core.php</code> állományban megadott, adja meg alább.';
 $_lang['config_not_writable_err'] = 'Megpróbált egy beállítást módosítani a setup/includes/config.core.php-ban, de az állomány nem írható. Tegye írhatóvá, vagy módosítsa kézzel, mielőtt folytatná.';
 $_lang['connection_character_set'] = 'Kapcsolat karakterkészlete:';
 $_lang['connection_collation'] = 'Összevetés:';

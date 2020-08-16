@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Правомощията за конфигу�
 $_lang['config_file_written'] = 'Конфигурационния файл е успешно записан.';
 $_lang['config_key'] = 'MODX конфигурационен ключ';
 $_lang['config_key_change'] = 'Ако искате да проемните конфигурационния ключ на MODX, <a id="cck-href" href="javascript:void(0);">моля кликнете тук.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'Опитахте се да промените настройките в setup/includes/config.core.php, но файла не е записваем. Направете файла достъпен за запис или го редактирайте ръчно преди да продължите.';
 $_lang['connection_character_set'] = 'Набор връзки:';
 $_lang['connection_collation'] = 'Сравнение:';

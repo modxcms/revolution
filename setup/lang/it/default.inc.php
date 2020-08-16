@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Per messi del file di configurazione aggiorna
 $_lang['config_file_written'] = 'File di configurazione scritto con successo.';
 $_lang['config_key'] = 'Chiave di Configurazione di MODx';
 $_lang['config_key_change'] = 'Se vuoi cambiare la chiave di configurazione di MODx, <a id="cck-href" href="javascript:void(0);">clicca qui.</a>';
-$_lang['config_key_override'] = 'Se vuoi eseguire il setup su una chiave di configurazione diversa da quella attualmente specificata nel file <pre>setup/includes/config.core.php</pre> specificala sotto.';
+$_lang['config_key_override'] = 'Se vuoi eseguire il setup su una chiave di configurazione diversa da quella attualmente specificata nel tuo <code>setup/includes/config.core.php</code>, specificala sotto.';
 $_lang['config_not_writable_err'] = 'Hai provato a cambiare un parametro di setup/includes/config.core.php ma il file non è scrivibile. Rendi il file scrivibile o modificalo manualmente prima di continuare.';
 $_lang['connection_character_set'] = 'Charset connessione:';
 $_lang['connection_collation'] = 'Ordinamento:';

@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = '設定ファイルのパーミッションを
 $_lang['config_file_written'] = '設定ファイルの作成が完了しました。';
 $_lang['config_key'] = 'Configuration Key をここで指定';
 $_lang['config_key_change'] = 'Configuration Keyを変更したい場合は <a id="cck-href" href="javascript:void(0);">ここをクリックしてください。</a><br />※通常は変更する必要はありません。';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = '設定ファイル setup/includes/config.core.php が書き込み可能ではありません。パーミッションを書き込み可能に変更してください。';
 $_lang['connection_character_set'] = 'データベース接続の文字セット<br />(通常はutf-8):';
 $_lang['connection_collation'] = '文字セットの照合順序<br />(通常はutf8_general_ci):';

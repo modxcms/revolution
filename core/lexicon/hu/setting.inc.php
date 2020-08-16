@@ -36,19 +36,19 @@ $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['search_by_key'] = 'Search by key...';
-$_lang['setting_create'] = 'Create Setting';
+$_lang['setting_create'] = 'Beállítás létrehozása';
 $_lang['setting_err'] = 'Please check your data for the following fields: ';
 $_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
 $_lang['setting_err_nf'] = 'Setting not found.';
 $_lang['setting_err_ns'] = 'Setting not specified';
 $_lang['setting_err_not_editable'] = 'Ez a beállítás nem módosítható a rácsban. Kérjük, használja a gear/context menüt az érték módosításához!';
-$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
+$_lang['setting_err_remove'] = 'Hiba történt a beállítás törlésekor.';
 $_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
 $_lang['setting_err_startint'] = 'Settings may not start with an integer.';
 $_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
 $_lang['setting_remove'] = 'Delete Setting';
 $_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Edit Setting';
+$_lang['setting_update'] = 'Beállítás szerkesztése';
 $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
 $_lang['settings_desc'] = 'Itt módosíthatja a MODX kezelőfelületének beállításait, és a MODX webhely futási módját. <b>Az egyes beállítások a [[++key]] helyettesítőn keresztül lesznek elérhetők.</b><br />Kattintson duplán az érték oszlopon, ha a rácsban szeretné módosítani, vagy jobb kattintással megjelennek a további lehetőségek. A "+" jelre kattintva megjelenik a beállítás leírása.';
 $_lang['settings_furls'] = 'Friendly URLs';
@@ -686,19 +686,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the Resource you
 $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID for the site unavailable page.';
 
 $_lang['setting_static_elements_automate_templates'] = 'Önműködővé tegye a sablonok állandó elemeit?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a sablonok állandó állományainak létrehozása és törlése.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Önműködővé tegye a sablonváltozók állandó elemeit?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a sablonváltozók állandó állományainak létrehozása és törlése.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Önműködővé tegye a kódegységek állandó elemeit?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a kódegységek állandó állományainak létrehozása és törlése.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Önműködővé tegye a kódrészletek állandó elemeit?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a kódrészletek állandó állományainak létrehozása és törlése.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Önműködővé tegye a beépülők állandó elemeit?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a beépülők állandó állományainak létrehozása és törlése.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Állandó elemek alapértelmezett médiaforrása';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Adja meg az alapértelmezett médiaforrást az állandó elemek tárolására.';

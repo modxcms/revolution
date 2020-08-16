@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Config file permissions successfully updated.
 $_lang['config_file_written'] = 'Config file successfully written.';
 $_lang['config_key'] = 'MODX Configuration Key';
 $_lang['config_key_change'] = 'If you would like to change the MODX configuration key, <a id="cck-href" href="javascript:void(0);">please click here.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'You have attempted to change a setting in setup/includes/config.core.php, but the file is not writable. Make the file writable or edit the file manually before continuing.';
 $_lang['connection_character_set'] = 'Connection character set:';
 $_lang['connection_collation'] = 'Sortowanie:';

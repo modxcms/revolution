@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Izin file Config berhasil diperbarui.';
 $_lang['config_file_written'] = 'File Config berhasil ditulis.';
 $_lang['config_key'] = 'Tombol Konfigurasi MODX';
 $_lang['config_key_change'] = 'Jika Anda ingin mengubah kunci konfigurasi MODx, <a id="cck-href" href="javascript:void(0);">silahkan klik disini.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <pre>setup/includes/config.core.php</pre>, please specify it below.';
+$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
 $_lang['config_not_writable_err'] = 'Anda telah mencoba mengubah setting di setup / includes / config.core.php, namun file tersebut tidak dapat ditulis. Buatlah file bisa ditulis atau edit file secara manual sebelum melanjutkan.';
 $_lang['connection_character_set'] = 'Set karakter koneksi:';
 $_lang['connection_collation'] = 'Collation:';
