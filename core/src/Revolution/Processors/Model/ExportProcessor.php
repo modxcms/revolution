@@ -95,7 +95,7 @@ abstract class ExportProcessor extends GetProcessor
                 MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $fileName;
 
         /** @var modFileHandler $fileHandler */
-        $fileHandler = $this->modx->getService('fileHandler', 'modFileHandler');
+        $fileHandler = $this->modx->getService('fileHandler', modFileHandler::class);
         $fileObj = $fileHandler->make($file);
         $name = strtolower(str_replace([' ', '/'], '-', $this->object->get($this->nameField)));
 

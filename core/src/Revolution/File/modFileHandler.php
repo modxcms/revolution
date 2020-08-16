@@ -65,9 +65,9 @@ class modFileHandler {
         } else {
             if (is_dir($path)) {
                 $path = $this->postfixSlash($path);
-                $class = 'modDirectory';
+                $class = modDirectory::class;
             } else {
-                $class = 'modFile';
+                $class = modFile::class;
             }
         }
 
