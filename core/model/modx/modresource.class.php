@@ -451,6 +451,41 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
+     * Compute the "preview URL" for the resource
+     *
+     * @return string
+     */
+    public function getPreviewUrl() {
+        if ($this->get('deleted')) {
+            return '';
+        }
+        $this->xpdo->setOption('cache_alias_map', false);
+        $sessionEnabled = '';
+        /** @var modContextSetting|null $ctxSetting */
+        $ctxSetting = $this->xpdo->getObject(
+            'modContextSetting',
+            array(
+                'context_key' => $this->get('context_key'),
+                'key' => 'session_enabled'
+            )
+        );
+
+        if ($ctxSetting && $ctxSetting->get('value') == 0) {
+            $sessionEnabled = array('preview' => 'true');
+        }
+
+        return $this->xpdo->makeUrl(
+            $this->get('id'),
+            $this->get('context_key'),
+            $sessionEnabled,
+            'full',
+            array(
+                'xhtml_urls' => false
+            )
+        );
+    }
+
+    /**
      * Prepare the resource for output.
      */
     public function prepare()
