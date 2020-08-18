@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Make error_handler_class available as service [#15162]
 - UI improvements for site_name in header [#15180]
 - Changed "remove" to "delete", "update" to "edit" in lexicons [#15155]
 - Localize anonymous in context interface [#15153]
