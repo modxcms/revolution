@@ -145,7 +145,7 @@ MODx.panel.UserGroup = function(config) {
                     ,listeners: {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                         ,'updateRole': {fn:this.markDirty,scope:this}
-                        ,'addMember': {fn:this.markDirty,scope:this}
+                        ,'addUser': {fn:this.markDirty,scope:this}
                     }
                 }]
             },{
@@ -374,7 +374,7 @@ MODx.grid.UserGroupUsers = function(config) {
         },'->',{
             text: _('user_group_user_add')
             ,cls:'primary-button'
-            ,handler: this.addMember
+            ,handler: this.addUser
             ,hidden: MODx.perm.usergroup_user_edit == 0
         },{
             xtype: 'textfield'
@@ -404,7 +404,7 @@ MODx.grid.UserGroupUsers = function(config) {
         }]
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);
-    this.addEvents('updateRole','addMember');
+    this.addEvents('updateRole','addUser');
 };
 Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
     getMenu: function() {
@@ -456,7 +456,7 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
         MODx.loadPage('security/usergroup/update', 'id=' + id);
     }
 
-    ,addMember: function(btn,e) {
+    ,addUser: function(btn,e) {
         var r = {usergroup:this.config.usergroup};
 
         if (!this.windows['modx-window-user-group-adduser']) {
@@ -467,7 +467,7 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
                 ,listeners: {
                     'success': {fn:function(r) {
                         this.refresh();
-                        this.fireEvent('addMember',r);
+                        this.fireEvent('addUser',r);
                     },scope:this}
                 }
             });
