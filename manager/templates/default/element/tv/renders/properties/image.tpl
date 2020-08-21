@@ -25,58 +25,6 @@ MODx.load({
         ,anchor: '100%'
         ,listeners: oc
     },{
-        xtype: 'numberfield'
-        ,fieldLabel: _('image_hspace')
-        ,name: 'prop_hspace'
-        ,id: 'prop_hspace{/literal}{$tv|default}{literal}'
-        ,value: params['hspace'] || ''
-        ,width: 200
-        ,listeners: oc
-    },{
-        xtype: 'numberfield'
-        ,fieldLabel: _('image_vspace')
-        ,name: 'prop_vspace'
-        ,id: 'prop_vspace{/literal}{$tv|default}{literal}'
-        ,value: params['vspace'] || ''
-        ,width: 200
-        ,listeners: oc
-    },{
-        xtype: 'numberfield'
-        ,fieldLabel: _('image_border_size')
-        ,name: 'prop_borsize'
-        ,id: 'prop_borsize{/literal}{$tv|default}{literal}'
-        ,value: params['borsize'] || ''
-        ,width: 200
-        ,listeners: oc
-    },{
-        xtype: 'combo'
-        ,name: 'prop_align'
-        ,hiddenName: 'prop_align'
-        ,id: 'prop_align{/literal}{$tv|default}{literal}'
-        ,fieldLabel: _('image_align')
-        ,store: new Ext.data.SimpleStore({
-            fields: ['v']
-            ,data: [['none'],['baseline'],['top'],['middle'],['bottom'],['texttop'],['absmiddle'],['absbottom'],['left'],['right']]
-        })
-        ,displayField: 'v'
-        ,valueField: 'v'
-        ,mode: 'local'
-        ,editable: true
-        ,forceSelection: false
-        ,typeAhead: false
-        ,triggerAction: 'all'
-        ,value: params['align'] || 'none'
-        ,anchor: '100%'
-        ,listeners: oc
-    },{
-        xtype: 'textfield'
-        ,fieldLabel: _('name')
-        ,name: 'prop_name'
-        ,id: 'prop_name{/literal}{$tv|default}{literal}'
-        ,value: params['name'] || ''
-        ,anchor: '100%'
-        ,listeners: oc
-    },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
