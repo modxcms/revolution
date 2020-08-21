@@ -26,18 +26,18 @@ MODx.load({
         ,listeners: oc
     },{
         xtype: 'textfield'
-        ,fieldLabel: _('class')
-        ,name: 'prop_class'
-        ,id: 'prop_class{/literal}{$tv|default}{literal}'
-        ,value: params['class'] || ''
-        ,anchor: '100%'
-        ,listeners: oc
-    },{
-        xtype: 'textfield'
         ,fieldLabel: _('id')
         ,name: 'prop_id'
         ,id: 'prop_id{/literal}{$tv|default}{literal}'
         ,value: params['id'] || ''
+        ,anchor: '100%'
+        ,listeners: oc
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('class')
+        ,name: 'prop_class'
+        ,id: 'prop_class{/literal}{$tv|default}{literal}'
+        ,value: params['class'] || ''
         ,anchor: '100%'
         ,listeners: oc
     },{

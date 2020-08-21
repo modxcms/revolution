@@ -26,9 +26,9 @@ class modTemplateVarOutputRenderImage extends modTemplateVarOutputRender {
             if ($src) {
                 $attributes = [];
                 $attr = [
-                    'class' => $params['class'],
                     'src' => $src,
                     'id' => ($params['id'] ? $params['id'] : ''),
+                    'class' => $params['class'],
                     'alt' => htmlspecialchars($params['alttext']),
                     'style' => $params['style']
                 ];
