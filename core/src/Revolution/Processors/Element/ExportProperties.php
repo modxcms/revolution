@@ -57,7 +57,7 @@ class ExportProperties extends Processor
         }
 
         /** @var modFileHandler $fileHandler */
-        $fileHandler = $this->modx->getService('fileHandler', 'modFileHandler');
+        $fileHandler = $this->modx->getService('fileHandler', modFileHandler::class);
 
         $fileName = strtolower(str_replace(' ', '-', $this->getProperty('id'))) . '.export.js';
 

@@ -249,7 +249,7 @@ abstract class modFileSystemResource
             return $ppath;
         }
 
-        $directory = $this->fileHandler->make($ppath, [], 'modDirectory');
+        $directory = $this->fileHandler->make($ppath, [], modDirectory::class);
 
         return $directory;
     }

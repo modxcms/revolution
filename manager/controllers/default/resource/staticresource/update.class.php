@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\File\modFileHandler;
+
 /**
  * @package modx
  * @subpackage manager.controllers
@@ -73,7 +75,7 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
         }
 
         /** @var modFileHandler $fileHandler */
-        if ($fileHandler = $this->modx->getService('fileHandler', 'modFileHandler', '', ['context' => $workingContext->get('key')])) {
+        if ($fileHandler = $this->modx->getService('fileHandler', modFileHandler::class, '', ['context' => $workingContext->get('key')])) {
             $baseUrl = $fileHandler->getBaseUrl();
             if (!empty($this->resourceArray['content'])) {
                 $this->resourceArray['openTo'] = str_replace($baseUrl, '', dirname($this->resourceArray['content']) . '/');
