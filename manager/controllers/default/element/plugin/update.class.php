@@ -100,7 +100,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $this->pluginArray = $this->plugin->toArray();
         $this->pluginArray['properties'] = $data;
         $this->pluginArray['plugincode'] = $this->plugin->getContent();
-        if (strpos($this->pluginArray['plugincode'],'<?php') === false) {
+        if (strpos(ltrim($this->pluginArray['plugincode']),'<?php') !== 0) {
             $this->pluginArray['plugincode'] = "<?php\n".$this->pluginArray['plugincode'];
         }
 
