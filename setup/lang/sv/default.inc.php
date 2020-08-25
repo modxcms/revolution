@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Konfigurationsfilens rättigheter uppdaterade
 $_lang['config_file_written'] = 'Konfigurationsfilen skrevs.';
 $_lang['config_key'] = 'MODX konfigureringsnyckel';
 $_lang['config_key_change'] = 'Om du vill ändra MODX konfigureringsnyckel, <a id="cck-href" href="javascript:void(0);">klicka här</a>.';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
+$_lang['config_key_override'] = 'Om du vill köra installationen med en annan konfigureringsnyckel än den som just nu är angiven i <code>setup/includes/config.core.php</code>, så anger du det nedan.';
 $_lang['config_not_writable_err'] = 'Du har försökt ändra en inställning i setup/includes/config.core.php, men filen är inte skrivbar. Gör filen skrivbar eller redigera den manuellt innan du fortsätter.';
 $_lang['connection_character_set'] = 'Teckenuppsättning för anslutning:';
 $_lang['connection_collation'] = 'Kollationering:';
