@@ -100,7 +100,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->snippetArray = $this->snippet->toArray();
         $this->snippetArray['properties'] = $data;
         $this->snippetArray['snippet'] = $this->snippet->getContent();
-        if (strpos($this->snippetArray['snippet'],'<?php') === false) {
+        if (strpos(ltrim($this->snippetArray['snippet']),'<?php') !== 0) {
             $this->snippetArray['snippet'] = "<?php\n".$this->snippetArray['snippet'];
         }
 
