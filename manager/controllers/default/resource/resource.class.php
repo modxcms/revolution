@@ -386,6 +386,9 @@ abstract class ResourceManagerController extends modManagerController {
         $this->setPlaceholder('tvCounts',$this->modx->toJSON($this->tvCounts));
         $this->setPlaceholder('tvMap',$this->modx->toJSON($tvMap));
         $this->setPlaceholder('hidden',$hidden);
+        if (is_null($this->getPlaceholder('tvcount'))) {
+            $this->setPlaceholder('tvcount', 0);
+        }
 
         if (!empty($this->scriptProperties['showCheckbox'])) {
             $this->setPlaceholder('showCheckbox',1);
