@@ -119,9 +119,9 @@
                             <form action="" method="post" id="modx-forgot-login-form" class="c-form can-toggle {if NOT $_post.username_reset|default}is-hidden{/if}">
                                 <p class="lead">{$_lang.login_forget_your_login_note}</p>
 
-                                {if $error_message}
+                                {if isset($error_message) && $error_message}
                                     <p class="is-error">{$error_message|default}</p>
-                                {elseif $success_message}
+                                {elseif isset($success_message) && $success_message}
                                     <p class="is-success">{$success_message|default}</p>
                                 {/if}
 
