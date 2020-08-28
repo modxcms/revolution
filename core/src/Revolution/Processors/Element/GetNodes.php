@@ -330,8 +330,10 @@ class GetNodes extends Processor
             ];
         }
 
-        foreach (array_keys($this->actionMap) as $type) {
-            $nodes = array_merge($nodes, $this->getInCategoryElements([$type, $map[1]]));
+        if (isset($map[1])) {
+            foreach (array_keys($this->actionMap) as $type) {
+                $nodes = array_merge($nodes, $this->getInCategoryElements([$type, $map[1]]));
+            }
         }
 
         return $nodes;
