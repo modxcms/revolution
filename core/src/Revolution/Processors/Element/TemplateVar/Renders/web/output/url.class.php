@@ -53,6 +53,7 @@ class modTemplateVarOutputRenderUrl extends modTemplateVarOutputRender {
                 $attr = [
                     'href' => $url,
                     'title' => !empty($params['title']) ? htmlspecialchars($params['title']) : $name,
+                    'id' => !empty($params['id']) ? $params['id'] : null,
                     'class' => !empty($params['class']) ? $params['class'] : null,
                     'style' => !empty($params['style']) ? $params['style'] : null,
                     'target' => !empty($params['target']) ? $params['target'] : null,

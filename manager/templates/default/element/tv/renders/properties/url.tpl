@@ -34,6 +34,14 @@ MODx.load({
         ,anchor: '100%'
     },{
         xtype: 'textfield'
+        ,fieldLabel: _('id')
+        ,name: 'prop_id'
+        ,id: 'prop_id{/literal}{$tv|default}{literal}'
+        ,value: params['id'] || ''
+        ,listeners: oc
+        ,anchor: '100%'
+    },{
+        xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
         ,id: 'prop_class{/literal}{$tv|default}{literal}'
