@@ -59,9 +59,9 @@ MODx.load({
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
-        ,name: 'prop_attrib'
-        ,id: 'prop_attrib{/literal}{$tv|default}{literal}'
-        ,value: params['attrib'] || ''
+        ,name: 'prop_attributes'
+        ,id: 'prop_attributes{/literal}{$tv|default}{literal}'
+        ,value: params['attributes'] || ''
         ,listeners: oc
         ,anchor: '100%'
     }]
