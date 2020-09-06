@@ -254,6 +254,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,changeSource: function(sel) {
+        this.cm.activeNode = '';
         var s = sel.getValue();
         var rn = this.getRootNode();
         if (rn) { rn.setText(sel.getRawValue()); }
