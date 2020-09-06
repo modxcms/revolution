@@ -247,6 +247,10 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
      * @return bool|modContext
      */
     public function getWorkingContext() {
+        if (!$this->checkPolicy('view')) {
+            return false;
+        }
+
         $wctx = isset($this->properties['wctx']) && !empty($this->properties['wctx']) ? $this->properties['wctx'] : '';
         if (!empty($wctx)) {
             $workingContext = $this->xpdo->getContext($wctx);
@@ -267,7 +271,7 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
     public function initialize() {
         $this->setProperties($this->getProperties(true));
         $this->getPermissions();
-        return true;
+        return $this->checkPolicy('view');
     }
 
     /**

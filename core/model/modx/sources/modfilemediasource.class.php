@@ -24,14 +24,14 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
      * @return boolean
      */
     public function initialize() {
-        parent::initialize();
+        $return = parent::initialize();
         $options = array();
         if (!$this->ctx) {
             $this->ctx =& $this->xpdo->context;
         }
         $options['context'] = $this->ctx->get('key');
         $this->fileHandler = $this->xpdo->getService('fileHandler','modFileHandler', '',$options);
-        return true;
+        return $return;
     }
 
     /**
