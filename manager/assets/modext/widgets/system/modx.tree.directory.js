@@ -292,6 +292,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             // Node has been collapsed, grab its parent
             n = n.parentNode;
         }
+        if (n.id == this.config.openTo) {
+            n.select();
+        }
         var p = n.getPath('text');
         Ext.state.Manager.set(this.treestate_id, p);
     }
