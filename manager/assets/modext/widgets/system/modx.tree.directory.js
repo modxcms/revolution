@@ -723,7 +723,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,beforeUpload: function() {
-        var path = this.config.rootId || '/';
+        var path = this.config.openTo || this.config.rootId || '/';
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
