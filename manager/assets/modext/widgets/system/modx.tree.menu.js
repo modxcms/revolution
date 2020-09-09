@@ -12,10 +12,11 @@ MODx.tree.Menu = function(config) {
         rootIconCls: 'icon-navicon'
         ,rootId: 'n_'
         ,rootName: _('menu_top')
-        ,rootVisible: true
+        ,rootVisible: false
         ,expandFirst: true
         ,enableDrag: true
         ,enableDrop: true
+        ,ddAppendOnly: true
         ,url: MODx.config.connector_url
         ,action: 'System/Menu/GetNodes'
         ,sortAction: 'System/Menu/Sort'
@@ -36,7 +37,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
 
     ,createMenu: function(n,e) {
         var r = {
-            parent: ''
+            parent: 'topnav'
         };
         if (this.cm && this.cm.activeNode && this.cm.activeNode.attributes && this.cm.activeNode.attributes.data) {
             r['parent'] = this.cm.activeNode.attributes.data.text;
