@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Display caption instead of description in template TV grid [#15231]
 - Create dedicated method to get resource preview URL [#14954]
 - Fix bug when emptying resource trash [#15171]
 - Fix url parameters in config.js processor [#15165]

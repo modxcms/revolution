@@ -92,7 +92,7 @@ class modElementTemplateTvGetListProcessor extends modObjectGetListProcessor {
      * @return array|mixed
      */
     public function prepareRow(xPDOObject $object) {
-        $tvArray = $object->get(array('id','name','description','tv_rank','category_name'));
+        $tvArray = $object->get(array('id','name','caption','tv_rank','category_name'));
         $tvArray['access'] = (boolean)$object->get('access');
 
         $tvArray['perm'] = array();
