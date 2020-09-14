@@ -106,7 +106,7 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $tvArray = $object->get(['id', 'name', 'description', 'tv_rank', 'category_name']);
+        $tvArray = $object->get(['id', 'name', 'caption', 'tv_rank', 'category_name']);
         $tvArray['access'] = (boolean)$object->get('access');
 
         $tvArray['perm'] = [];

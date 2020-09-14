@@ -18,7 +18,7 @@ MODx.grid.TemplateTV = function(config) {
         title: _('template_assignedtv_tab')
         ,id: 'modx-grid-template-tv'
         ,url: MODx.config.connector_url
-        ,fields: ['id','name','description','tv_rank','access','perm','category_name','category']
+        ,fields: ['id','name','caption','tv_rank','access','perm','category_name','category']
         ,baseParams: {
             action: 'Element/Template/TemplateVar/GetList'
             ,template: config.template
@@ -63,8 +63,8 @@ MODx.grid.TemplateTV = function(config) {
             ,width: 150
             ,sortable: true
         },{
-            header: _('description')
-            ,dataIndex: 'description'
+            header: _('caption')
+            ,dataIndex: 'caption'
             ,width: 350
             ,sortable: false
         },tt,{
