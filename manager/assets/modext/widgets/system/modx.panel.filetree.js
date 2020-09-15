@@ -78,8 +78,26 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
      * @returns {Object}
      */
     ,loadTree: function(source) {
+        var params = {};
+        if (location.search) {
+            var parts = location.search.substring(1).split('&');
+
+            for (var i = 0; i < parts.length; i++) {
+                var nv = parts[i].split('=');
+                if (!nv[0]) continue;
+                params[nv[0]] = nv[1] || true;
+            }
+        }
+        var activeSource = params.source,
+            expandSource = false;
+
+        if (source.id == activeSource) {
+            expandSource = true;
+        }
+
         return MODx.load({
             xtype: 'modx-tree-directory'
+            ,autoExpandRoot: expandSource
             ,itemId: this._treePrefix + source.id
             ,stateId: this._treePrefix + source.id
             ,id: this._treePrefix + source.id
