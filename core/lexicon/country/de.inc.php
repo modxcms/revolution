@@ -45,7 +45,7 @@ $_country_lang["bs"] = 'Bahamas'; // Bahamas
 $_country_lang["bt"] = 'Bhutan'; // Bhutan
 $_country_lang["bv"] = 'Bouvet-Insel'; // Bouvet Island
 $_country_lang["bw"] = 'Botswana'; // Botswana
-$_country_lang["by"] = 'Weißrussland'; // Belarus
+$_country_lang["by"] = 'Belarus'; // Belarus
 $_country_lang["bz"] = 'Belize'; // Belize
 
 $_country_lang["ca"] = 'Kanada'; // Canada
