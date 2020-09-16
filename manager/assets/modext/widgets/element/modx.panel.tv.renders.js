@@ -8,7 +8,6 @@
  */
 MODx.panel.ImageTV = function(config) {
     config = config || {};
-    config.filemanager_url = MODx.config.filemanager_url;
     Ext.applyIf(config,{
         layout: 'form'
         ,autoHeight: true
@@ -70,7 +69,6 @@ Ext.reg('modx-panel-tv-image',MODx.panel.ImageTV);
  */
 MODx.panel.FileTV = function(config) {
     config = config || {};
-    config.filemanager_url = MODx.config.filemanager_url;
     Ext.applyIf(config,{
         layout: 'form'
         ,autoHeight: true

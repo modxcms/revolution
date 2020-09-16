@@ -17,8 +17,6 @@ use MODX\Revolution\Processors\Browser\Browser;
  * Remove a directory
  *
  * @property string  $dir         The directory to remove
- * @property boolean $prependPath (optional) If true, will prepend rb_base_dir to
- * the final path
  *
  * @package MODX\Revolution\Processors\Browser\Directory
  */

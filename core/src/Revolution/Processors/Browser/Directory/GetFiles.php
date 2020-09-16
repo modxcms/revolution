@@ -17,10 +17,6 @@ use MODX\Revolution\Processors\Browser\Browser;
  * Gets all files in a directory
  *
  * @property string  $dir         The directory to browse
- * @property boolean $prependPath (optional) If true, will prepend rb_base_dir to
- * the final path
- * @property boolean $prependUrl  (optional) If true, will prepend rb_base_url to
- * the final url
  *
  * @package MODX\Revolution\Processors\Browser\Directory
  */
