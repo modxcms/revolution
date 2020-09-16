@@ -360,11 +360,16 @@ ul.x-tab-strip-bottom {
 .tvs-wrapper {
   &.below-content {
     border-radius: $borderRadius;
-    margin-top: 20px;
+    margin: 1rem;
 
     .vertical-tabs-panel {
       border-radius: $borderRadius;
-      box-shadow: $boxShadow;
+    }
+  }
+
+  @include grid-media($desktop) {
+    &.below-content {
+      margin: 0;
     }
   }
 }

@@ -36,10 +36,14 @@
           line-height: 34px;
           position: absolute;
           top: 0;
-          left: 6px;
+          left: 0;
           text-align: center;
           text-indent: 0;
           z-index: 2; /* put the icon above the triangle :after element */
+        }
+
+        #packages-breadcrumbs &:before {
+          content: fa-content($fa-var-cube);
         }
 
         &:hover:before {
@@ -56,9 +60,9 @@
           display: inline-block;
           line-height: 12px;
           margin: 0; /* neutralize the normal li margin */
-          padding: 11px 13px 11px 20px;
+          padding: 12px;
           text-indent: -999em;
-          width: 20px;
+          width: 35px;
           z-index: 3;
 
           /* do not display the cover element here */
@@ -72,10 +76,7 @@
         }
       }
 
-
-
       &:hover {
-
         button,
         span,
         span:after {
