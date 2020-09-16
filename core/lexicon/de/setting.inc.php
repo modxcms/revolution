@@ -36,19 +36,19 @@ $_lang['namespace'] = 'Namensraum';
 $_lang['namespace_desc'] = 'Der Namensraum, mit dem diese Einstellung verbunden ist. Das Standard-Lexikon-Thema wird für diesen Namensraum geladen, wenn die Einstellungen eingelesen werden.';
 $_lang['namespace_filter'] = 'Nach Namensraum filtern...';
 $_lang['search_by_key'] = 'Nach Schlüssel suchen...';
-$_lang['setting_create'] = 'Create Setting';
+$_lang['setting_create'] = 'Einstellung erstellen';
 $_lang['setting_err'] = 'Bitte überprüfen Sie Ihre Daten für die folgenden Felder: ';
 $_lang['setting_err_ae'] = 'Eine Einstellung mit diesem Schlüssel existiert bereits. Bitte geben Sie einen anderen Namen für den Schlüssel an.';
 $_lang['setting_err_nf'] = 'Einstellung nicht gefunden.';
 $_lang['setting_err_ns'] = 'Einstellung nicht angegeben';
 $_lang['setting_err_not_editable'] = 'Diese Einstellung kann nicht in der Tabelle bearbeitet werden. Bitte benutzen Sie das Icon/Kontextmenü, um den Wert zu bearbeiten!';
-$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
+$_lang['setting_err_remove'] = 'Beim Versuch, die Einstellung zu löschen, ist ein Fehler aufgetreten.';
 $_lang['setting_err_save'] = 'Beim Versuch, die Einstellung zu speichern, ist ein Fehler aufgetreten.';
 $_lang['setting_err_startint'] = 'Schlüsselnamen von Einstellungen dürfen nicht mit einer Ziffer beginnen.';
 $_lang['setting_err_invalid_document'] = 'Es gibt kein Dokument mit der ID %d. Bitte geben Sie ein existierendes Dokument an.';
 $_lang['setting_remove'] = 'Einstellung löschen';
 $_lang['setting_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Einstellung löschen möchten? Das könnte Ihre MODX-Installation unbrauchbar machen.';
-$_lang['setting_update'] = 'Edit Setting';
+$_lang['setting_update'] = 'Einstellung bearbeiten';
 $_lang['settings_after_install'] = 'Da dies eine neue MODX-Installation ist, müssen Sie diese Einstellungen kontrollieren und ggf. einige Ihren Wünschen entsprechend ändern. Nachdem Sie die Einstellungen kontrolliert und ggf. angepasst haben, klicken Sie auf "Speichern", um die Daten in der Datenbank zu aktualisieren.<br /><br />';
 $_lang['settings_desc'] = 'Hier können Sie sowohl generelle Konfigurationseinstellungen für die MODX-Manager-Benutzeroberfläche vornehmen als auch festlegen, wie sich Ihre MODX-Website verhält. <b>Jede Einstellung ist ist mit dem [[++key]] Platzhalter verfügbar.</b><br />Doppelklicken Sie über der Einstellung, die Sie ändern möchten, auf die Werte-Spalte, um den Wert dynamisch direkt in der Tabelle zu bearbeiten, oder führen Sie einen Rechtsklick auf einer Einstellung aus, um weitere Optionen angeboten zu bekommen. Sie können, wo vorhanden, auch auf das "+"-Icon klicken, um eine Erläuterung zu der jeweiligen Einstellung zu bekommen.';
 $_lang['settings_furls'] = 'Suchmaschinenfreundliche URLs';
@@ -311,7 +311,7 @@ $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Die Methode, die zur Ein
 $_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Suchmaschinenfreundliche Aliasse: RegEx zur Einschränkung der erlaubten Zeichen';
 $_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'Ein gültiger regulärer Ausdruck zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen.';
 
-$_lang['setting_friendly_alias_strip_element_tags'] = 'Suchmaschinenfreundliche Aliasse: Element-Tags entfernen';
+$_lang['setting_friendly_alias_strip_element_tags'] = 'Suchmaschinenfreundliche Aliasse: Element-Tags löschen';
 $_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Gibt an, ob Element-Tags aus Ressourcen-Aliassen entfernt werden sollen.';
 
 $_lang['setting_friendly_alias_translit'] = 'Transliteration suchmaschinenfreundlicher Aliasse';
@@ -686,19 +686,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Geben Sie die ID der Ressource e
 $_lang['setting_site_unavailable_page_err'] = 'Bitte geben Sie die Ressourcen-ID für die Website-Offline-Seite an.';
 
 $_lang['setting_static_elements_automate_templates'] = 'Statische Elemente für Templates automatisieren?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Templates, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Statische Elemente für Template-Variablen automatisieren?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Template-Variablen, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Statische Elemente für Chunks automatisieren?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Chunks, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Statische Elemente für Snippets automatisieren?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Snippets, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Statische Elemente für Plugins automatisieren?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Plugins, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Standard Medienquelle für statische Elemente';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Geben Sie die standardmäßige Medienquelle an, in der die statischen Elementen gespeichert werden.';
