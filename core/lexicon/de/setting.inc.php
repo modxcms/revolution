@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'Wenn diese Einstellung auf "Ja" geset
 $_lang['setting_cache_alias_map'] = 'Kontext-Alias-Cache aktivieren';
 $_lang['setting_cache_alias_map_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Ressourcen-URIs in den Kontext gecacht. Diese Einstellung sollte für kleinere Sites aktiviert und für größere Sites deaktiviert werden, um die Performance zu verbessern.';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Verwende die Context-Ressourcen-Tabelle für Context-Cache-Aktualisierungen';
+$_lang['setting_use_context_resource_table_desc'] = 'Wenn diese Einstellung aktiviert ist, wird bei Kontext-Aktualisierungen die Tabelle context_resource verwendet. Dadurch sind Sie in der Lage, programmgesteuert eine Ressource mehreren Kontexten zuzuordnen. Wenn Sie diese Möglichkeit nicht mittels der API nutzen, können Sie diese Einstellung auf "Nein" stellen. Bei großen Websites werden Sie dadurch im Manager möglicherweise eine bessere Performance erreichen.';
 
 $_lang['setting_cache_context_settings'] = 'Kontext-Einstellungen-Cache aktivieren';
 $_lang['setting_cache_context_settings_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden Kontext-Einstellungen gecacht, um die Ladezeiten zu verringern.';
@@ -332,7 +332,7 @@ $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Die Methode, die zur Ein
 $_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Suchmaschinenfreundliche Aliasse: RegEx zur Einschränkung der erlaubten Zeichen';
 $_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'Ein gültiger regulärer Ausdruck zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen.';
 
-$_lang['setting_friendly_alias_strip_element_tags'] = 'Suchmaschinenfreundliche Aliasse: Element-Tags entfernen';
+$_lang['setting_friendly_alias_strip_element_tags'] = 'Suchmaschinenfreundliche Aliasse: Element-Tags löschen';
 $_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Gibt an, ob Element-Tags aus Ressourcen-Aliassen entfernt werden sollen.';
 
 $_lang['setting_friendly_alias_translit'] = 'Transliteration suchmaschinenfreundlicher Aliasse';
@@ -716,19 +716,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Geben Sie die ID der Ressource e
 $_lang['setting_site_unavailable_page_err'] = 'Bitte geben Sie die Ressourcen-ID für die Website-Offline-Seite an.';
 
 $_lang['setting_static_elements_automate_templates'] = 'Statische Elemente für Templates automatisieren?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Templates, z. B. das Erstellen und Entfernen von statischen Dateien, automatisieren.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Templates, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Statische Elemente für Template-Variablen automatisieren?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Template-Variablen, z. B. das Erstellen und Entfernen von statischen Dateien, automatisieren.';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Template-Variablen, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Statische Elemente für Chunks automatisieren?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Chunks, z. B. das Erstellen und Entfernen von statischen Dateien, automatisieren.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Chunks, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Statische Elemente für Snippets automatisieren?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Snippets, z. B. das Erstellen und Entfernen von statischen Dateien, automatisieren.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Snippets, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Statische Elemente für Plugins automatisieren?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Plugins, z. B. das Erstellen und Entfernen von statischen Dateien, automatisieren.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Dies wird das Verarbeiten von statischen Dateien für Plugins, z. B. das Erstellen und Löschen von statischen Dateien, automatisieren.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Standard Medienquelle für statische Elemente';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Geben Sie die standardmäßige Medienquelle an, in der die statischen Elementen gespeichert werden.';
