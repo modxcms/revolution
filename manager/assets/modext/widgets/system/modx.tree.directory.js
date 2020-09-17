@@ -261,6 +261,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,changeSource: function(sel) {
+        this.cm.activeNode = '';
         var s = sel.getValue();
         var rn = this.getRootNode();
         if (rn) { rn.setText(sel.getRawValue()); }
@@ -297,6 +298,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         if (!n.expanded && !n.isRoot) {
             // Node has been collapsed, grab its parent
             n = n.parentNode;
+        }
+        if (n.id == this.config.openTo) {
+            n.select();
         }
         var p = n.getPath('text');
         Ext.state.Manager.set(this.treestate_id, p);
@@ -745,7 +749,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,beforeUpload: function() {
-        var path = this.config.rootId || '/';
+        var path = this.config.openTo || this.config.rootId || '/';
         if (this.cm.activeNode) {
             path = this.getPath(this.cm.activeNode);
             if(this.cm.activeNode.isLeaf()) {
