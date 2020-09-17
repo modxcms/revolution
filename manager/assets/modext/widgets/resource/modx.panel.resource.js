@@ -735,27 +735,36 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 return { collapsed: this.collapsed };
             }
             ,items: [{
-                layout: 'form'
+                layout: 'column'
                 ,border: false
-                ,items: [{
-                    xtype: 'xcheckbox'
-                    ,boxLabel: _('resource_published')
-                    ,hideLabel: true
-                    ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
-                    ,name: 'published'
-                    ,id: 'modx-resource-published'
-                    ,inputValue: 1
-                    ,checked: parseInt(config.record.published)
+                ,items:[{
+                    columnWidth: .5
+                    ,layout: 'form'
+                    ,items: [{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('resource_published')
+                        ,hideLabel: true
+                        ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
+                        ,name: 'published'
+                        ,id: 'modx-resource-published'
+                        ,inputValue: 1
+                        ,checked: parseInt(config.record.published)
+                    }]
                 },{
-                    xtype: 'xcheckbox'
-                    ,boxLabel: _('deleted')
-                    ,description: '<b>[[*deleted]]</b><br />'+_('resource_delete')
-                    ,hideLabel: true
-                    ,cls: 'danger'
-                    ,name: 'deleted'
-                    ,id: 'modx-resource-deleted'
-                    ,inputValue: 1
-                    ,checked: parseInt(config.record.deleted) || false
+                    columnWidth: .5
+                    ,layout: 'form'
+                    ,cls: 'resource-deleted-wrap'
+                    ,items: [{
+                        xtype: 'xcheckbox'
+                        ,boxLabel: _('deleted')
+                        ,description: '<b>[[*deleted]]</b><br />'+_('resource_delete')
+                        ,hideLabel: true
+                        ,cls: 'danger'
+                        ,name: 'deleted'
+                        ,id: 'modx-resource-deleted'
+                        ,inputValue: 1
+                        ,checked: parseInt(config.record.deleted) || false
+                    }]
                 }]
             },{
                 xtype: 'xdatetime'

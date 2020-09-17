@@ -1189,7 +1189,6 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   >.x-column {
     margin-right: 0;
     overflow: visible;
-
   }
 
   /* distance to the right for all following columns, this makes the first one 15px wider than the rest*/
@@ -1197,6 +1196,11 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   >.x-column:not(.x-hide-display)~.x-column {
     margin-right: 0;
     margin-left: 15px;
+
+    &.resource-deleted-wrap {
+      margin-right: 0;
+      margin-left: 5px;
+    }
   }
 }
 
