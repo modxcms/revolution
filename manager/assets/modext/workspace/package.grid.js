@@ -376,6 +376,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 'success': {fn:function(r) {
                     this.loadWindow(btn,e,{
                         xtype: 'modx-window-package-update'
+                        ,cls: 'modx-alert'
                         ,packages: r.object
                         ,record: this.menu.record
                         ,force: true
