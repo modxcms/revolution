@@ -218,7 +218,8 @@ class modTransportPackage extends xPDOObject {
                         if ($state < 0) {
                             /* if directory is missing or empty but zip exists, and DB state value is incorrect, fix here */
                             $targetDir = basename($sourceFile, '.transport.zip');
-                            $state = (is_dir($packageDir.$targetDir) && count(glob($packageDir.$targetDir.'/*')) !== 0) ? $this->get('state') : xPDOTransport::STATE_PACKED;
+                            $packageTargetDirIsNotEmpty = (count(glob($packageDir . $targetDir . '/*')) !== 0)
+                            $state = (is_dir($packageDir . $targetDir) && $packageTargetDirIsNotEmpty) ? $this->get('state') : xPDOTransport::STATE_PACKED;
                         }
                         /* retrieve the package */
                         $this->package = xPDOTransport :: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
