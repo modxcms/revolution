@@ -27,15 +27,15 @@ For details read the [complete changelog](./core/docs/changelog.txt 'complete ch
 Here's what you need to get started installing or upgrading MODX Revoluton:
 
 -   [Download MODX Revolution](http://modx.com/download/ 'Download MODX')
--   [What's required to run MODX Revolution](https://docs.modx.com/current/en/getting-started/server-requirements 'Server Requirements - MODx Revolution 2.x - MODx Documentation')
--   [How to install MODX Revolution](https://docs.modx.com/current/en/getting-started/installation/standard 'Basic Installation - MODx Revolution 2.x - MODx Documentation')
--   [Install MODX via git](https://docs.modx.com/current/en/getting-started/installation/git 'Git Installation - MODx Revolution 2.x - MODx Documentation')
--   [How to upgrade MODX Revolution](https://docs.modx.com/current/en/getting-started/maintenance/upgrading 'Upgrading MODx - MODx Revolution 2.x - MODx Documentation')
--   [Read the MODX Revolution Documentation](https://docs.modx.com/ 'Home - MODx Revolution 2.x - MODx Documentation')
+-   [What's required to run MODX Revolution](https://docs.modx.com/current/en/getting-started/server-requirements 'Server Requirements - MODX Revolution 2.x - MODX Documentation')
+-   [How to install MODX Revolution](https://docs.modx.com/current/en/getting-started/installation/standard 'Basic Installation - MODX Revolution 2.x - MODX Documentation')
+-   [Install MODX via git](https://docs.modx.com/current/en/getting-started/installation/git 'Git Installation - MODX Revolution 2.x - MODX Documentation')
+-   [How to upgrade MODX Revolution](https://docs.modx.com/current/en/getting-started/maintenance/upgrading 'Upgrading MODX - MODX Revolution 2.x - MODX Documentation')
+-   [Read the MODX Revolution Documentation](https://docs.modx.com/ 'Home - MODX Revolution 2.x - MODX Documentation')
 
 ### Other Important Stuff
 
-MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](https://github.com/modxcms/revolution/issues 'MODX Github Issues'). Make sure you [read the documentation](https://docs.modx.com/ 'Home - MODx Revolution 2.x - MODx Documentation'), [post feedback and share your successes](https://community.modx.com/ 'MODX Community') in the MODX community forums. And also help with translating lexicons on [Crowdin platform](https://crowdin.com/project/modx-revolution). To join us in the quest for _Creative Freedom_, [become a Contributor](https://docs.modx.com/current/en/contribute/code). You can [contribute using GitHub](https://docs.modx.com/current/en/contribute/code 'Contribute to MODX via GitHub')
+MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](https://github.com/modxcms/revolution/issues 'MODX Github Issues'). Make sure you [read the documentation](https://docs.modx.com/ 'Home - MODX Revolution 2.x - MODX Documentation'), [post feedback and share your successes](https://community.modx.com/ 'MODX Community') in the MODX community forums. And also help with translating lexicons on [Crowdin platform](https://crowdin.com/project/modx-revolution). To join us in the quest for _Creative Freedom_, [become a Contributor](https://docs.modx.com/current/en/contribute/code). You can [contribute using GitHub](https://docs.modx.com/current/en/contribute/code 'Contribute to MODX via GitHub')
 
 On behalf of the entire MODX Team,
 
