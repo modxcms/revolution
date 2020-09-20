@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Menetapkan URL untuk RSS feed untuk
 $_lang['setting_feed_modx_security_enabled'] = 'MODX keamanan Feed diaktifkan';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Jika \'Tidak\', MODX akan menyembunyikan Berita keamanan di bagian Selamat datang dari manajer.';
 
-$_lang['setting_filemanager_path'] = 'Path file Manager (sudah ditinggalkan)';
-$_lang['setting_filemanager_path_desc'] = 'Usang - menggunakan sumber-sumber Media sebagai gantinya. IIS sering tidak mengisi document_root pengaturan dengan benar, yang digunakan oleh file manager untuk menentukan apa yang Anda bisa melihat pada. Jika Anda mengalami masalah menggunakan file manager, pastikan ini poin jalan ke akar instalasi MODX.';
-
-$_lang['setting_filemanager_path_relative'] = 'Apakah manajer File Path relatif? (Sudah ditinggalkan)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Usang - menggunakan sumber-sumber Media sebagai gantinya. Jika pengaturan filemanager_path Anda relatif terhadap MODX base_path, kemudian silakan set pengaturan ini ke ya. Jika Anda filemanager_path di luar docroot, pengaturan No.';
-
-$_lang['setting_filemanager_url'] = 'Manajer file Url (sudah ditinggalkan)';
-$_lang['setting_filemanager_url_desc'] = 'Usang - menggunakan sumber-sumber Media sebagai gantinya. Opsional. Menetapkan ini jika Anda ingin mengatur sebuah URL yang eksplisit untuk mengakses file di file manager MODX dari (berguna jika Anda telah mengubah filemanager_path ke path di luar MODX webroot). Pastikan ini adalah nilai pengaturan filemanager_path URL diakses web. Jika Anda membiarkannya kosong, MODX akan mencoba untuk secara otomatis menghitung itu.';
-
-$_lang['setting_filemanager_url_relative'] = 'Apakah manajer File URL relatif? (Sudah ditinggalkan)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Usang - menggunakan sumber-sumber Media sebagai gantinya. Jika pengaturan filemanager_url Anda relatif terhadap MODX base_url, kemudian silakan set pengaturan ini ke ya. Jika Anda filemanager_url di luar webroot utama, pengaturan No.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Gunakan semua grup sumber daya untuk bentuk kotumisasi';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Jika diatur ke benar, FC akan menggunakan * all * set untuk * all * kelompok pengguna anggota ketika menerapkan pengaturan bentuk kustomisasi. Jika tidak, itu hanya akan menggunakan pengaturan milik pengguna primer kelompok. Catatan: pengaturan ini ke Ya mungkin menyebabkan bug dengan bertentangan FC set.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'Penerbitan standar';
 $_lang['setting_publish_default_desc'] = 'Pilih \'Ya\' untuk membuat semua sumber daya baru yang diterbitkan oleh default.';
 $_lang['setting_publish_default_err'] = 'Tolong nyatakan apakah Anda ingin dokumen diterbitkan secara default atau tidak.';
 
-$_lang['setting_rb_base_dir'] = 'Asal sumber';
-$_lang['setting_rb_base_dir_desc'] = 'Masukkan jalur fisik ke direktori sumber. Pengaturan ini biasanya dibuat secara otomatis. Jika Anda menggunakan IIS, MODX mungkin tidak dapat bekerja dengan sendirinya, menyebabkan sumber pencarian menunjukkan kesalahan. Dalam hal ini, Anda dapat memasukkan jalannya ke direktori gambar di sini (jalan seperti yang akan Anda lihat di Windows Explorer). <strong>NOTE:</strong> Direktori sumber harus berisi gambar, berkas, flash dan media bagian folder agar pencarian sumber berfungsi dengan benar.';
-$_lang['setting_rb_base_dir_err'] = 'Harap sebutkan direktori dasar browser sumber daya.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Direktori sumber ini tidak ada atau tidak dapat diakses. Harap sebutkan direktori yang sah atau sesuaikan hak akses dari direktori ini.';
-
-$_lang['setting_rb_base_url'] = 'Sumber URL';
-$_lang['setting_rb_base_url_desc'] = 'Masukkan jalur virtual ke direktori sumber daya. Pengaturan ini biasanya dibuat secara otomatis. Jika Anda menggunakan IIS, MODX mungkin tidak dapat mengerjakan URL dengan sendirinya, menyebabkan Browser Sumber Daya menunjukkan kesalahan. Dalam hal ini, Anda dapat memasukkan URL ke direktori gambar di sini (URL yang akan Anda masukkan di Internet Explorer).';
-$_lang['setting_rb_base_url_err'] = 'Harap sebutkan URL dasar browser sumber daya.';
-
 $_lang['setting_request_controller'] = 'Permintaan pengaturan Filename';
 $_lang['setting_request_controller_desc'] = 'Nama file dari pengontrol permintaan utama dari mana MODX dimuat. Sebagian besar pengguna bisa meninggalkan ini sebagai index.php.';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
 
-$_lang['setting_strip_image_paths'] = 'Rewrite browser paths?';
-$_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODX install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
-
 $_lang['setting_symlink_merge_fields'] = 'Merge Resource Fields in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'If set to Yes, will automatically merge non-empty fields with target resource when forwarding using Symlinks.';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Di sini Anda bisa memasukkan daftar berka
 
 $_lang['setting_use_alias_path'] = 'Gunakan sahabat alias diri sendiri';
 $_lang['setting_use_alias_path_desc'] = 'Atur pilihan ini menjadi \'ya\' akan menampilkan path lengkap ke sumber jika sumber memiliki alias. Misalnya, jika sumber dengan alias bernama \'child\' berada di dalam lingkupan sumber dengan alias disebut \'parent\', maka seluruh alias path ke sumber akan ditampilkan sebagai \'/parent/child.html\'.<br/><strong>CATATAN: Saat menyetel opsi ini ke \'Ya\' (mengaktifkan jalur alias), item referensi (seperti gambar, CSS, JavaScripts, dll.) gunakan jalur absolut, misalnya \'/ aset / gambar\' sebagai bertentangan dengan \'aset / gambar\'. Dengan demikian Anda akan mencegah pencarian (atau jaringan pencarian) menambahkan jalur relatif ke jalur alias.</strong>';
-
-$_lang['setting_use_browser'] = 'Mengaktifkan sumber pencarian';
-$_lang['setting_use_browser_desc'] = 'Pilih ya untuk mengaktifkan sumber daya browser. Hal ini akan memungkinkan pengguna untuk mencari dan meng-upload sumber daya seperti gambar, flash dan file media pada server.';
-$_lang['setting_use_browser_err'] = 'Sebutkan apakah atau tidak anda ingin menggunakan sumber daya browser.';
 
 $_lang['setting_use_editor'] = 'Mengaktifkan Editor Teks Kaya';
 $_lang['setting_use_editor_desc'] = 'Apakah anda ingin mengaktifkan editor teks kaya? Jika anda lebih nyaman menulis HTML, maka anda dapat mengubah editor menggunakan pengaturan ini. Perhatikan bahwa pengaturan ini berlaku untuk semua dokumen dan semua pengguna!';
