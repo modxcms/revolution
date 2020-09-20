@@ -35,7 +35,7 @@ Here's what you need to get started installing or upgrading MODX Revoluton:
 
 ### Other Important Stuff
 
-MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](https://github.com/modxcms/revolution/issues 'MODX Github Issues'). Make sure you [read the documentation](https://docs.modx.com/ 'Home - MODx Revolution 2.x - MODx Documentation'), [post feedback and share your successes](https://community.modx.com/ 'MODX Community') in the MODX community forums. To join us in the quest for _Creative Freedom_, [become a Contributor](https://docs.modx.com/current/en/contribute/code). You can [contribute using GitHub](https://docs.modx.com/current/en/contribute/code 'Contribute to MODX via GitHub')
+MODX is only as good as it is because of many individual community members and users that take the time to [report issues and request new features](https://github.com/modxcms/revolution/issues 'MODX Github Issues'). Make sure you [read the documentation](https://docs.modx.com/ 'Home - MODx Revolution 2.x - MODx Documentation'), [post feedback and share your successes](https://community.modx.com/ 'MODX Community') in the MODX community forums. And also help with translating lexicons on [Crowdin platform](https://crowdin.com/project/modx-revolution). To join us in the quest for _Creative Freedom_, [become a Contributor](https://docs.modx.com/current/en/contribute/code). You can [contribute using GitHub](https://docs.modx.com/current/en/contribute/code 'Contribute to MODX via GitHub')
 
 On behalf of the entire MODX Team,
 
