@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Imposta l\'URL per il feed RSS per 
 $_lang['setting_feed_modx_security_enabled'] = 'Feed Avvisi di sicurezza MODX Abilitato';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Se impostato su \'NO\', verrà nascosto il feed sulla Sicurezza nella sezione di benvenuto del manager.';
 
-$_lang['setting_filemanager_path'] = 'Percorso del File Manager';
-$_lang['setting_filemanager_path_desc'] = 'IIS spesso non completa in modo corretto il valore document_root, che è usato per determinare cosa puoi vedere dal file manager. Se stai incontrando problemi usando il file manager, assicurati che questo percorso punti alla root della tua installazione di MODX.';
-
-$_lang['setting_filemanager_path_relative'] = 'Il percorso del File Manager è Relativo?';
-$_lang['setting_filemanager_path_relative_desc'] = 'Se il tuo valore del filemanager_path è relativo rispetto al base_path di MODX, allora imposta questo valore a \'SI\'. Se il tuo filemanager_path è esterno rispetto alla radice dei documenti (docroot), imposta questo su \'NO\'.';
-
-$_lang['setting_filemanager_url'] = 'File Manager Url';
-$_lang['setting_filemanager_url_desc'] = 'Opzionale. Specifica questo valore se vuoi impostare un esplicito URL per accedere ai files tramite il file manager di MODX (utile se hai cambiato il valore filemanager_path con un percorso esterno alla radice web (webroot) di MODX). Assicurati che questa sia URL, accessibile da web, del parametro del filemanager_path. Se lasci questo campo vuoto, MODX proverà a calcolarlo automaticamente.';
-
-$_lang['setting_filemanager_url_relative'] = 'L\'URL del File Manager è Relativa?';
-$_lang['setting_filemanager_url_relative_desc'] = 'Se il tuo valore del filemanager_url è relativo rispetto alla base_url di MODx, allora imposta questo valore a \'SI\'. Se il tuo filemanager_url è esterno rispetto alla radice web (webroot), imposta questo su \'NO\'.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Utilizzare Tutte Associazioni Gruppo Utenti per la personalizzazione Form';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Se impostato SI, FC (Form Customization) usera\' *tutti* i settaggi per *tutti* i membri presenti in *tutti* i Gruppi Utenti quando viene applicato il settaggio di FC. Altrimenti , FC usera\' SOLO il settaggio appartenente al Gruppo Utenti Primario. ATTENZIONE: Impostando su SI potrebbero\' crearsi conflitti (BUG) con il settaggio FC.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'Pubblicato di Default';
 $_lang['setting_publish_default_desc'] = 'Scegli \'SI\' per impostare che tutte le nuove risorse siano "pubblicate di default".';
 $_lang['setting_publish_default_err'] = 'Per favore scegli se vuoi o no che i nuovi documenti siano pubblicati di default.';
 
-$_lang['setting_rb_base_dir'] = 'Percorso Risorse';
-$_lang['setting_rb_base_dir_desc'] = 'Inserisci il percorso fisico alla directory delle Risorse. Questa impostazione di solito è generata automaticamente. Se stai usando IIS, tuttavia, MODX potrebbe non riuscire ad impostare il percorso corretto, costringendo il browser delle Risorse a mostrare un errore. In tal caso, qui puoi correggere il percorso alla cartella delle immagini (il percorso che vedete in Windows Explorer). <strong>NOTA:</strong> La directory delle Risorse deve contenere le sottocartelle images, files, flash e media affinché funzioni correttamente con il Browser di Risorse.';
-$_lang['setting_rb_base_dir_err'] = 'Per favore inserisci la directory base per il browser delle risorse.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Questa directory o non esiste o non è accessibile. Per favore inserisci una directory valida o controlla i permessi di questa cartella.';
-
-$_lang['setting_rb_base_url'] = 'URL Risorse';
-$_lang['setting_rb_base_url_desc'] = 'Inserisci il percorso virtuale alla directory delle risorse. Questa impostazione di solito è generata automaticamente. Se stai usando IIS, tuttavia, MODX potrebbe non riuscire a determinare l\'URL da solo, costringendo il browser delle Risorse a mostrare un errore. In quel caso, qui puoi inserire l\'URL della cartella delle immagini (il percorso come lo scriveresti in Internet Explorer).';
-$_lang['setting_rb_base_url_err'] = 'Per favore specifica l\'URL base del browser delle risorse.';
-
 $_lang['setting_request_controller'] = 'Nome File Controllore Richieste';
 $_lang['setting_request_controller_desc'] = 'Il nome del file del controllore delle richieste con cui è caricato MODX. La maggior parte degli utenti possono lasciare index.php.';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specifica una categor
 $_lang['setting_static_elements_basepath'] = 'Percorso di base degli elementi statici';
 $_lang['setting_static_elements_basepath_desc'] = 'Percorso di base dove memorizzare i file di elementi statici.';
 
-$_lang['setting_strip_image_paths'] = 'Riscrivi Percorsi Browser?';
-$_lang['setting_strip_image_paths_desc'] = 'Se impostato su \'NO\', MODX scriverà le origini dei files delle risorse src(immagini, files, flash, etc.) come URLs assoluti. Gli URLs relativi sono utili per spostare la tua installazione di MODX, e.g., da un server di test a un server di produzione. Se non hai idea di cosa significhi, sarebbe opportuno lasciare semplicemente impostato su \'SI\'.';
-
 $_lang['setting_symlink_merge_fields'] = 'Unisci Campi Risorsa nei Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'Se impostato su Si, unirà automaticamente i campi non-vuoti con la risorsa target in caso di reindirizzamento con Symlinks.';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Qui puoi inserire una lista di tipi di fi
 
 $_lang['setting_use_alias_path'] = 'Usa Percorsi Semplici Alias (Completi)';
 $_lang['setting_use_alias_path_desc'] = 'Impostando questa opzione su \'SI\' verrà mostrato il percorso completo della Risorsa, se la Risorsa ha un alias. Per esempio, se una Risorsa con un alias chiamato \'figlio\' si trova nella cartella con alias \'genitore\', allora il percorso dell\'alias sarà \'/genitore/figlio.html\'.<br /><strong>NOTA: Se impostato su \'SI\' (attivando il percorso alias), si deve far riferimento agli oggetti (come immagini, css, javascripts, ecc) usando il percorso assoluto: es., \'/assets/images\' invece di \'assets/images\'. In questo modo si evita che il browser (o il web-server) aggiunga il percorso relativo al percorso dell\'alias.</strong>';
-
-$_lang['setting_use_browser'] = 'Abilita Browser Risorse';
-$_lang['setting_use_browser_desc'] = 'Seleziona \'SI\' per abilitare il browser delle risorse. Questo consentirà ai tuoi utenti di navigare e caricare risorse come immagini, flash e files multimediali sul server.';
-$_lang['setting_use_browser_err'] = 'Specifica se consentire o no l\'utilizzo del browser delle risorse.';
 
 $_lang['setting_use_editor'] = 'Abilita Editor Rich Text';
 $_lang['setting_use_editor_desc'] = 'Vuoi abilitare l\'editor rich text per le Risorse? Se sei abituato a scrivere direttamente in HTML, allora puoi disabilitare l\'editor da qui impostando "NO". Nota che questa opzione si applica a tutti i documenti e a tutti gli utenti!';
