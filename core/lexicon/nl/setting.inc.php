@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Stel de URL in voor de RSS feed voo
 $_lang['setting_feed_modx_security_enabled'] = 'MODX Beveiligings Feed Ingeschakeld';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Indien \'Nee\', MODX zal het Beveiligings blok verbergen op het welkomstscherm van de manager.';
 
-$_lang['setting_filemanager_path'] = 'Bestandsmanager pad';
-$_lang['setting_filemanager_path_desc'] = 'IIS heeft moeite met het goed instellen van de document_root instelling, welke door de bestandsmanager gebruikt wordt zodat bepaald wordt wat jij te zien krijgt. Indien je problemen ondervindt in de bestandsmanager, controleer of dit pad naar de root van jouw MODX installatie gaat.';
-
-$_lang['setting_filemanager_path_relative'] = 'Is het Bestandsmanager pad relatief?';
-$_lang['setting_filemanager_path_relative_desc'] = 'Indien filemanager_path instelling relatief is aan de MODX base_path, zet deze instelling dan op Ja. Indien jouw filemanager_path buiten de docroot valt, zet dit dan op Nee.';
-
-$_lang['setting_filemanager_url'] = 'Bestandsmanager URL';
-$_lang['setting_filemanager_url_desc'] = 'Optioneel. Stel deze in als je een expliciete URL wilt gebruiken voor de bestanden in de MODX bestandsmanager (handig als je het filemanager_path naar een pad buiten de MODX webroot hebt veranderd). Controleer wel of dit een web-bereikbare URL van de filemanager_path is. Als je deze leeg laat zal MODX proberen dit pad automatisch te berekenen.';
-
-$_lang['setting_filemanager_url_relative'] = 'Is de bestandsmanager URL relatief?';
-$_lang['setting_filemanager_url_relative_desc'] = 'Indien filemanager_url instelling relatief is aan de MODX base_url, zet deze instelling dan op Ja. Indien jouw filemanager_url buiten de webroot valt, zet dit dan op Nee.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Gebruik alle gebruikersgroep lidmaatschappen voor Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Indien Ja is ingesteld, zal FC *alle* sets op *alle* gebruikersgroepen met leden gebruiken. Anders, worden alleen de Sets gebruikt die behoren bij de primaire gebruikersgroep. Instellen op Ja kan voor problemen zorgen met conflicterende FC Sets.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'Standaard gepubliceerd';
 $_lang['setting_publish_default_desc'] = 'Selecteer \'Ja\' om alle nieuwe documenten standaard gepubliceerd te maken.';
 $_lang['setting_publish_default_err'] = 'Vul in om wel of niet documenten standaard gepubliceerd te maken.';
 
-$_lang['setting_rb_base_dir'] = 'Document pad';
-$_lang['setting_rb_base_dir_desc'] = 'Vul een fysiek pad in naar een document map. Deze instelling wordt normaal gesproken automatisch gegenereerd. Echter als je IIS gebruikt zal MODX niet in staat zijn het pad goed te genereren, dit veroorzaakt problemen met de document browser. In dat geval, kun je een pad naar de afbeeldingen map hier instellen (zoals je die ziet in Windows Explorer). <strong>Let op:</strong> De documentmap moet een submap images, files, flash en media bevatten om de browser goed te laten werken.';
-$_lang['setting_rb_base_dir_err'] = 'Vul een document browser basis map in.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Dit document bestaat niet of kan niet bereikt worden. Vul een geldige map in of pas de rechten van die map aan.';
-
-$_lang['setting_rb_base_url'] = 'Document URL';
-$_lang['setting_rb_base_url_desc'] = 'Vul een virtueel pad in naar de documentmap. Deze instelling wordt normaal gesproken automatisch gegenereerd. Echter als je IIS gebruikt zal MODX niet in staat zijn het pad goed te genereren, dit veroorzaakt problemen met de document browser. In dat geval, kun je een URL naar de afbeeldingen map hier instellen (zoals je die ziet in Internet Explorer).';
-$_lang['setting_rb_base_url_err'] = 'Vul een document browser basis URL in.';
-
 $_lang['setting_request_controller'] = 'Request controller bestandsnaam';
 $_lang['setting_request_controller_desc'] = 'De bestandsnaam van de hoofd request controller vanwaar MODX geladen is. De meeste gebruikers kunnen dit laten staan op index.php.';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
 
-$_lang['setting_strip_image_paths'] = 'Herschrijf browser paden?';
-$_lang['setting_strip_image_paths_desc'] = 'Als dit op \'Nee\' gezet is, MODX zal bestandsmanager geschreven src\'s (afbeeldingen, bestanden, flash, etc.) als absolute URLs. Relatieve URLs zijn nuttig indien je wenst de MODX installatie te verplaatsen, bijv. van staging naar een productie omgeving. Indien je niet weet wat dit inhoudt laat dit dan staan op \'Ja\'.';
-
 $_lang['setting_symlink_merge_fields'] = 'Voeg document velden samen in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'Indien op Ja ingesteld, worden alle niet-lege velden autmatisch samengevoegd met het doel document wanneer Symlinks gebruikt worden.';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Hier kun je een lijst van bestandstypen i
 
 $_lang['setting_use_alias_path'] = 'Gebruik vriendelijke aliaspaden';
 $_lang['setting_use_alias_path_desc'] = 'Stel deze optie in op \'Ja\' zal een volledig pad tonen naar het document als het een alias heeft. Ter voorbeeld, als een document met een alias genaamd \'child\' in een container document zit met een alias genaamd \'parent\', dan is het volledige pad naar het document dat getoond word zoiets als \'parent/child.html\'<br /><strong>Let op: wanneer je deze instelling instelt op \'Ja\' (aanzetten aliaspaden), refereer items (zoals afbeeldingen, css, javascripts, etc.) middels gebruik van absolute paden: bijv., \'/assets/images\' in tegenstelling tot \'assets/images\'. Als je dit doet dan voorkom je dat de browser (of webserver) dat ze het pad toevoegen aan het alias pad.</strong>';
-
-$_lang['setting_use_browser'] = 'Activeren document manager';
-$_lang['setting_use_browser_desc'] = 'Selecteer \'Ja\' om de document manager te gebruiken. Dit zal jouw gebruikers toestaan om te bladeren en te uploaden van documenten zoals afbeeldingen, flash en media bestanden op de server.';
-$_lang['setting_use_browser_err'] = 'Vul in of je wel of niet gebruik wilt maken van de document manager.';
 
 $_lang['setting_use_editor'] = 'Activeer rich tekst editor';
 $_lang['setting_use_editor_desc'] = 'Wil je gebruik van de rich tekst editor inschakelen? Als je je pretiger voelt met schrijven van HTML, dan kun je de editor uitzetten middels deze instelling. Let op dat deze instelling wordt toegepast op alle documenten en gebruikers!';

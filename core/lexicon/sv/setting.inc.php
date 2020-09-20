@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Ange URL:en till RSS-flödet för M
 $_lang['setting_feed_modx_security_enabled'] = 'MODX flöde för säkerhetsnotiser aktiverat';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Om denna sätts till "Nej"  kommer MODX att dölja flödet för säkerhetsnotiser på hanterarens välkomstsida.';
 
-$_lang['setting_filemanager_path'] = 'Sökväg till filhanteraren (Föråldrad)';
-$_lang['setting_filemanager_path_desc'] = 'Föråldrad - använd mediakällor istället. IIS fyller oftast inte i inställningarna för document_root ordentligt, vilket används av filhanteraren för att bestämma vad du får se. Om du har problem med filhanteraren, se till så att denna katalog pekar till roten på din installation av MODX.';
-
-$_lang['setting_filemanager_path_relative'] = 'Är filhanterarens sökväg relativ? (Föråldrad)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Föråldrad - använd mediakällor istället. Om din inställning för filemanager_path (Sökväg till filhanteraren) är relativ i förhållande till MODX base_path väljer du "Ja" här. Om din filemanager_path ligger utanför dokumentroten väljer du "Nej".';
-
-$_lang['setting_filemanager_url'] = 'Filhanterarens URL (Föråldrad)';
-$_lang['setting_filemanager_url_desc'] = 'Föråldrad - använd mediakällor istället. Valfri. Använd den här inställningen om du vill ange en uttrycklig URL för att komma åt filerna i MODX filhanterare (användbart om du har ändrat manager_path till en sökväg utanför MODX webbrot). Kontrollera att detta är den webbåtkomliga URL:en av det angivna värdet för filemanager_path. Om fältet lämnas tomt kommer MODX att försöka beräkna URL:en automatiskt.';
-
-$_lang['setting_filemanager_url_relative'] = 'Är filhanterarens URL relativ? (Föråldrad)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Föråldrad - använd mediakällor istället. Om din inställning för filemanager_url (Filhanterarens URL) är relativ i förhållande till MODX base_url väljer du "Ja" här. Om din filemanager_url ligger utanför den huvudsakliga webbroten väljer du "Nej".';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Använd alla medlemskap i användargrupper för formuläranpassning';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Om denna sätts till "Ja" kommer formuläranpassningen att använda *alla* set för *alla* användargrupper som en användare är medlem i när formuläranpassningsset tillämpas. I annat fall kommer bara det set som hör till användarens primära grupp att användas. Notera: Om denna sätts till "Ja" kan det orsaka buggar på grund av motstridiga formuläranpassningsset.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'Publicerade som standard';
 $_lang['setting_publish_default_desc'] = 'Välj "Ja" för att göra alla nya resurser publicerade som standard.';
 $_lang['setting_publish_default_err'] = 'Ange om du vill att dokument ska publiceras som standard eller inte.';
 
-$_lang['setting_rb_base_dir'] = 'Sökväg till resurs';
-$_lang['setting_rb_base_dir_desc'] = 'Ange den fysiska sökvägen till resursens katalog. Den här inställningen görs vanligen automatiskt, men om du använder IIS är det möjligt att MODX inte kan räkna ut sökvägen själv, vilket orsakar ett felmeddelande i resursläsaren. I så fall kan du skriva in sökvägen till bildkatalogen här (sökvägen som den visas i Utforskaren).<br /><strong>OBS: Resurskatalogen måste innehålla underkatalogerna images, files, flash och media för att resursläsaren ska fungera korrekt.</strong>';
-$_lang['setting_rb_base_dir_err'] = 'Ange resursläsarens baskatalog.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Denna resurskatalog finns inte eller kan inte kommas åt. Ange en giltig katalog eller ändra rättigheterna för denna katalog.';
-
-$_lang['setting_rb_base_url'] = 'Resursens adress';
-$_lang['setting_rb_base_url_desc'] = 'Ange den virtuella sökvägen till resurskatalogen. Den här inställningen görs vanligen automatiskt, men om du använder IIS är det möjligt att MODX inte kan räkna ut adressen på egen hand, vilket orsakar ett felmeddelande i resursläsaren. I så fall kan du skriva in adressen till bildkatalogen här (adressen som du skulle skriva den i Internet Explorer).';
-$_lang['setting_rb_base_url_err'] = 'Ange resursläsarens bas-URL.';
-
 $_lang['setting_request_controller'] = 'Anropscontrollerns filnamn';
 $_lang['setting_request_controller_desc'] = 'Filnamnet på den huvudsakliga anropscontrollern från vilken MODX laddas. De flesta användare kan låta denna vara index.php.';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Ange en standardkateg
 $_lang['setting_static_elements_basepath'] = 'Bassökväg för statiska element';
 $_lang['setting_static_elements_basepath_desc'] = 'Bassökvägen där statiska elements filer ska sparas.';
 
-$_lang['setting_strip_image_paths'] = 'Skriv om sökvägar till resurser?';
-$_lang['setting_strip_image_paths_desc'] = 'Om denna inställning sätts till "Nej", så kommer MODX att skriva sökvägarna till resurser i filhanteraren (bilder, filer, flash etc.) som absoluta URL:er. Relativa URL:er är användbara om du ska flytta din MODX-installation, tex från en testserver till en produktionsserver. Om du inte har någon aning om vad det här betyder, så är det bäst att lämna inställningen satt till "Ja".';
-
 $_lang['setting_symlink_merge_fields'] = 'Slå ihop resursfält i symlänkar';
 $_lang['setting_symlink_merge_fields_desc'] = 'Om du anger "Ja" här kommer ifyllda fält automatiskt att slås ihop med målresursen när vidarebefordring sker via symlänkar.';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Här kan du skriva en lista med de typer 
 
 $_lang['setting_use_alias_path'] = 'Använd vänliga aliassökvägar';
 $_lang['setting_use_alias_path_desc'] = 'Sätts detta val till "Ja", kommer hela sökvägen till resursen att visas om resursen har ett alias. Till exempel, om en resurs med aliaset "barn" befinner sig i en behållare med aliaset "foralder", kommer hela sökvägen att visas som "/foralder/barn.html".<br /><strong>Notera: När detta sätts till "Ja" (slår på aliassökvägar), måste du referera objekt (som bilder, css, javascript etc) med en absolut sökväg. Exempel: "/assets/images" istället för "assets/images". Genom att göra så förhindrar du att webbläsaren (eller webbservern) lägger till den relativa sökvägen till aliassökvägen.</strong>';
-
-$_lang['setting_use_browser'] = 'Använd resursutforskare';
-$_lang['setting_use_browser_desc'] = 'Välj "Ja" för att använda resursutforskaren. Detta låter dina användare läsa och ladda upp resurser såsom bilder, flash- och mediafiler till servern.';
-$_lang['setting_use_browser_err'] = 'Ange om du vill använda resursutforskaren eller inte.';
 
 $_lang['setting_use_editor'] = 'Aktivera richtext-editor';
 $_lang['setting_use_editor_desc'] = 'Vill du aktivera en richtext-editor? Om du trivs bättre med att skriva HTML, kan du stänga av editorn genom att ändra denna inställning.<br /><strong>OBS: Denna inställning gäller för samtliga dokument och alla användare!</strong>';

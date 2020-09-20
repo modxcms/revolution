@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = '管理画面のセキュリティ�
 $_lang['setting_feed_modx_security_enabled'] = 'MODXセキュリティフィードを有効';
 $_lang['setting_feed_modx_security_enabled_desc'] = '「いいえ」を選択した場合、管理画面のダッシュボードでセキュリティ通知を表示しません。';
 
-$_lang['setting_filemanager_path'] = '（非推奨）ファイルマネージャーの管理領域パス指定';
-$_lang['setting_filemanager_path_desc'] = '非推奨です。代わりにメディアソースを使用してください。<br />IISでは多くの場合、document_rootプロパティが正しく設定されないため、この設定でファイルマネージャーの管理領域を補正できる可能性があります。<br />ファイルマネージャーで問題が発生している場合、この設定がMODXのインストールされているルートを指しているか確認してください。';
-
-$_lang['setting_filemanager_path_relative'] = '（非推奨）ファイルマネージャーにIs File Manager Path Relative? （Deprecated）';
-$_lang['setting_filemanager_path_relative_desc'] = '非推奨です。代わりにメディアソースを使用してください。<br />filemanager_path に相対パスを設定している場合、「はい」を指定してください。filemanager_pathがドキュメントルート外を指す場合、「いいえ」を指定してください。';
-
-$_lang['setting_filemanager_url'] = '（非推奨）ファイルマネージャーURL';
-$_lang['setting_filemanager_url_desc'] = '非推奨です。代わりにメディアソースを使用してください。<br />ファイルマネージャーにアクセスする明示的なURLを指定します（filemanager_pathをMODXのウェブルート外に指定した場合に役立ちます）。filemanager_pathの値がウェブアクセス可能なURLであることを確認してください。<br />この設定が空の場合、MODXが自動算出を試みます。';
-
-$_lang['setting_filemanager_url_relative'] = '（非推奨）相対的なファイルマネージャーURL';
-$_lang['setting_filemanager_url_relative_desc'] = '非推奨です。代わりにメディアソースを使用してください。<br />filemanager_urlに相対URLを指定している場合、「はい」を指定してください。filemanager_urlがメインのウェブルート外を指す場合、「いいえ」を指定してください。';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets.<br />Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'リソースのデフォルト：公開';
 $_lang['setting_publish_default_desc'] = '「はい」を選択すると、新規リソースで「公開する」設定がデフォルトで有効になります。';
 $_lang['setting_publish_default_err'] = '新しいドキュメントの公開状態を設定してください。';
 
-$_lang['setting_rb_base_dir'] = 'リソースパス';
-$_lang['setting_rb_base_dir_desc'] = 'リソースディレクトリ（通常はassetsディレクトリ）への物理パスを入力してください。通常この設定は自動的に生成されますが、IISなど一部のサーバでは正常に検出されないことがあります。<br />この場合、イメージディレクトリなどのパスをここに入力することができます（パスはWindowsのエクスプローラで見るものです）。<br />注意: ファイルブラウザが全てを扱えるようにするためには、ファイルディレクトリにイメージや文書、Flash他のメディアを格納するサブフォルダを含むべきです。';
-$_lang['setting_rb_base_dir_err'] = 'リソースパスのパス名を指定してください。';
-$_lang['setting_rb_base_dir_err_invalid'] = 'このリソースパスは存在しないかアクセス禁止になっています。適切なパス名を指定しなおすかディレクトリのパーミッションを変更してください。';
-
-$_lang['setting_rb_base_url'] = 'リソースURL';
-$_lang['setting_rb_base_url_desc'] = 'リソースディレクトリ（通常はassetsディレクトリ）への仮想パスを入力してください。MODX設置ディレクトリを基準とした相対パスまたは http://から始まるフルパスを記述します。<br />通常この設定は自動的に生成されますが、IISなど一部のサーバでは正常に検出されないことがあります。）。';
-$_lang['setting_rb_base_url_err'] = 'リソースブラウザのベースURLを指定してください。';
-
 $_lang['setting_request_controller'] = 'コントローラのファイル名';
 $_lang['setting_request_controller_desc'] = 'リクエストコントローラのファイル名をここで指定します。通常は「index.php」です。';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
 
-$_lang['setting_strip_image_paths'] = 'src属性に相対パスを渡す';
-$_lang['setting_strip_image_paths_desc'] = 'この設定を「はい」にした場合、ファイルブラウザで選択したファイル（画像・Flash・その他メディアファイルなど）のsrc指定を相対パスで書き出します。<br />CMSでコンテンツを管理する場合は一般的には絶対パスが無難ですが、MODXでサイトを管理する場合はbaseタグを併用することで相対パスで効率よく運用することができます。';
-
 $_lang['setting_symlink_merge_fields'] = 'シムリンクによるフィールドのマージ';
 $_lang['setting_symlink_merge_fields_desc'] = '「はい」を指定すると、シムリンク側のフィールドに入力された値と、転送先のフィールド値が自動的にマージされます。';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'ファイルブラウザを使用して�
 
 $_lang['setting_use_alias_path'] = 'エイリアスパスを使用';
 $_lang['setting_use_alias_path_desc'] = 'このオプションを「はい」に設定すると、ドキュメントのエイリアスがパスとして表示されます。<br />例えば、「child」というエイリアスを持ったドキュメント「parent」というエイリアスのフォルダの下に配置されていると、エイリアスパスは「/parent/child.html」になります。<br /><strong>注意: このオプションを「はい」にするとき、つまりエイリアスパスを使用するときは、ドキュメントから参照するものは全て（画像やCSS、JavaScript等を）絶対パスで指定する必要があります。<br />例えば、assets/imagesに対しては/assets/imagesと指定しなければなりません。baseタグを利用すると、この問題をスマートに解決できます。</strong>';
-
-$_lang['setting_use_browser'] = 'ファイルブラウザを使用';
-$_lang['setting_use_browser_desc'] = '「はい」を選択するとファイルブラウザを使用できます。<br />これによりユーザーはサーバー上の画像やFlashなどのメディアファイルをブラウザ上で表示したり、サーバーにアップロードできるようになります。';
-$_lang['setting_use_browser_err'] = 'ファイルブラウザ使用の有無を選択してください。';
 
 $_lang['setting_use_editor'] = 'リッチテキストモード';
 $_lang['setting_use_editor_desc'] = 'リッチテキストエディタを使用しますか？　HTMLを直接書いた方が良いのでしたら「いいえ」を選択し、リッチテキストエディタを使わない設定も可能です。<br />この設定は全てのリソースおよび全てのユーザーに適用されるので注意してください';

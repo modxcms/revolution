@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for th
 $_lang['setting_feed_modx_security_enabled'] = 'MODX Security Feed Enabled';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODX will hide the Security feed in the welcome section of the manager.';
 
-$_lang['setting_filemanager_path'] = 'File Manager Path (Deprecated)';
-$_lang['setting_filemanager_path_desc'] = 'Deprecated - use Media Sources instead. IIS often does not populate the document_root setting properly, which is used by the file manager to determine what you can look at. If you\'re having problems using the file manager, make sure this path points to the root of your MODX installation.';
-
-$_lang['setting_filemanager_path_relative'] = 'Is File Manager Path Relative? (Deprecated)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_path setting is relative to the MODX base_path, then please set this setting to Yes. If your filemanager_path is outside the docroot, set this to No.';
-
-$_lang['setting_filemanager_url'] = 'File Manager Url (Deprecated)';
-$_lang['setting_filemanager_url_desc'] = 'Deprecated - use Media Sources instead. Optional. Set this if you want to set an explicit URL to access the files in the MODX file manager from (useful if you have changed filemanager_path to a path outside the MODX webroot). Make sure this is the web-accessible URL of the filemanager_path setting value. If you leave this empty, MODX will try to automatically calculate it.';
-
-$_lang['setting_filemanager_url_relative'] = 'Is File Manager URL Relative? (Deprecated)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - use Media Sources instead. If your filemanager_url setting is relative to the MODX base_url, then please set this setting to Yes. If your filemanager_url is outside the main webroot, set this to No.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'Published default';
 $_lang['setting_publish_default_desc'] = 'Select \'Yes\' to make all new resources published by default.';
 $_lang['setting_publish_default_err'] = 'Please state whether or not you want documents to be published by default.';
 
-$_lang['setting_rb_base_dir'] = 'Resource path';
-$_lang['setting_rb_base_dir_desc'] = 'Enter the physical path to the resource directory. This setting is usually automatically generated. If you\'re using IIS, however, MODX may not be able to work the path out on its own, causing the Resource Browser to show an error. In that case, you can enter the path to the images directory here (the path as you\'d see it in Windows Explorer). <strong>NOTE:</strong> The resource directory must contain the subfolders images, files, flash and media in order for the resource browser to function correctly.';
-$_lang['setting_rb_base_dir_err'] = 'Please state the resource browser base directory.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'This resource directory either does not exist or cannot be accessed. Please state a valid directory or adjust the permissions of this directory.';
-
-$_lang['setting_rb_base_url'] = 'Resource URL';
-$_lang['setting_rb_base_url_desc'] = 'Enter the virtual path to resource directory. This setting is usually automatically generated. If you\'re using IIS, however, MODX may not be able to work the URL out on its own, causing the Resource Browser to show an error. In that case, you can enter the URL to the images directory here (the URL as you\'d enter it on Internet Explorer).';
-$_lang['setting_rb_base_url_err'] = 'Please state the resource browser base URL.';
-
 $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODX is loaded. Most users can leave this as index.php.';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Adja meg az alapérte
 $_lang['setting_static_elements_basepath'] = 'Állandó elemek alapútvonala';
 $_lang['setting_static_elements_basepath_desc'] = 'Alapútvonal az állandó elemek állományainak tárolására.';
 
-$_lang['setting_strip_image_paths'] = 'Rewrite browser paths?';
-$_lang['setting_strip_image_paths_desc'] = 'If this is set to \'No\', MODX will write file browser resource src\'s (images, files, flash, etc.) as absolute URLs. Relative URLs are helpful should you wish to move your MODX install, e.g., from a staging site to a production site. If you have no idea what this means, it\'s best just to leave it set to \'Yes\'.';
-
 $_lang['setting_symlink_merge_fields'] = 'Merge Resource Fields in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'If set to Yes, will automatically merge non-empty fields with target resource when forwarding using Symlinks.';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Here you can enter a list of files that c
 
 $_lang['setting_use_alias_path'] = 'Use Friendly Alias Path';
 $_lang['setting_use_alias_path_desc'] = 'Setting this option to \'yes\' will display the full path to the Resource if the Resource has an alias. For example, if a Resource with an alias called \'child\' is located inside a container Resource with an alias called \'parent\', then the full alias path to the Resource will be displayed as \'/parent/child.html\'.<br /><strong>NOTE: When setting this option to \'Yes\' (turning on alias paths), reference items (such as images, CSS, JavaScripts, etc.) use the absolute path, e.g., \'/assets/images\' as opposed to \'assets/images\'. By doing so you will prevent the browser (or web server) from appending the relative path to the alias path.</strong>';
-
-$_lang['setting_use_browser'] = 'Enable Resource Browser';
-$_lang['setting_use_browser_desc'] = 'Select yes to enable the resource browser. This will allow your users to browse and upload resources such as images, flash and media files on the server.';
-$_lang['setting_use_browser_err'] = 'Please state whether or not you want to use the resource browser.';
 
 $_lang['setting_use_editor'] = 'Enable Rich Text Editor';
 $_lang['setting_use_editor_desc'] = 'Do you want to enable the rich text editor? If you\'re more comfortable writing HTML, then you can turn the editor off using this setting. Note that this setting applies to all documents and all users!';

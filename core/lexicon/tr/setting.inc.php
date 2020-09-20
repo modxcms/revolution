@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Yöneticideki MODX Güvenlik Uyarı
 $_lang['setting_feed_modx_security_enabled'] = 'MODX Güvenlik Kaynağı Etkin';
 $_lang['setting_feed_modx_security_enabled_desc'] = '\'Hayır\' ise, MODX, Yönetici\'nin karşılama bölümünde Güvenlik özet akışını gizleyecektir.';
 
-$_lang['setting_filemanager_path'] = 'Dosya Yöneticisi Yolu (Onaylanmamış)';
-$_lang['setting_filemanager_path_desc'] = 'Kullanımdan kaldırıldı - bunun yerine Medya Kaynakları\'nı kullanın. IIS genellikle doküman kaynağı ayarını düzgün bir şekilde doldurmaz; dosya yöneticisi tarafından nelere bakacağınızı belirlemek için kullanılır. Dosya yöneticisini kullanırken sorun yaşıyorsanız, bu yolun MODX kurulumunuzun kaynağına işaret ettiğinden emin olun.';
-
-$_lang['setting_filemanager_path_relative'] = 'Dosya Yöneticisi Yolu Göreceli Mi? (Kaldırıldı)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Kullanımdan kaldırıldı - bunun yerine Medya Kaynakları\'nı kullanın. Filemanager_path ayarı MODX base_path\'e göre ise, lütfen bu ayarı Evet olarak ayarlayın. Filemanager_path dosyanız docroot\'un dışında ise, bunu Hayır olarak ayarlayın.';
-
-$_lang['setting_filemanager_url'] = 'Dosya Yöneticisi Urlsi (Onaylanmamış)';
-$_lang['setting_filemanager_url_desc'] = 'Kullanımdan kaldırıldı - bunun yerine Medya Kaynakları\'nı kullanın. İsteğe bağlı. MODX dosya yöneticisindeki dosyalara erişmek için açık bir URL belirlemek istiyorsanız bunu ayarlayın (filemanager_path öğesini MODX webrootunun dışındaki bir yola değiştirdiyseniz kullanışlıdır). Bunun, filemanager_path ayar değerinin Web\'den erişilebilir URL\'si olduğundan emin olun. MODX otomatik olarak hesaplamaya çalışacaktır.';
-
-$_lang['setting_filemanager_url_relative'] = 'Dosya Yöneticisi URL\'si Göreceli mi? (Kaldırıldı)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Kullanımdan kaldırıldı - bunun yerine Medya Kaynakları\'nı kullanın.  filemanager_url ayarı MODX base_url\'ye göre ise, lütfen bu ayarı Evet olarak ayarlayın. Filemanager_url ana webroot\'un dışında ise, bunu Hayır olarak ayarlayın.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Form Özelleştirme için Tüm Kullanıcı Grubu Üyeliğini Kullan';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'True olarak ayarlanırsa, FC üyesi, Form Özelleştirme Setlerini uygularken * üye * Gruplar için * tüm * Setleri kullanır. Aksi halde, yalnızca kullanıcının birincil grubuna ait kümeyi kullanır. Not: Bunu Evet olarak ayarlamak, çakışan FC Setleri ile hatalara neden olabilir.';
 
@@ -583,17 +571,6 @@ $_lang['setting_publish_default'] = 'Yayınlananlar önceden tanımlanmış';
 $_lang['setting_publish_default_desc'] = 'Bütün yeni kaynakları varsayılan olarak yayınlanır yapmak için \'Evet\'i seçin.';
 $_lang['setting_publish_default_err'] = 'Lütfen belgelerin varsayılan olarak yayınlanmasını isteyip istemediğinizi belirtin.';
 
-$_lang['setting_rb_base_dir'] = 'Kaynak yolu';
-$_lang['setting_rb_base_dir_desc'] = 'Kaynak dizini için fiziksel yol girin. Bu ayar genellikle otomatik olarak oluşturulur. Ancak, eğer IIS kullanıyorsanız, MODX Kaynak Tarayıcıda bir hata göstermesine neden olan yolu kendi başına işleyebilecek durumda olmayabilir. Bu durumda, görüntü dizini yolunu buraya girebilirsiniz (Windows Gezgini\'ndeki gibi gördüğünüz yol).
-<strong>NOT:</strong> Kaynak dizini, kaynak tarayıcısının doğru şekilde çalışması için sırayla alt klasör resimleri, dosyalar, flash ve medya içermelidir.';
-$_lang['setting_rb_base_dir_err'] = 'Lütfen kaynak tarayıcı taban dizini belirtin.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Bu kaynak dizini yok veya erişilemiyor. Lütfen geçerli bir dizini belirtin veya bu dizinin izinlerini ayarlayın.';
-
-$_lang['setting_rb_base_url'] = 'Kaynak URL\'si';
-$_lang['setting_rb_base_url_desc'] = 'Kaynak dizinine sanal yolu girin. Bu ayar genellikle otomatik olarak oluşturulur. 
-Bununla birlikte, IIS kullanıyorsanız, MODX, Kaynak Tarayıcı\'da bir hata göstermesine neden olarak, tek başına URL çalışamayabilir. Bu durumda, burada görüntüler dizine URL girebilirsiniz (Internet Explorer girmek gibi URL).';
-$_lang['setting_rb_base_url_err'] = 'Lütfen kaynak tarayıcı taban URL\'sini belirtin.';
-
 $_lang['setting_request_controller'] = 'Denetleyici Dosya Adı İste';
 $_lang['setting_request_controller_desc'] = 'MODX\'in yüklendiği ana istem kontrolcüsünün dosya ismi. Bir çok kullanıcı bunu index.php şeklinde bırakabilir.';
 
@@ -711,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
 
-$_lang['setting_strip_image_paths'] = 'Tarayıcı yollarını yeniden yazın?';
-$_lang['setting_strip_image_paths_desc'] = 'Bu \'Hayır\' olarak ayarlanırsa, MODX dosya tarayıcı kaynak src\'lerini (resimler, dosyalar, flaş vb.) Mutlak URL\'ler olarak yazacaktır. MODX yüklemenizi, örneğin bir hazırlama sitesinden bir üretim sitesine taşımak isterseniz göreceli URL\'ler yardımcı olur. Bunun anlamı hakkında hiçbir fikriniz yoksa, sadece \'Evet\' olarak bırakmak en iyisidir.';
-
 $_lang['setting_symlink_merge_fields'] = 'Symlinks\'teki Kaynak Alanlarını Birleştirme';
 $_lang['setting_symlink_merge_fields_desc'] = 'Evet olarak ayarlanırsa, Symlinks kullanarak iletirken boş olmayan alanları otomatik olarak hedef kaynakla birleştirir.';
 
@@ -754,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Burada, Kaynak Yöneticisi\'ni kullanarak
 
 $_lang['setting_use_alias_path'] = 'Arkadaşça diğer yolu kullan';
 $_lang['setting_use_alias_path_desc'] = 'Kaynakta bir takma ad varsa, bu seçeneği \'evet\' olarak ayarlamak, Kaynağın tam yolunu görüntüleyecektir. Örneğin, \'alt\' adlı bir takma ada sahip bir Kaynak, \'üst\' olarak adlandırılan bir takma ada sahip bir kapsayıcı Kaynak içerisinde yer alıyorsa, Kaynak için tam takma ad yolu \'/parent/child.html\' olarak görüntülenecektir. <br /><strong> NOT: Bu seçeneği \'Evet\' (diğer ad yollarını açma) olarak ayarlarsanız, referans öğeler (resimler, CSS, JavaScript\'ler vb.) mutlak yolu, örn. \'/ assets / images\' olarak kullanır \'varlıklara / resimlere\' karşı. Böylece tarayıcının (veya web sunucusunun) takma ad yoluna göre yol eklemesini engelleyeceksiniz.</strong>';
-
-$_lang['setting_use_browser'] = 'Kaynak Tarayıcıyısını Etkinleştir';
-$_lang['setting_use_browser_desc'] = 'Kaynak tarayıcısını etkinleştirmek için evet\'i seçin. Bu, kullanıcıların sunucudaki görüntüler, flash ve medya dosyaları gibi kaynaklara göz atmasına ve yüklemesine olanak tanır.';
-$_lang['setting_use_browser_err'] = 'Lütfen kaynak tarayıcıyı kullanmak isteyip istemediğinizi belirtin.';
 
 $_lang['setting_use_editor'] = 'Zengin Metin Editörünü Etkinleştir';
 $_lang['setting_use_editor_desc'] = 'Zengin metin editörünü etkinleştirmek istiyor musunuz? HTML yazımında daha rahat iseniz bu ayarı kullanarak düzenleyiciyi kapatabilirsiniz. Bu ayarın tüm belgeler ve tüm kullanıcılar için geçerli olduğunu unutmayın!';

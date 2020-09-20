@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Zadejte URL pro RSS feed nesoucí b
 $_lang['setting_feed_modx_security_enabled'] = 'MODX RSS bezpečnostní oznámení';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Je-li nastaveno na "Ne", MODX nebude zobrazovat bezpečnostní oznámení na úvodní stránce správce obsahu.';
 
-$_lang['setting_filemanager_path'] = 'Cesta pro správce souborů (Deprecated)';
-$_lang['setting_filemanager_path_desc'] = 'Deprecated - Používejte Zdroje médií. IIS často nemá správně nastavenou proměnnou "document_root", která je používána správcem souborů, s čím může pracovat. Máte-li problémy s používáním správce souborů, ujistěte se, že tato cesta je nastavena do kořene MODX instalace.';
-
-$_lang['setting_filemanager_path_relative'] = 'Relativní cesta pro správce souborů? (Deprecated)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Deprecated - Používejte Zdroje médií. Je-li cesta nastavená ve filemanager_path relativní vůči MODX base_path, nastavte tuto volbu na Ano, pokud je cesta ve filemanager_path mimo docroot nastavte Ne.';
-
-$_lang['setting_filemanager_url'] = 'URL pro správce souborů (Deprecated)';
-$_lang['setting_filemanager_url_desc'] = 'Deprecated - Používejte Zdroje médií. Volitelné. Tuto volbu použijte pokud chcete nastavit explicitní URL pro přístup k souborům v rámci správce souborů (užitečné v případě, že jste změnili filemanager_path na cestu mimo MODX webroot). Ujistěte se, že je tato URL přístupná z webu. Pokud tuto volbu ponecháte prázdnou, MODX se pokusí automaticky tuto URL doplnit.';
-
-$_lang['setting_filemanager_url_relative'] = 'Relativní URL pro správce souborů? (Deprecated)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Deprecated - Používejte Zdroje médií. Je-li URL nastavená v filemanager_url relativní vůči MODX base_url, nastavte tuto volbu na Ano. Je-li URL nastavená ve filemanager_url mimo webroot nastavte Ne.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Pro přizpůsobení formulářů využit pravidla všech členských uživatelských skupiny';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Je-li nastaveno Ano, při aplikaci pravidel z přizpůsobení formulářů budou použita pravidla všech uživatelských skupin, do kterých je uživatel přiřazen. V opačném případě jsou použita pouze pravidla přiřazená k uživatelově primární skupině. Poznámka: volba Ano může zapříčinit chyby s konfliktními pravidly v jednotlivých uživatelských skupinách.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'Ve výchozím stavu publikováno';
 $_lang['setting_publish_default_desc'] = 'Zvolte "Ano", pokud chcete, aby všechny nově vytvořené dokumenty byly ve výchozím stavu publikované.';
 $_lang['setting_publish_default_err'] = 'Zvolte zda chcete, aby byly dokumenty publikovány nebo ne.';
 
-$_lang['setting_rb_base_dir'] = 'Cesta k souborům';
-$_lang['setting_rb_base_dir_desc'] = 'Zadejte fyzickou cestu k adresáři se zdroji. Toto nastavení je obvykle generováno automaticky. Používáte-li IIS, MODX není schopen zjistit automaticky tuto cestu, což zapříčiňuje zobrazení chyb ve správci souborů. V tomto případě můžete zadat cestu do adresáře s obrázky (stejně jako ji vkládáte do Vašeho prohlížeče). <strong>Poznámka:</strong> Adresář se zdroji musí obsahovat složky "images, files, flash a media" jinak nebude správce souborů pracovat správně.';
-$_lang['setting_rb_base_dir_err'] = 'Zadejte cestu ke kořenu pro správce souborů.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Tento adresář buď neexistuje nebo není přístupný. Zadejte platný adresář nebo nastavte atributy pro přístup PHP.';
-
-$_lang['setting_rb_base_url'] = 'URL k souborům';
-$_lang['setting_rb_base_url_desc'] = 'Zadejte virtuální cestu k adresáři souborů. Toto nastavení je obvykle generováno automaticky. Používáte-li IIS, MODX není schopen zjistit automaticky tuto URL, což zapříčiňuje zobrazení chyb ve správci souborů. V tomto případě můžete zadat URL do adresáře s obrázky (stejně jako ji vkládáte do Vašeho prohlížeče).';
-$_lang['setting_rb_base_url_err'] = 'Nastavte URL pro správce souborů.';
-
 $_lang['setting_request_controller'] = 'Název souboru kontroleru požadavků';
 $_lang['setting_request_controller_desc'] = 'Název souboru hlavního kontroleru požadavků odkud se načítá MODX. Většina uživatelů by toto měla ponechat na index.php.';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Zvolte výchozí kate
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
 
-$_lang['setting_strip_image_paths'] = 'Přepisovat URL souborů';
-$_lang['setting_strip_image_paths_desc'] = 'Pokud je nastaveno na "Ne", MODX bude zapisovat cesty k souborům (obrázky, soubory, flash, atd.) jako absolutní URL. Relativní URL jsou užitečné pokud byste chtěli přesunout celou instalaci MODX, např. z vývojového serveru na produkční. Pokud netušíte co s tímto nastavením, ponechte jej nastavené na "Ano".';
-
 $_lang['setting_symlink_merge_fields'] = 'Sloučit políčka dokumentů v symbolických odkazech';
 $_lang['setting_symlink_merge_fields_desc'] = 'JeIf nastaveno "Ano", dojde k automatickému sloučení neprázdných políček při přesměrování pomocí symbolických odkazů.';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Zde můžete zadat seznam souborů, kter�
 
 $_lang['setting_use_alias_path'] = 'Použít cesty pomocí přátelských aliasů';
 $_lang['setting_use_alias_path_desc'] = 'Nastavením možnosti na "Ano" zobrazí celou cestu k dokumentu pokud má dokument alias. Například, pokud je dokument s aliasem "potomek" umístěn uvnitř složky s aliasem "rodic", pak bude celá adresa zobrazena jako "/rodic/potomek.html".<br /><strong>Poznámka: Je-li toto nastaveno na Ano (zapnutím cest pomocí aliasů), referencované položky (jako obrázky, css, javaskripty, atd.) používají absolutní cesty: např., "/assets/images" na rozdíl od "assets/images". Tímto zamezíte prohlížeči (nebo serveru) vkládání relativních cest do aliasů.</strong>';
-
-$_lang['setting_use_browser'] = 'Povolit správce souborů';
-$_lang['setting_use_browser_desc'] = 'Nastavte "Ano" pro aktivaci správce souborů. Toto nastavení povolí uživatelům procházet a nahrávat soubory jako např. obrázky, flash nebo soubory médií na server.';
-$_lang['setting_use_browser_err'] = 'Uveďte zda chcete nebo nechcete používat správce souborů.';
 
 $_lang['setting_use_editor'] = 'Povolit WYSIWYG editor';
 $_lang['setting_use_editor_desc'] = 'Chcete aktivovat WYSIWYG editor? Pokud je Vám pohodlnější psát přímo HTML, pak ponechte toto nastavení neaktivní. Poznámka: toto nastavení je globálním, tzn. že bude aplikováno na všechny dokumenty a uživatele!';
