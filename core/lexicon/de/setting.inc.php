@@ -278,18 +278,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Geben Sie die URL des RSS-Feeds fü
 $_lang['setting_feed_modx_security_enabled'] = 'MODX-Sicherheitshinweise-Feed aktiviert';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, wird der Sicherheitshinweise-Feed auf der Startseite des Managers nicht angezeigt.';
 
-$_lang['setting_filemanager_path'] = 'Dateimanager-Pfad (Verwendung nicht empfohlen)';
-$_lang['setting_filemanager_path_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. IIS setzt die Einstellung document_root, die vom Dateimanager verwendet wird, um festzulegen, was angezeigt wird, häufig nicht korrekt. Wenn Sie Probleme mit der Benutzung des Dateimanagers haben, stellen Sie sicher, dass dieser Pfad auf den Root Ihrer MODX-Installation zeigt. Der Pfad muss mit einem Slash enden.';
-
-$_lang['setting_filemanager_path_relative'] = 'Ist der Dateimanager-Pfad relativ? (Verwendung nicht empfohlen)';
-$_lang['setting_filemanager_path_relative_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_path"-Einstellung relativ zum MODX-"base_path" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihr "filemanager_path" außerhalb des Document-Roots liegt, setzen Sie sie auf "Nein".';
-
-$_lang['setting_filemanager_url'] = 'Dateimanager-URL (Verwendung nicht empfohlen)';
-$_lang['setting_filemanager_url_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Optional. Verwenden Sie diese Option, wenn Sie eine bestimmte URL angeben möchten, von der aus Sie auf die Dateien im MODX-Dateimanager zuzugreifen (hilfreich, wenn Sie den Dateimanager-Pfad auf einen Pfad außerhalb des MODX-Webroots gesetzt haben). Stellen Sie sicher, dass dies die über das Web erreichbare URL der Dateimanager-Pfad-Einstellung ist. Der Pfad muss mit einem Slash enden. Falls diese Einstellung leer gelassen wird, versucht MODX, sie selbst zu erkennen.';
-
-$_lang['setting_filemanager_url_relative'] = 'Ist die Dateimanager-URL relativ? (Verwendung nicht empfohlen)';
-$_lang['setting_filemanager_url_relative_desc'] = 'Achtung: Diese Einstellung wird in späteren MODX-Versionen nicht mehr zur Verfügung stehen - bitte nutzen Sie stattdessen Medienquellen. Wenn Ihre "filemanager_url"-Einstellung relativ zur MODX-"base_url" ist, setzen Sie diese Einstellung bitte auf "Ja". Wenn Ihre "filemanager_url" außerhalb des Webroots liegt, setzen Sie sie auf "Nein".';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Alle Benutzergruppen-Zugehörigkeiten für die Formular-Anpassung nutzen';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden für die Formular-Anpassung ALLE Sets für ALLE Benutzergruppen, denen ein Benutzer angehört, genutzt, wenn Formular-Anpassungs-Sets angewendet werden. Anderenfalls wird nur das Set verwendet, das der primären Gruppe des Benutzers zugeordnet ist. Hinweis: Wenn Sie diese Einstellung auf "Ja" setzen, kann es wegen Konflikten zwischen Formular-Anpassungs-Sets zu Problemen kommen.';
 
@@ -583,15 +571,6 @@ $_lang['setting_publish_default'] = 'Ressourcen standardmäßig veröffentlichen
 $_lang['setting_publish_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig veröffentlicht werden sollen.';
 $_lang['setting_publish_default_err'] = 'Bitte geben Sie an, ob neue Dokumente standardmäßig veröffentlicht werden sollen.';
 
-$_lang['setting_rb_base_dir'] = 'Ressourcen-Pfad';
-$_lang['setting_rb_base_dir_desc'] = 'Geben Sie den Serverpfad zum Ressourcen-Verzeichnis ein. Diese Einstellung wird normalerweise automatisch generiert. Wenn Sie einen IIS-Server verwenden, ist MODX möglicherweise nicht in der Lage, den Pfad selbst zu ermitteln, was zu einer Fehlermeldung im Ressourcen-Browser führt. In diesem Fall können Sie hier den Pfad zum Ressourcen-Verzeichnis eingeben (so, wie er im Windows-Explorer angezeigt wird). <strong>HINWEIS:</strong> Das Ressourcen-Verzeichnis muss die Unterverzeichnisse images/, files/, flash/ und media/ enthalten, damit der Ressourcen-Browser korrekt funktioniert.';
-$_lang['setting_rb_base_dir_err'] = 'Bitte geben Sie das Basisverzeichnis für den Ressourcen-Browser an.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Dieses Ressourcen-Verzeichnis existiert entweder nicht, oder es kann nicht darauf zugegriffen werden. Bitte geben Sie ein gültiges Verzeichnis an oder passen Sie die Verzeichnisrechte dieses Verzeichnisses an.';
-
-$_lang['setting_rb_base_url'] = 'Ressourcen-URL';
-$_lang['setting_rb_base_url_desc'] = 'Geben Sie die URL des Ressourcen-Verzeichnisses ein. Diese Einstellung wird normalerweise automatisch generiert. Wenn Sie einen IIS-Server verwenden, ist MODX möglicherweise nicht in der Lage, die URL selbst zu ermitteln, was zu einer Fehlermeldung im Ressourcen-Browser führt. In diesem Fall können Sie hier die URL des Bilder-Verzeichnisses eingeben (so, wie Sie Sie im Internet Explorer eingeben würden).';
-$_lang['setting_rb_base_url_err'] = 'Bitte geben Sie die Basis-URL für den Ressourcen-Browser an.';
-
 $_lang['setting_request_controller'] = 'Dateiname des Request-Controllers';
 $_lang['setting_request_controller_desc'] = 'Der Dateiname des Haupt-Request-Controllers, von dem aus MODX geladen wird. Die meisten Benutzer können hier "index.php" eingestellt lassen.';
 
@@ -709,9 +688,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Geben Sie die standar
 $_lang['setting_static_elements_basepath'] = 'Basispfad für statische Elemente';
 $_lang['setting_static_elements_basepath_desc'] = 'Basispfad in dem statische Element-Dateien gespeichert werden.';
 
-$_lang['setting_strip_image_paths'] = 'Relative Datei-Browser-Pfade?';
-$_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Datei-Browser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z.B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
-
 $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
 $_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
@@ -752,10 +728,6 @@ $_lang['setting_upload_media_desc'] = 'Hier können Sie eine Liste von Dateitype
 
 $_lang['setting_use_alias_path'] = 'Suchmaschinenfreundliche Alias-Pfade';
 $_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf "Ja" setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias "kind" in einer Container-Ressource mit dem Alias "eltern" abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als "/eltern/kind.html" angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf "Ja" setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. "/assets/images" im Gegensatz zu "assets/images". Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
-
-$_lang['setting_use_browser'] = 'Ressourcen-Browser aktivieren';
-$_lang['setting_use_browser_desc'] = 'Wählen Sie "Ja", um den Ressourcen-Browser zu aktivieren. Dies erlaubt Ihren Benutzern, Ressourcen wie Bilder, Flash- und Medien-Dateien auf den Server hochzuladen und dort durchzusehen.';
-$_lang['setting_use_browser_err'] = 'Bitte geben Sie an, ob Sie den Ressourcen-Browser verwenden möchten oder nicht.';
 
 $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
