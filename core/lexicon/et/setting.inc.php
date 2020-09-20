@@ -279,18 +279,6 @@ $_lang['setting_feed_modx_security_desc'] = 'Määrake URL RSS feed-ile MODX Tur
 $_lang['setting_feed_modx_security_enabled'] = 'MODX Turva Feed Lubatud';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Kui \'Ei\', siis MODX peidab Turva feedi welcome sektsioonist manageris.';
 
-$_lang['setting_filemanager_path'] = 'Failide Manageri Path';
-$_lang['setting_filemanager_path_desc'] = 'IIS tihtipeale ei täida document_root välja õigesti, mida ksutatakse faili manageri poolt. Kui teil on probleeme faili managerigia, kontrollige, et see oath oleks õige root kataloogi peale, kui asub teie MODX installatsioon..';
-
-$_lang['setting_filemanager_path_relative'] = 'Kas Is Faili Manager Path on Relatiivne?';
-$_lang['setting_filemanager_path_relative_desc'] = 'Kui teie filemanager_path seade on relatiivne MODX base_path suhtes, siis palun määrake see sede Jah asendisse. Kui teie filemanager_path on väljaspool docroot-i, määrakse see Ei peale.';
-
-$_lang['setting_filemanager_url'] = 'Failide Manageri Url';
-$_lang['setting_filemanager_url_desc'] = 'Valikuline. Määra juhul, kui soovite määrata kindla URL-i, et juurdepääseda failidele Failide Manageri kaudu (kasulik, kui olete filemanager_path määranud kataloogi peale, mis asub väljaspool MODX webroot-i). Olge kindlad, et see on veebist ligipääsetav URL vastavalt filemanager_path seade väärtusele. Kui jätate tühjaks, siis MODX üritab automaatselt selle välja arvutada.';
-
-$_lang['setting_filemanager_url_relative'] = 'On Faili Manager URL Relatiivne?';
-$_lang['setting_filemanager_url_relative_desc'] = 'Kui teie filemanager_url seade on relatiivne MODX base_url suhtes, siis palun määrake see seade jah asendisse. Kui teie filemanager_url on väljaspool põhi webroot-i, määrakse see Ei asendisse.';
-
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
 
@@ -584,15 +572,6 @@ $_lang['setting_publish_default'] = 'Avalikustatud Vaikimisi';
 $_lang['setting_publish_default_desc'] = 'Valige \'Jah\', et muuta kõik ressurssid vaikimisi avalikustatuks.';
 $_lang['setting_publish_default_err'] = 'Palun määrake, kas soovite või mitte, et dokumendid oleksid avalikustatud vaikimisi.';
 
-$_lang['setting_rb_base_dir'] = 'Ressurssi path';
-$_lang['setting_rb_base_dir_desc'] = 'Siestage füüsiline asukoht ressurssi kaustani. See seade tavaliselt genereeritakse automaatselt. Kuid, kui kasutate IIS-i, siis ei pruugi MODX olla võimeline kaustasid välja nuputama, põhustades Resource Browser näitama erroreid. Sellisel juhul saate sisestada kasuta piltideni siit (sisestage kaust nii nagu näete seda Windows Explorer-is). <strong>MÄRKUS:</strong> Ressurssi kataloog peab sisaldama alamkaustasid: images, files, flash ja media selleks, et resssurssi brauseri saaks töödata korralikult.';
-$_lang['setting_rb_base_dir_err'] = 'Palun määrake ressurssi brauseri baas kataloog.';
-$_lang['setting_rb_base_dir_err_invalid'] = 'Seda ressurssi kataloogi ei eksisteeri või sellele puudub juurdepääs. Palun määrake kehtiv kataloog või muudke kataloogi õiguseid.';
-
-$_lang['setting_rb_base_url'] = 'Ressurssi URL';
-$_lang['setting_rb_base_url_desc'] = 'Sisestage virtuaalne sihtkoht ressurssi kataloogini. See seade tavaliselt genereeritakse automaatselt. Kuid, kui kasutate IIS-i, siis ei pruugi MODX olla võimeline kaustasid välja nuputama, põhustades Resource Browser näitama erroreid. Sellisel juhul saate sisestada URL-i piltide kataloogini siit (URL nagu isestaksite seda Internet Explorer-is).';
-$_lang['setting_rb_base_url_err'] = 'Palun määrake ressurssi brauseri baas URL.';
-
 $_lang['setting_request_controller'] = 'Päringu Kontrolleri Failinimi';
 $_lang['setting_request_controller_desc'] = 'Põhi päringu kontrolleri failinimi, millest MODX laetakse. Enamus kasutajaid jätavad selle index.php peale.';
 
@@ -710,9 +689,6 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
 
-$_lang['setting_strip_image_paths'] = 'Kirjuta ümber brauseri path-id?';
-$_lang['setting_strip_image_paths_desc'] = 'Kui valitud \'Ei\' asend, siis MODX kirjutab faili brauseri resurssi src-id (images, files, flash, jne.) absoluutsete URL-idena. Relatiivsed URL-id on kasulikud, kui soovite kolida MODX installiga, nt: staging serverist production servierisse. Kui teil pole aimugi, mis see tähendab, siis parim on jätta see valik \'Jah\' peale.';
-
 $_lang['setting_symlink_merge_fields'] = 'Merge Resource Fields in Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'If set to Yes, will automatically merge non-empty fields with target resource when forwarding using Symlinks.';
 
@@ -753,10 +729,6 @@ $_lang['setting_upload_media_desc'] = 'Siit saate sisestada nimekirja failidest,
 
 $_lang['setting_use_alias_path'] = 'Kasuta Sõbralikke Aliase Pathe';
 $_lang['setting_use_alias_path_desc'] = 'Valides \'jah\' kuvatakse terve path Ressurssini, kuiRessurssil on alias. Näiteks. kui Ressurss aliasega  \'child\' asub konteiner-Ressurssi sees, millel on alias \'parent\', siis täis alias paht Ressurssile kuvatakse kui \'/parent/child.html\'.<br /><strong>MÄRKUS: Valides \'Jah\' (lubades alias path-id), viitavad üksused (nagu näiteks pildid, css, javascriptid, jne) peavad kasutama absoluutseid pathe: näiteks \'/assets/images\' vastupidiselt \'assets/images\'. Tehes nii, hoiate ära, et brauser (või veebiserver) ei lisaks relatiivseid pathe aliase path-ile.</strong>';
-
-$_lang['setting_use_browser'] = 'Luba Ressurssi Brauser';
-$_lang['setting_use_browser_desc'] = 'Valige yes, et lubada ressurssi brauser. See lubab teie kasutajatel sirvida ja üleslaadida serverisse ressursse nagu pildid, flash ja meedia.';
-$_lang['setting_use_browser_err'] = 'Palun valige, kas soovite või mitte kasutada ressurssi brauserit.';
 
 $_lang['setting_use_editor'] = 'Luba Rich Text Editor';
 $_lang['setting_use_editor_desc'] = 'Kas soovite lubada rich text editor? Kui olete harjunud kirjutama HTML-i, siis võite keelata editori "off" seadega. See seade kehtib kõikidele dokumentidele ja kõikidele kasutajatele!';
