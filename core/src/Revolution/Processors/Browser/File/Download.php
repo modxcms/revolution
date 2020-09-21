@@ -45,7 +45,6 @@ class Download extends Browser
 
         // Download file
         @session_write_close();
-        $file = $this->sanitize($this->getProperty('file'));
         try {
             if ($data = $this->source->getObjectContents($file)) {
                 $name = preg_replace('#[^\w-.]#ui', '_', $data['basename']);
