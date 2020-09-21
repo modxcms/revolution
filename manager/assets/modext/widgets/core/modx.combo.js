@@ -108,7 +108,7 @@ MODx.combo.ComboBox = function(config,getStore) {
         this.loaded = true;
         
         // Show the pagination panel if it didn't show up earlier
-        if (this.pageSize < this.store.getTotalCount() && this.pageTb.hidden === true) {
+        if (this.isExpanded() && this.pageSize < this.store.getTotalCount() && this.pageTb.hidden === true) {
             this.collapse();
             this.expand();
         }
