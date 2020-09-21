@@ -125,7 +125,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,id: 'modx-header'
             ,applyTo: 'modx-header'
             ,autoScroll: true
-            ,width: 80
+            ,width: 70
             ,listeners: {
                 afterrender: this.initPopper
                 ,scope: this
@@ -155,11 +155,11 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
 
         var tree = this.getTree(config);
         center.margins = {
-            right: -80,
+            right: -70,
             left: -8,
         };
         tree.margins = {
-            left: 80
+            left: 70
         };
 
         return {
@@ -221,8 +221,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,applyTo: 'modx-leftbar'
             ,id: 'modx-leftbar-tabs'
             ,split: true
-            ,width: 310
-            ,minSize: 288
+            ,width: 300
+            ,minSize: 280
             ,autoScroll: true
             ,unstyled: true
             ,useSplitTips: true
