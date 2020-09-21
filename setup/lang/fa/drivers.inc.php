@@ -6,7 +6,7 @@
  * @subpackage lexicon
  */
 $_lang['mysql_err_ext'] = 'مادایکس احتیاج به افزونه‌ی mysql دارد که در حال حاضر نصب یا فعال نیست.';
-$_lang['mysql_err_pdo'] = 'MODX requires the pdo_mysql driver when native PDO is being used and it does not appear to be loaded.';
+$_lang['mysql_err_pdo'] = 'درصورت استفاده از افزونه PDO، مادایکس نیاز به درایور pdo_mysql دارد که در حال حاضر نصب یا فعال نیست.';
 $_lang['mysql_version_5051'] = 'مادایکس مشکلاتی با نسخه‌ی کنونی MySQL شما ([[+version]]) دارد. این نسخه دارای باگهای متعدد مرتبط با درایورِ PDO است. لطفا برای حل این مشکل، نسخه‌ی MySQL خود را بروز کنید. انجام این کار، جهت افزایش امنیت و کارایی وبسایت شما توصیه می‌شود حتی اگر قصد استفاده از مادایکس را نداشته باشید.';
 $_lang['mysql_version_client_nf'] = 'مادایکس به وسیله تابع ()mysql_get_client_info، موفق به تشخیص نسخه‌ی MySQL client شما نشد. لطفا قبل از ادامه‌ی مراحل، بصورت دستی نسخه‌ی MySQL client خود را پیدا کرده و اطمینان حاصل کنید که برابر یا جدیدتر از نسخه‌ی 4.1.20 باشد.';
 $_lang['mysql_version_client_start'] = 'بررسی نسخه‌ی MySQL client:';

@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'อนุญาตให้เพิ่มไ
 $_lang['combo_allowaddnewdata_desc'] = 'เมื่อเป็นใช่ จะอนุญาตให้ไอเท็มที่ไม่มีอยู่ก่อนหน้าในรายการถูกเพิ่มได้ ค่าปริยายคือไม่';
 $_lang['combo_forceselection'] = 'บังคับการเลือกรายการ';
 $_lang['combo_forceselection_desc'] = 'ถ้าใช้การพิมพ์ล่วงหน้า ถ้าตั้งค่านี้เป็นไม่ จะอนุญาตเฉพาะการป้อนอินพุตของไอเท็มในรายการเท่านั้น';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'ข้อความรายการว่างเปล่า';
 $_lang['combo_listempty_text_desc'] = 'ถ้าการพิมพ์ล่วงหน้าถูกเปิด และผู้ใช้ป้อนค่าที่ไม่อยู่ในรายการ จะแสดงข้อความนี้';
 $_lang['combo_listheight'] = 'List Height';

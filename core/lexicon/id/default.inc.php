@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Tidak ada tindakan';
 $_lang['no_category'] = 'Tidak terkategorikan';
 $_lang['no_records_found'] = 'Tidak ada catatan ditemukan.';
 $_lang['no_results'] = 'Hasil tidak ditemukan';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Offline';
 $_lang['ok'] = 'Oke';
 $_lang['old_key'] = 'Lama kunci';

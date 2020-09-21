@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Fő típus';
 $_lang['content_type_header_tab'] = 'Egyéni fejlécek';
 $_lang['content_type_header_title'] = 'Fejléc létrehozása, módosítása';
 $_lang['content_type_new'] = 'Új tartalomtípus';
+$_lang['content_type_edit'] = 'Tartalomtípus szerkesztése';
 $_lang['content_type_remove'] = 'Tartalomtípus törlése';
 $_lang['content_type_remove_confirm'] = 'Biztosan törli ezt a tartalomtípust?';
 $_lang['content_types'] = 'Tartalomtípusok';

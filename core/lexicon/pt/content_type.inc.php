@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Principal';
 $_lang['content_type_header_tab'] = 'Cabeçalhos personalizados';
 $_lang['content_type_header_title'] = 'Criar/editar cabeçalho';
 $_lang['content_type_new'] = 'Novo Tipo de Conteúdo';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Remover Tipo de Conteúdo';
 $_lang['content_type_remove_confirm'] = 'Tem certeza que deseja remover este tipo de conteúdo?';
 $_lang['content_types'] = 'Tipos de Conteúdo';

@@ -44,3 +44,5 @@ $_lang['update_table_column_data'] = 'Aggiornati i dati nella colonna [[+column]
 $_lang['iso_country_code_converted'] = 'Convertiti correttamente i nomi delle nazioni per il profilo utente nei codici ISO.';
 $_lang['legacy_cleanup_complete'] = 'Pulizia file versioni precedenti completata.';
 $_lang['legacy_cleanup_count'] = 'Rimossi [[+files]] file e [[+folders]] cartelle.';
+$_lang['system_setting_update_success'] = 'Impostazione sistema `[[+key]]` aggiornata.';
+$_lang['system_setting_update_failed'] = 'Impossibile aggiornare le impostazioni di sistema `[[+key]]`.';

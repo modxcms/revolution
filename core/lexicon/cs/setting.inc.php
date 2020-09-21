@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'Je-li nastaveno "Ano", akce (nebo kon
 $_lang['setting_cache_alias_map'] = 'Povolit cache mapy aliasů v rámci kontextu';
 $_lang['setting_cache_alias_map_desc'] = 'Je-li nastaveno "Ano", URI všech dokumentů jsou ukládány do cache kontextu. Pro lepší výkon toto povolte na menších a zakažte na rozsáhlejších portálech.';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Povolit cache nastavení kontextů';
 $_lang['setting_cache_context_settings_desc'] = 'Je-li nastaveno "Ano", kontextová nastavení budou ukládána do cache a tím se zkrátí doba načítání.';

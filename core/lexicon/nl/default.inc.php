@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Geen actie';
 $_lang['no_category'] = 'Ongecategoriseerd';
 $_lang['no_records_found'] = 'Geen gegevens gevonden.';
 $_lang['no_results'] = 'Geen resultaten gevonden';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Offline';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Oude Key';

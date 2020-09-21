@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Brak działania';
 $_lang['no_category'] = 'bez kategorii';
 $_lang['no_records_found'] = 'No records found.';
 $_lang['no_results'] = 'Nie znaleziono wyników';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Offline';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Starty klucz';

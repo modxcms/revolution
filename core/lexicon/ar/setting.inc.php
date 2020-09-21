@@ -137,8 +137,8 @@ $_lang['setting_cache_action_map_desc'] = 'عند التفعيل، سيتم تخ
 $_lang['setting_cache_alias_map'] = 'تمكين ذاكرة التخزين المؤقت لخريطة السياقات المستعارة';
 $_lang['setting_cache_alias_map_desc'] = 'عند التفعيل، سيتم تخزين كل URIs المصدر بشكل مؤقت في السياق. لأداء أفضل فعل في المواقع الأصغر وعطل في المواقع الأكبر.';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'تفعيل الذاكرة المؤقتة لإعداد السياق';
 $_lang['setting_cache_context_settings_desc'] = 'عند التفعيل، إعدادات السياق سوف يتم حفظها بالذاكرة المؤقتة لتقليل عدد عمليات التحميل.';

@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'Bila diaktifkan, tindakan (atau peta 
 $_lang['setting_cache_alias_map'] = 'Mengaktifkan cache konteks Alias peta';
 $_lang['setting_cache_alias_map_desc'] = 'Ketika diaktifkan, Semua URI sumber daya cache ke dalam konteks. Mengaktifkan situs yang lebih kecil dan menonaktifkan pada situs yang lebih besar untuk kinerja yang lebih baik.';
 
-$_lang['setting_use_context_resource_table'] = 'Gunakan tabel sumber konteks';
-$_lang['setting_use_context_resource_table_desc'] = 'Bila diaktifkan, penyegaran konteks menggunakan tabel context_resource. Ini memungkinkan Anda memprogram memiliki satu sumber dalam beberapa konteks. Jika Anda tidak menggunakan beberapa konteks sumber daya melalui API, Anda dapat menyetel ini ke false. Di situs besar Anda akan mendapatkan potensi peningkatan kinerja manajer saat itu.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Mengaktifkan konteks pengaturan Cache';
 $_lang['setting_cache_context_settings_desc'] = 'Bila diaktifkan, pengaturan konteks akan di-cache untuk mengurangi beban.';

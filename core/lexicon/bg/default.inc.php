@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Няма действие';
 $_lang['no_category'] = 'без категория';
 $_lang['no_records_found'] = 'Не са намерени записи.';
 $_lang['no_results'] = 'Не са намерени разултати';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Офлайн';
 $_lang['ok'] = 'ОК';
 $_lang['old_key'] = 'Стар ключ';

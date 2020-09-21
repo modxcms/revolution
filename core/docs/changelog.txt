@@ -4,6 +4,17 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Fix XSS in file upload and file tree [#15262]
+- Fix display of pagination toolbar [#15246]
+- Add check existing file on upload [#15232]
+- Update Smarty to 3.1.36 [#15249]
+- Prevent potential XXE vulnerability in modRestService [#15238]
+- Fix incorrect path setting when uploading files [#15227]
+- Add indication of selected file and expand active source in tree [#15228]
+- Display caption instead of description in template TV grid [#15231]
+- Create dedicated method to get resource preview URL [#14954]
+- Fix bug when emptying resource trash [#15171]
+- Fix url parameters in config.js processor [#15165]
 - Localize anonymous in context interface [#15153]
 - Update xPDO to 2.8.1
 - Use 0 if id is undefined [#15103]

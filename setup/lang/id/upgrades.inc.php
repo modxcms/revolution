@@ -44,3 +44,5 @@ $_lang['update_table_column_data'] = 'Diperbarui data di kolom [[+column]] meja 
 $_lang['iso_country_code_converted'] = 'Berhasil merubah profil nama negara menggunakan kode ISO negara.';
 $_lang['legacy_cleanup_complete'] = 'File legacy bersih selesai.';
 $_lang['legacy_cleanup_count'] = 'Dihapus [[+files]] berskas(s) dan [[+folders]] folder(s).';
+$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
+$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';

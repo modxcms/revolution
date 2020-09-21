@@ -51,4 +51,4 @@ $_lang['template_tv_msg'] = 'Die diesem Template zugeordneten Template-Variablen
 $_lang['template_untitled'] = 'Unbenanntes Template';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'Die Template-Variable hat keinen Zugriff auf das angegebene Template.';
-$_lang['tvt_err_remove'] = 'Beim Versuch, die Template-Variable aus dem Template zu entfernen, ist ein Fehler aufgetreten.';
+$_lang['tvt_err_remove'] = 'Beim Versuch, die Template-Variable aus dem Template zu löschen, ist ein Fehler aufgetreten.';

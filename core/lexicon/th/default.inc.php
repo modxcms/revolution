@@ -293,6 +293,7 @@ $_lang['no_action'] = 'ไม่มีแอ็กชัน';
 $_lang['no_category'] = 'ไม่มีหมวดหมู่';
 $_lang['no_records_found'] = 'ไม่พบระเบียน';
 $_lang['no_results'] = 'ไม่พบผลลัพธ์';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'ออฟไลน์';
 $_lang['ok'] = 'ตกลง';
 $_lang['old_key'] = 'คีย์เเดิม';

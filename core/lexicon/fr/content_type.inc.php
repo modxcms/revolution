@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Général';
 $_lang['content_type_header_tab'] = 'En-tête personnalisé';
 $_lang['content_type_header_title'] = 'Créer/modifier un en-tête';
 $_lang['content_type_new'] = 'Nouveau type de contenu';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Supprimer le type de contenu';
 $_lang['content_type_remove_confirm'] = 'Voulez-vous vraiment supprimer ce type de contenu?';
 $_lang['content_types'] = 'Types de contenu';

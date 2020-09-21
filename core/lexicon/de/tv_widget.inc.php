@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Das Hinzufügen neuer Werte erlauben';
 $_lang['combo_allowaddnewdata_desc'] = 'Wenn diese Einstellung auf "Ja" steht, können Werte hinzugefügt werden, die nicht bereits in der Liste vorkommen. Standard ist "Nein".';
 $_lang['combo_forceselection'] = 'Auswahl auf die Liste beschränken';
 $_lang['combo_forceselection_desc'] = 'Wenn Autovervollständigung verwendet wird und diese Einstellung auf "Ja" steht, ist nur die Eingabe von Werten möglich, die in der Liste vorkommen.';
+$_lang['combo_forceselection_multi_desc'] = 'Wenn dies aktiviert ist, sind nur Elemente erlaubt, die in der Liste vorhanden sind. Sonst können auch neue Werte eingegeben werden.';
 $_lang['combo_listempty_text'] = 'Text für leere Liste';
 $_lang['combo_listempty_text_desc'] = 'Wenn Autovervollständigung aktiviert ist und der Benutzer einen Wert eintippt, der nicht in der Liste vorkommt, wird der hier hinterlegte Text angezeigt.';
 $_lang['combo_listheight'] = 'Listen-Höhe';

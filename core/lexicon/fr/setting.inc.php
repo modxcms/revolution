@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'Activé, les actions seront mises en 
 $_lang['setting_cache_alias_map'] = 'Activer la mise en cache des Alias';
 $_lang['setting_cache_alias_map_desc'] = 'Activé, les URI des ressources seront mises en cache dans le Contexte. Pour des raisons de performance il est conseillé de n\'activer cette option que pour de "petits" sites.';
 
-$_lang['setting_use_context_resource_table'] = 'Utilisez la table de ressource de contexte';
-$_lang['setting_use_context_resource_table_desc'] = 'Activé, un rafraîchissement de contexte utilise la table context_resource. Cela vous permet d’avoir (via programmation) une ressource dans plusieurs contextes. Si vous n’utilisez pas ces multiples contextes de ressources via l’API, vous pouvez définir cette valeur à faux. Sur les sites importants vous obtiendrez alors un gain potentiel de performances dans le gestionnaire.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Activer la mise en cache de la configuration des contextes';
 $_lang['setting_cache_context_settings_desc'] = 'Activé, la configuration des contextes sera mise en cache pour réduire les temps de chargement.';

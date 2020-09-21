@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'اطلاعات اساسی';
 $_lang['content_type_header_tab'] = 'سرآیندهای اختصاصی';
 $_lang['content_type_header_title'] = 'ایجاد و ویرایش سرآیند';
 $_lang['content_type_new'] = 'نوع محتوای جدید';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'حذف نوع محتوا';
 $_lang['content_type_remove_confirm'] = 'آیا تمایل به حذف این نوع محتوا دارید؟';
 $_lang['content_types'] = 'Content Types';

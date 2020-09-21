@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Aucune action';
 $_lang['no_category'] = 'non catégorisé';
 $_lang['no_records_found'] = 'Aucun enregistrement trouvé.';
 $_lang['no_results'] = 'Aucun résultat trouvé';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Hors ligne';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Ancienne clé';
