@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Update Smarty to 3.1.36 [#15249]
 - Prevent potential XXE vulnerability in modRestService [#15238]
 - Fix incorrect path setting when uploading files [#15227]
 - Add indication of selected file and expand active source in tree [#15228]
