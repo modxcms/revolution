@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'När denna är aktiverad kommer händ
 $_lang['setting_cache_alias_map'] = 'Aktivera cachning av kontexts aliaskarta';
 $_lang['setting_cache_alias_map_desc'] = 'När denna är aktiverad cachas alla resurs-URI:er till kontexten. Aktivera på mindre webbplatser och inaktivera på större webbplatser för bättre prestande.';
 
-$_lang['setting_use_context_resource_table'] = 'Använd resurstabellen för kontexter';
-$_lang['setting_use_context_resource_table_desc'] = 'När denna är aktiverad kommer uppdateringar av kontexter att använda tabellen context_resource. Det här gör att du programmässigt kan ha en resurs i flera kontexter. Om du inte använder dessa resurskontexter via API:n så kan du sätta den här till false. På stora webbplatser kan du potentiellt få en prestandaökning i hanteraren då.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Aktivera cachning av kontextinställningar';
 $_lang['setting_cache_context_settings_desc'] = 'När denna är aktiverad kommer kontextinställningar att cachas för att minska laddningstider.';

@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Немає дій';
 $_lang['no_category'] = 'без категорії';
 $_lang['no_records_found'] = 'Записів не знайдено.';
 $_lang['no_results'] = 'Результатів не знайдено';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Офлайн';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Старий ключ';

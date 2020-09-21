@@ -44,3 +44,5 @@ $_lang['update_table_column_data'] = 'Dados atualizados em coluna [[+column]] da
 $_lang['iso_country_code_converted'] = 'Convertido com êxito os nomes de país do perfil de usuário para códigos ISO.';
 $_lang['legacy_cleanup_complete'] = 'Limpeza de arquivo legado completa.';
 $_lang['legacy_cleanup_count'] = 'Removido [[+files]] arquivo(s) e [[+folders]] pasta(s).';
+$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
+$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';

@@ -59,6 +59,10 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         $this->source->initialize();
 
         $list = $this->source->getContainerList($this->getProperty('dir'));
+        foreach ($list as &$item) {
+            // Make sure the id is HTML-safe as it will be inserted into an attribute
+            $item['id'] = htmlentities($item['id'], ENT_QUOTES, 'UTF-8');
+        }
         return $this->modx->toJSON($list);
     }
 

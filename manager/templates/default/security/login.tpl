@@ -49,9 +49,9 @@
                     <div class="x-panel-body x-panel-body-noheader">
                         <h2>{$_config.site_name|strip_tags|escape}</h2>
                         <br class="clear" />
-                        {if $error_message}
+                        {if isset($error_message) && $error_message}
                             <p class="error">{$error_message|default}</p>
-                        {elseif $success_message}
+                        {elseif isset($success_message) && $success_message}
                             <p class="success">{$success_message|default}</p>
                         {/if}
                     </div>

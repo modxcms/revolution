@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Ingen åtgärd';
 $_lang['no_category'] = 'okategoriserade';
 $_lang['no_records_found'] = 'Inga poster funna.';
 $_lang['no_results'] = 'Inga resultat hittade';
+$_lang['numberfield'] = 'Nummerfält';
 $_lang['offline'] = 'Offline';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Gammal nyckel';

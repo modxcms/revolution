@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Permitir Añadir Nuevos Artículos';
 $_lang['combo_allowaddnewdata_desc'] = 'Cuando se configure como "Sí", se podrán añadir elementos que no existan en la lista. El valor por defecto es "No".';
 $_lang['combo_forceselection'] = 'Forzar la Selección de un elemento de la Lista';
 $_lang['combo_forceselection_desc'] = 'Al usar Autocompletar, si esta configuración está activa, sólo se permitirá seleccionar artículos disponibles en la lista.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Texto de Lista Vacía';
 $_lang['combo_listempty_text_desc'] = 'Si Autocompletar está habilitado y el usuario introduce un valor que no está en la lista muestra este texto.';
 $_lang['combo_listheight'] = 'Altura de Lista';

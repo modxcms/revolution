@@ -198,7 +198,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             } else {
                 $url = rtrim($properties['url'],'/').'/'.$currentPath;
                 $url = str_replace(' ','%20',$url);
-                $page = '?a='.$editAction.'&file='.$currentPath.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
+                $page = '?a='.$editAction.'&file='.rawurlencode($currentPath).'&wctx='.$this->ctx->get('key').'&source='.$this->get('id');
                 // $isBinary = $this->isBinary(rtrim($properties['url'],'/').'/'.$currentPath);
 
                 // $cls = array();

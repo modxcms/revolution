@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Memungkinkan menambahkan item baru';
 $_lang['combo_allowaddnewdata_desc'] = 'Bila ya, memungkinkan item yang akan ditambahkan belum ada dalam daftar. Default dibatalkan/dihentikan.';
 $_lang['combo_forceselection'] = 'Memaksa pilihan ke daftar';
 $_lang['combo_forceselection_desc'] = 'Jika menggunakan jenis-depan, jika ini diatur ke Ya, hanya memungkinkan memasukkan item dalam daftar.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Daftar teks kosong';
 $_lang['combo_listempty_text_desc'] = 'Jika jenis-depan, dan pengguna jenis nilai tidak dalam daftar, menampilkan teks ini.';
 $_lang['combo_listheight'] = 'Daftar tinggi';

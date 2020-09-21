@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = '「はい」を選択すると、ア�
 $_lang['setting_cache_alias_map'] = 'コンテキストのエイリアスマップキャッシュを有効';
 $_lang['setting_cache_alias_map_desc'] = '有効にすると、すべてのリソースのURIは、コンテキストにキャッシュされます。小規模なサイトで有効にして、パフォーマンスを向上させるために大規模なサイトでは無効にします。';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'コンテキスト設定キャッシュを有効';
 $_lang['setting_cache_context_settings_desc'] = '「はい」を選択すると、コンテキストの設定をキャッシュして、読み込み時間を減らします。';

@@ -8,26 +8,26 @@
  */
 
 $_lang['events'] = 'Eventos';
-$_lang['system_event'] = 'System Event';
+$_lang['system_event'] = 'Eventos del Sistema';
 $_lang['system_events'] = 'Eventos del Sistema';
-$_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot remove core events, only your own.';
-$_lang['system_events.search_by_name'] = 'Search by event name';
-$_lang['system_events.create'] = 'Create New Event';
-$_lang['system_events.name_desc'] = 'The name of the event. Which you should use in a &dollar;modx->invokeEvent(name, properties) call.';
+$_lang['system_events.desc'] = 'Los eventos del sistema son los eventos en MODX en los que los Plugins están registrados. Se "disparan" en cualquier parte del código de MODX, lo que permite que los Plugins interactúen con el código de MODX y agreguen funciones personalizadas sin hackear el código del core. Aquí también puedes crear tus propios eventos para tu proyecto personalizado. No puedes eliminar eventos principales, solo los tuyos.';
+$_lang['system_events.search_by_name'] = 'Buscar por nombre de evento';
+$_lang['system_events.create'] = 'Crear nuevo evento';
+$_lang['system_events.name_desc'] = 'El nombre del evento. El cuál debe usarse en una llamada a &dollar;modx->invokeEvent(nombre, propiedades).';
 $_lang['system_events.groupname'] = 'Grupo';
-$_lang['system_events.groupname_desc'] = 'The name of the group where the new event belongs to. Select an existing one or type in a new group name.';
+$_lang['system_events.groupname_desc'] = 'El nombre del grupo al que pertenece el nuevo evento. Selecciona uno existente o escribe un nuevo nombre de grupo.';
 $_lang['system_events.plugins'] = 'Plugins';
-$_lang['system_events.plugins_desc'] = 'The list of plugins attached to the event. Pick up plugins that should be attached to event.';
+$_lang['system_events.plugins_desc'] = 'La lista de Plugins ligados al evento. Recoje los plugins que se deben ejecutar al suceder el evento.';
 
-$_lang['system_events.service'] = 'Service';
-$_lang['system_events.service_1'] = 'Parser Service Events';
-$_lang['system_events.service_2'] = 'Manager Access Events';
-$_lang['system_events.service_3'] = 'Web Access Service Events';
-$_lang['system_events.service_4'] = 'Cache Service Events';
-$_lang['system_events.service_5'] = 'Template Service Events';
-$_lang['system_events.service_6'] = 'User Defined Events';
+$_lang['system_events.service'] = 'Servicio';
+$_lang['system_events.service_1'] = 'Eventos del servicio parser';
+$_lang['system_events.service_2'] = 'Eventos de acceso al Manager';
+$_lang['system_events.service_3'] = 'Eventos del servicio de acceso a la web';
+$_lang['system_events.service_4'] = 'Eventos del servicio de caché';
+$_lang['system_events.service_5'] = 'Eventos del servicio de plantilla';
+$_lang['system_events.service_6'] = 'Eventos definidos por el usuario';
 
-$_lang['system_events.remove'] = 'Remove Event';
+$_lang['system_events.remove'] = 'Eliminar Evento';
 $_lang['system_events.remove_confirm'] = 'Are you sure you want to remove the <b>[[+name]]</b> event? This is irreversible!';
 
 $_lang['system_events_err_ns'] = 'Name of the System Event not specified.';

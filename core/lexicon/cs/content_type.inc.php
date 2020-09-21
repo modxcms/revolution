@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Hlavní';
 $_lang['content_type_header_tab'] = 'Vlastní hlavičky';
 $_lang['content_type_header_title'] = 'Vytvořit/upravit hlavičku';
 $_lang['content_type_new'] = 'Nový typ obsahu';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Odstranit typ obsahu';
 $_lang['content_type_remove_confirm'] = 'Opravdu chcete odstranit tento typ obsahu?';
 $_lang['content_types'] = 'Typy obsahů';

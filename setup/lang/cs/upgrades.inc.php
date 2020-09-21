@@ -44,3 +44,5 @@ $_lang['update_table_column_data'] = 'V tabulce [[+table]] ( [[+class]] ) byla a
 $_lang['iso_country_code_converted'] = 'Úspěšně převedeny názvy zemí na ISO kódy.';
 $_lang['legacy_cleanup_complete'] = 'Provedeno vyčištění starších souborů.';
 $_lang['legacy_cleanup_count'] = 'Odstraněno [[+files]] soubor(ů) a [[+folders]] složek.';
+$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
+$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';

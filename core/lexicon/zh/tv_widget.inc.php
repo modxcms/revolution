@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = '允许添加新的项目';
 $_lang['combo_allowaddnewdata_desc'] = '设为是的话，允许未存在列表中的项目被添加。默认设置为否。';
 $_lang['combo_forceselection'] = 'Force Selection to List';
 $_lang['combo_forceselection_desc'] = 'If using Type-Ahead, if this is set to Yes, only allow inputting of items in the list.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Empty List Text';
 $_lang['combo_listempty_text_desc'] = 'If Type-Ahead is on, and the user types a value not in the list, display this text.';
 $_lang['combo_listheight'] = 'List Height';

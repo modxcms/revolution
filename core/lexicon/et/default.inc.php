@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Tegevus puudub';
 $_lang['no_category'] = 'kategoriseerimata';
 $_lang['no_records_found'] = 'Andmed puuduvad.';
 $_lang['no_results'] = 'Tulemusi ei leitud';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Offline';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Vana Võti';

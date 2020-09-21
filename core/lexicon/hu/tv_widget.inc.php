@@ -16,6 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Új elemek hozzáadásának engedélyezése';
 $_lang['combo_allowaddnewdata_desc'] = 'Ha igen, hozzá lehet adni új elemeket a felsoroláshoz. Alapértelmezetten nem lehet.';
 $_lang['combo_forceselection'] = 'Választás csak a felsorolásból';
 $_lang['combo_forceselection_desc'] = 'Gépelés kiegészítésénél ha igenre van állítva, csak a felsorolás elemeit lehet megadni.';
+$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
 $_lang['combo_listempty_text'] = 'Üres felsorolás szövege';
 $_lang['combo_listempty_text_desc'] = 'Mutassa ezt a szöveget, ha gépelés kiegészítésénél a felhasználó a felsorolásban nem szereplő értéket ad meg.';
 $_lang['combo_listheight'] = 'Felsorolás magassága';

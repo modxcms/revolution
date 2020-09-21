@@ -136,8 +136,8 @@ $_lang['setting_cache_action_map_desc'] = 'Kui lubatud, tegevused (või kontroll
 $_lang['setting_cache_alias_map'] = 'Enable Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'When enabled, all Resource URIs are cached into the Context. Enable on smaller sites and disable on larger sites for better performance.';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
 $_lang['setting_cache_context_settings_desc'] = 'Kui lubatud, context settings will be cached to reduce load times.';

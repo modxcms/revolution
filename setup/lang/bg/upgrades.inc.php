@@ -44,3 +44,5 @@ $_lang['update_table_column_data'] = 'Актуализирани данни [[+c
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
 $_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
 $_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
+$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
+$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';

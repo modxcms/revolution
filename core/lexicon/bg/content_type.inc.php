@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Основен';
 $_lang['content_type_header_tab'] = 'Персонализирани headers';
 $_lang['content_type_header_title'] = 'Създайте/редактирайте заглавна информация';
 $_lang['content_type_new'] = 'Нов Тип Съдържание';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Изтриване на Тип Съдържание';
 $_lang['content_type_remove_confirm'] = 'Наистина ли искате да изтриете този Тип Съдържание?';
 $_lang['content_types'] = 'Вид Съдържание';

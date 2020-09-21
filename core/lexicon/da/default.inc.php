@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Ingen handling';
 $_lang['no_category'] = 'ukategoriseret';
 $_lang['no_records_found'] = 'Ingen poster fundet.';
 $_lang['no_results'] = 'Ingen resultater fundet';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Offline';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Tidligere nøgle';

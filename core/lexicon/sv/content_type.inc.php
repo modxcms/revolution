@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Allmänt';
 $_lang['content_type_header_tab'] = 'Anpassade headers';
 $_lang['content_type_header_title'] = 'Skapa/redigera headers';
 $_lang['content_type_new'] = 'Ny innehållstyp';
+$_lang['content_type_edit'] = 'Redigera innehållstyp';
 $_lang['content_type_remove'] = 'Ta bort innehållstyp';
 $_lang['content_type_remove_confirm'] = 'Är du säker på att du vill ta bort den här innehållstypen?';
 $_lang['content_types'] = 'Innehållstyper';

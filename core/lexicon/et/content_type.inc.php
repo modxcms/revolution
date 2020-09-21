@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Main';
 $_lang['content_type_header_tab'] = 'Custom headers';
 $_lang['content_type_header_title'] = 'Create/edit header';
 $_lang['content_type_new'] = 'Uus Content Type';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Eemalda Content Type';
 $_lang['content_type_remove_confirm'] = 'Oled kindel, et soovid selle content type-i eemaldada?';
 $_lang['content_types'] = 'Content Type-id';

@@ -44,3 +44,5 @@ $_lang['update_table_column_data'] = 'Módosított adat a [[+table]] tábla [[+c
 $_lang['iso_country_code_converted'] = 'Elkészült a felhasználói adatlap országneveinek átalakítása ISO kódokká.';
 $_lang['legacy_cleanup_complete'] = 'Korábbi állományok törlése kész.';
 $_lang['legacy_cleanup_count'] = '[[+files]] állomány és [[+folders]] mappa eltávolítva.';
+$_lang['system_setting_update_success'] = '\'[[+key]]\' rendszerbeállítás módosítva.';
+$_lang['system_setting_update_failed'] = '\'[[+key]]\' rendszerbeállítást nem sikerült módosítani.';

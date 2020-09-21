@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'الرئيسية';
 $_lang['content_type_header_tab'] = 'ترويسات مخصصة';
 $_lang['content_type_header_title'] = 'إنشاء/تعديل ترويسة';
 $_lang['content_type_new'] = 'نوع محتوى جديد';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'حذف نوع محتوى';
 $_lang['content_type_remove_confirm'] = 'هل أنت متأكد أنك تريد حذف نوع المحتوى هذا؟';
 $_lang['content_types'] = 'أنواع المحتوى';

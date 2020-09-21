@@ -293,6 +293,7 @@ $_lang['no_action'] = 'Žádná akce';
 $_lang['no_category'] = 'bez kategorie';
 $_lang['no_records_found'] = 'Nenalezen žádný záznam.';
 $_lang['no_results'] = 'Nenalezen žádný výsledek';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Odpojený';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Původní klíč';

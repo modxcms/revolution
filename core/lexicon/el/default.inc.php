@@ -293,6 +293,7 @@ $_lang['no_action'] = 'No Action';
 $_lang['no_category'] = 'χωρίς κατηγορία';
 $_lang['no_records_found'] = 'Δε βρέθηκαν εγγραφές.';
 $_lang['no_results'] = 'Δε βρέθηκαν αποτελέσματα';
+$_lang['numberfield'] = 'Numberfield';
 $_lang['offline'] = 'Χωρίς σύνδεση';
 $_lang['ok'] = 'Εντάξει';
 $_lang['old_key'] = 'Old Key';

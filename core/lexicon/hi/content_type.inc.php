@@ -23,6 +23,7 @@ $_lang['content_type_main_tab'] = 'Main';
 $_lang['content_type_header_tab'] = 'कस्टम हेडर';
 $_lang['content_type_header_title'] = 'Create/edit header';
 $_lang['content_type_new'] = 'नए Content Type';
+$_lang['content_type_edit'] = 'Edit Content Type';
 $_lang['content_type_remove'] = 'Content Type हटाएँ';
 $_lang['content_type_remove_confirm'] = 'आप सुनिश्चित करें कि आप इस Content Type को हटाना चाहते हैं?';
 $_lang['content_types'] = 'Content Types';

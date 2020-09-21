@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'Калі дазволена, мапа
 $_lang['setting_cache_alias_map'] = 'Дазволіць кэшаванне карты псеўданімаў кантэксту';
 $_lang['setting_cache_alias_map_desc'] = 'Калі дазволена, усе URI рэсурсаў кэшуюцца ў кантэкст. Дазваляйце для невялікіх сайтаў і адключайце для вялікіх сайтаў для лепшай прадукцыйнасці.';
 
-$_lang['setting_use_context_resource_table'] = 'Выкарыстоўваць табліцу context_resource';
-$_lang['setting_use_context_resource_table_desc'] = 'Калі ўключана, падчас абнаўлення кантэксту будзе выкарыстоўвацца табліца context_resource. Гэта дазваляе праграмна мець адзін рэсурс у некалькіх кантэкстах адначасова. Калі вы не выкарыстоўваеце гэтыя рэсурсы ў мностве кантэкстаў праз API, можна задаць гэтае значэнне роўным false. На буйных сайтах вы можаце атрымаць патэнцыйны прырост прадукцыйнасці адмінкі.';
+$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Дазволіць кэшаванне налад кантэкстаў';
 $_lang['setting_cache_context_settings_desc'] = 'Калі дазволена, налады кантэкстаў будуць кэшавацца для паскарэння загрузкі старонак.';
