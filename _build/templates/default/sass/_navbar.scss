@@ -82,8 +82,10 @@
     }
   }
 
-  #modx-user-menu a .label, #modx-user-menu a .description, #modx-user-menu a #user-username {
-    display: none;
+  #modx-user-menu a {
+    .label, .description, #user-username {
+      display: none;
+    }
   }
 
   #modx-manager-search-icon a,
