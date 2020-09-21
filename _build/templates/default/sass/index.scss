@@ -272,6 +272,13 @@ textarea.x-form-field {
     box-sizing: border-box;
     width: 100% !important;
     margin: 0 auto 15px;
+
+    & .x-panel-body {
+        height: auto !important;
+        max-height: 100% !important;
+        width: auto !important;
+        max-width: 100% !important;
+    }
   }
 }
 
