@@ -8,7 +8,7 @@ $xpdo_meta_map['modTemplate']= array (
   'version' => '1.1',
   'table' => 'site_templates',
   'extends' => 'modElement',
-  'fields' => 
+  'fields' =>
   array (
     'templatename' => '',
     'description' => 'Template',
@@ -22,9 +22,9 @@ $xpdo_meta_map['modTemplate']= array (
     'static' => 0,
     'static_file' => '',
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'templatename' => 
+    'templatename' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => '50',
@@ -33,7 +33,7 @@ $xpdo_meta_map['modTemplate']= array (
       'default' => '',
       'index' => 'unique',
     ),
-    'description' => 
+    'description' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => '255',
@@ -41,14 +41,14 @@ $xpdo_meta_map['modTemplate']= array (
       'null' => false,
       'default' => 'Template',
     ),
-    'editor_type' => 
+    'editor_type' =>
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
     ),
-    'category' => 
+    'category' =>
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
@@ -56,7 +56,7 @@ $xpdo_meta_map['modTemplate']= array (
       'default' => 0,
       'index' => 'fk',
     ),
-    'icon' => 
+    'icon' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => '255',
@@ -64,14 +64,14 @@ $xpdo_meta_map['modTemplate']= array (
       'null' => false,
       'default' => '',
     ),
-    'template_type' => 
+    'template_type' =>
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
     ),
-    'content' => 
+    'content' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => 'max',
@@ -79,7 +79,7 @@ $xpdo_meta_map['modTemplate']= array (
       'null' => false,
       'default' => '',
     ),
-    'locked' => 
+    'locked' =>
     array (
       'dbtype' => 'bit',
       'phptype' => 'boolean',
@@ -87,14 +87,14 @@ $xpdo_meta_map['modTemplate']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'properties' => 
+    'properties' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => 'max',
       'phptype' => 'array',
       'null' => true,
     ),
-    'static' => 
+    'static' =>
     array (
       'dbtype' => 'bit',
       'phptype' => 'boolean',
@@ -102,7 +102,7 @@ $xpdo_meta_map['modTemplate']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'static_file' => 
+    'static_file' =>
     array (
       'dbtype' => 'nvarchar',
       'precision' => '255',
@@ -111,17 +111,17 @@ $xpdo_meta_map['modTemplate']= array (
       'default' => '',
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'templatename' => 
+    'templatename' =>
     array (
       'alias' => 'templatename',
       'primary' => false,
       'unique' => true,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'templatename' => 
+        'templatename' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -129,15 +129,15 @@ $xpdo_meta_map['modTemplate']= array (
         ),
       ),
     ),
-    'category' => 
+    'category' =>
     array (
       'alias' => 'category',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'category' => 
+        'category' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -145,15 +145,15 @@ $xpdo_meta_map['modTemplate']= array (
         ),
       ),
     ),
-    'locked' => 
+    'locked' =>
     array (
       'alias' => 'locked',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'locked' => 
+        'locked' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -161,15 +161,15 @@ $xpdo_meta_map['modTemplate']= array (
         ),
       ),
     ),
-    'static' => 
+    'static' =>
     array (
       'alias' => 'static',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'static' => 
+        'static' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -178,24 +178,24 @@ $xpdo_meta_map['modTemplate']= array (
       ),
     ),
   ),
-  'composites' => 
+  'composites' =>
   array (
-    'PropertySets' => 
+    'PropertySets' =>
     array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
       'owner' => 'local',
       'cardinality' => 'many',
-      'criteria' => 
+      'criteria' =>
       array (
-        'foreign' => 
+        'foreign' =>
         array (
           'element_class' => 'modTemplate',
         ),
       ),
     ),
-    'TemplateVarTemplates' => 
+    'TemplateVarTemplates' =>
     array (
       'class' => 'modTemplateVarTemplate',
       'local' => 'id',
@@ -204,9 +204,9 @@ $xpdo_meta_map['modTemplate']= array (
       'owner' => 'local',
     ),
   ),
-  'aggregates' => 
+  'aggregates' =>
   array (
-    'Category' => 
+    'Category' =>
     array (
       'class' => 'modCategory',
       'local' => 'category',
@@ -214,13 +214,28 @@ $xpdo_meta_map['modTemplate']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Resources' => 
+    'Resources' =>
     array (
       'class' => 'modResource',
       'local' => 'id',
       'foreign' => 'template',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'validation' =>
+  array (
+    'rules' =>
+    array (
+      'name' =>
+      array (
+        'invalid' =>
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/',
+          'message' => 'snippet_err_invalid_name',
+        ),
+      ),
     ),
   ),
 );

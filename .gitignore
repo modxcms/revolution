@@ -52,3 +52,6 @@ composer.lock
 
 # ignore composer vendor dir
 /vendor
+manager/assets/modext/widgets/element/_b1_modx.panel.tv.js
+core/model/modx/processors/element/tv/configs/mgr/inputproperties/email_cols.php
+manager/assets/modext/widgets/core/_b1_modx.panel.js

@@ -8,11 +8,11 @@ $xpdo_meta_map['modSnippet']= array (
   'version' => '1.1',
   'table' => 'site_snippets',
   'extends' => 'modScript',
-  'tableMeta' => 
+  'tableMeta' =>
   array (
     'engine' => 'InnoDB',
   ),
-  'fields' => 
+  'fields' =>
   array (
     'cache_type' => 0,
     'snippet' => NULL,
@@ -22,9 +22,9 @@ $xpdo_meta_map['modSnippet']= array (
     'static' => 0,
     'static_file' => '',
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'cache_type' => 
+    'cache_type' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -32,12 +32,12 @@ $xpdo_meta_map['modSnippet']= array (
       'null' => false,
       'default' => 0,
     ),
-    'snippet' => 
+    'snippet' =>
     array (
       'dbtype' => 'mediumtext',
       'phptype' => 'string',
     ),
-    'locked' => 
+    'locked' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -47,13 +47,13 @@ $xpdo_meta_map['modSnippet']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'properties' => 
+    'properties' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'array',
       'null' => true,
     ),
-    'moduleguid' => 
+    'moduleguid' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '32',
@@ -62,7 +62,7 @@ $xpdo_meta_map['modSnippet']= array (
       'default' => '',
       'index' => 'fk',
     ),
-    'static' => 
+    'static' =>
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -72,7 +72,7 @@ $xpdo_meta_map['modSnippet']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'static_file' => 
+    'static_file' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '191',
@@ -81,21 +81,21 @@ $xpdo_meta_map['modSnippet']= array (
       'default' => '',
     ),
   ),
-  'fieldAliases' => 
+  'fieldAliases' =>
   array (
     'content' => 'snippet',
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'locked' => 
+    'locked' =>
     array (
       'alias' => 'locked',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'locked' => 
+        'locked' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -103,15 +103,15 @@ $xpdo_meta_map['modSnippet']= array (
         ),
       ),
     ),
-    'moduleguid' => 
+    'moduleguid' =>
     array (
       'alias' => 'moduleguid',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'moduleguid' => 
+        'moduleguid' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -119,15 +119,15 @@ $xpdo_meta_map['modSnippet']= array (
         ),
       ),
     ),
-    'static' => 
+    'static' =>
     array (
       'alias' => 'static',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'static' => 
+        'static' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -136,34 +136,34 @@ $xpdo_meta_map['modSnippet']= array (
       ),
     ),
   ),
-  'composites' => 
+  'composites' =>
   array (
-    'PropertySets' => 
+    'PropertySets' =>
     array (
       'class' => 'modElementPropertySet',
       'local' => 'id',
       'foreign' => 'element',
       'owner' => 'local',
       'cardinality' => 'many',
-      'criteria' => 
+      'criteria' =>
       array (
-        'foreign' => 
+        'foreign' =>
         array (
           'element_class' => 'modSnippet',
         ),
       ),
     ),
   ),
-  'validation' => 
+  'validation' =>
   array (
-    'rules' => 
+    'rules' =>
     array (
-      'name' => 
+      'name' =>
       array (
-        'invalid' => 
+        'invalid' =>
         array (
           'type' => 'preg_match',
-          'rule' => '/^(?!\\s)[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff-_\\s]+(?!\\s)$/',
+          'rule' => '/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/',
           'message' => 'snippet_err_invalid_name',
         ),
       ),

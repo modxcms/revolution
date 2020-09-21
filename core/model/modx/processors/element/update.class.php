@@ -82,6 +82,8 @@ abstract class modElementUpdateProcessor extends modObjectUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('',array_merge($this->object->get(array('id', 'name', 'description', 'locked', 'category', 'content')), array('previous_category' => $this->previousCategory)));
+        $fields = array('id', 'description', 'locked', 'category', 'content');
+        array_push($fields,($this->classKey == 'modTemplate' ? 'templatename' : 'name'));
+        return $this->success('',array_merge($this->object->get($fields), array('previous_category' => $this->previousCategory)));
     }
 }
