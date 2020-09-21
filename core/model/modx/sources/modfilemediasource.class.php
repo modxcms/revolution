@@ -190,7 +190,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 if ($this->hasPermission('file_update') && $canSave) $cls[] = 'pupdate';
 
                 $encFile = rawurlencode($fullPath.$fileName);
-                $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
+                $page = !empty($editAction) ? '?a='.$editAction.'&file='.rawurlencode($bases['urlRelative'].$fileName).'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
                 $url = $bases['urlRelative'] . $fileName;
 
                 /* get relative url from manager/ */

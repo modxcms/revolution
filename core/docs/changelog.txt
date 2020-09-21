@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.0-pl (TBD)
 ====================================
+- Fix XSS in file upload and file tree [#15262]
 - Fix display of pagination toolbar [#15246]
 - Add check existing file on upload [#15232]
 - Update Smarty to 3.1.36 [#15249]
