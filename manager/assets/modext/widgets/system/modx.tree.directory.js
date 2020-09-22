@@ -580,7 +580,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                     fn:function() {
                         var parent = Ext.getCmp('folder-parent').getValue();
 
-                        if (this.cm.activeNode.constructor.name === 'constructor' || parent === '' || parent === '/') {
+                        if ((this.cm.activeNode && this.cm.activeNode.constructor.name === 'constructor') || parent === '' || parent === '/') {
                             this.refresh();
                         } else {
                             this.refreshActiveNode();
