@@ -186,7 +186,7 @@
             var errors = '';
             for (var i in this.errors) {
                 if (this.errors.hasOwnProperty(i)) {
-                    errors += '- <b>' + i + '</b>: ' + this.errors[i] + '<br>';
+                    errors += this.errors[i] + '<br>';
                 }
             }
             if (errors != '') {

@@ -633,6 +633,17 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
+     * Checks `upload_file_exists` system setting to allow or disallow overwriting files with the same name
+     *
+     * @return boolean
+     */
+    public function checkFileExists()
+    {
+        return (bool)$this->xpdo->getOption('upload_file_exists', null, true);
+    }
+
+
+    /**
      * Create a file
      *
      * @param string $path
@@ -655,7 +666,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
 
         try {
-            if ($this->filesystem->has($path)) {
+            if ($this->checkFileExists() && $this->filesystem->has($path)) {
                 $this->addError('name', sprintf($this->xpdo->lexicon('file_err_ae'), $name));
 
                 return false;
@@ -945,7 +956,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $this->addError('name', $this->xpdo->lexicon('file_err_invalid'));
 
             return false;
-        } elseif ($this->filesystem->has($newPath)) {
+        } elseif ($this->checkFileExists() && $this->filesystem->has($newPath)) {
             $this->addError('name', sprintf($this->xpdo->lexicon('file_err_ae'), $newName));
 
             return false;
@@ -1076,6 +1087,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
             $newPath = $container . $this->sanitizePath($file['name']);
             try {
+                if ($this->checkFileExists() && $this->filesystem->has($newPath)) {
+                    $this->addError('path', sprintf($this->xpdo->lexicon('file_err_ae'), $file['name']));
+
+                    return false;
+                }
                 if (!$this->filesystem->put($newPath, file_get_contents($file['tmp_name']))) {
                     $this->addError('path', $this->xpdo->lexicon('file_err_upload'));
                     continue;
