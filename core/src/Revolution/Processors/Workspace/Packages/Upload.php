@@ -81,7 +81,7 @@ class Upload extends Processor
         // Prepare the upload path and check it exists
         $destination = $this->modx->getOption('core_path') . 'packages/';
         if (!is_dir($destination)) {
-            return $this->failure('Packages directory doesnt appear to exist!'); //@TODO Make translatable
+            return $this->failure($this->modx->lexicon('file_package_err_invalid_directory'));
         }
 
         // Grab the file
@@ -95,12 +95,14 @@ class Upload extends Processor
             'application/x-zip',
             'application/octet-stream',
         ])) {
-            return $this->failure('1 This file does not appear to be a transport package'); //@TODO Make translatable
+            return $this->failure($this->modx->lexicon('file_package_err_invalid_type'));
         }
 
         // Check valid name of file
         if (!preg_match("/.+\\.transport\\.zip$/i", $file['name'])) {
-            return $this->failure("2 This file [{$file['name']}] does not appear to be a transport package"); //@TODO Make translatable
+            return $this->failure($this->modx->lexicon('file_package_err_invalid_name', [
+                'name' => $file['name']
+            ]));
         }
 
         $newPath = $destination . $file['name'];
