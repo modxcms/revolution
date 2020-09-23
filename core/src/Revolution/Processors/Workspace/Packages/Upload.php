@@ -103,8 +103,15 @@ class Upload extends Processor
             return $this->failure("2 This file [{$file['name']}] does not appear to be a transport package"); //@TODO Make translatable
         }
 
+        $newPath = $destination . $file['name'];
+
+        // Check if a file exists
+        if (file_exists($newPath)) {
+            return $this->failure(sprintf($this->modx->lexicon('file_err_ae'), $file['name']));
+        }
+
         // Return response
-        if (move_uploaded_file($file['tmp_name'], $destination . $file['name'])) {
+        if (move_uploaded_file($file['tmp_name'], $newPath)) {
             return $this->success();
         }
 
