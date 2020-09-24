@@ -52,7 +52,6 @@
         "smarty/smarty": "^3.1",
         "james-heinrich/phpthumb": "^1.7",
         "erusev/parsedown": "^1.7",
-        "pelago/emogrifier": "^2.0",
         "simplepie/simplepie": "^1.5",
         "ext-curl": "*",
         "ext-dom": "*",
@@ -62,7 +61,8 @@
         "ext-simplexml": "*",
         "ext-pdo": "*",
         "ext-xml": "*",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "inlinestyle/inlinestyle": "^1.2"
     },
     "suggest": {
         "ext-imagick": "To process images in a more advanced way",

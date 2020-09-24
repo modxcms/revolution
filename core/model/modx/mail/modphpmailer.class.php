@@ -12,7 +12,7 @@ require_once MODX_CORE_PATH . 'model/modx/mail/modmail.class.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use Pelago\Emogrifier;
+use InlineStyle\InlineStyle;
 
 /**
  * PHPMailer implementation of the modMail service.
@@ -210,8 +210,10 @@ class modPHPMailer extends modMail {
         try {
             if (strpos($this->mailer->ContentType, 'html') !== false) {
                 if (!empty($this->mailer->Body)) {
-                    $emogrifier = new Emogrifier($this->mailer->Body);
-                    $this->mailer->Body = $emogrifier->emogrify();
+                    $html = new InlineStyle($this->mailer->Body);
+                    /** @noinspection PhpParamsInspection */
+                    $html->applyStylesheet($html->extractStylesheets());
+                    $this->mailer->Body = $html->getHTML();
                 }
             }
             $sent = $this->mailer->send();

@@ -139,9 +139,13 @@ class ResourceUpdateManagerController extends ResourceManagerController
         foreach ($fields as $field) {
             $this->resourceArray[$field] = !empty($this->resourceArray[$field]);
         }
-        $this->resourceArray['syncsite'] = isset($this->resourceArray['syncsite'])
-            ? !empty($this->resourceArray['syncsite'])
-            : !empty($this->context->getOption('syncsite_default', 1, $this->modx->_userConfig));
+        if (isset($this->resourceArray['syncsite'])) {
+            $this->resourceArray['syncsite'] = !empty($this->resourceArray['syncsite']);
+        } else {
+            $syncsiteDefault = $this->context->getOption('syncsite_default', 1,
+                $this->modx->_userConfig);
+            $this->resourceArray['syncsite'] = !empty($syncsiteDefault);
+        }
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($this->parent->get('pagetitle'));
