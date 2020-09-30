@@ -84,7 +84,6 @@ $_lang['regex'] = 'Regular Expression Validator';
 $_lang['name'] = 'नाम';
 $_lang['number'] = 'Number';
 $_lang['number_allowdecimals'] = 'दशमलव की अनुमति दें';
-$_lang['number_allownegative'] = 'नकारात्मक की अनुमति दें';
 $_lang['number_decimalprecision'] = 'दशमलव शुद्धता';
 $_lang['number_decimalprecision_desc'] = 'अधिकतम शुद्धता दशमलव विभाजक (2 के लिए चूक) के बाद प्रदर्शित करने के लिए।';
 $_lang['number_decimalseparator'] = 'दशमलव विभाजक';
