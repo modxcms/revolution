@@ -84,7 +84,6 @@ $_lang['regex'] = 'Expression régulière (REGEX) de validation';
 $_lang['name'] = 'Nom';
 $_lang['number'] = 'Nombre';
 $_lang['number_allowdecimals'] = 'Autoriser les nombres décimaux';
-$_lang['number_allownegative'] = 'Autoriser les nombres négatifs';
 $_lang['number_decimalprecision'] = 'Nombre de décimales';
 $_lang['number_decimalprecision_desc'] = 'Nombre maximum de décimales à afficher après le séparateur décimal (2 par défaut).';
 $_lang['number_decimalseparator'] = 'Séparateur décimal';
