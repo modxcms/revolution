@@ -84,7 +84,6 @@ $_lang['regex'] = 'Regulärer Ausdruck, mit dem die Eingabe validiert wird';
 $_lang['name'] = 'Name';
 $_lang['number'] = 'Zahl';
 $_lang['number_allowdecimals'] = 'Erlaube Dezimalstellen';
-$_lang['number_allownegative'] = 'Erlaube negative Zahlen';
 $_lang['number_decimalprecision'] = 'Dezimalstellen';
 $_lang['number_decimalprecision_desc'] = 'Die maximale Anzahl an Dezimalstellen, die nach dem Dezimaltrennzeichen angezeigt werden (Standard: 2).';
 $_lang['number_decimalseparator'] = 'Dezimaltrennzeichen';
