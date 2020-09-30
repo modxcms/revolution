@@ -2,6 +2,7 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Remove allowNegative parameter for TV with number type [#15119]
 - Fix incorrect path setting when uploading files [#15227]
 - Add indication of selected file and expand active source in tree [#15228]
 - Display caption instead of description in template TV grid [#15231]
