@@ -86,7 +86,6 @@ $_lang['regex'] = 'Regular Expression Validator';
 $_lang['name'] = '名前';
 $_lang['number'] = '数値';
 $_lang['number_allowdecimals'] = '小数を許可';
-$_lang['number_allownegative'] = '負の値を許可';
 $_lang['number_decimalprecision'] = '小数点以下の桁数（動作が不安定です）';
 $_lang['number_decimalprecision_desc'] = '許可する小数点以下の桁数を指定します（デフォルトは 2）。';
 $_lang['number_decimalseparator'] = '小数点の区切り';
