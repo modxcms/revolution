@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'टेम्पलेट हटाते सम
 $_lang['template_err_duplicate'] = 'टेम्पलेट duplicating करते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['template_err_ae'] = 'एक टेम्पलेट नाम "[[+name]]" के साथ पहले से ही मौजूद है।';
 $_lang['template_err_in_use'] = 'इस टेम्पलेट का उपयोग में है। एक और टेम्पलेट के लिए टेम्पलेट का उपयोग कर documents सेट करें। documents इस टेम्पलेट का उपयोग:  <br/>';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'टेम्पलेट से संपादन अवरोधित है।';
 $_lang['template_err_nf'] = 'टेम्पलेट नहीं मिला!';
 $_lang['template_err_ns'] = 'टेम्पलेट निर्दिष्ट नहीं किया गया।';
