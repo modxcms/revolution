@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Er is een fout opgetreden tijdens het verwijder
 $_lang['template_err_duplicate'] = 'Er is een fout opgetreden tijdens het dupliceren van de template.';
 $_lang['template_err_ae'] = 'Een template met dezelfde naam "[[+name]]" bestaat reeds.';
 $_lang['template_err_in_use'] = 'Deze template is in gebruik. Stel alle documenten die deze template gebruiken in op een andere template. Documenten die deze template gebruiken:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Template is vergrendelijk voor bewerken.';
 $_lang['template_err_nf'] = 'Template niet gevonden!';
 $_lang['template_err_ns'] = 'Template niet gespecificeerd.';
