@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Произошла ошибка при удал
 $_lang['template_err_duplicate'] = 'Произошла ошибка при копировании шаблона.';
 $_lang['template_err_ae'] = 'Шаблон с названием «[[+name]]» уже существует.';
 $_lang['template_err_in_use'] = 'Этот шаблон используется. Пожалуйста, установите ресурсам использующим этот шаблон другой шаблон. Ресурсы, использующие этот шаблон:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Шаблон заблокирован для редактирования.';
 $_lang['template_err_nf'] = 'Шаблон не найден!';
 $_lang['template_err_ns'] = 'Шаблон не указан.';
