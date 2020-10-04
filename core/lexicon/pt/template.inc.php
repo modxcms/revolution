@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Ocorreu um erro ao excluir o template.';
 $_lang['template_err_duplicate'] = 'Ocorreu um erro durante a duplicação do template.';
 $_lang['template_err_ae'] = 'O template já existe com o nome de "[[+name]]".';
 $_lang['template_err_in_use'] = 'Este template está em uso. Por favor, defina os documentos usando o template para outro template. Documentos usando este template: <br /> ';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Template é bloqueado para edição.';
 $_lang['template_err_nf'] = 'Template não encontrada';
 $_lang['template_err_ns'] = 'Template não especificado.';
