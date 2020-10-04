@@ -40,6 +40,7 @@ MODX Revolution 2.8.0-pl (TBD)
 - Fix a Fatal Error when upgrading from MODX Revolution 2.5.x or earlier [#15053]
 - Improve the error handling and showing invalid fields when creating/editing resources or elements [#14743, #15116, #15088]
 - Prevent error when creating a new folder in media source root [#15263]
+- Add "Update User Group" button to Access Control Lists > User Groups & Users for easier navigation [#15270]
 
 MODX Revolution 2.7.3-pl (February 27, 2020)
 ====================================
