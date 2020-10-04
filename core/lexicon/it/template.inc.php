@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Si è verificato un errore durante l\'eliminazi
 $_lang['template_err_duplicate'] = 'Si è verificato un errore durante la duplicazione del template.';
 $_lang['template_err_ae'] = 'Esiste già un template con nome "[[+name]]".';
 $_lang['template_err_in_use'] = 'Questo template è attualmente in uso. Assegna un template diverso alle risorse che lo stanno usando. Elenco Risorse che stanno usando questo template:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Il Template è bloccato e non può essere modificato.';
 $_lang['template_err_nf'] = 'Template non trovato!';
 $_lang['template_err_ns'] = 'Template non specificato.';
