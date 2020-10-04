@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'حصل خطأ أثناء حذف القالب.';
 $_lang['template_err_duplicate'] = 'حصل خطأ أثناء تكرار القالب.';
 $_lang['template_err_ae'] = 'يوجد مسبقا قالب يحمل الاسم  "[[name+]]".';
 $_lang['template_err_in_use'] = 'هذا القالب مستخدم حاليا. يرجى ضبط المستندات التي تستخدم القالب إلى قالب أخر. المستندات التي تستخدم القالب:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'القالب مقفل عن التعديل.';
 $_lang['template_err_nf'] = 'لم يتم العثور على القالب!';
 $_lang['template_err_ns'] = 'القالب غير محدد.';
