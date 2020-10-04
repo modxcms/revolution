@@ -204,7 +204,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             	'success': {fn:function(r) {
                     if (r.object.pub_date == '0') { r.object.pub_date = ''; }
                     if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
-                    Ext.get('modx-resource-header').update(r.object.pagetitle);
+                    Ext.get('modx-resource-header').update(Ext.util.Format.htmlEncode(r.object.pagetitle));
                     this.getForm().setValues(r.object);
                     this.fireEvent('ready');
             	},scope:this}
