@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'An error occurred while deleting the template.'
 $_lang['template_err_duplicate'] = 'An error occured while duplicating the template.';
 $_lang['template_err_ae'] = 'A template already exists with the name "[[+name]]".';
 $_lang['template_err_in_use'] = 'This template is in use. Please set the documents using the template to another template. Documents using this template:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Template is locked from editing.';
 $_lang['template_err_nf'] = 'Șablonul nu a fost găsit!';
 $_lang['template_err_ns'] = 'Template not specified.';
