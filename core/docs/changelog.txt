@@ -39,6 +39,7 @@ MODX Revolution 2.8.0-pl (TBD)
 - Update PHPMailer to 5.2.28 [#15041]
 - Fix a Fatal Error when upgrading from MODX Revolution 2.5.x or earlier [#15053]
 - Improve the error handling and showing invalid fields when creating/editing resources or elements [#14743, #15116, #15088]
+- Prevent error when creating a new folder in media source root [#15263]
 
 MODX Revolution 2.7.3-pl (February 27, 2020)
 ====================================
