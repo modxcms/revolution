@@ -20,7 +20,12 @@ MODx.panel.Resource = function(config) {
             ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'fieldChange': {fn:this.onFieldChange,scope:this}
-            ,'failureSubmit': {fn:this.failureSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-resource-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
@@ -38,9 +43,19 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,rteElements: 'ta'
     ,rteLoaded: false
     ,warnUnsavedChanges: false
+
     ,setup: function() {
         if (!this.initialized) {
+
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-resource-settings','modx-page-settings','modx-panel-resource-tv'];
+            this.errorHandlingIgnoreTabs = ['modx-resource-access-permissions'];
+
             this.getForm().setValues(this.config.record);
+
             var tpl = this.getForm().findField('modx-resource-template');
             if (tpl) {
                 tpl.originalValue = this.config.record.template;
@@ -77,6 +92,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
             this.defaultValues = this.config.record || {};
+
             if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
                 this.markDirty();
             }
@@ -105,7 +121,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 this.rteLoaded = false;
             }
         }
-
+        
         this.fireEvent('ready');
         this.initialized = true;
 
@@ -170,6 +186,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
         });
     }
+
     ,success: function(o) {
         this.warnUnsavedChanges = false;
         var g = Ext.getCmp('modx-grid-resource-security');
@@ -210,79 +227,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
     }
-    ,failureSubmit: function() {
-        // This array contains the components we want to traverse in the order we prioritize them
-        var forms = [
-            'modx-resource-settings', // Document
-            'modx-page-settings', // Settings
-            'modx-panel-resource-tv' // Template Variables
-        ];
-
-        var tab_name = null;
-
-        // Loop each component and traverse the children recursively
-        for (var i = 0; i < forms.length; i++) {
-            var component = Ext.getCmp(forms[i]);
-            if (component && component.el && component.el.dom) {
-                if (this.traverseNode(component.el.dom)) {
-                    tab_name = forms[i];
-
-                    // We want to switch to the first tab that has an invalid state, no matter if the current
-                    // or any later tabs also have such states. We can therefore quit early here.
-                    break;
-                }
-            }
-        }
-
-        // If no invalid states were found, this check makes sure we don't switch tabs for no reason
-        if (tab_name === null) {
-            return;
-        }
-
-        var tabs = Ext.getCmp('modx-resource-tabs');
-        var tabs_index = null;
-
-        // The next check needs the tabs index value to check if it is hidden or not
-        if (tabs && tabs.items && tabs.items.keys) {
-            tabs_index = tabs.items.keys.indexOf(tab_name);
-        }
-
-        // We are already on a tab that has an invalid state. No need to switch
-        if (!tabs.items.items[tabs_index].hidden)  {
-            return;
-        }
-
-        // Activate the tab (this is done by passing the name of the tab)
-        tabs.activate(tab_name);
-    }
-
-    ,traverseNode: function(node) {
-        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
-            return true;
-        }
-
-        if (typeof node.children == 'undefined') {
-            return false;
-        }
-
-        for (var i = 0; i < node.children.length; i++) {
-            if (this.traverseNode(node.children[i])) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    ,failure: function(o) {
-        this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'resource/create') {
-            var btn = Ext.getCmp('modx-abtn-save');
-            if (btn) { btn.enable(); }
-        }
-
-        this.fireEvent('failureSubmit');
-    }
 
     ,freezeUri: function(cb) {
         var uri = Ext.getCmp('modx-resource-uri');
@@ -293,6 +237,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             uri.hide();
         }
     }
+
     // used for realtime-alias transliteration
     ,translitAlias: function(string) {
         if (!this.config.translitloading) {
@@ -315,6 +260,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             });
         }
     }
+
     ,generateAliasRealTime: function(title) {
         // check some system settings before doing real time alias transliteration
         if (parseInt(MODx.config.friendly_alias_realtime) && parseInt(MODx.config.automatic_alias)) {
@@ -324,6 +270,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
         }
     }
+
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
@@ -349,6 +296,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },this);
         }
     }
+
     ,onFieldChange: function(o) {
     	//a11y - Set Active Input
         if (o && o.field) {
@@ -473,20 +421,23 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,anchor: '100%'
             ,id: 'modx-resource-main-columns'
             ,defaults: {
-                labelSeparator: ''
+                layout: 'form'
                 ,labelAlign: 'top'
+                ,labelSeparator: ''
                 ,border: false
-                ,msgTarget: 'under'
+                ,defaults: {
+                    msgTarget: 'under'
+                    ,validationEvent: 'change'
+                    ,validateOnBlur: false
+                }
             }
             ,items:[{
                 columnWidth: .67
-                ,layout: 'form'
                 ,id: 'modx-resource-main-left'
                 ,defaults: { msgTarget: 'under' }
                 ,items: this.getMainLeftFields(config)
             },{
                 columnWidth: .33
-                ,layout: 'form'
                 ,labelWidth: 0
                 ,border: false
                 ,id: 'modx-resource-main-right'
@@ -693,21 +644,23 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
+                layout: 'form'
                 ,labelAlign: 'top'
+                ,labelSeparator: ''
                 ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
+                ,defaults: {
+                    msgTarget: 'under'
+                    ,validationEvent: 'change'
+                    ,validateOnBlur: false
+                }
             }
             ,items:[{
                 columnWidth: .5
                 ,id: 'modx-page-settings-left'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingLeftFields(config)
             },{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFields(config)
             }]
         }];
@@ -742,7 +695,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-content-type'
             ,anchor: '100%'
             ,value: config.record.content_type || (MODx.config.default_content_type || 1)
-
         },{
             xtype: 'modx-combo-content-disposition'
             ,fieldLabel: _('resource_contentdispo')
@@ -752,7 +704,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-content-dispo'
             ,anchor: '100%'
             ,value: config.record.content_dispo || 0
-
         },{
             xtype: 'numberfield'
             ,fieldLabel: _('resource_menuindex')
@@ -820,21 +771,23 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,border: false
             ,anchor: '100%'
             ,defaults: {
-                labelSeparator: ''
+                layout: 'form'
                 ,labelAlign: 'top'
+                ,labelSeparator: ''
                 ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
+                ,defaults: {
+                    msgTarget: 'under'
+                    ,validationEvent: 'change'
+                    ,validateOnBlur: false
+                }
             }
             ,items: [{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right-box-left'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetLeft(config)
             },{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right-box-right'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetRight(config)
             }]
         }];
@@ -850,7 +803,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,id: 'modx-resource-isfolder'
             ,inputValue: 1
             ,checked: parseInt(config.record.isfolder) || 0
-
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_searchable')

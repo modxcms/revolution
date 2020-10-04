@@ -69,6 +69,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,defaultValues: []
     ,initialized: false
 
+    /*
+        Use these errorHandling properties to specify which tab components
+        should and should not be inspected for field errors
+    */
+    ,errorHandlingTabs: []
+    ,errorHandlingIgnoreTabs: []
+
     ,submit: function(o) {
         var fm = this.getForm();
         if (fm.isValid() || o.bypassValidCheck) {
@@ -102,14 +109,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                             Ext.callback(this.config.success,this.config.scope || this,[f,a]);
                         }
                         this.fireEvent('success',{
-                            form:f
-                            ,result:a.result
-                            ,options:o
-                            ,config:this.config
+                            form: f
+                            ,result: a.result
+                            ,options: o
+                            ,config: this.config
                         });
                         this.clearDirty();
                         this.fireEvent('setup',this.config);
-                        
+
                         //get our Active input value and keep focus
                         var lastActiveEle = Ext.state.Manager.get('curFocus');
                         if (lastActiveEle && lastActiveEle != '') {
@@ -126,12 +133,22 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         return true;
     }
 
+    ,failure: function(o) {
+        this.warnUnsavedChanges = true;
+        if(this.getForm().baseParams.action.indexOf('/create') !== -1) {
+            var btn = Ext.getCmp('modx-abtn-save');
+            if (btn) { btn.enable(); }
+        }
+        this.fireEvent('failureSubmit');
+    }
+
     ,focusFirstField: function() {
         if (this.getForm().items.getCount() > 0) {
             var fld = this.findFirstTextField();
             if (fld) { fld.focus(false,200); }
         }
     }
+
     ,findFirstTextField: function(i) {
         i = i || 0;
         var fld = this.getForm().items.itemAt(i);
@@ -298,56 +315,111 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     /**
+     * Get tab ids for use in further processing
+     *
+     * @param {Object} map - the items.map object of the primary tabs panel
+     * @param {Array} keys - an array of keys matching those in the tabsObj items.keys
+     */
+    ,getTabIdsFromKeys: function(map, keys) {
+
+        var tabIds = [];
+
+        if (typeof map == 'object') {
+            if (Array.isArray(keys) && keys.length > 0) {
+                keys.forEach(function(key) {
+                    if(map.hasOwnProperty(key) && typeof map[key].id == 'string') {
+                        tabIds.push(map[key].id);
+                    } else if (key == 'modx-panel-resource-tv' && MODx.config.tvs_below_content == 1) {
+                        /*
+                            When evaluating a resource panel with TVs moved below content,
+                            the panel id needs to be added explicitly as, in this case, the TV panel
+                            is not part of the main tabs component
+                        */
+                        tabIds.push(key);
+                    }
+                });
+            }
+        }
+        return tabIds;
+    }
+
+    /**
      * Find errored field in the panel and activates the tab where the first error was found.
      *
-     * @param {Array} detectingForms - array of forms where we should find errors
-     * @param {String} tabsId - id of tab component for a given panel
+     * @param {Array} targetForms - array of form tab itemIds to search for errors
+     * @param {String} tabsId - id of primary tab component for a given panel
      */
-    ,showErroredTab: function(detectingForms, tabsId) {
-        var tab = null, index = null;
-        for (var i = 0; i < detectingForms.length; i++) {
-            var component = Ext.getCmp(detectingForms[i]);
+    ,showErroredTab: function(targetForms, tabsId) {
+
+        var mainTabs = Ext.getCmp(tabsId);
+        var searchTabs = this.getTabIdsFromKeys(mainTabs.items.map, targetForms),
+            mainTabName = null,
+            mainTabIndex = null,
+            component,
+            erroredNode = null
+            ;
+        /*
+            Add any custom panels, created on the fly via manager customization or CMPs,
+            to the searchTabs
+        */
+        if (mainTabs.items.length > mainTabs.initialConfig.items.length) {
+            mainTabs.items.keys.forEach(function(key) {
+                if (mainTabs.items.map[key].hasOwnProperty('id')) {
+                    if(this.errorHandlingIgnoreTabs.indexOf(mainTabs.items.map[key].id) === -1 && searchTabs.indexOf(mainTabs.items.map[key].id) === -1) {
+                        searchTabs.push(mainTabs.items.map[key].id);
+                    }
+                }
+            }, this);
+        }
+
+        for (var i = 0; i < searchTabs.length; i++) {
+            component = Ext.getCmp(searchTabs[i]);
             if (component && component.el && component.el.dom) {
-                if (this.detectErrors(component.el.dom)) {
-                    tab = component.itemId ? component.itemId : detectingForms[i];
+                erroredNode = this.detectErrors(component.el.dom);
+                if (erroredNode !== false) {
+                    mainTabName = component.itemId ? component.itemId : searchTabs[i];
                     break;
                 }
             }
         }
 
-        if (tab === null) {
-            return;
+        if (mainTabName !== null) {
+
+            var errFld = document.getElementById(erroredNode);
+
+            if (mainTabs && mainTabs.items && mainTabs.items.keys) {
+                mainTabIndex = mainTabs.items.keys.indexOf(mainTabName);
+                if (component.id == 'modx-panel-resource-tv' && MODx.config.tvs_below_content == 0 || component.id != 'modx-panel-resource-tv') {
+                    if (mainTabs.items.items[mainTabIndex].hidden) {
+                        mainTabs.activate(mainTabName);
+                    }
+                }
+            }
+
+            if (component.id == 'modx-panel-resource-tv') {
+                var errFldPanelId = errFld.closest('.x-panel').id,
+                    tvTabs = Ext.getCmp('modx-resource-vtabs')
+                    ;
+                if (tvTabs && tvTabs.items && tvTabs.items.keys) {
+                    var tvTabIndex = tvTabs.items.keys.indexOf(errFldPanelId);
+                    if (tvTabs.items.items[tvTabIndex].hidden)  {
+                        tvTabs.activate(errFldPanelId);
+                    }
+                }
+            }
+            errFld.focus();
         }
-
-        var tabs = Ext.getCmp(tabsId);
-
-        if (tabs && tabs.items && tabs.items.keys) {
-            index = tabs.items.keys.indexOf(tab);
-        }
-
-        if (!tabs.items.items[index].hidden)  {
-            return;
-        }
-
-        tabs.activate(tab);
     }
 
     ,detectErrors: function(node) {
-        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
-            return true;
-        }
-
-        if (typeof node.children == 'undefined') {
+        var erroredFlds = document.getElementById(node.id).querySelectorAll('.x-form-invalid'),
+            numErrors = erroredFlds.length
+            ;
+        if (numErrors > 0) {
+            return erroredFlds[0].id;
+        } else {
             return false;
         }
-
-        for (var i = 0; i < node.children.length; i++) {
-            if (this.detectErrors(node.children[i])) {
-                return true;
-            }
-        }
-
-        return false;
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
@@ -578,15 +650,15 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
     ,getData: function() {
         return this.data;
     }
-    
+
 	,reset: function(msg){
 		if(typeof(this.resetText) == "undefined"){
 			this.resetText = this.getResetText(this.root);
-		}	
+		}
 		this.data = { text : msg ,trail : [this.resetText] };
 		this._updatePanel(this.data);
-	}	
-	
+	}
+
 	,onClick: function(e){
 		var target = e.getTarget();
 

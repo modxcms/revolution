@@ -43,6 +43,11 @@ MODx.panel.Chunk = function(config) {
                     ,border: false
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
                 }
                 ,items: [{
                     columnWidth: .6
@@ -172,6 +177,11 @@ MODx.panel.Chunk = function(config) {
                         ,inputValue: true
                         ,checked: config.record.locked || 0
                     },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-chunk-locked'
+                        ,html: _('chunk_lock_msg')
+                        ,cls: 'desc-under'
+                    },{
                         xtype: 'xcheckbox'
                         ,boxLabel: _('clear_cache_on_save')
                         ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_msg')
@@ -181,6 +191,11 @@ MODx.panel.Chunk = function(config) {
                         ,inputValue: 1
                         ,checked: Ext.isDefined(config.record.clearCache) || true
 
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: 'modx-chunk-clear-cache'
+                        ,html: _('clear_cache_on_save_msg')
+                        ,cls: 'desc-under'
                     },{
                         xtype: 'xcheckbox'
                         ,hideLabel: true
@@ -257,6 +272,7 @@ MODx.panel.Chunk = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
@@ -274,8 +290,20 @@ MODx.panel.Chunk = function(config) {
 Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
+
+        if (!this.initialized) {
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-chunk-form'];
+            this.errorHandlingIgnoreTabs = ['modx-panel-element-properties'];
+
+            this.getForm().setValues(this.config.record);
+        }
+
         if (this.initialized) { this.clearDirty(); return true; }
-        this.getForm().setValues(this.config.record);
+
         if (!Ext.isEmpty(this.config.record.name)) {
             var title = _('chunk')+': '+this.config.record.name;
             if (MODx.perm.tree_show_element_ids === 1) {
