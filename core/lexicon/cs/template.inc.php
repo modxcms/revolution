@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Nastala chyba při odstraňování šablony.';
 $_lang['template_err_duplicate'] = 'Nastala chyba při kopírování šablony.';
 $_lang['template_err_ae'] = 'Šablona s názvem "[[+name]]" již existuje.';
 $_lang['template_err_in_use'] = 'Tato šablona je používaná. Nastavte dokumentům jinou šablonu:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Šablona je uzamčena.';
 $_lang['template_err_nf'] = 'Šablona nenalezena!';
 $_lang['template_err_ns'] = 'Nespecifikovaná šablona.';
