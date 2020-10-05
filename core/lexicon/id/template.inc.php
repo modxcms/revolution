@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Terjadi kesalahan saat menghapus template.';
 $_lang['template_err_duplicate'] = 'Terjadi kesalahan saat duplikasi template.';
 $_lang['template_err_ae'] = 'Template sudah ada dengan nama tersebut "[[+name]]".';
 $_lang['template_err_in_use'] = 'Template ini sedang digunakan. Silakan atur dokumen-dokumen yang menggunakan template ke template lain. Dokumen-dokumen menggunakan template ini: <br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Template terkunci dari editing.';
 $_lang['template_err_nf'] = 'Template tidak ditemukan!';
 $_lang['template_err_ns'] = 'Template yang tidak ditentukan.';

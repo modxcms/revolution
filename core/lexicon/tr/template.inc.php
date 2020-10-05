@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Şablon silinirken bir hata oluştu.';
 $_lang['template_err_duplicate'] = 'Şablon çoğaltılırken bir hata oluştu.';
 $_lang['template_err_ae'] = 'Adla birlikte bir şablon mevcut zaten "[[+name]]".';
 $_lang['template_err_in_use'] = 'Bu şablon kullanımda. Lütfen şablonu kullanan dokümanları başka bir şablona yerleştirin. Dokümanlar şu şablonu kullanıyor:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Şablon düzenlemeye karşı kilitli.';
 $_lang['template_err_nf'] = 'Şablon bulunamadı!';
 $_lang['template_err_ns'] = 'Şablon belirtilmedi.';

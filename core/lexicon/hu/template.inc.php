@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Hiba történt a sablon törlése közben.';
 $_lang['template_err_duplicate'] = 'Hiba történt a sablon másolatának létrehozásakor.';
 $_lang['template_err_ae'] = 'Már létezik sablon "[[+name]]" néven.';
 $_lang['template_err_in_use'] = 'A sablon használatban van. Kérjük, hogy a sablont használó dokumentumokat kapcsolja másik sablonhoz. Ezt a sablont használó dokumentumok:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'A sablon nem szerkeszthető.';
 $_lang['template_err_nf'] = 'Sablon nem található!';
 $_lang['template_err_ns'] = 'Sablon nincs megadva.';

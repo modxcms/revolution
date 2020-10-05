@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Ett fel inträffade när mallen skulle tas bort
 $_lang['template_err_duplicate'] = 'Ett fel inträffade när mallen skulle dupliceras.';
 $_lang['template_err_ae'] = 'Det finns redan en mall med namnet "[[+name]]".';
 $_lang['template_err_in_use'] = 'Denna mall används. Ange en ny mall för de dokument som använder mallen. Dokument som använder mallen:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Mallen är låst för redigering.';
 $_lang['template_err_nf'] = 'Mallen kunde inte hittas!';
 $_lang['template_err_ns'] = 'Ingen mall angiven.';

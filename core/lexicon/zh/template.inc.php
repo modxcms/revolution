@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = '删除模板时出错。';
 $_lang['template_err_duplicate'] = '复制模板时出错。';
 $_lang['template_err_ae'] = '名为"[[+name]]"的模板已存在。';
 $_lang['template_err_in_use'] = '此模板正在使用中。请将正在使用此模板的文档设为其他的模板。以下是正在使用此模板的文档：<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = '模板处于锁定状态，无法编辑。';
 $_lang['template_err_nf'] = '找不到模板 ！';
 $_lang['template_err_ns'] = '未指定模板。';

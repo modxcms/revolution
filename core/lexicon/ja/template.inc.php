@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'テンプレートの削除中にエラーが�
 $_lang['template_err_duplicate'] = 'テンプレートの複製中にエラーが発生しました。';
 $_lang['template_err_ae'] = '[[+name]]という名前のテンプレートがすでに存在します。';
 $_lang['template_err_in_use'] = 'このテンプレートは使用中です。このテンプレートを利用しているドキュメントの設定を変え、別なテンプレートを利用するようにしてください。このテンプレートを使用しているドキュメントは:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'テンプレートは編集中のためロックされています。';
 $_lang['template_err_nf'] = 'テンプレートが見つかりません。';
 $_lang['template_err_ns'] = 'テンプレートが指定されていません。';

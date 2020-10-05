@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Une erreur est survenue lors de la suppression 
 $_lang['template_err_duplicate'] = 'Une erreur est survenue lors de la duplication du modèle.';
 $_lang['template_err_ae'] = 'Un modèle ayant pour nom "[[+name]]" existe déjà.';
 $_lang['template_err_in_use'] = 'Ce modèle est utilisé. Veuillez sélectionner un autre modèle pour les documents utilisant ce modèle. Les documents qui utilisent ce modèle sont:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Le modèle est protégé en écriture.';
 $_lang['template_err_nf'] = 'Modèle introuvable!';
 $_lang['template_err_ns'] = 'Modèle non spécifié.';

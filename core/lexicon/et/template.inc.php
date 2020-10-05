@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Tekkis viga template kustutamisel.';
 $_lang['template_err_duplicate'] = 'Tekkis viga template dubleerimsiel.';
 $_lang['template_err_ae'] = 'Template nimega "[[+name]]" juba eksisteerib.';
 $_lang['template_err_in_use'] = 'See template on juba kasutusel. Palun määrake dokumentides teine template. Dokumentid, mis kasutavad seda templatet:<br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Template on lukusustatud.';
 $_lang['template_err_nf'] = 'Templatet ei leitud!';
 $_lang['template_err_ns'] = 'Templatet ei olnud määratud.';

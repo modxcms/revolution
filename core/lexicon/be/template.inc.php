@@ -26,6 +26,7 @@ $_lang['template_err_delete'] = 'Адбылася памылка пры выда
 $_lang['template_err_duplicate'] = 'Адбылася памылка пры дубляванні шаблону.';
 $_lang['template_err_ae'] = 'Шаблон ужо існуе з назвай "[[+name]]".';
 $_lang['template_err_in_use'] = 'Гэты шаблон выкарыстоўваецца. Калі ласка, змяніце шаблон на другі для дакументаў, якія выкарыстоўваюць гэты шаблон. Спіс дакументаў, якія выкарыстоўваюць шаблон: <br />';
+$_lang['template_err_invalid_name'] = 'Template name is invalid.';
 $_lang['template_err_locked'] = 'Шаблон заблакаваны для рэдагавання.';
 $_lang['template_err_nf'] = 'Шаблон не знойдзены!';
 $_lang['template_err_ns'] = 'Шаблон не пазначаны.';
