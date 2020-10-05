@@ -49,7 +49,7 @@ class ResourceDataManagerController extends ResourceManagerController {
                     id: "'.$this->resource->get('id').'"
                     ,context_key: "'.$this->resource->get('context_key').'"
                     ,class_key: "'.$this->resource->get('class_key').'"
-                    ,pagetitle: "'.$this->resource->get('pagetitle').'"
+                    ,pagetitle: "'.htmlentities($this->resource->get('pagetitle'), ENT_QUOTES, 'UTF-8').'"
                     ,preview_url: "'.$this->previewUrl.'"
                 }
                 ,canEdit: "'.($this->modx->hasPermission('edit_document') ? 1 : 0).'"
