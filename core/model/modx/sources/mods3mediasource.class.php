@@ -38,7 +38,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean
      */
     public function initialize() {
-        parent::initialize();
+        $return = parent::initialize();
         $properties = $this->getPropertyList();
         if (!defined('AWS_KEY')) {
             define('AWS_KEY',$this->xpdo->getOption('key',$properties,''));
@@ -63,7 +63,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
 
-        return true;
+        return $return;
     }
 
     /**

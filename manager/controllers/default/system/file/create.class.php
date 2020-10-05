@@ -63,6 +63,10 @@ class SystemFileCreateManagerController extends modManagerController {
         $this->modx->lexicon->load('file');
         $this->getSource();
 
+        if (!$this->source || !$this->source->initialize()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+
         $directory = !empty($scriptProperties['directory']) ? $scriptProperties['directory'] : '';
         $this->directory = ltrim(strip_tags(str_replace(array('../','./'),'',$directory)),'/');
         $this->directory = htmlspecialchars(strip_tags($this->directory));
@@ -76,7 +80,7 @@ class SystemFileCreateManagerController extends modManagerController {
 
     /**
      * Get the active source
-     * @return modMediaSource
+     * @return modMediaSource|bool
      */
     public function getSource() {
         /** @var modMediaSource|modFileMediaSource $source */
@@ -90,10 +94,9 @@ class SystemFileCreateManagerController extends modManagerController {
                 $source = modMediaSource::getDefaultSource($this->modx);
             }
             if (!$source->getWorkingContext()) {
-                return $this->failure($this->modx->lexicon('permission_denied'));
+                return false;
             }
             $source->setRequestProperties($this->scriptProperties);
-            $source->initialize();
             $this->source = $source;
         }
         return $this->source;

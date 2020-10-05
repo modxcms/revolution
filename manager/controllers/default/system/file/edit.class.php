@@ -63,6 +63,10 @@ class SystemFileEditManagerController extends modManagerController {
         $this->filename = htmlspecialchars(strip_tags($this->filename));
 
         $source = $this->getSource();
+        if (!$source || !$source->initialize()) {
+            return $this->failure($this->modx->lexicon('permission_denied'));
+        }
+
         $this->fileRecord = $source->getObjectContents($this->filename);
         $this->fileRecord['source'] = $source->get('id');
 
@@ -88,7 +92,7 @@ class SystemFileEditManagerController extends modManagerController {
 
     /**
      * Get the active source
-     * @return modMediaSource
+     * @return modMediaSource|bool
      */
     public function getSource() {
         /** @var modMediaSource|modFileMediaSource $source */
@@ -101,10 +105,9 @@ class SystemFileEditManagerController extends modManagerController {
             $source = modMediaSource::getDefaultSource($this->modx);
         }
         if (!$source->getWorkingContext()) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
+            return false;
         }
         $source->setRequestProperties($this->scriptProperties);
-        $source->initialize();
         return $source;
     }
 
