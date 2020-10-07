@@ -12,13 +12,18 @@
 />
 <script type="text/javascript">
 // <![CDATA[
+{literal}
 Ext.onReady(function() {
-    MODx.makeDroppable(Ext.get('tv{$tv->id}'));
+{/literal}
 
+    MODx.makeDroppable(Ext.get('tv{$tv->id}'));
+{literal}
     var fld = MODx.load({
         xtype: 'combo'
+{/literal}
         ,transform: 'tv{$tv->id}_prefix'
         ,id: 'tv{$tv->id}_prefix'
+{literal}
         ,triggerAction: 'all'
         ,width: 100
         ,allowBlank: true
@@ -40,10 +45,12 @@ Ext.onReady(function() {
 
     var fld = MODx.load({
         xtype: 'textfield'
+{/literal}
         ,applyTo: 'tv{$tv->id}'
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+{literal}
         ,enableKeyEvents: true
         ,msgTarget: 'under'
-        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,listeners: {
             'keydown': {
                 fn:MODx.fireResourceFormChange,
@@ -54,5 +61,6 @@ Ext.onReady(function() {
     MODx.makeDroppable(fld);
     Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });
+{/literal}
 // ]]>
 </script>
