@@ -1901,6 +1901,15 @@ $settings['unauthorized_page']->fromArray(array (
   'area' => 'site',
   'editedon' => null,
 ), '', true, true);
+$settings['upload_check_exists']= $xpdo->newObject('modSystemSetting');
+$settings['upload_check_exists']->fromArray(array (
+  'key' => 'upload_check_exists',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+), '', true, true);
 $settings['upload_files']= $xpdo->newObject('modSystemSetting');
 $settings['upload_files']->fromArray(array (
   'key' => 'upload_files',
