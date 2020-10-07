@@ -20,8 +20,8 @@
     <property name="project.manager.dir" value="${project.root.dir}/manager" />
 
     <!-- Set the project version -->
-    <property name="modx.core.version" value="2.8.0" />
-    <property name="modx.core.release" value="pl" />
+    <property name="modx.core.version" value="2.8.1" />
+    <property name="modx.core.release" value="dev" />
 
     <!-- Set some common build properties -->
     <property name="build.dir" value="${project.basedir}" />
