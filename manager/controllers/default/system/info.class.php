@@ -45,7 +45,7 @@ class SystemInfoManagerController extends modManagerController {
         $mailerService = $this->modx->getService('PHPMailer', 'mail.modPHPMailer');
         $this->version = [
             'smarty'=> $this->modx->smarty->_version,
-            'PHPMailer'=> $this->modx->PHPMailer->mailer->Version
+            'PHPMailer'=> $mailerService->mailer->Version
         ];
 
         $this->pi = array_merge($pi,$this->getPhpInfo(INFO_CONFIGURATION));
