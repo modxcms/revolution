@@ -1,6 +1,6 @@
 /**
- * Loads a grid of resource groups assigned to a resource. 
- * 
+ * Loads a grid of resource groups assigned to a resource.
+ *
  * @class MODx.grid.TVSecurity
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
@@ -34,8 +34,8 @@ MODx.grid.TVSecurity = function(config) {
             ,dataIndex: 'name'
             ,width: 200
             ,sortable: true
+            ,renderer: Ext.util.Format.htmlEncode
         },tt]
-        
     });
     MODx.grid.TVSecurity.superclass.constructor.call(this,config);
 };
