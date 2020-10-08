@@ -354,7 +354,7 @@ MODx.grid.UserGroupUsers = function(config) {
             text: _('user_group_update')
             ,cls:'primary-button'
             ,handler: this.updateUserGroup
-            ,hidden: MODx.perm.usergroup_edit == 0
+            ,hidden: (MODx.perm.usergroup_edit == 0 || config.ownerCt.id != 'modx-tree-panel-usergroup')
         },'->',{
             text: _('user_group_user_add')
             ,cls:'primary-button'
