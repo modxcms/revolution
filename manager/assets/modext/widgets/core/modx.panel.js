@@ -402,7 +402,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                     ;
                 if (tvTabs && tvTabs.items && tvTabs.items.keys) {
                     var tvTabIndex = tvTabs.items.keys.indexOf(errFldPanelId);
-                    if (tvTabs.items.items[tvTabIndex].hidden)  {
+                    if (tvTabs.items.items[tvTabIndex] && tvTabs.items.items[tvTabIndex].hidden)  {
                         tvTabs.activate(errFldPanelId);
                     }
                 }
