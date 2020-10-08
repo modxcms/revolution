@@ -773,6 +773,9 @@ $_lang['setting_unauthorized_page'] = 'Yetkisiz sayfa';
 $_lang['setting_unauthorized_page_desc'] = 'Kullanıcılar, güvenli veya yetkisiz bir Kaynak talep ettiyse, göndermek istediğiniz Kaynak Kimliğini girin. <strong> NOT: Girdiğiniz kimliğin mevcut bir Kaynağa ait olduğundan ve yayınlandığından ve herkese açık olduğundan emin olun! </strong>';
 $_lang['setting_unauthorized_page_err'] = 'Yetkilendirilmemiş sayfa için lütfen bir kaynak ID belirleyin.';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'Yüklenebilir Dosya Türleri';
 $_lang['setting_upload_files_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \'asset/files/\' içine yüklenebilecek dosyalar listesini girebilirsiniz. Lütfen dosya türü uzantılarını virgül ile ayırarak girin.';
 
