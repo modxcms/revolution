@@ -771,6 +771,9 @@ $_lang['setting_unauthorized_page'] = 'Page pour accès non autorisée';
 $_lang['setting_unauthorized_page_desc'] = 'Entrez l\'ID de la ressource vers laquelle vous souhaitez rediriger les utilisateurs qui ont demandé à accéder à une ressource sécurisée ou non autorisée. <strong>Note : assurez-vous que l\'ID que vous avez indiqué est celle d\'une ressource existante, publiée et accessible publiquement !</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Veuillez spécifier un ID de ressource de la page pour accès non autorisé.';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'Types de fichiers autorisés';
 $_lang['setting_upload_files_desc'] = 'Ici vous pouvez indiquer une liste des types de fichiers qui peuvent être chargés dans \'assets/files/\' en utilisant le gestionnaire de fichiers. Veuillez entrer les extensions pour chaque type de fichier, séparées par des virgules.';
 
