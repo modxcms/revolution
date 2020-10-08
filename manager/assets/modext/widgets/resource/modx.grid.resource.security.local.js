@@ -19,6 +19,7 @@ MODx.grid.ResourceSecurity = function(config) {
             ,dataIndex: 'name'
             ,width: 200
             ,sortable: true
+            ,renderer: Ext.util.Format.htmlEncode
         },ac]
     });
     MODx.grid.ResourceSecurity.superclass.constructor.call(this,config);

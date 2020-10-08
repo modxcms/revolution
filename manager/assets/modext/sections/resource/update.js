@@ -61,7 +61,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
         var r = {
             resource: id
-            ,pagetitle: this.config.record.pagetitle
+            ,pagetitle: Ext.util.Format.htmlEncode(this.config.record.pagetitle)
             ,hasChildren: false
             ,is_folder: this.config.record.isfolder
         };
@@ -97,7 +97,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
     ,deleteResource: function(btn,e) {
         MODx.msg.confirm({
-            title: this.config.record.pagetitle ? _('resource_delete') + ' ' + this.config.record.pagetitle + ' (' + this.config.resource + ')' : _('resource_delete')
+            title: this.config.record.pagetitle ? _('resource_delete') + ' ' + Ext.util.Format.htmlEncode(this.config.record.pagetitle) + ' (' + this.config.resource + ')' : _('resource_delete')
             ,text: _('resource_delete_confirm')
             ,url: MODx.config.connector_url
             ,params: {
