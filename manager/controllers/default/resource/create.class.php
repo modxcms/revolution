@@ -117,6 +117,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
                 'searchable' => $this->context->getOption('search_default', 1, $this->modx->_userConfig),
                 'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
                 'syncsite' => $this->context->getOption('syncsite_default', 1, $this->modx->_userConfig),
+                'alias_visible' => $this->context->getOption('alias_visible_default', 1, $this->modx->_userConfig),
             ));
 
             // Allow certain fields to be prefilled from the OnDocFormRender plugin event
@@ -140,7 +141,6 @@ class ResourceCreateManagerController extends ResourceManagerController {
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = array();
-            $this->resourceArray['syncsite'] = true;
             $this->resourceArray['resource_groups'] = $this->modx->getOption('resource_groups',
                 $this->resourceArray, array());
             $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups']) ?
@@ -175,6 +175,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->resourceArray['deleted'] = isset($this->resourceArray['deleted']) && intval($this->resourceArray['deleted']) == 1 ? true : false;
         $this->resourceArray['uri_override'] = isset($this->resourceArray['uri_override']) && intval($this->resourceArray['uri_override']) == 1 ? true : false;
         $this->resourceArray['syncsite'] = isset($this->resourceArray['syncsite']) && intval($this->resourceArray['syncsite']) == 1 ? true : false;
+        $this->resourceArray['alias_visible'] = isset($this->resourceArray['alias_visible']) && (int)$this->resourceArray['alias_visible'] === 1;
         if (!empty($this->resourceArray['parent'])) {
             if ($this->parent->get('id') == $this->resourceArray['parent']) {
                 $this->resourceArray['parent_pagetitle'] = $this->modx->stripTags($this->parent->get('pagetitle'));
