@@ -771,6 +771,9 @@ $_lang['setting_unauthorized_page'] = 'Stránka neautorizovaného přístupu';
 $_lang['setting_unauthorized_page_desc'] = 'Zadejte ID zdroje, na který chcete přesměrovat uživatele pokud se pokusili přistoupit ke stránce, pro kterou nemají oprávnění. <strong>Poznámka: ujistěte se, že zadané ID patří existujícího zdroji, který je publikován a je přístupný veřejnosti!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Zadejte ID zdroje pro stránku neautorizovaného přístupu.';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'Povolené typy souborů';
 $_lang['setting_upload_files_desc'] = 'Zde můžete zadat seznam souborů, které mohou být nahrávány do "assets/files/" pomocí správce souborů. Zadejte přípony souborů pro typy souborů oddělené čárkami.';
 
