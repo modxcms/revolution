@@ -162,7 +162,9 @@ class modSessionHandler {
             $this->session->set('id', $id);
         }
         if (!($this->session instanceof modSession) || $id != $this->session->get('id') || !$this->session->validate()) {
-            $this->modx->log(modX::LOG_LEVEL_INFO, 'There was an error retrieving or creating session id: ' . $id);
+            if ($this->modx->getSessionState() == modX::SESSION_STATE_INITIALIZED) {
+                $this->modx->log(modX::LOG_LEVEL_INFO, 'There was an error retrieving or creating session id: ' . $id);
+            }
         }
         return $this->session;
     }
