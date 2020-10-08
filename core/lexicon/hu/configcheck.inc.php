@@ -21,16 +21,9 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Ez azt jelenti, hogy a hibaol
 $_lang['configcheck_errorpage_unpublished'] = 'A weboldal hibaoldala nincs közzétéve vagy nem létezik.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Ez azt jelenti, hogy a hibaoldalt nem érik el az átlagos látogatók. Tegye közzé az oldalt, vagy ellenőrizze, hogy létező dokumentumhoz van hozzárendelve a Rendszer &gt; Rendszerbeállítások menüben.';
 $_lang['configcheck_htaccess'] = 'Az alapkönyvtár elérhető a weben';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
-<strong>This is not recommended and a security risk.</strong>
-If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
-This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/current/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
-for further information about securing your site.</p>
-If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
-should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
-there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
+$_lang['configcheck_htaccess_msg'] = '
+A MODX érzékelte, hogy az alapkönyvtár (részben) elérhető a weben. <strong>Ezt nem javasoljuk, biztonsági kockázatot jelent.</strong> Ha a MODX telepítése Apache webkiszolgálón fut, legalább a .htaccess állományt állítsa be az alapkönyvtárban <em>[[+fileLocation]]</em>. Ehhez csak át kell neveznie a ht.access mintaállományt .htaccess-re. <p>Használhat más megoldásokat vagy webkiszolgálókat, kérjük, olvassa el az <a href="https://docs.modx.com/current/en/getting-started/maintenance/securing-modx">Útmutató a MODX megerősítésére</a> leírást az oldalának biztonságossá tételéhez.</p> Helyes beállításoknál pl. a <a href="[[+checkUrl]]" target="_blank">Változási napló</a> oldal 403 (hozzáférés megtagadva) vagy még inkább 404 (nem található) hibát kellene adjon. Ha látja a változási naplót a böngészőben, akkor még szükség van a beállítások módosítására, vagy szakértői segítségre.
+';
 $_lang['configcheck_images'] = 'Képek mappa nem írható';
 $_lang['configcheck_images_msg'] = 'A képek mappa nem írható, vagy nem létezik. Emiatt a képkezelő működés nem használható a szerkesztőben!';
 $_lang['configcheck_installer'] = 'A telepítő még nincs törölve';
