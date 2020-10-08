@@ -771,6 +771,9 @@ $_lang['setting_unauthorized_page'] = '権限外告知のページ';
 $_lang['setting_unauthorized_page_desc'] = 'ユーザーがアクセスを許可されていないドキュメントを要求したとき表示するドキュメントのIDを入力してください。<br /><strong>注意: 実在するドキュメントのIDを指定してください。また公開中でしかもPublicなアクセスが可能であるものに限ります</strong>';
 $_lang['setting_unauthorized_page_err'] = '権限外告知に利用するドキュメントIDを指定してください。';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'アップロード可能なファイルタイプ';
 $_lang['setting_upload_files_desc'] = 'ファイルブラウザを使用して「assets/files/」にアップロードできるメディアファイルの拡張子をカンマで区切って入力してください。';
 
