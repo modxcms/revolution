@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.1-pl (TBA)
 ====================================
+- Hide Update User Group button on Users tab when editing User Group [#15290]
 - Only log session info if session is initialized [#15292]
 - Avoid returning resource_groups on resource save [#15293]
 - Fix JS TypeError if image/file TV fails validation [#15282]
