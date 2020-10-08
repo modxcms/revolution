@@ -771,6 +771,9 @@ $_lang['setting_unauthorized_page'] = 'Onbevoegde pagina';
 $_lang['setting_unauthorized_page_desc'] = 'Vul het ID in van het document waar je gebruikers naar toe wilt sturen als ze een beveiligde of onbevoegde pagina opvragen. <strong>Let op: controleer of dit document ID bestaat en gepubliceerd is en toegankelijk is voor deze gebruiker!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Vul een document ID in voor de onbevoegde pagina.';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'Uploadbare bestandstypen';
 $_lang['setting_upload_files_desc'] = 'Hier kun je een lijst van bestandstypen invullen welke geupload kunnen worden in \'assets/files/\' bij gebruik van de document manager. Vul de extenties van de bestandstypen in gescheiden door een komma.';
 
