@@ -40,9 +40,9 @@
 
                         <p class="lead">{$_lang.login_note}</p>
 
-                        {if $error_message}
+                        {if isset($error_message) && $error_message}
                             <p class="is-error">{$error_message|default}</p>
-                        {elseif $success_message}
+                        {elseif isset($success_message) && $success_message}
                             <p class="is-success">{$success_message|default}</p>
                         {/if}
 
