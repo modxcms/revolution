@@ -54,6 +54,7 @@ class modSystemPhpThumbProcessor extends modProcessor {
         $src = $this->source->prepareSrcForThumb($src);
         if (empty($src)) return '';
 
+        $this->unsetProperty('t');
         $this->loadPhpThumb();
         /* set source and generate thumbnail */
         $this->phpThumb->set($src);
