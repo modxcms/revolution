@@ -21,7 +21,12 @@ MODx.panel.Resource = function(config) {
             ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'fieldChange': {fn:this.onFieldChange,scope:this}
-            ,'failureSubmit': {fn:this.failureSubmit,scope:this}
+            ,'failureSubmit': {
+                fn: function () {
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-resource-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
@@ -42,6 +47,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,warnUnsavedChanges: false
     ,setup: function() {
         if (!this.initialized) {
+
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-resource-settings','modx-page-settings','modx-panel-resource-tv'];
+            this.errorHandlingIgnoreTabs = ['modx-resource-access-permissions'];
+
             this.getForm().setValues(this.config.record);
             var tpl = this.getForm().findField('modx-resource-template');
             if (tpl) {
@@ -230,79 +243,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             this.getForm().setValues(object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
-    }
-    ,failureSubmit: function() {
-        // This array contains the components we want to traverse in the order we prioritize them
-        var forms = [
-            'modx-resource-settings', // Document
-            'modx-page-settings', // Settings
-            'modx-panel-resource-tv' // Template Variables
-        ];
-
-        var tab_name = null;
-
-        // Loop each component and traverse the children recursively
-        for (var i = 0; i < forms.length; i++) {
-            var component = Ext.getCmp(forms[i]);
-            if (component && component.el && component.el.dom) {
-                if (this.traverseNode(component.el.dom)) {
-                    tab_name = forms[i];
-
-                    // We want to switch to the first tab that has an invalid state, no matter if the current
-                    // or any later tabs also have such states. We can therefore quit early here.
-                    break;
-                }
-            }
-        }
-
-        // If no invalid states were found, this check makes sure we don't switch tabs for no reason
-        if (tab_name === null) {
-            return;
-        }
-
-        var tabs = Ext.getCmp('modx-resource-tabs');
-        var tabs_index = null;
-
-        // The next check needs the tabs index value to check if it is hidden or not
-        if (tabs && tabs.items && tabs.items.keys) {
-            tabs_index = tabs.items.keys.indexOf(tab_name);
-        }
-
-        // We are already on a tab that has an invalid state. No need to switch
-        if (!tabs.items.items[tabs_index].hidden)  {
-            return;
-        }
-
-        // Activate the tab (this is done by passing the name of the tab)
-        tabs.activate(tab_name);
-    }
-
-    ,traverseNode: function(node) {
-        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
-            return true;
-        }
-
-        if (typeof node.children == 'undefined') {
-            return false;
-        }
-
-        for (var i = 0; i < node.children.length; i++) {
-            if (this.traverseNode(node.children[i])) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    ,failure: function(o) {
-        this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'resource/create') {
-            var btn = Ext.getCmp('modx-abtn-save');
-            if (btn) { btn.enable(); }
-        }
-
-        this.fireEvent('failureSubmit');
     }
 
     ,freezeUri: function(cb) {
@@ -539,6 +479,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 labelAlign: 'top'
                 ,border: false
                 ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
             }
             ,items:[{
                 columnWidth: .75
@@ -904,7 +846,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,items: [{
                     id: 'modx-page-settings-left'
                     ,layout: 'form'
-                    ,defaults: { msgTarget: 'under' }
                     ,items: this.getSettingLeftFields(config)
                 },{
                     id: 'modx-page-settings-box-left'
@@ -917,7 +858,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,items: [{
                     id: 'modx-page-settings-right'
                     ,layout: 'form'
-                    ,defaults: { msgTarget: 'under' }
                     ,items: this.getSettingRightFields(config)
                 },{
                     id: 'modx-page-settings-box-right'
@@ -986,16 +926,16 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,border: false
                 ,layout: 'form'
                 ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
             }
             ,items: [{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right-box-left'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetLeft(config)
             },{
                 columnWidth: .5
                 ,id: 'modx-page-settings-right-box-right'
-                ,defaults: { msgTarget: 'under' }
                 ,items: this.getSettingRightFieldsetRight(config)
             }]
         }];

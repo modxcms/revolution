@@ -232,4 +232,19 @@ $xpdo_meta_map['modTemplate']= array (
       'owner' => 'local',
     ),
   ),
+  'validation' =>
+  array (
+    'rules' =>
+    array (
+      'templatename' =>
+      array (
+        'invalid' =>
+        array (
+          'type' => 'preg_match',
+          'rule' => '/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/',
+          'message' => 'template_err_invalid_name',
+        ),
+      ),
+    ),
+  ),
 );

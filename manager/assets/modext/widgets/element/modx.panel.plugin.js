@@ -45,6 +45,11 @@ MODx.panel.Plugin = function(config) {
                     ,border: false
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
+                    ,defaults: {
+                        msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
                 }
                 ,items: [{
                     columnWidth: .6
@@ -302,6 +307,7 @@ MODx.panel.Plugin = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'success': {fn:this.success,scope:this}
+            ,'failure': {fn:this.failure,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
             ,'failureSubmit': {
                 fn: function () {
@@ -318,8 +324,19 @@ MODx.panel.Plugin = function(config) {
 Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
     initialized: false
     ,setup: function() {
+
+        if (!this.initialized) {
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-plugin-form'];
+            this.errorHandlingIgnoreTabs = ['modx-plugin-sysevents','modx-panel-element-properties'];
+
+            this.getForm().setValues(this.config.record);
+        }
+
         if (this.initialized) { this.clearDirty(); return true; }
-        this.getForm().setValues(this.config.record);
         if (!Ext.isEmpty(this.config.record.name)) {
             var title = _('plugin')+': '+this.config.record.name;
             if (MODx.perm.tree_show_element_ids) {
