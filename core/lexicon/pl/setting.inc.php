@@ -771,6 +771,9 @@ $_lang['setting_unauthorized_page'] = 'Nieautoryzowana strona';
 $_lang['setting_unauthorized_page_desc'] = 'Enter the ID of the Resource you want to send users to if they have requested a secured or unauthorized Resource. <strong>NOTE: Make sure the ID you enter belongs to an existing Resource, and that it has been published and is publicly accessible!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Please specify a Resource ID for the unauthorized page.';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'Uploadable File Types';
 $_lang['setting_upload_files_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/files/\' using the Resource Manager. Please enter the extensions for the filetypes, seperated by commas.';
 

@@ -771,6 +771,9 @@ $_lang['setting_unauthorized_page'] = 'अनधिकृत पृष्ठ';
 $_lang['setting_unauthorized_page_desc'] = 'आप वे एक सुरक्षित है या अनधिकृत resource का अनुरोध किया है अगर करने के लिए users को भेजना चाहते resource का आईडी दर्ज करें। <strong> नोट: आप में प्रवेश आईडी एक मौजूदा resource के अंतर्गत आता है, और इसे प्रकाशित कर दिया गया है और सार्वजनिक रूप से सुलभ है सुनिश्चित करें </strong>';
 $_lang['setting_unauthorized_page_err'] = 'कृपया अनधिकृत पेज के लिए कोई resource ID निर्दिष्ट करें।';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'Uploadable फ़ाइल प्रकार';
 $_lang['setting_upload_files_desc'] = 'यहाँ आप resource manager का उपयोग करते हुए \'assets/files/\' में अपलोड किया जा सकता है कि फाइलों की सूची में प्रवेश कर सकते हैं। अल्पविराम के द्वारा अलग filetypes के लिए एक्सटेंशन दर्ज करें।';
 

@@ -776,6 +776,9 @@ $_lang['setting_unauthorized_page'] = 'صفحة غير مصرح بها';
 $_lang['setting_unauthorized_page_desc'] = 'أدخل معرف المصدر الذي تريد أن ترسل إليه المستخدمين إذا قاموا بطلب مصدر غير مؤمن أو غير مصرح به. <strong>ملاحظة: تأكد من أن المعرف الذي أدخلته ينتمي إلى مصدر موجود، وأنه منشور مسبقا وقابل للوصول بشكل عام!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'الرجاء تحديد معرف مصدر للصفحة الغير مصرح بها.';
 
+$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_files'] = 'أنواع ملفات قابلة للرفع';
 $_lang['setting_upload_files_desc'] = 'هنا يمكنك إدخال قائمة من الملفات التي يمكن أن ترفع إلى \'assets/files/\' باستخدام مدير المصدر. الرجاء إدخال الامتدادات لأنواع الملفات، مفصولة بفواصل.';
 

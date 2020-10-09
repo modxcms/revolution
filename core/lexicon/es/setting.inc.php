@@ -771,6 +771,9 @@ $_lang['setting_unauthorized_page'] = 'Página de Acceso No Autorizado';
 $_lang['setting_unauthorized_page_desc'] = 'Introduce el ID del Recurso que quieres mostrar a los usuarios cuando solicitan un Recurso seguro o no autorizado. <strong>NOTA: ¡Asegúrate de que el ID introducido pertenece a un Recurso existente que ha sido publicado y que es públicamente accesible!</strong>';
 $_lang['setting_unauthorized_page_err'] = 'Por favor, especifíca un ID de Recurso para la página de Acceso No Autorizado.';
 
+$_lang['setting_upload_check_exists'] = 'Comprueba si  el archivo cargado existe';
+$_lang['setting_upload_check_exists_desc'] = 'Cuando está habilitado, se mostrará un error al cargar un archivo si ya existe uno con el mismo nombre. Cuando está deshabilitado, el archivo existente será reemplazado por el nuevo archivo sin pedir confirmación.';
+
 $_lang['setting_upload_files'] = 'Tipo de Archivos Permitidos en Subida';
 $_lang['setting_upload_files_desc'] = 'Lista separada por comas de los tipos de archivo permitidos para subir a la carpeta "assets/files" utilizando el Administrador de Recursos.';
 
