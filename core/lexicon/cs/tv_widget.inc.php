@@ -84,7 +84,6 @@ $_lang['regex'] = 'Validátor regulárního výrazu';
 $_lang['name'] = 'Název';
 $_lang['number'] = 'Číslo';
 $_lang['number_allowdecimals'] = 'Povolit desetinná čísla';
-$_lang['number_allownegative'] = 'Povolit zápornou hodnotu';
 $_lang['number_decimalprecision'] = 'Počet desetinných míst';
 $_lang['number_decimalprecision_desc'] = 'Počet desetinných míst, které chcete zobrazit (výchozí hodnota je 2).';
 $_lang['number_decimalseparator'] = 'Oddělovač desetinných míst';

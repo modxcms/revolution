@@ -84,7 +84,6 @@ $_lang['regex'] = 'Validador de Expressão Regular';
 $_lang['name'] = 'Nome';
 $_lang['number'] = 'Número';
 $_lang['number_allowdecimals'] = 'Permitir decimais';
-$_lang['number_allownegative'] = 'Permitir Negativos';
 $_lang['number_decimalprecision'] = 'Precision Decimal';
 $_lang['number_decimalprecision_desc'] = 'O máximo de precisão para exibir após o separador decimal (padrão é 2).';
 $_lang['number_decimalseparator'] = 'Separador Decimal';

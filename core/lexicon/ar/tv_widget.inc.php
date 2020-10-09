@@ -76,7 +76,6 @@ $_lang['regex'] = 'أداة التحقق من الصحة التعبير العا
 $_lang['name'] = 'اسم';
 $_lang['number'] = 'رقم';
 $_lang['number_allowdecimals'] = 'السماح بالأرقام العشرية';
-$_lang['number_allownegative'] = 'السماح بالأرقام السلبية';
 $_lang['number_decimalprecision'] = 'دقة الأرقام العشرية';
 $_lang['number_decimalprecision_desc'] = 'الدقة العليا للعرض بعد فاصلة الرقم العشري (الافتراضي هو 2).';
 $_lang['number_decimalseparator'] = 'فاصل الرقم العشري';

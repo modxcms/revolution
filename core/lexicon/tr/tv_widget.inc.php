@@ -84,7 +84,6 @@ $_lang['regex'] = 'Düzgün İfade Hatası';
 $_lang['name'] = 'İsim';
 $_lang['number'] = 'Numara';
 $_lang['number_allowdecimals'] = 'Ondalık sayılara İzin Ver';
-$_lang['number_allownegative'] = 'Negatiflere İzin Ver';
 $_lang['number_decimalprecision'] = 'Ondalık hassasiyet';
 $_lang['number_decimalprecision_desc'] = 'Ondalık ayırıcının ardından görüntülenen maksimum hassaslık (varsayılan olarak 2).';
 $_lang['number_decimalseparator'] = 'Ondalık ayıracı';

@@ -84,7 +84,6 @@ $_lang['regex'] = 'Validator för reguljära uttryck';
 $_lang['name'] = 'Namn';
 $_lang['number'] = 'Nummer';
 $_lang['number_allowdecimals'] = 'Tillåt decimaler';
-$_lang['number_allownegative'] = 'Tillåt negativa tal';
 $_lang['number_decimalprecision'] = 'Antal decimaler';
 $_lang['number_decimalprecision_desc'] = 'Det maximala antalet decimaler som visas efter decimalavgränsaren. Standard är 2.';
 $_lang['number_decimalseparator'] = 'Decimalavgränsare';

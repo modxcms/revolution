@@ -86,7 +86,6 @@ $_lang['regex'] = 'Reguliere expressie validator';
 $_lang['name'] = 'Naam';
 $_lang['number'] = 'Nummer';
 $_lang['number_allowdecimals'] = 'Decimalen toestaan';
-$_lang['number_allownegative'] = 'Negatieven toestaan';
 $_lang['number_decimalprecision'] = 'Decimale precisie';
 $_lang['number_decimalprecision_desc'] = 'Het aantal decimalen om na het scheidingsteken te tonen (standaard 2).';
 $_lang['number_decimalseparator'] = 'Decimaal scheidingsteken';

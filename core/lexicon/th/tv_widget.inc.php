@@ -84,7 +84,6 @@ $_lang['regex'] = 'Regular Expression Validator';
 $_lang['name'] = 'ชื่อ';
 $_lang['number'] = 'หมายเลข';
 $_lang['number_allowdecimals'] = 'อนุญาตทศนิยม';
-$_lang['number_allownegative'] = 'อนุญาตค่าติดลบ';
 $_lang['number_decimalprecision'] = 'ความละเอียดของทศนิยม';
 $_lang['number_decimalprecision_desc'] = 'ความละเอียดสูงสุดที่จะแสดงผลหลังตัวคั่นทศนิยม (ค่าปริยายคือ 2)';
 $_lang['number_decimalseparator'] = 'ตัวคั่นทศนิยม';

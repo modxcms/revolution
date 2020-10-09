@@ -84,7 +84,6 @@ $_lang['regex'] = 'Regular Expression Validator';
 $_lang['name'] = 'Ім\'я';
 $_lang['number'] = 'Число';
 $_lang['number_allowdecimals'] = 'Дозволити десяткові';
-$_lang['number_allownegative'] = 'Дозволити від\'ємні значення';
 $_lang['number_decimalprecision'] = 'Точність';
 $_lang['number_decimalprecision_desc'] = 'Число знаків після десяткового роздільника (за замовчуванням 2).';
 $_lang['number_decimalseparator'] = 'Десятковий роздільник';

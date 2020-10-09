@@ -76,7 +76,6 @@ $_lang['regex'] = 'Проверка регулярного выражения';
 $_lang['name'] = 'Название';
 $_lang['number'] = 'Число';
 $_lang['number_allowdecimals'] = 'Разрешить десятичные';
-$_lang['number_allownegative'] = 'Разрешить минус';
 $_lang['number_decimalprecision'] = 'Точность';
 $_lang['number_decimalprecision_desc'] = 'Число знаков после десятичного разделителя (по умолчанию 2).';
 $_lang['number_decimalseparator'] = 'Разделитель';

@@ -84,7 +84,6 @@ $_lang['regex'] = 'Reguláris kifejezés ellenőrző';
 $_lang['name'] = 'Név';
 $_lang['number'] = 'Szám';
 $_lang['number_allowdecimals'] = 'Tizedesek engedélyezése';
-$_lang['number_allownegative'] = 'Negatívok engedélyezése';
 $_lang['number_decimalprecision'] = 'Tizedes pontosság';
 $_lang['number_decimalprecision_desc'] = 'A megjelenítendő legnagyobb tizedespontosság (alapértéke 2).';
 $_lang['number_decimalseparator'] = 'Tizedesjel';

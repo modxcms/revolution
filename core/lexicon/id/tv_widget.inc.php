@@ -84,7 +84,6 @@ $_lang['regex'] = 'Validator untuk Regular Expression';
 $_lang['name'] = 'Nama';
 $_lang['number'] = 'Nomor';
 $_lang['number_allowdecimals'] = 'Memungkinkan desimal';
-$_lang['number_allownegative'] = 'Memungkinkan negatif';
 $_lang['number_decimalprecision'] = 'Presisi desimal';
 $_lang['number_decimalprecision_desc'] = 'Ketepatan maksimum untuk menampilkan setelah pemisah desimal (defaultnya 2).';
 $_lang['number_decimalseparator'] = 'Pemisah desimal';
