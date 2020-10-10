@@ -34,7 +34,7 @@ class modBrowserFolderRenameProcessor extends modProcessor {
             'parent' => '',
         ));
         $path = $this->getProperty('path');
-        if (empty($path)) return $this->modx->lexicon('file_folder_err_ns');
+        if (!strlen($path)) return $this->modx->lexicon('file_folder_err_ns');
         return true;
     }
 
@@ -68,10 +68,10 @@ class modBrowserFolderRenameProcessor extends modProcessor {
      * @return boolean
      */
     public function validate(array $fields) {
-        if (empty($fields['path'])) {
+        if (!isset($fields['path']) || !strlen($fields['path'])) {
             $this->addFieldError('path',$this->modx->lexicon('path_err_ns'));
         }
-        if (empty($fields['name'])) {
+        if (!isset($fields['name']) || !strlen($fields['name'])) {
             $this->addFieldError('name',$this->modx->lexicon('name_err_ns'));
         }
 

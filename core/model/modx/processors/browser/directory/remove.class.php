@@ -35,7 +35,7 @@ class modBrowserFolderRemoveProcessor extends modProcessor {
             'parent' => '',
         ));
         $dir = $this->getProperty('dir');
-        if (empty($dir)) return $this->modx->lexicon('file_folder_err_ns');
+        if (!strlen($dir)) return $this->modx->lexicon('file_folder_err_ns');
         return true;
     }
 

@@ -39,7 +39,7 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         ));
         $dir = $this->getProperty('id');
         $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
-        if (empty($dir) || $dir === 'root') {
+        if (!strlen($dir) || $dir === 'root') {
             $this->setProperty('id','');
         } else if (strpos($dir, 'n_') === 0) {
             $dir = substr($dir, 2);
