@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://modx.com/">
-    <img alt="MODX Revolution" src="https://modx.com/assets/design/css/images/modx-logo-color.svg" width="180" />
+    <img alt="MODX Revolution" src="https://raw.githubusercontent.com/modxcms/revolution/2.x/manager/templates/default/images/modx-icon-color.svg" width="180" />
   </a>
 </p>
 <h1 align="center">
