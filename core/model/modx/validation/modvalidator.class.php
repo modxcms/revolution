@@ -25,7 +25,7 @@ class modValidator extends xPDOValidator {
      * @return boolean Either true or false indicating valid or invalid.
      */
     public function validate(array $parameters= array()) {
-        $result= parent :: validate($parameters);
+        $result = parent::validate($parameters);
         if (!empty($this->messages)) {
             foreach ($this->messages as $k => $v) {
                 if (array_key_exists('message',$this->messages[$k])) {

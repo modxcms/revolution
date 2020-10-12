@@ -124,6 +124,12 @@ class modFileRegisterTest extends MODxTestCase {
                 array('a' => 1, 'b' => 2.0, 'c' => 3.25, 'd' => 4.1390, 'e' => 5),
                 array()
             ),
+            array(
+                false,
+                '/topic5/',
+                array('../../invalidMessageKey' => 'invalid'),
+                array()
+            ),
         );
     }
 
@@ -199,6 +205,13 @@ class modFileRegisterTest extends MODxTestCase {
             array(
                 array(1, 2.0, 3.25, 4.1390, 5),
                 '/topic4/',
+                array(
+                    'poll_limit' => 1,
+                )
+            ),
+            array(
+                array(),
+                '/topic5/',
                 array(
                     'poll_limit' => 1,
                 )

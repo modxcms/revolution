@@ -21,7 +21,7 @@ Ext.onReady(function() {
         {if $params.title|default},title: '{$params.title}'{/if}
         {if $params.listWidth|default},listWidth: {$params.listWidth}{/if}
         ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
-        {if $params.typeAhead|default}
+        {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
             ,typeAhead: true
             ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
         {else}

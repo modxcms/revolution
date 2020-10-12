@@ -656,13 +656,13 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         }
 
         if (filter_var($target, FILTER_VALIDATE_INT) === false) {
-            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_invalid'));
+            $this->addFieldError('content', $this->modx->lexicon('resource_err_symlink_target_invalid'));
             return false;
         }
 
         $targetResource = $this->modx->getObject('modResource', $target);
         if (!$targetResource) {
-            $this->addFieldError('modx-symlink-content', $this->modx->lexicon('resource_err_symlink_target_nf'));
+            $this->addFieldError('content', $this->modx->lexicon('resource_err_symlink_target_nf'));
             return false;
         }
 

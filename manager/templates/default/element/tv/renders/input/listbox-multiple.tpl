@@ -34,7 +34,7 @@ Ext.onReady(function() {
         {if $params.title|default},title: '{$params.title|default}'{/if}
         {if $params.listWidth|default},listWidth: {$params.listWidth|default}{/if}
         ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight|default}{else}300{/if}
-        {if $params.typeAhead|default}
+        {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
             ,typeAhead: true
             ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
             ,editable: true
@@ -44,7 +44,8 @@ Ext.onReady(function() {
         {if $params.listEmptyText|default}
             ,listEmptyText: '{$params.listEmptyText|default}'
         {/if}
-        ,forceSelection: true
+        ,allowAddNewData: {if $params.forceSelection|default && $params.forceSelection|default != 'false'}false{else}true{/if}
+        ,addNewDataOnBlur: true
         ,stackItems: {if $params.stackItems|default && $params.stackItems|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
 
@@ -53,7 +54,11 @@ Ext.onReady(function() {
             'select': {fn:MODx.fireResourceFormChange, scope:this}
             ,'beforeadditem': {fn:MODx.fireResourceFormChange, scope:this}
             ,'newitem': {fn:function(bs,v,f) {
-                bs.addNewItem({"id": v,"text": v});
+                var item = {
+                    [bs.valueField]: v,
+                    [bs.displayField]: v,
+                };
+                bs.addNewItem(item);
                 MODx.fireResourceFormChange();
                 return true;
             },scope:this}

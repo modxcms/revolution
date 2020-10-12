@@ -53,6 +53,12 @@ Ext.onReady(function() {
                 }
             }}
         }
+        ,validate: function () {
+            var value = Ext.getCmp('tv{/literal}{$tv->id}{literal}').value;
+            return !(!this.allowBlank && (value.length < 1));
+        }
+        ,markInvalid : Ext.emptyFn
+        ,clearInvalid : Ext.emptyFn
     });
     MODx.makeDroppable(Ext.get('tv-image-{/literal}{$tv->id}{literal}'),function(v) {
         var cb = Ext.getCmp('tvbrowser{/literal}{$tv->id}{literal}');
@@ -62,6 +68,7 @@ Ext.onReady(function() {
         }
         return '';
     });
+    Ext.getCmp('modx-panel-resource').getForm().add(fld{/literal}{$tv->id}{literal});
 });
 {/literal}
 // ]]>

@@ -34,6 +34,7 @@ MODx.grid.TemplateVarTemplate = function(config) {
             ,dataIndex: 'templatename'
             ,width: 150
             ,sortable: true
+            ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('category')
             ,dataIndex: 'category_name'

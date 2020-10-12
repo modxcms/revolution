@@ -21,7 +21,7 @@ Ext.onReady(function() {
         ,id: 'tv{$tv->id}_prefix'
         ,triggerAction: 'all'
         ,width: 100
-        ,allowBlank: false
+        ,allowBlank: true
         ,maxHeight: 300
         ,typeAhead: false
         ,forceSelection: false
@@ -32,6 +32,17 @@ Ext.onReady(function() {
 	fld.wrap.applyStyles({
 		display: "inline-block"
 	});
+
+    var fld = MODx.load({
+        xtype: 'textfield'
+        ,applyTo: 'tv{$tv->id}'
+        ,enableKeyEvents: true
+        ,msgTarget: 'under'
+        ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+        ,listeners: {'keydown': {fn:MODx.fireResourceFormChange, scope:this}}
+    });
+    MODx.makeDroppable(fld);
+    Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });
 // ]]>
 </script>

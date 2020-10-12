@@ -412,7 +412,7 @@
                             }
                         });
 
-                    return '<div id="' + id + '"><p>' + value + '</p></div>';
+                    return '<div id="' + id + '"><p>' + Ext.util.Format.htmlEncode(value) + '</p></div>';
                 }
             }
             ,{

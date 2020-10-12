@@ -49,7 +49,9 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController
         MODx.config.publish_document = "' . $this->canPublish . '";
         MODx.onDocFormRender = "' . $this->onDocFormRender . '";
         MODx.ctx = "' . $this->resource->get('context_key') . '";
-        Ext.onReady(function() {MODx.load(' . json_encode($data) . ')});</script>');
+        Ext.onReady(function() {MODx.load(' . json_encode($data) . ')});
+        MODx.perm.tree_show_resource_ids = '.($this->modx->hasPermission('tree_show_resource_ids') ? 1 : 0).';
+        </script>');
 
         $this->loadRichTextEditor();
     }

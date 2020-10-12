@@ -393,7 +393,7 @@
         </composite>
         <aggregate alias="Category" class="modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
         <validation>
-            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?!\s)$/" message="chunk_err_invalid_name" />
+            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/" message="chunk_err_invalid_name" />
         </validation>
     </object>
 
@@ -818,7 +818,7 @@
         </composite>
         <composite alias="PluginEvents" class="modPluginEvent" local="id" foreign="pluginid" cardinality="many" owner="local" />
         <validation>
-            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9_-\x7f-\xff\s]+(?!\s)$/" message="plugin_err_invalid_name" />
+            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x7f-\xff-_\s]+(?<!\s)$/" message="plugin_err_invalid_name" />
         </validation>
     </object>
 
@@ -1077,7 +1077,7 @@
         </composite>
 
         <validation>
-            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?!\s)$/" message="snippet_err_invalid_name" />
+            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/" message="snippet_err_invalid_name" />
         </validation>
     </object>
 
@@ -1135,6 +1135,10 @@
         <aggregate alias="Category" class="modCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Resources" class="modResource" local="id" foreign="template" cardinality="many" owner="local" />
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="templateid" cardinality="many" owner="local" />
+
+        <validation>
+            <rule field="templatename" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/" message="template_err_invalid_name" />
+        </validation>
     </object>
 
     <object class="modTemplateVar" table="site_tmplvars" extends="modElement">
@@ -1183,7 +1187,7 @@
         <composite alias="TemplateVarResources" class="modTemplateVarResource" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <composite alias="TemplateVarResourceGroups" class="modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <validation>
-            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?!\s)$/" message="tv_err_invalid_name" />
+            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/" message="tv_err_invalid_name" />
             <rule field="name" name="reserved" type="preg_match" rule="/^(?!(id|type|contentType|pagetitle|longtitle|description|alias|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree)$)/" message="tv_err_reserved_name" />
         </validation>
     </object>

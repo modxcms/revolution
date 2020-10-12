@@ -59,6 +59,7 @@ class modRestService {
             'responseSuccessKey' => 'success',
             'trimParameters' => false,
             'xmlRootNode' => 'response',
+            'xmlDisableEntityLoader' => true,
             'sanitize' => false
 		),$config);
 		$this->modx->getService('lexicon','modLexicon');
@@ -414,7 +415,14 @@ class modRestServiceRequest {
             case 'text/xml':
                 $data = stream_get_contents($filehandle);
                 fclose($filehandle);
-                $xml = simplexml_load_string($data);
+                if (LIBXML_VERSION < 20900 && $this->service->getOption('xmlDisableEntityLoader')) {
+                    $disableEntities = libxml_disable_entity_loader(true);
+                    $xml = simplexml_load_string($data);
+                    libxml_disable_entity_loader($disableEntities);
+                }
+                else {
+                    $xml = simplexml_load_string($data);
+                }
                 $params = $this->_xml2array($xml);
                 break;
             case 'application/json':

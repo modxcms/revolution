@@ -46,6 +46,10 @@ class modBrowserFolderGetListProcessor extends modBrowserProcessor
             $dir = substr($dir, 2);
         }
         $list = $this->source->getContainerList($dir);
+        foreach ($list as &$item) {
+            // Make sure the id is HTML-safe as it will be inserted into an attribute
+            $item['id'] = htmlentities($item['id'], ENT_QUOTES, 'UTF-8');
+        }
 
         return $this->source->hasErrors()
             ? $this->failure($this->source->getErrors(), [])
