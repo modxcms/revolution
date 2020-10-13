@@ -212,6 +212,9 @@ a {
         float: none;
         margin: 20px auto 0;
         display: block;
+        &:active{
+	        margin: 20px auto 0;
+        }
     }
 
     .x-form-check-wrap.modx-login-rm-cb {
