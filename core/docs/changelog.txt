@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.1-pl (TBA)
 ====================================
+- Fix alias_visible/syncsite checkboxes when switching templates [#15289]
 - Allow directories with name "0" [#15296]
 - Fix login button margins on mobile [#15300]
 - Hide Update User Group button on Users tab when editing User Group [#15290]
