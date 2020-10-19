@@ -157,6 +157,8 @@ a {
     float: none;
     margin: 20px auto 0;
     display: block; }
+    #modx-login-btn:active {
+      margin: 20px auto 0; }
   .x-form-check-wrap.modx-login-rm-cb {
     float: none; }
   .loginLicense {

@@ -6341,7 +6341,6 @@ ul.x-tab-strip-bottom {
     z-index: 24; }
 
 #modx-navbar #modx-home-dashboard {
-  background-image: url("../images/modx-icon-color.png");
   background-image: url("../images/modx-icon-color.svg"), none;
   background-position: center center;
   background-repeat: no-repeat;
@@ -8915,7 +8914,6 @@ ul.configcheck {
   margin-top: 1.5em;
   min-height: 112px;
   background-color: transparent;
-  background-image: url("../images/modx-logo-color.png");
   background-image: url("../images/modx-logo-color.svg"), none;
   background-repeat: no-repeat;
   background-attachment: none;
