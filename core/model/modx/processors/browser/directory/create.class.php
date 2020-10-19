@@ -35,7 +35,7 @@ class modBrowserFolderCreateProcessor extends modProcessor {
             'name' => false,
             'parent' => '',
         ));
-        if (!$this->getProperty('name')) return $this->modx->lexicon('file_err_chmod_ns');
+        if (!strlen($this->getProperty('name'))) return $this->modx->lexicon('file_folder_err_ns_name');
         return true;
     }
 

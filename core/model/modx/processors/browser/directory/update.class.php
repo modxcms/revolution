@@ -68,9 +68,9 @@ class modBrowserFolderUpdateProcessor extends modProcessor {
      */
     public function validate() {
         $dir = $this->getProperty('dir');
-        if (empty($dir)) $this->addFieldError('dir',$this->modx->lexicon('file_folder_err_ns'));
+        if (!strlen($dir)) $this->addFieldError('dir',$this->modx->lexicon('file_folder_err_ns'));
         $name = $this->getProperty('name');
-        if (empty($name)) $this->addFieldError('name',$this->modx->lexicon('file_folder_err_ns'));
+        if (!strlen($name)) $this->addFieldError('name',$this->modx->lexicon('file_folder_err_ns'));
 
         return !$this->hasErrors();
     }

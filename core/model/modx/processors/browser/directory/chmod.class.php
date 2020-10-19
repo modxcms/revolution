@@ -36,7 +36,7 @@ class modBrowserFolderChmodProcessor extends modProcessor {
             'dir' => false,
         ));
         if (!$this->getProperty('mode')) return $this->modx->lexicon('file_err_chmod_ns');
-        if (!$this->getProperty('dir')) return $this->modx->lexicon('file_folder_err_ns');
+        if (!strlen($this->getProperty('dir'))) return $this->modx->lexicon('file_folder_err_ns');
         return true;
     }
 
