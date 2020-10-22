@@ -2,6 +2,9 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.8.2-pl (TBD)
+====================================
+
 MODX Revolution 2.8.1-pl (October 22, 2020)
 ====================================
 - Fix alias_visible/syncsite checkboxes when switching templates [#15289]
