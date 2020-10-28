@@ -1,5 +1,5 @@
 /*
-This file is part of Ext JS 3.4 (without the flash components)
+This file is part of Ext JS 3.4 (without the flash based components)
 
 Copyright (c) 2011-2013 Sencha Inc
 
