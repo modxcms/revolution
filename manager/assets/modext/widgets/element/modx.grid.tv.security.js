@@ -34,6 +34,7 @@ MODx.grid.TVSecurity = function(config) {
             ,dataIndex: 'name'
             ,width: 200
             ,sortable: true
+            ,renderer: Ext.util.Format.htmlEncode
         },tt]
         
     });
