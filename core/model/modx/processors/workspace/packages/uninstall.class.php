@@ -62,7 +62,7 @@ class modPackageUninstallProcessor extends modProcessor {
         );
 
         if ($this->package->uninstall($options) == false) {
-            return $this->failure(sprintf($this->modx->lexicon('package_err_uninstall'),$this->package->getPrimaryKey()));
+            return $this->failure(sprintf($this->modx->lexicon('package_err_uninstall',  array('signature' => $this->package->get('signature'))), $this->package->getPrimaryKey()));
         }
 
         $this->modx->log(modX::LOG_LEVEL_WARN,$this->modx->lexicon('package_uninstall_info_success',array('signature' => $this->package->get('signature'))));

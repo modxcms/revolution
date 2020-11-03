@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.2-pl (TBD)
 ====================================
+- Fix missing package signature when uninstalling [#15315]
 
 MODX Revolution 2.8.1-pl (October 22, 2020)
 ====================================
