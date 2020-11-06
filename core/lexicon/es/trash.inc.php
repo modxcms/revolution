@@ -7,11 +7,11 @@
  * @subpackage lexicon
  */
 
-$_lang['trash_menu'] = 'Trash';
-$_lang['trash_menu_desc'] = 'Manage deleted resources.';
-$_lang['trash.page_title'] = 'Trash - Deleted Resources Manager';
-$_lang['trash.tab_title'] = 'Trash Bin';
-$_lang['trash.intro_msg'] = 'Manage the deleted resources and the not deleted children of deleted parents here.<br><i>Please check the publishing state, before you restore any resource.</i> You can (un-)publish resources directly from the grid with a double click on the published cell of the resource.';
+$_lang['trash_menu'] = 'Papelera';
+$_lang['trash_menu_desc'] = 'Administrar recursos borrados.';
+$_lang['trash.page_title'] = 'Papelera - Gestion de Recursos eliminados';
+$_lang['trash.tab_title'] = 'Papelera Bin';
+$_lang['trash.intro_msg'] = 'Administra los recursos eliminados y los hijos no eliminados de los padres eliminados aquí.<br><i>Comprueba el estado de publicación antes de restaurar cualquier recurso.</i> Puedes (des)publicar recursos directamente de la cuadrícula con un doble clic en la celda <em>publicado</em> del recurso.';
 $_lang['trash.manage_recycle_bin_tooltip'] = "Go to the trash bin manager and manage up to [[+count]] deleted resources";
 $_lang['trash.deletedon_title'] = 'Deleted on';
 $_lang['trash.deletedbyUser_title'] = 'Deleted by';
