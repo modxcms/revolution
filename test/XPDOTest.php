@@ -71,10 +71,11 @@ class XPDOTest extends PHPUnit_Framework_TestCase {
 
     public function testConnection() {
         $xpdo= $this->getXPDOObject();
-        $result= $xpdo->connect();
+        $result= $xpdo->connect(array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
         // Should be no errors if we connected successfully to the database that was created
         $this->assertTrue(is_object($xpdo), "Could not get an xPDO instance");
         $this->assertTrue($result == true, "Could not connect to database");
+        $this->assertTrue($xpdo->getAttribute(PDO::ATTR_ERRMODE) == PDO::ERRMODE_WARNING, "Could not set PDO::ATTR_ERRMODE");
     }
 
     public function testCreateObjectContainers() {
