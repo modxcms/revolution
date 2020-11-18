@@ -341,7 +341,8 @@ class modUser extends modPrincipal {
                 foreach ($legacyContextTokens as $token)
                     $this->addSessionContext($token);
             }
-            $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
+            if ($this->xpdo->getSessionState())
+                $_SESSION['modx.user.contextTokens']= $this->sessionContexts;
         }
         return $this->sessionContexts;
     }
