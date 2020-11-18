@@ -1,5 +1,9 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.8.2-pl (TBD)
+====================================
+- Fix error caused by merging PDO driver options
+
 xPDO 2.8.1-pl (July 13, 2020)
 ====================================
 - Add current_timestamp() to valid currentTimestamps list

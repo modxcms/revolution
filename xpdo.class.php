@@ -3085,7 +3085,7 @@ class xPDOConnection {
         $this->config['password']= $password;
         $driverOptions = is_array($driverOptions) ? $driverOptions : array();
         if (array_key_exists('driverOptions', $this->config) && is_array($this->config['driverOptions'])) {
-            $driverOptions = array_merge($this->config['driverOptions'], $driverOptions);
+            $driverOptions = $driverOptions + $this->config['driverOptions'];
         }
         $this->config['driverOptions']= $driverOptions;
         if (array_key_exists(xPDO::OPT_CONN_MUTABLE, $this->config)) {
@@ -3111,7 +3111,7 @@ class xPDOConnection {
     public function connect($driverOptions = array()) {
         if ($this->pdo === null) {
             if (is_array($driverOptions) && !empty($driverOptions)) {
-                $this->config['driverOptions']= array_merge($this->config['driverOptions'], $driverOptions);
+                $this->config['driverOptions']= $driverOptions + $this->config['driverOptions'];
             }
             try {
                 $this->pdo= new PDO($this->config['dsn'], $this->config['username'], $this->config['password'], $this->config['driverOptions']);
