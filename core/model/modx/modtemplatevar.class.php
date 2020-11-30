@@ -819,7 +819,8 @@ class modTemplateVar extends modElement {
                     $dbtags['DBASE'] = $this->xpdo->getOption('dbname');
                     $dbtags['PREFIX'] = $this->xpdo->getOption('table_prefix');
                     foreach($dbtags as $key => $pValue) {
-                        $param = str_replace('[[+'.$key.']]', $pValue, $param);
+                        if (!is_scalar($pValue)) continue;
+                        $param = str_replace('[[+'.$key.']]', (string)$pValue, $param);
                     }
                     $stmt = $this->xpdo->query('SELECT '.$param);
                     if ($stmt && $stmt instanceof PDOStatement) {
