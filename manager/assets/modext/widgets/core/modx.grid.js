@@ -1530,9 +1530,18 @@ MODx.grid.JsonGrid = function (config) {
             editor: {
                 xtype: el.xtype || 'textfield',
                 allowBlank: el.allowBlank || true,
+                enableKeyEvents: true,
+                fieldname: el.name,
                 listeners: {
                     change: {
                         fn: this.saveValue,
+                        scope: this
+                    },
+                    keyup: {
+                        fn: function (sb) {
+                            sb.gridEditor.record.data[sb.fieldname] = sb.el.dom.value;
+                            this.saveValue();
+                        },
                         scope: this
                     }
                 }
@@ -1671,6 +1680,46 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
             value.push(row);
         }, this);
         this.hiddenField.setValue(Ext.util.JSON.encode(value));
+    },
+    _getActionsColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="actions !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="actions">'
+            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    },
+    actionsColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        return this._getActionsColumnTpl().apply({
+            actions: this.getActions()
+        });
+    },
+    onClick: function (e) {
+        var target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) return;
+        if (!target.dataset.action) return;
+
+        var actionHandler = 'action' + target.dataset.action.charAt(0).toUpperCase() + target.dataset.action.slice(1);
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
+            }
+        }
+
+        var record = this.getSelectionModel().getSelected();
+        var recordIndex = this.store.indexOf(record);
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
+    },
+    actionContextMenu: function (record, recordIndex, e) {
+        this._showMenu(this, recordIndex, e);
     }
 });
 Ext.reg('grid-json', MODx.grid.JsonGrid);
