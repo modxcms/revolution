@@ -6,30 +6,30 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['database_charset'] = 'Database charset';
+$_lang['database_charset'] = 'Jenis Pengkodean Basis Data';
 $_lang['database_name'] = 'Nama database';
-$_lang['database_server'] = 'Database server';
+$_lang['database_server'] = 'Server Basis Data';
 $_lang['database_tables'] = 'Tabel database';
 $_lang['database_optimize'] = 'Mengoptimalkan Database';
 $_lang['database_table_clickhere'] = 'Klik di sini';
 $_lang['database_table_clickbackup'] = 'backup &amp; Unduh tabel yang dipilih';
 $_lang['database_table_datasize'] = 'Ukuran data';
-$_lang['database_table_droptablestatements'] = 'Menghasilkan pernyataan DROP meja.';
+$_lang['database_table_droptablestatements'] = 'Membuat intruksi untuk menghapus tabel.';
 $_lang['database_table_effectivesize'] = 'Ukuran yang efektif';
-$_lang['database_table_indexsize'] = 'Indeks ukuran';
-$_lang['database_table_overhead'] = 'Overhead';
+$_lang['database_table_indexsize'] = 'Ukuran indeks';
+$_lang['database_table_overhead'] = 'Tidak cocok';
 $_lang['database_table_reserved'] = 'Milik';//sqlsrv
-$_lang['database_table_records'] = 'Catatan';
+$_lang['database_table_records'] = 'Baris';
 $_lang['database_table_tablename'] = 'Nama tabel';
-$_lang['database_table_totalsize'] = 'Total ukuran';
+$_lang['database_table_totalsize'] = 'Ukuran total';
 $_lang['database_table_totals'] = 'Total:';
 $_lang['database_table_unused'] = 'Tidak terpakai';//sqlsrv
 $_lang['database_type'] = 'Tipe database';
-$_lang['database_version'] = 'Database versi';
+$_lang['database_version'] = 'Versi database';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank"> ExtJS</a> Versi';
-$_lang['localtime'] = 'Waktu setempat';
+$_lang['localtime'] = 'Waktu Lokal';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank"> MagpieRSS</a> Versi';
-$_lang['modx_version'] = 'MODX versi';
+$_lang['modx_version'] = 'versi MODX';
 $_lang['onlineusers_action'] = 'Aksi';
 $_lang['onlineusers_actionid'] = 'Action ID';
 $_lang['onlineusers_ipaddress'] = 'Alamat IP pengguna';
