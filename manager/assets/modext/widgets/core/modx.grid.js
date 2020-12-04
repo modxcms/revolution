@@ -117,6 +117,7 @@ MODx.grid.Grid = function(config) {
 
             config.columns.push({
                 width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
@@ -130,6 +131,7 @@ MODx.grid.Grid = function(config) {
 
             config.cm.columns.push({
                 width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
@@ -806,6 +808,7 @@ MODx.grid.LocalGrid = function(config) {
     if (config.showActionsColumn && config.columns && Array.isArray(config.columns)) {
         config.columns.push({
             width: config.actionsColumnWidth || 50
+            ,menuDisabled: true
             ,renderer: {
                 fn: this.actionsColumnRenderer,
                 scope: this
@@ -1526,6 +1529,7 @@ MODx.grid.JsonGrid = function (config) {
             header: el.header || _(el.name),
             dataIndex: el.name,
             editable: true,
+            menuDisabled: true,
             hidden: el.hidden || false,
             editor: {
                 xtype: el.xtype || 'textfield',
@@ -1720,9 +1724,6 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
         this.menu.record = record.data;
 
         this[actionHandler](record, recordIndex, e);
-    },
-    actionContextMenu: function (record, recordIndex, e) {
-        this._showMenu(this, recordIndex, e);
     }
 });
 Ext.reg('grid-json', MODx.grid.JsonGrid);
