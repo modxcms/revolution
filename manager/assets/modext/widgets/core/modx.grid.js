@@ -1539,8 +1539,11 @@ MODx.grid.JsonGrid = function (config) {
                     },
                     keyup: {
                         fn: function (sb) {
-                            sb.gridEditor.record.data[sb.fieldname] = sb.el.dom.value;
-                            this.saveValue();
+                            var record = this.getSelectionModel().getSelected();
+                            if (record) {
+                                record.set(sb.fieldname, sb.el.dom.value);
+                                this.saveValue();
+                            }
                         },
                         scope: this
                     }
