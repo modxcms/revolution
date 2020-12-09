@@ -120,7 +120,7 @@ $_country_lang["hu"] = 'Macaristan'; // Hungary
 $_country_lang["id"] = 'Endonezya'; // Indonesia
 $_country_lang["ie"] = 'İrlanda'; // Ireland
 $_country_lang["il"] = 'İsrail'; // Israel
-$_country_lang["im"] = 'Isle of Man'; // Isle of Man
+$_country_lang["im"] = 'Man Adası (Isle of Man)'; // Isle of Man
 $_country_lang["in"] = 'Hindistan'; // India
 $_country_lang["io"] = 'İngiliz Hint Okyanusu Bölgesi'; // British Indian Ocean Territory
 $_country_lang["iq"] = 'Irak'; // Iraq
@@ -247,11 +247,13 @@ $_country_lang["tf"] = 'Fransız Güney Bölgeleri'; // French Southern Territor
 $_country_lang["tg"] = 'Togo'; // Togo
 $_country_lang["th"] = 'Tayland'; // Thailand
 $_country_lang["tj"] = 'Tacikistan'; // Tajikistan
-$_country_lang["tk"] = 'Tokelau'; // Tokelau
+$_country_lang["tk"] = 'Tokelau
+'; // Tokelau
 $_country_lang["tl"] = 'Doğu-Timör'; // Timor-Leste, ex: East Timor
 $_country_lang["tm"] = 'Türkmenistan'; // Turkmenistan
 $_country_lang["tn"] = 'Tunus'; // Tunisia
-$_country_lang["to"] = 'Tonga'; // Tonga
+$_country_lang["to"] = 'Tonga
+'; // Tonga
 $_country_lang["tr"] = 'Türkiye'; // Turkey
 $_country_lang["tt"] = 'Trinidad ve Tobago'; // Trinidad and Tobago
 $_country_lang["tv"] = 'Tuvalu'; // Tuvalu
@@ -271,7 +273,8 @@ $_country_lang["ve"] = 'Venezüella'; // Venezuela
 $_country_lang["vg"] = 'Virgin Adaları (İngiliz)'; // Virgin Islands (British)
 $_country_lang["vi"] = 'Virgin Adaları (ABD)'; // Virgin Islands (U.S.)
 $_country_lang["vn"] = 'Vietnam'; // Viet Nam
-$_country_lang["vu"] = 'Vanuatu'; // Vanuatu
+$_country_lang["vu"] = 'Vanuatu
+'; // Vanuatu
 
 $_country_lang["wf"] = 'Wallis ve Futuna Adaları'; // Wallis and Futuna Islands
 $_country_lang["ws"] = 'Samoa'; // Samoa
