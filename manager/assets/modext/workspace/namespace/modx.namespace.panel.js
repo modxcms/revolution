@@ -10,7 +10,7 @@ MODx.panel.Namespaces = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-namespaces'
-		,cls: 'container'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -25,7 +25,8 @@ MODx.panel.Namespaces = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-namespace'
-				,cls:'main-wrapper'
+                ,urlFilters: ['search']
+                ,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }])]
@@ -88,15 +89,33 @@ MODx.grid.Namespace = function(config) {
             ,id: 'modx-namespace-search'
             ,cls: 'x-form-filter'
             ,emptyText: _('search_ellipsis')
+            ,value: MODx.request.search
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.namespaceSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.search) {
+                            this.namespaceSearch(cb, cb.value);
+                            MODx.request.search = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -128,7 +147,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         } else {
             m.push({
                 text: _('namespace_update')
-                ,handler: this.updateNS
+                ,handler: this.namespaceUpdate
             });
             if (p.indexOf('premove') != -1 && this.menu.record.name != 'core') {
                 m.push({
@@ -140,7 +159,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         return m;
     }
 
-    ,updateNS: function(elem, vent) {
+    ,namespaceUpdate: function(elem, vent) {
         var win = MODx.load({
             xtype: 'modx-window-namespace-update'
             ,record: this.menu.record
@@ -155,19 +174,25 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         win.show(vent.target);
     }
 
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+    ,namespaceSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.search = newValue;
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
+
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        var s = this.getStore();
+        var namespaceSearch = Ext.getCmp('modx-namespace-search');
+        s.baseParams = {
             action: 'Workspace/PackageNamespace/GetList'
-    	};
-        Ext.getCmp('modx-namespace-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        };
+        MODx.request.search = '';
+        namespaceSearch.setValue('');
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
     }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
