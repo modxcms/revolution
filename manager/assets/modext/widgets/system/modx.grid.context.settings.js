@@ -22,7 +22,7 @@ MODx.grid.ContextSettings = function(config) {
         ,fk: config.context_key
         ,save_action: 'Context/Setting/UpdateFromGrid'
         ,tbar: [{
-            text: _('create_new')
+            text: _('setting_create')
             ,scope: this
             ,cls:'primary-button'
             ,handler: {
