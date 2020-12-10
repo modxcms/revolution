@@ -110,15 +110,33 @@ MODx.grid.FCSet = function(config) {
             ,id: 'modx-fcs-search'
             ,cls: 'x-form-filter'
             ,emptyText: _('filter_by_search')
+            ,value: MODx.request.search
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.fcsSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.search) {
+                            this.fcsSearch(cb, cb.value);
+                            MODx.request.search = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -196,20 +214,24 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         }
     }
 
-
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+    ,fcsSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.search = newValue;
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
+
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        var s = this.getStore();
+        var fcsSearch = Ext.getCmp('modx-fcs-search');
+        s.baseParams = {
             action: 'Security/Forms/Set/GetList'
             ,profile: MODx.request.id
-    	};
-        Ext.getCmp('modx-fcs-search').reset();
-    	this.getBottomToolbar().changePage(1);
+        };
+        MODx.request.search = '';
+        fcsSearch.setValue('');
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
     }
 
     ,exportSet: function(btn,e) {
@@ -273,6 +295,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         var r = this.menu.record;
         location.href = '?a=Security/Forms/Set/Update&id='+r.id;
     }
+
     ,duplicateSet: function(btn,e) {
         MODx.Ajax.request({
             url: this.config.url
@@ -291,6 +314,19 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             url: this.config.url
             ,params: {
                 action: 'Security/Forms/Set/Activate'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
+    ,deactivateSet: function(btn,e) {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'Security/Forms/Set/Deactivate'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -318,18 +354,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         });
         return true;
     }
-    ,deactivateSet: function(btn,e) {
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'Security/Forms/Set/Deactivate'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
+
     ,deactivateSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -349,6 +374,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         });
         return true;
     }
+
     ,removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
@@ -373,7 +399,12 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
 });
 Ext.reg('modx-grid-fc-set',MODx.grid.FCSet);
 
-
+/**
+ * @class MODx.window.CreateFCSet
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-fc-set-create
+ */
 MODx.window.CreateFCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -445,7 +476,6 @@ MODx.window.CreateFCSet = function(config) {
                     ,forId: 'modx-fcsc-template'
                     ,html: _('set_template_desc')
                     ,cls: 'desc-under'
-
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: _('constraint_field')
@@ -459,7 +489,6 @@ MODx.window.CreateFCSet = function(config) {
                     ,forId: 'modx-fcsc-constraint-field'
                     ,html: _('set_constraint_field_desc')
                     ,cls: 'desc-under'
-
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: _('constraint')
@@ -473,7 +502,6 @@ MODx.window.CreateFCSet = function(config) {
                     ,forId: 'modx-fcsc-constraint'
                     ,html: _('set_constraint_desc')
                     ,cls: 'desc-under'
-
                 }]
             }]
         }]
@@ -484,7 +512,12 @@ MODx.window.CreateFCSet = function(config) {
 Ext.extend(MODx.window.CreateFCSet,MODx.Window);
 Ext.reg('modx-window-fc-set-create',MODx.window.CreateFCSet);
 
-
+/**
+ * @class MODx.window.ImportFCSet
+ * @extends MODx.Window
+ * @param {Object} config An object of options.
+ * @xtype modx-window-fc-set-import
+ */
 MODx.window.ImportFCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
