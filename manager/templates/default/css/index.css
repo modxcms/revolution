@@ -19379,9 +19379,6 @@ ul.x-tab-strip-bottom {
   height: auto !important;
   box-sizing: border-box;
   /* we need the parent selector to override default combobox styles */ }
-  @media screen and (max-width: 960px) {
-    .modx-manager-search-results {
-      left: 5px !important; } }
   .modx-manager-search-results .loading-indicator {
     background: none;
     color: #515151;
@@ -19406,22 +19403,24 @@ ul.x-tab-strip-bottom {
           padding-bottom: .5em; } }
   .modx-manager-search-results .section {
     border-left: 1px solid #ededed;
-    font-size: 13px;
-    margin-left: 95px;
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: 100px;
     position: relative;
     width: auto;
     /* change to 100% to enable scrollable overflow */ }
   .modx-manager-search-results h3,
   .modx-manager-search-results .x-combo-list-item {
     color: #515151;
-    line-height: 17px;
+    line-height: 18px;
     margin: 0;
-    padding: 4px 8px; }
+    padding: 4px 6px; }
   .modx-manager-search-results h3 {
     color: #53595F;
-    font-size: 13px;
+    font-size: 11px;
+    line-height: 11px;
     font-weight: normal;
-    left: -116px;
+    left: -108px;
     position: absolute;
     text-align: right;
     top: 0;
@@ -19429,7 +19428,7 @@ ul.x-tab-strip-bottom {
   .modx-manager-search-results a {
     cursor: pointer;
     display: inline-block;
-    padding-left: 18px;
+    padding-left: 20px;
     position: relative;
     color: inherit;
     text-decoration: none; }
@@ -19437,7 +19436,7 @@ ul.x-tab-strip-bottom {
     color: #234368;
     left: 0;
     position: absolute;
-    top: 2px; }
+    top: 4px; }
   .modx-manager-search-results em {
     font-style: normal;
     opacity: .7; }
