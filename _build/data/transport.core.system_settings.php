@@ -1334,6 +1334,24 @@ $settings['publish_default']->fromArray([
   'area' => 'site',
   'editedon' => null,
 ], '', true, true);
+$settings['quick_search_in_content']= $xpdo->newObject(modSystemSetting::class);
+$settings['quick_search_in_content']->fromArray([
+  'key' => 'quick_search_in_content',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
+$settings['quick_search_result_max']= $xpdo->newObject(modSystemSetting::class);
+$settings['quick_search_result_max']->fromArray([
+  'key' => 'quick_search_result_max',
+  'value' => 10,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['request_controller']= $xpdo->newObject(modSystemSetting::class);
 $settings['request_controller']->fromArray([
   'key' => 'request_controller',
