@@ -576,6 +576,12 @@ $_lang['setting_publish_default'] = 'الافتراضي منشور';
 $_lang['setting_publish_default_desc'] = 'اختر ’نعم’ لجعل كل المصادر الجديدة منشورة بشكل افتراضي.';
 $_lang['setting_publish_default_err'] = 'الرجاء تحديد فيما إذا أو لم تكن تريد أن تكون المستندات منشورة بشكل افتراضي.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'طلب اسم ملف المتحكم';
 $_lang['setting_request_controller_desc'] = 'اسم الملف لمتحكم الطلب الأساسي الذي يتم تحميل مودكس منه. يمكن لمعظم المستخدمين ترك هذا كـ index.php.';
 
