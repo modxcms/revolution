@@ -812,7 +812,7 @@
         </composite>
         <composite alias="PluginEvents" class="modPluginEvent" local="id" foreign="pluginid" cardinality="many" owner="local" />
         <validation>
-            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x7f-\xff-_\s]+(?<!\s)$/" message="plugin_err_invalid_name" />
+            <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x23-\x2f\x3a\x5b-\x5d\x7f-\xff-_\s]+(?<!\s)$/" message="plugin_err_invalid_name" />
         </validation>
     </object>
 
@@ -1133,7 +1133,7 @@
         <composite alias="TemplateVarTemplates" class="modTemplateVarTemplate" local="id" foreign="templateid" cardinality="many" owner="local" />
 
         <validation>
-            <rule field="templatename" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?<!\s)$/" message="template_err_invalid_name" />
+            <rule field="templatename" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x23-\x2f\x3a\x5b-\x5d\x7f-\xff-_\s]+(?<!\s)$/" message="template_err_invalid_name" />
         </validation>
     </object>
 
