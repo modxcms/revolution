@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'Ressourcen standardmäßig veröffentlichen
 $_lang['setting_publish_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig veröffentlicht werden sollen.';
 $_lang['setting_publish_default_err'] = 'Bitte geben Sie an, ob neue Dokumente standardmäßig veröffentlicht werden sollen.';
 
+$_lang['setting_quick_search_in_content'] = 'Suchen im Inhalt erlauben';
+$_lang['setting_quick_search_in_content_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, dann wird der Inhalt des Elements (Ressource, Template, Chunk, etc.) auch in der Schnellsuche durchsucht.';
+
+$_lang['setting_quick_search_result_max'] = 'Anzahl der Elemente im Suchergebnis';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximale Anzahl von Elementen für jeden Typ (Ressource, Template, Chunk usw.) im Suchergebnis.';
+
 $_lang['setting_request_controller'] = 'Dateiname des Request-Controllers';
 $_lang['setting_request_controller_desc'] = 'Der Dateiname des Haupt-Request-Controllers, von dem aus MODX geladen wird. Die meisten Benutzer können hier "index.php" eingestellt lassen.';
 
