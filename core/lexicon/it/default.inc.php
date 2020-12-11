@@ -92,7 +92,6 @@ $_lang['create'] = 'Crea';
 $_lang['create_document_here'] = 'Crea Risorsa qui';
 $_lang['create_document_inside'] = 'Creare nuovo documento all\'interno';
 $_lang['create_folder_here'] = 'Crea Cartella qui';
-$_lang['create_new'] = 'Crea nuovo';
 $_lang['create_user_group'] = 'Crea Gruppo Utenti';
 $_lang['created'] = 'Creato';
 $_lang['createdon'] = 'Data di creazione';
