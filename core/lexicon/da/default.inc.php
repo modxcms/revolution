@@ -92,7 +92,6 @@ $_lang['create'] = 'Opret';
 $_lang['create_document_here'] = 'Opret dokument her';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Opret mappe her';
-$_lang['create_new'] = 'Opret ny';
 $_lang['create_user_group'] = 'Opret brugergruppe';
 $_lang['created'] = 'Oprettet';
 $_lang['createdon'] = 'Oprettelsesdato';
