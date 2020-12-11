@@ -92,7 +92,6 @@ $_lang['create'] = '创建';
 $_lang['create_document_here'] = '在此创建文档';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = '在此创建文件夹';
-$_lang['create_new'] = '创建新的';
 $_lang['create_user_group'] = '创建用户组';
 $_lang['created'] = '已创建';
 $_lang['createdon'] = '创建日期';
