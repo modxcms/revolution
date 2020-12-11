@@ -92,7 +92,6 @@ $_lang['create'] = 'Skapa';
 $_lang['create_document_here'] = 'Skapa dokument här';
 $_lang['create_document_inside'] = 'Skapa dokument inuti';
 $_lang['create_folder_here'] = 'Skapa mapp här';
-$_lang['create_new'] = 'Skapa ny';
 $_lang['create_user_group'] = 'Skapa användargrupp';
 $_lang['created'] = 'Skapad';
 $_lang['createdon'] = 'Skapat datum';
