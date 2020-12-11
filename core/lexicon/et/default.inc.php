@@ -92,7 +92,6 @@ $_lang['create'] = 'Loo';
 $_lang['create_document_here'] = 'Loo dokument siia';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Loo kaust siia';
-$_lang['create_new'] = 'Loo Uus';
 $_lang['create_user_group'] = 'Loo Kasutaja Grupp';
 $_lang['created'] = 'Loodud';
 $_lang['createdon'] = 'Loomise kuupäev';
