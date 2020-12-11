@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'प्रकाशित डिफ़ॉल
 $_lang['setting_publish_default_desc'] = 'डिफ़ॉल्ट रूप से प्रकाशित सभी नए Resource बनाने के लिए \' हाँ\' का चयन करें।';
 $_lang['setting_publish_default_err'] = 'कृपया state चाहे या नहीं आप document डिफ़ॉल्ट रूप से प्रकाशित किया जा करने के लिए चाहते हैं।';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'नियंत्रक फ़ाइलनाम का अनुरोध करें';
 $_lang['setting_request_controller_desc'] = 'मुख्य अनुरोध नियंत्रक का नाम है जिसमें से ModX भरी हुई है। अधिकांश users index.php के रूप में इस छोड़ सकते हैं।';
 
