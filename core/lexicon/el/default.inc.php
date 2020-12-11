@@ -92,7 +92,6 @@ $_lang['create'] = 'Δημιουργία';
 $_lang['create_document_here'] = 'Create document here';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Create folder here';
-$_lang['create_new'] = 'Δημιουργία νέου';
 $_lang['create_user_group'] = 'Create User Group';
 $_lang['created'] = 'Δημιουργήθηκε';
 $_lang['createdon'] = 'Ημερομηνία δημιουργίας';
