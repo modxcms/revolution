@@ -572,6 +572,12 @@ $_lang['setting_publish_default'] = 'Апублікавана па змаўча�
 $_lang['setting_publish_default_desc'] = 'Выберыце «Так», калі жадаеце, каб усе новыя рэсурсы адразу станавіліся апублікаванымі.';
 $_lang['setting_publish_default_err'] = 'Калі ласка, пазначце, жадаеце вы ці не, каб рэсурсы публікаваліся па змаўчанні.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Назва файла кантролера запыту';
 $_lang['setting_request_controller_desc'] = 'Назва файла асноўнага кантролера запыту, праз які загружаецца MODX. Большасць карыстальнікаў можа пакінуць значэнне "index.php".';
 
