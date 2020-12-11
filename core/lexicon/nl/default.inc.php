@@ -92,7 +92,6 @@ $_lang['create'] = 'Nieuwe';
 $_lang['create_document_here'] = 'Pagina';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Maak hier een Map';
-$_lang['create_new'] = 'Maak nieuw';
 $_lang['create_user_group'] = 'Maak Gebruikers Groep';
 $_lang['created'] = 'Gemaakt';
 $_lang['createdon'] = 'Aanmaak datum';

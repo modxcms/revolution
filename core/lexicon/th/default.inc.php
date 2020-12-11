@@ -92,7 +92,6 @@ $_lang['create'] = 'สร้าง';
 $_lang['create_document_here'] = 'สร้างเอกสารที่นี่';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'สร้างโฟลเดอร์ที่นี่';
-$_lang['create_new'] = 'สร้างใหม่';
 $_lang['create_user_group'] = 'สร้างกลุ่ม';
 $_lang['created'] = 'สร้างแล้ว';
 $_lang['createdon'] = 'วันที่สร้าง';

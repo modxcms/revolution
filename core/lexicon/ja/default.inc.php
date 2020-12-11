@@ -92,7 +92,6 @@ $_lang['create'] = '作成';
 $_lang['create_document_here'] = 'ドキュメントを作成';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'フォルダを作成';
-$_lang['create_new'] = '新規作成';
 $_lang['create_user_group'] = 'ユーザーグループを作成';
 $_lang['created'] = '作成日';
 $_lang['createdon'] = '作成日時';

@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'Ve výchozím stavu publikováno';
 $_lang['setting_publish_default_desc'] = 'Zvolte "Ano", pokud chcete, aby všechny nově vytvořené dokumenty byly ve výchozím stavu publikované.';
 $_lang['setting_publish_default_err'] = 'Zvolte zda chcete, aby byly dokumenty publikovány nebo ne.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Název souboru kontroleru požadavků';
 $_lang['setting_request_controller_desc'] = 'Název souboru hlavního kontroleru požadavků odkud se načítá MODX. Většina uživatelů by toto měla ponechat na index.php.';
 

@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'Penerbitan standar';
 $_lang['setting_publish_default_desc'] = 'Pilih \'Ya\' untuk membuat semua sumber daya baru yang diterbitkan oleh default.';
 $_lang['setting_publish_default_err'] = 'Tolong nyatakan apakah Anda ingin dokumen diterbitkan secara default atau tidak.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Permintaan pengaturan Filename';
 $_lang['setting_request_controller_desc'] = 'Nama file dari pengontrol permintaan utama dari mana MODX dimuat. Sebagian besar pengguna bisa meninggalkan ini sebagai index.php.';
 

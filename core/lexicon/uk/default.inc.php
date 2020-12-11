@@ -92,7 +92,6 @@ $_lang['create'] = 'Створити';
 $_lang['create_document_here'] = 'Створити документ тут';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Створити каталог тут';
-$_lang['create_new'] = 'Створити новий(у)';
 $_lang['create_user_group'] = 'Створити групу користувачів';
 $_lang['created'] = 'Створено';
 $_lang['createdon'] = 'Дата створення';

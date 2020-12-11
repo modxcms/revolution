@@ -92,7 +92,6 @@ $_lang['create'] = 'बनाएँ';
 $_lang['create_document_here'] = 'यहाँ document बनाएँ';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'यहाँ फ़ोल्डर बनाएँ';
-$_lang['create_new'] = 'नया बनाएँ';
 $_lang['create_user_group'] = 'User Group बनाएँ';
 $_lang['created'] = 'बनाया गया';
 $_lang['createdon'] = 'निर्माण दिनांक';

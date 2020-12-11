@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'Standaard gepubliceerd';
 $_lang['setting_publish_default_desc'] = 'Selecteer \'Ja\' om alle nieuwe documenten standaard gepubliceerd te maken.';
 $_lang['setting_publish_default_err'] = 'Vul in om wel of niet documenten standaard gepubliceerd te maken.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Request controller bestandsnaam';
 $_lang['setting_request_controller_desc'] = 'De bestandsnaam van de hoofd request controller vanwaar MODX geladen is. De meeste gebruikers kunnen dit laten staan op index.php.';
 

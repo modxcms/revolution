@@ -92,7 +92,6 @@ $_lang['create'] = 'Létrehozás';
 $_lang['create_document_here'] = 'Dokumentum létrehozása itt';
 $_lang['create_document_inside'] = 'Belső dokumentum létrehozása';
 $_lang['create_folder_here'] = 'Mappa létrehozása itt';
-$_lang['create_new'] = 'Új létrehozása';
 $_lang['create_user_group'] = 'Felhasználói csoport létrehozása';
 $_lang['created'] = 'Létrehozva';
 $_lang['createdon'] = 'Létrehozás dátuma';

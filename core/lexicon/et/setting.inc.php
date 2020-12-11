@@ -572,6 +572,12 @@ $_lang['setting_publish_default'] = 'Avalikustatud Vaikimisi';
 $_lang['setting_publish_default_desc'] = 'Valige \'Jah\', et muuta kõik ressurssid vaikimisi avalikustatuks.';
 $_lang['setting_publish_default_err'] = 'Palun määrake, kas soovite või mitte, et dokumendid oleksid avalikustatud vaikimisi.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Päringu Kontrolleri Failinimi';
 $_lang['setting_request_controller_desc'] = 'Põhi päringu kontrolleri failinimi, millest MODX laetakse. Enamus kasutajaid jätavad selle index.php peale.';
 

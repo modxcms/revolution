@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'Valor por Defecto de Estado de Publicación
 $_lang['setting_publish_default_desc'] = 'Selecciona "Sí" para hacer todos los recursos nuevos publicados por defecto.';
 $_lang['setting_publish_default_err'] = 'Por favor, indica si quieres que los nuevos elementos estén publicados desde su creación.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Nombre de Archivo del Controlador de Solicitudes';
 $_lang['setting_request_controller_desc'] = 'El nombre de archivo del controlador de solicitudes principal desde el cual se carga MODX. La mayoría de los usuarios pueden dejarlo como "index.php".';
 

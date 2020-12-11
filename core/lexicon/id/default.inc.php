@@ -92,7 +92,6 @@ $_lang['create'] = 'Membuat';
 $_lang['create_document_here'] = 'Membuat dokumen di sini';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Buat folder di sini';
-$_lang['create_new'] = 'Membuat baru';
 $_lang['create_user_group'] = 'Membuat grup pengguna';
 $_lang['created'] = 'Dibuat';
 $_lang['createdon'] = 'Tanggal pembuatan';

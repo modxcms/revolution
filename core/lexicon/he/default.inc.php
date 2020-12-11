@@ -92,7 +92,6 @@ $_lang['create'] = 'צור';
 $_lang['create_document_here'] = 'צור מסמך כאן';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'צור תיקיה כאן';
-$_lang['create_new'] = 'צור חדש';
 $_lang['create_user_group'] = 'צור קבוצת משתמשים';
 $_lang['created'] = 'נוצר';
 $_lang['createdon'] = 'תאריך יצירה';

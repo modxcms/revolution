@@ -93,7 +93,6 @@ $_lang['create'] = 'Luo';
 $_lang['create_document_here'] = 'Luo asiakirja tähän';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Luo kansio tähän';
-$_lang['create_new'] = 'Luo uusi';
 $_lang['create_user_group'] = 'Luo käyttäjäryhmä';
 $_lang['created'] = 'Luotu';
 $_lang['createdon'] = 'Luontipäivä';

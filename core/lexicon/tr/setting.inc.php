@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'Yayınlananlar önceden tanımlanmış';
 $_lang['setting_publish_default_desc'] = 'Bütün yeni kaynakları varsayılan olarak yayınlanır yapmak için \'Evet\'i seçin.';
 $_lang['setting_publish_default_err'] = 'Lütfen belgelerin varsayılan olarak yayınlanmasını isteyip istemediğinizi belirtin.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Denetleyici Dosya Adı İste';
 $_lang['setting_request_controller_desc'] = 'MODX\'in yüklendiği ana istem kontrolcüsünün dosya ismi. Bir çok kullanıcı bunu index.php şeklinde bırakabilir.';
 

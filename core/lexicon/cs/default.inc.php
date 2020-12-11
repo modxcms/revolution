@@ -92,7 +92,6 @@ $_lang['create'] = 'Vytvořit';
 $_lang['create_document_here'] = 'Vytvořit dokument';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Vytvořit složku';
-$_lang['create_new'] = 'Vytvořit';
 $_lang['create_user_group'] = 'Vytvořit uživatelskou skupinu';
 $_lang['created'] = 'Vytvořeno';
 $_lang['createdon'] = 'Vytvořeno';

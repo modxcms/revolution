@@ -92,7 +92,6 @@ $_lang['create'] = 'إنشاء';
 $_lang['create_document_here'] = 'إنشاء المستند هنا';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'إنشاء مجلد هنا';
-$_lang['create_new'] = 'إنشاء جديد';
 $_lang['create_user_group'] = 'إنشاء مجموعة المستخدمين';
 $_lang['created'] = 'تم انشاؤها';
 $_lang['createdon'] = 'تاريخ الانشاء';

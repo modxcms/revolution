@@ -92,7 +92,6 @@ $_lang['create'] = 'ایجاد';
 $_lang['create_document_here'] = 'ایجاد سند در اینجا';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'ایجاد پوشه در اینجا';
-$_lang['create_new'] = 'Create New';
 $_lang['create_user_group'] = 'ایجاد گروه کاربری';
 $_lang['created'] = 'ایجاد شده';
 $_lang['createdon'] = 'تاریخ ایجاد';
