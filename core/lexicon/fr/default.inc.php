@@ -92,7 +92,6 @@ $_lang['create'] = 'Créer';
 $_lang['create_document_here'] = 'Créer un document ici';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Créer un dossier ici';
-$_lang['create_new'] = 'Créer';
 $_lang['create_user_group'] = 'Créer un groupe d\'utilisateurs';
 $_lang['created'] = 'Créé';
 $_lang['createdon'] = 'Date de création';
