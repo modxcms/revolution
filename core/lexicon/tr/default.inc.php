@@ -92,7 +92,6 @@ $_lang['create'] = 'Oluştur';
 $_lang['create_document_here'] = 'Buraya belge oluştur';
 $_lang['create_document_inside'] = 'Create document inside';
 $_lang['create_folder_here'] = 'Buraya klasör oluştur';
-$_lang['create_new'] = 'Yeni oluşturmak';
 $_lang['create_user_group'] = 'Kullanıcı grubu oluştur';
 $_lang['created'] = 'Oluşturuldu';
 $_lang['createdon'] = 'Oluşturma tarihi';
