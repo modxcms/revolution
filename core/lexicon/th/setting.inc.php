@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'เผยแพร่โดยปริย�
 $_lang['setting_publish_default_desc'] = 'เลือก \'ใช่\' เพื่อทำให้รีซอร์สใหม่ถูกเผยแพร่โดยปริยาย';
 $_lang['setting_publish_default_err'] = 'กรุณากำหนดว่าคุณต้องการให้เอกสารถูกเผยแพร่โดยปริยายหรือไม่';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'ชื่อไฟล์ของตัวควบคุม main request จาก MODX ที่ถูกโหลด ผู้ใช้ส่วนใหญ่สามารถปล่อยไว้ให้เป็น index.php';
 
