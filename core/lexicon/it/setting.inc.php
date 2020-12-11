@@ -571,6 +571,12 @@ $_lang['setting_publish_default'] = 'Pubblicato di Default';
 $_lang['setting_publish_default_desc'] = 'Scegli \'SI\' per impostare che tutte le nuove risorse siano "pubblicate di default".';
 $_lang['setting_publish_default_err'] = 'Per favore scegli se vuoi o no che i nuovi documenti siano pubblicati di default.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Nome File Controllore Richieste';
 $_lang['setting_request_controller_desc'] = 'Il nome del file del controllore delle richieste con cui è caricato MODX. La maggior parte degli utenti possono lasciare index.php.';
 
