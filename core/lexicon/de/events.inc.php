@@ -27,10 +27,10 @@ $_lang['system_events.service_4'] = 'Cachedienst-Ereignisse';
 $_lang['system_events.service_5'] = 'Templatedienst-Ereignisse';
 $_lang['system_events.service_6'] = 'Benutzerdefinierte Ereignisse';
 
-$_lang['system_events.remove'] = 'Ereignis löschen';
-$_lang['system_events.remove_confirm'] = 'Sind Sie sicher, dass Sie das Ereignis <b>[[+name]]</b> löschen möchten? Dies kann nicht rückgängig gemacht werden!';
+$_lang['system_events.remove'] = 'Ereignis entfernen';
+$_lang['system_events.remove_confirm'] = 'Sind Sie sicher, dass Sie das Ereignis <b>[[+name]]</b> entfernen möchten? Dies kann nicht rückgängig gemacht werden!';
 
 $_lang['system_events_err_ns'] = 'Name des Systemereignisses nicht angegeben.';
 $_lang['system_events_err_ae'] = 'Der Name des Systemereignisses existiert bereits.';
 $_lang['system_events_err_startint'] = 'Der Name darf nicht mit einer Ziffer beginnen.';
-$_lang['system_events_err_remove_not_allowed'] = 'Sie sind nicht berechtigt, dieses Systemereignis zu löschen.';
+$_lang['system_events_err_remove_not_allowed'] = 'Sie sind nicht berechtigt, dieses Systemereignis zu entfernen.';
