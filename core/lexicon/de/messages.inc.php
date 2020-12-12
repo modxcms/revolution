@@ -27,7 +27,7 @@ $_lang['filter_by_type'] = 'Nach Typ filtern...';
 $_lang['message'] = 'Mitteilung';
 $_lang['message_create'] = 'Mitteilung erstellen';
 $_lang['message_new'] = 'Neue Nachricht';
-$_lang['message_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Mitteilung endgültig löschen möchten?';
+$_lang['message_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Mitteilung endgültig entfernen möchten?';
 $_lang['message_send_email'] = 'E-Mail senden';
 $_lang['message_err_nfs'] = 'Mitteilung nicht gefunden.';
 $_lang['message_err_not_specified_subject'] = 'Betreff nicht angegeben!';
@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='Sie sind nicht berechtigt, diese Mitteilu
 $_lang['message_err_save'] = 'Beim Speichern der Mitteilung ist ein Fehler aufgetreten.';
 
 $_lang['messages'] = 'Mitteilungen';
-$_lang['messages_desc'] = 'Hier können Sie Nachrichten verwalten, die von Ihnen versendet oder von anderen Benutzern an Sie geschickt wurden wurden. Sie können antworten oder Nachrichten weiterleiten; weiterhin können Sie ausgewählte Nachrichten löschen oder als gelesen markieren.';
+$_lang['messages_desc'] = 'Hier können Sie Nachrichten verwalten, die von Ihnen versendet oder von anderen Benutzern an Sie geschickt wurden wurden. Sie können antworten oder Nachrichten weiterleiten; weiterhin können Sie ausgewählte Nachrichten entfernen oder als gelesen markieren.';
 $_lang['messages_all'] = 'Jeder';
 $_lang['messages_compose'] = 'Mitteilung verfassen';
 $_lang['messages_forward'] = 'Weiterleiten';
