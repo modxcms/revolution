@@ -1,11 +1,18 @@
-
+/**
+ * The package info container
+ *
+ * @class MODx.panel.Package
+ * @extends MODx.Panel
+ * @param {Object} config An object of options.
+ * @xtype modx-panel-package
+ */
 MODx.panel.Package = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {}
         ,id: 'modx-panel-package'
-		,cls: 'container'
+        ,cls: 'container'
         ,chunk: ''
         ,bodyStyle: ''
         ,items: [{
@@ -19,70 +26,70 @@ MODx.panel.Package = function(config) {
             ,id: 'modx-package-form'
             ,labelWidth: 150
             ,items: [{
-				xtype: 'panel'
-				,border: false
-				,cls:'main-wrapper'
-				,layout: 'form'
-				,items: [{
-					xtype: 'statictextfield'
-					,fieldLabel: _('package')
-					,name: 'package_name'
-					,width: 300
-				},{
-					xtype: 'statictextfield'
-					,fieldLabel: _('signature')
-					,name: 'signature'
-					,width: 300
-					,submitValue: true
-				},{
-					xtype: 'statictextfield'
-					,fieldLabel: _('uploaded_on')
-					,name: 'created'
-					,width: 300
-				},{
-					xtype: 'statictextfield'
-					,fieldLabel: _('installed')
-					,name: 'installed'
-					,width: 300
-				},{
-					xtype: 'statictextfield'
-					,fieldLabel: _('last_updated')
-					,name: 'updated'
-					,width: 300
-				},{
-					xtype: 'modx-combo-provider'
-					,fieldLabel: _('provider')
-					,name: 'provider'
-					,width: 300
-				},{
-					xtype: 'textarea'
-					,readOnly: true
-					,fieldLabel: _('readme')
-					,name: 'readme'
-					,width: '80%'
-					,height: 200
-				},{
-					xtype: 'textarea'
-					,readOnly: true
-					,fieldLabel: _('license')
-					,name: 'license'
-					,width: '80%'
-					,height: 200
-				},{
-					xtype: 'textarea'
-					,readOnly: true
-					,fieldLabel: _('changelog')
-					,name: 'changelog'
-					,width: '80%'
-					,height: 200
-				}]
-			}]
+                xtype: 'panel'
+                ,border: false
+                ,cls:'main-wrapper'
+                ,layout: 'form'
+                ,items: [{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('package')
+                    ,name: 'package_name'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('signature')
+                    ,name: 'signature'
+                    ,submitValue: true
+                    ,anchor: '100%'
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('uploaded_on')
+                    ,name: 'created'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('installed')
+                    ,name: 'installed'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('last_updated')
+                    ,name: 'updated'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'modx-combo-provider'
+                    ,fieldLabel: _('provider')
+                    ,name: 'provider'
+                    ,anchor: '100%'
+                },{
+                    xtype: 'textarea'
+                    ,readOnly: true
+                    ,fieldLabel: _('changelog')
+                    ,name: 'changelog'
+                    ,anchor: '100%'
+                    ,height: 200
+                },{
+                    xtype: 'textarea'
+                    ,readOnly: true
+                    ,fieldLabel: _('readme')
+                    ,name: 'readme'
+                    ,anchor: '100%'
+                    ,height: 200
+                },{
+                    xtype: 'textarea'
+                    ,readOnly: true
+                    ,fieldLabel: _('license')
+                    ,name: 'license'
+                    ,anchor: '100%'
+                    ,height: 200
+                }]
+            }]
         },{
             title: _('uploaded_versions')
             ,defaults: { border: false ,msgTarget: 'side' }
             ,items: [{
                 xtype: 'modx-grid-package-versions'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,signature: config.signature
                 ,package_name: config.package_name
                 ,preventRender: true
