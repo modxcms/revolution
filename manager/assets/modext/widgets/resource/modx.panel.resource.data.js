@@ -328,7 +328,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
                     }
                     trail.push({
                         text: parents[i].pagetitle
-                        ,href: MODx.config.manager_url + '?a=Resource/Data&id=' + parents[i].id
+                        ,href: MODx.config.manager_url + '?a=resource/data&id=' + parents[i].id
                         ,cls: function(data) {
                             var cls = [];
                             if (!data.published) {
