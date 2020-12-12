@@ -21,16 +21,16 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'هذا يعني أن صفحة
 $_lang['configcheck_errorpage_unpublished'] = 'صفحة الخطأ الخاصة بموقعك غير منشورة أو غير موجودة.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'هذا يعني أن صفحة الخطأ الخاص بك غير قابلة للوصول إلى الجمهور العام. انشر الصفحة أو تأكد من أن يتم إسنادها إلى مستند موجود في شجرة الموقع الخاص بك في النظام &gt; قائمة إعدادات النظام.';
 $_lang['configcheck_htaccess'] = 'المجلد الأساسي يمكن الوصول إليه عن طريق شبكة الإنترنت';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
-<strong>This is not recommended and a security risk.</strong>
-If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
-This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/current/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
-for further information about securing your site.</p>
-If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
-should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
-there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
+$_lang['configcheck_htaccess_msg'] = 'اكتشف مودكس أن المجلد الأساسي الخاص بك (جزئيا) متاح للجمهور.
+<strong>هذا غير موصى به وخطر أمني.</strong>
+إذا كان تثبيت مودكس الخاص بك قيد التشغيل على خادم ويب أباتشي
+يجب عليك على الأقل إعداده. ملف الوصول داخل المجلد الأساسي <em>[[+fileLocation]]</em>.
+يمكن القيام بذلك بسهولة عن طريق إعادة تسمية ملف الـ ht.access المثال الموجود هناك إلى htaccess.
+<p>هناك طرق أخرى وخوادم ويب يمكنك استخدامها، يرجى قراءة <a href="https://docs.modx.com/current/en/getting-started/maintenance/securing-modx">دليل مودكس المتصلب</a>
+للحصول على مزيد من المعلومات حول تأمين موقعك.</p>
+إذا قمت بإعداد كل شيء بشكل صحيح، تصفح مثال. إلى <a href="[[+checkUrl]]" target="_blank">Changelog</a>
+يجب أن يمنحك 403 (إذن مرفوض) أو 404 (غير موجود). إذا كنت تستطيع رؤية سجل التغيير
+هناك في المتصفح، ما زال هناك شيء خاطئ وتحتاج إلى إعادة تشكيل أو استدعاء خبير لحل هذه المشكلة.';
 $_lang['configcheck_images'] = 'دليل الصور غير قابل للكتابة';
 $_lang['configcheck_images_msg'] = 'دليل الصور غير قابل للكتابة، أوغير موجود. هذا يعني أن وظائف الصور في المدير لن تعمل!';
 $_lang['configcheck_installer'] = 'التركيب مازال حاضر';
