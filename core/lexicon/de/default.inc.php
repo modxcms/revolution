@@ -493,7 +493,7 @@ $_lang['tv'] = 'TV';
 $_lang['tv_default'] = 'Standardwert';
 $_lang['tv_default_desc'] = 'Es wird der Standardwert verwendet, wenn der Benutzer keinen Wert angibt.';
 $_lang['tv_elements'] = 'Eingabe-Optionswerte';
-$_lang['tv_elements_desc'] = 'Optionswerte für Template-Variablen mit mehreren auswählbaren Elementen, wie z.B. Dropdown-Listen oder Tags (trennen Sie Optionen durch "||", z. B. "Katze||Hund" oder "Weiß==#ffffff||Schwarz==#000000").';
+$_lang['tv_elements_desc'] = 'Optionswerte für TVs mit mehreren auswählbaren Elementen, wie z.B. Dropdown-Listen oder Tags (trennen Sie Optionen durch "||", z. B. "Katze||Hund" oder "Weiß==#ffffff||Schwarz==#000000").';
 $_lang['tv_type'] = 'Eingabetyp';
 $_lang['tv_value_inherited'] = 'Wert geerbt';
 $_lang['type'] = 'Typ';
