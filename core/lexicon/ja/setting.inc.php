@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'メンテナンスモード時の
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'リソースツリーのルートID';
 $_lang['setting_tree_root_id_desc'] = '管理画面のリソースツリーで、ルートとなるリソースのIDを指定します。ユーザーには指定したIDの子リソースのみが表示されます。';
 
 $_lang['setting_tvs_below_content'] = 'テンプレート変数を「コンテンツ」の下に移動';
-$_lang['setting_tvs_below_content_desc'] = '「はい」を選択すると、リソース編集画面で、テンプレート変数はコンテンツの下に表示されます。';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = '管理画面のUIデバッグモード';
 $_lang['setting_ui_debug_mode_desc'] = '管理画面で標準のテーマを使用している場合に、UIのJavaScriptがデバッグ情報を出力します。<br />※使用するブラウザが"console.log"の出力に対応している必要があります。';
