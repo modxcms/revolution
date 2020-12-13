@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Ada potongan untuk kategori ini.';
 $_lang['category_no_plugins'] = 'Tidak ada plugin untuk kategori ini.';
 $_lang['category_no_snippets'] = 'Ada potongan untuk kategori ini.';
 $_lang['category_no_templates'] = 'Tidak ada template untuk kategori ini.';
-$_lang['category_no_template_variables'] = 'Tidak ada variabel template untuk kategori ini.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Mengubah nama kategori';
 $_lang['category_remove'] = 'Delete Category';
