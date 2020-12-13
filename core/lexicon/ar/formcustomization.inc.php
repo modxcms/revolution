@@ -92,7 +92,7 @@ $_lang['set_import_err_upload'] = 'حدث خطأ أثناء محاولة الع�
 $_lang['set_import_err_xml'] = 'حدث خطأ أثناء استيراد ملف XML. الرجاء التأكد من أنك حددت مجموعة نموذج مخصص صالح لملف XML.';
 $_lang['set_import_msg'] = 'حدد ملف XML لاستيراد مجموعة نموذج مخصص منه. يجب أن يكون بتنسيق XML الصحيح لنموذج التخصيص.';
 $_lang['set_import_template_err_nf'] = 'لم يتم العثور على القالب أثناء استيراد مجموعة تخصيص النموذج.';
-$_lang['set_msg'] = 'هنا يمكنك ضبط أي الحقول، علامات التبويب وعناصر القالب سوف تظهر على هذه الصفحة، وكذلك العناوين والقيم الافتراضية. فقط انقر نقراً مزدوجاً فوق العمود لتعديل القيمة الخاصة به. يمكنك أيضا استخدام المفتاح tab للتجول ضمن الشبكة. اترك الحقل فارغاً لاستخدام الإعداد الافتراضي.';
+$_lang['set_msg'] = 'Here you can edit what fields, tabs and TVs show for this page, as well as their labels and default values. Just double-click on a column to edit its value. You can also use the tab key to progress through the grid. Leave a field blank to use the default setting.';
 $_lang['set_new'] = 'Create Set';
 $_lang['set_edit'] = 'تحرير مجموعة';
 $_lang['set_remove'] = 'حذف مجموعة';
@@ -102,7 +102,7 @@ $_lang['set_remove_multiple_confirm'] = 'Are you sure you want to permanently de
 $_lang['set_tab_err_ae'] = 'علامة تبويب موجود مسبقاً مع هذا المعرف. الرجاء تحديد معرف آخر.';
 $_lang['set_tabs_msg'] = 'Here you adjust the tabs and regions for this page, including their visibility and title. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';
 $_lang['set_template_desc'] = 'اختيار قالب سيحد من القواعد في المجموعة من التنفيذ ما لم يكن المصدر يمتلك القالب المحدد.';
-$_lang['set_tvs_msg'] = 'هنا يمكنك تعيين قابلية الرؤية، العناوين، القيم الافتراضية وعلامات التبويب ويتم ترتيبهم عن طريق النقر نقراً مزدوجاً فوق السطر في الشبكة. ملاحظة: إذا قمت بنقل عنصر القالب إلى منطقة أخرى، يمكنك ضبط ترتيب عنصر القالب في حقل "ترتيب المنطقة". اترك الحقل فارغاً لاستخدام الإعداد الافتراضي.';
+$_lang['set_tvs_msg'] = 'Here you can set visibility, labels, default values and the tabs they reside in by double-clicking on the row in the grid. Note: If you move a <abbr title="Template Variable">TV</abbr> to another Region, you can adjust the order of the TV in the "Region Rank" field. Leave a field empty to use the default setting.';
 $_lang['sets'] = 'مجموعات التخصيص الخاص بالنموذج';
 $_lang['simplexml_err_nf'] = 'مودكس يتطلب لاحقة SimpleXML PHP لكي تستخدم هذه الميزة. الرجاء التأكد من أن اللاحقة مثبتة قبل المتابعة.';
 $_lang['tab'] = 'علامة التبويب';
@@ -116,7 +116,7 @@ $_lang['tab_remove'] = 'حذف علامة تبويب';
 $_lang['tab_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف علامة التبويب هذه؟';
 $_lang['tab_visible'] = 'علامة التبويب مرئية';
 $_lang['tabs'] = 'علامات التبويب';
-$_lang['tv'] = 'عنصر قالب';
+$_lang['tv'] = 'TV';
 $_lang['tv_default'] = 'القيمة الافتراضية لعنصر القالب';
 $_lang['tv_label'] = 'علامة التبويب لعنصر القالب';
 $_lang['tv_name'] = 'اسم';
