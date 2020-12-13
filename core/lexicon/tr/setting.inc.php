@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'Lütfen sitenin kullanılamayan s
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'Ağaç kök kimliği';
 $_lang['setting_tree_root_id_desc'] = 'Bunu, kök olarak o düğümün altındaki sol Kaynak ağacını başlatmak için bir Kaynağın geçerli bir kimliği olarak ayarlayın. Kullanıcı, yalnızca belirtilen Kaynak\'ın alt öğelerindeki Kaynakları görebilir.';
 
 $_lang['setting_tvs_below_content'] = 'TV\'leri İçerik Altında Taşı';
-$_lang['setting_tvs_below_content_desc'] = 'Kaynakları düzenlerken Şablon Değişkenlerini İçeriğin altına taşımak için Evet olarak ayarlayın.';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'UI Hata Ayıklama Modu';
 $_lang['setting_ui_debug_mode_desc'] = 'Varsayılan yönetici teması için kullanıcı arayüzünü kullanırken hata ayıklama iletileri çıkartmak için Evet olarak ayarlayın. Console.log dosyasını destekleyen bir tarayıcı kullanmalısınız.';
