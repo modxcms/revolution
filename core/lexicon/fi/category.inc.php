@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Ei palasia tälle kategorialle.';
 $_lang['category_no_plugins'] = 'Ei liitännäisiä tälle kategorialle.';
 $_lang['category_no_snippets'] = 'Ei PHP-palasia tälle kategorialle.';
 $_lang['category_no_templates'] = 'Ei sivupohjia tälle kategorialle.';
-$_lang['category_no_template_variables'] = 'Ei sivupohjan muuttujia tälle kategorialle.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Uudelleen nimeä kategoria';
 $_lang['category_remove'] = 'Delete Category';
