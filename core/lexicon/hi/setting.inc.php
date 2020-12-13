@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'कृपया साइट अ�
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'Tree Root ID';
 $_lang['setting_tree_root_id_desc'] = 'रूट के रूप में उस नोड के नीचे बाईं resource tree शुरू करने के लिए एक resource के एक वैध पहचान पत्र पर सेट करें। user केवल निर्दिष्ट resource के बच्चे हैं कि resource को देखने के लिए सक्षम हो जाएगा।';
 
 $_lang['setting_tvs_below_content'] = 'TVs content नीचे ले जाएँ';
-$_lang['setting_tvs_below_content_desc'] = 'यह Template Variables context के नीचे ले जाएँ जब resource संपादन करने के लिए हाँ करने के लिए सेट करें।';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'UI डिबग मोड';
 $_lang['setting_ui_debug_mode_desc'] = 'डिफ़ॉल्ट manager विषय के लिए UI का उपयोग करते समय उत्पादन डिबग संदेश के लिए हाँ करने के लिए सेट करें। आप console.log का समर्थन करता है कि एक ब्राउज़र का उपयोग करना चाहिए।';
