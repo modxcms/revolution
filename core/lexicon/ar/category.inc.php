@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'لا يوجد قطع من أجل هذا التص
 $_lang['category_no_plugins'] = 'لا يوجد إضافات من أجل هذا التصنيف.';
 $_lang['category_no_snippets'] = 'لا يوجد كتل كود من أجل هذا التصنيف.';
 $_lang['category_no_templates'] = 'لا يوجد قوالب من أجل هذا التصنيف.';
-$_lang['category_no_template_variables'] = 'لا يوجد عناصر قالب ضمن هذا التصنيف.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'إعادة تسمية التصنيف';
 $_lang['category_remove'] = 'Delete Category';
