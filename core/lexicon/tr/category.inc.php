@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Bu kategori için yığın yok.';
 $_lang['category_no_plugins'] = 'Bu kategori için hiçbir eklenti yok.';
 $_lang['category_no_snippets'] = 'Bu kategori için parçacık yok.';
 $_lang['category_no_templates'] = 'Bu kategori için şablon yok.';
-$_lang['category_no_template_variables'] = 'Bu kategori için hiçbir şablon değişkeni yok.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Kategoriyi yeniden adlandır';
 $_lang['category_remove'] = 'Delete Category';
