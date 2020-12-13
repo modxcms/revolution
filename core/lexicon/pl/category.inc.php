@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Brak chunków w tej kategorii.';
 $_lang['category_no_plugins'] = 'Brak pluginów w tej kategorii.';
 $_lang['category_no_snippets'] = 'Brak snippetów w tej kategorii.';
 $_lang['category_no_templates'] = 'Brak szablonów w tej kategorii.';
-$_lang['category_no_template_variables'] = 'Brak zmiennych TVs w tej kategorii.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Zmiana nazwy kategorii';
 $_lang['category_remove'] = 'Delete Category';
