@@ -11,7 +11,7 @@ $_lang['access'] = 'وصول';
 $_lang['filter_by_category'] = 'فلترة حسب الصنف...';
 $_lang['rank'] = 'ترتيب';
 $_lang['template'] = 'قالب';
-$_lang['template_assignedtv_tab'] = 'عناصر القالب المعينة';
+$_lang['template_assignedtv_tab'] = 'Assigned TVs';
 $_lang['template_code'] = 'كود القالب (HTML)';
 $_lang['template_desc'] = 'التوصيف';
 $_lang['template_desc_category'] = 'التصنيف الذي ينتمي له هذا القالب.';
@@ -41,14 +41,14 @@ $_lang['template_management_msg'] = 'هنا يمكنك اختيار أي قال�
 $_lang['template_msg'] = 'إنشاء وتعديل القوالب. لن تكون القوالب الجديدة أو المغيرة مرئية في الصفحات المخبئة لموقعك حتى يتم إفراغ الذاكرة المؤقتة، بكل الأحوال، يمكنك استخدام وظيفة العرض في الصفحة لرؤية تنفيذ القالب.';
 $_lang['template_name'] = 'اسم القالب';
 $_lang['template_new'] = 'Create Template';
-$_lang['template_no_tv'] = 'لا يوجد عناصر قالب مسندة لهذا القالب بعد.';
+$_lang['template_no_tv'] = 'No TVs have been assigned to this template yet.';
 $_lang['template_properties'] = 'الخصائص الافتراضية';
 $_lang['template_reset_all'] = 'إعادة ضبط كل الصفحات لتستخدم القالب الافتراضي';
 $_lang['template_reset_specific'] = 'إعادة ضبط الصفحات \'%s\' فقط';
 $_lang['template_title'] = 'إنشاء/تعديل القالب';
-$_lang['template_tv_edit'] = 'تعديل ترتيب الفرز لعناصر القالب';
-$_lang['template_tv_msg'] = 'عناصر القالب المسندة لهذا القالب مدرجة أدناه.';
+$_lang['template_tv_edit'] = 'Edit the sort order of the TVs';
+$_lang['template_tv_msg'] = 'The <abbr title="Template Variables">TVs</abbr> assigned to this template are listed below.';
 $_lang['template_untitled'] = 'قالب غير معنون';
 $_lang['templates'] = 'قوالب';
-$_lang['tvt_err_nf'] = 'لا يملك عنصر القالب حق الوصول إلى القالب المحدد.';
-$_lang['tvt_err_remove'] = 'An error occurred while trying to delete the template variable from the template.';
+$_lang['tvt_err_nf'] = 'TV does not have access to the specified Template.';
+$_lang['tvt_err_remove'] = 'An error occurred while trying to delete the TV from the template.';
