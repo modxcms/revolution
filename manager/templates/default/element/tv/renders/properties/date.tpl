@@ -31,26 +31,14 @@ MODx.load({
         ,html: _('date_format_desc')
         ,cls: 'desc-under'
     },{
-        xtype: 'combo'
+        xtype: 'combo-boolean'
         ,fieldLabel: _('date_use_current')
         ,description: MODx.expandHelp ? '' : _('date_use_current_desc')
         ,name: 'prop_default'
-        ,hiddenName: 'prop_default'
         ,id: 'prop_default{/literal}{$tv|default}{literal}'
-        ,store: new Ext.data.SimpleStore({
-            fields: ['v','d']
-            ,data: [[1,_('yes')],[0,_('no')]]
-        })
-        ,displayField: 'd'
-        ,valueField: 'v'
-        ,mode: 'local'
-        ,editable: false
-        ,forceSelection: true
-        ,typeAhead: false
-        ,triggerAction: 'all'
-        ,value: params['default'] || 'no'
+        ,value: (params['default']) ? !(params['default'] === 0 || params['default'] === 'false') : true
         ,listeners: oc
-        ,width: 200
+        ,anchor: '100%'
     },{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
         ,forId: 'prop_default{/literal}{$tv|default}{literal}'
