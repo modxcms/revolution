@@ -571,11 +571,11 @@ $_lang['setting_publish_default'] = 'Published default';
 $_lang['setting_publish_default_desc'] = 'Select \'Yes\' to make all new resources published by default.';
 $_lang['setting_publish_default_err'] = 'Please state whether or not you want documents to be published by default.';
 
-$_lang['setting_quick_search_in_content'] = 'Allow search in content';
-$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+$_lang['setting_quick_search_in_content'] = 'Keresés engedélyezése a tartalomban';
+$_lang['setting_quick_search_in_content_desc'] = 'Ha \'Igen\', az egyes elemek (erőforrás, sablon, kódegység) tartalma is elérhető a gyors keresésben.';
 
-$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
-$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+$_lang['setting_quick_search_result_max'] = 'Elemek száma a keresési eredményben';
+$_lang['setting_quick_search_result_max_desc'] = 'Az egyes elemek (erőforrás, sablon, kódegység) legnagyobb száma fajtánként a gyors keresés eredményében.';
 
 $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODX is loaded. Most users can leave this as index.php.';
@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID fo
 $_lang['setting_static_elements_automate_templates'] = 'Önműködővé tegye a sablonok állandó elemeit?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a sablonok állandó állományainak létrehozása és törlése.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
+$_lang['setting_static_elements_automate_tvs'] = 'Önműködővé tegye a sablonváltozók állandó elemeit?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a sablonváltozók állandó állományainak létrehozása és törlése.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Önműködővé tegye a kódegységek állandó elemeit?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'Ez önműködővé teszi az állandó állományok kezelését, mint például a kódegységek állandó állományainak létrehozása és törlése.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'Tree Root ID';
 $_lang['setting_tree_root_id_desc'] = 'Set this to a valid ID of a Resource to start the left Resource tree at below that node as the root. The user will only be able to see Resources that are children of the specified Resource.';
 
 $_lang['setting_tvs_below_content'] = 'Move TVs Below Content';
-$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
+$_lang['setting_tvs_below_content_desc'] = 'Állítsa Igenre a sablonváltozók tartalom alá mozgatásához az erőforrások szerkesztése közben.';
 
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Set this to Yes to output debug messages when using the UI for the default manager theme. You must use a browser that supports console.log.';
