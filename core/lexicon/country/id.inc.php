@@ -9,22 +9,22 @@
 *
 */
 
-$_country_lang["ad"] = 'Andorra'; // Andorra
+$_country_lang["ad"] = 'Bahasa Andorra'; // Andorra
 $_country_lang["ae"] = 'Uni Emirat Arab'; // United Arab Emirates
 $_country_lang["af"] = 'Afganistan'; // Afghanistan
 $_country_lang["ag"] = 'Antigua dan Barbuda'; // Antigua and Barbuda
-$_country_lang["ai"] = 'Anguilla'; // Anguilla
-$_country_lang["al"] = 'Albania'; // Albania
-$_country_lang["am"] = 'Armenia'; // Armenia
-$_country_lang["ao"] = 'Angola'; // Angola
+$_country_lang["ai"] = 'Bahasa Anguilla'; // Anguilla
+$_country_lang["al"] = 'Bahasa Albania'; // Albania
+$_country_lang["am"] = 'Bahasa Armenia'; // Armenia
+$_country_lang["ao"] = 'Bahasa Angola'; // Angola
 $_country_lang["aq"] = 'Antartika'; // Antarctica
-$_country_lang["ar"] = 'Argentina'; // Argentina
+$_country_lang["ar"] = 'Bahasa Argentina'; // Argentina
 $_country_lang["as"] = 'Samoa Amerika'; // American Samoa
-$_country_lang["at"] = 'Austria'; // Austria
-$_country_lang["au"] = 'Australia'; // Australia
-$_country_lang["aw"] = 'Aruba'; // Aruba
+$_country_lang["at"] = 'Bahasa Austria'; // Austria
+$_country_lang["au"] = 'Bahasa Australia'; // Australia
+$_country_lang["aw"] = 'Bahasa Aruba'; // Aruba
 $_country_lang["ax"] = 'Kepulauan Aland'; // Åland Islands
-$_country_lang["az"] = 'Azerbaijan'; // Azerbaijan
+$_country_lang["az"] = 'Bahasa Azerbaijan'; // Azerbaijan
 
 $_country_lang["ba"] = 'Bosnia dan Herzegowina'; // Bosnia and Herzegowina
 $_country_lang["bb"] = 'Barbados'; // Barbados
@@ -35,7 +35,7 @@ $_country_lang["bg"] = 'Bulgaria'; // Bulgaria
 $_country_lang["bh"] = 'Bahrain'; // Bahrain
 $_country_lang["bi"] = 'Burundi'; // Burundi
 $_country_lang["bj"] = 'Benin'; // Benin
-$_country_lang["bl"] = 'Saint Barthélemy'; // Saint Barthélemy
+$_country_lang["bl"] = 'Santo Bartolomeus'; // Saint Barthélemy
 $_country_lang["bm"] = 'Bermuda'; // Bermuda
 $_country_lang["bn"] = 'Brunei Darussalam'; // Brunei Darussalam
 $_country_lang["bo"] = 'Bolivia'; // Bolivia
@@ -45,7 +45,7 @@ $_country_lang["bs"] = 'Bahama'; // Bahamas
 $_country_lang["bt"] = 'Bhutan'; // Bhutan
 $_country_lang["bv"] = 'Pulau Bouvet'; // Bouvet Island
 $_country_lang["bw"] = 'Botswana'; // Botswana
-$_country_lang["by"] = 'Belarus'; // Belarus
+$_country_lang["by"] = 'Belarusia'; // Belarus
 $_country_lang["bz"] = 'Belize'; // Belize
 
 $_country_lang["ca"] = 'Kanada'; // Canada
@@ -63,17 +63,17 @@ $_country_lang["co"] = 'Kolombia'; // Colombia
 $_country_lang["cr"] = 'Kosta Rika'; // Costa Rica
 $_country_lang["cu"] = 'Kuba'; // Cuba
 $_country_lang["cv"] = 'Tanjung Verde'; // Cape Verde
-$_country_lang["cw"] = 'Curaçao'; // Curaçao
+$_country_lang["cw"] = 'Curacao'; // Curaçao
 $_country_lang["cx"] = 'Krismas, Kepulauan'; // Christmas Island
 $_country_lang["cy"] = 'Siprus'; // Cyprus
 $_country_lang["cz"] = 'Ceko'; // Czech Republic
 
 $_country_lang["de"] = 'Jerman'; // Germany
-$_country_lang["dj"] = 'Djibouti'; // Djibouti
+$_country_lang["dj"] = 'Jibuti'; // Djibouti
 $_country_lang["dk"] = 'Denmark'; // Denmark
 $_country_lang["dm"] = 'Dominika'; // Dominica
 $_country_lang["do"] = 'Dominika, Republik'; // Dominican Republic
-$_country_lang["dz"] = 'Algeria'; // Algeria
+$_country_lang["dz"] = 'Aljazair'; // Algeria
 
 $_country_lang["ec"] = 'Ekuador'; // Ecuador
 $_country_lang["ee"] = 'Estonia'; // Estonia
@@ -83,7 +83,7 @@ $_country_lang["er"] = 'Eritrea'; // Eritrea
 $_country_lang["es"] = 'Spanyol'; // Spain
 $_country_lang["et"] = 'Etiopia'; // Ethiopia
 
-$_country_lang["fi"] = 'Finland'; // Finland
+$_country_lang["fi"] = 'Finlandia'; // Finland
 $_country_lang["fj"] = 'Fiji'; // Fiji
 $_country_lang["fk"] = 'Falkland, Kepulauan'; // Falkland Islands (Malvinas)
 $_country_lang["fm"] = 'Mikronesia'; // Micronesia, Federated States of
@@ -117,7 +117,7 @@ $_country_lang["hr"] = 'Kroasia'; // Croatia
 $_country_lang["ht"] = 'Haiti'; // Haiti
 $_country_lang["hu"] = 'Hungaria'; // Hungary
 
-$_country_lang["id"] = 'Indonesia'; // Indonesia
+$_country_lang["id"] = 'Bahasa Indonesia'; // Indonesia
 $_country_lang["ie"] = 'Irlandia'; // Ireland
 $_country_lang["il"] = 'Israel'; // Israel
 $_country_lang["im"] = 'Isle of Man'; // Isle of Man
@@ -155,7 +155,7 @@ $_country_lang["ls"] = 'Lesotho'; // Lesotho
 $_country_lang["lt"] = 'Lituania'; // Lithuania
 $_country_lang["lu"] = 'Luksemburg'; // Luxembourg
 $_country_lang["lv"] = 'Latvia'; // Latvia
-$_country_lang["ly"] = 'Libya'; // Libya, ex: Libyan Arab Jamahiriya
+$_country_lang["ly"] = 'Libia'; // Libya, ex: Libyan Arab Jamahiriya
 
 $_country_lang["ma"] = 'Maroko'; // Morocco
 $_country_lang["mc"] = 'Monako'; // Monaco
@@ -183,7 +183,7 @@ $_country_lang["mz"] = 'Mozambik'; // Mozambique
 
 $_country_lang["na"] = 'Namibia'; // Namibia
 $_country_lang["nc"] = 'Kaledonia Baru'; // New Caledonia
-$_country_lang["ne"] = 'Niger'; // Niger
+$_country_lang["ne"] = 'Republik Niger'; // Niger
 $_country_lang["nf"] = 'Kepulauan Norfolk'; // Norfolk Island
 $_country_lang["ng"] = 'Nigeria'; // Nigeria
 $_country_lang["ni"] = 'Nikaragua'; // Nicaragua
@@ -217,7 +217,7 @@ $_country_lang["re"] = 'Reunion'; // Reunion
 $_country_lang["ro"] = 'Rumania'; // Romania
 $_country_lang["rs"] = 'Serbia'; //Serbia
 $_country_lang["ru"] = 'Rusia'; // Russian Federation
-$_country_lang["rw"] = 'Rwanda'; // Rwanda
+$_country_lang["rw"] = 'Ruwanda'; // Rwanda
 
 $_country_lang["sa"] = 'Arab Saudi'; // Saudi Arabia
 $_country_lang["sb"] = 'Kepulauan Solomon'; // Solomon Islands
@@ -225,7 +225,7 @@ $_country_lang["sc"] = 'Seychelles, Republik'; // Seychelles
 $_country_lang["sd"] = 'Sudan'; // Sudan
 $_country_lang["se"] = 'Swedia'; // Sweden
 $_country_lang["sg"] = 'Singapura'; // Singapore
-$_country_lang["sh"] = 'St. Helena'; // St. Helena
+$_country_lang["sh"] = 'Saint Helena'; // St. Helena
 $_country_lang["si"] = 'Slovenia'; // Slovenia
 $_country_lang["sj"] = 'Svalbard dan Jan Mayen, Kepulauan'; // Svalbard and Jan Mayen Islands
 $_country_lang["sk"] = 'Slovakia'; // Slovakia

@@ -41,7 +41,7 @@ $_lang['setting_err'] = 'Bitte überprüfen Sie Ihre Daten für die folgenden Fe
 $_lang['setting_err_ae'] = 'Eine Einstellung mit diesem Schlüssel existiert bereits. Bitte geben Sie einen anderen Namen für den Schlüssel an.';
 $_lang['setting_err_nf'] = 'Einstellung nicht gefunden.';
 $_lang['setting_err_ns'] = 'Einstellung nicht angegeben';
-$_lang['setting_err_remove'] = 'Beim Versuch, die Einstellung zu löschen, ist ein Fehler aufgetreten.';
+$_lang['setting_err_remove'] = 'Beim Versuch, die Einstellung zu entfernen, ist ein Fehler aufgetreten.';
 $_lang['setting_err_save'] = 'Beim Versuch, die Einstellung zu speichern, ist ein Fehler aufgetreten.';
 $_lang['setting_err_startint'] = 'Schlüsselnamen von Einstellungen dürfen nicht mit einer Ziffer beginnen.';
 $_lang['setting_err_invalid_document'] = 'Es gibt kein Dokument mit der ID %d. Bitte geben Sie ein existierendes Dokument an.';
@@ -690,7 +690,7 @@ $_lang['setting_send_poweredby_header'] = 'Sende X-Powered-By-Header';
 $_lang['setting_send_poweredby_header_desc'] = 'Wenn diese Option aktiviert ist, sendet MODX den "X-Powered-By"-Header, um diese Site als auf MODX basierend zu kennzeichnen. Dies hilft dabei, die Ermittlung der globalen MODX-Nutzung durch externe Tracker, die Ihre Site inspizieren, zu ermöglichen. Da dies erleichtert, zu erkennen, auf welchem System Ihre Site basiert, könnte dies ein leicht erhöhtes Sicherheitsrisiko darstellen, wenn eine Sicherheitslücke in MODX gefunden wird.';
 
 $_lang['setting_show_tv_categories_header'] = 'Reiter-Überschrift "Kategorien" für TVs anzeigen';
-$_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wurde, zeigt MODX die Überschrift "Kategorien" über dem ersten Kategorien-Reiter an, wenn Template-Variablen in einer Ressource bearbeitet werden.';
+$_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wurde, zeigt MODX die Überschrift "Kategorien" über dem ersten Kategorien-Reiter an, wenn TVs in einer Ressource bearbeitet werden.';
 
 $_lang['setting_signupemail_message'] = 'E-Mail nach Account-Erstellung';
 $_lang['setting_signupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
@@ -758,7 +758,7 @@ $_lang['setting_tree_default_sort_desc'] = 'Das Feld, nach dem der Ressourcen-Ba
 $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';
 
-$_lang['setting_tvs_below_content'] = 'Template-Variablen unter den Inhalt verschieben';
+$_lang['setting_tvs_below_content'] = 'TVs unter den Inhalt verschieben';
 $_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Template-Variablen beim Bearbeiten von Ressourcen unter das Eingabefeld für den Inhalt zu verschieben.';
 
 $_lang['setting_ui_debug_mode'] = 'Benutzerschnittstellen-Debug-Modus';

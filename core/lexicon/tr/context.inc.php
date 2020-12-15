@@ -28,7 +28,8 @@ $_lang['context_refresh'] = 'İçeriği Yenile';
 $_lang['context_remove'] = 'İçeriği Sil';
 $_lang['context_remove_confirm'] = 'Bu İçeriği silmek istediğinizden emin misiniz? Bu işlem kalıcıdır ve geri alınamaz.';
 $_lang['context_settings'] = 'İçerik Ayarları';
-$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
+$_lang['context_settings_desc'] = '
+Burada, bu Bağlama özel ayarları belirleyebilirsiniz. Bağlam ayarları, aynı anahtarla tüm Sistem Ayarlarını geçersiz kılar. <b> Her bir ayara [[++ tuş]] yer tutucusu aracılığıyla erişilebilecektir. </b>';
 $_lang['context_update'] = 'Kaynağı Güncelle';
 $_lang['context_with_key_not_found'] = 'Anahtar %s içeriği bulunamadı!';
 $_lang['contexts'] = 'İçerik';
