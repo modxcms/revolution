@@ -119,7 +119,6 @@ $_lang['start_day_desc'] = 'Hari indeks di mana minggu harus dimulai, berbasis 0
 $_lang['string'] = 'rangkaian';
 $_lang['string_format'] = 'Rangkaian Format';
 $_lang['style'] = 'Gaya';
-$_lang['tag_id'] = 'Tag ID';
 $_lang['tag_name'] = 'Nama tag';
 $_lang['target'] = 'Target';
 $_lang['text'] = 'Teks';
