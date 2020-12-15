@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Índice del primer día de la semana, empezando por 
 $_lang['string'] = 'Cadena de Caracteres';
 $_lang['string_format'] = 'Formato de Cadena de Caracteres';
 $_lang['style'] = 'Estilo';
-$_lang['tag_id'] = 'ID de Etiqueta';
 $_lang['tag_name'] = 'Nombre de Etiqueta';
 $_lang['target'] = 'Objetivo';
 $_lang['text'] = 'Texto';
