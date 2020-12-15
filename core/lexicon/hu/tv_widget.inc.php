@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'A hét kezdőnapjának sorszáma 0-tól kezdve (alap
 $_lang['string'] = 'Karakterlánc';
 $_lang['string_format'] = 'Karakterlánc alakja';
 $_lang['style'] = 'Stílus';
-$_lang['tag_id'] = 'Címke ID';
 $_lang['tag_name'] = 'Jelölő neve';
 $_lang['target'] = 'Cél';
 $_lang['text'] = 'Szöveg';
