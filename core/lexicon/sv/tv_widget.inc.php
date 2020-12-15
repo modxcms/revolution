@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Den dag som inleder en vecka. 0-baserad, standard ä
 $_lang['string'] = 'Sträng';
 $_lang['string_format'] = 'Strängformat';
 $_lang['style'] = 'Stil';
-$_lang['tag_id'] = 'Tagg-ID';
 $_lang['tag_name'] = 'Tagg-namn';
 $_lang['target'] = 'Mål';
 $_lang['text'] = 'Text';
