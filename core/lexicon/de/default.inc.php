@@ -374,6 +374,7 @@ $_lang['refresh_db'] = 'Leere den Datenbank-Abfrageergebnis-Cache';
 $_lang['refresh_default'] = 'Leere den Standard-Cache';
 $_lang['refresh_failure'] = 'Neuerstellung des Caches fehlgeschlagen! (HINWEIS: Dieser Cache-Bereich ist möglicherweise einfach leer)';
 $_lang['refresh_lexicon_topics'] = 'Leere den Lexikon-Themen-Cache';
+$_lang['refresh_media_sources'] = 'Leere den Medienquellen-Cache';
 $_lang['refresh_menu'] = 'Leere den Menü-Cache';
 $_lang['refresh_published'] = '<strong>[[+num]]</strong> Dokumente wurden veröffentlicht.';
 $_lang['refresh_resource'] = 'Leere den Ressourcen-Cache';
