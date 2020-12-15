@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Indice del giorno da cui dovrebbe cominciare la sett
 $_lang['string'] = 'Stringa';
 $_lang['string_format'] = 'Formato Stringa';
 $_lang['style'] = 'Stile';
-$_lang['tag_id'] = 'Tag ID';
 $_lang['tag_name'] = 'Nome Tag';
 $_lang['target'] = 'Target';
 $_lang['text'] = 'Testo';
