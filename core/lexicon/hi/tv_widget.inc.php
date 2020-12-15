@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'दिन सूचकांक जिस पर स
 $_lang['string'] = 'स्ट्रिंग';
 $_lang['string_format'] = 'स्ट्रिंग स्वरूप';
 $_lang['style'] = 'शैली';
-$_lang['tag_id'] = 'Tag ID';
 $_lang['tag_name'] = 'Tag Name';
 $_lang['target'] = 'लक्ष्य';
 $_lang['text'] = 'Text';
