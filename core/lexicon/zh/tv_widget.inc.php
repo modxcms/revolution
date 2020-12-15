@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Day index at which the week should begin, 0-based (d
 $_lang['string'] = 'String';
 $_lang['string_format'] = 'String Format';
 $_lang['style'] = 'Style';
-$_lang['tag_id'] = 'Tag ID';
 $_lang['tag_name'] = 'Tag Name';
 $_lang['target'] = '目标';
 $_lang['text'] = '文本';
