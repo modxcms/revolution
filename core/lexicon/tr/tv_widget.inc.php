@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Haftanın başlaması gereken gün indisi, 0-tabanl�
 $_lang['string'] = 'Karakter Dizisi';
 $_lang['string_format'] = 'Karakter Dizisi Biçimi';
 $_lang['style'] = 'Stil';
-$_lang['tag_id'] = 'Etiket Kimliği';
 $_lang['tag_name'] = 'Etiket İsmi';
 $_lang['target'] = 'Hedef';
 $_lang['text'] = 'Metin';
