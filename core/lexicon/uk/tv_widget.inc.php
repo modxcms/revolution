@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Номер дня, з якого починаєть�
 $_lang['string'] = 'Рядок';
 $_lang['string_format'] = 'Формат рядку';
 $_lang['style'] = 'Стиль';
-$_lang['tag_id'] = 'ID теґу';
 $_lang['tag_name'] = 'Ім\'я теґу';
 $_lang['target'] = 'Target';
 $_lang['text'] = 'Текст';
