@@ -120,7 +120,6 @@ $_lang['start_day_desc'] = '週を開始する曜日を、日曜日（0）～土
 $_lang['string'] = '文字列';
 $_lang['string_format'] = '文字列の形式';
 $_lang['style'] = 'スタイル';
-$_lang['tag_id'] = 'タグID';
 $_lang['tag_name'] = 'タグ名';
 $_lang['target'] = 'ターゲット';
 $_lang['text'] = 'テキスト';
