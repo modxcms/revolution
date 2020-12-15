@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Jour débutant la semaine, basé sur 0 (0 par défau
 $_lang['string'] = 'Chaîne de caractères';
 $_lang['string_format'] = 'Format des caractères';
 $_lang['style'] = 'Style';
-$_lang['tag_id'] = 'ID de la balise';
 $_lang['tag_name'] = 'Nom de la balise';
 $_lang['target'] = 'Cible';
 $_lang['text'] = 'Texte';
