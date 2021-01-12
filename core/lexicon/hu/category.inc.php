@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Nincs kódegység ehhez a kategóriához.';
 $_lang['category_no_plugins'] = 'Nincs beépülő ehhez a kategóriához.';
 $_lang['category_no_snippets'] = 'Nincsen kódrészlet ehhez a kategóriához.';
 $_lang['category_no_templates'] = 'Nincs sablon ehhez a kategóriához.';
-$_lang['category_no_template_variables'] = 'Nincs sablon változói ehhez a kategóriához.';
+$_lang['category_no_template_variables'] = 'Nincs sablonváltozó ehhez a kategóriához.';
 $_lang['category_rename'] = 'Kategória átnevezése';
 $_lang['category_remove'] = 'Kategória törlése';

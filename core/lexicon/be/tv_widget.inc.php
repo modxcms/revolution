@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Нумар дня, з якога павінен па
 $_lang['string'] = 'Радок';
 $_lang['string_format'] = 'Фармат радку';
 $_lang['style'] = 'Стыль';
-$_lang['tag_id'] = 'ID тэга';
 $_lang['tag_name'] = 'Назва тэга';
 $_lang['target'] = 'Мэта';
 $_lang['text'] = 'Тэкст';

@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'Zadejte ID dokumentu, která bude
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'ID kořenu stromu';
 $_lang['setting_tree_root_id_desc'] = 'Nastavte ID zdroje, pod kterým začne levý strom dokumentů. Uživatel bude mít možnost vidět pouze potomky tohoto zdroje.';
 
 $_lang['setting_tvs_below_content'] = 'Přesunout TVs pod obsah dokumentu';
-$_lang['setting_tvs_below_content_desc'] = 'Nastavte toto na "Ano", pokud chcete přessunout Template Variables ze záložky TVs dolu pod obsah dokumentu.';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'UI Debug Mode';
 $_lang['setting_ui_debug_mode_desc'] = 'Nastavte na "Ano" pro výpis ladících zpráv používáte-li UI pro výchozí téma správce obsahu. Musíte používat prohlížeč podporující console.log.';

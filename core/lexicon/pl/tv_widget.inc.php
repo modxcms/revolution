@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Day index at which the week should begin, 0-based (d
 $_lang['string'] = 'Ciąg tekstu';
 $_lang['string_format'] = 'Format linijek tekstu';
 $_lang['style'] = 'Styl';
-$_lang['tag_id'] = 'ID tagu';
 $_lang['tag_name'] = 'Nazwa tagu';
 $_lang['target'] = 'Cel';
 $_lang['text'] = 'Tekst';

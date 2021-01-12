@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'V této kategorii nejsou žádné chunky.';
 $_lang['category_no_plugins'] = 'V této kategorii nejsou žádné pluginy.';
 $_lang['category_no_snippets'] = 'V této kategorii nejsou žádné snippety.';
 $_lang['category_no_templates'] = 'V této kategorii nejsou žádné šablony.';
-$_lang['category_no_template_variables'] = 'V této kategorii nejsou žádné template variable.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Přejmenovat kategorii';
 $_lang['category_remove'] = 'Delete Category';

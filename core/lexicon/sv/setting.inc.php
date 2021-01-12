@@ -571,11 +571,11 @@ $_lang['setting_publish_default'] = 'Publicerade som standard';
 $_lang['setting_publish_default_desc'] = 'Välj "Ja" för att göra alla nya resurser publicerade som standard.';
 $_lang['setting_publish_default_err'] = 'Ange om du vill att dokument ska publiceras som standard eller inte.';
 
-$_lang['setting_quick_search_in_content'] = 'Allow search in content';
-$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+$_lang['setting_quick_search_in_content'] = 'Tillåt sökningar i innehåll';
+$_lang['setting_quick_search_in_content_desc'] = 'Om den här sätts till "Ja" så kommer även innehåll i element (resurser, mallar, chunks etc) att vara tillgängligt vid snabbsökning.';
 
-$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
-$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+$_lang['setting_quick_search_result_max'] = 'Antal träffar i sökresultat';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximalt antal träffar för varje typ (resurs, mall, chunk etc) i snabbsökresultat.';
 
 $_lang['setting_request_controller'] = 'Anropscontrollerns filnamn';
 $_lang['setting_request_controller_desc'] = 'Filnamnet på den huvudsakliga anropscontrollern från vilken MODX laddas. De flesta användare kan låta denna vara index.php.';

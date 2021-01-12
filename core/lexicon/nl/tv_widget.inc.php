@@ -120,7 +120,6 @@ $_lang['start_day_desc'] = 'Dag index waarop de week moet beginnen, 0-based (sta
 $_lang['string'] = 'Tekenreeks';
 $_lang['string_format'] = 'String Formaat';
 $_lang['style'] = 'Stijl';
-$_lang['tag_id'] = 'Tag ID';
 $_lang['tag_name'] = 'Tag Naam';
 $_lang['target'] = 'Bestemming';
 $_lang['text'] = 'Text';

@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'Por favor, especifíca el ID del 
 $_lang['setting_static_elements_automate_templates'] = '¿Automatizar elementos estáticos para plantillas?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = '¿Automatizar elementos estáticos para las variables de plantilla?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = '¿Automatizar elementos estáticos para chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'ID de la Raíz de Árbol';
 $_lang['setting_tree_root_id_desc'] = 'Introduce el ID de un Recurso válido para que al iniciar el árbol de Recursos de la parte lateral izquierda tome este nodo como la raíz. El usuario sólo podra ver Recursos que son hijos del Recurso especificado.';
 
 $_lang['setting_tvs_below_content'] = 'Mostrar Variables de Plantilla bajo el Contenido';
-$_lang['setting_tvs_below_content_desc'] = 'Configurar como "Sí" para mover las variables de plantilla debajo del campo Contenido cuando se edite un recurso.';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'Modo de Depuración en la Interfaz de Usuario';
 $_lang['setting_ui_debug_mode_desc'] = 'Configurar como "Sí" para mostrar mensajes de depuración al utilizar la interfaz gráfic de la plantilla predeterminada del panel de administración. El navegador debe soportar "console.log".';

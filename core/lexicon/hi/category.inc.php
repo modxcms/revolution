@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'इस Category के लिए कोई chunk
 $_lang['category_no_plugins'] = 'इस Category के लिए कोई plugins नहीं.';
 $_lang['category_no_snippets'] = 'इस Category के लिए कोई snippets नहीं।';
 $_lang['category_no_templates'] = 'इस Category के लिए कोई templates नहीं।';
-$_lang['category_no_template_variables'] = 'इस Category के लिए कोई template variables नहीं।';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Category का नाम बदलें';
 $_lang['category_remove'] = 'Delete Category';

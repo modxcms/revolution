@@ -674,8 +674,8 @@ $_lang['setting_site_unavailable_page_err'] = 'Калі ласка, пазнач
 $_lang['setting_static_elements_automate_templates'] = 'Аўтаматызаваць статычныя элементы для шаблонаў?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Аўтаматызаваць статычныя элементы для зменных шаблонаў?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Аўтаматызаваць статычныя элементы для чанкаў?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -713,7 +713,7 @@ $_lang['setting_tree_root_id'] = 'ID кораня дрэва рэсурсаў';
 $_lang['setting_tree_root_id_desc'] = 'Пазначце ID рэсурсу, які будзе каранём дрэва рэсурсаў. Карыстальнік будзе мець магчымасць бачыць толькі даччыныя рэсурсы гэтага рэсурсу.';
 
 $_lang['setting_tvs_below_content'] = 'Перасунуць зменныя шаблонаў ніжэй пад змест';
-$_lang['setting_tvs_below_content_desc'] = 'Калі выбрана «Так», зменныя шаблонаў будуць змешчаны ніжэй галоўнага поля са зместам падчас рэдагавання рэсурсу.';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'Рэжым адладкі UI сістэмы кіравання';
 $_lang['setting_ui_debug_mode_desc'] = 'Калі выбрана «Так», у кансоль браўзэра будуць выводзіцца адладкавыя паведамленні UI сістэмы кіравання. Вы павінны выкарыстоўваць браўзэр, які падтрымлівае console.log.';

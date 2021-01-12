@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Index dne, kterým chcete, aby začínal týden. Po�
 $_lang['string'] = 'Řetězec';
 $_lang['string_format'] = 'Formát řetězce';
 $_lang['style'] = 'Styl';
-$_lang['tag_id'] = 'ID tagu';
 $_lang['tag_name'] = 'Název tagu';
 $_lang['target'] = 'Cíl';
 $_lang['text'] = 'Text';

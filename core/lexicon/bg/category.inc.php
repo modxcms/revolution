@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Няма chunks за тази категория
 $_lang['category_no_plugins'] = 'Няма плъгини за тази категория.';
 $_lang['category_no_snippets'] = 'Няма снипети за тази категория.';
 $_lang['category_no_templates'] = 'Няма шаблони за тази категория.';
-$_lang['category_no_template_variables'] = 'Няма шаблонни променливи за тази категория.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Преименувай Категория';
 $_lang['category_remove'] = 'Delete Category';

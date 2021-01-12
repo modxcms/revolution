@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'Veuillez indiquer l\'ID du docume
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'ID racine de l\'arborescence';
 $_lang['setting_tree_root_id_desc'] = 'Indiquez un ID valide de ressource pour démarrer l\'arborescence de ressource (à gauche) en dessous de cette ressource. Les utilisateurs verront uniquement les ressources qui sont enfants de la ressource spécifiée.';
 
 $_lang['setting_tvs_below_content'] = 'TVs en dessous du contenu';
-$_lang['setting_tvs_below_content_desc'] = 'Activez cette option pour afficher les variables de modèle en dessous du contenu, lors de l\'édition de ressource.';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'Mode debug de l\'UI';
 $_lang['setting_ui_debug_mode_desc'] = 'Activez cette option pour afficher les messages de debug lors de l\'utilisation du thème de manager par défaut. Vous devez utiliser un navigateur qui supporte la fonction console.log().';

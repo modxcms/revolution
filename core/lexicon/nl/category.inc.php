@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Geen chunks voor deze categorie.';
 $_lang['category_no_plugins'] = 'Geen plugins voor deze categorie.';
 $_lang['category_no_snippets'] = 'Geen snippets voor deze categorie.';
 $_lang['category_no_templates'] = 'Geen templates voor deze categorie.';
-$_lang['category_no_template_variables'] = 'Geen template variables voor deze categorie.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Categorie hernoemen';
 $_lang['category_remove'] = 'Delete Category';

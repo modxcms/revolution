@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'Der Index des Tages, an dem die Woche beginnen soll,
 $_lang['string'] = 'Zeichenkette';
 $_lang['string_format'] = 'Zeichenkettenformat';
 $_lang['style'] = 'CSS-Style';
-$_lang['tag_id'] = 'Tag-ID';
 $_lang['tag_name'] = 'Tag-Name';
 $_lang['target'] = 'Ziel';
 $_lang['text'] = 'Text';

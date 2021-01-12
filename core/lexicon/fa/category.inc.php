@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'چانکی در این دسته قرار ندا�
 $_lang['category_no_plugins'] = 'پلاگینی در این دسته قرار ندارد.';
 $_lang['category_no_snippets'] = 'اسنیپتی در این دسته قرار ندارد.';
 $_lang['category_no_templates'] = 'قالبی در این دسته قرار ندارد.';
-$_lang['category_no_template_variables'] = 'متغیرِ قالبی در این دسته قرار ندارد.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'تغییر نام دسته';
 $_lang['category_remove'] = 'Delete Category';

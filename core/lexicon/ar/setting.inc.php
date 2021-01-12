@@ -678,8 +678,8 @@ $_lang['setting_site_unavailable_page_err'] = 'الرجاء تحديد معرف 
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -716,7 +716,7 @@ $_lang['setting_tree_root_id'] = 'معرف جذر الشجرة';
 $_lang['setting_tree_root_id_desc'] = 'اضبط هذا إلى معرف صالح لمصدر لبدء شجرة المصدر اليسرى عند أسفل تلك العقدة كجذر. يمكن للمستخدم أن يرى فقط المصادر الأبناء للمصدر المحدد.';
 
 $_lang['setting_tvs_below_content'] = 'انقل عناصر القالب أسفل المحتوى';
-$_lang['setting_tvs_below_content_desc'] = 'اضبط هذا إلى نعم لنقل عناصر القالب أسفل المحتوى عند تعديل المصادر.';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'وضع تصحيح أخطاء واجهة المستخدم';
 $_lang['setting_ui_debug_mode_desc'] = 'اضبط هذا إلى نعم لإخراج رسائل تصحيح الأخطاء عند استخدام UI لموضوع المدير الافتراضي: يجب عليك أن تستخدم المتصفح الذي يدعم  console.log.';

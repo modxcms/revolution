@@ -118,7 +118,6 @@ $_lang['start_day_desc'] = 'index dia em que a semana deve começar, baseado em 
 $_lang['string'] = 'String';
 $_lang['string_format'] = 'Formato de String';
 $_lang['style'] = 'Estilo';
-$_lang['tag_id'] = 'ID da tag';
 $_lang['tag_name'] = 'Nome da Tag';
 $_lang['target'] = 'Destino';
 $_lang['text'] = 'Texto';

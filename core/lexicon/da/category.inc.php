@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Ingen chunks i denne kategori.';
 $_lang['category_no_plugins'] = 'Ingen plugins i denne kategori.';
 $_lang['category_no_snippets'] = 'Ingen snippets i denne kategori.';
 $_lang['category_no_templates'] = 'Ingen skabeloner i denne kategori.';
-$_lang['category_no_template_variables'] = 'Ingen skabelonvariabler i denne kategori.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Omdøb kategori';
 $_lang['category_remove'] = 'Delete Category';

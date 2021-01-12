@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'Chunk-e ei ole selles kategoorias.';
 $_lang['category_no_plugins'] = 'Plugin-aid ei ole selles kategoorias.';
 $_lang['category_no_snippets'] = 'Snippet-eid ei ole selles kategoorias.';
 $_lang['category_no_templates'] = 'Template-sid ei ole selles kategoorias.';
-$_lang['category_no_template_variables'] = 'Template muutujaid ei ole selles kategoorias.';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'Nimeta ümber Kategooria';
 $_lang['category_remove'] = 'Delete Category';

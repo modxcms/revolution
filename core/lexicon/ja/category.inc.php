@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'このカテゴリーに属するチャンクは
 $_lang['category_no_plugins'] = 'このカテゴリーに属するプラグインはありません。';
 $_lang['category_no_snippets'] = 'このカテゴリーに関するスニペットはありません。';
 $_lang['category_no_templates'] = 'このカテゴリーに属するテンプレートはありません。';
-$_lang['category_no_template_variables'] = 'このカテゴリーに属するテンプレート変数はありません。';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'カテゴリー名の変更';
 $_lang['category_remove'] = 'Delete Category';

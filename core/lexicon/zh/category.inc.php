@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = '此类别无模板片段。';
 $_lang['category_no_plugins'] = '此类别无插件。';
 $_lang['category_no_snippets'] = '此类别无代码片段。';
 $_lang['category_no_templates'] = '此类别无模板。';
-$_lang['category_no_template_variables'] = '此类别无模板变量。';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = '重命名类别';
 $_lang['category_remove'] = 'Delete Category';

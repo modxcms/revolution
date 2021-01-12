@@ -25,6 +25,6 @@ $_lang['category_no_chunks'] = 'ไม่มีชังค์สำหรับ
 $_lang['category_no_plugins'] = 'ไม่มีปลั๊กอินสำหรับหมวดหมู่นี้';
 $_lang['category_no_snippets'] = 'ไม่มีสนิปเพตสำหรับหมวดหมู่นี้';
 $_lang['category_no_templates'] = 'ไม่มีแม่แบบสำหรับหมวดหมู่นี้';
-$_lang['category_no_template_variables'] = 'ไม่มีตัวแปรแม่แบบสำหรับหมวดหมู่นี้';
+$_lang['category_no_template_variables'] = 'No TV for this category.';
 $_lang['category_rename'] = 'เปลี่ยนชื่อหมวดหมู่';
 $_lang['category_remove'] = 'Delete Category';

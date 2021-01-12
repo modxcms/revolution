@@ -673,8 +673,8 @@ $_lang['setting_site_unavailable_page_err'] = 'กรุณาระบุไอ
 $_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'แผนผังไอดีของรู�
 $_lang['setting_tree_root_id_desc'] = 'ตั้งไอดีที่ถูกต้องของรีซอร์สเพื่อเริ่มแผนผังด้านซ้ายมือข้างล่างที่โหนดเป็นรูท ผู้ใช้จะสามารถเห็นรีซอร์สที่เป็นลูกของรีซอร์สที่ระบุเท่านั้น';
 
 $_lang['setting_tvs_below_content'] = 'ย้ายตัวแปรแม่แบบไปไว้ข้างล่างเนื้อหา';
-$_lang['setting_tvs_below_content_desc'] = 'ตั้งค่านี้เป็นใช่เพื่อย้ายตัวแปรแม่แบบไปไว้ข้างล่างเนื้อหาเมื่อแก้ไขรีซอร์ส';
+$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
 
 $_lang['setting_ui_debug_mode'] = 'ส่วนติดต่อผู้ใช้ในโหมดดีบั๊ก';
 $_lang['setting_ui_debug_mode_desc'] = 'ตั้งค่านี้เป็นใช่เพื่อแสดงข้อความผลลัพธ์การดีบั๊กเมื่อใช้ส่วนติดต่อผู้ใช้สำหรับธีมปริยายของเมเนเจอร์ คุณต้องใช้เบราว์เซอร์ที่สนับสนุน console.log ด้วย';
