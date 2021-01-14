@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['attributes'] = 'Tulajdonságok';
+$_lang['attributes'] = 'Jellemzők';
 $_lang['capitalize'] = 'Nagy kezdőbetű';
 $_lang['checkbox'] = 'Jelölőnégyzet';
 $_lang['checkbox_columns'] = 'Oszlopok';
@@ -16,7 +16,7 @@ $_lang['combo_allowaddnewdata'] = 'Új elemek hozzáadásának engedélyezése';
 $_lang['combo_allowaddnewdata_desc'] = 'Ha igen, hozzá lehet adni új elemeket a felsoroláshoz. Alapértelmezetten nem lehet.';
 $_lang['combo_forceselection'] = 'Választás csak a felsorolásból';
 $_lang['combo_forceselection_desc'] = 'Gépelés kiegészítésénél ha igenre van állítva, csak a felsorolás elemeit lehet megadni.';
-$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
+$_lang['combo_forceselection_multi_desc'] = 'Ha Igen van beállítva, csak a felsorolásban már szereplő elemek engedélyezettek. Ha Nem van beállítva, új értékek is bevihetők.';
 $_lang['combo_listempty_text'] = 'Üres felsorolás szövege';
 $_lang['combo_listempty_text_desc'] = 'Mutassa ezt a szöveget, ha gépelés kiegészítésénél a felhasználó a felsorolásban nem szereplő értéket ad meg.';
 $_lang['combo_listheight'] = 'Felsorolás magassága';
@@ -25,10 +25,10 @@ $_lang['combo_listwidth'] = 'Felsorolás szélessége';
 $_lang['combo_listwidth_desc'] = 'A lenyíló választék szélessége képpontban. Alapértéke a vegyes szövegbeviteli doboz szélessége.';
 $_lang['combo_maxheight'] = 'Legnagyobb magasság';
 $_lang['combo_maxheight_desc'] = 'A lenyíló választék legnagyobb magassága képpontban, mielőtt megjelennek a gördítősávok (alapértéke 300).';
-$_lang['combo_stackitems'] = 'Stack Selected Items';
-$_lang['combo_stackitems_desc'] = 'When set to Yes, the items will be stacked 1 per line. Defaults to No, which displays the items inline.';
+$_lang['combo_stackitems'] = 'Kiválasztott tételek halmozása';
+$_lang['combo_stackitems_desc'] = 'Ha Igen van beállítva, soronként 1 tétel jelenik meg. Alapértéke Nem, amikor a tételeket egy sorban jeleníti meg.';
 $_lang['combo_title'] = 'Felsorolás fejléce';
-$_lang['combo_title_desc'] = 'If supplied, a header element is created containing this text and added into the top of the dropdown list.';
+$_lang['combo_title_desc'] = 'Ha meg van adva, egy fejléc elem jön létre, ami tartalmazza ezt a szöveget, és a lenyíló választék tetején szerepel.';
 $_lang['combo_typeahead'] = 'Gépeléskiegészítés engedélyezése';
 $_lang['combo_typeahead_desc'] = 'If yes, populate and autoselect the remainder of the text being typed after a configurable delay (Type-Ahead Delay) if it matches a known value (defaults to off).';
 $_lang['combo_typeahead_delay'] = 'Gépeléskiegészítés késedelme';
@@ -40,17 +40,17 @@ $_lang['default'] = 'Alapértelmezett';
 $_lang['delim'] = 'Határolójel';
 $_lang['delimiter'] = 'Határolójel';
 $_lang['disabled_dates'] = 'Nem választható dátumok';
-$_lang['disabled_dates_desc'] = 'A comma-separated list of "dates" to disable, as strings. These strings will be used to build a dynamic regular expression so they are very powerful. Some examples:<br />
-- Disable these exact dates: 2003-03-08,2003-09-16<br />
-- Disable these days for every year: 03-08,09-16<br />
-- Only match the beginning (useful if you are using short years): ^03-08<br />
-- Disable every day in March 2006: 03-..-2006<br />
-- Disable every day in every March: ^03<br />
-Note that the format of the dates included in the list should exactly match the format config. In order to support regular expressions, if you are using a date format that has "." in it, you will have to escape the dot when restricting dates.';
+$_lang['disabled_dates_desc'] = 'Vesszővel elválasztott felsorolása a kizárt dátumoknak, szövegesen. Ezek a szövegek dinamikus reguláris kifejezéseket alkotnak, ezért nagyon hatékonyak. Néhány példa:<br />
+- Egyes napok kizárása: 2003-03-08,2003-09-16<br />
+- Egyes napok kizárása minden évben: 03-08,09-16<br />
+- Csak a kezdetre illeszkedés (rövid évek használatánál hasznos): ^03-08<br />
+- Minden nap kizárása 2006 márciusban: 03-..-2006<br />
+- Minden nap kizárása minden márciusban: ^03<br />
+Fontos, hogy a felsorolásban szereplő dátumok formátuma pontosan egyezzen a beállított formátummal. A reguláris kifejezések támogatása miatt ha a dátum formátumában szerepel a ".", hatástalanítania kell a pontot a dátumok kizárásánál.';
 $_lang['disabled_days'] = 'Nem választható napok';
-$_lang['disabled_days_desc'] = 'A comma-separated list of days to disable, 0-based (defaults to null). Some examples:<br />
-- Disable Sunday and Saturday: 0,6<br />
-- Disable weekdays: 1,2,3,4,5';
+$_lang['disabled_days_desc'] = 'Vesszővel elválasztott felsorolása a kizárt napoknak, 0-alapú (alapértéke null). Néhány példa:<br />
+- Vasárnap és szombat kizárása: 0,6<br />
+- Hétköznapok kizárása: 1,2,3,4,5';
 $_lang['dropdown'] = 'Legördülő menü';
 $_lang['earliest_date'] = 'Legkorábbi dátum';
 $_lang['earliest_date_desc'] = 'A legkorábbi választható dátum.';
@@ -98,7 +98,7 @@ $_lang['radio_columns_desc'] = 'Hány oszlopban jelenjenek meg a választógombo
 $_lang['rawtext'] = 'Nyers szöveg (elavult)';
 $_lang['rawtextarea'] = 'Nyers szövegmező (elavult)';
 $_lang['required'] = 'Üres engedélyezése';
-$_lang['required_desc'] = 'If set to No, MODX will not allow the user to save the Resource until a valid, non-blank value has been entered.';
+$_lang['required_desc'] = 'Ha Nem-re van állítva, a MODX nem engedi az erőforrás mentését addig, amíg egy érvényes, nem üres érték nincs megadva.';
 $_lang['resourcelist'] = 'Erőforrások felsorolása';
 $_lang['resourcelist_depth'] = 'Mélység';
 $_lang['resourcelist_depth_desc'] = 'The levels deep that the query to grab the list of Resources will go. The default is 10 deep.';
@@ -107,9 +107,9 @@ $_lang['resourcelist_includeparent_desc'] = 'If Yes, will include the Resources 
 $_lang['resourcelist_limitrelatedcontext'] = 'Szűkítse a kapcsolódó környezetre';
 $_lang['resourcelist_limitrelatedcontext_desc'] = 'If Yes, will only include the Resources related to the context of the current Resource.';
 $_lang['resourcelist_limit'] = 'Korlátoz';
-$_lang['resourcelist_limit_desc'] = 'The number of Resources to limit to in the list. 0 or empty means infinite.';
+$_lang['resourcelist_limit_desc'] = 'A felsorolásban megjeleníthető erőforrások legnagyobb száma. 0 vagy üres esetén végtelen.';
 $_lang['resourcelist_parents'] = 'Szülők';
-$_lang['resourcelist_parents_desc'] = 'A list of IDs to grab children for the list.';
+$_lang['resourcelist_parents_desc'] = 'Azonosítók felsorolása, amelyeknek az alárendelt elemeit összegyűjti a felsoroláshoz.';
 $_lang['resourcelist_where'] = 'Keresési feltételek';
 $_lang['resourcelist_where_desc'] = 'Az erőforrások lekérésénél használható keresőfeltételek JSON objektuma. (Nem támogatja a sablonváltozók keresését.)<br/>Példák: [{"template:=":"4"}], [{"pagetitle:!=":"Nyitó"}], [{"parent:IN":[34,56]}]';
 $_lang['richtext'] = 'Formázott szöveg';

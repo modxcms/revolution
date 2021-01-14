@@ -8,7 +8,7 @@
 $_lang['element'] = 'Елемент';
 $_lang['element_err_nf'] = 'Елемент не знайдений.';
 $_lang['element_err_ns'] = 'Елемент не вказаний.';
-$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
+$_lang['element_err_staticfile_exists'] = 'Статичний файл вже існує в зазначеному шляху.';
 $_lang['element_static_source_immutable'] = 'Статичний файл, вказаний в якості джерела елементу, не доступний для запису! Ви не можете редагувати вміст цього елементу у менеджері.';
 $_lang['element_static_source_protected_invalid'] = 'Ви не можете зберігати елемент у каталозі з конфігурацією MODX; цей каталог захищений і недоступний.';
 $_lang['is_static'] = 'Статичний';
