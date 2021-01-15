@@ -1,6 +1,6 @@
 <modx>
     <database_type>mysql</database_type>
-    <database_server>localhost</database_server>
+    <database_server>127.0.0.1</database_server>
     <database>{$dbName}</database>
     <database_user>{$dbUser}</database_user>
     <database_password>{$dbPass}</database_password>

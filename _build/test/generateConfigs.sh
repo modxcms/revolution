@@ -50,11 +50,11 @@ BUILDDIR=$BUILDDIR"/"
 
 echo "create database"
 if [ "$DBPASS" = "" ]; then
-    mysql -u$DBUSER -e "drop database if exists "$DBNAME
-    mysql -u$DBUSER -e "create database "$DBNAME
+    mysql -h"127.0.0.1" -u$DBUSER -e "drop database if exists "$DBNAME
+    mysql -h"127.0.0.1" -u$DBUSER -e "create database "$DBNAME
 else
-    mysql -u$DBUSER -p$DBPASS -e "drop database if exists "$DBNAME
-    mysql -u$DBUSER -p$DBPASS -e "create database "$DBNAME
+    mysql -h"127.0.0.1" -u$DBUSER -p$DBPASS -e "drop database if exists "$DBNAME
+    mysql -h"127.0.0.1" -u$DBUSER -p$DBPASS -e "create database "$DBNAME
 fi
 
 echo "create properties.inc.php"
