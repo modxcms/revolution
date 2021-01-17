@@ -28,7 +28,7 @@ $_lang['config_file_perms_set'] = 'Права доступу до конфігу
 $_lang['config_file_written'] = 'Конфігураційний файл був успішно записаний.';
 $_lang['config_key'] = 'MODX конфігурації ключ';
 $_lang['config_key_change'] = 'Якщо Ви бажаєте змінити ключ конфігурації MODX, <a id="cck-href" href="javascript:void(0);">будь ласка, натисніть тут.</a>';
-$_lang['config_key_override'] = 'If you wish to run setup on a configuration key other than the one currently specified in your <code>setup/includes/config.core.php</code>, please specify it below.';
+$_lang['config_key_override'] = 'Якщо Ви хочете запустити установку з ключем конфігурації, відмінним від заданого за замовчуванням у вашому <pre>setup/includes/config.core.php</pre>, будь ласка, вкажіть його нижче.';
 $_lang['config_not_writable_err'] = 'Здійснено спробу змінити налаштування в setup/includes/config.core.php, але файл не є записуваним. Зробіть файл відкритим для запису або відредагуйте файл вручну перед продовженням.';
 $_lang['connection_character_set'] = 'Кодування символів підключення:';
 $_lang['connection_collation'] = 'Співставлення:';
@@ -154,7 +154,7 @@ $_lang['modx_class_err_nf'] = 'Не вдалося підключити файл
 $_lang['modx_configuration_file'] = 'Конфігураційний файл MODX';
 $_lang['modx_err_instantiate'] = 'Не вдалося створити об\'єкт класу MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Не вдалося ініціалізувати контекст менеджера MODX.';
-$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] the <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF) project. All rights reserved. MODX is licensed under the GNU GPL.';
+$_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] для <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF). Всі права захищені. MODX розповсюджується за ліцензією GNU GPL.';
 $_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
 $_lang['modx_install'] = 'Встановлення MODX';
 $_lang['modx_install_complete'] = 'Встановлення MODX завершено';
@@ -210,7 +210,7 @@ $_lang['setup_err_core_comp'] = 'Каталог core/components/ не був с�
 $_lang['skip_to_bottom'] = 'прокрутити вниз';
 $_lang['step_welcome'] = 'Ласкаво просимо';
 $_lang['step_options'] = 'Опції';
-$_lang['step_connect'] = 'Connect';
+$_lang['step_connect'] = 'Підключення';
 $_lang['step_test'] = 'Перевірка';
 $_lang['step_contexts'] = 'Контексти';
 $_lang['step_install'] = 'Встановити';
