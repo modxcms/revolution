@@ -11,6 +11,10 @@
 
 class phpthumb_functions {
 
+	public static function is_windows() {
+		return (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN');
+	}
+
 	public static function user_function_exists($functionname) {
 		if (function_exists('get_defined_functions')) {
 			static $get_defined_functions = array();
@@ -239,7 +243,7 @@ class phpthumb_functions {
 	}
 
 	public static function ImageHexColorAllocate(&$gdimg_hexcolorallocate, $HexColorString, $dieOnInvalid=false, $alpha=false) {
-		if (!is_resource($gdimg_hexcolorallocate)) {
+		if (!is_resource($gdimg_hexcolorallocate) && !(is_object($gdimg_hexcolorallocate) && $gdimg_hexcolorallocate instanceOf \GdImage)) {
 			die('$gdimg_hexcolorallocate is not a GD resource in ImageHexColorAllocate()');
 		}
 		if (self::IsHexColor($HexColorString)) {
@@ -261,7 +265,7 @@ class phpthumb_functions {
 
 
 	public static function GetPixelColor(&$img, $x, $y) {
-		if (!is_resource($img)) {
+		if (!is_resource($img) && !(is_object($img) && $img instanceOf \GdImage)) {
 			return false;
 		}
 		return @imagecolorsforindex($img, @imagecolorat($img, $x, $y));
@@ -841,17 +845,30 @@ class phpthumb_functions {
 		return false;
 	}
 
-	public static function EnsureDirectoryExists($dirname, $mask = 0755) {
-		$directory_elements = explode(DIRECTORY_SEPARATOR, $dirname);
-		$startoffset = (!$directory_elements[0] ? 2 : 1);  // unix with leading "/" then start with 2nd element; Windows with leading "c:\" then start with 1st element
-		$open_basedirs = preg_split('#[;:]#', ini_get('open_basedir'));
+	public static function EnsureDirectoryExists($dirname, $mask=0755) {
+		// https://www.php.net/manual/en/ini.core.php#ini.open-basedir says:
+		// "Under Windows, separate the directories with a semicolon. On all other systems, separate the directories with a colon."
+		$config_open_basedir = ini_get('open_basedir');
+		$startoffset = 2; // 1-based counting, first element to left of first directory separator will either be drive letter (Windows) or blank (unix). May be overridden below.
+		if (self::is_windows()) {
+			$delimiter = ';';
+			$case_insensitive_pathname = true;
+			// unix OSs will always use "/", some Windows configurations you may find "/" used interchangeably with the OS-correct "\", so standardize for ease of comparison
+			$dirname             = str_replace('/', DIRECTORY_SEPARATOR, $dirname);
+			$config_open_basedir = str_replace('/', DIRECTORY_SEPARATOR, $config_open_basedir);
+		} else {
+			$delimiter = ':';
+			$case_insensitive_pathname = false;
+		}
+		$open_basedirs = explode($delimiter, $config_open_basedir);
 		foreach ($open_basedirs as $key => $open_basedir) {
-			if (preg_match('#^'.preg_quote($open_basedir).'#', $dirname) && (strlen($dirname) > strlen($open_basedir))) {
+			if (preg_match('#^'.preg_quote($open_basedir).'#'.($case_insensitive_pathname ? 'i' : ''), $dirname) && (strlen($dirname) > strlen($open_basedir))) {
 				$startoffset = substr_count($open_basedir, DIRECTORY_SEPARATOR) + 1;
 				break;
 			}
 		}
-		$i = $startoffset;
+
+		$directory_elements = explode(DIRECTORY_SEPARATOR, $dirname);
 		$endoffset = count($directory_elements);
 		for ($i = $startoffset; $i <= $endoffset; $i++) {
 			$test_directory = implode(DIRECTORY_SEPARATOR, array_slice($directory_elements, 0, $i));
@@ -983,7 +1000,8 @@ if (!function_exists('gd_info')) {
 						if ($fp_tempfile = @fopen($tempfilename, 'wb')) {
 							fwrite($fp_tempfile, base64_decode('R0lGODlhAQABAIAAAH//AP///ywAAAAAAQABAAACAUQAOw==')); // very simple 1px GIF file base64-encoded as string
 							fclose($fp_tempfile);
-							@chmod($tempfilename, $this->getParameter('config_file_create_mask'));
+							$phpthumb_temp = new phpthumb();
+							@chmod($tempfilename, $phpthumb_temp->getParameter('config_file_create_mask'));
 
 							// if we can convert the GIF file to a GD image then GIF create support must be enabled, otherwise it's not
 							$gd_info['GIF Read Support'] = (bool) @imagecreatefromgif($tempfilename);

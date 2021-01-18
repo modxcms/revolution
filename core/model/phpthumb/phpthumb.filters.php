@@ -1424,7 +1424,7 @@ class phpthumb_filters {
 
 	public function WatermarkOverlay(&$gdimg_dest, &$img_watermark, $alignment='*', $opacity=50, $margin_x=5, $margin_y=null) {
 
-		if (is_resource($gdimg_dest) && is_resource($img_watermark)) {
+		if ((is_resource($gdimg_dest) || (is_object($gdimg_dest) && $gdimg_dest instanceOf \GdImage)) && (is_resource($img_watermark) || (is_object($img_watermark) && $img_watermark instanceOf \GdImage))) {
 			$img_source_width          = imagesx($gdimg_dest);
 			$img_source_height         = imagesy($gdimg_dest);
 			$watermark_source_width    = imagesx($img_watermark);
