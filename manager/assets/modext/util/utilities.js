@@ -418,15 +418,6 @@ Ext.applyIf(Ext.form.Field,{
     }
 });
 
-/* allow copying to clipboard */
-MODx.util.Clipboard = function() {
-    return {
-        copy: function(text){
-            console.log('MODx.util.Clipboard was deactivated!');
-        }
-    };
-}();
-
 MODx.util.Format = {
     dateFromTimestamp: function(timestamp, date, time, defaultValue) {
         if (date === undefined) date = true;
