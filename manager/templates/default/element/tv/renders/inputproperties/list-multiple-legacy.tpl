@@ -11,13 +11,6 @@ var params = {
 {literal}
 };
 var oc = {'change':{fn:function(){Ext.getCmp('modx-panel-tv').markDirty();},scope:this}};
-// Show "Input Option Values"
-var element = Ext.getCmp('modx-tv-elements');
-var element_label = Ext.select('label[for="' + element.id + '"]');
-if (element) {
-    element.show();
-    element_label.show();
-}
 
 MODx.load({
     xtype: 'panel'
