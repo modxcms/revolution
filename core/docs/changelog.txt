@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.2-pl (TBD)
 ====================================
+- Improve removal of nested MODX tag content in sanitizeRequest [#15367]
 - Fix Plugin and Template name validation [#15349]
 - Fix missing package signature when uninstalling [#15315]
 
