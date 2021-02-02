@@ -316,7 +316,14 @@ class modRequestTest extends MODxTestCase {
             array('MODX [[fakeSnippet]] Tags','MODX  Tags'),
             array("MODX [[\$chunk? &property=`test`\n &across=`lines
 
-` &test=1]] Tags",'MODX  Tags'),
+                   `&test=1]] Tags",'MODX  Tags'),
+            array("Nested MODX [[test? 
+                   &ids = `[[!getids 
+                   &field=`id` 
+                   &resource=`[[+resource]]`
+                   ]]
+                   &parents=`2`
+                   `]] Tags",'Nested MODX  Tags'),
             array('Javascript! <script>alert(\'test\');</script> Yay.','Javascript!  Yay.'),
             array("Javascript line break! <script>alert('test');\n</script>Yay.","Javascript line break! Yay."),
             array('Testing entities &#123;kthx','Testing entities kthx'),
