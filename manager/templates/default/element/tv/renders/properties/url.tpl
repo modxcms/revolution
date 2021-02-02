@@ -20,6 +20,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('url_display_text')
         ,name: 'prop_text'
+        ,id: 'prop_text{/literal}{$tv|default}{literal}'
         ,value: params['text'] || ''
         ,listeners: oc
         ,anchor: '100%'
@@ -27,13 +28,23 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('title')
         ,name: 'prop_title'
+        ,id: 'prop_title{/literal}{$tv|default}{literal}'
         ,value: params['title'] || ''
+        ,listeners: oc
+        ,anchor: '100%'
+    },{
+        xtype: 'textfield'
+        ,fieldLabel: _('id')
+        ,name: 'prop_id'
+        ,id: 'prop_id{/literal}{$tv|default}{literal}'
+        ,value: params['id'] || ''
         ,listeners: oc
         ,anchor: '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('class')
         ,name: 'prop_class'
+        ,id: 'prop_class{/literal}{$tv|default}{literal}'
         ,value: params['class'] || ''
         ,listeners: oc
         ,anchor: '100%'
@@ -41,6 +52,7 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('style')
         ,name: 'prop_style'
+        ,id: 'prop_style{/literal}{$tv|default}{literal}'
         ,value: params['style'] || ''
         ,listeners: oc
         ,anchor: '100%'
@@ -48,14 +60,16 @@ MODx.load({
         xtype: 'textfield'
         ,fieldLabel: _('target')
         ,name: 'prop_target'
+        ,id: 'prop_target{/literal}{$tv|default}{literal}'
         ,value: params['target'] || ''
         ,listeners: oc
         ,anchor: '100%'
     },{
         xtype: 'textfield'
         ,fieldLabel: _('attributes')
-        ,name: 'prop_attrib'
-        ,value: params['attrib'] || ''
+        ,name: 'prop_attributes'
+        ,id: 'prop_attributes{/literal}{$tv|default}{literal}'
+        ,value: params['attributes'] || ''
         ,listeners: oc
         ,anchor: '100%'
     }]
