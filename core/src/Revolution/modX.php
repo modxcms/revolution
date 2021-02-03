@@ -1727,10 +1727,16 @@ class modX extends xPDO {
 
         // Make sure the required services are loaded before initialising a processor
         if (!$this->lexicon) {
-            $this->services->get('lexicon');
+            if (!$this->services->has('lexicon')) {
+                $this->services->add('lexicon', new modLexicon($this));
+            }
+            $this->lexicon = $this->services->get('lexicon');
         }
         if (!$this->error) {
-            $this->getService('error', 'error.modError');
+            if (!$this->services->has('error')) {
+                $this->services->add('error', new modError($this));
+            }
+            $this->error = $this->services->get('error');
         }
 
         // First check if the processor can be found directly as a class name provided to $action
