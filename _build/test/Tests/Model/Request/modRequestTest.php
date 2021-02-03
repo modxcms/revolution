@@ -321,7 +321,7 @@ class modRequestTest extends MODxTestCase {
                    &ids = `[[!getids 
                    &field=`id` 
                    &resource=`[[+resource]]`
-                   ]]
+                   ]]`
                    &parents=`2`
                    `]] Tags",'Nested MODX  Tags'),
             array('Javascript! <script>alert(\'test\');</script> Yay.','Javascript!  Yay.'),
