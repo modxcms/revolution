@@ -290,6 +290,14 @@ class modRequestTest extends MODxTestCase {
 
 ` &test=1]] Tags",'MODX  Tags'
             ],
+            ["Nested MODX [[test?
+                &ids = `[[!getids
+                &field=`id`
+                &resource=`[[+resource]]`
+                ]]`
+                &parents=`2`
+                `]] Tags",'Nested MODX  Tags'
+            ],
             ['Javascript! <script>alert(\'test\');</script> Yay.','Javascript!  Yay.'],
             ["Javascript line break! <script>alert('test');\n</script>Yay.","Javascript line break! Yay."],
             ['Testing entities &#123;kthx','Testing entities kthx'],
