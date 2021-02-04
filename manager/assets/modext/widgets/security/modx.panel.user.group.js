@@ -128,45 +128,7 @@ MODx.panel.UserGroup = function(config) {
                     }]
                 }]
             },{
-                title: _('users')
-                ,hideMode: 'offsets'
-                ,layout: 'form'
-                ,id: 'modx-usergroup-users-panel'
-                ,items: [{
-                    html: '<p>'+_('user_group_user_access_msg')+'</p>'
-                    ,xtype: 'modx-description'
-                },{
-                    xtype: 'modx-grid-user-group-users'
-                    ,cls: 'main-wrapper'
-                    ,preventRender: true
-                    ,usergroup: config.record.id
-                    ,autoHeight: true
-                    ,width: '97%'
-                    ,listeners: {
-                        'afterRemoveRow': {fn:this.markDirty,scope:this}
-                        ,'updateRole': {fn:this.markDirty,scope:this}
-                        ,'addUser': {fn:this.markDirty,scope:this}
-                    }
-                }]
-            },{
-                title: _('settings')
-                ,forceLayout: true
-                ,hideMode: 'offsets'
-                ,layout: 'form'
-                ,items: [{
-                    html: '<p>'+_('user_group_settings_desc')+'</p>'
-                    ,xtype: 'modx-description'
-                },{
-                    xtype: 'modx-grid-group-settings'
-                    ,urlFilters: ['namespace', 'area', 'query']
-                    ,cls: 'main-wrapper'
-                    ,preventRender: true
-                    ,group: config.record.id
-                    ,autoHeight: true
-                    ,width: '97%'
-                }]
-            },{
-                title: _('permissions')
+                title: _('access_permissions')
                 ,hidden: config.record.id === 0
                 ,forceLayout: true
                 ,hideMode: 'offsets'
@@ -276,6 +238,44 @@ MODx.panel.UserGroup = function(config) {
                             ,width: '97%'
                         }]
                     }]
+                }]
+            },{
+                title: _('users')
+                ,hideMode: 'offsets'
+                ,layout: 'form'
+                ,id: 'modx-usergroup-users-panel'
+                ,items: [{
+                    html: '<p>'+_('user_group_user_access_msg')+'</p>'
+                    ,xtype: 'modx-description'
+                },{
+                    xtype: 'modx-grid-user-group-users'
+                    ,cls: 'main-wrapper'
+                    ,preventRender: true
+                    ,usergroup: config.record.id
+                    ,autoHeight: true
+                    ,width: '97%'
+                    ,listeners: {
+                        'afterRemoveRow': {fn:this.markDirty,scope:this}
+                        ,'updateRole': {fn:this.markDirty,scope:this}
+                        ,'addUser': {fn:this.markDirty,scope:this}
+                    }
+                }]
+            },{
+                title: _('settings')
+                ,forceLayout: true
+                ,hideMode: 'offsets'
+                ,layout: 'form'
+                ,items: [{
+                    html: '<p>'+_('user_group_settings_desc')+'</p>'
+                    ,xtype: 'modx-description'
+                },{
+                    xtype: 'modx-grid-group-settings'
+                    ,urlFilters: ['namespace', 'area', 'query']
+                    ,cls: 'main-wrapper'
+                    ,preventRender: true
+                    ,group: config.record.id
+                    ,autoHeight: true
+                    ,width: '97%'
                 }]
             }]
         }]
