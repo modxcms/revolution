@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\Element;
 
 
 use MODX\Revolution\modClassMap;
+use MODX\Revolution\modElement;
 use MODX\Revolution\Processors\Processor;
 
 /**
@@ -31,7 +32,7 @@ class GetClasses extends Processor
     public function initialize()
     {
         $this->setDefaultProperties([
-            'limit' => 10,
+            'limit' => 0,
             'start' => 0,
             'sort' => 'class',
             'dir' => 'ASC',
@@ -42,36 +43,14 @@ class GetClasses extends Processor
 
     public function process()
     {
-        $this->modx->deprecated('2.1.4', 'Please use $modx->getDescendants($className) now.',
-            'modElementGetClassesProcessor support');
+        $classes = $this->modx->getDescendants(modElement::class);
 
-        $limit = $this->getProperty('limit', 10);
-        $isLimit = !empty($limit);
-
-        /* build query */
-        $c = $this->modx->newQuery(modClassMap::class);
-        $c->where([
-            'parent_class' => 'modElement',
-            'class:!=' => 'modTemplate',
-        ]);
-        $c->sortby($this->getProperty('sort'), $this->getProperty('dir'));
-        $name = $this->getProperty('name', '');
-        if (!empty($name)) {
-            $c->where([
-                'modClassMap.name:IN' => is_string($name) ? explode(',', $name) : $name,
-            ]);
-        }
-        if ($isLimit) {
-            $c->limit($limit, $this->getProperty('start'));
-        }
-        $classes = $this->modx->getCollection(modClassMap::class, $c);
-
-        /* iterate */
         $list = [];
-        /** @var modClassMap $class */
+
         foreach ($classes as $class) {
-            $el = ['name' => $class->get('class')];
-            $list[] = $el;
+            if ($class === 'MODX\\Revolution\\modScript') continue;
+
+            $list[] = ['name' => $class];
         }
 
         return $this->outputArray($list);

@@ -292,7 +292,7 @@ MODx.panel.Plugin = function(config) {
             xtype: 'modx-panel-element-properties'
             ,elementPanel: 'modx-panel-plugin'
             ,elementId: config.plugin
-            ,elementType: 'modPlugin'
+            ,elementType: 'MODX\\Revolution\\modPlugin'
             ,record: config.record
         }],{
             id: 'modx-plugin-tabs'

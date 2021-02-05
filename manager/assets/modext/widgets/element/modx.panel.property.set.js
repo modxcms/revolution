@@ -354,8 +354,8 @@ Ext.extend(MODx.window.AddElementToPropertySet,MODx.Window,{
     }
     ,onElementSelect: function(cb) {
         var ec = Ext.getCmp('modx-combo-element-class');
-        if (ec.getValue() == '') {
-            ec.setValue('modSnippet');
+        if (ec.getValue() === '') {
+            ec.setValue('MODX\\Revolution\\modSnippet');
         }
     }
 });
@@ -406,7 +406,7 @@ MODx.combo.Elements = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'Element/GetListByClass'
-            ,element_class: 'modSnippet'
+            ,element_class: 'MODX\\Revolution\\modSnippet'
         }
     });
     MODx.combo.Elements.superclass.constructor.call(this,config);

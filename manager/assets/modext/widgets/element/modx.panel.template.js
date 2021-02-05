@@ -287,7 +287,7 @@ MODx.panel.Template = function(config) {
             ,collapsible: true
             ,elementPanel: 'modx-panel-template'
             ,elementId: config.template
-            ,elementType: 'modTemplate'
+            ,elementType: 'MODX\\Revolution\\modTemplate'
             ,record: config.record
         }],{
             id: 'modx-template-tabs'

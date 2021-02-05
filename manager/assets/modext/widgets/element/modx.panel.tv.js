@@ -323,7 +323,7 @@ MODx.panel.TV = function(config) {
             ,itemId: 'panel-properties'
             ,elementPanel: 'modx-panel-tv'
             ,elementId: config.tv
-            ,elementType: 'modTemplateVar'
+            ,elementType: 'MODX\\Revolution\\modTemplateVar'
             ,record: config.record
         }],{
             id: 'modx-tv-tabs'
