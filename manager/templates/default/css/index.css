@@ -19450,7 +19450,6 @@ ul.x-tab-strip-bottom {
     #modx-navbar #modx-site-info .full_appname {
       color: #FFF; }
     #modx-navbar #modx-site-info > .info-item {
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
 

@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li id="modx-site-info">
-                    <div class="info-item full_appname">{$_version.full_version|strip_tags|escape}</div>
+                    <div class="info-item full_appname">{$_version.modx3s_version|strip_tags|escape}</div>
                 </li>
                 <li id="modx-leftbar-trigger">
                     <a href="javascript:;">
