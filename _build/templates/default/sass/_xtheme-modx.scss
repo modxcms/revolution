@@ -1377,3 +1377,8 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 .modx-grid-draggable .x-grid3-row {
   cursor: move;
 }
+
+/* On deprecated logs controller, allow group title to expand normally which is inexplicably hardcoded in the extjs files */
+#modx-grid-deprecated-log .x-grid-group-hd div {
+  height: auto;
+}

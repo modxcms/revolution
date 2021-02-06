@@ -47,6 +47,8 @@ $classes= [
     \MODX\Revolution\modDashboard::class,
     \MODX\Revolution\modDashboardWidget::class,
     \MODX\Revolution\modDashboardWidgetPlacement::class,
+    \MODX\Revolution\modDeprecatedCall::class,
+    \MODX\Revolution\modDeprecatedMethod::class,
     \MODX\Revolution\modElementPropertySet::class,
     \MODX\Revolution\modEvent::class,
     \MODX\Revolution\modExtensionPackage::class,
