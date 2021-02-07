@@ -839,7 +839,7 @@ class Update extends UpdateProcessor
         $this->object->removeLock();
         $this->clearCache();
 
-        $returnArray = $this->object->get(array_diff(array_keys($this->object->_fields), ['content', 'ta', 'introtext', 'description', 'link_attributes', 'pagetitle', 'longtitle', 'menutitle', 'properties']));
+        $returnArray = $this->object->get(array_diff(array_keys($this->object->_fields), ['content', 'ta', 'introtext', 'description', 'link_attributes', 'pagetitle', 'longtitle', 'menutitle', 'properties', 'resource_groups']));
         foreach ($returnArray as $k => $v) {
             if (strpos($k, 'tv') === 0) {
                 unset($returnArray[$k]);
