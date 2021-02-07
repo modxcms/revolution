@@ -33,7 +33,7 @@ class Remove extends Browser
     public function process()
     {
         $dir = $this->sanitize($this->getProperty('dir'));
-        if (empty($dir)) {
+        if (!strlen($dir)) {
             return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
         $dirBases = $this->source->getBases($dir);

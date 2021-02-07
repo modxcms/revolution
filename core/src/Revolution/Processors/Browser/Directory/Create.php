@@ -35,7 +35,7 @@ class Create extends Browser
     {
         $parent = $this->sanitize($this->getProperty('parent', ''));
         $name = $this->sanitize($this->getProperty('name'));
-        if (empty($name)) {
+        if (!strlen($name)) {
             return $this->modx->lexicon('file_folder_err_ns_name');
         }
         $response = $this->source->createContainer($name, $parent);
