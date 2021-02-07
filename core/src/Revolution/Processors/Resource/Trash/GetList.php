@@ -69,7 +69,11 @@ class GetList extends GetListProcessor
         if (!empty($context)) {
             $c->where(['modResource.context_key' => $context]);
         }
-        $c->where(['modResource.id:IN' => $this->getDeleted()]);
+        if ($deleted = $this->getDeleted()) {
+            $c->where(['modResource.id:IN' => $deleted]);
+        } else {
+            $c->where(['modResource.id:IN' => 0]);
+        }
 
         return $c;
     }
@@ -77,7 +81,6 @@ class GetList extends GetListProcessor
     public function getDeleted()
     {
         $c = $this->modx->newQuery($this->classKey);
-        $c->leftJoin($this->classKey, 'Children');
         $c->select($this->modx->getSelectColumns($this->classKey, $c->getAlias(), '', ['id', 'context_key']));
         $c->where([
             $c->getAlias() . '.deleted' => true
