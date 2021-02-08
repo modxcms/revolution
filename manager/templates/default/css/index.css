@@ -19058,6 +19058,7 @@ ul.x-tab-strip-bottom {
   #modx-navbar .icon {
     color: #FFF;
     font-size: 20px;
+    line-height: 20px;
     vertical-align: middle; }
   #modx-navbar li,
   #modx-navbar a {
@@ -19074,8 +19075,16 @@ ul.x-tab-strip-bottom {
     line-height: 12px;
     font-size: 10px;
     text-decoration: none; }
+    #modx-navbar a .description {
+      font-size: 9px;
+      opacity: .7; }
+    #modx-navbar a .icon, #modx-navbar a .label, #modx-navbar a .description {
+      width: 100%;
+      display: block; }
   #modx-navbar li a:hover {
     opacity: .7; }
+  #modx-navbar #modx-user-menu a .label, #modx-navbar #modx-user-menu a .description, #modx-navbar #modx-user-menu a #user-username {
+    display: none; }
   #modx-navbar #modx-manager-search-icon a,
   #modx-navbar #modx-leftbar-trigger a,
   #modx-navbar #modx-user-menu a {
@@ -19090,39 +19099,8 @@ ul.x-tab-strip-bottom {
       display: block;
       position: relative;
       padding: 12px 0; }
-      #modx-navbar #modx-topnav > li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) > a:before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        display: inline-block;
-        font-style: normal;
-        font-variant: normal;
-        text-rendering: auto;
-        font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Brands';
-        font-weight: 900;
-        text-align: center;
-        font-size: 20px;
-        margin: 5px 0;
-        width: 100%;
-        position: static; }
-    #modx-navbar #modx-topnav #limenu-site > a:before {
-      content: "\f15c";
-      font-weight: 300 !important; }
-    #modx-navbar #modx-topnav #limenu-media > a:before {
-      content: "\f1c5";
-      font-weight: 300 !important; }
-    #modx-navbar #modx-topnav #limenu-components > a:before {
-      content: "\f1b2"; }
-    #modx-navbar #modx-topnav #limenu-manage > a:before {
-      content: "\f1de"; }
   #modx-navbar #modx-user-menu {
     margin-top: auto; }
-    #modx-navbar #modx-user-menu #user-username {
-      display: none; }
     #modx-navbar #modx-user-menu #user-avatar img {
       border-radius: 20px;
       height: 40px;
@@ -19152,17 +19130,6 @@ ul.x-tab-strip-bottom {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
-
-#modx-footer ul.modx-subnav li:hover ul ul,
-#modx-footer ul.modx-subnav ul li:hover ul ul,
-#modx-footer ul.modx-subnav ul ul li:hover ul ul {
-  display: none; }
-
-#modx-footer ul.modx-subnav li:hover ul,
-#modx-footer ul.modx-subnav ul li:hover ul,
-#modx-footer ul.modx-subnav ul ul li:hover ul,
-#modx-footer ul.modx-subnav ul ul ul li:hover ul {
-  display: block; }
 
 #modx-leftbar-trigger {
   transition: all .2s ease; }
@@ -19219,6 +19186,11 @@ ul.x-tab-strip-bottom {
       display: block;
       text-decoration: none;
       cursor: pointer; }
+      #modx-footer .modx-subnav li a .icon {
+        display: inline-block;
+        font-size: 18px;
+        opacity: .07;
+        padding-left: 5px; }
       #modx-footer .modx-subnav li a span {
         color: #999999;
         display: block;
@@ -19235,6 +19207,15 @@ ul.x-tab-strip-bottom {
         color: #53595F; }
         #modx-footer .modx-subnav li a:hover .description {
           color: #707070; }
+  #modx-footer .modx-subnav li:hover ul ul,
+  #modx-footer .modx-subnav ul li:hover ul ul,
+  #modx-footer .modx-subnav ul ul li:hover ul ul {
+    display: none; }
+  #modx-footer .modx-subnav li:hover ul,
+  #modx-footer .modx-subnav ul li:hover ul,
+  #modx-footer .modx-subnav ul ul li:hover ul,
+  #modx-footer .modx-subnav ul ul ul li:hover ul {
+    display: block; }
   #modx-footer .modx-subnav.active {
     opacity: 1;
     visibility: visible; }
@@ -19258,7 +19239,7 @@ ul.x-tab-strip-bottom {
     pointer-events: none;
     margin-top: -6px; }
 
-#modx-footer #limenu-user-submenu #language .modx-subsubnav {
+#modx-footer #language .modx-subsubnav {
   max-height: 86vh;
   overflow-y: auto; }
 
