@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Über MODX';
-$_lang['about_desc'] = 'Erfahren Sie mehr über MODX und erhalten Sie Hilfe.';
 $_lang['access_permissions'] = 'Zugriffsrechte';
 $_lang['access_permissions_desc'] = 'Verwalten Sie die Benutzergruppen-Zugriffsmöglichkeiten auf Ressourcen und Kontexte.';
 $_lang['acls'] = 'Zugriffssteuerungslisten (ACLs)';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'Logout';
 $_lang['logout_desc'] = 'Loggen Sie sich aus dem Manager aus.';
 $_lang['manage'] = 'Verwalten';
 $_lang['media'] = 'Medien';
-$_lang['media_desc'] = 'Medien und Medienquellen bearbeiten';
 $_lang['messages'] = 'Mitteilungen';
 $_lang['messages_desc'] = 'Lesen und schreiben Sie Mitteilungen.';
 $_lang['namespaces'] = 'Namensräume';
@@ -103,7 +101,7 @@ $_lang['search_resulttype_plugins'] = 'Plugins';
 $_lang['search_resulttype_resources'] = 'Ressourcen';
 $_lang['search_resulttype_snippets'] = 'Snippets';
 $_lang['search_resulttype_templates'] = 'Templates';
-$_lang['search_resulttype_tvs'] = 'Template-Variablen';
+$_lang['search_resulttype_tvs'] = 'TVs';
 $_lang['search_resulttype_users'] = 'Benutzer';
 $_lang['security'] = 'Sicherheit';
 $_lang['settings'] = 'Einstellungen';
