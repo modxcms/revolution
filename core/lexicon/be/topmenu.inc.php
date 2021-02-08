@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Аб сістеме';
-$_lang['about_desc'] = 'Болей падрабязная інфармацыя аб MODX Revolution';
 $_lang['access_permissions'] = 'Правы доступу';
 $_lang['access_permissions_desc'] = 'Кіраванне доступам групы карыстальнікаў да рэсурсаў і кантэкстаў';
 $_lang['acls'] = 'Спісы кіравання доступам';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'Выйсці';
 $_lang['logout_desc'] = 'Выхад з сістэмы кіравання';
 $_lang['manage'] = 'Кіраваць';
 $_lang['media'] = 'Медыя';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'Паведамленні';
 $_lang['messages_desc'] = 'Прагляд і адпраўка паведамленняў';
 $_lang['namespaces'] = 'Прасторы імёнаў';
