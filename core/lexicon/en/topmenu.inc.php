@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'About';
-$_lang['about_desc'] = 'Learn more and get help with MODX';
 $_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Access Control Lists';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'Logout';
 $_lang['logout_desc'] = 'Log out of the Manager';
 $_lang['manage'] = 'Manage';
 $_lang['media'] = 'Media';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = 'View and send messages';
 $_lang['namespaces'] = 'Namespaces';

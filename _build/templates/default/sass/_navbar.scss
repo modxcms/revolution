@@ -43,6 +43,7 @@
   .icon {
     color: $white;
     font-size: 20px;
+    line-height: 20px;
     vertical-align: middle;
   }
 
@@ -63,11 +64,27 @@
     line-height: 12px;
     font-size: 10px;
     text-decoration: none;
+
+    & .description {
+      font-size: 9px;
+      opacity: .7;
+    }
+
+    & .icon, & .label, & .description {
+      width: 100%;
+      display: block;
+    }
   }
 
   li {
     a:hover {
       opacity: .7;
+    }
+  }
+
+  #modx-user-menu a {
+    .label, .description, #user-username {
+      display: none;
     }
   }
 
@@ -92,44 +109,12 @@
         display: block;
         position: relative;
         padding: 12px 0;
-
-        &:before {
-          @include absolute-corners;
-          @include awesome-font;
-          text-align: center;
-          font-size: 20px;
-          margin: 5px 0;
-          width: 100%;
-          position: static;
-        }
       }
-    }
-
-    #limenu-site > a:before {
-      content: fa-content($fa-var-file-alt);
-      font-weight: 300 !important;
-    }
-
-    #limenu-media > a:before {
-      content: fa-content($fa-var-file-image);
-      font-weight: 300 !important;
-    }
-
-    #limenu-components > a:before {
-      content: fa-content($fa-var-cube);
-    }
-
-    #limenu-manage > a:before {
-      content: fa-content($fa-var-sliders-h);
     }
   }
 
   #modx-user-menu {
     margin-top: auto;
-
-    #user-username {
-      display: none;
-    }
 
     #user-avatar {
       img {
@@ -173,20 +158,6 @@
       text-overflow: ellipsis;
     }
   }
-}
-
-// Submenus show & hide
-#modx-footer ul.modx-subnav li:hover ul ul,
-#modx-footer ul.modx-subnav ul li:hover ul ul,
-#modx-footer ul.modx-subnav ul ul li:hover ul ul {
-  display: none;
-}
-
-#modx-footer ul.modx-subnav li:hover ul,
-#modx-footer ul.modx-subnav ul li:hover ul,
-#modx-footer ul.modx-subnav ul ul li:hover ul,
-#modx-footer ul.modx-subnav ul ul ul li:hover ul {
-  display: block;
 }
 
 #modx-leftbar-trigger {
@@ -267,6 +238,13 @@
         text-decoration: none;
         cursor: pointer;
 
+        .icon {
+          display: inline-block;
+          font-size: 18px;
+          opacity: .07;
+          padding-left: 5px;
+        }
+
         span {
           color: $subnavDescriptionColor;
           display: block;
@@ -289,6 +267,19 @@
           }
         }
       }
+    }
+
+    & li:hover ul ul,
+    & ul li:hover ul ul,
+    & ul ul li:hover ul ul {
+      display: none;
+    }
+
+    & li:hover ul,
+    & ul li:hover ul,
+    & ul ul li:hover ul,
+    & ul ul ul li:hover ul {
+      display: block;
     }
 
     &.active {
@@ -321,7 +312,7 @@
   }
 
   // custom styles for language menu
-  #limenu-user-submenu #language .modx-subsubnav {
+  #language .modx-subsubnav {
     max-height: 86vh;
     overflow-y: auto;
   }
