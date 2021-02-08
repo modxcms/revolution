@@ -683,22 +683,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,downloadFile: function(item,e) {
         var node = this.cm.activeNode;
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Browser/File/Download'
-                ,file: node.attributes.pathRelative
-                ,wctx: MODx.ctx || ''
-                ,source: this.getSource()
-            }
-            ,listeners: {
-                'success':{fn:function(r) {
-                    if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
-                    }
-                },scope:this}
-            }
-        });
+        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+node.attributes.pathRelative+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
     }
 
     ,copyRelativePath: function(item,e) {
