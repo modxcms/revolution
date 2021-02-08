@@ -21870,7 +21870,7 @@ textarea.x-form-field {
     border-bottom: 0;
     right: 15px;
     position: absolute;
-    z-index: 20; }
+    z-index: 9; }
     #modx-resource-main-left .x-panel-header .x-panel-header-text {
       display: none; }
   #modx-resource-main-left .x-panel-collapsed .x-panel-header,
