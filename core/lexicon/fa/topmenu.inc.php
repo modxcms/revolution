@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'آشنایی با مادایکس';
-$_lang['about_desc'] = 'Learn more and get help with MODX';
 $_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Access Control Lists';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'خروج';
 $_lang['logout_desc'] = 'خروج از بخش مدیریت';
 $_lang['manage'] = 'مدیریت';
 $_lang['media'] = 'Media';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'پیام';
 $_lang['messages_desc'] = 'View and send messages';
 $_lang['namespaces'] = 'حوزه‌های نامگذاری';
