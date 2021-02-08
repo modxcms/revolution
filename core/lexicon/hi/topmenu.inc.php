@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'के बारे में';
-$_lang['about_desc'] = 'और अधिक जानने और MODX के साथ मदद प्राप्त करें';
 $_lang['access_permissions'] = 'पहुँच अनुमति';
 $_lang['access_permissions_desc'] = 'Resources और Contexts के लिए user group तक पहुँच का प्रबंधन करें';
 $_lang['acls'] = 'पहुँच नियंत्रण सूचियाँ';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'लॉग आउट';
 $_lang['logout_desc'] = 'Manager से लॉग आउट करें';
 $_lang['manage'] = 'प्रबंधित करें';
 $_lang['media'] = 'मीडिया';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = 'देखें और संदेश भेजें';
 $_lang['namespaces'] = 'Namespaces';
