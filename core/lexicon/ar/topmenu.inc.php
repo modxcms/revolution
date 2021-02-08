@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'حول';
-$_lang['about_desc'] = 'تعلم أكثر واحصل على المساعدة مع مودكس';
 $_lang['access_permissions'] = 'صلاحيات الوصول';
 $_lang['access_permissions_desc'] = 'إدارة وصول مجموعة المستخدم إلى المصادر والسياقات';
 $_lang['acls'] = 'قوائم تحكم الوصول';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'تسجيل الخروج';
 $_lang['logout_desc'] = 'تسجيل الخروج من المدير';
 $_lang['manage'] = 'إدارة';
 $_lang['media'] = 'وسائط';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'الرسائل';
 $_lang['messages_desc'] = 'عرض وإرسال الرسائل';
 $_lang['namespaces'] = 'فضاءات الأسماء';
