@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Hakkında';
-$_lang['about_desc'] = 'MODX ile daha fazlasını öğrenin ve bilgi alın';
 $_lang['access_permissions'] = 'Erişim İzinleri';
 $_lang['access_permissions_desc'] = 'Kullanıcı gruplarının Kaynaklara ve Bağlamlara erişimini yönetme';
 $_lang['acls'] = 'Erişim Kontrol Listeleri';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'Oturumu kapat';
 $_lang['logout_desc'] = 'Sistemden Çıkış';
 $_lang['manage'] = 'Yönet';
 $_lang['media'] = 'Medya';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'Mesajlar';
 $_lang['messages_desc'] = 'Mesajları gönder ve görüntüle';
 $_lang['namespaces'] = 'İsim Alanları';
