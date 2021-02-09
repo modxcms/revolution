@@ -139,7 +139,7 @@ class ResourceUpdateManagerController extends ResourceManagerController
         $this->resourceArray = array_merge($this->resourceArray, $overridden);
         $this->resourceArray['parents'] = $this->getParents();
 
-        $fields = ['published', 'hidemenu', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'uri_override'];
+        $fields = ['published', 'hidemenu', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'uri_override', 'alias_visible'];
         foreach ($fields as $field) {
             $this->resourceArray[$field] = !empty($this->resourceArray[$field]);
         }
