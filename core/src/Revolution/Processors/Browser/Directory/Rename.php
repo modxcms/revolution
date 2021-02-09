@@ -34,11 +34,11 @@ class Rename extends Browser
     public function process()
     {
         $path = $this->sanitize($this->getProperty('path'));
-        if (empty($path)) {
+        if (!strlen($path)) {
             $this->addFieldError('path', $this->modx->lexicon('file_folder_err_ns'));
         }
         $name = $this->sanitize($this->getProperty('name'));
-        if (empty($name)) {
+        if (!strlen($name)) {
             $this->addFieldError('name', $this->modx->lexicon('name_err_ns'));
         }
         $pathBases = $this->source->getBases($path);

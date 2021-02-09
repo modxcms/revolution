@@ -30,7 +30,8 @@ class Sort extends Browser
      */
     public function process()
     {
-        if (!$from = $this->sanitize($this->getProperty('from'))) {
+        $from = $this->sanitize($this->getProperty('from'));
+        if (!strlen($from)) {
             return $this->failure($this->modx->lexicon('file_folder_err_ns'));
         }
         $to = $this->sanitize($this->getProperty('to'));
