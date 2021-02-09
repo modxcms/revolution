@@ -1840,7 +1840,7 @@
 				api.getDropFiles(evt, function (files, all){
 					onDrop.call(evt[currentTarget], files, all, evt);
 				});
-				
+
 				onHover.call(evt[currentTarget], false, evt);
 			});
 		}
@@ -3510,25 +3510,7 @@
 
 
 	api.support.flash = (function (){
-		var mime = navigator.mimeTypes, has = false;
-
-		if( navigator.plugins && typeof navigator.plugins['Shockwave Flash'] == 'object' ){
-			has	= navigator.plugins['Shockwave Flash'].description && !(mime && mime['application/x-shockwave-flash'] && !mime['application/x-shockwave-flash'].enabledPlugin);
-		}
-		else {
-			try {
-				has	= !!(window.ActiveXObject && new ActiveXObject('ShockwaveFlash.ShockwaveFlash'));
-			}
-			catch(er){
-				api.log('Flash -- does not supported.');
-			}
-		}
-
-		if( has && /^file:/i.test(location) ){
-			api.log('[warn] Flash does not work on `file:` protocol.');
-		}
-
-		return	has;
+		return	false;
 	})();
 
 
