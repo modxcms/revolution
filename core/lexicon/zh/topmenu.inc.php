@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = '关于';
-$_lang['about_desc'] = '了解更多并获取MODX 帮助';
 $_lang['access_permissions'] = 'Access Permissions';
 $_lang['access_permissions_desc'] = '管理用户组访问资源和上下文';
 $_lang['acls'] = '访问控制列表';
@@ -61,7 +60,6 @@ $_lang['logout_desc'] = '从管理器注销';
 $_lang['manage'] = '管理
 ';
 $_lang['media'] = '媒体';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = '查看和发送消息';
 $_lang['namespaces'] = 'Namespaces';

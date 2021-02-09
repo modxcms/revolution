@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Rólunk';
-$_lang['about_desc'] = 'Tudjon meg többet és kérjen segítséget a MODX-től.';
 $_lang['access_permissions'] = 'Hozzáférési engedélyek';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Hozzáférési jogosultságok felsorolása';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'Kijelentkezés';
 $_lang['logout_desc'] = 'Kijelentkezés a kezelőből';
 $_lang['manage'] = 'Kezelés';
 $_lang['media'] = 'Média';
-$_lang['media_desc'] = 'Média és médiaforrások szerkesztése';
 $_lang['messages'] = 'Üzenetek';
 $_lang['messages_desc'] = 'Üzenetek megtekintése és küldése';
 $_lang['namespaces'] = 'Névterek';

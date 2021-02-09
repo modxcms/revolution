@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'À propos';
-$_lang['about_desc'] = 'Plus d\'informations sur MODX Revolution.';
 $_lang['access_permissions'] = 'Autorisations d\'accès';
 $_lang['access_permissions_desc'] = 'Gérer les accès des groupes d\'utilisateurs aux ressources et aux contextes';
 $_lang['acls'] = 'Listes des contrôles d\'accès';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'Déconnexion';
 $_lang['logout_desc'] = 'Déconnexion du gestionnaire de MODX.';
 $_lang['manage'] = 'Administration';
 $_lang['media'] = 'Média';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = 'Voir vos messages et en envoyer.';
 $_lang['namespaces'] = 'Espaces de noms';

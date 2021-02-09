@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'MODXについて';
-$_lang['about_desc'] = 'MODX Revolutionに関する情報';
 $_lang['access_permissions'] = 'アクセス許可';
 $_lang['access_permissions_desc'] = 'リソースとコンテキストへのユーザーアクセス管理';
 $_lang['acls'] = 'Access Control Lists';
@@ -60,7 +59,6 @@ $_lang['logout'] = 'ログアウト';
 $_lang['logout_desc'] = '管理画面からログアウト';
 $_lang['manage'] = 'Manage';
 $_lang['media'] = 'Media';
-$_lang['media_desc'] = 'Edit Media and Media Sources';
 $_lang['messages'] = 'メッセージ';
 $_lang['messages_desc'] = 'メッセージの閲覧と送信';
 $_lang['namespaces'] = 'ネームスペース';
