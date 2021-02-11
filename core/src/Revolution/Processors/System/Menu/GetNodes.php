@@ -102,6 +102,11 @@ class GetNodes extends GetListProcessor
             'data' => $object->toArray(),
             'qtip' => strip_tags($desc),
         ];
+
+        if (empty($object->parent)) {
+            $objectArray['draggable'] = false;
+        }
+
         if ($object->get('childrenCount') < 1) {
             // Workaround for leaf record not to display "arrows"
             $objectArray['loaded'] = true;
