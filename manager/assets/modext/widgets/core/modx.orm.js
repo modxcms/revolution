@@ -143,7 +143,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                         }
 
                         var n = new Ext.tree.TreeNode({
-                            text: r.name
+                            text: Ext.util.Format.htmlEncode(r.name)
                             ,id: r.name
                             ,name: r.name
                             ,expanded: true
@@ -188,6 +188,11 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
         this.windows.renameContainer.setValues(r);
         this.windows.renameContainer.show(e.target);
     }
+
+    ,renderItemText: function(item) {
+        return item.text;
+    }
+
     ,addAttribute: function(btn,e,node) {
         var r = {};
         if (node) { r.parent = node.id; }
@@ -204,7 +209,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                         }
 
                         var n = new Ext.tree.TreeNode({
-                            text: r.name+' - <i>'+r.value+'</i>'
+                            text: Ext.util.Format.htmlEncode(r.name) + ' - <i>' + Ext.util.Format.htmlEncode(r.value) + '</i>'
                             ,id: r.id
                             ,name: r.name
                             ,leaf: true
