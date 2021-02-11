@@ -161,6 +161,7 @@ class ResourceCreateManagerController extends ResourceManagerController
         } else {
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = [];
+            $this->resourceArray['parents'] = $this->getParents();
             $this->resourceArray['resource_groups'] = $this->modx->getOption('resource_groups',
                 $this->resourceArray, []);
             $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups'])

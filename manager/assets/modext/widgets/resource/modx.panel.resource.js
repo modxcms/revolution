@@ -57,7 +57,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 var title = Ext.util.Format.stripTags(this.config.record.pagetitle);
                 title = Ext.util.Format.htmlEncode(title);
                 if (MODx.perm.tree_show_resource_ids) {
-                    title = title+ ' <small>('+this.config.record.id+')</small>';
+                    title = title + (this.config.record.id ? ' <small>('+this.config.record.id+')</small>' : '');
                 }
                 Ext.getCmp('modx-header-breadcrumbs').updateHeader(title);
             }
@@ -621,16 +621,22 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     ,allowBlank: false
                     ,enableKeyEvents: true
                     ,listeners: {
-                'keyup': {fn: function(f) {
+                        'keyup': {
+                            fn: function(f) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
 
-                    this.generateAliasRealTime(title);
+                                this.generateAliasRealTime(title);
 
                                 title = Ext.util.Format.htmlEncode(title);
                                 if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === true) {
                                     title = title+ ' <small>('+this.config.record.id+')</small>';
                                 }
-                                Ext.getCmp('modx-header-breadcrumbs').updateHeader(title);
+                                var breadCrumbsHeader = Ext.getCmp('modx-header-breadcrumbs');
+                                if (breadCrumbsHeader) {
+                                    breadCrumbsHeader.updateHeader(title);
+                                } else {
+                                    Ext.getCmp('modx-resource-header').el.dom.innerText = title;
+                                }
 
                                 // check some system settings before doing real time alias transliteration
                                 if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
@@ -639,14 +645,19 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                                         this.translitAlias(title);
                                     }
                                 }
-                            }, scope: this}
+                            },
+                            scope: this
+                        }
                         // also do realtime transliteration of alias on blur of pagetitle field
                         // as sometimes (when typing very fast) the last letter(s) are not catched
-                        ,'blur': {fn: function(f,e) {
+                        ,'blur': {
+                            fn: function(f,e) {
                                 var title = Ext.util.Format.stripTags(f.getValue());
 
-                    this.generateAliasRealTime(title);
-                            }, scope: this}
+                                this.generateAliasRealTime(title);
+                            },
+                            scope: this
+                        }
                     }
                 }]
             },{

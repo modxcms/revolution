@@ -49,7 +49,6 @@ class ResourceUpdateManagerController extends ResourceManagerController
             'xtype' => 'modx-page-resource-update',
             'resource' => $this->resource->get('id'),
             'record' => $this->resourceArray,
-            'parents' => $this->getParents(),
             'publish_document' => $this->canPublish,
             'preview_url' => $this->previewUrl,
             'locked' => (int)$this->locked,
