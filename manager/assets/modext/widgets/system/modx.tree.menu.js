@@ -38,7 +38,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         var node = dropEvent.target;
         if (node.isRoot) return false;
 
-        if ((dropEvent.point === 'above') || dropEvent.point === 'below') {
+        if ((dropEvent.point === 'above') || (dropEvent.point === 'below')) {
             if (dropEvent.target.parentNode.isRoot) {
                 return false;
             }
