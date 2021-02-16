@@ -894,7 +894,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $resourceGroupTable = $this->xpdo->getTableName(modResourceGroupResource::class);
                 $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                     "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
-                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = 'MODX\\Revolution\\modUserGroup' " .
+                    "JOIN {$resourceGroupTable} ResourceGroup ON Acl.principal_class = {$this->xpdo->quote(modUserGroup::class)} " .
                     "AND (Acl.context_key = :context OR Acl.context_key IS NULL OR Acl.context_key = '') " .
                     "AND ResourceGroup.document = :resource " .
                     "AND ResourceGroup.document_group = Acl.target " .
