@@ -8,7 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modCategory;
 use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSnippet;
 use MODX\Revolution\modSystemEvent;
 
 /**
@@ -103,6 +105,9 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         if (strpos(ltrim($this->snippetArray['snippet']),'<?php') !== 0) {
             $this->snippetArray['snippet'] = "<?php\n".$this->snippetArray['snippet'];
         }
+
+        /* Don't remove the following line or the edit snippet page blanks when saving <script><!-- GitHub issue: #15222 */
+        $this->snippetArray['__fix_for_15222'] = '-->';
 
         $this->prepareElement();
 
