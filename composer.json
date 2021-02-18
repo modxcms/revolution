@@ -90,7 +90,23 @@
             "@php _build/transport.core.php"
         ],
         "phpunit": "phpunit -c _build/test/phpunit.xml --coverage-text --colors",
-        "coverage": "phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage"
+        "coverage": "phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage",
+        "parse-schema-mysql": [
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.mysql.schema.xml core/src/",
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.registry.db.mysql.schema.xml core/src/",
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.sources.mysql.schema.xml core/src/",
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.transport.mysql.schema.xml core/src/"
+        ],
+        "parse-schema-sqlsrv": [
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.sqlsrv.schema.xml core/src/",
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.registry.db.sqlsrv.schema.xml core/src/",
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.sources.sqlsrv.schema.xml core/src/",
+          "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.transport.sqlsrv.schema.xml core/src/"
+        ],
+        "parse-schema": [
+          "composer run-script parse-schema-mysql",
+          "composer run-script parse-schema-sqlsrv"
+        ]
     },
     "scripts-descriptions": {
         "phpunit": "Run PHPUnit test",
