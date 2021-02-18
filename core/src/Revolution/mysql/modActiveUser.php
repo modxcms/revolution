@@ -62,7 +62,7 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
             'action' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

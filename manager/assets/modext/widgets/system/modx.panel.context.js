@@ -41,7 +41,7 @@ MODx.panel.Context = function(config) {
                     ,fieldLabel: _('name')
                     ,name: 'name'
                     ,width: 300
-                    ,maxLength: 255
+                    ,maxLength: 191
                 },{
                     xtype: 'textarea'
                     ,fieldLabel: _('description')

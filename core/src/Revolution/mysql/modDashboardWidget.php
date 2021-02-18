@@ -83,7 +83,7 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
             'size' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => 'half',
@@ -91,7 +91,7 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
             'permission' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

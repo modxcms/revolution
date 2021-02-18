@@ -45,7 +45,7 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
             'description' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

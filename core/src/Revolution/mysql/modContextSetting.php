@@ -67,7 +67,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
             'area' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

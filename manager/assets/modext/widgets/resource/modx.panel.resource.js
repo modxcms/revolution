@@ -616,7 +616,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     ,description: '<b>[[*pagetitle]]</b><br />'+_('resource_pagetitle_help')
                     ,name: 'pagetitle'
                     ,id: 'modx-resource-pagetitle'
-                    ,maxLength: 255
+                    ,maxLength: 191
                     ,anchor: '100%'
                     ,allowBlank: false
                     ,enableKeyEvents: true
@@ -668,7 +668,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     ,description: '<b>[[*alias]]</b><br />'+_('resource_alias_help')
                     ,name: 'alias'
                     ,id: 'modx-resource-alias'
-                    ,maxLength: (aliasLength > 255 || aliasLength === 0) ? 255 : aliasLength
+                    ,maxLength: (aliasLength > 191 || aliasLength === 0) ? 191 : aliasLength
                     ,anchor: '100%'
                     ,value: config.record.alias || ''
                     ,listeners: {
@@ -688,7 +688,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,description: '<b>[[*longtitle]]</b><br />'+_('resource_longtitle_help')
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
-            ,maxLength: 255
+            ,maxLength: 191
             ,anchor: '100%'
             ,value: config.record.longtitle || ''
         },{

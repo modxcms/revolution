@@ -41,7 +41,7 @@ MODx.panel.FCProfile = function(config) {
                     ,name: 'name'
                     ,id: 'modx-fcp-name'
                     ,anchor: '100%'
-                    ,maxLength: 255
+                    ,maxLength: 191
                     ,enableKeyEvents: true
                     ,allowBlank: false
                     ,value: config.record.name

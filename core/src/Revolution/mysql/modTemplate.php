@@ -41,7 +41,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
             'description' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -66,7 +66,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
             'icon' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -115,7 +115,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
             'static_file' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

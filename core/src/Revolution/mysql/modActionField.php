@@ -39,7 +39,7 @@ class modActionField extends \MODX\Revolution\modActionField
             'name' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -65,7 +65,7 @@ class modActionField extends \MODX\Revolution\modActionField
             'form' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -73,7 +73,7 @@ class modActionField extends \MODX\Revolution\modActionField
             'other' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

@@ -68,7 +68,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
             'size' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => 'half',

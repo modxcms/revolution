@@ -55,7 +55,7 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
             'table_prefix' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -63,7 +63,7 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
             'service_class' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -71,7 +71,7 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
             'service_name' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

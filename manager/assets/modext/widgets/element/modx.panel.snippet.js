@@ -64,7 +64,7 @@ MODx.panel.Snippet = function(config) {
                         ,name: 'name'
                         ,id: 'modx-snippet-name'
                         ,anchor: '100%'
-                        ,maxLength: 255
+                        ,maxLength: 50
                         ,enableKeyEvents: true
                         ,allowBlank: false
                         ,value: config.record.name
