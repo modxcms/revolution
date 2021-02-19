@@ -303,18 +303,9 @@ if ('sdk' === trim($currentVersion['distro'], '@')) {
     $setting->save();
 }
 
-$maxFileSize = ini_get('upload_max_filesize');
-$maxFileSize = trim($maxFileSize);
-$last = strtolower($maxFileSize[strlen($maxFileSize)-1]);
-switch ($last) {
-    // The 'G' modifier is available since PHP 5.1.0
-    case 'g':
-        $maxFileSize *= 1024;
-    case 'm':
-        $maxFileSize *= 1024;
-    case 'k':
-        $maxFileSize *= 1024;
-}
+$maxFileSize = trim(ini_get('upload_max_filesize'));
+$modifier = strtolower(substr($maxFileSize, -1));
+$maxFileSizeInBytes = (int) $maxFileSize * pow(1024, strpos('kmg', $modifier) + 1);
 
 $settings_maxFileSize = $modx->getObject('modSystemSetting', array('key' => 'upload_maxsize'));
 if (!$settings_maxFileSize) {
@@ -330,7 +321,7 @@ if (!$settings_maxFileSize) {
         true
     );
 }
-$settings_maxFileSize->set('value', $maxFileSize);
+$settings_maxFileSize->set('value', $maxFileSizeInBytes);
 $settings_maxFileSize->save();
 
 return true;
