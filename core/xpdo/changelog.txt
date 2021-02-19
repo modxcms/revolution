@@ -1,7 +1,8 @@
 This file shows the changes in this release of xPDO.
 
-xPDO 2.8.2-pl (TBD)
+xPDO 2.8.2-pl (February 19, 2021)
 ====================================
+- Update pclzip.lib.php to resolve PHP Notice
 - Fix error caused by merging PDO driver options
 
 xPDO 2.8.1-pl (July 13, 2020)
