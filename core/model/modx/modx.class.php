@@ -339,7 +339,7 @@ class modX extends xPDO {
                         $iteration++;
                     }
                 }
-                if (get_magic_quotes_gpc()) {
+                if (version_compare(PHP_VERSION, '7.4.0', '<') && get_magic_quotes_gpc()) {
                     $target[$key]= stripslashes($value);
                 } else {
                     $target[$key]= $value;
@@ -2463,7 +2463,7 @@ class modX extends xPDO {
         }
         if ($initialized) {
             $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
-                
+
             $logTarget = $this->getOption('log_target', $options, 'FILE', true);
             if ($logTarget === 'FILE') {
                 $options = array();
@@ -2478,7 +2478,7 @@ class modX extends xPDO {
             } else {
                 $this->setLogTarget($logTarget);
             }
-            
+
             $debug = $this->getOption('debug');
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
