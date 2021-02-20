@@ -31,6 +31,11 @@ abstract class modProcessor {
      * @var array $properties
      */
     public $properties = array();
+    /**
+     * The Permission to use when checking against
+     * @var string $permission
+     */
+    public $permission = '';
 
     /**
      * Creates a modProcessor object.
@@ -163,7 +168,10 @@ abstract class modProcessor {
      */
     public function run() {
         if (!$this->checkPermissions()) {
-            $o = $this->failure($this->modx->lexicon('permission_denied'));
+            $o = $this->failure($this->modx->lexicon('permission_denied_processor', array(
+                'action' => preg_replace('/[^\w\-_\/]+/i', '', $this->getProperty('action')),
+                'permission' => ($this->permission != '') ? $this->permission : '- unknown -'
+            )));
         } else {
             $topics = $this->getLanguageTopics();
             foreach ($topics as $topic) {
@@ -390,8 +398,6 @@ abstract class modObjectProcessor extends modProcessor {
     public $classKey;
     /** @var string $primaryKeyField The primary key field to grab the object by */
     public $primaryKeyField = 'id';
-    /** @var string $permission The Permission to use when checking against */
-    public $permission = '';
     /** @var array $languageTopics An array of language topics to load */
     public $languageTopics = array();
 
