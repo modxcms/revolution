@@ -84,7 +84,7 @@ MODx.combo.ComboBox = function(config,getStore) {
             ,listeners: {
                 loadexception: {
                     fn: function (o, trans, resp) {
-                        var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
+                        var status = _('code') + ': ' + resp.status + ' ' + resp.statusText;
                         var response = Ext.decode(resp.responseText || '[]');
                         MODx.msg.alert(_('error'), (response.message || status));
                     }
