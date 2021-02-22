@@ -447,7 +447,7 @@ class modX extends xPDO {
                 null,
                 null,
                 $options,
-                null
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT)
             );
             $this->setLogLevel($this->getOption('log_level', null, xPDO::LOG_LEVEL_ERROR));
             $this->setLogTarget($this->getOption('log_target', null, 'FILE'));
@@ -477,10 +477,10 @@ class modX extends xPDO {
      *
      * @param string $configPath An absolute path location to search for the modX config file.
      * @param array $data Data provided to initialize the instance with, overriding config file entries.
-     * @param null $driverOptions Driver options for the primary connection.
+     * @param array $driverOptions Driver options for the primary connection.
      * @return array The merged config data ready for use by the modX::__construct() method.
      */
-    protected function loadConfig($configPath = '', $data = array(), $driverOptions = null) {
+    protected function loadConfig($configPath = '', $data = array(), $driverOptions = array()) {
         if (!is_array($data)) $data = array();
         modX :: protect();
         if (!defined('MODX_CONFIG_KEY')) {
@@ -495,6 +495,8 @@ class modX extends xPDO {
             if (MODX_CONFIG_KEY !== 'config') $cachePath .= MODX_CONFIG_KEY . '/';
             if (!is_array($config_options)) $config_options = array();
             if (!is_array($driver_options)) $driver_options = array();
+            if (!is_array($driverOptions)) $driverOptions = array();
+            $driver_options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT) + $driverOptions + $driver_options;
             $data = array_merge(
                 array (
                     xPDO::OPT_CACHE_KEY => 'default',
