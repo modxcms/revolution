@@ -322,6 +322,7 @@ $_lang['path'] = 'パス';
 $_lang['per_page'] = 'Per Page';
 $_lang['permissions'] = '権限';
 $_lang['permission_denied'] = '権限がありません。';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'このページを見るための権限がありません。エラーと思われる場合は管理者に確認してください。';
 $_lang['please_wait'] = 'しばらくお待ちください';
 $_lang['plugin'] = 'プラグイン';
