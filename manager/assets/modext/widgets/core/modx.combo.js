@@ -81,10 +81,13 @@ MODx.combo.ComboBox = function(config,getStore) {
             ,remoteSort: config.remoteSort || false
             ,autoDestroy: true
             ,listeners: {
-                'loadexception': {fn: function(o,trans,resp) {
-                    var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
-                    MODx.msg.alert(_('error'), status + resp.responseText);
-                }}
+                loadexception: {
+                    fn: function (o, trans, resp) {
+                        var status = _('code') + ': ' + resp.status + ' ' + resp.statusText;
+                        var response = Ext.decode(resp.responseText || '[]');
+                        MODx.msg.alert(_('error'), (response.message || status));
+                    }
+                }
             }
         })
     });

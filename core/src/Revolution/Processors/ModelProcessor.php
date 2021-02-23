@@ -31,8 +31,6 @@ abstract class ModelProcessor extends Processor
     public $classKey;
     /** @var string $primaryKeyField The primary key field to grab the object by */
     public $primaryKeyField = 'id';
-    /** @var string $permission The Permission to use when checking against */
-    public $permission = '';
     /** @var array $languageTopics An array of language topics to load */
     public $languageTopics = [];
 
