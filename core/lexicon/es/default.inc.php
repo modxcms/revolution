@@ -322,6 +322,7 @@ $_lang['path'] = 'Ruta';
 $_lang['per_page'] = 'Por Página';
 $_lang['permissions'] = 'Permisos';
 $_lang['permission_denied'] = '¡Permiso denegado!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'No tienes los permisos de la política de acceso necesarios para ver esta página. Si crees es un error, por favor, contacta con el administrador del sistema.';
 $_lang['please_wait'] = 'Por favor espera...';
 $_lang['plugin'] = 'Plugin';
