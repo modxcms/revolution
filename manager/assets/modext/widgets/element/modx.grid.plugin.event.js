@@ -64,7 +64,7 @@ MODx.grid.PluginEvent = function(config) {
                     action: 'Element/PropertySet/GetList'
                     ,showAssociated: true
                     ,elementId: config.plugin
-                    ,elementType: 'modPlugin'
+                    ,elementType: 'MODX\\Revolution\\modPlugin'
                 }
             }
             ,sortable: true
@@ -260,7 +260,7 @@ MODx.grid.PluginEventAssoc = function(config) {
                     action: 'Element/PropertySet/GetList'
                     ,showAssociated: true
                     ,elementId: config.plugin
-                    ,elementType: 'modPlugin'
+                    ,elementType: 'MODX\\Revolution\\modPlugin'
                 }
             }
         },{
