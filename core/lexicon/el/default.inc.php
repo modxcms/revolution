@@ -322,6 +322,7 @@ $_lang['path'] = 'Διαδρομή';
 $_lang['per_page'] = 'Ανά σελίδα';
 $_lang['permissions'] = 'Δικαιώματα';
 $_lang['permission_denied'] = 'Δεν επιτρέπεται η πρόσβαση!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
 $_lang['please_wait'] = 'Περιμένετε...';
 $_lang['plugin'] = 'Πρόσθετο';
