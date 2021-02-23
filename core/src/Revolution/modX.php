@@ -344,7 +344,7 @@ class modX extends xPDO {
                         $iteration++;
                     }
                 }
-                if (get_magic_quotes_gpc()) {
+                if (version_compare(PHP_VERSION, '7.4.0', '<') && get_magic_quotes_gpc()) {
                     $target[$key]= stripslashes($value);
                 } else {
                     $target[$key]= $value;
