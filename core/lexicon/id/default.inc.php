@@ -322,6 +322,7 @@ $_lang['path'] = 'Jalan';
 $_lang['per_page'] = 'Per halaman';
 $_lang['permissions'] = 'Izin';
 $_lang['permission_denied'] = 'Izin ditolak!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Anda tidak memiliki akses yang tepat kebijakan izin untuk melihat Halaman ini. Jika Anda merasa ini kesalahan, silahkan hubungi administrator sistem Anda.';
 $_lang['please_wait'] = 'Harap tunggu...';
 $_lang['plugin'] = 'Plugin';
