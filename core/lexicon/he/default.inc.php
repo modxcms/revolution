@@ -322,6 +322,7 @@ $_lang['path'] = 'נתיב';
 $_lang['per_page'] = 'לעמוד';
 $_lang['permissions'] = 'הרשאות';
 $_lang['permission_denied'] = 'הרשאה נדחתה!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'אין לך את הרשאות מדיניות גישה ראויות לצפייה בדף זה. אם אתה מרגיש שזה בטעות, אנא צור קשר עם מנהל המערכת שלך.';
 $_lang['please_wait'] = 'אנא המתן...';
 $_lang['plugin'] = 'תוסף';
