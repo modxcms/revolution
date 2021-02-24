@@ -9,7 +9,7 @@
 $_lang['area'] = 'Area';
 $_lang['areas'] = 'Aree';
 $_lang['class_name'] = 'Nome Classe';
-$_lang['default'] = 'Default';
+$_lang['default'] = 'Predefinito';
 $_lang['duplicate_of'] = 'Duplica [[+name]]';
 $_lang['element_properties_desc'] = 'Qui puoi modificare le proprietà di default dell\'elemento, o modificare specifici Sets di Proprietà. <b>Nota Bene</b>: Quando modifichi il Set di default, salverai le proprietà come "proprietà di default". Modificando un determinato Set di proprietà salverai queste configurazioni nell\'insieme stesso.<br /><br />Dopo aver selezionato un insieme di proprietà da modificare, verranno mostrate nella griglia le proprietà di default con il colore <span style="color: gray;">grigio</span>. Le proprietà in grigio non fanno parte dell\'insieme, ma sono mostrate per una modifica più semplice. Le proprietà in <span style="color: green">verde</span> sono proprietà che sono state cambiate rispetto ai valori di default. Le proprietà in <span style="color: purple">viola</span> sono nuove proprietà del Set personalizzato che non sono presenti nelle proprietà di default.<br /><br /><b>Nota Bene:</b> E\' sempre meglio non modificare le proprietà di default degli snippets installati tramite il Gestore dei Pacchetti (Package Management), infatti, qualora questi snippets vengano aggiornati, le proprietà di default saranno sovrascritte. Usa piuttosto un altro Set di Proprietà.';
 $_lang['file'] = 'File';
