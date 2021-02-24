@@ -28,3 +28,4 @@ include dirname(__DIR__) . '/common/3.0.0-update-default-media-source-setting.ph
 include dirname(__DIR__) . '/common/3.0.0-update-upload_files-woff2.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-params.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-output-params.php';
+include dirname(__DIR__) . '/common/3.0.0-update-base_help_url.php';
