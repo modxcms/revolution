@@ -10,7 +10,7 @@ $_lang['area'] = 'Area';
 $_lang['area_authentication'] = 'Autenticazione e Sicurezza';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Codice Core';
-$_lang['area_editor'] = 'Rich-Text Editor';
+$_lang['area_editor'] = 'Editor di Testo Avanzato';
 $_lang['area_file'] = 'File System';
 $_lang['area_filter'] = 'Filtra per area...';
 $_lang['area_furls'] = 'URL Semplici (Friendly URL)';
@@ -135,8 +135,8 @@ $_lang['setting_cache_action_map_desc'] = 'Se impostata su "SI", le azioni (o le
 $_lang['setting_cache_alias_map'] = 'Abilita Context Alias Map Cache';
 $_lang['setting_cache_alias_map_desc'] = 'Quando abilitato, tutti gli URIs delle Risorse sono inseriti nella cache del Contesto. Abilitalo su siti pi&ugrave; piccoli e disabilitalo su siti pi&ugrave; grandi per avere prestazioni migliori.';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Usa la tabella delle risorse contestuali per gli aggiornamenti della cache contestuale';
+$_lang['setting_use_context_resource_table_desc'] = 'Quando attivata, gli aggiornamenti del cache contesto utilizzano la tabella context_resource. Ciò consente di avere in paniera programmatica, una risorsa in più contesti. Se non devi usare queste risorse in contesti multipli tramite API, puoi impostare falso. Su siti di grandi dimensioni miglioreranno le prestazioni del manager.';
 
 $_lang['setting_cache_context_settings'] = 'Abilita Cache Impostazione dei Contesti';
 $_lang['setting_cache_context_settings_desc'] = 'Se impostata su "SI", le impostazioni dei contesti saranno inserite in cache per ridurre il tempo di caricamento.';
@@ -284,7 +284,7 @@ $_lang['setting_failed_login_attempts_desc'] = 'Il numero di tentativi errati di
 $_lang['setting_fe_editor_lang'] = 'Lingua Editor Front-end';
 $_lang['setting_fe_editor_lang_desc'] = 'Scegli una lingua da usare nell\'editor quando usato come editor front-end.';
 
-$_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
+$_lang['setting_feed_modx_news'] = 'Feed Novita\' MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Imposta l\'URL dei feed RSS per il pannello MODX News nel manager.';
 
 $_lang['setting_feed_modx_news_enabled'] = 'MODX News Feed Abilitati';
@@ -665,7 +665,7 @@ $_lang['setting_session_cookie_path_desc'] = 'Con questa impostazione puoi perso
 $_lang['setting_session_cookie_secure'] = 'Sicurezza Cookie Sessione';
 $_lang['setting_session_cookie_secure_desc'] = 'Abilita questa opzione per usare cookies per sessioni sicure.';
 
-$_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
+$_lang['setting_session_cookie_httponly'] = 'Cookie Sessione HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Utilizza questa opzione per spuntare il flag HttpOnly sui cookies della sessione.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Durata Max sessione Garbage Collector';
