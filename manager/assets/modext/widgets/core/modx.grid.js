@@ -117,6 +117,7 @@ MODx.grid.Grid = function(config) {
 
             config.columns.push({
                 width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
@@ -130,6 +131,7 @@ MODx.grid.Grid = function(config) {
 
             config.cm.columns.push({
                 width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
@@ -806,6 +808,7 @@ MODx.grid.LocalGrid = function(config) {
     if (config.showActionsColumn && config.columns && Array.isArray(config.columns)) {
         config.columns.push({
             width: config.actionsColumnWidth || 50
+            ,menuDisabled: true
             ,renderer: {
                 fn: this.actionsColumnRenderer,
                 scope: this
@@ -1526,13 +1529,26 @@ MODx.grid.JsonGrid = function (config) {
             header: el.header || _(el.name),
             dataIndex: el.name,
             editable: true,
+            menuDisabled: true,
             hidden: el.hidden || false,
             editor: {
                 xtype: el.xtype || 'textfield',
                 allowBlank: el.allowBlank || true,
+                enableKeyEvents: true,
+                fieldname: el.name,
                 listeners: {
                     change: {
                         fn: this.saveValue,
+                        scope: this
+                    },
+                    keyup: {
+                        fn: function (sb) {
+                            var record = this.getSelectionModel().getSelected();
+                            if (record) {
+                                record.set(sb.fieldname, sb.el.dom.value);
+                                this.saveValue();
+                            }
+                        },
                         scope: this
                     }
                 }
@@ -1671,6 +1687,43 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
             value.push(row);
         }, this);
         this.hiddenField.setValue(Ext.util.JSON.encode(value));
+    },
+    _getActionsColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="actions !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="actions">'
+            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    },
+    actionsColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        return this._getActionsColumnTpl().apply({
+            actions: this.getActions()
+        });
+    },
+    onClick: function (e) {
+        var target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) return;
+        if (!target.dataset.action) return;
+
+        var actionHandler = 'action' + target.dataset.action.charAt(0).toUpperCase() + target.dataset.action.slice(1);
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
+            }
+        }
+
+        var record = this.getSelectionModel().getSelected();
+        var recordIndex = this.store.indexOf(record);
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
     }
 });
 Ext.reg('grid-json', MODx.grid.JsonGrid);
