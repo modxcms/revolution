@@ -328,7 +328,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 if(this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforecollapse', this, animate) === false){
                     return;
                 }
-                if (animate && window.innerWidth > 640) {
+                if (animate && window.innerWidth > 960) {
                     var tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
                     tree.dom.style.opacity = 0;
                     this.el.dom.style.left = '-' + this.el.dom.style.width;
@@ -344,7 +344,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 if(!this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforeexpand', this, animate) === false){
                     return;
                 }
-                if (animate && window.innerWidth > 640) {
+                if (animate && window.innerWidth > 960) {
                     var tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
                     window.setTimeout(function() {
                         tree.dom.style.visibility = 'visible';
