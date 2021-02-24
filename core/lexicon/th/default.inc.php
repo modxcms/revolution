@@ -322,6 +322,7 @@ $_lang['path'] = 'เส้นทาง';
 $_lang['per_page'] = 'ต่อหน้า';
 $_lang['permissions'] = 'สิทธิ์การใช้งาน';
 $_lang['permission_denied'] = 'สิทธิ์การใช้งานถูกปฏิเสธ!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'คุณไม่ได้รับอนุญาตให้เข้าชมหน้านี้ ถ้าคุณคิดว่าเกิดจากข้อผิดพลาด กรุณาติดต่อผู้ดูและระบบของคุณ';
 $_lang['please_wait'] = 'กรุณารอสักครู่...';
 $_lang['plugin'] = 'ปลั๊กอิน';
