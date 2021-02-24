@@ -322,6 +322,7 @@ $_lang['path'] = 'Sökväg';
 $_lang['per_page'] = 'Per sida';
 $_lang['permissions'] = 'Behörigheter';
 $_lang['permission_denied'] = 'Åtkomst nekades!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Du har inte de rätta åtkomsträttigheterna för att se den här sidan. Kontakta systemadministratören om du tycker att det är fel.';
 $_lang['please_wait'] = 'Var snäll och vänta...';
 $_lang['plugin'] = 'Plugin';
