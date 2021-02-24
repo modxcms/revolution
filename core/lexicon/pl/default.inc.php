@@ -322,6 +322,7 @@ $_lang['path'] = 'Ścieżka';
 $_lang['per_page'] = 'Na stronie';
 $_lang['permissions'] = 'Uprawnienia';
 $_lang['permission_denied'] = 'Brak uprawnień!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'You do not have the proper access policy permissions to view this page. If you feel this is in error, please contact your systems administrator.';
 $_lang['please_wait'] = 'Proszę czekać&hellip;';
 $_lang['plugin'] = 'Wtyczka';
