@@ -602,7 +602,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,fieldLabel: _('user_country')
             ,xtype: 'modx-combo-country'
             ,anchor: '100%'
-            ,value: ''
         },{
             layout: 'column'
             ,border: false

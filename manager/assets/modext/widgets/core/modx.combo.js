@@ -719,6 +719,7 @@ MODx.combo.Country = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Country/GetList'
+            ,combo: 1
         }
         ,displayField: 'country'
         ,valueField: 'iso'
@@ -728,7 +729,6 @@ MODx.combo.Country = function(config) {
             'value' // Deprecated (available for BC)
         ]
         ,editable: true
-        ,value: 0
         ,typeAhead: true
     });
     MODx.combo.Country.superclass.constructor.call(this,config);
