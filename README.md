@@ -1,6 +1,6 @@
-# MODX3s - Sterc fork of MODX3
+# MODX3s
 
-This fork can be used for creating sites on `MODX 3`
+This can be used for creating sites on `MODX 3`
 
 ## Versioning
 
