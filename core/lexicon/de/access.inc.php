@@ -61,7 +61,7 @@ $_lang['access_rgroup_remove'] = 'Zugriff auf diese Ressourcen-Gruppe löschen';
 $_lang['access_rgroup_update'] = 'Zugriff auf diese Ressourcen-Gruppe bearbeiten';
 $_lang['access_source_err_ae'] = 'Eine ACL für diese Medienquelle existiert bereits.';
 $_lang['access_source_remove'] = 'Zugriff auf diese Medienquellen löschen';
-$_lang['access_source_update'] = 'Bearbeite Medienquellen-Zugriff';
+$_lang['access_source_update'] = 'Zugriff auf diese Medienquelle bearbeiten';
 $_lang['access_to_contexts'] = 'Zugriff auf Kontexte';
 $_lang['access_to_resource_groups'] = 'Zugriff auf Ressourcen-Gruppen';
 $_lang['access_type_err_ns'] = 'Zieltyp oder ID nicht angegeben!';
@@ -109,8 +109,8 @@ $_lang['resource_group_access_ugs_desc'] = 'Eine kommaseparierte Liste von Benut
 $_lang['roles_msg'] = 'Eine Rolle ist per Definition eine Position oder ein Status, den man in einer bestimmten Situation hat. Rollen können verwendet werden, um Benutzer innerhalb einer Benutzergruppe nach Position oder Status zu gruppieren. Rollen haben in MODX zudem das, was wir "Autorität" nennen. Dies ist ein Zahlenwert, genauer gesagt eine beliebige ganze Zahl >= 0. Autoritäts-Level sind "abwärts vererbbar" in dem Sinne, dass eine Rolle mit Autorität 1 alle Gruppenrichtlinien erbt, die ihr selbst und allen Rollen mit einem höheren Autoritäts-Wert als 1 zugeordnet sind.';
 $_lang['source_add'] = 'Medienquelle hinzufügen';
 $_lang['namespace_add'] = 'Namensraum hinzufügen';
-$_lang['access_namespace_update'] = 'Namensraum-Zugriff bearbeiten';
-$_lang['access_namespace_remove'] = 'Namensraum-Zugriff löschen';
+$_lang['access_namespace_update'] = 'Zugriff auf diesen Namensraum bearbeiten';
+$_lang['access_namespace_remove'] = 'Zugriff auf diesen Namensraum löschen';
 $_lang['filter_by_namespace'] = 'Nach Namensraum filtern...';
 
 $_lang['user_group_aw'] = 'Zugriffsrechte-Assistent';
