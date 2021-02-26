@@ -22,7 +22,7 @@ MODx.grid.ContextSettings = function(config) {
         ,fk: config.context_key
         ,save_action: 'Context/Setting/UpdateFromGrid'
         ,tbar: [{
-            text: _('setting_create')
+            text: _('create')
             ,scope: this
             ,cls:'primary-button'
             ,handler: {
@@ -97,7 +97,7 @@ MODx.window.UpdateContextSetting = function(config) {
     config = config || {};
     var r = config.record;
     Ext.applyIf(config,{
-        title: _('setting_update')
+        title: _('edit')
         ,action: 'Context/Setting/Update'
         ,fk: r.context_key
     });
