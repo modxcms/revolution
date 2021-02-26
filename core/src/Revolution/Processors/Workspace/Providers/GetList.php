@@ -88,12 +88,12 @@ class GetList extends GetListProcessor
         if (!$this->getProperty('combo', false)) {
             $objectArray['menu'] = [
                 [
-                    'text' => $this->modx->lexicon('provider_update'),
+                    'text' => $this->modx->lexicon('edit'),
                     'handler' => ['xtype' => 'modx-window-provider-update'],
                 ],
                 '-',
                 [
-                    'text' => $this->modx->lexicon('provider_remove'),
+                    'text' => $this->modx->lexicon('delete'),
                     'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove", "workspace/providers/remove"])',
                 ]
             ];
