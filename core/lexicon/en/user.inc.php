@@ -32,7 +32,6 @@ $_lang['profile_recent_resources'] = 'Recent Resources';
 $_lang['profile_recent_resources_desc'] = 'This is a list of your most recently edited Resources.';
 $_lang['remote_data'] = 'Remote Data';
 $_lang['role'] = 'Role';
-$_lang['role_create'] = 'Create Role';
 $_lang['role_desc_authority'] = 'The Authority level of the role. Lower Authority levels are stronger, and inherit the Permissions of Roles with higher authorities in the groups they are assigned to.';
 $_lang['role_desc_name'] = 'A name for the Role, such as Content Editor, Publisher, System Administrator, etc.';
 $_lang['role_desc_description'] = 'A short description of the Role.';

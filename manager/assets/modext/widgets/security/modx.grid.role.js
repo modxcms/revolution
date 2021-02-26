@@ -44,7 +44,7 @@ MODx.grid.Role = function(config) {
             ,sortable: true
         }]
         ,tbar: [{
-            text: _('new_role')
+            text: _('create')
             ,cls:'primary-button'
             ,handler: this.createRole
             ,scope: this
@@ -65,7 +65,7 @@ Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
         var m = [];
         if (p.indexOf('remove') != -1) {
             m.push({
-                text: _('role_remove')
+                text: _('delete')
                 ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'Security/Role/Remove'])
             });
         }
@@ -95,7 +95,7 @@ MODx.window.CreateRole = function(config) {
     config = config || {};
     this.ident = config.ident || 'crole'+Ext.id();
     Ext.applyIf(config,{
-        title: _('role_create')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Role/Create'
         ,fields: [{

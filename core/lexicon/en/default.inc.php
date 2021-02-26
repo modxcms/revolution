@@ -274,7 +274,6 @@ $_lang['new_message'] = 'Create Message';
 $_lang['new_name'] = 'New Name';
 $_lang['new_parent'] = 'Create parent';
 $_lang['new_plugin'] = 'Create Plugin';
-$_lang['new_role'] = 'Create Role';
 $_lang['new_snippet'] = 'Create Snippet';
 $_lang['new_template'] = 'Create Template';
 $_lang['new_tv'] = 'Create TV';

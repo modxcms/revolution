@@ -15,7 +15,7 @@ MODx.page.ListRoles = function(config) {
 	Ext.applyIf(config,{
 		buttons: [{
             process: 'new'
-            ,text: _('new')
+            ,text: _('create')
             ,id: 'modx-abtn-new'
             ,cls: 'primary-button'
             ,params: {
