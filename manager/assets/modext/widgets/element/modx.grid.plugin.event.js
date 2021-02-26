@@ -166,7 +166,7 @@ MODx.window.UpdatePluginEvent = function(config) {
     config = config || {};
     this.ident = config.ident || 'upluge'+Ext.id();
     Ext.applyIf(config,{
-        title: _('plugin_event_update')
+        title: _('edit')
         ,id: 'modx-window-plugin-event-update'
         ,url: MODx.config.connector_url
         ,action: 'Element/Plugin/Event/Associate'
@@ -325,7 +325,7 @@ MODx.window.AddPluginToEvent = function(config) {
     config = config || {};
     this.ident = config.ident || 'apluge'+Ext.id();
     Ext.applyIf(config,{
-        title: _('plugin_add_to_event')
+        title: _('plugin_add')
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'element/plugin/event/addplugin'
