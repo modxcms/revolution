@@ -47,7 +47,8 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
                 'select':{fn:function(data) {
                     var str = data.fullRelativeUrl;
                     if (MODx.config.base_url != '/') {
-                        str = str.replace(MODx.config.base_url,'');
+                        var regex = new RegExp('^' + MODx.config.base_url + '(.*)');
+                        str = str.replace(regex, '/$1');
                     }
                     if (str.substring(0,1) == '/') { str = str.substring(1); }
                     Ext.getCmp('modx-resource-content-static').setValue(str);
