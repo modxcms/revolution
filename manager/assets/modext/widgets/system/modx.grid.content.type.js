@@ -99,7 +99,7 @@ MODx.grid.ContentType = function(config) {
             ,hidden: true
         }]
         ,tbar: [{
-            text: _('content_type_new')
+            text: _('create')
             ,cls: 'primary-button'
             ,handler: this.newContentType
             ,scope: this
@@ -111,11 +111,11 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
     getMenu: function() {
         var m = [];
         m.push({
-            text: _('content_type_edit')
+            text: _('edit')
             ,handler: function(btn, e) {
                 var window = new MODx.window.CreateContentType({
                     record: this.menu.record
-                    ,title: _('content_type_edit')
+                    ,title: _('edit')
                     ,action: 'System/ContentType/Update'
                     ,listeners: {
                         success: {
@@ -130,7 +130,7 @@ Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
             ,scope: this
         });
         m.push({
-            text: _('content_type_remove')
+            text: _('delete')
             ,handler: this.confirm.createDelegate(this,['System/ContentType/Remove',_('content_type_remove_confirm')])
         });
 
@@ -167,7 +167,7 @@ MODx.window.CreateContentType = function(config) {
     config = config || {};
     this.ident = config.ident || 'modx-cct'+Ext.id();
     Ext.applyIf(config,{
-        title: _('content_type_new')
+        title: _('create')
         ,width: 600
         ,url: MODx.config.connector_url
         ,action: 'System/ContentType/Create'
@@ -336,7 +336,7 @@ MODx.ContentTypeHeaderGrid = function(config) {
         ,deferredRender: true
         ,autoHeight: true
         ,tbar: [{
-            text: _('new')
+            text: _('create')
             ,cls: 'primary-button'
             ,handler: this.add
             ,scope: this
@@ -383,7 +383,7 @@ Ext.extend(MODx.ContentTypeHeaderGrid, MODx.grid.LocalGrid, {
         });
 
         m.push({
-            text: _('remove')
+            text: _('delete')
             ,handler: this.remove
             ,scope: this
         });
