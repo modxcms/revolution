@@ -75,6 +75,9 @@ class GetList extends Processor
             }
             return $_country_lang;
         }
+        if ($this->getProperty('combo')) {
+            array_unshift($_country_lang, ['']);
+        }
 
         return $_country_lang;
     }
