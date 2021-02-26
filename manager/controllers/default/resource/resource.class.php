@@ -586,11 +586,25 @@ abstract class ResourceManagerController extends modManagerController
         $ctx = null;
         $height = $this->modx->getOption('resource_panel_max_crumbs', null, 3);
         $columns = ['id', 'pagetitle', 'published', 'hidemenu', 'parent'];
-        if (!$id = $this->resource->get('id')) {
-            if ($this->parent && $id = $this->parent->get('id')) {
-                $ctx = $this->parent->get('context_key');
-                $parents[] = $this->parent->get($columns);
-                $height--;
+
+        if (empty($this->resource->id) && (empty($this->parent) || empty($this->parent->id))) {
+            $parentGet = (int)$this->modx->getOption('parent', $this->resourceArray, $this->modx->getOption('parent', $_GET));
+            if (!empty($parentGet)) {
+                $this->parent = $this->modx->getObject(modResource::class, ['id' => $parentGet]);
+            } else {
+                $ctx = $this->modx->getOption('context_key', $_GET);
+            }
+        }
+
+        $id = $this->resource->get('id');
+        if (!$id) {
+            if ($this->parent) {
+                $id = $this->parent->get('id');
+                if ($id) {
+                    $ctx = $this->parent->get('context_key');
+                    $parents[] = $this->parent->get($columns);
+                    $height--;
+                }
             }
         } else {
             $ctx = $this->resource->get('context_key');
@@ -604,7 +618,9 @@ abstract class ResourceManagerController extends modManagerController
                 }
             }
         }
-        if ($context = $this->modx->getObject(modContext::class, ['key' => $ctx])) {
+
+        $context = $this->modx->getObject(modContext::class, ['key' => $ctx]);
+        if ($context) {
             $parents[] = $context->get(['name','key']);
         }
 
