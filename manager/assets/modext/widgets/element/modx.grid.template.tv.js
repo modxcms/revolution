@@ -127,7 +127,7 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
 
         if (p.indexOf('pedit') != -1) {
             m.push({
-                text: _('edit_tv')
+                text: _('edit')
                 ,handler: this.updateTV
             });
         }
