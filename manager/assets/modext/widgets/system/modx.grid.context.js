@@ -89,7 +89,7 @@ MODx.grid.Context = function(config) {
             ,editor: { xtype: 'numberfield' }
         }]
         ,tbar: [{
-            text: _('context_create')
+            text: _('create')
             ,cls:'primary-button'
             ,handler: this.create
             ,scope: this
@@ -150,7 +150,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         var m = [];
         if (p.indexOf('pnew') != -1) {
             m.push({
-                text: _('context_duplicate')
+                text: _('duplicate')
                 ,handler: this.duplicateContext
                 ,scope: this
             });
@@ -158,7 +158,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
 
         if (p.indexOf('pedit') != -1) {
             m.push({
-                text: _('context_update')
+                text: _('edit')
                 ,handler: this.updateContext
             });
         }
@@ -166,7 +166,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         if (p.indexOf('premove') != -1) {
             m.push('-');
             m.push({
-                text: _('context_remove')
+                text: _('delete')
                 ,handler: this.remove
                 ,scope: this
             });
@@ -274,7 +274,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             actions.push({
                 action: 'updateContext',
                 icon: 'pencil-square-o',
-                text: _('context_update')
+                text: _('edit')
             });
         }
 
@@ -282,7 +282,7 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
             actions.push({
                 action: 'remove',
                 icon: 'trash-o',
-                text: _('context_remove')
+                text: _('delete')
             });
         }
 
@@ -302,7 +302,7 @@ Ext.reg('modx-grid-contexts',MODx.grid.Context);
 MODx.window.CreateContext = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('context_create')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Context/Create'
         ,fields: [{
