@@ -322,6 +322,7 @@ $_lang['path'] = 'Pad';
 $_lang['per_page'] = 'Per pagina';
 $_lang['permissions'] = 'Rechten';
 $_lang['permission_denied'] = 'Toegang geweigerd!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Je hebt niet de juiste rechten om deze pagina te bekijken. Als je het gevoel hebt dat dit een fout is, neem contact op met de beheerder.';
 $_lang['please_wait'] = 'Even wachten a.u.b...';
 $_lang['plugin'] = 'Plugin';

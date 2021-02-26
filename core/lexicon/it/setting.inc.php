@@ -10,7 +10,7 @@ $_lang['area'] = 'Area';
 $_lang['area_authentication'] = 'Autenticazione e Sicurezza';
 $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Codice Core';
-$_lang['area_editor'] = 'Rich-Text Editor';
+$_lang['area_editor'] = 'Editor di Testo Avanzato';
 $_lang['area_file'] = 'File System';
 $_lang['area_filter'] = 'Filtra per area...';
 $_lang['area_furls'] = 'URL Semplici (Friendly URL)';
@@ -266,7 +266,7 @@ $_lang['setting_enable_gravatar_desc'] = 'Se abilitata, l\'immagine Gravatar ver
 $_lang['setting_failed_login_attempts'] = 'Tentativi Login Falliti';
 $_lang['setting_failed_login_attempts_desc'] = 'Il numero di tentativi errati di login concessi a un Utente prima che sia \'bloccato\'.';
 
-$_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
+$_lang['setting_feed_modx_news'] = 'Feed Novita\' MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Imposta l\'URL dei feed RSS per il pannello MODX News nel manager.';
 
 $_lang['setting_feed_modx_news_enabled'] = 'MODX News Feed Abilitati';
@@ -620,7 +620,7 @@ $_lang['setting_session_cookie_path_desc'] = 'Con questa impostazione puoi perso
 $_lang['setting_session_cookie_secure'] = 'Sicurezza Cookie Sessione';
 $_lang['setting_session_cookie_secure_desc'] = 'Abilita questa opzione per usare cookies per sessioni sicure.';
 
-$_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
+$_lang['setting_session_cookie_httponly'] = 'Cookie Sessione HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Utilizza questa opzione per spuntare il flag HttpOnly sui cookies della sessione.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Durata Max sessione Garbage Collector';

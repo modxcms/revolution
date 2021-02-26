@@ -322,6 +322,7 @@ $_lang['path'] = 'Шлях';
 $_lang['per_page'] = 'На сторінці';
 $_lang['permissions'] = 'Дозволи';
 $_lang['permission_denied'] = 'Доступ заборонено!';
+$_lang['permission_denied_processor'] = 'Потрібен дозвіл \'[[+permission]]\' для \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'У Вас немає достатніх прав доступу для перегляду цієї сторінки. Якщо Вам здається, що це помилка, будь ласка, зв\'яжіться з Вашим адміністратором.';
 $_lang['please_wait'] = 'Будь ласка, зачекайте...';
 $_lang['plugin'] = 'Плагін';

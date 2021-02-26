@@ -322,6 +322,7 @@ $_lang['path'] = 'Yol';
 $_lang['per_page'] = 'Sayfa başına';
 $_lang['permissions'] = 'İzinler';
 $_lang['permission_denied'] = 'İzin reddedildi!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Bu sayfayı görüntülemek için uygun erişim ilkesine sahip değilsiniz. Bunun bir hata olduğunu düşünüyorsanız, lütfen sistem yöneticinize başvurun.';
 $_lang['please_wait'] = 'Lütfen bekleyin...';
 $_lang['plugin'] = 'Eklenti';

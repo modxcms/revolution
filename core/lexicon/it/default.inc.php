@@ -322,6 +322,7 @@ $_lang['path'] = 'Percorso';
 $_lang['per_page'] = 'Per pagina';
 $_lang['permissions'] = 'Permessi';
 $_lang['permission_denied'] = 'Permesso negato!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Non hai sufficenti privilegi per vedere questa pagina. Se ritieni che questo sia un errore, per favore contatta l\'amministratore di sistema.';
 $_lang['please_wait'] = 'Attendere...';
 $_lang['plugin'] = 'Plugin';
