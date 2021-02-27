@@ -39,7 +39,7 @@ MODx.grid.SourceProperties = function(config) {
             ,sortable: true
         }]
         ,tbar: [{
-            text: _('property_create')
+            text: _('create')
             ,id: 'modx-btn-property-create'
             ,cls: 'primary-button'
             ,handler: this.create
@@ -201,7 +201,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             e.preventDefault();
             this.menu.removeAll();
             this.addContextMenuItem([{
-                text: _('properties_remove')
+                text: _('delete')
                 ,handler: this.removeMultiple
                 ,scope: this
             }]);
@@ -218,7 +218,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
         var r = this.menu.record;
         var m = []
         m.push({
-            text: _('property_update')
+            text: _('edit')
             ,scope: this
             ,handler: this.update
         });
@@ -232,7 +232,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
         }
         if (r.overridden != 1) {
             m.push({
-                text: _('property_remove')
+                text: _('delete')
                 ,scope: this
                 ,handler: this.remove.createDelegate(this,[{
                     title: _('warning')
@@ -285,7 +285,7 @@ MODx.grid.SourcePropertyOption = function(config) {
             ,editor: { xtype: 'textfield' ,allowBlank: true }
         }]
         ,tbar: [{
-            text: _('property_option_create')
+            text: _('create')
             ,cls: 'primary-button'
             ,handler: this.create
             ,scope: this
@@ -312,7 +312,7 @@ Ext.extend(MODx.grid.SourcePropertyOption,MODx.grid.LocalGrid,{
 
     ,getMenu: function() {
         return [{
-            text: _('property_option_remove')
+            text: _('delete')
             ,scope: this
             ,handler: this.remove.createDelegate(this,[{
                 title: _('warning')
@@ -332,7 +332,7 @@ Ext.reg('modx-grid-source-property-options',MODx.grid.SourcePropertyOption);
 MODx.window.CreateSourceProperty = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('property_create')
+        title: _('create')
         ,id: 'modx-window-source-property-create'
         ,saveBtnText: _('done')
         ,fields: [{
@@ -426,7 +426,7 @@ Ext.reg('modx-window-source-property-create',MODx.window.CreateSourceProperty);
 MODx.window.UpdateSourceProperty = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('property_update')
+        title: _('edit')
         ,id: 'modx-window-source-property-update'
         ,saveBtnText: _('done')
         ,forceLayout: true
@@ -542,7 +542,7 @@ Ext.reg('modx-window-source-property-update',MODx.window.UpdateSourceProperty);
 MODx.window.CreateSourcePropertyOption = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('property_option_create')
+        title: _('create')
         ,id: 'modx-window-source-property-option-create'
         ,saveBtnText: _('done')
         ,fields: [{
