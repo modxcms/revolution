@@ -51,7 +51,7 @@ MODx.grid.DashboardWidgets = function(config) {
             ,sortable: true
         }]
         ,tbar: [{
-            text: _('widget_create')
+            text: _('create')
             ,cls:'primary-button'
             ,handler: this.createDashboard
             ,scope: this
@@ -109,14 +109,14 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
         } else {
             if (p.indexOf('pupdate') != -1) {
                 m.push({
-                    text: _('widget_update')
+                    text: _('edit')
                     ,handler: this.updateWidget
                 });
             }
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('widget_unplace')
+                    text: _('delete')
                     ,handler: this.removeWidget
                 });
             }
@@ -136,7 +136,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
 
     ,removeWidget: function() {
         MODx.msg.confirm({
-            title: _('widget_remove')
+            title: _('delete')
             ,text: _('widget_remove_confirm')
             ,url: this.config.url
             ,params: {
