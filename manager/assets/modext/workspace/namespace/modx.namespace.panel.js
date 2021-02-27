@@ -79,7 +79,7 @@ MODx.grid.Namespace = function(config) {
             ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
-            text: _('namespace_create')
+            text: _('create')
             ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
             ,cls:'primary-button'
             ,scope: this
@@ -146,12 +146,12 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
             });
         } else {
             m.push({
-                text: _('namespace_update')
+                text: _('edit')
                 ,handler: this.namespaceUpdate
             });
             if (p.indexOf('premove') != -1 && this.menu.record.name != 'core') {
                 m.push({
-                    text: _('namespace_remove')
+                    text: _('delete')
                     ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','Workspace/PackageNamespace/Remove'])
                 });
             }
