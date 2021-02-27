@@ -23,7 +23,7 @@ MODx.tree.Menu = function(config) {
         ,useDefaultToolbar: true
         ,ddGroup: 'modx-menu'
         ,tbar: [{
-            text: _('menu_create')
+            text: _('create')
             ,cls:'primary-button'
             ,handler: this.createMenu
             ,scope: this
@@ -111,7 +111,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     ,getMenu: function(node, event) {
         var m = [
             {
-                text: _('menu_create'),
+                text: _('create'),
                 handler: this.createMenu
             }
         ];
@@ -119,12 +119,12 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         if (!node.parentNode.isRoot) {
             m.push('-');
             m.push({
-                text: _('menu_update'),
+                text: _('edit'),
                 handler: this.updateMenu
             });
             m.push('-');
             m.push({
-                text: _('menu_remove'),
+                text: _('delete'),
                 handler: this.removeMenu
             });
         }
@@ -153,7 +153,7 @@ MODx.window.CreateMenu = function(config) {
     config = config || {};
     this.ident = config.ident || 'modx-cmenu-'+Ext.id();
     Ext.applyIf(config,{
-        title: _('menu_create')
+        title: _('create')
         ,width: 600
         ,url: MODx.config.connector_url
         ,action: 'System/Menu/Create'
@@ -305,7 +305,7 @@ Ext.reg('modx-window-menu-create',MODx.window.CreateMenu);
 MODx.window.UpdateMenu = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('menu_update')
+        title: _('edit')
         ,action: 'System/Menu/Update'
     });
     MODx.window.UpdateMenu.superclass.constructor.call(this,config);
