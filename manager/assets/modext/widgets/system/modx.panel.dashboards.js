@@ -95,7 +95,7 @@ MODx.grid.Dashboards = function(config) {
             ,editor: { xtype: 'textarea' }
         }]
         ,tbar: [{
-            text: _('dashboard_create')
+            text: _('create')
             ,cls:'primary-button'
             ,handler: this.createDashboard
             ,scope: this
@@ -171,20 +171,20 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
         } else {
             if (p.indexOf('pupdate') != -1) {
                 m.push({
-                    text: _('dashboard_update')
+                    text: _('edit')
                     ,handler: this.updateDashboard
                 });
             }
             if (p.indexOf('pduplicate') != -1) {
                 m.push({
-                    text: _('dashboard_duplicate')
+                    text: _('duplicate')
                     ,handler: this.duplicateDashboard
                 });
             }
             if (p.indexOf('premove') != -1 && r.data.id != 1 && r.data.name != 'Default') {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('dashboard_remove')
+                    text: _('delete')
                     ,handler: this.removeDashboard
                 });
             }
@@ -217,7 +217,7 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
 
     ,removeDashboard: function() {
         MODx.msg.confirm({
-            title: _('dashboard_remove')
+            title: _('delete')
             ,text: _('dashboard_remove_confirm')
             ,url: this.config.url
             ,params: {

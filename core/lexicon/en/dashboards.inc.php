@@ -7,20 +7,15 @@
  * @language en
  */
 $_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard_add'] = 'Create Dashboard';
-$_lang['dashboard_create'] = 'Create Dashboard';
 $_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
 $_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
 $_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
 $_lang['dashboard_hide_trees'] = 'Hide Left-Hand Trees';
 $_lang['dashboard_desc_customizable'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
 $_lang['dashboard_customizable'] = 'Customizable';
-$_lang['dashboard_duplicate'] = 'Duplicate Dashboard';
-$_lang['dashboard_remove'] = 'Delete Dashboard';
 $_lang['dashboard_remove_confirm'] = 'Are you sure you want to delete this Dashboard?';
 $_lang['dashboard_remove_multiple'] = 'Delete Dashboards';
 $_lang['dashboard_remove_multiple_confirm'] = 'Are you sure you want to delete the selected Dashboards?';
-$_lang['dashboard_update'] = 'Edit Dashboard';
 $_lang['dashboard_err_ae_name'] = 'A dashboard with the name "[[+name]]" already exists! Please try another name.';
 $_lang['dashboard_err_duplicate'] = 'An error occurred while trying to duplicate the dashboard.';
 $_lang['dashboard_err_nf'] = 'Dashboard not found.';
