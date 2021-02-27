@@ -627,7 +627,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (ui.hasClass('pview') && a.preview_url != '') {
             m.push('-');
             m.push({
-                text: _('resource_view')
+                text: _('resource_preview')
                 ,handler: this.preview
             });
         }
