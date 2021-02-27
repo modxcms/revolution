@@ -55,7 +55,7 @@ MODx.page.UpdateUser = function(config) {
 Ext.extend(MODx.page.UpdateUser,MODx.Component,{
     removeUser: function(btn,e) {
         MODx.msg.confirm({
-            title: _('user_remove')
+            title: _('delete')
             ,text: _('user_confirm_remove')
             ,url: MODx.config.connector_url
             ,params: {

@@ -86,7 +86,7 @@ class SecurityUserCreateManagerController extends modManagerController
      * @return string
      */
     public function getPageTitle() {
-        return $this->modx->lexicon('user_new');
+        return $this->modx->lexicon('create');
     }
 
     /**
