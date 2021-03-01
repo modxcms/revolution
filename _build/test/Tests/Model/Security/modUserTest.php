@@ -27,9 +27,13 @@ use MODX\Revolution\MODxTestCase;
 class modUserTest extends MODxTestCase {
     /** @var modUser $user */
     public $user;
-
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup dummy data for each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->user = $this->modx->newObject(modUser::class);
         $this->user->fromArray([
             'id' => 123456,

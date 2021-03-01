@@ -31,8 +31,13 @@ use MODX\Revolution\Processors\Context\Setting\Create;
  * @group modContextSetting
  */
 class ContextSettingProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         /** @var modContext $ctx */
         $ctx = $this->modx->newObject(modContext::class);
         $ctx->set('key','unittest');
@@ -40,8 +45,13 @@ class ContextSettingProcessorsTest extends MODxTestCase {
         $ctx->save();
     }
 
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         /** @var modContext $ctx */
         $ctx = $this->modx->getObject(modContext::class,'unittest');
         if ($ctx) $ctx->remove();

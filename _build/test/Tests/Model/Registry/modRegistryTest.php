@@ -29,8 +29,8 @@ use MODX\Revolution\Registry\modRegister;
  * @group modRegistry
  */
 class modRegistryTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
-        parent::setUpBeforeClass();
+    public static function setUpFixturesBeforeClass() {
+        parent::setUpFixturesBeforeClass();
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
     }

@@ -32,8 +32,13 @@ use MODX\Revolution\Processors\Element\PropertySet\Remove;
  * @group PropertySetProcessors
  */
 class PropertySetProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         /** @var modPropertySet $propertySet */
         $propertySet = $this->modx->newObject(modPropertySet::class);
         $propertySet->fromArray(['name' => 'UnitTestPropertySet']);
@@ -42,9 +47,11 @@ class PropertySetProcessorsTest extends MODxTestCase {
 
     /**
      * Cleanup data after this test.
+     *
+     * @after
      */
-    public function tearDown() {
-        parent::tearDown();
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $propertySets = $this->modx->getCollection(modPropertySet::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modPropertySet $propertySet */
         foreach ($propertySets as $propertySet) {

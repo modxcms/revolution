@@ -29,8 +29,13 @@ use MODX\Revolution\Processors\Resource\Create;
  * @group modResource
  */
 class ResourceCreateProcessorTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->modx->eventMap = [];
         if ($this->modx instanceof modX) {
             $resources = $this->modx->getCollection(modResource::class, [
@@ -45,9 +50,11 @@ class ResourceCreateProcessorTest extends MODxTestCase {
 
     /**
      * Cleanup data after this test.
+     *
+     * @after
      */
-    public function tearDown() {
-        parent::tearDown();
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         if ($this->modx instanceof modX) {
             $resources = $this->modx->getCollection(modResource::class, [
                 'pagetitle:LIKE' => '%Unit Test Resource%'

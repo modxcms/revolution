@@ -4,16 +4,11 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="true"
          verbose="true"
          bootstrap="MODxTestHarness.php"
          timeoutForSmallTests="5"
          timeoutForMediumTests="5"
-         timeoutForLargeTests="10"
-         reportUselessTests="true"
-         strictCoverage="true"
-         disallowTestOutput="true"
-         enforceTimeLimit="true">
+         timeoutForLargeTests="10">
     <php>
         <server name="REQUEST_URI" value="/"/>
     </php>

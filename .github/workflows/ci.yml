@@ -25,7 +25,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: ['7.0', '7.1', '7.2', '7.3', '7.4']
+        php-version: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0']
 
     steps:
       - name: Checkout
@@ -55,4 +55,4 @@ jobs:
         run: cd _build/test && ./generateConfigs.sh auto
 
       - name: Run PHPUnit
-        run: core/vendor/bin/phpunit -c ./_build/test/phpunit.xml
+        run: core/vendor/bin/phpunit  --enforce-time-limit -c ./_build/test/phpunit.xml

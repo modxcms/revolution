@@ -10,7 +10,7 @@
  */
 namespace MODX\Revolution\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\TestCases\XTestCase;
 
 /**
  * Tests related to cleaning up the test environment.
@@ -18,8 +18,8 @@ use PHPUnit\Framework\TestCase;
  * @package modx-test
  * @subpackage modx
  */
-class MODxTeardownTest extends TestCase {
-    public function testTearDown() {
+class modXTeardownTest extends XTestCase {
+    public function testtearDownFixtures() {
         $this->assertTrue(true);
     }
 }

@@ -31,8 +31,13 @@ class modSnippetTest extends MODxTestCase {
     /** @var modSnippet $snippet */
     public $snippet;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->snippet = $this->modx->newObject(modSnippet::class);
         $this->snippet->fromArray([
             'name' => 'Unit Test Snippet',
@@ -46,8 +51,13 @@ class modSnippetTest extends MODxTestCase {
         $this->snippet->save();
         $this->modx->event= new modSystemEvent();
     }
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->snippet->remove();
         $this->snippet = null;
     }

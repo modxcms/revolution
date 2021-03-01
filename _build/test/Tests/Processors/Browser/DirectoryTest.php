@@ -30,21 +30,31 @@ use MODX\Revolution\Processors\Browser\Directory\Update;
  * @group BrowserProcessors
  */
 class BrowserDirectoryProcessorsTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
+    /**
+     * @beforeClass
+     */
+    public static function setUpFixturesBeforeClass() {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
     }
     /**
      * Cleanup data after this test case.
+     *
+     * @afterClass
      */
-    public static function tearDownAfterClass() {
+    public static function tearDownFixturesAfterClass() {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
     }
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
     }
 
     /**
@@ -172,13 +182,13 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         if (empty($response)) {
             $this->fail('Could not load '.GetList::class.' processor');
         }
-        $dirs = json_decode($response->getResponse(), true);
 
         /* ensure correct test result */
         if ($shouldWork) {
+            $dirs = json_decode($response->getResponse(), true);
             $success = !empty($dirs);
         } else {
-            $success = empty($dirs);
+            $success = $response->isError();
         }
         $this->assertTrue($success,'Could not get list of files and dirs for '.$dir.' in '.GetList::class.' test');
     }

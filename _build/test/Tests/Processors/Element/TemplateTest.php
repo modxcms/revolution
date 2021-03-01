@@ -31,8 +31,13 @@ use MODX\Revolution\Processors\Element\Template\Remove;
  * @group TemplateProcessors
  */
 class TemplateProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->modx->error->reset();
         /** @var modTemplate $template */
         $template = $this->modx->newObject(modTemplate::class);
@@ -43,9 +48,11 @@ class TemplateProcessorsTest extends MODxTestCase {
 
     /**
      * Cleanup data after this test.
+     *
+     * @after
      */
-    public function tearDown() {
-        parent::tearDown();
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $templates = $this->modx->getCollection(modTemplate::class, ['templatename:LIKE' => '%UnitTest%']);
         /** @var modTemplate $template */
         foreach ($templates as $template) {

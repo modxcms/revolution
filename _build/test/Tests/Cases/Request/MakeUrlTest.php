@@ -24,8 +24,13 @@ use MODX\Revolution\MODxTestCase;
  * @group MakeUrl
  */
 class MakeUrlTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
 
         /** @var modResource $resource */
         $resource = $this->modx->newObject(modResource::class);
@@ -87,8 +92,13 @@ class MakeUrlTest extends MODxTestCase {
         //$this->modx->context->prepare(true);
         $this->modx->context->aliasMap = null;
     }
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         /** @var modResource $resource */
         $resource = $this->modx->getObject(modResource::class, ['pagetitle' => 'Unit Test Resource']);
         if ($resource) $resource->remove();

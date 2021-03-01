@@ -27,9 +27,13 @@ use stdClass;
  */
 class modXTest extends MODxTestCase
 {
-    public function setUp()
+    /**
+     * @before
+     * @throws \xPDO\xPDOException
+     */
+    public function setUpFixtures()
     {
-        parent::setUp();
+        parent::setUpFixtures();
 
         /*
          * This map following the next pattern:
@@ -85,8 +89,13 @@ class modXTest extends MODxTestCase
 
 
 
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->modx->placeholders = [];
         $this->modx->resourceMap = [[1]];
         unset($this->modx->contexts['custom']);

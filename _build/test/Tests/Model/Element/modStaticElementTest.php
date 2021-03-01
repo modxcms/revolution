@@ -28,7 +28,11 @@ use MODX\Revolution\Sources\modMediaSource;
  * @group modTag
  */
 class modStaticElementTest extends MODxTestCase {
-    public function setUp()
+    /**
+     * @before
+     * @throws \xPDO\xPDOException
+     */
+    public function setUpFixtures()
     {
         $this->modx = MODxTestHarness::getFixture(modX::class, 'modx');
     }

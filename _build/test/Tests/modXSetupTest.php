@@ -10,7 +10,7 @@
  */
 namespace MODX\Revolution\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\TestCases\XTestCase;
 
 /**
  * Tests related to verifying and setting up the test environment.
@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  * @package modx-test
  * @subpackage modx
  */
-class modXSetupTest extends TestCase {
+class modXSetupTest extends XTestCase {
     /**
      * Test that the PDO extension is available and loaded.
      */

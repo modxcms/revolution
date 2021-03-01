@@ -25,8 +25,13 @@ use MODX\Revolution\MODxTestCase;
  * @group modActionDom
  */
 class modActionDomTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
     }
 
     /**

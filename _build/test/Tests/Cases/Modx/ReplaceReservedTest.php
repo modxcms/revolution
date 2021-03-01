@@ -2,10 +2,10 @@
 namespace MODX\Revolution\Tests\Cases\Modx;
 
 use MODX\Revolution\modX;
-use PHPUnit\Framework\TestCase;
 use stdClass;
+use Yoast\PHPUnitPolyfills\TestCases\XTestCase;
 
-class ReplaceReservedTest extends TestCase
+class ReplaceReservedTest extends XTestCase
 {
     public function testEmptyString()
     {

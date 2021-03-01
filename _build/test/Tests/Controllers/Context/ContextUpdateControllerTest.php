@@ -30,8 +30,13 @@ class ContextUpdateControllerTest extends MODxControllerTestCase {
     public $controllerName = 'ContextUpdateManagerController';
     public $controllerPath = 'context/update';
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->controller->setProperty('key','web');
     }
 

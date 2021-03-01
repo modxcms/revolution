@@ -30,11 +30,12 @@ class modDashboardTest extends MODxTestCase {
     /**
      * Load some utility classes this case uses
      *
+     * @before
      * @return void
      * @throws xPDOException
      */
-    public function setUp() {
-        parent::setUp();
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
     }
 
@@ -49,6 +50,8 @@ class modDashboardTest extends MODxTestCase {
 
     /**
      * Ensure the rendering of the dashboard works properly
+     *
+     * @medium 
      */
     public function testRender() {
         /** @var modManagerController $controller Fake running the welcome controller */

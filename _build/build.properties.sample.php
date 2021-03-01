@@ -16,7 +16,7 @@ $properties['mysql_array_options']= [
     xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
     xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
 ];
-$properties['mysql_array_driverOptions']= [];
+$properties['mysql_array_driverOptions']= [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT];
 
 /* sqlsrv */
 $properties['sqlsrv_string_dsn_test']= 'sqlsrv:server=(local);database=revo_test';
@@ -30,7 +30,7 @@ $properties['sqlsrv_array_options']= [
     xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
     xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
 ];
-$properties['sqlsrv_array_driverOptions']= [/*PDO::SQLSRV_ATTR_DIRECT_QUERY => false*/];
+$properties['sqlsrv_array_driverOptions']= [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT];
 
 /* PHPUnit test config */
 $properties['xpdo_driver']= 'mysql';

@@ -28,12 +28,22 @@ class modLexiconTest extends MODxTestCase {
     /** @var modLexicon $lexicon */
     public $lexicon;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->lexicon = new modLexicon($this->modx);
     }
 
-    public function tearDown() {
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
         $this->lexicon->clear();
     }
 

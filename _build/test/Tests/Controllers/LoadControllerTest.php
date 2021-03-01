@@ -17,9 +17,13 @@ class LoadControllerTest extends MODxTestCase
     /** @var modManagerResponse */
     protected $response;
 
-    public function setUp()
+    /**
+     * @before
+     * @throws \xPDO\xPDOException
+     */
+    public function setUpFixtures()
     {
-        parent::setUp();
+        parent::setUpFixtures();
 
         /* load smarty template engine */
         $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';

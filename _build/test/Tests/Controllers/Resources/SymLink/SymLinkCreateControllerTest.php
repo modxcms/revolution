@@ -12,10 +12,12 @@ class SymLinkCreateControllerTest extends ResourceCreateControllerTest
     public $controllerName = 'SymLinkCreateManagerController';
     public $controllerPath = 'resource/symlink/create';
 
-
-    public function setUp()
+    /**
+     * @before
+     */
+    public function setUpFixtures()
     {
-        parent::setUp();
+        parent::setUpFixtures();
         $this->controller->setProperties([
             'id' => 0,
             'class_key' => modSymlink::class,
