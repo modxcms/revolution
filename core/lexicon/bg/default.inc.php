@@ -322,6 +322,7 @@ $_lang['path'] = 'Път';
 $_lang['per_page'] = 'На страница';
 $_lang['permissions'] = 'Права';
 $_lang['permission_denied'] = 'Достъпът отказан!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Не разполагате с подходящите права за разглеждане на тази страница. Ако мислите, че това е грешка, моля свържете се със системния администратор.';
 $_lang['please_wait'] = 'Моля изчакайте...';
 $_lang['plugin'] = 'Плъгин';

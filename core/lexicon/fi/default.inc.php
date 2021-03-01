@@ -323,6 +323,7 @@ $_lang['path'] = 'Polku';
 $_lang['per_page'] = 'Per sivu';
 $_lang['permissions'] = 'Käyttöoikeudet';
 $_lang['permission_denied'] = 'Käyttö estetty!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Sinulla ei ole käyttöoikeuksia tämän sivun tarkastelemiseen. Jos uskot tämän olevan virhe, ota yhteyttä järjestelmänvalvojaan.';
 $_lang['please_wait'] = 'Ole hyvä ja odota...';
 $_lang['plugin'] = 'Lisä-osa/Liitännäinen';

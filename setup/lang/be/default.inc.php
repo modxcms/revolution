@@ -141,8 +141,8 @@ $_lang['license'] = '<p class="title">Вы павінны пагадзіцца �
 $_lang['license_agree'] = 'Я згодны з умовамі, запісанымі ў гэтай ліцэнзіі.';
 $_lang['license_agreement'] = 'Ліцэнзійная дамова';
 $_lang['license_agreement_error'] = 'Вы павінны пагадзіцца з ліцэнзіяй, перш чым працягнуць усталёўку.';
-$_lang['locked'] = 'MODX Setup is locked!';
-$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
+$_lang['locked'] = 'Усталёўка MODX заблакавана!';
+$_lang['locked_message'] = '<p>Вам патрэбна выдаліць каталог setup/.locked/, каб працягнуць.</p>';
 $_lang['login'] = 'Увайсці';
 $_lang['modx_class_err_nf'] = 'Не атрымалася знайсці файл класа MODX.';
 $_lang['modx_configuration_file'] = 'Канфігурацыйны файл MODX';

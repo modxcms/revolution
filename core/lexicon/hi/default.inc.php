@@ -322,6 +322,7 @@ $_lang['path'] = 'पथ';
 $_lang['per_page'] = 'प्रति पृष्ठ';
 $_lang['permissions'] = 'अनुमतियाँ';
 $_lang['permission_denied'] = 'नकारी गई!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'आप इस पेज को देखने के लिए उचित उपयोग नीति अनुमति नहीं है। आपको यह त्रुटि में मानते हैं, तो अपने सिस्टम व्यवस्थापक से संपर्क करें।';
 $_lang['please_wait'] = 'कृपया प्रतीक्षा करें ...';
 $_lang['plugin'] = 'प्लगइन';

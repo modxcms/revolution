@@ -322,6 +322,7 @@ $_lang['path'] = '路径';
 $_lang['per_page'] = '每页';
 $_lang['permissions'] = '权限';
 $_lang['permission_denied'] = '权限被拒绝 ！';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = '您没有适当的访问策略权限查看此页，请联系您的系统管理员。';
 $_lang['please_wait'] = '请稍候...';
 $_lang['plugin'] = '插件';

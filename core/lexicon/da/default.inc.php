@@ -322,6 +322,7 @@ $_lang['path'] = 'Sti';
 $_lang['per_page'] = 'Pr. side';
 $_lang['permissions'] = 'Rettigheder';
 $_lang['permission_denied'] = 'Adgang nægtet!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Du har ikke den tilstrækkelige adgangspolitikrettigheder til at se denne side. Hvis du mener det er en fejl bedes du kontakte din systemadministrator.';
 $_lang['please_wait'] = 'Vent venligst...';
 $_lang['plugin'] = 'Plugin';

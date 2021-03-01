@@ -323,6 +323,7 @@ $_lang['path'] = 'مسار';
 $_lang['per_page'] = 'في الصفحة الواحدة';
 $_lang['permissions'] = 'صلاحيات';
 $_lang['permission_denied'] = 'تم رفض الإذن!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'ليس لديك أذونات سياسة الوصول المناسبة لعرض هذه الصفحة. إذا كنت تشعر أن هذا خطأ، الرجاء الاتصال بمسؤول النظام الخاصة بك.';
 $_lang['please_wait'] = 'الرجاء الإنتظار...';
 $_lang['plugin'] = 'إضافة';

@@ -322,6 +322,7 @@ $_lang['path'] = 'Path';
 $_lang['per_page'] = 'Lehel';
 $_lang['permissions'] = 'Õigused';
 $_lang['permission_denied'] = 'Õigus puudub!';
+$_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Teil puuduvad lehe vaatamiseks õiged juurdepääsu poliisi õigused. Kui teile tundub, et see on viga, siis palun võtge ühendust oma süsteemi administraatoriga.';
 $_lang['please_wait'] = 'Palun oota...';
 $_lang['plugin'] = 'Plugin';
