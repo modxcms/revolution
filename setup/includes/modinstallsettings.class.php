@@ -97,6 +97,9 @@ class modInstallSettings {
      */
     public function load() {
         if (file_exists($this->fileName)) {
+            if (function_exists('opcache_invalidate')) {
+                opcache_invalidate($this->fileName);
+            }
             $this->settings = include $this->fileName;
             if (empty($this->settings)) {
                 $this->restart();
