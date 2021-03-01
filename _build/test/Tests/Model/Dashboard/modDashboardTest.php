@@ -50,6 +50,8 @@ class modDashboardTest extends MODxTestCase {
 
     /**
      * Ensure the rendering of the dashboard works properly
+     *
+     * @medium 
      */
     public function testRender() {
         /** @var modManagerController $controller Fake running the welcome controller */
