@@ -34,11 +34,12 @@ class modDashboardWidgetTest extends MODxTestCase {
     /**
      * Load some utility classes this case uses
      *
+     * @before
      * @return void
      * @throws xPDOException
      */
-    public function setUp() {
-        parent::setUp();
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
 
         $this->widget = $this->modx->newObject(modDashboardWidget::class);

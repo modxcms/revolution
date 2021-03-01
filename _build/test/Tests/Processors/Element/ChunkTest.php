@@ -34,8 +34,13 @@ use MODX\Revolution\Processors\Element\Chunk\Update;
  * @group ChunkProcessors
  */
 class ChunkProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->modx->lexicon->load('chunk');
         /** @var modChunk $chunk */
         $chunk = $this->modx->newObject(modChunk::class);
@@ -51,9 +56,11 @@ class ChunkProcessorsTest extends MODxTestCase {
 
     /**
      * Cleanup data after each test.
+     *
+     * @after
      */
-    public function tearDown() {
-        parent::tearDown();
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $chunks = $this->modx->getCollection(modChunk::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modChunk $chunk */
         foreach ($chunks as $chunk) {

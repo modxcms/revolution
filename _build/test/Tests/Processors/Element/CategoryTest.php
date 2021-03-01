@@ -31,8 +31,13 @@ use MODX\Revolution\Processors\Element\Category\Remove;
  * @group CategoryProcessors
  */
 class CategoryProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         /** @var modCategory $category */
         $category = $this->modx->newObject(modCategory::class);
         $category->fromArray(['category' => 'UnitTestCategory']);
@@ -45,9 +50,11 @@ class CategoryProcessorsTest extends MODxTestCase {
 
     /**
      * Cleanup data after this test.
+     *
+     * @after
      */
-    public function tearDown() {
-        parent::tearDown();
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         /** @var modCategory $category */
         $categories = $this->modx->getCollection(modCategory::class, [
             'category:LIKE' => 'UnitTest%',

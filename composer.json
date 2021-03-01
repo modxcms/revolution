@@ -90,7 +90,6 @@
             "@php _build/transport.core.php"
         ],
         "phpunit": "phpunit -c _build/test/phpunit.xml --coverage-text --colors",
-        "coverage": "phpunit -c _build/test/phpunit.xml --colors --coverage-html ./.coverage",
         "parse-schema-mysql": [
           "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.mysql.schema.xml core/src/",
           "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.registry.db.mysql.schema.xml core/src/",
@@ -109,13 +108,11 @@
         ]
     },
     "scripts-descriptions": {
-        "phpunit": "Run PHPUnit test",
-        "coverage": "Generating the code coverage report in HTML format"
+        "phpunit": "Run PHPUnit test"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "phpunit/phpunit": "^6",
-        "php-coveralls/php-coveralls": "~2.1"
+        "yoast/phpunit-polyfills": "^0.2.0"
     }
 }

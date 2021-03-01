@@ -33,8 +33,13 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     public $controllerName = 'WelcomeManagerController';
     public $controllerPath = 'welcome';
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
 
         /** @var modDashboard $dashboard */
         $this->controller->dashboard = $this->modx->newObject(modDashboard::class);
@@ -79,8 +84,13 @@ class WelcomeControllerTest extends MODxControllerTestCase {
 
     }
 
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $userGroups = $this->modx->getCollection(modUserGroup::class, ['name:LIKE' => '%Unit Test%']);
         /** @var modUserGroup $userGroup */
         foreach ($userGroups as $userGroup) {
@@ -129,7 +139,7 @@ class WelcomeControllerTest extends MODxControllerTestCase {
         $this->modx->user->set('primary_group',10000);
         $dashboard = $this->controller->dashboard;
         $content = $dashboard->render($this->controller);
-        $this->assertContains('<h2>Unit Test Widget Output</h2>',$content);
+        $this->assertStringContainsString('<h2>Unit Test Widget Output</h2>',$content);
     }
 
     /**

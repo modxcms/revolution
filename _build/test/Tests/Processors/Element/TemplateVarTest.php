@@ -30,8 +30,13 @@ use MODX\Revolution\Processors\Element\TemplateVar\Remove;
  * @group TemplateVarProcessors
  */
 class TemplateVarProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         /** @var modTemplateVar $tv */
         $tv = $this->modx->newObject(modTemplateVar::class);
         $tv->fromArray(['name' => 'UnitTestTv']);
@@ -40,8 +45,10 @@ class TemplateVarProcessorsTest extends MODxTestCase {
 
     /**
      * Cleanup data after this test.
+     *
+     * @after
      */
-    public function tearDown() {
+    public function tearDownFixtures() {
         $tvs = $this->modx->getCollection(modTemplateVar::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modTemplateVar $tv */
         foreach ($tvs as $tv) {

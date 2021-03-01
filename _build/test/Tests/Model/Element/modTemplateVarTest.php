@@ -29,8 +29,13 @@ class modTemplateVarTest extends MODxTestCase {
     /** @var modTemplateVar $tv */
     public $tv;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->tv = $this->modx->newObject(modTemplateVar::class);
         $this->tv->fromArray([
             'id' => 12345,
@@ -44,8 +49,13 @@ class modTemplateVarTest extends MODxTestCase {
         $this->tv->setProperties(['name' => 'John']);
         $this->tv->setCacheable(false);
     }
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->tv = null;
     }
 

@@ -25,7 +25,7 @@ use MODX\Revolution\MODxTestHarness;
  * @group modTag
  */
 class modTagTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
+    public static function setUpFixturesBeforeClass() {
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
     }
 

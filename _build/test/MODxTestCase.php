@@ -12,15 +12,15 @@
 namespace MODX\Revolution;
 
 use MODX\Revolution\Processors\ProcessorResponse;
-use PHPUnit\Framework\TestCase;
 use xPDO\xPDOException;
+use Yoast\PHPUnitPolyfills\TestCases\XTestCase;
 
 /**
  * Extends the basic PHPUnit TestCase class to provide MODX specific methods
  *
  * @package modx-test
  */
-abstract class MODxTestCase extends TestCase {
+abstract class MODxTestCase extends XTestCase {
     /**
      * @var modX $modx
      */
@@ -33,9 +33,10 @@ abstract class MODxTestCase extends TestCase {
     /**
      * Ensure all tests have a reference to the MODX object
      *
+     * @before
      * @throws xPDOException
      */
-    public function setUp() {
+    public function setUpFixtures() {
         $this->modx = MODxTestHarness::getFixture(modX::class, 'modx');
         if ($this->modx->request) {
             $this->modx->request->loadErrorHandler();
@@ -49,8 +50,10 @@ abstract class MODxTestCase extends TestCase {
 
     /**
      * Remove reference at end of test case
+     *
+     * @after
      */
-    public function tearDown() {}
+    public function tearDownFixtures() {}
 
     /**
      * Check a MODX return result for a success flag

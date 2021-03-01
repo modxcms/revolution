@@ -33,8 +33,13 @@ abstract class MODxControllerTestCase extends MODxTestCase {
      */
     public $controllerName;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
 
         /* load smarty template engine */
         $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
@@ -60,8 +65,13 @@ abstract class MODxControllerTestCase extends MODxTestCase {
         $this->modx->controller = $this->controller;
     }
 
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->controller = null;
     }
 }

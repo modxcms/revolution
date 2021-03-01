@@ -33,8 +33,13 @@ use MODX\Revolution\Processors\Context\Update;
  * @group modContext
  */
 class ContextProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         /** @var modContext $ctx */
         $ctx = $this->modx->newObject(modContext::class);
         $ctx->fromArray([
@@ -48,8 +53,13 @@ class ContextProcessorsTest extends MODxTestCase {
         $ctx->save();
     }
 
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $contexts = $this->modx->getCollection(modContext::class, [
             'key:LIKE' => '%unittest%'
         ]);

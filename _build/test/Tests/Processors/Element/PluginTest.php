@@ -31,8 +31,13 @@ use MODX\Revolution\Processors\Element\Plugin\Remove;
  * @group PluginProcessors
  */
 class PluginProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         /** @var modPlugin $plugin */
         $plugin = $this->modx->newObject(modPlugin::class);
         $plugin->fromArray([
@@ -41,8 +46,13 @@ class PluginProcessorsTest extends MODxTestCase {
         $plugin->save();
     }
 
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $plugins = $this->modx->getCollection(modPlugin::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modPlugin $plugin */
         foreach ($plugins as $plugin) {

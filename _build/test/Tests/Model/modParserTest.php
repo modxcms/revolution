@@ -27,13 +27,21 @@ use MODX\Revolution\MODxTestHarness;
 class modParserTest extends MODxTestCase {
     public static $scope = [];
 
-    public static function setUpBeforeClass() {
+    /**
+     * @beforeClass
+     * @throws \xPDO\xPDOException
+     */
+    public static function setUpFixturesBeforeClass() {
         $modx = MODxTestHarness::getFixture(modX::class, 'modx', true);
         $placeholders = ['tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2'];
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
 
-    public static function tearDownAfterClass() {
+    /**
+     * @afterClass
+     * @throws \xPDO\xPDOException
+     */
+    public static function tearDownFixturesAfterClass() {
         if (!empty(self::$scope)) {
             $modx = MODxTestHarness::getFixture(modX::class, 'modx');
             if (array_key_exists('keys', self::$scope)) {

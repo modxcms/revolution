@@ -13,10 +13,12 @@ class StaticResourceCreateControllerTest extends ResourceCreateControllerTest
     public $controllerName = 'StaticResourceCreateManagerController';
     public $controllerPath = 'resource/staticresource/create';
 
-
-    public function setUp()
+    /**
+     * @before
+     */
+    public function setUpFixtures()
     {
-        parent::setUp();
+        parent::setUpFixtures();
         $this->controller->setProperties([
             'id' => 0,
             'class_key' => modStaticResource::class,

@@ -30,8 +30,13 @@ class modFileMediaSourceTest extends MODxTestCase {
     /** @var modFileMediaSource $source */
     public $source;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
 
         $this->source = $this->modx->newObject(modFileMediaSource::class);
         $this->source->fromArray([
@@ -41,8 +46,13 @@ class modFileMediaSourceTest extends MODxTestCase {
             'properties' => [],
         ],'',true);
     }
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->source = null;
     }
 

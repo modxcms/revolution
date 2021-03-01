@@ -27,14 +27,22 @@ use MODX\Revolution\MODxTestHarness;
  * @group modFileRegister
  */
 class modFileRegisterTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
+    /**
+     * @beforeClass
+     * @throws \xPDO\xPDOException
+     */
+    public static function setUpFixturesBeforeClass() {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->registry->addRegister('register', 'registry.modFileRegister', ['directory' => 'register']);
     }
 
-    public static function tearDownAfterClass() {
+    /**
+     * @afterClass
+     * @throws \xPDO\xPDOException
+     */
+    public static function tearDownFixturesAfterClass() {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
         $modx->getService('registry', 'registry.modRegistry');

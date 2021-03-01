@@ -53,3 +53,6 @@ composer.lock
 
 # ignore composer vendor dir
 /vendor
+
+# ignore phpunit cache files
+.phpunit.result.cache

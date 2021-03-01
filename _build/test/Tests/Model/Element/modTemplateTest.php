@@ -29,8 +29,13 @@ class modTemplateTest extends MODxTestCase {
     /** @var modTemplate $template */
     public $template;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->template = $this->modx->newObject(modTemplate::class);
         $this->template->fromArray([
             'id' => 12345,
@@ -43,8 +48,13 @@ class modTemplateTest extends MODxTestCase {
         $this->template->setProperties(['name' => 'John']);
         $this->template->setCacheable(false);
     }
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->template = null;
     }
 

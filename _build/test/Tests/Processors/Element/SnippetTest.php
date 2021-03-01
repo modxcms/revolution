@@ -30,8 +30,13 @@ use MODX\Revolution\Processors\Element\Snippet\Remove;
  * @group SnippetProcessors
  */
 class SnippetProcessorsTest extends MODxTestCase {
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         /** @var modSnippet $snippet */
         $snippet = $this->modx->newObject(modSnippet::class);
         $snippet->fromArray(['name' => 'UnitTestSnippet']);
@@ -40,8 +45,10 @@ class SnippetProcessorsTest extends MODxTestCase {
 
     /**
      * Cleanup data after this test.
+     *
+     * @after
      */
-    public function tearDown() {
+    public function tearDownFixtures() {
         $snippets = $this->modx->getCollection(modSnippet::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modSnippet $snippet */
         foreach ($snippets as $snippet) {

@@ -30,8 +30,13 @@ class modChunkTest extends MODxTestCase {
     /** @var modChunk $chunk */
     public $chunk;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->chunk = $this->modx->newObject(modChunk::class);
         $this->chunk->fromArray([
             'id' => 12345,
@@ -44,8 +49,13 @@ class modChunkTest extends MODxTestCase {
         $this->chunk->setProperties(['name' => 'John']);
         $this->chunk->setCacheable(false);
     }
-    public function tearDown() {
-        parent::tearDown();
+    /**
+     * Tear down fixtures after each test.
+     *
+     * @after
+     */
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->chunk = null;
     }
 

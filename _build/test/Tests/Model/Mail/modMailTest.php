@@ -31,8 +31,13 @@ class modMailTest extends MODxTestCase {
      */
     public $mail;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->mail = $this->getMockForAbstractClass(modMail::class, [&$this->modx]);
         $this->mail->expects($this->any())
                    ->method('_getMailer')

@@ -28,16 +28,23 @@ class modErrorTest extends MODxTestCase {
     /** @var modError $error */
     public $error;
 
-    public function setUp() {
-        parent::setUp();
+    /**
+     * Setup fixtures before each test.
+     *
+     * @before
+     */
+    public function setUpFixtures() {
+        parent::setUpFixtures();
         $this->error = $this->modx->getService('error','error.modError');
     }
 
     /**
      * Ensure that the error class is reset on each load
+     *
+     * @after
      */
-    public function tearDown() {
-        parent::tearDown();
+    public function tearDownFixtures() {
+        parent::tearDownFixtures();
         $this->modx->services['error'] = null;
         $this->modx->error = null;
     }
