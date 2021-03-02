@@ -1748,6 +1748,15 @@ $settings['upload_files']->fromArray([
   'area' => 'file',
   'editedon' => null,
 ], '', true, true);
+$settings['upload_file_exists']= $xpdo->newObject('modSystemSetting');
+$settings['upload_file_exists']->fromArray([
+  'key' => 'upload_file_exists',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+], '', true, true);
 $settings['upload_images']= $xpdo->newObject(modSystemSetting::class);
 $settings['upload_images']->fromArray([
   'key' => 'upload_images',
