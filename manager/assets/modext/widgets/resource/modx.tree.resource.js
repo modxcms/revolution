@@ -808,7 +808,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         this.cm.activeNode = node;
         var itm = {
             usePk: '0'
-            ,classKey: 'modDocument'
+            ,classKey: 'MODX\\Revolution\\modDocument'
         };
 
         this.createResourceHere(itm);
@@ -817,7 +817,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,handleDirectCreateClick: function(node){
         this.cm.activeNode = node;
         this.createResourceHere({
-            classKey: 'modDocument'
+            classKey: 'MODX\\Revolution\\modDocument'
         });
     }
 
