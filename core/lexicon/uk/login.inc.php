@@ -8,7 +8,7 @@
  */
 $_lang['login_language'] = 'Мова';
 $_lang['login_activation_key_err'] = 'Невірний код активації! Будь-ласка, перевірте листа з кодом активації для того щоб бути впевненим, що ви перейшли по вірному посиланню URL.';
-$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
+$_lang['login_blocked_admin'] = 'Ви були заблоковані адміністратором.';
 $_lang['login_blocked_error'] = 'Ви тимчасово заблоковані і не можете увійти в систему. Спробуйте зробити це пізніше.';
 $_lang['login_blocked_ip'] = 'З данної IP адреси заборонено вхід до системи.';
 $_lang['login_blocked_time'] = 'На данний час ви не можете зайти в систему. Спробуйти зробити це пізніше.';
@@ -22,11 +22,11 @@ $_lang['login_forget_your_login'] = 'Забули пароль?';
 $_lang['login_hostname_error'] = 'Ваше ім\'я хоста не вказує на Вашу IP-адресу.';
 $_lang['login_message'] = 'Будь-ласка введіть Ваші дані для входу до Менеджера. Ім\'я користувача та пароль чутливі до регістру, тож, будь ласка, вводьте їх уважно!';
 $_lang['login_password'] = 'Пароль';
-$_lang['login_password_reset_act_sent'] = 'If the user or email exists, you\'ll receive an email shortly.';
+$_lang['login_password_reset_act_sent'] = 'Якщо користувач або email існують, ви скоро отримаєте електронний лист. ';
 $_lang['login_remember'] = 'Запам\'ятати мене';
 $_lang['login_send_activation_email'] = 'Відправити листа для активації';
 $_lang['login_title'] = 'Увійти';
-$_lang['login_user_err_nf_email'] = 'If the user or email exists, you\'ll receive an email shortly.';
+$_lang['login_user_err_nf_email'] = 'Якщо користувач або email існують, ви скоро отримаєте електронний лист. ';
 $_lang['login_username'] = 'Ім\'я користувача';
 $_lang['login_username_or_email'] = 'Ім’я користувача або Email';
 $_lang['login_username_password_incorrect'] = 'Ім’я користувача або пароль введені невірно. Перевірте, будь-ласка введені данні та спробуйте увійти знову.';
