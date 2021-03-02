@@ -166,6 +166,7 @@ class modUser extends modPrincipal
         }
         if ($this->_attributes === null || $reload) {
             $this->_attributes = [];
+            $_SESSION = isset($_SESSION) ? $_SESSION : [];
             if (isset($_SESSION["modx.user.{$id}.attributes"])) {
                 if ($reload) {
                     unset($_SESSION["modx.user.{$id}.attributes"]);
