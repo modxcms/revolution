@@ -7,30 +7,30 @@
  * @subpackage lexicon
  */
 
-$_lang['events'] = 'Events';
-$_lang['system_event'] = 'System Event';
+$_lang['events'] = 'Події';
+$_lang['system_event'] = 'Системна Подія';
 $_lang['system_events'] = 'Системні події';
-$_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot remove core events, only your own.';
-$_lang['system_events.search_by_name'] = 'Search by event name';
-$_lang['system_events.create'] = 'Create New Event';
-$_lang['system_events.name_desc'] = 'The name of the event. Which you should use in a &dollar;modx->invokeEvent(name, properties) call.';
+$_lang['system_events.desc'] = '<b>Системні події </b> - це події, що реєструються MODX за допомогою <i>плагінів</i>. Вони можуть «реагувати» всередині самого коду MODX, дозволяючи <i>плагинам</i> взаємодіяти з кодом MODX і додавати довільний функціонал без зміни коду ядра. Ви також можете створювати власні події для свого проекту. Системні події ядра MODX не можна видалити, лише створені вами. ';
+$_lang['system_events.search_by_name'] = 'Пошук за назвою події ';
+$_lang['system_events.create'] = 'Створити нову подію ';
+$_lang['system_events.name_desc'] = 'Назва події, яку ви повинні використовувати у виклику &dollar;modx-> invokeEvent(name, properties). ';
 $_lang['system_events.groupname'] = 'Група';
-$_lang['system_events.groupname_desc'] = 'The name of the group where the new event belongs to. Select an existing one or type in a new group name.';
+$_lang['system_events.groupname_desc'] = 'Назва групи, якій належить нова подія. Виберіть існуючу або створіть нову назву групи.';
 $_lang['system_events.plugins'] = 'Плагіни';
-$_lang['system_events.plugins_desc'] = 'The list of plugins attached to the event. Pick up plugins that should be attached to event.';
+$_lang['system_events.plugins_desc'] = 'Список плагінів, підключених до події. Виберіть плагіни, які повинні бути підключені до події.';
 
-$_lang['system_events.service'] = 'Service';
-$_lang['system_events.service_1'] = 'Parser Service Events';
-$_lang['system_events.service_2'] = 'Manager Access Events';
-$_lang['system_events.service_3'] = 'Web Access Service Events';
-$_lang['system_events.service_4'] = 'Cache Service Events';
-$_lang['system_events.service_5'] = 'Template Service Events';
-$_lang['system_events.service_6'] = 'User Defined Events';
+$_lang['system_events.service'] = 'Служба';
+$_lang['system_events.service_1'] = 'Події служби парсеру ';
+$_lang['system_events.service_2'] = 'Події служби доступу в систему управління';
+$_lang['system_events.service_3'] = 'Події служби зовнішнього доступу';
+$_lang['system_events.service_4'] = 'Події служби кеша';
+$_lang['system_events.service_5'] = 'Події служби шаблонів';
+$_lang['system_events.service_6'] = 'Події визначені користувачем';
 
-$_lang['system_events.remove'] = 'Remove Event';
-$_lang['system_events.remove_confirm'] = 'Are you sure you want to remove the <b>[[+name]]</b> event? This is irreversible!';
+$_lang['system_events.remove'] = 'Видалити подію';
+$_lang['system_events.remove_confirm'] = 'Ви впевнені, що хочете видалити подію <b>[[+name]]</b>? Ця дія незворотня!';
 
-$_lang['system_events_err_ns'] = 'Name of the System Event not specified.';
-$_lang['system_events_err_ae'] = 'Name of the System Event already exists.';
-$_lang['system_events_err_startint'] = 'It\'s not allowed to start the name with a digit.';
-$_lang['system_events_err_remove_not_allowed'] = 'You\'re not allowed to remove this System Event.';
+$_lang['system_events_err_ns'] = 'Не вказано назву системної події. ';
+$_lang['system_events_err_ae'] = 'Така назва системної події вже існує.';
+$_lang['system_events_err_startint'] = 'Назва не повинна починатися з цифри.';
+$_lang['system_events_err_remove_not_allowed'] = 'Ви не можете  видалили цю системну подію.';
