@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = 'Bitte geben Sie eine Ressourcen-ID f�
 $_lang['setting_upload_files'] = 'Hochladbare Dateitypen';
 $_lang['setting_upload_files_desc'] = 'Hier können Sie eine Liste von Dateitypen eingeben, die über den Ressourcen-Manager in das Verzeichnis assets/files/ hochgeladen werden können. Bitte geben Sie die Dateiendungen der Dateitypen ein, durch Kommata getrennt.';
 
+$_lang['setting_upload_file_exists'] = 'Überprüfen, ob die hochgeladene Datei existiert';
+$_lang['setting_upload_file_exists_desc'] = 'Wenn diese Einstellung aktiviert ist, wird ein Fehler beim Hochladen einer Datei mit gleichem Namen angezeigt. Wenn sie deaktiviert ist, wird die vorhandene Datei ohne Nachfrage durch die neue Datei ersetzt.';
+
 $_lang['setting_upload_images'] = 'Hochladbare Bild-Dateitypen';
 $_lang['setting_upload_images_desc'] = 'Hier können Sie eine Liste von Dateitypen eingeben, die über den Ressourcen-Manager in das Verzeichnis assets/images/ hochgeladen werden können. Bitte geben Sie die Dateiendungen der Bildtypen ein, durch Kommata getrennt.';
 
