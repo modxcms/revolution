@@ -724,6 +724,9 @@ $_lang['setting_unauthorized_page_err'] = 'Palun määrake Ressurssi ID authoris
 $_lang['setting_upload_files'] = 'Uploadable File Types';
 $_lang['setting_upload_files_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/files/\' using the Resource Manager. Please enter the extensions for the filetypes, seperated by commas.';
 
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_images'] = 'Üleslaetavad Piltide Tüübid';
 $_lang['setting_upload_images_desc'] = 'Siit saate sisestada nimekirja failidest, mida saab üleslaadida \'assets/images/\' kasuta, kasutades Ressurssi Manageri. Palun sisestage faililaiendid piltide tüüpidele, eraldatud komadega.';
 
