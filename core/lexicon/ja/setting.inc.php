@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = '権限外告知に利用するドキ�
 $_lang['setting_upload_files'] = 'アップロード可能なファイルタイプ';
 $_lang['setting_upload_files_desc'] = 'ファイルブラウザを使用して「assets/files/」にアップロードできるメディアファイルの拡張子をカンマで区切って入力してください。';
 
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_images'] = 'アップロード可能な画像タイプ';
 $_lang['setting_upload_images_desc'] = 'ファイルブラウザを使用して「assets/images/」にアップロードできる画像ファイルの拡張子をカンマで区切って入力してください。';
 
