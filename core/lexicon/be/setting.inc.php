@@ -725,6 +725,9 @@ $_lang['setting_unauthorized_page_err'] = 'Калі ласка пазначце 
 $_lang['setting_upload_files'] = 'Дазволеныя да загрузкі тыпы файлаў';
 $_lang['setting_upload_files_desc'] = 'Тут вы можаце пазначыць спіс тыпаў файлаў, якія можна загружаць у каталог "assets/files/", выкарыстоўваючы дыспетчар файлаў. Калі ласка, увядзіце пашырэнні файлаў, падзяляючы іх коскамі.';
 
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_images'] = 'Дазволеныя да загрузкі тыпы малюнкаў';
 $_lang['setting_upload_images_desc'] = 'Тут вы можаце пазначыць спіс тыпаў файлаў, якія можна загружаць у каталог "assets/images/", выкарыстоўваючы дыспетчар файлаў. Калі ласка, пазначце пашырэнні тыпаў файлаў праз коску.';
 
