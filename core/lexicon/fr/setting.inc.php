@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = 'Veuillez spécifier un ID de ressourc
 $_lang['setting_upload_files'] = 'Types de fichiers autorisés';
 $_lang['setting_upload_files_desc'] = 'Ici vous pouvez indiquer une liste des types de fichiers qui peuvent être chargés dans \'assets/files/\' en utilisant le gestionnaire de fichiers. Veuillez entrer les extensions pour chaque type de fichier, séparées par des virgules.';
 
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_images'] = 'Types d\'images autorisés';
 $_lang['setting_upload_images_desc'] = 'Ici vous pouvez indiquer une liste des types de fichiers qui peuvent être chargés dans \'assets/images/\' en utilisant le gestionnaire de fichiers. Veuillez entrer les extensions pour chaque type d\'images, séparées par des virgules.';
 
