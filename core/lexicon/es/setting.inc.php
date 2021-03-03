@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = 'Por favor, especifíca un ID de Recur
 $_lang['setting_upload_files'] = 'Tipo de Archivos Permitidos en Subida';
 $_lang['setting_upload_files_desc'] = 'Lista separada por comas de los tipos de archivo permitidos para subir a la carpeta "assets/files" utilizando el Administrador de Recursos.';
 
+$_lang['setting_upload_file_exists'] = 'Comprueba si  el archivo cargado existe';
+$_lang['setting_upload_file_exists_desc'] = 'Cuando está habilitado, se mostrará un error al cargar un archivo si ya existe uno con el mismo nombre. Cuando está deshabilitado, el archivo existente será reemplazado por el nuevo archivo sin pedir confirmación.';
+
 $_lang['setting_upload_images'] = 'Tipos de Archivos de Imagen Permitidos en Subida';
 $_lang['setting_upload_images_desc'] = 'Lista separada por comas de los tipos de archivos de imagen permitidos para subir a la carpeta "assets/images" utilizando el Administrador de Recursos.';
 
