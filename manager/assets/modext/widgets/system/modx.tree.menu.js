@@ -16,7 +16,6 @@ MODx.tree.Menu = function(config) {
         ,expandFirst: true
         ,enableDrag: true
         ,enableDrop: true
-        ,ddAppendOnly: true
         ,url: MODx.config.connector_url
         ,action: 'System/Menu/GetNodes'
         ,sortAction: 'System/Menu/Sort'
@@ -34,6 +33,24 @@ MODx.tree.Menu = function(config) {
 };
 Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     windows: {}
+
+    ,_handleDrop: function (dropEvent) {
+        var node = dropEvent.target;
+        if (node.isRoot) return false;
+
+        if ((dropEvent.point === 'above') || (dropEvent.point === 'below')) {
+            if (dropEvent.target.parentNode.isRoot) {
+                return false;
+            }
+        }
+
+        if (!Ext.isEmpty(node.attributes.treeHandler)) {
+            var h = Ext.getCmp(node.attributes.treeHandler);
+            if (h) {
+                return h.handleDrop(this,dropEvent);
+            }
+        }
+    }
 
     ,createMenu: function(n,e) {
         var r = {
@@ -64,6 +81,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         });
         this.windows.update_menu = MODx.load({
             xtype: 'modx-window-menu-update'
+            ,isRoot: this.cm.activeNode.parentNode.isRoot
             ,record: r
             ,listeners: {
                 'success': {fn:function(r) { this.refresh(); },scope:this}
@@ -88,27 +106,27 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         });
     }
 
-    ,getMenu: function(n,e) {
-        var m = [];
-        switch (n.attributes.type) {
-            case 'menu':
-                m.push({
-                    text: _('menu_update')
-                    ,handler: this.updateMenu
-                });
-                m.push('-');
-                m.push({
-                    text: _('menu_remove')
-                    ,handler: this.removeMenu
-                });
-                break;
-            default:
-                m.push({
-                    text: _('menu_create')
-                    ,handler: this.createMenu
-                });
-                break;
+    ,getMenu: function(node, event) {
+        var m = [
+            {
+                text: _('menu_create'),
+                handler: this.createMenu
+            }
+        ];
+
+        if (!node.parentNode.isRoot) {
+            m.push('-');
+            m.push({
+                text: _('menu_update'),
+                handler: this.updateMenu
+            });
+            m.push('-');
+            m.push({
+                text: _('menu_remove'),
+                handler: this.removeMenu
+            });
         }
+
         return m;
     }
 
@@ -143,6 +161,7 @@ MODx.window.CreateMenu = function(config) {
             ,hiddenName: 'parent'
             ,anchor: '100%'
             ,fieldLabel: _('parent')
+            ,showNone: 0
         },{
             layout: 'column'
             ,border: false
@@ -310,7 +329,7 @@ MODx.combo.Menu = function(config) {
             action: 'System/Menu/GetList'
             ,combo: true
             ,limit: 0
-            ,showNone: true
+            ,showNone: (config.showNone === undefined) ? true : config.showNone
         }
         ,fields: ['text','text_lex']
         ,displayField: 'text_lex'
