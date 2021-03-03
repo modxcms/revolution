@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = 'Specifica l\'ID di una Risorsa da mos
 $_lang['setting_upload_files'] = 'Tipi File Caricabili';
 $_lang['setting_upload_files_desc'] = 'Qui puoi inserire una lista di tipi di files che possono essere caricati dentro \'assets/files/\' tramite il Manager delle Risorse. Inserisci le estensioni per i tipi di files, separate da virgola.';
 
+$_lang['setting_upload_file_exists'] = 'Controlla se il file caricato esiste';
+$_lang['setting_upload_file_exists_desc'] = 'Quando abilitato verrà mostrato un errore durante il caricamento di un file che esiste già con lo stesso nome. Se disabilitato, il file esistente verrà sostituito tranquillamente con il nuovo file.';
+
 $_lang['setting_upload_images'] = 'Tipi Immagini Caricabili';
 $_lang['setting_upload_images_desc'] = 'Qui puoi inserire una lista di tipi di files immagini che possono essere caricati dentro  \'assets/images/\' usando il Manager delle Risorse. Inserisci le estensioni per i tipi di immagini, separate da virgola.';
 
