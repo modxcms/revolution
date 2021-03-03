@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = 'Yetkilendirilmemiş sayfa için lütf
 $_lang['setting_upload_files'] = 'Yüklenebilir Dosya Türleri';
 $_lang['setting_upload_files_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \'asset/files/\' içine yüklenebilecek dosyalar listesini girebilirsiniz. Lütfen dosya türü uzantılarını virgül ile ayırarak girin.';
 
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_images'] = 'Yüklenebilir Resim Türleri';
 $_lang['setting_upload_images_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \'asset/images/\' içine yüklenebilecek dosyalar listesini girebilirsiniz. Lütfen resim türü uzantılarını virgül ile ayırarak girin.';
 
