@@ -45,7 +45,7 @@ class modBrowserFileDownloadProcessor extends modBrowserProcessor
         $file = $this->sanitize($this->getProperty('file'));
         try {
             if ($data = $this->source->getObjectContents($file)) {
-                $name = preg_replace('#[^\w-.]#ui', '_', $data['basename']);
+                $name = preg_replace('#[^\w\.]+#S', '_', $data['basename']);
                 header('Content-type: ' . $data['mime']);
                 header('Content-Length: ' . $data['size']);
                 header('Content-Disposition: attachment; filename=' . $name);
