@@ -330,6 +330,7 @@ class TopMenu
             if (!empty($menu['handler'])) {
                 $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
             }
+            $menu['icon'] = $menu['icon'] ?? '';
             $smTpl .= '<a'.$attributes.'>'.$menu['text'].$menu['icon'].$description.'</a>'."\n";
 
             if (!empty($menu['children'])) {
