@@ -1748,7 +1748,7 @@ $settings['upload_files']->fromArray([
   'area' => 'file',
   'editedon' => null,
 ], '', true, true);
-$settings['upload_file_exists']= $xpdo->newObject('modSystemSetting');
+$settings['upload_file_exists']= $xpdo->newObject(modSystemSetting::class);
 $settings['upload_file_exists']->fromArray([
   'key' => 'upload_file_exists',
   'value' => true,
