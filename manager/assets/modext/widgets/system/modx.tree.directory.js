@@ -571,8 +571,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             parent: node && node.attributes.type == 'dir' ? node.attributes.pathRelative : '/'
             ,source: this.getSource()
         };
+        if (this.createDirectoryWindow) {
+            this.createDirectoryWindow.destroy();
+        }
 
-        var w = MODx.load({
+        this.createDirectoryWindow = MODx.load({
             xtype: 'modx-window-directory-create'
             ,record: r
             ,listeners: {
@@ -590,7 +593,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,'hide':{fn:function() {this.destroy();}}
             }
         });
-        w.show(e ? e.target : Ext.getBody());
+        this.createDirectoryWindow.show(e ? e.target : Ext.getBody());
     }
 
     ,setVisibility: function(item,e) {
