@@ -8,6 +8,7 @@
  */
 MODx.grid.RecentlyEditedResourcesByUser = function(config) {
     config = config || {};
+
     var dateFormat = MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format;
     Ext.applyIf(config,{
         title: _('recent_docs')
