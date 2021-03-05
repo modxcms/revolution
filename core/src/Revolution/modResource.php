@@ -1594,7 +1594,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         $arr = [];
 
-        $q = $this->xpdo->newQuery('modResource', array('parent' => $this->parent));
+        $q = $this->xpdo->newQuery(modResource::class, ['parent' => $this->parent]);
         $q->sortby('menuindex', 'ASC');
         $q->select('id');
         if ($q->prepare() && $q->stmt->execute()) {
