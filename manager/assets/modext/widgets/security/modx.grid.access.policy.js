@@ -72,7 +72,7 @@ MODx.grid.AccessPolicy = function(config) {
             ,dataIndex: 'description'
             ,width: 375
             ,renderer: function(value, metaData, record) {
-                return record['data']['description_trans'];
+                return Ext.util.Format.htmlEncode(record['data']['description_trans']);
             }
             ,editable: false
         },{
