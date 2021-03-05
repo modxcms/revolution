@@ -24,5 +24,8 @@
     "bourbon-neat": "^3.0.0",
     "@fortawesome/fontawesome-free": "^5.7.0",
     "normalize-scss": "^7.0.1"
+  },
+  "scripts": {
+    "build": "grunt build"
   }
 }
