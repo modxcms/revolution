@@ -65,14 +65,15 @@ class modUserValidation {
 
     public function checkPassword() {
         $newPassword = $this->processor->getProperty('newpassword',null);
+
         $id = $this->processor->getProperty('id');
-        if ($newPassword !== null && $newPassword != 'false' || empty($id)) {
-            $passwordGenerationMethod = $this->processor->getProperty('passwordgenmethod','g');
+        $passwordGenerationMethod = $this->processor->getProperty('passwordgenmethod','g');
+        if ($passwordGenerationMethod !== 'user_email_specify' && ($newPassword !== null && $newPassword != 'false' || empty($id))) {
             if ($passwordGenerationMethod === 'g') {
                 $autoPassword = $this->user->generatePassword();
                 $this->user->set('password', $autoPassword);
-                $this->processor->newPassword= $autoPassword;
-            } elseif ($passwordGenerationMethod === 'spec') {
+                $this->processor->newPassword = $autoPassword;
+            } else {
                 $specifiedPassword = $this->processor->getProperty('specifiedpassword');
                 $confirmPassword = $this->processor->getProperty('confirmpassword');
                 if (empty($specifiedPassword)) {
