@@ -156,7 +156,7 @@ class GetList extends GetListProcessor
      */
     protected function prepareRowClasses(xPDOObject $object)
     {
-        if ($object->isCorePolicy($object->get('name'))) {
+        if (!$object->isCorePolicy($object->get('name'))) {
             return implode(' ', [
                 static::CLASS_ALLOW_EDIT,
                 static::CLASS_ALLOW_REMOVE
