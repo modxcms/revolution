@@ -408,7 +408,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     ,quickCreate: function(itm,e,cls,ctx,p) {
-        cls = cls || 'modDocument';
+        cls = cls || 'MODX\\Revolution\\modDocument';
         var r = {
             class_key: cls
             ,context_key: ctx || 'web'
@@ -657,7 +657,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (Ext.isObject(o)) {
             Ext.apply(types,o);
         }
-        var coreTypes = ['modDocument','modWebLink','modSymLink','modStaticResource'];
+        var coreTypes = ['MODX\\Revolution\\modDocument','modWebLink','modSymLink','modStaticResource'];
         var ct = [];
         var qct = [];
         for (var k in types) {
@@ -1145,7 +1145,7 @@ MODx.getQRSettings = function(id,va) {
                 ,hiddenName: 'class_key'
                 ,id: 'modx-'+id+'-class-key'
                 ,anchor: '100%'
-                ,value: va['class_key'] != undefined ? va['class_key'] : 'modDocument'
+                ,value: va['class_key'] != undefined ? va['class_key'] : 'MODX\\Revolution\\modDocument'
             },{
                 xtype: 'modx-combo-content-type'
                 ,fieldLabel: _('resource_content_type')
