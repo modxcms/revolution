@@ -8,7 +8,7 @@
 $_lang['element'] = 'Élément';
 $_lang['element_err_nf'] = 'Élément non trouvé.';
 $_lang['element_err_ns'] = 'Élément non défini.';
-$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
+$_lang['element_err_staticfile_exists'] = 'Un fichier statique existe déjà dans le chemin spécifié.';
 $_lang['element_static_source_immutable'] = 'Le fichier externe utilisé comme source n\'est pas inscriptible! Vous ne pouvez pas éditer le contenu de cet élément depuis le manager.';
 $_lang['element_static_source_protected_invalid'] = 'Vous ne pouvez faire pointer cet élément vers le répertoire de configuration de MODX; c\'est un répertoire protégé et non accessible.';
 $_lang['is_static'] = 'Est statique';
