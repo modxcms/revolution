@@ -33,7 +33,7 @@ class GetList extends GetListProcessor
     public $checkListPermission = false;
     public $objectType = 'policy';
     public $permission = 'policy_view';
-    public $languageTopics = ['policy'];
+    public $languageTopics = ['policy', 'en:policy'];
 
     /**
      * @return bool

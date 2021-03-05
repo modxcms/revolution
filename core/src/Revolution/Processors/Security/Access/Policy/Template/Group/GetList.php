@@ -31,7 +31,7 @@ class GetList extends GetListProcessor
     public $checkListPermission = false;
     public $objectType = 'permission';
     public $permission = 'policy_template_view';
-    public $languageTopics = ['policy'];
+    public $languageTopics = ['policy', 'en:policy'];
 
     /**
      * @param xPDOObject $object
