@@ -166,7 +166,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         var r = {
             old_name: data.name
             ,name: data.name
-            ,path: data.pathRelative
+            ,path: data.pathname
             ,source: this.config.source
         };
         var w = MODx.load({
