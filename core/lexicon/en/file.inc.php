@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Directory';
-$_lang['file_confirm_remove'] = 'Are you sure you want to delete this file? Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_create'] = 'Create File';
 $_lang['file_deleted'] = 'Success!';
 $_lang['file_delete_file'] = 'Delete File';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'The packages directory does not 
 $_lang['file_package_err_invalid_name'] = 'This file [[+name]] has an invalid name for the transport package';
 $_lang['file_package_err_invalid_type'] = 'This file does not appear to be a transport package';
 $_lang['file_remove'] = 'Delete File';
-$_lang['file_remove_confirm'] = 'Are you sure you want to delete this file entirely?';
+$_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_saved'] = 'File updated successfully!';
 $_lang['file_size'] = 'File Size';
 $_lang['file_size_bytes'] = 'bytes';

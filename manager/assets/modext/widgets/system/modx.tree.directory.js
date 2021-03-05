@@ -636,12 +636,16 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,removeFile: function(item,e) {
         var node = this.cm.activeNode;
+        var fileName = node.attributes.text;
+        var filePath = node.attributes.pathRelative;
         MODx.msg.confirm({
-            text: _('file_confirm_remove')
+            text: _('file_remove_confirm',{
+                file: fileName
+            })
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'Browser/File/Remove'
-                ,file: node.attributes.pathRelative
+                ,file: filePath
                 ,wctx: MODx.ctx || ''
                 ,source: this.getSource()
             }
