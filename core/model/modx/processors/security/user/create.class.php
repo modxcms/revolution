@@ -179,18 +179,26 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
     }
 
     /**
-     * Send the password notification email, if specified
-     * @return void
+     * Send notification email for changed password
      */
     public function sendNotificationEmail() {
-        if ($this->getProperty('notify_new_user')) {
-            $message = $this->modx->getOption('signupemail_message', null, $this->modx->lexicon('login_signup_email'), true);
-            $placeholders = array_merge($this->modx->config, $this->profile->toArray(), $this->object->toArray(), [
-                'uid' => $this->object->get('username'),
-                'ufn' => $this->profile->get('fullname'),
-                'sname' => $this->modx->getOption('site_name'),
-                'surl' => $this->modx->getOption('url_scheme') . $this->modx->getOption('http_host') . $this->modx->getOption('manager_url'),
-            ]);
+        if ($this->getProperty('passwordgenmethod') === 'user_email_specify') {
+            $activationHash = md5(uniqid(md5($this->object->get('email') . '/' . $this->object->get('id')), true));
+
+            /** @var modRegistry $registry */
+            $registry = $this->modx->getService('registry', 'registry.modRegistry');
+            /** @var modRegister $register */
+            $register = $registry->getRegister('user', 'registry.modDbRegister');
+            $register->connect();
+            $register->subscribe('/pwd/change/');
+            $register->send('/pwd/change/', [$activationHash => $this->object->get('username')], ['ttl' => 86400]);
+
+            $this->modx->lexicon->load('core:login');
+
+            // Send activation email
+            $message                = $this->modx->lexicon('user_password_email');
+            $placeholders           = array_merge($this->modx->config, $this->object->toArray());
+            $placeholders['hash']   = $activationHash;
 
             // Store previous placeholders
             $ph = $this->modx->placeholders;
@@ -201,16 +209,25 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
-            $this->modx->getService('smarty', 'smarty.modSmarty', '', [
-                'template_dir' => $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme', null, 'default') . '/',
-            ]);
+            $this->modx->getService('smarty', 'smarty.modSmarty', '', ['template_dir' => $this->modx->getOption('manager_path') . 'templates/default/']);
+
             $this->modx->smarty->assign('_config', $this->modx->config);
-            $this->modx->smarty->assign('content', $message);
-            $message = $this->modx->smarty->fetch('email/default.tpl');
-            $this->object->sendEmail($message, [
-                'subject' => $this->modx->lexicon('login_email_subject'),
-                'html' => true,
-            ]);
+            $this->modx->smarty->assign('content', $message, true);
+
+            $sent    = $this->object->sendEmail(
+                $this->modx->smarty->fetch('email/default.tpl'),
+                [
+                    'from'          => $this->modx->getOption('emailsender'),
+                    'fromName'      => $this->modx->getOption('site_name'),
+                    'sender'        => $this->modx->getOption('emailsender'),
+                    'subject'       => $this->modx->lexicon('user_password_email_subject'),
+                    'html'          => true,
+                ]
+            );
+
+            if (!$sent) {
+                return $this->failure($this->modx->lexicon('error_sending_email_to') . $this->object->get('email'));
+            }
         }
     }
 
@@ -219,11 +236,15 @@ class modUserCreateProcessor extends modObjectCreateProcessor {
      * @return array|string
      */
     public function cleanup() {
-        $passwordNotifyMethod = $this->getProperty('passwordnotifymethod', 's');
-        if (!empty($passwordNotifyMethod) && $passwordNotifyMethod == 's') {
-            return $this->success($this->modx->lexicon('user_created_password_message', [
-                'password' => $this->newPassword,
-            ]), $this->object);
+        $passwordGenerationMethod = $this->getProperty('passwordgenmethod');
+        if (!empty($passwordGenerationMethod) && !empty($this->newPassword)) {
+            return $this->success(
+                $this->modx->lexicon('user_updated_password_message',
+                    array(
+                        'password' => $this->newPassword,
+                    )
+                ),
+                $this->object);
         } else {
             return $this->success('', $this->object);
         }
