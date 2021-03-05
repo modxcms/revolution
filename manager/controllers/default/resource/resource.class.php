@@ -597,24 +597,31 @@ abstract class ResourceManagerController extends modManagerController
         }
 
         $id = $this->resource->get('id');
+        $entryPoint = $this->resource;
         if (!$id) {
-            if ($this->parent) {
-                $id = $this->parent->get('id');
-                if ($id) {
-                    $ctx = $this->parent->get('context_key');
-                    $parents[] = $this->parent->get($columns);
-                    $height--;
-                }
+            $id = $this->parent->get('id');
+            $entryPoint = $this->parent;
+            if ($this->parent && $id) {
+                $ctx = $this->parent->get('context_key');
+                $parents[] = $this->parent->get($columns);
+                $height--;
             }
         } else {
             $ctx = $this->resource->get('context_key');
         }
 
-        if ($id) {
-            $pids = $this->modx->getParentIds($id, $height, ['context' => $ctx]);
-            foreach ($pids as $pid) {
-                if ($parent = $this->modx->getObject(modResource::class, $pid)) {
+        if ($entryPoint) {
+            $parent = $entryPoint->getOne('Parent');
+            if ($parent) {
+                $parents[] = $parent->get($columns);
+                $height--;
+            }
+
+            while($parent && ($height > 0)) {
+                $parent = $parent->getOne('Parent');
+                if ($parent) {
                     $parents[] = $parent->get($columns);
+                    $height--;
                 }
             }
         }
