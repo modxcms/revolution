@@ -277,6 +277,20 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,cls: 'danger'
             ,xtype: 'xcheckbox'
             ,inputValue: 1
+            ,listeners: {
+                'check': {
+                    fn: function (e, checked) {
+                        let blockeduntil = Ext.getCmp('modx-user-blockeduntil');
+                        if (checked) {
+                            blockeduntil.enable();
+                        } else {
+                            blockeduntil.disable();
+                            Ext.getCmp('modx-user-blockedafter').setValue(null);
+                        }
+                    }
+                    ,scope: this
+                }
+            }
         }];
         if (MODx.perm.set_sudo) {
             itemsRight.push({
@@ -305,6 +319,18 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,dateFormat: MODx.config.manager_date_format
             ,timeFormat: MODx.config.manager_time_format
             ,hiddenFormat: 'Y-m-d H:i:s'
+            ,listeners: {
+                'beforerender': {
+                    fn: function (e) {
+                        let blocked = Ext.getCmp('modx-user-blocked');
+                        if (blocked.checked) {
+                            e.enable();
+                        } else {
+                            e.disable();
+                        }
+                    }
+                }
+            }
         },{
             id: 'modx-user-blockedafter'
             ,name: 'blockedafter'
