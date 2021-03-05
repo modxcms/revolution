@@ -1,0 +1,10 @@
+#////////////////////////////////// 
+#   ADD NEW HTACCESS USER
+#//////////////////////////////////
+
+$ htpasswd -c .htpasswd <user_name>
+
+new password> _____
+repeat new password> ____
+
+Enjoy! 

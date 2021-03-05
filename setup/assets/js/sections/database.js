@@ -1,6 +1,7 @@
 Ext.onReady(function() {
     Ext.select('#modx-testconn').on('click',MODx.DB.testConnection);
     Ext.select('#modx-testcoll').on('click',MODx.DB.testCollation);
+    Ext.select('#database-type').on('change',MODx.DB.changeTypeDB);
 
     Ext.select('#modx-db-info').hide();
     var es = Ext.select('.modx-hidden2');
@@ -133,6 +134,19 @@ MODx.DB = function() {
                ,params: p
             });
         }
+        ,changeTypeDB:function(){
+            
+            var active_db = Ext.get('database-type');
+            var objs = [  'database-server'
+                         ,'database-user'
+                         ,'database-password'
+                       ];  
+            
+            for(var i in objs)
+               document.getElementById(objs[i]).disabled = (active_db.getValue()=='sqlite');
+            
+            
+        } 
         
         ,optionTpl: new Ext.Template('<option value="{value}"{selected}>{name}</option>')
     };

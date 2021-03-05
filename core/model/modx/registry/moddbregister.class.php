@@ -1,26 +1,23 @@
 <?php
-/*
- * This file is part of MODX Revolution.
+/**
+ * This file contains a simple database implementation of modRegister.
  *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
+ * @package modx
+ * @subpackage registry
  */
-
+/** Make sure the modRegister class is included. */
 require_once dirname(__FILE__) . '/modregister.class.php';
 
 /**
- * A simple, database-based implementation of modRegister.
+ * A simple, file-based implementation of modRegister.
  *
  * This implementation does not address transactional conflicts and should be
  * used in non-critical processes that are easily recoverable.
  *
  * @package modx
- * @subpackage registry.db
+ * @subpackage registry
  */
-class modDbRegister extends modRegister
-{
+class modDbRegister extends modRegister {
     /**
      * The queue object representing this modRegister instance.
      * @access protected
@@ -77,19 +74,9 @@ class modDbRegister extends modRegister
      *
      * {@inheritdoc}
      */
-    public function clear($topic)
-    {
-        $topicObject = $this->modx->getObject('registry.db.modDbRegisterTopic', array(
-            'queue' => $this->_queue->get('id'),
-            'name' => $topic
-        ));
-        if (!$topicObject) {
-            return false;
-        }
-
-        return (bool) $this->modx->removeCollection('registry.db.modDbRegisterMessage', array(
-            'topic' => $topicObject->get('id')
-        ));
+    public function clear($topic) {
+        $result = $this->modx->removeCollection('modDbRegisterMessage', array('topic' => $topic));
+        return (bool)$result;
     }
 
     /**
@@ -189,7 +176,7 @@ class modDbRegister extends modRegister
         if (is_object($obj) && !empty($obj->payload)) {
             $message = eval($obj->payload);
             if ($remove || ($obj->expires > 1 && $obj->expires < time())) {
-                $this->modx->removeObject('registry.db.modDbRegisterMessage', array('topic' => $obj->topic, 'id' => $obj->id));
+                $this->modx->removeObject('modDbRegisterMessage', array('topic' => $obj->topic, 'id' => $obj->id));
             }
             if ($obj->kill) $this->__kill = true;
         }

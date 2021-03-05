@@ -10,12 +10,13 @@
     <p>{$_lang.connection_connection_note}</p>
 
     <p class="error">{$error_message|default}</p>
-    
+
     <div class="labelHolder">
         <label for="database-type">{$_lang.connection_database_type}</label>
         <select id="database-type" name="database_type" autofocus="autofocus">
             <option value="mysql"{if $config.database_type|default EQ "mysql"} selected="selected"{/if}>mysql</option>
             <option value="sqlsrv"{if $config.database_type|default EQ "sqlsrv"} selected="selected"{/if}>sqlsrv</option>
+            <option value="sqlite"{if $config.database_type|default EQ "sqlite"} selected="selected"{/if}>sqlite</option>
         </select>
         &nbsp;<span class="version-msg" id="database-type-error"></span>
     </div>
