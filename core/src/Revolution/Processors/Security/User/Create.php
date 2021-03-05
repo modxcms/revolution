@@ -232,6 +232,52 @@ class Create extends CreateProcessor {
                 'html' => true,
             ]);
         }
+
+        if ($this->getProperty('passwordgenmethod') === 'user_email_specify') {
+            $activationHash = md5(uniqid(md5($this->object->get('email') . '/' . $this->object->get('id')), true));
+
+            /** @var modRegistry $registry */
+            $registry = $this->modx->getService('registry', 'registry.modRegistry');
+            /** @var modRegister $register */
+            $register = $registry->getRegister('user', 'registry.modDbRegister');
+            $register->connect();
+            $register->subscribe('/pwd/change/');
+            $register->send('/pwd/change/', [$activationHash => $this->object->get('username')], ['ttl' => 86400]);
+
+            // Send activation email
+            $message                = $this->modx->lexicon('user_password_email');
+            $placeholders           = array_merge($this->modx->config, $this->object->toArray());
+            $placeholders['hash']   = $activationHash;
+
+            // Store previous placeholders
+            $ph = $this->modx->placeholders;
+            // now set those useful for modParser
+            $this->modx->setPlaceholders($placeholders);
+            $this->modx->getParser()->processElementTags('', $message, true, false, '[[', ']]', [], 10);
+            $this->modx->getParser()->processElementTags('', $message, true, true, '[[', ']]', [], 10);
+            // Then restore previous placeholders to prevent any breakage
+            $this->modx->placeholders = $ph;
+
+            $this->modx->getService('smarty', 'smarty.modSmarty', '', ['template_dir' => $this->modx->getOption('manager_path') . 'templates/default/']);
+
+            $this->modx->smarty->assign('_config', $this->modx->config);
+            $this->modx->smarty->assign('content', $message, true);
+
+            $sent = $this->object->sendEmail(
+                $this->modx->smarty->fetch('email/default.tpl'),
+                [
+                    'from'          => $this->modx->getOption('emailsender'),
+                    'fromName'      => $this->modx->getOption('site_name'),
+                    'sender'        => $this->modx->getOption('emailsender'),
+                    'subject'       => $this->modx->lexicon('user_password_email_subject'),
+                    'html'          => true,
+                ]
+            );
+
+            if (!$sent) {
+                return $this->failure($this->modx->lexicon('error_sending_email_to') . $this->object->get('email'));
+            }
+        }
     }
 
     /**
