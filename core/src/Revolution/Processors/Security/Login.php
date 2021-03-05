@@ -187,7 +187,9 @@ class Login extends Processor
                 $profile->save();
             }
 
-            return $this->modx->lexicon('login_blocked_admin');
+            if ($profile->get('blocked')) {
+                return $this->modx->lexicon('login_blocked_admin');
+            }
         }
 
         if ($profile->get('blockedafter') > 0 && $profile->get('blockedafter') < time()) {
