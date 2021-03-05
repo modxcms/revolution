@@ -2219,6 +2219,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             ]);
             $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . $imageQuery;
         }
+
         return [
             'src' => $image,
             'width' => $width,
