@@ -1875,7 +1875,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $width = $this->ctx->getOption('filemanager_image_width', 800);
         $height = $this->ctx->getOption('filemanager_image_height', 600);
-        $preview_image_info = [
+        $original = $preview_image_info = [
             'width' => $width,
             'height' => $height,
         ];
@@ -1892,6 +1892,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $preview = 1;
             $preview_image_info = $this->buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties);
             $thumb_image_info = $this->buildManagerImagePreview($path, $ext, $thumb_width, $thumb_height, $bases, $properties);
+            $original = $this->getImageDimensions($path, $ext);
         }
 
         $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
@@ -1908,6 +1909,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'sid' => $this->get('id'),
             'name' => basename($path),
             'cls' => 'icon-' . $ext,
+            'original_width' => $original['width'],
+            'original_height' => $original['height'],
             // preview
             'preview' => $preview,
             'image' => $preview_image_info['src'],
