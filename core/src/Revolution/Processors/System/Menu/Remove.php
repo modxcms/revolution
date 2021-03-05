@@ -60,5 +60,3 @@ class Remove extends RemoveProcessor
         parent::cleanup();
     }
 }
-
-return modMenuRemoveProcessor::class;

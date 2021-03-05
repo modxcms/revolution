@@ -8,7 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modCategory;
 use MODX\Revolution\modManagerController;
+use MODX\Revolution\modPlugin;
 use MODX\Revolution\modSystemEvent;
 
 /**

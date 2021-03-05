@@ -6,6 +6,8 @@
  * @package setup
  */
 
+use MODX\Revolution\modSystemSetting;
+
 $messageTemplate = '<p class="%s">%s</p>';
 
 $keys = ['upload_files'];
@@ -14,7 +16,7 @@ foreach ($keys as $key) {
     $success = false;
 
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject('modSystemSetting', array('key' => $key));
+    $setting = $modx->getObject(modSystemSetting::class, array('key' => $key));
     if ($setting) {
         $value = $setting->get('value');
         $tmp = explode(',', $value);

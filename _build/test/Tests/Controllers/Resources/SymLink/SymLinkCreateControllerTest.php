@@ -2,6 +2,7 @@
 namespace MODX\Revolution\Tests\Controllers\Resources\SymLink;
 
 
+use MODX\Revolution\modSymLink;
 use MODX\Revolution\Tests\Controllers\Resources\ResourceCreateControllerTest;
 
 class SymLinkCreateControllerTest extends ResourceCreateControllerTest

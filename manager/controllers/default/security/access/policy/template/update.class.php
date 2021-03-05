@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modAccessPermission;
+use MODX\Revolution\modAccessPolicyTemplate;
 use MODX\Revolution\modManagerController;
 
 /**
