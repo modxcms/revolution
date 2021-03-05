@@ -2181,8 +2181,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
             if ($bases['pathIsRelative']) {
                 $absolute_path = $bases['pathAbsolute'] . $path;
+            } else {
+                $absolute_path = $path;
             }
-            $exif = exif_read_data($absolute_path);
+            $exif = @exif_read_data($absolute_path);
             if (!empty($exif) && $exif['Orientation'] >= 5) {
                 // This image was rotated
                 $new_width = $size['height'];
