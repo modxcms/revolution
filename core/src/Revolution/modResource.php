@@ -1592,7 +1592,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function getNeighborhood()
     {
-        $arr = array();
+        $arr = [];
 
         $q = $this->xpdo->newQuery('modResource', array('parent' => $this->parent));
         $q->sortby('menuindex', 'ASC');
