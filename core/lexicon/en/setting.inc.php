@@ -106,6 +106,9 @@ $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated use
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
 
+$_lang['setting_auto_detect_context'] = 'Automatic switch context if possible';
+$_lang['setting_auto_detect_context_desc'] = 'Select \'Yes\' to turn on automatic detecting and initializing needed context.';
+
 $_lang['setting_auto_menuindex'] = 'Menu indexing default';
 $_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
 

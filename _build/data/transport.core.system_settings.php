@@ -82,6 +82,15 @@ $settings['archive_with']->fromArray([
   'area' => 'system',
   'editedon' => null,
 ], '', true, true);
+$settings['auto_detect_context']= $xpdo->newObject(modSystemSetting::class);
+$settings['auto_detect_context']->fromArray([
+  'key' => 'auto_detect_context',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+], '', true, true);
 $settings['auto_menuindex']= $xpdo->newObject(modSystemSetting::class);
 $settings['auto_menuindex']->fromArray([
   'key' => 'auto_menuindex',

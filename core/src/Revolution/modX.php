@@ -555,7 +555,7 @@ class modX extends xPDO {
      * @param array|null $options An array of options for the initialization.
      * @return bool True if initialized successfully, or already initialized.
      */
-    public function initialize($contextKey= 'web', $options = null) {
+    public function initialize($contextKey = null, $options = null) {
         if (!$this->_initialized) {
             if (!$this->startTime) {
                 $this->startTime= microtime(true);
@@ -564,6 +564,10 @@ class modX extends xPDO {
             $this->getCacheManager();
             $this->getConfig();
             $this->_initNamespaces();
+
+            if (empty($contextKey)) {
+                $contextKey = $this->detectContext();
+            }
             $this->_initContext($contextKey, false, $options);
             $this->_loadExtensionPackages($options);
             $this->_initSession($options);
@@ -2872,5 +2876,47 @@ class modX extends xPDO {
             }
         }
         $this->invokeEvent('OnWebPageComplete');
+    }
+
+    /**
+     * Detect context to initialize.
+     *
+     * @return string Key of detected context.
+     */
+    public function detectContext() {
+        $contextKey = 'web';
+        if ($this->getOption('auto_detect_context')) {
+            $this->collectContexts();
+            foreach ($this->contexts as $key => $context) {
+                $context->prepare();
+                $cacheKey = "{$key}/context";
+                $settings = $this->cacheManager->get($cacheKey, [
+                    xPDO::OPT_CACHE_KEY => $this->getOption('cache_context_settings_key', null,
+                        'context_settings'),
+                    xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_context_settings_handler', null,
+                        $this->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
+                    xPDO::OPT_CACHE_FORMAT => (integer)$this->getOption('cache_context_settings_format', null,
+                        $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                ]);
+                if (!empty($settings['config']['site_url'])) {
+                    if (strpos(MODX_SITE_URL . ltrim($_SERVER['REQUEST_URI'], '/'), $settings['config']['site_url']) === 0) {
+                        return $key;
+                    }
+                }
+            }
+        }
+        return $contextKey;
+    }
+
+    /**
+     * Collects contexts.
+     *
+     * @return array List of contexts.
+     */
+    public function collectContexts() {
+        if (empty($this->contexts)) {
+            $this->contexts = $this->getCollection(modContext::class, ['key:!=' => 'mgr']);
+        }
+        return $this->contexts;
     }
 }
