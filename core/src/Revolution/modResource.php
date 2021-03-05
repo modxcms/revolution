@@ -1610,10 +1610,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
             }
 
-            $arr = array(
+            $arr = [
                 'left' => array_reverse($left),
                 'right' => $right,
-            );
+            ];
         }
 
         return $arr;
