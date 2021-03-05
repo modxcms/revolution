@@ -1910,7 +1910,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'name' => array_pop(explode(DIRECTORY_SEPARATOR, $path)),
             'cls' => 'icon-' . $ext,
             'original_width' => $original['width'],
-            'original_height' =>$original['height'],
+            'original_height' => $original['height'],
             // preview
             'preview' => $preview,
             'image' => $preview_image_info['src'],
