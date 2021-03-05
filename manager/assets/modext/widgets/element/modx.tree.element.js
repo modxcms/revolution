@@ -395,7 +395,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                     this.quickUpdate(itm,e,itm.type);
                 }
             });
-            if (a.classKey == 'modPlugin') {
+            if (a.classKey === 'MODX\\Revolution\\modPlugin') {
                 if (a.active) {
                     m.push({
                         text: _('plugin_deactivate')
