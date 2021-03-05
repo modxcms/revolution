@@ -52,6 +52,7 @@ class modTemplateVar extends modElement
     public $bindings = [
         'FILE',
         'CHUNK',
+        'SNIPPET',
         'DOCUMENT',
         'RESOURCE',
         'SELECT',
@@ -880,6 +881,12 @@ class modTemplateVar extends modElement
             case 'CHUNK': /* retrieve a chunk and process it's content */
                 if ($preProcess) {
                     $output = $this->xpdo->getChunk($param);
+                }
+                break;
+
+            case 'SNIPPET':
+                if ($preProcess) {
+                    $output = $this->xpdo->runSnippet($param);
                 }
                 break;
 
