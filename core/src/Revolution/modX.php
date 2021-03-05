@@ -2903,6 +2903,11 @@ class modX extends xPDO {
                         return $key;
                     }
                 }
+                if (!empty($settings['config']['base_url'])) {
+                    if (strpos($_SERVER['REQUEST_URI'], $settings['config']['base_url']) === 0) {
+                        return $key;
+                    }
+                }
             }
         }
         return $contextKey;
