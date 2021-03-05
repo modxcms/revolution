@@ -86,7 +86,7 @@ Ext.extend(MODx.grid.UserGroups,MODx.grid.LocalGrid,{
             ,scope: this
         },'-',{
             text: _('user_group_user_remove')
-            ,handler: this.remove.createDelegate(this,[{text: _('user_group_remove_confirm')}])
+            ,handler: this.remove.createDelegate(this,[{text: _('user_group_user_remove_confirm')}])
             ,scope: this
         });
         m.showAt(e.xy);
