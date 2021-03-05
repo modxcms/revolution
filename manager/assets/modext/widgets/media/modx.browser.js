@@ -41,7 +41,7 @@ MODx.browser.View = function(config) {
         ,id: this.ident
         ,fields: [
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','image','original_width', 'original_height','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
+            ,'cls','url','relativeUrl','fullRelativeUrl','image','original_width','original_height','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
             ,'menu', 'visibility'
