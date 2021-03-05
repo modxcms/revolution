@@ -2181,6 +2181,18 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             } catch (Exception $E) {
                 $timestamp = 0;
             }
+
+            if ($bases['pathIsRelative']) {
+                $absolute_path = $bases['pathAbsolute'] . $path;
+            }
+            $exif = exif_read_data($absolute_path);
+            if (!empty($exif) && $exif['Orientation'] >= 5) {
+                // This image was rotated
+                $new_width = $size['height'];
+                $new_height = $size['width'];
+                $size['width'] = $new_width;
+                $size['height'] = $new_height;
+            }
             // get original image size for proportional scaling
             if ($size['width'] > $size['height']) {
                 // landscape
@@ -2206,6 +2218,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'wctx' => $this->ctx->get('key'),
                 'source' => $this->get('id'),
                 't' => $timestamp,
+                'ar' => 'x'
             ]);
             $image = $this->ctx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . $imageQuery;
         }
