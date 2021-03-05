@@ -15,17 +15,9 @@ define('MODX_SETUP_PATH', $setupPath);
 $installPath = str_replace('\\', '/', realpath(dirname(__DIR__, 2))) . '/';
 define('MODX_INSTALL_PATH', $installPath);
 
-function checkServerSecurity(string $param) {
-    return in_array(strtolower($param), ['https', 'on', 'ssl', '1'], true);
-}
-
 if (!MODX_SETUP_INTERFACE_IS_CLI) {
-
-    $https = checkServerSecurity(
-        isset($_SERVER['REMOTE_ADDR']) && !empty($_SERVER['REMOTE_ADDR'])
-            ? $_SERVER['HTTP_X_FORWARDED_PROTO']
-            : $_SERVER['HTTPS']
-    );
+    $https = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? $_SERVER['HTTPS'] ?? 'off';
+    $https = in_array(strtolower((string)$https), ['https', 'on', 'ssl', '1'], true);
 
     $installBaseUrl = $https ? 'https://' : 'http://';
     $installBaseUrl .= $_SERVER['HTTP_HOST'];
