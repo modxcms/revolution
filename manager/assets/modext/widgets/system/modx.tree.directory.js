@@ -616,8 +616,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,removeDirectory: function(item,e) {
         var node = this.cm.activeNode;
+        var directory = node.attributes.text;
         MODx.msg.confirm({
-            text: _('file_folder_remove_confirm')
+            text: _('file_folder_remove_confirm',{
+                directory: directory
+            })
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'Browser/Directory/Remove'
