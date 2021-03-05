@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Security\User;
 
 
+use MODX\Revolution\Hashing\modHashing;
 use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modSystemEvent;
@@ -313,8 +314,8 @@ class Update extends UpdateProcessor {
      * @throws Exception
      */
     public function sendNotificationEmail() {
-        if ($this->getProperty('passwordgenmethod') === 'user_email_specify') {
-            $activationHash = md5(uniqid(md5($this->object->get('email') . '/' . $this->object->get('id')), true));
+        if ($this->getProperty('passwordgenmethod') === 'user_email_specify' && $this->modx->getService('hashing', modHashing::class)) {
+            $activationHash = $this->modx->hashing->getHash('md5', 'hashing.modMD5', [])->hash($this->object->get('email') . '/' . $this->object->get('id'));
 
             /** @var modRegistry $registry */
             $registry = $this->modx->getService('registry', 'registry.modRegistry');
