@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] sur [[+total]]';
 $_lang['active_permissions'] = 'Permissions actives';
 $_lang['no_policy_option'] = ' (pas de règle) ';
-$_lang['permission'] = 'Permission';
+$_lang['permission'] = 'Autorisation';
 $_lang['permission_add'] = 'Ajouter une autorisation';
 $_lang['permission_add_template'] = 'Ajouter une autorisation au modèle';
 $_lang['permission_err_ae'] = 'L\'autorisation existe déjà pour cette condition.';
