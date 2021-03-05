@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = 'Ange ett resurs-ID för otillåten-si
 $_lang['setting_upload_files'] = 'Uppladdningsbara filtyper';
 $_lang['setting_upload_files_desc'] = 'Här kan du skriva en lista med de typer av filer som kan laddas upp till "assets/files/" med filhanteraren. Skriv i suffixen för filtyperna, separerade med kommatecken.';
 
+$_lang['setting_upload_file_exists'] = 'Kontrollera om uppladdad fil redan finns';
+$_lang['setting_upload_file_exists_desc'] = 'När denna är aktiverad visas ett fel vid uppladdning av en fil om det redan finns en fil med samma namn. När den är inaktiverad kommer den befintliga filen att ersättas med den nya filen.';
+
 $_lang['setting_upload_images'] = 'Uppladdningsbara bildtyper';
 $_lang['setting_upload_images_desc'] = 'Här kan du skriva en lista med de typer av bildfiler som kan laddas upp till "assets/images/" med filhanteraren. Skriv filändelserna för bildfilerna, separerade med kommatecken.';
 

@@ -723,6 +723,9 @@ $_lang['setting_unauthorized_page_err'] = 'कृपया अनधिकृत
 $_lang['setting_upload_files'] = 'Uploadable फ़ाइल प्रकार';
 $_lang['setting_upload_files_desc'] = 'यहाँ आप resource manager का उपयोग करते हुए \'assets/files/\' में अपलोड किया जा सकता है कि फाइलों की सूची में प्रवेश कर सकते हैं। अल्पविराम के द्वारा अलग filetypes के लिए एक्सटेंशन दर्ज करें।';
 
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
+
 $_lang['setting_upload_images'] = 'Uploadable छवि प्रकार';
 $_lang['setting_upload_images_desc'] = 'यहाँ आप में अपलोड किया जा कर सकते हैं कि फ़ाइलों की एक सूची में प्रवेश कर सकते हैं \'assets/images/\' resource manager का उपयोग कर। कृपया अल्पविराम के द्वारा अलग छवि प्रकार के लिए एक्सटेंशन दर्ज करें।';
 
