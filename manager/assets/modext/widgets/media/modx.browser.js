@@ -235,7 +235,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'Browser/File/Remove'
-                ,file: files.pop()
+                ,files: Ext.util.JSON.encode(files)
                 ,source: this.config.source
                 ,wctx: this.config.wctx || 'web'
             }
@@ -466,7 +466,11 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
     ,_showContextMenu: function(v,i,n,e) {
         e.preventDefault();
-        this.select(n.id);
+        if(this.getSelectedRecords().length > 1){
+            this.select(n.id, true);
+        }else{
+            this.select(n.id);
+        }
         var data = this.lookup[n.id];
         var m = this.cm;
         m.removeAll();
