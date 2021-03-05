@@ -1601,7 +1601,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
             $current = array_search($this->id, $ids);
 
-            $right = $left = array();
+            $right = $left = [];
             foreach ($ids as $k => $v) {
                 if ($k > $current) {
                     $right[] = $v;
