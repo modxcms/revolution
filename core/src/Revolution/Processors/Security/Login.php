@@ -178,16 +178,15 @@ class Login extends Processor
             return $this->modx->lexicon('login_blocked_too_many_attempts');
         }
 
-        if ($profile->get('blockeduntil') != 0 && $profile->get('blockeduntil') < time()) {
-            $profile->set('failedlogincount', 0);
-            $profile->set('blocked', 0);
-            $profile->save();
-        }
-
         if ($profile->get('blocked')) {
             if ($profile->get('blockeduntil') > time()) {
                 return $this->modx->lexicon('login_blocked_error');
+            } elseif ($profile->get('blockeduntil') != 0) {
+                $profile->set('failedlogincount', 0);
+                $profile->set('blocked', 0);
+                $profile->save();
             }
+
             return $this->modx->lexicon('login_blocked_admin');
         }
 
