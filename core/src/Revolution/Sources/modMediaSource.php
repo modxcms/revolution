@@ -2262,6 +2262,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 } else {
                     return false;
                 }
+                if($height > 80){
+                    $height = 80;
+                    $width = (80 / $height) * $width;
+                }
                 $file_size = [
                     'width' => $width,
                     'height' => $height,
