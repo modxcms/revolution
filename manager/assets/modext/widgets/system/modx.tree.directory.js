@@ -728,7 +728,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 }
                 this.fireEvent('afterUpload',node);
             } else {
-                this.refreshActiveNode();
+                this.fireEvent('afterUpload',node);
             }
         } else {
             this.refresh();
