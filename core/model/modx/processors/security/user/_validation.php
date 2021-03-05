@@ -72,7 +72,7 @@ class modUserValidation {
                 $autoPassword = $this->user->generatePassword();
                 $this->user->set('password', $autoPassword);
                 $this->processor->newPassword= $autoPassword;
-            } elseif ($passwordGenerationMethod === 's') {
+            } elseif ($passwordGenerationMethod === 'spec') {
                 $specifiedPassword = $this->processor->getProperty('specifiedpassword');
                 $confirmPassword = $this->processor->getProperty('confirmpassword');
                 if (empty($specifiedPassword)) {

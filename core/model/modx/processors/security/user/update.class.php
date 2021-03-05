@@ -286,8 +286,6 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             $register->subscribe('/pwd/change/');
             $register->send('/pwd/change/', [$activationHash => $this->object->get('username')], ['ttl' => 86400]);
 
-            $this->modx->lexicon->load('core:login');
-
             // Send activation email
             $message                = $this->modx->lexicon('user_password_email');
             $placeholders           = array_merge($this->modx->config, $this->object->toArray());
@@ -307,7 +305,7 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
             $this->modx->smarty->assign('_config', $this->modx->config);
             $this->modx->smarty->assign('content', $message, true);
 
-            $sent    = $this->object->sendEmail(
+            $sent = $this->object->sendEmail(
                 $this->modx->smarty->fetch('email/default.tpl'),
                 [
                     'from'          => $this->modx->getOption('emailsender'),
