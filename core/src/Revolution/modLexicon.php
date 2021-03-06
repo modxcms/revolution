@@ -581,11 +581,35 @@ class modLexicon
             return $str;
         }
 
+        $params = $this->_flatten($params);
         foreach ($params as $k => $v) {
             $str = str_replace('[[+' . $k . ']]', $v, $str);
         }
 
         return $str;
+    }
+
+    /**
+     * Flattens an array by dot notation
+     *
+     * @access private
+     * @param array $array The array to flatten
+     * @return array The processed array
+     */
+    private function _flatten($array) {
+        $result = [];
+
+        if (is_array($array)) {
+            $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
+            foreach ($iterator as $value) {
+                $keys = array();
+                foreach (range(0, $iterator->getDepth()) as $depth) {
+                    $keys[] = $iterator->getSubIterator($depth)->key();
+                }
+                $result[ join('.', $keys) ] = $value;
+            }
+        }
+        return $result;
     }
 
     /**
