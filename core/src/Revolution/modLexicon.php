@@ -597,7 +597,7 @@ class modLexicon
      * @return array The processed array
      */
     private function _flatten($array) {
-        $result = [];
+        $result = array();
 
         if (is_array($array)) {
             $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
