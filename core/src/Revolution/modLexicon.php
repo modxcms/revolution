@@ -12,6 +12,8 @@ namespace MODX\Revolution;
 
 
 use DirectoryIterator;
+use RecursiveArrayIterator;
+use RecursiveIteratorIterator;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
