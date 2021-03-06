@@ -37,7 +37,7 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         $this->setDefaultProperties(array(
             'id' => '',
         ));
-        $dir = $this->getProperty('id');
+        $dir = $this->getProperty('node') ? rawurldecode($this->getProperty('node')) : $this->getProperty('id');
         $dir = preg_replace('/[\.]{2,}/', '', htmlspecialchars($dir));
         if (!strlen($dir) || $dir === 'root') {
             $this->setProperty('id','');
