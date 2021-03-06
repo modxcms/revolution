@@ -1006,9 +1006,12 @@ class modTemplateVar extends modElement
             if (preg_match($regexp2, $match[2] , $match2)) {
                 if (isset($match2[2])) {
                     $props = json_decode($match2[2],true);
-                    if (is_array($props)){
+                    $valid = json_last_error() === JSON_ERROR_NONE;
+                    if ($valid && is_array($props)){
                         $properties = $props;
                         $match[2] = $match2[1];
+                    } else {
+                        $this->xpdo->log(modX::LOG_LEVEL_ERROR, 'modTemplateVar::parseBinding - third parameter is invalid JSON :' . $binding_string);
                     }
                 }
             }
