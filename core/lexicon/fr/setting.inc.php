@@ -36,19 +36,19 @@ $_lang['namespace'] = 'Espace de noms';
 $_lang['namespace_desc'] = 'L\'espace de nom auquel est associé ce paramètre. Le sujet "default" du lexique sera chargé lors du chargement des paramètres de cet espace de nom.';
 $_lang['namespace_filter'] = 'Filtrer par espace de noms…';
 $_lang['search_by_key'] = 'Chercher par clé…';
-$_lang['setting_create'] = 'Create Setting';
+$_lang['setting_create'] = 'Créer un paramètre';
 $_lang['setting_err'] = 'Veuillez vérifier vos données pour les champs suivants : ';
 $_lang['setting_err_ae'] = 'Une option avec cette clé existe déjà. Veuillez indiquer un autre nom de clé.';
 $_lang['setting_err_nf'] = 'Option non trouvée.';
 $_lang['setting_err_ns'] = 'Option non spécifiée';
-$_lang['setting_err_not_editable'] = 'This setting can\'t be edited in the grid. Please use the gear/context menu to edit the value!';
-$_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
+$_lang['setting_err_not_editable'] = 'Ce paramètre ne peut pas être édité dans la grille. Veuillez utiliser le menu engrenage/contexte pour modifier la valeur !';
+$_lang['setting_err_remove'] = 'Une erreur est survenue lors de la suppression du paramètre.';
 $_lang['setting_err_save'] = 'Une erreur est survenue lors de la sauvegarde de l\'option.';
 $_lang['setting_err_startint'] = 'Les options ne peuvent débuter par un entier.';
 $_lang['setting_err_invalid_document'] = 'Il n\'y a pas de Ressource ayant pour ID %d. Veuillez indiquer une Ressource existante.';
 $_lang['setting_remove'] = 'Supprimer l\'option';
 $_lang['setting_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cette option ? Ceci peut endommager votre installation de MODX.';
-$_lang['setting_update'] = 'Edit Setting';
+$_lang['setting_update'] = 'Modifier les paramètres';
 $_lang['settings_after_install'] = 'Comme c\'est une nouvelle installation, vous devez contrôler les options de configuration et changer celles que vous souhaitez. Après avoir contrôlé les options, cliquez sur "Sauvegarder" pour mettre à jour la base de données des options.<br /><br />';
 $_lang['settings_desc'] = 'Ici, vous pouvez définir les préférences générales et les paramètres de configuration de l\'interface gestionnaire de MODX, ainsi que le fonctionnement de votre site MODX. <b>Chaque paramètre sera disponible via le placeholder [[++key]].</b><br />Double-cliquez sur la colonne de valeur pour le paramétrage que vous souhaitez éditer dynamiquement via la grille, ou faites un clic droit sur un paramètre pour plus d\'options. Vous pouvez également cliquer sur le signe "+" pour une description du paramètre.';
 $_lang['settings_furls'] = 'URLs simples';
@@ -408,8 +408,8 @@ $_lang['setting_manager_favicon_url_desc'] = 'Utilise le favicon indiqué pour l
 $_lang['setting_manager_login_url_alternate'] = 'URL alternative de connexion au manager';
 $_lang['setting_manager_login_url_alternate_desc'] = 'Une URL alternative vers laquelle envoyer les utilisateurs non authentifiés auprès du manager. Le formulaire de connexion doit authentifier l\'utilisateur au contexte "mgr" pour fonctionner.';
 
-$_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
-$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
+$_lang['setting_manager_tooltip_enable'] = 'Activer les infobulles du gestionnaire';
+$_lang['setting_manager_tooltip_delay'] = 'Délai des infobulles du gestionnaire';
 
 $_lang['setting_login_background_image'] = 'Image de fond de connexion';
 $_lang['setting_login_background_image_desc'] = 'L’image d’arrière-plan à utiliser dans le gestionnaire de connexion. Elle sera automatiquement étirée pour remplir l’écran.';
@@ -426,8 +426,8 @@ $_lang['setting_manager_login_start_desc'] = 'Entrez l\'ID du document vers lequ
 $_lang['setting_manager_theme'] = 'Thème du manager';
 $_lang['setting_manager_theme_desc'] = 'Sélectionnez le thème du gestionnaire de contenu.';
 
-$_lang['setting_manager_logo'] = 'Manager Logo';
-$_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
+$_lang['setting_manager_logo'] = 'Logo du gestionnaire';
+$_lang['setting_manager_logo_desc'] = 'Le logo à afficher dans l\'en-tête du gestionnaire de contenu.';
 
 $_lang['setting_manager_time_format'] = 'Format de date du manager';
 $_lang['setting_manager_time_format_desc'] = 'Le format de chaine de caractères, au format PHP date(), pour les options représentées dans le manager.';
@@ -571,11 +571,11 @@ $_lang['setting_publish_default'] = 'Publié par défaut';
 $_lang['setting_publish_default_desc'] = 'Sélectionnez \'Oui\' pour définir les nouvelles ressources comme publiées par défaut.';
 $_lang['setting_publish_default_err'] = 'Veuillez indiquer si vous désirez ou non que vos ressources soient publiées par défaut.';
 
-$_lang['setting_quick_search_in_content'] = 'Allow search in content';
-$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+$_lang['setting_quick_search_in_content'] = 'Autoriser la recherche dans le contenu';
+$_lang['setting_quick_search_in_content_desc'] = 'Si \'Oui\', alors le contenu de l\'élément (ressource, modèle, chunk, etc.) sera également disponible pour une recherche rapide.';
 
-$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
-$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+$_lang['setting_quick_search_result_max'] = 'Nombre d\'éléments dans le résultat de la recherche';
+$_lang['setting_quick_search_result_max_desc'] = 'Nombre maximum d\'éléments pour chaque type (ressource, modèle, chunk, etc.) dans le résultat de recherche rapide.';
 
 $_lang['setting_request_controller'] = 'Nom de fichier du contrôleur de requête';
 $_lang['setting_request_controller_desc'] = 'Le nom de fichier du contrôleur principal de requête par lequel MODX est chargé. La plupart des utilisateurs peuvent laisser index.php.';
@@ -671,19 +671,19 @@ $_lang['setting_site_unavailable_page_desc'] = 'Entrez l\'ID de la ressource que
 $_lang['setting_site_unavailable_page_err'] = 'Veuillez indiquer l\'ID du document pour la page site indisponible.';
 
 $_lang['setting_static_elements_automate_templates'] = 'Automatiser les éléments statiques pour les gabarits ?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
+$_lang['setting_static_elements_automate_templates_desc'] = 'Cela automatisera la gestion des fichiers statiques, comme la création et la suppression de fichiers statiques pour les modèles.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
+$_lang['setting_static_elements_automate_tvs'] = 'Automatiser les éléments statiques pour les TV ?';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'Cela automatisera la gestion des fichiers statiques, comme la création et la suppression de fichiers statiques pour les TV.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'Automatiser les éléments statiques pour les chuncks ?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'Ceci automatisera la gestion des fichiers statiques, tels que la création et la suppression de fichiers statiques pour les chunks.';
 
 $_lang['setting_static_elements_automate_snippets'] = 'Automatiser les éléments statiques pour les snippets ?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'Cela automatisera la gestion des fichiers statiques, comme la création et la suppression de fichiers statiques pour les snippets.';
 
 $_lang['setting_static_elements_automate_plugins'] = 'Automatiser les éléments statiques pour les plugins ?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'Ceci automatisera la gestion des fichiers statiques, comme la création et la suppression de fichiers statiques pour les plugins.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Médiasource par défaut des éléments statiques';
 $_lang['setting_static_elements_default_mediasource_desc'] = 'Spécifiez une médiasource par défaut dans laquelle vous voulez stocker les éléments statiques.';
@@ -701,8 +701,8 @@ $_lang['setting_syncsite_default'] = 'Vider le cache par défaut';
 $_lang['setting_syncsite_default_desc'] = 'Sélectionnez « Oui » pour vider le cache après avoir enregistré une ressource.';
 $_lang['setting_syncsite_default_err'] = 'Prière d\'indiquer si vous voulez ou non par défaut vider le cache après avoir sauvé une ressource.';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
-$_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
+$_lang['setting_topmenu_show_descriptions'] = 'Afficher les descriptions dans le menu principal';
+$_lang['setting_topmenu_show_descriptions_desc'] = 'Sélectionnez non pour que MODX cache les descriptions dans la navigation principale du gestionnaire.';
 
 $_lang['setting_tree_default_sort'] = 'Champ de classement de l\'arborescence';
 $_lang['setting_tree_default_sort_desc'] = 'Le champ par défaut utilisé pour classer les ressources dans l\'arborescence lors du chargement du manager.';
@@ -711,7 +711,7 @@ $_lang['setting_tree_root_id'] = 'ID racine de l\'arborescence';
 $_lang['setting_tree_root_id_desc'] = 'Indiquez un ID valide de ressource pour démarrer l\'arborescence de ressource (à gauche) en dessous de cette ressource. Les utilisateurs verront uniquement les ressources qui sont enfants de la ressource spécifiée.';
 
 $_lang['setting_tvs_below_content'] = 'TVs en dessous du contenu';
-$_lang['setting_tvs_below_content_desc'] = 'Set this to Yes to move TVs below the Content when editing Resources.';
+$_lang['setting_tvs_below_content_desc'] = 'Activez cette option pour afficher les variables de modèle (TV) en dessous du contenu lors de l\'édition de ressource.';
 
 $_lang['setting_ui_debug_mode'] = 'Mode debug de l\'UI';
 $_lang['setting_ui_debug_mode_desc'] = 'Activez cette option pour afficher les messages de debug lors de l\'utilisation du thème de manager par défaut. Vous devez utiliser un navigateur qui supporte la fonction console.log().';
@@ -796,8 +796,8 @@ $_lang['setting_error_log_filename_desc'] = 'Personnaliser le nom de fichier du 
 $_lang['setting_error_log_filepath'] = 'Chemin d’accès du journal des erreurs';
 $_lang['setting_error_log_filepath_desc'] = 'Éventuellement défini un chemin d’accès absolu pour l’emplacement du journal un message d’erreur personnalisé. Vous pouvez utiliser des placeholders comme {cache_path}.';
 
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
-$_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
+$_lang['setting_passwordless_activated'] = 'Activer la connexion sans mot de passe';
+$_lang['setting_passwordless_activated_desc'] = 'Lorsque cette option est activée, les utilisateurs saisissent leur adresse e-mail pour recevoir un lien de connexion unique, plutôt que d\'entrer un nom d\'utilisateur et un mot de passe.';
 
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
-$_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
+$_lang['setting_passwordless_expiration'] = 'Expiration de la connexion sans mot de passe';
+$_lang['setting_passwordless_expiration_desc'] = 'Durée de validité en secondes d\'un lien de connexion unique.';
