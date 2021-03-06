@@ -993,6 +993,7 @@ class modTemplateVar extends modElement
     public function parseBinding($binding_string)
     {
         $match = [];
+        $match2 = [];
         $binding_string = trim($binding_string);
         $regexp = '/@(' . implode('|', $this->bindings) . ')\s*(.*)/is'; /* Split binding on whitespace */
         
