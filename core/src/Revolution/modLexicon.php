@@ -597,12 +597,12 @@ class modLexicon
      * @return array The processed array
      */
     private function _flatten($array) {
-        $result = array();
+        $result = [];
 
         if (is_array($array)) {
             $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
             foreach ($iterator as $value) {
-                $keys = array();
+                $keys = [];
                 foreach (range(0, $iterator->getDepth()) as $depth) {
                     $keys[] = $iterator->getSubIterator($depth)->key();
                 }
