@@ -158,7 +158,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $dirnames[] = strtoupper($fileName);
                 $directories[$fileName] = array(
-                    'id' => $bases['urlRelative'].rtrim($fileName,'/').'/',
+                    'id' => rawurlencode($bases['urlRelative'].rtrim($fileName,'/').'/'),
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
                     'iconCls' => 'icon icon-folder',
@@ -199,7 +199,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
-                    'id' => $bases['urlRelative'].$fileName,
+                    'id' => rawurlencode($bases['urlRelative'].$fileName),
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
                     'iconCls' => 'icon icon-file icon-'.$ext . ($file->isWritable() ? '' : ' icon-lock'),
@@ -1071,8 +1071,8 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 }
 
                 $filesize = @filesize($filePathName);
-                $url = urlencode(ltrim($dir.$fileName,'/'));
-                $page = !empty($editAction) ? '?a='.$editAction.'&file='.$bases['urlRelative'].$fileName.'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
+                $url = rawurlencode(ltrim($dir.$fileName,'/'));
+                $page = !empty($editAction) ? '?a='.$editAction.'&file='.rawurlencode($bases['urlRelative'].$fileName).'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
 
                 /* get thumbnail */
                 $preview = 0;
@@ -1180,7 +1180,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
-                    'id' => $bases['urlAbsoluteWithPath'].$fileName,
+                    'id' => rawurlencode($bases['urlAbsoluteWithPath'].$fileName),
                     'name' => $fileName,
                     'cls' => 'icon-'.$fileExtension,
                     'image' => $image,
