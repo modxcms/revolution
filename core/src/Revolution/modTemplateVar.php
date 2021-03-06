@@ -833,6 +833,7 @@ class modTemplateVar extends modElement
         $nvalue = trim($value);
         $cmd = false;
         $param = '';
+        $properties = [];
         if (substr($nvalue, 0, 1) == '@') {
             list($cmd, $param, $properties) = $this->parseBinding($nvalue);
             $cmd = trim($cmd);
