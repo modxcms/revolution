@@ -47,7 +47,7 @@ class Download extends Browser
         @session_write_close();
         try {
             if ($data = $this->source->getObjectContents($file)) {
-                $name = preg_replace('#[^\w-.]#ui', '_', $data['basename']);
+                $name = preg_replace('#[^\w\-.]#ui', '_', $data['basename']);
                 header('Content-type: ' . $data['mime']);
                 header('Content-Length: ' . $data['size']);
                 header('Content-Disposition: attachment; filename=' . $name);
