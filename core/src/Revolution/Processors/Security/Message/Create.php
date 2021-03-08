@@ -201,7 +201,11 @@ class Create extends ModelProcessor
      */
     public function sendEmail($message)
     {
-        if ($user = $this->modx->getObject(modUser::class, ['id' => $message->get('recipient')])) {
+        /** @var modUser $user */
+        $user = $this->object instanceof modUser
+                ? $this->object
+                : $this->modx->getObject(modUser::class, ['id' => $message->get('recipient')]);
+        if ($user) {
             $user->sendEmail($message->get('message'), ['subject' => $message->get('subject')]);
         }
     }
