@@ -7,6 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Akcia';
-$_lang['action_desc'] = 'Actions are abstractions of MODX controllers. They can be used to create custom manager pages, as well as reorganize the main menu of the MODX manager.';
+$_lang['action_desc'] = 'Les actions sont des abstractions des contrôleurs MODX. Elles peuvent être utilisées pour créer des pages de gestion personnalisée, ainsi que pour réorganiser le menu principal du gestionnaire de MODX.';
 $_lang['action_err_ns'] = 'Aucune action n\'a été spécifiée!';
 $_lang['actions'] = 'Actions';

@@ -7,6 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Дія';
-$_lang['action_desc'] = 'Actions are abstractions of MODX controllers. They can be used to create custom manager pages, as well as reorganize the main menu of the MODX manager.';
+$_lang['action_desc'] = 'Дії — це абстракції контролерів MODX. Вони можуть використовуватися для створення сторінок менеджера MODX, а також для реорганізації головного меню.';
 $_lang['action_err_ns'] = 'Дія не вказана!';
 $_lang['actions'] = 'Дії';
