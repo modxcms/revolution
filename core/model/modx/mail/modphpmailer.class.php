@@ -26,7 +26,9 @@ class modPHPMailer extends modMail {
      */
     function __construct(modX &$modx, array $attributes= array()) {
         parent :: __construct($modx, $attributes);
-        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/class.phpmailer.php';
+        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/src/PHPMailer.php';
+        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/src/SMTP.php';
+        require_once $modx->getOption('core_path') . 'model/modx/mail/phpmailer/src/Exception.php';
         $this->_getMailer();
     }
 
@@ -224,21 +226,14 @@ class modPHPMailer extends modMail {
     }
 
     /**
-     * Loads the PHPMailer object used to send the emails in this implementation.
+     * Loads the PHPMailer\PHPMailer\PHPMailer object used to send the emails in this implementation.
      *
      * @return boolean True if the mailer class was successfully loaded
      */
     protected function _getMailer() {
-        $success= false;
-        if (!$this->mailer || !($this->mailer instanceof PHPMailer)) {
-            if ($this->mailer= new PHPMailer()) {
-                // Make sure PHPMailer autoloader is loaded
-                if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
-                    $autoload = spl_autoload_functions();
-                    if ($autoload === false or !in_array('PHPMailerAutoload', $autoload)) {
-                        require 'phpmailer/PHPMailerAutoload.php';
-                    }
-                }
+        $success = false;
+        if (!$this->mailer || !($this->mailer instanceof PHPMailer\PHPMailer\PHPMailer)) {
+            if ($this->mailer = new PHPMailer\PHPMailer\PHPMailer()) {
                 if (!empty($this->attributes)) {
                     foreach ($this->attributes as $attrKey => $attrVal) {
                         $this->set($attrKey, $attrVal);
@@ -247,7 +242,7 @@ class modPHPMailer extends modMail {
                 if (!isset($this->attributes[modMail::MAIL_LANGUAGE])) {
                     $this->set(modMail::MAIL_LANGUAGE, $this->modx->config['manager_language']);
                 }
-                $success= true;
+                $success = true;
             }
         }
         return $success;

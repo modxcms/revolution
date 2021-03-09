@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Slovak PHPMailer language file: refer to English translation for definitive list
  * @package PHPMailer
  * @author Michal Tinka <michaltinka@gmail.com>
+ * @author Peter Orlický <pcmanik91@gmail.com>
  */
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP Error: Chyba autentifikácie.';
@@ -16,6 +18,8 @@ $PHPMAILER_LANG['file_open']            = 'File Error: Súbor sa otvoriť pre č
 $PHPMAILER_LANG['from_failed']          = 'Následujúca adresa From je nesprávna: ';
 $PHPMAILER_LANG['instantiate']          = 'Nedá sa vytvoriť inštancia emailovej funkcie.';
 $PHPMAILER_LANG['invalid_address']      = 'Neodoslané, emailová adresa je nesprávna: ';
+$PHPMAILER_LANG['invalid_hostentry']    = 'Záznam hostiteľa je nesprávny: ';
+$PHPMAILER_LANG['invalid_host']         = 'Hostiteľ je nesprávny: ';
 $PHPMAILER_LANG['mailer_not_supported'] = ' emailový klient nieje podporovaný.';
 $PHPMAILER_LANG['provide_address']      = 'Musíte zadať aspoň jednu emailovú adresu príjemcu.';
 $PHPMAILER_LANG['recipients_failed']    = 'SMTP Error: Adresy príjemcov niesu správne ';
@@ -23,4 +27,4 @@ $PHPMAILER_LANG['signing']              = 'Chyba prihlasovania: ';
 $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Connect() zlyhalo.';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP chyba serveru: ';
 $PHPMAILER_LANG['variable_set']         = 'Nemožno nastaviť alebo resetovať premennú: ';
-//$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
+$PHPMAILER_LANG['extension_missing']    = 'Chýba rozšírenie: ';

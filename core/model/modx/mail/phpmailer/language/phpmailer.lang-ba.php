@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bosnian PHPMailer language file: refer to English translation for definitive list
  * @package PHPMailer
@@ -6,7 +7,7 @@
  */
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP Greška: Neuspjela prijava.';
-$PHPMAILER_LANG['connect_host']         = 'SMTP Greška: Ne moguće se spojiti sa SMTP serverom.';
+$PHPMAILER_LANG['connect_host']         = 'SMTP Greška: Nije moguće spojiti se sa SMTP serverom.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP Greška: Podatci nisu prihvaćeni.';
 $PHPMAILER_LANG['empty_message']        = 'Sadržaj poruke je prazan.';
 $PHPMAILER_LANG['encoding']             = 'Nepoznata kriptografija: ';

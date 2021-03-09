@@ -1,11 +1,12 @@
 <?php
+
 /**
  * French PHPMailer language file: refer to English translation for definitive list
  * @package PHPMailer
  * Some French punctuation requires a thin non-breaking space (U+202F) character before it,
  * for example before a colon or exclamation mark.
  * There is one of these characters between these quotes: " "
- * @link http://unicode.org/udhr/n/notes_fra.html
+ * @see http://unicode.org/udhr/n/notes_fra.html
  */
 
 $PHPMAILER_LANG['authenticate']         = 'Erreur SMTP : échec de l\'authentification.';
@@ -19,6 +20,8 @@ $PHPMAILER_LANG['file_open']            = 'Ouverture du fichier impossible : '
 $PHPMAILER_LANG['from_failed']          = 'L\'adresse d\'expéditeur suivante a échoué : ';
 $PHPMAILER_LANG['instantiate']          = 'Impossible d\'instancier la fonction mail.';
 $PHPMAILER_LANG['invalid_address']      = 'L\'adresse courriel n\'est pas valide : ';
+$PHPMAILER_LANG['invalid_hostentry']    = 'L\'entrée hôte n\'est pas valide : ';
+$PHPMAILER_LANG['invalid_host']         = 'L\'hôte n\'est pas valide : ';
 $PHPMAILER_LANG['mailer_not_supported'] = ' client de messagerie non supporté.';
 $PHPMAILER_LANG['provide_address']      = 'Vous devez fournir au moins une adresse de destinataire.';
 $PHPMAILER_LANG['recipients_failed']    = 'Erreur SMTP : les destinataires suivants sont en erreur : ';
