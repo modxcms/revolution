@@ -1050,7 +1050,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,anchor: '100%'
                 ,maxLength: 255
-                ,value: 'http://'
+                ,value: ''
             };
             break;
         case 'MODX\\Revolution\\modStaticResource':
