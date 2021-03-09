@@ -41,8 +41,6 @@ class GetList extends Processor
      */
     public function process()
     {
-        $this->modx->setPackageMeta('sources', $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'model/modx/');
-
         $descendants = $this->modx->getDescendants(modMediaSource::class);
 
         $list = [];

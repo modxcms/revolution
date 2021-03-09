@@ -63,7 +63,7 @@ class SourceUpdateManagerController extends modManagerController {
         if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('source_err_ns'));
         }
-        $this->source = $this->modx->getObject('sources.modMediaSource', ['id' => $this->scriptProperties['id']]);
+        $this->source = $this->modx->getObject(modMediaSource::class, ['id' => $this->scriptProperties['id']]);
         if (empty($this->source)) return $this->failure($this->modx->lexicon('source_err_nf'));
 
         $this->sourceArray = $this->source->toArray();

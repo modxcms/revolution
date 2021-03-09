@@ -13,7 +13,7 @@ MODx.grid.AccessContext = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'Security/Access/GetList'
-            ,type: config.type || 'modAccessContext'
+            ,type: config.type || 'MODX\\Revolution\\modAccessContext'
             ,target: config.context_key
         }
         ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','policy','policy_name','cls']

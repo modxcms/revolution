@@ -217,7 +217,7 @@ abstract class DuplicateProcessor extends ModelProcessor
         $sourceId = $this->getProperty('source');
         if ($sourceId > 0) {
             /** @var modFileMediaSource $source */
-            $source = $this->modx->getObject('sources.modFileMediaSource', ['id' => $sourceId]);
+            $source = $this->modx->getObject(modFileMediaSource::class, ['id' => $sourceId]);
             if ($source && $source->get('is_stream')) {
                 $source->initialize();
                 $filename = $source->getBasePath() . $filename;
