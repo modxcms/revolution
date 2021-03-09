@@ -32,12 +32,15 @@ class Remove extends Browser
      */
     public function process()
     {
-        $file = $this->sanitize($this->getProperty('file'));
-        if (empty($file)) {
-            return $this->failure($this->modx->lexicon('file_err_ns'));
+        $files = $this->sanitize($this->getProperty('files'));
+        $files = $this->modx->fromJSON($files);
+        $response = false;
+        foreach($files as $file) {
+            if (empty($file)) {
+                return $this->failure($this->modx->lexicon('file_err_ns'));
+            }
+            $response = $this->source->removeObject($file);
         }
-        $response = $this->source->removeObject($file);
-
         return $this->handleResponse($response);
     }
 }
