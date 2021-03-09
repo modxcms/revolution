@@ -128,7 +128,18 @@ MODx.panel.FileTV = function(config) {
     MODx.panel.FileTV.superclass.constructor.call(this,config);
     this.addEvents({select: true});
 };
-Ext.extend(MODx.panel.FileTV,MODx.Panel);
+Ext.extend(MODx.panel.FileTV,MODx.Panel, {
+    isDirty: function() {
+        if (this.disabled || !this.rendered) {
+            return false;
+        }
+
+        var inputField = this.find('name', 'tv' + this.config.tv);
+        if (!inputField || !inputField[0]) return false;
+
+        return inputField[0].isDirty();
+    }
+});
 Ext.reg('modx-panel-tv-file',MODx.panel.FileTV);
 
 MODx.checkTV = function(id) {
