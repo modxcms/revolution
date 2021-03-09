@@ -103,9 +103,12 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
     ,removeResourceGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_'); id = id[1];
+        var resource_group = n.text;
 
         MODx.msg.confirm({
-            text: _('resource_group_remove_confirm')
+            text: _('resource_group_remove_confirm',{
+                resource_group: resource_group
+            })
             ,url: this.config.url
             ,params: {
                 action: 'Security/ResourceGroup/Remove'

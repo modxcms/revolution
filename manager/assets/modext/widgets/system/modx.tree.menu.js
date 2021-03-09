@@ -92,13 +92,15 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     }
 
     ,removeMenu: function(n,e) {
+        var node = this.cm.activeNode;
         MODx.msg.confirm({
-            title: _('warning')
-            ,text: _('menu_confirm_remove')
+            text: _('menu_confirm_remove',{
+                menu: node.attributes.text
+            })
             ,url: this.config.url
             ,params: {
                 action: 'System/Menu/Remove'
-                ,text: this.cm.activeNode.attributes.pk
+                ,text: node.attributes.pk
             }
             ,listeners: {
                 'success':{fn:this.refresh,scope:this}

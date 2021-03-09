@@ -222,16 +222,20 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
     ,removeFile: function() {
         var files = [];
+        var filesNames = [];
         var selected = this.getSelectedRecords();
         for (var i in selected) {
             if (!selected.hasOwnProperty(i)) {
                 continue;
             }
-            files.push(selected[i]['id']);
+            files.push(selected[i].id);
+            filesNames.push(selected[i].data.name);
         }
 
         MODx.msg.confirm({
-            text: _('file_remove_confirm')
+            text: _('file_remove_confirm',{
+                file: filesNames.pop()
+            })
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'Browser/File/Remove'
