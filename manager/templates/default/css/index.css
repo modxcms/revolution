@@ -22251,6 +22251,19 @@ ul.x-tab-strip-bottom {
     box-shadow: 0 0 0 1px #6CB24A;
     color: #FFF; }
 
+#changelog-tab p {
+  margin-bottom: 0.3rem; }
+
+#changelog-tab h1 {
+  color: #515151; }
+
+#changelog-tab h2 {
+  font-weight: 700;
+  margin-top: 1rem; }
+
+#changelog-tab ul {
+  margin-bottom: 1rem; }
+
 body {
   color: black;
   font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
