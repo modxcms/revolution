@@ -26,7 +26,6 @@ use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessPolicyTemplate;
-use MODX\Revolution\modAction;
 use MODX\Revolution\modActionDom;
 use MODX\Revolution\modFormCustomizationProfile;
 use MODX\Revolution\modFormCustomizationProfileUserGroup;

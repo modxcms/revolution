@@ -10,7 +10,6 @@
 
 namespace MODX\Revolution\Processors\System\Log;
 
-use MODX\Revolution\modAction;
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;

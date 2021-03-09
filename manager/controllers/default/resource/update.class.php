@@ -10,6 +10,7 @@
 
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modUser;
 
 require_once dirname(__FILE__) . '/resource.class.php';
 

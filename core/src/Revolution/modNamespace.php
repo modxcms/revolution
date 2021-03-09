@@ -22,7 +22,6 @@ use xPDO\xPDO;
  * @property modUserSetting[]      $UserSettings
  * @property modExtensionPackage[] $ExtensionPackages
  * @property modAccessNamespace[]  $Acls
- * @property modAction[]           $Actions
  *
  * @package MODX\Revolution
  */

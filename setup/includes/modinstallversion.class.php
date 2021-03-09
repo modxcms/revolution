@@ -14,6 +14,8 @@
  * @package setup
 */
 
+use MODX\Revolution\modSystemSetting;
+
 /**
  * Handles version-specific upgrades for Revolution
  *

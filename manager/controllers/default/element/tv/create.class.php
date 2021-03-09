@@ -8,6 +8,8 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modCategory;
+use MODX\Revolution\modContext;
 use MODX\Revolution\modManagerController;
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\Sources\modMediaSource;
