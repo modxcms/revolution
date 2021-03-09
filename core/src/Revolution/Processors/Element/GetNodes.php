@@ -456,7 +456,7 @@ class GetNodes extends Processor
             if ($element->get('locked')) {
                 $class[] = 'element-node-locked';
             }
-            if ($elementClassKey === 'modPlugin' && $element->get('disabled')) {
+            if ($elementClassKey === modPlugin::class && $element->get('disabled')) {
                 $class[] = 'element-node-disabled';
             }
 
@@ -543,7 +543,7 @@ class GetNodes extends Processor
             if ($element->get('locked')) {
                 $class[] = 'element-node-locked';
             }
-            if ($elementClassKey == 'modPlugin' && $element->get('disabled')) {
+            if ($elementClassKey == modPlugin::class && $element->get('disabled')) {
                 $class[] = 'element-node-disabled';
             }
 
