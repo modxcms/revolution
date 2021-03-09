@@ -456,7 +456,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,quickCreateFile: function(itm,e) {
         var node = this.cm.activeNode;
         var r = {
-            directory: node.attributes.id
+            directory: decodeURIComponent(node.attributes.id)
             ,source: this.getSource()
         };
         var w = MODx.load({
