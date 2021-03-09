@@ -43,7 +43,7 @@ class Get extends GetProcessor
      */
     public function initialize()
     {
-        $this->modx->addPackage('modx.transport', $this->modx->getOption('core_path') . 'model/');
+        $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
         $this->dateFormat = $this->getProperty('dateFormat',
             $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'));
         return parent::initialize();

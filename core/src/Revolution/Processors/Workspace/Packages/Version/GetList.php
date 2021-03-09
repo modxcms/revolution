@@ -33,6 +33,7 @@ class GetList extends GetListProcessor
      */
     public function initialize()
     {
+        $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
         $this->setDefaultProperties([
             'limit' => 10,
             'start' => 0,
@@ -40,7 +41,6 @@ class GetList extends GetListProcessor
             'dateFormat' => $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
             'signature' => false,
         ]);
-        $this->modx->addPackage('modx.transport', $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'model/');
         return parent::initialize();
     }
 
