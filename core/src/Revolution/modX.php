@@ -39,7 +39,7 @@ use xPDO\Om\xPDOObject;
  *
  * @package modx
  */
-class modX extends xPDO {
+final class modX extends xPDO {
     /**
      * The parameter for when a session state is not able to be accessed
      * @const SESSION_STATE_UNAVAILABLE
