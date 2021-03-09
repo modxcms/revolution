@@ -48,29 +48,29 @@ $_lang['sources.intro_msg'] = 'Gérez vos Media Sources.';
 $_lang['user_group'] = 'Groupe d\'utilisateurs';
 
 /* file source type */
-$_lang['allowedFileTypes'] = 'allowedFileTypes';
+$_lang['allowedFileTypes'] = 'Types de fichiers autorisés';
 $_lang['prop_file.allowedFileTypes_desc'] = 'Si défini, n\'affiche que les fichiers utilisants les extensions indiquées. Veuillez indiquer ces extensions séparées par des virgules, sans spécifier le . (point)';
-$_lang['basePath'] = 'basePath';
+$_lang['basePath'] = 'chemin de base';
 $_lang['prop_file.basePath_desc'] = 'Le chemin d\'accès vers lequel faire pointer la Source.';
-$_lang['basePathRelative'] = 'basePathRelative';
+$_lang['basePathRelative'] = 'chemin de base relatif';
 $_lang['prop_file.basePathRelative_desc'] = 'Si le chemin de base ci-dessus est relatif au répertoire d\'installation de base de MODX, sélectionnez Oui.';
-$_lang['baseUrl'] = 'baseUrl';
+$_lang['baseUrl'] = 'URL de base';
 $_lang['prop_file.baseUrl_desc'] = 'L\'URL depuis laquelle cette source est assessible.';
-$_lang['baseUrlPrependCheckSlash'] = 'baseUrlPrependCheckSlash';
+$_lang['baseUrlPrependCheckSlash'] = 'Verification de l\'azjout de slash en tête de l\'URL de base';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'Activé, MODX préfixera seulement l\'URL de base si aucun slash (/) n\'est présent au début de l\'URL lors du rendu de la TV. Utile pour définir une valeur de TV en dehors de l\'URL de base.';
-$_lang['baseUrlRelative'] = 'baseUrlRelative';
+$_lang['baseUrlRelative'] = 'Url de base relative';
 $_lang['prop_file.baseUrlRelative_desc'] = 'Si l\'URL de base ci-dessus est relative à l\'URL de base d\'installation de MODX, sélectionnez Oui.';
-$_lang['imageExtensions'] = 'imageExtensions';
+$_lang['imageExtensions'] = 'Extensions de l\'image';
 $_lang['prop_file.imageExtensions_desc'] = 'Une liste d\'extension de fichiers d\'images, séparées par des virgules. MODX essaiera de créer des miniatures des fichiers portant ces extensions.';
-$_lang['skipFiles'] = 'skipFiles';
+$_lang['skipFiles'] = 'ignorer les fichiers';
 $_lang['prop_file.skipFiles_desc'] = 'Une liste d\'extensions de fichiers séparées par des virgules. MODX masquera les fichiers et dossiers qui correspondants.';
-$_lang['thumbnailQuality'] = 'thumbnailQuality';
+$_lang['thumbnailQuality'] = 'qualite de la vignette';
 $_lang['prop_file.thumbnailQuality_desc'] = 'La qualité de rendu des miniatures, dans une fourchette de 0 à 100.';
-$_lang['thumbnailType'] = 'thumbnailType';
+$_lang['thumbnailType'] = 'type de vignette';
 $_lang['prop_file.thumbnailType_desc'] = 'Le type d\'image à utiliser pour afficher les miniatures.';
 
 /* s3 source type */
-$_lang['bucket'] = 'Bucket';
+$_lang['bucket'] = 'Seau';
 $_lang['prop_s3.bucket_desc'] = 'Le S3 Bucket depuis lequel charger les données.';
 $_lang['prop_s3.key_desc'] = 'Clé d\'identification du Amazon bucket.';
 $_lang['prop_s3.imageExtensions_desc'] = 'Une liste d\'extension de fichiers d\'images, séparées par des virgules. MODX essaiera de créer des miniatures des fichiers portant ces extensions.';

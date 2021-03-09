@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['autotag'] = 'Auto-Tag';
+$_lang['autotag'] = 'Étiquette automatique';
 $_lang['text'] = 'Texte';
 $_lang['textarea'] = 'Zone de texte';
 $_lang['textareamini'] = 'Zone de texte (Mini)';
@@ -23,4 +23,4 @@ $_lang['url'] = 'URL';
 $_lang['email'] = 'E-mail';
 $_lang['number'] = 'Nombre';
 $_lang['date'] = 'Date';
-$_lang['tag'] = 'Tag';
+$_lang['tag'] = 'Étiquette';
