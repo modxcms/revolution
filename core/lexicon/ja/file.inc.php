@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'ディレクトリ';
-$_lang['file_confirm_remove'] = 'Are you sure you want to delete this file? Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_create'] = 'ファイルを作成';
 $_lang['file_deleted'] = '完了';
 $_lang['file_delete_file'] = 'ファイルを削除';
@@ -70,7 +69,7 @@ $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
 $_lang['file_folder_parent'] = '親ディレクトリ';
 $_lang['file_folder_remove'] = 'ディレクトリの削除';
-$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete this directory? This could potentially break your website.';
+$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
 $_lang['file_last_accessed'] = '最終アクセス';
 $_lang['file_last_modified'] = '最終更新日時';
 $_lang['file_name'] = 'ファイル名';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'The packages directory does not 
 $_lang['file_package_err_invalid_name'] = 'This file [[+name]] has an invalid name for the transport package';
 $_lang['file_package_err_invalid_type'] = 'This file does not appear to be a transport package';
 $_lang['file_remove'] = 'ファイルを削除';
-$_lang['file_remove_confirm'] = 'Are you sure you want to delete this file entirely?';
+$_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_saved'] = 'ファイルが正常に保存されました。';
 $_lang['file_size'] = 'ファイル容量';
 $_lang['file_size_bytes'] = 'bytes';
