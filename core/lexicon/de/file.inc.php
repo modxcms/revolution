@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Verzeichnis';
-$_lang['file_confirm_remove'] = 'Sind Sie sicher, dass Sie diese Datei löschen möchten? Das Löschen einer Datei kann möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert. Stellen Sie sicher, dass Sie wissen, welchen Zweck diese Datei erfüllt, bevor Sie sie löschen.';
 $_lang['file_create'] = 'Datei erstellen';
 $_lang['file_deleted'] = 'Erfolgreich!';
 $_lang['file_delete_file'] = 'Datei löschen';
@@ -70,7 +69,7 @@ $_lang['file_folder_err_remove'] = 'Beim Versuch, das Verzeichnis zu löschen, i
 $_lang['file_folder_err_remove_protected'] = 'Das Löschen des geschützten Systemverzeichnisses ist nicht erlaubt.';
 $_lang['file_folder_parent'] = 'Elternverzeichnis';
 $_lang['file_folder_remove'] = 'Verzeichnis löschen';
-$_lang['file_folder_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Verzeichnis löschen möchten? Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
+$_lang['file_folder_remove_confirm'] = 'Sind Sie sicher, dass Sie das Verzeichnis "[[+directory]]" löschen möchten?<br />Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
 $_lang['file_last_accessed'] = 'Letzter Zugriff';
 $_lang['file_last_modified'] = 'Zuletzt geändert';
 $_lang['file_name'] = 'Dateiname';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'Das Package-Verzeichnis existier
 $_lang['file_package_err_invalid_name'] = 'Die Datei [[+name]] hat einen ungültigen Namen für ein Transport-Package';
 $_lang['file_package_err_invalid_type'] = 'Diese Datei scheint kein Transport-Package zu sein';
 $_lang['file_remove'] = 'Datei löschen';
-$_lang['file_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Datei endgültig löschen möchten?';
+$_lang['file_remove_confirm'] = 'Sind Sie sicher, dass Sie die Datei "[[+file]]" löschen möchten?<br />Das Löschen einer Datei kann möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert. Stellen Sie sicher, dass Sie wissen, welchen Zweck diese Datei erfüllt, bevor Sie sie löschen.';
 $_lang['file_saved'] = 'Datei erfolgreich aktualisiert!';
 $_lang['file_size'] = 'Dateigröße';
 $_lang['file_size_bytes'] = 'Bytes';
