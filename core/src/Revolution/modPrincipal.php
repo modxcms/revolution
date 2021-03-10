@@ -61,7 +61,7 @@ abstract class modPrincipal extends xPDOSimpleObject
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (!is_array($targets) || empty($targets)) {
             $targets = explode(',', $this->xpdo->getOption('principal_targets', null,
-                'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource,modAccessNamespace'));
+                'MODX\\Revolution\\modAccessContext,MODX\\Revolution\\modAccessResourceGroup,MODX\\Revolution\\modAccessCategory,MODX\\Revolution\\Sources\\modAccessMediaSource,MODX\\Revolution\\modAccessNamespace'));
             array_walk($targets, 'trim');
         }
         $this->loadAttributes($targets, $context, $reload);
