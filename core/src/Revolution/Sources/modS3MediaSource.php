@@ -158,6 +158,14 @@ class modS3MediaSource extends modMediaSource
                 'value' => '.svn,.git,_notes,nbproject,.idea,.DS_Store',
                 'lexicon' => 'core:source',
             ],
+            'skipExtensions' => [
+                'name' => 'skipExtensions',
+                'desc' => 'prop_file.skipExtensions_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ],
         ];
     }
 

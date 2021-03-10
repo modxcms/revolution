@@ -159,7 +159,7 @@ class modFileMediaSource extends modMediaSource
                 'desc' => 'prop_file.skipExtensions_desc',
                 'type' => 'textfield',
                 'options' => '',
-                'value' => 'webp',
+                'value' => '',
                 'lexicon' => 'core:source',
             ],
         ];
