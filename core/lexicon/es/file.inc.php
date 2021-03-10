@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Directorio';
-$_lang['file_confirm_remove'] = 'Are you sure you want to delete this file? Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_create'] = 'Crear Archivo';
 $_lang['file_deleted'] = '¡Éxito!';
 $_lang['file_delete_file'] = 'Eliminar Archivo';
@@ -70,7 +69,7 @@ $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
 $_lang['file_folder_parent'] = 'Carpeta padre';
 $_lang['file_folder_remove'] = 'Eliminar carpeta';
-$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete this directory? This could potentially break your website.';
+$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
 $_lang['file_last_accessed'] = 'Último acceso';
 $_lang['file_last_modified'] = 'Última Modificación';
 $_lang['file_name'] = 'Nombre del archivo';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'The packages directory does not 
 $_lang['file_package_err_invalid_name'] = 'This file [[+name]] has an invalid name for the transport package';
 $_lang['file_package_err_invalid_type'] = 'This file does not appear to be a transport package';
 $_lang['file_remove'] = 'Eliminar Archivo';
-$_lang['file_remove_confirm'] = 'Are you sure you want to delete this file entirely?';
+$_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_saved'] = '¡Archivo actualizado con éxito!';
 $_lang['file_size'] = 'Tamaño del archivo';
 $_lang['file_size_bytes'] = 'bytes';
