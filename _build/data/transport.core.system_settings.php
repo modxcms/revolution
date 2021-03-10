@@ -85,7 +85,7 @@ $settings['archive_with']->fromArray([
 $settings['auto_detect_context']= $xpdo->newObject(modSystemSetting::class);
 $settings['auto_detect_context']->fromArray([
   'key' => 'auto_detect_context',
-  'value' => true,
+  'value' => false,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
