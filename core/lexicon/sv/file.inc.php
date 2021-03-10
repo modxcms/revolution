@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Katalog';
-$_lang['file_confirm_remove'] = 'Är du säker på att du vill ta bort den här filen? Det här kan potentiellt ha sönder din webbplats. Försäkra dig om att du vet vad filen gör innan du tar bort den.';
 $_lang['file_create'] = 'Skapa fil';
 $_lang['file_deleted'] = 'Klart!';
 $_lang['file_delete_file'] = 'Ta bort fil';
@@ -70,7 +69,7 @@ $_lang['file_folder_err_remove'] = 'Ett fel inträffade när katalogen skulle ta
 $_lang['file_folder_err_remove_protected'] = 'Det är inte tillåtet att ta bort den skyddade systemmappen.';
 $_lang['file_folder_parent'] = 'Föräldrakatalog';
 $_lang['file_folder_remove'] = 'Ta bort katalog';
-$_lang['file_folder_remove_confirm'] = 'Är du säker på att du vill ta bort den här katalogen? Detta kan potentiellt ha sönder din webbplats.';
+$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
 $_lang['file_last_accessed'] = 'Senast använd';
 $_lang['file_last_modified'] = 'Senast ändrad';
 $_lang['file_name'] = 'Filnamn';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'The packages directory does not 
 $_lang['file_package_err_invalid_name'] = 'This file [[+name]] has an invalid name for the transport package';
 $_lang['file_package_err_invalid_type'] = 'This file does not appear to be a transport package';
 $_lang['file_remove'] = 'Ta bort fil';
-$_lang['file_remove_confirm'] = 'Är du säker på att du vill ta bort den här filen helt och hållet?';
+$_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_saved'] = 'Filen uppdaterades utan problem!';
 $_lang['file_size'] = 'Filstorlek';
 $_lang['file_size_bytes'] = 'byte';
