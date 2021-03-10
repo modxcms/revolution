@@ -32,7 +32,7 @@ class MediaBrowserManagerController extends modManagerController
     {
         $this->addHtml(
 <<<HTML
-<script type="text/javascript">
+<script>
 // <![CDATA[
     Ext.onReady(function() {
         Ext.getCmp('modx-layout').hideLeftbar(true, false);

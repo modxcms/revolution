@@ -2,7 +2,7 @@
     value="{$tv->value}" name="tv{$tv->id}"
     onblur="MODx.fireResourceFormChange();"/>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {

@@ -50,7 +50,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.snippet.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/snippet/update.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
         Ext.onReady(function() {

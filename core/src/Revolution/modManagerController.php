@@ -168,7 +168,7 @@ abstract class modManagerController
         $this->setCssURLPlaceholders();
         /* help url */
         $helpUrl = $this->getHelpUrl();
-        $this->addHtml('<script type="text/javascript">MODx.helpUrl = "' . ($helpUrl) . '"</script>');
+        $this->addHtml('<script>MODx.helpUrl = "' . ($helpUrl) . '"</script>');
 
         $this->modx->invokeEvent('OnManagerPageBeforeRender', ['controller' => &$this]);
 
@@ -627,7 +627,7 @@ abstract class modManagerController
             $o = '';
             // Add script tags for the required javascript
             foreach ($externals as $js) {
-                $o .= '<script type="text/javascript" src="' . $js . '"></script>' . "\n";
+                $o .= '<script src="' . $js . '"></script>' . "\n";
             }
 
             // Get the state and user token for adding to the init script
@@ -645,7 +645,7 @@ abstract class modManagerController
                 ];
                 $layout = 'MODx.load(' . json_encode($data) . ');';
             }
-            $o .= '<script type="text/javascript">Ext.onReady(function() {' . $state . $layout . '});</script>';
+            $o .= '<script>Ext.onReady(function() {' . $state . $layout . '});</script>';
             $this->modx->smarty->assign('maincssjs', $o);
         }
     }
@@ -752,7 +752,7 @@ abstract class modManagerController
         $cssjs = [];
         if (!empty($jsToCompress)) {
             foreach ($jsToCompress as $scr) {
-                $cssjs[] = '<script src="' . $scr . '" type="text/javascript"></script>';
+                $cssjs[] = '<script src="' . $scr . '"></script>';
             }
         }
 
@@ -782,7 +782,7 @@ abstract class modManagerController
         }
         if (!empty($lastjs)) {
             foreach ($lastjs as $scr) {
-                $cssjs[] = '<script src="' . $scr . '" type="text/javascript"></script>';
+                $cssjs[] = '<script src="' . $scr . '"></script>';
             }
         }
 
@@ -960,7 +960,7 @@ abstract class modManagerController
             }
         }
         if (!empty($rules)) {
-            $this->ruleOutput[] = '<script type="text/javascript">Ext.onReady(function() {' . implode("\n",
+            $this->ruleOutput[] = '<script>Ext.onReady(function() {' . implode("\n",
                     $rules) . '});</script>';
         }
 

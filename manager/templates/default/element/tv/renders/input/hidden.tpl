@@ -1,6 +1,6 @@
 <input id="tv{$tv->id}" name="tv{$tv->id}" type="hidden" value="{$tv->get('value')|escape}" />
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 MODx.on('ready',function() {

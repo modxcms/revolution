@@ -1,5 +1,5 @@
-<script type="text/javascript" src="assets/js/sections/contexts.js"></script>
-<script type="text/javascript">
+<script src="assets/js/sections/contexts.js"></script>
+<script>
 Ext.onReady(function() {literal}{{/literal}
     MODx.context_web_path = "{$context_web_path}";
     MODx.context_web_url = "{$context_web_url}";

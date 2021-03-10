@@ -1,7 +1,7 @@
 <div id="tvpanel{$tv->id}"></div>
 
 {if $disabled}
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
@@ -20,7 +20,7 @@ Ext.onReady(function() {
 // ]]>
 </script>
 {else}
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {

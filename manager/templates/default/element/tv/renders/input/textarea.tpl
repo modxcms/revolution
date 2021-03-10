@@ -1,6 +1,6 @@
 <textarea id="tv{$tv->id}" name="tv{$tv->id}" rows="15">{$tv->get('value')|escape}</textarea>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {

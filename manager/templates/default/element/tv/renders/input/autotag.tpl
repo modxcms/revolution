@@ -6,7 +6,7 @@
 />
 <div id="tv-tags-{$tv->id}"></div>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
@@ -44,7 +44,7 @@ Ext.onReady(function() {
 {/foreach}
 </ul>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {

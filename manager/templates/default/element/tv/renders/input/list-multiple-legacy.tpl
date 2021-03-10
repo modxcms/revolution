@@ -7,7 +7,7 @@ class="modx-tv-legacy-select">
     {/foreach}
 </select>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
