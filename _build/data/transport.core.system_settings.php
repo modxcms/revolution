@@ -971,6 +971,15 @@ $settings['mail_smtp_prefix']->fromArray(array (
   'area' => 'mail',
   'editedon' => null,
 ), '', true, true);
+$settings['mail_smtp_autotls']= $xpdo->newObject('modSystemSetting');
+$settings['mail_smtp_autotls']->fromArray(array (
+  'key' => 'mail_smtp_autotls',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+), '', true, true);
 $settings['mail_smtp_single_to']= $xpdo->newObject('modSystemSetting');
 $settings['mail_smtp_single_to']->fromArray(array (
   'key' => 'mail_smtp_single_to',
