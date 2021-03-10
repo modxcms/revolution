@@ -20,13 +20,13 @@ MODx.panel.SymLink = function(config) {
     });
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
-        ,class_key: 'modSymLink'
+        ,class_key: 'MODX\\Revolution\\modSymLink'
         ,items: this.getFields(config)
     });
     MODx.panel.SymLink.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.SymLink,MODx.panel.Resource,{
-    defaultClassKey: 'modSymLink'
+    defaultClassKey: 'MODX\\Revolution\\modSymLink'
     ,classLexiconKey: 'symlink'
     ,rteElements: false
     ,contentField: 'modx-symlink-content'

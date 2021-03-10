@@ -60,11 +60,11 @@ MODx.SearchBar = function(config) {
                         switch (values.class) {
                             case 'MODX\\Revolution\\modDocument':
                                 return 'file';
-                            case 'modSymLink':
+                            case 'MODX\\Revolution\\modSymLink':
                                 return 'files-o';
-                            case 'modWebLink':
+                            case 'MODX\\Revolution\\modWebLink':
                                 return 'link';
-                            case 'modStaticResource':
+                            case 'MODX\\Revolution\\modStaticResource':
                                 return 'file-text-o';
                             default:
                                 break;

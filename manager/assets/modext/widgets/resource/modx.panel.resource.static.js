@@ -10,13 +10,13 @@ MODx.panel.Static = function(config) {
     config.default_title = config.default_title || _('static_resource_new');
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
-        ,class_key: 'modStaticResource'
+        ,class_key: 'MODX\\Revolution\\modStaticResource'
         ,items: this.getFields(config)
     });
     MODx.panel.Static.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
-    defaultClassKey: 'modStaticResource'
+    defaultClassKey: 'MODX\\Revolution\\modStaticResource'
     ,classLexiconKey: 'static_resource'
     ,rteElements: false
     ,contentField: 'modx-resource-content-static'
