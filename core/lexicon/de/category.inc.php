@@ -8,12 +8,12 @@
  */
 $_lang['categories'] = 'Kategorien';
 $_lang['category_confirm_delete'] = 'Sind Sie sicher, dass Sie diese Kategorie entfernen möchten? Alle Elemente in dieser Kategorie werden als unkategorisiert eingeordnet.';
-$_lang['category_create'] = 'Kategorie anlegen';
-$_lang['category_err_ae'] = 'Eine Kategorie mit diesem Namen existiert bereits. Bitte versuchen Sie es mit einem anderen Namen.';
+$_lang['category_create'] = 'Kategorie erstellen';
+$_lang['category_err_ae'] = 'Es existiert bereits eine Kategorie mit diesem Namen. Bitte geben Sie einen anderen Namen an.';
 $_lang['category_err_create'] = 'Beim Versuch, die Kategorie anzulegen, ist ein Fehler aufgetreten.';
 $_lang['category_err_not_found'] = 'Kategorie nicht gefunden!';
 $_lang['category_err_nf'] = 'Kategorie nicht gefunden.';
-$_lang['category_err_nfs'] = 'Kategory mit dem Schlüssel %s nicht gefunden';
+$_lang['category_err_nfs'] = 'Kategorie mit dem Schlüssel %s nicht gefunden';
 $_lang['category_err_ns'] = 'Kategorie nicht angegeben.';
 $_lang['category_err_ns_name'] = 'Bitte geben Sie einen gültigen Kategorie-Namen an.';
 $_lang['category_err_remove'] = 'Beim Versuch, die Kategorie zu entfernen, ist ein Fehler aufgetreten.';
