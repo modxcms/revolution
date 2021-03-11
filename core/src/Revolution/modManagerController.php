@@ -613,6 +613,7 @@ abstract class modManagerController
                 $externals[] = $managerUrl . 'assets/modext/widgets/core/modx.tree.asynctreenode.js';
 
                 $externals[] = $managerUrl . 'assets/modext/widgets/resource/modx.tree.resource.js';
+                $externals[] = $managerUrl . 'assets/modext/widgets/resource/modx.window.resource.js';
                 $externals[] = $managerUrl . 'assets/modext/widgets/element/modx.tree.element.js';
                 $externals[] = $managerUrl . 'assets/modext/widgets/system/modx.tree.directory.js';
                 $externals[] = $managerUrl . 'assets/modext/widgets/system/modx.panel.filetree.js';

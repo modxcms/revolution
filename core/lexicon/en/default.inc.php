@@ -140,6 +140,7 @@ $_lang['empty_recycle_bin_empty'] = 'There are no deleted Resources to erase.';
 $_lang['empty_recycle_bin_emptied'] = 'All deleted Resources have been permanently erased.';
 $_lang['enabled'] = 'Enabled';
 $_lang['err_self_parent'] = 'Cannot make something its own parent!';
+$_lang['parent_resource_empty'] = 'Root';
 $_lang['error'] = 'Error';
 $_lang['error_sending_email'] = 'Error sending email';
 $_lang['error_sending_email_to'] = 'Error while sending mail to ';

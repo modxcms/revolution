@@ -638,10 +638,18 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
     ,createResourceHere: function(itm) {
         var at = this.cm.activeNode.attributes;
-        var p = itm.usePk ? itm.usePk : at.pk;
-        this.loadAction(
-            'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
-        );
+
+        var parent = itm.usePk ? itm.usePk : at.pk;
+
+        MODx.createResource({
+            'class_key'     : itm.classKey,
+            'parent'        : parent,
+            'context_key'   : at.ctx || MODx.config.default_context
+        });
+
+        //this.loadAction(
+        //    'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
+        //);
     }
 
     ,createResource: function(itm,e) {

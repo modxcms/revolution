@@ -618,6 +618,37 @@ Ext.extend(MODx,Ext.Component,{
     ,isEmpty: function(v) {
         return Ext.isEmpty(v) || v === false || v === 'false' || v === 'FALSE' || v === '0' || v === 0;
     }
+
+    ,createResource: function(record) {
+        if (MODx.createResourceWindow) {
+            MODx.createResourceWindow.destroy();
+        }
+
+        MODx.createResourceWindow = MODx.load({
+            xtype       : 'modx-window-create-resource',
+            record      : record,
+            closeAction : 'close',
+            listeners   : {
+                'success'   : {
+                    fn          : function(r) {
+                        MODx.loadPage('?a=resource/update&id=' + r.a.result.object.id);
+                    },
+                    scope       : this
+                },
+                'failure'   : {
+                    fn          : function(data, data2) {
+                        console.log('failure');
+                        console.log(data);
+                        console.log(data2);
+                    },
+                    scope       : this
+                }
+            }
+        });
+
+        MODx.createResourceWindow.setValues(record);
+        MODx.createResourceWindow.show();
+    }
 });
 Ext.reg('modx',MODx);
 

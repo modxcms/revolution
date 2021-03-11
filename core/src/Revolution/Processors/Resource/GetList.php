@@ -13,6 +13,7 @@ namespace MODX\Revolution\Processors\Resource;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modResource;
 use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
 
 /**
  * Gets a list of resources.
@@ -31,11 +32,66 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'pagetitle';
     public $permission = 'view';
 
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
+        $c->leftJoin('modContext', 'Context');
+
+        $query = $this->getProperty('query');
+
+        if (!empty($query)) {
+            $c->where(array(
+                'pagetitle:LIKE'    => '%' . $query . '%',
+                'OR:longtitle:LIKE' => '%' . $query . '%'
+            ));
+        }
+
+        $ignore = $this->getProperty('ignore');
+
+        if (!empty($ignore)) {
+            $c->where(array(
+                'id:NOT IN' => explode(',', $ignore)
+            ));
+        }
+
+        $c->sortby('context_key');
+        $c->sortby('pagetitle');
+
+        return $c;
+    }
+
+    public function prepareQueryAfterCount(xPDOQuery $c) {
+        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey));
+
+        $c->select([
+            'context_name' => 'Context.name'
+        ]);
+
+        return $c;
+    }
+
+    public function beforeIteration(array $list) {
+        if ($this->getProperty('combo', false) && !$this->getProperty('query', false)) {
+            $list[] = [
+                'id'            => 0,
+                'pagetitle'     => $this->modx->lexicon('parent_resource_empty'),
+                'longtitle'     => '',
+                'time'          => time()
+            ];
+        }
+
+        return $list;
+    }
+
     public function prepareRow(xPDOObject $object)
     {
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
-        $objectArray = $object->toArray();
-        $objectArray['pagetitle'] = htmlentities($objectArray['pagetitle'], ENT_COMPAT, $charset);
-        return $objectArray;
+
+        return [
+            'id'            => $object->get('id'),
+            'pagetitle'     => htmlentities($object->get('pagetitle'), ENT_COMPAT, $charset),
+            'longtitle'     => htmlentities($object->get('longtitle'), ENT_COMPAT, $charset),
+            'context_key'   => $object->get('context_key'),
+            'context_name'  => $object->get('context_name'),
+            'time'          => time()
+        ];
     }
 }

@@ -381,21 +381,46 @@ Ext.reg('modx-combo-policy',MODx.combo.Policy);
 MODx.combo.Template = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        name: 'template'
-        ,hiddenName: 'template'
-        ,displayField: 'templatename'
-        ,valueField: 'id'
-        ,pageSize: 20
-        ,fields: ['id','templatename','description','category_name']
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename:htmlEncode}</span>'
-            ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name:htmlEncode}</span></tpl>'
-            ,'<br />{description:htmlEncode()}</div></tpl>')
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'Element/Template/GetList'
-            ,combo: 1
-        }
-        ,allowBlank: true
+        url         : MODx.config.connector_url,
+        baseParams  : {
+            action      : 'Element/Template/GetList',
+            combo       : 1,
+            limit       : 0
+        },
+        fields      : ['id', 'templatename', 'description', 'category_name', 'preview', 'time'],
+        name        : 'template',
+        hiddenName  : 'template',
+        displayField : 'templatename',
+        valueField  : 'id',
+        pageSize    : 20,
+        allowBlank  : true,
+        editable    : true,
+        typeAhead   : true,
+        tpl         : new Ext.XTemplate('<tpl for=".">' +
+            '<tpl if="!Ext.isEmpty(this.getGroup(values.category_name, values.time))">' +
+            '<div class="x-combo-list-group">{this.label}</div>' +
+            '</tpl>' +
+            '<div class="x-combo-list-item x-combo-list-item-grouped">' +
+            '<div class="x-combo-list-title">{templatename:htmlEncode}</div>' +
+            '{description:htmlEncode()}' +
+            '</div>' +
+            '</tpl>', {
+            group    : null,
+            label    : null,
+            getGroup : function(label, time) {
+                var group = time + '_' + label;
+
+                if (group !== this.group) {
+                    if (!Ext.isEmpty(group)) {
+                        this.group = group;
+
+                        return this.label = label;
+                    }
+                }
+
+                return null;
+            }
+        })
     });
     MODx.combo.Template.superclass.constructor.call(this,config);
 };
@@ -759,120 +784,226 @@ Ext.reg('modx-combo-property-set',MODx.combo.PropertySet);
 
 MODx.ChangeParentField = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        triggerAction: 'all'
-        ,editable: false
-        ,readOnly: false
-        ,formpanel: 'modx-panel-resource'
-        ,parentcmp: 'modx-resource-parent-hidden'
-        ,contextcmp: 'modx-resource-context-key'
-        ,currentid: MODx.request.id
+    Ext.applyIf(config, {
+        triggerAction   : 'all',
+        editable        : false,
+        readOnly        : false,
+        formpanel       : 'modx-panel-resource',
+        parentcmp       : 'modx-resource-parent-hidden',
+        contextcmp      : 'modx-resource-context-key',
+        currentid       : null
     });
     MODx.ChangeParentField.superclass.constructor.call(this,config);
     this.config = config;
-    this.on('click',this.onTriggerClick,this);
-    this.addEvents({ end: true });
-    this.on('end',this.end,this);
+
+    this.addEvents({
+        setParentValue : true
+    });
+
+    this.on('click', this.onTriggerClick, this);
+    this.on('setParentValue', this.setParentValue, this);
 };
-Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
-    oldValue: false
-    ,oldDisplayValue: false
-    ,end: function(p) {
-        var t = Ext.getCmp('modx-resource-tree');
-        if (!t) return;
-        p.d = p.d || p.v;
-
-        t.removeListener('click',this.handleChangeParent,this);
-        t.on('click',t._handleClick,t);
-        t.disableHref = false;
-
-        MODx.debug('Setting parent to: '+p.v);
-
-        Ext.getCmp(this.config.parentcmp).setValue(p.v);
-
-        this.setValue(p.d);
-        this.oldValue = false;
-
-        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
-    }
-    ,onTriggerClick: function() {
-        if (this.disabled) { return false; }
+Ext.extend(MODx.ChangeParentField, Ext.form.TriggerField, {
+    currentValue    : false,
+    currentLabel    : false,
+    onTriggerClick: function() {
+        if (this.disabled) {
+            return false;
+        }
         if (this.oldValue) {
-            this.fireEvent('end',{
-                v: this.oldValue
-                ,d: this.oldDisplayValue
+            this.fireEvent('setParentValue', {
+                value   : this.currentValue,
+                label   : this.currentLabel
             });
             return false;
         }
-        MODx.debug('onTriggerClick');
 
-        var t = Ext.getCmp('modx-resource-tree');
-        if (!t) {
-            MODx.debug('no tree found, trying to activate');
+        var tree = Ext.getCmp('modx-resource-tree');
+
+        if (!tree) {
             var tp = Ext.getCmp('modx-leftbar-tabpanel');
             if (tp) {
-                tp.on('tabchange',function(tbp,tab) {
-                    if (tab.id == 'modx-resource-tree-ct') {
+                tp.on('tabchange',function(tbp, tab) {
+                    if (tab.id === 'modx-resource-tree-ct') {
                         this.disableTreeClick();
                     }
                 },this);
                 tp.activate('modx-resource-tree-ct');
-            } else {
-                MODx.debug('no tabpanel');
             }
             return false;
         }
+        this.currentLabel = this.getValue();
 
-        this.disableTreeClick();
-    }
+        var parentField = Ext.getCmp(this.config.parentcmp);
 
-    ,disableTreeClick: function() {
-        MODx.debug('Disabling tree click');
-        t = Ext.getCmp('modx-resource-tree');
-        if (!t) {
-            MODx.debug('No tree found in disableTreeClick!');
+        if (parentField) {
+            this.currentValue = Ext.getCmp(this.config.parentcmp).getValue();
+        }
+        this.disableResourceTree();
+    },
+    enableResourceTree: function() {
+        var resourceTree = Ext.getCmp('modx-resource-tree');
+
+        if (!resourceTree) {
             return false;
         }
-        this.oldDisplayValue = this.getValue();
-        this.oldValue = Ext.getCmp(this.config.parentcmp).getValue();
 
-        this.setValue(_('resource_parent_select_node'));
+        resourceTree.disableHref = false;
 
-        t.expand();
-        t.removeListener('click',t._handleClick);
-        t.on('click',this.handleChangeParent,this);
-        t.disableHref = true;
+        resourceTree.removeListener('click', this.handleChangeParent, this);
 
-        return true;}
+        resourceTree.on('click', resourceTree._handleClick, resourceTree);
+    },
+    disableResourceTree: function() {
+        var resourceTree = Ext.getCmp('modx-resource-tree');
 
-    ,handleChangeParent: function(node,e) {
-        var t = Ext.getCmp('modx-resource-tree');
-        if (!t) { return false; }
-        t.disableHref = true;
+        if (!resourceTree) {
+            return false;
+        }
 
-        var id = node.id.split('_'); id = id[1];
+        resourceTree.expand();
+
+        resourceTree.disableHref = true;
+
+        resourceTree.removeListener('click', resourceTree._handleClick);
+
+        resourceTree.on('click', this.handleChangeParent, this);
+    },
+    handleChangeParent: function(node, e) {
+        var resourceTree = Ext.getCmp('modx-resource-tree');
+
+        if (!resourceTree) {
+            return false;
+        }
+
+        var id = node.id.split('_'),
+            id = id[1];
+
         if (id == this.config.currentid) {
-            MODx.msg.alert('',_('resource_err_own_parent'));
+            MODx.msg.alert(_('warning'), _('resource_err_own_parent'));
             return false;
         }
 
-        var ctxf = Ext.getCmp(this.config.contextcmp);
-        if (ctxf) {
-            var ctxv = ctxf.getValue();
-            if (node.attributes && node.attributes.ctx != ctxv) {
-                ctxf.setValue(node.attributes.ctx);
+        var contextField = Ext.getCmp(this.config.contextcmp);
+
+        if (contextField) {
+            if (node.attributes && node.attributes.ctx !== contextField.getValue()) {
+                contextField.setValue(node.attributes.ctx);
             }
         }
-        this.fireEvent('end',{
-            v: node.attributes.type != 'modContext' ? id : node.attributes.pk
-            ,d: Ext.util.Format.stripTags(node.text)
+        this.fireEvent('setParentValue', {
+            value   : node.attributes.type != 'modContext' ? id : node.attributes.pk,
+            label   : Ext.util.Format.stripTags(node.text)
         });
         e.preventDefault();
         e.stopEvent();
         return true;
+    },
+    setParentValue: function(value) {
+        this.currentValue = false;
+
+        this.setValue(value.label || value.value);
+
+        var parentField = Ext.getCmp(this.config.parentcmp);
+
+        if (parentField) {
+            parentField.setValue(value.id);
+        }
+
+        var formPanel = Ext.getCmp(this.config.formpanel);
+
+        if (formPanel) {
+            formPanel.fireEvent('fieldChange');
+        }
+
+        this.enableResourceTree();
     }
 });
 Ext.reg('modx-field-parent-change',MODx.ChangeParentField);
+
+
+MODx.combo.Resource = function(config) {
+    config = config || {};
+
+    Ext.applyIf(config,{
+        url         : MODx.config.connector_url,
+        baseParams  : {
+            action      : 'Resource/GetList',
+            combo       : 1,
+            limit       : 0,
+            ignore      : config.currentid || ''
+        },
+        fields      : ['id', 'pagetitle', 'longtitle', 'context_key', 'context_name', 'time'],
+        name        : 'resource',
+        hiddenName  : 'resource',
+        displayField : 'pagetitle',
+        valueField  : 'id',
+        pageSize    : 20,
+        allowBlank  : true,
+        editable    : true,
+        typeAhead   : true,
+        tpl         : new Ext.XTemplate('<tpl for=".">' +
+            '<tpl if="!Ext.isEmpty(this.getGroup(values.context_name, values.time))">' +
+                '<div class="x-combo-list-group">{this.label}</div>' +
+            '</tpl>' +
+            '<div class="x-combo-list-item x-combo-list-item-grouped">' +
+                '{pagetitle:htmlEncode}' +
+            '</div>' +
+        '</tpl>', {
+            group    : null,
+            label    : null,
+            getGroup : function(label, time) {
+                var group = time + '_' + label;
+
+                if (group !== this.group) {
+                    if (!Ext.isEmpty(group)) {
+                        this.group = group;
+
+                        return this.label = label;
+                    }
+                }
+
+                return null;
+            }
+        }),
+        parentcmp   : null,
+        contextcmp  : null,
+        listeners   : {
+            'change'    : {
+                fn          : this.setParentValue,
+                scope       : this
+            }
+        }
+    });
+
+    MODx.combo.Resource.superclass.constructor.call(this, config);
+};
+
+Ext.extend(MODx.combo.Resource, MODx.combo.ComboBox, {
+    setParentValue: function(tf) {
+        var record = this.store.getById(tf.getValue());
+
+        if (record) {
+            var contextField = Ext.getCmp(this.contextcmp);
+
+            if (contextField) {
+                if (Ext.isEmpty(record.data.context_key)) {
+                    contextField.setValue(MODx.config.default_context);
+                } else {
+                    contextField.setValue(record.data.context_key);
+                }
+            }
+
+            var parentField = Ext.getCmp(this.parentcmp);
+
+            if (parentField) {
+                parentField.setValue(record.data.id);
+            }
+        }
+    }
+});
+
+Ext.reg('modx-combo-resource', MODx.combo.Resource);
 
 
 MODx.combo.TVWidget = function(config) {

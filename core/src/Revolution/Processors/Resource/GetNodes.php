@@ -350,9 +350,9 @@ class GetNodes extends Processor
         $class[] = !empty($this->permissions['new_context_static_resource']) && $createRoot
             ? $this->permissions['new_context_static_resource']
             : '';
-        $class[] = !empty($this->permissions['resource_quick_create']) && $createRoot
-            ? $this->permissions['resource_quick_create']
-            : '';
+        //$class[] = !empty($this->permissions['resource_quick_create']) && $createRoot
+        //    ? $this->permissions['resource_quick_create']
+        //    : '';
 
         $context->prepare();
         return [
@@ -419,7 +419,7 @@ class GetNodes extends Processor
             if (!empty($this->permissions['new_symlink'])) $class[] = $this->permissions['new_symlink'];
             if (!empty($this->permissions['new_weblink'])) $class[] = $this->permissions['new_weblink'];
             if (!empty($this->permissions['new_static_resource'])) $class[] = $this->permissions['new_static_resource'];
-            if (!empty($this->permissions['resource_quick_create'])) $class[] = $this->permissions['resource_quick_create'];
+            //if (!empty($this->permissions['resource_quick_create'])) $class[] = $this->permissions['resource_quick_create'];
         }
         if (!empty($this->permissions['resource_quick_update'])) $class[] = $this->permissions['resource_quick_update'];
         if (!empty($this->permissions['delete_document'])) $class[] = $this->permissions['delete_document'];

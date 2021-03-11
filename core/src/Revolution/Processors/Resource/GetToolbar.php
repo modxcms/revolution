@@ -31,33 +31,39 @@ class GetToolbar extends Processor
     public function process()
     {
         $items = [];
-        $context = '&context_key=' . $this->modx->getOption('default_context');
+        //$context = '&context_key=' . $this->modx->getOption('default_context');
+        $items[] = '-';
+
         if ($this->modx->hasPermission('new_document')) {
+            $record = '{context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             $items[] = [
-                'cls' => 'tree-new-resource',
-                'tooltip' => $this->modx->lexicon('document_new'),
-                'handler' => 'new Function("this.redirect(\"?a=resource/create' . $context . '\");");',
+                'cls'       => 'tree-new-resource',
+                'tooltip'   => $this->modx->lexicon('document_new'),
+                'handler'   => 'new Function("MODx.createResource(' . $record . ');");'
             ];
         }
         if ($this->modx->hasPermission('new_weblink')) {
+            $record = '{class_key: \"MODX\\Revolution\\modWebLink\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             $items[] = [
-                'cls' => 'tree-new-weblink',
-                'tooltip' => $this->modx->lexicon('add_weblink'),
-                'handler' => 'new Function("this.redirect(\"?a=resource/create&class_key=modWebLink' . $context . '\");");',
+                'cls'       => 'tree-new-weblink',
+                'tooltip'   => $this->modx->lexicon('add_weblink'),
+                'handler'   => 'new Function("MODx.createResource(' . $record . ');");'
             ];
         }
         if ($this->modx->hasPermission('new_symlink')) {
+            $record = '{class_key: \"MODX\\Revolution\\modSymLink\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             $items[] = [
-                'cls' => 'tree-new-symlink',
-                'tooltip' => $this->modx->lexicon('add_symlink'),
-                'handler' => 'new Function("this.redirect(\"?a=resource/create&class_key=modSymLink' . $context . '\");");',
+                'cls'       => 'tree-new-symlink',
+                'tooltip'   => $this->modx->lexicon('add_symlink'),
+                'handler'   => 'new Function("MODx.createResource(' . $record . ');");'
             ];
         }
         if ($this->modx->hasPermission('new_static_resource')) {
+            $record = '{class_key: \"MODX\\Revolution\\modStaticResource\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
             $items[] = [
-                'cls' => 'tree-new-static-resource',
-                'tooltip' => $this->modx->lexicon('static_resource_new'),
-                'handler' => 'new Function("this.redirect(\"?a=resource/create&class_key=modStaticResource' . $context . '\");");',
+                'cls'       => 'tree-new-static-resource',
+                'tooltip'   => $this->modx->lexicon('static_resource_new'),
+                'handler'   => 'new Function("MODx.createResource(' . $record . ');");'
             ];
         }
         unset($context);

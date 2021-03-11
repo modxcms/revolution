@@ -1157,6 +1157,36 @@ class modElement extends modAccessibleSimpleObject
         return $isValid;
     }
 
+    /**
+     * Get the absolute path to the preview file for this instance.
+     *
+     * @return string
+     */
+    public function getPreviewUrl() {
+        if (!empty($this->get('preview_file'))) {
+            $previewfile = $this->get('preview_file');
+
+            if ($this->get('source') > 0) {
+                /** @var modMediaSource $source */
+                $source = $this->getOne('Source');
+
+                if ($source && $source->get('is_stream')) {
+                    $source->initialize();
+
+                    if (file_exists($source->getBasePath().$previewfile)) {
+                        return $source->getBaseUrl().$previewfile;
+                    }
+                }
+            }
+
+            if (file_exists($previewfile)) {
+                return $previewfile;
+            }
+        }
+
+        return '';
+    }
+
     private function getStaticFileName()
     {
         $filename = $this->get('static_file');
