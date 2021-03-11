@@ -1061,7 +1061,7 @@
 
     <object class="modTemplate" table="site_templates" extends="MODX\Revolution\modElement">
         <field key="templatename" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="Template" />
+        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="fk" />
         <field key="icon" dbtype="varchar" precision="191" phptype="string" null="false" default="" />

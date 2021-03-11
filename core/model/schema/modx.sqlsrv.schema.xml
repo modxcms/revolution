@@ -1007,7 +1007,7 @@
 
     <object class="modTemplate" table="site_templates" extends="MODX\Revolution\modElement">
         <field key="templatename" dbtype="nvarchar" precision="50" phptype="string" null="false" default="" index="unique" />
-        <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="Template" />
+        <field key="description" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" phptype="integer" null="false" default="0" index="fk" />
         <field key="icon" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
