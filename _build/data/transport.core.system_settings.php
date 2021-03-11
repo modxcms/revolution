@@ -1598,7 +1598,7 @@ $settings['site_status']->fromArray([
 $settings['site_unavailable_message']= $xpdo->newObject(modSystemSetting::class);
 $settings['site_unavailable_message']->fromArray([
   'key' => 'site_unavailable_message',
-  'value' => 'The site is currently unavailable',
+  'value' => '[[%site_unavailable_message]]',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'site',

@@ -450,6 +450,7 @@ $_lang['show_preview'] = 'Show Preview Window';
 $_lang['show_tree'] = 'Show tree';
 $_lang['showing_pub'] = 'Showing Publish Dates';
 $_lang['showing_unpub'] = 'Showing Unpublish Dates';
+$_lang['site_unavailable_message'] = 'The site is currently unavailable';
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets'] = 'Snippets';
 $_lang['sort_asc'] = 'Ascending';
