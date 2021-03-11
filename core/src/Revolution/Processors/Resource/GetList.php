@@ -59,7 +59,8 @@ class GetList extends GetListProcessor
     }
 
     public function prepareQueryAfterCount(xPDOQuery $c) {
-        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey));
+        $aliasArray = explode('\\',$this->classKey); // Get the alias
+        $c->select($this->modx->getSelectColumns($this->classKey, end($aliasArray)));
 
         $c->select([
             'context_name' => 'Context.name'
