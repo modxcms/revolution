@@ -1452,6 +1452,7 @@ td.x-date-mp-sep {
   }
 }
 
+// Template picker on resource create window
 .x-form-template-picker {
   .x-form-template-picker-search {
     padding: 0 !important;
@@ -1528,13 +1529,14 @@ td.x-date-mp-sep {
   }
 }
 
+// Shows a thumbnail of selected template
 .x-form-template-preview {
   height: 236px;
   border-radius: $borderRadius;
   background-color: $coreFieldBg;
   border: 1px solid $borderColor;
   background: url('../images/tp-no-preview.png') no-repeat center center;
-  overflow: auto;
+  overflow: hidden;
 
   .x-panel-bwrap,
   .x-panel-body {
@@ -1544,6 +1546,7 @@ td.x-date-mp-sep {
 
   .x-form-template-preview-image {
     height: 100%;
+    object-fit: cover;
   }
 
   .x-form-template-preview-desc {
@@ -1554,5 +1557,14 @@ td.x-date-mp-sep {
     padding: 10px 20px;
     color: #fff;
     background-color: rgba(0, 0, 0, .8);
+  }
+}
+
+// Template preview field that opens the file browser
+#x-form-el-modx-template-preview-file {
+  .x-form-trigger.x-form-file-trigger {
+    &:before {
+      content: "\f1c5" !important;
+    }
   }
 }
