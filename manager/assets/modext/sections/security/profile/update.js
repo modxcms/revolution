@@ -123,7 +123,6 @@ MODx.panel.UpdateProfile = function(config) {
                 ,name: 'fullname'
                 ,fieldLabel: _('user_full_name')
                 ,xtype: 'textfield'
-                ,allowBlank: false
                 ,anchor: '100%'
                 ,maxLength: 255
             },{
