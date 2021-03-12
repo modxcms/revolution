@@ -16,16 +16,38 @@
     "grunt-imageoptim": "^1.4.4",
     "grunt-notify": "^0.4.5",
     "grunt-sass": "^3.1.0",
+    "husky": "^5.1.3",
+    "lint-staged": "^10.5.4",
     "node": "^14.15.0",
-    "node-sass": "^5.0.0"
+    "node-sass": "^5.0.0",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.12.0",
+    "stylelint-config-airbnb": "^0.0.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-order": "^0.7.0",
+    "stylelint-prettier": "^1.2.0",
+    "stylelint-scss": "^3.19.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.0",
     "bourbon": "^5.1.0",
     "bourbon-neat": "^3.0.0",
-    "@fortawesome/fontawesome-free": "^5.7.0",
     "normalize-scss": "^7.0.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.scss": [
+      "stylelint --fix"
+    ]
+  },
   "scripts": {
-    "build": "grunt build"
+    "build": "grunt build",
+    "stylelint": "stylelint '**/*.scss'",
+    "stylelint:fix": "stylelint '**/*.scss' --fix"
   }
 }
