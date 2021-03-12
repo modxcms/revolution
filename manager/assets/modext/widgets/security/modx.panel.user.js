@@ -539,7 +539,8 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,anchor: '100%'
             ,maxLength: 255
         },{
-            fieldLabel: _('user_photo')
+            id: 'modx-user-photo'
+            ,fieldLabel: _('user_photo')
             ,name: 'photo'
             ,xtype: 'modx-combo-browser'
             ,hideFiles: true

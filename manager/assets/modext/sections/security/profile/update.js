@@ -136,7 +136,8 @@ MODx.panel.UpdateProfile = function(config) {
                 ,anchor: '100%'
                 ,maxLength: 255
             },{
-                name: 'photo'
+                id: 'modx-user-photo'
+                ,name: 'photo'
                 ,fieldLabel: _('user_photo')
                 ,xtype: 'modx-combo-browser'
                 ,hideFiles: true

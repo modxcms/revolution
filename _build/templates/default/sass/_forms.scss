@@ -546,6 +546,10 @@ input::-moz-focus-inner {
   }
 }
 
+#x-form-el-modx-user-photo .x-form-file-trigger:before {
+  content: fa-content($fa-var-file-image);
+}
+
 /* .x-form-field-wrap */
 
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
