@@ -930,17 +930,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,getSettingLeftFields: function(config) {
         return [{
-            xtype       : 'modx-combo-resource',
-            fieldLabel  : _('resource_parent'),
-            description : '<b>[[*parent]]</b><br />'+_('resource_parent_help'),
-            name        : 'parent-cmb',
-            id          : 'modx-resource-parent',
-            value       : config.record.parent || 0,
-            anchor      : '100%',
-            parentcmp   : 'modx-resource-parent-hidden',
-            contextcmp  : 'modx-resource-context-key',
-            currentid   : MODx.request.id || null
-        },{
             xtype: 'modx-combo-class-derivatives'
             ,fieldLabel: _('resource_type')
             ,description: '<b>[[*class_key]]</b><br />'

@@ -784,139 +784,117 @@ Ext.reg('modx-combo-property-set',MODx.combo.PropertySet);
 
 MODx.ChangeParentField = function(config) {
     config = config || {};
-    Ext.applyIf(config, {
-        triggerAction   : 'all',
-        editable        : false,
-        readOnly        : false,
-        formpanel       : 'modx-panel-resource',
-        parentcmp       : 'modx-resource-parent-hidden',
-        contextcmp      : 'modx-resource-context-key',
-        currentid       : null
+    Ext.applyIf(config,{
+        triggerAction: 'all'
+        ,editable: false
+        ,readOnly: false
+        ,formpanel: 'modx-panel-resource'
+        ,parentcmp: 'modx-resource-parent-hidden'
+        ,contextcmp: 'modx-resource-context-key'
+        ,currentid: MODx.request.id
     });
     MODx.ChangeParentField.superclass.constructor.call(this,config);
     this.config = config;
-
-    this.addEvents({
-        setParentValue : true
-    });
-
-    this.on('click', this.onTriggerClick, this);
-    this.on('setParentValue', this.setParentValue, this);
+    this.on('click',this.onTriggerClick,this);
+    this.addEvents({ end: true });
+    this.on('end',this.end,this);
 };
-Ext.extend(MODx.ChangeParentField, Ext.form.TriggerField, {
-    currentValue    : false,
-    currentLabel    : false,
-    onTriggerClick: function() {
-        if (this.disabled) {
-            return false;
-        }
+Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
+    oldValue: false
+    ,oldDisplayValue: false
+    ,end: function(p) {
+        var t = Ext.getCmp('modx-resource-tree');
+        if (!t) return;
+        p.d = p.d || p.v;
+
+        t.removeListener('click',this.handleChangeParent,this);
+        t.on('click',t._handleClick,t);
+        t.disableHref = false;
+
+        MODx.debug('Setting parent to: '+p.v);
+
+        Ext.getCmp(this.config.parentcmp).setValue(p.v);
+
+        this.setValue(p.d);
+        this.oldValue = false;
+
+        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
+    }
+    ,onTriggerClick: function() {
+        if (this.disabled) { return false; }
         if (this.oldValue) {
-            this.fireEvent('setParentValue', {
-                value   : this.currentValue,
-                label   : this.currentLabel
+            this.fireEvent('end',{
+                v: this.oldValue
+                ,d: this.oldDisplayValue
             });
             return false;
         }
+        MODx.debug('onTriggerClick');
 
-        var tree = Ext.getCmp('modx-resource-tree');
-
-        if (!tree) {
+        var t = Ext.getCmp('modx-resource-tree');
+        if (!t) {
+            MODx.debug('no tree found, trying to activate');
             var tp = Ext.getCmp('modx-leftbar-tabpanel');
             if (tp) {
-                tp.on('tabchange',function(tbp, tab) {
-                    if (tab.id === 'modx-resource-tree-ct') {
+                tp.on('tabchange',function(tbp,tab) {
+                    if (tab.id == 'modx-resource-tree-ct') {
                         this.disableTreeClick();
                     }
                 },this);
                 tp.activate('modx-resource-tree-ct');
+            } else {
+                MODx.debug('no tabpanel');
             }
             return false;
         }
-        this.currentLabel = this.getValue();
 
-        var parentField = Ext.getCmp(this.config.parentcmp);
+        this.disableTreeClick();
+    }
 
-        if (parentField) {
-            this.currentValue = Ext.getCmp(this.config.parentcmp).getValue();
-        }
-        this.disableResourceTree();
-    },
-    enableResourceTree: function() {
-        var resourceTree = Ext.getCmp('modx-resource-tree');
-
-        if (!resourceTree) {
+    ,disableTreeClick: function() {
+        MODx.debug('Disabling tree click');
+        t = Ext.getCmp('modx-resource-tree');
+        if (!t) {
+            MODx.debug('No tree found in disableTreeClick!');
             return false;
         }
+        this.oldDisplayValue = this.getValue();
+        this.oldValue = Ext.getCmp(this.config.parentcmp).getValue();
 
-        resourceTree.disableHref = false;
+        this.setValue(_('resource_parent_select_node'));
 
-        resourceTree.removeListener('click', this.handleChangeParent, this);
+        t.expand();
+        t.removeListener('click',t._handleClick);
+        t.on('click',this.handleChangeParent,this);
+        t.disableHref = true;
 
-        resourceTree.on('click', resourceTree._handleClick, resourceTree);
-    },
-    disableResourceTree: function() {
-        var resourceTree = Ext.getCmp('modx-resource-tree');
+        return true;}
 
-        if (!resourceTree) {
-            return false;
-        }
+    ,handleChangeParent: function(node,e) {
+        var t = Ext.getCmp('modx-resource-tree');
+        if (!t) { return false; }
+        t.disableHref = true;
 
-        resourceTree.expand();
-
-        resourceTree.disableHref = true;
-
-        resourceTree.removeListener('click', resourceTree._handleClick);
-
-        resourceTree.on('click', this.handleChangeParent, this);
-    },
-    handleChangeParent: function(node, e) {
-        var resourceTree = Ext.getCmp('modx-resource-tree');
-
-        if (!resourceTree) {
-            return false;
-        }
-
-        var id = node.id.split('_'),
-            id = id[1];
-
+        var id = node.id.split('_'); id = id[1];
         if (id == this.config.currentid) {
-            MODx.msg.alert(_('warning'), _('resource_err_own_parent'));
+            MODx.msg.alert('',_('resource_err_own_parent'));
             return false;
         }
 
-        var contextField = Ext.getCmp(this.config.contextcmp);
-
-        if (contextField) {
-            if (node.attributes && node.attributes.ctx !== contextField.getValue()) {
-                contextField.setValue(node.attributes.ctx);
+        var ctxf = Ext.getCmp(this.config.contextcmp);
+        if (ctxf) {
+            var ctxv = ctxf.getValue();
+            if (node.attributes && node.attributes.ctx != ctxv) {
+                ctxf.setValue(node.attributes.ctx);
             }
         }
-        this.fireEvent('setParentValue', {
-            value   : node.attributes.type != 'modContext' ? id : node.attributes.pk,
-            label   : Ext.util.Format.stripTags(node.text)
+        this.fireEvent('end',{
+            v: node.attributes.type != 'modContext' ? id : node.attributes.pk
+            ,d: Ext.util.Format.stripTags(node.text)
         });
         e.preventDefault();
         e.stopEvent();
         return true;
-    },
-    setParentValue: function(value) {
-        this.currentValue = false;
-
-        this.setValue(value.label || value.value);
-
-        var parentField = Ext.getCmp(this.config.parentcmp);
-
-        if (parentField) {
-            parentField.setValue(value.id);
-        }
-
-        var formPanel = Ext.getCmp(this.config.formpanel);
-
-        if (formPanel) {
-            formPanel.fireEvent('fieldChange');
-        }
-
-        this.enableResourceTree();
     }
 });
 Ext.reg('modx-field-parent-change',MODx.ChangeParentField);
