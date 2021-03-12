@@ -119,6 +119,14 @@ MODx.panel.UpdateProfile = function(config) {
         ,items: [{
             columnWidth: .5
             ,items: [{
+                id: 'modx-user-username'
+                ,name: 'username'
+                ,fieldLabel: _('username')
+                ,description: _('user_username_desc')
+                ,xtype: 'statictextfield'
+                ,allowBlank: false
+                ,anchor: '100%'
+            },{
                 id: 'modx-user-fullname'
                 ,name: 'fullname'
                 ,fieldLabel: _('user_full_name')
