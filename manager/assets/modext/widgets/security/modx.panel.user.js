@@ -516,6 +516,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,fieldLabel: _('username')
             ,description: _('user_username_desc')
             ,xtype: 'textfield'
+            ,allowBlank: false
             ,anchor: '100%'
             ,autoCreate: {tag: "input", type: "text", size: "20", autocomplete: "off", msgTarget: "under"}
             ,listeners: {
