@@ -398,7 +398,7 @@ MODx.combo.Template = function(config) {
         typeAhead   : true,
         tpl         : new Ext.XTemplate('<tpl for=".">' +
             '<tpl if="!Ext.isEmpty(this.getGroup(values.category_name, values.time))">' +
-            '<div class="x-combo-list-group">{this.label}</div>' +
+            '<div class="x-combo-list-group">{this.label:htmlEncode}</div>' +
             '</tpl>' +
             '<div class="x-combo-list-item x-combo-list-item-grouped">' +
             '<div class="x-combo-list-title">{templatename:htmlEncode}</div>' +
@@ -921,7 +921,7 @@ MODx.combo.Resource = function(config) {
         typeAhead: true,
         tpl: new Ext.XTemplate('<tpl for=".">' +
             '<tpl if="!Ext.isEmpty(this.getGroup(values.context_name, values.time))">' +
-                '<div class="x-combo-list-group">{this.label}</div>' +
+                '<div class="x-combo-list-group">{this.label:htmlEncode}</div>' +
             '</tpl>' +
             '<div class="x-combo-list-item x-combo-list-item-grouped">' +
                 '{pagetitle:htmlEncode}' +
