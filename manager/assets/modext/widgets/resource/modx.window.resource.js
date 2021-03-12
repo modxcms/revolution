@@ -40,7 +40,7 @@ MODx.window.CreateResource = function(config) {
                     hiddenName: 'class_key',
                     anchor: '100%',
                     allowBlank: false,
-                    value: config.record.class_key || 'modDocument'
+                    value: config.record.class_key || 'MODX\\Revolution\\modDocument'
                 }, {
                     xtype: MODx.expandHelp ? 'label' : 'hidden',
                     html: _('resource_type_help'),
