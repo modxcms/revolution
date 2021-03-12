@@ -35,7 +35,10 @@ class GetToolbar extends Processor
         $items[] = '-';
 
         if ($this->modx->hasPermission('new_document')) {
-            $record = '{context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
+            $record = json_encode([
+                'context_key'   => $this->modx->getOption('default_context'),
+                'parent'        => 0
+            ]);
             $items[] = [
                 'cls'       => 'tree-new-resource',
                 'tooltip'   => $this->modx->lexicon('document_new'),
@@ -43,7 +46,11 @@ class GetToolbar extends Processor
             ];
         }
         if ($this->modx->hasPermission('new_weblink')) {
-            $record = '{class_key: \"MODX\\Revolution\\modWebLink\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
+            $record = json_encode([
+                'class_key'     => 'MODX\\Revolution\\modWebLink',
+                'context_key'   => $this->modx->getOption('default_context'),
+                'parent'        => 0
+            ]);
             $items[] = [
                 'cls'       => 'tree-new-weblink',
                 'tooltip'   => $this->modx->lexicon('add_weblink'),
@@ -51,7 +58,11 @@ class GetToolbar extends Processor
             ];
         }
         if ($this->modx->hasPermission('new_symlink')) {
-            $record = '{class_key: \"MODX\\Revolution\\modSymLink\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
+            $record = json_encode([
+                'class_key'     => 'MODX\\Revolution\\modSymLink',
+                'context_key'   => $this->modx->getOption('default_context'),
+                'parent'        => 0
+            ]);
             $items[] = [
                 'cls'       => 'tree-new-symlink',
                 'tooltip'   => $this->modx->lexicon('add_symlink'),
@@ -59,7 +70,11 @@ class GetToolbar extends Processor
             ];
         }
         if ($this->modx->hasPermission('new_static_resource')) {
-            $record = '{class_key: \"MODX\\Revolution\\modStaticResource\", context_key: \"' . $this->modx->getOption('default_context') . '\", parent: 0}';
+            $record = json_encode([
+                'class_key'     =>  'MODX\\Revolution\\modStaticResource',
+                'context_key'   =>  $this->modx->getOption('default_context'),
+                'parent'        =>  0
+            ]);
             $items[] = [
                 'cls'       => 'tree-new-static-resource',
                 'tooltip'   => $this->modx->lexicon('static_resource_new'),
