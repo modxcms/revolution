@@ -440,20 +440,20 @@ Ext.extend(MODx,Ext.Component,{
             ,layout: 'fit'
 			,bodyStyle : 'padding: 0;'
             ,items: [{
-	        	xtype		: 'container',
-				layout		: {
-	            	type		: 'vbox',
-					align		: 'stretch'
+	        	xtype: 'container',
+				layout: {
+	            	type: 'vbox',
+					align: 'stretch'
 				},
-				width		: '100%',
-				height		: '100%',
-				items		:[{
-					autoEl 		: {
-		                tag 		: 'iframe',
-		                src			: url,
-		                width		: '100%',
-						height		: '100%',
-						frameBorder	: 0
+				width: '100%',
+				height: '100%',
+				items:[{
+					autoEl: {
+		                tag: 'iframe',
+		                src: url,
+		                width: '100%',
+						height: '100%',
+						frameBorder: 0
 					}
 				}]
 			}]
@@ -625,23 +625,23 @@ Ext.extend(MODx,Ext.Component,{
         }
 
         MODx.createResourceWindow = MODx.load({
-            xtype       : 'modx-window-create-resource',
-            record      : record,
-            closeAction : 'close',
-            listeners   : {
-                'success'   : {
-                    fn          : function(r) {
+            xtype: 'modx-window-create-resource',
+            record: record,
+            closeAction: 'close',
+            listeners: {
+                'success': {
+                    fn: function(r) {
                         MODx.loadPage('?a=resource/update&id=' + r.a.result.object.id);
                     },
-                    scope       : this
+                    scope: this
                 },
-                'failure'   : {
-                    fn          : function(data, data2) {
+                'failure': {
+                    fn: function(data, data2) {
                         console.log('failure');
                         console.log(data);
                         console.log(data2);
                     },
-                    scope       : this
+                    scope: this
                 }
             }
         });

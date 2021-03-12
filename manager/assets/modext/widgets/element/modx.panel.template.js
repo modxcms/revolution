@@ -140,24 +140,24 @@ MODx.panel.Template = function(config) {
                         html: MODx.onTempFormRender
                         ,border: false
                     },{
-                        xtype       : 'modx-combo-browser',
-                        browserEl   : 'modx-browser',
-                        fieldLabel  : _('template_preview'),
-                        description : MODx.expandHelp ? '' : _('template_preview_description'),
-                        name        : 'preview_file',
-                        source      : null !== config.record.source ? config.record.source : MODx.config.default_media_source,
-                        openTo      : config.record.openTo || '',
-                        allowedFileTypes : 'jpg,jpeg,png,gif,bmp',
-                        id          : 'modx-template-preview-file',
-                        anchor      : '100%',
-                        maxLength   : 255,
-                        value       : config.record.preview_file || ''
+                        xtype: 'modx-combo-browser',
+                        browserEl: 'modx-browser',
+                        fieldLabel: _('template_preview'),
+                        description: MODx.expandHelp ? '' : _('template_preview_description'),
+                        name: 'preview_file',
+                        source: null !== config.record.source ? config.record.source : MODx.config.default_media_source,
+                        openTo: config.record.openTo || '',
+                        allowedFileTypes: 'jpg,jpeg,png,gif,bmp',
+                        id: 'modx-template-preview-file',
+                        anchor: '100%',
+                        maxLength: 255,
+                        value: config.record.preview_file || ''
                     }, {
-                        xtype       : MODx.expandHelp ? 'label' : 'hidden',
-                        forId       : 'modx-template-preview-file',
-                        id          : 'modx-template-preview-file-help',
-                        html        : _('template_preview_description'),
-                        cls         : 'desc-under'
+                        xtype: MODx.expandHelp ? 'label' : 'hidden',
+                        forId: 'modx-template-preview-file',
+                        id: 'modx-template-preview-file-help',
+                        html: _('template_preview_description'),
+                        cls: 'desc-under'
                     },{
                         xtype: 'textfield'
                         ,fieldLabel: _('template_icon')
@@ -233,30 +233,30 @@ MODx.panel.Template = function(config) {
                         ,html: _('is_static_msg')
                         ,cls: 'desc-under'
                     },{
-                        xtype       : 'modx-combo-source',
-                        fieldLabel  : _('template_source'),
-                        description : MODx.expandHelp ? '' : _('static_source_msg'),
-                        name        : 'source',
-                        id          : 'modx-template-static-source',
-                        anchor      : '100%',
-                        value       : null !== config.record.source ? config.record.source : MODx.config.default_media_source,
-                        baseParams  : {
-                            action      : 'source/getList',
-                            showNone    : true,
-                            streamsOnly : true
+                        xtype: 'modx-combo-source',
+                        fieldLabel: _('template_source'),
+                        description: MODx.expandHelp ? '' : _('static_source_msg'),
+                        name: 'source',
+                        id: 'modx-template-static-source',
+                        anchor: '100%',
+                        value: null !== config.record.source ? config.record.source : MODx.config.default_media_source,
+                        baseParams: {
+                            action: 'source/getList',
+                            showNone: true,
+                            streamsOnly: true
                         },
-                        listeners   : {
-                            select      : {
-                                fn          : this.changeSource,
-                                scope       : this
+                        listeners: {
+                            select: {
+                                fn: this.changeSource,
+                                scope: this
                             }
                         }
                     },{
-                        xtype       : MODx.expandHelp ? 'label' : 'hidden',
-                        forId       : 'modx-template-static-source',
-                        id          : 'modx-template-static-source-help',
-                        html        : _('template_source_description'),
-                        cls         : 'desc-under'
+                        xtype: MODx.expandHelp ? 'label' : 'hidden',
+                        forId: 'modx-template-static-source',
+                        id: 'modx-template-static-source-help',
+                        html: _('template_source_description'),
+                        cls: 'desc-under'
                     }]
                 }]
             },{

@@ -2,72 +2,72 @@ MODx.window.CreateResource = function(config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        autoHeight  : true,
-        title       : _('document_new'),
-        url         : MODx.config.connector_url,
-        baseParams  : {
-            action      : 'Resource/Create'
+        autoHeight: true,
+        title: _('document_new'),
+        url: MODx.config.connector_url,
+        baseParams: {
+            action: 'Resource/Create'
         },
-        width       : 600,
-        fields      : [{
-            xtype       : 'textfield',
-            fieldLabel  : _('resource_pagetitle'),
-            description : MODx.expandHelp ? '' : _('resource_pagetitle_help'),
-            name        : 'pagetitle',
-            anchor      : '100%',
-            allowBlank  : false
+        width: 600,
+        fields: [{
+            xtype: 'textfield',
+            fieldLabel: _('resource_pagetitle'),
+            description: MODx.expandHelp ? '' : _('resource_pagetitle_help'),
+            name: 'pagetitle',
+            anchor: '100%',
+            allowBlank: false
         }, {
-            xtype       : 'hidden',
-            name        : 'parent',
-            id          : 'modx-template-picker-parent-id',
+            xtype: 'hidden',
+            name: 'parent',
+            id: 'modx-template-picker-parent-id',
         }, {
-            xtype       : 'hidden',
-            name        : 'context_key',
-            id          : 'modx-template-picker-parent-context',
+            xtype: 'hidden',
+            name: 'context_key',
+            id: 'modx-template-picker-parent-context',
         }, {
-            layout      : 'column',
-            defaults    : {
-                layout      : 'form',
-                labelSeparator : ''
+            layout: 'column',
+            defaults: {
+                layout: 'form',
+                labelSeparator: ''
             },
-            items       : [{
-                columnWidth : .5,
-                items       : [{
-                    xtype       : 'modx-combo-class-derivatives',
-                    fieldLabel  : _('resource_type'),
-                    description : MODx.expandHelp ? '' : _('resource_type_help'),
-                    name        : 'class_key',
-                    hiddenName  : 'class_key',
-                    anchor      : '100%',
-                    allowBlank  : false,
-                    value       : config.record.class_key || 'modDocument'
+            items: [{
+                columnWidth: .5,
+                items: [{
+                    xtype: 'modx-combo-class-derivatives',
+                    fieldLabel: _('resource_type'),
+                    description: MODx.expandHelp ? '' : _('resource_type_help'),
+                    name: 'class_key',
+                    hiddenName: 'class_key',
+                    anchor: '100%',
+                    allowBlank: false,
+                    value: config.record.class_key || 'modDocument'
                 }, {
-                    xtype       : MODx.expandHelp ? 'label' : 'hidden',
-                    html        : _('resource_type_help'),
-                    cls         : 'desc-under'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden',
+                    html: _('resource_type_help'),
+                    cls: 'desc-under'
                 }]
             }, {
-                columnWidth : .5,
-                items       : [{
-                    xtype       : 'modx-combo-resource',
-                    fieldLabel  : _('resource_parent'),
-                    description : MODx.expandHelp ? '' : _('resource_parent_help'),
-                    anchor      : '100%',
-                    value       : config.record.parent || 0,
-                    parentcmp   : 'modx-template-picker-parent-id',
-                    contextcmp  : 'modx-template-picker-parent-context'
+                columnWidth: .5,
+                items: [{
+                    xtype: 'modx-combo-resource',
+                    fieldLabel: _('resource_parent'),
+                    description: MODx.expandHelp ? '' : _('resource_parent_help'),
+                    anchor: '100%',
+                    value: config.record.parent || 0,
+                    parentcmp: 'modx-template-picker-parent-id',
+                    contextcmp: 'modx-template-picker-parent-context'
                 }, {
-                    xtype       : MODx.expandHelp ? 'label' : 'hidden',
-                    html        : _('resource_parent_help'),
-                    cls         : 'desc-under'
+                    xtype: MODx.expandHelp ? 'label' : 'hidden',
+                    html: _('resource_parent_help'),
+                    cls: 'desc-under'
                 }]
             }]
         }, {
-            xtype       : 'modx-panel-template-picker',
-            fieldLabel  : _('resource_template'),
-            description : MODx.expandHelp ? '' : _('resource_template_help'),
-            name        : 'template',
-            value       : config.record.template || MODx.config.default_template
+            xtype: 'modx-panel-template-picker',
+            fieldLabel: _('resource_template'),
+            description: MODx.expandHelp ? '' : _('resource_template_help'),
+            name: 'template',
+            value: config.record.template || MODx.config.default_template
         }]
     });
 
@@ -82,34 +82,34 @@ MODx.panel.TemplatePicker = function(config) {
     config = config || {};
     //console.log(config);
     Ext.applyIf(config, {
-        xtype       : 'panel',
-        layout      : 'form',
-        labelSeparator : '',
-        items       : [{
-            layout      : 'column',
-            defaults    : {
-                layout      : 'form',
-                labelSeparator : ''
+        xtype: 'panel',
+        layout: 'form',
+        labelSeparator: '',
+        items: [{
+            layout: 'column',
+            defaults: {
+                layout: 'form',
+                labelSeparator: ''
             },
-            items       : [{
-                columnWidth : .4,
-                items       : [{
-                    xtype       : 'modx-combo-template-picker',
-                    id          : 'modx-resource-template-picker',
-                    name        : 'template',
-                    value       : config.record || MODx.config.default_template,
-                    listeners   : {
-                        'select'    : {
-                            fn          : this.setPreview,
-                            scope       : this
+            items: [{
+                columnWidth: .4,
+                items: [{
+                    xtype: 'modx-combo-template-picker',
+                    id: 'modx-resource-template-picker',
+                    name: 'template',
+                    value: config.record || MODx.config.default_template,
+                    listeners: {
+                        'select': {
+                            fn: this.setPreview,
+                            scope: this
                         }
                     }
                 }]
             }, {
-                columnWidth : .6,
-                items       : [{
-                    xtype       : 'modx-panel-template-preview',
-                    id          : 'modx-resource-template-preview'
+                columnWidth: .6,
+                items: [{
+                    xtype: 'modx-panel-template-preview',
+                    id: 'modx-resource-template-preview'
                 }]
             }]
         }]
@@ -130,41 +130,41 @@ MODx.combo.TemplatePicker = function(config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        cls         : 'x-form-template-picker',
-        layout      : 'form',
-        defaults    : {
-            hideLabel   : true,
+        cls: 'x-form-template-picker',
+        layout: 'form',
+        defaults: {
+            hideLabel: true,
         },
-        items       : [{
-            xtype       : 'textfield',
-            itemCls     : 'x-form-template-picker-search',
-            cls         : 'x-form-field-search',
-            anchor      : '100%',
-            emptyText   : _('search'),
-            listeners   : {
-                'keyup'     : {
-                    fn          : this.filterItems,
-                    scope       : this
+        items: [{
+            xtype: 'textfield',
+            itemCls: 'x-form-template-picker-search',
+            cls: 'x-form-field-search',
+            anchor: '100%',
+            emptyText: _('search'),
+            listeners: {
+                'keyup': {
+                    fn: this.filterItems,
+                    scope: this
                 }
             },
-            enableKeyEvents : true
+            enableKeyEvents: true
         }],
-        store       : new Ext.data.JsonStore({
-            url         : MODx.config.connector_url,
-            baseParams  : {
-                action      : 'Element/Template/GetList',
-                combo       : true
+        store: new Ext.data.JsonStore({
+            url: MODx.config.connector_url,
+            baseParams: {
+                action: 'Element/Template/GetList',
+                combo: true
             },
-            root        : 'results',
-            totalProperty : 'total',
-            fields      : ['id', 'templatename', 'description', 'category_name', 'preview'],
-            errorReader : MODx.util.JSONReader,
-            autoDestroy : true,
-            autoLoad    : true,
+            root: 'results',
+            totalProperty: 'total',
+            fields: ['id', 'templatename', 'description', 'category_name', 'preview'],
+            errorReader: MODx.util.JSONReader,
+            autoDestroy: true,
+            autoLoad: true,
             listeners: {
-                'load'      : {
-                    fn          : this.loadItems,
-                    scope       : this
+                'load': {
+                    fn: this.loadItems,
+                    scope: this
                 },
                 'loadexception': {fn: function(o,trans,resp) {
                         var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
@@ -188,53 +188,53 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
             if (category !== record.data.category_name) {
                 if (!Ext.isEmpty(record.data.category_name)) {
                     items.push({
-                        hideLabel   : true,
-                        boxLabel    : record.data.category_name,
-                        disabled    : true,
-                        itemCls     : 'x-form-template-picker-category'
+                        hideLabel: true,
+                        boxLabel: record.data.category_name,
+                        disabled: true,
+                        itemCls: 'x-form-template-picker-category'
                     });
                 }
             }
 
             items.push({
-                hideLabel   : true,
-                boxLabel    : record.data.templatename,
-                name        : this.name || 'template',
-                inputValue  : record.data.id,
-                itemCls     : 'x-form-template-picker-item',
-                record      : record,
-                checked     : record.data.id == value
+                hideLabel: true,
+                boxLabel: record.data.templatename,
+                name: this.name || 'template',
+                inputValue: record.data.id,
+                itemCls: 'x-form-template-picker-item',
+                record: record,
+                checked: record.data.id == value
             });
 
             category = record.data.category_name;
         }, this);
 
         this.add({
-            xtype       : 'radiogroup',
-            id          : 'modx-template-picker-templates',
-            itemCls     : 'x-form-template-picker-templates',
-            columns     : 1,
-            items       : items,
-            listeners   : {
-                'render'    : {
-                    fn          : function(tf) {
+            xtype: 'radiogroup',
+            id: 'modx-template-picker-templates',
+            itemCls: 'x-form-template-picker-templates',
+            columns: 1,
+            items: items,
+            listeners: {
+                'render': {
+                    fn: function(tf) {
                         var value = tf.getValue();
 
                         if (value.record) {
                             this.fireEvent('select', value.record);
                         }
                     },
-                    scope       : this
+                    scope: this
                 },
-                'change'    : {
-                    fn          : function(tf) {
+                'change': {
+                    fn: function(tf) {
                         var value = tf.getValue();
 
                         if (value.record) {
                             this.fireEvent('select', value.record);
                         }
                     },
-                    scope       : this
+                    scope: this
                 }
             }
         });
@@ -266,7 +266,7 @@ MODx.panel.TemplatePreview = function(config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        cls         : 'x-form-template-preview'
+        cls: 'x-form-template-preview'
     });
 
     MODx.panel.TemplatePreview.superclass.constructor.call(this, config);
@@ -287,21 +287,21 @@ Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
         }
 
         this.add({
-            xtype       : 'box',
-            autoEl      : {
-                tag         : 'div',
-                cls         : 'x-form-template-preview-image',
-                html        : html
+            xtype: 'box',
+            autoEl: {
+                tag: 'div',
+                cls: 'x-form-template-preview-image',
+                html: html
             },
-            hidden      : '' == record.data.image ? true : false
+            hidden: '' == record.data.image ? true : false
         }, {
-            xtype       : 'box',
-            autoEl      : {
-                tag         : 'div',
-                cls         : 'x-form-template-preview-desc',
-                html        : '<p>' + record.data.description + '</p>'
+            xtype: 'box',
+            autoEl: {
+                tag: 'div',
+                cls: 'x-form-template-preview-desc',
+                html: '<p>' + record.data.description + '</p>'
             },
-            hidden      : '' == record.data.description ? true : false
+            hidden: '' == record.data.description ? true : false
         });
 
         this.doLayout();

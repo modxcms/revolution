@@ -642,11 +642,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var parent = itm.usePk ? itm.usePk : at.pk;
 
         MODx.createResource({
-            'class_key'     : itm.classKey,
-            'parent'        : parent,
-            'context_key'   : at.ctx || MODx.config.default_context
+            'class_key': itm.classKey,
+            'parent': parent,
+            'context_key': at.ctx || MODx.config.default_context
         });
 
+        // ** This is the old action link used for creating a new resource. Perhaps in the future a system setting to switch methods?
         //this.loadAction(
         //    'a=resource/create&class_key=' + itm.classKey + '&parent=' + p + (at.ctx ? '&context_key='+at.ctx : '')
         //);
