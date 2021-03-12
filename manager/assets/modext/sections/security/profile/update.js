@@ -127,19 +127,19 @@ MODx.panel.UpdateProfile = function(config) {
                 ,allowBlank: false
                 ,anchor: '100%'
             },{
-                id: 'modx-user-fullname'
-                ,name: 'fullname'
-                ,fieldLabel: _('user_full_name')
-                ,xtype: 'textfield'
-                ,anchor: '100%'
-                ,maxLength: 255
-            },{
                 id: 'modx-user-email'
                 ,name: 'email'
                 ,fieldLabel: _('user_email')
                 ,xtype: 'textfield'
                 ,vtype: 'email'
                 ,allowBlank: false
+                ,anchor: '100%'
+                ,maxLength: 255
+            },{
+                id: 'modx-user-fullname'
+                ,name: 'fullname'
+                ,fieldLabel: _('user_full_name')
+                ,xtype: 'textfield'
                 ,anchor: '100%'
                 ,maxLength: 255
             },{
