@@ -8,9 +8,9 @@
  */
 $_lang['about'] = 'Rólunk';
 $_lang['access_permissions'] = 'Hozzáférési engedélyek';
-$_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
+$_lang['access_permissions_desc'] = 'Felhasználói csoport elérésének kezelése az erőforrásokhoz és a környezetekhez.';
 $_lang['acls'] = 'Hozzáférési jogosultságok felsorolása';
-$_lang['acls_desc'] = 'Manage Permissions through Groups, Roles and Access Policies';
+$_lang['acls_desc'] = 'Engedélyek kezelése a csoportokon, szerepeken és hozzáférési házirendeken keresztül';
 $_lang['admin'] = 'Rendszergazda';
 $_lang['api_docs'] = 'API dokumentáció';
 $_lang['api_docs_desc'] = 'A MODX Revolution teljes API dokumentációja.';
