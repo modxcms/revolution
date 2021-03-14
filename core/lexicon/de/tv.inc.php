@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['has_access'] = 'Hat Zugriff?';
-$_lang['filter_by_category'] = 'Nach Kategorie filtern...';
+$_lang['filter_by_category'] = 'Nach Kategorie filtern …';
 $_lang['rank'] = 'Rang';
 $_lang['rendering_options'] = 'Darstellungsoptionen';
 $_lang['tv'] = 'TV';
