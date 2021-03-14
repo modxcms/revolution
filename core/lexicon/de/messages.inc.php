@@ -22,7 +22,7 @@ $_lang['sent_on'] = 'Gesendet am';
 $_lang['subject'] = 'Betreff';
 $_lang['user'] = 'Benutzer';
 $_lang['usergroup'] = 'Benutzergruppe';
-$_lang['filter_by_type'] = 'Nach Typ filtern...';
+$_lang['filter_by_type'] = 'Nach Typ filtern …';
 
 $_lang['message'] = 'Mitteilung';
 $_lang['message_create'] = 'Mitteilung erstellen';
