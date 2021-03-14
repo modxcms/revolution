@@ -8,7 +8,7 @@
  */
 $_lang['import_allowed_extensions'] = 'Вкажіть через кому список розширень файлів, призначених для імпорту.<br /><small><em>Залиште поле порожнім, щоб імпортувати усі файли у відповідності з типами вмісту, доступними на Вашому сайті. Невідомі типи будуть відмічені як звичайний текст.</em></small>';
 $_lang['import_base_path'] = 'Введіть шлях до каталогу з файлами, призначеними для імпорту.<br /><small><em>Залиште поле порожнім, щоб використовувати шлях до статичних файлів контексту.</em></small>';
-$_lang['import_duplicate_alias_found'] = 'Resource [[+id]] is already using the alias [[+alias]]. Please enter a unique alias.';
+$_lang['import_duplicate_alias_found'] = 'Ресурс [[+id]] вже використовує псевдонім [[+alias]]. Введіть, будь ласка, унікальний псевдонім. ';
 $_lang['import_element'] = 'Введіть кореневий HTML-елемент для імпорту:';
 $_lang['import_element_help'] = 'Вкажіть JSON у вигляді асоціацій "поле":"значення". Якщо значення починається з $, воно буде оброблене як jQuery-селектор. Поле може бути полем ресурсу або іменем змінної шаблону.';
 $_lang['import_enter_root_element'] = 'Введіть кореневий елемент для імпорту:';
@@ -20,12 +20,12 @@ $_lang['import_site_failed'] = '<span style="color:#990000">Невдача!</spa
 $_lang['import_site_html'] = 'Імпортування сайту з HTML';
 $_lang['import_site_importing_document'] = 'Імпортування файлу <strong>%s</strong> ';
 $_lang['import_site_maxtime'] = 'Максимальний час імпорту:';
-$_lang['import_site_maxtime_message'] = 'Here you can specify the number of seconds the Content Manager can take to import the site (overriding PHP settings). Enter 0 for unlimited time. Please note, setting 0 or a really high number can do weird things to your server and is not recommended.';
-$_lang['import_site_message'] = '<p>Using this tool you can import the content from a set of HTML files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import HTML\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, the page title as the document\'s title.</p>';
+$_lang['import_site_maxtime_message'] = 'Тут ви можете вказати час (в секундах), яке бекенд може витратити на імпорт сайту (перекриває настройки PHP). Введіть 0 для зняття обмеження по часу. Однак пам\'ятайте, що установка 0 або будь-якого великого числа може привести до фатальної помилки вашого сервера. ';
+$_lang['import_site_message'] = '<p> Використовуючи цей інструмент, Ви можете імпортувати вміст з файлів HTML в базу даних. <em> Будь ласка, не забудьте, що Вам необхідно попередньо скопіювати файли і / або папки в папку core/import. </em> </p> <p> Встановіть налаштування імпорту в формі нижче, вкажіть батьківський ресурс для імпортованих файлів (опціонально) в дереві документів і натисніть «Імпорт HTML» для запуску процесу імпорту. Імпортовані файли будуть збережені в зазначеному Вами місці, з використанням, де можливо, імен файлів як псевдонімів документів, а заголовки сторінок як заголовки документів. </p> ';
 $_lang['import_site_resource'] = 'Імпортування ресурсів зі статичних файлів';
-$_lang['import_site_resource_message'] = '<p>Using this tool you can import resources from a set of static files into the database. <em>Please note that you will need to copy your files and/or folders into the core/import folder.</em></p><p>Please fill out the form options below, optionally select a parent resource for the imported files from the document tree, and press \'Import Resources\' to start the import process. The files imported will be saved into the selected location, using, where possible, the file\'s name as the document\'s alias, and, if HTML, the page title as the document\'s title.</p>';
-$_lang['import_site_skip'] = '<span style="color:#990000">Skipped!</span>';
-$_lang['import_site_start'] = 'Start Import';
+$_lang['import_site_resource_message'] = '<p>Використовуючи цей інструмент, Ви можете імпортувати ресурси з статичних файлів в базу даних. <em> Будь ласка, не забудьте, що Вам необхідно попередньо скопіювати файли і / або папки в папку core/import. </ Em> </p> <p> Встановіть налаштування імпорту в формі нижче, вкажіть батьківський ресурс для імпортованих файлів (опціонально) в дереві документів і натисніть «Імпорт ресурсів» для запуску процесу імпорту. Імпортовані файли будуть збережені в зазначеному Вами місці, з використанням, де можливо, імен файлів як псевдонімів документів, і, якщо це HTML, заголовки сторінок як заголовки документів. </p> ';
+$_lang['import_site_skip'] = '<span style="color:#990000">Пропущено!</span>';
+$_lang['import_site_start'] = 'Почати Імпорт';
 $_lang['import_site_success'] = '<span style="color:#009900">Успішно!</span>';
 $_lang['import_site_time'] = 'Імпортування завершено. Імпортування файлів зайняло %s секунд.';
 $_lang['import_use_doc_tree'] = 'Використовуйте дерево документів, що розташоване нижче, для вибору батьківського каталогу для імпортування до нього Ваших файлів.';
