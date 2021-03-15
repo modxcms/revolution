@@ -53,7 +53,7 @@ class modBrowserFileCreateProcessor extends modProcessor {
             return $this->failure($msg);
         }
         return $this->success('',array(
-            'file' => $directory.ltrim($name,'/'),
+            'file' => rawurlencode($directory . ltrim($name, '/')),
         ));
     }
 

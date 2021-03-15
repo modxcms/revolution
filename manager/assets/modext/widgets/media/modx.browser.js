@@ -121,7 +121,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,editFile: function(item,e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
-        MODx.loadPage('system/file/edit', 'file='+data.pathRelative+'&source='+this.config.source);
+        MODx.loadPage('system/file/edit', 'file='+encodeURIComponent(data.pathRelative)+'&source='+this.config.source);
     }
 
     ,quickUpdateFile: function(item,e) {
