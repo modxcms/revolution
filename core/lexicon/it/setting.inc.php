@@ -417,6 +417,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Imposta la porta di default del server 
 $_lang['setting_mail_smtp_prefix'] = 'Prefisso Connessione SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Imposta il prefisso della connessione. Le Opzioni sono "", "ssl" or "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Invio Singolo A:';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Abilita l\'invio selettivo ai singoli destinatari "A:" delle mails, invece di inviare all\'intero elenco A: dei destinatari.';
 
