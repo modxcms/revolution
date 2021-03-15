@@ -17,7 +17,7 @@ $_lang['login_button'] = 'Login';
 $_lang['login_cannot_locate_account'] = 'Der von Ihnen eingegebene Benutzername oder das Passwort ist falsch. Bitte überprüfen Sie den Benutzernamen, geben Sie Ihr Passwort noch einmal ein und versuchen Sie es erneut.';
 $_lang['login_copyright'] = '&copy; 2005-[[+current_year]] <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; ist lizenziert unter der GPLv2 oder später.';
 $_lang['login_email_label'] = 'Account-E-Mail:';
-$_lang['login_err_unknown'] = 'Beim Login ist ein unbekannter Fehler aufgetreten.';
+$_lang['login_err_unknown'] = 'Beim Versuch, sich einzuloggen, ist ein unbekannter Fehler aufgetreten.';
 $_lang['login_forget_your_login'] = 'Zugangsdaten vergessen?';
 $_lang['login_hostname_error'] = 'Ihr Hostname zeigt nicht zurück auf Ihre IP-Adresse.';
 $_lang['login_message'] = 'Bitte geben Sie Ihre Zugangsdaten ein, um Ihre Manager-Sitzung zu starten. Achten Sie bei der Eingabe des Benutzernamens und des Passworts bitte auch auf Groß- und Kleinschreibung!';
