@@ -109,6 +109,10 @@ abstract class modMail {
      */
     const MAIL_SMTP_PREFIX = 'mail_smtp_prefix';
     /**
+     * @const An option for setting the mail SMTP AutoTLS option
+     */
+    const MAIL_SMTP_AUTOTLS = 'mail_smtp_autotls';
+    /**
      * @const An option for setting the mail SMTP Single-To option
      */
     const MAIL_SMTP_SINGLE_TO = 'mail_smtp_single_to';
@@ -217,7 +221,7 @@ abstract class modMail {
      *
      * @param array $attributes An optional array of default attributes to override with
      * @return array An array of default attributes
-     */
+     */ 
     public function getDefaultAttributes(array $attributes = array()) {
         $default = array();
         if ($this->modx->getOption('mail_use_smtp',false)) {
@@ -230,6 +234,7 @@ abstract class modMail {
             $default[modMail::MAIL_SMTP_PASS] = $this->modx->getOption('mail_smtp_pass',null,'');
             $default[modMail::MAIL_SMTP_PORT] = $this->modx->getOption('mail_smtp_port',null,25);
             $default[modMail::MAIL_SMTP_PREFIX] = $this->modx->getOption('mail_smtp_prefix',null,'');
+            $default[modMail::MAIL_SMTP_AUTOTLS] = $this->modx->getOption('mail_smtp_autotls',null,true);
             $default[modMail::MAIL_SMTP_SINGLE_TO] = $this->modx->getOption('mail_smtp_single_to',null,false);
             $default[modMail::MAIL_SMTP_TIMEOUT] = $this->modx->getOption('mail_smtp_timeout',null,10);
             $default[modMail::MAIL_SMTP_USER] = $this->modx->getOption('mail_smtp_user',null,'');
