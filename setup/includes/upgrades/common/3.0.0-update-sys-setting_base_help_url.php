@@ -1,5 +1,3 @@
-
-@@ -0,0 +1,14 @@
 <?php
 /**
  * Update the URL base_help_url

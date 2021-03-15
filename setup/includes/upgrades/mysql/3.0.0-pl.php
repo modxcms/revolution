@@ -19,13 +19,13 @@ include dirname(__DIR__) . '/common/3.0.0-cleanup-authentication-security-system
 include dirname(__DIR__) . '/common/3.0.0-cleanup-lexicon-language-system-settings.php';
 include dirname(__DIR__) . '/common/3.0.0-content-type-icon.php';
 include dirname(__DIR__) . '/common/3.0.0-update-xtypes-system-settings.php';
-include dirname(__DIR__) . '/common/3.0.0-update-upload_files-upload_images.php';
+include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_upload_files-upload_images.php';
 include dirname(__DIR__) . '/common/3.0.0-trim-gender-field-size.php';
 include dirname(__DIR__) . '/common/3.0.0-update-legacy-class-references.php';
 include dirname(__DIR__) . '/common/3.0.0-update-menu-entries.php';
 include dirname(__DIR__) . '/common/3.0.0-update-menu-main.php';
-include dirname(__DIR__) . '/common/3.0.0-update-default-media-source-setting.php';
-include dirname(__DIR__) . '/common/3.0.0-update-upload_files-woff2.php';
+include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_default_media_source.php';
+include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_upload_files-woff2.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-params.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-output-params.php';
-include dirname(__DIR__) . '/common/3.0.0-update-base_help_url.php';
+include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_base_help_url.php';
