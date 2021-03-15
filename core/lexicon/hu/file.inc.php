@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Mappa';
-$_lang['file_confirm_remove'] = 'Biztosan törli az állományt? Egy állomány törlése hibát okozhat a weboldalában. Törlés előtt nézzen utána, hogy ez az állomány mire való.';
 $_lang['file_create'] = 'Állomány létrehozása';
 $_lang['file_deleted'] = 'Siker!';
 $_lang['file_delete_file'] = 'Állomány törlése';
@@ -70,7 +69,7 @@ $_lang['file_folder_err_remove'] = 'Hiba történt a mappa törlése közben.';
 $_lang['file_folder_err_remove_protected'] = 'A védett rendszermappa törlése nem engedélyezett.';
 $_lang['file_folder_parent'] = 'Szülő mappa';
 $_lang['file_folder_remove'] = 'Mappa törlése';
-$_lang['file_folder_remove_confirm'] = 'Biztosan törli ezt a mappát? Összeomolhat tőle a weboldala.';
+$_lang['file_folder_remove_confirm'] = 'Biztosan törli a(z) "[[+directory]]" mappát? Összeomolhat tőle a weboldala.';
 $_lang['file_last_accessed'] = 'Utoljára megtekintve';
 $_lang['file_last_modified'] = 'Utoljára módosítva';
 $_lang['file_name'] = 'Állomány neve';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'A csomagok mappa nem létezik!';
 $_lang['file_package_err_invalid_name'] = 'A [[+name]] állomány neve érvénytelen az átviteli csomaghoz';
 $_lang['file_package_err_invalid_type'] = 'Ez az állomány nem tűnik átviteli csomagnak';
 $_lang['file_remove'] = 'Állomány törlése';
-$_lang['file_remove_confirm'] = 'Biztosan törli ezt az állományt teljesen?';
+$_lang['file_remove_confirm'] = 'Biztosan törli a(z) "[[+file]]" állományt? Egy állomány törlése hibát okozhat a weboldalában. Törlés előtt nézzen utána, hogy ez az állomány mire való.';
 $_lang['file_saved'] = 'Állomány sikeresen frissítve!';
 $_lang['file_size'] = 'Állomány mérete';
 $_lang['file_size_bytes'] = 'bájt';

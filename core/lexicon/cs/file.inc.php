@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Složka';
-$_lang['file_confirm_remove'] = 'Are you sure you want to delete this file? Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_create'] = 'Vytvořit soubor';
 $_lang['file_deleted'] = 'V pořádku!';
 $_lang['file_delete_file'] = 'Odstranit soubor';
@@ -70,17 +69,17 @@ $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
 $_lang['file_folder_parent'] = 'Nadřazená složka';
 $_lang['file_folder_remove'] = 'Odstranit složku';
-$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete this directory? This could potentially break your website.';
+$_lang['file_folder_remove_confirm'] = 'Jste si jisti, že chcete odstranit adresář: "[[+directory]]"?<br />To by mohlo potenciálně poškodit vaše webové stránky.';
 $_lang['file_last_accessed'] = 'Poslední přístup';
 $_lang['file_last_modified'] = 'Naposledy upraveno';
 $_lang['file_name'] = 'Název souboru';
 $_lang['file_quick_create'] = 'Vytvořit soubor v okně';
 $_lang['file_quick_update'] = 'Quick Edit File';
-$_lang['file_package_err_invalid_directory'] = 'The packages directory does not exist!';
-$_lang['file_package_err_invalid_name'] = 'This file [[+name]] has an invalid name for the transport package';
-$_lang['file_package_err_invalid_type'] = 'This file does not appear to be a transport package';
+$_lang['file_package_err_invalid_directory'] = 'Složka s balíčky neexistuje!';
+$_lang['file_package_err_invalid_name'] = 'Tento soubor [[+name]] má neplatný název pro přepravní balíček';
+$_lang['file_package_err_invalid_type'] = 'Tento soubor se nezdá být přepravním balíčkem';
 $_lang['file_remove'] = 'Odstranit soubor';
-$_lang['file_remove_confirm'] = 'Are you sure you want to delete this file entirely?';
+$_lang['file_remove_confirm'] = 'Jste si jisti, že chcete odstranit soubor: "[[+file]]"?<br />Odstranění souboru může potenciálně poškodit vaše webové stránky. Před odstraněním souboru se ujistěte, že víte, co tento soubor dělá.';
 $_lang['file_saved'] = 'Aktualizace souboru proběhla úspěšně!';
 $_lang['file_size'] = 'Velikost souboru';
 $_lang['file_size_bytes'] = 'bajtů';

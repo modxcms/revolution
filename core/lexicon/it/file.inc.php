@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Directory';
-$_lang['file_confirm_remove'] = 'Sei sicuro di voler eliminare questo file? Eliminare un file potrebbe potenzialmente danneggiare il tuo sito web. Assicurati di sapere cosa fa questo file prima di eliminarlo.';
 $_lang['file_create'] = 'Creare File';
 $_lang['file_deleted'] = 'Successo!';
 $_lang['file_delete_file'] = 'Elimina file';
@@ -70,7 +69,7 @@ $_lang['file_folder_err_remove'] = 'Si è verificato un errore durante il tentat
 $_lang['file_folder_err_remove_protected'] = 'L\'eliminazione della directory di sistema protetta non è consentita.';
 $_lang['file_folder_parent'] = 'Directory genitore';
 $_lang['file_folder_remove'] = 'Rimuovi directory';
-$_lang['file_folder_remove_confirm'] = 'Sei sicuro di voler eliminare questa directory? Questo potrebbe potenzialmente danneggiare il tuo sito web.';
+$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
 $_lang['file_last_accessed'] = 'Ultimo accesso';
 $_lang['file_last_modified'] = 'Ultima modifica';
 $_lang['file_name'] = 'Nome del file';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'Questa cartella di pacchetto non
 $_lang['file_package_err_invalid_name'] = 'Questo file [[+name]] ha un nome non valido per il pacchetto di trasporto';
 $_lang['file_package_err_invalid_type'] = 'Questo file non sembra essere un pacchetto di trasporto';
 $_lang['file_remove'] = 'Elimina file';
-$_lang['file_remove_confirm'] = 'Sei sicuro di voler eliminare completamente questo file?';
+$_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_saved'] = 'File aggiornato con successo!';
 $_lang['file_size'] = 'Dimensione del file';
 $_lang['file_size_bytes'] = 'byte';

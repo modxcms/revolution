@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Répertoire';
-$_lang['file_confirm_remove'] = 'Êtes-vous sûr de vouloir supprimer ce fichier ? La suppression d\'un fichier pourrait potentiellement endommager votre site Web. Assurez-vous de savoir ce que fait ce fichier avant de le supprimer.';
 $_lang['file_create'] = 'Créer un fichier';
 $_lang['file_deleted'] = 'Succès !';
 $_lang['file_delete_file'] = 'Supprimer le fichier';
@@ -70,7 +69,7 @@ $_lang['file_folder_err_remove'] = 'Une erreur s\'est produite lors de la suppre
 $_lang['file_folder_err_remove_protected'] = 'La suppression du répertoire système protégé n\'est pas autorisée.';
 $_lang['file_folder_parent'] = 'Répertoire parent';
 $_lang['file_folder_remove'] = 'Supprimer le répertoire';
-$_lang['file_folder_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce répertoire? Ceci pourrait potentiellement rendre votre site web inutilisable.';
+$_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
 $_lang['file_last_accessed'] = 'Dernier accès';
 $_lang['file_last_modified'] = 'Dernière mise à jour';
 $_lang['file_name'] = 'Nom de fichier';
@@ -80,7 +79,7 @@ $_lang['file_package_err_invalid_directory'] = 'Le répertoire des packages n\'e
 $_lang['file_package_err_invalid_name'] = 'Ce fichier [[+name]] a un nom invalide pour le paquet de transport';
 $_lang['file_package_err_invalid_type'] = 'Ce fichier ne semble pas être un paquet de transport';
 $_lang['file_remove'] = 'Supprimer le fichier';
-$_lang['file_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer complètement ce fichier ?';
+$_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
 $_lang['file_saved'] = 'Fichier correctement mis à jour!';
 $_lang['file_size'] = 'Taille du fichier';
 $_lang['file_size_bytes'] = 'octets';
