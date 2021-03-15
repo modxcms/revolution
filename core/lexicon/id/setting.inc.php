@@ -417,6 +417,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Menetapkan default SMTP server port.';
 $_lang['setting_mail_smtp_prefix'] = 'Awalan koneksi SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Set sambungan awalan. Pilihan "", "ssl" atau "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP tunggal untuk';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Menyediakan kemampuan untuk memiliki untuk bidang proses individu email, bukan pengiriman ke seluruh alamat.';
 
