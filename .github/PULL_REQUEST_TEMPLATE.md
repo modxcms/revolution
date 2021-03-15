@@ -8,4 +8,4 @@ Describe the issue you are solving.
 Describe how to test the changes you made.
 
 ### Related issue(s)/PR(s)
-Let us know if this is related to any issue/pull request (see https://github.com/blog/1506-closing-issues-via-pull-requests)
+Provide any issue that's addressed by this change in the format "Resolves #<issue number>", and mention other issues/pull requests with relevant information. 
