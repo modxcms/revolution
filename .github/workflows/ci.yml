@@ -56,3 +56,16 @@ jobs:
 
       - name: Run PHPUnit
         run: core/vendor/bin/phpunit  --enforce-time-limit -c ./_build/test/phpunit.xml
+
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run editorconfig
