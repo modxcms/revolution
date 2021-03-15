@@ -874,6 +874,15 @@ $settings['mail_smtp_single_to']->fromArray([
   'area' => 'mail',
   'editedon' => null,
 ], '', true, true);
+$settings['mail_smtp_autotls']= $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_autotls']->fromArray([
+    'key' => 'mail_smtp_autotls',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'mail',
+    'editedon' => null,
+], '', true, true);
 $settings['mail_smtp_timeout']= $xpdo->newObject(modSystemSetting::class);
 $settings['mail_smtp_timeout']->fromArray([
   'key' => 'mail_smtp_timeout',
