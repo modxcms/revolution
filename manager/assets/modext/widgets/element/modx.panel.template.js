@@ -450,6 +450,9 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
             if (field) {
                 if (cb.checked) {
                     field.show();
+                    if(field.id === 'modx-template-static-file') {
+                        field.updateBox(field.getResizeEl().parent().getBox());
+                    }
                 } else {
                     field.hide();
                 }
