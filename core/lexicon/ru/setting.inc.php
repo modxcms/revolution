@@ -417,8 +417,8 @@ $_lang['setting_mail_smtp_port_desc'] = 'Укажите порт SMTP серве
 $_lang['setting_mail_smtp_prefix'] = 'SMTP префикс для соединений';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Префикс соединений. Доступные варианты: «», «ssl», «tls»';
 
-$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls'] = 'Авто TLS для SMTP';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Включать ли TLS-шифрование автоматически, даже если "шифрование SMTP" не установлено на "TLS". При условии что сервер поддерживает "шифрование SMTP".';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP посылать по одному';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Предоставляет возможность отправлять сообщения адресатам из поля «to» по одному, вместо разовой отправки на все адреса.';
