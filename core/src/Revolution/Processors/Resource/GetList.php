@@ -69,19 +69,6 @@ class GetList extends GetListProcessor
         return $c;
     }
 
-    public function beforeIteration(array $list) {
-        if ($this->getProperty('combo', false) && !$this->getProperty('query', false)) {
-            $list[] = [
-                'id'            => 0,
-                'pagetitle'     => $this->modx->lexicon('parent_resource_empty'),
-                'longtitle'     => '',
-                'time'          => time()
-            ];
-        }
-
-        return $list;
-    }
-
     public function prepareRow(xPDOObject $object)
     {
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');

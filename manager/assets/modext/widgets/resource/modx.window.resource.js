@@ -16,15 +16,15 @@ MODx.window.CreateResource = function(config) {
             name: 'pagetitle',
             anchor: '100%',
             allowBlank: false
-        }, {
+        },{
             xtype: 'hidden',
             name: 'parent',
             id: 'modx-template-picker-parent-id',
-        }, {
+        },{
             xtype: 'hidden',
             name: 'context_key',
             id: 'modx-template-picker-parent-context',
-        }, {
+        },{
             layout: 'column',
             defaults: {
                 layout: 'form',
@@ -41,12 +41,8 @@ MODx.window.CreateResource = function(config) {
                     anchor: '100%',
                     allowBlank: false,
                     value: config.record.class_key || 'MODX\\Revolution\\modDocument'
-                }, {
-                    xtype: MODx.expandHelp ? 'label' : 'hidden',
-                    html: _('resource_type_help'),
-                    cls: 'desc-under'
                 }]
-            }, {
+            },{
                 columnWidth: .5,
                 items: [{
                     xtype: 'modx-combo-resource',
@@ -56,13 +52,9 @@ MODx.window.CreateResource = function(config) {
                     value: config.record.parent || 0,
                     parentcmp: 'modx-template-picker-parent-id',
                     contextcmp: 'modx-template-picker-parent-context'
-                }, {
-                    xtype: MODx.expandHelp ? 'label' : 'hidden',
-                    html: _('resource_parent_help'),
-                    cls: 'desc-under'
                 }]
             }]
-        }, {
+        },{
             xtype: 'modx-panel-template-picker',
             fieldLabel: _('resource_template'),
             description: MODx.expandHelp ? '' : _('resource_template_help'),
