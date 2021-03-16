@@ -22161,7 +22161,6 @@ ul.x-tab-strip-bottom {
 #helpBanner {
   margin-top: 1.5em;
   min-height: 112px;
-  background-image: url("../images/modx-logo-color.png");
   background-image: url("../images/modx-logo-color.svg"), none;
   background-repeat: no-repeat;
   background-attachment: none;
