@@ -384,6 +384,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'ตั้งค่าปริยาย
 $_lang['setting_mail_smtp_prefix'] = 'คำนำหน้าการเชื่อมต่อ SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'ตั้งคำนำหน้าการเชื่อมต่อ เหล่าตัวเลือกคือ "" "ssl" หรือ "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'มีความสามารถในการมีฟิลด์"ถึง" ที่มีกระบวนการเฉพาะแต่ละอีเมล์ แทนที่การส่งถึงที่อยู่';
 
@@ -722,6 +725,9 @@ $_lang['setting_unauthorized_page_err'] = 'กรุณาระบุไอด�
 
 $_lang['setting_upload_files'] = 'ประเภทไฟล์ที่สามารถอัปโหลดได้';
 $_lang['setting_upload_files_desc'] = 'คุณสามารถป้อนรายการของไฟล์ที่สามารถอัปโหลดไปยัง \'assets/files/\' โดยใช้ตัวจัดการรีซอร์ส กรุณาป้อนนามสกุลของประเภทไฟล์คั่นด้วยจุลภาค';
+
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
 $_lang['setting_upload_images'] = 'ประเภทรูปภาพที่สามารถอัปโหลดได้';
 $_lang['setting_upload_images_desc'] = 'คุณสามารถป้อนรายการของไฟล์ที่สามารถอัปโหลดไปยัง \'assets/images/\' โดยใช้ตัวจัดการรีซอร์ส กรุณาป้อนนามสกุลของประเภทรูปภาพคั่นด้วยจุลภาค';

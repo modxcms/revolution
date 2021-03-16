@@ -8,8 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modCategory;
 use MODX\Revolution\modManagerController;
 use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\modTemplate;
 
 /**
  * Load update template page
@@ -49,7 +51,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.template.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/template/update.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

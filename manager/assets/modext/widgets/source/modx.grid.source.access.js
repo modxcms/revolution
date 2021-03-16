@@ -11,7 +11,7 @@ MODx.grid.MediaSourceAccess = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-source-access'
         ,fields: ['id','target','target_name','principal_class','principal','principal_name','authority','authority_name','policy','policy_name','context_key']
-        ,type: 'modAccessMediaSource'
+        ,type: 'MODX\\Revolution\\Sources\\modAccessMediaSource'
         ,paging: true
         ,columns: [{
             header: _('user_group')
@@ -140,7 +140,7 @@ Ext.extend(MODx.grid.MediaSourceAccess,MODx.grid.LocalGrid,{
             ,params: {
                 action: 'Security/Access/RemoveAcl'
                 ,id: this.menu.record.id
-                ,type: this.config.type || 'modAccessMediaSource'
+                ,type: this.config.type || 'MODX\\Revolution\\Sources\\modAccessMediaSource'
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}
@@ -162,7 +162,7 @@ MODx.window.CreateSourceAccess = function(config) {
 
     Ext.applyIf(config,{
         title: _('source_access_add')
-        ,type: 'modAccessMediaSource'
+        ,type: 'MODX\\Revolution\\Sources\\modAccessMediaSource'
         ,acl: 0
         ,fields: [{
             xtype: 'hidden'

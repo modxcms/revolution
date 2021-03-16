@@ -6,7 +6,7 @@
 />
 <div id="tv-tags-{$tv->id}"></div>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
@@ -14,7 +14,7 @@ Ext.onReady(function() {
     {/literal}
         xtype: 'textfield'
         ,applyTo: 'tv{$tv->id}'
-        ,width: 400
+        ,width: '99%'
         ,id: 'tv{$tv->id}'
         ,enableKeyEvents: true
         ,msgTarget: 'under'
@@ -44,7 +44,7 @@ Ext.onReady(function() {
 {/foreach}
 </ul>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {

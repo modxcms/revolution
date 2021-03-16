@@ -66,13 +66,13 @@ class SecurityLoginManagerController extends modManagerController
         $this->setPlaceholder('onManagerLoginFormPrerender', $eventInfo);
 
         $hour = date('H') + (int)$this->modx->getOption('server_offset');
-        if ($hour > 18) {
+        if ($hour >= 18) {
             $greeting = $this->modx->lexicon('login_greeting_evening');
         }
-        elseif ($hour > 12) {
+        elseif ($hour >= 12) {
             $greeting = $this->modx->lexicon('login_greeting_afternoon');
         }
-        elseif ($hour > 6) {
+        elseif ($hour >= 6) {
             $greeting = $this->modx->lexicon('login_greeting_morning');
         }
         else {

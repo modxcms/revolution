@@ -8,7 +8,9 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modCategory;
 use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSnippet;
 use MODX\Revolution\modSystemEvent;
 
 /**
@@ -48,7 +50,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.snippet.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/snippet/update.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
         Ext.onReady(function() {

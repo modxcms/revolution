@@ -384,6 +384,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'SMTPサーバーのデフォルトポ�
 $_lang['setting_mail_smtp_prefix'] = 'SMTP接続の接頭辞';
 $_lang['setting_mail_smtp_prefix_desc'] = '接続の接頭辞を "", "ssl" または "tls" から指定します。';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Provides the ability to have the TO field process individual emails, instead of sending to entire TO addresses.';
 
@@ -722,6 +725,9 @@ $_lang['setting_unauthorized_page_err'] = '権限外告知に利用するドキ�
 
 $_lang['setting_upload_files'] = 'アップロード可能なファイルタイプ';
 $_lang['setting_upload_files_desc'] = 'ファイルブラウザを使用して「assets/files/」にアップロードできるメディアファイルの拡張子をカンマで区切って入力してください。';
+
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
 $_lang['setting_upload_images'] = 'アップロード可能な画像タイプ';
 $_lang['setting_upload_images_desc'] = 'ファイルブラウザを使用して「assets/images/」にアップロードできる画像ファイルの拡張子をカンマで区切って入力してください。';

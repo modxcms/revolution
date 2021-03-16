@@ -47,7 +47,7 @@ class SystemDashboardsWidgetCreateManagerController extends modManagerController
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.orm.js');
         $this->addJavascript($mgrUrl."assets/modext/widgets/system/modx.panel.dashboard.widget.js");
         $this->addJavascript($mgrUrl.'assets/modext/sections/system/dashboards/widget/create.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
+        $this->addHtml('<script>Ext.onReady(function() {
     MODx.add("modx-page-dashboard-widget-create");
 });</script>');
     }

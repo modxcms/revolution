@@ -11,14 +11,13 @@
 namespace MODX\Revolution\Processors\Security\Role;
 
 
-use modUserGroupRoleUpdateProcessor;
 
 /**
  * Updates a role from a grid. Passed as JSON data
  * @param integer $id The ID of the role
  * @package MODX\Revolution\Processors\Security\Role
  */
-class UpdateFromGrid extends modUserGroupRoleUpdateProcessor
+class UpdateFromGrid extends Update
 {
     /**
      * @return bool|string|null

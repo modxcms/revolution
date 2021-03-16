@@ -384,6 +384,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'डिफ़ॉल्ट SMTP सर्
 $_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
 $_lang['setting_mail_smtp_prefix_desc'] = 'कनेक्शन उपसर्ग सेट करता है। विकल्प हैं "", "ssl" या "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'बजाय पतों पर पूरे करने के लिए भेजने के लिए फील्ड प्रक्रिया व्यक्तिगत ईमेल करने की क्षमता प्रदान करता है।';
 
@@ -722,6 +725,9 @@ $_lang['setting_unauthorized_page_err'] = 'कृपया अनधिकृत
 
 $_lang['setting_upload_files'] = 'Uploadable फ़ाइल प्रकार';
 $_lang['setting_upload_files_desc'] = 'यहाँ आप resource manager का उपयोग करते हुए \'assets/files/\' में अपलोड किया जा सकता है कि फाइलों की सूची में प्रवेश कर सकते हैं। अल्पविराम के द्वारा अलग filetypes के लिए एक्सटेंशन दर्ज करें।';
+
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
 $_lang['setting_upload_images'] = 'Uploadable छवि प्रकार';
 $_lang['setting_upload_images_desc'] = 'यहाँ आप में अपलोड किया जा कर सकते हैं कि फ़ाइलों की एक सूची में प्रवेश कर सकते हैं \'assets/images/\' resource manager का उपयोग कर। कृपया अल्पविराम के द्वारा अलग छवि प्रकार के लिए एक्सटेंशन दर्ज करें।';

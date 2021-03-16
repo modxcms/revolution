@@ -192,6 +192,6 @@
         </div>
         <div class="l-background" style="background-image:url({$background})"></div>
 
-        <script src="{$_config.manager_url}assets/modext/sections/login.js" type="text/javascript"></script>
+        <script src="{$_config.manager_url}assets/modext/sections/login.js"></script>
     </body>
 </html>

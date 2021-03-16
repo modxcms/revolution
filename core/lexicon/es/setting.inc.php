@@ -384,6 +384,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Configura el puerto predeterminado del 
 $_lang['setting_mail_smtp_prefix'] = 'Prefijo de Conexión de SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Configura el prefijo de conexión SMTP. Las opciones son: "", "ssl" or "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'Un Solo Receptor de SMTP';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Provee la habilidad de que el campo "Destino" procese emails de individualmente, en lugar de enviar todos a la vez (correo colectivo).';
 
@@ -722,6 +725,9 @@ $_lang['setting_unauthorized_page_err'] = 'Por favor, especifíca un ID de Recur
 
 $_lang['setting_upload_files'] = 'Tipo de Archivos Permitidos en Subida';
 $_lang['setting_upload_files_desc'] = 'Lista separada por comas de los tipos de archivo permitidos para subir a la carpeta "assets/files" utilizando el Administrador de Recursos.';
+
+$_lang['setting_upload_file_exists'] = 'Comprueba si  el archivo cargado existe';
+$_lang['setting_upload_file_exists_desc'] = 'Cuando está habilitado, se mostrará un error al cargar un archivo si ya existe uno con el mismo nombre. Cuando está deshabilitado, el archivo existente será reemplazado por el nuevo archivo sin pedir confirmación.';
 
 $_lang['setting_upload_images'] = 'Tipos de Archivos de Imagen Permitidos en Subida';
 $_lang['setting_upload_images_desc'] = 'Lista separada por comas de los tipos de archivos de imagen permitidos para subir a la carpeta "assets/images" utilizando el Administrador de Recursos.';

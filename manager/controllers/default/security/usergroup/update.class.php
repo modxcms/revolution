@@ -43,7 +43,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.namespace.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-user-group-update"

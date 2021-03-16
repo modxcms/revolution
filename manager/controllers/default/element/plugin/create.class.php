@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modCategory;
 use MODX\Revolution\modManagerController;
 use MODX\Revolution\modSystemEvent;
 
@@ -42,7 +43,7 @@ class ElementPluginCreateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.plugin.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/plugin/create.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

@@ -144,10 +144,12 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     ,removeUserGroup: function(item,e) {
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
+        var user_group = n.text;
 
         MODx.msg.confirm({
-            title: _('warning')
-            ,text: _('user_group_remove_confirm')
+            text: _('user_group_remove_confirm',{
+                user_group: user_group
+            })
             ,url: this.config.url
             ,params: {
                 action: 'Security/Group/Remove'
@@ -165,8 +167,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
         var group_id = n.parentNode.id.substr(2).split('_');group_id = group_id[1];
 
         MODx.msg.confirm({
-            title: _('warning')
-            ,text: _('user_group_user_remove_confirm')
+            text: _('user_group_user_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'Security/Group/User/Remove'

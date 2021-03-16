@@ -17,7 +17,7 @@ MODx.panel.Plugin = function(config) {
         }
         ,id: 'modx-panel-plugin'
 		,cls: 'container form-with-labels'
-        ,class_key: 'modPlugin'
+        ,class_key: 'MODX\\Revolution\\modPlugin'
         ,plugin: ''
         ,bodyStyle: ''
         ,allowDrop: false

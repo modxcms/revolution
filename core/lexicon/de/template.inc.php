@@ -8,7 +8,7 @@
  */
 
 $_lang['access'] = 'Zugriff';
-$_lang['filter_by_category'] = 'Nach Kategorie filtern...';
+$_lang['filter_by_category'] = 'Nach Kategorie filtern …';
 $_lang['rank'] = 'Rang';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Zugewiesene TVs';

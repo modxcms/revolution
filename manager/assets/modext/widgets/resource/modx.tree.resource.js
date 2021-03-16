@@ -177,10 +177,11 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,deleteDocument: function(itm,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
-        var pagetitle = node.ui.textNode.innerText;
+        var resource = node.ui.textNode.innerText;
         MODx.msg.confirm({
-            title: pagetitle ? _('resource_delete') + ' ' + pagetitle : _('resource_delete')
-            ,text: _('resource_delete_confirm')
+            text: _('resource_delete_confirm',{
+                resource: resource
+            })
             ,url: MODx.config.connector_url
             ,params: {
                 action: 'Resource/Delete'
@@ -1050,7 +1051,7 @@ MODx.getQRContentField = function(id,cls) {
                 ,id: 'modx-'+id+'-content'
                 ,anchor: '100%'
                 ,maxLength: 255
-                ,value: 'http://'
+                ,value: ''
             };
             break;
         case 'MODX\\Revolution\\modStaticResource':

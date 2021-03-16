@@ -5,7 +5,7 @@
     {$tv->get('formElement')}
 {/foreach}
 
-{$onDocFormPrerender}
+{$onDocFormPrerender|default}
 {if $resource->richtext AND $_config.use_editor}
-    {$onRichTextEditorInit}
+    {$onRichTextEditorInit|default}
 {/if}

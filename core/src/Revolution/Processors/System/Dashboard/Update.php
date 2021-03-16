@@ -44,7 +44,16 @@ class Update extends UpdateProcessor
      */
     public function setWidgets()
     {
-        if ($widgets = $this->getProperty('widgets')) {
+        /** @var modDashboardWidgetPlacement[] $previousWidgets */
+        $previousWidgets = $this->modx->getCollection(modDashboardWidgetPlacement::class, ['dashboard' => $this->object->id, 'user' => 0]);
+        $previousWidgets = array_map(function($item){
+            return $item->widget;
+        }, $previousWidgets);
+
+        $newWidgets = [];
+
+        $widgets = $this->getProperty('widgets');
+        if ($widgets) {
             if (!is_array($widgets)) {
                 $widgets = json_decode($widgets, true);
             }
@@ -53,18 +62,55 @@ class Update extends UpdateProcessor
                 'user' => 0,
             ]);
             foreach ($widgets as $data) {
+                $newWidgets[] = $data['widget'];
+
                 $key = [
                     'dashboard' => $this->object->get('id'),
                     'user' => 0,
                     'widget' => $data['widget'],
                 ];
-                if (!$widget = $this->modx->getObject(modDashboardWidgetPlacement::class, $key)) {
-                    /** @var modDashboardWidgetPlacement $widget */
+
+                /** @var modDashboardWidgetPlacement $widget */
+                $widget = $this->modx->getObject(modDashboardWidgetPlacement::class, $key);
+                if (!$widget) {
                     $widget = $this->modx->newObject(modDashboardWidgetPlacement::class);
                     $widget->fromArray($key, '', true, true);
                 }
                 $widget->set('rank', $data['rank']);
                 $widget->save();
+            }
+
+            $addedWidgets = array_values(array_diff($newWidgets, $previousWidgets));
+            $removedWidgets = array_values(array_diff($previousWidgets, $newWidgets));
+
+            if (!empty($addedWidgets)) {
+                $userDashboardsQuery = $this->modx->newQuery(modDashboardWidgetPlacement::class, ['dashboard' => $this->object->id, 'user:!=' => 0]);
+                $userDashboardsQuery->distinct(true);
+                $userDashboardsQuery->select('user');
+                $userDashboardsQuery->prepare();
+
+                $userDashboardsQuery->stmt->execute();
+
+                $userDashboards = $userDashboardsQuery->stmt->fetchAll(\PDO::FETCH_COLUMN, 0);
+                $userDashboards = array_map('intval', $userDashboards);
+
+                foreach ($userDashboards as $user) {
+                    foreach ($addedWidgets as $widgetId) {
+                        $key = ['dashboard' => $this->object->id, 'user' => $user, 'widget' => $widgetId];
+
+                        /** @var modDashboardWidgetPlacement $widgetPlacement */
+                        $widgetPlacement = $this->modx->getObject(modDashboardWidgetPlacement::class, $key);
+                        if (!$widgetPlacement) {
+                            $widgetPlacement = $this->modx->newObject(modDashboardWidgetPlacement::class);
+                            $widgetPlacement->fromArray($key, '', true, true);
+                            $widgetPlacement->save();
+                        }
+                    }
+                }
+            }
+
+            if (!empty($removedWidgets)) {
+                $this->modx->removeCollection(modDashboardWidgetPlacement::class, ['dashboard' => $this->object->id, 'widget:IN' => $removedWidgets]);
             }
 
             $this->object->sortWidgets();

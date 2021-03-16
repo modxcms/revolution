@@ -47,7 +47,7 @@ class GetList extends GetListProcessor
      */
     public function initialize()
     {
-        $this->modx->addPackage('modx.transport', $this->modx->getOption('core_path') . 'model/');
+        $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
         $this->setDefaultProperties([
             'start' => 0,
             'limit' => 10,

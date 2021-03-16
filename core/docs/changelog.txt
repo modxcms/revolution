@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+- Fix HTTPS check on setup bootstrap [#15487]
+- Allow installation to work as expected behind a reverse proxy with HTTPS [#15470]
+- Improve behavior of blocking users [#15442]
+- Fix resource breadcrumbs if the resource is deleted [#15243]
 - Only log session info if session is initialized [#15308]
 - Improve removal of nested MODX tag content in sanitizeRequest [#15370]
 - Improve Navigation for Access Control Lists > User Groups & Users [#15159]

@@ -130,7 +130,7 @@ $settings['automatic_template_assignment']->fromArray([
 $settings['base_help_url']= $xpdo->newObject(modSystemSetting::class);
 $settings['base_help_url']->fromArray([
   'key' => 'base_help_url',
-  'value' => '//docs.modx.com/display/revolution20/',
+  'value' => '//docs.modx.com/3.x/en/index',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -873,6 +873,15 @@ $settings['mail_smtp_single_to']->fromArray([
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
+], '', true, true);
+$settings['mail_smtp_autotls']= $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_autotls']->fromArray([
+    'key' => 'mail_smtp_autotls',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'mail',
+    'editedon' => null,
 ], '', true, true);
 $settings['mail_smtp_timeout']= $xpdo->newObject(modSystemSetting::class);
 $settings['mail_smtp_timeout']->fromArray([
@@ -1744,6 +1753,15 @@ $settings['upload_files']->fromArray([
   'key' => 'upload_files',
   'value' => 'txt,html,htm,xml,js,js.map,css,scss,less,css.map,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,webp,odt,ods,odp,odb,odg,odf,md,ttf,woff,woff2,eot',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+], '', true, true);
+$settings['upload_file_exists']= $xpdo->newObject(modSystemSetting::class);
+$settings['upload_file_exists']->fromArray([
+  'key' => 'upload_file_exists',
+  'value' => true,
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
   'editedon' => null,

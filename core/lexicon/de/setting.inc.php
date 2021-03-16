@@ -12,7 +12,7 @@ $_lang['area_caching'] = 'Caching';
 $_lang['area_core'] = 'Core-Code';
 $_lang['area_editor'] = 'Rich-Text-Editor';
 $_lang['area_file'] = 'Dateisystem';
-$_lang['area_filter'] = 'Nach Bereich filtern...';
+$_lang['area_filter'] = 'Nach Bereich filtern …';
 $_lang['area_furls'] = 'Suchmaschinenfreundliche URLs';
 $_lang['area_gateway'] = 'Gateway';
 $_lang['area_language'] = 'Lexikon und Sprache';
@@ -34,8 +34,8 @@ $_lang['key_desc'] = 'Der Schlüssel der Einstellung. Er ist in Ihren Inhalten �
 $_lang['name_desc'] = 'Ein Name für die Einstellung. Dies kann auch ein Lexikon-Eintrag basierend auf dem Schlüssel sein, der dem Format "setting_" + Schlüssel entspricht.';
 $_lang['namespace'] = 'Namensraum';
 $_lang['namespace_desc'] = 'Der Namensraum, mit dem diese Einstellung verbunden ist. Das Standard-Lexikon-Thema wird für diesen Namensraum geladen, wenn die Einstellungen eingelesen werden.';
-$_lang['namespace_filter'] = 'Nach Namensraum filtern...';
-$_lang['search_by_key'] = 'Nach Schlüssel suchen...';
+$_lang['namespace_filter'] = 'Nach Namensraum filtern …';
+$_lang['search_by_key'] = 'Nach Schlüssel suchen …';
 $_lang['setting_create'] = 'Einstellung erstellen';
 $_lang['setting_err'] = 'Bitte überprüfen Sie Ihre Daten für die folgenden Felder: ';
 $_lang['setting_err_ae'] = 'Eine Einstellung mit diesem Schlüssel existiert bereits. Bitte geben Sie einen anderen Namen für den Schlüssel an.';
@@ -384,6 +384,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Legt den Standard-SMTP-Port fest.';
 $_lang['setting_mail_smtp_prefix'] = 'SMTP-Verbindungs-Präfix';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Legt den Verbindungs-Präfix fest. Möglich sind "", "ssl" oder "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'TLS-Verschlüsselung automatisch aktivieren, wenn ein Server dies unterstützt, auch wenn die "SMTP-Verschlüsselung" nicht auf "tls" eingestellt ist.';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP: Mails einzeln versenden';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden Mails an jeden Empfänger einzeln versendet, anderenfalls wird eine einzige Mail versendet, bei der alle Empfänger im entsprechenden Adressfeld stehen.';
 
@@ -722,6 +725,9 @@ $_lang['setting_unauthorized_page_err'] = 'Bitte geben Sie eine Ressourcen-ID f�
 
 $_lang['setting_upload_files'] = 'Hochladbare Dateitypen';
 $_lang['setting_upload_files_desc'] = 'Hier können Sie eine Liste von Dateitypen eingeben, die über den Ressourcen-Manager in das Verzeichnis assets/files/ hochgeladen werden können. Bitte geben Sie die Dateiendungen der Dateitypen ein, durch Kommata getrennt.';
+
+$_lang['setting_upload_file_exists'] = 'Überprüfen, ob die hochgeladene Datei existiert';
+$_lang['setting_upload_file_exists_desc'] = 'Wenn diese Einstellung aktiviert ist, wird ein Fehler beim Hochladen einer Datei mit gleichem Namen angezeigt. Wenn sie deaktiviert ist, wird die vorhandene Datei ohne Nachfrage durch die neue Datei ersetzt.';
 
 $_lang['setting_upload_images'] = 'Hochladbare Bild-Dateitypen';
 $_lang['setting_upload_images_desc'] = 'Hier können Sie eine Liste von Dateitypen eingeben, die über den Ressourcen-Manager in das Verzeichnis assets/images/ hochgeladen werden können. Bitte geben Sie die Dateiendungen der Bildtypen ein, durch Kommata getrennt.';

@@ -389,6 +389,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'ضبط منفذ المخدم SMTP ال�
 $_lang['setting_mail_smtp_prefix'] = 'بادئة اتصال SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'ضبط بادئة الاتصال. الخيارات هي ""،"ssl" أو "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'يوفر قدرة الحصول على معالجة الحقل TO لرسائل البريد الإلكتروني المستقلة، بدلا من الإرسال إلى كل العناوين TO.';
 
@@ -727,6 +730,9 @@ $_lang['setting_unauthorized_page_err'] = 'الرجاء تحديد معرف مص
 
 $_lang['setting_upload_files'] = 'أنواع ملفات قابلة للرفع';
 $_lang['setting_upload_files_desc'] = 'هنا يمكنك إدخال قائمة من الملفات التي يمكن أن ترفع إلى \'assets/files/\' باستخدام مدير المصدر. الرجاء إدخال الامتدادات لأنواع الملفات، مفصولة بفواصل.';
+
+$_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
 $_lang['setting_upload_images'] = 'أ،واع الصور القابلة للرفع';
 $_lang['setting_upload_images_desc'] = 'هنا يمكنك إدخال قائمة من الملفات التي يمكن أن ترفع إلى \'assets/images/\' باستخدام مدير المصدر. الرجاء إدخال الامتدادات لأنواع الصور، مفصولة بفواصل.';

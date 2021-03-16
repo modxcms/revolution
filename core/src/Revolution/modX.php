@@ -1573,7 +1573,7 @@ class modX extends xPDO {
             } elseif (strpos(strtolower($src), "<script") !== false) {
                 $this->sjscripts[count($this->sjscripts)]= $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script type="text/javascript" src="' . $src . '"></script>';
+                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
             }
         }
     }
@@ -1596,7 +1596,7 @@ class modX extends xPDO {
         } elseif (strpos(strtolower($src), "<script") !== false) {
             $this->jscripts[count($this->jscripts)]= $src;
         } else {
-            $this->jscripts[count($this->jscripts)]= '<script type="text/javascript" src="' . $src . '"></script>';
+            $this->jscripts[count($this->jscripts)]= '<script src="' . $src . '"></script>';
         }
     }
 

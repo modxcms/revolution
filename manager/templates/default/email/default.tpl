@@ -35,7 +35,7 @@
                 {if $_config.login_logo}
                     <img src="{$_config.login_logo}" alt="{$_config.site_name}"/>
                 {else}
-                    <img src="{$_config.url_scheme}{$_config.http_host}{$_config.manager_url}templates/default/images/modx-logo-color.png" alt="{$_config.site_name}"/>
+                    <img src="{$_config.url_scheme}{$_config.http_host}{$_config.manager_url}templates/default/images/modx-logo-color.svg" alt="{$_config.site_name}"/>
                 {/if}
             </a>
         </td>

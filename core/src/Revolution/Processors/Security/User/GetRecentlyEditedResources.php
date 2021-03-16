@@ -145,15 +145,14 @@ class GetRecentlyEditedResources extends GetListProcessor
                 ],
             ];
         }
+
         $row['menu'][] = '-';
         $row['menu'][] = [
-            'text' => $this->modx->lexicon('resource_preview'),
-            'params' => [
-                'url' => $this->modx->makeUrl($resource->get('id'), null, '', 'full'),
-                'type' => 'open',
-            ],
+            'text'    => $this->modx->lexicon('resource_preview'),
             'handler' => 'this.preview',
         ];
+
+        $row['link'] = $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'));
 
         return $row;
     }

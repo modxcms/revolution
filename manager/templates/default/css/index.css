@@ -22161,7 +22161,6 @@ ul.x-tab-strip-bottom {
 #helpBanner {
   margin-top: 1.5em;
   min-height: 112px;
-  background-image: url("../images/modx-logo-color.png");
   background-image: url("../images/modx-logo-color.svg"), none;
   background-repeat: no-repeat;
   background-attachment: none;
@@ -22250,6 +22249,19 @@ ul.x-tab-strip-bottom {
     background: #6CB24A;
     box-shadow: 0 0 0 1px #6CB24A;
     color: #FFF; }
+
+#changelog-tab p {
+  margin-bottom: 0.3rem; }
+
+#changelog-tab h1 {
+  color: #515151; }
+
+#changelog-tab h2 {
+  font-weight: 700;
+  margin-top: 1rem; }
+
+#changelog-tab ul {
+  margin-bottom: 1rem; }
 
 body {
   color: black;

@@ -5,7 +5,7 @@
     tvtype="{$tv->type}"
 />
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
@@ -13,7 +13,7 @@ Ext.onReady(function() {
     {/literal}
         xtype: 'numberfield'
         ,applyTo: 'tv{$tv->id}'
-        ,width: 400
+        ,width: '99%'
         ,enableKeyEvents: true
         ,autoStripChars: true
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}

@@ -13,7 +13,6 @@ namespace MODX\Revolution\Tests\Model\Request;
 
 
 use MODX\Revolution\Error\modError;
-use MODX\Revolution\modAction;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\modRequest;
 use MODX\Revolution\MODxTestCase;

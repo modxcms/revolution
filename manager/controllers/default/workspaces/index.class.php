@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\modCacheManager;
 use MODX\Revolution\modManagerController;
 use MODX\Revolution\Transport\modTransportProvider;
 

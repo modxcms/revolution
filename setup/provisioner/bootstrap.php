@@ -9,24 +9,27 @@
  */
 
 define('MODX_SETUP_INTERFACE_IS_CLI', (PHP_SAPI === 'cli'));
-define('MODX_SETUP_PHP_VERSION', phpversion());
 
-$setupPath= strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/';
+$setupPath = str_replace('\\', '/', realpath(dirname(__FILE__, 2))) . '/';
 define('MODX_SETUP_PATH', $setupPath);
-$installPath= strtr(realpath(dirname(dirname(__DIR__))), '\\', '/') . '/';
+$installPath = str_replace('\\', '/', realpath(dirname(__DIR__, 2))) . '/';
 define('MODX_INSTALL_PATH', $installPath);
 
 if (!MODX_SETUP_INTERFACE_IS_CLI) {
-    $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
-    $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
+    $https = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? $_SERVER['HTTPS'] ?? 'off';
+    $https = in_array(strtolower((string)$https), ['https', 'on', 'ssl', '1'], true);
+
+    $installBaseUrl = $https ? 'https://' : 'http://';
     $installBaseUrl .= $_SERVER['HTTP_HOST'];
-    if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] != '' && $_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
-    $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
+    if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] !== '' && $_SERVER['SERVER_PORT'] !== 80) {
+        $installBaseUrl = str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+    }
+    $installBaseUrl .= ($_SERVER['SERVER_PORT'] === 80 || ($https !== false || strtolower($https) === 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
     $installBaseUrl .= $_SERVER['SCRIPT_NAME'];
     $installBaseUrl = htmlspecialchars($installBaseUrl, ENT_QUOTES, 'utf-8');
     define('MODX_SETUP_URL', $installBaseUrl);
 } else {
-    define('MODX_SETUP_URL','/');
+    define('MODX_SETUP_URL', '/');
 }
 
 /*
@@ -35,13 +38,13 @@ if (!MODX_SETUP_INTERFACE_IS_CLI) {
 $unsatisfiedRequirementsErrors = [];
 
 /* Load and check PHP and installed extensions */
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'requirements.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'requirements.php';
 
-$phpVersionSatisfiesRequirement = version_compare(MODX_SETUP_PHP_VERSION, MODX_MINIMUM_REQUIRED_PHP_VERSION, '>=');
+$phpVersionSatisfiesRequirement = version_compare(PHP_VERSION, MODX_MINIMUM_REQUIRED_PHP_VERSION, '>=');
 if (!$phpVersionSatisfiesRequirement) {
     $unsatisfiedRequirementsErrors[] = [
         'title' => 'Wrong PHP Version!',
-        'description' => sprintf('You\'re using PHP version %s, and MODX requires version %s or higher.', MODX_SETUP_PHP_VERSION, MODX_MINIMUM_REQUIRED_PHP_VERSION),
+        'description' => sprintf('You\'re using PHP version %s, and MODX requires version %s or higher.', PHP_VERSION, MODX_MINIMUM_REQUIRED_PHP_VERSION),
     ];
 }
 
@@ -54,7 +57,7 @@ if (!empty($unsatisfiedExtensionRequirements)) {
     foreach ($unsatisfiedExtensionRequirements as $unsatisfiedExtensionRequirement) {
         $unsatisfiedRequirementsErrors[] = [
             'title' => sprintf('MODX requires the PHP %s extension', $unsatisfiedExtensionRequirement),
-            'description' => sprintf('You\'re PHP configuration at version %s does not appear to have this extension enabled.', MODX_SETUP_PHP_VERSION),
+            'description' => sprintf('You\'re PHP configuration at version %s does not appear to have this extension enabled.', PHP_VERSION),
         ];
     }
 }

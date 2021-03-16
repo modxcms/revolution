@@ -52,6 +52,7 @@ class modTemplateVar extends modElement
     public $bindings = [
         'FILE',
         'CHUNK',
+        'SNIPPET',
         'DOCUMENT',
         'RESOURCE',
         'SELECT',
@@ -832,12 +833,13 @@ class modTemplateVar extends modElement
         $nvalue = trim($value);
         $cmd = false;
         $param = '';
+        $properties = [];
         if (substr($nvalue, 0, 1) == '@') {
-            list($cmd, $param) = $this->parseBinding($nvalue);
+            list($cmd, $param, $properties) = $this->parseBinding($nvalue);
             $cmd = trim($cmd);
         }
 
-        return ['cmd' => $cmd, 'param' => $param];
+        return ['cmd' => $cmd, 'param' => $param, 'properties' => $properties];
     }
 
     /**
@@ -870,6 +872,7 @@ class modTemplateVar extends modElement
         }
         $cmd = $bdata['cmd'];
         $param = !empty($bdata['param']) ? $bdata['param'] : null;
+        $properties = !empty($bdata['properties']) ? $bdata['properties'] : [];
         switch ($cmd) {
             case 'FILE':
                 if ($preProcess) {
@@ -879,9 +882,15 @@ class modTemplateVar extends modElement
 
             case 'CHUNK': /* retrieve a chunk and process it's content */
                 if ($preProcess) {
-                    $output = $this->xpdo->getChunk($param);
+                    $output = $this->xpdo->getChunk($param, $properties);
                 }
                 break;
+                
+            case 'SNIPPET':
+                if ($preProcess) {
+                    $output = $this->xpdo->runSnippet($param, $properties);
+                }
+                break;                
 
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
@@ -984,13 +993,33 @@ class modTemplateVar extends modElement
     public function parseBinding($binding_string)
     {
         $match = [];
+        $match2 = [];
         $binding_string = trim($binding_string);
         $regexp = '/@(' . implode('|', $this->bindings) . ')\s*(.*)/is'; /* Split binding on whitespace */
+        
         if (preg_match($regexp, $binding_string, $match)) {
             /* We can't return the match array directly because the first element is the whole string */
+            
+            $regexp2 = '/(\S+)\s+(.+)/is'; /* Split binding on second whitespace to get properties */
+            
+            $properties = [];
+            if (preg_match($regexp2, $match[2] , $match2)) {
+                if (isset($match2[2])) {
+                    $props = json_decode($match2[2],true);
+                    $valid = json_last_error() === JSON_ERROR_NONE;
+                    if ($valid && is_array($props)){
+                        $properties = $props;
+                        $match[2] = $match2[1];
+                    } else {
+                        $this->xpdo->log(modX::LOG_LEVEL_ERROR, 'modTemplateVar::parseBinding - third parameter is invalid JSON :' . $binding_string);
+                    }
+                }
+            }
+            
             $binding_array = [
                 strtoupper($match[1]),
                 trim($match[2]),
+                $properties
             ]; /* Make command uppercase */
 
             return $binding_array;

@@ -1,9 +1,9 @@
 {if $showHidden|default}
-<script type="text/javascript">
+<script>
     MODx.showHidden = true;
 </script>
 {/if}
-<script type="text/javascript" src="assets/js/sections/database.js"></script>
+<script src="assets/js/sections/database.js"></script>
 <form id="install" action="?action=database" method="post">
 
     <h2 class="title">{$_lang.connection_connection_and_login_information}</h2>

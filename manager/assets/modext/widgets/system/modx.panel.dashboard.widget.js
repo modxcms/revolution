@@ -335,6 +335,7 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-dashboard-widget-dashboards'
+        ,showActionsColumn: false
         ,url: MODx.config.connector_url
         ,action: 'System/Dashboard/GetList'
         ,fields: ['id','name','description']

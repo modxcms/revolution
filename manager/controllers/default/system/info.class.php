@@ -64,7 +64,7 @@ class SystemInfoManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/{$this->modx->getOption('dbtype')}/modx.grid.databasetables.js");
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.active.js');
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/info.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-system-info"

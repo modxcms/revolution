@@ -36,7 +36,7 @@ class BrowserManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         /* invoke OnRichTextBrowserInit */
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
 MODx.siteId = "'.$this->modx->user->getUserToken($this->modx->context->get('key')).'";
 MODx.ctx = "'.$this->ctx.'";
 </script>');

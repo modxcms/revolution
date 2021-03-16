@@ -1,4 +1,4 @@
-<script type="text/javascript" src="assets/js/sections/summary.js"></script>
+<script src="assets/js/sections/summary.js"></script>
 <form id="install" action="?action=summary" method="post">
     <h2>{$_lang.install_summary}</h2>
     {if $failed}
