@@ -1177,6 +1177,11 @@ class modElement extends modAccessibleSimpleObject
                         return $source->getBaseUrl().$previewfile;
                     }
                 }
+            } else {
+                // Return "as is" if not assigned to a media source
+                if (file_exists(MODX_BASE_PATH.$previewfile)) {
+                    return MODX_BASE_URL.$previewfile;
+                }
             }
 
             if (file_exists($previewfile)) {
