@@ -417,6 +417,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'डिफ़ॉल्ट SMTP सर्
 $_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
 $_lang['setting_mail_smtp_prefix_desc'] = 'कनेक्शन उपसर्ग सेट करता है। विकल्प हैं "", "ssl" या "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'बजाय पतों पर पूरे करने के लिए भेजने के लिए फील्ड प्रक्रिया व्यक्तिगत ईमेल करने की क्षमता प्रदान करता है।';
 

@@ -417,6 +417,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Anger SMTP-serverns standardport.';
 $_lang['setting_mail_smtp_prefix'] = 'Anslutningsprefix för SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Anger anslutningsprefixet. Möjliga värden är "", "ssl" eller "tls".';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP individuella meddelanden';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Ger möjligheten att låta till-fältet processas som individuella meddelanden istället för att sända till hela TO-adressen.';
 

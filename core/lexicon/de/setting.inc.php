@@ -417,6 +417,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Legt den Standard-SMTP-Port fest.';
 $_lang['setting_mail_smtp_prefix'] = 'SMTP-Verbindungs-Präfix';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Legt den Verbindungs-Präfix fest. Möglich sind "", "ssl" oder "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'TLS-Verschlüsselung automatisch aktivieren, wenn ein Server dies unterstützt, auch wenn die "SMTP-Verschlüsselung" nicht auf "tls" eingestellt ist.';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP: Mails einzeln versenden';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden Mails an jeden Empfänger einzeln versendet, anderenfalls wird eine einzige Mail versendet, bei der alle Empfänger im entsprechenden Adressfeld stehen.';
 

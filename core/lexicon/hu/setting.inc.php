@@ -417,6 +417,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
 $_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Sets connection prefix. Options are "", "ssl" or "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP önműködő TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Az azt támogató kiszolgálón a TLS titkosítás önműködő engedélyezése még akkor is, ha az "SMTP titkosítás" nincs "tls" értékre állítva.';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Provides the ability to have the TO field process individual emails, instead of sending to entire TO addresses.';
 

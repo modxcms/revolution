@@ -422,6 +422,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'ضبط منفذ المخدم SMTP ال�
 $_lang['setting_mail_smtp_prefix'] = 'بادئة اتصال SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'ضبط بادئة الاتصال. الخيارات هي ""،"ssl" أو "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'يوفر قدرة الحصول على معالجة الحقل TO لرسائل البريد الإلكتروني المستقلة، بدلا من الإرسال إلى كل العناوين TO.';
 
