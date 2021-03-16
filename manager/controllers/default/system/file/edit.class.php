@@ -65,7 +65,7 @@ class SystemFileEditManagerController extends modManagerController
             'record' => $this->fileRecord,
             'canSave' => (int)$this->canSave,
         ]);
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load(' . $data . ');});</script>');
+        $this->addHtml('<script>Ext.onReady(function() {MODx.load(' . $data . ');});</script>');
     }
 
 

@@ -85,10 +85,10 @@ class WelcomeManagerController extends modManagerController
                 ['new_widgets' => $new_widgets]
             )
         ];
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load(' . json_encode($obj) . ')});</script>');
+        $this->addHtml('<script>Ext.onReady(function() {MODx.load(' . json_encode($obj) . ')});</script>');
         if ($this->showWelcomeScreen) {
             $url = $this->modx->getOption('welcome_screen_url', null, 'http://misc.modx.com/revolution/welcome.20.html');
-            $this->addHtml('<script type="text/javascript">Ext.onReady(function() { MODx.loadWelcomePanel("' . htmlspecialchars($url) . '"); });</script>');
+            $this->addHtml('<script>Ext.onReady(function() { MODx.loadWelcomePanel("' . htmlspecialchars($url) . '"); });</script>');
         }
     }
 

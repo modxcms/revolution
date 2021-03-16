@@ -128,7 +128,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
             'xtype' => 'modx-page-dashboard-update',
             'record' => $this->dashboardArray,
         ]);
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function(){MODx.load(' . $data . ')});</script>');
+        $this->addHtml('<script>Ext.onReady(function(){MODx.load(' . $data . ')});</script>');
     }
 
     /**

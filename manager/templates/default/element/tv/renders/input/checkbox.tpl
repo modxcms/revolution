@@ -1,6 +1,6 @@
 <div id="tv{$tv->id}-cb"></div>
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {

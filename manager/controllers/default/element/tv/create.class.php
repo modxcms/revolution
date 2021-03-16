@@ -47,7 +47,7 @@ class ElementTVCreateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.tv.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/tv/create.js');
         $this->addHtml('
-<script type="text/javascript">
+<script>
 // <![CDATA[
 MODx.onTVFormRender = "'.$this->onTVFormRender.'";
 Ext.onReady(function() {

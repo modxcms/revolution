@@ -12,7 +12,7 @@
     style="width: 283px;"
 />
 
-<script type="text/javascript">
+<script>
 // <![CDATA[
 Ext.onReady(function() {
     MODx.makeDroppable(Ext.get('tv{$tv->id}'));

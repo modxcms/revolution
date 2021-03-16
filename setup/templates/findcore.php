@@ -45,8 +45,8 @@ if ($posted) {
     <link rel="stylesheet" href="assets/css/print.css" type="text/css" media="print" />
 
     <link href="assets/css/style.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="assets/js/ext-core.js"></script>
-    <script type="text/javascript" src="assets/js/modx.setup.js"></script>
+    <script src="assets/js/ext-core.js"></script>
+    <script src="assets/js/modx.setup.js"></script>
 </head>
 
 <body>
