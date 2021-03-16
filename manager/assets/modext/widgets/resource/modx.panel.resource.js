@@ -6,7 +6,7 @@ MODx.panel.Resource = function(config) {
         url: MODx.config.connector_url
         ,baseParams: {}
         ,id: 'modx-panel-resource'
-        ,class_key: 'modDocument'
+        ,class_key: 'MODX\\Revolution\\modDocument'
         ,resource: ''
         ,bodyStyle: ''
         ,cls: 'container form-with-labels'
@@ -34,7 +34,7 @@ MODx.panel.Resource = function(config) {
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     initialized: false
-    ,defaultClassKey: 'modDocument'
+    ,defaultClassKey: 'MODX\\Revolution\\modDocument'
     ,classLexiconKey: 'document'
     ,rteElements: 'ta'
     ,rteLoaded: false
@@ -502,7 +502,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             xtype: 'modx-panel-resource-tv'
             ,collapsed: false
             ,resource: config.resource
-            ,class_key: config.record.class_key || 'modDocument'
+            ,class_key: config.record.class_key || 'MODX\\Revolution\\modDocument'
             ,template: config.record.template
             ,anchor: '100%'
             ,border: true
@@ -946,7 +946,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,hiddenName: 'class_key'
             ,id: 'modx-resource-class-key'
             ,allowBlank: false
-            ,value: config.record.class_key || 'modDocument'
+            ,value: config.record.class_key || 'MODX\\Revolution\\modDocument'
             ,anchor: '100%'
         },{
             xtype: 'modx-combo-content-type'

@@ -9,13 +9,13 @@ MODx.panel.WebLink = function(config) {
     config.default_title = config.default_title || _('weblink_new');
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
-        ,class_key: 'modWebLink'
+        ,class_key: 'MODX\\Revolution\\modWebLink'
         ,items: this.getFields(config)
     });
     MODx.panel.WebLink.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.WebLink,MODx.panel.Resource,{
-    defaultClassKey: 'modWebLink'
+    defaultClassKey: 'MODX\\Revolution\\modWebLink'
     ,classLexiconKey: 'weblink'
     ,rteElements: false
     ,contentField: 'modx-weblink-content'
