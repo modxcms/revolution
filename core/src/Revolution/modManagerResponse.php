@@ -102,6 +102,7 @@ class modManagerResponse extends modResponse
                 'namespace' => $this->namespace,
                 'namespace_path' => $this->namespacePath,
                 'action' => $this->route,
+                'controller' => $this->route,
             ]);
             $controller->setProperties(array_merge($_GET,$_POST));
             $controller->initialize();
