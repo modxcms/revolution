@@ -641,7 +641,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var at = this.cm.activeNode.attributes;
         var parent = itm.usePk ? itm.usePk : at.pk;
 
-        if(at.enable_tpl_picker_in_tree) {
+        if(MODx.config.enable_template_picker_in_tree) {
             MODx.createResource({
                 'class_key': itm.classKey,
                 'parent': parent,

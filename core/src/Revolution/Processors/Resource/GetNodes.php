@@ -538,7 +538,6 @@ class GetNodes extends Processor
             'childCount' => $resource->get('childrenCount'),
             'hasChildren' => $hasChildren,
             'hide_children_in_tree' => $resource->hide_children_in_tree,
-            'enable_tpl_picker_in_tree' => (boolean)$this->modx->getOption('enable_template_picker_in_tree', null, false),
             'qtip' => $qtip,
             'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), $sessionEnabled, 'full', ['xhtml_urls' => false]) : '',
             'page' => empty($noHref) ? '?a=' . (!empty($this->permissions['edit_document']) ? 'resource/update' : 'resource/data') . '&id=' . $resource->id : '',
