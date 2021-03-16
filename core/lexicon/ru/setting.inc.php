@@ -384,6 +384,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Укажите порт SMTP серве
 $_lang['setting_mail_smtp_prefix'] = 'SMTP префикс для соединений';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Префикс соединений. Доступные варианты: «», «ssl», «tls»';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP посылать по одному';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Предоставляет возможность отправлять сообщения адресатам из поля «to» по одному, вместо разовой отправки на все адреса.';
 
@@ -721,7 +724,7 @@ $_lang['setting_unauthorized_page_desc'] = 'Введите ID ресурса, к
 $_lang['setting_unauthorized_page_err'] = 'Пожалуйста укажите ID ресурса, который будет являться страницей ошибки 401 «Доступ запрещен».';
 
 $_lang['setting_upload_files'] = 'Разрешённые к загрузке файлы';
-$_lang['setting_upload_files_desc'] = 'Здесь вы можете указать список типов файлов, которые можно загружать в каталог "assets/files/", используя диспетчер файлов. Пожалуйста, введите расширения файлов, разделяя их запятыми.';
+$_lang['setting_upload_files_desc'] = 'Здесь вы можете указать список типов файлов, которые можно загружать, используя диспетчер файлов. Пожалуйста, введите расширения файлов, разделяя их запятыми.';
 
 $_lang['setting_upload_file_exists'] = 'Проверять файлы на существование при загрузке';
 $_lang['setting_upload_file_exists_desc'] = 'Если включено, при загрузке файла с таким же именем будет показано сообщение с ошибкой. Если отключено, то существующий файл будет перезаписан новым.';

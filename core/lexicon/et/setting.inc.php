@@ -385,6 +385,9 @@ $_lang['setting_mail_smtp_port_desc'] = 'Vaikimisi SMTP serveri port.';
 $_lang['setting_mail_smtp_prefix'] = 'SMTP Ühenduse Prefix';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Määrab ühenduse prefix-i. Valikud on "", "ssl" või "tls"';
 
+$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Võimaldab To välja eraldi protsessimist individiuaalselemailil, selle asemel, et saata kogu TO aadressitele';
 
