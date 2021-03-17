@@ -58,6 +58,7 @@ jobs:
         run: core/vendor/bin/phpunit  --enforce-time-limit -c ./_build/test/phpunit.xml
 
   lint:
+    name: Editorconfig Check
     runs-on: ubuntu-latest
     strategy:
       matrix:
