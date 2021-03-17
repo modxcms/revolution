@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'Адбылася невядомая памы
 $_lang['file_folder_err_rename_protected'] = 'Перайменаванне абароненай сістэмнай дырэкторыі не дапускаецца.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Выдаленне абароненага сістэмнага каталога не дапускаецца.';
+$_lang['file_folder_err_update'] = 'An error occurred while trying to update the directory.';
 $_lang['file_folder_parent'] = 'Бацькоўскі каталог';
 $_lang['file_folder_remove'] = 'Выдаліць каталог';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
