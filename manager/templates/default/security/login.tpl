@@ -44,9 +44,9 @@
 
                         <p class="lead">{$_lang.login_note_passwordless}</p>
 
-                        {if $error_message}
+                        {if $error_message|default}
                             <p class="is-error">{$error_message|default}</p>
-                        {elseif $success_message}
+                        {elseif $success_message|default}
                             <p class="is-success">{$success_message|default}</p>
                         {/if}
 
@@ -66,7 +66,7 @@
 
                 {else}
 
-                    {if !$_post.modhash}
+                    {if !$_post.modhash|default}
                         <form id="modx-login-form" class="c-form can-toggle {if $_post.username_reset|default}is-hidden{/if}" action="" method="post">
                             <input type="hidden" name="login_context" value="mgr">
                             <input type="hidden" name="modhash" value="{$modhash|default}">
@@ -74,9 +74,9 @@
 
                             <p class="lead">{$_lang.login_note}</p>
 
-                            {if $error_message}
+                            {if $error_message|default}
                                 <p class="is-error">{$error_message|default}</p>
-                            {elseif $success_message}
+                            {elseif $success_message|default}
                                 <p class="is-success">{$success_message|default}</p>
                             {/if}
 
@@ -146,9 +146,9 @@
                             <input type="hidden" name="modhash" value="{$_post.modhash|default}">
                             <p class="lead">{$_lang.login_new_password_note}</p>
 
-                            {if $error_message}
+                            {if $error_message|default}
                                 <p class="is-error">{$error_message|default}</p>
-                            {elseif $success_message}
+                            {elseif $success_message|default}
                                 <p class="is-success">{$success_message|default}</p>
                             {/if}
 
@@ -179,7 +179,7 @@
             <footer class="l-footer">
                 <div class="c-languageselect">
                     <select name="manager_language" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$_config.cultureKey}">
-                        {foreach from=$languages key=language item=native}
+                        {foreach $languages as $language => $native}
                             <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$native|capitalize}</option>
                         {/foreach}
                     </select>
