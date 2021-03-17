@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'Beim Versuch, das Verzeichnis umzubenennen, 
 $_lang['file_folder_err_rename_protected'] = 'Das Umbenennen des geschützten Systemverzeichnisses ist nicht erlaubt.';
 $_lang['file_folder_err_remove'] = 'Beim Versuch, das Verzeichnis zu löschen, ist ein Fehler aufgetreten.';
 $_lang['file_folder_err_remove_protected'] = 'Das Löschen des geschützten Systemverzeichnisses ist nicht erlaubt.';
+$_lang['file_folder_err_update'] = 'Beim Versuch, das Verzeichnis zu bearbeiten, ist ein Fehler aufgetreten.';
 $_lang['file_folder_parent'] = 'Elternverzeichnis';
 $_lang['file_folder_remove'] = 'Verzeichnis löschen';
 $_lang['file_folder_remove_confirm'] = 'Sind Sie sicher, dass Sie das Verzeichnis "[[+directory]]" löschen möchten?<br />Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
