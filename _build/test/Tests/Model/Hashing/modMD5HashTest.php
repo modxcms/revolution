@@ -27,13 +27,13 @@ use MODX\Revolution\MODxTestCase;
  */
 class modMD5HashTest extends MODxTestCase {
     /**
-     * Test the modMD5->hash() method.
-     *
-     * @dataProvider providerHash
-     * @param $string The string to create a hash of.
-     * @param $options The options for the hash process.
-     * @param $expected The expected hash value.
-     */
+    * Test the modMD5->hash() method.
+    *
+    * @dataProvider providerHash
+    * @param $string The string to create a hash of.
+    * @param $options The options for the hash process.
+    * @param $expected The expected hash value.
+    */
     public function testHash($string, $options, $expected) {
         $this->modx->getService('hashing', 'hashing.modHashing');
         /** @var modMD5 $md5 */

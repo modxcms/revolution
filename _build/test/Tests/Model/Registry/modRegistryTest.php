@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Registry;
 
@@ -36,14 +36,14 @@ class modRegistryTest extends MODxTestCase {
     }
 
     /**
-     * Test the modRegistry->getRegister() method.
-     *
-     * @dataProvider providerGetRegister
-     * @param boolean $shouldPass Indicates if the test is expected to pass.
-     * @param string $name The name or key of the register to get.
-     * @param string $class The name of the modRegister class implementation.
-     * @param array $options An array of options for the modRegister instance to use if not already created.
-     */
+    * Test the modRegistry->getRegister() method.
+    *
+    * @dataProvider providerGetRegister
+    * @param boolean $shouldPass Indicates if the test is expected to pass.
+    * @param string $name The name or key of the register to get.
+    * @param string $class The name of the modRegister class implementation.
+    * @param array $options An array of options for the modRegister instance to use if not already created.
+    */
     public function testGetRegister($shouldPass, $name, $class, $options) {
         $this->modx->registry->getRegister($name, $class, $options);
         $actualClass = $this->modx->loadClass($class);
@@ -68,14 +68,14 @@ class modRegistryTest extends MODxTestCase {
     }
 
     /**
-     * Test the modRegistry->addRegister() method.
-     *
-     * @dataProvider providerAddRegister
-     * @param boolean $shouldPass Indicates if the test is expected to pass.
-     * @param string $name The name or key of the register to add.
-     * @param string $class The name of the modRegister class implementation.
-     * @param array $options An array of options for the modRegister instance to use if not already created.
-     */
+    * Test the modRegistry->addRegister() method.
+    *
+    * @dataProvider providerAddRegister
+    * @param boolean $shouldPass Indicates if the test is expected to pass.
+    * @param string $name The name or key of the register to add.
+    * @param string $class The name of the modRegister class implementation.
+    * @param array $options An array of options for the modRegister instance to use if not already created.
+    */
     public function testAddRegister($shouldPass, $name, $class, $options) {
         $this->modx->registry->addRegister($name, $class, $options);
         $actualClass = $this->modx->loadClass($class);
@@ -100,11 +100,11 @@ class modRegistryTest extends MODxTestCase {
     }
 
     /**
-     * Test modRegistry->removeRegister() method.
-     *
-     * @dataProvider providerRemoveRegister
-     * @param string $name The name or key of the register instance to remove.
-     */
+    * Test modRegistry->removeRegister() method.
+    *
+    * @dataProvider providerRemoveRegister
+    * @param string $name The name or key of the register instance to remove.
+    */
     public function testRemoveRegister($name) {
         $this->modx->registry->removeRegister($name);
         $this->assertNotInstanceOf(modRegister::class, $this->modx->registry->$name, "Could not remove register with key {$name}");

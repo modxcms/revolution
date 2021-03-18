@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Element;
 
@@ -35,10 +35,10 @@ use MODX\Revolution\Processors\Element\Chunk\Update;
  */
 class ChunkProcessorsTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->modx->lexicon->load('chunk');
@@ -55,10 +55,10 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Cleanup data after each test.
-     *
-     * @after
-     */
+    * Cleanup data after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $chunks = $this->modx->getCollection(modChunk::class, ['name:LIKE' => '%UnitTest%']);
@@ -76,13 +76,13 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/chunk/create processor, which creates a Chunk
-     *
-     * @param boolean $shouldPass
-     * @param string $chunkPk
-     * @param array $properties
-     * @dataProvider providerChunkCreate
-     */
+    * Tests the element/chunk/create processor, which creates a Chunk
+    *
+    * @param boolean $shouldPass
+    * @param string $chunkPk
+    * @param array $properties
+    * @dataProvider providerChunkCreate
+    */
     public function testChunkCreate($shouldPass,$chunkPk,array $properties = []) {
         $properties['name'] = $chunkPk;
         $result = $this->modx->runProcessor(Create::class,$properties);
@@ -96,9 +96,9 @@ class ChunkProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not create Chunk: `'.$chunkPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/chunk/create processor test.
-     * @return array
-     */
+    * Data provider for element/chunk/create processor test.
+    * @return array
+    */
     public function providerChunkCreate() {
         return [
             /* pass: straight up chunk */
@@ -129,14 +129,14 @@ class ChunkProcessorsTest extends MODxTestCase {
 
 
     /**
-     * Tests the element/chunk/duplicate processor, which duplicates a Chunk
-     *
-     * @param boolean $shouldPass
-     * @param string $chunkPk
-     * @param string $newName
-     * @return boolean
-     * @dataProvider providerChunkDuplicate
-     */
+    * Tests the element/chunk/duplicate processor, which duplicates a Chunk
+    *
+    * @param boolean $shouldPass
+    * @param string $chunkPk
+    * @param string $newName
+    * @return boolean
+    * @dataProvider providerChunkDuplicate
+    */
     public function testChunkDuplicate($shouldPass,$chunkPk,$newName) {
         /** @var modChunk $chunk */
         $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
@@ -169,9 +169,9 @@ class ChunkProcessorsTest extends MODxTestCase {
         return $passed;
     }
     /**
-     * Data provider for element/chunk/duplicate processor test.
-     * @return array
-     */
+    * Data provider for element/chunk/duplicate processor test.
+    * @return array
+    */
     public function providerChunkDuplicate() {
         return [
             [true,'UnitTestChunk','UnitTestChunk3'], /* pass: standard name */
@@ -182,15 +182,15 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to update a chunk
-     *
-     * @param boolean $shouldPass
-     * @param string $chunkPk
-     * @param array $properties
-     * @return boolean
-     * @dataProvider providerChunkUpdate
-     * @depends testChunkCreate
-     */
+    * Attempts to update a chunk
+    *
+    * @param boolean $shouldPass
+    * @param string $chunkPk
+    * @param array $properties
+    * @return boolean
+    * @dataProvider providerChunkUpdate
+    * @depends testChunkCreate
+    */
     public function testChunkUpdate($shouldPass,$chunkPk,array $properties = []) {
         /** @var modChunk $chunk */
         $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
@@ -216,9 +216,9 @@ class ChunkProcessorsTest extends MODxTestCase {
         return $passed;
     }
     /**
-     * Data provider for chunk/update processor test.
-     * @return array
-     */
+    * Data provider for chunk/update processor test.
+    * @return array
+    */
     public function providerChunkUpdate() {
         return [
             /* pass: change the description/locked */
@@ -265,9 +265,9 @@ class ChunkProcessorsTest extends MODxTestCase {
 
 
     /**
-     * Tests the element/chunk/get processor, which gets a Chunk
-     * @dataProvider providerChunkGet
-     */
+    * Tests the element/chunk/get processor, which gets a Chunk
+    * @dataProvider providerChunkGet
+    */
     public function testChunkGet($shouldPass,$chunkPk) {
         $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
         if (empty($chunk) && $shouldPass) {
@@ -286,8 +286,8 @@ class ChunkProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not get Chunk: `'.$chunkPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/chunk/create processor test.
-     */
+    * Data provider for element/chunk/create processor test.
+    */
     public function providerChunkGet() {
         return [
             [true,'UnitTestChunk'], /* pass: get chunk from create test */
@@ -297,10 +297,10 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to get a list of chunks
-     *
-     * @dataProvider providerChunkGetList
-     */
+    * Attempts to get a list of chunks
+    *
+    * @dataProvider providerChunkGetList
+    */
     public function testChunkGetList($shouldPass = true,$sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
         $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
@@ -315,8 +315,8 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Data provider for element/chunk/getlist processor test.
-     */
+    * Data provider for element/chunk/getlist processor test.
+    */
     public function providerChunkGetList() {
         return [
             [true,'name','ASC',5,0], /* pass: sort 5 by name asc */
@@ -327,9 +327,9 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/chunk/remove processor, which removes a Chunk
-     * @dataProvider providerChunkRemove
-     */
+    * Tests the element/chunk/remove processor, which removes a Chunk
+    * @dataProvider providerChunkRemove
+    */
     public function testChunkRemove($shouldPass,$chunkPk) {
         $chunk = $this->modx->getObject(modChunk::class, ['name' => $chunkPk]);
         if (empty($chunk) && $shouldPass) {
@@ -348,8 +348,8 @@ class ChunkProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not remove Chunk: `'.$chunkPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/chunk/remove processor test.
-     */
+    * Data provider for element/chunk/remove processor test.
+    */
     public function providerChunkRemove() {
         return [
             [true,'UnitTestChunk'], /* pass: remove chunk from create test */

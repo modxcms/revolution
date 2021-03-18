@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
@@ -32,10 +32,10 @@ class modSnippetTest extends MODxTestCase {
     public $snippet;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->snippet = $this->modx->newObject(modSnippet::class);
@@ -52,10 +52,10 @@ class modSnippetTest extends MODxTestCase {
         $this->modx->event= new modSystemEvent();
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->snippet->remove();
@@ -63,24 +63,24 @@ class modSnippetTest extends MODxTestCase {
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetContent() {
         $this->assertEquals($this->snippet->get('snippet'),$this->snippet->getContent());
     }
 
     /**
-     * @param string $content
-     * @dataProvider providerSetContent
-     * @depends testGetContent
-     */
+    * @param string $content
+    * @dataProvider providerSetContent
+    * @depends testGetContent
+    */
     public function testSetContent($content) {
         $this->snippet->setContent($content);
         $this->assertEquals($content,$this->snippet->get('snippet'));
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSetContent() {
         return [
             ['return "Goodbye.";'],
@@ -89,18 +89,18 @@ class modSnippetTest extends MODxTestCase {
 
 
     /**
-     * @param string $expected
-     * @param null|array $properties
-     * @dataProvider providerProcess
-     */
+    * @param string $expected
+    * @param null|array $properties
+    * @dataProvider providerProcess
+    */
     public function testProcess($expected,$properties = null) {
         $this->snippet->setCacheable(false);
         $result = $this->snippet->process($properties);
         $this->assertEquals($expected,$result,'After processing the snippet, the expected result was different than the actual result.');
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerProcess() {
         return [
             ['Hello, John'],

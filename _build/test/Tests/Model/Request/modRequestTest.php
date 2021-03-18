@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Request;
 
@@ -31,10 +31,10 @@ class modRequestTest extends MODxTestCase {
     public $request;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         /** @var modNamespace $namespace */
@@ -51,9 +51,9 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * @after
-     * @return void
-     */
+    * @after
+    * @return void
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
 
@@ -70,8 +70,8 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Test to ensure modRequest is properly setting request parameters
-     */
+    * Test to ensure modRequest is properly setting request parameters
+    */
     public function testConstructorRequestParameters() {
         $this->assertArrayHasKey('testPost',$this->request->parameters['POST'],'The modRequest constructor did not set the POST parameters properly.');
         $this->assertArrayHasKey('testGet',$this->request->parameters['GET'],'The modRequest constructor did not set the GET parameters properly.');
@@ -80,15 +80,15 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Test the getResourceMethod method for getting the proper request method
-     *
-     * @param string|int $expected
-     * @param string $requestKey
-     * @param string|int $requestValue
-     * @param string $paramAlias
-     * @param string $paramId
-     * @dataProvider providerGetResourceMethod
-     */
+    * Test the getResourceMethod method for getting the proper request method
+    *
+    * @param string|int $expected
+    * @param string $requestKey
+    * @param string|int $requestValue
+    * @param string $paramAlias
+    * @param string $paramId
+    * @dataProvider providerGetResourceMethod
+    */
     public function testGetResourceMethod($expected,$requestKey,$requestValue,$paramAlias = 'q',$paramId = 'id') {
         $_REQUEST[$requestKey] = $requestValue;
         $this->modx->setOption('request_param_alias',$paramAlias);
@@ -99,8 +99,8 @@ class modRequestTest extends MODxTestCase {
         unset($_REQUEST[$requestKey]);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetResourceMethod() {
         return [
             ['id','id',123],
@@ -112,16 +112,16 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Test the getResourceIdentifier method
-     *
-     * @param string|int $expected
-     * @param string $requestKey
-     * @param string|int $requestValue
-     * @param string $method
-     * @param string $paramAlias
-     * @param string $paramId
-     * @dataProvider providerGetResourceIdentifier
-     */
+    * Test the getResourceIdentifier method
+    *
+    * @param string|int $expected
+    * @param string $requestKey
+    * @param string|int $requestValue
+    * @param string $method
+    * @param string $paramAlias
+    * @param string $paramId
+    * @dataProvider providerGetResourceIdentifier
+    */
     public function testGetResourceIdentifier($expected,$requestKey,$requestValue,$method = 'alias',$paramAlias = 'q',$paramId = 'id') {
         $_REQUEST[$requestKey] = $requestValue;
         $this->modx->setOption('request_param_alias',$paramAlias);
@@ -133,8 +133,8 @@ class modRequestTest extends MODxTestCase {
         unset($_REQUEST[$requestKey]);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetResourceIdentifier() {
         return [
             ['test.html','q','test.html','alias'],
@@ -149,17 +149,17 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Test the loadErrorHandler method
-     */
+    * Test the loadErrorHandler method
+    */
     public function testLoadErrorHandler() {
         $this->request->loadErrorHandler();
         $this->assertInstanceOf(modError::class, $this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
     }
 
     /**
-     * Ensure that the retrieveRequest method properly gets the stored REQUEST object
-     * @return void
-     */
+    * Ensure that the retrieveRequest method properly gets the stored REQUEST object
+    * @return void
+    */
     public function testRetrieveRequest() {
         if (empty($_SESSION)) $_SESSION = [];
         $_SESSION['modx.request.unit-test'] = $_REQUEST;
@@ -170,10 +170,10 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Ensure that the preserveRequest method properly preserves the REQUEST object
-     * @return void
-     * @depends testRetrieveRequest
-     */
+    * Ensure that the preserveRequest method properly preserves the REQUEST object
+    * @return void
+    * @depends testRetrieveRequest
+    */
     public function testPreserveRequest() {
         if (empty($_SESSION)) $_SESSION = [];
         $this->request->preserveRequest('unit-test');
@@ -184,8 +184,8 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Test the getParameters method, getting various types of request data, and asking for specific keys
-     */
+    * Test the getParameters method, getting various types of request data, and asking for specific keys
+    */
     public function testGetParameters() {
         $parameters = $this->request->getParameters();
         $this->assertEquals(2,$parameters['testGet']);
@@ -204,13 +204,13 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Test that getClientIp properly returns possible values for the user's IP address, obtained in different ways
-     * due to proxy considerations.
-     *
-     * @param string $ip
-     * @param string $key
-     * @dataProvider providerGetClientIp
-     */
+    * Test that getClientIp properly returns possible values for the user's IP address, obtained in different ways
+    * due to proxy considerations.
+    *
+    * @param string $ip
+    * @param string $key
+    * @dataProvider providerGetClientIp
+    */
     public function testGetClientIp($ip,$key = 'REMOTE_ADDR') {
         $_SERVER[$key] = $ip;
         $ipArray = $this->request->getClientIp();
@@ -219,8 +219,8 @@ class modRequestTest extends MODxTestCase {
         unset($_SERVER[$key]);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetClientIp() {
         return [
             ['123.45.67.100','REMOTE_ADDR'],
@@ -238,12 +238,12 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * Tests the _cleanResourceIdentifier method
-     * @param string $identifier
-     * @param string $expected
-     * @param boolean $furls
-     * @dataProvider providerCleanResourceIdentifier
-     */
+    * Tests the _cleanResourceIdentifier method
+    * @param string $identifier
+    * @param string $expected
+    * @param boolean $furls
+    * @dataProvider providerCleanResourceIdentifier
+    */
     public function testCleanResourceIdentifier($identifier,$expected,$furls = true) {
         $this->modx->aliasMap[$identifier] = 998;
         $this->modx->resourceMethod = 'alias';
@@ -255,8 +255,8 @@ class modRequestTest extends MODxTestCase {
         unset($this->modx->aliasMap[$identifier]);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerCleanResourceIdentifier() {
         return [
             ['test.html','alias',true],
@@ -267,12 +267,12 @@ class modRequestTest extends MODxTestCase {
     }
 
     /**
-     * @param $value
-     * @param $expected
-     * @dataProvider providerSanitizeRequest
-     */
+    * @param $value
+    * @param $expected
+    * @dataProvider providerSanitizeRequest
+    */
     public function testSanitizeRequest($value,$expected) {
-	    $this->modx->setOption('allow_tags_in_post',false);
+        $this->modx->setOption('allow_tags_in_post',false);
         $_GET['test'] = $value;
         $_POST['test'] = $value;
         $_REQUEST['test'] = $value;
@@ -284,8 +284,8 @@ class modRequestTest extends MODxTestCase {
         $this->assertEquals($expected,$_COOKIE['test'],'Failed on COOKIE');
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSanitizeRequest() {
         return [
             ['A test string','A test string'],

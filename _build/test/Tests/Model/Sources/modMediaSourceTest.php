@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Sources;
 
@@ -17,23 +17,23 @@ use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 
 /**
- * Tests related to the modMediaSource class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Sources
- * @group modMediaSource
- */
+* Tests related to the modMediaSource class.
+*
+* @package modx-test
+* @subpackage modx
+* @group Model
+* @group Sources
+* @group modMediaSource
+*/
 class modMediaSourceTest extends MODxTestCase {
     /** @var modMediaSource $source */
     public $source;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
 
@@ -46,10 +46,10 @@ class modMediaSourceTest extends MODxTestCase {
         ],'',true);
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->source = null;

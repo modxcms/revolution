@@ -1,30 +1,30 @@
 @import "font-awesome/v4-shims";
 
 button {
-  margin: 2px; /* default in chrome, apply it to everybody */
+    margin: 2px; /* default in chrome, apply it to everybody */
 }
 
 /* btn style */
 .x-btn {
-  @extend %secondary-button;
+    @extend %secondary-button;
 
-  .x-panel-btns & {
-    margin: 0 0 0 7px;
-  }
+    .x-panel-btns & {
+        margin: 0 0 0 7px;
+    }
 }
 
 /* Action buttons */
 .actions {
-  bottom: 8px;
-  margin: 0;
-  overflow: visible;
-  position: absolute;
+    bottom: 8px;
+    margin: 0;
+    overflow: visible;
+    position: absolute;
 
-  li {
-    float: left;
-    line-height: 0.7;
-    margin-right: 2px;
-  }
+    li {
+        float: left;
+        line-height: 0.7;
+        margin-right: 2px;
+    }
 }
 
 .actions button,
@@ -34,673 +34,673 @@ button {
 .x-date-picker .x-btn,
 .x-date-mp-ok,
 .x-date-mp-cancel {
-  @extend %secondary-button;
+    @extend %secondary-button;
 
-  box-shadow: $shadowBorderDark;
-  box-sizing: content-box; /* override browser default of border-box */
-  padding: 5px;
-
-  &:hover,
-  &:focus {
-    box-shadow: $mediumGray;
-  }
-
-  &:active {
-    box-shadow: $mediumGray;
-  }
-
-  &.yellow {
-    background: $yellow;
-    box-shadow: 0 0 0 1px $yellow;
-    color: $buttonColor !important;
+    box-shadow: $shadowBorderDark;
+    box-sizing: content-box; /* override browser default of border-box */
+    padding: 5px;
 
     &:hover,
     &:focus {
-      background: darken($yellow, 5%);
-      box-shadow: 0 0 0 1px darken($yellow, 5%);
+        box-shadow: $mediumGray;
     }
 
     &:active {
-      background: darken($yellow, 10%);
-      box-shadow: 0 0 0 1px darken($yellow, 10%);
-    }
-  }
-
-  &.orange {
-    background: $orange;
-    box-shadow: 0 0 0 1px $orange;
-    color: $white !important;
-
-    &:hover,
-    &:focus {
-      background: darken($orange, 5%);
-      box-shadow: 0 0 0 1px darken($orange, 5%);
+        box-shadow: $mediumGray;
     }
 
-    &:active {
-      background: darken($orange, 10%);
-      box-shadow: 0 0 0 1px darken($orange, 10%);
-    }
-  }
+    &.yellow {
+        background: $yellow;
+        box-shadow: 0 0 0 1px $yellow;
+        color: $buttonColor !important;
 
-  &.red {
-    background: $red;
-    box-shadow: 0 0 0 1px $red;
-    color: $white !important;
+        &:hover,
+        &:focus {
+            background: darken($yellow, 5%);
+            box-shadow: 0 0 0 1px darken($yellow, 5%);
+        }
 
-    &:hover,
-    &:focus {
-      background: darken($red, 3%);
-      box-shadow: 0 0 0 1px darken($red, 3%);
-    }
-
-    &:active {
-      background: darken($red, 6%);
-      box-shadow: 0 0 0 1px darken($red, 6%);
-    }
-  }
-
-  &.green {
-    background: $green;
-    box-shadow: 0 0 0 1px $green;
-    color: $white !important; /* override !important of .green class */
-
-    &:hover,
-    &:focus {
-      background: darken($green, 5%);
-      box-shadow: 0 0 0 1px darken($green, 5%);
+        &:active {
+            background: darken($yellow, 10%);
+            box-shadow: 0 0 0 1px darken($yellow, 10%);
+        }
     }
 
-    &:active {
-      background: darken($green, 10%);
-      box-shadow: 0 0 0 1px darken($green, 10%);
-    }
-  }
+    &.orange {
+        background: $orange;
+        box-shadow: 0 0 0 1px $orange;
+        color: $white !important;
 
-  &.blue {
-    background: $blue;
-    box-shadow: 0 0 0 1px $blue;
-    color: $white !important; /* override !important of .green class */
+        &:hover,
+        &:focus {
+            background: darken($orange, 5%);
+            box-shadow: 0 0 0 1px darken($orange, 5%);
+        }
 
-    &:hover,
-    &:focus {
-      background: darken($blue, 5%);
-      box-shadow: 0 0 0 1px darken($blue, 5%);
+        &:active {
+            background: darken($orange, 10%);
+            box-shadow: 0 0 0 1px darken($orange, 10%);
+        }
     }
 
-    &:active {
-      background: darken($blue, 10%);
-      box-shadow: 0 0 0 1px darken($blue, 10%);
+    &.red {
+        background: $red;
+        box-shadow: 0 0 0 1px $red;
+        color: $white !important;
+
+        &:hover,
+        &:focus {
+            background: darken($red, 3%);
+            box-shadow: 0 0 0 1px darken($red, 3%);
+        }
+
+        &:active {
+            background: darken($red, 6%);
+            box-shadow: 0 0 0 1px darken($red, 6%);
+        }
     }
-  }
+
+    &.green {
+        background: $green;
+        box-shadow: 0 0 0 1px $green;
+        color: $white !important; /* override !important of .green class */
+
+        &:hover,
+        &:focus {
+            background: darken($green, 5%);
+            box-shadow: 0 0 0 1px darken($green, 5%);
+        }
+
+        &:active {
+            background: darken($green, 10%);
+            box-shadow: 0 0 0 1px darken($green, 10%);
+        }
+    }
+
+    &.blue {
+        background: $blue;
+        box-shadow: 0 0 0 1px $blue;
+        color: $white !important; /* override !important of .green class */
+
+        &:hover,
+        &:focus {
+            background: darken($blue, 5%);
+            box-shadow: 0 0 0 1px darken($blue, 5%);
+        }
+
+        &:active {
+            background: darken($blue, 10%);
+            box-shadow: 0 0 0 1px darken($blue, 10%);
+        }
+    }
 }
 
 /* Toolbar combo/text styled just like the buttons */
 .x-toolbar {
-  .x-form-field-trigger-wrap {
-    background: $white;
-    border: 0;
-    border-radius: $borderRadius;
-    box-shadow: $shadowBorder;
-    cursor: pointer;
-    line-height: 1;
+    .x-form-field-trigger-wrap {
+        background: $white;
+        border: 0;
+        border-radius: $borderRadius;
+        box-shadow: $shadowBorder;
+        cursor: pointer;
+        line-height: 1;
 
-    .x-form-text {
-      background: $white;
-      border: 0;
-      margin: 0 !important;
+        .x-form-text {
+            background: $white;
+            border: 0;
+            margin: 0 !important;
+        }
+
+        .x-form-trigger:before {
+            margin-top: 0;
+        }
+
+        &.x-trigger-wrap-focus {
+            box-shadow: $shadowBorderGrayHover;
+        }
     }
 
-    .x-form-trigger:before {
-      margin-top: 0;
-    }
-
-    &.x-trigger-wrap-focus {
-      box-shadow: $shadowBorderGrayHover;
-    }
-  }
-
-  .x-toolbar-left-row {
-    td {
-      .x-btn {
-        display: block;
-      }
-
-      .x-btn,
-      .x-form-text,
-      .x-form-field-trigger-wrap {
-        margin-right: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
-      }
-
-      &:first-of-type {
+    .x-toolbar-left-row {
+        td {
+        .x-btn {
+            display: block;
+        }
 
         .x-btn,
         .x-form-text,
         .x-form-field-trigger-wrap {
-          margin-left: 1px; /* prevent first button to be cut off */
+            margin-right: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
         }
-      }
-    }
-  }
 
-  .x-toolbar-right-row {
+        &:first-of-type {
+
+            .x-btn,
+            .x-form-text,
+            .x-form-field-trigger-wrap {
+                margin-left: 1px; /* prevent first button to be cut off */
+            }
+        }
+    }
+}
+
+.x-toolbar-right-row {
 
     .x-btn,
     .x-form-text,
     .x-form-field-trigger-wrap {
-      margin-left: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
+        margin-left: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
     }
 
     .x-form-filter {
-      border-radius: $borderRadius 0 0 $borderRadius;
-      z-index: 1; /* prevent clear filter button from overlapping the textfield */
+        border-radius: $borderRadius 0 0 $borderRadius;
+        z-index: 1; /* prevent clear filter button from overlapping the textfield */
 
-      &:not(.x-form-empty-field) {
-        border-color: $darkBlack;
-      }
+        &:not(.x-form-empty-field) {
+            border-color: $darkBlack;
+        }
 
-      &.x-form-focus {
-        border-color: $mediumGray;
-      }
+        &.x-form-focus {
+            border-color: $mediumGray;
+        }
     }
 
     .x-form-filter-clear {
-      border-radius: 0 $borderRadius $borderRadius 0;
-      margin-left: 0;
+        border-radius: 0 $borderRadius $borderRadius 0;
+        margin-left: 0;
     }
-  }
+}
 
-  .x-form-text {
+.x-form-text {
     padding: 8px 13px;
     border-radius: $borderRadius;
     font-size: 13px !important;
-  }
+}
 
-  &.x-small-editor .x-form-text {
-    padding-top: 8px; /* overrides ext standard theme rule which isn't overridden by padding rule above */
-  }
+    &.x-small-editor .x-form-text {
+        padding-top: 8px; /* overrides ext standard theme rule which isn't overridden by padding rule above */
+    }
 
-  .xtb-sep {
-    /* use margin on the elements itself as the separators are not inserted consistently */
-    /* separators are removed, but we leave this rule for safety */
-    margin: 0;
-    width: 0;
-  }
+    .xtb-sep {
+        /* use margin on the elements itself as the separators are not inserted consistently */
+        /* separators are removed, but we leave this rule for safety */
+        margin: 0;
+        width: 0;
+    }
 
-  .x-tree & {
+    .x-tree & {
     .x-btn {
-      padding: 7px;
+        padding: 7px;
     }
 
     .x-btn-icon {
-      box-shadow: none;
-      padding: 7px;
-
-      &.x-btn-over {
-        background: none;
         box-shadow: none;
-        color: $colorSplash;
-      }
+        padding: 7px;
 
-      &.x-btn-click {
-        background: none;
-        box-shadow: none;
-        color: $borderColorActive;
-      }
+        &.x-btn-over {
+            background: none;
+            box-shadow: none;
+            color: $colorSplash;
+        }
+
+        &.x-btn-click {
+            background: none;
+            box-shadow: none;
+            color: $borderColorActive;
+        }
     }
 
-    .x-btn-icon:before {
-      content: none;
-    }
+            .x-btn-icon:before {
+            content: none;
+            }
 
-    .x-toolbar-left-row,
-    .x-toolbar-right-row {
-      .x-form-field-wrap {
-        margin-right: 6px;
-        margin-left: 6px !important; /* we need !important to override the rules above */
-      }
+            .x-toolbar-left-row,
+            .x-toolbar-right-row {
+            .x-form-field-wrap {
+                margin-right: 6px;
+                margin-left: 6px !important; /* we need !important to override the rules above */
+            }
+        }
     }
-  }
 }
 
 /* action buttons bar, declare after general toolbar styles to make use of the cascade */
 #modx-action-buttons {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: auto;
-  background: $mainBg;
-  padding: 0.8rem 1rem;
-  border: 0;
-  font-family: $buttonfonts;
-  border-radius: $borderRadius;
-  z-index: 12;
-
-  /* prevent panel collapse arrows + toggles from overlapping */
-  .x-toolbar-cell:not(:first-child) {
-    padding-left: 0.5rem;
-  }
-
-  .x-btn {
-    margin: 0;
-  }
-
-  #modx-abtn-menu {
-    .x-btn-split {
-      padding: 0;
-
-      &:before {
-        display: none;
-      }
-
-      .x-btn-text {
-        padding: 0;
-        border: none;
-      }
-    }
-  }
-
-  .x-toolbar-left {
-    width: auto !important;
-    zoom: 1;
-  }
-
-  @include grid-media($desktop) {
-    background: transparent;
-    padding: 0 15px;
-    position: relative;
-    top: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
     left: auto;
-    right: auto;
-    bottom: auto;
-    max-width: 100%;
-    border-radius: 0;
+    background: $mainBg;
+    padding: 0.8rem 1rem;
+    border: 0;
+    font-family: $buttonfonts;
+    border-radius: $borderRadius;
+    z-index: 12;
 
-    table {
-      @include responsive-table-bar;
+    /* prevent panel collapse arrows + toggles from overlapping */
+    .x-toolbar-cell:not(:first-child) {
+        padding-left: 0.5rem;
     }
 
-    #modx-panel-welcome & {
-      display: none;
+    .x-btn {
+        margin: 0;
     }
 
-    .x-toolbar-cell {
-      width: auto;
-      margin: 5px;
+    #modx-abtn-menu {
+        .x-btn-split {
+            padding: 0;
+
+            &:before {
+                display: none;
+            }
+
+            .x-btn-text {
+                padding: 0;
+                border: none;
+            }
+        }
     }
-  }
+
+    .x-toolbar-left {
+        width: auto !important;
+        zoom: 1;
+    }
+
+    @include grid-media($desktop) {
+        background: transparent;
+        padding: 0 15px;
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        max-width: 100%;
+        border-radius: 0;
+
+        table {
+            @include responsive-table-bar;
+        }
+
+        #modx-panel-welcome & {
+            display: none;
+        }
+
+        .x-toolbar-cell {
+            width: auto;
+            margin: 5px;
+        }
+    }
 }
 
 .tab-panel-wrapper .x-panel-tbar {
-  @include grid-media($desktop) {
-    @include responsive-table-bar;
+    @include grid-media($desktop) {
+        @include responsive-table-bar;
 
-    .x-toolbar-left,
-    .x-toolbar-right {
-      input {
-        height: auto !important;
-        width: 100%;
-        box-sizing: border-box;
-        margin-left: 0;
-      }
+        .x-toolbar-left,
+        .x-toolbar-right {
+            input {
+                height: auto !important;
+                width: 100%;
+                box-sizing: border-box;
+                margin-left: 0;
+            }
+        }
     }
-  }
 }
 
 html.ext-strict body #modx-container .x-small-editor .x-form-text {
-  @include grid-media($desktop) {
-    height: auto !important;
-  }
+    @include grid-media($desktop) {
+        height: auto !important;
+    }
 }
 
 #modx-grid-element-properties {
-  @include grid-media($desktop) {
-    @include responsive-table-bar;
+    @include grid-media($desktop) {
+        @include responsive-table-bar;
 
-    .x-toolbar-left {
-      margin-bottom: 0;
-    }
+        .x-toolbar-left {
+            margin-bottom: 0;
+        }
 
-    .x-toolbar-cell {
-      >* {
-        width: 100% !important;
-        box-sizing: border-box;
-        margin-left: auto;
-        margin-right: auto;
-      }
+        .x-toolbar-cell {
+        >* {
+            width: 100% !important;
+            box-sizing: border-box;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        }
     }
-  }
 }
 
 .x-btn-icon button {
-  font-size: 18px;
-  height: 18px;
-  width: 18px;
-  position: relative
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    position: relative
 }
 
 .x-btn-icon {
-  &.arrow_up {
-    button {
-      background: none !important; /* #shame */
-      position: relative;
+    &.arrow_up {
+        button {
+            background: none !important; /* #shame */
+            position: relative;
 
-      &:before {
-        @extend %pseudo-font-x-btn;
-        content: fa-content($fa-var-level-up-alt);
-        top: 1px;
-        bottom: auto;
-      }
+            &:before {
+                @extend %pseudo-font-x-btn;
+                content: fa-content($fa-var-level-up-alt);
+                top: 1px;
+                bottom: auto;
+            }
+        }
     }
-  }
 
-  &.arrow_down {
-    button {
-      background: none !important; /* #shame */
-      position: relative;
+    &.arrow_down {
+        button {
+        background: none !important; /* #shame */
+        position: relative;
 
-      &:before {
-        @extend %pseudo-font-x-btn;
-        content: fa-content($fa-var-level-down-alt);
-        top: 1px;
-        bottom: auto;
-      }
+        &:before {
+            @extend %pseudo-font-x-btn;
+            content: fa-content($fa-var-level-down-alt);
+            top: 1px;
+            bottom: auto;
+        }
     }
-  }
+}
 
-  &.refresh {
-    button {
-      background: none !important; /* #shame */
-      position: relative;
+    &.refresh {
+        button {
+            background: none !important; /* #shame */
+            position: relative;
 
-      &:before {
-        @extend %pseudo-font-x-btn;
-        content: fa-content($fa-var-sync);
-        top: 1px;
-        bottom: auto;
-      }
+            &:before {
+                @extend %pseudo-font-x-btn;
+                content: fa-content($fa-var-sync);
+                top: 1px;
+                bottom: auto;
+            }
+        }
     }
-  }
 
-  &.icon-folder {
-    button {
-      &:before {
-        @extend %pseudo-font;
-        content: fa-content($fa-var-folder);
-      }
+    &.icon-folder {
+        button {
+            &:before {
+                @extend %pseudo-font;
+                content: fa-content($fa-var-folder);
+            }
+        }
     }
-  }
 
-  &.icon-page_white {
-    button {
-      &:before {
-        @extend %pseudo-font;
-        content: fa-content($fa-var-file-alt);
-      }
+    &.icon-page_white {
+        button {
+            &:before {
+                @extend %pseudo-font;
+                content: fa-content($fa-var-file-alt);
+            }
+        }
     }
-  }
 
-  &.icon-file_upload {
-    button {
-      &:before {
-        @extend %pseudo-font;
-        content: fa-content($fa-var-arrow-alt-circle-up);
-      }
+    &.icon-file_upload {
+            button {
+                &:before {
+                    @extend %pseudo-font;
+                    content: fa-content($fa-var-arrow-alt-circle-up);
+                }
+            }
     }
-  }
 
-  &.icon-file_manager {
-    button {
-      &:before {
-        @extend %pseudo-font;
-        content: fa-content($fa-var-share-square);
-      }
+    &.icon-file_manager {
+        button {
+            &:before {
+                @extend %pseudo-font;
+                content: fa-content($fa-var-share-square);
+            }
+        }
     }
-  }
 }
 
 .x-btn-text-icon button {
-  padding-left: 20px !important;
+    padding-left: 20px !important;
 }
 
 .x-html-editor-tb .x-btn {
-  background-color: transparent;
-  background-image: none;
-  border: 0 none;
-  box-shadow: none;
-  margin: 0;
+    background-color: transparent;
+    background-image: none;
+    border: 0 none;
+    box-shadow: none;
+    margin: 0;
 }
 
 .x-html-editor-tb .x-btn-over {
-  border: 0 none;
+    border: 0 none;
 }
 
 .x-btn-group {
-  border-radius: $borderRadius;
-  border: 1px solid #DBE0E4;
-  margin-right: 2px;
-  padding: 0;
+    border-radius: $borderRadius;
+    border: 1px solid #DBE0E4;
+    margin-right: 2px;
+    padding: 0;
 }
 
 .x-btn-group .x-btn {
-  background-color: transparent;
-  background-image: none;
-  border: 1px solid transparent;
-  box-shadow: transparent 0 0 1px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    box-shadow: transparent 0 0 1px;
 }
 
 .x-btn-group .x-btn button {
-  color: $osloGray;
-  height: auto !important;
+    color: $osloGray;
+    height: auto !important;
 }
 
 .x-btn-group .x-btn-over {
-  background: $alto;
-  background: $lighterGray;
-  border: 1px solid #DBE0E4;
+    background: $alto;
+    background: $lighterGray;
+    border: 1px solid #DBE0E4;
 }
 
 .x-btn-group .x-btn-over button {
-  color: #5b7a98;
+    color: #5b7a98;
 }
 
 .x-btn-group .x-btn-click {
-  background-color: $white;
-  background-image: none;
-  box-shadow: 0 0 3px #AAAAAA inset;
-  margin: 0 2px 0 0;
+    background-color: $white;
+    background-image: none;
+    box-shadow: 0 0 3px #AAAAAA inset;
+    margin: 0 2px 0 0;
 }
 
 .x-btn-group-bwrap {
-  padding: 1px 0 0;
+    padding: 1px 0 0;
 }
 
 .x-btn-group-header {
-  background-color: #DBE0E4;
-  color: #73797f;
-  text-shadow: 0 1px 0 $alabastersolid;
+    background-color: #DBE0E4;
+    color: #73797f;
+    text-shadow: 0 1px 0 $alabastersolid;
 }
 
 .x-btn-group-tl,
 .x-btn-group-tr {
-  background-image: none;
-  padding: 0;
+    background-image: none;
+    padding: 0;
 }
 
 .x-btn-group-tc,
 .x-btn-group-bc,
 .x-btn-group-bl,
 .x-btn-group-br {
-  background-image: none;
+    background-image: none;
 }
 
 .x-btn-group-ml {
-  background-image: none;
-  padding-left: 1px;
+    background-image: none;
+    padding-left: 1px;
 }
 
 .x-btn-group-mr {
-  background-image: none;
-  padding-right: 1px;
+    background-image: none;
+    padding-right: 1px;
 }
 
 .x-btn em.x-btn-arrow-bottom {
-  background-image: url($imgPath + 'modx-theme/button/s-arrow-b-noline.gif');
+    background-image: url($imgPath + 'modx-theme/button/s-arrow-b-noline.gif');
 }
 
 .x-btn em.x-btn-split-bottom {
-  background-image: url($imgPath + 'modx-theme/button/s-arrow-b.gif');
+    background-image: url($imgPath + 'modx-theme/button/s-arrow-b.gif');
 }
 
 .x-btn-over em.x-btn-split-bottom,
 .x-btn-click em.x-btn-split-bottom,
 .x-btn-menu-active em.x-btn-split-bottom,
 .x-btn-pressed em.x-btn-split-bottom {
-  background-image: url($imgPath + 'modx-theme/button/s-arrow-bo.gif');
+    background-image: url($imgPath + 'modx-theme/button/s-arrow-bo.gif');
 }
 
 .x-btn-group-notitle .x-btn-group-tc {
-  background-image: url($imgPath + 'modx-theme/button/group-tb.gif');
+    background-image: url($imgPath + 'modx-theme/button/group-tb.gif');
 }
 
 /* basic tree toolbar styles */
 #modx-leftbar {
-  .x-toolbar-ct {
-    .x-btn {
-      margin: 0 3px;
-      padding: 0;
-      width: 25px;
-      height: 30px;
-      border: none;
-      box-shadow: none;
-      color: $treeColor;
-      background: $mainBg;
-      opacity: 1;
-      filter: alpha(opacity=100); /* for IE <= 8 */
-      display: inline-block;
-      position: relative;
+    .x-toolbar-ct {
+        .x-btn {
+            margin: 0 3px;
+            padding: 0;
+            width: 25px;
+            height: 30px;
+            border: none;
+            box-shadow: none;
+            color: $treeColor;
+            background: $mainBg;
+            opacity: 1;
+            filter: alpha(opacity=100); /* for IE <= 8 */
+            display: inline-block;
+            position: relative;
 
-      &>em>button {
-        /*color: $buttonColor;*/
-        font-size: 18px;
-        text-shadow: none;
-        overflow: visible;
-        position: absolute;
-        height: 24px;
-        top: 4px;
-        left: 2px;
-      }
+            &>em>button {
+                /*color: $buttonColor;*/
+                font-size: 18px;
+                text-shadow: none;
+                overflow: visible;
+                position: absolute;
+                height: 24px;
+                top: 4px;
+                left: 2px;
+            }
 
 
-      &.x-btn-over,
-      &:hover,
-      &.x-btn-focus,
-      &:focus,
-      &.x-btn-click,
-      &:active {
-        background: none;
-        box-shadow: none;
-        color: $brandSelectedColor;
+            &.x-btn-over,
+            &:hover,
+            &.x-btn-focus,
+            &:focus,
+            &.x-btn-click,
+            &:active {
+                background: none;
+                box-shadow: none;
+                color: $brandSelectedColor;
 
-        button {
-          color: inherit;
+                button {
+                    color: inherit;
+                }
+            }
+
+            span {
+                vertical-align: middle;
+            }
         }
-      }
 
-      span {
-        vertical-align: middle;
-      }
-    }
+        .x-toolbar-right .x-btn {
 
-    .x-toolbar-right .x-btn {
+            /* the resource trash button in the tree */
+            & > em > button {
+                /* not sure why the trash needs a different color when active? */
+                font-size: 20px; /* trash icon is a bit smaller than the others at 18px */
+            }
 
-      /* the resource trash button in the tree */
-      & > em > button {
-        /* not sure why the trash needs a different color when active? */
-        font-size: 20px; /* trash icon is a bit smaller than the others at 18px */
-      }
+            &#emptifier .x-item-disabled {
+                color: $treeColorDesaturated !important; /* !important prevents hover / active styles */
+                opacity: .6;
+                filter: alpha(opacity=60); /* for IE <= 8 */
 
-      &#emptifier .x-item-disabled {
-        color: $treeColorDesaturated !important; /* !important prevents hover / active styles */
-        opacity: .6;
-        filter: alpha(opacity=60); /* for IE <= 8 */
-
-        button {
-          color: inherit;
+                button {
+                    color: inherit;
+                }
+            }
         }
-      }
     }
-  }
 }
 
 /* resource tree toolbar icons */
 .tree-new-resource > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file);
 }
 
 .tree-new-weblink > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-link);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-link);
 }
 
 .tree-new-symlink > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-copy);
-  font-weight: 400;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-copy);
+    font-weight: 400;
 }
 
 .tree-new-static-resource > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-alt);
-  font-weight: 400;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-alt);
+    font-weight: 400;
 }
 
 .tree-trash > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-trash-alt);
-  font-weight: 400;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-trash-alt);
+    font-weight: 400;
 }
 
 /* alignment overrides */
 #modx-leftbar .x-toolbar-ct .x-btn .tree-new-symlink > em > button {
-  top: 4px;
-  left: 2px;
+    top: 4px;
+    left: 2px;
 }
 
 #modx-leftbar .x-toolbar-ct .x-btn .tree-new-weblink > em > button {
-  left: 2px;
+    left: 2px;
 }
 
 /* element tree toolbar */
 .tree-new-template > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-columns);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-columns);
 }
 
 .tree-new-tv > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-list-alt);
-  font-weight: 400;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-list-alt);
+    font-weight: 400;
 }
 
 .tree-new-chunk > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-th-large);
-  font-weight: 900;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-th-large);
+    font-weight: 900;
 }
 
 .tree-new-snippet > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-code);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-code);
 }
 
 .tree-new-plugin > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-cogs);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-cogs);
 }
 
 .tree-new-category > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-folder);
 }

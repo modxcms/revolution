@@ -31,22 +31,22 @@ class ContextListControllerTest extends MODxControllerTestCase {
     public $controllerPath = 'context/index';
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testLoadCustomCssJs() {
         $this->controller->loadCustomCssJs();
         $this->assertNotEmpty($this->controller->head['js']);
     }
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetTemplateFile() {
         $templateFile = $this->controller->getTemplateFile();
         $this->assertEmpty($templateFile);
     }
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetPageTitle() {
         $pageTitle = $this->controller->getPageTitle();
         $this->assertNotEmpty($pageTitle);

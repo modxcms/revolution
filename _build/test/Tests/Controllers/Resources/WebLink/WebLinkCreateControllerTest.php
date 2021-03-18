@@ -14,8 +14,8 @@ class WebLinkCreateControllerTest extends ResourceCreateControllerTest
     public $controllerPath = 'resource/weblink/create';
 
     /**
-     * @before
-     */
+    * @before
+    */
     public function setUpFixtures()
     {
         parent::setUpFixtures();

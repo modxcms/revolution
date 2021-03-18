@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Hashing;
 
@@ -25,15 +25,15 @@ use MODX\Revolution\MODxTestCase;
  */
 class modHashingTest extends MODxTestCase {
     /**
-     * Test the getOption method.
-     *
-     * @dataProvider providerGetOption
-     * @param $key The option key
-     * @param $options Local options to be passed to the method
-     * @param $hashingOptions Options set for the modHashing instance
-     * @param $modxOptions Options set in MODX
-     * @param $expected The expected value
-     */
+    * Test the getOption method.
+    *
+    * @dataProvider providerGetOption
+    * @param $key The option key
+    * @param $options Local options to be passed to the method
+    * @param $hashingOptions Options set for the modHashing instance
+    * @param $modxOptions Options set in MODX
+    * @param $expected The expected value
+    */
     public function testGetOption($key, $options, $hashingOptions, $modxOptions, $expected) {
         foreach ($modxOptions as $moKey => $moValue) $this->modx->setOption($moKey, $moValue);
         $this->modx->getService('hashing', 'hashing.modHashing', '', $hashingOptions);

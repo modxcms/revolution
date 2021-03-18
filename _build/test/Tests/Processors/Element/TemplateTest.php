@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Element;
 
@@ -32,10 +32,10 @@ use MODX\Revolution\Processors\Element\Template\Remove;
  */
 class TemplateProcessorsTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->modx->error->reset();
@@ -47,10 +47,10 @@ class TemplateProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Cleanup data after this test.
-     *
-     * @after
-     */
+    * Cleanup data after this test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $templates = $this->modx->getCollection(modTemplate::class, ['templatename:LIKE' => '%UnitTest%']);
@@ -62,12 +62,12 @@ class TemplateProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/template/create processor, which creates a Template
-     *
-     * @param boolean $shouldPass
-     * @param string $templatePk
-     * @dataProvider providerTemplateCreate
-     */
+    * Tests the element/template/create processor, which creates a Template
+    *
+    * @param boolean $shouldPass
+    * @param string $templatePk
+    * @dataProvider providerTemplateCreate
+    */
     public function testTemplateCreate($shouldPass,$templatePk) {
         if (empty($templatePk)) return;
         $result = $this->modx->runProcessor(Create::class, [
@@ -83,9 +83,9 @@ class TemplateProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not create Template: `'.$templatePk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/template/create processor test.
-     * @return array
-     */
+    * Data provider for element/template/create processor test.
+    * @return array
+    */
     public function providerTemplateCreate() {
         return [
             [true,'UnitTestTemplate2'],
@@ -95,11 +95,11 @@ class TemplateProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/template/get processor, which gets a Template
-     * @param boolean $shouldPass
-     * @param string $templatePk
-     * @dataProvider providerTemplateGet
-     */
+    * Tests the element/template/get processor, which gets a Template
+    * @param boolean $shouldPass
+    * @param string $templatePk
+    * @dataProvider providerTemplateGet
+    */
     public function testTemplateGet($shouldPass,$templatePk) {
         if (empty($templatePk)) return;
 
@@ -120,9 +120,9 @@ class TemplateProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not get Template: `'.$templatePk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/template/create processor test.
-     * @return array
-     */
+    * Data provider for element/template/create processor test.
+    * @return array
+    */
     public function providerTemplateGet() {
         return [
             [true,'UnitTestTemplate'],
@@ -131,14 +131,14 @@ class TemplateProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to get a list of templates
-     *
-     * @param string $sort
-     * @param string $dir
-     * @param int $limit
-     * @param int $start
-     * @dataProvider providerTemplateGetList
-     */
+    * Attempts to get a list of templates
+    *
+    * @param string $sort
+    * @param string $dir
+    * @param int $limit
+    * @param int $start
+    * @dataProvider providerTemplateGetList
+    */
     public function testTemplateGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
         $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
@@ -150,9 +150,9 @@ class TemplateProcessorsTest extends MODxTestCase {
         $this->assertTrue(!empty($results),'Could not get list of Templates: '.$result->getMessage());
     }
     /**
-     * Data provider for element/template/getlist processor test.
-     * @return array
-     */
+    * Data provider for element/template/getlist processor test.
+    * @return array
+    */
     public function providerTemplateGetList() {
         return [
             ['templatename','ASC',5,0],
@@ -160,12 +160,12 @@ class TemplateProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/template/remove processor, which removes a Template
-     *
-     * @param boolean $shouldPass
-     * @param string $templatePk
-     * @dataProvider providerTemplateRemove
-     */
+    * Tests the element/template/remove processor, which removes a Template
+    *
+    * @param boolean $shouldPass
+    * @param string $templatePk
+    * @dataProvider providerTemplateRemove
+    */
     public function testTemplateRemove($shouldPass,$templatePk) {
         if (empty($templatePk)) return;
 
@@ -187,9 +187,9 @@ class TemplateProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not remove Template: `'.$templatePk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/template/remove processor test.
-     * @return array
-     */
+    * Data provider for element/template/remove processor test.
+    * @return array
+    */
     public function providerTemplateRemove() {
         return [
             [true,'UnitTestTemplate'],

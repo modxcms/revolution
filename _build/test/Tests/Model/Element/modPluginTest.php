@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
@@ -31,10 +31,10 @@ class modPluginTest extends MODxTestCase {
     public $plugin;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->plugin = $this->modx->newObject(modPlugin::class);
@@ -51,34 +51,34 @@ class modPluginTest extends MODxTestCase {
         $this->plugin->setCacheable(false);
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->plugin = null;
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetContent() {
         $this->assertEquals($this->plugin->get('plugincode'),$this->plugin->getContent());
     }
 
     /**
-     * @param string $content
-     * @dataProvider providerSetContent
-     * @depends testGetContent
-     */
+    * @param string $content
+    * @dataProvider providerSetContent
+    * @depends testGetContent
+    */
     public function testSetContent($content) {
         $this->plugin->setContent($content);
         $this->assertEquals($content,$this->plugin->get('plugincode'));
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSetContent() {
         return [
             ['return "Goodbye.";'],

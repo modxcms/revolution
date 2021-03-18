@@ -14,8 +14,8 @@ class StaticResourceCreateControllerTest extends ResourceCreateControllerTest
     public $controllerPath = 'resource/staticresource/create';
 
     /**
-     * @before
-     */
+    * @before
+    */
     public function setUpFixtures()
     {
         parent::setUpFixtures();

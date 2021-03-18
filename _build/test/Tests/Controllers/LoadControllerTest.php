@@ -18,9 +18,9 @@ class LoadControllerTest extends MODxTestCase
     protected $response;
 
     /**
-     * @before
-     * @throws \xPDO\xPDOException
-     */
+    * @before
+    * @throws \xPDO\xPDOException
+    */
     public function setUpFixtures()
     {
         parent::setUpFixtures();
@@ -39,11 +39,11 @@ class LoadControllerTest extends MODxTestCase
 
 
     /**
-     * @dataProvider providerGetControllerClassName
-     * @param string $action
-     * @param string|bool $expected
-     * @throws NotFoundException
-     */
+    * @dataProvider providerGetControllerClassName
+    * @param string $action
+    * @param string|bool $expected
+    * @throws NotFoundException
+    */
     public function testGetControllerClassName(string $action, $expected)
     {
         if ($expected === false) {
@@ -66,10 +66,10 @@ class LoadControllerTest extends MODxTestCase
     }
 
     /**
-     * @param $className
-     * @param $isController
-     * @dataProvider providerIsControllerClass
-     */
+    * @param $className
+    * @param $isController
+    * @dataProvider providerIsControllerClass
+    */
     public function testIsControllerClass($className, $isController)
     {
         $this->assertEquals($isController, modManagerResponse::isControllerClass($className));

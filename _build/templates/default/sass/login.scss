@@ -5,27 +5,27 @@ $content-padding: 1.5625rem;
 
 // http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
 @-ms-viewport {
-  width: device-width;
+    width: device-width;
 }
 
 /**
- * CSS Reset
- */
+* CSS Reset
+*/
 
 html {
-  box-sizing: border-box;
-  font-family: $bodyfonts;
-  font-size: 100%;
-  line-height: 1.15;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+    font-family: $bodyfonts;
+    font-size: 100%;
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
-  outline: 0;
+    box-sizing: inherit;
+    outline: 0;
 }
 
 body,
@@ -39,454 +39,454 @@ p,
 ol,
 ul,
 form {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-  color: $mineShaft;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    color: $mineShaft;
 }
 
 strong {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 body {
-  background: $lightGray;
+    background: $lightGray;
 }
 
 /**
- * Layout styles
- */
+* Layout styles
+*/
 
 .l-background {
-  display: none;
-  z-index: -1;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: auto;
-  width: calc(100% - 30rem);
-  background: $lightGray no-repeat center center;
-  background-size: cover;
-  opacity: .8;
+    display: none;
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: calc(100% - 30rem);
+    background: $lightGray no-repeat center center;
+    background-size: cover;
+    opacity: .8;
 }
 
 .l-main {
-  margin: 0.5rem 0 2rem;
+    margin: 0.5rem 0 2rem;
 }
 
 .l-content {
-  position: relative;
-  background: $white;
-  max-width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-  padding: 0 $content-padding;
+    position: relative;
+    background: $white;
+    max-width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 0 $content-padding;
 }
 
 .l-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 // align content to right on RTL
 html[dir="rtl"] {
-  .l-content {
-    margin-right: 0;
-    margin-left: auto;
-  }
+    .l-content {
+        margin-right: 0;
+        margin-left: auto;
+    }
 
-  .l-background {
-    left: 0;
-    right: auto;
-  }
+    .l-background {
+        left: 0;
+        right: auto;
+    }
 }
 
 // increased padding for medium and above
 @media screen and (min-width: 25em) {
-  .l-content {
-    padding: 0 $content-padding*2;
-  }
+    .l-content {
+        padding: 0 $content-padding*2;
+    }
 }
 
 // larger screen styles (768+ px) with background
 @media screen and (min-width: 48em) {
-  .l-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30rem;
-  }
+    .l-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30rem;
+    }
 
-  .l-background {
-    display: block;
-  }
+    .l-background {
+        display: block;
+    }
 }
 
 
 /**
- * Basic Typography
- */
+* Basic Typography
+*/
 
 h1 {
-  margin: 2rem 0 1rem;
-  font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
 }
 
 h2 {
-  margin: 1.5rem 0 0.5rem;
-  font-size: 1.25rem;
-  font-weight: bold;
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
 p {
-  margin: 0 0 1rem;
-  line-height: 1.4;
+    margin: 0 0 1rem;
+    line-height: 1.4;
 }
 
 a {
-  color: $blue;
-  text-decoration: none;
+    color: $blue;
+    text-decoration: none;
 
-  &:hover {
-    opacity: .8;
-  }
+    &:hover {
+        opacity: .8;
+    }
 
-  &:focus {
-    color: $red;
-  }
+    &:focus {
+        color: $red;
+    }
 }
 
 .lead {
-  font-size: 1rem;
-  margin-bottom: 2rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
 }
 
 input {
-  display: inline-block;
-  width: 100%;
-  background: $lightestGray;
-  border-radius: $borderRadius;
-  outline-color: $green;
-  font-size: 1rem;
-  padding: 1rem;
-  box-shadow: none;
-  border: 1px solid $lightGray;
+    display: inline-block;
+    width: 100%;
+    background: $lightestGray;
+    border-radius: $borderRadius;
+    outline-color: $green;
+    font-size: 1rem;
+    padding: 1rem;
+    box-shadow: none;
+    border: 1px solid $lightGray;
 }
 
 input[type="checkbox"] {
-  width: auto;
-  margin: 0 0.5rem 0 0;
-  position: relative;
-  top: 0;
+    width: auto;
+    margin: 0 0.5rem 0 0;
+    position: relative;
+    top: 0;
 }
 
 input:focus {
-  border: 1px solid $blue;
+    border: 1px solid $blue;
 }
 
 label {
-  display: block;
-  margin: 1.25rem 0;
-  cursor: pointer;
-  font-weight: 500;
+    display: block;
+    margin: 1.25rem 0;
+    cursor: pointer;
+    font-weight: 500;
 
-  a {
-    font-weight: 400;
-  }
+    a {
+        font-weight: 400;
+    }
 }
 
 label > input {
-  margin-top: 0.25rem;
+    margin-top: 0.25rem;
 }
 
 /**
- * Components
- */
+* Components
+*/
 
 .c-logo {
-  display: block;
-  max-width: 100%;
-  width: 12rem;
-  margin: $content-padding 0 1rem;
+    display: block;
+    max-width: 100%;
+    width: 12rem;
+    margin: $content-padding 0 1rem;
 }
 
 @media screen and (min-width: 48em) {
-  .c-logo {
-    margin: $content-padding*2 0 1rem;
-  }
+    .c-logo {
+        margin: $content-padding*2 0 1rem;
+    }
 }
 
 .c-form {
-  padding: 0 1rem;
-  margin: 0 -1rem;
+    padding: 0 1rem;
+    margin: 0 -1rem;
 }
 
 .c-button {
-  display: block;
-  width: 100%;
-  margin: 1rem 0;
-  padding: 1rem;
-  background: $green;
-  border: 1px solid darken($green, 10%);
-  border-radius: $borderRadius;
-  color: $white;
-  text-align: center;
-  font-size: 1rem;
-  cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: $green;
+    border: 1px solid darken($green, 10%);
+    border-radius: $borderRadius;
+    color: $white;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 #modx-login-btn,
 #modx-fl-btn {
-  border: 1px solid transparent;
+    border: 1px solid transparent;
 
-  &:hover,
-  &:focus {
-    background: $greener;
-    color: $buttonColorPrimaryHover;
-    transition: background-color .2s ease-out;
-  }
+    &:hover,
+    &:focus {
+        background: $greener;
+        color: $buttonColorPrimaryHover;
+        transition: background-color .2s ease-out;
+    }
 
-  &:hover {
-    box-shadow: none;
-  }
+    &:hover {
+        box-shadow: none;
+    }
 }
 
 #modx-login-username,
 #modx-login-username-reset {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 #rememberme-checkbox {
-  & input[type="checkbox"] {
-    width: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-  }
+    & input[type="checkbox"] {
+        width: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+    }
 
-  & label {
-    position: relative;
-    display: inline-block;
-    padding-left: 22px;
-
-    &:before, &:after {
-        position: absolute;
-        content: "";
+    & label {
+        position: relative;
         display: inline-block;
+        padding-left: 22px;
+
+        &:before, &:after {
+            position: absolute;
+            content: "";
+            display: inline-block;
+        }
+
+        &:before {
+            width: 18px;
+            height: 18px;
+            background: $lightestGray;
+            border: 1px solid $lightGray;
+            border-radius: $borderRadius;
+            left: -3px;
+        }
+
+        &:after {
+            height: 5px;
+            width: 10px;
+            border-left: 2px solid;
+            border-bottom: 2px solid;
+            transform: rotate(-45deg);
+            left: 1px;
+            top: 5px;
+        }
     }
 
-    &:before {
-        width: 18px;
-        height: 18px;
-        background: $lightestGray;
-        border: 1px solid $lightGray;
-        border-radius: $borderRadius;
-        left: -3px;
+    & input[type="checkbox"] + label::after {
+        content: none;
     }
 
-    &:after {
-      height: 5px;
-      width: 10px;
-      border-left: 2px solid;
-      border-bottom: 2px solid;
-      transform: rotate(-45deg);
-      left: 1px;
-      top: 5px;
+    & input[type="checkbox"]:checked + label::after {
+        content: "";
     }
-  }
 
-  & input[type="checkbox"] + label::after {
-    content: none;
-  }
-
-  & input[type="checkbox"]:checked + label::after {
-    content: "";
-  }
-
-  & input[type="checkbox"]:focus + label::before {
-    border: 1px solid $blue;
-  }
+    & input[type="checkbox"]:focus + label::before {
+        border: 1px solid $blue;
+    }
 }
 
 .c-password-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .c-helplink {
-  margin-left: 2rem;
-  color: $darkestGray;
+    margin-left: 2rem;
+    color: $darkestGray;
 }
 
 .c-help {
-  display: none;
-  margin: 3rem 0;
-  border: 0.125rem solid $green;
-  padding: 0 1rem;
-  border-radius: $borderRadius;
+    display: none;
+    margin: 3rem 0;
+    border: 0.125rem solid $green;
+    padding: 0 1rem;
+    border-radius: $borderRadius;
 
-  &.is-visible {
-    display: block;
-  }
+    &.is-visible {
+        display: block;
+    }
 }
 
 .l-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  position: relative;
-  margin-bottom: 1rem;
-  background: $white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    margin-bottom: 1rem;
+    background: $white;
 }
 
 .c-languageselect {
-  position: relative;
+    position: relative;
 }
 
 .c-languageselect__select {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  user-select: none;
-  appearance: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  text-overflow: ellipsis;
-  direction: rtl;
-  padding-right: 1.2rem;
-  color: $darkestGray;
-
-  &:hover {
-    opacity: .8;
-  }
-
-  &:focus {
-    color: $red;
-  }
-
-  &:focus option {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    user-select: none;
+    appearance: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    text-overflow: ellipsis;
+    direction: rtl;
+    padding-right: 1.2rem;
     color: $darkestGray;
-  }
+
+    &:hover {
+        opacity: .8;
+    }
+
+    &:focus {
+        color: $red;
+    }
+
+    &:focus option {
+        color: $darkestGray;
+    }
 }
 
 .c-languageselect__arrow {
-  z-index: 1;
-  display: block;
-  position: absolute;
-  top: 55%;
-  transform: translateY(-50%);
-  right: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0.375rem 0.375rem 0 0.375rem;
-  border-color: $darkestGray transparent transparent transparent;
+    z-index: 1;
+    display: block;
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0.375rem 0.375rem 0 0.375rem;
+    border-color: $darkestGray transparent transparent transparent;
 }
 
 .c-button--ghost {
-  color: $blue;
-  background: transparent;
-  border: none;
+    color: $blue;
+    background: transparent;
+    border: none;
 
-  &:hover {
-    opacity: .8;
-  }
+    &:hover {
+        opacity: .8;
+    }
 
-  &:focus {
-    color: $red;
-  }
+    &:focus {
+        color: $red;
+    }
 
-  .c-arrow {
-    stroke: $blue;
-  }
+    .c-arrow {
+        stroke: $blue;
+    }
 
-  :hover > & {
-    left: -0.5rem;
-    right: 0;
-  }
+    :hover > & {
+        left: -0.5rem;
+        right: 0;
+    }
 }
 
 .c-arrow {
-  stroke: $mineShaft;
-  vertical-align: middle;
-  position: relative;
-  top: -2px;
-  transition: left .4s ease-in-out, right .4s ease-in-out;
-  right: 0;
-
-  .c-button:hover > & {
-    right: -0.5rem;
-  }
-
-  &.c-arrow--left {
-    transform: rotate(180deg);
-    left: 0;
+    stroke: $mineShaft;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+    transition: left .4s ease-in-out, right .4s ease-in-out;
+    right: 0;
 
     .c-button:hover > & {
-      left: -0.5rem;
-      right: 0;
+        right: -0.5rem;
     }
-  }
+
+    &.c-arrow--left {
+        transform: rotate(180deg);
+        left: 0;
+
+        .c-button:hover > & {
+        left: -0.5rem;
+        right: 0;
+        }
+    }
 }
 
 /**
- * States
- */
+* States
+*/
 
 .can-toggle {
-  max-height: 50rem;
-  overflow: hidden;
-  transition: max-height .4s ease-in-out;
+    max-height: 50rem;
+    overflow: hidden;
+    transition: max-height .4s ease-in-out;
 }
 
 .is-hidden {
-  max-height: 0;
-  visibility: hidden;
-  transition: max-height .4s ease-in-out, 0s visibility .7s;
+    max-height: 0;
+    visibility: hidden;
+    transition: max-height .4s ease-in-out, 0s visibility .7s;
 }
 
 .is-error {
-  color: $red;
-  border-left: 0.2rem solid $red;
-  padding: 1rem 1.2rem;
-  border-radius: $borderRadius;
-  background-color: $lighterRed;
+    color: $red;
+    border-left: 0.2rem solid $red;
+    padding: 1rem 1.2rem;
+    border-radius: $borderRadius;
+    background-color: $lighterRed;
 }
 
 .is-success {
-  color: $greener;
-  border-left: 0.2rem solid $green;
-  padding: 1rem 1.2rem;
-  border-radius: $borderRadius;
-  background-color: $lighterGreen;
+    color: $greener;
+    border-left: 0.2rem solid $green;
+    padding: 1rem 1.2rem;
+    border-radius: $borderRadius;
+    background-color: $lighterGreen;
 }
 
 @media screen and (max-width: 40em) {
-  h1 {
-    margin: 1rem 0 .5rem;
-    font-size: 1.3rem;
-  }
+    h1 {
+        margin: 1rem 0 .5rem;
+        font-size: 1.3rem;
+    }
 
-  .l-main {
-    margin: .5rem 0 .5rem;
-  }
+    .l-main {
+        margin: .5rem 0 .5rem;
+    }
 
-  .c-logo {
-    width: 10rem;
-  }
+    .c-logo {
+        width: 10rem;
+    }
 
-  label {
-    font-size: 1em;
-  }
+    label {
+        font-size: 1em;
+    }
 
-  .is-error,
-  .is-success {
-    font-size: 1em;
-  }
+    .is-error,
+    .is-success {
+        font-size: 1em;
+    }
 }

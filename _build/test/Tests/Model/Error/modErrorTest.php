@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Error;
 
@@ -29,20 +29,20 @@ class modErrorTest extends MODxTestCase {
     public $error;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->error = $this->modx->getService('error','error.modError');
     }
 
     /**
-     * Ensure that the error class is reset on each load
-     *
-     * @after
-     */
+    * Ensure that the error class is reset on each load
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->modx->services['error'] = null;
@@ -50,11 +50,11 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Test the addError method and ensure it adds the correct error
-     *
-     * @param string $errorMsg The error message to test with
-     * @dataProvider providerTestAddError
-     */
+    * Test the addError method and ensure it adds the correct error
+    *
+    * @param string $errorMsg The error message to test with
+    * @dataProvider providerTestAddError
+    */
     public function testAddError($errorMsg) {
         $this->error->addError($errorMsg);
         $this->assertTrue($this->error->errors[0] == $errorMsg,'modError.addError failed to insert the correct error.');
@@ -67,12 +67,12 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Ensures addField adds the correct message to the proper field
-     *
-     * @param string $field
-     * @param string $message
-     * @dataProvider providerTestAddField
-     */
+    * Ensures addField adds the correct message to the proper field
+    *
+    * @param string $field
+    * @param string $message
+    * @dataProvider providerTestAddField
+    */
     public function testAddField($field,$message) {
         $this->error->addField($field,$message);
         $this->assertEquals($field,$this->error->errors[0]['id'],'modError.addField failed to insert the correct error field.');
@@ -87,9 +87,9 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Tests the reset method to ensure that it fully resets the error object
-     * @depends testAddError
-     */
+    * Tests the reset method to ensure that it fully resets the error object
+    * @depends testAddError
+    */
     public function testReset() {
         $this->error->addError('Error to be emptied');
         $this->error->message = 'Fail';
@@ -104,10 +104,10 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Tests modError.hasError, ensuring it correctly calculates when an error is added
-     * @depends testAddError
-     * @depends testReset
-     */
+    * Tests modError.hasError, ensuring it correctly calculates when an error is added
+    * @depends testAddError
+    * @depends testReset
+    */
     public function testHasError() {
         $this->error->addError('A test error');
         $this->assertTrue($this->error->hasError());
@@ -118,11 +118,11 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Ensure modError.isFieldError properly checks for a field-based error
-     * @param array $error
-     * @param boolean $shouldPass
-     * @dataProvider providerTestIsFieldError
-     */
+    * Ensure modError.isFieldError properly checks for a field-based error
+    * @param array $error
+    * @param boolean $shouldPass
+    * @dataProvider providerTestIsFieldError
+    */
     public function testIsFieldError($error,$shouldPass = true) {
         $passed = $this->error->isFieldError($error);
         $this->assertEquals($shouldPass,$passed);
@@ -137,11 +137,11 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Ensure modError.isNotFieldError properly checks for a non-field-based error
-     * @param array $error
-     * @param boolean $shouldPass
-     * @dataProvider providerTestIsNotFieldError
-     */
+    * Ensure modError.isNotFieldError properly checks for a non-field-based error
+    * @param array $error
+    * @param boolean $shouldPass
+    * @dataProvider providerTestIsNotFieldError
+    */
     public function testIsNotFieldError($error,$shouldPass = true) {
         $passed = $this->error->isNotFieldError($error);
         $this->assertEquals($shouldPass,$passed);
@@ -156,12 +156,12 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Tests that getErrors properly calculates the right number of errors, both when includeFields is true or false,
-     * and returns them in the order they were given
-     *
-     * @depends testAddError
-     * @depends testAddField
-     */
+    * Tests that getErrors properly calculates the right number of errors, both when includeFields is true or false,
+    * and returns them in the order they were given
+    *
+    * @depends testAddError
+    * @depends testAddField
+    */
     public function testGetErrors() {
         $this->error->addError('A test error');
         $this->error->addError('Another test error');
@@ -176,12 +176,12 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Tests that getFields properly calculates the right number of field errors and properly returns the errors
-     * in the order they were given
-     *
-     * @depends testAddError
-     * @depends testAddField
-     */
+    * Tests that getFields properly calculates the right number of field errors and properly returns the errors
+    * in the order they were given
+    *
+    * @depends testAddError
+    * @depends testAddField
+    */
     public function testGetFields() {
         $this->error->addError('A test error that should be ignored');
         $this->error->addField('name','Please enter a valid name.');
@@ -195,12 +195,12 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Test the success method to ensure it sends back the right data
-     *
-     * @param string $message
-     * @param int $id
-     * @dataProvider providerTestSuccess
-     */
+    * Test the success method to ensure it sends back the right data
+    *
+    * @param string $message
+    * @param int $id
+    * @dataProvider providerTestSuccess
+    */
     public function testSuccess($message,$id) {
         $response = $this->error->success($message, ['id' => $id]);
 
@@ -215,9 +215,9 @@ class modErrorTest extends MODxTestCase {
     }
 
     /**
-     * Test the failure method to ensure it sends back the right data
-     * @return void
-     */
+    * Test the failure method to ensure it sends back the right data
+    * @return void
+    */
     public function testFailure() {
         $generalErrorMessage = 'Please check the values in your form.';
         $this->error->addField('name','Name is required.');

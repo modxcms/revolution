@@ -11,7 +11,7 @@ $(document).ready(function() {
     });
 
     $(".tabs").tabs();
-    
+
     var uls = $('ul.treeview:empty');
     uls.each(function() {
         $(this).parent().remove();

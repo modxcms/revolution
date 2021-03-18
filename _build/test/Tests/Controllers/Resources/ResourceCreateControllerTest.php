@@ -14,8 +14,8 @@ class ResourceCreateControllerTest extends MODxControllerTestCase
     public $controllerPath = 'resource/create';
 
     /**
-     * @before
-     */
+    * @before
+    */
     public function setUpFixtures()
     {
         parent::setUpFixtures();

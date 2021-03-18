@@ -1,14 +1,14 @@
 <phpunit colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         verbose="true"
-         bootstrap="MODxTestHarness.php"
-         timeoutForSmallTests="5"
-         timeoutForMediumTests="5"
-         timeoutForLargeTests="10">
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        verbose="true"
+        bootstrap="MODxTestHarness.php"
+        timeoutForSmallTests="5"
+        timeoutForMediumTests="5"
+        timeoutForLargeTests="10">
     <php>
         <server name="REQUEST_URI" value="/"/>
     </php>

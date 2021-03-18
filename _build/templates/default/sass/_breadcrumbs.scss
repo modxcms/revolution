@@ -1,166 +1,166 @@
 /* Breadcrumbs */
 .breadcrumbs .panel-desc {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 .crumb_wrapper {
-  background: $lightestGray;
-  border-bottom: 1px solid $borderColor;
-  border-top: 1px solid $borderColor;
-  margin-top: 15px;
+    background: $lightestGray;
+    border-bottom: 1px solid $borderColor;
+    border-top: 1px solid $borderColor;
+    margin-top: 15px;
 
-  .crumbs {
-    height: 34px;
-    overflow: hidden; /* hide the overflow from the oversized arrows */
+    .crumbs {
+        height: 34px;
+        overflow: hidden; /* hide the overflow from the oversized arrows */
 
-    li {
-      color: $darkestGray;
-      float: left;
-      font-size: 12px;
-      font-weight: normal;
-      line-height: 12px;
-      padding: 0 0 0 20px;
-      position: relative;
-      z-index: 1;
+        li {
+            color: $darkestGray;
+            float: left;
+            font-size: 12px;
+            font-weight: normal;
+            line-height: 12px;
+            padding: 0 0 0 20px;
+            position: relative;
+            z-index: 1;
 
-      &.first {
-        padding: 0; /* neutralize the normal li padding and give it to the inner element */
+            &.first {
+                padding: 0; /* neutralize the normal li padding and give it to the inner element */
 
-        /* the home breadcrumb with the house icon */
-        &:before {
-          @extend %pseudo-font-x-btn;
+                /* the home breadcrumb with the house icon */
+            &:before {
+                @extend %pseudo-font-x-btn;
 
-          content: fa-content($fa-var-home);
-          display: inline-block;
-          font-size: 20px;
-          line-height: 34px;
-          position: absolute;
-          top: 0;
-          left: 0;
-          text-align: center;
-          text-indent: 0;
-          z-index: 2; /* put the icon above the triangle :after element */
-        }
+                content: fa-content($fa-var-home);
+                display: inline-block;
+                font-size: 20px;
+                line-height: 34px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                text-align: center;
+                text-indent: 0;
+                z-index: 2; /* put the icon above the triangle :after element */
+            }
 
-        #packages-breadcrumbs &:before {
-          content: fa-content($fa-var-cube);
-        }
+            #packages-breadcrumbs &:before {
+                content: fa-content($fa-var-cube);
+            }
 
-        &:hover:before {
-          color: $colorSplashContrast;
+            &:hover:before {
+                color: $colorSplashContrast;
+            }
+
+            &:hover {
+                background-color: $darkGray;
+            }
+
+            .root {
+                background-color: transparent;
+                box-sizing: content-box; /* buttons have border-box and spans content-box, we normalize here */
+                display: inline-block;
+                line-height: 12px;
+                margin: 0; /* neutralize the normal li margin */
+                padding: 12px;
+                text-indent: -999em;
+                width: 35px;
+                z-index: 3;
+
+                /* do not display the cover element here */
+                &:before {
+                    display: none;
+                }
+
+                &:hover {
+                    background-color: transparent;
+                }
+            }
         }
 
         &:hover {
-          background-color: $darkGray;
-        }
-
-        .root {
-          background-color: transparent;
-          box-sizing: content-box; /* buttons have border-box and spans content-box, we normalize here */
-          display: inline-block;
-          line-height: 12px;
-          margin: 0; /* neutralize the normal li margin */
-          padding: 12px;
-          text-indent: -999em;
-          width: 35px;
-          z-index: 3;
-
-          /* do not display the cover element here */
-          &:before {
-            display: none;
-          }
-
-          &:hover {
-            background-color: transparent;
-          }
-        }
-      }
-
-      &:hover {
-        button,
-        span,
-        span:after {
-          background-color: $darkGray;
-          color: $colorSplashContrast;
+            button,
+            span,
+            span:after {
+            background-color: $darkGray;
+            color: $colorSplashContrast;
         }
 
         span:after,
         button:after {
-          border: 1px solid $lightestGray;
-          border-left-color: $darkGray;
-          border-bottom-color: $darkGray;
+            border: 1px solid $lightestGray;
+            border-left-color: $darkGray;
+            border-bottom-color: $darkGray;
         }
 
         span:before,
         button:before {
-          background-color: $darkGray;
+            background-color: $darkGray;
         }
 
         + li span:before,
         + li button:before {
-          border-left-color: $darkGray;
+            border-left-color: $darkGray;
         }
-      }
-
-      button {
-        background-color: transparent;
-        border: 0;
-        color: $darkestGray;
-        cursor: pointer;
-        font: $fontMedium;
-        font-weight: bold;
-        line-height: 1;
-        text-decoration: none;
-      }
-
-      span {
-        background-color: $lightestGray;
-      }
-
-      button,
-      span {
-        display: inline-block;
-        margin: 0 0 0 1px;
-        padding: 11px 13px 11px 15px;
-        position: relative; /* to position the pseudo elements */
-
-        /* the cover element, makes up the 2 triangle shapes at the left of each crumb */
-        &:before {
-          background-color: transparent;
-          content: '';
-          display: inline-block;
-          width: 0;
-          height: 0;
-          border-top: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
-          border-bottom: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
-          border-left: 30px solid $lightestGray;
-          padding-right: 3px;
-          position: absolute;
-          top: 50%;
-          left: -33px;
-          margin-top: -50px;
-          transform: scale(0.99999); /* fix blurry edges in FF */
-          z-index: -1;
-        }
-
-        /* the triangle shape and line to the right of each crumb */
-        &:after {
-          background-color: $lightestGray;
-          border: 1px solid $softGray;
-          border-left: 0;
-          border-bottom: 0;
-          border-radius: $borderRadius;
-          content: '';
-          display: inline-block;
-          width: 34px;
-          height: 34px; /* + 2px border = 36px */
-          position: absolute;
-          top: 0;
-          right: -22px;
-          transform: scaleX(0.6) rotate(45deg);
-          z-index: -1;
-        }
-      }
     }
-  }
+
+        button {
+            background-color: transparent;
+            border: 0;
+            color: $darkestGray;
+            cursor: pointer;
+            font: $fontMedium;
+            font-weight: bold;
+            line-height: 1;
+            text-decoration: none;
+        }
+
+        span {
+            background-color: $lightestGray;
+        }
+
+        button,
+        span {
+            display: inline-block;
+            margin: 0 0 0 1px;
+            padding: 11px 13px 11px 15px;
+            position: relative; /* to position the pseudo elements */
+
+            /* the cover element, makes up the 2 triangle shapes at the left of each crumb */
+            &:before {
+                background-color: transparent;
+                content: '';
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-top: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
+                border-bottom: 50px solid rgba(0, 0, 0, 0); /* no transparent, breaks anti-aliasing in FF */
+                border-left: 30px solid $lightestGray;
+                padding-right: 3px;
+                position: absolute;
+                top: 50%;
+                left: -33px;
+                margin-top: -50px;
+                transform: scale(0.99999); /* fix blurry edges in FF */
+                z-index: -1;
+            }
+
+            /* the triangle shape and line to the right of each crumb */
+            &:after {
+                background-color: $lightestGray;
+                border: 1px solid $softGray;
+                border-left: 0;
+                border-bottom: 0;
+                border-radius: $borderRadius;
+                content: '';
+                display: inline-block;
+                width: 34px;
+                height: 34px; /* + 2px border = 36px */
+                position: absolute;
+                top: 0;
+                right: -22px;
+                transform: scaleX(0.6) rotate(45deg);
+                z-index: -1;
+                }
+            }
+        }
+    }
 }

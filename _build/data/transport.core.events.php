@@ -1194,21 +1194,21 @@ $events['OnMediaSourceDuplicate']->fromArray([
 /* Package Manager */
 $events['OnPackageInstall']= $xpdo->newObject(modEvent::class);
 $events['OnPackageInstall']->fromArray([
-  'name' => 'OnPackageInstall',
-  'service' => 2,
-  'groupname' => 'Package Manager',
+    'name' => 'OnPackageInstall',
+    'service' => 2,
+    'groupname' => 'Package Manager',
 ], '', true, true);
 $events['OnPackageUninstall']= $xpdo->newObject(modEvent::class);
 $events['OnPackageUninstall']->fromArray([
-  'name' => 'OnPackageUninstall',
-  'service' => 2,
-  'groupname' => 'Package Manager',
+    'name' => 'OnPackageUninstall',
+    'service' => 2,
+    'groupname' => 'Package Manager',
 ], '', true, true);
 $events['OnPackageRemove']= $xpdo->newObject(modEvent::class);
 $events['OnPackageRemove']->fromArray([
-  'name' => 'OnPackageRemove',
-  'service' => 2,
-  'groupname' => 'Package Manager',
+    'name' => 'OnPackageRemove',
+    'service' => 2,
+    'groupname' => 'Package Manager',
 ], '', true, true);
 
 return $events;

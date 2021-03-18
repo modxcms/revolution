@@ -4,9 +4,9 @@
     <property file="build.properties" />
 
     <!-- Set build timestamp properties, available as:
-         DSTAMP "%Y%m%d"
-         TSTAMP "%H%M"
-         TODAY  "%B %d %Y"
+        DSTAMP "%Y%m%d"
+        TSTAMP "%H%M"
+        TODAY  "%B %d %Y"
     -->
     <tstamp />
 
@@ -41,8 +41,8 @@
     <property name="image.manager.dir" value="${build.image.dir}/manager" />
 
     <!-- =================================
-          target: complete
-         ================================= -->
+        target: complete
+        ================================= -->
     <target name="complete" description="--> Complete Build">
         <phingcall target="prepare-build-image" />
         <phingcall target="git-export-build-image" />
@@ -75,8 +75,8 @@
         <resolvepath propertyName="absolute.root.dir" file="${project.root.dir}" />
         <resolvepath propertyName="absolute.image.basedir" file="${build.image.basedir}" />
         <exec dir="${absolute.root.dir}"
-              command="${git.command} archive -o ${absolute.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}"
-              escape="false" />
+            command="${git.command} archive -o ${absolute.image.basedir}/${build.distrib.name}.zip --format=zip --prefix=${build.distrib.name}/ ${build.src.tree}"
+            escape="false" />
         <unzip file="${build.image.dir}.zip" todir="${build.image.basedir}" />
     </target>
 

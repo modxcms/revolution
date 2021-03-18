@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Dashboard;
 
@@ -32,12 +32,12 @@ class modDashboardWidgetTest extends MODxTestCase {
     public $widget;
 
     /**
-     * Load some utility classes this case uses
-     *
-     * @before
-     * @return void
-     * @throws xPDOException
-     */
+    * Load some utility classes this case uses
+    *
+    * @before
+    * @return void
+    * @throws xPDOException
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
@@ -55,8 +55,8 @@ class modDashboardWidgetTest extends MODxTestCase {
     }
 
     /**
-     * Test the content rendering of a widget
-     */
+    * Test the content rendering of a widget
+    */
     public function testGetContent() {
         /** @var modManagerController $controller Fake running the welcome controller */
         $controller = new \WelcomeManagerController($this->modx, [

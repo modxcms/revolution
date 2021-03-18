@@ -3,129 +3,129 @@
 
 #modx-leftbar {
 
-  /* the main container + bg behind the tabs */
-  .x-tab-panel-noborder {
-    margin: 0 12px;
-  }
-
-  .x-tab-panel-bwrap {
-    border-radius: 0 0 $borderRadius $borderRadius;
-    position: relative;
-    z-index: 1;
-
-    .x-tab-panel-body-noborder {
-      border-radius: 0 0 $borderRadius $borderRadius;
-      background: $mainBg;
+    /* the main container + bg behind the tabs */
+    .x-tab-panel-noborder {
+        margin: 0 12px;
     }
-  }
 
-  #modx-leftbar-tabpanel {
+    .x-tab-panel-bwrap {
+        border-radius: 0 0 $borderRadius $borderRadius;
+        position: relative;
+        z-index: 1;
+
+        .x-tab-panel-body-noborder {
+        border-radius: 0 0 $borderRadius $borderRadius;
+        background: $mainBg;
+        }
+    }
+
+    #modx-leftbar-tabpanel {
+        @include grid-media($desktop) {
+        width: auto !important;
+        margin: 0 auto;
+        padding: 0.5em;
+        }
+    }
+
     @include grid-media($desktop) {
-      width: auto !important;
-      margin: 0 auto;
-      padding: 0.5em;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        box-shadow: none;
+        margin: 0 auto 10px auto;
+
+        #modx-leftbar-header {
+        display: none;
+        }
     }
-  }
 
-  @include grid-media($desktop) {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    width: 100% !important;
-    height: auto !important;
-    box-shadow: none;
-    margin: 0 auto 10px auto;
-
-    #modx-leftbar-header {
-      display: none;
+    .x-plain-body {
+        @include grid-media($desktop) {
+        width: 100% !important;
+        height: auto !important;
+        }
     }
-  }
 
-  .x-plain-body {
-    @include grid-media($desktop) {
-      width: 100% !important;
-      height: auto !important;
+    /* the toolbars just below the tabs */
+    & .x-panel-tbar {
+        padding: 0;
     }
-  }
 
-  /* the toolbars just below the tabs */
-  & .x-panel-tbar {
-    padding: 0;
-  }
+    & .x-toolbar {
+        padding: 4px 5px 2px 0;
+    }
 
-  & .x-toolbar {
-    padding: 4px 5px 2px 0;
-  }
+    /* root box containing a context or category */
+    & .x-tree-root-ct {
+        padding: 6px;
+    }
 
-  /* root box containing a context or category */
-  & .x-tree-root-ct {
-    padding: 6px;
-  }
-
-  /* just the actual nodes */
-  & .x-tree .x-panel-body {
-    background: $white;
-    border-radius: 0;
-  }
+    /* just the actual nodes */
+    & .x-tree .x-panel-body {
+        background: $white;
+        border-radius: 0;
+    }
 }
 
 #modx-tree-usergroup .x-toolbar-left-row {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #modx-resource-tree-tbar .x-toolbar-left .x-btn .tree-new-resource,
 #modx-tree-element .x-toolbar-left .x-btn .tree-new-template {
-  margin-left: 16px;
+    margin-left: 16px;
 }
 
 #modx-split-wrapper {
 
-  .x-layout-split,
-  #modx-leftbar-tabs-xcollapsed {
-    margin-left: -80px;
-  }
+    .x-layout-split,
+    #modx-leftbar-tabs-xcollapsed {
+        margin-left: -80px;
+    }
 }
 
 .x-layout-split {
-  overflow: visible;
-  width: 8px;
-  z-index: 2;
+    overflow: visible;
+    width: 8px;
+    z-index: 2;
 
-  &:hover {
-    background: $mediumGray;
-  }
+    &:hover {
+        background: $mediumGray;
+    }
 }
 
 /* style for the collapsed tree expander */
 #modx-leftbar-tabs-xcollapsed {
-  .x-layout-mini {
-    //display: none;
-    left: 0;
+    .x-layout-mini {
+        //display: none;
+        left: 0;
 
-    &:after {
-      border-right: 0;
-      border-left: 5px solid $treeColor;
+        &:after {
+            border-right: 0;
+            border-left: 5px solid $treeColor;
 
-      @include grid-media($desktop) {
-        border: none;
-      }
+            @include grid-media($desktop) {
+                border: none;
+            }
+        }
+
+        &:hover:after {
+            border-left-color: $colorSplash;
+        }
     }
-
-    &:hover:after {
-      border-left-color: $colorSplash;
-    }
-  }
 }
 
 .modx-tree {
-  padding: 0;
+    padding: 0;
 
-  #modx-file-tree & {
-    &:first-child {
-      padding-top: 4px;
+    #modx-file-tree & {
+        &:first-child {
+        padding-top: 4px;
+        }
     }
-  }
 }
 
 /* icons */
@@ -133,323 +133,323 @@
 .x-tree-arrows .x-tree-elbow-minus,
 .x-tree-arrows .x-tree-elbow-end-plus,
 .x-tree-arrows .x-tree-elbow-end-minus {
-  background: none;
+    background: none;
 
-  &:hover {
-    background: lighten($treeText, 25);
-    border-radius: 50%;
-  }
+    &:hover {
+        background: lighten($treeText, 25);
+        border-radius: 50%;
+    }
 }
 
 .x-tree-arrows .x-tree-elbow-plus:before,
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  background: transparent 0 0;
-  display: inline-block;
-  width: 10px;
-  padding-left: 4px;
-  padding-right: 4px;
-  text-align: center;
-  margin: 0;
+    background: transparent 0 0;
+    display: inline-block;
+    width: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: center;
+    margin: 0;
 }
 
 .x-tree-arrows .x-tree-elbow-plus:before,
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-plus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-caret-right);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-caret-right);
 }
 
 .x-tree-arrows .x-tree-elbow-minus:before,
 .x-tree-arrows .x-tree-elbow-end-minus:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-caret-down);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-caret-down);
 }
 
 /* tree states */
 .x-tree-node-el {
-  color: $treeColor;
-  font: $treeNodeFont;
-  padding: 0 0 0 8px;
+    color: $treeColor;
+    font: $treeNodeFont;
+    padding: 0 0 0 8px;
 
-  &.is_folder {
-    background: $treeFolderBg;
-  }
-
-  .x-btn {
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
-
-  .icon {
-    display: inline-block;
-    width: 1em;
-
-    font-size: 1.15em;
-    line-height: (3em / 4);
-    vertical-align: -15%;
-  }
-
-  a span {
-    padding-left: 7px;
-
-    & span {
-      padding-left: 0;
+    &.is_folder {
+        background: $treeFolderBg;
     }
-  }
 
-  /* For legacy icons */
-  background-repeat: no-repeat;
-  background-position: 5px;
+    .x-btn {
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .icon {
+        display: inline-block;
+        width: 1em;
+
+        font-size: 1.15em;
+        line-height: (3em / 4);
+        vertical-align: -15%;
+    }
+
+    a span {
+        padding-left: 7px;
+
+        & span {
+        padding-left: 0;
+        }
+    }
+
+    /* For legacy icons */
+    background-repeat: no-repeat;
+    background-position: 5px;
 }
 
 /* tweak icons for FA 5.2.0 */
 .x-tree-node-el {
 
-  .icon-refresh,
-  .icon-plus-circle {
-    font-size: 1em;
-    vertical-align: 0;
-  }
+    .icon-refresh,
+    .icon-plus-circle {
+        font-size: 1em;
+        vertical-align: 0;
+    }
 }
 
 .unpublished,
 .unpublished a span {
-  color: $unpublished;
-  font-style: $unpubText;
-
-  i.icon,
-  i.icon-large {
     color: $unpublished;
-    font-style: normal;
-  }
+    font-style: $unpubText;
+
+    i.icon,
+    i.icon-large {
+        color: $unpublished;
+        font-style: normal;
+    }
 }
 
 .hidemenu,
 .hidemenu a span {
-  color: $hidden;
-  font-style: $hiddenText;
-
-  i.icon,
-  i.icon-large {
     color: $hidden;
-    font-style: normal;
-  }
+    font-style: $hiddenText;
+
+    i.icon,
+    i.icon-large {
+        color: $hidden;
+        font-style: normal;
+    }
 }
 
 .deleted {
-  color: $delTextColor;
-
-  i.icon,
-  i.icon-large {
     color: $delTextColor;
-    font-style: normal;
-  }
 
-  a span {
-    color: $delTextColor;
-    text-decoration: $delTextDeco; /* deleted files should inherit the text style from published/unpublished and
-       not overwrite it */
-    // font-style: $delTextStyle;
-  }
+    i.icon,
+    i.icon-large {
+        color: $delTextColor;
+        font-style: normal;
+    }
+
+    a span {
+        color: $delTextColor;
+        text-decoration: $delTextDeco; /* deleted files should inherit the text style from published/unpublished and
+        not overwrite it */
+        // font-style: $delTextStyle;
+    }
 }
 
 .element-node-disabled a span {
-  color: $disabledTextColor;
+    color: $disabledTextColor;
 }
 
 .x-tree-node {
-  position: relative;
-  background: $treeItemBg;
-  color: $treeItemColor;
+    position: relative;
+    background: $treeItemBg;
+    color: $treeItemColor;
 
-  .x-tree-node-disabled,
-  .element-node-disabled {
+    .x-tree-node-disabled,
+    .element-node-disabled {
 
-    a span,
-    i.icon {
-      color: $disabledTextColor;
+        a span,
+        i.icon {
+        color: $disabledTextColor;
+        }
     }
-  }
 }
 
 .element-node-locked a span {
-  font-style: $lockedText;
+    font-style: $lockedText;
 }
 
 .modx-tree-node-tool-ct {
-  position: absolute;
-  top: 0;
-  right: 6px;
-  bottom: 0;
-  line-height: 1.8;
-
-  .x-btn {
-    &:hover, &:focus {
-      color: $green !important;
-    }
-  }
-}
-
-/* Direct create buttons for a tree node */
-.x-tree-node-el {
-  .modx-tree-node-btn-create {
     position: absolute;
     top: 0;
     right: 6px;
     bottom: 0;
-    line-height: 34px;
-    opacity: 0;
-    transition: opacity .4s ease-in;
+    line-height: 1.8;
 
     .x-btn {
-      color: $darkGray;
-      opacity: .4;
-      transition: opacity .2s ease-in-out, color .2s ease-in-out;
-
-      &:hover,
-      &:focus {
-        opacity: 1.0;
-        color: $green;
-      }
+        &:hover, &:focus {
+            color: $green !important;
+        }
     }
-  }
+}
 
-  &:hover,
-  &:focus {
+/* Direct create buttons for a tree node */
+.x-tree-node-el {
     .modx-tree-node-btn-create {
-      opacity: 1.0;
+        position: absolute;
+        top: 0;
+        right: 6px;
+        bottom: 0;
+        line-height: 34px;
+        opacity: 0;
+        transition: opacity .4s ease-in;
+
+        .x-btn {
+            color: $darkGray;
+            opacity: .4;
+            transition: opacity .2s ease-in-out, color .2s ease-in-out;
+
+            &:hover,
+            &:focus {
+                opacity: 1.0;
+                color: $green;
+            }
+        }
     }
-  }
+
+    &:hover,
+    &:focus {
+        .modx-tree-node-btn-create {
+            opacity: 1.0;
+        }
+    }
 }
 
 .x-tree-root-ct {
-  border-radius: 0;
-  overflow: hidden;
-  padding: 0 !important;
+    border-radius: 0;
+    overflow: hidden;
+    padding: 0 !important;
 }
 
 .tree-pseudoroot-node.x-tree-node-el {
-  background-color: $treePseudoRootBg;
-  font: $treePseudoRootFont;
-  position: relative;
-  padding: 0 0 0 4px;
+    background-color: $treePseudoRootBg;
+    font: $treePseudoRootFont;
+    position: relative;
+    padding: 0 0 0 4px;
 
-  a span {
-    color: $treePseudoRootColor;
-  }
-
-  >.icon {
-    color: $treePseudoRootColor;
-  }
-
-  .modx-tree-node-tool-ct {
-    line-height: 3;
-    opacity: .5;
-    filter: alpha(opacity=50); /* for IE <= 8 */
-
-    .x-btn {
-      margin-left: 2px;
+    a span {
+        color: $treePseudoRootColor;
     }
-  }
 
-  &.x-tree-node-collapsed {
-    border-bottom: 1px solid $borderColor;
-  }
-
-  &.x-tree-node-expanded,
-  &.x-tree-node-expanded span,
-  &.x-tree-node-expanded > .icon {
-    color: $treePseudoRootColor; //background-color: $treePseudoRootBg;
-  }
-
-  &.x-tree-node-over {
-    background-color: $treePseudoRootOverBg;
-    color: $treePseudoRootOverColor;
-  }
-
-  +.x-tree-node-ct,
-  +div > .x-tree-node-ct {
-    background: $treeBg; //padding: 5px 0;
-    overflow-x: auto;
-
-    &:empty {
-      padding: 0;
+    >.icon {
+        color: $treePseudoRootColor;
     }
-  }
 
-  &:hover .modx-tree-node-tool-ct {
-    opacity: 1;
-    filter: alpha(opacity=100); /* for IE <= 8 */
+    .modx-tree-node-tool-ct {
+        line-height: 3;
+        opacity: .5;
+        filter: alpha(opacity=50); /* for IE <= 8 */
 
-    .x-btn {
-      color: inherit;
+        .x-btn {
+            margin-left: 2px;
+        }
     }
-  }
+
+    &.x-tree-node-collapsed {
+        border-bottom: 1px solid $borderColor;
+    }
+
+    &.x-tree-node-expanded,
+    &.x-tree-node-expanded span,
+    &.x-tree-node-expanded > .icon {
+        color: $treePseudoRootColor; //background-color: $treePseudoRootBg;
+    }
+
+    &.x-tree-node-over {
+        background-color: $treePseudoRootOverBg;
+        color: $treePseudoRootOverColor;
+    }
+
+    +.x-tree-node-ct,
+    +div > .x-tree-node-ct {
+        background: $treeBg; //padding: 5px 0;
+        overflow-x: auto;
+
+        &:empty {
+            padding: 0;
+        }
+    }
+
+    &:hover .modx-tree-node-tool-ct {
+        opacity: 1;
+        filter: alpha(opacity=100); /* for IE <= 8 */
+
+        .x-btn {
+            color: inherit;
+        }
+    }
 }
 
 .x-tree-elbow,
 .x-tree-elbow-end {
-  display: inline-block;
+    display: inline-block;
 }
 
 /* miscellaneous tree styles */
 .x-tree-node-el .x-tree-node-icon {
-  display: inline-block;
+    display: inline-block;
 }
 
 .x-tree-node-loading .x-tree-node-icon {
-  background-image: url($imgPath + 'modx-theme/tree/loading.gif') !important;
+    background-image: url($imgPath + 'modx-theme/tree/loading.gif') !important;
 }
 
 .x-tree-node-loading a span {
-  color: $tundora;
-  font-style: italic;
+    color: $tundora;
+    font-style: italic;
 }
 
 .ext-ie .x-tree-node-el input {
-  height: 15px;
-  width: 15px;
+    height: 15px;
+    width: 15px;
 }
 
-/* accordion header row icons */
-#modx-leftbar .icon,
-.x-tree-node
+// /* accordion header row icons */
+// #modx-leftbar .icon,
+// .x-tree-node
 
 /*.modx-tree-node-tool-ct*/
-.icon {
-  background: none;
-  border: 0;
-  display: inline-block;
-  margin: 0;
-  padding: 3px;
-  text-align: center;
-  opacity: .8;
-  filter: alpha(opacity=80); /* for IE <= 8 */
+    .icon {
+    background: none;
+    border: 0;
+    display: inline-block;
+    margin: 0;
+    padding: 3px;
+    text-align: center;
+    opacity: .8;
+    filter: alpha(opacity=80); /* for IE <= 8 */
 
-  &.icon-folder:before,
-  &.icon-columns:before,
-  &.icon-th-large:before,
-  &.icon-code:before,
-  &.icon-cogs:before {
-    font-weight: 900;
-  }
+    &.icon-folder:before,
+    &.icon-columns:before,
+    &.icon-th-large:before,
+    &.icon-code:before,
+    &.icon-cogs:before {
+        font-weight: 900;
+    }
 
-  i {
-    font-style: normal;
-  }
+    i {
+        font-style: normal;
+    }
 
-  button {
-    display: none;
-  }
-}
+    button {
+        display: none;
+    }
+    }
 
 .x-tree-node-ct .x-tree-node .icon {
-  position: relative;
-  top: -1px;
-  left: -1px;
+    position: relative;
+    top: -1px;
+    left: -1px;
 }
 
 /* drag and drop styles */
@@ -457,108 +457,108 @@
 .x-dd-drag-ghost a,
 .x-tree-node a span,
 .x-dd-drag-ghost a span {
-  color: $treeColor;
+    color: $treeColor;
 }
 
 .x-tree-node div.x-tree-drag-insert-below {
-  border-bottom: 2px solid $colorSplashLight !important;
+    border-bottom: 2px solid $colorSplashLight !important;
 }
 
 .x-tree-node div.x-tree-drag-insert-above {
-  border-top: 2px solid $colorSplashLight !important;
+    border-top: 2px solid $colorSplashLight !important;
 }
 
 .x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-below a {
-  border-bottom: 2px solid $colorSplashLight !important;
+    border-bottom: 2px solid $colorSplashLight !important;
 }
 
 .x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-above a {
-  border-top: 2px solid $colorSplashLight !important;
+    border-top: 2px solid $colorSplashLight !important;
 }
 
 .x-tree-node .x-tree-drag-append a span {
-  background-color: $brandHover;
-  border-color: $borderColor;
+    background-color: $brandHover;
+    border-color: $borderColor;
 }
 
 .x-tree-node .x-tree-node-over {
-  background-color: $brandHover;
+    background-color: $brandHover;
 }
 
 .x-tree-node .x-tree-selected {
-  background-color: $treeBgSelected;
+    background-color: $treeBgSelected;
 }
 
 .x-tree-node .x-tree-expanded {
-  color: $brandSelectedColor;
-  background-color: $brandHover;
-
-  a {
     color: $brandSelectedColor;
+    background-color: $brandHover;
 
-    span {
-      color: $brandSelectedColor;
+    a {
+        color: $brandSelectedColor;
+
+        span {
+        color: $brandSelectedColor;
+        }
     }
-  }
 }
 
 .x-tree-drop-ok-append .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');
 }
 
 .x-tree-drop-ok-above .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-over.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-over.gif');
 }
 
 .x-tree-drop-ok-below .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-under.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-under.gif');
 }
 
 .x-tree-drop-ok-between .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
 
 
 /* legacy icons */
 @mixin legacy-tree-icon {
-  background-repeat: no-repeat !important;
+    background-repeat: no-repeat !important;
 
-  // Set the background position to center
-  background-position: center !important;
+    // Set the background position to center
+    background-position: center !important;
 
-  // .. unless the icon is applied to the actual tree node (e.g. Gallery addon), in which case it needs
-  // .. to be in the top left a bit.
-  &.x-tree-node-el {
-    background-position: 5px 5px !important;
-  }
+    // .. unless the icon is applied to the actual tree node (e.g. Gallery addon), in which case it needs
+    // .. to be in the top left a bit.
+    &.x-tree-node-el {
+        background-position: 5px 5px !important;
+    }
 
-  min-width: 16px;
-  min-height: 16px;
-  vertical-align: middle;
+    min-width: 16px;
+    min-height: 16px;
+    vertical-align: middle;
 
-  // Hides the font awesome icon
-  &:before {
-    content: ' ';
-  }
+    // Hides the font awesome icon
+    &:before {
+        content: ' ';
+    }
 }
 
 .icon-rss:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-rss);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-rss);
 }
 
 .icon-cal:before,
 .icon-ical:before,
 .icon-ics:before,
 .icon-vcs:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-calendar);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-calendar);
 }
 
 .icon-db:before,
 .icon-sql:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-database);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-database);
 }
 
 .icon-zip:before,
@@ -570,15 +570,15 @@
 .icon-7z:before,
 .icon-dmg:before,
 .icon-iso:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-archive);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-archive);
 }
 
 .icon-bk:before,
 .icon-bak:before,
 .icon-backup:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-history);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-history);
 }
 
 .icon-jpg:before,
@@ -588,21 +588,21 @@
 .icon-bmp:before,
 .icon-tiff:before,
 .icon-svg:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-image);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-image);
 }
 
 .icon-bat:before,
 .icon-scr:before,
 .icon-sh:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-terminal);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-terminal);
 }
 
 .icon-txt:before,
 .icon-log:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-alt);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-alt);
 }
 
 .icon-aac:before,
@@ -614,8 +614,8 @@
 .icon-wav:before,
 .icon-aif:before,
 .icon-aiff:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-audio);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-audio);
 }
 
 .icon-avi:before,
@@ -629,14 +629,14 @@
 .icon-fla:before,
 .icon-swf:before,
 .icon-wmv:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-video);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-video);
 }
 
 .icon-access:before,
 .icon-htaccess:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-lock);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-lock);
 }
 
 .icon-php:before,
@@ -645,341 +645,341 @@
 .icon-as:before,
 .icon-java:before,
 .icon-jar:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-code);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-code);
 }
 
 .icon-doc:before,
 .icon-docx:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-word);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-word);
 }
 
 .icon-csv:before,
 .icon-xls:before,
 .icon-xlsx:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-excel);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-excel);
 }
 
 .icon-ppt:before,
 .icon-pptx:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-powerpoint);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-powerpoint);
 }
 
 .icon-pdf:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-pdf);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-pdf);
 }
 
 .icon-html:before,
 .icon-htm:before,
 .icon-xml:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-code);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-code);
 }
 
 .icon-js:before,
 .icon-json:before,
 .icon-coffeescript:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-code);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-code);
 }
 
 .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
 .icon-styl:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-code);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-code);
 }
 
 .icon-action {
-  background-image: url($imgPath + 'restyle/icons/application_osx_terminal.png') !important;
-  @include legacy-tree-icon;
+    background-image: url($imgPath + 'restyle/icons/application_osx_terminal.png') !important;
+    @include legacy-tree-icon;
 }
 
 .icon-namespace {
-  background-image: url($imgPath + 'restyle/icons/computer.png') !important;
-  @include legacy-tree-icon;
+    background-image: url($imgPath + 'restyle/icons/computer.png') !important;
+    @include legacy-tree-icon;
 }
 
 .icon-list-new {
-  background-image: url($imgPath + 'restyle/icons/layout_add.png') !important;
-  @include legacy-tree-icon;
+    background-image: url($imgPath + 'restyle/icons/layout_add.png') !important;
+    @include legacy-tree-icon;
 }
 
 .icon-mark-active {
-  background-image: url($imgPath + 'restyle/icons/layout_edit.png') !important;
-  @include legacy-tree-icon;
+    background-image: url($imgPath + 'restyle/icons/layout_edit.png') !important;
+    @include legacy-tree-icon;
 }
 
 .icon-mark-complete {
-  background-image: url($imgPath + 'restyle/icons/layout_header.png') !important;
-  @include legacy-tree-icon;
+    background-image: url($imgPath + 'restyle/icons/layout_header.png') !important;
+    @include legacy-tree-icon;
 }
 
 .icon-package {
-  background-image: url($imgPath + 'restyle/icons/package.png') !important;
-  padding-right: 5px !important;
-  @include legacy-tree-icon;
+    background-image: url($imgPath + 'restyle/icons/package.png') !important;
+    padding-right: 5px !important;
+    @include legacy-tree-icon;
 }
 
 .icon-locked {
-  background-image: url($imgPath + 'restyle/icons/lock_edit.png') !important;
-  @include legacy-tree-icon;
+    background-image: url($imgPath + 'restyle/icons/lock_edit.png') !important;
+    @include legacy-tree-icon;
 }
 
 .icon-lock {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-lock);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-lock);
 }
 
 #modx-resource-tree-panel .x-accordion-hd {
-  background-position: 0 0;
+    background-position: 0 0;
 }
 
 #modx-element-tree-panel .x-accordion-hd {
-  background-position: 0 -32px;
+    background-position: 0 -32px;
 }
 
 #modx-file-tree-panel .x-accordion-hd {
-  background-position: 0 -64px;
+    background-position: 0 -64px;
 }
 
 #modx-static-page-settings .x-accordion-hd {
-  background-position: 0 -96px;
+    background-position: 0 -96px;
 }
 
 /*
 .x-tree .x-panel-body {
-  background-color:$white
-  border:1px solid #E4E4E4;
+    background-color:$white
+    border:1px solid #E4E4E4;
 }*/
 .x-tree-node-el .x-tree-node-icon {
-  display: inline-block;
+    display: inline-block;
 }
 
 .x-tree-node-loading .x-tree-node-icon {
-  background-image: url($imgPath + 'modx-theme/tree/loading.gif') !important;
+    background-image: url($imgPath + 'modx-theme/tree/loading.gif') !important;
 }
 
 .x-tree-node-loading a span {
-  color: $tundora;
-  font-style: italic;
+    color: $tundora;
+    font-style: italic;
 }
 
 /* icons for the various tree elements */
 .tree-context:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-globe);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-globe);
 }
 
 .tree-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file);
 }
 
 .tree-static-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-alt);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file-alt);
 }
 
 .tree-weblink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-link);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-link);
 }
 
 .tree-symlink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-copy);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-copy);
 }
 
 .parent-resource:before,
 .icon-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-folder);
 }
 
 .x-tree-node-expanded .parent-resource:before,
 .x-tree-node-expanded .icon-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder-open);
+    @extend %pseudo-font;
+    content: fa-content($fa-var-folder-open);
 }
 
 .locked-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-lock) !important;
+    @extend %pseudo-font;
+    content: fa-content($fa-var-lock) !important;
 }
 
 .ext-ie .x-tree-node-el input {
-  height: 15px;
-  width: 15px;
+    height: 15px;
+    width: 15px;
 }
 
 .x-tree-root-ct {
-  border-radius: 0;
-  overflow: hidden;
-  padding: 0 !important;
+    border-radius: 0;
+    overflow: hidden;
+    padding: 0 !important;
 }
 
 .x-tree-root-node {
-  margin: 0;
+    margin: 0;
 }
 
 .x-tree-node {
-  color: $treeColor;
+    color: $treeColor;
 }
 
 .x-tree-node a,
 .x-dd-drag-ghost a {
-  color: $treeColor;
+    color: $treeColor;
 }
 
 .x-tree-node a span,
 .x-dd-drag-ghost a span {
-  color: $treeColor;
+    color: $treeColor;
 }
 
 .x-tree-node .x-tree-node-disabled a span {
-  color: lighten($treeColor, 50%);
+    color: lighten($treeColor, 50%);
 }
 
 .x-tree-node div.x-tree-drag-insert-below {
-  border-bottom-color: $doveGray;
+    border-bottom-color: $doveGray;
 }
 
 .x-tree-node div.x-tree-drag-insert-above {
-  border-top-color: $doveGray;
+    border-top-color: $doveGray;
 }
 
 .x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-below a {
-  border-bottom-color: $doveGray;
+    border-bottom-color: $doveGray;
 }
 
 .x-tree-dd-underline .x-tree-node div.x-tree-drag-insert-above a {
-  border-top-color: $doveGray;
+    border-top-color: $doveGray;
 }
 
 .x-tree-node .x-tree-drag-append a span {
-  background-color: $alto;
-  border-color: $borderColor;
+    background-color: $alto;
+    border-color: $borderColor;
 }
 
 .x-tree-drop-ok-append .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-add.gif');
 }
 
 .x-tree-drop-ok-above .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-over.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-over.gif');
 }
 
 .x-tree-drop-ok-below .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-under.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-under.gif');
 }
 
 .x-tree-drop-ok-between .x-dd-drop-icon {
-  background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
+    background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
 
 #modx-leftbar-header {
-  height: $treeHeaderHeight;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  padding: 0.67rem 1rem;
-  box-sizing: border-box;
-  color: $darkestGray;
-
-  img {
-    max-width: 33%;
-    max-height: 100%;
-  }
-
-  a {
+    height: $treeHeaderHeight;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0.67rem 1rem;
+    box-sizing: border-box;
     color: $darkestGray;
-    text-decoration: none;
-    font: $fontH2;
-    font-size: 16px;
 
-    &:hover,
-    &:focus {
-      color: $colorSplash;
+    img {
+        max-width: 33%;
+        max-height: 100%;
     }
 
-    &:after {
-      @extend %pseudo-font;
-      content: fa-content($fa-var-eye);
-      margin-left: 5px;
-      font-size: 14px;
-      opacity: 0.5;
-    }
-  }
+    a {
+        color: $darkestGray;
+        text-decoration: none;
+        font: $fontH2;
+        font-size: 16px;
 
-  img+a {
-    padding-left: 0.67rem;
-  }
+        &:hover,
+        &:focus {
+            color: $colorSplash;
+        }
+
+        &:after {
+            @extend %pseudo-font;
+            content: fa-content($fa-var-eye);
+            margin-left: 5px;
+            font-size: 14px;
+            opacity: 0.5;
+        }
+    }
+
+    img+a {
+        padding-left: 0.67rem;
+    }
 }
 
 #modx-leftbar-tabpanel {
-  .x-tab-panel-header {
-    .x-tab-strip-wrap {
-      margin: 0;
-      padding: 0;
+    .x-tab-panel-header {
+        .x-tab-strip-wrap {
+            margin: 0;
+            padding: 0;
+        }
+
+        .x-tab-strip {
+            display: flex;
+            width: 100%;
+
+            li {
+                margin-left: 0;
+                float: none;
+                flex-grow: 1;
+                text-align: center;
+                box-sizing: border-box;
+
+                &#modx-leftbar-tabpanel__modx-trash-link {
+                    border-right: none;
+                }
+
+                &:hover {
+                    color: $colorSplash;
+                }
+
+                &.x-tab-strip-active {
+                    background: $leftbarTabActiveBg;
+
+                    &:after {
+                        box-shadow: none;
+                    }
+
+                    &:before {
+                        background: transparent;
+                    }
+                }
+            }
+
+            .x-clear,
+            .x-tab-edge {
+                display: none;
+            }
+        }
     }
-
-    .x-tab-strip {
-      display: flex;
-      width: 100%;
-
-      li {
-        margin-left: 0;
-        float: none;
-        flex-grow: 1;
-        text-align: center;
-        box-sizing: border-box;
-
-        &#modx-leftbar-tabpanel__modx-trash-link {
-          border-right: none;
-        }
-
-        &:hover {
-          color: $colorSplash;
-        }
-
-        &.x-tab-strip-active {
-          background: $leftbarTabActiveBg;
-
-          &:after {
-            box-shadow: none;
-          }
-
-          &:before {
-            background: transparent;
-          }
-        }
-      }
-
-      .x-clear,
-      .x-tab-edge {
-        display: none;
-      }
-    }
-  }
 }
 
 #modx-leftbar-tabpanel__modx-trash-link {
-  .icon {
-    opacity: .5;
-    &:hover {
-      color: $red;
-    }
-  }
-
-  &.active {
     .icon {
-      opacity: 1;
+        opacity: .5;
+        &:hover {
+            color: $red;
+        }
     }
-  }
+
+    &.active {
+        .icon {
+            opacity: 1;
+        }
+    }
 }

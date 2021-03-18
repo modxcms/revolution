@@ -153,8 +153,7 @@ $unpublished: lighten($treeText, 10%) !important;
 $hidden: $treeText;
 $unpubText: normal;
 $hiddenText: italic;
-/* locked is already signaled with lock-icon, no need to use other semantic style here
-   as italic is used for "unpublished" */
+/* locked is already signaled with lock-icon, no need to use other semantic style here as italic is used for "unpublished" */
 $lockedText: inherit; //italic;
 
 $delTextColor: fade-out(darken(lighten(desaturate($red,50%), 33%), 25%), 0.5) !important;

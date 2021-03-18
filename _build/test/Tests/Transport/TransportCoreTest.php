@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Transport;
 
@@ -24,9 +24,9 @@ use MODX\Revolution\MODxTestCase;
 class TransportCoreTest extends MODxTestCase
 {
     /**
-     * @before
-     * @throws \xPDO\xPDOException
-     */
+    * @before
+    * @throws \xPDO\xPDOException
+    */
     public function setUpFixtures()
     {
         parent::setUpFixtures();
@@ -45,16 +45,16 @@ class TransportCoreTest extends MODxTestCase
     }
 
     /**
-     * @after
-     */
+    * @after
+    */
     public function tearDownFixtures()
     {
         @unlink(MODX_PACKAGES_PATH. "core.transport.zip");
     }
 
     /**
-     * @large
-     */
+    * @large
+    */
     public function testBuildCoreTransportPackage()
     {
         $transportCoreFile = MODX_BUILD_DIR. 'transport.core.php';

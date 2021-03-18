@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
@@ -30,10 +30,10 @@ class modTemplateTest extends MODxTestCase {
     public $template;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->template = $this->modx->newObject(modTemplate::class);
@@ -49,34 +49,34 @@ class modTemplateTest extends MODxTestCase {
         $this->template->setCacheable(false);
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->template = null;
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetContent() {
         $this->assertEquals($this->template->get('content'),$this->template->getContent());
     }
 
     /**
-     * @param string $content
-     * @dataProvider providerSetContent
-     * @depends testGetContent
-     */
+    * @param string $content
+    * @dataProvider providerSetContent
+    * @depends testGetContent
+    */
     public function testSetContent($content) {
         $this->template->setContent($content);
         $this->assertEquals($content,$this->template->get('content'));
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSetContent() {
         return [
             ['Test content.'],
@@ -84,18 +84,18 @@ class modTemplateTest extends MODxTestCase {
     }
 
     /**
-     * @param string $expected
-     * @param array $properties
-     * @param null|string $content
-     * @dataProvider providerProcess
-     */
+    * @param string $expected
+    * @param array $properties
+    * @param null|string $content
+    * @dataProvider providerProcess
+    */
     public function testProcess($expected,array $properties = [],$content = null) {
         $result = $this->template->process($properties,$content);
         $this->assertEquals($expected,$result);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerProcess() {
         return [
             ['<p>Hello, John!</p>'],

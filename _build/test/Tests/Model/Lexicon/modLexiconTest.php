@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Lexicon;
 
@@ -29,38 +29,38 @@ class modLexiconTest extends MODxTestCase {
     public $lexicon;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->lexicon = new modLexicon($this->modx);
     }
 
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         $this->lexicon->clear();
     }
 
     /**
-     * Ensure total() returns an accurate count
-     * @param string $topic
-     * @param int $total
-     * @dataProvider providerTotal
-     */
+    * Ensure total() returns an accurate count
+    * @param string $topic
+    * @param int $total
+    * @dataProvider providerTotal
+    */
     public function testTotal($topic,$total) {
         $this->assertEquals(0,$this->lexicon->total());
         $this->lexicon->load($topic);
         $this->assertEquals($total,$this->lexicon->total());
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerTotal() {
         require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/core/lexicon/en/about.inc.php';
         /** @var array $_lang */
@@ -71,11 +71,11 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * Tests the load method with various use cases
-     * @param string $key
-     * @depends testTotal
-     * @dataProvider providerLoad
-     */
+    * Tests the load method with various use cases
+    * @param string $key
+    * @depends testTotal
+    * @dataProvider providerLoad
+    */
     public function testLoad($key) {
         $this->lexicon->load($key);
         $lang = '';
@@ -87,8 +87,8 @@ class modLexiconTest extends MODxTestCase {
         $this->assertGreaterThan(0,$this->lexicon->total($lang));
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerLoad() {
         return [
             ['user'],
@@ -100,9 +100,9 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * Ensure the clear method clears the lexicon
-     * @depends testLoad
-     */
+    * Ensure the clear method clears the lexicon
+    * @depends testLoad
+    */
     public function testClear() {
         $this->lexicon->load('user');
         $this->assertGreaterThan(0,$this->lexicon->total());
@@ -111,19 +111,19 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * @param string $expected
-     * @param string $namespace
-     * @param string $topic
-     * @param string $language
-     * @dataProvider providerGetCacheKey
-     */
+    * @param string $expected
+    * @param string $namespace
+    * @param string $topic
+    * @param string $language
+    * @dataProvider providerGetCacheKey
+    */
     public function testGetCacheKey($expected,$namespace,$topic,$language) {
         $key = $this->lexicon->getCacheKey($namespace,$topic,$language);
         $this->assertEquals($expected,$key);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetCacheKey() {
         return [
             ['lexicon/en/core/user','core','user','en'],
@@ -136,18 +136,18 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * @param string $language
-     * @param string $namespace
-     * @param string $topic
-     * @dataProvider providerGetFileTopic
-     */
+    * @param string $language
+    * @param string $namespace
+    * @param string $topic
+    * @dataProvider providerGetFileTopic
+    */
     public function testGetFileTopic($language,$namespace,$topic) {
         $results = $this->lexicon->getFileTopic($language,$namespace,$topic);
         $this->assertNotEmpty($results);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetFileTopic() {
         return [
             ['en','core','default'],
@@ -157,18 +157,18 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * @param string $namespace
-     * @param string $expected
-     * @dataProvider providerGetNamespacePath
-     */
+    * @param string $namespace
+    * @param string $expected
+    * @dataProvider providerGetNamespacePath
+    */
     public function testGetNamespacePath($namespace,$expected) {
         $path = $this->lexicon->getNamespacePath($namespace);
         $path = str_replace(MODX_CORE_PATH,'',$path);
         $this->assertEquals($expected,$path);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetNamespacePath() {
         return [
             ['core',''],
@@ -176,18 +176,18 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * @param string $language
-     * @param string $namespace
-     * @depends testGetNamespacePath
-     * @dataProvider providerGetTopicList
-     */
+    * @param string $language
+    * @param string $namespace
+    * @depends testGetNamespacePath
+    * @dataProvider providerGetTopicList
+    */
     public function testGetTopicList($language,$namespace) {
         $results = $this->lexicon->getTopicList($language,$namespace);
         $this->assertNotEmpty($results);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetTopicList() {
         return [
             ['en','core'],
@@ -197,17 +197,17 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * @param string $namespace
-     * @depends testGetNamespacePath
-     * @dataProvider providerGetLanguageList
-     */
+    * @param string $namespace
+    * @depends testGetNamespacePath
+    * @dataProvider providerGetLanguageList
+    */
     public function testGetLanguageList($namespace) {
         $results = $this->lexicon->getLanguageList($namespace);
         $this->assertNotEmpty($results);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetLanguageList() {
         return [
             ['core'],
@@ -215,21 +215,21 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * @param string $topic
-     * @param string $key
-     * @param array $properties
-     * @param string $expected
-     * @dataProvider providerProcess
-     * @depends testLoad
-     */
+    * @param string $topic
+    * @param string $key
+    * @param array $properties
+    * @param string $expected
+    * @dataProvider providerProcess
+    * @depends testLoad
+    */
     public function testProcess($topic,$key,$properties,$expected) {
         $this->lexicon->load($topic);
         $translation = $this->lexicon->process($key,$properties);
         $this->assertEquals($expected,$translation);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerProcess() {
         return [
             ['chunk','chunk', [],'Chunk'],
@@ -241,20 +241,20 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * @param string $topic
-     * @param string $key
-     * @param boolean $expected
-     * @dataProvider providerExists
-     * @depends testLoad
-     */
+    * @param string $topic
+    * @param string $key
+    * @param boolean $expected
+    * @dataProvider providerExists
+    * @depends testLoad
+    */
     public function testExists($topic,$key,$expected = true) {
         $this->lexicon->load($topic);
         $exists = $this->lexicon->exists($key);
         $this->assertEquals($expected,$exists);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerExists() {
         return [
             ['chunk','chunk_err_nf',true],
@@ -265,23 +265,23 @@ class modLexiconTest extends MODxTestCase {
     }
 
     /**
-     * Test modLexicon.fetch and ensure prefixing features work
-     *
-     * @param string $topic The topic to load
-     * @param string $key The key to check for in the fetched lexicon
-     * @param string $filterPrefix If not empty, will filter results to only entries with this prefix
-     * @param boolean $removePrefix If true, will remove the filterPrefix from the returned keys
-     * @dataProvider providerFetch
-     * @depends testLoad
-     */
+    * Test modLexicon.fetch and ensure prefixing features work
+    *
+    * @param string $topic The topic to load
+    * @param string $key The key to check for in the fetched lexicon
+    * @param string $filterPrefix If not empty, will filter results to only entries with this prefix
+    * @param boolean $removePrefix If true, will remove the filterPrefix from the returned keys
+    * @dataProvider providerFetch
+    * @depends testLoad
+    */
     public function testFetch($topic,$key,$filterPrefix = '',$removePrefix = false) {
         $this->lexicon->load($topic);
         $lang = $this->lexicon->fetch($filterPrefix,$removePrefix);
         $this->assertArrayHasKey($key,$lang);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerFetch() {
         return [
             ['about','help_about'],

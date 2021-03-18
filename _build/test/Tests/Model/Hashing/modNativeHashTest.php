@@ -27,13 +27,13 @@ use MODX\Revolution\MODxTestCase;
  */
 class modNativeHashTest extends MODxTestCase {
     /**
-     * Test the native hasher implementation
-     *
-     * @dataProvider providerHash
-     * @param $string The string to create a hash of.
-     * @param $options The options for the hash process.
-     * @param $expected The expected hash value.
-     */
+    * Test the native hasher implementation
+    *
+    * @dataProvider providerHash
+    * @param $string The string to create a hash of.
+    * @param $options The options for the hash process.
+    * @param $expected The expected hash value.
+    */
     public function testHash($string) {
         $this->modx->getService('hashing', 'hashing.modHashing');
         /** @var modNative $hasher */

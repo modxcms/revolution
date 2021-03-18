@@ -34,10 +34,10 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     public $controllerPath = 'welcome';
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
 
@@ -85,10 +85,10 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     }
 
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $userGroups = $this->modx->getCollection(modUserGroup::class, ['name:LIKE' => '%Unit Test%']);
@@ -113,17 +113,17 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     }
 
     /**
-     * @param string|int $userGroupPk
-     * @dataProvider providerGetDashboard
-     */
+    * @param string|int $userGroupPk
+    * @dataProvider providerGetDashboard
+    */
     public function testGetDashboard($userGroupPk) {
         $this->modx->user->set('primary_group',$userGroupPk);
         $dashboard = $this->controller->dashboard;
         $this->assertInstanceOf(modDashboard::class, $dashboard);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGetDashboard() {
         return [
             [0], /* default dashboard */
@@ -133,8 +133,8 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     }
 
     /**
-     * Run a test to ensure custom dashboards work as expected
-     */
+    * Run a test to ensure custom dashboards work as expected
+    */
     public function testCustomDashboardRender() {
         $this->modx->user->set('primary_group',10000);
         $dashboard = $this->controller->dashboard;
@@ -143,18 +143,18 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     }
 
     /**
-     * Test to see if the welcome screen loads as expected
-     * @param boolean $showWelcomeScreen
-     * @dataProvider providerWelcomeScreen
-     */
+    * Test to see if the welcome screen loads as expected
+    * @param boolean $showWelcomeScreen
+    * @dataProvider providerWelcomeScreen
+    */
     public function testWelcomeScreen($showWelcomeScreen) {
         $this->modx->setOption('welcome_screen',$showWelcomeScreen);
         $this->controller->checkForWelcomeScreen();
         $this->assertEquals($showWelcomeScreen,$this->controller->showWelcomeScreen);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerWelcomeScreen() {
         return [
             [false],
@@ -163,22 +163,22 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testLoadCustomCssJs() {
         $this->controller->loadCustomCssJs();
         $this->assertNotEmpty($this->controller->head['js']);
     }
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetTemplateFile() {
         $templateFile = $this->controller->getTemplateFile();
         $this->assertNotEmpty($templateFile);
     }
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetPageTitle() {
         $pageTitle = $this->controller->getPageTitle();
         $this->assertNotEmpty($pageTitle);

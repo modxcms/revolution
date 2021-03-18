@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Registry;
 
@@ -28,9 +28,9 @@ use MODX\Revolution\MODxTestHarness;
  */
 class modFileRegisterTest extends MODxTestCase {
     /**
-     * @beforeClass
-     * @throws \xPDO\xPDOException
-     */
+    * @beforeClass
+    * @throws \xPDO\xPDOException
+    */
     public static function setUpFixturesBeforeClass() {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
@@ -39,9 +39,9 @@ class modFileRegisterTest extends MODxTestCase {
     }
 
     /**
-     * @afterClass
-     * @throws \xPDO\xPDOException
-     */
+    * @afterClass
+    * @throws \xPDO\xPDOException
+    */
     public static function tearDownFixturesAfterClass() {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
@@ -58,11 +58,11 @@ class modFileRegisterTest extends MODxTestCase {
     }
 
     /**
-     * Test modFileRegister->subscribe() method.
-     *
-     * @dataProvider providerSubscribe
-     * @param $topic
-     */
+    * Test modFileRegister->subscribe() method.
+    *
+    * @dataProvider providerSubscribe
+    * @param $topic
+    */
     public function testSubscribe($topic) {
         $this->modx->registry->register->subscribe($topic);
         $this->assertTrue(in_array($topic, $this->modx->registry->register->subscriptions), "Could not subscribe to register topic {$topic}");
@@ -78,12 +78,12 @@ class modFileRegisterTest extends MODxTestCase {
     }
 
     /**
-     * Test modFileRegister->setCurrentTopic() method.
-     *
-     * @dataProvider providerSetCurrentTopic
-     * @param string $expected The expected currentTopic result.
-     * @param string $topic The topic string to pass.
-     */
+    * Test modFileRegister->setCurrentTopic() method.
+    *
+    * @dataProvider providerSetCurrentTopic
+    * @param string $expected The expected currentTopic result.
+    * @param string $topic The topic string to pass.
+    */
     public function testSetCurrentTopic($expected, $topic) {
         $this->modx->registry->register->setCurrentTopic($topic);
         $this->assertEquals($expected, $this->modx->registry->register->getCurrentTopic(), "Could not set current topic.");
@@ -98,14 +98,14 @@ class modFileRegisterTest extends MODxTestCase {
     }
 
     /**
-     * Test modFileRegister->send() method.
-     *
-     * @dataProvider providerSend
-     * @param $expected
-     * @param $topic
-     * @param $msg
-     * @param $options
-     */
+    * Test modFileRegister->send() method.
+    *
+    * @dataProvider providerSend
+    * @param $expected
+    * @param $topic
+    * @param $msg
+    * @param $options
+    */
     public function testSend($expected, $topic, $msg, $options) {
         $this->modx->registry->register->subscribe($topic);
         $actual = $this->modx->registry->register->send($topic, $msg, $options);
@@ -148,14 +148,14 @@ class modFileRegisterTest extends MODxTestCase {
     }
 
     /**
-     * Test modFileRegister->read() method.
-     *
-     * @depends testSend
-     * @dataProvider providerRead
-     * @param $expected
-     * @param $topic
-     * @param $options
-     */
+    * Test modFileRegister->read() method.
+    *
+    * @depends testSend
+    * @dataProvider providerRead
+    * @param $expected
+    * @param $topic
+    * @param $options
+    */
     public function testRead($expected, $topic, $options) {
         $this->modx->registry->register->subscribe($topic);
         $actual = $this->modx->registry->register->read($options);

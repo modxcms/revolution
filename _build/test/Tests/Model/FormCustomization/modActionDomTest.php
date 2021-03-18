@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\FormCustomization;
 
@@ -26,22 +26,22 @@ use MODX\Revolution\MODxTestCase;
  */
 class modActionDomTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
     }
 
     /**
-     * @param string $expected
-     * @param string $ruleType
-     * @param string $name
-     * @param string $value
-     * @param string $container
-     * @dataProvider providerApply
-     */
+    * @param string $expected
+    * @param string $ruleType
+    * @param string $name
+    * @param string $value
+    * @param string $container
+    * @dataProvider providerApply
+    */
     public function testApply($expected,$ruleType,$name,$value,$container) {
         /** @var modActionDom $rule */
         $rule = $this->modx->newObject(modActionDom::class);
@@ -61,8 +61,8 @@ class modActionDomTest extends MODxTestCase {
         $this->assertEquals($expected,$content);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerApply() {
         return [
             [

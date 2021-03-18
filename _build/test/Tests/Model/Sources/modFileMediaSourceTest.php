@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Sources;
 
@@ -18,23 +18,23 @@ use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Sources\modFileMediaSource;
 
 /**
- * Tests related to the modFileMediaSource class.
- *
- * @package modx-test
- * @subpackage modx
- * @group Model
- * @group Sources
- * @group modFileMediaSource
- */
+* Tests related to the modFileMediaSource class.
+*
+* @package modx-test
+* @subpackage modx
+* @group Model
+* @group Sources
+* @group modFileMediaSource
+*/
 class modFileMediaSourceTest extends MODxTestCase {
     /** @var modFileMediaSource $source */
     public $source;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
 
@@ -47,10 +47,10 @@ class modFileMediaSourceTest extends MODxTestCase {
         ],'',true);
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->source = null;
@@ -72,8 +72,8 @@ class modFileMediaSourceTest extends MODxTestCase {
     }
 
     /**
-     * Test getBases with no provided file and default settings
-     */
+    * Test getBases with no provided file and default settings
+    */
     public function testGetBasesWithEmptyPath() {
         $this->source->initialize();
         $bases = $this->source->getBases('');
@@ -92,8 +92,8 @@ class modFileMediaSourceTest extends MODxTestCase {
     }
 
     /**
-     * Test getBases with a provided file and default settings
-     */
+    * Test getBases with a provided file and default settings
+    */
     public function testGetBasesWithProvidedFile() {
         $this->source->initialize();
         $bases = $this->source->getBases('assets/images/logo.png');

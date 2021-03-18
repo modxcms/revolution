@@ -3,4 +3,4 @@
 # This script runs the MODX Test Harness.
 #
 
-phpunit 
+phpunit

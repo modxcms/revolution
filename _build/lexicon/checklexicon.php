@@ -98,7 +98,7 @@ $xpdo->log(xPDO::LOG_LEVEL_INFO, 'Start lexicon check...');
 flush();
 
 /* language can be defined for checking language specific lexicons
-   en default means checks the english lexicons */
+    en default means checks the english lexicons */
 $language = 'en';
 if (!empty($argv) && $argc > 1) {
     $language = $argv[1];
@@ -197,10 +197,10 @@ class CheckLexicon
 
 
     /**
-     * Load package lexicons
-     *
-     * @return bool|array
-     */
+    * Load package lexicons
+    *
+    * @return bool|array
+    */
     private function loadLexicons()
     {
         $lexicons = [];
@@ -221,11 +221,11 @@ class CheckLexicon
     }
 
     /**
-     * Load lexicon files
-     *
-     * @param $path string
-     * @return array|bool
-     */
+    * Load lexicon files
+    *
+    * @param $path string
+    * @return array|bool
+    */
     private function loadLexiconFiles($path)
     {
         if (file_exists($path)) {
@@ -247,8 +247,8 @@ class CheckLexicon
     }
 
     /**
-     * Add used lexicon keys
-     */
+    * Add used lexicon keys
+    */
     private function addKeys()
     {
         $directory = new \RecursiveDirectoryIterator($this->scanPath, \RecursiveDirectoryIterator::SKIP_DOTS);
@@ -285,11 +285,11 @@ class CheckLexicon
     }
 
     /**
-     * Check for allowed file types
-     *
-     * @param \RecursiveDirectoryIterator $file
-     * @return bool
-     */
+    * Check for allowed file types
+    *
+    * @param \RecursiveDirectoryIterator $file
+    * @return bool
+    */
     private function allowedFiletype($file)
     {
         $pathinfo = pathinfo($file->getFilename());
@@ -306,11 +306,11 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in php files:
-     * modx->lexicon('whatever',
-     *
-     * @param string $filename
-     */
+    * Add lexicon calls in php files:
+    * modx->lexicon('whatever',
+    *
+    * @param string $filename
+    */
     private function addPhpKeys($filename)
     {
         $fileContent = file_get_contents($filename);
@@ -335,12 +335,12 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in javascript files:
-     * _('whatever',
-     * createDelegate(this, ['whatever'
-     *
-     * @param string $filename
-     */
+    * Add lexicon calls in javascript files:
+    * _('whatever',
+    * createDelegate(this, ['whatever'
+    *
+    * @param string $filename
+    */
     private function addJsKeys($filename)
     {
         $fileContent = file_get_contents($filename);
@@ -382,11 +382,11 @@ class CheckLexicon
     }
 
     /**
-     * Add lexicon calls in chunk files:
-     * [[%whatever
-     *
-     * @param string $filename
-     */
+    * Add lexicon calls in chunk files:
+    * [[%whatever
+    *
+    * @param string $filename
+    */
     private function addChunkKeys($filename)
     {
         $fileContent = file_get_contents($filename);
@@ -411,11 +411,11 @@ class CheckLexicon
     }
 
     /**
-     * Add _lang calls in smarty template files:
-     * {$_lang.whatever
-     *
-     * @param string $filename
-     */
+    * Add _lang calls in smarty template files:
+    * {$_lang.whatever
+    *
+    * @param string $filename
+    */
     private function addSmartyKeys($filename)
     {
         $fileContent = file_get_contents($filename);
@@ -434,8 +434,8 @@ class CheckLexicon
     }
 
     /**
-     * Add setting language keys
-     */
+    * Add setting language keys
+    */
     private function addSettingKeys()
     {
         $settings = [];
@@ -457,8 +457,8 @@ class CheckLexicon
     }
 
     /**
-     * Add menu language keys
-     */
+    * Add menu language keys
+    */
     private function addMenuKeys()
     {
         $menus = [];
@@ -475,9 +475,9 @@ class CheckLexicon
     }
 
     /**
-     * Recursive add menu language key
-     * @param modMenu $menu
-     */
+    * Recursive add menu language key
+    * @param modMenu $menu
+    */
     private function addMenuKey(modMenu $menu)
     {
         $this->languageKeys[] = $menu->get('text');
@@ -489,8 +489,8 @@ class CheckLexicon
     }
 
     /**
-     * Add widget language keys
-     */
+    * Add widget language keys
+    */
     private function addWidgetKeys()
     {
         $widgets = [];
@@ -507,8 +507,8 @@ class CheckLexicon
     }
 
     /**
-     * Add permission language keys
-     */
+    * Add permission language keys
+    */
     private function addPermissionKeys()
     {
         $directory = new \RecursiveDirectoryIterator(MODX_BASE_PATH . '_build/data/permissions/', \RecursiveDirectoryIterator::SKIP_DOTS);
@@ -543,11 +543,11 @@ class CheckLexicon
     }
 
     /**
-     * Write missing/superfluous/variable keys to the file _missing.php/_superfluous.php/_variable.php in the _build/lexicon folder
-     *
-     * @param string $type
-     * @return bool|string
-     */
+    * Write missing/superfluous/variable keys to the file _missing.php/_superfluous.php/_variable.php in the _build/lexicon folder
+    *
+    * @param string $type
+    * @return bool|string
+    */
     private function writeKeys($type)
     {
         $folder = dirname(__FILE__);

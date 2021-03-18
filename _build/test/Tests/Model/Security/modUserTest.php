@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Security;
 
@@ -28,10 +28,10 @@ class modUserTest extends MODxTestCase {
     /** @var modUser $user */
     public $user;
     /**
-     * Setup dummy data for each test.
-     *
-     * @before
-     */
+    * Setup dummy data for each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->user = $this->modx->newObject(modUser::class);
@@ -51,21 +51,21 @@ class modUserTest extends MODxTestCase {
     }
 
     /**
-     * Test the overrides on xPDOObject::set for the user
-     *
-     * @param string $field
-     * @param mixed $value
-     * @param mixed $expected
-     * @dataProvider providerSet
-     */
+    * Test the overrides on xPDOObject::set for the user
+    *
+    * @param string $field
+    * @param mixed $value
+    * @param mixed $expected
+    * @dataProvider providerSet
+    */
     public function testSet($field,$value,$expected) {
         $this->user->set($field,$value);
         $actual = $this->user->get($field);
         $this->assertEquals($expected,$actual);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSet() {
         return [
             ['password','boogie',md5('boogie')],
@@ -74,28 +74,28 @@ class modUserTest extends MODxTestCase {
     }
 
     /**
-     * Ensure generateToken returns a non-empty value
-     * @return void
-     */
+    * Ensure generateToken returns a non-empty value
+    * @return void
+    */
     public function testGenerateToken() {
         $token = $this->user->generateToken('');
         $this->assertNotEmpty($token);
     }
 
     /**
-     *
-     * @param int $length
-     * @param array $options
-     * @dataProvider providerGeneratePassword
-     */
+    *
+    * @param int $length
+    * @param array $options
+    * @dataProvider providerGeneratePassword
+    */
     public function testGeneratePassword($length,array $options = []) {
         $password = $this->user->generatePassword($length,$options);
         $this->assertNotEmpty($password);
         $this->assertEquals($length,strlen($password));
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerGeneratePassword() {
         return [
             [10],
@@ -135,9 +135,9 @@ class modUserTest extends MODxTestCase {
     }
 
     /**
-     * Ensure passwordMatches works
-     * @return void
-     */
+    * Ensure passwordMatches works
+    * @return void
+    */
     public function testPasswordMatches() {
         $this->assertTrue($this->user->passwordMatches('boogles'));
         $this->assertFalse($this->user->passwordMatches('bugles'));

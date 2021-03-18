@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Element;
 
@@ -31,10 +31,10 @@ use MODX\Revolution\Processors\Element\Snippet\Remove;
  */
 class SnippetProcessorsTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         /** @var modSnippet $snippet */
@@ -44,10 +44,10 @@ class SnippetProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Cleanup data after this test.
-     *
-     * @after
-     */
+    * Cleanup data after this test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         $snippets = $this->modx->getCollection(modSnippet::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modSnippet $snippet */
@@ -58,12 +58,12 @@ class SnippetProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/snippet/create processor, which creates a Snippet
-     *
-     * @param boolean $shouldPass
-     * @param string $snippetPk
-     * @dataProvider providerSnippetCreate
-     */
+    * Tests the element/snippet/create processor, which creates a Snippet
+    *
+    * @param boolean $shouldPass
+    * @param string $snippetPk
+    * @dataProvider providerSnippetCreate
+    */
     public function testSnippetCreate($shouldPass,$snippetPk) {
         if (empty($snippetPk)) return;
         $result = $this->modx->runProcessor(Create::class, [
@@ -79,9 +79,9 @@ class SnippetProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not create Snippet: `'.$snippetPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/snippet/create processor test.
-     * @return array
-     */
+    * Data provider for element/snippet/create processor test.
+    * @return array
+    */
     public function providerSnippetCreate() {
         return [
             [true,'UnitTestSnippet2'],
@@ -91,11 +91,11 @@ class SnippetProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/snippet/get processor, which gets a Snippet
-     * @param boolean $shouldPass
-     * @param string $snippetPk
-     * @dataProvider providerSnippetGet
-     */
+    * Tests the element/snippet/get processor, which gets a Snippet
+    * @param boolean $shouldPass
+    * @param string $snippetPk
+    * @dataProvider providerSnippetGet
+    */
     public function testSnippetGet($shouldPass,$snippetPk) {
         if (empty($snippetPk)) return;
 
@@ -116,9 +116,9 @@ class SnippetProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not get Snippet: `'.$snippetPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/snippet/create processor test.
-     * @return array
-     */
+    * Data provider for element/snippet/create processor test.
+    * @return array
+    */
     public function providerSnippetGet() {
         return [
             [true,'UnitTestSnippet'],
@@ -127,14 +127,14 @@ class SnippetProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to get a list of snippets
-     *
-     * @param string $sort
-     * @param string $dir
-     * @param int $limit
-     * @param int $start
-     * @dataProvider providerSnippetGetList
-     */
+    * Attempts to get a list of snippets
+    *
+    * @param string $sort
+    * @param string $dir
+    * @param int $limit
+    * @param int $start
+    * @dataProvider providerSnippetGetList
+    */
     public function testSnippetGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
         $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
@@ -146,9 +146,9 @@ class SnippetProcessorsTest extends MODxTestCase {
         $this->assertTrue(!empty($results),'Could not get list of Snippets: '.$result->getMessage());
     }
     /**
-     * Data provider for element/snippet/getlist processor test.
-     * @return array
-     */
+    * Data provider for element/snippet/getlist processor test.
+    * @return array
+    */
     public function providerSnippetGetList() {
         return [
             ['name','ASC',5,0],
@@ -156,12 +156,12 @@ class SnippetProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/snippet/remove processor, which removes a Snippet
-     *
-     * @param boolean $shouldPass
-     * @param string $snippetPk
-     * @dataProvider providerSnippetRemove
-     */
+    * Tests the element/snippet/remove processor, which removes a Snippet
+    *
+    * @param boolean $shouldPass
+    * @param string $snippetPk
+    * @dataProvider providerSnippetRemove
+    */
     public function testSnippetRemove($shouldPass,$snippetPk) {
         if (empty($snippetPk)) return;
 
@@ -182,9 +182,9 @@ class SnippetProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not remove Snippet: `'.$snippetPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/snippet/remove processor test.
-     * @return array
-     */
+    * Data provider for element/snippet/remove processor test.
+    * @return array
+    */
     public function providerSnippetRemove() {
         return [
             [true,'UnitTestSnippet'],

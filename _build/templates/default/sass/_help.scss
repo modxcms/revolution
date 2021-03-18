@@ -1,206 +1,206 @@
 .nobg .x-panel-body {
-  background: transparent;
-  padding-right: 1.5em;
+    background: transparent;
+    padding-right: 1.5em;
 }
 
 /* Thanks to Christian Seel for these! http://chsmedien.com/blog/2013/02/customize-your-modx-dashboard */
 #managerbuttons {
-  margin-bottom: 1em;
-  overflow: hidden;
-  width: 100%;
+    margin-bottom: 1em;
+    overflow: hidden;
+    width: 100%;
 }
 
 #managerbuttons ul:before,
 #managerbuttons ul:after {
-  content: " ";
-  display: table;
+    content: " ";
+    display: table;
 }
 
 #managerbuttons ul:after {
-  clear: both;
+    clear: both;
 }
 
 #managerbuttons ul {
-  /* clearfix */
-  *zoom: 1;
-  margin: 0;
-  width: 100%;
+    /* clearfix */
+    *zoom: 1;
+    margin: 0;
+    width: 100%;
 }
 
 #managerbuttons ul li {
-  display: table;
-  float: left;
-  margin: 0;
-  padding: 0 1%;
-  position: relative;
-  width: 20%;
-  box-sizing: border-box;
+    display: table;
+    float: left;
+    margin: 0;
+    padding: 0 1%;
+    position: relative;
+    width: 20%;
+    box-sizing: border-box;
 
-  &:first-child {
-    padding-left: 0%;
-  }
+    &:first-child {
+        padding-left: 0%;
+    }
 
-  &:last-child {
-    padding-right: 0%;
-  }
+    &:last-child {
+        padding-right: 0%;
+    }
 }
 
 #managerbuttons ul li a {
-  background-color: $white;
-  border-radius: $borderRadius;
-  border: 1px solid $borderColor;
-  box-shadow: 0 1px 0 $borderColor;
-  color: $darkestGray;
-  display: table-cell; /* MODX 2.x.x Manager Button Styles */
-  font: $fontSmall;
-  font-weight: bold;
-  padding: 12px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
+    background-color: $white;
+    border-radius: $borderRadius;
+    border: 1px solid $borderColor;
+    box-shadow: 0 1px 0 $borderColor;
+    color: $darkestGray;
+    display: table-cell; /* MODX 2.x.x Manager Button Styles */
+    font: $fontSmall;
+    font-weight: bold;
+    padding: 12px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
 }
 
 #managerbuttons ul li a span {
-  display: block;
-  line-height: 1.4;
+    display: block;
+    line-height: 1.4;
 }
 
 #managerbuttons ul li a span.headline {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 #managerbuttons ul li a span.subline {
-  font-weight: normal;
+    font-weight: normal;
 }
 
 #managerbuttons ul li a span.icon {
-  display: block;
-  margin: 0 auto;
-  padding: 0 0 10px;
-  width: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 0 0 10px;
+    width: auto;
 }
 
 #managerbuttons ul li a:hover span.icon {
-  color: $colorSplash;
+    color: $colorSplash;
 }
 
 #helpBanner,
 #contactus {
-  box-sizing: border-box;
-  background: $white;
-  border: 1px solid $borderColor;
-  box-shadow: 0 1px 0 $borderColor;
-  margin: 0.75em 0 1.75em;
-  padding: 18px;
-  width: 100%;
+    box-sizing: border-box;
+    background: $white;
+    border: 1px solid $borderColor;
+    box-shadow: 0 1px 0 $borderColor;
+    margin: 0.75em 0 1.75em;
+    padding: 18px;
+    width: 100%;
 
-  h3 {
-    margin: 0 0 1em;
-  }
+    h3 {
+        margin: 0 0 1em;
+    }
 }
 
 #helpBanner {
-  margin-top: 1.5em;
-  min-height: 112px;
-  background-image: url($imgPath + 'modx-logo-color.svg'), none;
-  background-repeat: no-repeat;
-  background-attachment: none;
-  background-position: 97% center;
-  background-size: 200px;
+    margin-top: 1.5em;
+    min-height: 112px;
+    background-image: url($imgPath + 'modx-logo-color.svg'), none;
+    background-repeat: no-repeat;
+    background-attachment: none;
+    background-position: 97% center;
+    background-size: 200px;
 
-  #helpLogo {
-    float: right;
-    height: 76px;
-    margin-right: 1em;
-    width: 200px;
-  }
+    #helpLogo {
+        float: right;
+        height: 76px;
+        margin-right: 1em;
+        width: 200px;
+    }
 }
 
 #contactus {
-  box-sizing: border-box;
-  float: left;
-  width: 60%;
-
-  form {
-    display: inline;
-  }
-
-  input[type=email] {
     box-sizing: border-box;
-    font-size: 1.1em;
-    margin-right: 4px;
-    padding: 0.4em;
-    width: 70%;
-  }
+    float: left;
+    width: 60%;
 
-  input[type=submit] {
-    border: 0;
-    cursor: pointer;
-    font-size: 1.1em;
-    padding: 6px 10px;
-  }
+    form {
+        display: inline;
+    }
 
-  p {
-    color: lighten($mainText, 15%);
-    margin: 1em 0;
-  }
+    input[type=email] {
+        box-sizing: border-box;
+        font-size: 1.1em;
+        margin-right: 4px;
+        padding: 0.4em;
+        width: 70%;
+    }
 
-  form+p {
-    margin: 2em 0 0;
-  }
+    input[type=submit] {
+        border: 0;
+        cursor: pointer;
+        font-size: 1.1em;
+        padding: 6px 10px;
+    }
+
+    p {
+        color: lighten($mainText, 15%);
+        margin: 1em 0;
+    }
+
+    form+p {
+        margin: 2em 0 0;
+    }
 }
 
 #contactus a {
-  color: $mainText;
-  text-decoration: none;
+    color: $mainText;
+    text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
+    &:hover {
+        text-decoration: underline;
+
+        i {
+        text-decoration: none;
+        }
+    }
 
     i {
-      text-decoration: none;
+        margin: 0 15px -6px 0;
     }
-  }
-
-  i {
-    margin: 0 15px -6px 0;
-  }
 }
 
 #mcsignup input.x-btn {
-  padding: 10px 15px;
+    padding: 10px 15px;
 }
 
 .icon.icon-2x {
-  width: 22px;
-  text-align: center;
-  vertical-align: text-bottom;
+    width: 22px;
+    text-align: center;
+    vertical-align: text-bottom;
 }
 
 #aboutMODX {
-  box-sizing: border-box;
-  background: $lighterGray;
-  float: left;
-  margin: 1em 0 0 2%;
-  min-height: 300px;
-  padding: 1em;
-  width: 38%;
+    box-sizing: border-box;
+    background: $lighterGray;
+    float: left;
+    margin: 1em 0 0 2%;
+    min-height: 300px;
+    padding: 1em;
+    width: 38%;
 
-  p {
-    line-height: 1.6;
-    margin: 0 0 1em;
-  }
-
-  a {
-    color: $colorSplash;
-    margin: -2px -4px;
-    padding: 2px 4px;
-
-    &:hover {
-      background-color: $colorSplash;
-      color: $white;
-      text-decoration: none;
+    p {
+        line-height: 1.6;
+        margin: 0 0 1em;
     }
-  }
+
+    a {
+        color: $colorSplash;
+        margin: -2px -4px;
+        padding: 2px 4px;
+
+        &:hover {
+        background-color: $colorSplash;
+        color: $white;
+        text-decoration: none;
+        }
+    }
 }

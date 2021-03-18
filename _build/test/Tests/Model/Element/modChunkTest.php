@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
@@ -31,10 +31,10 @@ class modChunkTest extends MODxTestCase {
     public $chunk;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->chunk = $this->modx->newObject(modChunk::class);
@@ -50,34 +50,34 @@ class modChunkTest extends MODxTestCase {
         $this->chunk->setCacheable(false);
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->chunk = null;
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetContent() {
         $this->assertEquals($this->chunk->get('snippet'),$this->chunk->getContent());
     }
 
     /**
-     * @param string $content
-     * @dataProvider providerSetContent
-     * @depends testGetContent
-     */
+    * @param string $content
+    * @dataProvider providerSetContent
+    * @depends testGetContent
+    */
     public function testSetContent($content) {
         $this->chunk->setContent($content);
         $this->assertEquals($content,$this->chunk->get('snippet'));
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSetContent() {
         return [
             ['Test content.'],
@@ -85,18 +85,18 @@ class modChunkTest extends MODxTestCase {
     }
 
     /**
-     * @param string $expected
-     * @param array $properties
-     * @param null|string $content
-     * @dataProvider providerProcess
-     */
+    * @param string $expected
+    * @param array $properties
+    * @param null|string $content
+    * @dataProvider providerProcess
+    */
     public function testProcess($expected,array $properties = [],$content = null) {
         $result = $this->chunk->process($properties,$content);
         $this->assertEquals($expected,$result);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerProcess() {
         return [
             ['<p>Hello, John!</p>'],

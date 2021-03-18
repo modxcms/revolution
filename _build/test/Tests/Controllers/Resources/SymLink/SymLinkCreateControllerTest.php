@@ -14,8 +14,8 @@ class SymLinkCreateControllerTest extends ResourceCreateControllerTest
     public $controllerPath = 'resource/symlink/create';
 
     /**
-     * @before
-     */
+    * @before
+    */
     public function setUpFixtures()
     {
         parent::setUpFixtures();

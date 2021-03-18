@@ -33,18 +33,18 @@ class MODxTestHarness {
     protected static $debug = false;
 
     /**
-     * Create or grab a reference to a static xPDO/modX instance.
-     *
-     * The instances can be reused by multiple tests and test suites.
-     *
-     * @param string  $class   A fixture class to get an instance of.
-     * @param string  $name    A unique identifier for the fixture.
-     * @param boolean $new
-     * @param array   $options An array of configuration options for the fixture.
-     *
-     * @return object|null An instance of the specified fixture class or null on failure.
-     * @throws xPDOException
-     */
+    * Create or grab a reference to a static xPDO/modX instance.
+    *
+    * The instances can be reused by multiple tests and test suites.
+    *
+    * @param string  $class   A fixture class to get an instance of.
+    * @param string  $name    A unique identifier for the fixture.
+    * @param boolean $new
+    * @param array   $options An array of configuration options for the fixture.
+    *
+    * @return object|null An instance of the specified fixture class or null on failure.
+    * @throws xPDOException
+    */
     public static function &getFixture($class, $name, $new = false, array $options = []) {
         if (!$new && array_key_exists($name, self::$fixtures) && self::$fixtures[$name] instanceof $class) {
             $fixture =& self::$fixtures[$name];

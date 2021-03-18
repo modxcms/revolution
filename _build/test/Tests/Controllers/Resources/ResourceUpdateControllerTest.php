@@ -37,8 +37,8 @@ class ResourceUpdateControllerTest extends MODxControllerTestCase
 
 
     /**
-     * @depends testFound
-     */
+    * @depends testFound
+    */
     public function testRender()
     {
         $this->controller->setProperties([
@@ -59,8 +59,8 @@ class ResourceUpdateControllerTest extends MODxControllerTestCase
 
 
     /**
-     * @depends testFound
-     */
+    * @depends testFound
+    */
     public function testGetPageTitle()
     {
         $pageTitle = $this->controller->getPageTitle();

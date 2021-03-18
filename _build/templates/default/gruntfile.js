@@ -37,59 +37,59 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     dirs: {
-      /* just defining some properties */
-      lib: 'node_modules/',
-      scss: 'sass/',
-      css: '../../../manager/templates/default/css/',
-      template: '../../../manager/templates/default/',
-      manager: '../../../manager/',
-      setup: '../../../setup/assets/css/',
-      root: '../../../'
+    /* just defining some properties */
+    lib: 'node_modules/',
+    scss: 'sass/',
+    css: '../../../manager/templates/default/css/',
+    template: '../../../manager/templates/default/',
+    manager: '../../../manager/',
+    setup: '../../../setup/assets/css/',
+    root: '../../../'
     },
     copy: { /* move files */
-      bourbon: {
+    bourbon: {
         files: [{
-          src: '**/*',
-          cwd: '<%= dirs.lib %>bourbon/core',
-          dest: '<%= dirs.scss %>/bourbon',
-          expand: true,
-          nonull: true
+        src: '**/*',
+        cwd: '<%= dirs.lib %>bourbon/core',
+        dest: '<%= dirs.scss %>/bourbon',
+        expand: true,
+        nonull: true
         }]
-      },
-      neat: {
+    },
+    neat: {
         files: [{
-          src: '**/*',
-          cwd: '<%= dirs.lib %>bourbon-neat/core',
-          dest: '<%= dirs.scss %>/neat',
-          expand: true,
-          nonull: true
+        src: '**/*',
+        cwd: '<%= dirs.lib %>bourbon-neat/core',
+        dest: '<%= dirs.scss %>/neat',
+        expand: true,
+        nonull: true
         }]
-      },
-      fontawesome: {
+    },
+    fontawesome: {
         files: [{
-          src: '**/*',
-          cwd: '<%= dirs.lib %>@fortawesome/fontawesome-free/scss/',
-          dest: '<%= dirs.scss %>/font-awesome/',
-          expand: true,
-          flatten: true,
-          nonull: true
+        src: '**/*',
+        cwd: '<%= dirs.lib %>@fortawesome/fontawesome-free/scss/',
+        dest: '<%= dirs.scss %>/font-awesome/',
+        expand: true,
+        flatten: true,
+        nonull: true
         }, {
-          src: '**/*',
-          cwd: '<%= dirs.lib %>@fortawesome/fontawesome-free/webfonts/',
-          dest: '<%= dirs.template %>/fonts/',
-          expand: true,
-          flatten: true,
-          nonull: true
+        src: '**/*',
+        cwd: '<%= dirs.lib %>@fortawesome/fontawesome-free/webfonts/',
+        dest: '<%= dirs.template %>/fonts/',
+        expand: true,
+        flatten: true,
+        nonull: true
         }]
-      }
+    }
     },
     cssmin: {
-      compress: {
+    compress: {
         options: {
-          report: 'min',
-          sourceMap: true,
-          keepSpecialComments: 1,
-          banner: '/*!' +
+        report: 'min',
+        sourceMap: true,
+        keepSpecialComments: 1,
+        banner: '/*!' +
             '\n* ' +
             '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC' +
             '\n* ' +
@@ -108,191 +108,191 @@ module.exports = function (grunt) {
             '\n*/'
         },
         files: {
-          '<%= dirs.css %>index-min.css': '<%= dirs.css %>index.css',
-          '<%= dirs.css %>login-min.css': '<%= dirs.css %>login.css',
-          '<%= dirs.setup %>installer-min.css': '<%= dirs.setup %>installer.css'
+        '<%= dirs.css %>index-min.css': '<%= dirs.css %>index.css',
+        '<%= dirs.css %>login-min.css': '<%= dirs.css %>login.css',
+        '<%= dirs.setup %>installer-min.css': '<%= dirs.setup %>installer.css'
         }
-      }
+    }
     },
     sass: {
-      dist: {
+    dist: {
         options: {
-          style: 'compressed',
-          compass: false,
-          sourcemap: false,
-          implementation: sass,
-          update: true
+        style: 'compressed',
+        compass: false,
+        sourcemap: false,
+        implementation: sass,
+        update: true
         },
         files: {
-          '<%= dirs.css %>index.css': 'sass/index.scss',
-          '<%= dirs.css %>login.css': 'sass/login.scss',
-          '<%= dirs.setup %>installer.css': 'sass/installer.scss'
+        '<%= dirs.css %>index.css': 'sass/index.scss',
+        '<%= dirs.css %>login.css': 'sass/login.scss',
+        '<%= dirs.setup %>installer.css': 'sass/installer.scss'
         }
-      },
-      dev: {
+    },
+    dev: {
         options: {
-          style: 'expanded',
-          compass: false,
-          sourcemap: false,
-          implementation: sass,
-          trace: true
+        style: 'expanded',
+        compass: false,
+        sourcemap: false,
+        implementation: sass,
+        trace: true
         },
         files: {
-          '<%= dirs.css %>index.css': 'sass/index.scss',
-          '<%= dirs.css %>login.css': 'sass/login.scss',
-          '<%= dirs.setup %>installer.css': 'sass/installer.scss'
+        '<%= dirs.css %>index.css': 'sass/index.scss',
+        '<%= dirs.css %>login.css': 'sass/login.scss',
+        '<%= dirs.setup %>installer.css': 'sass/installer.scss'
         }
-      }
+    }
     },
     autoprefixer: { /* this expands the css so it needs to get compressed with cssmin afterwards */
-      options: {
+    options: {
         browsers: ['last 2 versions', 'ie 8', 'ie 9']
-      },
+    },
 
-      // just prefix the specified file
-      index: {
+    // just prefix the specified file
+    index: {
         options: {},
         src: '<%= dirs.css %>index.css',
         dest: '<%= dirs.css %>index.css'
-      },
-      login: {
+    },
+    login: {
         options: {},
         src: '<%= dirs.css %>login.css',
         dest: '<%= dirs.css %>login.css'
-      },
-      setup: {
+    },
+    setup: {
         options: {},
         src: '<%= dirs.setup %>installer.css',
         dest: '<%= dirs.setup %>installer.css'
-      }
+    }
     },
     csslint: {
-      strict: {
+    strict: {
         options: {
-          import: 2
+        import: 2
         },
         src: ['<%= dirs.css %>*.css']
-      }
+    }
     },
     watch: { /* trigger tasks on save */
-      scss: {
+    scss: {
         files: ['<%= dirs.scss %>/**/*'],
         tasks: ['sass:dev', 'notify:sass']
-      },
-      css: {
+    },
+    css: {
         options: {
-          livereload: true
+        livereload: true
         },
         files: ['<%= dirs.css %>*.css'],
         tasks: []
-      },
-      js: {
+    },
+    js: {
         files: coreJSFiles,
         tasks: ['compress']
-      }
+    }
     },
     imageoptim: {
-      png: {
+    png: {
         options: {
-          jpegMini: false,
-          imageAlpha: true,
-          quitAfter: true
+        jpegMini: false,
+        imageAlpha: true,
+        quitAfter: true
         },
         src: [
-          '<%= dirs.root %>setup/assets/**/*.png',
-          '<%= dirs.root %>_build/docs/**/*.png',
-          '<%= dirs.root %>manager/assets/ext3/**/*.png',
-          '<%= dirs.root %>manager/templates/default/**/*.png'
+        '<%= dirs.root %>setup/assets/**/*.png',
+        '<%= dirs.root %>_build/docs/**/*.png',
+        '<%= dirs.root %>manager/assets/ext3/**/*.png',
+        '<%= dirs.root %>manager/templates/default/**/*.png'
         ]
-      },
-      jpg: {
+    },
+    jpg: {
         options: {
-          jpegMini: false,
-          imageAlpha: false,
-          quitAfter: true
+        jpegMini: false,
+        imageAlpha: false,
+        quitAfter: true
         },
         src: [
-          '<%= dirs.root %>setup/assets/**/*.jpg',
-          '<%= dirs.root %>_build/docs/**/*.jpg',
-          '<%= dirs.root %>manager/assets/ext3/**/*.jpg',
-          '<%= dirs.root %>manager/templates/default/**/*.jpg'
+        '<%= dirs.root %>setup/assets/**/*.jpg',
+        '<%= dirs.root %>_build/docs/**/*.jpg',
+        '<%= dirs.root %>manager/assets/ext3/**/*.jpg',
+        '<%= dirs.root %>manager/templates/default/**/*.jpg'
         ]
-      },
-      gif: {
+    },
+    gif: {
         options: {
-          jpegMini: false,
-          imageAlpha: false,
-          quitAfter: true
+        jpegMini: false,
+        imageAlpha: false,
+        quitAfter: true
         },
         src: [
-          '<%= dirs.root %>setup/assets/**/*.gif',
-          '<%= dirs.root %>_build/docs/**/*.gif',
-          '<%= dirs.root %>manager/assets/ext3/**/*.gif',
-          '<%= dirs.root %>manager/templates/default/**/*.gif'
+        '<%= dirs.root %>setup/assets/**/*.gif',
+        '<%= dirs.root %>_build/docs/**/*.gif',
+        '<%= dirs.root %>manager/assets/ext3/**/*.gif',
+        '<%= dirs.root %>manager/templates/default/**/*.gif'
         ]
-      }
+    }
     },
     uglify: {
-      jsgrps: {
+    jsgrps: {
         options: {
-          report: 'min',
-          mangle: false,
-          sourceMap: true
+        report: 'min',
+        mangle: false,
+        sourceMap: true
         },
         files: {
-          '<%= dirs.manager %>assets/modext/modx.jsgrps-min.js': coreJSFiles
+        '<%= dirs.manager %>assets/modext/modx.jsgrps-min.js': coreJSFiles
         }
-      }
+    }
     },
     notify: {
-      sass: {
+    sass: {
         options: {
-          message: "Sass files created.",
-          title: "grunt"
+        message: "Sass files created.",
+        title: "grunt"
         }
-      },
-      js: {
+    },
+    js: {
         options: {
-          message: "Core JS concatenated and minified.",
-          title: "grunt"
+        message: "Core JS concatenated and minified.",
+        title: "grunt"
         }
-      },
-      map: {
+    },
+    map: {
         options: {
-          message: "Sass files created with source maps.",
-          title: "grunt"
+        message: "Sass files created with source maps.",
+        title: "grunt"
         }
-      },
-      build: {
+    },
+    build: {
         options: {
-          title: "grunt",
-          message: "Build complete."
+        title: "grunt",
+        message: "Build complete."
         }
-      },
-      prefixes: {
+    },
+    prefixes: {
         options: {
-          title: "grunt",
-          message: "CSS prefixes added."
+        title: "grunt",
+        message: "CSS prefixes added."
         }
-      },
-      watch: {
+    },
+    watch: {
         options: {
-          title: "grunt",
-          message: "Watching. Grunt has its eye on you."
+        title: "grunt",
+        message: "Watching. Grunt has its eye on you."
         }
-      },
-      expand: {
+    },
+    expand: {
         options: {
-          title: "grunt",
-          message: "CSS Expanded. Don't check it in."
+        title: "grunt",
+        message: "CSS Expanded. Don't check it in."
         }
-      },
-      uglify: {
+    },
+    uglify: {
         options: {
-          title: "grunt",
-          message: "JavaScript uglified."
+        title: "grunt",
+        message: "JavaScript uglified."
         }
-      }
+    }
     }
   });
 

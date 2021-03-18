@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Resource;
 
@@ -30,10 +30,10 @@ use MODX\Revolution\Processors\Resource\Create;
  */
 class ResourceCreateProcessorTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->modx->eventMap = [];
@@ -49,10 +49,10 @@ class ResourceCreateProcessorTest extends MODxTestCase {
     }
 
     /**
-     * Cleanup data after this test.
-     *
-     * @after
-     */
+    * Cleanup data after this test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         if ($this->modx instanceof modX) {
@@ -67,15 +67,15 @@ class ResourceCreateProcessorTest extends MODxTestCase {
     }
 
     /**
-     * Tests the resource/create processor
-     *
-     * @param boolean $shouldPass
-     * @param string $pageTitle
-     * @param array $fields
-     * @param array $expectedFieldsToCheck
-     * @param array $settings
-     * @dataProvider providerCreate
-     */
+    * Tests the resource/create processor
+    *
+    * @param boolean $shouldPass
+    * @param string $pageTitle
+    * @param array $fields
+    * @param array $expectedFieldsToCheck
+    * @param array $settings
+    * @dataProvider providerCreate
+    */
     public function testCreate($shouldPass = true,$pageTitle = '',array $fields = [],array $expectedFieldsToCheck = [],array $settings = []
     ) {
         if (empty($pageTitle)) {
@@ -113,9 +113,9 @@ class ResourceCreateProcessorTest extends MODxTestCase {
         }
     }
     /**
-     * Data provider for resource/create processor test.
-     * @return array
-     */
+    * Data provider for resource/create processor test.
+    * @return array
+    */
     public function providerCreate() {
         return [
             [ /* test basic resource creation */

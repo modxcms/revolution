@@ -13,4 +13,3 @@ if (!empty($scriptProperties['fail'])) {
 }
 
 return $modx->error->success('Success!', ['id' => 123]);
-

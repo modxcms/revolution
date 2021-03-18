@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution;
 
@@ -23,21 +23,21 @@ abstract class MODxControllerTestCase extends MODxTestCase {
     /** @var modManagerController $controller */
     public $controller;
     /**
-     * The short path to the controller, ie, "context/update"
-     * @var string $controllerPath
-     */
+    * The short path to the controller, ie, "context/update"
+    * @var string $controllerPath
+    */
     public $controllerPath;
     /**
-     * The name of the controller class to load, ie, "ContextUpdateManagerController"
-     * @var string $controllerName
-     */
+    * The name of the controller class to load, ie, "ContextUpdateManagerController"
+    * @var string $controllerName
+    */
     public $controllerName;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
 
@@ -66,10 +66,10 @@ abstract class MODxControllerTestCase extends MODxTestCase {
     }
 
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->controller = null;

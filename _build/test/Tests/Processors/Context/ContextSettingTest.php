@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Context;
 
@@ -32,10 +32,10 @@ use MODX\Revolution\Processors\Context\Setting\Create;
  */
 class ContextSettingProcessorsTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         /** @var modContext $ctx */
@@ -46,10 +46,10 @@ class ContextSettingProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         /** @var modContext $ctx */
@@ -66,12 +66,12 @@ class ContextSettingProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the context/setting/create processor, which creates a context setting
-     * @param string $ctx
-     * @param string $key
-     * @param string $description
-     * @dataProvider providerContextSettingCreate
-     */
+    * Tests the context/setting/create processor, which creates a context setting
+    * @param string $ctx
+    * @param string $key
+    * @param string $description
+    * @dataProvider providerContextSettingCreate
+    */
     public function testContextSettingCreate($ctx,$key,$description = '') {
         if (empty($ctx)) return;
         $this->assertTrue(true);
@@ -91,9 +91,9 @@ class ContextSettingProcessorsTest extends MODxTestCase {
         $this->assertTrue($s && $ct > 0,'Could not create context: `'.$ctx.'`: '.$result['message']);*/
     }
     /**
-     * Data provider for context/setting/create processor test.
-     * @return array
-     */
+    * Data provider for context/setting/create processor test.
+    * @return array
+    */
     public function providerContextSettingCreate() {
         return [
             ['unittest','unittest_setting',''],

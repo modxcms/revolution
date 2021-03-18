@@ -28,9 +28,9 @@ class modParserTest extends MODxTestCase {
     public static $scope = [];
 
     /**
-     * @beforeClass
-     * @throws \xPDO\xPDOException
-     */
+    * @beforeClass
+    * @throws \xPDO\xPDOException
+    */
     public static function setUpFixturesBeforeClass() {
         $modx = MODxTestHarness::getFixture(modX::class, 'modx', true);
         $placeholders = ['tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2'];
@@ -38,9 +38,9 @@ class modParserTest extends MODxTestCase {
     }
 
     /**
-     * @afterClass
-     * @throws \xPDO\xPDOException
-     */
+    * @afterClass
+    * @throws \xPDO\xPDOException
+    */
     public static function tearDownFixturesAfterClass() {
         if (!empty(self::$scope)) {
             $modx = MODxTestHarness::getFixture(modX::class, 'modx');
@@ -54,12 +54,12 @@ class modParserTest extends MODxTestCase {
     }
 
     /**
-     * Test modParser->collectElementTags()
-     *
-     * @dataProvider providerCollectElementTags
-     * @param $input
-     * @param $expected
-     */
+    * Test modParser->collectElementTags()
+    *
+    * @dataProvider providerCollectElementTags
+    * @param $input
+    * @param $expected
+    */
     public function testCollectElementTags($input, $prefix, $suffix, $expectedMatches, $expectedCount) {
         $matches = [];
         $tagCount = $this->modx->parser->collectElementTags($input, $matches, $prefix, $suffix);
@@ -67,8 +67,8 @@ class modParserTest extends MODxTestCase {
         $this->assertEquals($expectedCount, $tagCount, "Did not collect expected number of tags.");
     }
     /**
-     * dataProvider for testCollectElementTags
-     */
+    * dataProvider for testCollectElementTags
+    */
     public function providerCollectElementTags() {
         return [
             ["", '[[', ']]', [], 0],
@@ -78,15 +78,15 @@ class modParserTest extends MODxTestCase {
             [
                 "[[!+fi.successMessage:empty=`
     test[]
-	[[~[[*id]]]]
+    [[~[[*id]]]]
 `]]", '[[', ']]', [
                 [
                     "[[!+fi.successMessage:empty=`
     test[]
-	[[~[[*id]]]]
+    [[~[[*id]]]]
 `]]", "!+fi.successMessage:empty=`
     test[]
-	[[~[[*id]]]]
+    [[~[[*id]]]]
 `"
                 ]
             ], 1
@@ -102,13 +102,13 @@ class modParserTest extends MODxTestCase {
     }
 
     /**
-     * Test modParser->processElementTags().
-     *
-     * @dataProvider providerProcessElementTags
-     * @param array $expected An array with expected processed tag count and content.
-     * @param string $content The content to process tags in.
-     * @param array $params An array of parameters for the processElementTags() method.
-     */
+    * Test modParser->processElementTags().
+    *
+    * @dataProvider providerProcessElementTags
+    * @param array $expected An array with expected processed tag count and content.
+    * @param string $content The content to process tags in.
+    * @param array $params An array of parameters for the processElementTags() method.
+    */
     public function testProcessElementTags($expected, $content, $params) {
         $processed = $this->modx->parser->processElementTags(
             $params['parentTag'],
@@ -127,8 +127,8 @@ class modParserTest extends MODxTestCase {
         $this->assertEquals($expected, $actual, "Did not get expected results from tag parsing.");
     }
     /**
-     * dataProvider for testProcessElementTags.
-     */
+    * dataProvider for testProcessElementTags.
+    */
     public function providerProcessElementTags() {
         return [
             [
@@ -343,14 +343,14 @@ class modParserTest extends MODxTestCase {
     }
 
     /**
-     * Test modParser->parsePropertyString()
-     *
-     * @dataProvider providerParsePropertyString
-     *
-     * @param array $expected
-     * @param string $string
-     * @param boolean $valuesOnly
-     */
+    * Test modParser->parsePropertyString()
+    *
+    * @dataProvider providerParsePropertyString
+    *
+    * @param array $expected
+    * @param string $string
+    * @param boolean $valuesOnly
+    */
     public function testParsePropertyString($expected, $string, $valuesOnly) {
         $actual = $this->modx->parser->parsePropertyString($string, $valuesOnly);
         $this->assertEquals($expected, $actual, "Property string not parsed properly");
@@ -456,19 +456,19 @@ class modParserTest extends MODxTestCase {
     }
 
     /**
-     * Test modParser->realname().
-     *
-     * @dataProvider providerTestRealname
-     * @param string $expected The expected filtered tag name.
-     * @param string $string The tag name to filter.
-     */
+    * Test modParser->realname().
+    *
+    * @dataProvider providerTestRealname
+    * @param string $expected The expected filtered tag name.
+    * @param string $string The tag name to filter.
+    */
     public function testRealname($expected, $string) {
         $actual = $this->modx->parser->realname($string);
         $this->assertEquals($expected, $actual, "Could not generate proper realname from unfiltered element tag name");
     }
     /**
-     * dataProvider for testRealname.
-     */
+    * dataProvider for testRealname.
+    */
     public function providerTestRealname() {
         return [
             ["", ""],

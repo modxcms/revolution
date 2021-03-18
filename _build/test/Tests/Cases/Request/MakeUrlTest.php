@@ -25,10 +25,10 @@ use MODX\Revolution\MODxTestCase;
  */
 class MakeUrlTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
 
@@ -93,10 +93,10 @@ class MakeUrlTest extends MODxTestCase {
         $this->modx->context->aliasMap = null;
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         /** @var modResource $resource */
@@ -107,19 +107,19 @@ class MakeUrlTest extends MODxTestCase {
     }
 
     /**
-     * Test a single call to makeUrl with the base Resource and no parameters
-     *
-     * @param int $id
-     * @param string $expected
-     * @dataProvider providerSingleParameter
-     */
+    * Test a single call to makeUrl with the base Resource and no parameters
+    *
+    * @param int $id
+    * @param string $expected
+    * @dataProvider providerSingleParameter
+    */
     public function testSingleParameter($id,$expected) {
         $url = $this->modx->makeUrl($id);
         $this->assertEquals($expected, $url);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSingleParameter() {
         return [
             // Dummy data to pass on first makeUrl
@@ -130,22 +130,22 @@ class MakeUrlTest extends MODxTestCase {
     }
 
     /**
-     * Test a call to makeUrl with REQUEST arguments
-     * @param int $id
-     * @param array $arguments
-     * @param string $expected
-     * @param boolean $xhtmlUrls
-     * @dataProvider providerArguments
-     * @depends testSingleParameter
-     */
+    * Test a call to makeUrl with REQUEST arguments
+    * @param int $id
+    * @param array $arguments
+    * @param string $expected
+    * @param boolean $xhtmlUrls
+    * @dataProvider providerArguments
+    * @depends testSingleParameter
+    */
     public function testArguments($id,array $arguments,$expected,$xhtmlUrls = false) {
         $this->modx->setOption('xhtml_urls',$xhtmlUrls);
         $url = $this->modx->makeUrl($id,'',$arguments);
         $this->assertEquals($expected,$url);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerArguments() {
         return [
             [12345, [],'unit-test/'],
@@ -156,20 +156,20 @@ class MakeUrlTest extends MODxTestCase {
     }
 
     /**
-     * Test a call to makeUrl with REQUEST arguments
-     * @param int $id
-     * @param string $scheme
-     * @param string $expected
-     * @dataProvider providerScheme
-     * @depends testSingleParameter
-     */
+    * Test a call to makeUrl with REQUEST arguments
+    * @param int $id
+    * @param string $scheme
+    * @param string $expected
+    * @dataProvider providerScheme
+    * @depends testSingleParameter
+    */
     public function testScheme($id,$scheme,$expected) {
         $url = $this->modx->makeUrl($id,'',null,$scheme);
         $this->assertEquals($expected,$url);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerScheme() {
         return [
             [12345,'','unit-test/'],

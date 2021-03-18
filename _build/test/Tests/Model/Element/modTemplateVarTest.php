@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
@@ -30,10 +30,10 @@ class modTemplateVarTest extends MODxTestCase {
     public $tv;
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->tv = $this->modx->newObject(modTemplateVar::class);
@@ -50,34 +50,34 @@ class modTemplateVarTest extends MODxTestCase {
         $this->tv->setCacheable(false);
     }
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $this->tv = null;
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetContent() {
         $this->assertEquals($this->tv->get('default_text'),$this->tv->getContent());
     }
 
     /**
-     * @param string $content
-     * @dataProvider providerSetContent
-     * @depends testGetContent
-     */
+    * @param string $content
+    * @dataProvider providerSetContent
+    * @depends testGetContent
+    */
     public function testSetContent($content) {
         $this->tv->setContent($content);
         $this->assertEquals($content,$this->tv->get('default_text'));
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerSetContent() {
         return [
             ['Test content.'],
@@ -85,18 +85,18 @@ class modTemplateVarTest extends MODxTestCase {
     }
 
     /**
-     * @param string $expected
-     * @param array $properties
-     * @param null|string $content
-     * @dataProvider providerProcess
-     */
+    * @param string $expected
+    * @param array $properties
+    * @param null|string $content
+    * @dataProvider providerProcess
+    */
     public function testProcess($expected,array $properties = [],$content = null) {
         $result = $this->tv->process($properties,$content);
         $this->assertEquals($expected,$result);
     }
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function providerProcess() {
         return [
             ['<p>Hello, John!</p>'],

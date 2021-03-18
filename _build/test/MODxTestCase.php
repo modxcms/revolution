@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution;
 
@@ -22,20 +22,20 @@ use Yoast\PHPUnitPolyfills\TestCases\XTestCase;
  */
 abstract class MODxTestCase extends XTestCase {
     /**
-     * @var modX $modx
-     */
+    * @var modX $modx
+    */
     public $modx = null;
     /**
-     * @var bool
-     */
+    * @var bool
+    */
     public $debug = false;
 
     /**
-     * Ensure all tests have a reference to the MODX object
-     *
-     * @before
-     * @throws xPDOException
-     */
+    * Ensure all tests have a reference to the MODX object
+    *
+    * @before
+    * @throws xPDOException
+    */
     public function setUpFixtures() {
         $this->modx = MODxTestHarness::getFixture(modX::class, 'modx');
         if ($this->modx->request) {
@@ -49,29 +49,29 @@ abstract class MODxTestCase extends XTestCase {
     }
 
     /**
-     * Remove reference at end of test case
-     *
-     * @after
-     */
+    * Remove reference at end of test case
+    *
+    * @after
+    */
     public function tearDownFixtures() {}
 
     /**
-     * Check a MODX return result for a success flag
-     *
-     * @param ProcessorResponse $result The result response
-     * @return boolean
-     */
+    * Check a MODX return result for a success flag
+    *
+    * @param ProcessorResponse $result The result response
+    * @return boolean
+    */
     public function checkForSuccess(&$result) {
         if (empty($result) || !($result instanceof ProcessorResponse)) return false;
         return !$result->isError();
     }
 
     /**
-     * Check a MODX processor response and return results
-     *
-     * @param ProcessorResponse $result The response
-     * @return array
-     */
+    * Check a MODX processor response and return results
+    *
+    * @param ProcessorResponse $result The response
+    * @return array
+    */
     public function getResults(&$result) {
         $response = ltrim(rtrim($result->response,')'),'(');
         $response = json_decode($response, true);

@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Hashing;
 
@@ -27,13 +27,13 @@ use MODX\Revolution\MODxTestCase;
  */
 class modPBKDF2HashTest extends MODxTestCase {
     /**
-     * Test the modPBKDF2->hash() method.
-     *
-     * @dataProvider providerHash
-     * @param $string The string to create a hash of.
-     * @param $options The options for the hash process.
-     * @param $expected The expected hash value.
-     */
+    * Test the modPBKDF2->hash() method.
+    *
+    * @dataProvider providerHash
+    * @param $string The string to create a hash of.
+    * @param $options The options for the hash process.
+    * @param $expected The expected hash value.
+    */
     public function testHash($string, $options, $expected) {
         $this->modx->getService('hashing', 'hashing.modHashing');
         /** @var modPBKDF2 $pbkdf2 */

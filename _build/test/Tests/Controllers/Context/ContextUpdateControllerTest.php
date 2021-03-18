@@ -31,47 +31,47 @@ class ContextUpdateControllerTest extends MODxControllerTestCase {
     public $controllerPath = 'context/update';
 
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         $this->controller->setProperty('key','web');
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testInitialize() {
         $this->controller->initialize();
         $this->assertNotEmpty($this->controller->context);
     }
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testLoadCustomCssJs() {
         $this->controller->loadCustomCssJs();
         $this->assertNotEmpty($this->controller->head['js']);
     }
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function testGetTemplateFile() {
         $templateFile = $this->controller->getTemplateFile();
         $this->assertEmpty($templateFile);
     }
     /**
-     * @depends testInitialize
-     */
+    * @depends testInitialize
+    */
     public function testGetPageTitle() {
         $this->controller->initialize();
         $pageTitle = $this->controller->getPageTitle();
         $this->assertNotEmpty($pageTitle);
     }
     /**
-     * @depends testInitialize
-     */
+    * @depends testInitialize
+    */
     public function testProcess() {
         $this->controller->initialize();
         $this->controller->process();

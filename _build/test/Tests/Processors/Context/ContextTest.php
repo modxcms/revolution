@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Context;
 
@@ -34,10 +34,10 @@ use MODX\Revolution\Processors\Context\Update;
  */
 class ContextProcessorsTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         /** @var modContext $ctx */
@@ -54,10 +54,10 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tear down fixtures after each test.
-     *
-     * @after
-     */
+    * Tear down fixtures after each test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         parent::tearDownFixtures();
         $contexts = $this->modx->getCollection(modContext::class, [
@@ -70,12 +70,12 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the context/create processor, which creates a context
-     *
-     * @param string $ctx
-     * @param string $description
-     * @dataProvider providerContextCreate
-     */
+    * Tests the context/create processor, which creates a context
+    *
+    * @param string $ctx
+    * @param string $description
+    * @dataProvider providerContextCreate
+    */
     public function testContextCreate($ctx,$description = '') {
         if (empty($ctx)) return;
         /** @var ProcessorResponse $result */
@@ -91,9 +91,9 @@ class ContextProcessorsTest extends MODxTestCase {
         $this->assertTrue($s && $ct > 0,'Could not create context: `'.$ctx.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for context/create processor test.
-     * @return array
-     */
+    * Data provider for context/create processor test.
+    * @return array
+    */
     public function providerContextCreate() {
         return [
             ['unittest4','Our unit testing context.'],
@@ -101,15 +101,15 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tries to create an invalid context
-     *
-     * @TODO Fix this; letting it run causes other tests to fail since the error persists across test. For some reason
-     * the error handler's error queue isn't being reset.
-     *
-     * @param string $ctx
-     * @return boolean
-     * @dataProvider providerContextCreateInvalid
-     */
+    * Tries to create an invalid context
+    *
+    * @TODO Fix this; letting it run causes other tests to fail since the error persists across test. For some reason
+    * the error handler's error queue isn't being reset.
+    *
+    * @param string $ctx
+    * @return boolean
+    * @dataProvider providerContextCreateInvalid
+    */
     public function testContextCreateInvalid($ctx = '') {
         $this->assertTrue(true); return true;
         if (empty($ctx)) return;
@@ -124,9 +124,9 @@ class ContextProcessorsTest extends MODxTestCase {
         return $success;
     }
     /**
-     * Data provider for context/create processor test.
-     * @return array
-     */
+    * Data provider for context/create processor test.
+    * @return array
+    */
     public function providerContextCreateInvalid() {
         return [
             ['mgr'],
@@ -135,13 +135,13 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to duplicate a context
-     * @param string $ctx
-     * @param string $newKey
-     * @return boolean
-     * @dataProvider providerContextDuplicate
-     * @depends testContextCreate
-     */
+    * Attempts to duplicate a context
+    * @param string $ctx
+    * @param string $newKey
+    * @return boolean
+    * @dataProvider providerContextDuplicate
+    * @depends testContextCreate
+    */
     public function testContextDuplicate($ctx,$newKey) {
         if (empty($ctx) || empty($newKey)) return false;
 
@@ -156,9 +156,9 @@ class ContextProcessorsTest extends MODxTestCase {
         return $success;
     }
     /**
-     * Data provider for context/duplicate processor test.
-     * @return array
-     */
+    * Data provider for context/duplicate processor test.
+    * @return array
+    */
     public function providerContextDuplicate() {
         return [
             ['unittest','unittestCopy'],
@@ -166,14 +166,14 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to update a context
-     * @dataProvider providerContextUpdate
-     * @depends testContextCreate
-     *
-     * @TODO pass in some settings in JSON format to test that.
-     * @param string $ctx
-     * @param string $description
-     */
+    * Attempts to update a context
+    * @dataProvider providerContextUpdate
+    * @depends testContextCreate
+    *
+    * @TODO pass in some settings in JSON format to test that.
+    * @param string $ctx
+    * @param string $description
+    */
     public function testContextUpdate($ctx,$description = '') {
         if (empty($ctx)) return;
 
@@ -189,9 +189,9 @@ class ContextProcessorsTest extends MODxTestCase {
         $this->assertTrue($success,'Could not update context: `'.$ctx.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for context/update processor test.
-     * @return array
-     */
+    * Data provider for context/update processor test.
+    * @return array
+    */
     public function providerContextUpdate() {
         return [
             ['unittest','Changing the description of our test context.'],
@@ -199,14 +199,14 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to get a context
-     * @dataProvider providerContextGet
-     * @depends testContextCreate
-     *
-     * @TODO pass in some settings in JSON format to test that.
-     * @param string $ctx
-     * @return boolean
-     */
+    * Attempts to get a context
+    * @dataProvider providerContextGet
+    * @depends testContextCreate
+    *
+    * @TODO pass in some settings in JSON format to test that.
+    * @param string $ctx
+    * @return boolean
+    */
     public function testContextGet($ctx) {
         if (empty($ctx)) return false;
 
@@ -222,9 +222,9 @@ class ContextProcessorsTest extends MODxTestCase {
         return $success;
     }
     /**
-     * Data provider for context/get processor test.
-     * @return array
-     */
+    * Data provider for context/get processor test.
+    * @return array
+    */
     public function providerContextGet() {
         return [
             ['unittest'],
@@ -233,13 +233,13 @@ class ContextProcessorsTest extends MODxTestCase {
 
 
     /**
-     * Attempts to get a non-existent context
-     *
-     * @param string $ctx
-     * @param string $description
-     * @return boolean
-     * @dataProvider providerContextGetInvalid
-     */
+    * Attempts to get a non-existent context
+    *
+    * @param string $ctx
+    * @param string $description
+    * @return boolean
+    * @dataProvider providerContextGetInvalid
+    */
     public function testContextGetInvalid($ctx,$description = '') {
         if (empty($ctx)) return false;
 
@@ -255,9 +255,9 @@ class ContextProcessorsTest extends MODxTestCase {
         return $success;
     }
     /**
-     * Data provider for context/getinvalid processor test.
-     * @return array
-     */
+    * Data provider for context/getinvalid processor test.
+    * @return array
+    */
     public function providerContextGetInvalid() {
         return [
             ['unittestdoesntexistatall'],
@@ -265,16 +265,16 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to get a list of contexts
-     *
-     * @TODO Fix this. Seems to crash phpunit when the getlist processor is run.
-     *
-     * @param string $sort
-     * @param string $dir
-     * @param int $limit
-     * @param int $start
-     * @dataProvider providerContextGetList
-     */
+    * Attempts to get a list of contexts
+    *
+    * @TODO Fix this. Seems to crash phpunit when the getlist processor is run.
+    *
+    * @param string $sort
+    * @param string $dir
+    * @param int $limit
+    * @param int $start
+    * @dataProvider providerContextGetList
+    */
     public function testContextGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
         $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
@@ -286,9 +286,9 @@ class ContextProcessorsTest extends MODxTestCase {
         $this->assertTrue(!empty($results),'Could not get list of contexts: '.$result->getMessage());
     }
     /**
-     * Data provider for context/get processor test.
-     * @return array
-     */
+    * Data provider for context/get processor test.
+    * @return array
+    */
     public function providerContextGetList() {
         return [
             ['key','ASC',5,0],
@@ -296,14 +296,14 @@ class ContextProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the context/remove processor, which removes a context
-     *
-     * @param string $ctx
-     * @return boolean
-     * @dataProvider providerContextRemove
-     * @depends testContextCreate
-     * @depends testContextDuplicate
-     */
+    * Tests the context/remove processor, which removes a context
+    *
+    * @param string $ctx
+    * @return boolean
+    * @dataProvider providerContextRemove
+    * @depends testContextCreate
+    * @depends testContextDuplicate
+    */
     public function testContextRemove($ctx = '') {
         $this->assertTrue(true); return true;
 
@@ -315,9 +315,9 @@ class ContextProcessorsTest extends MODxTestCase {
         $this->assertTrue($s,'Could not remove context: `'.$ctx.'`: '.$result->getMessage());*/
     }
     /**
-     * Data provider for context/remove processor test.
-     * @return array
-     */
+    * Data provider for context/remove processor test.
+    * @return array
+    */
     public function providerContextRemove() {
         return [
             ['unittest'],

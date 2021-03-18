@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Browser;
 
@@ -31,37 +31,37 @@ use MODX\Revolution\Processors\Browser\Directory\Update;
  */
 class BrowserDirectoryProcessorsTest extends MODxTestCase {
     /**
-     * @beforeClass
-     */
+    * @beforeClass
+    */
     public static function setUpFixturesBeforeClass() {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
     }
     /**
-     * Cleanup data after this test case.
-     *
-     * @afterClass
-     */
+    * Cleanup data after this test case.
+    *
+    * @afterClass
+    */
     public static function tearDownFixturesAfterClass() {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
     }
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
     }
 
     /**
-     * Tests the browser/directory/create processor, which creates a directory
-     * @param string $dir
-     * @dataProvider providerCreateDirectory
-     */
+    * Tests the browser/directory/create processor, which creates a directory
+    * @param string $dir
+    * @dataProvider providerCreateDirectory
+    */
     public function testCreateDirectory($dir = '') {
         if (empty($dir)) {
             $this->fail('Empty data set!');
@@ -78,9 +78,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         $this->assertTrue($s,'Could not create directory '.$dir.' in ' . Create::class . ' test: '.$result->getMessage());
     }
     /**
-     * Data provider for create processor test.
-     * @return array
-     */
+    * Data provider for create processor test.
+    * @return array
+    */
     public function providerCreateDirectory() {
         return [
             ['assets/test2'],
@@ -89,15 +89,15 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the browser/directory/update processor, which renames a directory
-     *
-     * @TODO Fix this test.
-     *
-     * @param string $oldDirectory
-     * @param string $newDirectory
-     * @depends testCreateDirectory
-     * @dataProvider providerUpdateDirectory
-     */
+    * Tests the browser/directory/update processor, which renames a directory
+    *
+    * @TODO Fix this test.
+    *
+    * @param string $oldDirectory
+    * @param string $newDirectory
+    * @depends testCreateDirectory
+    * @dataProvider providerUpdateDirectory
+    */
     public function testUpdateDirectory($oldDirectory = '',$newDirectory = '') {
         $this->markTestSkipped(
             'The test is skipped - testUpdateDirectory.'
@@ -122,9 +122,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         $this->assertTrue($s,'Could not rename directory '.$oldDirectory.' to '.$newDirectory.' in ' . Update::class . ' test: '.$result->getMessage());
     }
     /**
-     * Data provider for update processor test
-     * @return array
-     */
+    * Data provider for update processor test
+    * @return array
+    */
     public function providerUpdateDirectory() {
         return [
             ['assets/test3/','assets/test4'],
@@ -132,12 +132,12 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the browser/directory/remove processor, which removes a directory
-     * @param string $dir
-     * @dataProvider providerRemoveDirectory
-     * @depends testCreateDirectory
-     * @depends testUpdateDirectory
-     */
+    * Tests the browser/directory/remove processor, which removes a directory
+    * @param string $dir
+    * @dataProvider providerRemoveDirectory
+    * @depends testCreateDirectory
+    * @depends testUpdateDirectory
+    */
     public function testRemoveDirectory($dir = '') {
         if (empty($dir)) return;
 
@@ -157,9 +157,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         $this->assertTrue($s,'Could not remove directory: `'.$dir.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for remove processor test.
-     * @return array
-     */
+    * Data provider for remove processor test.
+    * @return array
+    */
     public function providerRemoveDirectory() {
         return [
             ['assets/test2'],
@@ -168,12 +168,12 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the browser/directory/getList processor
-     *
-     * @dataProvider providerGetDirectoryList
-     * @param string $dir A string path to the directory to list.
-     * @param boolean $shouldWork True if the directory list should not be empty.
-     */
+    * Tests the browser/directory/getList processor
+    *
+    * @dataProvider providerGetDirectoryList
+    * @param string $dir A string path to the directory to list.
+    * @param boolean $shouldWork True if the directory list should not be empty.
+    */
     public function testGetDirectoryList($dir,$shouldWork = true) {
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(GetList::class, [
@@ -193,9 +193,9 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         $this->assertTrue($success,'Could not get list of files and dirs for '.$dir.' in '.GetList::class.' test');
     }
     /**
-     * Test data provider for getList processor
-     * @return array
-     */
+    * Test data provider for getList processor
+    * @return array
+    */
     public function providerGetDirectoryList() {
         return [
             ['manager/',true],

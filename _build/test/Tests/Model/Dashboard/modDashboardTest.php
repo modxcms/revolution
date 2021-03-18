@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Dashboard;
 
@@ -28,20 +28,20 @@ use xPDO\xPDOException;
  */
 class modDashboardTest extends MODxTestCase {
     /**
-     * Load some utility classes this case uses
-     *
-     * @before
-     * @return void
-     * @throws xPDOException
-     */
+    * Load some utility classes this case uses
+    *
+    * @before
+    * @return void
+    * @throws xPDOException
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
     }
 
     /**
-     * Ensure the static getDefaultDashboard method works, returning the default dashboard for the user
-     */
+    * Ensure the static getDefaultDashboard method works, returning the default dashboard for the user
+    */
     public function testGetDefaultDashboard() {
         /** @var modDashboard $dashboard */
         $dashboard = modDashboard::getDefaultDashboard($this->modx);
@@ -49,10 +49,10 @@ class modDashboardTest extends MODxTestCase {
     }
 
     /**
-     * Ensure the rendering of the dashboard works properly
-     *
-     * @medium 
-     */
+    * Ensure the rendering of the dashboard works properly
+    *
+    * @medium
+    */
     public function testRender() {
         /** @var modManagerController $controller Fake running the welcome controller */
         $controller = new \WelcomeManagerController($this->modx, [

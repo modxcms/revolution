@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
@@ -26,14 +26,14 @@ use MODX\Revolution\MODxTestCase;
  */
 class modElementTest extends MODxTestCase {
     /**
-     * Test the modElement->getProperties() method.
-     *
-     * @dataProvider providerGetProperties
-     * @param string $name The name of the element.
-     * @param string|array|null $properties The element properties value.
-     * @param string|array|null $addProperties Additional properties passed to getProperties()
-     * @param array $expected The expected array of properties.
-     */
+    * Test the modElement->getProperties() method.
+    *
+    * @dataProvider providerGetProperties
+    * @param string $name The name of the element.
+    * @param string|array|null $properties The element properties value.
+    * @param string|array|null $addProperties Additional properties passed to getProperties()
+    * @param array $expected The expected array of properties.
+    */
     public function testGetProperties($name, $properties, $addProperties, $expected) {
         /** @var modElement $element */
         $element = $this->modx->newObject(modElement::class);
@@ -88,12 +88,12 @@ class modElementTest extends MODxTestCase {
     }
 
     /**
-     * Test the modElement->process() method.
-     *
-     * @dataProvider providerProcess
-     * @param $properties
-     * @param $content
-     */
+    * Test the modElement->process() method.
+    *
+    * @dataProvider providerProcess
+    * @param $properties
+    * @param $content
+    */
     public function testProcess($name, $tag, $properties, $content, $expected) {
         /** @var modElement $element */
         $element = $this->modx->newObject(modElement::class);

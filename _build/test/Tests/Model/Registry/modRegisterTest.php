@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Registry;
 
@@ -27,9 +27,9 @@ use MODX\Revolution\MODxTestHarness;
  */
 class modRegisterTest extends MODxTestCase {
     /**
-     * @beforeClass
-     * @throws \xPDO\xPDOException
-     */
+    * @beforeClass
+    * @throws \xPDO\xPDOException
+    */
     public static function setUpFixturesBeforeClass() {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
@@ -38,9 +38,9 @@ class modRegisterTest extends MODxTestCase {
     }
 
     /**
-     * @afterClass
-     * @throws \xPDO\xPDOException
-     */
+    * @afterClass
+    * @throws \xPDO\xPDOException
+    */
     public static function tearDownFixturesAfterClass() {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture(modX::class, 'modx');
@@ -57,11 +57,11 @@ class modRegisterTest extends MODxTestCase {
     }
 
     /**
-     * Test modRegister->subscribe() method.
-     *
-     * @dataProvider providerSubscribe
-     * @param $topic
-     */
+    * Test modRegister->subscribe() method.
+    *
+    * @dataProvider providerSubscribe
+    * @param $topic
+    */
     public function testSubscribe($topic) {
         $this->modx->registry->register->subscribe($topic);
         $this->assertTrue(in_array($topic, $this->modx->registry->register->subscriptions), "Could not subscribe to register topic {$topic}");
@@ -77,12 +77,12 @@ class modRegisterTest extends MODxTestCase {
     }
 
     /**
-     * Test modRegister->setCurrentTopic() method.
-     *
-     * @dataProvider providerSetCurrentTopic
-     * @param string $expected The expected currentTopic result.
-     * @param string $topic The topic string to pass.
-     */
+    * Test modRegister->setCurrentTopic() method.
+    *
+    * @dataProvider providerSetCurrentTopic
+    * @param string $expected The expected currentTopic result.
+    * @param string $topic The topic string to pass.
+    */
     public function testSetCurrentTopic($expected, $topic) {
         $this->modx->registry->register->setCurrentTopic($topic);
         $this->assertEquals($expected, $this->modx->registry->register->getCurrentTopic(), "Could not set current topic.");

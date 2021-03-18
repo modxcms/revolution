@@ -1,5 +1,5 @@
 <?php
 /**
- * @var string $name
- */
+* @var string $name
+*/
 return 'Hello, '.$name;

@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Element;
 
@@ -31,10 +31,10 @@ use MODX\Revolution\Processors\Element\TemplateVar\Remove;
  */
 class TemplateVarProcessorsTest extends MODxTestCase {
     /**
-     * Setup fixtures before each test.
-     *
-     * @before
-     */
+    * Setup fixtures before each test.
+    *
+    * @before
+    */
     public function setUpFixtures() {
         parent::setUpFixtures();
         /** @var modTemplateVar $tv */
@@ -44,10 +44,10 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Cleanup data after this test.
-     *
-     * @after
-     */
+    * Cleanup data after this test.
+    *
+    * @after
+    */
     public function tearDownFixtures() {
         $tvs = $this->modx->getCollection(modTemplateVar::class, ['name:LIKE' => '%UnitTest%']);
         /** @var modTemplateVar $tv */
@@ -58,12 +58,12 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/tv/create processor, which creates a TV
-     *
-     * @param boolean $shouldPass
-     * @param string $tvPk
-     * @dataProvider providerTvCreate
-     */
+    * Tests the element/tv/create processor, which creates a TV
+    *
+    * @param boolean $shouldPass
+    * @param string $tvPk
+    * @dataProvider providerTvCreate
+    */
     public function testTvCreate($shouldPass,$tvPk) {
         if (empty($tvPk)) return;
         $result = $this->modx->runProcessor(Create::class, [
@@ -79,10 +79,10 @@ class TemplateVarProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not create Tv: `'.$tvPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/tv/create processor test.
-     *
-     * @return array
-     */
+    * Data provider for element/tv/create processor test.
+    *
+    * @return array
+    */
     public function providerTvCreate() {
         return [
             [true,'UnitTestTv2'],
@@ -92,12 +92,12 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/tv/get processor, which gets a Tv
-     *
-     * @param boolean $shouldPass
-     * @param string $tvPk
-     * @dataProvider providerTvGet
-     */
+    * Tests the element/tv/get processor, which gets a Tv
+    *
+    * @param boolean $shouldPass
+    * @param string $tvPk
+    * @dataProvider providerTvGet
+    */
     public function testTvGet($shouldPass,$tvPk) {
         if (empty($tvPk)) return;
 
@@ -118,9 +118,9 @@ class TemplateVarProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not get Tv: `'.$tvPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/tv/create processor test.
-     * @return array
-     */
+    * Data provider for element/tv/create processor test.
+    * @return array
+    */
     public function providerTvGet() {
         return [
             [true,'UnitTestTv'],
@@ -129,14 +129,14 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Attempts to get a list of Template Variables
-     *
-     * @param string $sort
-     * @param string $dir
-     * @param int $limit
-     * @param int $start
-     * @dataProvider providerTvGetList
-     */
+    * Attempts to get a list of Template Variables
+    *
+    * @param string $sort
+    * @param string $dir
+    * @param int $limit
+    * @param int $start
+    * @dataProvider providerTvGetList
+    */
     public function testTvGetList($sort = 'key',$dir = 'ASC',$limit = 10,$start = 0) {
         $result = $this->modx->runProcessor(GetList::class, [
             'sort' => $sort,
@@ -148,9 +148,9 @@ class TemplateVarProcessorsTest extends MODxTestCase {
         $this->assertTrue(!empty($results),'Could not get list of TVs: '.$result->getMessage());
     }
     /**
-     * Data provider for element/tv/getlist processor test.
-     * @return array
-     */
+    * Data provider for element/tv/getlist processor test.
+    * @return array
+    */
     public function providerTvGetList() {
         return [
             ['name','ASC',5,0],
@@ -158,12 +158,12 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests the element/tv/remove processor, which removes a Tv
-     *
-     * @param boolean $shouldPass
-     * @param string $tvPk
-     * @dataProvider providerTvRemove
-     */
+    * Tests the element/tv/remove processor, which removes a Tv
+    *
+    * @param boolean $shouldPass
+    * @param string $tvPk
+    * @dataProvider providerTvRemove
+    */
     public function testTvRemove($shouldPass,$tvPk) {
         if (empty($tvPk)) return;
 
@@ -184,9 +184,9 @@ class TemplateVarProcessorsTest extends MODxTestCase {
         $this->assertTrue($passed,'Could not remove Tv: `'.$tvPk.'`: '.$result->getMessage());
     }
     /**
-     * Data provider for element/tv/remove processor test.
-     * @return array
-     */
+    * Data provider for element/tv/remove processor test.
+    * @return array
+    */
     public function providerTvRemove() {
         return [
             [true,'UnitTestTv'],

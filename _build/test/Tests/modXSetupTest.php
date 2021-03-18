@@ -20,8 +20,8 @@ use Yoast\PHPUnitPolyfills\TestCases\XTestCase;
  */
 class modXSetupTest extends XTestCase {
     /**
-     * Test that the PDO extension is available and loaded.
-     */
+    * Test that the PDO extension is available and loaded.
+    */
     public function testPDOExtension() {
         $exists = extension_loaded('pdo');
         $this->assertTrue($exists, "Required PDO extension is not loaded.");

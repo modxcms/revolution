@@ -1,13 +1,13 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- *
- * @package modx-test
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*
+* @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Element;
 
@@ -30,14 +30,14 @@ class modTagTest extends MODxTestCase {
     }
 
     /**
-     * Test the modTag->getProperties() method.
-     *
-     * @dataProvider providerGetProperties
-     * @param string $name The name of the element.
-     * @param string|array|null $properties The element properties value.
-     * @param string|array|null $addProperties Additional properties passed to getProperties()
-     * @param array $expected The expected array of properties.
-     */
+    * Test the modTag->getProperties() method.
+    *
+    * @dataProvider providerGetProperties
+    * @param string $name The name of the element.
+    * @param string|array|null $properties The element properties value.
+    * @param string|array|null $addProperties Additional properties passed to getProperties()
+    * @param array $expected The expected array of properties.
+    */
     public function testGetProperties($name, $properties, $addProperties, $expected) {
         /** @var modTagElement $element */
         $element = new modTagElement($this->modx);
@@ -92,12 +92,12 @@ class modTagTest extends MODxTestCase {
     }
 
     /**
-     * Test the modTag->process() method.
-     *
-     * @dataProvider providerProcess
-     * @param $properties
-     * @param $content
-     */
+    * Test the modTag->process() method.
+    *
+    * @dataProvider providerProcess
+    * @param $properties
+    * @param $content
+    */
     public function testProcess($name, $tag, $properties, $content, $expected) {
         /** @var modTagElement $element */
         $element = new modTagElement($this->modx);
