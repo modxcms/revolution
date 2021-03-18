@@ -22,9 +22,9 @@ use MODX\Revolution\Smarty\modSmarty;
 class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterface
 {
     /**
-     * @return string
-     * @throws Exception
-     */
+    * @return string
+    * @throws Exception
+    */
     public function render()
     {
         /** @var ProcessorResponse $res */

@@ -7,9 +7,9 @@
  * @xtype modx-page-dashboards
  */
 MODx.page.Dashboards = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		components: [{
+    config = config || {};
+    Ext.applyIf(config,{
+        components: [{
             xtype: 'modx-panel-dashboards'
         }]
         ,buttons: [{
@@ -17,8 +17,8 @@ MODx.page.Dashboards = function(config) {
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-	});
-	MODx.page.Dashboards.superclass.constructor.call(this,config);
+    });
+    MODx.page.Dashboards.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.Dashboards,MODx.Component);
 Ext.reg('modx-page-dashboards',MODx.page.Dashboards);

@@ -29,23 +29,23 @@
 
     <meta name="robots" content="noindex, nofollow" />
     {literal}<style>body, html { background: #fafafa !important; }</style>{/literal}
-	<script>
-	var SITE_NAME = '{$_config.site_name|strip_tags|escape}';
-	var CONNECTORS_URL = '{$_config.connectors_url}';
-	</script>
+    <script>
+    var SITE_NAME = '{$_config.site_name|strip_tags|escape}';
+    var CONNECTORS_URL = '{$_config.connectors_url}';
+    </script>
 </head>
 <body id="login" style="background-color: #fffffa;">
 
 <div id="mx_loginbox">
-	<form action="?" method="post">
-		<h2>{$_lang.permission_denied}</h2>
+    <form action="?" method="post">
+        <h2>{$_lang.permission_denied}</h2>
 
-		<p>{$_lang.permission_denied_msg}</p>
+        <p>{$_lang.permission_denied_msg}</p>
 
-		<br />
+        <br />
 
-		<input type="submit" name="logout" value="{$_lang.logout}" />
-	</form>
+        <input type="submit" name="logout" value="{$_lang.logout}" />
+    </form>
 </div>
 <p class="loginLicense">
 {$_lang.login_copyright}

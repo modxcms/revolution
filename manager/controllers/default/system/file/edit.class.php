@@ -30,10 +30,10 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Check for any permissions or requirements to load page
-     *
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    *
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('file_view');
@@ -41,10 +41,10 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Specify the language topics to load
-     *
-     * @return array
-     */
+    * Specify the language topics to load
+    *
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['file', 'source'];
@@ -52,10 +52,10 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $this->addJavascript($this->modx->getOption('manager_url') . 'assets/modext/sections/system/file/edit.js');
@@ -70,12 +70,12 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     *
-     * @param array $scriptProperties
-     *
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    *
+    * @param array $scriptProperties
+    *
+    * @return mixed
+    */
     public function process(array $scriptProperties = [])
     {
         $placeholders = [];
@@ -114,10 +114,10 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Get the active source
-     *
-     * @return modMediaSource|bool
-     */
+    * Get the active source
+    *
+    * @return modMediaSource|bool
+    */
     public function getSource()
     {
         /** @var modMediaSource|modFileMediaSource $source */
@@ -145,10 +145,10 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Invoke OnFileEditFormPrerender event
-     *
-     * @return string
-     */
+    * Invoke OnFileEditFormPrerender event
+    *
+    * @return string
+    */
     public function fireEvents()
     {
         $onFileEditFormPrerender = $this->modx->invokeEvent('OnFileEditFormPrerender', [
@@ -165,10 +165,10 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle()
     {
         return $this->modx->lexicon('file_edit') . ': ' . basename($this->filename);
@@ -176,10 +176,10 @@ class SystemFileEditManagerController extends modManagerController
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return '';

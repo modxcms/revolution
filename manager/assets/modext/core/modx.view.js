@@ -39,9 +39,9 @@ Ext.extend(MODx.DataView,Ext.DataView,{
     }
 
     /**
-     * Add context menu items to the dataview.
-     * @param {Object, Array} items Either an Object config or array of Object configs.
-     */
+    * Add context menu items to the dataview.
+    * @param {Object, Array} items Either an Object config or array of Object configs.
+    */
     ,_addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i=0;i<l;i=i+1) {

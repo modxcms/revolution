@@ -20,33 +20,33 @@ use MODX\Revolution\modSystemEvent;
  */
 class ContextUpdateManagerController extends modManagerController {
     /**
-     * The key of the current context
-     * @var string $contextKey
-     */
+    * The key of the current context
+    * @var string $contextKey
+    */
     public $contextKey;
     /**
-     * The return value from the OnContextFormRender event
-     * @var string $onContextFormRender
-     */
+    * The return value from the OnContextFormRender event
+    * @var string $onContextFormRender
+    */
     public $onContextFormRender;
     /**
-     * The context to update.
-     * @var modContext $context
-     */
+    * The context to update.
+    * @var modContext $context
+    */
     public $context;
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('edit_context');
     }
 
     /**
-     * Get the context to update
-     * @return void
-     */
+    * Get the context to update
+    * @return void
+    */
     public function initialize() {
         $this->context= $this->modx->getObjectGraph(modContext::class, '{"ContextSettings":{}}', ['key' => $this->scriptProperties['key']]);
         if ($this->context) {
@@ -55,9 +55,9 @@ class ContextUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addHtml("<script>
@@ -77,10 +77,10 @@ class ContextUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         if (empty($this->context)) {
             return $this->failure(sprintf($this->modx->lexicon('context_with_key_not_found'), $this->scriptProperties['key']));
@@ -107,8 +107,8 @@ class ContextUpdateManagerController extends modManagerController {
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function onPreRender() {
         $onContextFormPrerender = $this->modx->invokeEvent('OnContextFormPrerender', [
             'key' => $this->context->get('key'),
@@ -120,8 +120,8 @@ class ContextUpdateManagerController extends modManagerController {
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function onRender() {
         $this->onContextFormRender = $this->modx->invokeEvent('OnContextFormRender', [
             'key' => $this->context->get('key'),
@@ -134,34 +134,34 @@ class ContextUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('context').': '.$this->contextKey;
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return '';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['context','setting','access','policy','user'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Contexts';
     }

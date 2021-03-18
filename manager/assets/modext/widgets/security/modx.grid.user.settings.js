@@ -1,6 +1,6 @@
 /**
  * Loads a grid of User Settings
- * 
+ *
  * @class MODx.grid.UserSettings
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.

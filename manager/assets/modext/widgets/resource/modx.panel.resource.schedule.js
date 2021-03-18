@@ -10,7 +10,7 @@ MODx.panel.ResourceSchedule = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-resource-schedule'
-		,cls: 'container'
+        ,cls: 'container'
         ,bodyStyle: ''
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -25,7 +25,7 @@ MODx.panel.ResourceSchedule = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-resource-schedule'
-				,cls:'main-wrapper'
+                ,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }])]

@@ -35,17 +35,17 @@ class ElementTVUpdateManagerController extends modManagerController {
     public $onTVFormPrerender = '';
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('edit_tv');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
@@ -70,10 +70,10 @@ class ElementTVUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $placeholders = [];
 
@@ -122,10 +122,10 @@ class ElementTVUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Prepare the element and get the static openTo path if needed
-     *
-     * @return void|string
-     */
+    * Prepare the element and get the static openTo path if needed
+    *
+    * @return void|string
+    */
     public function prepareElement() {
         $this->tvArray['openTo'] = '/';
         if (!empty($this->tvArray['static'])) {
@@ -166,9 +166,9 @@ class ElementTVUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnTVFormPrerender event
-     * @return void
-     */
+    * Invoke OnTVFormPrerender event
+    * @return void
+    */
     public function firePreRenderEvents()
     {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML into the panel */
@@ -184,9 +184,9 @@ class ElementTVUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnTVFormRender event
-     * @return string
-     */
+    * Invoke OnTVFormRender event
+    * @return string
+    */
     public function fireRenderEvent() {
         $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender', [
             'id' => $this->tvArray['id'],
@@ -199,34 +199,34 @@ class ElementTVUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('tv').': '.$this->tvArray['name'];
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'element/tv/update.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['tv','category','tv_widget','propertyset','element'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Template+Variables';
     }

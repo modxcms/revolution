@@ -133,8 +133,8 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     }
 
     /**
-     * Renders the item text without any special formatting. The menu/getnodes processor already protects against XSS.
-     */
+    * Renders the item text without any special formatting. The menu/getnodes processor already protects against XSS.
+    */
     ,renderItemText: function(item) {
         return item.text;
     }

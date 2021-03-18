@@ -1,6 +1,6 @@
 /**
  * Loads the welcome page
- * 
+ *
  * @class MODx.page.Welcome
  * @extends MODx.Component
  * @param {Object} config An object of configuration options

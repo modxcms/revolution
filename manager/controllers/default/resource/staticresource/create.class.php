@@ -15,10 +15,10 @@
 class StaticResourceCreateManagerController extends ResourceCreateManagerController
 {
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
@@ -48,10 +48,10 @@ class StaticResourceCreateManagerController extends ResourceCreateManagerControl
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return 'resource/staticresource/create.tpl';

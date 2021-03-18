@@ -7,14 +7,14 @@
  * @xtype modx-page-user-update
  */
 MODx.page.UpdateUser = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-       formpanel: 'modx-panel-user'
-       ,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-user'
+        ,actions: {
             'new': 'Security/User/Create'
             ,edit: 'Security/User/Update'
             ,cancel: 'security/user'
-       }
+        }
         ,buttons: [{
             process: 'Security/User/Update'
             ,text: _('save')
@@ -49,8 +49,8 @@ MODx.page.UpdateUser = function(config) {
             ,extendedFields: config.extendedFields
             ,name: ''
         }]
-	});
-	MODx.page.UpdateUser.superclass.constructor.call(this,config);
+    });
+    MODx.page.UpdateUser.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.UpdateUser,MODx.Component,{
     removeUser: function(btn,e) {

@@ -11,7 +11,7 @@ MODx.panel.Lexicon = function(config) {
 
     Ext.applyIf(config,{
         id: 'modx-panel-lexicon'
-		,cls: 'container'
+        ,cls: 'container'
         ,itemId: 'panel-lexicon'
         ,bodyStyle: ''
         ,defaults: { autoHeight: true, collapsible: false }
@@ -30,7 +30,7 @@ MODx.panel.Lexicon = function(config) {
             },{
                 xtype: 'modx-grid-lexicon'
                 ,itemId: 'grid-lexicon'
-				,cls: 'main-wrapper'
+                ,cls: 'main-wrapper'
                 ,title: ''
                 ,preventRender: true
             }]

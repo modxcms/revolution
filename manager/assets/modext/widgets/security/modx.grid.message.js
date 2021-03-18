@@ -180,12 +180,12 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
                 ,id: r.id
             }
             ,listeners: {
-            	'success': {fn:function(r) {
+                'success': {fn:function(r) {
                     var r2 = this.getStore().getAt(ri);
                     r2.set('read',true);
                     r2.commit();
                     this.exp.expandRow(ri);
-            	},scope:this}
+                },scope:this}
             }
         });
     }
@@ -198,10 +198,10 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
                 ,id: rec.data.id
             }
             ,listeners: {
-            	'success': {fn:function(r) {
-            		rec.set('read',false);
-            		rec.commit();
-            	},scope:this}
+                'success': {fn:function(r) {
+                    rec.set('read',false);
+                    rec.commit();
+                },scope:this}
             }
         });
     }
@@ -275,12 +275,12 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
         return true;
     }
     ,clearFilter: function() {
-    	this.getStore().baseParams = {
+        this.getStore().baseParams = {
             action: 'Security/Message/GetList'
-    	};
+        };
         Ext.getCmp('modx-messages-search').reset();
         Ext.getCmp('modx-messages-filter').reset();
-    	this.getBottomToolbar().changePage(1);
+        this.getBottomToolbar().changePage(1);
     }
 });
 Ext.reg('modx-grid-message',MODx.grid.Message);

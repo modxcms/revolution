@@ -8,11 +8,11 @@ MODx.panel.GroupsRoles = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-groups-roles'
-		,cls: 'container'
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: [{
-             html: _('user_group_management')
+            html: _('user_group_management')
             ,id: 'modx-access-permissions-header'
             ,xtype: 'modx-header'
         },MODx.getPageStructure(this.getPageTabs(config),{

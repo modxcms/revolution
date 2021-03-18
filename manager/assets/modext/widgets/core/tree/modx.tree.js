@@ -165,8 +165,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Sets up the tree and initializes it with the specified options.
-     */
+    * Sets up the tree and initializes it with the specified options.
+    */
     ,setup: function (config) {
         config.listeners = config.listeners || {};
         config.listeners.render = {
@@ -219,8 +219,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Expand the tree upon initialization.
-     */
+    * Expand the tree upon initialization.
+    */
     ,_initExpand: function () {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         if (Ext.isEmpty(treeState) && this.root) {
@@ -236,9 +236,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Add context menu items to the tree.
-     * @param {Object, Array} items Either an Object config or array of Object configs.
-     */
+    * Add context menu items to the tree.
+    * @param {Object, Array} items Either an Object config or array of Object configs.
+    */
     ,addContextMenuItem: function (items) {
         var a = items,l = a.length;
         for (var i = 0; i < l; i++) {
@@ -251,10 +251,10 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     *
-     *
-     * @param node
-     */
+    *
+    *
+    * @param node
+    */
     ,prepareNodes: function(node) {
         var params = {};
         if (location.search) {
@@ -280,11 +280,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Adds direct access buttons to a node. Currently the only added button is
-     * for directly creating a new child document.
-     *
-     * @param node
-     */
+    * Adds direct access buttons to a node. Currently the only added button is
+    * for directly creating a new child document.
+    *
+    * @param node
+    */
     ,addNodeButtons: function(node) {
         var elId = node.ui.elNode.id + '_tools';
         var el = document.createElement('div');
@@ -323,10 +323,10 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} node The
-     * @param {Ext.EventObject} e The event object run.
-     */
+    * Shows the current context menu.
+    * @param {Ext.tree.TreeNode} node The
+    * @param {Ext.EventObject} e The event object run.
+    */
     ,_showContextMenu: function (node,e) {
         this.cm.activeNode = node;
         this.cm.removeAll();
@@ -359,22 +359,22 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Checks to see if a node exists in a tree node's children.
-     * @param {Object} t The parent node.
-     * @param {Object} n The node to find.
-     * @return {Boolean} True if the node exists in the parent's children.
-     */
+    * Checks to see if a node exists in a tree node's children.
+    * @param {Object} t The parent node.
+    * @param {Object} n The node to find.
+    * @return {Boolean} True if the node exists in the parent's children.
+    */
     ,hasNode: function (t,n) {
         return (t.findChild('id',n.id)) || (t.leaf === true && t.parentNode.findChild('id',n.id));
     }
 
     /**
-     * Refreshes the tree and runs an optional func.
-     * @param {Function} func The function to run.
-     * @param {Object} scope The scope to run the function in.
-     * @param {Array} args An array of arguments to run with.
-     * @return {Boolean} True if successful.
-     */
+    * Refreshes the tree and runs an optional func.
+    * @param {Function} func The function to run.
+    * @param {Object} scope The scope to run the function in.
+    * @param {Array} args An array of arguments to run with.
+    * @return {Boolean} True if successful.
+    */
     ,refresh: function (func,scope,args) {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
@@ -421,8 +421,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Abstracted remove function
-     */
+    * Abstracted remove function
+    */
     ,remove: function (text,substr,split) {
         if (this.destroying) {
             return MODx.tree.Tree.superclass.remove.apply(this,arguments);
@@ -457,8 +457,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Expand the tree and all children.
-     */
+    * Expand the tree and all children.
+    */
     ,expandNodes: function () {
         if (this.root) {
             this.root.expand();
@@ -467,8 +467,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Completely collapse the tree.
-     */
+    * Completely collapse the tree.
+    */
     ,collapseNodes: function () {
         if (this.root) {
             this.root.collapseChildNodes(true);
@@ -477,9 +477,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Save the state of the tree's open children.
-     * @param {Ext.tree.TreeNode} n The most recent expanded or collapsed node.
-     */
+    * Save the state of the tree's open children.
+    * @param {Ext.tree.TreeNode} n The most recent expanded or collapsed node.
+    */
     ,_saveState: function (n) {
         if (!this.stateful) {
             return true;
@@ -539,10 +539,10 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Handles tree clicks
-     * @param {Object} n The node clicked
-     * @param {Object} e The event object
-     */
+    * Handles tree clicks
+    * @param {Object} n The node clicked
+    * @param {Object} e The event object
+    */
     ,_handleClick: function (n,e) {
         e.stopEvent();
         e.preventDefault();
@@ -590,9 +590,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Handles all drag events into the tree.
-     * @param {Object} dropEvent The node dropped on the parent node.
-     */
+    * Handles all drag events into the tree.
+    * @param {Object} dropEvent The node dropped on the parent node.
+    */
     ,_handleDrag: function (dropEvent) {
         function simplifyNodes(node) {
             var resultNode = {};
@@ -640,8 +640,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Abstract definition to handle drop events.
-     */
+    * Abstract definition to handle drop events.
+    */
     ,_handleDrop: function (dropEvent) {
         var node = dropEvent.dropNode;
         if (node.isRoot) return false;
@@ -655,18 +655,18 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Semi unique ids across edits
-     * @param {String} prefix Prefix the guid.
-     * @return {String} The newly generated guid.
-     */
+    * Semi unique ids across edits
+    * @param {String} prefix Prefix the guid.
+    * @return {String} The newly generated guid.
+    */
     ,_guid: function (prefix) {
         return prefix + (new Date().getTime());
     }
 
     /**
-     * Redirects the page or the content frame to the correct location.
-     * @param {String} loc The URL to direct to.
-     */
+    * Redirects the page or the content frame to the correct location.
+    * @param {String} loc The URL to direct to.
+    */
     ,redirect: function (loc) {
         MODx.loadPage(loc);
     }
@@ -680,19 +680,19 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         MODx.loadPage('?' + id + '&' + p);
     }
     /**
-     * Loads the default toolbar for the tree.
-     * @access private
-     * @see Ext.Toolbar
-     */
+    * Loads the default toolbar for the tree.
+    * @access private
+    * @see Ext.Toolbar
+    */
     ,_loadToolbar: function () {
     }
 
     /**
-     * Refreshes a given tree node.
-     * @access public
-     * @param {String} id The ID of the node
-     * @param {Boolean} self If true, will refresh self rather than parent.
-     */
+    * Refreshes a given tree node.
+    * @access public
+    * @param {String} id The ID of the node
+    * @param {Boolean} self If true, will refresh self rather than parent.
+    */
     ,refreshNode: function (id,self) {
         var node = this.getNodeById(id);
         if (node) {
@@ -704,9 +704,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Refreshes selected active node
-     * @access public
-     */
+    * Refreshes selected active node
+    * @access public
+    */
     ,refreshActiveNode: function () {
         if (this.cm.activeNode) {
             this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
@@ -716,9 +716,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Refreshes selected active node's parent
-     * @access public
-     */
+    * Refreshes selected active node's parent
+    * @access public
+    */
     ,refreshParentNode: function () {
         if (this.cm.activeNode) {
             this.getLoader().load(this.cm.activeNode.parentNode || this.cm.activeNode, this.cm.activeNode.expand);
@@ -728,9 +728,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Removes specified node
-     * @param {String} id The node's ID
-     */
+    * Removes specified node
+    * @param {String} id The node's ID
+    */
     ,removeNode: function (id) {
         var node = this.getNodeById(id);
         if (node) {
@@ -739,15 +739,15 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Dynamically removes active node
-     */
+    * Dynamically removes active node
+    */
     ,removeActiveNode: function () {
         this.cm.activeNode.remove();
     }
 
     /**
-     * Gets a default toolbar setup
-     */
+    * Gets a default toolbar setup
+    */
     ,getToolbar: function () {
         var iu = MODx.config.manager_url + 'templates/default/images/restyle/icons/';
         return [{
@@ -772,8 +772,8 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Add Items to the toolbar.
-     */
+    * Add Items to the toolbar.
+    */
     ,_formatToolbar: function (a) {
         var l = a.length;
         for (var i = 0; i < l; i++) {
@@ -789,11 +789,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Allow pseudoroot actions
-     * @param tree {self}
-     * @param parent {Ext.tree.TreeNode} Parent node
-     * @param node {Ext.tree.TreeNode} Node to be inserted
-     */
+    * Allow pseudoroot actions
+    * @param tree {self}
+    * @param parent {Ext.tree.TreeNode} Parent node
+    * @param node {Ext.tree.TreeNode} Node to be inserted
+    */
     ,_onAppend: function (tree,parent,node) {
         if (node.attributes.pseudoroot) {
 
@@ -876,11 +876,11 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     }
 
     /**
-     * Handled inline add button click
-     * Need to be extended in MODx.tree.Tree instances to work properly
-     *
-     * @param Ext.tree.AsyncTreeNode node
-     */
+    * Handled inline add button click
+    * Need to be extended in MODx.tree.Tree instances to work properly
+    *
+    * @param Ext.tree.AsyncTreeNode node
+    */
     ,handleCreateClick: function (node) {
     }
 

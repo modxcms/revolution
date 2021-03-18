@@ -14,7 +14,7 @@
                 {if $modx.updateable}
                     <td><span class="updates-available">{$modx.full_version}</span></td>
                     <td><a href="https://modx.com/download" class="dashboard-button"
-                           target="_blank">{$_lang.updates_update}</a></td>
+                            target="_blank">{$_lang.updates_update}</a></td>
                 {else}
                     <td><span class="updates-ok">{$_lang.updates_ok}</span></td>
                     <td><button class="dashboard-button" disabled>{$_lang.updates_update}</button></td>
@@ -31,7 +31,7 @@
                     <td><span class="updates-available">{$_lang.updates_available}</span></td>
                     <td>
                         <a href="{$_config.manager_url}?a=workspaces"
-                           class="dashboard-button">{$_lang.updates_update}</a>
+                            class="dashboard-button">{$_lang.updates_update}</a>
                     </td>
                 {else}
                     <td><span class="updates-title">{$_lang.updates_extras}</span></td>

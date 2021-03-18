@@ -19,10 +19,10 @@ use MODX\Revolution\modManagerController;
 class ResourceSiteScheduleManagerController extends modManagerController
 {
     /**
-     * Check for any permissions or requirements to load page
-     *
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    *
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view_document');
@@ -30,10 +30,10 @@ class ResourceSiteScheduleManagerController extends modManagerController
 
 
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
@@ -44,12 +44,12 @@ class ResourceSiteScheduleManagerController extends modManagerController
 
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     *
-     * @param array $scriptProperties
-     *
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    *
+    * @param array $scriptProperties
+    *
+    * @return mixed
+    */
     public function process(array $scriptProperties = [])
     {
         return '';
@@ -57,10 +57,10 @@ class ResourceSiteScheduleManagerController extends modManagerController
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle()
     {
         return $this->modx->lexicon('site_schedule');
@@ -68,10 +68,10 @@ class ResourceSiteScheduleManagerController extends modManagerController
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return '';
@@ -79,10 +79,10 @@ class ResourceSiteScheduleManagerController extends modManagerController
 
 
     /**
-     * Specify the language topics to load
-     *
-     * @return array
-     */
+    * Specify the language topics to load
+    *
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['resource'];

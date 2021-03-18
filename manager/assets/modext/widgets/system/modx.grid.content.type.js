@@ -8,7 +8,7 @@ MODx.panel.ContentType = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-content-type'
-		,cls: 'container'
+        ,cls: 'container'
         ,url: MODx.config.connector_url
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
@@ -24,7 +24,7 @@ MODx.panel.ContentType = function(config) {
             },{
                 xtype: 'modx-grid-content-type'
                 ,itemId: 'grid'
-				,cls:'main-wrapper'
+                ,cls:'main-wrapper'
                 ,preventRender: true
             }]
         }])]

@@ -250,11 +250,11 @@ MODx.window.InsertElement = function(config) {
             ,autoLoad: {
                 url: MODx.config.connector_url
                 ,params: {
-                   'action': 'Element/GetInsertProperties'
-                   ,classKey: config.record.classKey
-                   ,pk: config.record.pk
-                   ,resourceId: resourceId
-                   ,propertySet: 0
+                    'action': 'Element/GetInsertProperties'
+                    ,classKey: config.record.classKey
+                    ,pk: config.record.pk
+                    ,resourceId: resourceId
+                    ,propertySet: 0
                 }
                 ,scripts: true
                 ,callback: this.onPropFormLoad

@@ -11,7 +11,7 @@ MODx.panel.Actions = function(config) {
     Ext.applyIf(config,{
         bodyStyle: ''
         ,id: 'modx-panel-actions'
-		,cls: 'container'
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: _('topmenu')

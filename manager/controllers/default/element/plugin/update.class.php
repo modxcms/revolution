@@ -32,17 +32,17 @@ class ElementPluginUpdateManagerController extends modManagerController {
     public $onPluginFormPrerender = '';
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('edit_plugin');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
@@ -66,10 +66,10 @@ class ElementPluginUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $placeholders = [];
 
@@ -119,10 +119,10 @@ class ElementPluginUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Prepare the element and get the static openTo path if needed
-     *
-     * @return void|string
-     */
+    * Prepare the element and get the static openTo path if needed
+    *
+    * @return void|string
+    */
     public function prepareElement() {
         $this->pluginArray['openTo'] = '/';
         if (!empty($this->pluginArray['static'])) {
@@ -133,9 +133,9 @@ class ElementPluginUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnPluginFormPrerender event
-     * @return string
-     */
+    * Invoke OnPluginFormPrerender event
+    * @return string
+    */
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
@@ -149,9 +149,9 @@ class ElementPluginUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnPluginFormRender event
-     * @return string
-     */
+    * Invoke OnPluginFormRender event
+    * @return string
+    */
     public function fireRenderEvent() {
         $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender', [
             'id' => $this->pluginArray['id'],
@@ -164,34 +164,34 @@ class ElementPluginUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('plugin').': '.$this->pluginArray['name'];
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'element/plugin/update.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['plugin','category','system_events','propertyset','element'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Plugins';
     }

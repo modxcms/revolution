@@ -85,8 +85,8 @@ MODx.grid.Package = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Packages/GetList'
         ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
-                 ,'provider','provider_name','disabled','source','attributes','readme','menu'
-                 ,'install','textaction','iconaction','updateable']
+                ,'provider','provider_name','disabled','source','attributes','readme','menu'
+                ,'install','textaction','iconaction','updateable']
         ,showActionsColumn: false
         ,plugins: [this.exp]
         ,pageSize: Math.min(parseInt(MODx.config.default_per_page), 25)
@@ -337,8 +337,8 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     /**
-     * Open a window allowing user to upload a transport package directly
-     */
+    * Open a window allowing user to upload a transport package directly
+    */
     ,uploadTransportPackage: function(){
         this.uploader.setBaseParams({source: 1});
         this.uploader.show();
@@ -361,8 +361,8 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     /**
-     * Scan for new packages, without the pointless & annoying confirmation box
-     */
+    * Scan for new packages, without the pointless & annoying confirmation box
+    */
     ,searchLocalWithoutPrompt: function(){
         MODx.Ajax.request({
             url: MODx.config.connector_url

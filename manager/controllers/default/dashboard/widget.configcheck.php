@@ -24,9 +24,9 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface
     public $cssBlockClass = 'dashboard-block-variable';
 
     /**
-     * @return string
-     * @throws Exception
-     */
+    * @return string
+    * @throws Exception
+    */
     public function render()
     {
         /** @var ProcessorResponse $response */

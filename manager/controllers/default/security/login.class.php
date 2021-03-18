@@ -33,24 +33,24 @@ class SecurityLoginManagerController extends modManagerController
         return true;
     }
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return true;
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {}
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return void
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return void
+    */
     public function process(array $scriptProperties = []) {
         $this->handleForgotLoginHash();
         $this->handleMagicLoginLink();
@@ -199,10 +199,10 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Determine and save the user cultureKey so it could be used across the whole manager
-     *
-     * @return string The loaded cultureKey
-     */
+    * Determine and save the user cultureKey so it could be used across the whole manager
+    *
+    * @return string The loaded cultureKey
+    */
     public function handleLanguageChange()
     {
         $languages = $this->modx->lexicon->getLanguageList('core');
@@ -261,10 +261,10 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Handle the forgot login hash, if existent
-     *
-     * @return void
-     */
+    * Handle the forgot login hash, if existent
+    *
+    * @return void
+    */
     public function handleForgotLoginHash() {
         // Handle new password form
         if (!empty($_GET['modhash'])) {
@@ -288,10 +288,10 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Handle a magic login link, if existent.
-     *
-     * @return void
-     */
+    * Handle a magic login link, if existent.
+    *
+    * @return void
+    */
     public function handleMagicLoginLink() {
 
         if (!empty($_GET['magiclink'])) {
@@ -345,9 +345,9 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * If the user is coming from a specific mgr action, preserve the return URL and redirect post-login
-     * @return void
-     */
+    * If the user is coming from a specific mgr action, preserve the return URL and redirect post-login
+    * @return void
+    */
     public function preserveReturnUrl() {
         if (!empty($_SERVER['REQUEST_URI'])) {
             $chars = ["'",'"','(',')',';','>','<','!'];
@@ -357,9 +357,9 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Check to see if there's an active installation in process; if so, notify the user.
-     * @return void
-     */
+    * Check to see if there's an active installation in process; if so, notify the user.
+    * @return void
+    */
     public function checkForActiveInstallation() {
         if (isset($this->scriptProperties['installGoingOn'])) {
             $installGoingOn = $this->modx->sanitizeString($this->scriptProperties['installGoingOn']);
@@ -373,10 +373,10 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Handle and sanitize any POST actions that come through
-     *
-     * @return void
-     */
+    * Handle and sanitize any POST actions that come through
+    *
+    * @return void
+    */
     public function handlePost() {
         $san = ["'",'"','(',')',';','>','<','../'];
         foreach ($this->scriptProperties as $k => $v) {
@@ -401,10 +401,10 @@ class SecurityLoginManagerController extends modManagerController
 
 
     /**
-     * Handle when a user attempts to log in or change password
-     *
-     * @return void
-     */
+    * Handle when a user attempts to log in or change password
+    *
+    * @return void
+    */
     public function handleLogin()
     {
         $hash = $this->modx->sanitizeString($this->scriptProperties['modhash']);
@@ -465,10 +465,10 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Handles the action when a user forgets their login
-     *
-     * @return void
-     */
+    * Handles the action when a user forgets their login
+    *
+    * @return void
+    */
     public function handleForgotLogin() {
         $c = $this->modx->newQuery(modUser::class);
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
@@ -517,12 +517,12 @@ class SecurityLoginManagerController extends modManagerController
 
 
     /**
-     * Creates, sets and returns activation/magic-login hash for a user.
-     *
-     * @param $user
-     *
-     * @return string
-     */
+    * Creates, sets and returns activation/magic-login hash for a user.
+    *
+    * @param $user
+    *
+    * @return string
+    */
     private function setActivationHash($user, $ttl = 86400, $topic = '/pwd/change/') {
         $hash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
 
@@ -543,11 +543,11 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Handles the action when a user requests a magic login link.
-     *
-     * @return void
-     * @throws Exception
-     */
+    * Handles the action when a user requests a magic login link.
+    *
+    * @return void
+    * @throws Exception
+    */
     public function handlePasswordlessLoginRequest()
     {
 
@@ -610,26 +610,26 @@ class SecurityLoginManagerController extends modManagerController
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('login');
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'security/login.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['login'];
     }

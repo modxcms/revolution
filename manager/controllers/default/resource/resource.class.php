@@ -61,16 +61,16 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Return the appropriate Resource controller class based on the class_key request parameter
-     *
-     * @static
-     *
-     * @param modX $modx A reference to the modX instance
-     * @param string $className The controller class name that is attempting to be loaded
-     * @param array $config An array of configuration options for the action
-     *
-     * @return modManagerController The proper controller class
-     */
+    * Return the appropriate Resource controller class based on the class_key request parameter
+    *
+    * @static
+    *
+    * @param modX $modx A reference to the modX instance
+    * @param string $className The controller class name that is attempting to be loaded
+    * @param array $config An array of configuration options for the action
+    *
+    * @return modManagerController The proper controller class
+    */
     public static function getInstance(modX $modx, $className, array $config = [])
     {
         $resourceClass = modDocument::class;
@@ -121,20 +121,20 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Used to set values on the resource record sent to the template for derivative classes
-     *
-     * @return void
-     */
+    * Used to set values on the resource record sent to the template for derivative classes
+    *
+    * @return void
+    */
     public function prepareResource()
     {
     }
 
 
     /**
-     * Specify the language topics to load
-     *
-     * @return array
-     */
+    * Specify the language topics to load
+    *
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['resource'];
@@ -142,10 +142,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Setup permissions for this page
-     *
-     * @return void
-     */
+    * Setup permissions for this page
+    *
+    * @return void
+    */
     public function setPermissions()
     {
         if ($this->canSave) {
@@ -161,10 +161,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Get and set the parent for this resource
-     *
-     * @return string The pagetitle of the parent
-     */
+    * Get and set the parent for this resource
+    *
+    * @return string The pagetitle of the parent
+    */
     public function setParent()
     {
         /* handle default parent */
@@ -192,10 +192,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Fire any pre-render events
-     *
-     * @return array|bool|string
-     */
+    * Fire any pre-render events
+    *
+    * @return array|bool|string
+    */
     public function firePreRenderEvents()
     {
         $resourceId = !empty($this->resource) && ($this->resource instanceof $this->resourceClass)
@@ -218,10 +218,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Fire any render events
-     *
-     * @return string
-     */
+    * Fire any render events
+    *
+    * @return string
+    */
     public function fireOnRenderEvent()
     {
         $resourceId = $this->resource->get('id');
@@ -239,10 +239,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Initialize a RichText Editor, if set
-     *
-     * @return void
-     */
+    * Initialize a RichText Editor, if set
+    *
+    * @return void
+    */
     public function loadRichTextEditor()
     {
         /* register JS scripts */
@@ -276,10 +276,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Get and set the context for this resource
-     *
-     * @return modContext
-     */
+    * Get and set the context for this resource
+    *
+    * @return modContext
+    */
     public function setContext()
     {
         if (!empty($this->scriptProperties['context_key'])) {
@@ -300,12 +300,12 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Load the TVs for the Resource
-     *
-     * @param array $reloadData resource data passed if reloading
-     *
-     * @return string The TV editing form
-     */
+    * Load the TVs for the Resource
+    *
+    * @param array $reloadData resource data passed if reloading
+    *
+    * @return string The TV editing form
+    */
     public function loadTVs($reloadData = [])
     {
         $this->setPlaceholder('wctx', $this->resource->get('context_key'));
@@ -460,10 +460,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Set token for validating a request
-     *
-     * @return void
-     */
+    * Set token for validating a request
+    *
+    * @return void
+    */
     public function setResourceToken()
     {
         if (!isset($_SESSION['newResourceTokens']) || !is_array($_SESSION['newResourceTokens'])) {
@@ -475,10 +475,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Fire the TV Form Render event
-     *
-     * @return mixed
-     */
+    * Fire the TV Form Render event
+    *
+    * @return mixed
+    */
     public function fireOnTVFormRender()
     {
         $onResourceTVFormPrerender = $this->modx->invokeEvent('OnResourceTVFormPrerender', [
@@ -565,10 +565,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Get the Help URL
-     *
-     * @return string
-     */
+    * Get the Help URL
+    *
+    * @return string
+    */
     public function getHelpUrl()
     {
         return 'Resources';
@@ -576,10 +576,10 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
-     * Returns the parents of current resource
-     *
-     * @return array
-     */
+    * Returns the parents of current resource
+    *
+    * @return array
+    */
     public function getParents()
     {
         $parents = [];

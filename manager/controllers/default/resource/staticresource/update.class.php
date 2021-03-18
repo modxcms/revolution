@@ -17,10 +17,10 @@ use MODX\Revolution\File\modFileHandler;
 class StaticResourceUpdateManagerController extends ResourceUpdateManagerController
 {
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $mgrUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
@@ -56,10 +56,10 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
 
 
     /**
-     * Used to set values on the resource record sent to the template for derivative classes
-     *
-     * @return void|string
-     */
+    * Used to set values on the resource record sent to the template for derivative classes
+    *
+    * @return void|string
+    */
     public function prepareResource()
     {
         $wctx = $this->resource->get('context_key');
@@ -87,10 +87,10 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return 'resource/staticresource/update.tpl';

@@ -38,8 +38,8 @@ Ext.onReady(function() {
     MODx.onBrowserReturn = {/literal}{$rtecallback}{literal};{/literal}{/if}{literal}
     MODx.ctx = "{/literal}{if $_ctx}{$_ctx}{else}web{/if}{literal}";
     MODx.load({
-       xtype: 'modx-browser-rte'
-       ,auth: '{/literal}{$site_id}{literal}'
+        xtype: 'modx-browser-rte'
+        ,auth: '{/literal}{$site_id}{literal}'
     });
 });
 </script>

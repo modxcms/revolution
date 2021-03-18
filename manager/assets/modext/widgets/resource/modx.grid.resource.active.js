@@ -1,13 +1,13 @@
 MODx.grid.ActiveResources = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		title: _('resources_active')
+    Ext.applyIf(config,{
+        title: _('resources_active')
         ,id: 'modx-grid-resource-active'
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/ActiveResource/GetList'
         }
-		,fields: ['id','pagetitle','username','editedon']
+        ,fields: ['id','pagetitle','username','editedon']
         ,showActionsColumn: false
         ,columns: [{
             header: _('id')
@@ -31,9 +31,9 @@ MODx.grid.ActiveResources = function(config) {
             ,sortable: true
         }]
         ,remoteSort: true
-		,paging: true
-	});
-	MODx.grid.ActiveResources.superclass.constructor.call(this,config);
+        ,paging: true
+    });
+    MODx.grid.ActiveResources.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.ActiveResources,MODx.grid.Grid);
 Ext.reg('modx-grid-resource-active',MODx.grid.ActiveResources);

@@ -34,10 +34,10 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $mgrUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
@@ -74,8 +74,8 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * @return bool|string
-     */
+    * @return bool|string
+    */
     public function getResource()
     {
         $id = (int)$this->scriptProperties['id'];
@@ -92,10 +92,10 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * @param array $scriptProperties
-     *
-     * @return array|mixed
-     */
+    * @param array $scriptProperties
+    *
+    * @return array|mixed
+    */
     public function process(array $scriptProperties = [])
     {
         $placeholders = [];
@@ -195,10 +195,10 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * Get url for resource for preview window
-     *
-     * @return string
-     */
+    * Get url for resource for preview window
+    *
+    * @return string
+    */
     public function getPreviewUrl()
     {
         if (!$this->resource->get('deleted')) {
@@ -220,10 +220,10 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * Check for locks on the Resource
-     *
-     * @return bool
-     */
+    * Check for locks on the Resource
+    *
+    * @return bool
+    */
     public function checkForLocks()
     {
         $lockedBy = $this->resource->addLock($this->modx->user->get('id'));
@@ -248,10 +248,10 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * Check for any permissions or requirements to load page
-     *
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    *
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('edit_document');
@@ -259,10 +259,10 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle()
     {
         return $this->modx->lexicon('editing', ['name' => $this->resourceArray['pagetitle']]);
@@ -270,10 +270,10 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return 'resource/update.tpl';

@@ -6,7 +6,7 @@
  * @param {Object} config An object of configuration options
  * @xtype modx-panel-users
  */
-MODx.panel.Users = function(config) { 
+MODx.panel.Users = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-users'

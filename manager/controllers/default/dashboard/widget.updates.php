@@ -21,9 +21,9 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
 
 
     /**
-     * @return string
-     * @throws Exception
-     */
+    * @return string
+    * @throws Exception
+    */
     public function render()
     {
         $processor = new GetList($this->modx);

@@ -23,17 +23,17 @@ class BrowserManagerController extends modManagerController {
     public $loadFooter = false;
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('file_manager');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         /* invoke OnRichTextBrowserInit */
         $this->addHtml('<script>
@@ -43,10 +43,10 @@ MODx.ctx = "'.$this->ctx.'";
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $placeholders = [];
 
@@ -68,26 +68,26 @@ MODx.ctx = "'.$this->ctx.'";
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('modx_resource_browser');
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'browser/index.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['file'];
     }

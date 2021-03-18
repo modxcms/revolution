@@ -11,9 +11,9 @@ use MODX\Revolution\Smarty\modSmarty;
 class modDashboardWidgetButtons extends modDashboardWidgetInterface
 {
     /**
-     * @return string
-     * @throws Exception
-     */
+    * @return string
+    * @throws Exception
+    */
     public function render()
     {
         $this->modx->getService('smarty', modSmarty::class);
@@ -26,9 +26,9 @@ class modDashboardWidgetButtons extends modDashboardWidgetInterface
 
 
     /**
-     * @return string
-     * @throws Exception
-     */
+    * @return string
+    * @throws Exception
+    */
     public function process()
     {
         /** @var modChunk $chunk */

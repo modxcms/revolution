@@ -24,17 +24,17 @@ class ElementPluginCreateManagerController extends modManagerController {
     public $onPluginFormPrerender = '';
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('new_plugin');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
@@ -59,10 +59,10 @@ class ElementPluginCreateManagerController extends modManagerController {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = [])
     {
         $placeholders = [];
@@ -82,9 +82,9 @@ class ElementPluginCreateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnPluginFormPrerender event
-     * @return void
-     */
+    * Invoke OnPluginFormPrerender event
+    * @return void
+    */
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
@@ -97,9 +97,9 @@ class ElementPluginCreateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnPluginFormRender event
-     * @return string
-     */
+    * Invoke OnPluginFormRender event
+    * @return string
+    */
     public function fireRenderEvent() {
         $this->onPluginFormRender = $this->modx->invokeEvent('OnPluginFormRender', [
             'id' => 0,
@@ -111,34 +111,34 @@ class ElementPluginCreateManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('plugin_new');
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'element/plugin/create.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['plugin','category','system_events','propertyset','element'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Plugins';
     }

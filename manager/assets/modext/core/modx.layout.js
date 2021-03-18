@@ -53,12 +53,12 @@ MODx.Layout = function(config){
 };
 Ext.extend(MODx.Layout, Ext.Viewport, {
     /**
-     * Wrapper method to build the layout regions
-     *
-     * @param {Object} config
-     *
-     * @returns {Array}
-     */
+    * Wrapper method to build the layout regions
+    *
+    * @param {Object} config
+    *
+    * @returns {Array}
+    */
     buildLayout: function(config) {
         var items = []
             ,north = this.getNorth(config)
@@ -86,12 +86,12 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         return items;
     }
     /**
-     * Build the north region (header)
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
+    * Build the north region (header)
+    *
+    * @param {Object} config
+    *
+    * @returns {Object|void}
+    */
     ,getNorth: function(config) {
         if (window.innerWidth <= 640) {
             return {
@@ -108,12 +108,12 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         return false;
     }
     /**
-     * Build the west region (trees)
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
+    * Build the west region (trees)
+    *
+    * @param {Object} config
+    *
+    * @returns {Object|void}
+    */
     ,getWest: function(config) {
         if (window.innerWidth <= 640) {
             return this.getTree(config);
@@ -133,12 +133,12 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         };
     }
     /**
-     * Build the center region (main content)
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
+    * Build the center region (main content)
+    *
+    * @param {Object} config
+    *
+    * @returns {Object|void}
+    */
     ,getCenter: function(config) {
         var center = {
             region: 'center',
@@ -170,21 +170,21 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         };
     }
     /**
-     * Build the south region (footer)
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
+    * Build the south region (footer)
+    *
+    * @param {Object} config
+    *
+    * @returns {Object|void}
+    */
     ,getSouth: function(config) {
     }
     /**
-     * Build the east region
-     *
-     * @param {Object} config
-     *
-     * @returns {Object|void}
-     */
+    * Build the east region
+    *
+    * @param {Object} config
+    *
+    * @returns {Object|void}
+    */
     ,getEast: function(config) {
     }
 
@@ -453,10 +453,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     }
 
     /**
-     * Convenient method to target the west region
-     *
-     * @returns {Ext.Component|void}
-     */
+    * Convenient method to target the west region
+    *
+    * @returns {Ext.Component|void}
+    */
     ,getLeftBar: function() {
         var nav = Ext.getCmp('modx-leftbar-tabpanel');
         if (nav) {
@@ -467,10 +467,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     }
 
     /**
-     * Add the given item(s) to the west container
-     *
-     * @param {Object|Array} items
-     */
+    * Add the given item(s) to the west container
+    *
+    * @param {Object|Array} items
+    */
     ,addToLeftBar: function(items) {
         var nav = this.getLeftBar();
         if (nav && items) {
@@ -479,19 +479,19 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         }
     }
     /**
-     * Method executed after some item(s) has been added to the west container
-     *
-     * @param {Ext.Component} nav The container
-     * @param {Object|Array} items Added item(s)
-     */
+    * Method executed after some item(s) has been added to the west container
+    *
+    * @param {Ext.Component} nav The container
+    * @param {Object|Array} items Added item(s)
+    */
     ,onAfterLeftBarAdded: function(nav, items) {
 
     }
 
 
     /**
-     * Set keyboard shortcuts
-     */
+    * Set keyboard shortcuts
+    */
     ,loadKeys: function() {
         Ext.KeyMap.prototype.stopEvent = true;
         var k = new Ext.KeyMap(Ext.get(document));
@@ -531,8 +531,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         });
     }
     /**
-     * Wrapper method to refresh all available trees
-     */
+    * Wrapper method to refresh all available trees
+    */
     ,refreshTrees: function() {
         var t;
         t = Ext.getCmp('modx-resource-tree');
@@ -554,19 +554,19 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     // Why here & why assuming visible ??
     ,leftbarVisible: true
     /**
-     * Toggle left bar
-     */
+    * Toggle left bar
+    */
     ,toggleLeftbar: function() {
         this.leftbarVisible ? this.hideLeftbar(true) : this.showLeftbar(true);
         // Toggle the left bar visibility
         this.leftbarVisible = !this.leftbarVisible;
     }
     /**
-     * Hide the left bar
-     *
-     * @param {Boolean} [anim] Whether or not to animate the transition
-     * @param {Boolean} [state] Whether or not to save the component's state
-     */
+    * Hide the left bar
+    *
+    * @param {Boolean} [anim] Whether or not to animate the transition
+    * @param {Boolean} [state] Whether or not to save the component's state
+    */
     ,hideLeftbar: function(anim, state) {
         Ext.getCmp('modx-leftbar-tabs').collapse(anim);
         if (Ext.isBoolean(state)) {
@@ -574,19 +574,19 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         }
     }
     /**
-     * Show the left bar
-     *
-     * @param {Boolean} [anim] Whether or not to animate the transition
-     */
+    * Show the left bar
+    *
+    * @param {Boolean} [anim] Whether or not to animate the transition
+    */
     ,showLeftbar: function(anim) {
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
     /**
-     * Actions performed before we save the component state
-     *
-     * @param {Ext.Component} component
-     * @param {Object} state
-     */
+    * Actions performed before we save the component state
+    *
+    * @param {Ext.Component} component
+    * @param {Object} state
+    */
     ,onBeforeSaveState: function(component, state) {
         var collapsed = state.collapsed;
         if (collapsed && !this.stateSave) {

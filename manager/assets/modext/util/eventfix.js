@@ -27,7 +27,7 @@ Ext.EventManager = function(){
             scope: scope
         });
 
-         E.on(el, ename, wrap);
+        E.on(el, ename, wrap);
 
         if(ename == "mousewheel" && el.addEventListener){ // workaround for jQuery
             el.addEventListener("DOMMouseScroll", wrap, false);
@@ -124,17 +124,17 @@ Ext.EventManager = function(){
                 var rs = document.readyState;
                 if(rs == "complete") {
                     fireDocReady();
-                 }
+                }
             }, 10);
         }
-        
+
         E.on(window, "load", fireDocReady);
     };
 
     var createBuffered = function(h, o){
         var task = new Ext.util.DelayedTask(h);
         return function(e){
-            
+
             e = new Ext.EventObjectImpl(e);
             task.delay(o.buffer, h, null, [e]);
         };
@@ -149,7 +149,7 @@ Ext.EventManager = function(){
 
     var createDelayed = function(h, o){
         return function(e){
-            
+
             e = new Ext.EventObjectImpl(e);
             setTimeout(function(){
                 h(e);
@@ -179,7 +179,7 @@ Ext.EventManager = function(){
                 e.stopEvent();
             }
             if(o.preventDefault === true){
-               e.preventDefault();
+                e.preventDefault();
             }
             if(o.stopPropagation === true){
                 e.stopPropagation();
@@ -204,13 +204,13 @@ Ext.EventManager = function(){
         fn._handlers.push([Ext.id(el), ename, h]);
 
         E.on(el, ename, h);
-        if(ename == "mousewheel" && el.addEventListener){ 
+        if(ename == "mousewheel" && el.addEventListener){
             el.addEventListener("DOMMouseScroll", h, false);
             E.on(window, 'unload', function(){
                 el.removeEventListener("DOMMouseScroll", h, false);
             });
         }
-        if(ename == "mousedown" && el == document){ 
+        if(ename == "mousedown" && el == document){
             Ext.EventManager.stoppedMouseDownEvent.addListener(h);
         }
         return h;
@@ -233,7 +233,7 @@ Ext.EventManager = function(){
         if(ename == "mousewheel" && el.addEventListener){
             el.removeEventListener("DOMMouseScroll", hd, false);
         }
-        if(ename == "mousedown" && el == document){ 
+        if(ename == "mousedown" && el == document){
             Ext.EventManager.stoppedMouseDownEvent.removeListener(hd);
         }
     };
@@ -241,7 +241,7 @@ Ext.EventManager = function(){
     var propRe = /^(?:scope|delay|buffer|single|stopEvent|preventDefault|stopPropagation|normalized|args|delegate)$/;
     var pub = {
 
-    
+
         addListener : function(element, eventName, fn, scope, options){
             if(typeof eventName == "object"){
                 var o = eventName;
@@ -250,10 +250,10 @@ Ext.EventManager = function(){
                         continue;
                     }
                     if(typeof o[e] == "function"){
-                        
+
                         listen(element, e, o, o[e], o.scope);
                     }else{
-                        
+
                         listen(element, e, o[e]);
                     }
                 }
@@ -262,7 +262,7 @@ Ext.EventManager = function(){
             return listen(element, eventName, options, fn, scope);
         },
 
-        
+
         removeListener : function(element, eventName, fn){
             return stopListening(element, eventName, fn);
         },
@@ -270,9 +270,9 @@ Ext.EventManager = function(){
         removeAll : function(element){
             return removeAll(element);
         },
-        
+
         onDocumentReady : function(fn, scope, options){
-            if(docReadyState){ 
+            if(docReadyState){
                 docReadyEvent.addListener(fn, scope, options);
                 docReadyEvent.fire();
                 docReadyEvent.clearListeners();
@@ -283,12 +283,12 @@ Ext.EventManager = function(){
             }
             options = options || {};
             if(!options.delay) {
-				options.delay = 1;
-			}
+                options.delay = 1;
+            }
             docReadyEvent.addListener(fn, scope, options);
         },
 
-        
+
         onWindowResize : function(fn, scope, options){
             if(!resizeEvent){
                 resizeEvent = new Ext.util.Event();
@@ -300,7 +300,7 @@ Ext.EventManager = function(){
             resizeEvent.addListener(fn, scope, options);
         },
 
-        
+
         fireWindowResize : function(){
             if(resizeEvent){
                 if((Ext.isIE||Ext.isAir) && resizeTask){
@@ -311,7 +311,7 @@ Ext.EventManager = function(){
             }
         },
 
-        
+
         onTextResize : function(fn, scope, options){
             if(!textEvent){
                 textEvent = new Ext.util.Event();
@@ -329,27 +329,27 @@ Ext.EventManager = function(){
             textEvent.addListener(fn, scope, options);
         },
 
-        
+
         removeResizeListener : function(fn, scope){
             if(resizeEvent){
                 resizeEvent.removeListener(fn, scope);
             }
         },
 
-        
+
         fireResize : function(){
             if(resizeEvent){
                 resizeEvent.fire(D.getViewWidth(), D.getViewHeight());
             }
         },
-        
+
         ieDeferSrc : false,
-        
+
         textResizeInterval : 50
     };
-     
+
     pub.on = pub.addListener;
-    
+
     pub.un = pub.removeListener;
 
     pub.stoppedMouseDownEvent = new Ext.util.Event();
@@ -377,7 +377,7 @@ Ext.onReady(function(){
     if(Ext.isBorderBox){
         cls.push('ext-border-box');
     }
-    if(Ext.isStrict){ 
+    if(Ext.isStrict){
         var p = bd.dom.parentNode;
         if(p){
             p.className += ' ext-strict';

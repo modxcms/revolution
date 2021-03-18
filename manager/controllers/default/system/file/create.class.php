@@ -30,10 +30,10 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Check for any permissions or requirements to load page
-     *
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    *
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('file_create');
@@ -41,10 +41,10 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Specify the language topics to load
-     *
-     * @return array
-     */
+    * Specify the language topics to load
+    *
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['file', 'source'];
@@ -52,10 +52,10 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $this->addJavascript($this->modx->getOption('manager_url') . 'assets/modext/sections/system/file/create.js');
@@ -68,12 +68,12 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     *
-     * @param array $scriptProperties
-     *
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    *
+    * @param array $scriptProperties
+    *
+    * @return mixed
+    */
     public function process(array $scriptProperties = [])
     {
         $placeholders = [];
@@ -97,10 +97,10 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Get the active source
-     *
-     * @return modMediaSource|bool
-     */
+    * Get the active source
+    *
+    * @return modMediaSource|bool
+    */
     public function getSource()
     {
         /** @var modMediaSource|modFileMediaSource $source */
@@ -128,10 +128,10 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Invoke OnFileEditFormPrerender event
-     *
-     * @return string
-     */
+    * Invoke OnFileEditFormPrerender event
+    *
+    * @return string
+    */
     public function fireEvents()
     {
         $OnFileCreateFormPrerender = $this->modx->invokeEvent('OnFileCreateFormPrerender', [
@@ -147,10 +147,10 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle()
     {
         return $this->modx->lexicon('file_create');
@@ -158,10 +158,10 @@ class SystemFileCreateManagerController extends modManagerController
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return '';

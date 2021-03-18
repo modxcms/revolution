@@ -1,6 +1,6 @@
 /**
  * A checkbox-driven tree
- * 
+ *
  * @class MODx.tree.CheckboxTree
  * @extends Ext.tree.TreePanel
  * @param {Object} config An object of config properties
@@ -29,10 +29,10 @@ MODx.tree.CheckboxTree = function(config) {
 Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
     menu: {}
     ,root: null
-    
+
     ,setup: function() {
         var root;
-        if (this.config.url) {            
+        if (this.config.url) {
             this.config.loader = new Ext.tree.TreeLoader({
                 preloadChildren: false
                 ,baseAttrs: {
@@ -59,24 +59,24 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
                 ,children: this.config.data || []
             });
         }
-        
-        
+
+
         MODx.tree.CheckboxTree.superclass.constructor.call(this,this.config);
         this.addEvents({
             refresh: true
         });
         this.getLoader().doPreload(root);
         this.setRootNode(root);
-        
+
         this.cm = new Ext.menu.Menu(Ext.id(),{});
         this.on('contextmenu',this._showContextMenu,this);
-        
+
         this.treestateId = Ext.id();
         this.on('click',function(x) {
             Ext.state.Manager.set(this.treestateId,x.getPath());
-        },this);        
+        },this);
     }
-    
+
     ,encode: function(node) {
         if (!node) { node = this.getRootNode(); }
         var _encode = function(node) {
@@ -97,19 +97,19 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         var nodes = _encode(node);
         return Ext.encode(nodes);
     }
-    
+
     ,_showContextMenu: function(node,e) {
         node.select();
         this.cm.activeNode = node;
         var nar = node.id.split('_');
-        
+
         this.cm.removeAll();
         if (node.attributes.menu && node.attributes.menu.items) {
             this.addContextMenuItem(node.attributes.menu.items);
             this.cm.show(node.ui.getEl(),'t?');
         }
     }
-    
+
     ,addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
@@ -117,15 +117,15 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
             this.cm.add(a[i]);
         }
     }
-    
+
     ,removeChildren: function(node) {
         while(node.firstChild){
-             var c = node.firstChild;
-             node.removeChild(c);
-             c.destroy();
+            var c = node.firstChild;
+            node.removeChild(c);
+            c.destroy();
         }
     }
-    
+
     ,loadRemoteData: function(data) {
         this.removeChildren(this.getRootNode());
         for (var c in data) {
@@ -134,18 +134,18 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
             }
         }
     }
-    
+
     ,removeNode: function(id) {
         var node = this.getNodeById(id);
         if (node) {
-            node.remove(); 
+            node.remove();
         }
     }
-    
+
     ,removeActiveNode: function() {
         this.cm.activeNode.remove();
     }
-    
+
     ,refresh: function() {
         var treeState = Ext.state.Manager.get(this.treestateId);
         var root = this.getRootNode();
@@ -158,21 +158,21 @@ Ext.extend(MODx.tree.CheckboxTree,Ext.tree.TreePanel,{
         this.fireEvent('refresh',{root:this.getRootNode()});
         return true;
     }
-    
+
     ,expand: function() {
         if (this.root) {
             this.root.expand();
             this.root.expandChildNodes();
         }
     }
-    
+
     ,collapse: function() {
         if (this.root) {
             this.root.collapseChildNodes();
             this.root.collapse();
         }
     }
-    
+
     ,getToolbar: function() {
         var iu = MODx.config.template_url+'images/restyle/icons/';
         return [{

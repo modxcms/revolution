@@ -17,8 +17,8 @@ use MODX\Revolution\modDashboardWidgetInterface;
 class modDashboardWidgetNewsFeed extends modDashboardWidgetInterface
 {
     /**
-     * @return string
-     */
+    * @return string
+    */
     public function render()
     {
         $enabled = $this->modx->getOption('feed_modx_news_enabled', null, true);

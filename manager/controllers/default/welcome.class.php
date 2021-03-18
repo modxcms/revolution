@@ -24,25 +24,25 @@ use MODX\Revolution\Processors\System\Dashboard\User\GetList;
 class WelcomeManagerController extends modManagerController
 {
     /**
-     * Whether or not to show the welcome screen
-     *
-     * @var boolean $showWelcomeScreen
-     */
+    * Whether or not to show the welcome screen
+    *
+    * @var boolean $showWelcomeScreen
+    */
     public $showWelcomeScreen = false;
 
     /**
-     * The current, active dashboard for the user
-     *
-     * @var null|modDashboard $dashboard
-     */
+    * The current, active dashboard for the user
+    *
+    * @var null|modDashboard $dashboard
+    */
     public $dashboard = null;
 
 
     /**
-     * Check for any permissions or requirements to load page
-     *
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    *
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('home');
@@ -50,10 +50,10 @@ class WelcomeManagerController extends modManagerController
 
 
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $this->addJavascript($this->modx->getOption('manager_url') . 'assets/modext/widgets/system/modx.panel.dashboard.js');
@@ -94,12 +94,12 @@ class WelcomeManagerController extends modManagerController
 
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     *
-     * @param array $scriptProperties
-     *
-     * @return array
-     */
+    * Custom logic code here for setting placeholders, etc
+    *
+    * @param array $scriptProperties
+    *
+    * @return array
+    */
     public function process(array $scriptProperties = [])
     {
         $this->checkForWelcomeScreen();
@@ -113,10 +113,10 @@ class WelcomeManagerController extends modManagerController
 
 
     /**
-     * Check to show if we need to show the Welcome Screen for the user
-     *
-     * @return void
-     */
+    * Check to show if we need to show the Welcome Screen for the user
+    *
+    * @return void
+    */
     public function checkForWelcomeScreen()
     {
         if ($this->modx->getOption('welcome_screen', null, false)) {
@@ -142,10 +142,10 @@ class WelcomeManagerController extends modManagerController
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle()
     {
         return $this->modx->lexicon('dashboard');
@@ -153,10 +153,10 @@ class WelcomeManagerController extends modManagerController
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return 'welcome.tpl';
@@ -164,10 +164,10 @@ class WelcomeManagerController extends modManagerController
 
 
     /**
-     * Specify the language topics to load
-     *
-     * @return array
-     */
+    * Specify the language topics to load
+    *
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['welcome', 'configcheck', 'dashboards'];

@@ -28,17 +28,17 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
     public $widgetArray = [];
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('dashboards');
     }
 
     /**
-     * Get the active widget
-     * @return void
-     */
+    * Get the active widget
+    * @return void
+    */
     public function initialize() {
         if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
             $this->widget = $this->modx->getObject(modDashboardWidget::class, ['id' => $this->scriptProperties['id']]);
@@ -46,11 +46,11 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     *
-     * @param array $scriptProperties
-     * @return array
-     */
+    * Custom logic code here for setting placeholders, etc
+    *
+    * @param array $scriptProperties
+    * @return array
+    */
     public function process(array $scriptProperties = []) {
         if (empty($this->widget)) {
             return $this->failure($this->modx->lexicon('widget_err_nf'));
@@ -63,12 +63,12 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
 
 
     /**
-     * Get the Dashboards this Widget has been placed on
-     *
-     * @param int $user
-     *
-     * @return array
-     */
+    * Get the Dashboards this Widget has been placed on
+    *
+    * @param int $user
+    *
+    * @return array
+    */
     public function getDashboards($user = 0) {
         $list = [];
         $c = $this->modx->newQuery(modDashboardWidgetPlacement::class);
@@ -96,9 +96,9 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.orm.js');
@@ -115,26 +115,26 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('widget').': '.$this->widgetArray['name'];
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return '';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         $topics = ['dashboards','user'];
         if ($this->widget) {
@@ -147,20 +147,20 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Dashboard+Widgets';
     }
 
 
     /**
-     * @param array $remoteData
-     * @param string $path
-     *
-     * @return array
-     */
+    * @param array $remoteData
+    * @param string $path
+    *
+    * @return array
+    */
     private function _parseCustomData($remoteData = [], $path = '')
     {
         if (!$remoteData) {

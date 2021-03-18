@@ -1,6 +1,6 @@
 /**
  * Loads the property sets page
- * 
+ *
  * @class MODx.page.PropertySets
  * @extends MODx.Component
  * @param {Object} config An object of config properties
@@ -18,7 +18,7 @@ MODx.page.PropertySets = function(config) {
             ,handler: MODx.loadHelpPane
         }]
     });
-    MODx.page.PropertySets.superclass.constructor.call(this,config);    
+    MODx.page.PropertySets.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.PropertySets,MODx.Component);
 Ext.reg('modx-page-property-sets',MODx.page.PropertySets);

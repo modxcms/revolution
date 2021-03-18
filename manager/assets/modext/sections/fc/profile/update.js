@@ -7,10 +7,10 @@
  * @xtype modx-page-fc-profile-update
  */
 MODx.page.UpdateFCProfile = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-	   formpanel: 'modx-panel-fc-profile'
-	   ,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-fc-profile'
+        ,actions: {
             'new': 'Security/Forms/Profile/Create'
             ,edit: 'Security/Forms/Profile/Update'
             ,cancel: 'security/forms'
@@ -39,8 +39,8 @@ MODx.page.UpdateFCProfile = function(config) {
             xtype: 'modx-panel-fc-profile'
             ,record: config.record || {}
         }]
-	});
-	MODx.page.UpdateFCProfile.superclass.constructor.call(this,config);
+    });
+    MODx.page.UpdateFCProfile.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.UpdateFCProfile,MODx.Component);
 Ext.reg('modx-page-fc-profile-update',MODx.page.UpdateFCProfile);

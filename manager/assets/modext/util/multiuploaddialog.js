@@ -198,12 +198,12 @@
 
 
     /**
-     * @deprecated
-     *
-     * File upload browse button.
-     *
-     * @class MODx.util.MultiUploadDialog.BrowseButton
-     */
+    * @deprecated
+    *
+    * File upload browse button.
+    *
+    * @class MODx.util.MultiUploadDialog.BrowseButton
+    */
     MODx.util.MultiUploadDialog.BrowseButton = Ext.extend(Ext.Button,{
         input_name : 'file',
         input_file : null,
@@ -351,11 +351,11 @@
     Ext.reg('multiupload-browse-btn', MODx.util.MultiUploadDialog.BrowseButton);
 
     /**
-     * @deprecated
-     *
-     * @param config
-     * @constructor
-     */
+    * @deprecated
+    *
+    * @param config
+    * @constructor
+    */
     MODx.util.MultiUploadDialog.FilesGrid = function(config) {
         config = config || {};
         Ext.applyIf(config,{
@@ -442,11 +442,11 @@
     Ext.reg('multiupload-grid-files',MODx.util.MultiUploadDialog.FilesGrid);
 
     /**
-     * @deprecated
-     *
-     * @param config
-     * @constructor
-     */
+    * @deprecated
+    *
+    * @param config
+    * @constructor
+    */
     MODx.util.MultiUploadDialog.Dialog = function(config) {
         this.filesGridId = Ext.id();
 

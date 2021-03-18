@@ -29,37 +29,37 @@ use xPDO\Cache\xPDOCacheManager;
 class TopMenu
 {
     /**
-     * @var modManagerController
-     */
+    * @var modManagerController
+    */
     public $controller;
     /**
-     * @var modX
-     */
+    * @var modX
+    */
     public $modx;
     /**
-     * The current menu HTML output
-     *
-     * @var string
-     */
+    * The current menu HTML output
+    *
+    * @var string
+    */
     protected $menus = '';
     protected $submenus = '';
     /**
-     * Whether or not to display menus description
-     *
-     * @var bool
-     */
+    * Whether or not to display menus description
+    *
+    * @var bool
+    */
     protected $showDescriptions = true;
     /**
-     * Current menu index
-     *
-     * @var int
-     */
+    * Current menu index
+    *
+    * @var int
+    */
     protected $order = 0;
     /**
-     * Current children menu index
-     *
-     * @var int
-     */
+    * Current children menu index
+    *
+    * @var int
+    */
     protected $childrenCt = 0;
 
     public function __construct(modManagerController &$controller)
@@ -70,10 +70,10 @@ class TopMenu
     }
 
     /**
-     * Build the top menu
-     *
-     * @return void
-     */
+    * Build the top menu
+    *
+    * @return void
+    */
     public function render()
     {
         // First assign most variables so they could be used within menus
@@ -97,10 +97,10 @@ class TopMenu
     }
 
     /**
-     * Set a bunch of placeholders to be used within Smarty templates
-     *
-     * @return void
-     */
+    * Set a bunch of placeholders to be used within Smarty templates
+    *
+    * @return void
+    */
     public function setPlaceholders()
     {
         $username = '';
@@ -121,10 +121,10 @@ class TopMenu
     }
 
     /**
-     * Retrieve/compute the user picture profile
-     *
-     * @return string The HTML output
-     */
+    * Retrieve/compute the user picture profile
+    *
+    * @return string The HTML output
+    */
     public function getUserImage()
     {
         // Default to FontAwesome
@@ -139,13 +139,13 @@ class TopMenu
     }
 
     /**
-     * Build the requested menu "container" and set it as a placeholder
-     *
-     * @param string $name The container name (topnav, usernav)
-     * @param string $placeholder The placeholder to display the built menu to
-     *
-     * @return void
-     */
+    * Build the requested menu "container" and set it as a placeholder
+    *
+    * @param string $name The container name (topnav, usernav)
+    * @param string $placeholder The placeholder to display the built menu to
+    *
+    * @return void
+    */
     public function buildMenu($name, $placeholder)
     {
         if (!$placeholder) {
@@ -215,12 +215,12 @@ class TopMenu
     }
 
     /**
-     * Retrieve the menus for the given "container"
-     *
-     * @param string $name
-     *
-     * @return array
-     */
+    * Retrieve the menus for the given "container"
+    *
+    * @param string $name
+    *
+    * @return array
+    */
     protected function getCache($name)
     {
         $key = $this->getCacheKey($name);
@@ -250,12 +250,12 @@ class TopMenu
     }
 
     /**
-     * Compute the cache key for the given menu "container"
-     *
-     * @param string $name
-     *
-     * @return string
-     */
+    * Compute the cache key for the given menu "container"
+    *
+    * @param string $name
+    *
+    * @return string
+    */
     protected function getCacheKey($name)
     {
         $ml = $this->modx->getOption('manager_language', $_SESSION, $this->modx->getOption('cultureKey', null, 'en'));
@@ -264,10 +264,10 @@ class TopMenu
     }
 
     /**
-     * Reset menu HTML output & indexes counters
-     *
-     * @return void
-     */
+    * Reset menu HTML output & indexes counters
+    *
+    * @return void
+    */
     protected function resetCounters()
     {
         $this->menus = '';
@@ -277,12 +277,12 @@ class TopMenu
     }
 
     /**
-     * Check if the current user is allowed to view the menu record
-     *
-     * @param string $perms
-     *
-     * @return bool
-     */
+    * Check if the current user is allowed to view the menu record
+    *
+    * @param string $perms
+    *
+    * @return bool
+    */
     public function hasPermission($perms)
     {
         if (empty($perms)) {
@@ -298,13 +298,13 @@ class TopMenu
     }
 
     /**
-     * Process the given sub menus
-     *
-     * @param string $output The existing menu HTML "output"
-     * @param array $menus The sub menus to process
-     *
-     * @return void
-     */
+    * Process the given sub menus
+    *
+    * @param string $output The existing menu HTML "output"
+    * @param array $menus The sub menus to process
+    *
+    * @return void
+    */
     public function processSubMenus(&$output, array $menus = [])
     {
         foreach ($menus as $menu) {

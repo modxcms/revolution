@@ -22,8 +22,8 @@ MODx.tree.SimpleResource = function(config) {
 };
 Ext.extend(MODx.tree.SimpleResource, MODx.tree.Tree, {
     /**
-     * Renders the item text without any special formatting. The Resource/GetNodes processor already protects against XSS.
-     */
+    * Renders the item text without any special formatting. The Resource/GetNodes processor already protects against XSS.
+    */
     renderItemText: function(item) {
         return item.text;
     }

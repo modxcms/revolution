@@ -21,17 +21,17 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
     /** @var modUserGroup $userGroup */
     public $userGroup;
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('usergroup_view');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
@@ -47,17 +47,17 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-user-group-update"
-                 ,record: '.$this->modx->toJSON($this->userGroup->toArray()).'
+                ,record: '.$this->modx->toJSON($this->userGroup->toArray()).'
             });
         });
         </script>');
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $placeholders = [];
         if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
@@ -74,35 +74,35 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         $ugName = $this->userGroup ? $this->userGroup->get('name') : $this->modx->lexicon('anonymous');
         return $this->modx->lexicon('user_group').': '.$ugName;
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return '';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['user','access','policy','context','setting'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'User+Groups';
     }

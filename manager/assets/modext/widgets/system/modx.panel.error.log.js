@@ -78,8 +78,8 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         location.href = this.config.url+'?action=System/ErrorLog/Download&HTTP_MODAUTH='+MODx.siteId;
     }
     /**
-     * Set the textarea height to make use of the maximum "space" the client viewport allows
-     */
+    * Set the textarea height to make use of the maximum "space" the client viewport allows
+    */
     ,setTextareaHeight: function() {
         var elem = Ext.getCmp('modx-error-log-content');
         // Client viewport visible height

@@ -24,17 +24,17 @@ class ElementTemplateCreateManagerController extends modManagerController {
     public $onTempFormPrerender = '';
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('new_template');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
@@ -59,10 +59,10 @@ class ElementTemplateCreateManagerController extends modManagerController {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $placeholders = [];
 
@@ -81,9 +81,9 @@ class ElementTemplateCreateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnTempFormPrerender event
-     * @return void
-     */
+    * Invoke OnTempFormPrerender event
+    * @return void
+    */
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
@@ -96,9 +96,9 @@ class ElementTemplateCreateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnTempFormRender event
-     * @return string
-     */
+    * Invoke OnTempFormRender event
+    * @return string
+    */
     public function fireRenderEvent() {
         $this->onTempFormRender = $this->modx->invokeEvent('OnTempFormRender', [
             'id' => 0,
@@ -110,34 +110,34 @@ class ElementTemplateCreateManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('template_new');
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'element/template/create.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['template','category','propertyset','element','tv'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Templates';
     }

@@ -200,47 +200,47 @@ MODx.window.SetupOptions = function(config) {
 
     Ext.applyIf(config,{
         title: _('setup_options')
-		,layout: 'form'
-		,width: 650
-		,autoHeight: true
-		,cls: 'modx-confirm'
-		,items:[{
-			xtype: 'modx-template-panel'
-			,id: 'modx-setupoptions-panel'
-			,bodyCssClass: 'win-desc panel-desc'
-			,startingMarkup: '<tpl for="."><p>{text}</p></tpl>'
-			,startingText: _('setup_options_desc')
-		},{
-			html:''
-			,xtype: 'form'
-			,bodyCssClass: 'inline-form'
-			,id: 'modx-setupoptions-form'
-		}]
-		,buttons :[{
-			text: config.cancelBtnText || _('cancel')
+        ,layout: 'form'
+        ,width: 650
+        ,autoHeight: true
+        ,cls: 'modx-confirm'
+        ,items:[{
+            xtype: 'modx-template-panel'
+            ,id: 'modx-setupoptions-panel'
+            ,bodyCssClass: 'win-desc panel-desc'
+            ,startingMarkup: '<tpl for="."><p>{text}</p></tpl>'
+            ,startingText: _('setup_options_desc')
+        },{
+            html:''
+            ,xtype: 'form'
+            ,bodyCssClass: 'inline-form'
+            ,id: 'modx-setupoptions-form'
+        }]
+        ,buttons :[{
+            text: config.cancelBtnText || _('cancel')
             ,scope: this
             ,handler: function() { this.hide(); }
-		},{
-			text: _('package_install')
+        },{
+            text: _('package_install')
             ,cls: 'primary-button'
-			,id:'package-setupoptions-install-btn'
-			,handler: this.install
-			,scope: this
-		}]
+            ,id:'package-setupoptions-install-btn'
+            ,handler: this.install
+            ,scope: this
+        }]
     });
     MODx.window.SetupOptions.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.SetupOptions,MODx.Window,{
-	fetch: function(content){
-		Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content, true);
-	}
+    fetch: function(content){
+        Ext.getCmp('modx-setupoptions-form').getForm().getEl().update(content, true);
+    }
 
-	,install: function(btn, ev){
-		this.hide();
-		var options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
+    ,install: function(btn, ev){
+        this.hide();
+        var options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
         options.signature = this.signature;
-		Ext.getCmp('modx-panel-packages').install(btn, ev, options);
-	}
+        Ext.getCmp('modx-panel-packages').install(btn, ev, options);
+    }
 });
 Ext.reg('modx-package-setupoptions', MODx.window.SetupOptions);
 
@@ -255,46 +255,46 @@ MODx.window.ChangeProvider = function(config) {
     Ext.applyIf(config,{
         title: _('provider_select')
         ,width: 600 // prevents primary button text from being cut off if it is a long string
-		,layout: 'form'
-		,items:[{
-			xtype: 'modx-template-panel'
-			,id: 'modx-cp-panel'
-			,bodyCssClass: 'win-desc panel-desc'
-			,startingMarkup: '<tpl for="."><p>{text}</p></tpl>'
-			,startingText: _('provider_select_desc')
-		},{
-			xtype: 'form'
-			,id: 'change-provider-form'
-			,border: false
-			,items:[{
-				fieldLabel: _('provider')
-				,xtype: 'modx-combo-provider'
-				,id: 'modx-pdselprov-provider'
+        ,layout: 'form'
+        ,items:[{
+            xtype: 'modx-template-panel'
+            ,id: 'modx-cp-panel'
+            ,bodyCssClass: 'win-desc panel-desc'
+            ,startingMarkup: '<tpl for="."><p>{text}</p></tpl>'
+            ,startingText: _('provider_select_desc')
+        },{
+            xtype: 'form'
+            ,id: 'change-provider-form'
+            ,border: false
+            ,items:[{
+                fieldLabel: _('provider')
+                ,xtype: 'modx-combo-provider'
+                ,id: 'modx-pdselprov-provider'
                 ,anchor: '100%'
-				,allowBlank: false
-				,baseParams: {
+                ,allowBlank: false
+                ,baseParams: {
                     action: 'Workspace/Providers/GetList'
                     ,showNone: false
                 }
-			}]
-		}]
-		,buttons :[{
-			text: config.cancelBtnText || _('cancel')
+            }]
+        }]
+        ,buttons :[{
+            text: config.cancelBtnText || _('cancel')
             ,scope: this
             ,handler: function() { this.hide(); }
-		},{
-			text: _('save_and_go_to_browser')
+        },{
+            text: _('save_and_go_to_browser')
             ,cls: 'primary-button'
-			,id:'package-cp-btn'
-			,handler: this.submit
-			,scope: this
-		}]
+            ,id:'package-cp-btn'
+            ,handler: this.submit
+            ,scope: this
+        }]
     });
     MODx.window.ChangeProvider.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would create an empty unused form (It's not a bug))
-	submit: function(o) {
-		var fm = Ext.getCmp('change-provider-form');
+    submit: function(o) {
+        var fm = Ext.getCmp('change-provider-form');
         if (fm.getForm().isValid()) {
             var vs = fm.getForm().getValues();
             MODx.provider = vs.provider;
@@ -310,8 +310,8 @@ Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would cre
                 loader.load(tree.root);
             }
             MODx.debug('Switching to: '+MODx.provider);
-			this.hide();
-			Ext.getCmp('modx-panel-packages-browser').activate();
+            this.hide();
+            Ext.getCmp('modx-panel-packages-browser').activate();
         }
     }
 });

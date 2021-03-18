@@ -15,14 +15,14 @@ MODx.grid.PackageVersions = function(config) {
             ,package_name: MODx.request.package_name
         }
         ,fields: ['signature','name','version','release','created','updated','installed','state'
-                 ,'workspace','provider','provider_name','disabled','source'
-                 ,'readme','menu']
+                ,'workspace','provider','provider_name','disabled','source'
+                ,'readme','menu']
         ,plugins: [this.exp]
         ,pageSize: 20
         ,columns: [this.exp,{
-              header: _('name') ,dataIndex: 'name' }
-           ,{ header: _('version') ,dataIndex: 'version' }
-           ,{ header: _('release') ,dataIndex: 'release' }
+            header: _('name') ,dataIndex: 'name' }
+            ,{ header: _('version') ,dataIndex: 'version' }
+            ,{ header: _('release') ,dataIndex: 'release' }
             ,{ header: _('installed') ,dataIndex: 'installed' ,renderer: this._rins }
             ,{
                 header: _('provider')

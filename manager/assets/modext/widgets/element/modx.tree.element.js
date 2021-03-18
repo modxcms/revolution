@@ -308,10 +308,10 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
 
     /**
-     * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} n The current node
-     * @param {Ext.EventObject} e The event object run.
-     */
+    * Shows the current context menu.
+    * @param {Ext.tree.TreeNode} n The current node
+    * @param {Ext.EventObject} e The event object run.
+    */
     ,_showContextMenu: function(n,e) {
         this.cm.activeNode = n;
         this.cm.removeAll();

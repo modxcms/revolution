@@ -114,12 +114,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     windows: {}
 
     /**
-     * Build the contextual menu for the root node
-     *
-     * @param {Ext.data.Node} node
-     *
-     * @returns {Array}
-     */
+    * Build the contextual menu for the root node
+    *
+    * @param {Ext.data.Node} node
+    *
+    * @returns {Array}
+    */
     ,getRootMenu: function(node) {
         var menu = [];
         if (MODx.perm.directory_create) {
@@ -163,11 +163,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     /**
-     * Override to handle root nodes contextual menus
-     *
-     * @param node
-     * @param e
-     */
+    * Override to handle root nodes contextual menus
+    *
+    * @param node
+    * @param e
+    */
     ,_showContextMenu: function(node,e) {
         this.cm.activeNode = node;
         this.cm.removeAll();
@@ -188,10 +188,10 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     /**
-     * Create a refresh button on the root node
-     *
-     * @see MODx.Tree.Tree#_onAppend
-     */
+    * Create a refresh button on the root node
+    *
+    * @see MODx.Tree.Tree#_onAppend
+    */
     ,showRefresh: function() {
         var node = this.getRootNode()
             ,inlineButtonsLang = this.getInlineButtonsLang(node)
@@ -271,8 +271,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     /**
-     * Expand the root node if appropriate
-     */
+    * Expand the root node if appropriate
+    */
     ,_init: function() {
         var treeState = Ext.state.Manager.get(this.treestate_id)
             ,rootPath = this.root.getPath('text');
@@ -516,7 +516,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-               'success': {fn:function(r) {
+                'success': {fn:function(r) {
                     this.fireEvent('afterRename');
                     this.refreshActiveNode();
                 }, scope: this}
@@ -662,8 +662,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     /**
-     * Operation executed after a node has been removed
-     */
+    * Operation executed after a node has been removed
+    */
     ,_afterRemove: function() {
         this.fireEvent('afterRemove');
         this.refreshParentNode();
@@ -983,7 +983,7 @@ MODx.window.QuickUpdateFile = function(config) {
             ,anchor: '100%'
             ,height: 200
         }]
-       ,keys: [{
+        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
             ,fn: this.submit
@@ -1051,7 +1051,7 @@ MODx.window.QuickCreateFile = function(config) {
             ,anchor: '100%'
             ,height: 200
         }]
-       ,keys: [{
+        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
             ,fn: this.submit
@@ -1062,5 +1062,3 @@ MODx.window.QuickCreateFile = function(config) {
 };
 Ext.extend(MODx.window.QuickCreateFile,MODx.Window);
 Ext.reg('modx-window-file-quick-create',MODx.window.QuickCreateFile);
-
-

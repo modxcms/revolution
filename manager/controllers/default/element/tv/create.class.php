@@ -26,17 +26,17 @@ class ElementTVCreateManagerController extends modManagerController {
     public $onTVFormPrerender = '';
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('new_tv');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $sources = $this->modx->toJSON($this->getElementSources());
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
@@ -64,10 +64,10 @@ Ext.onReady(function() {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $placeholders = [];
 
@@ -108,9 +108,9 @@ Ext.onReady(function() {
     }
 
     /**
-     * Invoke OnTVFormPrerender event
-     * @return void
-     */
+    * Invoke OnTVFormPrerender event
+    * @return void
+    */
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
@@ -123,9 +123,9 @@ Ext.onReady(function() {
     }
 
     /**
-     * Invoke OnTVFormRender event
-     * @return string
-     */
+    * Invoke OnTVFormRender event
+    * @return string
+    */
     public function fireRenderEvent() {
         $this->onTVFormRender = $this->modx->invokeEvent('OnTVFormRender', [
             'id' => 0,
@@ -137,34 +137,34 @@ Ext.onReady(function() {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('tv_new');
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'element/tv/create.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['tv','category','tv_widget','propertyset','element'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Template+Variables';
     }

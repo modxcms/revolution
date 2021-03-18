@@ -12,4 +12,3 @@ Ext.extend(MODx.tree.AsyncTreeNode,Ext.tree.AsyncTreeNode,{
 
 });
 Ext.reg('modx-tree-asynctreenode',MODx.tree.AsyncTreeNode);
-

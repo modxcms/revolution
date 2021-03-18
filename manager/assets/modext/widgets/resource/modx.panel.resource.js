@@ -114,10 +114,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     }
 
     /**
-     * Handle the preview button visibility according to the resource "deleted" status
-     *
-     * @param {string} action The action to perform on the preview button (hide/show)
-     */
+    * Handle the preview button visibility according to the resource "deleted" status
+    *
+    * @param {string} action The action to perform on the preview button (hide/show)
+    */
     ,handlePreview: function(deleted) {
         var previewBtn = Ext.getCmp('modx-abtn-preview');
         if (previewBtn) {

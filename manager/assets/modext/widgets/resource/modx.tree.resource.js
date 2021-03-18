@@ -67,10 +67,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     /**
-     * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} n The current node
-     * @param {Ext.EventObject} e The event object run.
-     */
+    * Shows the current context menu.
+    * @param {Ext.tree.TreeNode} n The current node
+    * @param {Ext.EventObject} e The event object run.
+    */
     ,_showContextMenu: function(n,e) {
         this.cm.activeNode = n;
         this.cm.removeAll();
@@ -700,9 +700,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     /**
-     * Handles all drag events into the tree.
-     * @param {Object} dropEvent The node dropped on the parent node.
-     */
+    * Handles all drag events into the tree.
+    * @param {Object} dropEvent The node dropped on the parent node.
+    */
     ,_handleDrag: function(dropEvent) {
         function simplifyNodes(node) {
             var resultNode = {};
@@ -823,8 +823,8 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     }
 
     /**
-     * Renders the item text without any special formatting. The Resource/GetNodes processor already protects against XSS.
-     */
+    * Renders the item text without any special formatting. The Resource/GetNodes processor already protects against XSS.
+    */
     ,renderItemText: function(item) {
         return item.text;
     }

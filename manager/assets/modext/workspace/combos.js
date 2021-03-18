@@ -1,6 +1,6 @@
 /**
  * Displays a dropdown list of modTransportProviders
- * 
+ *
  * @class MODx.combo.Provider
  * @extends MODx.combo.ComboBox
  * @param {Object} config An object of options.

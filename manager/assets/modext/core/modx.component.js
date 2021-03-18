@@ -157,7 +157,7 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             } else if (el.confirm && el.handler) {
                 el.handler = function() {
                     Ext.Msg.confirm(_('warning'),el.confirm,function(e) {
-                      if (e === 'yes') { Ext.callback(el.handler,this); }
+                    if (e === 'yes') { Ext.callback(el.handler,this); }
                     },el.scope || this);
                 };
             } else if (el.handler) {} else { el.handler = this.handleClick; }
@@ -354,10 +354,10 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
         var fp = Ext.getCmp(f);
         if (fp) {
             fp.on('fieldChange',function(o) {
-               for (var i=0;i<this.checkDirtyBtns.length;i=i+1) {
+                for (var i=0;i<this.checkDirtyBtns.length;i=i+1) {
                     var btn = this.checkDirtyBtns[i];
                     btn.setDisabled(false);
-               }
+                }
             },this);
         }
     }

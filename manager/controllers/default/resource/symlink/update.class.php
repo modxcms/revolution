@@ -15,10 +15,10 @@
 class SymlinkUpdateManagerController extends ResourceUpdateManagerController
 {
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $mgrUrl = $this->context->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig);
@@ -56,10 +56,10 @@ class SymlinkUpdateManagerController extends ResourceUpdateManagerController
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return 'resource/symlink/update.tpl';

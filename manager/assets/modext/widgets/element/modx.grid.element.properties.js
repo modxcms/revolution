@@ -5,14 +5,14 @@ MODx.panel.ElementProperties = function(config) {
         ,title: _('properties')
         ,header: false
         ,defaults: { collapsible: false ,autoHeight: true ,border: false }
-		,layout: 'form'
+        ,layout: 'form'
         ,items: [{
             html: '<p>'+_('element_properties_desc')+'</p>'
             ,itemId: 'desc-properties'
             ,xtype: 'modx-description'
         },{
             xtype: 'modx-grid-element-properties'
-			,cls:'main-wrapper'
+            ,cls:'main-wrapper'
             ,id: 'modx-grid-element-properties'
             ,itemId: 'grid-properties'
             ,autoHeight: true
@@ -661,9 +661,9 @@ MODx.window.CreateElementProperty = function(config) {
                             var g = Ext.getCmp('modx-cep-grid-element-property-options');
                             if (!g) return;
                             if (cb.getValue() == 'list' || cb.getValue() == 'color') {
-                               g.show();
+                                g.show();
                             } else {
-                               g.hide();
+                                g.hide();
                             }
                             this.syncSize();
                         },scope:this}
@@ -907,9 +907,9 @@ Ext.extend(MODx.window.UpdateElementProperty,MODx.Window,{
             var opt = rec.data.options;
             var opts = [];
             for (var x in opt) {
-              if (opt.hasOwnProperty(x)) {
+            if (opt.hasOwnProperty(x)) {
                 opts.push([opt[x].text,opt[x].value]);
-              }
+            }
             }
             g.getStore().loadData(opts);
         }

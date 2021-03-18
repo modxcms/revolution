@@ -29,10 +29,10 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * Check for any permissions or requirements to load page
-     *
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    *
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view_document');
@@ -40,10 +40,10 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
@@ -69,12 +69,12 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     *
-     * @param array $scriptProperties
-     *
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    *
+    * @param array $scriptProperties
+    *
+    * @return mixed
+    */
     public function process(array $scriptProperties = [])
     {
         $placeholders = [];
@@ -119,8 +119,8 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * @return string
-     */
+    * @return string
+    */
     public function getPreviewUrl()
     {
         $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'), $this->resource->get('context_key'));
@@ -130,10 +130,10 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle()
     {
         return $this->resource
@@ -143,10 +143,10 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * Return the location of the template file
-     *
-     * @return string
-     */
+    * Return the location of the template file
+    *
+    * @return string
+    */
     public function getTemplateFile()
     {
         return '';
@@ -154,10 +154,10 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * Specify the language topics to load
-     *
-     * @return array
-     */
+    * Specify the language topics to load
+    *
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['resource'];
@@ -165,10 +165,10 @@ class ResourceDataManagerController extends ResourceManagerController
 
 
     /**
-     * Get the Help URL
-     *
-     * @return string
-     */
+    * Get the Help URL
+    *
+    * @return string
+    */
     public function getHelpUrl()
     {
         return 'Resources';

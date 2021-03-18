@@ -29,16 +29,16 @@ MODx.panel.SystemSettings = function(config) {
                 ,items: [{
                     html: '<p>'+_('settings_desc')+'</p>'
                     ,xtype: 'modx-description'
-				},{
-					xtype: 'modx-grid-system-settings'
+                },{
+                    xtype: 'modx-grid-system-settings'
                     ,urlFilters: ['namespace', 'area', 'query']
-					,cls: 'main-wrapper'
-					,preventSaveRefresh: true
-				},{
-					html: MODx.onSiteSettingsRender
-				}]
-			}]
-		},{
+                    ,cls: 'main-wrapper'
+                    ,preventSaveRefresh: true
+                },{
+                    html: MODx.onSiteSettingsRender
+                }]
+            }]
+        },{
             title: _('system_events')
             ,autoHeight: true
             ,layout: 'form'

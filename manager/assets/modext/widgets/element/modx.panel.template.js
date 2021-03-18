@@ -338,8 +338,8 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
     }
 
     /**
-     * Set the browser window "media source" source
-     */
+    * Set the browser window "media source" source
+    */
     ,changeSource: function() {
         var browser = Ext.getCmp('modx-template-static-file')
             ,source = Ext.getCmp('modx-template-static-source').getValue();

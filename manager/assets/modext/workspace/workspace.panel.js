@@ -39,39 +39,39 @@ Ext.extend(MODx.panel.Workspace,MODx.Panel ,{
 
         i.push([MODx.getPageStructure([{
             title: _('packages')
-			,items:[{
-				xtype: 'modx-breadcrumbs-panel'
-				,id: 'packages-breadcrumbs'
-				,desc: _('packages_desc')
-				,root : {
-					text : 'Packages List'
-					,className: 'first'
-					,root: true
-					,pnl: 'modx-panel-packages'
-				}
-			},{
-				layout:'card'
-				,id:'card-container'
-				,activeItem:0
-				,border: false
-				,autoHeight: true
-				,defaults:{
-					cls: 'main-wrapper'
-					,preventRender: true
-					,autoHeight: true
-				}
-				,items: [{
-					xtype: 'modx-panel-packages'
-					,id: 'modx-panel-packages'
-				},{
-					xtype: 'modx-panel-packages-browser'
-					,id: 'modx-panel-packages-browser'
-				}]
-			}]
+            ,items:[{
+                xtype: 'modx-breadcrumbs-panel'
+                ,id: 'packages-breadcrumbs'
+                ,desc: _('packages_desc')
+                ,root : {
+                    text : 'Packages List'
+                    ,className: 'first'
+                    ,root: true
+                    ,pnl: 'modx-panel-packages'
+                }
+            },{
+                layout:'card'
+                ,id:'card-container'
+                ,activeItem:0
+                ,border: false
+                ,autoHeight: true
+                ,defaults:{
+                    cls: 'main-wrapper'
+                    ,preventRender: true
+                    ,autoHeight: true
+                }
+                ,items: [{
+                    xtype: 'modx-panel-packages'
+                    ,id: 'modx-panel-packages'
+                },{
+                    xtype: 'modx-panel-packages-browser'
+                    ,id: 'modx-panel-packages-browser'
+                }]
+            }]
         },{
             title: _('providers')
             ,autoHeight: true
-			,layout: 'form'
+            ,layout: 'form'
             ,items: [{
                 html: '<p>'+_('providers_desc')+'</p>'
                 ,xtype: 'modx-description'

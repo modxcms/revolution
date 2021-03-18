@@ -1,6 +1,6 @@
 Ext.onReady(function() {
     if (MODx.config.cultureKey == 'en') return false;
-    
+
     Date.dayNames = [
         _('sunday')
         ,_('monday')
@@ -43,7 +43,7 @@ Ext.onReady(function() {
         ,prevText: _('ext_prevmonth')
         ,monthYearText: _('ext_choosemonth')
     });
-    
+
     Ext.MessageBox.buttonText = {
         yes: _('yes')
         ,no: _('no')
@@ -78,12 +78,12 @@ Ext.onReady(function() {
     });
     Ext.apply(Ext.form.Field.prototype,{
         invalidText: _('ext_invalidfield')
-    });    
+    });
     Ext.apply(Ext.form.TextField.prototype,{
         minLengthText: _('ext_minlenfield')
         ,maxLengthText: _('ext_maxlenfield')
         ,invalidText: _('ext_invalidfield')
-        ,blankText: _('field_required') 
+        ,blankText: _('field_required')
     });
     Ext.apply(Ext.form.NumberField.prototype,{
         minText: _('ext_minvalfield')

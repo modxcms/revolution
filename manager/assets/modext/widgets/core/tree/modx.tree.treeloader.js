@@ -49,5 +49,3 @@ Ext.extend(MODx.tree.TreeLoader,Ext.tree.TreeLoader,{
 
 });
 Ext.reg('modx-tree-treeloader',MODx.tree.TreeLoader);
-
-

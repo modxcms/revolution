@@ -78,9 +78,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 ,'modAuth': MODx.siteId
             };
             if (this.fireEvent('beforeSubmit',{
-               form: fm
-               ,options: o
-               ,config: this.config
+                form: fm
+                ,options: o
+                ,config: this.config
             })) {
                 fm.submit({
                     waitMsg: this.config.saveMsg || _('saving')
@@ -88,14 +88,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                     ,headers: o.headers
                     ,clientValidation: (o.bypassValidCheck ? false : true)
                     ,failure: function(f,a) {
-                    	if (this.fireEvent('failure',{
-                    	   form: f
-                    	   ,result: a.result
-                    	   ,options: o
-                    	   ,config: this.config
-                    	})) {
+                        if (this.fireEvent('failure',{
+                            form: f
+                            ,result: a.result
+                            ,options: o
+                            ,config: this.config
+                        })) {
                             MODx.form.Handler.errorExt(a.result,f);
-                    	}
+                        }
                     }
                     ,success: function(f,a) {
                         if (this.config.success) {
@@ -109,7 +109,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         });
                         this.clearDirty();
                         this.fireEvent('setup',this.config);
-                        
+
                         //get our Active input value and keep focus
                         var lastActiveEle = Ext.state.Manager.get('curFocus');
                         if (lastActiveEle && lastActiveEle != '') {
@@ -144,10 +144,10 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,addChangeEvent: function(items) {
-    	if (!items) { return false; }
-    	if (typeof(items) == 'object' && items.items) {
+        if (!items) { return false; }
+        if (typeof(items) == 'object' && items.items) {
             items = items.items;
-    	}
+        }
 
         for (var f=0;f<items.length;f++) {
             var cmp = items[f];
@@ -202,16 +202,16 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 
     ,isDirty: function() {
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
-    	return f.isDirty();
+        return f.isDirty();
     }
 
     ,clearDirty: function() {
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
-    	return f.clearDirty();
+        return f.clearDirty();
     }
 
     ,onReady: function(r) {
-    	this.isReady = true;
+        this.isReady = true;
         if (this.config.allowDrop) { this.loadDropZones(); }
         if (this.config.useLoadingMask && this.mask) {
             this.mask.hide();
@@ -298,11 +298,11 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     /**
-     * Find errored field in the panel and activates the tab where the first error was found.
-     *
-     * @param {Array} detectingForms - array of forms where we should find errors
-     * @param {String} tabsId - id of tab component for a given panel
-     */
+    * Find errored field in the panel and activates the tab where the first error was found.
+    *
+    * @param {Array} detectingForms - array of forms where we should find errors
+    * @param {String} tabsId - id of tab component for a given panel
+    */
     ,showErroredTab: function(detectingForms, tabsId) {
         var tab = null, index = null;
         for (var i = 0; i < detectingForms.length; i++) {
@@ -427,14 +427,14 @@ Ext.extend(MODx.panel.Wizard,Ext.Panel,{
 Ext.reg('modx-panel-wizard',MODx.panel.Wizard);
 
 MODx.panel.WizardPanel = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
+    config = config || {};
+    Ext.applyIf(config,{
         wizard: null
         ,checkDirty: false
         ,bodyStyle: 'padding: 3em 3em'
         ,hideMode: 'offsets'
-	});
-	MODx.panel.WizardPanel.superclass.constructor.call(this,config);
+    });
+    MODx.panel.WizardPanel.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.WizardPanel,MODx.FormPanel);
 Ext.reg('modx-wizard-panel',MODx.panel.WizardPanel);
@@ -455,43 +455,43 @@ MODx.PanelSpacer = {
  */
 MODx.TemplatePanel = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		frame:false
-		,startingMarkup: '<tpl for=".">'
-			+'<div class="empty-text-wrapper"><p>{text}</p></div>'
-		+'</tpl>'
-		,startingText: 'Loading...'
-		,markup: null
-		,plain:true
-		,border: false
-	});
-	MODx.TemplatePanel.superclass.constructor.call(this,config);
-	this.on('render', this.init, this);
+    Ext.applyIf(config,{
+        frame:false
+        ,startingMarkup: '<tpl for=".">'
+            +'<div class="empty-text-wrapper"><p>{text}</p></div>'
+        +'</tpl>'
+        ,startingText: 'Loading...'
+        ,markup: null
+        ,plain:true
+        ,border: false
+    });
+    MODx.TemplatePanel.superclass.constructor.call(this,config);
+    this.on('render', this.init, this);
 }
 Ext.extend(MODx.TemplatePanel,Ext.Panel,{
-	init: function(){
-		this.defaultMarkup = new Ext.XTemplate(this.startingMarkup, { compiled: true });
-		this.reset();
-		this.tpl = new Ext.XTemplate(this.markup, { compiled: true });
-	}
+    init: function(){
+        this.defaultMarkup = new Ext.XTemplate(this.startingMarkup, { compiled: true });
+        this.reset();
+        this.tpl = new Ext.XTemplate(this.markup, { compiled: true });
+    }
 
-	,reset: function(){
-		this.body.hide();
-		this.defaultMarkup.overwrite(this.body, {text: this.startingText});
-		this.body.slideIn('r', {stopFx:true, duration:.2});
-		setTimeout(function(){
-			Ext.getCmp('modx-content').doLayout();
-		}, 500);
-	}
+    ,reset: function(){
+        this.body.hide();
+        this.defaultMarkup.overwrite(this.body, {text: this.startingText});
+        this.body.slideIn('r', {stopFx:true, duration:.2});
+        setTimeout(function(){
+            Ext.getCmp('modx-content').doLayout();
+        }, 500);
+    }
 
-	,updateDetail: function(data) {
-		this.body.hide();
-		this.tpl.overwrite(this.body, data);
-		this.body.slideIn('r', {stopFx:true, duration:.2});
-		setTimeout(function(){
-			Ext.getCmp('modx-content').doLayout();
-		}, 500);
-	}
+    ,updateDetail: function(data) {
+        this.body.hide();
+        this.tpl.overwrite(this.body, data);
+        this.body.slideIn('r', {stopFx:true, duration:.2});
+        setTimeout(function(){
+            Ext.getCmp('modx-content').doLayout();
+        }, 500);
+    }
 });
 Ext.reg('modx-template-panel',MODx.TemplatePanel);
 
@@ -505,90 +505,90 @@ Ext.reg('modx-template-panel',MODx.TemplatePanel);
  */
 MODx.BreadcrumbsPanel = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		frame:false
-		,plain:true
-		,border: false
-		,desc: 'This the description part of this panel'
-		,bdMarkup: '<tpl if="typeof(trail) != &quot;undefined&quot;">'
-			+'<div class="crumb_wrapper"><ul class="crumbs">'
-				+'<tpl for="trail">'
-					+'<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'
-						+'<tpl if="typeof pnl != \'undefined\'">'
-							+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'
-						+'</tpl>'
+    Ext.applyIf(config,{
+        frame:false
+        ,plain:true
+        ,border: false
+        ,desc: 'This the description part of this panel'
+        ,bdMarkup: '<tpl if="typeof(trail) != &quot;undefined&quot;">'
+            +'<div class="crumb_wrapper"><ul class="crumbs">'
+                +'<tpl for="trail">'
+                    +'<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'
+                        +'<tpl if="typeof pnl != \'undefined\'">'
+                            +'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'
+                        +'</tpl>'
                         +'<tpl if="typeof install != \'undefined\'">'
-							+'<button type="button" class="controlBtn install{[values.root ? \' root\' : \'\' ]}">{text}</button>'
-						+'</tpl>'
-						+'<tpl if="typeof pnl == \'undefined\' && typeof install == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
-					+'</li>'
-				+'</tpl>'
-			+'</ul></div>'
-		+'</tpl>'
-		+'<tpl if="typeof(text) != &quot;undefined&quot;">'
-			+'<div class="panel-desc{[values.className != undefined ? \' \'+values.className+\'"\' : \'\' ]}"><p>{text}</p></div>'
-		+'</tpl>'
-		,root : {
-			text : 'Home'
-			,className: 'first'
-			,root: true
-			,pnl: ''
-		}
-		,bodyCssClass: 'breadcrumbs'
-	});
-	MODx.BreadcrumbsPanel.superclass.constructor.call(this,config);
-	this.on('render', this.init, this);
+                            +'<button type="button" class="controlBtn install{[values.root ? \' root\' : \'\' ]}">{text}</button>'
+                        +'</tpl>'
+                        +'<tpl if="typeof pnl == \'undefined\' && typeof install == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
+                    +'</li>'
+                +'</tpl>'
+            +'</ul></div>'
+        +'</tpl>'
+        +'<tpl if="typeof(text) != &quot;undefined&quot;">'
+            +'<div class="panel-desc{[values.className != undefined ? \' \'+values.className+\'"\' : \'\' ]}"><p>{text}</p></div>'
+        +'</tpl>'
+        ,root : {
+            text : 'Home'
+            ,className: 'first'
+            ,root: true
+            ,pnl: ''
+        }
+        ,bodyCssClass: 'breadcrumbs'
+    });
+    MODx.BreadcrumbsPanel.superclass.constructor.call(this,config);
+    this.on('render', this.init, this);
 }
 
 Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
     data: {trail: []}
 
-	,init: function(){
-		this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
-		this.reset(this.desc);
+    ,init: function(){
+        this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
+        this.reset(this.desc);
 
         this.body.on('click', this.onClick, this);
-	}
+    }
 
-	,getResetText: function(srcInstance){
-		if(typeof(srcInstance) != 'object' || srcInstance == null){
-			return srcInstance;
-		}
-		var newInstance = srcInstance.constructor();
-		for(var i in srcInstance){
-			newInstance[i] = this.getResetText(srcInstance[i]);
-		}
-		//The trail is not a link
-		if(newInstance.hasOwnProperty('pnl')){
-			delete newInstance['pnl'];
-		}
-		return newInstance;
-	}
+    ,getResetText: function(srcInstance){
+        if(typeof(srcInstance) != 'object' || srcInstance == null){
+            return srcInstance;
+        }
+        var newInstance = srcInstance.constructor();
+        for(var i in srcInstance){
+            newInstance[i] = this.getResetText(srcInstance[i]);
+        }
+        //The trail is not a link
+        if(newInstance.hasOwnProperty('pnl')){
+            delete newInstance['pnl'];
+        }
+        return newInstance;
+    }
 
-	,updateDetail: function(data){
+    ,updateDetail: function(data){
         this.data = data;
-		// Automagically the trail root
-		if(data.hasOwnProperty('trail')){
-			var trail = data.trail;
-			trail.unshift(this.root);
-		}
-		this._updatePanel(data);
-	}
+        // Automagically the trail root
+        if(data.hasOwnProperty('trail')){
+            var trail = data.trail;
+            trail.unshift(this.root);
+        }
+        this._updatePanel(data);
+    }
 
     ,getData: function() {
         return this.data;
     }
-    
-	,reset: function(msg){
-		if(typeof(this.resetText) == "undefined"){
-			this.resetText = this.getResetText(this.root);
-		}	
-		this.data = { text : msg ,trail : [this.resetText] };
-		this._updatePanel(this.data);
-	}	
-	
-	,onClick: function(e){
-		var target = e.getTarget();
+
+    ,reset: function(msg){
+        if(typeof(this.resetText) == "undefined"){
+            this.resetText = this.getResetText(this.root);
+        }
+        this.data = { text : msg ,trail : [this.resetText] };
+        this._updatePanel(this.data);
+    }
+
+    ,onClick: function(e){
+        var target = e.getTarget();
 
         var index = 1;
         var parent = target.parentElement;
@@ -602,10 +602,10 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
             remove -= 1;
         }
 
-		elm = target.className.split(' ')[0];
-		if(elm != "" && elm == 'controlBtn'){
-			// Don't use "pnl" shorthand, it make the breadcrumb fail
-			var panel = target.className.split(' ')[1];
+        elm = target.className.split(' ')[0];
+        if(elm != "" && elm == 'controlBtn'){
+            // Don't use "pnl" shorthand, it make the breadcrumb fail
+            var panel = target.className.split(' ')[1];
 
             if (panel == 'install') {
                 var last = this.data.trail[this.data.trail.length - 1];
@@ -616,18 +616,18 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
                     return;
                 }
             } else {
-			    Ext.getCmp(panel).activate();
+                Ext.getCmp(panel).activate();
             }
-		}
-	}
+        }
+    }
 
-	,_updatePanel: function(data){
-		this.body.hide();
-		this.tpl.overwrite(this.body, data);
-		this.body.slideIn('r', {stopFx:true, duration:.2});
-		setTimeout(function(){
-			Ext.getCmp('modx-content').doLayout();
-		}, 500);
-	}
+    ,_updatePanel: function(data){
+        this.body.hide();
+        this.tpl.overwrite(this.body, data);
+        this.body.slideIn('r', {stopFx:true, duration:.2});
+        setTimeout(function(){
+            Ext.getCmp('modx-content').doLayout();
+        }, 500);
+    }
 });
 Ext.reg('modx-breadcrumbs-panel',MODx.BreadcrumbsPanel);

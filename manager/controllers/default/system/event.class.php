@@ -14,17 +14,17 @@ class SystemEventManagerController extends modManagerController {
     public $logArray = [];
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('error_log_view');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.panel.error.log.js');
@@ -33,18 +33,18 @@ class SystemEventManagerController extends modManagerController {
         MODx.hasEraseErrorLog = "'.($this->modx->hasPermission('error_log_erase') ? 1 : 0).'"
         Ext.onReady(function() {
             MODx.load({
-              xtype: "modx-page-error-log"
-              ,record: '.$this->modx->toJSON($this->logArray).'
+            xtype: "modx-page-error-log"
+            ,record: '.$this->modx->toJSON($this->logArray).'
             });
         });
         </script>');
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $logTarget = $this->modx->getLogTarget();
         if (!is_array($logTarget)) {
@@ -67,26 +67,26 @@ class SystemEventManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('error_log');
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return '';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['system_events'];
     }

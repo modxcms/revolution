@@ -1,4 +1,4 @@
-All adapter related files below are located in 
+All adapter related files below are located in
 /adapters/<lib name>/ of this zip file.
 
 Your include order should be:

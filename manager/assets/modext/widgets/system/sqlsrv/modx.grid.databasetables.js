@@ -8,7 +8,7 @@
  */
 MODx.grid.DatabaseTables = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
+    Ext.applyIf(config,{
         title: _('database_tables')
         ,id: 'modx-grid-dbtable'
         ,url: MODx.config.connector_url
@@ -54,9 +54,9 @@ MODx.grid.DatabaseTables = function(config) {
 };
 Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
     /**
-     * Truncates the specified SQL table.
-     * @param {String} table
-     */
+    * Truncates the specified SQL table.
+    * @param {String} table
+    */
     truncate: function(table) {
         MODx.Ajax.request({
             url: this.config.url
@@ -71,9 +71,9 @@ Ext.extend(MODx.grid.DatabaseTables,MODx.grid.Grid,{
         return false;
     }
     /**
-     * Optimizes the specified SQL table.
-     * @param {String} table
-     */
+    * Optimizes the specified SQL table.
+    * @param {String} table
+    */
     ,optimize: function(table) {
         MODx.Ajax.request({
             url: this.config.url

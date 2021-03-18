@@ -307,7 +307,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         var node = this.getSelectedNodes();
         var detailPanel = Ext.getCmp(this.config.ident+'-img-detail-panel').body;
         var okBtn = Ext.getCmp(this.ident+'-ok-btn');
-		var keys = Object.keys(node);
+        var keys = Object.keys(node);
         if (node && node.length > 0) {
             node = node[keys[keys.length - 1]];
             if (okBtn) {
@@ -395,13 +395,13 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
                 ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
-            	,'<tpl if="preview === 1">'
+                ,'<tpl if="preview === 1">'
                 ,'  <div class="modx-browser-thumb">'
                 ,'      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" ' +
                             'data-src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
                 ,'  </div>'
                 ,'</tpl>'
-            	,'<tpl if="preview === 0">'
+                ,'<tpl if="preview === 0">'
                 ,'  <div class="modx-browser-thumb">'
                 ,' 	  <div class="modx-browser-placeholder">.{ext}</div>'
                 ,'  </div>'
@@ -672,8 +672,8 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     returnEl: null
 
     /**
-     * Filter the DataView results
-     */
+    * Filter the DataView results
+    */
     ,filter : function() {
         var filter = Ext.getCmp(this.ident+'filter');
         this.view.store.filter('name', filter.getValue(), true);
@@ -682,10 +682,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
 
 
     /**
-     * Load the given directory in the DataView
-     *
-     * @param {String} dir
-     */
+    * Load the given directory in the DataView
+    *
+    * @param {String} dir
+    */
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
@@ -698,8 +698,8 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     /**
-     * Sort the DataView results
-     */
+    * Sort the DataView results
+    */
     ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
@@ -707,8 +707,8 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     /**
-     * Switch viewmode from grid to list and vice versa
-     */
+    * Switch viewmode from grid to list and vice versa
+    */
     ,changeViewmode: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
         this.view.setTemplate(v);
@@ -716,8 +716,8 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     /**
-     * Remove any filter applied to the DataView
-     */
+    * Remove any filter applied to the DataView
+    */
     ,reset: function() {
         if (this.rendered) {
             Ext.getCmp(this.ident+'filter').reset();
@@ -728,10 +728,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     /**
-     * Get the browser view toolbar configuration
-     *
-     * @returns {Array}
-     */
+    * Get the browser view toolbar configuration
+    *
+    * @returns {Array}
+    */
     ,getToolbar: function() {
         return [{
             text: _('filter')+':'
@@ -812,10 +812,10 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     /**
-     * Get the bottom filepath textfield in the browser view
-     *
-     * @returns {Array}
-     */
+    * Get the bottom filepath textfield in the browser view
+    *
+    * @returns {Array}
+    */
     ,getPathbar: function() {
         return {
             cls: 'modx-browser-pathbbar'
@@ -1028,8 +1028,8 @@ Ext.extend(MODx.Media, Ext.Container, {
     returnEl: null
 
     /**
-     * Filter the DataView results
-     */
+    * Filter the DataView results
+    */
     ,filter : function() {
         var filter = Ext.getCmp(this.ident+'filter');
         this.view.store.filter('name', filter.getValue(), true);
@@ -1037,10 +1037,10 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
-     * Load the given directory in the DataView
-     *
-     * @param {String} dir
-     */
+    * Load the given directory in the DataView
+    *
+    * @param {String} dir
+    */
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
@@ -1053,8 +1053,8 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
-     * Sort the DataView results
-     */
+    * Sort the DataView results
+    */
     ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
@@ -1062,8 +1062,8 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
-     * Switch viewmode from grid to list and vice versa
-     */
+    * Switch viewmode from grid to list and vice versa
+    */
     ,changeViewmode: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
         this.view.setTemplate(v);
@@ -1071,8 +1071,8 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
-     * Remove any filter applied to the DataView
-     */
+    * Remove any filter applied to the DataView
+    */
     ,reset: function() {
         if (this.rendered) {
             Ext.getCmp(this.ident+'filter').reset();
@@ -1083,10 +1083,10 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
-     * Get the browser view toolbar configuration
-     *
-     * @returns {Array}
-     */
+    * Get the browser view toolbar configuration
+    *
+    * @returns {Array}
+    */
     ,getToolbar: function() {
         return [{
             text: _('filter')+':'
@@ -1167,10 +1167,10 @@ Ext.extend(MODx.Media, Ext.Container, {
     }
 
     /**
-     * Get the bottom filepath textfield in the browser view
-     *
-     * @returns {Array}
-     */
+    * Get the bottom filepath textfield in the browser view
+    *
+    * @returns {Array}
+    */
     ,getPathbar: function() {
         return {
             cls: 'modx-browser-pathbbar'
@@ -1400,8 +1400,8 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     returnEl: null
 
     /**
-     * Filter the DataView results
-     */
+    * Filter the DataView results
+    */
     ,filter : function() {
         var filter = Ext.getCmp(this.ident+'filter');
         this.view.store.filter('name', filter.getValue(), true);
@@ -1409,10 +1409,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     /**
-     * Load the given directory in the DataView
-     *
-     * @param {String} dir
-     */
+    * Load the given directory in the DataView
+    *
+    * @param {String} dir
+    */
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
         this.view.run({
@@ -1425,8 +1425,8 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     /**
-     * Sort the DataView results
-     */
+    * Sort the DataView results
+    */
     ,sortStore: function(){
         var v = Ext.getCmp(this.ident+'sortSelect').getValue();
         this.view.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
@@ -1434,8 +1434,8 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     /**
-     * Switch viewmode from grid to list and vice versa
-     */
+    * Switch viewmode from grid to list and vice versa
+    */
     ,changeViewmode: function() {
         var v = Ext.getCmp(this.ident+'viewSelect').getValue();
         this.view.setTemplate(v);
@@ -1443,8 +1443,8 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     /**
-     * Remove any filter applied to the DataView
-     */
+    * Remove any filter applied to the DataView
+    */
     ,reset: function() {
         if (this.rendered) {
             Ext.getCmp(this.ident+'filter').reset();
@@ -1455,10 +1455,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     /**
-     * Get the browser view toolbar configuration
-     *
-     * @returns {Array}
-     */
+    * Get the browser view toolbar configuration
+    *
+    * @returns {Array}
+    */
     ,getToolbar: function() {
         return [{
             text: _('filter')+':'
@@ -1539,10 +1539,10 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     /**
-     * Get the bottom filepath textfield in the browser view
-     *
-     * @returns {Array}
-     */
+    * Get the bottom filepath textfield in the browser view
+    *
+    * @returns {Array}
+    */
     ,getPathbar: function() {
         return {
             cls: 'modx-browser-pathbbar'

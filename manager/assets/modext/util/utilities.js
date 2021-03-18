@@ -217,23 +217,23 @@ Ext.form.getCheckboxMask = function(cbgroup) {
 
 
 Ext.form.BasicForm.prototype.append = function() {
-  var layout = new Ext.form.Layout();
-  var fields = [];
-  layout.stack.push.apply(layout.stack, arguments);
-  for(var i = 0; i < arguments.length; i=i+1) {
-    if(arguments[i].isFormField) {
-      fields.push(arguments[i]);
+    var layout = new Ext.form.Layout();
+    var fields = [];
+    layout.stack.push.apply(layout.stack, arguments);
+    for(var i = 0; i < arguments.length; i=i+1) {
+        if(arguments[i].isFormField) {
+            fields.push(arguments[i]);
+        }
     }
-  }
-  layout.render(this.el);
+    layout.render(this.el);
 
-  if(fields.length > 0) {
-    this.items.addAll(fields);
-    for(var f=0;f<fields.length;f=f+1) {
-      fields[f].render('x-form-el-' + fields[f].id);
+    if(fields.length > 0) {
+        this.items.addAll(fields);
+        for(var f=0;f<fields.length;f=f+1) {
+        fields[f].render('x-form-el-' + fields[f].id);
+        }
     }
-  }
-  return this;
+    return this;
 };
 
 
@@ -324,10 +324,10 @@ Ext.override(Ext.tree.TreeNodeUI,{
         this.textNode = cs[index].firstChild;
     }
     /**
-     * Renders the item text as a XSS-safe value. Can be overridden with a renderItemText method on the Tree.
-     * @param text
-     * @returns string
-     */
+    * Renders the item text as a XSS-safe value. Can be overridden with a renderItemText method on the Tree.
+    * @param text
+    * @returns string
+    */
     ,renderItemText: function(item) {
         return Ext.util.Format.htmlEncode(item.text)
     }
@@ -636,12 +636,12 @@ Ext.namespace('Ext.ux.dd');Ext.ux.dd.GridDragDropRowOrder=Ext.extend(Ext.util.Ob
 
 /** selectability in Ext grids */
 if (!Ext.grid.GridView.prototype.templates) {
-   Ext.grid.GridView.prototype.templates = {};
+    Ext.grid.GridView.prototype.templates = {};
 }
 Ext.grid.GridView.prototype.templates.cell = new Ext.Template(
-   '<td class="x-grid3-col x-grid3-cell x-grid3-td-{id} x-selectable {css}" style="{style}" tabIndex="0" {cellAttr}>',
-   '<div class="x-grid3-cell-inner x-grid3-col-{id}" {attr}>{value}</div>',
-   '</td>'
+    '<td class="x-grid3-col x-grid3-cell x-grid3-td-{id} x-selectable {css}" style="{style}" tabIndex="0" {cellAttr}>',
+    '<div class="x-grid3-cell-inner x-grid3-col-{id}" {attr}>{value}</div>',
+    '</td>'
 );
 
 /* combocolumn */
@@ -699,8 +699,8 @@ Ext.Button.buttonTemplate = new Ext.Template(
 Ext.Button.buttonTemplate.compile();
 
 Ext.TabPanel.prototype.itemTpl = new Ext.Template(
-     '<li class="{cls}" id="{id}"><a class="x-tab-strip-close"></a>',
-     '<span class="x-tab-strip-text {iconCls}">{text}</span></li>'
+    '<li class="{cls}" id="{id}"><a class="x-tab-strip-close"></a>',
+    '<span class="x-tab-strip-text {iconCls}">{text}</span></li>'
 );
 Ext.TabPanel.prototype.itemTpl.disableFormats = true;
 Ext.TabPanel.prototype.itemTpl.compile();

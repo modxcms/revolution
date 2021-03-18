@@ -169,7 +169,7 @@ MODx.grid.SettingsGrid = function(config) {
             return Ext.grid.ColumnModel.prototype.isCellEditable.call(this, col, row);
         }
         /* Editors are pushed here. I think that they should be in general grid
-         * definitions (modx.grid.js) and activated via a config property (loadEditor: true) */
+        * definitions (modx.grid.js) and activated via a config property (loadEditor: true) */
         ,getCellEditor: function(colIndex, rowIndex) {
             var field = this.getDataIndex(colIndex);
             if (field == 'value') {
@@ -394,12 +394,12 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     }
 
     /**
-     * Prevent display updated date for unmodified records
-     *
-     * @param {String} value
-     *
-     * @returns {String}
-     */
+    * Prevent display updated date for unmodified records
+    *
+    * @param {String} value
+    *
+    * @returns {String}
+    */
     ,renderLastModDate: function(value) {
         if (Ext.isEmpty(value)) {
             return '—';

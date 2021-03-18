@@ -25,17 +25,17 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
     public $templateArray = [];
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('policy_template_edit');
     }
 
     /**
-     * Get the current policy template
-     * @return void
-     */
+    * Get the current policy template
+    * @return void
+    */
     public function initialize() {
         if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
             $this->template = $this->modx->getObject(modAccessPolicyTemplate::class, ['id' => $this->scriptProperties['id']]);
@@ -43,9 +43,9 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.access.policy.template.js');
@@ -65,10 +65,10 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         if (empty($this->template)) return $this->failure($this->modx->lexicon('policy_template_err_nf'));
 
@@ -104,34 +104,34 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('policy_template').': '.$this->templateArray['name'];
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return '';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['user','access','policy','context'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'PolicyTemplates';
     }

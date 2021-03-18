@@ -20,9 +20,9 @@ use MODX\Revolution\Smarty\modSmarty;
 class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface
 {
     /**
-     * @return string
-     * @throws Exception
-     */
+    * @return string
+    * @throws Exception
+    */
     public function render()
     {
         /** @var ProcessorResponse $res */

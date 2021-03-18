@@ -299,8 +299,8 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
     }
 
     /**
-     * Set the browser window "media source" source
-     */
+    * Set the browser window "media source" source
+    */
     ,changeSource: function() {
         var browser = Ext.getCmp('modx-chunk-static-file')
             ,source = Ext.getCmp('modx-chunk-static-source').getValue();

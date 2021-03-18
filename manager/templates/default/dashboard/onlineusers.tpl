@@ -44,5 +44,5 @@
         <div class="widget-footer">
             <a href="{$_config.manager_url}?a=system/logs">{$_lang.w_view_all} &rarr;</a>
         </div>
-     {/if}
+    {/if}
 </div>

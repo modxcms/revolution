@@ -25,11 +25,11 @@ MODx.panel.ManagerLog = function(config) {
                 html: '<p>'+_('mgrlog_query_msg')+'</p>'
                 ,xtype: 'modx-description'
             },{
-				xtype: 'panel'
-				,border: false
-				,cls:'main-wrapper'
-				,layout: 'form'
-				,items: [{
+                xtype: 'panel'
+                ,border: false
+                ,cls:'main-wrapper'
+                ,layout: 'form'
+                ,items: [{
                     layout: 'column'
                     ,border: false
                     ,defaults: {
@@ -100,10 +100,10 @@ MODx.panel.ManagerLog = function(config) {
                             }
                         }]
                     }]
-				}]
+                }]
             },MODx.PanelSpacer,{
                 xtype: 'modx-grid-manager-log'
-				,cls:'main-wrapper'
+                ,cls:'main-wrapper'
                 ,preventRender: true
                 ,formpanel: 'modx-panel-manager-log'
             }]

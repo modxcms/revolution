@@ -36,9 +36,9 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
             url: MODx.config.manager_url+'?a=resource/tvs'
             ,method: 'GET'
             ,params: {
-               'class_key': this.config.class_key
-               ,'template': template
-               ,'resource': this.config.resource
+                'class_key': this.config.class_key
+                ,'template': template
+                ,'resource': this.config.resource
             }
             ,scripts: true
             ,callback: function() {

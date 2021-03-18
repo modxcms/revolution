@@ -1,6 +1,6 @@
 /**
  * Loads the groups and roles page
- * 
+ *
  * @class MODx.page.ResourceGroups
  * @extends MODx.Component
  * @param {Object} config An object of config properties

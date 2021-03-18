@@ -21,37 +21,37 @@ use MODX\Revolution\Transport\modTransportProvider;
 class WorkspacesManagerController extends modManagerController {
     public $errors = [];
     /**
-     * The template file for this controller
-     * @var string $templateFile
-     */
+    * The template file for this controller
+    * @var string $templateFile
+    */
     public $templateFile = 'workspaces/index.tpl';
     /**
-     * The ID of the default Provider
-     * @var int $providerId
-     */
+    * The ID of the default Provider
+    * @var int $providerId
+    */
     public $providerId = 1;
     /**
-     * The name of the default Provider
-     * @var string $providerName
-     */
+    * The name of the default Provider
+    * @var string $providerName
+    */
     public $providerName = 'modx.com';
     /**
-     * Whether or not cURL is enabled on this server
-     * @var boolean $curlEnabled
-     */
+    * Whether or not cURL is enabled on this server
+    * @var boolean $curlEnabled
+    */
     public $curlEnabled = true;
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('workspaces');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/core/modx.view.js');
@@ -75,10 +75,10 @@ class WorkspacesManagerController extends modManagerController {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         /* ensure directories for Package Management are created */
         /** @var modCacheManager $cacheManager */
@@ -132,10 +132,10 @@ class WorkspacesManagerController extends modManagerController {
     }
 
     /**
-     * Get the default Provider for Package Management
-     *
-     * @return modTransportProvider|void
-     */
+    * Get the default Provider for Package Management
+    *
+    * @return modTransportProvider|void
+    */
     public function getDefaultProvider() {
         $default = $this->modx->getOption('default_provider');
         $c = $this->modx->newQuery(modTransportProvider::class);
@@ -161,34 +161,34 @@ class WorkspacesManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('package_management');
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return $this->templateFile;
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['workspace','namespace'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Package+Management';
     }

@@ -131,7 +131,7 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
 
     ,setRegister: function(register,topic) {
-    	this.config.register = register;
+        this.config.register = register;
         this.config.topic = topic;
     }
 

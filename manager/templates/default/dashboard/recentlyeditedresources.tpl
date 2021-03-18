@@ -65,7 +65,7 @@
 
                                 {if !empty($menu.params.a) && !empty($menu.params.id)}
                                     <a href="{$_config.manager_url}?a={$menu.params.a}&id={$menu.params.id}"
-                                       title="{$menu.text}">
+                                        title="{$menu.text}">
                                         {if $icon}<i class="{$icon}"></i>{else}{$menu.text}{/if}
                                     </a>
                                 {elseif $menu.params.url}

@@ -29,17 +29,17 @@ class ElementChunkUpdateManagerController extends modManagerController {
     public $chunkArray = [];
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('edit_chunk');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
@@ -62,10 +62,10 @@ class ElementChunkUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Custom logic code here for setting placeholders, etc
-     * @param array $scriptProperties
-     * @return mixed
-     */
+    * Custom logic code here for setting placeholders, etc
+    * @param array $scriptProperties
+    * @return mixed
+    */
     public function process(array $scriptProperties = []) {
         $placeholders = [];
 
@@ -119,10 +119,10 @@ class ElementChunkUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Prepare the element and get the static openTo path if needed
-     *
-     * @return void|string
-     */
+    * Prepare the element and get the static openTo path if needed
+    *
+    * @return void|string
+    */
     public function prepareElement() {
         $this->chunkArray['openTo'] = '/';
         if (!empty($this->chunkArray['static'])) {
@@ -133,9 +133,9 @@ class ElementChunkUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Fire the OnChunkFormPrerender event
-     * @return mixed
-     */
+    * Fire the OnChunkFormPrerender event
+    * @return mixed
+    */
     public function firePreRenderEvents() {
         /* PreRender events inject directly into the HTML, as opposed to the JS-based Render event which injects HTML
         into the panel */
@@ -149,9 +149,9 @@ class ElementChunkUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Invoke OnRichTextEditorInit event, loading the RTE
-     * @return string
-     */
+    * Invoke OnRichTextEditorInit event, loading the RTE
+    * @return string
+    */
     public function loadRte() {
         $o = '';
         if ($this->modx->getOption('use_editor') === 1) {
@@ -169,9 +169,9 @@ class ElementChunkUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Fire the OnChunkFormRender event
-     * @return mixed
-     */
+    * Fire the OnChunkFormRender event
+    * @return mixed
+    */
     public function fireRenderEvent() {
         $this->onChunkFormRender = $this->modx->invokeEvent('OnChunkFormRender', [
             'id' => $this->chunk->get('id'),
@@ -185,34 +185,34 @@ class ElementChunkUpdateManagerController extends modManagerController {
 
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('chunk').': '.$this->chunkArray['name'];
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return 'element/chunk/update.tpl';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['chunk','category','propertyset','element'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Chunks';
     }

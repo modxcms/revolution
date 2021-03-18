@@ -83,12 +83,12 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
     }
 
     /**
-     *
-     * @param va ExtJS instance of the button that was clicked
-     * @param event The Ext.EventObjectImpl from clicking the button
-     * @param options Object containing the setup options if available, or undefined.
-     * @returns {boolean}
-     */
+    *
+    * @param va ExtJS instance of the button that was clicked
+    * @param event The Ext.EventObjectImpl from clicking the button
+    * @param options Object containing the setup options if available, or undefined.
+    * @returns {boolean}
+    */
     ,install: function(va, event, options){
         options = options || {};
         var r;

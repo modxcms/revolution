@@ -3,18 +3,18 @@ Ext.apply(Ext,{
     isFirebug: (window.console && window.console.firebug)
 });
 /* work around IE9 createContextualFragment bug
-   http://www.sencha.com/forum/showthread.php?125869-Menu-shadow-probolem-in-IE9
+    http://www.sencha.com/forum/showthread.php?125869-Menu-shadow-probolem-in-IE9
  */
 if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
 {
-	Range.prototype.createContextualFragment = function(html)
-	{
-		var frag = document.createDocumentFragment(),
-		div = document.createElement("div");
-		frag.appendChild(div);
-		div.outerHTML = html;
-		return frag;
-	};
+    Range.prototype.createContextualFragment = function(html)
+    {
+        var frag = document.createDocumentFragment(),
+        div = document.createElement("div");
+        frag.appendChild(div);
+        div.outerHTML = html;
+        return frag;
+    };
 }
 /**
  * @class MODx
@@ -58,12 +58,12 @@ Ext.extend(MODx,Ext.Component,{
     }
 
     /**
-     * Add the given component to the modx-content container
-     *
-     * @param {String|Object} cmp Either a component xtype (string) or an object/configuration
-     *
-     * @return void
-     */
+    * Add the given component to the modx-content container
+    *
+    * @param {String|Object} cmp Either a component xtype (string) or an object/configuration
+    *
+    * @return void
+    */
     ,add: function(cmp) {
         if (typeof cmp === 'string') {
             cmp = { xtype: cmp }
@@ -185,12 +185,12 @@ Ext.extend(MODx,Ext.Component,{
 
         var topic = '/clearcache/';
         this.console = MODx.load({
-           xtype: 'modx-console'
-           ,register: 'mgr'
-           ,topic: topic
-           ,clear: true
-           ,show_filename: 0
-           ,listeners: {
+            xtype: 'modx-console'
+            ,register: 'mgr'
+            ,topic: topic
+            ,clear: true
+            ,show_filename: 0
+            ,listeners: {
                 'shutdown': {fn:function() {
                     if (this.fireEvent('afterClearCache')) {
                         if (MODx.config.clear_cache_refresh_trees == 1) {
@@ -198,7 +198,7 @@ Ext.extend(MODx,Ext.Component,{
                         }
                     }
                 },scope:this}
-           }
+            }
         });
 
         this.console.show(Ext.getBody());
@@ -265,33 +265,33 @@ Ext.extend(MODx,Ext.Component,{
         }
     }
     ,removeLocks: function(id) {
-		MODx.msg.confirm({
-			title: _('remove_locks')
-			,text: _('confirm_remove_locks')
-			,url: MODx.config.connectors_url
-			,params: {
-				action: 'System/RemoveLocks'
-			}
-			,listeners: {
-				'success': {
-					fn:function() {
-						var tree = Ext.getCmp("modx-resource-tree");
+        MODx.msg.confirm({
+            title: _('remove_locks')
+            ,text: _('confirm_remove_locks')
+            ,url: MODx.config.connectors_url
+            ,params: {
+                action: 'System/RemoveLocks'
+            }
+            ,listeners: {
+                'success': {
+                    fn:function() {
+                        var tree = Ext.getCmp("modx-resource-tree");
 
-						if (tree && tree.rendered) {
-							tree.refresh();
-						}
+                        if (tree && tree.rendered) {
+                            tree.refresh();
+                        }
 
-						var cmp = Ext.getCmp("modx-panel-resource");
+                        var cmp = Ext.getCmp("modx-panel-resource");
 
-						if (cmp) {
-							Ext.getCmp('modx-abtn-locked').hide();
-							Ext.getCmp('modx-abtn-save').show();
-						}
-					},
-					scope:this
-				}
-			}
-		});
+                        if (cmp) {
+                            Ext.getCmp('modx-abtn-locked').hide();
+                            Ext.getCmp('modx-abtn-save').show();
+                        }
+                    },
+                    scope:this
+                }
+            }
+        });
     }
 
     ,sleep: function(ms) {
@@ -330,7 +330,7 @@ Ext.extend(MODx,Ext.Component,{
             xtype: 'modx-tabs'
             ,itemId: 'tabs'
             ,items: v
-			,cls: 'structure-tabs'
+            ,cls: 'structure-tabs'
         });
         return c;
     }
@@ -438,25 +438,25 @@ Ext.extend(MODx,Ext.Component,{
             ,maximizable: true
             ,modal: false
             ,layout: 'fit'
-			,bodyStyle : 'padding: 0;'
+            ,bodyStyle : 'padding: 0;'
             ,items: [{
-	        	xtype		: 'container',
-				layout		: {
-	            	type		: 'vbox',
-					align		: 'stretch'
-				},
-				width		: '100%',
-				height		: '100%',
-				items		:[{
-					autoEl 		: {
-		                tag 		: 'iframe',
-		                src			: url,
-		                width		: '100%',
-						height		: '100%',
-						frameBorder	: 0
-					}
-				}]
-			}]
+                xtype		: 'container',
+                layout		: {
+                    type		: 'vbox',
+                    align		: 'stretch'
+                },
+                width		: '100%',
+                height		: '100%',
+                items		:[{
+                    autoEl 		: {
+                        tag 		: 'iframe',
+                        src			: url,
+                        width		: '100%',
+                        height		: '100%',
+                        frameBorder	: 0
+                    }
+                }]
+            }]
         });
         MODx.helpWindow.show(b);
         return true;
@@ -506,7 +506,7 @@ Ext.extend(MODx,Ext.Component,{
         if (MODx.hiddenTabs.indexOf(tab) != -1) {
             var id;
             for (var i=0;i<tp.items.items.length;i++) {
-                 id = tp.items.items[i].id;
+                id = tp.items.items[i].id;
                 if (MODx.hiddenTabs.indexOf(id) == -1) { break; }
             }
         } else { id = tab; }
@@ -673,11 +673,11 @@ Ext.extend(MODx.Ajax,Ext.Component,{
         Ext.Ajax.request(config);
     }
     /**
-     * Execute the listener callback
-     *
-     * @param {Object} config - The listener configuration (ie.failure/success)
-     * @param {Array} args - An array of arguments to pass to the callback
-     */
+    * Execute the listener callback
+    *
+    * @param {Object} config - The listener configuration (ie.failure/success)
+    * @param {Array} args - An array of arguments to pass to the callback
+    */
     ,_runCallback: function(config, args) {
         var scope = window
             ,fn = config.fn;
@@ -783,8 +783,8 @@ Ext.extend(MODx.Msg,Ext.Component,{
         this.purgeListeners();
         if (config.listeners) {
             for (var i in config.listeners) {
-              var l = config.listeners[i];
-              this.addListener(i,l.fn,l.scope || this,l.options || {});
+            var l = config.listeners[i];
+            this.addListener(i,l.fn,l.scope || this,l.options || {});
             }
         }
         Ext.Msg.confirm(config.title || _('warning'),config.text,function(e) {
@@ -971,7 +971,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         this.dt.cancel();
 
         var o = {
-             url: this.writeUrl
+            url: this.writeUrl
             ,method: this.method
             ,scope: this
             ,success: this.onWriteSuccess
@@ -1048,7 +1048,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
     }
     ,readState: function() {
         var o = {
-             url: this.readUrl
+            url: this.readUrl
             ,method: this.method
             ,scope: this
             ,success: this.onReadSuccess

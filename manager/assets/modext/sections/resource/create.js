@@ -14,7 +14,7 @@ MODx.page.CreateResource = function(config) {
         ,id: 'modx-page-update-resource'
         ,which_editor: 'none'
         ,action: 'Resource/Create'
-    	,buttons: this.getButtons(config)
+        ,buttons: this.getButtons(config)
         ,components: [{
             xtype: config.panelXType || 'modx-panel-resource'
             ,renderTo: config.panelRenderTo || 'modx-panel-resource-div'
@@ -72,8 +72,8 @@ Ext.extend(MODx.page.CreateResource,MODx.Component,{
 
         var btns;
         if (config.canSave == 1) {
-             btns = [{
-                 text: '<i class="icon icon-ellipsis-h"></i>'
+            btns = [{
+                text: '<i class="icon icon-ellipsis-h"></i>'
                 ,id: 'modx-abtn-menu'
                 ,xtype: 'splitbutton'
                 ,split: false

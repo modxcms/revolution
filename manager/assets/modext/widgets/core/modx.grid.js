@@ -217,10 +217,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     /**
-     * Method executed after a record has been edited/saved inline from within the grid
-     *
-     * @param {Object} response - The processor save response object. See modConnectorResponse::outputContent (PHP)
-     */
+    * Method executed after a record has been edited/saved inline from within the grid
+    *
+    * @param {Object} response - The processor save response object. See modConnectorResponse::outputContent (PHP)
+    */
     ,onAfterAutoSave: function(response) {
         if (!response.success && response.message === '') {
             var msg = '';
@@ -420,19 +420,19 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 }
 
                 /**
-                 * When no renderer is provided, automatically apply the htmlEncode renderer to protect
-                 * against XSS vulnerabilities. Columns that do have a renderer applied are assumed to
-                 * implement their own protection.
-                 */
+                * When no renderer is provided, automatically apply the htmlEncode renderer to protect
+                * against XSS vulnerabilities. Columns that do have a renderer applied are assumed to
+                * implement their own protection.
+                */
                 if (Ext.isEmpty(c[i].renderer)) {
                     c[i].renderer = Ext.util.Format.htmlEncode;
                 }
 
                 /**
-                 * When the field has an editor defined, wrap the (optional) renderer with
-                 * a special renderer that applies a class and tooltip to indicate the
-                 * column is editable.
-                 */
+                * When the field has an editor defined, wrap the (optional) renderer with
+                * a special renderer that applies a class and tooltip to indicate the
+                * column is editable.
+                */
                 if (c[i].editor) {
                     c[i].renderer = this.renderEditableColumn(c[i].renderer);
                 }
@@ -632,9 +632,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     /**
-     * Returns first found expander plugin
-     * @param plugins
-     */
+    * Returns first found expander plugin
+    * @param plugins
+    */
     ,findExpanderPlugin: function (plugins) {
 
         if (Ext.isObject(plugins)) {
@@ -897,19 +897,19 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
                 }
 
                 /**
-                 * When no renderer is provided, automatically apply the htmlEncode renderer to protect
-                 * against XSS vulnerabilities. Columns that do have a renderer applied are assumed to
-                 * implement their own protection.
-                 */
+                * When no renderer is provided, automatically apply the htmlEncode renderer to protect
+                * against XSS vulnerabilities. Columns that do have a renderer applied are assumed to
+                * implement their own protection.
+                */
                 if (Ext.isEmpty(c[i].renderer)) {
                     c[i].renderer = Ext.util.Format.htmlEncode;
                 }
 
                 /**
-                 * When the field has an editor defined, wrap the (optional) renderer with
-                 * a special renderer that applies a class and tooltip to indicate the
-                 * column is editable.
-                 */
+                * When the field has an editor defined, wrap the (optional) renderer with
+                * a special renderer that applies a class and tooltip to indicate the
+                * column is editable.
+                */
                 if (c[i].editor) {
                     c[i].renderer = this.renderEditableColumn(c[i].renderer);
                 }
@@ -1030,9 +1030,9 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             r = s.getAt(j).data;
             r.menu = null;
             if (this.config.encodeAssoc) {
-               rs[r[this.config.encodeByPk || 'id']] = r;
+                rs[r[this.config.encodeByPk || 'id']] = r;
             } else {
-               rs.push(r);
+                rs.push(r);
             }
         }
 
@@ -1090,9 +1090,9 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
     }
 
     /**
-     * Returns first found expander plugin
-     * @param plugins
-     */
+    * Returns first found expander plugin
+    * @param plugins
+    */
     ,findExpanderPlugin: function (plugins) {
 
         if (Ext.isObject(plugins)) {
@@ -1221,16 +1221,16 @@ Ext.ns('Ext.ux.grid');
  */
 Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
     /**
-     * @cfg {Boolean} expandOnEnter
-     * <tt>true</tt> to toggle selected row(s) between expanded/collapsed when the enter
-     * key is pressed (defaults to <tt>true</tt>).
-     */
+    * @cfg {Boolean} expandOnEnter
+    * <tt>true</tt> to toggle selected row(s) between expanded/collapsed when the enter
+    * key is pressed (defaults to <tt>true</tt>).
+    */
     expandOnEnter : true,
     /**
-     * @cfg {Boolean} expandOnDblClick
-     * <tt>true</tt> to toggle a row between expanded/collapsed when double clicked
-     * (defaults to <tt>true</tt>).
-     */
+    * @cfg {Boolean} expandOnDblClick
+    * <tt>true</tt> to toggle a row between expanded/collapsed when double clicked
+    * (defaults to <tt>true</tt>).
+    */
     expandOnDblClick : true,
 
     header : '',
@@ -1249,40 +1249,40 @@ Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
 
         this.addEvents({
             /**
-             * @event beforeexpand
-             * Fires before the row expands. Have the listener return false to prevent the row from expanding.
-             * @param {Object} this RowExpander object.
-             * @param {Object} Ext.data.Record Record for the selected row.
-             * @param {Object} body body element for the secondary row.
-             * @param {Number} rowIndex The current row index.
-             */
+            * @event beforeexpand
+            * Fires before the row expands. Have the listener return false to prevent the row from expanding.
+            * @param {Object} this RowExpander object.
+            * @param {Object} Ext.data.Record Record for the selected row.
+            * @param {Object} body body element for the secondary row.
+            * @param {Number} rowIndex The current row index.
+            */
             beforeexpand: true,
             /**
-             * @event expand
-             * Fires after the row expands.
-             * @param {Object} this RowExpander object.
-             * @param {Object} Ext.data.Record Record for the selected row.
-             * @param {Object} body body element for the secondary row.
-             * @param {Number} rowIndex The current row index.
-             */
+            * @event expand
+            * Fires after the row expands.
+            * @param {Object} this RowExpander object.
+            * @param {Object} Ext.data.Record Record for the selected row.
+            * @param {Object} body body element for the secondary row.
+            * @param {Number} rowIndex The current row index.
+            */
             expand: true,
             /**
-             * @event beforecollapse
-             * Fires before the row collapses. Have the listener return false to prevent the row from collapsing.
-             * @param {Object} this RowExpander object.
-             * @param {Object} Ext.data.Record Record for the selected row.
-             * @param {Object} body body element for the secondary row.
-             * @param {Number} rowIndex The current row index.
-             */
+            * @event beforecollapse
+            * Fires before the row collapses. Have the listener return false to prevent the row from collapsing.
+            * @param {Object} this RowExpander object.
+            * @param {Object} Ext.data.Record Record for the selected row.
+            * @param {Object} body body element for the secondary row.
+            * @param {Number} rowIndex The current row index.
+            */
             beforecollapse: true,
             /**
-             * @event collapse
-             * Fires after the row collapses.
-             * @param {Object} this RowExpander object.
-             * @param {Object} Ext.data.Record Record for the selected row.
-             * @param {Object} body body element for the secondary row.
-             * @param {Number} rowIndex The current row index.
-             */
+            * @event collapse
+            * Fires after the row collapses.
+            * @param {Object} this RowExpander object.
+            * @param {Object} Ext.data.Record Record for the selected row.
+            * @param {Object} body body element for the secondary row.
+            * @param {Number} rowIndex The current row index.
+            */
             collapse: true
         });
 
@@ -1347,10 +1347,10 @@ Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
             delete this.keyNav;
         }
         /*
-         * A majority of the time, the plugin will be destroyed along with the grid,
-         * which means the mainBody won't be available. On the off chance that the plugin
-         * isn't destroyed with the grid, take care of removing the listener.
-         */
+        * A majority of the time, the plugin will be destroyed along with the grid,
+        * which means the mainBody won't be available. On the off chance that the plugin
+        * isn't destroyed with the grid, take care of removing the listener.
+        */
         var mainBody = this.grid.getView().mainBody;
         if(mainBody){
             mainBody.un('mousedown', this.onMouseDown, this);

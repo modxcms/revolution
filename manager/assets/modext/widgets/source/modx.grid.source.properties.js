@@ -359,9 +359,9 @@ MODx.window.CreateSourceProperty = function(config) {
                     var g = Ext.getCmp('modx-cep-grid-source-property-options');
                     if (!g) return;
                     if (cb.getValue() == 'list') {
-                       g.show();
+                        g.show();
                     } else {
-                       g.hide();
+                        g.hide();
                     }
                     this.syncSize();
                 },scope:this}
@@ -521,9 +521,9 @@ Ext.extend(MODx.window.UpdateSourceProperty,MODx.Window,{
             var opt = rec.data.options;
             var opts = [];
             for (var x in opt) {
-              if (opt.hasOwnProperty(x)) {
+            if (opt.hasOwnProperty(x)) {
                 opts.push([opt[x].text,opt[x].value]);
-              }
+            }
             }
             g.getStore().loadData(opts);
         }

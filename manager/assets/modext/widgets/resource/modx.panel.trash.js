@@ -41,4 +41,3 @@ MODx.panel.Trash = function (config) {
 };
 Ext.extend(MODx.panel.Trash, MODx.FormPanel);
 Ext.reg('modx-panel-trash', MODx.panel.Trash);
-

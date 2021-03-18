@@ -222,7 +222,7 @@ Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
                                 Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
                             },scope:this}
                         }
-                  });
+                });
                 }
             }
         }

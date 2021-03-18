@@ -21,8 +21,8 @@ MODx.panel.FileTree = function(config) {
 };
 Ext.extend(MODx.panel.FileTree, Ext.Container, {
     /**
-     * Query the media sources list
-     */
+    * Query the media sources list
+    */
     getSourceList: function() {
         MODx.Ajax.request({
             url: MODx.config.connector_url
@@ -52,10 +52,10 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
     }
 
     /**
-     * Iterate over the given media sources list to add their trees
-     *
-     * @param {Array} sources
-     */
+    * Iterate over the given media sources list to add their trees
+    *
+    * @param {Array} sources
+    */
     ,onSourceListReceived: function(sources) {
         for (var k = 0; k < sources.length; k++) {
             var source = sources[k]
@@ -72,11 +72,11 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
     }
 
     /**
-     * Load the tree configuration for the given media source
-     *
-     * @param {Object} source
-     * @returns {Object}
-     */
+    * Load the tree configuration for the given media source
+    *
+    * @param {Object} source
+    * @returns {Object}
+    */
     ,loadTree: function(source) {
         var params = {};
         if (location.search) {
@@ -115,4 +115,3 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
     }
 });
 Ext.reg('modx-panel-filetree', MODx.panel.FileTree);
-

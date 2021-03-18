@@ -54,11 +54,11 @@ Ext.extend(MODx.Button,Ext.Button,{
             btn = this.template.append(ct, targs, true);
         }
         /**
-         * An {@link Ext.Element Element} encapsulating the Button's clickable element. By default,
-         * this references a <tt>&lt;button&gt;</tt> element. Read only.
-         * @type Ext.Element
-         * @property btnEl
-         */
+        * An {@link Ext.Element Element} encapsulating the Button's clickable element. By default,
+        * this references a <tt>&lt;button&gt;</tt> element. Read only.
+        * @type Ext.Element
+        * @property btnEl
+        */
         this.btnEl = btn.child('i');
         this.mon(this.btnEl, {
             scope: this,
@@ -73,4 +73,3 @@ Ext.extend(MODx.Button,Ext.Button,{
 
 });
 Ext.reg('modx-button',MODx.Button);
-

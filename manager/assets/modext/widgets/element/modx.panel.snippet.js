@@ -15,7 +15,7 @@ MODx.panel.Snippet = function(config) {
             action: 'Element/Snippet/Get'
         }
         ,id: 'modx-panel-snippet'
-		,cls: 'container form-with-labels'
+        ,cls: 'container form-with-labels'
         ,class_key: 'modSnippet'
         ,plugin: ''
         ,bodyStyle: ''
@@ -45,7 +45,7 @@ MODx.panel.Snippet = function(config) {
                     ,cls:'main-wrapper'
                     ,labelSeparator: ''
                 }
-				,items: [{
+                ,items: [{
                     columnWidth: .6
                     ,items: [{
                         xtype: 'hidden'
@@ -229,19 +229,19 @@ MODx.panel.Snippet = function(config) {
                     }]
                 }]
             },{
-				xtype: 'panel'
-				,border: false
-				,layout: 'form'
-				,cls:'main-wrapper'
-				,labelAlign: 'top'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('snippet_code')
-					,name: 'snippet'
-					,id: 'modx-snippet-snippet'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.snippet || "<?php\n"
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls:'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('snippet_code')
+                    ,name: 'snippet'
+                    ,id: 'modx-snippet-snippet'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.snippet || "<?php\n"
                 }]
             }]
         },{
@@ -298,8 +298,8 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
     }
 
     /**
-     * Set the browser window "media source" source
-     */
+    * Set the browser window "media source" source
+    */
     ,changeSource: function() {
         var browser = Ext.getCmp('modx-snippet-static-file')
             ,source = Ext.getCmp('modx-snippet-static-source').getValue();

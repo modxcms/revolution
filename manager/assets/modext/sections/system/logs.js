@@ -1,6 +1,6 @@
 /**
  * Loads the manager log page
- * 
+ *
  * @class MODx.page.ManagerLog
  * @extends MODx.Component
  * @param {Object} config An object of config properties

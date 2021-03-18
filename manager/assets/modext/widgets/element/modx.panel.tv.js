@@ -394,8 +394,8 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     }
 
     /**
-     * Set the browser window "media source" source
-     */
+    * Set the browser window "media source" source
+    */
     ,changeSource: function() {
         var browser = Ext.getCmp('modx-tv-static-file')
             ,source = Ext.getCmp('modx-tv-static-source').getValue();

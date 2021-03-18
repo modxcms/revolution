@@ -27,19 +27,19 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
     public $dashboardArray;
 
     /**
-     * Check for any permissions or requirements to load page
-     * @return bool
-     */
+    * Check for any permissions or requirements to load page
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('dashboards');
     }
 
 
     /**
-     * @param array $scriptProperties
-     *
-     * @return array
-     */
+    * @param array $scriptProperties
+    *
+    * @return array
+    */
     public function process(array $scriptProperties = []) {
         if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
             $this->failure($this->modx->lexicon('dashboard_err_ns'));
@@ -59,9 +59,9 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Get all the Widgets placed on this Dashboard
-     * @return array
-     */
+    * Get all the Widgets placed on this Dashboard
+    * @return array
+    */
     public function getWidgets() {
         $c = $this->modx->newQuery(modDashboardWidgetPlacement::class);
         $c->where([
@@ -97,9 +97,9 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Get all the User Groups assigned to this Dashboard
-     * @return array
-     */
+    * Get all the User Groups assigned to this Dashboard
+    * @return array
+    */
     public function getUserGroups() {
         $list = [];
         $c = $this->modx->newQuery(modUserGroup::class);
@@ -118,9 +118,9 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
 
 
     /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    * @return void
+    */
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboard.js");
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/update.js');
@@ -132,34 +132,34 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
     }
 
     /**
-     * Return the pagetitle
-     *
-     * @return string
-     */
+    * Return the pagetitle
+    *
+    * @return string
+    */
     public function getPageTitle() {
         return $this->modx->lexicon('dashboards').': '.$this->dashboardArray['name'];
     }
 
     /**
-     * Return the location of the template file
-     * @return string
-     */
+    * Return the location of the template file
+    * @return string
+    */
     public function getTemplateFile() {
         return '';
     }
 
     /**
-     * Specify the language topics to load
-     * @return array
-     */
+    * Specify the language topics to load
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['dashboards','user'];
     }
 
     /**
-     * Get the Help URL
-     * @return string
-     */
+    * Get the Help URL
+    * @return string
+    */
     public function getHelpUrl() {
         return 'Dashboards';
     }

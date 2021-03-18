@@ -16,18 +16,18 @@ use MODX\Revolution\modManagerController;
 class MediaBrowserManagerController extends modManagerController
 {
     /**
-     * @inherit
-     */
+    * @inherit
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('file_manager');
     }
 
     /**
-     * Register custom CSS/JS for the page
-     *
-     * @return void
-     */
+    * Register custom CSS/JS for the page
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
         $this->addHtml(
@@ -45,32 +45,32 @@ HTML
     }
 
     /**
-     * @inherit
-     */
+    * @inherit
+    */
     public function process(array $scriptProperties = [])
     {
         return [];
     }
 
     /**
-     * @inherit
-     */
+    * @inherit
+    */
     public function getPageTitle()
     {
         return $this->modx->lexicon('modx_browser');
     }
 
     /**
-     * @inherit
-     */
+    * @inherit
+    */
     public function getTemplateFile()
     {
         return '';
     }
 
     /**
-     * @inherit
-     */
+    * @inherit
+    */
     public function getLanguageTopics()
     {
         return ['file'];

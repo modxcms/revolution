@@ -46,11 +46,11 @@ MODx.SearchBar = function(config) {
             '</tpl>'
             ,{
                 /**
-                 * Get the appropriate CSS class based on the result type
-                 *
-                 * @param {Array} values
-                 * @returns {string}
-                 */
+                * Get the appropriate CSS class based on the result type
+                *
+                * @param {Array} values
+                * @returns {string}
+                */
                 getClass: function(values) {
                     if (values.icon) {
                         return values.icon;
@@ -91,12 +91,12 @@ MODx.SearchBar = function(config) {
                     }
                 }
                 /**
-                 * Get the result type lexicon
-                 *
-                 * @param {Array} values
-                 *
-                 * @returns {String}
-                 */
+                * Get the result type lexicon
+                *
+                * @param {Array} values
+                *
+                * @returns {String}
+                */
                 ,getLabel: function(values) {
                     if (values.label) {
                         return values.label;
@@ -157,8 +157,8 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     }
 
     /**
-     * Override to support opening results in new window/tab
-     */
+    * Override to support opening results in new window/tab
+    */
     ,initList : function() {
         if(!this.list){
             var cls = 'x-combo-list',
@@ -221,10 +221,10 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
 
             this.view.on('click', function(view, index, node, vent) {
                 /**
-                 * Force node selection to make sure it is available in onViewClick
-                 *
-                 * @see Ext.form.ComboBox#onViewClick
-                 */
+                * Force node selection to make sure it is available in onViewClick
+                *
+                * @see Ext.form.ComboBox#onViewClick
+                */
                 view.select(node);
                 if (!window.event) {
                     window.event = vent;
@@ -253,11 +253,11 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     // Nullify the "parent" function
     ,onTypeAhead : function() {}
     /**
-     * Go to the selected record "action" page
-     *
-     * @param {Object} record
-     * @param {Number} index
-     */
+    * Go to the selected record "action" page
+    *
+    * @param {Object} record
+    * @param {Number} index
+    */
     ,onSelect: function(record, index) {
         var e = Ext.EventObject;
 
@@ -280,10 +280,10 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
     ,blurBar: function() {
     }
     /**
-     * Compute the available max height so results could be scrollable if required
-     *
-     * @returns {number}
-     */
+    * Compute the available max height so results could be scrollable if required
+    *
+    * @returns {number}
+    */
     ,getViewPortSize: function() {
         var height = 300;
         if (window.innerHeight !== undefined) {

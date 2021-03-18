@@ -35,10 +35,10 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     windows: {}
 
     /**
-     * Handles tree clicks
-     * @param {Object} n The node clicked
-     * @param {Object} e The event object
-     */
+    * Handles tree clicks
+    * @param {Object} n The node clicked
+    * @param {Object} e The event object
+    */
     ,_handleClick: function (n,e) {
         e.stopEvent();
         e.preventDefault();

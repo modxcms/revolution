@@ -92,8 +92,8 @@ MODx.combo.ComboBox = function(config,getStore) {
         })
     });
     if (getStore === true) {
-       config.store.load();
-       return config.store;
+        config.store.load();
+        return config.store;
     }
     MODx.combo.ComboBox.superclass.constructor.call(this,config);
     this.config = config;
@@ -665,10 +665,10 @@ Ext.reg('modx-combo-namespace',MODx.combo.Namespace);
 MODx.combo.Browser = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-       width: 400
-       ,triggerAction: 'all'
-       ,triggerClass: 'x-form-file-trigger'
-       ,source: config.source || MODx.config.default_media_source
+        width: 400
+        ,triggerAction: 'all'
+        ,triggerClass: 'x-form-file-trigger'
+        ,source: config.source || MODx.config.default_media_source
     });
     MODx.combo.Browser.superclass.constructor.call(this,config);
     this.config = config;

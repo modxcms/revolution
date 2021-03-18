@@ -15,7 +15,7 @@ MODx.tree.ColumnTree = function(config) {
         ,autoScroll: true
         ,autoHeight: true
         ,root: {
-             nodeType: 'async'
+            nodeType: 'async'
             ,text: config.rootText || ''
         }
         ,loader: new Ext.tree.TreeLoader({
@@ -25,7 +25,7 @@ MODx.tree.ColumnTree = function(config) {
                 'col': Ext.tree.ColumnNodeUI
             }
             ,listeners: config.loaderListeners || {
-               'beforeload': {fn:function(treeLoader, node) {
+                'beforeload': {fn:function(treeLoader, node) {
                     if (node.attributes.class_key) {
                         var bp = {};
                         Ext.apply(bp,this.config.baseParams);
@@ -50,10 +50,10 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
     windows: {}
 
     /**
-     * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} node The
-     * @param {Ext.EventObject} e The event object run.
-     */
+    * Shows the current context menu.
+    * @param {Ext.tree.TreeNode} node The
+    * @param {Ext.EventObject} e The event object run.
+    */
     ,_showContextMenu: function(node,e) {
         node.select();
         this.cm.activeNode = node;
@@ -65,9 +65,9 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
         }
     }
     /**
-     * Add context menu items to the tree.
-     * @param {Object, Array} items Either an Object config or array of Object configs.
-     */
+    * Add context menu items to the tree.
+    * @param {Object, Array} items Either an Object config or array of Object configs.
+    */
     ,_addContextMenuItem: function(items) {
         var a = items, l = a.length;
         for(var i = 0; i < l; i++) {
@@ -78,9 +78,9 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
 
 
     /**
-     * Handles all drag events into the tree.
-     * @param {Object} dropEvent The node dropped on the parent node.
-     */
+    * Handles all drag events into the tree.
+    * @param {Object} dropEvent The node dropped on the parent node.
+    */
     ,_handleDrag: function(dropEvent) {
         Ext.Msg.show({
             title: _('please_wait')
@@ -96,9 +96,9 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
         }
 
         /**
-         * Simplify nodes into JSON format.
-         * @param {Object} node
-         */
+        * Simplify nodes into JSON format.
+        * @param {Object} node
+        */
         function simplifyNodes(node) {
             var resultNode = {};
             var kids = node.childNodes;
@@ -137,8 +137,8 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
     }
 
     /**
-     * Abstract definition to handle drop events.
-     */
+    * Abstract definition to handle drop events.
+    */
     ,_handleDrop: function() { }
 
     ,loadWindow: function(btn,e,win) {
@@ -202,13 +202,13 @@ Ext.extend(MODx.tree.ColumnTree,Ext.tree.ColumnTree,{
     }
 
     /**
-     * Render the row to a colored Yes/No value.
-     *
-     * @access public
-     * @param {Object} d The data record
-     * @param {Object} c The dom properties
-     * @return {String} The value to return
-     */
+    * Render the row to a colored Yes/No value.
+    *
+    * @access public
+    * @param {Object} d The data record
+    * @param {Object} c The dom properties
+    * @return {String} The value to return
+    */
     ,rendYesNo: function(d,c,a) {
         switch(d) {
             case '':
