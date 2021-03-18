@@ -1,7 +1,7 @@
 <?php
 /**
- * Update the RSS feed URLs to HTTPS
- */
+* Update the RSS feed URLs to HTTPS
+*/
 
 use MODX\Revolution\modSystemSetting;
 

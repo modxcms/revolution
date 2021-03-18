@@ -1,10 +1,10 @@
 <?php
 /**
- * Common upgrade script for modify modTemplateVar output params
- *
- * @var modX $modx
- * @package setup
- */
+* Common upgrade script for modify modTemplateVar output params
+*
+* @var modX $modx
+* @package setup
+*/
 
 use MODX\Revolution\modTemplateVar;
 

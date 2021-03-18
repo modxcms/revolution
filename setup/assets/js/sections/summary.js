@@ -1,14 +1,14 @@
-Ext.onReady(function(){
+Ext.onReady(function () {
     MODx.Summary.init();
 });
 
-MODx.Summary = function() {
+MODx.Summary = (function () {
     return {
-        init: function() {
-            Ext.get('install').on('submit',function() {
-                Ext.get('modx-next').setVisible(false);
-                Ext.get('modx-back').setVisible(false);
+        init: function () {
+            Ext.get("install").on("submit", function () {
+                Ext.get("modx-next").setVisible(false);
+                Ext.get("modx-back").setVisible(false);
             });
-        }
-    }
-}();
+        },
+    };
+})();

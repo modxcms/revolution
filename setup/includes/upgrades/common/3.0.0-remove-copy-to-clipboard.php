@@ -1,11 +1,11 @@
 <?php
 /**
- * Common upgrade script to clean up the copy to clipboard flash file.
- *
- * @var modX
- *
- * @package setup
- */
+* Common upgrade script to clean up the copy to clipboard flash file.
+*
+* @var modX
+*
+* @package setup
+*/
 
 $managerPath = $modx->getOption('manager_path', null, MODX_MANAGER_PATH);
 $fileToRemove = $managerPath.'assets/modext/_clipboard.swf';

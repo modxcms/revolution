@@ -1,10 +1,10 @@
 <?php
 /**
- * Common upgrade script for modify modMenu entries
- *
- * @var modX $modx
- * @package setup
- */
+* Common upgrade script for modify modMenu entries
+*
+* @var modX $modx
+* @package setup
+*/
 
 use MODX\Revolution\modMenu;
 

@@ -1,10 +1,10 @@
 <?php
 /**
- * Test-related English Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* Test-related English Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['test_config_file'] = 'जाँच अगर <span class="mono"> [[+file]]</span> मौजूद है और लेखन योग्य है : ';
 $_lang['test_config_file_nw'] = 'नई Linux/Unix स्थापित करता है के लिए, अपने ModX कोर में एक खाली नामक फ़ाइल <span class="mono"> [[+key]]। Inc.php </span> बनाने कृपया <span class="mono">config/</span> पीएचपी द्वारा लिखने योग्य होना तय अनुमतियों के साथ directory।';
 $_lang['test_db_check'] = 'डेटाबेस के लिए कनेक्शन बना रहा है: ';

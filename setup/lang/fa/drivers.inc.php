@@ -1,10 +1,10 @@
 <?php
 /**
- * English Drivers Lexicon Topic for Revolution setup
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Drivers Lexicon Topic for Revolution setup
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['mysql_err_ext'] = 'مادایکس احتیاج به افزونه‌ی mysql دارد که در حال حاضر نصب یا فعال نیست.';
 $_lang['mysql_err_pdo'] = 'درصورت استفاده از افزونه PDO، مادایکس نیاز به درایور pdo_mysql دارد که در حال حاضر نصب یا فعال نیست.';
 $_lang['mysql_version_5051'] = 'مادایکس مشکلاتی با نسخه‌ی کنونی MySQL شما ([[+version]]) دارد. این نسخه دارای باگهای متعدد مرتبط با درایورِ PDO است. لطفا برای حل این مشکل، نسخه‌ی MySQL خود را بروز کنید. انجام این کار، جهت افزایش امنیت و کارایی وبسایت شما توصیه می‌شود حتی اگر قصد استفاده از مادایکس را نداشته باشید.';

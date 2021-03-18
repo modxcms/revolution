@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'アドオン';
 $_lang['advanced_options'] = 'その他のオプション';
@@ -100,21 +100,21 @@ $_lang['install_summary'] = 'インストールの概要';
 $_lang['install_update'] = 'インストール/アップデート';
 $_lang['installation_finished'] = 'インストール完了：[[+time]]';
 $_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
-	<p>Usage of this software is subject to the GPL license. To help you understand
-	what the GPL licence is and how it affects your ability to use the software, we
-	have provided the following summary:</p>
-	<h4>The GNU General Public License is a Free Software license.</h4>
-	<p>Like any Free Software license, it grants to you the four following freedoms:</p>
-	<ul>
+    <p>Usage of this software is subject to the GPL license. To help you understand
+    what the GPL licence is and how it affects your ability to use the software, we
+    have provided the following summary:</p>
+    <h4>The GNU General Public License is a Free Software license.</h4>
+    <p>Like any Free Software license, it grants to you the four following freedoms:</p>
+    <ul>
         <li>The freedom to run the program for any purpose. </li>
         <li>The freedom to study how the program works and adapt it to your needs. </li>
         <li>The freedom to redistribute copies so you can help your neighbor. </li>
         <li>The freedom to improve the program and release your improvements to the
         public, so that the whole community benefits. </li>
-	</ul>
-	<p>You may exercise the freedoms specified here provided that you comply with
-	the express conditions of this license. The principal conditions are:</p>
-	<ul>
+    </ul>
+    <p>You may exercise the freedoms specified here provided that you comply with
+    the express conditions of this license. The principal conditions are:</p>
+    <ul>
         <li>You must conspicuously and appropriately publish on each copy distributed an
         appropriate copyright notice and disclaimer of warranty and keep intact all the
         notices that refer to this License and to the absence of any warranty; and give
@@ -137,12 +137,12 @@ $_lang['license'] = '<p class="title">You must agree to the License before conti
 
         <li>Your fair use and other rights are in no way affected by the above.</li>
     </ul>
-	<p>The above is a summary of the GNU General Public License. By proceeding, you
-	are agreeing to the GNU General Public Licence, not the above. The above is
-	simply a summary of the GNU General Public Licence, and its accuracy is not
-	guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-	License</a> in full before proceeding, which can also be found in the license
-	file distributed with this package.</p>
+    <p>The above is a summary of the GNU General Public License. By proceeding, you
+    are agreeing to the GNU General Public Licence, not the above. The above is
+    simply a summary of the GNU General Public Licence, and its accuracy is not
+    guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
+    License</a> in full before proceeding, which can also be found in the license
+    file distributed with this package.</p>
 ';
 $_lang['license_agree'] = 'はい。このライセンス条文に合意しました。';
 $_lang['license_agreement'] = 'ライセンス契約';
@@ -234,7 +234,7 @@ $_lang['version'] = 'version';
 $_lang['warning'] = 'Warning';
 $_lang['welcome'] = 'MODX Revolutionへようこそ！';
 $_lang['welcome_message'] = '<p>期待の新世代フレームワーク「MODX Revolution」を、このサーバーにインストールします。<br />パーミッション変更・オプション選択など、必要に応じてナビゲーションいたします。</p>
-	<p>[次へ] をクリックしてください。</p>
+    <p>[次へ] をクリックしてください。</p>
 ';
 $_lang['workspace_err_nf'] = '現在の作業ディレクトリが発見できませんでした。';
 $_lang['workspace_err_path'] = '作業ディレクトリの設定中にエラーが発生しました。';

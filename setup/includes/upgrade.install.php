@@ -1,24 +1,24 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * Upgrade-specific scripts
- *
- * @var modInstallRunner   $this
- * @var modInstall         $install
- * @var xPDO               $modx
- * @var modInstallSettings $settings
- *
- * @package modx
- * @subpackage setup
- */
+* Upgrade-specific scripts
+*
+* @var modInstallRunner   $this
+* @var modInstall         $install
+* @var xPDO               $modx
+* @var modInstallSettings $settings
+*
+* @package modx
+* @subpackage setup
+*/
 /* handle change of manager_theme to default (FIXME: temp hack) */
 
 use MODX\Revolution\modAccessActionDom;
@@ -125,31 +125,31 @@ if ($adminPolicy && $adminGroup) {
     if (!$access) {
         $access = $modx->newObject(modAccessContext::class);
         $access->fromArray([
-          'target' => 'mgr',
-          'principal_class' => modUserGroup::class,
-          'principal' => $adminGroup->get('id'),
-          'authority' => 0,
-          'policy' => $adminPolicy->get('id'),
+        'target' => 'mgr',
+        'principal_class' => modUserGroup::class,
+        'principal' => $adminGroup->get('id'),
+        'authority' => 0,
+        'policy' => $adminPolicy->get('id'),
         ]);
         $access->save();
     }
     unset($access);
 
     $access = $modx->getObject(modAccessContext::class, [
-      'target' => 'web',
-      'principal_class' => modUserGroup::class,
-      'principal' => $adminGroup->get('id'),
-      'authority' => 0,
-      'policy' => $adminPolicy->get('id'),
+    'target' => 'web',
+    'principal_class' => modUserGroup::class,
+    'principal' => $adminGroup->get('id'),
+    'authority' => 0,
+    'policy' => $adminPolicy->get('id'),
     ]);
     if (!$access) {
         $access= $modx->newObject(modAccessContext::class);
         $access->fromArray([
-          'target' => 'web',
-          'principal_class' => modUserGroup::class,
-          'principal' => $adminGroup->get('id'),
-          'authority' => 0,
-          'policy' => $adminPolicy->get('id'),
+        'target' => 'web',
+        'principal_class' => modUserGroup::class,
+        'principal' => $adminGroup->get('id'),
+        'authority' => 0,
+        'policy' => $adminPolicy->get('id'),
         ]);
         $access->save();
     }
@@ -166,11 +166,11 @@ $setting = $modx->getObject(modSystemSetting::class, [
 ]);
 if (!$setting) {
     /* truncate permissions in modAccessPermission and migrate to modAccessPolicyTemplate objects from modAccessPolicy.data
-     * first get the standard policies, and then array_diff with Admin policy and unknown policies
-     * if an unknown policy doesnt contain any new permissions that arent in Admin policy,
-     * just switch it to the Admin Policy Template. Otherwise, create a new AP template
-     * based on the Policy's name (first look for an existing one).
-     */
+    * first get the standard policies, and then array_diff with Admin policy and unknown policies
+    * if an unknown policy doesnt contain any new permissions that arent in Admin policy,
+    * just switch it to the Admin Policy Template. Otherwise, create a new AP template
+    * based on the Policy's name (first look for an existing one).
+    */
     /* get admin policy and list of standard policies */
     $standards = ['Administrator','Resource','Load Only','Load, List and View','Object','Element'];
     $adminPolicy = $modx->getObject(modAccessPolicy::class, ['name' => 'Administrator']);
@@ -255,8 +255,8 @@ if (!$setting) {
                 $modx->log(xPDO::LOG_LEVEL_DEBUG,'Diff: '.print_r($diff,true));
 
                 /* if the unknown policy has all the perms and no new perms of the admin
-                 * policy, just set its tpl to the admin policy tpl
-                 */
+                * policy, just set its tpl to the admin policy tpl
+                */
                 if (empty($diff) && $adminPolicyTpl) {
                     $policy->set('template',$adminPolicyTpl->get('id'));
                     $policy->save();

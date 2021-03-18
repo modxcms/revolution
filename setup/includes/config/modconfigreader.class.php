@@ -1,20 +1,20 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 abstract class modConfigReader {
     /** @var modInstall $install */
     public $install;
@@ -32,17 +32,17 @@ abstract class modConfigReader {
     }
 
     /**
-     * Read an existing configuration file
-     * @abstract
-     * @param array $config
-     */
+    * Read an existing configuration file
+    * @abstract
+    * @param array $config
+    */
     abstract public function read(array $config = []);
 
     /**
-     * Load defaults for a configuration file if one does not exist; used in new installations
-     * @param array $config
-     * @return array
-     */
+    * Load defaults for a configuration file if one does not exist; used in new installations
+    * @param array $config
+    * @return array
+    */
     public function loadDefaults(array $config = []) {
         $this->getHttpHost();
 
@@ -65,8 +65,8 @@ abstract class modConfigReader {
     }
 
     /**
-     * Get the HTTP host for the server
-     */
+    * Get the HTTP host for the server
+    */
     public function getHttpHost() {
         if (php_sapi_name() != 'cli') {
             $this->config['https_port'] = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';

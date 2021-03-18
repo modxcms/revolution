@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Bővítmények';
 $_lang['advanced_options'] = 'Haladó beállítások';
@@ -209,7 +209,7 @@ $_lang['version'] = 'verzió';
 $_lang['warning'] = 'Figyelmeztetés';
 $_lang['welcome'] = 'Üdvözöljük a MODX telepítő programban.';
 $_lang['welcome_message'] = '<p>Ez a program végigvezeti Önt a telepítés további részén.</p>
-	<p>Válassza ki a \'Tovább\' gombot a folytatáshoz:</p>
+    <p>Válassza ki a \'Tovább\' gombot a folytatáshoz:</p>
 ';
 $_lang['workspace_err_nf'] = 'Nem található az aktív munkaterület.';
 $_lang['workspace_err_path'] = 'Hiba az aktív munkaterület útvonalának beállításában.';

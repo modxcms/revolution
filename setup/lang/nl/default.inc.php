@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Uitbreidingen';
 $_lang['advanced_options'] = 'Geavanceerde opties';
@@ -100,7 +100,7 @@ $_lang['install_summary'] = 'Installatie overzicht';
 $_lang['install_update'] = 'Installeer/Update';
 $_lang['installation_finished'] = 'Installatie voltooid in [[+time]]';
 $_lang['license'] = '<p class="title">Je moet akkoord gaan met de licentie voordat u verder gaat met de installatie.</p>
-	<p>Usage of this software is subject to the GPL license. To help you understand
+    <p>Usage of this software is subject to the GPL license. To help you understand
     what the GPL licence is and how it affects your ability to use the software, we
     have provided the following summary:</p>
     <h4>The GNU General Public License is a Free Software license.</h4>
@@ -137,12 +137,12 @@ $_lang['license'] = '<p class="title">Je moet akkoord gaan met de licentie voord
 
         <li>Your fair use and other rights are in no way affected by the above.</li>
     </ul>
-	<p>The above is a summary of the GNU General Public License. By proceeding, you
-	are agreeing to the GNU General Public Licence, not the above. The above is
-	simply a summary of the GNU General Public Licence, and its accuracy is not
-	guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-	License</a> in full before proceeding, which can also be found in the license
-	file distributed with this package.</p>
+    <p>The above is a summary of the GNU General Public License. By proceeding, you
+    are agreeing to the GNU General Public Licence, not the above. The above is
+    simply a summary of the GNU General Public Licence, and its accuracy is not
+    guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
+    License</a> in full before proceeding, which can also be found in the license
+    file distributed with this package.</p>
 ';
 $_lang['license_agree'] = 'Ik ga akkoord met de voorwaarden vermeld in de licentie.';
 $_lang['license_agreement'] = 'Licentie Overeenkomst';
@@ -234,7 +234,7 @@ $_lang['version'] = 'versie';
 $_lang['warning'] = 'Fout';
 $_lang['welcome'] = 'Welkom in het MODX installatie programma.';
 $_lang['welcome_message'] = '<p>Dit programma begeleid je door de installatie van MODX.</p>
-	<p>Klik op de knop `volgende` om door te gaan:</p>';
+    <p>Klik op de knop `volgende` om door te gaan:</p>';
 $_lang['workspace_err_nf'] = 'Kan de actieve workspace niet vinden.';
 $_lang['workspace_err_path'] = 'Fout bij het instellen van het actieve workspace pad.';
 $_lang['workspace_path_updated'] = 'Actieve workspace pad geupdate.';

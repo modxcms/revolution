@@ -1,17 +1,17 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * The lexicon handling class for setup.
- * @package modx
- */
+* The lexicon handling class for setup.
+* @package modx
+*/
 class modInstallLexicon
 {
     const OPTION_LEXICON_PATH = 'lexicon_path';
@@ -26,10 +26,10 @@ class modInstallLexicon
     protected $lexicon = [];
 
     /**
-     * modInstallLexicon constructor.
-     * @param modInstall $install
-     * @param array $config
-     */
+    * modInstallLexicon constructor.
+    * @param modInstall $install
+    * @param array $config
+    */
     public function __construct(modInstall $install, array $config = [])
     {
         $this->install = $install;
@@ -37,22 +37,22 @@ class modInstallLexicon
     }
 
     /**
-     * Gets and parses a lexicon entry.
-     * @param string $key The key to grab
-     * @param array $placeholders Any values to replace placeholders with
-     * @return string The translated key.
-     */
+    * Gets and parses a lexicon entry.
+    * @param string $key The key to grab
+    * @param array $placeholders Any values to replace placeholders with
+    * @return string The translated key.
+    */
     public function get(string $key, array $placeholders = []): string
     {
         return $this->exists($key) ? $this->parse($this->lexicon[$key], $placeholders) : '';
     }
 
     /**
-     * Sets a lexicon entry value.
-     * @param string $key The key to set the value to.
-     * @param string $value The value to set.
-     * @return string The set value.
-     */
+    * Sets a lexicon entry value.
+    * @param string $key The key to set the value to.
+    * @param string $value The value to set.
+    * @return string The set value.
+    */
     public function set(string $key, string $value = ''): string
     {
         $this->lexicon[$key] = $value;
@@ -61,11 +61,11 @@ class modInstallLexicon
     }
 
     /**
-     * Parses a lexicon string for placeholder replacement
-     * @param string $str
-     * @param array $placeholders An array of placeholders
-     * @return string
-     */
+    * Parses a lexicon string for placeholder replacement
+    * @param string $str
+    * @param array $placeholders An array of placeholders
+    * @return string
+    */
     public function parse($str = '',array $placeholders = []) {
         if (empty($str)) return '';
         if (empty($placeholders) || !is_array($placeholders)) return $str;
@@ -77,23 +77,23 @@ class modInstallLexicon
     }
 
     /**
-     * Checks if a key exists in the currently loaded lexicon
-     * @param string $key
-     * @return boolean True if key is found
-     */
+    * Checks if a key exists in the currently loaded lexicon
+    * @param string $key
+    * @return boolean True if key is found
+    */
     public function exists(string $key): bool
     {
         return array_key_exists($key, $this->lexicon);
     }
 
     /**
-     * Accessor method for the lexicon array.
-     *
-     * @access public
-     * @param string $prefix If set, will only return the lexicon entries with this prefix.
-     * @param boolean If true, will strip the prefix from the returned indexes
-     * @return array The internal lexicon.
-     */
+    * Accessor method for the lexicon array.
+    *
+    * @access public
+    * @param string $prefix If set, will only return the lexicon entries with this prefix.
+    * @param boolean If true, will strip the prefix from the returned indexes
+    * @return array The internal lexicon.
+    */
     public function fetch($prefix = '',$removePrefix = false) {
         if (!empty($prefix)) {
             $lex = [];
@@ -111,9 +111,9 @@ class modInstallLexicon
     }
 
     /**
-     * Returns the currently specified language.
-     * @return string The IANA language code
-     */
+    * Returns the currently specified language.
+    * @return string The IANA language code
+    */
     public function getLanguage() {
         $language = 'en';
         if (isset ($_COOKIE['modx_setup_language'])) {
@@ -155,9 +155,9 @@ class modInstallLexicon
     }
 
     /**
-     * Get a list of available languages.
-     * @return array An array of available languages
-     */
+    * Get a list of available languages.
+    * @return array An array of available languages
+    */
     public function getLanguageList(): array
     {
         $languages = [];
@@ -178,11 +178,11 @@ class modInstallLexicon
     }
 
     /**
-     * Loads a lexicon topic.
-     *
-     * @param string/array $topics A string name of a topic (or an array of topic names)
-     * @return boolean True if successful.
-     */
+    * Loads a lexicon topic.
+    *
+    * @param string/array $topics A string name of a topic (or an array of topic names)
+    * @return boolean True if successful.
+    */
     public function load($topics): bool
     {
         $currentLanguage = $this->getLanguage();

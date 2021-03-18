@@ -1,10 +1,10 @@
 <?php
 /**
- * Test-related English Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* Test-related English Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['test_config_file'] = '<span class="mono">[[+file]]</span> mevcut ve yazılabilir olduğu denetleniyor: ';
 $_lang['test_config_file_nw'] = 'Yeni Linux/Unix kurulumları için, MODX çekirdek <span class="mono">config/</span> dizininizde, izinler PHP tarafından yazılabilir şekilde ayarlanmış olarak <span class="mono">[[+key]].inc.php</span> isimli boş bir dosya oluşturun.';
 $_lang['test_db_check'] = 'Veri tabanı giriş bağlantısı oluşturuluyor: ';

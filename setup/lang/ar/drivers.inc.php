@@ -1,10 +1,10 @@
 <?php
 /**
- * English Drivers Lexicon Topic for Revolution setup
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Drivers Lexicon Topic for Revolution setup
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['mysql_err_ext'] = 'مودكس يتطلب لاحقة MySQL من أجل PHP ولا يبدو أنها محملة.';
 $_lang['mysql_err_pdo'] = 'مودكس يتطلب برنامج التشغيل pdo_mysql عند استخدام PDO الأصلي ولا يبدو أنه محمل.';
 $_lang['mysql_version_5051'] = 'مودكس سوف يواجه مشاكل مع إصدار MySQL الخاص بك ([[+version]]) بسبب العديد من الأخطاء التي تتصل ببرامج تشغيل PDO في هذا الإصدار. الرجاء ترقية MySQL لتصحيح هذه المشاكل. حتى إذا اخترت عدم استخدام مودكس، من المستحسن ترقية هذا الإصدار من أدل الأمن والاستقرار لموقع الوب الخاص بك.';

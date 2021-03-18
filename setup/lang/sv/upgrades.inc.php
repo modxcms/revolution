@@ -1,10 +1,10 @@
 <?php
 /**
- * English Upgrades Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Upgrades Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['add_column'] = 'Lade till kolumnen `[[+column]]` i [[+table]].';
 $_lang['add_index'] = 'Lade till nytt index `[[+index]]` för tabellen [[+table]].';
 $_lang['alter_column'] = 'Modifierade kolumnen `[[+column]]` i tabellen [[+table]].';

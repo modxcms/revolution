@@ -1,7 +1,7 @@
 <?php
 /**
- * Remove obsolete system settings about compression
- */
+* Remove obsolete system settings about compression
+*/
 
 use MODX\Revolution\modSystemSetting;
 

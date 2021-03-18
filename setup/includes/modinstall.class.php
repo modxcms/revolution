@@ -1,18 +1,18 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * Common classes for the MODX installation and provisioning services.
- *
- * @package setup
- */
+* Common classes for the MODX installation and provisioning services.
+*
+* @package setup
+*/
 
 use MODX\Revolution\modCacheManager;
 use MODX\Revolution\modX;
@@ -21,10 +21,10 @@ use xPDO\xPDO;
 use xPDO\xPDOException;
 
 /**
- * Provides common functionality and data for installation and provisioning.
- *
- * @package setup
- */
+* Provides common functionality and data for installation and provisioning.
+*
+* @package setup
+*/
 class modInstall {
     const MODE_NEW = 0;
     const MODE_UPGRADE_REVO = 1;
@@ -52,11 +52,11 @@ class modInstall {
     public $finished = false;
 
     /**
-     * The constructor for the modInstall object.
-     *
-     * @constructor
-     * @param array $options An array of configuration options.
-     */
+    * The constructor for the modInstall object.
+    *
+    * @constructor
+    * @param array $options An array of configuration options.
+    */
     function __construct(array $options = []) {
         if (isset ($_REQUEST['action'])) {
             $this->action = preg_replace('/[\.]{2,}/', '', htmlspecialchars($_REQUEST['action']));
@@ -74,11 +74,11 @@ class modInstall {
     }
 
     /**
-     * Load a class file for setup
-     * @param string $class The name of the class to load
-     * @param string $path The path to load the class from
-     * @return array|bool
-     */
+    * Load a class file for setup
+    * @param string $class The name of the class to load
+    * @param string $path The path to load the class from
+    * @return array|bool
+    */
     public function loadClass($class,$path = '') {
         $classFile = str_replace('.', '/', strtolower($class));
         $className = explode('.',$class);
@@ -95,13 +95,13 @@ class modInstall {
     }
 
     /**
-     * Return a service class instance
-     * @param string $name
-     * @param string $class
-     * @param string $path
-     * @param array $config
-     * @return Object|null
-     */
+    * Return a service class instance
+    * @param string $name
+    * @param string $class
+    * @param string $path
+    * @param array $config
+    * @return Object|null
+    */
     public function getService($name,$class,$path = '',array $config = []) {
         if (empty($this->$name)) {
             $className = $this->loadClass($class,$path);
@@ -109,11 +109,11 @@ class modInstall {
                 $this->$name = new $className($this,$config);
             } else {
                 $this->_fatalError($this->lexicon('service_err_nf',
-                                                  [
+                                                [
                     'name' => $name,
                     'class' => $class,
                     'path' => $path,
-                                                  ]
+                                                ]
                 ));
             }
         }
@@ -121,13 +121,13 @@ class modInstall {
     }
 
     /**
-     * Load settings class
-     *
-     * @access public
-     * @param string $class The settings class to load.
-     * @param string $path
-     * @return modInstallSettings
-     */
+    * Load settings class
+    *
+    * @access public
+    * @param string $class The settings class to load.
+    * @param string $path
+    * @return modInstallSettings
+    */
     public function loadSettings($class = 'modInstallSettings',$path = '') {
         if (empty($this->settings)) {
             $className = $this->loadClass($class,$path);
@@ -141,24 +141,24 @@ class modInstall {
     }
 
     /**
-     * Shortcut method for modInstallLexicon::get. {@see modInstallLexicon::get}
-     *
-     * @param string $key
-     * @param array $placeholders
-     * @return string
-     */
+    * Shortcut method for modInstallLexicon::get. {@see modInstallLexicon::get}
+    *
+    * @param string $key
+    * @param array $placeholders
+    * @return string
+    */
     public function lexicon($key,array $placeholders = []) {
         return $this->lexicon->get($key,$placeholders);
     }
 
     /**
-     * Get an xPDO connection to the database.
-     *
-     * @param int $mode
-     *
-     * @return xPDO|string A copy of the xpdo object.
-     * @throws xPDOException
-     */
+    * Get an xPDO connection to the database.
+    *
+    * @param int $mode
+    *
+    * @return xPDO|string A copy of the xpdo object.
+    * @throws xPDOException
+    */
     public function getConnection($mode = 0) {
         if ($this->settings && empty($mode)) $mode = (int)$this->settings->get('installmode');
         if (empty($mode)) $mode = modInstall::MODE_NEW;
@@ -175,7 +175,7 @@ class modInstall {
                 ,$this->settings->get('database_password')
                 ,$this->settings->get('table_prefix')
                 ,$options
-             );
+            );
 
             if (!($this->xpdo instanceof xPDO)) { return $this->xpdo; }
 
@@ -214,13 +214,13 @@ class modInstall {
     }
 
     /**
-     * Load distribution-specific test handlers
-     *
-     * @param string $class
-     * @param string $path
-     * @param array $config
-     * @return modInstallTest|void
-     */
+    * Load distribution-specific test handlers
+    *
+    * @param string $class
+    * @param string $path
+    * @param array $config
+    * @return modInstallTest|void
+    */
     public function loadTestHandler($class = 'test.modInstallTest',$path = '',array $config = []) {
         $className = $this->loadClass($class,$path);
         if (!empty($className)) {
@@ -239,23 +239,23 @@ class modInstall {
     }
 
     /**
-     * Perform a series of pre-installation tests.
-     *
-     * @param integer $mode The install mode.
-     * @param string $testClass The class to run tests with
-     * @param string $testClassPath
-     * @return array An array of result messages collected during the process.
-     */
+    * Perform a series of pre-installation tests.
+    *
+    * @param integer $mode The install mode.
+    * @param string $testClass The class to run tests with
+    * @param string $testClassPath
+    * @return array An array of result messages collected during the process.
+    */
     public function test($mode = modInstall::MODE_NEW,$testClass = 'test.modInstallTest',$testClassPath = '') {
         $this->loadTestHandler($testClass,$testClassPath);
         return $this->test->run($mode);
     }
 
     /**
-     * Verify that the modX class can be initialized.
-     *
-     * @return array An array of error messages collected during the process.
-     */
+    * Verify that the modX class can be initialized.
+    *
+    * @return array An array of error messages collected during the process.
+    */
     public function verify() {
         $errors = [];
         $modx = $this->_modx($errors);
@@ -268,12 +268,12 @@ class modInstall {
     }
 
     /**
-     * Cleans up after install.
-     *
-     * TODO: implement this function to cleanup any temporary files
-     * @param array $options
-     * @return array
-     */
+    * Cleans up after install.
+    *
+    * TODO: implement this function to cleanup any temporary files
+    * @param array $options
+    * @return array
+    */
     public function cleanup(array $options = []) {
         $errors = [];
         $modx = $this->_modx($errors);
@@ -323,12 +323,12 @@ class modInstall {
     }
 
     /**
-     * Removes the setup directory
-     *
-     * @access public
-     * @param array $options
-     * @return array
-     */
+    * Removes the setup directory
+    *
+    * @access public
+    * @param array $options
+    * @return array
+    */
     public function removeSetupDirectory(array $options = []) {
         $errors = [];
 
@@ -351,10 +351,10 @@ class modInstall {
     }
 
     /**
-     * Generates a random universal unique ID for identifying modx installs
-     *
-     * @return string A universally unique ID
-     */
+    * Generates a random universal unique ID for identifying modx installs
+    *
+    * @return string A universally unique ID
+    */
     public function generateUUID() {
         srand(intval(microtime(true) * 1000));
         $b = md5(uniqid(rand(),true),true);
@@ -364,12 +364,12 @@ class modInstall {
     }
 
     /**
-     * Installs a transport package.
-     *
-     * @param string $pkg The package signature.
-     * @param array $attributes An array of installation attributes.
-     * @return array An array of error messages collected during the process.
-     */
+    * Installs a transport package.
+    *
+    * @param string $pkg The package signature.
+    * @param array $attributes An array of installation attributes.
+    * @return array An array of error messages collected during the process.
+    */
     public function installPackage($pkg, array $attributes = []) {
         $errors = [];
 
@@ -406,10 +406,10 @@ class modInstall {
     }
 
     /**
-     * Gets the manager login URL.
-     *
-     * @return string The URL of the installed manager context.
-     */
+    * Gets the manager login URL.
+    *
+    * @return string The URL of the installed manager context.
+    */
     public function getManagerLoginUrl() {
         $url = '';
 
@@ -426,15 +426,15 @@ class modInstall {
     }
 
     /**
-     * Determines the possible install modes.
-     *
-     * @access public
-     * @return integer One of three possible mode indicators:<ul>
-     * <li>0 = new install only</li>
-     * <li>1 = new OR upgrade from older versions of MODX Revolution</li>
-     * <li>2 = new OR upgrade from MODX Evolution</li>
-     * </ul>
-     */
+    * Determines the possible install modes.
+    *
+    * @access public
+    * @return integer One of three possible mode indicators:<ul>
+    * <li>0 = new install only</li>
+    * <li>1 = new OR upgrade from older versions of MODX Revolution</li>
+    * <li>2 = new OR upgrade from MODX Evolution</li>
+    * </ul>
+    */
     public function getInstallMode() {
         $mode = modInstall::MODE_NEW;
         if (isset ($_POST['installmode'])) {
@@ -455,12 +455,12 @@ class modInstall {
     }
 
     /**
-     * Creates the database connection for the installation process.
-     *
-     * @access private
-     * @return xPDO|string The xPDO instance to be used by the installation.
-     * @throws xPDOException
-     */
+    * Creates the database connection for the installation process.
+    *
+    * @access private
+    * @return xPDO|string The xPDO instance to be used by the installation.
+    * @throws xPDOException
+    */
     public function _connect($dsn, $user = '', $password = '', $prefix = '', array $options = []) {
         require_once MODX_CORE_PATH . 'vendor/autoload.php';
         if (class_exists('\xPDO\xPDO')) {
@@ -470,7 +470,7 @@ class modInstall {
                     xPDO::OPT_TABLE_PREFIX => $prefix,
                     xPDO::OPT_SETUP => true,
                 ], $options),
-                                   [PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT]
+                                    [PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT]
             );
             $this->xpdo->setLogTarget(
                 [
@@ -488,11 +488,11 @@ class modInstall {
     }
 
     /**
-     * Instantiate an existing modX configuration.
-     *
-     * @param array &$errors An array in which error messages are collected.
-     * @return modX|null The modX instance, or null if it could not be instantiated.
-     */
+    * Instantiate an existing modX configuration.
+    *
+    * @param array &$errors An array in which error messages are collected.
+    * @return modX|null The modX instance, or null if it could not be instantiated.
+    */
     private function _modx(array & $errors) {
         $modx = null;
 
@@ -528,11 +528,11 @@ class modInstall {
     }
 
     /**
-     * Finds the core directory, if possible. If core cannot be found, loads the
-     * findcore controller.
-     *
-     * @return boolean Returns true if core directory is found.
-     */
+    * Finds the core directory, if possible. If core cannot be found, loads the
+    * findcore controller.
+    *
+    * @return boolean Returns true if core directory is found.
+    */
     public function findCore() {
         $exists = false;
         if (defined('MODX_CORE_PATH') && file_exists(MODX_CORE_PATH) && is_dir(MODX_CORE_PATH)) {
@@ -548,10 +548,10 @@ class modInstall {
     }
 
     /**
-     * Does all the pre-load checks, before setup loads.
-     *
-     * @access public
-     */
+    * Does all the pre-load checks, before setup loads.
+    *
+    * @access public
+    */
     public function doPreloadChecks() {
         $this->lexicon->load('preload');
         $errors= [];
@@ -572,11 +572,11 @@ class modInstall {
     }
 
     /**
-     * Outputs a fatal error message and then dies.
-     *
-     * @param string|array $errors A string or array of errors
-     * @return void
-     */
+    * Outputs a fatal error message and then dies.
+    *
+    * @param string|array $errors A string or array of errors
+    * @return void
+    */
     public function _fatalError($errors) {
         $output = '<html><head><title></title></head><body><h1>'.$this->lexicon('fatal_error').'</h1><ul>';
         if (is_array($errors)) {
@@ -591,11 +591,11 @@ class modInstall {
     }
 
     /**
-     * Custom is_writable function to test on problematic servers
-     *
-     * @param string $path
-     * @return boolean True if write was successful
-     */
+    * Custom is_writable function to test on problematic servers
+    *
+    * @param string $path
+    * @return boolean True if write was successful
+    */
     public function is_writable2($path) {
         $written = false;
         if (!is_string($path)) return false;
@@ -630,11 +630,11 @@ class modInstall {
     }
 
     /**
-     * Loads the correct database driver for this environment.
-     *
-     * @param string $path
-     * @return boolean True if successful.
-     */
+    * Loads the correct database driver for this environment.
+    *
+    * @param string $path
+    * @return boolean True if successful.
+    */
     public function loadDriver($path = '') {
         $this->loadSettings();
 

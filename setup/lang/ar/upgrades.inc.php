@@ -1,10 +1,10 @@
 <?php
 /**
- * English Upgrades Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Upgrades Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['add_column'] = 'Added new `[[+column]]` column to [[+table]].';
 $_lang['add_index'] = 'Added new index on `[[+index]]` for table [[+table]].';
 $_lang['alter_column'] = 'Modified column `[[+column]]` in table [[+table]].';
@@ -12,9 +12,8 @@ $_lang['add_moduser_classkey'] = 'أضاف حقل ال class_key لدعم مشت
 $_lang['added_cachepwd'] = 'أضاف حقل كاشبيود مفقود في اصدارت الرفيلوشون المبكرة.';
 $_lang['added_content_ft_idx'] = 'أضاف`content_ft_idx`جديدة ذات فهرس نص كامل في الحقول `pagetitle`, `longtitle`, `description`, `introtext`, `content`.';
 $_lang['allow_null_properties'] = 'تحديد السماح بالقيمة null ل \'class]]`.`properties+]]`.';
-$_lang['alter_activeuser_action'] = 'تعديل الحقل modActiveUser
- \'action\' للسماح بعلامات أحداث اطول.';
-$_lang['alter_usermessage_messageread'] = 'تغيير الحقل  modUserMessage  
+$_lang['alter_activeuser_action'] = 'تعديل الحقل modActiveUser \'action\' للسماح بعلامات أحداث اطول.';
+$_lang['alter_usermessage_messageread'] = 'تغيير الحقل  modUserMessage
 `messageread\' ل \'read\'.';
 $_lang['alter_usermessage_postdate'] = 'تغيير الحقل modUserMessage
 \'postdate\' من نمط INT إلى نمط DATETIME وإلى الاسم \'date_sent\'.';
@@ -49,7 +48,7 @@ $_lang['remove_fulltext_index'] = 'إزالة فهرس النص الكامل \'[
 $_lang['systemsetting_xtype_fix'] = 'تم اصلاح انماط xtypes بنجاح من أجل modSystemSettings.';
 $_lang['transportpackage_manifest_text'] = 'تعديل عمود \'manifest\' إلى نص من نص متوسط من أجل `[[class+]]`.';
 $_lang['update_closure_table'] = 'تحديث إغلاق جدول البيانات لفئة \'[[class+]]\'.';
-$_lang['update_table_column_data'] = 'تحديث البيانات في العمود [[column+]] للجدول [[table+]] 
+$_lang['update_table_column_data'] = 'تحديث البيانات في العمود [[column+]] للجدول [[table+]]
 ( [[class+]] )';
 $_lang['iso_country_code_converted'] = 'تم تحويل أسماء المستخدمين الشخصية القطرية إلى رموز ISO بنجاح.';
 $_lang['legacy_cleanup_complete'] = 'اكتملت عملية التخلص من الملفات القديمة.';

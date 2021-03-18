@@ -1,24 +1,24 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * @package setup
- */
+* @package setup
+*/
 require_once dirname(__FILE__) . '/modinstallparser.class.php';
 /**
- * An extension of the Smarty class for use with modX.
- *
- * Automatically sets appropriate configuration variables for Smarty in
- * the MODX context.
- * @package setup
- */
+* An extension of the Smarty class for use with modX.
+*
+* Automatically sets appropriate configuration variables for Smarty in
+* the MODX context.
+* @package setup
+*/
 class modInstallSmarty extends Smarty implements modInstallParser {
     public $smarty = null;
     public $_blocks;
@@ -60,12 +60,12 @@ class modInstallSmarty extends Smarty implements modInstallParser {
 
 
     /**
-     * Recursively writes a directory tree of files to the filesystem
-     *
-     * @access public
-     * @param string $dirname The directory to write
-     * @return boolean Returns true if the directory was successfully written.
-     */
+    * Recursively writes a directory tree of files to the filesystem
+    *
+    * @access public
+    * @param string $dirname The directory to write
+    * @return boolean Returns true if the directory was successfully written.
+    */
     public function writeTree($dirname) {
         $written= false;
         if (!empty ($dirname)) {

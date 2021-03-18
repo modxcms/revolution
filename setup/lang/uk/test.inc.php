@@ -1,10 +1,10 @@
 <?php
 /**
- * Test-related English Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* Test-related English Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['test_config_file'] = 'Перевірка існування і можливості запису до <span class="mono">[[+file]]</span>: ';
 $_lang['test_config_file_nw'] = 'Для нової інсталяції на системах Linux/Unix, будь ласка, створіть порожній файл з іменем <span class="mono">[[+key]].inc.php</span> у каталозі MODX core <span class="mono">config/</span> з правами доступу, які дозволяють PHP змінювати його.';
 $_lang['test_db_check'] = 'Створення підключення до бази даних: ';

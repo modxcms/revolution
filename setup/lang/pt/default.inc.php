@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Complementos';
 $_lang['advanced_options'] = 'Opções Avançadas';
@@ -112,16 +112,16 @@ $_lang['license'] = '<p class="title">Você deve concordar com a licença antes 
     <p>Você pode exercer as liberdades aqui especificados, desde que esteja em conformidade com as condições expressas do presente licença. As principais condições são:</p>
     <ul>
         <li>
-         Você deve conspícua e apropriadamente publique em cada cópia distribuída uma
-         nota de copyright apropriada e exoneração de garantia e mantenha intactos todos
-         os avisos que se referem a esta Licença e à ausência de qualquer garantia e forneça
-         a outros recebedores do Programa uma cópia do GNU Licença Pública Geral, juntamente
-         com o Programa. Qualquer tradução da Licença Pública Geral GNU deve ser acompanhada
-         pela Licença Pública Geral GNU.
-         </li>
+        Você deve conspícua e apropriadamente publique em cada cópia distribuída uma
+        nota de copyright apropriada e exoneração de garantia e mantenha intactos todos
+        os avisos que se referem a esta Licença e à ausência de qualquer garantia e forneça
+        a outros recebedores do Programa uma cópia do GNU Licença Pública Geral, juntamente
+        com o Programa. Qualquer tradução da Licença Pública Geral GNU deve ser acompanhada
+        pela Licença Pública Geral GNU.
+        </li>
 
         <li>
-        Se você modificar a sua cópia ou cópias do Programa ou qualquer parte dele, ou 
+        Se você modificar a sua cópia ou cópias do Programa ou qualquer parte dele, ou
         desenvolver um programa baseado em cima dele, só pode distribuir a obra resultante
         desde que você fazê-lo sob a Licença Pública Geral GNU. Qualquer tradução da Licença
         Pública Geral GNU deve ser acompanhada pela Licença Pública Geral GNU.
@@ -129,21 +129,21 @@ $_lang['license'] = '<p class="title">Você deve concordar com a licença antes 
 
         <li>
         Se você copiar ou distribuir o programa, você deve acompanhá-lo com o correspondente
-        código completo legível por máquina fonte ou com uma oferta escrita, válida por pelo 
-        menos três anos, para fornecer o correspondente código completo legível por máquina 
+        código completo legível por máquina fonte ou com uma oferta escrita, válida por pelo
+        menos três anos, para fornecer o correspondente código completo legível por máquina
         fonte.
         </li>
 
-        <li>Qualquer uma destas condições podem ser derrogadas se você obter permissão do 
+        <li>Qualquer uma destas condições podem ser derrogadas se você obter permissão do
         detentor dos direitos autorais.</li>
 
         <li>O uso justo e outros direitos não são, de forma alguma afectados pelo disposto acima.</li>
     </ul>
-    <p>O texto acima é um resumo da GNU General Public License. Ao prosseguir, você concorda com a GNU 
+    <p>O texto acima é um resumo da GNU General Public License. Ao prosseguir, você concorda com a GNU
     General Public Licence, não a que está acima. A descrição acima é apenas um resumo da GNU General Public Licence,
-     e sua exatidão não é garantida. É altamente recomendável que você leia o <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
+    e sua exatidão não é garantida. É altamente recomendável que você leia o <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
     License</a> na íntegra antes de prosseguir, que também pode ser encontrado na licença
-     arquivo distribuído com este pacote.</p>';
+    arquivo distribuído com este pacote.</p>';
 $_lang['license_agree'] = 'Eu concordo com os termos estabelecidos nesta licença.';
 $_lang['license_agreement'] = 'Licença';
 $_lang['license_agreement_error'] = 'Você deve concordar com a licença antes de continuar a instalação.';

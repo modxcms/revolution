@@ -1,10 +1,10 @@
 <?php
 /**
- * Test-related English Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* Test-related English Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['test_config_file'] = 'Memeriksa apakah <span class="mono">[[+file]]</span> ada dan dapat ditulis: ';
 $_lang['test_config_file_nw'] = 'Untuk menginstal Linux/Unix baru, silakan membuat sebuah file kosong yang bernama <span class="mono"> [[+key]].inc.php</span> dalam inti MODX Anda <span class="mono"> config /</span> direktori dengan izin diatur menjadi ditulisi oleh PHP.';
 $_lang['test_db_check'] = 'Membuat koneksi ke database: ';

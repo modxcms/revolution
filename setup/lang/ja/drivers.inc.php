@@ -1,10 +1,10 @@
 <?php
 /**
- * English Drivers Lexicon Topic for Revolution setup
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Drivers Lexicon Topic for Revolution setup
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['mysql_err_ext'] = 'PHPのMySQL拡張が見つかりません。';
 $_lang['mysql_err_pdo'] = 'PDO拡張モジュールのMySQLドライバーを発見できませんでした。';
 $_lang['mysql_version_5051'] = 'お使いのMySQLのバージョン([[+version]])には、PDOドライバに関する多くの問題があります。問題を解消するため、MySQLをアップグレードしてください。MODXを使用しない場合でも、セキュリティと安定性のためアップグレードをおすすめします。';

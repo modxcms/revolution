@@ -1,10 +1,10 @@
 <?php
 /**
- * Common upgrade script to update modUser fields for native password hashing feature.
- *
- * @var modX $modx
- * @package setup
- */
+* Common upgrade script to update modUser fields for native password hashing feature.
+*
+* @var modX $modx
+* @package setup
+*/
 
 use MODX\Revolution\modUser;
 

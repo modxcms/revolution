@@ -1,21 +1,21 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 use MODX\Revolution\modWorkspace;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
 
 /**
- * @package modx
- * @subpackage setup
- */
+* @package modx
+* @subpackage setup
+*/
 abstract class modInstallRunner {
     const RESULT_FAILURE = 'failed';
     const RESULT_ERROR = 'error';
@@ -65,13 +65,13 @@ abstract class modInstallRunner {
     }
 
     /**
-     * Load version-specific installer.
-     *
-     * @access public
-     * @param string $class The class to load.
-     * @param string $path
-     * @return modInstallVersion
-     */
+    * Load version-specific installer.
+    *
+    * @access public
+    * @param string $class The class to load.
+    * @param string $path
+    * @return modInstallVersion
+    */
     public function loadVersionInstaller($class = 'modInstallVersion',$path = '') {
         $className = $this->install->loadClass($class,$path);
         if (!empty($className)) {
@@ -84,9 +84,9 @@ abstract class modInstallRunner {
     }
 
     /**
-     * Update the workspace path
-     * @return boolean
-     */
+    * Update the workspace path
+    * @return boolean
+    */
     public function updateWorkspace() {
         $updated = false;
         /* @var modWorkspace $workspace set default workspace path */
@@ -114,8 +114,8 @@ abstract class modInstallRunner {
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function installPackage() {
         /* add required core data */
         $packageDirectory = MODX_CORE_PATH . 'packages/';
@@ -158,22 +158,22 @@ abstract class modInstallRunner {
 
 
     /**
-     * Writes the config file.
-     *
-     * @return boolean Returns true if successful; false otherwise.
-     */
+    * Writes the config file.
+    *
+    * @return boolean Returns true if successful; false otherwise.
+    */
     public function writeConfig() {
         $written = false;
         $configTpl = MODX_CORE_PATH . 'docs/config.inc.tpl';
         $configFile = MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 
         /**
-         * Sanitize MySQL Password before writing to config, escaping '
-         * I'm sure there's a better way to do this, but this works for now.
-         * Otherwise, we risk fatal PHP errors if the entered Password
-         * contains any single quotes as they would escape the string.
-         * See GitHub issue 12502 for more information. https://github.com/modxcms/revolution/issues/12502
-         */
+        * Sanitize MySQL Password before writing to config, escaping '
+        * I'm sure there's a better way to do this, but this works for now.
+        * Otherwise, we risk fatal PHP errors if the entered Password
+        * contains any single quotes as they would escape the string.
+        * See GitHub issue 12502 for more information. https://github.com/modxcms/revolution/issues/12502
+        */
         $this->install->settings->settings['database_password'] = addslashes($this->install->settings->settings['database_password']);
 
         $settings = $this->install->settings->fetch();

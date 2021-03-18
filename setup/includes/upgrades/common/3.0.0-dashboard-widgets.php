@@ -1,11 +1,11 @@
 <?php
 /**
- * Common upgrade script to upgrade dashboard tables.
- *
- * @var modX
- *
- * @package setup
- */
+* Common upgrade script to upgrade dashboard tables.
+*
+* @var modX
+*
+* @package setup
+*/
 
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modDashboardWidget;

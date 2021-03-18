@@ -6,30 +6,30 @@ use xPDO\xPDOException;
 
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/runner/modinstallrunner.class.php'),'\\','/');
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 class modInstallRunnerWeb extends modInstallRunner {
 
     public function initialize() {
         /* set the time limit infinite in case it takes a bit
-         * TODO: fix this by allowing resume when it takes a long time
-         */
+        * TODO: fix this by allowing resume when it takes a long time
+        */
         @ set_time_limit(0);
     }
 
     /**
-     * Execute the installation process.
-     *
-     * @param integer $mode The install mode.
-     *
-     * @return array An array of result messages collected during execution.
-     * @throws xPDOException
-     */
+    * Execute the installation process.
+    *
+    * @param integer $mode The install mode.
+    *
+    * @return array An array of result messages collected during execution.
+    * @throws xPDOException
+    */
     public function execute($mode) {
         /* write config file */
         $this->writeConfig();
@@ -87,9 +87,9 @@ class modInstallRunnerWeb extends modInstallRunner {
     }
 
     /**
-     * Do post-run cleanups
-     * @return void
-     */
+    * Do post-run cleanups
+    * @return void
+    */
     public function cleanup() {
         /* empty sessions table to prevent old permissions from loading */
         $tableName = $this->install->xpdo->getTableName(modSession::class);

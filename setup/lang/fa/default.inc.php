@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'افزودنی‌ها';
 $_lang['advanced_options'] = 'تنظيمات پيشرفته';
@@ -234,7 +234,7 @@ $_lang['version'] = 'version';
 $_lang['warning'] = 'Warning';
 $_lang['welcome'] = 'Welcome to the MODX installation program.';
 $_lang['welcome_message'] = '<p>This program will guide you through the rest of the installation.</p>
-	<p>Please select the `Next` button to continue:</p>
+    <p>Please select the `Next` button to continue:</p>
 ';
 $_lang['workspace_err_nf'] = 'Could not find the active workspace.';
 $_lang['workspace_err_path'] = 'Error setting the active workspace path.';

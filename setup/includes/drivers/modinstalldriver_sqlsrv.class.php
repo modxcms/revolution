@@ -1,41 +1,41 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 require_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/modinstalldriver.class.php');
 /**
- * Provides query abstraction for setup using the sqlsrv native database driver.
- *
- * @package setup
- * @subpackage drivers
- */
+* Provides query abstraction for setup using the sqlsrv native database driver.
+*
+* @package setup
+* @subpackage drivers
+*/
 class modInstallDriver_sqlsrv extends modInstallDriver {
     /**
-     * Check for sqlsrv extension
-     * {@inheritDoc}
-     */
+    * Check for sqlsrv extension
+    * {@inheritDoc}
+    */
     public function verifyExtension() {
         return extension_loaded('sqlsrv');
     }
 
     /**
-     * Check for sqlsrv_pdo extension
-     * {@inheritDoc}
-     */
+    * Check for sqlsrv_pdo extension
+    * {@inheritDoc}
+    */
     public function verifyPDOExtension() {
         return extension_loaded('pdo_sqlsrv');
     }
 
     /**
-     * SQL Server syntax for default collation query
-     * {@inheritDoc}
-     */
+    * SQL Server syntax for default collation query
+    * {@inheritDoc}
+    */
     public function getCollation() {
         $collation = 'Latin1_General_100_BIN2';
 //        $stmt = $this->xpdo->query("SELECT CAST(SERVERPROPERTY('Collation') AS varchar(128))");
@@ -47,9 +47,9 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
     }
 
     /**
-     * SQL Server syntax for collation listing
-     * {@inheritDoc}
-     */
+    * SQL Server syntax for collation listing
+    * {@inheritDoc}
+    */
     public function getCollations($collation = '') {
         $collations = null;
         $stmt = $this->xpdo->query("SELECT * FROM sys.fn_helpcollations()");
@@ -81,9 +81,9 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
     }
 
     /**
-     * SQL Server syntax for charset listing
-     * {@inheritDoc}
-     */
+    * SQL Server syntax for charset listing
+    * {@inheritDoc}
+    */
     public function getCharsets($charset = '') {
         if (empty($charset)) {
             $charset = $this->getCharset();
@@ -98,28 +98,28 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
     }
 
     /**
-     * SQL Server syntax for table prefix check
-     * {@inheritDoc}
-     */
+    * SQL Server syntax for table prefix check
+    * {@inheritDoc}
+    */
     public function testTablePrefix($database,$prefix) {
         return 'SELECT COUNT('.$this->xpdo->escape('id').') AS '.$this->xpdo->escape('ct').' FROM '.$this->xpdo->escape($prefix.'site_content');
     }
 
     /**
-     * SQL Server syntax for table truncation
-     * {@inheritDoc}
-     */
+    * SQL Server syntax for table truncation
+    * {@inheritDoc}
+    */
     public function truncate($table) {
         return 'TRUNCATE '.$this->xpdo->escape($table);
     }
 
     /**
-     * SQL Server check for server version
-     *
-     * @TODO Get this to actually check the server version.
-     *
-     * {@inheritDoc}
-     */
+    * SQL Server check for server version
+    *
+    * @TODO Get this to actually check the server version.
+    *
+    * {@inheritDoc}
+    */
     public function verifyServerVersion() {
         return [
             'result' => 'success','message' => $this->install->lexicon('sqlsrv_version_success', ['version' => ''])
@@ -149,12 +149,12 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
     }
 
     /**
-     * SQL Server check for client version
-     *
-     * @TODO Get this to actually check the client version.
-     *
-     * {@inheritDoc}
-     */
+    * SQL Server check for client version
+    *
+    * @TODO Get this to actually check the client version.
+    *
+    * {@inheritDoc}
+    */
     public function verifyClientVersion() {
         return [
             'result' => 'success', 'message' => $this->install->lexicon('sqlsrv_version_client_success',
@@ -183,28 +183,28 @@ class modInstallDriver_sqlsrv extends modInstallDriver {
     }
 
     /**
-     * SQL Server syntax to add an index
-     * {@inheritDoc}
-     */
+    * SQL Server syntax to add an index
+    * {@inheritDoc}
+    */
     public function addIndex($table,$name,$column) {
         return 'ALTER TABLE '.$this->xpdo->escape($table).' ADD INDEX '.$this->xpdo->escape($name).' ('.$this->xpdo->escape($column).')"';
     }
 
     /**
-     * SQL Server syntax to drop an index
-     * {@inheritDoc}
-     */
+    * SQL Server syntax to drop an index
+    * {@inheritDoc}
+    */
     public function dropIndex($table,$index) {
         return 'ALTER TABLE '.$this->xpdo->escape($table).' DROP INDEX '.$this->xpdo->escape($index);
     }
 
 
     /**
-     * Cleans a sqlsrv version string that often has extra junk in certain distros
-     *
-     * @param string $sqlsrvVersion The version note to sanitize
-     * @return string The sanitized version
-     */
+    * Cleans a sqlsrv version string that often has extra junk in certain distros
+    *
+    * @param string $sqlsrvVersion The version note to sanitize
+    * @return string The sanitized version
+    */
     protected function _sanitizeVersion($sqlsrvVersion) {
         return $sqlsrvVersion;
     }

@@ -1,19 +1,19 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * Handles all Git build-specific checks
- *
- * @package setup
- * @subpackage tests
- */
+* Handles all Git build-specific checks
+*
+* @package setup
+* @subpackage tests
+*/
 class modInstallTestGit extends modInstallTest {
     public function run($mode = modInstall::MODE_NEW) {
         $this->results = parent::run($mode);
@@ -25,8 +25,8 @@ class modInstallTestGit extends modInstallTest {
     }
 
     /**
-     * Check memory limit, to make sure it is set at least to 64M for zip status
-     */
+    * Check memory limit, to make sure it is set at least to 64M for zip status
+    */
     protected function _checkZipMemLimit() {
         $success = false;
         $ml = ini_get('memory_limit');
@@ -48,8 +48,8 @@ class modInstallTestGit extends modInstallTest {
     }
 
     /**
-     * Check paths for writability
-     */
+    * Check paths for writability
+    */
     protected function _checkAdvPaths() {
         /* web_path */
         $this->title('context_web_writable',$this->install->lexicon('test_directory_writable',

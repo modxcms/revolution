@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Addon';
 $_lang['advanced_options'] = 'Opsi Tambahan';
@@ -126,7 +126,7 @@ $_lang['license'] = '<p class="title">Anda harus menyetujui Lisensi sebelum mela
     <p>Di atas adalah ringkasan dari GNU General Public License. Dengan melanjutkan, kamu
      menyetujui GNU General Public License, bukan di atas. Di atas adalah
      hanya ringkasan dari GNU General Public License, dan keakuratannya tidak
-     terjamin. Sangat disarankan Anda membaca <a 
+     terjamin. Sangat disarankan Anda membaca <a
 href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
      Lisensi </a> secara penuh sebelum melanjutkan, yang juga dapat ditemukan dalam lisensi
      file yang dibagikan dengan paket ini.</p>
@@ -221,7 +221,7 @@ $_lang['version'] = 'versi';
 $_lang['warning'] = 'Peringatan';
 $_lang['welcome'] = 'Selamat datang di program instalasi MODX.';
 $_lang['welcome_message'] = '<p>Program ini akan memandu Anda melalui bagian instalasi lainnya.</p>
-	<p>Silahkan pilih tombol `Next` untuk melanjutkan: </p>
+    <p>Silahkan pilih tombol `Next` untuk melanjutkan: </p>
 ';
 $_lang['workspace_err_nf'] = 'Tidak dapat menemukan ruang kerja yang aktif.';
 $_lang['workspace_err_path'] = 'Kesalahan saat mengatur jalur kerja aktif.';

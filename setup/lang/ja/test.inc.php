@@ -1,10 +1,10 @@
 <?php
 /**
- * Test-related English Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* Test-related English Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['test_config_file'] = '<span class="mono">[[+file]]</span>が書き込み可能になっているか確認します。:';
 $_lang['test_config_file_nw'] = 'Linux/Unix環境に新しくインストールする場合、<span class="mono">core/config/</span>ディレクトリーに<span class="mono">[[+key]].inc.php</span>という名前の空ファイルを作成し、PHPからの書き込みを許可してください。';
 $_lang['test_db_check'] = 'データベース設定の作成: ';

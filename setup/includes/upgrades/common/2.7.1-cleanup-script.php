@@ -1,11 +1,11 @@
 <?php
 /**
- * Common upgrade script for 2.7.1 to clean up legacy files for download distributions.
- *
- * @var modX
- *
- * @package setup
- */
+* Common upgrade script for 2.7.1 to clean up legacy files for download distributions.
+*
+* @var modX
+*
+* @package setup
+*/
 $paths = [
     'assets' => $modx->getOption('assets_path', null, MODX_ASSETS_PATH),
     'base' => $modx->getOption('base_path', null, MODX_BASE_PATH),

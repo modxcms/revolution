@@ -1,11 +1,11 @@
 <?php
 /**
- * Common upgrade script for 3.0 to clean up files removed since 2.x
- *
- * @var modX
- *
- * @package setup
- */
+* Common upgrade script for 3.0 to clean up files removed since 2.x
+*
+* @var modX
+*
+* @package setup
+*/
 $paths = [
     'assets' => $modx->getOption('assets_path', null, MODX_ASSETS_PATH),
     'base' => $modx->getOption('base_path', null, MODX_BASE_PATH),

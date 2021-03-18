@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Add-ons';
 $_lang['advanced_options'] = 'Erweiterte Optionen';
@@ -117,7 +117,7 @@ $_lang['license'] = '<p class="title">Sie müssen der Lizenzvereinbarung zustimm
     <ul>
         <li>Sie müssen unübersehbar und auf geeignete Weise jeder weitergegebenen Kopie einen
         angemessenen Urheberrechts-Hinweis und eine Gewährleistungsausschlusserklärung beifügen und alle
-        Hinweise, die sich auf diese Lizenz und das Fehlen jeglicher Gewährleistung beziehen, intakt lassen; außerdem 
+        Hinweise, die sich auf diese Lizenz und das Fehlen jeglicher Gewährleistung beziehen, intakt lassen; außerdem
         müssen Sie allen anderen Empfängern des Programms eine Kopie der GNU General Public License
         zusammen mit dem Programm aushändigen. Jeder Übersetzung der GNU General Public License muss
         die GNU General Public License beiliegen.</li>

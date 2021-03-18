@@ -1,19 +1,19 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * Runs tests on the server to determine if MODX can be installed
- *
- * @package setup
- * @subpackage tests
- */
+* Runs tests on the server to determine if MODX can be installed
+*
+* @package setup
+* @subpackage tests
+*/
 abstract class modInstallTest {
     public $results = [
         'pass' => [],
@@ -30,11 +30,11 @@ abstract class modInstallTest {
     }
 
     /**
-     * Run tests.
-     *
-     * @param integer $mode The install mode.
-     * @return array An array of result messages collected during the process.
-     */
+    * Run tests.
+    *
+    * @param integer $mode The install mode.
+    * @return array An array of result messages collected during the process.
+    */
     public function run($mode = modInstall::MODE_NEW) {
         $this->results = [];
         $this->mode = $mode;
@@ -57,8 +57,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Checks PHP version
-     */
+    * Checks PHP version
+    */
     protected function _checkPHPVersion() {
         $this->title('php_version',$this->install->lexicon('test_php_version_start').' ');
         $phpVersion = phpversion();
@@ -71,7 +71,7 @@ abstract class modInstallTest {
         /* -1 if left is less, 0 if equal, +1 if left is higher */
         if (!$php_ver_comp) {
             $this->fail('php_version','',$this->install->lexicon('test_php_version_fail', [
-                 'version' => $phpVersion
+                'version' => $phpVersion
                 ,'required' => $required_version
                 ,'recommended' => $recommended_version
             ]));
@@ -82,8 +82,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check memory limit, to make sure it is set at least to 32M
-     */
+    * Check memory limit, to make sure it is set at least to 32M
+    */
     protected function _checkMemoryLimit() {
         $success = false;
         $ml = @ini_get('memory_limit');
@@ -105,12 +105,12 @@ abstract class modInstallTest {
     }
 
     /**
-     * Helper function that converts php.ini memory string settings to bytes
-     *
-     * @access private
-     * @param string $val The byte string
-     * @return integer The string converted into a proper integer bytes
-     */
+    * Helper function that converts php.ini memory string settings to bytes
+    *
+    * @access private
+    * @param string $val The byte string
+    * @return integer The string converted into a proper integer bytes
+    */
     protected function _returnBytes($val) {
         if (is_integer($val)) return $val;
         $lval = strtolower(trim($val));
@@ -129,10 +129,10 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check to see if PHP has zlib and SimpleXML installed.
-     *
-     * @access public
-     */
+    * Check to see if PHP has zlib and SimpleXML installed.
+    *
+    * @access public
+    */
     protected function _checkDependencies() {
         $this->title('dependencies',$this->install->lexicon('test_dependencies').' ');
         /* check for zlib */
@@ -153,8 +153,8 @@ abstract class modInstallTest {
 
 
     /**
-     * Check sessions
-     */
+    * Check sessions
+    */
     protected function _checkSessions() {
         if ($this->install->request instanceof modInstallCLIRequest) {
             $this->pass('sessions');
@@ -169,8 +169,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check if cache exists and is writable. Should in theory never fail.
-     */
+    * Check if cache exists and is writable. Should in theory never fail.
+    */
     protected function _checkCache() {
         /* cache exists? */
         $this->title('cache_exists',$this->install->lexicon('test_directory_exists',
@@ -192,8 +192,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check if core/export exists and is writable
-     */
+    * Check if core/export exists and is writable
+    */
     protected function _checkExport() {
         /* export exists? */
         $this->title('assets_export_exists',$this->install->lexicon('test_directory_exists',
@@ -215,8 +215,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Verify if core/packages exists and is writable
-     */
+    * Verify if core/packages exists and is writable
+    */
     protected function _checkPackages() {
         /* core/packages exists? */
         $this->title('core_packages_exists',$this->install->lexicon('test_directory_exists',
@@ -238,8 +238,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check context paths if inplace, else make sure paths can be written
-     */
+    * Check context paths if inplace, else make sure paths can be written
+    */
     protected function _checkContexts() {
         $coreConfigsExist = false;
         if ($this->install->settings->get('inplace')) {
@@ -278,8 +278,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Config file writable?
-     */
+    * Config file writable?
+    */
     protected function _checkConfig() {
         $configFileDisplay= 'config/' . MODX_CONFIG_KEY . '.inc.php';
         $configFilePath= MODX_CORE_PATH . $configFileDisplay;
@@ -300,8 +300,8 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check connection to database, as well as table prefix
-     */
+    * Check connection to database, as well as table prefix
+    */
     protected function _checkDatabase() {
         /* connect to the database */
         $this->title('dbase_connection',$this->install->lexicon('test_db_check'));
@@ -320,9 +320,9 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check for suhosin extension, and if found and suhosin.get.max_value_length is less than 1024, throw a warning
-     * and force compress_js off.
-     */
+    * Check for suhosin extension, and if found and suhosin.get.max_value_length is less than 1024, throw a warning
+    * and force compress_js off.
+    */
     public function _checkSuhosin() {
         $this->title('test_suhosin_max_length',$this->install->lexicon('test_suhosin'));
         $maxLength = (int)@ini_get('suhosin.get.max_value_length');
@@ -337,9 +337,9 @@ abstract class modInstallTest {
     }
 
     /**
-     * Check if the user requested css/js compression to be off, regardless of Suhosin check result.
-     * Force css/js compression to be off if the option was checked during install (adv options).
-     */
+    * Check if the user requested css/js compression to be off, regardless of Suhosin check result.
+    * Force css/js compression to be off if the option was checked during install (adv options).
+    */
     public function _checkNoCompress() {
         $this->title('test_nocompress',$this->install->lexicon('test_nocompress'));
         if ($this->install->settings->get('nocompress') == 1) {
@@ -354,9 +354,9 @@ abstract class modInstallTest {
     }
 
     /**
-     * If the server document root is empty, don't do JS/CSS compression until they set it up manually.
-     * @return void
-     */
+    * If the server document root is empty, don't do JS/CSS compression until they set it up manually.
+    * @return void
+    */
     public function _checkDocumentRoot() {
         $documentRoot = $_SERVER['DOCUMENT_ROOT'];
         if (empty($documentRoot)) {
@@ -368,32 +368,32 @@ abstract class modInstallTest {
 
 
     /**
-     * Custom is_writable function to test on problematic servers
-     *
-     * @param string $path
-     * @return boolean True if write was successful
-     */
+    * Custom is_writable function to test on problematic servers
+    *
+    * @param string $path
+    * @return boolean True if write was successful
+    */
     protected function is_writable2($path) {
         return $this->install->is_writable2($path);
     }
 
     /**
-     * Titles the check message
-     *
-     * @param string $key The check being titled
-     * @param string $title The title of the check
-     */
+    * Titles the check message
+    *
+    * @param string $key The check being titled
+    * @param string $title The title of the check
+    */
     protected function title($key,$title) {
         if (!isset($this->results[$key])) $this->results[$key] = [];
         $this->results[$key]['msg'] = '<p>'.$title;
     }
 
     /**
-     * Denotes a check passed successfully
-     *
-     * @param string $key The check being performed
-     * @param string $message The success message.
-     */
+    * Denotes a check passed successfully
+    *
+    * @param string $key The check being performed
+    * @param string $message The success message.
+    */
     protected function pass($key,$message = '') {
         if (empty($message)) $message = $this->install->lexicon('ok');
 
@@ -410,14 +410,14 @@ abstract class modInstallTest {
     }
 
     /**
-     * Denotes a check message that is a warning
-     *
-     * @param string $key The check being performed
-     * @param string $title The warning message title.
-     * @param string $message A detailed warning message.
-     * @param string $messageTitle An optional title for the detail panel.
-     * @return boolean
-     */
+    * Denotes a check message that is a warning
+    *
+    * @param string $key The check being performed
+    * @param string $title The warning message title.
+    * @param string $message A detailed warning message.
+    * @param string $messageTitle An optional title for the detail panel.
+    * @return boolean
+    */
     protected function warn($key,$title,$message = '',$messageTitle = '') {
         if (empty($title)) $title = $this->install->lexicon('warning');
         $msg = '<p class="notok">'.$title.'</p>';
@@ -443,13 +443,13 @@ abstract class modInstallTest {
     }
 
     /**
-     * Denotes a check message that is a failure
-     *
-     * @param string $key The check being performed
-     * @param string $title The failure message title.
-     * @param string $message A detailed failure message.
-     * @return boolean
-     */
+    * Denotes a check message that is a failure
+    *
+    * @param string $key The check being performed
+    * @param string $title The failure message title.
+    * @param string $message A detailed failure message.
+    * @return boolean
+    */
     protected function fail($key,$title = '',$message = '') {
         if (empty($title)) $title = $this->install->lexicon('failed');
         $msg = '<p class="notok">'.$title.'</p>';

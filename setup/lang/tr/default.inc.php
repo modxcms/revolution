@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Eklentiler';
 $_lang['advanced_options'] = 'Gelişmiş Seçenekler';
@@ -101,7 +101,7 @@ $_lang['install_update'] = 'Yükle/Güncelle';
 $_lang['installation_finished'] = 'Kurulum [[+ time]] tarihinde tamamlandı';
 $_lang['license'] = '<p class="title">Kuruluma devam etmeden önce Lisansı kabul etmelisiniz.</p>
     <p>Bu yazılımın kullanımı GPL lisansına tabidir. GPL lisansının ne olduğunu
-     ve bunun yazılımı kullanma kabiliyetinize nasıl etki ettiğini anlamanıza yardımcı olmak için, biz
+    ve bunun yazılımı kullanma kabiliyetinize nasıl etki ettiğini anlamanıza yardımcı olmak için, biz
     aşağıdaki özeti sunduk:</p>
     <h4>GNU Genel Kamu Lisansı bir Ücretsiz Yazılım lisansıdır.</h4>
     <p>Size herhangi bir Ücretsiz Yazılım lisansı gibi aşağıdaki dört özgürlük hakkını verir:</p>
@@ -117,19 +117,19 @@ $_lang['license'] = '<p class="title">Kuruluma devam etmeden önce Lisansı kabu
     <ul>
         <li>Dağıtılan her kopyada belirgin ve uygun biçimde bir telif hakkı bildirimi ve garanti reddi
         yayınlamanız ve bu Lisansa atıfta bulunan tüm bildirimleri ve haliyle herhangi bir
-        garantinin bulunmadığını göz önünde bulundurmanız gerekir; ve Programın   
+        garantinin bulunmadığını göz önünde bulundurmanız gerekir; ve Programın
         herhangi diğer alıcılarına Program ile birlikte GNU Genel Kamu Lisansı\'nın bir kopyasını
         verirsiniz. GNU Genel Kamu Lisansı\'nın herhangi bir çevirisine GNU Genel Kamu
         Lisansı eşlik etmelidir.</li>
 
         <li>Eğer kopyanızı veya programın bir kopyasını veya bunun herhangi bir bölümünü
-        değiştirirseniz veya buna dayalı bir program geliştirirseniz, elde ettiğiniz çalışmayı GNU Genel Kamu 
+        değiştirirseniz veya buna dayalı bir program geliştirirseniz, elde ettiğiniz çalışmayı GNU Genel Kamu
         Lisansı kapsamında dağıtabilirsiniz. GNU Genel Kamu Lisansı\'nın herhangi bir çevirisine
         GNU Genel Kamu Lisansı eşlik etmelidir. </li>
 
         <li>Programı kopyalarsanız veya dağıtırsanız, karşılık gelen makine tarafından okunabilir
-        kaynak kodunu tamamlayın veya karşılık gelen makine tarafından okunabilir kaynak 
-        kodunu tamamını vermek için en az üç yıllık geçerli, yazılı bir teklifle birlikte 
+        kaynak kodunu tamamlayın veya karşılık gelen makine tarafından okunabilir kaynak
+        kodunu tamamını vermek için en az üç yıllık geçerli, yazılı bir teklifle birlikte
         göndermelisiniz.</li>
 
         <li>Eğer telif hakkı sahibinden izin alırsanız bu koşullardan herhangi birinden feragat
@@ -137,9 +137,9 @@ $_lang['license'] = '<p class="title">Kuruluma devam etmeden önce Lisansı kabu
 
         <li>Adil kullanımınız ve diğer haklarınız yukarıdakilerden hiçbir şekilde etkilenmez.</li>
     </ul>
-    <p>Yukarıdakiler GNU Genel Kamu Lisansı\'nın bir özetidir. Devam ederek, GNU Genel 
-    Kamu Lisansı\'nı kabul etmiş olursunuz, yukarıdakileri değil. Yukarıdakiler sadece GNU 
-    Genel Kamu Lisansı\'nın bir özetidir ve bunun doğruluğu garanti edilemez. Devam 
+    <p>Yukarıdakiler GNU Genel Kamu Lisansı\'nın bir özetidir. Devam ederek, GNU Genel
+    Kamu Lisansı\'nı kabul etmiş olursunuz, yukarıdakileri değil. Yukarıdakiler sadece GNU
+    Genel Kamu Lisansı\'nın bir özetidir ve bunun doğruluğu garanti edilemez. Devam
     etmeden önce <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU
 Genel Kamu
     Lisansı</a> \'nın tamamını okumanız ve bu paketle birlikte dağıtılan lisans dosyasında da bulundurmanız
@@ -235,7 +235,7 @@ $_lang['version'] = 'sürüm';
 $_lang['warning'] = 'Uyarı';
 $_lang['welcome'] = 'MODX kurulum programına hoş geldiniz.';
 $_lang['welcome_message'] = '<p>Bu program kurulumun kalanı boyunca size rehberlik edecek.</p>
-	<p>Lütfen devam etmek için \'İleri\' düğmesini seçin:</p>
+    <p>Lütfen devam etmek için \'İleri\' düğmesini seçin:</p>
 ';
 $_lang['workspace_err_nf'] = 'Etkin çalışma alanı bulunamadı.';
 $_lang['workspace_err_path'] = 'Etkin çalışma alanı yolunu ayarlama hatası.';

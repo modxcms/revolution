@@ -1,10 +1,10 @@
 <?php
 /**
- * Upgrade script for adding icon field to content types.
- *
- * @var modX
- * @package setup
- */
+* Upgrade script for adding icon field to content types.
+*
+* @var modX
+* @package setup
+*/
 
 use MODX\Revolution\modContentType;
 

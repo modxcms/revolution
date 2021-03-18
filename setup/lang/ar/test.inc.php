@@ -1,10 +1,10 @@
 <?php
 /**
- * Test-related English Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* Test-related English Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['test_config_file'] = 'التحقق من أن <span class="mono">[[+file]]</span> موجود وقابل للكتابة: ';
 $_lang['test_config_file_nw'] = 'من أجل تثبيت Linux/Unix، الرجاء إنشاء ملف فارغ باسم<span class="mono">[[+key]].inc.php</span>
 في دليل أساس مودكس الخاص بك<span class="mono">config/</span>  مع ضبط الصلاحيات على PHP قابل للقراءة.';

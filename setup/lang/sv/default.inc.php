@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Tillägg';
 $_lang['advanced_options'] = 'Avancerade inställningar';
@@ -103,8 +103,8 @@ $_lang['license'] = '<p class="title">MODX Licensavtal</p>
     <hr style="text-align:left;height:1px;width:100%;" />
     <h4>Du måste godkänna licensen innan installationen kan fortsätta.</h4>
     <p>Användning av den här mjukvaran lyder under GPL-licensen. För att hjälpa dig förstå
-       vad GPL-licensen är och hur den påverkar dina möjligheter att använda mjukvaran, så
-       har vi gjort följande sammanfattning.</p>
+        vad GPL-licensen är och hur den påverkar dina möjligheter att använda mjukvaran, så
+        har vi gjort följande sammanfattning.</p>
     <h4>GNU General Public License (GPL) är en licens för Fri Mjukvara.</h4>
     <p>Som alla licenser för Fri Mjukvara ger den dig följande fyra friheter:</p>
     <ul>
@@ -115,7 +115,7 @@ $_lang['license'] = '<p class="title">MODX Licensavtal</p>
             allmänheten, så att hela gemenskapen kan dra nytta av dom.</li>
     </ul>
     <p>Du kan åtnjuta de ovan specificerade friheterna förutsatt att du följer
-       de uttryckliga krav som licensen uttalar. De huvudsakliga kraven är:</p>
+        de uttryckliga krav som licensen uttalar. De huvudsakliga kraven är:</p>
     <ul>
         <li>Du måste på varje kopia du distribuerar, tydligt och på lämpligt sätt
             publicera ett tillämpligt meddelande om copyright och en garantifriskrivning,
@@ -138,12 +138,12 @@ $_lang['license'] = '<p class="title">MODX Licensavtal</p>
         <li>Din rätt att citera samt andra rättigheter påverkas inte av ovanstående.</li>
     </ul>
     <p>Ovanstående är en sammanfattning av GNU GPL-licensen. Genom att fortsätta godkänner du
-       GNU GPL-licensen - inte ovanstående. Ovanstående är en enkel sammanfattning och dess korrekthet
-       kan inte garanteras. En stark rekommendation är att du läser den fullständiga <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU GPL-licensen</a> innan du
-       fortsätter. Den återfinns också i filen license.txt som distribueras tillsammans med det här
-       programmet.<br />
-       Det finns en <a href="http://danielnylander.se/gpl/" target="_blank">inofficiell svensk
-       översättning</a>.</p>';
+        GNU GPL-licensen - inte ovanstående. Ovanstående är en enkel sammanfattning och dess korrekthet
+        kan inte garanteras. En stark rekommendation är att du läser den fullständiga <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU GPL-licensen</a> innan du
+        fortsätter. Den återfinns också i filen license.txt som distribueras tillsammans med det här
+        programmet.<br />
+        Det finns en <a href="http://danielnylander.se/gpl/" target="_blank">inofficiell svensk
+        översättning</a>.</p>';
 $_lang['license_agree'] = 'Jag godkänner villkoren i denna licens.';
 $_lang['license_agreement'] = 'Licensavtal';
 $_lang['license_agreement_error'] = 'Du måste godkänna licensen innan installationen kan fortsätta.';

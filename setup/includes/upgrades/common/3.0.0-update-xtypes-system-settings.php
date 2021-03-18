@@ -1,7 +1,7 @@
 <?php
 /**
- * Update the xtype's for system settings
- */
+* Update the xtype's for system settings
+*/
 
 use MODX\Revolution\modSystemSetting;
 

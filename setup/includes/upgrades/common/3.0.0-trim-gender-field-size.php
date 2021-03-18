@@ -1,11 +1,11 @@
 <?php
 /**
- * Changes type of gender field to `tinyint` instead of `int` as this field shouldn't contain a lot of information.
- *
- * @var modX $modx
- * @package setup
- * @subpackage upgrades
- */
+* Changes type of gender field to `tinyint` instead of `int` as this field shouldn't contain a lot of information.
+*
+* @var modX $modx
+* @package setup
+* @subpackage upgrades
+*/
 
 use MODX\Revolution\modUserProfile;
 

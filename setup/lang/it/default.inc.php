@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Estensioni';
 $_lang['advanced_options'] = 'Opzioni Avanzate';
@@ -99,23 +99,23 @@ $_lang['install_success'] = 'Installazione Core terminata con successo. Clicca s
 $_lang['install_summary'] = 'Resoconto Installazione';
 $_lang['install_update'] = 'Installa/Aggiorna';
 $_lang['installation_finished'] = 'Installazione completata in [[+time]]';
-$_lang['license'] = '<p class="title"> E\' necessario accettare la licenza prima di continuare l\'installazione.</p>     <p>L\'utilizzo di questo software è soggetto a licenza GPL. Per aiutarvi a capire che cosa sia la licenza GPL e come essa influisce sulle possibilità di utilizzare il software, abbiamo fornito il seguente Sommario:</p> <h4>The GNU General Public License è una licenza per Software libero.</h4>     
-<p>Come qualsiasi licenza per Software libero, concede all\'utente le seguenti quattro libertà:</p>     
+$_lang['license'] = '<p class="title"> E\' necessario accettare la licenza prima di continuare l\'installazione.</p>     <p>L\'utilizzo di questo software è soggetto a licenza GPL. Per aiutarvi a capire che cosa sia la licenza GPL e come essa influisce sulle possibilità di utilizzare il software, abbiamo fornito il seguente Sommario:</p> <h4>The GNU General Public License è una licenza per Software libero.</h4>
+<p>Come qualsiasi licenza per Software libero, concede all\'utente le seguenti quattro libertà:</p>
 <ul>
-<li>La libertà di eseguire il programma per qualsiasi scopo.</li>         
-<li>La libertà di studiare come funziona il programma e adattarlo alle vostre esigenze.</li>         
-<li>La libertà di ridistribuire copie in modo da aiutare il prossimo.</li>         
-<li>La libertà di migliorare il programma e rilasciare i tuoi miglioramenti al pubblico, così che i benefici siano per tutta la Comunità.</li>     
-</ul> 
-<p>Si possono esercitare le libertà specificate qui, purché ci si attenga alle condizioni espresse in questa licenza. Le condizioni principali sono:</p> 
+<li>La libertà di eseguire il programma per qualsiasi scopo.</li>
+<li>La libertà di studiare come funziona il programma e adattarlo alle vostre esigenze.</li>
+<li>La libertà di ridistribuire copie in modo da aiutare il prossimo.</li>
+<li>La libertà di migliorare il programma e rilasciare i tuoi miglioramenti al pubblico, così che i benefici siano per tutta la Comunità.</li>
+</ul>
+<p>Si possono esercitare le libertà specificate qui, purché ci si attenga alle condizioni espresse in questa licenza. Le condizioni principali sono:</p>
 <ul>
-<li>dovete vistosamente e in modo appropriato pubblicare su ogni copia distribuita un\'appropriata nota di copyright e l\'esclusione di garanzia e mantenere intatte tutti gli avvisi che si riferiscono alla presente licenza e all\'assenza di qualsiasi garanzia; e dare a qualsiasi altro destinatario del programma una copia della GNU General Public License insieme al programma. Qualsiasi traduzione della GNU General Public License deve essere accompagnarta dalla GNU General Public License.</li>          
-<li>Se modifichi la tua copia o copie del programma, o parte di esso, o sviluppi un programma basato su esso, si può distribuire l\'opera risultante a condizione di farlo sotto la GNU General Public License. Qualsiasi traduzione della GNU General Public License deve essere accompagnata dalla GNU General Public License. </li> 
-<li>Se copiate o distribuite il programma, dovete accompagnarlo con il corrispondente codice sorgente leggibile completo o con un\'offerta scritta, valida per almeno tre anni, di fornire il corrispondente codice sorgente leggibile e completo.</li>          
-<li>Qualsiasi di queste condizioni può essere revocata se si ottiene l\'autorizzazione del titolare del copyright.</li>          
-<li>L\'utilizzo equo e gli altri diritti non sono in alcun modo modificati da quanto sopra.</li>     
-</ul> 
-<p>Questo è un riassunto della GNU General Public License. Procedendo, accetti la licenza pubblica GNU General, non quanto sopra. Quanto sopra è semplicemente un riassunto della licenza GNU General Public, e la sua precisione non è garantita. Si raccomanda vivamente di leggere la <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> GNU General Public License</a> nella versione integrale prima di procedere, la quale può anche essere trovata nel file di licenza distribuito con questo pacchetto.</p> 
+<li>dovete vistosamente e in modo appropriato pubblicare su ogni copia distribuita un\'appropriata nota di copyright e l\'esclusione di garanzia e mantenere intatte tutti gli avvisi che si riferiscono alla presente licenza e all\'assenza di qualsiasi garanzia; e dare a qualsiasi altro destinatario del programma una copia della GNU General Public License insieme al programma. Qualsiasi traduzione della GNU General Public License deve essere accompagnarta dalla GNU General Public License.</li>
+<li>Se modifichi la tua copia o copie del programma, o parte di esso, o sviluppi un programma basato su esso, si può distribuire l\'opera risultante a condizione di farlo sotto la GNU General Public License. Qualsiasi traduzione della GNU General Public License deve essere accompagnata dalla GNU General Public License. </li>
+<li>Se copiate o distribuite il programma, dovete accompagnarlo con il corrispondente codice sorgente leggibile completo o con un\'offerta scritta, valida per almeno tre anni, di fornire il corrispondente codice sorgente leggibile e completo.</li>
+<li>Qualsiasi di queste condizioni può essere revocata se si ottiene l\'autorizzazione del titolare del copyright.</li>
+<li>L\'utilizzo equo e gli altri diritti non sono in alcun modo modificati da quanto sopra.</li>
+</ul>
+<p>Questo è un riassunto della GNU General Public License. Procedendo, accetti la licenza pubblica GNU General, non quanto sopra. Quanto sopra è semplicemente un riassunto della licenza GNU General Public, e la sua precisione non è garantita. Si raccomanda vivamente di leggere la <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;"> GNU General Public License</a> nella versione integrale prima di procedere, la quale può anche essere trovata nel file di licenza distribuito con questo pacchetto.</p>
 ';
 $_lang['license_agree'] = 'Accetto i termini di questa licenza (I agree to the terms set out in this license).';
 $_lang['license_agreement'] = 'Contratto Licenza';
@@ -207,7 +207,7 @@ $_lang['version'] = 'versione';
 $_lang['warning'] = 'avviso';
 $_lang['welcome'] = 'Benvenuto nel programma di installazione di MODx.';
 $_lang['welcome_message'] = '<p>Questo programma ti guiderà attraverso i passaggi dell\'installazione.</p>
-	<p>Premi `Avanti` per continuare:</p>
+    <p>Premi `Avanti` per continuare:</p>
 ';
 $_lang['workspace_err_nf'] = 'Impossibile trovare lo workspace attivo.';
 $_lang['workspace_err_path'] = 'Errore durante l\'impostazione del percorso dello workspace attivo.';

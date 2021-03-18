@@ -1,10 +1,10 @@
 <?php
 /**
- * English Drivers Lexicon Topic for Revolution setup
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Drivers Lexicon Topic for Revolution setup
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['mysql_err_ext'] = 'MODX memerlukan ekstensi mysql untuk PHP dan tidak muncul dimuat.';
 $_lang['mysql_err_pdo'] = 'MODx membutuhkan driver pdo_mysql ketika asli PDO sedang digunakan dan tidak muncul untuk dimuat.';
 $_lang['mysql_version_5051'] = 'MODX akan punya masalah pada MySQL versi ([[+version]]) Anda, karena banyak bug yang berkaitan dengan driver PDO pada versi ini. Silakan upgrade MySQL untuk menambal masalah ini. Bahkan jika Anda memilih untuk tidak menggunakan MODX, dianjurkan Anda meng-upgrade ke versi ini untuk keamanan dan stabilitas dari situs Anda sendiri.';

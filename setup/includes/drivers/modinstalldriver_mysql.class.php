@@ -1,43 +1,43 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 require_once (strtr(realpath(dirname(__FILE__)), '\\', '/') . '/modinstalldriver.class.php');
 /**
- * Provides query abstraction for setup using the MySQL database
- *
- * @package setup
- * @subpackage drivers
- */
+* Provides query abstraction for setup using the MySQL database
+*
+* @package setup
+* @subpackage drivers
+*/
 
 use xPDO\xPDO;
 
 class modInstallDriver_mysql extends modInstallDriver {
     /**
-     * MySQL only needs PDO extension
-     * {@inheritDoc}
-     */
+    * MySQL only needs PDO extension
+    * {@inheritDoc}
+    */
     public function verifyExtension() {
         return true;
     }
 
     /**
-     * MySQL check for mysql_pdo extension
-     * {@inheritDoc}
-     */
+    * MySQL check for mysql_pdo extension
+    * {@inheritDoc}
+    */
     public function verifyPDOExtension() {
         return extension_loaded('pdo_mysql');
     }
 
     /**
-     * MySQL process for getting the default collation
-     * {@inheritDoc}
-     */
+    * MySQL process for getting the default collation
+    * {@inheritDoc}
+    */
     public function getCollation() {
         $collation = 'utf8_bin';
         $stmt = $this->xpdo->query("SHOW SESSION VARIABLES LIKE 'collation_database'");
@@ -50,9 +50,9 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * MySQL collation listing
-     * {@inheritDoc}
-     */
+    * MySQL collation listing
+    * {@inheritDoc}
+    */
     public function getCollations($collation = '') {
         $collations = null;
         $stmt = $this->xpdo->query("SHOW COLLATION");
@@ -72,9 +72,9 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * Get the MySQL charset based on collation, or default.
-     * {@inheritDoc}
-     */
+    * Get the MySQL charset based on collation, or default.
+    * {@inheritDoc}
+    */
     public function getCharset($collation = '') {
         $charset = 'utf8';
         if (empty($collation)) {
@@ -88,9 +88,9 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * Get charset listing for MySQL.
-     * {@inheritDoc}
-     */
+    * Get charset listing for MySQL.
+    * {@inheritDoc}
+    */
     public function getCharsets($charset = '') {
         $charsets = null;
         $stmt = $this->xpdo->query('SHOW CHARSET');
@@ -110,25 +110,25 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * MySQL syntax for table prefix check
-     * {@inheritDoc}
-     */
+    * MySQL syntax for table prefix check
+    * {@inheritDoc}
+    */
     public function testTablePrefix($database,$prefix) {
         return 'SELECT COUNT('.$this->xpdo->escape('id').') AS '.$this->xpdo->escape('ct').' FROM '.$this->xpdo->escape($database).'.'.$this->xpdo->escape($prefix.'site_content');
     }
 
     /**
-     * MySQL syntax for table truncation
-     * {@inheritDoc}
-     */
+    * MySQL syntax for table truncation
+    * {@inheritDoc}
+    */
     public function truncate($table) {
         return 'TRUNCATE '.$this->xpdo->escape($table);
     }
 
     /**
-     * MySQL check for server version
-     * {@inheritDoc}
-     */
+    * MySQL check for server version
+    * {@inheritDoc}
+    */
     public function verifyServerVersion() {
         $version = $this->getServerVersion();
         $isMariaDB = stripos($version, 'mariadb') !== false;
@@ -179,9 +179,9 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * MySQL check for client version
-     * {@inheritDoc}
-     */
+    * MySQL check for client version
+    * {@inheritDoc}
+    */
     public function verifyClientVersion() {
         $mysqlVersion = $this->xpdo->getAttribute(PDO::ATTR_CLIENT_VERSION);
         $mysqlVersion = $this->_sanitizeVersion($mysqlVersion);
@@ -204,17 +204,17 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * MySQL syntax to add an index
-     * {@inheritDoc}
-     */
+    * MySQL syntax to add an index
+    * {@inheritDoc}
+    */
     public function addIndex($table,$name,$column) {
         return 'ALTER TABLE '.$this->xpdo->escape($table).' ADD INDEX '.$this->xpdo->escape($name).' ('.$this->xpdo->escape($column).')"';
     }
 
     /**
-     * MySQL syntax to drop an index
-     * {@inheritDoc}
-     */
+    * MySQL syntax to drop an index
+    * {@inheritDoc}
+    */
     public function dropIndex($table,$index) {
         return 'ALTER TABLE '.$this->xpdo->escape($table).' DROP INDEX '.$this->xpdo->escape($index);
     }
@@ -231,11 +231,11 @@ class modInstallDriver_mysql extends modInstallDriver {
     }
 
     /**
-     * Cleans a mysql version string that often has extra junk in certain distros
-     *
-     * @param string $mysqlVersion The version note to sanitize
-     * @return string The sanitized version
-     */
+    * Cleans a mysql version string that often has extra junk in certain distros
+    *
+    * @param string $mysqlVersion The version note to sanitize
+    * @return string The sanitized version
+    */
     protected function _sanitizeVersion($mysqlVersion) {
         $mysqlVersion = str_replace([
             'mysqlnd ',

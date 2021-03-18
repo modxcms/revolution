@@ -1,26 +1,26 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * modInstallVersion
- *
- * @package setup
+* modInstallVersion
+*
+* @package setup
 */
 
 use MODX\Revolution\modSystemSetting;
 
 /**
- * Handles version-specific upgrades for Revolution
- *
- * @package setup
- */
+* Handles version-specific upgrades for Revolution
+*
+* @package setup
+*/
 class modInstallVersion {
     public $results = [];
     public $version = '';
@@ -32,12 +32,12 @@ class modInstallVersion {
     }
 
     /**
-     * Creates tables for installation
-     *
-     * @access public
-     * @param string|array $class A class name or array of class names
-     * @return boolean True if successful
-     */
+    * Creates tables for installation
+    *
+    * @access public
+    * @param string|array $class A class name or array of class names
+    * @return boolean True if successful
+    */
     public function createTable($class) {
         if (is_array($class)) {
             $dbcreated = true;
@@ -59,11 +59,11 @@ class modInstallVersion {
     }
 
     /**
-     * Run the version-specific install scripts
-     *
-     * @access public
-     * @return array An array of results
-     */
+    * Run the version-specific install scripts
+    *
+    * @access public
+    * @return array An array of results
+    */
     public function install() {
         $this->results = [];
 
@@ -87,15 +87,15 @@ class modInstallVersion {
     }
 
     /**
-     * Process a SQL command
-     *
-     * @access public
-     * @param string $class The class being operated on.
-     * @param string $description The description of the operation.
-     * @param string|callable $callable A callable function or string representing a SQL command.
-     * @param array $params Optional parameters to be passed to a callable function.
-     * @return boolean True if successful
-     */
+    * Process a SQL command
+    *
+    * @access public
+    * @param string $class The class being operated on.
+    * @param string $description The description of the operation.
+    * @param string|callable $callable A callable function or string representing a SQL command.
+    * @param array $params Optional parameters to be passed to a callable function.
+    * @return boolean True if successful
+    */
     public function processResults($class,$description,$callable,array $params= []) {
         $result = false;
         if (is_callable($callable)) {
@@ -116,11 +116,11 @@ class modInstallVersion {
 
 
     /**
-     * Gets an array list of all applicable upgrade scripts
-     *
-     * @access private
-     * @return array An array of script filenames to load
-     */
+    * Gets an array list of all applicable upgrade scripts
+    *
+    * @access private
+    * @return array An array of script filenames to load
+    */
     private function _getUpgradeScripts() {
         $scripts = [];
         $path = dirname(__FILE__).'/upgrades/'.$this->install->settings->get('database_type','mysql').'/';
@@ -140,11 +140,11 @@ class modInstallVersion {
     }
 
     /**
-     * Grabs the version from the installation
-     *
-     * @access private
-     * @return string The full version of the MODX installation
-     */
+    * Grabs the version from the installation
+    *
+    * @access private
+    * @return string The full version of the MODX installation
+    */
     private function _getVersion() {
         $installVersion = '2.0.0-alpha-1';
         if ($settings_version = $this->install->xpdo->getObject(modSystemSetting::class, [

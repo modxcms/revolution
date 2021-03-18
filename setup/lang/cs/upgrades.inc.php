@@ -1,10 +1,10 @@
 <?php
 /**
- * English Upgrades Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Upgrades Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['add_column'] = 'Přidán nový sloupec `[[+column]]` do [[+table]].';
 $_lang['add_index'] = 'Přidáno nový index na `[[+index]]` v tabulce [[+table]].';
 $_lang['alter_column'] = 'Změněn sloupec `[[+column]]` v tabulce [[+table]].';

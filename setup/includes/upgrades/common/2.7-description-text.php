@@ -1,10 +1,10 @@
 <?php
 /**
- * Common upgrade script for 2.7 modResource
- *
- * @var modX $modx
- * @package setup
- */
+* Common upgrade script for 2.7 modResource
+*
+* @var modX $modx
+* @package setup
+*/
 
 /* modify modResource.description field */
 

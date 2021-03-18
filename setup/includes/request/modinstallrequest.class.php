@@ -1,33 +1,33 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
-
-/**
- * modInstallRequest
- *
- * @package setup
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
 */
 
 /**
- * The Installation Request handler.
- *
- * @package setup
- */
+* modInstallRequest
+*
+* @package setup
+*/
+
+/**
+* The Installation Request handler.
+*
+* @package setup
+*/
 
 error_reporting(E_ALL & ~E_NOTICE);
 @ ini_set('display_errors', 1);
 
 class modInstallRequest {
     /**
-     * @var modInstall $install A reference to the modInstall object.
-     * @access public
-     */
+    * @var modInstall $install A reference to the modInstall object.
+    * @access public
+    */
     public $install = null;
     /** @var modInstallParser|modInstallSmarty $parser */
     public $parser = null;
@@ -36,21 +36,21 @@ class modInstallRequest {
     public $configReader;
 
     /**
-     * Initializes the modInstallRequest object.
-     *
-     * @constructor
-     * @param modInstall &$installer A reference to the modInstall object.
-     */
+    * Initializes the modInstallRequest object.
+    *
+    * @constructor
+    * @param modInstall &$installer A reference to the modInstall object.
+    */
     function __construct(modInstall &$installer) {
         $this->install =& $installer;
         $this->loadParser();
     }
 
     /**
-     * Handles the request and loads the appropriate controller.
-     *
-     * @return string
-     */
+    * Handles the request and loads the appropriate controller.
+    *
+    * @return string
+    */
     public function handle() {
         $install =& $this->install;
         $install->loadSettings();
@@ -89,12 +89,12 @@ class modInstallRequest {
     }
 
     /**
-     * Get the existing or create a new configuration.
-     *
-     * @param integer $mode The install mode.
-     * @param array $config An array of config attributes.
-     * @return array A copy of the config attributes array.
-     */
+    * Get the existing or create a new configuration.
+    *
+    * @param integer $mode The install mode.
+    * @param array $config An array of config attributes.
+    * @return array A copy of the config attributes array.
+    */
     public function getConfig($mode = 0, array $config = []) {
         switch ($mode) {
             case modInstall::MODE_UPGRADE_EVO :
@@ -120,10 +120,10 @@ class modInstallRequest {
     }
 
     /**
-     * Ensure default paths are set for the server on new installations
-     * @param array $config
-     * @return array
-     */
+    * Ensure default paths are set for the server on new installations
+    * @param array $config
+    * @return array
+    */
     public function setDefaultPaths(array $config = []) {
         $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
         $webUrl= rtrim($webUrl,'/').'/';
@@ -168,13 +168,13 @@ class modInstallRequest {
     }
 
     /**
-     * Get the database DSN from the passed parameters
-     * @param string $databaseType
-     * @param string $databaseServer
-     * @param string $database
-     * @param string $databaseConnectionCharset
-     * @return string
-     */
+    * Get the database DSN from the passed parameters
+    * @param string $databaseType
+    * @param string $databaseServer
+    * @param string $database
+    * @param string $databaseConnectionCharset
+    * @return string
+    */
     public function getDatabaseDSN($databaseType,$databaseServer,$database,$databaseConnectionCharset = '') {
         $dsn = '';
         switch ($databaseType) {
@@ -191,12 +191,12 @@ class modInstallRequest {
     }
 
     /**
-     * Loads the Config Reader
-     *
-     * @param string $class
-     * @param string $path The path to the parser
-     * @return boolean True if successful.
-     */
+    * Loads the Config Reader
+    *
+    * @param string $class
+    * @param string $path The path to the parser
+    * @return boolean True if successful.
+    */
     public function loadConfigReader($class = 'config.modRevolutionConfigReader',$path = '') {
         $loaded = false;
         $className = $this->install->loadClass($class,$path);
@@ -208,12 +208,12 @@ class modInstallRequest {
     }
 
     /**
-     * Loads the Smarty parser
-     *
-     * @param string $class
-     * @param string $path The path to the parser
-     * @return boolean True if successful.
-     */
+    * Loads the Smarty parser
+    *
+    * @param string $class
+    * @param string $path The path to the parser
+    * @return boolean True if successful.
+    */
     public function loadParser($class = 'parser.modInstallSmarty',$path = '') {
         $loaded = false;
         $className = $this->install->loadClass($class,$path);

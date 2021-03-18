@@ -1,7 +1,7 @@
 <?php
 /**
- * Update the URL base_help_url
- */
+* Update the URL base_help_url
+*/
 use MODX\Revolution\modSystemSetting;
 
 /** @var modSystemSetting $base_help_url */

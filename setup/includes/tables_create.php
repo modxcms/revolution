@@ -1,22 +1,22 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * Create a new MODX Revolution repository.
- *
- * @var \xPDO\xPDO $modx
- * @var modInstall $install
- * @var modInstallRunner $this
- *
- * @package setup
- */
+* Create a new MODX Revolution repository.
+*
+* @var \xPDO\xPDO $modx
+* @var modInstall $install
+* @var modInstallRunner $this
+*
+* @package setup
+*/
 
 $results= [];
 $classes= [

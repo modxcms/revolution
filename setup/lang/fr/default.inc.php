@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Extensions';
 $_lang['advanced_options'] = 'Options avancées';
@@ -100,26 +100,26 @@ $_lang['install_summary'] = 'Résumé de l\'installation';
 $_lang['install_update'] = 'Installer/Mettre à Jour';
 $_lang['installation_finished'] = 'Installation effectuée en [[+time]]';
 $_lang['license'] = '<p class="title">Vous devez accepter la Licence avant de poursuivre l\'installation.</p>
-	<p>L\'utilisation de ce logiciel est soumis à la licence GPL. Pour vous aider à comprendre ce qu\'est
-	la licence GPL et comment elle influe sur vos possibilités d\'utilisation du logiciel, nous vous
-	fournissons le résumé suivant:</p>
-	<h4>La Licence Publique Générale GNU est une licence pour logiciel libre.</h4>
-	<p>Comme toute licence pour logiciel libre, elle vous octroie les libertés suivantes:</p>
-	<ul>
+    <p>L\'utilisation de ce logiciel est soumis à la licence GPL. Pour vous aider à comprendre ce qu\'est
+    la licence GPL et comment elle influe sur vos possibilités d\'utilisation du logiciel, nous vous
+    fournissons le résumé suivant:</p>
+    <h4>La Licence Publique Générale GNU est une licence pour logiciel libre.</h4>
+    <p>Comme toute licence pour logiciel libre, elle vous octroie les libertés suivantes:</p>
+    <ul>
         <li>La liberté d\'utiliser le programme pour tout but. </li>
         <li>La liberté d\'étudier le fonctionnement du programme et de l\'adapter à vos besoins. </li>
         <li>La liberté de redistribuer des copies afin d\'aider votre prochain. </li>
         <li>La liberté d\'améliorer le programme et de publier ces améliorations publiquement
         afin d\'en faire profiter la communauté entière. </li>
-	</ul>
-	<p>Vous pouvez user de ces libertés à condition de vous conformer avec les conditions exprimées dans
-	cette license. Les conditions principales sont:</p>
-	<ul>
+    </ul>
+    <p>Vous pouvez user de ces libertés à condition de vous conformer avec les conditions exprimées dans
+    cette license. Les conditions principales sont:</p>
+    <ul>
         <li>Vous devez publier une notice de copyright de façon visible et appropriée sur chaque
         copie distribuée ainsi que les mentions légales et la garantie de garder intactes les
-		indications qui renvoient à cette licence ainsi qu\'à l\'absence de toute garantie; vous
-		devez également fournir une copie de la Licence Publique Générale GNU à chaque destinataire
-		du programme. Chaque traduction de la Licence Publique Générale GNU doit être accompagnée
+        indications qui renvoient à cette licence ainsi qu\'à l\'absence de toute garantie; vous
+        devez également fournir une copie de la Licence Publique Générale GNU à chaque destinataire
+        du programme. Chaque traduction de la Licence Publique Générale GNU doit être accompagnée
         par la Licence Publique Générale GNU.</li>
 
         <li>Si vous modifiez votre copie ou vos copies du programme, ou une portion
@@ -139,15 +139,15 @@ $_lang['license'] = '<p class="title">Vous devez accepter la Licence avant de po
         <li>Votre utilisation respectable ainsi que tout autre droit ne sont en
         aucun cas affectés par les éléments ci-dessus.</li>
     </ul>
-	<p>Ci-dessus se trouve un résumé de la Licence Publique Générale GNU. En
-	continuant vous acceptez implicitement la Licence Publique Générale GNU et pas
-	uniquement le résumé ci-dessus qui peut être approximatif et non garantie.
-	Il est fortement conseillé de lire <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-	License</a> en entier avant de continuer, qui peut également être trouvée dans
-	le fichier de licence distribué avec ce programme.
-	À titre d\'information, vous pouvez trouver une traduction française
-	non officielle qui vous permettra de comprendre la Licence Publique Générale mais
-	n\'a aucune valeur juridique <a href="http://www.april.org/files/groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html?q=groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">ici</a>.</p>
+    <p>Ci-dessus se trouve un résumé de la Licence Publique Générale GNU. En
+    continuant vous acceptez implicitement la Licence Publique Générale GNU et pas
+    uniquement le résumé ci-dessus qui peut être approximatif et non garantie.
+    Il est fortement conseillé de lire <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
+    License</a> en entier avant de continuer, qui peut également être trouvée dans
+    le fichier de licence distribué avec ce programme.
+    À titre d\'information, vous pouvez trouver une traduction française
+    non officielle qui vous permettra de comprendre la Licence Publique Générale mais
+    n\'a aucune valeur juridique <a href="http://www.april.org/files/groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html?q=groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">ici</a>.</p>
 ';
 $_lang['license_agree'] = 'J\'accepte les termes et conditions de la licence.';
 $_lang['license_agreement'] = 'Accord de Licence';

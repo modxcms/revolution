@@ -1,24 +1,24 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/request/modinstallrequest.class.php'),'\\','/');
 /**
- * modInstallConnector
- *
- * @package setup
+* modInstallConnector
+*
+* @package setup
 */
 
 /**
- * Handles all connector requests to processors.
- *
- * @package setup
- */
+* Handles all connector requests to processors.
+*
+* @package setup
+*/
 class modInstallConnectorRequest extends modInstallRequest {
     /** @var modInstall $install */
     public $install;
@@ -27,24 +27,24 @@ class modInstallConnectorRequest extends modInstallRequest {
     public $action = '';
 
     /**
-     * Constructor for modInstallConnector object.
-     *
-     * @constructor
-     * @param modInstall &$modInstall A reference to the modInstall object.
-     */
+    * Constructor for modInstallConnector object.
+    *
+    * @constructor
+    * @param modInstall &$modInstall A reference to the modInstall object.
+    */
     function __construct(modInstall &$modInstall) {
         $this->install =& $modInstall;
         $this->loadError();
     }
 
     /**
-     * Loads error processing tool
-     *
-     * @param string $class
-     * @param string $path
-     * @param array $config
-     * @return modInstallError
-     */
+    * Loads error processing tool
+    *
+    * @param string $class
+    * @param string $path
+    * @param array $config
+    * @return modInstallError
+    */
     public function loadError($class = 'error.modInstallJSONError',$path = '',array $config = []) {
         $className = $this->install->loadClass($class,$path);
         if (!empty($className)) {
@@ -56,10 +56,10 @@ class modInstallConnectorRequest extends modInstallRequest {
     }
 
     /**
-     * Handles connector requests.
-     *
-     * @param string $action
-     */
+    * Handles connector requests.
+    *
+    * @param string $action
+    */
     public function handle($action = '') {
         if ($this->install->isLocked()) {
             $this->error->failure('MODX setup is locked!');

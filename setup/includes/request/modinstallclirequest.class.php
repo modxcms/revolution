@@ -1,27 +1,27 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 require_once strtr(realpath(MODX_SETUP_PATH.'includes/request/modinstallrequest.class.php'),'\\','/');
 
 use xPDO\xPDO;
 
 /**
- * modInstallCLIRequest
- *
- * @package setup
+* modInstallCLIRequest
+*
+* @package setup
 */
 
 /**
- * Handles CLI installs.
- *
- * @package setup
- */
+* Handles CLI installs.
+*
+* @package setup
+*/
 class modInstallCLIRequest extends modInstallRequest {
     /** @var modInstall $install */
     public $install;
@@ -31,21 +31,21 @@ class modInstallCLIRequest extends modInstallRequest {
     public $timeTotal = '';
 
     /**
-     * Constructor for modInstallConnector object.
-     *
-     * @constructor
-     * @param modInstall &$modInstall A reference to the modInstall object.
-     */
+    * Constructor for modInstallConnector object.
+    *
+    * @constructor
+    * @param modInstall &$modInstall A reference to the modInstall object.
+    */
     function __construct(modInstall &$modInstall) {
         $this->install =& $modInstall;
         $this->install->loadSettings();
     }
 
     /**
-     * Parse the install mode from a string or int
-     * @param string|int $mode
-     * @return int
-     */
+    * Parse the install mode from a string or int
+    * @param string|int $mode
+    * @return int
+    */
     public function getInstallMode($mode) {
         if (!is_int($mode)) {
             switch ($mode) {
@@ -70,10 +70,10 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * Handles connector requests.
-     *
-     * @param string $action
-     */
+    * Handles connector requests.
+    *
+    * @param string $action
+    */
     public function handle($action = '') {
         $this->beginTimer();
         /* prepare the settings */
@@ -160,11 +160,11 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * {@inheritDoc}
-     * @param int $mode
-     * @param array $config
-     * @return array
-     */
+    * {@inheritDoc}
+    * @param int $mode
+    * @param array $config
+    * @return array
+    */
     public function getConfig($mode = 0, array $config = []) {
         /* load the config file */
         $config = array_merge($this->loadConfigFile(), $config);
@@ -174,11 +174,11 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * Attempt to load the config.xml (or other config file) to use when installing. One must be present to run
-     * MODX Setup in CLI mode.
-     *
-     * @return array
-     */
+    * Attempt to load the config.xml (or other config file) to use when installing. One must be present to run
+    * MODX Setup in CLI mode.
+    *
+    * @return array
+    */
     public function loadConfigFile() {
         $settings = [];
         $configFile = $this->install->settings->get('config');
@@ -197,11 +197,11 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * Prepares settings for installation, including setting of defaults
-     *
-     * @param array $settings
-     * @return void
-     */
+    * Prepares settings for installation, including setting of defaults
+    *
+    * @param array $settings
+    * @return void
+    */
     public function prepareSettings(array &$settings) {
         if (empty($settings['site_sessionname'])) {
             $settings['site_sessionname'] = 'SN' . uniqid('');
@@ -230,11 +230,11 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * Sets a default for a setting if not set
-     * @param string $key
-     * @param mixed $default
-     * @return void
-     */
+    * Sets a default for a setting if not set
+    * @param string $key
+    * @param mixed $default
+    * @return void
+    */
     public function setDefaultSetting($key,$default) {
         $value = $this->install->settings->get($key,null);
         if ($value === null) {
@@ -243,11 +243,11 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * Parse the config XML file
-     *
-     * @param string $file
-     * @return array
-     */
+    * Parse the config XML file
+    *
+    * @param string $file
+    * @return array
+    */
     public function parseConfigFile($file) {
         $contents = file_get_contents($file);
         $xml = new SimpleXMLElement($contents);
@@ -261,9 +261,9 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * Check database settings
-     * @return void
-     */
+    * Check database settings
+    * @return void
+    */
     public function checkDatabase() {
         $mode = $this->install->settings->get('installmode');
         if ($mode == modInstall::MODE_NEW) {
@@ -336,20 +336,20 @@ class modInstallCLIRequest extends modInstallRequest {
     }
 
     /**
-     * End the PHP session and output a message
-     *
-     * @param string $message
-     * @return void
-     */
+    * End the PHP session and output a message
+    *
+    * @param string $message
+    * @return void
+    */
     public function end($message = '') {
         @session_write_close();
         die($message."\n");
     }
 
     /**
-     * Start the debugging timer
-     * @return int
-     */
+    * Start the debugging timer
+    * @return int
+    */
     protected function beginTimer() {
         $mtime = microtime();
         $mtime = explode(" ", $mtime);
@@ -358,9 +358,9 @@ class modInstallCLIRequest extends modInstallRequest {
         return $this->timeStart;
     }
     /**
-     * End the debugging timer
-     * @return string
-     */
+    * End the debugging timer
+    * @return string
+    */
     protected function endTimer() {
         $mtime = microtime();
         $mtime = explode(" ", $mtime);

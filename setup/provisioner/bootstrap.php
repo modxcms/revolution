@@ -1,12 +1,12 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 define('MODX_SETUP_INTERFACE_IS_CLI', (PHP_SAPI === 'cli'));
 
@@ -33,8 +33,8 @@ if (!MODX_SETUP_INTERFACE_IS_CLI) {
 }
 
 /*
- * Start validating MODX requirements
- */
+* Start validating MODX requirements
+*/
 $unsatisfiedRequirementsErrors = [];
 
 /* Load and check PHP and installed extensions */
@@ -110,8 +110,8 @@ if (!empty($unsatisfiedRequirementsErrors)) {
     exit();
 }
 /*
- * End validating MODX requirements
- */
+* End validating MODX requirements
+*/
 
 if (MODX_SETUP_INTERFACE_IS_CLI) {
     foreach ($argv as $idx => $argument) {

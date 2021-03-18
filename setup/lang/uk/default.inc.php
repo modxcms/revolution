@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Додатки';
 $_lang['advanced_options'] = 'Розширені опції';
@@ -234,7 +234,7 @@ $_lang['version'] = 'версія';
 $_lang['warning'] = 'Попередження';
 $_lang['welcome'] = 'Ласкаво просимо до програми встановлення MODX.';
 $_lang['welcome_message'] = '<p>Ця програма проведе Вас через весь процес встановлення.</p>
-	<p>Будь ласка, натисніть кнопку "Далі" для продовження:</p>
+    <p>Будь ласка, натисніть кнопку "Далі" для продовження:</p>
 ';
 $_lang['workspace_err_nf'] = 'Не вдалося знайти активний робочий простір.';
 $_lang['workspace_err_path'] = 'Помилка встановлення шляху активного робочого простору.';

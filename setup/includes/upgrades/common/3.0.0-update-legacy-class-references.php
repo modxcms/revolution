@@ -1,17 +1,16 @@
 <?php
 /*
- * This file is part of the MODX Revolution package.
- *
- * Copyright (c) MODX, LLC
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
+* This file is part of the MODX Revolution package.
+*
+* Copyright (c) MODX, LLC
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
 
 /**
- * @property modX $modx
- */
+* @property modX $modx
+*/
 
 use MODX\Revolution\Hashing\modMD5;
 use MODX\Revolution\Hashing\modNative;

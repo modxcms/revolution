@@ -1,10 +1,10 @@
 <?php
 /**
- * English Drivers Lexicon Topic for Revolution setup
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Drivers Lexicon Topic for Revolution setup
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['mysql_err_ext'] = 'MODX har brug for mysql udvidelsen til PHP og den lader ikke til at være indlæst.';
 $_lang['mysql_err_pdo'] = 'MODX requires the pdo_mysql driver when native PDO is being used and it does not appear to be loaded.';
 $_lang['mysql_version_5051'] = 'MODX vil have problemer på din MySQL version ([[+version]]), på grund af de mange fejl relateret til PDO driverne på denne version. Opgrader venligst MySQL for at rette disse problemer. Selv hvis du vælger ikke at bruge MODX, anbefales det, at du har opgraderet til denne version for sikkerheden og stabiliteten af din egen hjemmeside.';

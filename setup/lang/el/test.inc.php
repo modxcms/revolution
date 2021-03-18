@@ -1,10 +1,10 @@
 <?php
 /**
- * Test-related English Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* Test-related English Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['test_config_file'] = 'Checking if <span class="mono">[[+file]]</span> exists and is writable: ';
 $_lang['test_config_file_nw'] = 'Για εγκατάσταση σε περιβάλλον Linux/Unix, πρέπει να δημιουργήσετε ένα κενό αρχείο με όνομα <span class="mono">[[+key]].inc.php</span> στο φάκελο του MODX core <span class="mono">config/</span>. Αυτό το αρχείο πρέπει να έχει δικαιώματα εγγραφής από την PHP.';
 $_lang['test_db_check'] = 'Creating connection to the database: ';

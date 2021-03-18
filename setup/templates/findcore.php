@@ -1,17 +1,17 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * @package modx
- * @subpackage setup
- */
+* @package modx
+* @subpackage setup
+*/
 $posted = !empty($_POST) && isset($_POST['findcore']) && isset($_POST['core_path']);
 if ($posted) {
     $core_path = $_POST['core_path'];
@@ -70,7 +70,7 @@ if ($posted) {
 
 <div id="contentarea">
     <div class="container_16">
-       <!-- start content -->
+        <!-- start content -->
         <div id="content" class="grid_12">
             <h2>Your MODX_CORE_PATH is invalid</h2>
             <p>In order to install MODX Revolution, you must first locate your core directory that contains the files required to run MODX,

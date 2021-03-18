@@ -1,10 +1,10 @@
 <?php
 /**
- * Common upgrade script for modify upload_files, upload_images System Setting
- *
- * @var modX $modx
- * @package setup
- */
+* Common upgrade script for modify upload_files, upload_images System Setting
+*
+* @var modX $modx
+* @package setup
+*/
 
 use MODX\Revolution\modSystemSetting;
 

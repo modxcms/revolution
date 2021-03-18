@@ -4,7 +4,7 @@
 use MODX\Revolution\modSystemSetting;
 
 $defaultMediaSourceType = $modx->getObject(modSystemSetting::class, [
-  'key' => 'default_media_source_type'
+    'key' => 'default_media_source_type'
 ]);
 
 if ($defaultMediaSourceType) {

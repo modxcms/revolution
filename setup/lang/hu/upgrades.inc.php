@@ -1,10 +1,10 @@
 <?php
 /**
- * English Upgrades Lexicon Topic for Revolution setup.
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Upgrades Lexicon Topic for Revolution setup.
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['add_column'] = 'Új `[[+column]]` oszlop hozzáadva a [[+table]] táblához.';
 $_lang['add_index'] = 'Új `[[+index]]` index hozzáadva a [[+table]] táblához.';
 $_lang['alter_column'] = 'Módosított oszlop `[[+column]]` a [[+table]] táblában.';

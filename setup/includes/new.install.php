@@ -1,15 +1,15 @@
 <?php
 /**
- * New Install specific DB script
- *
- * @var modInstallRunner $this
- * @var modInstall $install
- * @var \xPDO\xPDO $modx
- * @var modInstallSettings $settings
- *
- * @package modx
- * @subpackage setup
- */
+* New Install specific DB script
+*
+* @var modInstallRunner $this
+* @var modInstall $install
+* @var \xPDO\xPDO $modx
+* @var modInstallSettings $settings
+*
+* @package modx
+* @subpackage setup
+*/
 
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
@@ -109,11 +109,11 @@ if ($loadOnly) {
     /** @var modAccessContext $access */
     $access= $modx->newObject(modAccessContext::class);
     $access->fromArray([
-      'target' => 'web',
-      'principal_class' => modUserGroup::class,
-      'principal' => 0,
-      'authority' => 9999,
-      'policy' => $loadOnly->get('id'),
+    'target' => 'web',
+    'principal_class' => modUserGroup::class,
+    'principal' => 0,
+    'authority' => 9999,
+    'policy' => $loadOnly->get('id'),
     ]);
     $access->save();
     unset($access);
@@ -135,22 +135,22 @@ if ($adminPolicy && $adminGroup) {
     /** @var modAccessContext $access */
     $access= $modx->newObject(modAccessContext::class);
     $access->fromArray([
-      'target' => 'mgr',
-      'principal_class' => modUserGroup::class,
-      'principal' => $adminGroup->get('id'),
-      'authority' => 0,
-      'policy' => $adminPolicy->get('id'),
+    'target' => 'mgr',
+    'principal_class' => modUserGroup::class,
+    'principal' => $adminGroup->get('id'),
+    'authority' => 0,
+    'policy' => $adminPolicy->get('id'),
     ]);
     $access->save();
     unset($access);
 
     $access= $modx->newObject(modAccessContext::class);
     $access->fromArray([
-      'target' => 'web',
-      'principal_class' => modUserGroup::class,
-      'principal' => $adminGroup->get('id'),
-      'authority' => 0,
-      'policy' => $adminPolicy->get('id'),
+    'target' => 'web',
+    'principal_class' => modUserGroup::class,
+    'principal' => $adminGroup->get('id'),
+    'authority' => 0,
+    'policy' => $adminPolicy->get('id'),
     ]);
     $access->save();
     unset($access);
@@ -206,7 +206,7 @@ if ($template->save()) {
 
     if ($resource->save()) {
 
-         /* site_start */
+        /* site_start */
         $setting = $modx->getObject(modSystemSetting::class, [
             'key' => 'site_start',
         ]);

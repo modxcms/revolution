@@ -1,18 +1,18 @@
 <?php
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
 
 /**
- * Handles AJAX requests
- *
- * @package setup
- */
+* Handles AJAX requests
+*
+* @package setup
+*/
 /* do a little bit of environment cleanup if possible */
 @ini_set('magic_quotes_runtime',0);
 @ini_set('magic_quotes_sybase',0);

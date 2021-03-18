@@ -1,9 +1,9 @@
 <?php
 /**
- * English language files for Revolution 2.0.0 setup
- *
- * @package setup
- */
+* English language files for Revolution 2.0.0 setup
+*
+* @package setup
+*/
 $_lang['additional_css'] = '';
 $_lang['addons'] = 'Добавки';
 $_lang['advanced_options'] = 'Разширени настройки';
@@ -214,7 +214,7 @@ $_lang['version'] = 'версия';
 $_lang['warning'] = 'Внимание';
 $_lang['welcome'] = 'Добре дошли в инсталационната програма на MODX.';
 $_lang['welcome_message'] = '<p>Тази програма ще ви напътства през останалата част от инсталацията.</p>
-	<p>Моля изберете бутона `Следващ` за да продължите:</p>
+    <p>Моля изберете бутона `Следващ` за да продължите:</p>
 ';
 $_lang['workspace_err_nf'] = 'Не може да намери активна работна област.';
 $_lang['workspace_err_path'] = 'Грешка при настройване пътя на активната работна област.';

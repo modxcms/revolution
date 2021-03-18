@@ -1,10 +1,10 @@
 <?php
 /**
- * English Drivers Lexicon Topic for Revolution setup
- *
- * @package setup
- * @subpackage lexicon
- */
+* English Drivers Lexicon Topic for Revolution setup
+*
+* @package setup
+* @subpackage lexicon
+*/
 $_lang['mysql_err_ext'] = 'A MODX megköveteli a PHP mysql kiterjesztését, és úgy tűnik, ez nincs betöltve.';
 $_lang['mysql_err_pdo'] = 'A MODX megköveteli a pdo_mysql vezérlőt, ha natív PDO van használatban, és úgy látszik, hogy ez nincs betöltve.';
 $_lang['mysql_version_5051'] = 'A MODX hibákat ad a betöltött MySQL verzión ([[+version]]) az ehhet tartozó PDO meghajtó számos hibája miatt. Frissítse a MySQL-t ezek megelőzésére. Még ha nem is a MODX használata mellett dönt, javasolt a frissítés a weboldala biztonsága és megbízható működése érdekében.';
