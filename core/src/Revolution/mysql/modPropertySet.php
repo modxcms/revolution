@@ -11,20 +11,20 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
         'version' => '3.0',
         'table' => 'property_set',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'category' => 0,
             'description' => '',
             'properties' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '50',
@@ -33,7 +33,7 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
                 'default' => '',
                 'index' => 'unique',
             ),
-            'category' => 
+            'category' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -42,7 +42,7 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
                 'default' => 0,
                 'index' => 'fk',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -50,24 +50,24 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
                 'null' => false,
                 'default' => '',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'array',
                 'null' => true,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -75,15 +75,15 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
                     ),
                 ),
             ),
-            'category' => 
+            'category' =>
             array (
                 'alias' => 'category',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'category' => 
+                    'category' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -92,9 +92,9 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Elements' => 
+            'Elements' =>
             array (
                 'class' => 'MODX\\Revolution\\modElementPropertySet',
                 'local' => 'id',
@@ -103,9 +103,9 @@ class modPropertySet extends \MODX\Revolution\modPropertySet
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Category' => 
+            'Category' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'key' => 'id',

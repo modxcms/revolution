@@ -59,10 +59,10 @@ abstract class Remove extends RemoveProcessor
     }
 
     /**
-     * Determine if static files should be automated for current element class.
-     *
-     * @return bool
-     */
+    * Determine if static files should be automated for current element class.
+    *
+    * @return bool
+    */
     protected function isStaticFilesAutomated()
     {
         $elements = [

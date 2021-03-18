@@ -31,8 +31,8 @@ use MODX\Revolution\Registry\modRegistry;
 class Console extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $register = $this->getProperty('register');
@@ -48,9 +48,9 @@ class Console extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * @return array|mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         $register = trim($this->getProperty('register'));

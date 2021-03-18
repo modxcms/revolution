@@ -40,16 +40,16 @@ use xPDO\Om\xPDOObject;
 class GetList extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('logs');
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -67,9 +67,9 @@ class GetList extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         $data = $this->getData();
@@ -87,9 +87,9 @@ class GetList extends Processor
     }
 
     /**
-     * Get a collection of modManagerLog objects
-     * @return array
-     */
+    * Get a collection of modManagerLog objects
+    * @return array
+    */
     public function getData()
     {
         $actionType = $this->getProperty('actionType');
@@ -150,12 +150,12 @@ class GetList extends Processor
     }
 
     /**
-     * Convert comma separated field into array and clean up
-     * @param string $string field to be processed
-     * @param string $delimiter the value to explode defaults to ','
-     * @param boolean $keepZero remove empty values from the array
-     * @return array
-     */
+    * Convert comma separated field into array and clean up
+    * @param string $string field to be processed
+    * @param string $delimiter the value to explode defaults to ','
+    * @param boolean $keepZero remove empty values from the array
+    * @return array
+    */
     public function explodeAndClean($string, $delimiter = ',', $keepZero = false)
     {
         $array = explode($delimiter, $string);            // Explode fields to array
@@ -174,10 +174,10 @@ class GetList extends Processor
     }
 
     /**
-     * Prepare a log entry for listing
-     * @param modManagerLog $log
-     * @return array
-     */
+    * Prepare a log entry for listing
+    * @param modManagerLog $log
+    * @return array
+    */
     public function prepareLog(modManagerLog $log)
     {
         $logArray = $log->toArray();
@@ -210,10 +210,10 @@ class GetList extends Processor
     }
 
     /**
-     * Get the name field of the class
-     * @param string $classKey
-     * @return string
-     */
+    * Get the name field of the class
+    * @param string $classKey
+    * @return string
+    */
     public function getNameField($classKey)
     {
         $field = 'name';

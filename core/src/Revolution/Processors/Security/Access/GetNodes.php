@@ -27,8 +27,8 @@ class GetNodes extends ModelProcessor
     public $defaultSortField = 'target';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         if (!$this->getProperty($this->primaryKeyField)) {
@@ -39,9 +39,9 @@ class GetNodes extends ModelProcessor
     }
 
     /**
-     * @return mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * @return mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         $targetAttr = explode('_', $this->getProperty($this->primaryKeyField));

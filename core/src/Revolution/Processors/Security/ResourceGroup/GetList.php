@@ -29,10 +29,10 @@ class GetList extends GetListProcessor
     public $permission = 'resourcegroup_view';
 
     /**
-     * Filter the query by the valueField of MODx.combo.ResourceGroup to get the initially value displayed right
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * Filter the query by the valueField of MODx.combo.ResourceGroup to get the initially value displayed right
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $key = $this->getProperty('id', '');

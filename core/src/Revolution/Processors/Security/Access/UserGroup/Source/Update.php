@@ -28,8 +28,8 @@ class Update extends UpdateProcessor
     public $objectType = 'source';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $policyId = $this->getProperty('policy');

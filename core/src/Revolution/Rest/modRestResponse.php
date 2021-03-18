@@ -25,12 +25,12 @@ use xPDO\xPDO;
 class modRestResponse
 {
     /**
-     * @var string The raw response.
-     */
+    * @var string The raw response.
+    */
     public $response;
     /**
-     * @var string The type of response format
-     */
+    * @var string The type of response format
+    */
     public $responseType = 'xml';
     /** @var SimpleXMLElement $xml */
     public $xml = null;
@@ -38,14 +38,14 @@ class modRestResponse
     public $json = null;
 
     /**
-     * The constructor for the modRestResponse class.
-     *
-     * @param modRestClient &$client       A reference to the modRestClient instance.
-     * @param string         $response     The response from the REST server.
-     * @param string         $responseType The type of response, either xml or json
-     *
-     * @return modRestResponse
-     */
+    * The constructor for the modRestResponse class.
+    *
+    * @param modRestClient &$client       A reference to the modRestClient instance.
+    * @param string         $response     The response from the REST server.
+    * @param string         $responseType The type of response, either xml or json
+    *
+    * @return modRestResponse
+    */
     function __construct(modRestClient &$client, $response, $responseType = 'xml')
     {
         $this->client =& $client;
@@ -59,11 +59,11 @@ class modRestResponse
     }
 
     /**
-     * Translates the current response object to a SimpleXMLElement instance
-     *
-     * @access public
-     * @return SimpleXMLElement
-     */
+    * Translates the current response object to a SimpleXMLElement instance
+    *
+    * @access public
+    * @return SimpleXMLElement
+    */
     public function toXml()
     {
         if (!empty($this->xml) && $this->xml instanceof SimpleXMLElement) {
@@ -87,11 +87,11 @@ class modRestResponse
     }
 
     /**
-     * Translates current response from JSON to an array
-     *
-     * @access public
-     * @return array
-     */
+    * Translates current response from JSON to an array
+    *
+    * @access public
+    * @return array
+    */
     public function fromJSON()
     {
         if (!empty($this->json)) {
@@ -104,11 +104,11 @@ class modRestResponse
     }
 
     /**
-     * Checks to see whether or not the response is an error response
-     *
-     * @access public
-     * @return boolean True if the response is an error
-     */
+    * Checks to see whether or not the response is an error response
+    *
+    * @access public
+    * @return boolean True if the response is an error
+    */
     public function isError()
     {
         if ($this->responseType == 'xml') {
@@ -125,11 +125,11 @@ class modRestResponse
     }
 
     /**
-     * Returns an error message, if any.
-     *
-     * @access public
-     * @return string The error message
-     */
+    * Returns an error message, if any.
+    *
+    * @access public
+    * @return string The error message
+    */
     public function getError()
     {
         $message = '';

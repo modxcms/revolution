@@ -34,8 +34,8 @@ abstract class Browser extends Processor
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return !empty($this->permission)
@@ -45,8 +45,8 @@ abstract class Browser extends Processor
 
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return $this->languageTopics;
@@ -54,8 +54,8 @@ abstract class Browser extends Processor
 
 
     /**
-     * @return bool|null|string
-     */
+    * @return bool|null|string
+    */
     public function initialize()
     {
         if (!$this->getSource()) {
@@ -70,10 +70,10 @@ abstract class Browser extends Processor
 
 
     /**
-     * Get the active Source
-     *
-     * @return modMediaSource|bool
-     */
+    * Get the active Source
+    *
+    * @return modMediaSource|bool
+    */
     public function getSource()
     {
         $source = $this->getProperty('source', 1);
@@ -90,10 +90,10 @@ abstract class Browser extends Processor
     }
 
     /**
-     * Get the list of protected directories
-     *
-     * @return array
-     */
+    * Get the list of protected directories
+    *
+    * @return array
+    */
     public function getProtectedPathDirectories()
     {
         $protectedDirectories = [
@@ -111,10 +111,10 @@ abstract class Browser extends Processor
 
 
     /**
-     * @param $response
-     *
-     * @return array|string
-     */
+    * @param $response
+    *
+    * @return array|string
+    */
     public function handleResponse($response)
     {
         if (empty($response)) {
@@ -135,10 +135,10 @@ abstract class Browser extends Processor
 
 
     /**
-     * @param $file
-     *
-     * @return string
-     */
+    * @param $file
+    *
+    * @return string
+    */
     public function sanitize($file)
     {
         $file = rawurldecode($file);

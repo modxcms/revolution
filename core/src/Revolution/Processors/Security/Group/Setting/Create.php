@@ -29,8 +29,8 @@ class Create extends \MODX\Revolution\Processors\System\Settings\Create
     public $languageTopics = ['setting', 'namespace', 'user'];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $group = (int)$this->getProperty('fk', $this->getProperty('group', 0));
@@ -43,9 +43,9 @@ class Create extends \MODX\Revolution\Processors\System\Settings\Create
     }
 
     /**
-     * Check to see if a Setting already exists with this key and user group
-     * @return boolean
-     */
+    * Check to see if a Setting already exists with this key and user group
+    * @return boolean
+    */
     public function alreadyExists()
     {
         return $this->doesAlreadyExist([

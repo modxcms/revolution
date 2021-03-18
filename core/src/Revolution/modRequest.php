@@ -30,33 +30,33 @@ use xPDO\xPDO;
 class modRequest
 {
     /**
-     * A reference to the modX object
-     *
-     * @var modX $modx
-     */
+    * A reference to the modX object
+    *
+    * @var modX $modx
+    */
     public $modx = null;
     /**
-     * The current request method
-     *
-     * @var string $method
-     */
+    * The current request method
+    *
+    * @var string $method
+    */
     public $method = null;
     /**
-     * The parameters sent in the request
-     *
-     * @var array $parameters
-     */
+    * The parameters sent in the request
+    *
+    * @var array $parameters
+    */
     public $parameters = null;
     /**
-     * The HTTP headers sent in the request
-     *
-     * @var array $headers
-     */
+    * The HTTP headers sent in the request
+    *
+    * @var array $headers
+    */
     public $headers = null;
 
     /**
-     * @param modX $modx A reference to the modX object
-     */
+    * @param modX $modx A reference to the modX object
+    */
     public function __construct(modX $modx)
     {
         $this->modx = &$modx;
@@ -67,8 +67,8 @@ class modRequest
     }
 
     /**
-     * The primary MODX request handler (a.k.a. controller).
-     */
+    * The primary MODX request handler (a.k.a. controller).
+    */
     public function handleRequest()
     {
         $this->loadErrorHandler();
@@ -139,10 +139,10 @@ class modRequest
     }
 
     /**
-     * Prepares the MODX response to a web request that is being handled.
-     *
-     * @param array $options An array of options
-     */
+    * Prepares the MODX response to a web request that is being handled.
+    *
+    * @param array $options An array of options
+    */
     public function prepareResponse(array $options = [])
     {
         $this->modx->beforeProcessing();
@@ -155,10 +155,10 @@ class modRequest
     }
 
     /**
-     * Gets the method used to request a resource.
-     *
-     * @return string 'alias', 'id', or an empty string.
-     */
+    * Gets the method used to request a resource.
+    *
+    * @return string 'alias', 'id', or an empty string.
+    */
     public function getResourceMethod()
     {
         $method = '';
@@ -178,16 +178,16 @@ class modRequest
     }
 
     /**
-     * Gets a requested resource and all required data.
-     *
-     * @param string         $method     The method, 'id', or 'alias', by which to perform
-     *                                   the resource lookup.
-     * @param string|integer $identifier The identifier with which to search.
-     * @param array          $options    An array of options for the resource fetching
-     *
-     * @return modResource The requested modResource instance or request
-     * is forwarded to the error page, or unauthorized page.
-     */
+    * Gets a requested resource and all required data.
+    *
+    * @param string         $method     The method, 'id', or 'alias', by which to perform
+    *                                   the resource lookup.
+    * @param string|integer $identifier The identifier with which to search.
+    * @param array          $options    An array of options for the resource fetching
+    *
+    * @return modResource The requested modResource instance or request
+    * is forwarded to the error page, or unauthorized page.
+    */
     public function getResource($method, $identifier, array $options = [])
     {
         $resource = null;
@@ -317,12 +317,12 @@ class modRequest
     }
 
     /**
-     * Gets the idetifier used to request a resource.
-     *
-     * @param string $method 'alias' or 'id'.
-     *
-     * @return string The identifier for the requested resource.
-     */
+    * Gets the idetifier used to request a resource.
+    *
+    * @param string $method 'alias' or 'id'.
+    *
+    * @return string The identifier for the requested resource.
+    */
     public function getResourceIdentifier($method)
     {
         $identifier = '';
@@ -343,12 +343,12 @@ class modRequest
     }
 
     /**
-     * Cleans the resource identifier from the request params.
-     *
-     * @param string $identifier The raw identifier.
-     *
-     * @return string|integer The cleansed identifier.
-     */
+    * Cleans the resource identifier from the request params.
+    *
+    * @param string $identifier The raw identifier.
+    *
+    * @return string|integer The cleansed identifier.
+    */
     public function _cleanResourceIdentifier($identifier)
     {
         if (empty ($identifier)) {
@@ -413,8 +413,8 @@ class modRequest
     }
 
     /**
-     * Harden GPC variables by removing any MODX tags, Javascript, or entities.
-     */
+    * Harden GPC variables by removing any MODX tags, Javascript, or entities.
+    */
     public function sanitizeRequest()
     {
         $modxtags = array_values($this->modx->sanitizePatterns);
@@ -438,10 +438,10 @@ class modRequest
     }
 
     /**
-     * Loads the error handling class for the request.
-     *
-     * @param string $class The class to use as the error handler.
-     */
+    * Loads the error handling class for the request.
+    *
+    * @param string $class The class to use as the error handler.
+    */
     public function loadErrorHandler($class = modError::class)
     {
         if (class_exists($class)) {
@@ -452,22 +452,22 @@ class modRequest
     }
 
     /**
-     * Provides an easy way to initiate register logging.
-     *
-     * Through an array of options, you can have all calls to modX::log()
-     * recorded in a topic of a modRegister instance. The options include:
-     *
-     * <ul>
-     * <li>register: the name of the register (required)</li>
-     * <li>topic: the topic to record to (required)</li>
-     * <li>register_class: the modRegister class (defaults to modFileRegister)</li>
-     * <li>log_level: the logging level (defaults to MODX_LOG_LEVEL_INFO)</li>
-     * <li>clear: set flag to clear register before logging new messages into it  (optional)</li>
-     * </ul>
-     *
-     * @param array $options An array containing all the options required to
-     *                       initiate and configure logging to a modRegister instance.
-     */
+    * Provides an easy way to initiate register logging.
+    *
+    * Through an array of options, you can have all calls to modX::log()
+    * recorded in a topic of a modRegister instance. The options include:
+    *
+    * <ul>
+    * <li>register: the name of the register (required)</li>
+    * <li>topic: the topic to record to (required)</li>
+    * <li>register_class: the modRegister class (defaults to modFileRegister)</li>
+    * <li>log_level: the logging level (defaults to MODX_LOG_LEVEL_INFO)</li>
+    * <li>clear: set flag to clear register before logging new messages into it  (optional)</li>
+    * </ul>
+    *
+    * @param array $options An array containing all the options required to
+    *                       initiate and configure logging to a modRegister instance.
+    */
     public function registerLogging(array $options = [])
     {
         if (isset($options['register']) && isset($options['topic'])) {
@@ -484,10 +484,10 @@ class modRequest
     }
 
     /**
-     * Preserves the $_REQUEST superglobal to the $_SESSION.
-     *
-     * @param string $key A key to save the $_REQUEST as; default is 'referrer'.
-     */
+    * Preserves the $_REQUEST superglobal to the $_SESSION.
+    *
+    * @param string $key A key to save the $_REQUEST as; default is 'referrer'.
+    */
     public function preserveRequest($key = 'referrer')
     {
         if (isset ($_SESSION)) {
@@ -496,12 +496,12 @@ class modRequest
     }
 
     /**
-     * Retrieve a preserved $_REQUEST from $_SESSION.
-     *
-     * @param string $key A key to identify a specific $_REQUEST; default is 'referrer'.
-     *
-     * @return mixed
-     */
+    * Retrieve a preserved $_REQUEST from $_SESSION.
+    *
+    * @param string $key A key to identify a specific $_REQUEST; default is 'referrer'.
+    *
+    * @return mixed
+    */
     public function retrieveRequest($key = 'referrer')
     {
         $request = null;
@@ -513,12 +513,12 @@ class modRequest
     }
 
     /**
-     * Return the HTTP headers sent through the request
-     *
-     * @param boolean $ucKeys if true, upper-case all keys for the headers
-     *
-     * @return array
-     */
+    * Return the HTTP headers sent through the request
+    *
+    * @param boolean $ucKeys if true, upper-case all keys for the headers
+    *
+    * @return array
+    */
     public function getHeaders($ucKeys = false)
     {
         if (!isset($this->headers)) {
@@ -539,8 +539,8 @@ class modRequest
     }
 
     /**
-     * Checks the current status of timed publishing events and automatically (un)publishes resources if needed.
-     */
+    * Checks the current status of timed publishing events and automatically (un)publishes resources if needed.
+    */
     public function checkPublishStatus()
     {
         $partKey = $this->modx->getOption('cache_auto_publish_key', null, 'auto_publish');
@@ -586,14 +586,14 @@ class modRequest
     }
 
     /**
-     * Get a GPC/REQUEST variable value or an array of values from the request.
-     *
-     * @param string|array $keys A key or array of keys to retrieve from the GPC variable. An empty
-     *                           array means get all keys of the variable.
-     * @param string       $type The type of GPC variable, GET by default (GET, POST, COOKIE or REQUEST).
-     *
-     * @return mixed
-     */
+    * Get a GPC/REQUEST variable value or an array of values from the request.
+    *
+    * @param string|array $keys A key or array of keys to retrieve from the GPC variable. An empty
+    *                           array means get all keys of the variable.
+    * @param string       $type The type of GPC variable, GET by default (GET, POST, COOKIE or REQUEST).
+    *
+    * @return mixed
+    */
     public function getParameters($keys = [], $type = 'GET')
     {
         $value = null;
@@ -635,15 +635,15 @@ class modRequest
     }
 
     /**
-     * Get the true client IP. Returns an array of values:
-     *
-     * * ip - The real, true client IP
-     * * suspected - The suspected IP, if not alike to REMOTE_ADDR
-     * * network - The client's network IP
-     *
-     * @access public
-     * @return array
-     */
+    * Get the true client IP. Returns an array of values:
+    *
+    * * ip - The real, true client IP
+    * * suspected - The suspected IP, if not alike to REMOTE_ADDR
+    * * network - The client's network IP
+    *
+    * @access public
+    * @return array
+    */
     public function getClientIp()
     {
         $ip = '';

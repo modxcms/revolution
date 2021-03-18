@@ -39,9 +39,9 @@ class Send extends Processor
     public $message;
 
     /**
-     * {@inheritdoc}
-     * @return bool|null|string
-     */
+    * {@inheritdoc}
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $register = trim($this->getProperty('register'));
@@ -56,10 +56,10 @@ class Send extends Processor
     }
 
     /**
-     * Create instance of register and connect to it
-     * @param $register
-     * @return bool|null|string
-     */
+    * Create instance of register and connect to it
+    * @param $register
+    * @return bool|null|string
+    */
     public function connectRegister($register)
     {
         $register_class = trim($this->getProperty('register_class', modFileRegister::class));
@@ -76,9 +76,9 @@ class Send extends Processor
     }
 
     /**
-     * Prepare message before sending
-     * @throws \xPDO\xPDOException
-     */
+    * Prepare message before sending
+    * @throws \xPDO\xPDOException
+    */
     public function prepareMessage()
     {
         $message_format = $this->getProperty('message_format', 'string');
@@ -103,9 +103,9 @@ class Send extends Processor
     }
 
     /**
-     * Subscribe register and send message
-     * @return bool
-     */
+    * Subscribe register and send message
+    * @return bool
+    */
     public function sendMessage()
     {
         $options = [
@@ -120,10 +120,10 @@ class Send extends Processor
     }
 
     /**
-     * {@inheritdoc}
-     * @return array|mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * {@inheritdoc}
+    * @return array|mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         $this->prepareMessage();

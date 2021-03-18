@@ -11,7 +11,7 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
         'version' => '3.0',
         'table' => 'user_messages',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'type' => '',
             'subject' => '',
@@ -22,9 +22,9 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
             'date_sent' => '0000-00-00 00:00:00',
             'read' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'type' => 
+            'type' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '15',
@@ -32,7 +32,7 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
                 'null' => false,
                 'default' => '',
             ),
-            'subject' => 
+            'subject' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -40,7 +40,7 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
                 'null' => false,
                 'default' => '',
             ),
-            'message' => 
+            'message' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -48,21 +48,21 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
                 'null' => false,
                 'default' => '',
             ),
-            'sender' => 
+            'sender' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'recipient' => 
+            'recipient' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'private' => 
+            'private' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '4',
@@ -70,14 +70,14 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
                 'null' => false,
                 'default' => 0,
             ),
-            'date_sent' => 
+            'date_sent' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => false,
                 'default' => '0000-00-00 00:00:00',
             ),
-            'read' => 
+            'read' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -86,9 +86,9 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
                 'default' => 0,
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Sender' => 
+            'Sender' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'sender',
@@ -96,7 +96,7 @@ class modUserMessage extends \MODX\Revolution\modUserMessage
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Recipient' => 
+            'Recipient' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'recipient',

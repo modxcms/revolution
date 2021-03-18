@@ -360,15 +360,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
         $c->where([
             "(SELECT TOP 1
                 latestPackage.signature
-              FROM {$modx->getTableName(\MODX\Revolution\Transport\modTransportPackage::class)} AS latestPackage
-              WHERE latestPackage.package_name = modTransportPackage.package_name
-              ORDER BY
-                 latestPackage.version_major DESC,
-                 latestPackage.version_minor DESC,
-                 latestPackage.version_patch DESC,
-                 CASE WHEN latestPackage.release = '' OR latestPackage.release = 'ga' OR latestPackage.release = 'pl' THEN 'z' ELSE latestPackage.release END DESC,
-                 latestPackage.release_index DESC
-              ) = modTransportPackage.signature",
+            FROM {$modx->getTableName(\MODX\Revolution\Transport\modTransportPackage::class)} AS latestPackage
+            WHERE latestPackage.package_name = modTransportPackage.package_name
+            ORDER BY
+                latestPackage.version_major DESC,
+                latestPackage.version_minor DESC,
+                latestPackage.version_patch DESC,
+                CASE WHEN latestPackage.release = '' OR latestPackage.release = 'ga' OR latestPackage.release = 'pl' THEN 'z' ELSE latestPackage.release END DESC,
+                latestPackage.release_index DESC
+            ) = modTransportPackage.signature",
         ]);
         if (!empty($search)) {
             $c->where([
@@ -406,7 +406,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
         $c->sortby("CASE WHEN modTransportPackage.release = '' OR modTransportPackage.release = 'ga' OR modTransportPackage.release = 'pl'
             THEN 'z'
             ELSE modTransportPackage.release
-          END", 'DESC');
+        END", 'DESC');
         $c->sortby('modTransportPackage.release_index', 'DESC');
         if ((int)$limit > 0) {
             $c->limit((int)$limit, (int)$offset);

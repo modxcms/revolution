@@ -16,9 +16,9 @@ namespace MODX\Revolution\Processors\System\DatabaseTable\mysql;
 class Optimize extends \MODX\Revolution\Processors\System\DatabaseTable\OptimizeAbstract
 {
     /**
-     * @param string $table
-     * @return bool
-     */
+    * @param string $table
+    * @return bool
+    */
     public function optimize($table)
     {
         $sql = 'OPTIMIZE TABLE ' . $this->modx->escape($this->modx->getOption('dbname')) . '.' . $this->modx->escape($table);

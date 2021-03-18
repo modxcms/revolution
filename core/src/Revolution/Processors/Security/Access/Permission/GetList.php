@@ -28,8 +28,8 @@ class GetList extends GetListProcessor
     public $languageTopics = ['access', 'permission'];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -39,9 +39,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->leftJoin(modAccessPolicyTemplate::class, 'Template');
@@ -57,9 +57,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select([
@@ -80,9 +80,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array|mixed
-     */
+    * @param xPDOObject $object
+    * @return array|mixed
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->get(['name', 'description']);

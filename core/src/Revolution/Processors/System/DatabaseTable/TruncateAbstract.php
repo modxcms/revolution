@@ -18,24 +18,24 @@ use MODX\Revolution\Processors\DriverSpecificProcessor;
 abstract class TruncateAbstract extends DriverSpecificProcessor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('database_truncate');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['system_info'];
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $table = $this->getProperty('t', false);
@@ -53,16 +53,16 @@ abstract class TruncateAbstract extends DriverSpecificProcessor
     }
 
     /**
-     * Truncate a database table
-     * @param string $table
-     * @return boolean
-     */
+    * Truncate a database table
+    * @param string $table
+    * @return boolean
+    */
     abstract public function truncate($table);
 
     /**
-     * Log a manager action showing the truncated table
-     * @return void
-     */
+    * Log a manager action showing the truncated table
+    * @return void
+    */
     public function logManagerAction()
     {
         if ($this->modx->error->status) {
@@ -70,7 +70,3 @@ abstract class TruncateAbstract extends DriverSpecificProcessor
         }
     }
 }
-
-
-
-

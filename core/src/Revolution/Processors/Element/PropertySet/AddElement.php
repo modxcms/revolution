@@ -35,10 +35,10 @@ class AddElement extends ModelProcessor
     public $propertySetKey = 'property_set';
 
     /**
-     * Grab element to check its existence
-     *
-     * @return bool|null|string
-     */
+    * Grab element to check its existence
+    *
+    * @return bool|null|string
+    */
     public function getElement()
     {
         $elementClass = $this->getProperty($this->element_class);
@@ -56,12 +56,12 @@ class AddElement extends ModelProcessor
     }
 
     /**
-     * Grab Property Set to check if it exists and get its ID
-     *
-     * @param $propertySetId
-     *
-     * @return bool|null|string
-     */
+    * Grab Property Set to check if it exists and get its ID
+    *
+    * @param $propertySetId
+    *
+    * @return bool|null|string
+    */
     public function getPropertySet(&$propertySetId)
     {
         $propertySetId = (int)$this->getProperty('propertyset');
@@ -78,9 +78,9 @@ class AddElement extends ModelProcessor
     }
 
     /**
-     * {@inheritdoc}
-     * @return bool|null|string
-     */
+    * {@inheritdoc}
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $isSetExists = $this->getPropertySet($propertySetId);
@@ -103,10 +103,10 @@ class AddElement extends ModelProcessor
     }
 
     /**
-     * Log add element to property set
-     *
-     * @return void
-     */
+    * Log add element to property set
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $item = $this->object->get($this->element_class) . ' ' . $this->object->get($this->elementKey) .
@@ -126,10 +126,10 @@ class AddElement extends ModelProcessor
     }
 
     /**
-     * Return the success message
-     *
-     * @return array
-     */
+    * Return the success message
+    *
+    * @return array
+    */
     public function cleanup()
     {
         return $this->success('', $this->object);

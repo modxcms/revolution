@@ -39,9 +39,9 @@ class Read extends Processor
     public $options;
 
     /**
-     * {@inheritdoc}
-     * @return bool|null|string
-     */
+    * {@inheritdoc}
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $register = trim($this->getProperty('register'));
@@ -64,10 +64,10 @@ class Read extends Processor
     }
 
     /**
-     * Create instance of register and connect to it
-     * @param $register
-     * @return bool|null|string
-     */
+    * Create instance of register and connect to it
+    * @param $register
+    * @return bool|null|string
+    */
     public function connectRegister($register)
     {
         $register_class = trim($this->getProperty('register_class', modFileRegister::class));
@@ -84,9 +84,9 @@ class Read extends Processor
     }
 
     /**
-     * Subscribe to register and read it
-     * @return mixed
-     */
+    * Subscribe to register and read it
+    * @return mixed
+    */
     public function readRegister()
     {
         $this->register->subscribe($this->topic);
@@ -94,11 +94,11 @@ class Read extends Processor
     }
 
     /**
-     * Prepare message from register
-     * @param $messages
-     * @return string
-     * @throws \xPDO\xPDOException
-     */
+    * Prepare message from register
+    * @param $messages
+    * @return string
+    * @throws \xPDO\xPDOException
+    */
     public function prepareMessage($messages)
     {
         $format = trim($this->getProperty('format', 'json'));
@@ -135,10 +135,10 @@ class Read extends Processor
     }
 
     /**
-     * {@inheritdoc}
-     * @return array|mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * {@inheritdoc}
+    * @return array|mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         $messages = $this->readRegister();

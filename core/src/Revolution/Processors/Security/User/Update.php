@@ -52,14 +52,14 @@ class Update extends UpdateProcessor {
 
 
     /**
-     * Allow for Users to use derivative classes for their processors
-     *
-     * @static
-     * @param modX $modx
-     * @param string $className
-     * @param array $properties
-     * @return Processor
-     */
+    * Allow for Users to use derivative classes for their processors
+    *
+    * @static
+    * @param modX $modx
+    * @param string $className
+    * @param array $properties
+    * @return Processor
+    */
     public static function getInstance(modX $modx,$className,$properties = []) {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modUser::class;
         $object = $modx->newObject($classKey);
@@ -76,9 +76,9 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean|string
-     */
+    * {@inheritDoc}
+    * @return boolean|string
+    */
     public function initialize() {
         $this->setDefaultProperties(
             [
@@ -89,9 +89,9 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function beforeSet() {
         $this->setCheckbox('blocked');
         $this->setCheckbox('active');
@@ -100,9 +100,9 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function beforeSave() {
         $this->setProfile();
         $this->setRemoteData();
@@ -124,20 +124,20 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * Check for an active/inactive status change
-     * @return boolean|string
-     */
+    * Check for an active/inactive status change
+    * @return boolean|string
+    */
     public function checkActiveChange() {
         $this->activeStatusChanged = $this->object->isDirty('active');
         $this->newActiveStatus = $this->object->get('active');
         if ($this->activeStatusChanged) {
             $event = $this->newActiveStatus == true ? 'OnBeforeUserActivate' : 'OnBeforeUserDeactivate';
             $OnBeforeUserActivate = $this->modx->invokeEvent($event,
-                                                             [
+                                                            [
                 'id' => $this->object->get('id'),
                 'user' => &$this->object,
                 'mode' => modSystemEvent::MODE_UPD,
-                                                             ]
+                                                            ]
             );
             $canChange = $this->processEventResponse($OnBeforeUserActivate);
             if (!empty($canChange)) {
@@ -148,9 +148,9 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * Set the profile data for the user
-     * @return modUserProfile
-     */
+    * Set the profile data for the user
+    * @return modUserProfile
+    */
     public function setProfile() {
         $this->profile = $this->object->getOne('Profile');
         if (empty($this->profile)) {
@@ -164,9 +164,9 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * Set the remote data for the user
-     * @return mixed
-     */
+    * Set the remote data for the user
+    * @return mixed
+    */
     public function setRemoteData() {
         $remoteData = $this->getProperty('remoteData',null);
         if ($remoteData !== null) {
@@ -177,9 +177,9 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * Set user groups for the user
-     * @return modUserGroupMember[] new added member groups
-     */
+    * Set user groups for the user
+    * @return modUserGroupMember[] new added member groups
+    */
     public function setUserGroups() {
         $memberships = [];
         $groups = $this->getProperty('groups', null);
@@ -280,9 +280,9 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function afterSave() {
         $this->setUserGroups();
         if ($this->activeStatusChanged) {
@@ -292,30 +292,30 @@ class Update extends UpdateProcessor {
     }
 
     /**
-     * Fire the active status change event
-     */
+    * Fire the active status change event
+    */
     public function fireAfterActiveStatusChange() {
         $event = $this->newActiveStatus == true ? 'OnUserActivate' : 'OnUserDeactivate';
         $this->modx->invokeEvent($event,
-                                 [
+                                [
             'id' => $this->object->get('id'),
             'user' => &$this->object,
             'mode' => modSystemEvent::MODE_UPD,
-                                 ]
+                                ]
         );
     }
 
     /**
-     * {@inheritDoc}
-     * @return array|string
-     */
+    * {@inheritDoc}
+    * @return array|string
+    */
     public function cleanup() {
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod');
         if (!empty($passwordNotifyMethod) && !empty($this->newPassword) && $passwordNotifyMethod  == 's') {
             return $this->success($this->modx->lexicon('user_updated_password_message',
-                                                       [
+                                                        [
                 'password' => $this->newPassword,
-                                                       ]
+                                                        ]
             ), $this->object);
         } else {
             return $this->success('',$this->object);

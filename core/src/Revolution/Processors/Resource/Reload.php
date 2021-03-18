@@ -29,10 +29,10 @@ class Reload extends Processor
     private $reg;
 
     /**
-     * initialization tasks before processing
-     *
-     * @return bool|string true to continue with processing, otherwise err msg
-     */
+    * initialization tasks before processing
+    *
+    * @return bool|string true to continue with processing, otherwise err msg
+    */
     public function initialize()
     {
         $return = true;

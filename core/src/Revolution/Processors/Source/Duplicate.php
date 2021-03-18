@@ -28,8 +28,8 @@ class Duplicate extends DuplicateProcessor
     public $checkSavePermission = false;
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -40,8 +40,8 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $this->fireDuplicateEvent();
@@ -49,9 +49,9 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Fire the OnMediaSourceDuplicate event
-     * @return void
-     */
+    * Fire the OnMediaSourceDuplicate event
+    * @return void
+    */
     public function fireDuplicateEvent()
     {
         $this->modx->invokeEvent('OnMediaSourceDuplicate', [

@@ -20,11 +20,11 @@ namespace MODX\Revolution;
 class modConnectorResponse extends modResponse
 {
     /**
-     * The base location of the processors called by the connectors.
-     *
-     * @var string
-     * @access private
-     */
+    * The base location of the processors called by the connectors.
+    *
+    * @var string
+    * @access private
+    */
     protected $_directory;
 
     public $responseCode = 200;
@@ -74,10 +74,10 @@ class modConnectorResponse extends modResponse
     ];
 
     /**
-     * Creates a modConnectorResponse object.
-     *
-     * {@inheritdoc}
-     */
+    * Creates a modConnectorResponse object.
+    *
+    * {@inheritdoc}
+    */
     public function __construct(modX $modx)
     {
         parent:: __construct($modx);
@@ -85,11 +85,11 @@ class modConnectorResponse extends modResponse
     }
 
     /**
-     * Overrides modResponse::outputContent to provide connector-specific
-     * processing.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modResponse::outputContent to provide connector-specific
+    * processing.
+    *
+    * {@inheritdoc}
+    */
     public function outputContent(array $options = [])
     {
         /* variable pointer for easier access */
@@ -162,8 +162,8 @@ class modConnectorResponse extends modResponse
             }
         }
         /* if files sent, this means that the browser needs it in text/plain,
-         * so ignore text/json header type
-         */
+        * so ignore text/json header type
+        */
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
             header("Content-Type: application/json; charset=UTF-8");
             $message = 'OK';
@@ -203,18 +203,18 @@ class modConnectorResponse extends modResponse
     }
 
     /**
-     * Return arrays of objects (with count) converted to JSON.
-     *
-     * The JSON result includes two main elements, total and results. This format is used for list
-     * results.
-     *
-     * @access public
-     *
-     * @param array $array An array of data objects.
-     * @param mixed $count The total number of objects. Used for pagination.
-     *
-     * @return string The JSON output.
-     */
+    * Return arrays of objects (with count) converted to JSON.
+    *
+    * The JSON result includes two main elements, total and results. This format is used for list
+    * results.
+    *
+    * @access public
+    *
+    * @param array $array An array of data objects.
+    * @param mixed $count The total number of objects. Used for pagination.
+    *
+    * @return string The JSON output.
+    */
     public function outputArray(array $array, $count = false)
     {
         if (!is_array($array)) {
@@ -228,14 +228,14 @@ class modConnectorResponse extends modResponse
     }
 
     /**
-     * Set the physical location of the processor directory for the response handler.
-     *
-     * This allows for dynamic processor locations.
-     *
-     * @access public
-     *
-     * @param string $dir The directory to set as the processors directory.
-     */
+    * Set the physical location of the processor directory for the response handler.
+    *
+    * This allows for dynamic processor locations.
+    *
+    * @access public
+    *
+    * @param string $dir The directory to set as the processors directory.
+    */
     public function setDirectory($dir = '')
     {
         if ($dir == '') {
@@ -246,17 +246,17 @@ class modConnectorResponse extends modResponse
     }
 
     /**
-     * Converts PHP to JSON with JavaScript literals left in-tact.
-     *
-     * JSON does not allow JavaScript literals, but this function encodes certain identifiable
-     * literals and decodes them back into literals after modX::toJSON() formats the data.
-     *
-     * @access public
-     *
-     * @param mixed $data The PHP data to be converted.
-     *
-     * @return string The extended JSON-encoded string.
-     */
+    * Converts PHP to JSON with JavaScript literals left in-tact.
+    *
+    * JSON does not allow JavaScript literals, but this function encodes certain identifiable
+    * literals and decodes them back into literals after modX::toJSON() formats the data.
+    *
+    * @access public
+    *
+    * @param mixed $data The PHP data to be converted.
+    *
+    * @return string The extended JSON-encoded string.
+    */
     public function toJSON($data)
     {
         if (is_array($data)) {
@@ -267,13 +267,13 @@ class modConnectorResponse extends modResponse
     }
 
     /**
-     * Encodes certain JavaScript literal strings for later decoding.
-     *
-     * @access protected
-     *
-     * @param mixed &        $value A reference to the value to be encoded if it is identified as a literal.
-     * @param integer|string $key   The array key corresponding to the value.
-     */
+    * Encodes certain JavaScript literal strings for later decoding.
+    *
+    * @access protected
+    *
+    * @param mixed &        $value A reference to the value to be encoded if it is identified as a literal.
+    * @param integer|string $key   The array key corresponding to the value.
+    */
     protected function _encodeLiterals(&$value, $key)
     {
         if (is_string($value)) {
@@ -288,14 +288,14 @@ class modConnectorResponse extends modResponse
     }
 
     /**
-     * Decodes strings encoded by _encodeLiterals to restore JavaScript literals.
-     *
-     * @access protected
-     *
-     * @param string $string The JSON-encoded string with encoded literals.
-     *
-     * @return string The JSON-encoded string with literals restored.
-     */
+    * Decodes strings encoded by _encodeLiterals to restore JavaScript literals.
+    *
+    * @access protected
+    *
+    * @param string $string The JSON-encoded string with encoded literals.
+    *
+    * @return string The JSON-encoded string with literals restored.
+    */
     protected function _decodeLiterals($string)
     {
         $pattern = '/"@@(.*?)@@"/';

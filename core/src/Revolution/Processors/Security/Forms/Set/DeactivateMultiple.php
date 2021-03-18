@@ -19,8 +19,8 @@ class DeactivateMultiple extends Deactivate
     public $sets = [];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $sets = $this->getProperty('sets', '');
@@ -33,8 +33,8 @@ class DeactivateMultiple extends Deactivate
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         foreach ($this->sets as $set) {

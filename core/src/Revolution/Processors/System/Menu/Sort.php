@@ -21,25 +21,25 @@ use MODX\Revolution\Processors\Processor;
 class Sort extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('menus');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['action', 'menu'];
     }
 
     /**
-     * @return array|mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * @return array|mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         $data = $this->getProperty('data');
@@ -61,10 +61,10 @@ class Sort extends Processor
     }
 
     /**
-     * @param $ar_nodes
-     * @param $cur_level
-     * @param string $parent
-     */
+    * @param $ar_nodes
+    * @param $cur_level
+    * @param string $parent
+    */
     public function getNodesFormatted(&$ar_nodes, $cur_level, $parent = '')
     {
         $order = 0;
@@ -81,8 +81,8 @@ class Sort extends Processor
     }
 
     /**
-     * @param $nodes
-     */
+    * @param $nodes
+    */
     public function sort($nodes)
     {
         /* readjust cache */

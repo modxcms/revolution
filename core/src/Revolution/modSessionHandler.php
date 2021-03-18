@@ -19,29 +19,29 @@ namespace MODX\Revolution;
 class modSessionHandler
 {
     /**
-     * @var modX A reference to the modX instance controlling this session
-     * handler.
-     * @access public
-     */
+    * @var modX A reference to the modX instance controlling this session
+    * handler.
+    * @access public
+    */
     public $modx = null;
     /**
-     * @var int The maximum lifetime of the session
-     */
+    * @var int The maximum lifetime of the session
+    */
     public $gcMaxLifetime = 0;
     /**
-     * @var int The maximum lifetime of the cache of the session
-     */
+    * @var int The maximum lifetime of the cache of the session
+    */
     public $cacheLifetime = false;
     /**
-     * @var modSession The Session object
-     */
+    * @var modSession The Session object
+    */
     private $session = null;
 
     /**
-     * Creates an instance of a modSessionHandler class.
-     *
-     * @param modX &$modx A reference to a {@link modX} instance.
-     */
+    * Creates an instance of a modSessionHandler class.
+    *
+    * @param modX &$modx A reference to a {@link modX} instance.
+    */
     function __construct(modX &$modx)
     {
         $this->modx = &$modx;
@@ -62,38 +62,38 @@ class modSessionHandler
     }
 
     /**
-     * Opens the connection for the session handler.
-     *
-     * @access public
-     * @return boolean Always returns true; actual connection is managed by
-     * {@link modX}.
-     */
+    * Opens the connection for the session handler.
+    *
+    * @access public
+    * @return boolean Always returns true; actual connection is managed by
+    * {@link modX}.
+    */
     public function open()
     {
         return true;
     }
 
     /**
-     * Closes the connection for the session handler.
-     *
-     * @access public
-     * @return boolean Always returns true; actual connection is managed by
-     * {@link modX}
-     */
+    * Closes the connection for the session handler.
+    *
+    * @access public
+    * @return boolean Always returns true; actual connection is managed by
+    * {@link modX}
+    */
     public function close()
     {
         return true;
     }
 
     /**
-     * Reads a specific {@link modSession} record's data.
-     *
-     * @access public
-     *
-     * @param integer $id The pk of the {@link modSession} object.
-     *
-     * @return string The data read from the {@link modSession} object.
-     */
+    * Reads a specific {@link modSession} record's data.
+    *
+    * @access public
+    *
+    * @param integer $id The pk of the {@link modSession} object.
+    *
+    * @return string The data read from the {@link modSession} object.
+    */
     public function read($id)
     {
         if ($this->_getSession($id)) {
@@ -106,15 +106,15 @@ class modSessionHandler
     }
 
     /**
-     * Writes data to a specific {@link modSession} object.
-     *
-     * @access public
-     *
-     * @param integer $id   The PK of the modSession object.
-     * @param mixed   $data The data to write to the session.
-     *
-     * @return boolean True if successfully written.
-     */
+    * Writes data to a specific {@link modSession} object.
+    *
+    * @access public
+    *
+    * @param integer $id   The PK of the modSession object.
+    * @param mixed   $data The data to write to the session.
+    *
+    * @return boolean True if successfully written.
+    */
     public function write($id, $data)
     {
         $written = false;
@@ -130,14 +130,14 @@ class modSessionHandler
     }
 
     /**
-     * Destroy a specific {@link modSession} record.
-     *
-     * @access public
-     *
-     * @param integer $id
-     *
-     * @return boolean True if the session record was destroyed.
-     */
+    * Destroy a specific {@link modSession} record.
+    *
+    * @access public
+    *
+    * @param integer $id
+    *
+    * @return boolean True if the session record was destroyed.
+    */
     public function destroy($id)
     {
         if ($this->_getSession($id)) {
@@ -150,15 +150,15 @@ class modSessionHandler
     }
 
     /**
-     * Remove any expired sessions.
-     *
-     * @access public
-     *
-     * @param integer $max The amount of time since now to expire any session
-     *                     longer than.
-     *
-     * @return boolean True if session records were removed.
-     */
+    * Remove any expired sessions.
+    *
+    * @access public
+    *
+    * @param integer $max The amount of time since now to expire any session
+    *                     longer than.
+    *
+    * @return boolean True if session records were removed.
+    */
     public function gc($max)
     {
         $maxtime = time() - $this->gcMaxLifetime;
@@ -167,17 +167,17 @@ class modSessionHandler
     }
 
     /**
-     * Gets the {@link modSession} object, respecting the cache flag represented by cacheLifetime.
-     *
-     * @access protected
-     *
-     * @param integer $id         The PK of the {@link modSession} record.
-     * @param boolean $autoCreate If true, will automatically create the session
-     *                            record if none is found.
-     *
-     * @return modSession|null The modSession instance loaded from db or auto-created; null if it
-     * could not be retrieved and/or created.
-     */
+    * Gets the {@link modSession} object, respecting the cache flag represented by cacheLifetime.
+    *
+    * @access protected
+    *
+    * @param integer $id         The PK of the {@link modSession} record.
+    * @param boolean $autoCreate If true, will automatically create the session
+    *                            record if none is found.
+    *
+    * @return modSession|null The modSession instance loaded from db or auto-created; null if it
+    * could not be retrieved and/or created.
+    */
     protected function _getSession($id, $autoCreate = false)
     {
         $this->session = $this->modx->getObject(modSession::class, ['id' => $id], $this->cacheLifetime);

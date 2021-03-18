@@ -42,11 +42,11 @@ class Delete extends Processor
     }
 
     /**
-     * Get the Resource and check for proper permissions
-     *
-     * {@inheritDoc}
-     * @return boolean|string
-     */
+    * Get the Resource and check for proper permissions
+    *
+    * {@inheritDoc}
+    * @return boolean|string
+    */
     public function initialize()
     {
         $id = $this->getProperty('id', false);
@@ -63,9 +63,9 @@ class Delete extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         if ($this->modx->getOption('site_start') == $this->resource->get('id')) {
@@ -121,10 +121,10 @@ class Delete extends Processor
     }
 
     /**
-     * Attempt to add a lock to the Resource
-     *
-     * @return boolean
-     */
+    * Attempt to add a lock to the Resource
+    *
+    * @return boolean
+    */
     public function addLock()
     {
         $locked = $this->resource->addLock();
@@ -138,9 +138,9 @@ class Delete extends Processor
     }
 
     /**
-     * Get the IDs of all the children of the Resource
-     * @return array
-     */
+    * Get the IDs of all the children of the Resource
+    * @return array
+    */
     public function getChildrenIds()
     {
         $this->children = [];
@@ -156,12 +156,12 @@ class Delete extends Processor
     }
 
     /**
-     * Helper method for getChildrenIds for getting Children recursively
-     *
-     * @param modResource $parent
-     * @return void
-     * @see getChildrenIds
-     */
+    * Helper method for getChildrenIds for getting Children recursively
+    *
+    * @param modResource $parent
+    * @return void
+    * @see getChildrenIds
+    */
     protected function getChildren(modResource $parent)
     {
         $childResources = $parent->getMany('Children');
@@ -184,10 +184,10 @@ class Delete extends Processor
     }
 
     /**
-     * Fire any pre-delete events
-     * @param array $childrenIds
-     * @return void
-     */
+    * Fire any pre-delete events
+    * @param array $childrenIds
+    * @return void
+    */
     public function fireBeforeDelete(array $childrenIds = [])
     {
         $this->modx->invokeEvent('OnBeforeDocFormDelete', [
@@ -198,9 +198,9 @@ class Delete extends Processor
     }
 
     /**
-     * Delete all children of this resource
-     * @return array
-     */
+    * Delete all children of this resource
+    * @return array
+    */
     public function deleteChildren()
     {
         if (count($this->children) > 0) {
@@ -227,10 +227,10 @@ class Delete extends Processor
     }
 
     /**
-     * Fire the after-delete events
-     * @param array $childrenIds
-     * @return void
-     */
+    * Fire the after-delete events
+    * @param array $childrenIds
+    * @return void
+    */
     public function fireAfterDelete(array $childrenIds = [])
     {
         $this->modx->invokeEvent('OnDocFormDelete', [
@@ -246,9 +246,9 @@ class Delete extends Processor
     }
 
     /**
-     * Clear the site cache
-     * @return void
-     */
+    * Clear the site cache
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->cacheManager->refresh([
@@ -260,10 +260,10 @@ class Delete extends Processor
     }
 
     /**
-     * Log the manager action
-     *
-     * @return void
-     */
+    * Log the manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('delete_resource', $this->resource->get('class_key'), $this->resource->get('id'));

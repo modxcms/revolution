@@ -66,16 +66,16 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the default MODX filesystem source
-     *
-     * @static
-     *
-     * @param xPDO|modX $xpdo A reference to an xPDO instance
-     * @param int $defaultSourceId
-     * @param boolean $fallbackToDefault
-     *
-     * @return modMediaSource|null
-     */
+    * Get the default MODX filesystem source
+    *
+    * @static
+    *
+    * @param xPDO|modX $xpdo A reference to an xPDO instance
+    * @param int $defaultSourceId
+    * @param boolean $fallbackToDefault
+    *
+    * @return modMediaSource|null
+    */
     public static function getDefaultSource(xPDO &$xpdo, $defaultSourceId = null, $fallbackToDefault = true)
     {
         if (empty($defaultSourceId)) {
@@ -97,10 +97,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the current working context for the processor
-     *
-     * @return bool|modContext
-     */
+    * Get the current working context for the processor
+    *
+    * @return bool|modContext
+    */
     public function getWorkingContext()
     {
         $wctx = isset($this->properties['wctx']) && !empty($this->properties['wctx']) ? $this->properties['wctx'] : '';
@@ -119,10 +119,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Initialize the source
-     *
-     * @return boolean
-     */
+    * Initialize the source
+    *
+    * @return boolean
+    */
     public function initialize()
     {
         $this->setProperties($this->getProperties(true));
@@ -138,8 +138,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @return modContext
-     */
+    * @return modContext
+    */
     public function getContext()
     {
         return $this->ctx;
@@ -147,12 +147,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Setup the request properties for the source, determining any request-specific actions
-     *
-     * @param array $scriptProperties
-     *
-     * @return array
-     */
+    * Setup the request properties for the source, determining any request-specific actions
+    *
+    * @param array $scriptProperties
+    *
+    * @return array
+    */
     public function setRequestProperties(array $scriptProperties = [])
     {
         if (empty($this->properties)) {
@@ -165,11 +165,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get a list of permissions for browsing and utilizing the source. May be overridden to provide a custom
-     * list of permissions.
-     *
-     * @return array
-     */
+    * Get a list of permissions for browsing and utilizing the source. May be overridden to provide a custom
+    * list of permissions.
+    *
+    * @return array
+    */
     public function getPermissions()
     {
         $this->permissions = [
@@ -192,12 +192,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * See if the source is allowing a certain permission.
-     *
-     * @param string $key
-     *
-     * @return bool
-     */
+    * See if the source is allowing a certain permission.
+    *
+    * @param string $key
+    *
+    * @return bool
+    */
     public function hasPermission($key)
     {
         return !empty($this->permissions[$key]);
@@ -205,13 +205,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Add an error for an action occurring in the source
-     *
-     * @param string $field The field corresponding to the error
-     * @param string $message The message to add
-     *
-     * @return string The added error
-     */
+    * Add an error for an action occurring in the source
+    *
+    * @param string $field The field corresponding to the error
+    * @param string $message The message to add
+    *
+    * @return string The added error
+    */
     public function addError($field, $message)
     {
         $this->errors[$field] = $message;
@@ -221,10 +221,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get all errors that have occurred for this source
-     *
-     * @return array
-     */
+    * Get all errors that have occurred for this source
+    *
+    * @return array
+    */
     public function getErrors()
     {
         return $this->errors;
@@ -232,10 +232,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * See if the source has any errors
-     *
-     * @return bool
-     */
+    * See if the source has any errors
+    *
+    * @return bool
+    */
     public function hasErrors()
     {
         return !empty($this->errors);
@@ -243,8 +243,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @return Filesystem
-     */
+    * @return Filesystem
+    */
     public function getFilesystem()
     {
         return $this->filesystem;
@@ -252,8 +252,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @return FilesystemInterface
-     */
+    * @return FilesystemInterface
+    */
     public function getAdapter()
     {
         return $this->adapter;
@@ -261,12 +261,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get base paths/urls and sanitize incoming paths
-     *
-     * @param string $path A path to the active directory
-     *
-     * @return array
-     */
+    * Get base paths/urls and sanitize incoming paths
+    *
+    * @param string $path A path to the active directory
+    *
+    * @return array
+    */
     public function getBases($path = '')
     {
         $properties = $this->getProperties();
@@ -306,10 +306,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the ID of the edit file action
-     *
-     * @return boolean|int
-     */
+    * Get the ID of the edit file action
+    *
+    * @return boolean|int
+    */
     protected function getEditActionId()
     {
         return 'system/file/edit';
@@ -317,8 +317,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     protected function getPropertyListWithDefaults()
     {
         $properties = $this->getPropertyList();
@@ -334,12 +334,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Return an array of files and folders at this current level in the directory structure
-     *
-     * @param string $path
-     *
-     * @return array
-     */
+    * Return an array of files and folders at this current level in the directory structure
+    *
+    * @param string $path
+    *
+    * @return array
+    */
     public function getContainerList($path)
     {
         $properties = $this->getPropertyListWithDefaults();
@@ -441,12 +441,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get a list of files in a specific directory.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
+    * Get a list of files in a specific directory.
+    *
+    * @param string $path
+    *
+    * @return array
+    */
     public function getObjectsInContainer($path)
     {
         $properties = $this->getPropertyListWithDefaults();
@@ -517,10 +517,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param $path
-     *
-     * @return array|bool
-     */
+    * @param $path
+    *
+    * @return array|bool
+    */
     public function getMetaData($path)
     {
         try {
@@ -534,12 +534,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the contents of a specified file
-     *
-     * @param string $path
-     *
-     * @return array
-     */
+    * Get the contents of a specified file
+    *
+    * @param string $path
+    *
+    * @return array
+    */
     public function getObjectContents($path)
     {
         try {
@@ -584,13 +584,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Create a filesystem folder
-     *
-     * @param string $name
-     * @param string $parentContainer
-     *
-     * @return boolean
-     */
+    * Create a filesystem folder
+    *
+    * @param string $name
+    * @param string $parentContainer
+    *
+    * @return boolean
+    */
     public function createContainer($name, $parentContainer)
     {
         if ($parentContainer == DIRECTORY_SEPARATOR) {
@@ -633,10 +633,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Checks `upload_file_exists` system setting to allow or disallow overwriting files with the same name
-     *
-     * @return boolean
-     */
+    * Checks `upload_file_exists` system setting to allow or disallow overwriting files with the same name
+    *
+    * @return boolean
+    */
     public function checkFileExists()
     {
         return (bool)$this->xpdo->getOption('upload_file_exists', null, true);
@@ -644,14 +644,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Create a file
-     *
-     * @param string $path
-     * @param string $name
-     * @param string $content
-     *
-     * @return boolean|string
-     */
+    * Create a file
+    *
+    * @param string $path
+    * @param string $name
+    * @param string $content
+    *
+    * @return boolean|string
+    */
     public function createObject($path, $name, $content)
     {
         if ($path == DIRECTORY_SEPARATOR) {
@@ -699,15 +699,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Move a file or folder to a specific location
-     *
-     * @param string $from The location to move from
-     * @param string $to The location to move to
-     * @param string $point @TODO what is this for?
-     * @param int $to_source
-     *
-     * @return boolean
-     */
+    * Move a file or folder to a specific location
+    *
+    * @param string $from The location to move from
+    * @param string $to The location to move to
+    * @param string $point @TODO what is this for?
+    * @param int $to_source
+    *
+    * @return boolean
+    */
     public function moveObject($from, $to, $point = 'append', $to_source = 0)
     {
         $path = $this->postfixSlash($from);
@@ -794,12 +794,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Remove a folder at the specified location
-     *
-     * @param string $path ~ pre 3.0 $path was full absolute path, all paths need to be relative
-     *
-     * @return boolean
-     */
+    * Remove a folder at the specified location
+    *
+    * @param string $path ~ pre 3.0 $path was full absolute path, all paths need to be relative
+    *
+    * @return boolean
+    */
     public function removeContainer($path)
     {
         $path = $this->postfixSlash($path);
@@ -846,12 +846,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Remove a file
-     *
-     * @param string $path
-     *
-     * @return boolean
-     */
+    * Remove a file
+    *
+    * @param string $path
+    *
+    * @return boolean
+    */
     public function removeObject($path)
     {
         if (!$this->filesystem->has($path)) {
@@ -883,11 +883,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $oldPath
-     * @param string $newName
-     *
-     * @return bool
-     */
+    * @param string $oldPath
+    * @param string $newName
+    *
+    * @return bool
+    */
     public function renameContainer($oldPath, $newName)
     {
         $oldPath = trim($oldPath, DIRECTORY_SEPARATOR);
@@ -934,11 +934,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $oldPath
-     * @param string $newName
-     *
-     * @return bool
-     */
+    * @param string $oldPath
+    * @param string $newName
+    *
+    * @return bool
+    */
     public function renameObject($oldPath, $newName)
     {
         $oldPath = trim($oldPath, DIRECTORY_SEPARATOR);
@@ -987,13 +987,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Update the contents of a file
-     *
-     * @param string $path
-     * @param string $content
-     *
-     * @return boolean|string
-     */
+    * Update the contents of a file
+    *
+    * @param string $path
+    * @param string $content
+    *
+    * @return boolean|string
+    */
     public function updateObject($path, $content)
     {
         $path = $this->sanitizePath($path);
@@ -1033,13 +1033,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Upload files to a specific folder on the file system
-     *
-     * @param string $container
-     * @param array $objects
-     *
-     * @return boolean
-     */
+    * Upload files to a specific folder on the file system
+    *
+    * @param string $container
+    * @param array $objects
+    *
+    * @return boolean
+    */
     public function uploadObjectsToContainer($container, array $objects = [])
     {
         $container = $this->postfixSlash($container);
@@ -1117,10 +1117,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $path ~ relative path of file/directory
-     *
-     * @return bool
-     */
+    * @param string $path ~ relative path of file/directory
+    *
+    * @return bool
+    */
     public function getVisibility($path)
     {
         $path = $this->sanitizePath($path);
@@ -1140,11 +1140,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $path ~ relative path of file/directory
-     * @param string $visibility ~ public or private
-     *
-     * @return bool
-     */
+    * @param string $path ~ relative path of file/directory
+    * @param string $visibility ~ public or private
+    *
+    * @return bool
+    */
     public function setVisibility($path, $visibility)
     {
         $path = $this->sanitizePath($path);
@@ -1164,10 +1164,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $object
-     *
-     * @return string
-     */
+    * @param string $object
+    *
+    * @return string
+    */
     public function getBasePath($object = '')
     {
         return '';
@@ -1175,8 +1175,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getDefaultProperties()
     {
         return [];
@@ -1184,13 +1184,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the openTo directory for this source, used with TV input types
-     *
-     * @param string $value
-     * @param array $parameters
-     *
-     * @return string
-     */
+    * Get the openTo directory for this source, used with TV input types
+    *
+    * @param string $value
+    * @param array $parameters
+    *
+    * @return string
+    */
     public function getOpenTo($value,array $parameters = []) {
         $dirname = dirname($value);
         return $dirname == '.' ? '' : $dirname . '/';
@@ -1198,10 +1198,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the name of this source type
-     *
-     * @return string
-     */
+    * Get the name of this source type
+    *
+    * @return string
+    */
     public function getTypeName()
     {
         $this->xpdo->lexicon->load('source');
@@ -1211,10 +1211,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the description of this source type
-     *
-     * @return string
-     */
+    * Get the description of this source type
+    *
+    * @return string
+    */
     public function getTypeDescription()
     {
         $this->xpdo->lexicon->load('source');
@@ -1224,12 +1224,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the base URL for this source.
-     *
-     * @param string $object
-     *
-     * @return mixed
-     */
+    * Get the base URL for this source.
+    *
+    * @param string $object
+    *
+    * @return mixed
+    */
     public function getBaseUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -1239,12 +1239,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the absolute URL for a specified object.
-     *
-     * @param string $object
-     *
-     * @return bool|string
-     */
+    * Get the absolute URL for a specified object.
+    *
+    * @param string $object
+    *
+    * @return bool|string
+    */
     public function getObjectUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -1256,12 +1256,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the properties on this source
-     *
-     * @param boolean $parsed
-     *
-     * @return array
-     */
+    * Get the properties on this source
+    *
+    * @param boolean $parsed
+    *
+    * @return array
+    */
     public function getProperties($parsed = false)
     {
         $properties = $this->get('properties');
@@ -1303,10 +1303,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get all properties in key => value format
-     *
-     * @return array
-     */
+    * Get all properties in key => value format
+    *
+    * @return array
+    */
     public function getPropertyList()
     {
         $properties = $this->getProperties(true);
@@ -1325,12 +1325,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Parse any tags in the properties
-     *
-     * @param array $properties
-     *
-     * @return array
-     */
+    * Parse any tags in the properties
+    *
+    * @param array $properties
+    *
+    * @return array
+    */
     public function parseProperties(array $properties)
     {
         if (empty($properties)) {
@@ -1348,12 +1348,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Translate any needed properties
-     *
-     * @param array $properties
-     *
-     * @return array
-     */
+    * Translate any needed properties
+    *
+    * @param array $properties
+    *
+    * @return array
+    */
     public function prepareProperties(array $properties = [])
     {
         foreach ($properties as &$property) {
@@ -1386,13 +1386,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Set the properties for this Source
-     *
-     * @param array $properties
-     * @param boolean $merge
-     *
-     * @return bool
-     */
+    * Set the properties for this Source
+    *
+    * @param array $properties
+    * @param boolean $merge
+    *
+    * @return bool
+    */
     public function setProperties($properties, $merge = false)
     {
         $default = $this->getDefaultProperties();
@@ -1479,12 +1479,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Prepare a src parameter to be rendered with phpThumb
-     *
-     * @param string $src
-     *
-     * @return string
-     */
+    * Prepare a src parameter to be rendered with phpThumb
+    *
+    * @param string $src
+    *
+    * @return string
+    */
     public function prepareSrcForThumb($src)
     {
         try {
@@ -1526,13 +1526,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Prepares the output URL when the Source is being used in an Element. Can be overridden to provide prefixing/post-
-     * fixing functionality.
-     *
-     * @param string $value
-     *
-     * @return string
-     */
+    * Prepares the output URL when the Source is being used in an Element. Can be overridden to provide prefixing/post-
+    * fixing functionality.
+    *
+    * @param string $value
+    *
+    * @return string
+    */
     public function prepareOutputUrl($value)
     {
         $url = $this->getObjectUrl($value);
@@ -1542,12 +1542,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Find all policies for this object
-     *
-     * @param string $context
-     *
-     * @return array
-     */
+    * Find all policies for this object
+    *
+    * @param string $context
+    *
+    * @return array
+    */
     public function findPolicy($context = '')
     {
         $policy = [];
@@ -1595,14 +1595,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Allow overriding of checkPolicy to always allow media sources to be loaded
-     *
-     * @param string|array $criteria
-     * @param array $targets
-     * @param modUser $user
-     *
-     * @return bool
-     */
+    * Allow overriding of checkPolicy to always allow media sources to be loaded
+    *
+    * @param string|array $criteria
+    * @param array $targets
+    * @param modUser $user
+    *
+    * @return bool
+    */
     public function checkPolicy($criteria, $targets = null, modUser $user = null)
     {
         if ($criteria == 'load') {
@@ -1616,12 +1616,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Override xPDOObject::save to clear the sources cache on save
-     *
-     * @param boolean $cacheFlag
-     *
-     * @return boolean
-     */
+    * Override xPDOObject::save to clear the sources cache on save
+    *
+    * @param boolean $cacheFlag
+    *
+    * @return boolean
+    */
     public function save($cacheFlag = null)
     {
         $saved = parent::save($cacheFlag);
@@ -1634,12 +1634,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Clear the caches of all sources
-     *
-     * @param array $options
-     *
-     * @return void
-     */
+    * Clear the caches of all sources
+    *
+    * @param array $options
+    *
+    * @return void
+    */
     public function clearCache(array $options = [])
     {
         /** @var modCacheManager $cacheManager */
@@ -1668,12 +1668,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Sanitize the specified path
-     *
-     * @param string $path The path to clean
-     *
-     * @return string The sanitized path
-     */
+    * Sanitize the specified path
+    *
+    * @param string $path The path to clean
+    *
+    * @return string The sanitized path
+    */
     public function sanitizePath($path)
     {
         return preg_replace(["/\.*[\/|\\\]/i", "/[\/|\\\]+/i"], [DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR], $path);
@@ -1681,12 +1681,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Ensures that the passed path has a / at the end
-     *
-     * @param string $path
-     *
-     * @return string The postfixed path
-     */
+    * Ensures that the passed path has a / at the end
+    *
+    * @param string $path
+    *
+    * @return string The postfixed path
+    */
     public function postfixSlash($path)
     {
         $len = strlen($path);
@@ -1699,9 +1699,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param AdapterInterface $localAdapter
-     * @param string $cache_type ~ memory, persistent or memcached
-     */
+    * @param AdapterInterface $localAdapter
+    * @param string $cache_type ~ memory, persistent or memcached
+    */
     protected function loadFlySystem(AdapterInterface $localAdapter, $cache_type = 'memory')
     {
         /** @var CachedAdapter $cache */
@@ -1732,12 +1732,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Check that the filename has a file type extension that is allowed
-     *
-     * @param $filename
-     *
-     * @return bool
-     */
+    * Check that the filename has a file type extension that is allowed
+    *
+    * @param $filename
+    *
+    * @return bool
+    */
     protected function checkFileType($filename)
     {
         if ($this->getOption('allowedFileTypes')) {
@@ -1769,14 +1769,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $path
-     * @param string $ext
-     * @param array $image_extensions
-     * @param array $bases
-     * @param array $properties
-     *
-     * @return array
-     */
+    * @param string $path
+    * @param string $ext
+    * @param array $image_extensions
+    * @param array $bases
+    * @param array $properties
+    *
+    * @return array
+    */
     protected function buildFileList($path, $ext, $image_extensions, $bases, $properties)
     {
         $file_name = basename($path);
@@ -1854,14 +1854,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $path
-     * @param string $ext
-     * @param array $image_extensions
-     * @param array $bases
-     * @param array $properties
-     *
-     * @return array
-     */
+    * @param string $path
+    * @param string $ext
+    * @param array $image_extensions
+    * @param array $bases
+    * @param array $properties
+    *
+    * @return array
+    */
     protected function buildFileBrowserViewList($path, $ext, $image_extensions, $bases, $properties)
     {
         $editAction = $this->getEditActionId();
@@ -1945,10 +1945,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param array $properties
-     *
-     * @return array|mixed
-     */
+    * @param array $properties
+    *
+    * @return array|mixed
+    */
     protected function getSkipFilesArray($properties = [])
     {
         $skipFiles = $this->getOption('skipFiles', $properties, '.svn,.git,_notes,nbproject,.idea,.DS_Store');
@@ -1964,10 +1964,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param array $properties
-     *
-     * @return array|mixed|string
-     */
+    * @param array $properties
+    *
+    * @return array|mixed|string
+    */
     protected function getAllowedExtensionsArray($properties = [])
     {
         $allowedExtensions = $this->getOption('allowedFileTypes', $properties, '');
@@ -1984,8 +1984,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     protected function getExtJSDirClasses()
     {
 
@@ -2018,10 +2018,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the context menu items for a specific dir object in the list view
-     *
-     * @return array
-     */
+    * Get the context menu items for a specific dir object in the list view
+    *
+    * @return array
+    */
     protected function getListDirContextMenu()
     {
         $canSave = $this->checkPolicy('save');
@@ -2081,14 +2081,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Get the context menu items for a specific file object in the list view
-     *
-     * @param string $path
-     * @param bool $editable
-     * @param array $data
-     *
-     * @return array
-     */
+    * Get the context menu items for a specific file object in the list view
+    *
+    * @param string $path
+    * @param bool $editable
+    * @param array $data
+    *
+    * @return array
+    */
     protected function getListFileContextMenu($path, $editable = true, $data = [])
     {
         $canSave = $this->checkPolicy('save');
@@ -2154,15 +2154,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param string $path
-     * @param string $ext
-     * @param int $width
-     * @param int $height
-     * @param array $bases
-     * @param array $properties
-     *
-     * @return array
-     */
+    * @param string $path
+    * @param string $ext
+    * @param int $width
+    * @param int $height
+    * @param array $bases
+    * @param array $properties
+    *
+    * @return array
+    */
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         $size = $this->getImageDimensions($path, $ext);
@@ -2233,11 +2233,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param $path
-     * @param $ext
-     *
-     * @return array|bool
-     */
+    * @param $path
+    * @param $ext
+    *
+    * @return array|bool
+    */
     protected function getImageDimensions($path, $ext)
     {
         $file_size = false;
@@ -2283,12 +2283,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Tells if a file is a binary file (some sort of text file) or not.
-     *
-     * @param string $file
-     *
-     * @return boolean True if a binary file.
-     */
+    * Tells if a file is a binary file (some sort of text file) or not.
+    *
+    * @param string $file
+    *
+    * @return boolean True if a binary file.
+    */
     protected function isFileBinary($file)
     {
         try {
@@ -2304,13 +2304,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Tells if a file is an image or not.
-     *
-     * @param string $file
-     * @param array $image_extensions
-     *
-     * @return boolean True if a binary file.
-     */
+    * Tells if a file is an image or not.
+    *
+    * @param string $file
+    * @param array $image_extensions
+    *
+    * @return boolean True if a binary file.
+    */
     protected function isFileImage($file, $image_extensions = [])
     {
         try {

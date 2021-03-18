@@ -11,13 +11,13 @@ class modAccessResource extends \MODX\Revolution\modAccessResource
         'version' => '3.0',
         'table' => 'access_resources',
         'extends' => 'MODX\\Revolution\\modAccess',
-        'fields' => 
+        'fields' =>
         array (
             'context_key' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -27,17 +27,17 @@ class modAccessResource extends \MODX\Revolution\modAccessResource
                 'index' => 'fk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'alias' => 'context_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -46,9 +46,9 @@ class modAccessResource extends \MODX\Revolution\modAccessResource
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'target',
@@ -56,7 +56,7 @@ class modAccessResource extends \MODX\Revolution\modAccessResource
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'context_key',

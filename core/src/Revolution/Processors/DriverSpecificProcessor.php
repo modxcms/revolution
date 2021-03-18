@@ -20,12 +20,12 @@ use ReflectionClass;
 abstract class DriverSpecificProcessor extends Processor
 {
     /**
-     * @param modX $modx
-     * @param string $className
-     * @param array $properties
-     * @return Processor
-     * @throws \ReflectionException
-     */
+    * @param modX $modx
+    * @param string $className
+    * @param array $properties
+    * @return Processor
+    * @throws \ReflectionException
+    */
     public static function getInstance(modX $modx, $className, $properties = [])
     {
         $class = new ReflectionClass($className);

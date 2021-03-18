@@ -26,26 +26,26 @@ use UnexpectedValueException;
 class GetOutputs extends Processor {
 
     /**
-     * Check permissions to view TV
-     * @return bool
-     */
+    * Check permissions to view TV
+    * @return bool
+    */
     public function checkPermissions() {
         return $this->modx->hasPermission('view_tv');
     }
 
     /**
-     * Load Language Topics for this processor.
-     * @return array
-     */
+    * Load Language Topics for this processor.
+    * @return array
+    */
     public function getLanguageTopics() {
         return ['tv_widget'];
     }
 
     /**
-     * Fire event to allow for custom directories
-     * @param $context
-     * @return array
-     */
+    * Fire event to allow for custom directories
+    * @param $context
+    * @return array
+    */
     public function fireOnTVOutputRenderListEvent($context) {
         $pluginResult = $this->modx->invokeEvent('OnTVOutputRenderList', [
             'context' => $context,
@@ -56,9 +56,9 @@ class GetOutputs extends Processor {
     }
 
     /**
-     * Load namespace cached directories
-     * @return array
-     */
+    * Load namespace cached directories
+    * @return array
+    */
     public function loadNamespaceCache() {
         $cache = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
         $cachedDirs = [];
@@ -74,9 +74,9 @@ class GetOutputs extends Processor {
     }
 
     /**
-     * Get directories where to find TV output types
-     * @return array
-     */
+    * Get directories where to find TV output types
+    * @return array
+    */
     public function getRenderDirectories() {
         $context = $this->getProperty('context', 'web');
 
@@ -92,10 +92,10 @@ class GetOutputs extends Processor {
     }
 
     /**
-     * Find TV output types
-     * @param array $data
-     * @return array
-     */
+    * Find TV output types
+    * @param array $data
+    * @return array
+    */
     public function iterate(array $data) {
         $types = [];
         foreach ($data as $renderDirectory) {
@@ -117,9 +117,9 @@ class GetOutputs extends Processor {
     }
 
     /**
-     * {@inheritdoc}
-     * @return mixed|string
-     */
+    * {@inheritdoc}
+    * @return mixed|string
+    */
     public function process() {
         $renderDirectories = $this->getRenderDirectories();
         $types = $this->iterate($renderDirectories);
@@ -127,10 +127,10 @@ class GetOutputs extends Processor {
     }
 
     /**
-     * Prepare list of types for response
-     * @param array $types
-     * @return string
-     */
+    * Prepare list of types for response
+    * @param array $types
+    * @return string
+    */
     public function cleanup(array $types) {
         ksort($types);
         $types = array_values($types);

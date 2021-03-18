@@ -23,25 +23,25 @@ class UpdateFromGrid extends Processor
     public $entry;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('lexicons');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['lexicon'];
     }
 
     /**
-     * @return bool|string|null
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool|string|null
+    * @throws \xPDO\xPDOException
+    */
     public function initialize()
     {
         $data = $this->getProperty('data');
@@ -59,8 +59,8 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $language = $this->getProperty('language');

@@ -18,9 +18,9 @@ use MODX\Revolution\Processors\System\DatabaseTable\TruncateAbstract;
 class Truncate extends TruncateAbstract
 {
     /**
-     * @param string $table
-     * @return bool
-     */
+    * @param string $table
+    * @return bool
+    */
     public function truncate($table)
     {
         $sql = 'TRUNCATE TABLE ' . $this->modx->escape($table);

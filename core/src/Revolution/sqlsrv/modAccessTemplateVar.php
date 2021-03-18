@@ -11,15 +11,15 @@ class modAccessTemplateVar extends \MODX\Revolution\modAccessTemplateVar
         'version' => '3.0',
         'table' => 'access_templatevars',
         'extends' => 'MODX\\Revolution\\modAccessElement',
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'target',

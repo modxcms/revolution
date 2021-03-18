@@ -63,11 +63,11 @@ abstract class modManagerController
     protected $failureMessage = '';
 
     /**
-     * The constructor for the modManagerController class.
-     *
-     * @param modX  $modx   A reference to the modX object.
-     * @param array $config A configuration array of options related to this controller's action object.
-     */
+    * The constructor for the modManagerController class.
+    *
+    * @param modX  $modx   A reference to the modX object.
+    * @param array $config A configuration array of options related to this controller's action object.
+    */
     public function __construct(modX $modx, $config = [])
     {
         $this->modx =& $modx;
@@ -75,26 +75,26 @@ abstract class modManagerController
     }
 
     /**
-     * Can be used to provide custom methods prior to processing
-     *
-     * @return void
-     */
+    * Can be used to provide custom methods prior to processing
+    *
+    * @return void
+    */
     public function initialize()
     {
     }
 
     /**
-     * Return the proper instance of the derived class. This can be used to override how the manager loads a controller
-     * class; for example, when handling derivative classes with class_key settings.
-     *
-     * @static
-     *
-     * @param modX   $modx      A reference to the modX object.
-     * @param string $className The name of the class that is being requested.
-     * @param array  $config    A configuration array of options related to this controller's action object.
-     *
-     * @return modManagerController The class specified by $className
-     */
+    * Return the proper instance of the derived class. This can be used to override how the manager loads a controller
+    * class; for example, when handling derivative classes with class_key settings.
+    *
+    * @static
+    *
+    * @param modX   $modx      A reference to the modX object.
+    * @param string $className The name of the class that is being requested.
+    * @param array  $config    A configuration array of options related to this controller's action object.
+    *
+    * @return modManagerController The class specified by $className
+    */
     public static function getInstance(modX $modx, $className, array $config = [])
     {
         /** @var modManagerController $controller */
@@ -104,34 +104,34 @@ abstract class modManagerController
     }
 
     /**
-     * Sets the properties array for this controller
-     *
-     * @param array $properties
-     * @param bool $merge Indicates if properties should be merged with existing ones
-     *
-     * @return void
-     */
+    * Sets the properties array for this controller
+    *
+    * @param array $properties
+    * @param bool $merge Indicates if properties should be merged with existing ones
+    *
+    * @return void
+    */
     public function setProperties(array $properties, $merge = false)
     {
         $this->scriptProperties = $merge ? array_merge($this->scriptProperties, $properties) : $properties;
     }
 
     /**
-     * Set a property for this controller
-     *
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return void
-     */
+    * Set a property for this controller
+    *
+    * @param string $key
+    * @param mixed  $value
+    *
+    * @return void
+    */
     public function setProperty($key, $value)
     {
         $this->scriptProperties[$key] = $value;
     }
 
     /**
-     * Prepares the language placeholders
-     */
+    * Prepares the language placeholders
+    */
     public function prepareLanguage()
     {
         $this->modx->lexicon->load('action');
@@ -144,10 +144,10 @@ abstract class modManagerController
     }
 
     /**
-     * Render the controller.
-     *
-     * @return string
-     */
+    * Render the controller.
+    *
+    * @return string
+    */
     public function render()
     {
         $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
@@ -226,8 +226,8 @@ abstract class modManagerController
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     protected function assignPlaceholders()
     {
         foreach ($this->placeholders as $k => $v) {
@@ -236,13 +236,13 @@ abstract class modManagerController
     }
 
     /**
-     * Set a placeholder for this controller's template
-     *
-     * @param string $k The key of the placeholder
-     * @param mixed  $v The value of the placeholder
-     *
-     * @return void
-     */
+    * Set a placeholder for this controller's template
+    *
+    * @param string $k The key of the placeholder
+    * @param mixed  $v The value of the placeholder
+    *
+    * @return void
+    */
     public function setPlaceholder($k, $v)
     {
         $this->placeholders[$k] = $v;
@@ -250,12 +250,12 @@ abstract class modManagerController
     }
 
     /**
-     * Set an array of placeholders
-     *
-     * @param array $keys
-     *
-     * @return void
-     */
+    * Set an array of placeholders
+    *
+    * @param array $keys
+    *
+    * @return void
+    */
     public function setPlaceholders($keys)
     {
         foreach ($keys as $k => $v) {
@@ -265,35 +265,35 @@ abstract class modManagerController
     }
 
     /**
-     * Get all the set placeholders
-     *
-     * @return array
-     */
+    * Get all the set placeholders
+    *
+    * @return array
+    */
     public function getPlaceholders()
     {
         return $this->placeholders;
     }
 
     /**
-     * Get a specific placeholder set
-     *
-     * @param string $k
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
+    * Get a specific placeholder set
+    *
+    * @param string $k
+    * @param mixed  $default
+    *
+    * @return mixed
+    */
     public function getPlaceholder($k, $default = null)
     {
         return isset($this->placeholders[$k]) ? $this->placeholders[$k] : $default;
     }
 
     /**
-     * Fetch the template content
-     *
-     * @param string $tpl The path to the template
-     *
-     * @return string The output of the template
-     */
+    * Fetch the template content
+    *
+    * @param string $tpl The path to the template
+    *
+    * @return string The output of the template
+    */
     public function fetchTemplate($tpl)
     {
         $templatePath = '';
@@ -311,13 +311,13 @@ abstract class modManagerController
     }
 
     /**
-     * Load another manual controller file (such as header/footer)
-     *
-     * @param      $controller
-     * @param bool $coreOnly
-     *
-     * @return mixed|string
-     */
+    * Load another manual controller file (such as header/footer)
+    *
+    * @param      $controller
+    * @param bool $coreOnly
+    *
+    * @return mixed|string
+    */
     public function loadController($controller, $coreOnly = false)
     {
         /** @var modX $modx */
@@ -335,12 +335,12 @@ abstract class modManagerController
     }
 
     /**
-     * Set a failure on this controller. This will return the error message.
-     *
-     * @param string $message
-     *
-     * @return void
-     */
+    * Set a failure on this controller. This will return the error message.
+    *
+    * @param string $message
+    *
+    * @return void
+    */
     public function failure($message)
     {
         $this->isFailure = true;
@@ -348,11 +348,11 @@ abstract class modManagerController
     }
 
     /**
-     * Load the path to this controller's template's directory. Only override this if you want to override default
-     * behavior; otherwise, overriding getTemplatesPath is preferred.
-     *
-     * @return string
-     */
+    * Load the path to this controller's template's directory. Only override this if you want to override default
+    * behavior; otherwise, overriding getTemplatesPath is preferred.
+    *
+    * @return string
+    */
     public function loadTemplatesPath()
     {
         if (empty($this->templatesPaths)) {
@@ -367,23 +367,23 @@ abstract class modManagerController
     }
 
     /**
-     * Set the possible template paths for this controller
-     *
-     * @param array $paths
-     *
-     * @return void
-     */
+    * Set the possible template paths for this controller
+    *
+    * @param array $paths
+    *
+    * @return void
+    */
     public function setTemplatePaths(array $paths)
     {
         $this->templatesPaths = $paths;
     }
 
     /**
-     * Load an array of possible paths to this controller's directory. Only override this if you want to override
-     * default behavior; otherwise, overriding getControllersPath is preferred.
-     *
-     * @return array
-     */
+    * Load an array of possible paths to this controller's directory. Only override this if you want to override
+    * default behavior; otherwise, overriding getControllersPath is preferred.
+    *
+    * @return array
+    */
     public function loadControllersPath()
     {
         if (empty($this->controllersPaths)) {
@@ -395,12 +395,12 @@ abstract class modManagerController
 
 
     /**
-     * Get the path to this controller's directory. Override this to point to a custom directory.
-     *
-     * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
-     *
-     * @return array
-     */
+    * Get the path to this controller's directory. Override this to point to a custom directory.
+    *
+    * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
+    *
+    * @return array
+    */
     public function getControllersPaths($coreOnly = false)
     {
         if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) { /* for non-core controllers */
@@ -424,13 +424,13 @@ abstract class modManagerController
     }
 
     /**
-     * Get an array of possible paths to this controller's template's directory.
-     * Override this to point to a custom directory.
-     *
-     * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
-     *
-     * @return array|string
-     */
+    * Get an array of possible paths to this controller's template's directory.
+    * Override this to point to a custom directory.
+    *
+    * @param bool $coreOnly Ensure that it grabs the path from the core namespace only.
+    *
+    * @return array|string
+    */
     public function getTemplatesPaths($coreOnly = false)
     {
         /* extras */
@@ -449,13 +449,13 @@ abstract class modManagerController
     }
 
     /**
-     * Get an array of possible URLs to the template's directory.
-     * Override this to point to a custom directory.
-     *
-     * @param bool $specificThemeOnly Return URL only to theme specified in system settings
-     *
-     * @return array
-     */
+    * Get an array of possible URLs to the template's directory.
+    * Override this to point to a custom directory.
+    *
+    * @param bool $specificThemeOnly Return URL only to theme specified in system settings
+    *
+    * @return array
+    */
     public function getTemplatesUrls($specificThemeOnly = false)
     {
         $urls = [];
@@ -471,81 +471,81 @@ abstract class modManagerController
     }
 
     /**
-     * Do permission checking in this method. Returning false will present a "permission denied" message.
-     *
-     * @abstract
-     * @return boolean
-     */
+    * Do permission checking in this method. Returning false will present a "permission denied" message.
+    *
+    * @abstract
+    * @return boolean
+    */
     abstract public function checkPermissions();
 
     /**
-     * Process the controller, returning an array of placeholders to set.
-     *
-     * @abstract
-     *
-     * @param array $scriptProperties A array of REQUEST parameters.
-     *
-     * @return mixed Either an error or output string, or an array of placeholders to set.
-     */
+    * Process the controller, returning an array of placeholders to set.
+    *
+    * @abstract
+    *
+    * @param array $scriptProperties A array of REQUEST parameters.
+    *
+    * @return mixed Either an error or output string, or an array of placeholders to set.
+    */
     abstract public function process(array $scriptProperties = []);
 
     /**
-     * Return a string to set as the controller's page title.
-     *
-     * @abstract
-     * @return string
-     */
+    * Return a string to set as the controller's page title.
+    *
+    * @abstract
+    * @return string
+    */
     abstract public function getPageTitle();
 
     /**
-     * Register any custom CSS or JS in this method.
-     *
-     * @abstract
-     * @return void
-     */
+    * Register any custom CSS or JS in this method.
+    *
+    * @abstract
+    * @return void
+    */
     abstract public function loadCustomCssJs();
 
     /**
-     * Return the relative path to the template file to load
-     *
-     * @abstract
-     * @return string
-     */
+    * Return the relative path to the template file to load
+    *
+    * @abstract
+    * @return string
+    */
     abstract public function getTemplateFile();
 
     /**
-     * Specify an array of language topics to load for this controller
-     *
-     * @return array
-     */
+    * Specify an array of language topics to load for this controller
+    *
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return [];
     }
 
     /**
-     * Can be used to fire events after all the CSS/JS is loaded for a page
-     *
-     * @return void
-     */
+    * Can be used to fire events after all the CSS/JS is loaded for a page
+    *
+    * @return void
+    */
     public function firePostRenderEvents()
     {
     }
 
     /**
-     * Fire any pre-render events for the controller
-     *
-     * @return void
-     */
+    * Fire any pre-render events for the controller
+    *
+    * @return void
+    */
     public function firePreRenderEvents()
     {
     }
 
     /**
-     * Get the page header for the controller.
-     *
-     * @return string
-     */
+    * Get the page header for the controller.
+    *
+    * @return string
+    */
     public function getHeader()
     {
         $this->loadController('header.php', true);
@@ -554,10 +554,10 @@ abstract class modManagerController
     }
 
     /**
-     * Get the page footer for the controller.
-     *
-     * @return string
-     */
+    * Get the page footer for the controller.
+    *
+    * @return string
+    */
     public function getFooter()
     {
         $this->loadController('footer.php', true);
@@ -566,11 +566,11 @@ abstract class modManagerController
     }
 
     /**
-     * Registers the core and base JS scripts
-     *
-     * @access public
-     * @return void
-     */
+    * Registers the core and base JS scripts
+    *
+    * @access public
+    * @return void
+    */
     public function registerBaseScripts()
     {
         $managerUrl = $this->modx->getOption('manager_url');
@@ -651,12 +651,12 @@ abstract class modManagerController
     }
 
     /**
-     * Load theme specific layout.js if found, fallback to default layout
-     *
-     * @param array $externals An array of assets to load
-     *
-     * @return void
-     */
+    * Load theme specific layout.js if found, fallback to default layout
+    *
+    * @param array $externals An array of assets to load
+    *
+    * @return void
+    */
     public function loadLayout(array &$externals)
     {
         $templatesUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL) . 'templates/';
@@ -673,10 +673,10 @@ abstract class modManagerController
     }
 
     /**
-     * Get the default state for the UI
-     *
-     * @return array|mixed|string
-     */
+    * Get the default state for the UI
+    *
+    * @return array|mixed|string
+    */
     public function getDefaultState()
     {
         /** @var ProcessorResponse $response */
@@ -701,11 +701,11 @@ abstract class modManagerController
     }
 
     /**
-     * Grabs a stripped version of modx to prevent caching of JS after upgrades
-     *
-     * @access private
-     * @return string The parsed version string
-     */
+    * Grabs a stripped version of modx to prevent caching of JS after upgrades
+    *
+    * @access private
+    * @return string The parsed version string
+    */
     private function _prepareVersionPostfix()
     {
         $version = $this->modx->getVersionData();
@@ -714,15 +714,15 @@ abstract class modManagerController
     }
 
     /**
-     * Appends a version postfix to a script tag
-     *
-     * @access private
-     *
-     * @param string $str     The script tag to append the version to
-     * @param string $version The version to append
-     *
-     * @return string The adjusted script tag
-     */
+    * Appends a version postfix to a script tag
+    *
+    * @access private
+    *
+    * @param string $str     The script tag to append the version to
+    * @param string $version The version to append
+    *
+    * @return string The adjusted script tag
+    */
     private function _postfixVersionToScript($str, $version)
     {
         $pos = strpos($str, '.js');
@@ -738,8 +738,8 @@ abstract class modManagerController
     }
 
     /**
-     * Registers CSS/JS to manager interface
-     */
+    * Registers CSS/JS to manager interface
+    */
     public function registerCssJs()
     {
         $this->_prepareHead();
@@ -791,10 +791,10 @@ abstract class modManagerController
     }
 
     /**
-     * Prepare the set html/css/js to be added
-     *
-     * @return void
-     */
+    * Prepare the set html/css/js to be added
+    *
+    * @return void
+    */
     private function _prepareHead()
     {
         $this->head['js'] = array_unique($this->head['js']);
@@ -804,48 +804,48 @@ abstract class modManagerController
     }
 
     /**
-     * Add an external Javascript file to the head of the page
-     *
-     * @param string $script
-     *
-     * @return void
-     */
+    * Add an external Javascript file to the head of the page
+    *
+    * @param string $script
+    *
+    * @return void
+    */
     public function addJavascript($script)
     {
         $this->head['js'][] = $script;
     }
 
     /**
-     * Add a block of HTML to the head of the page
-     *
-     * @param string $script
-     *
-     * @return void
-     */
+    * Add a block of HTML to the head of the page
+    *
+    * @param string $script
+    *
+    * @return void
+    */
     public function addHtml($script)
     {
         $this->head['html'][] = $script;
     }
 
     /**
-     * Add a external CSS file to the head of the page
-     *
-     * @param string $script
-     *
-     * @return void
-     */
+    * Add a external CSS file to the head of the page
+    *
+    * @param string $script
+    *
+    * @return void
+    */
     public function addCss($script)
     {
         $this->head['css'][] = $script;
     }
 
     /**
-     * Add an external Javascript file to the head of the page
-     *
-     * @param string $script
-     *
-     * @return void
-     */
+    * Add an external Javascript file to the head of the page
+    *
+    * @param string $script
+    *
+    * @return void
+    */
     public function addLastJavascript($script)
     {
         $this->head['lastjs'][] = $script;
@@ -853,13 +853,13 @@ abstract class modManagerController
 
 
     /**
-     * Checks Form Customization rules for an object.
-     *
-     * @param xPDOObject $obj       If passed, will validate against for rules with constraints.
-     * @param bool       $forParent No longer used - filtering only happens by controller
-     *
-     * @return array
-     */
+    * Checks Form Customization rules for an object.
+    *
+    * @param xPDOObject $obj       If passed, will validate against for rules with constraints.
+    * @param bool       $forParent No longer used - filtering only happens by controller
+    *
+    * @return array
+    */
     public function checkFormCustomizationRules(&$obj = null, $forParent = false)
     {
         $overridden = [];
@@ -968,10 +968,10 @@ abstract class modManagerController
     }
 
     /**
-     * Load the working context for this controller.
-     *
-     * @return modContext|string
-     */
+    * Load the working context for this controller.
+    *
+    * @return modContext|string
+    */
     public function loadWorkingContext()
     {
         $wctx = !empty($_GET['wctx']) ? $_GET['wctx'] : $this->modx->context->get('key');
@@ -988,12 +988,12 @@ abstract class modManagerController
     }
 
     /**
-     * Adds a topic to the JS language array
-     *
-     * @param string $topic
-     *
-     * @return string
-     */
+    * Adds a topic to the JS language array
+    *
+    * @param string $topic
+    *
+    * @return string
+    */
     public function addLexiconTopic($topic)
     {
         $this->modx->lexicon->load($topic);

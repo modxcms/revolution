@@ -20,12 +20,12 @@ use xPDO\xPDO;
 class modDashboard extends xPDOSimpleObject
 {
     /**
-     * Get the default MODX dashboard
-     *
-     * @param xPDO $xpdo A reference to an xPDO instance
-     *
-     * @return modDashboard|null
-     */
+    * Get the default MODX dashboard
+    *
+    * @param xPDO $xpdo A reference to an xPDO instance
+    *
+    * @return modDashboard|null
+    */
     public static function getDefaultDashboard(xPDO &$xpdo)
     {
         /** @var modDashboard $defaultDashboard */
@@ -43,12 +43,12 @@ class modDashboard extends xPDOSimpleObject
 
 
     /**
-     * Override xPDOObject::remove() to revert to the default dashboard any user groups using this Dashboard
-     *
-     * @param array $ancestors
-     *
-     * @return boolean
-     */
+    * Override xPDOObject::remove() to revert to the default dashboard any user groups using this Dashboard
+    *
+    * @param array $ancestors
+    *
+    * @return boolean
+    */
     public function remove(array $ancestors = [])
     {
         $dashboardId = $this->get('id');
@@ -75,13 +75,13 @@ class modDashboard extends xPDOSimpleObject
 
 
     /**
-     * Render the Dashboard
-     *
-     * @param modManagerController $controller
-     * @param modUser              $user
-     *
-     * @return string
-     */
+    * Render the Dashboard
+    *
+    * @param modManagerController $controller
+    * @param modUser              $user
+    *
+    * @return string
+    */
     public function render(modManagerController $controller, $user = null)
     {
         if (!$user) {
@@ -131,9 +131,9 @@ class modDashboard extends xPDOSimpleObject
 
 
     /**
-     * @param int  $user
-     * @param bool $force
-     */
+    * @param int  $user
+    * @param bool $force
+    */
     public function sortWidgets($user = 0, $force = false)
     {
         if (!$force) {
@@ -170,8 +170,8 @@ class modDashboard extends xPDOSimpleObject
 
 
     /**
-     * @param modUser $user
-     */
+    * @param modUser $user
+    */
     protected function addUserWidgets(modUser $user)
     {
         $c = $this->xpdo->newQuery(modDashboardWidgetPlacement::class);

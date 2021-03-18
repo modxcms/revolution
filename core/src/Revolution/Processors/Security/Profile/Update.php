@@ -25,24 +25,24 @@ class Update extends Processor
     public $profile;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('change_profile');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->profile = $this->modx->user->getOne('Profile');
@@ -54,9 +54,9 @@ class Update extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     * @return array|string
-     */
+    * {@inheritDoc}
+    * @return array|string
+    */
     public function process()
     {
         if (!$this->validate()) {

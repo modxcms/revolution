@@ -24,24 +24,24 @@ class RemoveMultiple extends Processor
     public $source;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('source_delete');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['source'];
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $sources = $this->getProperty('sources');
@@ -75,9 +75,9 @@ class RemoveMultiple extends Processor
     }
 
     /**
-     * Log a manager action
-     * @return void
-     */
+    * Log a manager action
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('source_delete', modMediaSource::class, $this->source->get('id'));

@@ -25,8 +25,8 @@ class ConfigCheck extends Processor
     protected $warnings = [];
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $this->modx->lexicon->load('configcheck');
@@ -42,9 +42,9 @@ class ConfigCheck extends Processor
 
 
     /**
-     * @param $key
-     * @return bool
-     */
+    * @param $key
+    * @return bool
+    */
     protected function ini_get_bool($key)
     {
         $value = ini_get($key);
@@ -69,9 +69,9 @@ class ConfigCheck extends Processor
 
 
     /**
-     * @param $criteria
-     * @return mixed|null
-     */
+    * @param $criteria
+    * @return mixed|null
+    */
     protected function getResource($criteria)
     {
         $resource = null;
@@ -87,9 +87,9 @@ class ConfigCheck extends Processor
 
 
     /**
-     * @param $url
-     * @return bool|mixed
-     */
+    * @param $url
+    * @return bool|mixed
+    */
     protected function makeRequest($url)
     {
         if (!function_exists('curl_init')) {

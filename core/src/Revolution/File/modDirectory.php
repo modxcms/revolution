@@ -24,12 +24,12 @@ use RecursiveIteratorIterator;
 class modDirectory extends modFileSystemResource
 {
     /**
-     * Actually creates the new directory on the file system.
-     *
-     * @param string $mode Optional. The permissions of the new directory.
-     *
-     * @return boolean True if successful
-     */
+    * Actually creates the new directory on the file system.
+    *
+    * @param string $mode Optional. The permissions of the new directory.
+    *
+    * @return boolean True if successful
+    */
     public function create($mode = '')
     {
         $mode = $this->parseMode($mode);
@@ -46,12 +46,12 @@ class modDirectory extends modFileSystemResource
     }
 
     /**
-     * @see modFileSystemResource::parseMode
-     *
-     * @param string $mode
-     *
-     * @return boolean
-     */
+    * @see modFileSystemResource::parseMode
+    *
+    * @param string $mode
+    *
+    * @return boolean
+    */
     protected function parseMode($mode = '')
     {
         if (empty($mode)) {
@@ -63,13 +63,13 @@ class modDirectory extends modFileSystemResource
     }
 
     /**
-     * Removes the directory from the file system, recursively removing
-     * subdirectories and files.
-     *
-     * @param array $options Options for removal.
-     *
-     * @return boolean True if successful
-     */
+    * Removes the directory from the file system, recursively removing
+    * subdirectories and files.
+    *
+    * @param array $options Options for removal.
+    *
+    * @return boolean True if successful
+    */
     public function remove($options = [])
     {
         if ($this->path == '/') {
@@ -88,24 +88,24 @@ class modDirectory extends modFileSystemResource
     }
 
     /**
-     * Iterates over a modDirectory object and returns an array of all containing files and optionally directories,
-     * can run recursive, filter by file extension(s) or filenames and sort the resulting list with the specified sort options
-     * an anonymous callback function can be passed to modify the output on the fly, by default an array of paths is returned
-     *
-     * @param array $options Options for iterating the directory.
-     *
-     * @option boolean recursive If subdirectories should be scanned as well
-     * @option boolean sort If the resulting array should be sorted
-     * @option string sortdir What sort order should be applied: SORT_ASC|SORT_DESC
-     * @optoin string sortflag What sort flag should be applied: SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC etc
-     * @option boolean skiphidden If hidden directories and files should be ignored, defaults to true
-     * @option boolean skipdirs If directories should be skipped in the resulting array, defaults to true
-     * @option string|array skip Comma separated list or array of filenames (including extension) that should be ignored
-     * @option string|array extensions Comma separated list or array of file extensions to filter files by
-     * @option boolean|function callback Anonymous function to modify each output item, $item will be passed as argument
-     *
-     * @return array
-     */
+    * Iterates over a modDirectory object and returns an array of all containing files and optionally directories,
+    * can run recursive, filter by file extension(s) or filenames and sort the resulting list with the specified sort options
+    * an anonymous callback function can be passed to modify the output on the fly, by default an array of paths is returned
+    *
+    * @param array $options Options for iterating the directory.
+    *
+    * @option boolean recursive If subdirectories should be scanned as well
+    * @option boolean sort If the resulting array should be sorted
+    * @option string sortdir What sort order should be applied: SORT_ASC|SORT_DESC
+    * @optoin string sortflag What sort flag should be applied: SORT_REGULAR, SORT_NATURAL, SORT_NUMERIC etc
+    * @option boolean skiphidden If hidden directories and files should be ignored, defaults to true
+    * @option boolean skipdirs If directories should be skipped in the resulting array, defaults to true
+    * @option string|array skip Comma separated list or array of filenames (including extension) that should be ignored
+    * @option string|array extensions Comma separated list or array of file extensions to filter files by
+    * @option boolean|function callback Anonymous function to modify each output item, $item will be passed as argument
+    *
+    * @return array
+    */
     public function getList($options = [])
     {
         $options = array_merge([

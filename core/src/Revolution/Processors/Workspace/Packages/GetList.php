@@ -43,8 +43,8 @@ class GetList extends GetListProcessor
     public $providerCache = [];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
@@ -59,8 +59,8 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getData()
     {
         $data = [];
@@ -79,9 +79,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param array $list
-     * @return array
-     */
+    * @param array $list
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         $this->updatesCacheExpire = $this->modx->getOption('auto_check_pkg_updates_cache_expire', null, 5) * 60;
@@ -91,17 +91,17 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @return string
-     */
+    * @return string
+    */
     public function getSortClassKey()
     {
         return modTransportPackage::class;
     }
 
     /**
-     * @param xPDOObject|modTransportPackage $object
-     * @return array
-     */
+    * @param xPDOObject|modTransportPackage $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         if ($object->get('installed') === '0000-00-00 00:00:00') {
@@ -119,10 +119,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Get basic version information about the package
-     * @param array $packageArray
-     * @return array
-     */
+    * Get basic version information about the package
+    * @param array $packageArray
+    * @return array
+    */
     public function getVersionInfo(array $packageArray)
     {
         $signatureArray = explode('-', $packageArray['signature']);
@@ -135,10 +135,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Format installed, created and updated dates
-     * @param array $packageArray
-     * @return array
-     */
+    * Format installed, created and updated dates
+    * @param array $packageArray
+    * @return array
+    */
     public function formatDates(array $packageArray)
     {
         if ($packageArray['updated'] !== '0000-00-00 00:00:00' && $packageArray['updated'] !== null) {
@@ -159,11 +159,11 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Setup description, using either metadata or readme
-     * @param modTransportPackage $package
-     * @param array $packageArray
-     * @return array
-     */
+    * Setup description, using either metadata or readme
+    * @param modTransportPackage $package
+    * @param array $packageArray
+    * @return array
+    */
     public function getPackageMeta(modTransportPackage $package, array $packageArray)
     {
         $metadata = $packageArray['metadata'];
@@ -187,10 +187,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param modTransportPackage $package
-     * @param array $packageArray
-     * @return array
-     */
+    * @param modTransportPackage $package
+    * @param array $packageArray
+    * @return array
+    */
     public function checkForUpdates(modTransportPackage $package, array $packageArray)
     {
         $updates = ['count' => 0];

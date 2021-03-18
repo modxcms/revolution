@@ -11,11 +11,11 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
         'version' => '3.0',
         'table' => 'context_setting',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'context_key' => NULL,
             'key' => NULL,
@@ -25,9 +25,9 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
             'area' => '',
             'editedon' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -35,7 +35,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'index' => 'pk',
             ),
-            'key' => 
+            'key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '50',
@@ -43,12 +43,12 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'index' => 'pk',
             ),
-            'value' => 
+            'value' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
             ),
-            'xtype' => 
+            'xtype' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '75',
@@ -56,7 +56,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'default' => 'textfield',
             ),
-            'namespace' => 
+            'namespace' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '40',
@@ -64,7 +64,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'default' => 'core',
             ),
-            'area' => 
+            'area' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -72,7 +72,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'null' => false,
                 'default' => '',
             ),
-            'editedon' => 
+            'editedon' =>
             array (
                 'dbtype' => 'timestamp',
                 'phptype' => 'timestamp',
@@ -81,21 +81,21 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
-                'columns' => 
+                'columns' =>
                 array (
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'key' => 
+                    'key' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
@@ -103,9 +103,9 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'key' => 'context_key',
@@ -114,7 +114,7 @@ class modContextSetting extends \MODX\Revolution\modContextSetting
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'SystemSetting' => 
+            'SystemSetting' =>
             array (
                 'class' => 'MODX\\Revolution\\modSystemSetting',
                 'key' => 'key',

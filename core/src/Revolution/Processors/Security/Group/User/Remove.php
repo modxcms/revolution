@@ -27,24 +27,24 @@ class Remove extends Processor
     public $membership;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('usergroup_user_edit');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->membership = $this->modx->getObject(modUserGroupMember::class, [
@@ -59,8 +59,8 @@ class Remove extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         /** @var modUserGroup $userGroup */

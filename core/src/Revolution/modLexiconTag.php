@@ -21,9 +21,9 @@ namespace MODX\Revolution;
 class modLexiconTag extends modTag
 {
     /**
-     * Overrides modTag::__construct to set the Lexicon Tag token
-     * {@inheritdoc}
-     */
+    * Overrides modTag::__construct to set the Lexicon Tag token
+    * {@inheritdoc}
+    */
     function __construct(modX & $modx)
     {
         parent:: __construct($modx);
@@ -31,10 +31,10 @@ class modLexiconTag extends modTag
     }
 
     /**
-     * Processes a modLexiconTag, recursively processing nested tags.
-     *
-     * {@inheritdoc}
-     */
+    * Processes a modLexiconTag, recursively processing nested tags.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         parent:: process($properties, $content);
@@ -65,10 +65,10 @@ class modLexiconTag extends modTag
     }
 
     /**
-     * Get the raw source content of the link.
-     *
-     * {@inheritdoc}
-     */
+    * Get the raw source content of the link.
+    *
+    * {@inheritdoc}
+    */
     public function getContent(array $options = [])
     {
         if (!is_string($this->_content) || $this->_content === '') {

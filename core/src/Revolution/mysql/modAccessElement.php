@@ -11,17 +11,17 @@ class modAccessElement extends \MODX\Revolution\modAccessElement
         'version' => '3.0',
         'table' => 'access_elements',
         'extends' => 'MODX\\Revolution\\modAccess',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'context_key' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -31,17 +31,17 @@ class modAccessElement extends \MODX\Revolution\modAccessElement
                 'index' => 'fk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'alias' => 'context_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -50,9 +50,9 @@ class modAccessElement extends \MODX\Revolution\modAccessElement
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
                 'class' => 'MODX\\Revolution\\modElement',
                 'local' => 'target',
@@ -60,7 +60,7 @@ class modAccessElement extends \MODX\Revolution\modAccessElement
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'context_key',

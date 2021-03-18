@@ -19,16 +19,16 @@ class Truncate extends TruncateAbstract
 {
 
     /**
-     * @var TruncateAbstract
-     */
+    * @var TruncateAbstract
+    */
     protected $concreteProcessor;
 
     /**
-     * Creates a Processor object.
-     *
-     * @param modX $modx A reference to the modX instance
-     * @param array $properties An array of properties
-     */
+    * Creates a Processor object.
+    *
+    * @param modX $modx A reference to the modX instance
+    * @param array $properties An array of properties
+    */
     public function __construct(modX $modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
@@ -39,10 +39,10 @@ class Truncate extends TruncateAbstract
     }
 
     /**
-     * Truncate a database table
-     * @param string $table
-     * @return boolean
-     */
+    * Truncate a database table
+    * @param string $table
+    * @return boolean
+    */
     public function truncate($table)
     {
         return $this->concreteProcessor->truncate($table);

@@ -30,10 +30,10 @@ class UpdateFromElement extends Update
     public $element = null;
 
     /**
-     * Get element, if necessary
-     *
-     * @return null|modElement
-     */
+    * Get element, if necessary
+    *
+    * @return null|modElement
+    */
     public function getElement()
     {
         $elementId = (int)$this->getProperty('elementId', 0);
@@ -49,9 +49,9 @@ class UpdateFromElement extends Update
     }
 
     /**
-     * {@inheritdoc}
-     * @return bool|null|string
-     */
+    * {@inheritdoc}
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $this->element = $this->getElement();
@@ -74,20 +74,20 @@ class UpdateFromElement extends Update
     }
 
     /**
-     * Return data as array
-     *
-     * @return mixed
-     */
+    * Return data as array
+    *
+    * @return mixed
+    */
     public function getData()
     {
         return $this->modx->fromJSON($this->getProperty('data'));
     }
 
     /**
-     * Convert JSON data to array and unset default properties
-     *
-     * @return bool
-     */
+    * Convert JSON data to array and unset default properties
+    *
+    * @return bool
+    */
     public function beforeSave()
     {
         $data = $this->getData();
@@ -109,9 +109,9 @@ class UpdateFromElement extends Update
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         if (!$this->object) {
@@ -137,10 +137,10 @@ class UpdateFromElement extends Update
     }
 
     /**
-     * Log the property set update from element manager action
-     *
-     * @return void
-     */
+    * Log the property set update from element manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $key = $this->object ? $this->object->get($this->primaryKeyField) :

@@ -25,10 +25,10 @@ use xPDO\xPDO;
 class modChunk extends modElement
 {
     /**
-     * Overrides modElement::__construct to set the tag token for this Element
-     *
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * Overrides modElement::__construct to set the tag token for this Element
+    *
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(& $xpdo)
     {
         parent:: __construct($xpdo);
@@ -36,11 +36,11 @@ class modChunk extends modElement
     }
 
     /**
-     * Overrides modElement::save to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::save to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -73,11 +73,11 @@ class modChunk extends modElement
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::remove to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritdoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -105,11 +105,11 @@ class modChunk extends modElement
     }
 
     /**
-     * Overrides modElement::process to initialize the Chunk into the element cache,
-     * as well as set placeholders and filter the output.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::process to initialize the Chunk into the element cache,
+    * as well as set placeholders and filter the output.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         parent:: process($properties, $content);

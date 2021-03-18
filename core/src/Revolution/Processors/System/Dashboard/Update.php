@@ -30,8 +30,8 @@ class Update extends UpdateProcessor
     public $object;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $this->setWidgets();
@@ -40,8 +40,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Set the widgets assigned to this Dashboard
-     */
+    * Set the widgets assigned to this Dashboard
+    */
     public function setWidgets()
     {
         /** @var modDashboardWidgetPlacement[] $previousWidgets */

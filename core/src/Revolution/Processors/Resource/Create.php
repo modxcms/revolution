@@ -90,14 +90,14 @@ class Create extends CreateProcessor
     public $object;
 
     /**
-     * Allow for Resources to use derivative classes for their processors
-     *
-     * @static
-     * @param modX $modx
-     * @param $className
-     * @param array $properties
-     * @return CreateProcessor
-     */
+    * Allow for Resources to use derivative classes for their processors
+    *
+    * @static
+    * @param modX $modx
+    * @param $className
+    * @param array $properties
+    * @return CreateProcessor
+    */
     public static function getInstance(modX $modx, $className, $properties = [])
     {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modDocument::class;
@@ -115,9 +115,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Create the modResource object for manipulation
-     * @return string|modResource
-     */
+    * Create the modResource object for manipulation
+    * @return string|modResource
+    */
     public function initialize()
     {
         /* get the class_key to determine classKey and resourceDir */
@@ -131,12 +131,12 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Process the form and create the Resource
-     *
-     * {@inheritDoc}
-     *
-     * @return array|string
-     */
+    * Process the form and create the Resource
+    *
+    * {@inheritDoc}
+    *
+    * @return array|string
+    */
     public function beforeSet()
     {
         /* default settings */
@@ -175,8 +175,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Handle any properties-specific fields
-     */
+    * Handle any properties-specific fields
+    */
     public function handleResourceProperties()
     {
         if ($this->object->get('class_key') == modWebLink::class) {
@@ -188,9 +188,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function beforeSave()
     {
         if (!$this->object->get('class_key')) {
@@ -206,9 +206,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function afterSave()
     {
         $this->object->addLock();
@@ -220,9 +220,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function cleanup()
     {
         $this->object->removeLock();
@@ -231,9 +231,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Set defaults for the fields if values are not passed
-     * @return mixed
-     */
+    * Set defaults for the fields if values are not passed
+    * @return mixed
+    */
     public function setFieldDefaults()
     {
         $scriptProperties = $this->getProperties();
@@ -306,8 +306,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Handle if parent is a context
-     */
+    * Handle if parent is a context
+    */
     public function checkIfParentIsContext()
     {
         $parent = $this->getProperty('parent');
@@ -321,9 +321,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Set and prepare the parent field
-     * @return int
-     */
+    * Set and prepare the parent field
+    * @return int
+    */
     public function prepareParent()
     {
         $this->checkIfParentIsContext();
@@ -335,9 +335,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Make sure parent exists and user can add_children to the parent
-     * @return boolean|string
-     */
+    * Make sure parent exists and user can add_children to the parent
+    * @return boolean|string
+    */
     public function checkParentPermissions()
     {
         $parent = null;
@@ -358,9 +358,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Prepare the pagetitle for insertion
-     * @return string
-     */
+    * Prepare the pagetitle for insertion
+    * @return string
+    */
     public function preparePageTitle()
     {
         $pageTitle = $this->getProperty('pagetitle', '');
@@ -379,10 +379,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Get the working Context for the Resource
-     *
-     * @return modContext
-     */
+    * Get the working Context for the Resource
+    *
+    * @return modContext
+    */
     public function getWorkingContext()
     {
         $contextKey = $this->getProperty('context_key', '');
@@ -395,9 +395,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Clean and prepare the alias, automatically generating it if the option is set
-     * @return string
-     */
+    * Clean and prepare the alias, automatically generating it if the option is set
+    * @return string
+    */
     public function prepareAlias()
     {
         // The user submitted alias & page title
@@ -446,9 +446,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check if new resource token posted from manager
-     * @return boolean
-     */
+    * Check if new resource token posted from manager
+    * @return boolean
+    */
     public function checkForAllowableCreateToken()
     {
         $tokenPassed = true;
@@ -469,9 +469,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Add Template Variables to the Resource object
-     * @return array
-     */
+    * Add Template Variables to the Resource object
+    * @return array
+    */
     public function addTemplateVariables()
     {
         $addedTemplateVariables = [];
@@ -533,9 +533,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Set the menu index on the Resource, incrementing if not set
-     * @return int
-     */
+    * Set the menu index on the Resource, incrementing if not set
+    * @return int
+    */
     public function setMenuIndex()
     {
         $autoMenuIndex = $this->workingContext->getOption('auto_menuindex', true);
@@ -551,9 +551,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save
-     * @return boolean
-     */
+    * Invoke OnBeforeDocFormSave event, and allow non-empty responses to prevent save
+    * @return boolean
+    */
     public function fireBeforeSaveEvent()
     {
         /** @var array $OnBeforeDocFormSave */
@@ -577,10 +577,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Save the Resource Groups on the object
-     *
-     * @return void
-     */
+    * Save the Resource Groups on the object
+    *
+    * @return void
+    */
     public function saveResourceGroups()
     {
         $resourceGroups = $this->getProperty('resource_groups', null);
@@ -634,9 +634,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Invoke OnDocFormSave event
-     * @return void
-     */
+    * Invoke OnDocFormSave event
+    * @return void
+    */
     public function fireAfterSaveEvent()
     {
         $this->modx->invokeEvent('OnDocFormSave', [
@@ -648,10 +648,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Update parent to be a container if user has save permission
-     *
-     * @return boolean
-     */
+    * Update parent to be a container if user has save permission
+    *
+    * @return boolean
+    */
     public function setParentToContainer()
     {
         $saved = false;
@@ -665,10 +665,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Quick check to make sure it's not site_start, if so, publish if not published to prevent site error
-     *
-     * @return boolean
-     */
+    * Quick check to make sure it's not site_start, if so, publish if not published to prevent site error
+    *
+    * @return boolean
+    */
     public function checkIfSiteStart()
     {
         $saved = false;
@@ -680,9 +680,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check that the symlink target is a valid resource ID
-     * @return bool
-     */
+    * Check that the symlink target is a valid resource ID
+    * @return bool
+    */
     public function checkSymLinkTarget()
     {
         $target = $this->getProperty('content', null);
@@ -709,9 +709,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check that the weblink target is a valid resource ID if it contains an integer value
-     * @return bool
-     */
+    * Check that the weblink target is a valid resource ID if it contains an integer value
+    * @return bool
+    */
     public function checkWebLinkTarget()
     {
         $target = $this->getProperty('content', null);
@@ -735,9 +735,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Clear the cache if specified
-     * @return boolean
-     */
+    * Clear the cache if specified
+    * @return boolean
+    */
     public function clearCache()
     {
         $clear = $this->getProperty('syncsite', false) || $this->getProperty('clearCache', false);
@@ -752,4 +752,3 @@ class Create extends CreateProcessor
         return $clear;
     }
 }
-

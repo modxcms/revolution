@@ -44,11 +44,11 @@ class RestClientRequest
     public $rootNode = 'request';
 
     /**
-     * The RestClientRequest constructor
-     *
-     * @param modX  $modx   A reference to the modX instance
-     * @param array $config An array of configuration options
-     */
+    * The RestClientRequest constructor
+    *
+    * @param modX  $modx   A reference to the modX instance
+    * @param array $config An array of configuration options
+    */
     function __construct(modX &$modx, array $config = [])
     {
         $this->modx =& $modx;
@@ -63,66 +63,66 @@ class RestClientRequest
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
-     */
+    * @param string $key
+    * @param mixed  $value
+    */
     public function setOption($key, $value)
     {
         $this->config[$key] = $value;
     }
 
     /**
-     * @param string $key
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
+    * @param string $key
+    * @param mixed  $default
+    *
+    * @return mixed
+    */
     public function getOption($key, $default = null)
     {
         return array_key_exists($key, $this->config) ? $this->config[$key] : $default;
     }
 
     /**
-     * Set the root node of the request. Only used for XML requests.
-     *
-     * @param string $node
-     */
+    * Set the root node of the request. Only used for XML requests.
+    *
+    * @param string $node
+    */
     public function setRootNode($node)
     {
         $this->rootNode = $node;
     }
 
     /**
-     * Set the request parameters for the request.
-     *
-     * @param array $parameters
-     */
+    * Set the request parameters for the request.
+    *
+    * @param array $parameters
+    */
     public function setRequestParameters(array $parameters)
     {
         $this->requestParameters = array_merge($this->defaultRequestParameters, $parameters);
     }
 
     /**
-     * Set the HTTP headers on the request
-     *
-     * @param array $headers
-     * @param bool  $merge
-     */
+    * Set the HTTP headers on the request
+    *
+    * @param array $headers
+    * @param bool  $merge
+    */
     public function setHeaders($headers = [], $merge = false)
     {
         $this->headers = $merge ? array_merge($this->headers, $headers) : $headers;
     }
 
     /**
-     * Execute the request, properly preparing it, setting the URL and sending the request via cURL
-     *
-     * @param string $path
-     * @param string $method
-     * @param array  $parameters
-     * @param array  $headers
-     *
-     * @return RestClientResponse
-     */
+    * Execute the request, properly preparing it, setting the URL and sending the request via cURL
+    *
+    * @param string $path
+    * @param string $method
+    * @param array  $parameters
+    * @param array  $headers
+    *
+    * @return RestClientResponse
+    */
     public function execute($path, $method = 'GET', $parameters = [], $headers = [])
     {
         $this->url = $path;
@@ -138,8 +138,8 @@ class RestClientRequest
     }
 
     /**
-     * Prepare the request for sending
-     */
+    * Prepare the request for sending
+    */
     protected function prepare()
     {
         $this->prepareHandle();
@@ -151,10 +151,10 @@ class RestClientRequest
     }
 
     /**
-     * Send the request over the wire
-     *
-     * @return RestClientResponse
-     */
+    * Send the request over the wire
+    *
+    * @return RestClientResponse
+    */
     protected function send()
     {
         $this->modx->log(modX::LOG_LEVEL_INFO,
@@ -173,10 +173,10 @@ class RestClientRequest
     }
 
     /**
-     * Load the request handle
-     *
-     * @return mixed
-     */
+    * Load the request handle
+    *
+    * @return mixed
+    */
     protected function prepareHandle()
     {
         $this->handle = curl_init();
@@ -185,8 +185,8 @@ class RestClientRequest
     }
 
     /**
-     * Set any authentication options for this request
-     */
+    * Set any authentication options for this request
+    */
     protected function prepareAuthentication()
     {
         $username = $this->getOption('username', '');
@@ -197,8 +197,8 @@ class RestClientRequest
     }
 
     /**
-     * Set any HTTP headers and load them into the request options
-     */
+    * Set any HTTP headers and load them into the request options
+    */
     protected function prepareHeaders()
     {
         if (!empty($this->headers)) {
@@ -212,10 +212,10 @@ class RestClientRequest
     }
 
     /**
-     * Prepare the URL, prefixing the baseUrl if set, and setting the format suffix, if wanted
-     *
-     * @return mixed
-     */
+    * Prepare the URL, prefixing the baseUrl if set, and setting the format suffix, if wanted
+    *
+    * @return mixed
+    */
     protected function prepareUrl()
     {
         $format = $this->getOption('format', 'json');
@@ -242,8 +242,8 @@ class RestClientRequest
     }
 
     /**
-     * Prepare the payload of parameters to be sent with the request
-     */
+    * Prepare the payload of parameters to be sent with the request
+    */
     protected function preparePayload()
     {
         if ($this->method != 'GET') {
@@ -287,8 +287,8 @@ class RestClientRequest
     }
 
     /**
-     * Prepare the request options to be sent, setting them on the cURL handle
-     */
+    * Prepare the request options to be sent, setting them on the cURL handle
+    */
     protected function prepareRequestOptions()
     {
         $curlOptions = $this->getOption('curlOptions');
@@ -300,8 +300,8 @@ class RestClientRequest
     }
 
     /**
-     * Setup the default request options
-     */
+    * Setup the default request options
+    */
     private function _setDefaultRequestOptions()
     {
         $this->requestOptions = [
@@ -346,12 +346,12 @@ class RestClientRequest
     }
 
     /**
-     * Format an array of parameters into a query string
-     *
-     * @param array $parameters
-     *
-     * @return string
-     */
+    * Format an array of parameters into a query string
+    *
+    * @param array $parameters
+    *
+    * @return string
+    */
     private function _formatQuery(array $parameters)
     {
         $query = http_build_query($parameters);
@@ -360,11 +360,11 @@ class RestClientRequest
     }
 
     /**
-     * @param array  $parameters
-     * @param string $rootNode
-     *
-     * @return string
-     */
+    * @param array  $parameters
+    * @param string $rootNode
+    *
+    * @return string
+    */
     public function toXml($parameters, $rootNode)
     {
         $doc = new DOMDocument("1.0", 'UTF-8');
@@ -375,10 +375,10 @@ class RestClientRequest
     }
 
     /**
-     * @param DOMDocument   $doc
-     * @param DOMNode       $node
-     * @param array|DOMNode $parameters
-     */
+    * @param DOMDocument   $doc
+    * @param DOMNode       $node
+    * @param array|DOMNode $parameters
+    */
     protected function _populateXmlDoc(&$doc, &$node, &$parameters)
     {
         foreach ($parameters as $key => $val) {

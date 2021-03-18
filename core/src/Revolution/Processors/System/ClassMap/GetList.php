@@ -28,10 +28,10 @@ class GetList extends GetListProcessor
     public $permission = 'class_map';
 
     /**
-     * {@inheritDoc}
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * {@inheritDoc}
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $parentClass = $this->getProperty('parentClass', '');
@@ -44,10 +44,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Filter the query by the valueField of MODx.combo.ClassMap to get the initially value displayed right
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * Filter the query by the valueField of MODx.combo.ClassMap to get the initially value displayed right
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $class = $this->getProperty('class', '');

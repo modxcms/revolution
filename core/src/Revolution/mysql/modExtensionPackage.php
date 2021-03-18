@@ -11,11 +11,11 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
         'version' => '3.0',
         'table' => 'extension_packages',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'namespace' => 'core',
             'name' => 'core',
@@ -26,9 +26,9 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
             'created_at' => NULL,
             'updated_at' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'namespace' => 
+            'namespace' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '40',
@@ -37,7 +37,7 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
                 'default' => 'core',
                 'index' => 'index',
             ),
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -46,13 +46,13 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
                 'default' => 'core',
                 'index' => 'index',
             ),
-            'path' => 
+            'path' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => true,
             ),
-            'table_prefix' => 
+            'table_prefix' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -60,7 +60,7 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
                 'null' => false,
                 'default' => '',
             ),
-            'service_class' => 
+            'service_class' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -68,7 +68,7 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
                 'null' => false,
                 'default' => '',
             ),
-            'service_name' => 
+            'service_name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -76,30 +76,30 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
                 'null' => false,
                 'default' => '',
             ),
-            'created_at' => 
+            'created_at' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => true,
             ),
-            'updated_at' => 
+            'updated_at' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => true,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'namespace' => 
+            'namespace' =>
             array (
                 'alias' => 'namespace',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'namespace' => 
+                    'namespace' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -107,15 +107,15 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
                     ),
                 ),
             ),
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -124,9 +124,9 @@ class modExtensionPackage extends \MODX\Revolution\modExtensionPackage
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Namespace' => 
+            'Namespace' =>
             array (
                 'class' => 'MODX\\Revolution\\modNamespace',
                 'local' => 'namespace',

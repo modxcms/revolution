@@ -28,7 +28,7 @@ class Remove extends RemoveProcessor
     public function afterRemove()
     {
         $this->modx->cacheManager->flushPermissions();
-        
+
         return parent::afterRemove();
     }
 }

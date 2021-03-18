@@ -11,20 +11,20 @@ class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
         'version' => '3.0',
         'table' => 'access_policy_templates',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'template_group' => 0,
             'name' => '',
             'description' => NULL,
             'lexicon' => 'permissions',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'template_group' => 
+            'template_group' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -34,7 +34,7 @@ class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
                 'default' => 0,
                 'index' => 'index',
             ),
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -43,12 +43,12 @@ class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
             ),
-            'lexicon' => 
+            'lexicon' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -57,9 +57,9 @@ class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
                 'default' => 'permissions',
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Permissions' => 
+            'Permissions' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPermission',
                 'local' => 'id',
@@ -67,7 +67,7 @@ class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
                 'owner' => 'local',
                 'cardinality' => 'many',
             ),
-            'Policies' => 
+            'Policies' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicy',
                 'local' => 'id',
@@ -76,9 +76,9 @@ class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
                 'cardinality' => 'many',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'TemplateGroup' => 
+            'TemplateGroup' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicyTemplateGroup',
                 'local' => 'template_group',

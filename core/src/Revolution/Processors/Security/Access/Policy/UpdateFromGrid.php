@@ -22,9 +22,9 @@ namespace MODX\Revolution\Processors\Security\Access\Policy;
 class UpdateFromGrid extends Update
 {
     /**
-     * @return bool|string|null
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool|string|null
+    * @throws \xPDO\xPDOException
+    */
     public function initialize()
     {
         $data = $this->getProperty('data');

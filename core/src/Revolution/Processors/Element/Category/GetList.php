@@ -99,10 +99,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param array                      $list
-     * @param modCategory[]|xPDOObject[] $children
-     * @param string                     $nestedName
-     */
+    * @param array                      $list
+    * @param modCategory[]|xPDOObject[] $children
+    * @param string                     $nestedName
+    */
     public function includeCategoryChildren(&$list, $children, $nestedName)
     {
         if ($children) {
@@ -122,11 +122,11 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param modCategory|xPDOObject $parent
-     * @param string                 $parentName
-     *
-     * @return string
-     */
+    * @param modCategory|xPDOObject $parent
+    * @param string                 $parentName
+    *
+    * @return string
+    */
     public function includeCategoryParent($parent, $parentName)
     {
         if ($parent) {

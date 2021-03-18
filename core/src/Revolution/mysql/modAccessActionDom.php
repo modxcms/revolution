@@ -11,19 +11,19 @@ class modAccessActionDom extends \MODX\Revolution\modAccessActionDom
         'version' => '3.0',
         'table' => 'access_actiondom',
         'extends' => 'MODX\\Revolution\\modAccess',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
                 'class' => 'MODX\\Revolution\\modActionDom',
                 'local' => 'target',

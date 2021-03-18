@@ -76,9 +76,9 @@ class Search extends GetListProcessor
     }
 
     /**
-     * Get a collection of Context keys that the User can access for all the Resources
-     * @return array
-     */
+    * Get a collection of Context keys that the User can access for all the Resources
+    * @return array
+    */
     public function getContextKeys()
     {
         $contextKeys = [];

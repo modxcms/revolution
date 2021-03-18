@@ -36,8 +36,8 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'target';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -56,9 +56,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns($this->classKey, $c->getAlias()));
@@ -77,8 +77,8 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getData()
     {
         $data = [];
@@ -117,9 +117,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $principal = $this->modx->getObject($object->get('principal_class'), $object->get('principal'));
@@ -158,9 +158,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Return formatted and translated string for anonymous value.
-     * @return string
-     */
+    * Return formatted and translated string for anonymous value.
+    * @return string
+    */
     protected function getAnonymName()
     {
         return '(' . $this->modx->lexicon('anonymous') . ')';

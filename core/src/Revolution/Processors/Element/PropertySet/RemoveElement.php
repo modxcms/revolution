@@ -28,9 +28,9 @@ class RemoveElement extends RemoveProcessor
     public $languageTopics = ['propertyset', 'element'];
 
     /**
-     * {@inheritdoc}
-     * @return bool|null|string
-     */
+    * {@inheritdoc}
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $elementClass = $this->getProperty('element_class', '');
@@ -61,9 +61,9 @@ class RemoveElement extends RemoveProcessor
     }
 
     /**
-     * {@inheritdoc}
-     * @return array|string
-     */
+    * {@inheritdoc}
+    * @return array|string
+    */
     public function process()
     {
         if ($this->object->remove() === false) {
@@ -75,10 +75,10 @@ class RemoveElement extends RemoveProcessor
     }
 
     /**
-     * Log the removal of element from a property set manager action
-     *
-     * @return void
-     */
+    * Log the removal of element from a property set manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $item = $this->object->get('element_class') . ' ' . $this->object->get('element') .

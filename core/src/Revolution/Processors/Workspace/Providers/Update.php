@@ -32,8 +32,8 @@ class Update extends UpdateProcessor
     public $object;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name', '');

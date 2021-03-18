@@ -66,10 +66,10 @@ class Associate extends UpdateProcessor
     }
 
     /**
-     * Return the success message
-     *
-     * @return array
-     */
+    * Return the success message
+    *
+    * @return array
+    */
     public function cleanup()
     {
         return $this->success();

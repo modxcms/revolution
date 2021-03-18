@@ -25,8 +25,8 @@ class Deactivate extends UpdateProcessor
     public $permission = 'customize_forms';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $this->unsetProperty('action');
@@ -34,8 +34,8 @@ class Deactivate extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->object->set('active', false);

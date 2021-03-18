@@ -26,8 +26,8 @@ class Create extends CreateProcessor
     public $objectType = 'set';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->object->set('constraint_class', modResource::class);

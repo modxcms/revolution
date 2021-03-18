@@ -26,35 +26,35 @@ use xPDO\xPDO;
 class modManagerRequest extends modRequest
 {
     /**
-     * @var string The action to load.
-     * @access public
-     */
+    * @var string The action to load.
+    * @access public
+    */
     public $action = null;
     /**
-     * @deprecated 2.0.0 Use $modx->error instead.
-     * @var modError The error handler for the request.
-     * @access     public
-     */
+    * @deprecated 2.0.0 Use $modx->error instead.
+    * @var modError The error handler for the request.
+    * @access     public
+    */
     public $error = null;
     /**
-     * @var string The REQUEST parameter to load actions by.
-     * @access public
-     */
+    * @var string The REQUEST parameter to load actions by.
+    * @access public
+    */
     public $actionVar = 'a';
     /**
-     * @var mixed The default action to load from.
-     * @access public
-     */
+    * @var mixed The default action to load from.
+    * @access public
+    */
     public $defaultAction = 'welcome';
 
     public $namespace = 'core';
     public $namespaceVar = 'namespace';
 
     /**
-     * Instantiates a modManagerRequest object.
-     *
-     * @param modX $modx
-     */
+    * Instantiates a modManagerRequest object.
+    *
+    * @param modX $modx
+    */
     public function __construct(modX $modx)
     {
         parent:: __construct($modx);
@@ -62,11 +62,11 @@ class modManagerRequest extends modRequest
     }
 
     /**
-     * Initializes the manager request.
-     *
-     * @access public
-     * @return boolean True if successful.
-     */
+    * Initializes the manager request.
+    *
+    * @access public
+    * @return boolean True if successful.
+    */
     public function initialize()
     {
         $this->sanitizeRequest();
@@ -95,9 +95,9 @@ class modManagerRequest extends modRequest
         header('Content-Type: text/html; charset=' . $this->modx->getOption('modx_charset'));
 
         /*
-         * TODO: implement destroy active sessions if installing
-         * TODO: implement regen session if not destroyed from install
-         */
+        * TODO: implement destroy active sessions if installing
+        * TODO: implement regen session if not destroyed from install
+        */
 
         /* include version info */
         if ($this->modx->version === null) {
@@ -116,10 +116,10 @@ class modManagerRequest extends modRequest
     }
 
     /**
-     * The primary MODX manager request handler (a.k.a. controller).
-     *
-     * @access public
-     */
+    * The primary MODX manager request handler (a.k.a. controller).
+    *
+    * @access public
+    */
     public function handleRequest()
     {
         /* Load error handling class */
@@ -144,11 +144,11 @@ class modManagerRequest extends modRequest
     }
 
     /**
-     * This implementation adds register logging capabilities via $_POST vars
-     * when the error handler is loaded.
-     *
-     * @param string $class
-     */
+    * This implementation adds register logging capabilities via $_POST vars
+    * when the error handler is loaded.
+    *
+    * @param string $class
+    */
     public function loadErrorHandler($class = modError::class)
     {
         parent:: loadErrorHandler($class);
@@ -159,12 +159,12 @@ class modManagerRequest extends modRequest
     }
 
     /**
-     * Prepares the MODX response to a mgr request that is being handled.
-     *
-     * @access public
-     *
-     * @param array $options An array of options
-     */
+    * Prepares the MODX response to a mgr request that is being handled.
+    *
+    * @access public
+    *
+    * @param array $options An array of options
+    */
     public function prepareResponse(array $options = [])
     {
         if (!$this->modx->getResponse(modManagerResponse::class)) {

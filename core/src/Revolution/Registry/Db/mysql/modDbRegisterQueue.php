@@ -11,18 +11,18 @@ class modDbRegisterQueue extends \MODX\Revolution\Registry\Db\modDbRegisterQueue
         'version' => '3.0',
         'table' => 'register_queues',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'options' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -30,23 +30,23 @@ class modDbRegisterQueue extends \MODX\Revolution\Registry\Db\modDbRegisterQueue
                 'null' => false,
                 'index' => 'unique',
             ),
-            'options' => 
+            'options' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'array',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -55,9 +55,9 @@ class modDbRegisterQueue extends \MODX\Revolution\Registry\Db\modDbRegisterQueue
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Topics' => 
+            'Topics' =>
             array (
                 'class' => 'MODX\\Revolution\\Registry\\Db\\modDbRegisterTopic',
                 'local' => 'id',

@@ -31,9 +31,9 @@ class GetList extends GetListProcessor
     public $permission = 'namespaces';
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -42,10 +42,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * {@inheritDoc}
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $search = $this->getProperty('search', '');
@@ -59,10 +59,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Filter the query by the name property to get the right value in preselectFirstValue of MODx.combo.Namespace
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * Filter the query by the name property to get the right value in preselectFirstValue of MODx.combo.Namespace
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $name = $this->getProperty('name', '');
@@ -73,10 +73,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Prepare the Namespace for listing
-     * @param xPDOObject $object
-     * @return array
-     */
+    * Prepare the Namespace for listing
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

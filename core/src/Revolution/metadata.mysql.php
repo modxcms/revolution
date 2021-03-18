@@ -3,9 +3,9 @@ $xpdo_meta_map = array (
     'version' => '3.0',
     'namespace' => 'MODX\\Revolution',
     'namespacePrefix' => 'MODX',
-    'class_map' => 
+    'class_map' =>
     array (
-        'xPDO\\Om\\xPDOSimpleObject' => 
+        'xPDO\\Om\\xPDOSimpleObject' =>
         array (
             0 => 'MODX\\Revolution\\modAccess',
             1 => 'MODX\\Revolution\\modAccessPolicy',
@@ -33,7 +33,7 @@ $xpdo_meta_map = array (
             23 => 'MODX\\Revolution\\modUserProfile',
             24 => 'MODX\\Revolution\\modWorkspace',
         ),
-        'MODX\\Revolution\\modAccess' => 
+        'MODX\\Revolution\\modAccess' =>
         array (
             0 => 'MODX\\Revolution\\modAccessActionDom',
             1 => 'MODX\\Revolution\\modAccessCategory',
@@ -44,11 +44,11 @@ $xpdo_meta_map = array (
             6 => 'MODX\\Revolution\\modAccessResource',
             7 => 'MODX\\Revolution\\modAccessResourceGroup',
         ),
-        'MODX\\Revolution\\modAccessElement' => 
+        'MODX\\Revolution\\modAccessElement' =>
         array (
             0 => 'MODX\\Revolution\\modAccessTemplateVar',
         ),
-        'xPDO\\Om\\xPDOObject' => 
+        'xPDO\\Om\\xPDOObject' =>
         array (
             0 => 'MODX\\Revolution\\modAccessibleObject',
             1 => 'MODX\\Revolution\\modActiveUser',
@@ -66,14 +66,14 @@ $xpdo_meta_map = array (
             13 => 'MODX\\Revolution\\modUserGroupSetting',
             14 => 'MODX\\Revolution\\modUserSetting',
         ),
-        'MODX\\Revolution\\modAccessibleObject' => 
+        'MODX\\Revolution\\modAccessibleObject' =>
         array (
             0 => 'MODX\\Revolution\\modAccessibleSimpleObject',
             1 => 'MODX\\Revolution\\modContext',
             2 => 'MODX\\Revolution\\modMenu',
             3 => 'MODX\\Revolution\\modNamespace',
         ),
-        'MODX\\Revolution\\modAccessibleSimpleObject' => 
+        'MODX\\Revolution\\modAccessibleSimpleObject' =>
         array (
             0 => 'MODX\\Revolution\\modActionDom',
             1 => 'MODX\\Revolution\\modCategory',
@@ -81,26 +81,26 @@ $xpdo_meta_map = array (
             3 => 'MODX\\Revolution\\modResource',
             4 => 'MODX\\Revolution\\modResourceGroup',
         ),
-        'MODX\\Revolution\\modElement' => 
+        'MODX\\Revolution\\modElement' =>
         array (
             0 => 'MODX\\Revolution\\modChunk',
             1 => 'MODX\\Revolution\\modScript',
             2 => 'MODX\\Revolution\\modTemplate',
             3 => 'MODX\\Revolution\\modTemplateVar',
         ),
-        'MODX\\Revolution\\modResource' => 
+        'MODX\\Revolution\\modResource' =>
         array (
             0 => 'MODX\\Revolution\\modDocument',
             1 => 'MODX\\Revolution\\modStaticResource',
             2 => 'MODX\\Revolution\\modSymLink',
             3 => 'MODX\\Revolution\\modWebLink',
         ),
-        'MODX\\Revolution\\modScript' => 
+        'MODX\\Revolution\\modScript' =>
         array (
             0 => 'MODX\\Revolution\\modPlugin',
             1 => 'MODX\\Revolution\\modSnippet',
         ),
-        'MODX\\Revolution\\modPrincipal' => 
+        'MODX\\Revolution\\modPrincipal' =>
         array (
             0 => 'MODX\\Revolution\\modUser',
             1 => 'MODX\\Revolution\\modUserGroup',

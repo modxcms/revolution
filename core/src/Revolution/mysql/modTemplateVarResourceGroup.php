@@ -11,18 +11,18 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
         'version' => '3.0',
         'table' => 'site_tmplvar_access',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'tmplvarid' => 0,
             'documentgroup' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'tmplvarid' => 
+            'tmplvarid' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -31,7 +31,7 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
                 'null' => false,
                 'default' => 0,
             ),
-            'documentgroup' => 
+            'documentgroup' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -40,21 +40,21 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
                 'default' => 0,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'tmplvar_template' => 
+            'tmplvar_template' =>
             array (
                 'alias' => 'tmplvar_template',
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'tmplvarid' => 
+                    'tmplvarid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'documentgroup' => 
+                    'documentgroup' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -63,9 +63,9 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'TemplateVar' => 
+            'TemplateVar' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'tmplvarid',
@@ -73,7 +73,7 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'ResourceGroup' => 
+            'ResourceGroup' =>
             array (
                 'class' => 'MODX\\Revolution\\modResourceGroup',
                 'local' => 'documentgroup',

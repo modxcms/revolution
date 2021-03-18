@@ -11,7 +11,7 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
         'version' => '3.0',
         'table' => 'register_topics',
         'extends' => 'MODX\\Revolution\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'queue' => NULL,
             'name' => NULL,
@@ -19,16 +19,16 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
             'updated' => NULL,
             'options' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'queue' => 
+            'queue' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'index' => 'fk',
             ),
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -36,35 +36,35 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
                 'null' => false,
                 'index' => 'fk',
             ),
-            'created' => 
+            'created' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => false,
             ),
-            'updated' => 
+            'updated' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
             ),
-            'options' => 
+            'options' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'array',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'queue' => 
+            'queue' =>
             array (
                 'alias' => 'queue',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'queue' => 
+                    'queue' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -72,15 +72,15 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
                     ),
                 ),
             ),
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -89,9 +89,9 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Messages' => 
+            'Messages' =>
             array (
                 'class' => 'MODX\\Revolution\\Registry\\Db\\modDbRegisterMessage',
                 'local' => 'id',
@@ -100,9 +100,9 @@ class modDbRegisterTopic extends \MODX\Revolution\Registry\Db\modDbRegisterTopic
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Queue' => 
+            'Queue' =>
             array (
                 'class' => 'MODX\\Revolution\\Registry\\Db\\modDbRegisterQueue',
                 'local' => 'queue',

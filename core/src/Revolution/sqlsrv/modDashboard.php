@@ -11,16 +11,16 @@ class modDashboard extends \MODX\Revolution\modDashboard
         'version' => '3.0',
         'table' => 'dashboard',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'description' => NULL,
             'hide_trees' => 0,
             'customizable' => 1,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -28,13 +28,13 @@ class modDashboard extends \MODX\Revolution\modDashboard
                 'null' => false,
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'hide_trees' => 
+            'hide_trees' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -42,7 +42,7 @@ class modDashboard extends \MODX\Revolution\modDashboard
                 'default' => 0,
                 'index' => 'index',
             ),
-            'customizable' => 
+            'customizable' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -50,17 +50,17 @@ class modDashboard extends \MODX\Revolution\modDashboard
                 'default' => 1,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -68,15 +68,15 @@ class modDashboard extends \MODX\Revolution\modDashboard
                     ),
                 ),
             ),
-            'hide_trees' => 
+            'hide_trees' =>
             array (
                 'alias' => 'hide_trees',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'hide_trees' => 
+                    'hide_trees' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -85,9 +85,9 @@ class modDashboard extends \MODX\Revolution\modDashboard
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Placements' => 
+            'Placements' =>
             array (
                 'class' => 'MODX\\Revolution\\modDashboardWidgetPlacement',
                 'local' => 'id',
@@ -96,9 +96,9 @@ class modDashboard extends \MODX\Revolution\modDashboard
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'UserGroups' => 
+            'UserGroups' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'id',

@@ -31,10 +31,10 @@ class GetOnline extends GetListProcessor
     public $defaultSortDirection = 'desc';
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     * @throws \Exception
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    * @throws \Exception
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $date_timezone = !empty($this->modx->getOption('date_timezone')) ? $this->modx->getOption('date_timezone') : date_default_timezone_get();
@@ -62,10 +62,10 @@ class GetOnline extends GetListProcessor
     }
 
     /**
-     * Prepare the row for iteration
-     * @param xPDOObject $object
-     * @return array
-     */
+    * Prepare the row for iteration
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $row = $object->toArray();

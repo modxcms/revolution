@@ -23,73 +23,73 @@ use SimpleXMLElement;
  */
 class modRestClient {
     /**
-     * @const The path of the request
-     */
+    * @const The path of the request
+    */
     const OPT_PATH = 'path';
     /**
-     * @const The port of the request
-     */
+    * @const The port of the request
+    */
     const OPT_PORT = 'port';
     /**
-     * @const The response class to use when generating the response object
-     */
+    * @const The response class to use when generating the response object
+    */
     const OPT_RESPONSE_CLASS = 'restResponse.class';
     /**
-     * @const The number of seconds before the request times out
-     */
+    * @const The number of seconds before the request times out
+    */
     const OPT_TIMEOUT = 'timeout';
     /**
-     * @const The user-agent sent in the request
-     */
+    * @const The user-agent sent in the request
+    */
     const OPT_USERAGENT = 'userAgent';
     /**
-     * @const The user password to send with the request
-     */
+    * @const The user password to send with the request
+    */
     const OPT_USERPWD = 'userpwd';
     /**
-     * @const The authentication type for the request
-     */
+    * @const The authentication type for the request
+    */
     const OPT_AUTHTYPE = 'authtype';
 
     /**
-     * @var modX $modx A reference to the modX instance.
-     * @access public
-     */
+    * @var modX $modx A reference to the modX instance.
+    * @access public
+    */
     public $modx = null;
     /**
-     * @var array $config The configuration array.
-     * @access public
-     */
+    * @var array $config The configuration array.
+    * @access public
+    */
     public $config = [];
     /**
-     * @var modRestClient $conn The client connection instance to use.
-     * @access public
-     */
+    * @var modRestClient $conn The client connection instance to use.
+    * @access public
+    */
     public $conn = null;
     /**
-     * @var modRestResponse $response The response object after a request is
-     * made.
-     * @access public
-     */
+    * @var modRestResponse $response The response object after a request is
+    * made.
+    * @access public
+    */
     public $response = null;
     /**
-     * @access public
-     * @var string The expected response type
-     */
+    * @access public
+    * @var string The expected response type
+    */
     public $responseType = 'xml';
     /**
-     * The current host to connect to
-     * @var string $host
-     */
+    * The current host to connect to
+    * @var string $host
+    */
     public $host;
 
     /**
-     * The constructor for the modRestClient class. Assigns a modX instance
-     * reference and sets up the basic config array.
-     *
-     * @param modX &$modx A reference to the modX instance.
-     * @param array $config An array of configuration options.
-     */
+    * The constructor for the modRestClient class. Assigns a modX instance
+    * reference and sets up the basic config array.
+    *
+    * @param modX &$modx A reference to the modX instance.
+    * @param array $config An array of configuration options.
+    */
     function __construct(modX &$modx,array $config = []) {
         $this->modx =& $modx;
         $this->config = array_merge([
@@ -102,12 +102,12 @@ class modRestClient {
     }
 
     /**
-     * Get the connection class for the client. Defaults to cURL, then
-     * fsockopen. If neither exists, returns false.
-     *
-     * @access public
-     * @return boolean True if a connection can be made.
-     */
+    * Get the connection class for the client. Defaults to cURL, then
+    * fsockopen. If neither exists, returns false.
+    *
+    * @access public
+    * @return boolean True if a connection can be made.
+    */
     public function getConnection() {
         $className = false;
         if (function_exists('curl_init')) {
@@ -123,17 +123,17 @@ class modRestClient {
     }
 
     /**
-     * Send a REST request
-     *
-     * @access public
-     * @param string $host The host of the REST server.
-     * @param string $path The path to request to on the REST server.
-     * @param string $method The HTTP method to use for the request. May be GET,
-     * PUT or POST.
-     * @param array $params An array of parameters to send with the request.
-     * @param array $options An array of options to pass to the request.
-     * @return modRestResponse The response object.
-     */
+    * Send a REST request
+    *
+    * @access public
+    * @param string $host The host of the REST server.
+    * @param string $path The path to request to on the REST server.
+    * @param string $method The HTTP method to use for the request. May be GET,
+    * PUT or POST.
+    * @param array $params An array of parameters to send with the request.
+    * @param array $options An array of options to pass to the request.
+    * @return modRestResponse The response object.
+    */
     public function request($host,$path,$method = 'GET',array $params = [],array $options = []) {
         if (!is_object($this->conn)) {
             $loaded = $this->getConnection();
@@ -149,22 +149,22 @@ class modRestClient {
     }
 
     /**
-     * Sets the response type
-     *
-     * @param string $type The type to set, either json or xml
-     */
+    * Sets the response type
+    *
+    * @param string $type The type to set, either json or xml
+    */
     public function setResponseType($type) {
         $this->responseType = $type;
     }
 
     /**
-     * Translates a SimpleXMLElement object into an array.
-     *
-     * @access public
-     * @param SimpleXMLElement $obj
-     * @param array &$arr The reference array to store the results in.
-     * @return boolean True if successful.
-     */
+    * Translates a SimpleXMLElement object into an array.
+    *
+    * @access public
+    * @param SimpleXMLElement $obj
+    * @param array &$arr The reference array to store the results in.
+    * @return boolean True if successful.
+    */
     public function xml2array($obj, &$arr) {
         if (!($obj instanceof SimpleXMLElement)) return false;
         $children = $obj->children();

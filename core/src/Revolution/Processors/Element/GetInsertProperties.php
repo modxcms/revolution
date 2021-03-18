@@ -70,10 +70,10 @@ class GetInsertProperties extends Processor
     }
 
     /**
-     * Get the properties for the element
-     *
-     * @return array
-     */
+    * Get the properties for the element
+    *
+    * @return array
+    */
     public function getElementProperties()
     {
         $properties = $this->element->get('properties');
@@ -94,13 +94,13 @@ class GetInsertProperties extends Processor
     }
 
     /**
-     * Prepare the property array for property insertion
-     *
-     * @param string $key
-     * @param array  $property
-     *
-     * @return array
-     */
+    * Prepare the property array for property insertion
+    *
+    * @param string $key
+    * @param array  $property
+    *
+    * @return array
+    */
     public function prepareProperty($key, array $property)
     {
         $xtype = 'textfield';
@@ -225,7 +225,7 @@ class GetInsertProperties extends Processor
                 }
 
                 $listener = [
-                    'fn' => 'function(data) { 
+                    'fn' => 'function(data) {
                                 if (data.fullRelativeUrl) {
                                     // sets the correct path in the select field
                                     Ext.getCmp(\'tvbrowser' . $key . '\').setValue(data.fullRelativeUrl);

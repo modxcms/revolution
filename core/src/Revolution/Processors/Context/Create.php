@@ -47,10 +47,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * {inheritDoc}
-     *
-     * @return mixed
-     */
+    * {inheritDoc}
+    *
+    * @return mixed
+    */
     public function afterSave()
     {
         $this->ensureAdministratorAccess();
@@ -63,23 +63,23 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check to see if the context already exists
-     *
-     * @param string $key
-     *
-     * @return boolean
-     */
+    * Check to see if the context already exists
+    *
+    * @param string $key
+    *
+    * @return boolean
+    */
     public function alreadyExists($key)
     {
         return $this->modx->getCount(modContext::class, $key) > 0;
     }
 
     /**
-     * Ensure that Admin User Group always has access to this context, so that it never loses the ability
-     * to remove or edit it.
-     *
-     * @return void
-     */
+    * Ensure that Admin User Group always has access to this context, so that it never loses the ability
+    * to remove or edit it.
+    *
+    * @return void
+    */
     public function ensureAdministratorAccess()
     {
         /** @var modUserGroup $adminGroup */
@@ -100,10 +100,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Enable anonymous Load Only access to a context.
-     *
-     * @return void
-     */
+    * Enable anonymous Load Only access to a context.
+    *
+    * @return void
+    */
     public function enableAnonymousAccess()
     {
         $anonContextPolicy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Load Only']);
@@ -125,10 +125,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Refresh the mgr user ACLs to accurately update the context's permissions
-     *
-     * @return void
-     */
+    * Refresh the mgr user ACLs to accurately update the context's permissions
+    *
+    * @return void
+    */
     public function refreshUserACLs()
     {
         if ($this->modx->getUser()) {

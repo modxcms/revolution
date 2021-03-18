@@ -21,24 +21,24 @@ use MODX\Revolution\modX;
 class RemoveMultiple extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('customize_forms');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['formcustomization'];
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $profiles = $this->getProperty('profiles');

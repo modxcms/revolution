@@ -31,8 +31,8 @@ class AddAcl extends CreateProcessor
     public $languageTopics = ['access'];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->classKey = $this->getProperty('type');
@@ -44,8 +44,8 @@ class AddAcl extends CreateProcessor
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeSet()
     {
         $this->setDefaultProperties([
@@ -64,8 +64,8 @@ class AddAcl extends CreateProcessor
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeSave()
     {
         $c = [
@@ -88,9 +88,9 @@ class AddAcl extends CreateProcessor
     }
 
     /**
-     * Reload current user's ACLs
-     * @return bool
-     */
+    * Reload current user's ACLs
+    * @return bool
+    */
     public function afterSave()
     {
         if ($this->modx->getUser()) {

@@ -11,18 +11,18 @@ class modResourceGroupResource extends \MODX\Revolution\modResourceGroupResource
         'version' => '3.0',
         'table' => 'document_groups',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'document_group' => 0,
             'document' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'document_group' => 
+            'document_group' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -31,7 +31,7 @@ class modResourceGroupResource extends \MODX\Revolution\modResourceGroupResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'document' => 
+            'document' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -41,17 +41,17 @@ class modResourceGroupResource extends \MODX\Revolution\modResourceGroupResource
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'document_group' => 
+            'document_group' =>
             array (
                 'alias' => 'document_group',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'document_group' => 
+                    'document_group' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -59,15 +59,15 @@ class modResourceGroupResource extends \MODX\Revolution\modResourceGroupResource
                     ),
                 ),
             ),
-            'document' => 
+            'document' =>
             array (
                 'alias' => 'document',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'document' => 
+                    'document' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -76,9 +76,9 @@ class modResourceGroupResource extends \MODX\Revolution\modResourceGroupResource
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'ResourceGroup' => 
+            'ResourceGroup' =>
             array (
                 'class' => 'MODX\\Revolution\\modResourceGroup',
                 'key' => 'id',
@@ -87,7 +87,7 @@ class modResourceGroupResource extends \MODX\Revolution\modResourceGroupResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Resource' => 
+            'Resource' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'key' => 'id',

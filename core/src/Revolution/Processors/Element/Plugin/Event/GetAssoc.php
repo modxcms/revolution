@@ -30,12 +30,12 @@ class GetAssoc extends GetListProcessor
     public $objectType = 'plugin';
 
     /**
-     * Filter by system event
-     *
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * Filter by system event
+    *
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->innerJoin(modPluginEvent::class, 'modPluginEvent', [
@@ -47,12 +47,12 @@ class GetAssoc extends GetListProcessor
     }
 
     /**
-     * Add selection of priority and propertyset
-     *
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * Add selection of priority and propertyset
+    *
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns(modPlugin::class, 'modPlugin'));
@@ -65,12 +65,12 @@ class GetAssoc extends GetListProcessor
     }
 
     /**
-     * Filter only desired fields
-     *
-     * @param xPDOObject $object
-     *
-     * @return array
-     */
+    * Filter only desired fields
+    *
+    * @param xPDOObject $object
+    *
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

@@ -21,43 +21,43 @@ namespace MODX\Revolution;
 class modResponse
 {
     /**
-     * A reference to the modX instance
-     *
-     * @var modX $modx
-     */
+    * A reference to the modX instance
+    *
+    * @var modX $modx
+    */
     public $modx = null;
     /**
-     * The HTTP header for this Response
-     *
-     * @var string $header
-     */
+    * The HTTP header for this Response
+    *
+    * @var string $header
+    */
     public $header = null;
     /**
-     * The body of this response
-     *
-     * @var string $body
-     */
+    * The body of this response
+    *
+    * @var string $body
+    */
     public $body = null;
     /**
-     * The current content type on the resource
-     *
-     * @var modContentType $contentType
-     */
+    * The current content type on the resource
+    *
+    * @var modContentType $contentType
+    */
     public $contentType = null;
 
     /**
-     * @param modX $modx A reference to the modX instance
-     */
+    * @param modX $modx A reference to the modX instance
+    */
     public function __construct(modX $modx)
     {
         $this->modx = &$modx;
     }
 
     /**
-     * Prepare the final response after the resource has been processed.
-     *
-     * @param array $options Various options that can be set.
-     */
+    * Prepare the final response after the resource has been processed.
+    *
+    * @param array $options Various options that can be set.
+    */
     public function outputContent(array $options = [])
     {
         if (!($this->contentType = $this->modx->resource->getOne('ContentType'))) {
@@ -191,26 +191,26 @@ class modResponse
     }
 
     /**
-     * Sends a redirect to the specified URL using the specified method.
-     *
-     * Valid $type values include:
-     *    REDIRECT_REFRESH  Uses the header refresh method
-     *    REDIRECT_META  Sends a a META HTTP-EQUIV="Refresh" tag to the output
-     *    REDIRECT_HEADER  Uses the header location method
-     *
-     * REDIRECT_HEADER is the default.
-     *
-     * @param string        $url          The URL to redirect the client browser to.
-     * @param array|boolean $options      An array of options for the redirect OR
-     *                                    indicates if redirect attempts should be counted and limited to 3 (latter is deprecated
-     *                                    usage; use count_attempts in options array).
-     * @param string        $type         The type of redirection to attempt (deprecated, use type in
-     *                                    options array).
-     * @param string        $responseCode The type of HTTP response code HEADER to send for the
-     *                                    redirect (deprecated, use responseCode in options array)
-     *
-     * @return void
-     */
+    * Sends a redirect to the specified URL using the specified method.
+    *
+    * Valid $type values include:
+    *    REDIRECT_REFRESH  Uses the header refresh method
+    *    REDIRECT_META  Sends a a META HTTP-EQUIV="Refresh" tag to the output
+    *    REDIRECT_HEADER  Uses the header location method
+    *
+    * REDIRECT_HEADER is the default.
+    *
+    * @param string        $url          The URL to redirect the client browser to.
+    * @param array|boolean $options      An array of options for the redirect OR
+    *                                    indicates if redirect attempts should be counted and limited to 3 (latter is deprecated
+    *                                    usage; use count_attempts in options array).
+    * @param string        $type         The type of redirection to attempt (deprecated, use type in
+    *                                    options array).
+    * @param string        $responseCode The type of HTTP response code HEADER to send for the
+    *                                    redirect (deprecated, use responseCode in options array)
+    *
+    * @return void
+    */
     public function sendRedirect($url, $options = false, $type = '', $responseCode = '')
     {
         if (!is_array($options)) {
@@ -278,10 +278,10 @@ class modResponse
     }
 
     /**
-     * Checks to see if the preview parameter is set.
-     *
-     * @return boolean
-     */
+    * Checks to see if the preview parameter is set.
+    *
+    * @return boolean
+    */
     public function checkPreview()
     {
         $preview = false;

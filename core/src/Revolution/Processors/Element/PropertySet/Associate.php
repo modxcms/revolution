@@ -21,12 +21,12 @@ use MODX\Revolution\modPropertySet;
 class Associate extends AddElement
 {
     /**
-     * Grab Property Set to check if it exists or create new and get its ID
-     *
-     * @param $propertySetId
-     *
-     * @return bool|null|string
-     */
+    * Grab Property Set to check if it exists or create new and get its ID
+    *
+    * @param $propertySetId
+    *
+    * @return bool|null|string
+    */
     public function getPropertySet(&$propertySetId)
     {
         // set up proper field names

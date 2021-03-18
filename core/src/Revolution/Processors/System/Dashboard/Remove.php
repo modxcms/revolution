@@ -26,8 +26,8 @@ class Remove extends RemoveProcessor
     public $objectType = 'dashboard';
 
     /**
-     * @return array|bool|string
-     */
+    * @return array|bool|string
+    */
     public function beforeRemove()
     {
         if ($this->object->get('id') === 1 || $this->object->get('name') === $this->modx->lexicon('default')) {

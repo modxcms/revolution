@@ -11,16 +11,16 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
         'version' => '3.0',
         'table' => 'site_plugin_events',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'pluginid' => 0,
             'event' => '',
             'priority' => 0,
             'propertyset' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'pluginid' => 
+            'pluginid' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -28,7 +28,7 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'event' => 
+            'event' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -37,7 +37,7 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'default' => '',
                 'index' => 'pk',
             ),
-            'priority' => 
+            'priority' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -45,7 +45,7 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'default' => 0,
                 'index' => 'index',
             ),
-            'propertyset' => 
+            'propertyset' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -54,23 +54,23 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'pluginid' => 
+                    'pluginid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'event' => 
+                    'event' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -78,15 +78,15 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                     ),
                 ),
             ),
-            'priority' => 
+            'priority' =>
             array (
                 'alias' => 'priority',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'priority' => 
+                    'priority' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -95,9 +95,9 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Plugin' => 
+            'Plugin' =>
             array (
                 'class' => 'MODX\\Revolution\\modPlugin',
                 'local' => 'pluginid',
@@ -105,7 +105,7 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Event' => 
+            'Event' =>
             array (
                 'class' => 'MODX\\Revolution\\modEvent',
                 'local' => 'event',
@@ -113,7 +113,7 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'PropertySet' => 
+            'PropertySet' =>
             array (
                 'class' => 'MODX\\Revolution\\modPropertySet',
                 'local' => 'propertyset',

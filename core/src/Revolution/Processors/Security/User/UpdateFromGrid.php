@@ -18,9 +18,9 @@ namespace MODX\Revolution\Processors\Security\User;
 class UpdateFromGrid extends Update
 {
     /**
-     * @return bool|string
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool|string
+    * @throws \xPDO\xPDOException
+    */
     public function initialize()
     {
         $data = $this->getProperty('data');

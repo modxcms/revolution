@@ -20,16 +20,16 @@ use xPDO\Cache\xPDOCacheManager;
 class Get extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('error_log_view');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $logTarget = $this->modx->getLogTarget();

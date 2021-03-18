@@ -27,8 +27,8 @@ class Remove extends RemoveProcessor
     public $primaryKeyField = 'name';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeRemove()
     {
         return 'core' !== $this->getProperty('name');

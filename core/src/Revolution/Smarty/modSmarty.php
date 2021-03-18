@@ -28,34 +28,34 @@ use xPDO\xPDO;
 class modSmarty extends SmartyBC
 {
     /**
-     * A reference to the modX instance
-     *
-     * @var modX
-     */
+    * A reference to the modX instance
+    *
+    * @var modX
+    */
     public $modx = null;
     /**
-     * A reference to the Smarty instance
-     *
-     * @var Smarty
-     */
+    * A reference to the Smarty instance
+    *
+    * @var Smarty
+    */
     public $smarty;
     /**
-     * Any custom blocks loaded
-     *
-     * @var array
-     */
+    * Any custom blocks loaded
+    *
+    * @var array
+    */
     public $_blocks;
     /**
-     * The derived block loaded
-     *
-     * @var mixed
-     */
+    * The derived block loaded
+    *
+    * @var mixed
+    */
     public $_derived;
 
     /**
-     * @param modX  $modx   A reference to the modX object
-     * @param array $params An array of configuration parameters
-     */
+    * @param modX  $modx   A reference to the modX object
+    * @param array $params An array of configuration parameters
+    */
     function __construct(modX &$modx, $params = [])
     {
         parent:: __construct();
@@ -86,13 +86,13 @@ class modSmarty extends SmartyBC
     }
 
     /**
-     * Sets the cache path for this Smarty instance
-     *
-     * @access public
-     *
-     * @param string $path The path to set. Defaults to '', which in turn
-     *                     defaults to $this->modx->cachePath.
-     */
+    * Sets the cache path for this Smarty instance
+    *
+    * @access public
+    *
+    * @param string $path The path to set. Defaults to '', which in turn
+    *                     defaults to $this->modx->cachePath.
+    */
     public function setCachePath($path = '')
     {
         $path = $this->modx->getOption(xPDO::OPT_CACHE_PATH) . $path;
@@ -104,14 +104,14 @@ class modSmarty extends SmartyBC
     }
 
     /**
-     * Sets the template path for this Smarty instance
-     *
-     * @access public
-     *
-     * @param string $path The path to set.
-     *
-     * @return boolean True if successful
-     */
+    * Sets the template path for this Smarty instance
+    *
+    * @access public
+    *
+    * @param string $path The path to set.
+    *
+    * @return boolean True if successful
+    */
     public function setTemplatePath($path = '')
     {
         if (empty($path)) {
@@ -126,13 +126,13 @@ class modSmarty extends SmartyBC
     }
 
     /**
-     * Display a template by echoing the output of a Smarty::fetch().
-     *
-     * @param string|object $template   the resource handle of the template file or template object
-     * @param mixed         $cache_id   cache id to be used with this template
-     * @param mixed         $compile_id compile id to be used with this template
-     * @param object        $parent     next higher level of Smarty variables
-     */
+    * Display a template by echoing the output of a Smarty::fetch().
+    *
+    * @param string|object $template   the resource handle of the template file or template object
+    * @param mixed         $cache_id   cache id to be used with this template
+    * @param mixed         $compile_id compile id to be used with this template
+    * @param object        $parent     next higher level of Smarty variables
+    */
     public function display($template = null, $cache_id = null, $compile_id = null, $parent = null)
     {
         try {
@@ -143,14 +143,14 @@ class modSmarty extends SmartyBC
     }
 
     /**
-     * @param null $template
-     * @param null $cache_id
-     * @param null $compile_id
-     * @param null $parent
-     *
-     * @return string
-     * @throws Exception
-     */
+    * @param null $template
+    * @param null $cache_id
+    * @param null $compile_id
+    * @param null $parent
+    *
+    * @return string
+    * @throws Exception
+    */
     public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null)
     {
         $output = '';

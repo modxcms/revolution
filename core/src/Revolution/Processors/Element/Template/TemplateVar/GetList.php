@@ -37,10 +37,10 @@ class GetList extends GetListProcessor
     public $languageTopics = ['template'];
 
     /**
-     * Prepare conditions for TV list
-     *
-     * @return array
-     */
+    * Prepare conditions for TV list
+    *
+    * @return array
+    */
     public function prepareConditions()
     {
         $conditions = [];
@@ -61,10 +61,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Load template which TVs are assigned to or new template
-     *
-     * @return modTemplate
-     */
+    * Load template which TVs are assigned to or new template
+    *
+    * @return modTemplate
+    */
     public function loadTemplate()
     {
         $templateId = $this->getProperty($this->primaryKeyField, 0);
@@ -77,9 +77,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritdoc}
-     * @return array
-     */
+    * {@inheritdoc}
+    * @return array
+    */
     public function getData()
     {
         $sort = $this->getProperty('sort');
@@ -99,11 +99,11 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritdoc}
-     * @param xPDOObject $object
-     *
-     * @return array|mixed
-     */
+    * {@inheritdoc}
+    * @param xPDOObject $object
+    *
+    * @return array|mixed
+    */
     public function prepareRow(xPDOObject $object)
     {
         $tvArray = $object->get(['id', 'name', 'caption', 'tv_rank', 'category_name']);

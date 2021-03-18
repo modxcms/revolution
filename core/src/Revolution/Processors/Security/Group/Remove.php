@@ -28,8 +28,8 @@ class Remove extends RemoveProcessor
     public $afterRemoveEvent = 'OnUserGroupFormRemove';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeRemove()
     {
         if ($this->isAdminGroup()) {
@@ -40,9 +40,9 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * See if this User Group is the Administrator group
-     * @return boolean
-     */
+    * See if this User Group is the Administrator group
+    * @return boolean
+    */
     public function isAdminGroup()
     {
         return $this->object->get('id') === 1 || $this->object->get('name') === $this->modx->lexicon('administrator');

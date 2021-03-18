@@ -92,42 +92,42 @@ abstract class ImportProcessor extends ModelProcessor
     }
 
     /**
-     * Do any before save logic
-     *
-     * @return boolean
-     */
+    * Do any before save logic
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Do any after save logic
-     *
-     * @return boolean
-     */
+    * Do any after save logic
+    *
+    * @return boolean
+    */
     public function afterSave()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Check to see if the object already exists with this name field
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
+    * Check to see if the object already exists with this name field
+    *
+    * @param string $name
+    *
+    * @return bool
+    */
     public function alreadyExists($name)
     {
         return $this->modx->getCount($this->classKey, [$this->nameField => $name]) > 0;
     }
 
     /**
-     * Log the export manager action
-     *
-     * @return void
-     */
+    * Log the export manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction($this->objectType . '_import', $this->classKey,

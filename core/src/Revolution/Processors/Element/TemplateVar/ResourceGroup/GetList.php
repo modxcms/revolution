@@ -70,10 +70,10 @@ class GetList extends Processor
     }
 
     /**
-     * Get the Resource Group objects
-     *
-     * @return array
-     */
+    * Get the Resource Group objects
+    *
+    * @return array
+    */
     public function getData()
     {
         $data = [];
@@ -93,12 +93,12 @@ class GetList extends Processor
     }
 
     /**
-     * Prepare object for iteration
-     *
-     * @param modResourceGroup $resourceGroup
-     *
-     * @return array
-     */
+    * Prepare object for iteration
+    *
+    * @param modResourceGroup $resourceGroup
+    *
+    * @return array
+    */
     public function prepareRow(modResourceGroup $resourceGroup)
     {
         if ($this->getProperty('tv')) {

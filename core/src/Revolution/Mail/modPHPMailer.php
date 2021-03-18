@@ -27,11 +27,11 @@ class modPHPMailer extends modMail
     public $mailer;
 
     /**
-     * Constructs a new instance of the modPHPMailer class.
-     *
-     * @param modX  $modx       A reference to the modX instance
-     * @param array $attributes An array of attributes for the instance
-     */
+    * Constructs a new instance of the modPHPMailer class.
+    *
+    * @param modX  $modx       A reference to the modX instance
+    * @param array $attributes An array of attributes for the instance
+    */
     function __construct(modX &$modx, array $attributes = [])
     {
         parent:: __construct($modx, $attributes);
@@ -39,12 +39,12 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Sets a PHPMailer attribute corresponding to the modX::MAIL_* constants or
-     * a custom key.
-     *
-     * @param string $key   The attribute key to set
-     * @param mixed  $value The value to set
-     */
+    * Sets a PHPMailer attribute corresponding to the modX::MAIL_* constants or
+    * a custom key.
+    *
+    * @param string $key   The attribute key to set
+    * @param mixed  $value The value to set
+    */
     public function set($key, $value)
     {
         parent:: set($key, $value);
@@ -153,14 +153,14 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Adds an address to the mailer
-     *
-     * @param string $type  The type of address (to, reply-to, bcc, cc)
-     * @param string $email The email address to address to
-     * @param string $name  The name of the email address
-     *
-     * @return boolean True if was addressed
-     */
+    * Adds an address to the mailer
+    *
+    * @param string $type  The type of address (to, reply-to, bcc, cc)
+    * @param string $email The email address to address to
+    * @param string $name  The name of the email address
+    *
+    * @return boolean True if was addressed
+    */
     public function address($type, $email, $name = '')
     {
         $set = false;
@@ -193,12 +193,12 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Adds a custom header to the mailer
-     *
-     * @param string $header The header to set
-     *
-     * @return boolean True if the header was successfully set
-     */
+    * Adds a custom header to the mailer
+    *
+    * @param string $header The header to set
+    *
+    * @return boolean True if the header was successfully set
+    */
     public function header($header)
     {
         $set = parent:: header($header);
@@ -210,12 +210,12 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Send the email, applying any attributes to the mailer before sending.
-     *
-     * @param array $attributes An array of attributes to pass when sending
-     *
-     * @return boolean True if the email was successfully sent
-     */
+    * Send the email, applying any attributes to the mailer before sending.
+    *
+    * @param array $attributes An array of attributes to pass when sending
+    *
+    * @return boolean True if the email was successfully sent
+    */
     public function send(array $attributes = [])
     {
         parent:: send($attributes);
@@ -240,10 +240,10 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Resets all PHPMailer attributes, including recipients and attachments.
-     *
-     * @param array $attributes An array of attributes to pass when resetting
-     */
+    * Resets all PHPMailer attributes, including recipients and attachments.
+    *
+    * @param array $attributes An array of attributes to pass when resetting
+    */
     public function reset(array $attributes = [])
     {
         parent:: reset($attributes);
@@ -255,10 +255,10 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Loads the PHPMailer object used to send the emails in this implementation.
-     *
-     * @return boolean True if the mailer class was successfully loaded
-     */
+    * Loads the PHPMailer object used to send the emails in this implementation.
+    *
+    * @return boolean True if the mailer class was successfully loaded
+    */
     protected function _getMailer()
     {
         $success = false;
@@ -280,13 +280,13 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Attaches a file to the mailer.
-     *
-     * @param mixed  $file     The file to attach
-     * @param string $name     The name of the file to attach as
-     * @param string $encoding The encoding of the attachment
-     * @param string $type     The header type of the attachment
-     */
+    * Attaches a file to the mailer.
+    *
+    * @param mixed  $file     The file to attach
+    * @param string $name     The name of the file to attach as
+    * @param string $encoding The encoding of the attachment
+    * @param string $type     The header type of the attachment
+    */
     public function attach($file, $name = '', $encoding = 'base64', $type = 'application/octet-stream')
     {
         parent:: attach($file);
@@ -299,15 +299,15 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Embeds image inside message body.
-     *
-     * @param mixed  $image    Absolute path to image
-     * @param string $cid      Id of the image by wich it will be available in html.
-     *                         Example: <img src="cid:<$cid>" />
-     * @param string $name     The name of the image to attach as
-     * @param string $encoding The encoding of the attachment
-     * @param string $type     The header type of the attachment
-     */
+    * Embeds image inside message body.
+    *
+    * @param mixed  $image    Absolute path to image
+    * @param string $cid      Id of the image by wich it will be available in html.
+    *                         Example: <img src="cid:<$cid>" />
+    * @param string $name     The name of the image to attach as
+    * @param string $encoding The encoding of the attachment
+    * @param string $type     The header type of the attachment
+    */
     public function embedImage($image, $cid, $name = '', $encoding = 'base64', $type = 'application/octet-stream')
     {
         parent:: embedImage($image, $cid);
@@ -315,8 +315,8 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Clears all existing attachments.
-     */
+    * Clears all existing attachments.
+    */
     public function clearAttachments()
     {
         parent:: clearAttachments();
@@ -324,12 +324,12 @@ class modPHPMailer extends modMail
     }
 
     /**
-     * Sets email to HTML or text-only.
-     *
-     * @access public
-     *
-     * @param boolean $toggle True to set to HTML.
-     */
+    * Sets email to HTML or text-only.
+    *
+    * @access public
+    *
+    * @param boolean $toggle True to set to HTML.
+    */
     public function setHTML($toggle)
     {
         $this->mailer->isHTML($toggle);

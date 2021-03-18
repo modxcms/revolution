@@ -28,8 +28,8 @@ class Duplicate extends DuplicateProcessor
     public $objectType = 'dashboard';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->duplicatePlacements();
@@ -37,8 +37,8 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     *
-     */
+    *
+    */
     public function duplicatePlacements()
     {
         $oldPlacements = $this->modx->getCollection(modDashboardWidgetPlacement::class, [

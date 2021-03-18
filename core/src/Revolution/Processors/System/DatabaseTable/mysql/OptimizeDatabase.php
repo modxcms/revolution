@@ -20,8 +20,8 @@ use PDOStatement;
 class OptimizeDatabase extends OptimizeDatabaseAbstract
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function optimize()
     {
         $stmt = $this->modx->query('SHOW TABLES');

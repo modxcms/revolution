@@ -105,14 +105,14 @@ class Update extends UpdateProcessor
     public $oldContext;
 
     /**
-     * Allow for Resources to use derivative classes for their processors
-     *
-     * @static
-     * @param modX $modx
-     * @param string $className
-     * @param array $properties
-     * @return Processor
-     */
+    * Allow for Resources to use derivative classes for their processors
+    *
+    * @static
+    * @param modX $modx
+    * @param string $className
+    * @param array $properties
+    * @return Processor
+    */
     public static function getInstance(modX $modx, $className, $properties = [])
     {
         /** @var modResource $object */
@@ -131,9 +131,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean|string
-     */
+    * {@inheritDoc}
+    * @return boolean|string
+    */
     public function beforeSet()
     {
         $locked = $this->addLock();
@@ -185,8 +185,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Handle any properties-specific fields
-     */
+    * Handle any properties-specific fields
+    */
     public function handleResourceProperties()
     {
         if ($this->object->get('class_key') == modWebLink::class) {
@@ -198,9 +198,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Add a lock to the resource we are saving
-     * @return boolean
-     */
+    * Add a lock to the resource we are saving
+    * @return boolean
+    */
     public function addLock()
     {
         $locked = $this->object->addLock();
@@ -230,9 +230,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Trim the page title
-     * @return string
-     */
+    * Trim the page title
+    * @return string
+    */
     public function trimPageTitle()
     {
         $pageTitle = $this->getProperty('pagetitle', null);
@@ -247,9 +247,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Handle the parent field, checking for veracity
-     * @return int|mixed
-     */
+    * Handle the parent field, checking for veracity
+    * @return int|mixed
+    */
     public function handleParent()
     {
         $parent = $this->getProperty('parent', null);
@@ -284,9 +284,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * If parent is changed, set context to new parent's context
-     * @return mixed
-     */
+    * If parent is changed, set context to new parent's context
+    * @return mixed
+    */
     public function checkParentContext()
     {
         $parent = $this->getProperty('parent', null);
@@ -305,9 +305,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Handle formatting of various checkbox fields
-     * @return void
-     */
+    * Handle formatting of various checkbox fields
+    * @return void
+    */
     public function handleCheckBoxes()
     {
         $this->setCheckbox('hidemenu');
@@ -322,9 +322,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Friendly URL alias checks
-     * @return mixed|string
-     */
+    * Friendly URL alias checks
+    * @return mixed|string
+    */
     public function checkFriendlyAlias()
     {
         // The user submitted alias & page title
@@ -373,9 +373,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Format the pub_date if it is set and adjust contingencies
-     * @return int
-     */
+    * Format the pub_date if it is set and adjust contingencies
+    * @return int
+    */
     public function setPublishDate()
     {
         $now = time();
@@ -402,9 +402,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Format the unpub_date if it is set and adjust contingencies
-     * @return int|mixed
-     */
+    * Format the unpub_date if it is set and adjust contingencies
+    * @return int|mixed
+    */
     public function setUnPublishDate()
     {
         $now = time();
@@ -427,9 +427,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Set publishedon date if publish change is different
-     * @return int
-     */
+    * Set publishedon date if publish change is different
+    * @return int
+    */
     public function checkPublishedOn()
     {
         $published = $this->getProperty('published', null);
@@ -452,9 +452,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Deny publishing if the user does not have access to
-     * @return boolean
-     */
+    * Deny publishing if the user does not have access to
+    * @return boolean
+    */
     public function checkPublishingPermissions()
     {
         $canPublish = $this->modx->hasPermission('publish_document');
@@ -475,10 +475,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Check to prevent unpublishing of site_start
-     *
-     * @return boolean
-     */
+    * Check to prevent unpublishing of site_start
+    *
+    * @return boolean
+    */
     public function checkForUnPublishOnSiteStart()
     {
         $passed = true;
@@ -494,9 +494,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Check deleted status and ensure user has permissions to delete resource
-     * @return boolean
-     */
+    * Check deleted status and ensure user has permissions to delete resource
+    * @return boolean
+    */
     public function checkDeletedStatus()
     {
         $deleted = $this->getProperty('deleted', null);
@@ -521,9 +521,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Check that the symlink target is a valid resource ID
-     * @return bool
-     */
+    * Check that the symlink target is a valid resource ID
+    * @return bool
+    */
     public function checkSymLinkTarget()
     {
         $target = $this->getProperty('content', null);
@@ -555,9 +555,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Check that the weblink target is a valid resource ID if it contains an integer value
-     * @return bool
-     */
+    * Check that the weblink target is a valid resource ID if it contains an integer value
+    * @return bool
+    */
     public function checkWebLinkTarget()
     {
         $target = $this->getProperty('content', null);
@@ -586,9 +586,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function beforeSave()
     {
         $this->object->set('editedby', $this->modx->user->get('id'));
@@ -597,9 +597,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function afterSave()
     {
         $this->fixParents();
@@ -612,10 +612,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Set the parents isfolder status based upon remaining children
-     *
-     * @return void
-     */
+    * Set the parents isfolder status based upon remaining children
+    *
+    * @return void
+    */
     public function fixParents()
     {
         $autoIsFolder = $this->modx->getOption('auto_isfolder', null, true);
@@ -636,9 +636,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Set any Template Variables passed to the Resource. You must pass "tvs" as 1 or true to initiate these checks.
-     * @return array|mixed
-     */
+    * Set any Template Variables passed to the Resource. You must pass "tvs" as 1 or true to initiate these checks.
+    * @return array|mixed
+    */
     public function saveTemplateVariables()
     {
         $tvs = $this->getProperty('tvs', null);
@@ -731,9 +731,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * If specified, set the Resource Groups attached to the Resource
-     * @return mixed
-     */
+    * If specified, set the Resource Groups attached to the Resource
+    * @return mixed
+    */
     public function setResourceGroups()
     {
         $resourceGroups = $this->getProperty('resource_groups', null);
@@ -787,9 +787,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Reassign context for children if changed on main Resource
-     * @return void
-     */
+    * Reassign context for children if changed on main Resource
+    * @return void
+    */
     public function checkContextOfChildren()
     {
         if (is_object($this->oldContext) && $this->oldContext instanceof modContext && $this->oldContext->get('key') !== $this->workingContext->get('key')) {
@@ -798,9 +798,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Fire UnDelete event if resource was undeleted
-     * @return mixed
-     */
+    * Fire UnDelete event if resource was undeleted
+    * @return mixed
+    */
     public function fireUnDeleteEvent()
     {
         $response = null;
@@ -814,9 +814,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Fire Delete event if resource was deleted
-     * @return null
-     */
+    * Fire Delete event if resource was deleted
+    * @return null
+    */
     public function fireDeleteEvent()
     {
         $response = null;
@@ -830,10 +830,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Cleanup the processor and return the resulting object
-     *
-     * @return array
-     */
+    * Cleanup the processor and return the resulting object
+    *
+    * @return array
+    */
     public function cleanup()
     {
         $this->object->removeLock();
@@ -861,9 +861,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Empty site cache if specified to do so
-     * @return void
-     */
+    * Empty site cache if specified to do so
+    * @return void
+    */
     public function clearCache()
     {
         $syncSite = $this->getProperty('syncsite', false);

@@ -26,24 +26,24 @@ class GetNodes extends Processor
     public $nodeKey = '';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('packages');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $provider = $this->getProperty('provider', false);
@@ -59,8 +59,8 @@ class GetNodes extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         /* get client */
@@ -88,16 +88,16 @@ class GetNodes extends Processor
     }
 
     /**
-     * @return array|string|null
-     */
+    * @return array|string|null
+    */
     public function getCategories()
     {
         return $this->provider->categories($this->nodeKey);
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getRepositories()
     {
         return $this->provider->repositories();

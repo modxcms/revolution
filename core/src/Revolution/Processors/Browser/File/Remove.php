@@ -28,8 +28,8 @@ class Remove extends Browser
 
 
     /**
-     * @return array|bool|mixed|string
-     */
+    * @return array|bool|mixed|string
+    */
     public function process()
     {
         $file = $this->sanitize($this->getProperty('file'));

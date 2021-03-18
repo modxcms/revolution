@@ -26,8 +26,8 @@ class Create extends CreateProcessor
     public $objectType = 'role';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name');
@@ -43,10 +43,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check to see if a role already exists with the specified name
-     * @param string $name
-     * @return boolean
-     */
+    * Check to see if a role already exists with the specified name
+    * @param string $name
+    * @return boolean
+    */
     public function alreadyExists($name)
     {
         return $this->modx->getCount(modUserGroupRole::class, ['name' => $name]) > 0;

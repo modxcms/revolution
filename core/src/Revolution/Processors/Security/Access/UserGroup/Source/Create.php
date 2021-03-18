@@ -27,8 +27,8 @@ class Create extends CreateProcessor
     public $objectType = 'source';
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSet()
     {
         $policyId = $this->getProperty('policy');
@@ -63,8 +63,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSave()
     {
         if ($this->doesAlreadyExist([

@@ -34,8 +34,8 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'username';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -53,9 +53,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->leftJoin(modUserProfile::class, 'Profile');
@@ -92,9 +92,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns(modUser::class, 'modUser'));
@@ -109,10 +109,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Prepare the row for iteration
-     * @param xPDOObject $object
-     * @return array
-     */
+    * Prepare the row for iteration
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

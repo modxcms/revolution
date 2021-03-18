@@ -30,26 +30,26 @@ abstract class modTemplateVarInputRender extends modTemplateVarRender {
     }
 
     /**
-     * Set a placeholder to be used in the template
-     * @param string $k
-     * @param mixed $v
-     */
+    * Set a placeholder to be used in the template
+    * @param string $k
+    * @param mixed $v
+    */
     public function setPlaceholder($k,$v) {
         $this->modx->controller->setPlaceholder($k,$v);
     }
 
     /**
-     * Return the template path to load
-     * @return string
-     */
+    * Return the template path to load
+    * @return string
+    */
     public function getTemplate() {
         return '';
     }
 
     /**
-     * Return the input options parsed for the TV
-     * @return mixed
-     */
+    * Return the input options parsed for the TV
+    * @return mixed
+    */
     public function getInputOptions() {
         return $this->tv->parseInputOptions($this->tv->processBindings($this->tv->get('elements'),$this->modx->resource->get('id')));
     }

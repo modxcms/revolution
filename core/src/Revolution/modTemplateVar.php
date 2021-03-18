@@ -45,10 +45,10 @@ use xPDO\xPDO;
 class modTemplateVar extends modElement
 {
     /**
-     * Supported bindings for MODX
-     *
-     * @var array $bindings
-     */
+    * Supported bindings for MODX
+    *
+    * @var array $bindings
+    */
     public $bindings = [
         'FILE',
         'CHUNK',
@@ -63,18 +63,18 @@ class modTemplateVar extends modElement
     public $xpdo;
 
     /**
-     * A cache for modTemplateVar::getRenderDirectories()
-     *
-     * @see getRenderDirectories()
-     * @var array $_renderPaths
-     */
+    * A cache for modTemplateVar::getRenderDirectories()
+    *
+    * @see getRenderDirectories()
+    * @var array $_renderPaths
+    */
     private static $_renderPaths = [];
 
     /**
-     * Creates a modTemplateVar instance, and sets the token of the class to *
-     *
-     * {@inheritdoc}
-     */
+    * Creates a modTemplateVar instance, and sets the token of the class to *
+    *
+    * {@inheritdoc}
+    */
     function __construct(& $xpdo)
     {
         parent:: __construct($xpdo);
@@ -82,11 +82,11 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Overrides modElement::save to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::save to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -117,11 +117,11 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::remove to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritdoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -148,10 +148,10 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Process the template variable and return the output.
-     *
-     * {@inheritdoc}
-     */
+    * Process the template variable and return the output.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         parent:: process($properties, $content);
@@ -203,15 +203,15 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Get the value of a template variable for a resource.
-     *
-     * @access public
-     *
-     * @param integer $resourceId The id of the resource; 0 defaults to the default_text field for the tv.
-     *
-     * @return mixed The raw value of the template variable in context of the
-     * specified resource or the default_text for the tv.
-     */
+    * Get the value of a template variable for a resource.
+    *
+    * @access public
+    *
+    * @param integer $resourceId The id of the resource; 0 defaults to the default_text field for the tv.
+    *
+    * @return mixed The raw value of the template variable in context of the
+    * specified resource or the default_text for the tv.
+    */
     public function getValue($resourceId = 0)
     {
         $value = null;
@@ -240,15 +240,15 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Set the value of a template variable for a resource.
-     *
-     * @access public
-     *
-     * @param integer $resourceId The id of the resource; 0 defaults to the
-     *                            current resource.
-     * @param mixed   $value      The value to give the template variable for the
-     *                            specified document.
-     */
+    * Set the value of a template variable for a resource.
+    *
+    * @access public
+    *
+    * @param integer $resourceId The id of the resource; 0 defaults to the
+    *                            current resource.
+    * @param mixed   $value      The value to give the template variable for the
+    *                            specified document.
+    */
     public function setValue($resourceId = 0, $value = null)
     {
         if (intval($resourceId)) {
@@ -277,15 +277,15 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Returns the processed output of a template variable.
-     *
-     * @access public
-     *
-     * @param integer $resourceId The id of the resource; 0 defaults to the
-     *                            current resource.
-     *
-     * @return mixed The processed output of the template variable.
-     */
+    * Returns the processed output of a template variable.
+    *
+    * @access public
+    *
+    * @param integer $resourceId The id of the resource; 0 defaults to the
+    *                            current resource.
+    *
+    * @return mixed The processed output of the template variable.
+    */
     public function renderOutput($resourceId = 0)
     {
         $value = $this->getValue($resourceId);
@@ -311,14 +311,14 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Prepare the output in this method to allow processing of this without depending on the actual render of the output
-     *
-     * @param string  $value
-     * @param integer $resourceId The id of the resource; 0 defaults to the
-     *                            current resource.
-     *
-     * @return string
-     */
+    * Prepare the output in this method to allow processing of this without depending on the actual render of the output
+    *
+    * @param string  $value
+    * @param integer $resourceId The id of the resource; 0 defaults to the
+    *                            current resource.
+    *
+    * @return string
+    */
     public function prepareOutput($value, $resourceId = 0)
     {
         /* Allow custom source types to manipulate the output URL for image/file tvs */
@@ -350,15 +350,15 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Renders input forms for the template variable.
-     *
-     * @access public
-     *
-     * @param modResource|null $resource The resource; 0 defaults to the current resource.
-     * @param mixed            $options  Array of options ('value', 'style') or deprecated $style string
-     *
-     * @return mixed The rendered input for the template variable.
-     */
+    * Renders input forms for the template variable.
+    *
+    * @access public
+    *
+    * @param modResource|null $resource The resource; 0 defaults to the current resource.
+    * @param mixed            $options  Array of options ('value', 'style') or deprecated $style string
+    *
+    * @return mixed The rendered input for the template variable.
+    */
     public function renderInput($resource = null, $options = [])
     {
         if (is_int($resource)) {
@@ -430,17 +430,17 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Gets the correct render given paths and type of render
-     *
-     * @param array   $params     The parameters to pass to the render
-     * @param mixed   $value      The value of the TV
-     * @param array   $paths      An array of paths to search
-     * @param string  $method     The type of Render (input/output/properties)
-     * @param integer $resourceId The ID of the current Resource
-     * @param string  $type       The type of render to display
-     *
-     * @return string
-     */
+    * Gets the correct render given paths and type of render
+    *
+    * @param array   $params     The parameters to pass to the render
+    * @param mixed   $value      The value of the TV
+    * @param array   $paths      An array of paths to search
+    * @param string  $method     The type of Render (input/output/properties)
+    * @param integer $resourceId The ID of the current Resource
+    * @param string  $type       The type of render to display
+    *
+    * @return string
+    */
     public function getRender($params, $value, array $paths, $method, $resourceId = 0, $type = 'text')
     {
         if (empty($type)) {
@@ -498,13 +498,13 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Check for a registered TV render
-     *
-     * @param string $type
-     * @param string $method
-     *
-     * @return bool
-     */
+    * Check for a registered TV render
+    *
+    * @param string $type
+    * @param string $method
+    *
+    * @return bool
+    */
     public function checkForRegisteredRenderMethod($type, $method)
     {
         $v = false;
@@ -522,14 +522,14 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Register a render method to the array cache to prevent double loading of the class
-     *
-     * @param string $type
-     * @param string $method
-     * @param string $className
-     *
-     * @return mixed
-     */
+    * Register a render method to the array cache to prevent double loading of the class
+    *
+    * @param string $type
+    * @param string $method
+    * @param string $className
+    *
+    * @return mixed
+    */
     public function registerRenderMethod($type, $method, $className)
     {
         if (!isset($this->xpdo->tvRenders)) {
@@ -544,13 +544,13 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Finds the correct directories for renders
-     *
-     * @param string $event  The plugin event to fire
-     * @param string $subdir The subdir to search
-     *
-     * @return array The found render directories
-     */
+    * Finds the correct directories for renders
+    *
+    * @param string $event  The plugin event to fire
+    * @param string $subdir The subdir to search
+    *
+    * @return array The found render directories
+    */
     public function getRenderDirectories($event, $subdir)
     {
         $context = $this->xpdo->context->get('key');
@@ -603,13 +603,13 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Check for any Form Customization rules for this TV
-     *
-     * @param string      $value
-     * @param modResource $resource
-     *
-     * @return mixed
-     */
+    * Check for any Form Customization rules for this TV
+    *
+    * @param string      $value
+    * @param modResource $resource
+    *
+    * @return mixed
+    */
     public function checkForFormCustomizationRules($value, &$resource)
     {
         if ($this->xpdo->request && $this->xpdo->user instanceof modUser) {
@@ -634,8 +634,8 @@ class modTemplateVar extends modElement
             $c->where([
                 [
                     "(modActionDom.{$ruleFieldName} = 'tvDefault'
-                   OR modActionDom.{$ruleFieldName} = 'tvVisible'
-                   OR modActionDom.{$ruleFieldName} = 'tvTitle')",
+                    OR modActionDom.{$ruleFieldName} = 'tvVisible'
+                    OR modActionDom.{$ruleFieldName} = 'tvTitle')",
                 ],
                 "'tv{$this->get('id')}' IN ({$this->xpdo->escape('modActionDom')}.{$this->xpdo->escape('name')})",
                 'FCSet.active' => true,
@@ -718,14 +718,14 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Decodes special function-based chars from a parameter value.
-     *
-     * @access public
-     *
-     * @param string $s The string to decode.
-     *
-     * @return string The decoded string.
-     */
+    * Decodes special function-based chars from a parameter value.
+    *
+    * @access public
+    *
+    * @param string $s The string to decode.
+    *
+    * @return string The decoded string.
+    */
     public function decodeParamValue($s)
     {
         $s = str_replace(["%3D", '&#61;'], '=', $s);
@@ -735,10 +735,10 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Returns an array of display params for this TV
-     *
-     * @return array The processed settings
-     */
+    * Returns an array of display params for this TV
+    *
+    * @return array The processed settings
+    */
     public function getDisplayParams()
     {
         $settings = [];
@@ -762,14 +762,14 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Returns a string or array representation of input options from a source.
-     *
-     * @param mixed  $src   A PDOStatement, array or string source to parse.
-     * @param string $delim A delimiter for string parsing.
-     * @param string $type  Type to return, either 'string' or 'array'.
-     *
-     * @return string|array If delimiter present, returns string, otherwise array.
-     */
+    * Returns a string or array representation of input options from a source.
+    *
+    * @param mixed  $src   A PDOStatement, array or string source to parse.
+    * @param string $delim A delimiter for string parsing.
+    * @param string $type  Type to return, either 'string' or 'array'.
+    *
+    * @return string|array If delimiter present, returns string, otherwise array.
+    */
     public function parseInput($src, $delim = "||", $type = "string")
     {
         if (is_object($src)) {
@@ -799,12 +799,12 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Parses input options sent through post back.
-     *
-     * @param mixed $v A PDOStatement, array or string to parse.
-     *
-     * @return mixed The parsed options.
-     */
+    * Parses input options sent through post back.
+    *
+    * @param mixed $v A PDOStatement, array or string to parse.
+    *
+    * @return mixed The parsed options.
+    */
     public function parseInputOptions($v)
     {
         $a = [];
@@ -822,12 +822,12 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Parses the binding data from a value
-     *
-     * @param mixed $value The value to parse
-     *
-     * @return array An array of cmd and param for the binding
-     */
+    * Parses the binding data from a value
+    *
+    * @param mixed $value The value to parse
+    *
+    * @return array An array of cmd and param for the binding
+    */
     public function getBindingDataFromValue($value)
     {
         $nvalue = trim($value);
@@ -843,16 +843,16 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Process bindings assigned to a template variable.
-     *
-     * @access public
-     *
-     * @param string  $value      The value specified from the binding.
-     * @param integer $resourceId The resource in which the TV is assigned.
-     * @param boolean $preProcess Whether or not to process certain bindings.
-     *
-     * @return string The processed value.
-     */
+    * Process bindings assigned to a template variable.
+    *
+    * @access public
+    *
+    * @param string  $value      The value specified from the binding.
+    * @param integer $resourceId The resource in which the TV is assigned.
+    * @param boolean $preProcess Whether or not to process certain bindings.
+    *
+    * @return string The processed value.
+    */
     public function processBindings($value = '', $resourceId = 0, $preProcess = true)
     {
         $bdata = $this->getBindingDataFromValue($value);
@@ -885,12 +885,12 @@ class modTemplateVar extends modElement
                     $output = $this->xpdo->getChunk($param, $properties);
                 }
                 break;
-                
+
             case 'SNIPPET':
                 if ($preProcess) {
                     $output = $this->xpdo->runSnippet($param, $properties);
                 }
-                break;                
+                break;
 
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
@@ -982,26 +982,26 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Parses bindings to an appropriate format.
-     *
-     * @access public
-     *
-     * @param string $binding_string The binding to parse.
-     *
-     * @return array The parsed binding, now in array format.
-     */
+    * Parses bindings to an appropriate format.
+    *
+    * @access public
+    *
+    * @param string $binding_string The binding to parse.
+    *
+    * @return array The parsed binding, now in array format.
+    */
     public function parseBinding($binding_string)
     {
         $match = [];
         $match2 = [];
         $binding_string = trim($binding_string);
         $regexp = '/@(' . implode('|', $this->bindings) . ')\s*(.*)/is'; /* Split binding on whitespace */
-        
+
         if (preg_match($regexp, $binding_string, $match)) {
             /* We can't return the match array directly because the first element is the whole string */
-            
+
             $regexp2 = '/(\S+)\s+(.+)/is'; /* Split binding on second whitespace to get properties */
-            
+
             $properties = [];
             if (preg_match($regexp2, $match[2] , $match2)) {
                 if (isset($match2[2])) {
@@ -1015,7 +1015,7 @@ class modTemplateVar extends modElement
                     }
                 }
             }
-            
+
             $binding_array = [
                 strtoupper($match[1]),
                 trim($match[2]),
@@ -1027,13 +1027,13 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Parse inherit binding
-     *
-     * @param string $default    The value to default if there is no inherited value
-     * @param int    $resourceId The current Resource, if any
-     *
-     * @return string The inherited value
-     */
+    * Parse inherit binding
+    *
+    * @param string $default    The value to default if there is no inherited value
+    * @param int    $resourceId The current Resource, if any
+    *
+    * @return string The inherited value
+    */
     public function processInheritBinding($default = '', $resourceId = null)
     {
         $output = $default; /* Default to param value if no content from parents */
@@ -1076,14 +1076,14 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Special parsing for file bindings.
-     *
-     * @access public
-     *
-     * @param string $file The absolute location of the file in the binding.
-     *
-     * @return string The file buffer from the read file.
-     */
+    * Special parsing for file bindings.
+    *
+    * @access public
+    *
+    * @param string $file The absolute location of the file in the binding.
+    *
+    * @return string The file buffer from the read file.
+    */
     public function processFileBinding($file)
     {
         if (file_exists($file) && @ $handle = fopen($file, 'r')) {
@@ -1104,10 +1104,10 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Loads the access control policies applicable to this template variable.
-     *
-     * {@inheritdoc}
-     */
+    * Loads the access control policies applicable to this template variable.
+    *
+    * {@inheritdoc}
+    */
     public function findPolicy($context = '')
     {
         $policy = [];
@@ -1183,12 +1183,12 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Check to see if the TV has access to a Template
-     *
-     * @param mixed $templatePk Either the ID, name or object of the Template
-     *
-     * @return boolean Whether or not the TV has access to the specified Template
-     */
+    * Check to see if the TV has access to a Template
+    *
+    * @param mixed $templatePk Either the ID, name or object of the Template
+    *
+    * @return boolean Whether or not the TV has access to the specified Template
+    */
     public function hasTemplate($templatePk)
     {
         if (!is_int($templatePk) && !is_object($templatePk)) {
@@ -1210,13 +1210,13 @@ class modTemplateVar extends modElement
     }
 
     /**
-     * Check to see if the
-     *
-     * @param modUser|null $user
-     * @param string       $context
-     *
-     * @return bool
-     */
+    * Check to see if the
+    *
+    * @param modUser|null $user
+    * @param string       $context
+    *
+    * @return bool
+    */
     public function checkResourceGroupAccess($user = null, $context = '')
     {
         $context = !empty($context) ? $context : '';

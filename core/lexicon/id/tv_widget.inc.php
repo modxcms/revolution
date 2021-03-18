@@ -43,10 +43,10 @@ $_lang['disabled_dates'] = 'Tanggal dinonaktifkan';
 $_lang['disabled_dates_desc'] = 'Daftar comma separated "tanggal" untuk menonaktifkan, sebagai string. String ini akan digunakan untuk membangun kalimat biasa dinamis sehingga mereka sangat kuat. Beberapa contoh:<br />
 -menonaktifkan ini tanggal yang tepat: 2003-03-08,2003-09-16<br />
 -menonaktifkan hari ini untuk setiap tahun: 03-08,09-16<br />
--hanya cocok awal (berguna jika Anda menggunakan tahun yang singkat): ^03-08<br /> 
+-hanya cocok awal (berguna jika Anda menggunakan tahun yang singkat): ^03-08<br />
 -Nonaktifkan setiap hari pada bulan Maret 2006:03-...-2006<br />
 -Nonaktifkan setiap hari dalam setiap bulan Maret: ^03<br />
- catatan bahwa format tanggal yang termasuk dalam daftar harus persis cocok konfigurasi format. Untuk mendukung ekspresi reguler, jika Anda menggunakan format tanggal yang memiliki "." di dalamnya, Anda akan harus melarikan diri dot ketika membatasi tanggal.';
+catatan bahwa format tanggal yang termasuk dalam daftar harus persis cocok konfigurasi format. Untuk mendukung ekspresi reguler, jika Anda menggunakan format tanggal yang memiliki "." di dalamnya, Anda akan harus melarikan diri dot ketika membatasi tanggal.';
 $_lang['disabled_days'] = 'Non aktifkan hari';
 $_lang['disabled_days_desc'] = 'Daftar dipisahkan dengan koma pada hari yang dinonaktifkan, berbasis 0 (default ke null). Beberapa contoh:<br />
 - Nonaktifkan minggu dan Sabtu: 0,6<br />

@@ -32,9 +32,9 @@ class Get extends GetProcessor
     public $primaryKeyField = 'key';
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $key = $this->getProperty('key');

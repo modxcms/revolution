@@ -10,14 +10,14 @@ class modAccessibleObject extends \MODX\Revolution\modAccessibleObject
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
     );

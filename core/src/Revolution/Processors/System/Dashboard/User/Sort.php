@@ -28,8 +28,8 @@ class Sort extends UpdateProcessor
     public $object;
 
     /**
-     * @return bool|null|string
-     */
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $primaryKey = [
@@ -51,8 +51,8 @@ class Sort extends UpdateProcessor
 
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $from = $this->getProperty('from');
@@ -101,8 +101,8 @@ class Sort extends UpdateProcessor
 
 
     /**
-     * Log event
-     */
+    * Log event
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('user_widget_sort', modDashboardWidget::class, $this->object->get('widget'));

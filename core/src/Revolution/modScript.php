@@ -24,27 +24,27 @@ use xPDO\xPDO;
 class modScript extends modElement
 {
     /**
-     * The name of the script
-     *
-     * @var string $_scriptName
-     */
+    * The name of the script
+    *
+    * @var string $_scriptName
+    */
     public $_scriptName = null;
     /**
-     * The cache key of the script
-     *
-     * @var string $_scriptCacheKey
-     */
+    * The cache key of the script
+    *
+    * @var string $_scriptCacheKey
+    */
     public $_scriptCacheKey = null;
     /**
-     * @var string The filename of the script to include.
-     */
+    * @var string The filename of the script to include.
+    */
     protected $_scriptFilename;
 
     /**
-     * Override set to properly strip invalid tags from script code
-     *
-     * {@inheritdoc}
-     */
+    * Override set to properly strip invalid tags from script code
+    *
+    * {@inheritdoc}
+    */
     public function set($k, $v = null, $vType = '')
     {
         if (in_array($k, ['snippet', 'plugincode', 'content'])) {
@@ -66,10 +66,10 @@ class modScript extends modElement
     }
 
     /**
-     * Process specifically script-related functionality for modScript objects.
-     *
-     * {@inheritdoc}
-     */
+    * Process specifically script-related functionality for modScript objects.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         parent:: process($properties, $content);
@@ -121,11 +121,11 @@ class modScript extends modElement
     }
 
     /**
-     * Get the name of the script source file, written to the cache file system
-     *
-     * @return string The filename containing the function generated from the
-     * script element.
-     */
+    * Get the name of the script source file, written to the cache file system
+    *
+    * @return string The filename containing the function generated from the
+    * script element.
+    */
     public function getScriptCacheKey()
     {
         if ($this->_scriptCacheKey === null) {
@@ -136,10 +136,10 @@ class modScript extends modElement
     }
 
     /**
-     * Get the name of the function the script has been given.
-     *
-     * @return string The function name representing this script element.
-     */
+    * Get the name of the function the script has been given.
+    *
+    * @return string The function name representing this script element.
+    */
     public function getScriptName()
     {
         if ($this->_scriptName === null) {
@@ -151,10 +151,10 @@ class modScript extends modElement
     }
 
     /**
-     * Get the include filename for the script, generating it if it does not exist.
-     *
-     * @return string|bool The include filename of the script or false.
-     */
+    * Get the include filename for the script, generating it if it does not exist.
+    *
+    * @return string|bool The include filename of the script or false.
+    */
     public function loadScript()
     {
         $includeFilename = $this->xpdo->getCachePath() . 'includes/' . $this->getScriptCacheKey() . '.include.cache.php';

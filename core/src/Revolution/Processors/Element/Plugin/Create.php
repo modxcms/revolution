@@ -64,10 +64,10 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Save system events
-     *
-     * @return void
-     */
+    * Save system events
+    *
+    * @return void
+    */
     public function saveEvents()
     {
         $events = $this->getProperty('events', null);

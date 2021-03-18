@@ -27,8 +27,8 @@ class Create extends CreateProcessor
     public $permission = 'access_permissions';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         if ($this->getProperty('principal') === null) {
@@ -51,8 +51,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $context = $this->modx->getObject(modContext::class, $this->getProperty('target'));
@@ -80,9 +80,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Ensure that Admin UserGroup always has access to this context, if not adding Admin ACL
-     * @return bool
-     */
+    * Ensure that Admin UserGroup always has access to this context, if not adding Admin ACL
+    * @return bool
+    */
     public function afterSave()
     {
         $adminGroup = $this->modx->getObject(modUserGroup::class, ['name' => 'Administrator']);

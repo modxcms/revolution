@@ -33,4 +33,3 @@ class Get extends \MODX\Revolution\Processors\Element\Get
         $this->object->set('els', $this->object->get('elements'));
     }
 }
-

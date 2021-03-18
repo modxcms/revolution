@@ -23,13 +23,13 @@ class modUserGroupSetting extends xPDOObject
     public $xpdo;
 
     /**
-     * Update the translation for the setting
-     *
-     * @param string $key The key of the Setting to update
-     * @param string $value The value of the Setting to update
-     * @param array $options An array of options for the update
-     * @return bool
-     */
+    * Update the translation for the setting
+    *
+    * @param string $key The key of the Setting to update
+    * @param string $value The value of the Setting to update
+    * @param array $options An array of options for the update
+    * @return bool
+    */
     public function updateTranslation($key,$value = '',array $options = []) {
         if (!is_array($options) || empty($options)) return false;
 

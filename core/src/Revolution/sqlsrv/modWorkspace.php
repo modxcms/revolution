@@ -11,7 +11,7 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
         'version' => '3.0',
         'table' => 'workspaces',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'path' => '',
@@ -19,9 +19,9 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
             'active' => 0,
             'attributes' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -30,7 +30,7 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
                 'default' => '',
                 'index' => 'index',
             ),
-            'path' => 
+            'path' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -39,13 +39,13 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
                 'default' => '',
                 'index' => 'unique',
             ),
-            'created' => 
+            'created' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => false,
             ),
-            'active' => 
+            'active' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -53,24 +53,24 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
                 'default' => 0,
                 'index' => 'index',
             ),
-            'attributes' => 
+            'attributes' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'array',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -78,15 +78,15 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
                     ),
                 ),
             ),
-            'path' => 
+            'path' =>
             array (
                 'alias' => 'path',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'path' => 
+                    'path' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -94,15 +94,15 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
                     ),
                 ),
             ),
-            'active' => 
+            'active' =>
             array (
                 'alias' => 'active',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'active' => 
+                    'active' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -111,9 +111,9 @@ class modWorkspace extends \MODX\Revolution\modWorkspace
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Packages' => 
+            'Packages' =>
             array (
                 'class' => 'MODX\\Revolution\\Transport\\modTransportPackage',
                 'local' => 'id',

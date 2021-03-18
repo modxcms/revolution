@@ -26,9 +26,9 @@ class Remove extends RemoveProcessor
     public $languageTopics = ['messages'];
 
     /**
-     * Make sure user is message recipient
-     * @return bool
-     */
+    * Make sure user is message recipient
+    * @return bool
+    */
     public function beforeRemove()
     {
         if ($this->object->get('recipient') !== $this->modx->user->get('id')) {

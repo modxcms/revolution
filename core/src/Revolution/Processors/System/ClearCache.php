@@ -22,16 +22,16 @@ use PDO;
 class ClearCache extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('empty_cache');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $this->runBeforeEvents();
@@ -109,8 +109,8 @@ class ClearCache extends Processor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getPartitions()
     {
         $contextKeys = $this->getProperty('contexts', []);
@@ -162,8 +162,8 @@ class ClearCache extends Processor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function clearByPaths()
     {
         $pathResults = [];

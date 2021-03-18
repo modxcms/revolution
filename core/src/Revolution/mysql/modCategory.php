@@ -11,19 +11,19 @@ class modCategory extends \MODX\Revolution\modCategory
         'version' => '3.0',
         'table' => 'categories',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'parent' => 0,
             'category' => '',
             'rank' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'parent' => 
+            'parent' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -33,7 +33,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'index' => 'unique',
                 'indexgrp' => 'category',
             ),
-            'category' => 
+            'category' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '45',
@@ -43,7 +43,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'index' => 'unique',
                 'indexgrp' => 'category',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -53,17 +53,17 @@ class modCategory extends \MODX\Revolution\modCategory
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'parent' => 
+            'parent' =>
             array (
                 'alias' => 'parent',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'parent' => 
+                    'parent' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -71,21 +71,21 @@ class modCategory extends \MODX\Revolution\modCategory
                     ),
                 ),
             ),
-            'category' => 
+            'category' =>
             array (
                 'alias' => 'category',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'parent' => 
+                    'parent' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'category' => 
+                    'category' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -93,15 +93,15 @@ class modCategory extends \MODX\Revolution\modCategory
                     ),
                 ),
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'alias' => 'rank',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'rank' => 
+                    'rank' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -110,9 +110,9 @@ class modCategory extends \MODX\Revolution\modCategory
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Children' => 
+            'Children' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'local' => 'id',
@@ -120,7 +120,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Acls' => 
+            'Acls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessCategory',
                 'local' => 'id',
@@ -128,7 +128,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'owner' => 'local',
                 'cardinality' => 'many',
             ),
-            'Ancestors' => 
+            'Ancestors' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategoryClosure',
                 'local' => 'id',
@@ -136,7 +136,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Descendants' => 
+            'Descendants' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategoryClosure',
                 'local' => 'id',
@@ -145,9 +145,9 @@ class modCategory extends \MODX\Revolution\modCategory
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Parent' => 
+            'Parent' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'local' => 'parent',
@@ -155,7 +155,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Chunks' => 
+            'Chunks' =>
             array (
                 'class' => 'MODX\\Revolution\\modChunk',
                 'key' => 'id',
@@ -164,7 +164,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Snippets' => 
+            'Snippets' =>
             array (
                 'class' => 'MODX\\Revolution\\modSnippet',
                 'local' => 'id',
@@ -172,7 +172,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Plugins' => 
+            'Plugins' =>
             array (
                 'class' => 'MODX\\Revolution\\modPlugin',
                 'local' => 'id',
@@ -180,7 +180,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Templates' => 
+            'Templates' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',
                 'local' => 'id',
@@ -188,7 +188,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'TemplateVars' => 
+            'TemplateVars' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'id',
@@ -196,7 +196,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'PropertySets' => 
+            'PropertySets' =>
             array (
                 'class' => 'MODX\\Revolution\\modPropertySet',
                 'local' => 'id',
@@ -204,7 +204,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'modChunk' => 
+            'modChunk' =>
             array (
                 'class' => 'MODX\\Revolution\\modChunk',
                 'key' => 'id',
@@ -213,7 +213,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'modSnippet' => 
+            'modSnippet' =>
             array (
                 'class' => 'MODX\\Revolution\\modSnippet',
                 'local' => 'id',
@@ -221,7 +221,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'modPlugin' => 
+            'modPlugin' =>
             array (
                 'class' => 'MODX\\Revolution\\modPlugin',
                 'local' => 'id',
@@ -229,7 +229,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'modTemplate' => 
+            'modTemplate' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',
                 'local' => 'id',
@@ -237,7 +237,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'modTemplateVar' => 
+            'modTemplateVar' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'id',
@@ -245,7 +245,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'modPropertySet' => 
+            'modPropertySet' =>
             array (
                 'class' => 'MODX\\Revolution\\modPropertySet',
                 'local' => 'id',
@@ -254,13 +254,13 @@ class modCategory extends \MODX\Revolution\modCategory
                 'owner' => 'local',
             ),
         ),
-        'validation' => 
+        'validation' =>
         array (
-            'rules' => 
+            'rules' =>
             array (
-                'category' => 
+                'category' =>
                 array (
-                    'preventBlank' => 
+                    'preventBlank' =>
                     array (
                         'type' => 'xPDOValidationRule',
                         'rule' => 'xPDO\\Validation\\xPDOMinLengthValidationRule',

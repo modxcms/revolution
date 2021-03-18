@@ -33,8 +33,8 @@ class Update extends UpdateProcessor
     public $isRename = false;
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeSet()
     {
         // Setup to allow PK change
@@ -69,8 +69,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->object->set('action', $this->getProperty('action_id'));
@@ -80,8 +80,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function afterSave()
     {
         /* if changing key */

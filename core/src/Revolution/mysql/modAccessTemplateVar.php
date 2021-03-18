@@ -11,19 +11,19 @@ class modAccessTemplateVar extends \MODX\Revolution\modAccessTemplateVar
         'version' => '3.0',
         'table' => 'access_templatevars',
         'extends' => 'MODX\\Revolution\\modAccessElement',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'target',

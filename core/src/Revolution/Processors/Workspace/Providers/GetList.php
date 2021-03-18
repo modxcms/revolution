@@ -30,9 +30,9 @@ class GetList extends GetListProcessor
     public $permission = 'providers';
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -41,19 +41,19 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return string
-     */
+    * {@inheritDoc}
+    * @return string
+    */
     public function getSortClassKey()
     {
         return modTransportProvider::class;
     }
 
     /**
-     * {@inheritDoc}
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * {@inheritDoc}
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $id = $this->getProperty('id', '');
@@ -64,10 +64,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @param array $list
-     * @return array
-     */
+    * {@inheritDoc}
+    * @param array $list
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         $isCombo = $this->getProperty('combo', false);
@@ -78,10 +78,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @param xPDOObject $object
-     * @return array
-     */
+    * {@inheritDoc}
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

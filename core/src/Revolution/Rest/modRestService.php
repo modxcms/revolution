@@ -37,9 +37,9 @@ class modRestService
     public $requestPrimaryKey;
 
     /**
-     * @param modX  $modx
-     * @param array $config
-     */
+    * @param modX  $modx
+    * @param array $config
+    */
     public function __construct(modX &$modx, array $config = [])
     {
         $this->modx =& $modx;
@@ -76,13 +76,13 @@ class modRestService
     }
 
     /**
-     * Get a configuration option for this service
-     *
-     * @param string $key
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
+    * Get a configuration option for this service
+    *
+    * @param string $key
+    * @param mixed  $default
+    *
+    * @return mixed
+    */
     public function getOption($key, $default = null)
     {
         return array_key_exists($key, $this->config) ? $this->config[$key] : $default;
@@ -90,18 +90,18 @@ class modRestService
 
 
     /**
-     * Check permissions for the request.
-     *
-     * @return boolean
-     */
+    * Check permissions for the request.
+    *
+    * @return boolean
+    */
     public function checkPermissions()
     {
         return true;
     }
 
     /**
-     * Prepare the request object, setting the method, headers, format and parameters
-     */
+    * Prepare the request object, setting the method, headers, format and parameters
+    */
     public function prepare()
     {
         $requestParameter = $this->getOption('requestParameter', '_rest');
@@ -116,10 +116,10 @@ class modRestService
     }
 
     /**
-     * Process the request, creating the controller and response objects, and then sending the processed
-     * response back to the client. The controller is determined by the path passed to the request parameter, and
-     * the controller's method is determined by the HTTP request method sent.
-     */
+    * Process the request, creating the controller and response objects, and then sending the processed
+    * response back to the client. The controller is determined by the path passed to the request parameter, and
+    * the controller's method is determined by the HTTP request method sent.
+    */
     public function process()
     {
         try {
@@ -178,12 +178,12 @@ class modRestService
     }
 
     /**
-     * Get the Response content type based on the format passed
-     *
-     * @param string $format
-     *
-     * @return string
-     */
+    * Get the Response content type based on the format passed
+    *
+    * @param string $format
+    *
+    * @return string
+    */
     public function getResponseContentType($format = 'json')
     {
         $supportedFormats = $this->getOption('supportedFormats', 'xml,json,qs');
@@ -198,10 +198,10 @@ class modRestService
     }
 
     /**
-     * Get the correct controller path for the class
-     *
-     * @return string
-     */
+    * Get the correct controller path for the class
+    *
+    * @return string
+    */
     protected function getController()
     {
         $expectedFile = trim($this->request->action, '/');
@@ -244,13 +244,13 @@ class modRestService
     }
 
     /**
-     * Iterate across directories looking for files based on a pattern
-     *
-     * @param string $pattern
-     * @param int    $flags
-     *
-     * @return array
-     */
+    * Iterate across directories looking for files based on a pattern
+    *
+    * @param string $pattern
+    * @param int    $flags
+    *
+    * @return array
+    */
     public function iterateDirectories($pattern, $flags = 0)
     {
         $files = glob($pattern, $flags);
@@ -266,10 +266,10 @@ class modRestService
     }
 
     /**
-     * Send either to the unauthorized page or exit out with a 401
-     *
-     * @param bool $exit
-     */
+    * Send either to the unauthorized page or exit out with a 401
+    *
+    * @param bool $exit
+    */
     public function sendUnauthorized($exit = true)
     {
         if (!$exit) {

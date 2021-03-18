@@ -32,10 +32,10 @@ class modTransportProvider extends xPDOSimpleObject
     public $xpdo = null;
 
     /**
-     * Return a list repositories from this Provider.
-     *
-     * @return array A list of repositories in this Provider.
-     */
+    * Return a list repositories from this Provider.
+    *
+    * @return array A list of repositories in this Provider.
+    */
     public function repositories()
     {
         /** @var modRestResponse $response */
@@ -97,12 +97,12 @@ class modTransportProvider extends xPDOSimpleObject
     }
 
     /**
-     * Return statistical data about this Provider
-     *
-     * @param array $args Additional arguments to pass to the provider service
-     *
-     * @return array An array of statistics
-     */
+    * Return statistical data about this Provider
+    *
+    * @param array $args Additional arguments to pass to the provider service
+    *
+    * @return array An array of statistics
+    */
     public function stats(array $args = [])
     {
         $stats = [
@@ -409,14 +409,14 @@ class modTransportProvider extends xPDOSimpleObject
     }
 
     /**
-     * Sends a REST request to the provider
-     *
-     * @param string $path   The path of the request
-     * @param string $method The method of the request (GET/POST)
-     * @param array  $params An array of parameters to send to the REST request
-     *
-     * @return modRestResponse|bool The response from the REST request, or false
-     */
+    * Sends a REST request to the provider
+    *
+    * @param string $path   The path of the request
+    * @param string $method The method of the request (GET/POST)
+    * @param array  $params An array of parameters to send to the REST request
+    *
+    * @return modRestResponse|bool The response from the REST request, or false
+    */
     public function request($path, $method = 'GET', $params = [])
     {
         $response = false;
@@ -432,10 +432,10 @@ class modTransportProvider extends xPDOSimpleObject
     }
 
     /**
-     * Get the client responsible for communicating with the provider.
-     *
-     * @return modRestClient|bool A REST client instance, or FALSE.
-     */
+    * Get the client responsible for communicating with the provider.
+    *
+    * @return modRestClient|bool A REST client instance, or FALSE.
+    */
     public function getClient()
     {
         if (empty($this->xpdo->rest)) {
@@ -450,10 +450,10 @@ class modTransportProvider extends xPDOSimpleObject
     }
 
     /**
-     * Verifies the authenticity of the provider
-     *
-     * @return boolean True if verified, xml if failed
-     */
+    * Verifies the authenticity of the provider
+    *
+    * @return boolean True if verified, xml if failed
+    */
     public function verify()
     {
         $response = $this->request('verify', 'GET');
@@ -471,12 +471,12 @@ class modTransportProvider extends xPDOSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::save to set the created date.
-     *
-     * @param boolean $cacheFlag
-     *
-     * @return boolean True if successful
-     */
+    * Overrides xPDOObject::save to set the created date.
+    *
+    * @param boolean $cacheFlag
+    *
+    * @return boolean True if successful
+    */
     public function save($cacheFlag = null)
     {
         if ($this->isNew() && !$this->get('created')) {

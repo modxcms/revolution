@@ -11,8 +11,8 @@ $_lang['areas'] = 'Areas';
 $_lang['class_name'] = 'Classi Nimi';
 $_lang['default'] = 'Vaikimisi';
 $_lang['duplicate_of'] = 'Dubleeri [[+name]]';
-$_lang['element_properties_desc'] = 'Siit saate muuta elemendi vaikimisi omadusi või muuta spetsiifilisi omadusi. <b>Märkus</b>: 
-Kui muudate vaikimisi väärtusi, siis salvestate vaikimisi omaduste alla. Muutes spetsiifilist omaduste kogumit, salvestate need omaduse seaded omaduste kogumi alla.<br /><br />Kui olete valinud omaduse mida muuta, vaikimisi omadus on tabelis <span style="color: gray;">halli</span> värvi. 
+$_lang['element_properties_desc'] = 'Siit saate muuta elemendi vaikimisi omadusi või muuta spetsiifilisi omadusi. <b>Märkus</b>:
+Kui muudate vaikimisi väärtusi, siis salvestate vaikimisi omaduste alla. Muutes spetsiifilist omaduste kogumit, salvestate need omaduse seaded omaduste kogumi alla.<br /><br />Kui olete valinud omaduse mida muuta, vaikimisi omadus on tabelis <span style="color: gray;">halli</span> värvi.
 Omadused, mis on hallid ei ole omaduste kogumis, aga neid kuvatakse seal lihtsamaks muutmiseks. Omadused, mis on <span style="color: green">rohelist</span> värvi on omadused mis domineerivad vaikimisi väärtust. Omadused, mis on <span style="color: purple">lillat</span> värvi on uued omadused teises kogumis mis ei ole vaikimisi kogu.<br /><br /><b>Märkus:</b> Parim on mitte muuta snippetite vaikimisi omadusi, mis on installitud Pakkide halduse kaudu, kui neid snippeteid uuendatakse, siis vaikimisi omadused kirjutatakse üle. Kasutage Omaduste Kogumit hoopis.';
 $_lang['file'] = 'File';
 $_lang['color'] = 'Color';

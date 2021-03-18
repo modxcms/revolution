@@ -30,10 +30,10 @@ abstract class Create extends CreateProcessor
     public $object;
 
     /**
-     * Cleanup the process and send back the response
-     *
-     * @return array
-     */
+    * Cleanup the process and send back the response
+    *
+    * @return array
+    */
     public function cleanup()
     {
         $this->clearCache();
@@ -44,10 +44,10 @@ abstract class Create extends CreateProcessor
     }
 
     /**
-     * Validate the form
-     *
-     * @return boolean
-     */
+    * Validate the form
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name');
@@ -97,12 +97,12 @@ abstract class Create extends CreateProcessor
     }
 
     /**
-     * Check to see if a Chunk already exists with specified name
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
+    * Check to see if a Chunk already exists with specified name
+    *
+    * @param string $name
+    *
+    * @return bool
+    */
     public function alreadyExists($name)
     {
         if ($this->classKey == modTemplate::class) {
@@ -115,10 +115,10 @@ abstract class Create extends CreateProcessor
     }
 
     /**
-     * Set the properties on the Element
-     *
-     * @return mixed
-     */
+    * Set the properties on the Element
+    *
+    * @return mixed
+    */
     public function setElementProperties()
     {
         $properties = null;
@@ -134,10 +134,10 @@ abstract class Create extends CreateProcessor
     }
 
     /**
-     * Run object-level validation on the element
-     *
-     * @return void
-     */
+    * Run object-level validation on the element
+    *
+    * @return void
+    */
     public function validateElement()
     {
         if (!$this->object->validate()) {
@@ -152,10 +152,10 @@ abstract class Create extends CreateProcessor
     }
 
     /**
-     * Clear the cache post-save
-     *
-     * @return void
-     */
+    * Clear the cache post-save
+    *
+    * @return void
+    */
     public function clearCache()
     {
         if ($this->getProperty('clearCache')) {

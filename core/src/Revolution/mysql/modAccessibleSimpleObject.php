@@ -10,17 +10,17 @@ class modAccessibleSimpleObject extends \MODX\Revolution\modAccessibleSimpleObje
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'MODX\\Revolution\\modAccessibleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'id' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'id' => 
+            'id' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -31,17 +31,17 @@ class modAccessibleSimpleObject extends \MODX\Revolution\modAccessibleSimpleObje
                 'generated' => 'native',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'id' => 
+                    'id' =>
                     array (
                         'length' => '',
                         'collation' => 'A',

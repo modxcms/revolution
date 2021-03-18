@@ -39,13 +39,13 @@ class RestClientResponse
     public $responseHeaders;
 
     /**
-     * Constructor for RestClientResponse class.
-     *
-     * @param modX   $modx       A reference to the modX instance
-     * @param string $response   The response data
-     * @param int    $headerSize The size of the response header, in bytes
-     * @param array  $config     An array of configuration options
-     */
+    * Constructor for RestClientResponse class.
+    *
+    * @param modX   $modx       A reference to the modX instance
+    * @param string $response   The response data
+    * @param int    $headerSize The size of the response header, in bytes
+    * @param array  $config     An array of configuration options
+    */
     function __construct(modX &$modx, $response = '', $headerSize = 0, array $config = [])
     {
         $this->modx =& $modx;
@@ -56,40 +56,40 @@ class RestClientResponse
     }
 
     /**
-     * Set and parse the response body
-     *
-     * @param string $result
-     */
+    * Set and parse the response body
+    *
+    * @param string $result
+    */
     public function setResponseBody($result)
     {
         $this->responseBody = $this->_parse($result);
     }
 
     /**
-     * Set the response info
-     *
-     * @param string $info
-     */
+    * Set the response info
+    *
+    * @param string $info
+    */
     public function setResponseInfo($info)
     {
         $this->responseInfo = $info;
     }
 
     /**
-     * Set the response error, if any
-     *
-     * @param string $error
-     */
+    * Set the response error, if any
+    *
+    * @param string $error
+    */
     public function setResponseError($error)
     {
         $this->responseError = $error;
     }
 
     /**
-     * Return the processed result based on the format the response was returned in
-     *
-     * @return array
-     */
+    * Return the processed result based on the format the response was returned in
+    *
+    * @return array
+    */
     public function process()
     {
         switch ($this->config['format']) {
@@ -106,12 +106,12 @@ class RestClientResponse
     }
 
     /**
-     * Parse the result
-     *
-     * @param string $result
-     *
-     * @return string
-     */
+    * Parse the result
+    *
+    * @param string $result
+    *
+    * @return string
+    */
     public function _parse($result)
     {
         $headers = [];
@@ -140,27 +140,27 @@ class RestClientResponse
     }
 
     /**
-     * Convert JSON into an array
-     *
-     * @param string $data
-     *
-     * @return array
-     */
+    * Convert JSON into an array
+    *
+    * @param string $data
+    *
+    * @return array
+    */
     protected function fromJSON($data)
     {
         return $this->modx->fromJSON($data);
     }
 
     /**
-     * Convert XML into an array
-     *
-     * @param string|SimpleXMLElement $xml
-     * @param mixed                   $attributesKey
-     * @param mixed                   $childrenKey
-     * @param mixed                   $valueKey
-     *
-     * @return array
-     */
+    * Convert XML into an array
+    *
+    * @param string|SimpleXMLElement $xml
+    * @param mixed                   $attributesKey
+    * @param mixed                   $childrenKey
+    * @param mixed                   $valueKey
+    *
+    * @return array
+    */
     protected function fromXML($xml, $attributesKey = null, $childrenKey = null, $valueKey = null)
     {
         if (is_string($xml)) {

@@ -61,10 +61,10 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Save template variables associated to the Template
-     *
-     * @return void
-     */
+    * Save template variables associated to the Template
+    *
+    * @return void
+    */
     public function saveTemplateVariables()
     {
         /* change template access to tvs */

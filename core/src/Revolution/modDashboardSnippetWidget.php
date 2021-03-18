@@ -22,9 +22,9 @@ class modDashboardSnippetWidget extends modDashboardWidgetInterface
     {
         /** @var modSnippet $snippet */
         $snippet = $this->modx->getObject(modSnippet::class,
-                                          [
+                                        [
             'name' => $this->widget->get('content'),
-                                          ]
+                                        ]
         );
         if ($snippet) {
             $snippet->setCacheable(false);

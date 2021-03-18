@@ -11,15 +11,15 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
         'version' => '3.0',
         'table' => 'user_group_roles',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'description' => NULL,
             'authority' => 9999,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -27,13 +27,13 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
                 'null' => false,
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'authority' => 
+            'authority' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -42,17 +42,17 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -60,15 +60,15 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
                     ),
                 ),
             ),
-            'authority' => 
+            'authority' =>
             array (
                 'alias' => 'authority',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'authority' => 
+                    'authority' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -77,9 +77,9 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'UserGroupMembers' => 
+            'UserGroupMembers' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroupMember',
                 'local' => 'id',

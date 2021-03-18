@@ -26,8 +26,8 @@ class GetList extends \MODX\Revolution\Processors\System\Settings\GetList
     public $classKey = modUserSetting::class;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['user' => 0]);
@@ -36,14 +36,14 @@ class GetList extends \MODX\Revolution\Processors\System\Settings\GetList
     }
 
     /**
-     * Filter by user
-     * @return array
-     */
+    * Filter by user
+    * @return array
+    */
     public function prepareCriteria()
     {
         $criteria = [];
         $criteria[] = ['user' => (int)$this->getProperty('user')];
-        
+
         return $criteria;
     }
 

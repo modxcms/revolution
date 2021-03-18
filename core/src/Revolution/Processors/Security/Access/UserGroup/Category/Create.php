@@ -28,8 +28,8 @@ class Create extends CreateProcessor
     public $permission = 'access_permissions';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $principal = $this->getProperty('principal');
@@ -56,8 +56,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $policy = $this->modx->getObject(modAccessPolicy::class, $this->getProperty('policy'));

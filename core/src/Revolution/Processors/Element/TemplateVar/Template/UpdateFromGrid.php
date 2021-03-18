@@ -71,12 +71,12 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * For adding access or updating rank
-     *
-     * @param array $fields
-     *
-     * @return modTemplateVarTemplate|string
-     */
+    * For adding access or updating rank
+    *
+    * @param array $fields
+    *
+    * @return modTemplateVarTemplate|string
+    */
     public function addAccess(array $fields)
     {
         $templateVarTemplate = $this->modx->getObject(modTemplateVarTemplate::class, [
@@ -98,12 +98,12 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * For removing access
-     *
-     * @param array $fields
-     *
-     * @return modTemplateVarTemplate|string
-     */
+    * For removing access
+    *
+    * @param array $fields
+    *
+    * @return modTemplateVarTemplate|string
+    */
     public function removeAccess(array $fields)
     {
         $templateVarTemplate = $this->modx->getObject(modTemplateVarTemplate::class, [
@@ -121,4 +121,3 @@ class UpdateFromGrid extends Processor
         return $templateVarTemplate;
     }
 }
-

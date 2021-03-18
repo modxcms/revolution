@@ -19,8 +19,8 @@ use xPDO\Om\xPDOCriteria;
 class OptimizeDatabase extends OptimizeDatabaseAbstract
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function optimize()
     {
         $sql = file_get_contents(__DIR__ . '/defragment-indexes.sql');

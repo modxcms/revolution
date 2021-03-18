@@ -31,9 +31,9 @@ class GetList extends GetListProcessor
     public $permission = 'source_view';
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -46,10 +46,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @param array $list
-     * @return array
-     */
+    * {@inheritDoc}
+    * @param array $list
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         if ($this->getProperty('showNone')) {
@@ -63,10 +63,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * {@inheritDoc}
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $query = $this->getProperty('query');
@@ -83,10 +83,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Filter the query by the valueField of MODx.combo.MediaSource to get the initially value displayed right
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * Filter the query by the valueField of MODx.combo.MediaSource to get the initially value displayed right
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $id = $this->getProperty('id', '');
@@ -99,19 +99,19 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return string
-     */
+    * {@inheritDoc}
+    * @return string
+    */
     public function getSortClassKey()
     {
         return modMediaSource::class;
     }
 
     /**
-     * Prepare the source for iteration and output
-     * @param xPDOObject|modAccessibleObject|modMediaSource $object
-     * @return array
-     */
+    * Prepare the source for iteration and output
+    * @param xPDOObject|modAccessibleObject|modMediaSource $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $canEdit = $this->modx->hasPermission('source_edit');

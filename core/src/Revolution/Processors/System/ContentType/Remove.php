@@ -27,8 +27,8 @@ class Remove extends RemoveProcessor
     public $objectType = 'content_type';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeRemove()
     {
         if ($this->isInUse()) {
@@ -38,8 +38,8 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function isInUse()
     {
         return $this->modx->getCount(modResource::class, ['content_type' => $this->object->get('id')]) > 0;

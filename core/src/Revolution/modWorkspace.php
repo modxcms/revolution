@@ -20,10 +20,10 @@ use xPDO\Om\xPDOSimpleObject;
 class modWorkspace extends xPDOSimpleObject
 {
     /**
-     * Overrides xPDOObject::save to set the createdon date.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides xPDOObject::save to set the createdon date.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         if ($this->_new && !$this->get('created')) {
@@ -35,10 +35,10 @@ class modWorkspace extends xPDOSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::get() to replace path settings.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides xPDOObject::get() to replace path settings.
+    *
+    * {@inheritdoc}
+    */
     public function get($k, $format = null, $formatTemplate = null)
     {
         $result = parent:: get($k, $format, $formatTemplate);

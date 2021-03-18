@@ -19,16 +19,16 @@ use MODX\Revolution\Processors\Processor;
 class GetList extends Processor
 {
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('countries');
     }
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function process()
     {
         $countryList = $this->getCountryList();
@@ -46,8 +46,8 @@ class GetList extends Processor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getCountryList()
     {
         $_country_lang = [];

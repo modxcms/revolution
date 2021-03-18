@@ -12,11 +12,11 @@ class modResource extends \MODX\Revolution\modResource
         'table' => 'site_content',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
         'inherit' => 'single',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'type' => 'document',
             'contentType' => 'text/html',
@@ -62,9 +62,9 @@ class modResource extends \MODX\Revolution\modResource
             'properties' => NULL,
             'alias_visible' => 1,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'type' => 
+            'type' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '20',
@@ -72,7 +72,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 'document',
             ),
-            'contentType' => 
+            'contentType' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '50',
@@ -80,7 +80,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 'text/html',
             ),
-            'pagetitle' => 
+            'pagetitle' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -90,7 +90,7 @@ class modResource extends \MODX\Revolution\modResource
                 'index' => 'fulltext',
                 'indexgrp' => 'content_ft_idx',
             ),
-            'longtitle' => 
+            'longtitle' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -100,7 +100,7 @@ class modResource extends \MODX\Revolution\modResource
                 'index' => 'fulltext',
                 'indexgrp' => 'content_ft_idx',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
@@ -109,7 +109,7 @@ class modResource extends \MODX\Revolution\modResource
                 'index' => 'fulltext',
                 'indexgrp' => 'content_ft_idx',
             ),
-            'alias' => 
+            'alias' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -118,7 +118,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => '',
                 'index' => 'index',
             ),
-            'link_attributes' => 
+            'link_attributes' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -126,7 +126,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => '',
             ),
-            'published' => 
+            'published' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -136,7 +136,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'pub_date' => 
+            'pub_date' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -145,7 +145,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'unpub_date' => 
+            'unpub_date' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -154,7 +154,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'parent' => 
+            'parent' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -164,7 +164,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'isfolder' => 
+            'isfolder' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -174,21 +174,21 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'introtext' => 
+            'introtext' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'index' => 'fulltext',
                 'indexgrp' => 'content_ft_idx',
             ),
-            'content' => 
+            'content' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
                 'index' => 'fulltext',
                 'indexgrp' => 'content_ft_idx',
             ),
-            'richtext' => 
+            'richtext' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -197,7 +197,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 1,
             ),
-            'template' => 
+            'template' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -206,7 +206,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'menuindex' => 
+            'menuindex' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -215,17 +215,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'searchable' => 
-            array (
-                'dbtype' => 'tinyint',
-                'precision' => '1',
-                'attributes' => 'unsigned',
-                'phptype' => 'boolean',
-                'null' => false,
-                'default' => 1,
-                'index' => 'index',
-            ),
-            'cacheable' => 
+            'searchable' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -235,7 +225,17 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 1,
                 'index' => 'index',
             ),
-            'createdby' => 
+            'cacheable' =>
+            array (
+                'dbtype' => 'tinyint',
+                'precision' => '1',
+                'attributes' => 'unsigned',
+                'phptype' => 'boolean',
+                'null' => false,
+                'default' => 1,
+                'index' => 'index',
+            ),
+            'createdby' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -243,7 +243,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'createdon' => 
+            'createdon' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -251,7 +251,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'editedby' => 
+            'editedby' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -259,7 +259,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'editedon' => 
+            'editedon' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -267,7 +267,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'deleted' => 
+            'deleted' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -276,7 +276,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'deletedon' => 
+            'deletedon' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -284,7 +284,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'deletedby' => 
+            'deletedby' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -292,7 +292,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'publishedon' => 
+            'publishedon' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -300,7 +300,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'publishedby' => 
+            'publishedby' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -308,7 +308,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'menutitle' => 
+            'menutitle' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -316,7 +316,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => '',
             ),
-            'donthit' => 
+            'donthit' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -325,7 +325,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'privateweb' => 
+            'privateweb' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -334,7 +334,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'privatemgr' => 
+            'privatemgr' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -343,7 +343,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'content_dispo' => 
+            'content_dispo' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -351,7 +351,7 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 0,
             ),
-            'hidemenu' => 
+            'hidemenu' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -361,7 +361,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'class_key' => 
+            'class_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -370,7 +370,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 'MODX\\Revolution\\modDocument',
                 'index' => 'index',
             ),
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -379,7 +379,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 'web',
                 'index' => 'index',
             ),
-            'content_type' => 
+            'content_type' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -388,14 +388,14 @@ class modResource extends \MODX\Revolution\modResource
                 'null' => false,
                 'default' => 1,
             ),
-            'uri' => 
+            'uri' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => true,
                 'index' => 'index',
             ),
-            'uri_override' => 
+            'uri_override' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -404,7 +404,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'hide_children_in_tree' => 
+            'hide_children_in_tree' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -413,7 +413,7 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'show_in_tree' => 
+            'show_in_tree' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -422,13 +422,13 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 1,
                 'index' => 'index',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'json',
                 'null' => true,
             ),
-            'alias_visible' => 
+            'alias_visible' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -438,17 +438,17 @@ class modResource extends \MODX\Revolution\modResource
                 'default' => 1,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'alias' => 
+            'alias' =>
             array (
                 'alias' => 'alias',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'alias' => 
+                    'alias' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -456,15 +456,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'published' => 
+            'published' =>
             array (
                 'alias' => 'published',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'published' => 
+                    'published' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -472,15 +472,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'pub_date' => 
+            'pub_date' =>
             array (
                 'alias' => 'pub_date',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'pub_date' => 
+                    'pub_date' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -488,15 +488,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'unpub_date' => 
+            'unpub_date' =>
             array (
                 'alias' => 'unpub_date',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'unpub_date' => 
+                    'unpub_date' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -504,15 +504,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'parent' => 
+            'parent' =>
             array (
                 'alias' => 'parent',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'parent' => 
+                    'parent' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -520,15 +520,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'isfolder' => 
+            'isfolder' =>
             array (
                 'alias' => 'isfolder',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'isfolder' => 
+                    'isfolder' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -536,15 +536,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'template' => 
+            'template' =>
             array (
                 'alias' => 'template',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'template' => 
+                    'template' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -552,15 +552,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'menuindex' => 
+            'menuindex' =>
             array (
                 'alias' => 'menuindex',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'menuindex' => 
+                    'menuindex' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -568,15 +568,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'searchable' => 
+            'searchable' =>
             array (
                 'alias' => 'searchable',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'searchable' => 
+                    'searchable' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -584,15 +584,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'cacheable' => 
+            'cacheable' =>
             array (
                 'alias' => 'cacheable',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'cacheable' => 
+                    'cacheable' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -600,15 +600,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'hidemenu' => 
+            'hidemenu' =>
             array (
                 'alias' => 'hidemenu',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'hidemenu' => 
+                    'hidemenu' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -616,15 +616,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'class_key' => 
+            'class_key' =>
             array (
                 'alias' => 'class_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'class_key' => 
+                    'class_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -632,15 +632,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'context_key' => 
+            'context_key' =>
             array (
                 'alias' => 'context_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -648,15 +648,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'uri' => 
+            'uri' =>
             array (
                 'alias' => 'uri',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'uri' => 
+                    'uri' =>
                     array (
                         'length' => '191',
                         'collation' => 'A',
@@ -664,15 +664,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'uri_override' => 
+            'uri_override' =>
             array (
                 'alias' => 'uri_override',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'uri_override' => 
+                    'uri_override' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -680,15 +680,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'hide_children_in_tree' => 
+            'hide_children_in_tree' =>
             array (
                 'alias' => 'hide_children_in_tree',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'hide_children_in_tree' => 
+                    'hide_children_in_tree' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -696,15 +696,15 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'show_in_tree' => 
+            'show_in_tree' =>
             array (
                 'alias' => 'show_in_tree',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'show_in_tree' => 
+                    'show_in_tree' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -712,39 +712,39 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'content_ft_idx' => 
+            'content_ft_idx' =>
             array (
                 'alias' => 'content_ft_idx',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'FULLTEXT',
-                'columns' => 
+                'columns' =>
                 array (
-                    'pagetitle' => 
+                    'pagetitle' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'longtitle' => 
+                    'longtitle' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'description' => 
+                    'description' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'introtext' => 
+                    'introtext' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => true,
                     ),
-                    'content' => 
+                    'content' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -752,27 +752,27 @@ class modResource extends \MODX\Revolution\modResource
                     ),
                 ),
             ),
-            'cache_refresh_idx' => 
+            'cache_refresh_idx' =>
             array (
                 'alias' => 'cache_refresh_index',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'parent' => 
+                    'parent' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'menuindex' => 
+                    'menuindex' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'id' => 
+                    'id' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -781,9 +781,9 @@ class modResource extends \MODX\Revolution\modResource
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Children' => 
+            'Children' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'id',
@@ -791,7 +791,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'TemplateVarResources' => 
+            'TemplateVarResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVarResource',
                 'local' => 'id',
@@ -799,7 +799,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'ResourceGroupResources' => 
+            'ResourceGroupResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResourceGroupResource',
                 'local' => 'id',
@@ -807,7 +807,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Acls' => 
+            'Acls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessResource',
                 'local' => 'id',
@@ -815,7 +815,7 @@ class modResource extends \MODX\Revolution\modResource
                 'owner' => 'local',
                 'cardinality' => 'many',
             ),
-            'ContextResources' => 
+            'ContextResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modContextResource',
                 'local' => 'id',
@@ -824,9 +824,9 @@ class modResource extends \MODX\Revolution\modResource
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Parent' => 
+            'Parent' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'parent',
@@ -834,7 +834,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'CreatedBy' => 
+            'CreatedBy' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'createdby',
@@ -842,7 +842,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'EditedBy' => 
+            'EditedBy' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'editedby',
@@ -850,7 +850,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'DeletedBy' => 
+            'DeletedBy' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'deletedby',
@@ -858,7 +858,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'PublishedBy' => 
+            'PublishedBy' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'publishedby',
@@ -866,7 +866,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Template' => 
+            'Template' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',
                 'local' => 'template',
@@ -874,7 +874,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'TemplateVars' => 
+            'TemplateVars' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'id:template',
@@ -882,7 +882,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'TemplateVarTemplates' => 
+            'TemplateVarTemplates' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVarTemplate',
                 'local' => 'template',
@@ -890,7 +890,7 @@ class modResource extends \MODX\Revolution\modResource
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'ContentType' => 
+            'ContentType' =>
             array (
                 'class' => 'MODX\\Revolution\\modContentType',
                 'local' => 'content_type',
@@ -898,7 +898,7 @@ class modResource extends \MODX\Revolution\modResource
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'context_key',

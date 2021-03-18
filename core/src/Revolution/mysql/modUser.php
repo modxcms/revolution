@@ -11,11 +11,11 @@ class modUser extends \MODX\Revolution\modUser
         'version' => '3.0',
         'table' => 'users',
         'extends' => 'MODX\\Revolution\\modPrincipal',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'username' => '',
             'password' => '',
@@ -31,9 +31,9 @@ class modUser extends \MODX\Revolution\modUser
             'sudo' => 0,
             'createdon' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'username' => 
+            'username' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -42,7 +42,7 @@ class modUser extends \MODX\Revolution\modUser
                 'default' => '',
                 'index' => 'unique',
             ),
-            'password' => 
+            'password' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -50,7 +50,7 @@ class modUser extends \MODX\Revolution\modUser
                 'null' => false,
                 'default' => '',
             ),
-            'cachepwd' => 
+            'cachepwd' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -58,7 +58,7 @@ class modUser extends \MODX\Revolution\modUser
                 'null' => false,
                 'default' => '',
             ),
-            'class_key' => 
+            'class_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -67,7 +67,7 @@ class modUser extends \MODX\Revolution\modUser
                 'default' => 'MODX\\Revolution\\modUser',
                 'index' => 'index',
             ),
-            'active' => 
+            'active' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -76,7 +76,7 @@ class modUser extends \MODX\Revolution\modUser
                 'null' => false,
                 'default' => 1,
             ),
-            'remote_key' => 
+            'remote_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -84,13 +84,13 @@ class modUser extends \MODX\Revolution\modUser
                 'null' => true,
                 'index' => 'index',
             ),
-            'remote_data' => 
+            'remote_data' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'json',
                 'null' => true,
             ),
-            'hash_class' => 
+            'hash_class' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -98,7 +98,7 @@ class modUser extends \MODX\Revolution\modUser
                 'null' => false,
                 'default' => 'MODX\\Revolution\\Hashing\\modNative',
             ),
-            'salt' => 
+            'salt' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -106,7 +106,7 @@ class modUser extends \MODX\Revolution\modUser
                 'null' => false,
                 'default' => '',
             ),
-            'primary_group' => 
+            'primary_group' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -116,13 +116,13 @@ class modUser extends \MODX\Revolution\modUser
                 'default' => 0,
                 'index' => 'index',
             ),
-            'session_stale' => 
+            'session_stale' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'array',
                 'null' => true,
             ),
-            'sudo' => 
+            'sudo' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -131,7 +131,7 @@ class modUser extends \MODX\Revolution\modUser
                 'null' => false,
                 'default' => 0,
             ),
-            'createdon' => 
+            'createdon' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -140,17 +140,17 @@ class modUser extends \MODX\Revolution\modUser
                 'default' => 0,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'username' => 
+            'username' =>
             array (
                 'alias' => 'username',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'username' => 
+                    'username' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -158,15 +158,15 @@ class modUser extends \MODX\Revolution\modUser
                     ),
                 ),
             ),
-            'class_key' => 
+            'class_key' =>
             array (
                 'alias' => 'class_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'class_key' => 
+                    'class_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -174,15 +174,15 @@ class modUser extends \MODX\Revolution\modUser
                     ),
                 ),
             ),
-            'remote_key' => 
+            'remote_key' =>
             array (
                 'alias' => 'remote_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'remote_key' => 
+                    'remote_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -190,15 +190,15 @@ class modUser extends \MODX\Revolution\modUser
                     ),
                 ),
             ),
-            'primary_group' => 
+            'primary_group' =>
             array (
                 'alias' => 'primary_group',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'primary_group' => 
+                    'primary_group' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -207,9 +207,9 @@ class modUser extends \MODX\Revolution\modUser
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Profile' => 
+            'Profile' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserProfile',
                 'local' => 'id',
@@ -217,7 +217,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'one',
                 'owner' => 'local',
             ),
-            'UserSettings' => 
+            'UserSettings' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserSetting',
                 'local' => 'id',
@@ -225,7 +225,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'UserGroupMembers' => 
+            'UserGroupMembers' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroupMember',
                 'local' => 'id',
@@ -233,7 +233,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'ActiveUsers' => 
+            'ActiveUsers' =>
             array (
                 'class' => 'MODX\\Revolution\\modActiveUser',
                 'local' => 'id',
@@ -241,7 +241,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'DashboardWidgets' => 
+            'DashboardWidgets' =>
             array (
                 'class' => 'MODX\\Revolution\\modDashboardWidgetPlacement',
                 'local' => 'id',
@@ -250,9 +250,9 @@ class modUser extends \MODX\Revolution\modUser
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'CreatedResources' => 
+            'CreatedResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'id',
@@ -260,7 +260,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'EditedResources' => 
+            'EditedResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'id',
@@ -268,7 +268,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'DeletedResources' => 
+            'DeletedResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'id',
@@ -276,7 +276,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'PublishedResources' => 
+            'PublishedResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'id',
@@ -284,7 +284,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'SentMessages' => 
+            'SentMessages' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserMessage',
                 'local' => 'id',
@@ -292,7 +292,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'ReceivedMessages' => 
+            'ReceivedMessages' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserMessage',
                 'local' => 'id',
@@ -300,7 +300,7 @@ class modUser extends \MODX\Revolution\modUser
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'PrimaryGroup' => 
+            'PrimaryGroup' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'primary_group',

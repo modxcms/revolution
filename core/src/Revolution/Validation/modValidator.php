@@ -21,14 +21,14 @@ use xPDO\Validation\xPDOValidator;
 class modValidator extends xPDOValidator
 {
     /**
-     * Validate a xPDOObject by the parameters specified
-     *
-     * @access public
-     *
-     * @param array $parameters An associative array of config parameters.
-     *
-     * @return boolean Either true or false indicating valid or invalid.
-     */
+    * Validate a xPDOObject by the parameters specified
+    *
+    * @access public
+    *
+    * @param array $parameters An associative array of config parameters.
+    *
+    * @return boolean Either true or false indicating valid or invalid.
+    */
     public function validate(array $parameters = [])
     {
         $result = parent:: validate($parameters);

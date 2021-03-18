@@ -28,24 +28,24 @@ class Purge extends Processor
     public $packageName;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('packages');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace'];
     }
 
     /**
-     * @return array|bool|string
-     */
+    * @return array|bool|string
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['package' => '']);
@@ -75,11 +75,11 @@ class Purge extends Processor
     }
 
     /**
-     * Return a failure message from the processor.
-     * @param string $msg
-     * @param mixed $object
-     * @return array|string
-     */
+    * Return a failure message from the processor.
+    * @param string $msg
+    * @param mixed $object
+    * @return array|string
+    */
     public function failure($msg = '', $object = null)
     {
         $this->modx->log(modX::LOG_LEVEL_INFO, 'COMPLETED');
@@ -88,8 +88,8 @@ class Purge extends Processor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function process()
     {
         foreach ($this->packages as $package) {
@@ -110,10 +110,10 @@ class Purge extends Processor
     }
 
     /**
-     * Remove the package
-     * @param modTransportPackage $package
-     * @return void
-     */
+    * Remove the package
+    * @param modTransportPackage $package
+    * @return void
+    */
     public function removePackage($package)
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO,
@@ -143,10 +143,10 @@ class Purge extends Processor
     }
 
     /**
-     * Remove the transport package archive
-     * @param string $transportZip
-     * @return void
-     */
+    * Remove the transport package archive
+    * @param string $transportZip
+    * @return void
+    */
     public function removeTransportZip($transportZip)
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tzip_start'));
@@ -160,10 +160,10 @@ class Purge extends Processor
     }
 
     /**
-     * Remove the transport package directory
-     * @param string $transportDir
-     * @return void
-     */
+    * Remove the transport package directory
+    * @param string $transportDir
+    * @return void
+    */
     public function removeTransportDirectory($transportDir)
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tdir_start'));
@@ -177,9 +177,9 @@ class Purge extends Processor
     }
 
     /**
-     * Empty the site cache
-     * @return void
-     */
+    * Empty the site cache
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->getCacheManager();
@@ -190,9 +190,9 @@ class Purge extends Processor
     }
 
     /**
-     * Cleanup and return the result
-     * @return array
-     */
+    * Cleanup and return the result
+    * @return array
+    */
     public function cleanup()
     {
         if ($this->packageName === '*') {
@@ -206,11 +206,11 @@ class Purge extends Processor
     }
 
     /**
-     * Return a success message from the processor.
-     * @param string $msg
-     * @param mixed $object
-     * @return array|string
-     */
+    * Return a success message from the processor.
+    * @param string $msg
+    * @param mixed $object
+    * @return array|string
+    */
     public function success($msg = '', $object = null)
     {
         $this->modx->log(modX::LOG_LEVEL_INFO, 'COMPLETED');
@@ -219,8 +219,8 @@ class Purge extends Processor
     }
 
     /**
-     * Log manager action
-     */
+    * Log manager action
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('packages_purge', modTransportPackage::class, $this->packageName);

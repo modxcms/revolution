@@ -26,8 +26,8 @@ class Update extends UpdateProcessor
     public $objectType = 'widget';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         if ($properties = $this->getProperty('properties')) {

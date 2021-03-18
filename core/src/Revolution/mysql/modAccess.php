@@ -10,11 +10,11 @@ class modAccess extends \MODX\Revolution\modAccess
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'target' => '',
             'principal_class' => 'MODX\\Revolution\\modPrincipal',
@@ -22,9 +22,9 @@ class modAccess extends \MODX\Revolution\modAccess
             'authority' => 9999,
             'policy' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'target' => 
+            'target' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -33,7 +33,7 @@ class modAccess extends \MODX\Revolution\modAccess
                 'default' => '',
                 'index' => 'fk',
             ),
-            'principal_class' => 
+            'principal_class' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -42,7 +42,7 @@ class modAccess extends \MODX\Revolution\modAccess
                 'default' => 'MODX\\Revolution\\modPrincipal',
                 'index' => 'index',
             ),
-            'principal' => 
+            'principal' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -52,7 +52,7 @@ class modAccess extends \MODX\Revolution\modAccess
                 'default' => 0,
                 'index' => 'fk',
             ),
-            'authority' => 
+            'authority' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -62,7 +62,7 @@ class modAccess extends \MODX\Revolution\modAccess
                 'default' => 9999,
                 'index' => 'index',
             ),
-            'policy' => 
+            'policy' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -73,17 +73,17 @@ class modAccess extends \MODX\Revolution\modAccess
                 'index' => 'fk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'target' => 
+            'target' =>
             array (
                 'alias' => 'target',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'target' => 
+                    'target' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -91,15 +91,15 @@ class modAccess extends \MODX\Revolution\modAccess
                     ),
                 ),
             ),
-            'principal_class' => 
+            'principal_class' =>
             array (
                 'alias' => 'principal_class',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'principal_class' => 
+                    'principal_class' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -107,15 +107,15 @@ class modAccess extends \MODX\Revolution\modAccess
                     ),
                 ),
             ),
-            'principal' => 
+            'principal' =>
             array (
                 'alias' => 'principal',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'principal' => 
+                    'principal' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -123,15 +123,15 @@ class modAccess extends \MODX\Revolution\modAccess
                     ),
                 ),
             ),
-            'authority' => 
+            'authority' =>
             array (
                 'alias' => 'authority',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'authority' => 
+                    'authority' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -139,15 +139,15 @@ class modAccess extends \MODX\Revolution\modAccess
                     ),
                 ),
             ),
-            'policy' => 
+            'policy' =>
             array (
                 'alias' => 'policy',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'policy' => 
+                    'policy' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -156,9 +156,9 @@ class modAccess extends \MODX\Revolution\modAccess
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Policy' => 
+            'Policy' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicy',
                 'local' => 'policy',
@@ -166,7 +166,7 @@ class modAccess extends \MODX\Revolution\modAccess
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'Principal' => 
+            'Principal' =>
             array (
                 'class' => 'MODX\\Revolution\\modPrincipal',
                 'local' => 'principal',
@@ -174,37 +174,37 @@ class modAccess extends \MODX\Revolution\modAccess
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'GroupPrincipal' => 
+            'GroupPrincipal' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'principal',
                 'foreign' => 'id',
                 'owner' => 'foreign',
                 'cardinality' => 'one',
-                'criteria' => 
+                'criteria' =>
                 array (
-                    'local' => 
+                    'local' =>
                     array (
                         'principal_class' => 'MODX\\Revolution\\modUserGroup',
                     ),
                 ),
             ),
-            'UserPrincipal' => 
+            'UserPrincipal' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'principal',
                 'foreign' => 'id',
                 'owner' => 'foreign',
                 'cardinality' => 'one',
-                'criteria' => 
+                'criteria' =>
                 array (
-                    'local' => 
+                    'local' =>
                     array (
                         'principal_class' => 'MODX\\Revolution\\modUser',
                     ),
                 ),
             ),
-            'MinimumRole' => 
+            'MinimumRole' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroupRole',
                 'local' => 'authority',

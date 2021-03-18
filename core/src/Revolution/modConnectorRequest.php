@@ -21,18 +21,18 @@ namespace MODX\Revolution;
 class modConnectorRequest extends modManagerRequest
 {
     /**
-     * The base subdirectory location of the requested action.
-     *
-     * @var string
-     * @access public
-     */
+    * The base subdirectory location of the requested action.
+    *
+    * @var string
+    * @access public
+    */
     public $location;
 
     /**
-     * Initializes the connector request, loading the proper context, culture and lexicon; also loads the action map
-     *
-     * @return bool
-     */
+    * Initializes the connector request, loading the proper context, culture and lexicon; also loads the action map
+    *
+    * @return bool
+    */
     public function initialize()
     {
         if ($this->modx && is_object($this->modx->context) && $this->modx->context instanceof modContext) {
@@ -53,12 +53,12 @@ class modConnectorRequest extends modManagerRequest
     }
 
     /**
-     * Handles all requests specified by the action param and prepares for loading.
-     *
-     * @access public
-     *
-     * @param array $options An array of request options
-     */
+    * Handles all requests specified by the action param and prepares for loading.
+    *
+    * @access public
+    *
+    * @param array $options An array of request options
+    */
     public function handleRequest(array $options = [])
     {
         if (!isset($options['action'])) {
@@ -78,10 +78,10 @@ class modConnectorRequest extends modManagerRequest
     }
 
     /**
-     * Prepares the output with the specified processor.
-     *
-     * @param array $options An array of options
-     */
+    * Prepares the output with the specified processor.
+    *
+    * @param array $options An array of options
+    */
     public function prepareResponse(array $options = [])
     {
         $procDir = !empty($options['processors_path']) ? $options['processors_path'] : '';
@@ -90,10 +90,10 @@ class modConnectorRequest extends modManagerRequest
     }
 
     /**
-     * Sets the directory to load the processors from
-     *
-     * @param string $dir The directory to load from
-     */
+    * Sets the directory to load the processors from
+    *
+    * @param string $dir The directory to load from
+    */
     public function setDirectory($dir = '')
     {
         if (!$this->modx->getResponse(modConnectorResponse::class)) {

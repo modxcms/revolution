@@ -34,8 +34,8 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'key';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -55,9 +55,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Get a collection of modSystemSetting objects
-     * @return array
-     */
+    * Get a collection of modSystemSetting objects
+    * @return array
+    */
     public function getData()
     {
         $query = $this->getProperty('query', false);
@@ -103,10 +103,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Prepare a setting for output
-     * @param xPDOObject $object
-     * @return array
-     */
+    * Prepare a setting for output
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $settingArray = $object->toArray();

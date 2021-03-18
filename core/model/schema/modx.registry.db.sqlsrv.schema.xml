@@ -8,7 +8,7 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
- -->
+-->
 <!-- The following xPDO model represents an object-relational map structure of the MODX db registry package -->
 <model package="MODX\Revolution\Registry\Db" baseClass="xPDO\Om\xPDOObject" platform="sqlsrv" phpdoc-package="MODX\Revolution\Registry\Db" version="3.0">
     <object class="modDbRegisterQueue" table="register_queues" extends="MODX\Revolution\xPDOSimpleObject">

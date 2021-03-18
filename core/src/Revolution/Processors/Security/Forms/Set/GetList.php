@@ -34,8 +34,8 @@ class GetList extends GetListProcessor
     public $canRemove = false;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['profile' => 0, 'search' => '']);
@@ -45,9 +45,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->leftJoin(modTemplate::class, 'Template');
@@ -67,9 +67,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns(modFormCustomizationSet::class, 'modFormCustomizationSet'));
@@ -78,9 +78,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

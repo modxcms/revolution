@@ -27,8 +27,8 @@ class Duplicate extends DuplicateProcessor
     public $objectType = 'policy_template';
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function afterSave()
     {
         $permissions = $this->object->getMany('Permissions');

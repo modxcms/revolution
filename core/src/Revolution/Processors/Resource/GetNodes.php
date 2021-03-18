@@ -59,10 +59,10 @@ class GetNodes extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
+    * {@inheritDoc}
+    *
+    * @return mixed
+    */
     public function process()
     {
         $this->getRootNode();
@@ -90,9 +90,9 @@ class GetNodes extends Processor
     }
 
     /**
-     * Prepare the tree nodes, by getting the permissions
-     * @return void
-     */
+    * Prepare the tree nodes, by getting the permissions
+    * @return void
+    */
     public function prepare()
     {
         $this->permissions = [
@@ -124,10 +124,10 @@ class GetNodes extends Processor
     }
 
     /**
-     * Determine the context and root and start nodes for the tree
-     *
-     * @return void
-     */
+    * Determine the context and root and start nodes for the tree
+    *
+    * @return void
+    */
     public function getRootNode()
     {
         $this->defaultRootId = $this->modx->getOption('tree_root_id', null, 0);
@@ -146,9 +146,9 @@ class GetNodes extends Processor
     }
 
     /**
-     * Get the query object for grabbing Contexts in the tree
-     * @return xPDOQuery
-     */
+    * Get the query object for grabbing Contexts in the tree
+    * @return xPDOQuery
+    */
     public function getContextQuery()
     {
         $this->itemClass = modContext::class;
@@ -167,9 +167,9 @@ class GetNodes extends Processor
     }
 
     /**
-     * Get the query object for grabbing Resources in the tree
-     * @return xPDOQuery
-     */
+    * Get the query object for grabbing Resources in the tree
+    * @return xPDOQuery
+    */
     public function getResourceQuery()
     {
         $resourceColumns = [
@@ -215,11 +215,11 @@ class GetNodes extends Processor
     }
 
     /**
-     * Add search results to tree nodes
-     *
-     * @param string $query
-     * @return void
-     */
+    * Add search results to tree nodes
+    *
+    * @param string $query
+    * @return void
+    */
     public function search($query)
     {
         /* first check to see if search results */
@@ -291,11 +291,11 @@ class GetNodes extends Processor
     }
 
     /**
-     * Iterate across the collection of items from the query
-     *
-     * @param array $collection
-     * @return void
-     */
+    * Iterate across the collection of items from the query
+    *
+    * @param array $collection
+    * @return void
+    */
     public function iterate(array $collection = [])
     {
         /* now process actual tree nodes */
@@ -324,11 +324,11 @@ class GetNodes extends Processor
     }
 
     /**
-     * Prepare a Context for being shown in the tree
-     *
-     * @param modContext $context
-     * @return array
-     */
+    * Prepare a Context for being shown in the tree
+    *
+    * @param modContext $context
+    * @return array
+    */
     public function prepareContextNode(modContext $context)
     {
         $class = ['tree-pseudoroot-node'];
@@ -380,11 +380,11 @@ class GetNodes extends Processor
     }
 
     /**
-     * Prepare a Resource for being shown in the tree
-     *
-     * @param modResource $resource
-     * @return array
-     */
+    * Prepare a Resource for being shown in the tree
+    *
+    * @param modResource $resource
+    * @return array
+    */
     public function prepareResourceNode(modResource $resource)
     {
         $qtipField = $this->getProperty('qtipField');

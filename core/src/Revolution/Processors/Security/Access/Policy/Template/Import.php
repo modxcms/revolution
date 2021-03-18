@@ -27,8 +27,8 @@ class Import extends ImportProcessor
     public $languageTopics = ['policy'];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         /** @var modAccessPolicyTemplate $template */

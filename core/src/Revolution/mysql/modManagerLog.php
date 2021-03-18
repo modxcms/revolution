@@ -11,11 +11,11 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
         'version' => '3.0',
         'table' => 'manager_log',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'user' => 0,
             'occurred' => NULL,
@@ -23,9 +23,9 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
             'classKey' => '',
             'item' => '0',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'user' => 
+            'user' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -34,14 +34,14 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 'null' => false,
                 'default' => 0,
             ),
-            'occurred' => 
+            'occurred' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => true,
                 'default' => NULL,
             ),
-            'action' => 
+            'action' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -49,7 +49,7 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 'null' => false,
                 'default' => '',
             ),
-            'classKey' => 
+            'classKey' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -57,7 +57,7 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 'null' => false,
                 'default' => '',
             ),
-            'item' => 
+            'item' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -66,23 +66,23 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 'default' => '0',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'user_occurred' => 
+            'user_occurred' =>
             array (
                 'alias' => 'user_occurred',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'user' => 
+                    'user' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'occurred' => 
+                    'occurred' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -91,9 +91,9 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'User' => 
+            'User' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'user',

@@ -66,10 +66,10 @@ class Update extends \MODX\Revolution\Processors\Element\Update
     }
 
     /**
-     * Update system event associations
-     *
-     * @return void
-     */
+    * Update system event associations
+    *
+    * @return void
+    */
     public function setSystemEvents()
     {
         $events = $this->getProperty('events', null);

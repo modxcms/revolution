@@ -27,14 +27,14 @@ use xPDO\xPDO;
 class modContextSetting extends xPDOObject
 {
     /**
-     * Updates the Lexicon Entry translation for this Context Setting
-     *
-     * @param string $key     The key of the setting
-     * @param string $value   The new value of the setting
-     * @param array  $options An array of options related to the setting
-     *
-     * @return bool
-     */
+    * Updates the Lexicon Entry translation for this Context Setting
+    *
+    * @param string $key     The key of the setting
+    * @param string $value   The new value of the setting
+    * @param array  $options An array of options related to the setting
+    *
+    * @return bool
+    */
     public function updateTranslation($key, $value = '', array $options = [])
     {
         if (!is_array($options) || empty($options)) {

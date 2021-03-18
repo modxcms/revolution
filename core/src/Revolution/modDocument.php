@@ -15,10 +15,10 @@ use xPDO\xPDO;
 class modDocument extends modResource
 {
     /**
-     * Overrides modResource::__construct to set the class key for this Resource type
-     *
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * Overrides modResource::__construct to set the class key for this Resource type
+    *
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(& $xpdo)
     {
         parent:: __construct($xpdo);
@@ -27,11 +27,11 @@ class modDocument extends modResource
     }
 
     /**
-     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
-     * set to true.
-     *
-     * @return array
-     */
+    * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+    * set to true.
+    *
+    * @return array
+    */
     public function getContextMenuText()
     {
         return [

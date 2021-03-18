@@ -35,18 +35,18 @@ class modRestServiceRequest
     public $parameters = [];
 
     /**
-     * @param modRestService $service A reference to the modRestService instance
-     */
+    * @param modRestService $service A reference to the modRestService instance
+    */
     function __construct(modRestService &$service)
     {
         $this->service = &$service;
     }
 
     /**
-     * Set or determine the target action (controller) for this request
-     *
-     * @param string $action
-     */
+    * Set or determine the target action (controller) for this request
+    *
+    * @param string $action
+    */
     public function setAction($action = '')
     {
         if (empty($action)) {
@@ -59,10 +59,10 @@ class modRestServiceRequest
     }
 
     /**
-     * Set the response format for this request
-     *
-     * @param string $format
-     */
+    * Set the response format for this request
+    *
+    * @param string $format
+    */
     public function setFormat($format = 'json')
     {
         $this->_trimString($format);
@@ -70,8 +70,8 @@ class modRestServiceRequest
     }
 
     /**
-     * Check for a format suffix (.json, .xml, etc) on the request, properly setting the format if found
-     */
+    * Check for a format suffix (.json, .xml, etc) on the request, properly setting the format if found
+    */
     public function checkForSuffix()
     {
         $checkForSuffix = $this->service->getOption('checkForSuffix', true);
@@ -83,10 +83,10 @@ class modRestServiceRequest
     }
 
     /**
-     * Set or determine the HTTP request method for this request
-     *
-     * @param string $method
-     */
+    * Set or determine the HTTP request method for this request
+    *
+    * @param string $method
+    */
     public function setMethod($method = '')
     {
         if (empty($method)) {
@@ -97,10 +97,10 @@ class modRestServiceRequest
     }
 
     /**
-     * Set or collect the headers for this request
-     *
-     * @param array $headers
-     */
+    * Set or collect the headers for this request
+    *
+    * @param array $headers
+    */
     public function setHeaders(array $headers = [])
     {
         if (empty($headers)) {
@@ -120,8 +120,8 @@ class modRestServiceRequest
     }
 
     /**
-     * Set the REQUEST parameters for this request
-     */
+    * Set the REQUEST parameters for this request
+    */
     public function setRequestParameters()
     {
         switch ($this->method) {
@@ -149,10 +149,10 @@ class modRestServiceRequest
     }
 
     /**
-     * Sanitize the request parameters
-     *
-     * @return void
-     */
+    * Sanitize the request parameters
+    *
+    * @return void
+    */
     protected function sanitizeRequest()
     {
         $modxtags = array_values($this->service->modx->sanitizePatterns);
@@ -163,10 +163,10 @@ class modRestServiceRequest
     }
 
     /**
-     * Properly get request parameters for various HTTP methods and content types
-     *
-     * @return array
-     */
+    * Properly get request parameters for various HTTP methods and content types
+    *
+    * @return array
+    */
     protected function _collectRequestParameters()
     {
         $filehandle = fopen('php://input', "r");
@@ -211,12 +211,12 @@ class modRestServiceRequest
     }
 
     /**
-     * Trim a value, assuming it is a string
-     *
-     * @static
-     *
-     * @param mixed $value
-     */
+    * Trim a value, assuming it is a string
+    *
+    * @static
+    *
+    * @param mixed $value
+    */
     public static function _trimString(&$value)
     {
         if (is_string($value)) {
@@ -225,15 +225,15 @@ class modRestServiceRequest
     }
 
     /**
-     * Convert a SimpleXMLElement object to a multi-dimensional array
-     *
-     * @param SimpleXMLElement $xml
-     * @param mixed            $attributesKey
-     * @param mixed            $childrenKey
-     * @param mixed            $valueKey
-     *
-     * @return array|null|string
-     */
+    * Convert a SimpleXMLElement object to a multi-dimensional array
+    *
+    * @param SimpleXMLElement $xml
+    * @param mixed            $attributesKey
+    * @param mixed            $childrenKey
+    * @param mixed            $valueKey
+    *
+    * @return array|null|string
+    */
     protected function _xml2array(SimpleXMLElement $xml, $attributesKey = null, $childrenKey = null, $valueKey = null)
     {
         if ($childrenKey && !is_string($childrenKey)) {

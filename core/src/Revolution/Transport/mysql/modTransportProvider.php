@@ -11,11 +11,11 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
         'version' => '3.0',
         'table' => 'transport_providers',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'description' => NULL,
@@ -28,9 +28,9 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
             'priority' => 10,
             'properties' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -38,17 +38,17 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                 'null' => false,
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
             ),
-            'service_url' => 
+            'service_url' =>
             array (
                 'dbtype' => 'tinytext',
                 'phptype' => 'string',
             ),
-            'username' => 
+            'username' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -57,7 +57,7 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                 'default' => '',
                 'index' => 'index',
             ),
-            'api_key' => 
+            'api_key' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -66,19 +66,19 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                 'default' => '',
                 'index' => 'index',
             ),
-            'created' => 
+            'created' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => false,
             ),
-            'updated' => 
+            'updated' =>
             array (
                 'dbtype' => 'timestamp',
                 'phptype' => 'timestamp',
                 'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
-            'active' => 
+            'active' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -87,7 +87,7 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                 'default' => 1,
                 'index' => 'index',
             ),
-            'priority' => 
+            'priority' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '4',
@@ -96,7 +96,7 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                 'default' => 10,
                 'index' => 'index',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'json',
@@ -104,17 +104,17 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                 'default' => '',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -122,15 +122,15 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                     ),
                 ),
             ),
-            'api_key' => 
+            'api_key' =>
             array (
                 'alias' => 'api_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'api_key' => 
+                    'api_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -138,15 +138,15 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                     ),
                 ),
             ),
-            'username' => 
+            'username' =>
             array (
                 'alias' => 'username',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'username' => 
+                    'username' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -154,15 +154,15 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                     ),
                 ),
             ),
-            'active' => 
+            'active' =>
             array (
                 'alias' => 'active',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'active' => 
+                    'active' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -170,15 +170,15 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                     ),
                 ),
             ),
-            'priority' => 
+            'priority' =>
             array (
                 'alias' => 'priority',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'priority' => 
+                    'priority' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -187,9 +187,9 @@ class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvid
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Packages' => 
+            'Packages' =>
             array (
                 'class' => 'MODX\\Revolution\\Transport\\modTransportPackage',
                 'local' => 'id',

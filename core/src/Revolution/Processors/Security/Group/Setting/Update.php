@@ -27,8 +27,8 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
     public $permission = ['usergroup_save' => true, 'settings' => true];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $group = (int)$this->getProperty('fk', 0);

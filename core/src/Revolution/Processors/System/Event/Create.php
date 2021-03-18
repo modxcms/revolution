@@ -26,8 +26,8 @@ class Create extends CreateProcessor
     public $primaryKeyField = 'name';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         /* prevent empty or already existing settings */
@@ -50,10 +50,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check to see if a Event already exists with this name
-     * @param string $name
-     * @return boolean
-     */
+    * Check to see if a Event already exists with this name
+    * @param string $name
+    * @return boolean
+    */
     public function alreadyExists($name)
     {
         return $this->modx->getCount(modEvent::class, [

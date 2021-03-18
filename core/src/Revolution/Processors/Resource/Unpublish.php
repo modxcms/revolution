@@ -80,9 +80,9 @@ class Unpublish extends Processor
     }
 
     /**
-     * Checks if the given resource is set as site_start
-     * @return bool
-     */
+    * Checks if the given resource is set as site_start
+    * @return bool
+    */
     public function isSiteStart()
     {
         $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
@@ -90,9 +90,9 @@ class Unpublish extends Processor
     }
 
     /**
-     * Add a lock to the Resource while unpublishing it
-     * @return boolean
-     */
+    * Add a lock to the Resource while unpublishing it
+    * @return boolean
+    */
     public function addLock()
     {
         $locked = $this->resource->addLock();
@@ -106,9 +106,9 @@ class Unpublish extends Processor
     }
 
     /**
-     * Fire the after unpublish event
-     * @return void
-     */
+    * Fire the after unpublish event
+    * @return void
+    */
     public function fireAfterUnPublishEvent()
     {
         $this->modx->invokeEvent('OnDocUnPublished', [
@@ -119,18 +119,18 @@ class Unpublish extends Processor
     }
 
     /**
-     * Log the manager action
-     * @return void
-     */
+    * Log the manager action
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('unpublish_resource', modResource::class, $this->resource->get('id'));
     }
 
     /**
-     * Clear the site cache
-     * @return void
-     */
+    * Clear the site cache
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->cacheManager->refresh([

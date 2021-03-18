@@ -26,10 +26,10 @@ use xPDO\xPDO;
 class modAccessPolicy extends xPDOSimpleObject
 {
     /**
-     * Get the permissions for this access policy, in array format.
-     *
-     * @return array An array of access permissions for this Policy.
-     */
+    * Get the permissions for this access policy, in array format.
+    *
+    * @return array An array of access permissions for this Policy.
+    */
     public function getPermissions()
     {
         $template = $this->getOne('Template');

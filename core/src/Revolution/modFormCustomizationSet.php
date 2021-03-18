@@ -25,10 +25,10 @@ use xPDO\Om\xPDOSimpleObject;
 class modFormCustomizationSet extends xPDOSimpleObject
 {
     /**
-     * Get the formatted data for the FC Set
-     *
-     * @return array
-     */
+    * Get the formatted data for the FC Set
+    *
+    * @return array
+    */
     public function getData()
     {
         $setArray = [];

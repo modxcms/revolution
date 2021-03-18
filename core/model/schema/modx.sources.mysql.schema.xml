@@ -8,7 +8,7 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
- -->
+-->
 <!-- The following xPDO model represents an object-relational map structure of the MODX db registry package -->
 <model package="MODX\Revolution\Sources" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution\Sources" version="3.0">
 

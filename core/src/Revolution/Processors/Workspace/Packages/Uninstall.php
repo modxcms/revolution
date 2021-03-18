@@ -26,24 +26,24 @@ class Uninstall extends Processor
     public $package;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('packages');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -67,8 +67,8 @@ class Uninstall extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('package_uninstall_info_prep'));

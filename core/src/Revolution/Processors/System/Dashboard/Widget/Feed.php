@@ -25,8 +25,8 @@ use xPDO\xPDO;
 class Feed extends Processor
 {
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $feed = $this->getProperty('feed', 'news');
@@ -50,9 +50,9 @@ class Feed extends Processor
     }
 
     /**
-     * @param $url
-     * @return array|string
-     */
+    * @param $url
+    * @return array|string
+    */
     public function loadFeed($url)
     {
         $feed = new \SimplePie();
@@ -88,10 +88,10 @@ class Feed extends Processor
     }
 
     /**
-     * @param string $tpl
-     * @param array $placeholders
-     * @return string
-     */
+    * @param string $tpl
+    * @param array $placeholders
+    * @return string
+    */
     public function getFileChunk($tpl, array $placeholders = [])
     {
         $output = '';

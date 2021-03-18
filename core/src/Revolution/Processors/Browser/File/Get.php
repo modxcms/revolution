@@ -27,8 +27,8 @@ class Get extends Browser
 
 
     /**
-     * @return array|bool|string
-     */
+    * @return array|bool|string
+    */
     public function initialize()
     {
         if (!$this->getSource() || !$this->source->checkPolicy('delete')) {
@@ -40,8 +40,8 @@ class Get extends Browser
 
 
     /**
-     * @return array|bool|mixed|string
-     */
+    * @return array|bool|mixed|string
+    */
     public function process()
     {
         $file = $this->sanitize($this->getProperty('file'));

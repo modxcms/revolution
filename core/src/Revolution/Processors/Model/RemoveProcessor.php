@@ -71,41 +71,41 @@ abstract class RemoveProcessor extends ModelProcessor
     }
 
     /**
-     * Abstract the removing of the object out to allow for transient and non-persistent object updating in derivative
-     * classes
-     *
-     * @return boolean
-     */
+    * Abstract the removing of the object out to allow for transient and non-persistent object updating in derivative
+    * classes
+    *
+    * @return boolean
+    */
     public function removeObject()
     {
         return $this->object->remove();
     }
 
     /**
-     * Can contain pre-removal logic; return false to prevent remove.
-     *
-     * @return boolean
-     */
+    * Can contain pre-removal logic; return false to prevent remove.
+    *
+    * @return boolean
+    */
     public function beforeRemove()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Can contain post-removal logic.
-     *
-     * @return bool
-     */
+    * Can contain post-removal logic.
+    *
+    * @return bool
+    */
     public function afterRemove()
     {
         return true;
     }
 
     /**
-     * Log the removal manager action
-     *
-     * @return void
-     */
+    * Log the removal manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction($this->objectType . '_delete', $this->classKey,
@@ -113,19 +113,19 @@ abstract class RemoveProcessor extends ModelProcessor
     }
 
     /**
-     * After removal, manager action log, and event firing logic
-     *
-     * @return void
-     */
+    * After removal, manager action log, and event firing logic
+    *
+    * @return void
+    */
     public function cleanup()
     {
     }
 
     /**
-     * If specified, fire the before remove event
-     *
-     * @return boolean Return false to allow removal; non-empty to prevent it
-     */
+    * If specified, fire the before remove event
+    *
+    * @return boolean Return false to allow removal; non-empty to prevent it
+    */
     public function fireBeforeRemoveEvent()
     {
         $preventRemove = false;
@@ -142,10 +142,10 @@ abstract class RemoveProcessor extends ModelProcessor
     }
 
     /**
-     * If specified, fire the after remove event
-     *
-     * @return void
-     */
+    * If specified, fire the after remove event
+    *
+    * @return void
+    */
     public function fireAfterRemoveEvent()
     {
         if (!empty($this->afterRemoveEvent)) {

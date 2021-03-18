@@ -30,8 +30,8 @@ class PhpThumb extends Processor
     public $source;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -48,9 +48,9 @@ class PhpThumb extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         $src = rawurldecode($this->getProperty('src'));
@@ -92,10 +92,10 @@ class PhpThumb extends Processor
     }
 
     /**
-     * Get the source to load the paths from
-     * @param int $sourceId
-     * @return modMediaSource|modFileMediaSource|boolean
-     */
+    * Get the source to load the paths from
+    * @param int $sourceId
+    * @return modMediaSource|modFileMediaSource|boolean
+    */
     public function getSource($sourceId)
     {
         /** @var modMediaSource|modFileMediaSource $source */
@@ -114,9 +114,9 @@ class PhpThumb extends Processor
     }
 
     /**
-     * Attempt to load modPhpThumb
-     * @return bool|modPhpThumb
-     */
+    * Attempt to load modPhpThumb
+    * @return bool|modPhpThumb
+    */
     public function loadPhpThumb()
     {
         if (!$this->modx->getService('phpthumb', modPhpThumb::class)) {

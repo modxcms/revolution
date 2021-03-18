@@ -18,8 +18,8 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         parent::initialize();
@@ -38,10 +38,10 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * Get the name of this source type
-     *
-     * @return string
-     */
+    * Get the name of this source type
+    *
+    * @return string
+    */
     public function getTypeName()
     {
         $this->xpdo->lexicon->load('source');
@@ -51,10 +51,10 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * Get the description of this source type
-     *
-     * @return string
-     */
+    * Get the description of this source type
+    *
+    * @return string
+    */
     public function getTypeDescription()
     {
         $this->xpdo->lexicon->load('source');
@@ -64,10 +64,10 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * Get the default properties for the filesystem media source type.
-     *
-     * @return array
-     */
+    * Get the default properties for the filesystem media source type.
+    *
+    * @return array
+    */
     public function getDefaultProperties()
     {
         return [
@@ -159,12 +159,12 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * Prepare the output values for image/file TVs by prefixing the baseUrl property to them
-     *
-     * @param string $value
-     *
-     * @return string
-     */
+    * Prepare the output values for image/file TVs by prefixing the baseUrl property to them
+    *
+    * @param string $value
+    *
+    * @return string
+    */
     public function prepareOutputUrl($value)
     {
         $properties = $this->getPropertyList();
@@ -177,12 +177,12 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * Get the base path for this source. Only applicable to sources that are streams.
-     *
-     * @param string $object An optional file to find the base path of
-     *
-     * @return string
-     */
+    * Get the base path for this source. Only applicable to sources that are streams.
+    *
+    * @param string $object An optional file to find the base path of
+    *
+    * @return string
+    */
     public function getBasePath($object = '')
     {
         $bases = $this->getBases($object);
@@ -192,12 +192,12 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * Get the base URL for this source. Only applicable to sources that are streams.
-     *
-     * @param string $object An optional object to find the base url of
-     *
-     * @return string
-     */
+    * Get the base URL for this source. Only applicable to sources that are streams.
+    *
+    * @param string $object An optional object to find the base url of
+    *
+    * @return string
+    */
     public function getBaseUrl($object = '')
     {
         $bases = $this->getBases($object);
@@ -207,12 +207,12 @@ class modFileMediaSource extends modMediaSource
 
 
     /**
-     * Get the absolute URL for a specified object. Only applicable to sources that are streams.
-     *
-     * @param string $object
-     *
-     * @return string
-     */
+    * Get the absolute URL for a specified object. Only applicable to sources that are streams.
+    *
+    * @param string $object
+    *
+    * @return string
+    */
     public function getObjectUrl($object = '')
     {
         return $this->getBaseUrl() . $object;

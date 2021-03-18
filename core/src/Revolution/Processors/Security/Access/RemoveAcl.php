@@ -25,8 +25,8 @@ class RemoveAcl extends RemoveProcessor
     public $languageTopics = ['access'];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->classKey = $this->getProperty('type');
@@ -43,9 +43,9 @@ class RemoveAcl extends RemoveProcessor
     }
 
     /**
-     * Reload current user's ACLs
-     * @return bool
-     */
+    * Reload current user's ACLs
+    * @return bool
+    */
     public function afterRemove()
     {
         if ($this->modx->getUser()) {

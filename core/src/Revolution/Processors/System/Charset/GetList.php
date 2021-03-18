@@ -19,16 +19,16 @@ use MODX\Revolution\Processors\Processor;
 class GetList extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('charsets');
     }
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function process()
     {
         $charsets = [

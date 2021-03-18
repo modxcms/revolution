@@ -27,9 +27,9 @@ use MODX\Revolution\modResource;
 class ConfigJs extends Processor
 {
     /**
-     * @return mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * @return mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         if (!$this->modx->user->isAuthenticated('mgr')) {

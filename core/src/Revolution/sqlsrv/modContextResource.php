@@ -11,14 +11,14 @@ class modContextResource extends \MODX\Revolution\modContextResource
         'version' => '3.0',
         'table' => 'context_resource',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'context_key' => NULL,
             'resource' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -26,7 +26,7 @@ class modContextResource extends \MODX\Revolution\modContextResource
                 'null' => false,
                 'index' => 'pk',
             ),
-            'resource' => 
+            'resource' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -34,21 +34,21 @@ class modContextResource extends \MODX\Revolution\modContextResource
                 'index' => 'pk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
-                'columns' => 
+                'columns' =>
                 array (
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'resource' => 
+                    'resource' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
@@ -56,9 +56,9 @@ class modContextResource extends \MODX\Revolution\modContextResource
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'context_key',
@@ -66,7 +66,7 @@ class modContextResource extends \MODX\Revolution\modContextResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Resource' => 
+            'Resource' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'resource',

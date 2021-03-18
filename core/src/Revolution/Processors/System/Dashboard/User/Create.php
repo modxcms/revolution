@@ -28,8 +28,8 @@ class Create extends CreateProcessor
     public $object;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $this->object->fromArray([
@@ -43,8 +43,8 @@ class Create extends CreateProcessor
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         /** @var modDashboardWidget $widget */
@@ -61,8 +61,8 @@ class Create extends CreateProcessor
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         /** @var modDashboard $dashboard */
@@ -75,8 +75,8 @@ class Create extends CreateProcessor
 
 
     /**
-     * Log event
-     */
+    * Log event
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('user_widget_add', modDashboardWidget::class, $this->object->get('widget'));

@@ -44,9 +44,9 @@ class Create extends ModelProcessor
     public $recipients;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $subject = $this->getProperty('subject');
@@ -65,12 +65,12 @@ class Create extends ModelProcessor
     }
 
     /**
-     * Get object of mailing list
-     * @param string $primaryKey
-     * @param string $objectClass
-     * @param string $objectType
-     * @return bool|null|string
-     */
+    * Get object of mailing list
+    * @param string $primaryKey
+    * @param string $objectClass
+    * @param string $objectType
+    * @return bool|null|string
+    */
     public function getMailingObject($primaryKey, $objectClass, $objectType)
     {
         $id = (int)$this->getProperty($primaryKey);
@@ -91,9 +91,9 @@ class Create extends ModelProcessor
     }
 
     /**
-     * Prepare recipients of message with error check
-     * @return string|bool
-     */
+    * Prepare recipients of message with error check
+    * @return string|bool
+    */
     public function prepareRecipientsByType()
     {
         $error = false;
@@ -141,11 +141,11 @@ class Create extends ModelProcessor
     }
 
     /**
-     * Create mailing list of user ids
-     * @param xPDOIterator $users
-     * @param string $primaryKey
-     * @return array
-     */
+    * Create mailing list of user ids
+    * @param xPDOIterator $users
+    * @param string $primaryKey
+    * @return array
+    */
     public function getRecipients(xPDOIterator $users, $primaryKey = 'id')
     {
         /** @var xPDOSimpleObject $user */
@@ -160,11 +160,11 @@ class Create extends ModelProcessor
     }
 
     /**
-     * Create message object
-     * @param int $user
-     * @param bool $private
-     * @return modUserMessage
-     */
+    * Create message object
+    * @param int $user
+    * @param bool $private
+    * @return modUserMessage
+    */
     public function createMessage($user, $private = false)
     {
         /** @var modUserMessage $message */
@@ -181,10 +181,10 @@ class Create extends ModelProcessor
     }
 
     /**
-     * Try to save message and return error or success
-     * @param modUserMessage $message
-     * @return bool|null|string
-     */
+    * Try to save message and return error or success
+    * @param modUserMessage $message
+    * @return bool|null|string
+    */
     public function sendMessage($message)
     {
         if ($message->save() === false) {
@@ -197,9 +197,9 @@ class Create extends ModelProcessor
     }
 
     /**
-     * Send email if needed
-     * @param modUserMessage $message
-     */
+    * Send email if needed
+    * @param modUserMessage $message
+    */
     public function sendEmail($message)
     {
         if ($this->getProperty('sendemail', false)) {
@@ -212,9 +212,9 @@ class Create extends ModelProcessor
     }
 
     /**
-     * {@inheritdoc}
-     * @return array|mixed|string
-     */
+    * {@inheritdoc}
+    * @return array|mixed|string
+    */
     public function process()
     {
         $private = ($this->type === 'user');

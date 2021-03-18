@@ -10,15 +10,15 @@ class modPrincipal extends \MODX\Revolution\modPrincipal
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Acls' => 
+            'Acls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccess',
                 'local' => 'id',

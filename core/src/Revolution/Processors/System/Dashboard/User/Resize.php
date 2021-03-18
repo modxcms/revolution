@@ -25,8 +25,8 @@ class Resize extends UpdateProcessor
     public $languageTopics = ['dashboards'];
 
     /**
-     * @return bool|null|string
-     */
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $primaryKey = [
@@ -48,8 +48,8 @@ class Resize extends UpdateProcessor
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $this->setProperties([
@@ -60,8 +60,8 @@ class Resize extends UpdateProcessor
     }
 
     /**
-     * Log event
-     */
+    * Log event
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('user_widget_resize', modDashboardWidget::class, $this->object->get('widget'));

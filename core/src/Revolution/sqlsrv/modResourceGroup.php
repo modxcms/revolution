@@ -11,15 +11,15 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
         'version' => '3.0',
         'table' => 'documentgroup_names',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'private_memgroup' => 0,
             'private_webgroup' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -28,14 +28,14 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
                 'default' => '',
                 'index' => 'unique',
             ),
-            'private_memgroup' => 
+            'private_memgroup' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
                 'null' => false,
                 'default' => 0,
             ),
-            'private_webgroup' => 
+            'private_webgroup' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -43,17 +43,17 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
                 'default' => 0,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -62,9 +62,9 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'ResourceGroupResources' => 
+            'ResourceGroupResources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResourceGroupResource',
                 'local' => 'id',
@@ -72,7 +72,7 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'TemplateVarResourceGroups' => 
+            'TemplateVarResourceGroups' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVarResourceGroup',
                 'local' => 'id',
@@ -80,7 +80,7 @@ class modResourceGroup extends \MODX\Revolution\modResourceGroup
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Acls' => 
+            'Acls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessResourceGroup',
                 'local' => 'id',

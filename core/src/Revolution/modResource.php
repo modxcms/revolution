@@ -72,110 +72,110 @@ use xPDO\xPDO;
 class modResource extends modAccessibleSimpleObject implements modResourceInterface
 {
     /**
-     * Represents the cacheable content for a resource.
-     *
-     * Note that this is not the raw source content, but the content that is the
-     * result of processing cacheable tags within the raw source content.
-     *
-     * @var string
-     */
+    * Represents the cacheable content for a resource.
+    *
+    * Note that this is not the raw source content, but the content that is the
+    * result of processing cacheable tags within the raw source content.
+    *
+    * @var string
+    */
     public $_content = '';
     /**
-     * Represents the output the resource produces.
-     *
-     * @var string
-     */
+    * Represents the output the resource produces.
+    *
+    * @var string
+    */
     public $_output = '';
     /**
-     * The context the resource is requested from.
-     *
-     * Note that this is different than the context_key field that describes a
-     * primary context for the resource.
-     *
-     * @var string
-     */
+    * The context the resource is requested from.
+    *
+    * Note that this is different than the context_key field that describes a
+    * primary context for the resource.
+    *
+    * @var string
+    */
     public $_contextKey = null;
     /**
-     * Indicates if the resource has already been processed.
-     *
-     * @var boolean
-     */
+    * Indicates if the resource has already been processed.
+    *
+    * @var boolean
+    */
     protected $_processed = false;
     /**
-     * The cache filename for the resource in the context.
-     *
-     * @var string
-     */
+    * The cache filename for the resource in the context.
+    *
+    * @var string
+    */
     protected $_cacheKey = null;
     /**
-     * Indicates if the site cache should be refreshed when saving changes.
-     *
-     * @var boolean
-     */
+    * Indicates if the site cache should be refreshed when saving changes.
+    *
+    * @var boolean
+    */
     protected $_refreshCache = true;
     /**
-     * Indicates if this Resource was generated from a forward.
-     *
-     * @var boolean
-     */
+    * Indicates if this Resource was generated from a forward.
+    *
+    * @var boolean
+    */
     public $_isForward = false;
     /**
-     * An array of Javascript/CSS to be appended to the footer of this Resource
-     *
-     * @var array $_jscripts
-     */
+    * An array of Javascript/CSS to be appended to the footer of this Resource
+    *
+    * @var array $_jscripts
+    */
     public $_jscripts = [];
     /**
-     * An array of Javascript/CSS to be appended to the HEAD of this Resource
-     *
-     * @var array $_sjscripts
-     */
+    * An array of Javascript/CSS to be appended to the HEAD of this Resource
+    *
+    * @var array $_sjscripts
+    */
     public $_sjscripts = [];
     /**
-     * All loaded Javascript/CSS that has been calculated to be loaded
-     *
-     * @var array
-     */
+    * All loaded Javascript/CSS that has been calculated to be loaded
+    *
+    * @var array
+    */
     public $_loadedjscripts = [];
     /**
-     * Use if extending modResource to state whether or not to show the extended class in the tree context menu
-     *
-     * @var boolean
-     */
+    * Use if extending modResource to state whether or not to show the extended class in the tree context menu
+    *
+    * @var boolean
+    */
     public $showInContextMenu = false;
     /**
-     * Use if extending modResource to state whether or not to allow drop on extended class in the resource tree
-     * Set 1 for allow drop, 0 for disable drop or -1 for default behavior
-     *
-     * @var int
-     */
+    * Use if extending modResource to state whether or not to allow drop on extended class in the resource tree
+    * Set 1 for allow drop, 0 for disable drop or -1 for default behavior
+    *
+    * @var int
+    */
     public $allowDrop = -1;
     /**
-     * Use if extending modResource to state whether or not the derivative class can be listed in the class_key
-     * dropdown users can change when editing a resource.
-     *
-     * @var boolean
-     */
+    * Use if extending modResource to state whether or not the derivative class can be listed in the class_key
+    * dropdown users can change when editing a resource.
+    *
+    * @var boolean
+    */
     public $allowListingInClassKeyDropdown = true;
     /**
-     * Whether or not to allow creation of children resources in tree. Can be overridden in a derivative Resource class.
-     *
-     * @var boolean
-     */
+    * Whether or not to allow creation of children resources in tree. Can be overridden in a derivative Resource class.
+    *
+    * @var boolean
+    */
     public $allowChildrenResources = true;
 
     /** @var modX|xPDO $xpdo */
     public $xpdo;
 
     /**
-     * Filter a string for use as a URL path segment.
-     *
-     * @param modX|xPDO &$xpdo    A reference to a modX or xPDO instance.
-     * @param string     $segment The string to filter into a path segment.
-     * @param array      $options Local options to override global filter settings.
-     *
-     * @return string The filtered string ready to use as a path segment.
-     */
+    * Filter a string for use as a URL path segment.
+    *
+    * @param modX|xPDO &$xpdo    A reference to a modX or xPDO instance.
+    * @param string     $segment The string to filter into a path segment.
+    * @param array      $options Local options to override global filter settings.
+    *
+    * @return string The filtered string ready to use as a path segment.
+    */
     public static function filterPathSegment(&$xpdo, $segment, array $options = [])
     {
         /* setup the various options */
@@ -307,17 +307,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
-     *
-     * @static
-     *
-     * @param modResource &$resource A reference to the modResource to get the groups from.
-     * @param array        $sort     An array of sort columns in column => direction format.
-     * @param int          $limit    A limit of records to retrieve in the collection.
-     * @param int          $offset   A record offset for a limited collection.
-     *
-     * @return array An array containing the collection and total.
-     */
+    * Get a sortable, limitable collection (and total count) of Resource Groups for a given Resource.
+    *
+    * @static
+    *
+    * @param modResource &$resource A reference to the modResource to get the groups from.
+    * @param array        $sort     An array of sort columns in column => direction format.
+    * @param int          $limit    A limit of records to retrieve in the collection.
+    * @param int          $offset   A record offset for a limited collection.
+    *
+    * @return array An array containing the collection and total.
+    */
     public static function listGroups(modResource &$resource, array $sort = ['id' => 'ASC'], $limit = 0, $offset = 0)
     {
         $result = ['collection' => [], 'total' => 0];
@@ -341,14 +341,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Retrieve a collection of Template Variables for a Resource.
-     *
-     * @static
-     *
-     * @param modResource &$resource A reference to the modResource to retrieve TemplateVars for.
-     *
-     * @return modTemplateVar[] A collection of modTemplateVar instances for the modResource.
-     */
+    * Retrieve a collection of Template Variables for a Resource.
+    *
+    * @static
+    *
+    * @param modResource &$resource A reference to the modResource to retrieve TemplateVars for.
+    *
+    * @return modTemplateVar[] A collection of modTemplateVar instances for the modResource.
+    */
     public static function getTemplateVarCollection(modResource &$resource)
     {
         $c = $resource->xpdo->newQuery(modTemplateVar::class);
@@ -382,18 +382,18 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Refresh Resource URI fields for children of the specified parent.
-     *
-     * @static
-     *
-     * @param modX &$modx    A reference to a valid modX instance.
-     * @param int   $parent  The id of a Resource parent to start from (default is 0, the root)
-     * @param array $options An array of various options for the method:
-     *                       - resetOverrides: if true, Resources with uri_override set to true will be included
-     *                       - contexts: an optional array of context keys to limit the refresh scope
-     *
-     * @return void
-     */
+    * Refresh Resource URI fields for children of the specified parent.
+    *
+    * @static
+    *
+    * @param modX &$modx    A reference to a valid modX instance.
+    * @param int   $parent  The id of a Resource parent to start from (default is 0, the root)
+    * @param array $options An array of various options for the method:
+    *                       - resetOverrides: if true, Resources with uri_override set to true will be included
+    *                       - contexts: an optional array of context keys to limit the refresh scope
+    *
+    * @return void
+    */
     public static function refreshURIs(modX &$modx, $parent = 0, array $options = [])
     {
         $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean)$options['resetOverrides'] : false;
@@ -420,16 +420,16 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Updates the Context of all Children recursively to that of the parent.
-     *
-     * @static
-     *
-     * @param modX &      $modx    A reference to an initialized modX instance.
-     * @param modResource $parent  The parent modResource instance.
-     * @param array       $options An array of options.
-     *
-     * @return int The number of children updated.
-     */
+    * Updates the Context of all Children recursively to that of the parent.
+    *
+    * @static
+    *
+    * @param modX &      $modx    A reference to an initialized modX instance.
+    * @param modResource $parent  The parent modResource instance.
+    * @param array       $options An array of options.
+    *
+    * @return int The number of children updated.
+    */
     public static function updateContextOfChildren(modX &$modx, $parent, array $options = [])
     {
         $count = 0;
@@ -448,8 +448,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(xPDO & $xpdo)
     {
         parent:: __construct($xpdo);
@@ -458,8 +458,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Prepare the resource for output.
-     */
+    * Prepare the resource for output.
+    */
     public function prepare()
     {
         # 1. Parse cacheable elements if exist.
@@ -471,10 +471,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Process a resource, transforming source content to output.
-     *
-     * @return string The processed cacheable content of a resource.
-     */
+    * Process a resource, transforming source content to output.
+    *
+    * @return string The processed cacheable content of a resource.
+    */
     public function process()
     {
         if (!$this->get('cacheable') || !$this->_processed || !$this->_content) {
@@ -500,10 +500,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * @param array $data Data for placeholders
-     *
-     * @return string
-     */
+    * @param array $data Data for placeholders
+    *
+    * @return string
+    */
     public function parseContent($data = [])
     {
         $this->xpdo->getParser();
@@ -533,8 +533,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Store scripts registered by cached elements.
-     */
+    * Store scripts registered by cached elements.
+    */
     public function syncScripts()
     {
         $this->_jscripts = $this->xpdo->jscripts;
@@ -543,14 +543,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Gets the raw, unprocessed source content for a resource.
-     *
-     * @param array $options An array of options implementations can use to
-     *                       accept language, revision identifiers, or other information to alter the
-     *                       behavior of the method.
-     *
-     * @return string The raw source content for the resource.
-     */
+    * Gets the raw, unprocessed source content for a resource.
+    *
+    * @param array $options An array of options implementations can use to
+    *                       accept language, revision identifiers, or other information to alter the
+    *                       behavior of the method.
+    *
+    * @return string The raw source content for the resource.
+    */
     public function getContent(array $options = [])
     {
         if (isset($options['content'])) {
@@ -563,28 +563,28 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Set the raw source content for this element.
-     *
-     * @param mixed $content The source content; implementations can decide if
-     *                       it can only be a string, or some other source from which to retrieve it.
-     * @param array $options An array of options implementations can use to
-     *                       accept language, revision identifiers, or other information to alter the
-     *                       behavior of the method.
-     *
-     * @return boolean True indicates the content was set.
-     */
+    * Set the raw source content for this element.
+    *
+    * @param mixed $content The source content; implementations can decide if
+    *                       it can only be a string, or some other source from which to retrieve it.
+    * @param array $options An array of options implementations can use to
+    *                       accept language, revision identifiers, or other information to alter the
+    *                       behavior of the method.
+    *
+    * @return boolean True indicates the content was set.
+    */
     public function setContent($content, array $options = [])
     {
         return $this->set('content', $content);
     }
 
     /**
-     * Returns the cache key for this instance in the specified or current context.
-     *
-     * @param string $context A specific Context to get the cache key from.
-     *
-     * @return string The cache key.
-     */
+    * Returns the cache key for this instance in the specified or current context.
+    *
+    * @param string $context A specific Context to get the cache key from.
+    *
+    * @return string The cache key.
+    */
     public function getCacheKey($context = '')
     {
         $id = $this->get('id') ? (string)$this->get('id') : '0';
@@ -603,16 +603,16 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Gets a collection of objects related by aggregate or composite relations.
-     *
-     * {@inheritdoc}
-     *
-     * Includes special handling for related objects with alias {@link
-     * modTemplateVar}, respecting framework security unless specific criteria
-     * are provided.
-     *
-     * @todo Refactor to use the new ABAC security model.
-     */
+    * Gets a collection of objects related by aggregate or composite relations.
+    *
+    * {@inheritdoc}
+    *
+    * Includes special handling for related objects with alias {@link
+    * modTemplateVar}, respecting framework security unless specific criteria
+    * are provided.
+    *
+    * @todo Refactor to use the new ABAC security model.
+    */
     public function & getMany($alias, $criteria = null, $cacheFlag = false)
     {
         if ($alias === 'TemplateVars' || $alias === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
@@ -625,25 +625,25 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Get a collection of the Template Variable values for the Resource.
-     *
-     * @return array A collection of TemplateVar values for this Resource.
-     */
+    * Get a collection of the Template Variable values for the Resource.
+    *
+    * @return array A collection of TemplateVar values for this Resource.
+    */
     public function getTemplateVars()
     {
         return $this->xpdo->call(modResource::class, 'getTemplateVarCollection', [&$this]);
     }
 
     /**
-     * Set a field value by the field key or name.
-     *
-     * {@inheritdoc}
-     *
-     * Additional logic added for the following fields:
-     *    -alias: Applies {@link modResource::cleanAlias()}
-     *  -contentType: Calls {@link modResource::addOne()} to sync contentType
-     *  -content_type: Sets the contentType field appropriately
-     */
+    * Set a field value by the field key or name.
+    *
+    * {@inheritdoc}
+    *
+    * Additional logic added for the following fields:
+    *    -alias: Applies {@link modResource::cleanAlias()}
+    *  -contentType: Calls {@link modResource::addOne()} to sync contentType
+    *  -content_type: Sets the contentType field appropriately
+    */
     public function set($k, $v = null, $vType = '')
     {
         switch ($k) {
@@ -676,18 +676,18 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Adds an object related to this modResource by a foreign key relationship.
-     *
-     * {@inheritdoc}
-     *
-     * Adds legacy support for keeping the existing contentType field in sync
-     * when a modContentType is set using this function.
-     *
-     * @param xPDOObject $obj
-     * @param string     $alias
-     *
-     * @return boolean
-     */
+    * Adds an object related to this modResource by a foreign key relationship.
+    *
+    * {@inheritdoc}
+    *
+    * Adds legacy support for keeping the existing contentType field in sync
+    * when a modContentType is set using this function.
+    *
+    * @param xPDOObject $obj
+    * @param string     $alias
+    *
+    * @return boolean
+    */
     public function addOne(& $obj, $alias = '')
     {
         $added = parent:: addOne($obj, $alias);
@@ -700,13 +700,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Transforms a string to form a valid URL representation.
-     *
-     * @param string $alias   A string to transform into a valid URL representation.
-     * @param array  $options Options to append to or override configuration settings.
-     *
-     * @return string The transformed string.
-     */
+    * Transforms a string to form a valid URL representation.
+    *
+    * @param string $alias   A string to transform into a valid URL representation.
+    * @param array  $options Options to append to or override configuration settings.
+    *
+    * @return string The transformed string.
+    */
     public function cleanAlias($alias, array $options = [])
     {
         if ($this->xpdo instanceof modX && $ctx = $this->xpdo->getContext($this->get('context_key'))) {
@@ -717,19 +717,19 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Persist new or changed modResource instances to the database container.
-     *
-     * If the modResource is new, the createdon and createdby fields will be set
-     * using the current time and user authenticated in the context.
-     *
-     * If uri is empty or uri_overridden is not set and something has been changed which
-     * might affect the Resource's uri, it is (re-)calculated using getAliasPath(). This
-     * can be forced recursively by setting refreshURIs to true before calling save().
-     *
-     * @param boolean $cacheFlag
-     *
-     * @return boolean
-     */
+    * Persist new or changed modResource instances to the database container.
+    *
+    * If the modResource is new, the createdon and createdby fields will be set
+    * using the current time and user authenticated in the context.
+    *
+    * If uri is empty or uri_overridden is not set and something has been changed which
+    * might affect the Resource's uri, it is (re-)calculated using getAliasPath(). This
+    * can be forced recursively by setting refreshURIs to true before calling save().
+    *
+    * @param boolean $cacheFlag
+    *
+    * @return boolean
+    */
     public function save($cacheFlag = null)
     {
         if ($this->isNew()) {
@@ -766,36 +766,36 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Return whether or not the resource has been processed.
-     *
-     * @access public
-     * @return boolean
-     */
+    * Return whether or not the resource has been processed.
+    *
+    * @access public
+    * @return boolean
+    */
     public function getProcessed()
     {
         return $this->_processed;
     }
 
     /**
-     * Set the field indicating the resource has been processed.
-     *
-     * @param boolean $processed Pass true to indicate the Resource has been processed.
-     */
+    * Set the field indicating the resource has been processed.
+    *
+    * @param boolean $processed Pass true to indicate the Resource has been processed.
+    */
     public function setProcessed($processed)
     {
         $this->_processed = (boolean)$processed;
     }
 
     /**
-     * Adds a lock on the Resource
-     *
-     * @access public
-     *
-     * @param integer $user
-     * @param array   $options An array of options for the lock.
-     *
-     * @return boolean True if the lock was successful.
-     */
+    * Adds a lock on the Resource
+    *
+    * @access public
+    *
+    * @param integer $user
+    * @param array   $options An array of options for the lock.
+    *
+    * @return boolean True if the lock was successful.
+    */
     public function addLock($user = 0, array $options = [])
     {
         $locked = false;
@@ -818,11 +818,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Gets the lock on the Resource.
-     *
-     * @access public
-     * @return int
-     */
+    * Gets the lock on the Resource.
+    *
+    * @access public
+    * @return int
+    */
     public function getLock()
     {
         $lock = 0;
@@ -842,14 +842,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Removes all locks on a Resource.
-     *
-     * @access public
-     *
-     * @param int $user
-     *
-     * @return boolean True if locks were removed.
-     */
+    * Removes all locks on a Resource.
+    *
+    * @access public
+    *
+    * @param int $user
+    *
+    * @return boolean True if locks were removed.
+    */
     public function removeLock($user = 0)
     {
         $removed = false;
@@ -873,10 +873,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Loads the access control policies applicable to this resource.
-     *
-     * {@inheritdoc}
-     */
+    * Loads the access control policies applicable to this resource.
+    *
+    * {@inheritdoc}
+    */
     public function findPolicy($context = '')
     {
         $policy = [];
@@ -923,12 +923,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Checks to see if the Resource has children or not. Returns the number of
-     * children.
-     *
-     * @access public
-     * @return integer The number of children of the Resource
-     */
+    * Checks to see if the Resource has children or not. Returns the number of
+    * children.
+    *
+    * @access public
+    * @return integer The number of children of the Resource
+    */
     public function hasChildren()
     {
         $c = $this->xpdo->newQuery(modResource::class);
@@ -940,15 +940,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Gets the value of a TV for the Resource.
-     *
-     * @access public
-     *
-     * @param mixed $pk Either the ID of the TV, or the name of the TV.
-     *
-     * @return null/mixed The value of the TV for the Resource, or null if the
-     * TV is not found.
-     */
+    * Gets the value of a TV for the Resource.
+    *
+    * @access public
+    *
+    * @param mixed $pk Either the ID of the TV, or the name of the TV.
+    *
+    * @return null/mixed The value of the TV for the Resource, or null if the
+    * TV is not found.
+    */
     public function getTVValue($pk)
     {
         $byName = !is_numeric($pk);
@@ -964,13 +964,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Sets a value for a TV for this Resource
-     *
-     * @param mixed  $pk    The TV name or ID to set
-     * @param string $value The value to set for the TV
-     *
-     * @return bool Whether or not the TV saved successfully
-     */
+    * Sets a value for a TV for this Resource
+    *
+    * @param mixed  $pk    The TV name or ID to set
+    * @param string $value The value to set for the TV
+    *
+    * @return bool Whether or not the TV saved successfully
+    */
     public function setTVValue($pk, $value)
     {
         $success = false;
@@ -990,15 +990,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Get the Resource's full alias path.
-     *
-     * @param string $alias  Optional. The alias to check. If not set, will
-     *                       then build it from the pagetitle if automatic_alias is set to true.
-     * @param array  $fields Optional. An array of field values to use instead of
-     *                       using the current modResource fields.
-     *
-     * @return string
-     */
+    * Get the Resource's full alias path.
+    *
+    * @param string $alias  Optional. The alias to check. If not set, will
+    *                       then build it from the pagetitle if automatic_alias is set to true.
+    * @param array  $fields Optional. An array of field values to use instead of
+    *                       using the current modResource fields.
+    *
+    * @return string
+    */
     public function getAliasPath($alias = '', array $fields = [])
     {
         if (empty($fields)) {
@@ -1080,14 +1080,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Tests to see if an alias is a duplicate.
-     *
-     * @param string $aliasPath  The current full alias path. If none is passed,
-     *                           will build it from the Resource's currently set alias.
-     * @param string $contextKey The context to search for a duplicate alias in.
-     *
-     * @return mixed The ID of the Resource using the alias, if a duplicate, otherwise false.
-     */
+    * Tests to see if an alias is a duplicate.
+    *
+    * @param string $aliasPath  The current full alias path. If none is passed,
+    *                           will build it from the Resource's currently set alias.
+    * @param string $contextKey The context to search for a duplicate alias in.
+    *
+    * @return mixed The ID of the Resource using the alias, if a duplicate, otherwise false.
+    */
     public function isDuplicateAlias($aliasPath = '', $contextKey = '')
     {
         if (empty($aliasPath)) {
@@ -1111,12 +1111,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Duplicate the Resource.
-     *
-     * @param array $options An array of options.
-     *
-     * @return mixed Returns either an error message, or the newly created modResource object.
-     */
+    * Duplicate the Resource.
+    *
+    * @param array $options An array of options.
+    *
+    * @return mixed Returns either an error message, or the newly created modResource object.
+    */
     public function duplicate(array $options = [])
     {
         if (!($this->xpdo instanceof modX)) {
@@ -1257,15 +1257,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Joins a Resource to a Resource Group
-     *
-     * @access public
-     *
-     * @param mixed   $resourceGroupPk Either the ID, name or object of the Resource Group
-     * @param boolean $byName          Force the criteria to check by name for Numeric usergroup's name
-     *
-     * @return boolean True if successful.
-     */
+    * Joins a Resource to a Resource Group
+    *
+    * @access public
+    *
+    * @param mixed   $resourceGroupPk Either the ID, name or object of the Resource Group
+    * @param boolean $byName          Force the criteria to check by name for Numeric usergroup's name
+    *
+    * @return boolean True if successful.
+    */
     public function joinGroup($resourceGroupPk, $byName = false)
     {
         if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
@@ -1304,14 +1304,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Removes a Resource from a Resource Group
-     *
-     * @access public
-     *
-     * @param int|string|modResourceGroup $resourceGroupPk Either the ID, name or object of the Resource Group
-     *
-     * @return boolean True if successful.
-     */
+    * Removes a Resource from a Resource Group
+    *
+    * @access public
+    *
+    * @param int|string|modResourceGroup $resourceGroupPk Either the ID, name or object of the Resource Group
+    *
+    * @return boolean True if successful.
+    */
     public function leaveGroup($resourceGroupPk)
     {
         if (!is_object($resourceGroupPk) && !($resourceGroupPk instanceof modResourceGroup)) {
@@ -1346,25 +1346,25 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Gets a sortable, limitable collection (and total count) of Resource Groups for the Resource.
-     *
-     * @param array $sort   An array of sort columns in column => direction format.
-     * @param int   $limit  A limit of records to retrieve in the collection.
-     * @param int   $offset A record offset for a limited collection.
-     *
-     * @return array An array containing the collection and total.
-     */
+    * Gets a sortable, limitable collection (and total count) of Resource Groups for the Resource.
+    *
+    * @param array $sort   An array of sort columns in column => direction format.
+    * @param int   $limit  A limit of records to retrieve in the collection.
+    * @param int   $offset A record offset for a limited collection.
+    *
+    * @return array An array containing the collection and total.
+    */
     public function getGroupsList(array $sort = ['id' => 'ASC'], $limit = 0, $offset = 0)
     {
         return $this->xpdo->call(modResource::class, 'listGroups', [&$this, $sort, $limit, $offset]);
     }
 
     /**
-     * Gets all the Resource Group names of the resource groups this resource is assigned to.
-     *
-     * @access public
-     * @return array An array of Resource Group names.
-     */
+    * Gets all the Resource Group names of the resource groups this resource is assigned to.
+    *
+    * @access public
+    * @return array An array of Resource Group names.
+    */
     public function getResourceGroupNames()
     {
         $resourceGroupNames = [];
@@ -1383,20 +1383,20 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * States whether a resource is a member of a resource group or groups. You may specify
-     * either a string name of the resource group, or an array of names.
-     *
-     * @access public
-     *
-     * @param string|array $groups   Either a string of a resource group name or an array
-     *                               of names.
-     * @param boolean      $matchAll If true, requires the resource to be a member of all
-     *                               the resource groups specified. If false, the resource can be a member of only one to
-     *                               pass. Defaults to false.
-     *
-     * @return boolean True if the resource is a member of any of the resource groups
-     * specified.
-     */
+    * States whether a resource is a member of a resource group or groups. You may specify
+    * either a string name of the resource group, or an array of names.
+    *
+    * @access public
+    *
+    * @param string|array $groups   Either a string of a resource group name or an array
+    *                               of names.
+    * @param boolean      $matchAll If true, requires the resource to be a member of all
+    *                               the resource groups specified. If false, the resource can be a member of only one to
+    *                               pass. Defaults to false.
+    *
+    * @return boolean True if the resource is a member of any of the resource groups
+    * specified.
+    */
     public function isMember($groups, $matchAll = false)
     {
         $isMember = false;
@@ -1420,14 +1420,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Determine the controller path for this Resource class
-     *
-     * @static
-     *
-     * @param xPDO $modx A reference to the modX object
-     *
-     * @return string The absolute path to the controller for this Resource class
-     */
+    * Determine the controller path for this Resource class
+    *
+    * @static
+    *
+    * @param xPDO $modx A reference to the modX object
+    *
+    * @return string The absolute path to the controller for this Resource class
+    */
     public static function getControllerPath(xPDO &$modx)
     {
         $theme = $modx->getOption('manager_theme', null, 'default');
@@ -1437,11 +1437,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
-     * set to true.
-     *
-     * @return array
-     */
+    * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+    * set to true.
+    *
+    * @return array
+    */
     public function getContextMenuText()
     {
         return [
@@ -1451,10 +1451,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Use this in your extended Resource class to return a translatable name for the Resource Type.
-     *
-     * @return string
-     */
+    * Use this in your extended Resource class to return a translatable name for the Resource Type.
+    *
+    * @return string
+    */
     public function getResourceTypeName()
     {
         $className = $this->_class;
@@ -1466,26 +1466,26 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Use this in your extended Resource class to modify the tree node contents
-     *
-     * @param array $node
-     *
-     * @return array
-     */
+    * Use this in your extended Resource class to modify the tree node contents
+    *
+    * @param array $node
+    *
+    * @return array
+    */
     public function prepareTreeNode(array $node = [])
     {
         return $node;
     }
 
     /**
-     * Get a namespaced property for the Resource
-     *
-     * @param string $key
-     * @param string $namespace
-     * @param null   $default
-     *
-     * @return null
-     */
+    * Get a namespaced property for the Resource
+    *
+    * @param string $key
+    * @param string $namespace
+    * @param null   $default
+    *
+    * @return null
+    */
     public function getProperty($key, $namespace = 'core', $default = null)
     {
         $properties = $this->get('properties');
@@ -1496,12 +1496,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Get the properties for the specific namespace for the Resource
-     *
-     * @param string $namespace
-     *
-     * @return array
-     */
+    * Get the properties for the specific namespace for the Resource
+    *
+    * @param string $namespace
+    *
+    * @return array
+    */
     public function getProperties($namespace = 'core')
     {
         $properties = $this->get('properties');
@@ -1511,14 +1511,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Set a namespaced property for the Resource
-     *
-     * @param string $key
-     * @param mixed  $value
-     * @param string $namespace
-     *
-     * @return bool
-     */
+    * Set a namespaced property for the Resource
+    *
+    * @param string $key
+    * @param mixed  $value
+    * @param string $namespace
+    *
+    * @return bool
+    */
     public function setProperty($key, $value, $namespace = 'core')
     {
         $properties = $this->get('properties');
@@ -1532,14 +1532,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Set properties for a namespace on the Resource, optionally merging them with existing ones.
-     *
-     * @param array  $newProperties
-     * @param string $namespace
-     * @param bool   $merge
-     *
-     * @return boolean
-     */
+    * Set properties for a namespace on the Resource, optionally merging them with existing ones.
+    *
+    * @param array  $newProperties
+    * @param string $namespace
+    * @param bool   $merge
+    *
+    * @return boolean
+    */
     public function setProperties(array $newProperties, $namespace = 'core', $merge = true)
     {
         $properties = $this->get('properties');
@@ -1553,12 +1553,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     }
 
     /**
-     * Clear the cache of this resource in the current or specified Context.
-     *
-     * @param string $context Key of context for clearing
-     *
-     * @return void
-     */
+    * Clear the cache of this resource in the current or specified Context.
+    *
+    * @param string $context Key of context for clearing
+    *
+    * @return void
+    */
     public function clearCache($context = '')
     {
         /** @var xPDOCache $cache */

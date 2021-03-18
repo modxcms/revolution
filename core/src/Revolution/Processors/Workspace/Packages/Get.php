@@ -39,8 +39,8 @@ class Get extends GetProcessor
     public $object;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
@@ -50,8 +50,8 @@ class Get extends GetProcessor
     }
 
     /**
-     * @return array|string
-     */
+    * @return array|string
+    */
     public function cleanup()
     {
         $this->getMetadata();
@@ -62,9 +62,9 @@ class Get extends GetProcessor
     }
 
     /**
-     * Get the metadata for the object
-     * @return void
-     */
+    * Get the metadata for the object
+    * @return void
+    */
     public function getMetadata()
     {
         /** @var xPDOTransport $transport */
@@ -77,10 +77,10 @@ class Get extends GetProcessor
     }
 
     /**
-     * Format the dates for readability
-     * @param array $packageArray
-     * @return array
-     */
+    * Format the dates for readability
+    * @param array $packageArray
+    * @return array
+    */
     public function formatDates(array $packageArray)
     {
         $updated = $this->object->get('updated');

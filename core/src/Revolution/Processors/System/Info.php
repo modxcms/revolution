@@ -20,16 +20,16 @@ use PDO;
 class Info extends Processor
 {
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view_sysinfo');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $data = [];

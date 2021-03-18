@@ -29,8 +29,8 @@ class Create extends Browser
 
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $parent = $this->sanitize($this->getProperty('parent', ''));

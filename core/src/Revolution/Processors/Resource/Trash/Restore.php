@@ -43,8 +43,8 @@ class Restore extends Processor
     }
 
     /**
-     * @return bool|null|string
-     */
+    * @return bool|null|string
+    */
     public function initialize()
     {
         // we expect a list of ids here
@@ -143,11 +143,11 @@ class Restore extends Processor
     }
 
     /**
-     * Add a lock to the Resource while undeleting it
-     *
-     * @param modResource $resource
-     * @return boolean
-     */
+    * Add a lock to the Resource while undeleting it
+    *
+    * @param modResource $resource
+    * @return boolean
+    */
     public function addLock($resource)
     {
         $locked = $resource->addLock();
@@ -162,22 +162,22 @@ class Restore extends Processor
     }
 
     /**
-     * Remove the lock from the Resource
-     *
-     * @param modResource $resource
-     * @return boolean
-     */
+    * Remove the lock from the Resource
+    *
+    * @param modResource $resource
+    * @return boolean
+    */
     public function removeLock($resource)
     {
         return $resource->removeLock();
     }
 
     /**
-     * Fire the UnDelete event
-     *
-     * @param modResource $resource
-     * @return void
-     */
+    * Fire the UnDelete event
+    *
+    * @param modResource $resource
+    * @return void
+    */
     public function fireAfterUnDeleteEvent($resource)
     {
         $this->modx->invokeEvent('OnResourceUndelete', [
@@ -187,21 +187,21 @@ class Restore extends Processor
     }
 
     /**
-     * Log the manager action
-     *
-     * @param modResource $resource
-     * @return void
-     */
+    * Log the manager action
+    *
+    * @param modResource $resource
+    * @return void
+    */
     public function logManagerAction($resource)
     {
         $this->modx->logManagerAction('undelete_resource', modResource::class, $resource->get('id'));
     }
 
     /**
-     * Clear the site cache for the restored resources contexts
-     *
-     * @return void
-     */
+    * Clear the site cache for the restored resources contexts
+    *
+    * @return void
+    */
     public function clearCache($contexts)
     {
         $this->modx->cacheManager->refresh([

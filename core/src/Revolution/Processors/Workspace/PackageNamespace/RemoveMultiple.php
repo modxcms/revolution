@@ -25,24 +25,24 @@ class RemoveMultiple extends Processor
     public $namespace;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('namespaces');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace', 'namespace', 'lexicon'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $namespaces = $this->getProperty('namespaces');
@@ -53,8 +53,8 @@ class RemoveMultiple extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $namespaceIds = explode(',', $this->getProperty('namespaces'));
@@ -84,8 +84,8 @@ class RemoveMultiple extends Processor
     }
 
     /**
-     * @return void
-     */
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('namespace_remove', modNamespace::class, $this->namespace->get('name'));

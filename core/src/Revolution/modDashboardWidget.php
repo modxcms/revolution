@@ -43,12 +43,12 @@ class modDashboardWidget extends xPDOSimpleObject
     }
 
     /**
-     * Return the output for the widget, processed by type
-     *
-     * @param modManagerController $controller
-     *
-     * @return mixed
-     */
+    * Return the output for the widget, processed by type
+    *
+    * @param modManagerController $controller
+    *
+    * @return mixed
+    */
     public function getContent($controller)
     {
         /** @var string $lexicon */

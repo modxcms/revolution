@@ -10,10 +10,10 @@ class modSymLink extends \MODX\Revolution\modSymLink
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'MODX\\Revolution\\modResource',
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
     );

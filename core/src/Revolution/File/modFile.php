@@ -19,17 +19,17 @@ namespace MODX\Revolution\File;
 class modFile extends modFileSystemResource
 {
     /**
-     * @var string The content of the resource
-     */
+    * @var string The content of the resource
+    */
     protected $content = '';
 
     /**
-     * @see modFileSystemResource.parseMode
-     *
-     * @param string $mode
-     *
-     * @return string
-     */
+    * @see modFileSystemResource.parseMode
+    *
+    * @param string $mode
+    *
+    * @return string
+    */
     protected function parseMode($mode = '')
     {
         if (empty($mode)) {
@@ -40,13 +40,13 @@ class modFile extends modFileSystemResource
     }
 
     /**
-     * Actually create the file on the file system
-     *
-     * @param string $content The content of the file to write
-     * @param string $mode    The perms to write with the file
-     *
-     * @return boolean True if successful
-     */
+    * Actually create the file on the file system
+    *
+    * @param string $content The content of the file to write
+    * @param string $mode    The perms to write with the file
+    *
+    * @return boolean True if successful
+    */
     public function create($content = '', $mode = 'w+')
     {
         if ($this->exists()) {
@@ -73,20 +73,20 @@ class modFile extends modFileSystemResource
     }
 
     /**
-     * Temporarily set (but not save) the content of the file
-     *
-     * @param string $content The content
-     */
+    * Temporarily set (but not save) the content of the file
+    *
+    * @param string $content The content
+    */
     public function setContent($content)
     {
         $this->content = $content;
     }
 
     /**
-     * Get the contents of the file
-     *
-     * @return string The contents of the file
-     */
+    * Get the contents of the file
+    *
+    * @return string The contents of the file
+    */
     public function getContents()
     {
         $content = @file_get_contents($this->path);
@@ -99,29 +99,29 @@ class modFile extends modFileSystemResource
     }
 
     /**
-     * Alias for save()
-     *
-     * @see modDirectory::write
-     *
-     * @param string $content
-     * @param string $mode
-     *
-     * @return boolean
-     */
+    * Alias for save()
+    *
+    * @see modDirectory::write
+    *
+    * @param string $content
+    * @param string $mode
+    *
+    * @return boolean
+    */
     public function write($content = null, $mode = 'w+')
     {
         return $this->save($content, $mode);
     }
 
     /**
-     * Writes the content of the modFile object to the actual file.
-     *
-     * @param string $content Optional. If not using setContent, this will set
-     *                        the content to write.
-     * @param string $mode    The mode in which to write
-     *
-     * @return boolean The result of the fwrite
-     */
+    * Writes the content of the modFile object to the actual file.
+    *
+    * @param string $content Optional. If not using setContent, this will set
+    *                        the content to write.
+    * @param string $mode    The mode in which to write
+    *
+    * @return boolean The result of the fwrite
+    */
     public function save($content = null, $mode = 'w+')
     {
         if ($content !== null) {
@@ -139,16 +139,16 @@ class modFile extends modFileSystemResource
     }
 
     /**
-     * Unpack a zip archive to a specified location.
-     *
-     * @uses compression.xPDOZip OR compression.PclZip
-     *
-     * @param string $this    ->getPath() An absolute file system location to a valid zip archive.
-     * @param string $to      A file system location to extract the contents of the archive to.
-     * @param array  $options an array of optional options, primarily for the xPDOZip class
-     *
-     * @return array|string|boolean An array of unpacked files, a string in case of cli functions or false on failure.
-     */
+    * Unpack a zip archive to a specified location.
+    *
+    * @uses compression.xPDOZip OR compression.PclZip
+    *
+    * @param string $this    ->getPath() An absolute file system location to a valid zip archive.
+    * @param string $to      A file system location to extract the contents of the archive to.
+    * @param array  $options an array of optional options, primarily for the xPDOZip class
+    *
+    * @return array|string|boolean An array of unpacked files, a string in case of cli functions or false on failure.
+    */
     public function unpack($to = '', $options = [])
     {
 
@@ -162,10 +162,10 @@ class modFile extends modFileSystemResource
     }
 
     /**
-     * Gets the size of the file
-     *
-     * @return int The size of the file, in bytes
-     */
+    * Gets the size of the file
+    *
+    * @return int The size of the file, in bytes
+    */
     public function getSize()
     {
         $size = @filesize($this->path);
@@ -182,54 +182,54 @@ class modFile extends modFileSystemResource
     }
 
     /**
-     * Gets the last accessed time of the file
-     *
-     * @param string $timeFormat The format, in strftime format, of the time
-     *
-     * @return string The formatted time
-     */
+    * Gets the last accessed time of the file
+    *
+    * @param string $timeFormat The format, in strftime format, of the time
+    *
+    * @return string The formatted time
+    */
     public function getLastAccessed($timeFormat = '%b %d, %Y %I:%M:%S %p')
     {
         return strftime($timeFormat, fileatime($this->path));
     }
 
     /**
-     * Gets the last modified time of the file
-     *
-     * @param string $timeFormat The format, in strftime format, of the time
-     *
-     * @return string The formatted time
-     */
+    * Gets the last modified time of the file
+    *
+    * @param string $timeFormat The format, in strftime format, of the time
+    *
+    * @return string The formatted time
+    */
     public function getLastModified($timeFormat = '%b %d, %Y %I:%M:%S %p')
     {
         return strftime($timeFormat, filemtime($this->path));
     }
 
     /**
-     * Gets the file extension of the file
-     *
-     * @return string The file extension of the file
-     */
+    * Gets the file extension of the file
+    *
+    * @return string The file extension of the file
+    */
     public function getExtension()
     {
         return pathinfo($this->path, PATHINFO_EXTENSION);
     }
 
     /**
-     * Gets the basename, or only the filename without the path, of the file
-     *
-     * @return string The basename of the file
-     */
+    * Gets the basename, or only the filename without the path, of the file
+    *
+    * @return string The basename of the file
+    */
     public function getBaseName()
     {
         return ltrim(strrchr($this->path, '/'), '/');
     }
 
     /**
-     * Sends the file as a download
-     *
-     * @param array $options Optional configuration options like mimetype and filename
-     */
+    * Sends the file as a download
+    *
+    * @param array $options Optional configuration options like mimetype and filename
+    */
     public function download($options = [])
     {
         $options = array_merge([
@@ -248,10 +248,10 @@ class modFile extends modFileSystemResource
     }
 
     /**
-     * Deletes the file from the filesystem
-     *
-     * @return boolean True if successful
-     */
+    * Deletes the file from the filesystem
+    *
+    * @return boolean True if successful
+    */
     public function remove()
     {
         if (!$this->exists()) {

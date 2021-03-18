@@ -20,10 +20,10 @@ use xPDO\xPDO;
 class modActiveUser extends xPDOObject
 {
     /**
-     * Overrides xPDOObject::__construct to set the _cacheFlag var for this class to false.
-     *
-     * @param modX|xPDO $xpdo Reference to the xPDO|modX instance
-     */
+    * Overrides xPDOObject::__construct to set the _cacheFlag var for this class to false.
+    *
+    * @param modX|xPDO $xpdo Reference to the xPDO|modX instance
+    */
     function __construct(& $xpdo)
     {
         parent:: __construct($xpdo);

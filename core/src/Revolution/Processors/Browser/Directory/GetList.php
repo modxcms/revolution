@@ -31,8 +31,8 @@ class GetList extends Browser
 
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $dir = $this->sanitize($this->getProperty('id', ''));

@@ -20,24 +20,24 @@ use MODX\Revolution\Processors\DriverSpecificProcessor;
 abstract class GetListAbstract extends DriverSpecificProcessor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('database');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['system_info'];
     }
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function process()
     {
         $tables = $this->getTables();
@@ -48,14 +48,14 @@ abstract class GetListAbstract extends DriverSpecificProcessor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     abstract public function getTables();
 
     /**
-     * @param $size
-     * @return string
-     */
+    * @param $size
+    * @return string
+    */
     public function formatSize($size)
     {
         if (!isset($size) || !is_numeric($size) || $size === 0) {

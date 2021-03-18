@@ -21,16 +21,16 @@ use MODX\Revolution\Registry\modRegistry;
 class RemoveLocks extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('remove_locks');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         /** @var modRegistry $registry */

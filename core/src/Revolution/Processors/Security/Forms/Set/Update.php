@@ -36,8 +36,8 @@ class Update extends UpdateProcessor
     public $newRules = [];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $this->setCheckbox('active');
@@ -45,8 +45,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->object->set('constraint_class', modResource::class);
@@ -59,9 +59,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function afterSave()
     {
         $this->clearOldRules();
@@ -73,9 +73,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Clear out the old rules
-     * @return void
-     */
+    * Clear out the old rules
+    * @return void
+    */
     public function clearOldRules()
     {
         $oldRules = $this->modx->getCollection(modActionDom::class, [
@@ -88,10 +88,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Calculate field rules
-     * @return void
-     * @throws \xPDO\xPDOException
-     */
+    * Calculate field rules
+    * @return void
+    * @throws \xPDO\xPDOException
+    */
     public function setFieldRules()
     {
         $fields = $this->getProperty('fields');
@@ -160,10 +160,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Calculate tab rules
-     * @return void
-     * @throws \xPDO\xPDOException
-     */
+    * Calculate tab rules
+    * @return void
+    * @throws \xPDO\xPDOException
+    */
     public function setTabRules()
     {
         $tabs = $this->getProperty('tabs');
@@ -246,10 +246,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Calculate the TV rules
-     * @return void
-     * @throws \xPDO\xPDOException
-     */
+    * Calculate the TV rules
+    * @return void
+    * @throws \xPDO\xPDOException
+    */
     public function setTVRules()
     {
         $tvs = $this->getProperty('tvs');
@@ -344,9 +344,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Save the new rules to the set
-     * @return void
-     */
+    * Save the new rules to the set
+    * @return void
+    */
     public function saveNewRules()
     {
         /** @var modActionDom $newRule */

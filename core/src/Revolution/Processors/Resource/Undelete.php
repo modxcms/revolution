@@ -88,9 +88,9 @@ class Undelete extends Processor
     }
 
     /**
-     * Add a lock to the Resource while undeleting it
-     * @return boolean
-     */
+    * Add a lock to the Resource while undeleting it
+    * @return boolean
+    */
     public function addLock()
     {
         $locked = $this->resource->addLock();
@@ -104,19 +104,19 @@ class Undelete extends Processor
     }
 
     /**
-     * Remove the lock from the Resource
-     * @return boolean
-     */
+    * Remove the lock from the Resource
+    * @return boolean
+    */
     public function removeLock()
     {
         return $this->resource->removeLock();
     }
 
     /**
-     * UnDelete all the children Resources recursively
-     * @param int $parent
-     * @return boolean
-     */
+    * UnDelete all the children Resources recursively
+    * @param int $parent
+    * @return boolean
+    */
     public function unDeleteChildren($parent)
     {
         $success = false;
@@ -150,9 +150,9 @@ class Undelete extends Processor
     }
 
     /**
-     * Fire the UnDelete event
-     * @return void
-     */
+    * Fire the UnDelete event
+    * @return void
+    */
     public function fireAfterUnDeleteEvent()
     {
         $this->modx->invokeEvent('OnResourceUndelete', [
@@ -162,18 +162,18 @@ class Undelete extends Processor
     }
 
     /**
-     * Log the manager action
-     * @return void
-     */
+    * Log the manager action
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('undelete_resource', modResource::class, $this->resource->get('id'));
     }
 
     /**
-     * Clear the site cache
-     * @return void
-     */
+    * Clear the site cache
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->cacheManager->refresh([

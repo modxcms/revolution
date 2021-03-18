@@ -48,11 +48,11 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     public $afterSaveEvent = 'OnTVFormSave';
 
     /**
-     * Fire pre-save logic
-     * {@inheritDoc}
-     *
-     * @return boolean
-     */
+    * Fire pre-save logic
+    * {@inheritDoc}
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         $template = $this->getProperty('template');
@@ -80,10 +80,10 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Set the Output Options for the TV
-     *
-     * @return array
-     */
+    * Set the Output Options for the TV
+    *
+    * @return array
+    */
     public function setOutputProperties()
     {
         $properties = $this->getProperties();
@@ -100,10 +100,10 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Set the Input Options for the TV
-     *
-     * @return array
-     */
+    * Set the Input Options for the TV
+    *
+    * @return array
+    */
     public function setInputProperties()
     {
         $properties = $this->getProperties();
@@ -120,11 +120,11 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Add post-saving options to TVs
-     *
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * Add post-saving options to TVs
+    *
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function afterSave()
     {
         $this->setTemplateAccess();
@@ -135,10 +135,10 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Set the Template Access to the TV
-     *
-     * @return void
-     */
+    * Set the Template Access to the TV
+    *
+    * @return void
+    */
     public function setTemplateAccess()
     {
         $templates = $this->getProperty('templates', null);
@@ -173,10 +173,10 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Set Resource Groups access to TV
-     *
-     * @return array|string
-     */
+    * Set Resource Groups access to TV
+    *
+    * @return array|string
+    */
     public function setResourceGroupAccess()
     {
         $resourceGroups = $this->getProperty('resource_groups', null);
@@ -209,10 +209,10 @@ class Create extends \MODX\Revolution\Processors\Element\Create
     }
 
     /**
-     * Set source-element maps
-     *
-     * @return void
-     */
+    * Set source-element maps
+    *
+    * @return void
+    */
     public function setMediaSources()
     {
         $sources = $this->getProperty('sources', null);

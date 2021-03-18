@@ -20,13 +20,13 @@ namespace MODX\Revolution\Hashing;
 class modNative extends modHash
 {
     /**
-     * Generates the hash for the provided string using PHP's password_hash function.
-     *
-     * @param string $string  A string to generate a secure hash from.
-     * @param array  $options An array of options to be passed to the hash implementation.
-     *
-     * @return mixed The hash result or false on failure.
-     */
+    * Generates the hash for the provided string using PHP's password_hash function.
+    *
+    * @param string $string  A string to generate a secure hash from.
+    * @param array  $options An array of options to be passed to the hash implementation.
+    *
+    * @return mixed The hash result or false on failure.
+    */
     public function hash($string, array $options = [])
     {
 
@@ -34,15 +34,15 @@ class modNative extends modHash
     }
 
     /**
-     * Verifies with PHP's native password_verify function that the provided hash in $expected matches the
-     * raw (unhashed) $string.
-     *
-     * @param string $string
-     * @param string $expected
-     * @param array  $options
-     *
-     * @return bool
-     */
+    * Verifies with PHP's native password_verify function that the provided hash in $expected matches the
+    * raw (unhashed) $string.
+    *
+    * @param string $string
+    * @param string $expected
+    * @param array  $options
+    *
+    * @return bool
+    */
     public function verify($string, $expected, array $options = [])
     {
         return password_verify($string, $expected);

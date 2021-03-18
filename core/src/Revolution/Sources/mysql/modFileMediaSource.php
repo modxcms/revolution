@@ -10,14 +10,14 @@ class modFileMediaSource extends \MODX\Revolution\Sources\modFileMediaSource
         'package' => 'MODX\\Revolution\\Sources',
         'version' => '3.0',
         'extends' => 'MODX\\Revolution\\Sources\\modMediaSource',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
     );

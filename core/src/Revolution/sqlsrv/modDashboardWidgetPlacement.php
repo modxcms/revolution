@@ -11,7 +11,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
         'version' => '3.0',
         'table' => 'dashboard_widget_placement',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'user' => 0,
             'dashboard' => 0,
@@ -19,9 +19,9 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
             'rank' => 0,
             'size' => 'half',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'user' => 
+            'user' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -29,7 +29,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'dashboard' => 
+            'dashboard' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -37,7 +37,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'widget' => 
+            'widget' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -45,7 +45,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -53,7 +53,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 'default' => 0,
                 'index' => 'index',
             ),
-            'size' => 
+            'size' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -62,41 +62,41 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 'default' => 'half',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
-                'columns' => 
+                'columns' =>
                 array (
-                    'user' => 
+                    'user' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'dashboard' => 
+                    'dashboard' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'widget' => 
+                    'widget' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
                 ),
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'alias' => 'rank',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'rank' => 
+                    'rank' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -105,9 +105,9 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'User' => 
+            'User' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'user',
@@ -115,7 +115,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Dashboard' => 
+            'Dashboard' =>
             array (
                 'class' => 'MODX\\Revolution\\modDashboard',
                 'local' => 'dashboard',
@@ -123,7 +123,7 @@ class modDashboardWidgetPlacement extends \MODX\Revolution\modDashboardWidgetPla
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Widget' => 
+            'Widget' =>
             array (
                 'class' => 'MODX\\Revolution\\modDashboardWidget',
                 'local' => 'widget',

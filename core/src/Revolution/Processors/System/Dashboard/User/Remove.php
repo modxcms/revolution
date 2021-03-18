@@ -26,8 +26,8 @@ class Remove extends RemoveProcessor
     public $languageTopics = ['dashboards'];
 
     /**
-     * @return bool|null|string
-     */
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $primaryKey = [
@@ -48,8 +48,8 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         if ($this->removeObject() === false) {
@@ -82,8 +82,8 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterRemove()
     {
         /** @var modDashboard $dashboard */
@@ -95,8 +95,8 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * Log event
-     */
+    * Log event
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('user_widget_remove', modDashboardWidget::class, $this->object->get('widget'));

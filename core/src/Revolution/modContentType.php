@@ -19,11 +19,11 @@ use xPDO\Om\xPDOSimpleObject;
 class modContentType extends xPDOSimpleObject
 {
     /**
-     * Returns the first extension of this Content Type.
-     *
-     * @access public
-     * @return string
-     */
+    * Returns the first extension of this Content Type.
+    *
+    * @access public
+    * @return string
+    */
     public function getExtension()
     {
         $extension = '';

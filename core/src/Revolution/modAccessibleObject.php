@@ -16,22 +16,22 @@ use xPDO\xPDO;
 class modAccessibleObject extends xPDOObject
 {
     /**
-     * A local cache of access policies for the instance.
-     *
-     * @var array
-     */
+    * A local cache of access policies for the instance.
+    *
+    * @var array
+    */
     protected $_policies = [];
 
     /**
-     * Custom instance from row loader that respects policy checking
-     *
-     * @param xPDO|modX $xpdo      A reference to the xPDO/modX object.
-     * @param string    $className The name of the class by which to grab the instance from
-     * @param mixed     $criteria  A criteria to use when grabbing this instance
-     * @param array     $row       The row to select
-     *
-     * @return modAccessibleObject|null An instance of the object
-     */
+    * Custom instance from row loader that respects policy checking
+    *
+    * @param xPDO|modX $xpdo      A reference to the xPDO/modX object.
+    * @param string    $className The name of the class by which to grab the instance from
+    * @param mixed     $criteria  A criteria to use when grabbing this instance
+    * @param array     $row       The row to select
+    *
+    * @return modAccessibleObject|null An instance of the object
+    */
     public static function _loadInstance(& $xpdo, $className, $criteria, $row)
     {
         /** @var modAccessibleObject $instance */
@@ -53,10 +53,10 @@ class modAccessibleObject extends xPDOObject
     }
 
     /**
-     * Custom instance loader for collections that respects policy checking.
-     *
-     * {@inheritdoc}
-     */
+    * Custom instance loader for collections that respects policy checking.
+    *
+    * {@inheritdoc}
+    */
     public static function _loadCollectionInstance(
         xPDO & $xpdo,
         array & $objCollection,
@@ -95,10 +95,10 @@ class modAccessibleObject extends xPDOObject
     }
 
     /**
-     * Custom instance loader that forces access policy checking.
-     *
-     * {@inheritdoc}
-     */
+    * Custom instance loader that forces access policy checking.
+    *
+    * {@inheritdoc}
+    */
     public static function load(xPDO & $xpdo, $className, $criteria, $cacheFlag = true)
     {
         $instance = null;
@@ -154,10 +154,10 @@ class modAccessibleObject extends xPDOObject
     }
 
     /**
-     * Custom collection loader that forces access policy checking.
-     *
-     * {@inheritdoc}
-     */
+    * Custom collection loader that forces access policy checking.
+    *
+    * {@inheritdoc}
+    */
     public static function loadCollection(xPDO & $xpdo, $className, $criteria = null, $cacheFlag = true)
     {
         $objCollection = [];
@@ -203,10 +203,10 @@ class modAccessibleObject extends xPDOObject
     }
 
     /**
-     * Custom save that respects access policies.
-     *
-     * {@inheritdoc}
-     */
+    * Custom save that respects access policies.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         if (!$this->checkPolicy('save')) {
@@ -218,10 +218,10 @@ class modAccessibleObject extends xPDOObject
     }
 
     /**
-     * Custom remove that respects access policies.
-     *
-     * {@inheritdoc}
-     */
+    * Custom remove that respects access policies.
+    *
+    * {@inheritdoc}
+    */
     public function remove(array $ancestors = [])
     {
         if (!$this->checkPolicy('remove')) {
@@ -233,20 +233,20 @@ class modAccessibleObject extends xPDOObject
     }
 
     /**
-     * Determine if the current/specified user attributes satisfy the object policy.
-     *
-     * @param array|string $criteria An associative array providing a key and value to
-     *                               search for within the matched policy attributes between policy and
-     *                               principal, or the name of a permission to check.
-     * @param string|array $targets  A target modAccess class name or an array of
-     *                               class names to limit the check. In most cases, this does not need to be
-     *                               set; derivatives should typically determine what targets to include in
-     *                               the findPolicy() implementation.
-     * @param modUser      $user
-     *
-     * @return boolean Returns true if the policy is satisfied or no policy
-     * exists.
-     */
+    * Determine if the current/specified user attributes satisfy the object policy.
+    *
+    * @param array|string $criteria An associative array providing a key and value to
+    *                               search for within the matched policy attributes between policy and
+    *                               principal, or the name of a permission to check.
+    * @param string|array $targets  A target modAccess class name or an array of
+    *                               class names to limit the check. In most cases, this does not need to be
+    *                               set; derivatives should typically determine what targets to include in
+    *                               the findPolicy() implementation.
+    * @param modUser      $user
+    *
+    * @return boolean Returns true if the policy is satisfied or no policy
+    * exists.
+    */
     public function checkPolicy($criteria, $targets = null, modUser $user = null)
     {
         if (!$user) {
@@ -316,39 +316,39 @@ class modAccessibleObject extends xPDOObject
     }
 
     /**
-     * Find access policies applicable to this object in a specific context.
-     *
-     * @access protected
-     *
-     * @param string $context A key identifying a specific context to use when
-     *                        searching for the applicable policies. If not provided, the current
-     *                        context is used.
-     *
-     * @return array An array of access policies for this object; an empty
-     * array is returned if no policies are assigned to the object.
-     */
+    * Find access policies applicable to this object in a specific context.
+    *
+    * @access protected
+    *
+    * @param string $context A key identifying a specific context to use when
+    *                        searching for the applicable policies. If not provided, the current
+    *                        context is used.
+    *
+    * @return array An array of access policies for this object; an empty
+    * array is returned if no policies are assigned to the object.
+    */
     public function findPolicy($context = '')
     {
         return [];
     }
 
     /**
-     * Return the currently loaded array of policies.
-     *
-     * @return array
-     */
+    * Return the currently loaded array of policies.
+    *
+    * @return array
+    */
     public function getPolicies()
     {
         return $this->_policies;
     }
 
     /**
-     * Set the current object's policies.
-     *
-     * @param array $policies
-     *
-     * @return void
-     */
+    * Set the current object's policies.
+    *
+    * @param array $policies
+    *
+    * @return void
+    */
     public function setPolicies(array $policies = [])
     {
         $this->_policies = $policies;

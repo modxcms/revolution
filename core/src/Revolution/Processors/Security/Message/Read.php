@@ -27,8 +27,8 @@ class Read extends UpdateProcessor
     public $languageTopics = ['messages'];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeSave()
     {
         if ($this->object->get('recipient') !== $this->modx->user->get('id')) {

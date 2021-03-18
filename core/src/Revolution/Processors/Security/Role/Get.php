@@ -26,4 +26,3 @@ class Get extends GetProcessor
     public $permission = 'view_role';
     public $objectType = 'role';
 }
-

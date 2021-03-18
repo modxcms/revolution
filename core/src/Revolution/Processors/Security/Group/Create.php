@@ -38,8 +38,8 @@ class Create extends CreateProcessor
     public $afterSaveEvent = 'OnUserGroupFormSave';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['parent' => 0]);
@@ -48,9 +48,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function beforeSave()
     {
         $this->setUsersIn();
@@ -72,9 +72,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function afterSave()
     {
         $this->setContexts();
@@ -127,12 +127,12 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Add user groups via a wizard property, which is a comma-separated list of username:role key pairs, ie:
-     * jimbob:Member,johndoe:Administrator,marksmith
-     * If the Role is left off, it will default to the Member role.
-     * @param string|array $users
-     * @return bool
-     */
+    * Add user groups via a wizard property, which is a comma-separated list of username:role key pairs, ie:
+    * jimbob:Member,johndoe:Administrator,marksmith
+    * If the Role is left off, it will default to the Member role.
+    * @param string|array $users
+    * @return bool
+    */
     public function addUsersViaWizard($users)
     {
         $users = is_array($users) ? $users : explode(',', $users);
@@ -168,10 +168,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Add Manager Access via wizard property with a specified policy.
-     * @param int|string $adminPolicy
-     * @return bool
-     */
+    * Add Manager Access via wizard property with a specified policy.
+    * @param int|string $adminPolicy
+    * @return bool
+    */
     public function addManagerContextAccessViaWizard($adminPolicy)
     {
         $c = (int)$adminPolicy > 0 ? $adminPolicy : ['name' => $adminPolicy];
@@ -196,10 +196,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Add Context Access via wizard property.
-     * @param array $contexts
-     * @return boolean
-     */
+    * Add Context Access via wizard property.
+    * @param array $contexts
+    * @return boolean
+    */
     public function addContextAccessViaWizard(array $contexts)
     {
         /** @var modAccessPolicy $policy */
@@ -224,10 +224,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @param string|array $resourceGroupNames
-     * @param array $contexts
-     * @return boolean
-     */
+    * @param string|array $resourceGroupNames
+    * @param array $contexts
+    * @return boolean
+    */
     public function addResourceGroupsViaWizard($resourceGroupNames, array $contexts)
     {
         $resourceGroupNames = is_array($resourceGroupNames) ? $resourceGroupNames : explode(',', $resourceGroupNames);
@@ -264,10 +264,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Adds a Resource Group with the same name and grants access for the specified Contexts
-     * @param array $contexts
-     * @return boolean
-     */
+    * Adds a Resource Group with the same name and grants access for the specified Contexts
+    * @param array $contexts
+    * @return boolean
+    */
     public function addParallelResourceGroup(array $contexts)
     {
         /** @var modResourceGroup $resourceGroup */
@@ -305,10 +305,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @param string|array $categoryNames
-     * @param array $contexts
-     * @return boolean
-     */
+    * @param string|array $categoryNames
+    * @param array $contexts
+    * @return boolean
+    */
     public function addElementCategoriesViaWizard($categoryNames, array $contexts)
     {
         $categoryNames = is_array($categoryNames) ? $categoryNames : explode(',', $categoryNames);
@@ -345,10 +345,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Set the users in the group
-     * @return array
-     * @throws \xPDO\xPDOException
-     */
+    * Set the users in the group
+    * @return array
+    * @throws \xPDO\xPDOException
+    */
     public function setUsersIn()
     {
         $users = $this->getProperty('users');
@@ -374,10 +374,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Set the Context ACLs for the Group
-     * @return array
-     * @throws \xPDO\xPDOException
-     */
+    * Set the Context ACLs for the Group
+    * @return array
+    * @throws \xPDO\xPDOException
+    */
     public function setContexts()
     {
         $contexts = $this->getProperty('contexts');
@@ -399,10 +399,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Set the Resource Group ACLs for the Group
-     * @return array
-     * @throws \xPDO\xPDOException
-     */
+    * Set the Resource Group ACLs for the Group
+    * @return array
+    * @throws \xPDO\xPDOException
+    */
     public function setResourceGroups()
     {
         $resourceGroups = $this->getProperty('resource_groups');

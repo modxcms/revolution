@@ -25,24 +25,24 @@ use xPDO\Om\xPDOQuery;
 class GetAreas extends Processor
 {
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('settings');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['setting', 'namespace'];
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -53,8 +53,8 @@ class GetAreas extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $c = $this->getQuery();
@@ -87,9 +87,9 @@ class GetAreas extends Processor
     }
 
     /**
-     * Get the query object for the data
-     * @return xPDOQuery
-     */
+    * Get the query object for the data
+    * @return xPDOQuery
+    */
     public function getQuery()
     {
         $namespace = $this->getProperty('namespace', 'core');

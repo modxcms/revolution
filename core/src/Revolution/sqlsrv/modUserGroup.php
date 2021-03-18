@@ -11,7 +11,7 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
         'version' => '3.0',
         'table' => 'membergroup_names',
         'extends' => 'MODX\\Revolution\\modPrincipal',
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'description' => NULL,
@@ -19,9 +19,9 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
             'rank' => 0,
             'dashboard' => 1,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -30,12 +30,12 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'default' => '',
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
             ),
-            'parent' => 
+            'parent' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -43,7 +43,7 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'default' => 0,
                 'index' => 'index',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -51,7 +51,7 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'default' => 0,
                 'index' => 'index',
             ),
-            'dashboard' => 
+            'dashboard' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -60,17 +60,17 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -78,15 +78,15 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                     ),
                 ),
             ),
-            'parent' => 
+            'parent' =>
             array (
                 'alias' => 'parent',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'parent' => 
+                    'parent' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -94,15 +94,15 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                     ),
                 ),
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'alias' => 'rank',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'rank' => 
+                    'rank' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -110,15 +110,15 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                     ),
                 ),
             ),
-            'dashboard' => 
+            'dashboard' =>
             array (
                 'alias' => 'dashboard',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'dashboard' => 
+                    'dashboard' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -127,9 +127,9 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'UserGroupMembers' => 
+            'UserGroupMembers' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroupMember',
                 'local' => 'id',
@@ -137,7 +137,7 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'FormCustomizationProfiles' => 
+            'FormCustomizationProfiles' =>
             array (
                 'class' => 'MODX\\Revolution\\modFormCustomizationProfileUserGroup',
                 'local' => 'id',
@@ -146,9 +146,9 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Parent' => 
+            'Parent' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'parent',
@@ -156,7 +156,7 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Children' => 
+            'Children' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'id',
@@ -164,7 +164,7 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Dashboard' => 
+            'Dashboard' =>
             array (
                 'class' => 'MODX\\Revolution\\modDashboard',
                 'local' => 'dashboard',

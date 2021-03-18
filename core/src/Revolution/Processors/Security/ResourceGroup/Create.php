@@ -34,8 +34,8 @@ class Create extends CreateProcessor
     public $afterSaveEvent = 'OnResourceGroupSave';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['automatic_access' => false]);
@@ -44,8 +44,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name');
@@ -65,8 +65,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $contexts = $this->getProperty('access_contexts', '');
@@ -106,10 +106,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Give the Administrator User Group access to this Resource Group
-     * @param array $contexts
-     * @return boolean
-     */
+    * Give the Administrator User Group access to this Resource Group
+    * @param array $contexts
+    * @return boolean
+    */
     protected function addAdminAccess(array $contexts = [])
     {
         /** @var modUserGroup $adminGroup */
@@ -142,10 +142,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Give anonymous users view access to this Resource Group
-     * @param array $contexts
-     * @return boolean
-     */
+    * Give anonymous users view access to this Resource Group
+    * @param array $contexts
+    * @return boolean
+    */
     protected function addAnonymousAccess(array $contexts = [])
     {
         /** @var modAccessPolicy $policy */
@@ -171,10 +171,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Create a User Group with the same name and give it access to this Resource Group
-     * @param array $contexts
-     * @return boolean
-     */
+    * Create a User Group with the same name and give it access to this Resource Group
+    * @param array $contexts
+    * @return boolean
+    */
     protected function addParallelUserGroup(array $contexts = [])
     {
         /** @var modUserGroup $userGroup */
@@ -213,11 +213,11 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Give a list of User Groups access to this Resource Group
-     * @param array $userGroupNames
-     * @param array $contexts
-     * @return boolean
-     */
+    * Give a list of User Groups access to this Resource Group
+    * @param array $userGroupNames
+    * @param array $contexts
+    * @return boolean
+    */
     protected function addOtherUserGroups(array $userGroupNames = [], array $contexts = [])
     {
         $userGroupNames = array_unique($userGroupNames);
@@ -254,9 +254,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Flush the permissions
-     * @return array|string
-     */
+    * Flush the permissions
+    * @return array|string
+    */
     protected function flushPermissions()
     {
         $ctxQuery = $this->modx->newQuery(modContext::class);

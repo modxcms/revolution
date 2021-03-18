@@ -57,4 +57,3 @@ $_lang['login_help_button_text'] = 'Súgó';
 $_lang['login_help_title'] = 'Kérjen segítséget a MODX-hez';
 $_lang['login_help_text'] = '<p>Szakértői MODX támogatást kér? Összeállítottunk egy címtárat a világ MODX szakértőiből, akik szívesen segítenek. <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Keressen MODX szakértőket a MODX weboldalán">Gyors segítség a modx.com oldalról</a>.</p>';
 $_lang['login_return_site'] = 'Vissza a weboldalra';
-

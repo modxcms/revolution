@@ -27,8 +27,8 @@ class Create extends CreateProcessor
     public $objectType = 'dashboard';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         /* validate name field */
@@ -46,9 +46,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function afterSave()
     {
         $widgets = $this->getProperty('widgets');
@@ -59,21 +59,21 @@ class Create extends CreateProcessor
     }
 
     /**
-     * See if a Dashboard already exists with this name
-     * @param string $name
-     * @return bool
-     */
+    * See if a Dashboard already exists with this name
+    * @param string $name
+    * @return bool
+    */
     public function alreadyExists($name)
     {
         return $this->modx->getCount(modDashboard::class, ['name' => $name]) > 0;
     }
 
     /**
-     * Assign widgets to this dashboard
-     * @param array|string $widgets
-     * @return array An array of placement objects
-     * @throws \xPDO\xPDOException
-     */
+    * Assign widgets to this dashboard
+    * @param array|string $widgets
+    * @return array An array of placement objects
+    * @throws \xPDO\xPDOException
+    */
     public function assignWidgets($widgets)
     {
         $placements = [];

@@ -19,16 +19,16 @@ class Optimize extends OptimizeAbstract
 {
 
     /**
-     * @var OptimizeAbstract
-     */
+    * @var OptimizeAbstract
+    */
     protected $concreteProcessor;
 
     /**
-     * Creates a Processor object.
-     *
-     * @param modX $modx A reference to the modX instance
-     * @param array $properties An array of properties
-     */
+    * Creates a Processor object.
+    *
+    * @param modX $modx A reference to the modX instance
+    * @param array $properties An array of properties
+    */
     public function __construct(modX $modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
@@ -39,10 +39,10 @@ class Optimize extends OptimizeAbstract
     }
 
     /**
-     * Optimize a database table
-     * @param $table
-     * @return boolean
-     */
+    * Optimize a database table
+    * @param $table
+    * @return boolean
+    */
     public function optimize($table)
     {
         return $this->concreteProcessor->optimize($table);

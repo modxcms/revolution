@@ -24,11 +24,11 @@ use xPDO\xPDO;
 class modLexiconEntry extends xPDOSimpleObject
 {
     /**
-     * Clears the cache for the entry
-     *
-     * @access public
-     * @return boolean True if successful
-     */
+    * Clears the cache for the entry
+    *
+    * @access public
+    * @return boolean True if successful
+    */
     public function clearCache()
     {
         if ($this->xpdo && $this->xpdo->lexicon) {
@@ -39,10 +39,10 @@ class modLexiconEntry extends xPDOSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::save to clear lexicon cache on saving.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides xPDOObject::save to clear lexicon cache on saving.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         if ($this->_new) {

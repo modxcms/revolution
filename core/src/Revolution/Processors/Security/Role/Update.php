@@ -27,8 +27,8 @@ class Update extends UpdateProcessor
     public $objectType = 'role';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name');

@@ -21,16 +21,16 @@ use MODX\Revolution\modX;
 class RefreshUris extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('empty_cache');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $this->modx->call(modResource::class, 'refreshURIs', [&$this->modx]);

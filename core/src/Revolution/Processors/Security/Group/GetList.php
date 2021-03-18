@@ -30,8 +30,8 @@ class GetList extends GetListProcessor
     public $permission = 'usergroup_view';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -40,14 +40,14 @@ class GetList extends GetListProcessor
             'addNone' => false,
             'combo' => false,
         ]);
-        
+
         return $initialized;
     }
 
     /**
-     * @param array $list
-     * @return array
-     */
+    * @param array $list
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         $query = $this->getProperty('query', '');
@@ -84,9 +84,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $exclude = $this->getProperty('exclude', '');
@@ -108,7 +108,7 @@ class GetList extends GetListProcessor
         }
         $c->sortby('parent', 'asc');
         $c->sortby('id', 'asc');
-        
+
         return $c;
     }
 }

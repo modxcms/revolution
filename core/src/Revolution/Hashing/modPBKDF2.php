@@ -22,20 +22,20 @@ use MODX\Revolution\modX;
 class modPBKDF2 extends modHash
 {
     /**
-     * Generate a hash of a string using the RSA PBKDFA2 specification.
-     *
-     * The following options are available:
-     *  - salt (required): a valid, non-empty string to salt the hashes
-     *  - iterations: the number of iterations per block, default is 1000 (< 1000 not recommended)
-     *  - derived_key_length: the size of the derived key to generate, default is 32
-     *  - algorithm: the hash algorithm to use, default is sha256
-     *  - raw_output: if true, returns binary output, otherwise derived key is base64_encode()'d; default is false
-     *
-     * @param string $string  A string to generate a secure hash from.
-     * @param array  $options An array of options to be passed to the hash implementation.
-     *
-     * @return mixed The hash result or false on failure.
-     */
+    * Generate a hash of a string using the RSA PBKDFA2 specification.
+    *
+    * The following options are available:
+    *  - salt (required): a valid, non-empty string to salt the hashes
+    *  - iterations: the number of iterations per block, default is 1000 (< 1000 not recommended)
+    *  - derived_key_length: the size of the derived key to generate, default is 32
+    *  - algorithm: the hash algorithm to use, default is sha256
+    *  - raw_output: if true, returns binary output, otherwise derived key is base64_encode()'d; default is false
+    *
+    * @param string $string  A string to generate a secure hash from.
+    * @param array  $options An array of options to be passed to the hash implementation.
+    *
+    * @return mixed The hash result or false on failure.
+    */
     public function hash($string, array $options = [])
     {
         $derivedKey = false;

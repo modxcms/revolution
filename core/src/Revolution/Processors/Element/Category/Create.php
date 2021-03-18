@@ -29,10 +29,10 @@ class Create extends CreateProcessor
     public $objectType = 'category';
 
     /**
-     * Validate the creation
-     *
-     * @return boolean
-     */
+    * Validate the creation
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('category');
@@ -49,13 +49,13 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check to see if a Category with that name and same parent already exists
-     *
-     * @param string  $name   The name to check against
-     * @param integer $parent The parent ID to check against
-     *
-     * @return boolean
-     */
+    * Check to see if a Category with that name and same parent already exists
+    *
+    * @param string  $name   The name to check against
+    * @param integer $parent The parent ID to check against
+    *
+    * @return boolean
+    */
     public function alreadyExists($name, $parent = 0)
     {
         return $this->modx->getCount(modCategory::class, ['category' => $name, 'parent' => $parent]) > 0;

@@ -20,8 +20,8 @@ class RemoveMultiple extends Delete
     public $users = [];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $users = $this->getProperty('users', '');
@@ -34,8 +34,8 @@ class RemoveMultiple extends Delete
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         foreach ($this->users as $user) {

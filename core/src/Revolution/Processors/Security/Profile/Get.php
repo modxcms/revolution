@@ -27,24 +27,24 @@ class Get extends Processor
     public $user;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('change_profile');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $id = $this->getProperty('id');
@@ -82,10 +82,10 @@ class Get extends Processor
     }
 
     /**
-     * Get the User Groups for the user
-     * @return array
-     * @throws \xPDO\xPDOException
-     */
+    * Get the User Groups for the user
+    * @return array
+    * @throws \xPDO\xPDOException
+    */
     public function getUserGroups()
     {
         $c = $this->modx->newQuery(modUserGroupMember::class);

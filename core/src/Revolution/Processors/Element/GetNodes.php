@@ -109,12 +109,12 @@ class GetNodes extends Processor
     }
 
     /**
-     * Default icons for element types
-     *
-     * @param $elementIdentifier string Element Type
-     *
-     * @return string
-     */
+    * Default icons for element types
+    *
+    * @param $elementIdentifier string Element Type
+    *
+    * @return string
+    */
     public function getNodeIcon($elementIdentifier)
     {
         $defaults = [
@@ -257,10 +257,10 @@ class GetNodes extends Processor
     }
 
     /**
-     * @param array $map
-     *
-     * @return array
-     */
+    * @param array $map
+    *
+    * @return array
+    */
     public function getCategoryNodes(array $map)
     {
         if (!empty($map[1])) {
@@ -490,12 +490,12 @@ class GetNodes extends Processor
     }
 
     /**
-     * @param array $map
-     * 0: type of element
-     * 1: parent category
-     *
-     * @return array
-     */
+    * @param array $map
+    * 0: type of element
+    * 1: parent category
+    *
+    * @return array
+    */
     public function getInCategoryElements(array $map)
     {
         $nodes = [];

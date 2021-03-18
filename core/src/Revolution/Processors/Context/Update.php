@@ -41,10 +41,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Update the context settings for this Context
-     *
-     * @return array
-     */
+    * Update the context settings for this Context
+    *
+    * @return array
+    */
     public function updateContextSettings()
     {
         $settings = $this->getProperty('settings');
@@ -95,10 +95,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Run the OnContextUpdate event
-     *
-     * @return void
-     */
+    * Run the OnContextUpdate event
+    *
+    * @return void
+    */
     public function runOnUpdateEvent()
     {
         $this->modx->invokeEvent('OnContextUpdate', [

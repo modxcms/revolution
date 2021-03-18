@@ -29,20 +29,20 @@ class modInputFilter
     private $_modifiers = null;
 
     /**
-     * Constructor for modInputFilter
-     *
-     * @param modX $modx A reference to the modX instance.
-     */
+    * Constructor for modInputFilter
+    *
+    * @param modX $modx A reference to the modX instance.
+    */
     function __construct(modX &$modx)
     {
         $this->modx = &$modx;
     }
 
     /**
-     * Filters a modElement before it is processed.
-     *
-     * @param modElement|modTag &$element The element to apply filtering to.
-     */
+    * Filters a modElement before it is processed.
+    *
+    * @param modElement|modTag &$element The element to apply filtering to.
+    */
     public function filter(&$element)
     {
         /* split commands and modifiers and store them as properties for the output filtering */
@@ -62,30 +62,30 @@ class modInputFilter
     }
 
     /**
-     * Indicates if the element has any input filter commands.
-     *
-     * @return boolean True if the input filter has commands to execute.
-     */
+    * Indicates if the element has any input filter commands.
+    *
+    * @return boolean True if the input filter has commands to execute.
+    */
     public function hasCommands()
     {
         return !empty($this->_commands);
     }
 
     /**
-     * Returns a list of filter input commands to be applied through output filtering.
-     *
-     * @return array|null An array of filter commands or null if no commands exist.
-     */
+    * Returns a list of filter input commands to be applied through output filtering.
+    *
+    * @return array|null An array of filter commands or null if no commands exist.
+    */
     public function & getCommands()
     {
         return $this->_commands;
     }
 
     /**
-     * Returns a list of filter input modifiers corresponding to the input commands.
-     *
-     * @return array|null An array of filter modifiers for corresponding commands.
-     */
+    * Returns a list of filter input modifiers corresponding to the input commands.
+    *
+    * @return array|null An array of filter modifiers for corresponding commands.
+    */
     public function & getModifiers()
     {
         return $this->_modifiers;

@@ -40,11 +40,11 @@ class modRest
     public $url;
 
     /**
-     * The modRest constructor
-     *
-     * @param modX  $modx   A reference to the modX instance
-     * @param array $config An array of configuration options
-     */
+    * The modRest constructor
+    *
+    * @param modX  $modx   A reference to the modX instance
+    * @param array $config An array of configuration options
+    */
     public function __construct(modX &$modx, array $config = [])
     {
         $this->modx =& $modx;
@@ -67,56 +67,56 @@ class modRest
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
-     */
+    * @param string $key
+    * @param mixed  $value
+    */
     public function setOption($key, $value)
     {
         $this->config[$key] = $value;
     }
 
     /**
-     * @param string $key
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
+    * @param string $key
+    * @param mixed  $default
+    *
+    * @return mixed
+    */
     public function getOption($key, $default = null)
     {
         return array_key_exists($key, $this->config) ? $this->config[$key] : $default;
     }
 
     /**
-     * @param string $url
-     * @param array  $parameters
-     * @param array  $headers
-     *
-     * @return RestClientResponse
-     */
+    * @param string $url
+    * @param array  $parameters
+    * @param array  $headers
+    *
+    * @return RestClientResponse
+    */
     public function get($url, $parameters = [], $headers = [])
     {
         return $this->execute($url, 'GET', $parameters, $headers);
     }
 
     /**
-     * @param string $url
-     * @param array  $parameters
-     * @param array  $headers
-     *
-     * @return RestClientResponse
-     */
+    * @param string $url
+    * @param array  $parameters
+    * @param array  $headers
+    *
+    * @return RestClientResponse
+    */
     public function post($url, $parameters = [], $headers = [])
     {
         return $this->execute($url, 'POST', $parameters, $headers);
     }
 
     /**
-     * @param string $url
-     * @param array  $parameters
-     * @param array  $headers
-     *
-     * @return RestClientResponse
-     */
+    * @param string $url
+    * @param array  $parameters
+    * @param array  $headers
+    *
+    * @return RestClientResponse
+    */
     public function put($url, $parameters = [], $headers = [])
     {
         if (!empty($this->config['addMethodParameter'])) {
@@ -127,12 +127,12 @@ class modRest
     }
 
     /**
-     * @param string $url
-     * @param array  $parameters
-     * @param array  $headers
-     *
-     * @return RestClientResponse
-     */
+    * @param string $url
+    * @param array  $parameters
+    * @param array  $headers
+    *
+    * @return RestClientResponse
+    */
     public function delete($url, $parameters = [], $headers = [])
     {
         if (!empty($this->config['addMethodParameter'])) {
@@ -143,13 +143,13 @@ class modRest
     }
 
     /**
-     * @param string $url
-     * @param string $method
-     * @param array  $parameters
-     * @param array  $headers
-     *
-     * @return RestClientResponse
-     */
+    * @param string $url
+    * @param string $method
+    * @param array  $parameters
+    * @param array  $headers
+    *
+    * @return RestClientResponse
+    */
     protected function execute($url, $method = 'GET', $parameters = [], $headers = [])
     {
         $request = new RestClientRequest($this->modx, $this->config);

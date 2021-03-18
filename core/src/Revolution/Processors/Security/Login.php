@@ -41,9 +41,9 @@ class Login extends Processor
     public $isMgr;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $this->username = $this->getProperty('username');
@@ -66,17 +66,17 @@ class Login extends Processor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['login'];
     }
 
     /**
-     * Fire event at the start of login process
-     * @return string
-     */
+    * Fire event at the start of login process
+    * @return string
+    */
     public function fireOnBeforeLoginEvent()
     {
         $onBeforeLoginParams = [
@@ -107,9 +107,9 @@ class Login extends Processor
     }
 
     /**
-     * Load user with profile and user settings
-     * @return bool|null|string
-     */
+    * Load user with profile and user settings
+    * @return bool|null|string
+    */
     public function getUser()
     {
         /** @var $user modUser */
@@ -123,9 +123,9 @@ class Login extends Processor
     }
 
     /**
-     * Fire event when user with this username is not found
-     * @return bool|null|string
-     */
+    * Fire event when user with this username is not found
+    * @return bool|null|string
+    */
     public function fireOnUserNotFoundEvent()
     {
         if (!$this->user) {
@@ -158,9 +158,9 @@ class Login extends Processor
     }
 
     /**
-     * Check if user is not active or blocked
-     * @return bool|null|string
-     */
+    * Check if user is not active or blocked
+    * @return bool|null|string
+    */
     public function checkIsBlocked()
     {
         if (!$this->user->get('active')) {
@@ -201,15 +201,15 @@ class Login extends Processor
     }
 
     /**
-     * Check user settings related to authentication
-     * @return bool|null|string
-     */
+    * Check user settings related to authentication
+    * @return bool|null|string
+    */
     public function checkUserSettings()
     {
         /**
-         * @var string $settingPK
-         * @var modUserSetting $setting
-         */
+        * @var string $settingPK
+        * @var modUserSetting $setting
+        */
         foreach ($this->user->UserSettings as $settingPK => $setting) {
             if ($setting->get('key') === 'allowed_ip') {
                 $ip = $this->modx->request->getClientIp();
@@ -232,9 +232,9 @@ class Login extends Processor
     }
 
     /**
-     * Actions before user is logged in
-     * @return bool|null|string
-     */
+    * Actions before user is logged in
+    * @return bool|null|string
+    */
     public function beforeLogin()
     {
         $preventLogin = $this->fireOnBeforeLoginEvent();
@@ -261,9 +261,9 @@ class Login extends Processor
     }
 
     /**
-     * Fire event just before password check
-     * @return array|bool
-     */
+    * Fire event just before password check
+    * @return array|bool
+    */
     public function fireOnAuthenticationEvent()
     {
         $loginParams = [
@@ -279,8 +279,8 @@ class Login extends Processor
     }
 
     /**
-     * Update failed login count
-     */
+    * Update failed login count
+    */
     public function failedLogin()
     {
         if (!isset($_SESSION['login_failed'])) {
@@ -293,9 +293,9 @@ class Login extends Processor
     }
 
     /** Check user password
-     * @param $rt
-     * @return bool|null|string
-     */
+    * @param $rt
+    * @return bool|null|string
+    */
     public function checkPassword($rt)
     {
         /* check if plugin authenticated the user */
@@ -319,8 +319,8 @@ class Login extends Processor
     }
 
     /**
-     * Remember user in session by login contexts
-     */
+    * Remember user in session by login contexts
+    */
     public function addSessionContexts()
     {
         $contexts = array_merge([$this->loginContext], $this->addContexts);
@@ -331,8 +331,8 @@ class Login extends Processor
     }
 
     /**
-     * Fire after login event
-     */
+    * Fire after login event
+    */
     public function fireAfterLoginEvent()
     {
         $postLoginParams = [
@@ -349,11 +349,11 @@ class Login extends Processor
     }
 
     /**
-     * Prepare response for mgr context
-     * @param $userToken
-     * @param $returnUrl
-     * @return array
-     */
+    * Prepare response for mgr context
+    * @param $userToken
+    * @param $returnUrl
+    * @return array
+    */
     public function prepareMgrResponse($userToken, $returnUrl)
     {
         $managerUrl = $this->modx->getOption('url_scheme') . $this->modx->getOption('http_host') . $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
@@ -366,10 +366,10 @@ class Login extends Processor
     }
 
     /** Prepare response for non-mgr contexts
-     * @param $userToken
-     * @param $returnUrl
-     * @return array
-     */
+    * @param $userToken
+    * @param $returnUrl
+    * @return array
+    */
     public function prepareWebResponse($userToken, $returnUrl)
     {
         $siteUrl = $this->modx->getOption('site_url', null, MODX_SITE_URL);
@@ -382,8 +382,8 @@ class Login extends Processor
     }
 
     /** Prepare response depending on the login context
-     * @return array
-     */
+    * @return array
+    */
     public function prepareResponse()
     {
         $userToken = $this->user->getUserToken($this->modx->context->get('key'));
@@ -402,9 +402,9 @@ class Login extends Processor
     }
 
     /**
-     * Actions after user is logged in
-     * @return array
-     */
+    * Actions after user is logged in
+    * @return array
+    */
     public function afterLogin()
     {
         $this->addSessionContexts();
@@ -424,8 +424,8 @@ class Login extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     */
+    * {@inheritDoc}
+    */
     public function process()
     {
         $preventLogin = $this->beforeLogin();
@@ -443,10 +443,10 @@ class Login extends Processor
     }
 
     /**
-     * Return the response
-     * @param $response array
-     * @return array
-     */
+    * Return the response
+    * @param $response array
+    * @return array
+    */
     public function cleanup($response)
     {
         return $this->success('', $response);

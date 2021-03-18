@@ -29,8 +29,8 @@ class GetList extends GetListProcessor
     public $languageTopics = ['workspace'];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
@@ -45,8 +45,8 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getData()
     {
         $data = [];
@@ -65,9 +65,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject|modTransportPackage $object
-     * @return array
-     */
+    * @param xPDOObject|modTransportPackage $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         if ($object->get('installed') === '0000-00-00 00:00:00') {
@@ -88,10 +88,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param modTransportPackage $package
-     * @param array $packageArray
-     * @return array
-     */
+    * @param modTransportPackage $package
+    * @param array $packageArray
+    * @return array
+    */
     public function parseVersion(modTransportPackage $package, array $packageArray)
     {
         $signatureArray = explode('-', $package->get('signature'));
@@ -104,10 +104,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param modTransportPackage $package
-     * @param array $packageArray
-     * @return array
-     */
+    * @param modTransportPackage $package
+    * @param array $packageArray
+    * @return array
+    */
     public function formatDates(modTransportPackage $package, array $packageArray)
     {
         $updated = $package->get('updated');
@@ -127,10 +127,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param modTransportPackage $package
-     * @param array $packageArray
-     * @return array
-     */
+    * @param modTransportPackage $package
+    * @param array $packageArray
+    * @return array
+    */
     public function getMetaData(modTransportPackage $package, array $packageArray)
     {
         $metadata = $package->get('metadata');
@@ -157,10 +157,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param modTransportPackage $package
-     * @param array $packageArray
-     * @return array
-     */
+    * @param modTransportPackage $package
+    * @param array $packageArray
+    * @return array
+    */
     public function prepareMenu(modTransportPackage $package, array $packageArray)
     {
         $notInstalled = $package->get('installed') === null || $package->get('installed') === '0000-00-00 00:00:00';

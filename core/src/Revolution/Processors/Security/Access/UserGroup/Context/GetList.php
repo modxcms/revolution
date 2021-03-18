@@ -41,8 +41,8 @@ class GetList extends GetListProcessor
     public $userGroup;
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -59,9 +59,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $userGroup = $this->getProperty('usergroup');
@@ -81,9 +81,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->leftJoin(modUserGroupRole::class, 'Role', ['Role.authority = modAccessContext.authority']);
@@ -99,10 +99,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject|modAccessContext $object
-     * @return array
-     * @throws \xPDO\xPDOException
-     */
+    * @param xPDOObject|modAccessContext $object
+    * @return array
+    * @throws \xPDO\xPDOException
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

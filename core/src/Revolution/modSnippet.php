@@ -22,11 +22,11 @@ use xPDO\xPDO;
 class modSnippet extends modScript
 {
     /**
-     * Overrides modElement::save to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides modElement::save to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -57,11 +57,11 @@ class modSnippet extends modScript
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides modElement::remove to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {

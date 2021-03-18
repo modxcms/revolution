@@ -50,10 +50,10 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Validate the passed properties for the new context
-     *
-     * @return boolean
-     */
+    * Validate the passed properties for the new context
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         $newKey = $this->getProperty($this->newNameField);
@@ -66,10 +66,10 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Get the new name for the duplicate
-     *
-     * @return string
-     */
+    * Get the new name for the duplicate
+    *
+    * @return string
+    */
     public function getNewName()
     {
         $name = $this->getProperty($this->newNameField);
@@ -80,10 +80,10 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Duplicate the settings of the old Context to the new one
-     *
-     * @return array
-     */
+    * Duplicate the settings of the old Context to the new one
+    *
+    * @return array
+    */
     public function duplicateSettings()
     {
         $duplicatedSettings = [];
@@ -104,10 +104,10 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Duplicate the ACLs of the old Context into the new one
-     *
-     * @return array
-     */
+    * Duplicate the ACLs of the old Context into the new one
+    *
+    * @return array
+    */
     public function duplicateAccessControlLists()
     {
         $duplicatedACLs = [];
@@ -128,10 +128,10 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Flush permissions for the mgr user to properly handle the new context
-     *
-     * @return void
-     */
+    * Flush permissions for the mgr user to properly handle the new context
+    *
+    * @return void
+    */
     public function reloadPermissions()
     {
         if ($this->modx->getUser()) {
@@ -140,10 +140,10 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Duplicate the MediaSourceElements of the old Context into the new one
-     *
-     * @return array
-     */
+    * Duplicate the MediaSourceElements of the old Context into the new one
+    *
+    * @return array
+    */
     public function duplicateMediaSourceElements()
     {
         $duplicatedElements = [];
@@ -167,10 +167,10 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Duplicate the Resources of the old Context into the new one
-     *
-     * @return void
-     */
+    * Duplicate the Resources of the old Context into the new one
+    *
+    * @return void
+    */
     public function duplicateResources()
     {
         $criteria = [

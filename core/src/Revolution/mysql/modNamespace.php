@@ -11,19 +11,19 @@ class modNamespace extends \MODX\Revolution\modNamespace
         'version' => '3.0',
         'table' => 'namespaces',
         'extends' => 'MODX\\Revolution\\modAccessibleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'path' => '',
             'assets_path' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '40',
@@ -32,30 +32,30 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 'default' => '',
                 'index' => 'pk',
             ),
-            'path' => 
+            'path' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'default' => '',
             ),
-            'assets_path' => 
+            'assets_path' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'default' => '',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -64,9 +64,9 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'LexiconEntries' => 
+            'LexiconEntries' =>
             array (
                 'class' => 'MODX\\Revolution\\modLexiconEntry',
                 'local' => 'name',
@@ -74,7 +74,7 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'SystemSettings' => 
+            'SystemSettings' =>
             array (
                 'class' => 'MODX\\Revolution\\modSystemSetting',
                 'local' => 'name',
@@ -82,7 +82,7 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'ContextSettings' => 
+            'ContextSettings' =>
             array (
                 'class' => 'MODX\\Revolution\\modContextSetting',
                 'local' => 'name',
@@ -90,7 +90,7 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'UserSettings' => 
+            'UserSettings' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserSetting',
                 'local' => 'name',
@@ -98,7 +98,7 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'ExtensionPackages' => 
+            'ExtensionPackages' =>
             array (
                 'class' => 'MODX\\Revolution\\modExtensionPackage',
                 'local' => 'name',
@@ -106,7 +106,7 @@ class modNamespace extends \MODX\Revolution\modNamespace
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Acls' => 
+            'Acls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessNamespace',
                 'local' => 'name',

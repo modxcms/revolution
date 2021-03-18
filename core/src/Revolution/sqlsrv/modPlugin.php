@@ -11,7 +11,7 @@ class modPlugin extends \MODX\Revolution\modPlugin
         'version' => '3.0',
         'table' => 'site_plugins',
         'extends' => 'MODX\\Revolution\\modScript',
-        'fields' => 
+        'fields' =>
         array (
             'cache_type' => 0,
             'plugincode' => '',
@@ -22,9 +22,9 @@ class modPlugin extends \MODX\Revolution\modPlugin
             'static' => 0,
             'static_file' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'cache_type' => 
+            'cache_type' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -32,7 +32,7 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'null' => false,
                 'default' => 0,
             ),
-            'plugincode' => 
+            'plugincode' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -40,7 +40,7 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'null' => false,
                 'default' => '',
             ),
-            'locked' => 
+            'locked' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -48,14 +48,14 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'default' => 0,
                 'index' => 'index',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'array',
                 'null' => true,
             ),
-            'disabled' => 
+            'disabled' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -63,7 +63,7 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'default' => 0,
                 'index' => 'index',
             ),
-            'moduleguid' => 
+            'moduleguid' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '32',
@@ -72,7 +72,7 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'default' => '',
                 'index' => 'fk',
             ),
-            'static' => 
+            'static' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -80,7 +80,7 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'default' => 0,
                 'index' => 'index',
             ),
-            'static_file' => 
+            'static_file' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -89,21 +89,21 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'default' => '',
             ),
         ),
-        'fieldAliases' => 
+        'fieldAliases' =>
         array (
             'content' => 'plugincode',
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'locked' => 
+            'locked' =>
             array (
                 'alias' => 'locked',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'locked' => 
+                    'locked' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -111,15 +111,15 @@ class modPlugin extends \MODX\Revolution\modPlugin
                     ),
                 ),
             ),
-            'disabled' => 
+            'disabled' =>
             array (
                 'alias' => 'disabled',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'disabled' => 
+                    'disabled' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -128,24 +128,24 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'PropertySets' => 
+            'PropertySets' =>
             array (
                 'class' => 'MODX\\Revolution\\modElementPropertySet',
                 'local' => 'id',
                 'foreign' => 'element',
                 'owner' => 'local',
                 'cardinality' => 'many',
-                'criteria' => 
+                'criteria' =>
                 array (
-                    'foreign' => 
+                    'foreign' =>
                     array (
                         'element_class' => 'MODX\\Revolution\\modPlugin',
                     ),
                 ),
             ),
-            'PluginEvents' => 
+            'PluginEvents' =>
             array (
                 'class' => 'MODX\\Revolution\\modPluginEvent',
                 'local' => 'id',
@@ -154,13 +154,13 @@ class modPlugin extends \MODX\Revolution\modPlugin
                 'owner' => 'local',
             ),
         ),
-        'validation' => 
+        'validation' =>
         array (
-            'rules' => 
+            'rules' =>
             array (
-                'name' => 
+                'name' =>
                 array (
-                    'invalid' => 
+                    'invalid' =>
                     array (
                         'type' => 'preg_match',
                         'rule' => '/^(?!\\s)[a-zA-Z0-9_-\\x7f-\\xff\\s]+(?!\\s)$/',

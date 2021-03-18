@@ -27,8 +27,8 @@ class Update extends UpdateProcessor
     public $objectType = 'profile';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $active = $this->getProperty('active');
@@ -39,9 +39,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function afterSave()
     {
         $this->setUserGroups();
@@ -49,8 +49,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @throws \xPDO\xPDOException
-     */
+    * @throws \xPDO\xPDOException
+    */
     public function setUserGroups()
     {
         /* get usergroups */

@@ -35,10 +35,10 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
+    * {@inheritDoc}
+    *
+    * @return mixed
+    */
     public function initialize()
     {
         $data = $this->getProperty('data');
@@ -63,10 +63,10 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
+    * {@inheritDoc}
+    *
+    * @return mixed
+    */
     public function process()
     {
         if (!$this->validate()) {
@@ -87,10 +87,10 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * Validate the passed properties
-     *
-     * @return boolean
-     */
+    * Validate the passed properties
+    *
+    * @return boolean
+    */
     public function validate()
     {
         $key = $this->getProperty('key');
@@ -107,22 +107,22 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * Check to see if the context already exists
-     *
-     * @param string $key
-     *
-     * @return boolean
-     */
+    * Check to see if the context already exists
+    *
+    * @param string $key
+    *
+    * @return boolean
+    */
     public function alreadyExists($key)
     {
         return $this->modx->getCount(modContext::class, $key) > 0;
     }
 
     /**
-     * Run the OnContextUpdate event
-     *
-     * @return void
-     */
+    * Run the OnContextUpdate event
+    *
+    * @return void
+    */
     public function runOnUpdateEvent()
     {
         $this->modx->invokeEvent('OnContextUpdate', [
@@ -132,10 +132,10 @@ class UpdateFromGrid extends Processor
     }
 
     /**
-     * Log the manager action of updating this Context
-     *
-     * @return void
-     */
+    * Log the manager action of updating this Context
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('context_update', modContext::class, $this->context->get('id'));

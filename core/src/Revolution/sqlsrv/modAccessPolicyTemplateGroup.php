@@ -11,14 +11,14 @@ class modAccessPolicyTemplateGroup extends \MODX\Revolution\modAccessPolicyTempl
         'version' => '3.0',
         'table' => 'access_policy_template_groups',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'description' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -27,16 +27,16 @@ class modAccessPolicyTemplateGroup extends \MODX\Revolution\modAccessPolicyTempl
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Templates' => 
+            'Templates' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicyTemplate',
                 'local' => 'id',

@@ -11,14 +11,14 @@ class modMediaSourceContext extends \MODX\Revolution\Sources\modMediaSourceConte
         'version' => '3.0',
         'table' => 'media_sources_contexts',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'source' => 0,
             'context_key' => 'web',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'source' => 
+            'source' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -26,7 +26,7 @@ class modMediaSourceContext extends \MODX\Revolution\Sources\modMediaSourceConte
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -36,23 +36,23 @@ class modMediaSourceContext extends \MODX\Revolution\Sources\modMediaSourceConte
                 'index' => 'pk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'source' => 
+                    'source' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -61,9 +61,9 @@ class modMediaSourceContext extends \MODX\Revolution\Sources\modMediaSourceConte
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Source' => 
+            'Source' =>
             array (
                 'class' => 'MODX\\Revolution\\Sources\\modMediaSource',
                 'local' => 'source',
@@ -71,7 +71,7 @@ class modMediaSourceContext extends \MODX\Revolution\Sources\modMediaSourceConte
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'context_key',

@@ -19,8 +19,8 @@ use MODX\Revolution\Processors\Processor;
 class DownloadOutput extends Processor
 {
     /**
-     * @return array|string
-     */
+    * @return array|string
+    */
     public function process()
     {
         if ($this->getProperty('download')) {
@@ -32,9 +32,9 @@ class DownloadOutput extends Processor
     }
 
     /**
-     * Download the output to the browser
-     * @return string
-     */
+    * Download the output to the browser
+    * @return string
+    */
     public function download()
     {
         $dl = $this->getProperty('download');
@@ -57,9 +57,9 @@ class DownloadOutput extends Processor
     }
 
     /**
-     * Cache the data stored
-     * @return array|string
-     */
+    * Cache the data stored
+    * @return array|string
+    */
     public function cache()
     {
         $data = $this->getProperty('data');

@@ -11,16 +11,16 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
         'version' => '3.0',
         'table' => 'access_permissions',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'template' => 0,
             'name' => '',
             'description' => '',
             'value' => 1,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'template' => 
+            'template' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -28,7 +28,7 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
                 'default' => 0,
                 'index' => 'index',
             ),
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -37,7 +37,7 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -45,7 +45,7 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
                 'null' => false,
                 'default' => '',
             ),
-            'value' => 
+            'value' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -53,17 +53,17 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
                 'default' => 1,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'template' => 
+            'template' =>
             array (
                 'alias' => 'template',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'template' => 
+                    'template' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -71,15 +71,15 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
                     ),
                 ),
             ),
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -88,9 +88,9 @@ class modAccessPermission extends \MODX\Revolution\modAccessPermission
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Template' => 
+            'Template' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicyTemplate',
                 'local' => 'template',

@@ -25,24 +25,24 @@ class ScanLocal extends Processor
     public $workspace;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('packages');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $workspace = $this->getProperty('workspace', 1);
@@ -54,8 +54,8 @@ class ScanLocal extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $packages = $this->getPackages();
@@ -76,9 +76,9 @@ class ScanLocal extends Processor
     }
 
     /**
-     * Scan the packages/ directory
-     * @return array
-     */
+    * Scan the packages/ directory
+    * @return array
+    */
     public function getPackages()
     {
         $packages = [];
@@ -113,10 +113,10 @@ class ScanLocal extends Processor
     }
 
     /**
-     * Attempt to create and add the package to the DB
-     * @param string $signature
-     * @return boolean
-     */
+    * Attempt to create and add the package to the DB
+    * @param string $signature
+    * @return boolean
+    */
     public function createPackage($signature)
     {
         /** @var modTransportPackage $package */

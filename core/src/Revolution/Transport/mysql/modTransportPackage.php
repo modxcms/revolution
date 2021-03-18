@@ -371,15 +371,15 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
         $c->where([
             "(SELECT
                 `signature`
-              FROM {$modx->getTableName(\MODX\Revolution\Transport\modTransportPackage::class)} AS `latestPackage`
-              WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
-              ORDER BY
+            FROM {$modx->getTableName(\MODX\Revolution\Transport\modTransportPackage::class)} AS `latestPackage`
+            WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
+            ORDER BY
                 `latestPackage`.`version_major` DESC,
                 `latestPackage`.`version_minor` DESC,
                 `latestPackage`.`version_patch` DESC,
                 IF(`release` = '' OR `release` = 'ga' OR `release` = 'pl','z',IF(`release` = 'dev','a',`release`)) DESC,
                 `latestPackage`.`release_index` DESC
-              LIMIT 1) = `modTransportPackage`.`signature`",
+            LIMIT 1) = `modTransportPackage`.`signature`",
         ]);
         if (!empty($search)) {
             $c->where([

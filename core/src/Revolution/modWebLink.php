@@ -14,10 +14,10 @@ use xPDO\xPDO;
 class modWebLink extends modResource implements modResourceInterface
 {
     /**
-     * Overrides modResource::__construct to set the class key for this Resource type
-     *
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * Overrides modResource::__construct to set the class key for this Resource type
+    *
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(& $xpdo)
     {
         parent:: __construct($xpdo);
@@ -27,8 +27,8 @@ class modWebLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Process the modWebLink and redirect to the specified resource.
-     */
+    * Process the modWebLink and redirect to the specified resource.
+    */
     public function process()
     {
         $this->_content = $this->get('content');
@@ -53,14 +53,14 @@ class modWebLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Get the full controller path for managing WebLinks in MODX
-     *
-     * @static
-     *
-     * @param xPDO $modx A reference to the modX instance
-     *
-     * @return string The absolute path to the controller for managing WebLinks
-     */
+    * Get the full controller path for managing WebLinks in MODX
+    *
+    * @static
+    *
+    * @param xPDO $modx A reference to the modX instance
+    *
+    * @return string The absolute path to the controller for managing WebLinks
+    */
     public static function getControllerPath(xPDO &$modx)
     {
         $path = modResource::getControllerPath($modx);
@@ -69,11 +69,11 @@ class modWebLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
-     * set to true.
-     *
-     * @return array
-     */
+    * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+    * set to true.
+    *
+    * @return array
+    */
     public function getContextMenuText()
     {
         return [
@@ -83,10 +83,10 @@ class modWebLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Use this in your extended Resource class to return a translatable name for the Resource Type.
-     *
-     * @return string
-     */
+    * Use this in your extended Resource class to return a translatable name for the Resource Type.
+    *
+    * @return string
+    */
     public function getResourceTypeName()
     {
         return $this->xpdo->lexicon('weblink');

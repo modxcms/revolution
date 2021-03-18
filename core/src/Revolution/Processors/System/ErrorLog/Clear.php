@@ -21,16 +21,16 @@ use xPDO\Cache\xPDOCacheManager;
 class Clear extends Processor
 {
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('error_log_erase');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $logTarget = $this->modx->getLogTarget();

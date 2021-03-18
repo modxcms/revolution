@@ -41,9 +41,9 @@ class GetList extends GetListProcessor
     public $canCreate = false;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -59,11 +59,11 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * {@inheritDoc}
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $search = $this->getProperty('search');
@@ -84,12 +84,12 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Filter the query by the valueField of MODx.combo.Context to get the initially value displayed right
-     *
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * Filter the query by the valueField of MODx.combo.Context to get the initially value displayed right
+    *
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $key = $this->getProperty('key', '');
@@ -103,11 +103,11 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @param xPDOObject $object
-     *
-     * @return array
-     */
+    * {@inheritDoc}
+    * @param xPDOObject $object
+    *
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $contextArray = $object->toArray();

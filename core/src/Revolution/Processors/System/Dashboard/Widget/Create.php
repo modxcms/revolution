@@ -25,8 +25,8 @@ class Create extends CreateProcessor
     public $objectType = 'widget';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name');

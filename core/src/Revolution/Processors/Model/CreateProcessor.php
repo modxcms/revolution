@@ -30,9 +30,9 @@ abstract class CreateProcessor extends ModelProcessor
     public $afterSaveEvent = '';
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $this->object = $this->modx->newObject($this->classKey);
@@ -41,11 +41,11 @@ abstract class CreateProcessor extends ModelProcessor
     }
 
     /**
-     * Process the Object create processor
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
+    * Process the Object create processor
+    * {@inheritDoc}
+    *
+    * @return mixed
+    */
     public function process()
     {
         /* Run the beforeSet method before setting the fields, and allow stoppage */
@@ -94,51 +94,51 @@ abstract class CreateProcessor extends ModelProcessor
     }
 
     /**
-     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
-     * classes
-     *
-     * @return boolean
-     */
+    * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+    * classes
+    *
+    * @return boolean
+    */
     public function saveObject()
     {
         return $this->object->save();
     }
 
     /**
-     * Return the success message
-     *
-     * @return array
-     */
+    * Return the success message
+    *
+    * @return array
+    */
     public function cleanup()
     {
         return $this->success('', $this->object);
     }
 
     /**
-     * Override in your derivative class to do functionality before the fields are set on the object
-     *
-     * @return boolean
-     */
+    * Override in your derivative class to do functionality before the fields are set on the object
+    *
+    * @return boolean
+    */
     public function beforeSet()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Override in your derivative class to do functionality before save() is run
-     *
-     * @return boolean
-     */
+    * Override in your derivative class to do functionality before save() is run
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Override in your derivative class to do functionality after save() is run
-     *
-     * @return boolean
-     */
+    * Override in your derivative class to do functionality after save() is run
+    *
+    * @return boolean
+    */
     public function afterSave()
     {
         return true;
@@ -146,10 +146,10 @@ abstract class CreateProcessor extends ModelProcessor
 
 
     /**
-     * Fire before save event. Return true to prevent saving.
-     *
-     * @return boolean
-     */
+    * Fire before save event. Return true to prevent saving.
+    *
+    * @return boolean
+    */
     public function fireBeforeSaveEvent()
     {
         $preventSave = false;
@@ -178,10 +178,10 @@ abstract class CreateProcessor extends ModelProcessor
     }
 
     /**
-     * Fire the after save event
-     *
-     * @return void
-     */
+    * Fire the after save event
+    *
+    * @return void
+    */
     public function fireAfterSaveEvent()
     {
         if (!empty($this->afterSaveEvent)) {
@@ -195,20 +195,20 @@ abstract class CreateProcessor extends ModelProcessor
     }
 
     /**
-     * @param array $criteria
-     *
-     * @return int
-     */
+    * @param array $criteria
+    *
+    * @return int
+    */
     public function doesAlreadyExist(array $criteria)
     {
         return $this->modx->getCount($this->classKey, $criteria);
     }
 
     /**
-     * Log the removal manager action
-     *
-     * @return void
-     */
+    * Log the removal manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction($this->objectType . '_create', $this->classKey,

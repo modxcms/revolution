@@ -19,16 +19,16 @@ use MODX\Revolution\Processors\Processor;
 class PhpInfo extends Processor
 {
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view_sysinfo');
     }
 
     /**
-     * @return mixed|void
-     */
+    * @return mixed|void
+    */
     public function process()
     {
         echo '<div style="font-size: 1.3em;">';

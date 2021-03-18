@@ -41,8 +41,8 @@ class Update extends UpdateProcessor
     public $refreshURIs = false;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->verifyNamespace();
@@ -53,8 +53,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $this->updateTranslations($this->getProperties());
@@ -65,10 +65,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Verify the Namespace passed is a valid Namespace
-     *
-     * @return string|null
-     */
+    * Verify the Namespace passed is a valid Namespace
+    *
+    * @return string|null
+    */
     public function verifyNamespace()
     {
         $namespaceKey = $this->getProperty('namespace');
@@ -85,10 +85,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * If this is a Boolean setting, ensure the value of the setting is 1/0
-     *
-     * @return mixed
-     */
+    * If this is a Boolean setting, ensure the value of the setting is 1/0
+    *
+    * @return mixed
+    */
     public function checkForBooleanValue()
     {
         $xtype = $this->getProperty('xtype');
@@ -102,10 +102,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Check to see if the URIs need to be refreshed
-     *
-     * @return boolean
-     */
+    * Check to see if the URIs need to be refreshed
+    *
+    * @return boolean
+    */
     public function checkForRefreshURIs()
     {
         $refresh = false;
@@ -121,12 +121,12 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Update lexicon name/description
-     *
-     * @param array $fields
-     *
-     * @return void
-     */
+    * Update lexicon name/description
+    *
+    * @param array $fields
+    *
+    * @return void
+    */
     public function updateTranslations(array $fields)
     {
         if (isset($fields['name'])) {
@@ -143,10 +143,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * If friendly_urls is set on or use_alias_path changes, refreshURIs
-     *
-     * @return boolean
-     */
+    * If friendly_urls is set on or use_alias_path changes, refreshURIs
+    *
+    * @return boolean
+    */
     public function refreshURIs()
     {
         if ($this->refreshURIs) {
@@ -158,10 +158,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Clear the settings cache and reload the config
-     *
-     * @return void
-     */
+    * Clear the settings cache and reload the config
+    *
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->reloadConfig();

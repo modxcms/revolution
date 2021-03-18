@@ -11,13 +11,13 @@ class modAccessResourceGroup extends \MODX\Revolution\modAccessResourceGroup
         'version' => '3.0',
         'table' => 'access_resource_groups',
         'extends' => 'MODX\\Revolution\\modAccess',
-        'fields' => 
+        'fields' =>
         array (
             'context_key' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -27,17 +27,17 @@ class modAccessResourceGroup extends \MODX\Revolution\modAccessResourceGroup
                 'index' => 'fk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'context_key' => 
+            'context_key' =>
             array (
                 'alias' => 'context_key',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'context_key' => 
+                    'context_key' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -46,9 +46,9 @@ class modAccessResourceGroup extends \MODX\Revolution\modAccessResourceGroup
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
                 'class' => 'MODX\\Revolution\\modResourceGroup',
                 'local' => 'target',
@@ -56,7 +56,7 @@ class modAccessResourceGroup extends \MODX\Revolution\modAccessResourceGroup
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'Context' => 
+            'Context' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'context_key',

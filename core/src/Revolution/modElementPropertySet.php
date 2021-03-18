@@ -16,10 +16,10 @@ use xPDO\Om\xPDOObject;
 class modElementPropertySet extends xPDOObject
 {
     /**
-     * Returns related modElement instances based on the element_class column.
-     *
-     * {@inheritdoc}
-     */
+    * Returns related modElement instances based on the element_class column.
+    *
+    * {@inheritdoc}
+    */
     public function & getOne($alias, $criteria = null, $cacheFlag = true)
     {
         if ($alias == 'Element') {

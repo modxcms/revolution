@@ -66,10 +66,10 @@ class GetList extends Processor
     }
 
     /**
-     * Get the data from a query
-     *
-     * @return array
-     */
+    * Get the data from a query
+    *
+    * @return array
+    */
     public function getData()
     {
         $data = [];
@@ -89,9 +89,9 @@ class GetList extends Processor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $timeFormat = $this->getProperty('timeFormat', '%a %b %d, %Y');

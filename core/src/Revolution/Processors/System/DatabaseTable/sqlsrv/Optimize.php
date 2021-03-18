@@ -16,9 +16,9 @@ namespace MODX\Revolution\Processors\System\DatabaseTable\sqlsrv;
 class Optimize extends \MODX\Revolution\Processors\System\DatabaseTable\OptimizeAbstract
 {
     /**
-     * @param string $table
-     * @return bool
-     */
+    * @param string $table
+    * @return bool
+    */
     public function optimize($table)
     {
         $sql = 'ALTER INDEX ALL ON ' . $this->modx->escape($table) . ' REBUILD';

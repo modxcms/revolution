@@ -26,8 +26,8 @@ class GetList extends \MODX\Revolution\Processors\System\Settings\GetList
     public $classKey = modUserGroupSetting::class;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['group' => 0]);
@@ -36,9 +36,9 @@ class GetList extends \MODX\Revolution\Processors\System\Settings\GetList
     }
 
     /**
-     * Filter by user group
-     * @return array
-     */
+    * Filter by user group
+    * @return array
+    */
     public function prepareCriteria()
     {
         $criteria = [];

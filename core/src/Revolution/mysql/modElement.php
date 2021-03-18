@@ -11,18 +11,18 @@ class modElement extends \MODX\Revolution\modElement
         'version' => '3.0',
         'table' => 'site_element',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'source' => 0,
             'property_preprocess' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'source' => 
+            'source' =>
             array (
                 'dbtype' => 'int',
                 'attributes' => 'unsigned',
@@ -31,7 +31,7 @@ class modElement extends \MODX\Revolution\modElement
                 'default' => 0,
                 'index' => 'fk',
             ),
-            'property_preprocess' => 
+            'property_preprocess' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -41,9 +41,9 @@ class modElement extends \MODX\Revolution\modElement
                 'default' => 0,
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Acls' => 
+            'Acls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessElement',
                 'local' => 'id',
@@ -52,9 +52,9 @@ class modElement extends \MODX\Revolution\modElement
                 'cardinality' => 'many',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'CategoryAcls' => 
+            'CategoryAcls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessCategory',
                 'local' => 'category',
@@ -62,7 +62,7 @@ class modElement extends \MODX\Revolution\modElement
                 'owner' => 'local',
                 'cardinality' => 'many',
             ),
-            'Source' => 
+            'Source' =>
             array (
                 'class' => 'MODX\\Revolution\\Sources\\modMediaSource',
                 'local' => 'source',

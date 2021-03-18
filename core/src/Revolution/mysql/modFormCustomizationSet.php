@@ -11,11 +11,11 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
         'version' => '3.0',
         'table' => 'fc_sets',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'profile' => 0,
             'action' => '',
@@ -26,9 +26,9 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
             'constraint_field' => '',
             'constraint_class' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'profile' => 
+            'profile' =>
             array (
                 'dbtype' => 'integer',
                 'precision' => '11',
@@ -37,7 +37,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'default' => 0,
                 'index' => 'index',
             ),
-            'action' => 
+            'action' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -46,14 +46,14 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
             ),
-            'active' => 
+            'active' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -62,7 +62,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'default' => 0,
                 'index' => 'index',
             ),
-            'template' => 
+            'template' =>
             array (
                 'dbtype' => 'integer',
                 'precision' => '11',
@@ -71,7 +71,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'default' => 0,
                 'index' => 'index',
             ),
-            'constraint' => 
+            'constraint' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -79,7 +79,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'null' => false,
                 'default' => '',
             ),
-            'constraint_field' => 
+            'constraint_field' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -87,7 +87,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'null' => false,
                 'default' => '',
             ),
-            'constraint_class' => 
+            'constraint_class' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -96,17 +96,17 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'default' => '',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'profile' => 
+            'profile' =>
             array (
                 'alias' => 'profile',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'profile' => 
+                    'profile' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -114,15 +114,15 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                     ),
                 ),
             ),
-            'action' => 
+            'action' =>
             array (
                 'alias' => 'action',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'action' => 
+                    'action' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -130,15 +130,15 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                     ),
                 ),
             ),
-            'active' => 
+            'active' =>
             array (
                 'alias' => 'active',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'active' => 
+                    'active' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -146,15 +146,15 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                     ),
                 ),
             ),
-            'template' => 
+            'template' =>
             array (
                 'alias' => 'template',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'template' => 
+                    'template' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -163,9 +163,9 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Rules' => 
+            'Rules' =>
             array (
                 'class' => 'MODX\\Revolution\\modActionDom',
                 'local' => 'id',
@@ -174,9 +174,9 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Template' => 
+            'Template' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',
                 'local' => 'template',
@@ -184,7 +184,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Profile' => 
+            'Profile' =>
             array (
                 'class' => 'MODX\\Revolution\\modFormCustomizationProfile',
                 'local' => 'profile',

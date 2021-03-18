@@ -39,16 +39,16 @@ use xPDO\xPDO;
 class modCacheManager extends xPDOCacheManager
 {
     /**
-     * @var modX A reference to the modX instance
-     */
+    * @var modX A reference to the modX instance
+    */
     public $modx = null;
 
     /**
-     * Constructor for modCacheManager that overrides xPDOCacheManager constructor to assign modX reference
-     *
-     * @param xPDO  $xpdo    A reference to the xPDO/modX instance
-     * @param array $options An array of configuration options
-     */
+    * Constructor for modCacheManager that overrides xPDOCacheManager constructor to assign modX reference
+    *
+    * @param xPDO  $xpdo    A reference to the xPDO/modX instance
+    * @param array $options An array of configuration options
+    */
     function __construct(& $xpdo, array $options = [])
     {
         parent:: __construct($xpdo, $options);
@@ -56,19 +56,19 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Generates a cache entry for a MODX site Context.
-     *
-     * Context cache entries can override site configuration settings and are responsible for
-     * loading the various listings and maps in the modX class, including resourceMap, aliasMap,
-     * and eventMap.  It can also be used to setup or transform any other modX properties.
-     *
-     * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
-     *
-     * @param string $key     The modContext key to be cached.
-     * @param array  $options Options for context settings generation.
-     *
-     * @return array An array containing all the context variable values.
-     */
+    * Generates a cache entry for a MODX site Context.
+    *
+    * Context cache entries can override site configuration settings and are responsible for
+    * loading the various listings and maps in the modX class, including resourceMap, aliasMap,
+    * and eventMap.  It can also be used to setup or transform any other modX properties.
+    *
+    * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
+    *
+    * @param string $key     The modContext key to be cached.
+    * @param array  $options Options for context settings generation.
+    *
+    * @return array An array containing all the context variable values.
+    */
     public function generateContext($key, array $options = [])
     {
         $results = [];
@@ -259,12 +259,12 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Generates the system settings cache for a MODX site.
-     *
-     * @param array $options Options for system settings generation.
-     *
-     * @return array The generated system settings array.
-     */
+    * Generates the system settings cache for a MODX site.
+    *
+    * @param array $options Options for system settings generation.
+    *
+    * @return array The generated system settings array.
+    */
     public function generateConfig(array $options = [])
     {
         $config = [];
@@ -306,15 +306,15 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Generates a cache entry for a Resource or Resource-derived object.
-     *
-     * Resource classes can define their own cacheKey.
-     *
-     * @param modResource $obj     The Resource instance to be cached.
-     * @param array       $options Options for resource generation.
-     *
-     * @return array The generated resource representation.
-     */
+    * Generates a cache entry for a Resource or Resource-derived object.
+    *
+    * Resource classes can define their own cacheKey.
+    *
+    * @param modResource $obj     The Resource instance to be cached.
+    * @param array       $options Options for resource generation.
+    *
+    * @return array The generated resource representation.
+    */
     public function generateResource(modResource & $obj, array $options = [])
     {
         $results = [];
@@ -383,16 +383,16 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Generates a lexicon topic cache file from a collection of entries
-     *
-     * @access public
-     *
-     * @param string $cacheKey The key to use when caching the lexicon topic.
-     * @param array  $entries  An array of key => value pairs of lexicon entries.
-     * @param array  $options  An optional array of caching options.
-     *
-     * @return array An array representing the lexicon topic cache.
-     */
+    * Generates a lexicon topic cache file from a collection of entries
+    *
+    * @access public
+    *
+    * @param string $cacheKey The key to use when caching the lexicon topic.
+    * @param array  $entries  An array of key => value pairs of lexicon entries.
+    * @param array  $options  An optional array of caching options.
+    *
+    * @return array An array representing the lexicon topic cache.
+    */
     public function generateLexiconTopic($cacheKey, $entries = [], $options = [])
     {
         if (!empty($entries) && $this->getOption('cache_lexicon_topics', $options, true)) {
@@ -516,17 +516,17 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Generates a file representing an executable modScript function.
-     *
-     * @param modScript $objElement A {@link modScript} instance to generate the
-     * script file for.
-     * @param string    $objContent Optional script content to override the
-     *                              persistent instance.
-     * @param array     $options    An array of additional options for the operation.
-     *
-     * @return boolean|string The actual generated source content representing the modScript or
-     * false if the source content could not be generated.
-     */
+    * Generates a file representing an executable modScript function.
+    *
+    * @param modScript $objElement A {@link modScript} instance to generate the
+    * script file for.
+    * @param string    $objContent Optional script content to override the
+    *                              persistent instance.
+    * @param array     $options    An array of additional options for the operation.
+    *
+    * @return boolean|string The actual generated source content representing the modScript or
+    * false if the source content could not be generated.
+    */
     public function generateScript(modScript &$objElement, $objContent = null, array $options = [])
     {
         $results = false;
@@ -558,13 +558,13 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Implements MODX cache refresh process, converting cache partitions to cache providers.
-     *
-     * @param array $providers
-     * @param array $results
-     *
-     * @return boolean
-     */
+    * Implements MODX cache refresh process, converting cache partitions to cache providers.
+    *
+    * @param array $providers
+    * @param array $results
+    *
+    * @return boolean
+    */
     public function refresh(array $providers = [], array &$results = [])
     {
         if (empty($providers)) {
@@ -671,14 +671,14 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Check for and process Resources with pub_date or unpub_date set to now or in past.
-     *
-     * @todo Implement Context-isolated auto-publishing.
-     *
-     * @param array $options An array of options for the process.
-     *
-     * @return array An array containing published and unpublished Resource counts.
-     */
+    * Check for and process Resources with pub_date or unpub_date set to now or in past.
+    *
+    * @todo Implement Context-isolated auto-publishing.
+    *
+    * @param array $options An array of options for the process.
+    *
+    * @return array An array containing published and unpublished Resource counts.
+    */
     public function autoPublish(array $options = [])
     {
         $publishingResults = [];
@@ -776,19 +776,19 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Clear part or all of the MODX cache.
-     *
-     * @deprecated Use refresh()
-     *
-     * @param array $paths   An optional array of paths, relative to the cache
-     *                       path, to be deleted.
-     * @param array $options An optional associative array of cache clearing options: <ul>
-     *                       <li><strong>objects</strong>: an array of objects or paths to flush from the db object cache</li>
-     *                       <li><strong>extensions</strong>: an array of file extensions to match when deleting the cache directories</li>
-     *                       </ul>
-     *
-     * @return array
-     */
+    * Clear part or all of the MODX cache.
+    *
+    * @deprecated Use refresh()
+    *
+    * @param array $paths   An optional array of paths, relative to the cache
+    *                       path, to be deleted.
+    * @param array $options An optional associative array of cache clearing options: <ul>
+    *                       <li><strong>objects</strong>: an array of objects or paths to flush from the db object cache</li>
+    *                       <li><strong>extensions</strong>: an array of file extensions to match when deleting the cache directories</li>
+    *                       </ul>
+    *
+    * @return array
+    */
     public function clearCache(array $paths = [], array $options = [])
     {
         $this->modx->deprecated('2.1.0', 'Use modCacheManager::refresh() instead.');
@@ -852,10 +852,10 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Flush permissions for users
-     *
-     * @return bool True if successful
-     */
+    * Flush permissions for users
+    *
+    * @return bool True if successful
+    */
     public function flushPermissions()
     {
         $ctxQuery = $this->modx->newQuery(modContext::class);

@@ -23,24 +23,24 @@ class Update extends Processor
     public $resourceGroup;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('resourcegroup_save');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user', 'access'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $id = $this->getProperty('id', false);
@@ -56,8 +56,8 @@ class Update extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         if (!$this->validate()) {
@@ -75,9 +75,9 @@ class Update extends Processor
     }
 
     /**
-     * Validate the form
-     * @return boolean
-     */
+    * Validate the form
+    * @return boolean
+    */
     public function validate()
     {
         $name = $this->getProperty('name');
@@ -93,10 +93,10 @@ class Update extends Processor
     }
 
     /**
-     * Check if a Resource Group already exists with that name
-     * @param string $name
-     * @return boolean
-     */
+    * Check if a Resource Group already exists with that name
+    * @param string $name
+    * @return boolean
+    */
     public function alreadyExists($name)
     {
         return $this->modx->getCount(modResourceGroup::class, [
@@ -106,9 +106,9 @@ class Update extends Processor
     }
 
     /**
-     * Log the manager action
-     * @return void
-     */
+    * Log the manager action
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('update_resource_group', modResourceGroup::class, $this->resourceGroup->get('id'));

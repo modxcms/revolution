@@ -48,18 +48,18 @@ class Delete extends RemoveProcessor
     }
 
     /**
-     * See if the user is the active user
-     * @return boolean
-     */
+    * See if the user is the active user
+    * @return boolean
+    */
     public function isSelf()
     {
         return $this->object->get('id') === $this->modx->user->get('id');
     }
 
     /**
-     * See if the user is the last member in the administrators group
-     * @return boolean
-     */
+    * See if the user is the last member in the administrators group
+    * @return boolean
+    */
     public function isLastUserInAdministrators()
     {
         $last = false;

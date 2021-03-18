@@ -10,14 +10,14 @@ class modFTPMediaSource extends \MODX\Revolution\Sources\modFTPMediaSource
         'package' => 'MODX\\Revolution\\Sources',
         'version' => '3.0',
         'extends' => 'MODX\\Revolution\\Sources\\modMediaSource',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
     );

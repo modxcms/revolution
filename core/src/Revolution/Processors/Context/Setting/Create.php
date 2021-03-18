@@ -45,9 +45,9 @@ class Create extends CreateProcessor
     public $context;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $this->context = $this->modx->getContext($this->getProperty('fk'));
@@ -59,10 +59,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Process the setting before saving
-     *
-     * @return boolean
-     */
+    * Process the setting before saving
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         $this->object->set('context_key', $this->context->key);
@@ -115,9 +115,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function afterSave()
     {
         $this->setLexiconEntries($this->object->toArray());
@@ -146,10 +146,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @param array $fields
-     *
-     * @return void
-     */
+    * @param array $fields
+    *
+    * @return void
+    */
     public function setLexiconEntries(array $fields)
     {
         /* set lexicon name/description */

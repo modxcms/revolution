@@ -29,8 +29,8 @@ class Duplicate extends DuplicateProcessor
     public $checkSavePermission = false;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->newObject->set('active', false);
@@ -39,8 +39,8 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $this->duplicateUserGroupAccess();
@@ -50,9 +50,9 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Duplicate the user group access on the old profile
-     * @return void
-     */
+    * Duplicate the user group access on the old profile
+    * @return void
+    */
     public function duplicateUserGroupAccess()
     {
         $profileUserGroups = $this->modx->getCollection(modFormCustomizationProfileUserGroup::class, [
@@ -69,9 +69,9 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Duplicate all the Sets of the old Profile
-     * @return void
-     */
+    * Duplicate all the Sets of the old Profile
+    * @return void
+    */
     public function duplicateSets()
     {
         $sets = $this->object->getMany('Sets');

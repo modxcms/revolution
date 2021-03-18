@@ -44,10 +44,10 @@ class ExportProperties extends Processor
     }
 
     /**
-     * Create a temporary file object and serve as a download to the browser
-     *
-     * @return bool|string
-     */
+    * Create a temporary file object and serve as a download to the browser
+    *
+    * @return bool|string
+    */
     public function download()
     {
         $data = $this->getProperty('data');

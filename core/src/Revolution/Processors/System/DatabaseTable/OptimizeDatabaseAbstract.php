@@ -18,24 +18,24 @@ use MODX\Revolution\Processors\DriverSpecificProcessor;
 abstract class OptimizeDatabaseAbstract extends DriverSpecificProcessor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('database');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['system_info'];
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $optimized = $this->optimize();
@@ -49,15 +49,15 @@ abstract class OptimizeDatabaseAbstract extends DriverSpecificProcessor
     }
 
     /**
-     * Optimize the database
-     * @return boolean
-     */
+    * Optimize the database
+    * @return boolean
+    */
     abstract public function optimize();
 
     /**
-     * Log a manager action showing the optimized table
-     * @return void
-     */
+    * Log a manager action showing the optimized table
+    * @return void
+    */
     public function logManagerAction()
     {
         if ($this->modx->error->status) {

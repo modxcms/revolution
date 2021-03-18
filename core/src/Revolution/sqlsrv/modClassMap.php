@@ -11,7 +11,7 @@ class modClassMap extends \MODX\Revolution\modClassMap
         'version' => '3.0',
         'table' => 'class_map',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'class' => '',
             'parent_class' => '',
@@ -19,9 +19,9 @@ class modClassMap extends \MODX\Revolution\modClassMap
             'path' => '',
             'lexicon' => 'core:resource',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'class' => 
+            'class' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '120',
@@ -30,7 +30,7 @@ class modClassMap extends \MODX\Revolution\modClassMap
                 'default' => '',
                 'index' => 'unique',
             ),
-            'parent_class' => 
+            'parent_class' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '120',
@@ -39,7 +39,7 @@ class modClassMap extends \MODX\Revolution\modClassMap
                 'default' => '',
                 'index' => 'index',
             ),
-            'name_field' => 
+            'name_field' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -48,14 +48,14 @@ class modClassMap extends \MODX\Revolution\modClassMap
                 'default' => 'name',
                 'index' => 'index',
             ),
-            'path' => 
+            'path' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '512',
                 'phptype' => 'string',
                 'default' => '',
             ),
-            'lexicon' => 
+            'lexicon' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -64,17 +64,17 @@ class modClassMap extends \MODX\Revolution\modClassMap
                 'default' => 'core:resource',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'class' => 
+            'class' =>
             array (
                 'alias' => 'class',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'class' => 
+                    'class' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -82,15 +82,15 @@ class modClassMap extends \MODX\Revolution\modClassMap
                     ),
                 ),
             ),
-            'parent_class' => 
+            'parent_class' =>
             array (
                 'alias' => 'parent_class',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'parent_class' => 
+                    'parent_class' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -98,15 +98,15 @@ class modClassMap extends \MODX\Revolution\modClassMap
                     ),
                 ),
             ),
-            'name_field' => 
+            'name_field' =>
             array (
                 'alias' => 'name_field',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name_field' => 
+                    'name_field' =>
                     array (
                         'length' => '',
                         'collation' => 'A',

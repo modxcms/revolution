@@ -21,16 +21,16 @@ use PDO;
 class GroupList extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('events');
     }
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function process()
     {
 

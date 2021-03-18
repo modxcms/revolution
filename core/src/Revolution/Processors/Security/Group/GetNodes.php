@@ -27,27 +27,27 @@ class GetNodes extends Processor
     public $userGroup;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('usergroup_view');
     }
 
     /**
-     * {@inheritDoc}
-     * @return array
-     */
+    * {@inheritDoc}
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user'];
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -61,9 +61,9 @@ class GetNodes extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         $this->id = $this->parseId($this->getProperty('id'));
@@ -85,19 +85,19 @@ class GetNodes extends Processor
     }
 
     /**
-     * Parse the ID to get the parent group
-     * @param string $id
-     * @return mixed
-     */
+    * Parse the ID to get the parent group
+    * @param string $id
+    * @return mixed
+    */
     protected function parseId($id)
     {
         return str_replace('n_ug_', '', $id);
     }
 
     /**
-     * Get the User Groups within the filter
-     * @return array
-     */
+    * Get the User Groups within the filter
+    * @return array
+    */
     public function getGroups()
     {
         $data = [];
@@ -111,10 +111,10 @@ class GetNodes extends Processor
     }
 
     /**
-     * Add the Anonymous group to the list
-     * @param array $list
-     * @return array
-     */
+    * Add the Anonymous group to the list
+    * @param array $list
+    * @return array
+    */
     public function addAnonymous(array $list)
     {
         if ($this->getProperty('showAnonymous') && empty($this->id)) {
@@ -133,10 +133,10 @@ class GetNodes extends Processor
     }
 
     /**
-     * Prepare a User Group for listing
-     * @param modUserGroup $group
-     * @return array
-     */
+    * Prepare a User Group for listing
+    * @param modUserGroup $group
+    * @return array
+    */
     public function prepareGroup(modUserGroup $group)
     {
         $cls = 'padduser pcreate pupdate';

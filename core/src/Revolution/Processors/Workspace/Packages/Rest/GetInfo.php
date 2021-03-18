@@ -22,24 +22,24 @@ class GetInfo extends Processor
     public $provider;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('packages');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace'];
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         if (!$this->loadProvider()) {
@@ -55,9 +55,9 @@ class GetInfo extends Processor
     }
 
     /**
-     * Load the provider
-     * @return boolean
-     */
+    * Load the provider
+    * @return boolean
+    */
     public function loadProvider()
     {
         $loaded = false;

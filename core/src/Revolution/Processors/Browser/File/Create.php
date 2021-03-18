@@ -30,8 +30,8 @@ class Create extends Browser
 
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $directory = $this->sanitize($this->getProperty('directory', ''));

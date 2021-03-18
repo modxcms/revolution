@@ -28,8 +28,8 @@ class Update extends UpdateProcessor
     public $permission = 'access_permissions';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         if ($this->getProperty('principal') === null) {
@@ -52,8 +52,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $context = $this->modx->getObject(modContext::class, $this->getProperty('target'));

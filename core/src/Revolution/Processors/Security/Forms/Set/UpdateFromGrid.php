@@ -17,9 +17,9 @@ namespace MODX\Revolution\Processors\Security\Forms\Set;
 class UpdateFromGrid extends Update
 {
     /**
-     * @return bool|string|null
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool|string|null
+    * @throws \xPDO\xPDOException
+    */
     public function initialize()
     {
         $data = $this->getProperty('data');
@@ -29,7 +29,7 @@ class UpdateFromGrid extends Update
         $properties = $this->modx->fromJSON($data);
         $this->setProperties($properties);
         $this->unsetProperty('data');
-        
+
         return parent::initialize();
     }
 }

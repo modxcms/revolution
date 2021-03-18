@@ -32,8 +32,8 @@ class Create extends CreateProcessor
     public $objectType = 'policy';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $name = $this->getProperty('name');
@@ -49,8 +49,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool|void
-     */
+    * @return bool|void
+    */
     public function beforeSave()
     {
         /** @var modAccessPolicyTemplate $template */
@@ -71,8 +71,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $this->modx->cacheManager->flushPermissions();
@@ -80,4 +80,3 @@ class Create extends CreateProcessor
         return parent::afterSave();
     }
 }
-

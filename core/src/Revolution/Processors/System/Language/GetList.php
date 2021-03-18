@@ -21,24 +21,24 @@ use MODX\Revolution\Processors\Processor;
 class GetList extends Processor
 {
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('languages');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['lexicon'];
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -50,8 +50,8 @@ class GetList extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $data = $this->getData();
@@ -71,9 +71,9 @@ class GetList extends Processor
     }
 
     /**
-     * Get a collection of languages
-     * @return array
-     */
+    * Get a collection of languages
+    * @return array
+    */
     public function getData()
     {
         $data = [];

@@ -34,54 +34,54 @@ use MODX\Revolution\modX;
 class modRegistry
 {
     /**
-     * A reference to the modX instance the registry is loaded by.
-     *
-     * @var modX
-     * @access public
-     */
+    * A reference to the modX instance the registry is loaded by.
+    *
+    * @var modX
+    * @access public
+    */
     public $modx = null;
     /**
-     * An array of global options applied to the registry.
-     *
-     * @var array
-     * @access protected
-     */
+    * An array of global options applied to the registry.
+    *
+    * @var array
+    * @access protected
+    */
     public $_options = [];
     /**
-     * An array of register keys that are reserved from use.
-     *
-     * @var array
-     * @access protected
-     */
+    * An array of register keys that are reserved from use.
+    *
+    * @var array
+    * @access protected
+    */
     protected $_invalidKeys = [
         'modx',
     ];
     /**
-     * An array of MODX registers managed by the registry.
-     *
-     * @var array
-     * @access private
-     */
+    * An array of MODX registers managed by the registry.
+    *
+    * @var array
+    * @access private
+    */
     protected $_registers = [];
     /**
-     * @var modRegister The current logging registry
-     */
+    * @var modRegister The current logging registry
+    */
     protected $_loggingRegister = null;
     /**
-     * @var string The previous logTarget for xPDO, to be reset when finished
-     */
+    * @var string The previous logTarget for xPDO, to be reset when finished
+    */
     protected $_prevLogTarget = null;
     /**
-     * @var integer The previous log level for xPDO, to be reset when finished
-     */
+    * @var integer The previous log level for xPDO, to be reset when finished
+    */
     protected $_prevLogLevel = null;
 
     /**
-     * Construct a new registry instance.
-     *
-     * @param modX &$modx    A reference to a modX instance.
-     * @param array $options Optional array of registry options.
-     */
+    * Construct a new registry instance.
+    *
+    * @param modX &$modx    A reference to a modX instance.
+    * @param array $options Optional array of registry options.
+    */
     function __construct(modX &$modx, array $options = [])
     {
         $this->modx =& $modx;
@@ -89,20 +89,20 @@ class modRegistry
     }
 
     /**
-     * Get a modRegister instance from the registry.
-     *
-     * If the register does not exist, it is added to the registry.
-     *
-     * @access public
-     *
-     * @param string $key     A unique name for the register in the registry. Must
-     *                        be a valid PHP variable string.
-     * @param string $class   The actual modRegister derivative which implements
-     *                        the register functionality.
-     * @param array  $options An optional array of register options.
-     *
-     * @return modRegister A modRegister instance.
-     */
+    * Get a modRegister instance from the registry.
+    *
+    * If the register does not exist, it is added to the registry.
+    *
+    * @access public
+    *
+    * @param string $key     A unique name for the register in the registry. Must
+    *                        be a valid PHP variable string.
+    * @param string $class   The actual modRegister derivative which implements
+    *                        the register functionality.
+    * @param array  $options An optional array of register options.
+    *
+    * @return modRegister A modRegister instance.
+    */
     public function getRegister($key, $class, array $options = [])
     {
         if (isset($this->_registers[$key])) {
@@ -117,19 +117,19 @@ class modRegistry
     }
 
     /**
-     * Add a modRegister instance to the registry.
-     *
-     * Once a register is added, it is available directly from this registry
-     * instance by the key provided, e.g. $registry->key.
-     *
-     * @access public
-     *
-     * @param string $key     A unique name for the register in the registry. Must
-     *                        be a valid PHP variable string.
-     * @param string $class   The actual modRegister derivative which implements
-     *                        the register functionality.
-     * @param array  $options An optional array of register options.
-     */
+    * Add a modRegister instance to the registry.
+    *
+    * Once a register is added, it is available directly from this registry
+    * instance by the key provided, e.g. $registry->key.
+    *
+    * @access public
+    *
+    * @param string $key     A unique name for the register in the registry. Must
+    *                        be a valid PHP variable string.
+    * @param string $class   The actual modRegister derivative which implements
+    *                        the register functionality.
+    * @param array  $options An optional array of register options.
+    */
     public function addRegister($key, $class, array $options = [])
     {
         if (!in_array($key, $this->_invalidKeys) && substr($key, 0,
@@ -140,12 +140,12 @@ class modRegistry
     }
 
     /**
-     * Remove a modRegister instance from the registry.
-     *
-     * @access public
-     *
-     * @param string $key The unique name of the register to remove.
-     */
+    * Remove a modRegister instance from the registry.
+    *
+    * @access public
+    *
+    * @param string $key The unique name of the register to remove.
+    */
     public function removeRegister($key)
     {
         if (!in_array($key, $this->_invalidKeys) && substr($key, 0,
@@ -156,17 +156,17 @@ class modRegistry
     }
 
     /**
-     * Initialize a register within the registry.
-     *
-     * @access protected
-     *
-     * @param string $key     The key of the registry
-     * @param string $class   The class of the modRegister implementation to
-     *                        initialize.
-     * @param array  $options An optional array of register options.
-     *
-     * @return modRegister The register instance.
-     */
+    * Initialize a register within the registry.
+    *
+    * @access protected
+    *
+    * @param string $key     The key of the registry
+    * @param string $class   The class of the modRegister implementation to
+    *                        initialize.
+    * @param array  $options An optional array of register options.
+    *
+    * @return modRegister The register instance.
+    */
     protected function _initRegister($key, $class, array $options = [])
     {
         $register = null;
@@ -178,17 +178,17 @@ class modRegistry
     }
 
     /**
-     * Set the logging level for the topic.
-     *
-     * @access public
-     *
-     * @param modRegister &$register
-     * @param string       $topic
-     * @param int          $level
-     * @param boolean      $clear Clear the register before subscribing to it
-     *
-     * @return boolean True if successful.
-     */
+    * Set the logging level for the topic.
+    *
+    * @access public
+    *
+    * @param modRegister &$register
+    * @param string       $topic
+    * @param int          $level
+    * @param boolean      $clear Clear the register before subscribing to it
+    *
+    * @return boolean True if successful.
+    */
     public function setLogging(modRegister &$register, $topic, $level = modX::LOG_LEVEL_ERROR, $clear = false)
     {
         $set = false;
@@ -213,10 +213,10 @@ class modRegistry
     }
 
     /**
-     * Reset the current logging.
-     *
-     * @access public
-     */
+    * Reset the current logging.
+    *
+    * @access public
+    */
     public function resetLogging()
     {
         if ($this->_loggingRegister && $this->_prevLogTarget && $this->_prevLogLevel) {
@@ -227,11 +227,11 @@ class modRegistry
     }
 
     /**
-     * Check if logging is currently active
-     *
-     * @access public
-     * @return boolean
-     */
+    * Check if logging is currently active
+    *
+    * @access public
+    * @return boolean
+    */
     public function isLogging()
     {
         return $this->_loggingRegister !== null;

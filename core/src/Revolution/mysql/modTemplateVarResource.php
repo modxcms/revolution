@@ -11,19 +11,19 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
         'version' => '3.0',
         'table' => 'site_tmplvar_contentvalues',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'tmplvarid' => 0,
             'contentid' => 0,
             'value' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'tmplvarid' => 
+            'tmplvarid' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -33,7 +33,7 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'contentid' => 
+            'contentid' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -43,24 +43,24 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
                 'default' => 0,
                 'index' => 'index',
             ),
-            'value' => 
+            'value' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
                 'null' => false,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'tmplvarid' => 
+            'tmplvarid' =>
             array (
                 'alias' => 'tmplvarid',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'tmplvarid' => 
+                    'tmplvarid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -68,15 +68,15 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
                     ),
                 ),
             ),
-            'contentid' => 
+            'contentid' =>
             array (
                 'alias' => 'contentid',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'contentid' => 
+                    'contentid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -84,21 +84,21 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
                     ),
                 ),
             ),
-            'tv_cnt' => 
+            'tv_cnt' =>
             array (
                 'alias' => 'tv_cnt',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'tmplvarid' => 
+                    'tmplvarid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'contentid' => 
+                    'contentid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -107,9 +107,9 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'TemplateVar' => 
+            'TemplateVar' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'tmplvarid',
@@ -117,7 +117,7 @@ class modTemplateVarResource extends \MODX\Revolution\modTemplateVarResource
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Resource' => 
+            'Resource' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'contentid',

@@ -11,11 +11,11 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
         'version' => '3.0',
         'table' => 'access_policies',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'description' => NULL,
@@ -25,9 +25,9 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
             'data' => '{}',
             'lexicon' => 'permissions',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -35,12 +35,12 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'null' => false,
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
             ),
-            'parent' => 
+            'parent' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -50,7 +50,7 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'default' => 0,
                 'index' => 'index',
             ),
-            'template' => 
+            'template' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -60,7 +60,7 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'default' => 0,
                 'index' => 'index',
             ),
-            'class' => 
+            'class' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -69,13 +69,13 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'default' => '',
                 'index' => 'index',
             ),
-            'data' => 
+            'data' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'json',
                 'default' => '{}',
             ),
-            'lexicon' => 
+            'lexicon' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -84,17 +84,17 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'default' => 'permissions',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -102,15 +102,15 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                     ),
                 ),
             ),
-            'parent' => 
+            'parent' =>
             array (
                 'alias' => 'parent',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'parent' => 
+                    'parent' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -118,15 +118,15 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                     ),
                 ),
             ),
-            'class' => 
+            'class' =>
             array (
                 'alias' => 'class',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'class' => 
+                    'class' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -134,15 +134,15 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                     ),
                 ),
             ),
-            'template' => 
+            'template' =>
             array (
                 'alias' => 'template',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'template' => 
+                    'template' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -151,9 +151,9 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Children' => 
+            'Children' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicy',
                 'local' => 'id',
@@ -162,9 +162,9 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'cardinality' => 'many',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Parent' => 
+            'Parent' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicy',
                 'local' => 'parent',
@@ -172,7 +172,7 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'Template' => 
+            'Template' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessPolicyTemplate',
                 'local' => 'template',

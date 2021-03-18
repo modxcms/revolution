@@ -22,10 +22,10 @@ namespace MODX\Revolution;
 class modFieldTag extends modTag
 {
     /**
-     * Overrides modTag::__construct to set the Field Tag token
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modTag::__construct to set the Field Tag token
+    *
+    * {@inheritdoc}
+    */
     function __construct(modX & $modx)
     {
         parent:: __construct($modx);
@@ -33,10 +33,10 @@ class modFieldTag extends modTag
     }
 
     /**
-     * Process the modFieldTag and return the output.
-     *
-     * {@inheritdoc}
-     */
+    * Process the modFieldTag and return the output.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         if ($this->get('name') === 'content') {
@@ -70,10 +70,10 @@ class modFieldTag extends modTag
     }
 
     /**
-     * Get the raw source content of the field.
-     *
-     * {@inheritdoc}
-     */
+    * Get the raw source content of the field.
+    *
+    * {@inheritdoc}
+    */
     public function getContent(array $options = [])
     {
         if (!$this->isCacheable() || !is_string($this->_content) || $this->_content === '') {

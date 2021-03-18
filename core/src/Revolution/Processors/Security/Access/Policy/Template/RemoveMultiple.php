@@ -26,8 +26,8 @@ class RemoveMultiple extends ModelProcessor
     public $objectType = 'policy_template';
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function process()
     {
         $templates = $this->getProperty('templates');
@@ -66,8 +66,8 @@ class RemoveMultiple extends ModelProcessor
     }
 
     /**
-     * @param modAccessPolicyTemplate $template
-     */
+    * @param modAccessPolicyTemplate $template
+    */
     public function logManagerAction(modAccessPolicyTemplate $template)
     {
         $this->modx->logManagerAction('remove_policy_template', modAccessPolicyTemplate::class, $template->get('id'));

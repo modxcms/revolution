@@ -24,17 +24,17 @@ class Logout extends Processor
     public $isMgr;
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['login'];
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $this->loginContext = $this->getProperty('login_context', $this->modx->context->get('key'));
@@ -46,8 +46,8 @@ class Logout extends Processor
     }
 
     /**
-     * Fire event at the start of logout process
-     */
+    * Fire event at the start of logout process
+    */
     public function fireBeforeLogoutEvent()
     {
         $this->modx->invokeEvent($this->isMgr ? 'OnBeforeManagerLogout' : 'OnBeforeWebLogout', [
@@ -60,8 +60,8 @@ class Logout extends Processor
     }
 
     /**
-     * Remove user from Session by contexts
-     */
+    * Remove user from Session by contexts
+    */
     public function removeSessionContexts()
     {
         $contexts = array_merge([$this->loginContext], $this->addContexts);
@@ -71,8 +71,8 @@ class Logout extends Processor
     }
 
     /**
-     * Fire event after removing user from Session
-     */
+    * Fire event after removing user from Session
+    */
     public function fireAfterLogoutEvent()
     {
         $this->modx->invokeEvent($this->isMgr ? 'OnManagerLogout' : 'OnWebLogout', [

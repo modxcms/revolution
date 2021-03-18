@@ -62,9 +62,9 @@ class Duplicate extends Processor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         if (!$this->checkParentPermissions()) {
@@ -91,9 +91,9 @@ class Duplicate extends Processor
     }
 
     /**
-     * Ensure the user can add children to the parent
-     * @return boolean
-     */
+    * Ensure the user can add children to the parent
+    * @return boolean
+    */
     public function checkParentPermissions()
     {
         $canAddChildren = true;
@@ -105,9 +105,9 @@ class Duplicate extends Processor
     }
 
     /**
-     * Fire the OnResourceDuplicate event
-     * @return void
-     */
+    * Fire the OnResourceDuplicate event
+    * @return void
+    */
     public function fireDuplicateEvent()
     {
         $this->modx->invokeEvent('OnResourceDuplicate', [
@@ -121,10 +121,10 @@ class Duplicate extends Processor
     }
 
     /**
-     * Log the manager action
-     *
-     * @return void
-     */
+    * Log the manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('duplicate_resource', $this->newResource->get('class_key'), $this->newResource->get('id'));

@@ -35,24 +35,24 @@ class Create extends Processor
     public $role;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('usergroup_user_edit');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user'];
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -115,9 +115,9 @@ class Create extends Processor
     }
 
     /**
-     * @param array $fields
-     * @return bool
-     */
+    * @param array $fields
+    * @return bool
+    */
     public function validate(array $fields)
     {
         /* get user */
@@ -156,9 +156,9 @@ class Create extends Processor
     }
 
     /**
-     * @param array $fields
-     * @return bool
-     */
+    * @param array $fields
+    * @return bool
+    */
     public function alreadyExists(array $fields)
     {
         if (empty($fields['user']) || empty($fields['usergroup'])) {
@@ -173,8 +173,8 @@ class Create extends Processor
     }
 
     /**
-     * @return int
-     */
+    * @return int
+    */
     public function getNewRank()
     {
         return $this->modx->getCount(modUserGroupMember::class, ['member' => $this->user->get('id')]);

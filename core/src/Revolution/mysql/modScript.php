@@ -11,20 +11,20 @@ class modScript extends \MODX\Revolution\modScript
         'version' => '3.0',
         'table' => 'site_script',
         'extends' => 'MODX\\Revolution\\modElement',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'description' => '',
             'editor_type' => 0,
             'category' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '50',
@@ -33,7 +33,7 @@ class modScript extends \MODX\Revolution\modScript
                 'default' => '',
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -41,7 +41,7 @@ class modScript extends \MODX\Revolution\modScript
                 'null' => false,
                 'default' => '',
             ),
-            'editor_type' => 
+            'editor_type' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -49,7 +49,7 @@ class modScript extends \MODX\Revolution\modScript
                 'null' => false,
                 'default' => 0,
             ),
-            'category' => 
+            'category' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -59,17 +59,17 @@ class modScript extends \MODX\Revolution\modScript
                 'index' => 'fk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -77,15 +77,15 @@ class modScript extends \MODX\Revolution\modScript
                     ),
                 ),
             ),
-            'category' => 
+            'category' =>
             array (
                 'alias' => 'category',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'category' => 
+                    'category' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -94,9 +94,9 @@ class modScript extends \MODX\Revolution\modScript
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Category' => 
+            'Category' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'key' => 'id',

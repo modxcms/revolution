@@ -11,7 +11,7 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
         'version' => '3.0',
         'table' => 'active_users',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'internalKey' => 0,
             'username' => '',
@@ -20,9 +20,9 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
             'action' => '',
             'ip' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'internalKey' => 
+            'internalKey' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '9',
@@ -31,7 +31,7 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'username' => 
+            'username' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '50',
@@ -39,7 +39,7 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
                 'null' => false,
                 'default' => '',
             ),
-            'lasthit' => 
+            'lasthit' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -47,13 +47,13 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
                 'null' => false,
                 'default' => 0,
             ),
-            'id' => 
+            'id' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => true,
             ),
-            'action' => 
+            'action' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -61,7 +61,7 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
                 'null' => false,
                 'default' => '',
             ),
-            'ip' => 
+            'ip' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '20',
@@ -70,17 +70,17 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
                 'default' => '',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'internalKey' => 
+            'internalKey' =>
             array (
                 'alias' => 'internalKey',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'internalKey' => 
+                    'internalKey' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -89,9 +89,9 @@ class modActiveUser extends \MODX\Revolution\modActiveUser
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'User' => 
+            'User' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'internalKey',

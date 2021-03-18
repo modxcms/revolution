@@ -31,8 +31,8 @@ class GetList extends GetListProcessor
     public $canRemove = false;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['search' => '']);
@@ -42,8 +42,8 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getData()
     {
         $criteria = [];
@@ -68,9 +68,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

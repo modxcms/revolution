@@ -25,20 +25,20 @@ use PDO;
 class modDbRegister extends modRegister
 {
     /**
-     * The queue object representing this modRegister instance.
-     *
-     * @access protected
-     * @var modDbRegisterQueue $_queue
-     */
+    * The queue object representing this modRegister instance.
+    *
+    * @access protected
+    * @var modDbRegisterQueue $_queue
+    */
     protected $_queue = null;
 
     /**
-     * Construct a new modDbRegister instance.
-     *
-     * @param modX & $modx    A reference to the modX instance
-     * @param string $key     The key of the registry to load
-     * @param array  $options An array of options to set
-     */
+    * Construct a new modDbRegister instance.
+    *
+    * @param modX & $modx    A reference to the modX instance
+    * @param string $key     The key of the registry to load
+    * @param array  $options An array of options to set
+    */
     function __construct(modX &$modx, $key, array $options = [])
     {
         parent:: __construct($modx, $key, $options);
@@ -46,13 +46,13 @@ class modDbRegister extends modRegister
     }
 
     /**
-     * Initialize a new queue
-     *
-     * @param string $key     The new name of the queue
-     * @param array  $options An array of options
-     *
-     * @return modDbRegisterQueue A reference to the new Queue object
-     */
+    * Initialize a new queue
+    *
+    * @param string $key     The new name of the queue
+    * @param array  $options An array of options
+    *
+    * @return modDbRegisterQueue A reference to the new Queue object
+    */
     protected function _initQueue($key, $options)
     {
         /** @var modDbRegisterQueue $queue */
@@ -74,23 +74,23 @@ class modDbRegister extends modRegister
     }
 
     /**
-     * Connect to the register service implementation. If we made it here, we connected fine.
-     *
-     * @param array $attributes A collection of attributes required for
-     *                          connection to the register.
-     *
-     * @return boolean Indicates if the connection was successful.
-     */
+    * Connect to the register service implementation. If we made it here, we connected fine.
+    *
+    * @param array $attributes A collection of attributes required for
+    *                          connection to the register.
+    *
+    * @return boolean Indicates if the connection was successful.
+    */
     public function connect(array $attributes = [])
     {
         return true;
     }
 
     /**
-     * Clear the register messages.
-     *
-     * {@inheritdoc}
-     */
+    * Clear the register messages.
+    *
+    * {@inheritdoc}
+    */
     public function clear($topic)
     {
         $topicObject = $this->modx->getObject(modDbRegisterTopic::class, [
@@ -107,27 +107,27 @@ class modDbRegister extends modRegister
     }
 
     /**
-     * This implementation supports the following options and default behavior:
-     * <ul>
-     * <li>msg_limit: Only poll until the specified limit of messages has
-     * been digested. Default is 5 messages.</li>
-     * <li>time_limit: Poll for new messages for a specified number of
-     * seconds. Default is the result of the php time_limit system variable.</li>
-     * <li>poll_limit: Only poll for new subscriptions a specified number
-     * of times. Default is unlimited.</li>
-     * <li>poll_interval: Wait a specified number of seconds between each
-     * additional polling iteration, after the initial one. Default is no
-     * interval.</li>
-     * <li>remove_read: Remove the message immediately upon digesting it.
-     * Default is true.</li>
-     * <li>include_keys: Include the message keys in the array of messages returned.
-     * Default is false.</li>
-     * </ul>
-     *
-     * @param array $options An array of general or protocol specific options.
-     *
-     * @return mixed The resulting message from the register.
-     */
+    * This implementation supports the following options and default behavior:
+    * <ul>
+    * <li>msg_limit: Only poll until the specified limit of messages has
+    * been digested. Default is 5 messages.</li>
+    * <li>time_limit: Poll for new messages for a specified number of
+    * seconds. Default is the result of the php time_limit system variable.</li>
+    * <li>poll_limit: Only poll for new subscriptions a specified number
+    * of times. Default is unlimited.</li>
+    * <li>poll_interval: Wait a specified number of seconds between each
+    * additional polling iteration, after the initial one. Default is no
+    * interval.</li>
+    * <li>remove_read: Remove the message immediately upon digesting it.
+    * Default is true.</li>
+    * <li>include_keys: Include the message keys in the array of messages returned.
+    * Default is false.</li>
+    * </ul>
+    *
+    * @param array $options An array of general or protocol specific options.
+    *
+    * @return mixed The resulting message from the register.
+    */
     public function read(array $options = [])
     {
         $this->__kill = false;
@@ -196,16 +196,16 @@ class modDbRegister extends modRegister
     }
 
     /**
-     * Read a message record from the queue topic.
-     *
-     * @todo Implement support for reading various message types, other than
-     * executable PHP format.
-     *
-     * @param object  $obj    The message data to read.
-     * @param boolean $remove Indicates if the message should be deleted once it is read.
-     *
-     * @return mixed The message returned
-     */
+    * Read a message record from the queue topic.
+    *
+    * @todo Implement support for reading various message types, other than
+    * executable PHP format.
+    *
+    * @param object  $obj    The message data to read.
+    * @param boolean $remove Indicates if the message should be deleted once it is read.
+    *
+    * @return mixed The message returned
+    */
     protected function _readMessage($obj, $remove = true)
     {
         $message = null;
@@ -223,40 +223,40 @@ class modDbRegister extends modRegister
     }
 
     /**
-     * This implementation provides support for sending messages using either
-     * time-based indexes so they are consumed in the order they are produced,
-     * or named indexes typically used when consumers want to subscribe to a
-     * specific, unique message. Individual messages or message collections
-     * passed in numerically indexed arrays are treated as time-based messages
-     * and message collections passed in associative arrays are treated as named
-     * messages. e.g., to send a single message as named, wrap it in an array
-     * with the intended message name as the key.
-     *
-     * This implementation also supports a message_type option to indicate the
-     * format of the message being sent to the register. Currently only supports
-     * executable PHP format.
-     *
-     * Other implementation specific options include:
-     * <ul>
-     * <li>delay: Number of seconds to delay the message. This option is only
-     * supported for time-based messages.</li>
-     * <li>ttl: Number of seconds the message is valid in the queue.
-     * Default is forever or 0.</li>
-     * <li>kill: Tells a message consumer to stop consuming any more
-     * messages after reading any message sent with this option.</li>
-     * </ul>
-     *
-     * @param string $topic   A topic container in which to broadcast the message.
-     * @param mixed  $message A message, or collection of messages to be sent to
-     *                        the register.
-     * @param array  $options An optional array of general or protocol
-     *                        specific message properties.
-     *
-     * @return boolean Indicates if the message was recorded.
-     *
-     * @todo Implement support for sending various message types, other than
-     * executable PHP format.
-     */
+    * This implementation provides support for sending messages using either
+    * time-based indexes so they are consumed in the order they are produced,
+    * or named indexes typically used when consumers want to subscribe to a
+    * specific, unique message. Individual messages or message collections
+    * passed in numerically indexed arrays are treated as time-based messages
+    * and message collections passed in associative arrays are treated as named
+    * messages. e.g., to send a single message as named, wrap it in an array
+    * with the intended message name as the key.
+    *
+    * This implementation also supports a message_type option to indicate the
+    * format of the message being sent to the register. Currently only supports
+    * executable PHP format.
+    *
+    * Other implementation specific options include:
+    * <ul>
+    * <li>delay: Number of seconds to delay the message. This option is only
+    * supported for time-based messages.</li>
+    * <li>ttl: Number of seconds the message is valid in the queue.
+    * Default is forever or 0.</li>
+    * <li>kill: Tells a message consumer to stop consuming any more
+    * messages after reading any message sent with this option.</li>
+    * </ul>
+    *
+    * @param string $topic   A topic container in which to broadcast the message.
+    * @param mixed  $message A message, or collection of messages to be sent to
+    *                        the register.
+    * @param array  $options An optional array of general or protocol
+    *                        specific message properties.
+    *
+    * @return boolean Indicates if the message was recorded.
+    *
+    * @todo Implement support for sending various message types, other than
+    * executable PHP format.
+    */
     public function send($topic, $message, array $options = [])
     {
         $sent = false;
@@ -335,10 +335,10 @@ class modDbRegister extends modRegister
     }
 
     /**
-     * Close the connection to the register service implementation.
-     *
-     * @return boolean Indicates if the connection was closed successfully.
-     */
+    * Close the connection to the register service implementation.
+    *
+    * @return boolean Indicates if the connection was closed successfully.
+    */
     public function close()
     {
         return true;

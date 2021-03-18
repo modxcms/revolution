@@ -62,10 +62,10 @@ class Update extends \MODX\Revolution\Processors\Element\Update
     }
 
     /**
-     * Set the TemplateVar associations to this Template
-     *
-     * @return void
-     */
+    * Set the TemplateVar associations to this Template
+    *
+    * @return void
+    */
     public function setTemplateVariables()
     {
         $tvs = $this->getProperty('tvs', null);

@@ -57,4 +57,3 @@ $_lang['login_help_button_text'] = 'Aiuto';
 $_lang['login_help_title'] = 'Ottenere aiuto con MODX';
 $_lang['login_help_text'] = '<p>Avete bisogno di supporto professionale di MODX? Noi abbiamo curato una directory di professionisti MODX nel mondo che sono felici di aiutare. <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Trova professionisti MODX sul sito MODX">Ottieni rapidamente assistenza su modx.com</a>.</p>';
 $_lang['login_return_site'] = 'Torna al sito';
-

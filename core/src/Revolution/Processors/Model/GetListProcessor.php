@@ -35,9 +35,9 @@ abstract class GetListProcessor extends ModelProcessor
     public $currentIndex = 0;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -53,9 +53,9 @@ abstract class GetListProcessor extends ModelProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         $beforeQuery = $this->beforeQuery();
@@ -69,22 +69,22 @@ abstract class GetListProcessor extends ModelProcessor
     }
 
     /**
-     * Allow stoppage of process before the query
-     *
-     * @return boolean
-     */
+    * Allow stoppage of process before the query
+    *
+    * @return boolean
+    */
     public function beforeQuery()
     {
         return true;
     }
 
     /**
-     * Iterate across the data
-     *
-     * @param array $data
-     *
-     * @return array
-     */
+    * Iterate across the data
+    *
+    * @param array $data
+    *
+    * @return array
+    */
     public function iterate(array $data)
     {
         $list = [];
@@ -107,34 +107,34 @@ abstract class GetListProcessor extends ModelProcessor
     }
 
     /**
-     * Can be used to insert a row before iteration
-     *
-     * @param array $list
-     *
-     * @return array
-     */
+    * Can be used to insert a row before iteration
+    *
+    * @param array $list
+    *
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         return $list;
     }
 
     /**
-     * Can be used to insert a row after iteration
-     *
-     * @param array $list
-     *
-     * @return array
-     */
+    * Can be used to insert a row after iteration
+    *
+    * @param array $list
+    *
+    * @return array
+    */
     public function afterIteration(array $list)
     {
         return $list;
     }
 
     /**
-     * Get the data of the query
-     *
-     * @return array
-     */
+    * Get the data of the query
+    *
+    * @return array
+    */
     public function getData()
     {
         $data = [];
@@ -169,46 +169,46 @@ abstract class GetListProcessor extends ModelProcessor
     }
 
     /**
-     * Can be used to provide a custom sorting class key for the default sorting columns
-     *
-     * @return string
-     */
+    * Can be used to provide a custom sorting class key for the default sorting columns
+    *
+    * @return string
+    */
     public function getSortClassKey()
     {
         return $this->classKey;
     }
 
     /**
-     * Can be used to adjust the query prior to the COUNT statement
-     *
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * Can be used to adjust the query prior to the COUNT statement
+    *
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         return $c;
     }
 
     /**
-     * Can be used to prepare the query after the COUNT statement
-     *
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * Can be used to prepare the query after the COUNT statement
+    *
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         return $c;
     }
 
     /**
-     * Prepare the row for iteration
-     *
-     * @param xPDOObject $object
-     *
-     * @return array
-     */
+    * Prepare the row for iteration
+    *
+    * @param xPDOObject $object
+    *
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         return $object->toArray();

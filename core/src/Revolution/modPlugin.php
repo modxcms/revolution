@@ -24,10 +24,10 @@ use xPDO\xPDO;
 class modPlugin extends modScript
 {
     /**
-     * Overrides xPDOObject::__construct to always set plugins as non-cacheable
-     *
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * Overrides xPDOObject::__construct to always set plugins as non-cacheable
+    *
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(xPDO & $xpdo)
     {
         parent:: __construct($xpdo);
@@ -35,11 +35,11 @@ class modPlugin extends modScript
     }
 
     /**
-     * Overrides modElement::save to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::save to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -70,11 +70,11 @@ class modPlugin extends modScript
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::remove to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritdoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -101,11 +101,11 @@ class modPlugin extends modScript
     }
 
     /**
-     * Overrides modElement::getPropertySet to handle separate plugin event
-     * property set calls.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::getPropertySet to handle separate plugin event
+    * property set calls.
+    *
+    * {@inheritdoc}
+    */
     public function getPropertySet($setName = null)
     {
         if (empty($setName) && !empty($this->xpdo->event->propertySet)) {
@@ -116,19 +116,19 @@ class modPlugin extends modScript
     }
 
     /**
-     * Grabs a list of groups for the plugin.
-     *
-     * @todo Implement this.
-     *
-     * @static
-     *
-     * @param modResource $resource
-     * @param array       $sort
-     * @param int         $limit
-     * @param int         $offset
-     *
-     * @return void
-     */
+    * Grabs a list of groups for the plugin.
+    *
+    * @todo Implement this.
+    *
+    * @static
+    *
+    * @param modResource $resource
+    * @param array       $sort
+    * @param int         $limit
+    * @param int         $offset
+    *
+    * @return void
+    */
     public static function listGroups(modResource &$resource, array $sort = ['id' => 'ASC'], $limit = 0, $offset = 0)
     {
 

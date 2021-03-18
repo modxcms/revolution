@@ -52,10 +52,10 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Get a collection of modContextSetting objects
-     *
-     * @return array
-     */
+    * Get a collection of modContextSetting objects
+    *
+    * @return array
+    */
     public function getData()
     {
         $query = $this->getProperty('query', false);
@@ -98,12 +98,12 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Prepare a setting for output
-     *
-     * @param xPDOObject $object
-     *
-     * @return array
-     */
+    * Prepare a setting for output
+    *
+    * @param xPDOObject $object
+    *
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $settingArray = $object->toArray();

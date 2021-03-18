@@ -27,8 +27,8 @@ class Remove extends RemoveProcessor
     public $primaryKeyField = 'text';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeRemove()
     {
         $this->removeNested($this->object);
@@ -37,8 +37,8 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * @param modMenu $menu
-     */
+    * @param modMenu $menu
+    */
     public function removeNested(modMenu $menu)
     {
         $criteria = ['parent' => $menu->get('text')];

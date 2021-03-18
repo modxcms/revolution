@@ -27,9 +27,9 @@ class Remove extends \MODX\Revolution\Processors\System\Settings\Remove
     public $classKey = modContextSetting::class;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $key = $this->getProperty('key');

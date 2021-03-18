@@ -70,10 +70,10 @@ class Update extends \MODX\Revolution\Processors\Element\Update
     }
 
     /**
-     * Set the input properties based on the passed data
-     *
-     * @return array
-     */
+    * Set the input properties based on the passed data
+    *
+    * @return array
+    */
     public function setInputProperties()
     {
         $fields = $this->getProperties();
@@ -94,10 +94,10 @@ class Update extends \MODX\Revolution\Processors\Element\Update
     }
 
     /**
-     * Set the output properties based on the passed data
-     *
-     * @return array
-     */
+    * Set the output properties based on the passed data
+    *
+    * @return array
+    */
     public function setOutputProperties()
     {
         $fields = $this->getProperties();
@@ -118,10 +118,10 @@ class Update extends \MODX\Revolution\Processors\Element\Update
     }
 
     /**
-     * Set the Templates, if passed, for the TV
-     *
-     * @return void
-     */
+    * Set the Templates, if passed, for the TV
+    *
+    * @return void
+    */
     public function setTemplateAccess()
     {
         $templates = $this->getProperty('templates', null);
@@ -161,10 +161,10 @@ class Update extends \MODX\Revolution\Processors\Element\Update
     }
 
     /**
-     * Set the Resource Groups, if passed, for the TV
-     *
-     * @return void
-     */
+    * Set the Resource Groups, if passed, for the TV
+    *
+    * @return void
+    */
     public function setResourceGroups()
     {
         $resourceGroups = $this->getProperty('resource_groups', null);
@@ -200,10 +200,10 @@ class Update extends \MODX\Revolution\Processors\Element\Update
     }
 
     /**
-     * Set the Media Source attributions, if passed, for the TV
-     *
-     * @return void
-     */
+    * Set the Media Source attributions, if passed, for the TV
+    *
+    * @return void
+    */
     public function setMediaSources()
     {
         $sources = $this->getProperty('sources', null);
@@ -252,4 +252,3 @@ class Update extends \MODX\Revolution\Processors\Element\Update
                 ['previous_category' => $this->previousCategory]));
     }
 }
-

@@ -40,18 +40,18 @@ use xPDO\xPDO;
 class modUser extends modPrincipal
 {
     /**
-     * A collection of contexts which the current principal is authenticated in.
-     *
-     * @var array
-     * @access public
-     */
+    * A collection of contexts which the current principal is authenticated in.
+    *
+    * @var array
+    * @access public
+    */
     public $sessionContexts = [];
 
     /**
-     * The modUser password field is hashed automatically, and prevent sudo from being set via mass-assignment
-     *
-     * {@inheritdoc}
-     */
+    * The modUser password field is hashed automatically, and prevent sudo from being set via mass-assignment
+    *
+    * {@inheritdoc}
+    */
     public function set($k, $v = null, $vType = '')
     {
         if (!$this->getOption(xPDO::OPT_SETUP)) {
@@ -71,12 +71,12 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Set the sudo field explicitly
-     *
-     * @param boolean $sudo
-     *
-     * @return bool
-     */
+    * Set the sudo field explicitly
+    *
+    * @param boolean $sudo
+    *
+    * @return bool
+    */
     public function setSudo($sudo)
     {
         $this->_fields['sudo'] = (boolean)$sudo;
@@ -86,10 +86,10 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Overrides xPDOObject::save to fire modX-specific events
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::save to fire modX-specific events
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = false)
     {
         $isNew = $this->isNew();
@@ -119,10 +119,10 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Overrides xPDOObject::remove to fire modX-specific events
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::remove to fire modX-specific events
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -145,10 +145,10 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Loads the principal attributes that define a modUser security profile.
-     *
-     * {@inheritdoc}
-     */
+    * Loads the principal attributes that define a modUser security profile.
+    *
+    * {@inheritdoc}
+    */
     public function loadAttributes($target, $context = '', $reload = false)
     {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
@@ -195,19 +195,19 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Determines if this user is authenticated in a specific context.
-     *
-     * Separate session contexts can allow users to login/out of specific sub-sites
-     * individually (or in collections).
-     *
-     * @access public
-     *
-     * @param string $sessionContext The context to determine if the user is
-     *                               authenticated in.
-     *
-     * @return boolean true, if the user is authenticated in the specified
-     * context, false otherwise.
-     */
+    * Determines if this user is authenticated in a specific context.
+    *
+    * Separate session contexts can allow users to login/out of specific sub-sites
+    * individually (or in collections).
+    *
+    * @access public
+    *
+    * @param string $sessionContext The context to determine if the user is
+    *                               authenticated in.
+    *
+    * @return boolean true, if the user is authenticated in the specified
+    * context, false otherwise.
+    */
     public function isAuthenticated($sessionContext = 'web')
     {
         $isAuthenticated = false;
@@ -223,10 +223,10 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Ends a user session completely, including all contexts.
-     *
-     * @access public
-     */
+    * Ends a user session completely, including all contexts.
+    *
+    * @access public
+    */
     public function endSession()
     {
         $this->removeLocks();
@@ -247,13 +247,13 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Determines if the provided password matches the hashed password stored for the user.
-     *
-     * @param string $password The password to determine if it matches.
-     * @param array  $options  Optional settings for the hashing process.
-     *
-     * @return boolean True if the provided password matches the stored password for the user.
-     */
+    * Determines if the provided password matches the hashed password stored for the user.
+    *
+    * @param string $password The password to determine if it matches.
+    * @param array  $options  Optional settings for the hashing process.
+    *
+    * @return boolean True if the provided password matches the stored password for the user.
+    */
     public function passwordMatches($password, array $options = [])
     {
         $match = false;
@@ -269,16 +269,16 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Activate a reset user password if the proper activation key is provided.
-     *
-     * {@internal This does not mark the user active, but rather moves the cachepwd to the
-     * password field if the activation key matches.}
-     *
-     * @param string $key The activation key provided to the user and stored in the registry for matching.
-     *
-     * @return boolean|integer True if the activation was successful, false if unsuccessful,
-     * and -1 if there is no activation to perform.
-     */
+    * Activate a reset user password if the proper activation key is provided.
+    *
+    * {@internal This does not mark the user active, but rather moves the cachepwd to the
+    * password field if the activation key matches.}
+    *
+    * @param string $key The activation key provided to the user and stored in the registry for matching.
+    *
+    * @return boolean|integer True if the activation was successful, false if unsuccessful,
+    * and -1 if there is no activation to perform.
+    */
     public function activatePassword($key)
     {
         $activated = -1;
@@ -308,17 +308,17 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Change the user password.
-     *
-     * @access public
-     *
-     * @param string  $newPassword         Password to set.
-     * @param string  $oldPassword         Current password for validation.
-     * @param boolean $validateOldPassword Current password validation required flag.
-     *
-     * @return boolean Indicates if password was successfully changed.
-     * @todo   Add support for configurable password encoding.
-     */
+    * Change the user password.
+    *
+    * @access public
+    *
+    * @param string  $newPassword         Password to set.
+    * @param string  $oldPassword         Current password for validation.
+    * @param boolean $validateOldPassword Current password validation required flag.
+    *
+    * @return boolean Indicates if password was successfully changed.
+    * @todo   Add support for configurable password encoding.
+    */
     public function changePassword($newPassword, $oldPassword, $validateOldPassword = true)
     {
         $changed = false;
@@ -344,11 +344,11 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Returns an array of user session context keys.
-     *
-     * @access public
-     * @return array An array of session contexts.
-     */
+    * Returns an array of user session context keys.
+    *
+    * @access public
+    * @return array An array of session contexts.
+    */
     public function getSessionContexts()
     {
         if (!is_array($this->sessionContexts) || empty ($this->sessionContexts)) {
@@ -374,12 +374,12 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Adds a new context to the user session context array.
-     *
-     * @access public
-     *
-     * @param string $context The context to add to the user session.
-     */
+    * Adds a new context to the user session context array.
+    *
+    * @access public
+    *
+    * @param string $context The context to add to the user session.
+    */
     public function addSessionContext($context)
     {
         if (!$this->xpdo->startSession()) {
@@ -417,24 +417,24 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Generate a specific authentication token for this user for accessing the MODX manager
-     *
-     * @param string $salt Ignored
-     *
-     * @return string
-     */
+    * Generate a specific authentication token for this user for accessing the MODX manager
+    *
+    * @param string $salt Ignored
+    *
+    * @return string
+    */
     public function generateToken($salt)
     {
         return uniqid($this->xpdo->site_id . '_' . $this->get('id'), true);
     }
 
     /**
-     * Get the user token for the user
-     *
-     * @param string $ctx
-     *
-     * @return string
-     */
+    * Get the user token for the user
+    *
+    * @param string $ctx
+    *
+    * @return string
+    */
     public function getUserToken($ctx = '')
     {
         if (empty($ctx)) {
@@ -445,12 +445,12 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Removes a user session context.
-     *
-     * @access public
-     *
-     * @param string|array $context The context key or an array of context keys.
-     */
+    * Removes a user session context.
+    *
+    * @access public
+    *
+    * @param string|array $context The context key or an array of context keys.
+    */
     public function removeSessionContext($context)
     {
         if ($this->getSessionContexts()) {
@@ -474,12 +474,12 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Removes the session vars associated with a specific context.
-     *
-     * @access public
-     *
-     * @param string $context The context key.
-     */
+    * Removes the session vars associated with a specific context.
+    *
+    * @access public
+    *
+    * @param string $context The context key.
+    */
     public function removeSessionContextVars($context)
     {
         if (is_string($context) && !empty ($context)) {
@@ -490,28 +490,28 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Removes a session cookie for a user.
-     *
-     * TODO Implement this.
-     *
-     * @access public
-     *
-     * @param string $context The context to remove.
-     */
+    * Removes a session cookie for a user.
+    *
+    * TODO Implement this.
+    *
+    * @access public
+    *
+    * @param string $context The context to remove.
+    */
     public function removeSessionCookie($context)
     {
     }
 
     /**
-     * Checks if the user has a specific session context.
-     *
-     * @access public
-     *
-     * @param mixed $context Either a name of a context or array of context
-     *                       names to check against.
-     *
-     * @return boolean True if the user has the context(s) specified.
-     */
+    * Checks if the user has a specific session context.
+    *
+    * @access public
+    *
+    * @param mixed $context Either a name of a context or array of context
+    *                       names to check against.
+    *
+    * @return boolean True if the user has the context(s) specified.
+    */
     public function hasSessionContext($context)
     {
         $hasContext = false;
@@ -532,14 +532,14 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Gets a count of {@link modUserMessage} objects ascribed to the user.
-     *
-     * @access public
-     *
-     * @param mixed $read
-     *
-     * @return integer The number of messages.
-     */
+    * Gets a count of {@link modUserMessage} objects ascribed to the user.
+    *
+    * @access public
+    *
+    * @param mixed $read
+    *
+    * @return integer The number of messages.
+    */
     public function countMessages($read = '')
     {
         if ($read == 'read') {
@@ -556,11 +556,11 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Gets all user settings in array format.
-     *
-     * @access public
-     * @return array A key -> value array of settings.
-     */
+    * Gets all user settings in array format.
+    *
+    * @access public
+    * @return array A key -> value array of settings.
+    */
     public function getSettings()
     {
         $settings = $this->getUserGroupSettings();
@@ -575,13 +575,13 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Get all group settings for the user in array format.
-     *
-     * Preference is set by group rank + member rank, with primary_group having
-     * highest priority.
-     *
-     * @return array An associative array of group settings.
-     */
+    * Get all group settings for the user in array format.
+    *
+    * Preference is set by group rank + member rank, with primary_group having
+    * highest priority.
+    *
+    * @return array An associative array of group settings.
+    */
     public function getUserGroupSettings()
     {
         $settings = [];
@@ -605,15 +605,15 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Gets all Resource Groups this user is assigned to. This may not work in
-     * the new model.
-     *
-     * @access public
-     *
-     * @param string $ctx The context in which to peruse for Resource Groups
-     *
-     * @return array An array of Resource Group names.
-     */
+    * Gets all Resource Groups this user is assigned to. This may not work in
+    * the new model.
+    *
+    * @access public
+    *
+    * @param string $ctx The context in which to peruse for Resource Groups
+    *
+    * @return array An array of Resource Group names.
+    */
     public function getResourceGroups($ctx = '')
     {
         if (empty($ctx) && is_object($this->xpdo->context)) {
@@ -634,11 +634,11 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Gets all the User Group IDs of the groups this user belongs to.
-     *
-     * @access public
-     * @return array An array of User Group IDs.
-     */
+    * Gets all the User Group IDs of the groups this user belongs to.
+    *
+    * @access public
+    * @return array An array of User Group IDs.
+    */
     public function getUserGroups()
     {
         $groups = [];
@@ -661,10 +661,10 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Return the Primary Group of this User
-     *
-     * @return modUserGroup|null
-     */
+    * Return the Primary Group of this User
+    *
+    * @return modUserGroup|null
+    */
     public function getPrimaryGroup()
     {
         if (!$this->isAuthenticated($this->xpdo->context->get('key'))) {
@@ -686,11 +686,11 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Gets all the User Group names of the groups this user belongs to.
-     *
-     * @access public
-     * @return array An array of User Group names.
-     */
+    * Gets all the User Group names of the groups this user belongs to.
+    *
+    * @access public
+    * @return array An array of User Group names.
+    */
     public function getUserGroupNames()
     {
         $groupNames = [];
@@ -713,20 +713,20 @@ class modUser extends modPrincipal
     }
 
     /**
-     * States whether a user is a member of a group or groups. You may specify
-     * either a string name of the group, or an array of names.
-     *
-     * @access public
-     *
-     * @param string|array $groups   Either a string of a group name or an array
-     *                               of names.
-     * @param boolean      $matchAll If true, requires the user to be a member of all
-     *                               the groups specified. If false, the user can be a member of only one to
-     *                               pass. Defaults to false.
-     *
-     * @return boolean True if the user is a member of any of the groups
-     * specified.
-     */
+    * States whether a user is a member of a group or groups. You may specify
+    * either a string name of the group, or an array of names.
+    *
+    * @access public
+    *
+    * @param string|array $groups   Either a string of a group name or an array
+    *                               of names.
+    * @param boolean      $matchAll If true, requires the user to be a member of all
+    *                               the groups specified. If false, the user can be a member of only one to
+    *                               pass. Defaults to false.
+    *
+    * @return boolean True if the user is a member of any of the groups
+    * specified.
+    */
     public function isMember($groups, $matchAll = false)
     {
         $isMember = false;
@@ -749,17 +749,17 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Join a User Group, and optionally assign a Role.
-     *
-     * @access public
-     *
-     * @param mixed   $groupId Either the name or ID of the User Group to join.
-     * @param mixed   $roleId  Optional. Either the name or ID of the Role to
-     * @param integer $rank    Optional.
-     *                         assign to for the group.
-     *
-     * @return boolean True if successful.
-     */
+    * Join a User Group, and optionally assign a Role.
+    *
+    * @access public
+    *
+    * @param mixed   $groupId Either the name or ID of the User Group to join.
+    * @param mixed   $roleId  Optional. Either the name or ID of the Role to
+    * @param integer $rank    Optional.
+    *                         assign to for the group.
+    *
+    * @return boolean True if successful.
+    */
     public function joinGroup($groupId, $roleId = null, $rank = null)
     {
         $joined = false;
@@ -816,14 +816,14 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Removes the User from the specified User Group.
-     *
-     * @access public
-     *
-     * @param mixed $groupId Either the name or ID of the User Group to leave.
-     *
-     * @return boolean True if successful.
-     */
+    * Removes the User from the specified User Group.
+    *
+    * @access public
+    *
+    * @param mixed $groupId Either the name or ID of the User Group to leave.
+    *
+    * @return boolean True if successful.
+    */
     public function leaveGroup($groupId)
     {
         $left = false;
@@ -856,13 +856,13 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Remove any locks held by the user.
-     *
-     * @param array $options An array of options for controlling removal of specific locks or lock
-     *                       types.
-     *
-     * @return boolean True if the process was successful, or false if an error was encountered.
-     */
+    * Remove any locks held by the user.
+    *
+    * @param array $options An array of options for controlling removal of specific locks or lock
+    *                       types.
+    *
+    * @return boolean True if the process was successful, or false if an error was encountered.
+    */
     public function removeLocks(array $options = [])
     {
         $removed = false;
@@ -888,13 +888,13 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Returns a randomly generated password
-     *
-     * @param integer $length The length of the password
-     * @param array   $options
-     *
-     * @return string The newly generated password
-     */
+    * Returns a randomly generated password
+    *
+    * @param integer $length The length of the password
+    * @param array   $options
+    *
+    * @return string The newly generated password
+    */
     public function generatePassword($length = null, array $options = [])
     {
         if ($length === null) {
@@ -921,13 +921,13 @@ class modUser extends modPrincipal
 
 
     /**
-     * Send an email to the user
-     *
-     * @param string $message The body of the email
-     * @param array  $options An array of options
-     *
-     * @return boolean True if successful
-     */
+    * Send an email to the user
+    *
+    * @param string $message The body of the email
+    * @param array  $options An array of options
+    *
+    * @return boolean True if successful
+    */
     public function sendEmail($message, array $options = [])
     {
         if (!($this->xpdo instanceof modX)) {
@@ -963,10 +963,10 @@ class modUser extends modPrincipal
 
 
     /**
-     * Get the dashboard for this user
-     *
-     * @return modDashboard
-     */
+    * Get the dashboard for this user
+    *
+    * @return modDashboard
+    */
     public function getDashboard()
     {
         /** @var modUserGroup $userGroup */
@@ -985,14 +985,14 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Wrapper method to retrieve this user image
-     *
-     * @param int    $width   The desired photo width
-     * @param int    $height  The desired photo height (if applicable)
-     * @param string $default An optional default photo URL
-     *
-     * @return string The photo URL
-     */
+    * Wrapper method to retrieve this user image
+    *
+    * @param int    $width   The desired photo width
+    * @param int    $height  The desired photo height (if applicable)
+    * @param string $default An optional default photo URL
+    *
+    * @return string The photo URL
+    */
     public function getPhoto($width = 128, $height = 128, $default = '')
     {
         $img = $default;
@@ -1007,13 +1007,13 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Retrieve the profile photo, if any
-     *
-     * @param int $width  The desired photo width
-     * @param int $height The desired photo height
-     *
-     * @return string The photo URL
-     */
+    * Retrieve the profile photo, if any
+    *
+    * @param int $width  The desired photo width
+    * @param int $height The desired photo height
+    *
+    * @return string The photo URL
+    */
     public function getProfilePhoto($width = 128, $height = 128)
     {
         if (empty($this->Profile->photo)) {
@@ -1035,13 +1035,13 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Compute the Gravatar photo URL
-     *
-     * @param int    $size    The desired image size
-     * @param string $default The default Gravatar photo
-     *
-     * @return string The Gravatar photo URL
-     */
+    * Compute the Gravatar photo URL
+    *
+    * @param int    $size    The desired image size
+    * @param string $default The default Gravatar photo
+    *
+    * @return string The Gravatar photo URL
+    */
     public function getGravatar($size = 128, $default = 'retro')
     {
         $gravemail = md5(

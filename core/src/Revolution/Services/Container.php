@@ -14,8 +14,8 @@ class Container extends \Pimple\Container implements ContainerInterface
     }
 
     /**
-     * @inheritDoc
-     */
+    * @inheritDoc
+    */
     public function get($id)
     {
         if ($this->has($id)) {
@@ -29,8 +29,8 @@ class Container extends \Pimple\Container implements ContainerInterface
     }
 
     /**
-     * @inheritDoc
-     */
+    * @inheritDoc
+    */
     public function has($id)
     {
         return $this->offsetExists($id);

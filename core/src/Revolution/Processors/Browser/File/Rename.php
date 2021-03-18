@@ -29,8 +29,8 @@ class Rename extends Browser
 
 
     /**
-     * @return array|bool|mixed|string
-     */
+    * @return array|bool|mixed|string
+    */
     public function process()
     {
         $oldFile = $this->sanitize($this->getProperty('path'));

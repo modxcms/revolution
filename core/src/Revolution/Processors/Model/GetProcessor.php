@@ -27,9 +27,9 @@ abstract class GetProcessor extends ModelProcessor
     public $checkViewPermission = true;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $primaryKey = $this->getProperty($this->primaryKeyField, false);
@@ -49,9 +49,9 @@ abstract class GetProcessor extends ModelProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         $this->beforeOutput();
@@ -60,20 +60,20 @@ abstract class GetProcessor extends ModelProcessor
     }
 
     /**
-     * Return the response
-     *
-     * @return array
-     */
+    * Return the response
+    *
+    * @return array
+    */
     public function cleanup()
     {
         return $this->success('', $this->object->toArray());
     }
 
     /**
-     * Used for adding custom data in derivative types
-     *
-     * @return void
-     */
+    * Used for adding custom data in derivative types
+    *
+    * @return void
+    */
     public function beforeOutput()
     {
     }

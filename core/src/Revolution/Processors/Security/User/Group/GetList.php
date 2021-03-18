@@ -28,8 +28,8 @@ class GetList extends GetListProcessor
     public $permission = 'edit_user';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['user' => 0]);
@@ -38,9 +38,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->innerJoin(modUserGroupRole::class, 'UserGroupRole');
@@ -55,9 +55,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns(modUserGroupMember::class, 'modUserGroupMember'));

@@ -32,8 +32,8 @@ class Create extends CreateProcessor
     public $primaryKeyField = 'text';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeSet()
     {
         /* verify action */
@@ -64,8 +64,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $menuIndex = $this->modx->getCount($this->classKey, ['parent' => $this->getProperty('parent')]);
@@ -77,8 +77,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $cacheManager = $this->modx->getCacheManager();

@@ -83,9 +83,9 @@ class Publish extends Processor
     }
 
     /**
-     * Attempt to lock the Resource
-     * @return boolean
-     */
+    * Attempt to lock the Resource
+    * @return boolean
+    */
     public function addLock()
     {
         $locked = $this->resource->addLock();
@@ -99,9 +99,9 @@ class Publish extends Processor
     }
 
     /**
-     * Check for a duplicate alias before publishing
-     * @return boolean|string
-     */
+    * Check for a duplicate alias before publishing
+    * @return boolean|string
+    */
     public function checkForDuplicateAlias()
     {
         $duplicateAlias = false;
@@ -122,9 +122,9 @@ class Publish extends Processor
     }
 
     /**
-     * Fire after-publish events
-     * @return void
-     */
+    * Fire after-publish events
+    * @return void
+    */
     public function fireAfterPublish()
     {
         $this->modx->invokeEvent('OnDocPublished', [
@@ -135,18 +135,18 @@ class Publish extends Processor
     }
 
     /**
-     * Log a manager action
-     * @return void
-     */
+    * Log a manager action
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction('publish_resource', $this->resource->get('class_key'), $this->resource->get('id'));
     }
 
     /**
-     * Clear the site cache
-     * @return void
-     */
+    * Clear the site cache
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->cacheManager->refresh([

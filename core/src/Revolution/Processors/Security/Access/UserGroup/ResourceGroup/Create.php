@@ -27,8 +27,8 @@ class Create extends CreateProcessor
     public $permission = 'access_permissions';
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSet()
     {
         if ($this->getProperty('principal') === null) {
@@ -51,8 +51,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSave()
     {
         $resourceGroup = $this->modx->getObject(modResourceGroup::class, $this->getProperty('target'));

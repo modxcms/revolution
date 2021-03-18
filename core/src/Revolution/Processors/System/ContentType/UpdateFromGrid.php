@@ -34,25 +34,25 @@ class UpdateFromGrid extends Processor
     protected $record;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('content_types');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['content_type'];
     }
 
     /**
-     * @return bool|string|null
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool|string|null
+    * @throws \xPDO\xPDOException
+    */
     public function initialize()
     {
         $data = $this->getProperty('data');

@@ -25,19 +25,19 @@ use MODX\Revolution\modX;
 class modFileRegister extends modRegister
 {
     /**
-     * A physical directory where the register stores topics and messages.
-     *
-     * @var string
-     */
+    * A physical directory where the register stores topics and messages.
+    *
+    * @var string
+    */
     protected $directory = null;
 
     /**
-     * Construct a new modFileRegister instance.
-     *
-     * @param modX & $modx    A reference to a modX instance.
-     * @param string $key     A valid PHP variable which will be set on the modRegistry instance.
-     * @param array  $options Optional array of registry options.
-     */
+    * Construct a new modFileRegister instance.
+    *
+    * @param modX & $modx    A reference to a modX instance.
+    * @param string $key     A valid PHP variable which will be set on the modRegistry instance.
+    * @param array  $options Optional array of registry options.
+    */
     function __construct(& $modx, $key, $options = [])
     {
         parent::__construct($modx, $key, $options);
@@ -52,10 +52,10 @@ class modFileRegister extends modRegister
     }
 
     /**
-     * Make sure the register can write to the specified $directory.
-     *
-     * {@inheritdoc}
-     */
+    * Make sure the register can write to the specified $directory.
+    *
+    * {@inheritdoc}
+    */
     public function connect(array $attributes = [])
     {
         $connected = false;
@@ -67,10 +67,10 @@ class modFileRegister extends modRegister
     }
 
     /**
-     * Clear the register messages.
-     *
-     * {@inheritdoc}
-     */
+    * Clear the register messages.
+    *
+    * {@inheritdoc}
+    */
     public function clear($topic)
     {
         $topicDirectory = $this->directory . ltrim($this->sanitizePath($topic), '/');
@@ -84,25 +84,25 @@ class modFileRegister extends modRegister
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * This implementation supports the following options and default behavior:
-     * <ul>
-     * <li>msg_limit: Only poll until the specified limit of messages has
-     * been digested. Default is 5 messages.</li>
-     * <li>time_limit: Poll for new messages for a specified number of
-     * seconds. Default is the result of the php time_limit system variable.</li>
-     * <li>poll_limit: Only poll for new subscriptions a specified number
-     * of times. Default is unlimited.</li>
-     * <li>poll_interval: Wait a specified number of seconds between each
-     * additional polling iteration, after the initial one. Default is no
-     * interval.</li>
-     * <li>remove_read: Remove the message immediately upon digesting it.
-     * Default is true.</li>
-     * <li>include_keys: Include the message keys in the array of messages returned.
-     * Default is false.</li>
-     * </ul>
-     */
+    * {@inheritdoc}
+    *
+    * This implementation supports the following options and default behavior:
+    * <ul>
+    * <li>msg_limit: Only poll until the specified limit of messages has
+    * been digested. Default is 5 messages.</li>
+    * <li>time_limit: Poll for new messages for a specified number of
+    * seconds. Default is the result of the php time_limit system variable.</li>
+    * <li>poll_limit: Only poll for new subscriptions a specified number
+    * of times. Default is unlimited.</li>
+    * <li>poll_interval: Wait a specified number of seconds between each
+    * additional polling iteration, after the initial one. Default is no
+    * interval.</li>
+    * <li>remove_read: Remove the message immediately upon digesting it.
+    * Default is true.</li>
+    * <li>include_keys: Include the message keys in the array of messages returned.
+    * Default is false.</li>
+    * </ul>
+    */
     public function read(array $options = [])
     {
         $this->__kill = false;
@@ -174,12 +174,12 @@ class modFileRegister extends modRegister
     }
 
     /**
-     * Get list of topic messages from a directory sorted by modified date.
-     *
-     * @param string $dir A valid directory path.
-     *
-     * @return array An array of topic messages sorted by modified date.
-     */
+    * Get list of topic messages from a directory sorted by modified date.
+    *
+    * @param string $dir A valid directory path.
+    *
+    * @return array An array of topic messages sorted by modified date.
+    */
     private function getSortedDirectoryListing($dir)
     {
         $listing = [];
@@ -200,18 +200,18 @@ class modFileRegister extends modRegister
     }
 
     /**
-     * Read a message file from the queue.
-     *
-     * @todo   Implement support for reading various message types, other than
-     * executable PHP format.
-     * @access private
-     *
-     * @param string  $filename An absolute path to a message file to read.
-     * @param boolean $remove   Indicates if the message file should be deleted
-     *                          once the message is read from it.
-     *
-     * @return mixed|null
-     */
+    * Read a message file from the queue.
+    *
+    * @todo   Implement support for reading various message types, other than
+    * executable PHP format.
+    * @access private
+    *
+    * @param string  $filename An absolute path to a message file to read.
+    * @param boolean $remove   Indicates if the message file should be deleted
+    *                          once the message is read from it.
+    *
+    * @return mixed|null
+    */
     private function _readMessage($filename, $remove = true)
     {
         $message = null;
@@ -226,34 +226,34 @@ class modFileRegister extends modRegister
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * This implementation provides support for sending messages using either
-     * time-based indexes so they are consumed in the order they are produced,
-     * or named indexes typically used when consumers want to subscribe to a
-     * specific, unique message. Individual messages or message collections
-     * passed in numerically indexed arrays are treated as time-based messages
-     * and message collections passed in associative arrays are treated as named
-     * messages. e.g., to send a single message as named, wrap it in an array
-     * with the intended message name as the key.
-     *
-     * This implementation also supports a message_type option to indicate the
-     * format of the message being sent to the register. Currently only supports
-     * executable PHP format.
-     *
-     * Other implementation specific options include:
-     * <ul>
-     * <li>delay: Number of seconds to delay the message. This option is only
-     * supported for time-based messages.</li>
-     * <li>ttl: Number of seconds the message is valid in the queue.
-     * Default is forever or 0.</li>
-     * <li>kill: Tells a message consumer to stop consuming any more
-     * messages after reading any message sent with this option.</li>
-     * </ul>
-     *
-     * @todo Implement support for sending various message types, other than
-     * executable PHP format.
-     */
+    * {@inheritdoc}
+    *
+    * This implementation provides support for sending messages using either
+    * time-based indexes so they are consumed in the order they are produced,
+    * or named indexes typically used when consumers want to subscribe to a
+    * specific, unique message. Individual messages or message collections
+    * passed in numerically indexed arrays are treated as time-based messages
+    * and message collections passed in associative arrays are treated as named
+    * messages. e.g., to send a single message as named, wrap it in an array
+    * with the intended message name as the key.
+    *
+    * This implementation also supports a message_type option to indicate the
+    * format of the message being sent to the register. Currently only supports
+    * executable PHP format.
+    *
+    * Other implementation specific options include:
+    * <ul>
+    * <li>delay: Number of seconds to delay the message. This option is only
+    * supported for time-based messages.</li>
+    * <li>ttl: Number of seconds the message is valid in the queue.
+    * Default is forever or 0.</li>
+    * <li>kill: Tells a message consumer to stop consuming any more
+    * messages after reading any message sent with this option.</li>
+    * </ul>
+    *
+    * @todo Implement support for sending various message types, other than
+    * executable PHP format.
+    */
     public function send($topic, $message, array $options = [])
     {
         $sent = false;
@@ -313,12 +313,12 @@ class modFileRegister extends modRegister
     }
 
     /**
-     * Sanitize the specified path
-     *
-     * @param string $path The path to clean
-     *
-     * @return string The sanitized path
-     */
+    * Sanitize the specified path
+    *
+    * @param string $path The path to clean
+    *
+    * @return string The sanitized path
+    */
     protected function sanitizePath($path)
     {
         return preg_replace(["/\.*[\/|\\\]/i", "/[\/|\\\]+/i"], ['/', '/'], $path);

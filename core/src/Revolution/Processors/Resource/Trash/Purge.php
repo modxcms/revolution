@@ -44,8 +44,8 @@ class Purge extends Processor
     }
 
     /**
-     * @return bool|null|string
-     */
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $idlist = $this->getProperty('ids', false);
@@ -61,10 +61,10 @@ class Purge extends Processor
         ]);
 
         /* validate resource can be deleted: this is necessary in advance, because
-           otherwise the tvs might already have been removed, when the policy on the
-           resource is checked. (just a guess, does not harm to check here and again on
-           processing.
-         */
+            otherwise the tvs might already have been removed, when the policy on the
+            resource is checked. (just a guess, does not harm to check here and again on
+            processing.
+        */
 
         $this->failures = [];
         $success = [];

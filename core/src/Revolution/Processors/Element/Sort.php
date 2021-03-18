@@ -63,10 +63,10 @@ class Sort extends Processor
     }
 
     /**
-     * Get the data formatted and ready for sorting
-     *
-     * @return array
-     */
+    * Get the data formatted and ready for sorting
+    *
+    * @return array
+    */
     public function getData()
     {
         $data = $this->getProperty('data');
@@ -83,12 +83,12 @@ class Sort extends Processor
     }
 
     /**
-     * Handle dropping of Elements or Categories onto Categories
-     *
-     * @param array $data
-     *
-     * @return boolean|string
-     */
+    * Handle dropping of Elements or Categories onto Categories
+    *
+    * @param array $data
+    *
+    * @return boolean|string
+    */
     public function handleCategoryDrop(array $data)
     {
         /* if dropping an element onto a category, do that here */
@@ -147,12 +147,12 @@ class Sort extends Processor
     }
 
     /**
-     * Handle dropping of Categories onto other Categories
-     *
-     * @param array $data
-     *
-     * @return boolean
-     */
+    * Handle dropping of Categories onto other Categories
+    *
+    * @param array $data
+    *
+    * @return boolean
+    */
     public function handleSubCategoryDrop(array $data)
     {
         $cdata = [];
@@ -181,14 +181,14 @@ class Sort extends Processor
 
 
     /**
-     * Properly sort the data
-     *
-     * @param string $xname
-     * @param string $type
-     * @param array  $data
-     *
-     * @return void
-     */
+    * Properly sort the data
+    *
+    * @param string $xname
+    * @param string $type
+    * @param array  $data
+    *
+    * @return void
+    */
     public function sortNodes($xname, $type, $data)
     {
         $s = $data['n_type_' . $type];
@@ -247,14 +247,14 @@ class Sort extends Processor
     }
 
     /**
-     * Set the static element path after drag and drop.
-     *
-     * @param string     $type
-     * @param modElement $element
-     * @param int        $currentCategoryId
-     *
-     * @return string
-     */
+    * Set the static element path after drag and drop.
+    *
+    * @param string     $type
+    * @param modElement $element
+    * @param int        $currentCategoryId
+    *
+    * @return string
+    */
     public function setNewStaticElementFilename($type, $element, $currentCategoryId)
     {
         $categoryArray = $this->getCategoryUltimateParent($currentCategoryId);
@@ -289,12 +289,12 @@ class Sort extends Processor
     }
 
     /**
-     * Retrieve ultimate parent category for current category.
-     *
-     * @param int $id
-     *
-     * @return mixed
-     */
+    * Retrieve ultimate parent category for current category.
+    *
+    * @param int $id
+    *
+    * @return mixed
+    */
     public function getCategoryUltimateParent($id)
     {
         $category = $this->modx->getObject(modCategory::class, $id);
@@ -306,12 +306,12 @@ class Sort extends Processor
     }
 
     /**
-     * Get a list of nested categories.
-     *
-     * @param $list
-     * @param $nestedId
-     * @param $nestedName
-     */
+    * Get a list of nested categories.
+    *
+    * @param $list
+    * @param $nestedId
+    * @param $nestedName
+    */
     public function includeCategoryChildren(&$list, $nestedId, $nestedName)
     {
         $children = $this->modx->getIterator(modCategory::class, ['parent' => $nestedId]);

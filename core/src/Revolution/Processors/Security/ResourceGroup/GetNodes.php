@@ -22,24 +22,24 @@ use MODX\Revolution\modResourceGroup;
 class GetNodes extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('resourcegroup_view');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['access'];
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -54,8 +54,8 @@ class GetNodes extends Processor
     }
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function process()
     {
         /* get parent */
@@ -102,9 +102,9 @@ class GetNodes extends Processor
     }
 
     /**
-     * Get the Resource Groups at this level
-     * @return array
-     */
+    * Get the Resource Groups at this level
+    * @return array
+    */
     public function getResourceGroups()
     {
         $c = $this->modx->newQuery(modResourceGroup::class);

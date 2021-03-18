@@ -26,8 +26,8 @@ class Activate extends UpdateProcessor
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->object->set('active', true);

@@ -17,30 +17,30 @@ class modTransportManager
 {
 
     /**
-     * @var modX A reference to the MODX object.
-     */
+    * @var modX A reference to the MODX object.
+    */
     public $modx = null;
 
     /**
-     * @var array The configuration array for the TransportManager.
-     */
+    * @var array The configuration array for the TransportManager.
+    */
     public $config = [];
 
     /**
-     * @var array An array of active providers.
-     */
+    * @var array An array of active providers.
+    */
     public $providers = [];
 
     /**
-     * @var modWorkspace The active MODX workspace.
-     */
+    * @var modWorkspace The active MODX workspace.
+    */
     public $workspace = null;
 
     /**
-     * Creates an instance of the modTransportManager class.
-     *
-     * @param  modX  $modx  A reference to a modX instance.
-     */
+    * Creates an instance of the modTransportManager class.
+    *
+    * @param  modX  $modx  A reference to a modX instance.
+    */
     public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
@@ -48,11 +48,11 @@ class modTransportManager
     }
 
     /**
-     * Get the active workspace for the MODX installation.
-     *
-     * @access public
-     * @return modWorkspace
-     */
+    * Get the active workspace for the MODX installation.
+    *
+    * @access public
+    * @return modWorkspace
+    */
     public function getActiveWorkspace()
     {
         if ($this->workspace == null) {
@@ -65,14 +65,14 @@ class modTransportManager
     }
 
     /**
-     * Change the active workspace in MODX.
-     *
-     * @access public
-     *
-     * @param  int  $workspaceId  The PK of the modWorkspace.
-     *
-     * @return modWorkspace
-     */
+    * Change the active workspace in MODX.
+    *
+    * @access public
+    *
+    * @param  int  $workspaceId  The PK of the modWorkspace.
+    *
+    * @return modWorkspace
+    */
     public function changeActiveWorkspace($workspaceId)
     {
         /** @var modWorkspace $workspace */
@@ -92,11 +92,11 @@ class modTransportManager
     }
 
     /**
-     * Scans all providers for a list of updates for all packages.
-     *
-     * @access public
-     * @return array An array of updates for packages.
-     */
+    * Scans all providers for a list of updates for all packages.
+    *
+    * @access public
+    * @return array An array of updates for packages.
+    */
     public function scanForUpdates()
     {
         $updates = [];
@@ -110,14 +110,14 @@ class modTransportManager
     }
 
     /**
-     * Get a list of providers for the transports.
-     *
-     * @access public
-     *
-     * @param  bool  $refresh  If true, refresh the list of providers. Defaults to false.
-     *
-     * @return modTransportProvider[] A list of providers.
-     */
+    * Get a list of providers for the transports.
+    *
+    * @access public
+    *
+    * @param  bool  $refresh  If true, refresh the list of providers. Defaults to false.
+    *
+    * @return modTransportProvider[] A list of providers.
+    */
     public function getProviders($refresh = false)
     {
         if (empty($this->providers) || $refresh) {
@@ -130,11 +130,11 @@ class modTransportManager
     }
 
     /**
-     * Scans all providers for a list of packages.
-     *
-     * @access public
-     * @return array An array of packages.
-     */
+    * Scans all providers for a list of packages.
+    *
+    * @access public
+    * @return array An array of packages.
+    */
     public function scanForPackages()
     {
         $packages = [];

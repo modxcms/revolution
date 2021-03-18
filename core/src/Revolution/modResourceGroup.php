@@ -18,10 +18,10 @@ namespace MODX\Revolution;
 class modResourceGroup extends modAccessibleSimpleObject
 {
     /**
-     * Overrides xPDOObject::save to fire modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::save to fire modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -49,10 +49,10 @@ class modResourceGroup extends modAccessibleSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::remove to fire modX-specific events
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::remove to fire modX-specific events
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -76,10 +76,10 @@ class modResourceGroup extends modAccessibleSimpleObject
 
 
     /**
-     * Get all Resources within this Resource Group
-     *
-     * @return array|null
-     */
+    * Get all Resources within this Resource Group
+    *
+    * @return array|null
+    */
     public function getResources()
     {
         $c = $this->xpdo->newQuery(modResource::class);
@@ -90,10 +90,10 @@ class modResourceGroup extends modAccessibleSimpleObject
     }
 
     /**
-     * Get all User Groups attached to this Resource Group
-     *
-     * @return array
-     */
+    * Get all User Groups attached to this Resource Group
+    *
+    * @return array
+    */
     public function getUserGroups()
     {
         $access = $this->xpdo->getCollection(modAccessResourceGroup::class, [
@@ -110,13 +110,13 @@ class modResourceGroup extends modAccessibleSimpleObject
     }
 
     /**
-     * Check to see if the passed user (or current active user) has access to this Resource Group
-     *
-     * @param null|modUser $user
-     * @param string       $context
-     *
-     * @return boolean
-     */
+    * Check to see if the passed user (or current active user) has access to this Resource Group
+    *
+    * @param null|modUser $user
+    * @param string       $context
+    *
+    * @return boolean
+    */
     public function hasAccess($user = null, $context = '')
     {
         /** @var modUser $user */

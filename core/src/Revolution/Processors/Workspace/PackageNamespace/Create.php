@@ -28,8 +28,8 @@ class Create extends CreateProcessor
     public $primaryKeyField = 'name';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name');
@@ -40,7 +40,7 @@ class Create extends CreateProcessor
 
         $this->object->set('path', trim($this->object->get('path')));
         $this->object->set('assets_path', trim($this->object->get('assets_path')));
-        
+
         return parent::beforeSave();
     }
 }

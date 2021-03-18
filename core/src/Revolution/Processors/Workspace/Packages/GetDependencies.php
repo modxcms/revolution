@@ -46,8 +46,8 @@ class GetDependencies extends GetListProcessor
     public $transport;
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $signature = $this->getProperty('signature');
@@ -69,8 +69,8 @@ class GetDependencies extends GetListProcessor
     }
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function process()
     {
         $requires = $this->transport->getAttribute('requires');

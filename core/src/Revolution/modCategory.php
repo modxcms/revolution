@@ -19,15 +19,15 @@ namespace MODX\Revolution;
 class modCategory extends modAccessibleSimpleObject
 {
     /**
-     * @var boolean Monitors whether parent has been changed.
-     * @access protected
-     */
+    * @var boolean Monitors whether parent has been changed.
+    * @access protected
+    */
     protected $_parentChanged = false;
 
     /**
-     * @var array A list of invalid characters in the name of an Element.
-     * @access protected
-     */
+    * @var array A list of invalid characters in the name of an Element.
+    * @access protected
+    */
     protected $_invalidCharacters = [
         '!',
         '@',
@@ -61,10 +61,10 @@ class modCategory extends modAccessibleSimpleObject
     ];
 
     /**
-     * Overrides xPDOObject::set to strip invalid characters from element names.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::set to strip invalid characters from element names.
+    *
+    * {@inheritDoc}
+    */
     public function set($k, $v = null, $vType = '')
     {
         $set = false;
@@ -83,10 +83,10 @@ class modCategory extends modAccessibleSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::save to fire modX-specific events
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::save to fire modX-specific events
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -121,11 +121,11 @@ class modCategory extends modAccessibleSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::remove to reset all Element categories back to 0
-     * and fire modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::remove to reset all Element categories back to 0
+    * and fire modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -163,10 +163,10 @@ class modCategory extends modAccessibleSimpleObject
     }
 
     /**
-     * Loads the access control policies applicable to this category.
-     *
-     * {@inheritdoc}
-     */
+    * Loads the access control policies applicable to this category.
+    *
+    * {@inheritdoc}
+    */
     public function findPolicy($context = '')
     {
         $policy = [];
@@ -218,10 +218,10 @@ class modCategory extends modAccessibleSimpleObject
     }
 
     /**
-     * Build the closure table for this instance.
-     *
-     * @return boolean True unless building the closure fails and instance is removed.
-     */
+    * Build the closure table for this instance.
+    *
+    * @return boolean True unless building the closure fails and instance is removed.
+    */
     public function buildClosure()
     {
         $id = $this->get('id');
@@ -280,8 +280,8 @@ class modCategory extends modAccessibleSimpleObject
     }
 
     /**
-     * Rebuild closure table records for this instance, i.e. parent changed.
-     */
+    * Rebuild closure table records for this instance, i.e. parent changed.
+    */
     public function rebuildClosure()
     {
         /* first remove old tree path */

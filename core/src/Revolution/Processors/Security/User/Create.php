@@ -46,14 +46,14 @@ class Create extends CreateProcessor {
     public $newPassword = '';
 
     /**
-     * Allow for Users to use derivative classes for their processors
-     *
-     * @static
-     * @param modX $modx
-     * @param $className
-     * @param array $properties
-     * @return Processor
-     */
+    * Allow for Users to use derivative classes for their processors
+    *
+    * @static
+    * @param modX $modx
+    * @param $className
+    * @param array $properties
+    * @return Processor
+    */
     public static function getInstance(modX $modx,$className,$properties = []) {
         $classKey = !empty($properties['class_key']) ? $properties['class_key'] : modUser::class;
         $object = $modx->newObject($classKey);
@@ -83,9 +83,9 @@ class Create extends CreateProcessor {
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function beforeSave() {
         $this->addProfile();
 
@@ -103,9 +103,9 @@ class Create extends CreateProcessor {
     }
 
     /**
-     * Add User Group memberships to the User
-     * @return modUserGroupMember[]
-     */
+    * Add User Group memberships to the User
+    * @return modUserGroupMember[]
+    */
     public function setUserGroups()
     {
         $memberships = [];
@@ -174,8 +174,8 @@ class Create extends CreateProcessor {
     }
 
     /**
-     * @return modUserProfile
-     */
+    * @return modUserProfile
+    */
     public function addProfile() {
         $this->profile = $this->modx->newObject(modUserProfile::class);
         $this->profile->fromArray($this->getProperties());
@@ -186,10 +186,10 @@ class Create extends CreateProcessor {
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     * @throws Exception
-     */
+    * {@inheritDoc}
+    * @return boolean
+    * @throws Exception
+    */
     public function afterSave() {
         $this->setUserGroups();
         $this->sendNotificationEmail();
@@ -197,11 +197,11 @@ class Create extends CreateProcessor {
     }
 
     /**
-     * Send the password notification email, if specified
-     *
-     * @return void
-     * @throws Exception
-     */
+    * Send the password notification email, if specified
+    *
+    * @return void
+    * @throws Exception
+    */
     public function sendNotificationEmail() {
         if ($this->getProperty('notify_new_user')) {
             $message = $this->modx->getOption('signupemail_message', null, $this->modx->lexicon('login_signup_email'), true);
@@ -235,9 +235,9 @@ class Create extends CreateProcessor {
     }
 
     /**
-     * {@inheritDoc}
-     * @return array|string
-     */
+    * {@inheritDoc}
+    * @return array|string
+    */
     public function cleanup() {
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod', 's');
         if (!empty($passwordNotifyMethod) && $passwordNotifyMethod == 's') {

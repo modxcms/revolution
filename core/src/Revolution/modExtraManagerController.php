@@ -19,27 +19,27 @@ namespace MODX\Revolution;
 abstract class modExtraManagerController extends modManagerController
 {
     /**
-     * Define the default controller action for this namespace
-     *
-     * @static
-     * @return string A default controller action
-     */
+    * Define the default controller action for this namespace
+    *
+    * @static
+    * @return string A default controller action
+    */
     public static function getDefaultController()
     {
         return 'index';
     }
 
     /**
-     * Get an instance of this extra controller
-     *
-     * @static
-     *
-     * @param modX   $modx      A reference to the modX object
-     * @param string $className The string className that is being requested to load
-     * @param array  $config    An array of configuration options built from the modAction object
-     *
-     * @return modManagerController A newly created modManagerController instance
-     */
+    * Get an instance of this extra controller
+    *
+    * @static
+    *
+    * @param modX   $modx      A reference to the modX object
+    * @param string $className The string className that is being requested to load
+    * @param array  $config    An array of configuration options built from the modAction object
+    *
+    * @return modManagerController A newly created modManagerController instance
+    */
     public static function getInstanceDeprecated(modX &$modx, $className, array $config = [])
     {
         $action = call_user_func([$className, 'getDefaultController']);
@@ -56,16 +56,16 @@ abstract class modExtraManagerController extends modManagerController
     }
 
     /**
-     * Return the class name of a controller given the action
-     *
-     * @static
-     *
-     * @param string $action    The action name, eg: "home" or "create"
-     * @param string $namespace The namespace of the Exra
-     * @param string $postFix   The string to postfix to the class name
-     *
-     * @return string A full class name of the controller class
-     */
+    * Return the class name of a controller given the action
+    *
+    * @static
+    *
+    * @param string $action    The action name, eg: "home" or "create"
+    * @param string $namespace The namespace of the Exra
+    * @param string $postFix   The string to postfix to the class name
+    *
+    * @return string A full class name of the controller class
+    */
     public static function getControllerClassName($action, $namespace = '', $postFix = 'ManagerController')
     {
         $className = explode('/', $action);
@@ -78,50 +78,50 @@ abstract class modExtraManagerController extends modManagerController
     }
 
     /**
-     * Do any page-specific logic and/or processing here
-     *
-     * @param array $scriptProperties
-     *
-     * @return void
-     */
+    * Do any page-specific logic and/or processing here
+    *
+    * @param array $scriptProperties
+    *
+    * @return void
+    */
     public function process(array $scriptProperties = [])
     {
     }
 
     /**
-     * The page title for this controller
-     *
-     * @return string The string title of the page
-     */
+    * The page title for this controller
+    *
+    * @return string The string title of the page
+    */
     public function getPageTitle()
     {
         return '';
     }
 
     /**
-     * Loads any page-specific CSS/JS for the controller
-     *
-     * @return void
-     */
+    * Loads any page-specific CSS/JS for the controller
+    *
+    * @return void
+    */
     public function loadCustomCssJs()
     {
     }
 
     /**
-     * Specify the location of the template file
-     *
-     * @return string The absolute path to the template file
-     */
+    * Specify the location of the template file
+    *
+    * @return string The absolute path to the template file
+    */
     public function getTemplateFile()
     {
         return '';
     }
 
     /**
-     * Check whether the active user has access to view this page
-     *
-     * @return bool True if the user passes permission checks
-     */
+    * Check whether the active user has access to view this page
+    *
+    * @return bool True if the user passes permission checks
+    */
     public function checkPermissions()
     {
         return true;

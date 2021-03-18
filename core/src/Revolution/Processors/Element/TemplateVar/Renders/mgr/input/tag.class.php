@@ -18,10 +18,10 @@ use MODX\Revolution\modTemplateVarInputRender;
 class modTemplateVarInputRenderTag extends modTemplateVarInputRender
 {
     /**
-     * @param string|array $value
-     * @param array $params
-     * @return mixed|void
-     */
+    * @param string|array $value
+    * @param array $params
+    * @return mixed|void
+    */
     public function process($value, array $params = [])
     {
         $value = is_array($value) ? $value : explode(',', $value);
@@ -46,8 +46,8 @@ class modTemplateVarInputRenderTag extends modTemplateVarInputRender
     }
 
     /**
-     * @return string
-     */
+    * @return string
+    */
     public function getTemplate()
     {
         return 'element/tv/renders/input/tag.tpl';

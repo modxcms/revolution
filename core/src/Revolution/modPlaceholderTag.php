@@ -22,9 +22,9 @@ namespace MODX\Revolution;
 class modPlaceholderTag extends modTag
 {
     /**
-     * Overrides modTag::__construct to set the Placeholder Tag token
-     * {@inheritdoc}
-     */
+    * Overrides modTag::__construct to set the Placeholder Tag token
+    * {@inheritdoc}
+    */
     function __construct(modX & $modx)
     {
         parent:: __construct($modx);
@@ -33,14 +33,14 @@ class modPlaceholderTag extends modTag
     }
 
     /**
-     * Processes the modPlaceholderTag, recursively processing nested tags.
-     *
-     * Tags in the properties of the tag itself, or the content returned by the
-     * tag element are processed.  Non-cacheable nested tags are only processed
-     * if this tag element is also non-cacheable.
-     *
-     * {@inheritdoc}
-     */
+    * Processes the modPlaceholderTag, recursively processing nested tags.
+    *
+    * Tags in the properties of the tag itself, or the content returned by the
+    * tag element are processed.  Non-cacheable nested tags are only processed
+    * if this tag element is also non-cacheable.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         parent:: process($properties, $content);
@@ -72,10 +72,10 @@ class modPlaceholderTag extends modTag
     }
 
     /**
-     * Get the raw source content of the field.
-     *
-     * {@inheritdoc}
-     */
+    * Get the raw source content of the field.
+    *
+    * {@inheritdoc}
+    */
     public function getContent(array $options = [])
     {
         if (!is_string($this->_content)) {
@@ -90,20 +90,20 @@ class modPlaceholderTag extends modTag
     }
 
     /**
-     * modPlaceholderTag instances cannot be cacheable.
-     *
-     * @return boolean Always returns false.
-     */
+    * modPlaceholderTag instances cannot be cacheable.
+    *
+    * @return boolean Always returns false.
+    */
     public function isCacheable()
     {
         return false;
     }
 
     /**
-     * modPlaceholderTag instances cannot be cacheable.
-     *
-     * {@inheritdoc}
-     */
+    * modPlaceholderTag instances cannot be cacheable.
+    *
+    * {@inheritdoc}
+    */
     public function setCacheable($cacheable = true)
     {
     }

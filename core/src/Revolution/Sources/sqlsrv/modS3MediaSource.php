@@ -10,10 +10,10 @@ class modS3MediaSource extends \MODX\Revolution\Sources\modS3MediaSource
         'package' => 'MODX\\Revolution\\Sources',
         'version' => '3.0',
         'extends' => 'MODX\\Revolution\\Sources\\modMediaSource',
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
     );

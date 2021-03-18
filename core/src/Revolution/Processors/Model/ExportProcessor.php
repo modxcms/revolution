@@ -46,10 +46,10 @@ abstract class ExportProcessor extends GetProcessor
     }
 
     /**
-     * Cache the data to an export file
-     *
-     * @return array|string
-     */
+    * Cache the data to an export file
+    *
+    * @return array|string
+    */
     public function cache()
     {
         $this->xml = new XMLWriter();
@@ -77,17 +77,17 @@ abstract class ExportProcessor extends GetProcessor
     }
 
     /**
-     * Must be declared in your derivative class. Used to prepare the data to export.
-     *
-     * @abstract
-     */
+    * Must be declared in your derivative class. Used to prepare the data to export.
+    *
+    * @abstract
+    */
     abstract public function prepareXml();
 
     /**
-     * Attempt to download the exported file to the browser
-     *
-     * @return mixed
-     */
+    * Attempt to download the exported file to the browser
+    *
+    * @return mixed
+    */
     public function download()
     {
         $fileName = $this->object->get($this->nameField) . '.xml';
@@ -111,10 +111,10 @@ abstract class ExportProcessor extends GetProcessor
     }
 
     /**
-     * Log the export manager action
-     *
-     * @return void
-     */
+    * Log the export manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction($this->objectType . '_export', $this->classKey,

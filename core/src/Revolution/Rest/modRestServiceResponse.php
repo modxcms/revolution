@@ -32,20 +32,20 @@ class modRestServiceResponse
     protected $payload = [];
 
     /**
-     * Map of formats to their parallel content types
-     *
-     * @var array
-     */
+    * Map of formats to their parallel content types
+    *
+    * @var array
+    */
     protected static $contentTypes = [
         'xml' => 'application/xml',
         'json' => 'application/json',
         'qs' => 'text/plain',
     ];
     /**
-     * Dictionary of response codes and their text descriptions
-     *
-     * @var array
-     */
+    * Dictionary of response codes and their text descriptions
+    *
+    * @var array
+    */
     protected static $responseCodes = [
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -91,10 +91,10 @@ class modRestServiceResponse
     ];
 
     /**
-     * @param modRestService $service A reference to the modRestService instance
-     * @param string         $body    The actual body of the response
-     * @param string|int     $status  The status code for the response
-     */
+    * @param modRestService $service A reference to the modRestService instance
+    * @param string         $body    The actual body of the response
+    * @param string|int     $status  The status code for the response
+    */
     function __construct(modRestService &$service, $body, $status)
     {
         $this->service = &$service;
@@ -103,18 +103,18 @@ class modRestServiceResponse
     }
 
     /**
-     * Set the content type for this response
-     *
-     * @param string $contentType
-     */
+    * Set the content type for this response
+    *
+    * @param string $contentType
+    */
     public function setContentType($contentType)
     {
         $this->contentType = $contentType;
     }
 
     /**
-     * Prepare the response, properly formatting the body and generating the payload
-     */
+    * Prepare the response, properly formatting the body and generating the payload
+    */
     public function prepare()
     {
         if (!empty($this->body)) {
@@ -126,11 +126,11 @@ class modRestServiceResponse
     }
 
     /**
-     * Format the body based on the content type of the response
-     *
-     * @access protected
-     * @return string
-     */
+    * Format the body based on the content type of the response
+    *
+    * @access protected
+    * @return string
+    */
     protected function getFormattedBody()
     {
         switch ($this->contentType) {
@@ -151,8 +151,8 @@ class modRestServiceResponse
     }
 
     /**
-     * Send the response back to the client.
-     */
+    * Send the response back to the client.
+    */
     public function send()
     {
         $contentType = $this->getResponseContentType($this->contentType);
@@ -170,38 +170,38 @@ class modRestServiceResponse
     }
 
     /**
-     * Get the proper response code message for the passed status code
-     *
-     * @param int $status
-     *
-     * @return string
-     */
+    * Get the proper response code message for the passed status code
+    *
+    * @param int $status
+    *
+    * @return string
+    */
     protected function getResponseCodeMessage($status)
     {
         return (isset(self::$responseCodes[$status])) ? self::$responseCodes[$status] : self::$responseCodes[500];
     }
 
     /**
-     * Get the proper HTTP content type for the passed format
-     *
-     * @param string $format
-     *
-     * @return string
-     */
+    * Get the proper HTTP content type for the passed format
+    *
+    * @param string $format
+    *
+    * @return string
+    */
     protected function getResponseContentType($format = 'json')
     {
         return self::$contentTypes[$format];
     }
 
     /**
-     * Convert an array to XML output
-     *
-     * @param array  $data
-     * @param string $version
-     * @param string $encoding
-     *
-     * @return string
-     */
+    * Convert an array to XML output
+    *
+    * @param array  $data
+    * @param string $version
+    * @param string $encoding
+    *
+    * @return string
+    */
     protected function toXml($data, $version = '1.0', $encoding = 'UTF-8')
     {
         $xml = new XMLWriter;
@@ -215,12 +215,12 @@ class modRestServiceResponse
     }
 
     /**
-     * Helper method for converting an array to XML output
-     *
-     * @param XMLWriter $xml
-     * @param mixed     $data
-     * @param string    $old_key
-     */
+    * Helper method for converting an array to XML output
+    *
+    * @param XMLWriter $xml
+    * @param mixed     $data
+    * @param string    $old_key
+    */
     protected function _xml(XMLWriter $xml, $data, $old_key = null)
     {
         foreach ($data as $key => $value) {

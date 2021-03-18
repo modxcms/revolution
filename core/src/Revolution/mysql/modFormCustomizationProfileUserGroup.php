@@ -11,18 +11,18 @@ class modFormCustomizationProfileUserGroup extends \MODX\Revolution\modFormCusto
         'version' => '3.0',
         'table' => 'fc_profiles_usergroups',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'usergroup' => 0,
             'profile' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'usergroup' => 
+            'usergroup' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -31,7 +31,7 @@ class modFormCustomizationProfileUserGroup extends \MODX\Revolution\modFormCusto
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'profile' => 
+            'profile' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -41,23 +41,23 @@ class modFormCustomizationProfileUserGroup extends \MODX\Revolution\modFormCusto
                 'index' => 'pk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'usergroup' => 
+                    'usergroup' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'profile' => 
+                    'profile' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -66,9 +66,9 @@ class modFormCustomizationProfileUserGroup extends \MODX\Revolution\modFormCusto
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'UserGroup' => 
+            'UserGroup' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'usergroup',
@@ -76,7 +76,7 @@ class modFormCustomizationProfileUserGroup extends \MODX\Revolution\modFormCusto
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Profile' => 
+            'Profile' =>
             array (
                 'class' => 'MODX\\Revolution\\modFormCustomizationProfile',
                 'local' => 'profile',

@@ -113,4 +113,3 @@ abstract class Update extends UpdateProcessor
                 ['previous_category' => $this->previousCategory]));
     }
 }
-

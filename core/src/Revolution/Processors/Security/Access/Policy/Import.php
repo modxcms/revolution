@@ -28,8 +28,8 @@ class Import extends ImportProcessor
     public $languageTopics = ['policy'];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->object->set('description', (string)$this->xml->description);
@@ -62,8 +62,8 @@ class Import extends ImportProcessor
     }
 
     /**
-     * @return modAccessPolicyTemplate
-     */
+    * @return modAccessPolicyTemplate
+    */
     public function createTemplateFromImport()
     {
         /** @var modAccessPolicyTemplate $template */

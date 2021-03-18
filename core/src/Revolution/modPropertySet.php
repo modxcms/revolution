@@ -25,19 +25,19 @@ use xPDO\xPDO;
 class modPropertySet extends xPDOSimpleObject
 {
     /**
-     * The property value array for the element.
-     *
-     * @var array
-     * @access protected
-     */
+    * The property value array for the element.
+    *
+    * @var array
+    * @access protected
+    */
     protected $_properties = null;
 
     /**
-     * Get all the modElement instances this property set is available to.
-     *
-     * @access public
-     * @return array An array of modElement instances.
-     */
+    * Get all the modElement instances this property set is available to.
+    *
+    * @access public
+    * @return array An array of modElement instances.
+    */
     public function getElements()
     {
         $elements = [];
@@ -54,11 +54,11 @@ class modPropertySet extends xPDOSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::get to handle when retrieving the properties field
-     * for an Element.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides xPDOObject::get to handle when retrieving the properties field
+    * for an Element.
+    *
+    * {@inheritdoc}
+    */
     public function get($k, $format = null, $formatTemplate = null)
     {
         $value = parent:: get($k, $format, $formatTemplate);
@@ -98,15 +98,15 @@ class modPropertySet extends xPDOSimpleObject
     }
 
     /**
-     * Get the properties for this element instance for processing.
-     *
-     * @access public
-     *
-     * @param array|string $properties An array or string of properties to
-     *                                 apply.
-     *
-     * @return array A simple array of properties ready to use for processing.
-     */
+    * Get the properties for this element instance for processing.
+    *
+    * @access public
+    *
+    * @param array|string $properties An array or string of properties to
+    *                                 apply.
+    *
+    * @return array A simple array of properties ready to use for processing.
+    */
     public function getProperties($properties = null)
     {
         $this->xpdo->getParser();
@@ -119,16 +119,16 @@ class modPropertySet extends xPDOSimpleObject
     }
 
     /**
-     * Set properties for this modPropertySet instance.
-     *
-     * @access public
-     *
-     * @param array|string $properties A property array or property string.
-     * @param boolean      $merge      Indicates if properties should be merged with
-     *                                 existing ones.
-     *
-     * @return boolean true if the properties are set.
-     */
+    * Set properties for this modPropertySet instance.
+    *
+    * @access public
+    *
+    * @param array|string $properties A property array or property string.
+    * @param boolean      $merge      Indicates if properties should be merged with
+    *                                 existing ones.
+    *
+    * @return boolean true if the properties are set.
+    */
     public function setProperties($properties, $merge = false)
     {
         $set = false;
@@ -206,10 +206,10 @@ class modPropertySet extends xPDOSimpleObject
 
 
     /**
-     * Overrides xPDOObject::save to fire modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::save to fire modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -235,10 +235,10 @@ class modPropertySet extends xPDOSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::remove to fire modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::remove to fire modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {

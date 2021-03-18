@@ -25,14 +25,14 @@ use xPDO\Om\xPDOSimpleObject;
 class modAccess extends xPDOSimpleObject
 {
     /**
-     * Override getOne to get the appropriate Principal class.
-     *
-     * @param      $alias
-     * @param null $criteria
-     * @param bool $cacheFlag
-     *
-     * @return null|xPDOObject
-     */
+    * Override getOne to get the appropriate Principal class.
+    *
+    * @param      $alias
+    * @param null $criteria
+    * @param bool $cacheFlag
+    *
+    * @return null|xPDOObject
+    */
     public function & getOne($alias, $criteria = null, $cacheFlag = true)
     {
         $object = null;

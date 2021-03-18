@@ -114,41 +114,41 @@ abstract class SoftRemoveProcessor extends ModelProcessor
     }
 
     /**
-     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
-     * classes
-     *
-     * @return boolean
-     */
+    * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+    * classes
+    *
+    * @return boolean
+    */
     public function saveObject()
     {
         return $this->object->save();
     }
 
     /**
-     * Can contain pre-removal logic; return false to prevent remove.
-     *
-     * @return boolean
-     */
+    * Can contain pre-removal logic; return false to prevent remove.
+    *
+    * @return boolean
+    */
     public function beforeRemove()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Can contain post-removal logic.
-     *
-     * @return bool
-     */
+    * Can contain post-removal logic.
+    *
+    * @return bool
+    */
     public function afterRemove()
     {
         return true;
     }
 
     /**
-     * Log the removal manager action
-     *
-     * @return void
-     */
+    * Log the removal manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction($this->objectType . '_soft_delete', $this->classKey,
@@ -156,19 +156,19 @@ abstract class SoftRemoveProcessor extends ModelProcessor
     }
 
     /**
-     * After removal, manager action log, and event firing logic
-     *
-     * @return void
-     */
+    * After removal, manager action log, and event firing logic
+    *
+    * @return void
+    */
     public function cleanup()
     {
     }
 
     /**
-     * If specified, fire the before remove event
-     *
-     * @return boolean Return false to allow removal; non-empty to prevent it
-     */
+    * If specified, fire the before remove event
+    *
+    * @return boolean Return false to allow removal; non-empty to prevent it
+    */
     public function fireBeforeRemoveEvent()
     {
         $preventRemove = false;
@@ -185,10 +185,10 @@ abstract class SoftRemoveProcessor extends ModelProcessor
     }
 
     /**
-     * If specified, fire the after remove event
-     *
-     * @return void
-     */
+    * If specified, fire the after remove event
+    *
+    * @return void
+    */
     public function fireAfterRemoveEvent()
     {
         if (!empty($this->afterRemoveEvent)) {

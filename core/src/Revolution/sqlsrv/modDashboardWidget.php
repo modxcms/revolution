@@ -11,7 +11,7 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
         'version' => '3.0',
         'table' => 'dashboard_widget',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'description' => NULL,
@@ -23,9 +23,9 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
             'size' => 'half',
             'permission' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -33,13 +33,13 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 'null' => false,
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'type' => 
+            'type' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -47,20 +47,20 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 'null' => false,
                 'index' => 'index',
             ),
-            'content' => 
+            'content' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'json',
                 'null' => true,
             ),
-            'namespace' => 
+            'namespace' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -69,7 +69,7 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 'default' => '',
                 'index' => 'index',
             ),
-            'lexicon' => 
+            'lexicon' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -78,7 +78,7 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 'default' => 'core:dashboards',
                 'index' => 'index',
             ),
-            'size' => 
+            'size' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -86,7 +86,7 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 'null' => false,
                 'default' => 'half',
             ),
-            'permission' => 
+            'permission' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -95,17 +95,17 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 'default' => '',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -113,15 +113,15 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                     ),
                 ),
             ),
-            'type' => 
+            'type' =>
             array (
                 'alias' => 'type',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'type' => 
+                    'type' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -129,15 +129,15 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                     ),
                 ),
             ),
-            'namespace' => 
+            'namespace' =>
             array (
                 'alias' => 'namespace',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'namespace' => 
+                    'namespace' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -145,15 +145,15 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                     ),
                 ),
             ),
-            'lexicon' => 
+            'lexicon' =>
             array (
                 'alias' => 'lexicon',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'lexicon' => 
+                    'lexicon' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -162,9 +162,9 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Placements' => 
+            'Placements' =>
             array (
                 'class' => 'MODX\\Revolution\\modDashboardWidgetPlacement',
                 'local' => 'id',
@@ -173,9 +173,9 @@ class modDashboardWidget extends \MODX\Revolution\modDashboardWidget
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Namespace' => 
+            'Namespace' =>
             array (
                 'class' => 'MODX\\Revolution\\modNamespace',
                 'local' => 'namespace',

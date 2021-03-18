@@ -33,8 +33,8 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'date_sent';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -47,9 +47,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->innerJoin(modUser::class, 'Sender');
@@ -80,9 +80,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns(modUserMessage::class, 'modUserMessage'));
@@ -92,14 +92,14 @@ class GetList extends GetListProcessor
             'recipient_username' => 'Recipient.username',
             'recipient_fullname' => 'RecipientProfile.fullname'
         ]);
-        
+
         return $c;
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

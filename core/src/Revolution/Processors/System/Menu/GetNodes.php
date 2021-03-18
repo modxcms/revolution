@@ -32,9 +32,9 @@ class GetNodes extends GetListProcessor
     public $defaultSortField = 'menuindex';
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -47,9 +47,9 @@ class GetNodes extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->leftJoin($this->classKey, 'Children');
@@ -62,9 +62,9 @@ class GetNodes extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns(modMenu::class, 'modMenu'));
@@ -76,9 +76,9 @@ class GetNodes extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $controller = $object->get('action');
@@ -113,11 +113,11 @@ class GetNodes extends GetListProcessor
     }
 
     /**
-     * @param array $array
-     * @param bool $count
-     * @return string
-     * @throws \xPDO\xPDOException
-     */
+    * @param array $array
+    * @param bool $count
+    * @return string
+    * @throws \xPDO\xPDOException
+    */
     public function outputArray(array $array, $count = false)
     {
         return $this->modx->toJSON($array);

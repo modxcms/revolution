@@ -11,7 +11,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
         'version' => '3.0',
         'table' => 'user_attributes',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'internalKey' => NULL,
             'fullname' => '',
@@ -39,16 +39,16 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             'website' => '',
             'extended' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'internalKey' => 
+            'internalKey' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'index' => 'unique',
             ),
-            'fullname' => 
+            'fullname' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -56,7 +56,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'email' => 
+            'email' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -64,7 +64,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'phone' => 
+            'phone' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -72,7 +72,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'mobilephone' => 
+            'mobilephone' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -80,56 +80,56 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'blocked' => 
+            'blocked' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
                 'null' => false,
                 'default' => 0,
             ),
-            'blockeduntil' => 
+            'blockeduntil' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'blockedafter' => 
+            'blockedafter' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'logincount' => 
+            'logincount' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'lastlogin' => 
+            'lastlogin' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'thislogin' => 
+            'thislogin' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'failedlogincount' => 
+            'failedlogincount' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'sessionid' => 
+            'sessionid' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -137,14 +137,14 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'dob' => 
+            'dob' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'gender' => 
+            'gender' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -152,7 +152,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => 0,
             ),
-            'address' => 
+            'address' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -160,7 +160,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'country' => 
+            'country' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -168,7 +168,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'city' => 
+            'city' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -176,7 +176,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'state' => 
+            'state' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '25',
@@ -184,7 +184,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'zip' => 
+            'zip' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '25',
@@ -192,7 +192,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'fax' => 
+            'fax' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -200,7 +200,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'photo' => 
+            'photo' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -208,7 +208,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'comment' => 
+            'comment' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -216,7 +216,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'website' => 
+            'website' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -224,7 +224,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'null' => false,
                 'default' => '',
             ),
-            'extended' => 
+            'extended' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -234,17 +234,17 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'indexgrp' => 'extended',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'internalKey' => 
+            'internalKey' =>
             array (
                 'alias' => 'internalKey',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'internalKey' => 
+                    'internalKey' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -253,9 +253,9 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'User' => 
+            'User' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'internalKey',

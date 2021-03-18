@@ -39,9 +39,9 @@ class GetList extends GetListProcessor
     public $permission = 'view';
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $query = $this->getProperty('query');
@@ -99,9 +99,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param modResource $object
-     * @return array
-     */
+    * @param modResource $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         // quick exit if we don't have access to the context
@@ -126,7 +126,7 @@ class GetList extends GetListProcessor
             if ($parentObject) {
                 $parents[] = $parentObject;
                 $parent = $parentObject->get('parent');
-            } 
+            }
             else {
                 break;
             }

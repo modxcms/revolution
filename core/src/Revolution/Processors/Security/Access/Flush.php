@@ -19,24 +19,24 @@ use MODX\Revolution\Processors\Processor;
 class Flush extends Processor
 {
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['topmenu'];
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('access_permissions');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         if (!$this->modx->cacheManager->flushPermissions()) {

@@ -11,7 +11,7 @@ class modChunk extends \MODX\Revolution\modChunk
         'version' => '3.0',
         'table' => 'site_htmlsnippets',
         'extends' => 'MODX\\Revolution\\modElement',
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'description' => 'Chunk',
@@ -24,9 +24,9 @@ class modChunk extends \MODX\Revolution\modChunk
             'static' => 0,
             'static_file' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '50',
@@ -35,7 +35,7 @@ class modChunk extends \MODX\Revolution\modChunk
                 'default' => '',
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -43,14 +43,14 @@ class modChunk extends \MODX\Revolution\modChunk
                 'null' => false,
                 'default' => 'Chunk',
             ),
-            'editor_type' => 
+            'editor_type' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'category' => 
+            'category' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -58,7 +58,7 @@ class modChunk extends \MODX\Revolution\modChunk
                 'default' => 0,
                 'index' => 'fk',
             ),
-            'cache_type' => 
+            'cache_type' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -66,13 +66,13 @@ class modChunk extends \MODX\Revolution\modChunk
                 'null' => false,
                 'default' => 0,
             ),
-            'snippet' => 
+            'snippet' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'locked' => 
+            'locked' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -80,14 +80,14 @@ class modChunk extends \MODX\Revolution\modChunk
                 'default' => 0,
                 'index' => 'index',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'array',
                 'null' => true,
             ),
-            'static' => 
+            'static' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -95,7 +95,7 @@ class modChunk extends \MODX\Revolution\modChunk
                 'default' => 0,
                 'index' => 'index',
             ),
-            'static_file' => 
+            'static_file' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -104,21 +104,21 @@ class modChunk extends \MODX\Revolution\modChunk
                 'default' => '',
             ),
         ),
-        'fieldAliases' => 
+        'fieldAliases' =>
         array (
             'content' => 'snippet',
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -126,15 +126,15 @@ class modChunk extends \MODX\Revolution\modChunk
                     ),
                 ),
             ),
-            'category' => 
+            'category' =>
             array (
                 'alias' => 'category',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'category' => 
+                    'category' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -142,15 +142,15 @@ class modChunk extends \MODX\Revolution\modChunk
                     ),
                 ),
             ),
-            'locked' => 
+            'locked' =>
             array (
                 'alias' => 'locked',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'locked' => 
+                    'locked' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -158,15 +158,15 @@ class modChunk extends \MODX\Revolution\modChunk
                     ),
                 ),
             ),
-            'static' => 
+            'static' =>
             array (
                 'alias' => 'static',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'static' => 
+                    'static' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -175,27 +175,27 @@ class modChunk extends \MODX\Revolution\modChunk
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'PropertySets' => 
+            'PropertySets' =>
             array (
                 'class' => 'MODX\\Revolution\\modElementPropertySet',
                 'local' => 'id',
                 'foreign' => 'element',
                 'owner' => 'local',
                 'cardinality' => 'many',
-                'criteria' => 
+                'criteria' =>
                 array (
-                    'foreign' => 
+                    'foreign' =>
                     array (
                         'element_class' => 'MODX\\Revolution\\modChunk',
                     ),
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Category' => 
+            'Category' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'key' => 'id',
@@ -205,13 +205,13 @@ class modChunk extends \MODX\Revolution\modChunk
                 'owner' => 'foreign',
             ),
         ),
-        'validation' => 
+        'validation' =>
         array (
-            'rules' => 
+            'rules' =>
             array (
-                'name' => 
+                'name' =>
                 array (
-                    'invalid' => 
+                    'invalid' =>
                     array (
                         'type' => 'preg_match',
                         'rule' => '/^(?!\\s)[a-zA-Z0-9\\x2d-\\x2f\\x7f-\\xff-_\\s]+(?!\\s)$/',

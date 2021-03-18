@@ -32,9 +32,9 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
     public $context;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $key = $this->getProperty('key');
@@ -65,10 +65,10 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
 
 
     /**
-     * If friendly_urls is set on or use_alias_path changes, refreshURIs
-     *
-     * @return boolean
-     */
+    * If friendly_urls is set on or use_alias_path changes, refreshURIs
+    *
+    * @return boolean
+    */
     public function refreshURIs()
     {
         if ($this->refreshURIs) {
@@ -81,10 +81,10 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
     }
 
     /**
-     * Clear the context settings cache
-     *
-     * @return void
-     */
+    * Clear the context settings cache
+    *
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->cacheManager->refresh([

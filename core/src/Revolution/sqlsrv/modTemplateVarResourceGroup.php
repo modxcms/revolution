@@ -11,21 +11,21 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
         'version' => '3.0',
         'table' => 'site_tmplvar_access',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'tmplvarid' => 0,
             'documentgroup' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'tmplvarid' => 
+            'tmplvarid' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'documentgroup' => 
+            'documentgroup' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -33,9 +33,9 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
                 'default' => 0,
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'TemplateVar' => 
+            'TemplateVar' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'local' => 'tmplvarid',
@@ -43,7 +43,7 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'ResourceGroup' => 
+            'ResourceGroup' =>
             array (
                 'class' => 'MODX\\Revolution\\modResourceGroup',
                 'local' => 'documentgroup',

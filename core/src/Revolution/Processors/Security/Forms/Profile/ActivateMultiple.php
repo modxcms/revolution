@@ -19,8 +19,8 @@ class ActivateMultiple extends Activate
     public $profiles = [];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $profiles = $this->getProperty('profiles', '');
@@ -33,8 +33,8 @@ class ActivateMultiple extends Activate
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         foreach ($this->profiles as $profile) {

@@ -11,15 +11,15 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
         'version' => '3.0',
         'table' => 'site_tmplvar_templates',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'tmplvarid' => 0,
             'templateid' => 0,
             'rank' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'tmplvarid' => 
+            'tmplvarid' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -27,7 +27,7 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'templateid' => 
+            'templateid' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -35,7 +35,7 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -43,23 +43,23 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
                 'default' => 0,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'tmplvarid' => 
+                    'tmplvarid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'templateid' => 
+                    'templateid' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -68,9 +68,9 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'TemplateVar' => 
+            'TemplateVar' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVar',
                 'key' => 'id',
@@ -79,7 +79,7 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Template' => 
+            'Template' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplate',
                 'key' => 'id',

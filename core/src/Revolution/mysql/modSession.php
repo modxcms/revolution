@@ -11,19 +11,19 @@ class modSession extends \MODX\Revolution\modSession
         'version' => '3.0',
         'table' => 'session',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'id' => '',
             'access' => NULL,
             'data' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'id' => 
+            'id' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -32,7 +32,7 @@ class modSession extends \MODX\Revolution\modSession
                 'index' => 'pk',
                 'default' => '',
             ),
-            'access' => 
+            'access' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '20',
@@ -40,23 +40,23 @@ class modSession extends \MODX\Revolution\modSession
                 'null' => false,
                 'attributes' => 'unsigned',
             ),
-            'data' => 
+            'data' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'id' => 
+                    'id' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -64,15 +64,15 @@ class modSession extends \MODX\Revolution\modSession
                     ),
                 ),
             ),
-            'access' => 
+            'access' =>
             array (
                 'alias' => 'access',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'access' => 
+                    'access' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -81,13 +81,13 @@ class modSession extends \MODX\Revolution\modSession
                 ),
             ),
         ),
-        'validation' => 
+        'validation' =>
         array (
-            'rules' => 
+            'rules' =>
             array (
-                'id' => 
+                'id' =>
                 array (
-                    'invalid' => 
+                    'invalid' =>
                     array (
                         'type' => 'preg_match',
                         'rule' => '/^[0-9a-zA-Z,-]{22,191}$/',

@@ -28,8 +28,8 @@ class Remove extends RemoveProcessor
     public $afterRemoveEvent = 'OnMediaSourceFormDelete';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeRemove()
     {
         if ($this->object->get('id') === 1) {

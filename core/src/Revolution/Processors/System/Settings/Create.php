@@ -35,9 +35,9 @@ class Create extends CreateProcessor
     public $primaryKeyField = 'key';
 
     /**
-     * Verify the Namespace passed is a valid Namespace
-     * @return string|null
-     */
+    * Verify the Namespace passed is a valid Namespace
+    * @return string|null
+    */
     public function verifyNamespace()
     {
         $namespace = $this->getProperty('namespace', '');
@@ -51,8 +51,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Verify setting key
-     */
+    * Verify setting key
+    */
     public function verifySettingKey()
     {
         /* prevent empty or already existing settings */
@@ -69,9 +69,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * If this is a Boolean setting, ensure the value of the setting is 1/0
-     * @return mixed
-     */
+    * If this is a Boolean setting, ensure the value of the setting is 1/0
+    * @return mixed
+    */
     public function checkForBooleanValue()
     {
         $xtype = $this->getProperty('xtype', 'textfield');
@@ -84,8 +84,8 @@ class Create extends CreateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->checkForBooleanValue();
@@ -101,30 +101,30 @@ class Create extends CreateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function afterSave()
     {
         $this->setLexiconEntries($this->object->toArray());
         $this->modx->reloadConfig();
-        
+
         return true;
     }
 
     /**
-     * Check to see if a Setting already exists with this key
-     * @return boolean
-     */
+    * Check to see if a Setting already exists with this key
+    * @return boolean
+    */
     public function alreadyExists()
     {
         return $this->doesAlreadyExist(['key' => $this->getProperty('key')]);
     }
 
     /**
-     * @param array $fields
-     * @return void
-     */
+    * @param array $fields
+    * @return void
+    */
     public function setLexiconEntries(array $fields)
     {
         /* set lexicon name/description */

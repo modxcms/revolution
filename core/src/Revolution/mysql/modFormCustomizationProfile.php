@@ -11,20 +11,20 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
         'version' => '3.0',
         'table' => 'fc_profiles',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'description' => '',
             'active' => 0,
             'rank' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -33,14 +33,14 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
             ),
-            'active' => 
+            'active' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -49,7 +49,7 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
                 'default' => 0,
                 'index' => 'index',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -59,17 +59,17 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -77,15 +77,15 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
                     ),
                 ),
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'alias' => 'rank',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'rank' => 
+                    'rank' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -93,15 +93,15 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
                     ),
                 ),
             ),
-            'active' => 
+            'active' =>
             array (
                 'alias' => 'active',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'active' => 
+                    'active' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -110,9 +110,9 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Sets' => 
+            'Sets' =>
             array (
                 'class' => 'MODX\\Revolution\\modFormCustomizationSet',
                 'local' => 'id',
@@ -120,7 +120,7 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'UserGroups' => 
+            'UserGroups' =>
             array (
                 'class' => 'MODX\\Revolution\\modFormCustomizationProfileUserGroup',
                 'local' => 'id',
@@ -147,7 +147,7 @@ class modFormCustomizationProfile extends \MODX\Revolution\modFormCustomizationP
             (SELECT GROUP_CONCAT(UserGroup.name) FROM ' . $xpdo->getTableName(\MODX\Revolution\modUserGroup::class) . ' AS UserGroup
                 INNER JOIN ' . $xpdo->getTableName(\MODX\Revolution\modFormCustomizationProfileUserGroup::class) . ' AS fcpug
                 ON fcpug.usergroup = UserGroup.id
-             WHERE fcpug.profile = modFormCustomizationProfile.id
+            WHERE fcpug.profile = modFormCustomizationProfile.id
             ) AS usergroups
         ');
         $c->where($criteria, null, 2);// also log issue in remine to look at this usage of where()

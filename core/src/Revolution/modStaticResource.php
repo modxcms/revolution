@@ -14,25 +14,25 @@ use xPDO\xPDO;
 class modStaticResource extends modResource implements modResourceInterface
 {
     /**
-     * @var string Path of the file containing the source content, relative to
-     * the {@link modStaticResource::$_sourcePath}.
-     */
+    * @var string Path of the file containing the source content, relative to
+    * the {@link modStaticResource::$_sourcePath}.
+    */
     protected $_sourceFile = '';
     /**
-     * @var integer Size of the source file content in bytes.
-     */
+    * @var integer Size of the source file content in bytes.
+    */
     protected $_sourceFileSize = 0;
     /**
-     * @var string An absolute base filesystem path where the source file
-     * exists.
-     */
+    * @var string An absolute base filesystem path where the source file
+    * exists.
+    */
     protected $_sourcePath = '';
 
     /**
-     * Overrides modResource::__construct to set the class key for this Resource type
-     *
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * Overrides modResource::__construct to set the class key for this Resource type
+    *
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(& $xpdo)
     {
         parent:: __construct($xpdo);
@@ -41,12 +41,12 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Get the absolute path to the static source file represented by this instance.
-     *
-     * @param array $options An array of options.
-     *
-     * @return string The absolute path to the static source file.
-     */
+    * Get the absolute path to the static source file represented by this instance.
+    *
+    * @param array $options An array of options.
+    *
+    * @return string The absolute path to the static source file.
+    */
     public function getSourceFile(array $options = [])
     {
         if (empty($this->_sourceFile)) {
@@ -75,12 +75,12 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Get the filesize of the static source file represented by this instance.
-     *
-     * @param array $options An array of options.
-     *
-     * @return integer The filesize of the source file in bytes.
-     */
+    * Get the filesize of the static source file represented by this instance.
+    *
+    * @param array $options An array of options.
+    *
+    * @return integer The filesize of the source file in bytes.
+    */
     public function getSourceFileSize(array $options = [])
     {
         if (empty($this->_sourceFileSize)) {
@@ -94,10 +94,10 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Treats the local content as a filename to load the raw content from.
-     *
-     * {@inheritdoc}
-     */
+    * Treats the local content as a filename to load the raw content from.
+    *
+    * {@inheritdoc}
+    */
     public function getContent(array $options = [])
     {
         $content = false; // Going to sendErrorPage() if couldn't populate the $content
@@ -123,14 +123,14 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Retrieve the resource content stored in a physical file.
-     *
-     * @param string $file A path to the file representing the resource content.
-     * @param array  $options
-     *
-     * @return string The content of the file, of false if it could not be
-     * retrieved.
-     */
+    * Retrieve the resource content stored in a physical file.
+    *
+    * @param string $file A path to the file representing the resource content.
+    * @param array  $options
+    *
+    * @return string The content of the file, of false if it could not be
+    * retrieved.
+    */
     public function getFileContent($file, array $options = [])
     {
         $content = false;
@@ -203,21 +203,21 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Converts to bytes from PHP ini_get() format.
-     *
-     * PHP ini modifiers for byte values:
-     * <ul>
-     *  <li>G = gigabytes</li>
-     *  <li>M = megabytes</li>
-     *  <li>K = kilobytes</li>
-     * </ul>
-     *
-     * @access protected
-     *
-     * @param string $value Number of bytes represented in PHP ini value format.
-     *
-     * @return integer The value converted to bytes.
-     */
+    * Converts to bytes from PHP ini_get() format.
+    *
+    * PHP ini modifiers for byte values:
+    * <ul>
+    *  <li>G = gigabytes</li>
+    *  <li>M = megabytes</li>
+    *  <li>K = kilobytes</li>
+    * </ul>
+    *
+    * @access protected
+    *
+    * @param string $value Number of bytes represented in PHP ini value format.
+    *
+    * @return integer The value converted to bytes.
+    */
     protected function _bytes($value)
     {
         $value = trim($value);
@@ -235,14 +235,14 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Sets the path to the Static Resource manager controller
-     *
-     * @static
-     *
-     * @param xPDO $modx A reference to the modX instance
-     *
-     * @return string
-     */
+    * Sets the path to the Static Resource manager controller
+    *
+    * @static
+    *
+    * @param xPDO $modx A reference to the modX instance
+    *
+    * @return string
+    */
     public static function getControllerPath(xPDO &$modx)
     {
         $path = modResource::getControllerPath($modx);
@@ -251,11 +251,11 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
-     * set to true.
-     *
-     * @return array
-     */
+    * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+    * set to true.
+    *
+    * @return array
+    */
     public function getContextMenuText()
     {
         return [
@@ -265,10 +265,10 @@ class modStaticResource extends modResource implements modResourceInterface
     }
 
     /**
-     * Use this in your extended Resource class to return a translatable name for the Resource Type.
-     *
-     * @return string
-     */
+    * Use this in your extended Resource class to return a translatable name for the Resource Type.
+    *
+    * @return string
+    */
     public function getResourceTypeName()
     {
         return $this->xpdo->lexicon('static_resource');

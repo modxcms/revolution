@@ -21,20 +21,20 @@ namespace MODX\Revolution\Rest;
 class modRestSockClient extends modRestClient
 {
     /**
-     * Extends modRestClient::request to provide socket-specific request
-     * handling
-     *
-     * @todo Ensure this strips whitespace that prevents this class from working
-     *
-     * @param string $host    The host of the REST server.
-     * @param string $path    The path to request to on the REST server.
-     * @param string $method  The HTTP method to use for the request. May be GET,
-     *                        PUT or POST.
-     * @param array  $params  An array of parameters to send with the request.
-     * @param array  $options An array of options to pass to the request.
-     *
-     * @return modRestResponse The response object.
-     */
+    * Extends modRestClient::request to provide socket-specific request
+    * handling
+    *
+    * @todo Ensure this strips whitespace that prevents this class from working
+    *
+    * @param string $host    The host of the REST server.
+    * @param string $path    The path to request to on the REST server.
+    * @param string $method  The HTTP method to use for the request. May be GET,
+    *                        PUT or POST.
+    * @param array  $params  An array of parameters to send with the request.
+    * @param array  $options An array of options to pass to the request.
+    *
+    * @return modRestResponse The response object.
+    */
     public function request($host, $path, $method = 'GET', array $params = [], array $options = [])
     {
         $method = strtoupper($method);

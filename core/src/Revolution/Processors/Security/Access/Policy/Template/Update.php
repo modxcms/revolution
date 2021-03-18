@@ -31,9 +31,9 @@ class Update extends UpdateProcessor
     public $objectType = 'policy';
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function afterSave()
     {
         /* now store the permissions into the modAccessPermission table */

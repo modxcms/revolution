@@ -38,10 +38,10 @@ class Get extends GetProcessor
     public $props = [];
 
     /**
-     * Get default properties of an element
-     *
-     * @return array|mixed|null
-     */
+    * Get default properties of an element
+    *
+    * @return array|mixed|null
+    */
     public function getDefaultSet()
     {
         $default = [];
@@ -62,10 +62,10 @@ class Get extends GetProcessor
     }
 
     /**
-     * Prepare default set
-     *
-     * @param $default
-     */
+    * Prepare default set
+    *
+    * @param $default
+    */
     public function prepareDefaultSet($default)
     {
         $this->isDefault = true;
@@ -76,10 +76,10 @@ class Get extends GetProcessor
     }
 
     /**
-     * Initialize property set
-     *
-     * @return bool|null|string
-     */
+    * Initialize property set
+    *
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $this->default = $this->getDefaultSet();
@@ -97,13 +97,13 @@ class Get extends GetProcessor
     }
 
     /**
-     * Get value of overridden status of property
-     *
-     * @param $property
-     * @param $data
-     *
-     * @return bool|int
-     */
+    * Get value of overridden status of property
+    *
+    * @param $property
+    * @param $data
+    *
+    * @return bool|int
+    */
     public function getOverridden($property, $data)
     {
         $overridden = false;
@@ -120,10 +120,10 @@ class Get extends GetProcessor
     }
 
     /**
-     * Load lexicon string for text option
-     *
-     * @param $property
-     */
+    * Load lexicon string for text option
+    *
+    * @param $property
+    */
     public function loadLexicons(&$property)
     {
         if (is_array($property['options'])) {
@@ -137,12 +137,12 @@ class Get extends GetProcessor
     }
 
     /**
-     * Form data field from properties
-     *
-     * @param       $properties
-     * @param array $data
-     * @param bool  $isDefault
-     */
+    * Form data field from properties
+    *
+    * @param       $properties
+    * @param array $data
+    * @param bool  $isDefault
+    */
     public function setData(array $properties, array &$data, $isDefault = false)
     {
         foreach ($properties as $property) {
@@ -163,10 +163,10 @@ class Get extends GetProcessor
     }
 
     /**
-     * Used for adding custom data in derivative types
-     *
-     * @return void
-     */
+    * Used for adding custom data in derivative types
+    *
+    * @return void
+    */
     public function beforeOutput()
     {
         /* get set properties */
@@ -185,10 +185,10 @@ class Get extends GetProcessor
     }
 
     /**
-     * Set data to object
-     *
-     * @return void
-     */
+    * Set data to object
+    *
+    * @return void
+    */
     public function beforeCleanup()
     {
         $this->object->set('data', '(' . $this->modx->toJSON($this->props) . ')');

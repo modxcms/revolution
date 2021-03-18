@@ -22,8 +22,8 @@ class GetList extends ModelProcessor
     public $permission = 'settings';
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function process()
     {
         $themePath = $this->modx->config['manager_path'] . 'templates/';

@@ -32,79 +32,79 @@ use xPDO\xPDO;
 class modElement extends modAccessibleSimpleObject
 {
     /**
-     * The property value array for the element.
-     *
-     * @var array
-     */
+    * The property value array for the element.
+    *
+    * @var array
+    */
     public $_properties = null;
     /**
-     * The string representation of the element properties.
-     *
-     * @var string
-     */
+    * The string representation of the element properties.
+    *
+    * @var string
+    */
     public $_propertyString = '';
     /**
-     * The source content of the element.
-     *
-     * @var string
-     */
+    * The source content of the element.
+    *
+    * @var string
+    */
     public $_content = '';
     /**
-     * The source of the element.
-     *
-     * @var string
-     */
+    * The source of the element.
+    *
+    * @var string
+    */
     public $_source = null;
     /**
-     * The output of the element.
-     *
-     * @var string
-     */
+    * The output of the element.
+    *
+    * @var string
+    */
     public $_output = '';
     /**
-     * The boolean result of the element.
-     *
-     * This is typically only applicable to elements that use PHP source content.
-     *
-     * @var boolean
-     */
+    * The boolean result of the element.
+    *
+    * This is typically only applicable to elements that use PHP source content.
+    *
+    * @var boolean
+    */
     public $_result = true;
     /**
-     * The tag signature of the element instance.
-     *
-     * @var string
-     */
+    * The tag signature of the element instance.
+    *
+    * @var string
+    */
     public $_tag = null;
     /**
-     * The character token which helps identify the element class in tag string.
-     *
-     * @var string
-     */
+    * The character token which helps identify the element class in tag string.
+    *
+    * @var string
+    */
     public $_token = '';
     /**
-     * @var boolean If the element is cacheable or not.
-     */
+    * @var boolean If the element is cacheable or not.
+    */
     public $_cacheable = true;
     /**
-     * @var boolean Indicates if the element was processed already.
-     */
+    * @var boolean Indicates if the element was processed already.
+    */
     public $_processed = false;
     /**
-     * @var array Optional filters that can be used during processing.
-     */
+    * @var array Optional filters that can be used during processing.
+    */
     public $_filters = ['input' => null, 'output' => null];
 
     /**
-     * @var string Path to source file location when modElement->isStatic() === true.
-     */
+    * @var string Path to source file location when modElement->isStatic() === true.
+    */
     protected $_sourcePath = "";
     /**
-     * @var string Source file name when modElement->isStatic() === true.
-     */
+    * @var string Source file name when modElement->isStatic() === true.
+    */
     protected $_sourceFile = "";
     /**
-     * @var array A list of invalid characters in the name of an Element.
-     */
+    * @var array A list of invalid characters in the name of an Element.
+    */
     protected $_invalidCharacters = [
         '!',
         '@',
@@ -139,10 +139,10 @@ class modElement extends modAccessibleSimpleObject
     ];
 
     /**
-     * Provides custom handling for retrieving the properties field of an Element.
-     *
-     * {@inheritdoc}
-     */
+    * Provides custom handling for retrieving the properties field of an Element.
+    *
+    * {@inheritdoc}
+    */
     public function get($k, $format = null, $formatTemplate = null)
     {
         $value = parent:: get($k, $format, $formatTemplate);
@@ -187,10 +187,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Overridden to handle changes to content managed in an external file.
-     *
-     * {@inheritdoc}
-     */
+    * Overridden to handle changes to content managed in an external file.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         if (!$this->getOption(xPDO::OPT_SETUP)) {
@@ -241,10 +241,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Determine if static files should be automated for current element class.
-     *
-     * @return bool
-     */
+    * Determine if static files should be automated for current element class.
+    *
+    * @return bool
+    */
     protected function isStaticFilesAutomated()
     {
         $elements = [
@@ -263,10 +263,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Constructs a valid tag representation of the element.
-     *
-     * @return string A tag representation of the element.
-     */
+    * Constructs a valid tag representation of the element.
+    *
+    * @return string A tag representation of the element.
+    */
     public function getTag()
     {
         if (empty($this->_tag)) {
@@ -302,30 +302,30 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Accessor method for the token class var.
-     *
-     * @return string The token for this element tag.
-     */
+    * Accessor method for the token class var.
+    *
+    * @return string The token for this element tag.
+    */
     public function getToken()
     {
         return $this->_token;
     }
 
     /**
-     * Setter method for the token class var.
-     *
-     * @param string $token The token to use for this element tag.
-     */
+    * Setter method for the token class var.
+    *
+    * @param string $token The token to use for this element tag.
+    */
     public function setToken($token)
     {
         $this->_token = $token;
     }
 
     /**
-     * Setter method for the tag class var.
-     *
-     * @param string $tag The tag to use for this element.
-     */
+    * Setter method for the tag class var.
+    *
+    * @param string $tag The tag to use for this element.
+    */
     public function setTag($tag)
     {
         $this->_tag = $tag;
@@ -333,17 +333,17 @@ class modElement extends modAccessibleSimpleObject
 
 
     /**
-     * Process the element source content to produce a result.
-     *
-     * @abstract Implement this to define behavior for a MODX content element.
-     *
-     * @param array|string $properties A set of configuration properties for the
-     *                                 element.
-     * @param string       $content    Optional content to use in place of any persistent
-     *                                 content associated with the element.
-     *
-     * @return mixed The result of processing.
-     */
+    * Process the element source content to produce a result.
+    *
+    * @abstract Implement this to define behavior for a MODX content element.
+    *
+    * @param array|string $properties A set of configuration properties for the
+    *                                 element.
+    * @param string       $content    Optional content to use in place of any persistent
+    *                                 content associated with the element.
+    *
+    * @return mixed The result of processing.
+    */
     public function process($properties = null, $content = null)
     {
         $this->xpdo->getParser();
@@ -367,8 +367,8 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Cache the current output of this element instance by tag signature.
-     */
+    * Cache the current output of this element instance by tag signature.
+    */
     public function cache()
     {
         if ($this->isCacheable()) {
@@ -377,10 +377,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Get an input filter instance configured for this Element.
-     *
-     * @return modInputFilter|null An input filter instance (or null if one cannot be loaded).
-     */
+    * Get an input filter instance configured for this Element.
+    *
+    * @return modInputFilter|null An input filter instance (or null if one cannot be loaded).
+    */
     public function & getInputFilter()
     {
         if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
@@ -398,10 +398,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Get an output filter instance configured for this Element.
-     *
-     * @return modOutputFilter|null An output filter instance (or null if one cannot be loaded).
-     */
+    * Get an output filter instance configured for this Element.
+    *
+    * @return modOutputFilter|null An output filter instance (or null if one cannot be loaded).
+    */
     public function & getOutputFilter()
     {
         if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
@@ -419,11 +419,11 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Apply an input filter to an element.
-     *
-     * This is called by default in {@link modElement::process()} after the
-     * element properties have been parsed.
-     */
+    * Apply an input filter to an element.
+    *
+    * This is called by default in {@link modElement::process()} after the
+    * element properties have been parsed.
+    */
     public function filterInput()
     {
         $filter = $this->getInputFilter();
@@ -433,12 +433,12 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Apply an output filter to an element.
-     *
-     * Call this method in your {modElement::process()} implementation when it
-     * is appropriate, typically once all processing has been completed, but
-     * before any caching takes place.
-     */
+    * Apply an output filter to an element.
+    *
+    * Call this method in your {modElement::process()} implementation when it
+    * is appropriate, typically once all processing has been completed, but
+    * before any caching takes place.
+    */
     public function filterOutput()
     {
         $filter = $this->getOutputFilter();
@@ -448,10 +448,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Loads the access control policies applicable to this element.
-     *
-     * {@inheritdoc}
-     */
+    * Loads the access control policies applicable to this element.
+    *
+    * {@inheritdoc}
+    */
     public function findPolicy($context = '')
     {
         $policy = [];
@@ -498,14 +498,14 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Gets the raw, unprocessed source content for this element.
-     *
-     * @param array $options An array of options implementations can use to
-     *                       accept language, revision identifiers, or other information to alter the
-     *                       behavior of the method.
-     *
-     * @return string The raw source content for the element.
-     */
+    * Gets the raw, unprocessed source content for this element.
+    *
+    * @param array $options An array of options implementations can use to
+    *                       accept language, revision identifiers, or other information to alter the
+    *                       behavior of the method.
+    *
+    * @return string The raw source content for the element.
+    */
     public function getContent(array $options = [])
     {
         if (!is_string($this->_content) || $this->_content === '') {
@@ -528,28 +528,28 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Set the raw source content for this element.
-     *
-     * @param mixed $content The source content; implementations can decide if
-     *                       it can only be a string, or some other source from which to retrieve it.
-     * @param array $options An array of options implementations can use to
-     *                       accept language, revision identifiers, or other information to alter the
-     *                       behavior of the method.
-     *
-     * @return boolean True indicates the content was set.
-     */
+    * Set the raw source content for this element.
+    *
+    * @param mixed $content The source content; implementations can decide if
+    *                       it can only be a string, or some other source from which to retrieve it.
+    * @param array $options An array of options implementations can use to
+    *                       accept language, revision identifiers, or other information to alter the
+    *                       behavior of the method.
+    *
+    * @return boolean True indicates the content was set.
+    */
     public function setContent($content, array $options = [])
     {
         return $this->set('content', $content);
     }
 
     /**
-     * Get the absolute path to the static source file for this instance.
-     *
-     * @param array $options An array of options.
-     *
-     * @return string|boolean The absolute path to the static source file (if streamable), a relative path (if needs to be loaded through media source) or false if not static/available.
-     */
+    * Get the absolute path to the static source file for this instance.
+    *
+    * @param array $options An array of options.
+    *
+    * @return string|boolean The absolute path to the static source file (if streamable), a relative path (if needs to be loaded through media source) or false if not static/available.
+    */
     public function getSourceFile(array $options = [])
     {
         // Only static files have a source file
@@ -605,12 +605,12 @@ class modElement extends modAccessibleSimpleObject
 
 
     /**
-     * Get the absolute path location the source file is located relative to.
-     *
-     * @param array $options An array of options.
-     *
-     * @return string The path to file.
-     */
+    * Get the absolute path location the source file is located relative to.
+    *
+    * @param array $options An array of options.
+    *
+    * @return string The path to file.
+    */
     public function getSourcePath(array $options = [])
     {
         $array = [];
@@ -625,12 +625,12 @@ class modElement extends modAccessibleSimpleObject
 
 
     /**
-     * Get the content stored in an external file for this instance.
-     *
-     * @param array $options An array of options.
-     *
-     * @return bool|string The content or false if the content could not be retrieved.
-     */
+    * Get the content stored in an external file for this instance.
+    *
+    * @param array $options An array of options.
+    *
+    * @return bool|string The content or false if the content could not be retrieved.
+    */
     public function getFileContent(array $options = [])
     {
         $content = false;
@@ -653,13 +653,13 @@ class modElement extends modAccessibleSimpleObject
 
 
     /**
-     * Set external file content from this instance.
-     *
-     * @param string $content The content to set.
-     * @param array  $options An array of options.
-     *
-     * @return bool
-     */
+    * Set external file content from this instance.
+    *
+    * @param string $content The content to set.
+    * @param array  $options An array of options.
+    *
+    * @return bool
+    */
     public function setFileContent($content, array $options = [])
     {
         $set = false;
@@ -686,13 +686,13 @@ class modElement extends modAccessibleSimpleObject
 
 
     /**
-     * Get the properties for this element instance for processing.
-     *
-     * @param array|string $properties An array or string of properties to
-     *                                 apply.
-     *
-     * @return array A simple array of properties ready to use for processing.
-     */
+    * Get the properties for this element instance for processing.
+    *
+    * @param array|string $properties An array or string of properties to
+    *                                 apply.
+    *
+    * @return array A simple array of properties ready to use for processing.
+    */
     public function getProperties($properties = null)
     {
         $this->xpdo->getParser();
@@ -717,25 +717,25 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Gets a named property set related to this element instance.
-     *
-     * If a setName parameter is not provided, this function will attempt to
-     * extract a setName from the element name using the @ symbol to delimit the
-     * name of the property set.
-     *
-     * Here is an example of an element tag using the @ modifier to specify a
-     * property set name:
-     *  [[ElementName@PropertySetName:FilterCommand=`FilterModifier`?
-     *      &PropertyKey1=`PropertyValue1`
-     *      &PropertyKey2=`PropertyValue2`
-     *  ]]
-     *
-     * @access public
-     *
-     * @param string|null $setName An explicit property set name to search for.
-     *
-     * @return array|null An array of properties or null if no set is found.
-     */
+    * Gets a named property set related to this element instance.
+    *
+    * If a setName parameter is not provided, this function will attempt to
+    * extract a setName from the element name using the @ symbol to delimit the
+    * name of the property set.
+    *
+    * Here is an example of an element tag using the @ modifier to specify a
+    * property set name:
+    *  [[ElementName@PropertySetName:FilterCommand=`FilterModifier`?
+    *      &PropertyKey1=`PropertyValue1`
+    *      &PropertyKey2=`PropertyValue2`
+    *  ]]
+    *
+    * @access public
+    *
+    * @param string|null $setName An explicit property set name to search for.
+    *
+    * @return array|null An array of properties or null if no set is found.
+    */
     public function getPropertySet($setName = null)
     {
         $propertySet = null;
@@ -784,16 +784,16 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Set default properties for this element instance.
-     *
-     * @access public
-     *
-     * @param array|string $properties A property array or property string.
-     * @param boolean      $merge      Indicates if properties should be merged with
-     *                                 existing ones.
-     *
-     * @return boolean true if the properties are set.
-     */
+    * Set default properties for this element instance.
+    *
+    * @access public
+    *
+    * @param array|string $properties A property array or property string.
+    * @param boolean      $merge      Indicates if properties should be merged with
+    *                                 existing ones.
+    *
+    * @return boolean true if the properties are set.
+    */
     public function setProperties($properties, $merge = false)
     {
         $set = false;
@@ -867,15 +867,15 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Add a property set to this element, making it available for use.
-     *
-     * @access public
-     *
-     * @param string|modPropertySet $propertySet A modPropertySet object or the
-     *                                           name of a modPropertySet object to create a relationship with.
-     *
-     * @return boolean True if a relationship was created or already exists.
-     */
+    * Add a property set to this element, making it available for use.
+    *
+    * @access public
+    *
+    * @param string|modPropertySet $propertySet A modPropertySet object or the
+    *                                           name of a modPropertySet object to create a relationship with.
+    *
+    * @return boolean True if a relationship was created or already exists.
+    */
     public function addPropertySet($propertySet)
     {
         $added = false;
@@ -908,15 +908,15 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Remove a property set from this element, making it unavailable for use.
-     *
-     * @access public
-     *
-     * @param string|modPropertySet $propertySet A modPropertySet object or the
-     *                                           name of a modPropertySet object to dissociate from.
-     *
-     * @return boolean True if a relationship was destroyed.
-     */
+    * Remove a property set from this element, making it unavailable for use.
+    *
+    * @access public
+    *
+    * @param string|modPropertySet $propertySet A modPropertySet object or the
+    *                                           name of a modPropertySet object to dissociate from.
+    *
+    * @return boolean True if a relationship was destroyed.
+    */
     public function removePropertySet($propertySet)
     {
         $removed = false;
@@ -937,38 +937,38 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Indicates if the element is cacheable.
-     *
-     * @access public
-     * @return boolean True if the element can be stored to or retrieved from
-     * the element cache.
-     */
+    * Indicates if the element is cacheable.
+    *
+    * @access public
+    * @return boolean True if the element can be stored to or retrieved from
+    * the element cache.
+    */
     public function isCacheable()
     {
         return $this->_cacheable;
     }
 
     /**
-     * Sets the runtime cacheability of the element.
-     *
-     * @access public
-     *
-     * @param boolean $cacheable Indicates the value to set for cacheability of
-     *                           this element.
-     */
+    * Sets the runtime cacheability of the element.
+    *
+    * @access public
+    *
+    * @param boolean $cacheable Indicates the value to set for cacheability of
+    *                           this element.
+    */
     public function setCacheable($cacheable = true)
     {
         $this->_cacheable = (boolean)$cacheable;
     }
 
     /**
-     * Get the Source for this Element
-     *
-     * @param string  $contextKey
-     * @param boolean $fallbackToDefault
-     *
-     * @return modMediaSource|null
-     */
+    * Get the Source for this Element
+    *
+    * @param string  $contextKey
+    * @param boolean $fallbackToDefault
+    *
+    * @return modMediaSource|null
+    */
     public function getSource($contextKey = '', $fallbackToDefault = true)
     {
         if (empty($contextKey)) {
@@ -998,10 +998,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Setter method for the source class var.
-     *
-     * @param modMediaSourceInterface $source The source to use for this element.
-     */
+    * Setter method for the source class var.
+    *
+    * @param modMediaSourceInterface $source The source to use for this element.
+    */
     public function setSource(modMediaSourceInterface $source)
     {
         $source->initialize();
@@ -1009,13 +1009,13 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Get the stored sourceCache for a context
-     *
-     * @param string $contextKey
-     * @param array  $options
-     *
-     * @return array
-     */
+    * Get the stored sourceCache for a context
+    *
+    * @param string $contextKey
+    * @param array  $options
+    *
+    * @return array
+    */
     public function getSourceCache($contextKey = '', array $options = [])
     {
         /** @var modCacheManager $cacheManager */
@@ -1032,30 +1032,30 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Indicates if the instance has content in an external file.
-     *
-     * @return boolean True if the instance has content stored in an external file.
-     */
+    * Indicates if the instance has content in an external file.
+    *
+    * @return boolean True if the instance has content stored in an external file.
+    */
     public function isStatic()
     {
         return $this->get('static');
     }
 
     /**
-     * Indicates if the content has changed and the Element has a mutable static source.
-     *
-     * @return boolean
-     */
+    * Indicates if the content has changed and the Element has a mutable static source.
+    *
+    * @return boolean
+    */
     public function staticContentChanged()
     {
         return $this->isStatic() && $this->isDirty('content');
     }
 
     /**
-     * Check if directories are empty after moving a static element and remove empty directories.
-     *
-     * @param $dirname
-     */
+    * Check if directories are empty after moving a static element and remove empty directories.
+    *
+    * @param $dirname
+    */
     public function cleanupStaticFileDirectories($dirname)
     {
         $contents = array_diff(scandir($dirname), ['..', '.', '.DS_Store']);
@@ -1072,8 +1072,8 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Returns static file path if the file path or source has changed.
-     */
+    * Returns static file path if the file path or source has changed.
+    */
     public function getOldStaticFilePath()
     {
         $oldFilePath = '';
@@ -1108,20 +1108,20 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Indicates if the static source has changed.
-     *
-     * @return boolean
-     */
+    * Indicates if the static source has changed.
+    *
+    * @return boolean
+    */
     public function staticSourceChanged()
     {
         return $this->isStatic() && ($this->isDirty('static') || $this->isDirty('static_file') || $this->isDirty('source'));
     }
 
     /**
-     * Return if the static source is mutable.
-     *
-     * @return boolean True if the source file is mutable.
-     */
+    * Return if the static source is mutable.
+    *
+    * @return boolean True if the source file is mutable.
+    */
     public function isStaticSourceMutable()
     {
         $isMutable = false;
@@ -1138,10 +1138,10 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Ensure the static source cannot browse the protected configuration directory
-     *
-     * @return boolean True if is a valid source path
-     */
+    * Ensure the static source cannot browse the protected configuration directory
+    *
+    * @return boolean True if is a valid source path
+    */
     public function isStaticSourceValidPath()
     {
         $isValid = true;

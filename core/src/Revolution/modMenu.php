@@ -24,10 +24,10 @@ use xPDO\xPDO;
 class modMenu extends modAccessibleObject
 {
     /**
-     * Overrides xPDOObject::save to cache the menus.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides xPDOObject::save to cache the menus.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         $saved = parent::save($cacheFlag);
@@ -39,10 +39,10 @@ class modMenu extends modAccessibleObject
     }
 
     /**
-     * Overrides xPDOObject::remove to cache the menus.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides xPDOObject::remove to cache the menus.
+    *
+    * {@inheritdoc}
+    */
     public function remove(array $ancestors = [])
     {
         $removed = parent::remove($ancestors);
@@ -54,12 +54,12 @@ class modMenu extends modAccessibleObject
     }
 
     /**
-     * Rebuilds the menu map cache.
-     *
-     * @param string $start The start menu to build from recursively.
-     *
-     * @return array An array of modMenu objects, in tree form.
-     */
+    * Rebuilds the menu map cache.
+    *
+    * @param string $start The start menu to build from recursively.
+    *
+    * @return array An array of modMenu objects, in tree form.
+    */
     public function rebuildCache($start = '')
     {
         $cacheKey = 'menus/';
@@ -84,10 +84,10 @@ class modMenu extends modAccessibleObject
     }
 
     /**
-     * Returns list of available languages in the system with descriptions ans translated names
-     *
-     * @return array|null
-     */
+    * Returns list of available languages in the system with descriptions ans translated names
+    *
+    * @return array|null
+    */
     protected function getLanguageMenu()
     {
         $languages = array_flip($this->xpdo->lexicon->getLanguageList('core'));
@@ -114,12 +114,12 @@ class modMenu extends modAccessibleObject
     }
 
     /**
-     * Gets all submenus from a start menu.
-     *
-     * @param string $start The top menu to load from.
-     *
-     * @return array An array of modMenu objects, in tree form.
-     */
+    * Gets all submenus from a start menu.
+    *
+    * @param string $start The top menu to load from.
+    *
+    * @return array An array of modMenu objects, in tree form.
+    */
     public function getSubMenus($start = '')
     {
         if (!$this->xpdo->lexicon) {

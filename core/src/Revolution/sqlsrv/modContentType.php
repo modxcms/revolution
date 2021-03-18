@@ -11,7 +11,7 @@ class modContentType extends \MODX\Revolution\modContentType
         'version' => '3.0',
         'table' => 'content_type',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'name' => NULL,
             'description' => NULL,
@@ -21,9 +21,9 @@ class modContentType extends \MODX\Revolution\modContentType
             'headers' => NULL,
             'binary' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -31,38 +31,38 @@ class modContentType extends \MODX\Revolution\modContentType
                 'null' => false,
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '512',
                 'phptype' => 'string',
                 'null' => true,
             ),
-            'mime_type' => 
+            'mime_type' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '512',
                 'phptype' => 'string',
             ),
-            'file_extensions' => 
+            'file_extensions' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '512',
                 'phptype' => 'string',
             ),
-            'icon' => 
+            'icon' =>
             array (
                 'dbtype' => 'tinytext',
                 'phptype' => 'string',
                 'null' => true,
             ),
-            'headers' => 
+            'headers' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'array',
             ),
-            'binary' => 
+            'binary' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -70,17 +70,17 @@ class modContentType extends \MODX\Revolution\modContentType
                 'default' => 0,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -89,9 +89,9 @@ class modContentType extends \MODX\Revolution\modContentType
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Resources' => 
+            'Resources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'id',
@@ -100,13 +100,13 @@ class modContentType extends \MODX\Revolution\modContentType
                 'cardinality' => 'many',
             ),
         ),
-        'validation' => 
+        'validation' =>
         array (
-            'rules' => 
+            'rules' =>
             array (
-                'name' => 
+                'name' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'type' => 'xPDOValidationRule',
                         'rule' => 'xPDOMinLengthValidationRule',

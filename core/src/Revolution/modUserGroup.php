@@ -19,10 +19,10 @@ namespace MODX\Revolution;
 class modUserGroup extends modPrincipal
 {
     /**
-     * Overrides xPDOObject::save to fire modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::save to fire modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -49,10 +49,10 @@ class modUserGroup extends modPrincipal
     }
 
     /**
-     * Overrides xPDOObject::remove to fire modX-specific events
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::remove to fire modX-specific events
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -91,14 +91,14 @@ class modUserGroup extends modPrincipal
 
 
     /**
-     * Get all users in a user group.
-     *
-     * @access public
-     *
-     * @param array $criteria
-     *
-     * @return array An array of {@link modUser} objects.
-     */
+    * Get all users in a user group.
+    *
+    * @access public
+    *
+    * @param array $criteria
+    *
+    * @return array An array of {@link modUser} objects.
+    */
     public function getUsersIn(array $criteria = [])
     {
         $c = $this->xpdo->newQuery(modUser::class);
@@ -126,16 +126,16 @@ class modUserGroup extends modPrincipal
     }
 
     /**
-     * Get all resource groups related to the user group.
-     *
-     * @access public
-     *
-     * @param boolean $limit The number of Resource Groups to grab. Defaults to 0, which
-     *                       grabs all Groups.
-     * @param int     $start The starting index for the limit query.
-     *
-     * @return array An array of resource groups.
-     */
+    * Get all resource groups related to the user group.
+    *
+    * @access public
+    *
+    * @param boolean $limit The number of Resource Groups to grab. Defaults to 0, which
+    *                       grabs all Groups.
+    * @param int     $start The starting index for the limit query.
+    *
+    * @return array An array of resource groups.
+    */
     public function getResourceGroups($limit = false, $start = 0)
     {
         $c = $this->xpdo->newQuery(modResourceGroup::class);

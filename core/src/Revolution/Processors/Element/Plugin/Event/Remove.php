@@ -49,4 +49,3 @@ class Remove extends RemoveProcessor
         return true;
     }
 }
-

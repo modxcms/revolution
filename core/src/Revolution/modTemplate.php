@@ -30,20 +30,20 @@ use xPDO\xPDO;
 class modTemplate extends modElement
 {
     /**
-     * Get a sortable, limitable list and total record count of Template Variables.
-     *
-     * This list includes an access field indicating their relationship to a modTemplate.
-     *
-     * @static
-     *
-     * @param modTemplate &$template A modTemplate instance.
-     * @param array        $sort     An array of criteria for sorting the list.
-     * @param int          $limit    An optional limit to apply to the list.
-     * @param array        $conditions
-     * @param int          $offset   An optional offset to apply to the list.
-     *
-     * @return array An array with the list collection and total records in the collection.
-     */
+    * Get a sortable, limitable list and total record count of Template Variables.
+    *
+    * This list includes an access field indicating their relationship to a modTemplate.
+    *
+    * @static
+    *
+    * @param modTemplate &$template A modTemplate instance.
+    * @param array        $sort     An array of criteria for sorting the list.
+    * @param int          $limit    An optional limit to apply to the list.
+    * @param array        $conditions
+    * @param int          $offset   An optional offset to apply to the list.
+    *
+    * @return array An array with the list collection and total records in the collection.
+    */
     public static function listTemplateVars(
         modTemplate &$template,
         array $sort = ['name' => 'ASC'],
@@ -55,8 +55,8 @@ class modTemplate extends modElement
     }
 
     /**
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(xPDO & $xpdo)
     {
         parent:: __construct($xpdo);
@@ -64,11 +64,11 @@ class modTemplate extends modElement
     }
 
     /**
-     * Overrides modElement::save to add custom error logging and fire
-     * modX-specific events.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::save to add custom error logging and fire
+    * modX-specific events.
+    *
+    * {@inheritdoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -99,10 +99,10 @@ class modTemplate extends modElement
     }
 
     /**
-     * Overrides modElement::remove to add custom error logging.
-     *
-     * {@inheritdoc}
-     */
+    * Overrides modElement::remove to add custom error logging.
+    *
+    * {@inheritdoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -128,10 +128,10 @@ class modTemplate extends modElement
     }
 
     /**
-     * Process the template content and return the output.
-     *
-     * {@inheritdoc}
-     */
+    * Process the template content and return the output.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         parent:: process($properties, $content);
@@ -156,14 +156,14 @@ class modTemplate extends modElement
     }
 
     /**
-     * Gets a collection of objects related by aggregate or composite relations.
-     *
-     * {@inheritdoc}
-     *
-     * Includes special handling for related objects with alias {@link
-     * modTemplateVar}, respecting framework security unless specific criteria
-     * are provided.
-     */
+    * Gets a collection of objects related by aggregate or composite relations.
+    *
+    * {@inheritdoc}
+    *
+    * Includes special handling for related objects with alias {@link
+    * modTemplateVar}, respecting framework security unless specific criteria
+    * are provided.
+    */
     public function & getMany($alias, $criteria = null, $cacheFlag = true)
     {
         if (($alias === 'TemplateVars' || $alias === 'modTemplateVar') && ($criteria === null || strtolower($criteria) === 'all')) {
@@ -189,12 +189,12 @@ class modTemplate extends modElement
     }
 
     /**
-     * Grabs an array of Template Variables associated with this Template,
-     * bypassing the many-to-many relationship.
-     *
-     * @access public
-     * @return array An array of TVs.
-     */
+    * Grabs an array of Template Variables associated with this Template,
+    * bypassing the many-to-many relationship.
+    *
+    * @access public
+    * @return array An array of TVs.
+    */
     public function getTemplateVars()
     {
         $c = $this->xpdo->newQuery(modTemplateVar::class);
@@ -208,29 +208,29 @@ class modTemplate extends modElement
     }
 
     /**
-     * Get a list of Template Variables and if they are currently associated to this template.
-     *
-     * This is a sortable, scrollable list.
-     *
-     * @param array   $sort   An array of criteria for sorting the list.
-     * @param integer $limit  An optional limit to apply to the list.
-     * @param integer $offset An optional offset to apply to the list.
-     * @param array   $conditions
-     *
-     * @return array An array containing the collection and total.
-     */
+    * Get a list of Template Variables and if they are currently associated to this template.
+    *
+    * This is a sortable, scrollable list.
+    *
+    * @param array   $sort   An array of criteria for sorting the list.
+    * @param integer $limit  An optional limit to apply to the list.
+    * @param integer $offset An optional offset to apply to the list.
+    * @param array   $conditions
+    *
+    * @return array An array containing the collection and total.
+    */
     public function getTemplateVarList(array $sort = ['name' => 'ASC'], $limit = 0, $offset = 0, array $conditions = [])
     {
         return $this->xpdo->call(modTemplate::class, 'listTemplateVars', [&$this, $sort, $limit, $offset, $conditions]);
     }
 
     /**
-     * Check to see if this Template is assigned the specified Template Var
-     *
-     * @param mixed $tvPk Either the ID, name or object of the Template Var
-     *
-     * @return boolean True if the TV is assigned to this Template
-     */
+    * Check to see if this Template is assigned the specified Template Var
+    *
+    * @param mixed $tvPk Either the ID, name or object of the Template Var
+    *
+    * @return boolean True if the TV is assigned to this Template
+    */
     public function hasTemplateVar($tvPk)
     {
         if (!is_int($tvPk) && !is_object($tvPk)) {

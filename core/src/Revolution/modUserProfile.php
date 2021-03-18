@@ -38,10 +38,10 @@ use xPDO\Om\xPDOSimpleObject;
 class modUserProfile extends xPDOSimpleObject
 {
     /**
-     * Overrides xPDOObject::save to fire modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::save to fire modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -68,10 +68,10 @@ class modUserProfile extends xPDOSimpleObject
     }
 
     /**
-     * Overrides xPDOObject::remove to fire modX-specific events
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::remove to fire modX-specific events
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {

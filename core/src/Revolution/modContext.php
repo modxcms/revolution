@@ -24,94 +24,94 @@ use xPDO\xPDO;
 class modContext extends modAccessibleObject
 {
     /**
-     * An array of configuration options for this context
-     *
-     * @var array $config
-     */
+    * An array of configuration options for this context
+    *
+    * @var array $config
+    */
     public $config = null;
     /**
-     * The alias map for this context
-     *
-     * @var array $aliasMap
-     */
+    * The alias map for this context
+    *
+    * @var array $aliasMap
+    */
     public $aliasMap = null;
     /**
-     * The resource map for all resources in this context
-     *
-     * @var array $resourceMap
-     */
+    * The resource map for all resources in this context
+    *
+    * @var array $resourceMap
+    */
     public $resourceMap = null;
     /**
-     * A map of WebLink Resources with their target URLs
-     *
-     * @var array $webLinkMap
-     */
+    * A map of WebLink Resources with their target URLs
+    *
+    * @var array $webLinkMap
+    */
     public $webLinkMap = null;
     /**
-     * The event map for all events being executed in this context
-     *
-     * @var array $eventMap
-     */
+    * The event map for all events being executed in this context
+    *
+    * @var array $eventMap
+    */
     public $eventMap = null;
     /**
-     * The plugin cache array for all plugins being fired in this context
-     *
-     * @var array $pluginCache
-     */
+    * The plugin cache array for all plugins being fired in this context
+    *
+    * @var array $pluginCache
+    */
     public $pluginCache = null;
     /**
-     * The key for the cache for this context
-     *
-     * @var string $_cacheKey
-     */
+    * The key for the cache for this context
+    *
+    * @var string $_cacheKey
+    */
     protected $_cacheKey = '[contextKey]/context';
 
     /**
-     * Prepare and execute a PDOStatement to retrieve data needed for $aliasMap and $resourceMap.
-     *
-     * @static
-     *
-     * @param modContext &$context A reference to a specific modContext instance.
-     *
-     * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
-     * if the statement could not be prepared or executed.
-     */
+    * Prepare and execute a PDOStatement to retrieve data needed for $aliasMap and $resourceMap.
+    *
+    * @static
+    *
+    * @param modContext &$context A reference to a specific modContext instance.
+    *
+    * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
+    * if the statement could not be prepared or executed.
+    */
     public static function getResourceCacheMapStmt(&$context)
     {
         return false;
     }
 
     /**
-     * Prepare and execute a PDOStatement to retrieve data needed for $webLinkMap.
-     *
-     * @static
-     *
-     * @param modContext &$context A reference to a specific modContext instance.
-     *
-     * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
-     * if the statement could not be prepared or executed.
-     */
+    * Prepare and execute a PDOStatement to retrieve data needed for $webLinkMap.
+    *
+    * @static
+    *
+    * @param modContext &$context A reference to a specific modContext instance.
+    *
+    * @return PDOStatement|bool A PDOStatement, prepared and executed, with the map data, or false
+    * if the statement could not be prepared or executed.
+    */
     public static function getWebLinkCacheMapStmt(&$context)
     {
         return false;
     }
 
     /**
-     * Prepare a context for use.
-     *
-     * @uses   modCacheManager::generateContext() This method is responsible for
-     * preparing the context for use.
-     *
-     * You can override this behavior here, but you will only need to
-     * override the modCacheManager::generateContext() method in most cases
-     *
-     * @access public
-     *
-     * @param boolean $regenerate If true, the existing cache file will be ignored
-     *                            and regenerated.
-     *
-     * @return boolean Indicates if the context was successfully prepared.
-     */
+    * Prepare a context for use.
+    *
+    * @uses   modCacheManager::generateContext() This method is responsible for
+    * preparing the context for use.
+    *
+    * You can override this behavior here, but you will only need to
+    * override the modCacheManager::generateContext() method in most cases
+    *
+    * @access public
+    *
+    * @param boolean $regenerate If true, the existing cache file will be ignored
+    *                            and regenerated.
+    *
+    * @return boolean Indicates if the context was successfully prepared.
+    */
     public function prepare($regenerate = false, array $options = [])
     {
         $prepared = false;
@@ -147,15 +147,15 @@ class modContext extends modAccessibleObject
     }
 
     /**
-     * Returns a context-specific setting value.
-     *
-     * @param string $key     The option key to check.
-     * @param string $default A default value to use if not found.
-     * @param array  $options An array of additional options to merge over top of
-     *                        the context settings.
-     *
-     * @return mixed The option value or the provided default.
-     */
+    * Returns a context-specific setting value.
+    *
+    * @param string $key     The option key to check.
+    * @param string $default A default value to use if not found.
+    * @param array  $options An array of additional options to merge over top of
+    *                        the context settings.
+    *
+    * @return mixed The option value or the provided default.
+    */
     public function getOption($key, $default = null, $options = null)
     {
         if (is_array($options)) {
@@ -168,11 +168,11 @@ class modContext extends modAccessibleObject
     }
 
     /**
-     * Returns the file name representing this context in the cache.
-     *
-     * @access public
-     * @return string The cache filename.
-     */
+    * Returns the file name representing this context in the cache.
+    *
+    * @access public
+    * @return string The cache filename.
+    */
     public function getCacheKey()
     {
         if ($this->get('key')) {
@@ -185,10 +185,10 @@ class modContext extends modAccessibleObject
     }
 
     /**
-     * Loads the access control policies applicable to this element.
-     *
-     * {@inheritdoc}
-     */
+    * Loads the access control policies applicable to this element.
+    *
+    * {@inheritdoc}
+    */
     public function findPolicy($context = '')
     {
         $policy = [];
@@ -235,30 +235,30 @@ class modContext extends modAccessibleObject
     }
 
     /**
-     * Generates a URL representing a specified resource in this context.
-     *
-     * Note that if this method is called from a context other than the one
-     * initialized for the modX instance, and the scheme is not specified, an
-     * empty string, or abs, the method will force the scheme to full.
-     *
-     * @access public
-     *
-     * @param integer $id      The id of a resource.
-     * @param string  $args    A query string to append to the generated URL.
-     * @param mixed   $scheme  The scheme indicates in what format the URL is generated.<br>
-     *                         <pre>
-     *                         -1 : (default value) URL is relative to site_url
-     *                         0 : see http
-     *                         1 : see https
-     *                         full : URL is absolute, prepended with site_url from config
-     *                         abs : URL is absolute, prepended with base_url from config
-     *                         http : URL is absolute, forced to http scheme
-     *                         https : URL is absolute, forced to https scheme
-     *                         </pre>
-     * @param array   $options An array of options for generating the Resource URL.
-     *
-     * @return string The URL for the resource.
-     */
+    * Generates a URL representing a specified resource in this context.
+    *
+    * Note that if this method is called from a context other than the one
+    * initialized for the modX instance, and the scheme is not specified, an
+    * empty string, or abs, the method will force the scheme to full.
+    *
+    * @access public
+    *
+    * @param integer $id      The id of a resource.
+    * @param string  $args    A query string to append to the generated URL.
+    * @param mixed   $scheme  The scheme indicates in what format the URL is generated.<br>
+    *                         <pre>
+    *                         -1 : (default value) URL is relative to site_url
+    *                         0 : see http
+    *                         1 : see https
+    *                         full : URL is absolute, prepended with site_url from config
+    *                         abs : URL is absolute, prepended with base_url from config
+    *                         http : URL is absolute, forced to http scheme
+    *                         https : URL is absolute, forced to https scheme
+    *                         </pre>
+    * @param array   $options An array of options for generating the Resource URL.
+    *
+    * @return string The URL for the resource.
+    */
     public function makeUrl($id, $args = '', $scheme = -1, array $options = [])
     {
         $url = '';
@@ -375,10 +375,10 @@ class modContext extends modAccessibleObject
     }
 
     /**
-     * Overrides xPDOObject::remove to fire modX-specific events
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::remove to fire modX-specific events
+    *
+    * {@inheritDoc}
+    */
     public function remove(array $ancestors = [])
     {
         if ($this->xpdo instanceof modX) {
@@ -401,10 +401,10 @@ class modContext extends modAccessibleObject
     }
 
     /**
-     * Overrides xPDOObject::save to fire modX-specific events.
-     *
-     * {@inheritDoc}
-     */
+    * Overrides xPDOObject::save to fire modX-specific events.
+    *
+    * {@inheritDoc}
+    */
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
@@ -431,32 +431,32 @@ class modContext extends modAccessibleObject
     }
 
     /**
-     * Get and execute a PDOStatement representing data for the aliasMap and resourceMap.
-     *
-     * @return PDOStatement|null
-     */
+    * Get and execute a PDOStatement representing data for the aliasMap and resourceMap.
+    *
+    * @return PDOStatement|null
+    */
     public function getResourceCacheMap()
     {
         return $this->xpdo->call(modContext::class, 'getResourceCacheMapStmt', [&$this]);
     }
 
     /**
-     * Get and execute a PDOStatement representing data for the webLinkMap.
-     *
-     * @return PDOStatement|null
-     */
+    * Get and execute a PDOStatement representing data for the webLinkMap.
+    *
+    * @return PDOStatement|null
+    */
     public function getWebLinkCacheMap()
     {
         return $this->xpdo->call(modContext::class, 'getWebLinkCacheMapStmt', [&$this]);
     }
 
     /**
-     * Get a Resource URI in this Context by id.
-     *
-     * @param string|integer $id The integer id of the Resource.
-     *
-     * @return string|bool The URI of the Resource, or false if not found in this Context.
-     */
+    * Get a Resource URI in this Context by id.
+    *
+    * @param string|integer $id The integer id of the Resource.
+    *
+    * @return string|bool The URI of the Resource, or false if not found in this Context.
+    */
     public function getResourceURI($id)
     {
         if ($this->getOption('cache_alias_map') && isset($this->aliasMap)) {

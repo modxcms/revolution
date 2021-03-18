@@ -20,9 +20,9 @@ namespace MODX\Revolution;
 class modLinkTag extends modTag
 {
     /**
-     * Overrides modTag::__construct to set the Link Tag token
-     * {@inheritdoc}
-     */
+    * Overrides modTag::__construct to set the Link Tag token
+    * {@inheritdoc}
+    */
     function __constructor(modX & $modx)
     {
         parent:: __construct($modx);
@@ -30,10 +30,10 @@ class modLinkTag extends modTag
     }
 
     /**
-     * Processes the modLinkTag, recursively processing nested tags.
-     *
-     * {@inheritdoc}
-     */
+    * Processes the modLinkTag, recursively processing nested tags.
+    *
+    * {@inheritdoc}
+    */
     public function process($properties = null, $content = null)
     {
         parent:: process($properties, $content);

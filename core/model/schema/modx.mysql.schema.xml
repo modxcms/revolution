@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
- * This file is part of MODX Revolution.
- *
- * Copyright (c) MODX, LLC. All Rights Reserved.
- *
- * For complete copyright and license information, see the COPYRIGHT and LICENSE
- * files found in the top-level directory of this distribution.
- */
- -->
+* This file is part of MODX Revolution.
+*
+* Copyright (c) MODX, LLC. All Rights Reserved.
+*
+* For complete copyright and license information, see the COPYRIGHT and LICENSE
+* files found in the top-level directory of this distribution.
+*/
+-->
 <!-- The following xPDO model represents an object-relational map structure of MODX -->
 <model package="MODX\Revolution\" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution" version="3.0">
     <object class="modAccess" extends="xPDO\Om\xPDOSimpleObject">

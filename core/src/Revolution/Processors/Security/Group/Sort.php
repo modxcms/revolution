@@ -24,25 +24,25 @@ use MODX\Revolution\modX;
 class Sort extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('usergroup_save');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user'];
     }
 
     /**
-     * @return array|mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * @return array|mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         $data = $this->getProperty('data');
@@ -64,10 +64,10 @@ class Sort extends Processor
     }
 
     /**
-     * Sort and rearrange any groups in the data
-     * @param array $data
-     * @return void
-     */
+    * Sort and rearrange any groups in the data
+    * @param array $data
+    * @return void
+    */
     public function sortGroups(array $data)
     {
         $groups = [];
@@ -117,10 +117,10 @@ class Sort extends Processor
     }
 
     /**
-     * Sort and rearrange any users in the data
-     * @param array $data
-     * @return void
-     */
+    * Sort and rearrange any users in the data
+    * @param array $data
+    * @return void
+    */
     public function sortUsers(array $data)
     {
         $users = [];
@@ -166,10 +166,10 @@ class Sort extends Processor
     }
 
     /**
-     * @param $ar_nodes
-     * @param $cur_level
-     * @param int $parent
-     */
+    * @param $ar_nodes
+    * @param $cur_level
+    * @param int $parent
+    */
     protected function getGroupsFormatted(&$ar_nodes, $cur_level, $parent = 0)
     {
         $order = 0;
@@ -188,10 +188,10 @@ class Sort extends Processor
     }
 
     /**
-     * @param $ar_nodes
-     * @param $cur_level
-     * @param int $parent
-     */
+    * @param $ar_nodes
+    * @param $cur_level
+    * @param int $parent
+    */
     protected function getUsersFormatted(&$ar_nodes, $cur_level, $parent = 0)
     {
         $order = 0;

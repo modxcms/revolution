@@ -24,48 +24,48 @@ use xPDO\xPDO;
 class modParser
 {
     /**
-     * A reference to the modX instance
-     * @var modX $modx
-     */
+    * A reference to the modX instance
+    * @var modX $modx
+    */
     public $modx= null;
     /**
-     * If the parser is currently processing a tag
-     * @var bool $_processingTag
-     */
+    * If the parser is currently processing a tag
+    * @var bool $_processingTag
+    */
     protected $_processingTag = false;
     /**
-     * If the parser is currently processing an element
-     * @var bool $_processingElement
-     */
+    * If the parser is currently processing an element
+    * @var bool $_processingElement
+    */
     protected $_processingElement = false;
     /**
-     * If the parser is currently processing an uncacheable tag
-     * @var bool $_processingUncacheable
-     */
+    * If the parser is currently processing an uncacheable tag
+    * @var bool $_processingUncacheable
+    */
     protected $_processingUncacheable = false;
     /**
-     * If the parser is currently removing all unprocessed tags
-     * @var bool $_removingUnprocessed
-     */
+    * If the parser is currently removing all unprocessed tags
+    * @var bool $_removingUnprocessed
+    */
     protected $_removingUnprocessed = false;
     /**
-     * If the parser has ever processed uncacheable
-     *
-     * @var bool $_startedProcessingUncacheable
-     */
+    * If the parser has ever processed uncacheable
+    *
+    * @var bool $_startedProcessingUncacheable
+    */
     protected $_startedProcessingUncacheable = false;
 
     /**
-     * @param xPDO $modx A reference to the modX|xPDO instance
-     */
+    * @param xPDO $modx A reference to the modX|xPDO instance
+    */
     function __construct(xPDO &$modx) {
         $this->modx =& $modx;
     }
 
     /**
-     * Returns true if the parser is currently processing an uncacheable tag
-     * @return bool
-     */
+    * Returns true if the parser is currently processing an uncacheable tag
+    * @return bool
+    */
     public function isProcessingUncacheable() {
         $result = false;
         if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_processingUncacheable;
@@ -73,17 +73,17 @@ class modParser
     }
 
     /**
-     * Returns true if the parser has ever processed an uncacheable tag
-     * @return bool
-     */
+    * Returns true if the parser has ever processed an uncacheable tag
+    * @return bool
+    */
     public function startedProcessingUncacheable() {
         return $this->_startedProcessingUncacheable;
     }
 
     /**
-     * Returns true if the parser is currently removing any unprocessed tags
-     * @return bool
-     */
+    * Returns true if the parser is currently removing any unprocessed tags
+    * @return bool
+    */
     public function isRemovingUnprocessed() {
         $result = false;
         if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_removingUnprocessed;
@@ -91,17 +91,17 @@ class modParser
     }
 
     /**
-     * Returns true if the parser is currently processing a tag
-     * @return bool
-     */
+    * Returns true if the parser is currently processing a tag
+    * @return bool
+    */
     public function isProcessingTag() {
         return (boolean) $this->_processingTag;
     }
 
     /**
-     * Returns true if the parser is currently processing an element
-     * @return bool
-     */
+    * Returns true if the parser is currently processing an element
+    * @return bool
+    */
     public function isProcessingElement() {
         return (boolean) $this->_processingElement;
     }
@@ -117,17 +117,17 @@ class modParser
     }
 
     /**
-     * Collects element tags in a string and injects them into an array.
-     *
-     * @param string $origContent The content to collect tags from.
-     * @param array &$matches An array in which the collected tags will be
-     * stored (by reference)
-     * @param string $prefix The characters that define the start of a tag
-     * (default= "[[").
-     * @param string $suffix The characters that define the end of a tag
-     * (default= "]]").
-     * @return integer The number of tags collected from the content.
-     */
+    * Collects element tags in a string and injects them into an array.
+    *
+    * @param string $origContent The content to collect tags from.
+    * @param array &$matches An array in which the collected tags will be
+    * stored (by reference)
+    * @param string $prefix The characters that define the start of a tag
+    * (default= "[[").
+    * @param string $suffix The characters that define the end of a tag
+    * (default= "]]").
+    * @return integer The number of tags collected from the content.
+    */
     public function collectElementTags($origContent, array &$matches, $prefix= '[[', $suffix= ']]') {
         $subPrefix = $prefix;
         $subSuffix = $suffix;
@@ -160,25 +160,25 @@ class modParser
     }
 
     /**
-     * Collects and processes any set of tags as defined by a prefix and suffix.
-     *
-     * @param string $parentTag The tag representing the element processing this
-     * tag.  Pass an empty string to allow parsing without this recursion check.
-     * @param string $content The content to process and act on (by reference).
-     * @param boolean $processUncacheable Determines if noncacheable tags are to
-     * be processed (default= false).
-     * @param boolean $removeUnprocessed Determines if unprocessed tags should
-     * be left in place in the content, or stripped out (default= false).
-     * @param string $prefix The characters that define the start of a tag
-     * (default= "[[").
-     * @param string $suffix The characters that define the end of a tag
-     * (default= "]]").
-     * @param array $tokens Indicates that the parser should only process tags
-     * with the tokens included in this array.
-     * @param integer $depth The maximum iterations to recursively process tags
-     * returned by prior passes, 0 by default.
-     * @return int The number of processed tags
-     */
+    * Collects and processes any set of tags as defined by a prefix and suffix.
+    *
+    * @param string $parentTag The tag representing the element processing this
+    * tag.  Pass an empty string to allow parsing without this recursion check.
+    * @param string $content The content to process and act on (by reference).
+    * @param boolean $processUncacheable Determines if noncacheable tags are to
+    * be processed (default= false).
+    * @param boolean $removeUnprocessed Determines if unprocessed tags should
+    * be left in place in the content, or stripped out (default= false).
+    * @param string $prefix The characters that define the start of a tag
+    * (default= "[[").
+    * @param string $suffix The characters that define the end of a tag
+    * (default= "]]").
+    * @param array $tokens Indicates that the parser should only process tags
+    * with the tokens included in this array.
+    * @param integer $depth The maximum iterations to recursively process tags
+    * returned by prior passes, 0 by default.
+    * @return int The number of processed tags
+    */
     public function processElementTags($parentTag, & $content, $processUncacheable= false, $removeUnprocessed= false, $prefix= "[[", $suffix= "]]", $tokens= [], $depth= 0) {
         if ($processUncacheable) {
             $this->_startedProcessingUncacheable = true;
@@ -238,13 +238,13 @@ class modParser
     }
 
     /**
-     * Merges processed tag output into provided content string.
-     *
-     * @param array $tagMap An array with full tags as keys and processed output
-     * as the values.
-     * @param string $content The content to merge the tag output with (passed by
-     * reference).
-     */
+    * Merges processed tag output into provided content string.
+    *
+    * @param array $tagMap An array with full tags as keys and processed output
+    * as the values.
+    * @param string $content The content to merge the tag output with (passed by
+    * reference).
+    */
     public function mergeTagOutput(array $tagMap, & $content) {
         if (!empty ($content) && is_array($tagMap) && !empty ($tagMap)) {
             $content= str_replace(array_keys($tagMap), array_values($tagMap), $content);
@@ -252,13 +252,13 @@ class modParser
     }
 
     /**
-     * Parses an element/tag property string or array definition.
-     *
-     * @param string $propSource A valid property string or array source to
-     * parse.
-     * @return array An associative array of property values parsed from
-     * the property string or array definition.
-     */
+    * Parses an element/tag property string or array definition.
+    *
+    * @param string $propSource A valid property string or array source to
+    * parse.
+    * @return array An associative array of property values parsed from
+    * the property string or array definition.
+    */
     public function parseProperties($propSource) {
         $properties= [];
         if (!empty ($propSource)) {
@@ -278,13 +278,13 @@ class modParser
     }
 
     /**
-     * Parses an element/tag property string and returns an array of properties.
-     *
-     * @param string $string The property string to parse.
-     * @param boolean $valuesOnly Indicates only the property value should be
-     * returned.
-     * @return array The processed properties in array format
-     */
+    * Parses an element/tag property string and returns an array of properties.
+    *
+    * @param string $string The property string to parse.
+    * @param boolean $valuesOnly Indicates only the property value should be
+    * returned.
+    * @return array The processed properties in array format
+    */
     public function parsePropertyString($string, $valuesOnly = false) {
         $properties = [];
         $tagProps= xPDO :: escSplit("&", $string);
@@ -342,12 +342,12 @@ class modParser
     }
 
     /**
-     * Converts legacy property string types to xtypes.
-     *
-     * @access protected
-     * @param string $type A property type string.
-     * @return string A valid xtype.
-     */
+    * Converts legacy property string types to xtypes.
+    *
+    * @access protected
+    * @param string $type A property type string.
+    * @return string A valid xtype.
+    */
     protected function _XType($type) {
         $xtype = $type;
         switch ($type) {
@@ -376,13 +376,13 @@ class modParser
     }
 
     /**
-     * Processes a modElement tag and returns the result.
-     *
-     * @param string $tag A full tag string parsed from content.
-     * @param boolean $processUncacheable
-     * @return mixed The output of the processed element represented by the
-     * specified tag.
-     */
+    * Processes a modElement tag and returns the result.
+    *
+    * @param string $tag A full tag string parsed from content.
+    * @param boolean $processUncacheable
+    * @return mixed The output of the processed element represented by the
+    * specified tag.
+    */
     public function processTag($tag, $processUncacheable = true) {
         $this->_processingTag = true;
         $element= null;
@@ -524,12 +524,12 @@ class modParser
     }
 
     /**
-     * Get a modElement instance taking advantage of the modX::$sourceCache.
-     *
-     * @param string $class The modElement derivative class to load.
-     * @param string $name An element name or raw tagName to identify the modElement instance.
-     * @return modElement|null An instance of the specified modElement derivative class.
-     */
+    * Get a modElement instance taking advantage of the modX::$sourceCache.
+    *
+    * @param string $class The modElement derivative class to load.
+    * @param string $name An element name or raw tagName to identify the modElement instance.
+    * @return modElement|null An instance of the specified modElement derivative class.
+    */
     public function getElement($class, $name) {
         $realname = $this->realname($name);
         $class = $this->modx->loadClass($class);
@@ -588,11 +588,11 @@ class modParser
     }
 
     /**
-     * Gets the real name of an element containing filter modifiers.
-     *
-     * @param string $unfiltered The unfiltered name of a {@link modElement}.
-     * @return string The name minus any filter modifiers.
-     */
+    * Gets the real name of an element containing filter modifiers.
+    *
+    * @param string $unfiltered The unfiltered name of a {@link modElement}.
+    * @return string The name minus any filter modifiers.
+    */
     public function realname($unfiltered) {
         $filtered= $unfiltered;
         $split= xPDO :: escSplit(':', $filtered);
@@ -607,13 +607,13 @@ class modParser
     }
 
     /**
-     * Loads output cached by complete tag signature from the elementCache.
-     *
-     * @uses modX::$_elementCache Stores all cacheable content from processed
-     * elements.
-     * @param string $tag The tag signature representing the element instance.
-     * @return string The cached output from the element instance.
-     */
+    * Loads output cached by complete tag signature from the elementCache.
+    *
+    * @uses modX::$_elementCache Stores all cacheable content from processed
+    * elements.
+    * @param string $tag The tag signature representing the element instance.
+    * @return string The cached output from the element instance.
+    */
     public function loadFromCache($tag) {
         $elementOutput= null;
         if (isset ($this->modx->elementCache[$tag])) {

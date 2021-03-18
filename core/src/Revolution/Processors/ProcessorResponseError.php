@@ -19,23 +19,23 @@ namespace MODX\Revolution\Processors;
 class ProcessorResponseError
 {
     /**
-     * @var array The error data itself
-     */
+    * @var array The error data itself
+    */
     public $error = null;
     /**
-     * @var string The field key that the error occurred on
-     */
+    * @var string The field key that the error occurred on
+    */
     public $field = null;
     /**
-     * @var string The message that was sent for the field error
-     */
+    * @var string The message that was sent for the field error
+    */
     public $message = '';
 
     /**
-     * The constructor for the modProcessorResponseError class
-     *
-     * @param array $error An array error response
-     */
+    * The constructor for the modProcessorResponseError class
+    *
+    * @param array $error An array error response
+    */
     public function __construct($error = [])
     {
         $this->error = $error;
@@ -48,30 +48,30 @@ class ProcessorResponseError
     }
 
     /**
-     * Returns the message for the field-specific error
-     *
-     * @return string
-     */
+    * Returns the message for the field-specific error
+    *
+    * @return string
+    */
     public function getMessage()
     {
         return $this->message;
     }
 
     /**
-     * Returns the field key for the field-specific error
-     *
-     * @return string
-     */
+    * Returns the field key for the field-specific error
+    *
+    * @return string
+    */
     public function getField()
     {
         return $this->field;
     }
 
     /**
-     * Returns the array data for the field-specific error
-     *
-     * @return array
-     */
+    * Returns the array data for the field-specific error
+    *
+    * @return array
+    */
     public function getError()
     {
         return $this->error;

@@ -50,9 +50,9 @@ abstract class UpdateProcessor extends ModelProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         /* Run the beforeSet method before setting the fields, and allow stoppage */
@@ -97,21 +97,21 @@ abstract class UpdateProcessor extends ModelProcessor
     }
 
     /**
-     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
-     * classes
-     *
-     * @return boolean
-     */
+    * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+    * classes
+    *
+    * @return boolean
+    */
     public function saveObject()
     {
         return $this->object->save();
     }
 
     /**
-     * Override in your derivative class to do functionality before the fields are set on the object
-     *
-     * @return boolean
-     */
+    * Override in your derivative class to do functionality before the fields are set on the object
+    *
+    * @return boolean
+    */
     public function beforeSet()
     {
         return !$this->hasErrors();
@@ -119,30 +119,30 @@ abstract class UpdateProcessor extends ModelProcessor
 
 
     /**
-     * Override in your derivative class to do functionality before save() is run
-     *
-     * @return boolean
-     */
+    * Override in your derivative class to do functionality before save() is run
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Override in your derivative class to do functionality after save() is run
-     *
-     * @return boolean
-     */
+    * Override in your derivative class to do functionality after save() is run
+    *
+    * @return boolean
+    */
     public function afterSave()
     {
         return true;
     }
 
     /**
-     * Return the success message
-     *
-     * @return array
-     */
+    * Return the success message
+    *
+    * @return array
+    */
     public function cleanup()
     {
         return $this->success('', $this->object);
@@ -150,10 +150,10 @@ abstract class UpdateProcessor extends ModelProcessor
 
 
     /**
-     * Fire before save event. Return true to prevent saving.
-     *
-     * @return boolean
-     */
+    * Fire before save event. Return true to prevent saving.
+    *
+    * @return boolean
+    */
     public function fireBeforeSaveEvent()
     {
         $preventSave = false;
@@ -182,10 +182,10 @@ abstract class UpdateProcessor extends ModelProcessor
     }
 
     /**
-     * Fire the after save event
-     *
-     * @return void
-     */
+    * Fire the after save event
+    *
+    * @return void
+    */
     public function fireAfterSaveEvent()
     {
         if (!empty($this->afterSaveEvent)) {
@@ -199,10 +199,10 @@ abstract class UpdateProcessor extends ModelProcessor
     }
 
     /**
-     * Log the removal manager action
-     *
-     * @return void
-     */
+    * Log the removal manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction($this->objectType . '_update', $this->classKey,
@@ -210,10 +210,10 @@ abstract class UpdateProcessor extends ModelProcessor
     }
 
     /**
-     * @param array $criteria
-     *
-     * @return int
-     */
+    * @param array $criteria
+    *
+    * @return int
+    */
     public function doesAlreadyExist(array $criteria)
     {
         return $this->modx->getCount($this->classKey, $criteria);

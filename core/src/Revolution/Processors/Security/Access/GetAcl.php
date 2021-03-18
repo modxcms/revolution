@@ -25,8 +25,8 @@ class GetAcl extends GetProcessor
     public $languageTopics = ['access'];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->classKey = $this->getProperty('type');
@@ -38,7 +38,7 @@ class GetAcl extends GetProcessor
         if (!$this->object) {
             return $this->modx->lexicon($this->objectType . '_err_nf');
         }
-        
+
         return true;
     }
 }

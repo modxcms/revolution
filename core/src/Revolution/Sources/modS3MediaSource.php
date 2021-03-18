@@ -22,8 +22,8 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         parent::initialize();
@@ -60,8 +60,8 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @return string
-     */
+    * @return string
+    */
     public function getTypeName()
     {
         $this->xpdo->lexicon->load('source');
@@ -71,8 +71,8 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @return string
-     */
+    * @return string
+    */
     public function getTypeDescription()
     {
         $this->xpdo->lexicon->load('source');
@@ -82,8 +82,8 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getDefaultProperties()
     {
         return [
@@ -163,8 +163,8 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     protected function getListDirContextMenu()
     {
         $menu = parent::getListDirContextMenu();
@@ -181,13 +181,13 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @param string $from
-     * @param string $to
-     * @param string $point
-     * @param int    $to_source
-     *
-     * @return bool
-     */
+    * @param string $from
+    * @param string $to
+    * @param string $point
+    * @param int    $to_source
+    *
+    * @return bool
+    */
     public function moveObject($from, $to, $point = 'append', $to_source = 0)
     {
         $path = $this->postfixSlash($from);
@@ -208,10 +208,10 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @param string $object
-     *
-     * @return string
-     */
+    * @param string $object
+    *
+    * @return string
+    */
     public function getBasePath($object = '')
     {
         $properties = $this->getPropertyList();
@@ -221,10 +221,10 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @param string $src
-     *
-     * @return string
-     */
+    * @param string $src
+    *
+    * @return string
+    */
     public function prepareSrcForThumb($src)
     {
         $properties = $this->getPropertyList();
@@ -237,10 +237,10 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @param string $object An optional object to find the base url of
-     *
-     * @return string
-     */
+    * @param string $object An optional object to find the base url of
+    *
+    * @return string
+    */
     public function getBaseUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -250,10 +250,10 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @param string $object
-     *
-     * @return string
-     */
+    * @param string $object
+    *
+    * @return string
+    */
     public function getObjectUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -265,15 +265,15 @@ class modS3MediaSource extends modMediaSource
 
 
     /**
-     * @param string $path
-     * @param string $ext
-     * @param int    $width
-     * @param int    $height
-     * @param array  $bases
-     * @param array  $properties
-     *
-     * @return array
-     */
+    * @param string $path
+    * @param string $ext
+    * @param int    $width
+    * @param int    $height
+    * @param array  $bases
+    * @param array  $properties
+    *
+    * @return array
+    */
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         if ($image = $this->getObjectUrl($path)) {

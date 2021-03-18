@@ -31,8 +31,8 @@ class Create extends CreateProcessor
     public $object;
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name', '');

@@ -34,8 +34,8 @@ class UpdateResourcesIn extends CreateProcessor
     public $resourceGroup;
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeSave()
     {
         /* format data */
@@ -81,9 +81,9 @@ class UpdateResourcesIn extends CreateProcessor
     }
 
     /**
-     * Return the success message
-     * @return array
-     */
+    * Return the success message
+    * @return array
+    */
     public function cleanup()
     {
         $objArray = $this->object->toArray();

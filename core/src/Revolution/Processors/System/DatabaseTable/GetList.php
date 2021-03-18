@@ -20,16 +20,16 @@ class GetList extends GetListAbstract
 {
 
     /**
-     * @var GetListAbstract
-     */
+    * @var GetListAbstract
+    */
     protected $concreteProcessor;
 
     /**
-     * Creates a Processor object.
-     *
-     * @param modX $modx A reference to the modX instance
-     * @param array $properties An array of properties
-     */
+    * Creates a Processor object.
+    *
+    * @param modX $modx A reference to the modX instance
+    * @param array $properties An array of properties
+    */
     public function __construct(modX $modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
@@ -40,8 +40,8 @@ class GetList extends GetListAbstract
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getTables()
     {
         return $this->concreteProcessor->getTables();

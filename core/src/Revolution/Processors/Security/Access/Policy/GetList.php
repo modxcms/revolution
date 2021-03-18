@@ -36,8 +36,8 @@ class GetList extends GetListProcessor
     public $languageTopics = ['policy'];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -51,9 +51,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->innerJoin(modAccessPolicyTemplate::class, 'Template');
@@ -75,9 +75,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $subc = $this->modx->newQuery(modAccessPermission::class);
@@ -98,9 +98,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param array $list
-     * @return array
-     */
+    * @param array $list
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         if ($this->getProperty('combo', false)) {
@@ -113,9 +113,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $core = ['Resource', 'Object', 'Administrator', 'Load Only', 'Load, List and View'];

@@ -30,9 +30,9 @@ class Get extends GetProcessor
     public $languageTopics = ['plugin'];
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $plugin = $this->getProperty('plugin', 0);

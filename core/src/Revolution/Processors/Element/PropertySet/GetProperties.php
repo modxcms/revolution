@@ -24,17 +24,17 @@ class GetProperties extends Get
     public $element_class = 'element_class';
 
     /**
-     * No need to do something here
-     */
+    * No need to do something here
+    */
     public function beforeCleanup()
     {
     }
 
     /**
-     * Output properties instead of property set
-     *
-     * @return array|string
-     */
+    * Output properties instead of property set
+    *
+    * @return array|string
+    */
     public function cleanup()
     {
         return $this->success('', $this->props);

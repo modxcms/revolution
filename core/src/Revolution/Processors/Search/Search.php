@@ -42,33 +42,33 @@ class Search extends Processor
     public $results = [];
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('search');
     }
 
     /**
-     * Returns max records per search request
-     * @return int
-     */
+    * Returns max records per search request
+    * @return int
+    */
     protected function getMaxResults()
     {
         return (int)$this->modx->getOption('quick_search_result_max', null, 10);
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     protected function searchInContent()
     {
         return (boolean)$this->modx->getOption('quick_search_in_content', null, true);
     }
 
     /**
-     * @return string JSON formatted results
-     */
+    * @return string JSON formatted results
+    */
     public function process()
     {
         $this->query = trim($this->getProperty('query'));
@@ -100,8 +100,8 @@ class Search extends Processor
     }
 
     /**
-     * Search in resources
-     */
+    * Search in resources
+    */
     protected function searchResources()
     {
         $contextKeys = [];
@@ -152,13 +152,13 @@ class Search extends Processor
     }
 
     /**
-     * Searches elements - chunks, snippets, tvs, templates, plugins
-     * @param $class
-     * @param string $type
-     * @param string $nameField
-     * @param string $descriptionField
-     * @param string $contentField
-     */
+    * Searches elements - chunks, snippets, tvs, templates, plugins
+    * @param $class
+    * @param string $type
+    * @param string $nameField
+    * @param string $descriptionField
+    * @param string $contentField
+    */
     protected function searchElements($class, $type = '', $nameField = 'name', $descriptionField = 'description', $contentField = '')
     {
         $c = $this->modx->newQuery($class);
@@ -188,8 +188,8 @@ class Search extends Processor
     }
 
     /**
-     * Searches users registered in the system
-     */
+    * Searches users registered in the system
+    */
     protected function searchUsers()
     {
         $c = $this->modx->newQuery(modUser::class);

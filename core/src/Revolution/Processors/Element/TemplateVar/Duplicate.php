@@ -42,10 +42,10 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
     }
 
     /**
-     * Duplicate Template associations
-     *
-     * @return void
-     */
+    * Duplicate Template associations
+    *
+    * @return void
+    */
     public function duplicateTemplates()
     {
         $templateVarTemplates = $this->object->getMany('TemplateVarTemplates');
@@ -63,10 +63,10 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
     }
 
     /**
-     * Duplicate the values of the TV across Resources using it
-     *
-     * @return void
-     */
+    * Duplicate the values of the TV across Resources using it
+    *
+    * @return void
+    */
     public function duplicateResources()
     {
         if ($this->getProperty('duplicateValues', true)) {
@@ -86,10 +86,10 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
     }
 
     /**
-     * Duplicate Resource Group associations
-     *
-     * @return void
-     */
+    * Duplicate Resource Group associations
+    *
+    * @return void
+    */
     public function duplicateResourceGroups()
     {
         $resourceGroups = $this->object->getMany('TemplateVarResourceGroups');
@@ -106,10 +106,10 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
     }
 
     /**
-     * Duplicate all media source associations
-     *
-     * @return void
-     */
+    * Duplicate all media source associations
+    *
+    * @return void
+    */
     public function duplicateMediaSources()
     {
         $sourceElements = $this->modx->getCollection(modMediaSourceElement::class, [
@@ -133,33 +133,33 @@ class Duplicate extends \MODX\Revolution\Processors\Element\Duplicate
     }
 
     /**
-     * Get the new caption for the duplicate
-     *
-     * @return string
-     */
+    * Get the new caption for the duplicate
+    *
+    * @return string
+    */
     public function getNewCaption()
     {
         return $this->getProperty($this->captionField);
     }
 
     /**
-     * Set the new caption to the new object
-     *
-     * @param $caption
-     *
-     * @return string
-     * @internal param string $name
-     */
+    * Set the new caption to the new object
+    *
+    * @param $caption
+    *
+    * @return string
+    * @internal param string $name
+    */
     public function setNewCaption($caption)
     {
         return $this->newObject->set($this->captionField, $caption);
     }
 
     /**
-     * Run any logic before the object has been duplicated. May return false to prevent duplication.
-     *
-     * @return boolean
-     */
+    * Run any logic before the object has been duplicated. May return false to prevent duplication.
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         $caption = $this->getNewCaption();

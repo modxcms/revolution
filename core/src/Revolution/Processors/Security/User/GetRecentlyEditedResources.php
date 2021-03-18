@@ -38,8 +38,8 @@ class GetRecentlyEditedResources extends GetListProcessor
     protected $classKeys = [];
 
     /**
-     * @return bool|null|string
-     */
+    * @return bool|null|string
+    */
     public function initialize()
     {
         $this->setDefaultProperties(['limit' => 10]);
@@ -52,10 +52,10 @@ class GetRecentlyEditedResources extends GetListProcessor
 
 
     /**
-     * Filter resources by user
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * Filter resources by user
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $user = $this->getProperty('user');
@@ -82,10 +82,10 @@ class GetRecentlyEditedResources extends GetListProcessor
 
 
     /**
-     * Prepare the row for iteration
-     * @param xPDOObject $object
-     * @return array
-     */
+    * Prepare the row for iteration
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $row = $object->toArray();

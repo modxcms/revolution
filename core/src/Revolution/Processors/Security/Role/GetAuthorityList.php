@@ -27,9 +27,9 @@ use xPDO\Om\xPDOObject;
 class GetAuthorityList extends GetList
 {
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

@@ -30,24 +30,24 @@ class RemoveResource extends Processor
     public $resource;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('resourcegroup_resource_edit');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['resource', 'access'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $resource = $this->getProperty('resource');
@@ -72,8 +72,8 @@ class RemoveResource extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         /* @var modResourceGroupResource $resourceGroupResource */

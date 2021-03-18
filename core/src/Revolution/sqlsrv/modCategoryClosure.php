@@ -11,15 +11,15 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
         'version' => '3.0',
         'table' => 'categories_closure',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'fields' => 
+        'fields' =>
         array (
             'ancestor' => 0,
             'descendant' => 0,
             'depth' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'ancestor' => 
+            'ancestor' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -27,7 +27,7 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'descendant' => 
+            'descendant' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -35,7 +35,7 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'depth' => 
+            'depth' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -43,23 +43,23 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
                 'default' => 0,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'ancestor' => 
+                    'ancestor' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'descendant' => 
+                    'descendant' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -68,9 +68,9 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Ancestor' => 
+            'Ancestor' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'local' => 'ancestor',
@@ -78,7 +78,7 @@ class modCategoryClosure extends \MODX\Revolution\modCategoryClosure
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Descendant' => 
+            'Descendant' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'local' => 'descendant',

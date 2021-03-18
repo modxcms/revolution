@@ -23,24 +23,24 @@ class Create extends Processor
     public $entry;
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('lexicons');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['lexicon'];
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function process()
     {
         if ($this->alreadyExists()) {
@@ -59,8 +59,8 @@ class Create extends Processor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function alreadyExists()
     {
         return $this->modx->getCount(modLexiconEntry::class, [

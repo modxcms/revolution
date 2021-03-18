@@ -114,12 +114,12 @@ class modNamespace extends modAccessibleObject
     }
 
     /**
-     * Find all policies for this object
-     *
-     * @param string $context
-     *
-     * @return array
-     */
+    * Find all policies for this object
+    *
+    * @param string $context
+    *
+    * @return array
+    */
     public function findPolicy($context = '')
     {
         $policy = [];

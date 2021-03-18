@@ -26,23 +26,23 @@ use MODX\Revolution\modX;
 class modOutputFilter
 {
     /**
-     * @var modX A reference to the modX instance
-     */
+    * @var modX A reference to the modX instance
+    */
     public $modx = null;
 
     /**
-     * @param modX $modx A reference to the modX instance
-     */
+    * @param modX $modx A reference to the modX instance
+    */
     function __construct(modX &$modx)
     {
         $this->modx = &$modx;
     }
 
     /**
-     * Filters the output
-     *
-     * @param modElement|modTag $element The element to filter
-     */
+    * Filters the output
+    *
+    * @param modElement|modTag $element The element to filter
+    */
     public function filter(&$element)
     {
         $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte', null, false);
@@ -767,15 +767,15 @@ class modOutputFilter
     }
 
     /**
-     * Parse a set of conditions
-     *
-     * @param array      $conditions Conditionals to parse
-     * @param null|mixed $value      The value to set if our parsing matches
-     * @param null|mixed $default    The default value to set if our conditions were false
-     * @param bool       $negate     Negate the comparison
-     *
-     * @return bool
-     */
+    * Parse a set of conditions
+    *
+    * @param array      $conditions Conditionals to parse
+    * @param null|mixed $value      The value to set if our parsing matches
+    * @param null|mixed $default    The default value to set if our conditions were false
+    * @param bool       $negate     Negate the comparison
+    *
+    * @return bool
+    */
     private static function parseConditions($conditions, $value = null, $default = null, $negate = false)
     {
         $conditional = join(' ', $conditions);
@@ -803,12 +803,12 @@ class modOutputFilter
     }
 
     /**
-     * Validate conditionals before running eval
-     *
-     * @param array $conditions Conditionals to validate
-     *
-     * @return bool
-     */
+    * Validate conditionals before running eval
+    *
+    * @param array $conditions Conditionals to validate
+    *
+    * @return bool
+    */
     private function validateConditionals($conditions)
     {
         // Check if we have any conditions at all
@@ -850,36 +850,36 @@ class modOutputFilter
     }
 
     /**
-     * Checks if input is integer og boolean
-     *
-     * @param mixed $input Value from conditions
-     *
-     * @return bool
-     */
+    * Checks if input is integer og boolean
+    *
+    * @param mixed $input Value from conditions
+    *
+    * @return bool
+    */
     private static function isValue($input)
     {
         return is_bool($input) or is_int($input);
     }
 
     /**
-     * Checks if input is a condition
-     *
-     * @param mixed $input Value from conditions
-     *
-     * @return bool
-     */
+    * Checks if input is a condition
+    *
+    * @param mixed $input Value from conditions
+    *
+    * @return bool
+    */
     private static function isCondition($input)
     {
         return $input === '&&' or $input === '||';
     }
 
     /**
-     * Send a log message to the message logger
-     *
-     * @param string $msg
-     *
-     * @return void
-     */
+    * Send a log message to the message logger
+    *
+    * @param string $msg
+    *
+    * @return void
+    */
     public function log($msg)
     {
         if ($this->modx->getDebug() === true) {

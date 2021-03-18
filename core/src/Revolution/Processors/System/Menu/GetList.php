@@ -32,8 +32,8 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'menuindex';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $initialized = parent::initialize();
@@ -45,9 +45,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param array $list
-     * @return array
-     */
+    * @param array $list
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         if ($this->getProperty('showNone', false)) {
@@ -63,9 +63,9 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
-     * @return array
-     */
+    * @param xPDOObject $object
+    * @return array
+    */
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();

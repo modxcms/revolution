@@ -32,9 +32,9 @@ class Update extends UpdateProcessor
     public $object;
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function beforeSave()
     {
         $this->setSourceProperties();
@@ -42,10 +42,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Sets the properties on the source
-     * @return void
-     * @throws \xPDO\xPDOException
-     */
+    * Sets the properties on the source
+    * @return void
+    * @throws \xPDO\xPDOException
+    */
     public function setSourceProperties()
     {
         $properties = $this->getProperty('properties');
@@ -56,9 +56,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function afterSave()
     {
         $this->setAccess();
@@ -66,10 +66,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Sets access permissions for the source
-     * @return void
-     * @throws \xPDO\xPDOException
-     */
+    * Sets access permissions for the source
+    * @return void
+    * @throws \xPDO\xPDOException
+    */
     public function setAccess()
     {
         $access = $this->getProperty('access');

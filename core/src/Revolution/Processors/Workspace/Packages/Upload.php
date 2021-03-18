@@ -24,24 +24,24 @@ class Upload extends Processor
     public $source;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('file_upload');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['file'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         if (empty($_FILES)) {
@@ -53,9 +53,9 @@ class Upload extends Processor
     }
 
     /**
-     * Get the active Source
-     * @return modMediaSource|boolean
-     */
+    * Get the active Source
+    * @return modMediaSource|boolean
+    */
     public function getSource()
     {
         $this->source = modMediaSource::getDefaultSource($this->modx);

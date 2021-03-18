@@ -11,19 +11,19 @@ class modAccessContext extends \MODX\Revolution\modAccessContext
         'version' => '3.0',
         'table' => 'access_context',
         'extends' => 'MODX\\Revolution\\modAccess',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Target' => 
+            'Target' =>
             array (
                 'class' => 'MODX\\Revolution\\modContext',
                 'local' => 'target',

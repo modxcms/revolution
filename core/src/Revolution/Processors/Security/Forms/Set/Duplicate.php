@@ -28,8 +28,8 @@ class Duplicate extends DuplicateProcessor
     public $checkSavePermission = false;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $this->newObject->set('constraint_class', modResource::class);
@@ -39,8 +39,8 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterSave()
     {
         $this->duplicateRules();
@@ -48,9 +48,9 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * Duplicate all the old rules
-     * @return void
-     */
+    * Duplicate all the old rules
+    * @return void
+    */
     public function duplicateRules()
     {
         $rules = $this->object->getMany('Rules');

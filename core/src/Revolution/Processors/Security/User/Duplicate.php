@@ -33,8 +33,8 @@ class Duplicate extends DuplicateProcessor
     public $afterSaveEvent = 'OnUserDuplicate';
 
     /**
-     * @return mixed|string
-     */
+    * @return mixed|string
+    */
     public function getNewName()
     {
         $name = $this->getProperty('new_username', '');
@@ -42,8 +42,8 @@ class Duplicate extends DuplicateProcessor
     }
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         /* copy profile */

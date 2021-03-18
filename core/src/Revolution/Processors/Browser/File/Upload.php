@@ -27,8 +27,8 @@ class Upload extends Browser
     public $languageTopics = ['file'];
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $path = $this->getProperty('path');

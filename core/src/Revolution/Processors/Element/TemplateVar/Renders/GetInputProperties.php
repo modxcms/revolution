@@ -63,10 +63,10 @@ class GetInputProperties extends Processor {
     }
 
     /**
-     * Get the properties render output when given an array of directories to search
-     * @param array $renderDirectories
-     * @return mixed|string
-     */
+    * Get the properties render output when given an array of directories to search
+    * @param array $renderDirectories
+    * @return mixed|string
+    */
     public function getRenderOutput(array $renderDirectories) {
         $o = '';
         foreach ($renderDirectories as $renderDirectory) {
@@ -85,9 +85,9 @@ class GetInputProperties extends Processor {
     }
 
     /**
-     * Simulate controller with the faux controller class
-     * @return string
-     */
+    * Simulate controller with the faux controller class
+    * @return string
+    */
     public function renderController() {
         $c = new TvInputPropertiesManagerController($this->modx);
         $this->modx->controller = call_user_func_array([$c,'getInstance'],
@@ -96,9 +96,9 @@ class GetInputProperties extends Processor {
     }
 
     /**
-     * Get default display properties for specific tv
-     * @return array
-     */
+    * Get default display properties for specific tv
+    * @return array
+    */
     public function getInputProperties() {
         $settings = [];
         $tvId = $this->getProperty('tv');
@@ -117,9 +117,9 @@ class GetInputProperties extends Processor {
     }
 
     /**
-     * Fire event to allow for custom directories
-     * @return array
-     */
+    * Fire event to allow for custom directories
+    * @return array
+    */
     public function fireOnTVPropertiesListEvent() {
         $pluginResult = $this->modx->invokeEvent($this->onPropertiesListEvent, [
             'context' => $this->getProperty('context'),
@@ -130,9 +130,9 @@ class GetInputProperties extends Processor {
     }
 
     /**
-     * Load namespace cached directories
-     * @return array
-     */
+    * Load namespace cached directories
+    * @return array
+    */
     public function loadNamespaceCache() {
         $cache = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
         $cachedDirs = [];
@@ -148,8 +148,8 @@ class GetInputProperties extends Processor {
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getRenderDirectories() {
         /* handle dynamic paths */
         $renderDirectories = [

@@ -11,7 +11,7 @@ class modActionField extends \MODX\Revolution\modActionField
         'version' => '3.0',
         'table' => 'actions_fields',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'action' => '',
             'name' => '',
@@ -21,9 +21,9 @@ class modActionField extends \MODX\Revolution\modActionField
             'other' => '',
             'rank' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'action' => 
+            'action' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -32,7 +32,7 @@ class modActionField extends \MODX\Revolution\modActionField
                 'default' => '',
                 'index' => 'index',
             ),
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -40,7 +40,7 @@ class modActionField extends \MODX\Revolution\modActionField
                 'null' => false,
                 'default' => '',
             ),
-            'type' => 
+            'type' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -49,7 +49,7 @@ class modActionField extends \MODX\Revolution\modActionField
                 'default' => 'field',
                 'index' => 'index',
             ),
-            'tab' => 
+            'tab' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -58,7 +58,7 @@ class modActionField extends \MODX\Revolution\modActionField
                 'default' => '',
                 'index' => 'index',
             ),
-            'form' => 
+            'form' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -66,7 +66,7 @@ class modActionField extends \MODX\Revolution\modActionField
                 'null' => false,
                 'default' => '',
             ),
-            'other' => 
+            'other' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -74,7 +74,7 @@ class modActionField extends \MODX\Revolution\modActionField
                 'null' => false,
                 'default' => '',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -82,17 +82,17 @@ class modActionField extends \MODX\Revolution\modActionField
                 'default' => 0,
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'action' => 
+            'action' =>
             array (
                 'alias' => 'action',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'action' => 
+                    'action' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -100,15 +100,15 @@ class modActionField extends \MODX\Revolution\modActionField
                     ),
                 ),
             ),
-            'type' => 
+            'type' =>
             array (
                 'alias' => 'type',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'type' => 
+                    'type' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -116,15 +116,15 @@ class modActionField extends \MODX\Revolution\modActionField
                     ),
                 ),
             ),
-            'tab' => 
+            'tab' =>
             array (
                 'alias' => 'tab',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'tab' => 
+                    'tab' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -133,9 +133,9 @@ class modActionField extends \MODX\Revolution\modActionField
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Action' => 
+            'Action' =>
             array (
                 'class' => 'MODX\\Revolution\\modAction',
                 'local' => 'action',

@@ -30,8 +30,8 @@ class Update extends Browser
 
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $file = $this->sanitize($this->getProperty('file'));

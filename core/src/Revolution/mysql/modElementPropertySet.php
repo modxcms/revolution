@@ -11,19 +11,19 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
         'version' => '3.0',
         'table' => 'element_property_sets',
         'extends' => 'xPDO\\Om\\xPDOObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'element' => 0,
             'element_class' => '',
             'property_set' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'element' => 
+            'element' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -33,7 +33,7 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'element_class' => 
+            'element_class' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '100',
@@ -42,7 +42,7 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
                 'default' => '',
                 'index' => 'pk',
             ),
-            'property_set' => 
+            'property_set' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -53,26 +53,26 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
                 'index' => 'pk',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'PRIMARY' => 
+            'PRIMARY' =>
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
-                'columns' => 
+                'columns' =>
                 array (
-                    'element' => 
+                    'element' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'element_class' => 
+                    'element_class' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'property_set' => 
+                    'property_set' =>
                     array (
                         'collation' => 'A',
                         'null' => false,
@@ -80,9 +80,9 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Element' => 
+            'Element' =>
             array (
                 'class' => 'MODX\\Revolution\\modElement',
                 'local' => 'element',
@@ -90,7 +90,7 @@ class modElementPropertySet extends \MODX\Revolution\modElementPropertySet
                 'owner' => 'foreign',
                 'cardinality' => 'one',
             ),
-            'PropertySet' => 
+            'PropertySet' =>
             array (
                 'class' => 'MODX\\Revolution\\modPropertySet',
                 'local' => 'property_set',

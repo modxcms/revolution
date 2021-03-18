@@ -34,24 +34,24 @@ abstract class modTemplateVarRender
     }
 
     /**
-     * Get any lexicon topics for your render. You may override this method in your render to provide an array of
-     * lexicon topics to load.
-     *
-     * @return array
-     */
+    * Get any lexicon topics for your render. You may override this method in your render to provide an array of
+    * lexicon topics to load.
+    *
+    * @return array
+    */
     public function getLexiconTopics()
     {
         return ['tv_widget'];
     }
 
     /**
-     * Render the TV render.
-     *
-     * @param string $value
-     * @param array  $params
-     *
-     * @return mixed|void
-     */
+    * Render the TV render.
+    *
+    * @param string $value
+    * @param array  $params
+    *
+    * @return mixed|void
+    */
     public function render($value, array $params = [])
     {
         if (!empty($params)) {
@@ -73,8 +73,8 @@ abstract class modTemplateVarRender
     }
 
     /**
-     * Load any specified lexicon topics for the render
-     */
+    * Load any specified lexicon topics for the render
+    */
     protected function _loadLexiconTopics()
     {
         $topics = $this->getLexiconTopics();
@@ -86,11 +86,11 @@ abstract class modTemplateVarRender
     }
 
     /**
-     * @param string $value
-     * @param array  $params
-     *
-     * @return void|mixed
-     */
+    * @param string $value
+    * @param array  $params
+    *
+    * @return void|mixed
+    */
     public function process($value, array $params = [])
     {
         return $value;

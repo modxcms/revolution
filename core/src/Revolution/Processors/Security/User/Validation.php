@@ -66,10 +66,10 @@ class Validation {
 
     public function alreadyExists($name) {
         return $this->modx->getCount(modUser::class,
-                                     [
+                                    [
                 'username' => $name,
                 'id:!=' => $this->user->get('id'),
-                                     ]
+                                    ]
             ) > 0;
     }
 

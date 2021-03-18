@@ -23,9 +23,9 @@ use MODX\Revolution\modX;
 class modRestCurlClient extends modRestClient
 {
     /**
-     * @param modX  $modx   A reference to the modX object
-     * @param array $config An array of configuration options
-     */
+    * @param modX  $modx   A reference to the modX object
+    * @param array $config An array of configuration options
+    */
     function __construct(modX &$modx, array $config = [])
     {
         parent::__construct($modx, $config);
@@ -34,17 +34,17 @@ class modRestCurlClient extends modRestClient
     }
 
     /**
-     * Extends modRestClient::request to provide cURL specific request handling
-     *
-     * @param string $host    The host of the REST server.
-     * @param string $path    The path to request to on the REST server.
-     * @param string $method  The HTTP method to use for the request. May be GET,
-     *                        PUT or POST.
-     * @param array  $params  An array of parameters to send with the request.
-     * @param array  $options An array of options to pass to the request.
-     *
-     * @return modRestResponse The response object.
-     */
+    * Extends modRestClient::request to provide cURL specific request handling
+    *
+    * @param string $host    The host of the REST server.
+    * @param string $path    The path to request to on the REST server.
+    * @param string $method  The HTTP method to use for the request. May be GET,
+    *                        PUT or POST.
+    * @param array  $params  An array of parameters to send with the request.
+    * @param array  $options An array of options to pass to the request.
+    *
+    * @return modRestResponse The response object.
+    */
     public function request($host, $path, $method = 'GET', array $params = [], array $options = [])
     {
         /* start our cURL connection */
@@ -66,18 +66,18 @@ class modRestCurlClient extends modRestClient
     }
 
     /**
-     * Configure and set the URL to use, along with any request parameters.
-     *
-     * @param resource $ch      The cURL connection resource
-     * @param string   $host    The host to send the request to
-     * @param string   $path    The path of the request
-     * @param string   $method  The method of the request (GET/POST)
-     * @param array    $params  An array of request parameters to attach to the URL
-     * @param array    $options An array of options when setting the URL
-     *
-     * @return boolean Whether or not the URL was set
-     * @see modRestClient::request for parameter documentation.
-     */
+    * Configure and set the URL to use, along with any request parameters.
+    *
+    * @param resource $ch      The cURL connection resource
+    * @param string   $host    The host to send the request to
+    * @param string   $path    The path of the request
+    * @param string   $method  The method of the request (GET/POST)
+    * @param array    $params  An array of request parameters to attach to the URL
+    * @param array    $options An array of options when setting the URL
+    *
+    * @return boolean Whether or not the URL was set
+    * @see modRestClient::request for parameter documentation.
+    */
     public function setUrl($ch, $host, $path, $method = 'GET', array $params = [], array $options = [])
     {
         $q = http_build_query($params);
@@ -119,11 +119,11 @@ class modRestCurlClient extends modRestClient
     }
 
     /**
-     * Set up cURL-specific options
-     *
-     * @param resource $ch      The cURL connection resource
-     * @param array    $options An array of options
-     */
+    * Set up cURL-specific options
+    *
+    * @param resource $ch      The cURL connection resource
+    * @param array    $options An array of options
+    */
     public function setOptions($ch, array $options = [])
     {
         /* always return us the result */
@@ -180,13 +180,13 @@ class modRestCurlClient extends modRestClient
     }
 
     /**
-     * Set up authentication configuration , if specified, to be used with REST request.
-     *
-     * @param resource $ch      The cURL connection resource.
-     * @param array    $options An array of options
-     *
-     * @return boolean True if authentication was used.
-     */
+    * Set up authentication configuration , if specified, to be used with REST request.
+    *
+    * @param resource $ch      The cURL connection resource.
+    * @param array    $options An array of options
+    *
+    * @return boolean True if authentication was used.
+    */
     public function setAuth($ch, array $options = [])
     {
         $auth = false;
@@ -222,13 +222,13 @@ class modRestCurlClient extends modRestClient
     }
 
     /**
-     * Set up proxy configuration , if specified, to be used with REST request.
-     *
-     * @param resource $ch      The cURL connection resource.
-     * @param array    $options An array of options
-     *
-     * @return boolean True if the proxy was setup.
-     */
+    * Set up proxy configuration , if specified, to be used with REST request.
+    *
+    * @param resource $ch      The cURL connection resource.
+    * @param array    $options An array of options
+    *
+    * @return boolean True if the proxy was setup.
+    */
     public function setProxy($ch, array $options = [])
     {
         $proxyEnabled = false;

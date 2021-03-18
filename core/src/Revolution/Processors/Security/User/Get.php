@@ -29,8 +29,8 @@ class Get extends GetProcessor
     public $objectType = 'user';
 
     /**
-     * @throws \xPDO\xPDOException
-     */
+    * @throws \xPDO\xPDOException
+    */
     public function beforeOutput()
     {
         if ($this->getProperty('getGroups', false)) {
@@ -40,10 +40,10 @@ class Get extends GetProcessor
     }
 
     /**
-     * Get all the groups for the user
-     * @return array
-     * @throws \xPDO\xPDOException
-     */
+    * Get all the groups for the user
+    * @return array
+    * @throws \xPDO\xPDOException
+    */
     public function getGroups()
     {
         $c = $this->modx->newQuery(modUserGroupMember::class);

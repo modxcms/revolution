@@ -59,12 +59,12 @@ class GetNodes extends ModelProcessor
     }
 
     /**
-     * Default icons for element types
-     *
-     * @param $elementIdentifier string Element Type
-     *
-     * @return string
-     */
+    * Default icons for element types
+    *
+    * @param $elementIdentifier string Element Type
+    *
+    * @return string
+    */
     function getNodeIcon($elementIdentifier = '')
     {
         $elementIdentifier = strtolower($elementIdentifier);
@@ -267,4 +267,3 @@ class GetNodes extends ModelProcessor
         return $this->toJSON($list);
     }
 }
-

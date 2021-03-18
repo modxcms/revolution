@@ -10,14 +10,14 @@ class modStaticResource extends \MODX\Revolution\modStaticResource
         'package' => 'MODX\\Revolution\\',
         'version' => '3.0',
         'extends' => 'MODX\\Revolution\\modResource',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
         ),
     );

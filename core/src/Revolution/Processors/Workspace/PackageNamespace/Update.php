@@ -28,8 +28,8 @@ class Update extends UpdateProcessor
     public $primaryKeyField = 'name';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSave()
     {
         $name = $this->getProperty('name');

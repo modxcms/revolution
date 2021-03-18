@@ -22,15 +22,15 @@ use SimpleXMLElement;
 class modRestArrayToXML
 {
     /**
-     * The main function for converting to an XML document.
-     * Pass in a multi dimensional array and this recrusively loops through and builds up an XML document.
-     *
-     * @param array            $data
-     * @param string           $rootNodeName - what you want the root node to be - defaultsto data.
-     * @param SimpleXMLElement $xml          - should only be used recursively
-     *
-     * @return string XML
-     */
+    * The main function for converting to an XML document.
+    * Pass in a multi dimensional array and this recrusively loops through and builds up an XML document.
+    *
+    * @param array            $data
+    * @param string           $rootNodeName - what you want the root node to be - defaultsto data.
+    * @param SimpleXMLElement $xml          - should only be used recursively
+    *
+    * @return string XML
+    */
     public static function toXML($data, $rootNodeName = 'ResultSet', &$xml = null)
     {
 
@@ -85,13 +85,13 @@ class modRestArrayToXML
 
 
     /**
-     * Convert an XML document to a multi dimensional array
-     * Pass in an XML document (or SimpleXMLElement object) and this recursively loops through and builds a representative array
-     *
-     * @param string $xml - XML document - can optionally be a SimpleXMLElement object
-     *
-     * @return array ARRAY
-     */
+    * Convert an XML document to a multi dimensional array
+    * Pass in an XML document (or SimpleXMLElement object) and this recursively loops through and builds a representative array
+    *
+    * @param string $xml - XML document - can optionally be a SimpleXMLElement object
+    *
+    * @return array ARRAY
+    */
     public static function toArray($xml)
     {
         if (is_string($xml)) {
@@ -125,14 +125,14 @@ class modRestArrayToXML
     }
 
     /**
-     * Determine if a variable is an associative array
-     *
-     * @static
-     *
-     * @param mixed $array The variable to check
-     *
-     * @return boolean True if is an array
-     */
+    * Determine if a variable is an associative array
+    *
+    * @static
+    *
+    * @param mixed $array The variable to check
+    *
+    * @return boolean True if is an array
+    */
     public static function isAssoc($array)
     {
         return (is_array($array) && 0 !== count(array_diff_key($array, array_keys(array_keys($array)))));

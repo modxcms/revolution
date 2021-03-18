@@ -27,8 +27,8 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
     public $permission = ['save_user' => true, 'settings' => true];
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $user = (int)$this->getProperty('fk', 0);
@@ -55,4 +55,3 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
     }
 
 }
-

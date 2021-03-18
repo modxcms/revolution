@@ -28,8 +28,8 @@ class Create extends CreateProcessor
     public $afterSaveEvent = 'OnMediaSourceFormSave';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $classKey = $this->getProperty('class_key');
@@ -40,9 +40,9 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Validate the properties sent
-     * @return boolean
-     */
+    * Validate the properties sent
+    * @return boolean
+    */
     public function beforeSave()
     {
         /* validate name field */
@@ -59,10 +59,10 @@ class Create extends CreateProcessor
     }
 
     /**
-     * Check to see if a Media Source with the specified name already exists
-     * @param string $name
-     * @return boolean
-     */
+    * Check to see if a Media Source with the specified name already exists
+    * @param string $name
+    * @return boolean
+    */
     public function alreadyExists($name)
     {
         return $this->modx->getCount(modMediaSource::class, [

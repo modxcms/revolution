@@ -49,10 +49,10 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * @param array $options
-     *
-     * @return mixed|string
-     */
+    * @param array $options
+    *
+    * @return mixed|string
+    */
     public function outputContent(array $options = [])
     {
         $this->namespace = (string)$this->modx->request->namespace;
@@ -182,8 +182,8 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Send the response to the client
-     */
+    * Send the response to the client
+    */
     public function send()
     {
         if (is_array($this->body)) {
@@ -201,13 +201,13 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * If this action has a menu item, ensure user has access to menu
-     *
-     * @param string $action
-     *
-     * @return bool
-     * @throws AccessDeniedException
-     */
+    * If this action has a menu item, ensure user has access to menu
+    *
+    * @param string $action
+    *
+    * @return bool
+    * @throws AccessDeniedException
+    */
     public function checkForMenuPermissions(string $action): bool
     {
         /** @var modMenu $menu */
@@ -231,12 +231,12 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Gets the controller class name from the active action
-     *
-     * @param string $action
-     * @return string
-     * @throws NotFoundException
-     */
+    * Gets the controller class name from the active action
+    *
+    * @param string $action
+    * @return string
+    * @throws NotFoundException
+    */
     public function getControllerClassName(string $action): string
     {
         // Check for an autoloadable controller (3.0+)
@@ -292,12 +292,12 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Get the appropriate path to the controllers directory for the active Namespace.
-     *
-     * @param string $theme
-     *
-     * @return array An array of paths to the Namespace's controllers directory.
-     */
+    * Get the appropriate path to the controllers directory for the active Namespace.
+    *
+    * @param string $theme
+    *
+    * @return array An array of paths to the Namespace's controllers directory.
+    */
     public function getNamespacePath($theme = 'default')
     {
         $namespace = array_key_exists($this->namespace, $this->namespaces) ? $this->namespaces[$this->namespace] : $this->namespaces['core'];
@@ -329,13 +329,13 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Adds a lexicon topic to this page's language topics to load. Will load
-     * the topic as well.
-     *
-     * @param string $topic The topic to load, in standard namespace:topic format
-     *
-     * @return boolean True if successful
-     */
+    * Adds a lexicon topic to this page's language topics to load. Will load
+    * the topic as well.
+    *
+    * @param string $topic The topic to load, in standard namespace:topic format
+    *
+    * @return boolean True if successful
+    */
     public function addLangTopic($topic)
     {
         $this->modx->lexicon->load($topic);
@@ -346,10 +346,10 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Adds a lexicon topic to this page's language topics to load
-     *
-     * @return array An array of topics
-     */
+    * Adds a lexicon topic to this page's language topics to load
+    *
+    * @return array An array of topics
+    */
     public function getLangTopics()
     {
         $topics = $this->modx->smarty->get_template_vars('_lang_topics');
@@ -358,12 +358,12 @@ class modManagerResponse extends modResponse
     }
 
     /**
-     * Sets the language topics for this page
-     *
-     * @param array $topics The array of topics to set
-     *
-     * @return boolean True if successful
-     */
+    * Sets the language topics for this page
+    *
+    * @param array $topics The array of topics to set
+    *
+    * @return boolean True if successful
+    */
     public function setLangTopics(array $topics = [])
     {
         if (!is_array($topics) || empty($topics)) {

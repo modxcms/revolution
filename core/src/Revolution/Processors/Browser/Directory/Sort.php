@@ -26,8 +26,8 @@ class Sort extends Browser
 
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $from = $this->sanitize($this->getProperty('from'));

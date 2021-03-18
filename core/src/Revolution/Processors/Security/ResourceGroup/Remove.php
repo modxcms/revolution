@@ -24,24 +24,24 @@ class Remove extends Processor
     public $resourceGroup;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('resourcegroup_delete');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['user', 'access'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $id = $this->getProperty('id', false);
@@ -57,8 +57,8 @@ class Remove extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         if ($this->resourceGroup->remove() === false) {
@@ -73,4 +73,3 @@ class Remove extends Processor
         $this->modx->logManagerAction('delete_resource_group', modResourceGroup::class, $this->resourceGroup->get('id'));
     }
 }
-

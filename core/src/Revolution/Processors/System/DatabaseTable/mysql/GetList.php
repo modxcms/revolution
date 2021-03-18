@@ -20,8 +20,8 @@ use xPDO\Om\xPDOCriteria;
 class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAbstract
 {
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getTables()
     {
         $c = new xPDOCriteria($this->modx,

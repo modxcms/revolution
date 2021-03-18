@@ -34,8 +34,8 @@ class Import extends ImportProcessor
     public $setName = false;
 
     /**
-     * @return array|bool|string|null
-     */
+    * @return array|bool|string|null
+    */
     public function initialize()
     {
         $profileId = (int)$this->getProperty('profile', 0);
@@ -52,8 +52,8 @@ class Import extends ImportProcessor
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeSave()
     {
         $this->setMainFields();
@@ -83,8 +83,8 @@ class Import extends ImportProcessor
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function setTemplate()
     {
         $templatePk = (string)$this->xml->template;
@@ -103,13 +103,13 @@ class Import extends ImportProcessor
     }
 
     /**
-     * @param $name
-     * @param $ruleName
-     * @param $value
-     * @param $rank
-     * @param string $container
-     * @return modActionDom
-     */
+    * @param $name
+    * @param $ruleName
+    * @param $value
+    * @param $rank
+    * @param string $container
+    * @return modActionDom
+    */
     public function setRule($name, $ruleName, $value, $rank, $container = 'modx-panel-resource')
     {
         /** @var modActionDom $rule */

@@ -28,10 +28,10 @@ class GetList extends GetListProcessor
     public $languageTopics = ['content_type'];
 
     /**
-     * Filter the query by the valueField of MODx.combo.ContentType to get the initially value displayed right
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * Filter the query by the valueField of MODx.combo.ContentType to get the initially value displayed right
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $id = $this->getProperty('id', '');

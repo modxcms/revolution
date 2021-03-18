@@ -31,9 +31,9 @@ class Create extends CreateProcessor
     public $objectType = 'content_type';
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function beforeSave()
     {
         $this->setCheckbox('binary');

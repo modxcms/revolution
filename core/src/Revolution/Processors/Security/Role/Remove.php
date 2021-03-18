@@ -28,8 +28,8 @@ class Remove extends RemoveProcessor
     public $objectType = 'role';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeRemove()
     {
         if ($this->isCoreRole()) {
@@ -45,19 +45,19 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * Don't delete the Member or Super User roles.
-     * @TODO: when this is converted in build script, convert to i18n
-     * @return boolean
-     */
+    * Don't delete the Member or Super User roles.
+    * @TODO: when this is converted in build script, convert to i18n
+    * @return boolean
+    */
     public function isCoreRole()
     {
         return $this->object->get('name') === 'Member' || $this->object->get('name') === 'Super User';
     }
 
     /**
-     * See if the Role is assigned to any users
-     * @return boolean
-     */
+    * See if the Role is assigned to any users
+    * @return boolean
+    */
     public function isAssigned()
     {
         $c = $this->modx->newQuery(modUserGroupMember::class);

@@ -32,8 +32,8 @@ class Index extends ModelProcessor
     public $parent;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         $this->importTime = microtime(true);
@@ -56,9 +56,9 @@ class Index extends ModelProcessor
     }
 
     /**
-     * @return array|mixed|string
-     * @throws \xPDO\xPDOException
-     */
+    * @return array|mixed|string
+    * @throws \xPDO\xPDOException
+    */
     public function process()
     {
         $context = $this->getContext();
@@ -69,8 +69,8 @@ class Index extends ModelProcessor
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function getContext()
     {
         // is import_context being used anywhere? It isn't in the manager form...
@@ -85,9 +85,9 @@ class Index extends ModelProcessor
     }
 
     /**
-     * @param $context
-     * @return array
-     */
+    * @param $context
+    * @return array
+    */
     public function getPaths($context)
     {
         $file_path = $this->getProperty('import_base_path');
@@ -116,10 +116,10 @@ class Index extends ModelProcessor
     }
 
     /**
-     * @param $paths
-     * @param $context
-     * @throws \xPDO\xPDOException
-     */
+    * @param $paths
+    * @param $context
+    * @throws \xPDO\xPDOException
+    */
     public function importFiles($paths, $context)
     {
         $elements = $this->getElements();
@@ -133,10 +133,10 @@ class Index extends ModelProcessor
     }
 
     /**
-     * Prepare associations between resource fields and html selectors
-     * @return array
-     * @throws \xPDO\xPDOException
-     */
+    * Prepare associations between resource fields and html selectors
+    * @return array
+    * @throws \xPDO\xPDOException
+    */
     public function getElements()
     {
         $elements = $this->getProperty('import_element', false);

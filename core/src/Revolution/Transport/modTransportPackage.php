@@ -35,63 +35,63 @@ class modTransportPackage extends xPDOObject
     /** @var xPDO|modX */
     public $xpdo = null;
     /**
-     * @var string The unique identifier of a package.
-     */
+    * @var string The unique identifier of a package.
+    */
     public $identifier = null;
     /**
-     * @var string The version number of a package.
-     */
+    * @var string The version number of a package.
+    */
     public $version = null;
     /**
-     * @var int The major version number of a package.
-     */
+    * @var int The major version number of a package.
+    */
     public $version_major = 0;
     /**
-     * @var int The minor version number of a package.
-     */
+    * @var int The minor version number of a package.
+    */
     public $version_minor = 0;
     /**
-     * @var int The patch version number of a package.
-     */
+    * @var int The patch version number of a package.
+    */
     public $version_patch = 0;
     /**
-     * @var string The release number of a package; eg, pl, beta, alpha, dev
-     */
+    * @var string The release number of a package; eg, pl, beta, alpha, dev
+    */
     public $release = '';
     /**
-     * @var int The release index of a package
-     */
+    * @var int The release index of a package
+    */
     public $release_index = 0;
     /**
-     * @var xPDOTransport The package to transport.
-     */
+    * @var xPDOTransport The package to transport.
+    */
     public $package = null;
 
     /**
-     * List the packages from this transport package
-     *
-     * @static
-     *
-     * @param modX   $modx      A reference to the modX instance
-     * @param int    $workspace The current active workspace ID
-     * @param int    $limit     The limit of packages to return
-     * @param int    $offset    The offset on which to list by
-     * @param string $search    An optional search value
-     *
-     * @return array
-     */
+    * List the packages from this transport package
+    *
+    * @static
+    *
+    * @param modX   $modx      A reference to the modX instance
+    * @param int    $workspace The current active workspace ID
+    * @param int    $limit     The limit of packages to return
+    * @param int    $offset    The offset on which to list by
+    * @param string $search    An optional search value
+    *
+    * @return array
+    */
     public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0, $search = '')
     {
         return ['collection' => [], 'total' => 0];
     }
 
     /**
-     * Overrides xPDOObject::save to set a default created time if new.
-     *
-     * @param boolean $cacheFlag
-     *
-     * @return boolean True if the save was successful
-     */
+    * Overrides xPDOObject::save to set a default created time if new.
+    *
+    * @param boolean $cacheFlag
+    *
+    * @return boolean True if the save was successful
+    */
     public function save($cacheFlag = null)
     {
         if ($this->_new && !$this->get('created')) {
@@ -103,15 +103,15 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Overrides xPDOObject::set. Checks if signature is set, and if so,
-     * parses it and sets the source if is a new package.
-     *
-     * @param string $k     The key to set
-     * @param mixed  $v     The value to set
-     * @param string $vType The validation type to set against
-     *
-     * @return boolean True if successfully set
-     */
+    * Overrides xPDOObject::set. Checks if signature is set, and if so,
+    * parses it and sets the source if is a new package.
+    *
+    * @param string $k     The key to set
+    * @param mixed  $v     The value to set
+    * @param string $vType The validation type to set against
+    *
+    * @return boolean True if successfully set
+    */
     public function set($k, $v = null, $vType = '')
     {
         $set = parent:: set($k, $v, $vType);
@@ -126,10 +126,10 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Parses the signature.
-     *
-     * @return boolean True if successful.
-     */
+    * Parses the signature.
+    *
+    * @return boolean True if successful.
+    */
     public function parseSignature()
     {
         $parsed = false;
@@ -170,10 +170,10 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Set package version data based on the signature
-     *
-     * @return boolean
-     */
+    * Set package version data based on the signature
+    *
+    * @return boolean
+    */
     public function setPackageVersionData()
     {
         $sig = explode('-', $this->signature);
@@ -205,14 +205,14 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Gets the package's transport mechanism.
-     *
-     * @access public
-     *
-     * @param integer $state The state of the package.
-     *
-     * @return mixed The package.
-     */
+    * Gets the package's transport mechanism.
+    *
+    * @access public
+    *
+    * @param integer $state The state of the package.
+    *
+    * @return mixed The package.
+    */
     public function getTransport($state = -1)
     {
         if (!is_object($this->package) || !($this->package instanceof xPDOTransport)) {
@@ -261,13 +261,13 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Removes and uninstalls the package.
-     *
-     * @param boolean $force     Indicates if removal should be forced even if currently installed.
-     * @param boolean $uninstall Indicates if the package should be uninstalled before removal.
-     *
-     * @return boolean True if the package was successfully removed.
-     */
+    * Removes and uninstalls the package.
+    *
+    * @param boolean $force     Indicates if removal should be forced even if currently installed.
+    * @param boolean $uninstall Indicates if the package should be uninstalled before removal.
+    *
+    * @return boolean True if the package was successfully removed.
+    */
     public function removePackage($force = false, $uninstall = true)
     {
         $removed = false;
@@ -288,14 +288,14 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Installs or upgrades the package.
-     *
-     * @access public
-     *
-     * @param array $options An array of installation options
-     *
-     * @return boolean True if successful.
-     */
+    * Installs or upgrades the package.
+    *
+    * @access public
+    *
+    * @param array $options An array of installation options
+    *
+    * @return boolean True if successful.
+    */
     public function install(array $options = [])
     {
         $installed = false;
@@ -345,14 +345,14 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Uninstalls the package.
-     *
-     * @access public
-     *
-     * @param array $options An array of uninstallation options
-     *
-     * @return boolean True if successful.
-     */
+    * Uninstalls the package.
+    *
+    * @access public
+    *
+    * @param array $options An array of uninstallation options
+    *
+    * @return boolean True if successful.
+    */
     public function uninstall(array $options = [])
     {
         $uninstalled = false;
@@ -385,15 +385,15 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Transfers the package from one directory to another.
-     *
-     * @access public
-     *
-     * @param string $sourceFile The file to transfer.
-     * @param string $targetDir  The directory to transfer into.
-     *
-     * @return boolean True if successful.
-     */
+    * Transfers the package from one directory to another.
+    *
+    * @access public
+    *
+    * @param string $sourceFile The file to transfer.
+    * @param string $targetDir  The directory to transfer into.
+    *
+    * @return boolean True if successful.
+    */
     public function transferPackage($sourceFile, $targetDir)
     {
         $transferred = false;
@@ -488,12 +488,12 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Check dependency constraints for the package.
-     *
-     * @param array $dependencies An array of dependencies to check.
-     *
-     * @return array An array of unsatisfied dependencies.
-     */
+    * Check dependency constraints for the package.
+    *
+    * @param array $dependencies An array of dependencies to check.
+    *
+    * @return array An array of unsatisfied dependencies.
+    */
     public function checkDependencies(array $dependencies)
     {
         $unsatisfied = [];
@@ -573,12 +573,12 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Resolve unsatisfied dependencies defined for a package.
-     *
-     * @param array $requirements An array of unsatisfied package names and their constraints
-     *
-     * @return array Any unresolvable dependent package names and their failed constraints.
-     */
+    * Resolve unsatisfied dependencies defined for a package.
+    *
+    * @param array $requirements An array of unsatisfied package names and their constraints
+    *
+    * @return array Any unresolvable dependent package names and their failed constraints.
+    */
     public function resolveDependencies(array $requirements)
     {
         $unresolved = [];
@@ -592,13 +592,13 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Resolve an unsatisfied dependency defined for a package.
-     *
-     * @param string $package    The dependent package name.
-     * @param string $constraint A valid version constraint for the dependent package.
-     *
-     * @return bool TRUE if the dependency was resolved.
-     */
+    * Resolve an unsatisfied dependency defined for a package.
+    *
+    * @param string $package    The dependent package name.
+    * @param string $constraint A valid version constraint for the dependent package.
+    *
+    * @return bool TRUE if the dependency was resolved.
+    */
     public function resolveDependency($package, $constraint)
     {
         $resolved = false;
@@ -625,15 +625,15 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Search for package to satisfy a dependency.
-     *
-     * @param string                    $package    The name of the dependent package.
-     * @param string                    $constraint The version constraint the package must satisfy.
-     * @param modTransportProvider|null $provider   A reference which is set to the
-     *                                              modTransportProvider which satisfies the dependency.
-     *
-     * @return array|bool The metadata for the package version which satisfies the dependency, or FALSE.
-     */
+    * Search for package to satisfy a dependency.
+    *
+    * @param string                    $package    The name of the dependent package.
+    * @param string                    $constraint The version constraint the package must satisfy.
+    * @param modTransportProvider|null $provider   A reference which is set to the
+    *                                              modTransportProvider which satisfies the dependency.
+    *
+    * @return array|bool The metadata for the package version which satisfies the dependency, or FALSE.
+    */
     public function findResolution($package, $constraint, &$provider = null)
     {
         $resolution = false;
@@ -683,21 +683,21 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Converts to bytes from PHP ini_get() format.
-     *
-     * PHP ini modifiers for byte values:
-     * <ul>
-     *  <li>G = gigabytes</li>
-     *  <li>M = megabytes</li>
-     *  <li>K = kilobytes</li>
-     * </ul>
-     *
-     * @access protected
-     *
-     * @param string $value Number of bytes represented in PHP ini value format.
-     *
-     * @return integer The value converted to bytes.
-     */
+    * Converts to bytes from PHP ini_get() format.
+    *
+    * PHP ini modifiers for byte values:
+    * <ul>
+    *  <li>G = gigabytes</li>
+    *  <li>M = megabytes</li>
+    *  <li>K = kilobytes</li>
+    * </ul>
+    *
+    * @access protected
+    *
+    * @param string $value Number of bytes represented in PHP ini value format.
+    *
+    * @return integer The value converted to bytes.
+    */
     protected function _bytes($value)
     {
         $value = trim($value);
@@ -715,15 +715,15 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * If for some reason the server does not have allow_url_fopen or cURL
-     * enabled, use this function to get the file via fsockopen.
-     *
-     * @access protected
-     *
-     * @param string $url The source URL to retrieve
-     *
-     * @return string The response from the server
-     */
+    * If for some reason the server does not have allow_url_fopen or cURL
+    * enabled, use this function to get the file via fsockopen.
+    *
+    * @access protected
+    *
+    * @param string $url The source URL to retrieve
+    *
+    * @return string The response from the server
+    */
     protected function _getByFsockopen($url)
     {
         $purl = parse_url($url);
@@ -764,10 +764,10 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Gets a version string able to be used by version_compare for checking
-     *
-     * @return string The properly formatted string.
-     */
+    * Gets a version string able to be used by version_compare for checking
+    *
+    * @return string The properly formatted string.
+    */
     public function getComparableVersion()
     {
         $v = explode('-', $this->get('signature'));
@@ -779,14 +779,14 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Compares this version of the package to another
-     *
-     * @param string $version   The version to compare to. Must be a PHP-
-     *                          standardized version.
-     * @param string $direction The direction to compare. Defaults to <=
-     *
-     * @return boolean Result of comparison.
-     */
+    * Compares this version of the package to another
+    *
+    * @param string $version   The version to compare to. Must be a PHP-
+    *                          standardized version.
+    * @param string $direction The direction to compare. Defaults to <=
+    *
+    * @return boolean Result of comparison.
+    */
     public function compareVersion($version, $direction = '<=')
     {
         $v = $this->getComparableVersion();
@@ -795,10 +795,10 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Indicates if a previous version of the package is installed.
-     *
-     * @return boolean True if a previous version of the package is installed.
-     */
+    * Indicates if a previous version of the package is installed.
+    *
+    * @return boolean True if a previous version of the package is installed.
+    */
     public function previousVersionInstalled()
     {
         $this->parseSignature();

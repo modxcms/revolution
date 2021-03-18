@@ -77,8 +77,8 @@ class Export extends ExportProcessor
     }
 
     /**
-     * @param modAccessPolicyTemplate $template
-     */
+    * @param modAccessPolicyTemplate $template
+    */
     public function addTemplatePermissions(modAccessPolicyTemplate $template)
     {
         $this->xml->startElement('permissions');

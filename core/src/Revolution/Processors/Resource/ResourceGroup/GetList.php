@@ -98,10 +98,10 @@ class GetList extends Processor
     }
 
     /**
-     * Get the Resource associated
-     *
-     * @return modResource|string
-     */
+    * Get the Resource associated
+    *
+    * @return modResource|string
+    */
     public function getResource()
     {
         $resourceId = $this->getProperty('resource', 0);

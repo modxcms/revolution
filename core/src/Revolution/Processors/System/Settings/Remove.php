@@ -28,8 +28,8 @@ class Remove extends RemoveProcessor
     public $primaryKeyField = 'key';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function afterRemove()
     {
         $this->removeRelatedLexiconEntries();
@@ -39,10 +39,10 @@ class Remove extends RemoveProcessor
     }
 
     /**
-     * Remove all Lexicon Entries related to the setting
-     *
-     * @return void
-     */
+    * Remove all Lexicon Entries related to the setting
+    *
+    * @return void
+    */
     public function removeRelatedLexiconEntries()
     {
         /** @var modLexiconEntry $entry */

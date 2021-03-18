@@ -27,8 +27,8 @@ class Create extends CreateProcessor
     public $objectType = 'policy_template';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $name = $this->getProperty('name');

@@ -20,20 +20,20 @@ use MODX\Revolution\Processors\Processor;
 class Truncate extends Processor
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('logs');
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $this->modx->exec("TRUNCATE {$this->modx->getTableName(modManagerLog::class)}");
-        
+
         return $this->success();
     }
 }

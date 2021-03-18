@@ -36,9 +36,9 @@ class Update extends UpdateProcessor
     public $refreshURIs = false;
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function beforeSave()
     {
         $this->setCheckbox('binary');
@@ -58,9 +58,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function afterSave()
     {
         if ($this->refreshURIs) {

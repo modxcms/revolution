@@ -23,41 +23,41 @@ use xPDO\xPDO;
 abstract class modDashboardWidgetInterface
 {
     /**
-     * A reference to the modX|xPDO instance
-     * @var xPDO|modX $modx
-     */
+    * A reference to the modX|xPDO instance
+    * @var xPDO|modX $modx
+    */
     public $modx;
     /**
-     * A reference to the currently loaded manager controller
-     * @var modManagerController $controller
-     */
+    * A reference to the currently loaded manager controller
+    * @var modManagerController $controller
+    */
     public $controller;
     /**
-     * A reference to this class's widget
-     * @var modDashboardWidget $widget
-     */
+    * A reference to this class's widget
+    * @var modDashboardWidget $widget
+    */
     public $widget;
     /**
-     * A reference to the Namespace that this widget is executing in
-     * @var modNamespace $namespace
-     */
+    * A reference to the Namespace that this widget is executing in
+    * @var modNamespace $namespace
+    */
     public $namespace;
     /**
-     * Allows widgets to specify a CSS class to attach to the block
-     *
-     * @var string
-     */
+    * Allows widgets to specify a CSS class to attach to the block
+    *
+    * @var string
+    */
     public $cssBlockClass = '';
     /**
-     * @var string
-     */
+    * @var string
+    */
     public $content = '';
 
     /**
-     * @param xPDO|modX $modx A reference to the modX instance
-     * @param modDashboardWidget $widget A reference to this class's widget
-     * @param modManagerController $controller A reference to the currently loaded manager controller
-     */
+    * @param xPDO|modX $modx A reference to the modX instance
+    * @param modDashboardWidget $widget A reference to this class's widget
+    * @param modManagerController $controller A reference to the currently loaded manager controller
+    */
     function __construct(xPDO &$modx,modDashboardWidget &$widget,modManagerController &$controller) {
         $this->modx =& $modx;
         $this->widget =& $widget;
@@ -65,18 +65,18 @@ abstract class modDashboardWidgetInterface
     }
 
     /**
-     * Set the widget content
-     * @param string $content
-     * @return void
-     */
+    * Set the widget content
+    * @param string $content
+    * @return void
+    */
     public function setContent($content) {
         $this->content = $content;
     }
 
     /**
-     * Renders the content of the block in the appropriate size
-     * @return string
-     */
+    * Renders the content of the block in the appropriate size
+    * @return string
+    */
     public function process() {
         $output = $this->render();
         if (!empty($output)) {
@@ -91,34 +91,34 @@ abstract class modDashboardWidgetInterface
     }
 
     /**
-     * Sets the Namespace that this widget will execute in
-     * @param modNamespace $namespace
-     * @return void
-     */
+    * Sets the Namespace that this widget will execute in
+    * @param modNamespace $namespace
+    * @return void
+    */
     public function setNamespace(modNamespace $namespace) {
         $this->namespace =& $namespace;
     }
 
     /**
-     * Returns an array of placeholders for the block from the widget class. Override to add or change placeholders.
-     * @return array
-     */
+    * Returns an array of placeholders for the block from the widget class. Override to add or change placeholders.
+    * @return array
+    */
     public function toArray() {
         return $this->widget->toArray();
     }
 
     /**
-     * Must be declared in your derivative class. Must return the processed output of the widget.
-     * @abstract
-     * @return string
-     */
+    * Must be declared in your derivative class. Must return the processed output of the widget.
+    * @abstract
+    * @return string
+    */
     abstract public function render();
 
     /**
-     * @param string $tpl
-     * @param array $placeholders
-     * @return string
-     */
+    * @param string $tpl
+    * @param array $placeholders
+    * @return string
+    */
     public function getFileChunk($tpl,array $placeholders = []) {
         $output = '';
         $file = $tpl;
@@ -140,11 +140,11 @@ abstract class modDashboardWidgetInterface
     }
 
     /**
-     * Render the widget content as if it were a Snippet
-     *
-     * @param string $content
-     * @return string
-     */
+    * Render the widget content as if it were a Snippet
+    *
+    * @param string $content
+    * @return string
+    */
     public function renderAsSnippet($content = '')
     {
         if (empty($content)) {

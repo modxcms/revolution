@@ -17,8 +17,8 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function initialize()
     {
         parent::initialize();
@@ -51,8 +51,8 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @return null|string
-     */
+    * @return null|string
+    */
     public function getTypeName()
     {
         $this->xpdo->lexicon->load('source');
@@ -62,8 +62,8 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @return null|string
-     */
+    * @return null|string
+    */
     public function getTypeDescription()
     {
         $this->xpdo->lexicon->load('source');
@@ -73,8 +73,8 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getDefaultProperties()
     {
         return [
@@ -170,10 +170,10 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @param string $src
-     *
-     * @return string
-     */
+    * @param string $src
+    *
+    * @return string
+    */
     public function prepareSrcForThumb($src)
     {
         $properties = $this->getPropertyList();
@@ -186,10 +186,10 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @param string $object
-     *
-     * @return string
-     */
+    * @param string $object
+    *
+    * @return string
+    */
     public function getBasePath($object = '')
     {
         return '';
@@ -197,10 +197,10 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @param string $object
-     *
-     * @return mixed
-     */
+    * @param string $object
+    *
+    * @return mixed
+    */
     public function getBaseUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -210,10 +210,10 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @param string $object
-     *
-     * @return bool|string
-     */
+    * @param string $object
+    *
+    * @return bool|string
+    */
     public function getObjectUrl($object = '')
     {
         $properties = $this->getPropertyList();
@@ -225,15 +225,15 @@ class modFTPMediaSource extends modMediaSource
 
 
     /**
-     * @param string $path
-     * @param string $ext
-     * @param int $width
-     * @param int $height
-     * @param array $bases
-     * @param array $properties
-     *
-     * @return array
-     */
+    * @param string $path
+    * @param string $ext
+    * @param int $width
+    * @param int $height
+    * @param array $bases
+    * @param array $properties
+    *
+    * @return array
+    */
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         if ($image = $this->getObjectUrl($path)) {

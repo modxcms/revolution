@@ -33,30 +33,30 @@ class Download extends Processor
     public $package;
 
     /**
-     * Ensure user has access to do this
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * Ensure user has access to do this
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('packages');
     }
 
     /**
-     * The language topics to load
-     * {@inheritDoc}
-     * @return array
-     */
+    * The language topics to load
+    * {@inheritDoc}
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace'];
     }
 
     /**
-     * Ensure the info was properly passed and initialize the processor
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * Ensure the info was properly passed and initialize the processor
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         @set_time_limit(0);
@@ -86,10 +86,10 @@ class Download extends Processor
     }
 
     /**
-     * Run the processor, downloading and transferring the package, and creating the metadata in the database
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * Run the processor, downloading and transferring the package, and creating the metadata in the database
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         if (!$this->loadProvider()) {
@@ -105,9 +105,9 @@ class Download extends Processor
     }
 
     /**
-     * Load the provider for the package
-     * @return boolean
-     */
+    * Load the provider for the package
+    * @return boolean
+    */
     public function loadProvider()
     {
         $provider = $this->getProperty('provider');

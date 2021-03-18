@@ -21,32 +21,32 @@ use MODX\Revolution\modX;
  */
 class modImport {
     /**
-     * @var modX A reference to the modX instance
-     */
+    * @var modX A reference to the modX instance
+    */
     public $modx = null;
     /**
-     * @var array A collection of results in an array
-     */
+    * @var array A collection of results in an array
+    */
     public $results = [];
     /**
-     * @var array A collection of properties that are being used in this import
-     */
+    * @var array A collection of properties that are being used in this import
+    */
     public $properties = [];
 
     /**
-     * @param modX $modx A reference to the modX instance
-     */
+    * @param modX $modx A reference to the modX instance
+    */
     function __construct(& $modx) {
         $this->modx = & $modx;
     }
 
     /**
-     * @param int $filesfound A reference to an array of file locations
-     * @param string $directory The directory to import from
-     * @param array $listing A listing of imported files
-     * @param int $count The current count iteration
-     * @return array
-     */
+    * @param int $filesfound A reference to an array of file locations
+    * @param string $directory The directory to import from
+    * @param array $listing A listing of imported files
+    * @param int $count The current count iteration
+    * @return array
+    */
     public function getFiles(& $filesfound, $directory, $listing= [], $count= 0) {
         if ($directory[-1] !== '/') {
             $directory.= '/';
@@ -75,10 +75,10 @@ class modImport {
     }
 
     /**
-     * Gets the buffered content of a file
-     * @param string $file An absolute path to the file
-     * @return string
-     */
+    * Gets the buffered content of a file
+    * @param string $file An absolute path to the file
+    * @return string
+    */
     public function getFileContent($file) {
         // get the file
         $buffer= '';
@@ -94,10 +94,10 @@ class modImport {
     }
 
     /**
-     * Gets the content type of a file
-     * @param string $extension The extension of the file
-     * @return string The content-type of the file
-     */
+    * Gets the content type of a file
+    * @param string $extension The extension of the file
+    * @return string The content-type of the file
+    */
     public function getFileContentType($extension) {
         if (!$contentType= $this->modx->getObject(modContentType::class, ['file_extensions:LIKE' => '%'.$extension.'%'])) {
             $this->log("Could not find content type for extension '$extension'; using <samp>text/plain</samp>.");
@@ -107,10 +107,10 @@ class modImport {
     }
 
     /**
-     * Log a message to the results array
-     * @param string $message A string message to log
-     * @return void
-     */
+    * Log a message to the results array
+    * @param string $message A string message to log
+    * @return void
+    */
     public function log($message) {
         $this->results[] = $message;
     }

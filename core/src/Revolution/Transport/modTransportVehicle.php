@@ -19,35 +19,35 @@ class modTransportVehicle
 {
 
     /**
-     * @var array The collection of attributes to attach to the vehicle.
-     * @access public
-     */
+    * @var array The collection of attributes to attach to the vehicle.
+    * @access public
+    */
     public $attributes;
 
     /**
-     * @var array The collection of dependencies to resolve post-install/upgrade.
-     * @access public
-     */
+    * @var array The collection of dependencies to resolve post-install/upgrade.
+    * @access public
+    */
     public $resolvers;
 
     /**
-     * @var string The collection of dependencies to validate against pre-install/upgrade.
-     * @access public
-     */
+    * @var string The collection of dependencies to validate against pre-install/upgrade.
+    * @access public
+    */
     public $validators;
 
     /**
-     * @var mixed The actual object or artifact payload that the vehicle represents.
-     * @access public
-     */
+    * @var mixed The actual object or artifact payload that the vehicle represents.
+    * @access public
+    */
     public $obj;
 
     /**
-     * Creates an instance of the modTransportVehicle class.
-     *
-     * @param  mixed  $obj  The object that the vehicle represents.
-     * @param  array  $attr  An array of attributes for the object.
-     */
+    * Creates an instance of the modTransportVehicle class.
+    *
+    * @param  mixed  $obj  The object that the vehicle represents.
+    * @param  array  $attr  An array of attributes for the object.
+    */
     public function __construct($obj, array $attr = [])
     {
         $this->obj = $obj;
@@ -57,15 +57,15 @@ class modTransportVehicle
     }
 
     /**
-     * Adds a pre-creation validator to the vehicle.
-     *
-     * @access public
-     *
-     * @param  string  $type  The type of validator (php,file,etc)
-     * @param  array  $options  An array of options for the validator.
-     *
-     * @return array The added validator.
-     */
+    * Adds a pre-creation validator to the vehicle.
+    *
+    * @access public
+    *
+    * @param  string  $type  The type of validator (php,file,etc)
+    * @param  array  $options  An array of options for the validator.
+    *
+    * @return array The added validator.
+    */
     public function validate($type, $options)
     {
         $options['type'] = $type;
@@ -74,15 +74,15 @@ class modTransportVehicle
     }
 
     /**
-     * Adds a post-save resolver to the vehicle.
-     *
-     * @access public
-     *
-     * @param  string  $type  The type of resolver (php,file,etc)
-     * @param  array  $options  An array of options for the resolver.
-     *
-     * @return array The added resolver.
-     */
+    * Adds a post-save resolver to the vehicle.
+    *
+    * @access public
+    *
+    * @param  string  $type  The type of resolver (php,file,etc)
+    * @param  array  $options  An array of options for the resolver.
+    *
+    * @return array The added resolver.
+    */
     public function resolve($type, $options)
     {
         $options['type'] = $type;
@@ -91,11 +91,11 @@ class modTransportVehicle
     }
 
     /**
-     * Compiles the attributes array to pass on to the modPackageBuilder instance.
-     *
-     * @access public
-     * @return array An array of added attributes.
-     */
+    * Compiles the attributes array to pass on to the modPackageBuilder instance.
+    *
+    * @access public
+    * @return array An array of added attributes.
+    */
     public function compile()
     {
         return array_merge(
@@ -108,11 +108,11 @@ class modTransportVehicle
     }
 
     /**
-     * Returns the artifact payload associated with the vehicle.
-     *
-     * @access public
-     * @return mixed The payload for this vehicle.
-     */
+    * Returns the artifact payload associated with the vehicle.
+    *
+    * @access public
+    * @return mixed The payload for this vehicle.
+    */
     public function fetch()
     {
         return $this->obj;

@@ -21,22 +21,22 @@ use MODX\Revolution\modX;
  */
 class modFileHandler {
     /**
-     * An array of configuration properties for the class
-     * @var array $config
-     */
+    * An array of configuration properties for the class
+    * @var array $config
+    */
     public $config = [];
     /**
-     * The current context in which this File Manager instance should operate
-     * @var modContext|null $context
-     */
+    * The current context in which this File Manager instance should operate
+    * @var modContext|null $context
+    */
     public $context = null;
 
     /**
-     * The constructor for the modFileHandler class
-     *
-     * @param modX &$modx A reference to the modX object.
-     * @param array $config An array of options.
-     */
+    * The constructor for the modFileHandler class
+    *
+    * @param modX &$modx A reference to the modX object.
+    * @param array $config An array of options.
+    */
     function __construct(modX &$modx, array $config = []) {
         $this->modx =& $modx;
         $this->config = array_merge($this->config, $this->modx->_userConfig, $config);
@@ -47,16 +47,16 @@ class modFileHandler {
     }
 
     /**
-     * Dynamically creates a modDirectory or modFile object.
-     *
-     * The object is created based on the type of resource provided.
-     *
-     * @param string $path The absolute path to the filesystem resource.
-     * @param array $options Optional. An array of options for the object.
-     * @param string $overrideClass Optional. If provided, will force creation
-     * of the object as the specified class.
-     * @return mixed The appropriate modFile/modDirectory object
-     */
+    * Dynamically creates a modDirectory or modFile object.
+    *
+    * The object is created based on the type of resource provided.
+    *
+    * @param string $path The absolute path to the filesystem resource.
+    * @param array $options Optional. An array of options for the object.
+    * @param string $overrideClass Optional. If provided, will force creation
+    * of the object as the specified class.
+    * @return mixed The appropriate modFile/modDirectory object
+    */
     public function make($path, array $options = [], $overrideClass = '') {
         $path = $this->sanitizePath($path);
 
@@ -75,10 +75,10 @@ class modFileHandler {
     }
 
     /**
-     * Get the modX base path for the user.
-     *
-     * @return string The base path
-     */
+    * Get the modX base path for the user.
+    *
+    * @return string The base path
+    */
     public function getBasePath() {
         $basePath = '';
 
@@ -96,10 +96,10 @@ class modFileHandler {
     }
 
     /**
-     * Get base URL of file manager
-     *
-     * @return string The base URL
-     */
+    * Get base URL of file manager
+    *
+    * @return string The base URL
+    */
     public function getBaseUrl() {
         $baseUrl = '';
 
@@ -117,21 +117,21 @@ class modFileHandler {
     }
 
     /**
-     * Sanitize the specified path
-     *
-     * @param string $path The path to clean
-     * @return string The sanitized path
-     */
+    * Sanitize the specified path
+    *
+    * @param string $path The path to clean
+    * @return string The sanitized path
+    */
     public function sanitizePath($path) {
         return preg_replace(["/\.*[\/|\\\]/i", "/[\/|\\\]+/i"], ['/', '/'], $path);
     }
 
     /**
-     * Ensures that the passed path has a / at the end
-     *
-     * @param string $path
-     * @return string The postfixed path
-     */
+    * Ensures that the passed path has a / at the end
+    *
+    * @param string $path
+    * @return string The postfixed path
+    */
     public function postfixSlash($path) {
         $len = strlen($path);
         if (substr($path, $len - 1, $len) != '/') {
@@ -141,22 +141,22 @@ class modFileHandler {
     }
 
     /**
-     * Gets the directory path for a given file
-     *
-     * @param string $fileName The path for a file
-     * @return string The directory path of the given file
-     */
+    * Gets the directory path for a given file
+    *
+    * @param string $fileName The path for a file
+    * @return string The directory path of the given file
+    */
     public function getDirectoryFromFile($fileName) {
         $dir = dirname($fileName);
         return $this->postfixSlash($dir);
     }
 
     /**
-     * Tells if a file is a binary file or not.
-     *
-     * @param string $file
-     * @return boolean True if a binary file.
-     */
+    * Tells if a file is a binary file or not.
+    *
+    * @param string $file
+    * @return boolean True if a binary file.
+    */
     public function isBinary($file) {
         if (!file_exists($file) || !is_file($file)) {
             return false;

@@ -27,8 +27,8 @@ class Remove extends RemoveProcessor
     public $primaryKeyField = 'name';
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function beforeRemove()
     {
         $service = $this->object->get('service');

@@ -27,8 +27,8 @@ class Update extends UpdateProcessor
     public $permission = 'access_permissions';
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSet()
     {
         $principal = $this->getProperty('principal');
@@ -55,8 +55,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSave()
     {
         $policy = $this->modx->getObject(modAccessPolicy::class, $this->getProperty('policy'));

@@ -11,30 +11,30 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
         'version' => '3.0',
         'table' => 'member_groups',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'user_group' => 0,
             'member' => 0,
             'role' => 1,
             'rank' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'user_group' => 
+            'user_group' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'member' => 
+            'member' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'role' => 
+            'role' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -42,7 +42,7 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
                 'default' => 1,
                 'index' => 'index',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -51,17 +51,17 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'role' => 
+            'role' =>
             array (
                 'alias' => 'role',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'role' => 
+                    'role' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -69,15 +69,15 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
                     ),
                 ),
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'alias' => 'rank',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'rank' => 
+                    'rank' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -86,9 +86,9 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'UserGroupRole' => 
+            'UserGroupRole' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroupRole',
                 'local' => 'role',
@@ -96,7 +96,7 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'UserGroup' => 
+            'UserGroup' =>
             array (
                 'class' => 'MODX\\Revolution\\modUserGroup',
                 'local' => 'user_group',
@@ -104,7 +104,7 @@ class modUserGroupMember extends \MODX\Revolution\modUserGroupMember
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'User' => 
+            'User' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'member',

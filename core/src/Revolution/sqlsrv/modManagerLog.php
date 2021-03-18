@@ -11,7 +11,7 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
         'version' => '3.0',
         'table' => 'manager_log',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'user' => 0,
             'occurred' => '0000-00-00 00:00:00',
@@ -19,23 +19,23 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
             'classKey' => '',
             'item' => '0',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'user' => 
+            'user' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
             ),
-            'occurred' => 
+            'occurred' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => true,
                 'default' => '0000-00-00 00:00:00',
             ),
-            'action' => 
+            'action' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -43,7 +43,7 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 'null' => false,
                 'default' => '',
             ),
-            'classKey' => 
+            'classKey' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -51,7 +51,7 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 'null' => false,
                 'default' => '',
             ),
-            'item' => 
+            'item' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -60,9 +60,9 @@ class modManagerLog extends \MODX\Revolution\modManagerLog
                 'default' => '0',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'User' => 
+            'User' =>
             array (
                 'class' => 'MODX\\Revolution\\modUser',
                 'local' => 'user',

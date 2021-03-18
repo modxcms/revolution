@@ -28,9 +28,9 @@ class GetList extends GetListProcessor
     public $languageTopics = ['dashboards'];
 
     /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
+    * @param xPDOQuery $c
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $q = $this->modx->newQuery(modDashboardWidgetPlacement::class, [
@@ -47,9 +47,9 @@ class GetList extends GetListProcessor
 
 
     /**
-     * @param array $data
-     * @return array
-     */
+    * @param array $data
+    * @return array
+    */
     public function iterate(array $data)
     {
         $list = [];

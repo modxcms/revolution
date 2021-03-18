@@ -31,17 +31,17 @@ class modStaticImport extends modImport
 {
 
     /**
-     * Import files into MODX
-     *
-     * @param array   $allowedfiles An array of allowed file types
-     * @param integer $parent       The parent Resource to pull into
-     * @param string  $filepath     The path to the files to import
-     * @param array   $files        An array of imported files
-     * @param string  $context      The context to import into
-     * @param string  $class        The class of Resource to import as
-     * @param string  $basefilepath The base file path for the import
-     * @param array   $elements     Associations of resource fields and selectors
-     */
+    * Import files into MODX
+    *
+    * @param array   $allowedfiles An array of allowed file types
+    * @param integer $parent       The parent Resource to pull into
+    * @param string  $filepath     The path to the files to import
+    * @param array   $files        An array of imported files
+    * @param string  $context      The context to import into
+    * @param string  $class        The class of Resource to import as
+    * @param string  $basefilepath The base file path for the import
+    * @param array   $elements     Associations of resource fields and selectors
+    */
     public function importFiles(
         $allowedfiles,
         $parent,
@@ -189,15 +189,15 @@ class modStaticImport extends modImport
     }
 
     /**
-     * Calculate a resource alias from the imported file
-     *
-     * @param modResource $resource A reference to the new modResource object
-     * @param string      $alias    A suggested alias
-     * @param integer     $parent   The parent ID of the Resource
-     * @param string      $context  The context of the Resource
-     *
-     * @return string The formatted alias
-     */
+    * Calculate a resource alias from the imported file
+    *
+    * @param modResource $resource A reference to the new modResource object
+    * @param string      $alias    A suggested alias
+    * @param integer     $parent   The parent ID of the Resource
+    * @param string      $context  The context of the Resource
+    *
+    * @return string The formatted alias
+    */
     public function getResourceAlias(& $resource, $alias, $parent, $context = 'web')
     {
         // auto assign alias
@@ -255,12 +255,12 @@ class modStaticImport extends modImport
     }
 
     /**
-     * Convert $selector into an XPath string.
-     *
-     * @param string $selector
-     *
-     * @return string
-     */
+    * Convert $selector into an XPath string.
+    *
+    * @param string $selector
+    *
+    * @return string
+    */
     public function toXPath($selector)
     {
         // remove spaces around operators
@@ -322,12 +322,12 @@ class modStaticImport extends modImport
     }
 
     /**
-     * Return innerHTML of an element
-     *
-     * @param DOMNode $element
-     *
-     * @return string
-     */
+    * Return innerHTML of an element
+    *
+    * @param DOMNode $element
+    *
+    * @return string
+    */
     public function DOMinnerHTML(DOMNode $element)
     {
         $innerHTML = "";
@@ -340,14 +340,14 @@ class modStaticImport extends modImport
     }
 
     /**
-     * Parse values of resource fields and TVs. Set resource fields and return TVs.
-     *
-     * @param modResource $resource
-     * @param             $file
-     * @param array       $elements
-     *
-     * @return array|boolean
-     */
+    * Parse values of resource fields and TVs. Set resource fields and return TVs.
+    *
+    * @param modResource $resource
+    * @param             $file
+    * @param array       $elements
+    *
+    * @return array|boolean
+    */
     public function parseElements(modResource &$resource, $file, $elements = [])
     {
         if (empty($elements)) {
@@ -381,14 +381,14 @@ class modStaticImport extends modImport
     }
 
     /**
-     * Return field value by selector
-     *
-     * @param          $selector
-     * @param          $parentNode
-     * @param DOMXPath $xpath
-     *
-     * @return bool|string
-     */
+    * Return field value by selector
+    *
+    * @param          $selector
+    * @param          $parentNode
+    * @param DOMXPath $xpath
+    *
+    * @return bool|string
+    */
     protected function getFieldValue($selector, $parentNode, DOMXPath $xpath)
     {
         if (strpos($selector, '$') === 0) {
@@ -403,4 +403,3 @@ class modStaticImport extends modImport
         return $fieldValue;
     }
 }
-

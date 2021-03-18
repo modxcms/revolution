@@ -27,11 +27,11 @@ class modPhpThumb extends phpthumb
     public $config = [];
 
     /**
-     * modPhpThumb constructor.
-     *
-     * @param modX  $modx
-     * @param array $config
-     */
+    * modPhpThumb constructor.
+    *
+    * @param modX  $modx
+    * @param array $config
+    */
     public function __construct(modX &$modx, array $config = [])
     {
         $this->modx =& $modx;
@@ -46,8 +46,8 @@ class modPhpThumb extends phpthumb
     }
 
     /**
-     * Setup some site-wide phpthumb options from modx config
-     */
+    * Setup some site-wide phpthumb options from modx config
+    */
     public function initialize()
     {
         $cachePath = $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'cache/phpthumb/';
@@ -173,12 +173,12 @@ class modPhpThumb extends phpthumb
     }
 
     /**
-     * Sets the source image
-     *
-     * @param $src
-     *
-     * @return bool|string
-     */
+    * Sets the source image
+    *
+    * @param $src
+    *
+    * @return bool|string
+    */
     public function set($src)
     {
         $src = rawurldecode($src);
@@ -190,8 +190,8 @@ class modPhpThumb extends phpthumb
     }
 
     /**
-     * Check to see if cached file already exists
-     */
+    * Check to see if cached file already exists
+    */
     public function checkForCachedFile()
     {
         $this->SetCacheFilename();
@@ -203,16 +203,16 @@ class modPhpThumb extends phpthumb
     }
 
     /**
-     * Load cached file
-     */
+    * Load cached file
+    */
     public function loadCache()
     {
         $this->RedirectToCachedFile();
     }
 
     /**
-     * Cache the generated thumbnail.
-     */
+    * Cache the generated thumbnail.
+    */
     public function cache()
     {
         phpthumb_functions::EnsureDirectoryExists(dirname($this->cache_filename));
@@ -226,8 +226,8 @@ class modPhpThumb extends phpthumb
     }
 
     /**
-     * Generate a thumbnail
-     */
+    * Generate a thumbnail
+    */
     public function generate()
     {
         if (!$this->GenerateThumbnail()) {
@@ -241,8 +241,8 @@ class modPhpThumb extends phpthumb
     }
 
     /**
-     * Output a thumbnail.
-     */
+    * Output a thumbnail.
+    */
     public function output()
     {
         $output = $this->OutputThumbnail();
@@ -469,4 +469,3 @@ class modPhpThumb extends phpthumb
         return $AbsoluteFilename;
     }
 }
-

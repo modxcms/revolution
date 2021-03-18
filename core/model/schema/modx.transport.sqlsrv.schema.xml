@@ -8,7 +8,7 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
- -->
+-->
 <!-- The following xPDO model represents an object-relational map structure of the MODX transport package -->
 <model package="MODX\Revolution\Transport" baseClass="xPDO\Om\xPDOObject" platform="sqlsrv" phpdoc-package="MODX\Revolution\Transport" version="3.0">
     <object class="modTransportProvider" table="transport_providers" extends="xPDO\Om\xPDOSimpleObject">

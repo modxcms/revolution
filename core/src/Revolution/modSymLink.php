@@ -14,10 +14,10 @@ use xPDO\xPDO;
 class modSymLink extends modResource implements modResourceInterface
 {
     /**
-     * Overrides modResource::__construct to set the class key for this Resource type
-     *
-     * @param xPDO $xpdo A reference to the xPDO|modX instance
-     */
+    * Overrides modResource::__construct to set the class key for this Resource type
+    *
+    * @param xPDO $xpdo A reference to the xPDO|modX instance
+    */
     function __construct(xPDO & $xpdo)
     {
         parent:: __construct($xpdo);
@@ -27,10 +27,10 @@ class modSymLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Process the modSymLink and forward to the specified resource.
-     *
-     * {@inheritDoc}
-     */
+    * Process the modSymLink and forward to the specified resource.
+    *
+    * {@inheritDoc}
+    */
     public function process()
     {
         $this->_content = $this->get('content');
@@ -55,14 +55,14 @@ class modSymLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Gets the manager controller path for the Symlink
-     *
-     * @static
-     *
-     * @param xPDO $modx A reference to the modX instance
-     *
-     * @return string
-     */
+    * Gets the manager controller path for the Symlink
+    *
+    * @static
+    *
+    * @param xPDO $modx A reference to the modX instance
+    *
+    * @return string
+    */
     public static function getControllerPath(xPDO &$modx)
     {
         $path = modResource::getControllerPath($modx);
@@ -71,11 +71,11 @@ class modSymLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
-     * set to true.
-     *
-     * @return array
-     */
+    * Use this in your extended Resource class to display the text for the context menu item, if showInContextMenu is
+    * set to true.
+    *
+    * @return array
+    */
     public function getContextMenuText()
     {
         return [
@@ -85,10 +85,10 @@ class modSymLink extends modResource implements modResourceInterface
     }
 
     /**
-     * Use this in your extended Resource class to return a translatable name for the Resource Type.
-     *
-     * @return string
-     */
+    * Use this in your extended Resource class to return a translatable name for the Resource Type.
+    *
+    * @return string
+    */
     public function getResourceTypeName()
     {
         return $this->xpdo->lexicon('symlink');

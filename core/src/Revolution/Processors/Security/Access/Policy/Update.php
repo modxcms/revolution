@@ -31,8 +31,8 @@ class Update extends UpdateProcessor
     public $objectType = 'policy';
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function beforeSet()
     {
         $name = $this->getProperty('name');
@@ -50,9 +50,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return bool
-     * @throws \xPDO\xPDOException
-     */
+    * @return bool
+    * @throws \xPDO\xPDOException
+    */
     public function beforeSave()
     {
         /* now store the permissions into the modAccessPermission table */
@@ -73,7 +73,7 @@ class Update extends UpdateProcessor
     public function afterSave()
     {
         $this->modx->cacheManager->flushPermissions();
-        
+
         return parent::afterSave();
     }
 }

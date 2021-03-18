@@ -33,10 +33,10 @@ class UpdateFromGrid extends ModelProcessor
     public $resource;
 
     /**
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
+    * {@inheritDoc}
+    *
+    * @return mixed
+    */
     public function initialize()
     {
         $data = $this->getProperty('data');
@@ -56,10 +56,10 @@ class UpdateFromGrid extends ModelProcessor
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return mixed
-     */
+    * {@inheritDoc}
+    *
+    * @return mixed
+    */
     public function process()
     {
 
@@ -100,10 +100,10 @@ class UpdateFromGrid extends ModelProcessor
     }
 
     /**
-     * Get the Resource associated
-     *
-     * @return modResource|string
-     */
+    * Get the Resource associated
+    *
+    * @return modResource|string
+    */
     public function getResource()
     {
         $resource_id = $this->getProperty('resource');

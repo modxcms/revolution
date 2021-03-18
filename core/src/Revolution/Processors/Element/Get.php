@@ -23,20 +23,20 @@ use MODX\Revolution\Processors\Model\GetProcessor;
 abstract class Get extends GetProcessor
 {
     /**
-     * Used for adding custom data in derivative types
-     *
-     * @return void
-     */
+    * Used for adding custom data in derivative types
+    *
+    * @return void
+    */
     public function beforeOutput()
     {
         $this->getElementProperties();
     }
 
     /**
-     * Get the properties of the element
-     *
-     * @return array
-     */
+    * Get the properties of the element
+    *
+    * @return array
+    */
     public function getElementProperties()
     {
         $properties = $this->object->get('properties');

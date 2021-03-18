@@ -11,7 +11,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
         'version' => '3.0',
         'table' => 'actiondom',
         'extends' => 'MODX\\Revolution\\modAccessibleSimpleObject',
-        'fields' => 
+        'fields' =>
         array (
             'set' => 0,
             'action' => '',
@@ -28,9 +28,9 @@ class modActionDom extends \MODX\Revolution\modActionDom
             'for_parent' => 0,
             'rank' => 0,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'set' => 
+            'set' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -38,7 +38,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'default' => 0,
                 'index' => 'index',
             ),
-            'action' => 
+            'action' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -47,7 +47,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'default' => '',
                 'index' => 'index',
             ),
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -56,13 +56,13 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'default' => '',
                 'index' => 'index',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
             ),
-            'xtype' => 
+            'xtype' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -70,7 +70,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'null' => false,
                 'default' => '',
             ),
-            'container' => 
+            'container' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -78,7 +78,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'null' => false,
                 'default' => '',
             ),
-            'rule' => 
+            'rule' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -86,7 +86,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'null' => false,
                 'default' => '',
             ),
-            'value' => 
+            'value' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
@@ -94,7 +94,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'null' => false,
                 'default' => '',
             ),
-            'constraint' => 
+            'constraint' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -102,7 +102,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'null' => false,
                 'default' => '',
             ),
-            'constraint_field' => 
+            'constraint_field' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -110,7 +110,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'null' => false,
                 'default' => '',
             ),
-            'constraint_class' => 
+            'constraint_class' =>
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '100',
@@ -118,7 +118,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'null' => false,
                 'default' => '',
             ),
-            'active' => 
+            'active' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -126,7 +126,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'default' => 1,
                 'index' => 'index',
             ),
-            'for_parent' => 
+            'for_parent' =>
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -134,7 +134,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'default' => 0,
                 'index' => 'index',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -143,17 +143,17 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'index' => 'index',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'set' => 
+            'set' =>
             array (
                 'alias' => 'set',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'set' => 
+                    'set' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -161,15 +161,15 @@ class modActionDom extends \MODX\Revolution\modActionDom
                     ),
                 ),
             ),
-            'action' => 
+            'action' =>
             array (
                 'alias' => 'action',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'action' => 
+                    'action' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -177,15 +177,15 @@ class modActionDom extends \MODX\Revolution\modActionDom
                     ),
                 ),
             ),
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -193,15 +193,15 @@ class modActionDom extends \MODX\Revolution\modActionDom
                     ),
                 ),
             ),
-            'active' => 
+            'active' =>
             array (
                 'alias' => 'active',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'active' => 
+                    'active' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -209,15 +209,15 @@ class modActionDom extends \MODX\Revolution\modActionDom
                     ),
                 ),
             ),
-            'for_parent' => 
+            'for_parent' =>
             array (
                 'alias' => 'for_parent',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'for_parent' => 
+                    'for_parent' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -225,15 +225,15 @@ class modActionDom extends \MODX\Revolution\modActionDom
                     ),
                 ),
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'alias' => 'rank',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'rank' => 
+                    'rank' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -242,9 +242,9 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'Access' => 
+            'Access' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessActionDom',
                 'local' => 'id',
@@ -253,9 +253,9 @@ class modActionDom extends \MODX\Revolution\modActionDom
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'FCSet' => 
+            'FCSet' =>
             array (
                 'class' => 'MODX\\Revolution\\modFormCustomizationSet',
                 'local' => 'set',

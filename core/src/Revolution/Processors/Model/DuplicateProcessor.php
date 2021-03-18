@@ -32,15 +32,15 @@ abstract class DuplicateProcessor extends ModelProcessor
     public $nameField = 'name';
     public $staticfileField = 'static_file';
     /**
-     * @var string $newNameField The name of field that used for filling new name of object.
-     * If defined, duplication error will be attached to field with this name
-     */
+    * @var string $newNameField The name of field that used for filling new name of object.
+    * If defined, duplication error will be attached to field with this name
+    */
     public $newNameField;
 
     /**
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function initialize()
     {
         $primaryKey = $this->getProperty($this->primaryKeyField, false);
@@ -62,9 +62,9 @@ abstract class DuplicateProcessor extends ModelProcessor
     }
 
     /**
-     * {@inheritDoc}
-     * @return mixed
-     */
+    * {@inheritDoc}
+    * @return mixed
+    */
     public function process()
     {
         /* Run the beforeSet method before setting the fields, and allow stoppage */
@@ -114,61 +114,61 @@ abstract class DuplicateProcessor extends ModelProcessor
     }
 
     /**
-     * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
-     * classes
-     *
-     * @return boolean
-     */
+    * Abstract the saving of the object out to allow for transient and non-persistent object updating in derivative
+    * classes
+    *
+    * @return boolean
+    */
     public function saveObject()
     {
         return $this->newObject->save();
     }
 
     /**
-     * Cleanup and return a response.
-     *
-     * @return array
-     */
+    * Cleanup and return a response.
+    *
+    * @return array
+    */
     public function cleanup()
     {
         return $this->success('', $this->newObject);
     }
 
     /**
-     * Override in your derivative class to do functionality before the fields are set on the object
-     *
-     * @return boolean
-     */
+    * Override in your derivative class to do functionality before the fields are set on the object
+    *
+    * @return boolean
+    */
     public function beforeSet()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Run any logic before the object has been duplicated. May return false to prevent duplication.
-     *
-     * @return boolean
-     */
+    * Run any logic before the object has been duplicated. May return false to prevent duplication.
+    *
+    * @return boolean
+    */
     public function beforeSave()
     {
         return !$this->hasErrors();
     }
 
     /**
-     * Run any logic after the object has been duplicated
-     *
-     * @return boolean
-     */
+    * Run any logic after the object has been duplicated
+    *
+    * @return boolean
+    */
     public function afterSave()
     {
         return true;
     }
 
     /**
-     * Get the new name for the duplicate
-     *
-     * @return string
-     */
+    * Get the new name for the duplicate
+    *
+    * @return string
+    */
     public function getNewName()
     {
         $name = $this->getProperty($this->nameField);
@@ -179,24 +179,24 @@ abstract class DuplicateProcessor extends ModelProcessor
     }
 
     /**
-     * Set the new name to the new object
-     *
-     * @param string $name
-     *
-     * @return string
-     */
+    * Set the new name to the new object
+    *
+    * @param string $name
+    *
+    * @return string
+    */
     public function setNewName($name)
     {
         return $this->newObject->set($this->nameField, $name);
     }
 
     /**
-     * Check to see if an object already exists with that name
-     *
-     * @param string $name
-     *
-     * @return boolean
-     */
+    * Check to see if an object already exists with that name
+    *
+    * @param string $name
+    *
+    * @return boolean
+    */
     public function alreadyExists($name)
     {
         return $this->modx->getCount($this->classKey, [
@@ -206,12 +206,12 @@ abstract class DuplicateProcessor extends ModelProcessor
     }
 
     /**
-     * Check to see if a static element file already exists.
-     *
-     * @param $filename
-     *
-     * @return bool
-     */
+    * Check to see if a static element file already exists.
+    *
+    * @param $filename
+    *
+    * @return bool
+    */
     public function staticFileAlreadyExists($filename)
     {
         $sourceId = $this->getProperty('source');
@@ -228,10 +228,10 @@ abstract class DuplicateProcessor extends ModelProcessor
     }
 
     /**
-     * Log a manager action
-     *
-     * @return void
-     */
+    * Log a manager action
+    *
+    * @return void
+    */
     public function logManagerAction()
     {
         $this->modx->logManagerAction($this->objectType . '_duplicate', $this->classKey, $this->newObject->get('id'));

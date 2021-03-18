@@ -28,24 +28,24 @@ class Remove extends Processor
     public $package;
 
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function checkPermissions()
     {
         return $this->modx->hasPermission('packages');
     }
 
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function getLanguageTopics()
     {
         return ['workspace'];
     }
 
     /**
-     * @return bool|string|null
-     */
+    * @return bool|string|null
+    */
     public function initialize()
     {
         $this->setDefaultProperties([
@@ -68,8 +68,8 @@ class Remove extends Processor
     }
 
     /**
-     * @return array|mixed|string
-     */
+    * @return array|mixed|string
+    */
     public function process()
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_gpack'));
@@ -97,9 +97,9 @@ class Remove extends Processor
     }
 
     /**
-     * Empty the site cache
-     * @return void
-     */
+    * Empty the site cache
+    * @return void
+    */
     public function clearCache()
     {
         $this->modx->getCacheManager();
@@ -111,10 +111,10 @@ class Remove extends Processor
     }
 
     /**
-     * Remove the transport package archive
-     * @param string $transportZip
-     * @return void
-     */
+    * Remove the transport package archive
+    * @param string $transportZip
+    * @return void
+    */
     public function removeTransportZip($transportZip)
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tzip_start'));
@@ -128,10 +128,10 @@ class Remove extends Processor
     }
 
     /**
-     * Remove the transport package directory
-     * @param string $transportDir
-     * @return void
-     */
+    * Remove the transport package directory
+    * @param string $transportDir
+    * @return void
+    */
     public function removeTransportDirectory($transportDir)
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tdir_start'));
@@ -145,9 +145,9 @@ class Remove extends Processor
     }
 
     /**
-     * Cleanup and return the result
-     * @return array
-     */
+    * Cleanup and return the result
+    * @return array
+    */
     public function cleanup()
     {
         $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('package_remove_info_success'));

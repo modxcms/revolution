@@ -18,10 +18,10 @@ namespace MODX\Revolution;
 abstract class modParsedManagerController extends modExtraManagerController
 {
     /**
-     * The request HTTP method
-     *
-     * @var string
-     */
+    * The request HTTP method
+    *
+    * @var string
+    */
     protected $method = 'GET';
 
     public function initialize()
@@ -49,8 +49,8 @@ HTML
     }
 
     /**
-     * @inheritDoc
-     */
+    * @inheritDoc
+    */
     public function render()
     {
         $html = parent::render();

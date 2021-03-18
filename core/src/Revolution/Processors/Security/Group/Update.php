@@ -31,9 +31,9 @@ class Update extends UpdateProcessor
     public $afterSaveEvent = 'OnUserGroupFormSave';
 
     /**
-     * Override the modObjectUpdateProcessor::initialize method to allow for grabbing the (anonymous) user group
-     * @return boolean|string
-     */
+    * Override the modObjectUpdateProcessor::initialize method to allow for grabbing the (anonymous) user group
+    * @return boolean|string
+    */
     public function initialize()
     {
         $id = $this->getProperty('id', false);
@@ -51,10 +51,10 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Override the saveObject method to prevent saving of the (anonymous) group
-     * {@inheritDoc}
-     * @return boolean
-     */
+    * Override the saveObject method to prevent saving of the (anonymous) group
+    * {@inheritDoc}
+    * @return boolean
+    */
     public function saveObject()
     {
         $saved = true;
@@ -66,8 +66,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function beforeSave()
     {
         $c = $this->modx->newQuery(modUserGroup::class);
@@ -85,8 +85,8 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function afterSave()
     {
         if ($this->modx->hasPermission('usergroup_user_edit')) {
@@ -97,9 +97,9 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Add users to the User Group
-     * @return modUserGroupMember[]
-     */
+    * Add users to the User Group
+    * @return modUserGroupMember[]
+    */
     public function addUsers()
     {
         $users = $this->getProperty('users');

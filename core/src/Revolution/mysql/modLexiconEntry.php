@@ -11,11 +11,11 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
         'version' => '3.0',
         'table' => 'lexicon_entries',
         'extends' => 'xPDO\\Om\\xPDOSimpleObject',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'name' => '',
             'value' => '',
@@ -25,9 +25,9 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
             'createdon' => NULL,
             'editedon' => NULL,
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -36,14 +36,14 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                 'default' => '',
                 'index' => 'index',
             ),
-            'value' => 
+            'value' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
             ),
-            'topic' => 
+            'topic' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -52,7 +52,7 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                 'default' => 'default',
                 'index' => 'index',
             ),
-            'namespace' => 
+            'namespace' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '40',
@@ -61,7 +61,7 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                 'default' => 'core',
                 'index' => 'index',
             ),
-            'language' => 
+            'language' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '20',
@@ -70,12 +70,12 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                 'default' => 'en',
                 'index' => 'index',
             ),
-            'createdon' => 
+            'createdon' =>
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
             ),
-            'editedon' => 
+            'editedon' =>
             array (
                 'dbtype' => 'timestamp',
                 'phptype' => 'timestamp',
@@ -84,17 +84,17 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                 'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'name' => 
+            'name' =>
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'name' => 
+                    'name' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -102,15 +102,15 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                     ),
                 ),
             ),
-            'topic' => 
+            'topic' =>
             array (
                 'alias' => 'topic',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'topic' => 
+                    'topic' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -118,15 +118,15 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                     ),
                 ),
             ),
-            'namespace' => 
+            'namespace' =>
             array (
                 'alias' => 'namespace',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'namespace' => 
+                    'namespace' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -134,15 +134,15 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                     ),
                 ),
             ),
-            'language' => 
+            'language' =>
             array (
                 'alias' => 'language',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'language' => 
+                    'language' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -151,9 +151,9 @@ class modLexiconEntry extends \MODX\Revolution\modLexiconEntry
                 ),
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Namespace' => 
+            'Namespace' =>
             array (
                 'class' => 'MODX\\Revolution\\modNamespace',
                 'local' => 'namespace',

@@ -111,4 +111,3 @@ class Remove extends \MODX\Revolution\Processors\Element\Remove
         return true;
     }
 }
-

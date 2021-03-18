@@ -44,11 +44,11 @@ class GetList extends GetListProcessor
     public $showNotAssociated;
 
     /**
-     * {@inheritdoc}
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * {@inheritdoc}
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $this->elementId = $this->getProperty('elementId', false);
@@ -79,12 +79,12 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * Filter the query by the valueField of MODx.combo.PropertySet to get the initially value displayed right
-     *
-     * @param xPDOQuery $c
-     *
-     * @return xPDOQuery
-     */
+    * Filter the query by the valueField of MODx.combo.PropertySet to get the initially value displayed right
+    *
+    * @param xPDOQuery $c
+    *
+    * @return xPDOQuery
+    */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $id = $this->getProperty('id', '');
@@ -98,12 +98,12 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * If limiting to an Element, get default properties
-     *
-     * @param array $list
-     *
-     * @return array
-     */
+    * If limiting to an Element, get default properties
+    *
+    * @param array $list
+    *
+    * @return array
+    */
     public function beforeIteration(array $list)
     {
         if ($this->elementId && $this->elementType && !$this->showNotAssociated) {
