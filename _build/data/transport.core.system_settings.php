@@ -1066,7 +1066,7 @@ $settings['modx_charset']->fromArray([
 $settings['principal_targets']= $xpdo->newObject(modSystemSetting::class);
 $settings['principal_targets']->fromArray([
   'key' => 'principal_targets',
-  'value' => 'modAccessContext,modAccessResourceGroup,modAccessCategory,sources.modAccessMediaSource,modAccessNamespace',
+  'value' => 'MODX\\Revolution\\modAccessContext,MODX\\Revolution\\modAccessResourceGroup,MODX\\Revolution\\modAccessCategory,MODX\\Revolution\\Sources\\modAccessMediaSource,MODX\\Revolution\\modAccessNamespace',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'authentication',
