@@ -20,4 +20,39 @@ use xPDO\Om\xPDOSimpleObject;
  */
 class modAccessPolicyTemplate extends xPDOSimpleObject
 {
+    const TEMPLATE_ADMINISTRATOR = 'AdministratorTemplate';
+    const TEMPLATE_CONTEXT = 'ContextTemplate';
+    const TEMPLATE_ELEMENT = 'ElementTemplate';
+    const TEMPLATE_MEDIA_SOURCE = 'MediaSourceTemplate';
+    const TEMPLATE_NAMESPACE = 'NamespaceTemplate';
+    const TEMPLATE_OBJECT = 'ObjectTemplate';
+    const TEMPLATE_RESOURCE = 'ResourceTemplate';
+
+    /**
+     * Returns list of core Policy Templates
+     *
+     * @return array
+     */
+    public static function getCoreTemplates()
+    {
+        return [
+            self::TEMPLATE_ADMINISTRATOR,
+            self::TEMPLATE_RESOURCE,
+            self::TEMPLATE_OBJECT,
+            self::TEMPLATE_ELEMENT,
+            self::TEMPLATE_MEDIA_SOURCE,
+            self::TEMPLATE_CONTEXT,
+            self::TEMPLATE_NAMESPACE,
+        ];
+    }
+
+    /**
+     * @param $name string The name of access policy template
+     *
+     * @return bool
+     */
+    public function isCoreTemplate($name)
+    {
+        return in_array($name, static::getCoreTemplates(), true);
+    }
 }

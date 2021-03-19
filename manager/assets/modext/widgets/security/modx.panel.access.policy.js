@@ -213,33 +213,3 @@ Ext.extend(MODx.grid.PolicyPermissions,MODx.grid.LocalGrid,{
     }
 });
 Ext.reg('modx-grid-policy-permissions',MODx.grid.PolicyPermissions);
-
-/**
- * @class MODx.combo.AccessPolicyTemplate
- * @extends MODx.combo.ComboBox
- * @constructor
- * @param {Object} config An object of options.
- * @xtype modx-combo-access-policy-template
- */
-MODx.combo.AccessPolicyTemplate = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'template'
-        ,hiddenName: 'template'
-        ,fields: ['id','name','description']
-        ,forceSelection: true
-        ,typeAhead: false
-        ,editable: false
-        ,allowBlank: false
-        ,pageSize: 20
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'Security/Access/Policy/Template/GetList'
-        }
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{name:htmlEncode}</span>'
-            ,'<p style="margin: 0; font-size: 11px; color: gray;">{description:htmlEncode}</p></div></tpl>')
-    });
-    MODx.combo.AccessPolicyTemplate.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.AccessPolicyTemplate,MODx.combo.ComboBox);
-Ext.reg('modx-combo-access-policy-template',MODx.combo.AccessPolicyTemplate);

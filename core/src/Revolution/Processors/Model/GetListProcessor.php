@@ -25,6 +25,9 @@ use xPDO\Om\xPDOQuery;
  */
 abstract class GetListProcessor extends ModelProcessor
 {
+    const CLASS_ALLOW_EDIT = 'pedit';
+    const CLASS_ALLOW_REMOVE = 'premove';
+
     /** @var string $defaultSortField The default field to sort by */
     public $defaultSortField = 'name';
     /** @var string $defaultSortDirection The default direction to sort */
