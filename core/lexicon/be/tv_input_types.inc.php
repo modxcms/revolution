@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Тэкставы рэдактар';
 $_lang['dropdown'] = 'Выпадальны спіс';
 $_lang['listbox'] = 'Спіс (адзіночны выбар)';
 $_lang['listbox-multiple'] = 'Спіс (множны выбар)';
-$_lang['list-multiple-legacy'] = 'Састарэлы спіс множнага выбару';
 $_lang['option'] = 'Перамыкачы (radio)';
 $_lang['checkbox'] = 'Сцяжкі (checkbox)';
 $_lang['image'] = 'Малюнак';
