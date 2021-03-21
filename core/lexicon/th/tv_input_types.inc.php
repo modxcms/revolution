@@ -14,7 +14,6 @@ $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'รายการเมนูแบบเลื่อนลง';
 $_lang['listbox'] = 'Listbox (เลือกได้อย่างเดียว)';
 $_lang['listbox-multiple'] = 'Listbox (เลือกได้หลายอย่าง)';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['option'] = 'ตัวเลือก';
 $_lang['checkbox'] = 'Check Box';
 $_lang['image'] = 'รูปภาพ';
