@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Legkésőbbi időpont';
 $_lang['latest_time_desc'] = 'A legkésőbbi választható időpont.';
 $_lang['listbox'] = 'Lista (egyetlen választással)';
 $_lang['listbox-multiple'] = 'Lista (több választási lehetőség)';
-$_lang['list-multiple-legacy'] = 'Korábbi többszörös felsorolás';
 $_lang['lower_case'] = 'Kisbetűs';
 $_lang['max_length'] = 'Legnagyobb hossz';
 $_lang['min_length'] = 'Legkisebb hossz';
