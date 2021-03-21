@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Текстовый редактор';
 $_lang['dropdown'] = 'Выпадающий список';
 $_lang['listbox'] = 'Список (одиночный выбор)';
 $_lang['listbox-multiple'] = 'Список (множественный выбор)';
-$_lang['list-multiple-legacy'] = 'Устаревший список множественного выбора';
 $_lang['option'] = 'Переключатели (radio)';
 $_lang['checkbox'] = 'Флажки (checkbox)';
 $_lang['image'] = 'Изображение';
