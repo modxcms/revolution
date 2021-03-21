@@ -72,7 +72,6 @@ $_lang['latest_time'] = 'Laatste tijd';
 $_lang['latest_time_desc'] = 'De laatst toegestane tijd die geselecteerd kan worden.';
 $_lang['listbox'] = 'Lijstbox (Enkele-Selectie)';
 $_lang['listbox-multiple'] = 'Lijstbox (Meervoudige-Selectie)';
-$_lang['list-multiple-legacy'] = 'Oude multiselect lijst';
 $_lang['lower_case'] = 'Kleine letters';
 $_lang['max_length'] = 'Max Lengte';
 $_lang['min_length'] = 'Min Lengte';
