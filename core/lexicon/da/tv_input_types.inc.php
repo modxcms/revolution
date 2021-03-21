@@ -14,7 +14,6 @@ $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'DropDown listemenu';
 $_lang['listbox'] = 'Liste (enkelt valg)';
 $_lang['listbox-multiple'] = 'Liste (flere valg)';
-$_lang['list-multiple-legacy'] = 'Forældet liste type';
 $_lang['option'] = 'Alternativknapper';
 $_lang['checkbox'] = 'Afkrydsningsfelt';
 $_lang['image'] = 'Billede';
