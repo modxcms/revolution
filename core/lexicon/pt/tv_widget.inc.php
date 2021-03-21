@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Última Hora';
 $_lang['latest_time_desc'] = 'A última vez permitiu que podem ser selecionados.';
 $_lang['listbox'] = 'Caixa lista (Seleção Única)';
 $_lang['listbox-multiple'] = 'Caixa lista (Multipla Seleção)';
-$_lang['list-multiple-legacy'] = 'Lista múltipla (legacy)';
 $_lang['lower_case'] = 'Caixa Baixa';
 $_lang['max_length'] = 'Comprimento Máximo';
 $_lang['min_length'] = 'Comprimento Mínimo ';
