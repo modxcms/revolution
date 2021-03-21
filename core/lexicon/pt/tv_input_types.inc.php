@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Editor de Texto (RichText)';
 $_lang['dropdown'] = 'Menu em lista Drop Down';
 $_lang['listbox'] = 'Caixa lista (Seleção Única)';
 $_lang['listbox-multiple'] = 'Caixa lista (Multipla Seleção)';
-$_lang['list-multiple-legacy'] = 'Lista múltipla (legacy)';
 $_lang['option'] = 'Opções de Rádio';
 $_lang['checkbox'] = 'Caixa de Marcar';
 $_lang['image'] = 'Imagem';
