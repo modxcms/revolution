@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Zengin Metin';
 $_lang['dropdown'] = 'Açılabilir Liste Menüsü';
 $_lang['listbox'] = 'Liste kutusu (Tek-Seçim)';
 $_lang['listbox-multiple'] = 'Liste kutusu (Çoklu-Seçim)';
-$_lang['list-multiple-legacy'] = 'Çoklu eski liste';
 $_lang['option'] = 'Radyo Seçenekleri';
 $_lang['checkbox'] = 'Onay Kutusu';
 $_lang['image'] = 'Resim';
