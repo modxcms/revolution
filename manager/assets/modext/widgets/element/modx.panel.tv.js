@@ -561,7 +561,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
     }
 
     ,showInputProperties: function(cb,rc,i) {
-        var tvTypesWithOptions = ['checkbox', 'list-multiple-legacy', 'listbox-multiple', 'listbox', 'option', 'tag'],
+        var tvTypesWithOptions = ['checkbox', 'listbox-multiple', 'listbox', 'option', 'tag'],
             tvType = Ext.getCmp('modx-tv-type').value,
             tvOptions = Ext.getCmp('modx-tv-elements'),
             tvOptionsLabel = Ext.select('label[for="' + tvOptions.id + '"]'),

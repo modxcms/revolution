@@ -142,6 +142,8 @@ $cleanup = [
         'src/Revolution/sqlsrv/modAction.php',
         'src/Revolution/sqlsrv/modAccessAction.php',
         'src/Revolution/modManagerControllerDeprecated.php',
+        'src/Revolution/Processors/Element/TemplateVar/Renders/mgr/input/list-multiple-legacy.class.php',
+        'src/Revolution/Processors/Element/TemplateVar/Renders/mgr/inputproperties/list-multiple-legacy.php',
     ],
     'manager' => [
         'min/',
@@ -149,6 +151,8 @@ $cleanup = [
         'assets/modext/widgets/security/modx.grid.role.user.js',
         'assets/modext/workspace/lexicon/language.grid.js',
         'assets/modext/workspace/lexicon/lexicon.topic.grid.js',
+        'templates/default/element/tv/renders/input/list-multiple-legacy.tpl',
+        'templates/default/element/tv/renders/inputproperties/list-multiple-legacy.tpl',
     ],
 ];
 
