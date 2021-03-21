@@ -14,7 +14,6 @@ $_lang['richtext'] = 'WYSIWYG';
 $_lang['dropdown'] = 'Rozbalovací seznam';
 $_lang['listbox'] = 'Seznam (jeden vybraný)';
 $_lang['listbox-multiple'] = 'Seznam (více vybraných)';
-$_lang['list-multiple-legacy'] = 'Seznam s více možnostmi';
 $_lang['option'] = 'Přepínače';
 $_lang['checkbox'] = 'Zaškrtávací políčko';
 $_lang['image'] = 'Obrázek';
