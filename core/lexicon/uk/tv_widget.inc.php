@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Найпізніший час';
 $_lang['latest_time_desc'] = 'Найпізніший час, який можна вибрати.';
 $_lang['listbox'] = 'Список (одиночний вибір)';
 $_lang['listbox-multiple'] = 'Список (множинний вибір)';
-$_lang['list-multiple-legacy'] = 'Застарілий список з множинним вибором';
 $_lang['lower_case'] = 'Нижній регістр';
 $_lang['max_length'] = 'Максимальна довжина';
 $_lang['min_length'] = 'Мінімальна довжина';
