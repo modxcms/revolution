@@ -62,7 +62,6 @@ $_lang['latest_time'] = 'Позднее время';
 $_lang['latest_time_desc'] = 'Самое позднее время, которое можно выбрать.';
 $_lang['listbox'] = 'Список (одиночный выбор)';
 $_lang['listbox-multiple'] = 'Список (множественный выбор)';
-$_lang['list-multiple-legacy'] = 'Устаревший список множественного выбора';
 $_lang['lower_case'] = 'Нижний регистр';
 $_lang['max_length'] = 'Максимальная длина';
 $_lang['min_length'] = 'Минимальная длина';
