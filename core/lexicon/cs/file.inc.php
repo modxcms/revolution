@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'Nastala neznámá chyba při přejmenovává
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
+$_lang['file_folder_err_update'] = 'Nastala chyba při aktualizaci adresáře.';
 $_lang['file_folder_parent'] = 'Nadřazená složka';
 $_lang['file_folder_remove'] = 'Odstranit složku';
 $_lang['file_folder_remove_confirm'] = 'Jste si jisti, že chcete odstranit adresář: "[[+directory]]"?<br />To by mohlo potenciálně poškodit vaše webové stránky.';

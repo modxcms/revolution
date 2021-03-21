@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'Ett okänt fel inträffade när namnet på k
 $_lang['file_folder_err_rename_protected'] = 'Det är inte tillåtet att ändra namn på den skyddade systemmappen.';
 $_lang['file_folder_err_remove'] = 'Ett fel inträffade när katalogen skulle tas bort.';
 $_lang['file_folder_err_remove_protected'] = 'Det är inte tillåtet att ta bort den skyddade systemmappen.';
+$_lang['file_folder_err_update'] = 'An error occurred while trying to update the directory.';
 $_lang['file_folder_parent'] = 'Föräldrakatalog';
 $_lang['file_folder_remove'] = 'Ta bort katalog';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
