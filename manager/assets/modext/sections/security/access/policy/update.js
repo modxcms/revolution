@@ -31,7 +31,7 @@ MODx.page.UpdateAccessPolicy = function(config) {
             ,id: 'modx-abtn-cancel'
             ,params: {a:'security/permission'}
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
