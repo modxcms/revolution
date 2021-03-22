@@ -38,7 +38,7 @@ MODx.page.UpdateContext = function(config) {
                 a: 'context'
             }
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]

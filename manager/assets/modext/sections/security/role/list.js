@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-	MODx.load({ xtype: 'page-roles' });
+    MODx.load({ xtype: 'page-roles' });
 });
 
 /**
@@ -11,9 +11,9 @@ Ext.onReady(function() {
  * @xtype page-roles
  */
 MODx.page.ListRoles = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		buttons: [{
+    config = config || {};
+    Ext.applyIf(config,{
+        buttons: [{
             process: 'new'
             ,text: _('new')
             ,id: 'modx-abtn-new'
@@ -25,7 +25,7 @@ MODx.page.ListRoles = function(config) {
             text: _('cancel')
             ,id: 'modx-abtn-cancel'
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
@@ -33,8 +33,8 @@ MODx.page.ListRoles = function(config) {
             xtype: 'grid-role'
             ,renderTo: 'role_grid'
         }]
-	});
-	MODx.page.ListRoles.superclass.constructor.call(this,config);
+    });
+    MODx.page.ListRoles.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.ListRoles,MODx.Component);
 Ext.reg('page-roles',MODx.page.ListRoles);

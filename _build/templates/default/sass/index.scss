@@ -1539,38 +1539,16 @@ iframe[classname="x-hidden"] {
   }
 }
 
-#modx-abtn-menu-list {
-  .x-menu-item {
-    padding: 10px 20px;
+#modx-abtn-delete {
+  color: $red;
+}
 
-    .x-menu-item-text {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
+#modx-abtn-undelete {
+  color: $green;
+}
 
-      .icon {
-        text-align: center;
-        margin-left: 10px;
-        @extend .#{$fa-css-prefix}-fw;
-      }
-    }
-  }
-
-  #modx-abtn-delete {
-    color: $red;
-
-    &:hover {
-      color: $red;
-    }
-  }
-
-  #modx-abtn-undelete {
-    color: $green;
-
-    &:hover {
-      color: $green;
-    }
-  }
+#modx-abtn-help {
+  color: $colorSplash;
 }
 
 #modx-resource-tabs {
