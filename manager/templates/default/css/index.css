@@ -18653,6 +18653,9 @@ input::-moz-focus-inner {
       z-index: 3;
       /* needs to stay above the transparent file input field */ }
 
+#x-form-el-modx-user-photo .x-form-file-trigger:before {
+  content: "\f1c5"; }
+
 /* .x-form-field-wrap */
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
 .x-form-check-wrap,
