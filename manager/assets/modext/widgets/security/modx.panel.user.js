@@ -516,6 +516,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,fieldLabel: _('username')
             ,description: _('user_username_desc')
             ,xtype: 'textfield'
+            ,allowBlank: false
             ,anchor: '100%'
             ,autoCreate: {tag: "input", type: "text", size: "20", autocomplete: "off", msgTarget: "under"}
             ,listeners: {
@@ -539,7 +540,8 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,anchor: '100%'
             ,maxLength: 255
         },{
-            fieldLabel: _('user_photo')
+            id: 'modx-user-photo'
+            ,fieldLabel: _('user_photo')
             ,name: 'photo'
             ,xtype: 'modx-combo-browser'
             ,hideFiles: true
