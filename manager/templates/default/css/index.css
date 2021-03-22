@@ -22047,7 +22047,11 @@ ul.x-tab-strip-bottom {
   background: #CF1124; }
 
 #modx-panel-system-info .x-form-label-left .x-form-item {
-  padding: 0; }
+  padding: 0 5px; }
+  #modx-panel-system-info .x-form-label-left .x-form-item:nth-child(2n) {
+    background: #F0F0F0; }
+  #modx-panel-system-info .x-form-label-left .x-form-item .x-form-display-field {
+    padding: 7px 0; }
 
 @media screen and (max-width: 960px) {
   .dashboard-buttons .dashboard-button {
