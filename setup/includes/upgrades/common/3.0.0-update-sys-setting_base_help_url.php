@@ -10,6 +10,6 @@ $base_help_url = $modx->getObject(modSystemSetting::class, [
     'value' => '//docs.modx.com/display/revolution20/',
 ]);
 if ($base_help_url) {
-    $base_help_url->set('value', '//docs.modx.com/3.x/en/index');
+    $base_help_url->set('value', '//docs.modx.com/help/');
     $base_help_url->save();
 }
