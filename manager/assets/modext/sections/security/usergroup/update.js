@@ -28,7 +28,7 @@ MODx.page.UpdateUserGroup = function(config) {
                 MODx.loadPage('security/permission')
             }
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
