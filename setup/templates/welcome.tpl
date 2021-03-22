@@ -1,4 +1,4 @@
-<script type="text/javascript" src="assets/js/sections/welcome.js"></script>
+<script src="assets/js/sections/welcome.js"></script>
 <form id="welcome" action="?action=welcome" method="post">
 <div>
     <h2>{$_lang.welcome}</h2>

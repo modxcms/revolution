@@ -23,7 +23,7 @@ class ResourceTrashManagerController extends modManagerController
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/resource/modx.grid.trash.js');
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/resource/modx.panel.trash.js');
         $this->addJavascript($mgrUrl . 'assets/modext/sections/resource/trash/index.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() { MODx.add("modx-page-trash"); });</script>');
+        $this->addHtml('<script>Ext.onReady(function() { MODx.add("modx-page-trash"); });</script>');
     }
 
     /**

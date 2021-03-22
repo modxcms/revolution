@@ -39,7 +39,7 @@ class ElementPluginCreateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.plugin.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/plugin/create.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

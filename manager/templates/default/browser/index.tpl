@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}">
+<!doctype html>
+<html {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.manager_lang_attribute}" xml:lang="{$_config.manager_lang_attribute}">
 <head>
 <title>MODX :: {$_lang.modx_resource_browser}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
@@ -9,15 +9,15 @@
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index{if $_config.compress_css}-min{/if}.css" />
 
 {if isset($_config.ext_debug) && $_config.ext_debug}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js"></script>
 {else}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all.js"></script>
 {/if}
-<script src="{$_config.manager_url}assets/modext/core/modx.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=category,file,resource&action={$smarty.get.a|strip_tags|default:''}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags|default:''}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/core/modx.js"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=category,file,resource&action={$smarty.get.a|strip_tags|default:''}"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags|default:''}{if $_ctx}&wctx={$_ctx}{/if}"></script>
 
 {$maincssjs}
 
@@ -30,7 +30,7 @@
 <body>
 
 {literal}
-<script type="text/javascript">
+<script>
 Ext.onReady(function() {
     Ext.QuickTips.init();
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';{/literal}

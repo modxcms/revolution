@@ -11,22 +11,22 @@
 <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
 
 {if isset($_config.ext_debug) && $_config.ext_debug}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js"></script>
 {else}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all.js"></script>
 {/if}
-<script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,trash,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}" type="text/javascript"></script>
-<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,trash,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}"></script>
 
 {$maincssjs}
 {foreach from=$cssjs item=scr}
 {$scr}
 {/foreach}
 
-<script type="text/javascript">
+<script>
     Ext.onReady(function() {
         // Enable site name tooltip (on overflow only)
         if( Ext.get('site_name').dom.scrollWidth > Ext.get('site_name').dom.clientWidth ){

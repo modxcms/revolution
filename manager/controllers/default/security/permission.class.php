@@ -45,7 +45,7 @@ class SecurityPermissionManagerController extends modManagerController {
         $canAddUserGroup = $this->modx->hasPermission('usergroup_new') ? 1 : 0;
         $canEditUserGroup = $this->modx->hasPermission('usergroup_edit') ? 1 : 0;
         $canDeleteUserGroup = $this->modx->hasPermission('usergroup_delete') ? 1 : 0;
-        $this->addHtml('<script type="text/javascript">'
+        $this->addHtml('<script>'
                 .'MODx.perm.usergroup_view = '.$canListUserGroups.';'
                 .'MODx.perm.view_role = '.$canListRoles.';'
                 .'MODx.perm.policy_view = '.$canListPolicies.';'

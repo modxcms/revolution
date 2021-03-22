@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!doctype html>
+<html xml:lang="en">
 <head>
 	<title><?php echo $moduleName; ?> &raquo; Install</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style type="text/css">
-         @import url(./style/style.css);
+        @import url(./style/style.css);
     </style>
-</head>	
+</head>
 
 <body>
 

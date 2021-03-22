@@ -42,7 +42,7 @@ class SystemDashboardsCreateManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboard.js");
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/create.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
+        $this->addHtml('<script>Ext.onReady(function() {
     MODx.add("modx-page-dashboard-create");
 });</script>');
     }

@@ -31,4 +31,4 @@
 
 
 </div>
-<script type="text/javascript" src="assets/modext/sections/context/view.js"></script>
+<script src="assets/modext/sections/context/view.js"></script>

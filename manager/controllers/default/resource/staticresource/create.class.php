@@ -21,7 +21,7 @@ class StaticResourceCreateManagerController extends ResourceCreateManagerControl
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.static.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/static/create.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
 // <![CDATA[
 MODx.config.publish_document = "'.$this->canPublish.'";
 MODx.onDocFormRender = "'.$this->onDocFormRender.'";
@@ -41,7 +41,7 @@ Ext.onReady(function() {
         /* load RTE */
         $this->loadRichTextEditor();
     }
-    
+
     /**
      * Return the location of the template file
      * @return string

@@ -10,7 +10,7 @@
     class="textfield x-form-text x-form-field"
     style="width: 283px;"
 />
-<script type="text/javascript">
+<script>
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
