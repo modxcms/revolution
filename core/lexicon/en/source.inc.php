@@ -66,13 +66,13 @@ $_lang['prop_file.baseUrlRelative_desc'] = 'If the Base URL setting above is not
 $_lang['imageExtensions'] = 'imageExtensions';
 $_lang['prop_file.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
 $_lang['skipFiles'] = 'skipFiles';
-$_lang['prop_file.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
+$_lang['prop_file.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and directories that match any of these.';
 $_lang['thumbnailQuality'] = 'thumbnailQuality';
 $_lang['prop_file.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'The image type to render thumbnails as.';
-$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and folders.';
-$_lang['no_move_folder'] = 'The Media Source driver does not support moving of folders at this time.';
+$_lang['prop_file.visibility_desc'] = 'Default visibility for new files and directories.';
+$_lang['no_move_folder'] = 'The Media Source driver does not support moving of directories at this time.';
 
 /* s3 source type */
 $_lang['bucket'] = 'Bucket';
@@ -80,13 +80,13 @@ $_lang['prop_s3.bucket_desc'] = 'The S3 Bucket to load your data from.';
 $_lang['prop_s3.key_desc'] = 'The Amazon key for authentication to the bucket.';
 $_lang['prop_s3.imageExtensions_desc'] = 'A comma-separated list of file extensions to use as images. MODX will attempt to make thumbnails of files with these extensions.';
 $_lang['prop_s3.secret_key_desc'] = 'The Amazon secret key for authentication to the bucket.';
-$_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and folders that match any of these.';
+$_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over and hide files and directories that match any of these.';
 $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
-$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
-$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
+$_lang['prop_s3.prefix_desc'] = 'Optional path/directory prefix';
+$_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of directories at this time.';
 
 /* ftp source type */
 $_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
@@ -94,7 +94,7 @@ $_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymo
 $_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
 $_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
 $_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
-$_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
+$_lang['prop_ftp.root_desc'] = 'The root directory, it will be opened after connection';
 $_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
 $_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
 $_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
