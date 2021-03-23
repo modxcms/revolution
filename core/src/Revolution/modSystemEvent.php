@@ -68,9 +68,11 @@ class modSystemEvent {
      * modSystemEvent constructor.
      * @param string $name Event name
      */
-    public function __construct($name)
+    public function __construct($name = null)
     {
-        $this->name = $name;
+        if ($name) {
+            $this->name = $name;
+        }
     }
 
     /**
