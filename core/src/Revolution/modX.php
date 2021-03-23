@@ -270,11 +270,6 @@ class modX extends xPDO {
 
     /**
      * @deprecated
-     * @var modSystemEvent $Event
-     */
-    public $Event= null;
-    /**
-     * @deprecated
      * @var string $documentOutput
      */
     public $documentOutput= null;
@@ -1649,64 +1644,51 @@ class modX extends xPDO {
     /**
      * Invokes a specified Event with an optional array of parameters.
      *
-     * @todo refactor this completely, yuck!!
-     *
      * @access public
      * @param string $eventName Name of an event to invoke.
      * @param array $params Optional params provided to the elements registered with an event.
      * @return bool|array
      */
     public function invokeEvent($eventName, array $params= []) {
-        if (!$eventName)
+        if (!$eventName) {
             return false;
-        if ($this->eventMap === null && $this->context instanceof modContext)
+        }
+        if ($this->eventMap === null && $this->context instanceof modContext) {
             $this->_initEventMap($this->context->get('key'));
+        }
         if (!isset ($this->eventMap[$eventName])) {
             //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
-        $results= [];
+        $results = [];
         if (count($this->eventMap[$eventName])) {
-            $this->event= new modSystemEvent();
+            $this->event = new modSystemEvent($eventName);
             foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
                 /** @var modPlugin $plugin */
-                $plugin= null;
-                if (!version_compare(PHP_VERSION, '5.4', '>=')) {
-                    $this->Event = & $this->event;
-                } else {
-                    $this->Event = clone $this->event;
-                }
-                $this->event->resetEventObject();
-                $this->event->name= $eventName;
-                if (isset ($this->pluginCache[$pluginId])) {
-                    $plugin= $this->newObject(modPlugin::class);
+                $plugin = null;
+                if (isset($this->pluginCache[$pluginId])) {
+                    $plugin = $this->newObject(modPlugin::class);
                     $plugin->fromArray($this->pluginCache[$pluginId], '', true, true);
                     $plugin->_processed = false;
                     if ($plugin->get('disabled')) {
-                        $plugin= null;
+                        $plugin = null;
                     }
                 } else {
-                    $plugin= $this->getObject(modPlugin::class, ['id' => intval($pluginId), 'disabled' => '0'], true);
+                    $plugin = $this->getObject(modPlugin::class, ['id' => (int)$pluginId, 'disabled' => '0'], true);
                 }
-                if ($plugin && !$plugin->get('disabled')) {
-                    $this->event->plugin =& $plugin;
-                    $this->event->activated= true;
-                    $this->event->activePlugin= $plugin->get('name');
-                    $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
-
+                if ($plugin) {
                     /* merge in plugin properties */
-                    $eventParams = array_merge($plugin->getProperties(),$params);
-
-                    $msg= $plugin->process($eventParams);
-                    $results[]= $this->event->_output;
+                    $eventParams = array_merge($plugin->getProperties(), $params);
+                    $msg = $plugin->process($eventParams);
+                    if ($this->event->_output) {
+                        $results[] = $this->event->_output;
+                    }
+                    $this->event->_output = '';
                     if ($msg && is_string($msg)) {
-                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
+                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] ' . $msg);
                     } elseif ($msg === false) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin ' . $plugin->name . ' failed!');
                     }
-                    $this->event->plugin = null;
-                    $this->event->activePlugin= '';
-                    $this->event->propertySet= '';
                     if (!$this->event->isPropagatable()) {
                         break;
                     }

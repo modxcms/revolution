@@ -31,22 +31,12 @@ class modSystemEvent {
      */
     public $name = '';
     /**
-     * The name of the active plugin being invoked
-     * @var string $activePlugin
-     * @deprecated
-     */
-    public $activePlugin = '';
-    /**
      * A reference/instance of the currently processed modPlugin object
      *
      * @var modPlugin|null
-     */
-    public $plugin = null;
-    /**
-     * @var string The name of the active property set for the invoked Event
      * @deprecated
      */
-    public $propertySet = '';
+    public $plugin = null;
     /**
      * Whether or not to allow further execution of Plugins for this event
      * @var boolean $_propagate
@@ -60,6 +50,7 @@ class modSystemEvent {
     /**
      * Whether or not this event has been activated
      * @var boolean
+     * @deprecated
      */
     public $activated;
     /**
@@ -74,23 +65,20 @@ class modSystemEvent {
     public $params;
 
     /**
-     * Display a message to the user during the event.
-     *
-     * @todo Remove this; the centralized modRegistry will handle configurable
-     * logging of any kind of message or data to any repository or output
-     * context.  Use {@link modX::_log()} in the meantime.
-     * @param string $msg The message to display.
+     * modSystemEvent constructor.
+     * @param string $name Event name
      */
-    public function alert($msg) {}
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
 
     /**
      * Render output from the event.
      * @param string $output The output to render.
      */
     public function output($output) {
-        if ($this->_output === '') {
-            $this->_output = $output;
-        } else {
+        if (is_string($output)) {
             $this->_output .= $output;
         }
     }
@@ -110,16 +98,5 @@ class modSystemEvent {
      */
     public function isPropagatable() {
         return $this->_propagate;
-    }
-
-    /**
-     * Reset the event instance for reuse.
-     */
-    public function resetEventObject(){
-        $this->returnedValues = null;
-        $this->name = '';
-        $this->_output = '';
-        $this->_propagate = true;
-        $this->activated = false;
     }
 }
