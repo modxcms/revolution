@@ -21732,7 +21732,7 @@ ul.x-tab-strip-bottom {
   display: flex;
   -ms-flex-flow: row wrap;
       flex-flow: row wrap;
-  margin: -1rem 0 0 -1rem !important;
+  margin: -0.5rem 0 0 -1rem !important;
   padding: 0 15px; }
   .dashboard .dashboard-button {
     padding: 5px 20px;
