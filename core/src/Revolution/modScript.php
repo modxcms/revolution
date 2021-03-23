@@ -84,7 +84,7 @@ class modScript extends modElement
                 $scriptProperties = $this->xpdo->event->params = $this->_properties; /* store params inside event object */
                 ob_start();
                 unset($properties, $content);
-                extract($scriptProperties, EXTR_SKIP);
+                extract($scriptProperties, EXTR_SKIP|EXTR_REFS);
                 $includeResult = include $this->_scriptFilename;
                 $includeResult = ($includeResult === null ? '' : $includeResult);
                 if (ob_get_length()) {
