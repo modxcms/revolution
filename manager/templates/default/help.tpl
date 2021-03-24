@@ -62,7 +62,7 @@
         <p><a href="https://twitter.com/modx" target="_blank" rel="noopener noreferrer"><i class="icon icon-2x icon-twitter"></i>Twitter: twitter.com/modx</a></p>
         <p><a href="https://www.facebook.com/modxcms" target="_blank" rel="noopener noreferrer"><i class="icon icon-2x icon-facebook"></i>Facebook: www.facebook.com/modxcms</a></p>
         <p><a href="https://www.linkedin.com/groups/MODX-697477" target="_blank" rel="noopener noreferrer"><i class="icon icon-2x icon-linkedin"></i>LinkedIn: linkedin.com/groups/MODX-697477</a></p>
-        <p><a href="http://www.pinterest.com/modx/" target="_blank" rel="noopener noreferrer"><i class="icon icon-2x icon-pinterest"></i>Pinterest: pinterest.com/modx </a></p>
+        <p><a href="https://www.pinterest.com/modx/" target="_blank" rel="noopener noreferrer"><i class="icon icon-2x icon-pinterest"></i>Pinterest: pinterest.com/modx </a></p>
     </div>
 
     <div id="aboutMODX">

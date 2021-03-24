@@ -8,7 +8,7 @@
  */
 $_lang['help_page_title'] = 'Help & Support';
 $_lang['help_main_head'] = 'MODX is Here for You';
-$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/community/free-support-options">modx.com/community/free-support-options</a> or call +1 (469) 777-6639';
+$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/community/free-support-options" target="_blank" rel="noopener noreferrer">modx.com/community/free-support-options</a> or call +1 (469) 777-6639';
 $_lang['forums'] = 'Forums';
 $_lang['forums_title'] = 'MODX Community Forums';
 $_lang['forums_description'] = 'Free help from the Community';
