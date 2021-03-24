@@ -328,7 +328,7 @@ class TopMenu
                 $attributes = ' href="?a='.$menu['action'].$menu['params'].'"'.' aria-label="'.$menu['text'].'"';
             }
             if (!empty($menu['handler'])) {
-                $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
+                $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "'.' aria-label="'.$menu['text'].'"';
             }
             $menu['icon'] = $menu['icon'] ?? '';
             $smTpl .= '<a'.$attributes.'>'.$menu['text'].$menu['icon'].$description.'</a>'."\n";
