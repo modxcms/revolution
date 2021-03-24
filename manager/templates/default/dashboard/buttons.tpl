@@ -2,12 +2,9 @@
     <div class="body{if $customizable} draggable{/if}">
         {if $customizable}
             <div class="action-buttons">
-                <button class="action icon icon-compress{if $size == 'quarter'} hidden{/if}"
-                        data-action="shrink"></button>
-                <button class="action icon icon-expand{if $size == 'double'} hidden{/if}"
-                        data-action="expand"></button>
-                <button class="action icon icon-times-circle"
-                        data-action="remove"></button>
+                <button class="action icon icon-compress{if $size == 'quarter'} hidden{/if}" data-action="shrink" aria-label="Shrink"></button>
+                <button class="action icon icon-expand{if $size == 'double'} hidden{/if}" data-action="expand" aria-label="Expand"></button>
+                <button class="action icon icon-times-circle" data-action="remove" aria-label="Remove"></button>
             </div>
         {/if}
         <div class="dashboard-buttons">

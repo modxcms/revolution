@@ -1,8 +1,8 @@
 <!doctype html>
 <html dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
 <head>
-<title>{if $_pagetitle}{$_pagetitle|escape} | {/if}{$_config.site_name|strip_tags|escape}</title>
 <meta charset="{$_config.modx_charset}" />
+<title>{if $_pagetitle}{$_pagetitle|escape} | {/if}{$_config.site_name|strip_tags|escape}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="google" content="notranslate" />
 

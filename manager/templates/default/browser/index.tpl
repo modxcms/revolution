@@ -1,8 +1,8 @@
 <!doctype html>
 <html {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
 <head>
-<title>MODX :: {$_lang.modx_resource_browser}</title>
 <meta charset="{$_config.modx_charset}" />
+<title>MODX :: {$_lang.modx_resource_browser}</title>
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/index{if $_config.compress_css}-min{/if}.css" />

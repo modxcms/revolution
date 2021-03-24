@@ -3,9 +3,9 @@
         <div class="title[[+customizable:is=`1`:then=` draggable`]]">[[+name_trans]]</div>
         [[+customizable:is=`1`:then=`
             <div class="action-buttons">
-                <button class="action icon icon-compress [[+size:is=`quarter`:then=`hidden`]]" data-action="shrink"></button>
-                <button class="action icon icon-expand [[+size:is=`double`:then=`hidden`]]" data-action="expand"></button>
-                <button class="action icon icon-times-circle" data-action="remove"></button>
+                <button class="action icon icon-compress [[+size:is=`quarter`:then=`hidden`]]" data-action="shrink" aria-label="Shrink"></button>
+                <button class="action icon icon-expand [[+size:is=`double`:then=`hidden`]]" data-action="expand" aria-label="Expand"></button>
+                <button class="action icon icon-times-circle" data-action="remove" aria-label="Remove"></button>
             </div>
         `]]
     </div>
