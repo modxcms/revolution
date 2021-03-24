@@ -227,11 +227,13 @@
     font-style: italic;
   }
 
-  .configcheck a, .news_article a {
+  .configcheck a,
+  .news_article a {
     text-decoration: underline;
   }
 
-  .configcheck a:hover, .news_article a:hover {
+  .configcheck a:hover,
+  .news_article a:hover {
     text-decoration: none;
   }
 
@@ -352,7 +354,7 @@
     }
 
     .user-group {
-      color: $mediumGray;
+      color: $darkGray;
     }
   }
 
@@ -370,7 +372,7 @@
     }
 
     &-time {
-      color: $mediumGray;
+      color: $darkGray;
     }
   }
 }
@@ -403,14 +405,14 @@
       color: $black;
 
       .icon {
-        opacity: .7;
+        opacity: 0.7;
       }
     }
 
     &-icon {
       border-radius: 20px;
       border: 1px solid $green;
-      background: rgba(108, 178, 74, .2);
+      background: rgba(108, 178, 74, 0.2);
       padding: 10px;
       text-align: center;
 
@@ -439,17 +441,17 @@
 ::-webkit-scrollbar-thumb {
   width: 1rem;
   height: 1rem;
-  border: .25rem solid transparent;
-  border-radius: .5rem;
+  border: 0.25rem solid transparent;
+  border-radius: 0.5rem;
   background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .1);
+  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, .2);
+  box-shadow: inset 0 0 0 1rem rgba(85, 108, 136, 0.2);
 }
 
 ::-webkit-resizer,
@@ -523,7 +525,6 @@
 @include grid-media($desktop) {
   .dashboard {
     .dashboard-block {
-
       &.quarter,
       &.one-third,
       &.half,
