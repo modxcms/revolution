@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset={$_config.mail_charset}"/>
+    <meta charset="{$_config.modx_charset}" />
     <title>{$_config.site_name}</title>
     <style type="text/css">
         body { background: #f7f7f7;margin: 0;padding: 0;width: 100%;height: 100%;font-family: Arial, serif;font-size: 14px;color: #293034; }

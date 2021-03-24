@@ -2,7 +2,7 @@
 <html {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
 <head>
     <title>MODx :: {$_lang.permission_denied}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
+    <meta charset="{$_config.modx_charset}" />
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all.css" />
     <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/xtheme-gray-extend.css" />
     <link rel="stylesheet" type="text/css" href="{$indexCss}" />
