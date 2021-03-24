@@ -25,6 +25,52 @@ use xPDO\xPDO;
  */
 class modAccessPolicy extends xPDOSimpleObject
 {
+    const POLICY_RESOURCE = 'Resource';
+    const POLICY_ADMINISTRATOR = 'Administrator';
+    const POLICY_LOAD_ONLY = 'Load Only';
+    const POLICY_LOAD_LIST_VIEW = 'Load, List and View';
+    const POLICY_OBJECT = 'Object';
+    const POLICY_ELEMENT = 'Element';
+    const POLICY_CONTENT_EDITOR = 'Content Editor';
+    const POLICY_MEDIA_SOURCE_ADMIN = 'Media Source Admin';
+    const POLICY_MEDIA_SOURCE_USER = 'Media Source User';
+    const POLICY_DEVELOPER = 'Developer';
+    const POLICY_CONTEXT = 'Context';
+    const POLICY_HIDDEN_NAMESPACE = 'Hidden Namespace';
+
+    /**
+     * Returns list of core Policies
+     *
+     * @return array
+     */
+    public static function getCorePolicies()
+    {
+        return [
+            self::POLICY_RESOURCE,
+            self::POLICY_ADMINISTRATOR,
+            self::POLICY_LOAD_ONLY,
+            self::POLICY_LOAD_LIST_VIEW,
+            self::POLICY_OBJECT,
+            self::POLICY_ELEMENT ,
+            self::POLICY_CONTENT_EDITOR,
+            self::POLICY_MEDIA_SOURCE_ADMIN,
+            self::POLICY_MEDIA_SOURCE_USER,
+            self::POLICY_DEVELOPER,
+            self::POLICY_CONTEXT,
+            self::POLICY_HIDDEN_NAMESPACE,
+        ];
+    }
+
+    /**
+     * @param $name string The name of access policy
+     *
+     * @return bool
+     */
+    public function isCorePolicy($name)
+    {
+        return in_array($name, static::getCorePolicies(), true);
+    }
+
     /**
     * Get the permissions for this access policy, in array format.
     *

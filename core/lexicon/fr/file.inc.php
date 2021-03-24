@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'Une erreur inconnue s\'est produite en tenta
 $_lang['file_folder_err_rename_protected'] = 'Le renommage du répertoire système protégé n\'est pas autorisé.';
 $_lang['file_folder_err_remove'] = 'Une erreur s\'est produite lors de la suppression du répertoire.';
 $_lang['file_folder_err_remove_protected'] = 'La suppression du répertoire système protégé n\'est pas autorisée.';
+$_lang['file_folder_err_update'] = 'An error occurred while trying to update the directory.';
 $_lang['file_folder_parent'] = 'Répertoire parent';
 $_lang['file_folder_remove'] = 'Supprimer le répertoire';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';

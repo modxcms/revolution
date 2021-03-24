@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'Возникла неизвестная ош
 $_lang['file_folder_err_rename_protected'] = 'Переименование защищенного системного каталога не допускается.';
 $_lang['file_folder_err_remove'] = 'Произошла ошибка при попытке удалить папку.';
 $_lang['file_folder_err_remove_protected'] = 'Удаление защищенного системного каталога не допускается.';
+$_lang['file_folder_err_update'] = 'Произошла ошибка при редактировании категории.';
 $_lang['file_folder_parent'] = 'Родительский каталог';
 $_lang['file_folder_remove'] = 'Удалить каталог';
 $_lang['file_folder_remove_confirm'] = 'Вы уверены, что хотите удалить каталог: «[[+directory]]»?<br />Это может нарушить работу сайта.';

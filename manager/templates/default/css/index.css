@@ -18653,6 +18653,9 @@ input::-moz-focus-inner {
       z-index: 3;
       /* needs to stay above the transparent file input field */ }
 
+#x-form-el-modx-user-photo .x-form-file-trigger:before {
+  content: "\f1c5"; }
+
 /* .x-form-field-wrap */
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
 .x-form-check-wrap,
@@ -22047,7 +22050,11 @@ ul.x-tab-strip-bottom {
   background: #CF1124; }
 
 #modx-panel-system-info .x-form-label-left .x-form-item {
-  padding: 0; }
+  padding: 0 5px; }
+  #modx-panel-system-info .x-form-label-left .x-form-item:nth-child(2n) {
+    background: #F0F0F0; }
+  #modx-panel-system-info .x-form-label-left .x-form-item .x-form-display-field {
+    padding: 7px 0; }
 
 @media screen and (max-width: 960px) {
   .dashboard-buttons .dashboard-button {

@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'حدث خطأ غير معروف أثناء �
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
+$_lang['file_folder_err_update'] = 'An error occurred while trying to update the directory.';
 $_lang['file_folder_parent'] = 'الدليل الحاوي';
 $_lang['file_folder_remove'] = 'حذف الدليل';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';

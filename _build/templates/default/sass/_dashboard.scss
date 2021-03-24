@@ -491,9 +491,17 @@
 }
 
 #modx-panel-system-info {
-    .x-form-label-left .x-form-item {
-        padding: 0;
+  .x-form-label-left .x-form-item {
+    padding: 0 5px;
+
+    &:nth-child(2n) {
+      background: $lighterGray;
     }
+
+    .x-form-display-field {
+      padding: 7px 0;
+    }
+  }
 }
 
 @include grid-media($desktop) {

@@ -119,13 +119,13 @@ MODx.panel.UpdateProfile = function(config) {
         ,items: [{
             columnWidth: .5
             ,items: [{
-                id: 'modx-user-fullname'
-                ,name: 'fullname'
-                ,fieldLabel: _('user_full_name')
-                ,xtype: 'textfield'
+                id: 'modx-user-username'
+                ,name: 'username'
+                ,fieldLabel: _('username')
+                ,description: _('user_username_desc')
+                ,xtype: 'statictextfield'
                 ,allowBlank: false
                 ,anchor: '100%'
-                ,maxLength: 255
             },{
                 id: 'modx-user-email'
                 ,name: 'email'
@@ -136,7 +136,15 @@ MODx.panel.UpdateProfile = function(config) {
                 ,anchor: '100%'
                 ,maxLength: 255
             },{
-                name: 'photo'
+                id: 'modx-user-fullname'
+                ,name: 'fullname'
+                ,fieldLabel: _('user_full_name')
+                ,xtype: 'textfield'
+                ,anchor: '100%'
+                ,maxLength: 255
+            },{
+                id: 'modx-user-photo'
+                ,name: 'photo'
                 ,fieldLabel: _('user_photo')
                 ,xtype: 'modx-combo-browser'
                 ,hideFiles: true

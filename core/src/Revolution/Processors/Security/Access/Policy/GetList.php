@@ -33,7 +33,7 @@ class GetList extends GetListProcessor
     public $checkListPermission = false;
     public $objectType = 'policy';
     public $permission = 'policy_view';
-    public $languageTopics = ['policy'];
+    public $languageTopics = ['policy', 'en:policy'];
 
     /**
     * @return bool
@@ -118,15 +118,12 @@ class GetList extends GetListProcessor
     */
     public function prepareRow(xPDOObject $object)
     {
-        $core = ['Resource', 'Object', 'Administrator', 'Load Only', 'Load, List and View'];
-        $policyArray = $object->toArray();
+        $policy = $object->toArray();
+
+        $policy['cls'] = $this->prepareRowClasses($object);
+
         $permissions = [];
-        $cls = 'pedit';
-        if (!in_array($object->get('name'), $core)) {
-            $cls .= ' premove';
-        }
-        $policyArray['cls'] = $cls;
-        if (!empty($policyArray['total_permissions'])) {
+        if (!empty($policy['total_permissions'])) {
             $data = $object->get('data');
             $ct = 0;
             if (!empty($data)) {
@@ -137,16 +134,35 @@ class GetList extends GetListProcessor
                     }
                 }
             }
-            $policyArray['active_permissions'] = $ct;
-            $policyArray['active_of'] = $this->modx->lexicon('active_of', [
-                'active' => $policyArray['active_permissions'],
-                'total' => $policyArray['total_permissions'],
+            $policy['active_permissions'] = $ct;
+            $policy['active_of'] = $this->modx->lexicon('active_of', [
+                'active' => $policy['active_permissions'],
+                'total' => $policy['total_permissions'],
             ]);
-            $policyArray['permissions'] = $permissions;
+            $policy['permissions'] = $permissions;
         }
 
-        unset($policyArray['data']);
+        unset($policy['data']);
 
-        return $policyArray;
+        $policy['description_trans'] = $this->modx->lexicon($policy['description']);
+
+        return $policy;
+    }
+
+    /**
+     * @param xPDOObject|modAccessPolicy $object
+     *
+     * @return string
+     */
+    protected function prepareRowClasses(xPDOObject $object)
+    {
+        if (!$object->isCorePolicy($object->get('name'))) {
+            return implode(' ', [
+                static::CLASS_ALLOW_EDIT,
+                static::CLASS_ALLOW_REMOVE
+            ]);
+        }
+
+        return static::CLASS_ALLOW_EDIT;
     }
 }

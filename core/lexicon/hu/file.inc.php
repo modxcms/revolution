@@ -67,6 +67,7 @@ $_lang['file_folder_err_rename'] = 'Ismeretlen hiba történt a mappa átnevezé
 $_lang['file_folder_err_rename_protected'] = 'A védett rendszermappa átnevezése nem engedélyezett.';
 $_lang['file_folder_err_remove'] = 'Hiba történt a mappa törlése közben.';
 $_lang['file_folder_err_remove_protected'] = 'A védett rendszermappa törlése nem engedélyezett.';
+$_lang['file_folder_err_update'] = 'Hiba történt a mappa frissítése közben.';
 $_lang['file_folder_parent'] = 'Szülő mappa';
 $_lang['file_folder_remove'] = 'Mappa törlése';
 $_lang['file_folder_remove_confirm'] = 'Biztosan törli a(z) "[[+directory]]" mappát? Összeomolhat tőle a weboldala.';
