@@ -48,7 +48,7 @@
                     <div class="info-item full_appname">{$_version.full_version|strip_tags|escape}</div>
                 </li>
                 <li id="modx-leftbar-trigger">
-                    <a href="javascript:;">
+                    <a href="javascript:;" aria-label="Expand / Collapse Menu">
                         <i class="icon"></i>
                     </a>
                 </li>
