@@ -31,7 +31,7 @@
     <thead>
     <tr>
         <td class="main-logo">
-            <a href="{$_config.site_url}" target="_blank">
+            <a href="{$_config.site_url}" target="_blank" rel="noopener noreferrer">
                 {if $_config.login_logo}
                     <img src="{$_config.login_logo}" alt="{$_config.site_name}"/>
                 {else}
@@ -54,7 +54,7 @@
             <table class="footer">
                 <tr>
                     <td>
-                        <a href="{$_config.site_url}" target="_blank">{$_config.site_name}</a>
+                        <a href="{$_config.site_url}" target="_blank" rel="noopener noreferrer">{$_config.site_name}</a>
                     </td>
                 </tr>
             </table>
