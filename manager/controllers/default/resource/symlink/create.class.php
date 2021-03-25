@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 class SymLinkCreateManagerController extends ResourceCreateManagerController {
+    public function checkPermissions() {
+        return $this->modx->hasPermission('new_document') && $this->modx->hasPermission('new_symlink');
+    }
+
     /**
      * Register custom CSS/JS for the page
      * @return void

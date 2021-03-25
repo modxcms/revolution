@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 class WebLinkCreateManagerController extends ResourceCreateManagerController {
+    public function checkPermissions() {
+        return $this->modx->hasPermission('new_document') && $this->modx->hasPermission('new_weblink');
+    }
+
     /**
      * Register custom CSS/JS for the page
      * @return void
