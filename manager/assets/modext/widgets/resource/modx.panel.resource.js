@@ -825,7 +825,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,items: [{
                 xtype: 'modx-combo-template'
                 ,fieldLabel: _('resource_template')
-                //,hideLabel: true
                 ,description: '<b>[[*template]]</b><br />'+_('resource_template_help')
                 ,name: 'template'
                 ,id: 'modx-resource-template'

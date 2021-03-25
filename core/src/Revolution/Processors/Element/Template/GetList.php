@@ -81,8 +81,7 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
             $preview = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
         }
 
-
-        $array  = array(
+        return array(
             'id'            => $object->get('id'),
             'templatename'  => $object->get('templatename'),
             'description'   => $object->get('description'),
@@ -90,7 +89,5 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
             'preview'       => $preview,
             'time'          => time()
         );
-
-        return $array;
     }
 }

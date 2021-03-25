@@ -111,7 +111,6 @@ MODx.panel.Template = function(config) {
                         ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
                         ,openTo: config.record.openTo || ''
                         ,id: 'modx-template-static-file'
-                        //,triggerClass: 'x-form-code-trigger'
                         ,anchor: '100%'
                         ,maxLength: 255
                         ,value: config.record.static_file || ''
@@ -406,42 +405,9 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         }
     }
     ,toggleStaticFile: function(cb) {
-        /*var flds = ['modx-template-static-file','modx-template-static-source'];
-        var fld;
-        var i;
-        var fldHelp;
-        if (cb.checked) {
-            for (i in flds) {
-                fld = Ext.getCmp(flds[i]);
-                if (fld) {
-                    fld.show();
-                    fld.updateBox(fld.getResizeEl().parent().getBox());
-
-                    fldHelp = Ext.getCmp(flds[i] + '-help');
-                    if (fldHelp) {
-                        fldHelp.show();
-                    }
-
-                }
-            }
-        } else {
-            for (i in flds) {
-                fld = Ext.getCmp(flds[i]);
-                if (fld) {
-                    fld.hide();
-
-                    fldHelp = Ext.getCmp(flds[i] + '-help');
-                    if (fldHelp) {
-                        fldHelp.hide();
-                    }
-                }
-            }
-        }*/
         var fields = [
             'modx-template-static-file',
-            'modx-template-static-file-help',
-            //'modx-template-static-source',
-            //'modx-template-static-source-help'
+            'modx-template-static-file-help'
         ];
 
         for (var i = 0; i < fields.length; i++) {

@@ -33,7 +33,7 @@ class GetList extends GetListProcessor
     public $permission = 'view';
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
-        $c->leftJoin('modContext', 'Context');
+        $c->leftJoin(\MODX\Revolution\modContext::class, 'Context');
 
         $query = $this->getProperty('query');
 

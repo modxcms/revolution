@@ -72,7 +72,6 @@ Ext.reg('modx-window-create-resource', MODx.window.CreateResource);
 
 MODx.panel.TemplatePicker = function(config) {
     config = config || {};
-    //console.log(config);
     Ext.applyIf(config, {
         xtype: 'panel',
         layout: 'form',
@@ -267,7 +266,6 @@ MODx.panel.TemplatePreview = function(config) {
 Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
     setPreview: function(record) {
         this.removeAll();
-        //console.log(record);
         if ('' == record.data.preview || undefined === record.data.preview) {
             this.addClass('x-form-template-preview-empty');
 

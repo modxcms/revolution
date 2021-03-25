@@ -12,6 +12,9 @@ namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modWebLink;
+use MODX\Revolution\modSymLink;
+use MODX\Revolution\modStaticResource;
 
 /**
  * Gets a dynamic toolbar for the Resource tree.
@@ -47,7 +50,7 @@ class GetToolbar extends Processor
         }
         if ($this->modx->hasPermission('new_weblink')) {
             $record = json_encode([
-                'class_key'     => 'MODX\\Revolution\\modWebLink',
+                'class_key'     => modWebLink::class,
                 'context_key'   => $this->modx->getOption('default_context'),
                 'parent'        => 0
             ]);
@@ -59,7 +62,7 @@ class GetToolbar extends Processor
         }
         if ($this->modx->hasPermission('new_symlink')) {
             $record = json_encode([
-                'class_key'     => 'MODX\\Revolution\\modSymLink',
+                'class_key'     => modSymLink::class,
                 'context_key'   => $this->modx->getOption('default_context'),
                 'parent'        => 0
             ]);
@@ -71,7 +74,7 @@ class GetToolbar extends Processor
         }
         if ($this->modx->hasPermission('new_static_resource')) {
             $record = json_encode([
-                'class_key'     =>  'MODX\\Revolution\\modStaticResource',
+                'class_key'     =>  modStaticResource::class,
                 'context_key'   =>  $this->modx->getOption('default_context'),
                 'parent'        =>  0
             ]);
