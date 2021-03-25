@@ -25,10 +25,8 @@ class modResourceDeleteProcessor extends modProcessor {
     public $children = array();
     /** @var int $deletedTime */
     public $deletedTime = 0;
+    public $permission = 'delete_document';
 
-    public function checkPermissions() {
-        return $this->modx->hasPermission('delete_document');
-    }
     public function getLanguageTopics() {
         return array('resource');
     }
@@ -45,10 +43,35 @@ class modResourceDeleteProcessor extends modProcessor {
         if (empty($this->resource)) return $this->modx->lexicon('resource_err_nfs',array('id' => $id));
 
         /* validate resource can be deleted */
-        if (!$this->resource->checkPolicy(array('save' => true, 'delete' => true))) {
+        if (!$this->checkDeletePermission() || !$this->resource->checkPolicy(array('save' => true, 'delete' => true))) {
             return $this->modx->lexicon('permission_denied');
         }
         $this->deletedTime = time();
+        return true;
+    }
+
+    public function checkDeletePermission()
+    {
+        $permissions = [$this->permission];
+        $classKey = $this->resource->get('class_key');
+
+        $map = [
+            'modWebLink' => 'delete_weblink',
+            'modSymLink' => 'delete_symlink',
+            'modStaticResource' => 'delete_resource',
+        ];
+        if (array_key_exists($classKey, $map)) {
+            $permissions[] = $map[$classKey];
+        }
+
+        foreach ($permissions as $permission) {
+            if (!$this->modx->hasPermission($permission)) {
+                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
+                $this->permission = $permission;
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -111,7 +134,7 @@ class modResourceDeleteProcessor extends modProcessor {
 
     /**
      * Attempt to add a lock to the Resource
-     * 
+     *
      * @return boolean
      */
     public function addLock() {
@@ -240,7 +263,7 @@ class modResourceDeleteProcessor extends modProcessor {
             'resource' => array('contexts' => array($this->resource->get('context_key'))),
         ));
     }
-    
+
     /**
      * Log the manager action
      *

@@ -106,6 +106,21 @@ $permissions[] = $xpdo->newObject('modAccessPermission',array(
     'value' => true,
 ));
 $permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'delete_weblink',
+    'description' => 'perm.delete_weblink_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'delete_symlink',
+    'description' => 'perm.delete_symlink_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
+    'name' => 'delete_static_resource',
+    'description' => 'perm.delete_static_resource_desc',
+    'value' => true,
+));
+$permissions[] = $xpdo->newObject('modAccessPermission',array(
     'name' => 'delete_eventlog',
     'description' => 'perm.delete_eventlog_desc',
     'value' => true,

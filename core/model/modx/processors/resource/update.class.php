@@ -540,9 +540,21 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                     $this->resourceUnDeleted = true;
                 }
             } else { /* delete */
-                if (!$this->modx->hasPermission('delete_document')) {
+                $hasPermission = $this->modx->hasPermission('delete_document');
+                $map = [
+                    'modWebLink' => 'delete_weblink',
+                    'modSymLink' => 'delete_symlink',
+                    'modStaticResource' => 'delete_resource',
+                ];
+                if (array_key_exists($this->object->get('class_key'), $map)) {
+                    $permission = $map[$this->object->get('class_key')];
+                    $hasPermission = $hasPermission && $this->modx->hasPermission($permission);
+                }
+
+                if (!$hasPermission) {
                     $this->setProperty('deleted',$this->object->get('deleted'));
-                } else {
+                }
+                else {
                     $this->object->set('deleted',true);
                     $this->resourceDeleted = true;
                 }
