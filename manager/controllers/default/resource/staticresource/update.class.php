@@ -83,4 +83,8 @@ MODx.perm.tree_show_resource_ids = '.($this->modx->hasPermission('tree_show_reso
     public function getTemplateFile() {
         return 'resource/staticresource/update.tpl';
     }
+
+    public function checkPermissions() {
+        return $this->modx->hasPermission('edit_document') && $this->modx->hasPermission('edit_static_resource');
+    }
 }

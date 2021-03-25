@@ -65,4 +65,8 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
         $this->resourceArray['responseCode'] = $this->resource->getProperty('responseCode','core',$_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently');
         return $placeholders;
     }
+
+    public function checkPermissions() {
+        return $this->modx->hasPermission('edit_document') && $this->modx->hasPermission('edit_weblink');
+    }
 }

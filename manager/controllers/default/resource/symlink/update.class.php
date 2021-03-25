@@ -59,4 +59,8 @@ class SymlinkUpdateManagerController extends ResourceUpdateManagerController {
     public function getTemplateFile() {
         return 'resource/symlink/update.tpl';
     }
+
+    public function checkPermissions() {
+        return $this->modx->hasPermission('edit_document') && $this->modx->hasPermission('edit_symlink');
+    }
 }
