@@ -817,7 +817,9 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         this.setValue(p.d);
         this.oldValue = false;
 
-        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
+        if(this.config.parentcmp !== 'modx-template-picker-parent-id') {
+            Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
+        }
     }
     ,onTriggerClick: function() {
         if (this.disabled) { return false; }
@@ -897,88 +899,6 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
     }
 });
 Ext.reg('modx-field-parent-change',MODx.ChangeParentField);
-
-
-MODx.combo.Resource = function(config) {
-    config = config || {};
-
-    Ext.applyIf(config,{
-        url: MODx.config.connector_url,
-        baseParams: {
-            action: 'Resource/GetList',
-            combo: 1,
-            limit: 0,
-            ignore: config.currentid || ''
-        },
-        fields: ['id', 'pagetitle', 'longtitle', 'context_key', 'context_name', 'time'],
-        name: 'resource',
-        hiddenName: 'resource',
-        displayField: 'pagetitle',
-        valueField: 'id',
-        pageSize: 20,
-        allowBlank: true,
-        editable: true,
-        typeAhead: true,
-        tpl: new Ext.XTemplate('<tpl for=".">' +
-            '<tpl if="!Ext.isEmpty(this.getGroup(values.context_name, values.time))">' +
-                '<div class="x-combo-list-group">{this.label:htmlEncode}</div>' +
-            '</tpl>' +
-            '<div class="x-combo-list-item x-combo-list-item-grouped">' +
-                '{pagetitle:htmlEncode}' +
-            '</div>' +
-        '</tpl>', {
-            group: null,
-            label: null,
-            getGroup: function(label, time) {
-                var group = time + '_' + label;
-
-                if (group !== this.group) {
-                    if (!Ext.isEmpty(group)) {
-                        this.group = group;
-
-                        return this.label = label;
-                    }
-                }
-                return null;
-            }
-        }),
-        parentcmp: null,
-        contextcmp: null,
-        listeners: {
-            'change': {
-                fn: this.setParentValue,
-                scope: this
-            }
-        }
-    });
-
-    MODx.combo.Resource.superclass.constructor.call(this, config);
-};
-
-Ext.extend(MODx.combo.Resource, MODx.combo.ComboBox, {
-    setParentValue: function(tf) {
-        var record = this.store.getById(tf.getValue());
-
-        if (record) {
-            var contextField = Ext.getCmp(this.contextcmp);
-
-            if (contextField) {
-                if (Ext.isEmpty(record.data.context_key)) {
-                    contextField.setValue(MODx.config.default_context);
-                } else {
-                    contextField.setValue(record.data.context_key);
-                }
-            }
-
-            var parentField = Ext.getCmp(this.parentcmp);
-
-            if (parentField) {
-                parentField.setValue(record.data.id);
-            }
-        }
-    }
-});
-Ext.reg('modx-combo-resource', MODx.combo.Resource);
 
 
 MODx.combo.TVWidget = function(config) {

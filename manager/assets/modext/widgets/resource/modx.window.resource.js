@@ -1,6 +1,7 @@
 MODx.window.CreateResource = function(config) {
     config = config || {};
-
+    this.ident = config.ident || 'tplpick'+Ext.id();
+    var id = this.ident;
     Ext.applyIf(config, {
         autoHeight: true,
         title: _('document_new'),
@@ -45,13 +46,16 @@ MODx.window.CreateResource = function(config) {
             },{
                 columnWidth: .5,
                 items: [{
-                    xtype: 'modx-combo-resource',
-                    fieldLabel: _('resource_parent'),
-                    description: MODx.expandHelp ? '' : _('resource_parent_help'),
-                    anchor: '100%',
-                    value: config.record.parent || 0,
-                    parentcmp: 'modx-template-picker-parent-id',
-                    contextcmp: 'modx-template-picker-parent-context'
+                    xtype: 'modx-field-parent-change'
+                    ,fieldLabel: _('resource_parent')
+                    ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
+                    ,name: 'parent-cmb'
+                    ,id: 'modx-'+id+'-parent-change'
+                    ,value: config.record.parent || 0
+                    ,anchor: '100%'
+                    ,parentcmp: 'modx-template-picker-parent-id'
+                    ,contextcmp: 'modx-template-picker-parent-context'
+                    ,currentid: id
                 }]
             }]
         },{
