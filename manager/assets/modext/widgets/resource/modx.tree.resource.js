@@ -658,7 +658,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (Ext.isObject(o)) {
             Ext.apply(types,o);
         }
-        var coreTypes = ['MODX\\Revolution\\modDocument','MODX\\Revolution\\modWebLink','MODX\\Revolution\\modSymLink','MODX\\Revolution\\modStaticResource'];
+        var coreTypes = ['MODX\Revolution\modDocument','MODX\Revolution\modWebLink','MODX\Revolution\modSymLink','MODX\Revolution\modStaticResource'];
         var ct = [];
         var qct = [];
         for (var k in types) {
