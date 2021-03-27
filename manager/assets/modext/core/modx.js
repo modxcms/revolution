@@ -830,9 +830,9 @@ Ext.extend(MODx.Msg,Ext.Component,{
         var fadeOpts = {remove:true,useDisplay:true};
         if (!opt.dontHide) {
             if(!Ext.isIE8) {
-                m.pause(opt.delay || 1.5).ghost("t",fadeOpts);
+                m.pause(opt.delay || 10).ghost("t",fadeOpts);
             } else {
-                fadeOpts.duration = (opt.delay || 1.5);
+                fadeOpts.duration = (opt.delay || 10);
                 m.ghost("t",fadeOpts);
             }
         } else {
