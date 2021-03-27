@@ -23,7 +23,7 @@
                             {/if}
                         </div>
                         <div class="user-data">
-                            <div class="user-name">{$record.fullname}</div>
+                            <div class="user-name">{$record.fullname|default:$record.username}</div>
                             <div class="user-group">{$record.group}</div>
                         </div>
                     </td>
