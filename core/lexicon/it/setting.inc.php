@@ -738,6 +738,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Inserisci la dimensione massima (bytes)
 $_lang['setting_upload_media'] = 'Tipi Media Caricabili';
 $_lang['setting_upload_media_desc'] = 'Qui puoi inserire una lista di tipi di files media (video,audio) che possono essere caricati dentro  \'assets/media/\' usando il Manager delle Risorse. Inserisci le estensioni per i tipi di media, separate da virgola.';
 
+$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
+$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+
 $_lang['setting_use_alias_path'] = 'Usa Percorsi Semplici Alias (Completi)';
 $_lang['setting_use_alias_path_desc'] = 'Impostando questa opzione su \'SI\' verrà mostrato il percorso completo della Risorsa, se la Risorsa ha un alias. Per esempio, se una Risorsa con un alias chiamato \'figlio\' si trova nella cartella con alias \'genitore\', allora il percorso dell\'alias sarà \'/genitore/figlio.html\'.<br /><strong>NOTA: Se impostato su \'SI\' (attivando il percorso alias), si deve far riferimento agli oggetti (come immagini, css, javascripts, ecc) usando il percorso assoluto: es., \'/assets/images\' invece di \'assets/images\'. In questo modo si evita che il browser (o il web-server) aggiunga il percorso relativo al percorso dell\'alias.</strong>';
 
