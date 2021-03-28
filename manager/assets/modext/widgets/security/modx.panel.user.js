@@ -36,6 +36,7 @@ MODx.panel.User = function(config) {
     MODx.panel.User.superclass.constructor.call(this,config);
     Ext.getCmp('modx-user-panel-newpassword').getEl().dom.style.display = 'none';
     Ext.getCmp('modx-user-password-genmethod-s').on('check',this.showNewPassword,this);
+    Ext.getCmp('modx-extended-form').disable();
 };
 Ext.extend(MODx.panel.User,MODx.FormPanel,{
     setup: function() {
@@ -231,7 +232,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                         ,prefix: 'extended'
                         ,enableDD: true
                         ,listeners: {
-                            'dragdrop': {fn:function() {
+                            'click': {fn:function() {
+                                Ext.getCmp('modx-extended-form').enable();
+                            },scope:this}
+                            ,'dragdrop': {fn:function() {
                                 this.markDirty();
                             },scope:this}
                         }

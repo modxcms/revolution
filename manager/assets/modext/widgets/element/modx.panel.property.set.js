@@ -97,6 +97,7 @@ MODx.grid.PropertySetProperties = function(config) {
             ,scope: this
         }]
     });
+    Ext.getCmp('right-column').disable();
     MODx.grid.PropertySetProperties.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.PropertySetProperties,MODx.grid.ElementProperties);
@@ -116,6 +117,7 @@ MODx.tree.PropertySets = function(config) {
         ,action: 'Element/PropertySet/GetNodes'
         ,rootIconCls: 'icon-sitemap'
         ,root_name: _('propertysets')
+        ,rootVisible: false
         ,enableDD: false
         ,tbar: ['->', {
             text: _('propertyset_new')
@@ -130,6 +132,7 @@ MODx.tree.PropertySets = function(config) {
 };
 Ext.extend(MODx.tree.PropertySets,MODx.tree.Tree,{
     loadGrid: function(n,e) {
+        Ext.getCmp('right-column').enable();
         var ar = n.id.split('_');
         if (ar[0] == 'ps') {
             MODx.Ajax.request({
