@@ -209,7 +209,7 @@ MODx.grid.TemplatePermissions = function(config) {
         ,autosave: false
         ,autoExpandColumn: 'name'
         ,tbar: [{
-            text: _('permission_add_template')
+            text: _('create')
             ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createAttribute
@@ -257,7 +257,7 @@ Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
         }
         m.removeAll();
         m.add({
-            text: _('permission_remove')
+            text: _('delete')
             ,scope: this
             ,handler: this.remove
         });
@@ -276,7 +276,7 @@ MODx.window.NewTemplatePermission = function(config) {
     config = config || {};
     this.ident = config.ident || 'polpc'+Ext.id();
     Ext.applyIf(config,{
-        title: _('permission_add_template')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'security/access/policy/addProperty'
         ,saveBtnText: _('add')

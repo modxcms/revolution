@@ -312,7 +312,7 @@ MODx.window.CreateNamespace = function(config) {
     var r = config.record;
     this.ident = config.ident || 'cns'+Ext.id();
     Ext.applyIf(config,{
-        title: _('namespace_create')
+        title: _('create')
         ,id: this.ident
         ,width: 600
         ,url: MODx.config.connector_url
@@ -368,7 +368,7 @@ MODx.window.UpdateNamespace = function(config) {
     config = config || {};
 
     Ext.applyIf(config, {
-        title: _('namespace_update')
+        title: _('edit')
         ,action: 'Workspace/PackageNamespace/Update'
         ,isUpdate: true
     });
@@ -847,7 +847,7 @@ MODx.window.DuplicateContext = function(config) {
     this.ident = config.ident || 'dupctx'+Ext.id();
     Ext.Ajax.timeout = 0;
     Ext.applyIf(config,{
-        title: _('context_duplicate')
+        title: _('duplicate')
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'Context/Duplicate'

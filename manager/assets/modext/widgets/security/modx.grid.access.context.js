@@ -49,7 +49,7 @@ MODx.grid.AccessContext = function(config) {
             }, scope: this }
         }]
         ,tbar: [{
-            text: _('acl_add')
+            text: _('create')
             ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createAcl
@@ -78,7 +78,7 @@ Ext.extend(MODx.grid.AccessContext,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) { m.push('-'); }
                 m.push({
-                    text: _('remove')
+                    text: _('delete')
                     ,handler: this.removeAcl
                 });
             }

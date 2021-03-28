@@ -96,7 +96,7 @@ MODx.grid.FCProfile = function(config) {
             }
         }
         ,tbar: [{
-            text: _('profile_create')
+            text: _('create')
             ,scope: this
             ,handler: this.createProfile
             ,cls:'primary-button'
@@ -209,7 +209,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             }
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
-                    text: _('remove')
+                    text: _('delete')
                     ,handler: this.confirm.createDelegate(this,['Security/Forms/Profile/Remove','profile_remove_confirm'])
                 });
             }
@@ -371,7 +371,7 @@ Ext.reg('modx-grid-fc-profile',MODx.grid.FCProfile);
 MODx.window.CreateFCProfile = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('profile_create')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Profile/Create'
         ,fields: [{

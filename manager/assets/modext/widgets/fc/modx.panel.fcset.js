@@ -329,7 +329,7 @@ MODx.grid.FCSetTabs = function(config) {
             }
         }
         ,tbar: [{
-            text: _('tab_create')
+            text: _('create')
             ,cls: 'primary-button'
             ,handler: this.createTab
             ,scope: this
@@ -343,7 +343,7 @@ Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
         var rec = this.getStore().getAt(ri);
         if (rec.data.type == 'new') {
             return [{
-                text: _('tab_remove')
+                text: _('delete')
                 ,handler: this.removeTab
                 ,scope: this
             }];
@@ -370,7 +370,7 @@ Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
 
     ,removeTab: function(btn,e) {
         var rec = this.getSelectionModel().getSelected();
-        Ext.Msg.confirm(_('tab_remove'),_('tab_remove_confirm'),function(e) {
+        Ext.Msg.confirm(_('delete'),_('tab_remove_confirm'),function(e) {
             if (e == 'yes') {
                 this.getStore().remove(rec);
             }
@@ -470,7 +470,7 @@ Ext.reg('modx-grid-fc-set-tvs',MODx.grid.FCSetTVs);
 MODx.window.AddTabToSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('tab_create')
+        title: _('create')
         ,fields: [{
             xtype: 'hidden'
             ,name: 'container'

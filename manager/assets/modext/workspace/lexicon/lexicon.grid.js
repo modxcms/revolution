@@ -43,7 +43,7 @@ MODx.grid.Lexicon = function(config) {
         }]
         ,tbar: [{
             xtype: 'button'
-            ,text: _('entry_create')
+            ,text: _('create')
             ,cls:'primary-button'
             ,handler: this.createEntry
             ,scope: this
@@ -394,7 +394,7 @@ MODx.window.LexiconEntryCreate = function(config) {
     this.ident = config.ident || 'lexentc'+Ext.id();
     var r = config.record;
     Ext.applyIf(config,{
-        title: _('entry_create')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Lexicon/Create'
         ,fileUpload: true

@@ -35,7 +35,7 @@ MODx.grid.Provider = function(config) {
             ,editor: { xtype: 'textarea' }
         }]
         ,tbar: [{
-            text: _('provider_add')
+            text: _('create')
             ,cls: 'primary-button'
             ,handler: { xtype: 'modx-window-provider-create' ,blankValues: true }
         }]
@@ -57,7 +57,7 @@ Ext.reg('modx-grid-provider',MODx.grid.Provider);
 MODx.window.CreateProvider = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('provider_add')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Providers/Create'
         ,fields: [{
@@ -110,7 +110,7 @@ Ext.reg('modx-window-provider-create',MODx.window.CreateProvider);
 MODx.window.UpdateProvider = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('provider_update')
+        title: _('edit')
         ,action: 'Workspace/Providers/Update'
     });
     MODx.window.UpdateProvider.superclass.constructor.call(this,config);

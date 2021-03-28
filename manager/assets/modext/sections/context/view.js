@@ -23,7 +23,7 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
 		var b = [];
 	    b.push({
 	        process: 'create'
-	        ,text: _('new')
+	        ,text: _('create')
 	        ,id: 'modx-abtn-new'
 	        ,params: {
 	            a: 'Context/Create'

@@ -81,7 +81,7 @@ MODx.grid.FCSet = function(config) {
             }
         }
         ,tbar: [{
-            text: _('set_new')
+            text: _('create')
             ,cls: 'primary-button'
             ,scope: this
             ,handler: this.createSet
@@ -203,7 +203,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
             }
             if (p.indexOf('premove') != -1) {
                 m.push('-',{
-                    text: _('remove')
+                    text: _('delete')
                     ,handler: this.confirm.createDelegate(this,['Security/Forms/Set/Remove','set_remove_confirm'])
                 });
             }
@@ -408,7 +408,7 @@ Ext.reg('modx-grid-fc-set',MODx.grid.FCSet);
 MODx.window.CreateFCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('set_create')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Set/Create'
         ,width: 600

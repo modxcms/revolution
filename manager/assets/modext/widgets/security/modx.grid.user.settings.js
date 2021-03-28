@@ -22,7 +22,7 @@ MODx.grid.UserSettings = function(config) {
         ,save_action: 'Security/User/Setting/UpdateFromGrid'
         ,fk: config.user
         ,tbar: [{
-            text: _('setting_create')
+            text: _('create')
             ,cls: 'primary-button'
             ,scope: this
             ,handler: {
@@ -73,10 +73,10 @@ Ext.extend(MODx.grid.UserSettings,MODx.grid.SettingsGrid, {
             m = this.menu.record.menu;
         } else {
             m.push({
-                text: _('setting_update')
+                text: _('edit')
                 ,handler: this.updateSetting
             },'-',{
-                text: _('setting_remove')
+                text: _('remove')
                 ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'Security/User/Setting/Remove'])
             });
         }

@@ -2041,7 +2041,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
         if ($this->hasPermission('directory_update') && $canSave) {
             $menu[] = [
-                'text' => $this->xpdo->lexicon('rename'),
+                'text' => $this->xpdo->lexicon('file_folder_rename'),
                 'handler' => 'this.renameDirectory',
             ];
         }

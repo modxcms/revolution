@@ -89,7 +89,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,sortable: true
         }]
         ,tbar: [{
-            text: _('policy_template_create')
+            text: _('create')
             ,cls:'primary-button'
             ,scope: this
             ,handler: this.createPolicyTemplate
@@ -154,11 +154,11 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         } else {
             if (p.indexOf('pedit') != -1) {
                 m.push({
-                    text: _('policy_template_update')
+                    text: _('edit')
                     ,handler: this.editPolicyTemplate
                 });
                 m.push({
-                    text: _('policy_template_duplicate')
+                    text: _('duplicate')
                     ,handler: this.confirm.createDelegate(this,["Security/Access/Policy/Template/Duplicate","policy_template_duplicate_confirm"])
                 });
             }
@@ -171,7 +171,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('policy_template_remove')
+                    text: _('delete')
                     ,handler: this.confirm.createDelegate(this,["Security/Access/Policy/Template/Remove","policy_template_remove_confirm"])
                 });
             }
@@ -289,7 +289,7 @@ MODx.window.CreateAccessPolicyTemplate = function(config) {
     config = config || {};
     this.ident = config.ident || 'cacpt'+Ext.id();
     Ext.applyIf(config,{
-        title: _('policy_template_create')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/Policy/Template/Create'
         ,fields: [{
