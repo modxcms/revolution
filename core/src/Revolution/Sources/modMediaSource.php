@@ -1085,6 +1085,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 continue;
             }
 
+            if ((boolean)$this->xpdo->getOption('upload_translit')) {
+                $file['name'] = $this->xpdo->filterPathSegment($file['name']);
+            }
+
             $newPath = $container . $this->sanitizePath($file['name']);
             try {
                 if ($this->checkFileExists() && $this->filesystem->has($newPath)) {
