@@ -130,7 +130,7 @@ $settings['automatic_template_assignment']->fromArray([
 $settings['base_help_url']= $xpdo->newObject(modSystemSetting::class);
 $settings['base_help_url']->fromArray([
   'key' => 'base_help_url',
-  'value' => '//docs.modx.com/3.x/en/index',
+  'value' => '//docs.modx.com/help/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
