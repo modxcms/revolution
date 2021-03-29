@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Online Users';
 $_lang['onlineusers_user'] = 'User';
 $_lang['onlineusers_userid'] = 'User\'s ID';
 
-$_lang['updates_sort'] = 'Sort';
+$_lang['updates_type'] = 'Type';
 $_lang['updates_status'] = 'स्थिति';
 $_lang['updates_action'] = 'Action';
 $_lang['updates_available'] = 'Updates available';
