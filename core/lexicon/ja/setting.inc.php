@@ -414,8 +414,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'SMTP認証で用いるパスワード�
 $_lang['setting_mail_smtp_port'] = 'SMTPのポート';
 $_lang['setting_mail_smtp_port_desc'] = 'SMTPサーバーのデフォルトポート番号を指定します。';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP接続の接頭辞';
-$_lang['setting_mail_smtp_prefix_desc'] = '接続の接頭辞を "", "ssl" または "tls" から指定します。';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';

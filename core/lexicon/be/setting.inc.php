@@ -415,8 +415,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Пароль для аўтэнтыфі�
 $_lang['setting_mail_smtp_port'] = 'SMTP Порт';
 $_lang['setting_mail_smtp_port_desc'] = 'Порт SMTP сервера па змаўчанні.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP прэфікс для злучэнняў';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Усталёўвае прэфікс злучэння. Даступныя варыянты: "", "ssl", "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';

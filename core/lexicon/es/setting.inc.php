@@ -414,8 +414,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'La contraseña utilizada para autentica
 $_lang['setting_mail_smtp_port'] = 'Puerto de SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Configura el puerto predeterminado del servidor de SMTP.';
 
-$_lang['setting_mail_smtp_prefix'] = 'Prefijo de Conexión de SMTP';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Configura el prefijo de conexión SMTP. Las opciones son: "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';

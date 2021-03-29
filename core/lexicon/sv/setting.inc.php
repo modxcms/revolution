@@ -414,8 +414,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Lösenordet som ska användas för att 
 $_lang['setting_mail_smtp_port'] = 'SMTP-port';
 $_lang['setting_mail_smtp_port_desc'] = 'Anger SMTP-serverns standardport.';
 
-$_lang['setting_mail_smtp_prefix'] = 'Anslutningsprefix för SMTP';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Anger anslutningsprefixet. Möjliga värden är "", "ssl" eller "tls".';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';

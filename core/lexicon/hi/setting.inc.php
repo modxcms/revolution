@@ -414,8 +414,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'SMTP के खिलाफ को प�
 $_lang['setting_mail_smtp_port'] = 'SMTP पोर्ट';
 $_lang['setting_mail_smtp_port_desc'] = 'डिफ़ॉल्ट SMTP सर्वर पोर्ट सेट करता है।';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
-$_lang['setting_mail_smtp_prefix_desc'] = 'कनेक्शन उपसर्ग सेट करता है। विकल्प हैं "", "ssl" या "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';

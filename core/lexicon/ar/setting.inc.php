@@ -419,8 +419,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'كلمة المرور للمصادقة 
 $_lang['setting_mail_smtp_port'] = 'منفذ SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'ضبط منفذ المخدم SMTP الافتراضي.';
 
-$_lang['setting_mail_smtp_prefix'] = 'بادئة اتصال SMTP';
-$_lang['setting_mail_smtp_prefix_desc'] = 'ضبط بادئة الاتصال. الخيارات هي ""،"ssl" أو "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
