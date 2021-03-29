@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Пространство от имена';
-$_lang['namespace_create'] = 'Създаване на пространство от имена';
 $_lang['namespace_err_create'] = 'Възникна грешка при опита за създавне на пространство от имена.';
 $_lang['namespace_err_nf'] = 'Не е намерено пространство от имена.';
 $_lang['namespace_err_nfs'] = 'Не е намерено пространство от имена с име: %s';
@@ -19,10 +18,8 @@ $_lang['namespace_assets_path_desc'] = 'Посочете тук абсолюте
 $_lang['namespace_name_desc'] = 'Задайте име на пространството от имена тук.';
 $_lang['namespace_path'] = 'Път към ядрото';
 $_lang['namespace_path_desc'] = 'Посочете тук абсолютен път към ядрото за това  пространство от имена. Може да използвате контейнери като {core_path}. Пример: {core_path}components/democomponent/';
-$_lang['namespace_remove'] = 'Изтрийте пространство от имена';
 $_lang['namespace_remove_confirm'] = 'Сигурни ли сте, че искате да изтриете пространството от имена "[[+name]]" и цялото съдържание свързано с това?';
 $_lang['namespace_remove_multiple'] = 'Иззтрийте пространствата от имена';
 $_lang['namespace_remove_multiple_confirm'] = 'Сигурни ли сте, че искате да изтриете пространствата от имена "[[+name]]" и цялото съдържание свързано с това?';
-$_lang['namespace_update'] = 'Edit Namespace';
 $_lang['namespaces'] = 'Пространства от имена';
 $_lang['namespaces_desc'] = 'Пространствата от имена са глобални идентификатори за пакети и компоненти, в които се регистрират заедно техните превозни средства, лексикон записи и ресурси.';
