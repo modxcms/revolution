@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Access to Contexts';
 $_lang['access_to_resource_groups'] = 'Access to Resource Groups';
 $_lang['access_type_err_ns'] = 'Target type or id not specified!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Authority';
 $_lang['authority_err_ns'] = 'لطفاً نقش حداقلی را مشخص کنید.';
 $_lang['category'] = 'دسته‌بندی';
