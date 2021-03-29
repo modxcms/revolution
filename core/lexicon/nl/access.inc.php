@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Toegang tot Contexten';
 $_lang['access_to_resource_groups'] = 'Toegang tot documentgroepen';
 $_lang['access_type_err_ns'] = 'Doeltype of ID niet gedefinieerd!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Autoriteit';
 $_lang['authority_err_ns'] = 'Specificeer een minimale rol';
 $_lang['category'] = 'Categorie';
