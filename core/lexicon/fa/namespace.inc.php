@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Namespace';
-$_lang['namespace_create'] = 'ایجاد حوزه‌ی نامگذاری';
 $_lang['namespace_err_create'] = 'خطایی به هنگام ایجاد حوزه‌ی نامگذاری رخ داد.';
 $_lang['namespace_err_nf'] = 'حوزه‌ی نامگذاری‌ای پیدا نشد.';
 $_lang['namespace_err_nfs'] = 'حوزه‌ی نامگذاری‌ای با نام %s پیدا نشد';
@@ -21,10 +20,8 @@ $_lang['namespace_name_desc'] = 'در اینجا، برای حوزه‌ی نام
 $_lang['namespace_path'] = 'مسیرِ Core';
 $_lang['namespace_path_desc'] = 'در اینجا برای این حوزه‌ی نامگذاری، یک مسیر مطلق به core تعیین کنید. میتوانید از placeholderهایی مانند {core_path} استفاده کنید. برای نمونه:
 /core_path}components/democomponent}';
-$_lang['namespace_remove'] = 'حذفِ حوزه‌ی نامگذاری';
 $_lang['namespace_remove_confirm'] = 'آیا مایل به حذف حوزه‌ی نامگذاری با نامِ "[[+name]]" و اطلاعات مرتبط با آن هستید؟';
 $_lang['namespace_remove_multiple'] = 'حذفِ حوزه‌های نامگذاری';
 $_lang['namespace_remove_multiple_confirm'] = 'آیا مایل به حذف این حوزه‌های نامگذاری و اطلاعات مرتبط با آنها هستید؟';
-$_lang['namespace_update'] = 'Edit Namespace';
 $_lang['namespaces'] = 'حوزه‌های نامگذاری';
 $_lang['namespaces_desc'] = 'Namespaces are global identifiers for packages and components, registering their vehicles, lexicon entries and resources all together.';
