@@ -71,6 +71,7 @@ $_lang['file_folder_err_update'] = 'Сталася помилка при спр�
 $_lang['file_folder_parent'] = 'Батьківський каталог';
 $_lang['file_folder_remove'] = 'Видалити каталог';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
+$_lang['file_folder_rename'] = 'Перейменувати каталог';
 $_lang['file_last_accessed'] = 'Останній доступ';
 $_lang['file_last_modified'] = 'Остання зміна';
 $_lang['file_name'] = 'Ім\'я файлу';
