@@ -35,7 +35,7 @@ class SecurityFormsProfileUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.panel.fcprofile.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.grid.fcset.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/fc/profile/update.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

@@ -33,7 +33,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.fc.common.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.panel.fcset.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/fc/set/update.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

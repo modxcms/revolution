@@ -38,7 +38,7 @@ class ElementSnippetCreateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.snippet.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/snippet/create.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         MODx.onSnipFormRender = "'.$this->onSnipFormRender.'";
         MODx.perm.unlock_element_properties = "'.($this->modx->hasPermission('unlock_element_properties') ? 1 : 0).'";

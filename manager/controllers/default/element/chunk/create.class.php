@@ -38,7 +38,7 @@ class ElementChunkCreateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/chunk/create.js');
 
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

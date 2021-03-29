@@ -1,7 +1,7 @@
 <public:component>
 <public:attach event="onpropertychange" onevent="doFix()" />
 
-<script type="text/javascript">
+<script>
 
 // IE5.5+ PNG Alpha Fix v1.0RC4
 // (c) 2004-2005 Angus Turnbull http://www.twinhelix.com

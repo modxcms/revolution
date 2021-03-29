@@ -91,7 +91,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl."assets/modext/widgets/system/modx.panel.dashboard.widget.js");
         $this->addJavascript($mgrUrl.'assets/modext/sections/system/dashboards/widget/update.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
+        $this->addHtml('<script>Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-dashboard-widget-update"
         ,record: '.$this->modx->toJSON($this->widgetArray).'

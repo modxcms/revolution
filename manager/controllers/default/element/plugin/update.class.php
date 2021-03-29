@@ -46,7 +46,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.plugin.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/plugin/update.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

@@ -42,7 +42,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.grid.element.properties.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/element/modx.panel.chunk.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/element/chunk/update.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

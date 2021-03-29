@@ -1,4 +1,4 @@
-<script type="text/javascript" src="assets/js/sections/install.js"></script>
+<script src="assets/js/sections/install.js"></script>
 <form id="install" action="?action=install" method="post">
 <h2>{$_lang.install_summary}</h2>
 {if $failed}
@@ -8,9 +8,8 @@
     {$_lang.install_success}
     <br />(<a style="font-size: .9em" href="#continuebtn">{$_lang.skip_to_bottom}</a>)
     <br /><br />
-    <a href="javascript:void(0);" class="modx-toggle-success">{$_lang.toggle_success}</a> | 
+    <a href="javascript:void(0);" class="modx-toggle-success">{$_lang.toggle_success}</a> |
     <a href="javascript:void(0);" class="modx-toggle-warning">{$_lang.toggle_warnings}</a>
-    
 </p>
 {/if}
 <ul class="checklist">

@@ -1,7 +1,7 @@
 {if $showHidden|default}
-    <script type="text/javascript">MODx.showHidden = true;</script>
+    <script>MODx.showHidden = true;</script>
 {/if}
-<script type="text/javascript" src="assets/js/sections/database.js"></script>
+<script src="assets/js/sections/database.js"></script>
 <form id="install" action="?action=database" method="post">
     <h2>{$_lang.connection_title}</h2>
 
@@ -10,7 +10,7 @@
     <p>{$_lang.connection_connection_note}</p>
 
     <p class="error">{$error_message|default}</p>
-    
+
     <div class="labelHolder">
         <label for="database-type">{$_lang.connection_database_type}</label>
         <select id="database-type" name="database_type" autofocus="autofocus">

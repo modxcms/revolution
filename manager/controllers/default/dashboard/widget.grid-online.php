@@ -28,7 +28,7 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface {
 
     $this->controller->addJavascript($this->modx->getOption('manager_url').'assets/modext/widgets/security/modx.grid.user.online.js');
     $this->controller->addHtml('
-    <script type="text/javascript">
+    <script>
       Ext.applyIf(MODx.lang, '. $this->modx->toJSON($this->modx->lexicon->loadCache('core', 'dashboard')) .');
       Ext.onReady(function() {
         MODx.load({

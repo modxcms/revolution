@@ -40,7 +40,7 @@ class SourceUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/source/modx.grid.source.access.js');
         $this->addJavascript($mgrUrl.'assets/modext/widgets/source/modx.panel.source.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/source/update.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {MODx.load({
+        $this->addHtml('<script>Ext.onReady(function() {MODx.load({
     xtype: "modx-page-source-update"
     ,record: '.$this->modx->toJSON($this->sourceArray).'
     ,defaultProperties: '.$this->modx->toJSON($this->sourceDefaultProperties).'

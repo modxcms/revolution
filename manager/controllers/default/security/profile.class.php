@@ -32,7 +32,7 @@ class SecurityProfileManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.recent.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/profile/update.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

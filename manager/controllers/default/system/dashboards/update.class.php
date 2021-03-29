@@ -111,7 +111,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboard.js");
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/update.js');
-        $this->addHtml('<script type="text/javascript">Ext.onReady(function() {
+        $this->addHtml('<script>Ext.onReady(function() {
     MODx.load({
         xtype: "modx-page-dashboard-update"
         ,record: '.$this->modx->toJSON($this->dashboardArray).'

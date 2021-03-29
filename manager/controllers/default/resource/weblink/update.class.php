@@ -22,7 +22,7 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController {
         $this->addJavascript($managerUrl.'assets/modext/sections/resource/update.js');
         $this->addJavascript($managerUrl.'assets/modext/sections/resource/weblink/update.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         MODx.config.publish_document = "'.$this->canPublish.'";
         MODx.onDocFormRender = "'.$this->onDocFormRender.'";

@@ -34,7 +34,7 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.access.policy.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/security/access/policy/update.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({

@@ -25,7 +25,7 @@
             {$tv->get('formElement')}
         </div>
     </div>
-    <script type="text/javascript">{literal}Ext.onReady(function() { new Ext.ToolTip({{/literal}target: 'tv{$tv->id}-caption',html: '[[*{$tv->name}]]'{literal}});});{/literal}</script>
+    <script>{literal}Ext.onReady(function() { new Ext.ToolTip({{/literal}target: 'tv{$tv->id}-caption',html: '[[*{$tv->name}]]'{literal}});});{/literal}</script>
 {else}
     <input type="hidden" id="tvdef{$tv->id}" value="{$tv->default_text|escape}" />
     {$tv->get('formElement')}
@@ -39,7 +39,7 @@
 {/foreach}
 </div>
 {literal}
-<script type="text/javascript">
+<script>
 // <![CDATA[
 Ext.onReady(function() {
     MODx.resetTV = function(id) {

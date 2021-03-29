@@ -39,7 +39,7 @@ class ResourceDataManagerController extends ResourceManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.data.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/data.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.ctx = "'.$this->resource->get('context_key').'";

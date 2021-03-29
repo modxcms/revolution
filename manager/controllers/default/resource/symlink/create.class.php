@@ -21,7 +21,7 @@ class SymLinkCreateManagerController extends ResourceCreateManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.symlink.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/symlink/create.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
 // <![CDATA[
 MODx.config.publish_document = "'.$this->canPublish.'";
 MODx.onDocFormRender = "'.$this->onDocFormRender.'";

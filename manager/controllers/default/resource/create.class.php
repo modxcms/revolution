@@ -37,7 +37,7 @@ class ResourceCreateManagerController extends ResourceManagerController {
         $this->addJavascript($mgrUrl.'assets/modext/widgets/resource/modx.panel.resource.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/resource/create.js');
         $this->addHtml('
-        <script type="text/javascript">
+        <script>
         // <![CDATA[
         MODx.config.publish_document = "'.$this->canPublish.'";
         MODx.onDocFormRender = "'.$this->onDocFormRender.'";

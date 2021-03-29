@@ -43,7 +43,7 @@ class SystemDashboardsManagerController extends modManagerController {
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.grid.dashboard.widgets.js");
         $this->addJavascript($this->modx->getOption('manager_url')."assets/modext/widgets/system/modx.panel.dashboards.js");
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/sections/system/dashboards/list.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
         Ext.onReady(function() {
             MODx.add("modx-page-dashboards");
         });

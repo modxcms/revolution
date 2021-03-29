@@ -26,7 +26,7 @@ class SystemEventManagerController extends modManagerController {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.panel.error.log.js');
         $this->addJavascript($mgrUrl.'assets/modext/sections/system/error.log.js');
-        $this->addHtml('<script type="text/javascript">
+        $this->addHtml('<script>
         MODx.hasEraseErrorLog = "'.($this->modx->hasPermission('error_log_erase') ? 1 : 0).'"
         Ext.onReady(function() {
             MODx.load({
