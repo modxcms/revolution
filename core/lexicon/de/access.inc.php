@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Zugriff auf diese Medienquelle bearbeiten';
 $_lang['access_to_contexts'] = 'Zugriff auf Kontexte';
 $_lang['access_to_resource_groups'] = 'Zugriff auf Ressourcen-Gruppen';
 $_lang['access_type_err_ns'] = 'Zieltyp oder ID nicht angegeben!';
-$_lang['acl_add'] = 'Zugriffskontrolle hinzufügen';
 $_lang['authority'] = 'Autorität';
 $_lang['authority_err_ns'] = 'Bitte geben Sie die mindestens benötigte Rolle an.';
 $_lang['category'] = 'Kategorie';
