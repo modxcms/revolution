@@ -71,6 +71,7 @@ $_lang['file_folder_err_update'] = 'Nastala chyba při aktualizaci adresáře.';
 $_lang['file_folder_parent'] = 'Nadřazená složka';
 $_lang['file_folder_remove'] = 'Odstranit složku';
 $_lang['file_folder_remove_confirm'] = 'Jste si jisti, že chcete odstranit adresář: "[[+directory]]"?<br />To by mohlo potenciálně poškodit vaše webové stránky.';
+$_lang['file_folder_rename'] = 'Přejmenovat adresář';
 $_lang['file_last_accessed'] = 'Poslední přístup';
 $_lang['file_last_modified'] = 'Naposledy upraveno';
 $_lang['file_name'] = 'Název souboru';
