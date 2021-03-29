@@ -146,7 +146,6 @@ $_lang['resource_uri_help'] = 'Bu kaynak için tam ilişkili URL.';
 $_lang['resource_uri_override'] = 'URI Dondur';
 $_lang['resource_uri_override_help'] = 'Bunu seçmek bu kaynak için URl\'i aşağıdaki metin kutularındaki değerlerde dondurmanızı sağlayacaktır.';
 $_lang['resource_with_id_not_found'] = 'Kimliği olan kaynak %s bulunamadı!';
-$_lang['resource_view'] = 'Görüntüle';
 $_lang['show_sort_options'] = 'Sıralama Seçeneklerini Göster';
 $_lang['site_schedule'] = 'Zamanlamak';
 $_lang['site_schedule_desc'] = 'Bu durum belirli tarihlerde yayınlanması veya yayımlanması planlanan mevcut kaynakları gösterir. Geçerli görünümü, araç çubuğu düğmesini tıklayarak değiştirebilirsiniz.
