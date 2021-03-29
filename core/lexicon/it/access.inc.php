@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Modifca Accesso Sorgenti Media ';
 $_lang['access_to_contexts'] = 'Accesso ai Contesti';
 $_lang['access_to_resource_groups'] = 'Accesso ai Gruppi di Risorse';
 $_lang['access_type_err_ns'] = 'Tipo di destinazione o id non specificati!';
-$_lang['acl_add'] = 'Crea Politica di Accesso';
 $_lang['authority'] = 'Autorità';
 $_lang['authority_err_ns'] = 'Specifica un Ruolo Minimo.';
 $_lang['category'] = 'Categoria';
