@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'L\'URL relativo completo per questa Risorsa.';
 $_lang['resource_uri_override'] = 'Congela (Freeze) URI';
 $_lang['resource_uri_override_help'] = 'Questa opzione ti consente di congelare l\'URI per questa Risorsa al valore mostrato nel campo di testo sotto.';
 $_lang['resource_with_id_not_found'] = 'Risorsa con ID %s non trovata!';
-$_lang['resource_view'] = 'Anteprima';
 $_lang['show_sort_options'] = 'Mostra Opzioni Ordinamento';
 $_lang['site_schedule'] = 'Programmazione';
 $_lang['site_schedule_desc'] = 'Mostra fra le risorse correnti quelle  programmate per essere pubblicate o ritirate in date specifiche. Puoi attivare/disattivare la visualizzazione corrente cliccando sul pulsante nella Barra strumenti.';
