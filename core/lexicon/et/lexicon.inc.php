@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Dubleeri';
 $_lang['entry'] = 'Kirje';
-$_lang['entry_create'] = 'Loo Kirje';
 $_lang['entry_err_ae'] = 'Kirje juba eksisteerib!';
 $_lang['entry_err_nf'] = 'Kirjet ei leitud.';
 $_lang['entry_err_ns'] = 'Kirjet ei olnud määratud.';
