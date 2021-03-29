@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Juurdepääs Context-idele';
 $_lang['access_to_resource_groups'] = 'Juurdepääs Ressurssi gruppidele';
 $_lang['access_type_err_ns'] = 'Sihtkoha tüüp või ID ei olnud määratud!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Volitus';
 $_lang['authority_err_ns'] = 'Palun täpsusta Miinimum Roll.';
 $_lang['category'] = 'Kategooria';
