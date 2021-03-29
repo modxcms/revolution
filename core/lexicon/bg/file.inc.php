@@ -71,6 +71,7 @@ $_lang['file_folder_err_update'] = 'An error occurred while trying to update the
 $_lang['file_folder_parent'] = 'Родителска директория';
 $_lang['file_folder_remove'] = 'Изтрийте директорията';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
+$_lang['file_folder_rename'] = 'Rename Directory';
 $_lang['file_last_accessed'] = 'Последни посещения';
 $_lang['file_last_modified'] = 'Последно променени';
 $_lang['file_name'] = 'Име на файл';
