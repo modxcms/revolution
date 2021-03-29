@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Gebruikersgroep';
 $_lang['filter_by_type'] = 'Filter op type...';
 
 $_lang['message'] = 'Bericht';
-$_lang['message_create'] = 'Bericht maken';
-$_lang['message_new'] = 'Bericht maken';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Verstuur e-mail';
 $_lang['message_err_nfs'] = 'Bericht niet gevonden.';
