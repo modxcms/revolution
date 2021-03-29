@@ -14,7 +14,6 @@ $_lang['richtext'] = 'نص منسق';
 $_lang['dropdown'] = 'سحب لإسفل القائمة المنسدلة';
 $_lang['listbox'] = 'سلسلة مربعات (اختيار وحيد)';
 $_lang['listbox-multiple'] = 'سلسلة مربعات (عدة اختيارات)';
-$_lang['list-multiple-legacy'] = 'سلسلة متعددة موروثة';
 $_lang['option'] = 'خيارات الراديو';
 $_lang['checkbox'] = 'مربع الاختيار';
 $_lang['image'] = 'صورة';

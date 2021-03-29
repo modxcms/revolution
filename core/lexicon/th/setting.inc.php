@@ -738,6 +738,9 @@ $_lang['setting_upload_maxsize_desc'] = 'ป้อนขนาดไฟล์ส
 $_lang['setting_upload_media'] = 'ประเภทมีเดียที่สามารถอัปโหลดได้';
 $_lang['setting_upload_media_desc'] = 'คุณสามารถป้อนรายการของไฟล์ที่สามารถอัปโหลดไปยัง \'assets/media/\' โดยใช้ตัวจัดการรีซอร์ส กรุณาป้อนนามสกุลของประเภทมีเดียคั่นด้วยจุลภาค';
 
+$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
+$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+
 $_lang['setting_use_alias_path'] = 'ใช้เส้นทาง Friendly Alias';
 $_lang['setting_use_alias_path_desc'] = 'การตั้งค่าตัวเลือกนี้เป็น \'ใช่\' จะเป็นการแสดงเส้นทางแบบเต็มของรีซอร์ส ถ้ารีซอร์สมี alias ตัวอย่าง ถ้ารีซอร์สมี alias เรียกว่า \'child\' อยู่ในตัวบรรจุรีซอร์สที่มี alias เรียกว่า \'parent\' ดังนั้นเส้นทางเต็มของ alias ไปยังรีซอร์สจะแสดงได้เป็น \'/parent/child.html\'<br /><strong>หมายเหตุ: เมื่อตั้งค่าตัวเลือกนี้เป็น \'ใช่\' (เปิดใช้เส้นทาง alias) การอ้างอิงถึงไอเท็ม (เช่น รูปภาพ css javascripts เป็นต้น) จะใช้เส้นทางสัมพัทธ์: เช่น \'/assets/images\' ไม่ใช่ \'assets/images\' โดยการทำอย่างนี้จะเป็นการป้องกันเบราว์เซอร์ (หรือเว็บเซิร์ฟเวอร์) จากการเติมท้ายเส้นทางสัมพัทธ์ของเส้นทาง alias</strong>';
 

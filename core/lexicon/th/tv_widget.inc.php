@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'เวลาล่าสุด';
 $_lang['latest_time_desc'] = 'เวลาล่าสุดที่อนุญาตให้สามารถเลือกได้';
 $_lang['listbox'] = 'Listbox (เลือกได้อย่างเดียว)';
 $_lang['listbox-multiple'] = 'Listbox (เลือกได้หลายอย่าง)';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['lower_case'] = 'ตัวพิพม์เล็ก';
 $_lang['max_length'] = 'ความยาวสูงสุด';
 $_lang['min_length'] = 'ความยาวขั้นต่ำ';

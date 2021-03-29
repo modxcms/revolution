@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Latest Time';
 $_lang['latest_time_desc'] = 'The latest allowed time that can be selected.';
 $_lang['listbox'] = 'Căsuță de tip listă (cu o singură alegere)';
 $_lang['listbox-multiple'] = 'Căsuță de tip listă (cu alegere multiplă)';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['lower_case'] = 'Lower Case';
 $_lang['max_length'] = 'Max Length';
 $_lang['min_length'] = 'Min Length';

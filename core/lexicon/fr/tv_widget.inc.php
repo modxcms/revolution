@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Heure de fin';
 $_lang['latest_time_desc'] = 'Heure jusqu\'à laquelle on peut autoriser la sélection.';
 $_lang['listbox'] = 'Liste à sélection unique';
 $_lang['listbox-multiple'] = 'Liste à sélection multiple';
-$_lang['list-multiple-legacy'] = 'Liste hiérarchique à choix multiples';
 $_lang['lower_case'] = 'Minuscules';
 $_lang['max_length'] = 'Longueur maximale';
 $_lang['min_length'] = 'Longueur minimale';

@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'नवीनतम समय';
 $_lang['latest_time_desc'] = 'नवीनतम अनुमत समय कि चयनित किया जा सकता है।';
 $_lang['listbox'] = 'Listbox (Single-Select)';
 $_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['lower_case'] = 'Lower Case';
 $_lang['max_length'] = 'अधिकतम लंबाई';
 $_lang['min_length'] = 'न्यूनतम लम्बाई';

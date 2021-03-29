@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Editor RichText';
 $_lang['dropdown'] = 'Daftar DropDown Menu';
 $_lang['listbox'] = 'Listbox (Single-pilih)';
 $_lang['listbox-multiple'] = 'Listbox (multi pilih)';
-$_lang['list-multiple-legacy'] = 'Daftar beberapa peninggalan';
 $_lang['option'] = 'Opsi radio';
 $_lang['checkbox'] = 'Kotak centang';
 $_lang['image'] = 'Gambar';

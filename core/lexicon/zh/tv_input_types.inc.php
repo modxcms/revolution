@@ -14,7 +14,6 @@ $_lang['richtext'] = '富文本';
 $_lang['dropdown'] = '下拉列表菜单';
 $_lang['listbox'] = '列表框 (单选)';
 $_lang['listbox-multiple'] = '列表框 （多选）';
-$_lang['list-multiple-legacy'] = '传统多列表';
 $_lang['option'] = '单选项';
 $_lang['checkbox'] = '复选框';
 $_lang['image'] = '图像';

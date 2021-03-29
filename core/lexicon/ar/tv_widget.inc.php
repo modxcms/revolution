@@ -62,7 +62,6 @@ $_lang['latest_time'] = 'الوقت الآخير';
 $_lang['latest_time_desc'] = 'الوقت الأخير المسموح الممكن اختياره.';
 $_lang['listbox'] = 'سلسلة مربعات (اختيار وحيد)';
 $_lang['listbox-multiple'] = 'سلسلة مربعات (عدة اختيارات)';
-$_lang['list-multiple-legacy'] = 'سلسلة متعددة موروثة';
 $_lang['lower_case'] = 'أحرف صغيرة';
 $_lang['max_length'] = 'الطول الأعظمي';
 $_lang['min_length'] = 'الطول الأصغري';

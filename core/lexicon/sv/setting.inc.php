@@ -738,6 +738,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Skriv den största filstorleken som kan
 $_lang['setting_upload_media'] = 'Uppladdningsbara mediatyper';
 $_lang['setting_upload_media_desc'] = 'Här kan du skriva en lista med de typer av mediafiler som kan laddas upp till "assets/media/" med filhanteraren. Skriv filändelserna för mediatyperna, separerade med kommatecken.';
 
+$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
+$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+
 $_lang['setting_use_alias_path'] = 'Använd vänliga aliassökvägar';
 $_lang['setting_use_alias_path_desc'] = 'Sätts detta val till "Ja", kommer hela sökvägen till resursen att visas om resursen har ett alias. Till exempel, om en resurs med aliaset "barn" befinner sig i en behållare med aliaset "foralder", kommer hela sökvägen att visas som "/foralder/barn.html".<br /><strong>Notera: När detta sätts till "Ja" (slår på aliassökvägar), måste du referera objekt (som bilder, css, javascript etc) med en absolut sökväg. Exempel: "/assets/images" istället för "assets/images". Genom att göra så förhindrar du att webbläsaren (eller webbservern) lägger till den relativa sökvägen till aliassökvägen.</strong>';
 

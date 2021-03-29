@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Última Hora';
 $_lang['latest_time_desc'] = 'La última hora que puede ser seleccionada.';
 $_lang['listbox'] = 'Lista (Sel. Sencilla)';
 $_lang['listbox-multiple'] = 'Lista (Sel. Múltiple)';
-$_lang['list-multiple-legacy'] = 'Lista múltiple heredada';
 $_lang['lower_case'] = 'Minúsculas';
 $_lang['max_length'] = 'Longitud Máxima';
 $_lang['min_length'] = 'Longitud Mínima';

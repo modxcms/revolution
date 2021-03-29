@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Richtext';
 $_lang['dropdown'] = 'DropDown Lijst Menu';
 $_lang['listbox'] = 'Lijstbox (Enkele-Selectie)';
 $_lang['listbox-multiple'] = 'Lijstbox (Meervoudige-Selectie)';
-$_lang['list-multiple-legacy'] = 'Oude multiselect lijst';
 $_lang['option'] = 'Radio Opties';
 $_lang['checkbox'] = 'Checkbox';
 $_lang['image'] = 'Afbeelding';
