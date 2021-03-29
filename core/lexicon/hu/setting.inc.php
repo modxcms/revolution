@@ -414,8 +414,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'The password to authenticate to SMTP ag
 $_lang['setting_mail_smtp_port'] = 'SMTP Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Sets connection prefix. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP önműködő TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Az azt támogató kiszolgálón a TLS titkosítás önműködő engedélyezése még akkor is, ha az "SMTP titkosítás" nincs "tls" értékre állítva.';
