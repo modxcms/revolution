@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'URL الكامل الموافق لهذا المص
 $_lang['resource_uri_override'] = 'تجميد URL';
 $_lang['resource_uri_override_help'] = 'اختيار هذا سوف يسمح لك بتجميد URL من أجل هذا المصدر عند القيمة في مربع النص ادناه.';
 $_lang['resource_with_id_not_found'] = 'لم يتم العثور على المصدر مع المعرف %s!';
-$_lang['resource_view'] = 'عرض';
 $_lang['show_sort_options'] = 'إظهار خيارت الفرز';
 $_lang['site_schedule'] = 'البرنامج';
 $_lang['site_schedule_desc'] = 'هذا يعرض المصادر الحالية المبرمجة للنشر أو عدم النشر في تواريخ محددة. يمكنك تبديل العرض الحالي عن طريق الضغط على زر شريط الأدوات.';
