@@ -36,7 +36,6 @@ $_lang['namespace'] = 'ネームスペース';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'ネームスペースで絞り込み';
 $_lang['search_by_key'] = 'キーで検索';
-$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'このフィールドの存在を確認してください：';
 $_lang['setting_err_ae'] = 'そのキーの設定はすでに存在します。ほかのキー名を指定してください。';
 $_lang['setting_err_nf'] = '設定が見つかりませんでした。';
@@ -46,9 +45,7 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to delete the set
 $_lang['setting_err_save'] = '設定の保存中にエラーが発生しました。';
 $_lang['setting_err_startint'] = '設定が整数から始まっていません。';
 $_lang['setting_err_invalid_document'] = 'ID %のドキュメントが見つかりませんでした。存在するドキュメントを設定してください。';
-$_lang['setting_remove'] = '設定を削除';
 $_lang['setting_remove_confirm'] = '設定を削除しますか？（MODXのインストール設定が消失します）';
-$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = '<p><strong style="color:red;">新規インストール直後のため、各種設定を確認し保存する必要があります。設定を確認した後、データベースを更新するために「保存」ボタンをクリックしてください。</strong></p><p>※この設定はいつでも自由に変更できます。</p>';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'フレンドリーURL';
@@ -738,8 +735,8 @@ $_lang['setting_upload_maxsize_desc'] = '管理画面を通じてアップロー
 $_lang['setting_upload_media'] = 'アップロード可能なマルチメディアタイプ';
 $_lang['setting_upload_media_desc'] = 'ファイルブラウザを使用して「assets/media/」にアップロードできるメディアファイルの拡張子をカンマで区切って入力してください。';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
-$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
+$_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
 $_lang['setting_use_alias_path'] = 'エイリアスパスを使用';
 $_lang['setting_use_alias_path_desc'] = 'このオプションを「はい」に設定すると、ドキュメントのエイリアスがパスとして表示されます。<br />例えば、「child」というエイリアスを持ったドキュメント「parent」というエイリアスのフォルダの下に配置されていると、エイリアスパスは「/parent/child.html」になります。<br /><strong>注意: このオプションを「はい」にするとき、つまりエイリアスパスを使用するときは、ドキュメントから参照するものは全て（画像やCSS、JavaScript等を）絶対パスで指定する必要があります。<br />例えば、assets/imagesに対しては/assets/imagesと指定しなければなりません。baseタグを利用すると、この問題をスマートに解決できます。</strong>';
