@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Redigera tillgång till mediakälla';
 $_lang['access_to_contexts'] = 'Tillgång till kontexter';
 $_lang['access_to_resource_groups'] = 'Tillgång till resursgrupper';
 $_lang['access_type_err_ns'] = 'Målets typ eller id har inte angivits!';
-$_lang['acl_add'] = 'Skapa åtkomstkontroll';
 $_lang['authority'] = 'Behörighet';
 $_lang['authority_err_ns'] = 'Ange en minimal roll.';
 $_lang['category'] = 'Kategori';
