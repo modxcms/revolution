@@ -415,8 +415,8 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Parool, millega SMTP-s audentida.';
 $_lang['setting_mail_smtp_port'] = 'SMTP Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Vaikimisi SMTP serveri port.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Ühenduse Prefix';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Määrab ühenduse prefix-i. Valikud on "", "ssl" või "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
