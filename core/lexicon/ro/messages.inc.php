@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'User Group';
 $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'Mesaj';
-$_lang['message_create'] = 'Mesaj nou';
-$_lang['message_new'] = 'Mesaj nou';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'Mesajul nu a fost găsit.';
