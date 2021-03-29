@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Αντίγραφο';
 $_lang['entry'] = 'Entry';
-$_lang['entry_create'] = 'Create Entry';
 $_lang['entry_err_ae'] = 'Entry already exists!';
 $_lang['entry_err_nf'] = 'Entry not found.';
 $_lang['entry_err_ns'] = 'Entry not specified.';
