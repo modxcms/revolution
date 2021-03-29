@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Kelompok pengguna';
 $_lang['filter_by_type'] = 'Filter menurut jenis...';
 
 $_lang['message'] = 'Pesan';
-$_lang['message_create'] = 'Membuat pesan';
-$_lang['message_new'] = 'Membuat pesan';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Kirim Email';
 $_lang['message_err_nfs'] = 'Pesan tidak ditemukan.';
