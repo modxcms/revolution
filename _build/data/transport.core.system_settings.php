@@ -706,7 +706,7 @@ $settings['global_duplicate_uri_check']->fromArray([
 $settings['hidemenu_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['hidemenu_default']->fromArray([
   'key' => 'hidemenu_default',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
@@ -1337,7 +1337,7 @@ $settings['phpthumb_zoomcrop']->fromArray([
 $settings['publish_default']= $xpdo->newObject(modSystemSetting::class);
 $settings['publish_default']->fromArray([
   'key' => 'publish_default',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'site',
