@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Duplica';
 $_lang['entry'] = 'Termine';
-$_lang['entry_create'] = 'Creare Termine';
 $_lang['entry_err_ae'] = 'Termine già esistente!';
 $_lang['entry_err_nf'] = 'Termine non trovato.';
 $_lang['entry_err_ns'] = 'Termine non specificato.';
