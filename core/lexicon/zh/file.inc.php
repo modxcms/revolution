@@ -71,6 +71,7 @@ $_lang['file_folder_err_update'] = 'An error occurred while trying to update the
 $_lang['file_folder_parent'] = '父目录';
 $_lang['file_folder_remove'] = '删除目录';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
+$_lang['file_folder_rename'] = 'Rename Directory';
 $_lang['file_last_accessed'] = '最近访问';
 $_lang['file_last_modified'] = '最后修改';
 $_lang['file_name'] = '文件名称';
