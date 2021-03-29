@@ -71,6 +71,7 @@ $_lang['file_folder_err_update'] = 'Beim Versuch, das Verzeichnis zu bearbeiten,
 $_lang['file_folder_parent'] = 'Elternverzeichnis';
 $_lang['file_folder_remove'] = 'Verzeichnis löschen';
 $_lang['file_folder_remove_confirm'] = 'Sind Sie sicher, dass Sie das Verzeichnis "[[+directory]]" löschen möchten?<br />Das könnte möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert.';
+$_lang['file_folder_rename'] = 'Verzeichnis umbenennen';
 $_lang['file_last_accessed'] = 'Letzter Zugriff';
 $_lang['file_last_modified'] = 'Zuletzt geändert';
 $_lang['file_name'] = 'Dateiname';
