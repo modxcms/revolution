@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'The full relative URL for this Resource.';
 $_lang['resource_uri_override'] = 'Freeze URI';
 $_lang['resource_uri_override_help'] = 'Checking this will allow you to freeze the URI for this Resource at the value in the textbox below.';
 $_lang['resource_with_id_not_found'] = 'Ressurssi ID-ga %s ei leitud!';
-$_lang['resource_view'] = 'Vaade';
 $_lang['show_sort_options'] = 'Näita sorteerimise Valikuid';
 $_lang['site_schedule'] = 'Ajakava';
 $_lang['site_schedule_desc'] = 'See näitab, millal praegused ressurssid on määratud avalikustamisel ja mitte-avalikustamisele kindlatel kuupäevadel. Võite muuta praegust vaadet vajutades toolbar nupule.';
