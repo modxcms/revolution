@@ -565,26 +565,6 @@ MODx.combo.ContentDisposition = function(config) {
 Ext.extend(MODx.combo.ContentDisposition,MODx.combo.ComboBox);
 Ext.reg('modx-combo-content-disposition',MODx.combo.ContentDisposition);
 
-MODx.combo.ClassMap = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        name: 'class'
-        ,hiddenName: 'class'
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'System/ClassMap/GetList'
-        }
-        ,displayField: 'class'
-        ,valueField: 'class'
-        ,fields: ['class']
-        ,editable: false
-        ,pageSize: 20
-    });
-    MODx.combo.ClassMap.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.combo.ClassMap,MODx.combo.ComboBox);
-Ext.reg('modx-combo-class-map',MODx.combo.ClassMap);
-
 MODx.combo.ClassDerivatives = function(config) {
     config = config || {};
     Ext.applyIf(config,{

@@ -10,8 +10,6 @@
 
 namespace MODX\Revolution\Processors\Element;
 
-
-use MODX\Revolution\modClassMap;
 use MODX\Revolution\modElement;
 use MODX\Revolution\Processors\Processor;
 
