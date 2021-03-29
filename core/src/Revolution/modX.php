@@ -1742,17 +1742,17 @@ class modX extends xPDO {
             $this->error = $this->services->get('error');
         }
 
-        // First check if the processor can be found directly as a class name provided to $action
-        // We're limiting to subclasses of Processor to prevent instantiating arbitrary classes
-        if (static::isProcessorClass($action)) {
-            /** @var Processor $processor */
-            $processor = $action::getInstance($this, $action, $scriptProperties);
-
-            return $processor->run();
-        }
-
         // Check for a custom processors path that is not the core processor path to avoid running autoloaded core processors
-        if (!(isset($options['processors_path']) && !empty($options['processors_path']) && $options['processors_path'] != $this->config['processors_path'])) {
+        if (!isset($options['processors_path']) || $options['processors_path'] == $this->config['processors_path']) {
+            // First check if the processor can be found directly as a class name provided to $action
+            // We're limiting to subclasses of Processor to prevent instantiating arbitrary classes
+            if (static::isProcessorClass($action)) {
+                /** @var Processor $processor */
+                $processor = $action::getInstance($this, $action, $scriptProperties);
+
+                return $processor->run();
+            }
+
             // Check if we're dealing with an action like "context/update", which we transform into the 3.0+ class name
             $legacyAction = 'MODX\\Revolution\\Processors\\' . implode('\\', array_map('ucfirst', explode('/', $action)));
 
