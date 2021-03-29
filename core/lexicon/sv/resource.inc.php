@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'Hela relativa URL:en för denna resurs.';
 $_lang['resource_uri_override'] = 'Frys URI';
 $_lang['resource_uri_override_help'] = 'Genom att markera här kan du frysa URI:n för denna resurs till värdet i textrutan nedan.';
 $_lang['resource_with_id_not_found'] = 'Resursen med ID %s kunde inte hittas!';
-$_lang['resource_view'] = 'Visa';
 $_lang['show_sort_options'] = 'Visa sökinställningar';
 $_lang['site_schedule'] = 'Schema';
 $_lang['site_schedule_desc'] = 'Här visas de resurser som är schemalagda för publicering eller avpublicering på angivna datum. Du kan växla den aktuella vyn genom att klicka på knappen i verktygsraden.';
