@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'Die komplette relative URL für diese Ressource.'
 $_lang['resource_uri_override'] = 'URI fixieren';
 $_lang['resource_uri_override_help'] = 'Hier ein Häkchen zu setzen erlaubt Ihnen, den URI für diese Ressource auf den Wert im Textfeld darunter zu fixieren.';
 $_lang['resource_with_id_not_found'] = 'Ressource mit der ID %s nicht gefunden!';
-$_lang['resource_view'] = 'Anzeigen';
 $_lang['show_sort_options'] = 'Sortier-Optionen anzeigen';
 $_lang['site_schedule'] = 'Site-Terminplan';
 $_lang['site_schedule_desc'] = 'Dies zeigt die Ressourcen, für die aktuell eine Veröffentlichung oder ein Zurückziehen an einem bestimmten Datum geplant ist. Sie können die Anzeige durch Klicken auf den Toolbar-Button umschalten.';
