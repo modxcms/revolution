@@ -33,7 +33,13 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (empty($file)) {
             return $this->modx->error->failure($this->modx->lexicon('file_err_ns'));
         }
-        $file = preg_replace('/[\.]{2,}/', '', $file);
+        $pathinfo = pathinfo($file);
+        if ($pathinfo['dirname'].DIRECTORY_SEPARATOR.$pathinfo['basename'] != $file) {
+            $this->modx->log (modX::LOG_LEVEL_ERROR, 'Could not prepare the filepath ' . $file . '. Please set a valid UTF8 capable locale in the MODX system setting "locale".');
+        }
+        $directory = preg_replace('/[\.]{2,}/', '', htmlspecialchars($pathinfo['dirname']));
+        $name = htmlspecialchars($pathinfo['basename']);
+        $path = $directory.DIRECTORY_SEPARATOR.$name;
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {
@@ -42,7 +48,7 @@ class modBrowserFileRemoveProcessor extends modProcessor {
         if (!$this->source->checkPolicy('remove')) {
             return $this->failure($this->modx->lexicon('permission_denied'));
         }
-        $success = $this->source->removeObject($file);
+        $success = $this->source->removeObject($path);
 
         if (empty($success)) {
             $errors = $this->source->getErrors();
