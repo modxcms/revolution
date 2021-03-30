@@ -44,7 +44,7 @@ MODx.grid.UserGroupContext = function(config) {
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 100
-            ,sortable: false
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/permission'
