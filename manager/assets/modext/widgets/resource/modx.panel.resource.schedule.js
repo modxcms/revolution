@@ -68,10 +68,12 @@ MODx.grid.ResourceSchedule = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,width: 40
+            ,sortable: true
         },{
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
             ,width: 40
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=resource/update&id=' + record.data.id
@@ -82,6 +84,7 @@ MODx.grid.ResourceSchedule = function(config) {
             header: _('publish_date')
             ,dataIndex: 'pub_date'
             ,width: 150
+            ,sortable: true
             ,editor: {
                 xtype: 'xdatetime'
                 ,dateFormat: MODx.config.manager_date_format
@@ -93,6 +96,7 @@ MODx.grid.ResourceSchedule = function(config) {
             header: _('unpublish_date')
             ,dataIndex: 'unpub_date'
             ,width: 150
+            ,sortable: true
             ,editor: {
                 xtype: 'xdatetime'
                 ,dateFormat: MODx.config.manager_date_format
