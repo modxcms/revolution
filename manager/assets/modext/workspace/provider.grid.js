@@ -22,16 +22,19 @@ MODx.grid.Provider = function(config) {
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
+            ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
             header: _('service_url')
             ,dataIndex: 'service_url'
             ,width: 200
+            ,sortable: true
             ,editor: { xtype: 'textfield' ,allowBlank: false }
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
+            ,sortable: true
             ,editor: { xtype: 'textarea' }
         }]
         ,tbar: [{
