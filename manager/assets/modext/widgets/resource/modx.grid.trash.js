@@ -42,7 +42,7 @@ MODx.grid.Trash = function (config) {
             header: _('trash.context_title'),
             dataIndex: 'context_name',
             width: 60,
-            sortable: false
+            sortable: true
         }, {
             header: _('published'),
             dataIndex: 'published',
