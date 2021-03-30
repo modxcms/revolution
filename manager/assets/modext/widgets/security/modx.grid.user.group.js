@@ -27,6 +27,7 @@ MODx.grid.UserGroups = function(config) {
             header: _('user_group')
             ,dataIndex: 'name'
             ,width: 175
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/usergroup/update&id=' + record.data.usergroup
@@ -37,6 +38,7 @@ MODx.grid.UserGroups = function(config) {
             header: _('role')
             ,dataIndex: 'rolename'
             ,width: 175
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/permission'
@@ -47,6 +49,7 @@ MODx.grid.UserGroups = function(config) {
             header: _('rank')
             ,dataIndex: 'rank'
             ,width: 80
+            ,sortable: true
             ,editor: { xtype: 'numberfield', allowBlank: false, allowNegative: false }
         }]
         ,plugins: [new Ext.ux.dd.GridDragDropRowOrder({
