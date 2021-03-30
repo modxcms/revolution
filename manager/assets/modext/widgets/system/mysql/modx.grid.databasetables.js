@@ -22,30 +22,37 @@ MODx.grid.DatabaseTables = function(config) {
             header: _('database_table_tablename')
             ,dataIndex: 'Name'
             ,width: 250
+            ,sortable: true
         },{
             header: _('database_table_records')
             ,dataIndex: 'Rows'
             ,width: 70
+            ,sortable: true
         },{
             header: _('database_table_datasize')
             ,dataIndex: 'Data_size'
             ,width: 70
+            ,sortable: true
         },{
             header: _('database_table_overhead')
             ,dataIndex: 'Data_free'
             ,width: 70
+            ,sortable: true
         },{
             header: _('database_table_effectivesize')
             ,dataIndex: 'Effective_size'
             ,width: 70
+            ,sortable: true
         },{
             header: _('database_table_indexsize')
             ,dataIndex: 'Index_length'
             ,width: 70
+            ,sortable: true
         },{
             header: _('database_table_totalsize')
             ,dataIndex: 'Total_size'
             ,width: 70
+            ,sortable: true
         }]
         ,tbar: [{
             text: _('database_optimize')
