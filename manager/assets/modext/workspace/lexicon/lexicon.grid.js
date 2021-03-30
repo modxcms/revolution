@@ -32,7 +32,7 @@ MODx.grid.Lexicon = function(config) {
             header: _('value')
             ,dataIndex: 'value'
             ,width: 500
-            ,sortable: false
+            ,sortable: true
             ,editor: {xtype: 'textarea'}
             ,renderer: this._renderStatus
         },{
