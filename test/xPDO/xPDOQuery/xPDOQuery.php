@@ -568,6 +568,37 @@ class xPDOQueryTest extends xPDOTestCase {
             array(array("1=1; DROP TABLE `person`;" => '')),
             array(array("1=1 UNION SELECT * FROM `person` WHERE id = 2" => '')),
             array(array("1=1 UNION/**/SELECT * FROM `person` WHERE id = 2" => '')),
+            array("1=sleep(1)"),
+            array(array("1=sleep(1)")),
+            array("1 = sleep ( 69 )"),
+            array("sleep ( 69 )"),
+            array("benchmark(999, 100+1)"),
+            array("if(now()=sysdate(),sleep (20),0)"),
+        );
+    }
+
+    /**
+     * @param $clause
+     * @dataProvider providerInvalidClause
+     */
+    public function testInvalidClauseReturnsFalse($clause) {
+        $this->assertFalse(xPDOQuery::isValidClause($clause));
+    }
+
+    public function providerInvalidClause() {
+        return array(
+            array("1=1;DROP TABLE `person`"),
+            array("1=1 UNION SELECT * FROM `person` WHERE id = 2"),
+            array("1=1 UNION SELECT * FROM `person` WHERE id = 2;"),
+            array("1=1; DROP TABLE `person`;"),
+            array("1=1 UNION SELECT * FROM `person` WHERE id = 2"),
+            array("1=sleep(1)"),
+            array("1 = sleep ( 69 )"),
+            array("sleep ( 69 )"),
+            array("1=benchmark(1000,1+1)"),
+            array("1 =benchmark( 999,100+1)"),
+            array("benchmark ( 999, 100+1 )"),
+            array("if(now()=sysdate(),sleep (20),0)"),
         );
     }
 }

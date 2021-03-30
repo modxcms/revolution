@@ -115,6 +115,12 @@ abstract class xPDOQuery extends xPDOCriteria {
         $output = preg_replace('/\\".*?\\"/', '{mask}', $output);
         $output = preg_replace("/'.*?'/", '{mask}', $output);
         $output = preg_replace('/".*?"/', '{mask}', $output);
+        if (preg_match('/sleep\s*\(\s*\d+\s*\)/i', $output) > 0) {
+            return false;
+        }
+        if (preg_match('/benchmark\s*\(\s*.+,.+\s*\)/i', $output) > 0) {
+            return false;
+        }
         return strpos($output, ';') === false && strpos(strtolower($output), 'union') === false;
     }
 
