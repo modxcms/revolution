@@ -153,10 +153,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
 
 	Ext.applyIf(config,{
 		id: 'modx-package-browser-grid'
-        ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
-                 ,'downloads','releasedon','screenshot','license','location','version-compiled'
-                 ,'supports_db','minimum_supports','breaks_at','featured','audited','changelog'
-                 ,'downloaded','dlaction-text','dlaction-icon']
+        ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name','downloads','releasedon','screenshot','license','location','version-compiled','supports_db','minimum_supports','breaks_at','featured','audited','changelog','downloaded','dlaction-text','dlaction-icon']
         ,showActionsColumn: false
         ,url: MODx.config.connector_url
         ,baseParams: {
@@ -178,26 +175,30 @@ MODx.grid.PackageBrowserGrid = function(config) {
             header: _('version')
             ,dataIndex: 'version-compiled'
             ,width: 100
-			,fixed:true
+            ,sortable: true
+			,fixed: true
 			,id: 'meta-col'
         },{
             header: _('author')
             ,dataIndex: 'author'
             ,width: 100
-			,fixed:true
+            ,sortable: true
+			,fixed: true
 			,id: 'text-col'
         },{
             header: _('released')
             ,dataIndex: 'releasedon'
             ,width: 140
-			,fixed:true
+            ,sortable: true
+			,fixed: true
 			,id: 'info-col'
             ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format)
         },{
             header: _('downloads')
             ,dataIndex: 'downloads'
             ,width: 100
-			,fixed:true
+            ,sortable: true
+			,fixed: true
 			,id: 'text-col'
         }]
 		,tbar: [{
