@@ -1990,12 +1990,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     protected function getSkipExtensionsArray($properties = [])
     {
         $skipExtensions = $this->getOption('skipExtensions', $properties, '');
-        if (is_string($skipExtensions)) {
-            if (empty($skipExtensions)) {
-                $skipExtensions = [];
-            } else {
-                $skipExtensions = explode(',', $skipExtensions);
-            }
+        if (empty($skipExtensions)) {
+            $skipExtensions = [];
+        } else {
+            $skipExtensions = explode(',', $skipExtensions);
         }
 
         return $skipExtensions;
