@@ -77,12 +77,13 @@ MODx.grid.ContentType = function(config) {
             ,dataIndex: 'description'
             ,editor: { xtype: 'textfield' }
             ,width: 200
+            ,sortable: true
         },{
             header: _('mime_type')
             ,dataIndex: 'mime_type'
-            ,sortable: true
             ,editor: { xtype: 'textfield' }
             ,width: 80
+            ,sortable: true
         },{
             header: _('file_extensions')
             ,dataIndex: 'file_extensions'
@@ -91,7 +92,7 @@ MODx.grid.ContentType = function(config) {
         },{
             header: _('icon')
             ,dataIndex: 'icon'
-            ,sortable: false
+            ,sortable: true
             ,editor: { xtype: 'textfield' }
             ,renderer: this.renderIconField.createDelegate(this,[this],true)
         }, binaryColumn, {
