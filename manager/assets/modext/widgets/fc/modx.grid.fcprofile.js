@@ -84,6 +84,7 @@ MODx.grid.FCProfile = function(config) {
             header: _('usergroups')
             ,dataIndex: 'usergroups'
             ,width: 150
+            ,sortable: true
         }]
         ,viewConfig: {
             forceFit:true
