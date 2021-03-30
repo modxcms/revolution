@@ -79,7 +79,7 @@ MODx.grid.Context = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 575
-            ,sortable: false
+            ,sortable: true
             ,editor: { xtype: 'textarea' }
         },{
             header: _('rank')
