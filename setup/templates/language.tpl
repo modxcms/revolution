@@ -98,12 +98,10 @@
         showAllLanguagesButton.addEventListener('click', function(event) {
             languagesMode = 'all'
             renderLanguagesForm()
-            event.preventDefault()
         })
         showPopularLanguagesButton.addEventListener('click', function(event) {
             languagesMode = 'popular'
             renderLanguagesForm()
-            event.preventDefault()
         })
     </script>
 
