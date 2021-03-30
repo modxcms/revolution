@@ -35,13 +35,14 @@ MODx.grid.Role = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 350
+            ,sortable: true
             ,editor: { xtype: 'textarea' }
         },{
             header: _('authority')
             ,dataIndex: 'authority'
             ,width: 60
-            ,editor: { xtype: 'textfield' }
             ,sortable: true
+            ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
             text: _('create')
