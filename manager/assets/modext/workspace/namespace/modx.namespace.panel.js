@@ -69,13 +69,13 @@ MODx.grid.Namespace = function(config) {
             header: _('namespace_path')
             ,dataIndex: 'path'
             ,width: 500
-            ,sortable: false
+            ,sortable: true
             ,editor: { xtype: 'textfield' }
         },{
             header: _('namespace_assets_path')
             ,dataIndex: 'assets_path'
             ,width: 500
-            ,sortable: false
+            ,sortable: true
             ,editor: { xtype: 'textfield' }
         }]
         ,tbar: [{
