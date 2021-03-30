@@ -191,6 +191,7 @@ MODx.grid.ManagerLog = function(config) {
             header: _('object')
             ,dataIndex: 'name'
             ,width: 300
+            ,sortable: true
             ,renderer: Ext.util.Format.htmlEncode
         }]
         ,tbar: [{
