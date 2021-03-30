@@ -2748,20 +2748,19 @@ class xPDO {
         if (is_scalar($criteria)) {
             $pkType = $this->getPKType($className);
             if (is_string($pkType)) {
-                if (is_string($criteria) && !xPDOQuery::isValidClause($criteria)) {
-                    $criteria = null;
-                } else {
-                    switch ($pkType) {
-                        case 'int':
-                        case 'integer':
-                            $criteria = (int)$criteria;
+                $pk = $this->getPK($className);
+                switch ($pkType) {
+                    case 'int':
+                    case 'integer':
+                        if (!is_numeric($criteria)) {
+                            $criteria = null;
                             break;
-                        case 'string':
-                            if (is_int($criteria)) {
-                                $criteria = (string)$criteria;
-                            }
-                            break;
-                    }
+                        }
+                        $criteria = array($pk => (int)$criteria);
+                        break;
+                    case 'string':
+                        $criteria = array($pk => (string)$criteria);
+                        break;
                 }
             } elseif (is_array($pkType)) {
                 $criteria = null;
