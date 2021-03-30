@@ -278,6 +278,13 @@ class xPDOObjectTest extends xPDOTestCase {
         $person->remove();
     }
 
+    public function testGetObjectDoesNotReturnUnexpectedResults()
+    {
+        $person = $this->xpdo->getObject('xPDO\\Test\\Sample\\Person', 'test');
+
+        $this->assertNull($person, 'getObject returned an instance from an invalid key');
+    }
+
     /**
      * Test getting an object by the primary key.
      *
@@ -377,6 +384,13 @@ class xPDOObjectTest extends xPDOTestCase {
         $this->assertNull($expectedNull, "Got unexpected instance of Person object by invalid primary key");
     }
 
+    public function testGetObjectGraphDoesNotReturnUnexpectedResults()
+    {
+        $person = $this->xpdo->getObjectGraph('xPDO\\Test\\Sample\\Person', '{"PersonPhone":{"Phone":{}}}', 'test');
+
+        $this->assertNull($person, 'getObjectGraph returned unexpected result from invalid key');
+    }
+
     /**
      * Test getObjectGraph by PK
      */
@@ -433,6 +447,13 @@ class xPDOObjectTest extends xPDOTestCase {
         $this->assertTrue($phone instanceof Phone, "Error retrieving related Phone object via getObjectGraph, JSON graph");
     }
 
+    public function testGetCollectionDoesNotReturnUnexpectedResults()
+    {
+        $person = $this->xpdo->getCollection('xPDO\\Test\\Sample\\Person', 'test');
+
+        $this->assertEmpty($person, 'getCollection returned data from an invalid where clause');
+    }
+
     /**
      * Test xPDO::getCollection
      */
@@ -446,6 +467,13 @@ class xPDOObjectTest extends xPDOTestCase {
         $this->assertTrue(isset($people[1]) && $people[1] instanceof Person, "Error retrieving all objects.");
         $this->assertTrue(isset($people[2]) && $people[2] instanceof Person, "Error retrieving all objects.");
         $this->assertTrue(count($people) == 2, "Error retrieving all objects.");
+    }
+
+    public function testGetCollectionGraphDoesNotReturnUnexpectedResults()
+    {
+        $person = $this->xpdo->getCollectionGraph('xPDO\\Test\\Sample\\Person', array('PersonPhone' => array('Phone' => array())), 'test');
+
+        $this->assertEmpty($person, 'getCollectionGraph returned data from an invalid where clause');
     }
 
     /**

@@ -802,6 +802,13 @@ abstract class xPDOQuery extends xPDOCriteria {
             $field['conjunction']= $conjunction;
             $result = new xPDOQueryCondition($field);
         }
+        else {
+            $result = new xPDOQueryCondition([
+                'sql' => $conditions,
+                'binding' => null,
+                'conjunction' => $conjunction
+            ]);
+        }
         return $result;
     }
 

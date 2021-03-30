@@ -1060,6 +1060,7 @@ class xPDO {
      */
     public function getObjectGraph($className, $graph, $criteria= null, $cacheFlag= true) {
         $object= null;
+        $this->sanitizePKCriteria($className, $criteria);
         if ($collection= $this->getCollectionGraph($className, $graph, $criteria, $cacheFlag)) {
             if (!count($collection) === 1) {
                 $this->log(xPDO::LOG_LEVEL_WARN, 'getObjectGraph criteria returned more than one instance.');
