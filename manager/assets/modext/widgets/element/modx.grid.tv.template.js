@@ -45,10 +45,12 @@ MODx.grid.TemplateVarTemplate = function(config) {
             header: _('category')
             ,dataIndex: 'category_name'
             ,width: 300
+            ,sortable: true
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
+            ,sortable: true
         },tt]
         ,tbar: ['->',{
             xtype: 'modx-combo-category'
