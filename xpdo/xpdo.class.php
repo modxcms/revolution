@@ -2752,8 +2752,8 @@ class xPDO {
                 switch ($pkType) {
                     case 'int':
                     case 'integer':
-                        if (!is_numeric($criteria)) {
-                            $criteria = null;
+                        if (!is_int($criteria) && (string)(int)$criteria !== (string)$criteria) {
+                            $criteria = array($pk => null);
                             break;
                         }
                         $criteria = array($pk => (int)$criteria);
