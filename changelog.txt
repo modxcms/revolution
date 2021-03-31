@@ -1,5 +1,11 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.8.3-pl (March 31, 2021)
+====================================
+- Prevent sleep()/benchmark() usage in criteria
+- Refactor xPDO->sanitizePKCriteria to use prepared statements
+- Prevent unexpected results with non-conditional string criteria
+
 xPDO 2.8.2-pl (February 19, 2021)
 ====================================
 - Update pclzip.lib.php to resolve PHP Notice
