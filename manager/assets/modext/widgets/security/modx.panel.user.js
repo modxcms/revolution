@@ -417,7 +417,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,description: _('user_class_key_desc')
             ,xtype: 'textfield'
             ,anchor: '100%'
-            ,value: 'modUser'
+            ,value: 'MODX\\Revolution\\modUser'
         },{
             id: 'modx-user-comment'
             ,name: 'comment'
