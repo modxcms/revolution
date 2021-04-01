@@ -830,7 +830,9 @@ class modTemplateVar extends modElement
      */
     public function getBindingDataFromValue($value)
     {
-        $nvalue = trim($value);
+        if (is_string($value)) {
+            $nvalue = trim($value);
+        }
         $cmd = false;
         $param = '';
         $properties = [];
@@ -885,12 +887,12 @@ class modTemplateVar extends modElement
                     $output = $this->xpdo->getChunk($param, $properties);
                 }
                 break;
-                
+
             case 'SNIPPET':
                 if ($preProcess) {
                     $output = $this->xpdo->runSnippet($param, $properties);
                 }
-                break;                
+                break;
 
             case 'RESOURCE':
             case 'DOCUMENT': /* retrieve a document and process it's content */
@@ -996,12 +998,12 @@ class modTemplateVar extends modElement
         $match2 = [];
         $binding_string = trim($binding_string);
         $regexp = '/@(' . implode('|', $this->bindings) . ')\s*(.*)/is'; /* Split binding on whitespace */
-        
+
         if (preg_match($regexp, $binding_string, $match)) {
             /* We can't return the match array directly because the first element is the whole string */
-            
+
             $regexp2 = '/(\S+)\s+(.+)/is'; /* Split binding on second whitespace to get properties */
-            
+
             $properties = [];
             if (preg_match($regexp2, $match[2] , $match2)) {
                 if (isset($match2[2])) {
@@ -1015,7 +1017,7 @@ class modTemplateVar extends modElement
                     }
                 }
             }
-            
+
             $binding_array = [
                 strtoupper($match[1]),
                 trim($match[2]),
