@@ -62,7 +62,7 @@ MODx.panel.UserGroup = function(config) {
                             },{
                                 name: 'name'
                                 ,id: 'modx-usergroup-name'
-                                ,xtype: config.record && (config.record.name == 'Administrator' || config.record.id == 0) ? 'statictextfield' : 'textfield'
+                                ,xtype: config.record && (config.record.name === 'Administrator' || config.record.id === 0) ? 'statictextfield' : 'textfield'
                                 ,fieldLabel: _('name')
                                 ,allowBlank: false
                                 ,enableKeyEvents: true

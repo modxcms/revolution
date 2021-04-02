@@ -83,7 +83,7 @@ MODx.grid.UserGroupContext = function(config) {
             ,allowBlank: true
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
-                ,group: 'Admin'
+                ,group: 'Administrator'
             }
             ,listeners: {
                 'select': {fn:this.filterPolicy,scope:this}
@@ -242,7 +242,7 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,hiddenName: 'policy'
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
-                ,group: 'Admin,Object'
+                ,group: 'Administrator,Object'
                 ,combo: '1'
             }
             ,allowBlank: false
