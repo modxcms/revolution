@@ -414,11 +414,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Lösenordet som ska användas för att 
 $_lang['setting_mail_smtp_port'] = 'SMTP-port';
 $_lang['setting_mail_smtp_port_desc'] = 'Anger SMTP-serverns standardport.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP-kryptering';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Krypteringen av SMTP-anslutningen. Alternativen är "", "ssl" eller "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Anger om TLS-kryptering ska aktiveras automatiskt om en server stödjer det även om "SMTP-kryptering" inte är satt till "tls".';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP individuella meddelanden';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Ger möjligheten att låta till-fältet processas som individuella meddelanden istället för att sända till hela TO-adressen.';
