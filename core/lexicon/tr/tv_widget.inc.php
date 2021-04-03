@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'En son zaman';
 $_lang['latest_time_desc'] = 'Seçilebilecek en son izin verilen süre.';
 $_lang['listbox'] = 'Liste kutusu (Tek-Seçim)';
 $_lang['listbox-multiple'] = 'Liste kutusu (Çoklu-Seçim)';
-$_lang['list-multiple-legacy'] = 'Çoklu eski liste';
 $_lang['lower_case'] = 'Küçük Harf';
 $_lang['max_length'] = 'Maksimum Uzunluk';
 $_lang['min_length'] = 'Minimum Uzunluk';

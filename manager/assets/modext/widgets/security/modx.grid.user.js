@@ -112,7 +112,7 @@ MODx.grid.User = function(config) {
             ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
         }]
         ,tbar: [{
-            text: _('user_new')
+            text: _('create')
             ,handler: this.createUser
             ,scope: this
             ,cls:'primary-button'
@@ -204,21 +204,21 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         } else {
             if (p.indexOf('pupdate') != -1) {
                 m.push({
-                    text: _('user_update')
+                    text: _('edit')
                     ,handler: this.updateUser
                 });
             }
             if (p.indexOf('pcopy') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('user_duplicate')
+                    text: _('duplicate')
                     ,handler: this.duplicateUser
                 });
             }
             if (p.indexOf('premove') != -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('user_remove')
+                    text: _('delete')
                     ,handler: this.removeUser
                 });
             }
@@ -251,7 +251,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
 
     ,removeUser: function() {
         MODx.msg.confirm({
-            title: _('user_remove')
+            title: _('delete')
             ,text: _('user_confirm_remove')
             ,url: this.config.url
             ,params: {

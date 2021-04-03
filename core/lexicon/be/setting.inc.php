@@ -740,6 +740,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Увядзіце максімальны
 $_lang['setting_upload_media'] = 'Дазволеныя да загрузкі тыпы медыя-файлаў';
 $_lang['setting_upload_media_desc'] = 'Тут вы можаце пазначыць спіс тыпаў файлаў, якія можна загружаць у каталог "assets/media/", выкарыстоўваючы дыспетчар файлаў. Калі ласка, пазначце пашырэнні тыпаў файлаў праз коску.';
 
+$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
+$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+
 $_lang['setting_use_alias_path'] = 'Выкарыстоўваць укладзеныя URL';
 $_lang['setting_use_alias_path_desc'] = 'Значэнне «Так» для гэтай налады пакажа поўны шлях да рэсурсу, калі ў рэсурса ёсць псеўданім. Напрыклад, калі рэсурс з псеўданімам "child" размешчаны ўнутры рэсурсу-кантэйнера з псеўданімам "parent", то поўны шлях да рэсурсу будзе выведзены так: \'/parent/child.html\'.<br /><strong>ВАЖНА: Усталёўваючы значэнне «Так» для гэтай налады, выкарыстоўвайце поўны шлях у спасылках для такіх файлаў, як малюнкі, CSS, JavaScript, і г.д. Напрыклад, \'/assets/images\', а не \'assets/images\'. Такім чынам вы абароніце браўзер (або веб-сервер) ад дадання адноснага шляху да шляху псеўданіма.</strong>';
 

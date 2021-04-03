@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Nejnovější možný čas';
 $_lang['latest_time_desc'] = 'Nejnovější čas, který může být zvolen..';
 $_lang['listbox'] = 'Seznam (jeden vybraný)';
 $_lang['listbox-multiple'] = 'Seznam (více vybraných)';
-$_lang['list-multiple-legacy'] = 'Seznam s více možnostmi';
 $_lang['lower_case'] = 'Malá písmena';
 $_lang['max_length'] = 'Max. délka';
 $_lang['min_length'] = 'Min. délka';

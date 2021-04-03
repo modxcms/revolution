@@ -16,7 +16,7 @@ MODx.grid.SettingsGrid = function(config) {
 
     if (!config.tbar) {
         config.tbar = [{
-            text: _('setting_create')
+            text: _('create')
             ,scope: this
             ,cls:'primary-button'
             ,handler: {
@@ -256,10 +256,10 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
             m = this.menu.record.menu;
         } else {
             m.push({
-                text: _('setting_update')
+                text: _('edit')
                 ,handler: this.updateSetting
             },'-',{
-                text: _('setting_remove')
+                text: _('delete')
                 ,handler: this.removeSetting
             });
         }
@@ -435,7 +435,7 @@ MODx.window.CreateSetting = function(config) {
     config = config || {};
     config.keyField = config.keyField || {};
     Ext.applyIf(config,{
-        title: _('setting_create')
+        title: _('create')
         ,width: 600
         ,url: config.url
         ,action: 'System/Settings/Create'
@@ -601,7 +601,7 @@ MODx.window.UpdateSetting = function(config) {
     config = config || {};
     this.ident = config.ident || 'modx-uss-'+Ext.id();
     Ext.applyIf(config,{
-        title: _('setting_update')
+        title: _('edit')
         ,width: 600
         ,url: config.grid.config.url
         ,action: 'System/Settings/Update'

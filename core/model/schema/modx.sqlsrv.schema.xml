@@ -290,24 +290,6 @@
         </validation>
     </object>
 
-    <object class="modClassMap" table="class_map" extends="xPDO\Om\xPDOSimpleObject">
-        <field key="class" dbtype="nvarchar" precision="120" phptype="string" null="false" default="" index="unique" />
-        <field key="parent_class" dbtype="nvarchar" precision="120" phptype="string" null="false" default="" index="index" />
-        <field key="name_field" dbtype="nvarchar" precision="255" phptype="string" null="false" default="name" index="index" />
-        <field key="path" dbtype="nvarchar" precision="512" phptype="string" default="" />
-        <field key="lexicon" dbtype="nvarchar" precision="255" phptype="string" null="false" default="core:resource" />
-
-        <index alias="class" name="class" primary="false" unique="true" type="BTREE">
-            <column key="class" length="" collation="A" null="false" />
-        </index>
-        <index alias="parent_class" name="parent_class" primary="false" unique="false" type="BTREE">
-            <column key="parent_class" length="" collation="A" null="false" />
-        </index>
-        <index alias="name_field" name="name_field" primary="false" unique="false" type="BTREE">
-            <column key="name_field" length="" collation="A" null="false" />
-        </index>
-    </object>
-
     <object class="modContentType" table="content_type" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="nvarchar" precision="255" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="nvarchar" precision="512" phptype="string" null="true" />
@@ -703,7 +685,7 @@
         models to be loaded prior to modX request handling. Useful for when you want to integrate custom data and
         extensions, such as Custom Resource Classes, into the core.
     -->
-    <object class="modExtensionPackage" table="extension_packages" extends="xPDO\Om\xPDOObject">
+    <object class="modExtensionPackage" table="extension_packages" extends="xPDO\Om\xPDOSimpleObject">
         <!-- The namespace the extension package relates to -->
         <field key="namespace" dbtype="nvarchar" precision="40" phptype="string" null="false" default="core" index="index" />
         <!-- If empty, will assume the Namespace path -->

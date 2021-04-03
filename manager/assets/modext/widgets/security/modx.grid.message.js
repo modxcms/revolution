@@ -119,7 +119,7 @@ MODx.grid.Message = function(config) {
             ,editable: false
         }]
         ,tbar: [{
-            text: _('message_new')
+            text: _('create')
             ,cls:'primary-button'
             ,disabled: disabled
             ,scope: this
@@ -296,7 +296,7 @@ Ext.reg('modx-grid-message',MODx.grid.Message);
 MODx.window.CreateMessage = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('message_create')
+        title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Message/Create'
         ,fields: this.getFields()

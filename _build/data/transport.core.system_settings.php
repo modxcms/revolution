@@ -130,7 +130,7 @@ $settings['automatic_template_assignment']->fromArray([
 $settings['base_help_url']= $xpdo->newObject(modSystemSetting::class);
 $settings['base_help_url']->fromArray([
   'key' => 'base_help_url',
-  'value' => '//docs.modx.com/3.x/en/index',
+  'value' => '//docs.modx.com/help/',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',
@@ -1789,6 +1789,15 @@ $settings['upload_media']->fromArray([
   'key' => 'upload_media',
   'value' => 'mp3,wav,au,wmv,avi,mpg,mpeg',
   'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+], '', true, true);
+$settings['upload_translit']= $xpdo->newObject(modSystemSetting::class);
+$settings['upload_translit']->fromArray([
+  'key' => 'upload_translit',
+  'value' => true,
+  'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'file',
   'editedon' => null,

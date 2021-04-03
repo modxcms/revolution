@@ -738,6 +738,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Dosya yöneticisi aracılığıyla yük
 $_lang['setting_upload_media'] = 'Yüklenebilir Medya Türleri';
 $_lang['setting_upload_media_desc'] = 'Burada, Kaynak Yöneticisi\'ni kullanarak \'assets / media /\' dosyasına yüklenebilecek dosyaların bir listesini girebilirsiniz. Lütfen medya türleri için virgüllerle ayrılmış uzantıları girin.';
 
+$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
+$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+
 $_lang['setting_use_alias_path'] = 'Arkadaşça diğer yolu kullan';
 $_lang['setting_use_alias_path_desc'] = 'Kaynakta bir takma ad varsa, bu seçeneği \'evet\' olarak ayarlamak, Kaynağın tam yolunu görüntüleyecektir. Örneğin, \'alt\' adlı bir takma ada sahip bir Kaynak, \'üst\' olarak adlandırılan bir takma ada sahip bir kapsayıcı Kaynak içerisinde yer alıyorsa, Kaynak için tam takma ad yolu \'/parent/child.html\' olarak görüntülenecektir. <br /><strong> NOT: Bu seçeneği \'Evet\' (diğer ad yollarını açma) olarak ayarlarsanız, referans öğeler (resimler, CSS, JavaScript\'ler vb.) mutlak yolu, örn. \'/ assets / images\' olarak kullanır \'varlıklara / resimlere\' karşı. Böylece tarayıcının (veya web sunucusunun) takma ad yoluna göre yol eklemesini engelleyeceksiniz.</strong>';
 

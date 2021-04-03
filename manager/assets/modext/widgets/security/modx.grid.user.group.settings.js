@@ -22,7 +22,7 @@ MODx.grid.GroupSettings = function(config) {
         ,save_action: 'Security/Group/Setting/UpdateFromGrid'
         ,fk: config.group
         ,tbar: [{
-            text: _('setting_create')
+            text: _('create')
             ,cls:'primary-button'
             ,scope: this
             ,handler: {
@@ -52,10 +52,10 @@ Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
             m = this.menu.record.menu;
         } else {
             m.push({
-                text: _('setting_update')
+                text: _('edit')
                 ,handler: this.updateSetting
             },'-',{
-                text: _('setting_remove')
+                text: _('remove')
                 ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'Security/Group/Setting/Remove'])
             });
         }

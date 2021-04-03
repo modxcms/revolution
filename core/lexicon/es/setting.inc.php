@@ -738,6 +738,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Tamaño máximo permitido de los archiv
 $_lang['setting_upload_media'] = 'Tipos de Archivo Multimedia Permitidos en Subida';
 $_lang['setting_upload_media_desc'] = 'Lista separada por comas de los tipos de archivo multimedia permitidos para subir a la carpeta "assets/media" utilizando el Administrador de Recursos.';
 
+$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
+$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+
 $_lang['setting_use_alias_path'] = 'Usar la Ruta de Alias Amigable';
 $_lang['setting_use_alias_path_desc'] = 'Configurando esta opción a "Sí" se mostrará la ruta completa al Recurso si éste tiene un alias. Por ejemplo, si un Recurso con un alias de "hijo" se encuentra dentro de un Recurso contenedor con un alias de "padre", entonces la ruta completa del alias al Recurso será mostrado como "/padre/hijo.html".<br /><strong>NOTA: Cuando esta opción se configura como "Sí" (activando las rutas de alias), los recursos (como imágenes, css, javascript, etc.) usan la ruta absoluta, como por ejemplo "/assets/images" en lugar de "assets/images". Al hacer esto, prevendrás que navegador o servidor web añadan la ruta relativa a la ruta del alias.</strong>';
 

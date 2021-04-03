@@ -738,6 +738,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Zadejte maximální velikost souboru, k
 $_lang['setting_upload_media'] = 'Povolené typy médií';
 $_lang['setting_upload_media_desc'] = 'Zde můžete zadat seznam souborů, které mohou být nahrávány do "assets/media/" pomocí správce souborů. Zadejte přípony souborů pro typy médií oddělené čárkami.';
 
+$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
+$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+
 $_lang['setting_use_alias_path'] = 'Použít cesty pomocí přátelských aliasů';
 $_lang['setting_use_alias_path_desc'] = 'Nastavením možnosti na "Ano" zobrazí celou cestu k dokumentu pokud má dokument alias. Například, pokud je dokument s aliasem "potomek" umístěn uvnitř složky s aliasem "rodic", pak bude celá adresa zobrazena jako "/rodic/potomek.html".<br /><strong>Poznámka: Je-li toto nastaveno na Ano (zapnutím cest pomocí aliasů), referencované položky (jako obrázky, css, javaskripty, atd.) používají absolutní cesty: např., "/assets/images" na rozdíl od "assets/images". Tímto zamezíte prohlížeči (nebo serveru) vkládání relativních cest do aliasů.</strong>';
 

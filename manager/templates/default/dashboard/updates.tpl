@@ -3,7 +3,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th>{$_lang.updates_sort}</th>
+                <th>{$_lang.updates_type}</th>
                 <th>{$_lang.updates_status}</th>
                 <th>{$_lang.updates_action}</th>
             </tr>

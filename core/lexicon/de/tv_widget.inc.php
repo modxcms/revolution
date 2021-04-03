@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Späteste Zeit';
 $_lang['latest_time_desc'] = 'Die späteste erlaubte Zeit, die ausgewählt werden kann.';
 $_lang['listbox'] = 'Listbox (einfache Auswahl)';
 $_lang['listbox-multiple'] = 'Listbox (Mehrfachauswahl)';
-$_lang['list-multiple-legacy'] = 'Hierarchische Listbox (Mehrfachauswahl)';
 $_lang['lower_case'] = 'Kleinbuchstaben';
 $_lang['max_length'] = 'Maximale Länge';
 $_lang['min_length'] = 'Minimale Länge';

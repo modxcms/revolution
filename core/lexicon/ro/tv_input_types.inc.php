@@ -14,7 +14,6 @@ $_lang['richtext'] = 'RichText';
 $_lang['dropdown'] = 'Listă derulabilă';
 $_lang['listbox'] = 'Căsuță de tip listă (cu o singură alegere)';
 $_lang['listbox-multiple'] = 'Căsuță de tip listă (cu alegere multiplă)';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['option'] = 'Radio Options';
 $_lang['checkbox'] = 'Căsuță de bifare';
 $_lang['image'] = 'Imagine';

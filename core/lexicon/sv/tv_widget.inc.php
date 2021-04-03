@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Senaste klockslag';
 $_lang['latest_time_desc'] = 'Det senaste klockslag som kan väljas.';
 $_lang['listbox'] = 'Listbox (enkelval)';
 $_lang['listbox-multiple'] = 'Listbox (flerval)';
-$_lang['list-multiple-legacy'] = 'Äldre flervalslista';
 $_lang['lower_case'] = 'Gemener';
 $_lang['max_length'] = 'Maximal längd';
 $_lang['min_length'] = 'Minimal längd';

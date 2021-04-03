@@ -39,7 +39,6 @@ $classes= [
     \MODX\Revolution\modCategory::class,
     \MODX\Revolution\modCategoryClosure::class,
     \MODX\Revolution\modChunk::class,
-    \MODX\Revolution\modClassMap::class,
     \MODX\Revolution\modContentType::class,
     \MODX\Revolution\modContext::class,
     \MODX\Revolution\modContextResource::class,

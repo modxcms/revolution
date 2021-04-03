@@ -72,7 +72,6 @@ $_lang['latest_time'] = '最も遅い時刻';
 $_lang['latest_time_desc'] = '選択可能な最も遅い時刻を指定します。';
 $_lang['listbox'] = 'リストボックス（単一選択）';
 $_lang['listbox-multiple'] = 'リストボックス（複数選択）';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
 $_lang['lower_case'] = '小文字';
 $_lang['max_length'] = '最大の長さ';
 $_lang['min_length'] = '最小の長さ';

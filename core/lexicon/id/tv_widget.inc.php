@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Waktu terakhir';
 $_lang['latest_time_desc'] = 'Waktu terakhir yang bisa dipilih.';
 $_lang['listbox'] = 'Listbox (Single-pilih)';
 $_lang['listbox-multiple'] = 'Listbox (multi pilih)';
-$_lang['list-multiple-legacy'] = 'Daftar beberapa peninggalan';
 $_lang['lower_case'] = 'Huruf kecil';
 $_lang['max_length'] = 'Panjang Maksimum';
 $_lang['min_length'] = 'Panjang minimum';

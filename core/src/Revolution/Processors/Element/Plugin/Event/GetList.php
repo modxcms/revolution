@@ -52,7 +52,7 @@ class GetList extends ModelProcessor
 
             $eventArray['menu'] = [
                 [
-                    'text' => $this->modx->lexicon('plugin_event_update'),
+                    'text' => $this->modx->lexicon('edit'),
                     'handler' => 'this.updateEvent',
                 ],
             ];

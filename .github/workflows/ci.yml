@@ -2,7 +2,11 @@ name: CI
 
 on:
   push:
+      branches-ignore:
+          - 'l10n_**'
   pull_request:
+      branches-ignore:
+          - 'l10n_**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -25,7 +29,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0']
+        php-version: ['7.1', '7.2', '7.3', '7.4', '8.0']
 
     steps:
       - name: Checkout

@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Area Testo Formattabile (RichText)';
 $_lang['dropdown'] = 'Menu a Tendina (DropDown List Menu)';
 $_lang['listbox'] = 'Lista, Singola Scelta (Listbox (Single-Select))';
 $_lang['listbox-multiple'] = 'Lista, Scelta Multipla (ctrl+)(Listbox (Multi-Select))';
-$_lang['list-multiple-legacy'] = 'Liste multiple Legacy';
 $_lang['option'] = 'Bottoni Scelta (Radio Options)';
 $_lang['checkbox'] = 'Check Box';
 $_lang['image'] = 'Immagine';

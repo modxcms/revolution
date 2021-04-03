@@ -42,7 +42,7 @@ MODx.grid.SystemEvent = function(config) {
 			,hidden: true
 		}]
 		,tbar: [{
-            text: _('system_events.create')
+            text: _('create')
             ,scope: this
             ,cls:'primary-button'
             ,handler: {
@@ -87,7 +87,7 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 		var m = [];
 		if (this.menu.record.service == 6) { /* user defined */
 			m.push({
-				text: _('system_events.remove')
+				text: _('delete')
 				,handler: this.removeEvent
 			});
 		}
@@ -112,7 +112,7 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 
 	,removeEvent: function(btn, e) {
 		MODx.msg.confirm({
-			title: _('system_events.remove')
+			title: _('delete')
 			,text: _('system_events.remove_confirm', { name: this.menu.record.name })
 			,url: this.config.url
 			,params: {
@@ -146,7 +146,7 @@ Ext.reg('modx-grid-system-event',MODx.grid.SystemEvent);
 MODx.window.CreateUpdateEvent = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('system_events.create')
+        title: _('create')
         ,width: 450
 		,autoHeight: true
         ,url: config.url

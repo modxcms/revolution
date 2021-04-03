@@ -14,7 +14,6 @@ $_lang['richtext'] = 'Formázott szöveg';
 $_lang['dropdown'] = 'Legördülő menü';
 $_lang['listbox'] = 'Lista (egyetlen választással)';
 $_lang['listbox-multiple'] = 'Lista (több választási lehetőség)';
-$_lang['list-multiple-legacy'] = 'Korábbi többszörös felsorolás';
 $_lang['option'] = 'Választókapcsoló';
 $_lang['checkbox'] = 'Jelölőnégyzet';
 $_lang['image'] = 'Kép';

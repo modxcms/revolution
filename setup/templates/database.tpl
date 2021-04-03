@@ -125,7 +125,7 @@
                 <label for="cmsadminemail">{$_lang.connection_default_admin_email}</label>
             </div>
             <div class="col">
-                <input type="email" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" />
+                <input type="email" name="cmsadminemail" id="cmsadminemail" value="{$config.cmsadminemail|default|escape}" required/>
                 <span class="field_error" id="cmsadminemail_error">{$error_cmsadminemail|default}</span>
             </div>
         </div>
@@ -134,7 +134,7 @@
                 <label for="cmsadmin">{$_lang.connection_default_admin_login}</label>
             </div>
             <div class="col">
-                <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default|escape}" />
+                <input type="text" name="cmsadmin" id="cmsadmin" value="{$config.cmsadmin|default|escape}" required/>
                 <span class="field_error" id="cmsadmin_error">{$error_cmsadmin|default}</span>
             </div>
         </div>
@@ -143,7 +143,7 @@
                 <label for="cmspassword">{$_lang.connection_default_admin_password}</label>
             </div>
             <div class="col">
-                <input type="password" id="cmspassword" type="password" name="cmspassword" value="{$config.cmspassword|default|escape}" />
+                <input type="password" id="cmspassword" type="password" name="cmspassword" value="{$config.cmspassword|default|escape}" required/>
                 <span class="field_error" id="cmspassword_error">{$error_cmspassword|default}</span>
             </div>
         </div>
@@ -152,7 +152,7 @@
                 <label for="cmspasswordconfirm">{$_lang.connection_default_admin_password_confirm}</label>
             </div>
             <div class="col">
-                <input type="password" id="cmspasswordconfirm" type="password" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default|escape}" />
+                <input type="password" id="cmspasswordconfirm" type="password" name="cmspasswordconfirm" value="{$config.cmspasswordconfirm|default|escape}" required/>
                 <span class="field_error" id="cmspasswordconfirm_error">{$error_cmspasswordconfirm|default}</span>
             </div>
         </div>

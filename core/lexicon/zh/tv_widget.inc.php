@@ -70,7 +70,6 @@ $_lang['latest_time'] = 'Latest Time';
 $_lang['latest_time_desc'] = 'The latest allowed time that can be selected.';
 $_lang['listbox'] = '列表框 (单选)';
 $_lang['listbox-multiple'] = '列表框 （多选）';
-$_lang['list-multiple-legacy'] = '传统多列表';
 $_lang['lower_case'] = 'Lower Case';
 $_lang['max_length'] = 'Max Length';
 $_lang['min_length'] = 'Min Length';

@@ -149,7 +149,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var node = this.cm.activeNode;
         var key = node.attributes.pk;
         MODx.msg.confirm({
-            title: _('context_remove')
+            title: _('remove_context')
             ,text: _('context_remove_confirm')
             ,url: MODx.config.connector_url
             ,params: {
@@ -508,7 +508,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
         }
         m.push({
-            text: _('context_refresh')
+            text: _('refresh_context')
             ,handler: function() {
                 this.refreshNode(this.cm.activeNode.id,true);
             }
@@ -519,14 +519,14 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         }
         if (ui.hasClass('pnew')) {
             m.push({
-                text: _('context_duplicate')
+                text: _('duplicate_context')
                 ,handler: this.duplicateContext
             });
         }
         if (ui.hasClass('pdelete')) {
             m.push('-');
             m.push({
-                text: _('context_remove')
+                text: _('remove_context')
                 ,handler: this.removeContext
             });
         }
@@ -627,7 +627,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (ui.hasClass('pview') && a.preview_url != '') {
             m.push('-');
             m.push({
-                text: _('resource_view')
+                text: _('resource_preview')
                 ,handler: this.preview
             });
         }
@@ -658,7 +658,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         if (Ext.isObject(o)) {
             Ext.apply(types,o);
         }
-        var coreTypes = ['MODX\\Revolution\\modDocument','MODX\\Revolution\\modWebLink','MODX\\Revolution\\modSymLink','MODX\\Revolution\\modStaticResource'];
+        var coreTypes = ['MODX\Revolution\modDocument','MODX\Revolution\modWebLink','MODX\Revolution\modSymLink','MODX\Revolution\modStaticResource'];
         var ct = [];
         var qct = [];
         for (var k in types) {
