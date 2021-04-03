@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea that makes MODX Revolution even better
-
+labels: feature
 ---
 
 ## Feature request
