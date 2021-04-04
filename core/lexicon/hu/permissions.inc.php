@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['perm.about_desc'] = 'Névjegy oldal.';
-$_lang['perm.access_permissions_desc'] = 'Any Access Permission-related pages and actions.';
+$_lang['perm.access_permissions_desc'] = 'Bármelyik hozzáférési engedélyhez kapcsolódó oldal és tevékenység.';
 $_lang['perm.actions_desc'] = 'Műveletek oldal.';
 $_lang['perm.add_children_desc'] = 'To add any Resources as children of the specified Resource or Elements to a Category.';
 $_lang['perm.change_password_desc'] = 'User can change their user password.';
