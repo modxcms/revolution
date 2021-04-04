@@ -71,6 +71,7 @@ $_lang['file_folder_err_update'] = 'Hiba történt a mappa frissítése közben.
 $_lang['file_folder_parent'] = 'Szülő mappa';
 $_lang['file_folder_remove'] = 'Mappa törlése';
 $_lang['file_folder_remove_confirm'] = 'Biztosan törli a(z) "[[+directory]]" mappát? Összeomolhat tőle a weboldala.';
+$_lang['file_folder_rename'] = 'Mappa átnevezése';
 $_lang['file_last_accessed'] = 'Utoljára megtekintve';
 $_lang['file_last_modified'] = 'Utoljára módosítva';
 $_lang['file_name'] = 'Állomány neve';
