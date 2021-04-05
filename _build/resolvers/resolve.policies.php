@@ -16,6 +16,7 @@ $map = [
     modAccessPolicy::POLICY_RESOURCE => modAccessPolicyTemplate::TEMPLATE_RESOURCE,
     modAccessPolicy::POLICY_ADMINISTRATOR => modAccessPolicyTemplate::TEMPLATE_ADMINISTRATOR,
     modAccessPolicy::POLICY_CONTENT_EDITOR => modAccessPolicyTemplate::TEMPLATE_ADMINISTRATOR,
+    modAccessPolicy::POLICY_DEVELOPER => modAccessPolicyTemplate::TEMPLATE_ADMINISTRATOR,
     modAccessPolicy::POLICY_LOAD_ONLY => modAccessPolicyTemplate::TEMPLATE_OBJECT,
     modAccessPolicy::POLICY_LOAD_LIST_VIEW => modAccessPolicyTemplate::TEMPLATE_OBJECT,
     modAccessPolicy::POLICY_OBJECT => modAccessPolicyTemplate::TEMPLATE_OBJECT,

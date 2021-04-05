@@ -25,25 +25,25 @@ use xPDO\xPDO;
  */
 class modAccessPolicy extends xPDOSimpleObject
 {
-    const POLICY_RESOURCE = 'Resource';
-    const POLICY_ADMINISTRATOR = 'Administrator';
-    const POLICY_LOAD_ONLY = 'Load Only';
-    const POLICY_LOAD_LIST_VIEW = 'Load, List and View';
-    const POLICY_OBJECT = 'Object';
-    const POLICY_ELEMENT = 'Element';
-    const POLICY_CONTENT_EDITOR = 'Content Editor';
-    const POLICY_MEDIA_SOURCE_ADMIN = 'Media Source Admin';
-    const POLICY_MEDIA_SOURCE_USER = 'Media Source User';
-    const POLICY_DEVELOPER = 'Developer';
-    const POLICY_CONTEXT = 'Context';
-    const POLICY_HIDDEN_NAMESPACE = 'Hidden Namespace';
+    public const POLICY_RESOURCE = 'Resource';
+    public const POLICY_ADMINISTRATOR = 'Administrator';
+    public const POLICY_LOAD_ONLY = 'Load Only';
+    public const POLICY_LOAD_LIST_VIEW = 'Load, List and View';
+    public const POLICY_OBJECT = 'Object';
+    public const POLICY_ELEMENT = 'Element';
+    public const POLICY_CONTENT_EDITOR = 'Content Editor';
+    public const POLICY_MEDIA_SOURCE_ADMIN = 'Media Source Admin';
+    public const POLICY_MEDIA_SOURCE_USER = 'Media Source User';
+    public const POLICY_DEVELOPER = 'Developer';
+    public const POLICY_CONTEXT = 'Context';
+    public const POLICY_HIDDEN_NAMESPACE = 'Hidden Namespace';
 
     /**
      * Returns list of core Policies
      *
      * @return array
      */
-    public static function getCorePolicies()
+    public static function getCorePolicies(): array
     {
         return [
             self::POLICY_RESOURCE,
@@ -66,7 +66,7 @@ class modAccessPolicy extends xPDOSimpleObject
      *
      * @return bool
      */
-    public function isCorePolicy($name)
+    public function isCorePolicy(string $name): bool
     {
         return in_array($name, static::getCorePolicies(), true);
     }
@@ -76,10 +76,11 @@ class modAccessPolicy extends xPDOSimpleObject
      *
      * @return array An array of access permissions for this Policy.
      */
-    public function getPermissions()
+    public function getPermissions(): array
     {
         $template = $this->getOne('Template');
-        if (empty($template)) {
+
+        if ($template === null) {
             return [];
         }
 
