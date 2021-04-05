@@ -29,3 +29,4 @@ include dirname(__DIR__) . '/common/3.0.0-update-principal_targets.php';
 include dirname(__DIR__) . '/common/3.0-policy-template-group-description.php';
 include dirname(__DIR__) . '/common/3.0-policy-template-description.php';
 include dirname(__DIR__) . '/common/3.0-policy-description.php';
+include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_welcome_screen_url.php';
