@@ -19,7 +19,7 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
     defaultClassKey: 'MODX\\Revolution\\modStaticResource'
     ,classLexiconKey: 'static_resource'
     ,rteElements: false
-    ,contentField: 'modx-resource-content-static'
+    ,contentField: 'modx-resource-content'
 
     ,getContentField: function(config) {
         return {
@@ -30,22 +30,22 @@ Ext.extend(MODx.panel.Static,MODx.panel.Resource,{
             ,fieldLabel: _('static_resource')
             ,description: '<b>[[*content]]</b>'
             ,name: 'content'
-            ,id: 'modx-resource-content-static' // changed id to not have to usual box-shadow around the content field
+            ,id: 'modx-resource-content'
             ,maxLength: 255
             ,anchor: '100%'
             ,value: (config.record.content || config.record.ta) || ''
             ,openTo: config.record.openTo
             ,listeners: {
                 'select':{fn:function(data) {
-                        var str = data.fullRelativeUrl;
-                        if (MODx.config.base_url != '/') {
-                            var regex = new RegExp('^' + MODx.config.base_url + '(.*)');
-                            str = str.replace(regex, '/$1');
-                        }
-                        if (str.substring(0,1) == '/') { str = str.substring(1); }
-                        Ext.getCmp('modx-resource-content-static').setValue(str);
-                        this.markDirty();
-                    },scope:this}
+                    var str = data.fullRelativeUrl;
+                    if (MODx.config.base_url != '/') {
+                        var regex = new RegExp('^' + MODx.config.base_url + '(.*)');
+                        str = str.replace(regex, '/$1');
+                    }
+                    if (str.substring(0,1) === '/') { str = str.substring(1); }
+                    Ext.getCmp('modx-resource-content').setValue(str);
+                    this.markDirty();
+                },scope:this}
             }
         };
     }
