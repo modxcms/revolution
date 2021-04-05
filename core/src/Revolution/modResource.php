@@ -906,7 +906,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                 if ($query->stmt && $query->stmt->execute()) {
                     while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                        $policy['modAccessResourceGroup'][$row['target']][] = [
+                        $policy[modAccessResourceGroup::class][$row['target']][] = [
                             'principal' => $row['principal'],
                             'authority' => $row['authority'],
                             'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : [],

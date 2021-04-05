@@ -481,7 +481,7 @@ class modElement extends modAccessibleSimpleObject
                 $query = new xPDOCriteria($this->xpdo, $sql, $bindings);
                 if ($query->stmt && $query->stmt->execute()) {
                     while ($row = $query->stmt->fetch(PDO::FETCH_ASSOC)) {
-                        $policy['modAccessCategory'][$row['target']][] = [
+                        $policy[modAccessCategory::class][$row['target']][] = [
                             'principal' => $row['principal'],
                             'authority' => $row['authority'],
                             'policy' => $row['data'] ? $this->xpdo->fromJSON($row['data'], true) : [],

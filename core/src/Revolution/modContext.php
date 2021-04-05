@@ -219,7 +219,7 @@ class modContext extends modAccessibleObject
                 $acls = $this->xpdo->getCollection(modAccessContext::class, $c);
                 /** @var modAccessContext $acl */
                 foreach ($acls as $acl) {
-                    $policy['modAccessContext'][$acl->get('target')][] = [
+                    $policy[modAccessContext::class][$acl->get('target')][] = [
                         'principal' => $acl->get('principal'),
                         'authority' => $acl->get('authority'),
                         'policy' => $acl->get('data') ? json_decode($acl->get('data'), true) : [],

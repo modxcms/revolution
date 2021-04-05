@@ -202,7 +202,7 @@ class modCategory extends modAccessibleSimpleObject
                 $acls = $this->xpdo->getIterator(modAccessCategory::class, $c);
 
                 foreach ($acls as $acl) {
-                    $policy['modAccessCategory'][$acl->get('target')][] = [
+                    $policy[modAccessCategory::class][$acl->get('target')][] = [
                         'principal' => $acl->get('principal'),
                         'authority' => $acl->get('authority'),
                         'policy' => $acl->get('data') ? $this->xpdo->fromJSON($acl->get('data'), true) : [],
