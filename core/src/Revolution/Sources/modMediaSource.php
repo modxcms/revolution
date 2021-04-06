@@ -1996,7 +1996,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $skipExtensions = explode(',', $skipExtensions);
         }
 
-        return $skipExtensions;
+        return !empty($skipExtensions) ? explode(',', $skipExtensions) : [];
     }
 
 
