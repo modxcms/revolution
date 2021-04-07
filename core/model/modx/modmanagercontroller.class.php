@@ -480,8 +480,11 @@ abstract class modManagerController {
      * @return string
      */
     public function getHeader() {
+        $this->setPlaceholder('_authToken', $this->modx->user->getUserToken('mgr'));
         $this->loadController('header.php',true);
-        return $this->fetchTemplate('header.tpl');
+        $output = $this->fetchTemplate('header.tpl');
+        $this->setPlaceholder('_authToken', '');
+        return $output;
     }
 
     /**
