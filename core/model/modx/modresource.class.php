@@ -197,7 +197,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public static function filterPathSegment(&$xpdo, $segment, array $options = array()) {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean) $xpdo->getOption('use_multibyte', false);
+        $mbext = function_exists('mb_strlen') && (boolean) $xpdo->getOption('use_multibyte', $options, false);
         $charset = strtoupper((string) $xpdo->getOption('modx_charset', $options, 'UTF-8'));
         $delimiter = $xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
         $delimiters = $xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
