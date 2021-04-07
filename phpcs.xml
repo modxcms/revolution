@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ruleset name="MODX Coding Standards">
+    <description>MODX dev PHP_CodeSniffer ruleset</description>
+    <file>_build</file>
+    <file>connectors</file>
+    <file>core</file>
+    <file>manager</file>
+    <file>setup</file>
+
+    <!-- Exclude paths -->
+    <exclude-pattern>manager/assets/ext3</exclude-pattern>
+    <exclude-pattern>core/lexicon</exclude-pattern>
+
+    <!-- Show progress, show the error codes for each message (source). -->
+    <arg value="ps" />
+
+    <!-- Ignore vendor files -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <!-- Our base rule: set to PSR12-->
+    <rule ref="PSR12"/>
+</ruleset>
