@@ -660,6 +660,7 @@ header {
 
         li {
             font-family: $codefonts;
+            padding: 10px;
 
             p {
                 color: #333333;
@@ -682,7 +683,6 @@ header {
         }
 
         & .warning, & .testWarn, & .success, & .testPassed, & .failed, & .testFailed {
-            padding: 10px;
             border-left: 0.2rem solid;
         }
 
