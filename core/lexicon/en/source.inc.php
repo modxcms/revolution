@@ -80,6 +80,7 @@ $_lang['prop_s3.skipFiles_desc'] = 'A comma-separated list. MODX will skip over 
 $_lang['prop_s3.thumbnailQuality_desc'] = 'The quality of the rendered thumbnails, in a scale from 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.';
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
+$_lang['prop_s3.endpoint_desc'] = 'Alternative S3-compatible endpoint URL, e.g., "https://s3.<region>.backblazeb2.com". Review your S3-compatible provider’s documentation for the endpoint location. Leave empty for Amazon S3';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
 $_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
 $_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
