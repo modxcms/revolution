@@ -709,6 +709,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $bases = $this->getBases($objectPath);
 
         $fullPath = $bases['pathAbsolute'].$objectPath;
+        if (!$this->checkFiletype($fullPath)) {
+            return false;
+        }
         if (!file_exists($fullPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$fullPath);
             return false;
@@ -757,6 +760,9 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $bases = $this->getBases($objectPath);
 
         $fullPath = $bases['pathAbsolute'].ltrim($objectPath,'/');
+        if (!$this->checkFiletype($fullPath)) {
+            return false;
+        }
 
         /** @var modFile $file */
         $file = $this->fileHandler->make($fullPath);

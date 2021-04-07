@@ -720,7 +720,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean|string
      */
     public function updateObject($objectPath,$content) {
-        /* create empty file that acts as folder */
+        if (!$this->checkFiletype($objectPath)) {
+            return false;
+        }
         $created = $this->driver->create_object($this->bucket,$objectPath,array(
                  'body' => $content,
                  'acl' => AmazonS3::ACL_PUBLIC,
@@ -744,6 +746,9 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
      * @return boolean
      */
     public function removeObject($objectPath) {
+        if (!$this->checkFiletype($objectPath)) {
+            return false;
+        }
         if (!$this->driver->if_object_exists($this->bucket,$objectPath)) {
             $this->addError('file',$this->xpdo->lexicon('file_folder_err_ns').': '.$objectPath);
             return false;
