@@ -8,8 +8,8 @@
     <file>setup</file>
 
     <!-- Exclude paths -->
-    <exclude-pattern>manager/assets/ext3</exclude-pattern>
-    <exclude-pattern>core/lexicon</exclude-pattern>
+    <exclude-pattern>manager/assets/ext3/</exclude-pattern>
+    <exclude-pattern>core/lexicon/</exclude-pattern>
 
     <!-- Show progress, show the error codes for each message (source). -->
     <arg value="ps" />
