@@ -31,6 +31,8 @@ class modS3MediaSource extends modMediaSource
 
         $bucket = $this->xpdo->getOption('bucket', $properties, '');
         $prefix = $this->xpdo->getOption('prefix', $properties, '');
+        $endpoint = $this->xpdo->getOption('endpoint', $properties, '');
+
         $config = [
             'credentials' => [
                 'key' => $this->xpdo->getOption('key', $properties, ''),
@@ -39,6 +41,11 @@ class modS3MediaSource extends modMediaSource
             'region' => $this->xpdo->getOption('region', $properties, 'us-east-2'),
             'version' => $this->xpdo->getOption('version', $properties, '2006-03-01'),
         ];
+
+        if (!empty($endpoint)) {
+            $config['endpoint'] = $endpoint;
+        }
+
         try {
             $client = new S3Client($config);
             if (!$client->doesBucketExist($bucket)) {
@@ -93,6 +100,14 @@ class modS3MediaSource extends modMediaSource
                 'type' => 'textfield',
                 'options' => '',
                 'value' => 'http://mysite.s3.amazonaws.com/',
+                'lexicon' => 'core:source',
+            ],
+            'endpoint' => [
+                'name'    => 'endpoint',
+                'desc'    => 'prop_s3.endpoint_desc',
+                'type'    => 'textfield',
+                'options' => '',
+                'value'   => '',
                 'lexicon' => 'core:source',
             ],
             'region' => [
