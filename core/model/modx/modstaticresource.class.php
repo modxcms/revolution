@@ -17,19 +17,17 @@
  */
 class modStaticResource extends modResource implements modResourceInterface {
     /**
-     * @var string Path of the file containing the source content, relative to
-     * the {@link modStaticResource::$_sourcePath}.
+     * @var string Path of the file containing the source content, relative to the media source or full absolute path
      */
     protected $_sourceFile= '';
+    /**
+     * @var array
+     */
+    protected $_sourceContents = [];
     /**
      * @var integer Size of the source file content in bytes.
      */
     protected $_sourceFileSize= 0;
-    /**
-     * @var string An absolute base filesystem path where the source file
-     * exists.
-     */
-    protected $_sourcePath= '';
 
     /**
      * Overrides modResource::__construct to set the class key for this Resource type
@@ -48,26 +46,54 @@ class modStaticResource extends modResource implements modResourceInterface {
      * @return string The absolute path to the static source file.
      */
     public function getSourceFile(array $options = array()) {
-        if (empty($this->_sourceFile)) {
-            $filename = parent :: getContent($options);
-            if (!empty($filename)) {
-                $array = array();
+        $filename = (string)parent::getContent($options);
 
-                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
-                    $this->xpdo->parser->processElementTags('', $filename);
-                }
+        // Support placeholders/snippets in the filename by parsing it through the modParser
+        $array = array();
+        if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
+            $this->xpdo->parser->processElementTags('', $filename);
+        }
+
+        // Sanitize to avoid ../ style path traversal
+        $filename = preg_replace(array("/\.*[\/|\\\]/i", "/[\/|\\\]+/i"), array('/', '/'), $filename);
+
+        // If absolute paths are allowed (disabled by default for security reasons), and a file exists at the provided path, use it
+        $allowAbsolute = (bool)$this->xpdo->getOption('resource_static_allow_absolute', null, false);
+        if ($allowAbsolute && file_exists($filename)) {
+            $this->_sourceFile = $filename;
+            $this->_sourceFileSize = filesize($filename);
+        }
+
+        // If absolute paths are **not** allowed or an absolute file was not found, prefix the resource_static_path setting
+        else {
+            $sourcePath = $this->xpdo->getOption('resource_static_path', $options, '{assets_path}', true);
+            if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($sourcePath, $array)) {
+                $this->xpdo->parser->processElementTags('', $sourcePath);
             }
 
-            if (!file_exists($filename)) {
-                $this->_sourcePath= $this->xpdo->getOption('resource_static_path', $options, $this->xpdo->getOption('base_path'));
-                if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourcePath, $array)) {
-                    $this->xpdo->parser->processElementTags('', $this->_sourcePath);
-                }
-                $this->_sourceFile= $this->_sourcePath . $filename;
-            } else {
-                $this->_sourceFile= $filename;
+            // If an absolute path was provided that matches the required path, strip the absolute portion as it's added again below
+            if (strpos($filename, $sourcePath) === 0) {
+                $filename = substr($filename, strlen($sourcePath));
+            }
+
+            // When selecting a file using the media browser, that will provide a relative url like "assets/static/foo.pdf";
+            // To avoid that from 404ing when the resource_static_path is set to {assets_path}, we need to check
+            // if the provided $filename starts with the _relative_ url, matching against the base path.
+            // This doesn't work for directories outside of the base path (ie a moved core), but that's too complex
+            // to resolve without full media source support on static resources.
+            $relativeSourcePath = strpos($sourcePath, MODX_BASE_PATH) === 0 ? substr($sourcePath, strlen(MODX_BASE_PATH)) : false;
+            // if $filename starts with the $relativeSourcePath, remove the $relativeSourcePath from the start of $filename
+            // to avoid that getting duplicated when adding the $sourcePath below.
+            if ($relativeSourcePath && strpos($filename, $relativeSourcePath) === 0) {
+                $filename = substr($filename, strlen($relativeSourcePath));
+            }
+
+            $this->_sourceFile = $sourcePath . $filename;
+            if (file_exists($this->_sourceFile)) {
+                $this->_sourceFileSize = filesize($filename);
             }
         }
+
         return $this->_sourceFile;
     }
 
@@ -78,36 +104,21 @@ class modStaticResource extends modResource implements modResourceInterface {
      * @return integer The filesize of the source file in bytes.
      */
     public function getSourceFileSize(array $options = array()) {
-        if (empty($this->_sourceFileSize)) {
-            $this->getSourceFile($options);
-            if (file_exists($this->_sourceFile)) {
-                $this->_sourceFileSize = filesize($this->_sourceFile);
-            }
-        }
+        $this->getSourceFile($options);
         return $this->_sourceFileSize;
     }
 
     /**
      * Treats the local content as a filename to load the raw content from.
      *
+     * For resources with a binary content type, this renders out the file to the browser immediately.
+     *
      * {@inheritdoc}
      */
     public function getContent(array $options = array()) {
-        $content = false; // Going to sendErrorPage() if couldn't populate the $content
         $this->getSourceFile($options);
-        if (!empty ($this->_sourceFile)) {
-            if (file_exists($this->_sourceFile)) {
-                $content= $this->getFileContent($this->_sourceFile);
-                if ($content === false) {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "No content could be retrieved from source file: {$this->_sourceFile}");
-                }
-            } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not locate source file: {$this->_sourceFile}");
-            }
-        } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "No source file specified.");
-        }
-        if($content===false) {
+        $content = $this->getFileContent($this->_sourceFile);
+        if ($content === false) {
             $this->xpdo->sendErrorPage();
         }
         return $content;
@@ -116,75 +127,84 @@ class modStaticResource extends modResource implements modResourceInterface {
     /**
      * Retrieve the resource content stored in a physical file.
      *
-     * @param string $file A path to the file representing the resource content.
+     * @param string $file @deprecated internal _sourceFile is always used
      * @param array $options
      * @return string The content of the file, of false if it could not be
      * retrieved.
      */
     public function getFileContent($file, array $options = array()) {
-        $content= false;
-        $memory_limit= ini_get('memory_limit');
-        if (!$memory_limit) $memory_limit= '8M';
-        $byte_limit= $this->_bytes($memory_limit) * .5;
-        $filesize= $this->getSourceFileSize($options);
-        if ($this->getOne('ContentType')) {
-            $type= $this->ContentType->get('mime_type') ? $this->ContentType->get('mime_type') : 'text/html';
-            if ($this->ContentType->get('binary') || $filesize > $byte_limit) {
-                if ($alias= $this->get('uri')) {
-                    $name= basename($alias);
-                } elseif ($this->get('alias')) {
-                    $name= $this->get('alias');
-                    if ($ext= $this->ContentType->getExtension()) {
-                        $name .= "{$ext}";
-                    }
-                } elseif ($name= $this->get('pagetitle')) {
-                    $name= $this->cleanAlias($name);
-                    if ($ext= $this->ContentType->getExtension()) {
-                        $name .= "{$ext}";
-                    }
-                } else {
-                    $name= 'download';
-                    if ($ext= $this->ContentType->getExtension()) {
-                        $name .= "{$ext}";
-                    }
-                }
-                $header= 'Content-Type: ' . $type;
-                if (!$this->ContentType->get('binary')) {
-                    $charset= $this->xpdo->getOption('modx_charset',null,'UTF-8');
-                    $header .= '; charset=' . $charset;
-                }
-                header($header);
-                if ($this->ContentType->get('binary')) {
-                    header('Content-Transfer-Encoding: binary');
-                }
-                if ($filesize > 0) {
-                    $header= 'Content-Length: ' . $filesize;
-                    header($header);
-                }
-                $header= 'Cache-Control: public';
-                header($header);
-                $header= 'Content-Disposition: ' . ($this->get('content_dispo') ? 'attachment; filename=' . $name : 'inline');
-                header($header);
-                $header= 'Vary: User-Agent';
-                header($header);
-                if ($customHeaders= $this->ContentType->get('headers')) {
-                    foreach ($customHeaders as $headerKey => $headerString) {
-                        header($headerString);
-                    }
-                }
-                @session_write_close();
-                while (ob_get_level() && @ob_end_clean()) {}
-                readfile($file);
-                die();
-            }
-            else {
-                $content = file_get_contents($file);
-            }
-            if (!is_string($content)) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "modStaticResource->getFileContent({$file}): Could not get content from file.");
+        /** @var modContentType $contentType */
+        $contentType = $this->getOne('ContentType');
+        if (!$contentType) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "modStaticResource->getFileContent() for resource {$this->get('id')}: Could not get content type.");
+            return false;
+        }
+
+        $content = false;
+        $streamable = false;
+        if (file_exists($this->_sourceFile) && is_readable($this->_sourceFile)) {
+            $content = $this->_sourceFile;
+            $streamable = true;
+        }
+
+        if (empty($content)) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "modStaticResource->getFileContent() for resource {$this->get('id')}: Could not load content from file {$this->_sourceFile}");
+            return false;
+        }
+
+        // Set the appropriate content type and charset for non-binary content types
+        $mimeType = $contentType->get('mime_type') ?: 'text/html';
+        $header = 'Content-Type: ' . $mimeType;
+        if (!$contentType->get('binary')) {
+            $charset = $this->xpdo->getOption('modx_charset',null,'UTF-8');
+            $header .= '; charset=' . $charset;
+        }
+        header($header);
+
+        if ($contentType->get('binary')) {
+            // @todo This header dates back to pre-git revo circa 2008, but seems to be an email header and may need fixing
+            header('Content-Transfer-Encoding: binary');
+        }
+
+        // Apply a content-length header if we know the size in bytes
+        $filesize = $this->getSourceFileSize($options);
+        if ($filesize > 0) {
+            header('Content-Length: ' . $filesize);
+        }
+
+        // Set content disposition header based on what's configured on the resource (bool)
+        if ($this->get('content_dispo')) {
+            $name = $this->getAttachmentName($contentType);
+            header('Content-Disposition: attachment; filename=' . $name);
+        }
+        else {
+            header('Content-Disposition: inline');
+        }
+
+        // Cache control headers
+        header('Cache-Control: public');
+        header('Vary: User-Agent');
+
+        // Custom headers defined on the content type, if any
+        if ($customHeaders = $contentType->get('headers')) {
+            foreach ($customHeaders as $headerKey => $headerString) {
+                header($headerString);
             }
         }
-        return $content;
+
+        // Close the user session, clean out the output buffer
+        @session_write_close();
+        while (ob_get_level() && @ob_end_clean()) {}
+
+        // Output the content, either streaming with readfile() or by echo'ing content that was retrieved earlier from media source
+        if ($streamable) {
+            readfile($content);
+        }
+        else {
+            echo $content;
+        }
+
+        exit();
     }
 
     /**
@@ -244,5 +264,30 @@ class modStaticResource extends modResource implements modResourceInterface {
      */
     public function getResourceTypeName() {
         return $this->xpdo->lexicon('static_resource');
+    }
+
+    /**
+     * Gets the name for the downloaded file for the resource
+     *
+     * @param modContentType $contentType
+     * @return string
+     */
+    private function getAttachmentName(modContentType $contentType)
+    {
+        $ext = $contentType->getExtension();
+        if ($alias= $this->get('uri')) {
+            $name = basename($alias);
+        }
+        elseif ($this->get('alias')) {
+            $name = $this->get('alias') . $ext;
+        }
+        elseif ($name = $this->get('pagetitle')) {
+            $name = $this->cleanAlias($name) . $ext;
+        }
+        else {
+            $name = 'download' . $ext;
+        }
+
+        return $name;
     }
 }
