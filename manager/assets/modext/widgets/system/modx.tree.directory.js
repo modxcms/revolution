@@ -39,7 +39,7 @@ MODx.tree.Directory = function(config) {
         },{
             cls: 'x-btn-icon icon-page_white'
             ,tooltip: {text: _('file_create')}
-            ,handler: this.createFile
+            ,handler: this.quickCreateFile
             ,scope: this
             ,hidden: MODx.perm.file_create ? false : true
         },{
@@ -455,8 +455,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,quickCreateFile: function(itm,e) {
         var node = this.cm.activeNode;
+        var directory = (node) ? decodeURIComponent(node.attributes.id) : '/';
         var r = {
-            directory: decodeURIComponent(node.attributes.id)
+            directory: directory
             ,source: this.getSource()
         };
         var w = MODx.load({
@@ -1043,6 +1044,10 @@ MODx.window.QuickCreateFile = function(config) {
             ,submitValue: true
             ,xtype: 'statictextfield'
             ,anchor: '100%'
+        },{
+            xtype: 'label'
+            ,html: _('file_folder_parent_desc')
+            ,cls: 'desc-under'
         },{
             fieldLabel: _('name')
             ,name: 'name'
