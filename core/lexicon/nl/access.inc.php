@@ -129,7 +129,7 @@ $_lang['user_group_aw_parallel'] = 'Maak Resource groep parallel aan';
 $_lang['user_group_aw_parallel_desc'] = 'Indien aangevinkt, wordt er automatisch een Resource groep met dezelfde naam aangemaakt en krijgt het bekijk toegang voor de Contexten hierboven gespecificeerd.';
 
 $_lang['user_group_category_access'] = 'Element categorietoegang';
-$_lang['user_group_category_access_msg'] = 'Hier kun je instellen welke elementen van deze gebruikersgroep toegang hebben tot de categoriën waar de elementen in zitten.';
+$_lang['user_group_category_access_msg'] = 'Hier kun je instellen welke elementen van deze gebruikersgroep toegang hebben tot de categorieën waar de elementen in zitten.';
 $_lang['user_group_category_authority_desc'] = 'De minimum Rol welke toegang zal hebben tot de toegangsrechten in het geselecteerde beleid. Rollen met een hogere autoriteit (lagere nummers) zullen deze toegangsrechten ook krijgen. In de meeste situaties kan dit blijven als "Member".';
 $_lang['user_group_category_category_desc'] = 'De Categorie waartoe je toegang wilt geven.';
 $_lang['user_group_category_context_desc'] = 'De Context waarvoor dit toegangsbeleid geld voor elementen in de bovenstaande categorie.';
