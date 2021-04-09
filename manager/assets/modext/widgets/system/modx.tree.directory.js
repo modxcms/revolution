@@ -516,7 +516,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
                 ,source: this.getSource()
             }
             ,listeners: {
-               'success': {fn:function(r) {
+                'success': {fn:function(r) {
                     this.fireEvent('afterRename');
                     this.refreshActiveNode();
                 }, scope: this}
@@ -794,6 +794,11 @@ MODx.window.CreateDirectory = function(config) {
             ,name: 'parent'
             ,xtype: 'textfield'
             ,anchor: '100%'
+        },{
+            xtype: 'label'
+            ,forId: 'folder-parent'
+            ,html: _('file_folder_parent_desc')
+            ,cls: 'desc-under'
         }]
     });
     MODx.window.CreateDirectory.superclass.constructor.call(this,config);
@@ -834,7 +839,7 @@ MODx.window.SetVisibility = function(config) {
             ,xtype: 'modx-combo-visibility'
             ,anchor: '100%'
             ,allowBlank: false
-        }, {
+        },{
             hideLabel: true
             ,xtype: 'displayfield'
             ,value: _('file_folder_visibility_desc')
@@ -983,7 +988,7 @@ MODx.window.QuickUpdateFile = function(config) {
             ,anchor: '100%'
             ,height: 200
         }]
-       ,keys: [{
+        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
             ,fn: this.submit
@@ -1051,7 +1056,7 @@ MODx.window.QuickCreateFile = function(config) {
             ,anchor: '100%'
             ,height: 200
         }]
-       ,keys: [{
+        ,keys: [{
             key: Ext.EventObject.ENTER
             ,shift: true
             ,fn: this.submit
@@ -1062,5 +1067,3 @@ MODx.window.QuickCreateFile = function(config) {
 };
 Ext.extend(MODx.window.QuickCreateFile,MODx.Window);
 Ext.reg('modx-window-file-quick-create',MODx.window.QuickCreateFile);
-
-
