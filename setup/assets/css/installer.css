@@ -10098,7 +10098,11 @@ header {
   margin: 15px 0;
   padding: 0; }
   #install ul.checklist li {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    border-left: 0.2rem solid;
+    background-color: rgba(74, 144, 226, 0.2);
+    border-color: #4A90E2;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    padding: 15px 10px; }
     #install ul.checklist li p {
       color: #333333;
       font-size: 14px;
@@ -10110,9 +10114,6 @@ header {
       color: #355825; }
     #install ul.checklist li .notok {
       color: #590710; }
-  #install ul.checklist .warning, #install ul.checklist .testWarn, #install ul.checklist .success, #install ul.checklist .testPassed, #install ul.checklist .failed, #install ul.checklist .testFailed {
-    padding: 10px;
-    border-left: 0.2rem solid; }
   #install ul.checklist .warning, #install ul.checklist .testWarn {
     background-color: rgba(240, 180, 41, 0.2);
     border-color: #F0B429; }

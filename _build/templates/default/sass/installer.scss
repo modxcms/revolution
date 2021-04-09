@@ -659,7 +659,11 @@ header {
         padding: 0;
 
         li {
+            border-left: 0.2rem solid;
+            background-color: rgba($blue, 0.2);
+            border-color: $blue;
             font-family: $codefonts;
+            padding: 15px 10px;
 
             p {
                 color: #333333;
@@ -679,11 +683,6 @@ header {
             .notok {
                 color: darken($red, 25%);
             }
-        }
-
-        & .warning, & .testWarn, & .success, & .testPassed, & .failed, & .testFailed {
-            padding: 10px;
-            border-left: 0.2rem solid;
         }
 
         & .warning, & .testWarn {

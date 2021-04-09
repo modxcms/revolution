@@ -1,15 +1,19 @@
 <script src="assets/js/sections/summary.js"></script>
 <form id="install" action="?action=summary" method="post">
     <h2>{$_lang.install_summary}</h2>
+
     {if $failed}
         <p>{$_lang.preinstall_failure}</p>
     {else}
         <p>{$_lang.preinstall_success}</p>
     {/if}
+
     <ul class="checklist {if $failed}failed{else}success{/if}">
-        {foreach from=$test item=result}
-            <li class="{$result.class|default}">{$result.msg|default}</li>
-        {/foreach}
+    {foreach $test as $result}
+        {if $result.msg|default}
+        <li class="{$result.class|default}">{$result.msg}</li>
+        {/if}
+    {/foreach}
     </ul>
 
     <div class="setup_navbar">
