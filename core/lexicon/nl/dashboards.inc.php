@@ -73,7 +73,7 @@ $_lang['widget_type_desc'] = 'Het type van deze Widget. "Snippet" is een MODX Sn
 $_lang['widget_unplace'] = 'Verwijder Widget';
 $_lang['widget_update'] = 'Bewerk Widget';
 $_lang['widgets'] = 'Widgets';
-$_lang['widgets.intro_msg'] = 'Hieronder is een lijst met alle geinstalleerde Dashboard Widgets.';
+$_lang['widgets.intro_msg'] = 'Hieronder is een lijst met alle geïnstalleerde Dashboard Widgets.';
 
 $_lang['w_configcheck'] = 'Configuratie Controle';
 $_lang['w_configcheck_desc'] = 'Geeft een configurate controle weer welke de standaard beveiliging controleerd.';
