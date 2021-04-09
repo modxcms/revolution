@@ -450,6 +450,7 @@ $_lang['show_preview'] = 'Visa förhandsgranskningsfönster';
 $_lang['show_tree'] = 'Visa träd';
 $_lang['showing_pub'] = 'Visar publiceringsdatum';
 $_lang['showing_unpub'] = 'Visar avpubliceringsdatum';
+$_lang['site_unavailable_message'] = 'The site is currently unavailable';
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets'] = 'Snippets';
 $_lang['sort_asc'] = 'Stigande';
