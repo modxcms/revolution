@@ -180,7 +180,7 @@
                 <div class="c-languageselect">
                     <select name="manager_language" id="modx-login-language-select" class="c-languageselect__select" aria-label="{$_config.cultureKey}">
                         {foreach $languages as $language => $native}
-                            <option lang="{$language}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$native|capitalize}</option>
+                            <option lang="{$language}" aria-label="{$native|capitalize}" value="{$language}"{if $language == $_config.cultureKey} selected{/if}>{$native|capitalize}</option>
                         {/foreach}
                     </select>
                     <span class="c-languageselect__arrow"></span>
