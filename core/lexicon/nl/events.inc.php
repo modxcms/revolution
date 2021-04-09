@@ -12,7 +12,6 @@ $_lang['system_event'] = 'Systeem Gebeurtenissen';
 $_lang['system_events'] = 'Systeem gebeurtenissen';
 $_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot delete core events, only your own.';
 $_lang['system_events.search_by_name'] = 'Zoek op naam van een gebeurtenis';
-$_lang['system_events.create'] = 'Create Event';
 $_lang['system_events.name_desc'] = 'Naam van de gebeurtenis. Deze wordt gebruikt in de &dollar;modx->invokeEvent(name, properties) aanroep.';
 $_lang['system_events.groupname'] = 'Groep';
 $_lang['system_events.groupname_desc'] = 'The name of the group where the event belongs to. Select an existing one or type a new group name.';
@@ -27,7 +26,6 @@ $_lang['system_events.service_4'] = 'Cache Service Gebeurtenissen';
 $_lang['system_events.service_5'] = 'Template Service Gebeurtenissen';
 $_lang['system_events.service_6'] = 'Gebruiker gedefinieerde gebeurtenissen';
 
-$_lang['system_events.remove'] = 'Delete Event';
 $_lang['system_events.remove_confirm'] = 'Are you sure you want to delete the <b>[[+name]]</b> event? This is irreversible!';
 
 $_lang['system_events_err_ns'] = 'Name van de gebeurtenis niet opgegeven.';
