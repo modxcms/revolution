@@ -450,6 +450,7 @@ $_lang['show_preview'] = 'Előnézeti ablak megjelenítése';
 $_lang['show_tree'] = 'Faszerkezet megjelenítése';
 $_lang['showing_pub'] = 'Közzététel keltének megjelenítése';
 $_lang['showing_unpub'] = 'Visszavonás keltének megjelenítése';
+$_lang['site_unavailable_message'] = 'The site is currently unavailable';
 $_lang['snippet'] = 'Kódrészlet';
 $_lang['snippets'] = 'Kódrészletek';
 $_lang['sort_asc'] = 'Növekvő';
