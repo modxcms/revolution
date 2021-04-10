@@ -63,7 +63,7 @@ MODx.panel.Chunk = function(config) {
                         ,name: 'name'
                         ,id: 'modx-chunk-name'
                         ,anchor: '100%'
-                        ,maxLength: 255
+                        ,maxLength: 50
                         ,enableKeyEvents: true
                         ,allowBlank: false
                         ,value: config.record.name

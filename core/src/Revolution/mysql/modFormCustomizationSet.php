@@ -74,7 +74,7 @@ class modFormCustomizationSet extends \MODX\Revolution\modFormCustomizationSet
             'constraint' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

@@ -13,7 +13,7 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
         'version' => '3.0',
         'table' => 'register_messages',
         'extends' => 'MODX\\Revolution\\xPDOObject',
-        'fields' =>
+        'fields' => 
         array (
             'topic' => NULL,
             'id' => NULL,
@@ -25,16 +25,16 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
             'payload' => NULL,
             'kill' => 0,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'topic' =>
+            'topic' => 
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
                 'null' => false,
                 'index' => 'pk',
             ),
-            'id' =>
+            'id' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => '255',
@@ -42,27 +42,27 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                 'null' => false,
                 'index' => 'pk',
             ),
-            'created' =>
+            'created' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => false,
                 'index' => 'index',
             ),
-            'valid' =>
+            'valid' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => false,
                 'index' => 'index',
             ),
-            'accessed' =>
+            'accessed' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'index' => 'index',
             ),
-            'accesses' =>
+            'accesses' => 
             array (
                 'dbtype' => 'int',
                 'phptype' => 'integer',
@@ -70,7 +70,7 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                 'default' => 0,
                 'index' => 'index',
             ),
-            'expires' =>
+            'expires' => 
             array (
                 'dbtype' => 'integer',
                 'phptype' => 'integer',
@@ -78,14 +78,14 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                 'default' => '0',
                 'index' => 'index',
             ),
-            'payload' =>
+            'payload' => 
             array (
                 'dbtype' => 'nvarchar',
                 'precision' => 'max',
                 'phptype' => 'string',
                 'null' => false,
             ),
-            'kill' =>
+            'kill' => 
             array (
                 'dbtype' => 'bit',
                 'phptype' => 'boolean',
@@ -93,23 +93,23 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                 'default' => 0,
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'PRIMARY' =>
+            'PRIMARY' => 
             array (
                 'alias' => 'PRIMARY',
                 'primary' => true,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'topic' =>
+                    'topic' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
                     ),
-                    'id' =>
+                    'id' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -117,15 +117,15 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                     ),
                 ),
             ),
-            'created' =>
+            'created' => 
             array (
                 'alias' => 'created',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'created' =>
+                    'created' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -133,15 +133,15 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                     ),
                 ),
             ),
-            'valid' =>
+            'valid' => 
             array (
                 'alias' => 'valid',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'valid' =>
+                    'valid' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -149,15 +149,15 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                     ),
                 ),
             ),
-            'accessed' =>
+            'accessed' => 
             array (
                 'alias' => 'accessed',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'accessed' =>
+                    'accessed' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -165,15 +165,15 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                     ),
                 ),
             ),
-            'accesses' =>
+            'accesses' => 
             array (
                 'alias' => 'accesses',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'accesses' =>
+                    'accesses' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -181,15 +181,15 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                     ),
                 ),
             ),
-            'expires' =>
+            'expires' => 
             array (
                 'alias' => 'expires',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'expires' =>
+                    'expires' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -198,9 +198,9 @@ class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMes
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'Topic' =>
+            'Topic' => 
             array (
                 'class' => 'MODX\\Revolution\\Registry\\Db\\modDbRegisterTopic',
                 'local' => 'topic',

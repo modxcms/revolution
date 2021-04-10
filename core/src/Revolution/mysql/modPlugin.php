@@ -91,7 +91,7 @@ class modPlugin extends \MODX\Revolution\modPlugin
             'static_file' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

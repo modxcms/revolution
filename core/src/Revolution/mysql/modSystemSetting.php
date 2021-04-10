@@ -61,7 +61,7 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
             'area' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

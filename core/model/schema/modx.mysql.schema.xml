@@ -115,7 +115,7 @@
         <field key="template" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="class" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="data" dbtype="text" phptype="json" default="{}" />
-        <field key="lexicon" dbtype="varchar" precision="191" phptype="string" null="false" default="permissions" />
+        <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
 
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -139,7 +139,7 @@
         <field key="template_group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="mediumtext" phptype="string" />
-        <field key="lexicon" dbtype="varchar" precision="191" phptype="string" null="false" default="permissions" />
+        <field key="lexicon" dbtype="varchar" precision="255" phptype="string" null="false" default="permissions" />
 
         <aggregate alias="TemplateGroup" class="MODX\Revolution\modAccessPolicyTemplateGroup" local="template_group" foreign="id" owner="foreign" cardinality="one" />
         <composite alias="Permissions" class="MODX\Revolution\modAccessPermission" local="id" foreign="template" owner="local" cardinality="many" />
@@ -208,10 +208,10 @@
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="xtype" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
-        <field key="container" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="container" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="rule" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="value" dbtype="text" phptype="string" null="false" default="" />
-        <field key="constraint" dbtype="varchar" precision="191" phptype="string" null="false" default="" /><!-- deprecated -->
+        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" /><!-- deprecated -->
         <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
         <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" /><!-- deprecated -->
         <field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="1" index="index" /><!-- deprecated -->
@@ -247,11 +247,11 @@
     -->
     <object class="modActionField" table="actions_fields" extends="xPDO\Om\xPDOSimpleObject">
         <field key="action" dbtype="nvarchar" precision="191" phptype="string" null="false" default="" index="index" />
-        <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" /> <!-- name/id of field -->
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
         <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" default="field" index="index" /> <!-- either field/tab -->
         <field key="tab" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" /> <!-- for fields, what tab they are on -->
-        <field key="form" dbtype="varchar" precision="191" phptype="string" null="false" default="" /> <!-- the form ID (for dom sel purposes) -->
-        <field key="other" dbtype="varchar" precision="191" phptype="string" null="false" default="" /> <!-- used on tabs to delineate TV tabs -->
+        <field key="form" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- the form ID (for dom sel purposes) -->
+        <field key="other" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- used on tabs to delineate TV tabs -->
         <field key="rank" dbtype="integer" precision="11" phptype="integer" null="false" default="0" />
 
         <index alias="action" name="action" primary="false" unique="false" type="BTREE">
@@ -272,7 +272,7 @@
         <field key="username" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
         <field key="lasthit" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
         <field key="id" dbtype="int" precision="10" phptype="integer" null="true" />
-        <field key="action" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="action" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="ip" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
 
         <index alias="internalKey" name="internalKey" primary="true" unique="true" type="BTREE">
@@ -341,7 +341,7 @@
 
     <object class="modChunk" table="site_htmlsnippets" extends="MODX\Revolution\modElement">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="Chunk" />
+        <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="Chunk" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="fk" />
         <field key="cache_type" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
@@ -349,7 +349,7 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        <field key="static_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
 
         <alias key="content" field="snippet" />
 
@@ -427,7 +427,7 @@
         <field key="value" dbtype="mediumtext" phptype="string" />
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
-        <field key="area" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
@@ -479,8 +479,8 @@
         <field key="properties" dbtype="text" phptype="json" null="true" />
         <field key="namespace" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="lexicon" dbtype="varchar" precision="191" phptype="string" null="false" default="core:dashboards" index="index" />
-        <field key="size" dbtype="varchar" precision="191" phptype="string" null="false" default="half" />
-        <field key="permission" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="size" dbtype="varchar" precision="255" phptype="string" null="false" default="half" />
+        <field key="permission" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
 
         <index alias="name" name="name" primary="false" unique="false" type="BTREE">
             <column key="name" length="" collation="A" null="false" />
@@ -505,7 +505,7 @@
         <field key="dashboard" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="widget" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
-        <field key="size" dbtype="varchar" precision="191" phptype="string" null="false" default="half" />
+        <field key="size" dbtype="varchar" precision="255" phptype="string" null="false" default="half" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
             <column key="user" collation="A" null="false" />
@@ -597,7 +597,7 @@
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
         <field key="template" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
-        <field key="constraint" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="constraint" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="constraint_field" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="constraint_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
 
@@ -649,7 +649,7 @@
         <field key="occurred" dbtype="datetime" phptype="datetime" null="true" default="NULL" />
         <field key="action" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="classKey" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="item" dbtype="varchar" precision="191" phptype="string" null="false" default="0" />
+        <field key="item" dbtype="varchar" precision="255" phptype="string" null="false" default="0" />
 
         <index alias="user_occurred" name="user_occurred" primary="false" unique="false" type="BTREE">
             <column key="user" length="" collation="A" null="false" />
@@ -663,8 +663,8 @@
         <field key="text" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="pk" />
         <field key="parent" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="action" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
-        <field key="icon" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="icon" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="menuindex" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="params" dbtype="text" phptype="string" null="false" default="" />
         <field key="handler" dbtype="text" phptype="string" null="false" default="" />
@@ -726,11 +726,11 @@
         <!-- If empty, will assume the Namespace path -->
         <field key="path" dbtype="text" phptype="string" null="true" />
         <!-- If empty, will assume no table prefix and delegate to package schema -->
-        <field key="table_prefix" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="table_prefix" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <!-- If specified, will create an instance of the class with this name using modX.getService on the loading of this extension package -->
-        <field key="service_class" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="service_class" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <!-- The name to give the service on the modX object when instantiating. Only valid if service_class is not empty. -->
-        <field key="service_name" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="service_name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <!-- When this extension package was made -->
         <field key="created_at" dbtype="datetime" phptype="datetime" null="true" />
         <!-- The last time this extension package was updated -->
@@ -754,7 +754,7 @@
         <field key="disabled" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        <field key="static_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
 
         <alias key="content" field="plugincode" />
 
@@ -805,7 +805,7 @@
     <object class="modPropertySet" table="property_set" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="category" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="fk" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
 
         <index alias="name" name="name" primary="false" unique="true" type="BTREE">
@@ -826,7 +826,7 @@
         <field key="longtitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="alias" dbtype="varchar" precision="191" phptype="string" null="true" default="" index="index" />
-        <field key="link_attributes" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="link_attributes" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="published" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="pub_date" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" index="index" />
         <field key="unpub_date" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" index="index" />
@@ -848,7 +848,7 @@
         <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="publishedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
         <field key="publishedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
-        <field key="menutitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="menutitle" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="donthit" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="privateweb" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="privatemgr" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
@@ -976,7 +976,7 @@
 
     <object class="modScript" table="site_script" extends="MODX\Revolution\modElement">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="fk" />
 
@@ -1014,7 +1014,7 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        <field key="static_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
 
         <alias key="content" field="snippet" />
 
@@ -1048,7 +1048,7 @@
         <field key="value" dbtype="text" phptype="string" null="false" default="" />
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
-        <field key="area" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
@@ -1061,16 +1061,16 @@
 
     <object class="modTemplate" table="site_templates" extends="MODX\Revolution\modElement">
         <field key="templatename" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="fk" />
-        <field key="icon" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="icon" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="template_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="content" dbtype="mediumtext" phptype="string" null="false" default="" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        <field key="static_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
 
         <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
             <column key="templatename" length="" collation="A" null="false" />
@@ -1099,7 +1099,7 @@
         <field key="type" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="caption" dbtype="varchar" precision="80" phptype="string" null="false" default="" />
-        <field key="description" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="category" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="fk" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
@@ -1111,7 +1111,7 @@
         <field key="input_properties" dbtype="text" phptype="array" null="true" />
         <field key="output_properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
-        <field key="static_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
 
         <alias key="content" field="default_text" />
 
@@ -1301,7 +1301,7 @@
         <field key="value" dbtype="text" phptype="string" />
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
-        <field key="area" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
@@ -1315,7 +1315,7 @@
 
     <object class="modUserMessage" table="user_messages" extends="xPDO\Om\xPDOSimpleObject">
         <field key="type" dbtype="varchar" precision="15" phptype="string" null="false" default="" />
-        <field key="subject" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="subject" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="message" dbtype="text" phptype="string" null="false" default="" />
         <field key="sender" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="recipient" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
@@ -1344,14 +1344,14 @@
         <field key="dob" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="gender" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="address" dbtype="text" phptype="string" null="false" default="" />
-        <field key="country" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
-        <field key="city" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="country" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="city" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="state" dbtype="varchar" precision="25" phptype="string" null="false" default="" />
         <field key="zip" dbtype="varchar" precision="25" phptype="string" null="false" default="" />
         <field key="fax" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="photo" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="photo" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="comment" dbtype="text" phptype="string" null="false" default="" />
-        <field key="website" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="website" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="extended" dbtype="text" phptype="json" null="true" index="fulltext" indexgrp="extended" />
 
         <index alias="internalKey" name="internalKey" primary="false" unique="true" type="BTREE">
@@ -1367,7 +1367,7 @@
         <field key="value" dbtype="text" phptype="string" />
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" />
-        <field key="area" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="area" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editedon" dbtype="timestamp" phptype="timestamp" null="true" default="NULL" attributes="ON UPDATE CURRENT_TIMESTAMP" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">

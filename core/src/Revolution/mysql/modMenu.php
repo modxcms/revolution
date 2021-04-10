@@ -60,7 +60,7 @@ class modMenu extends \MODX\Revolution\modMenu
             'description' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -68,7 +68,7 @@ class modMenu extends \MODX\Revolution\modMenu
             'icon' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

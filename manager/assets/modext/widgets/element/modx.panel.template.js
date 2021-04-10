@@ -66,7 +66,7 @@ MODx.panel.Template = function(config) {
                         ,name: 'templatename'
                         ,id: 'modx-template-templatename'
                         ,anchor: '100%'
-                        ,maxLength: 100
+                        ,maxLength: 50
                         ,enableKeyEvents: true
                         ,allowBlank: false
                         ,value: config.record.templatename

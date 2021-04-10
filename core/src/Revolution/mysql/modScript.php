@@ -36,7 +36,7 @@ class modScript extends \MODX\Revolution\modScript
             'description' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

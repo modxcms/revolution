@@ -77,7 +77,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
             'container' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -100,7 +100,7 @@ class modActionDom extends \MODX\Revolution\modActionDom
             'constraint' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

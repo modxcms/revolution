@@ -121,7 +121,7 @@ class modResource extends \MODX\Revolution\modResource
             'link_attributes' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -311,7 +311,7 @@ class modResource extends \MODX\Revolution\modResource
             'menutitle' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

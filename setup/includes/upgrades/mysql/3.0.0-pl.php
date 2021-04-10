@@ -30,3 +30,4 @@ include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_welcome_screen_url.
 include dirname(__DIR__) . '/common/3.0.0-policy-template-group-description.php';
 include dirname(__DIR__) . '/common/3.0.0-policy-template-description.php';
 include dirname(__DIR__) . '/common/3.0.0-policy-description.php';
+include dirname(__DIR__) . '/common/3.0.0-non-index-field-length.php';

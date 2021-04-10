@@ -177,7 +177,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             'country' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -185,7 +185,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             'city' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -217,7 +217,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             'photo' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -232,7 +232,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             'website' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

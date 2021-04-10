@@ -68,7 +68,7 @@ class modUserGroupSetting extends \MODX\Revolution\modUserGroupSetting
             'area' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

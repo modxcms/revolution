@@ -42,7 +42,7 @@ class modChunk extends \MODX\Revolution\modChunk
             'description' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => 'Chunk',
@@ -106,7 +106,7 @@ class modChunk extends \MODX\Revolution\modChunk
             'static_file' => 
             array (
                 'dbtype' => 'varchar',
-                'precision' => '191',
+                'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

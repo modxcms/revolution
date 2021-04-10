@@ -65,7 +65,7 @@ MODx.panel.Plugin = function(config) {
                         ,name: 'name'
                         ,id: 'modx-plugin-name'
                         ,anchor: '100%'
-                        ,maxLength: 255
+                        ,maxLength: 50
                         ,enableKeyEvents: true
                         ,allowBlank: false
                         ,value: config.record.name
