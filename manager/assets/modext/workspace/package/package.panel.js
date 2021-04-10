@@ -15,7 +15,7 @@ MODx.panel.Package = function(config) {
         ,cls: 'container'
         ,chunk: ''
         ,bodyStyle: ''
-        ,items: [{
+        ,items: [this.getPageHeader(config),{
             html: _('package')
             ,id: 'modx-package-header'
             ,xtype: 'modx-header'
@@ -105,6 +105,7 @@ MODx.panel.Package = function(config) {
 };
 Ext.extend(MODx.panel.Package,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.config.signature === '' || this.config.signature === 0 || this.initialized) {
             this.fireEvent('ready');
@@ -127,12 +128,21 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
             }
         });
     }
+
     ,beforeSubmit: function(o) {
         return this.fireEvent('save',{
             values: this.getForm().getValues()
         });
     }
+
     ,success: function(r) {
+    }
+
+    ,getPageHeader: function(config) {
+        return MODx.util.getHeaderBreadCrumbs('modx-package-header', [{
+            text: _('package_management'),
+            href: MODx.getPage('workspaces')
+        }]);
     }
 });
 Ext.reg('modx-panel-package',MODx.panel.Package);
