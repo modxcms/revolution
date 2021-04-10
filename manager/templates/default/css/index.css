@@ -19755,7 +19755,7 @@ ul.x-tab-strip-bottom {
 
 #modx-header {
   background: #234368;
-  max-width: 80px;
+  max-width: 70px;
   position: absolute;
   z-index: 2;
   height: 100%; }
@@ -19769,7 +19769,7 @@ ul.x-tab-strip-bottom {
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
-  padding: 0 10px; }
+  padding: 0 5px; }
   #modx-navbar .icon {
     color: #FFF;
     font-size: 20px;
@@ -20473,7 +20473,7 @@ ul.x-tab-strip-bottom {
   /* root box containing a context or category */
   /* just the actual nodes */ }
   #modx-leftbar .x-tab-panel-noborder {
-    margin: 0 12px; }
+    margin: 0 8px; }
   #modx-leftbar .x-tab-panel-bwrap {
     border-radius: 0 0 3px 3px;
     position: relative;
@@ -20523,7 +20523,7 @@ ul.x-tab-strip-bottom {
 
 #modx-split-wrapper .x-layout-split,
 #modx-split-wrapper #modx-leftbar-tabs-xcollapsed {
-  margin-left: -80px; }
+  margin-left: -70px; }
 
 .x-layout-split {
   overflow: visible;
@@ -22378,10 +22378,10 @@ textarea.x-form-field {
   transition: all .6s ease; }
 
 #modx-content {
-  width: calc(100% - 390px);
+  width: calc(100% - 370px);
   right: 0;
   padding-left: 0.5rem;
-  left: 310px;
+  left: 370px;
   /* give #modx-content an initial left value to prevent the panel from jumping around */ }
 
 .modx-form p {
@@ -22429,14 +22429,22 @@ textarea.x-form-field {
     #modx-container {
       height: auto; } }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1140px) {
   #modx-resource-main-left,
   #modx-resource-main-right,
   #modx-page-settings-left,
   #modx-page-settings-right {
     box-sizing: border-box;
     width: 100% !important;
-    margin: 0 auto 15px; } }
+    margin: 0 auto 15px; }
+    #modx-resource-main-left .x-panel-body,
+    #modx-resource-main-right .x-panel-body,
+    #modx-page-settings-left .x-panel-body,
+    #modx-page-settings-right .x-panel-body {
+      height: auto !important;
+      max-height: 100% !important;
+      width: auto !important;
+      max-width: 100% !important; } }
 
 @media screen and (max-width: 960px) {
   #modx-template-form .main-wrapper,

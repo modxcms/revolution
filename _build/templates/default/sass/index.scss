@@ -192,10 +192,10 @@ textarea.x-form-field {
 }
 
 #modx-content {
-  width: calc(100% - 390px);
+  width: calc(100% - 370px);
   right: 0;
   padding-left: 0.5rem;
-  left: 310px; /* give #modx-content an initial left value to prevent the panel from jumping around */
+  left: 370px; /* give #modx-content an initial left value to prevent the panel from jumping around */
 }
 
 .modx-form p {
@@ -272,6 +272,13 @@ textarea.x-form-field {
     box-sizing: border-box;
     width: 100% !important;
     margin: 0 auto 15px;
+
+    & .x-panel-body {
+        height: auto !important;
+        max-height: 100% !important;
+        width: auto !important;
+        max-width: 100% !important;
+    }
   }
 }
 
