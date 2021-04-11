@@ -8,7 +8,7 @@
 $_lang['element'] = 'Element';
 $_lang['element_err_nf'] = 'Element niet gevonden.';
 $_lang['element_err_ns'] = 'Element niet gespecificeerd.';
-$_lang['element_err_staticfile_exists'] = 'A static file already exists within the specified path.';
+$_lang['element_err_staticfile_exists'] = 'Een statisch bestand binnen het opgegeven pad bestaat al.';
 $_lang['element_static_source_immutable'] = 'Het statisch gespecificeerde bestand als bron voor het element is niet schrijfbaar! Je kunt de inhoud van dit element niet bewerken in de manager.';
 $_lang['element_static_source_protected_invalid'] = 'Je kunt jouw element niet wijzen naar de MODX configuratie map; dit is een beveiligde, niet toegankelijke map.';
 $_lang['is_static'] = 'Extern Bestand';

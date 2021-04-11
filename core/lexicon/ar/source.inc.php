@@ -19,9 +19,7 @@ $_lang['source_access_add'] = 'إضافة مجموعة مستخدم';
 $_lang['source_access_remove'] = 'Delete Access';
 $_lang['source_access_remove_confirm'] = 'Are you sure you want to delete Access to this Source for this User Group?';
 $_lang['source_access_update'] = 'Edit Access';
-$_lang['source_create'] = 'Create Media Source';
 $_lang['source_description_desc'] = 'وصف مختصر لمصدر الوسائط.';
-$_lang['source_duplicate'] = 'تكرار مصدر الوسائط';
 $_lang['source_err_ae_name'] = 'يوجد مصدر وسائط بهذا الاسم مسبقاً! الرجاء تحديد اسم جديد.';
 $_lang['source_err_nf'] = 'لم يتم العثور على مصدر الوسائط!';
 $_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
@@ -30,11 +28,9 @@ $_lang['source_err_ns'] = 'الرجاء تحديد مصدر الوسائط.';
 $_lang['source_err_ns_name'] = 'الرجاء تحديد اسم لمصدر الوسائط.';
 $_lang['source_name_desc'] = 'اسم مصدر الوسائط.';
 $_lang['source_properties.intro_msg'] = 'إدارة خصائص هذا المصدر بالأسفل.';
-$_lang['source_remove'] = 'حذف مصدر الوسائط';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
 $_lang['source_remove_multiple'] = 'حذف مصادر الوسائط المتعددة';
 $_lang['source_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد حذف مصدر الوسائط هذا؟ قد يؤدي هذا إلى عطب عناصر القالب التي قمت بإسنادها لهذا المصدر.';
-$_lang['source_update'] = 'Edit Media Source';
 $_lang['source_type'] = 'نوع المصدر';
 $_lang['source_type_desc'] = 'النمط، أو السواقة لمصدر الوسائط. المصدر سوف يستخدم هذه السواقة ليتصل إليها عند جمع بياناتها. مثال: ملف النظام سوف يجمع الملفات من ملف النظام. S3 سوف يحصل على الملفات من حزمة S3.';
 $_lang['source_type.file'] = 'ملف نظام';
@@ -54,11 +50,11 @@ $_lang['user_group'] = 'مجموعة المستخدم';
 $_lang['allowedFileTypes'] = 'أنواع الملفات المسموحة';
 $_lang['prop_file.allowedFileTypes_desc'] = 'في حالة الضبط، سوف يقيد الملفات المعروضة فقط على اللواحق المحددة. الرجاء تحدد لائحة مفصولة، دون النقاط السابقة للواحق.';
 $_lang['basePath'] = 'المسارالاساس';
-$_lang['prop_file.basePath_desc'] = 'مسار الملف لربط المصدر معه.';
+$_lang['prop_file.basePath_desc'] = 'The file path to point the Source to, for example: assets/images/<br>The path may depend on the "basePathRelative" parameter';
 $_lang['basePathRelative'] = 'المسار الاساس النسبي';
 $_lang['prop_file.basePathRelative_desc'] = 'اذا كان المسار الأساسي أعلاه ليس ذو صلة مع مسار تثبيت مودكس، اضبط هذا على لا.';
 $_lang['baseUrl'] = 'العنوان الاساس';
-$_lang['prop_file.baseUrl_desc'] = 'الـ URL الذي يمكن الوصول للمصدر منه.';
+$_lang['prop_file.baseUrl_desc'] = 'The URL that this source can be accessed from, for example: assets/images/<br>The path may depend on the "baseUrlRelative" parameter';
 $_lang['baseUrlPrependCheckSlash'] = 'إضافة البادئة الشرطة المائلة للعنوان الاساس';
 $_lang['prop_file.baseUrlPrependCheckSlash_desc'] = 'اذا كانت القيمة true، مودكس فقط سوف يعتمد مسبقاً  على baseUrl اذا لم يوجد (/) في بداية URL  عند عرض عنصر القالب. مفقيد لإعداد قيمة عنصر القالب خارج baseUrl.';
 $_lang['baseUrlRelative'] = 'العنوان الاساس النسبي';
@@ -84,6 +80,7 @@ $_lang['prop_s3.skipFiles_desc'] = 'سلسلة مفصولة. مودكس سوف �
 $_lang['prop_s3.thumbnailQuality_desc'] = 'جودة الصورة المصغرة المعروضة، في نطاق 0-100.';
 $_lang['prop_s3.thumbnailType_desc'] = 'نوع الصورة لعرض الصور المصغرة على أساسه.';
 $_lang['prop_s3.url_desc'] = 'URL نسخة Amazon S3.';
+$_lang['prop_s3.endpoint_desc'] = 'Alternative S3-compatible endpoint URL, e.g., "https://s3.<region>.example.com". Review your S3-compatible provider’s documentation for the endpoint location. Leave empty for Amazon S3';
 $_lang['prop_s3.region_desc'] = 'منطقة التخزين في أمازون s3. على سبيل المثال: us-west-1';
 $_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
 $_lang['s3_no_move_folder'] = 'سواقة S3 لا تدعم تنقل المجلدات في هذا الوقت.';

@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Dupliceer';
 $_lang['entry'] = 'Item';
-$_lang['entry_create'] = 'Item maken';
 $_lang['entry_err_ae'] = 'Item bestaat reeds!';
 $_lang['entry_err_nf'] = 'Item niet gevonden!';
 $_lang['entry_err_ns'] = 'Item niet gespecificeerd.';

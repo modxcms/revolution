@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Online felhasználók';
 $_lang['onlineusers_user'] = 'Felhasználó';
 $_lang['onlineusers_userid'] = 'Felhasználó ID';
 
-$_lang['updates_sort'] = 'Rendez';
+$_lang['updates_type'] = 'Fajta';
 $_lang['updates_status'] = 'Állapot';
 $_lang['updates_action'] = 'Tevékenység';
 $_lang['updates_available'] = 'Frissítések érhetők el';
