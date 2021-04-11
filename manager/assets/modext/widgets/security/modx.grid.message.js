@@ -312,8 +312,10 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
 
     ,getFields: function() {
         var data = [];
-        if (MODx.perm.view_user) data.push(['user',_('user')]);
-        if (MODx.perm.view_usergroup) data.push(['usergroup',_('usergroup')]);
+        if (MODx.perm.view_user) {
+            data.push(['user',_('user')]);
+            data.push(['usergroup',_('usergroup')]);
+        }
         if (MODx.perm.view_role) data.push(['role',_('role')]);
         if (MODx.perm.view_user) data.push(['all',_('all')]);
 
@@ -338,20 +340,22 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
             ,anchor: '100%'
         }];
 
-        if (MODx.perm.view_user) items.push({
-            xtype: 'modx-combo-user'
-            ,id: 'mc-recipient-user'
-            ,fieldLabel: _('user')
-            ,allowBlank: true
-            ,anchor: '100%'
-        });
-        if (MODx.perm.view_usergroup) items.push({
-            xtype: 'modx-combo-usergroup'
-            ,id: 'mc-recipient-usergroup'
-            ,fieldLabel: _('usergroup')
-            ,allowBlank: true
-            ,anchor: '100%'
-        });
+        if (MODx.perm.view_user) {
+            items.push({
+                xtype: 'modx-combo-user'
+                , id: 'mc-recipient-user'
+                , fieldLabel: _('user')
+                , allowBlank: true
+                , anchor: '100%'
+            });
+            items.push({
+                xtype: 'modx-combo-usergroup'
+                , id: 'mc-recipient-usergroup'
+                , fieldLabel: _('usergroup')
+                , allowBlank: true
+                , anchor: '100%'
+            });
+        }
         if (MODx.perm.view_role) items.push({
             xtype: 'modx-combo-role'
             ,id: 'mc-recipient-role'

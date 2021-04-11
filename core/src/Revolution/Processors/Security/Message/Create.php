@@ -74,15 +74,12 @@ class Create extends ModelProcessor
     public function getMailingObject($primaryKey, $objectClass, $objectType)
     {
         $id = (int)$this->getProperty($primaryKey);
-        if (!$id) {
+
+        if (!$id || !is_numeric($this->getProperty($primaryKey))) {
             return $this->modx->lexicon($objectType . '_err_ns');
         }
 
-        if ($id !== $this->getProperty($primaryKey)) {
-            return $this->modx->lexicon($objectType . '_err_nf');
-        }
-
-        $this->object = $this->modx->getObject($objectClass, $id);
+        $this->object = $this->modx->getObject($objectClass, ['id' => $id]);
         if (!$this->object) {
             return $this->modx->lexicon($objectType . '_err_nf');
         }
@@ -191,7 +188,9 @@ class Create extends ModelProcessor
             return $this->modx->lexicon($this->objectType . '_err_save');
         }
 
-        $this->sendEmail($message);
+        if ($this->getProperty('sendemail', false)) {
+            $this->sendEmail($message);
+        }
 
         return true;
     }
@@ -202,12 +201,12 @@ class Create extends ModelProcessor
      */
     public function sendEmail($message)
     {
-        if ($this->getProperty('sendemail', false)) {
-            /** @var modUser $user */
-            $user = $this->modx->getObject(modUser::class, $message->get('recipient'));
-            $user->sendEmail($message->get('message'), [
-                'subject' => $message->get('subject')
-            ]);
+        /** @var modUser $user */
+        $user = $this->object instanceof modUser
+                ? $this->object
+                : $this->modx->getObject(modUser::class, ['id' => $message->get('recipient')]);
+        if ($user) {
+            $user->sendEmail($message->get('message'), ['subject' => $message->get('subject')]);
         }
     }
 
