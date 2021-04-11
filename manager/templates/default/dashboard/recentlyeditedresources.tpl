@@ -49,18 +49,18 @@
                         </td>
                         <td class="widget-actions">
                             {foreach $record.menu as $menu}
-                                {if empty($menu.text) || $menu.text == '-'}
+                                {if empty($menu.text) || $menu.text == '-' || !isset($menu.params)}
                                     {continue}
                                 {/if}
 
                                 {if $menu.params.type == 'view'}
-                                    {assign var=icon value='icon icon-eye'}
+                                    {$icon='icon icon-eye'}
                                 {elseif $menu.params.type == 'edit'}
-                                    {assign var=icon value='icon icon-edit'}
+                                    {$icon='icon icon-edit'}
                                 {elseif $menu.params.type == 'open'}
-                                    {assign var=icon value='icon icon-external-link'}
+                                    {$icon='icon icon-external-link'}
                                 {else}
-                                    {assign var=icon value=null}
+                                    {$icon=null}
                                 {/if}
 
                                 {if !empty($menu.params.a) && !empty($menu.params.id)}
