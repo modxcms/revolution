@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['action'] = 'Actie';
-$_lang['action_confirm_remove'] = 'Weet je zeker dat je deze actie wilt verwijderen? Dit kan eventueel de werking van jouw MODX manager be�nvloeden.';
+$_lang['action_confirm_remove'] = 'Weet je zeker dat je deze actie wilt verwijderen? Dit kan eventueel de werking van jouw MODX manager beïnvloeden.';
 $_lang['action_create'] = 'Nieuwe actie';
 $_lang['action_create_here'] = 'Nieuwe actie hier';
 $_lang['action_desc'] = 'Acties zijn abstracties van MODX controllers. Ze kunnen worden gebruikt om aangepaste manager pagina\'s te maken, evenals de reorganisatie van het top menu van de MODX manager.';
@@ -28,5 +28,5 @@ $_lang['controller_err_ae'] = 'Controller met dit pad bestaat al voor deze Names
 $_lang['controller_err_nf'] = 'Controller bestand niet gevonden!';
 $_lang['controller_err_ns'] = 'Geen controller gespecificeerd!';
 $_lang['controller_parent'] = 'Bovenliggende controller';
-$_lang['lang_topics'] = 'Taal topics';
+$_lang['lang_topics'] = 'Taal Onderwerpen';
 $_lang['lang_topics_desc'] = 'Dit is een lijst van teksten welke lexicon topics vertegenwoordigen welke deze actie zal laden.';

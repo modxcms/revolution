@@ -144,7 +144,7 @@ $_lang['license'] = '<p class="title">Je moet akkoord gaan met de licentie voord
 $_lang['license_agree'] = 'Ik ga akkoord met de voorwaarden vermeld in de licentie.';
 $_lang['license_agreement'] = 'Licentie Overeenkomst';
 $_lang['license_agreement_error'] = 'Je moet akkoord gaan met de licentie voordat je verder kunt met de installatie.';
-$_lang['locked'] = 'MODX Setup is locked!';
+$_lang['locked'] = 'MODX Installatie is vergrendeld!';
 $_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
 $_lang['login'] = 'Aanmelden';
 $_lang['modx_class_err_nf'] = 'Kan het MODX class bestand niet inladen.';
