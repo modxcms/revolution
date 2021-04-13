@@ -2715,18 +2715,24 @@ class modX extends xPDO {
                 $cookieDomain = $this->getOption('session_cookie_domain', $options, '');
                 $cookiePath = $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
                 if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
-                $cookieSecure = (boolean) $this->getOption('session_cookie_secure', $options, false);
-                $cookieHttpOnly = (boolean) $this->getOption('session_cookie_httponly', $options, true);
+                $cookieSecure = (bool) $this->getOption('session_cookie_secure', $options, false);
+                $cookieHttpOnly = (bool) $this->getOption('session_cookie_httponly', $options, true);
                 $cookieSamesite = $this->getOption('session_cookie_samesite', $options, '');
-                $cookieLifetime = (integer) $this->getOption('session_cookie_lifetime', $options, 0);
-                $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
+                $cookieLifetime = (int) $this->getOption('session_cookie_lifetime', $options, 0);
+                $gcMaxlifetime = (int) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
                 if ($gcMaxlifetime > 0) {
                     ini_set('session.gc_maxlifetime', $gcMaxlifetime);
                 }
                 $site_sessionname = $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
                 if (PHP_VERSION_ID < 70300) {
-                    session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
+                    session_set_cookie_params(
+                        $cookieLifetime,
+                        $cookiePath,
+                        $cookieDomain,
+                        $cookieSecure,
+                        $cookieHttpOnly
+                    );
                 } else {
                     $cookie_params = [
                         'lifetime' => $cookieLifetime,
@@ -2765,8 +2771,15 @@ class modX extends xPDO {
                                 $cookie_settings['samesite'] = $cookieSamesite;
                             }
                             if (PHP_VERSION_ID < 70300) {
-                                setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain,
-                                    $cookieSecure, $cookieHttpOnly);
+                                setcookie(
+                                    session_name(),
+                                    session_id(),
+                                    $cookieExpiration,
+                                    $cookiePath,
+                                    $cookieDomain,
+                                    $cookieSecure,
+                                    $cookieHttpOnly
+                                );
                             } else {
                                 setcookie(session_name(), session_id(), $cookie_settings);
                             }
