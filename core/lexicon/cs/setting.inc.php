@@ -36,7 +36,6 @@ $_lang['namespace'] = 'Jmenný prostor';
 $_lang['namespace_desc'] = 'Jmenný prostor, ke kterému tato položka nastavení patří. Výchozí téma slovníku bude načteno pro tento jmenný prostor při dotazu na nastavení.';
 $_lang['namespace_filter'] = 'Filtrovat dle jmenného prostoru...';
 $_lang['search_by_key'] = 'Hledat dle klíče...';
-$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'Zkontrolujte údaje v těchto políčkách: ';
 $_lang['setting_err_ae'] = 'Položka konfigurace s tímto klíčem již existuje. Zadejte jiný název klíče.';
 $_lang['setting_err_nf'] = 'Položka konfigurace nenalezena.';
@@ -46,9 +45,7 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to delete the set
 $_lang['setting_err_save'] = 'Nastala chyba při ukládání položky konfigurace.';
 $_lang['setting_err_startint'] = 'Položka konfigurace nesmí začínat číslem.';
 $_lang['setting_err_invalid_document'] = 'Dokument s ID %d neexistuje. Zadejte existující dokument.';
-$_lang['setting_remove'] = 'Odstranit položku';
 $_lang['setting_remove_confirm'] = 'Opravdu chcete odstranit tuto položku konfigurace? Mohlo by dojít k narušení správné funkčnosti správce obsahu.';
-$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'Protože se jedná o novou instalaci, je třeba aby jste zkontroloval tyto položky konfigurace a změnil všechny, které je třeba. Poté co vše zkontrolujete klikněte na "Uložit" a tím dojde k aktualizaci databáze.<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Přátelská URL';
@@ -614,6 +611,9 @@ $_lang['setting_server_offset_time_desc'] = 'Nastavte počet hodin, který je ro
 $_lang['setting_session_cookie_domain'] = 'Doména session cookie';
 $_lang['setting_session_cookie_domain_desc'] = 'Toto nastavení použijte pro přizpůsobení domény pro session cookie.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Zvolte Lax nebo Strict.';
+
 $_lang['setting_session_cookie_lifetime'] = 'Životnost session cookie';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Tímto nastavením můžete přizpůsobit životnost session cookie v sekundách. Toto nastavení je použito pro nastavení životnosti sesson cookie přihlášeného uživatele pokud při přihlášení zvolí "Zapamatovat si mě".';
 
@@ -738,8 +738,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Zadejte maximální velikost souboru, k
 $_lang['setting_upload_media'] = 'Povolené typy médií';
 $_lang['setting_upload_media_desc'] = 'Zde můžete zadat seznam souborů, které mohou být nahrávány do "assets/media/" pomocí správce souborů. Zadejte přípony souborů pro typy médií oddělené čárkami.';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
-$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Přepsat názvy nahraných souborů?';
+$_lang['setting_upload_translit_desc'] = 'Pokud je tato možnost povolena, název nahraného souboru bude přepsán podle globálních pravidel přepisování.';
 
 $_lang['setting_use_alias_path'] = 'Použít cesty pomocí přátelských aliasů';
 $_lang['setting_use_alias_path_desc'] = 'Nastavením možnosti na "Ano" zobrazí celou cestu k dokumentu pokud má dokument alias. Například, pokud je dokument s aliasem "potomek" umístěn uvnitř složky s aliasem "rodic", pak bude celá adresa zobrazena jako "/rodic/potomek.html".<br /><strong>Poznámka: Je-li toto nastaveno na Ano (zapnutím cest pomocí aliasů), referencované položky (jako obrázky, css, javaskripty, atd.) používají absolutní cesty: např., "/assets/images" na rozdíl od "assets/images". Tímto zamezíte prohlížeči (nebo serveru) vkládání relativních cest do aliasů.</strong>';
