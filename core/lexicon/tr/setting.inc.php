@@ -36,7 +36,6 @@ $_lang['namespace'] = 'İsim Alanı';
 $_lang['namespace_desc'] = 'Bu ayar ile ilişkili isim alanı. Ayarlar alınırken varsayılan Veri Sözlüğü Konusu bu İsim Alanı için yüklenecek.';
 $_lang['namespace_filter'] = 'İsim alanına göre filtrele...';
 $_lang['search_by_key'] = 'Anahtara göre ara...';
-$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'Lütfen aşağıda ki alanlar için verinizi kontrol edin: ';
 $_lang['setting_err_ae'] = 'Bu anahtar ile ayar zaten var. Lütfen başka anahtar ismi belirleyin.';
 $_lang['setting_err_nf'] = 'Ayar bulunamadı.';
@@ -46,9 +45,7 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to delete the set
 $_lang['setting_err_save'] = 'Ayar kaydedilmeye çalışılırken hata meydana geldi.';
 $_lang['setting_err_startint'] = 'Ayarlar bir tam sayı ile başlamayabilir.';
 $_lang['setting_err_invalid_document'] = '%d kimliği ile belge yok. Lütfen varolan bir belge belirleyin.';
-$_lang['setting_remove'] = 'Ayarı Sil';
 $_lang['setting_remove_confirm'] = 'Bu ayarı silmek istediğinizden emin misiniz? Bu MODX kurulumunu bozabilir.';
-$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'Bu yeni bir kurulum olduğu için bu ayarları kontrol etmeniz, ve istediğiniz ayarları değiştirmeniz gerekmektedir. Ayarları kontrol ettikten sonra, ayarlar veri tabanını güncelleştirmek için \'Kaydet\'e basınız.<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Kullanıcı Dostu URLler';
@@ -614,6 +611,9 @@ $_lang['setting_server_offset_time_desc'] = 'Bulunduğunuz yer ile sunucunun bul
 $_lang['setting_session_cookie_domain'] = 'Oturum Tanımlama Bilgisi';
 $_lang['setting_session_cookie_domain_desc'] = 'Oturum tanımlama bilgisi alan adını özelleştirmek için bu ayarı kullanın. Geçerli alanı kullanmak için boş bırakın.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_cookie_lifetime'] = 'Oturum Çerezi Ömrü';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Oturum çerezi ömrünü saniyeler içinde özelleştirmek için bu ayarı kullanın. Bu, oturum açma sırasında \'beni hatırla\' seçeneğini belirlediklerinde bir istemci oturum tanımlama bilgisinin ömrünü ayarlamak için kullanılır.';
 
@@ -738,8 +738,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Dosya yöneticisi aracılığıyla yük
 $_lang['setting_upload_media'] = 'Yüklenebilir Medya Türleri';
 $_lang['setting_upload_media_desc'] = 'Burada, Kaynak Yöneticisi\'ni kullanarak \'assets / media /\' dosyasına yüklenebilecek dosyaların bir listesini girebilirsiniz. Lütfen medya türleri için virgüllerle ayrılmış uzantıları girin.';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
-$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
+$_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
 $_lang['setting_use_alias_path'] = 'Arkadaşça diğer yolu kullan';
 $_lang['setting_use_alias_path_desc'] = 'Kaynakta bir takma ad varsa, bu seçeneği \'evet\' olarak ayarlamak, Kaynağın tam yolunu görüntüleyecektir. Örneğin, \'alt\' adlı bir takma ada sahip bir Kaynak, \'üst\' olarak adlandırılan bir takma ada sahip bir kapsayıcı Kaynak içerisinde yer alıyorsa, Kaynak için tam takma ad yolu \'/parent/child.html\' olarak görüntülenecektir. <br /><strong> NOT: Bu seçeneği \'Evet\' (diğer ad yollarını açma) olarak ayarlarsanız, referans öğeler (resimler, CSS, JavaScript\'ler vb.) mutlak yolu, örn. \'/ assets / images\' olarak kullanır \'varlıklara / resimlere\' karşı. Böylece tarayıcının (veya web sunucusunun) takma ad yoluna göre yol eklemesini engelleyeceksiniz.</strong>';
