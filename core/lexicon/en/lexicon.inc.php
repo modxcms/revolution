@@ -30,5 +30,4 @@ $_lang['lexicon_management_desc'] = 'Here you can override any Lexicon Entries a
 $_lang['lexicon_rlfb_msg'] = 'Successfully regenerated [[+num]] strings.';
 $_lang['reload_from_base'] = 'Revert All Core Entries';
 $_lang['reload_success'] = 'Successfully reloaded [[+total]] strings.';
-$_lang['search_by_key'] = 'Search by Key:';
 $_lang['topic'] = 'Topic';

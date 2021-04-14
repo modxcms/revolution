@@ -98,7 +98,7 @@ MODx.grid.Context = function(config) {
             ,name: 'search'
             ,id: 'modx-ctx-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,value: MODx.request.search
             ,listeners: {
                 'change': {

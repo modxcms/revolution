@@ -109,7 +109,7 @@ MODx.grid.FCSet = function(config) {
             ,name: 'search'
             ,id: 'modx-fcs-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('filter_by_search')
+            ,emptyText: _('search')
             ,value: MODx.request.search
             ,listeners: {
                 'change': {

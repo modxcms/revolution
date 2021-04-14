@@ -126,7 +126,7 @@ MODx.grid.Dashboards = function(config) {
             ,name: 'search'
             ,id: 'modx-dashboard-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
                 ,'render': {fn: function(cmp) {

@@ -117,7 +117,7 @@ MODx.grid.Sources = function(config) {
             ,name: 'search'
             ,id: 'modx-source-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,value: MODx.request.query
             ,listeners: {
                 'change': {

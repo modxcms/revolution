@@ -120,7 +120,7 @@ MODx.grid.FCProfile = function(config) {
             ,name: 'search'
             ,id: 'modx-fcp-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('filter_by_search')
+            ,emptyText: _('search')
             ,value: MODx.request.search
             ,listeners: {
                 'change': {

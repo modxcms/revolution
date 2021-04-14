@@ -101,7 +101,7 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-search'
             ,cls: 'x-form-filter'
             ,itemId: 'search'
-            ,emptyText: _('search_by_key')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
                 ,'render': {fn: function(cmp) {

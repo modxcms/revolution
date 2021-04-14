@@ -151,7 +151,7 @@ MODx.grid.User = function(config) {
             ,name: 'search'
             ,id: 'modx-user-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
                 ,'render': {fn: function(cmp) {
