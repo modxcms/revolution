@@ -36,7 +36,6 @@ $_lang['namespace'] = 'فضاء الأسماء';
 $_lang['namespace_desc'] = 'فضاء الأسماء التي يرتبط بها هذا الإعداد. موضوع المعجم الافتراضي سيتم تحميله من اجل فضاء الأسماء هذا عند الحصول على الإعدادات.';
 $_lang['namespace_filter'] = 'فلترة حسب فضاء الأسماء...';
 $_lang['search_by_key'] = 'بحث حسب المفتاح...';
-$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'الرجاء التحقق من بياناتك للحقول التالية: ';
 $_lang['setting_err_ae'] = 'الإعداد مع هذا المفتاح موجوة مسبقاً. الرجاء تحديد اسم مفتاح آخر.';
 $_lang['setting_err_nf'] = 'الإعداد غير موجود.';
@@ -46,9 +45,7 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to delete the set
 $_lang['setting_err_save'] = 'حدث خطأ أثناء محاولة حفظ الإعداد.';
 $_lang['setting_err_startint'] = 'الإعدادات لاتسطيع البداية مع عدد صحيح.';
 $_lang['setting_err_invalid_document'] = 'لا توجد وثيقة مع المعرف %d. الرجاء تحديد وثيقة موجودة.';
-$_lang['setting_remove'] = 'حذف الإعداد';
 $_lang['setting_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف هذا الإعداد؟ قد يؤدي هذا إلى عطب تثبيت مودكس الخاص بك.';
-$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'لانه تنصيب جديد، من المطلوب منك ان تتحكم بهذه الإعدادات، وتغيير كل ما ترغب بتغييره. بعد ان تتحكم بالإعدادات، اضغط \'حفظ\' من أجل ترقية قاعدة بيانات الإعدادات.</ br /><br>';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'URLs صديقة';
@@ -619,6 +616,9 @@ $_lang['setting_server_offset_time_desc'] = 'اختر عدد ساعات فرق �
 $_lang['setting_session_cookie_domain'] = 'نطاق كوكي الجلسة';
 $_lang['setting_session_cookie_domain_desc'] = 'استخدم هذا الإعداد لتخصيص نطاق كوكي الجلسة. اتركه فارغا لاستخدام النطاق الحالي.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_cookie_lifetime'] = 'عمر حياة كوكي الجلسة';
 $_lang['setting_session_cookie_lifetime_desc'] = 'استخدم هذا الإعداد لتخصيص عمر حياة كوكي الجلسة مقدرا بالثواني. يستخدم هذا لضبط عمر حياة كوكي الجلسة للزبون عندما يقوم باختيار الخيار ’تذكرني’ عند تسجيل الدخول.';
 
@@ -743,8 +743,8 @@ $_lang['setting_upload_maxsize_desc'] = 'أدخل حجم الملف الأعظم
 $_lang['setting_upload_media'] = 'أنواع الوسائط القابلة للرفع';
 $_lang['setting_upload_media_desc'] = 'هنا يمكنك إدخال قائمة من الملفات التي يمكن أن ترفع إلى \'assets/media/\' باستخدام مدير المصدر. الرجاء إدخال الامتدادات لأنواع الوسائط، مفصولة بفواصل.';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
-$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
+$_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
 $_lang['setting_use_alias_path'] = 'استخدم مسار ذو اسم مستعار مألوف';
 $_lang['setting_use_alias_path_desc'] = 'ضبط هذا الخيار إلى ’نعم’ سيعرض المسار الكامل للمصدر إذا كان المصدر يملك اسم مستعار. على سبيل المثال، إذا كان مصدر مع اسم مستعار يدعى \'child\' موجود ضمن مصدر حاوي مع اسم مستعار يدعى \'parent\'، عندها مسار الاسم المستعار الكامل للمصدر سيعرض كـ  \'/parent/child.html\'.<br /><strong>ملاحظة: عند ضبط هذا الخيار إلى ’نعم’ (تشغيل مسارات الاسم المستعار)، العناصر المرجعية (مثل الصور، ملفات CSS، ملفات جافا سكريبت، وغيرها) تستخدم المسار المطلق، مثلا، \'/assets/images\' بدلا من  \'assets/images\'. عند القيام بذلك ستمنع المتصفح (أو مخدم الوب) من إلحاق المسار ذو الصلة بمسار الاسم المستعار.</strong>';
