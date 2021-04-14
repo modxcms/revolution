@@ -2712,19 +2712,40 @@ class modX extends xPDO {
                         session_save_path($sessionSavePath);
                     }
                 }
-                $cookieDomain= $this->getOption('session_cookie_domain', $options, '');
-                $cookiePath= $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
+                $cookieDomain = $this->getOption('session_cookie_domain', $options, '');
+                $cookiePath = $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
                 if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
-                $cookieSecure= (boolean) $this->getOption('session_cookie_secure', $options, false);
-                $cookieHttpOnly= (boolean) $this->getOption('session_cookie_httponly', $options, true);
-                $cookieLifetime= (integer) $this->getOption('session_cookie_lifetime', $options, 0);
-                $gcMaxlifetime = (integer) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
+                $cookieSecure = (bool) $this->getOption('session_cookie_secure', $options, false);
+                $cookieHttpOnly = (bool) $this->getOption('session_cookie_httponly', $options, true);
+                $cookieSamesite = $this->getOption('session_cookie_samesite', $options, '');
+                $cookieLifetime = (int) $this->getOption('session_cookie_lifetime', $options, 0);
+                $gcMaxlifetime = (int) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
                 if ($gcMaxlifetime > 0) {
                     ini_set('session.gc_maxlifetime', $gcMaxlifetime);
                 }
                 $site_sessionname = $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
-                session_set_cookie_params($cookieLifetime, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
+                if (PHP_VERSION_ID < 70300) {
+                    session_set_cookie_params(
+                        $cookieLifetime,
+                        $cookiePath,
+                        $cookieDomain,
+                        $cookieSecure,
+                        $cookieHttpOnly
+                    );
+                } else {
+                    $cookie_params = [
+                        'lifetime' => $cookieLifetime,
+                        'path' => $cookiePath,
+                        'domain' => $cookieDomain,
+                        'secure' => $cookieSecure,
+                        'httponly' => $cookieHttpOnly
+                    ];
+                    if ($cookieSamesite !== '') {
+                        $cookie_params['samesite'] = $cookieSamesite;
+                    }
+                    session_set_cookie_params($cookie_params);
+                }
                 if ($this->getOption('anonymous_sessions', $options, true) || isset($_COOKIE[session_name()])) {
                     if (!$this->startSession()) {
                         $this->log(modX::LOG_LEVEL_ERROR, 'Unable to initialize a session', '', __METHOD__, __FILE__, __LINE__);
@@ -2739,8 +2760,29 @@ class modX extends xPDO {
                             if ($sessionCookieLifetime) {
                                 $cookieExpiration = time() + $sessionCookieLifetime;
                             }
-                            setcookie(session_name(), session_id(), $cookieExpiration, $cookiePath, $cookieDomain,
-                                $cookieSecure, $cookieHttpOnly);
+                            $cookie_settings = [
+                                'expires' => $cookieExpiration,
+                                'path' => $cookiePath,
+                                'domain' => $cookieDomain,
+                                'secure' => $cookieSecure,
+                                'httponly' => $cookieHttpOnly
+                            ];
+                            if ($cookieSamesite !== '') {
+                                $cookie_settings['samesite'] = $cookieSamesite;
+                            }
+                            if (PHP_VERSION_ID < 70300) {
+                                setcookie(
+                                    session_name(),
+                                    session_id(),
+                                    $cookieExpiration,
+                                    $cookiePath,
+                                    $cookieDomain,
+                                    $cookieSecure,
+                                    $cookieHttpOnly
+                                );
+                            } else {
+                                setcookie(session_name(), session_id(), $cookie_settings);
+                            }
                         }
                     }
                 } else {
