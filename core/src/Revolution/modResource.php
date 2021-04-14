@@ -1252,6 +1252,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             }
         }
 
+        $this->xpdo->invokeEvent('OnResourceDuplicate',array(
+            'newResource' => $newResource,
+            'oldResource' => $this,
+            'newName' => $newName,
+            'duplicateChildren' => $duplicateChildren,
+            'prefixDuplicate' => $prefixDuplicate,
+            'publishedMode' => $publishedMode,
+        ));
+
         return $newResource;
 
     }

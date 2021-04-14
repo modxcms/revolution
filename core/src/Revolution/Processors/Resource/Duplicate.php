@@ -81,7 +81,6 @@ class Duplicate extends Processor
             return $this->failure($this->newResource);
         }
 
-        $this->fireDuplicateEvent();
         $this->logManagerAction();
 
         return $this->success('', [
@@ -102,22 +101,6 @@ class Duplicate extends Processor
             $canAddChildren = false;
         }
         return $canAddChildren;
-    }
-
-    /**
-     * Fire the OnResourceDuplicate event
-     * @return void
-     */
-    public function fireDuplicateEvent()
-    {
-        $this->modx->invokeEvent('OnResourceDuplicate', [
-            'newResource' => &$this->newResource,
-            'oldResource' => &$this->oldResource,
-            'newName' => $this->getProperty('name', ''),
-            'duplicateChildren' => $this->getProperty('duplicate_children', false),
-            'prefixDuplicate' => $this->getProperty('prefixDuplicate', false),
-            'publishedMode' => $this->getProperty('published_mode', 'preserve'),
-        ]);
     }
 
     /**
