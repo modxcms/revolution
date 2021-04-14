@@ -62,7 +62,6 @@ $_lang['cleaningup'] = 'Cleaning up';
 $_lang['clear_cache'] = 'Clear Cache';
 $_lang['clear_cache_on_save'] = 'Empty Cache'; // make consistent with how this appears on Resource editing panel
 $_lang['clear_cache_on_save_desc'] = 'Clear cache files when this item is saved.'; // make more general, as this action clears more than just this item's cache files
-$_lang['clear_filter'] = 'Clear Filter';
 $_lang['click_to_change'] = 'Click to Change';
 $_lang['close'] = 'Close';
 $_lang['code'] = 'Code';

@@ -88,7 +88,7 @@ MODx.grid.UserGroupNamespace = function(config) {
                 'select': {fn:this.filterPolicy,scope:this}
             }
         },{
-            text: _('clear_filter')
+            text: _('filter_clear')
             ,id: 'modx-ugnamespace-clear-filter'
             ,handler: this.clearFilter
             ,scope: this
