@@ -324,7 +324,7 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('profile_remove_multiple')
+            title: _('selected_remove')
             ,text: _('profile_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {

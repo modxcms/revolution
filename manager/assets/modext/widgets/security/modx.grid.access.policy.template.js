@@ -106,7 +106,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         },{
             text: _('bulk_actions')
             ,menu: [{
-                text: _('policy_remove_multiple')
+                text: _('selected_remove')
                 ,handler: this.removeSelected
                 ,scope: this
             }]
@@ -154,7 +154,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
 
         if (this.getSelectionModel().getCount() > 1) {
             m.push({
-                text: _('policy_template_remove_multiple')
+                text: _('selected_remove')
                 ,handler: this.removeSelected
             });
         } else {
@@ -260,7 +260,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         })
 
         MODx.msg.confirm({
-            title: _('policy_template_remove_multiple')
+            title: _('selected_remove')
             ,text: policiesCount ? _('policy_template_remove_multiple_confirm_in_use', {count: policiesCount}) : _('policy_template_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
