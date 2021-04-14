@@ -36,7 +36,6 @@ $_lang['namespace'] = 'Espacio de Nombres';
 $_lang['namespace_desc'] = 'El Espacio de Nombres al que esta configuración estará asociado. Se cargará el Tópico por defecto del Archivo de Idioma para este Espacio de Nombres al tomar la configuración.';
 $_lang['namespace_filter'] = 'Filtrar por espacio de nombres...';
 $_lang['search_by_key'] = 'Buscar por clave...';
-$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'Por favor, revisa los siguientes campos: ';
 $_lang['setting_err_ae'] = 'La configuración con esa clave ya existe. Por favor, especifíca otro nombre de clave.';
 $_lang['setting_err_nf'] = 'Configuración no encontrada.';
@@ -46,9 +45,7 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to delete the set
 $_lang['setting_err_save'] = 'Ocurrió un error mientras se trataba de guardar la configuración.';
 $_lang['setting_err_startint'] = 'Las configuraciones no pueden comenzar con un número.';
 $_lang['setting_err_invalid_document'] = 'No existe ningún documento con ID %d. Por favor especifíca un documento válido.';
-$_lang['setting_remove'] = 'Eliminar Configuración';
 $_lang['setting_remove_confirm'] = '¿Estás seguro de que quieres eliminar esta configuración? Esto puede romper tu instalación de MODX.';
-$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'Como esta es una instalación nueva, deberás revisar la configuración y modificar las que creas convenientes. Después de modificar la configuración, pulsa "Guardar" para actualizar la base de datos con la nueva configuración.<br /><br />';
 $_lang['settings_desc'] = 'Aquí puedes configurar las preferencias generales y la configuración para la interfaz de administración de MODX, así como la manera en que funciona el sitio. Haz click dos veces en un valor para modificarlo, o haz click derecho para ver más opciones. También puedes hacer click en el símbolo "+" para ver una descripción de la configuración.';
 $_lang['settings_furls'] = 'URLs Amigables';
@@ -614,6 +611,9 @@ $_lang['setting_server_offset_time_desc'] = 'Selecciona el número de horas de d
 $_lang['setting_session_cookie_domain'] = 'Dominio de Cookie de Sesión';
 $_lang['setting_session_cookie_domain_desc'] = 'Usa esta configuración para personalizar el dominio de la cookie de sesión. Déjalo en blanco para usar el dominio actual.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_cookie_lifetime'] = 'Tiempo de Vida de la Cookie de Sesión';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Usa esta configuración para personalizar el tiempo de vida en segundos de la cookie de sesión. Esto sirve praa configurar el tiempo de validez de una cookie de sesión de un cliente éste escoge la opción "recuérdame".';
 
@@ -738,8 +738,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Tamaño máximo permitido de los archiv
 $_lang['setting_upload_media'] = 'Tipos de Archivo Multimedia Permitidos en Subida';
 $_lang['setting_upload_media_desc'] = 'Lista separada por comas de los tipos de archivo multimedia permitidos para subir a la carpeta "assets/media" utilizando el Administrador de Recursos.';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
-$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
+$_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
 $_lang['setting_use_alias_path'] = 'Usar la Ruta de Alias Amigable';
 $_lang['setting_use_alias_path_desc'] = 'Configurando esta opción a "Sí" se mostrará la ruta completa al Recurso si éste tiene un alias. Por ejemplo, si un Recurso con un alias de "hijo" se encuentra dentro de un Recurso contenedor con un alias de "padre", entonces la ruta completa del alias al Recurso será mostrado como "/padre/hijo.html".<br /><strong>NOTA: Cuando esta opción se configura como "Sí" (activando las rutas de alias), los recursos (como imágenes, css, javascript, etc.) usan la ruta absoluta, como por ejemplo "/assets/images" en lugar de "assets/images". Al hacer esto, prevendrás que navegador o servidor web añadan la ruta relativa a la ruta del alias.</strong>';
