@@ -671,6 +671,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'Aktivací této možnosti dojde 
 $_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Povolte toto nastavení pro nastavení příznaku HttpOnly v session cookies.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Zvolte Lax nebo Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'Maximální životnost Session Garbage Collectoru';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Umožnuje přizpůsobení nastavení PHP ini session.gc_maxlifetime používá-li se "modSessionHandler".';
 
