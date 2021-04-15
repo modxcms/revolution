@@ -1840,6 +1840,24 @@ $settings['static_elements_basepath']->fromArray(array (
   'area' => 'static_elements',
   'editedon' => null,
 ), '', true, true);
+$settings['resource_static_allow_absolute']= $xpdo->newObject('modSystemSetting');
+$settings['resource_static_allow_absolute']->fromArray(array (
+    'key' => 'resource_static_allow_absolute',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'static_resources',
+    'editedon' => null,
+), '', true, true);
+$settings['resource_static_path']= $xpdo->newObject('modSystemSetting');
+$settings['resource_static_path']->fromArray(array (
+    'key' => 'resource_static_path',
+    'value' => '{assets_path}',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'static_resources',
+    'editedon' => null,
+), '', true, true);
 $settings['strip_image_paths']= $xpdo->newObject('modSystemSetting');
 $settings['strip_image_paths']->fromArray(array (
   'key' => 'strip_image_paths',
