@@ -132,6 +132,18 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $properties = $this->getProperties();
         if (isset($properties['ta'])) $this->setProperty('content',$properties['ta']);
 
+        // Check if we have permission to **edit the current resource type**
+        if (!$this->checkEditPermissions($this->object->get('class_key'))) {
+            return $this->modx->lexicon('access_denied');
+        }
+        // If changing the resource type, check if we have permission to **create the selected resource type**
+        if (($this->object->get('class_key') !== $properties['class_key'])
+            && !$this->checkCreatePermissions($properties['class_key'])
+        ) {
+            return $this->modx->lexicon('access_denied');
+        }
+
+
         $this->workingContext = $this->modx->getContext($this->getProperty('context_key', $this->object->get('context_key') ? $this->object->get('context_key') : 'web'));
 
         $this->trimPageTitle();
@@ -165,6 +177,54 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
         return parent::beforeSet();
+    }
+
+    public function checkEditPermissions($classKey)
+    {
+        $permissions = [$this->permission];
+
+        $map = [
+            'modWebLink' => 'edit_weblink',
+            'modSymLink' => 'edit_symlink',
+            'modStaticResource' => 'edit_static_resource',
+        ];
+        if (array_key_exists($classKey, $map)) {
+            $permissions[] = $map[$classKey];
+        }
+
+        foreach ($permissions as $permission) {
+            if (!$this->modx->hasPermission($permission)) {
+                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
+                $this->permission = $permission;
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function checkCreatePermissions($classKey)
+    {
+        $permissions = [];
+
+        $map = [
+            'modWebLink' => 'new_weblink',
+            'modSymLink' => 'new_symlink',
+            'modStaticResource' => 'new_static_resource',
+        ];
+        if (array_key_exists($classKey, $map)) {
+            $permissions[] = $map[$classKey];
+        }
+
+        foreach ($permissions as $permission) {
+            if (!$this->modx->hasPermission($permission)) {
+                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
+                $this->permission = $permission;
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -480,9 +540,21 @@ class modResourceUpdateProcessor extends modObjectUpdateProcessor {
                     $this->resourceUnDeleted = true;
                 }
             } else { /* delete */
-                if (!$this->modx->hasPermission('delete_document')) {
+                $hasPermission = $this->modx->hasPermission('delete_document');
+                $map = [
+                    'modWebLink' => 'delete_weblink',
+                    'modSymLink' => 'delete_symlink',
+                    'modStaticResource' => 'delete_resource',
+                ];
+                if (array_key_exists($this->object->get('class_key'), $map)) {
+                    $permission = $map[$this->object->get('class_key')];
+                    $hasPermission = $hasPermission && $this->modx->hasPermission($permission);
+                }
+
+                if (!$hasPermission) {
                     $this->setProperty('deleted',$this->object->get('deleted'));
-                } else {
+                }
+                else {
                     $this->object->set('deleted',true);
                     $this->resourceDeleted = true;
                 }

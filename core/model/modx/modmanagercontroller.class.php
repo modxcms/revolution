@@ -125,7 +125,7 @@ abstract class modManagerController {
      */
     public function render() {
         if (!$this->checkPermissions()) {
-            return $this->modx->error->failure($this->modx->lexicon('access_denied'));
+            $this->failure($this->modx->lexicon('access_denied'));
         }
 
         $this->modx->invokeEvent('OnBeforeManagerPageInit',array(
@@ -152,7 +152,7 @@ abstract class modManagerController {
 
         $this->modx->invokeEvent('OnManagerPageBeforeRender',array('controller' => &$this));
 
-        $placeholders = $this->process($this->scriptProperties);
+        $placeholders = !$this->isFailure ? $this->process($this->scriptProperties) : [];
         if (!$this->isFailure && !empty($placeholders) && is_array($placeholders)) {
             $this->setPlaceholders($placeholders);
         } elseif (!empty($placeholders)) {

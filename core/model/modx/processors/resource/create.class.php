@@ -96,6 +96,35 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
         return $processor;
     }
 
+    public function checkPermissions()
+    {
+        $permissions = [$this->permission];
+
+        // Get and normalise the class key to avoid bypassing checks with different capitalization
+        $classKey = $this->getProperty('class_key','modDocument');
+        $obj = $this->modx->newObject($classKey);
+        $classKey = $obj ? $obj->get('class_key') : $classKey;
+
+        $map = [
+            'modWebLink' => 'new_weblink',
+            'modSymLink' => 'new_symlink',
+            'modStaticResource' => 'new_static_resource',
+        ];
+        if (array_key_exists($classKey, $map)) {
+            $permissions[] = $map[$classKey];
+        }
+
+        foreach ($permissions as $permission) {
+            if (!$this->modx->hasPermission($permission)) {
+                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
+                $this->permission = $permission;
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Create the modResource object for manipulation
      * @return string|modResource

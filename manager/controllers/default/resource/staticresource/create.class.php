@@ -8,6 +8,10 @@
  * files found in the top-level directory of this distribution.
  */
 class StaticResourceCreateManagerController extends ResourceCreateManagerController {
+    public function checkPermissions() {
+        return $this->modx->hasPermission('new_document') && $this->modx->hasPermission('new_static_resource');
+    }
+
     /**
      * Register custom CSS/JS for the page
      * @return void
