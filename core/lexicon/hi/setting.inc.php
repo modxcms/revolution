@@ -671,6 +671,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'सुरक्षित Session
 $_lang['setting_session_cookie_httponly'] = 'manager कुकी HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'manager कुकीज़ पर HttpOnly ध्वज सेट करने के लिए इस सेटिंग का उपयोग करें।';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'manager कचरा कलेक्टर अधिकतम जीवनकाल';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Session.gc_maxlifetime PHP ini सेटिंग का अनुकूलन जब \'modSessionHandler\' का उपयोग करने की अनुमति देता है।';
 
