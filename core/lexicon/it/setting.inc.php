@@ -671,6 +671,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'Abilita questa opzione per usare
 $_lang['setting_session_cookie_httponly'] = 'Cookie Sessione HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Utilizza questa opzione per spuntare il flag HttpOnly sui cookies della sessione.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'Durata Max sessione Garbage Collector';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Consente la personalizzazione dell\'impostazione gc_maxlifetime di PHP ini quando si usa \'modSessionHandler\'.';
 
