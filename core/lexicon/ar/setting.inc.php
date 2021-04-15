@@ -676,6 +676,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'تفعيل هذا الإعداد
 $_lang['setting_session_cookie_httponly'] = 'HttpOnly لكوكي الجلسة';
 $_lang['setting_session_cookie_httponly_desc'] = 'استخدم هذا الإعداد لضبط علامة HttpOnly على كوكي الجلسة.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'وقت الحياة الأعظمي لجامع قمامة الجلسة';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'السماح بتخصيص session.gc_maxlifetime في إعداد PHP ini عند استخدام \'modSessionHandler\'.';
 

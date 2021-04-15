@@ -671,6 +671,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'httpsでの接続時のみセッ
 $_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'セッションCookieにHTTPOnlyフラグを設定するには、この設定を使用します。';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'セッションのガベージコレクション実行期限';
 $_lang['setting_session_gc_maxlifetime_desc'] = '\'modSessionHandler\'を使用して、PHPのINI設定"session.gc_maxlifetime"を設定します。';
 
