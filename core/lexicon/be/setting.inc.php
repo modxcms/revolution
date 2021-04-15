@@ -672,6 +672,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'Дазвольце гэтую н
 $_lang['setting_session_cookie_httponly'] = 'Кукі сеансаў у рэжыме HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Выкарыстоўвайце гэтую наладу для задання рэжыма HttpOnly для кукаў сеансаў.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'Максімальны час жыцця сесіі прыбіральніка смецця';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Дазваляе наладзіць PHP-параметр session.gc_maxlifetime, калі выкарыстоўваецца \'modSessionHandler\'.';
 
