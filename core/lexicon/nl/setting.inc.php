@@ -611,6 +611,9 @@ $_lang['setting_server_offset_time_desc'] = 'Selecteer het aantal uren in tijdsv
 $_lang['setting_session_cookie_domain'] = 'Sessie cookie domein';
 $_lang['setting_session_cookie_domain_desc'] = 'Gebruik deze instelling om de sessie cookie domein aan te passen.';
 
+$_lang['setting_session_cookie_samesite'] = 'Sessie Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Kies Lax of Strict.';
+
 $_lang['setting_session_cookie_lifetime'] = 'Sessie cookie verlooptijd';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Gebruik deze instelling om de sessie cookie verlooptijd in seconden aan te passen. Dit wordt gebruikt om de verlooptijd van de sessie cookie wanneer er gekozen wordt voor \'onthoud mij\' optie bij het inloggen.';
 

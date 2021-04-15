@@ -611,6 +611,9 @@ $_lang['setting_server_offset_time_desc'] = 'Укажите разницу в ч
 $_lang['setting_session_cookie_domain'] = 'Домен для сессионных куки';
 $_lang['setting_session_cookie_domain_desc'] = 'Используйте эту настройку для указания доменного имени для сессионных куки. При пустом значении, в качестве доменного имени будет использоваться текущий домен.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_cookie_lifetime'] = 'Длительность хранения куки сессий';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Используйте эту настройку для выбора длительности хранения сессионных куки в секундах. Эта настройка используется для определения длительности хранения клиентских сессионных куки при выборе опции «запомнить меня» во время аутентификации.';
 

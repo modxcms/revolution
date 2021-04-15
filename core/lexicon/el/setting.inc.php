@@ -36,7 +36,6 @@ $_lang['namespace'] = 'Namespace (ονοματόχωρος)';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
 $_lang['search_by_key'] = 'Search by key...';
-$_lang['setting_create'] = 'Create Setting';
 $_lang['setting_err'] = 'Please check your data for the following fields: ';
 $_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
 $_lang['setting_err_nf'] = 'Setting not found.';
@@ -46,9 +45,7 @@ $_lang['setting_err_remove'] = 'An error occurred while trying to delete the set
 $_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
 $_lang['setting_err_startint'] = 'Settings may not start with an integer.';
 $_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
-$_lang['setting_remove'] = 'Delete Setting';
 $_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Edit Setting';
 $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Friendly URLs';
@@ -614,6 +611,9 @@ $_lang['setting_server_offset_time_desc'] = 'Select the number of hours time dif
 $_lang['setting_session_cookie_domain'] = 'Session Cookie Domain';
 $_lang['setting_session_cookie_domain_desc'] = 'Use this setting to customize the session cookie domain. Leave blank to use the current domain.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_cookie_lifetime'] = 'Session Cookie Lifetime';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Use this setting to customize the session cookie lifetime in seconds.  This is used to set the lifetime of a client session cookie when they choose the \'remember me\' option on login.';
 
@@ -738,8 +738,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Enter the maximum file size that can be
 $_lang['setting_upload_media'] = 'Uploadable Media Types';
 $_lang['setting_upload_media_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/media/\' using the Resource Manager. Please enter the extensions for the media types, separated by commas.';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploading files?';
-$_lang['setting_upload_translit_desc'] = 'If \'Yes\' name of any uploading file will be transliterated by global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
+$_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
 $_lang['setting_use_alias_path'] = 'Use Friendly Alias Path';
 $_lang['setting_use_alias_path_desc'] = 'Setting this option to \'yes\' will display the full path to the Resource if the Resource has an alias. For example, if a Resource with an alias called \'child\' is located inside a container Resource with an alias called \'parent\', then the full alias path to the Resource will be displayed as \'/parent/child.html\'.<br /><strong>NOTE: When setting this option to \'Yes\' (turning on alias paths), reference items (such as images, CSS, JavaScripts, etc.) use the absolute path, e.g., \'/assets/images\' as opposed to \'assets/images\'. By doing so you will prevent the browser (or web server) from appending the relative path to the alias path.</strong>';
