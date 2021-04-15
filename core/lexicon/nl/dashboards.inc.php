@@ -77,11 +77,11 @@ $_lang['widgets.intro_msg'] = 'Hieronder is een lijst met alle geïnstalleerde D
 
 $_lang['w_configcheck'] = 'Configuratie Controle';
 $_lang['w_configcheck_desc'] = 'Geeft een configurate controle weer welke de standaard beveiliging controleerd.';
-$_lang['w_newsfeed'] = 'MODX nieuws';
+$_lang['w_newsfeed'] = 'MODX Nieuws';
 $_lang['w_newsfeed_desc'] = 'Toont de laatste resultaten van de MODX Nieuws feed.';
-$_lang['w_recentlyeditedresources'] = 'Recent gewijzigde pagina\'s';
+$_lang['w_recentlyeditedresources'] = 'Recent Gewijzigde Pagina\'s';
 $_lang['w_recentlyeditedresources_desc'] = 'Toont een lijst van de meest recentelijk bewerkte Resources door de gebruiker.';
 $_lang['w_securityfeed'] = 'MODX beveiligingsnieuws';
 $_lang['w_securityfeed_desc'] = 'Toont de laatste resultaten van de MODX Beveiligings Feed';
-$_lang['w_whosonline'] = 'Online gebruikers';
+$_lang['w_whosonline'] = 'Online Gebruikers';
 $_lang['w_whosonline_desc'] = 'Geeft weer wie er op dit moment ingelogd is.';
