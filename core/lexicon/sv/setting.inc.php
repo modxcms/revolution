@@ -671,6 +671,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'Aktivera denna inställning för
 $_lang['setting_session_cookie_httponly'] = 'HttpOnly för sessions-cookie';
 $_lang['setting_session_cookie_httponly_desc'] = 'Använd den här inställningen för att ange flaggan HttpOnly för sessions-cookies.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'Maximal livslängd för sessionens sophämtning';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Tillåter anpassning av PHP:s ini-inställning session.gc_maxlifetime när "modSessionHandler" används.';
 
