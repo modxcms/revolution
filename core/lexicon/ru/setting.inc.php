@@ -671,6 +671,9 @@ $_lang['setting_session_cookie_secure_desc'] = 'Включите эту наст
 $_lang['setting_session_cookie_httponly'] = 'Сессионные куки в режиме HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Включите эту настройку для установки флага HttpOnly для сессионых кук.';
 
+$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+
 $_lang['setting_session_gc_maxlifetime'] = 'Максимальное время жизни сессии';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Позволяет настроить PHP-параметр «session.gc_maxlifetime» сборщика мусора при использовании обработчика «modSessionHandler».';
 
