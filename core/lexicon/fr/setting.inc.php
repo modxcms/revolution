@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session et Cookie';
 $_lang['area_static_elements'] = 'Contenus statiques';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'Entrées du lexique de zone';
 $_lang['area_lexicon_string_msg'] = 'Entrez ici la clé de l\'entrée du lexique pour la zone. S\'il n\'y a pas d\'entrée de lexique, cela affichera la clé de la zone.<br />Zones du coeur : Authentification, cache, fichier, urls simples, passerelle, langue, gestionnaire, session, site, système';
 $_lang['area_site'] = 'Site';
@@ -744,6 +745,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Spécifier une catég
 
 $_lang['setting_static_elements_basepath'] = 'Chemin de base des éléments statiques';
 $_lang['setting_static_elements_basepath_desc'] = 'Chemin de base où stocker les fichiers d\'éléments statiques.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = 'Réécrire les chemins du navigateur ?';
 $_lang['setting_strip_image_paths_desc'] = 'Sélectionnez "Non" pour que MODX écrive les "src" (images, fichiers, flash, etc.) des fichiers ressources en URL absolues. Les URL relatives sont utiles si vous souhaitez déplacer votre installation MODX, par exemple, depuis un site en temporaire vers un site en production. Si vous ne savez pas ce que cela signifie, il est préférable de laisser "Oui".';
