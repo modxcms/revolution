@@ -55,7 +55,7 @@ class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
     }
 
     public function prepareQueryAfterCount(xPDOQuery $c) {
-        $c->select($this->modx->getSelectColumns($this->classKey,$this->classKey));
+        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', ['id', 'username']));
         $c->select(array(
             'usergroup' => 'UserGroup.id',
             'usergroup_name' => 'UserGroup.name',
@@ -70,7 +70,7 @@ class modUserGroupUserGetListProcessor extends modObjectGetListProcessor {
     }
 
     public function prepareRow(xPDOObject $object) {
-        $objectArray = $object->toArray();
+        $objectArray = $object->toArray('', false, true);
         $objectArray['role_name'] .= ' - '.$objectArray['authority'];
         return $objectArray;
     }
