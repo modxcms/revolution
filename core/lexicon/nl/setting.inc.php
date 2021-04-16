@@ -15,13 +15,14 @@ $_lang['area_file'] = 'Bestandssysteem';
 $_lang['area_filter'] = 'Filter op gebied...';
 $_lang['area_furls'] = 'Vriendelijke URLs';
 $_lang['area_gateway'] = 'Gateway';
-$_lang['area_language'] = 'Lexicon en taal';
+$_lang['area_language'] = 'Lexicon en Taal';
 $_lang['area_mail'] = 'E-mail';
 $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Sessie en Cookie';
 $_lang['area_static_elements'] = 'Static Elements';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'Gebied Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Vul hier een key in van een lexicon entry gebied. Indien er geen lexicon entry is, dan wordt de key van het gebied getoond.<br />Core gebieden:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Site';
@@ -35,15 +36,15 @@ $_lang['name_desc'] = 'Een Naam voor de instelling, kan een Lexicon key zijn.';
 $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'De Namespace waar deze Instelling bij hoort. Het "default" Lexicon Topic voor de Namespace zal beschikbaar zijn wanneer Instellingen worden geladen.';
 $_lang['namespace_filter'] = 'Filter op namespace...';
-$_lang['search_by_key'] = 'Zoek op key...';
+$_lang['search_by_key'] = 'Zoek op sleutel...';
 $_lang['setting_create'] = 'Maak nieuwe instelling';
-$_lang['setting_err'] = 'Controleer jouw gegevens voor de volgende velden: ';
+$_lang['setting_err'] = 'Controleer je gegevens voor de volgende velden: ';
 $_lang['setting_err_ae'] = 'Instelling met deze key bestaat reeds. Definieer een andere keynaam.';
 $_lang['setting_err_nf'] = 'Instelling niet gevonden.';
 $_lang['setting_err_ns'] = 'Instelling niet gedefinieerd';
 $_lang['setting_err_remove'] = 'Er is een fout opgetreden tijdens het proberen te verwijderen van de instelling.';
 $_lang['setting_err_save'] = 'Er is een fout opgetreden tijdens het proberen op te slaan van de instelling.';
-$_lang['setting_err_startint'] = 'Instelling mag niet starten met een cijfer.';
+$_lang['setting_err_startint'] = 'Instellingen mogen niet beginnen met een cijfer.';
 $_lang['setting_err_invalid_document'] = 'Er is geen document met ID %d. Definieer een geldig document.';
 $_lang['setting_remove'] = 'Instelling verwijderen';
 $_lang['setting_remove_confirm'] = 'Weet je zeker dat je deze insteling wilt verwijderen? Dit kan jouw MODX installatie kapot maken.';
@@ -744,6 +745,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = 'Herschrijf browser paden?';
 $_lang['setting_strip_image_paths_desc'] = 'Als dit op \'Nee\' gezet is, MODX zal bestandsmanager geschreven src\'s (afbeeldingen, bestanden, flash, etc.) als absolute URLs. Relatieve URLs zijn nuttig indien je wenst de MODX installatie te verplaatsen, bijv. van staging naar een productie omgeving. Indien je niet weet wat dit inhoudt laat dit dan staan op \'Ja\'.';

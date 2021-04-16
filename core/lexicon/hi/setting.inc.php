@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'प्रॉक्सी';
 $_lang['area_session'] = 'Session and Cookie';
 $_lang['area_static_elements'] = 'Static Elements';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'क्षेत्र Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'यहाँ क्षेत्र के लिए lexicon entry की key दर्ज करें। यदि कोई lexicon entry है, तो यह सिर्फ क्षेत्र key। प्रदर्शित करेगा <br /> कोर क्षेत्रों: प्रमाणीकरण, कैशिंग, फ़ाइल, furls, गेटवे, भाषा, manager, सत्र, साइट, प्रणाली';
 $_lang['area_site'] = 'साइट';
@@ -744,6 +745,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = 'ब्राउज़र path को फिर से लिखना?';
 $_lang['setting_strip_image_paths_desc'] = 'MODX फ़ाइल ब्राउज़र Resource src (छवियाँ, फ़ाइलों, फ़्लैश, आदि) निरपेक्ष Url के रूप में अगर यह \'नहीं\' के लिए सेट किया गया है, लिखना होगा। रिश्तेदार URL आप अपने MODX स्थापित करें, उदाहरण के लिए, एक उत्पादन साइट के लिए एक staging साइट से स्थानांतरित करने के लिए इच्छा चाहिए उपयोगी हैं। यदि आप पता नहीं इसका मतलब क्या है, यह सिर्फ यह सेट करने के लिए \'हाँ\' छोड़ करने के लिए सबसे अच्छा है।';

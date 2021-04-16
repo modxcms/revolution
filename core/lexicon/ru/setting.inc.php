@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Прокси';
 $_lang['area_session'] = 'Сессии и куки';
 $_lang['area_static_elements'] = 'Статические элементы';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'Запись словаря для раздела';
 $_lang['area_lexicon_string_msg'] = 'Введите ключ записи словаря для раздела. Если запись с таким ключом не будет найдена, отобразится сам ключ. <br />Разделы пространства «core»: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Сайт';
@@ -744,6 +745,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Укажите кат
 
 $_lang['setting_static_elements_basepath'] = 'Путь к файлам статических элементов';
 $_lang['setting_static_elements_basepath_desc'] = 'Путь к файлам, где хранятся статические элементы.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = 'Переписывать пути для браузера?';
 $_lang['setting_strip_image_paths_desc'] = 'Если установлено значение «Нет», MODX будет использовать абсолютные ссылки для изображений, файлов, flash и тому подобного. Относительные ссылки удобнее, если вы в будущем собираетесь переместить свой сайт, например, с тестового сервера на конечный. Если вы не понимаете о чем идёт речь, оставьте значение «Да».';

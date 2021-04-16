@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Проксі';
 $_lang['area_session'] = 'Сеансы і кукі';
 $_lang['area_static_elements'] = 'Статычныя элементы';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'Запіс слоўніка для раздзела';
 $_lang['area_lexicon_string_msg'] = 'Увядзіце ключ запісу слоўніка для раздзела. Калі запіс з такім ключом не будзе знойдзены, адлюструецца сам ключ.<br />Раздзелы прасторы «core»: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Сайт';
@@ -745,6 +746,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Пазначце ка
 
 $_lang['setting_static_elements_basepath'] = 'Базавы шлях да статычных элементаў';
 $_lang['setting_static_elements_basepath_desc'] = 'Базавы шлях да месца, дзе будуць захоўвацца файлы статычных элементаў.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = 'Перапісваць шляхі для браўзэра?';
 $_lang['setting_strip_image_paths_desc'] = 'Калі ўсталявана значэнне «Не», MODX будзе выкарыстоўваць абсалютныя спасылкі для выяваў, файлаў, flash і таму падобнага. Адносныя спасылкі зручней, калі вы ў будучыні збіраецеся перамясціць свой сайт, напрыклад, з тэставага сервера на канчатковы. Калі вы не разумееце пра што ідзе гаворка, пакіньце значэнне «Так».';

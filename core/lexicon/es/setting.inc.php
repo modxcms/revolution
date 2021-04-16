@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Sesión y Cookie';
 $_lang['area_static_elements'] = 'Elementos estáticos';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'Clave de Entrada del Área en el Archivo de Idioma';
 $_lang['area_lexicon_string_msg'] = 'Introduce la clave de la entrada del archivo de idioma para el área. Si la entrada no existe en el archivo de idioma, sólo mostrará la clave del área.<br />Áreas Principales:<ul><li>Autenticación</li><li>Caché</li><li>Archivo</li><li>URLs amigables</li><li>Portal</li><li>Idioma</li><li>Administrador</li><li>Sesión</li><li>Sitio</li><li>Sistema</li></ul>';
 $_lang['area_site'] = 'Sitio';
@@ -744,6 +745,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Especifique una categ
 
 $_lang['setting_static_elements_basepath'] = 'Ruta base de elementos estáticos';
 $_lang['setting_static_elements_basepath_desc'] = 'Ruta base en donde almacenar los archivos de elementos estáticos.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = '¿Re-escribir rutas del navegador?';
 $_lang['setting_strip_image_paths_desc'] = 'Si se configura como "No", MODX creará las rutas a recursos (imágenes, archivos, flash, etc.) del navegador de recursos como URLs absolutas. Las URLs relativas son útiles cuando se desea migrar la instalación de MODX, como por ejemplo de un sitio de desarrollo a un sitio de producción. Si no tienes idea de lo que esto significa, es mejor dejarlo configurado a "Sí".';

@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session ja Cookie';
 $_lang['area_static_elements'] = 'Static Elements';
+$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_lexicon_string'] = 'Piirkonna Lexicon-i Kirje';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Sait';
@@ -745,6 +746,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = 'Kirjuta ümber brauseri path-id?';
 $_lang['setting_strip_image_paths_desc'] = 'Kui valitud \'Ei\' asend, siis MODX kirjutab faili brauseri resurssi src-id (images, files, flash, jne.) absoluutsete URL-idena. Relatiivsed URL-id on kasulikud, kui soovite kolida MODX installiga, nt: staging serverist production servierisse. Kui teil pole aimugi, mis see tähendab, siis parim on jätta see valik \'Jah\' peale.';
