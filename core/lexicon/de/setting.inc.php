@@ -22,6 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session und Cookies';
 $_lang['area_static_elements'] = 'Statische Elemente';
+$_lang['area_static_resources'] = 'Statische Ressourcen';
 $_lang['area_lexicon_string'] = 'Lexikon-Eintrag für den Bereich';
 $_lang['area_lexicon_string_msg'] = 'Geben Sie hier den Schlüssel für den Lexikon-Eintrag für den Bereich ein. Wenn es keinen Lexikon-Eintrag gibt, wird einfach der Bereichs-Schlüssel angezeigt.<br />Core-Bereiche: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Site';
@@ -744,6 +745,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Geben Sie die standar
 
 $_lang['setting_static_elements_basepath'] = 'Basispfad für statische Elemente';
 $_lang['setting_static_elements_basepath_desc'] = 'Basispfad in dem statische Element-Dateien gespeichert werden.';
+
+$_lang['setting_resource_static_allow_absolute'] = 'Absoluten statischen Ressourcenpfad zulassen';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Mit dieser Einstellung können Benutzer einen vollständig qualifizierten absoluten Pfad zu einer beliebigen lesbaren Datei auf dem Server als Inhalt einer statischen Ressource eingeben. Wichtig: Die Aktivierung dieser Einstellung kann als erhebliches Sicherheitsrisiko angesehen werden! Es wird dringend empfohlen, diese Einstellung deaktiviert zu lassen, es sei denn, Sie vertrauen uneingeschränkt jedem einzelnen Manager-Benutzer.';
+
+$_lang['setting_resource_static_path'] = 'Basispfad für statische Ressourcen';
+$_lang['setting_resource_static_path_desc'] = 'Wenn resource_static_allow_absolute deaktiviert ist, sind statische Ressourcen auf den hier angegebenen absoluten Pfad beschränkt.  Wichtig: Wenn Sie diese Einstellung zu weit fassen, können Benutzer Dateien lesen, die sie nicht lesen sollten! Es wird dringend empfohlen, Benutzer mit dieser Einstellung auf ein bestimmtes Verzeichnis wie {core_path}static/ oder {assets_path} zu beschränken.';
 
 $_lang['setting_strip_image_paths'] = 'Relative Datei-Browser-Pfade?';
 $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Datei-Browser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z.B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
