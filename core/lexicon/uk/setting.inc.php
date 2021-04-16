@@ -611,8 +611,8 @@ $_lang['setting_server_offset_time_desc'] = 'Select the number of hours time dif
 $_lang['setting_session_cookie_domain'] = 'Session Cookie Domain';
 $_lang['setting_session_cookie_domain_desc'] = 'Use this setting to customize the session cookie domain. Leave blank to use the current domain.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Сеансові SameSite куки';
+$_lang['setting_session_cookie_samesite_desc'] = 'Виберіть Lax або Strict.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Session Cookie Lifetime';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Use this setting to customize the session cookie lifetime in seconds.  This is used to set the lifetime of a client session cookie when they choose the \'remember me\' option on login.';
