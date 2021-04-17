@@ -54,7 +54,7 @@ MODx.grid.FCSet = function(config) {
             ,dataIndex: 'constraint_field'
             ,width: 200
             ,editable: true
-            ,sortable: false
+            ,sortable: true
             ,editor: {
                 xtype: 'textfield',
                 renderer: true
@@ -64,15 +64,15 @@ MODx.grid.FCSet = function(config) {
             ,dataIndex: 'constraint'
             ,width: 200
             ,editable: true
-            ,sortable: false
+            ,sortable: true
             ,editor: {
                 xtype: 'textfield',
                 renderer: true
             }
         }]
         ,viewConfig: {
-            forceFit:true
-            ,enableRowBody:true
+            forceFit: true
+            ,enableRowBody: true
             ,scrollOffset: 0
             ,autoFill: true
             ,showPreview: true

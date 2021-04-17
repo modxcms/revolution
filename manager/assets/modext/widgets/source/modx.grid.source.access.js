@@ -17,6 +17,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             header: _('user_group')
             ,dataIndex: 'principal_name'
             ,width: 120
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/usergroup/update&id=' + record.data.principal
@@ -27,6 +28,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 50
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/permission'
@@ -37,6 +39,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 175
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/access/policy/update&id=' + record.data.policy

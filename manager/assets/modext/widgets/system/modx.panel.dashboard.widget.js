@@ -351,6 +351,7 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
             header: _('dashboard')
             ,dataIndex: 'name'
             ,width: 200
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=system/dashboards/update&id=' + record.data.id
@@ -361,6 +362,7 @@ MODx.grid.DashboardWidgetDashboards = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
+            ,sortable: true
         }]
     });
     MODx.grid.DashboardWidgetDashboards.superclass.constructor.call(this,config);

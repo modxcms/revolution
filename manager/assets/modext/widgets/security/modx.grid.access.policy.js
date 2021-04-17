@@ -71,6 +71,7 @@ MODx.grid.AccessPolicy = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 375
+            ,sortable: true
             ,renderer: function(value, metaData, record) {
                 return Ext.util.Format.htmlEncode(record['data']['description_trans']);
             }
@@ -79,6 +80,7 @@ MODx.grid.AccessPolicy = function(config) {
             header: _('policy_template')
             ,dataIndex: 'template_name'
             ,width: 375
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/access/policy/template/update&id=' + record.data.template
@@ -89,6 +91,7 @@ MODx.grid.AccessPolicy = function(config) {
             header: _('active_permissions')
             ,dataIndex: 'active_of'
             ,width: 100
+            ,sortable: true
             ,editable: false
         }]
         ,tbar: [{

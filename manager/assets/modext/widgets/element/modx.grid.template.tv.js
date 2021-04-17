@@ -66,7 +66,7 @@ MODx.grid.TemplateTV = function(config) {
             header: _('caption')
             ,dataIndex: 'caption'
             ,width: 350
-            ,sortable: false
+            ,sortable: true
         },tt,{
             header: _('rank')
             ,dataIndex: 'tv_rank'

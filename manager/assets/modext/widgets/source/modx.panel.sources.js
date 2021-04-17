@@ -97,7 +97,7 @@ MODx.grid.Sources = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
-            ,sortable: false
+            ,sortable: true
             ,editor: { xtype: 'textarea' }
             ,renderer: Ext.util.Format.htmlEncode
         }]
@@ -344,7 +344,7 @@ MODx.grid.SourceTypes = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
-            ,sortable: false
+            ,sortable: true
             ,renderer: Ext.util.Format.htmlEncode
         }]
     });

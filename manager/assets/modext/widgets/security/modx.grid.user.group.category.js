@@ -38,6 +38,7 @@ MODx.grid.UserGroupCategory = function(config) {
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 100
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/permission'
@@ -48,6 +49,7 @@ MODx.grid.UserGroupCategory = function(config) {
             header: _('policy')
             ,dataIndex: 'policy_name'
             ,width: 200
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=security/access/policy/update&id=' + record.data.policy

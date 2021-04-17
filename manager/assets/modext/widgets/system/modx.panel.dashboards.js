@@ -91,7 +91,7 @@ MODx.grid.Dashboards = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 300
-            ,sortable: false
+            ,sortable: true
             ,editor: { xtype: 'textarea' }
         }]
         ,tbar: [{

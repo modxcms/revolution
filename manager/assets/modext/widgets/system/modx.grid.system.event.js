@@ -26,19 +26,23 @@ MODx.grid.SystemEvent = function(config) {
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
+            ,sortable: true
         },{
             header: _('system_events.service')
             ,dataIndex: 'service'
+            ,sortable: true
 			,renderer: this.renderServiceField.createDelegate(this,[this],true)
         },{
             header: _('system_events.plugins')
             ,dataIndex: 'plugins'
             ,width: 150
+            ,sortable: true
             ,renderer: this.renderPluginsField.createDelegate(this,[this],true)
         },{
 			header: _('system_events.groupname')
             ,dataIndex: 'groupname'
             ,width: 150
+            ,sortable: true
 			,hidden: true
 		}]
 		,tbar: [{

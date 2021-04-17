@@ -33,13 +33,6 @@ MODx.grid.Package = function(config) {
         compiled: true
     });
 
-    var cols = [];
-    cols.push(this.exp);
-    cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
-    cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:120, renderer: function (v, md, record) { return v + '-' + record.data.release;} });
-    cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
-    cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
-
     var dlbtn;
     if (MODx.curlEnabled) {
         dlbtn = {
@@ -84,14 +77,47 @@ MODx.grid.Package = function(config) {
         ,id: 'modx-package-grid'
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Packages/GetList'
-        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
-                 ,'provider','provider_name','disabled','source','attributes','readme','menu'
-                 ,'install','textaction','iconaction','updateable']
+        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace','provider','provider_name','disabled','source','attributes','readme','menu','install','textaction','iconaction','updateable']
         ,showActionsColumn: false
         ,plugins: [this.exp]
         ,pageSize: Math.min(parseInt(MODx.config.default_per_page), 25)
         ,disableContextMenuAction: true
-        ,columns: cols
+        ,columns: [
+        this.exp
+        ,{
+            header: _('name')
+            ,dataIndex: 'name'
+            ,id: 'main'
+            ,sortable: true
+            ,renderer: {
+                fn: this.mainColumnRenderer, scope: this
+            }
+        },{
+            header: _('version')
+            ,dataIndex: 'version'
+            ,id: 'meta-col'
+            ,fixed: true
+            ,width: 120
+            ,sortable: true
+            ,renderer: function (v, md, record) {
+                return v + '-' + record.data.release;
+            }
+        },{
+            header: _('installed')
+            ,dataIndex: 'installed'
+            ,id: 'info-col'
+            ,fixed: true
+            ,width: 160
+            ,sortable: true
+            ,renderer: this.dateColumnRenderer
+        },{
+            header: _('provider')
+            ,dataIndex: 'provider_name'
+            ,id: 'text-col'
+            ,fixed: true
+            ,width: 120
+            ,sortable: true
+        }]
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true

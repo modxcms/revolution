@@ -92,29 +92,35 @@ MODx.grid.Message = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,width: 30
+            ,sortable: true
         },{
             header: _('subject')
             ,dataIndex: 'subject'
             ,width: 200
+            ,sortable: true
             ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('sender')
             ,dataIndex: 'sender_name'
             ,width: 120
+            ,sortable: true
             ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('recipient')
             ,dataIndex: 'recipient_name'
             ,width: 120
+            ,sortable: true
             ,renderer: Ext.util.Format.htmlEncode
         },{
             header: _('date_sent')
             ,dataIndex: 'date_sent'
             ,width: 150
+            ,sortable: true
         },{
             header: _('read')
             ,dataIndex: 'read'
             ,width: 100
+            ,sortable: true
             ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
             ,editable: false
         }]

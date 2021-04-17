@@ -12,7 +12,7 @@ MODx.grid.TVSecurity = function(config) {
         header: _('access')
         ,dataIndex: 'access'
         ,width: 40
-        ,sortable: false
+        ,sortable: true
     });
     Ext.applyIf(config,{
         id: 'modx-grid-tv-security'

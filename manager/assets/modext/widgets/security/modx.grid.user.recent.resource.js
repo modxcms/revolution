@@ -24,10 +24,12 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
             header: _('id')
             ,dataIndex: 'id'
             ,width: 75
+            ,sortable: true
             ,fixed: true
         },{
             header: _('pagetitle')
             ,dataIndex: 'pagetitle'
+            ,sortable: true
             ,renderer: { fn: function(v,md,record) {
                 return this.renderLink(v, {
                     href: '?a=resource/update&id=' + record.data.id
@@ -37,11 +39,13 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         },{
             header: _('editedon')
             ,dataIndex: 'occurred'
+            ,sortable: true
             ,renderer : Ext.util.Format.dateRenderer(dateFormat)
         },{
             header: _('published')
             ,dataIndex: 'published'
             ,width: 120
+            ,sortable: true
             ,fixed: true
             ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
         }]
