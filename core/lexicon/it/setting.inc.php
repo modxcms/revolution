@@ -22,7 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Sessioni e Cookie';
 $_lang['area_static_elements'] = 'Elementi statici';
-$_lang['area_static_resources'] = 'Static Resources';
+$_lang['area_static_resources'] = 'Risorse Statiche';
 $_lang['area_lexicon_string'] = 'Denominazione Area';
 $_lang['area_lexicon_string_msg'] = 'Inserisci qui la Chiave del termine associato all\'area. Se non c\'è alcuna denominazione corrispondente, verrà mostrata soltanto la Chiave stessa (il nome univoco).<br />Aree Core:<ul><li>authentication</li><li>caching</li><li>file</li><li>furls</li><li>gateway</li><li>language</li><li>manager</li><li>session</li><li>site</li><li>system</li></ul>';
 $_lang['area_site'] = 'Sito';
@@ -746,11 +746,11 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specifica una categor
 $_lang['setting_static_elements_basepath'] = 'Percorso di base degli elementi statici';
 $_lang['setting_static_elements_basepath_desc'] = 'Percorso di base dove memorizzare i file di elementi statici.';
 
-$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
-$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+$_lang['setting_resource_static_allow_absolute'] = 'Consenti percorso risorsa statica assoluta';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Questa impostazione consente agli utenti di inserire un percorso assoluto completamente qualificato per qualsiasi file leggibile sul server come contenuto di una risorsa statica. Importante: abilitare questa impostazione può essere considerato un rischio significativo per la sicurezza! Si raccomanda vivamente di mantenere questa impostazione disabilitata, a meno che non ti fidi completamente ogni singolo utente manager.';
 
-$_lang['setting_resource_static_path'] = 'Static resource base path';
-$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
+$_lang['setting_resource_static_path'] = 'Percorso base risorsa statica';
+$_lang['setting_resource_static_path_desc'] = 'Quando resource_static_allow_absolute è disabilitato, le risorse statiche sono limitate ad essere all\'interno del percorso assoluto fornito qui. Importante: l\'impostazione di questo troppo largo può consentire agli utenti di leggere i file che non dovrebbero! Si raccomanda vivamente di limitare gli utenti a una directory specifica come {core_path}static/ o {assets_path} con questa impostazione.';
 
 $_lang['setting_strip_image_paths'] = 'Riscrivi Percorsi Browser?';
 $_lang['setting_strip_image_paths_desc'] = 'Se impostato su \'NO\', MODX scriverà le origini dei files delle risorse src(immagini, files, flash, etc.) come URLs assoluti. Gli URLs relativi sono utili per spostare la tua installazione di MODX, e.g., da un server di test a un server di produzione. Se non hai idea di cosa significhi, sarebbe opportuno lasciare semplicemente impostato su \'SI\'.';
