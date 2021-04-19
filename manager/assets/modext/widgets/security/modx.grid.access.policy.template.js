@@ -170,7 +170,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
             }
             if (m.length > 0) { m.push('-'); }
             m.push({
-                text: _('policy_template_export')
+                text: _('export')
                 ,handler: this.exportPolicyTemplate
             });
 
@@ -382,7 +382,7 @@ MODx.window.ImportPolicyTemplate = function(config) {
     config = config || {};
     this.ident = config.ident || 'imppt-'+Ext.id();
     Ext.applyIf(config,{
-        title: _('policy_template_import')
+        title: _('import')
         ,id: 'modx-window-policy-template-import'
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/Policy/Template/Import'

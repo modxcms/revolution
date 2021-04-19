@@ -101,7 +101,7 @@ MODx.grid.FCSet = function(config) {
                 ,scope: this
             }]
         },{
-            text: _('import_from_xml')
+            text: _('import')
             ,handler: this.importSet
             ,scope: this
         },'->',{
@@ -521,7 +521,7 @@ Ext.reg('modx-window-fc-set-create',MODx.window.CreateFCSet);
 MODx.window.ImportFCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('import_from_xml')
+        title: _('import')
         ,id: 'modx-window-fc-set-import'
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Set/Import'

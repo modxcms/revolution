@@ -235,7 +235,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
             }
             if (m.length > 0) { m.push('-'); }
             m.push({
-                text: _('policy_export')
+                text: _('export')
                 ,handler: this.exportPolicy
             });
             if (p.indexOf('premove') != -1) {
@@ -385,7 +385,7 @@ MODx.window.ImportPolicy = function(config) {
     config = config || {};
     this.ident = config.ident || 'imppol-'+Ext.id();
     Ext.applyIf(config,{
-        title: _('policy_import')
+        title: _('import')
         ,id: 'modx-window-policy-import'
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/Policy/Import'
