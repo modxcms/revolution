@@ -2230,4 +2230,13 @@ $settings['error_log_filepath']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
+$settings['search_max_results']= $xpdo->newObject('modSystemSetting');
+$settings['search_max_results']->fromArray(array (
+  'key' => 'search_max_results',
+  'value' => 5,
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'site',
+  'editedon' => null,
+), '', true, true);
 return $settings;
