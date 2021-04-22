@@ -14,17 +14,20 @@
  **/
 class modSearchProcessor extends modProcessor
 {
-    public $maxResults = 5;
     public $actionToken = ':';
     private $actions = array();
 
     protected $query;
     public $results = array();
 
+    public function getMaxResults() {
+        return $this->modx->getOption('search_max_results',5,5);
+    }
+
     public function checkPermissions() {
         return $this->modx->hasPermission('search');
     }
-
+		
     /**
      * @return string JSON formatted results
      */
@@ -109,7 +112,7 @@ class modSearchProcessor extends modProcessor
 //        $c->where(array(
 //            'action:LIKE' => '%' . $this->query . '%',
 //        ));
-//        $c->limit($this->maxResults);
+//        $c->limit($this->getMaxResults());
 //
 //        $collection = $this->modx->getCollection($class, $c);
 //        /** @var modMenu $record */
@@ -186,7 +189,7 @@ class modSearchProcessor extends modProcessor
         ));
         $c->sortby('modResource.createdon', 'DESC');
 
-        $c->limit($this->maxResults);
+        $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getCollection('modResource', $c);
         /** @var modResource $record */
@@ -214,7 +217,7 @@ class modSearchProcessor extends modProcessor
             'OR:id:=' => $this->query,
         ));
 
-        $c->limit($this->maxResults);
+        $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getCollection('modSnippet', $c);
         /** @var modSnippet $record */
@@ -240,7 +243,7 @@ class modSearchProcessor extends modProcessor
             'OR:id:=' => $this->query,
         ));
 
-        $c->limit($this->maxResults);
+        $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modChunk $record */
@@ -266,7 +269,7 @@ class modSearchProcessor extends modProcessor
             'OR:id:=' => $this->query,
         ));
 
-        $c->limit($this->maxResults);
+        $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modTemplate $record */
@@ -292,7 +295,7 @@ class modSearchProcessor extends modProcessor
             'OR:id:=' => $this->query,
         ));
 
-        $c->limit($this->maxResults);
+        $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modPlugin $record */
@@ -309,6 +312,7 @@ class modSearchProcessor extends modProcessor
     public function searchTVs()
     {
         $type = 'tvs';
+				// $this->getMaxResults();
 
         $class = 'modTemplateVar';
         $c = $this->modx->newQuery($class);
@@ -318,7 +322,7 @@ class modSearchProcessor extends modProcessor
             'OR:id:=' => $this->query,
         ));
 
-        $c->limit($this->maxResults);
+        $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getCollection($class, $c);
         /** @var modTemplate $record */
@@ -350,7 +354,7 @@ class modSearchProcessor extends modProcessor
             'OR:id:=' => $this->query,
         ));
 
-        $c->limit($this->maxResults);
+        $c->limit($this->getMaxResults());
 
         /** @var modUserProfile[] $collection */
         $collection = $this->modx->getCollection($class, $c);
