@@ -279,7 +279,7 @@ $_country_lang["ws"] = '萨摩亚'; // Samoa
 $_country_lang["ye"] = '也门'; // Yemen
 $_country_lang["yt"] = '马约特'; // Mayotte
 
-$_country_lang["za"] = '南非服务器'; // South Africa
+$_country_lang["za"] = '南非'; // South Africa
 $_country_lang["zm"] = '赞比亚'; // Zambia
 $_country_lang["zw"] = '津巴布韦'; // Zimbabwe
 
