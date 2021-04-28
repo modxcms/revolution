@@ -14,6 +14,7 @@
  **/
 class modSearchProcessor extends modProcessor
 {
+    public $maxResults = 5;
     public $actionToken = ':';
     private $actions = array();
 
@@ -24,7 +25,7 @@ class modSearchProcessor extends modProcessor
         return $this->modx->getOption('search_max_results',5,5);
     }
 
-    public function checkPermissions() {
+    private function checkPermissions() {
         return $this->modx->hasPermission('search');
     }
 		
