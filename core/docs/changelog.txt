@@ -2,8 +2,34 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.8.2-pl (TBD)
+MODX Revolution 2.8.2-pl (April 28, 2021)
 ====================================
+- Reduce log_level to WARN on cache errors [#15532]
+- Prevent access to sensitive user data [#15678]
+- Exclude sensitive config values from placeholders [#15677]
+- Flatten nested lexicon parameters by dot notation [#15490]
+- Add permissions to enforce access to specific resource types [#15655]
+- Restrict static resources to predefined path [#15656]
+- Support SameSite attribute in session cookies [#15666]
+- Strip base_url only from beginning of relative url [#15418]
+- Remove legacy file manager processors [#15646]
+- Fix invalid getOption call in modResource->filterPathSegment [#15647]
+- Restrict file management to allowed file types [#15643]
+- Prevent XSSI access to `MODx.config` by requiring auth token [#15644]
+- Add missing password validation characters to lexicon [#15611]
+- Update PHPMailer to 6.4.0 [#15618]
+- Update xPDO to version 2.8.3-pl
+- Remove unnecessary type="text/javascript" [#15570]
+- Implement isDirty function in MODx.panel.ImageTV and MODx.panel.FileTV [#15534]
+- Improve the lexicon entry for mail_smtp_prefix [#15527]
+- Update url in system setting base_help_url [#15571]
+- Update Smarty to 3.1.39 [#15566]
+- Add mail_smtp_autotls system setting [#15536]
+- Fix bug with special chars in directory or file names [#15505]
+- Update base_help_url system setting [#15571]
+- Improve the processor permission response error message [#15402]
+- Change modSessionHandler->gc() to return number of removed sessions [#15393]
+- PHP 8 Compatibility [#15335]
 - Improve removal of nested MODX tag content in sanitizeRequest [#15367]
 - Fix Plugin and Template name validation [#15349]
 - Fix missing package signature when uninstalling [#15315]
