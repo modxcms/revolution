@@ -21,13 +21,15 @@ class modSearchProcessor extends modProcessor
     protected $query;
     public $results = array();
 
-    private function getMaxResults() {
-        return $this->modx->getOption('search_max_results',5,5);
-    }
 
     public function checkPermissions() {
         return $this->modx->hasPermission('search');
     }
+
+    private function getMaxResults() {
+        return $this->modx->getOption('search_max_results',5,5);
+    }
+
 		
     /**
      * @return string JSON formatted results
