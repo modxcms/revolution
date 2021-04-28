@@ -21,11 +21,11 @@ class modSearchProcessor extends modProcessor
     protected $query;
     public $results = array();
 
-    public function getMaxResults() {
+    private function getMaxResults() {
         return $this->modx->getOption('search_max_results',5,5);
     }
 
-    private function checkPermissions() {
+    public function checkPermissions() {
         return $this->modx->hasPermission('search');
     }
 		
