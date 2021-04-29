@@ -17,7 +17,7 @@
 {/if}
 <script src="{$_config.manager_url}assets/modext/core/modx.js"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=category,file,resource&action={$smarty.get.a|strip_tags|default:''}"></script>
-<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags|default:''}{if $_ctx}&wctx={$_ctx}{/if}"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|strip_tags|default:''}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$site_id|default|htmlspecialchars}"></script>
 
 {$maincssjs}
 
