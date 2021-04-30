@@ -266,7 +266,7 @@ class modPhpThumb extends phpThumb
             //$AbsoluteFilename = $filename;
             return $filename;
 
-        } elseif ($this->iswindows && isset($filename{1}) && ($filename{1} == ':')) {
+        } elseif ($this->iswindows && substr($filename, 1, 1) == ':') {
 
             // absolute pathname (Windows)
             $AbsoluteFilename = $filename;
