@@ -106,6 +106,9 @@ class ElementSnippetUpdateManagerController extends modManagerController {
             $this->snippetArray['snippet'] = "<?php\n".$this->snippetArray['snippet'];
         }
 
+        /* Don't remove the following line or the edit snippet page blanks when saving <script><!-- GitHub issue: #15222 */
+        $this->snippetArray['__fix_for_15222'] = '-->';
+
         $this->prepareElement();
 
         /* load snippet into parser */

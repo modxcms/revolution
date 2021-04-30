@@ -107,6 +107,9 @@ class ElementChunkUpdateManagerController extends modManagerController {
         $this->chunkArray['properties'] = $data;
         $this->chunkArray['snippet'] = $this->chunk->getContent();
 
+        /* Don't remove the following line or the edit chunk page blanks when saving <script><!-- GitHub issue: #15222 */
+        $this->chunkArray['__fix_for_15222'] = '-->';
+
         $this->prepareElement();
 
         /* invoke OnRichTextEditorInit event */
