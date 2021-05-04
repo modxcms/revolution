@@ -187,27 +187,32 @@ class modPhpThumb extends phpThumb
         $nice_cachefile = str_replace(DIRECTORY_SEPARATOR, '/', $this->cache_filename);
         $nice_docroot   = str_replace(DIRECTORY_SEPARATOR, '/', rtrim($this->config_document_root, '/\\'));
 
-        $parsed_url = phpthumb_functions::ParseURLbetter(@$_SERVER['HTTP_REFERER']);
+        $parsed_url = phpthumb_functions::ParseURLbetter(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
 
         $nModified  = filemtime($this->cache_filename);
 
-        if ($this->config_nooffsitelink_enabled && @$_SERVER['HTTP_REFERER'] && !in_array(@$parsed_url['host'], $this->config_nooffsitelink_valid_domains)) {
+        if ($this->config_nooffsitelink_enabled && !empty($_SERVER['HTTP_REFERER']) && !in_array(isset($parsed_url['host']) ? $parsed_url['host'] : '', $this->config_nooffsitelink_valid_domains)) {
 
-            $this->DebugMessage('Would have used cached (image/'.$this->thumbnailFormat.') file "'.$this->cache_filename.'" (Last-Modified: '.gmdate('D, d M Y H:i:s', $nModified).' GMT), but skipping because $_SERVER[HTTP_REFERER] ('.@$_SERVER['HTTP_REFERER'].') is not in $this->config_nooffsitelink_valid_domains ('.implode(';', $this->config_nooffsitelink_valid_domains).')', __FILE__, __LINE__);
+            $this->DebugMessage('Would have used cached (image/'.$this->thumbnailFormat.') file "'.$this->cache_filename.'" (Last-Modified: '.gmdate('D, d M Y H:i:s', $nModified).' GMT), but skipping because $_SERVER[HTTP_REFERER] ('.$_SERVER['HTTP_REFERER'].') is not in $this->config_nooffsitelink_valid_domains ('.implode(';', $this->config_nooffsitelink_valid_domains).')', __FILE__, __LINE__);
 
         } elseif ($this->phpThumbDebug) {
 
             $this->DebugTimingMessage('skipped using cached image', __FILE__, __LINE__);
             $this->DebugMessage('Would have used cached file, but skipping due to phpThumbDebug', __FILE__, __LINE__);
             $this->DebugMessage('* Would have sent headers (1): Last-Modified: '.gmdate('D, d M Y H:i:s', $nModified).' GMT', __FILE__, __LINE__);
-            $getimagesize = @getimagesize($this->cache_filename);
-            if ($getimagesize) {
-                $this->DebugMessage('* Would have sent headers (2): Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]), __FILE__, __LINE__);
+            try {
+                $getimagesize = getimagesize($this->cache_filename);
+                if ($getimagesize) {
+                    $this->DebugMessage('* Would have sent headers (2): Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]), __FILE__, __LINE__);
+                }
+                if (preg_match('/^'.preg_quote($nice_docroot, '/').'(.*)$/', $nice_cachefile, $matches)) {
+                    $this->DebugMessage('* Would have sent headers (3): Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])), __FILE__, __LINE__);
+                } else {
+                    $this->DebugMessage('* Would have sent data: readfile('.$this->cache_filename.')', __FILE__, __LINE__);
+                }
             }
-            if (preg_match('/^'.preg_quote($nice_docroot, '/').'(.*)$/', $nice_cachefile, $matches)) {
-                $this->DebugMessage('* Would have sent headers (3): Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])), __FILE__, __LINE__);
-            } else {
-                $this->DebugMessage('* Would have sent data: readfile('.$this->cache_filename.')', __FILE__, __LINE__);
+            catch(Exception $Exception) {
+                $this->DebugMessage('getimagesize() failed for "'.$this->cache_filename.'" with message: '.$Exception->getMessage(), __FILE__, __LINE__);
             }
 
         } else {
@@ -219,24 +224,31 @@ class modPhpThumb extends phpThumb
             $this->SendSaveAsFileHeaderIfNeeded();
 
             header('Last-Modified: '.gmdate('D, d M Y H:i:s', $nModified).' GMT');
-            if (@$_SERVER['HTTP_IF_MODIFIED_SINCE'] && ($nModified == strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) && @$_SERVER['SERVER_PROTOCOL']) {
+            if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && ($nModified == strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) && isset($_SERVER['SERVER_PROTOCOL'])) {
                 header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
                 exit;
             }
 
-            $getimagesize = @getimagesize($this->cache_filename);
-            if ($getimagesize) {
-                header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]));
-            } elseif (preg_match('#\.ico$#i', $this->cache_filename)) {
-                header('Content-Type: image/x-icon');
+            try {
+                $getimagesize = getimagesize($this->cache_filename);
+                if ($getimagesize) {
+                    header('Content-Type: '.phpthumb_functions::ImageTypeToMIMEtype($getimagesize[2]));
+                } elseif (preg_match('#\.ico$#i', $this->cache_filename)) {
+                    header('Content-Type: image/x-icon');
+                }
+                if (!$this->config_cache_force_passthru && preg_match('#^'.preg_quote($nice_docroot, '/').'(.*)$#', $nice_cachefile, $matches)) {
+                    header('Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])));
+                } else {
+                    readfile($this->cache_filename);
+                }
             }
-            if (!$this->config_cache_force_passthru && preg_match('#^'.preg_quote($nice_docroot, '/').'(.*)$#', $nice_cachefile, $matches)) {
-                header('Location: '.dirname($matches[1]).'/'.urlencode(basename($matches[1])));
-            } else {
-                @readfile($this->cache_filename);
+            catch(Exception $Exception) {
+                $this->DebugMessage('getimagesize() failed for "'.$this->cache_filename.'" with message: '.$Exception->getMessage(), __FILE__, __LINE__);
             }
-            session_write_close();
-            exit;
+            finally {
+                session_write_close();
+                exit;
+            }
 
         }
         return true;
@@ -245,10 +257,10 @@ class modPhpThumb extends phpThumb
         if (headers_sent()) {
             return false;
         }
-        $downloadfilename = phpthumb_functions::SanitizeFilename(@$_GET['sia'] ? $_GET['sia'] : (@$_GET['down'] ? $_GET['down'] : 'phpThumb_generated_thumbnail'.(@$_GET['f'] ? $_GET['f'] : 'jpg')));
-        if (@$downloadfilename) {
-            $this->DebugMessage('SendSaveAsFileHeaderIfNeeded() sending header: Content-Disposition: '.(@$_GET['down'] ? 'attachment' : 'inline').'; filename="'.$downloadfilename.'"', __FILE__, __LINE__);
-            header('Content-Disposition: '.(@$_GET['down'] ? 'attachment' : 'inline').'; filename="'.$downloadfilename.'"');
+        $downloadfilename = phpthumb_functions::SanitizeFilename(isset($_GET['sia']) ? $_GET['sia'] : (isset($_GET['down']) ? $_GET['down'] : 'phpThumb_generated_thumbnail'.(isset($_GET['f']) ? $_GET['f'] : 'jpg')));
+        if ($downloadfilename) {
+            $this->DebugMessage('SendSaveAsFileHeaderIfNeeded() sending header: Content-Disposition: '.(isset($_GET['down']) ? 'attachment' : 'inline').'; filename="'.$downloadfilename.'"', __FILE__, __LINE__);
+            header('Content-Disposition: '.(isset($_GET['down']) ? 'attachment' : 'inline').'; filename="'.$downloadfilename.'"');
         }
         return true;
     }
@@ -278,7 +290,7 @@ class modPhpThumb extends phpThumb
 
         } elseif (substr($filename, 0, 1) == '/') {
 
-            if (@is_readable($filename) && !@is_readable($this->config_document_root.$filename)) {
+            if (is_readable($filename) && !is_readable($this->config_document_root.$filename)) {
 
                 // absolute filename (*nix)
                 $AbsoluteFilename = $filename;
@@ -290,7 +302,7 @@ class modPhpThumb extends phpThumb
                     $AbsoluteFilename = $ApacheLookupURIarray['filename'];
                 } else {
                     $AbsoluteFilename = realpath($filename);
-                    if (@is_readable($AbsoluteFilename)) {
+                    if (is_readable($AbsoluteFilename)) {
                         $this->DebugMessage('phpthumb_functions::ApacheLookupURIarray() failed for "'.$filename.'", but the correct filename ('.$AbsoluteFilename.') seems to have been resolved with realpath($filename)', __FILE__, __LINE__);
                     } elseif (is_dir(dirname($AbsoluteFilename))) {
                         $this->DebugMessage('phpthumb_functions::ApacheLookupURIarray() failed for "'.dirname($filename).'", but the correct directory ('.dirname($AbsoluteFilename).') seems to have been resolved with realpath(.)', __FILE__, __LINE__);
@@ -315,26 +327,26 @@ class modPhpThumb extends phpThumb
         } else {
 
             // relative to current directory (any OS)
-            $AbsoluteFilename = $this->config_document_root.preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, dirname(@$_SERVER['PHP_SELF'])).DIRECTORY_SEPARATOR.preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, $filename);
+            $AbsoluteFilename = $this->config_document_root.(isset($_SERVER['PHP_SELF']) ? preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, dirname($_SERVER['PHP_SELF'])) : '').DIRECTORY_SEPARATOR.preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, $filename);
 //			$AbsoluteFilename = dirname(__FILE__).DIRECTORY_SEPARATOR.preg_replace('#[/\\\\]#', DIRECTORY_SEPARATOR, $filename);
 
             $AbsoluteFilename = preg_replace('~[\/]+~', DIRECTORY_SEPARATOR, $AbsoluteFilename);
 
-            //if (!@file_exists($AbsoluteFilename) && @file_exists(realpath($this->DotPadRelativeDirectoryPath($filename)))) {
+            //if (!file_exists($AbsoluteFilename) && file_exists(realpath($this->DotPadRelativeDirectoryPath($filename)))) {
             //	$AbsoluteFilename = realpath($this->DotPadRelativeDirectoryPath($filename));
             //}
 
-            if (substr(dirname(@$_SERVER['PHP_SELF']), 0, 2) == '/~') {
-                if ($ApacheLookupURIarray = phpthumb_functions::ApacheLookupURIarray(dirname(@$_SERVER['PHP_SELF']))) {
+            if (isset($_SERVER['PHP_SELF']) && substr(dirname($_SERVER['PHP_SELF']), 0, 2) == '/~') {
+                if ($ApacheLookupURIarray = phpthumb_functions::ApacheLookupURIarray(dirname($_SERVER['PHP_SELF']))) {
                     $AbsoluteFilename = $ApacheLookupURIarray['filename'].DIRECTORY_SEPARATOR.$filename;
                 } else {
                     $AbsoluteFilename = realpath('.').DIRECTORY_SEPARATOR.$filename;
-                    if (@is_readable($AbsoluteFilename)) {
-                        $this->DebugMessage('phpthumb_functions::ApacheLookupURIarray() failed for "'.dirname(@$_SERVER['PHP_SELF']).'", but the correct filename ('.$AbsoluteFilename.') seems to have been resolved with realpath(.)/$filename', __FILE__, __LINE__);
+                    if (is_readable($AbsoluteFilename)) {
+                        $this->DebugMessage('phpthumb_functions::ApacheLookupURIarray() failed for "'.dirname($_SERVER['PHP_SELF']).'", but the correct filename ('.$AbsoluteFilename.') seems to have been resolved with realpath(.)/$filename', __FILE__, __LINE__);
                     } elseif (is_dir(dirname($AbsoluteFilename))) {
-                        $this->DebugMessage('phpthumb_functions::ApacheLookupURIarray() failed for "'.dirname(@$_SERVER['PHP_SELF']).'", but the correct directory ('.dirname($AbsoluteFilename).') seems to have been resolved with realpath(.)', __FILE__, __LINE__);
+                        $this->DebugMessage('phpthumb_functions::ApacheLookupURIarray() failed for "'.dirname($_SERVER['PHP_SELF']).'", but the correct directory ('.dirname($AbsoluteFilename).') seems to have been resolved with realpath(.)', __FILE__, __LINE__);
                     } else {
-                        return $this->ErrorImage('phpthumb_functions::ApacheLookupURIarray() failed for "'.dirname(@$_SERVER['PHP_SELF']).'". This has been known to fail on Apache2 - try using the absolute filename for the source image');
+                        return $this->ErrorImage('phpthumb_functions::ApacheLookupURIarray() failed for "'.dirname($_SERVER['PHP_SELF']).'". This has been known to fail on Apache2 - try using the absolute filename for the source image');
                     }
                 }
             }
