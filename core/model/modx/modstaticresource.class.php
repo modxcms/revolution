@@ -90,7 +90,7 @@ class modStaticResource extends modResource implements modResourceInterface {
 
             $this->_sourceFile = $sourcePath . $filename;
             if (file_exists($this->_sourceFile)) {
-                $this->_sourceFileSize = filesize($filename);
+                $this->_sourceFileSize = filesize($this->_sourceFile);
             }
         }
 
