@@ -188,11 +188,11 @@
   .x-window-bc {
 
     .x-window-footer {
-      background-color: $winFooterBg;
+      background-color: $wildSand;
       border-top: 1px solid $winFooterBorderColor;
       border-radius: 0 0 $borderRadius $borderRadius;
       box-sizing: border-box; /* don't count padding in width: 100%; */
-      padding: 5px 15px 15px ; /* make sure the padding also stays when maximized */
+      padding: 5px 15px; /* make sure the padding also stays when maximized */
       width: 100% !important; /* override fixed width set by extjs */
     }
   }
