@@ -145,18 +145,6 @@ class modStaticResource extends modResource implements modResourceInterface {
         if (file_exists($this->_sourceFile) && is_readable($this->_sourceFile)) {
             $content = $this->_sourceFile;
             $streamable = true;
-
-            // For non-binary types, return early to allow for template use.
-            if (!$contentType->get('binary')) {
-                // Set the appropriate content type and charset for non-binary content types
-                $mimeType = $contentType->get('mime_type') ?: 'text/html';
-                $charset = $this->xpdo->getOption('modx_charset',null,'UTF-8');
-
-                $header = 'Content-Type: ' . $mimeType . '; charset=' . $charset;
-                header($header);
-
-                return file_get_contents($content);
-            }
         }
 
         if (empty($content)) {
@@ -164,8 +152,19 @@ class modStaticResource extends modResource implements modResourceInterface {
             return false;
         }
 
-        // @todo This header dates back to pre-git revo circa 2008, but seems to be an email header and may need fixing
-        header('Content-Transfer-Encoding: binary');
+        // Set the appropriate content type and charset for non-binary content types
+        $mimeType = $contentType->get('mime_type') ?: 'text/html';
+        $header = 'Content-Type: ' . $mimeType;
+        if (!$contentType->get('binary')) {
+            $charset = $this->xpdo->getOption('modx_charset',null,'UTF-8');
+            $header .= '; charset=' . $charset;
+        }
+        header($header);
+
+        if ($contentType->get('binary')) {
+            // @todo This header dates back to pre-git revo circa 2008, but seems to be an email header and may need fixing
+            header('Content-Transfer-Encoding: binary');
+        }
 
         // Apply a content-length header if we know the size in bytes
         $filesize = $this->getSourceFileSize($options);
@@ -198,11 +197,11 @@ class modStaticResource extends modResource implements modResourceInterface {
         while (ob_get_level() && @ob_end_clean()) {}
 
         // Output the content, either streaming with readfile() or by echo'ing content that was retrieved earlier from media source
-        if ($streamable) {
+        if ($streamable && $contentType->get('binary')) {
             readfile($content);
         }
         else {
-            echo $content;
+            return file_get_contents($content);
         }
 
         exit();
