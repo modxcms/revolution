@@ -197,11 +197,11 @@ class modStaticResource extends modResource implements modResourceInterface {
         while (ob_get_level() && @ob_end_clean()) {}
 
         // Output the content, either streaming with readfile() or by echo'ing content that was retrieved earlier from media source
-        if ($streamable) {
+        if ($streamable && $contentType->get('binary')) {
             readfile($content);
         }
         else {
-            echo $content;
+            return file_get_contents($content);
         }
 
         exit();
