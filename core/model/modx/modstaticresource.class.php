@@ -21,10 +21,6 @@ class modStaticResource extends modResource implements modResourceInterface {
      */
     protected $_sourceFile= '';
     /**
-     * @var array
-     */
-    protected $_sourceContents = [];
-    /**
      * @var integer Size of the source file content in bytes.
      */
     protected $_sourceFileSize= 0;
