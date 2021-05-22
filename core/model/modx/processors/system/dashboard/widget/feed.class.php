@@ -40,7 +40,16 @@ class modDashboardWidgetFeedProcessor extends modProcessor
             return $this->failure();
         }
 
-        return $this->loadFeed($url);
+        $cacheKey = 'dashboard_feed/' . $feed;
+        $fromCache = $this->modx->getCacheManager()->get($cacheKey);
+        if ($fromCache) {
+            return $fromCache;
+        }
+
+        $result = $this->loadFeed($url);
+        $this->modx->getCacheManager()->set($cacheKey, $result, 3600);
+
+        return $result;
     }
 
     public function loadFeed($url)
