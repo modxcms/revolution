@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.8.4-pl (TBD)
+====================================
+
+
 MODX Revolution 2.8.3-pl (May 28, 2021)
 ====================================
 - XSS issues reported by Solar Security (#15720)
