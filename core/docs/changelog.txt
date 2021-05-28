@@ -2,6 +2,22 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.8.3-pl (May 28, 2021)
+====================================
+- XSS issues reported by Solar Security (#15720)
+- Patch MagpieRSS for basic use in PHP 8 (#15721)
+- Avoid setting headers for modStaticResource when returning content (#15715)
+- Adjust filtering of placeholders and accessible options for `@SELECT` (#15714)
+- Fix incorrect id format (#15709)
+- Fix filesize() calculation for static resources (#15697)
+- Return content from non-binary static resources (#15702)
+- Fix PHP 8 compatibility with phpThumb (#15706)
+- Fix PHP 8 warnings in modPhpThumb (#15705)
+- Fix PHPMailer version display (#15704)
+- PHP 8 compatibility (#15699)
+- Pass auth token to Browser controller config (#15692)
+- Update to PHPMailer 6.4.1 (#15693)
+
 MODX Revolution 2.8.2-pl (April 28, 2021)
 ====================================
 - Reduce log_level to WARN on cache errors [#15532]
