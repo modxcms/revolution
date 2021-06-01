@@ -42,10 +42,12 @@ class SystemInfoManagerController extends modManagerController {
         if ($dbtype_mysql && !empty($m['pdo_mysql'])) $pi = array_merge($pi,array('pdo_mysql' => $m['pdo_mysql']));
         if ($dbtype_sqlsrv && !empty($m['pdo_sqlsrv'])) $pi = array_merge($pi,array('pdo_sqlsrv' => $m['pdo_sqlsrv']));
         if (!empty($m['zip'])) $pi = array_merge($pi,array('zip' => $m['zip']));
+        /** @var modPHPMailer $mailerService */
         $mailerService = $this->modx->getService('mail', 'mail.modPHPMailer');
+        $mailer = $mailerService->mailer;
         $this->version = [
             'smarty'=> $this->modx->smarty->_version,
-            'PHPMailer'=> $mailerService->mailer::VERSION
+            'PHPMailer'=> $mailer::VERSION,
         ];
 
         $this->pi = array_merge($pi,$this->getPhpInfo(INFO_CONFIGURATION));
