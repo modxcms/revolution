@@ -47,6 +47,52 @@ MODx.load({
         ,items: [{
             columnWidth: .5
             ,items: [{
+                xtype: 'combo-boolean'
+                ,fieldLabel: _('combo_typeahead')
+                ,description: MODx.expandHelp ? '' : _('combo_typeahead_desc')
+                ,name: 'inopt_typeAhead'
+                ,hiddenName: 'inopt_typeAhead'
+                ,id: 'inopt_typeAhead{/literal}{$tv|default}{literal}'
+                ,anchor: '100%'
+                ,value: (params['typeAhead']) ? !(params['typeAhead'] === 0 || params['typeAhead'] === 'false') : false
+                ,listeners: oc
+            },{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,forId: 'inopt_typeAhead{/literal}{$tv|default}{literal}'
+                ,html: _('combo_typeahead_desc')
+                ,cls: 'desc-under'
+            }]
+        },{
+            columnWidth: .5
+            ,items: [{
+                xtype: 'textfield'
+                ,fieldLabel: _('combo_typeahead_delay')
+                ,description: MODx.expandHelp ? '' : _('combo_typeahead_delay_desc')
+                ,name: 'inopt_typeAheadDelay'
+                ,id: 'inopt_typeAheadDelay{/literal}{$tv|default}{literal}'
+                ,value: params['typeAheadDelay'] || 250
+                ,anchor: '100%'
+                ,listeners: oc
+            },{
+                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                ,forId: 'inopt_typeAheadDelay{/literal}{$tv|default}{literal}'
+                ,html: _('typeahead_delay_desc')
+                ,cls: 'desc-under'
+            }]
+        }]
+    },{
+        layout: 'column'
+        ,border: false
+        ,defaults: {
+            layout: 'form'
+            ,labelAlign: 'top'
+            ,labelSeparator: ''
+            ,anchor: '100%'
+            ,border: false
+        }
+        ,items: [{
+            columnWidth: .5
+            ,items: [{
                 xtype: 'textfield'
                 ,fieldLabel: _('resourcelist_parents')
                 ,description: MODx.expandHelp ? '' : _('resourcelist_parents_desc')
