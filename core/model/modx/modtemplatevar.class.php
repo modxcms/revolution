@@ -819,8 +819,8 @@ class modTemplateVar extends modElement {
                     if ($modx->resource && $modx->resource instanceof modResource) {
                         $dbtags = $modx->resource->toArray();
                     }
-                    $dbtags['DBASE'] = $this->xpdo->getOption('dbname');
-                    $dbtags['PREFIX'] = $this->xpdo->getOption('table_prefix');
+                    $dbtags['DBASE'] = $dbtags['+dbname'] = $this->xpdo->getOption('dbname');
+                    $dbtags['PREFIX'] = $dbtags['+table_prefix'] = $this->xpdo->getOption('table_prefix');
                     foreach($dbtags as $key => $pValue) {
                         $param = str_replace('[[+'.$key.']]', $pValue, $param);
                     }
