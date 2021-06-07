@@ -49,6 +49,12 @@ MODx.ctx = "'.$this->ctx.'";
         $placeholders = array();
 
         $scriptProperties['ctx'] = !empty($scriptProperties['ctx']) ? $scriptProperties['ctx'] : 'web';
+        $context = $this->modx->getObject('modContext', [
+            'key' => (string)$scriptProperties['ctx'],
+        ]);
+        if (!$context) {
+            return $this->failure(sprintf($this->modx->lexicon('context_with_key_not_found'), htmlentities($scriptProperties['ctx'], ENT_QUOTES, 'UTF-8')));
+        }
 
         $rtecallback = $this->modx->invokeEvent('OnRichTextBrowserInit', $scriptProperties);
         if (is_array($rtecallback)) $rtecallback = trim(implode(',',$rtecallback),',');
@@ -87,6 +93,6 @@ MODx.ctx = "'.$this->ctx.'";
      * @return array
      */
     public function getLanguageTopics() {
-        return array('file');
+        return array('file', 'context');
     }
 }
