@@ -1319,6 +1319,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $list = [];
         foreach ($properties as $property) {
             $value = $property['value'];
+            if (empty($value) && !empty($this->properties[$property['name']])) {
+                $value = $this->properties[$property['name']];
+            }
             if (!empty($property['xtype']) && $property['xtype'] == 'combo-boolean') {
                 $value = empty($property['value']) && $property['value'] != 'true' ? false : true;
             }
