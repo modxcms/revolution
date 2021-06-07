@@ -844,7 +844,7 @@ class modUser extends modPrincipal {
         $mail->set(modMail::MAIL_FROM, $this->xpdo->getOption('from', $options, $this->xpdo->getOption('emailsender')));
         $mail->set(modMail::MAIL_FROM_NAME, $this->xpdo->getOption('fromName', $options, $this->xpdo->getOption('site_name')));
         $mail->set(modMail::MAIL_SENDER, $this->xpdo->getOption('sender', $options, $this->xpdo->getOption('emailsender')));
-        $mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('emailsubject', $options, $this->xpdo->lexicon('emailsubject')));
+        $mail->set(modMail::MAIL_SUBJECT, $this->xpdo->getOption('subject', $options, $this->xpdo->lexicon('emailsubject')));
         $mail->address('to', $profile->get('email'), $profile->get('fullname'));
         $mail->address('reply-to', $this->xpdo->getOption('sender', $options, $this->xpdo->getOption('emailsender')));
         $mail->setHTML($this->xpdo->getOption('html', $options, true));
@@ -916,7 +916,7 @@ class modUser extends modPrincipal {
         $this->xpdo->loadClass('sources.modMediaSource');
         /** @var modMediaSource $source */
         $source = modMediaSource::getDefaultSource($this->xpdo, $this->xpdo->getOption('photo_profile_source'));
-        
+
         $thumb_param = array(
             "zc" => 1,
             "h" => $height,

@@ -116,7 +116,7 @@ class SecurityLoginManagerController extends modManagerController
         $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
         $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', array('lifetime' => $this->getLifetimeString($lifetime))));
-        
+
 
         $this->checkForActiveInstallation();
         $this->checkForAllowManagerForgotPassword();
