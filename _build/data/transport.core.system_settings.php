@@ -1889,6 +1889,15 @@ $settings['upload_media']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['upload_translit']= $xpdo->newObject('modSystemSetting');
+$settings['upload_translit']->fromArray([
+  'key' => 'upload_translit',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+], '', true, true);
 $settings['use_alias_path']= $xpdo->newObject('modSystemSetting');
 $settings['use_alias_path']->fromArray(array (
   'key' => 'use_alias_path',
