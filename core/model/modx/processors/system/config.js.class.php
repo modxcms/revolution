@@ -23,7 +23,7 @@ class modConfigJsProcessor extends modProcessor
     public function process()
     {
         if (!$this->modx->user->isAuthenticated('mgr')) {
-            return '';
+            return $this->failure($this->modx->lexicon('permission_denied'));
         }
         $this->modx->getVersionData();
 
@@ -33,7 +33,7 @@ class modConfigJsProcessor extends modProcessor
             if ($workingContext instanceof modContext) {
                 $workingContext->prepare();
             } else {
-                return $this->modx->error->failure($this->modx->error->failure($this->modx->lexicon('permission_denied')));
+                return $this->modx->error->failure($this->modx->lexicon('permission_denied'));
             }
         } else {
             $workingContext =& $this->modx->context;
