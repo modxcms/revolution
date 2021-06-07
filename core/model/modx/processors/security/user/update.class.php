@@ -339,6 +339,13 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
      * @return array|string
      */
     public function cleanup() {
+        $userArray = $this->object->toArray();
+        $profile = $this->object->getOne('Profile');
+        if ($profile) {
+            $userArray = array_merge($profile->toArray(),$userArray);
+        }
+        unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
+
         $passwordGenerationMethod = $this->getProperty('passwordgenmethod');
         if (!empty($passwordGenerationMethod) && !empty($this->newPassword)) {
             return $this->success(
@@ -347,9 +354,9 @@ class modUserUpdateProcessor extends modObjectUpdateProcessor {
                         'password' => $this->newPassword,
                     )
                 ),
-                $this->object);
+                $userArray);
         } else {
-            return $this->success('', $this->object);
+            return $this->success('', $userArray);
         }
     }
 }

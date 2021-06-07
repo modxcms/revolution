@@ -94,7 +94,7 @@ class modUserGetProcessor extends modObjectGetProcessor {
             )
             : '';
 
-        unset($userArray['password'],$userArray['cachepwd']);
+        unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
         return $this->success('',$userArray);
     }
 }

@@ -82,6 +82,10 @@ class modUserDuplicateProcessor extends modObjectDuplicateProcessor {
 
         return parent::beforeSave();
     }
+
+    public function cleanup() {
+        return $this->success('', $this->newObject->get(['id', 'username']));
+    }
 }
 
 return 'modUserDuplicateProcessor';
