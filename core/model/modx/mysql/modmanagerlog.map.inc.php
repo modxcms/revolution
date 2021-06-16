@@ -35,8 +35,8 @@ $xpdo_meta_map['modManagerLog']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => true,
-      'default' => NULL,
+      'null' => false,
+      'default' => CURRENT_TIMESTAMP,
     ),
     'action' => 
     array (
