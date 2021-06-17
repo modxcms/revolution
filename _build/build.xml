@@ -59,6 +59,18 @@
         <phingcall target="build-advanced" />
     </target>
 
+    <!-- =================================
+          target: nightly
+         ================================= -->
+    <target name="nightly" description="--> Nightly Build">
+        <phingcall target="prepare-build-image" />
+        <phingcall target="git-export-build-image" />
+        <phingcall target="composer-install-dependencies" />
+        <phingcall target="prepare-build-distrib" />
+        <phingcall target="generate-core-transport" />
+        <phingcall target="build-traditional" />
+    </target>
+
     <!-- Make sure the image directory exists and is clean -->
     <target name="prepare-build-image" description="prepare the build image directory">
         <delete includeemptydirs="true" failonerror="false">
