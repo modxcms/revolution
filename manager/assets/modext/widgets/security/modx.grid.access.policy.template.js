@@ -100,7 +100,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         },{
             text: _('bulk_actions')
             ,menu: [{
-                text: _('policy_remove_multiple')
+                text: _('selected_remove')
                 ,handler: this.removeSelected
                 ,scope: this
             }]
@@ -148,7 +148,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
 
         if (this.getSelectionModel().getCount() > 1) {
             m.push({
-                text: _('policy_template_remove_multiple')
+                text: _('selected_remove')
                 ,handler: this.removeSelected
             });
         } else {
@@ -164,7 +164,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
             }
             if (m.length > 0) { m.push('-'); }
             m.push({
-                text: _('policy_template_export')
+                text: _('export')
                 ,handler: this.exportPolicyTemplate
             });
 
@@ -243,7 +243,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('policy_template_remove_multiple')
+            title: _('selected_remove')
             ,text: _('policy_template_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
@@ -345,7 +345,7 @@ MODx.window.ImportPolicyTemplate = function(config) {
     config = config || {};
     this.ident = config.ident || 'imppt-'+Ext.id();
     Ext.applyIf(config,{
-        title: _('policy_template_import')
+        title: _('import')
         ,id: 'modx-window-policy-template-import'
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/Policy/Template/Import'

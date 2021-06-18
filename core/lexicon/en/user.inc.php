@@ -172,7 +172,6 @@ $_lang['user_prevlogin_desc'] = 'The last time that the user successfully logged
 $_lang['user_profile_err_nf'] = 'FATAL ERROR: User profile not found.';
 $_lang['user_profile_err_save'] = 'An error occurred while attempting to save the user attributes.';
 $_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
-$_lang['user_remove_multiple'] = 'Delete Multiple Users';
 $_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
 $_lang['user_remote_data_msg'] = 'Edit remote user data here.';
 $_lang['user_role_update'] = 'Edit User Role';

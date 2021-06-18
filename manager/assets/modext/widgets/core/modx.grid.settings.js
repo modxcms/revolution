@@ -77,7 +77,7 @@ MODx.grid.SettingsGrid = function(config) {
         xtype: 'textfield'
         ,id: 'modx-filter-query'
         ,cls: 'x-form-filter'
-        ,emptyText: _('search_by_key')
+        ,emptyText: _('search_ellipsis')
         ,value: MODx.request.query
         ,listeners: {
             'change': {

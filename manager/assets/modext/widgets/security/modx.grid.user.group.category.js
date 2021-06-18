@@ -93,7 +93,7 @@ MODx.grid.UserGroupCategory = function(config) {
                 'select': {fn:this.filterPolicy,scope:this}
             }
         },{
-            text: _('clear_filter')
+            text: _('filter_clear')
             ,id: 'modx-ugcat-clear-filter'
             ,handler: this.clearFilter
             ,scope: this

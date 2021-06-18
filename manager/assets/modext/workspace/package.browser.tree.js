@@ -29,7 +29,7 @@ MODx.tree.PackageBrowserTree = function(config) {
 		}
 		,tbar: [{
 			xtype: 'textfield'
-			,emptyText: _('search')
+			,emptyText: _('search_ellipsis')
 			,name: 'search'
 			,id: 'package-browser-search-fld'
 			,cls: 'icon-search'
@@ -157,7 +157,7 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 		grid.getStore().setBaseParam('query', nv);
 		grid.getStore().setBaseParam('provider', MODx.provider);
 		grid.getStore().load();
-		grid.activate(_('search'), nv);
+		grid.activate(_('search_ellipsis'), nv);
         return true;
     }
 });

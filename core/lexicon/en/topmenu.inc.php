@@ -93,7 +93,6 @@ $_lang['reports'] = 'Reports';
 $_lang['reports_desc'] = 'Admin reports for your MODX install';
 $_lang['resource_groups'] = 'Resource Groups';
 $_lang['resource_groups_desc'] = 'Assign Resources to Groups';
-$_lang['search'] = 'Search';
 $_lang['search_desc'] = 'Search for resources.';
 $_lang['search_resulttype_actions'] = 'Actions';
 $_lang['search_resulttype_chunks'] = 'Chunks';

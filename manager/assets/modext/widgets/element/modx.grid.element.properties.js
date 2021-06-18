@@ -146,11 +146,11 @@ MODx.grid.ElementProperties = function(config) {
             ,scope:this
             ,disabled: true
         },{
-            text: _('properties_import')
+            text: _('import')
             ,handler: this.importProperties
             ,scope: this
         },{
-            text: _('properties_export')
+            text: _('export')
             ,handler: this.exportProperties
             ,scope: this
         }]
@@ -1135,7 +1135,7 @@ Ext.reg('modx-window-element-property-set-add',MODx.window.AddPropertySet);
 MODx.window.ImportProperties = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('properties_import')
+        title: _('import')
         ,id: 'modx-window-properties-import'
         ,url: MODx.config.connector_url
         ,action: 'Element/ImportProperties'

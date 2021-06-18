@@ -309,7 +309,7 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('user_remove_multiple')
+            title: _('selected_remove')
             ,text: _('user_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {

@@ -198,7 +198,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('namespace_remove_multiple')
+            title: _('selected_remove')
             ,text: _('namespace_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {

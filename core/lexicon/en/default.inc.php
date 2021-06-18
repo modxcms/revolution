@@ -62,7 +62,6 @@ $_lang['cleaningup'] = 'Cleaning up';
 $_lang['clear_cache'] = 'Clear Cache';
 $_lang['clear_cache_on_save'] = 'Clear Cache on Save';
 $_lang['clear_cache_on_save_msg'] = 'If this is checked, it will clear this item\'s cache files when this item is saved.';
-$_lang['clear_filter'] = 'Clear Filter';
 $_lang['click_to_change'] = 'Click to Change';
 $_lang['close'] = 'Close';
 $_lang['code'] = 'Code';

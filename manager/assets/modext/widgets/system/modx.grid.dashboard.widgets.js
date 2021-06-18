@@ -154,7 +154,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('widget_remove_multiple')
+            title: _('selected_remove')
             ,text: _('widget_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
