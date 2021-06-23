@@ -4,7 +4,7 @@ MODx.page.ImportHTML = function(config) {
         formpanel: 'modx-panel-import-html'
         ,buttons: [{
             process: 'System/Import/Html'
-            ,text: _('import_site')
+            ,text: _('import_site_html')
             ,id: 'modx-abtn-import'
             ,cls:'primary-button'
             ,method: 'remote'
