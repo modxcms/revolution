@@ -493,7 +493,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         var m = [];
 
         m.push({
-            text: '<b>'+a.text+'</b>'
+            text: '<b>'+a.text+' ('+a.ctx+')</b>'
             ,handler: function() {return false;}
             ,header: true
         });
