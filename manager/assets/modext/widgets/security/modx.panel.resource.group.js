@@ -8,7 +8,7 @@ MODx.panel.ResourceGroups = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-resource-groups'
-		,cls: 'container'
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,items: [{
             html: _('resource_groups')
@@ -23,7 +23,7 @@ MODx.panel.ResourceGroups = function(config) {
                 ,xtype: 'modx-description'
             },{
                 layout: 'column'
-				,cls:'main-wrapper'
+                ,cls:'main-wrapper'
                 ,defaults: { border: false }
                 ,items: [{
                     columnWidth: .5
@@ -50,6 +50,9 @@ MODx.panel.ResourceGroups = function(config) {
                         ,allowDrop: false
                         ,enableDD: false
                         ,rootVisible: false
+                        ,listeners: {
+                            'click': {fn:function() {return false;}}
+                        }
                     }]
                 }]
             }]
