@@ -291,6 +291,10 @@
       color: $green !important;
     }
   }
+
+  #modx-gr-tree-resource &, #modx-ih-resource-tree & {
+    display: none;
+  }
 }
 
 /* Direct create buttons for a tree node */
@@ -314,6 +318,10 @@
         opacity: 1.0;
         color: $green;
       }
+    }
+
+    #modx-gr-tree-resource &, #modx-ih-resource-tree & {
+      display: none;
     }
   }
 
