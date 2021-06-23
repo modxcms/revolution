@@ -498,6 +498,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             ,header: true
         });
         m.push('-');
+        m.push({
+            text: _('refresh_context')
+            ,handler: function() {
+                this.refreshNode(this.cm.activeNode.id,true);
+            }
+        });
         if (ui.hasClass('pedit')) {
             m.push({
                 text: _('edit_context')
@@ -507,16 +513,6 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 }
             });
         }
-        m.push({
-            text: _('refresh_context')
-            ,handler: function() {
-                this.refreshNode(this.cm.activeNode.id,true);
-            }
-        });
-        if (ui.hasClass('pnewdoc')) {
-            m.push('-');
-            this._getCreateMenus(m,'0',ui);
-        }
         if (ui.hasClass('pnew')) {
             m.push({
                 text: _('duplicate_context')
@@ -524,13 +520,15 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
         }
         if (ui.hasClass('pdelete')) {
-            m.push('-');
             m.push({
                 text: _('remove_context')
                 ,handler: this.removeContext
             });
         }
-
+        if (ui.hasClass('pnewdoc')) {
+            m.push('-');
+            this._getCreateMenus(m,'0',ui);
+        }
         if(!ui.hasClass('x-tree-node-leaf')) {
             m.push('-');
             m.push(this._getSortMenu());
