@@ -611,8 +611,8 @@ $_lang['setting_server_offset_time_desc'] = 'Välj det antal timmar som skiljer 
 $_lang['setting_session_cookie_domain'] = 'Sessionscookiens domän';
 $_lang['setting_session_cookie_domain_desc'] = 'Använd den här inställningen för att anpassa domänen för sessionscookien. Lämna tom för att använda den nuvarande domänen.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Sessionscookien Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Välj Lax eller Strict.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Sessionscookiens livslängd';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Använd denna inställning för att anpassa sessionscookiens livslängd i sekunder. Den bestämmer livslängden på en användares sessionscookie när den valt \'Kom ihåg mig\' vid inloggningen.';
