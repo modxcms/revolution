@@ -40,8 +40,10 @@ class Duplicate extends DuplicateProcessor
     public function getNewName()
     {
         $name = $this->getProperty('new_username', '');
-        $newName = !empty($name) ? $name : $this->modx->lexicon('duplicate_of',
-            ['name' => $this->object->get('username')]);
+        $newName = !empty($name) ? $name : $this->modx->lexicon(
+            'duplicate_of',
+            ['name' => $this->object->get('username')]
+        );
 
         return $newName;
     }
