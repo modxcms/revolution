@@ -2,7 +2,7 @@
 namespace MODX\Revolution\Sources;
 
 use Exception;
-use League\Flysystem\Adapter\Local;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use xPDO\xPDO;
 
 /**
@@ -24,7 +24,7 @@ class modFileMediaSource extends modMediaSource
     {
         parent::initialize();
         try {
-            $localAdapter = new Local($this->getBasePath());
+            $localAdapter = new LocalFilesystemAdapter($this->getBasePath());
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
                 $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
