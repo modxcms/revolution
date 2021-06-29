@@ -3,6 +3,7 @@ namespace MODX\Revolution\Sources;
 
 use Exception;
 use League\Flysystem\Local\LocalFilesystemAdapter;
+use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use xPDO\xPDO;
 
 /**
@@ -23,14 +24,39 @@ class modFileMediaSource extends modMediaSource
     public function initialize()
     {
         parent::initialize();
+
         try {
-            $localAdapter = new LocalFilesystemAdapter($this->getBasePath());
+            $localAdapter = new LocalFilesystemAdapter(
+                // Determine the root directory
+                $this->getBasePath(),
+
+                // Customize how visibility is converted to unix permissions
+                PortableVisibilityConverter::fromArray([
+                    'file' => [
+                        'public' => (int)$this->xpdo->getOption('new_file_permissions', $this->xpdo->getConfig(),0644),
+                        'private' => 0600, // TODO: New system setting?
+                    ],
+                    'dir' => [
+                        'public' => (int)$this->xpdo->getOption('new_folder_permissions', $this->xpdo->getConfig(),0755),
+                        'private' => 0700, // TODO: New system setting?
+                    ],
+                ]),
+
+                // Write flags
+                LOCK_EX,
+
+                // How to deal with links, either DISALLOW_LINKS or SKIP_LINKS
+                // Disallowing them causes exceptions when encountered
+                LocalFilesystemAdapter::DISALLOW_LINKS
+            );
+
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
                 $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
 
             return false;
         }
+
         $this->loadFlySystem($localAdapter);
 
         return true;
