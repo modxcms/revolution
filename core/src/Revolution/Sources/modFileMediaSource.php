@@ -33,11 +33,11 @@ class modFileMediaSource extends modMediaSource
                 // Customize how visibility is converted to unix permissions
                 PortableVisibilityConverter::fromArray([
                     'file' => [
-                        'public' => (int)$this->xpdo->getOption('new_file_permissions', $this->xpdo->getConfig(),0644),
+                        'public' => (int)$this->xpdo->getOption('new_file_permissions', [],0644),
                         'private' => 0600, // TODO: New system setting?
                     ],
                     'dir' => [
-                        'public' => (int)$this->xpdo->getOption('new_folder_permissions', $this->xpdo->getConfig(),0755),
+                        'public' => (int)$this->xpdo->getOption('new_folder_permissions', [],0755),
                         'private' => 0700, // TODO: New system setting?
                     ],
                 ]),
