@@ -9,8 +9,14 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\MountManager;
+use League\Flysystem\UnableToCreateDirectory;
+use League\Flysystem\UnableToDeleteDirectory;
+use League\Flysystem\UnableToDeleteFile;
+use League\Flysystem\UnableToMoveFile;
+use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnableToSetVisibility;
+use League\Flysystem\UnableToWriteFile;
 use League\Flysystem\Visibility;
 use Memcached;
 use MODX\Revolution\modAccessibleSimpleObject;
@@ -352,16 +358,20 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $allowedExtensions = $this->getAllowedExtensionsArray($properties);
 
         $directories = $dirNames = $files = $fileNames = [];
+
         if (!empty($path)) {
+
+            // Ensure the provided path can be read.
             try {
                 $mimeType = $this->filesystem->mimeType($path);
             } catch (FilesystemException | UnableToRetrieveMetadata $e) {
                 $this->addError('path', $e->getMessage());
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 return [];
             }
-            if ($mimeType != 'directory') {
-                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
 
+            if ($mimeType !== 'directory') {
+                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
                 return [];
             }
 
@@ -432,6 +442,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         } catch (FilesystemException $e) {
             $this->addError('path', $e->getMessage());
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return [];
         }
     }
@@ -463,17 +474,19 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $files = $fileNames = [];
 
         if (!empty($path) && $path != DIRECTORY_SEPARATOR) {
+
             try {
                 $mimeType = $this->filesystem->mimeType($path);
-
             } catch (FilesystemException | UnableToRetrieveMetadata $e) {
                 $this->addError('path', $e->getMessage());
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 return [];
 
             }
-            if ($mimeType != 'directory') {
-                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
 
+            // Ensure this is a directory.
+            if ($mimeType !== 'directory') {
+                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
                 return [];
             }
         }
@@ -482,7 +495,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $contents = $this->filesystem->listContents($path);
         } catch (FilesystemException $e) {
             $this->addError('path', $e->getMessage());
-
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return [];
         }
         foreach ($contents as $object) {
@@ -533,6 +546,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $data['file_size'] = $this->filesystem->fileSize($path);
             $data['visibility'] = $this->filesystem->visibility($path);
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             $data = false;
         }
 
@@ -550,14 +564,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     public function getObjectContents($path)
     {
         try {
-            $file = $this->filesystem->read($path);
-        } catch (FilesystemException $e) {
-            $this->addError('path', $this->xpdo->lexicon('file_err_nf') . ' Message: ' . $e->getMessage());
-            return [];
-        }
-
-        if (!$file) {
-            $this->addError('file', $this->xpdo->lexicon('file_err_nf'));
+            if (!$file = $this->filesystem->read($path)) {
+                $this->addError('file', $this->xpdo->lexicon('file_err_nf'));
+                return [];
+            }
+        } catch (FilesystemException | UnableToReadFile $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return [];
         }
 
@@ -569,14 +581,16 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'basename' => basename($path),
                 'path' => $path,
                 'size' => $this->filesystem->fileSize($path),
-                'last_accessed' => $this->filesystem->lastModified($path),
+                'last_accessed' => $this->filesystem->lastModified($path), // We only have lastModified() here.
                 'last_modified' => $this->filesystem->lastModified($path),
                 'content' => $file,
                 'mime' => $this->filesystem->mimeType($path),
                 'image' => $this->isFileImage($path, $imageExtensions),
             ];
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
-            $this->addError('file', $e->getMessage());
+            $this->addError('file', $this->xpdo->lexicon('file_err_nf'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            return [];
         }
         $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
         if ($visibility) {
@@ -602,10 +616,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
         $path = $this->sanitizePath($parentContainer . DIRECTORY_SEPARATOR . ltrim($name, DIRECTORY_SEPARATOR));
 
+        // Ensure directory doesn't already exist.
         try {
-            $this->filesystem->fileExists($path);
-        } catch (FilesystemException $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_ae'));
+            if ($this->filesystem->fileExists($path)) {
+                $this->addError('name', $this->xpdo->lexicon('file_folder_err_ae'));
+                return false;
+            }
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
@@ -615,17 +633,18 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $config['visibility'] = $this->xpdo->getOption('visibility', $properties, Visibility::PUBLIC);
         }
 
+        // Attempt creating the directory.
         try {
             $this->filesystem->createDirectory($path, $config);
-        } catch (FilesystemException $e) {
+        } catch (FilesystemException | UnableToCreateDirectory $e) {
             $this->addError('name', $this->xpdo->lexicon('file_folder_err_create'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
-
         }
 
         $this->xpdo->invokeEvent('OnFileManagerDirCreate', [
             'directory' => $path,
-            'source' => &$this,
+            'source' => $this,
         ]);
         $this->xpdo->logManagerAction('directory_create', '', "{$this->get('name')}: $path");
 
@@ -666,30 +685,35 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             return false;
         }
 
+        // Ensure file can be read.
         try {
-            if ($this->checkFileExists() && $this->filesystem->has($path)) {
+            if ($this->checkFileExists() && $this->filesystem->fileExists($path)) {
                 $this->addError('name', sprintf($this->xpdo->lexicon('file_err_ae'), $name));
-
                 return false;
             }
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            return false;
+        }
 
-            $config = [];
-            if ($this->visibility_files) {
-                $properties = $this->getPropertyList();
-                $config['visibility'] = $this->xpdo->getOption('visibility', $properties, AbstractAdapter::VISIBILITY_PUBLIC);
-            }
-            if (!$this->filesystem->put($path, $content, $config)) {
-                $this->addError('name', $this->xpdo->lexicon('file_err_create'));
-                return false;
-            }
-        } catch (Exception $e) {
-            $this->addError('name', $e->getMessage());
+        $config = [];
+        if ($this->visibility_files) {
+            $properties = $this->getPropertyList();
+            $config['visibility'] = $this->xpdo->getOption('visibility', $properties, Visibility::PUBLIC);
+        }
+
+        // Attempt creating the new file.
+        try {
+            $this->filesystem->write($path, $content, $config);
+        } catch (FilesystemException | UnableToWriteFile $e) {
+            $this->addError('name', $this->xpdo->lexicon('file_err_create'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
         $this->xpdo->invokeEvent('OnFileManagerFileCreate', [
             'path' => $path,
-            'source' => &$this,
+            'source' => $this,
         ]);
         $this->xpdo->logManagerAction('file_create', '', "{$this->get('name')}: $path");
 
@@ -713,24 +737,21 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $to = $this->postfixSlash($to);
         $newPath = rtrim($to, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . basename($from);
 
+        // Ensure object can be read.
         try {
-            /** @var Directory|File $originalObject */
-            $originalObject = $this->filesystem->get($path);
-            if ($originalObject->isDir()) {
+            $mimeType = $this->filesystem->mimeType($path);
+            if ($mimeType === 'directory') {
                 $newPath = $this->postfixSlash($newPath);
             }
-        } catch (FilesystemException $e) {
+        } catch (FilesystemException | UnableToReadFile $e) {
             $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
-
-            return false;
-        } catch (Exception $e) {
-            $this->addError('path', $e->getMessage());
-
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
+        // Determine if moving to another media source.
         if ($to_source) {
-            if ($originalObject->isDir()) {
+            if ($mimeType === 'directory') {
                 $this->addError('source', $this->xpdo->lexicon('no_move_folder'));
 
                 return false;
@@ -752,7 +773,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             /** @var Filesystem $destination */
             try {
                 $destination = $toSource->getFilesystem();
-                /** @var MountManager $mountManager */
+
                 $mountManager = new MountManager([
                     'org' => $this->filesystem,
                     'destination' => $destination,
@@ -761,22 +782,18 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     'org://' . ltrim($path, DIRECTORY_SEPARATOR),
                     'destination://' . ltrim($newPath, DIRECTORY_SEPARATOR)
                 );
-            } catch (Exception $e) {
+            } catch (FilesystemException | UnableToMoveFile $e) {
                 $this->addError('source', $e->getMessage());
-
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 return false;
             }
         } else {
             $toSource = false;
             try {
                 $this->filesystem->move($path, $newPath);
-            } catch (FilesystemException $e) {
+            } catch (FilesystemException | UnableToMoveFile $e) {
                 $this->addError('from', $this->xpdo->lexicon('file_err_rename'));
-
-                return false;
-            } catch (Exception $e) {
-                $this->addError('from', $e->getMessage());
-
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 return false;
             }
         }
@@ -803,35 +820,25 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $path = $this->postfixSlash($path);
 
+        // Ensure this is a directory.
         try {
-            $dirObject = $this->filesystem->read($path);
-        } catch (FilesystemException $e) {
-            $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
-
-            return false;
-        } catch (Exception $e) {
-            $this->addError('path', $e->getMessage());
-
-            return false;
-        }
-
-        if (!$dirObject->isDir()) {
-            $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
-
+            $mimeType = $this->filesystem->mimeType($path);
+            if ($mimeType !== 'directory') {
+                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
+                return false;
+            }
+        } catch (FilesystemException | UnableToReadFile $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
+        // Attempt deletion of the directory.
         try {
             $this->filesystem->deleteDirectory($path);
-
-        } catch (FilesystemException $e) {
-                $this->addError('path', $this->xpdo->lexicon('file_folder_err_remove'));
-                return false;
-
-        } catch (Exception $e) {
-            $this->addError('path', $e->getMessage());
+        } catch (FilesystemException | UnableToDeleteDirectory $e) {
+            $this->addError('path', $this->xpdo->lexicon('file_folder_err_remove'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
-
         }
 
         $this->xpdo->invokeEvent('OnFileManagerDirRemove', [
@@ -853,24 +860,25 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function removeObject($path)
     {
-        if (!$this->filesystem->fileExists($path)) {
-            $this->addError('file', $this->xpdo->lexicon('file_err_nf') . ': ' . $path);
-
+        // Ensure file can be read.
+        try {
+            if (!$this->filesystem->fileExists($path)) {
+                $this->addError('file', $this->xpdo->lexicon('file_err_nf') . ': ' . $path);
+                return false;
+            }
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
+        // Attempt deleting the file.
         try {
             $this->filesystem->delete($path);
-
-        } catch (FilesystemException $e) {
+        } catch (FilesystemException | UnableToDeleteFile $e) {
             $this->addError('file', $this->xpdo->lexicon('file_err_remove'));
-            return false;
-
-        } catch (Exception $e) {
-            $this->addError('file', $e->getMessage());
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
-
 
         $this->xpdo->invokeEvent('OnFileManagerFileRemove', [
             'directory' => $path,
@@ -901,24 +909,34 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $oldPath = $this->sanitizePath($oldPath) . DIRECTORY_SEPARATOR;
         $newPath = $this->sanitizePath($newPath) . DIRECTORY_SEPARATOR;
 
+        // Ensure current directory can be read.
         try {
-            $this->filesystem->fileExists($oldPath);
-        } catch (FilesystemException $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_invalid') . ' ' . $e->getMessage());
+            if (!$this->filesystem->fileExists($oldPath)) {
+                $this->addError('name', $this->xpdo->lexicon('file_folder_err_invalid'));
+                return false;
+            }
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
+        // Ensure new path doesn't exist.
         try {
-            $this->filesystem->fileExists($newPath);
-        } catch (FilesystemException $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_ae') . ' ' . $e->getMessage());
+            if ($this->filesystem->fileExists($newPath)) {
+                $this->addError('name', $this->xpdo->lexicon('file_folder_err_ae'));
+                return false;
+            }
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
+        // Attempt renaming the directory. Flysystem considers this a "move".
         try {
             $this->filesystem->move($oldPath, $newPath);
-        } catch (FilesystemException $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename') . ' ' . $e->getMessage());
+        } catch (FilesystemException | UnableToMoveFile $e) {
+            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
@@ -951,32 +969,31 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $oldPath = $this->sanitizePath($oldPath);
         $newPath = $this->sanitizePath($newPath);
 
+        // Ensure current file can be read, and new file doesn't exist.
         try {
-            $this->filesystem->fileExists($oldPath);
-        } catch (FilesystemException $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_err_invalid') . ' ' . $e->getMessage());
-            return false;
-        }
-
-        try {
-            $this->filesystem->fileExists($newPath);
-            if ($this->checkFileExists()) {
+            if (!$this->filesystem->fileExists($oldPath)) {
+                $this->addError('name', $this->xpdo->lexicon('file_err_invalid'));
+                return false;
+            }
+            elseif ($this->checkFileExists() && $this->filesystem->fileExists($newPath)) {
                 $this->addError('name', sprintf($this->xpdo->lexicon('file_err_ae'), $newName));
                 return false;
             }
             elseif (!$this->checkFileType($newName)) {
                 return false;
             }
-
-        } catch(FilesystemException $e) {
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
             $this->addError('name', $this->xpdo->lexicon('file_err_invalid'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
+        // Attempt renaming the file.
         try {
             $this->filesystem->move($oldPath, $newPath);
-        } catch (FilesystemException $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename') . ' ' . $e->getMessage());
+        } catch (FilesystemException | UnableToMoveFile $e) {
+            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
@@ -1002,15 +1019,18 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $path = $this->sanitizePath($path);
 
+        // Ensure file can be read.
         try {
             if (!$this->checkFileType($path)) {
                 return false;
-            } elseif (!$this->filesystem->fileExists($path)) {
+            }
+            elseif (!$this->filesystem->fileExists($path)) {
                 $this->addError('file', $this->xpdo->lexicon('file_err_nf') . ': ' . $path);
                 return false;
             }
-        } catch (FilesystemException $e) {
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
             $this->addError('file', $this->xpdo->lexicon('file_err_nf') . ': ' . $path);
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
         $config = [];
@@ -1018,10 +1038,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $config['visibility'] = $this->getVisibility($path);
         }
 
+        // Attempt creating the file.
         try {
             $this->filesystem->write($path, $content, $config);
-        } catch (FilesystemException $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_update') . ' ' . $e->getMessage());
+        } catch (FilesystemException | UnableToWriteFile $e) {
+            $this->addError('name', $this->xpdo->lexicon('file_folder_err_update'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
 
@@ -1053,8 +1075,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         if ($container != DIRECTORY_SEPARATOR) {
             try {
                 $this->filesystem->fileExists($container);
-            } catch (FilesystemException $e) {
-                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid') . ': ' . $container . ' ' . $e->getMessage());
+            } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid') . ': ' . $container);
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 return false;
             }
         }
@@ -1088,33 +1111,30 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
 
             $newPath = $container . $this->sanitizePath($file['name']);
-
             try {
-                $this->filesystem->fileExists($newPath);
-                if ($this->checkFileExists()) {
+                if ($this->checkFileExists() && $this->filesystem->fileExists($newPath)) {
                     $this->addError('path', sprintf($this->xpdo->lexicon('file_err_ae'), $file['name']));
                     return false;
                 }
-            } catch (FilesystemException $e) {
-                $this->addError('path', $e->getMessage());
+            } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             }
 
             try {
                 $this->filesystem->write($newPath, file_get_contents($file['tmp_name']));
-
-            } catch (FilesystemException $e) {
+            } catch (FilesystemException | UnableToWriteFile $e) {
                 $this->addError('path', $this->xpdo->lexicon('file_err_upload'));
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 continue;
             }
 
             if ($this->visibility_files) {
                 try {
                     $this->filesystem->setVisibility($newPath, $visibility);
-                } catch (FilesystemException $e) {
-                    $this->addError('path',$e->getMessage());
+                } catch (FilesystemException | UnableToSetVisibility $e) {
+                    $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 }
             }
-
         }
 
         $this->xpdo->invokeEvent('OnFileManagerUpload', [
@@ -1139,12 +1159,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         try {
             $mimeType = $this->filesystem->mimeType($path);
-            if (($mimeType == 'directory' && $this->visibility_dirs) || ($mimeType == 'file' && $this->visibility_files)) {
-                $this->xpdo->log(1,$this->filesystem->visibility($path));
+            if (($mimeType === 'directory' && $this->visibility_dirs) || (/*$mimeType === 'file' && */$this->visibility_files)) {
                 return $this->filesystem->visibility($path);
             }
-        } catch (FilesystemException $e) {
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
             $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
         }
         return false;
     }
@@ -1161,13 +1181,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $path = $this->sanitizePath($path);
         try {
             $mimeType = $this->filesystem->mimeType($path);
-            if (($mimeType == 'directory' && $this->visibility_dirs) || ($mimeType == 'file' && $this->visibility_files)) {
+            if (($mimeType === 'directory' && $this->visibility_dirs) || (/*$mimeType === 'file' && */$this->visibility_files)) {
                 $this->filesystem->setVisibility($path, $visibility);
                 return true;
             }
 
         } catch (FilesystemException | UnableToSetVisibility $e) {
-            $this->addError('path', $this->xpdo->lexicon('file_err_nf') . ' Message: ' . $e->getMessage());
+            $this->addError('path', $this->xpdo->lexicon('file_err_nf') . ' ' . $e->getMessage());
         }
 
         return false;
@@ -1502,7 +1522,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             if (!$this->filesystem->fileExists($src)) {
                 return '';
             }
-        } catch (Exception $e) {
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,$e->getMessage());
             return '';
         }
 
@@ -2280,7 +2301,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     'height' => $height,
                 ];
             } else {
-                $file = $this->filesystem->read($path);
+                try {
+                    $file = $this->filesystem->read($path);
+                } catch (FilesystemException $e) {
+                    $this->addError('file',$e->getMessage());
+                }
                 $size = @getimagesize($this->getBasePath() . $path);
                 if (is_array($size)) {
                     // make this human readable
