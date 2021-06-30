@@ -10,5 +10,5 @@
 $class = 'modTemplate';
 $table = $modx->getTableName($class);
 
-$description = $this->install->lexicon('add_column',array('column' => 'preview_file','table' => $table));
+$description = $this->install->lexicon('add_column', array('column' => 'preview_file', 'table' => $table));
 $this->processResults($class, $description, array($modx->manager, 'addField'), array($class, 'preview_file'));
