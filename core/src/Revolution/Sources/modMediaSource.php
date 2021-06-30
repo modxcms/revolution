@@ -9,6 +9,7 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\MountManager;
+use League\Flysystem\StorageAttributes;
 use League\Flysystem\UnableToCreateDirectory;
 use League\Flysystem\UnableToDeleteDirectory;
 use League\Flysystem\UnableToDeleteFile;
@@ -379,14 +380,24 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         try {
             $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
-            $contents = $this->filesystem->listContents($path);
+            $contents = $this->filesystem->listContents($path)
+                ->filter(function(StorageAttributes $attributes) use ($re) {
+                    return !preg_match($re, $attributes->path());
+                })
+                ->filter(function(StorageAttributes $attributes) use ($properties) {
+                    if ($attributes->isDir()) {
+                        return $this->hasPermission('directory_list');
+                    } elseif ($attributes->isFile()) {
+                        return $this->hasPermission('file_list') && !$properties['hideFiles'];
+                    }
+
+                    return false;
+                });
+
             foreach ($contents as $object) {
-                if (preg_match($re, $object['path'])) {
-                    continue;
-                }
                 $file_name = basename($object['path']);
 
-                if ($object instanceof DirectoryAttributes && $this->hasPermission('directory_list')) {
+                if ($object instanceof DirectoryAttributes) {
                     $cls = $this->getExtJSDirClasses();
                     $dirNames[] = strtoupper($file_name);
                     $visibility = $this->visibility_dirs ? $this->filesystem->visibility($object['path']) : false;
@@ -410,7 +421,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                         'items' => $this->getListDirContextMenu(),
                     ];
 
-                } elseif ($object instanceof FileAttributes && !$properties['hideFiles'] && $this->hasPermission('file_list')) {
+                }
+                elseif ($object instanceof FileAttributes) {
                     // @TODO review/refactor extension and mime_type would be better for filesystems that
                     // may not always have an extension on it. For example would be S3 and you have an HTML file
                     // but the name is just myPage - $this->filesystem->getMimetype($object['path']);
