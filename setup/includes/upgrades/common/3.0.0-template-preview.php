@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Common upgrade script for 3.0.0 modTemplate
  *
