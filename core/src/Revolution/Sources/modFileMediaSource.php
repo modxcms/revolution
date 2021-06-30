@@ -4,6 +4,8 @@ namespace MODX\Revolution\Sources;
 use Exception;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
+use League\Flysystem\Visibility;
+use MODX\Revolution\modX;
 use xPDO\xPDO;
 
 /**
@@ -30,17 +32,18 @@ class modFileMediaSource extends modMediaSource
                 // Determine the root directory
                 $this->getBasePath(),
 
-                // Customize how visibility is converted to unix permissions
+                // If users would like to modify the private values, they can create
+                // new system settings: private_file_permissions and private_folder_permissions.
                 PortableVisibilityConverter::fromArray([
                     'file' => [
-                        'public' => (int)$this->xpdo->getOption('new_file_permissions', [],0644),
-                        'private' => 0600, // TODO: New system setting?
+                        'public' => octdec($this->xpdo->getOption('new_file_permissions', [], 0644)),
+                        'private' => octdec($this->xpdo->getOption('private_file_permissions', [], 0600)),
                     ],
                     'dir' => [
-                        'public' => (int)$this->xpdo->getOption('new_folder_permissions', [],0755),
-                        'private' => 0700, // TODO: New system setting?
+                        'public' => octdec($this->xpdo->getOption('new_folder_permissions', [], 0755)),
+                        'private' => octdec($this->xpdo->getOption('private_folder_permissions', [], 0700)),
                     ],
-                ]),
+                ],Visibility::PUBLIC),
 
                 // Write flags
                 LOCK_EX,
