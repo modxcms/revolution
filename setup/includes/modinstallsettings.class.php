@@ -40,20 +40,24 @@ class modInstallSettings {
             switch ($this->settings['database_type']) {
                 case 'sqlsrv':
                     $database_dsn = "{$this->settings['database_type']}:server={$this->settings['database_server']};database={$this->settings['dbase']}";
+                    $database_dsn_config = '{$database_type}:server={$database_server};database={$dbase}';
                     $server_dsn = "{$this->settings['database_type']}:server={$this->settings['database_server']}";
                     break;
                 case 'mysql':
                     $server = explode(':', $this->settings['database_server']);
                     $port = !empty($server[1]) ? "port={$server[1]};" : '';
                     $database_dsn = "{$this->settings['database_type']}:host={$server[0]};{$port}dbname={$this->settings['dbase']};charset={$this->settings['database_connection_charset']}";
+                    $database_dsn_config = '{$database_type}:host={$database_server};dbname={$dbase};charset={$database_connection_charset}';
                     $server_dsn = "{$this->settings['database_type']}:host={$server[0]};{$port}charset={$this->settings['database_connection_charset']}";
                     break;
                 default:
                     $database_dsn = '';
+                    $database_dsn_config = '';
                     $server_dsn = '';
                     break;
             }
             $this->settings['database_dsn'] = $database_dsn;
+            $this->settings['database_dsn_config'] = $database_dsn_config;
             $this->settings['server_dsn'] = $server_dsn;
         }
     }
@@ -76,7 +80,7 @@ class modInstallSettings {
      * @return mixed
      */
     public function get($k,$default = null) {
-        if (in_array($k, ['database_dsn', 'server_dsn'])) {
+        if (in_array($k, ['database_dsn', 'database_dsn_config', 'server_dsn'])) {
             $this->rebuildDSN();
         }
         return isset($this->settings[$k]) ? $this->settings[$k] : $default;
