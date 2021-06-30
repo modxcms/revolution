@@ -540,11 +540,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     public function getMetaData($path)
     {
         try {
-            $data['last_modified'] = $this->filesystem->lastModified($path);
-            $data['file_exists'] = $this->filesystem->fileExists($path);
-            $data['mime_type'] = $this->filesystem->mimeType($path);
-            $data['file_size'] = $this->filesystem->fileSize($path);
-            $data['visibility'] = $this->filesystem->visibility($path);
+            $data['path'] = $path;
+            $data['timestamp'] = $this->filesystem->lastModified($path);
+            $data['size'] = $this->filesystem->fileSize($path);
+            $data['mimetype'] = $this->filesystem->mimeType($path);
+            $data['type'] = $data['mimetype'] === 'directory' ? 'dir' : 'file';
+
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             $data = false;
@@ -911,7 +912,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         // Ensure current directory can be read.
         try {
-            if (!$this->filesystem->fileExists($oldPath)) {
+            $mimeType = $this->filesystem->mimeType($oldPath);
+            if ($mimeType !== 'directory') {
                 $this->addError('name', $this->xpdo->lexicon('file_folder_err_invalid'));
                 return false;
             }
@@ -1087,10 +1089,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         foreach ($objects as $file) {
             $this->xpdo->invokeEvent('OnFileManagerBeforeUpload', [
-                'files' => &$objects,
-                'file' => &$file,
+                'files' => $objects,
+                'file' => $file,
                 'directory' => $container,
-                'source' => &$this,
+                'source' => $this,
             ]);
 
             if ($file['error'] != 0 || empty($file['name']) || !$this->checkFileType($file['name'])) {
@@ -1731,35 +1733,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param FilesystemAdapter $localAdapter
-     * @param string $cache_type ~ memory, persistent or memcached
+     * @param FilesystemAdapter $adapter
      */
-    protected function loadFlySystem(FilesystemAdapter $localAdapter, $cache_type = 'memory')
+    protected function loadFlySystem(FilesystemAdapter $adapter)
     {
-//        /** @var CachedAdapter $cache */
-//        switch (strtolower($cache_type)) {
-//            case 'persistent':
-//                //no break
-//            case 'predis':
-//                // @TODO requires: composer require predis/predis
-//                $cache = new Predis();
-//                break;
-//
-//            case 'memcached':
-//                $memcached = new Memcached();
-//                // @TODO requires config data
-//                $memcached->addServer('localhost', 11211);
-//
-//                $cache = new Memcached($memcached, 'storageKey', 300);
-//                break;
-//
-//            case 'memory':
-//                // no break
-//            default:
-//                $cache = new Memory();
-//        }
-//        $this->adapter = new CachedAdapter($localAdapter, $cache);
-        $this->adapter = $localAdapter;
+        $this->adapter = $adapter;
         $this->filesystem = new Filesystem($this->adapter);
     }
 
