@@ -194,7 +194,6 @@ textarea.x-form-field {
 #modx-content {
   width: calc(100% - 370px);
   right: 0;
-  padding-left: 0.5rem;
   left: 370px; /* give #modx-content an initial left value to prevent the panel from jumping around */
 }
 
@@ -567,7 +566,7 @@ a.x-grid-link:focus {
     > div::after {
       @include awesome-font;
       content: fa-content($fa-var-pen);
-      margin-left: 0.5em;
+      margin: 0 0.5em;
       color: $colorSplash;
     }
   }
@@ -594,8 +593,8 @@ a.x-grid-link:focus {
 .modx-page-header div {
   background-color: transparent !important;
 
-  #modx-panel-welcome & {
-    margin: 1rem;
+  #modx-panel-welcome &, #modx-panel-trash & {
+    margin: 1rem !important;
   }
 }
 
@@ -605,6 +604,10 @@ a.x-grid-link:focus {
     .modx-page-header {
       margin-top: 1.25rem;
       box-sizing: border-box;
+
+      html[dir="rtl"] & {
+        margin-top: 4rem;
+      }
 
       &+div {
         margin: 1rem;
@@ -620,8 +623,12 @@ a.x-grid-link:focus {
       margin-top: 1.25rem;
       font-weight: bold;
       box-sizing: border-box;
-      padding-left: 18px;
+      padding: 0 15px;
       font-size: 18px;
+
+      html[dir="rtl"] & {
+        margin-top: 4rem;
+      }
 
       &+div {
         margin: 1rem;
@@ -1460,11 +1467,7 @@ iframe[classname="x-hidden"] {
   font: normal 20px $bodyfonts;
   color: $darkestGray;
   margin: 0;
-  padding-left: 18px;
-
-  #modx-panel-welcome & {
-    padding-left: 0;
-  }
+  padding: 0 15px;
 
   @include grid-media($desktop) {
     width: 100%;
@@ -1557,7 +1560,7 @@ iframe[classname="x-hidden"] {
 
       .icon {
         text-align: center;
-        margin-left: 10px;
+        margin: 0 10px;
         @extend .#{$fa-css-prefix}-fw;
       }
     }

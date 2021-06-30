@@ -160,35 +160,53 @@ button {
     }
   }
 
+  html[dir="rtl"] &-left table {
+    float: right;
+  }
+
   .x-toolbar-left-row {
+    .x-btn,
+    .x-form-text,
+    .x-form-field-trigger-wrap {
+      margin: 0 3px;
+    }
+
     td {
       .x-btn {
         display: block;
       }
+    }
 
-      .x-btn,
-      .x-form-text,
-      .x-form-field-trigger-wrap {
-        margin-right: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
+    .x-form-filter {
+      border-radius: $borderRadius 0 0 $borderRadius;
+      z-index: 1; /* prevent clear filter button from overlapping the textfield */
+
+      &:not(.x-form-empty-field) {
+        border-color: $darkBlack;
       }
 
-      &:first-of-type {
-
-        .x-btn,
-        .x-form-text,
-        .x-form-field-trigger-wrap {
-          margin-left: 1px; /* prevent first button to be cut off */
-        }
+      &.x-form-focus {
+        border-color: $mediumGray;
       }
+    }
+
+    .x-form-filter-clear {
+      border-radius: 0 $borderRadius $borderRadius 0;
+      margin-right: 0;
     }
   }
 
   .x-toolbar-right-row {
-
     .x-btn,
     .x-form-text,
     .x-form-field-trigger-wrap {
-      margin-left: 7px; /* 5px + 2px box-shadow = 5px visible spacing */
+      margin: 0 3px;
+    }
+
+    td {
+      .x-btn {
+        display: block;
+      }
     }
 
     .x-form-filter {
@@ -270,15 +288,15 @@ button {
   right: 0;
   left: auto;
   background: $mainBg;
-  padding: 0.8rem 1rem;
+  padding: 0.5rem 1rem;
   border: 0;
   font-family: $buttonfonts;
   border-radius: $borderRadius;
   z-index: 12;
 
   /* prevent panel collapse arrows + toggles from overlapping */
-  .x-toolbar-cell:not(:first-child) {
-    padding-left: 0.5rem;
+  .x-toolbar-cell {
+    padding: 0.25rem;
   }
 
   .x-btn {

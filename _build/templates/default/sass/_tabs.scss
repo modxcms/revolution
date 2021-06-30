@@ -51,9 +51,6 @@
     }
 
     .x-tab-strip-wrap {
-      padding: 2px 0 0 0; /* revert padding from main tabs for nested ones */
-      margin: 0; /* revert margin from main tabs for nested ones */
-
       .x-tab-strip {
         background-color: $lightestGray !important; /* override !important rule defined by extjs default theme */
       }
@@ -90,6 +87,10 @@ ul.x-tab-strip li {
   position: relative;
   z-index: 5;
 
+  html[dir="rtl"] & {
+    float: right;
+  }
+
   &:hover {
     background-color: $tabInactiveBgHover;
     color: $tabInactiveTextHover;
@@ -124,8 +125,8 @@ ul.x-tab-strip li {
 
 .x-tab-strip-wrap {
   overflow: hidden;
-  padding: 2px 5px 0 5px; /* keep the tab box-shadows visible */
-  margin-left: -5px; /* and move the tab strip back into place */
+  padding: 2px 0 0;
+  margin: 0;
 }
 
 .x-tab-strip-closable {
