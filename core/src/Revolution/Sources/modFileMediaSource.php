@@ -5,7 +5,6 @@ use Exception;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use League\Flysystem\Visibility;
-use MODX\Revolution\modX;
 use xPDO\xPDO;
 
 /**
@@ -36,12 +35,12 @@ class modFileMediaSource extends modMediaSource
                 // new system settings: private_file_permissions and private_folder_permissions.
                 PortableVisibilityConverter::fromArray([
                     'file' => [
-                        'public' => octdec($this->xpdo->getOption('new_file_permissions', [], 0644)),
-                        'private' => octdec($this->xpdo->getOption('private_file_permissions', [], 0600)),
+                        'public' => octdec($this->xpdo->getOption('new_file_permissions', [], '0644')),
+                        'private' => octdec($this->xpdo->getOption('private_file_permissions', [], '0600')),
                     ],
                     'dir' => [
-                        'public' => octdec($this->xpdo->getOption('new_folder_permissions', [], 0755)),
-                        'private' => octdec($this->xpdo->getOption('private_folder_permissions', [], 0700)),
+                        'public' => octdec($this->xpdo->getOption('new_folder_permissions', [], '0755')),
+                        'private' => octdec($this->xpdo->getOption('private_folder_permissions', [], '0700')),
                     ],
                 ],Visibility::PUBLIC),
 
