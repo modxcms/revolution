@@ -33,12 +33,19 @@ class Duplicate extends DuplicateProcessor
     public $afterSaveEvent = 'OnUserDuplicate';
 
     /**
-     * @return mixed|string
+     * Get the new name for the duplicate
+     *
+     * @return string
      */
     public function getNewName()
     {
         $name = $this->getProperty('new_username', '');
-        return !empty($name) ? $name : $this->object->get('username') . '_copy';
+        $newName = !empty($name) ? $name : $this->modx->lexicon(
+            'duplicate_of',
+            ['name' => $this->object->get('username')]
+        );
+
+        return $newName;
     }
 
     /**
