@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset={$_config.mail_charset}"/>
+    <meta charset="{$_config.modx_charset}" />
     <title>{$_config.site_name}</title>
     <style type="text/css">
         body { background: #f7f7f7;margin: 0;padding: 0;width: 100%;height: 100%;font-family: Arial, serif;font-size: 14px;color: #293034; }
@@ -31,7 +31,7 @@
     <thead>
     <tr>
         <td class="main-logo">
-            <a href="{$_config.site_url}" target="_blank">
+            <a href="{$_config.site_url}" target="_blank" rel="noopener noreferrer">
                 {if $_config.login_logo}
                     <img src="{$_config.login_logo}" alt="{$_config.site_name}"/>
                 {else}
@@ -54,7 +54,7 @@
             <table class="footer">
                 <tr>
                     <td>
-                        <a href="{$_config.site_url}" target="_blank">{$_config.site_name}</a>
+                        <a href="{$_config.site_url}" target="_blank" rel="noopener noreferrer">{$_config.site_name}</a>
                     </td>
                 </tr>
             </table>

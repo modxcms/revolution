@@ -1,8 +1,8 @@
 <!doctype html>
 <html dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
 <head>
+<meta charset="{$_config.modx_charset}" />
 <title>{if $_pagetitle}{$_pagetitle|escape} | {/if}{$_config.site_name|strip_tags|escape}</title>
-<meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="google" content="notranslate" />
 
@@ -48,7 +48,7 @@
                     <div class="info-item full_appname">{$_version.full_version|strip_tags|escape}</div>
                 </li>
                 <li id="modx-leftbar-trigger">
-                    <a href="javascript:;">
+                    <a href="javascript:;" aria-label="Expand / Collapse Menu">
                         <i class="icon"></i>
                     </a>
                 </li>
