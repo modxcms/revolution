@@ -43,7 +43,7 @@
         "vendor-dir": "core/vendor"
     },
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
         "xpdo/xpdo": "^3.0@dev",
         "league/flysystem": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
