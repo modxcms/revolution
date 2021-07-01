@@ -68,10 +68,13 @@ class Delete extends Processor
      */
     public function process()
     {
-        if ($this->modx->getOption('site_start') == $this->resource->get('id')) {
+        if ($this->isSiteStart()) {
             return $this->failure($this->modx->lexicon('resource_err_delete_sitestart'));
         }
-        if ($this->modx->getOption('site_unavailable_page') == $this->resource->get('id')) {
+        if ($this->isSiteErrorPage()) {
+            return $this->failure($this->modx->lexicon('resource_err_delete_errorpage'));
+        }
+        if ($this->isSiteUnavailablePage()) {
             return $this->failure($this->modx->lexicon('resource_err_delete_siteunavailable'));
         }
 
@@ -118,6 +121,36 @@ class Delete extends Processor
         $outputArray['deletedCount'] = $deletedCount;
 
         return $this->success('', $outputArray);
+    }
+
+    /**
+     * Checks if the given resource is set as site_start
+     * @return bool
+     */
+    public function isSiteStart()
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption('site_start') || $this->resource->get('id') == $this->modx->getOption('site_start'));
+    }
+
+    /**
+     * Checks if the given resource is set as error_page
+     * @return bool
+     */
+    public function isSiteErrorPage()
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption('error_page') || $this->resource->get('id') == $this->modx->getOption('error_page'));
+    }
+
+    /**
+     * Checks if the given resource is set as site_unavailable_page
+     * @return bool
+     */
+    public function isSiteUnavailablePage()
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption('site_unavailable_page') || $this->resource->get('id') == $this->modx->getOption('site_unavailable_page'));
     }
 
     /**

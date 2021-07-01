@@ -61,6 +61,14 @@ class Unpublish extends Processor
             return $this->failure($this->modx->lexicon('resource_err_unpublish_sitestart'));
         }
 
+        if ($this->isSiteErrorPage()) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_errorpage'));
+        }
+
+        if ($this->isSiteUnavailablePage()) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_siteunavailable'));
+        }
+
         $this->resource->set('published', false);
         $this->resource->set('pub_date', false);
         $this->resource->set('unpub_date', false);
@@ -87,6 +95,26 @@ class Unpublish extends Processor
     {
         $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
         return ($this->resource->get('id') == $workingContext->getOption('site_start') || $this->resource->get('id') == $this->modx->getOption('site_start'));
+    }
+
+    /**
+     * Checks if the given resource is set as error_page
+     * @return bool
+     */
+    public function isSiteErrorPage()
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption('error_page') || $this->resource->get('id') == $this->modx->getOption('error_page'));
+    }
+
+    /**
+     * Checks if the given resource is set as site_unavailable_page
+     * @return bool
+     */
+    public function isSiteUnavailablePage()
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption('site_unavailable_page') || $this->resource->get('id') == $this->modx->getOption('site_unavailable_page'));
     }
 
     /**
