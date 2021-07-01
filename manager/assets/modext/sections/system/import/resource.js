@@ -4,7 +4,7 @@ MODx.page.ImportResource = function(config) {
         formpanel: 'modx-panel-import-resources'
         ,buttons: [{
             process: 'System/Import/Index'
-            ,text: _('import_resources')
+            ,text: _('import_site_resource')
             ,id: 'modx-abtn-import'
             ,cls: 'primary-button'
             ,method: 'remote'
