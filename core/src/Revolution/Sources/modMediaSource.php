@@ -2262,6 +2262,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 } else {
                     return false;
                 }
+                $filemanager_thumb_height = $this->ctx->getOption('filemanager_thumb_height', 80);
+                if ($height > $filemanager_thumb_height) {
+                    $width = ($filemanager_thumb_height / $height) * $width;
+                    $height = $filemanager_thumb_height;
+                }
                 $file_size = [
                     'width' => $width,
                     'height' => $height,
