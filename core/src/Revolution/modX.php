@@ -576,13 +576,17 @@ class modX extends xPDO {
             $this->invokeEvent(
                 'OnMODXInit',
                 [
-                     'contextKey' => $contextKey,
-                     'options' => $options,
+                    'contextKey' => $contextKey,
+                    'options' => $options,
                 ]
             );
 
             if (is_array ($this->config)) {
-                $this->setPlaceholders($this->config, '+');
+                $c = $this->config;
+                if ((bool)$this->getOption('filter_config_placeholders', null, true)) {
+                    unset($c['password'], $c['username'], $c['mail_smtp_pass'], $c['mail_smtp_user'], $c['proxy_password'], $c['proxy_username'], $c['connections'], $c['connection_init'], $c['connection_mutable'], $c['dbname'], $c['database'], $c['table_prefix'], $c['driverOptions'], $c['dsn'], $c['session_name'], $c['assets_path'], $c['base_path'], $c['cache_path'], $c['connectors_path'], $c['core_path'], $c['friendly_alias_translit_class_path'], $c['manager_path'], $c['processors_path']);
+                }
+                $this->setPlaceholders($c, '+');
             }
 
             $this->_initialized= true;
