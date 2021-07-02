@@ -1101,10 +1101,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         foreach ($objects as $file) {
             $this->xpdo->invokeEvent('OnFileManagerBeforeUpload', [
-                'files' => $objects,
-                'file' => $file,
+                'files' => &$objects,
+                'file' => &$file,
                 'directory' => $container,
-                'source' => $this,
+                'source' => &$this,
             ]);
 
             if ($file['error'] != 0 || empty($file['name']) || !$this->checkFileType($file['name'])) {
