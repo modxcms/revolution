@@ -1746,27 +1746,30 @@ class modX extends xPDO {
             $this->error = $this->services->get('error');
         }
 
-        // First check if the processor can be found directly as a class name provided to $action
-        // We're limiting to subclasses of Processor to prevent instantiating arbitrary classes
-        if (static::isProcessorClass($action)) {
-            /** @var Processor $processor */
-            $processor = $action::getInstance($this, $action, $scriptProperties);
+        // Check for a custom processors path that is not the core processor path to avoid running autoloaded core processors
+        if (!isset($options['processors_path']) || $options['processors_path'] == $this->config['processors_path']) {
+            // First check if the processor can be found directly as a class name provided to $action
+            // We're limiting to subclasses of Processor to prevent instantiating arbitrary classes
+            if (static::isProcessorClass($action)) {
+                /** @var Processor $processor */
+                $processor = $action::getInstance($this, $action, $scriptProperties);
 
-            return $processor->run();
-        }
+                return $processor->run();
+            }
 
-        // Check if we're dealing with an action like "context/update", which we transform into the 3.0+ class name
-        $legacyAction = 'MODX\\Revolution\\Processors\\' . implode('\\', array_map('ucfirst', explode('/', $action)));
+            // Check if we're dealing with an action like "context/update", which we transform into the 3.0+ class name
+            $legacyAction = 'MODX\\Revolution\\Processors\\' . implode('\\', array_map('ucfirst', explode('/', $action)));
 
-        // Special case for TVs, for which the directory is named differently from how it was called in the past
-        if (strpos($legacyAction, '\\Tv\\') !== false) {
-            $legacyAction = str_replace('\\Tv\\', '\\TemplateVar\\', $legacyAction);
-        }
-        if (static::isProcessorClass($legacyAction)) {
-            /** @var Processor $processor */
-            $processor = $legacyAction::getInstance($this, $legacyAction, $scriptProperties);
+            // Special case for TVs, for which the directory is named differently from how it was called in the past
+            if (strpos($legacyAction, '\\Tv\\') !== false) {
+                $legacyAction = str_replace('\\Tv\\', '\\TemplateVar\\', $legacyAction);
+            }
+            if (static::isProcessorClass($legacyAction)) {
+                /** @var Processor $processor */
+                $processor = $legacyAction::getInstance($this, $legacyAction, $scriptProperties);
 
-            return $processor->run();
+                return $processor->run();
+            }
         }
 
         // If we don't have a processor yet, we're dealing with a custom processor. See if we have been provided a path to look in.
