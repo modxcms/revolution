@@ -178,9 +178,6 @@ class modInstallRequest {
     public function getDatabaseDSN($databaseType,$databaseServer,$database,$databaseConnectionCharset = '') {
         $dsn = '';
         switch ($databaseType) {
-            case 'sqlsrv':
-                $dsn = "{$databaseType}:server={$databaseServer};database={$database}";
-                break;
             case 'mysql':
                 $dsn = "{$databaseType}:host={$databaseServer};dbname={$database};charset={$databaseConnectionCharset}";
                 break;
