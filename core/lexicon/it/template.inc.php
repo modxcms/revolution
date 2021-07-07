@@ -10,7 +10,7 @@
 $_lang['access'] = 'Accesso';
 $_lang['filter_by_category'] = 'Filtra per Categoria...';
 $_lang['rank'] = 'Rango';
-$_lang['template'] = 'Template';
+$_lang['template'] = 'Modello';
 $_lang['template_assignedtv_tab'] = 'Assigned TVs';
 $_lang['template_code'] = 'Codice Template (html)';
 $_lang['template_desc'] = 'Descrizione';
@@ -49,6 +49,6 @@ $_lang['template_title'] = 'Crea/Modifica Template';
 $_lang['template_tv_edit'] = 'Edit the sort order of the TVs';
 $_lang['template_tv_msg'] = 'The <abbr title="Template Variables">TVs</abbr> assigned to this template are listed below.';
 $_lang['template_untitled'] = 'Template Senza Titolo';
-$_lang['templates'] = 'Templates';
+$_lang['templates'] = 'Modelli';
 $_lang['tvt_err_nf'] = 'TV does not have access to the specified Template.';
 $_lang['tvt_err_remove'] = 'An error occurred while trying to delete the TV from the template.';
