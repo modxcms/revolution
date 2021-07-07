@@ -13,8 +13,8 @@ $_lang['base_url'] = 'URL di base';
 $_lang['base_url_relative'] = 'URL di base relativo?';
 $_lang['minimum_role'] = 'Ruolo minimo';
 $_lang['path_options'] = 'Opzioni di percorso';
-$_lang['policy'] = 'Policy';
-$_lang['source'] = 'Media Source';
+$_lang['policy'] = 'Politica';
+$_lang['source'] = 'Sorgente Multimediale';
 $_lang['source_access_add'] = 'Aggiungi Gruppo Utenti';
 $_lang['source_access_remove'] = 'Rimuovere l\'accesso';
 $_lang['source_access_remove_confirm'] = 'Sei sicuro di voler rimuovere l\'accesso a questa Source per questo gruppo utenti?';
@@ -36,14 +36,14 @@ $_lang['source_remove_multiple_confirm'] = 'Sei sicuro di voler eliminare queste
 $_lang['source_update'] = 'Aggiorna Media Source';
 $_lang['source_type'] = 'Tipo di Source';
 $_lang['source_type_desc'] = 'Il tipo, o driver, della Media Source. L\'origine utilizzerà questo driver per connettersi quando raccoglie i suoi dati. Ad esempio: File System catturerà i file dal file system. S3 otterrà i file da un bucket S3.';
-$_lang['source_type.file'] = 'File System';
+$_lang['source_type.file'] = 'File di Sistema';
 $_lang['source_type.file_desc'] = 'Una Media Source basata su filesystem che sfoglia i file del server.';
 $_lang['source_type.s3'] = 'Amazon S3';
 $_lang['source_type.s3_desc'] = 'Navigata un bucket Amazon S3.';
 $_lang['source_types'] = 'Tipi di origine';
 $_lang['source_types.intro_msg'] = 'Questo è un elenco di tutti i Tipi di Media Sources installati su questa istanza MODX.';
 $_lang['source.access.intro_msg'] = 'Qui è possibile limitare una Media Source a specifici gruppi di utenti e applicare policies per quei gruppi di utenti. Una Media Source senza gruppi utente collegati ad essa è disponibile a tutti gli utenti del manager.';
-$_lang['sources'] = 'Media Sources';
+$_lang['sources'] = 'Sorgenti Multimediali';
 $_lang['sources.intro_msg'] = 'Gestisci tutte le tue Media Sources qui.';
 $_lang['user_group'] = 'Gruppo Utenti';
 
@@ -70,7 +70,7 @@ $_lang['thumbnailType'] = 'thumbnailType';
 $_lang['prop_file.thumbnailType_desc'] = 'Il tipo di immagine da usare per le miniature.';
 
 /* s3 source type */
-$_lang['bucket'] = 'Bucket';
+$_lang['bucket'] = 'Secchio';
 $_lang['prop_s3.bucket_desc'] = 'Il bucket di S3 da cui caricare i tuoi dati.';
 $_lang['prop_s3.key_desc'] = 'La chiave di Amazon per l\'autenticazione al bucket.';
 $_lang['prop_s3.imageExtensions_desc'] = 'Un elenco delimitato da virgole di estensioni di file da utilizzare per le immagini. MODX tenterà di fare le miniature dei file con queste estensioni.';
