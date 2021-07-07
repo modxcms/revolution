@@ -415,11 +415,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'La password per autenticatsi con SMTP.'
 $_lang['setting_mail_smtp_port'] = 'Porta SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Imposta la porta di default del server SMTP.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'Crittografia SMTP';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Imposta la crittografia della connessione SMTP. Sono opzioni "", "ssl" o "tls"';
 
-$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls'] = 'TLS Automatico SMTP';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Se abilitare la crittografia TLS automaticamente se un server la supporta, anche se "Crittografia SMTP" non è impostata a "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Invio Singolo A:';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Abilita l\'invio selettivo ai singoli destinatari "A:" delle mails, invece di inviare all\'intero elenco A: dei destinatari.';
@@ -672,8 +672,8 @@ $_lang['setting_session_cookie_secure_desc'] = 'Abilita questa opzione per usare
 $_lang['setting_session_cookie_httponly'] = 'Cookie Sessione HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Utilizza questa opzione per spuntare il flag HttpOnly sui cookies della sessione.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Cookie Sessione Sito Stesso';
+$_lang['setting_session_cookie_samesite_desc'] = 'Scegli Lax o Strict.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Durata Max sessione Garbage Collector';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Consente la personalizzazione dell\'impostazione gc_maxlifetime di PHP ini quando si usa \'modSessionHandler\'.';
