@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['snippet'] = 'Snippet';
+$_lang['snippet'] = 'Frammento';
 $_lang['snippets_available'] = 'Snippets disponibili per essere inclusi nella tua pagina';
 $_lang['snippet_code'] = 'Codice Snippet (php)';
 $_lang['snippet_delete_confirm'] = 'Sei sicuro di voler eliminare questo snippet?';
@@ -37,4 +37,4 @@ $_lang['snippet_new'] = 'Nuovo Snippet';
 $_lang['snippet_properties'] = 'Proprietà di default';
 $_lang['snippet_title'] = 'Crea/Modifica Snippet';
 $_lang['snippet_untitled'] = 'Snippet senza nome';
-$_lang['snippets'] = 'Snippets';
+$_lang['snippets'] = 'Frammenti';
