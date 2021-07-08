@@ -381,8 +381,8 @@ $_lang['setting_mail_smtp_port_desc'] = 'Imposta la porta di default del server 
 $_lang['setting_mail_smtp_prefix'] = 'Prefisso Connessione SMTP';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Imposta il prefisso della connessione. Le Opzioni sono "", "ssl" or "tls"';
 
-$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls'] = 'TLS Automatico SMTP';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Se abilitare la crittografia TLS automaticamente se un server la supporta, anche se "Crittografia SMTP" non è impostata a "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Invio Singolo A:';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Abilita l\'invio selettivo ai singoli destinatari "A:" delle mails, invece di inviare all\'intero elenco A: dei destinatari.';
@@ -611,8 +611,8 @@ $_lang['setting_server_offset_time_desc'] = 'Seleziona il numero di ore di diffe
 $_lang['setting_session_cookie_domain'] = 'Dominio Cookie Sessione';
 $_lang['setting_session_cookie_domain_desc'] = 'Usa questa impostazione per personalizzare la voce: dominio dei cookie della sessione.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Cookie Sessione Sito Stesso';
+$_lang['setting_session_cookie_samesite_desc'] = 'Scegli Lax o Strict.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Durata Cookie Sessione';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Usa questa impostazione per personalizzare la voce: durata in secondi dei cookie della sessione.  Così si imposta la durata del cookie della sessione di un cliente che abbia scelto l\'opzione \'ricordami\' al momento del login.';
