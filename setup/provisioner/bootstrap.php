@@ -63,11 +63,13 @@ if (!empty($unsatisfiedExtensionRequirements)) {
 }
 
 /* Validate functions and settings */
-$sessionsWorking = (session_start() && session_status() === PHP_SESSION_ACTIVE);
-if (!$sessionsWorking) {
-    $unsatisfiedRequirementsErrors[] = [
-        'description' => 'Make sure your PHP session configuration is valid and working.',
-    ];
+if (!MODX_SETUP_INTERFACE_IS_CLI) {
+    $sessionsWorking = (session_start() && session_status() === PHP_SESSION_ACTIVE);
+    if (!$sessionsWorking) {
+        $unsatisfiedRequirementsErrors[] = [
+            'description' => 'Make sure your PHP session configuration is valid and working.',
+        ];
+    }
 }
 
 $phptz = @ini_get('date.timezone');
