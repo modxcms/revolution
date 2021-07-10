@@ -31,6 +31,7 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/resource/modx.panel.resource.static.js');
         $this->addJavascript($mgrUrl . 'assets/modext/sections/resource/update.js');
         $this->addJavascript($mgrUrl . 'assets/modext/sections/resource/static/update.js');
+        $neighborhood = $this->resource->getNeighborhood();
         $data = [
             'xtype' => 'modx-page-static-update',
             'resource' => $this->resource->get('id'),
@@ -44,6 +45,13 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
             'canCreate' => (int)$this->modx->hasPermission('new_document'),
             'canDelete' => (int)$this->modx->hasPermission('delete_document'),
             'show_tvs' => (int)!empty($this->tvCounts),
+            'next_page' => !empty($neighborhood['right'][0])
+                ? $neighborhood['right'][0]
+                : 0,
+            'prev_page' => !empty($neighborhood['left'][0])
+                ? $neighborhood['left'][0]
+                : 0,
+            'up_page' => $this->resource->parent
         ];
         $this->addHtml('<script>
         MODx.config.publish_document = "' . $this->canPublish . '";
