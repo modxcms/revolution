@@ -2,7 +2,9 @@
 namespace MODX\Revolution\Sources;
 
 use Exception;
-use League\Flysystem\Adapter\Ftp;
+use League\Flysystem\Ftp\FtpAdapter;
+use League\Flysystem\Ftp\FtpConnectionOptions;
+use League\Flysystem\Visibility;
 use xPDO\xPDO;
 
 /**
@@ -36,8 +38,7 @@ class modFTPMediaSource extends modMediaSource
         ];
 
         try {
-            $adapter = new Ftp($config);
-            $adapter->connect();
+            $adapter = new FtpAdapter(FtpConnectionOptions::fromArray($config));
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
                 $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
@@ -237,7 +238,7 @@ class modFTPMediaSource extends modMediaSource
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         if ($image = $this->getObjectUrl($path)) {
-            if ($this->getVisibility($path) != \League\Flysystem\AdapterInterface::VISIBILITY_PUBLIC) {
+            if ($this->getVisibility($path) != Visibility::PUBLIC) {
                 $image = false;
             }
         }

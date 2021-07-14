@@ -2,7 +2,9 @@
 namespace MODX\Revolution\Sources;
 
 use Exception;
-use League\Flysystem\Adapter\Local;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
+use League\Flysystem\Visibility;
 use xPDO\xPDO;
 
 /**
@@ -23,14 +25,40 @@ class modFileMediaSource extends modMediaSource
     public function initialize()
     {
         parent::initialize();
+
         try {
-            $localAdapter = new Local($this->getBasePath());
+            $localAdapter = new LocalFilesystemAdapter(
+                // Determine the root directory
+                $this->getBasePath(),
+
+                // If users would like to modify the private values, they can create
+                // new system settings: private_file_permissions and private_folder_permissions.
+                PortableVisibilityConverter::fromArray([
+                    'file' => [
+                        'public' => octdec($this->xpdo->getOption('new_file_permissions', [], '0644')),
+                        'private' => octdec($this->xpdo->getOption('private_file_permissions', [], '0600')),
+                    ],
+                    'dir' => [
+                        'public' => octdec($this->xpdo->getOption('new_folder_permissions', [], '0755')),
+                        'private' => octdec($this->xpdo->getOption('private_folder_permissions', [], '0700')),
+                    ],
+                ],Visibility::PUBLIC),
+
+                // Write flags
+                LOCK_EX,
+
+                // How to deal with links, either DISALLOW_LINKS or SKIP_LINKS
+                // Disallowing them causes exceptions when encountered
+                LocalFilesystemAdapter::DISALLOW_LINKS
+            );
+
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
                 $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
 
             return false;
         }
+
         $this->loadFlySystem($localAdapter);
 
         return true;

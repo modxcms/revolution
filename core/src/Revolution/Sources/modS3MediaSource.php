@@ -4,9 +4,11 @@ namespace MODX\Revolution\Sources;
 
 use Aws\S3\S3Client;
 use Exception;
-use League\Flysystem\AdapterInterface;
-use League\Flysystem\AwsS3v3\AwsS3Adapter;
-use xPDO\Exception\Container\NotFoundException;
+use League\Flysystem\AwsS3v3\AwsS3V3Adapter;
+use League\Flysystem\FilesystemException;
+use League\Flysystem\UnableToRetrieveMetadata;
+use League\Flysystem\Visibility;
+use MODX\Revolution\modX;
 use xPDO\xPDO;
 
 /**
@@ -54,7 +56,7 @@ class modS3MediaSource extends modMediaSource
 
                 return false;
             }
-            $adapter = new AwsS3Adapter(new S3Client($config), $bucket, $prefix);
+            $adapter = new AwsS3V3Adapter(new S3Client($config), $bucket, $prefix);
             $this->loadFlySystem($adapter);
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage());
@@ -207,15 +209,14 @@ class modS3MediaSource extends modMediaSource
     {
         $path = $this->postfixSlash($from);
         try {
-            $originalObject = $this->filesystem->get($path);
-            if ($originalObject->isFile()) {
+            $mimeType = $this->filesystem->mimeType($path);
+            if ($mimeType !== 'directory') {
                 return parent::moveObject($from, $to, $point, $to_source);
             }
             $this->addError('source', $this->xpdo->lexicon('no_move_folder'));
-        } catch (NotFoundException $e) {
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
             $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
-        } catch (Exception $e) {
-            $this->addError('path', $e->getMessage());
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
         }
 
         return false;
@@ -292,7 +293,7 @@ class modS3MediaSource extends modMediaSource
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         if ($image = $this->getObjectUrl($path)) {
-            if ($this->getVisibility($path) != AdapterInterface::VISIBILITY_PUBLIC) {
+            if ($this->getVisibility($path) !== Visibility::PUBLIC) {
                 $image = false;
             }
         }
