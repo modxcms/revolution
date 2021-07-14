@@ -293,7 +293,7 @@ class modS3MediaSource extends modMediaSource
     protected function buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties = [])
     {
         if ($image = $this->getObjectUrl($path)) {
-            if ($this->getVisibility($path) != Visibility::PUBLIC) {
+            if ($this->getVisibility($path) !== Visibility::PUBLIC) {
                 $image = false;
             }
         }

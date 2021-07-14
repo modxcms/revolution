@@ -400,7 +400,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 if ($object instanceof DirectoryAttributes) {
                     $cls = $this->getExtJSDirClasses();
                     $dirNames[] = strtoupper($file_name);
-                    $visibility = $this->visibility_dirs ? $this->filesystem->visibility($object['path']) : false;
+                    $visibility = $this->visibility_dirs ? $this->getVisibility($object['path']) : false;
                     $directories[$file_name] = [
                         'id' => rawurlencode(rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR),
                         'sid' => $this->get('id'),
@@ -1173,7 +1173,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         try {
             $mimeType = $this->filesystem->mimeType($path);
-            if (($mimeType === 'directory' && $this->visibility_dirs) || (/*$mimeType === 'file' && */$this->visibility_files)) {
+            if (($mimeType === 'directory' && $this->visibility_dirs) || ($mimeType !== 'directory' && $this->visibility_files)) {
                 return $this->filesystem->visibility($path);
             }
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
@@ -1195,7 +1195,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $path = $this->sanitizePath($path);
         try {
             $mimeType = $this->filesystem->mimeType($path);
-            if (($mimeType === 'directory' && $this->visibility_dirs) || (/*$mimeType === 'file' && */$this->visibility_files)) {
+            if (($mimeType === 'directory' && $this->visibility_dirs) || ($mimeType !== 'directory' && $this->visibility_files)) {
                 $this->filesystem->setVisibility($path, $visibility);
                 return true;
             }
@@ -1839,7 +1839,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'text' => $file_name,
             'cls' => implode(' ', $cls),
             'iconCls' => 'icon ' . (
-                $visibility == Visibility::PRIVATE
+                $visibility === Visibility::PRIVATE
                     ? 'icon-eye-slash'
                     : ('icon-file icon-' . $ext)
                 ),
@@ -2118,7 +2118,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $canRemove = $this->checkPolicy('remove');
         $canView = $this->checkPolicy('view');
         $canOpen = !empty($data['urlExternal']) &&
-            (empty($data['visibility']) || $data['visibility'] == Visibility::PUBLIC);
+            (empty($data['visibility']) || $data['visibility'] === Visibility::PUBLIC);
 
         $menu = [];
         if ($this->hasPermission('file_update') && $canSave) {
