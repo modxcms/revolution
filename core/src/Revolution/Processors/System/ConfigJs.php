@@ -18,6 +18,7 @@ use MODX\Revolution\modResource;
 
 /**
  * Outputs the $modx->config to JSON
+ *
  * @param string $action If set with context, will output the context info for a
  * custom context by the action
  * @param string $context If set with action, will output the context info for a
@@ -33,7 +34,7 @@ class ConfigJs extends Processor
     public function process()
     {
         if (!$this->modx->user->isAuthenticated('mgr')) {
-            return '';
+            return $this->failure($this->modx->lexicon('permission_denied'));
         }
         $this->modx->getVersionData();
 
@@ -41,7 +42,7 @@ class ConfigJs extends Processor
         if (!empty($wctx)) {
             $workingContext = $this->modx->getContext($wctx);
             if (!$workingContext) {
-                return $this->modx->error->failure($this->modx->error->failure($this->modx->lexicon('permission_denied')));
+                return $this->modx->error->failure($this->modx->lexicon('permission_denied'));
             }
         } else {
             $workingContext =& $this->modx->context;
@@ -66,20 +67,28 @@ class ConfigJs extends Processor
             }
         }
 
-        $template_url = $workingContext->getOption('manager_url', MODX_MANAGER_URL,
-                $this->modx->_userConfig) . 'templates/' . $workingContext->getOption('manager_theme', 'default',
-                $this->modx->_userConfig) . '/';
+        $template_url = $workingContext->getOption(
+            'manager_url', MODX_MANAGER_URL,
+            $this->modx->_userConfig
+        ) . 'templates/' . $workingContext->getOption(
+            'manager_theme', 'default',
+            $this->modx->_userConfig
+        ) . '/';
         $c = [
             'base_url' => $workingContext->getOption('base_url', MODX_BASE_URL, $this->modx->_userConfig),
-            'connectors_url' => $workingContext->getOption('connectors_url', MODX_CONNECTORS_URL,
-                $this->modx->_userConfig),
+            'connectors_url' => $workingContext->getOption(
+                'connectors_url', MODX_CONNECTORS_URL,
+                $this->modx->_userConfig
+            ),
             'icons_url' => $template_url . 'images/ext/modext/',
             'manager_url' => $workingContext->getOption('manager_url', MODX_MANAGER_URL, $this->modx->_userConfig),
             'template_url' => $template_url,
             'http_host' => $workingContext->getOption('http_host', MODX_HTTP_HOST, $this->modx->_userConfig),
             'site_url' => $workingContext->getOption('site_url', MODX_SITE_URL, $this->modx->_userConfig),
-            'http_host_remote' => MODX_URL_SCHEME . $workingContext->getOption('http_host', MODX_HTTP_HOST,
-                    $this->modx->_userConfig),
+            'http_host_remote' => MODX_URL_SCHEME . $workingContext->getOption(
+                'http_host', MODX_HTTP_HOST,
+                $this->modx->_userConfig
+            ),
             'user' => $this->modx->user->get('id'),
             'version' => $this->modx->version['full_version'],
             'resource_classes' => $resourceClasses,
@@ -92,7 +101,7 @@ class ConfigJs extends Processor
             $c['default_site_url'] = $ctx->makeUrl($ctx->getOption('site_start'));
         }
 
-        $namespace = (string)$this->getProperty('namespace','core');
+        $namespace = (string)$this->getProperty('namespace', 'core');
         /** @var modNamespace $namespace */
         $namespace = $this->modx->getObject(modNamespace::class, $namespace);
         if ($namespace) {
