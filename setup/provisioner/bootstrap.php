@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -7,6 +8,7 @@
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
  */
+
 define('MODX_SETUP_INTERFACE_IS_CLI', (PHP_SAPI === 'cli'));
 $setupPath = str_replace('\\', '/', realpath(dirname(__FILE__, 2))) . '/';
 define('MODX_SETUP_PATH', $setupPath);
@@ -20,7 +22,9 @@ if (!MODX_SETUP_INTERFACE_IS_CLI) {
     if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] !== '' && $_SERVER['SERVER_PORT'] !== 80) {
         $installBaseUrl = str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
     }
-    $installBaseUrl .= ($_SERVER['SERVER_PORT'] === 80 || ($https !== false || strtolower($https) === 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
+    $installBaseUrl .= ($_SERVER['SERVER_PORT'] === 80 || ($https !== false || strtolower(
+                $https
+            ) === 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
     $installBaseUrl .= $_SERVER['SCRIPT_NAME'];
     $installBaseUrl = htmlspecialchars($installBaseUrl, ENT_QUOTES, 'utf-8');
     define('MODX_SETUP_URL', $installBaseUrl);
@@ -37,19 +41,29 @@ $phpVersionSatisfiesRequirement = version_compare(PHP_VERSION, MODX_MINIMUM_REQU
 if (!$phpVersionSatisfiesRequirement) {
     $unsatisfiedRequirementsErrors[] = [
         'title' => 'Wrong PHP Version!',
-        'description' => sprintf('You\'re using PHP version %s, and MODX requires version %s or higher.', PHP_VERSION, MODX_MINIMUM_REQUIRED_PHP_VERSION),
+        'description' => sprintf(
+            'You\'re using PHP version %s, and MODX requires version %s or higher.',
+            PHP_VERSION,
+            MODX_MINIMUM_REQUIRED_PHP_VERSION
+        ),
     ];
 }
-$unsatisfiedExtensionRequirements = array_filter(MODX_REQUIRED_EXTENSIONS, function ($extensionToValidate) {
-    $extensionVersion = phpversion($extensionToValidate);
-    $extensionIsInstalled = ($extensionVersion !== false);
-    return !$extensionIsInstalled;
-});
+$unsatisfiedExtensionRequirements = array_filter(
+    MODX_REQUIRED_EXTENSIONS,
+    function ($extensionToValidate) {
+        $extensionVersion = phpversion($extensionToValidate);
+        $extensionIsInstalled = ($extensionVersion !== false);
+        return !$extensionIsInstalled;
+    }
+);
 if (!empty($unsatisfiedExtensionRequirements)) {
     foreach ($unsatisfiedExtensionRequirements as $unsatisfiedExtensionRequirement) {
         $unsatisfiedRequirementsErrors[] = [
             'title' => sprintf('MODX requires the PHP %s extension', $unsatisfiedExtensionRequirement),
-            'description' => sprintf('You\'re PHP configuration at version %s does not appear to have this extension enabled.', PHP_VERSION),
+            'description' => sprintf(
+                'You\'re PHP configuration at version %s does not appear to have this extension enabled.',
+                PHP_VERSION
+            ),
         ];
     }
 }
@@ -69,20 +83,23 @@ if (empty($phptz)) {
 $defaultTimezoneSet = date_default_timezone_get();
 if (!$defaultTimezoneSet) {
     $unsatisfiedRequirementsErrors[] = [
-        'description' => 'You must set the date.timezone setting in your php.ini (or have at least UTC in the list of supported timezones). Please do set it to a proper timezone before proceeding.',
+        'description' => 'You must set the date.timezone setting in your php.ini (or have at least UTC in the list of '
+            . 'supported timezones). Please do set it to a proper timezone before proceeding.',
     ];
 }
 /* Validate critical files */
 $setupCoreConfigFileUsable = is_readable(MODX_SETUP_PATH . 'includes/config.core.php');
 if (!$setupCoreConfigFileUsable) {
     $unsatisfiedRequirementsErrors[] = [
-        'description' => 'Make sure you have uploaded all of the setup/ files; your setup/includes/config.core.php file is missing.',
+        'description' => 'Make sure you have uploaded all of the setup/ files; your setup/includes/config.core.php file'
+            . ' is missing.',
     ];
 }
 $modInstallClassFileUsable = is_readable(MODX_SETUP_PATH . 'includes/modinstall.class.php');
 if (!$modInstallClassFileUsable) {
     $unsatisfiedRequirementsErrors[] = [
-        'description' => 'Make sure you have uploaded all of the setup/ files; your setup/includes/modinstall.class.php file is missing.',
+        'description' => 'Make sure you have uploaded all of the setup/ files; your setup/includes/modinstall.class.php'
+            . ' file is missing.',
     ];
 }
 /* Prevent setup if not all requirements are satisfied */
@@ -93,7 +110,11 @@ if (!empty($unsatisfiedRequirementsErrors)) {
     }
     echo 'MODX Setup cannot continue.' . PHP_EOL;
     foreach ($unsatisfiedRequirementsErrors as $unsatisfiedRequirementError) {
-        echo sprintf('%s %s' . PHP_EOL, $unsatisfiedRequirementError['title'] ?? '', $unsatisfiedRequirementError['description'] ?? '');
+        echo sprintf(
+            '%s %s' . PHP_EOL,
+            $unsatisfiedRequirementError['title'] ?? '',
+            $unsatisfiedRequirementError['description'] ?? ''
+        );
     }
     exit();
 }
@@ -111,7 +132,7 @@ if (MODX_SETUP_INTERFACE_IS_CLI) {
         define('MODX_CORE_PATH', $_REQUEST['core_path']);
     }
     if (!empty($_REQUEST['config_key'])) {
-        $_REQUEST['config_key'] = str_replace(['{','}',"'",'"','\$'], '', $_REQUEST['config_key']);
+        $_REQUEST['config_key'] = str_replace(['{', '}', "'", '"', '\$'], '', $_REQUEST['config_key']);
         define('MODX_CONFIG_KEY', $_REQUEST['config_key']);
     }
 }
