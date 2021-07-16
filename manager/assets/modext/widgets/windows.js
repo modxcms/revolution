@@ -161,11 +161,16 @@ MODx.window.DuplicateElement = function(config) {
 
     if (config.record.static === true) {
         flds.push({
-                xtype: 'textfield'
+                xtype: 'modx-combo-browser'
+                ,browserEl: 'modx-browser'
                 ,fieldLabel: _('static_file')
                 ,name: 'static_file'
+                ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
+                ,openTo: config.record.openTo || ''
                 ,id: 'modx-'+this.ident+'-static_file'
+                ,triggerClass: 'x-form-code-trigger'
                 ,anchor: '100%'
+                ,maxLength: 255
             }
         );
     }

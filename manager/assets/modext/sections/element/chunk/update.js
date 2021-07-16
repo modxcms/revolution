@@ -55,10 +55,14 @@ Ext.extend(MODx.page.UpdateChunk,MODx.Component, {
             ,type: 'chunk'
             ,name: _('duplicate_of',{name: this.record.name})
             ,source: this.record.source
+            ,openTo: this.record.openTo
             ,static: this.record.static
             ,static_file: this.record.static_file
             ,category: this.record.category
         };
+        if (MODx.config["static_elements_automate_" + rec.type + "s"] == 1) {
+            rec.static_file = MODx.getStaticElementsPath(rec.name, rec.category, rec.type + "s");
+        }
         var w = MODx.load({
             xtype: 'modx-window-element-duplicate'
             ,record: rec
