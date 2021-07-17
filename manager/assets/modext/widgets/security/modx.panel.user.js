@@ -126,7 +126,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,labelAlign: 'top' // prevent default class of x-form-label-left
             ,items: this.getGeneralFields(config)
         }];
-        if (config.user != 0) {
+        if (config.user != 0 && MODx.perm.user_settings) {
             f.push({
                 title: _('settings')
                 ,autoHeight: true

@@ -20,8 +20,10 @@
  * @subpackage processors.system.settings
  */
 class modSystemSettingsGetAreasProcessor extends modProcessor {
+    public $permission = 'settings';
+
     public function checkPermissions() {
-        return $this->modx->hasPermission('settings');
+        return $this->modx->hasPermission($this->permission);
     }
     public function getLanguageTopics() {
         return array('setting','namespace');
