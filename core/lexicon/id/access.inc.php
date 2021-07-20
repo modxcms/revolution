@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Akses ke konteks';
 $_lang['access_to_resource_groups'] = 'Akses ke sumber daya kelompok';
 $_lang['access_type_err_ns'] = 'Jenis sasaran atau id tidak ditentukan!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Otoritas';
 $_lang['authority_err_ns'] = 'Silakan tentukan peran minimum.';
 $_lang['category'] = 'Kategori';
