@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Добавить команды 
 $_lang['database_table_effectivesize'] = 'Реальный размер';
 $_lang['database_table_indexsize'] = 'Размер индекса';
 $_lang['database_table_overhead'] = 'Перерасход';
-$_lang['database_table_reserved'] = 'Зарезервировано';//sqlsrv
 $_lang['database_table_records'] = 'Записей';
 $_lang['database_table_tablename'] = 'Имя таблицы';
 $_lang['database_table_totalsize'] = 'Общий размер';
 $_lang['database_table_totals'] = 'Итого:';
-$_lang['database_table_unused'] = 'Не использовано';//sqlsrv
 $_lang['database_type'] = 'Тип базы данных';
 $_lang['database_version'] = 'Версия базы данных';
 $_lang['extjs_version'] = 'Версия <a href="http://extjs.com/" target="_blank">ExtJS</a>';
