@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Dostęp do kontekstów';
 $_lang['access_to_resource_groups'] = 'Dostęp do grup zasobów';
 $_lang['access_type_err_ns'] = 'Nie podano ID ani typu miejsca docelowego!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Autorytet';
 $_lang['authority_err_ns'] = 'Podaj minimalną rolę.';
 $_lang['category'] = 'Kategoria';
