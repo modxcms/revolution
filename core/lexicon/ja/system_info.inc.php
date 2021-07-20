@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'DROP文を生成';
 $_lang['database_table_effectivesize'] = '有効サイズ';
 $_lang['database_table_indexsize'] = 'インデックス';
 $_lang['database_table_overhead'] = 'オーバーヘッド';
-$_lang['database_table_reserved'] = '予約済み';//sqlsrv
 $_lang['database_table_records'] = '件数';
 $_lang['database_table_tablename'] = 'テーブル名';
 $_lang['database_table_totalsize'] = '合計サイズ';
 $_lang['database_table_totals'] = '総計:';
-$_lang['database_table_unused'] = '不使用';//sqlsrv
 $_lang['database_type'] = 'データベースの種類';
 $_lang['database_version'] = 'データベースのバージョン:';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> のバージョン';
