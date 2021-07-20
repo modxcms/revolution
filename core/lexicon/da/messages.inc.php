@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Brugergruppe';
 $_lang['filter_by_type'] = 'Filtrer efter type...';
 
 $_lang['message'] = 'Besked';
-$_lang['message_create'] = 'Opret besked';
-$_lang['message_new'] = 'Opret besked';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'Beskeden blev ikke fundet.';
