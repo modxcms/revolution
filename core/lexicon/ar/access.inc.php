@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'الوصول إلى السياقات';
 $_lang['access_to_resource_groups'] = 'الوصول إلى مجموعات المصادر';
 $_lang['access_type_err_ns'] = 'نمط الهدف أو المعرف غير محدد!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'السلطة';
 $_lang['authority_err_ns'] = 'الرجاء تحديد دور أصغري.';
 $_lang['category'] = 'الصنف';
