@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'Estás usando la versión [[+version]] de MySQL,
 $_lang['mysql_version_server_nf'] = 'MODX no pudo detectar la versión del servidor MySQL a través de mysql_get_server_info(). Por favor, comprueba manualmente que la versión del servidor MySQL es al menos 4.1.20 antes de continuar.';
 $_lang['mysql_version_server_start'] = 'Comprobando versión del servidor MySQL:';
 $_lang['mysql_version_success'] = '¡OK! Versión: [[+version]]';
-
-$_lang['sqlsrv_version_success'] = '¡OK!';
-$_lang['sqlsrv_version_client_success'] = '¡OK!';
