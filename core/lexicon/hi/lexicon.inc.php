@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'डुप्लिकेट';
 $_lang['entry'] = 'Entry';
-$_lang['entry_create'] = 'Create Entry';
 $_lang['entry_err_ae'] = 'Entry पहले से मौजूद है!';
 $_lang['entry_err_nf'] = 'Entry नहीं मिली।';
 $_lang['entry_err_ns'] = 'Entry निर्दिष्ट नहीं।';
