@@ -6,19 +6,19 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['configcheck_admin'] = 'Neem contact op met de beheerder en waarschuw hem over deze melding!';
-$_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post Context Setting is ingeschakeld buiten de `mgr` context';
+$_lang['configcheck_admin'] = 'Neem contact op met de systeembeheerder en waarschuw hem over deze melding!';
+$_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post Context Instelling is ingeschakeld buiten de `mgr` context';
 $_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'De allow_tags_in_post Context Setting is in deze installatie ingeschakeld buiten de "mgr" context. Tenzij de gebruikers van de website specifiek MODX tags, genummerde entities of HTML script tags via POST naar een of meerdere formulieren op de site moeten kunnen sturen is het sterk aan te raden deze instelling te deactiveren. Over het algemeen moet alleen de "mgr" context deze instelling gebruiken.';
-$_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post System Setting Ingeschakeld';
+$_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post Systeem Instelling Ingeschakeld';
 $_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'De allow_tags_in_post System Setting is in deze installatie ingeschakeld. Tenzij de gebruikers van de website specifiek MODX tags, genummerde entities of HTML script tags via POST naar een of meerdere formulieren op de site moeten kunnen sturen is het sterk aan te raden deze instelling te deactiveren. Indien deze instelling nodig is, kan dit het beste op context niveau worden ingeschakeld met Context Settings.';
 $_lang['configcheck_cache'] = 'cache map is niet schrijfbaar';
 $_lang['configcheck_cache_msg'] = 'MODX kan niet schrijven naar de cache map. MODX zal nog steeds functioneren als verwacht maar caching zal niet werken. Om dit op te lossen maak de /cache/ map schrijfbaar.';
 $_lang['configcheck_configinc'] = 'Configuratiebestand nog steeds schrijfbaar!';
-$_lang['configcheck_configinc_msg'] = 'De website is kwetsbaar voor hackers welke veel schade aan jouw website kunnen aanrichten. Stel jouw configuratiebestand in op alleen-lezen! Indien je niet de beheerder bent, neem dan contact met de beheerder op en waarschuw hem over deze melding. Het bestand kan worden gevonden in [[+path]]';
+$_lang['configcheck_configinc_msg'] = 'Je website is kwetsbaar voor hackers die veel schade kunnen aanrichten. Zorg ervoor dat je configuratiebestand op alleen-lezen is ingesteld! Als je niet de beheerder bent, neem dan contact op met een systeembeheerder en waarschuw hem over deze melding! Het bestand kan gevonden worden in [[+path]]';
 $_lang['configcheck_default_msg'] = 'Een onverwachte fout is opgetreden. Dit is toch wel een beetje apart.';
-$_lang['configcheck_errorpage_unavailable'] = 'De website\'s foutpagina is niet beschikbaar.';
+$_lang['configcheck_errorpage_unavailable'] = 'De foutpagina van je website is niet beschikbaar.';
 $_lang['configcheck_errorpage_unavailable_msg'] = 'Dit betekent dat jouw foutpagina niet bereikbaar is voor bezoekers of deze bestaat niet. Dit kan leiden tot een oneindige loop en veel fouten in logbestanden. Zorg ervoor dat de foutpagina publiekelijk toegankelijk is.';
-$_lang['configcheck_errorpage_unpublished'] = 'De site\'s foutpagina is niet gepubliceerd of bestaat niet.';
+$_lang['configcheck_errorpage_unpublished'] = 'De foutpagina van je website is niet gepubliceerd of bestaat niet.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Dit betekent dat jouw foutpagina niet bereikbaar is voor bezoekers. Publiceer de pagina of controleer of het is gekoppeld aan een bestaand document in jouw site structuur in het Systeem > Systeeminstellingen menu.';
 $_lang['configcheck_htaccess'] = 'Core map is toegankelijk op het web';
 $_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
