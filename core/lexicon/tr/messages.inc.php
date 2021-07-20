@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Kullanıcı Grubu';
 $_lang['filter_by_type'] = 'Türe göre filtrele...';
 
 $_lang['message'] = 'İleti';
-$_lang['message_create'] = 'Mesaj Oluştur';
-$_lang['message_new'] = 'Mesaj Oluştur';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'E-posta gönder';
 $_lang['message_err_nfs'] = 'Mesaj bulunamadı.';
