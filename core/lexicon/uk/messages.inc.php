@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Група користувачів';
 $_lang['filter_by_type'] = 'Фільтрувати за типом...';
 
 $_lang['message'] = 'Повідомлення';
-$_lang['message_create'] = 'Створити повідомлення';
-$_lang['message_new'] = 'Створити повідомлення';
 $_lang['message_remove_confirm'] = 'Ви впевнені, що хочете повністю видалити це повідомлення?';
 $_lang['message_send_email'] = 'Надіслати листа';
 $_lang['message_err_nfs'] = 'Повідомлення не знайдене.';
