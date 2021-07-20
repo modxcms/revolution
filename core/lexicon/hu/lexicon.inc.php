@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Kettőzés';
 $_lang['entry'] = 'Bejegyzés';
-$_lang['entry_create'] = 'Bejegyzés létrehozása';
 $_lang['entry_err_ae'] = 'A bejegyzés már létezik!';
 $_lang['entry_err_nf'] = 'Bejegyzés nem található.';
 $_lang['entry_err_ns'] = 'Bejegyzés nincs megadva.';
