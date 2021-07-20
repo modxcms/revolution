@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'إنشاء عبارة  DROP TABL
 $_lang['database_table_effectivesize'] = 'الحجم المؤثر';
 $_lang['database_table_indexsize'] = 'حجم الفهرس';
 $_lang['database_table_overhead'] = 'ترويسة عليا';
-$_lang['database_table_reserved'] = 'محجوزة';//sqlsrv
 $_lang['database_table_records'] = 'السجلات';
 $_lang['database_table_tablename'] = 'اسم الجدول';
 $_lang['database_table_totalsize'] = 'الحجم الكلي';
 $_lang['database_table_totals'] = 'المجموع:';
-$_lang['database_table_unused'] = 'غير مستخدم';//sqlsrv
 $_lang['database_type'] = 'نوع قاعدة البيانات';
 $_lang['database_version'] = 'نسخة قاعدة المعطيات';
 $_lang['extjs_version'] = 'نسخة <a href="http://extjs.com/" target="_blank">ExtJS</a>';
