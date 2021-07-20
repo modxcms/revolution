@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Достъп до Контексти';
 $_lang['access_to_resource_groups'] = 'Достъп до Групи Ресурси';
 $_lang['access_type_err_ns'] = 'Не е зададен вид на таргета или id!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Авторитет';
 $_lang['authority_err_ns'] = 'Моля задайте Минимална роля.';
 $_lang['category'] = 'Категория';
