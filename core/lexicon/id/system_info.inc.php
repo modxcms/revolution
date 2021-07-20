@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Membuat intruksi untuk menghapus
 $_lang['database_table_effectivesize'] = 'Ukuran yang efektif';
 $_lang['database_table_indexsize'] = 'Ukuran indeks';
 $_lang['database_table_overhead'] = 'Tidak cocok';
-$_lang['database_table_reserved'] = 'Milik';//sqlsrv
 $_lang['database_table_records'] = 'Baris';
 $_lang['database_table_tablename'] = 'Nama tabel';
 $_lang['database_table_totalsize'] = 'Ukuran total';
 $_lang['database_table_totals'] = 'Total:';
-$_lang['database_table_unused'] = 'Tidak terpakai';//sqlsrv
 $_lang['database_type'] = 'Tipe database';
 $_lang['database_version'] = 'Versi database';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank"> ExtJS</a> Versi';
