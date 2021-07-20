@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'टेबल्स ड्रॉ�
 $_lang['database_table_effectivesize'] = 'प्रभावी आकार';
 $_lang['database_table_indexsize'] = 'इंडेक्स आकार';
 $_lang['database_table_overhead'] = 'Overhead';
-$_lang['database_table_reserved'] = 'आरक्षित';//sqlsrv
 $_lang['database_table_records'] = 'रिकॉर्ड्स';
 $_lang['database_table_tablename'] = 'टेबल नाम';
 $_lang['database_table_totalsize'] = 'कुल आकार';
 $_lang['database_table_totals'] = 'Totals:';
-$_lang['database_table_unused'] = 'उपयोग नहीं किये गए';//sqlsrv
 $_lang['database_type'] = 'डेटाबेस प्रकार';
 $_lang['database_version'] = 'डेटाबेस version';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank"> ExtJS</a> version';
