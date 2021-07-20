@@ -99,7 +99,6 @@ $_lang['date'] = 'Datum';
 $_lang['datechanged'] = 'Datum veranderd';
 $_lang['db_header'] = 'Database tabellen';
 $_lang['db_info_mysql'] = 'Als een tabel overhead heeft, kun je de tabel optimaliseren door op de link in de overhead kolom te klikken.';
-$_lang['db_info_sqlsrv'] = 'Je kunt de tabel index herbouwen door te klikken op de link in de ongebruikte kolom.';
 $_lang['delete'] = 'Verwijder';
 $_lang['deleted'] = 'Verwijderd';
 $_lang['description'] = 'Omschrijving';
