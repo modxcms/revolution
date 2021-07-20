@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'Pełny relatywny adres URL dla tego zasobu z uwzg
 $_lang['resource_uri_override'] = 'Niezależny alias';
 $_lang['resource_uri_override_help'] = 'Jeżeli zaznaczone, alias do tego zasobu zostanie na sztywno zapisany z poniższą wartością.';
 $_lang['resource_with_id_not_found'] = 'Nie znaleziono dokumentu o id: %s!';
-$_lang['resource_view'] = 'Wyświetl';
 $_lang['show_sort_options'] = 'Pokaż opcje sortowania';
 $_lang['site_schedule'] = 'Kalendarz publikacji';
 $_lang['site_schedule_desc'] = 'Ta lista zawiera zasoby z zaplanowanymi datami rozpoczęcia i zakończenia publikacji. Możesz przełączyć wyświetlanie listy, używając przycisku.';
