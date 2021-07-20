@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'このリソースの完全な相対URLを指定�
 $_lang['resource_uri_override'] = 'URIを固定';
 $_lang['resource_uri_override_help'] = '有効にすると、下に表示されるテキストボックスに入れた値で、このリソースのURIを固定することができます。';
 $_lang['resource_with_id_not_found'] = 'リソースID %s が見つかりません。';
-$_lang['resource_view'] = 'プレビュー';
 $_lang['show_sort_options'] = 'ソートオプションの表示';
 $_lang['site_schedule'] = '公開スケジュールの一覧';
 $_lang['site_schedule_desc'] = 'ドキュメントの公開および公開終了スケジュールの一覧です。';

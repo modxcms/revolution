@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'MODXは、お使いのMySQLのバージョン([[
 $_lang['mysql_version_server_nf'] = 'mysql_get_server_info()関数を使ったMySQL serverのバージョン取得に失敗しました。セットアップを続行する前に、お使いのMySQL clientのバージョンが4.1.20以上である事を手動で確認してください。';
 $_lang['mysql_version_server_start'] = 'MySQL Serverのバージョンをチェック中:';
 $_lang['mysql_version_success'] = 'OK! MySQLの動作を確認: バージョン[[+version]]';
-
-$_lang['sqlsrv_version_success'] = '問題なし';
-$_lang['sqlsrv_version_client_success'] = '問題なし';

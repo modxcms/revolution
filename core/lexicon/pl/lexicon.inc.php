@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Utwórz duplikat';
 $_lang['entry'] = 'Wpis';
-$_lang['entry_create'] = 'Utwórz wpis';
 $_lang['entry_err_ae'] = 'Wpis już istnieje!';
 $_lang['entry_err_nf'] = 'Nie znaleziono wpisu.';
 $_lang['entry_err_ns'] = 'Nie określono wpisu.';

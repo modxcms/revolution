@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'Relatif URL penuh untuk sumber ini.';
 $_lang['resource_uri_override'] = 'Membekukan URI';
 $_lang['resource_uri_override_help'] = 'Memeriksa ini akan memungkinkan Anda untuk membekukan URI untuk sumber daya ini di nilai dalam textbox di bawah ini.';
 $_lang['resource_with_id_not_found'] = 'Sumber daya dengan ID %s tidak ditemukan!';
-$_lang['resource_view'] = 'Pemandangan';
 $_lang['show_sort_options'] = 'Tampilkan penyortiran pilihan';
 $_lang['site_schedule'] = 'Jadwal';
 $_lang['site_schedule_desc'] = 'Ini menunjukkan sumber daya saat ini yang dijadwalkan untuk ditayangkan atau tidak ditayangkan pada tanggal yang ditentukan. Anda dapat beralih tampilan yang aktif dengan mengeklik tombol toolbar.';

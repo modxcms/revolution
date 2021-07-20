@@ -99,7 +99,6 @@ $_lang['date'] = 'Date';
 $_lang['datechanged'] = 'Date de modification';
 $_lang['db_header'] = 'Tables de la base de données';
 $_lang['db_info_mysql'] = 'Si une table a un "dépassement", vous pouvez l\'optimiser en cliquant sur le lien dans la colonne dépassement.';
-$_lang['db_info_sqlsrv'] = 'Vous pouvez reconstruire un index de table en cliquant sur le lien de la colonne « inutilisé ».';
 $_lang['delete'] = 'Supprimer';
 $_lang['deleted'] = 'Supprimé';
 $_lang['description'] = 'Description';

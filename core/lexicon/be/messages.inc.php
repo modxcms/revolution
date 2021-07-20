@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Група карыстальнiкаў';
 $_lang['filter_by_type'] = 'Фільтр па тыпу...';
 
 $_lang['message'] = 'Паведамленне';
-$_lang['message_create'] = 'Стварыць паведамленне';
-$_lang['message_new'] = 'Стварыць паведамленне';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Даслаць еmail';
 $_lang['message_err_nfs'] = 'Паведамленне не знойдзена.';

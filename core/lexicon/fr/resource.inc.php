@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'L\'URL relative complète de cette ressource.';
 $_lang['resource_uri_override'] = 'URI fixe';
 $_lang['resource_uri_override_help'] = 'Activer l\'option vous permet de fixer l\'URI de cette ressource à la valeur indiquée dans le champ ci-dessous.';
 $_lang['resource_with_id_not_found'] = 'La ressource avec l\'ID %s est introuvable !';
-$_lang['resource_view'] = 'Voir';
 $_lang['show_sort_options'] = 'Voir les options du tri';
 $_lang['site_schedule'] = 'Calendrier';
 $_lang['site_schedule_desc'] = 'Ceci affiche les ressouces qui ont une date de publication et/ou une date de fin de publication. Vous pouvez activer/désactiver l\'affichage en cours en cliquant sur le bouton de la barre.';

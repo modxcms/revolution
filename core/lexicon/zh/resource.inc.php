@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = '此资源完全相对 URL。';
 $_lang['resource_uri_override'] = '冻结的 URI';
 $_lang['resource_uri_override_help'] = '选中将允许您冻结资源URI为下面的文本框中的值。';
 $_lang['resource_with_id_not_found'] = 'ID 为 %s 的资源未找到！';
-$_lang['resource_view'] = '查看';
 $_lang['show_sort_options'] = '显示排序选项';
 $_lang['site_schedule'] = '计划';
 $_lang['site_schedule_desc'] = '这里显示了在指定日期预定发布或取消发布的资源。您可以通过点击工具栏按钮切换当前视图。';

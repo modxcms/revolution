@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'La URL relativa completa para este Recurso.';
 $_lang['resource_uri_override'] = 'Congelar URI';
 $_lang['resource_uri_override_help'] = 'Si se activa, se congelará la URI para este recurso con el valor del cuadro de texto presente debajo.';
 $_lang['resource_with_id_not_found'] = '¡No se encontró el recurso con ID %s!';
-$_lang['resource_view'] = 'Vista';
 $_lang['show_sort_options'] = 'Mostrar Opciones de Ordenamiento';
 $_lang['site_schedule'] = 'Horario';
 $_lang['site_schedule_desc'] = 'Esto muestra los recursos que actualmente están programados para publicarse o despublicarse en fechas específicas. Se puede alternar la vista actual haciendo en el botón de la barra de herramientas.';

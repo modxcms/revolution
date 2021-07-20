@@ -99,7 +99,6 @@ $_lang['date'] = 'Datum';
 $_lang['datechanged'] = 'Datum geändert';
 $_lang['db_header'] = 'Datenbank-Tabellen';
 $_lang['db_info_mysql'] = 'Wenn eine Tabelle einen Overhead hat, können Sie sie optimieren, indem Sie auf den Link in der Spalte "Overhead" klicken.';
-$_lang['db_info_sqlsrv'] = 'Sie können den Index einer Tabelle neu erstellen lassen, indem Sie auf den Link in der Spalte "Ungenutzt" klicken.';
 $_lang['delete'] = 'Löschen';
 $_lang['deleted'] = 'Gelöscht';
 $_lang['description'] = 'Beschreibung';

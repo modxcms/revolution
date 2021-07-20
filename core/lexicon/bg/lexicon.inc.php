@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Дублирай';
 $_lang['entry'] = 'Запис';
-$_lang['entry_create'] = 'Създай запис';
 $_lang['entry_err_ae'] = 'Записа вече съществува!';
 $_lang['entry_err_nf'] = 'Не е намерен запис.';
 $_lang['entry_err_ns'] = 'Не е зададен запис.';

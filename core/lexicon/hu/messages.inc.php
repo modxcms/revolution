@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Felhasználói csoport';
 $_lang['filter_by_type'] = 'Szűrés típus szerint...';
 
 $_lang['message'] = 'Üzenet';
-$_lang['message_create'] = 'Üzenet létrehozása';
-$_lang['message_new'] = 'Üzenet létrehozása';
 $_lang['message_remove_confirm'] = 'Biztosan törli ezt az üzenetet teljes egészében?';
 $_lang['message_send_email'] = 'Email küldése';
 $_lang['message_err_nfs'] = 'Üzenet nem található.';

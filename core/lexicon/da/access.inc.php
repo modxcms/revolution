@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Adgang til kontekster';
 $_lang['access_to_resource_groups'] = 'Adgang til ressourcegrupper';
 $_lang['access_type_err_ns'] = 'Måltype eller -id er ikke angivet!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Autoritet';
 $_lang['authority_err_ns'] = 'Angiv venligst en minimumsrolle.';
 $_lang['category'] = 'Kategori';

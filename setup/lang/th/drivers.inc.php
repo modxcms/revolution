@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'คุณกำลังใช้งาน MySQL
 $_lang['mysql_version_server_nf'] = 'MODX ไม่สามารถตรวจสอบเวอร์ชันของ MySQL server ผ่านทาง mysql_get_server_info() ได้ กรุณาตรวจสอบเพื่อความมั่นใจเองว่าเวอร์ชัน MySQL server ของคุณนั้นอย่างน้อยเป็นเวอร์ชัน 4.1.2 ก่อนที่จะทำการติดตั้งต่อ';
 $_lang['mysql_version_server_start'] = 'กำลังตรวจสอบเวอร์ชันของ MySQL server:';
 $_lang['mysql_version_success'] = 'เรียบร้อย! กำลังทำงานบนเวอร์ชัน: [[+version]]';
-
-$_lang['sqlsrv_version_success'] = 'เรียบร้อย!';
-$_lang['sqlsrv_version_client_success'] = 'เรียบร้อย!';

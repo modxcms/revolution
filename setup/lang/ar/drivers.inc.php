@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'أنت تعمل على MySQL[[+version]]، وم�
 $_lang['mysql_version_server_nf'] = 'لم يستطع مودكس التعرف على إصدار مخدم MySQL الخاص بك عن طريق mysql_get_server_info(). يرجى التأكد يدوياً من أن إصدار مخدم MySQL الخاص بك هو 4.1.20 على الأقل قبل المتابعة.';
 $_lang['mysql_version_server_start'] = 'التحقق من إصدار مخدم MySQL:';
 $_lang['mysql_version_success'] = 'موافق! تشغيل: [[+version]]';
-
-$_lang['sqlsrv_version_success'] = 'موافق!';
-$_lang['sqlsrv_version_client_success'] = 'موافق!';

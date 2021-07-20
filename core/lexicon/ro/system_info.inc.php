@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Generează comenzi DROP TABLE.';
 $_lang['database_table_effectivesize'] = 'Effective size';
 $_lang['database_table_indexsize'] = 'Index size';
 $_lang['database_table_overhead'] = 'Overhead';
-$_lang['database_table_reserved'] = 'Reserved';//sqlsrv
 $_lang['database_table_records'] = 'Înregistrări';
 $_lang['database_table_tablename'] = 'Table name';
 $_lang['database_table_totalsize'] = 'Total size';
 $_lang['database_table_totals'] = 'Totals:';
-$_lang['database_table_unused'] = 'Unused';//sqlsrv
 $_lang['database_type'] = 'Database type';
 $_lang['database_version'] = 'Database version';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Version';

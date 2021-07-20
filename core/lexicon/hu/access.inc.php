@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Médiaforrás-hozzáférés szerkesztése';
 $_lang['access_to_contexts'] = 'Hozzáférés környezetekhez';
 $_lang['access_to_resource_groups'] = 'Hozzáférés erőforráscsoportokhoz';
 $_lang['access_type_err_ns'] = 'Cél típusa vagy azonosítója nincs megadva!';
-$_lang['acl_add'] = 'Hozzáférési szabály létrehozása';
 $_lang['authority'] = 'Felhatalmazás';
 $_lang['authority_err_ns'] = 'Kérjük, adjon meg egy legkisebb szerepkört.';
 $_lang['category'] = 'Kategória';

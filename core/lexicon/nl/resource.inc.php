@@ -147,7 +147,6 @@ $_lang['resource_uri_override_help'] = 'Vink aan om de URL van de pagina handmat
 
 Deze aanvinken zal toestaan om de waarde in de tekstbox hieronder voor dit document vast te zetten.';
 $_lang['resource_with_id_not_found'] = 'Document met ID %s niet gevonden!';
-$_lang['resource_view'] = 'Bekijk';
 $_lang['show_sort_options'] = 'Toon sorteer opties';
 $_lang['site_schedule'] = 'Rooster';
 $_lang['site_schedule_desc'] = 'Dit toont huidige document welke gepubliceerd of gedepubliceerd gaan worden op specifieke datums. Je kunt switchen van de huidige weergave door te klikken op de werkbalkknop.';

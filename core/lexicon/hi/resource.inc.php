@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'इस Resource के लिए पूर्ण 
 $_lang['resource_uri_override'] = 'Freeze URI';
 $_lang['resource_uri_override_help'] = 'यह जाँच आप नीचे दिए गए textbox में मूल्य पर इस Resource के लिए URI फ्रीज करने की अनुमति देगा।';
 $_lang['resource_with_id_not_found'] = 'Resource ID %s के साथ नहीं मिला !';
-$_lang['resource_view'] = 'देखें';
 $_lang['show_sort_options'] = 'Sorting विकल्प दिखाएँ';
 $_lang['site_schedule'] = 'अनुसूची';
 $_lang['site_schedule_desc'] = 'यह वर्तमान resources है कि प्रकाशित करने के लिए अनुसूचित या निर्दिष्ट तिथियाँ पर अप्रकाशित हैं दिखाता है। आप toolbar बटन पर क्लिक करके वर्तमान दृश्य टॉगल कर सकते हैं।';

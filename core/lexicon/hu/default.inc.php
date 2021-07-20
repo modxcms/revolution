@@ -99,7 +99,6 @@ $_lang['date'] = 'Dátum';
 $_lang['datechanged'] = 'Módosítás dátuma';
 $_lang['db_header'] = 'Adatbázis táblák';
 $_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by clicking on the link in the Overhead column.';
-$_lang['db_info_sqlsrv'] = 'You may rebuild a table\'s index by clicking on the link in the Unused column.';
 $_lang['delete'] = 'Törlés';
 $_lang['deleted'] = 'Törölve';
 $_lang['description'] = 'Leírás';

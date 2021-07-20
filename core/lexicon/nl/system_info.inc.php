@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Genereer DROP TABLE statements.'
 $_lang['database_table_effectivesize'] = 'Effectieve grootte';
 $_lang['database_table_indexsize'] = 'Index grootte';
 $_lang['database_table_overhead'] = 'Overhad';
-$_lang['database_table_reserved'] = 'Gereserveerd';//sqlsrv
 $_lang['database_table_records'] = 'Records';
 $_lang['database_table_tablename'] = 'Tabelnaam';
 $_lang['database_table_totalsize'] = 'Totale grootte';
 $_lang['database_table_totals'] = 'Totalen:';
-$_lang['database_table_unused'] = 'Ongebruikt';//sqlsrv
 $_lang['database_type'] = 'Databasetype';
 $_lang['database_version'] = 'Database versie';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Versie';

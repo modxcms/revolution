@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'A MySQL [[+version]] fut, és a MODX Revolution 
 $_lang['mysql_version_server_nf'] = 'A MODX nem tudta felismerni a MySQL kiszolgáló verzióját a mysql_get_server_info() meghívásával. Kérjük, hogy továbblépés előtt győződjön meg róla, hogy a MySQL kiszolgáló verziója legalább 4.1.20.';
 $_lang['mysql_version_server_start'] = 'MySQL kiszolgáló verziójának ellenőrzése:';
 $_lang['mysql_version_success'] = 'Rendben! Fut a [[+version]] verzió';
-
-$_lang['sqlsrv_version_success'] = 'Rendben!';
-$_lang['sqlsrv_version_client_success'] = 'Rendben!';

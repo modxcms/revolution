@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Online uživatelé';
 $_lang['onlineusers_user'] = 'Uživatel';
 $_lang['onlineusers_userid'] = 'ID uživatele';
 
-$_lang['updates_sort'] = 'Řazení';
+$_lang['updates_type'] = 'Typ';
 $_lang['updates_status'] = 'Stav';
 $_lang['updates_action'] = 'Akce';
 $_lang['updates_available'] = 'Jsou dostupné aktualizace';

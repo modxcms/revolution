@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Acceso a Contextos';
 $_lang['access_to_resource_groups'] = 'Acceso a Grupos de Recursos';
 $_lang['access_type_err_ns'] = '¡Tipo de objetivo o ID no especificado!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Autoridad';
 $_lang['authority_err_ns'] = 'Por favor especifica un Rol Mínimo.';
 $_lang['category'] = 'Categoría';

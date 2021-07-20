@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = '在线用户';
 $_lang['onlineusers_user'] = '用户';
 $_lang['onlineusers_userid'] = '用户ID';
 
-$_lang['updates_sort'] = '排序';
+$_lang['updates_type'] = 'Type';
 $_lang['updates_status'] = '状态';
 $_lang['updates_action'] = '行为';
 $_lang['updates_available'] = '更新可用';

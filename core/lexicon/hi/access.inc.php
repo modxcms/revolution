@@ -67,7 +67,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Contexts तक पहुंच';
 $_lang['access_to_resource_groups'] = 'Resource Groups के लिए पहुँच';
 $_lang['access_type_err_ns'] = 'लक्ष्य प्रकार या id निर्दिष्ट नहीं किया गया!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'अधिकार';
 $_lang['authority_err_ns'] = 'कृपया एक न्यूनतम भूमिका निर्दिष्ट करें।';
 $_lang['category'] = 'Category';

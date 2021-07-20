@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'DROP TABLE ifadeleri oluşturun.
 $_lang['database_table_effectivesize'] = 'Etkili boyut';
 $_lang['database_table_indexsize'] = 'İndeks boyutu';
 $_lang['database_table_overhead'] = 'Ek Yük';
-$_lang['database_table_reserved'] = 'Ayrılmış';//sqlsrv
 $_lang['database_table_records'] = 'Kayıtlar';
 $_lang['database_table_tablename'] = 'Tablo ismi';
 $_lang['database_table_totalsize'] = 'Tablo boyutu';
 $_lang['database_table_totals'] = 'Toplamları:';
-$_lang['database_table_unused'] = 'Kullanılmamış';//sqlsrv
 $_lang['database_type'] = 'Veritabanı türü';
 $_lang['database_version'] = 'Veritabanı versiyonu';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Versiyon';

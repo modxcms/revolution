@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Kasutaja Grupp';
 $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'Kiri';
-$_lang['message_create'] = 'Loo Kiri';
-$_lang['message_new'] = 'Loo Kiri';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'Kirja ei leitud.';

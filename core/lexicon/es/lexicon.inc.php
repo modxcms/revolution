@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Duplicar';
 $_lang['entry'] = 'Entrada';
-$_lang['entry_create'] = 'Crear entrada';
 $_lang['entry_err_ae'] = '¡La entrada ya existe!';
 $_lang['entry_err_nf'] = 'Entrada no encontrada.';
 $_lang['entry_err_ns'] = 'Entrada no especificada.';

@@ -99,7 +99,6 @@ $_lang['date'] = 'Kuupäev';
 $_lang['datechanged'] = 'Kuupäev muudetud';
 $_lang['db_header'] = 'Andmebaasi tabelid';
 $_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by clicking on the link in the Overhead column.';
-$_lang['db_info_sqlsrv'] = 'You may rebuild a table\'s index by clicking on the link in the Unused column.';
 $_lang['delete'] = 'Kustuta';
 $_lang['deleted'] = 'kustutatud';
 $_lang['description'] = 'Kirjeldus';

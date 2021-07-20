@@ -8,9 +8,7 @@
  */
 $_lang['context'] = 'İçerik';
 $_lang['context_add'] = 'İçerik Ekle';
-$_lang['context_create'] = 'İçerik Oluştur';
 $_lang['context_data'] = 'İçerik Verisi';
-$_lang['context_duplicate'] = 'İçeriği Yinele';
 $_lang['context_err_ae'] = 'Bu isimde bir içerik zaten mevcut.';
 $_lang['context_err_create'] = 'İçerik oluşturulurken bir hata meydana geldi.';
 $_lang['context_err_duplicate'] = 'İçerik yineleme denemesi sırasında bir hata meydana geldi.';
@@ -24,12 +22,8 @@ $_lang['context_err_save'] = 'İçeriği kaydederken bir hata meydana geldi.';
 $_lang['context_id'] = 'Ctx Kimliği';
 $_lang['context_key'] = 'İçerik anahtarı';
 $_lang['context_management_message'] = 'Site İçeriklerini Yönet.';
-$_lang['context_refresh'] = 'İçeriği Yenile';
-$_lang['context_remove'] = 'İçeriği Sil';
-$_lang['context_remove_confirm'] = 'Are you sure you want to delete this Context? This is permanent and irreversible.';
 $_lang['context_settings'] = 'İçerik Ayarları';
 $_lang['context_settings_desc'] = '
 Burada, bu Bağlama özel ayarları belirleyebilirsiniz. Bağlam ayarları, aynı anahtarla tüm Sistem Ayarlarını geçersiz kılar. <b> Her bir ayara [[++ tuş]] yer tutucusu aracılığıyla erişilebilecektir. </b>';
-$_lang['context_update'] = 'Edit Context';
 $_lang['context_with_key_not_found'] = 'Anahtar %s içeriği bulunamadı!';
 $_lang['contexts'] = 'İçerik';

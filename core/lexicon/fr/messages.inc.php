@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Groupe d\'utilisateurs';
 $_lang['filter_by_type'] = 'Filtrer par type...';
 
 $_lang['message'] = 'Message';
-$_lang['message_create'] = 'Composer un Message';
-$_lang['message_new'] = 'Composer un Message';
 $_lang['message_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer complètement ce message ?';
 $_lang['message_send_email'] = 'Envoyer Email';
 $_lang['message_err_nfs'] = 'Message non trouvé.';

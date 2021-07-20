@@ -99,7 +99,6 @@ $_lang['date'] = 'Tarih';
 $_lang['datechanged'] = 'Tarih değiştirildi';
 $_lang['db_header'] = 'Veritabanı tabloları';
 $_lang['db_info_mysql'] = 'Bir tabloya ek yük varsa, ek yükü sütunundaki bağlantıyı tıklayarak tabloyu optimize edebilirsiniz.';
-$_lang['db_info_sqlsrv'] = 'Kullanılmayan sütundaki bağlantıyı tıklayarak bir tablonun dizinini yeniden oluşturabilirsiniz.';
 $_lang['delete'] = 'Silmek';
 $_lang['deleted'] = 'Silindi';
 $_lang['description'] = 'Açıklama';

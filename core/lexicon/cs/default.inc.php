@@ -99,7 +99,6 @@ $_lang['date'] = 'Datum';
 $_lang['datechanged'] = 'Změněno';
 $_lang['db_header'] = 'Databázové tabulky';
 $_lang['db_info_mysql'] = 'Pokud je tabulka neoptimalizovaná, můžete ji optimalizovat kliknutím na hodnotu ve sloupečku "Navíc".';
-$_lang['db_info_sqlsrv'] = 'Index tabulky lze zregenoravat kliknutím na odkaz v nevyužitém sloupci.';
 $_lang['delete'] = 'Odstranit';
 $_lang['deleted'] = 'Odstraněno';
 $_lang['description'] = 'Popis';

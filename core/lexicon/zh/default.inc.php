@@ -99,7 +99,6 @@ $_lang['date'] = '日期';
 $_lang['datechanged'] = '日期已更改';
 $_lang['db_header'] = '数据库表';
 $_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by clicking on the link in the Overhead column.';
-$_lang['db_info_sqlsrv'] = '可以通过单击未使用列中的链接来重建表索引。';
 $_lang['delete'] = '删除';
 $_lang['deleted'] = '已删除';
 $_lang['description'] = '描述';
