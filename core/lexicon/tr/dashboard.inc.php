@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Çevrimiçi kullanıcılar';
 $_lang['onlineusers_user'] = 'Kullanıcı';
 $_lang['onlineusers_userid'] = 'Kullanıcı Kimliği';
 
-$_lang['updates_sort'] = 'Sort';
+$_lang['updates_type'] = 'Type';
 $_lang['updates_status'] = 'Durum';
 $_lang['updates_action'] = 'Eylem';
 $_lang['updates_available'] = 'Updates available';
