@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = '复制';
 $_lang['entry'] = '条目';
-$_lang['entry_create'] = '创建条目';
 $_lang['entry_err_ae'] = '条目已经存在！';
 $_lang['entry_err_nf'] = '条目未找到。';
 $_lang['entry_err_ns'] = '未指定的条目。';
