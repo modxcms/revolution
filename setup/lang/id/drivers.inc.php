@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'Anda menjalankan pada MySQL [[+version]], dan MO
 $_lang['mysql_version_server_nf'] = 'MODX tidak bisa mendeteksi server MySQL versi melalui mysql_get_server_info(). Silakan secara manual membuat yakin bahwa server MySQL versi setidaknya 4.1.20 sebelum melanjutkan.';
 $_lang['mysql_version_server_start'] = 'Memeriksa server MySQL versi:';
 $_lang['mysql_version_success'] = 'Oke! Menjalankan: [[+version]]';
-
-$_lang['sqlsrv_version_success'] = 'OK!';
-$_lang['sqlsrv_version_client_success'] = 'OK!';
