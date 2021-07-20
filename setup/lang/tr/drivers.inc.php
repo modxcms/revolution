@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'MySQL[[+version]] üzerinde çalışıyorsunuz, 
 $_lang['mysql_version_server_nf'] = 'MODX mysql_sucunu_bilgisi_al_bilgi() üzerinden MySQL sunucu sürümünü algılayamadı. Lütfen devam etmeden önce el ile MySQL sunucu sürümünün en az 4.1.20 olduğundan emin olun.';
 $_lang['mysql_version_server_start'] = 'MySQL sunucu sürümü kontrol ediliyor:';
 $_lang['mysql_version_success'] = 'Tamam! Çalışıyor: [[+version]]';
-
-$_lang['sqlsrv_version_success'] = 'TAMAM!';
-$_lang['sqlsrv_version_client_success'] = 'TAMAM!';
