@@ -12,7 +12,6 @@ $_lang['system_event'] = 'Rendszeresemény';
 $_lang['system_events'] = 'Rendszeresemények';
 $_lang['system_events.desc'] = 'A rendszeresemények olyan események a MODX-ben, amelyekhez a beépülők be vannak jegyezve. A MODX futása indítja el őket, hogy a beépülők kapcsolódhassanak a MODX kódjához, és egyedi működéseket adjanak hozzá az alapkód módosítása nélkül. Itt adhat hozzá saját eseményeket is a saját fejlesztéséhez. A rendszereseményeket nem törölheti, csak a sajátjait.';
 $_lang['system_events.search_by_name'] = 'Keresés esemény neve szerint';
-$_lang['system_events.create'] = 'Esemény létrehozása';
 $_lang['system_events.name_desc'] = 'Az esemény neve, amit &dollar;modx->invokeEvent(név, tulajdonságok) formában hívhat meg.';
 $_lang['system_events.groupname'] = 'Csoport';
 $_lang['system_events.groupname_desc'] = 'A csoport neve, ahová az esemény tartozik. Válasszon egy meglevőt, vagy írjon be egy új csoportnevet.';
@@ -27,7 +26,6 @@ $_lang['system_events.service_4'] = 'Gyorsítótár-szolgáltatási események';
 $_lang['system_events.service_5'] = 'Sablonszolgáltatási események';
 $_lang['system_events.service_6'] = 'Felhasználó által létrehozott események';
 
-$_lang['system_events.remove'] = 'Esemény törlése';
 $_lang['system_events.remove_confirm'] = 'Biztosan törli a <b>[[+name]]</b> eseményt? A törlés végleges!';
 
 $_lang['system_events_err_ns'] = 'A rendszeresemény neve nincs megadva.';
