@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'URL แบบสัมพัทธ์สำหร
 $_lang['resource_uri_override'] = 'Freeze URI';
 $_lang['resource_uri_override_help'] = 'การตรวจสอบนี้จะอนุญาตให้คุณตรึง URI สำหรับรีซอร์สนี้ทเป็นค่าในกล่องข้อความด้านล่างนี้';
 $_lang['resource_with_id_not_found'] = 'ไม่พบรีซอร์สไอดี %s!';
-$_lang['resource_view'] = 'ดู';
 $_lang['show_sort_options'] = 'แสดงตัวเลือกการจัดเรียง';
 $_lang['site_schedule'] = 'กำหนดการ';
 $_lang['site_schedule_desc'] = 'นี่จะแสดงรีซอร์สในตอนนี้ที่มีกำหนดการเผยแพร่หรือยกเลิกการเผยแพร่ในวันเวลาที่ระบุ คุณสามารถสลับมุมมองโดยการคลิ๊กบนปุ่มทูลบาร์';
