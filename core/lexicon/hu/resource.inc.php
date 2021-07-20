@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'The full relative URL for this Resource.';
 $_lang['resource_uri_override'] = 'Freeze URI';
 $_lang['resource_uri_override_help'] = 'Checking this will allow you to freeze the URI for this Resource at the value in the textbox below.';
 $_lang['resource_with_id_not_found'] = 'Resource with ID %s not found!';
-$_lang['resource_view'] = 'Megtekintés';
 $_lang['show_sort_options'] = 'Rendezési beállítások mutatása';
 $_lang['site_schedule'] = 'Ütemezés';
 $_lang['site_schedule_desc'] = 'This shows the current resources that are scheduled to publish or unpublished on specified dates. You may toggle the current view by clicking on the toolbar button.';
