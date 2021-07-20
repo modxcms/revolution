@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'เนมสเปซ';
-$_lang['namespace_create'] = 'สร้างเนมสเปซ';
 $_lang['namespace_err_create'] = 'เกิดข้อผิดพลาดขณะที่พยายามสร้างเนมสเปซ';
 $_lang['namespace_err_nf'] = 'ไม่พบเนมสเปซ';
 $_lang['namespace_err_nfs'] = 'ไม่พบเนมสเปซที่ชื่อ: %s';
@@ -19,10 +18,8 @@ $_lang['namespace_assets_path_desc'] = 'Specify an absolute path to the assets f
 $_lang['namespace_name_desc'] = 'Specify a name for the Namespace here.';
 $_lang['namespace_path'] = 'Core Path';
 $_lang['namespace_path_desc'] = 'ระบุชื่อเส้นทางที่สมบูรณ์: (ตัวอย่าง: MODX_CORE_PATH . "assets/democomponent")';
-$_lang['namespace_remove'] = 'ลบเนมสเปซ';
 $_lang['namespace_remove_confirm'] = 'คุณแน่ใจว่าต้องการลบเนมสเปซนี้และเนื้อหาทั้งหมดที่เกี่ยวข้องหรือไม่?';
 $_lang['namespace_remove_multiple'] = 'ลบหลายเนมสเปส';
 $_lang['namespace_remove_multiple_confirm'] = 'คุณแน่ใจว่าต้องการลบเนมสเปซเหล่านี้และเนื้อหาทั้งหมดที่เกี่ยวข้องหรือไม่?';
-$_lang['namespace_update'] = 'Edit Namespace';
 $_lang['namespaces'] = 'เนมสเปซ';
 $_lang['namespaces_desc'] = 'เนมสเปซเป็นตัวระบุที่อยู่สำหรับแพคเกจและส่วนประกอบที่ร่วมกันลงทะเบียนส่วนต่างๆเข้าด้วยกัน';
