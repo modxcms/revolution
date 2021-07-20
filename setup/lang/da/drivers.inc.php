@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'Du kører på MySQL [[+version]], og MODX Revolu
 $_lang['mysql_version_server_nf'] = 'MODX kunne ikke registrere din MySQL serverversion via mysql_get_server_info(). Sørg venligst manuelt for at din MySQL serverversion er mindst 4.1.20 inden du fortsætter.';
 $_lang['mysql_version_server_start'] = 'Kontrollerer MySQL serverversion:';
 $_lang['mysql_version_success'] = 'OK! Kører: [[+version]]';
-
-$_lang['sqlsrv_version_success'] = 'OK!';
-$_lang['sqlsrv_version_client_success'] = 'OK!';
