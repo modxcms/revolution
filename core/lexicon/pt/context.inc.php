@@ -8,9 +8,7 @@
  */
 $_lang['context'] = 'Contexto';
 $_lang['context_add'] = 'Adicionar Contexto';
-$_lang['context_create'] = 'Criar Contexto';
 $_lang['context_data'] = 'Dados de Contexto';
-$_lang['context_duplicate'] = 'Duplicar Contexto';
 $_lang['context_err_ae'] = 'Um Contexto com este nome já existe.';
 $_lang['context_err_create'] = 'Um erro ocorreu na tentativa de criar o Contexto.';
 $_lang['context_err_duplicate'] = 'Um erro ocorreu na tentativa de duplicar o Contexto.';
@@ -24,11 +22,7 @@ $_lang['context_err_save'] = 'Um erro ocorreu enquanto tentava salvar o Contexto
 $_lang['context_id'] = 'ID Contexto';
 $_lang['context_key'] = 'Chave Contexto';
 $_lang['context_management_message'] = 'Gerenciar Contextos do Site.';
-$_lang['context_refresh'] = 'Atualizar Contexto';
-$_lang['context_remove'] = 'Remover Contexto';
-$_lang['context_remove_confirm'] = 'Are you sure you want to delete this Context? This is permanent and irreversible.';
 $_lang['context_settings'] = 'Configurações de Contexto';
 $_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
-$_lang['context_update'] = 'Edit Context';
 $_lang['context_with_key_not_found'] = 'Contexto com chave %s não encontradop!';
 $_lang['contexts'] = 'Contextos';
