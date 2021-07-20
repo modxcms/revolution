@@ -99,7 +99,6 @@ $_lang['date'] = 'Fecha';
 $_lang['datechanged'] = 'Fecha cambiada';
 $_lang['db_header'] = 'Tablas de Base de Datos';
 $_lang['db_info_mysql'] = 'Si una tabla tiene un problema, puedes optimizarla haciendo click en el enlace de la columna "Residuos".';
-$_lang['db_info_sqlsrv'] = 'Puedes reconstruir el índice de una tabla haciendo clic en el enlace de la columna "No Usada".';
 $_lang['delete'] = 'Borrar';
 $_lang['deleted'] = 'Borrado';
 $_lang['description'] = 'Descripción';
