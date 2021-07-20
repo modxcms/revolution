@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Дадаць каманды DROP
 $_lang['database_table_effectivesize'] = 'Сапраўдны памер';
 $_lang['database_table_indexsize'] = 'Памер індэкса';
 $_lang['database_table_overhead'] = 'Перавыдатак';
-$_lang['database_table_reserved'] = 'Зарэзервавана';//sqlsrv
 $_lang['database_table_records'] = 'Запісаў';
 $_lang['database_table_tablename'] = 'Iмя табліцы';
 $_lang['database_table_totalsize'] = 'Агульны памер';
 $_lang['database_table_totals'] = 'Усяго:';
-$_lang['database_table_unused'] = 'Не выкарыстана';//sqlsrv
 $_lang['database_type'] = 'Тып базы дадзеных';
 $_lang['database_version'] = 'Версія базы дадзеных';
 $_lang['extjs_version'] = 'Версiя <a href="http://extjs.com/" target="_blank">ExtJS</a>';
