@@ -99,7 +99,6 @@ $_lang['date'] = 'Data';
 $_lang['datechanged'] = 'Data modifica';
 $_lang['db_header'] = 'Tabelle database';
 $_lang['db_info_mysql'] = 'Se una tabella presenta un sovraccarico, puoi ottimizzarla cliccando sul link nella colonna \'sovraccarico\' (overhead).';
-$_lang['db_info_sqlsrv'] = 'Puoi ricostruire un indice di tabella cliccando sul link nella colonna Non usato (unused).';
 $_lang['delete'] = 'Elimina';
 $_lang['deleted'] = 'Eliminato';
 $_lang['description'] = 'Descrizione';
