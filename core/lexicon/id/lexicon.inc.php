@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'DuplikaSI';
 $_lang['entry'] = 'Catatan';
-$_lang['entry_create'] = 'Membuat entri';
 $_lang['entry_err_ae'] = 'Entri sudah ada!';
 $_lang['entry_err_nf'] = 'Entri tidak ditemukan.';
 $_lang['entry_err_ns'] = 'Entri yang tidak ditentukan.';
