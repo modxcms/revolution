@@ -23,6 +23,9 @@ include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_default_media_sourc
 include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_upload_files-woff2.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-params.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-output-params.php';
+include dirname(__DIR__) . '/common/3.0.0-update-base_help_url.php';
+include dirname(__DIR__) . '/common/3.0.0-template-preview.php';
+include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_base_help_url.php';
 include dirname(__DIR__) . '/common/3.0.0-update-tvs-list-legacy.php';
 include dirname(__DIR__) . '/common/3.0.0-update-sys-setting_base_help_url.php';
 include dirname(__DIR__) . '/common/3.0.0-update-principal_targets.php';

@@ -1018,7 +1018,16 @@ $settings['manager_week_start']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
-$settings['modx_browser_tree_hide_files'] = $xpdo->newObject(modSystemSetting::class);
+$settings['enable_template_picker_in_tree']= $xpdo->newObject(modSystemSetting::class);
+$settings['enable_template_picker_in_tree']->fromArray([
+    'key' => 'enable_template_picker_in_tree',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['modx_browser_tree_hide_files']= $xpdo->newObject(modSystemSetting::class);
 $settings['modx_browser_tree_hide_files']->fromArray([
   'key' => 'modx_browser_tree_hide_files',
   'value' => true,

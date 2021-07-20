@@ -1058,6 +1058,7 @@
         <field key="output_properties" dbtype="nvarchar" precision="max" phptype="array" null="false" default="" />
         <field key="static" dbtype="bit" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
+        <field key="preview_file" dbtype="nvarchar" precision="255" phptype="string" null="false" default="" />
 
         <alias key="content" field="default_text" />
 
