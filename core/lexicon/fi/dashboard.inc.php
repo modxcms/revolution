@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Online käyttäjät';
 $_lang['onlineusers_user'] = 'Käyttäjä';
 $_lang['onlineusers_userid'] = 'Käyttäjän ID';
 
-$_lang['updates_sort'] = 'Sort';
+$_lang['updates_type'] = 'Type';
 $_lang['updates_status'] = 'Tila';
 $_lang['updates_action'] = 'Toiminto';
 $_lang['updates_available'] = 'Updates available';
