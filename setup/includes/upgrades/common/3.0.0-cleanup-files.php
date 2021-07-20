@@ -134,6 +134,19 @@ $cleanup = [
         'model/phpthumb/',
         'model/smarty/',
 
+        // Remove sqlsrv
+        'model/schema/modx.registry.db.sqlsrv.schema.xml',
+        'model/schema/modx.sources.sqlsrv.schema.xml',
+        'model/schema/modx.sqlsrv.schema.xml',
+        'model/schema/modx.transport.sqlsrv.schema.xml',
+        'src/Revolution/Processors/System/DatabaseTable/sqlsrv/',
+        'src/Revolution/Registry/Db/sqlsrv/',
+        'src/Revolution/Sources/sqlsrv/',
+        'src/Revolution/Sources/metadata.sqlsrv.php',
+        'src/Revolution/Transport/sqlsrv/',
+        'src/Revolution/sqlsrv/',
+        'src/Revolution/metadata.sqlsrv.php',
+
         // were present in alpha1, but removed in alpha2
         'src/Revolution/modAction.php',
         'src/Revolution/modAccessAction.php',

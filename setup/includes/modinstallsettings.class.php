@@ -38,10 +38,6 @@ class modInstallSettings {
     protected function rebuildDSN() {
         if (array_key_exists('database_type', $this->settings)) {
             switch ($this->settings['database_type']) {
-                case 'sqlsrv':
-                    $database_dsn = "{$this->settings['database_type']}:server={$this->settings['database_server']};database={$this->settings['dbase']}";
-                    $server_dsn = "{$this->settings['database_type']}:server={$this->settings['database_server']}";
-                    break;
                 case 'mysql':
                     $server = explode(':', $this->settings['database_server']);
                     $port = !empty($server[1]) ? "port={$server[1]};" : '';

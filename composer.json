@@ -95,15 +95,8 @@
             "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.sources.mysql.schema.xml core/src/",
             "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.transport.mysql.schema.xml core/src/"
         ],
-        "parse-schema-sqlsrv": [
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.sqlsrv.schema.xml core/src/",
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.registry.db.sqlsrv.schema.xml core/src/",
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.sources.sqlsrv.schema.xml core/src/",
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.transport.sqlsrv.schema.xml core/src/"
-        ],
         "parse-schema": [
-            "composer run-script parse-schema-mysql",
-            "composer run-script parse-schema-sqlsrv"
+          "composer run-script parse-schema-mysql"
         ]
     },
     "scripts-descriptions": {
