@@ -99,7 +99,6 @@ $_lang['date'] = 'Tanggal';
 $_lang['datechanged'] = 'Tanggal yang berubah';
 $_lang['db_header'] = 'Tabel database';
 $_lang['db_info_mysql'] = 'Jika tabel memiliki overhead, Anda dapat mengoptimalkan itu dengan mengklik pada link di kolom Overhead.';
-$_lang['db_info_sqlsrv'] = 'Anda dapat membangun kembali tabel indeks dengan mengklik pada link di kolom yang tidak terpakai.';
 $_lang['delete'] = 'Hapus';
 $_lang['deleted'] = 'Dihapus';
 $_lang['description'] = 'Deskripsi';
