@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Bağlamlara Eişim';
 $_lang['access_to_resource_groups'] = 'Kaynak Gruplarına erişim';
 $_lang['access_type_err_ns'] = 'Hedef türü veya kimliği belirtilmedi!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Yetki';
 $_lang['authority_err_ns'] = 'Lütfen bir Minimum Rolü belirtin.';
 $_lang['category'] = 'Kategori';
