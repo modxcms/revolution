@@ -116,6 +116,7 @@
 }
 
 .x-grid3-hd-row td {
+  text-align: initial;
   border-left: 1px solid $griddivider;
   border-right: none;
 }
@@ -200,6 +201,7 @@
 .x-grid3-header .x-grid3-hd-row td {
   color: rgb(105, 105, 105);
   font-weight: bold;
+  text-align: initial;
 }
 
 .x-grid3-header-pop {
@@ -325,7 +327,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-hd-inner {
   font-weight: bold;
-  padding: 13px 18px 13px 5px;
+  padding: 10px;
 }
 
 .ext-ie .x-grid3-hd-inner {
@@ -334,7 +336,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-cell-inner,
 .x-grid3-hd-inner {
-  padding: 13px 18px 13px 5px;
+  padding: 10px;
 }
 
 .x-props-grid .x-grid3-body .x-grid3-td-name {
@@ -387,7 +389,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-row-collapsed .x-grid3-row-expander {
   height: 27px;
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 .x-grid3-row-collapsed .x-grid3-row-expander:before {
@@ -400,7 +402,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-row-expanded .x-grid3-row-expander {
   height: 27px;
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 .x-grid3-row-expanded .x-grid3-row-expander:before {
@@ -511,7 +513,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   color: $darkestGray;
   font-size: 12px;
   font-weight: bold;
-  padding: 8px 4px 12px 5px;
+  padding: 10px 0;
 }
 
 .x-grid-group-hd div.x-grid-group-title:before {
@@ -520,7 +522,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   font-weight: 400;
   font-size: 14px;
   font-style: normal;
-  margin-right: 10px;
+  padding: 0 5px;
 }
 
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title:before {
@@ -528,7 +530,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   content: fa-content($fa-var-plus-square);
   font-weight: 400;
   font-style: normal;
-  margin-right: 10px;
+  padding: 0 5px;
 }
 
 .x-group-by-icon {

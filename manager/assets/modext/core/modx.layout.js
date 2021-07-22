@@ -404,10 +404,12 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         enabled: true,
                         fn: function(data) {
                             for (var i in data.offsets.popper) {
-                                if (data.offsets.popper.hasOwnProperty(i)) {
-                                    data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
-                                        ? data.offsets.popper[i] + 'px'
-                                        : data.offsets.popper[i];
+                                if (i != 'bottom' && i != 'right') {
+                                    if (data.offsets.popper.hasOwnProperty(i)) {
+                                        data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
+                                            ? data.offsets.popper[i] + 'px'
+                                            : data.offsets.popper[i];
+                                    }
                                 }
                                 if (data.offsets.arrow.top !== '') {
                                     data.arrowElement.style.top = data.offsets.arrow.top + 'px';
