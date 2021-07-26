@@ -19,8 +19,8 @@ Ext.onReady(function() {
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         {if $params.minLength|default},minLength: {$params.minLength|default}{/if}
         {if $params.maxLength|default},maxLength: {$params.maxLength|default}{/if}
-        {if $params.regex|default},regex: new RegExp(/{$params.regex|default}/){/if}
-        {if $params.regexText|default},regexText: '{$params.regexText|default}'{/if}
+        {if $params.regex|default},regex: new RegExp(/{$params.regex|default|escape}/){/if}
+        {if $params.regexText|default},regexText: '{$params.regexText|default|escape}'{/if}
     {literal}
         ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
     });

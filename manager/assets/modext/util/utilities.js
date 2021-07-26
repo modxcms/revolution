@@ -704,3 +704,115 @@ Ext.TabPanel.prototype.itemTpl = new Ext.Template(
 );
 Ext.TabPanel.prototype.itemTpl.disableFormats = true;
 Ext.TabPanel.prototype.itemTpl.compile();
+
+
+Ext.namespace('Ext.ux.form');
+
+/**
+ * A custom checkbox group class that aggregates the values of its checked children
+ * into a hidden field.
+ */
+Ext.ux.form.CheckboxGroup = Ext.extend(Ext.form.CheckboxGroup, {
+
+    aggregateSubmitField: {},
+
+    initComponent: function() {
+        const   me = this,
+                ct = this.ownerCt
+            ;
+        if (typeof this.name === 'string' && this.name.length > 0) {
+            this.aggregateSubmitField = new Ext.form.Hidden({
+                name: this.name
+            });
+
+            Ext.ux.form.CheckboxGroup.superclass.initComponent.call(this);
+
+            this.cls = typeof this.cls === 'string' && this.cls.length > 0 ? 'aggregated-group ' + this.cls : 'aggregated-group' ;
+
+            Ext.each(this.items, function(item) {
+                if (typeof me.value === 'string' && me.value.length > 0) {
+                    const savedVals = me.value.split(',');
+                    if (savedVals.find(v => v == item.inputValue) == item.inputValue) {
+                        item.checked = true;
+                    }
+                    me.aggregateSubmitField.setValue(me.value);
+                }
+                item.listeners = {
+                    check: {
+                        fn: me.setHiddenSubmit,
+                        scope: me
+                    }
+                }
+                item.submitValue = false;
+            });
+            ct.add(this.aggregateSubmitField);
+        } else {
+            console.warning('Ext.ux.form.CheckboxGroup: A name must be specified in this component’s config for its values to be saved.', this);
+        }
+    },
+    setHiddenSubmit: function() {
+        const groupOpts = this.items.items;
+        let vals = [];
+        Ext.each(groupOpts, function(item) {
+            if (item.checked) {
+                vals.push(item.inputValue);
+            }
+        });
+        this.aggregateSubmitField.setValue(vals.join(','));
+    }
+});
+Ext.reg('xcheckboxgroup', Ext.ux.form.CheckboxGroup);
+
+/**
+ * Plugin that adds reset and clear field (and in the future copy tag) functionality
+ * via dynamically created buttons appearing next to field labels.
+ *
+ * Currently implemented directly in field configs, but may be added automatically on
+ * a more global basis if desired for all fields or all fields of certain classes
+ */
+Ext.define('AddFieldUtilities.plugin.Class', {
+    alias: 'plugin.fieldutilities',
+    init: function(cmp){
+        cmp.on('afterrender', this.afterRender, cmp);
+    },
+    afterRender: function() {
+        const me = this;
+
+        // add reset trigger
+        this.label.createChild({
+            tag: 'a',
+            title: _('field_reset'),
+            cls: 'modx-field-utils modx-field-reset'
+        }).on('click', function(){
+            me.reset();
+        }, me);
+
+        // add clear trigger
+        this.label.createChild({
+            tag: 'a',
+            title: _('field_clear'),
+            cls: 'modx-field-utils modx-field-clear'
+        }).on('click', function(){
+            switch(this.xtype) {
+                case 'xcheckboxgroup':
+                case 'checkboxgroup':
+                    if (Ext.isArray(this.items.items)) {
+                        Ext.each(this.items.items, function(item) {
+                            item.setValue(false);
+                        });
+                        this.doLayout();
+                    }
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    me.setValue(false);
+                    break;
+                default:
+                    me.setValue('');
+                    break;
+            }
+        }, me);
+
+        // copy tag trigger TBD
+    }
+});

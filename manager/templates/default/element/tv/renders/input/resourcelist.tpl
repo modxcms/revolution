@@ -17,15 +17,26 @@ Ext.onReady(function() {
         ,width: 400
         ,maxHeight: 300
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+
+        {if $params.title|default}
+            ,title: '{$params.title|default|escape}'
+        {/if}
+        {if $params.listWidth|default}
+            ,listWidth: {$params.listWidth}
+        {/if}
+        ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
         {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
             ,typeAhead: true
-            ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
-            ,editable: true
+            ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
+            ,selectOnFocus: true
         {else}
             ,typeAhead: false
             ,editable: false
         {/if}
-        ,forceSelection: false
+        {if $params.listEmptyText|default}
+            ,listEmptyText: '{$params.listEmptyText|default|escape}'
+        {/if}
+        ,forceSelection: {if $params.forceSelection|default && $params.forceSelection != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
 
         {if $params.allowBlank == 1 || $params.allowBlank == 'true'}

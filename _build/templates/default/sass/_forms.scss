@@ -91,37 +91,55 @@ input::-moz-focus-inner {
       font-weight: normal;
     }
 
-    .modx-tv-reset {
+    .modx-tv-reset,
+    .modx-field-utils {
       cursor: pointer;
       display: inline-block;
-      height: 16px;
+      position: relative;
       opacity: 0;
       filter: alpha(opacity=0); /* for IE <= 8 */
-      padding: 3px;
-      position: relative;
+      padding: 0 0 0 3px;
       top: 0;
       right: 0;
       transition: all .25s;
       width: 16px;
+      height: 16px;
 
-      &:before {
+      &::before {
         @extend %pseudo-font;
-
         box-sizing: border-box;
-        color: $coreFieldLabelColor;
-        content: fa-content($fa-var-sync);
+        color: scale-color($coreFieldLabelColor, $lightness: 50%);
+        content: fa-content($fa-var-undo-alt); /* better match IMO for the action being taken */
         font-size: 14px;
         position: relative;
-        bottom: 3px;
+        bottom: 2px;
         left: 0;
         text-align: center;
         vertical-align: middle;
         width: 16px;
         height: 16px;
       }
+      &.modx-field-reset {
+          &::before {
+            content: fa-content($fa-var-undo-alt);
+          }
+          &:hover::before {
+            color: $green;
+          }
+      }
+      &.modx-field-clear {
+        &::before {
+          content: fa-content($fa-var-eraser);
+          font-size: 15px;
+          margin-bottom: 4px;
+        }
+        &:hover::before {
+          color: $red;
+        }
+      }
 
       &:hover:before {
-        color: $colorSplash;
+        color: $green;
       }
 
       &:active:before {
@@ -129,7 +147,8 @@ input::-moz-focus-inner {
       }
     }
 
-    &:hover .modx-tv-reset {
+    &:hover .modx-tv-reset,
+    &:hover .modx-field-utils {
       opacity: 1;
       filter: alpha(opacity=100); /* for IE <= 8 */
     }
@@ -264,8 +283,10 @@ input::-moz-focus-inner {
 
     label.x-form-item-label {
       display: inline-block; /* override extjs default theme styles */
-      margin: 0; /* override extjs default theme styles */
-      padding: 15px 0 4px 0;
+      // margin: 0; /* override extjs default theme styles */
+      // padding: 15px 0 4px 0;
+      margin: 15px 0 4px 0;
+      padding: 0;
     }
   }
 
@@ -285,6 +306,12 @@ input::-moz-focus-inner {
 
     label.x-form-item-label {
       display: none; /* override !important rule from above */
+    }
+  }
+
+  &.disabled {
+    label {
+        color: scale-color($coreFieldLabelColor, $lightness: 50%);
     }
   }
 
@@ -324,11 +351,11 @@ input::-moz-focus-inner {
   display: block;
   font-size: 12px;
   font-style: italic;
-  margin: 2px 0 0 0;
-  text-align: justify;
+  margin: .4em 0 0 0;
 
-  &.desc-checkbox {
-    margin: 0 0 4px 0;
+  &.toggle-slider-above {
+    margin: .3em 0;
+    padding-left: 3.9em;
   }
 
   .warning {
@@ -336,6 +363,93 @@ input::-moz-focus-inner {
     overflow: hidden;
     padding: 0;
   }
+
+  .example-list {
+    ul {
+      margin: .4em 0;
+      li {
+        position: relative;
+        margin-bottom: .25em;
+        padding-left: 1.25em;
+        &::before {
+          @extend %pseudo-font;
+          position: absolute;
+          left: .2em;
+          top: 0;
+          content: fa-content($fa-var-angle-double-right);
+          color: scale-color($mediumGray, $lightness: 20%);
+        }
+      }
+    }
+  }
+  .example-input,
+  .copy-this {
+    padding: 0 .3em;
+    border-radius: 2px;
+    transition: width 1s;
+  }
+
+  .example-input {
+    color: scale-color($green, $lightness: -5%, $saturation: -45%);
+    background-color: scale-color($green, $lightness: 94%, $saturation: -20%);
+    &:hover {
+      background-color: scale-color($green, $lightness: 89%, $saturation: -10%);
+      color: scale-color($green, $lightness: -20%, $saturation: -5%);
+      cursor: pointer;
+    }
+  }
+
+  .copy-this {
+      color: scale-color($blue, $lightness: -5%, $saturation: -40%);
+      background-color: scale-color($blue, $lightness: 92%, $saturation: -15%);
+      &:hover {
+          background-color: scale-color($blue, $lightness: 87%, $saturation: 5%);
+          color: scale-color($blue, $lightness: -35%);
+          cursor: pointer;
+          &::after {
+              @extend %pseudo-font;
+              content: fa-content($fa-var-copy);
+              color: scale-color($blue, $saturation: -40%);
+              display: inherit;
+              margin-left: .5em;
+          }
+          &:active {
+              color: $darkGray;
+              &::after {
+                  color: $darkGray;
+              }
+          }
+      }
+  }
+  .feedback {
+      margin-left: .75em;
+      color: scale-color($blue, $lightness: -35%);
+      font-style: normal;
+      &.item-copied {
+          opacity: 1;
+          transition: opacity 1.5s;
+      }
+  }
+
+  a {
+    text-decoration: none;
+    border-bottom: 1px dotted $mediumGray;
+    color: $mediumGray;
+    &:hover {
+      color: $darkGray;
+    }
+  }
+
+  .deemphasize {
+    font-style: normal;
+  }
+
+}
+
+.fs-toggle {
+  padding-top: 1em;
+  margin-top: 2em;
+  border-top: 1px dashed $borderColor;
 }
 
 .x-fieldset {
@@ -366,6 +480,34 @@ input::-moz-focus-inner {
       padding: 0 10px 10px 10px;
     }
   }
+
+  /* for toggled fieldsets */
+  &.form-row-wrapper {
+    .x-fieldset-bwrap {
+      .x-fieldset-body {
+        padding: 0 15px 15px 15px;
+      }
+    }
+  }
+
+  &#tv-input-opts-fs,
+  &#tv-output-opts-fs {
+    border: 0;
+    margin: 0;
+    .x-fieldset-bwrap {
+      .x-fieldset-body {
+        padding: 0;
+      }
+    }
+    .x-fieldset {
+      .x-fieldset-bwrap {
+        .x-fieldset-body {
+          padding: 0 15px 15px 15px;
+        }
+      }
+    }
+  }
+
 }
 
 .x-form-field {
@@ -550,6 +692,10 @@ input::-moz-focus-inner {
   content: fa-content($fa-var-file-image);
 }
 
+#x-form-el-modx-tv-locked {
+  margin-top: 1em;
+}
+
 /* .x-form-field-wrap */
 
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
@@ -671,8 +817,9 @@ input::-moz-focus-inner {
 }
 
 /* .x-form-check-wrap */
-/* Special checboxes for resources */
-#modx-resource-tabs {
+/* Special checboxes for resources and tv configs */
+#modx-resource-tabs,
+#modx-tv-tabs {
 
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
@@ -694,6 +841,7 @@ input::-moz-focus-inner {
         margin-left: 0;
         cursor: pointer;
         box-sizing: border-box;
+        line-height: 1; /* fixes vertical alignment with slider control */
 
         &:before,
         &:after {
@@ -770,6 +918,7 @@ input::-moz-focus-inner {
 .x-form-radio-group {
   /*overflow: visible; /* do not cut off the bottom of the input elements */
   overflow: hidden; /* visible causes horizontal scrollbars in vertical tabs */
+  padding-bottom: 0.5em; /* prevent bottom-most sliders from being clipped */
 
   .x-column {
     /* we need this to have access to the first child */
@@ -779,6 +928,11 @@ input::-moz-focus-inner {
         padding: 4px 0 0 0;
       }
     }
+  }
+  /* applies to new xcheckboxgroup custom checkbox group */
+  &.aggregated-group {
+      padding-left: 1em;
+      padding-right: 1em;
   }
 }
 

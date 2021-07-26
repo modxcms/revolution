@@ -14,15 +14,14 @@ Ext.onReady(function() {
         ,dateFormat: MODx.config.manager_date_format
         ,timeFormat: MODx.config.manager_time_format
         {if $params.disabledDays|default},disabledDays: {$params.disabledDays|default}{/if}
+        {if $params.disabledDates|default},disabledDates: {$params.disabledDates|default}{/if}
         {if $params.minDateValue|default},minDateValue: '{$params.minDateValue|default}'{/if}
         {if $params.maxDateValue|default},maxDateValue: '{$params.maxDateValue|default}'{/if}
         {if $params.startDay|default},startDay: {$params.startDay|default}{/if}
-
         {if $params.minTimeValue|default},minTimeValue: '{$params.minTimeValue|default}'{/if}
         {if $params.maxTimeValue|default},maxTimeValue: '{$params.maxTimeValue|default}'{/if}
         {if $params.timeIncrement|default},timeIncrement: {$params.timeIncrement|default}{/if}
         {if $params.hideTime|default},hideTime: {$params.hideTime|default}{/if}
-
         ,dateWidth: 198
         ,timeWidth: 198
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
