@@ -26,10 +26,10 @@ Ext.onReady(function() {
             ,typeAhead: false
         {/if}
         {if $params.title|default}
-            ,title: '{$params.title|default}'
+            ,title: '{$params.title|default|escape}'
         {/if}
         {if $params.listEmptyText|default}
-            ,listEmptyText: '{$params.listEmptyText|default}'
+            ,listEmptyText: '{$params.listEmptyText|default|escape}'
         {/if}
         ,forceSelection: {if $params.forceSelection|default && $params.forceSelection|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'

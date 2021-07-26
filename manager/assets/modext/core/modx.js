@@ -97,7 +97,7 @@ Ext.extend(MODx,Ext.Component,{
     }
 
     ,initMarkRequiredFields: function() {
-        var markdom = '<span class=\"field-required-mark\">*</span> ';
+        var markdom = '<span class=\"field-required-mark\">*</span>';
 
         var MarkRequiredFieldPlugin = function (config) {
             config = config || {};
@@ -109,14 +109,14 @@ Ext.extend(MODx,Ext.Component,{
                     var label = cmp.fieldLabel;
                     if (!applyTo) {
                         if (label) {
-                            cmp.fieldLabel = markdom + label;
+                            cmp.fieldLabel = label + markdom;
                         } else if (cmp.caption && document.getElementById(cmp.caption)) {
                             label = document.getElementById(cmp.caption);
-                            label.innerHTML = markdom + label.innerHTML;
+                            label.innerHTML = label.innerHTML + markdom;
                         }
                     } else if (applyTo && applyTo.match(/^tv[\d]*$/i)) {
                         label = document.getElementById(applyTo+'-caption');
-                        label.innerHTML = markdom+label.innerHTML;
+                        label.innerHTML = label.innerHTML + markdom;
                     }
                 }
             });

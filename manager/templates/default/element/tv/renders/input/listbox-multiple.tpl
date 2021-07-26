@@ -38,10 +38,10 @@ Ext.onReady(function() {
             ,editable: false
         {/if}
         {if $params.title|default}
-            ,title: '{$params.title|default}'
+            ,title: '{$params.title|default|escape}'
         {/if}
         {if $params.listEmptyText|default}
-            ,listEmptyText: '{$params.listEmptyText|default}'
+            ,listEmptyText: '{$params.listEmptyText|default|escape}'
         {/if}
         ,allowAddNewData: {if $params.forceSelection|default && $params.forceSelection|default != 'false'}false{else}true{/if}
         ,addNewDataOnBlur: true
