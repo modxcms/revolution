@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Συνδεδεμένοι χρήστες';
 $_lang['onlineusers_user'] = 'Χρήστης';
 $_lang['onlineusers_userid'] = 'ID Χρήστη';
 
-$_lang['updates_sort'] = 'Sort';
+$_lang['updates_type'] = 'Type';
 $_lang['updates_status'] = 'Status';
 $_lang['updates_action'] = 'Action';
 $_lang['updates_available'] = 'Updates available';

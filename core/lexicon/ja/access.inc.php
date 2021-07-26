@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'コンテキストへアクセス';
 $_lang['access_to_resource_groups'] = 'リソースグループへアクセス';
 $_lang['access_type_err_ns'] = 'ターゲットタイプもしくはIDタイプが特定されていません。';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = '特権レベル';
 $_lang['authority_err_ns'] = 'ミニマムロールを指定してください。';
 $_lang['category'] = 'カテゴリー';

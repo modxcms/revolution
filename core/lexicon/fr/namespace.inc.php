@@ -7,7 +7,6 @@
  * @subpackage lexicon
  */
 $_lang['namespace'] = 'Espace de noms';
-$_lang['namespace_create'] = 'Créer un espace de noms ';
 $_lang['namespace_err_create'] = 'Une erreur s\'est produite en essayant de créer l\'espace de noms.';
 $_lang['namespace_err_nf'] = 'Espace de noms introuvable.';
 $_lang['namespace_err_nfs'] = 'Espace de noms: %s, introuvable';
@@ -19,10 +18,8 @@ $_lang['namespace_assets_path_desc'] = 'Indiquez un chemin absolu vers les asset
 $_lang['namespace_name_desc'] = 'Indiquez un nom pour cet espace de nom.';
 $_lang['namespace_path'] = 'Chemin du core';
 $_lang['namespace_path_desc'] = 'Indiquez ici un chemin absolu vers le core de cet espace de nom (namespace). Vous pouvez utiliser des placeholders tels que {core_path}. Exemple: {core_path}components/democomponent';
-$_lang['namespace_remove'] = 'Supprimer l\'espace de noms';
 $_lang['namespace_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer l\'espace de nom « [[+name]] » et tous les contenus associés ?';
 $_lang['namespace_remove_multiple'] = 'Supprimer les espaces de noms';
 $_lang['namespace_remove_multiple_confirm'] = 'Êtes-vous sûr de vouloir supprimer ces espaces de noms ainsi que leurs contenus ?';
-$_lang['namespace_update'] = 'Modifier l\'espace de noms';
 $_lang['namespaces'] = 'Espaces de noms';
 $_lang['namespaces_desc'] = 'Les espaces de noms sont des identifiants globaux pour les extensions, qui identifient leurs véhicules, leurs entrées de lexique et leurs ressources.';

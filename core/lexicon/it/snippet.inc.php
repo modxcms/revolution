@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['snippet'] = 'Snippet';
+$_lang['snippet'] = 'Frammento';
 $_lang['snippets_available'] = 'Snippets disponibili per essere inclusi nella tua pagina';
 $_lang['snippet_code'] = 'Codice Snippet (php)';
 $_lang['snippet_delete_confirm'] = 'Sei sicuro di voler eliminare questo snippet?';
@@ -25,16 +25,16 @@ $_lang['snippet_err_locked'] = 'Questo snippet è bloccato per la modifica e non
 $_lang['snippet_err_nf'] = 'Snippet non trovato!';
 $_lang['snippet_err_ns'] = 'Snippet non specificato.';
 $_lang['snippet_err_ns_name'] = 'Specificare un nome per lo snippet.';
-$_lang['snippet_err_remove'] = 'An error occurred while trying to delete the snippet.';
+$_lang['snippet_err_remove'] = 'Si è verificato un errore provando a eliminare il frammento.';
 $_lang['snippet_err_save'] = 'Si è verificato un errore durante il salvataggio dello snippet.';
 $_lang['snippet_execonsave'] = 'Esegui lo snippet dopo il salvataggio.';
 $_lang['snippet_lock'] = 'Blocca Modifiche Snippet';
 $_lang['snippet_lock_msg'] = 'Se selezionato, gli utenti devono avere i permessi di "modifica bloccati" (edit_locked) per modificare questo Snippet.';
 $_lang['snippet_management_msg'] = 'Qui puoi scegliere quale snippet vorresti modificare.';
-$_lang['snippet_msg'] = 'Here you can create/edit snippets. Remember, snippets are \'raw\' PHP code, and if you expect the output of the snippet to be shown at a certain point within the template, you need to return a value from within the snippet.';
+$_lang['snippet_msg'] = 'Qui puoi creare/modificare frammenti. Ricorda, i frammenti sono codice PHP \'grezzo\' e se prevedi che l\'output del frammento sia mostrato a un certo punto entro il modello, devi restituire un valore dall\'interno del frammento.';
 $_lang['snippet_name'] = 'Nome Snippet';
-$_lang['snippet_new'] = 'Create Snippet';
+$_lang['snippet_new'] = 'Crea Frammento';
 $_lang['snippet_properties'] = 'Proprietà di default';
 $_lang['snippet_title'] = 'Crea/Modifica Snippet';
 $_lang['snippet_untitled'] = 'Snippet senza nome';
-$_lang['snippets'] = 'Snippets';
+$_lang['snippets'] = 'Frammenti';

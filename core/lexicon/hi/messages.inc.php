@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'User Group';
 $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'Message';
-$_lang['message_create'] = 'Message बनाएँ';
-$_lang['message_new'] = 'Message बनाएँ';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'ईमेल भेजें';
 $_lang['message_err_nfs'] = 'Message नहीं मिला।';

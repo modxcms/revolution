@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Користувачі онлайн';
 $_lang['onlineusers_user'] = 'Користувач';
 $_lang['onlineusers_userid'] = 'ID користувача';
 
-$_lang['updates_sort'] = 'Сортувати';
+$_lang['updates_type'] = 'Тип';
 $_lang['updates_status'] = 'Стан ресурсу';
 $_lang['updates_action'] = 'Дія';
 $_lang['updates_available'] = 'Доступні оновлення';

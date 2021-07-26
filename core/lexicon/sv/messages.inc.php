@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Användargrupp';
 $_lang['filter_by_type'] = 'Filtrera efter typ...';
 
 $_lang['message'] = 'Meddelande';
-$_lang['message_create'] = 'Skapa meddelande';
-$_lang['message_new'] = 'Skapa meddelande';
 $_lang['message_remove_confirm'] = 'Är du säker på att du vill ta bort detta meddelande helt och hållet?';
 $_lang['message_send_email'] = 'Skicka e-post';
 $_lang['message_err_nfs'] = 'Kunde inte hitta meddelandet.';

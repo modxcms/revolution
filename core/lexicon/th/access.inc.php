@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'การเข้าถึงบริบท';
 $_lang['access_to_resource_groups'] = 'การเข้าถึงกลุ่มรีซอร์ส';
 $_lang['access_type_err_ns'] = 'ไม่ระบุประเภทเป้าหมายหรือไอดี!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'อำนาจ';
 $_lang['authority_err_ns'] = 'กรุณาระบุบทบาทขั้นต่ำ';
 $_lang['category'] = 'หมวดหมู่';

@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Kopier';
 $_lang['entry'] = 'Post';
-$_lang['entry_create'] = 'Opret post';
 $_lang['entry_err_ae'] = 'Posten findes allerede!';
 $_lang['entry_err_nf'] = 'Posten blev ikke fundet.';
 $_lang['entry_err_ns'] = 'Posten ikke angivet.';

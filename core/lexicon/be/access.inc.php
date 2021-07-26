@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Доступ да кантэкстаў';
 $_lang['access_to_resource_groups'] = 'Доступ да груп рэсурсаў';
 $_lang['access_type_err_ns'] = 'Не пазначаны мэтавы тып або ID!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Ранг';
 $_lang['authority_err_ns'] = 'Калі ласка, пазначце мінімальную ролю.';
 $_lang['category'] = 'Катэгорыя';

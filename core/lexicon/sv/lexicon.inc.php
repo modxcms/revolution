@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Duplicera';
 $_lang['entry'] = 'Post';
-$_lang['entry_create'] = 'Skapa post';
 $_lang['entry_err_ae'] = 'Posten finns redan!';
 $_lang['entry_err_nf'] = 'Posten kunde inte hittas.';
 $_lang['entry_err_ns'] = 'Post ej angiven.';

@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Modifier l\'accès au Media Source';
 $_lang['access_to_contexts'] = 'Accès aux contextes';
 $_lang['access_to_resource_groups'] = 'Accès aux groupes de ressources';
 $_lang['access_type_err_ns'] = 'Le type de cible ou l\'ID n\'est pas spécifié!';
-$_lang['acl_add'] = 'Créer un contrôle d\'accès';
 $_lang['authority'] = 'Autorité';
 $_lang['authority_err_ns'] = 'Veuillez spécifier au moins une règle.';
 $_lang['category'] = 'Catégorie';

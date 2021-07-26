@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Hozzon létre DROP TABLE parancs
 $_lang['database_table_effectivesize'] = 'Tényleges méret';
 $_lang['database_table_indexsize'] = 'Mutató mérete';
 $_lang['database_table_overhead'] = 'Terhelés';
-$_lang['database_table_reserved'] = 'Lefoglalt';//sqlsrv
 $_lang['database_table_records'] = 'Bejegyzések';
 $_lang['database_table_tablename'] = 'Tábla neve';
 $_lang['database_table_totalsize'] = 'Teljes méret';
 $_lang['database_table_totals'] = 'Összesen:';
-$_lang['database_table_unused'] = 'Nem használt';//sqlsrv
 $_lang['database_type'] = 'Adatbázis fajtája';
 $_lang['database_version'] = 'Adatbázis verzió';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> változat';

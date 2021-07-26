@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'The full relative URL for this Resource.';
 $_lang['resource_uri_override'] = 'Jäädytä URI';
 $_lang['resource_uri_override_help'] = 'Checking this will allow you to freeze the URI for this Resource at the value in the textbox below.';
 $_lang['resource_with_id_not_found'] = 'Resurssia IDllä %s ei löydy.';
-$_lang['resource_view'] = 'Näytä';
 $_lang['show_sort_options'] = 'Lajitteluvalinnat';
 $_lang['site_schedule'] = 'Aikataulu';
 $_lang['site_schedule_desc'] = 'Tämä näyttää nykyiset resurssit, joilla on ajastettuja asetuksia. Voit vaihtaa nykyisen näkymän napsauttamalla työkalurivipainiketta.';

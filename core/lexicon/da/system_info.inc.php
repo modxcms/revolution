@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Generér DROP TABLE-sætninger.'
 $_lang['database_table_effectivesize'] = 'Faktisk størrelse';
 $_lang['database_table_indexsize'] = 'Indeksstørrelse';
 $_lang['database_table_overhead'] = 'Overhead';
-$_lang['database_table_reserved'] = 'Reserveret';//sqlsrv
 $_lang['database_table_records'] = 'Poster';
 $_lang['database_table_tablename'] = 'Tabelnavn';
 $_lang['database_table_totalsize'] = 'Samlet størrelse';
 $_lang['database_table_totals'] = 'Totaler:';
-$_lang['database_table_unused'] = 'Ubrugt';//sqlsrv
 $_lang['database_type'] = 'Databasetype';
 $_lang['database_version'] = 'Databaseversion';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a>-version';

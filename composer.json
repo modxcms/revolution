@@ -43,11 +43,10 @@
         "vendor-dir": "core/vendor"
     },
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
         "xpdo/xpdo": "^3.0@dev",
-        "league/flysystem": "^1.0",
-        "league/flysystem-aws-s3-v3": "^1.0",
-        "league/flysystem-cached-adapter": "^1.0",
+        "league/flysystem": "^2.0",
+        "league/flysystem-aws-s3-v3": "^2.0",
         "phpmailer/phpmailer": "^6.0",
         "smarty/smarty": "^3.1",
         "james-heinrich/phpthumb": "^1.7",
@@ -96,15 +95,8 @@
             "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.sources.mysql.schema.xml core/src/",
             "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.transport.mysql.schema.xml core/src/"
         ],
-        "parse-schema-sqlsrv": [
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.sqlsrv.schema.xml core/src/",
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.registry.db.sqlsrv.schema.xml core/src/",
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.sources.sqlsrv.schema.xml core/src/",
-            "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ sqlsrv core/model/schema/modx.transport.sqlsrv.schema.xml core/src/"
-        ],
         "parse-schema": [
-            "composer run-script parse-schema-mysql",
-            "composer run-script parse-schema-sqlsrv"
+          "composer run-script parse-schema-mysql"
         ]
     },
     "scripts-descriptions": {

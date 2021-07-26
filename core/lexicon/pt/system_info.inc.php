@@ -22,12 +22,10 @@ $_lang['database_table_droptablestatements'] = 'Gerar estatudos de DROP TABLE.';
 $_lang['database_table_effectivesize'] = 'Tamanho Efetivo';
 $_lang['database_table_indexsize'] = 'Tamanho do índice';
 $_lang['database_table_overhead'] = 'Sobrecarga';
-$_lang['database_table_reserved'] = 'Reservado';//sqlsrv
 $_lang['database_table_records'] = 'Registros';
 $_lang['database_table_tablename'] = 'Nome da tabela';
 $_lang['database_table_totalsize'] = 'Tamanho total';
 $_lang['database_table_totals'] = 'Totais:';
-$_lang['database_table_unused'] = 'Sem uso';//sqlsrv
 $_lang['database_type'] = 'Tipo de Base de Dados';
 $_lang['database_version'] = 'Versão da Base de Dados';
 $_lang['extjs_version'] = 'Versão do <a href="http://extjs.com/" target="_blank">ExtJS</a>';

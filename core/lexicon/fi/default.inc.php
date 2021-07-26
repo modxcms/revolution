@@ -100,7 +100,6 @@ $_lang['date'] = 'Pvm';
 $_lang['datechanged'] = 'Päivämäärä muutettu';
 $_lang['db_header'] = 'Tietokannan taulukot';
 $_lang['db_info_mysql'] = 'Jos taulukolla on yläosa, voit optimoida sen klikkaamalla linkkiä yläosan sarakkeessa.';
-$_lang['db_info_sqlsrv'] = 'Voit uudistaa taulukon indeksin klikkaamalla linkkiä käyttämättömässä sarakkeessa.';
 $_lang['delete'] = 'Poista';
 $_lang['deleted'] = 'Poistettu';
 $_lang['description'] = 'Kuvaus';

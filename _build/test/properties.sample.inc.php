@@ -36,19 +36,6 @@ $properties['mysql_array_options']= [
 ];
 $properties['mysql_array_driverOptions']= [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT];
 
-/* sqlsrv */
-$properties['sqlsrv_string_dsn_test']= 'sqlsrv:server=(local);database=revo_test';
-$properties['sqlsrv_string_dsn_nodb']= 'sqlsrv:server=(local)';
-$properties['sqlsrv_string_dsn_error']= 'sqlsrv:server=xyz;123';
-$properties['sqlsrv_string_username']= '';
-$properties['sqlsrv_string_password']= '';
-$properties['sqlsrv_array_options']= [
-    xPDO::OPT_HYDRATE_FIELDS => true,
-    xPDO::OPT_HYDRATE_RELATED_OBJECTS => true,
-    xPDO::OPT_HYDRATE_ADHOC_FIELDS => true,
-];
-$properties['sqlsrv_array_driverOptions']= [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT];
-
 /* PHPUnit test config */
 $properties['xpdo_driver']= 'mysql';
 $properties['logTarget']= [

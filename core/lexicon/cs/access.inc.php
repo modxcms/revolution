@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'Přístup ke kontextům';
 $_lang['access_to_resource_groups'] = 'Přístup ke skupinám dokumentů';
 $_lang['access_type_err_ns'] = 'Nespecifikovaný cílový typ nebo ID!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'Autorita';
 $_lang['authority_err_ns'] = 'Specifikujte minimální roli.';
 $_lang['category'] = 'Kategorie';

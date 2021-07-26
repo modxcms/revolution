@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Çoğalt';
 $_lang['entry'] = 'Giriş';
-$_lang['entry_create'] = 'Giriş Oluştur';
 $_lang['entry_err_ae'] = 'Zaten giriş var!';
 $_lang['entry_err_nf'] = 'Giriş bulunamadı.';
 $_lang['entry_err_ns'] = 'Giriş belirtilmedi.';

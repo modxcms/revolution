@@ -12,7 +12,6 @@ $_lang['system_event'] = 'Системна Подія';
 $_lang['system_events'] = 'Системні події';
 $_lang['system_events.desc'] = '<b>Системні події</b> - це події, що реєструються MODX за допомогою <i>плагінів</i>. Вони можуть «реагувати» всередині самого коду MODX, дозволяючи <i>плагинам</i> взаємодіяти з кодом MODX і додавати довільний функціонал без зміни коду ядра. Ви також можете створювати власні події для свого проекту. Системні події ядра MODX не можна видалити, лише створені вами. ';
 $_lang['system_events.search_by_name'] = 'Пошук за назвою події ';
-$_lang['system_events.create'] = 'Створити Подію';
 $_lang['system_events.name_desc'] = 'Назва події, яку ви повинні використовувати у виклику &dollar;modx-> invokeEvent(name, properties). ';
 $_lang['system_events.groupname'] = 'Група';
 $_lang['system_events.groupname_desc'] = 'Назва групи, якій належить нова подія. Виберіть існуючу або створіть нову назву групи.';
@@ -27,7 +26,6 @@ $_lang['system_events.service_4'] = 'Події служби кеша';
 $_lang['system_events.service_5'] = 'Події служби шаблонів';
 $_lang['system_events.service_6'] = 'Події визначені користувачем';
 
-$_lang['system_events.remove'] = 'Видалити подію';
 $_lang['system_events.remove_confirm'] = 'Ви впевнені, що хочете видалити <b>[[+name]]</b> подію? Ця дія є незворотньою!';
 
 $_lang['system_events_err_ns'] = 'Не вказано назву системної події. ';

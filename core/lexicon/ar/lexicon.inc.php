@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'مكرر';
 $_lang['entry'] = 'مدخل';
-$_lang['entry_create'] = 'إنشاء مدخل';
 $_lang['entry_err_ae'] = 'المدخل موجود مسبقاً!';
 $_lang['entry_err_nf'] = 'المدخل غير موجود.';
 $_lang['entry_err_ns'] = 'لم يتم تحديد المدخل.';

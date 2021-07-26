@@ -99,7 +99,6 @@ $_lang['date'] = 'Date';
 $_lang['datechanged'] = 'Date changed';
 $_lang['db_header'] = 'Database tables';
 $_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by clicking on the link in the Overhead column.';
-$_lang['db_info_sqlsrv'] = 'You may rebuild a table\'s index by clicking on the link in the Unused column.';
 $_lang['delete'] = 'Șterge';
 $_lang['deleted'] = 'Șters';
 $_lang['description'] = 'Descriere';

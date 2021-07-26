@@ -8,9 +8,7 @@
  */
 $_lang['context'] = 'Környezet';
 $_lang['context_add'] = 'Környezet hozzáadása';
-$_lang['context_create'] = 'Környezet létrehozása';
 $_lang['context_data'] = 'Környezeti adatok';
-$_lang['context_duplicate'] = 'Környezet kettőzése';
 $_lang['context_err_ae'] = 'Már létezik ilyen nevű környezet.';
 $_lang['context_err_create'] = 'Hiba történt a környezet létrehozásakor.';
 $_lang['context_err_duplicate'] = 'Hiba történt a környezet kettőzésekor.';
@@ -24,11 +22,7 @@ $_lang['context_err_save'] = 'Hiba történt a környezet mentésekor.';
 $_lang['context_id'] = 'Környezet azonosítója';
 $_lang['context_key'] = 'Környezet kulcsa';
 $_lang['context_management_message'] = 'Webhely környezetek kezelése.';
-$_lang['context_refresh'] = 'Környezet frissítése';
-$_lang['context_remove'] = 'Környezet törlése';
-$_lang['context_remove_confirm'] = 'Biztosan törli ezt a környezetet? A művelet nem vonható vissza.';
 $_lang['context_settings'] = 'Környezet beállításai';
 $_lang['context_settings_desc'] = 'Itt megadhatja az ehhez a környezethez tartozó beállításokat. Az azonos kulccsal megadott rendszerbeállításokat felülírják a környezeti beállítások. <b>Az egyes beállítások a [[++key]] helyettesítőn keresztül lesznek elérhetők.</b>';
-$_lang['context_update'] = 'Környezet szerkesztése';
 $_lang['context_with_key_not_found'] = 'Nem található környezet %s kulccsal!';
 $_lang['contexts'] = 'Környezetek';

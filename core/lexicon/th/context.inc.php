@@ -8,9 +8,7 @@
  */
 $_lang['context'] = 'บริบท';
 $_lang['context_add'] = 'เพิ่มบริบท';
-$_lang['context_create'] = 'สร้างบริบท';
 $_lang['context_data'] = 'ข้อมูลบริบท';
-$_lang['context_duplicate'] = 'ทำสำเนาบริบท';
 $_lang['context_err_ae'] = 'บริบทชื่อนี้มีอยู่แล้ว';
 $_lang['context_err_create'] = 'เกิดข้อผิดพลาดขณะกำลังสร้างบริบท';
 $_lang['context_err_duplicate'] = 'เกิดข้อผิดพลาดขณะที่พยายามทำสำเนาบริบท';
@@ -24,11 +22,7 @@ $_lang['context_err_save'] = 'เกิดข้อผิดพลาดขณ�
 $_lang['context_id'] = 'หมายเลขบริบท';
 $_lang['context_key'] = 'คีย์บริบท';
 $_lang['context_management_message'] = 'จัดการบริบทของเว็บไซต์';
-$_lang['context_refresh'] = 'รีเฟรชบริบท';
-$_lang['context_remove'] = 'ลบบริบท';
-$_lang['context_remove_confirm'] = 'Are you sure you want to delete this Context? This is permanent and irreversible.';
 $_lang['context_settings'] = 'ตั้งค่าบริบท';
 $_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
-$_lang['context_update'] = 'Edit Context';
 $_lang['context_with_key_not_found'] = 'ไม่พบบริบทที่มีคีย์ %s!';
 $_lang['contexts'] = 'บริบท';

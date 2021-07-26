@@ -8,7 +8,6 @@
  */
 $_lang['duplicate'] = 'Kopírovat';
 $_lang['entry'] = 'Záznam';
-$_lang['entry_create'] = 'Vytvořit záznam';
 $_lang['entry_err_ae'] = 'Záznam již existuje!';
 $_lang['entry_err_nf'] = 'Záznam nenalezen.';
 $_lang['entry_err_ns'] = 'Nespecifikovaný záznam.';

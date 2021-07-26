@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'مجموعة المستخدم';
 $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'رسالة';
-$_lang['message_create'] = 'إنشاء رسالة';
-$_lang['message_new'] = 'إنشاء رسالة';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'إرسال بريد الكتروني';
 $_lang['message_err_nfs'] = 'الرسالة غير موجودة.';

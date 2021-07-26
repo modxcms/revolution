@@ -143,7 +143,6 @@ $_lang['resource_uri_help'] = 'Relativní URL pro tento dokument.';
 $_lang['resource_uri_override'] = 'Statická URI';
 $_lang['resource_uri_override_help'] = 'Změnou tohoto nastavení dovolíte určit statickou URI pro tento dokument hodnotou zapsanou níže.';
 $_lang['resource_with_id_not_found'] = 'Dokument s ID %s nenalezen!';
-$_lang['resource_view'] = 'Zobrazit';
 $_lang['show_sort_options'] = 'Zobrazit možnosti řazení';
 $_lang['site_schedule'] = 'Plán portálu';
 $_lang['site_schedule_desc'] = 'Zde jsou zobrazeny dokumenty s přednastaveným datem publikování/ukončení publikování. Přepnutí mezi čekajícími na publikování a čekajícími na ukončení publikování provedete kliknutím na tlačítko níže.';

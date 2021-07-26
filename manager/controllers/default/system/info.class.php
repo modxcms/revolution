@@ -36,13 +36,10 @@ class SystemInfoManagerController extends modManagerController {
         $pi = $this->getPhpInfo(INFO_GENERAL);
         $m = $this->parsePHPModules();
         $dbtype_mysql = $this->modx->config['dbtype'] == 'mysql';
-        $dbtype_sqlsrv = $this->modx->config['dbtype'] == 'sqlsrv';
         if ($dbtype_mysql && !empty($m['mysql'])) $pi = array_merge($pi, ['mysql' => $m['mysql']]);
         if ($dbtype_mysql && !empty($m['mysqlnd'])) $pi = array_merge($pi, ['pdo' => $m['mysqlnd']]);
-        if ($dbtype_sqlsrv && !empty($m['sqlsrv'])) $pi = array_merge($pi, ['sqlsrv' => $m['sqlsrv']]);
         if (!empty($m['PDO'])) $pi = array_merge($pi, ['pdo' => $m['PDO']]);
         if ($dbtype_mysql && !empty($m['pdo_mysql'])) $pi = array_merge($pi, ['pdo_mysql' => $m['pdo_mysql']]);
-        if ($dbtype_sqlsrv && !empty($m['pdo_sqlsrv'])) $pi = array_merge($pi, ['pdo_sqlsrv' => $m['pdo_sqlsrv']]);
         if (!empty($m['zip'])) $pi = array_merge($pi, ['zip' => $m['zip']]);
         $this->version = [
             'smarty'=> $this->modx->smarty->_version,

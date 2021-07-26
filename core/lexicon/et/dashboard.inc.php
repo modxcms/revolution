@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'Online kasutajad';
 $_lang['onlineusers_user'] = 'Kasutaja';
 $_lang['onlineusers_userid'] = 'Kasutaja ID';
 
-$_lang['updates_sort'] = 'Sort';
+$_lang['updates_type'] = 'Type';
 $_lang['updates_status'] = 'Staatus';
 $_lang['updates_action'] = 'Tegevus';
 $_lang['updates_available'] = 'Updates available';

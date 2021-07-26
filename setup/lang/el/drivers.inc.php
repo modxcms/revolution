@@ -15,6 +15,3 @@ $_lang['mysql_version_fail'] = 'Χρησιμοποιείτε MySQL έκδοση�
 $_lang['mysql_version_server_nf'] = 'Το MODX δεν μπόρεσε να βρει την έκδοση του server MySQL με την εντολή mysql_get_server_info(). Παρακαλώ βεβαιωθείτε ότι έχετε MySQL server έκδοσης τουλάχιστον 4.1.20 πριν συνεχίσετε.';
 $_lang['mysql_version_server_start'] = 'Έλεγχος της έκδοσης του server MySQL:';
 $_lang['mysql_version_success'] = 'Εντάξει! Χρήση: [[+version]]';
-
-$_lang['sqlsrv_version_success'] = 'OK!';
-$_lang['sqlsrv_version_client_success'] = 'OK!';

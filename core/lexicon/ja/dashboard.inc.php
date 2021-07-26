@@ -24,7 +24,7 @@ $_lang['onlineusers_title'] = 'オンラインユーザー';
 $_lang['onlineusers_user'] = 'ユーザー';
 $_lang['onlineusers_userid'] = 'ユーザーID';
 
-$_lang['updates_sort'] = 'Sort';
+$_lang['updates_type'] = 'Type';
 $_lang['updates_status'] = 'ステータス';
 $_lang['updates_action'] = 'アクション';
 $_lang['updates_available'] = 'Updates available';

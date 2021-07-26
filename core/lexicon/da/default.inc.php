@@ -99,7 +99,6 @@ $_lang['date'] = 'Dato';
 $_lang['datechanged'] = 'Ændringsdato';
 $_lang['db_header'] = 'Databasetabeller';
 $_lang['db_info_mysql'] = 'Hvis en tabel har overhead (midlertidigt diskforbrug) kan du optimere det ved at klikke på linket i kolonnen Overhead.';
-$_lang['db_info_sqlsrv'] = 'Du kan genopbygge en tabels indeks ved at klikke på linket i kolonnen ubrugt.';
 $_lang['delete'] = 'Slet';
 $_lang['deleted'] = 'Slettet';
 $_lang['description'] = 'Beskrivelse';

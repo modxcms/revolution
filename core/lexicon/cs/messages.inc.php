@@ -25,8 +25,6 @@ $_lang['usergroup'] = 'Uživatelská skupina';
 $_lang['filter_by_type'] = 'Filtrovat dle typu...';
 
 $_lang['message'] = 'Zpráva';
-$_lang['message_create'] = 'Vytvořit zprávu';
-$_lang['message_new'] = 'Vytvořit zprávu';
 $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
 $_lang['message_send_email'] = 'Poslat E-mail';
 $_lang['message_err_nfs'] = 'Zpráva nenalezena.';

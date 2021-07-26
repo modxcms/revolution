@@ -8,9 +8,7 @@
  */
 $_lang['context'] = 'Contexte';
 $_lang['context_add'] = 'Ajouter un contexte';
-$_lang['context_create'] = 'Créer un contexte';
 $_lang['context_data'] = 'Données du contexte';
-$_lang['context_duplicate'] = 'Dupliquer le contexte';
 $_lang['context_err_ae'] = 'Un contexte du même nom existe déjà.';
 $_lang['context_err_create'] = 'Une erreur est survenue lors de la création du contexte.';
 $_lang['context_err_duplicate'] = 'Une erreur est survenue lors de la duplication du contexte.';
@@ -24,11 +22,7 @@ $_lang['context_err_save'] = 'Une erreur est survenue lors de la sauvegarde du c
 $_lang['context_id'] = 'Ctx ID';
 $_lang['context_key'] = 'Clé de contexte';
 $_lang['context_management_message'] = 'Gérer les contextes du site.';
-$_lang['context_refresh'] = 'Actualiser le contexte';
-$_lang['context_remove'] = 'Supprimer le contexte';
-$_lang['context_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce contexte? Ceci est permanent et irréversible.';
 $_lang['context_settings'] = 'Paramètres du contexte';
 $_lang['context_settings_desc'] = 'Ici, vous pouvez définir des paramètres spécifiques à ce contexte. Les paramètres contextuels remplaceront tous les paramètres système avec la même clé. <b>Chaque paramètre sera disponible via le placeholder [[++key]].</b>';
-$_lang['context_update'] = 'Modifier le contexte';
 $_lang['context_with_key_not_found'] = 'Contexte ayant pour clé %s introuvable!';
 $_lang['contexts'] = 'Contextes';

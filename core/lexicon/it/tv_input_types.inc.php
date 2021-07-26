@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['autotag'] = 'Auto-Tag';
+$_lang['autotag'] = 'Tag Automatico';
 $_lang['text'] = 'Testo';
 $_lang['textarea'] = 'Area di testo (Textarea)';
 $_lang['textareamini'] = 'Mini Area Testo(Mini TextArea)';
@@ -15,7 +15,7 @@ $_lang['dropdown'] = 'Menu a Tendina (DropDown List Menu)';
 $_lang['listbox'] = 'Lista, Singola Scelta (Listbox (Single-Select))';
 $_lang['listbox-multiple'] = 'Lista, Scelta Multipla (ctrl+)(Listbox (Multi-Select))';
 $_lang['option'] = 'Bottoni Scelta (Radio Options)';
-$_lang['checkbox'] = 'Check Box';
+$_lang['checkbox'] = 'Spunta Casella';
 $_lang['image'] = 'Immagine';
 $_lang['file'] = 'File';
 $_lang['url'] = 'URL';

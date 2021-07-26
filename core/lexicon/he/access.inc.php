@@ -65,7 +65,6 @@ $_lang['access_source_update'] = 'Edit Media Source Access';
 $_lang['access_to_contexts'] = 'גישה אל קונטקסים';
 $_lang['access_to_resource_groups'] = 'גישה אל קבוצות משאבים';
 $_lang['access_type_err_ns'] = 'סוג היעד או id לא צוין!';
-$_lang['acl_add'] = 'Create Access Control';
 $_lang['authority'] = 'סמכות';
 $_lang['authority_err_ns'] = 'אנא ציין תפקיד מינימום.';
 $_lang['category'] = 'קטגוריה';

@@ -99,7 +99,6 @@ $_lang['date'] = '日付';
 $_lang['datechanged'] = '編集日時';
 $_lang['db_header'] = 'データベーステーブル';
 $_lang['db_info_mysql'] = 'テーブルがオーバーヘッドを持つ場合、オーバーヘッドカラムのリンクをクリックすることで最適化が可能かもしれません。';
-$_lang['db_info_sqlsrv'] = '未使用カラムのリンクをクリックして、テーブルのインデックスを再構築できます。';
 $_lang['delete'] = '削除';
 $_lang['deleted'] = '削除済み';
 $_lang['description'] = '説明';
