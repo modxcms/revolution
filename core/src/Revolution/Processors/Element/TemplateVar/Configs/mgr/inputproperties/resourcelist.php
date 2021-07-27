@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of a proposed change to MODX Revolution's tv input option rendering in the back end.
  * Developed by Jim Graham (smg6511), Pixels & Strings, LLC (formerly Spark Media Group)
@@ -40,7 +41,7 @@ $descKeys = [
 ];
 $this->setHelpContent($descKeys, $expandHelp);
 
-$optsJSON = <<<OPTSJSON
+$optsJSON = <<<OPTSJS
 [
     {
         defaults: {
@@ -370,12 +371,19 @@ $optsJSON = <<<OPTSJSON
             afterrender: function(cmp) {
                 const typeAheadCmp = Ext.getCmp('inopt_typeAhead{$tvId}');
                 if (typeAheadCmp) {
-                    const typeAheadOn = typeAheadCmp.getValue();
+                    const   typeAheadOn = typeAheadCmp.getValue(),
+                            switchField = 'inopt_typeAhead{$tvId}',
+                            toggleFields = [
+                                'inopt_typeAheadDelay{$tvId}',
+                                'inopt_forceSelection{$tvId}',
+                                'inopt_listEmptyText{$tvId}'
+                            ]
+                            ;
                     typeAheadCmp.on('check', function(){
-                        this.toggleFieldVisibility('inopt_typeAhead{$tvId}', cmp.id, ['inopt_typeAheadDelay{$tvId}','inopt_forceSelection{$tvId}','inopt_listEmptyText{$tvId}']);
+                        this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                     }, this);
                     if(!typeAheadOn) {
-                        this.toggleFieldVisibility('inopt_typeAhead{$tvId}', cmp.id, ['inopt_typeAheadDelay{$tvId}','inopt_forceSelection{$tvId}','inopt_listEmptyText{$tvId}']);
+                        this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                     }
                 }
             },
@@ -383,6 +391,6 @@ $optsJSON = <<<OPTSJSON
         }
     }
 ]
-OPTSJSON;
+OPTSJS;
 
 return "{'success': 1, 'optsItems': $optsJSON}";

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of a proposed change to MODX Revolution's tv input option rendering in the back end.
  * Developed by Jim Graham (smg6511), Pixels & Strings, LLC (formerly Spark Media Group)
@@ -34,7 +35,7 @@ $descKeys = [
 ];
 $this->setHelpContent($descKeys, $expandHelp);
 
-$optsJSON = <<<OPTSJSON
+$optsJS = <<<OPTSJS
 [
     {
         defaults: {
@@ -194,7 +195,12 @@ $optsJSON = <<<OPTSJSON
                     id: 'prop_target{$tvId}',
                     store: new Ext.data.SimpleStore({
                         fields: ['v','d']
-                        ,data: [['_blank',_('attr_target_blank')],['_self',_('attr_target_self')],['_parent',_('attr_target_parent')],['_top',_('attr_target_top')]]
+                        ,data: [
+                            ['_blank',_('attr_target_blank')],
+                            ['_self',_('attr_target_self')],
+                            ['_parent',_('attr_target_parent')],
+                            ['_top',_('attr_target_top')]
+                        ]
                     }),
                     displayField: 'd',
                     valueField: 'v',
@@ -238,6 +244,6 @@ $optsJSON = <<<OPTSJSON
         ]
     }
 ]
-OPTSJSON;
+OPTSJS;
 
-return "{'success': 1, 'optsItems': $optsJSON}";
+return "{'success': 1, 'optsItems': $optsJS}";

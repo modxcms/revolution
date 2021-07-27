@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of a proposed change to MODX Revolution's tv input option rendering in the back end.
  * Developed by Jim Graham (smg6511), Pixels & Strings, LLC (formerly Spark Media Group)
@@ -41,7 +42,7 @@ $descKeys = [
 ];
 $this->setHelpContent($descKeys, $expandHelp);
 
-$optsJSON = <<<OPTSJSON
+$optsJS = <<<OPTSJS
 [
     {
         defaults: {
@@ -257,12 +258,18 @@ $optsJSON = <<<OPTSJSON
             afterrender: function(cmp) {
                 const allowDecimalsCmp = Ext.getCmp('inopt_allowDecimals{$tvId}');
                 if (allowDecimalsCmp) {
-                    const showDecimalsOn = allowDecimalsCmp.getValue();
+                    const   showDecimalsOn = allowDecimalsCmp.getValue(),
+                            switchField = 'inopt_allowDecimals{$tvId}',
+                            toggleFields = [
+                                'inopt_decimalPrecision{$tvId}',
+                                'inopt_decimalSeparator{$tvId}'
+                            ]
+                            ;
                     allowDecimalsCmp.on('check', function(){
-                        this.toggleFieldVisibility('inopt_allowDecimals{$tvId}', cmp.id, ['inopt_decimalPrecision{$tvId}','inopt_decimalSeparator{$tvId}']);
+                        this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                     }, this);
                     if(showDecimalsOn) {
-                        this.toggleFieldVisibility('inopt_allowDecimals{$tvId}', cmp.id, ['inopt_decimalPrecision{$tvId}','inopt_decimalSeparator{$tvId}']);
+                        this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                     }
                 }
             },
@@ -270,6 +277,6 @@ $optsJSON = <<<OPTSJSON
         }
     }
 ]
-OPTSJSON;
+OPTSJS;
 
-return "{'success': 1, 'optsItems': $optsJSON}";
+return "{'success': 1, 'optsItems': $optsJS}";
