@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,6 @@
 
 namespace MODX\Revolution\Processors\Element\TemplateVar\Configs\Controllers;
 
-
 use MODX\Revolution\modManagerController;
 
 /**
@@ -18,17 +18,30 @@ use MODX\Revolution\modManagerController;
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\Configs\Controllers
  */
-class TvInputPropertiesManagerController extends modManagerController {
+class TvInputPropertiesManagerController extends modManagerController
+{
     public $loadFooter = false;
     public $loadHeader = false;
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return $this->modx->hasPermission('view_tv');
     }
-    public function loadCustomCssJs() {}
-    public function process(array $scriptProperties = []) {}
-    public function getPageTitle() {return '';}
-    public function getTemplateFile() {
+    public function loadCustomCssJs()
+    {
+    }
+    public function process(array $scriptProperties = [])
+    {
+    }
+    public function getPageTitle()
+    {
+        return '';
+    }
+    public function getTemplateFile()
+    {
         return 'empty.tpl';
     }
-    public function getLanguageTopics() {return [];}
+    public function getLanguageTopics()
+    {
+        return [];
+    }
 }

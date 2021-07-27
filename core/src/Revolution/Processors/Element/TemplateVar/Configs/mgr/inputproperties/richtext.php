@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of a proposed change to MODX Revolution's tv input option rendering in the back end.
  * Developed by Jim Graham (smg6511), Pixels & Strings, LLC (formerly Spark Media Group)
@@ -17,7 +18,7 @@
 $descKeys = ['required_desc'];
 $this->setHelpContent($descKeys, $expandHelp);
 
-$optsJSON = <<<OPTSJSON
+$optsJS = <<<OPTSJS
 [
     {
         defaults: {
@@ -52,6 +53,6 @@ $optsJSON = <<<OPTSJSON
         ]
     }
 ]
-OPTSJSON;
+OPTSJS;
 
-return "{'success': 1, 'optsItems': $optsJSON}";
+return "{'success': 1, 'optsItems': $optsJS}";

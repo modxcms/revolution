@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element\TemplateVar\Configs;
-
 
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\Processors\Processor;
@@ -27,7 +27,8 @@ use MODX\Revolution\Processors\Element\TemplateVar\Configs\Controllers\TvInputPr
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\Configs
  */
-class GetInputPropertyConfigs extends Processor {
+class GetInputPropertyConfigs extends Processor
+{
 
     public $propertiesKey = 'input_properties';
     public $configDirectory = 'inputproperties';
@@ -35,10 +36,12 @@ class GetInputPropertyConfigs extends Processor {
 
     public $helpContent = [];
 
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return $this->modx->hasPermission('view_tv');
     }
-    public function getLanguageTopics() {
+    public function getLanguageTopics()
+    {
         return ['tv_widget','tv_input_types'];
     }
 
@@ -47,22 +50,24 @@ class GetInputPropertyConfigs extends Processor {
      * @param array $fieldKeys - A set of lexicon entry keys for this field
      * @param bool $expandHelp - The current system setting indicating whether help should be displayed inline
      */
-    public function setHelpContent(array $fieldKeys, bool $expandHelp) {
+    public function setHelpContent(array $fieldKeys, bool $expandHelp)
+    {
         foreach ($fieldKeys as $k) {
             $help = $this->modx->lexicon($k);
             # avoid issue of lexicon key being returned when its entry does not exist
             $this->helpContent[$k] = $help != $k ? json_encode($help) : "''" ;
-            $this->helpContent['eh_'.$k] = $expandHelp ? "''" : $this->helpContent[$k] ;
+            $this->helpContent['eh_' . $k] = $expandHelp ? "''" : $this->helpContent[$k] ;
         }
     }
 
-    public function initialize() {
+    public function initialize()
+    {
         /* simulate controller to allow controller methods in TV Input Properties controllers */
-        $this->modx->getService('smarty', 'smarty.modSmarty','');
+        $this->modx->getService('smarty', 'smarty.modSmarty', '');
 
         $context = $this->getProperty('context');
         if (empty($context)) {
-            $this->setProperty('context',$this->modx->context->get('key'));
+            $this->setProperty('context', $this->modx->context->get('key'));
         }
         $this->setDefaultProperties([
             'type' => 'default',
@@ -70,7 +75,8 @@ class GetInputPropertyConfigs extends Processor {
         return true;
     }
 
-    public function process() {
+    public function process()
+    {
         $this->renderController();
         $this->getInputProperties();
 
@@ -83,15 +89,18 @@ class GetInputPropertyConfigs extends Processor {
      * @param array $configDirectories
      * @return mixed|string
      */
-    public function getConfigOutput(array $configDirectories) {
+    public function getConfigOutput(array $configDirectories)
+    {
         $o = '';
         foreach ($configDirectories as $configDirectory) {
-            if (empty($configDirectory) || !is_dir($configDirectory)) continue;
+            if (empty($configDirectory) || !is_dir($configDirectory)) {
+                continue;
+            }
 
             # Remapping option to radio; remove this mapping if the field type is ultimately renamed to radio
             $type = $this->getProperty('type');
             $type = $type == 'option' ? 'radio' : $type ;
-            $configFile = $configDirectory.$type.'.php';
+            $configFile = $configDirectory . $type . '.php';
 
             if (file_exists($configFile)) {
                 $modx =& $this->modx;
@@ -121,10 +130,13 @@ class GetInputPropertyConfigs extends Processor {
      * Simulate controller with the faux controller class
      * @return string
      */
-    public function renderController() {
+    public function renderController()
+    {
         $c = new TvInputPropertiesManagerController($this->modx);
-        $this->modx->controller = call_user_func_array([$c,'getInstance'],
-            [&$this->modx,TvInputPropertiesManagerController::class]);
+        $this->modx->controller = call_user_func_array(
+            [$c,'getInstance'],
+            [&$this->modx,TvInputPropertiesManagerController::class]
+        );
         return $this->modx->controller->render();
     }
 
@@ -132,19 +144,22 @@ class GetInputPropertyConfigs extends Processor {
      * Get default display properties for specific tv
      * @return array
      */
-    public function getInputProperties() {
+    public function getInputProperties()
+    {
         $settings = [];
         $tvId = $this->getProperty('tv');
         if (!empty($tvId)) {
             /** @var modTemplateVar $tv */
-            $tv = $this->modx->getObject(modTemplateVar::class,$tvId);
+            $tv = $this->modx->getObject(modTemplateVar::class, $tvId);
             if (is_object($tv) && $tv instanceof modTemplateVar) {
                 $settings = $tv->get($this->propertiesKey);
             }
-            $this->modx->controller->setPlaceholder('tv',$tvId);
+            $this->modx->controller->setPlaceholder('tv', $tvId);
         }
-        if (!isset($settings['allowBlank'])) $settings['allowBlank'] = true;
-        $this->modx->controller->setPlaceholder('params',$settings);
+        if (!isset($settings['allowBlank'])) {
+            $settings['allowBlank'] = true;
+        }
+        $this->modx->controller->setPlaceholder('params', $settings);
         return $settings;
     }
 
@@ -152,11 +167,14 @@ class GetInputPropertyConfigs extends Processor {
      * Fire event to allow for custom directories
      * @return array
      */
-    public function fireOnTVPropertiesListEvent() {
+    public function fireOnTVPropertiesListEvent()
+    {
         $pluginResult = $this->modx->invokeEvent($this->onPropertiesListEvent, [
             'context' => $this->getProperty('context'),
         ]);
-        if (!is_array($pluginResult) && !empty($pluginResult)) { $pluginResult = [$pluginResult]; }
+        if (!is_array($pluginResult) && !empty($pluginResult)) {
+            $pluginResult = [$pluginResult];
+        }
 
         return !empty($pluginResult) ? $pluginResult : [];
     }
@@ -165,12 +183,13 @@ class GetInputPropertyConfigs extends Processor {
      * Load namespace cached directories
      * @return array
      */
-    public function loadNamespaceCache() {
+    public function loadNamespaceCache()
+    {
         $cache = $this->modx->call(modNamespace::class, 'loadCache', [&$this->modx]);
         $cachedDirs = [];
         if (!empty($cache) && is_array($cache)) {
             foreach ($cache as $namespace) {
-                $inputDir = rtrim($namespace['path'],'/').'/tv/'.$this->configDirectory.'/';
+                $inputDir = rtrim($namespace['path'], '/') . '/tv/' . $this->configDirectory . '/';
                 if (is_dir($inputDir)) {
                     $cachedDirs[] = $inputDir;
                 }
@@ -182,10 +201,11 @@ class GetInputPropertyConfigs extends Processor {
     /**
      * @return array
      */
-    public function getConfigDirectories() {
+    public function getConfigDirectories()
+    {
         /* handle dynamic paths */
         $configDirectories = [
-            dirname(__FILE__).'/'.$this->getProperty('context').'/'.$this->configDirectory.'/',
+            dirname(__FILE__) . '/' . $this->getProperty('context') . '/' . $this->configDirectory . '/',
         ];
 
         $pluginResult = $this->fireOnTVPropertiesListEvent();

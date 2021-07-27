@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of a proposed change to MODX Revolution's tv input option rendering in the back end.
  * Developed by Jim Graham (smg6511), Pixels & Strings, LLC (formerly Spark Media Group)
@@ -40,7 +41,7 @@ $descKeys = [
 ];
 $this->setHelpContent($descKeys, $expandHelp);
 
-$optsJSON = <<<OPTSJSON
+$optsJS = <<<OPTSJS
 [
     {
         defaults: {
@@ -87,7 +88,15 @@ $optsJSON = <<<OPTSJSON
                     id: 'inopt_startDay{$tvId}',
                     store: new Ext.data.SimpleStore({
                         fields: ['v','d']
-                        ,data: [[0,_('sunday')],[1,_('monday')],[2,_('tuesday')],[3,_('wednesday')],[4,_('thursday')],[5,_('friday')],[6,_('saturday')]]
+                        ,data: [
+                            [0,_('sunday')],
+                            [1,_('monday')],
+                            [2,_('tuesday')],
+                            [3,_('wednesday')],
+                            [4,_('thursday')],
+                            [5,_('friday')],
+                            [6,_('saturday')]
+                        ]
                     }),
                     displayField: 'd',
                     valueField: 'v',
@@ -358,12 +367,19 @@ $optsJSON = <<<OPTSJSON
             afterrender: function(cmp) {
                 const hideTimeCmp = Ext.getCmp('inopt_hideTime{$tvId}');
                 if (hideTimeCmp) {
-                    const hideTimeOn = hideTimeCmp.getValue();
+                    const   hideTimeOn = hideTimeCmp.getValue(),
+                            switchField = 'inopt_hideTime{$tvId}',
+                            toggleFields = [
+                                'inopt_minTimeValue{$tvId}',
+                                'inopt_maxTimeValue{$tvId}',
+                                'inopt_timeIncrement{$tvId}'
+                            ]
+                        ;
                     hideTimeCmp.on('check', function(){
-                        this.toggleFieldVisibility('inopt_hideTime{$tvId}', cmp.id, ['inopt_minTimeValue{$tvId}','inopt_maxTimeValue{$tvId}','inopt_timeIncrement{$tvId}'], false);
+                        this.toggleFieldVisibility(switchField, cmp.id, toggleFields, false);
                     }, this);
                     if(hideTimeOn) {
-                        this.toggleFieldVisibility('inopt_hideTime{$tvId}', cmp.id, ['inopt_minTimeValue{$tvId}','inopt_maxTimeValue{$tvId}','inopt_timeIncrement{$tvId}'], false);
+                        this.toggleFieldVisibility(switchField, cmp.id, toggleFields, false);
                     }
                 }
             },
@@ -371,6 +387,6 @@ $optsJSON = <<<OPTSJSON
         }
     }
 ]
-OPTSJSON;
+OPTSJS;
 
-return "{'success': 1, 'optsItems': $optsJSON}";
+return "{'success': 1, 'optsItems': $optsJS}";

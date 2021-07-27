@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element\TemplateVar\Configs;
-
 
 /**
  * Grabs a list of render properties for a TV render
@@ -22,7 +22,8 @@ namespace MODX\Revolution\Processors\Element\TemplateVar\Configs;
  *
  * @package MODX\Revolution\Processors\Element\TemplateVar\Renders
  */
-class GetOutputPropertyConfigs extends GetInputPropertyConfigs {
+class GetOutputPropertyConfigs extends GetInputPropertyConfigs
+{
     public $propertiesKey = 'output_properties';
     public $configDirectory = 'properties';
     public $onPropertiesListEvent = 'OnTVOutputRenderPropertiesList';
