@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
+<!doctype html>
+<html dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
 <head>
 <title>{if $_pagetitle}{$_pagetitle|escape} | {/if}{$_config.site_name|strip_tags|escape}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
@@ -12,15 +12,15 @@
 <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
 
 {if isset($_config.ext_debug) && $_config.ext_debug}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js"></script>
 {else}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all.js" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all.js"></script>
 {/if}
-<script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}" type="text/javascript"></script>
-<script src="{$_config.manager_url}assets/lib/popper.min.js" type="text/javascript"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}" type="text/javascript"></script>
+<script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}"></script>
+<script src="{$_config.manager_url}assets/lib/popper.min.js"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}"></script>
 
 {$maincssjs}
@@ -28,7 +28,7 @@
 {$scr}
 {/foreach}
 
-<script type="text/javascript">
+<script>
     MODx.config.search_enabled = {$_search};
 </script>
 </head>
@@ -41,7 +41,7 @@
             <ul id="modx-headnav">
                 <li id="modx-home-dashboard">
                     <a href="?" title="{$_config.site_name|strip_tags|escape}">
-                        <img src="{$_config.manager_url}templates/{$_config.manager_theme}/images/modx-icon-color.svg" title="{$_config.site_name}">
+                        <img src="{$_config.manager_url}templates/{$_config.manager_theme}/images/modx-icon-color.svg" title="{$_config.site_name|strip_tags|escape}">
                     </a>
                 </li>
                 <li id="modx-site-info">

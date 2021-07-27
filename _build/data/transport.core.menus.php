@@ -39,6 +39,7 @@ $topNavMenus[0]->fromArray(array (
   'parent' => 'topnav',
   'permissions' => 'menu_site',
   'action' => '',
+  'icon' => '<i class="icon-file-text-o icon icon-large"></i>',
 ), '', true, true);
 
 $children = array();
@@ -119,10 +120,11 @@ $topNavMenus[1]= $xpdo->newObject('modMenu');
 $topNavMenus[1]->fromArray(array (
   'menuindex' => 1,
   'text' => 'media',
-  'description' => 'media_desc',
+  'description' => '',
   'parent' => 'topnav',
   'permissions' => 'file_manager',
   'action' => '',
+  'icon' => '<i class="icon-file-image-o icon icon-large"></i>',
 ), '', true, true);
 
 /* Media Browser */
@@ -160,6 +162,7 @@ $topNavMenus[2]->fromArray(array (
   'parent' => 'topnav',
   'permissions' => 'components',
   'action' => '',
+  'icon' => '<i class="icon-cube icon icon-large"></i>',
 ), '', true, true);
 
 /* Installer */
@@ -186,6 +189,7 @@ $topNavMenus[3]->fromArray(array (
   'parent' => 'topnav',
   'permissions' => 'menu_tools',
   'action' => '',
+  'icon' => '<i class="icon-sliders icon icon-large"></i>',
 ), '', true, true);
 $children = array();
 
