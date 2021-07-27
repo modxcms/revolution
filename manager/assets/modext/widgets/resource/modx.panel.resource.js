@@ -433,7 +433,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             items.push({
                 xtype: 'modx-breadcrumbs-panel'
-                ,id: 'modx-resource-breadcrumbs'
+                ,id: 'modx-header-breadcrumbs'
+                ,cls: 'modx-header-breadcrumbs'
                 ,desc: ''
                 ,bdMarkup: '<ul><tpl for="trail"><li>' +
                         '<tpl if="href"><a href="{href}" class="{cls}">{text}</a></tpl>' +
