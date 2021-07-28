@@ -548,9 +548,11 @@ abstract class modManagerController
      */
     public function getHeader()
     {
+        $this->setPlaceholder('_authToken', $this->modx->user->getUserToken('mgr'));
         $this->loadController('header.php', true);
-
-        return $this->fetchTemplate('header.tpl');
+        $output = $this->fetchTemplate('header.tpl');
+        $this->setPlaceholder('_authToken', '');
+        return $output;
     }
 
     /**
@@ -960,8 +962,10 @@ abstract class modManagerController
             }
         }
         if (!empty($rules)) {
-            $this->ruleOutput[] = '<script>Ext.onReady(function() {' . implode("\n",
-                    $rules) . '});</script>';
+            $this->ruleOutput[] = '<script>Ext.onReady(function() {' . implode(
+                "\n",
+                $rules
+            ) . '});</script>';
         }
 
         return $overridden;
