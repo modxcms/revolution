@@ -195,16 +195,16 @@ class RestClientResponse
         }
 
         $children = [];
-        $first = true;
+        $first = [];
         foreach ($xml->children() as $elementName => $child) {
             $value = $this->fromXML($child, $attributesKey, $childrenKey, $valueKey);
             if (isset($children[$elementName])) {
                 if (is_array($children[$elementName])) {
-                    if ($first) {
+                    if (!in_array($elementName, $first)) {
                         $temp = $children[$elementName];
                         unset($children[$elementName]);
                         $children[$elementName][] = $temp;
-                        $first = false;
+                        $first[] = $elementName;
                     }
                     $children[$elementName][] = $value;
                 } else {
