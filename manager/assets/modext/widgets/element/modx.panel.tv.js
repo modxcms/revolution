@@ -414,11 +414,14 @@ MODx.panel.TV = function(config) {
                             const isStaticCmp = Ext.getCmp('modx-tv-static');
                             if (isStaticCmp) {
                                 this.isStatic = isStaticCmp.checked;
+                                const   switchField = 'modx-tv-static',
+                                        toggleFields = ['modx-tv-static-file','modx-tv-static-source']
+                                        ;
                                 isStaticCmp.on('check', function(){
-                                    this.toggleFieldVisibility('modx-tv-static', cmp.id, ['modx-tv-static-file','modx-tv-static-source']);
+                                    this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                                 }, this);
                                 if(!this.isStatic) {
-                                    this.toggleFieldVisibility('modx-tv-static', cmp.id, ['modx-tv-static-file','modx-tv-static-source']);
+                                    this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                                 }
                             }
                         }

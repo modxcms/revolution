@@ -17,7 +17,11 @@
 # Set values
 $showNone = $params['showNone'] === 'false' || $params['showNone'] == 0 ? 'false' : 'true' ;
 $includeParent = $params['includeParent'] === 'false' || $params['includeParent'] == 0 ? 'false' : 'true' ;
-$limitRelatedContext = $params['limitRelatedContext'] == "true" || $params['limitRelatedContext'] == 1 ? 'true' : 'false' ;
+$limitRelatedContext =
+    $params['limitRelatedContext'] == "true" || $params['limitRelatedContext'] == 1
+    ? 'true'
+    : 'false'
+    ;
 $depth = $params['depth'] == 0 || $params['depth'] >= 1 ? $params['depth'] : 10 ;
 $limit = $params['limit'] >= 1 ? $params['limit'] : 0 ;
 $parents = !empty($params['parents']) ? json_encode($params['parents']) : 'null' ;
