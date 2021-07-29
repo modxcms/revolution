@@ -20,7 +20,7 @@ use MODX\Revolution\modUser;
  * @subpackage manager.controllers
  */
 
-pclass SecurityUserUpdateManagerController extends modManagerController
+class SecurityUserUpdateManagerController extends modManagerController
 {
     /** @var string $onUserFormRender */
     public $onUserFormRender = '';
@@ -35,19 +35,19 @@ pclass SecurityUserUpdateManagerController extends modManagerController
      * Check for any permissions or requirements to load page
      * @return bool
      */
-public function checkPermissions()
-{
-    return $this->modx->hasPermission('edit_user');
-}
+    public function checkPermissions()
+    {
+        return $this->modx->hasPermission('edit_user');
+    }
 
     /**
      * Register custom CSS/JS for the page
      * @return void
      */
-public function loadCustomCssJs()
-{
-    $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
-    $this->addHtml('<script>
+    public function loadCustomCssJs()
+    {
+        $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $this->addHtml('<script>
 // <![CDATA[
 MODx.onUserFormRender = "' . $this->onUserFormRender . '";
 MODx.perm.set_sudo = ' . ($this->modx->hasPermission('set_sudo') ? 1 : 0) . ';
@@ -55,14 +55,14 @@ MODx.perm.user_settings = ' . (($this->modx->hasPermission('settings') && $this-
 // ]]>
 </script>');
 
-    /* register JS scripts */
-    $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.orm.js');
-    $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.grid.settings.js');
-    $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.settings.js');
-    $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.js');
-    $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.panel.user.js');
-    $this->addJavascript($mgrUrl . 'assets/modext/sections/security/user/update.js');
-    $this->addHtml('<script>
+        /* register JS scripts */
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.orm.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.grid.settings.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.settings.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.panel.user.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/sections/security/user/update.js');
+        $this->addHtml('<script>
 // <![CDATA[
 Ext.onReady(function() {
     MODx.load({
@@ -74,141 +74,141 @@ Ext.onReady(function() {
 });
 // ]]>
 </script>');
-}
+    }
 
     /**
      * Custom logic code here for setting placeholders, etc
      * @param array $scriptProperties
      * @return mixed
      */
-public function process(array $scriptProperties = [])
-{
-    $placeholders = [];
+    public function process(array $scriptProperties = [])
+    {
+        $placeholders = [];
 
-    /* get user */
-    if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
-        return $this->failure($this->modx->lexicon('user_err_ns'));
-    }
-    $this->user = $this->modx->getObject(modUser::class, ['id' => $scriptProperties['id']]);
-    if ($this->user == null) {
-        return $this->failure($this->modx->lexicon('user_err_nf'));
-    }
-
-    /* process remote data, if existent */
-    $this->remoteFields = [];
-    $remoteData = $this->user->get('remote_data');
-    if (!empty($remoteData)) {
-        $this->remoteFields = $this->_parseCustomData($remoteData);
-    }
-
-    /* parse extended data, if existent */
-    $this->user->getOne('Profile');
-    if ($this->user->Profile) {
-        $this->extendedFields = [];
-        $extendedData = $this->user->Profile->get('extended');
-        if (!empty($extendedData)) {
-            $this->extendedFields = $this->_parseCustomData($extendedData);
+        /* get user */
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('user_err_ns'));
         }
-    }
+        $this->user = $this->modx->getObject(modUser::class, ['id' => $scriptProperties['id']]);
+        if ($this->user == null) {
+            return $this->failure($this->modx->lexicon('user_err_nf'));
+        }
 
-    /* invoke OnUserFormPrerender event */
-    $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', [
-        'id' => $this->user->get('id'),
-        'user' => &$this->user,
-        'mode' => modSystemEvent::MODE_UPD,
-    ]);
-    if (is_array($onUserFormPrerender)) {
-        $onUserFormPrerender = implode('', $onUserFormPrerender);
-    }
-    $placeholders['OnUserFormPrerender'] = $onUserFormPrerender;
+        /* process remote data, if existent */
+        $this->remoteFields = [];
+        $remoteData = $this->user->get('remote_data');
+        if (!empty($remoteData)) {
+            $this->remoteFields = $this->_parseCustomData($remoteData);
+        }
 
-    /* invoke OnUserFormRender event */
-    $onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', [
-        'id' => $this->user->get('id'),
-        'user' => &$this->user,
-        'mode' => modSystemEvent::MODE_UPD,
-    ]);
-    if (is_array($onUserFormRender)) {
-        $onUserFormRender = implode('', $onUserFormRender);
-    }
-    $this->onUserFormRender = str_replace(['"', "\n", "\r"], ['\"', '', ''], $onUserFormRender);
-    $placeholders['OnUserFormRender'] = $this->onUserFormRender;
-
-    return $placeholders;
-}
-
-private function _parseCustomData(array $remoteData = [], $path = '')
-{
-    $usemb = function_exists('mb_strlen') && (bool)$this->modx->getOption('use_multibyte', null, false);
-    $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
-    $fields = [];
-    foreach ($remoteData as $key => $value) {
-        $field = [
-            'name' => $key,
-            'id' => (!empty($path) ? $path . '.' : '') . $key,
-        ];
-        if (is_array($value)) {
-            $field['iconCls'] = 'icon-folder';
-            $field['text'] = htmlentities($key, ENT_QUOTES, $encoding);
-            $field['leaf'] = false;
-            $field['children'] = $this->_parseCustomData($value, $key);
-        } else {
-            $v = $value;
-            if ($usemb) {
-                if (mb_strlen($v, $encoding) > 30) {
-                    $v = mb_substr($v, 0, 30, $encoding) . '...';
-                }
-            } elseif (strlen($v) > 30) {
-                $v = substr($v, 0, 30) . '...';
+        /* parse extended data, if existent */
+        $this->user->getOne('Profile');
+        if ($this->user->Profile) {
+            $this->extendedFields = [];
+            $extendedData = $this->user->Profile->get('extended');
+            if (!empty($extendedData)) {
+                $this->extendedFields = $this->_parseCustomData($extendedData);
             }
-            $field['iconCls'] = 'icon-terminal';
-            $field['text'] = htmlentities($key, ENT_QUOTES, $encoding) . ' - <i>' . htmlentities($v, ENT_QUOTES, $encoding) . '</i>';
-            $field['leaf'] = true;
-            $field['value'] = $value;
         }
-        $fields[] = $field;
+
+        /* invoke OnUserFormPrerender event */
+        $onUserFormPrerender = $this->modx->invokeEvent('OnUserFormPrerender', [
+            'id' => $this->user->get('id'),
+            'user' => &$this->user,
+            'mode' => modSystemEvent::MODE_UPD,
+        ]);
+        if (is_array($onUserFormPrerender)) {
+            $onUserFormPrerender = implode('', $onUserFormPrerender);
+        }
+        $placeholders['OnUserFormPrerender'] = $onUserFormPrerender;
+
+        /* invoke OnUserFormRender event */
+        $onUserFormRender = $this->modx->invokeEvent('OnUserFormRender', [
+            'id' => $this->user->get('id'),
+            'user' => &$this->user,
+            'mode' => modSystemEvent::MODE_UPD,
+        ]);
+        if (is_array($onUserFormRender)) {
+            $onUserFormRender = implode('', $onUserFormRender);
+        }
+        $this->onUserFormRender = str_replace(['"', "\n", "\r"], ['\"', '', ''], $onUserFormRender);
+        $placeholders['OnUserFormRender'] = $this->onUserFormRender;
+
+        return $placeholders;
     }
-    return $fields;
-}
+
+    private function _parseCustomData(array $remoteData = [], $path = '')
+    {
+        $usemb = function_exists('mb_strlen') && (bool)$this->modx->getOption('use_multibyte', null, false);
+        $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
+        $fields = [];
+        foreach ($remoteData as $key => $value) {
+            $field = [
+                'name' => $key,
+                'id' => (!empty($path) ? $path . '.' : '') . $key,
+            ];
+            if (is_array($value)) {
+                $field['iconCls'] = 'icon-folder';
+                $field['text'] = htmlentities($key, ENT_QUOTES, $encoding);
+                $field['leaf'] = false;
+                $field['children'] = $this->_parseCustomData($value, $key);
+            } else {
+                $v = $value;
+                if ($usemb) {
+                    if (mb_strlen($v, $encoding) > 30) {
+                        $v = mb_substr($v, 0, 30, $encoding) . '...';
+                    }
+                } elseif (strlen($v) > 30) {
+                    $v = substr($v, 0, 30) . '...';
+                }
+                $field['iconCls'] = 'icon-terminal';
+                $field['text'] = htmlentities($key, ENT_QUOTES, $encoding) . ' - <i>' . htmlentities($v, ENT_QUOTES, $encoding) . '</i>';
+                $field['leaf'] = true;
+                $field['value'] = $value;
+            }
+            $fields[] = $field;
+        }
+        return $fields;
+    }
 
     /**
      * Return the pagetitle
      *
      * @return string
      */
-public function getPageTitle()
-{
-    if ($this->user == null) {
-        return $this->modx->lexicon('user_err_nf');
-    } else {
-        return $this->modx->lexicon('user') . ': ' . htmlentities($this->user->get('username'));
+    public function getPageTitle()
+    {
+        if ($this->user == null) {
+            return $this->modx->lexicon('user_err_nf');
+        } else {
+            return $this->modx->lexicon('user') . ': ' . htmlentities($this->user->get('username'));
+        }
     }
-}
 
     /**
      * Return the location of the template file
      * @return string
      */
-public function getTemplateFile()
-{
-    return 'security/user/update.tpl';
-}
+    public function getTemplateFile()
+    {
+        return 'security/user/update.tpl';
+    }
 
     /**
      * Specify the language topics to load
      * @return array
      */
-public function getLanguageTopics()
-{
-    return ['user', 'setting', 'access'];
-}
+    public function getLanguageTopics()
+    {
+        return ['user', 'setting', 'access'];
+    }
 
     /**
      * Get the Help URL
      * @return string
      */
-public function getHelpUrl()
-{
-    return 'Users';
-}
+    public function getHelpUrl()
+    {
+        return 'Users';
+    }
 }
