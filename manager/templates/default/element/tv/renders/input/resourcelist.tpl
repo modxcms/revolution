@@ -26,16 +26,13 @@ Ext.onReady(function() {
         ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
         {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
             ,typeAhead: true
-            ,typeAheadDelay: {if $params.typeAheadDelay && $params.typeAheadDelay != ''}{$params.typeAheadDelay}{else}250{/if}
+            ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
             ,selectOnFocus: true
         {else}
             ,editable: false
             ,typeAhead: false
         {/if}
-        {if $params.listEmptyText|default}
-            ,listEmptyText: '{$params.listEmptyText|default|escape}'
-        {/if}
-        ,forceSelection: {if $params.forceSelection|default && $params.forceSelection != 'false'}true{else}false{/if}
+        ,forceSelection: true
         ,msgTarget: 'under'
 
         {if $params.allowBlank == 1 || $params.allowBlank == 'true'}
