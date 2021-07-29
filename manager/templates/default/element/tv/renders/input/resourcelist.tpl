@@ -15,6 +15,7 @@ Ext.onReady(function() {
         ,id: 'tv{$tv->id}'
         ,triggerAction: 'all'
         ,width: 400
+        ,maxHeight: 300
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
 
         {if $params.title|default}
@@ -29,8 +30,8 @@ Ext.onReady(function() {
             ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}
             ,selectOnFocus: true
         {else}
-            ,editable: false
             ,typeAhead: false
+            ,editable: false
         {/if}
         ,forceSelection: true
         ,msgTarget: 'under'
