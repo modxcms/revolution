@@ -166,7 +166,7 @@ class RestClientResponse
         if (is_string($xml)) {
             $xml = simplexml_load_string($xml);
         }
-        if (empty($xml)) {
+        if (!($xml instanceof SimpleXMLElement)) {
             return '';
         }
         if ($childrenKey && !is_string($childrenKey)) {
@@ -180,7 +180,6 @@ class RestClientResponse
         }
 
         $return = [];
-        $name = $xml->getName();
         $_value = trim((string)$xml);
         if (!strlen($_value)) {
             $_value = null;
@@ -224,7 +223,7 @@ class RestClientResponse
 
         $attributes = [];
         foreach ($xml->attributes() as $name => $value) {
-            $attributes[$name] = trim($value);
+            $attributes[$name] = trim((string)$value);
         }
         if ($attributes) {
             if ($attributesKey) {
