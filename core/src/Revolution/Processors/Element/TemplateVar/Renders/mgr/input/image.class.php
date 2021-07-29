@@ -22,7 +22,8 @@ use MODX\Revolution\Sources\modMediaSource;
  * @subpackage processors.element.tv.renders.mgr.input
  */
 class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
-    public function process($value, array $params = []) {
+    public function process($value, array $params = [])
+    {
         $this->modx->getService('fileHandler', modFileHandler::class, '', ['context' => $this->modx->context->get('key')]);
 
         /** @var modMediaSource $source */
