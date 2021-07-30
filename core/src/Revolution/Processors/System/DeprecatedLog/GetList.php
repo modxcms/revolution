@@ -33,6 +33,11 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'method';
     public $defaultSortDirection = 'id';
 
+    public function checkPermissions()
+    {
+        return $this->modx->hasPermission('error_log_view');
+    }
+
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->select($this->modx->getSelectColumns($this->classKey, $this->modx->getAlias($this->classKey)));

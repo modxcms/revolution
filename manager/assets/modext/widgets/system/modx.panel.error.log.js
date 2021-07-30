@@ -59,6 +59,22 @@ MODx.panel.ErrorLog = function(config) {
                     ,scope: this
                 }]
             }]
+        },{
+            title: _('deprecated_log')
+            ,id: 'modx-panel-deprecated-log'
+            ,layout: 'form'
+            ,hideLabels: true
+            ,autoHeight: true
+            ,border: true
+            ,items: [{
+                html: '<p>'+_('deprecated_log_desc')+'</p>'
+                ,xtype: 'modx-description'
+            },{
+                xtype: 'modx-grid-deprecated-log'
+                ,id: 'modx-grid-deprecated-log'
+                ,border: false
+                ,cls:'main-wrapper'
+            }]
         }])]
     });
     MODx.panel.ErrorLog.superclass.constructor.call(this,config);
