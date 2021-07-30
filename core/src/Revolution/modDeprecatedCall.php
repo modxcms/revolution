@@ -1,4 +1,5 @@
 <?php
+
 namespace MODX\Revolution;
 
 use xPDO\xPDO;
@@ -16,4 +17,5 @@ use xPDO\xPDO;
  */
 class modDeprecatedCall extends \xPDO\Om\xPDOSimpleObject
 {
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace MODX\Revolution;
 
 use xPDO\xPDO;
@@ -14,14 +15,15 @@ use xPDO\xPDO;
  */
 class modDeprecatedMethod extends \xPDO\Om\xPDOSimpleObject
 {
-    private $_callers = [];
+    private $callers = [];
+
     public function addCaller(string $class, string $function, string $file = null, int $line = null)
     {
         $def = "{$class}::{$function}::{$file}::{$line}";
 
         // Check if we have it in memory already
-        if (array_key_exists($def, $this->_callers)) {
-            $caller = $this->_callers[$def];
+        if (array_key_exists($def, $this->callers)) {
+            $caller = $this->callers[$def];
             $caller->set('call_count', $caller->get('call_count') + 1);
             return;
         }
@@ -31,8 +33,8 @@ class modDeprecatedMethod extends \xPDO\Om\xPDOSimpleObject
         // If the method is new, we can't yet have a callers instance yet, so create it
         // and keep in memory + addMany so it is saved when the method is saved
         if ($this->isNew()) {
-            $this->_callers[$def] = $this->_createNewCaller($callerDef, $file, $line);
-            $this->addMany($this->_callers[$def], 'Callers');
+            $this->callers[$def] = $this->createNewCaller($callerDef, $file, $line);
+            $this->addMany($this->callers[$def], 'Callers');
             return;
         }
 
@@ -45,18 +47,18 @@ class modDeprecatedMethod extends \xPDO\Om\xPDOSimpleObject
         ]);
         if ($caller) {
             $caller->set('call_count', $caller->get('call_count') + 1);
-            $this->_callers[$def] = $caller;
+            $this->callers[$def] = $caller;
             // this makes sure the object is saved on success
-            $this->addMany($this->_callers[$def], 'Callers');
+            $this->addMany($this->callers[$def], 'Callers');
             return;
         }
 
         // Create a new caller object
-        $this->_callers[$def] = $this->_createNewCaller($callerDef, $file, $line);
-        $this->addMany($this->_callers[$def], 'Callers');
+        $this->callers[$def] = $this->createNewCaller($callerDef, $file, $line);
+        $this->addMany($this->callers[$def], 'Callers');
     }
 
-    private function _createNewCaller(string $callerDef, string $file, int $line): modDeprecatedCall
+    private function createNewCaller(string $callerDef, string $file, int $line): modDeprecatedCall
     {
         /** @var modDeprecatedCall $caller */
         $caller = $this->xpdo->newObject(modDeprecatedCall::class);

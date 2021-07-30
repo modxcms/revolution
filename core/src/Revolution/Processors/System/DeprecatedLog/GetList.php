@@ -42,7 +42,9 @@ class GetList extends GetListProcessor
     {
         $c->select($this->modx->getSelectColumns($this->classKey, $this->modx->getAlias($this->classKey)));
         $c->leftJoin(modDeprecatedMethod::class, 'Method');
-        $c->select($this->modx->getSelectColumns(modDeprecatedMethod::class, 'Method', 'method_', ['id', 'definition', 'since', 'recommendation']));
+        $c->select($this->modx->getSelectColumns(modDeprecatedMethod::class, 'Method', 'method_', [
+            'id', 'definition', 'since', 'recommendation'
+        ]));
         return parent::prepareQueryBeforeCount($c);
     }
 
