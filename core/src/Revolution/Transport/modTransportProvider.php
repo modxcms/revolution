@@ -3,8 +3,10 @@
 namespace MODX\Revolution\Transport;
 
 use MODX\Revolution\modX;
-use MODX\Revolution\Rest\modRestClient;
-use MODX\Revolution\Rest\modRestResponse;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use SimpleXMLElement;
 use xPDO\Om\xPDOSimpleObject;
 use xPDO\Transport\xPDOTransport;
@@ -30,23 +32,34 @@ class modTransportProvider extends xPDOSimpleObject
 {
     /** @var xPDO|modX */
     public $xpdo = null;
+    /**
+     * @var ClientInterface
+     */
+    private $client;
+    /**
+     * @var RequestFactoryInterface
+     */
+    private $requestFactory;
 
     /**
      * Return a list repositories from this Provider.
      *
-     * @return array A list of repositories in this Provider.
+     * @return array|string A list of repositories in this Provider, or an error message.
      */
     public function repositories()
     {
-        /** @var modRestResponse $response */
         $response = $this->request('repository');
-        if ($response->isError()) {
-            return $this->xpdo->lexicon('provider_err_connect', ['error' => $response->getError()]);
+        if (!$response) {
+            return $this->xpdo->lexicon('provider_err_blank_response');
         }
-        $repositories = $response->toXml();
+
+        $xml = simplexml_load_string($response->getBody()->getContents());
+        if ($xml->getName() === 'error') {
+            return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
+        }
 
         $list = [];
-        foreach ($repositories as $repository) {
+        foreach ($xml as $repository) {
             $repositoryArray = [];
             foreach ($repository->children() as $k => $v) {
                 $repositoryArray[$k] = (string)$v;
@@ -64,22 +77,29 @@ class modTransportProvider extends xPDOSimpleObject
         return $list;
     }
 
-    public function categories($node)
+    /**
+     * @param string $node
+     * @return array|string An array of categories, or an error message
+     */
+    public function categories(string $node)
     {
-        $this->xpdo->getVersionData();
-        $productVersion = $this->xpdo->version['code_name'] . '-' . $this->xpdo->version['full_version'];
+        $version = $this->xpdo->getVersionData();
+        $productVersion = $version['code_name'] . '-' . $version['full_version'];
 
-        /** @var modRestResponse $response */
         $response = $this->request('repository/' . $node, 'GET', [
             'supports' => $productVersion,
         ]);
-        if ($response->isError()) {
-            return $this->xpdo->lexicon('provider_err_connect', ['error' => $response->getError()]);
+        if (!$response) {
+            return $this->xpdo->lexicon('provider_err_blank_response');
         }
-        $tags = $response->toXml();
+
+        $xml = simplexml_load_string($response->getBody()->getContents());
+        if ($xml->getName() === 'error') {
+            return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
+        }
 
         $list = [];
-        foreach ($tags as $tag) {
+        foreach ($xml as $tag) {
             if ((string)$tag->name == '') {
                 continue;
             }
@@ -101,7 +121,7 @@ class modTransportProvider extends xPDOSimpleObject
      *
      * @param array $args Additional arguments to pass to the provider service
      *
-     * @return array An array of statistics
+     * @return array|string An array of statistics or an error message
      */
     public function stats(array $args = [])
     {
@@ -112,64 +132,77 @@ class modTransportProvider extends xPDOSimpleObject
             'newest' => [],
         ];
         $response = $this->request('home', 'GET', $args);
-        if ($response) {
-            if (!$response->isError()) {
-                $xml = $response->toXml();
+        if (!$response) {
+            return $this->xpdo->lexicon('provider_err_blank_response');
+        }
 
-                $stats['packages'] = number_format((integer)$xml->packages);
-                $stats['downloads'] = number_format((integer)$xml->downloads);
-                /** @var SimpleXMLElement $package */
-                foreach ($xml->topdownloaded as $package) {
-                    $stats['topdownloaded'][] = [
-                        'url' => (string)$xml->url,
-                        'id' => (string)$package->id,
-                        'name' => (string)$package->name,
-                        'downloads' => number_format((integer)$package->downloads, 0),
-                    ];
-                }
-                /** @var SimpleXMLElement $package */
-                foreach ($xml->newest as $package) {
-                    $stats['newest'][] = [
-                        'url' => (string)$xml->url,
-                        'id' => (string)$package->id,
-                        'name' => (string)$package->name,
-                        'package_name' => (string)$package->package_name,
-                        'releasedon' => strftime('%b %d, %Y', strtotime((string)$package->releasedon)),
-                    ];
-                }
-            } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $response->getError(), '', __METHOD__, __FILE__, __LINE__);
-            }
+        $xml = simplexml_load_string($response->getBody()->getContents());
+        if ($xml->getName() === 'error') {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package provider statistics: " . $xml->message, '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
+        }
+
+        $stats['packages'] = number_format((int)$xml->packages);
+        $stats['downloads'] = number_format((int)$xml->downloads);
+
+        /** @var SimpleXMLElement $package */
+        foreach ($xml->topdownloaded as $package) {
+            $stats['topdownloaded'][] = [
+                'url' => (string)$xml->url,
+                'id' => (string)$package->id,
+                'name' => (string)$package->name,
+                'downloads' => number_format((integer)$package->downloads, 0),
+            ];
+        }
+        /** @var SimpleXMLElement $package */
+        foreach ($xml->newest as $package) {
+            $stats['newest'][] = [
+                'url' => (string)$xml->url,
+                'id' => (string)$package->id,
+                'name' => (string)$package->name,
+                'package_name' => (string)$package->package_name,
+                'releasedon' => strftime('%b %d, %Y', strtotime((string)$package->releasedon)),
+            ];
         }
 
         return $stats;
     }
 
-    public function info($identifier, array $args = [])
+    /**
+     * @param string $identifier
+     * @param array $args
+     * @return array|string An array of information about the provided package, or a string error message
+     */
+    public function info(string $identifier, array $args = [])
     {
-        $info = [];
         if (strpos($identifier, '-') > 0) {
             $response = $this->request('package', 'GET', ['signature' => $identifier]);
-            if ($response) {
-                if (!$response->isError()) {
-                    $xml = $response->toXml();
-                    $this->fromXML($xml, $info);
-                }
+            if (!$response) {
+                return $this->xpdo->lexicon('provider_err_blank_response');
             }
-        } else {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                'Could not load package info from name for ' . $identifier . ', not yet implemented.');
-            /* TODO: implement package info by package name */
+
+            $xml = simplexml_load_string($response->getBody()->getContents());
+            if ($xml->getName() === 'error') {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package info for {$identifier}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
+                return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
+            }
+            $info = [];
+            $this->fromXML($xml, $info);
+            return $info;
         }
 
-        return $info;
+        /* TODO: implement package info by package name */
+        $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not load package info from name for ' . $identifier . ', not yet implemented.');
+
+        return [];
     }
 
-    public function latest($identifier, $constraint = '*', array $args = [])
+    public function latest($identifier, $constraint = '*', array $args = []): array
     {
         $latest = [];
+
+        // Given a package name, we check the available versions
         if (strpos($identifier, '-') === false) {
-            /** @var modRestResponse $response */
             $response = $this->request(
                 'package/versions',
                 'GET',
@@ -181,44 +214,54 @@ class modTransportProvider extends xPDOSimpleObject
                     $args
                 )
             );
-            if ($response) {
-                if (!$response->isError()) {
-                    $xml = $response->toXml();
-                    /** @var SimpleXMLElement $resolver */
-                    foreach ($xml as $resolver) {
-                        $node = [];
-                        if (xPDOTransport::satisfies((string)$resolver->version, $constraint)) {
-                            $this->fromXML($resolver, $node);
-                            array_push($latest, $node);
-                        }
-                    }
-                } else {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $response->getError(), '', __METHOD__, __FILE__, __LINE__);
+
+            if (!$response) {
+                return $this->xpdo->lexicon('provider_err_blank_response');
+            }
+
+            $xml = simplexml_load_string($response->getBody()->getContents());
+            if ($xml->getName() === 'error') {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load latest versions for {$identifier} with constraint {$constraint}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
+                return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
+            }
+
+            foreach ($xml as $resolver) {
+                $node = [];
+                if (xPDOTransport::satisfies((string)$resolver->version, $constraint)) {
+                    $this->fromXML($resolver, $node);
+                    array_push($latest, $node);
                 }
             }
-        } else {
-            $response = $this->request(
-                'package/update',
-                'GET',
-                array_merge(
-                    [
-                        'signature' => $identifier,
-                        'constraint' => $constraint,
-                    ],
-                    $args
-                )
-            );
-            if ($response) {
-                if (!$response->isError()) {
-                    $xml = $response->toXml();
-                    foreach ($xml as $resolver) {
-                        $node = [];
-                        if (xPDOTransport::satisfies((string)$resolver->version, $constraint)) {
-                            $this->fromXML($resolver, $node);
-                            array_push($latest, $node);
-                        }
-                    }
-                }
+            return $latest;
+        }
+
+        // Given a signature, we ask if an update is available for it
+        $response = $this->request(
+            'package/update',
+            'GET',
+            array_merge(
+                [
+                    'signature' => $identifier,
+                    'constraint' => $constraint,
+                ],
+                $args
+            )
+        );
+        if (!$response) {
+            return $this->xpdo->lexicon('provider_err_blank_response');
+        }
+
+        $xml = simplexml_load_string($response->getBody()->getContents());
+        if ($xml->getName() === 'error') {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load updates for {$identifier}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
+        }
+
+        foreach ($xml as $resolver) {
+            $node = [];
+            if (xPDOTransport::satisfies((string)$resolver->version, $constraint)) {
+                $this->fromXML($resolver, $node);
+                array_push($latest, $node);
             }
         }
 
@@ -229,7 +272,7 @@ class modTransportProvider extends xPDOSimpleObject
     {
         $result = false;
         $metadata = $this->info($signature);
-        if (!empty($metadata)) {
+        if (is_array($metadata)) {
             /** @var modTransportPackage $package */
             $package = $this->xpdo->newObject(modTransportPackage::class);
             $package->set('signature', $signature);
@@ -261,32 +304,32 @@ class modTransportProvider extends xPDOSimpleObject
         return $result;
     }
 
-    public function find(array $search = [], array $args = [])
+    public function find(array $search = [], array $args = []): array
     {
         $results = [];
 
-        $where = array_merge(
-            [
-                'query' => false,
-                'tag' => false,
-                'sorter' => false,
-                'start' => 0,
-                'limit' => 10,
-                'dateFormat' => '%b %d, %Y',
-                'supportsSeparator' => ', ',
-            ],
-            $search
-        );
+        $where = array_merge([
+            'query' => false,
+            'tag' => false,
+            'sorter' => false,
+            'start' => 0,
+            'limit' => 10,
+            'dateFormat' => '%b %d, %Y',
+            'supportsSeparator' => ', ',
+        ], $search);
         $where['page'] = !empty($where['start']) ? round($where['start'] / $where['limit']) : 0;
 
-        /** @var modRestResponse $response */
         $response = $this->request('package', 'GET', $where);
-        if ($response->isError()) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $response->getError(), '', __METHOD__, __FILE__, __LINE__);
 
-            return $results;
+        if (!$response) {
+            return $this->xpdo->lexicon('provider_err_blank_response');
         }
-        $xml = $response->toXml();
+
+        $xml = simplexml_load_string($response->getBody()->getContents());
+        if ($xml->getName() === 'error') {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load packages for search " . json_encode($where) . ": {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
+        }
 
         /** @var SimpleXMLElement $package */
         foreach ($xml as $package) {
@@ -334,34 +377,28 @@ class modTransportProvider extends xPDOSimpleObject
 
     protected function downloadUrl($signature, $location, array $args = [])
     {
-        $url = false;
-        /** @var modRestClient $rest */
-        $rest = $this->xpdo->getService('rest', modRestClient::class);
-        if ($rest) {
-            $responseType = $rest->responseType;
-            $rest->setResponseType('text');
-            $response = $rest->request(
-                $location,
-                '',
-                'GET',
-                [
-                    'revolution_version' => $this->arg('revolution_version', $this->args($args)),
-                    'getUrl' => true,
-                ]
-            );
-            if (empty($response) || empty($response->response)) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                    "Could not get download url for package {$signature} using location {$location}");
-            } elseif ($response->isError()) {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                    "Could not get download url for package {$signature} using location {$location}: {$response->getError()}");
-            } else {
-                $url = (string)$response->response;
-            }
-            $rest->setResponseType($responseType);
+        /** @var ClientInterface $client */
+        $client = $this->xpdo->services->get(ClientInterface::class);
+        /** @var RequestFactoryInterface $requestFactory */
+        $requestFactory = $this->xpdo->services->get(RequestFactoryInterface::class);
+
+        $uri = $location;
+        $uri .= (strpos($uri, '?') > 0) ? '&' : '?';
+        $uri .= http_build_query([
+            'revolution_version' => $this->arg('revolution_version', $this->args($args)),
+            'getUrl' => true,
+        ]);
+        $request = $requestFactory->createRequest('GET', $uri)
+            ->withHeader('Accept', 'text/plain');
+
+        try {
+            $response = $client->sendRequest($request);
+        } catch (ClientExceptionInterface $e) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not get download url for package {$signature} using location {$location}");
+            return '';
         }
 
-        return $url;
+        return $response->getBody()->getContents();
     }
 
     protected function fromXML(SimpleXMLElement $xml, array &$array, $level = 0)
@@ -415,17 +452,39 @@ class modTransportProvider extends xPDOSimpleObject
      * @param string $method The method of the request (GET/POST)
      * @param array  $params An array of parameters to send to the REST request
      *
-     * @return modRestResponse|bool The response from the REST request, or false
+     * @return ResponseInterface|bool
      */
-    public function request($path, $method = 'GET', $params = [])
+    public function request(string $path, string $method = 'GET', array $params = [])
     {
+        $client = $this->getClient();
+
+        $uri = $this->get('service_url');
+        $uri = rtrim(trim($uri), '/') . '/' . ltrim($path, '/');
+
+        // Add default params (authentication, versions, etc)
+        $params = $this->args($params);
+
+        // Add params to the URI if this is a GET request
+        if ($method === 'GET') {
+            $uri .= (strpos($uri, '?') > 0) ? '&' : '?';
+            $uri .= http_build_query($params);
+        }
+
+        // Create the PSR-7 request
+        $request = $this->requestFactory->createRequest($method, $uri)
+            ->withHeader('Accept', 'application/xml');
+
+        // Add params to the body if this is a POST request
+        if ($method === 'POST') {
+            $request->withHeader('Content-Type','application/x-www-form-urlencoded');
+            $request->getBody()->write(http_build_query($params));
+        }
+
         $response = false;
-        $service = $this->getClient();
-        if ($service) {
-            $response = $service->request($this->get('service_url'), $path, $method, $this->args($params));
-        } else {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $this->xpdo->lexicon('provider_err_no_client'), '', __METHOD__,
-                __FILE__, __LINE__);
+        try {
+            $response = $client->sendRequest($request);
+        } catch (ClientExceptionInterface $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, get_class($e) . " sending {$method} {$path} for provider {$this->get('name')}: {$e->getMessage()}", '', '', $e->getFile(), $e->getLine());
         }
 
         return $response;
@@ -434,40 +493,32 @@ class modTransportProvider extends xPDOSimpleObject
     /**
      * Get the client responsible for communicating with the provider.
      *
-     * @return modRestClient|bool A REST client instance, or FALSE.
+     * @return ClientInterface A REST client instance, or FALSE.
      */
-    public function getClient()
+    public function getClient(): ClientInterface
     {
-        if (empty($this->xpdo->rest)) {
-            $this->xpdo->getService('rest', modRestClient::class);
-            $loaded = $this->xpdo->rest->getConnection();
-            if (!$loaded) {
-                return false;
-            }
+        if ($this->client) {
+            return $this->client;
         }
-
-        return $this->xpdo->rest;
+        $this->client = $this->xpdo->services->get(ClientInterface::class);
+        $this->requestFactory = $this->xpdo->services->get(RequestFactoryInterface::class);
+        return $this->client;
     }
 
     /**
      * Verifies the authenticity of the provider
      *
-     * @return boolean True if verified, xml if failed
+     * @return bool|string Boolean indicating success or failure; string if request failed
      */
     public function verify()
     {
         $response = $this->request('verify', 'GET');
-        if ($response->isError()) {
-            $message = $response->getError();
-            if ($this->xpdo->lexicon && $this->xpdo->lexicon->exists('provider_err_' . $message)) {
-                $message = $this->xpdo->lexicon('provider_err_' . $message);
-            }
-
-            return $message;
+        if (!$response) {
+            return $this->xpdo->lexicon('provider_err_blank_response');
         }
-        $status = $response->toXml();
 
-        return (boolean)$status->verified;
+        $body = simplexml_load_string($response->getBody()->getContents());
+        return (bool)$body->verified;
     }
 
     /**

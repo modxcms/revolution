@@ -23,7 +23,6 @@ use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
-use MODX\Revolution\Rest\modRestClient;
 use MODX\Revolution\Smarty\modSmarty;
 use MODX\Revolution\Validation\modValidator;
 use PDO;
@@ -219,10 +218,6 @@ class modX extends xPDO {
      * @var modMail $mail
      */
     public $mail;
-    /**
-     * @var modRestClient $rest
-     */
-    public $rest;
     /**
      * @var modSmarty $smarty
      */
