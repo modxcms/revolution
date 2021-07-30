@@ -159,7 +159,6 @@ $cleanup = [
         'src/Revolution/Processors/Element/TemplateVar/Renders/mgr/inputproperties/list-multiple-legacy.php',
 
         // remove modClassMap and dependencies
-        'src/Revolution/Processors/Element/GetClasses.php',
         'src/Revolution/Processors/System/ClassMap/GetList.php',
         'src/Revolution/modClassMap.php',
         'src/Revolution/mysql/modClassMap.php',
