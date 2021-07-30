@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Add new tables introduced in 3.0
  *
