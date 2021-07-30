@@ -3,6 +3,7 @@
 namespace MODX\Revolution\Transport;
 
 use MODX\Revolution\modX;
+use Throwable;
 use xPDO\Om\xPDOObject;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
@@ -298,47 +299,62 @@ class modTransportPackage extends xPDOObject
      */
     public function install(array $options = [])
     {
-        $installed = false;
-        if ($this->getTransport()) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('workspace_grabbing'));
-            $this->getOne('Workspace');
-            $wc = isset($this->Workspace->config) && is_array($this->Workspace->config) ? $this->Workspace->config : [];
-            $at = is_array($this->get('attributes')) ? $this->get('attributes') : [];
-            $attributes = array_merge($wc, $at);
-            $attributes = array_merge($attributes, $options);
-            $attributes[xPDOTransport::PACKAGE_ACTION] = $this->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
-            @ini_set('max_execution_time', 0);
-            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
-            $requires = isset($attributes['requires']) && is_array($attributes['requires'])
-                ? $attributes['requires']
-                : [];
-            $unsatisfied = $this->checkDependencies($requires);
+        if (!$this->getTransport()) {
+            return false;
+        }
+
+        $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('workspace_grabbing'));
+        $this->getOne('Workspace');
+        $wc = isset($this->Workspace->config) && is_array($this->Workspace->config) ? $this->Workspace->config : [];
+        $at = is_array($this->get('attributes')) ? $this->get('attributes') : [];
+        $attributes = array_merge($wc, $at);
+        $attributes = array_merge($attributes, $options);
+        $attributes[xPDOTransport::PACKAGE_ACTION] = $this->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
+        @ini_set('max_execution_time', 0);
+        $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
+        $requires = isset($attributes['requires']) && is_array($attributes['requires'])
+            ? $attributes['requires']
+            : [];
+        $unsatisfied = $this->checkDependencies($requires);
+        if (!empty($unsatisfied)) {
+            $unsatisfied = $this->resolveDependencies($unsatisfied);
             if (!empty($unsatisfied)) {
-                $unsatisfied = $this->resolveDependencies($unsatisfied);
-                if (!empty($unsatisfied)) {
-                    foreach ($unsatisfied as $dependency => $constraint) {
-                        $this->xpdo->log(
-                            xPDO::LOG_LEVEL_ERROR,
-                            $this->xpdo->lexicon(
-                                'package_dependency_unsatisfied',
-                                [
-                                    'signature' => $this->get('signature'),
-                                    'requires' => "{$dependency} @ {$constraint}",
-                                ]
-                            )
-                        );
-                    }
-                    if ($this->getOption('abort_install_on_unsatisfied_dependency', $attributes, true)) {
-                        return false;
-                    }
+                foreach ($unsatisfied as $dependency => $constraint) {
+                    $this->xpdo->log(
+                        xPDO::LOG_LEVEL_ERROR,
+                        $this->xpdo->lexicon(
+                            'package_dependency_unsatisfied',
+                            [
+                                'signature' => $this->get('signature'),
+                                'requires' => "{$dependency} @ {$constraint}",
+                            ]
+                        )
+                    );
+                }
+                if ($this->getOption('abort_install_on_unsatisfied_dependency', $attributes, true)) {
+                    return false;
                 }
             }
-            if ($this->package->install($attributes)) {
-                $installed = true;
-                $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
-                $this->set('attributes', $attributes);
-                $this->save();
-            }
+        }
+
+        $installed = false;
+        try {
+            $installed = $this->package->install($attributes);
+        }
+        catch (Throwable $e) {
+            $this->xpdo->log(
+                xPDO::LOG_LEVEL_ERROR,
+                $this->xpdo->lexicon('package_err_caught', [
+                    'type' => $e->getPrevious() ? get_class($e->getPrevious()) : get_class($e),
+                    'message' => $e->getMessage(),
+                    'in' => str_replace(MODX_BASE_PATH, '/', $e->getFile()) . ':' . $e->getLine(),
+                ])
+            );
+        }
+        if ($installed) {
+            $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
+            $this->set('attributes', $attributes);
+            $this->save();
         }
 
         return $installed;
