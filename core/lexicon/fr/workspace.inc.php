@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Impossible de télécharger et créer l
 $_lang['package_download_err_ns'] = 'Veuillez sélectionner au moins une version de l\'extension à télécharger.';
 $_lang['package_err_create'] = 'Impossible de créer l\'extension.';
 $_lang['package_err_file_read'] = 'Impossible d\'ouvrir le fichier en lecture : [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Impossible d\'installer l\'extension ayant pour signature : [[+signature]]';
 $_lang['package_err_install_gen'] = 'L\'installation de l\'extension a échoué.';
 $_lang['package_err_load'] = 'Impossible de charger le paquet de transport de l\'extension.';
