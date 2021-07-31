@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Не удалось загрузить 
 $_lang['package_download_err_ns'] = 'Выберите хотя бы одну версию пакета для загрузки.';
 $_lang['package_err_create'] = 'Невозможно создать пакет.';
 $_lang['package_err_file_read'] = 'Невозможно открыть файл для чтения: [[+source]]';
+$_lang['package_err_caught'] = 'Ошибка установки [[+type]] в [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Невозможно установить пакет с подписью: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Не удалось установить пакет.';
 $_lang['package_err_load'] = 'Не удалось загрузить транспортный пакет.';
