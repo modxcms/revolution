@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Konnte das Transport-Package mit der Si
 $_lang['package_download_err_ns'] = 'Bitte wählen Sie mindestens eine Package-Version zum Herunterladen aus.';
 $_lang['package_err_create'] = 'Konnte das Package nicht erstellen.';
 $_lang['package_err_file_read'] = 'Konnte die Datei "[[+source]]" nicht zum Lesen öffnen.';
+$_lang['package_err_caught'] = 'Installation fehlgeschlagen mit [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Konnte das Package mit der Signatur "[[+signature]]" nicht installieren.';
 $_lang['package_err_install_gen'] = 'Konnte das Package nicht installieren.';
 $_lang['package_err_load'] = 'Konnte das Transport-Package nicht laden.';
