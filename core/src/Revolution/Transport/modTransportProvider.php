@@ -170,10 +170,9 @@ class modTransportProvider extends xPDOSimpleObject
 
     /**
      * @param string $identifier
-     * @param array $args
      * @return array|string An array of information about the provided package, or a string error message
      */
-    public function info(string $identifier, array $args = [])
+    public function info(string $identifier)
     {
         if (strpos($identifier, '-') > 0) {
             $response = $this->request('package', 'GET', ['signature' => $identifier]);
@@ -197,7 +196,16 @@ class modTransportProvider extends xPDOSimpleObject
         return [];
     }
 
-    public function latest($identifier, $constraint = '*', array $args = []): array
+    /**
+     * Retrieves either the available versions for a provided package name, or checks if updates are available
+     * when provided an exact package signature.
+     *
+     * @param string $identifier
+     * @param string $constraint
+     * @param array $args
+     * @return array|string Array of package versions, or an error string
+     */
+    public function latest(string $identifier, string $constraint = '*', array $args = [])
     {
         $latest = [];
 
@@ -268,6 +276,14 @@ class modTransportProvider extends xPDOSimpleObject
         return $latest;
     }
 
+    /**
+     * Downloads the package and creates the modTransportPackage if successful.
+     *
+     * @param $signature
+     * @param null $target
+     * @param array $args
+     * @return false|modTransportPackage
+     */
     public function transfer($signature, $target = null, array $args = [])
     {
         $result = false;
@@ -304,7 +320,13 @@ class modTransportProvider extends xPDOSimpleObject
         return $result;
     }
 
-    public function find(array $search = [], array $args = []): array
+    /**
+     * Retrieves packages from the provider that matches the provided search options.
+     *
+     * @param array $search Array with keys query, tag, sorter, start, limit, dateFormat, supportsSeparator controlling the search request
+     * @return array|string Array of packages, or a string error message if the request failed
+     */
+    public function find(array $search = [])
     {
         $results = [];
 
@@ -375,7 +397,15 @@ class modTransportProvider extends xPDOSimpleObject
         return [(int)$xml['total'], $results];
     }
 
-    protected function downloadUrl($signature, $location, array $args = [])
+    /**
+     * Grabs the download URL for a file. This allows a provider to specify a download location on AWS for example.
+     *
+     * @param string $signature
+     * @param string $location
+     * @param array $args
+     * @return string The download URL, or an empty string if the request failed.
+     */
+    protected function downloadUrl(string $signature, string $location, array $args = [])
     {
         /** @var ClientInterface $client */
         $client = $this->xpdo->services->get(ClientInterface::class);
