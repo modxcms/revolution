@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Ei saanud allalaadida ja luuba transpor
 $_lang['package_download_err_ns'] = 'Palun valige vähemalt üks paki versioon, mida allalaadida.';
 $_lang['package_err_create'] = 'Ei saanud luua pakki.';
 $_lang['package_err_file_read'] = 'Ei saanud avada faili lugemiseks: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Ei saanud installida pakki signatuuriga: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Paki install ei õnnestunud.';
 $_lang['package_err_load'] = 'Ei suutnud laadida transpordi pakki.';
