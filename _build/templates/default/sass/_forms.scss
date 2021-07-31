@@ -681,6 +681,10 @@ input::-moz-focus-inner {
 
       position: absolute;
       left: -9999px;
+      html[dir="rtl"] & {
+        right: -9999px;
+        left: unset;
+      }
 
       &+.x-form-cb-label,
       &+.x-fieldset-header-text {

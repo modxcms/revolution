@@ -1293,6 +1293,14 @@ iframe[classname="x-hidden"] {
   visibility: hidden;
 }
 
+.x-hiden,
+.x-hide-offsets {
+  html[dir="rtl"] & {
+    right: -9999px;
+    left: unset;
+  }
+}
+
 /* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
   background: url($imgPath + 'restyle/fileup/file-add.gif') no-repeat left center !important;
