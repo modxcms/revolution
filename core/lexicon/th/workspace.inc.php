@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'ไม่สามารถดาวน
 $_lang['package_download_err_ns'] = 'กรุณาเลือกแพ็กเกจอย่างน้อยหนึ่งแพ็กเกจเพื่อทำการดาวน์โหลด';
 $_lang['package_err_create'] = 'ไม่สามารถสร้างแพ็กเกจได้';
 $_lang['package_err_file_read'] = 'ไม่สามารถเปิดไฟล์อ่านได้: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'ไม่สามารถติดตั้งแพ็กเกจด้วยลายเซ็น: [[+signature]]';
 $_lang['package_err_install_gen'] = 'การติดตั้งแพ็กเกจล้มเหลว';
 $_lang['package_err_load'] = 'ไม่สามารถโหลดทรานสปอร์ตแพ็กเกจได้';
