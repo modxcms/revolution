@@ -1559,12 +1559,3 @@ td.x-date-mp-sep {
     background-color: rgba(0, 0, 0, .8);
   }
 }
-
-// Template preview field that opens the file browser
-#x-form-el-modx-template-preview-file {
-  .x-form-trigger.x-form-file-trigger {
-    &:before {
-      content: "\f1c5" !important;
-    }
-  }
-}

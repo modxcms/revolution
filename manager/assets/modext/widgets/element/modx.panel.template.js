@@ -143,6 +143,7 @@ MODx.panel.Template = function(config) {
                         browserEl: 'modx-browser',
                         fieldLabel: _('template_preview'),
                         description: MODx.expandHelp ? '' : _('template_preview_description'),
+                        triggerClass: 'x-form-image-trigger',
                         name: 'preview_file',
                         source: null !== config.record.source ? config.record.source : MODx.config.default_media_source,
                         openTo: config.record.openTo || '',
