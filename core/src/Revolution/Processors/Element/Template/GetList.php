@@ -70,24 +70,24 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
         $preview = $object->getPreviewUrl();
 
         if (!empty($preview)) {
-            $imageQuery = http_build_query(array(
+            $imageQuery = http_build_query([
                 'src'           => $preview,
                 'w'             => 335,
                 'h'             => 236,
                 'HTTP_MODAUTH'  => $this->modx->user->getUserToken($this->modx->context->get('key')),
                 'zc'            => 1
-            ));
+            ]);
 
             $preview = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
         }
 
-        return array(
+        return [
             'id'            => $object->get('id'),
             'templatename'  => $object->get('templatename'),
             'description'   => $object->get('description'),
             'category_name' => $object->get('category_name'),
             'preview'       => $preview,
             'time'          => time()
-        );
+        ];
     }
 }

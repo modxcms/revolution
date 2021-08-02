@@ -38,18 +38,18 @@ class GetList extends GetListProcessor
         $query = $this->getProperty('query');
 
         if (!empty($query)) {
-            $c->where(array(
+            $c->where([
                 'pagetitle:LIKE'    => '%' . $query . '%',
                 'OR:longtitle:LIKE' => '%' . $query . '%'
-            ));
+            ]);
         }
 
         $ignore = $this->getProperty('ignore');
 
         if (!empty($ignore)) {
-            $c->where(array(
+            $c->where([
                 'id:NOT IN' => explode(',', $ignore)
-            ));
+            ]);
         }
 
         $c->sortby('context_key');
