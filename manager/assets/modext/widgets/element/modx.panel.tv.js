@@ -539,7 +539,6 @@ MODx.panel.TV = function(config) {
             }
         }
     });
-    this.addNewLoaderType(['dummyTv', 'dummyRender']);
     MODx.panel.TV.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.TV,MODx.FormPanel,{
@@ -596,7 +595,10 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
      * values that may already exist, following the same data scheme used above in the nativeTypes property.
      * Using apply/applyIf is not advisable here, as it's the inner properties' array values that need to be appended.
      */
-    ,newLoaderTypes: {}
+    ,newLoaderTypes: {
+        input: [],
+        output: []
+    }
 
     /**
      * @property {Function} addNewLoaderType - Inserts given tv type, and optionally output render type, into newLoaderTypes object
@@ -698,6 +700,13 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             }
         }
     }
+
+    /**
+     * @property {Object} sharedComponentOverrides - Entry point for user-contributed TV
+     * overrides of the global input properties (currently input options [elements] and
+     * default value [default_text]).
+     */
+    ,sharedComponentOverrides: {}
 
     ,setup: function() {
         if (this.initialized) { this.clearDirty(); return true; }
@@ -861,7 +870,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     ,getValidatorDefs: function(tvId, type) {
         // Here, 'this' refers to the current class (MODx.panel.TV)
         const me = this;
-
         // Within each validator, 'this' refers to the input element triggering the given method
         let validatorDefs = {
             minLtMax: function (v) {
@@ -903,38 +911,10 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
      * @returns {Object} - The currently-available set of listener methods
      */
     ,getListenerDefs: function(tvId, propsPanel) {
-        /*
-            NOTE: The testX methods below are left here just to illustrate that/how the listener insertion works;
-            remove before final publishing.
 
-            See the config file at core/src/Revolution/Processors/Element/TemplateVar/Configs/mgr/inputproperties/text.php and
-            play with the text TV input properties (where these test methods are specified) to
-        */
         const me = this;
 
         let listenerDefs = {
-            testDirtyOnBlur: {
-                blur: function(){
-                    const fldDirty = this.isDirty() ? 'is' : 'is not',
-                        formDirty = me.isDirty() ? 'is' : 'is not'
-                        ;
-                    console.log(`testDirtyOnBlur: ${this.fieldLabel} field ${fldDirty} dirty and the form ${formDirty} dirty`);
-                }
-            },
-            testComboEvt: {
-                select: function(){
-                    console.log(`testComboEvt: Changed this select from "${this.startValue}" to "${this.getValue()}"`);
-                },
-                change: function(){
-                    console.log(`testComboEvt: This combo element also fired the change event.`);
-                }
-            },
-            testInputEvt: {
-                change: function(){
-                    console.log(`testInputEvt: Changed this select from "${this.startValue}" to "${this.getValue()}"`);
-                    me.testMethod(this);
-                }
-            },
             insertHelpExampleOnClick: {
                 render: {
                     fn: function(el) {
@@ -945,11 +925,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
             }
         };
         return listenerDefs;
-    }
-
-    /* - - - REMOVE BEFORE PUBLISHING - - - */
-    ,testMethod: function(cmp) {
-        console.log(`testMethod: Called from ${cmp.fieldLabel}'s listener.`);
     }
 
     /**
@@ -1079,38 +1054,21 @@ MODx.panel.TVInputProperties = function(config) {
                 ,html: _('tv_type_desc')
                 ,cls: 'desc-under'
             },{
+                /*
+                    Reducing this and next 3 items' initial config to bare-bones minimum,
+                    as they will be dynamically replaced via updateSharedComponent each time
+                    the tv type is changed
+                */
                 xtype: 'textarea'
-                ,fieldLabel: _('tv_elements')
-                ,description: MODx.expandHelp ? '' : _('tv_elements_desc')
-                ,name: 'els'
                 ,id: 'modx-tv-elements'
-                ,itemId: 'fld-els'
-                ,grow: true
-                ,maxHeight: 160
-                ,value: config.record.elements || ''
-                ,plugins: new AddFieldUtilities.plugin.Class
+                ,itemId: 'fld-elements'
             },{
                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                 ,forId: 'modx-tv-elements'
-                ,html: _('tv_elements_desc')
-                ,cls: 'desc-under'
-                ,listeners: {
-                    render: {
-                        fn: function(el) {
-                            this.insertHelpExample(el);
-                        },
-                        scope: Ext.getCmp('modx-panel-tv')
-                    }
-                }
             },{
-                /*
-                    Reducing this item's initial config to bare-bones minimum,
-                    as it will be dynamically replaced each time the input time
-                    is changed via getDefaultValueItem (below)
-                */
                 xtype: 'textarea'
                 ,id: 'modx-tv-default-text'
-                ,itemId: 'fld-default_text'
+                ,itemId: 'fld-default-text'
             },{
                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                 ,forId: 'modx-tv-default-text'
@@ -1140,207 +1098,322 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
         Ext.getCmp('modx-panel-tv').markDirty();
     }
 
+    ,isNativeType: true
+
     /**
-     * @property {Function} getDefaultValueItem - Creates TV type-dependent configuration
-     * for the default value field component
+     * @property {Function} updateSharedComponent - Allows manipulation of input property components common to all tv types
+     * based on the current tv type. User overrides possible via sharedComponentOverrides property
      *
      * @param {String} type - The TV type (e.g., 'date')
+     * @param {Object} fieldCmp - The field's Ext component
      * @param {mixed} value - The field's currently stored value
-     * @returns {Object} - This TV type's field component configuration
+     * @param {Boolean} updateSibling - Whether to alter the sibling component (inline help); default is true
      */
-    ,getDefaultValueItem: function(type, value) {
+    ,updateSharedComponent: function(type, fieldCmp, value, updateSibling) {
 
         value = typeof value !== 'undefined' ? value : '' ;
-        type = typeof type === 'undefined' ? 'text' : type ;
+        updateSibling = typeof updateSibling === 'undefined' || updateSibling === true ? true : false ;
 
-        // Default value item properties common to all tv types
-        const defaultProps = {
-                xtype: 'textfield'
-                ,fieldLabel: _('tv_default')
-                ,description: MODx.expandHelp ? '' : _('tv_default_desc')
-                ,name: 'default_text'
-                ,id: 'modx-tv-default-text'
-                ,itemId: 'fld-default_text'
-                ,anchor: '100%'
-                ,value: value
-            };
-        let typeProps = {},
-            item
+        const   tvPanel = Ext.getCmp('modx-panel-tv'),
+                container = fieldCmp.ownerCt,
+                fieldId = fieldCmp.id,
+                fieldItemId = fieldCmp.itemId,
+                itemKey = container.items.keys.indexOf(fieldItemId),
+                siblingKey = itemKey + 1,
+                siblingCmp = fieldCmp.nextSibling(),
+                optsDbExample_1 = '@SELECT `pagetitle`,`id` FROM `[[+PREFIX]]site_content` WHERE `published`=1 AND `deleted`=0 AND `template`=1',
+                optsDbExample_2 = '@SELECT "-none-" AS `pagetitle`, 0 AS `id` UNION ALL SELECT `pagetitle`,`id` FROM `[[+PREFIX]]site_content` WHERE `published`=1 AND `deleted`=0 AND `template`=1'
+                ;
+        let defaultProps = {},
+            typeProps = {},
+            defaultHelp = {},
+            helpProps = {},
+            item,
+            helpLexKey,
+            helpUseLexKey,
+            helpText
             ;
-        switch (type) {
+        if (this.isNativeType) {
+            switch(fieldId) {
+                case 'modx-tv-elements':
+                    helpLexKey = 'tv_elements_'+type+'_desc';
+                    break;
+                case 'modx-tv-default-text':
+                    helpLexKey = 'tv_default_'+type+'_desc';
+                    break;
+            }
+        } else {
+            switch(fieldId) {
+                case 'modx-tv-elements':
+                    helpLexKey = 'tv_elements_desc';
+                    break;
+                case 'modx-tv-default-text':
+                    helpLexKey = 'tv_default_desc';
+                    break;
+            }
+        }
+        helpUseLexKey = typeof _(helpLexKey) !== 'undefined' ? helpLexKey : helpUseLexKey ;
+        helpText = _(helpUseLexKey);
 
-            case 'checkbox':
-                typeProps = {
-                    fieldLabel: _('tv_default_options')
-                };
-                break;
-
-            case 'email':
-                typeProps = {
-                    fieldLabel: _('tv_default_email')
-                    ,vtype: 'email'
-                };
-                break;
-
-            case 'date':
-                typeProps = {
-                    xtype: 'combo'
-                    ,fieldLabel: _('tv_default_date')
-                    ,description: MODx.expandHelp ? '' : _('tv_default_date_desc')
-                    ,hiddenName: 'default_text'
-                    ,store: new Ext.data.SimpleStore({
-                        fields: ['v','d']
-                        ,data: [['',_('none')],['now',_('default_date_now')],['today',_('default_date_today')],['yesterday',_('default_date_yesterday')],['tomorrow',_('default_date_tomorrow')],['custom',_('default_date_custom')]]
-                    })
-                    ,displayField: 'd'
-                    ,valueField: 'v'
-                    ,mode: 'local'
-                    ,editable: true
-                    ,forceSelection: false
-                    ,typeAhead: false
-                    ,triggerAction: 'all'
-                    ,anchor: '50%'
+        switch(fieldId) {
+            case 'modx-tv-elements':
+                defaultProps = {
+                    xtype: 'textarea'
+                    ,fieldLabel: _('tv_elements')
+                    ,description: MODx.expandHelp ? '' : _(helpUseLexKey, { example_1: optsDbExample_1, example_2: optsDbExample_2})
+                    ,name: 'els'
+                    ,id: 'modx-tv-elements'
+                    ,itemId: 'fld-elements'
+                    ,grow: true
+                    ,maxHeight: 160
+                    ,value: value
                     ,plugins: new AddFieldUtilities.plugin.Class
                 };
-                break;
-
-
-            case 'file':
-                typeProps = {
-                    xtype: 'modx-combo-browser'
-                    ,browserEl: 'modx-browser'
-                    ,fieldLabel: _('tv_default_file')
-                    ,openTo: this.record.openTo || ''
-                    ,source: this.record.source
-                    ,allowedFileTypes: 'txt'
-                    ,triggerClass: 'x-form-code-trigger'
-                    ,maxLength: 255
-                    ,hideMode: 'offsets'
-                    ,anchor: '50%'
+                defaultHelp = {
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-tv-elements'
+                    ,html: _(helpUseLexKey, { example_1: optsDbExample_1, example_2: optsDbExample_2})
+                    ,cls: 'desc-under'
+                    ,listeners: {
+                        render: {
+                            fn: function(el) {
+                                this.insertHelpExample(el);
+                            },
+                            scope: tvPanel
+                        }
+                    }
                 };
+                if (this.isNativeType) {
+                    switch (type) {
+                        case 'checkbox':
+                            typeProps = {
+                                fieldLabel: _('tv_elements_checkbox')
+                            };
+                            break;
+                        case 'listbox':
+                            typeProps = {
+                                fieldLabel: _('tv_elements_listbox')
+                            };
+                            break;
+                        case 'listbox-multiple':
+                        case 'listbox-multiple-legacy':
+                            typeProps = {
+                                fieldLabel: _('tv_elements_listbox')
+                            };
+                            break;
+                        case 'option':
+                        case 'radio':
+                            typeProps = {
+                                fieldLabel: _('tv_elements_radio')
+                            };
+                            break;
+                        case 'tag':
+                            typeProps = {
+                                fieldLabel: _('tv_elements_tag')
+                            };
+                            break;
+                    }
+                }
                 break;
 
-            // TBD: Would be nice to provide preview
-            case 'image':
-                typeProps = {
-                    xtype: 'modx-combo-browser'
-                    ,browserEl: 'modx-browser'
-                    ,fieldLabel: _('tv_default_image')
-                    ,openTo: this.record.openTo || ''
-                    ,source: this.record.source
-                    ,allowedFileTypes: MODx.config.upload_images
-                    ,triggerClass: 'x-form-code-trigger'
-                    ,maxLength: 255
-                    ,hideMode: 'offsets'
-                    ,anchor: '50%'
+            case 'modx-tv-default-text':
+                defaultProps = {
+                    xtype: 'textfield'
+                    ,fieldLabel: _('tv_default')
+                    ,description: MODx.expandHelp ? '' : _('tv_default_desc')
+                    ,name: 'default_text'
+                    ,id: 'modx-tv-default-text'
+                    ,itemId: 'fld-default-text'
+                    ,anchor: '100%'
+                    ,value: value
                 };
-                break;
-
-            case 'listbox':
-                typeProps = {
-                    fieldLabel: _('tv_default_option')
+                defaultHelp = {
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: 'modx-tv-default-text'
+                    ,html: helpText
+                    ,cls: 'desc-under'
+                    ,listeners: {
+                        render: {
+                            fn: function(el) {
+                                this.insertHelpExample(el);
+                            },
+                            scope: tvPanel
+                        }
+                    }
                 };
+                if (this.isNativeType) {
+                    switch (type) {
+                        case 'checkbox':
+                            typeProps = {
+                                fieldLabel: _('tv_default_options')
+                            };
+                            break;
+                        case 'email':
+                            typeProps = {
+                                fieldLabel: _('tv_default_email')
+                                ,vtype: 'email'
+                            };
+                            break;
+                        case 'date':
+                            const   now = new Date(),
+                                    datetimeNow = Ext.util.Format.date(now, MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+                            ;
+                            helpText = _(helpUseLexKey, {example_1: '+24', example_2: '-24', example_3: datetimeNow});
+                            typeProps = {
+                                xtype: 'combo'
+                                ,fieldLabel: _('tv_default_date')
+                                ,description: MODx.expandHelp ? '' : helpText
+                                ,hiddenName: 'default_text'
+                                ,store: new Ext.data.SimpleStore({
+                                    fields: ['v','d']
+                                    ,data: [
+                                        ['',_('none')],
+                                        ['now',_('default_date_now')],
+                                        ['today',_('default_date_today')],
+                                        ['yesterday',_('default_date_yesterday')],
+                                        ['tomorrow',_('default_date_tomorrow')],
+                                        ['custom',_('default_date_custom')]
+                                    ]
+                                })
+                                ,displayField: 'd'
+                                ,valueField: 'v'
+                                ,mode: 'local'
+                                ,editable: true
+                                ,forceSelection: false
+                                ,typeAhead: false
+                                ,triggerAction: 'all'
+                                ,anchor: '50%'
+                                ,plugins: new AddFieldUtilities.plugin.Class
+                            };
+                            helpProps = {
+                                html: helpText
+                            };
+                            break;
+                        case 'file':
+                            typeProps = {
+                                xtype: 'modx-combo-browser'
+                                ,browserEl: 'modx-browser'
+                                ,fieldLabel: _('tv_default_file')
+                                ,openTo: this.record.openTo || ''
+                                ,source: this.record.source
+                                ,allowedFileTypes: 'txt'
+                                ,triggerClass: 'x-form-code-trigger'
+                                ,maxLength: 255
+                                ,hideMode: 'offsets'
+                                ,anchor: '50%'
+                            };
+                            break;
+                        // TBD: Would be nice to provide preview
+                        case 'image':
+                            typeProps = {
+                                xtype: 'modx-combo-browser'
+                                ,browserEl: 'modx-browser'
+                                ,fieldLabel: _('tv_default_image')
+                                ,openTo: this.record.openTo || ''
+                                ,source: this.record.source
+                                ,allowedFileTypes: MODx.config.upload_images
+                                ,triggerClass: 'x-form-code-trigger'
+                                ,maxLength: 255
+                                ,hideMode: 'offsets'
+                                ,anchor: '50%'
+                            };
+                            break;
+                        case 'listbox':
+                            typeProps = {
+                                fieldLabel: _('tv_default_option')
+                            };
+                            break;
+                        case 'listbox-multiple':
+                        case 'listbox-multiple-legacy':
+                            typeProps = {
+                                fieldLabel: _('tv_default_options')
+                            };
+                            break;
+                        case 'number':
+                            typeProps = {
+                                xtype: 'numberfield'
+                                ,fieldLabel: _('tv_default_number')
+                                ,anchor: '50%'
+                            };
+                            break;
+                        case 'option':
+                        case 'radio':
+                            typeProps = {
+                                fieldLabel: _('tv_default_option')
+                            };
+                            break;
+                        case 'resourcelist':
+                            typeProps = {
+                                xtype: 'numberfield'
+                                ,fieldLabel: _('tv_default_resource')
+                            };
+                            break;
+                        case 'richtext':
+                            typeProps = {
+                                xtype: 'textarea'
+                                ,fieldLabel: _('tv_default_text')
+                                ,grow: true
+                                ,maxHeight: 250
+                            };
+                            break;
+                        case 'tag':
+                            typeProps = {
+                                fieldLabel: _('tv_default_tag')
+                            };
+                            break;
+                        case 'text':
+                            typeProps = {
+                                fieldLabel: _('tv_default_text')
+                                ,anchor: '50%'
+                            };
+                            break;
+                        case 'textarea':
+                            typeProps = {
+                                xtype: 'textarea'
+                                ,fieldLabel: _('tv_default_text')
+                                ,grow: true
+                                ,maxHeight: 250
+                                ,anchor: '50%'
+                            };
+                            break;
+                        case 'url':
+                            typeProps = {
+                                vtype: 'url'
+                                ,fieldLabel: _('tv_default_url')
+                            };
+                            break;
+                    }
+                }
                 break;
-
-            case 'listbox-multiple':
-            case 'listbox-multiple-legacy':
-                typeProps = {
-                    fieldLabel: _('tv_default_options')
-                };
-                break;
-
-            case 'number':
-                typeProps = {
-                    xtype: 'numberfield'
-                    ,fieldLabel: _('tv_default_number')
-                    ,anchor: '50%'
-                };
-                break;
-
-            case 'option':
-            case 'radio':
-                typeProps = {
-                    fieldLabel: _('tv_default_option')
-                };
-                break;
-
-            case 'resourcelist':
-                typeProps = {
-                    xtype: 'numberfield'
-                    ,fieldLabel: _('tv_default_resource')
-                };
-                break;
-
-            case 'richtext':
-                typeProps = {
-                    xtype: 'textarea'
-                    ,fieldLabel: _('tv_default_text')
-                    ,grow: true
-                    ,maxHeight: 250
-                };
-                break;
-
-            case 'tag':
-                typeProps = {
-                    fieldLabel: _('tv_default_tag')
-                };
-                break;
-
-            case 'text':
-                typeProps = {
-                    fieldLabel: _('tv_default_text')
-                    ,anchor: '50%'
-                };
-                break;
-
-            case 'textarea':
-                typeProps = {
-                    xtype: 'textarea'
-                    ,fieldLabel: _('tv_default_text')
-                    ,grow: true
-                    ,maxHeight: 250
-                    ,anchor: '50%'
-                };
-                break;
-
-            case 'url':
-                typeProps = {
-                    vtype: 'url'
-                    ,fieldLabel: _('tv_default_url')
-                };
-                break;
-
-            default:
         }
-        item = Object.assign({}, defaultProps, typeProps);
-        return item;
-    }
 
-    /**
-     * @property {Function} getDefaultValueHelpItem - Creates TV type-dependent configuration
-     * for the default value field's help component
-     *
-     * @param {String} type - The TV type (e.g., 'date')
-     * @returns {Object} - This TV type's help component configuration
-     */
-    ,getDefaultValueHelpItem: function(type) {
-
-        const   helpLexKey = 'tv_default_'+type+'_desc',
-                helpText = typeof _(helpLexKey) !== 'undefined' ? _(helpLexKey) : _('tv_default_desc')
-                ;
-        return {
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-tv-default-text'
-            ,html: helpText
-            ,cls: 'desc-under'
-            ,listeners: {
-                render: {
-                    fn: function(el) {
-                        this.insertHelpExample(el);
-                    },
-                    scope: Ext.getCmp('modx-panel-tv')
+        if (!this.isNativeType && tvPanel.sharedComponentOverrides.hasOwnProperty(type)) {
+            const overrides = tvPanel.sharedComponentOverrides[type][fieldId];
+            if (typeof overrides !== 'undefined') {
+                const help = overrides.help;
+                typeProps = overrides.config || {};
+                if (typeProps.hasOwnProperty('hidden') && typeProps.hidden === true || help === false) {
+                    helpProps.hidden = true;
+                }
+                if (!Ext.isEmpty(help)) {
+                    typeProps.description = MODx.expandHelp ? '' : help ;
+                    helpProps.html = help;
+                }
+                if (help === false) {
+                    typeProps.description = '';
                 }
             }
+        }
+
+        item = Ext.apply(defaultProps, typeProps);
+        fieldCmp.clearInvalid();
+        fieldCmp.destroy();
+        container.insert(itemKey, item);
+
+        if (updateSibling) {
+            item = Ext.apply(defaultHelp, helpProps);
+            siblingCmp.destroy();
+            container.insert(siblingKey, item);
         }
     }
 
@@ -1362,16 +1435,20 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 legacyOpts = Ext.get('modx-input-props'),
                 useLegacyLoader = tvPanel.useLegacyLoader(type, 'input'),
                 inputOptValsItem = Ext.getCmp('modx-tv-elements'),
+                inputOptValsItemVal = typeChanged ? inputOptValsItem.getValue() : this.config.record.elements,
                 inputDefaultValItem = Ext.getCmp('modx-tv-default-text'),
                 inputDefaultValItemVal = typeChanged ? inputDefaultValItem.getValue() : this.config.record.default_text,
                 hideInputOptValsItemFor = ['autotag','date','email','file','hidden','image','number','resourcelist','richtext','text','textarea','url'],
                 hideInputDefaultValItemFor = ['autotag']
             ;
+        this.isNativeType = tvPanel.nativeTypes['input'].indexOf(type) !== -1 ? true : false ;
+
         if(inputOptValsItem){
             if(hideInputOptValsItemFor.indexOf(type) !== -1){
                 inputOptValsItem.hide().nextSibling().hide();
             } else {
-                inputOptValsItem.show().nextSibling().show();
+                this.updateSharedComponent(type, inputOptValsItem, inputOptValsItemVal);
+                formCmp.doLayout();
             }
         }
         if(inputDefaultValItem){
@@ -1382,30 +1459,12 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                     inputDefaultValItem.getEl().up('.x-form-item').addClass('x-hide-display');
                 }
             } else {
-                const   container = inputDefaultValItem.ownerCt,
-                        key = container.items.keys.indexOf('fld-default_text'),
-                        newDefaultInput = this.getDefaultValueItem(type, inputDefaultValItemVal),
-                        defaultHelpItem = inputDefaultValItem.nextSibling(),
-                        newDefaultHelpItem = this.getDefaultValueHelpItem(type),
-                        helpKey = key+1
-                        ;
-                inputDefaultValItem.clearInvalid();
-                /*
-                    For cases where the default value field (and its help text) was previously hidden,
-                    show the help component here before destroying the item it references
-                */
-                defaultHelpItem.show();
-
-                inputDefaultValItem.destroy();
-                defaultHelpItem.destroy();
-                container.insert(key, newDefaultInput);
-                container.insert(helpKey, newDefaultHelpItem);
+                this.updateSharedComponent(type, inputDefaultValItem, inputDefaultValItemVal);
                 formCmp.doLayout();
             }
         }
 
         if (useLegacyLoader) {
-            console.log(`using legacy props loader to get ${type} tv input props`);
             let pu = legacyOpts.getUpdater();
             pu.loadScripts = true;
             optsFieldset.removeAll();
@@ -1426,7 +1485,6 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
             }
 
         } else {
-            console.log(`using new props loader to get ${type} tv input props`);
             legacyOpts.update('');
             try {
                 MODx.Ajax.request({
@@ -1441,13 +1499,6 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                    ,listeners: {
                         success: {
                             fn: function(r) {
-
-                                if (inputOptValsItem && r.hasOwnProperty('hideInputOptValsItem') && (r.hideInputOptValsItem == "true" || r.hideInputOptValsItem == 1)) {
-                                    inputOptValsItem.hide().nextSibling().hide();
-                                }
-                                if (inputDefaultValItem && r.hasOwnProperty('hideInputDefaultValItem') && (r.hideInputDefaultValItem == "true" || r.hideInputDefaultValItem == 1)) {
-                                    inputDefaultValItem.hide().nextSibling().hide();
-                                }
 
                                 // Make adjustments to returned config
                                 if (r.hasOwnProperty('optsItems') && r.optsItems.length > 0) {
@@ -1550,7 +1601,9 @@ MODx.panel.TVOutputProperties = function(config) {
 };
 Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
 
-    showOutputProperties: function(cb,rc,i) {
+    isNativeType: true
+
+    ,showOutputProperties: function(cb,rc,i) {
 
         Ext.getCmp('modx-panel-tv').markDirty();
 
@@ -1565,9 +1618,9 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 legacyOpts = Ext.get('modx-widget-props'),
                 useLegacyLoader = tvPanel.useLegacyLoader(type, 'output')
         ;
+        this.isNativeType = tvPanel.nativeTypes['output'].indexOf(type) !== -1 ? true : false ;
 
         if (useLegacyLoader) {
-            console.log(`using legacy props loader to get ${type} tv output props`);
             let pu = legacyOpts.getUpdater();
             pu.loadScripts = true;
             optsFieldset.removeAll();
@@ -1587,7 +1640,6 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
                 MODx.debug(e);
             }
         } else {
-            console.log(`using new props loader to get ${type} tv output props`);
             legacyOpts.update('');
             try {
                 MODx.Ajax.request({

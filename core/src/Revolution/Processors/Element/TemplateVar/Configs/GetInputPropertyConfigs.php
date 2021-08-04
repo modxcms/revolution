@@ -35,6 +35,7 @@ class GetInputPropertyConfigs extends Processor
     public $onPropertiesListEvent = 'OnTVInputPropertiesList';
 
     public $helpContent = [];
+    private $exampleData = [];
 
     public function checkPermissions()
     {
@@ -53,11 +54,83 @@ class GetInputPropertyConfigs extends Processor
     public function setHelpContent(array $fieldKeys, bool $expandHelp)
     {
         foreach ($fieldKeys as $k) {
-            $help = $this->modx->lexicon($k);
+            $help = array_key_exists($k, $this->exampleData)
+                ? $this->modx->lexicon($k, $this->exampleData[$k])
+                : $this->modx->lexicon($k)
+                ;
             # avoid issue of lexicon key being returned when its entry does not exist
             $this->helpContent[$k] = $help != $k ? json_encode($help) : "''" ;
             $this->helpContent['eh_' . $k] = $expandHelp ? "''" : $this->helpContent[$k] ;
         }
+    }
+
+    /**
+     * Sets placeholder arrays for TV lexicons with example data
+     */
+    private function setExampleData()
+    {
+        /* Date example */
+        $formatDefault = 'Y-m-d';
+        $formatCurrent = $this->modx->getOption('manager_date_format');
+        $seps = '-/. ';
+        $formatWithoutYear = trim(str_replace(['o','y','Y'], '', $formatDefault), $seps);
+        $formatWithoutDay = trim(str_replace(['d','D','j','l'], '', $formatDefault), $seps);
+        $formatRegexAllDays = str_replace(
+            '{..}',
+            '..',
+            trim(str_replace(['d','D','j','l'], '{..}', $formatDefault), $seps)
+        );
+        $formatRegexShort = trim(substr($formatDefault, 0, (strlen($formatDefault) - 1)), $seps);
+        $timestampAheadOneMonth = strtotime('+1 month');
+        $timestampAheadAlt = strtotime('+3 months 8 days');
+        $nextYear = date('Y') + 1;
+
+        $this->exampleData['disabled_dates_desc'] = [
+            'format_current' => date($formatCurrent),
+            'format_default' => date($formatDefault),
+            'example_1' => date($formatDefault, strtotime("+3 days")) . ',' . date($formatDefault, strtotime("+7 days")),
+            'example_2a' => date($formatWithoutYear, $timestampAheadOneMonth) . ',' . date($formatWithoutYear, $timestampAheadAlt),
+            'example_2b' => date("F jS", $timestampAheadOneMonth),
+            'example_2c' => date("F jS", $timestampAheadAlt),
+            'example_3a' => '^' . date("Y"),
+            'example_3b' => date("Y"),
+            'example_4a' => date($formatRegexAllDays, $timestampAheadOneMonth),
+            'example_4b' => date("F Y", $timestampAheadOneMonth),
+            'example_5' => '03-..$',
+            'example_6a' => $nextYear . '.03.15',
+            'example_6b' => $nextYear . '<span class="deemphasize">\\\.</span>03<span class="deemphasize">\\\.</span>15'
+        ];
+        $this->exampleData['date_format_desc'] = [
+            'example_1a' => '%A %d, %B %Y',
+            'example_1b' => strftime('%A %d, %B %Y'),
+            'example_2a' => '%a, %b %e, %Y',
+            'example_2b' => strftime('%a, %b %e, %Y'),
+            'example_3a' => '%m/%d/%Y',
+            'example_3b' => strftime('%m/%d/%Y'),
+            'example_4a' => '%Y-%m-%d',
+            'example_4b' => strftime('%Y-%m-%d'),
+            'example_5a' => '%Y-%m-%d %T',
+            'example_5b' => strftime('%Y-%m-%d %T'),
+            'example_6a' => '%b %e, %Y',
+            'example_6b' => strftime('%b %e, %Y'),
+            'example_7a' => '%e %h %Y %l:%M %p',
+            'example_7b' => strftime('%e %h %Y %l:%M %p')
+        ];
+
+        /* Resource list example */
+        $this->exampleData['resourcelist_where_desc'] = [
+            'example_1' => '[{"template:=":"4"}]',
+            'example_2' => '[{"pagetitle:!=":"Home"}]',
+            'example_3' => '[{"class_key:IN":["MODX\\\Revolution\\\modWebLink","MODX\\\Revolution\\\modSymLink"]}]',
+            'example_4' => '[{"published":1},{"isfolder":0}]'
+        ];
+
+        $this->exampleData['regex_desc'] = [
+            'example_1' => '^[0-9]{5}(-[0-9]{4})?$',
+            'example_2' => '^[A-zÀ-ž]*$',
+            'example_3' => '^[^0-9]*$',
+            'example_4' => '-XP$'
+        ];
     }
 
     public function initialize()
@@ -72,6 +145,7 @@ class GetInputPropertyConfigs extends Processor
         $this->setDefaultProperties([
             'type' => 'default',
         ]);
+        $this->setExampleData();
         return true;
     }
 
@@ -97,7 +171,7 @@ class GetInputPropertyConfigs extends Processor
                 continue;
             }
 
-            # Remapping option to radio; remove this mapping if the field type is ultimately renamed to radio
+            /* Remapping option to radio; remove this mapping if the field type is ultimately renamed to radio */
             $type = $this->getProperty('type');
             $type = $type == 'option' ? 'radio' : $type ;
             $configFile = $configDirectory . $type . '.php';
@@ -109,10 +183,13 @@ class GetInputPropertyConfigs extends Processor
                 $tvId = $modx->controller->getPlaceholder('tv');
                 $tvId = !empty($tvId) ? $tvId : '' ;
 
-                # Because this value is inserted into a JSON string, a string boolean needs to be returned
+                /*
+                    Because this value is used in a javascript object built in a php heredoc string,
+                    a string boolean needs to be returned.
+                */
                 $allowBlank = $params['allowBlank'] === 'false' || $params['allowBlank'] === 0 ? 'false' : 'true' ;
 
-                # Adding system-wide vars here instead of in individual config files
+                /* Adding system-wide vars here instead of in individual config files */
                 $expandHelp = $this->getProperty('expandHelp');
                 $expandHelp = $expandHelp == 'true' || $expandHelp === 1 ? true : false ;
                 $helpXtype = $expandHelp ? 'label' : 'hidden' ;
@@ -211,7 +288,6 @@ class GetInputPropertyConfigs extends Processor
         $pluginResult = $this->fireOnTVPropertiesListEvent();
         $cached = $this->loadNamespaceCache();
         $configDirectories = array_merge($configDirectories, $pluginResult, $cached);
-
         return $configDirectories;
     }
 }
