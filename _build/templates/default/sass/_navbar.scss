@@ -24,6 +24,7 @@
   position: absolute;
   z-index: 2;
   height: 100%;
+  overflow-x: hidden;
 }
 
 #modx-navbar {
@@ -112,6 +113,7 @@
   #modx-user-menu {
     margin-top: auto;
     #user-username { display: none; }
+    span.label{ display: none; }
     #user-avatar {
       img {
         border-radius: 20px;
