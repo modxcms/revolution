@@ -335,10 +335,13 @@ class modS3MediaSource extends modMediaSource
                 }
                 $file_name = basename($object['path']);
 
-                if ($object['type'] == 'dir' && $this->hasPermission('directory_list')) {
+                if (
+                    $object['type'] == 'dir' &&
+                    $this->hasPermission('directory_list')
+                ) {
                     $cls = $this->getExtJSDirClasses();
                     $dirNames[] = strtoupper($file_name);
-                    $visibility = $this->visibility_dirs ? $this->getVisibility($object['path']) : false;
+                    $visibility = $this->visibility_dirs && $this->getVisibility($object['path']);
                     $directories[$file_name] = [
                         'id' => $id,
                         'sid' => $this->get('id'),
@@ -358,7 +361,11 @@ class modS3MediaSource extends modMediaSource
                     $directories[$file_name]['menu'] = [
                         'items' => $this->getListDirContextMenu(),
                     ];
-                } elseif ($object['type'] == 'file' && !$properties['hideFiles'] && $this->hasPermission('file_list')) {
+                } elseif (
+                    $object['type'] == 'file' &&
+                    !$properties['hideFiles'] &&
+                    $this->hasPermission('file_list')
+                ) {
                     // @TODO review/refactor extension and mime_type would be better for filesystems that
                     // may not always have an extension on it. For example would be S3 and you have an HTML file
                     // but the name is just myPage - $this->filesystem->getMimetype($object['path']);
@@ -366,11 +373,20 @@ class modS3MediaSource extends modMediaSource
                     $ext = $properties['use_multibyte']
                         ? mb_strtolower($ext, $properties['modx_charset'])
                         : strtolower($ext);
-                    if (!empty($allowedExtensions) && !in_array($ext, $allowedExtensions)) {
+                    if (
+                        !empty($allowedExtensions) &&
+                        !in_array($ext, $allowedExtensions)
+                    ) {
                         continue;
                     }
                     $fileNames[] = strtoupper($file_name);
-                    $files[$file_name] = $this->buildFileList($object['path'], $ext, $imageExtensions, $bases, $properties);
+                    $files[$file_name] = $this->buildFileList(
+                        $object['path'],
+                        $ext,
+                        $imageExtensions,
+                        $bases,
+                        $properties
+                    );
                 }
             }
 
@@ -428,25 +444,46 @@ class modS3MediaSource extends modMediaSource
             return [];
         }
         foreach ($contents as $object) {
-            if (in_array($object['path'], $skipFiles) || in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles) || (in_array($fullPath . $object['path'], $skipFiles))) {
+            if (
+                in_array($object['path'], $skipFiles) ||
+                in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles) ||
+                (in_array($fullPath . $object['path'], $skipFiles))
+            ) {
                 continue;
             }
-            if ($object['type'] == 'dir' && !$this->hasPermission('directory_list')) {
+            if (
+                $object['type'] == 'dir' &&
+                !$this->hasPermission('directory_list')
+            ) {
                 continue;
-            } elseif ($object['type'] == 'file' && !$properties['hideFiles'] && $this->hasPermission('file_list')) {
-                // @TODO review/refactor ext and mime_type would be better for filesystems that may not always have an extension on it
+            } elseif (
+                $object['type'] == 'file' &&
+                !$properties['hideFiles'] &&
+                $this->hasPermission('file_list')
+            ) {
+                // @TODO review/refactor ext and mime_type would be better
+                // for filesystems that may not always have an extension on it
                 // example would be S3 and you have an HTML file but the name is just myPage
                 //$this->filesystem->getMimetype($object['path']);
                 $ext = pathinfo($object['path'], PATHINFO_EXTENSION);
                 $ext = $properties['use_multibyte']
                     ? mb_strtolower($ext, $properties['modx_charset'])
                     : strtolower($ext);
-                if (!empty($allowedExtensions) && !in_array($ext, $allowedExtensions)) {
+                if (
+                    !empty($allowedExtensions) &&
+                    !in_array($ext, $allowedExtensions)
+                ) {
                     continue;
                 }
                 $fileNames[] = strtoupper($object['path']);
 
-                $files[$object['path']] = $this->buildFileBrowserViewList($object['path'], $ext, $imageExtensions, $bases, $properties);
+                $files[$object['path']] = $this->buildFileBrowserViewList(
+                    $object['path'],
+                    $ext,
+                    $imageExtensions,
+                    $bases,
+                    $properties
+                );
             }
         }
 
