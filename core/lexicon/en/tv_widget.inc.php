@@ -47,15 +47,16 @@ $_lang['date_format'] = 'Date Format';
 $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/strftime" target="_blank">php’s strftime syntax</a>.
     <div class="example-list">Common examples include:
         <ul>
-            <li><span class="example-input">%A %d, %B %Y</span> ('.strftime("%A %d, %B %Y").') (default format)</li>
-            <li><span class="example-input">%a, %b %e, %Y</span> ('.strftime("%a, %b %e, %Y").')</li>
-            <li><span class="example-input">%m/%d/%Y</span> ('.strftime("%m/%d/%Y").')</li>
-            <li><span class="example-input">%Y-%m-%d</span> ('.strftime("%Y-%m-%d").')</li>
-            <li><span class="example-input">%Y-%m-%d %T</span> ('.strftime("%Y-%m-%d %T").')</li>
-            <li><span class="example-input">%b %e, %Y</span> ('.strftime("%b %e, %Y").')</li>
-            <li><span class="example-input">%e %h %Y %l:%M %p</span> ('.strftime("%e %h %Y %l:%M %p").')</li>
+            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (default format)</li>
+            <li><span class="example-input">[[+example_2a]]</span> ([[+example_2b]])</li>
+            <li><span class="example-input">[[+example_3a]]</span> ([[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> ([[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5a]]</span> ([[+example_5b]])</li>
+            <li><span class="example-input">[[+example_6a]]</span> ([[+example_6b]])</li>
+            <li><span class="example-input">[[+example_7a]]</span> ([[+example_7b]])</li>
         </ul>
-    </div>';
+    </div>
+';
 $_lang['date_use_current'] = 'Use Current Date as Fallback';
 $_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
 $_lang['default'] = 'Default';
@@ -67,32 +68,20 @@ $_lang['default_date_custom'] = 'Custom (see description below)';
 $_lang['delim'] = 'Delimiter';
 $_lang['delimiter'] = 'Delimiter';
 $_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting mutliple chooseable options).';
-
-# Date example helper vars
-$_format_default = 'Y-m-d';
-$_format = $this->modx->getOption('manager_date_format');
-$_seps = '-/. ';
-$_formatWithoutYear = trim(str_replace(['o','y','Y'],'', $_format_default), $_seps);
-$_formatWithoutDay = trim(str_replace(['d','D','j','l'],'', $_format_default), $_seps);
-$_formatRegexAllDays = str_replace('{..}','..', trim(str_replace(['d','D','j','l'],'{..}', $_format_default), $_seps));
-$_formatRegexShort = trim(substr($_format_default, 0, (strlen($_format_default)-1)), $_seps);
-$_timestampAheadOneMonth = strtotime('+1 month');
-$_timestampAheadAlt = strtotime('+3 months 8 days');
-
 $_lang['disabled_dates'] = 'Disabled Dates';
-$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “'.date($_format).'”).
-    <p>Examples using the default format (“'.date($_format_default).'”) include:</p>
+$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
+    <p>Examples using the default format (“[[+format_default]]”) include:</p>
     <div class="example-list">
         <ul>
-            <li><span class="example-input">'.date($_format_default, strtotime("+3 days")).','.date($_format_default, strtotime("+7 days")).'</span> (selects individual dates)</li>
-            <li><span class="example-input">'.date($_formatWithoutYear, $_timestampAheadOneMonth).','.date($_formatWithoutYear, $_timestampAheadAlt).'</span> (selects '.date("F jS", $_timestampAheadOneMonth).' and '.date("F jS", $_timestampAheadAlt).' of every year)</li>
-            <li><span class="example-input">^'.date("Y").'</span> (“^” to match beginning of string; this selects all of '.date("Y").')</li>
-            <li><span class="example-input">'.date($_formatRegexAllDays, $_timestampAheadOneMonth).'</span> (selects every day in '.date("F Y",$_timestampAheadOneMonth).')</li>
-            <li><span class="example-input">03-..$</span> (“$” to match end of string; this selects every day in March of every year)</li>
+            <li><span class="example-input">[[+example_1]]</span> (selects individual dates)</li>
+            <li><span class="example-input">[[+example_2a]]</span> (selects [[+example_2b]] and [[+example_2c]] of every year)</li>
+            <li><span class="example-input">[[+example_3a]]</span> (“^” to match beginning of string; this selects all of [[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> (selects every day in [[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5]]</span> (“$” to match end of string; this selects every day in March of every year)</li>
         </ul>
-        Note: If your date format uses dot separators they will need to be escaped (e.g., “2030.03.15” should be entered above as “2030<span class="deemphasize">\\\.</span>03<span class="deemphasize">\\\.</span>15”).
+        Note: If your date format uses dot separators they will need to be escaped (e.g., “[[+example_6a]]” should be entered above as “[[+example_6b]]”).
     </div>
-    ';
+';
 $_lang['disabled_days'] = 'Disabled Days';
 $_lang['disabled_days_desc'] = '';
 $_lang['dropdown'] = 'DropDown List Menu';
@@ -125,13 +114,13 @@ $_lang['regex'] = 'Regular Expression Validator';
 $_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">^[0-9]{5}(-[0-9]{4})?$</span> (pattern for U.S. zip codes)</li>
-            <li><span class="example-input">^[A-zÀ-ž]*$</span> (allow only letters)</li>
-            <li><span class="example-input">^[^0-9]*$</span> (allow all characters except numbers)</li>
-            <li><span class="example-input">-XP$</span> (must end with the string “-XP”)</li>
+            <li><span class="example-input">[[+example_1]]</span> (pattern for U.S. zip codes)</li>
+            <li><span class="example-input">[[+example_2]]</span> (allow only letters)</li>
+            <li><span class="example-input">[[+example_3]]</span> (allow all characters except numbers)</li>
+            <li><span class="example-input">[[+example_4]]</span> (must end with the string “-XP”)</li>
         </ul>
     </div>
-    ';
+';
 $_lang['name'] = 'Name';
 $_lang['number'] = 'Number';
 $_lang['number_allowdecimals'] = 'Allow Decimals';
@@ -169,10 +158,10 @@ $_lang['resourcelist_where_desc'] = '
     <p>A JSON object of one or more Resource fields to filter this TV’s listing of Resources.</p>
     <div class="example-list">Some examples:
         <ul>
-            <li><span class="example-input">[{"template:=":"4"}]</span> (only include Resources with template 4 applied)</li>
-            <li><span class="example-input">[{"pagetitle:!=":"Home"}]</span> (include all Resources, except for those named “Home”)</li>
-            <li><span class="example-input">[{"class_key:IN":["MODX\\\Revolution\\\modWebLink","MODX\\\Revolution\\\modSymLink"]}]</span> (include only Resources whose Resource Type is Weblink or Symlink)</li>
-            <li><span class="example-input">[{"published":1},{"isfolder":0}]</span> (include only Resources that are published and are not containers)</li>
+            <li><span class="example-input">[[+example_1]]</span> (only include Resources with template 4 applied)</li>
+            <li><span class="example-input">[[+example_2]]</span> (include all Resources, except for those named “Home”)</li>
+            <li><span class="example-input">[[+example_3]]</span> (include only Resources whose Resource Type is Weblink or Symlink)</li>
+            <li><span class="example-input">[[+example_4]]</span> (include only Resources that are published and are not containers)</li>
         </ul>
     </div>
     <p>Note: Filtering by TV values is not supported.</p>
@@ -200,9 +189,9 @@ $_lang['tv_default_date'] = 'Default Date and Time';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">+24</span> (number respresents hours ago)</li>
-            <li><span class="example-input">-24</span> (number represents hours in the future)</li>
-            <li><span class="example-input">'.date($this->modx->getOption("manager_date_format")." ".$this->modx->getOption("manager_time_format")).'</span> (a specific date [and time if desired] using the format shown)</li>
+            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
+            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
+            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
         </ul>
         Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
     </div>';
@@ -226,21 +215,31 @@ $_lang['tv_default_resourcelist_desc'] = 'The resource this TV will show if the 
 $_lang['tv_default_tag'] = 'Default Tag(s)';
 $_lang['tv_default_tag_desc'] = 'A comma-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Tag One==1||Tag Two==2||Tag Three==3), be sure to enter the value (i.e., “1” for Tag One, or “1,3” for Tag One and Tag Three)';
 $_lang['tv_default_text'] = 'Default Text';
+$_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
 $_lang['tv_default_url'] = 'Default URL';
 $_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
-
 $_lang['tv_elements'] = 'Input Option Values';
-$_lang['tv_elements_tag'] = 'Tags';
+$_lang['tv_elements_checkbox'] = 'Checkbox Options';
+$_lang['tv_elements_listbox'] = 'Dropdown List Options';
+$_lang['tv_elements_radio'] = 'Radio Button Options';
+$_lang['tv_elements_tag'] = 'Tag Options';
 $_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
     <div class="example-list">
         <ul>
             <li><span class="example-input">Bird||Cat||Dog</span> (shorthand for Bird==Bird||Cat==Cat||Dog==Dog)</li>
             <li><span class="example-input">White==#ffffff||Black==#000000</span> (where label==value)</li>
-            <li><span class="example-input">@SELECT `pagetitle`,`id` FROM `[[+PREFIX]]site_content` WHERE `published`=1 AND `deleted`=0 AND `template`=1</span> (builds a list of published Resources whose assigned template id is 1)</li>
-            <li><span class="example-input">@SELECT "-none-" AS `pagetitle`, 0 AS `id` UNION ALL SELECT `pagetitle`,`id` FROM `[[+PREFIX]]site_content` WHERE `published`=1 AND `deleted`=0 AND `template`=1</span> (builds the same list as the previous example, including a blank option)</li>
+            <li><span class="example-input">[[+example_1]]</span> (builds a list of published Resources whose assigned template id is 1)</li>
+            <li><span class="example-input">[[+example_2]]</span> (builds the same list as the previous example, including a blank option)</li>
         </ul>
     </div>
     ';
+$_lang['tv_elements_checkbox_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
+$_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
+$_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
 $_lang['tv_type'] = 'Input Type';
 $_lang['upper_case'] = 'Upper Case';
 $_lang['url'] = 'URL';

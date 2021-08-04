@@ -1,8 +1,7 @@
 <?php
 
 /*
- * This file is part of a proposed change to MODX Revolution's tv input option rendering in the back end.
- * Developed by Jim Graham (smg6511), Pixels & Strings, LLC (formerly Spark Media Group)
+ * This file is part of MODX Revolution.
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
@@ -55,8 +54,7 @@ $optsJS = <<<OPTSJS
                     hiddenName: 'inopt_allowBlank',
                     id: 'inopt_allowBlank{$tvId}',
                     tabIndex: 1,
-                    value: {$allowBlank},
-                    listeners: 'testComboEvt'
+                    value: {$allowBlank}
                 },{
                     xtype: '{$helpXtype}',
                     forId: 'inopt_allowBlank{$tvId}',
@@ -150,8 +148,7 @@ $optsJS = <<<OPTSJS
                     id: 'inopt_regex{$tvId}',
                     tabIndex: 4,
                     value: {$regex},
-                    plugins: new AddFieldUtilities.plugin.Class,
-                    listeners: 'testInputEvt,testDirtyOnBlur'
+                    plugins: new AddFieldUtilities.plugin.Class
                 },{
                     xtype: '{$helpXtype}',
                     forId: 'inopt_regex{$tvId}',
@@ -174,8 +171,7 @@ $optsJS = <<<OPTSJS
                     name: 'inopt_regexText',
                     id: 'inopt_regexText{$tvId}',
                     tabIndex: 5,
-                    value: {$regexText},
-                    listeners: 'testInputEvt'
+                    value: {$regexText}
                 },{
                     xtype: '{$helpXtype}',
                     forId: 'inopt_regexText{$tvId}',

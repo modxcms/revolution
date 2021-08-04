@@ -732,7 +732,7 @@ Ext.ux.form.CheckboxGroup = Ext.extend(Ext.form.CheckboxGroup, {
             Ext.each(this.items, function(item) {
                 if (typeof me.value === 'string' && me.value.length > 0) {
                     const savedVals = me.value.split(',');
-                    if (savedVals.find(v => v == item.inputValue) == item.inputValue) {
+                    if (savedVals.find(function(v){ return v == item.inputValue; }) == item.inputValue) {
                         item.checked = true;
                     }
                     me.aggregateSubmitField.setValue(me.value);

@@ -1,8 +1,7 @@
 <?php
 
 /*
- * This file is part of a proposed change to MODX Revolution's tv input option rendering in the back end.
- * Developed by Jim Graham (smg6511), Pixels & Strings, LLC (formerly Spark Media Group)
+ * This file is part of MODX Revolution.
  *
  * Copyright (c) MODX, LLC. All Rights Reserved.
  *
