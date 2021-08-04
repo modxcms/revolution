@@ -4,7 +4,7 @@ namespace MODX\Revolution\Sources;
 
 use Aws\S3\S3Client;
 use Exception;
-use League\Flysystem\AwsS3v3\AwsS3V3Adapter;
+use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\Visibility;
