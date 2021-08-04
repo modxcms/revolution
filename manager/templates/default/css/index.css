@@ -19410,14 +19410,22 @@ ul.x-tab-strip-bottom {
         margin: 5px 0;
         width: 100%;
         position: static; }
+    #modx-navbar #modx-topnav #limenu-site .icon {
+      display: none; }
     #modx-navbar #modx-topnav #limenu-site > a:before {
       content: "\f15c";
       font-weight: 300 !important; }
     #modx-navbar #modx-topnav #limenu-media > a:before {
       content: "\f1c5";
       font-weight: 300 !important; }
+    #modx-navbar #modx-topnav #limenu-media .icon {
+      display: none; }
+    #modx-navbar #modx-topnav #limenu-components .icon {
+      display: none; }
     #modx-navbar #modx-topnav #limenu-components > a:before {
       content: "\f1b2"; }
+    #modx-navbar #modx-topnav #limenu-manage .icon {
+      display: none; }
     #modx-navbar #modx-topnav #limenu-manage > a:before {
       content: "\f1de"; }
   #modx-navbar #modx-user-menu {
