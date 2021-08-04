@@ -272,6 +272,8 @@ MODx.window.ChangeProvider = function(config) {
 				,id: 'modx-pdselprov-provider'
                 ,anchor: '100%'
 				,allowBlank: false
+                ,msgTarget: 'under'
+                ,blankText: _('provider_err_not_selected')
 				,baseParams: {
                     action: 'Workspace/Providers/GetList'
                     ,showNone: false
