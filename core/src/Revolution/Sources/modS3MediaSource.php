@@ -192,7 +192,7 @@ class modS3MediaSource extends modMediaSource
     {
         $menu = parent::getListDirContextMenu();
         foreach ($menu as $k => $v) {
-            if ($v['handler'] == 'this.renameDirectory') {
+            if ($v['handler'] === 'this.renameDirectory') {
                 unset($menu[$k]);
                 $menu = array_values($menu);
                 break;
@@ -316,7 +316,7 @@ class modS3MediaSource extends modMediaSource
     {
         $properties = $this->getPropertyListWithDefaults();
         $path = $this->postfixSlash($path);
-        if ($path == DIRECTORY_SEPARATOR || $path == '\\') {
+        if ($path === DIRECTORY_SEPARATOR || $path === '\\') {
             $path = '';
         }
 
@@ -343,85 +343,84 @@ class modS3MediaSource extends modMediaSource
         }
 
         try {
-            $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
             /** @var array $contents */
             $contents = $this->filesystem->listContents($path);
-            $pathid = rawurlencode(rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+        } catch (Exception $e) {
+            $this->addError('path', $e->getMessage());
+            return [];
+        }
 
-            foreach ($contents as $object) {
-                $id = rawurlencode(rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
-                if (preg_match($re, $object['path']) || $id == $pathid) {
-                    continue;
-                }
-                $file_name = basename($object['path']);
+        $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
+        $pathid = rawurlencode(rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+        foreach ($contents as $object) {
+            $id = rawurlencode(rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+            if ($id === $pathid || preg_match($re, $object['path'])) {
+                continue;
+            }
+            $file_name = basename($object['path']);
 
-                if ($object['type'] == 'dir' &&
+            if (
+                    $object['type'] === 'dir' &&
                     $this->hasPermission('directory_list')
-                ) {
-                    $cls = $this->getExtJSDirClasses();
-                    $dirNames[] = strtoupper($file_name);
-                    $visibility = $this->visibility_dirs && $this->getVisibility($object['path']);
-                    $directories[$file_name] = [
+            ) {
+                $cls = $this->getExtJSDirClasses();
+                $dirNames[] = strtoupper($file_name);
+                $visibility = true;
+                $directories[$file_name] = [
                         'id' => $id,
                         'sid' => $this->get('id'),
                         'text' => $file_name,
                         'cls' => implode(' ', $cls),
-                        'iconCls' => 'icon ' . ($visibility == Visibility::PRIVATE
-                                ? 'icon-eye-slash' : 'icon-folder'),
+                        'iconCls' => 'icon icon-folder',
                         'type' => 'dir',
                         'leaf' => false,
                         'path' => $object['path'],
                         'pathRelative' => $object['path'],
                         'menu' => [],
+                        'visibility' => true
                     ];
-                    if ($this->visibility_dirs && $visibility) {
-                        $directories[$file_name]['visibility'] = $visibility;
-                    }
-                    $directories[$file_name]['menu'] = [
+                $directories[$file_name]['menu'] = [
                         'items' => $this->getListDirContextMenu(),
                     ];
-                } elseif ($object['type'] == 'file' &&
+            } elseif (
+                    $object['type'] === 'file' &&
                     !$properties['hideFiles'] &&
                     $this->hasPermission('file_list')
-                ) {
-                    $ext = pathinfo($object['path'], PATHINFO_EXTENSION);
-                    $ext = $properties['use_multibyte']
+            ) {
+                $ext = pathinfo($object['path'], PATHINFO_EXTENSION);
+                $ext = $properties['use_multibyte']
                         ? mb_strtolower($ext, $properties['modx_charset'])
                         : strtolower($ext);
-                    if (!empty($allowedExtensions) &&
-                        !in_array($ext, $allowedExtensions)
-                    ) {
-                        continue;
-                    }
-                    $fileNames[] = strtoupper($file_name);
-                    $files[$file_name] = $this->buildFileList(
-                        $object['path'],
-                        $ext,
-                        $imageExtensions,
-                        $bases,
-                        $properties
-                    );
+                if (
+                        !empty($allowedExtensions) &&
+                        !in_array($ext, $allowedExtensions, true)
+                ) {
+                    continue;
                 }
+                $fileNames[] = strtoupper($file_name);
+                $files[$file_name] = $this->buildFileList(
+                    $object['path'],
+                    $ext,
+                    $imageExtensions,
+                    $bases,
+                    $properties
+                );
             }
-
-            $ls = [];
-            // now sort files/directories
-            array_multisort($dirNames, SORT_ASC, SORT_STRING, $directories);
-            foreach ($directories as $dir) {
-                $ls[] = $dir;
-            }
-
-            array_multisort($fileNames, SORT_ASC, SORT_STRING, $files);
-            foreach ($files as $file) {
-                $ls[] = $file;
-            }
-
-            return $ls;
-        } catch (Exception $e) {
-            $this->addError('path', $e->getMessage());
-
-            return [];
         }
+
+        $ls = [];
+        // now sort files/directories
+        array_multisort($dirNames, SORT_ASC, SORT_STRING, $directories);
+        foreach ($directories as $dir) {
+            $ls[] = $dir;
+        }
+
+        array_multisort($fileNames, SORT_ASC, SORT_STRING, $files);
+        foreach ($files as $file) {
+            $ls[] = $file;
+        }
+
+        return $ls;
     }
 
 
@@ -450,7 +449,7 @@ class modS3MediaSource extends modMediaSource
 
         $files = $fileNames = [];
 
-        if (!empty($path) && $path != DIRECTORY_SEPARATOR) {
+        if (!empty($path) && $path !== DIRECTORY_SEPARATOR) {
             try {
                 $mimeType = $this->filesystem->mimeType($path);
             } catch (FilesystemException | UnableToRetrieveMetadata $e) {
@@ -473,9 +472,10 @@ class modS3MediaSource extends modMediaSource
             return [];
         }
         foreach ($contents as $object) {
-            if (in_array($object['path'], $skipFiles, true) ||
-                in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles, true) ||
-                (in_array($fullPath . $object['path'], $skipFiles, true))
+            if (
+                (in_array($fullPath . $object['path'], $skipFiles, true)) ||
+                in_array($object['path'], $skipFiles, true) ||
+                in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles, true)
             ) {
                 continue;
             }
@@ -488,7 +488,7 @@ class modS3MediaSource extends modMediaSource
                 $ext = $properties['use_multibyte']
                     ? mb_strtolower($ext, $properties['modx_charset'])
                     : strtolower($ext);
-                if (!empty($allowedExtensions) && !in_array($ext, $allowedExtensions)) {
+                if (!empty($allowedExtensions) && !in_array($ext, $allowedExtensions, true)) {
                     continue;
                 }
                 $fileNames[] = strtoupper($object['path']);
