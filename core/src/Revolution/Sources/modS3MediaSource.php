@@ -5,7 +5,11 @@ namespace MODX\Revolution\Sources;
 use Aws\S3\S3Client;
 use Exception;
 use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
+use League\Flysystem\DirectoryAttributes;
 use League\Flysystem\FilesystemException;
+use League\Flysystem\UnableToDeleteDirectory;
+use League\Flysystem\UnableToMoveFile;
+use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\Visibility;
 use MODX\Revolution\modX;
@@ -212,13 +216,13 @@ class modS3MediaSource extends modMediaSource
         $path = $this->postfixSlash($from);
         try {
             $mimeType = $this->filesystem->mimeType($path);
-            if ($mimeType !== 'directory') {
-                return parent::moveObject($from, $to, $point, $to_source);
-            }
             $this->addError('source', $this->xpdo->lexicon('no_move_folder'));
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
-            $this->addError('path', $this->xpdo->lexicon('file_err_nf'));
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            // on S3 Directory Mime Types are unreadable
+            $mimeType = 'directory';
+        }
+        if ($mimeType !== 'directory') {
+            return parent::moveObject($from, $to, $point, $to_source);
         }
 
         return false;
@@ -323,11 +327,27 @@ class modS3MediaSource extends modMediaSource
 
         $directories = $dirNames = $files = $fileNames = [];
 
+        if (!empty($path)) {
+            // Ensure the provided path can be read.
+            try {
+                $mimeType = $this->filesystem->mimeType($path);
+            } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+                // on S3 Directory Mime Types are unreadable
+                $mimeType = 'directory';
+            }
+
+            if ($mimeType !== 'directory') {
+                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
+                return [];
+            }
+        }
+
         try {
             $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
             /** @var array $contents */
             $contents = $this->filesystem->listContents($path);
             $pathid = rawurlencode(rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+
             foreach ($contents as $object) {
                 $id = rawurlencode(rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
                 if (preg_match($re, $object['path']) || $id == $pathid) {
@@ -335,8 +355,7 @@ class modS3MediaSource extends modMediaSource
                 }
                 $file_name = basename($object['path']);
 
-                if (
-                    $object['type'] == 'dir' &&
+                if ($object['type'] == 'dir' &&
                     $this->hasPermission('directory_list')
                 ) {
                     $cls = $this->getExtJSDirClasses();
@@ -361,20 +380,15 @@ class modS3MediaSource extends modMediaSource
                     $directories[$file_name]['menu'] = [
                         'items' => $this->getListDirContextMenu(),
                     ];
-                } elseif (
-                    $object['type'] == 'file' &&
+                } elseif ($object['type'] == 'file' &&
                     !$properties['hideFiles'] &&
                     $this->hasPermission('file_list')
                 ) {
-                    // @TODO review/refactor extension and mime_type would be better for filesystems that
-                    // may not always have an extension on it. For example would be S3 and you have an HTML file
-                    // but the name is just myPage - $this->filesystem->getMimetype($object['path']);
                     $ext = pathinfo($object['path'], PATHINFO_EXTENSION);
                     $ext = $properties['use_multibyte']
                         ? mb_strtolower($ext, $properties['modx_charset'])
                         : strtolower($ext);
-                    if (
-                        !empty($allowedExtensions) &&
+                    if (!empty($allowedExtensions) &&
                         !in_array($ext, $allowedExtensions)
                     ) {
                         continue;
@@ -436,6 +450,21 @@ class modS3MediaSource extends modMediaSource
 
         $files = $fileNames = [];
 
+        if (!empty($path) && $path != DIRECTORY_SEPARATOR) {
+            try {
+                $mimeType = $this->filesystem->mimeType($path);
+            } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+                // on S3 Directory Mime Types are unreadable
+                $mimeType = 'directory';
+            }
+
+            // Ensure this is a directory.
+            if ($mimeType !== 'directory') {
+                $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
+                return [];
+            }
+        }
+
         try {
             $contents = $this->filesystem->listContents($path);
         } catch (FilesystemException $e) {
@@ -444,35 +473,22 @@ class modS3MediaSource extends modMediaSource
             return [];
         }
         foreach ($contents as $object) {
-            if (
-                in_array($object['path'], $skipFiles) ||
-                in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles) ||
-                (in_array($fullPath . $object['path'], $skipFiles))
+            if (in_array($object['path'], $skipFiles, true) ||
+                in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles, true) ||
+                (in_array($fullPath . $object['path'], $skipFiles, true))
             ) {
                 continue;
             }
-            if (
-                $object['type'] == 'dir' &&
-                !$this->hasPermission('directory_list')
-            ) {
+            if ($object instanceof DirectoryAttributes && !$this->hasPermission('directory_list')) {
                 continue;
-            } elseif (
-                $object['type'] == 'file' &&
-                !$properties['hideFiles'] &&
-                $this->hasPermission('file_list')
-            ) {
-                // @TODO review/refactor ext and mime_type would be better
-                // for filesystems that may not always have an extension on it
-                // example would be S3 and you have an HTML file but the name is just myPage
-                //$this->filesystem->getMimetype($object['path']);
+            }
+
+            if ($object['type'] === 'file' && !$properties['hideFiles'] && $this->hasPermission('file_list')) {
                 $ext = pathinfo($object['path'], PATHINFO_EXTENSION);
                 $ext = $properties['use_multibyte']
                     ? mb_strtolower($ext, $properties['modx_charset'])
                     : strtolower($ext);
-                if (
-                    !empty($allowedExtensions) &&
-                    !in_array($ext, $allowedExtensions)
-                ) {
+                if (!empty($allowedExtensions) && !in_array($ext, $allowedExtensions)) {
                     continue;
                 }
                 $fileNames[] = strtoupper($object['path']);
@@ -495,5 +511,133 @@ class modS3MediaSource extends modMediaSource
         }
 
         return $ls;
+    }
+
+
+    /**
+     * Remove a folder at the specified location
+     *
+     * @param string $path ~ pre 3.0 $path was full absolute path, all paths need to be relative
+     *
+     * @return boolean
+     */
+    public function removeContainer($path)
+    {
+        $path = $this->postfixSlash($path);
+
+        // Ensure this is a directory.
+        try {
+            $mimeType = $this->filesystem->mimeType($path);
+        } catch (FilesystemException | UnableToReadFile $e) {
+            // on S3 Directory Mime Types are unreadable
+            $mimeType = 'directory';
+        }
+        if ($mimeType !== 'directory') {
+            $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
+            return false;
+        }
+
+        // Attempt deletion of the directory.
+        try {
+            $this->filesystem->deleteDirectory($path);
+        } catch (FilesystemException | UnableToDeleteDirectory $e) {
+            $this->addError('path', $this->xpdo->lexicon('file_folder_err_remove'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            return false;
+        }
+
+        $this->xpdo->invokeEvent('OnFileManagerDirRemove', [
+            'directory' => $path,
+            'source' => &$this,
+        ]);
+        $this->xpdo->logManagerAction('directory_remove', '', "{$this->get('name')}: $path");
+
+        return true;
+    }
+
+
+    /**
+     * @param string $oldPath
+     * @param string $newName
+     *
+     * @return bool
+     */
+    public function renameContainer($oldPath, $newName)
+    {
+        $oldPath = trim($oldPath, DIRECTORY_SEPARATOR);
+        if (strpos($oldPath, DIRECTORY_SEPARATOR)) {
+            $path = explode(DIRECTORY_SEPARATOR, $oldPath);
+            array_pop($path);
+            $newPath = implode(DIRECTORY_SEPARATOR, $path) . DIRECTORY_SEPARATOR . $newName;
+        } else {
+            $newPath = $newName;
+        }
+        $oldPath = $this->sanitizePath($oldPath) . DIRECTORY_SEPARATOR;
+        $newPath = $this->sanitizePath($newPath) . DIRECTORY_SEPARATOR;
+
+        // Ensure current directory can be read.
+        try {
+            $mimeType = $this->filesystem->mimeType($oldPath);
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            // on S3 Directory Mime Types are unreadable
+            $mimeType = 'directory';
+        }
+        if ($mimeType !== 'directory') {
+            $this->addError('name', $this->xpdo->lexicon('file_folder_err_invalid'));
+            return false;
+        }
+
+        // Ensure new path doesn't exist.
+        try {
+            if ($this->filesystem->fileExists($newPath)) {
+                $this->addError('name', $this->xpdo->lexicon('file_folder_err_ae'));
+                return false;
+            }
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            return false;
+        }
+
+        // Attempt renaming the directory. Flysystem considers this a "move".
+        try {
+            $this->filesystem->move($oldPath, $newPath);
+        } catch (FilesystemException | UnableToMoveFile $e) {
+            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            return false;
+        }
+
+        $this->xpdo->invokeEvent('OnFileManagerDirRename', [
+            'directory' => $newPath,
+            'source' => &$this,
+        ]);
+        $this->xpdo->logManagerAction('directory_rename', '', "{$this->get('name')}: $oldPath -> $newPath");
+
+        return true;
+    }
+
+
+    /**
+     * @param string $path ~ relative path of file/directory
+     *
+     * @return bool
+     */
+    public function getVisibility($path)
+    {
+        // S3 Visibility Checks always returning false
+        return true;
+    }
+
+
+    /**
+     * @param string $path ~ relative path of file/directory
+     * @param string $visibility ~ public or private
+     *
+     * @return bool
+     */
+    public function setVisibility($path, $visibility)
+    {
+        // S3 Set visibility always returns false
+        return false;
     }
 }
