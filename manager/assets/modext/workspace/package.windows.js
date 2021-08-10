@@ -256,6 +256,7 @@ MODx.window.ChangeProvider = function(config) {
         title: _('provider_select')
         ,width: 600 // prevents primary button text from being cut off if it is a long string
 		,layout: 'form'
+        ,closeAction: 'hide'
 		,items:[{
 			xtype: 'modx-template-panel'
 			,id: 'modx-cp-panel'
@@ -273,6 +274,7 @@ MODx.window.ChangeProvider = function(config) {
                 ,anchor: '100%'
 				,allowBlank: false
                 ,msgTarget: 'under'
+                ,labelSeparator: ''
                 ,blankText: _('provider_err_not_selected')
 				,baseParams: {
                     action: 'Workspace/Providers/GetList'
@@ -283,7 +285,9 @@ MODx.window.ChangeProvider = function(config) {
 		,buttons :[{
 			text: config.cancelBtnText || _('cancel')
             ,scope: this
-            ,handler: function() { this.hide(); }
+            ,handler: function() {
+                this.hide();
+            }
 		},{
 			text: _('save_and_go_to_browser')
             ,cls: 'primary-button'
@@ -292,7 +296,13 @@ MODx.window.ChangeProvider = function(config) {
 			,scope: this
 		}]
     });
+
     MODx.window.ChangeProvider.superclass.constructor.call(this,config);
+
+    this.on('beforehide', function(){
+        var form = Ext.getCmp('change-provider-form').getForm();
+        form.clearInvalid();
+    });
 };
 Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would create an empty unused form (It's not a bug))
 	submit: function(o) {
