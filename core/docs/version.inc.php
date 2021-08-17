@@ -1,6 +1,6 @@
 <?php
 
-$f_version = 3; // Change this when needed new version for MODX 3S
+$f_version = 4; // Change this when needed new version for MODX 3S
 
 $v = [];
 $v['version']        = '3'; // Current version.
