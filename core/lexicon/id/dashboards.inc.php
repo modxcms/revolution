@@ -6,8 +6,8 @@
  * @subpackage lexicon
  * @language en
  */
-$_lang['dashboard'] = 'Dasbor';
-$_lang['dashboard_add'] = 'Menambahkan dasbor';
+$_lang['dashboard'] = 'Dashboard';
+$_lang['dashboard_add'] = 'Menambahkan Dashboard';
 $_lang['dashboard_create'] = 'Membuat Dashboard';
 $_lang['dashboard_desc_name'] = 'Nama dari Dashboard.';
 $_lang['dashboard_desc_description'] = 'Deskripsi singkat dari Dashboard.';
@@ -15,9 +15,9 @@ $_lang['dashboard_desc_hide_trees'] = 'Memeriksa ini akan menyembunyikan left-ha
 $_lang['dashboard_hide_trees'] = 'Menyembunyikan Left-Hand Trees';
 $_lang['dashboard_duplicate'] = 'Duplikat Dashboard';
 $_lang['dashboard_remove'] = 'Menghapus Dashboard';
-$_lang['dashboard_remove_confirm'] = 'Apakah Anda yakin ingin menghapus Dashboard ini?';
+$_lang['dashboard_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus Dashboard ini?';
 $_lang['dashboard_remove_multiple'] = 'Menghapus dashboard';
-$_lang['dashboard_remove_multiple_confirm'] = 'Apakah Anda yakin Anda ingin menghapus dashboard dipilih?';
+$_lang['dashboard_remove_multiple_confirm'] = 'Apakah Anda yakin Anda ingin menghapus dashboard terpilih?';
 $_lang['dashboard_update'] = 'Memperbarui Dashboard';
 $_lang['dashboard_err_ae_name'] = 'Sebuah dashboard dengan nama "[[+name]]" sudah ada! Coba nama lain.';
 $_lang['dashboard_err_duplicate'] = 'Galat terjadi saat mencoba menduplikasi dashboard.';
@@ -27,7 +27,7 @@ $_lang['dashboard_err_ns_name'] = 'Silakan tentukan nama untuk widget.';
 $_lang['dashboard_err_remove'] = 'Terjadi kesalahan saat mencoba untuk menghapus Dashboard.';
 $_lang['dashboard_err_remove_default'] = 'Anda tidak dapat menghapus default Dashboard!';
 $_lang['dashboard_err_save'] = 'Terjadi kesalahan saat mencoba untuk menyimpan Dashboard.';
-$_lang['dashboard_usergroup_add'] = 'Menetapkan Dashboard untuk user group';
+$_lang['dashboard_usergroup_add'] = 'Menetapkan Dashboard untuk kelompok pengguna';
 $_lang['dashboard_usergroup_remove'] = 'Menghapus Dashboard dari User Group';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Apakah Anda yakin Anda ingin memulihkan User Group ini untuk menggunakan default Dashboard?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Berikut adalah daftar dari semua kelompok pengguna yang menggunakan dasbor ini.';

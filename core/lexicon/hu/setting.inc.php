@@ -7,63 +7,63 @@
  * @subpackage lexicon
  */
 $_lang['area'] = 'Terület';
-$_lang['area_authentication'] = 'Authentication and Security';
-$_lang['area_caching'] = 'Caching';
+$_lang['area_authentication'] = 'Hitelesítés és biztonság';
+$_lang['area_caching'] = 'Gyorsítótárazás';
 $_lang['area_core'] = 'Core Code';
-$_lang['area_editor'] = 'Rich-Text Editor';
-$_lang['area_file'] = 'File System';
-$_lang['area_filter'] = 'Filter by area...';
-$_lang['area_furls'] = 'Friendly URL';
-$_lang['area_gateway'] = 'Gateway';
-$_lang['area_language'] = 'Lexicon and Language';
-$_lang['area_mail'] = 'Mail';
+$_lang['area_editor'] = 'Szerkesztő formázott szöveghez';
+$_lang['area_file'] = 'Állományrendszer';
+$_lang['area_filter'] = 'Szűrés terület alapján...';
+$_lang['area_furls'] = 'Keresőbarát URL';
+$_lang['area_gateway'] = 'Átjáró';
+$_lang['area_language'] = 'Szókészlet és nyelv';
+$_lang['area_mail'] = 'Levelezés';
 $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
-$_lang['area_session'] = 'Session and Cookie';
+$_lang['area_session'] = 'Munkamenet és süti';
 $_lang['area_static_elements'] = 'Állandó elemek';
-$_lang['area_static_resources'] = 'Static Resources';
-$_lang['area_lexicon_string'] = 'Area Lexicon Entry';
+$_lang['area_static_resources'] = 'Állandó erőforrások';
+$_lang['area_lexicon_string'] = 'Területi szókészlet-bejegyzés';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
-$_lang['area_site'] = 'Site';
-$_lang['area_system'] = 'System and Server';
-$_lang['areas'] = 'Areas';
-$_lang['charset'] = 'Charset';
-$_lang['country'] = 'Country';
+$_lang['area_site'] = 'Weboldal';
+$_lang['area_system'] = 'Rendszer és kiszolgáló';
+$_lang['areas'] = 'Területek';
+$_lang['charset'] = 'Karakterkészlet';
+$_lang['country'] = 'Ország';
 $_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
 $_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
 $_lang['namespace'] = 'Namespace';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
 $_lang['namespace_filter'] = 'Filter by namespace...';
-$_lang['search_by_key'] = 'Search by key...';
-$_lang['setting_create'] = 'Create New Setting';
+$_lang['search_by_key'] = 'Keresés kulcs alapján...';
+$_lang['setting_create'] = 'Új beállítás létrehozása';
 $_lang['setting_err'] = 'Please check your data for the following fields: ';
 $_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
-$_lang['setting_err_nf'] = 'Setting not found.';
-$_lang['setting_err_ns'] = 'Setting not specified';
-$_lang['setting_err_remove'] = 'An error occurred while trying to remove the setting.';
-$_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
+$_lang['setting_err_nf'] = 'A beállítás nem található.';
+$_lang['setting_err_ns'] = 'A beállítás nincs megadva';
+$_lang['setting_err_remove'] = 'Hiba történt a beállítás eltávolítása közben.';
+$_lang['setting_err_save'] = 'Hiba történt a beállítás mentése közben.';
 $_lang['setting_err_startint'] = 'Settings may not start with an integer.';
 $_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
-$_lang['setting_remove'] = 'Delete Setting';
+$_lang['setting_remove'] = 'Beállítás törlése';
 $_lang['setting_remove_confirm'] = 'Are you sure you want to delete this setting? This might break your MODX installation.';
-$_lang['setting_update'] = 'Update Setting';
+$_lang['setting_update'] = 'Beállítás frissítése';
 $_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
 $_lang['settings_desc'] = 'Itt módosíthatja a MODX kezelőfelületének beállításait, és a MODX webhely futási módját. <b>Az egyes beállítások a [[++key]] helyettesítőn keresztül lesznek elérhetők.</b><br />Kattintson duplán az érték oszlopon, ha a rácsban szeretné módosítani, vagy jobb kattintással megjelennek a további lehetőségek. A "+" jelre kattintva megjelenik a beállítás leírása.';
-$_lang['settings_furls'] = 'Friendly URLs';
-$_lang['settings_misc'] = 'Miscellaneous';
-$_lang['settings_site'] = 'Site';
+$_lang['settings_furls'] = 'Keresőbarát URL-ek';
+$_lang['settings_misc'] = 'Egyéb';
+$_lang['settings_site'] = 'Weboldal';
 $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'Felhasználó';
 $_lang['system_settings'] = 'Rendszerbeállítások';
-$_lang['usergroup'] = 'User Group';
+$_lang['usergroup'] = 'Felhasználói csoport';
 
 // user settings
-$_lang['setting_access_category_enabled'] = 'Check Category Access';
+$_lang['setting_access_category_enabled'] = 'Kategória-hozzáférés ellenőrzése';
 $_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable Category ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Category Access Permissions will be ignored!</strong>';
 
-$_lang['setting_access_context_enabled'] = 'Check Context Access';
+$_lang['setting_access_context_enabled'] = 'Környezet-hozzáférés ellenőrzése';
 $_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 
 $_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
@@ -839,26 +839,26 @@ $_lang['setting_welcome_screen_desc'] = 'If set to true, the welcome screen will
 $_lang['setting_welcome_screen_url'] = 'Welcome Screen URL';
 $_lang['setting_welcome_screen_url_desc'] = 'The URL for the welcome screen that loads on first load of MODX Revolution.';
 
-$_lang['setting_welcome_action'] = 'Welcome Action';
+$_lang['setting_welcome_action'] = 'Üdvözlő tevékenység';
 $_lang['setting_welcome_action_desc'] = 'The default controller to load when accessing the manager when no controller is specified in the URL.';
 
-$_lang['setting_welcome_namespace'] = 'Welcome Namespace';
-$_lang['setting_welcome_namespace_desc'] = 'The namespace the Welcome Action belongs to.';
+$_lang['setting_welcome_namespace'] = 'Üdvözlő névtér';
+$_lang['setting_welcome_namespace_desc'] = 'A névtér, amelyhez az üdvözlő tevékenység tartozik.';
 
-$_lang['setting_which_editor'] = 'Editor to use';
+$_lang['setting_which_editor'] = 'Használandó szerkesztő';
 $_lang['setting_which_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use. You can download and install additional Rich Text Editors from Package Management.';
 
-$_lang['setting_which_element_editor'] = 'Editor to use for Elements';
+$_lang['setting_which_element_editor'] = 'Az elemekhez használandó szerkesztő';
 $_lang['setting_which_element_editor_desc'] = 'Here you can select which Rich Text Editor you wish to use when editing Elements. You can download and install additional Rich Text Editors from Package Management.';
 
-$_lang['setting_xhtml_urls'] = 'XHTML URLs';
+$_lang['setting_xhtml_urls'] = 'XHTML URL-ek';
 $_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODX will be XHTML-compliant, including encoding of the ampersand character.';
 
-$_lang['setting_default_context'] = 'Default Context';
-$_lang['setting_default_context_desc'] = 'Select the default Context you wish to use for new Resources.';
+$_lang['setting_default_context'] = 'Alapértelmezett környezet';
+$_lang['setting_default_context_desc'] = 'Válassza ki az alapértelmezett környezetet új erőforrások létrehozásához.';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
-$_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
+$_lang['setting_auto_isfolder'] = 'Önműködően jelölje ki a tárolót';
+$_lang['setting_auto_isfolder_desc'] = 'Ha igenre van állítva, a tároló tulajdonsága önműködően módosul.';
 
 $_lang['setting_default_username'] = 'Alapértelmezett felhasználónév';
 $_lang['setting_default_username_desc'] = 'Alapértelmezett név az azonosítatlan felhasználó számára.';
