@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Kunde inte ladda ner och skapa transpor
 $_lang['package_download_err_ns'] = 'Välj minst en paketversion för nedladdning.';
 $_lang['package_err_create'] = 'Kunde inte skapa paketet.';
 $_lang['package_err_file_read'] = 'Kunde inte öppna fil för läsning: [[+source]]';
+$_lang['package_err_caught'] = 'Installationen misslyckades med [[+type]] i [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Kunde inte installera paketet med signaturen: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Installationen av paketet misslyckades.';
 $_lang['package_err_load'] = 'Kunde inte ladda transportpaketet.';

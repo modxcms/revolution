@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Kon pakket niet downloaden of aanmaken 
 $_lang['package_download_err_ns'] = 'Selecteer tenminste een pakket versie om te downloaden.';
 $_lang['package_err_create'] = 'Kon pakket niet aanmaken.';
 $_lang['package_err_file_read'] = 'Kan bestand niet openen om lezen: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Kon pakket niet installeren met kenmerk: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Het is niet gelukt om het pakket te installeren.';
 $_lang['package_err_load'] = 'Kan pakket niet laden.';

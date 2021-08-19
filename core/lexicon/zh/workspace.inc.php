@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Could not download and create transport
 $_lang['package_download_err_ns'] = '请选择至少一个要下载的软件包版本。';
 $_lang['package_err_create'] = '不能创建包。';
 $_lang['package_err_file_read'] = '不能打开[[+source]]进行读写';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = '不能以签名[[+signature]]安装此包';
 $_lang['package_err_install_gen'] = '无法安装该软件包。';
 $_lang['package_err_load'] = 'Could not load transport package.';

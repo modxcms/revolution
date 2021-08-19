@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Απέτυχε η δημιουργία 
 $_lang['package_download_err_ns'] = 'Παρακαλώ επιλέξτε την έκδοση του πακέτου που θέλετε να κατεβάσετε.';
 $_lang['package_err_create'] = 'Η δημιουργία του πακέτου απέτυχε.';
 $_lang['package_err_file_read'] = 'Το αρχείο [[+source]] δεν μπορεί να αναγνωσθεί.';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Η εγκατάσταση του πακέτου με υπογραφή [[+signature]] απέτυχε.';
 $_lang['package_err_install_gen'] = 'Αποτυχία εγκατάστασης του πακέτου.';
 $_lang['package_err_load'] = 'Αποτυχία φόρτωσης του πακέτου εγκατάστασης.';

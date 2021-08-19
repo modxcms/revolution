@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Could not download and create transport
 $_lang['package_download_err_ns'] = 'Please select at least one package version to download.';
 $_lang['package_err_create'] = 'A csomag nem hozható létre.';
 $_lang['package_err_file_read'] = 'Could not open file for reading: [[+source]]';
+$_lang['package_err_caught'] = 'Sikertelen telepítés [[+type]] hibával a(z) [[+in]] részben: [[+message]]';
 $_lang['package_err_install'] = 'Nem sikerült telepíteni a csomagot [[+signature]] aláírással';
 $_lang['package_err_install_gen'] = 'Csomag telepítése sikertelen.';
 $_lang['package_err_load'] = 'Nem sikerült az átviteli csomag betöltése.';

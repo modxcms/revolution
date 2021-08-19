@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'لا يمكن تحميل وإنشاء �
 $_lang['package_download_err_ns'] = 'الرجاء تحديد إصدار حزمة واحد على الأقل للتحميل.';
 $_lang['package_err_create'] = 'لا يمكن إنشاء الحزمة.';
 $_lang['package_err_file_read'] = 'لا يمكن فتح الملف للقراءة: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'لا يمكن تثبيت الحزمة مع التوقيع: [[+signature]]';
 $_lang['package_err_install_gen'] = 'فشل تثبيت الحزمة.';
 $_lang['package_err_load'] = 'لا يمكن تحميل حزمة النقل.';

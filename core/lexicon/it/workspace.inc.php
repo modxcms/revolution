@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Non è possibile scaricare e creare il 
 $_lang['package_download_err_ns'] = 'Seleziona almento una versione di Pacchetto da scaricare.';
 $_lang['package_err_create'] = 'Non è stato possibile creare il Pacchetto.';
 $_lang['package_err_file_read'] = 'Non è stato possibile aprire il file per leggerlo: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Non è stato possibile installare il Pacchetto con firma: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Fallita installazione Pacchetto.';
 $_lang['package_err_load'] = 'Non è stato possibile caricare il transporto Pacchetto.';

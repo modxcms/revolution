@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'シグネイチャ：[[+signature]] の
 $_lang['package_download_err_ns'] = 'ダウンロードするために、少なくとも1つはパッケージを選択してください。';
 $_lang['package_err_create'] = 'パッケージを作成できませんでした。';
 $_lang['package_err_file_read'] = '[[+source]] を読み込むためにファイルが開けませんでした。';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'シグネイチャ：[[+signature]] のパッケージインストール時にエラーが発生しました。';
 $_lang['package_err_install_gen'] = 'パッケージのインストールに失敗しました。';
 $_lang['package_err_load'] = '転送パッケージを読み込めませんでした。';

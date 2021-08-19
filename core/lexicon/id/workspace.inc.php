@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'Tidak dapat mendownload dan membuat pak
 $_lang['package_download_err_ns'] = 'Harap pilih setidaknya satu versi paket untuk diunduh.';
 $_lang['package_err_create'] = 'Tidak bisa membuat paket.';
 $_lang['package_err_file_read'] = 'Tidak dapat membuka file untuk dibaca: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Tidak bisa memasang paket dengan tanda tangan: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Gagal menginstal paket.';
 $_lang['package_err_load'] = 'Tidak bisa memuat paket transport.';

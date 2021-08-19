@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'İmzalı taşıma paketi indirilemedi v
 $_lang['package_download_err_ns'] = 'Lütfen indirmek için en az bir paket sürümü seçin.';
 $_lang['package_err_create'] = 'Paket oluşturulamadı.';
 $_lang['package_err_file_read'] = 'Okumak için dosya açılamadı: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'İmzalı paket yüklenemedi: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Paket yüklenemedi.';
 $_lang['package_err_load'] = 'Taşıma paketi yüklenemedi.';
