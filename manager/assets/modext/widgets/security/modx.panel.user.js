@@ -4,7 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-user
  */
-MODx.panel.User = function(config) {
+ MODx.panel.User = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         url: MODx.config.connector_url
@@ -90,7 +90,7 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
 
     ,success: function(o) {
         var userId = this.config.user;
-        if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() === 's' && o.result.message != '') {
+        if (Ext.getCmp('modx-user-passwordnotifymethod-s').getValue() && o.result.message != '') {
             Ext.Msg.hide();
             Ext.Msg.show({
                 title: _('password_notification')
@@ -445,17 +445,9 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             }
             ,items: [{
                 xtype: 'radiogroup'
-                ,hidden: true
                 ,fieldLabel: _('password_method')
                 ,columns: 1
                 ,items: [{
-                    id: 'modx-user-passwordnotifymethod-e'
-                    ,name: 'passwordnotifymethod'
-                    ,boxLabel: _('password_method_email')
-                    ,xtype: 'radio'
-                    ,value: 'e'
-                    ,inputValue: 'e'
-                },{
                     id: 'modx-user-passwordnotifymethod-s'
                     ,name: 'passwordnotifymethod'
                     ,boxLabel: _('password_method_screen')
