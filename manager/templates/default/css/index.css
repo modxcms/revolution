@@ -14227,6 +14227,7 @@ readers do not read off random characters that represent icons */
   padding-left: 0; }
 
 .x-grid3-hd-row td {
+  text-align: initial;
   border-left: 1px solid #FFF;
   border-right: none; }
 
@@ -14293,7 +14294,8 @@ readers do not read off random characters that represent icons */
 
 .x-grid3-header .x-grid3-hd-row td {
   color: dimgray;
-  font-weight: bold; }
+  font-weight: bold;
+  text-align: initial; }
 
 .x-grid3-header-pop {
   border-left-color: #DFDFDF; }
@@ -14394,14 +14396,14 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-hd-inner {
   font-weight: bold;
-  padding: 13px 18px 13px 5px; }
+  padding: 10px; }
 
 .ext-ie .x-grid3-hd-inner {
   width: auto; }
 
 .x-grid3-cell-inner,
 .x-grid3-hd-inner {
-  padding: 13px 18px 13px 5px; }
+  padding: 10px; }
 
 .x-props-grid .x-grid3-body .x-grid3-td-name {
   background-color: #FFF !important;
@@ -14443,7 +14445,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-row-collapsed .x-grid3-row-expander {
   height: 27px;
-  margin-top: 14px; }
+  margin-top: 10px; }
 
 .x-grid3-row-collapsed .x-grid3-row-expander:before {
   content: "\f0fe";
@@ -14453,7 +14455,7 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-grid3-row-expanded .x-grid3-row-expander {
   height: 27px;
-  margin-top: 14px; }
+  margin-top: 10px; }
 
 .x-grid3-row-expanded .x-grid3-row-expander:before {
   content: "\f146";
@@ -14543,20 +14545,20 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
   color: #53595F;
   font-size: 12px;
   font-weight: bold;
-  padding: 8px 4px 12px 5px; }
+  padding: 10px 0; }
 
 .x-grid-group-hd div.x-grid-group-title:before {
   content: "\f146";
   font-weight: 400;
   font-size: 14px;
   font-style: normal;
-  margin-right: 10px; }
+  padding: 0 5px; }
 
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title:before {
   content: "\f0fe";
   font-weight: 400;
   font-style: normal;
-  margin-right: 10px; }
+  padding: 0 5px; }
 
 .x-group-by-icon {
   background-image: url("../images/modx-theme/grid/group-by.gif"); }
@@ -14697,6 +14699,9 @@ td.x-grid3-hd-menu-open .x-grid3-hd-inner {
 
 .x-menu-floating {
   border-color: #C7C7C7; }
+  html[dir="rtl"] .x-menu-floating {
+    left: unset !important;
+    right: 0; }
 
 .x-menu-nosep {
   background-image: none; }
@@ -17795,26 +17800,37 @@ button {
   .x-toolbar .x-form-field-trigger-wrap.x-trigger-wrap-focus {
     box-shadow: 0 0 0 1px #999999; }
 
+html[dir="rtl"] .x-toolbar-left table {
+  float: right; }
+
+.x-toolbar .x-toolbar-left-row .x-btn,
+.x-toolbar .x-toolbar-left-row .x-form-text,
+.x-toolbar .x-toolbar-left-row .x-form-field-trigger-wrap {
+  margin: 0 3px; }
+
 .x-toolbar .x-toolbar-left-row td .x-btn {
   display: block; }
 
-.x-toolbar .x-toolbar-left-row td .x-btn,
-.x-toolbar .x-toolbar-left-row td .x-form-text,
-.x-toolbar .x-toolbar-left-row td .x-form-field-trigger-wrap {
-  margin-right: 7px;
-  /* 5px + 2px box-shadow = 5px visible spacing */ }
+.x-toolbar .x-toolbar-left-row .x-form-filter {
+  border-radius: 3px 0 0 3px;
+  z-index: 1;
+  /* prevent clear filter button from overlapping the textfield */ }
+  .x-toolbar .x-toolbar-left-row .x-form-filter:not(.x-form-empty-field) {
+    border-color: #000; }
+  .x-toolbar .x-toolbar-left-row .x-form-filter.x-form-focus {
+    border-color: #999999; }
 
-.x-toolbar .x-toolbar-left-row td:first-of-type .x-btn,
-.x-toolbar .x-toolbar-left-row td:first-of-type .x-form-text,
-.x-toolbar .x-toolbar-left-row td:first-of-type .x-form-field-trigger-wrap {
-  margin-left: 1px;
-  /* prevent first button to be cut off */ }
+.x-toolbar .x-toolbar-left-row .x-form-filter-clear {
+  border-radius: 0 3px 3px 0;
+  margin-right: 0; }
 
 .x-toolbar .x-toolbar-right-row .x-btn,
 .x-toolbar .x-toolbar-right-row .x-form-text,
 .x-toolbar .x-toolbar-right-row .x-form-field-trigger-wrap {
-  margin-left: 7px;
-  /* 5px + 2px box-shadow = 5px visible spacing */ }
+  margin: 0 3px; }
+
+.x-toolbar .x-toolbar-right-row td .x-btn {
+  display: block; }
 
 .x-toolbar .x-toolbar-right-row .x-form-filter {
   border-radius: 3px 0 0 3px;
@@ -17875,14 +17891,14 @@ button {
   right: 0;
   left: auto;
   background: #F1F1F1;
-  padding: 0.8rem 1rem;
+  padding: 0.5rem 1rem;
   border: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   border-radius: 3px;
   z-index: 12;
   /* prevent panel collapse arrows + toggles from overlapping */ }
-  #modx-action-buttons .x-toolbar-cell:not(:first-child) {
-    padding-left: 0.5rem; }
+  #modx-action-buttons .x-toolbar-cell {
+    padding: 0.25rem; }
   #modx-action-buttons .x-btn {
     margin: 0; }
   #modx-action-buttons #modx-abtn-menu .x-btn-split {
@@ -18815,6 +18831,11 @@ input::-moz-focus-inner {
 #modx-resource-tabs .x-fieldset legend [type="checkbox"] {
   position: absolute;
   left: -9999px; }
+  html[dir="rtl"] #modx-resource-tabs .x-form-check-wrap [type="checkbox"], html[dir="rtl"]
+  #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"], html[dir="rtl"]
+  #modx-resource-tabs .x-fieldset legend [type="checkbox"] {
+    right: -9999px;
+    left: unset; }
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-form-cb-label,
   #modx-resource-tabs .x-form-check-wrap [type="checkbox"] + .x-fieldset-header-text,
   #modx-resource-tabs .x-fieldset-checkbox-toggle legend [type="checkbox"] + .x-form-cb-label,
@@ -19470,14 +19491,9 @@ td.x-date-mp-sep {
     .x-tab-panel .x-tab-panel.vertical-tabs-panel {
       padding-top: 0;
       /* do not add that padding to vertical tabs panels */ }
-    .x-tab-panel .x-tab-panel .x-tab-strip-wrap {
-      padding: 2px 0 0 0;
-      /* revert padding from main tabs for nested ones */
-      margin: 0;
-      /* revert margin from main tabs for nested ones */ }
-      .x-tab-panel .x-tab-panel .x-tab-strip-wrap .x-tab-strip {
-        background-color: #FBFBFB !important;
-        /* override !important rule defined by extjs default theme */ }
+    .x-tab-panel .x-tab-panel .x-tab-strip-wrap .x-tab-strip {
+      background-color: #FBFBFB !important;
+      /* override !important rule defined by extjs default theme */ }
 
 .x-tab-panel-header,
 .x-tab-strip {
@@ -19504,6 +19520,8 @@ ul.x-tab-strip li {
   padding: 0 12px;
   position: relative;
   z-index: 5; }
+  html[dir="rtl"] ul.x-tab-strip li {
+    float: right; }
   ul.x-tab-strip li:hover {
     background-color: #E4E4E4;
     color: black; }
@@ -19528,10 +19546,8 @@ ul.x-tab-strip li {
 
 .x-tab-strip-wrap {
   overflow: hidden;
-  padding: 2px 5px 0 5px;
-  /* keep the tab box-shadows visible */
-  margin-left: -5px;
-  /* and move the tab strip back into place */ }
+  padding: 2px 0 0;
+  margin: 0; }
 
 .x-tab-strip-closable {
   padding-right: 15px !important; }
@@ -19889,7 +19905,6 @@ ul.x-tab-strip-bottom {
       right: 10px; }
     #modx-footer .modx-subnav li a {
       border-radius: 3px;
-      text-align: left;
       background-color: #FFF;
       color: #515151;
       font-weight: bold;
@@ -20588,7 +20603,7 @@ ul.x-tab-strip-bottom {
 .x-tree-node-el {
   color: #515151;
   font: normal 14px/2.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  padding: 0 0 0 8px;
+  padding: 0 8px;
   /* For legacy icons */
   background-repeat: no-repeat;
   background-position: 5px; }
@@ -20669,6 +20684,9 @@ ul.x-tab-strip-bottom {
   right: 6px;
   bottom: 0;
   line-height: 1.8; }
+  html[dir="rtl"] .modx-tree-node-tool-ct {
+    left: 6px;
+    right: unset; }
   .modx-tree-node-tool-ct .x-btn:hover, .modx-tree-node-tool-ct .x-btn:focus {
     color: #6CB24A !important; }
 
@@ -20681,6 +20699,9 @@ ul.x-tab-strip-bottom {
   line-height: 34px;
   opacity: 0;
   transition: opacity .4s ease-in; }
+  html[dir="rtl"] .x-tree-node-el .modx-tree-node-btn-create {
+    left: 6px;
+    right: unset; }
   .x-tree-node-el .modx-tree-node-btn-create .x-btn {
     color: #515151;
     opacity: .4;
@@ -20701,7 +20722,7 @@ ul.x-tab-strip-bottom {
   background-color: #F1F1F1;
   font: 500 14px/3 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   position: relative;
-  padding: 0 0 0 4px; }
+  padding: 0 5px; }
   .tree-pseudoroot-node.x-tree-node-el a span {
     color: #53595F; }
   .tree-pseudoroot-node.x-tree-node-el > .icon {
@@ -21170,7 +21191,7 @@ ul.x-tab-strip-bottom {
       color: #234368; }
     #modx-leftbar-header a:after {
       content: "\f06e";
-      margin-left: 5px;
+      padding: 5px;
       font-size: 14px;
       opacity: 0.5; }
   #modx-leftbar-header img + a {
@@ -21882,6 +21903,7 @@ ul.x-tab-strip-bottom {
     border-radius: 5px; }
     .dashboard table th {
       font-weight: bold;
+      text-align: initial;
       padding: 10px;
       border-bottom: 2px solid #F0F0F0; }
     .dashboard table td {
@@ -21939,7 +21961,7 @@ ul.x-tab-strip-bottom {
     -ms-flex-align: center;
         align-items: center; }
     .dashboard .user-with-avatar .user-avatar {
-      margin-right: 10px; }
+      margin: 0 10px; }
       .dashboard .user-with-avatar .user-avatar img {
         width: 35px;
         border-radius: 50%; }
@@ -22001,7 +22023,7 @@ ul.x-tab-strip-bottom {
         height: 16px;
         text-align: center; }
     .dashboard-buttons .dashboard-button-wrapper {
-      margin-left: 10px; }
+      padding: 0 10px; }
     .dashboard-buttons .dashboard-button-title {
       font-weight: bold; }
 
@@ -22380,7 +22402,6 @@ textarea.x-form-field {
 #modx-content {
   width: calc(100% - 370px);
   right: 0;
-  padding-left: 0.5rem;
   left: 370px;
   /* give #modx-content an initial left value to prevent the panel from jumping around */ }
 
@@ -22664,7 +22685,7 @@ a.x-grid-link:focus {
       font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Brands';
       font-weight: 900;
       content: "\f304";
-      margin-left: 0.5em;
+      margin: 0 0.5em;
       color: #234368; }
 
 .x-grid-buttons {
@@ -22684,14 +22705,17 @@ a.x-grid-link:focus {
 .modx-page-header,
 .modx-page-header div {
   background-color: transparent !important; }
-  #modx-panel-welcome .modx-page-header, #modx-panel-welcome
+  #modx-panel-welcome .modx-page-header, #modx-panel-trash .modx-page-header, #modx-panel-welcome
+  .modx-page-header div, #modx-panel-trash
   .modx-page-header div {
-    margin: 1rem; }
+    margin: 1rem !important; }
 
 @media screen and (min-width: 961px) {
   #modx-content > .x-panel-bwrap > .x-panel-body .modx-page-header {
     margin-top: 1.25rem;
     box-sizing: border-box; }
+    html[dir="rtl"] #modx-content > .x-panel-bwrap > .x-panel-body .modx-page-header {
+      margin-top: 4rem; }
     #modx-content > .x-panel-bwrap > .x-panel-body .modx-page-header + div {
       margin: 1rem; }
   #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel {
@@ -22700,8 +22724,10 @@ a.x-grid-link:focus {
       margin-top: 1.25rem;
       font-weight: bold;
       box-sizing: border-box;
-      padding-left: 18px;
+      padding: 0 15px;
       font-size: 18px; }
+      html[dir="rtl"] #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs {
+        margin-top: 4rem; }
       #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs + div {
         margin: 1rem; }
     #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs {
@@ -23225,6 +23251,11 @@ a.x-grid-link:focus {
 iframe[classname="x-hidden"] {
   visibility: hidden; }
 
+html[dir="rtl"] .x-hiden, html[dir="rtl"]
+.x-hide-offsets {
+  right: -9999px;
+  left: unset; }
+
 /* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
   background: url("../images/restyle/fileup/file-add.gif") no-repeat left center !important; }
@@ -23366,9 +23397,7 @@ iframe[classname="x-hidden"] {
   font: normal 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #53595F;
   margin: 0;
-  padding-left: 18px; }
-  #modx-panel-welcome .modx-page-header {
-    padding-left: 0; }
+  padding: 0 15px; }
   @media screen and (max-width: 960px) {
     .modx-page-header {
       width: 100%;
@@ -23441,7 +23470,7 @@ iframe[classname="x-hidden"] {
         justify-content: space-between; }
     #modx-abtn-menu-list .x-menu-item .x-menu-item-text .icon {
       text-align: center;
-      margin-left: 10px; }
+      margin: 0 10px; }
 
 #modx-abtn-menu-list #modx-abtn-delete {
   color: #CF1124; }
