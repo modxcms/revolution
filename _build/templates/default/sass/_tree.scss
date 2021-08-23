@@ -172,7 +172,7 @@
 .x-tree-node-el {
   color: $treeColor;
   font: $treeNodeFont;
-  padding: 0 0 0 8px;
+  padding: 0 8px;
 
   &.is_folder {
     background: $treeFolderBg;
@@ -286,6 +286,11 @@
   bottom: 0;
   line-height: 1.8;
 
+  html[dir="rtl"] & {
+    left: 6px;
+    right: unset;
+  }
+
   .x-btn {
     &:hover, &:focus {
       color: $green !important;
@@ -303,6 +308,11 @@
     line-height: 34px;
     opacity: 0;
     transition: opacity .4s ease-in;
+
+    html[dir="rtl"] & {
+      left: 6px;
+      right: unset;
+    }
 
     .x-btn {
       color: $darkGray;
@@ -335,7 +345,7 @@
   background-color: $treePseudoRootBg;
   font: $treePseudoRootFont;
   position: relative;
-  padding: 0 0 0 4px;
+  padding: 0 5px;
 
   a span {
     color: $treePseudoRootColor;
@@ -911,7 +921,7 @@
     &:after {
       @extend %pseudo-font;
       content: fa-content($fa-var-eye);
-      margin-left: 5px;
+      padding: 5px;
       font-size: 14px;
       opacity: 0.5;
     }
