@@ -88,8 +88,10 @@ class GetInputPropertyConfigs extends Processor
         $this->exampleData['disabled_dates_desc'] = [
             'format_current' => date($formatCurrent),
             'format_default' => date($formatDefault),
-            'example_1' => date($formatDefault, strtotime("+3 days")) . ',' . date($formatDefault, strtotime("+7 days")),
-            'example_2a' => date($formatWithoutYear, $timestampAheadOneMonth) . ',' . date($formatWithoutYear, $timestampAheadAlt),
+            'example_1' => date($formatDefault, strtotime("+3 days")) .
+                ',' . date($formatDefault, strtotime("+7 days")),
+            'example_2a' => date($formatWithoutYear, $timestampAheadOneMonth) .
+                ',' . date($formatWithoutYear, $timestampAheadAlt),
             'example_2b' => date("F jS", $timestampAheadOneMonth),
             'example_2c' => date("F jS", $timestampAheadAlt),
             'example_3a' => '^' . date("Y"),
