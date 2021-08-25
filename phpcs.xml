@@ -14,10 +14,12 @@
 
     <!-- Show progress, show the error codes for each message (source). -->
     <arg value="ps" />
+    <!-- Show warnings, but do not cause warnings to report as a failure. -->
+    <arg name="ignore_warnings_on_exit" value="1" />
 
     <!-- Ignore vendor files -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
     <!-- Our base rule: set to PSR12-->
-    <rule ref="PSR12"/>
+    <rule ref="PSR12" />
 </ruleset>
