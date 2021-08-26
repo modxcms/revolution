@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = 'Nemáte vhodný REST klient pro Váš systé
 $_lang['provider_err_nfs'] = 'Nebyl nalezen poskytovatel ID [[+id]]';
 $_lang['provider_err_no_response'] = 'Nastala chyba při odezvě od serveru: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Tento poskytovatel nebyl ověřen, proto nemůže být použit jako MODX poskytovatel. Zkontrolujte URL a zkuste to znovu.';
+$_lang['provider_err_not_selected'] = 'Pro pokračování musíte vybrat poskytovatele ze seznamu výše.';
 $_lang['provider_err_ns'] = 'Nespecifikovaný poskytovatel.';
 $_lang['provider_err_ns_name'] = 'Zadejte název poskytovatele.';
 $_lang['provider_err_ns_url'] = 'Zadejte platnou URL poskytovatele.';
