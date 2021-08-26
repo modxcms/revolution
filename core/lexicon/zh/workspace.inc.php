@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>你没有一个此系统需要的可�
 $_lang['provider_err_nfs'] = 'ID为[[+id]]的源未找到';
 $_lang['provider_err_no_response'] = '从服务器： [[+provider]]获取一个响应时出错';
 $_lang['provider_err_not_verified'] = '此源不能被验证，无法作为MODX的源使用，请重新检查服务URL后再次尝试。';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = '未指定源。';
 $_lang['provider_err_ns_name'] = '请为源指定一个名字。';
 $_lang['provider_err_ns_url'] = '请为源提供一个有效的URL。';
