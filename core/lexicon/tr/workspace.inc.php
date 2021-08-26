@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Sisteminiz için geçerli bir REST ist
 $_lang['provider_err_nfs'] = 'Sağlayıcı kimliği bulunamadı [[+id]]';
 $_lang['provider_err_no_response'] = 'Sunucudan yanıt alma hatası: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Bu Sağlayıcı doğrulanamadı, bu nedenle bir MODX Sağlayıcısı olarak kullanılamaz. Lütfen hizmet URL\'sini kontrol edin ve tekrar deneyin.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Sağlayıcı belirtilmedi.';
 $_lang['provider_err_ns_name'] = 'Lütfen sağlayıcı için bir isim belirleyin.';
 $_lang['provider_err_ns_url'] = 'Lütfen sağlayıcı için geçerli bir URL sağlayın.';
