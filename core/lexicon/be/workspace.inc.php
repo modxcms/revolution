@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>У вашай сістэме не пр
 $_lang['provider_err_nfs'] = 'Не знойдзены правайдэр з ID [[+id]]';
 $_lang['provider_err_no_response'] = 'Памылка пры атрыманні адказу ад сервера: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Гэты правайдэр не можа быць правераны і таму не можа быць выкарыстаны ў якасці правайдэра MODX. Калі ласка, праверце URL і паспрабуйце ізноў.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Правайдэр не пазначаны.';
 $_lang['provider_err_ns_name'] = 'Калi ласка, пазначце назву для правайдэра.';
 $_lang['provider_err_ns_url'] = 'Калi ласка, пазначце сапраўдны URL для правайдэра.';
