@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>このシステムには有効なREST�
 $_lang['provider_err_nfs'] = 'ID [[+id]] のプロバイダーが見つかりません。';
 $_lang['provider_err_no_response'] = 'サーバーからの応答取得時にエラーが発生しました。：[[+provider]]';
 $_lang['provider_err_not_verified'] = 'このプロバイダーの検証に失敗したため、MODXプロバイダーとして使用できません。URLを確認して、もう一度やり直してください。';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'プロバイダーが指定されていません。';
 $_lang['provider_err_ns_name'] = 'プロバイダー名を指定してください。';
 $_lang['provider_err_ns_url'] = 'プロバイダーの有効なURLを指定してください。';
