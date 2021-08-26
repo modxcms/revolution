@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Teil puudub toimiv REST klient.</b></p
 $_lang['provider_err_nfs'] = 'Varustajat ID-ga [[+id]] ei leitud';
 $_lang['provider_err_no_response'] = 'Viga päringu vastuse saamisel serverist: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Varustajat ei saanud verifitseerida ja seetõttu ei saa seda kasutada kui MODX Varustajana. Palun kontrollige teenuse URL-i ja proovige uuesti.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Varustajat ei ole määratud.';
 $_lang['provider_err_ns_name'] = 'Palun määrake Varustaja nimi.';
 $_lang['provider_err_ns_url'] = 'Palun määrake kehtiv URL Varustajale.';
