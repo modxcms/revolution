@@ -56,9 +56,3 @@ composer.lock
 
 # ignore phpunit cache files
 .phpunit.result.cache
-config.codekit3
-_build/templates/default/sass/index-codekit.scss
-package.json
-package-lock.json
-manager/templates/default/css/index-modified.css
-_build/_2x-build.properties.php
