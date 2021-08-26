@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Vous ne possédez pas de client REST v
 $_lang['provider_err_nfs'] = 'Fournisseur avec l\'ID [[+id]] non trouvé';
 $_lang['provider_err_no_response'] = 'Erreur dans l\'obtention de réponse du serveur : [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Ce fournisseur n\'a pu être vérifié et donc ne peut être utilisé comme un fournisseur MODX. Veuillez vérifier l\'URL du service et essayer de nouveau.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Fournisseur non spécifié.';
 $_lang['provider_err_ns_name'] = 'Veuillez spécifier un nom pour le fournisseur.';
 $_lang['provider_err_ns_url'] = 'Veuillez fournir une URL valide pour le fournisseur.';
