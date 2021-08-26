@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Anda tidak memiliki klien REST yang la
 $_lang['provider_err_nfs'] = 'Penyedia tidak ditemukan dengan ID [[+id]]';
 $_lang['provider_err_no_response'] = 'Kesalahan dalam mendapatkan respon dari server: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Penyedia ini tidak dapat diverifikasi, dan oleh karena itu tidak dapat digunakan sebagai Penyedia MODX. Harap periksa URL layanan dan coba lagi.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Penyedia tidak ditentukan.';
 $_lang['provider_err_ns_name'] = 'Harap tentukan nama untuk Penyedia.';
 $_lang['provider_err_ns_url'] = 'Berikan URL yang valid untuk Penyedia.';
