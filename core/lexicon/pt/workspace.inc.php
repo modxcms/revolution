@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Você não tem um cliente REST viável
 $_lang['provider_err_nfs'] = 'Provedor não encontrado com o ID [[+id]]';
 $_lang['provider_err_no_response'] = 'Erro na obtenção de uma resposta do servidor: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Este provedor não pôde ser verificado e, portanto, não pode ser usado como um provedor MODX. Por favor verifique a URL do serviço e tente novamente.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Provedor não especificado.';
 $_lang['provider_err_ns_name'] = 'Por favor, especifique um nome para o Provedor.';
 $_lang['provider_err_ns_url'] = 'Por favor forneça uma URL válida para o provedor.';
