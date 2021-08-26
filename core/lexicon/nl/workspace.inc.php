@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Er is op je systeem geen juiste REST c
 $_lang['provider_err_nfs'] = 'Provider met ID [[+id]] niet gevonden';
 $_lang['provider_err_no_response'] = 'Fout met het krijgen van een reactie van de server: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Deze provider kon niet geverifieerd worden en kan daardoor niet gebruikt worden als MODX provider. Controleer de Service URL en probeer opnieuw.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Provider niet gespecificeerd';
 $_lang['provider_err_ns_name'] = 'Geef een naam op voor de Provider.';
 $_lang['provider_err_ns_url'] = 'Geef een correcte URL op voor de Provider.';
