@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>आप अपने सिस्टम
 $_lang['provider_err_nfs'] = 'प्रदाता ID के साथ नहीं पाया [[+id]]';
 $_lang['provider_err_no_response'] = 'सर्वर से प्रतिक्रिया प्राप्त करने में त्रुटि: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'इस प्रदाता सत्यापित नहीं किया जा सकता है, और इसलिए एक ModX प्रदाता के रूप में इस्तेमाल नहीं किया जा सकता। सेवा URL की जाँच करें और पुन: प्रयास करें।';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'प्रदाता निर्दिष्ट नहीं किया गया।';
 $_lang['provider_err_ns_name'] = 'कृपया इस प्रदाता के लिए कोई नाम निर्दिष्ट करें।';
 $_lang['provider_err_ns_url'] = 'कृपया एक मान्य URL इस प्रदाता के लिए प्रदान करते हैं।';
