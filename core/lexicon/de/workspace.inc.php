@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Sie haben keinen geeigneten REST-Clien
 $_lang['provider_err_nfs'] = 'Anbieter mit der ID [[+id]] nicht gefunden';
 $_lang['provider_err_no_response'] = 'Fehler beim Empfangen einer Antwort vom Server [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Dieser Anbieter konnte nicht überprüft werden und kann daher nicht als MODX-Anbieter verwendet werden. Bitte überprüfen Sie die URL des Dienstes und versuchen Sie es erneut.';
+$_lang['provider_err_not_selected'] = 'Sie müssen einen Anbieter aus der Liste auswählen, um fortzufahren.';
 $_lang['provider_err_ns'] = 'Anbieter nicht angegeben.';
 $_lang['provider_err_ns_name'] = 'Bitte geben Sie einen Namen für den Anbieter an.';
 $_lang['provider_err_ns_url'] = 'Bitte geben Sie eine gültige URL für den Anbieter an.';
