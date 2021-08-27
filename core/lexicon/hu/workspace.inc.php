@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>You do not have a viable REST client f
 $_lang['provider_err_nfs'] = 'Szolgáltató [[+id]] azonosítóval nem található';
 $_lang['provider_err_no_response'] = 'Hiba a kiszolgálótól érkező válaszban: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Ez a szolgáltató nem ellenőrizhető, ezért nem használható MODX szolgáltatóként. Kérjük, ellenőrizze a szolgáltatás URL-jét, és próbálja újra.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Szolgáltató nincs megadva.';
 $_lang['provider_err_ns_name'] = 'Kérjük, adja meg a szolgáltató nevét.';
 $_lang['provider_err_ns_url'] = 'Kérjük, adjon meg egy érvényes webcímet a szolgáltatóhoz.';

@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>لا تملك زبون REST قابل �
 $_lang['provider_err_nfs'] = 'لم يتم العثور على المزود مع المعرف [[+id]]';
 $_lang['provider_err_no_response'] = 'خطأ في الحصول على استجابة من المخدم: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'لا يمكن التحقق من المزود، ولذلك لا يمكن استخدامه كمزود لمودكس.الرجاء التحقق من URL الخدمة والمحاولة ثانية.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'المزود غير محدد.';
 $_lang['provider_err_ns_name'] = 'الرجاء تحديد اسم للمزود.';
 $_lang['provider_err_ns_url'] = 'الرجاء تزويد URL صالحاً للمزود.';

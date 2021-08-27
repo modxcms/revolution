@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = 'คุณไม่มี  REST client ที
 $_lang['provider_err_nfs'] = 'ไม่พบ Provider ไอดี [[+id]]';
 $_lang['provider_err_no_response'] = 'เกิดข้อผิดพลาดในการตอบสนองของเซิร์ฟเวอร์: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Provider นี้ไม่สามารถพิสูจน์ตัวตนได้และไม่สามารถใช้เป็น MODX Provider ได้ กรุณาตรวจสอบ service URL และลองใหม่อีกครั้ง';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'ไม่มีการระบุ Provider';
 $_lang['provider_err_ns_name'] = 'กรุณาระบุชื่อสำหรับ Provider';
 $_lang['provider_err_ns_url'] = 'กรุณาจัดหา URL ที่ถูกต้องสำหรับ Provider';

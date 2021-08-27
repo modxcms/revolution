@@ -177,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>Nie masz właściwego klienta REST dla
 $_lang['provider_err_nfs'] = 'Provider not found with ID [[+id]]';
 $_lang['provider_err_no_response'] = 'Error in getting a response from the server: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'This Provider could not be verified, and therefore cannot be used as a MODX Provider. Please check the service URL and try again.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'Provider not specified.';
 $_lang['provider_err_ns_name'] = 'Please specify a name for the Provider.';
 $_lang['provider_err_ns_url'] = 'Please provide a valid URL for the Provider.';
