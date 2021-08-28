@@ -36,30 +36,30 @@ var coreJSFiles = [
         '<%= dirs.setup %>installer.css': 'sass/installer.scss'
     },
     bannerText = '/*' +
-        '\n* ' +
-        '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC' +
-        '\n* ' +
-        '\n* This file is part of <%= pkg.title %> and was compiled using Grunt.' +
-        '\n* ' +
-        '\n* <%= pkg.title %> is free software: you can redistribute it and/or modify it under the terms of the' +
-        '\n* GNU General Public License as published by the Free Software Foundation, either version 2 of the' +
-        '\n* License, or (at your option) any later version.' +
-        '\n* ' +
-        '\n* <%= pkg.title %> is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;' +
-        '\n* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.' +
-        '\n* ' +
-        '\n* See the GNU General Public License for more details. You should have received a copy of the GNU' +
-        '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.' +
-        '\n* ' +
-        '\n*/' +
-        '\n',
+    '\n* ' +
+    '\n* Copyright (C) <%= grunt.template.today("yyyy") %> MODX LLC' +
+    '\n* ' +
+    '\n* This file is part of <%= pkg.title %> and was compiled using Grunt.' +
+    '\n* ' +
+    '\n* <%= pkg.title %> is free software: you can redistribute it and/or modify it under the terms of the' +
+    '\n* GNU General Public License as published by the Free Software Foundation, either version 2 of the' +
+    '\n* License, or (at your option) any later version.' +
+    '\n* ' +
+    '\n* <%= pkg.title %> is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;' +
+    '\n* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.' +
+    '\n* ' +
+    '\n* See the GNU General Public License for more details. You should have received a copy of the GNU' +
+    '\n* General Public License along with <%= pkg.title %>. If not, see <http://www.gnu.org/licenses/>.' +
+    '\n* ' +
+    '\n*/' +
+    '\n',
     cssFileMain = '<%= dirs.css %>index.css',
     cssFileSetup = '<%= dirs.setup %>installer.css',
     cssFileLogin = '<%= dirs.css %>login.css',
     cssMinFileMain = '<%= dirs.css %>index-min.css',
     cssMinFileSetup = '<%= dirs.setup %>installer-min.css',
     cssMinFileLogin = '<%= dirs.css %>login-min.css'
-;
+    ;
 
 module.exports = function(grunt) {
     // Project configuration.
@@ -113,20 +113,6 @@ module.exports = function(grunt) {
                 }]
             }
         },
-        cssmin: {
-            compress: {
-                options: {
-                    report: 'min',
-                    sourceMap: true,
-                    keepSpecialComments: 1
-                },
-                files: {
-                    [cssMinFileMain]: cssFileMain,
-                    [cssMinFileLogin]: cssFileLogin,
-                    [cssMinFileSetup]: cssFileSetup
-                }
-            }
-        },
         concat: {
             options: {
                 stripBanners: true,
@@ -167,35 +153,29 @@ module.exports = function(grunt) {
                 files: sassCompileFileMap
             }
         },
-        autoprefixer: {
-            /* this expands the css so it needs to get compressed with cssmin afterwards */
+        postcss: {
             options: {
-                browsers: ['last 2 versions']
+                map: {
+                    inline: false
+                },
+                processors: [
+                    require('autoprefixer')(),
+                    require('cssnano')({
+                        preset: 'default'
+                    })
+                ]
             },
-
-            // just prefix the specified file
             index: {
-                options: {},
                 src: cssFileMain,
-                dest: cssFileMain
+                dest: cssMinFileMain
             },
             login: {
-                options: {},
                 src: cssFileLogin,
-                dest: cssFileLogin
+                dest: cssMinFileLogin
             },
             setup: {
-                options: {},
                 src: cssFileSetup,
-                dest: cssFileSetup
-            }
-        },
-        csslint: {
-            strict: {
-                options: {
-                    import: 2
-                },
-                src: ['<%= dirs.css %>*.css']
+                dest: cssMinFileSetup
             }
         },
         watch: {
@@ -244,22 +224,16 @@ module.exports = function(grunt) {
                     title: "grunt"
                 }
             },
-            map: {
-                options: {
-                    message: "Sass files created with source maps.",
-                    title: "grunt"
-                }
-            },
             build: {
                 options: {
                     title: "grunt",
                     message: "Build complete."
                 }
             },
-            prefixes: {
+            postcss: {
                 options: {
                     title: "grunt",
-                    message: "CSS prefixes added."
+                    message: "PostCSS ran autoprefixer and minified files."
                 }
             },
             watch: {
@@ -289,11 +263,9 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('@lodder/grunt-postcss');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-dart-sass');
     grunt.loadNpmTasks('grunt-notify');
@@ -301,7 +273,7 @@ module.exports = function(grunt) {
 
     // Tasks
     grunt.registerTask('default', ['notify:watch', 'watch']);
-    grunt.registerTask('build', ['copy', 'dart-sass:dist', 'autoprefixer', 'notify:prefixes', 'notify:sass', 'cssmin:compress', 'concat', 'notify:concat', 'terser:jsgrps', 'notify:terser']);
+    grunt.registerTask('build', ['copy', 'dart-sass:dist', 'notify:sass', 'postcss', 'notify:postcss', 'concat', 'notify:concat', 'terser:jsgrps', 'notify:terser']);
     grunt.registerTask('compress', ['terser:jsgrps', 'notify:terser']);
-    grunt.registerTask('style', ['copy', 'dart-sass:dist', 'autoprefixer', 'notify:prefixes', 'notify:sass', 'cssmin:compress', 'concat', 'notify:concat']);
+    grunt.registerTask('style', ['copy', 'dart-sass:dist', 'notify:sass', 'postcss', 'notify:postcss', 'concat', 'notify:concat']);
 };
