@@ -670,7 +670,7 @@ $settings['friendly_alias_word_delimiters']->fromArray([
 $settings['friendly_urls'] = $xpdo->newObject(modSystemSetting::class);
 $settings['friendly_urls']->fromArray([
   'key' => 'friendly_urls',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
@@ -1816,7 +1816,7 @@ $settings['upload_translit']->fromArray([
 $settings['use_alias_path'] = $xpdo->newObject(modSystemSetting::class);
 $settings['use_alias_path']->fromArray([
   'key' => 'use_alias_path',
-  'value' => false,
+  'value' => true,
   'xtype' => 'combo-boolean',
   'namespace' => 'core',
   'area' => 'furls',
