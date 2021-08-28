@@ -23,6 +23,6 @@ $_lang['context_id'] = 'Ctx ID';
 $_lang['context_key'] = 'مفتاح السياق';
 $_lang['context_management_message'] = 'إدارة سياقات الموقع.';
 $_lang['context_settings'] = 'إعدادات السياق';
-$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
+$_lang['context_settings_desc'] = 'هنا يمكنك تعيين إعدادات محددة لهذا السياق. سيتم تجاوز إعدادات السياق أي إعدادات نظام بنفس المفتاح. <b>كل إعداد سيكون متوفراً عن طريق العنصر النائب [[++key]].</b>';
 $_lang['context_with_key_not_found'] = 'لم يتم العثور على السياق ذو المفتاح %s !';
 $_lang['contexts'] = 'السياقات';
