@@ -2259,4 +2259,13 @@ $settings['error_log_filepath']->fromArray(array (
     'area' => 'system',
     'editedon' => null,
 ), '', true, true);
+$settings['static_elements_html_extension']= $xpdo->newObject('modSystemSetting');
+$settings['static_elements_html_extension']->fromArray(array (
+    'key' => 'static_elements_html_extension',
+    'value' => '.tpl',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'static_elements',
+    'editedon' => null,
+), '', true, true);
 return $settings;
