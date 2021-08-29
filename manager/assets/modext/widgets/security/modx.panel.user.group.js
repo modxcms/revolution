@@ -302,7 +302,7 @@ MODx.panel.UserGroup = function(config) {
                         tabPanel.hideTabStripItem(usersPanelKey);
                         tabPanel.hideTabStripItem(settingsPanelKey);
                     }
-                    if (!MODx.perm.usergroup_user_list ) {
+                    if (!MODx.perm.usergroup_user_list) {
                         tabPanel.hideTabStripItem(usersPanelKey);
                     }
                 }
