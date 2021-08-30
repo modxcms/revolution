@@ -32,7 +32,6 @@
     height: 16px;
     min-width: 100%;
     padding: 0; /* override extjs default theme styles */
-    vertical-align: middle;
 
     .ext-ie8 & {
       padding-top: 0; /* fix IE < 9 (overriding extjs default style) */
@@ -98,7 +97,7 @@
     background-color: $buttonBgDisabled;
     color: $buttonColorDisabled;
     box-shadow: $shadowBorderDisabled;
-    opacity: 0.6; /* extjs default theme is also 0.6 */
+    opacity: .6; /* extjs default theme is also 0.6 */
     filter: alpha(opacity=60); /* for IE <= 8 */
   }
 
