@@ -138,7 +138,7 @@ class GetInputPropertyConfigs extends Processor
     public function initialize()
     {
         /* simulate controller to allow controller methods in TV Input Properties controllers */
-        $this->modx->getService('smarty', 'smarty.modSmarty', '');
+        $this->modx->getService('smarty', 'MODX\Revolution\Smarty\modSmarty', '');
 
         $context = $this->getProperty('context');
         if (empty($context)) {

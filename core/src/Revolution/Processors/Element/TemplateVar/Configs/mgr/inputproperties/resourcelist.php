@@ -21,7 +21,8 @@ $limitRelatedContext =
     ? 'true'
     : 'false'
     ;
-$depth = $params['depth'] == 0 || $params['depth'] >= 1 ? $params['depth'] : 10 ;
+$depth = $params['depth'] === '0' ? 0 : $params['depth'] ;
+$depth = $depth === 0 || $depth >= 1 ? $depth : 10 ;
 $limit = $params['limit'] >= 1 ? $params['limit'] : 0 ;
 $parents = !empty($params['parents']) ? json_encode($params['parents']) : 'null' ;
 $where = !empty($params['where']) ? json_encode($params['where']) : 'null' ;

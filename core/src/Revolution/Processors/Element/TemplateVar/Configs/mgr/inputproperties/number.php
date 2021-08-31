@@ -23,11 +23,19 @@
 
 # Set values
 $allowDecimals = $params['allowDecimals'] === 'true' || $params['allowDecimals'] == 1 ? 'true' : 'false' ;
-$allowNegative = $params['allowNegative'] === 'false' || $params['allowNegative'] == 0 ? 'false' : 'true' ;
 $decimalPrecision = !empty($params['decimalPrecision']) ? $params['decimalPrecision'] : 2 ;
-$decimalSeparator = !empty($params['decimalSeparator']) ? json_encode($params['decimalSeparator']) : json_encode('.') ;
-$minValue = !empty($params['minValue']) ? $params['minValue'] : 'null' ;
-$maxValue = !empty($params['maxValue']) ? $params['maxValue'] : 'null' ;
+$decimalSeparator = !empty($params['decimalSeparator'])
+    ? json_encode($params['decimalSeparator'])
+    : json_encode('.')
+    ;
+$minValue = !empty($params['minValue']) || $params['minValue'] === '0'
+    ? $params['minValue']
+    : 'null'
+    ;
+$maxValue = !empty($params['maxValue']) || $params['maxValue'] === '0'
+    ? $params['maxValue']
+    : 'null'
+    ;
 
 # Set help descriptions
 $descKeys = [
@@ -70,30 +78,6 @@ $optsJS = <<<OPTSJS
                     xtype: '{$helpXtype}',
                     forId: 'inopt_allowBlank{$tvId}',
                     html: {$this->helpContent['required_desc']},
-                    cls: 'desc-under'
-                }]
-            },
-            {
-                xtype: 'panel',
-                columnWidth: 0.5,
-                autoHeight: true,
-                labelAlign: 'top',
-                defaults: {
-                    anchor: '100%',
-                    msgTarget: 'under'
-                },
-                items: [{
-                    xtype: 'combo-boolean',
-                    fieldLabel: _('number_allownegative'),
-                    description: {$this->helpContent['eh_allownegative_desc']},
-                    name: 'inopt_allowNegative',
-                    hiddenName: 'inopt_allowNegative',
-                    id: 'inopt_allowNegative{$tvId}',
-                    value: {$allowNegative}
-                },{
-                    xtype: '{$helpXtype}',
-                    forId: 'inopt_allowNegative{$tvId}',
-                    html: {$this->helpContent['allownegative_desc']},
                     cls: 'desc-under'
                 }]
             }
@@ -267,7 +251,7 @@ $optsJS = <<<OPTSJS
                     allowDecimalsCmp.on('check', function(){
                         this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                     }, this);
-                    if(showDecimalsOn) {
+                    if(!showDecimalsOn) {
                         this.toggleFieldVisibility(switchField, cmp.id, toggleFields);
                     }
                 }
