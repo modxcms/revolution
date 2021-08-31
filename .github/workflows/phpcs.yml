@@ -25,3 +25,4 @@ jobs:
                   files: "**.php"
                   phpcs_path: php phpcs.phar
                   standard: phpcs.xml
+                  fail_on_warnings: false
