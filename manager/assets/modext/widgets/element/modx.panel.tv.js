@@ -1033,6 +1033,7 @@ MODx.panel.TVInputProperties = function(config) {
             ,cls:'main-wrapper'
             ,labelAlign: 'top'
             ,labelSeparator: ''
+            // ,bodyStyle: 'max-width:900px'
             ,defaults: {
                 anchor: '100%'
                 ,msgTarget: 'under'
@@ -1184,6 +1185,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                     }
                 };
                 if (this.isNativeType) {
+                    defaultProps.allowBlank = false;
                     switch (type) {
                         case 'checkbox':
                             typeProps = {
@@ -1449,6 +1451,14 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
             } else {
                 this.updateSharedComponent(type, inputOptValsItem, inputOptValsItemVal);
                 formCmp.doLayout();
+                /*
+                    Prevents this required field from immediately showing as invalid upon changing the tv type.
+                    Because this component is dynamically generated, it needs to be fetched again here
+                    with getCmp instead of using the inputOptValsItem variable
+                */
+                if (typeChanged) {
+                    Ext.getCmp('modx-tv-elements').clearInvalid();
+                }
             }
         }
         if(inputDefaultValItem){
@@ -1604,8 +1614,6 @@ Ext.extend(MODx.panel.TVOutputProperties,MODx.Panel,{
     isNativeType: true
 
     ,showOutputProperties: function(cb,rc,i) {
-
-        Ext.getCmp('modx-panel-tv').markDirty();
 
         const   formCmp = this.getComponent(1),
                 tvPanel = Ext.getCmp('modx-panel-tv'),
