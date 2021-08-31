@@ -43,6 +43,7 @@ class PhpThumb extends Processor
             'context' => $this->getProperty('wctx'),
         ]);
         $this->unsetProperty('wctx');
+        $this->unsetProperty('version');
         error_reporting(E_ALL);
         return true;
     }
