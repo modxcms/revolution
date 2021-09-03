@@ -58,6 +58,7 @@ MODx.browser.View = function(config) {
         }
         ,tpl: MODx.config.modx_browser_default_viewmode === 'list' ? this.templates.list : this.templates.thumb
         ,itemSelector: MODx.config.modx_browser_default_viewmode === 'list' ? 'div.modx-browser-list-item' : 'div.modx-browser-thumb-wrap'
+        ,loadingText : '<div style="padding:10px;"><h4>'+_('loading')+'</h4></div>'
         ,thumbnails: []
         ,lazyLoad: function() {
             var height = this.getEl().parent().getHeight() + 100;
@@ -101,17 +102,18 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
     ,run: function(p) {
         p = p || {};
-        if (p.dir) { this.dir = p.dir; }
         Ext.applyIf(p,{
             action: 'Browser/Directory/GetFiles'
-            ,dir: this.dir
+            ,dir: p.dir ?? this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
+        this.mask = new Ext.LoadMask(Ext.getBody(), {msg:_('loading')});
+        this.mask.show();
         this.store.load({
             params: p
-            ,callback: function() {
+            ,callback: function(rec, options, success) {
+                this.mask.hide();
                 this.refresh();
-
                 // reset the bottom filepath bar
                 Ext.getCmp(this.ident+'-filepath').setValue('');
 
