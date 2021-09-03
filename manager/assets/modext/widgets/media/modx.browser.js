@@ -98,20 +98,20 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
     ,run: function(p) {
         p = p || {};
-        if (p.dir) { this.dir = p.dir; }
         Ext.applyIf(p,{
             action: 'browser/directory/getFiles'
-            ,dir: this.dir
+            ,dir: p.dir ?? this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
+        this.mask = new Ext.LoadMask(Ext.getBody(), {msg:_('loading')});
+        this.mask.show();
         this.store.load({
             params: p
             ,callback: function() {
+                this.mask.hide();
                 this.refresh();
-
                 // reset the bottom filepath bar
                 Ext.getCmp(this.ident+'-filepath').setValue('');
-
                 this.select(0);
             }
             ,scope: this
