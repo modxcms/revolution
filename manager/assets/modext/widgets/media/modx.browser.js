@@ -371,7 +371,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
-        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" width="'+data.image_width+'" height="'+data.image_height+'" alt="'+data.name+'" title="'+data.name+'" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
+        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" loading="lazy" width="'+data.image_width+'" height="'+data.image_height+'" alt="'+data.name+'" title="'+data.name+'" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
 
     ,formatData: function(data) {
@@ -398,7 +398,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             	,'<tpl if="preview === 1">'
                 ,'  <div class="modx-browser-thumb">'
                 ,'      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" ' +
-                            'data-src="{thumb}" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
+                            'data-src="{thumb}" loading="lazy" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
                 ,'  </div>'
                 ,'</tpl>'
             	,'<tpl if="preview === 0">'
@@ -434,7 +434,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  <tpl for=".">'
             ,'  <tpl if="preview === 1">'
             ,'      <div class="modx-browser-detail-thumb preview" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;">'
-            ,'          <img src="{image}" width="{image_width}" height="{image_height}" alt="{name}" title="{name}" />'
+            ,'          <img src="{image}" loading="lazy" width="{image_width}" height="{image_height}" alt="{name}" title="{name}" />'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <tpl if="preview === 0">'
