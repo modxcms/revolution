@@ -277,7 +277,21 @@ class modElement extends modAccessibleSimpleObject
                     if (is_scalar($value)) {
                         $propTemp[$key] = $key . '=`' . $value . '`';
                     } else {
-                        $propTemp[$key] = $key . '=`' . (is_array($value) ? md5(serialize($value)) : md5(uniqid(rand(), true))) . '`';
+                        if (is_array($value)) {
+                            array_walk_recursive($value, function(&$item, $key) {
+                                if ($item instanceof \xPDOObject) {
+                                    $item = $item->toArray('', false, true);
+                                }
+                            });
+                        } elseif ($value instanceof \xPDOObject) {
+                            $value = $value->toArray('', false, true);
+                        }
+                        try {
+                            $propTemp[$key] = $key . '=`' . (is_array($value) ? md5(serialize($value))
+                                    : md5(uniqid(rand(), true))) . '`';
+                        } catch (\Throwable $handlerException) {
+                            $propTemp[$key] = $key . '=`' . md5(uniqid(rand(), true)) . '`';
+                        }
                     }
                 }
                 if (!empty($propTemp)) {

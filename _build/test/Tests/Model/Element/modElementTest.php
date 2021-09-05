@@ -150,4 +150,24 @@ class modElementTest extends MODxTestCase {
             ],
         ];
     }
+
+    /**
+     * Test the modElement->getTag() method with xPDOObjects as values.
+     * E.g the nodes when the event `OnResourceSort` is fired
+     *
+     */
+    public function testGetTagWithXPDOObjects()
+    {
+        /** @var modElement $element */
+        $element = $this->modx->newObject(modElement::class);
+        $element->getProperties([
+            'objects' => [
+                $this->modx->newObject(modElement::class),
+            ],
+            'object' => $this->modx->newObject(modElement::class),
+        ]);
+
+        $tag = $element->getTag();
+        $this->assertNotEmpty($tag);
+    }
 }
