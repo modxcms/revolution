@@ -278,7 +278,7 @@ class modElement extends modAccessibleSimpleObject
                         $propTemp[$key] = $key . '=`' . $value . '`';
                     } else {
                         if (is_array($value)) {
-                            array_walk_recursive($value, function(&$item, $key) {
+                            array_walk_recursive($value, function (&$item, $key) {
                                 if ($item instanceof \xPDOObject) {
                                     $item = $item->toArray('', false, true);
                                 }
@@ -898,11 +898,15 @@ class modElement extends modAccessibleSimpleObject
                 $propertySet = $this->xpdo->getObject(modPropertySet::class, ['name' => $propertySet]);
             }
             if (is_object($propertySet) && $propertySet instanceof modPropertySet) {
-                if (!$this->isNew() && !$propertySet->isNew() && $this->xpdo->getCount(modElementPropertySet::class, [
+                if (
+                    !$this->isNew()
+                    && !$propertySet->isNew()
+                    && $this->xpdo->getCount(modElementPropertySet::class, [
                         'element' => $this->get('id'),
                         'element_class' => $this->_class,
                         'property_set' => $propertySet->get('id'),
-                    ])) {
+                    ])
+                ) {
                     $added = true;
                 } else {
                     if ($propertySet->isNew()) {
