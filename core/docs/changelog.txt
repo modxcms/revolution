@@ -4,7 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 2.8.4-pl (TBD)
 ====================================
-
+- New edit_media_source lexicon (#15737)
 
 MODX Revolution 2.8.3-pl (May 28, 2021)
 ====================================
