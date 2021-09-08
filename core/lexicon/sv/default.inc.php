@@ -126,6 +126,7 @@ $_lang['duplication_options'] = 'Dupliceringsalternativ';
 $_lang['edit'] = 'Redigera';
 $_lang['edit_chunk'] = 'Redigera chunk';
 $_lang['edit_context'] = 'Redigera kontext';
+$_lang['edit_media_source'] = 'Edit Media Source';
 $_lang['edit_plugin'] = 'Redigera plugin';
 $_lang['edit_snippet'] = 'Redigera snippet';
 $_lang['edit_template'] = 'Redigera mall';
