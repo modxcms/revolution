@@ -611,8 +611,8 @@ $_lang['setting_server_offset_time_desc'] = 'Geben Sie die Zeitdifferenz zwische
 $_lang['setting_session_cookie_domain'] = 'Session-Cookie-Domain';
 $_lang['setting_session_cookie_domain_desc'] = 'Verwenden Sie diese Einstellung, um die Session-Cookie-Domain anzupassen. Lassen Sie das Feld leer, wenn die aktuelle Domain verwendet werden soll.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Session-Cookie Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Wählen Sie \'lax\' oder \'strict\'.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Session-Cookie-Lebensdauer';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Verwenden Sie diese Einstellung, um die Session-Cookie-Lebensdauer anzupassen (in Sekunden). Diese gibt an, wie lange ein Session-Cookie gültig ist, wenn die Login-Option "An mich erinnern" gewählt wurde. Standardeinstellung ist "604800" (= 7 Tage).';
