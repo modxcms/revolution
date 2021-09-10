@@ -98,9 +98,12 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
     ,run: function(p) {
         p = p || {};
+        if(p.dir) {
+            this.dir = p.dir;
+        }
         Ext.applyIf(p,{
             action: 'browser/directory/getFiles'
-            ,dir: p.dir ?? this.dir
+            ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
         this.mask = new Ext.LoadMask(Ext.getBody(), {msg:_('loading')});
