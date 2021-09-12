@@ -6,7 +6,7 @@
  * @subpackage lexicon
  * @language en
  */
-$_lang['dashboard'] = 'Dasbor';
+$_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_desc_name'] = 'Nama dari Dashboard.';
 $_lang['dashboard_desc_description'] = 'Deskripsi singkat dari Dashboard.';
 $_lang['dashboard_desc_hide_trees'] = 'Memeriksa ini akan menyembunyikan left-hand trees ketika Dashboard ini dirender pada halaman Selamat datang.';
@@ -24,7 +24,7 @@ $_lang['dashboard_err_ns_name'] = 'Silakan tentukan nama untuk widget.';
 $_lang['dashboard_err_remove'] = 'An error occurred while trying to delete the Dashboard.';
 $_lang['dashboard_err_remove_default'] = 'You cannot delete the default Dashboard!';
 $_lang['dashboard_err_save'] = 'Terjadi kesalahan saat mencoba untuk menyimpan Dashboard.';
-$_lang['dashboard_usergroup_add'] = 'Menetapkan Dashboard untuk user group';
+$_lang['dashboard_usergroup_add'] = 'Menetapkan Dashboard untuk kelompok pengguna';
 $_lang['dashboard_usergroup_remove'] = 'Delete Dashboard from User Group';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Apakah Anda yakin Anda ingin memulihkan User Group ini untuk menggunakan default Dashboard?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Berikut adalah daftar dari semua kelompok pengguna yang menggunakan dasbor ini.';

@@ -166,7 +166,7 @@ class RestClientResponse
         if (is_string($xml)) {
             $xml = simplexml_load_string($xml);
         }
-        if (empty($xml)) {
+        if (!($xml instanceof SimpleXMLElement)) {
             return '';
         }
         if ($childrenKey && !is_string($childrenKey)) {
@@ -180,7 +180,6 @@ class RestClientResponse
         }
 
         $return = [];
-        $name = $xml->getName();
         $_value = trim((string)$xml);
         if (!strlen($_value)) {
             $_value = null;
@@ -195,16 +194,16 @@ class RestClientResponse
         }
 
         $children = [];
-        $first = true;
+        $first = [];
         foreach ($xml->children() as $elementName => $child) {
             $value = $this->fromXML($child, $attributesKey, $childrenKey, $valueKey);
             if (isset($children[$elementName])) {
                 if (is_array($children[$elementName])) {
-                    if ($first) {
+                    if (!in_array($elementName, $first)) {
                         $temp = $children[$elementName];
                         unset($children[$elementName]);
                         $children[$elementName][] = $temp;
-                        $first = false;
+                        $first[] = $elementName;
                     }
                     $children[$elementName][] = $value;
                 } else {
@@ -224,7 +223,7 @@ class RestClientResponse
 
         $attributes = [];
         foreach ($xml->attributes() as $name => $value) {
-            $attributes[$name] = trim($value);
+            $attributes[$name] = trim((string)$value);
         }
         if ($attributes) {
             if ($attributesKey) {

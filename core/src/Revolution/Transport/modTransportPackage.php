@@ -3,6 +3,7 @@
 namespace MODX\Revolution\Transport;
 
 use MODX\Revolution\modX;
+use Throwable;
 use xPDO\Om\xPDOObject;
 use xPDO\Transport\xPDOTransport;
 use xPDO\xPDO;
@@ -114,7 +115,7 @@ class modTransportPackage extends xPDOObject
      */
     public function set($k, $v = null, $vType = '')
     {
-        $set = parent:: set($k, $v, $vType);
+        $set = parent::set($k, $v, $vType);
         if ($k == 'signature') {
             $this->parseSignature();
             if ($this->isNew() && !$this->get('source')) {
@@ -139,7 +140,8 @@ class modTransportPackage extends xPDOObject
             if (count($parsedSig) === 2 && !empty($parsedSig[0]) && !empty($parsedSig[1])) {
                 $this->identifier = $parsedSig[0];
                 $parsedVersion = explode('-', $parsedSig[1], 2);
-                if (count($parsedVersion) === 2) {
+                $parsedVersionEls = count($parsedVersion);
+                if ($parsedVersionEls === 2) {
                     $this->version = $parsedVersion[0];
                     $releaseChars = [];
                     parse_str($parsedVersion[1], $releaseChars);
@@ -154,15 +156,19 @@ class modTransportPackage extends xPDOObject
                         $releaseIndex .= $char;
                     }
                     $this->release = $release;
-                    $this->release_index = (integer)$releaseIndex;
+                    $this->release_index = (int)$releaseIndex;
                     $parsed = true;
-                } elseif (count($parsedVersion) === 1) {
+                } elseif ($parsedVersionEls === 1) {
                     $this->version = $parsedVersion[0];
                     $this->release = '';
                     $this->release_index = 0;
                     $parsed = true;
                 }
-                list($this->version_major, $this->version_minor, $this->version_patch) = explode('.', $this->version);
+                $version = explode('.', $this->version);
+                if (count($version) === 2) {
+                    $version[] = '0';
+                }
+                list($this->version_major, $this->version_minor, $this->version_patch) = $version;
             }
         }
 
@@ -239,8 +245,7 @@ class modTransportPackage extends xPDOObject
                             $state = is_dir($packageDir . $targetDir) ? $this->get('state') : xPDOTransport::STATE_PACKED;
                         }
                         /* retrieve the package */
-                        $this->package = xPDOTransport:: retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir,
-                            $state);
+                        $this->package = xPDOTransport::retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
                         if ($this->package) {
                             /* set to unpacked state */
                             if ($state == xPDOTransport::STATE_PACKED) {
@@ -298,47 +303,61 @@ class modTransportPackage extends xPDOObject
      */
     public function install(array $options = [])
     {
-        $installed = false;
-        if ($this->getTransport()) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('workspace_grabbing'));
-            $this->getOne('Workspace');
-            $wc = isset($this->Workspace->config) && is_array($this->Workspace->config) ? $this->Workspace->config : [];
-            $at = is_array($this->get('attributes')) ? $this->get('attributes') : [];
-            $attributes = array_merge($wc, $at);
-            $attributes = array_merge($attributes, $options);
-            $attributes[xPDOTransport::PACKAGE_ACTION] = $this->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
-            @ini_set('max_execution_time', 0);
-            $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
-            $requires = isset($attributes['requires']) && is_array($attributes['requires'])
-                ? $attributes['requires']
-                : [];
-            $unsatisfied = $this->checkDependencies($requires);
+        if (!$this->getTransport()) {
+            return false;
+        }
+
+        $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('workspace_grabbing'));
+        $this->getOne('Workspace');
+        $wc = isset($this->Workspace->config) && is_array($this->Workspace->config) ? $this->Workspace->config : [];
+        $at = is_array($this->get('attributes')) ? $this->get('attributes') : [];
+        $attributes = array_merge($wc, $at);
+        $attributes = array_merge($attributes, $options);
+        $attributes[xPDOTransport::PACKAGE_ACTION] = $this->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
+        @ini_set('max_execution_time', 0);
+        $this->xpdo->log(xPDO::LOG_LEVEL_INFO, $this->xpdo->lexicon('package_installing'));
+        $requires = isset($attributes['requires']) && is_array($attributes['requires'])
+            ? $attributes['requires']
+            : [];
+        $unsatisfied = $this->checkDependencies($requires);
+        if (!empty($unsatisfied)) {
+            $unsatisfied = $this->resolveDependencies($unsatisfied);
             if (!empty($unsatisfied)) {
-                $unsatisfied = $this->resolveDependencies($unsatisfied);
-                if (!empty($unsatisfied)) {
-                    foreach ($unsatisfied as $dependency => $constraint) {
-                        $this->xpdo->log(
-                            xPDO::LOG_LEVEL_ERROR,
-                            $this->xpdo->lexicon(
-                                'package_dependency_unsatisfied',
-                                [
-                                    'signature' => $this->get('signature'),
-                                    'requires' => "{$dependency} @ {$constraint}",
-                                ]
-                            )
-                        );
-                    }
-                    if ($this->getOption('abort_install_on_unsatisfied_dependency', $attributes, true)) {
-                        return false;
-                    }
+                foreach ($unsatisfied as $dependency => $constraint) {
+                    $this->xpdo->log(
+                        xPDO::LOG_LEVEL_ERROR,
+                        $this->xpdo->lexicon(
+                            'package_dependency_unsatisfied',
+                            [
+                                'signature' => $this->get('signature'),
+                                'requires' => "{$dependency} @ {$constraint}",
+                            ]
+                        )
+                    );
+                }
+                if ($this->getOption('abort_install_on_unsatisfied_dependency', $attributes, true)) {
+                    return false;
                 }
             }
-            if ($this->package->install($attributes)) {
-                $installed = true;
-                $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
-                $this->set('attributes', $attributes);
-                $this->save();
-            }
+        }
+
+        $installed = false;
+        try {
+            $installed = $this->package->install($attributes);
+        } catch (Throwable $e) {
+            $this->xpdo->log(
+                xPDO::LOG_LEVEL_ERROR,
+                $this->xpdo->lexicon('package_err_caught', [
+                    'type' => $e->getPrevious() ? get_class($e->getPrevious()) : get_class($e),
+                    'message' => $e->getMessage(),
+                    'in' => str_replace(MODX_BASE_PATH, '/', $e->getFile()) . ':' . $e->getLine(),
+                ])
+            );
+        }
+        if ($installed) {
+            $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
+            $this->set('attributes', $attributes);
+            $this->save();
         }
 
         return $installed;
@@ -404,8 +423,8 @@ class modTransportPackage extends xPDOObject
             }
             $productVersion = $this->xpdo->version['code_name'] . '-' . $this->xpdo->version['full_version'];
 
-            $source = $this->get('service_url') . $sourceFile . (strpos($sourceFile,
-                    '?') !== false ? '&' : '?') . 'revolution_version=' . $productVersion;
+            $source = $this->get('service_url') . $sourceFile . (
+                strpos($sourceFile, '?') !== false ? '&' : '?') . 'revolution_version=' . $productVersion;
 
             /* see if user has allow_url_fopen on and is not behind a proxy */
             $proxyHost = $this->xpdo->getOption('proxy_host', null, '');
@@ -475,8 +494,10 @@ class modTransportPackage extends xPDOObject
                     $transferred = $cacheManager->writeFile($target, $content);
                 }
             } else {
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                    'MODX could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.');
+                $this->xpdo->log(
+                    xPDO::LOG_LEVEL_ERROR,
+                    'MODX could not download the file. You must enable allow_url_fopen, cURL or fsockopen to use remote transport packaging.'
+                );
             }
         } else {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $this->xpdo->lexicon('package_err_target_write', [
@@ -614,13 +635,17 @@ class modTransportPackage extends xPDOObject
             if ($transport) {
                 $installed = $transport->install();
                 if (!$installed) {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
-                        "Error installing dependency {$package} from {$transport->source}", '', __METHOD__, __FILE__,
-                        __LINE__);
+                    $this->xpdo->log(
+                        xPDO::LOG_LEVEL_ERROR,
+                        "Error installing dependency {$package} from {$transport->source}",
+                        '',
+                        __METHOD__,
+                        __FILE__,
+                        __LINE__
+                    );
                 }
             }
         }
-
         return $resolved;
     }
 
@@ -643,13 +668,27 @@ class modTransportPackage extends xPDOObject
         switch (strtolower($package)) {
             case 'php':
                 /* you must resolve php dependencies manually */
-                $this->xpdo->log(xPDO::LOG_LEVEL_WARN, "PHP version dependencies must be resolved manually", '', __METHOD__, __FILE__, __LINE__);
+                $this->xpdo->log(
+                    xPDO::LOG_LEVEL_WARN,
+                    "PHP version dependencies must be resolved manually",
+                    '',
+                    __METHOD__,
+                    __FILE__,
+                    __LINE__
+                );
                 break;
             case 'modx':
             case 'revo':
             case 'revolution':
                 /* resolve core dependencies manually for now */
-                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "MODX core version dependencies must be resolved manually", '', __METHOD__, __FILE__, __LINE__);
+                $this->xpdo->log(
+                    xPDO::LOG_LEVEL_ERROR,
+                    "MODX core version dependencies must be resolved manually",
+                    '',
+                    __METHOD__,
+                    __FILE__,
+                    __LINE__
+                );
                 break;
             default:
                 /* TODO: scan for local packages to satisfy dependency */
@@ -674,7 +713,14 @@ class modTransportPackage extends xPDOObject
                     }
                 }
                 if (empty($resolution)) {
-                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not find package to satisfy dependency {$package} @ {$constraint} from your currently active providers", '', __METHOD__, __FILE__, __LINE__);
+                    $this->xpdo->log(
+                        xPDO::LOG_LEVEL_ERROR,
+                        "Could not find package to satisfy dependency {$package} @ {$constraint} from your currently active providers",
+                        '',
+                        __METHOD__,
+                        __FILE__,
+                        __LINE__
+                    );
                 }
                 break;
         }
@@ -705,8 +751,10 @@ class modTransportPackage extends xPDOObject
         switch ($modifier) {
             case 'g':
                 $value *= 1024;
+                // no break
             case 'm':
                 $value *= 1024;
+                // no break
             case 'k':
                 $value *= 1024;
         }

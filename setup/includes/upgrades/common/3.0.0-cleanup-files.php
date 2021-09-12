@@ -159,12 +159,16 @@ $cleanup = [
         'src/Revolution/Processors/Element/TemplateVar/Renders/mgr/inputproperties/list-multiple-legacy.php',
 
         // remove modClassMap and dependencies
-        'src/Revolution/Processors/Element/GetClasses.php',
         'src/Revolution/Processors/System/ClassMap/GetList.php',
         'src/Revolution/modClassMap.php',
         'src/Revolution/mysql/modClassMap.php',
         'src/Revolution/sqlsrv/modClassMap.php',
 
+        // remove deprecated rest client present until alpha4/beta1
+        'src/Revolution/Rest/modRestClient.php',
+        'src/Revolution/Rest/modRestCurlClient.php',
+        'src/Revolution/Rest/modRestResponse.php',
+        'src/Revolution/Rest/modRestSockClient.php',
     ],
     'manager' => [
         'min/',

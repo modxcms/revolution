@@ -19,5 +19,5 @@
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
     <!-- Our base rule: set to PSR12-->
-    <rule ref="PSR12"/>
+    <rule ref="PSR12" />
 </ruleset>

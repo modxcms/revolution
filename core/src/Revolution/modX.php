@@ -11,6 +11,10 @@
 namespace MODX\Revolution;
 
 use Exception;
+use GuzzleHttp\Client;
+use Http\Factory\Guzzle\RequestFactory;
+use Http\Factory\Guzzle\ServerRequestFactory;
+use Http\Factory\Guzzle\StreamFactory;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
@@ -19,11 +23,14 @@ use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
-use MODX\Revolution\Rest\modRestClient;
 use MODX\Revolution\Smarty\modSmarty;
 use MODX\Revolution\Validation\modValidator;
 use PDO;
 use PDOStatement;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ServerRequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use xPDO\Cache\xPDOFileCache;
 use xPDO\xPDO;
 use xPDO\xPDOException;
@@ -211,10 +218,6 @@ class modX extends xPDO {
      * @var modMail $mail
      */
     public $mail;
-    /**
-     * @var modRestClient $rest
-     */
-    public $rest;
     /**
      * @var modSmarty $smarty
      */
@@ -568,6 +571,7 @@ class modX extends xPDO {
             $this->_loadExtensionPackages($options);
             $this->_initSession($options);
             $this->_initErrorHandler($options);
+            $this->_initHttpClient();
             $this->_initCulture($options);
 
             $this->services->add('registry', new modRegistry($this));
@@ -2669,6 +2673,32 @@ class modX extends xPDO {
             }
         } catch (\Exception $exception) {
             $this->log(modX::LOG_LEVEL_ERROR, 'Error handler not found: ' . $exception->getMessage());
+        }
+    }
+
+    protected function _initHttpClient()
+    {
+        if (!$this->services->has(ClientInterface::class)) {
+            // Http Client is created as a factory, so that repeat calls get a fresh client. This is done to make sure
+            // mutable clients (perhaps they allow setting options after instantiation) do not cause side-effects elsewhere
+            $this->services->add(ClientInterface::class, $this->services->factory(function() {
+                return new Client();
+            }));
+        }
+        if (!$this->services->has(ServerRequestFactoryInterface::class)) {
+            $this->services->add(ServerRequestFactoryInterface::class, function() {
+                return new ServerRequestFactory();
+            });
+        }
+        if (!$this->services->has(RequestFactoryInterface::class)) {
+            $this->services->add(RequestFactoryInterface::class, function() {
+                return new RequestFactory();
+            });
+        }
+        if (!$this->services->has(StreamFactoryInterface::class)) {
+            $this->services->add(StreamFactoryInterface::class, function() {
+                return new StreamFactory();
+            });
         }
     }
 

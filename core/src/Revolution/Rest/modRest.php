@@ -143,6 +143,19 @@ class modRest
     }
 
     /**
+     * @param string $method
+     * @param string $url
+     * @param array  $parameters
+     * @param array  $headers
+     *
+     * @return RestClientResponse
+     */
+    public function request($method, $url, $parameters = [], $headers = [])
+    {
+        return $this->execute($url, $method, $parameters, $headers);
+    }
+
+    /**
      * @param string $url
      * @param string $method
      * @param array  $parameters

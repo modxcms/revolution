@@ -247,6 +247,7 @@
 
     th {
       font-weight: bold;
+      text-align: initial;
       padding: 10px;
       border-bottom: 2px solid $lighterGray;
     }
@@ -338,7 +339,7 @@
     align-items: center;
 
     .user-avatar {
-      margin-right: 10px;
+      margin: 0 10px;
 
       img {
         width: 35px;
@@ -426,7 +427,7 @@
     }
 
     &-wrapper {
-      margin-left: 10px;
+      padding: 0 10px;
     }
 
     &-title {

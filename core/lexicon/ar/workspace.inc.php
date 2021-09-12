@@ -77,6 +77,7 @@ $_lang['package_download_err_create'] = 'لا يمكن تحميل وإنشاء �
 $_lang['package_download_err_ns'] = 'الرجاء تحديد إصدار حزمة واحد على الأقل للتحميل.';
 $_lang['package_err_create'] = 'لا يمكن إنشاء الحزمة.';
 $_lang['package_err_file_read'] = 'لا يمكن فتح الملف للقراءة: [[+source]]';
+$_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'لا يمكن تثبيت الحزمة مع التوقيع: [[+signature]]';
 $_lang['package_err_install_gen'] = 'فشل تثبيت الحزمة.';
 $_lang['package_err_load'] = 'لا يمكن تحميل حزمة النقل.';
@@ -176,6 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>لا تملك زبون REST قابل �
 $_lang['provider_err_nfs'] = 'لم يتم العثور على المزود مع المعرف [[+id]]';
 $_lang['provider_err_no_response'] = 'خطأ في الحصول على استجابة من المخدم: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'لا يمكن التحقق من المزود، ولذلك لا يمكن استخدامه كمزود لمودكس.الرجاء التحقق من URL الخدمة والمحاولة ثانية.';
+$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
 $_lang['provider_err_ns'] = 'المزود غير محدد.';
 $_lang['provider_err_ns_name'] = 'الرجاء تحديد اسم للمزود.';
 $_lang['provider_err_ns_url'] = 'الرجاء تزويد URL صالحاً للمزود.';
