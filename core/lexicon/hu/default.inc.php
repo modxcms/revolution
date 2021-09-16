@@ -126,6 +126,7 @@ $_lang['duplication_options'] = 'Kettőzés beállításai';
 $_lang['edit'] = 'Szerkeszt';
 $_lang['edit_chunk'] = 'Kódegység szerkesztése';
 $_lang['edit_context'] = 'Környezet szerkesztése';
+$_lang['edit_media_source'] = 'Edit Media Source';
 $_lang['edit_plugin'] = 'Beépülő szerkesztése';
 $_lang['edit_snippet'] = 'Kódrészlet szerkesztése';
 $_lang['edit_template'] = 'Sablon szerkesztése';

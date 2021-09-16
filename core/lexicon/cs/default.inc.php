@@ -126,6 +126,7 @@ $_lang['duplication_options'] = 'Možnosti kopie';
 $_lang['edit'] = 'Upravit';
 $_lang['edit_chunk'] = 'Upravit chunk';
 $_lang['edit_context'] = 'Upravit kontext';
+$_lang['edit_media_source'] = 'Upravit zdroj médií';
 $_lang['edit_plugin'] = 'Upravit plugin';
 $_lang['edit_snippet'] = 'Upravit snippet';
 $_lang['edit_template'] = 'Upravit šablonu';

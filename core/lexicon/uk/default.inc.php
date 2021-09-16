@@ -126,6 +126,7 @@ $_lang['duplication_options'] = 'Параметри дублювання';
 $_lang['edit'] = 'Редагувати';
 $_lang['edit_chunk'] = 'Редагувати чанк';
 $_lang['edit_context'] = 'Редагувати контекст';
+$_lang['edit_media_source'] = 'Edit Media Source';
 $_lang['edit_plugin'] = 'Редагувати плагін';
 $_lang['edit_snippet'] = 'Редагувати сніпет';
 $_lang['edit_template'] = 'Редагувати шаблон';
