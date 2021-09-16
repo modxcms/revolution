@@ -50,7 +50,7 @@
                         d.update('');
                     } else {
                         {/literal}
-                        d.update('<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&src='+data.url+'&wctx={$ctx}&source={$source}" alt="" />');
+                        d.update('<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&src='+data.url+'&wctx={$ctx}&source={$source}&version={$hash}" alt="" />');
                         {literal}
                     }
                 }}

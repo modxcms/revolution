@@ -22,7 +22,8 @@ use MODX\Revolution\Sources\modMediaSource;
  * @subpackage processors.element.tv.renders.mgr.input
  */
 class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
-    public function process($value,array $params = []) {
+    public function process($value, array $params = [])
+    {
         $this->modx->getService('fileHandler', modFileHandler::class, '', ['context' => $this->modx->context->get('key')]);
 
         /** @var modMediaSource $source */
@@ -33,25 +34,31 @@ class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
         }
         $source->setRequestProperties($_REQUEST);
         $source->initialize();
-        $this->modx->controller->setPlaceholder('source',$source->get('id'));
-        $params = array_merge($source->getPropertyList(),$params);
+        $this->modx->controller->setPlaceholder('source', $source->get('id'));
+        $params = array_merge($source->getPropertyList(), $params);
 
+        $value = $this->tv->get('value');
+        $this->tv->set('relativeValue', $value);
         if (!$source->checkPolicy('view')) {
-            $this->setPlaceholder('disabled',true);
-            $this->tv->set('disabled',true);
-            $this->tv->set('relativeValue',$this->tv->get('value'));
+            $this->setPlaceholder('disabled', true);
+            $this->tv->set('disabled', true);
         } else {
-            $this->setPlaceholder('disabled',false);
-            $this->tv->set('disabled',false);
-            $value = $this->tv->get('value');
+            $this->setPlaceholder('disabled', false);
+            $this->tv->set('disabled', false);
             if (!empty($value)) {
-                $params['openTo'] = $source->getOpenTo($value,$params);
+                $params['openTo'] = $source->getOpenTo($value, $params);
             }
-            $this->tv->set('relativeValue',$value);
+        }
+        if (!empty($value) && file_exists($source->getBasePath() . $value)) {
+            $filename = $source->getBasePath() . $value;
+            $hash = hash('crc32', filemtime($filename) . filesize($filename));
+        } else {
+            $hash = hash('crc32', $value);
         }
 
-        $this->setPlaceholder('params',$params);
-        $this->setPlaceholder('tv',$this->tv);
+        $this->setPlaceholder('hash', $hash);
+        $this->setPlaceholder('params', $params);
+        $this->setPlaceholder('tv', $this->tv);
     }
     public function getTemplate() {
         return 'element/tv/renders/input/image.tpl';
