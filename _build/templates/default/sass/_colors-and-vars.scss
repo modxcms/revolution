@@ -1,9 +1,9 @@
-/* Main colors */
+// Main colors
 $colorSplash: #234368;
 $colorSplashLight: lighten($colorSplash, 50%);
 $colorSplashMedium: lighten($colorSplash, 75%);
 $colorSplashDark: darken($colorSplash, 20%);
-$colorSplashContrast: #FFFFFF; /* needs much more adaption, should be used as text color for elements with $colorSplash background */
+$colorSplashContrast: #FFFFFF; // needs much more adaption, should be used as text color for elements with $colorSplash background
 $silver: #CCCCCC;
 $gallery: #EEEEEE;
 $wildSand: #F4F4F4;
@@ -13,7 +13,7 @@ $lightGray: #E4E4E4;
 $softGray: #DCDCDC;
 $mediumGray: #999999;
 $darkGray: #515151;
-$darkestGray: #53595F; /* a blueish dark gray */
+$darkestGray: #53595F; // a blueish dark gray
 $osloGray: #868B8F;
 $doveGray: #686868;  ;
 $alabastersolid: #FAFAFA;
@@ -22,7 +22,7 @@ $scorpion: #606060;
 $mineShaft: #343434;
 $alto: #DFDFDF;
 $white: #FFF;
-$black: darken($colorSplash, 42.5%); /* generate the black from the $colorSplash */
+$black: darken($colorSplash, 42.5%); // generate the black from the $colorSplash
 $darkBlack: #000;
 $lighterRed: #FFEEEE;
 $green: #6CB24A;
@@ -32,27 +32,27 @@ $lighterGreen: #EFFCF6;
 $yellow: #FCE588;
 $orange: #F0B429;
 $red: #CF1124;
-$blue: #4A90E2; /* default theme $colorSplash */
+$blue: #4A90E2; // default theme $colorSplash
 
-/* Status Message */
+// Status Message
 $statusMessageBg: $green;
 $statusMessageText: $white;
 $statusMessageIconBg: $white;
 $statusMessageIconText: $green;
 
-/* Brand colors */
+// Brand colors
 $brandBg: $white;
 $brandHover: $lightGray;
 $brandSelectedBg: darken($brandHover, 3%);
 $brandSelectedColor: $colorSplash;
 
-/* Backgrounds */
+// Backgrounds
 $mainBg: #F1F1F1;
 $lightBg: $lighterGray;
 $mediumBg: $lighterGray;
 $darkBg: $darkestGray;
 
-/* Borders */
+// Borders
 $borderColor: $lightGray;
 $borderColorHover: $colorSplash;
 $borderColorGrayHover: $mediumGray;
@@ -62,7 +62,7 @@ $borderColorGrayActive: darken($mediumGray, 6%);
 $borderColorDisabled: $borderColor;
 $borderRadius: 3px;
 
-/* Shadows */
+// Shadows
 $boxShadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 $boxShadowBig: 0 0 15px 0 rgba(0,0,0,0.2);
 $shadowBorder: 0 0 0 1px $borderColor;
@@ -75,7 +75,7 @@ $shadowBorderActive: 0 0 0 1px $borderColorActive;
 $shadowBorderGrayActive: 0 0 0 1px $borderColorGrayActive;
 $shadowBorderDisabled: 0 0 0 1px $borderColorDisabled;
 
-/* Grids */
+// Grids
 $gridsorted: $white;
 $griddivider: $white;
 $gridrowalt: #F5F6F9;
@@ -86,12 +86,12 @@ $gridHeaderBtnBgColor: $white;
 $gridHeaderBtnColor: #77899F;
 $gridHeaderBtnBgHoverColor: $white;
 
-/* Form field colors */
+// Form field colors
 $coreFieldBg: $white;
 $coreFieldLabelColor: $darkGray;
 $coreFieldDescColor: $mediumGray;
 
-/* Buttons */
+// Buttons
 $buttonBg: $white;
 $buttonBgHover: $colorSplash;
 $buttonBgActive: darken($colorSplash, 6%);
@@ -106,7 +106,7 @@ $buttonColorPrimaryActive: $white;
 $buttonColorPrimaryDisabled: $white;
 $buttonPrimaryBgActive: darken($greener, 12%);
 
-/* Context menus */
+// Context menus
 $menuBg: $brandBg;
 $menuBorder: 1px solid $borderColor;
 $menuBorderRadius: $borderRadius;
@@ -116,13 +116,13 @@ $menuSelectedColor: $brandBg;
 $menuTextColor: $darkGray;
 $menuSeparatorColor: $borderColor;
 
-/* ComboBox dropdown menus */
+// ComboBox dropdown menus
 $dropdownBg: $white;
 $dropdownSelectedBg: #E1ECF1;
 $dropdownTextColor: $darkGray;
 $dropdownBorder: $lightGray;
 
-/* Tree menus */
+// Tree menus
 $treeText: $mediumGray;
 $tipText: $lighterGray;
 $mainText: $black;
@@ -153,9 +153,9 @@ $unpublished: lighten($treeText, 10%) !important;
 $hidden: $treeText;
 $unpubText: normal;
 $hiddenText: italic;
-/* locked is already signaled with lock-icon, no need to use other semantic style here
-   as italic is used for "unpublished" */
-$lockedText: inherit; //italic;
+// locked is already signaled with lock-icon, no need to use other semantic style here
+// as italic is used for "unpublished"
+$lockedText: inherit; // italic;
 
 $delTextColor: fade-out(darken(lighten(desaturate($red,50%), 33%), 25%), 0.5) !important;
 $delTextStyle: normal;
@@ -164,7 +164,8 @@ $delTextDeco: line-through;
 $treeDivider: #404040;
 
 $navbarWidth: 70px;
-/* Top navigation colors */
+
+// Top navigation colors
 $navbarText: $white;
 $navbarBorder: rgba(255, 255, 255, .1);
 $subnavBg: $white;
@@ -179,7 +180,7 @@ $searchResultsBgHover: $subnavBgHover;
 $searchResultsHeadingColor: $darkestGray;
 $searchResultsColor: $subnavTitleColor;
 
-/* Tabs */
+// Tabs
 $tabStripBg: transparent;
 $tabActiveBg: $white;
 $tabActiveBgHover: $white;
@@ -192,14 +193,14 @@ $tabText: $colorSplash;
 $tabTextHover: $darkestGray;
 $leftbarTabActiveBg: $mainBg;
 
-/* Windows */
+// Windows
 $winHeaderBg: $wildSand;
 $winHeaderBorderColor: $wildSand;
 $winBodyBg: $white;
 $winFooterBg: $white;
 $winFooterBorderColor: $white;
 
-/* Font stacks */
+// Font stacks
 $bodyfonts: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 $bodyFontSize: 13px;
 $headfonts: $bodyfonts;
@@ -217,7 +218,7 @@ $fontNavbar: normal $bodyFontSize $headfonts;
 $fontH2:     normal 25px $headfonts;
 $fontH3:     550 15px $headfonts;
 
-/* Responsive breakpoints */
+// Responsive breakpoints
 $mobile:  (media: "screen and (max-width: 640px)", columns: 4);
 $tabletP: (media: "screen and (max-width: 768px)", columns: 12);
 $desktop: (media: "screen and (max-width: 960px)", columns: 12);
@@ -232,5 +233,5 @@ $gtTabletM: (media: "screen and (min-width: 1025px)", columns: 12);
 $gtTabletL: (media: "screen and (min-width: 1141px)", columns: 12);
 $gtCinema:  (media: "screen and (min-width: 1401px)", columns: 12);
 
-/* Path for background-images */
+// Path for background-images
 $imgPath: '../images/';
