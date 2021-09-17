@@ -23,6 +23,10 @@
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}"></script>
 
+<script>
+    const tvPanelOverrides = [];
+</script>
+
 {$maincssjs}
 {foreach from=$cssjs item=scr}
 {$scr}
@@ -30,6 +34,45 @@
 
 <script>
     MODx.config.search_enabled = {$_search};
+    if (!Ext.isEmpty(tvPanelOverrides)) {
+        let fn = {},
+            vd = {},
+            ld = {}
+            ;
+        tvPanelOverrides.forEach(obj => {
+            if (obj.hasOwnProperty('fn')) {
+                fn = Object.assign(fn, obj.fn);
+            }
+            if (obj.hasOwnProperty('validatorDefs')) {
+                vd = Object.assign(vd, obj.validatorDefs);
+            }
+            if (obj.hasOwnProperty('listenerDefs')) {
+                ld = Object.assign(ld, obj.listenerDefs);
+            }
+        });
+        Ext.override(MODx.panel.TV, {
+            initComponent: function() {
+                tvPanelOverrides.forEach(obj => {
+                    if (obj.hasOwnProperty('initComponent')) {
+                        if (obj.initComponent.hasOwnProperty('sharedComponentOverrides')) {
+                            Ext.applyIf(this.sharedComponentOverrides, obj.initComponent.sharedComponentOverrides);
+                        }
+                        if (obj.initComponent.hasOwnProperty('validatorRefMap')) {
+                            Ext.applyIf(this.validatorRefMap, obj.initComponent.validatorRefMap);
+                        }
+                        if (obj.initComponent.hasOwnProperty('addNewLoaderType')) {
+                            this.addNewLoaderType(...obj.initComponent.addNewLoaderType);
+                        }
+                    }
+                });
+                this.validatorCustomDefs = vd;
+                this.listenerCustomDefs = ld;
+
+                MODx.panel.TV.superclass.initComponent.call(this);
+            },
+            fn
+        });
+    }
 </script>
 </head>
 <body id="modx-body-tag">

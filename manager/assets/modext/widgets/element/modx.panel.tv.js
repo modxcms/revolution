@@ -546,6 +546,16 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     initialized: false
 
     /**
+     * @property {String} currentTvType - Used to store tv type (xtype) for easy reference by other methods
+     */
+    ,currentTvType: null
+
+    /**
+     * @property {Number} tvId - Used to store this record's id for easy reference by other methods
+     */
+    ,tvId: null
+
+    /**
      * @property {Boolean} isStatic - Used to track the state of the static file switch and its toggled fieldset
      */
     ,isStatic: false
@@ -859,9 +869,11 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         });
     }
 
+    ,validatorCustomDefs: {}
+
     /**
      * @property {Function} getValidatorDefs - Establishes special built-in validators and provides
-     * an easy way for custom TVs to add their own via Ext.override
+     * an easy way for custom TVs to add their own via a custom override object
      *
      * @param {Number} tvId - The numeric id of the template variable
      * @param {String} type - The TV type (e.g., 'date')
@@ -869,42 +881,45 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
      */
     ,getValidatorDefs: function(tvId, type) {
         // Here, 'this' refers to the current class (MODx.panel.TV)
-        const me = this;
+        const tvp = this;
         // Within each validator, 'this' refers to the input element triggering the given method
-        let validatorDefs = {
+        let validatorDefs = Ext.applyIf({
             minLtMax: function (v) {
-                const maxFld = me.validatorRefMap[type][this.validator.name].compareTo + tvId;
+                const maxFld = tvp.validatorRefMap[type][this.validator.name].compareTo + tvId;
                 let max = Ext.getCmp(maxFld),
                     maxVal = Number(max.getValue())
                     ;
                 if(maxVal > 0){
                     if (Number(v) > maxVal) {
-                        return me.validatorRefMap[type][this.validator.name].errMsg;
+                        return tvp.validatorRefMap[type][this.validator.name].errMsg;
                     }
                     max.clearInvalid();
                 }
                 return true;
             },
             maxGtMin: function(v) {
-                const minFld = me.validatorRefMap[type][this.validator.name].compareTo + tvId;
+                const minFld = tvp.validatorRefMap[type][this.validator.name].compareTo + tvId;
                 let min = Ext.getCmp(minFld),
                     minVal = Number(min.getValue())
                     ;
                 if(minVal > 0){
                     if (v && Number(v) < minVal) {
-                        return me.validatorRefMap[type][this.validator.name].errMsg;
+                        return tvp.validatorRefMap[type][this.validator.name].errMsg;
                     }
                     min.clearInvalid();
                 }
                 return true;
-            }
-        };
+            },
+        }, this.validatorCustomDefs);
+
         return validatorDefs;
     }
 
+    ,listenerCustomDefs: {}
+
     /**
      * @property {Function} getListenerDefs - Establishes special built-in listeners and provides
-     * an easy way for custom TVs to add their own via Ext.override
+     * an easy way for custom TVs to add their own via a custom override object
      *
      * @param {Number} tvId - The numeric id of the template variable
      * @param {Object} propsPanel - A reference to the MODx.panel.TVInputProperties instance
@@ -912,18 +927,19 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
      */
     ,getListenerDefs: function(tvId, propsPanel) {
 
-        const me = this;
+        const tvp = this;
 
-        let listenerDefs = {
+        let listenerDefs = Ext.applyIf({
             insertHelpExampleOnClick: {
                 render: {
                     fn: function(el) {
                         this.insertHelpExample(el);
                     },
-                    scope: me
+                    scope: tvp
                 }
             }
-        };
+        }, this.listenerCustomDefs);
+
         return listenerDefs;
     }
 
@@ -935,10 +951,12 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
      */
     ,insertHelpExample: function(cmp) {
         return cmp.getEl().on({
-            click: function(el){
+            click: function(el) {
                 const targetEl = arguments[1];
                 if(targetEl.classList.contains('example-input')) {
-                    const exampleTxt = targetEl.textContent, inputEl = cmp.previousSibling();
+                    const   exampleTxt = targetEl.textContent,
+                            inputEl = cmp.previousSibling()
+                        ;
                     inputEl.setValue(exampleTxt);
                 }
             },
@@ -1443,6 +1461,9 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 hideInputOptValsItemFor = ['autotag','date','email','file','hidden','image','number','resourcelist','richtext','text','textarea','url'],
                 hideInputDefaultValItemFor = ['autotag']
             ;
+
+        tvPanel.currentTvType = type;
+        tvPanel.tvId = tvId;
         this.isNativeType = tvPanel.nativeTypes['input'].indexOf(type) !== -1 ? true : false ;
 
         if(inputOptValsItem){
