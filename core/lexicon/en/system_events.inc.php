@@ -23,4 +23,3 @@ $_lang['deprecated_caller'] = 'Caller';
 $_lang['deprecated_caller_file'] = 'Called by file';
 $_lang['deprecated_caller_line'] = 'Line number';
 $_lang['deprecated_call_count'] = 'Count';
-$_lang['deprecated_log_cleared'] = 'Cleared the log of deprecation notices.';

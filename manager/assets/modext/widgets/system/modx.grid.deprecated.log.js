@@ -96,10 +96,6 @@ Ext.extend(MODx.grid.DeprecatedLogGrid, MODx.grid.Grid, {
             ,listeners: {
                 'success': {fn:function(r) {
                         panel.el.unmask();
-                        MODx.msg.status({
-                            title: _('success'),
-                            message: _('deprecated_log_cleared')
-                        });
                         // refresh grid
                         this.refresh();
                     },scope: this}
