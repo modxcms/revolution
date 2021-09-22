@@ -20,6 +20,7 @@ MODx.panel.UserGroup = function(config) {
                 autoHeight: true
                 ,border: true
                 ,bodyCssClass: 'tab-panel-wrapper'
+                ,hideMode: 'offsets'
             }
             ,id: 'modx-usergroup-tabs'
             ,forceLayout: true
@@ -32,9 +33,12 @@ MODx.panel.UserGroup = function(config) {
             }
             ,items: [{
                 title: _('general_information')
-                ,defaults: { border: false ,msgTarget: 'side' }
+                ,defaults: {
+                    border: false
+                    ,msgTarget: 'side'
+                }
                 ,layout: 'form'
-                ,id: 'modx-usergroup-form'
+                ,itemId: 'modx-usergroup-general-panel'
                 ,labelAlign: 'top'
                 ,labelSeparator: ''
                 ,items: [{
@@ -129,14 +133,13 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('access_permissions')
-                ,hidden: config.record.id === 0
-                ,forceLayout: true
-                ,hideMode: 'offsets'
+                ,itemId: 'modx-usergroup-permissions-panel'
                 ,items: [{
                     xtype: 'modx-vtabs'
                     ,items: [{
                         title: _('user_group_context_access')
-                        ,forceLayout: true
+                        ,itemId: 'user-group-context-access'
+                        // ,forceLayout: true
                         ,hideMode: 'offsets'
                         ,layout: 'form'
                         ,items: [{
@@ -157,7 +160,7 @@ MODx.panel.UserGroup = function(config) {
                         }]
                     },{
                         title: _('user_group_resourcegroup_access')
-                        ,hidden: config.record.id === 0
+                        ,itemId: 'user-group-resourcegroup-access'
                         ,hideMode: 'offsets'
                         ,layout: 'form'
                         ,items: [{
@@ -179,7 +182,7 @@ MODx.panel.UserGroup = function(config) {
                         }]
                     },{
                         title: _('user_group_category_access')
-                        ,hidden: config.record.id === 0
+                        ,itemId: 'user-group-category-access'
                         ,hideMode: 'offsets'
                         ,layout: 'form'
                         ,items: [{
@@ -201,7 +204,7 @@ MODx.panel.UserGroup = function(config) {
                         }]
                     },{
                         title: _('user_group_source_access')
-                        ,hidden: config.record.id === 0
+                        ,itemId: 'user-group-source-access'
                         ,hideMode: 'offsets'
                         ,layout: 'form'
                         ,items: [{
@@ -223,7 +226,7 @@ MODx.panel.UserGroup = function(config) {
                         }]
                     },{
                         title: _('user_group_namespace_access')
-                        ,hidden: config.record.id === 0
+                        ,itemId: 'user-group-namespace-access'
                         ,hideMode: 'offsets'
                         ,layout: 'form'
                         ,items: [{
@@ -238,12 +241,24 @@ MODx.panel.UserGroup = function(config) {
                             ,width: '97%'
                         }]
                     }]
+                    ,listeners: {
+                        render: function(vtabPanel) {
+                            var elCatsPanelKey = vtabPanel.items.keys.indexOf('user-group-category-access'),
+                                mediaSrcPanelKey = vtabPanel.items.keys.indexOf('user-group-source-access'),
+                                namespacePanelKey = vtabPanel.items.keys.indexOf('user-group-namespace-access')
+                                form = Ext.getCmp('modx-panel-user-group').getForm()
+                                ;
+                            if (form.record.id === 0) {
+                                vtabPanel.hideTabStripItem(elCatsPanelKey);
+                                vtabPanel.hideTabStripItem(mediaSrcPanelKey);
+                                vtabPanel.hideTabStripItem(namespacePanelKey);
+                            }
+                        }
+                    }
                 }]
             },{
                 title: _('users')
-                ,hideMode: 'offsets'
-                ,layout: 'form'
-                ,id: 'modx-usergroup-users-panel'
+                ,itemId: 'modx-usergroup-users-panel'
                 ,items: [{
                     html: '<p>'+_('user_group_user_access_msg')+'</p>'
                     ,xtype: 'modx-description'
@@ -262,8 +277,7 @@ MODx.panel.UserGroup = function(config) {
                 }]
             },{
                 title: _('settings')
-                ,forceLayout: true
-                ,hideMode: 'offsets'
+                ,itemId: 'modx-usergroup-settings-panel'
                 ,layout: 'form'
                 ,items: [{
                     html: '<p>'+_('user_group_settings_desc')+'</p>'
@@ -278,6 +292,21 @@ MODx.panel.UserGroup = function(config) {
                     ,width: '97%'
                 }]
             }]
+            ,listeners: {
+                render: function(tabPanel) {
+                    var usersPanelKey = tabPanel.items.keys.indexOf('modx-usergroup-users-panel'),
+                        settingsPanelKey = tabPanel.items.keys.indexOf('modx-usergroup-settings-panel'),
+                        form = Ext.getCmp('modx-panel-user-group').getForm()
+                        ;
+                    if (form.record.id === 0) {
+                        tabPanel.hideTabStripItem(usersPanelKey);
+                        tabPanel.hideTabStripItem(settingsPanelKey);
+                    }
+                    if (!MODx.perm.usergroup_user_list) {
+                        tabPanel.hideTabStripItem(usersPanelKey);
+                    }
+                }
+            }
         }]
         ,useLoadingMask: false
         ,listeners: {
@@ -287,10 +316,6 @@ MODx.panel.UserGroup = function(config) {
         }
     });
     MODx.panel.UserGroup.superclass.constructor.call(this,config);
-    if (config.record.id == 0 || MODx.perm.usergroup_user_list == 0) {
-        var tbs = Ext.getCmp('modx-usergroup-tabs');
-        tbs.hideTabStripItem('modx-usergroup-users-panel');
-    }
 };
 Ext.extend(MODx.panel.UserGroup,MODx.FormPanel,{
     initialized: false
