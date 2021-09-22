@@ -98,20 +98,23 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
     ,run: function(p) {
         p = p || {};
-        if (p.dir) { this.dir = p.dir; }
+        if(p.dir) {
+            this.dir = p.dir;
+        }
         Ext.applyIf(p,{
             action: 'browser/directory/getFiles'
             ,dir: this.dir
             ,source: this.config.source || MODx.config.default_media_source
         });
+        this.mask = new Ext.LoadMask(Ext.getBody(), {msg:_('loading')});
+        this.mask.show();
         this.store.load({
             params: p
             ,callback: function() {
+                this.mask.hide();
                 this.refresh();
-
                 // reset the bottom filepath bar
                 Ext.getCmp(this.ident+'-filepath').setValue('');
-
                 this.select(0);
             }
             ,scope: this
@@ -325,7 +328,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         this.fvWin.setSize(w,h);
         this.fvWin.center();
         this.fvWin.setTitle(data.name);
-        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" width="'+data.image_width+'" height="'+data.image_height+'" alt="'+data.name+'" title="'+data.name+'" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
+        Ext.get(this.ident+'modx-view-item-full').update('<img src="'+data.image+'" loading="lazy" width="'+data.image_width+'" height="'+data.image_height+'" alt="'+data.name+'" title="'+data.name+'" class="modx-browser-fullview-img" onclick="Ext.getCmp(\''+ident+'\').fvWin.hide();" />');
     }
 
     ,formatData: function(data) {
@@ -350,7 +353,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,'<div class="modx-browser-thumb-wrap" id="{name:htmlEncode}" title="{name:htmlEncode}">'
                 ,'  <div class="modx-browser-thumb">'
                 ,'      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" ' +
-                            'data-src="{thumb:htmlEncode}" width="{thumb_width}" height="{thumb_height}" alt="{name:htmlEncode}" title="{name:htmlEncode}" />'
+                            'data-src="{thumb:htmlEncode}" loading="lazy" width="{thumb_width}" height="{thumb_height}" alt="{name:htmlEncode}" title="{name:htmlEncode}" />'
                 ,'  </div>'
                 ,'  <span>{shortName:htmlEncode}</span>'
                 ,'</div>'
@@ -380,12 +383,12 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  <tpl for=".">'
             ,'  <tpl if="preview === 1">'
             ,'      <div class="modx-browser-detail-thumb preview" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name:htmlEncode}\',\''+this.ident+'\'); return false;">'
-            ,'          <img src="{image:htmlEncode}" width="{image_width}" height="{image_height}" alt="{name:htmlEncode}" title="{name:htmlEncode}" />'
+            ,'          <img src="{image:htmlEncode}" loading="lazy" width="{image_width}" height="{image_height}" alt="{name:htmlEncode}" title="{name:htmlEncode}" />'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <tpl if="preview === 0">'
             ,'      <div class="modx-browser-detail-thumb">'
-            ,'          <img src="{image:htmlEncode}" alt="" />'
+            ,'          <img src="{image:htmlEncode}" loading="lazy" alt="" />'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <div class="modx-browser-details-info">'
