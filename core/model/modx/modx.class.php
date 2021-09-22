@@ -1536,9 +1536,11 @@ class modX extends xPDO {
      * tag of an HTML response.
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
+     * @param array $options Optional param to add script  attributes as
+     * defer, async, type="module" and etc
      * @return void
      */
-    public function regClientStartupScript($src, $plaintext= false) {
+    public function regClientStartupScript($src, $plaintext= false, $options = []) {
         if (!empty ($src) && !array_key_exists($src, $this->loadedjscripts)) {
             if (isset ($this->loadedjscripts[$src]))
                 return;
@@ -1548,7 +1550,8 @@ class modX extends xPDO {
             } elseif (strpos(strtolower($src), "<script") !== false) {
                 $this->sjscripts[count($this->sjscripts)]= $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
+                $scriptOptions = implode(' ', $options);
+                $this->sjscripts[count($this->sjscripts)]= "<script $scriptOptions src=\"$src\"></script>";
             }
         }
     }
