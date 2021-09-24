@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Vermeld het e-mailadres voor het e-mail ber
 $_lang['setting_enable_dragdrop'] = 'Schakel drag/drop in voor document/element boomstructuren';
 $_lang['setting_enable_dragdrop_desc'] = 'Als uit, voorkom dan slepen en neerzetten in de document en element boomstructuur.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Foutpagina';
 $_lang['setting_error_page_desc'] = 'Vul het ID in van het document jij wilt dat gebruikers naar doorgestuurd worden als een document verzoek niet gevonden kan worden. <strong>Let op: controleer dat dit ID behoort tot een geldig document en dat deze gepubliceerd is!</strong>';
 $_lang['setting_error_page_err'] = 'Specificeer een document ID voor de foutpagina.';
