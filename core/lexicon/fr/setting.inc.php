@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Veuillez indiquer l\'adresse e-mail d\'admi
 $_lang['setting_enable_dragdrop'] = 'Activer le Glisser-Déposer dans l\'arborescence de ressources/éléments';
 $_lang['setting_enable_dragdrop_desc'] = 'Inactif, empêchera l\'utilisation du glisser-déposer dans l\'arborescence de ressources et d\'éléments.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Page d\'erreur';
 $_lang['setting_error_page_desc'] = 'Entrez l\'ID du document que vous souhaitez afficher aux utilisateurs qui demandent un document qui n\'existe pas. <strong>NOTE : assurez-vous que cet ID appartienne à un document publié existant!</strong>';
 $_lang['setting_error_page_err'] = 'Veuillez indiquer un ID de document pour la page d\'erreur.';

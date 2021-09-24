@@ -52,3 +52,7 @@ $_lang['template_untitled'] = 'Template Senza Titolo';
 $_lang['templates'] = 'Modelli';
 $_lang['tvt_err_nf'] = 'La TV non ha accesso al Modello specificato.';
 $_lang['tvt_err_remove'] = 'Si è verificato un errore provando a eliminare la TV dal modello.';
+$_lang['template_source'] = 'Media Source';
+$_lang['template_source_description'] = 'The media source to select a static file or preview. Using "None" will assume you are specifying an absolute path.';
+$_lang['template_preview'] = 'Template preview';
+$_lang['template_preview_description'] = 'A screenshot of the template to use as preview in the template picker. Best size is 335 x 236 (w x h)';

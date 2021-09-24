@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Please state the administration email addre
 $_lang['setting_enable_dragdrop'] = 'Resource/Element पेड़ में Drag/Drop सक्षम करें';
 $_lang['setting_enable_dragdrop_desc'] = 'अगर बंद, खींचने और Resource और Element के पेड़ों में छोड़ने को रोकने जाएगा।';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'त्रुटि पृष्ठ';
 $_lang['setting_error_page_desc'] = 'Users को अगर वे एक document है जो वास्तव में मौजूद नहीं है (404 पृष्ठ नहीं मिला) का अनुरोध भेजने के लिए इच्छित document की ID दर्ज करें। <strong>नोट: सुनिश्चित करें इस ID आप दर्ज करने के लिए कोई मौजूदा document के अंतर्गत आता है, और इसे प्रकाशित किया गया है!</strong>';
 $_lang['setting_error_page_err'] = 'कृपया त्रुटि पृष्ठ है एक document ID निर्दिष्ट करें।';

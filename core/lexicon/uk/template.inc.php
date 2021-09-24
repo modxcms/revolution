@@ -52,3 +52,7 @@ $_lang['template_untitled'] = 'Безіменний шаблон';
 $_lang['templates'] = 'Шаблони';
 $_lang['tvt_err_nf'] = 'У TV немає доступу до вказаного шаблону.';
 $_lang['tvt_err_remove'] = 'Сталася помилка при спробі видалення TV з шаблону.';
+$_lang['template_source'] = 'Media Source';
+$_lang['template_source_description'] = 'The media source to select a static file or preview. Using "None" will assume you are specifying an absolute path.';
+$_lang['template_preview'] = 'Template preview';
+$_lang['template_preview_description'] = 'A screenshot of the template to use as preview in the template picker. Best size is 335 x 236 (w x h)';

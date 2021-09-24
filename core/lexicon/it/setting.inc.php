@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Si prega di specificare l\'indirizzo email 
 $_lang['setting_enable_dragdrop'] = 'Abilita Drag/Drop negli Alberi Risorse/Elementi';
 $_lang['setting_enable_dragdrop_desc'] = 'Se impostato su \'No\', non sarà effettuabile il dragging e dropping negli Alberi delle Risorse e degli Elementi.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Pagina di Errore';
 $_lang['setting_error_page_desc'] = 'Inserisci l\'ID della risorsa a cui vuoi indirizzare gli utenti se richiedono un documento non esistente. <strong>NOTA BENE: assicurati che questo ID appartenga a un documento esistente, e che questo sia regolarmente pubblicato!</strong>';
 $_lang['setting_error_page_err'] = 'Specifica ID Risorsa da utilizzare come pagina di errore.';

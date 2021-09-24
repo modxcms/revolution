@@ -252,6 +252,9 @@ $_lang['setting_emailsender_err'] = 'الرجاء توضيح عنوان البر
 $_lang['setting_enable_dragdrop'] = 'اتاحة السحب/الإفلات في أشجار المصدر/العنصر';
 $_lang['setting_enable_dragdrop_desc'] = 'في حالة الإيقاف، سيتم منع السحب والإفلات في أشجار المصدر والعنصر.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'صفحة الخطأ';
 $_lang['setting_error_page_desc'] = 'أدخل معرف المستند الذي تريد إرساله للمستخدمين إذا طلبوا مستند غير موجود بشكل فعلي (404 لم يتم العثور على الصفحة). <strong>ملاحظة: تأكد من أن هذا المعرف الذي قمت بإدخاله ينتمي إلى مستند موجود، وأنه قد تم نشره مسبقا!</strong>';
 $_lang['setting_error_page_err'] = 'الرجاء تحديد المعرف ID للمستند الذي يمثل صفحة الخطأ.';
