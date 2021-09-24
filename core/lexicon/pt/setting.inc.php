@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Por favor, indique o endereço de e-mail da
 $_lang['setting_enable_dragdrop'] = 'Habilitar Arrastar e Soltar em árvores de Elemento/Recurso';
 $_lang['setting_enable_dragdrop_desc'] = 'Se desabilitado, impedirá arrastar e soltar em árvores de Recurso e Elemento.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Página de Erro';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist. <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Por favor, especifique uma ID do documento para a página de erro.';
