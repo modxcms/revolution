@@ -248,6 +248,9 @@ $_lang['setting_emailsender_err'] = 'Palun määrake administratiooni emaili aad
 $_lang['setting_enable_dragdrop'] = 'Luba Drag/Drop Ressurssi/Elemendi Puus';
 $_lang['setting_enable_dragdrop_desc'] = 'Kui off, siis välditakse Ressurssi ja Elemendi Puus draggimist ja droppimist.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Vealeht';
 $_lang['setting_error_page_desc'] = 'Sisestage dokumendi ID, mida soovite saata kasutajatele, kui nad pärivad dokumenti, mis ei eksisteeri. <strong>Märkus: olge kindel, et see ID kuulub olemasolevale dokumendile ja et dokument oleks avalikustatud!</strong>';
 $_lang['setting_error_page_err'] = 'palun määrake dokumendi ID mis on vealeheks.';
