@@ -61,6 +61,7 @@ class TopMenu
         $this->controller =& $controller;
         $this->modx =& $controller->modx;
         $this->showDescriptions = (boolean) $this->modx->getOption('topmenu_show_descriptions', null, true);
+        $this->subItemsMax = abs((int) $this->modx->getOption('topmenu_subitems_max', null, 0, true));
     }
 
     /**
@@ -194,7 +195,7 @@ class TopMenu
 
             if (!empty($menu['children'])) {
                 $menuTpl .= '<ul class="modx-subnav">'."\n";
-                $this->processSubMenus($menuTpl, $menu['children']);
+                $this->processSubMenus($menuTpl, $menu['children'], $this->subItemsMax);
                 $menuTpl .= '</ul>'."\n";
             }
             $menuTpl .= '</li>'."\n";
@@ -303,9 +304,14 @@ class TopMenu
      *
      * @return void
      */
-    public function processSubMenus(&$output, array $menus = array())
+    public function processSubMenus(&$output, array $menus = array(), $maxItems = false)
     {
         //$output .= '<ul class="modx-subnav">'."\n";
+        $moreMenu = '';
+        if ($maxItems && count($menus) > $maxItems) {
+            $moreMenu = array_slice($menus, $maxItems);
+            $menus = array_slice($menus, 0, $maxItems);
+        }
 
         foreach ($menus as $menu) {
             if (!$this->hasPermission($menu['permissions'])) {
@@ -333,12 +339,19 @@ class TopMenu
 
             if (!empty($menu['children'])) {
                 $smTpl .= '<ul class="modx-subsubnav">'."\n";
-                $this->processSubMenus($smTpl, $menu['children']);
+                $this->processSubMenus($smTpl, $menu['children'], $this->subItemsMax);
                 $smTpl .= '</ul>'."\n";
             }
             $smTpl .= '</li>';
             $output .= $smTpl;
             $this->childrenCt++;
+        }
+
+        if (!empty($moreMenu)) {
+            $output .= '<li class="sub"><a href="#">...</a>'."\n";
+            $output .= '<ul class="modx-subsubnav more">'."\n";
+            $this->processSubMenus($output, $moreMenu, $this->subItemsMax);
+            $output .= '</ul>'."\n";
         }
 
         //$output .= '</ul>'."\n";
