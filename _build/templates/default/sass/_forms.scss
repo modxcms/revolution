@@ -1057,15 +1057,39 @@ input::-moz-focus-inner {
   }
 
   .x-combo-list-item {
-    border: 0;
-    padding: 5px;
+    padding: 6px 8px;
     color: $dropdownTextColor;
     min-height: $baseTextHeight;
+    border: 0 !important;
+    border-bottom: 1px solid $borderColor !important;
+
+    &:last-child {
+      border-bottom: 0;
+    }
 
     &.x-combo-selected {
+      color: $borderColorFocus;
       background-color: $brandHover;
-      border: 0 !important; /* override !important extjs default theme style */
+      border: 0 !important;
+      border-bottom: 1px solid $borderColor !important;
     }
+
+    &.x-combo-list-item-grouped {
+      padding: 6px 14px;
+    }
+
+    .x-combo-list-title {
+      display: block;
+      font-weight: bold;
+      margin: 0 0 5px;
+    }
+  }
+
+  .x-combo-list-group {
+    padding: 6px 8px;
+    color: $dropdownTextColor;
+    font-weight: bold;
+    border-bottom: 1px solid $borderColor;
   }
 
   /* the pagination toolbar inside a combobox has 2 buttons left, text, pagenumberfield, text, 2 buttons */
@@ -1425,5 +1449,113 @@ td.x-date-mp-sep {
     .changelog {
       float: right;
     }
+  }
+}
+
+// Template picker on resource create window
+.x-form-template-picker {
+  .x-form-template-picker-search {
+    padding: 0 !important;
+  }
+
+  .x-form-template-picker-templates {
+    .x-form-radio-group {
+      height: 194px;
+      border-radius: $borderRadius;
+      background-color: $coreFieldBg;
+      border: 1px solid $borderColor;
+      overflow: auto;
+    }
+
+    .x-form-template-picker-item,
+    .x-form-template-picker-category {
+      border-bottom: 1px solid $borderColor;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      .x-form-check-wrap {
+        .x-form-cb-label {
+          display: block;
+
+          &:before {
+            display: none;
+          }
+        }
+
+        .x-form-radio {
+          &:checked {
+            + .x-form-cb-label {
+              color: $borderColorFocus;
+              background-color: $brandHover;
+            }
+          }
+        }
+
+        &:not(.x-item-disabled) {
+          .x-form-cb-label {
+            &:hover {
+              color: $borderColorFocus;
+              background-color: $brandHover;
+            }
+          }
+        }
+      }
+    }
+
+    .x-form-template-picker-item {
+      padding: 0 !important;
+
+      .x-form-cb-label {
+        padding: 10px 14px;
+      }
+    }
+
+    .x-form-template-picker-category {
+      padding: 0 !important;
+
+      .x-form-cb-label {
+        padding: 10px 8px;
+        font-weight: bold !important;
+      }
+
+      .x-item-disabled {
+        opacity: 1;
+        -moz-opacity: 1;
+        filter: alpha(opacity=100);
+      }
+    }
+  }
+}
+
+// Shows a thumbnail of selected template
+.x-form-template-preview {
+  height: 236px;
+  border-radius: $borderRadius;
+  background-color: $coreFieldBg;
+  border: 1px solid $borderColor;
+  background: url('../images/tp-no-preview.png') no-repeat center center;
+  overflow: hidden;
+
+  .x-panel-bwrap,
+  .x-panel-body {
+    position: relative;
+    height: 100%;
+  }
+
+  .x-form-template-preview-image {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .x-form-template-preview-desc {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .8);
   }
 }

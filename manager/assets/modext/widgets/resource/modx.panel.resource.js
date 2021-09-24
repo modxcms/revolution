@@ -566,7 +566,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             xtype: 'hidden'
             ,name: 'context_key'
             ,id: 'modx-resource-context-key'
-            ,value: config.record.context_key || 'web'
+            ,value: config.record.context_key || MODx.config.default_context
         },{
             xtype: 'hidden'
             ,name: 'content'
@@ -825,20 +825,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,items: [{
                 xtype: 'modx-combo-template'
                 ,fieldLabel: _('resource_template')
-                ,hideLabel: true
                 ,description: '<b>[[*template]]</b><br />'+_('resource_template_help')
                 ,name: 'template'
                 ,id: 'modx-resource-template'
                 ,anchor: '100%'
-                ,editable: true
-                ,typeAhead: true
-                ,typeAheadDelay: 300
-                ,forceSelection: true
-                ,baseParams: {
-                    action: 'Element/Template/GetList'
-                    ,combo: '1'
-                    ,limit: 0
-                }
                 ,listeners: {
                     'select': {fn: this.templateWarning,scope: this}
                 }}]

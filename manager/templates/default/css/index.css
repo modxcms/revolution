@@ -24558,15 +24558,34 @@ html[dir=rtl] #modx-resource-tabs .x-fieldset legend [type=checkbox] {
     /* override extjs calculated inline dimensions and stretch to container */
 }
 .x-combo-list .x-combo-list-item {
-    border: 0;
-    padding: 5px;
+    padding: 6px 8px;
     color: #515151;
     min-height: 18.2px;
+    border: 0 !important;
+    border-bottom: 1px solid #E4E4E4 !important;
+}
+.x-combo-list .x-combo-list-item:last-child {
+    border-bottom: 0;
 }
 .x-combo-list .x-combo-list-item.x-combo-selected {
+    color: #1b3451;
     background-color: #E4E4E4;
     border: 0 !important;
-    /* override !important extjs default theme style */
+    border-bottom: 1px solid #E4E4E4 !important;
+}
+.x-combo-list .x-combo-list-item.x-combo-list-item-grouped {
+    padding: 6px 14px;
+}
+.x-combo-list .x-combo-list-item .x-combo-list-title {
+    display: block;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+.x-combo-list .x-combo-list-group {
+    padding: 6px 8px;
+    color: #515151;
+    font-weight: bold;
+    border-bottom: 1px solid #E4E4E4;
 }
 .x-combo-list .x-toolbar {
     border: 0;
@@ -24897,6 +24916,88 @@ td.x-date-mp-sep {
 }
 .radio-version .x-form-check-wrap .x-form-cb-label .changelog {
     float: right;
+}
+
+.x-form-template-picker .x-form-template-picker-search {
+    padding: 0 !important;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-radio-group {
+    height: 194px;
+    border-radius: 3px;
+    background-color: #FFF;
+    border: 1px solid #E4E4E4;
+    overflow: auto;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item,
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category {
+    border-bottom: 1px solid #E4E4E4;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item:last-child,
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category:last-child {
+    border-bottom: 0;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item .x-form-check-wrap .x-form-cb-label,
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category .x-form-check-wrap .x-form-cb-label {
+    display: block;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item .x-form-check-wrap .x-form-cb-label:before,
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category .x-form-check-wrap .x-form-cb-label:before {
+    display: none;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item .x-form-check-wrap .x-form-radio:checked + .x-form-cb-label,
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category .x-form-check-wrap .x-form-radio:checked + .x-form-cb-label {
+    color: #1b3451;
+    background-color: #E4E4E4;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item .x-form-check-wrap:not(.x-item-disabled) .x-form-cb-label:hover,
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category .x-form-check-wrap:not(.x-item-disabled) .x-form-cb-label:hover {
+    color: #1b3451;
+    background-color: #E4E4E4;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item {
+    padding: 0 !important;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-item .x-form-cb-label {
+    padding: 10px 14px;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category {
+    padding: 0 !important;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category .x-form-cb-label {
+    padding: 10px 8px;
+    font-weight: bold !important;
+}
+.x-form-template-picker .x-form-template-picker-templates .x-form-template-picker-category .x-item-disabled {
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.x-form-template-preview {
+    height: 236px;
+    border-radius: 3px;
+    background-color: #FFF;
+    border: 1px solid #E4E4E4;
+    background: url("../images/tp-no-preview.png") no-repeat center center;
+    overflow: hidden;
+}
+.x-form-template-preview .x-panel-bwrap,
+.x-form-template-preview .x-panel-body {
+    position: relative;
+    height: 100%;
+}
+.x-form-template-preview .x-form-template-preview-image {
+    height: 100%;
+    object-fit: cover;
+}
+.x-form-template-preview .x-form-template-preview-desc {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* needs to come after the button styles! */
