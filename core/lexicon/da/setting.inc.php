@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Please state the administration email addre
 $_lang['setting_enable_dragdrop'] = 'Enable Drag/Drop in Resource/Element Trees';
 $_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and dropping in Resource and Element trees.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Error Page';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist (404 Page Not Found). <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
