@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = '送信者メールアドレスを指定し�
 $_lang['setting_enable_dragdrop'] = 'リソース・エレメントツリーでのドラッグ移動';
 $_lang['setting_enable_dragdrop_desc'] = '「いいえ」を選択した場合、リソース・エレメントのツリーでは要素をドラッグして移動できなくなります。';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'エラーページ';
 $_lang['setting_error_page_desc'] = 'ドキュメントが存在しない場合のエラーページ（404 ページ）として表示する、ドキュメントのIDを入力してください。<br /><strong>注意: 既に存在するドキュメントで、かつ公開されている必要があります。</strong>';
 $_lang['setting_error_page_err'] = 'エラーページに使用するドキュメントIDを指定してください。';
