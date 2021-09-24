@@ -131,6 +131,23 @@
     top: 50%;
     transform: translateY(-50%);
   }
+
+  & .more {
+    top: unset !important;
+    bottom: -1px;
+  }
+}
+
+#modx-navbar #modx-user-menu .sub {
+  &:after {
+    border: 5px solid transparent;
+    border-right: 5px solid rgb(96,114,124);
+    position: absolute;
+    content: ' ';
+    left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 #modx-user-menu li.top > a,
@@ -159,11 +176,6 @@
   }
 }
 
-#modx-navbar #modx-user-menu ul.modx-subnav {
-  left: auto;
-  right: 0;
-}
-
 #modx-navbar ul.modx-subnav {
   border-radius: 0 $borderRadius $borderRadius $borderRadius;
   border: 1px solid $navbarBorder;
@@ -188,8 +200,22 @@
     display: none;
     list-style: none;
     padding-left: 0;
-    position: absolute; left: 270px; top: -1px;
+    position: absolute;
+    left: 270px;
+    top: -1px;
     z-index: 24;
+  }
+}
+
+#modx-navbar #modx-user-menu ul.modx-subnav {
+  border-radius: $borderRadius 0 $borderRadius $borderRadius;
+  left: auto;
+  right: 0;
+
+  ul.modx-subsubnav {
+    border-radius: $borderRadius 0 $borderRadius $borderRadius;
+    right: 270px;
+    left: auto;
   }
 }
 
@@ -211,9 +237,6 @@
   display: block;
   float: left;
 }
-/*#user-username {
-
-}*/
 
 #modx-navbar #modx-home-dashboard a {
   overflow: hidden;
@@ -302,36 +325,7 @@
   width: 100%;
 }
 
-#modx-navbar ul.modx-subnav li:first-child,
-#modx-navbar ul.modx-subnav li:first-child a {
-  border-radius: 0 $borderRadius 0 0;
-}
-
-#modx-navbar ul.modx-subnav ul li:first-child,
-#modx-navbar ul.modx-subnav ul li:first-child a {
-  border-radius: 0 $borderRadius 0 0;
-}
-
-#modx-navbar ul.modx-subnav ul li:last-child,
-#modx-navbar ul.modx-subnav ul li:last-child a {
-  border-radius: 0 0 $borderRadius 0;
-}
-
-#modx-navbar ul.modx-subnav ul ul li:last-child,
-#modx-navbar ul.modx-subnav ul ul li:last-child a {
-  border-radius: 0 0 $borderRadius $borderRadius;
-}
-
-#modx-navbar ul.modx-subnav li:hover ul ul,
-#modx-navbar ul.modx-subnav ul li:hover ul ul,
-#modx-navbar ul.modx-subnav ul ul li:hover ul ul {
-  display: none;
-}
-
-#modx-navbar ul.modx-subnav li:hover ul,
-#modx-navbar ul.modx-subnav ul li:hover ul,
-#modx-navbar ul.modx-subnav ul ul li:hover ul,
-#modx-navbar ul.modx-subnav ul ul ul li:hover ul {
+#modx-navbar ul.modx-subnav li:hover > ul {
   display: block;
 }
 
