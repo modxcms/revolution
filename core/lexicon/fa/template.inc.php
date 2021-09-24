@@ -52,3 +52,7 @@ $_lang['template_untitled'] = 'قالبِ بدون عنوان';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'TV does not have access to the specified Template.';
 $_lang['tvt_err_remove'] = 'An error occurred while trying to delete the TV from the template.';
+$_lang['template_source'] = 'Media Source';
+$_lang['template_source_description'] = 'The media source to select a static file or preview. Using "None" will assume you are specifying an absolute path.';
+$_lang['template_preview'] = 'Template preview';
+$_lang['template_preview_description'] = 'A screenshot of the template to use as preview in the template picker. Best size is 335 x 236 (w x h)';
