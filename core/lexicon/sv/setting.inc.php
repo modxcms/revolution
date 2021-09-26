@@ -247,7 +247,7 @@ $_lang['setting_emailsender_err'] = 'Ange e-postadressen för administrationen.'
 $_lang['setting_enable_dragdrop'] = 'Aktivera dra-och-släpp i resurs/elementträden';
 $_lang['setting_enable_dragdrop_desc'] = 'Om denna sätts till "Nej" hindras dra-och-släpp i resurs- och elementträden.';
 
-$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree'] = 'Aktivera mallväljaren i resursträd';
 $_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
 
 $_lang['setting_error_page'] = 'Felsida';
