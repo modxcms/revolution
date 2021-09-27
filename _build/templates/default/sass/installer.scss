@@ -101,19 +101,28 @@ body {
 }
 
 .select_lang {
-    .toggle {
+    &__toggle {
+        background-color: transparent;
+        border: 0;
         color: $darkGray;
-        width: 25%;
         float: right;
-        top: -3rem;
-        position: relative;
+        font-family: $bodyfonts;
         font-size: 18px;
+        position: relative;
         text-align: center;
-        span {
+        top: -3rem;
+        width: 25%;
+
+        & > span {
             cursor: pointer;
             border-bottom: 1px dotted;
         }
-        &.pop {
+
+        &--all {
+          display: block;
+        }
+
+        &--popular {
             display: none;
         }
     }
@@ -122,47 +131,62 @@ body {
 .languages {
     display: flex;
     flex-flow: wrap;
+
     .language {
-        max-width: 25%;
-        flex-basis: 25%;
         cursor: pointer;
+        flex-basis: 25%;
+        font-family: $bodyfonts;
+        max-width: 25%;
+        padding: 5px;
         position: relative;
-        &.other {
+
+        &--popular {
+            display: block;
+        }
+
+        &--other {
             display: none;
         }
+
         .radio {
             position: absolute;
             z-index: -1;
         }
-        .wrap {
-            display: block;
-            padding: .5rem .7rem;
-            border: 1px solid $softGray;// $blue
-            margin: 5px;
+
+        .language-button {
             background-color: $lightestGray;
             border-radius: 3px;
+            border: 1px solid $softGray;
             color: $darkGray;
-            & > span {
-                display: block;
+            cursor: pointer;
+            display: block;
+            font-family: $bodyfonts;
+            padding: .6rem .7rem;
+            text-align: left;
+            width: 100%;
+
+            &--active {
+                border-color: $blue;
+                background-color: lighten($blue, 38%);
+                outline: 1px solid $blue;
             }
         }
-        .native {
+
+        &__native {
+            display: block;
             font-weight: bold;
             font-size: 1rem;
+            margin: 0 0 0.2rem;
         }
-        .name {
-            strong {
+
+        &__name {
+            display: block;
+
+            &__code {
+              display: block;
+                font-weight: bold;
                 text-transform: uppercase;
             }
-        }
-        &:hover input ~ .wrap,
-        &:focus input ~ .wrap {
-            border-color: $blue;
-        }
-        input:checked ~ .wrap,
-        input:focus ~ .wrap {
-            border-color: $blue;
-            background-color: lighten($blue, 38%);
         }
     }
 }
