@@ -12766,12 +12766,6 @@ body a:hover {
     cursor: pointer;
     border-bottom: 1px dashed;
 }
-.languages__toggler--all {
-    display: block;
-}
-.languages__toggler--popular {
-    display: none;
-}
 .languages__toggler-wrapper {
     align-items: stretch;
     display: flex;

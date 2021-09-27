@@ -80,7 +80,7 @@
                     <button class="languages__toggler languages__toggler--all" id="toggle--all" type="button">
                         <span>{$_lang.all_languages}</span>
                     </button>
-                    <button class="languages__toggler languages__toggler--popular" id="toggle--popular" type="button">
+                    <button class="languages__toggler languages__toggler--popular" id="toggle--popular" type="button" style="display: none;">
                         <span>{$_lang.only_popular}</span>
                     </button>
                 </div>
