@@ -5,7 +5,7 @@
 
         <div class="welcome_text">
             <h2>{$_lang.welcome}</h2>
-            <p>{$_lang.welcome_message}</p>
+            <div>{$_lang.welcome_message}</div>
         </div>
 
         {if $restarted}
