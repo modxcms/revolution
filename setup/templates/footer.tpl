@@ -9,7 +9,7 @@
                 <p>{$_lang.modx_footer1|replace:'[[+current_year]]':{'Y'|date}}</p>
             </div>
             <div class="copyrite_info">
-                {$_lang.modx_footer2}</p>
+                <p>{$_lang.modx_footer2}</p>
             </div>
         </div>
     </footer>
