@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Scripts removes obsolete field contentType from the main resource table
  *
