@@ -100,45 +100,28 @@ body {
     font-family: $codefonts;
 }
 
-.select_lang {
-    &__toggle {
-        background-color: transparent;
-        border: 0;
-        color: $darkGray;
-        float: right;
-        font-family: $bodyfonts;
-        font-size: 18px;
-        position: relative;
-        text-align: center;
-        top: -3rem;
-        width: 25%;
-
-        & > span {
-            cursor: pointer;
-            border-bottom: 1px dotted;
-        }
-
-        &--all {
-          display: block;
-        }
-
-        &--popular {
-            display: none;
-        }
-    }
-}
-
 .languages {
-    display: flex;
-    flex-flow: wrap;
+    &-wrapper {
+      display: flex;
+      flex-flow: wrap;
+    }
 
-    .language {
+    &-item {
         cursor: pointer;
         flex-basis: 25%;
         font-family: $bodyfonts;
         max-width: 25%;
         padding: 5px;
         position: relative;
+
+        &:focus-within,
+        &--active {
+            .languages-item__inner {
+                border-color: $blue;
+                background-color: lighten($blue, 38%);
+                outline: 1px solid $blue;
+            }
+        }
 
         &--popular {
             display: block;
@@ -148,12 +131,12 @@ body {
             display: none;
         }
 
-        .radio {
+        &__radio {
             position: absolute;
             z-index: -1;
         }
 
-        .language-button {
+        &__inner {
             background-color: $lightestGray;
             border-radius: 3px;
             border: 1px solid $softGray;
@@ -165,30 +148,54 @@ body {
             text-align: left;
             width: 100%;
 
-            &--active {
-                border-color: $blue;
-                background-color: lighten($blue, 38%);
-                outline: 1px solid $blue;
+            &__native {
+                display: block;
+                font-weight: bold;
+                font-size: 1rem;
+                margin: 0 0 0.2rem;
             }
-        }
 
-        &__native {
-            display: block;
-            font-weight: bold;
-            font-size: 1rem;
-            margin: 0 0 0.2rem;
-        }
-
-        &__name {
-            display: block;
+            &__name {
+                display: block;
+            }
 
             &__code {
-              display: block;
+                display: inline-block;
                 font-weight: bold;
                 text-transform: uppercase;
             }
         }
     }
+
+    &__toggler {
+      background-color: transparent;
+      border: 0;
+      color: $darkGray;
+      font-family: $bodyfonts;
+      font-size: 18px;
+      padding: 5px;
+      text-align: center;
+      width: 100%;
+
+      & > span {
+          cursor: pointer;
+          border-bottom: 1px dashed;
+      }
+
+      &--all {
+        display: block;
+      }
+
+      &--popular {
+          display: none;
+      }
+
+      &-wrapper {
+          align-items: stretch;
+          display: flex;
+          justify-content: center;
+      }
+  }
 }
 
 [type="checkbox"] {
@@ -1039,26 +1046,15 @@ footer {
         font-size: 12px;
         padding: 0;
     }
-
-    .select_lang {
-        .toggle {
-            width: 100%;
-            float: initial;
-            top: 0.5rem;
-            display: block;
-        }
-    }
-
-    .languages {
-        .language{
-            max-width: 100%;
-            flex-basis: 100%;
-        }
-    }
 }
 
 // Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) {}
+@media (max-width: 767.98px) {
+  .languages-item {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
 
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991.98px) {}

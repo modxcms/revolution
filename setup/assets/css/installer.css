@@ -12699,34 +12699,11 @@ body a:hover {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.select_lang__toggle {
-    background-color: transparent;
-    border: 0;
-    color: #515151;
-    float: right;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    font-size: 18px;
-    position: relative;
-    text-align: center;
-    top: -3rem;
-    width: 25%;
-}
-.select_lang__toggle > span {
-    cursor: pointer;
-    border-bottom: 1px dotted;
-}
-.select_lang__toggle--all {
-    display: block;
-}
-.select_lang__toggle--popular {
-    display: none;
-}
-
-.languages {
+.languages-wrapper {
     display: flex;
     flex-flow: wrap;
 }
-.languages .language {
+.languages-item {
     cursor: pointer;
     flex-basis: 25%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -12734,17 +12711,22 @@ body a:hover {
     padding: 5px;
     position: relative;
 }
-.languages .language--popular {
+.languages-item:focus-within .languages-item__inner, .languages-item--active .languages-item__inner {
+    border-color: #4A90E2;
+    background-color: #f1f6fd;
+    outline: 1px solid #4A90E2;
+}
+.languages-item--popular {
     display: block;
 }
-.languages .language--other {
+.languages-item--other {
     display: none;
 }
-.languages .language .radio {
+.languages-item__radio {
     position: absolute;
     z-index: -1;
 }
-.languages .language .language-button {
+.languages-item__inner {
     background-color: #FBFBFB;
     border-radius: 3px;
     border: 1px solid #DCDCDC;
@@ -12756,24 +12738,44 @@ body a:hover {
     text-align: left;
     width: 100%;
 }
-.languages .language .language-button--active {
-    border-color: #4A90E2;
-    background-color: #f1f6fd;
-    outline: 1px solid #4A90E2;
-}
-.languages .language__native {
+.languages-item__inner__native {
     display: block;
     font-weight: bold;
     font-size: 1rem;
     margin: 0 0 0.2rem;
 }
-.languages .language__name {
+.languages-item__inner__name {
     display: block;
 }
-.languages .language__name__code {
-    display: block;
+.languages-item__inner__code {
+    display: inline-block;
     font-weight: bold;
     text-transform: uppercase;
+}
+.languages__toggler {
+    background-color: transparent;
+    border: 0;
+    color: #515151;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+.languages__toggler > span {
+    cursor: pointer;
+    border-bottom: 1px dashed;
+}
+.languages__toggler--all {
+    display: block;
+}
+.languages__toggler--popular {
+    display: none;
+}
+.languages__toggler-wrapper {
+    align-items: stretch;
+    display: flex;
+    justify-content: center;
 }
 
 [type=checkbox]:not(:checked), [type=checkbox]:checked {
@@ -13503,16 +13505,10 @@ pre,
         font-size: 12px;
         padding: 0;
     }
-
-    .select_lang .toggle {
-        width: 100%;
-        float: initial;
-        top: 0.5rem;
-        display: block;
-    }
-
-    .languages .language {
-        max-width: 100%;
+}
+@media (max-width: 767.98px) {
+    .languages-item {
         flex-basis: 100%;
+        max-width: 100%;
     }
 }
