@@ -316,6 +316,10 @@ input::-moz-focus-inner {
   .x-form-element {
     padding: 0;
     font: $baseText;
+    /* add margin to element without label, primarily for checkboxes/radios appearing after a regular field or help element */
+    &.add-label-space {
+        margin-top: 28px;
+    }
   }
 
   /* .x-form-element */
@@ -818,11 +822,12 @@ input::-moz-focus-inner {
 /* .x-form-check-wrap */
 /* Special checboxes for resources and tv configs */
 #modx-resource-tabs,
-#modx-tv-tabs {
+#modx-tv-tabs,
+.x-window {
 
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
-  .x-fieldset legend {
+  .x-fieldset legend{
     [type="checkbox"]{
 
       position: absolute;

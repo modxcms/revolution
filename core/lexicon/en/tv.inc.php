@@ -15,12 +15,12 @@ $_lang['tv'] = 'TV';
 $_lang['tvs'] = 'Template Variables';
 $_lang['tv_binding_msg'] = 'This field supports data source bindings using the @ commands';
 $_lang['tv_caption'] = 'Caption';
-$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
-$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
+// $_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
+// $_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
 $_lang['tv_change_template_msg'] = 'Changing this template will cause the page to reload the TVs, losing any unsaved changes.<br /><br /> Are you sure you want to change this template?';
 $_lang['tv_delete_confirm'] = 'Are you sure you want to delete this TV?';
 $_lang['tv_description'] = 'Description';
-$_lang['tv_description_desc'] = 'Usage information for this TV shown next its caption in Resource editing pages and as a tooltip in the Elements tree.';
+// $_lang['tv_description_desc'] = 'Usage information for this TV shown next its caption in Resource editing pages and as a tooltip in the Elements tree.';
 $_lang['tv_err_delete'] = 'An error occurred while trying to delete the TV.';
 $_lang['tv_err_duplicate'] = 'An error occurred while trying to duplicate the TV.';
 $_lang['tv_err_duplicate_templates'] = 'An error occurred while duplicating the TV templates.';
@@ -87,3 +87,15 @@ $_lang['tv_output_options_msg'] = $_lang['tv_tab_output_options_desc'];
 $_lang['tv_sources.intro_msg'] = $_lang['tv_tab_sources_desc'];
 $_lang['tv_tmpl_access'] = $_lang['tv_tab_tmpl_access'];
 $_lang['tv_tmpl_access_msg'] = $_lang['tv_tab_tmpl_access_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_caption_desc
+    tv_category_desc
+    tv_description_desc
+
+*/

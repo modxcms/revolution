@@ -240,7 +240,7 @@ $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['t
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
 $_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
-$_lang['tv_type'] = 'Input Type';
+// $_lang['tv_type'] = 'Input Type';
 $_lang['upper_case'] = 'Upper Case';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Display Text';
@@ -248,3 +248,13 @@ $_lang['width'] = 'Width';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['tv_default_datetime'] = $_lang['tv_default_date'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_type
+
+*/
