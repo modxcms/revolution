@@ -98,67 +98,73 @@
         }
 
         // State
-        var languageSelected = '{$current}' // value passed from php-script
-        var languagesMode = 'popular' // 'popular' | 'all'
-        var isSwitchingLanguageGroups = false
+        var languageSelected = '{$current}'; // value passed from php-script
+        var languagesMode = 'popular'; // 'popular' | 'all'
+        var isSwitchingLanguageGroups = false;
 
         // Interactive elements
-        var showAllLanguagesButton = document.getElementById('toggle--all')
-        var showPopularLanguagesButton = document.getElementById('toggle--popular')
+        var showAllLanguagesButton = document.getElementById('toggle--all');
+        var showPopularLanguagesButton = document.getElementById('toggle--popular');
 
         // Updating DOM dependings on State
         function renderLanguagesForm() {
-            document.querySelectorAll('.languages-item').forEach(function(languagesItem) {
-                languagesItem.classList.remove('languages-item--active')
-                var radio = languagesItem.querySelector('input');
+            var languageItems = document.querySelectorAll('.languages-item');
+            for (var i = 0; i < languageItems.length; i++) {
+                languageItems[i].classList.remove('languages-item--active');
+                var radio = languageItems[i].querySelector('input');
                 if (radio && radio.value === languageSelected) {
-                    languagesItem.classList.add('languages-item--active')
+                    languageItems[i].classList.add('languages-item--active');
                 }
-            })
+            }
+
             switch (languagesMode) {
                 case 'all': {
-                    showElement(showPopularLanguagesButton)
-                    hideElement(showAllLanguagesButton)
+                    showElement(showPopularLanguagesButton);
+                    hideElement(showAllLanguagesButton);
                     if (isSwitchingLanguageGroups) {
-                        showPopularLanguagesButton.focus()
-                        isSwitchingLanguageGroups = false
+                        showPopularLanguagesButton.focus();
+                        isSwitchingLanguageGroups = false;
                     }
-                    document.querySelectorAll('.languages-item--other').forEach(function(e) {
-                        showElement(e);
-                    })
+
+                    var languageItemsOther = document.querySelectorAll('.languages-item--other');
+                    for (var i = 0; i < languageItemsOther.length; i++) {
+                        showElement(languageItemsOther[i]);
+                    }
                     break;
                 }
                 case 'popular': {
-                    showElement(showAllLanguagesButton)
-                    hideElement(showPopularLanguagesButton)
+                    showElement(showAllLanguagesButton);
+                    hideElement(showPopularLanguagesButton);
                     if (isSwitchingLanguageGroups) {
-                        showAllLanguagesButton.focus()
-                        isSwitchingLanguageGroups = false
+                        showAllLanguagesButton.focus();
+                        isSwitchingLanguageGroups = false;
                     }
-                    document.querySelectorAll('.languages-item--other').forEach(function(e) {
-                        hideElement(e);
-                    })
+                    var languageItemsOther = document.querySelectorAll('.languages-item--other');
+                    for (var i = 0; i < languageItemsOther.length; i++) {
+                        hideElement(languageItemsOther[i]);
+                    }
                     break;
                 }
             }
         }
 
         // Event handlers
-        document.querySelectorAll('.languages-item__radio').forEach(function(input) {
-            input.addEventListener('change', function(e) {
-                languageSelected = e.target.value
-                renderLanguagesForm()
+        var languageItemsRadio = document.querySelectorAll('.languages-item__radio');
+        for (var i = 0; i < languageItemsRadio.length; i++) {
+            languageItemsRadio[i].addEventListener('change', function(e) {
+                languageSelected = e.target.value;
+                renderLanguagesForm();
             })
-        })
+        }
         showAllLanguagesButton.addEventListener('click', function(event) {
-            languagesMode = 'all'
-            isSwitchingLanguageGroups = true
-            renderLanguagesForm()
+            languagesMode = 'all';
+            isSwitchingLanguageGroups = true;
+            renderLanguagesForm();
         })
         showPopularLanguagesButton.addEventListener('click', function(event) {
-            languagesMode = 'popular'
-            isSwitchingLanguageGroups = true
-            renderLanguagesForm()
+            languagesMode = 'popular';
+            isSwitchingLanguageGroups = true;
+            renderLanguagesForm();
         })
     </script>
 
