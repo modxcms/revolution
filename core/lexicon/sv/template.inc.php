@@ -54,5 +54,5 @@ $_lang['tvt_err_nf'] = 'Mallvariabeln har inte tillgång till den angivna mallen
 $_lang['tvt_err_remove'] = 'Ett fel inträffade när mallvariabeln skulle tas bort från mallen.';
 $_lang['template_source'] = 'Mediakälla';
 $_lang['template_source_description'] = 'Mediakällan som ska användas för att välja en statisk fil eller en förhandsgranskning. Om du anger "Ingen" så antas att du anger en absolut sökväg.';
-$_lang['template_preview'] = 'Förhandsgranska mall';
+$_lang['template_preview'] = 'Förhandsgranskning av mall';
 $_lang['template_preview_description'] = 'En skärmdump av mallen att använda som förhandsgranskning i mallväljaren. Bästa storlek är 335 x 236 (b x h).';
