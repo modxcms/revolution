@@ -52,3 +52,7 @@ $_lang['template_untitled'] = 'Template Senza Titolo';
 $_lang['templates'] = 'Modelli';
 $_lang['tvt_err_nf'] = 'La TV non ha accesso al Modello specificato.';
 $_lang['tvt_err_remove'] = 'Si è verificato un errore provando a eliminare la TV dal modello.';
+$_lang['template_source'] = 'Sorgente Multimediale';
+$_lang['template_source_description'] = 'La sorgente multimediale per selezionare un file statico o d\'anteprima. Usare "Nessuno" presumerà che stai specificando un percorso assoluto.';
+$_lang['template_preview'] = 'Anteprima del modello';
+$_lang['template_preview_description'] = 'Uno screenshot del modello da usare come anteprima del selettore del modello. La dimensione migliore è 335x236 (l x a)';

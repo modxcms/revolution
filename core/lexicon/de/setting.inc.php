@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Bitte geben Sie die Administrations-E-Mail-
 $_lang['setting_enable_dragdrop'] = 'Drag & Drop im Ressourcen- und im Elemente-Baum aktivieren';
 $_lang['setting_enable_dragdrop_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, ist Drag & Drop im Ressourcen- und im Elemente-Baum nicht möglich.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Template Picker im Ressourcen-Baum aktivieren';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um das Template-Picker-Fenster zu verwenden, wenn Sie eine neue Ressource im Baum erstellen.';
+
 $_lang['setting_error_page'] = 'Fehlerseite';
 $_lang['setting_error_page_desc'] = 'Geben Sie die ID des Dokuments ein, das Benutzern angezeigt werden soll, wenn sie ein Dokument aufrufen, das nicht existiert (404 Page Not Found). <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einem existierenden Dokument gehört und dass dieses veröffentlicht wurde!</strong>';
 $_lang['setting_error_page_err'] = 'Bitte geben Sie eine Ressourcen-ID für die Fehlerseite an.';

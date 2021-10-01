@@ -24,12 +24,14 @@ use xPDO\Om\xPDOQuery;
  */
 class GetAreas extends Processor
 {
+    public $permission = 'settings';
+
     /**
      * @return mixed
      */
     public function checkPermissions()
     {
-        return $this->modx->hasPermission('settings');
+        return $this->modx->hasPermission($this->permission);
     }
 
     /**

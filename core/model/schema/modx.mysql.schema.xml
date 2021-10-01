@@ -1112,6 +1112,7 @@
         <field key="output_properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="preview_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
 
         <alias key="content" field="default_text" />
 

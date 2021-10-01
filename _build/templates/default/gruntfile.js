@@ -24,6 +24,7 @@ var coreJSFiles = [
         '<%= dirs.manager %>assets/modext/widgets/modx.treedrop.js',
         '<%= dirs.manager %>assets/modext/widgets/core/modx.tree.asynctreenode.js',
         '<%= dirs.manager %>assets/modext/widgets/resource/modx.tree.resource.js',
+        '<%= dirs.manager %>assets/modext/widgets/resource/modx.window.resource.js',
         '<%= dirs.manager %>assets/modext/widgets/element/modx.tree.element.js',
         '<%= dirs.manager %>assets/modext/widgets/system/modx.tree.directory.js',
         '<%= dirs.manager %>assets/modext/widgets/system/modx.panel.filetree.js',

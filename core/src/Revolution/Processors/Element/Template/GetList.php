@@ -23,6 +23,7 @@ use xPDO\Om\xPDOQuery;
  * to 20.
  * @property string  $sort  (optional) The column to sort by. Defaults to name.
  * @property string  $dir   (optional) The direction of the sort. Defaults to ASC.
+ * @return array An array of modTemplate
  *
  * @package MODX\Revolution\Processors\Element\Template
  */
@@ -39,9 +40,12 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where([
-                'templatename:LIKE' => "$query%",
+                'templatename:LIKE' => '%' . $query . '%'
             ]);
         }
+
+        $c->sortby('category_name');
+        $c->sortby('templatename');
 
         return $c;
     }
@@ -49,18 +53,13 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
     public function beforeIteration(array $list)
     {
         if ($this->getProperty('combo', false) && !$this->getProperty('query', false)) {
-            $empty = [
-                'id' => 0,
-                'templatename' => $this->modx->lexicon('template_empty'),
-                'description' => '',
-                'editor_type' => 0,
-                'icon' => '',
-                'template_type' => 0,
-                'content' => '',
-                'locked' => false,
+            $list[] = [
+                'id'            => 0,
+                'templatename'  => $this->modx->lexicon('template_empty'),
+                'description'   => '',
+                'category_name' => '',
+                'time'          => time()
             ];
-            $empty['category_name'] = '';
-            $list[] = $empty;
         }
 
         return $list;
@@ -68,10 +67,27 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
 
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectArray['category_name'] = $object->get('category_name');
-        unset($objectArray['content']);
+        $preview = $object->getPreviewUrl();
 
-        return $objectArray;
+        if (!empty($preview)) {
+            $imageQuery = http_build_query([
+                'src'           => $preview,
+                'w'             => 335,
+                'h'             => 236,
+                'HTTP_MODAUTH'  => $this->modx->user->getUserToken($this->modx->context->get('key')),
+                'zc'            => 1
+            ]);
+
+            $preview = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
+        }
+
+        return [
+            'id'            => $object->get('id'),
+            'templatename'  => $object->get('templatename'),
+            'description'   => $object->get('description'),
+            'category_name' => $object->get('category_name'),
+            'preview'       => $preview,
+            'time'          => time()
+        ];
     }
 }

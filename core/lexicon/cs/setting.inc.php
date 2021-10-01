@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Zadejte e-mail.';
 $_lang['setting_enable_dragdrop'] = 'Povolit přetahování ve stromu dokumentů a elementů';
 $_lang['setting_enable_dragdrop_desc'] = 'Je-li nastavení neaktivní, není možno upravovat dokumenty/elementy přetažením v rámci stromu.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Chybová stránka';
 $_lang['setting_error_page_desc'] = 'Zadejte ID dokumentu, na který chcete přesměrovat uživatele, kteří se pokusili přistoupit na stránku, která neexistuje. <strong>Poznámka: ujistěte se, že ID patří existujícímu dokumentu a že je publikován!</strong>';
 $_lang['setting_error_page_err'] = 'Zadejte ID dokumentu, který bude sloužit jako chybová stránka.';

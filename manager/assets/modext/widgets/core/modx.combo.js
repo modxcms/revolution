@@ -381,21 +381,46 @@ Ext.reg('modx-combo-policy',MODx.combo.Policy);
 MODx.combo.Template = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        name: 'template'
-        ,hiddenName: 'template'
-        ,displayField: 'templatename'
-        ,valueField: 'id'
-        ,pageSize: 20
-        ,fields: ['id','templatename','description','category_name']
-        ,tpl: new Ext.XTemplate('<tpl for="."><div class="x-combo-list-item"><span style="font-weight: bold">{templatename:htmlEncode}</span>'
-            ,'<tpl if="category_name"> - <span style="font-style:italic">{category_name:htmlEncode}</span></tpl>'
-            ,'<br />{description:htmlEncode()}</div></tpl>')
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'Element/Template/GetList'
-            ,combo: 1
-        }
-        ,allowBlank: true
+        url         : MODx.config.connector_url,
+        baseParams  : {
+            action      : 'Element/Template/GetList',
+            combo       : 1,
+            limit       : 0
+        },
+        fields      : ['id', 'templatename', 'description', 'category_name', 'preview', 'time'],
+        name        : 'template',
+        hiddenName  : 'template',
+        displayField : 'templatename',
+        valueField  : 'id',
+        pageSize    : 20,
+        allowBlank  : true,
+        editable    : true,
+        typeAhead   : true,
+        tpl         : new Ext.XTemplate('<tpl for=".">' +
+            '<tpl if="!Ext.isEmpty(this.getGroup(values.category_name, values.time))">' +
+            '<div class="x-combo-list-group">{this.label:htmlEncode}</div>' +
+            '</tpl>' +
+            '<div class="x-combo-list-item x-combo-list-item-grouped">' +
+            '<div class="x-combo-list-title">{templatename:htmlEncode}</div>' +
+            '{description:htmlEncode()}' +
+            '</div>' +
+            '</tpl>', {
+            group    : null,
+            label    : null,
+            getGroup : function(label, time) {
+                var group = time + '_' + label;
+
+                if (group !== this.group) {
+                    if (!Ext.isEmpty(group)) {
+                        this.group = group;
+
+                        return this.label = label;
+                    }
+                }
+
+                return null;
+            }
+        })
     });
     MODx.combo.Template.superclass.constructor.call(this,config);
 };
@@ -660,27 +685,26 @@ Ext.extend(MODx.combo.Browser,Ext.form.TriggerField,{
         if (this.disabled){
             return false;
         }
-
-            this.browser = MODx.load({
-                xtype: 'modx-browser'
-                ,closeAction: 'close'
-                ,id: Ext.id()
-                ,multiple: true
-                ,source: this.config.source || MODx.config.default_media_source
-                ,hideFiles: this.config.hideFiles || false
-                ,rootVisible: this.config.rootVisible || false
-                ,allowedFileTypes: this.config.allowedFileTypes || ''
-                ,wctx: this.config.wctx || 'web'
-                ,openTo: this.config.openTo || ''
-                ,rootId: this.config.rootId || '/'
-                ,hideSourceCombo: this.config.hideSourceCombo || false
-                ,listeners: {
-                    'select': {fn: function(data) {
-                        this.setValue(data.relativeUrl);
-                        this.fireEvent('select',data);
-                    },scope:this}
-                }
-            });
+        this.browser = MODx.load({
+            xtype: 'modx-browser'
+            ,closeAction: 'close'
+            ,id: Ext.id()
+            ,multiple: true
+            ,source: this.config.source || MODx.config.default_media_source
+            ,hideFiles: this.config.hideFiles || false
+            ,rootVisible: this.config.rootVisible || false
+            ,allowedFileTypes: this.config.allowedFileTypes || ''
+            ,wctx: this.config.wctx || 'web'
+            ,openTo: this.config.openTo || ''
+            ,rootId: this.config.rootId || '/'
+            ,hideSourceCombo: this.config.hideSourceCombo || false
+            ,listeners: {
+                'select': {fn: function(data) {
+                    this.setValue(data.relativeUrl);
+                    this.fireEvent('select',data);
+                },scope:this}
+            }
+        });
         this.browser.show(btn);
         return true;
     }
@@ -793,7 +817,9 @@ Ext.extend(MODx.ChangeParentField,Ext.form.TriggerField,{
         this.setValue(p.d);
         this.oldValue = false;
 
-        Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
+        if(this.config.parentcmp !== 'modx-template-picker-parent-id') {
+            Ext.getCmp(this.config.formpanel).fireEvent('fieldChange');
+        }
     }
     ,onTriggerClick: function() {
         if (this.disabled) { return false; }

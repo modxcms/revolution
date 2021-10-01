@@ -52,3 +52,7 @@ $_lang['template_untitled'] = 'Unbenanntes Template';
 $_lang['templates'] = 'Templates';
 $_lang['tvt_err_nf'] = 'Die TV hat keinen Zugriff auf das angegebene Template.';
 $_lang['tvt_err_remove'] = 'Beim Versuch, die TV vom Template zu entfernen, ist ein Fehler aufgetreten.';
+$_lang['template_source'] = 'Medienquelle';
+$_lang['template_source_description'] = 'Die Medienquelle, um eine statische Datei oder Vorschau auszuwählen. Wenn "Nichts" gewählt ist, wird davon ausgegangen, dass Sie einen absoluten Pfad angeben.';
+$_lang['template_preview'] = 'Template-Vorschau';
+$_lang['template_preview_description'] = 'Ein Screenshot des Templates als Vorschau im Template Picker. Die optimale Größe beträgt 335 x 236 (B x H)';

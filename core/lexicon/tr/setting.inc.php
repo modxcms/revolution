@@ -247,6 +247,9 @@ $_lang['setting_emailsender_err'] = 'Lütfen yönetim e-posta adresini belirtin.
 $_lang['setting_enable_dragdrop'] = 'Kaynak / Element Ağaçlarında Sürükle / Bırak\'ı Etkinleştir';
 $_lang['setting_enable_dragdrop_desc'] = 'Kapalıysa, kaynak ve element ağaçlarında sürükleyip bırakmayı önleyecektir.';
 
+$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+
 $_lang['setting_error_page'] = 'Hatalı Sayfa';
 $_lang['setting_error_page_desc'] = 'Eğer aslında olmayan bir dokümanı talep ediyorlarsa(404 Sayfa Bulunamadı Hatası), kullanıcılara göndermek istediğiniz dokümanın ID\'sini giriniz.<strong>NOT: Girmiş olduğunuz ID\'nin varolan bir dokümana ait olduğu ve yayımlandığı konusunda emin olun!</strong>';
 $_lang['setting_error_page_err'] = 'Lütfen hata sayfası olan bir belge kimliği belirtin.';
