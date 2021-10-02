@@ -278,26 +278,19 @@
 .ext-el-mask {
   background-color: $colorSplashShadow;
   opacity: 0;
-  // filter: alpha(opacity=0); /* for IE <= 8 */
   transition: opacity .25s;
   /*z-index: 10;*/ /* this is handeled by extjs and set to 9000 on show */
 
   &.fade-in {
     opacity: .5;
-    // filter: alpha(opacity=50); /* for IE <= 8 */
   }
 
+  // This affects the grid mask
   .x-masked & {
+    background-color: $white;
     opacity: .5;
-    // filter: alpha(opacity=50); /* for IE <= 8 */
     z-index: 9; /* extjs standard is 100, 10 prevents overlapping the topnav dropdowns */
   }
-}
-
-.x-masked {
-    .ext-el-mask {
-        background-color: $white;
-    }
 }
 
 .ext-mb-icon {
