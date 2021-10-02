@@ -29,6 +29,7 @@ class SymlinkUpdateManagerController extends ResourceUpdateManagerController
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/resource/modx.panel.resource.symlink.js');
         $this->addJavascript($mgrUrl . 'assets/modext/sections/resource/update.js');
         $this->addJavascript($mgrUrl . 'assets/modext/sections/resource/symlink/update.js');
+        $neighborhood = $this->resource->getNeighborhood();
         $data = [
             'xtype' => 'modx-page-symlink-update',
             'resource' => $this->resource->get('id'),
@@ -44,6 +45,13 @@ class SymlinkUpdateManagerController extends ResourceUpdateManagerController
             'canDuplicate' => (int)$this->canDuplicate,
             'canDelete' => (int)$this->canDelete,
             'show_tvs' => (int)!empty($this->tvCounts),
+            'next_page' => !empty($neighborhood['right'][0])
+                ? $neighborhood['right'][0]
+                : 0,
+            'prev_page' => !empty($neighborhood['left'][0])
+                ? $neighborhood['left'][0]
+                : 0,
+            'up_page' => $this->resource->parent
         ];
         $this->addHtml('<script>
         MODx.config.publish_document = "' . $this->canPublish . '";

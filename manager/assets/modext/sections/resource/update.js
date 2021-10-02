@@ -228,6 +228,8 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,scope: this
         });
 
+        btns.push(this.getAdditionalButtons(config));
+
         btns.push({
             process: 'Resource/Update'
             ,text: _('save') + ' <i class="icon icon-check"></i>'
@@ -242,6 +244,49 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         });
 
         return btns;
+    }
+
+    ,getAdditionalButtons: function (config) {
+        return [{
+            text: '<i class="icon icon-arrow-left"></i>',
+            handler: this.prevPage,
+            disabled: !config['prev_page'],
+            scope: this,
+            tooltip: _('prev_page'),
+            keys: [{key: 37, alt: true, scope: this, fn: this.prevPage}]
+        }, {
+            text: '<i class="icon icon-arrow-up"></i>',
+            handler: this.upPage,
+            scope: this,
+            disabled: !config['up_page'],
+            tooltip: _('up_page'),
+            keys: [{key: 38, alt: true, scope: this, fn: this.upPage}]
+        }, {
+            text: '<i class="icon icon-arrow-right"></i>',
+            handler: this.nextPage,
+            disabled: !config['next_page'],
+            scope: this,
+            tooltip: _('next_page'),
+            keys: [{key: 39, alt: true, scope: this, fn: this.nextPage}]
+        }];
+    }
+
+    ,prevPage: function () {
+        if (this.config['prev_page'] > 0) {
+            MODx.loadPage('resource/update', 'id=' + this.config['prev_page'])
+        }
+    }
+
+    ,nextPage: function () {
+        if (this.config['next_page'] > 0) {
+            MODx.loadPage('resource/update', 'id=' + this.config['next_page'])
+        }
+    }
+
+    ,upPage: function () {
+        if (this.config['up_page'] > 0) {
+            MODx.loadPage('resource/update', 'id=' + this.config['up_page'])
+        }
     }
 });
 Ext.reg('modx-page-resource-update',MODx.page.UpdateResource);

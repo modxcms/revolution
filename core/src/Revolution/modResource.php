@@ -1584,4 +1584,38 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $this->xpdo->invokeEvent('OnResourceCacheUpdate', ['id' => $this->get('id')]);
         }
     }
+
+    /**
+     * Returns array with all neighborhood resources
+     *
+     * @return array $arr Array with neighborhood from left and right
+     */
+    public function getNeighborhood()
+    {
+        $arr = [];
+
+        $q = $this->xpdo->newQuery(modResource::class, ['parent' => $this->parent]);
+        $q->sortby('menuindex', 'ASC');
+        $q->select('id');
+        if ($q->prepare() && $q->stmt->execute()) {
+            $ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN);
+            $current = array_search($this->id, $ids);
+
+            $right = $left = [];
+            foreach ($ids as $k => $v) {
+                if ($k > $current) {
+                    $right[] = $v;
+                } elseif ($k < $current) {
+                    $left[] = $v;
+                }
+            }
+
+            $arr = [
+                'left' => array_reverse($left),
+                'right' => $right,
+            ];
+        }
+
+        return $arr;
+    }
 }
