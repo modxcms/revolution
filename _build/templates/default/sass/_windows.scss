@@ -51,9 +51,10 @@
       padding: 8px;
       text-align: center;
     }
+
     .x-window-header-text {
-        padding-left: 64px;
-    }    
+        padding-left: 24px;
+    }
   }
 
   /* styles for a collapsed window */
@@ -113,6 +114,12 @@
       .x-window-body {
         padding-top: 15px;
       }
+    }
+
+    .x-window-tc {
+        .x-window-header-text {
+            padding-left: 64px;
+        }
     }
   }
 
