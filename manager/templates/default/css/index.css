@@ -26499,6 +26499,9 @@ html[dir=rtl] .modx-tree-node-tool-ct {
 .modx-tree-node-tool-ct .x-btn:hover, .modx-tree-node-tool-ct .x-btn:focus {
     color: #6CB24A !important;
 }
+#modx-gr-tree-resource .modx-tree-node-tool-ct, #modx-ih-resource-tree .modx-tree-node-tool-ct {
+    display: none;
+}
 
 /* Direct create buttons for a tree node */
 .x-tree-node-el .modx-tree-node-btn-create {
@@ -26522,6 +26525,9 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 .x-tree-node-el .modx-tree-node-btn-create .x-btn:hover, .x-tree-node-el .modx-tree-node-btn-create .x-btn:focus {
     opacity: 1;
     color: #6CB24A;
+}
+#modx-gr-tree-resource .x-tree-node-el .modx-tree-node-btn-create, #modx-ih-resource-tree .x-tree-node-el .modx-tree-node-btn-create {
+    display: none;
 }
 .x-tree-node-el:hover .modx-tree-node-btn-create, .x-tree-node-el:focus .modx-tree-node-btn-create {
     opacity: 1;
