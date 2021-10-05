@@ -28,4 +28,4 @@ jobs:
                 run: cd _build/templates/default && npm install
 
             -   name: Run Grunt build
-                run: cd _build/templates/default && grunt build --force
+                run: cd _build/templates/default && grunt build

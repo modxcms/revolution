@@ -20,7 +20,8 @@
         "node": "^14.15.0",
         "normalize-scss": "^7.0.1",
         "postcss": "^8.3.6",
-        "sass": "^1.42.1"
+        "sass": "^1.42.1",
+        "terser": "^5.9.0"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4"
