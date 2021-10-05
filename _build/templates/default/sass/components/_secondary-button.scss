@@ -61,17 +61,16 @@
     }
   }
 
+  &.x-btn-focus:not(.x-btn-over) {
+      background: $buttonBg;
+      color: $buttonColor;
+  }
+
   &.x-btn-over,
-  &:hover,
-  &.x-btn-focus,
-  &:focus {
+  &:hover {
     background-color: $lightGray;
     box-shadow: $softGray;
     color: $darkGray;
-
-    /*button {
-      color: inherit;
-    }*/
   }
 
   &.x-btn-click,
@@ -79,10 +78,6 @@
     background-color: $lightGray;
     box-shadow: $softGray;
     color: $darkGray;
-
-    /*button {
-      color: inherit;
-    }*/
   }
 
   &.x-btn-menu-active {

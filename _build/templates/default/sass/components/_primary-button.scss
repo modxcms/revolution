@@ -4,7 +4,11 @@
     box-shadow: none;
     color: $buttonColorPrimary;
 
-    &.x-btn-focus,
+    &.x-btn-focus:not(.x-btn-over) {
+        background: $green;
+        color: $buttonColorPrimary;
+    }
+
     &.x-btn-over,
     &:hover {
         background: $greener;

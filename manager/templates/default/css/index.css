@@ -19675,7 +19675,7 @@ html[dir=rtl] .x-menu-floating {
 }
 
 /* having to do some real janky stuff to work with ExtJS markup */
-.actions button.primary-button,
+.x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-btn, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-btn, .actions button.primary-button,
 .primary-button.inline-button,
 .primary-button.x-superboxselect-item,
 .primary-button.x-form-trigger,
@@ -19686,17 +19686,21 @@ html[dir=rtl] .x-menu-floating {
     box-shadow: none;
     color: #FFF;
 }
-.actions button.x-btn-focus.primary-button,
-.x-btn-focus.primary-button.inline-button,
-.x-btn-focus.primary-button.x-superboxselect-item,
-.x-btn-focus.primary-button.x-form-trigger,
-.x-btn-focus.primary-button.x-date-mp-ok,
-.x-btn-focus.primary-button.x-date-mp-cancel, .x-btn-focus.primary-button.x-btn, .actions button.x-btn-over.primary-button,
+.x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-btn-focus.x-btn:not(.x-btn-over), .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-btn-focus.x-btn:not(.x-btn-over), .actions button.x-btn-focus.primary-button:not(.x-btn-over),
+.x-btn-focus.primary-button.inline-button:not(.x-btn-over),
+.x-btn-focus.primary-button.x-superboxselect-item:not(.x-btn-over),
+.x-btn-focus.primary-button.x-form-trigger:not(.x-btn-over),
+.x-btn-focus.primary-button.x-date-mp-ok:not(.x-btn-over),
+.x-btn-focus.primary-button.x-date-mp-cancel:not(.x-btn-over), .x-btn-focus.primary-button.x-btn:not(.x-btn-over) {
+    background: #6CB24A;
+    color: #FFF;
+}
+.x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-btn-over.x-btn, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-btn-over.x-btn, .actions button.x-btn-over.primary-button,
 .x-btn-over.primary-button.inline-button,
 .x-btn-over.primary-button.x-superboxselect-item,
 .x-btn-over.primary-button.x-form-trigger,
 .x-btn-over.primary-button.x-date-mp-ok,
-.x-btn-over.primary-button.x-date-mp-cancel, .x-btn-over.primary-button.x-btn, .actions button.primary-button:hover,
+.x-btn-over.primary-button.x-date-mp-cancel, .x-btn-over.primary-button.x-btn, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-btn:hover, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-btn:hover, .actions button.primary-button:hover,
 .primary-button.inline-button:hover,
 .primary-button.x-superboxselect-item:hover,
 .primary-button.x-form-trigger:hover,
@@ -19706,12 +19710,12 @@ html[dir=rtl] .x-menu-floating {
     box-shadow: none;
     color: #FFF;
 }
-.actions button.x-btn-click.primary-button,
+.x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-btn-click.x-btn, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-btn-click.x-btn, .actions button.x-btn-click.primary-button,
 .x-btn-click.primary-button.inline-button,
 .x-btn-click.primary-button.x-superboxselect-item,
 .x-btn-click.primary-button.x-form-trigger,
 .x-btn-click.primary-button.x-date-mp-ok,
-.x-btn-click.primary-button.x-date-mp-cancel, .x-btn-click.primary-button.x-btn, .actions button.primary-button:active,
+.x-btn-click.primary-button.x-date-mp-cancel, .x-btn-click.primary-button.x-btn, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-btn:active, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-btn:active, .actions button.primary-button:active,
 .primary-button.inline-button:active,
 .primary-button.x-superboxselect-item:active,
 .primary-button.x-form-trigger:active,
@@ -19721,7 +19725,7 @@ html[dir=rtl] .x-menu-floating {
     box-shadow: none;
     color: #FFF;
 }
-.actions button.x-item-disabled.primary-button,
+.x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-item-disabled.x-btn, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-item-disabled.x-btn, .actions button.x-item-disabled.primary-button,
 .x-item-disabled.primary-button.inline-button,
 .x-item-disabled.primary-button.x-superboxselect-item,
 .x-item-disabled.primary-button.x-form-trigger,
@@ -19857,6 +19861,15 @@ html[dir=rtl] .x-menu-floating {
     border-right-width: 1px;
     padding-right: 10px;
 }
+.actions button.x-btn-focus:not(.x-btn-over),
+.x-btn-focus.inline-button:not(.x-btn-over),
+.x-btn-focus.x-superboxselect-item:not(.x-btn-over),
+.x-btn-focus.x-form-trigger:not(.x-btn-over),
+.x-btn-focus.x-date-mp-ok:not(.x-btn-over),
+.x-btn-focus.x-date-mp-cancel:not(.x-btn-over), .x-btn-focus.x-btn:not(.x-btn-over) {
+    background: #FFF;
+    color: #515151;
+}
 .actions button.x-btn-over,
 .x-btn-over.inline-button,
 .x-btn-over.x-superboxselect-item,
@@ -19867,23 +19880,10 @@ html[dir=rtl] .x-menu-floating {
 .x-superboxselect-item:hover,
 .x-form-trigger:hover,
 .x-date-mp-ok:hover,
-.x-date-mp-cancel:hover, .x-btn:hover, .actions button.x-btn-focus,
-.x-btn-focus.inline-button,
-.x-btn-focus.x-superboxselect-item,
-.x-btn-focus.x-form-trigger,
-.x-btn-focus.x-date-mp-ok,
-.x-btn-focus.x-date-mp-cancel, .x-btn-focus.x-btn, .actions button:focus,
-.inline-button:focus,
-.x-superboxselect-item:focus,
-.x-form-trigger:focus,
-.x-date-mp-ok:focus,
-.x-date-mp-cancel:focus, .x-btn:focus {
+.x-date-mp-cancel:hover, .x-btn:hover {
     background-color: #E4E4E4;
     box-shadow: #DCDCDC;
     color: #515151;
-    /*button {
-      color: inherit;
-    }*/
 }
 .actions button.x-btn-click,
 .x-btn-click.inline-button,
@@ -19899,9 +19899,6 @@ html[dir=rtl] .x-menu-floating {
     background-color: #E4E4E4;
     box-shadow: #DCDCDC;
     color: #515151;
-    /*button {
-      color: inherit;
-    }*/
 }
 .actions button.x-btn-menu-active .x-btn-split:before,
 .x-btn-menu-active.inline-button .x-btn-split:before,
@@ -27514,6 +27511,7 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     /* the window form / content container */
     /* The window bottom container */
     /* the console window */
+    /* message dialog windows */
 }
 .x-window.anim-ready {
     transform: scale(0.7) translate3d(0, 0, 0);
@@ -27550,6 +27548,9 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     font-weight: bold;
     padding: 8px;
     text-align: center;
+}
+.x-window .x-window-tc .x-window-header-text {
+    padding-left: 24px;
 }
 .x-window.x-panel-collapsed .x-window-tl {
     border-bottom: 1px solid #DCDCDC;
@@ -27592,6 +27593,9 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 }
 .x-window.modx-window.modx-console .x-window-body, .x-window.modx-window.modx-alert .x-window-body, .x-window.modx-window.modx-confirm .x-window-body, .x-window.modx-window .x-window-with-tabs .x-window-body {
     padding-top: 15px;
+}
+.x-window.modx-window .x-window-tc .x-window-header-text {
+    padding-left: 64px;
 }
 .x-window .x-panel-bwrap {
     background: #FFF;
@@ -27683,7 +27687,17 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 .x-window.modx-console .error {
     color: #CF1124;
 }
-
+.x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell {
+    /*
+        Note that because the MessageBox class in Extjs 3 is a singleton,
+        it can not be extended or overriden and is very limited in its
+        configuration options. Thus the fragile method here of selecting
+        the button by dom position. Ext always outputs all 4 buttons into
+        the markup and just hides ones not in use for a particular window type.
+        For the time-being, the primary button will always be the
+        first ("ok") or second ("yes", typically our save button) index.
+    */
+}
 /* .x-window */
 /* the progress bar (ex. saving a resource), usually in a window too */
 .x-progress-wrap {
