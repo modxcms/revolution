@@ -19674,6 +19674,11 @@ html[dir=rtl] .x-menu-floating {
     cursor: move;
 }
 
+/* On deprecated logs controller, allow group title to expand normally which is inexplicably hardcoded in the extjs files */
+#modx-grid-deprecated-log .x-grid-group-hd div {
+    height: auto;
+}
+
 /* having to do some real janky stuff to work with ExtJS markup */
 .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(1) .x-btn, .x-window.x-window-plain .x-toolbar-left-row .x-toolbar-cell:nth-child(2) .x-btn, .actions button.primary-button,
 .primary-button.inline-button,
