@@ -13,18 +13,18 @@ $_lang['system_events'] = 'Systemereignisse';
 $_lang['system_events.desc'] = 'Systemereignisse sind die Ereignisse in MODX, auf die Plugins reagieren können. Sie werden im MODX-Code "abgefeuert", sodass Plugins mit MODX-Code interagieren und ihn um eigene Funktionalitäten erweitern können, ohne in den Core-Code einzugreifen. Sie können hier auch eigene Ereignisse für Ihr Projekt erstellen. MODX-eigene Ereignisse können nicht entfernt werden, lediglich Ihre eigenen.';
 $_lang['system_events.search_by_name'] = 'Suche nach Ereignis-Name';
 $_lang['system_events.create'] = 'Neues Ereignis anlegen';
-$_lang['system_events.name_desc'] = 'Der Name des Ereignisses, den Sie in einem Aufruf der Form &dollar;modx->invokeEvent(name, eigenschaften) benutzen können.';
+$_lang['system_events.name_desc'] = 'Der Name des Ereignisses, den Sie in einem Aufruf der Form &dollar;modx->invokeEvent(name, properties) benutzen können.';
 $_lang['system_events.groupname'] = 'Gruppe';
 $_lang['system_events.groupname_desc'] = 'Der Name der Gruppe, zu der das neue Ereignis gehört. Wählen Sie einen vorhandenen Gruppennamen oder geben Sie einen neuen ein.';
 $_lang['system_events.plugins'] = 'Plugins';
 $_lang['system_events.plugins_desc'] = 'Liste der dem Ereignis zugeordneten Plugins. Wählen Sie die Plugins, die dem Ereignis zugeordnet werden sollen.';
 
 $_lang['system_events.service'] = 'Dienst';
-$_lang['system_events.service_1'] = 'Parserdienst-Ereignisse';
+$_lang['system_events.service_1'] = 'Parser-Dienst-Ereignisse';
 $_lang['system_events.service_2'] = 'Manager-Zugangs-Ereignisse';
-$_lang['system_events.service_3'] = 'Webzugriffsdienst-Ereignisse';
-$_lang['system_events.service_4'] = 'Cachedienst-Ereignisse';
-$_lang['system_events.service_5'] = 'Templatedienst-Ereignisse';
+$_lang['system_events.service_3'] = 'Webzugriff-Dienst-Ereignisse';
+$_lang['system_events.service_4'] = 'Cache-Dienst-Ereignisse';
+$_lang['system_events.service_5'] = 'Template-Dienst-Ereignisse';
 $_lang['system_events.service_6'] = 'Benutzerdefinierte Ereignisse';
 
 $_lang['system_events.remove'] = 'Ereignis entfernen';
