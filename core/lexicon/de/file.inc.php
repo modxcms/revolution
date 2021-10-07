@@ -115,7 +115,7 @@ $_lang['upf_add'] = 'Hinzufügen';
 $_lang['upf_add_desc'] = 'Datei zur Upload-Liste hinzufügen.';
 $_lang['upf_close'] = 'Schließen';
 $_lang['upf_close_desc'] = 'Fenster schließen.';
-$_lang['upf_err_failed'] = 'Der Server ist nicht verfügbar oder es trat ein interner Server-Fehler auf.';
+$_lang['upf_err_failed'] = 'Der Server ist nicht verfügbar oder es ist ein interner Server-Fehler aufgetreten.';
 $_lang['upf_err_filetype'] = 'Die ausgewählte Dateiendung ist nicht erlaubt.<br/>Bitte wählen Sie Dateien mit den folgenden Dateiendungen aus: {1}';
 $_lang['upf_error'] = 'Fehler';
 $_lang['upf_filename'] = 'Dateiname';
@@ -132,7 +132,7 @@ $_lang['upf_upload'] = 'Hochladen';
 $_lang['upf_upload_desc'] = 'Dateien der Upload-Liste auf den Server hochladen.';
 $_lang['upf_upload_err'] = 'Upload-Fehler.';
 $_lang['upf_uploading'] = 'Lade hoch …';
-$_lang['upf_uploading_desc'] = 'Lade hoch: {0} von {1} Dateien übertragen.';
+$_lang['upf_uploading_desc'] = 'Hochladen: {0} von {1} Dateien übertragen.';
 $_lang['upload_files'] = 'Dateien hochladen';
 $_lang['no_file_err'] = 'Es wurde keine Datei hochgeladen.';
 
