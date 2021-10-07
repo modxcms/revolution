@@ -9,7 +9,7 @@
 $_lang['action'] = 'Aktion';
 $_lang['action_desc'] = 'Die Aktion, auf die diese Regel angewendet wird.';
 $_lang['activate'] = 'Aktivieren';
-$_lang['constraint'] = 'Einschränken auf';
+$_lang['constraint'] = 'Einschränkung';
 $_lang['constraint_class'] = 'Klasse für Einschränkung';
 $_lang['constraint_class_desc'] = 'Optional. Regel-Einschränkungen erlauben es, Regeln nur dann anzuwenden, wenn ein bestimmtes Feld einen bestimmten Wert hat. Angenommen, eine Regel für resource/update soll nur auf Ressourcen mit der Template-ID 4 angewendet werden. Dann sollte als Klasse "modResource", als Feld "template" und als Wert "4" eingegeben werden. Wenn hier Klasse, Feld und Wert der Einschränkung angegeben werden, wird die Regel entsprechend eingeschränkt.';
 $_lang['constraint_desc'] = 'Optional. Der Wert der Einschränkungs-Bedingung, der mit dem Wert des Feldes verglichen wird.';
@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Nach Regel filtern …';
 $_lang['filter_by_search'] = 'Suche …';
 $_lang['for_parent'] = 'Für Eltern-Element';
 $_lang['for_parent_desc'] = 'Aktivieren Sie diese Option, wenn Sie möchten, dass diese Regel auf das Eltern-Element angewendet wird. Verwenden Sie dies nur mit Ressourcen oder Objekten mit einem mit einem "parent"-Feld. Nützlich für die "Erstellen"-Seite von Ressourcen.';
-$_lang['form_customization_msg'] = 'Hier ist eine Liste der momentan angewendeten Regeln. Weitere Informationen über Regeln und Formular-Anpassung finden Sie <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">hier</a>. Bitte beachten Sie, dass ungeeignete Regeln Probleme mit Ihrer MODX-Installation verursachen können. Inaktive Regeln werden ausgegraut dargestellt.';
+$_lang['form_customization_msg'] = 'Hier ist eine Liste der momentan angewendeten Regeln. Weitere Informationen über Regeln und Formular-Anpassung finden Sie <a href="https://docs.modx.com/current/en/building-sites/client-proofing/form-customization" target="_blank">hier</a>. Bitte beachten Sie, dass ungeeignete Regeln Probleme mit Ihrer MODX-Installation verursachen können. Inaktive Regeln werden ausgegraut dargestellt.';
 $_lang['form_rules'] = 'Formular-Regeln';
 $_lang['import'] = 'Importieren';
 $_lang['import_from_xml'] = 'Neues Set aus XML-Datei importieren';
