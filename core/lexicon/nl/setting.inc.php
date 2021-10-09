@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Toon inline Help tekst voor velden';
 $_lang['setting_inline_help_desc'] = 'Indien \'Ja\', dan zullen velden hun help tekst direct onder het veld getoond worden. Indien \'Nee\', alle velden krijgen tooltip gebaseerde help.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Generator Schema';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generator schema voor tag . Beschikbare opties: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Locale';
-$_lang['setting_locale_desc'] = 'Stel de locale in voor het systeem. Laat leeg om de standaard te gebruiken. Zie <a href="http://php.net/setlocale" target="_blank">de PHP documentatie</a> voor meer info.';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Vergrendel Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'Het aantal seconden dat de Resource vergrendeld blijft zodra de gebruiker inactief is.';
