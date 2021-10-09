@@ -376,10 +376,10 @@ $_lang['setting_inline_help'] = 'إظهار نص المساعدة السطري �
 $_lang['setting_inline_help_desc'] = 'إذا ’نعم’، عندها ستقوم الحقول بعرض نص المساعدة الخاص بها بشكل مباشر تحت الحقل. إذا ’لا’، كل الحقول ستملك مساعدة معتمدة على أداة التلميح.';
 
 $_lang['setting_link_tag_scheme'] = 'مخطط توليد URL';
-$_lang['setting_link_tag_scheme_desc'] = 'مخطط توليد URL للوسم [[~id]]. الخيارات المتوفرة <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">هنا</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'محلي';
-$_lang['setting_locale_desc'] = 'تعيين الإعدادات المحلية للنظام. اترك المساحة فارغة لاستخدام الافتراضي. راجع <a href="http://php.net/setlocale" target="_blank"> the PHP documentation</a> للحصول على مزيد من المعلومات.';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'قفل Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'عدد الثواني الذي سيبقى فيه القفل على المصدر إذا كان المستخدم غير نشط.';
