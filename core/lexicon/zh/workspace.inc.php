@@ -20,7 +20,7 @@ $_lang['changelog'] = '更新日志​​​​​';
 $_lang['changelog_desc'] = '请查看此版本的更新日志。';
 $_lang['continue'] = '继续 ';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
-$_lang['curl_not_installed'] = '为了使用包管理器，必须保证已经安装和设置了PHP扩展cURL。可以在 <a href="http://php.net/curl" target="_blank">PHP cURL website</a>找到更多关于cURL的信息。';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = '描述';
 $_lang['details'] = '详细';
 $_lang['dir_err_assets'] = '你的 assets/目录不能在[[+path]]被创建，<br />如果你要使用包管理器或安装第三方组件必须创建此目录并使其可写。';
