@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Değişiklikler';
 $_lang['changelog_desc'] = 'Lütfen bu sürüm için değişiklik günlüğünü gözden geçir.';
 $_lang['continue'] = 'Devam et';
 $_lang['core_err_invalid'] = 'Oluşturduğunuz dosyayı çalıştırmak için etkin bir çalışma alanına sahip olmanız gerekmektedir.';
-$_lang['curl_not_installed'] = 'cURL, Paket Yönetimini kullanmak için PHP\'ye eklenti olarak yüklenmeli ve ayarlanmalıdır. cURL ile ilgili daha fazla bilgiyi <a href="http://php.net/curl" target="_blank">PHP cURL website</a>\'da bulabilirsiniz.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Açıklama';
 $_lang['details'] = 'Detaylar';
 $_lang['dir_err_assets'] = 'Dizinleriniz/assetleriniz [[+path]]\'de oluşturulamadı: <br />Paket Yönetimi veya 3. Parti Bileşenler kullanmak istiyorsanız bu dizini oluşturmalı ve yazılabilir yapmanız gerekir.';
