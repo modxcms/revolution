@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Показывать текст подсказ�
 $_lang['setting_inline_help_desc'] = 'Если выбрано «Да», рядом с полем будет выводиться текст подсказки. Если выбрано «Нет», подсказка будет «всплывающей».';
 
 $_lang['setting_link_tag_scheme'] = 'Схема URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Схема генерации URL для тега [[~id]]. Доступные опции смотрите <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">здесь</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Локаль';
-$_lang['setting_locale_desc'] = 'Устанавливает локаль для системы. Оставьте пустым чтобы использовать локаль по умолчанию. <a href="http://php.net/setlocale" target="_blank">Документация по настройке локалей в PHP</a> .';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Время жизни блокировки';
 $_lang['setting_lock_ttl_desc'] = 'Количество секунд, на которое будет оставаться блокировка ресурса, если пользователь неактивен.';
