@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'แสดงข้อความช่วย�
 $_lang['setting_inline_help_desc'] = 'ถ้า \'ใช่\' ฟิลด์จะแสดงข้อความช่วยเหลือของพวกมันตรงด้านล่างของฟิลด์ ถ้า \'ไม่\' ฟิลด์ทั้งหมดจะมีความช่วยเหลือแบบทูลทิป';
 
 $_lang['setting_link_tag_scheme'] = 'โครงร่างการสร้าง URL';
-$_lang['setting_link_tag_scheme_desc'] = 'โครงร่างการสร้าง URL สำหรับแท็ก [[~id]] ตัวเลือกที่ใช้งานได้: <a href="http://api.modxcms.com/modx/modX.html#makeUrl">http://api.modxcms.com/modx/modX.html#makeUrl</a>';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'ท้องถิ่น';
-$_lang['setting_locale_desc'] = 'ตั้งท้องถิ่นสำหรับระบบ ปล่อยว่างไว้เพื่อใช้ค่าปริยาย ดูที่ <a href="http://php.net/setlocale" target="_blank">เอกสารประกอบ PHP</a> สำหรับข้อมูลเพิ่มเติม';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
