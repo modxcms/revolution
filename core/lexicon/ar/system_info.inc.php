@@ -44,7 +44,7 @@ $_lang['phpmailer_version'] = 'نسخة <a href="https://github.com/PHPMailer/PH
 $_lang['server'] = 'المخدم';
 $_lang['servertime'] = 'وقت المخدم';
 $_lang['serveroffset'] = 'إزاحة المخدم';
-$_lang['smarty_version'] = 'نسخة <a href="http://smarty.net/" target="_blank">Smarty</a>';
+$_lang['smarty_version'] = '<a href="https://www.smarty.net/" target="_blank">Smarty</a> Version';
 $_lang['sysinfo_desc'] = 'هنا تستطيع رؤية معلومات عامة عن بيئة مودكس الخاصة بك.';
 $_lang['view_sysinfo'] = 'معلومات النظام';
 $_lang['table_prefix'] = 'بادئة الجدول';
