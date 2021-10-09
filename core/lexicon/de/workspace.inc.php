@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Changelog';
 $_lang['changelog_desc'] = 'Bitte schauen Sie in die Liste der Änderungen (Changelog) für diese Version.';
 $_lang['continue'] = 'Weiter';
 $_lang['core_err_invalid'] = 'Sie benötigen eine gültige Core-Installation mit einem aktiven Workspace, um das Erstellen des Packages zu starten.';
-$_lang['curl_not_installed'] = 'cURL muss installiert und als Extension für PHP konfiguriert sein, damit Sie die Package-Verwaltung nutzen können. Sie finden weitere Informationen über cURL auf der <a href="http://php.net/curl" target="_blank">PHP-cURL-Website</a>.';
+$_lang['curl_not_installed'] = 'cURL muss installiert und als Extension für PHP konfiguriert sein, damit Sie die Package-Verwaltung nutzen können. Sie finden weitere Informationen über cURL auf der <a href="https://www.php.net/curl" target="_blank">PHP-cURL-Website</a>.';
 $_lang['description'] = 'Beschreibung';
 $_lang['details'] = 'Details';
 $_lang['dir_err_assets'] = 'Das Verzeichnis assets/ konnte nicht in [[+path]] angelegt werden.<br />Sie müssen dieses Verzeichnis anlegen und dafür sorgen, dass es beschreibbar ist, wenn Sie die Package-Verwaltung oder Komponenten von Drittanbietern verwenden möchten.';
