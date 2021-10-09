@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Zmiany w najnowszej wersji';
 $_lang['changelog_desc'] = 'Zapoznaj się z zmian w tej wersji.';
 $_lang['continue'] = 'Kontynuuj';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
-$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Opis';
 $_lang['details'] = 'Szczegóły';
 $_lang['dir_err_assets'] = 'Your assets/ directory was not able to be created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
