@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Visa hjälptexter för fält inline';
 $_lang['setting_inline_help_desc'] = 'Om denna sätts till "Ja" kommer hjälptexten för fält att visas direkt nedanför fältet. Om den sätts till "Nej" kommer alla fält att visa hjälptexten som verktygstips.';
 
 $_lang['setting_link_tag_scheme'] = 'Schema för att skapa URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Schema för URL-skapande för taggen [[~id]]. Tillgängliga alternativ <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">här</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Systemspråk';
-$_lang['setting_locale_desc'] = 'Anger språket (locale) för systemet. Lämna fältet tomt för att använda standardinställningen. Se <a href="http://php.net/setlocale" target="_blank">PHP-dokumentationen</a> för mer information.';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Livstid för lås';
 $_lang['setting_lock_ttl_desc'] = 'Det antal sekunder som ett lås på en resurs kommer att vara kvar om användaren är inaktiv.';
