@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Wijzigingslogboek';
 $_lang['changelog_desc'] = 'Bekijk de changelog voor deze versie.';
 $_lang['continue'] = 'Volgende';
 $_lang['core_err_invalid'] = 'Je dient een correcte core installatie met de active werkruimte te hebben om deze build uit te voeren.';
-$_lang['curl_not_installed'] = 'cURL moet geïnstalleerd en geconfigureerd zijn als als een PHP Extensie om Pakket Management te kunnen gebruiken. Meer informatie over cURL is te vinden op de <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Omschrijving';
 $_lang['details'] = 'Details';
 $_lang['dir_err_assets'] = 'Je assets/ map kon niet aangemaakt worden in: [[+path]] <br />Je dient deze map aan te maken en schrijfrechten te geven wanneer je de Packet Manager of 3th party software wilt gebruiken.';
