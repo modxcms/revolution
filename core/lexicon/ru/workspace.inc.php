@@ -20,7 +20,7 @@ $_lang['changelog'] = 'История изменений';
 $_lang['changelog_desc'] = 'Пожалуйста, просмотрите список изменений для этой версии.';
 $_lang['continue'] = 'Продолжить';
 $_lang['core_err_invalid'] = 'Для запуска процесса сборки у вас должно быть установлено ядро системы и активная рабочая область.';
-$_lang['curl_not_installed'] = 'cURL должен быть установлен и настроен как расширение PHP, если вы собираетесь использовать «Менеджер пакетов». Информацию по установке и настройке cURL можно найти здесь <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Описание';
 $_lang['details'] = 'Детали';
 $_lang['dir_err_assets'] = 'Невозможно создать каталог assets/ по адресу: [[+path]] <br />Вам необходимо создать его и разрешить запись, если вы хотите использовать «Менеджер пакетов» и устанавливать пакеты с дополнительными компонентами.';
