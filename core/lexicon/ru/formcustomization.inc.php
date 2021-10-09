@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Фильтровать по правилу...';
 $_lang['filter_by_search'] = 'Поиск...';
 $_lang['for_parent'] = 'Для контейнера';
 $_lang['for_parent_desc'] = 'Отметьте, если это правило должно использоваться для контейнера. Используется только для ресурсов или объектов с полем «parent». Удобно использовать для страницы создания ресурса.';
-$_lang['form_customization_msg'] = 'Подробную информацию о правилах и настройке форм можно найти <a href="https://docs.modx.com/current/ru/building-sites/client-proofing/form-customization" target="_blank">здесь</a>. Пожалуйста, обратите внимание, что некорректное правило может привести к проблемам в MODX. Неактивные правила помечены серым цветом.';
+$_lang['form_customization_msg'] = 'Here is a list of currently applied Rules. More information on Rules and Form Customization can be found <a href="https://docs.modx.com/current/en/building-sites/client-proofing/form-customization" target="_blank">here</a>. Please note that improper Rules might cause problems with your MODX Revolution installation. Inactive Rules are faded gray.';
 $_lang['form_rules'] = 'Правила настройки форм';
 $_lang['import'] = 'Импорт';
 $_lang['import_from_xml'] = 'Импортировать новый набор правил из XML';
