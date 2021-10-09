@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'इनलाइन Help Text दिखाने
 $_lang['setting_inline_help_desc'] = '\'यदि हाँ\', फिर उनकी मदद पाठ फ़ील्ड के नीचे सीधे फ़ील्ड प्रदर्शित करेगा। \'नहीं तो\', सभी फ़ील्ड्स tooltip-आधारित मदद करनी होगी।';
 
 $_lang['setting_link_tag_scheme'] = 'URL उत्पादन योजना';
-$_lang['setting_link_tag_scheme_desc'] = 'URL के लिए टैग उत्पादन योजना [[~id]]। उपलब्ध विकल्प <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()"> यहाँ</a>।';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'लोकेल';
-$_lang['setting_locale_desc'] = 'सिस्टम के लिए locale निर्धारित।  डिफ़ॉल्ट का उपयोग करने के लिए रिक्त छोड़ दें। अधिक जानकारी के लिए <a href="http://php.net/setlocale" target="_blank"> PHP documentation</a> देखें।';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'सेकंड की संख्या एक रिसोर्स पर ताला user निष्क्रिय है तो के लिए रहेगा।';
