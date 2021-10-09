@@ -26,7 +26,7 @@ $_lang['preview'] = 'عرض';
 $_lang['resource_access_message'] = 'هنا يمكنك إختيار مجموعات المصادر التي ينتمي اليها المصدر.';
 $_lang['resource_add_children_access_denied'] = 'ليس لديك صلاحية لإنشاء مصدر في هذا المكان.';
 $_lang['resource_alias'] = 'الاسم المستعار للمصدر';
-$_lang['resource_alias_help'] = 'إسم مستعار للمصدر. فتح المصدر بإسم مستعار, مثال:<br /><br />http://yourserver/<span dir="ltr">الاسم المستعار </span><br /><br /><strong>تنبيه</strong>هذه الخاصية تعمل عند تنشيط خاصية العناوين المعدّلة.';
+$_lang['resource_alias_help'] = 'An alias for this resource. This will make the resource accessible using:<br /><br />https://yourserver/alias<br /><br /><strong>Note</strong>This only works if you\'re using friendly URLs.';
 $_lang['resource_alias_visible'] = 'Use current alias in alias path';
 $_lang['resource_alias_visible_help'] = 'The alias of this Resource is inserted in Friendly URL alias path';
 $_lang['resource_change_template_confirm'] = 'هل أنت متأكد من تغيير القالب؟ <br /><br />تحذير: سيقوم هذا الإجراء<b>بالتخزين المؤقت</b> لتغييراتك السابقة و إعادة تحميل الصفحة. بعد إعادة تحميل الصفحة, يجب عليك حفظ القالب .';
