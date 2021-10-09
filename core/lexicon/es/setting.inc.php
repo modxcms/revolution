@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Mostrar Texto de Ayuda Junto a los Campos de un
 $_lang['setting_inline_help_desc'] = 'Si se configura como "Sí", la ayuda de los campos se mostrará directamente debajo de ellos. En caso contrario, los campos mostrarán un mensaje de ayuda al poner el cursor del ratón sobre ellos.';
 
 $_lang['setting_link_tag_scheme'] = 'Esquema de Generación de URLs';
-$_lang['setting_link_tag_scheme_desc'] = 'Esquema de generación de URLs para la etiqueta [[~id]]. Opciones disponibles: <a href="http://rtfm.modx.com/revolution/2.x/developing-in-modx/other-development-resources/class-reference/modx/modx.makeurl">http://rtfm.modx.com/revolution/2.x/developing-in-modx/other-development-resources/class-reference/modx/modx.makeurl</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Conriguración Regional';
-$_lang['setting_locale_desc'] = 'Selecciona la configuración regional para el sistema. Dejar en blanco para utilizar la configuración por defecto. Ver <a href="http://php.net/setlocale" target="_blank">la documentación de PHP</a> para más información.';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Tiempo de Vida de los Bloqueos';
 $_lang['setting_lock_ttl_desc'] = 'El número de segundos que permanecerá el bloqueo sobre un Recurso si el usuario está inactivo.';
