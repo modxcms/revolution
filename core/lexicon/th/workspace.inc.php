@@ -20,7 +20,7 @@ $_lang['changelog'] = 'บันทึกการเปลี่ยนแปล
 $_lang['changelog_desc'] = 'โปรดตรวจดูบันทึกการเปลี่ยนแปลงสำหรับเวอร์ชันนี้';
 $_lang['continue'] = 'ดำเนินการต่อ';
 $_lang['core_err_invalid'] = 'คุณต้องมีการติดตั้ง core ที่ถูกต้องในพื้นที่ทำงานที่ใช้งานเพื่อรัน build';
-$_lang['curl_not_installed'] = 'cURL ต้องถูกติดตั้งและตั้งค่าเป็นส่วนขยายของ PHP เพื่อให้คุณใช้การจัดการแพ็กเกจ คุณสามารถหารายละเอียดเพิ่มเติมเกี่ยวกับ cURLได้บน <a href="http://php.net/curl" target="_blank">เว็บไซต์ PHP cURL</a>';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'คำอธิบาย';
 $_lang['details'] = 'รายละเอียด';
 $_lang['dir_err_assets'] = 'โฟลเดอร์ assets/ ของคุณไม่สามารถถูกสร้างได้ที่: [[+path]] <br />คุณจะต้องสร้างโฟลเดอร์นี้เองและทำให้มันสามารถเขียนได้ถ้าคุณต้องการใช้ตัวจัดการแพ็กเกจหรือส่วนประกอบของบุคคลอื่น';
