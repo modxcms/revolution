@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Změny';
 $_lang['changelog_desc'] = 'Přečtěte si prosím změny v této verzi.';
 $_lang['continue'] = 'Pokračovat';
 $_lang['core_err_invalid'] = 'Pro spuštění sestavení musíte mít platnou instalaci jádra a aktivní pracovní prostředí.';
-$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL musí být nainstalováno a nakonfigurováno jako PHP rozšíření, abyste mohli používat Správce balíčků. Více informací o cURL naleznete na <a href="https://www.php.net/curl" target="_blank">PHP cURL webové stránce</a>.';
 $_lang['description'] = 'Popis';
 $_lang['details'] = 'Detaily';
 $_lang['dir_err_assets'] = 'Vaši "assets" složku nebylo možno vytvořit: [[+path]] <br />Musíte vytvořit složku a nastavit její práva pro zápis.';
