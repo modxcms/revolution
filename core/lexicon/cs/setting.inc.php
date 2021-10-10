@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Zobrazovat řádkové nápovědy u políček';
 $_lang['setting_inline_help_desc'] = 'Je-li nastaveno na "Ano" pak budou přímo pod políčky zobrazeny jejich nápovědné texty. Pokud je nastaveno na "Ne", budou nápovědné texty zobrazeny v tooltipech.';
 
 $_lang['setting_link_tag_scheme'] = 'Schéma generování URL';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Schéma generování URL pro tag [[~id]]. Možné volby  <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">zde</a>.';
 
 $_lang['setting_locale'] = 'Locale';
-$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale_desc'] = 'Nastavte locale pro systém. Ponechte prázdné pro použití výchozího nastavení. Více informací najdete v <a href="https://www.php.net/setlocale" target="_blank">PHP dokumentu</a>.';
 
 $_lang['setting_lock_ttl'] = 'Čas odstranění zámků';
 $_lang['setting_lock_ttl_desc'] = 'Počet sekund, po kterou je dokument uzamčen a uživatel v něm již nic neupravil, po jehož uplynutí bude daný zámek zrušen.';
