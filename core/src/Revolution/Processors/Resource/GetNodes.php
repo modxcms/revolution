@@ -12,11 +12,14 @@ namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;
+use MODX\Revolution\modX;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use ReflectionClass;
+use ReflectionException;
 use xPDO\Om\xPDOQuery;
+use xPDO\xPDOException;
 
 /**
  * Get nodes for the resource tree
@@ -68,7 +71,7 @@ class GetNodes extends Processor
         $this->getRootNode();
         $this->prepare();
 
-        if (empty($this->contextKey) || $this->contextKey == 'root') {
+        if (empty($this->contextKey) || $this->contextKey === 'root') {
             $c = $this->getContextQuery();
         } else {
             $c = $this->getResourceQuery();
@@ -76,16 +79,21 @@ class GetNodes extends Processor
 
         $collection = $this->modx->getCollection($this->itemClass, $c);
         $search = $this->getProperty('search', '');
-        if (!empty($search) && empty($node) && (empty($this->contextKey) || $this->contextKey == 'root')) {
+        if (!empty($search) && (empty($this->contextKey) || $this->contextKey === 'root')) {
             $this->search($search);
         }
 
         $this->iterate($collection);
 
-        if ($this->getProperty('stringLiterals', false)) {
-            return $this->modx->toJSON($this->items);
-        } else {
+        try {
+            if ($this->getProperty('stringLiterals', false)) {
+                return $this->modx->toJSON($this->items);
+            }
+
             return $this->toJSON($this->items);
+        } catch (xPDOException $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Failed to encode JSON. ' . $e->getMessage());
+            return $this->failure('Failed to encode JSON.');
         }
     }
 
@@ -133,7 +141,7 @@ class GetNodes extends Processor
         $this->defaultRootId = $this->modx->getOption('tree_root_id', null, 0);
 
         $id = $this->getProperty('id');
-        if (empty($id) || $id == 'root') {
+        if (empty($id) || $id === 'root') {
             $this->startNode = $this->defaultRootId;
         } else {
             $parts = explode('_', $id);
@@ -141,7 +149,7 @@ class GetNodes extends Processor
             $this->startNode = !empty($parts[1]) ? intval($parts[1]) : 0;
         }
         if ($this->getProperty('debug')) {
-            echo '<p style="width: 800px; font-family: \'Lucida Console\'; font-size: 11px">';
+            echo '<p style="width: 800px; font-family: \'Lucida Console\',monospace ; font-size: 11px">';
         }
     }
 
@@ -173,21 +181,21 @@ class GetNodes extends Processor
     public function getResourceQuery()
     {
         $resourceColumns = [
-            'id'
-        , 'template'
-        , 'pagetitle'
-        , 'longtitle'
-        , 'alias'
-        , 'description'
-        , 'parent'
-        , 'published'
-        , 'deleted'
-        , 'isfolder'
-        , 'menuindex'
-        , 'menutitle'
-        , 'hidemenu'
-        , 'class_key'
-        , 'context_key'
+            'id',
+            'template',
+            'pagetitle',
+            'longtitle',
+            'alias',
+            'description',
+            'parent',
+            'published',
+            'deleted',
+            'isfolder',
+            'menuindex',
+            'menutitle',
+            'hidemenu',
+            'class_key',
+            'context_key'
         ];
         $this->itemClass = modResource::class;
         $c = $this->modx->newQuery($this->itemClass);
@@ -237,21 +245,21 @@ class GetNodes extends Processor
 
         $c = $this->modx->newQuery(modResource::class);
         $c->select($this->modx->getSelectColumns(modResource::class, 'modResource', '', [
-            'id'
-        , 'template'
-        , 'pagetitle'
-        , 'longtitle'
-        , 'alias'
-        , 'description'
-        , 'parent'
-        , 'published'
-        , 'deleted'
-        , 'isfolder'
-        , 'menuindex'
-        , 'menutitle'
-        , 'hidemenu'
-        , 'class_key'
-        , 'context_key'
+            'id',
+            'template',
+            'pagetitle',
+            'longtitle',
+            'alias',
+            'description',
+            'parent',
+            'published',
+            'deleted',
+            'isfolder',
+            'menuindex',
+            'menutitle',
+            'hidemenu',
+            'class_key',
+            'context_key'
         ]));
         $c->where([
             'pagetitle:LIKE' => '%' . $s . '%',
@@ -428,7 +436,7 @@ class GetNodes extends Processor
         if (!empty($this->permissions['unpublish_document'])) $class[] = $this->permissions['unpublish_document'];
 
         $active = false;
-        if ($this->getProperty('currentResource') == $resource->id && $this->getProperty('currentAction') == 'resource/update') {
+        if ($this->getProperty('currentResource') == $resource->id && $this->getProperty('currentAction') === 'resource/update') {
             $active = true;
         }
 
@@ -448,10 +456,10 @@ class GetNodes extends Processor
         try {
             $reflectionClass = new ReflectionClass($resource->get('class_key'));
             $classKey = strtolower($reflectionClass->getShortName());
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             $classKey = strtolower($resource->get('class_key'));
         }
-        if (substr($classKey, 0, 3) == 'mod') {
+        if (substr($classKey, 0, 3) === 'mod') {
             $classKey = substr($classKey, 3);
         }
 
@@ -463,12 +471,15 @@ class GetNodes extends Processor
         }
 
         $template = $resource->getOne('Template');
+        $tplIcon = '';
         if ($template && $template->get('icon')) {
+            $tplIcon = $template->get('icon');
             $iconCls = [$template->get('icon')];
         }
 
+        $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
         if (empty($iconCls)) {
-            $iconCls[] = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
+            $iconCls[] = $classKeyIcon;
         }
 
         switch ($classKey) {
@@ -491,11 +502,9 @@ class GetNodes extends Processor
 
         // Modifiers to indicate resource _state_
         if ($hasChildren || $resource->isfolder) {
-            if (empty($tplIcon) && $classKeyIcon == 'tree-resource') {
-                $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder', null, 'tree-folder');
+            if (empty($tplIcon) && $classKeyIcon === 'tree-resource') {
+                $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder', null, 'parent-resource');
             }
-
-            $iconCls[] = 'parent-resource';
         }
 
         // Add icon class - and additional description to the tooltip - if the resource is locked.
