@@ -539,7 +539,7 @@ template {
     font-size: 10em;
 }
 
-.fa-fw, #modx-abtn-menu-list .x-menu-item .x-menu-item-text .icon {
+.fa-fw {
     text-align: center;
     width: 1.25em;
 }
@@ -29903,29 +29903,16 @@ html[dir=rtl] .x-hide-offsets {
     font-size: 12px;
 }
 
-#modx-abtn-menu-list .x-menu-item {
-    padding: 10px 20px;
-}
-#modx-abtn-menu-list .x-menu-item .x-menu-item-text {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-}
-#modx-abtn-menu-list .x-menu-item .x-menu-item-text .icon {
-    text-align: center;
-    margin: 0 10px;
-}
-#modx-abtn-menu-list #modx-abtn-delete {
+#modx-abtn-delete {
     color: #CF1124;
 }
-#modx-abtn-menu-list #modx-abtn-delete:hover {
-    color: #CF1124;
-}
-#modx-abtn-menu-list #modx-abtn-undelete {
+
+#modx-abtn-undelete {
     color: #6CB24A;
 }
-#modx-abtn-menu-list #modx-abtn-undelete:hover {
-    color: #6CB24A;
+
+#modx-abtn-help {
+    color: #234368;
 }
 
 #modx-resource-tabs .x-tab-panel-bwrap {
