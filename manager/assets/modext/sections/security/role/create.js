@@ -1,7 +1,7 @@
 Ext.onReady(function() {
-	MODx.load({
-	   xtype: 'page-role-create'
-	});	
+    MODx.load({
+       xtype: 'page-role-create'
+    });	
 });
 
 /**
@@ -11,10 +11,10 @@ Ext.onReady(function() {
  * @xtype page-role-create
  */
 MODx.page.CreateRole = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-		form: 'mutate_role'
-		,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        form: 'mutate_role'
+        ,actions: {
             'new': 'Security/Role/Create'
             ,edit: 'Security/Role/Update'
             ,cancel: 'security/role'
@@ -35,7 +35,7 @@ MODx.page.CreateRole = function(config) {
             ,id: 'modx-abtn-cancel'
             ,params: {a:'security/role'}
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
@@ -43,8 +43,8 @@ MODx.page.CreateRole = function(config) {
             {contentEl: 'tab_information', title: _('settings_general')}
             ,{contentEl: 'tab_permissions', title: _('permissions')}
         ]
-	});
-	MODx.page.CreateRole.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreateRole.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateRole,MODx.Component);
 Ext.reg('page-role-create',MODx.page.CreateRole);

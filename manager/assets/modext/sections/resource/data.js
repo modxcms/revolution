@@ -41,52 +41,31 @@ Ext.extend(MODx.page.ResourceData,MODx.Component,{
     }
 
     ,getButtons: function(config) {
-        var menu = [{
-            text: _('cancel') + ' <i class="icon icon-times"></i>'
+        var buttons = [];
+
+        if (config.canEdit == 1) {
+            buttons.push({
+                text: _('edit')
+                ,id: 'modx-abtn-edit'
+                ,cls: 'primary-button'
+                ,hidden: !config.canEdit
+                ,handler: this.editResource
+                ,scope: this
+            });
+        }
+
+        buttons.push({
+            text: _('cancel')
             ,id: 'modx-abtn-cancel'
             ,handler: this.cancel
             ,scope: this
         },{
-            text: _('help_ex') + ' <i class="icon icon-question-circle"></i>'
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
-        }];
-        var edit = {
-            text: _('edit') + ' <i class="icon icon-edit"></i>'
-            ,id: 'modx-abtn-edit'
-            ,cls: 'primary-button'
-            ,hidden: !config.canEdit
-            ,handler: this.editResource
-            ,scope: this
-        };
+        });
 
-        var btns;
-        if (config.canEdit == 1) {
-            btns = [{
-                text: '<i class="icon icon-ellipsis-h"></i>'
-                ,id: 'modx-abtn-menu'
-                ,xtype: 'splitbutton'
-                ,split: false
-                ,arrowSelector: false
-                ,handler: function(btn, e) {
-                    if (!btn.menu.isVisible() && !btn.ignoreNextClick) {
-                        btn.showMenu();
-                    }
-                    btn.fireEvent("arrowclick", btn, e);
-                    if (btn.arrowHandler) {
-                        btn.arrowHandler.call(btn.scope || btn, btn, e);
-                    }
-                }
-                ,menu: {
-                    id: 'modx-abtn-menu-list'
-                    ,items: menu
-                }
-            }, edit];
-        } else {
-            btns = menu;
-        }
-
-        return btns;
+        return buttons;
     }
 
 });

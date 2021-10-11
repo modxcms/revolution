@@ -14,7 +14,7 @@ MODx.page.ContentType = function(config) {
             text: _('cancel')
             ,id: 'modx-abtn-cancel'
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]

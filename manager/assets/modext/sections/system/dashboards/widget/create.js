@@ -1,6 +1,6 @@
 MODx.page.CreateDashboardWidget = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
+    config = config || {};
+    Ext.applyIf(config,{
         formpanel: 'modx-panel-dashboard-widget'
         ,actions: {
             'new': 'System/Dashboard/Widget/Create'
@@ -25,16 +25,16 @@ MODx.page.CreateDashboardWidget = function(config) {
                 MODx.loadPage('system/dashboards');
             }
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
-		,components: [{
+        ,components: [{
             xtype: 'modx-panel-dashboard-widget'
             ,record: config.record || {}
         }]
-	});
-	MODx.page.CreateDashboardWidget.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreateDashboardWidget.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateDashboardWidget,MODx.Component);
 Ext.reg('modx-page-dashboard-widget-create',MODx.page.CreateDashboardWidget);
