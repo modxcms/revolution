@@ -1,7 +1,7 @@
 <?php
 
 $_lang['language_ar'] = 'Arabisch';
-$_lang['language_be'] = 'Weißrussisch';
+$_lang['language_be'] = 'Belarussisch';
 $_lang['language_bg'] = 'Bulgarisch';
 $_lang['language_cs'] = 'Tschechisch';
 $_lang['language_da'] = 'Dänisch';

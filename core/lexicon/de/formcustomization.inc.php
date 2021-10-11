@@ -9,7 +9,7 @@
 $_lang['action'] = 'Aktion';
 $_lang['action_desc'] = 'Die Aktion, auf die diese Regel angewendet wird.';
 $_lang['activate'] = 'Aktivieren';
-$_lang['constraint'] = 'Einschränken auf';
+$_lang['constraint'] = 'Einschränkung';
 $_lang['constraint_class'] = 'Klasse für Einschränkung';
 $_lang['constraint_class_desc'] = 'Optional. Regel-Einschränkungen erlauben es, Regeln nur dann anzuwenden, wenn ein bestimmtes Feld einen bestimmten Wert hat. Angenommen, eine Regel für resource/update soll nur auf Ressourcen mit der Template-ID 4 angewendet werden. Dann sollte als Klasse "modResource", als Feld "template" und als Wert "4" eingegeben werden. Wenn hier Klasse, Feld und Wert der Einschränkung angegeben werden, wird die Regel entsprechend eingeschränkt.';
 $_lang['constraint_desc'] = 'Optional. Der Wert der Einschränkungs-Bedingung, der mit dem Wert des Feldes verglichen wird.';

@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['categories'] = 'Kategorien';
-$_lang['category_confirm_delete'] = 'Sind Sie sicher, dass Sie diese Kategorie löschen möchten? Alle Elemente in dieser Kategorie werden als unkategorisiert eingeordnet.';
+$_lang['category_confirm_delete'] = 'Sind Sie sicher, dass Sie diese Kategorie löschen möchten? Alle Elemente in dieser Kategorie werden als nicht kategorisiert eingeordnet.';
 $_lang['category_create'] = 'Kategorie erstellen';
 $_lang['category_err_ae'] = 'Es existiert bereits eine Kategorie mit diesem Namen. Bitte geben Sie einen anderen Namen an.';
 $_lang['category_err_create'] = 'Beim Versuch, die Kategorie anzulegen, ist ein Fehler aufgetreten.';
