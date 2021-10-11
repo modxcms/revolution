@@ -408,6 +408,20 @@
   }
 }
 
+/* Back out create button visibility for resource groups panel */
+#modx-panel-resource-groups {
+    #modx-gr-tree-resource {
+        .modx-tree-node-tool-ct {
+            display: none;
+        }
+        .x-tree-node-el {
+            .modx-tree-node-btn-create {
+                display: none;
+            }
+        }
+    }
+}
+
 .x-tree-root-ct {
   border-radius: 0;
   overflow: hidden;
@@ -910,4 +924,3 @@
 .x-tree-drop-ok-between .x-dd-drop-icon {
   background-image: url($imgPath + 'modx-theme/tree/drop-between.gif');
 }
-
