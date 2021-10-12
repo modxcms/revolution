@@ -130,7 +130,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
     ,addContainer: function(btn,e,node) {
         var r = {};
         if (node) { r.parent = node.id; }
-        
+
         if (!this.windows.addContainer) {
             this.windows.addContainer = MODx.load({
                 xtype: 'modx-orm-window-container-add'
@@ -141,9 +141,9 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                         if (typeof(r.name) !== 'undefined') {
                             r.name = r.name.replace(/"/g, '');
                         }
-                        
+
                         var n = new Ext.tree.TreeNode({
-                            text: r.name
+                            text: Ext.util.Format.htmlEncode(r.name)
                             ,id: r.name
                             ,name: r.name
                             ,expanded: true
@@ -166,7 +166,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
     ,renameContainer: function(btn,e,node) {
         var r = {};
         if (node) { r.parent = node.id; }
-        
+
         if (!this.windows.renameContainer) {
             this.windows.renameContainer = MODx.load({
                 xtype: 'modx-orm-window-container-rename'
@@ -176,7 +176,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                         if (typeof(r.name) !== 'undefined') {
                             r.name = r.name.replace(/"/g, '');
                         }
-                        
+
                         var nd = this.getSelectedNode();
                         nd.setId(r.name);
                         nd.setText(r.name);
@@ -202,9 +202,9 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                         if (typeof(r.name) !== 'undefined') {
                             r.name = r.name.replace(/"/g, '');
                         }
-                        
+
                         var n = new Ext.tree.TreeNode({
-                            text: r.name+' - <i>'+r.value+'</i>'
+                            text: Ext.util.Format.htmlEncode(r.name) + ' - <i>' + Ext.util.Format.htmlEncode(r.value) + '</i>'
                             ,id: r.id
                             ,name: r.name
                             ,leaf: true

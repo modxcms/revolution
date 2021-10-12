@@ -97,7 +97,7 @@ MODx.tree.Tree = function (config) {
                 hide: function () {
                     var node = this.activeNode;
                     if (node) {
-                        node.isSelected() || node.ui.removeClass('x-tree-selected');
+                        node.isSelected() || (node.ui && node.ui.removeClass('x-tree-selected'));
                     }
                 }
             }
@@ -267,11 +267,10 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
                 params[nv[0]] = nv[1] || true;
             }
         }
-        var activeFile = params.file;
+        var activeFile = params.file ? decodeURIComponent(params.file) : '' ;
 
         Ext.each(node.childNodes,function (node) {
             if (node.attributes.selected || node.id == activeFile) {
-                //node.select();
                 node.ui.addClass('x-tree-selected');
             }
 
@@ -547,7 +546,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,_handleClick: function (n,e) {
         e.stopEvent();
         e.preventDefault();
-
+        
         if (this.disableHref) {
             return true;
         }
@@ -721,7 +720,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      */
     ,refreshParentNode: function () {
         if (this.cm.activeNode) {
-            this.getLoader().load(this.cm.activeNode.parentNode,this.cm.activeNode.expand);
+            this.getLoader().load(this.cm.activeNode.parentNode || this.cm.activeNode, this.cm.activeNode.expand);
         } else {
             this.refresh();
         }
