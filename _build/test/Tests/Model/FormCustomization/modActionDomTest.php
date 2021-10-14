@@ -67,7 +67,7 @@ class modActionDomTest extends MODxTestCase {
             array('MODx.hideRegion("modx-resource-tabs", "modx-resource-settings");',
                 'tabVisible','modx-resource-settings',0,'modx-resource-tabs'),
 
-            array('MODx.addTab("modx-resource-tabs",{id:"tab-other", title:"Other Tab"});',
+            array('MODx.addTab("modx-resource-tabs", {id: "tab-other", title: "Other Tab"});',
                 'tabNew','tab-other','Other Tab','modx-resource-tabs'),
 
             array('MODx.moveTV("tv15", "modx-resource-settings");',
