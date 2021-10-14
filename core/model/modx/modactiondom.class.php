@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -24,7 +25,9 @@
  * @see modFormCustomizationSet
  * @package modx
  */
-class modActionDom extends modAccessibleSimpleObject {
+
+class modActionDom extends modAccessibleSimpleObject
+{
 
     /**
      * Apply the rule to the current page.
@@ -33,51 +36,45 @@ class modActionDom extends modAccessibleSimpleObject {
      * @param int|string $objId The PK of the object that the rule is being applied to.
      * @return string The generated code that applies the rule.
      */
-    public function apply($objId = '') {
+    public function apply($objId = '')
+    {
         $rule = '';
-        $encoding = $this->xpdo->getOption('modx_charset',null,'UTF-8');
+        $encoding = $this->xpdo->getOption('modx_charset', null, 'UTF-8');
 
-        /* now switch by types of rules */
-        switch ($this->get('rule')) {
+        $boolRules = ['fieldVisible', 'tabVisible'];
+        $ruleType = $this->get('rule');
+
+        $container = json_encode($this->get('container'));
+        $itemId = json_encode($this->get('name'));
+        $value = in_array($ruleType, $boolRules)
+            ? (int)$this->get('value')
+            : json_encode(htmlspecialchars($this->get('value'), ENT_COMPAT, $encoding))
+            ;
+
+        switch ($ruleType) {
             case 'fieldVisible':
-                if (!$this->get('value')) {
-                    $fields = explode(',',$this->get('name'));
-                    $rule = 'MODx.hideField("'.$this->get('container').'",'.$this->xpdo->toJSON($fields).');';
-                }
+                $rule = $value === 0 ? "MODx.hideField({$container}, {$itemId});" : '' ;
                 break;
             case 'fieldLabel':
             case 'fieldTitle':
-                $fields = explode(',',$this->get('name'));
-                $values = explode(',',$this->get('value'));
-                foreach ($values as &$value) {
-                    $value = htmlspecialchars($value,ENT_COMPAT,$encoding);
-                }
-                $rule = 'MODx.renameLabel("'.$this->get('container').'",'.$this->xpdo->toJSON($fields).','.$this->xpdo->toJSON($values).');';
+                $rule = "MODx.renameLabel({$container}, {$itemId}, {$value});";
                 break;
             case 'panelTitle':
             case 'tabTitle':
             case 'tabLabel':
-                $rule = 'MODx.renameTab("'.$this->get('name').'","'.htmlspecialchars($this->get('value'),ENT_COMPAT,$encoding).'");';
+                $rule = "MODx.renameTab({$itemId}, {$value});";
                 break;
             case 'tabVisible':
-                if (!$this->get('value')) {
-                    $tabs = explode(',',$this->get('name'));
-                    $rule = '';
-                    foreach ($tabs as $tab) {
-                        $tab = trim($tab);
-                        $rule .= 'MODx.hideRegion("'.$this->get('container').'","'.$tab.'");';
-                    }
-                }
+                $rule = $value === 0 ? "MODx.hideRegion({$container}, {$itemId});" : '' ;
                 break;
             case 'tabNew':
-                $title = $this->get('value');
-                $rule = 'MODx.addTab("'.$this->get('container').'",{title:"'.htmlspecialchars($title,ENT_COMPAT,$encoding).'",id:"'.$this->get('name').'"});';
+                $rule = "MODx.addTab({$container}, {id: {$itemId}, title: {$value}});";
                 break;
             case 'tvMove':
-                $tvs = explode(',',$this->get('name'));
-                $rule = 'MODx.moveTV('.$this->xpdo->toJSON($tvs).',"'.$this->get('value').'");';
+                $rule = "MODx.moveTV({$itemId}, {$value});";
                 break;
-            default: break;
+            default:
+                break;
         }
 
         return $rule;

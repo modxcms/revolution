@@ -265,15 +265,22 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         return fld;
     }
 
-    ,hideField: function(flds) {
-        if (!Ext.isArray(flds)) { flds = flds[flds]; }
-        var f;
-        for (var i=0;i<flds.length;i++) {
-            f = this.getField(flds[i]);
-            if (!f) return;
-            f.hide();
-            var d = f.getEl().up('.x-form-item');
-            if (d) { d.setDisplayed(false); }
+    /**
+     * Called exclusively from MODx.hideField (modx.js) for form customization
+     *
+     * @param {String} fieldId - Text id or name of field whose label is being hidden
+     * @return {void}
+     */
+    ,hideField: function(fieldId) {
+        var field = this.getField(fieldId),
+            label
+        ;
+        if (!field) {
+            return;
+        }
+        field.hide();
+        if (label = field.getEl().up('.x-form-item')) {
+            label.setDisplayed(false);
         }
     }
 
@@ -290,20 +297,28 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
     }
 
-    ,setLabel: function(flds,vals,bp){
-        if (!Ext.isArray(flds)) { flds = flds[flds]; }
-        if (!Ext.isArray(vals)) { vals = valss[vals]; }
-        var f,v;
-        for (var i=0;i<flds.length;i++) {
-            f = this.getField(flds[i]);
-
-            if (!f) return;
-            v = String.format('{0}',vals[i]);
-            if (f.xtype == 'checkbox' || f.xtype == 'xcheckbox' || f.xtype == 'radio') {
-                f.setBoxLabel(v);
-            } else if (f.label) {
-                f.label.update(v);
-            }
+    /**
+     * Called exclusively from MODx.renameLabel (modx.js) for form customization
+     *
+     * @param {String} fieldId - Text id or name of field whose label is being renamed
+     * @param {String} newLabel - The replacement label text
+     * @return {void}
+     */
+    ,setLabel: function(fieldId, newLabel){
+        var field = this.getField(fieldId);
+        if (!field) {
+            return;
+        }
+        switch (field.xtype) {
+            case 'checkbox':
+            case 'xcheckbox':
+            case 'radio':
+                field.setBoxLabel(newLabel);
+                break;
+            default:
+                if (field.label) {
+                    field.label.update(newLabel);
+                }
         }
     }
 
