@@ -55,10 +55,10 @@ class modActionDomTest extends MODxTestCase {
      */
     public function providerApply() {
         return array(
-            array('MODx.hideField("modx-panel-resource",["description"]);',
+            array('MODx.hideField("modx-panel-resource","description");',
                 'fieldVisible','description',0,'modx-panel-resource'),
 
-            array('MODx.renameLabel("modx-panel-resource",["published"],["Active"]);',
+            array('MODx.renameLabel("modx-panel-resource","published","Active");',
                 'fieldTitle','published','Active','modx-panel-resource'),
 
             array('MODx.renameTab("modx-resource-settings","Other Settings");',
@@ -70,7 +70,7 @@ class modActionDomTest extends MODxTestCase {
             array('MODx.addTab("modx-resource-tabs",{title:"Other Tab",id:"tab-other"});',
                 'tabNew','tab-other','Other Tab','modx-resource-tabs'),
 
-            array('MODx.moveTV(["tv15"],"modx-resource-settings");',
+            array('MODx.moveTV("tv15","modx-resource-settings");',
                 'tvMove','tv15','modx-resource-settings','modx-panel-resource'),
         );
     }
