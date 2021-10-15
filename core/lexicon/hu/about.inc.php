@@ -8,7 +8,7 @@
  */
 $_lang['help_page_title'] = 'Súgó és támogatás';
 $_lang['help_main_head'] = 'It van Önnek a MODX';
-$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/resources/free-support-options">modx.com/resources/free-support-options</a> or call +1 (469) 777-6639';
+$_lang['help_main_subhead'] = 'Lásd alább, ha segítségre van szüksége a MODX projektjéhez<br>További részletek itt: <a href="https://modx.com/resources/free-support-options">modx.com/resources/free-support-options</a>, vagy hívja a +1 (469) 777-6639 számot';
 $_lang['forums'] = 'Fórum';
 $_lang['forums_title'] = 'MODX közösségi fórumok';
 $_lang['forums_description'] = 'Ingyenes segítség a Közösségtől';
@@ -33,5 +33,5 @@ $_lang['social_follows'] = 'Az alábbi csatornákon <b>követheti a MODX-et</b>.
 $_lang['follow'] = 'MODX követése';
 $_lang['like'] = 'MODX lájkolása';
 $_lang['circle'] = 'Körözze a MODX-et';
-$_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/solutions/services" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
-$_lang['help_credit'] = 'MODX is free open source software licensed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">GPL version 2.0</a> or later. Copyright 2005-[[+current_year]] by MODX, LLC. “MODX” is a registered trademark. Do the right thing—please keep this credit and the other information on this page intact.';
+$_lang['help_about'] = 'A jelen MODX® programcsomag nagyszerű felhasználók, támogatók és fejlesztők közösségével való együttműködés eredménye. A MODX mögött álló csapat 2004 óta tartja fenn és irányítja ezt, a folyamatos munkát fizetős támogatás és megbízásos fejlesztéseken keresztül megalapozva. Vásárolhat <a href="https://modx.com/solutions/services" class="supportTicket">a forrástól</a> egy óra sürgősségi támogatást (felhasználható két óra nem elsőbbségi támogatásra is). Vagy <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry">írjon nekünk</a>, ha más általános kérdése van a MODX-ről.';
+$_lang['help_credit'] = 'A MODX ingyenes nyílt forrású szoftver a <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">GPL 2.0</a> vagy későbbi változata alapján engedélyezve. Copyright 2005-[[+current_year]] a MODX LLC részére. A "MODX" bejegyzett védjegy. Cselekedjen helyesen - kérjük, ne változtassa meg a hitelesítő és egyéb információkat ezen az oldalon.';
