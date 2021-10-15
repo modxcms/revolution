@@ -50,7 +50,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         ,baseParams: {
             action: 'Security/Access/Policy/Template/GetList'
         }
-        ,fields: ['id','name','description','description_trans','template_group','template_group_name','total_permissions','cls']
+        ,fields: ['id','name','description','description_trans','template_group','template_group_name','total_permissions','policy_count','cls']
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/Access/Policy/Template/UpdateFromGrid'
@@ -80,6 +80,12 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             header: _('template_group')
             ,dataIndex: 'template_group_name'
             ,width: 375
+            ,sortable: true
+        },{
+            header: _('policy_count')
+            ,dataIndex: 'policy_count'
+            ,width: 100
+            ,editable: false
             ,sortable: true
         },{
             header: _('permissions')
@@ -152,7 +158,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
                 ,handler: this.removeSelected
             });
         } else {
-            if (p.indexOf('pedit') != -1) {
+            if (p.indexOf('pedit') !== -1) {
                 m.push({
                     text: _('edit')
                     ,handler: this.editPolicyTemplate
@@ -168,11 +174,11 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
                 ,handler: this.exportPolicyTemplate
             });
 
-            if (p.indexOf('premove') != -1) {
+            if (p.indexOf('premove') !== -1) {
                 if (m.length > 0) m.push('-');
                 m.push({
-                    text: _('delete')
-                    ,handler: this.confirm.createDelegate(this,["Security/Access/Policy/Template/Remove","policy_template_remove_confirm"])
+                    text: _('delete'),
+                    handler: this.removePolicyTemplate
                 });
             }
         }
@@ -242,9 +248,20 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
 
+        var store = this.getStore();
+        var policiesCount = 0;
+        cs.split(',').forEach(function(item){
+            const record = store.getById(item);
+
+            if (record) {
+                policiesCount += parseInt(record.data.policy_count);
+            }
+
+        })
+
         MODx.msg.confirm({
             title: _('policy_template_remove_multiple')
-            ,text: _('policy_template_remove_multiple_confirm')
+            ,text: policiesCount ? _('policy_template_remove_multiple_confirm_in_use', {count: policiesCount}) : _('policy_template_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'Security/Access/Policy/Template/RemoveMultiple'
@@ -258,6 +275,26 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
             }
         });
         return true;
+    }
+
+    ,removePolicyTemplate: function() {
+        if (!this.menu.record) return;
+
+        MODx.msg.confirm({
+            title: _('warning'),
+            text: parseInt(this.menu.record.policy_count) ? _('policy_template_remove_confirm_in_use', {count: this.menu.record.policy_count}) : _('policy_template_remove_confirm'),
+            url: this.config.url,
+            params: {
+                action: 'Security/Access/Policy/Template/Remove',
+                id: this.menu.record.id
+            },
+            listeners: {
+                success: {
+                    fn: this.refresh,
+                    scope:this
+                }
+            }
+        });
     }
 
     ,search: function(tf,newValue,oldValue) {
