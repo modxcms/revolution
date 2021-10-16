@@ -60,6 +60,24 @@ Ext.extend(MODx.LockMask,Ext.LoadMask,{
 });
 Ext.reg('modx-lockmask',MODx.LockMask);
 
+/**
+ * Adds a new config parameter to allow preservation of trailing zeros in decimal numbers
+ */
+Ext.override(Ext.form.NumberField, {
+    strictDecimalPrecision: false,
+    fixPrecision : function(value){
+        var nan = isNaN(value);
+        if(!this.allowDecimals || this.decimalPrecision == -1 || nan || !value){
+           return nan ? '' : value;
+        }
+        return this.allowDecimals && this.strictDecimalPrecision
+            ? parseFloat(value).toFixed(this.decimalPrecision)
+            : parseFloat(parseFloat(value).toFixed(this.decimalPrecision))
+            ;
+    }
+});
+
+
 /** add clearDirty to basicform */
 Ext.override(Ext.form.BasicForm,{
     clearDirty : function(nodeToRecurse){

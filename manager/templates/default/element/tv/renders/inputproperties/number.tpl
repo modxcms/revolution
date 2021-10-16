@@ -79,6 +79,20 @@ MODx.load({
         ,html: _('decimalprecision_desc')
         ,cls: 'desc-under'
     },{
+        xtype: 'combo-boolean'
+        ,fieldLabel: _('number_strict_decimalprecision')
+        ,name: 'inopt_strictDecimalPrecision'
+        ,hiddenName: 'inopt_strictDecimalPrecision'
+        ,id: 'inopt_strictDecimalPrecision{/literal}{$tv|default}{literal}'
+        ,width: 200
+        ,value: (params['strictDecimalPrecision']) ? !(params['strictDecimalPrecision'] === 0 || params['strictDecimalPrecision'] === 'false') : false
+        ,listeners: oc
+    },{
+        xtype: MODx.expandHelp ? 'label' : 'hidden'
+        ,forId: 'inopt_strictDecimalPrecision{/literal}{$tv|default}{literal}'
+        ,html: _('number_strict_decimalprecision_desc')
+        ,cls: 'desc-under'
+    },{
         xtype: 'textfield'
         ,fieldLabel: _('number_decimalseparator')
         ,name: 'inopt_decimalSeparator'
