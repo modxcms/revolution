@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <base href="{$base_url}">
-    
+
     <link rel="shortcut icon" href="favicon.ico" />
     <link href="assets/css/installer.css" type="text/css" rel="stylesheet" />
 
@@ -20,9 +20,9 @@
     <script src="assets/js/modx.setup.js"></script>
     <script>
         window.onload = function () {
-            let url_string = window.location.href,
-                url = new URL(url_string),
-                action = url.searchParams.get('action');
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var action = url.searchParams.get('action');
 
             switch (action) {
                 case 'welcome':
