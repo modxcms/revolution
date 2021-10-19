@@ -109,7 +109,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                         });
                         this.clearDirty();
                         this.fireEvent('setup',this.config);
-                        
+
                         //get our Active input value and keep focus
                         var lastActiveEle = Ext.state.Manager.get('curFocus');
                         if (lastActiveEle && lastActiveEle != '') {
@@ -132,6 +132,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             if (fld) { fld.focus(false,200); }
         }
     }
+
     ,findFirstTextField: function(i) {
         i = i || 0;
         var fld = this.getForm().items.itemAt(i);
@@ -348,6 +349,54 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
 
         return false;
+    }
+
+    /**
+     * @property {Function} insertTagCopyUtility - Updates placeholder tag in element name's help
+     * field to the current element name and attaches a listener to copy the tag when clicked on
+     *
+     * @param {Object} cmp - The help field's Ext.Component object
+     * @param {String} elType - The MODX element type (i.e., tv, chunk, or snippet)
+     */
+    ,insertTagCopyUtility: function(cmp, elType) {
+
+        const helpTag = cmp.getEl().child('.example-replace-name'),
+            elTag = cmp.getEl().child('.copy-this')
+            ;
+        let nameVal = cmp.previousSibling().getValue(),
+            tagText
+            ;
+
+        if (nameVal.length > 0) {
+            helpTag.update(nameVal);
+            tagText = elTag.dom.innerText;
+        }
+
+        helpTag.on({
+            click: function() {
+                nameVal = cmp.previousSibling().getValue();
+                if (nameVal.length > 0) {
+                    tagText = elTag.dom.innerText;
+                    const tmp = document.createElement('textarea');
+                    tmp.value = tagText;
+                    document.body.appendChild(tmp);
+                    tmp.select();
+                    if (document.execCommand('copy')) {
+                        const feedback = document.createElement('span');
+                        feedback.className = 'element-panel feedback item-copied';
+                        feedback.textContent = _(elType+'_tag_copied');
+                        elTag.insertSibling(feedback, 'after');
+                        setTimeout(function(){
+                            feedback.style.opacity = 0;
+                            setTimeout(function(){
+                                feedback.remove();
+                            }, 1200);
+                        }, 10);
+                    }
+                    tmp.remove();
+                }
+            }
+        });
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
@@ -578,15 +627,15 @@ Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
     ,getData: function() {
         return this.data;
     }
-    
+
 	,reset: function(msg){
 		if(typeof(this.resetText) == "undefined"){
 			this.resetText = this.getResetText(this.root);
-		}	
+		}
 		this.data = { text : msg ,trail : [this.resetText] };
 		this._updatePanel(this.data);
-	}	
-	
+	}
+
 	,onClick: function(e){
 		var target = e.getTarget();
 
