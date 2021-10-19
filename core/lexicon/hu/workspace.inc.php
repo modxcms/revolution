@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Változások naplója';
 $_lang['changelog_desc'] = 'Kérjük, nézze át a változások leírását ehhez a változathoz.';
 $_lang['continue'] = 'Tovább';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
-$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'A cURL telepítése és kiterjesztésként való beállítása szükséges a csomagkezelő használatához. Részletes leírást a cURL kiterjesztésről a <a href="http://php.net/curl" target="_blank">PHP cURL weboldalon</a> talál.';
 $_lang['description'] = 'Leírás';
 $_lang['details'] = 'Részletek';
 $_lang['dir_err_assets'] = 'Az assets/ mappát nem lehetett létrehozni a [[+path]] helyen.<br />Létre kell hoznia és írhatóvá kell tennie, ha használni akarja a csomagkezelést vagy a külső összetevőket.';
@@ -177,7 +177,7 @@ $_lang['provider_err_no_client'] = '<p><b>You do not have a viable REST client f
 $_lang['provider_err_nfs'] = 'Szolgáltató [[+id]] azonosítóval nem található';
 $_lang['provider_err_no_response'] = 'Hiba a kiszolgálótól érkező válaszban: [[+provider]]';
 $_lang['provider_err_not_verified'] = 'Ez a szolgáltató nem ellenőrizhető, ezért nem használható MODX szolgáltatóként. Kérjük, ellenőrizze a szolgáltatás URL-jét, és próbálja újra.';
-$_lang['provider_err_not_selected'] = 'You must select a provider from the list above to continue.';
+$_lang['provider_err_not_selected'] = 'A továbblépéshez választania kell egy szolgáltatót a fenti felsorolásból.';
 $_lang['provider_err_ns'] = 'Szolgáltató nincs megadva.';
 $_lang['provider_err_ns_name'] = 'Kérjük, adja meg a szolgáltató nevét.';
 $_lang['provider_err_ns_url'] = 'Kérjük, adjon meg egy érvényes webcímet a szolgáltatóhoz.';
