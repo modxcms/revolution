@@ -5,6 +5,13 @@ use xPDO\xPDO;
 
 class modAccessPolicyTemplateGroup extends \MODX\Revolution\modAccessPolicyTemplateGroup
 {
+    const GROUP_ADMINISTRATOR = 'Administrator';
+    const GROUP_OBJECT = 'Object';
+    const GROUP_RESOURCE = 'Resource';
+    const GROUP_ELEMENT = 'Element';
+    const GROUP_MEDIA_SOURCE = 'MediaSource';
+    const GROUP_NAMESPACE = 'Namespace';
+    const GROUP_CONTEXT = 'Context';
 
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\',

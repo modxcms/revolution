@@ -33,6 +33,7 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
             'output_properties' => NULL,
             'static' => 0,
             'static_file' => '',
+            'preview_file' => '',
         ),
         'fieldMeta' => 
         array (
@@ -155,6 +156,14 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
+                'phptype' => 'string',
+                'null' => false,
+                'default' => '',
+            ),
+            'preview_file' => 
+            array (
+                'dbtype' => 'varchar',
+                'precision' => '191',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
@@ -315,7 +324,7 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
                     'reserved' => 
                     array (
                         'type' => 'preg_match',
-                        'rule' => '/^(?!(id|type|contentType|pagetitle|longtitle|description|alias|alias_visible|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree|properties)$)/',
+                        'rule' => '/^(?!(id|type|pagetitle|longtitle|description|alias|alias_visible|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree|properties)$)/',
                         'message' => 'tv_err_reserved_name',
                     ),
                 ),

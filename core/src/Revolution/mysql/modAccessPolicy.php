@@ -5,6 +5,18 @@ use xPDO\xPDO;
 
 class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
 {
+    const POLICY_RESOURCE = 'Resource';
+    const POLICY_ADMINISTRATOR = 'Administrator';
+    const POLICY_LOAD_ONLY = 'Load Only';
+    const POLICY_LOAD_LIST_VIEW = 'Load, List and View';
+    const POLICY_OBJECT = 'Object';
+    const POLICY_ELEMENT = 'Element';
+    const POLICY_CONTENT_EDITOR = 'Content Editor';
+    const POLICY_MEDIA_SOURCE_ADMIN = 'Media Source Admin';
+    const POLICY_MEDIA_SOURCE_USER = 'Media Source User';
+    const POLICY_DEVELOPER = 'Developer';
+    const POLICY_CONTEXT = 'Context';
+    const POLICY_HIDDEN_NAMESPACE = 'Hidden Namespace';
 
     public static $metaMap = array (
         'package' => 'MODX\\Revolution\\',
