@@ -873,6 +873,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function removeObject($path)
     {
+        if (!$this->checkFiletype($path)) {
+            return false;
+        }
+
         // Ensure file can be read.
         try {
             if (!$this->filesystem->fileExists($path)) {
@@ -1032,6 +1036,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     public function updateObject($path, $content)
     {
         $path = $this->sanitizePath($path);
+
+        if (!$this->checkFiletype($path)) {
+            return false;
+        }
 
         // Ensure file can be read.
         try {
