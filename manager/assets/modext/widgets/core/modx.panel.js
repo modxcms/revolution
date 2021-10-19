@@ -359,13 +359,16 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {String} elType - The MODX element type (i.e., tv, chunk, or snippet)
      */
     ,insertTagCopyUtility: function(cmp, elType) {
-
         const helpTag = cmp.getEl().child('.example-replace-name'),
-            elTag = cmp.getEl().child('.copy-this')
-            ;
+            elTag = cmp.getEl().child('.copy-this');
         let nameVal = cmp.previousSibling().getValue(),
-            tagText
-            ;
+            tagText;
+
+        // If the helptag isn't available, skip here. This may happen when a lexicon is missing or outdated
+        // and doesn't contain the `example-replace-name` class.
+        if (!helpTag) {
+            return;
+        }
 
         if (nameVal.length > 0) {
             helpTag.update(nameVal);
