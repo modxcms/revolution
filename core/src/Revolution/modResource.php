@@ -18,7 +18,6 @@ use xPDO\xPDO;
  *
  * @property int                        $id                    The ID of the Resource
  * @property string                     $type                  The type of the resource; document/reference
- * @property string                     $contentType           The content type string of the Resource, such as text/html
  * @property string                     $pagetitle             The page title of the Resource
  * @property string                     $longtitle             The long title of the Resource
  * @property string                     $description           The description of the Resource
@@ -641,8 +640,6 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      *
      * Additional logic added for the following fields:
      *    -alias: Applies {@link modResource::cleanAlias()}
-     *  -contentType: Calls {@link modResource::addOne()} to sync contentType
-     *  -content_type: Sets the contentType field appropriately
      */
     public function set($k, $v = null, $vType = '')
     {
@@ -650,53 +647,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             case 'alias' :
                 $v = $this->cleanAlias($v);
                 break;
-            case 'contentType' :
-                if ($v !== $this->get('contentType')) {
-                    if ($contentType = $this->xpdo->getObject(modContentType::class, ['mime_type' => $v])) {
-                        if ($contentType->get('mime_type') != $this->get('contentType')) {
-                            $this->addOne($contentType, 'ContentType');
-                        }
-                    }
-                }
-                break;
-            case 'content_type' :
-                if ($v !== $this->get('content_type')) {
-                    /** @var modContentType $contentType */
-                    if ($contentType = $this->xpdo->getObject(modContentType::class, $v)) {
-                        if ($contentType->get('mime_type') != $this->get('contentType')) {
-                            $this->_fields['contentType'] = $contentType->get('mime_type');
-                            $this->_dirty['contentType'] = 'contentType';
-                        }
-                    }
-                }
-                break;
         }
 
         return parent:: set($k, $v, $vType);
-    }
-
-    /**
-     * Adds an object related to this modResource by a foreign key relationship.
-     *
-     * {@inheritdoc}
-     *
-     * Adds legacy support for keeping the existing contentType field in sync
-     * when a modContentType is set using this function.
-     *
-     * @param xPDOObject $obj
-     * @param string     $alias
-     *
-     * @return boolean
-     */
-    public function addOne(& $obj, $alias = '')
-    {
-        $added = parent:: addOne($obj, $alias);
-        if ($obj instanceof modContentType && $alias = 'ContentType') {
-            $this->_fields['contentType'] = $obj->get('mime_type');
-            $this->_dirty['contentType'] = 'contentType';
-        }
-
-        return $added;
     }
 
     /**

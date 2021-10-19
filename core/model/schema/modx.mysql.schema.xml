@@ -821,7 +821,6 @@
 
     <object class="modResource" table="site_content" extends="MODX\Revolution\modAccessibleSimpleObject" inherit="single">
         <field key="type" dbtype="varchar" precision="20" phptype="string" null="false" default="document" />
-        <field key="contentType" dbtype="varchar" precision="50" phptype="string" null="false" default="text/html" />
         <field key="pagetitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="longtitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
@@ -1143,7 +1142,7 @@
         <composite alias="TemplateVarResourceGroups" class="MODX\Revolution\modTemplateVarResourceGroup" local="id" foreign="tmplvarid" cardinality="many" owner="local" />
         <validation>
             <rule field="name" name="invalid" type="preg_match" rule="/^(?!\s)[a-zA-Z0-9\x2d-\x2f\x7f-\xff-_\s]+(?!\s)$/" message="tv_err_invalid_name" />
-            <rule field="name" name="reserved" type="preg_match" rule="/^(?!(id|type|contentType|pagetitle|longtitle|description|alias|alias_visible|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree|properties)$)/" message="tv_err_reserved_name" />
+            <rule field="name" name="reserved" type="preg_match" rule="/^(?!(id|type|pagetitle|longtitle|description|alias|alias_visible|link_attributes|published|pub_date|unpub_date|parent|isfolder|introtext|content|richtext|template|menuindex|searchable|cacheable|createdby|createdon|editedby|editedon|deleted|deletedby|deletedon|publishedon|publishedby|menutitle|donthit|privateweb|privatemgr|content_dispo|hidemenu|class_key|context_key|content_type|uri|uri_override|hide_children_in_tree|show_in_tree|properties)$)/" message="tv_err_reserved_name" />
         </validation>
     </object>
 

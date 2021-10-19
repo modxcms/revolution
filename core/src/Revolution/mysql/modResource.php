@@ -19,7 +19,6 @@ class modResource extends \MODX\Revolution\modResource
         'fields' => 
         array (
             'type' => 'document',
-            'contentType' => 'text/html',
             'pagetitle' => '',
             'longtitle' => '',
             'description' => '',
@@ -71,14 +70,6 @@ class modResource extends \MODX\Revolution\modResource
                 'phptype' => 'string',
                 'null' => false,
                 'default' => 'document',
-            ),
-            'contentType' => 
-            array (
-                'dbtype' => 'varchar',
-                'precision' => '50',
-                'phptype' => 'string',
-                'null' => false,
-                'default' => 'text/html',
             ),
             'pagetitle' => 
             array (
