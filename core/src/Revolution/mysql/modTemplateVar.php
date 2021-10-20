@@ -3,6 +3,7 @@ namespace MODX\Revolution\mysql;
 
 use xPDO\xPDO;
 
+
 class modTemplateVar extends \MODX\Revolution\modTemplateVar
 {
 
@@ -33,7 +34,6 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
             'output_properties' => NULL,
             'static' => 0,
             'static_file' => '',
-            'preview_file' => '',
         ),
         'fieldMeta' => 
         array (
@@ -156,14 +156,6 @@ class modTemplateVar extends \MODX\Revolution\modTemplateVar
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
-                'phptype' => 'string',
-                'null' => false,
-                'default' => '',
-            ),
-            'preview_file' => 
-            array (
-                'dbtype' => 'varchar',
-                'precision' => '191',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',

@@ -3,6 +3,7 @@ namespace MODX\Revolution\Sources\mysql;
 
 use xPDO\xPDO;
 
+
 class modS3MediaSource extends \MODX\Revolution\Sources\modS3MediaSource
 {
 

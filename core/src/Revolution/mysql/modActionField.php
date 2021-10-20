@@ -3,6 +3,7 @@ namespace MODX\Revolution\mysql;
 
 use xPDO\xPDO;
 
+
 class modActionField extends \MODX\Revolution\modActionField
 {
 

@@ -3,6 +3,7 @@ namespace MODX\Revolution\Registry\Db\mysql;
 
 use xPDO\xPDO;
 
+
 class modDbRegisterQueue extends \MODX\Revolution\Registry\Db\modDbRegisterQueue
 {
 

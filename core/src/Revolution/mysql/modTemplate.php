@@ -1,6 +1,7 @@
 <?php
 namespace MODX\Revolution\mysql;
 
+
 class modTemplate extends \MODX\Revolution\modTemplate
 {
 
@@ -26,6 +27,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
             'properties' => NULL,
             'static' => 0,
             'static_file' => '',
+            'preview_file' => '',
         ),
         'fieldMeta' => 
         array (
@@ -116,6 +118,14 @@ class modTemplate extends \MODX\Revolution\modTemplate
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
+                'phptype' => 'string',
+                'null' => false,
+                'default' => '',
+            ),
+            'preview_file' => 
+            array (
+                'dbtype' => 'varchar',
+                'precision' => '191',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
