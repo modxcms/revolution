@@ -7,50 +7,83 @@
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Atributos';
+$_lang['attr_attr_desc'] = 'One or more space-separated attributes to add to this element’s tag (for example, <span class="example-input">rel="external" type="application/pdf"</span>).';
+$_lang['attr_class_desc'] = 'One or more space-separated CSS class names.';
+$_lang['attr_style_desc'] = 'CSS definitions (for example, <span class="example-input">color:#f36f99; text-decoration:none;</span>).';
+$_lang['attr_target_blank'] = 'Blank';
+$_lang['attr_target_parent'] = 'Parent';
+$_lang['attr_target_self'] = 'Self';
+$_lang['attr_target_top'] = 'Top';
+$_lang['attr_target_desc'] = 'Indicates in which window/tab or frame the linked url should open. To target a specific frame, enter its name in place of one of the provided options.';
 $_lang['capitalize'] = 'Capitalizar';
 $_lang['checkbox'] = 'Checkbox';
 $_lang['checkbox_columns'] = 'Columnas';
 $_lang['checkbox_columns_desc'] = 'Número de columnas en que se muestran las casillas de verificación.';
 $_lang['class'] = 'Clase';
+$_lang['classes'] = 'Class(es)';
 $_lang['combo_allowaddnewdata'] = 'Permitir Añadir Nuevos Artículos';
 $_lang['combo_allowaddnewdata_desc'] = 'Cuando se configure como "Sí", se podrán añadir elementos que no existan en la lista. El valor por defecto es "No".';
-$_lang['combo_forceselection'] = 'Forzar la Selección de un elemento de la Lista';
-$_lang['combo_forceselection_desc'] = 'Al usar Autocompletar, si esta configuración está activa, sólo se permitirá seleccionar artículos disponibles en la lista.';
+$_lang['combo_forceselection'] = 'Require Match';
+$_lang['combo_forceselection_desc'] = 'Only save typed option when it matches one already defined in the list.';
 $_lang['combo_forceselection_multi_desc'] = 'Si se establece en Sí, sólo se permiten los elementos que ya están en la lista. Si no, se pueden introducir nuevos valores.';
-$_lang['combo_listempty_text'] = 'Texto de Lista Vacía';
-$_lang['combo_listempty_text_desc'] = 'Si Autocompletar está habilitado y el usuario introduce un valor que no está en la lista muestra este texto.';
+$_lang['combo_listempty_text'] = 'Option Not Found Message';
+$_lang['combo_listempty_text_desc'] = 'Message to display when typed text does not match existing options.';
 $_lang['combo_listheight'] = 'Altura de Lista';
 $_lang['combo_listheight_desc'] = 'The height, in % or px, of the dropdown list itself. Defaults to the height of the combobox.';
 $_lang['combo_listwidth'] = 'Ancho de Lista';
 $_lang['combo_listwidth_desc'] = 'The width, in % or px, of the dropdown list itself. Defaults to the width of the combobox.';
 $_lang['combo_maxheight'] = 'Altura Máxima';
-$_lang['combo_maxheight_desc'] = 'La altura máxima en pixeles de la lista desplegable antes de que las barras de navegación sean mostradas (el valor por defecto es 300).';
+$_lang['combo_maxheight_desc'] = 'The maximum height in pixels of the dropdown list before scrollbars are shown. (Default: 300)';
 $_lang['combo_stackitems'] = 'Apilar elementos Seleccionados';
 $_lang['combo_stackitems_desc'] = 'Si esta configuración está activa, se mostrará un elemento por línea. El valor por defecto es No, lo cual muestra todos los elementos en una línea.';
 $_lang['combo_title'] = 'Encabezado de la Lista';
 $_lang['combo_title_desc'] = 'Si se introduce un texto, se creará una encabezado con dicho texto y se mostrará en la parte superior de la lista desplegable.';
 $_lang['combo_typeahead'] = 'Habilitar Autocompletar';
-$_lang['combo_typeahead_desc'] = 'Si se activa, muestra y selecciona automáticamente lo que falta del texto ya introducido con respecto a un valor existente (Toma en cuenta la demora configurada). Desactivado por defecto.';
-$_lang['combo_typeahead_delay'] = 'Demora para Autocompletar';
-$_lang['combo_typeahead_delay_desc'] = 'El tiempo en milisegundos que se espera desde que se deja de escribir en un campo hasta que se muestra el texto de Autocompletar cuando éste está habilitado. El valor por defecto es 250.';
+$_lang['combo_typeahead_desc'] = 'Populate and autoselect options that match as you type after a configurable delay. (Default: No)';
+$_lang['combo_typeahead_delay'] = 'Delay';
+$_lang['combo_typeahead_delay_desc'] = 'Milliseconds before a matched option is shown. (Default: 250)';
 $_lang['date'] = 'Fecha';
 $_lang['date_format'] = 'Formato de Fecha';
-$_lang['date_use_current'] = 'Si no hay valor, usar la fecha actual';
+$_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/strftime" target="_blank">php’s strftime syntax</a>.
+    <div class="example-list">Common examples include:
+        <ul>
+            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (default format)</li>
+            <li><span class="example-input">[[+example_2a]]</span> ([[+example_2b]])</li>
+            <li><span class="example-input">[[+example_3a]]</span> ([[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> ([[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5a]]</span> ([[+example_5b]])</li>
+            <li><span class="example-input">[[+example_6a]]</span> ([[+example_6b]])</li>
+            <li><span class="example-input">[[+example_7a]]</span> ([[+example_7b]])</li>
+        </ul>
+    </div>
+';
+$_lang['date_use_current'] = 'Use Current Date as Fallback';
+$_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
 $_lang['default'] = 'Predeterminado';
+$_lang['default_date_now'] = 'Today with Current Time';
+$_lang['default_date_today'] = 'Today (midnight)';
+$_lang['default_date_yesterday'] = 'Yesterday (midnight)';
+$_lang['default_date_tomorrow'] = 'Tomorrow (midnight)';
+$_lang['default_date_custom'] = 'Custom (see description below)';
 $_lang['delim'] = 'Separador';
 $_lang['delimiter'] = 'Separador';
+$_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting mutliple chooseable options).';
 $_lang['disabled_dates'] = 'Fechas Deshabilitadas';
-$_lang['disabled_dates_desc'] = 'Una lista separada por comas de "fechas" a deshabilitar, como palabras. Estas palabras serán usadas para construir una expresión regular dinámica así que son muy potentes. Algunos ejemplos:<br />
-- Deshabilitar estas fechas exactas: 2003-03-08,2003-09-16<br />
-- Deshabilitar estos días para cada año: 03-08,09-16<br />
-- Deshabilitar sólo si coincide el principio (útil si estás usando años cortos): ^03-08<br />
-- Deshabilitar cada día de Marzo de 2006: 03-..-2006<br />
-- Deshabilitar cada día de cada Marzo: ^03<br />
-El formato de las fechas introducidas deberá coincidir exactemente con los formatos de la lista. Si se usa un formato de fecha que incluya un ".", éste deberá ser escapado adecuadamente.';
+$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
+    <p>Examples using the default format (“[[+format_default]]”) include:</p>
+    <div class="example-list">
+        <ul>
+            <li><span class="example-input">[[+example_1]]</span> (selects individual dates)</li>
+            <li><span class="example-input">[[+example_2a]]</span> (selects [[+example_2b]] and [[+example_2c]] of every year)</li>
+            <li><span class="example-input">[[+example_3a]]</span> (“^” to match beginning of string; this selects all of [[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> (selects every day in [[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5]]</span> (“$” to match end of string; this selects every day in March of every year)</li>
+        </ul>
+        Note: If your date format uses dot separators they will need to be escaped (e.g., “[[+example_6a]]” should be entered above as “[[+example_6b]]”).
+    </div>
+';
 $_lang['disabled_days'] = 'Días de la semana Deshabilitados';
-$_lang['disabled_days_desc'] = 'Lista separada por comas de los días de la semana a deshabilitar, comenzando por 0 (el valor por defecto es "null"). Algunos ejemplos:<br />
-- Deshabilitar Domingo y Sábado: 0,6<br />
-- Deshabilitar días de la semana: 1,2,3,4,5';
+$_lang['disabled_days_desc'] = '';
 $_lang['dropdown'] = 'Lista Desplegable';
 $_lang['earliest_date'] = 'Primera Fecha';
 $_lang['earliest_date_desc'] = 'La primera fecha que puede ser seleccionada.';
@@ -60,6 +93,8 @@ $_lang['email'] = 'Email';
 $_lang['file'] = 'Archivo';
 $_lang['height'] = 'Altura';
 $_lang['hidden'] = 'Oculto';
+$_lang['hide_time'] = 'Hide Time Option';
+$_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
 $_lang['htmlarea'] = 'Area de HTML';
 $_lang['htmltag'] = 'Etiqueta HTML';
 $_lang['image'] = 'Imagen';
@@ -74,41 +109,67 @@ $_lang['lower_case'] = 'Minúsculas';
 $_lang['max_length'] = 'Longitud Máxima';
 $_lang['min_length'] = 'Longitud Mínima';
 $_lang['regex_text'] = 'Error en la expresión regular';
+$_lang['regex_text_desc'] = 'The message to show if the user enters text that is invalid according to the <abbr title="regular expression">regex</abbr> validator.';
 $_lang['regex'] = 'Validador de Expresión regular';
+$_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
+    <div class="example-list">
+        <ul>
+            <li><span class="example-input">[[+example_1]]</span> (pattern for U.S. zip codes)</li>
+            <li><span class="example-input">[[+example_2]]</span> (allow only letters)</li>
+            <li><span class="example-input">[[+example_3]]</span> (allow all characters except numbers)</li>
+            <li><span class="example-input">[[+example_4]]</span> (must end with the string “-XP”)</li>
+        </ul>
+    </div>
+';
 $_lang['name'] = 'Nombre';
 $_lang['number'] = 'Número';
 $_lang['number_allowdecimals'] = 'Permitir Decimales';
-$_lang['number_decimalprecision'] = 'Precisión Decimal';
-$_lang['number_decimalprecision_desc'] = 'El máximo de dígitos mostrados después del separador decimal (el valor por defecto es 2).';
-$_lang['number_decimalseparator'] = 'Separador Decimal';
-$_lang['number_decimalseparator_desc'] = 'Caracter(es) permitidos como el separador decimal (el valor por defecto es ".")';
+$_lang['number_allownegative'] = 'Allow Negative';
+$_lang['number_decimalprecision'] = 'Precision';
+$_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
+/* See note in number inputproperties config re separators */
+$_lang['number_decimalseparator'] = 'Separator';
+$_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
 $_lang['number_maxvalue'] = 'Valor Máximo';
 $_lang['number_minvalue'] = 'Valor Mínimo';
 $_lang['option'] = 'Botón circular';
 $_lang['parent_resources'] = 'Recursos Padre';
 $_lang['radio_columns'] = 'Columnas';
-$_lang['radio_columns_desc'] = 'El número de columnas que son mostrados los botones de opción.';
+$_lang['radio_columns_desc'] = 'The number of columns the radio buttons are displayed in.';
 $_lang['rawtext'] = 'Texto (obsoleto)';
 $_lang['rawtextarea'] = 'Area de Texto (obsoleto)';
 $_lang['required'] = 'Permitir en Blanco';
-$_lang['required_desc'] = 'Si se configura a "No", MODX no permitirá guardar el Recurso hasta que se introduzca un valor no vacío válido.';
+$_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
 $_lang['resourcelist'] = 'Lista de Recursos';
 $_lang['resourcelist_depth'] = 'Profundidad';
-$_lang['resourcelist_depth_desc'] = 'Los niveles de profundidad que cruzará la consulta para obtener la lista de Recursos. El valor por defecto es 10.';
+$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
+$_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
 $_lang['resourcelist_includeparent'] = 'Incluir Padres';
-$_lang['resourcelist_includeparent_desc'] = 'Si está se configura como "Sí", se incluirán los Recursos nombrados en el campo Padres en la lista.';
+$_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
 $_lang['resourcelist_limitrelatedcontext'] = 'Limitado al Contexto Correspondiente';
-$_lang['resourcelist_limitrelatedcontext_desc'] = 'Si se activa, solo se incluirán los Recursos correspondientes al contexto del Recurso actual.';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Select “Yes” to only include the Resources related to the context of the current Resource.';
 $_lang['resourcelist_limit'] = 'Límite';
-$_lang['resourcelist_limit_desc'] = 'El número máximo de Recursos en la lista. Cero o vacío significa infinito.';
+$_lang['resourcelist_limit_desc'] = 'The maximum number of Resources shown in this TV’s listing. (Default: 0, meaning unlimited)';
+$_lang['resourcelist_listempty_text_desc'] = 'Disabled; selections will always match the list.';
 $_lang['resourcelist_parents'] = 'Padres';
-$_lang['resourcelist_parents_desc'] = 'Una lista de IDs de los hijos para la lista.';
+$_lang['resourcelist_parents_desc'] = 'If specified, this TV’s listing will include only the child resources from this comma-separated set of resource IDs (containers).';
 $_lang['resourcelist_where'] = 'Condiciones WHERE';
-$_lang['resourcelist_where_desc'] = 'Un objeto JSON con las condiciones WHERE para filtrar la consulta que obtiene los Recursos de la lista. (No soporta búsqueda en VdP.)';
+$_lang['resourcelist_where_desc'] = '
+    <p>A JSON object of one or more Resource fields to filter this TV’s listing of Resources.</p>
+    <div class="example-list">Some examples:
+        <ul>
+            <li><span class="example-input">[[+example_1]]</span> (only include Resources with template 4 applied)</li>
+            <li><span class="example-input">[[+example_2]]</span> (include all Resources, except for those named “Home”)</li>
+            <li><span class="example-input">[[+example_3]]</span> (include only Resources whose Resource Type is Weblink or Symlink)</li>
+            <li><span class="example-input">[[+example_4]]</span> (include only Resources that are published and are not containers)</li>
+        </ul>
+    </div>
+    <p>Note: Filtering by TV values is not supported.</p>
+';
 $_lang['richtext'] = 'Texto Formateado';
 $_lang['sentence_case'] = 'Capitalizar Frases';
 $_lang['start_day'] = 'Primer Día de la Semana';
-$_lang['start_day_desc'] = 'Índice del primer día de la semana, empezando por 0 (el valor por defecto es 0, que es el Domingo)';
+$_lang['start_day_desc'] = 'Day displayed as the beginning of the week in this TV’s date picker. (Default: “Sunday”)';
 $_lang['string'] = 'Cadena de Caracteres';
 $_lang['string_format'] = 'Formato de Cadena de Caracteres';
 $_lang['style'] = 'Estilo';
@@ -119,10 +180,71 @@ $_lang['textarea'] = 'Área de texto';
 $_lang['textareamini'] = 'Area de Texto (Mini)';
 $_lang['textbox'] = 'Caja de Texto';
 $_lang['time_increment'] = 'Intervalo de Tiempo entre Valores';
-$_lang['time_increment_desc'] = 'El número de minutos entre cada valor de tiempo de la lista (el valor por defecto es 15).';
-$_lang['hide_time'] = 'Ocultar opción de tiempo para el usuario';
+$_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
 $_lang['title'] = 'Título';
+$_lang['tv_default'] = 'Default Value';
+$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
+$_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
+$_lang['tv_default_date'] = 'Default Date and Time';
+$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
+    <div class="example-list">
+        <ul>
+            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
+            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
+            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
+        </ul>
+        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
+    </div>';
+$_lang['tv_default_email'] = 'Default Email Address';
+$_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
+$_lang['tv_default_file'] = 'Default File';
+$_lang['tv_default_file_desc'] = 'The file path this TV will show if the user does not provide one.';
+$_lang['tv_default_image'] = 'Default Image';
+$_lang['tv_default_image_desc'] = 'The image path this TV will show if the user does not provide one.';
+$_lang['tv_default_option'] = 'Default Option';
+$_lang['tv_default_option_desc'] = 'The option selected for this TV if the user does not choose one. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One)';
+$_lang['tv_default_options'] = 'Default Option(s)';
+$_lang['tv_default_options_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
+$_lang['tv_default_radio_desc'] = $_lang['tv_default_option_desc'];
+$_lang['tv_default_listbox_desc'] = $_lang['tv_default_option_desc'];
+$_lang['tv_default_listbox-multiple_desc'] = $_lang['tv_default_options_desc'];
+$_lang['tv_default_number'] = 'Default Number';
+$_lang['tv_default_number_desc'] = 'The number this TV will show if the user does not provide one.';
+$_lang['tv_default_resource'] = 'Default Resource (ID)';
+$_lang['tv_default_resourcelist_desc'] = 'The resource this TV will show if the user does not choose one.';
+$_lang['tv_default_tag'] = 'Default Tag(s)';
+$_lang['tv_default_tag_desc'] = 'A comma-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Tag One==1||Tag Two==2||Tag Three==3), be sure to enter the value (i.e., “1” for Tag One, or “1,3” for Tag One and Tag Three)';
+$_lang['tv_default_text'] = 'Default Text';
+$_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
+$_lang['tv_default_url'] = 'Default URL';
+$_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
+$_lang['tv_elements'] = 'Input Option Values';
+$_lang['tv_elements_checkbox'] = 'Checkbox Options';
+$_lang['tv_elements_listbox'] = 'Dropdown List Options';
+$_lang['tv_elements_radio'] = 'Radio Button Options';
+$_lang['tv_elements_tag'] = 'Tag Options';
+$_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
+    <div class="example-list">
+        <ul>
+            <li><span class="example-input">Bird||Cat||Dog</span> (shorthand for Bird==Bird||Cat==Cat||Dog==Dog)</li>
+            <li><span class="example-input">White==#ffffff||Black==#000000</span> (where label==value)</li>
+            <li><span class="example-input">[[+example_1]]</span> (builds a list of published Resources whose assigned template id is 1)</li>
+            <li><span class="example-input">[[+example_2]]</span> (builds the same list as the previous example, including a blank option)</li>
+        </ul>
+    </div>
+    ';
+$_lang['tv_elements_checkbox_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
+$_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
+$_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
+$_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
+$_lang['tv_type'] = 'Input Type';
 $_lang['upper_case'] = 'Mayúsculas';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Mostrar Texto';
 $_lang['width'] = 'Ancho';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['tv_default_datetime'] = $_lang['tv_default_date'];
