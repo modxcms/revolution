@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['chunk'] = 'Chunk';
+$_lang['chunk'] = 'टुकड़ा';
 $_lang['chunk_desc_category'] = 'Category के इस Chunk में संबंधित है।';
 $_lang['chunk_desc_description'] = 'इस chunk का एक छोटा वर्णन।';
 $_lang['chunk_desc_name'] = 'इस chunk का नाम है। यह [[$nameOfChunk]] टैग का उपयोग कर उपलब्ध हो जाएगा।';
@@ -33,4 +33,4 @@ $_lang['chunk_new'] = 'नए Chunk';
 $_lang['chunk_properties'] = 'डिफ़ॉल्ट गुण';
 $_lang['chunk_title'] = 'बनाएँ/संपादित करें chunk';
 $_lang['chunk_untitled'] = 'अनामांकित chunk';
-$_lang['chunks'] = 'Chunks';
+$_lang['chunks'] = 'टुकड़े';
