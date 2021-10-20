@@ -6,15 +6,15 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['directory'] = 'Directory';
+$_lang['directory'] = 'निर्देशिका';
 $_lang['file_create'] = 'फ़ाइल बनाएँ';
 $_lang['file_deleted'] = 'Success';
 $_lang['file_delete_file'] = 'फाइल हटाएं?';
 $_lang['file_delete_folder'] = 'फ़ोल्डर हटाएँ';
 $_lang['file_download'] = 'फ़ाइल डाउनलोड करें';
 $_lang['file_download_file'] = 'फ़ाइल डाउनलोड करें';
-$_lang['file_download_unzip'] = 'Unzip File';
-$_lang['file_copy_path'] = 'Copy File Path';
+$_lang['file_download_unzip'] = 'फाइल को अनजिप करे';
+$_lang['file_copy_path'] = 'फाइल पथ कॉपी करे';
 $_lang['file_edit'] = 'फ़ाइल को संपादित करें';
 $_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = 'फ़ाइल %s पहले से मौजूद है';

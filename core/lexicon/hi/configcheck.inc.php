@@ -20,7 +20,7 @@ $_lang['configcheck_errorpage_unavailable'] = 'आपकी साइट की 
 $_lang['configcheck_errorpage_unavailable_msg'] = 'इसका मतलब यह है कि आपके Error page सामान्य web surfers करने के लिए पहुँच योग्य नहीं है या मौजूद नहीं है। यह एक recursive looping condition और आपकी साइट लॉग में कई त्रुटियों के लिए नेतृत्व कर सकते हैं। सुनिश्चित करें कि कोई webuser समूह पृष्ठ करने के लिए असाइन किए गए हैं।';
 $_lang['configcheck_errorpage_unpublished'] = 'आपकी साइट की त्रुटि पृष्ठ प्रकाशित नहीं है या मौजूद नहीं है।';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'इसका मतलब यह है कि आपके Error page आम जनता के लिए दुर्गम है। पृष्ठ प्रकाशित करें या सुनिश्चित करें कि यह आपकी साइट ट्री में कोई मौजूदा दस्तावेज़ के लिए प्रणाली में सौंपा है &gt; System Settings menu.';
-$_lang['configcheck_htaccess'] = 'Core folder is accessible by web';
+$_lang['configcheck_htaccess'] = 'कोर फोल्डर वेब द्वारा पहुंचा जा सकता हैं';
 $_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
 <strong>This is not recommended and a security risk.</strong>
 If your MODX installation is running on a Apache webserver
@@ -39,8 +39,8 @@ $_lang['configcheck_lang_difference'] = 'language file में entries की 
 $_lang['configcheck_lang_difference_msg'] = 'वर्तमान में चयनित भाषा डिफ़ॉल्ट भाषा से प्रविष्टियों का एक अलग संख्या है। जरूरी नहीं कि एक समस्या है जबकि, यह मतलब हो सकता है language file अद्यतन की जरूरत है।';
 $_lang['configcheck_notok'] = 'एक या एक से अधिक configuration details ठीक बाहर की जाँच नहीं किया: ';
 $_lang['configcheck_ok'] = 'Check passed OK - कोई चेतावनियाँ रिपोर्ट को पारित कर दिया।';
-$_lang['configcheck_phpversion'] = 'PHP version is outdated';
-$_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
+$_lang['configcheck_phpversion'] = 'पीएचपी संस्करण पुराना है';
+$_lang['configcheck_phpversion_msg'] = 'आपका PHP संस्करण [[+PHP version]] अब PHP डेवलपर्स द्वारा अनुरक्षित नहीं है, जिसका अर्थ है की कोई सुरक्षा अघतन उपलब्ध नही है | यह भी संभावना है कि एमओडीएक्स या एक अतिरिक पैकेज अभी या निकट भविष्य में संस्करण का समर्थन नही करेगा | कृपया अपनी साइड को सुरक्षित करने के लिए अपने परिवेश को कम से कम PHP [[+PHP required]] पर यथाशीघ्र अपडेट करें|';
 $_lang['configcheck_register_globals'] = 'register_globals अपने php. ini configuration file में सेट करने के लिए पर है';
 $_lang['configcheck_register_globals_msg'] = 'इस विन्यास आपकी साइट बहुत अधिक Cross Site Scripting (XSS) हमलों के लिए अतिसंवेदनशील बनाता है। आप अपने host करने के लिए क्या आप इस सेटिंग को अक्षम करने के लिए कर सकते हैं के बारे में बात करनी चाहिए।';
 $_lang['configcheck_title'] = 'Configuration जाँच';
