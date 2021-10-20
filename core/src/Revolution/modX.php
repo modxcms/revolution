@@ -2544,8 +2544,6 @@ class modX extends xPDO {
 
                 return $class;
             }
-
-            $this->log(self::LOG_LEVEL_WARN, "Could not find legacy class {$fqn} after converting to {$class}");
         }
 
         return parent::loadClass($fqn, $path, $ignorePkg, $transient);
