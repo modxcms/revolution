@@ -9,7 +9,7 @@
 $_lang['help_page_title'] = 'सहायता & समर्थन';
 $_lang['help_main_head'] = 'MODX यहाँ आप के लिए है';
 $_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/community/free-support-options">modx.com/community/free-support-options</a> or call +1 (469) 777-6639';
-$_lang['forums'] = 'Forums';
+$_lang['forums'] = 'मंचों';
 $_lang['forums_title'] = 'MODX सामुदायिक मंचों';
 $_lang['forums_description'] = 'नि: शुल्क समुदाय से मदद';
 $_lang['forums_link'] = 'https://community.modx.com/';
