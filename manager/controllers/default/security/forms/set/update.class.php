@@ -71,7 +71,11 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
         ]);
         /** @var modFormCustomizationSet $set */
         $set = $this->modx->getObject(modFormCustomizationSet::class, $c);
-        if (empty($set)) return $this->failure($this->modx->lexicon('set_err_nfs', ['id' => $scriptProperties['id']]));
+        if (empty($set)) {
+            return $this->failure($this->modx->lexicon('set_err_nfs',[
+                'id' => htmlentities($scriptProperties['id'], ENT_QUOTES, 'UTF-8')
+            ]));
+        }
 
         $this->setArray = $set->toArray();
         $setData = $set->getData();

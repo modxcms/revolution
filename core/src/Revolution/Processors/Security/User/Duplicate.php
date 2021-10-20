@@ -102,4 +102,9 @@ class Duplicate extends DuplicateProcessor
 
         return parent::beforeSave();
     }
+
+    public function cleanup()
+    {
+        return $this->success('', $this->newObject->get(['id', 'username']));
+    }
 }

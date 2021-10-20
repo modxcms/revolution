@@ -1,6 +1,6 @@
 <select id="tv{$tv->id}" name="tv{$tv->id}">
 {foreach from=$opts item=item}
-    <option value="{$item.value}" {if $item.selected}selected="selected"{/if}>{$item.text}</option>
+    <option value="{$item.value|escape}" {if $item.selected} selected="selected"{/if}>{$item.text|escape}</option>
 {/foreach}
 </select>
 
@@ -25,6 +25,7 @@ Ext.onReady(function() {
             ,listWidth: {$params.listWidth}
         {/if}
         ,maxHeight: {if $params.maxHeight|default}{$params.maxHeight}{else}300{/if}
+        ,tpl: {literal}'<tpl for="."><div class="x-combo-list-item">{text:htmlEncode}</div></tpl>'{/literal}
         {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
             ,typeAhead: true
             ,typeAheadDelay: {if $params.typeAheadDelay|default && $params.typeAheadDelay|default != ''}{$params.typeAheadDelay|default}{else}250{/if}

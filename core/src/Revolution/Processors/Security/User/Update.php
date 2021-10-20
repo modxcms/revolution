@@ -309,7 +309,15 @@ class Update extends UpdateProcessor {
      * {@inheritDoc}
      * @return array|string
      */
-    public function cleanup() {
+    public function cleanup()
+    {
+        $userArray = $this->object->toArray();
+        $profile = $this->object->getOne('Profile');
+        if ($profile) {
+            $userArray = array_merge($profile->toArray(),$userArray);
+        }
+        unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
+
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod');
         if (!empty($passwordNotifyMethod) && !empty($this->newPassword) && $passwordNotifyMethod  == 's') {
             return $this->success($this->modx->lexicon('user_updated_password_message',

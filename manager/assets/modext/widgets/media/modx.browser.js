@@ -398,11 +398,11 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     ,_initTemplates: function() {
         this.templates.thumb = new Ext.XTemplate(
             '<tpl for=".">'
-                ,'<div class="modx-browser-thumb-wrap" id="{name}" title="{name}">'
+                ,'<div class="modx-browser-thumb-wrap" id="{name:htmlEncode}" title="{name:htmlEncode}">'
             	,'<tpl if="preview === 1">'
                 ,'  <div class="modx-browser-thumb">'
                 ,'      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" ' +
-                            'data-src="{thumb}" loading="lazy" width="{thumb_width}" height="{thumb_height}" alt="{name}" title="{name}" />'
+                            'data-src="{thumb:htmlEncode}" loading="lazy" width="{thumb_width}" height="{thumb_height}" alt="{name:htmlEncode}" title="{name:htmlEncode}" />'
                 ,'  </div>'
                 ,'</tpl>'
             	,'<tpl if="preview === 0">'
@@ -410,7 +410,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,' 	  <div class="modx-browser-placeholder">.{ext}</div>'
                 ,'  </div>'
                 ,'</tpl>'
-                ,'  <span>{shortName}</span>'
+                ,'  <span>{shortName:htmlEncode}</span>'
                 ,'</div>'
             ,'</tpl>'
         );
@@ -418,9 +418,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
         this.templates.list = new Ext.XTemplate(
             '<tpl for=".">'
-                ,'<div class="modx-browser-list-item" id="{name}">'
+                ,'<div class="modx-browser-list-item" id="{name:htmlEncode}">'
                 ,'  <span class="icon icon-file {cls}">'
-                ,'      <span class="file-name">{name}</span>'
+                ,'      <span class="file-name">{name:htmlEncode}</span>'
                 ,'      <tpl if="sizeString !== 0">'
                 ,'      <span class="file-size">{sizeString}</span>'
                 ,'      </tpl>'
@@ -437,8 +437,8 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             '<div class="details">'
             ,'  <tpl for=".">'
             ,'  <tpl if="preview === 1">'
-            ,'      <div class="modx-browser-detail-thumb preview" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name}\',\''+this.ident+'\'); return false;">'
-            ,'          <img src="{image}" loading="lazy" width="{image_width}" height="{image_height}" alt="{name}" title="{name}" />'
+            ,'      <div class="modx-browser-detail-thumb preview" onclick="Ext.getCmp(\''+this.ident+'\').showFullView(\'{name:htmlEncode}\',\''+this.ident+'\'); return false;">'
+            ,'          <img src="{image:htmlEncode}" loading="lazy" width="{image_width}" height="{image_height}" alt="{name:htmlEncode}" title="{name:htmlEncode}" />'
             ,'      </div>'
             ,'  </tpl>'
             ,'  <tpl if="preview === 0">'
@@ -448,7 +448,7 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'  </tpl>'
             ,'  <div class="modx-browser-details-info">'
             ,'      <b>'+_('file_name')+':</b>'
-            ,'      <span>{name}</span>'
+            ,'      <span>{name:htmlEncode}</span>'
             ,'  <tpl if="sizeString !== 0">'
             ,'      <b>'+_('file_size')+':</b>'
             ,'      <span>{sizeString}</span>'
