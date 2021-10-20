@@ -27,5 +27,5 @@ jobs:
             -   name: Install NPM dependencies
                 run: cd _build/templates/default && npm install
 
-            -   name: Run Grunt build
-                run: cd _build/templates/default && grunt build
+            -   name: Build assets
+                run: cd _build/templates/default && npm run build
