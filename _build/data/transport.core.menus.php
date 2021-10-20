@@ -59,9 +59,9 @@ $children[0]->fromArray([
 ], '', true, true);
 
 /* Preview */
-$children[4]= $xpdo->newObject(modMenu::class);
-$children[4]->fromArray([
-  'menuindex' => 4,
+$children[1]= $xpdo->newObject(modMenu::class);
+$children[1]->fromArray([
+  'menuindex' => 1,
   'text' => 'preview',
   'description' => 'preview_desc',
   'parent' => 'site',
@@ -70,32 +70,10 @@ $children[4]->fromArray([
   'handler' => 'MODx.preview(); return false;',
 ], '', true, true);
 
-/* Import HTML */
-$children[5]= $xpdo->newObject(modMenu::class);
-$children[5]->fromArray([
-  'menuindex' => 5,
-  'text' => 'import_site',
-  'description' => 'import_site_desc',
-  'parent' => 'site',
-  'permissions' => 'import_static',
-  'action' => 'system/import/html',
-], '', true, true);
-
-/* Import Static Resources */
-$children[6]= $xpdo->newObject(modMenu::class);
-$children[6]->fromArray([
-  'menuindex' => 6,
-  'text' => 'import_resources',
-  'description' => 'import_resources_desc',
-  'parent' => 'site',
-  'permissions' => 'import_static',
-  'action' => 'system/import',
-], '', true, true);
-
 /* Manage Resource Groups */
-$children[7]= $xpdo->newObject(modMenu::class);
-$children[7]->fromArray([
-  'menuindex' => 7,
+$children[2]= $xpdo->newObject(modMenu::class);
+$children[2]->fromArray([
+  'menuindex' => 2,
   'text' => 'resource_groups',
   'description' => 'resource_groups_desc',
   'parent' => 'site',
@@ -104,9 +82,9 @@ $children[7]->fromArray([
 ], '', true, true);
 
 /* Content Types */
-$children[8]= $xpdo->newObject(modMenu::class);
-$children[8]->fromArray([
-  'menuindex' => 8,
+$children[3]= $xpdo->newObject(modMenu::class);
+$children[3]->fromArray([
+  'menuindex' => 3,
   'text' => 'content_types',
   'description' => 'content_types_desc',
   'parent' => 'site',
