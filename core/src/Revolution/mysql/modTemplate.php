@@ -1,7 +1,6 @@
 <?php
 namespace MODX\Revolution\mysql;
 
-
 class modTemplate extends \MODX\Revolution\modTemplate
 {
 

@@ -3,7 +3,6 @@ namespace MODX\Revolution\mysql;
 
 use xPDO\xPDO;
 
-
 class modPlugin extends \MODX\Revolution\modPlugin
 {
 

@@ -3,7 +3,6 @@ namespace MODX\Revolution\mysql;
 
 use xPDO\xPDO;
 
-
 class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
 {
 

@@ -3,7 +3,6 @@ namespace MODX\Revolution\Transport\mysql;
 
 use xPDO\xPDO;
 
-
 class modTransportProvider extends \MODX\Revolution\Transport\modTransportProvider
 {
 

@@ -3,7 +3,6 @@ namespace MODX\Revolution\Transport\mysql;
 
 use MODX\Revolution\modX;
 
-
 class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
 {
 

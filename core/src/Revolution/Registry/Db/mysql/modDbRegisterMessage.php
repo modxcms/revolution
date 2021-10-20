@@ -5,7 +5,6 @@ use MODX\Revolution\Registry\modDbRegister;
 use PDO;
 use xPDO\Om\xPDOCriteria;
 
-
 class modDbRegisterMessage extends \MODX\Revolution\Registry\Db\modDbRegisterMessage
 {
 

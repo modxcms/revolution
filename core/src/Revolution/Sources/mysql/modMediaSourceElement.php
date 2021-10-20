@@ -4,7 +4,6 @@ namespace MODX\Revolution\Sources\mysql;
 use MODX\Revolution\modTemplateVar;
 use xPDO\xPDO;
 
-
 class modMediaSourceElement extends \MODX\Revolution\Sources\modMediaSourceElement
 {
 

@@ -4,7 +4,6 @@ namespace MODX\Revolution\mysql;
 use MODX\Revolution\modX;
 use xPDO\Om\xPDOCriteria;
 
-
 class modContext extends \MODX\Revolution\modContext
 {
 

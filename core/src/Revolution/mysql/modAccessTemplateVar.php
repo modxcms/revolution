@@ -3,7 +3,6 @@ namespace MODX\Revolution\mysql;
 
 use xPDO\xPDO;
 
-
 class modAccessTemplateVar extends \MODX\Revolution\modAccessTemplateVar
 {
 

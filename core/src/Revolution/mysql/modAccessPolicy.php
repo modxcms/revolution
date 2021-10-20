@@ -3,7 +3,6 @@ namespace MODX\Revolution\mysql;
 
 use xPDO\xPDO;
 
-
 class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
 {
     const POLICY_RESOURCE = 'Resource';

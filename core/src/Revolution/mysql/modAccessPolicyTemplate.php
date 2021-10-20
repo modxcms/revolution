@@ -3,7 +3,6 @@ namespace MODX\Revolution\mysql;
 
 use xPDO\xPDO;
 
-
 class modAccessPolicyTemplate extends \MODX\Revolution\modAccessPolicyTemplate
 {
     const TEMPLATE_ADMINISTRATOR = 'AdministratorTemplate';
