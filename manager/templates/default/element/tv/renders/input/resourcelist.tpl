@@ -46,7 +46,7 @@ Ext.onReady(function() {
             }
             return true;
         }
-        {/literal}á
+        {/literal}
         {/if}
         {literal}
         ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
