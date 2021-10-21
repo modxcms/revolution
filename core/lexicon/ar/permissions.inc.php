@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'يمكن ومض الجلسات ضمن ال
 $_lang['perm.frames_desc'] = 'لاستخدام واجهة مدير مودكس.';
 $_lang['perm.help_desc'] = 'لعرض صفحة المساعدة.';
 $_lang['perm.home_desc'] = 'لعرض صفحة الترحيب.';
-$_lang['perm.import_static_desc'] = 'لعرض أو استخدام الصفحات المستوردة.';
 $_lang['perm.languages_desc'] = 'لعرض أو تعديل لغات المعجم.';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'لتعديل أو عرض المعاجم والتعميمات.';
