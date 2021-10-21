@@ -180,7 +180,7 @@ class Update extends UpdateProcessor
         $this->setUnPublishDate();
         $this->checkPublishedOn();
         $this->checkPublishingPermissions();
-        $result = $this->checkForUnPublishOnSiteSettingPages();
+        $result = $this->checkForUnPublishOnSitePages();
         if ($result !== true) {
             return $result;
         }
@@ -211,6 +211,16 @@ class Update extends UpdateProcessor
                 $this->object->setProperty('responseCode', $responseCode);
             }
         }
+    }
+
+    /**
+     * Checks if the given resource is set as page specified in the system settings
+     * @return bool
+     */
+    public function isSitePage(string $option)
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption($option) || $this->resource->get('id') == $this->modx->getOption($option));
     }
 
     /**
@@ -495,48 +505,45 @@ class Update extends UpdateProcessor
      *
      * @return bool
      */
-    public function checkForUnPublishOnSiteSettingPages()
+    public function checkForUnPublishOnSitePages()
     {
-        $result = true;
-        $isSiteStart = false;
-        $isSiteErrorPage = false;
-        $isSiteUnavailablePage = false;
+        $isSiteStart = $this->isSitePage('site_start');
+        $isSiteErrorPage = $this->isSitePage('error_page');
+        $isSiteUnavailablePage = $this->isSitePage('site_unavailable_page');
         $deleted = $this->getProperty('deleted', null);
         $published = $this->getProperty('published', null);
         $publishDate = $this->getProperty('pub_date');
         $unPublishDate = $this->getProperty('unpub_date');
-        $workingContext = $this->modx->getContext($this->getProperty('context_key'));
-        if ($this->getProperty('id') == $workingContext->getOption('site_start') || $this->getProperty('id') == $this->modx->getOption('site_start')) {
-            $isSiteStart = true;
-        }
-        if ($this->getProperty('id') == $workingContext->getOption('error_page') || $this->getProperty('id') == $this->modx->getOption('error_page')) {
-            $isSiteErrorPage = true;
-        }
-        if ($this->getProperty('id') == $workingContext->getOption('site_unavailable_page') || $this->getProperty('id') == $this->modx->getOption('site_unavailable_page')) {
-            $isSiteUnavailablePage = true;
-        }
 
         if ($isSiteStart && $deleted == 1) {
-            $result = $this->modx->lexicon('resource_err_delete_sitestart');
-        } else if ($isSiteStart && $published == 0) {
-            $result = $this->modx->lexicon('resource_err_unpublish_sitestart');
-        } else if ($isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
-            $result = $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
-        } else if ($isSiteErrorPage && $deleted == 1) {
-            $result = $this->modx->lexicon('resource_err_delete_errorpage');
-        } else if ($isSiteErrorPage && $published == 0) {
-            $result = $this->modx->lexicon('resource_err_unpublish_errorpage');
-        } else if ($isSiteErrorPage && (!empty($publishDate) || !empty($unPublishDate))) {
-            $result = $this->modx->lexicon('resource_err_unpublish_errorpage_dates');
-        } else if ($isSiteUnavailablePage && $deleted == 1) {
-            $result = $this->modx->lexicon('resource_err_delete_siteunavailable');
-        } else if ($isSiteUnavailablePage && $published == 0) {
-            $result = $this->modx->lexicon('resource_err_unpublish_siteunavailable');
-        } else if ($isSiteUnavailablePage && (!empty($publishDate) || !empty($unPublishDate))) {
-            $result = $this->modx->lexicon('resource_err_unpublish_siteunavailable_dates');
+            return $this->modx->lexicon('resource_err_delete_sitestart');
+        }
+        if ($isSiteStart && $published == 0) {
+            return $this->modx->lexicon('resource_err_unpublish_sitestart');
+        }
+        if ($isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
+            return $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
+        }
+        if ($isSiteErrorPage && $deleted == 1) {
+            return $this->modx->lexicon('resource_err_delete_errorpage');
+        }
+        if ($isSiteErrorPage && $published == 0) {
+            return $this->modx->lexicon('resource_err_unpublish_errorpage');
+        }
+        if ($isSiteErrorPage && (!empty($publishDate) || !empty($unPublishDate))) {
+            return $this->modx->lexicon('resource_err_unpublish_errorpage_dates');
+        }
+        if ($isSiteUnavailablePage && $deleted == 1) {
+            return $this->modx->lexicon('resource_err_delete_siteunavailable');
+        }
+        if ($isSiteUnavailablePage && $published == 0) {
+            return $this->modx->lexicon('resource_err_unpublish_siteunavailable');
+        }
+        if ($isSiteUnavailablePage && (!empty($publishDate) || !empty($unPublishDate))) {
+            return $this->modx->lexicon('resource_err_unpublish_siteunavailable_dates');
         }
 
-        return $result;
+        return true;
     }
 
     /**
