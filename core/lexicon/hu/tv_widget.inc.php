@@ -26,7 +26,7 @@ $_lang['combo_allowaddnewdata_desc'] = 'Ha igen, hozzá lehet adni új elemeket 
 $_lang['combo_forceselection'] = 'Require Match';
 $_lang['combo_forceselection_desc'] = 'Only save typed option when it matches one already defined in the list.';
 $_lang['combo_forceselection_multi_desc'] = 'Ha Igen van beállítva, csak a felsorolásban már szereplő elemek engedélyezettek. Ha Nem van beállítva, új értékek is bevihetők.';
-$_lang['combo_listempty_text'] = 'Option Not Found Message';
+$_lang['combo_listempty_text'] = 'Üzenet, ha nincs meg a választható érték';
 $_lang['combo_listempty_text_desc'] = 'Message to display when typed text does not match existing options.';
 $_lang['combo_listheight'] = 'Felsorolás magassága';
 $_lang['combo_listheight_desc'] = 'A lenyíló választék magassága százalékban vagy képpontban. Alapértéke a vegyes szövegbeviteli doboz magassága.';
@@ -60,10 +60,10 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
 $_lang['date_use_current'] = 'Use Current Date as Fallback';
 $_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
 $_lang['default'] = 'Alapértelmezett';
-$_lang['default_date_now'] = 'Today with Current Time';
-$_lang['default_date_today'] = 'Today (midnight)';
-$_lang['default_date_yesterday'] = 'Yesterday (midnight)';
-$_lang['default_date_tomorrow'] = 'Tomorrow (midnight)';
+$_lang['default_date_now'] = 'Ma a jelenlegi időponttal';
+$_lang['default_date_today'] = 'Ma (éjfél)';
+$_lang['default_date_yesterday'] = 'Tegnap (éjfél)';
+$_lang['default_date_tomorrow'] = 'Holnap (éjfél)';
 $_lang['default_date_custom'] = 'Custom (see description below)';
 $_lang['delim'] = 'Határolójel';
 $_lang['delimiter'] = 'Határolójel';
@@ -124,11 +124,11 @@ $_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abb
 $_lang['name'] = 'Név';
 $_lang['number'] = 'Szám';
 $_lang['number_allowdecimals'] = 'Tizedesek engedélyezése';
-$_lang['number_allownegative'] = 'Allow Negative';
-$_lang['number_decimalprecision'] = 'Precision';
+$_lang['number_allownegative'] = 'Negatív engedélyezése';
+$_lang['number_decimalprecision'] = 'Pontosság';
 $_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
 /* See note in number inputproperties config re separators */
-$_lang['number_decimalseparator'] = 'Separator';
+$_lang['number_decimalseparator'] = 'Elválasztó';
 $_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
 $_lang['number_maxvalue'] = 'Legnagyobb érték';
 $_lang['number_minvalue'] = 'Legkisebb érték';
@@ -182,10 +182,10 @@ $_lang['textbox'] = 'Szövegdoboz';
 $_lang['time_increment'] = 'Idő növelése';
 $_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
 $_lang['title'] = 'Felirat';
-$_lang['tv_default'] = 'Default Value';
+$_lang['tv_default'] = 'Alapérték';
 $_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
-$_lang['tv_default_date'] = 'Default Date and Time';
+$_lang['tv_default_date'] = 'Alapértelmezett dátum és idő';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
     <div class="example-list">
         <ul>
@@ -195,34 +195,34 @@ $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide 
         </ul>
         Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
     </div>';
-$_lang['tv_default_email'] = 'Default Email Address';
+$_lang['tv_default_email'] = 'Alapértelmezett email cím';
 $_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
-$_lang['tv_default_file'] = 'Default File';
+$_lang['tv_default_file'] = 'Alapértelmezett állomány';
 $_lang['tv_default_file_desc'] = 'The file path this TV will show if the user does not provide one.';
-$_lang['tv_default_image'] = 'Default Image';
+$_lang['tv_default_image'] = 'Alapértelmezett kép ';
 $_lang['tv_default_image_desc'] = 'The image path this TV will show if the user does not provide one.';
-$_lang['tv_default_option'] = 'Default Option';
+$_lang['tv_default_option'] = 'Alapértelmezett beállítás';
 $_lang['tv_default_option_desc'] = 'The option selected for this TV if the user does not choose one. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One)';
-$_lang['tv_default_options'] = 'Default Option(s)';
+$_lang['tv_default_options'] = 'Alapértelmezett beállítás(ok)';
 $_lang['tv_default_options_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
 $_lang['tv_default_radio_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox-multiple_desc'] = $_lang['tv_default_options_desc'];
-$_lang['tv_default_number'] = 'Default Number';
+$_lang['tv_default_number'] = 'Alapértelmezett szám';
 $_lang['tv_default_number_desc'] = 'The number this TV will show if the user does not provide one.';
-$_lang['tv_default_resource'] = 'Default Resource (ID)';
+$_lang['tv_default_resource'] = 'Alapértelmezett erőforrás (ID)';
 $_lang['tv_default_resourcelist_desc'] = 'The resource this TV will show if the user does not choose one.';
-$_lang['tv_default_tag'] = 'Default Tag(s)';
+$_lang['tv_default_tag'] = 'Alapértelmezett címké(k)';
 $_lang['tv_default_tag_desc'] = 'A comma-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Tag One==1||Tag Two==2||Tag Three==3), be sure to enter the value (i.e., “1” for Tag One, or “1,3” for Tag One and Tag Three)';
-$_lang['tv_default_text'] = 'Default Text';
+$_lang['tv_default_text'] = 'Alapértelmezett szöveg';
 $_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
-$_lang['tv_default_url'] = 'Default URL';
+$_lang['tv_default_url'] = 'Alapértelmezett URL';
 $_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
-$_lang['tv_elements'] = 'Input Option Values';
-$_lang['tv_elements_checkbox'] = 'Checkbox Options';
-$_lang['tv_elements_listbox'] = 'Dropdown List Options';
-$_lang['tv_elements_radio'] = 'Radio Button Options';
-$_lang['tv_elements_tag'] = 'Tag Options';
+$_lang['tv_elements'] = 'Lenyíló választék értékei';
+$_lang['tv_elements_checkbox'] = 'Jelölőnégyzet beállításai';
+$_lang['tv_elements_listbox'] = 'Lenyíló felsorolás beállításai';
+$_lang['tv_elements_radio'] = 'Rádiógomb beállításai';
+$_lang['tv_elements_tag'] = 'Címke beállításai';
 $_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
     <div class="example-list">
         <ul>
@@ -240,7 +240,7 @@ $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['t
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
 $_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
-$_lang['tv_type'] = 'Input Type';
+$_lang['tv_type'] = 'Bevitel fajtája';
 $_lang['upper_case'] = 'Nagybetű';
 $_lang['url'] = 'Webcím';
 $_lang['url_display_text'] = 'Szöveg megjelenítése';
