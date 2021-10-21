@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Нулиране на сесийте в с
 $_lang['perm.frames_desc'] = 'Използване на MODX мениджъра UI за всичко.';
 $_lang['perm.help_desc'] = 'Преглед на страницата Помощ.';
 $_lang['perm.home_desc'] = 'Преглед на началната страница.';
-$_lang['perm.import_static_desc'] = 'Преглед или използване на страниците Вмъкване/Импортиране.';
 $_lang['perm.languages_desc'] = 'Редактиране или преглед на езиците в Лексикона.';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'Редактиране или преглед на Лексиконите и Интернацинализацията.';
