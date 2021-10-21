@@ -9,7 +9,7 @@
 $_lang['active_of'] = '[[+active]] की [[+total]]';
 $_lang['active_permissions'] = 'सक्रिय अनुमतियाँ';
 $_lang['no_policy_option'] = '(कोई नीति नहीं)';
-$_lang['permission'] = 'Permission';
+$_lang['permission'] = 'अनुमति';
 $_lang['permission_add'] = 'अनुमति जोड़ें';
 $_lang['permission_add_template'] = 'टेम्पलेट के लिए अनुमति जोड़ें';
 $_lang['permission_err_ae'] = 'इस policy के लिए अनुमति पहले से ही मौजूद है।';
