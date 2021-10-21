@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Can flush Sessions across the site.';
 $_lang['perm.frames_desc'] = 'To use the MODX Manager UI at all.';
 $_lang['perm.help_desc'] = 'To view the Help page.';
 $_lang['perm.home_desc'] = 'To view the Welcome page.';
-$_lang['perm.import_static_desc'] = 'To view or use the Import pages.';
 $_lang['perm.languages_desc'] = 'To edit or view Lexicon Languages.';
 $_lang['perm.language_desc'] = 'A kijelölt nyelv változtatása a kezelőben.';
 $_lang['perm.lexicons_desc'] = 'To edit or view Lexicons and Internationalization.';
