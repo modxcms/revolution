@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'สามารถล้างวาระ
 $_lang['perm.frames_desc'] = 'เพื่อใช้ส่วนติดต่อผู้ใช้ของ MODX เมเนเจอร์ทั้งหมด';
 $_lang['perm.help_desc'] = 'เพื่อดูหน้าความช่วยเหลือ';
 $_lang['perm.home_desc'] = 'เพื่อดูหน้ายินดีต้อนรับ';
-$_lang['perm.import_static_desc'] = 'เพื่อดูหรือใช้หน้าการนำเข้า';
 $_lang['perm.languages_desc'] = 'เพื่อแก้ไขหรือดูภาษาของ Lexicon';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'เพื่อแก้ไขหรือดู Lexicon และ Internationalization';
