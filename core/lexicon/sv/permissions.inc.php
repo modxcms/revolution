@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Tömma sessioner över hela webbplatsen.';
 $_lang['perm.frames_desc'] = 'Använda gränssnittet i MODX hanterare över huvud taget.';
 $_lang['perm.help_desc'] = 'Se hjälpsidan.';
 $_lang['perm.home_desc'] = 'Se välkomstsidan.';
-$_lang['perm.import_static_desc'] = 'Se eller använda importsidorna.';
 $_lang['perm.languages_desc'] = 'Redigera eller se språklexikon.';
 $_lang['perm.language_desc'] = 'Används för att byta språk i hanteraren.';
 $_lang['perm.lexicons_desc'] = 'Redigera eller se lexikon och internationalisering.';

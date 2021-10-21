@@ -90,27 +90,27 @@ $_lang['earliest_date_desc'] = 'चुना जा सकता है कि �
 $_lang['earliest_time'] = 'जल्द से जल्द समय';
 $_lang['earliest_time_desc'] = 'जल्द से जल्द अनुमत समय कि चुना जा सकता है।';
 $_lang['email'] = 'ईमेल';
-$_lang['file'] = 'File';
+$_lang['file'] = 'फाइल';
 $_lang['height'] = 'ऊँचाई';
 $_lang['hidden'] = 'छिपा हुआ';
 $_lang['hide_time'] = 'Hide Time Option';
 $_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
 $_lang['htmlarea'] = 'HTML क्षेत्र';
-$_lang['htmltag'] = 'HTML Tag';
-$_lang['image'] = 'Image';
+$_lang['htmltag'] = 'HTML टैग';
+$_lang['image'] = 'छवि';
 $_lang['image_alt'] = 'वैकल्पिक पाठ';
 $_lang['latest_date'] = 'नवीनतम दिनांक';
 $_lang['latest_date_desc'] = 'नवीनतम अनुमति प्राप्त तिथि कि चयनित किया जा सकता।';
 $_lang['latest_time'] = 'नवीनतम समय';
 $_lang['latest_time_desc'] = 'नवीनतम अनुमत समय कि चयनित किया जा सकता है।';
-$_lang['listbox'] = 'Listbox (Single-Select)';
-$_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
-$_lang['lower_case'] = 'Lower Case';
+$_lang['listbox'] = 'लिस्टबॉक्स (एकल-चयन)';
+$_lang['listbox-multiple'] = 'लिस्टबॉक्स (बहु-चयन)';
+$_lang['lower_case'] = 'निचला मामला';
 $_lang['max_length'] = 'अधिकतम लंबाई';
 $_lang['min_length'] = 'न्यूनतम लम्बाई';
-$_lang['regex_text'] = 'Regular Expression Error';
+$_lang['regex_text'] = 'रेगुलर एक्सप्रेशन त्रुटि';
 $_lang['regex_text_desc'] = 'The message to show if the user enters text that is invalid according to the <abbr title="regular expression">regex</abbr> validator.';
-$_lang['regex'] = 'Regular Expression Validator';
+$_lang['regex'] = 'रेगुलर एक्सप्रेशन त्रुटि';
 $_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
     <div class="example-list">
         <ul>
@@ -122,7 +122,7 @@ $_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abb
     </div>
 ';
 $_lang['name'] = 'नाम';
-$_lang['number'] = 'Number';
+$_lang['number'] = 'संख्या';
 $_lang['number_allowdecimals'] = 'दशमलव की अनुमति दें';
 $_lang['number_allownegative'] = 'Allow Negative';
 $_lang['number_decimalprecision'] = 'Precision';
@@ -132,15 +132,15 @@ $_lang['number_decimalseparator'] = 'Separator';
 $_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
 $_lang['number_maxvalue'] = 'अधिकतम मान';
 $_lang['number_minvalue'] = 'न्यूनतम मान';
-$_lang['option'] = 'Radio Options';
+$_lang['option'] = 'रेडियो विकल्प';
 $_lang['parent_resources'] = 'Parent Resource';
-$_lang['radio_columns'] = 'Columns';
+$_lang['radio_columns'] = 'स्तंभ';
 $_lang['radio_columns_desc'] = 'The number of columns the radio buttons are displayed in.';
-$_lang['rawtext'] = 'Raw Text (deprecated)';
-$_lang['rawtextarea'] = 'Raw Textarea (deprecated)';
+$_lang['rawtext'] = 'कच्चा पाठ (बहिष्कृत)';
+$_lang['rawtextarea'] = 'कच्चा टेक्सटरिया (बहिष्कृत)';
 $_lang['required'] = 'रिक्त की अनुमति दें';
 $_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
-$_lang['resourcelist'] = 'Resource List';
+$_lang['resourcelist'] = 'संसाधन सूची';
 $_lang['resourcelist_depth'] = 'गहराई';
 $_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
@@ -151,7 +151,7 @@ $_lang['resourcelist_limitrelatedcontext_desc'] = 'Select “Yes” to only incl
 $_lang['resourcelist_limit'] = 'सीमा';
 $_lang['resourcelist_limit_desc'] = 'The maximum number of Resources shown in this TV’s listing. (Default: 0, meaning unlimited)';
 $_lang['resourcelist_listempty_text_desc'] = 'Disabled; selections will always match the list.';
-$_lang['resourcelist_parents'] = 'Parents';
+$_lang['resourcelist_parents'] = 'माता-पिता';
 $_lang['resourcelist_parents_desc'] = 'If specified, this TV’s listing will include only the child resources from this comma-separated set of resource IDs (containers).';
 $_lang['resourcelist_where'] = 'जहाँ शर्तें';
 $_lang['resourcelist_where_desc'] = '
@@ -166,22 +166,22 @@ $_lang['resourcelist_where_desc'] = '
     </div>
     <p>Note: Filtering by TV values is not supported.</p>
 ';
-$_lang['richtext'] = 'RichText';
-$_lang['sentence_case'] = 'Sentence Case';
+$_lang['richtext'] = 'रिच पाठ';
+$_lang['sentence_case'] = 'वाक्य मामले ';
 $_lang['start_day'] = 'दिन की शुरुआत';
 $_lang['start_day_desc'] = 'Day displayed as the beginning of the week in this TV’s date picker. (Default: “Sunday”)';
 $_lang['string'] = 'स्ट्रिंग';
 $_lang['string_format'] = 'स्ट्रिंग स्वरूप';
 $_lang['style'] = 'शैली';
-$_lang['tag_name'] = 'Tag Name';
+$_lang['tag_name'] = 'नाम टैग';
 $_lang['target'] = 'लक्ष्य';
-$_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
-$_lang['textareamini'] = 'Textarea (Mini)';
+$_lang['text'] = 'मूलपाठ';
+$_lang['textarea'] = 'पाठ क्षेत्र';
+$_lang['textareamini'] = 'टेक्सटेरिया (मिनी)';
 $_lang['textbox'] = 'पाठ बॉक्स';
-$_lang['time_increment'] = 'Time Increment';
+$_lang['time_increment'] = 'समय बृद्दी';
 $_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
-$_lang['title'] = 'Title';
+$_lang['title'] = 'शीर्षक';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
@@ -241,8 +241,8 @@ $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
 $_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
 $_lang['tv_type'] = 'Input Type';
-$_lang['upper_case'] = 'Upper Case';
-$_lang['url'] = 'URL';
+$_lang['upper_case'] = 'अपरकेस';
+$_lang['url'] = 'यूआरएल';
 $_lang['url_display_text'] = 'पाठ प्रदर्शित करें';
 $_lang['width'] = 'चौड़ाई';
 

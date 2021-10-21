@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'サイトのセッションを削除する
 $_lang['perm.frames_desc'] = '全てにおいてMODX管理画面UIを使用';
 $_lang['perm.help_desc'] = 'ヘルプページを表示';
 $_lang['perm.home_desc'] = 'ウェルカムページ（ダッシュボード）を表示';
-$_lang['perm.import_static_desc'] = 'インポートページを表示・利用';
 $_lang['perm.languages_desc'] = '言語を表示・編集';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'レキシコン管理機能を表示・編集';

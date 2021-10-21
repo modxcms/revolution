@@ -1,14 +1,14 @@
 <?php
 
-$_lang['language_ar'] = 'Arabic';
-$_lang['language_be'] = 'Belarusian';
-$_lang['language_bg'] = 'Bulgarian';
-$_lang['language_cs'] = 'Czech';
-$_lang['language_da'] = 'Danish';
-$_lang['language_de'] = 'German';
-$_lang['language_el'] = 'Greek';
-$_lang['language_en'] = 'English';
-$_lang['language_es'] = 'Spanish';
+$_lang['language_ar'] = 'अरबी';
+$_lang['language_be'] = 'बेलारूसी';
+$_lang['language_bg'] = 'बल्गेरियाई';
+$_lang['language_cs'] = 'चेक ';
+$_lang['language_da'] = 'दानिश';
+$_lang['language_de'] = 'जर्मन';
+$_lang['language_el'] = 'यूनानी';
+$_lang['language_en'] = 'अंग्रजी';
+$_lang['language_es'] = 'स्पेनिश';
 $_lang['language_et'] = 'Estonian';
 $_lang['language_fa'] = 'Persian';
 $_lang['language_fi'] = 'Finnish';

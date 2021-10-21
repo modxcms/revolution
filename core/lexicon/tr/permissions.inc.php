@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Oturumları siteden kaldırmak için.';
 $_lang['perm.frames_desc'] = 'MODX Yöneticisi kullanıcı arayüzü kullanmak için.';
 $_lang['perm.help_desc'] = 'Yardım sayfasını görüntülemek için.';
 $_lang['perm.home_desc'] = 'Karşılama sayfasını görüntülemek için.';
-$_lang['perm.import_static_desc'] = 'İçe aktarma sayfalarını görüntülemek veya kullanmak için.';
 $_lang['perm.languages_desc'] = 'Sözlük dilini düzenlemek veya görüntülemek için.';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'Sözcük öbekleri ve uluslararasılaştırmayı düzenlemek veya görüntülemek için.';

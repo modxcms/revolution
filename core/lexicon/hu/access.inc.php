@@ -39,7 +39,7 @@ $_lang['access_permissions_links'] = 'Felhasználói vagy dokumentumcsoportok hi
 $_lang['access_permissions_links_tab'] = 'Itt határozzuk meg, hogy melyik felhasználócsoportok kapnak hozzáférést (pl. alárendelt elemek szerkesztéséhez vagy létrehozásához) a dokumentumcsoportokhoz. Egy dokumentumcsoport és egy felhasználócsoport összekapcsolásához válassza ki a csoportot és kattintson a \'Összekapcsolás\' gombra. Az összekapcsolás törléséhez kattintson a \'Törlés ->\' gombra. Ez azonnal törli az összekapcsolást.';
 $_lang['access_permissions_no_documents_in_group'] = 'Egyik sem.';
 $_lang['access_permissions_no_users_in_group'] = 'Egyik sem.';
-$_lang['access_permissions_off'] = '<span class="warning">Access Permissions are not activated.</span> This means any changes made here will not have any effect until Access Permissions are activated.';
+$_lang['access_permissions_off'] = '<span class="warning">A hozzáférési engedélyek nincsenek bekapcsolva.</span> Az itt elvégzett módosításoknak nem lesz semmilyen hatásuk, amíg a hozzáférési engedélyek ki vannak kapcsolva..';
 $_lang['access_permissions_users_in_group'] = '<strong>Felhasználók a csoportban:</strong> ';
 $_lang['access_permissions_users_tab'] = 'Itt láthatók a létrehozott felhasználócsoportok. Létrehozhat új csoportokat, átnevezheti vagy törölheti őket, és megnézheti, hogy melyik felhasználók tagjai az egyes csoportoknak. Egy felhasználó egy csoporthoz adásához vagy onnan törléséhez szerkessze közvetlenül a felhasználót.';
 $_lang['access_permissions_user_group'] = 'Felhasználói csoport:';

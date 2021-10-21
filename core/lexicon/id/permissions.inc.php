@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Dapat flush sesi di situs.';
 $_lang['perm.frames_desc'] = 'Menggunakan UI MODX Manager sama sekali.';
 $_lang['perm.help_desc'] = 'Untuk melihat halaman bantuan.';
 $_lang['perm.home_desc'] = 'Untuk melihat halaman Selamat datang.';
-$_lang['perm.import_static_desc'] = 'Untuk melihat atau menggunakan halaman impor.';
 $_lang['perm.languages_desc'] = 'Untuk mengedit atau melihat leksikon bahasa.';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'Untuk mengedit atau melihat leksikon dan internasionalisasi.';

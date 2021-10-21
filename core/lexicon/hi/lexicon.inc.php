@@ -7,28 +7,28 @@
  * @subpackage lexicon
  */
 $_lang['duplicate'] = 'डुप्लिकेट';
-$_lang['entry'] = 'Entry';
+$_lang['entry'] = 'प्रवेश';
 $_lang['entry_err_ae'] = 'Entry पहले से मौजूद है!';
 $_lang['entry_err_nf'] = 'Entry नहीं मिली।';
 $_lang['entry_err_ns'] = 'Entry निर्दिष्ट नहीं।';
 $_lang['entry_err_save'] = 'Lexicon Entry सहेजने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['entry_revert'] = 'Lexicon Entry पर वापिस';
 $_lang['language'] = 'भाषा';
-$_lang['languages'] = 'Languages';
+$_lang['languages'] = 'भाषा';
 $_lang['last_modified'] = 'पर अंतिम बार संशोधित';
-$_lang['lexicon'] = 'Lexicon';
-$_lang['lexicon_export'] = 'Export Topic';
+$_lang['lexicon'] = 'शब्दकोश';
+$_lang['lexicon_export'] = 'निर्यात में विषय';
 $_lang['lexicon_export_desc'] = 'यहाँ आप एक फ़ाइल में निर्यात करने के लिए एक Lexicon topic चयन कर सकते हैं।';
-$_lang['lexicon_topics'] = 'Lexicon Topics';
+$_lang['lexicon_topics'] = 'शब्दकोश विषय';
 $_lang['lexicon_topics_desc'] = 'यहाँ आप अपने Lexicon Topic प्रबंधित कर सकते हैं।';
 $_lang['lexicon_import'] = 'आयात Topic';
 $_lang['lexicon_import_desc'] = 'आप किसी नाम स्थान के लिए एक निर्दिष्ट Lexicon topic में लोड करने के लिए एक फ़ाइल आयात कर सकते हैं। आपकी फ़ाइल एक $_lang associative array, core/lexicon फ़ाइलें करने के लिए इसी तरह की वापस चाहिए। यदि Topic Name स्थान में पहले से ही मौजूद है, इसे अधिलेखित हो जाएगा।';
 $_lang['lexicon_import_err_ns'] = 'Lexicon topic फ़ाइल निर्दिष्ट नहीं है।';
 $_lang['lexicon_import_err_upload'] = 'An error occurred while trying to upload the Lexicon Topic file. Check your web server permissions in trying to upload to the tmp directory, and validate that the file you are trying to upload is a valid file.';
-$_lang['lexicon_management'] = 'Lexicon Management';
+$_lang['lexicon_management'] = 'शब्दकोश प्रबंधन';
 $_lang['lexicon_management_desc'] = 'Here you can override any Lexicon Entries across Namespaces and their respective Topics. Just double-click on any Entry\'s value to override it. To add new Lexicon Entries or Topics, just create their Topic files in their Namespace\'s respective directory.<br /><b>Each Entry will be available via the [[%name]] placeholder.</b>';
 $_lang['lexicon_rlfb_msg'] = 'सफलतापूर्वक पुनर्जीवित [[+num]] स्ट्रिंग्स।';
 $_lang['reload_from_base'] = 'सभी Core Entries पर वापिस';
 $_lang['reload_success'] = 'स्ट्रिंग्स सफलतापूर्वक रीलोडेड [[+total]]।';
 $_lang['search_by_key'] = 'Key के आधार पर खोजें:';
-$_lang['topic'] = 'Topic';
+$_lang['topic'] = 'विषय';

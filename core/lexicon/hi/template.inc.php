@@ -9,8 +9,8 @@
 
 $_lang['access'] = 'पहुँच';
 $_lang['filter_by_category'] = 'Category द्वारा फ़िल्टर करें...';
-$_lang['rank'] = 'Rank';
-$_lang['template'] = 'Template';
+$_lang['rank'] = 'पद';
+$_lang['template'] = 'पोस्टर';
 $_lang['template_assignedtv_tab'] = 'Assigned TVs';
 $_lang['template_code'] = 'टेम्पलेट कोड (HTML)';
 $_lang['template_desc'] = 'Description:';
@@ -32,7 +32,7 @@ $_lang['template_err_ns'] = 'टेम्पलेट निर्दिष्�
 $_lang['template_err_ns_name'] = 'कृपया टेम्पलेट के लिए कोई नाम निर्दिष्ट करें।';
 $_lang['template_err_remove'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_save'] = 'टेम्पलेट सहेजते समय एक त्रुटि उत्पन्न हुई।';
-$_lang['template_icon'] = 'Icon';
+$_lang['template_icon'] = 'चिन्ह';
 $_lang['template_icon_description'] = 'Optional. A custom CSS icon class for all resources with this template. For example a Font Awesome (free) class such as icon-home or fa-home.';
 $_lang['template_lock'] = 'संपादन के लिए लॉक टेम्पलेट';
 $_lang['template_lock_msg'] = 'Users को edit_locked विशेषता इस टेम्पलेट को संपादित करने के लिए होना आवश्यक है।';
@@ -49,7 +49,7 @@ $_lang['template_title'] = 'बनाएँ/संपादित करें �
 $_lang['template_tv_edit'] = 'Edit the sort order of the TVs';
 $_lang['template_tv_msg'] = 'The <abbr title="Template Variables">TVs</abbr> assigned to this template are listed below.';
 $_lang['template_untitled'] = 'अनामांकित टेम्पलेट';
-$_lang['templates'] = 'Templates';
+$_lang['templates'] = 'पोस्टर्स';
 $_lang['tvt_err_nf'] = 'TV does not have access to the specified Template.';
 $_lang['tvt_err_remove'] = 'An error occurred while trying to delete the TV from the template.';
 $_lang['template_source'] = 'Media Source';

@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Sessions Site-übergreifend zurücksetzen.
 $_lang['perm.frames_desc'] = 'Die MODX-Manager-Oberfläche benutzen.';
 $_lang['perm.help_desc'] = 'Die Hilfe-Seite anzeigen.';
 $_lang['perm.home_desc'] = 'Die Manager-Startseite anzeigen.';
-$_lang['perm.import_static_desc'] = 'Import-Seiten anzeigen oder benutzen.';
 $_lang['perm.languages_desc'] = 'Lexikon-Sprachen bearbeiten oder anzeigen.';
 $_lang['perm.language_desc'] = 'Sprache im Manager wechseln.';
 $_lang['perm.lexicons_desc'] = 'Lexika bearbeiten oder anzeigen.';
