@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Kan sessie gegevens van de gehele site flu
 $_lang['perm.frames_desc'] = 'Om de MODX manager UI &uuml;berhaupt te gebruiken.';
 $_lang['perm.help_desc'] = 'De help pagina\'s weergeven.';
 $_lang['perm.home_desc'] = 'De welkomstpagina weergeven.';
-$_lang['perm.import_static_desc'] = 'Het bekijken of gebruiken van de "importeer pagina\'s" optie.';
 $_lang['perm.languages_desc'] = 'Het bekijken en bewerken van Lexicon talen.';
 $_lang['perm.language_desc'] = 'Om van manager taal te wisselen.';
 $_lang['perm.lexicons_desc'] = 'Het bekijken en bewerken van internationale settings.';
