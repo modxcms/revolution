@@ -19,18 +19,18 @@ $_lang['onlineusers_action'] = 'कार्यवाही';
 $_lang['onlineusers_actionid'] = 'क्रिया-आइडी';
 $_lang['onlineusers_ipaddress'] = 'उपयोगकर्ता का आइपी पता';
 $_lang['onlineusers_lasthit'] = 'आखरी हिट';
-$_lang['onlineusers_message'] = 'This list shows all users active within the last 20 minutes:';
+$_lang['onlineusers_message'] = 'यह सूची पिछले 20 मिनिट के भीतर सक्रिय सभी उपयोगकर्ताओं को दिखाती हैं';
 $_lang['onlineusers_title'] = 'Online Users';
 $_lang['onlineusers_user'] = 'उपयोगकर्ता';
 $_lang['onlineusers_userid'] = 'उपयोगकर्ता की आइडी';
 
-$_lang['updates_type'] = 'Type';
+$_lang['updates_type'] = 'प्रकार';
 $_lang['updates_status'] = 'स्थिति';
 $_lang['updates_action'] = 'कार्यवाही';
-$_lang['updates_available'] = 'Updates available';
+$_lang['updates_available'] = 'अघ्तन उपलब्ध';
 $_lang['updates_update'] = 'अद्यतन';
-$_lang['updates_ok'] = 'Up to date';
-$_lang['updates_extras'] = 'Extras';
+$_lang['updates_ok'] = 'आधुनिक';
+$_lang['updates_extras'] = 'अतिरिक्त';
 
 $_lang['quicklinks'] = 'त्वरित सम्पक';
 $_lang['security_notices'] = 'सुरक्षा सूचनाएँ';
