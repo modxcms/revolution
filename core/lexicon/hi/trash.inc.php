@@ -7,17 +7,17 @@
  * @subpackage lexicon
  */
 
-$_lang['trash_menu'] = 'Trash';
-$_lang['trash_menu_desc'] = 'Manage deleted resources.';
-$_lang['trash.page_title'] = 'Trash - Deleted Resources Manager';
-$_lang['trash.tab_title'] = 'Trash Bin';
+$_lang['trash_menu'] = 'कचरा';
+$_lang['trash_menu_desc'] = 'हटाए गए संसाधनों को प्रतिबंधित करे';
+$_lang['trash.page_title'] = 'ट्रेश - हटाए गए संसाधन प्रबंधक';
+$_lang['trash.tab_title'] = 'ट्रेश बिन';
 $_lang['trash.intro_msg'] = 'Manage the deleted resources and the not deleted children of deleted parents here.<br><i>Please check the publishing state, before you restore any resource.</i> You can (un-)publish resources directly from the grid with a double click on the published cell of the resource.';
-$_lang['trash.manage_recycle_bin_tooltip'] = "Go to the trash bin manager and manage up to [[+count]] deleted resources";
-$_lang['trash.deletedon_title'] = 'Deleted on';
-$_lang['trash.deletedbyUser_title'] = 'Deleted by';
-$_lang['trash.context_title'] = 'Context';
-$_lang['trash.parent_path'] = 'Resource location';
-$_lang['trash.purge_all'] = 'Purge all';
+$_lang['trash.manage_recycle_bin_tooltip'] = "ट्रैश बिन प्रबंधक पर जाय और [[+गिनती]] तक हटाए गए संसाधनो प्रतिबंधित करे";
+$_lang['trash.deletedon_title'] = 'को हटा दिया गया';
+$_lang['trash.deletedbyUser_title'] = 'द्वारा हटाया गया';
+$_lang['trash.context_title'] = 'सन्दर्भ';
+$_lang['trash.parent_path'] = 'संसाधान स्थान';
+$_lang['trash.purge_all'] = 'सभी को शुद्ध करे';
 $_lang['trash.restore_all'] = 'Restore all';
 $_lang['trash.selected_purge'] = 'Purge selected resources';
 $_lang['trash.selected_restore'] = 'Restore selected resources';
