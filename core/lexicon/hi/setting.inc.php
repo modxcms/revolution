@@ -8,27 +8,27 @@
  */
 $_lang['area'] = 'क्षेत्र';
 $_lang['area_authentication'] = 'प्रमाणन और सुरक्षा';
-$_lang['area_caching'] = 'Caching';
+$_lang['area_caching'] = 'कैशिंग';
 $_lang['area_core'] = 'कोर कोड';
-$_lang['area_editor'] = 'Rich-Text Editor';
+$_lang['area_editor'] = 'रिच पाठ संपादक';
 $_lang['area_file'] = 'फ़ाइल सिस्टम';
 $_lang['area_filter'] = 'क्षेत्र द्वारा फ़िल्टर करें...';
-$_lang['area_furls'] = 'Friendly URL';
+$_lang['area_furls'] = 'अनुकूल यूआरएल';
 $_lang['area_gateway'] = 'गेटवे';
 $_lang['area_language'] = 'Lexicon और Language';
-$_lang['area_mail'] = 'Mail';
-$_lang['area_manager'] = 'Back-end Manager';
-$_lang['area_phpthumb'] = 'phpThumb';
+$_lang['area_mail'] = 'मेल';
+$_lang['area_manager'] = 'बैक-एंड प्रबंधक';
+$_lang['area_phpthumb'] = 'php अंगूठे';
 $_lang['area_proxy'] = 'प्रॉक्सी';
-$_lang['area_session'] = 'Session and Cookie';
-$_lang['area_static_elements'] = 'Static Elements';
-$_lang['area_static_resources'] = 'Static Resources';
+$_lang['area_session'] = 'सत्र और कुकी';
+$_lang['area_static_elements'] = 'स्थिर तत्व';
+$_lang['area_static_resources'] = 'स्थिर संसाधन';
 $_lang['area_lexicon_string'] = 'क्षेत्र Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'यहाँ क्षेत्र के लिए lexicon entry की key दर्ज करें। यदि कोई lexicon entry है, तो यह सिर्फ क्षेत्र key। प्रदर्शित करेगा <br /> कोर क्षेत्रों: प्रमाणीकरण, कैशिंग, फ़ाइल, furls, गेटवे, भाषा, manager, सत्र, साइट, प्रणाली';
 $_lang['area_site'] = 'साइट';
 $_lang['area_system'] = 'सिस्टम और सर्वर';
 $_lang['areas'] = 'क्षेत्रों';
-$_lang['charset'] = 'Charset';
+$_lang['charset'] = 'चारसेट';
 $_lang['country'] = 'देश';
 $_lang['description_desc'] = 'सेटिंग का एक छोटा वर्णन। यह एक Lexicon key पर आधारित निम्नलिखित प्रारूप "setting_" + key + "_desc" entry हो सकता है।';
 $_lang['key_desc'] = 'key सेटिंग के लिए। यह के माध्यम से अपनी content में उपलब्ध हो जाएगा [[++key]] प्लेसहोल्डर।';
@@ -55,9 +55,9 @@ $_lang['settings_furls'] = 'Friendly URL';
 $_lang['settings_misc'] = 'विविध';
 $_lang['settings_site'] = 'साइट';
 $_lang['settings_ui'] = 'इंटरफेस है &amp; विशेषताएं';
-$_lang['settings_users'] = 'User';
+$_lang['settings_users'] = 'उपयोगकर्ता';
 $_lang['system_settings'] = 'सिस्टम सेटिंग्स';
-$_lang['usergroup'] = 'User Group';
+$_lang['usergroup'] = 'उपयोगकर्ता समूह';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Category तक पहुँच की जाँच करें';
@@ -81,11 +81,11 @@ $_lang['setting_login_allowed_days_desc'] = 'इस user लॉगइन कर�
 $_lang['setting_login_allowed_ip'] = 'IP Address की अनुमति दी';
 $_lang['setting_login_allowed_ip_desc'] = 'IP address इस user से लॉग इन करने की अनुमति दी है। <strong> नोट: एक अल्पविराम से अलग कई IP address(,) </strong>';
 
-$_lang['setting_login_homepage'] = 'Login Home Page';
+$_lang['setting_login_homepage'] = 'लॉग इन होम पेज';
 $_lang['setting_login_homepage_desc'] = 'के बाद वह अंदर लॉग इन किया है user के लिए भेजने के लिए इच्छित document ID दर्ज करें <strong>नोट: सुनिश्चित करें आप दर्ज करें ID करने के लिए कोई मौजूदा document के अंतर्गत आता है, और इसे प्रकाशित किया गया है और इस user द्वारा पहुँच योग्य है!</strong>';
 
 // system settings
-$_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
+$_lang['setting_access_policies_version'] = 'पहुंच नीति स्कीमा संस्करण';
 $_lang['setting_access_policies_version_desc'] = 'पहुँच नीति प्रणाली के version। न बदलें।';
 
 $_lang['setting_allow_forward_across_contexts'] = 'अग्रेषण Contexts के पार की अनुमति दें';
@@ -97,16 +97,16 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'इस सेट�
 $_lang['setting_allow_tags_in_post'] = 'पोस्ट में टैग की अनुमति दें';
 $_lang['setting_allow_tags_in_post_desc'] = 'अगर गलत है, सभी पोस्ट variables HTML स्क्रिप्ट टैग, numeric entities और MODX टैग के छीन लिया जाएगा। MODX की अनुशंसा यह false करने के लिए Contexts के लिए एमजीआर के अलावा, जहां यह सेट है करने के लिए सेट को छोड़ करने के लिए डिफ़ॉल्ट रूप से सच।';
 
-$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
+$_lang['setting_allow_tv_eval'] = 'टीवी बाइडिंग में एवल सक्षम करे';
 $_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'बेनामी सत्र';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
-$_lang['setting_archive_with'] = 'Force PCLZip Archives';
+$_lang['setting_archive_with'] = 'बल पीसीएलआईआईपी अभिलेखागार';
 $_lang['setting_archive_with_desc'] = 'अगर सही है, ZipArchive के रूप में के बजाय ZipArchive की PCLZip का उपयोग करेगा। आप extractTo त्रुटियाँ हो रही है या Package Management में unzipping के साथ समस्या हो रही है, तो इस पर मुड़ें।';
 
-$_lang['setting_auto_menuindex'] = 'Menu indexing default';
+$_lang['setting_auto_menuindex'] = 'मेनू अनुक्रामण डिफॉल्ट';
 $_lang['setting_auto_menuindex_desc'] = 'डिफ़ॉल्ट रूप से सूचकांक स्वत: मेनू incrementing पर चालू करने के लिए \' हाँ\' का चयन करें।';
 
 $_lang['setting_auto_check_pkg_updates'] = 'पैकेज अद्यतन के लिए स्वत: जाँच';
@@ -121,13 +121,13 @@ $_lang['setting_allow_multiple_emails_desc'] = 'यदि सक्षम, Users
 $_lang['setting_automatic_alias'] = 'स्वचालित रूप से alias उत्पन्न';
 $_lang['setting_automatic_alias_desc'] = 'बचत जब Resource के पृष्ठ शीर्षक पर आधारित एक alias उत्पन्न स्वचालित रूप से प्रणाली की \'हां\' का चयन करें।';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'स्वचलित टेम्पलेट असाइनमेंट';
 $_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
 
-$_lang['setting_base_help_url'] = 'Base Help URL';
+$_lang['setting_base_help_url'] = 'आधार सहायता यूआरएल';
 $_lang['setting_base_help_url_desc'] = 'जिसके द्वारा बेस URL manager में पृष्ठों के शीर्ष सही में सहायता लिंक बनाने के लिए।';
 
-$_lang['setting_blocked_minutes'] = 'Blocked Minutes';
+$_lang['setting_blocked_minutes'] = 'अवरुद्ध मिनिट';
 $_lang['setting_blocked_minutes_desc'] = 'यहाँ आप एक Users वे अनुमति दी विफल लॉगिन प्रयास की अपनी अधिकतम संख्या तक पहुँचने के लिए यदि अवरुद्ध हो जाएगा कि मिनट की संख्या में प्रवेश कर सकते हैं। केवल संख्या के रूप में इस मान दर्ज करें (कोई अल्पविराम, आदि spaces )';
 
 $_lang['setting_cache_action_map'] = 'Action Map कैश सक्षम करें';
@@ -136,7 +136,7 @@ $_lang['setting_cache_action_map_desc'] = 'जब सक्षम, actions (य�
 $_lang['setting_cache_alias_map'] = 'Context Alias Map कैश सक्षम करें';
 $_lang['setting_cache_alias_map_desc'] = 'सक्षम होने पर, सभी Resource URIs हैं कैश्ड के संदर्भ में। पर छोटे साइटों को सक्षम और बेहतर प्रदर्शन के लिए बड़ा साइटों पर अक्षम करें।';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
+$_lang['setting_use_context_resource_table'] = 'सन्दर्भ कैश रिफ्रेश के लिए संदर्भ संसाधन तालिका का उपयोग करे';
 $_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Context सेटिंग कैश सक्षम करें';
@@ -416,30 +416,30 @@ $_lang['setting_mail_smtp_port'] = 'SMTP पोर्ट';
 $_lang['setting_mail_smtp_port_desc'] = 'डिफ़ॉल्ट SMTP सर्वर पोर्ट सेट करता है।';
 
 $_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix_desc'] = 'SMTP कनेक्शन का एंक्रिप्शन सेट करता है | विकल्प "", एसएसएल" या "टीएलएस" हैं';
 
-$_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls'] = 'एसएमटीपी ऑटो टीएलस';
+$_lang['setting_mail_smtp_autotls_desc'] = 'यदि कोई सर्वर इसका समर्थन करता है तो क्या टीएलएस एंक्रिप्शन को स्वचालित रुप से सक्षम करना है, भले ही "एसएमटीपी एंक्रिप्शन" " टीएलएस" पर सेट न हो';
 
-$_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
+$_lang['setting_mail_smtp_single_to'] = 'एसएमटीपी सिंगल टू';
 $_lang['setting_mail_smtp_single_to_desc'] = 'बजाय पतों पर पूरे करने के लिए भेजने के लिए फील्ड प्रक्रिया व्यक्तिगत ईमेल करने की क्षमता प्रदान करता है।';
 
-$_lang['setting_mail_smtp_timeout'] = 'SMTP Timeout';
+$_lang['setting_mail_smtp_timeout'] = 'SMTP टाइमआउट';
 $_lang['setting_mail_smtp_timeout_desc'] = 'सेकंड में SMTP सर्वर मध्यांतर सेट करता है। इस समारोह में Win32 सर्वर में काम नहीं करेगा।';
 
-$_lang['setting_mail_smtp_user'] = 'SMTP User';
+$_lang['setting_mail_smtp_user'] = 'एसएमटीपी उपयोगकर्ता';
 $_lang['setting_mail_smtp_user_desc'] = 'User के खिलाफ SMTP को प्रमाणित करने के लिए।';
 
 $_lang['setting_main_nav_parent'] = 'मुख्य मेनू parent';
 $_lang['setting_main_nav_parent_desc'] = 'मुख्य मेनू के लिए सभी रिकॉर्ड खींच करने के लिए इस्तेमाल किया कंटेनर।';
 
-$_lang['setting_manager_direction'] = 'Manager Text Direction';
+$_lang['setting_manager_direction'] = 'प्रबंधक पाठ दिशा';
 $_lang['setting_manager_direction_desc'] = 'पाठ सही है या छोड़ दिया करने के लिए सही करने के लिए छोड़ दिया, manager में प्रदान किया जाएगा कि दिशा चुनें।';
 
 $_lang['setting_manager_date_format'] = 'Manager दिनांक स्वरूप';
 $_lang['setting_manager_date_format_desc'] = 'Format स्ट्रिंग, तारीखों में manager का प्रतिनिधित्व के लिए PHP तिथि () प्रारूप में।';
 
-$_lang['setting_manager_favicon_url'] = 'Manager Favicon URL';
+$_lang['setting_manager_favicon_url'] = 'प्रबंधक फेविकोन यूआरएल';
 $_lang['setting_manager_favicon_url_desc'] = 'यदि सेट, इस URL के रूप में एक favicon MODX manager के लिए लोड होगा। Manager को एक रिश्तेदार URL होना manager/directory, या कोई निरपेक्ष URL.';
 
 $_lang['setting_manager_js_cache_file_locking'] = 'Manager के लिए ताला लगा फ़ाइल सक्षम JS/CSS कैश';
@@ -485,7 +485,7 @@ $_lang['setting_modRequest.class'] = 'हेन्डलर class का अन�
 $_lang['setting_modRequest.class_desc'] = '';
 
 $_lang['setting_modx_browser_tree_hide_files'] = 'मीडिया ब्राउज़र Tree छिपा फ़ाइलें';
-$_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside folders are not displayed in the Media Browser source tree.';
+$_lang['setting_modx_browser_tree_hide_files_desc'] = 'अगर सही है तो फोल्डर के अंदर की फाइलें मीडिया ब्राउजर  सोर्स ट्री में प्रदर्शित नहीं होती हैं |';
 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'मीडिया ब्राउज़र Tree Tooltips छुपाएँ';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'मीडिया ब्राउज़र पेड़ में एक फाइल पर मँडरा जब अगर सही है, कोई छवि पूर्वावलोकन टूलटिप्स दिखाए जाते हैं। सच करने के लिए चूक।';
@@ -496,7 +496,7 @@ $_lang['setting_modx_browser_default_sort_desc'] = 'जब मीडिया �
 $_lang['setting_modx_browser_default_viewmode'] = 'मीडिया ब्राउज़र डिफ़ॉल्ट दृश्य मोड';
 $_lang['setting_modx_browser_default_viewmode_desc'] = 'जब मीडिया ब्राउज़र में प्रबंधक का उपयोग कर डिफ़ॉल्ट दृश्य मोड। उपलब्ध मान रहे हैं: ग्रिड, सूची है।';
 
-$_lang['setting_modx_charset'] = 'Character encoding';
+$_lang['setting_modx_charset'] = 'अक्षरों को सांकेतिक अक्षरों में बदलना';
 $_lang['setting_modx_charset_desc'] = 'कृपया आप उपयोग करना चाहते हैं जो वर्ण एन्कोडिंग का चयन करें। कृपया ध्यान दें कि MODX इन encodings की एक संख्या के साथ, लेकिन उन सभी को नहीं परीक्षण किया गया है। अधिकांश भाषाओं के लिए डिफ़ॉल्ट सेटिंग UTF-8 के बेहतर है।';
 
 $_lang['setting_new_file_permissions'] = 'नई फ़ाइल अनुमतियाँ';
@@ -505,17 +505,17 @@ $_lang['setting_new_file_permissions_desc'] = 'जब एक नया फ़ा
 $_lang['setting_new_folder_permissions'] = 'नया फ़ोल्डर अनुमतियाँ';
 $_lang['setting_new_folder_permissions_desc'] = 'जब फ़ाइल Manager में एक नया फ़ोल्डर बनाने, फ़ाइल Manager जो इस सेटिंग में प्रवेश करने के लिए फ़ोल्डर अनुमतियाँ परिवर्तित करने का प्रयास करेंगे। यह कुछ setups, जैसे कि IIS पर काम नहीं हो सकता है, जो मामले में आप मैन्युअल रूप से अनुमतियाँ बदलने की आवश्यकता होगी।';
 
-$_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
+$_lang['setting_parser_recurse_uncacheable'] = 'विलंबित अप्राप्य पार्सिंग';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 
-$_lang['setting_password_generated_length'] = 'Password Auto-Generated Length';
+$_lang['setting_password_generated_length'] = 'पासवर्ड स्वतः उत्पन्न लंबाई';
 $_lang['setting_password_generated_length_desc'] = 'एक user के लिए स्वत:-जनरेट किया गया पासवर्ड की लंबाई।';
 
 $_lang['setting_password_min_length'] = 'न्यूनतम पासवर्ड लंबाई';
 $_lang['setting_password_min_length_desc'] = 'एक user के लिए एक पासवर्ड के लिए न्यूनतम लंबाई।';
 
-$_lang['setting_preserve_menuindex'] = 'Preserve Menu Index When Duplicating Resources';
-$_lang['setting_preserve_menuindex_desc'] = 'When duplicating Resources, the menu index order will also be preserved.';
+$_lang['setting_preserve_menuindex'] = 'संसाधनों की नकल करते समय मेनू इंडेक्स को सुरक्षित रखें';
+$_lang['setting_preserve_menuindex_desc'] = 'संसाधनों की नकल करते समय मेनू अनुक्रमणिका क्रम भी संरक्षित रहेगा |';
 
 $_lang['setting_principal_targets'] = 'ACL लक्ष्य लोड करने के लिए';
 $_lang['setting_principal_targets_desc'] = 'MODX users के लिए लोड करने के लिए ACL लक्ष्य को अनुकूलित करें।';
@@ -565,7 +565,7 @@ $_lang['setting_phpthumb_error_fontsize_desc'] = 'एक em पाठ phpThumb �
 $_lang['setting_phpthumb_error_textcolor'] = 'phpThumb त्रुटि फ़ॉन्ट रंग';
 $_lang['setting_phpthumb_error_textcolor_desc'] = 'एक हेक्स मान, #, phpThumb त्रुटि आउटपुट में प्रदर्शित पाठ के लिए फ़ॉन्ट रंग का संकेत के बिना।';
 
-$_lang['setting_phpthumb_far'] = 'phpThumb Force Aspect Ratio';
+$_lang['setting_phpthumb_far'] = 'पीएचपी अंगूठे बल पहलू अनुपात';
 $_lang['setting_phpthumb_far_desc'] = 'डिफ़ॉल्ट तक जब MODX में इस्तेमाल किया phpThumb के लिए सेटिंग। डिफ़ॉल्ट C केंद्र की ओर पहलू अनुपात के बल पर।';
 
 $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb ImageMagick पथ';
@@ -601,7 +601,7 @@ $_lang['setting_phpthumb_nooffsitelink_valid_domains_desc'] = 'एक अल्�
 $_lang['setting_phpthumb_nooffsitelink_watermark_src'] = 'phpThumb Offsite जोड़ना वॉटरमार्क स्रोत';
 $_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'वैकल्पिक। एक फ़ाइल के लिए एक वैध फाइल सिस्टम पथ आपकी छवियों phpThumb द्वारा ऑफसाइट प्रदान कर रहे हैं जब एक वॉटरमार्क स्रोत के रूप में उपयोग करने के लिए।';
 
-$_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
+$_lang['setting_phpthumb_zoomcrop'] = 'पीएचपी अंगूठे जूम - फसल';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'ModX में प्रयोग किया जाता है जब phpThumb के लिए डिफ़ॉल्ट सेटिंग ZC। 0 चूक ज़ूम cropping को रोकने के लिए।';
 
 $_lang['setting_publish_default'] = 'प्रकाशित डिफ़ॉल्ट';
@@ -623,7 +623,7 @@ $_lang['setting_request_controller_desc'] = 'मुख्य अनुरोध 
 $_lang['setting_request_method_strict'] = 'सख्त अनुरोध विधि';
 $_lang['setting_request_method_strict_desc'] = 'अगर सक्रिय है, अनुरोध id पैरामीटर के माध्यम अनुरोधों को सक्रिय किया FURLs साथ ध्यान नहीं दिया जाएगा, और अनुरोध alias पैरामीटर के माध्यम से उन सक्षम होना चाहिए FURLs बिना नजरअंदाज कर दिया जाएगा।';
 
-$_lang['setting_request_param_alias'] = 'Request Alias Parameter';
+$_lang['setting_request_param_alias'] = 'उपनाम पैरामीटर का अनुरोध करे';
 $_lang['setting_request_param_alias_desc'] = 'जब पुनः निर्देशित कर के साथ FURLs resource alias की पहचान करने के लिए जाओ पैरामीटर का नाम।';
 
 $_lang['setting_request_param_id'] = 'ID पैरामीटर अनुरोध';
@@ -644,7 +644,7 @@ $_lang['setting_resource_tree_node_tooltip_desc'] = 'जब प्रतिप�
 $_lang['setting_richtext_default'] = 'Richtext डिफ़ॉल्ट';
 $_lang['setting_richtext_default_desc'] = '\'हाँ\' सभी नए Resource को Richtext संपादक डिफ़ॉल्ट रूप से उपयोग करने के लिए का चयन करें।';
 
-$_lang['setting_search_default'] = 'Searchable Default';
+$_lang['setting_search_default'] = 'खोजने योग्य डिफॉल्ट';
 $_lang['setting_search_default_desc'] = 'डिफ़ॉल्ट रूप से सभी नए Resource खोज योग्य बनाने के लिए \' हाँ\' का चयन करें।';
 $_lang['setting_search_default_err'] = 'कृपया निर्दिष्ट करें चाहे या नहीं आप document डिफ़ॉल्ट द्वारा खोजा जा करने के लिए चाहते हैं।';
 
@@ -654,8 +654,8 @@ $_lang['setting_server_offset_time_desc'] = 'जहाँ आप हैं औ�
 $_lang['setting_server_protocol'] = 'सर्वर प्रकार';
 $_lang['setting_server_protocol_desc'] = 'यदि आपकी साइट पर कोई https कनेक्शन है, तो कृपया यहाँ निर्दिष्ट करें।';
 $_lang['setting_server_protocol_err'] = 'कृपया अपनी साइट किसी सुरक्षित साइट है या नहीं निर्दिष्ट करें।';
-$_lang['setting_server_protocol_http'] = 'http';
-$_lang['setting_server_protocol_https'] = 'https';
+$_lang['setting_server_protocol_http'] = 'एचटीटीएस';
+$_lang['setting_server_protocol_https'] = 'एचटीटीसीएस';
 
 $_lang['setting_session_cookie_domain'] = 'Session कुकी डोमेन';
 $_lang['setting_session_cookie_domain_desc'] = 'Session कुकी डोमेन अनुकूलित करने के लिए इस सेटिंग का उपयोग करें। वर्तमान डोमेन का उपयोग करने के लिए रिक्त छोड़ दें।';
@@ -672,8 +672,8 @@ $_lang['setting_session_cookie_secure_desc'] = 'सुरक्षित Session
 $_lang['setting_session_cookie_httponly'] = 'manager कुकी HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'manager कुकीज़ पर HttpOnly ध्वज सेट करने के लिए इस सेटिंग का उपयोग करें।';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'सत्र कुकी समीसाइड';
+$_lang['setting_session_cookie_samesite_desc'] = 'ढीला या सख्त चुने';
 
 $_lang['setting_session_gc_maxlifetime'] = 'manager कचरा कलेक्टर अधिकतम जीवनकाल';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Session.gc_maxlifetime PHP ini सेटिंग का अनुकूलन जब \'modSessionHandler\' का उपयोग करने की अनुमति देता है।';
@@ -684,7 +684,7 @@ $_lang['setting_session_handler_class_desc'] = 'Session manager डेटाब�
 $_lang['setting_session_name'] = 'Session के नाम';
 $_lang['setting_session_name_desc'] = 'Session के नाम MODX में Sessions के लिए इस्तेमाल किया अनुकूलित करने के लिए इस सेटिंग का उपयोग करें। डिफ़ॉल्ट PHP Session के नाम का उपयोग करने के लिए रिक्त छोड़ दें।';
 
-$_lang['setting_settings_version'] = 'Settings Version';
+$_lang['setting_settings_version'] = 'सेटिंग संस्करण';
 $_lang['setting_settings_version_desc'] = 'MODX की वर्तमान स्थापित संस्करण।';
 
 $_lang['setting_settings_distro'] = 'सेटिंग्स वितरण';
@@ -693,7 +693,7 @@ $_lang['setting_settings_distro_desc'] = 'वर्तमान वितरण 
 $_lang['setting_set_header'] = 'HTTP हेडर सेट करें';
 $_lang['setting_set_header_desc'] = 'जब सक्षम, MODX Resources के लिए HTTP हेडर सेट करने का प्रयास करेंगे।';
 
-$_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
+$_lang['setting_send_poweredby_header'] = 'एक्स-पावर्ड-बाय हेडर भेजे';
 $_lang['setting_send_poweredby_header_desc'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
 
 $_lang['setting_show_tv_categories_header'] = 'TVs के साथ "Categories" टैब्स शीर्षक दिखाएँ';
@@ -722,34 +722,34 @@ $_lang['setting_site_unavailable_page'] = 'साइट अनुपलब्ध
 $_lang['setting_site_unavailable_page_desc'] = 'एक ऑफ़लाइन पेज के रूप में यहाँ का उपयोग करने के लिए इच्छित Resource की ID दर्ज करें। <strong>नोट: सुनिश्चित करें आप दर्ज करें इस ID को एक मौजूदा Resource के अंतर्गत आता है, और इसे प्रकाशित किया गया है!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'कृपया साइट अनुपलब्ध पृष्ठ के लिए document ID निर्दिष्ट करें।';
 
-$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
-$_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and removing static files for templates.';
+$_lang['setting_static_elements_automate_templates'] = 'टेम्पलेट के लिए स्थित तत्वों को स्वचालित करे';
+$_lang['setting_static_elements_automate_templates_desc'] = 'यह स्थिर फाइलों के संचालन को स्वचालित करेगा, जैसे टेम्पलेट के लिए स्थित फाइल बनाना और निकालना |';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for template variables?';
-$_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and removing static files for template variables.';
+$_lang['setting_static_elements_automate_tvs'] = '$_lang[\'setting_static_elements_automate_tvs\'] फाइल: सेटिंग. Inc. php';
+$_lang['setting_static_elements_automate_tvs_desc'] = 'यह स्थिर फाइलों के संचालन को स्वचालित करेगा, जैसे टेम्पलेट चर के लिए स्थित फाइलें बनाना और निकालना |';
 
-$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
-$_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and removing static files for chunks.';
+$_lang['setting_static_elements_automate_chunks'] = 'विखंडू के लिए स्थित तत्वों को स्वचालित करे?';
+$_lang['setting_static_elements_automate_chunks_desc'] = 'यह स्थिर फाइलों के संचालन को स्वचालित करेगा जैसे कि विखंडू के लिए स्थिर फाइल बनाना और निकालना |';
 
-$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
-$_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and removing static files for snippets.';
+$_lang['setting_static_elements_automate_snippets'] = 'स्नीपेट के लिए स्थित तत्वों को स्वचालित करे?';
+$_lang['setting_static_elements_automate_snippets_desc'] = 'यह स्थिर फाइलों को स्वचालित करेगा जैसे कि स्नीपेट के लिए स्थित फाइल बनाना और निकालना |';
 
-$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
-$_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and removing static files for plugins.';
+$_lang['setting_static_elements_automate_plugins'] = 'प्लगइन के लिए स्थित तत्वों को स्वचालित करे?';
+$_lang['setting_static_elements_automate_plugins_desc'] = 'यह स्थिर फाइलों को स्वचालित करेगा जैसे कि प्लगइन के लिए स्थित फाइल बनाना और निकालना |';
 
-$_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
-$_lang['setting_static_elements_default_mediasource_desc'] = 'Specify a default mediasource where you want to store the static elements in.';
+$_lang['setting_static_elements_default_mediasource'] = 'स्थिर तत्व डिफॉल्ट मीडिया स्त्रोत';
+$_lang['setting_static_elements_default_mediasource_desc'] = 'एक डिफॉल्ट मीडिया स्त्रोत निर्दिष्ट करे जहां आप स्थिर तत्वों को संग्रहित करना चाहते हैं |';
 
-$_lang['setting_static_elements_default_category'] = 'Static elements default category';
-$_lang['setting_static_elements_default_category_desc'] = 'Specify a default category for creating new static elements.';
+$_lang['setting_static_elements_default_category'] = 'स्थिर तत्व डिफॉल्ट श्रेणी';
+$_lang['setting_static_elements_default_category_desc'] = 'नए स्थिर तत्त्व बनाने के लिए एक डिफॉल्ट श्रेणी निर्दिष्ट करें |';
 
-$_lang['setting_static_elements_basepath'] = 'Static elements basepath';
-$_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
+$_lang['setting_static_elements_basepath'] = 'स्टेथिक तत्व बेसपाथ';
+$_lang['setting_static_elements_basepath_desc'] = 'स्थिर तत्व फाइलों को संग्रहित करने के लिए बेसपाथ';
 
-$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute'] = 'पूर्ण स्थिर संसाधन पथ की अनुमति दे';
 $_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
 
-$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path'] = 'स्थैतिक संसाधन आधार पथ';
 $_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
 
 $_lang['setting_strip_image_paths'] = 'ब्राउज़र path को फिर से लिखना?';
@@ -768,7 +768,7 @@ $_lang['setting_topmenu_show_descriptions_desc'] = 'यदि सेट कर�
 $_lang['setting_tree_default_sort'] = 'संसाधन ट्री डिफ़ॉल्ट सॉर्ट फ़ील्ड';
 $_lang['setting_tree_default_sort_desc'] = 'Resource tree के लिए डिफ़ॉल्ट सॉर्ट क्षेत्र manager लोड हो रहा है।';
 
-$_lang['setting_tree_root_id'] = 'Tree Root ID';
+$_lang['setting_tree_root_id'] = 'ट्री रूट आईडी';
 $_lang['setting_tree_root_id_desc'] = 'रूट के रूप में उस नोड के नीचे बाईं resource tree शुरू करने के लिए एक resource के एक वैध पहचान पत्र पर सेट करें। user केवल निर्दिष्ट resource के बच्चे हैं कि resource को देखने के लिए सक्षम हो जाएगा।';
 
 $_lang['setting_tvs_below_content'] = 'TVs content नीचे ले जाएँ';
@@ -777,14 +777,14 @@ $_lang['setting_tvs_below_content_desc'] = 'यह Template Variables context �
 $_lang['setting_ui_debug_mode'] = 'UI डिबग मोड';
 $_lang['setting_ui_debug_mode_desc'] = 'डिफ़ॉल्ट manager विषय के लिए UI का उपयोग करते समय उत्पादन डिबग संदेश के लिए हाँ करने के लिए सेट करें। आप console.log का समर्थन करता है कि एक ब्राउज़र का उपयोग करना चाहिए।';
 
-$_lang['setting_udperms_allowroot'] = 'Allow root';
+$_lang['setting_udperms_allowroot'] = 'रूट की अनुमति दे';
 $_lang['setting_udperms_allowroot_desc'] = 'क्या आप अपने users को साइट की जड़ में नए resource बनाने के लिए अनुमति देने के लिए चाहते हैं?';
 
 $_lang['setting_unauthorized_page'] = 'अनधिकृत पृष्ठ';
 $_lang['setting_unauthorized_page_desc'] = 'आप वे एक सुरक्षित है या अनधिकृत resource का अनुरोध किया है अगर करने के लिए users को भेजना चाहते resource का आईडी दर्ज करें। <strong> नोट: आप में प्रवेश आईडी एक मौजूदा resource के अंतर्गत आता है, और इसे प्रकाशित कर दिया गया है और सार्वजनिक रूप से सुलभ है सुनिश्चित करें </strong>';
 $_lang['setting_unauthorized_page_err'] = 'कृपया अनधिकृत पेज के लिए कोई resource ID निर्दिष्ट करें।';
 
-$_lang['setting_upload_check_exists'] = 'Check if uploaded file exists';
+$_lang['setting_upload_check_exists'] = 'जाचे की अपलोड की गई फाइल मौजूद है या नहीं';
 $_lang['setting_upload_check_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
 $_lang['setting_upload_files'] = 'Uploadable फ़ाइल प्रकार';
