@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Default System Settings for MODX Revolution
  *
@@ -1018,7 +1019,7 @@ $settings['manager_week_start']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
-$settings['enable_template_picker_in_tree']= $xpdo->newObject(modSystemSetting::class);
+$settings['enable_template_picker_in_tree'] = $xpdo->newObject(modSystemSetting::class);
 $settings['enable_template_picker_in_tree']->fromArray([
     'key' => 'enable_template_picker_in_tree',
     'value' => true,
@@ -1027,7 +1028,7 @@ $settings['enable_template_picker_in_tree']->fromArray([
     'area' => 'manager',
     'editedon' => null,
 ], '', true, true);
-$settings['modx_browser_tree_hide_files']= $xpdo->newObject(modSystemSetting::class);
+$settings['modx_browser_tree_hide_files'] = $xpdo->newObject(modSystemSetting::class);
 $settings['modx_browser_tree_hide_files']->fromArray([
   'key' => 'modx_browser_tree_hide_files',
   'value' => true,
@@ -2065,5 +2066,14 @@ $settings['passwordless_expiration']->fromArray([
     'area' => 'authentication',
     'editedon' => null,
 ], '', true, true);
+$settings['static_elements_html_extension'] = $xpdo->newObject('modSystemSetting');
+$settings['static_elements_html_extension']->fromArray(array (
+    'key' => 'static_elements_html_extension',
+    'value' => '.tpl',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'static_elements',
+    'editedon' => null,
+), '', true, true);
 
 return $settings;
