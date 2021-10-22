@@ -95,7 +95,7 @@ $_lang['setting_allow_tags_in_post'] = 'पोस्ट में टैग क�
 $_lang['setting_allow_tags_in_post_desc'] = 'अगर गलत है, सभी पोस्ट variables HTML स्क्रिप्ट टैग, numeric entities और MODX टैग के छीन लिया जाएगा। MODX की अनुशंसा यह false करने के लिए Contexts के लिए एमजीआर के अलावा, जहां यह सेट है करने के लिए सेट को छोड़ करने के लिए डिफ़ॉल्ट रूप से सच।';
 
 $_lang['setting_allow_tv_eval'] = 'टीवी बाइडिंग में एवल सक्षम करे';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval_desc'] = 'टीवी बाइडिंग में ईवल या सक्षम या अक्षम करने के लिए इस विकल्प का चयन करें | यदि यह विकल्प नहीं पर सेट हैं, तो कोड मान को लेवल नियमित पाठ के रूप में नियंत्रित किया जाएगा |';
 
 $_lang['setting_anonymous_sessions'] = 'बेनामी सत्र';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
@@ -155,8 +155,8 @@ $_lang['setting_cache_default_err'] = 'आप document डिफ़ॉल्ट 
 $_lang['setting_cache_expires'] = 'डिफ़ॉल्ट कैश के लिए समय सीमा समाप्ति समय';
 $_lang['setting_cache_expires_desc'] = 'यह मान (सेकंड में) समय कैश फ़ाइलों की राशि पिछले डिफ़ॉल्ट कैशिंग के लिए सेट करता है।';
 
-$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
-$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
+$_lang['setting_cache_resource_clear_partial'] = 'प्रदत्त संदर्भों के लिए आंशिक संसाधन कैस साफ़ करें';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'सक्षम होने पर, MODX रिफ्रेश लेवल प्रदान किए गए संदर्भों के लिए संसाधन कैस को साफ़ करेगा |';
 
 $_lang['setting_cache_format'] = 'कैशिंग स्वरूप उपयोग करने के लिए';
 $_lang['setting_cache_format_desc'] = '0 PHP, 1 = = JSON, 2 = serialize. एक स्वरूप';
@@ -170,7 +170,7 @@ $_lang['setting_cache_lang_js_desc'] = 'सच करने के लिए स
 $_lang['setting_cache_lexicon_topics'] = 'कैश Lexicon Topics';
 $_lang['setting_cache_lexicon_topics_desc'] = 'जब सक्षम बहुत अंतर्राष्ट्रीयकरण कार्यक्षमता के लिए लोड समय को कम करने के लिए इतनी के रूप में, सब शब्दकोश विषय में कैश किया जाएगा। ModX दृढ़ता से \'हां\' करने के लिए इस सेट को छोड़ने की सिफारिश की।';
 
-$_lang['setting_cache_noncore_lexicon_topics'] = 'Cache Non-Core Lexicon Topics';
+$_lang['setting_cache_noncore_lexicon_topics'] = 'कैसे नॉन-कोर लेक्सिकोंन विषय';
 $_lang['setting_cache_noncore_lexicon_topics_desc'] = 'कैश्ड नहीं जब विकलांग, गैर-कोर Lexicon विषय हो जाएगा। यह जब अपने ही एक्स्ट्रा कलाकार के विकास को अक्षम करने के लिए उपयोगी है।';
 
 $_lang['setting_cache_resource'] = 'आंशिक Resource कैश सक्षम';
@@ -203,7 +203,7 @@ $_lang['setting_concat_js_desc'] = 'यह सक्षम है, जब ModX m
 $_lang['setting_confirm_navigation'] = 'नेविगेशन न सहेजे गए परिवर्तनों के साथ की पुष्टि करें';
 $_lang['setting_confirm_navigation_desc'] = 'जब यह सक्षम किया गया है, users उनके इरादे अगर वहाँ बिना सहेजे परिवर्तन हैं की पुष्टि करें करने के लिए संकेत किया जाएगा।';
 
-$_lang['setting_container_suffix'] = 'Container Suffix';
+$_lang['setting_container_suffix'] = 'कंटेनर प्रत्यय';
 $_lang['setting_container_suffix_desc'] = 'Resources के लिए संलग्न करने के लिए प्रत्यय कंटेनरों के रूप में जब FURLs का उपयोग कर सेट करें।';
 
 $_lang['setting_context_tree_sort'] = 'Resource ट्री में Contexts की Sorting को सक्षम करें';
@@ -231,8 +231,8 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'डिफ़ॉल्
 $_lang['setting_default_media_source'] = 'डिफ़ॉल्ट मीडिया स्रोत';
 $_lang['setting_default_media_source_desc'] = 'डिफ़ॉल्ट मीडिया लोड करने के लिए स्रोत।';
 
-$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
-$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
+$_lang['setting_default_media_source_type'] = 'डिफॉल्ट मीडिया स्त्रोत प्रकार';
+$_lang['setting_default_media_source_type_desc'] = 'नया मीडिया स्त्रोत बनाते समय डिफॉल्ट चयनित मीडिया स्त्रोत प्रकार |';
 
 $_lang['setting_default_template'] = 'डिफॉल्ट टेम्पलेट';
 $_lang['setting_default_template_desc'] = 'डिफ़ॉल्ट टेम्पलेट आप नए Resource के लिए उपयोग करना चाहते हैं का चयन करें। आप अभी भी Resource संपादक में कोई अलग टेम्पलेट का चयन कर सकते हैं, यह सेटिंग सिर्फ आपके टेम्पलेट्स में से एक आप के लिए पूर्व-चुनता है।';
@@ -242,7 +242,7 @@ $_lang['setting_default_per_page_desc'] = 'डिफ़ॉल्ट manager भ�
 
 $_lang['setting_emailsender'] = 'ईमेल पते से Registration';
 $_lang['setting_emailsender_desc'] = 'यहाँ आप users अपने username और पासवर्ड को भेजते समय इस्तेमाल किया ईमेल पते निर्दिष्ट कर सकते हैं।';
-$_lang['setting_emailsender_err'] = 'Please state the administration email address.';
+$_lang['setting_emailsender_err'] = 'कृपया प्रशासन ईमेल पता बनाएं |';
 
 $_lang['setting_enable_dragdrop'] = 'Resource/Element पेड़ में Drag/Drop सक्षम करें';
 $_lang['setting_enable_dragdrop_desc'] = 'अगर बंद, खींचने और Resource और Element के पेड़ों में छोड़ने को रोकने जाएगा।';
@@ -284,13 +284,13 @@ $_lang['setting_form_customization_use_all_groups_desc'] = 'यदि सेट 
 $_lang['setting_forward_merge_excludes'] = 'sendForward पर मर्ज फ़ील्ड्स को बाहर';
 $_lang['setting_forward_merge_excludes_desc'] = 'एक Symlink लक्ष्य Resource के मान से अधिक गैर-रिक्त फ़ील्ड मानों विलीन हो जाती है; यह अल्पविराम-सीमांकित सूची का उपयोग कर शामिल नहीं निर्दिष्ट फ़ील्ड द्वारा Symlink अधिरोहित जा रहा से रोकता है।';
 
-$_lang['setting_friendly_alias_lowercase_only'] = 'FURL Lowercase Aliases';
+$_lang['setting_friendly_alias_lowercase_only'] = 'FURL लोअरकेश उपनाम';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'एक Resource एलियास में केवल लोअरकेस वर्णों की अनुमति देनी है या नहीं निर्धारित करता है।';
 
-$_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maximum Length';
+$_lang['setting_friendly_alias_max_length'] = 'FURL उपनाम अधिकतम लंबाई';
 $_lang['setting_friendly_alias_max_length_desc'] = 'यदि अधिक से अधिक शून्य, एक Resource alias में अनुमति देने के लिए वर्णों की अधिकतम संख्या। शून्य असीमित बराबर होती है।';
 
-$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
+$_lang['setting_friendly_alias_realtime'] = 'FURL उपनाम रियल-टाइम';
 $_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'एलियास चरित्र प्रतिबंध विधि तह करना';
@@ -299,22 +299,22 @@ $_lang['setting_friendly_alias_restrict_chars_desc'] = 'एक Resource alias �
 $_lang['setting_friendly_alias_restrict_chars_pattern'] = 'एलियास चरित्र प्रतिबंध पैटर्न तह करना';
 $_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'सीमित Resource alias में प्रयुक्त वर्णों के लिए एक मान्य RegEx पैटर्न।';
 
-$_lang['setting_friendly_alias_strip_element_tags'] = 'FURL Alias Strip Element Tags';
+$_lang['setting_friendly_alias_strip_element_tags'] = 'FURL उपनाम पट्टी तत्त्व टैग्स';
 $_lang['setting_friendly_alias_strip_element_tags_desc'] = 'निर्धारित करता है अगर element टैग एक Resource एलियास से छीन लिया जाना चाहिए।';
 
-$_lang['setting_friendly_alias_translit'] = 'FURL Alias Transliteration';
+$_lang['setting_friendly_alias_translit'] = 'FURL उपनाम लिपयांतरण';
 $_lang['setting_friendly_alias_translit_desc'] = 'transliteration पर एक Resource के लिए निर्दिष्ट एक उर्फ का उपयोग करने के लिए विधि। खाली या "कोई नहीं" डिफ़ॉल्ट जो transliteration रुक जाती है। अन्य संभव मूल्यों "iconv\' (यदि उपलब्ध है) या एक नामांकित transliteration तालिका एक कस्टम transliteration सेवा वर्ग द्वारा प्रदान की जाती हैं।';
 
-$_lang['setting_friendly_alias_translit_class'] = 'FURL Alias Transliteration Service Class';
+$_lang['setting_friendly_alias_translit_class'] = 'FURL उपनाम लिपयांतरण सेवा वर्ग';
 $_lang['setting_friendly_alias_translit_class_desc'] = 'एक वैकल्पिक सेवा class उर्फ generation/filtering मोड़ना के लिए नामांकित transliteration सेवाएं प्रदान करने के लिए।';
 
-$_lang['setting_friendly_alias_translit_class_path'] = 'FURL Alias Transliteration Service Class Path';
+$_lang['setting_friendly_alias_translit_class_path'] = 'FURL लिपयांतरण सेवा वर्ग पथ';
 $_lang['setting_friendly_alias_translit_class_path_desc'] = 'मॉडल पैकेज स्थान जहाँ मोड़ना उर्फ transliteration सेवा वर्ग से भरा जाएगा।';
 
 $_lang['setting_friendly_alias_trim_chars'] = 'एलियास ट्रिम अक्षर तह करना';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'वर्ण एक प्रदान किया गया Resource एलियास के सिरों से ट्रिम करने के लिए।';
 
-$_lang['setting_friendly_alias_word_delimiter'] = 'FURL Alias Word Delimiter';
+$_lang['setting_friendly_alias_word_delimiter'] = 'FURL उपनाम बर्ड डिलीमीटर';
 $_lang['setting_friendly_alias_word_delimiter_desc'] = 'पसंदीदा शब्द सीमांकक friendly URL alias slugs के लिए।';
 
 $_lang['setting_friendly_alias_word_delimiters'] = 'एलियास शब्द सीमांकक तह करना';
@@ -342,7 +342,7 @@ $_lang['setting_link_tag_scheme_desc'] = 'URL के लिए टैग उत�
 $_lang['setting_locale'] = 'लोकेल';
 $_lang['setting_locale_desc'] = 'सिस्टम के लिए locale निर्धारित।  डिफ़ॉल्ट का उपयोग करने के लिए रिक्त छोड़ दें। अधिक जानकारी के लिए <a href="http://php.net/setlocale" target="_blank"> PHP documentation</a> देखें।';
 
-$_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
+$_lang['setting_lock_ttl'] = 'समय - समय पर लॉक करें';
 $_lang['setting_lock_ttl_desc'] = 'सेकंड की संख्या एक रिसोर्स पर ताला user निष्क्रिय है तो के लिए रहेगा।';
 
 $_lang['setting_log_level'] = 'लॉगिंग स्तर';
@@ -351,19 +351,19 @@ $_lang['setting_log_level_desc'] = 'डिफ़ॉल्ट लॉगिंग 
 $_lang['setting_log_target'] = 'लॉगिंग लक्ष्य';
 $_lang['setting_log_target_desc'] = 'डिफ़ॉल्ट लॉगिंग लक्ष्य जहाँ लॉग संदेश लिखे गए हैं। उपलब्ध विकल्प: \'फ़ाइल\', \'HTML\' या \'ECHO\'। डिफ़ॉल्ट \'फ़ाइल\' है अगर नहीं निर्दिष्ट किया।';
 
-$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
-$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
+$_lang['setting_log_deprecated'] = 'बहिष्कृत कार्य लॉग करें';
+$_lang['setting_log_deprecated_desc'] = 'बहिष्कृत कार्य का उपयोग किए जाने पर अपने त्रुटि लॉग में सूचनाएं प्राप्त करने के लिए सक्षम करें |';
 
 $_lang['setting_mail_charset'] = 'मेल Charset';
 $_lang['setting_mail_charset_desc'] = 'ईमेल, उदाहरण के लिए, के लिए डिफ़ॉल्ट चारसेट \'iso-8859-1\' या \'utf-8\'';
 
-$_lang['setting_mail_encoding'] = 'Mail Encoding';
+$_lang['setting_mail_encoding'] = 'मेल इनकोडिंग';
 $_lang['setting_mail_encoding_desc'] = 'संदेश की एन्कोडिंग सेट करता है। इस के लिए विकल्प "8bit", "7bit", "बाइनरी", "base64" और "quoted-printable" कर रहे हैं।';
 
 $_lang['setting_mail_use_smtp'] = 'उपयोग SMTP';
 $_lang['setting_mail_use_smtp_desc'] = 'अगर यह सच है, MODX SMTP मेल कार्यों में उपयोग करने का प्रयास करेंगे।';
 
-$_lang['setting_mail_smtp_auth'] = 'SMTP Authentication';
+$_lang['setting_mail_smtp_auth'] = 'एसएमटीपी प्रमाणीकरण';
 $_lang['setting_mail_smtp_auth_desc'] = 'सेट SMTP प्रमाणन। Mail_smtp_user और mail_smtp_pass सेटिंग्स का इस्तेमाल करता है।';
 
 $_lang['setting_mail_smtp_helo'] = 'SMTP Helo संदेश';
@@ -372,7 +372,7 @@ $_lang['setting_mail_smtp_helo_desc'] = 'संदेश की SMTP HELO (hostn
 $_lang['setting_mail_smtp_hosts'] = 'SMTP होस्ट्स';
 $_lang['setting_mail_smtp_hosts_desc'] = 'SMTP होस्ट सेट करता है।  सभी होस्ट्स किसी अर्धविराम से पृथक होने चाहिए।  तुम भी एक अलग port के लिए प्रत्येक होस्ट इस स्वरूप का उपयोग करके निर्दिष्ट कर सकते हैं: [hostname:port] (उदाहरण के लिए, "smtp1.example.com:25;smtp2.example.com")। Host क्रम में करने की कोशिश की जाएगी।';
 
-$_lang['setting_mail_smtp_keepalive'] = 'SMTP Keep-Alive';
+$_lang['setting_mail_smtp_keepalive'] = 'एसएमटीपी कीप - अलाइव';
 $_lang['setting_mail_smtp_keepalive_desc'] = 'SMTP कनेक्शन प्रत्येक मेल भेजने के बाद बंद किया जा रहा से रोकता है। अनुशंसित नहीं है।';
 
 $_lang['setting_mail_smtp_pass'] = 'SMTP पासवर्ड';
@@ -744,14 +744,14 @@ $_lang['setting_upload_media_desc'] = 'यहाँ आप resource manager क�
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
-$_lang['setting_use_alias_path'] = 'Use Friendly Alias Path';
+$_lang['setting_use_alias_path'] = 'फ्रेंडली अलियास पाथ का इस्तेमाल करें उदाहरण के लिए';
 $_lang['setting_use_alias_path_desc'] = 'यदि resource एक उपनाम है \'हाँ \' के लिए इस विकल्प को सेट पूर्ण पथ resource को प्रदर्शित करेगा। एक एलियास बुलाया \'बच्चे\' के साथ एक resource \'parent\' नामक एक एलियास के साथ एक कंटेनर के अंदर resource स्थित है यदि, उदाहरण के लिए, तब resource के लिए पूर्ण alias पथ के रूप में प्रदर्शित किया जाएगा \'/parent/child.html\'.<br /><strong> ध्यान दें: जब \'हाँ (alias path पर मोड़), context आइटमों के लिए \' इस विकल्प की स्थापना (जैसे छवियाँ, CSS, JavaScripts, आदि) निरपेक्ष पथ, उदाहरण के लिए, \'/assets/images\' विरोध \'/assets/images\' के रूप में उपयोग करें। द्वारा ताकि आप ब्राउज़र (या वेब सर्वर) को रोकने जाएगा के रिश्तेदार पथ के लिए एलियास रास्ते से appending कर रही</strong>';
 
 $_lang['setting_use_editor'] = 'रिच पाठ संपादक को सक्षम करें';
 $_lang['setting_use_editor_desc'] = 'क्या आप rich text editor को सक्षम करने के लिए चाहते हैं? यदि आप और अधिक आराम कर रहे हैं तो आप संपादक इस सेटिंग का उपयोग कर बंद कर सकते हैं HTML, लेखन। ध्यान दें कि यह सेटिंग सभी document और सभी users के लिए लागू होता है!';
 $_lang['setting_use_editor_err'] = 'कृपया state चाहे या नहीं आप एक RTE संपादक का उपयोग करना चाहते हैं।';
 
-$_lang['setting_use_frozen_parent_uris'] = 'Use Frozen Parent URIs';
+$_lang['setting_use_frozen_parent_uris'] = 'फ्रोजन पैरेंट यूआरआई का प्रयोग करें';
 $_lang['setting_use_frozen_parent_uris_desc'] = 'When enabled, the URI for children resources will be relative to the frozen URI of one of its parents, ignoring the aliases of resources high in the tree.';
 
 $_lang['setting_use_multibyte'] = 'Multibyte एक्सटेंशन का उपयोग करें';
@@ -787,19 +787,19 @@ $_lang['setting_xhtml_urls_desc'] = 'अगर सच है, सभी यू�
 $_lang['setting_default_context'] = 'डिफ़ॉल्ट Context';
 $_lang['setting_default_context_desc'] = 'डिफ़ॉल्ट Context तुम नए resources के लिए उपयोग करना चाहते हैं का चयन करें।';
 
-$_lang['setting_auto_isfolder'] = 'Set container automatically';
+$_lang['setting_auto_isfolder'] = 'कंटेनर को स्वचालित रूप से सेट करें';
 $_lang['setting_auto_isfolder_desc'] = 'हाँ करने के लिए सेट, कंटेनर गुण स्वचालित रूप से बदल जाएगा यदि।';
 
-$_lang['setting_default_username'] = 'Default username';
-$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+$_lang['setting_default_username'] = 'डिफॉल्ट उपयोगकर्ता नाम';
+$_lang['setting_default_username_desc'] = 'एक अनधिकृत उपयोगकर्ता के लिए डिफॉल्ट उपयोगकर्ता नाम |';
 
-$_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
+$_lang['setting_manager_use_fullname'] = 'मैनेजर हेडर में पूरा नाम दिखाएं';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
 
-$_lang['setting_log_snippet_not_found'] = 'Log snippets not found';
-$_lang['setting_log_snippet_not_found_desc'] = 'If set to yes, snippets that are called but not found will be logged to the error log.';
+$_lang['setting_log_snippet_not_found'] = 'लॉग स्नीपेट नहीं मिले';
+$_lang['setting_log_snippet_not_found_desc'] = 'यदि हां पर सेट किया जाता है तो कॉल किए गए लेकिन नही मिले स्निपेट्स को त्रुटि लॉग में लॉग किया जाएगा';
 
-$_lang['setting_error_log_filename'] = 'Error log filename';
+$_lang['setting_error_log_filename'] = 'त्रुटि लॉग फाइल नाम';
 $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX error log file (includes file extension).';
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
