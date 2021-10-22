@@ -10,7 +10,7 @@
 $_lang['events'] = 'आयोजन';
 $_lang['system_event'] = 'तरीके वाले आयोजन';
 $_lang['system_events'] = 'सिस्टम ईवेंट्स';
-$_lang['system_events.desc'] = 'System Events are the events in MODX that Plugins are registered to. They are "fired" throughout the MODX code, allowing Plugins to interact with MODX code and add custom functionality without hacking core code. You can create your own events for your custom project here too. You cannot remove core events, only your own.';
+$_lang['system_events.desc'] = 'सिस्टम इवेंट्स MODX में वे इवेंट है जिसमे प्लगइन पंजीकृत हैं | वे पूरे MODX कोड में "निकाल दिए गए" हैं जिसमे प्लगइन को MODX कोड के साथ इंटरेक्ट करने और कोड को हैक किए बिना कस्टम कार्यक्षमता जोड़ने की अनुमति मिलती हैं | आप यहां अपने कस्टम प्रोजेक्ट के लिए अपने स्वम के इवेंट भी बना सकते हैं | आप मुख्य इवेंट को नहीं निकाल सकते, केवल अपने इवेंट को |';
 $_lang['system_events.search_by_name'] = 'घटना के नाम से खोजें';
 $_lang['system_events.create'] = 'नया कार्यक्रम बनाए';
 $_lang['system_events.name_desc'] = 'घटना का नाम | जिसका आपको &डॉलर;modx->invokeEvent(name, properties) कॉल में उपयोग करना चाहिए
