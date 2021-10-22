@@ -392,13 +392,13 @@ Ext.extend(MODx,Ext.Component,{
 
         switch(type) {
             case "templates":
-                ext = ".template.tpl";
+                ext = ".template" + (MODx.config.static_elements_html_extension || ".tpl");
                 break;
             case "tvs":
-                ext = ".tv.tpl";
+                ext = ".tv" + (MODx.config.static_elements_html_extension || ".tpl");
                 break;
             case "chunks":
-                ext = ".chunk.tpl";
+                ext = ".chunk" + (MODx.config.static_elements_html_extension || ".tpl");
                 break;
             case "snippets":
                 ext = ".snippet.php";
