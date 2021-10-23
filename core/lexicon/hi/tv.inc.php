@@ -9,7 +9,7 @@
 $_lang['example_tag_tvname'] = 'NameOfTV';
 $_lang['has_access'] = 'तक पहुँच गया है?';
 $_lang['filter_by_category'] = 'Category द्वारा फ़िल्टर करें...';
-$_lang['rank'] = 'Rank';
+$_lang['rank'] = 'पद';
 $_lang['rendering_options'] = 'प्रतिपादन विकल्प';
 $_lang['tv'] = 'TV';
 $_lang['tvs'] = 'Template Variables';
@@ -18,7 +18,7 @@ $_lang['tv_caption'] = 'कैप्शन';
 $_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
 $_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
 $_lang['tv_change_template_msg'] = 'Changing this template will cause the page to reload the TVs, losing any unsaved changes.<br /><br /> Are you sure you want to change this template?';
-$_lang['tv_delete_confirm'] = 'Are you sure you want to delete this TV?';
+$_lang['tv_delete_confirm'] = 'क्या आप बकाई इस टीवी को हटाना चाहते हैं';
 $_lang['tv_description'] = 'Description:';
 $_lang['tv_description_desc'] = 'Usage information for this TV shown next its caption in Resource editing pages and as a tooltip in the Elements tree.';
 $_lang['tv_err_delete'] = 'An error occurred while trying to delete the TV.';
