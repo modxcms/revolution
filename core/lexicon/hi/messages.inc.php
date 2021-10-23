@@ -36,7 +36,7 @@ $_lang['message_err_remove_notauth'] ='आप इस Message को हटान
 $_lang['message_err_save'] = 'Message सहेजते समय एक त्रुटि उत्पन्न हुई।';
 
 $_lang['messages'] = 'संदेश';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can remove or mark as read specified messages.';
+$_lang['messages_desc'] = 'यहां आप उन संदेशों को प्रबंधित कर सकते हैं जो आपके द्वारा भेजे गए थे या जो अन्य उपयोगकर्ताओं आपको भेजे गए थे | आप उत्तर दे सकते है, संदेशों को अग्रशित कर सकते हैं, साथ ही आप निर्दिष्ट संदेशों को पड़ने के रूप में हटा या चिन्हित कर सकते है';
 $_lang['messages_all'] = 'हर कोई';
 $_lang['messages_compose'] = 'एक Message लिखें';
 $_lang['messages_forward'] = 'फॉरवर्ड';
