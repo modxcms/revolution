@@ -21,16 +21,8 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'इसका मतलब य
 $_lang['configcheck_errorpage_unpublished'] = 'आपकी साइट की त्रुटि पृष्ठ प्रकाशित नहीं है या मौजूद नहीं है।';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'इसका मतलब यह है कि आपके Error page आम जनता के लिए दुर्गम है। पृष्ठ प्रकाशित करें या सुनिश्चित करें कि यह आपकी साइट ट्री में कोई मौजूदा दस्तावेज़ के लिए प्रणाली में सौंपा है &gt; System Settings menu.';
 $_lang['configcheck_htaccess'] = 'कोर फोल्डर वेब द्वारा पहुंचा जा सकता हैं';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
-<strong>This is not recommended and a security risk.</strong>
-If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
-This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/current/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
-for further information about securing your site.</p>
-If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
-should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
-there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
+$_lang['configcheck_htaccess_msg'] = 'MODX ने पाया कि आपका मुख्य फोल्डर जनता के लिए सुलभ है | 
+<Strong> यह अनुशंसित नही है और सुरक्षा जोखिम हैं | <strong> यदि आपका MODX संस्थापन apache वेबसर्वर पर चल रहा हैं आपको कम से कम .htaccess फाइल को मुख्य फोल्डर <em> [[+fileLocation]]</em> के अंदर सेट करना चाहिए | यहां मौजूदा ht.access उदाहरण फाइल का नाम बदलकर ht.access आसानी के किया जा सकता हैं  (p) ऐसी अन्य विधियां और बेबसर्वर हैं जिनका आप उपयोग कर सकते हैं, कृप्या <a href="htpps://docs.modx.com current/en/getting - started/maintenance/securing -modx"<हार्डनिंग MODX गाइड <पढ़े | </a> आपकी साइड को सुरक्षित करने के बाद में अधिक जानकारी के लिए | </p> यदि आप सब कुछ सही ढंग से सेटअप करते हैं तो ब्राउजिंग उदा. <a href=" [[+check UrL]]" target="_blank"<चेंजलॉग </a> पर आपको 403 (अनुमति स्वीकृत) बेहतर 404 (नहीं मिला ) देना चाहिए | यदि आप चेंज देख सकते है | ब्राउजर में, अभी भी कुछ गडबड है और इसे हल करने पर आपको फिर से कॉन्फीगर करने या किसी विशेषज्ञ को कॉल करने की आवश्यकता है |';
 $_lang['configcheck_images'] = 'Images directory लिखने योग्य नहीं';
 $_lang['configcheck_images_msg'] = 'images directory लिखने योग्य नहीं है, या मौजूद नहीं है। इसका मतलब यह Image Manager कार्य संपादक में काम नहीं करेगा!';
 $_lang['configcheck_installer'] = 'इंस्टॉलर अभी भी मौजूद';
