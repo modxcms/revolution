@@ -352,7 +352,7 @@ class modManagerResponse extends modResponse
      */
     public function getLangTopics()
     {
-        $topics = $this->modx->smarty->get_template_vars('_lang_topics');
+        $topics = $this->modx->smarty->getTemplateVars('_lang_topics');
 
         return explode(',', $topics);
     }

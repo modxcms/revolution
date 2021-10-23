@@ -48,7 +48,7 @@
         "league/flysystem": "^2.0",
         "league/flysystem-aws-s3-v3": "^2.0",
         "phpmailer/phpmailer": "^6.0",
-        "smarty/smarty": "^3.1",
+        "smarty/smarty": "^4.0",
         "james-heinrich/phpthumb": "^1.7",
         "erusev/parsedown": "^1.7",
         "inlinestyle/inlinestyle": "^1.2",
