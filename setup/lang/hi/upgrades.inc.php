@@ -44,11 +44,12 @@ $_lang['update_table_column_data'] = 'अपडेट किया गया ड
 $_lang['iso_country_code_converted'] = 'Successfully converted user profile country names to ISO codes.';
 $_lang['legacy_cleanup_complete'] = 'Legacy file clean up complete.';
 $_lang['legacy_cleanup_count'] = 'Removed [[+files]] file(s) and [[+folders]] folder(s).';
-$_lang['clipboard_flash_file_unlink_success'] = 'Successfully removed the copy to clipboard flash file.';
-$_lang['clipboard_flash_file_unlink_failed'] = 'Error removing the copy to clipboard flash file.';
-$_lang['clipboard_flash_file_missing'] = 'The copy to clipboard flash file has already been removed.';
-$_lang['system_setting_cleanup_success'] = 'System Setting `[[+key]]` removed.';
-$_lang['system_setting_cleanup_failed'] = 'System Setting `[[+key]]` could not be removed.';
+$_lang['clipboard_flash_file_unlink_success'] = 'कॉपी को क्लिपबोर्ड फ्लैश फाइल में सफलतापूर्वक निकाल दिया गया है |';
+$_lang['clipboard_flash_file_unlink_failed'] = 'कॉपी को क्लिपबोर्ड फ्लैश फाइल में सफलतापूर्वक निकाल दिया गया |';
+$_lang['clipboard_flash_file_missing'] = 'कॉपी को क्लिपबोर्ड फ्लैश फाइल में सफलतापूर्वक निकाल दिया |';
+$_lang['system_setting_cleanup_success'] = 'सिस्टम सेटिंग [[+कुंजी]] हटाई गई |
+ ';
+$_lang['system_setting_cleanup_failed'] = 'सिस्टम सेटिंग \'[[कुंजी]]\' को हटाया नहीं जा सका |';
 $_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
