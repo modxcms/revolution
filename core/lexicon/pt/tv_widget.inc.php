@@ -67,7 +67,7 @@ $_lang['default_date_tomorrow'] = 'Tomorrow (midnight)';
 $_lang['default_date_custom'] = 'Custom (see description below)';
 $_lang['delim'] = 'Delimitador';
 $_lang['delimiter'] = 'Delimitador';
-$_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting mutliple chooseable options).';
+$_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting multiple chooseable options).';
 $_lang['disabled_dates'] = 'Datas Desativadas';
 $_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
     <p>Examples using the default format (“[[+format_default]]”) include:</p>
