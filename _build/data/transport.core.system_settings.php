@@ -2084,7 +2084,7 @@ $settings['passwordless_expiration']->fromArray([
     'area' => 'authentication',
     'editedon' => null,
 ], '', true, true);
-$settings['static_elements_html_extension'] = $xpdo->newObject('modSystemSetting');
+$settings['static_elements_html_extension'] = $xpdo->newObject(modSystemSetting::class);
 $settings['static_elements_html_extension']->fromArray([
     'key' => 'static_elements_html_extension',
     'value' => '.tpl',
