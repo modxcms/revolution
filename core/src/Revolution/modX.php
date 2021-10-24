@@ -12,9 +12,7 @@ namespace MODX\Revolution;
 
 use Exception;
 use GuzzleHttp\Client;
-use Http\Factory\Guzzle\RequestFactory;
-use Http\Factory\Guzzle\ServerRequestFactory;
-use Http\Factory\Guzzle\StreamFactory;
+use GuzzleHttp\Psr7\HttpFactory;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
@@ -2713,17 +2711,17 @@ class modX extends xPDO {
         }
         if (!$this->services->has(ServerRequestFactoryInterface::class)) {
             $this->services->add(ServerRequestFactoryInterface::class, function() {
-                return new ServerRequestFactory();
+                return new HttpFactory();
             });
         }
         if (!$this->services->has(RequestFactoryInterface::class)) {
             $this->services->add(RequestFactoryInterface::class, function() {
-                return new RequestFactory();
+                return new HttpFactory();
             });
         }
         if (!$this->services->has(StreamFactoryInterface::class)) {
             $this->services->add(StreamFactoryInterface::class, function() {
-                return new StreamFactory();
+                return new HttpFactory();
             });
         }
     }
