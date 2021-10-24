@@ -7,41 +7,41 @@
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Атрибуты';
-$_lang['attr_attr_desc'] = 'One or more space-separated attributes to add to this element’s tag (for example, <span class="example-input">rel="external" type="application/pdf"</span>).';
-$_lang['attr_class_desc'] = 'One or more space-separated CSS class names.';
-$_lang['attr_style_desc'] = 'CSS definitions (for example, <span class="example-input">color:#f36f99; text-decoration:none;</span>).';
+$_lang['attr_attr_desc'] = 'Один или несколько атрибутов, разделенных пробелами, чтобы добавить к тегу этого элемента (например, <span class="example-input">rel="external" type="application/pdf"</span>).';
+$_lang['attr_class_desc'] = 'Один или несколько имен классов, разделенных пробелами.';
+$_lang['attr_style_desc'] = 'Определения CSS (например, цвет <span class="example-input">color:#f36f99; text-decoration:none;</span>).';
 $_lang['attr_target_blank'] = 'Blank';
 $_lang['attr_target_parent'] = 'Parent';
 $_lang['attr_target_self'] = 'Self';
 $_lang['attr_target_top'] = 'Top';
-$_lang['attr_target_desc'] = 'Indicates in which window/tab or frame the linked url should open. To target a specific frame, enter its name in place of one of the provided options.';
+$_lang['attr_target_desc'] = 'Указывает, в каком окне/вкладке или рамке должен быть открыт связанный url. Для указания определенного кадра введите его название вместо одного из предложенных вариантов.';
 $_lang['capitalize'] = 'Прописные';
 $_lang['checkbox'] = 'Флажки (checkbox)';
 $_lang['checkbox_columns'] = 'Столбцы';
 $_lang['checkbox_columns_desc'] = 'Количество колонок, в которых будут отображаться флажки (checkbox).';
 $_lang['class'] = 'Класс';
-$_lang['classes'] = 'Class(es)';
+$_lang['classes'] = 'Класс(ы)';
 $_lang['combo_allowaddnewdata'] = 'Разрешить добавлять новые элементы';
 $_lang['combo_allowaddnewdata_desc'] = 'Если выбрано «Да», разрешает добавлять элементы, которые еще не в списке. По умолчанию «Нет».';
 $_lang['combo_forceselection'] = 'Require Match';
-$_lang['combo_forceselection_desc'] = 'Only save typed option when it matches one already defined in the list.';
+$_lang['combo_forceselection_desc'] = 'Сохранить только введенный параметр, когда он соответствует тому, который уже определен в списке.';
 $_lang['combo_forceselection_multi_desc'] = 'Если выбрано «Да», то будет разрешен выбор элементов только из списка. Если выбрано «Нет», то будет разрешен ввод пользовательских значений.';
-$_lang['combo_listempty_text'] = 'Option Not Found Message';
-$_lang['combo_listempty_text_desc'] = 'Message to display when typed text does not match existing options.';
+$_lang['combo_listempty_text'] = 'Опция не найдена';
+$_lang['combo_listempty_text_desc'] = 'Сообщение для отображения при вводе текста не соответствует существующим параметрам.';
 $_lang['combo_listheight'] = 'Высота списка';
 $_lang['combo_listheight_desc'] = 'Высота выпадающего списка, в % или px. По умолчанию высота как у поля с выпадающим списком.';
 $_lang['combo_listwidth'] = 'Ширина списка';
 $_lang['combo_listwidth_desc'] = 'Ширина выпадающего списка, в % или px. По умолчанию ширина как у поля с выпадающим списком.';
 $_lang['combo_maxheight'] = 'Максимальная высота';
-$_lang['combo_maxheight_desc'] = 'The maximum height in pixels of the dropdown list before scrollbars are shown. (Default: 300)';
+$_lang['combo_maxheight_desc'] = 'Максимальная высота выпадающего списка в пикселях перед отображением прокрутки. (По умолчанию: 300)';
 $_lang['combo_stackitems'] = 'Выбранные значения в столбик';
 $_lang['combo_stackitems_desc'] = 'Если выбрать «Да», выбранные значения будут выстраиваться вертикально. По умолчанию «Нет», при этом значения выстраиваются в одну строку.';
 $_lang['combo_title'] = 'Заголовок списка';
 $_lang['combo_title_desc'] = 'Если указано, в начале выпадающего списка будет создан заголовок, содержащий указанный текст.';
 $_lang['combo_typeahead'] = 'Включить автозавершение';
-$_lang['combo_typeahead_desc'] = 'Populate and autoselect options that match as you type after a configurable delay. (Default: No)';
-$_lang['combo_typeahead_delay'] = 'Delay';
-$_lang['combo_typeahead_delay_desc'] = 'Milliseconds before a matched option is shown. (Default: 250)';
+$_lang['combo_typeahead_desc'] = 'Нажать и автоматически выбирать параметры, которые совпадают по мере ввода после настраиваемой задержки. (По умолчанию: Нет)';
+$_lang['combo_typeahead_delay'] = 'Задержка';
+$_lang['combo_typeahead_delay_desc'] = 'Миллисекунды перед отображением соответствующего параметра. (По умолчанию: 250)';
 $_lang['date'] = 'Дата';
 $_lang['date_format'] = 'Формат даты';
 $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/strftime" target="_blank">php’s strftime syntax</a>.
@@ -57,17 +57,17 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
         </ul>
     </div>
 ';
-$_lang['date_use_current'] = 'Use Current Date as Fallback';
-$_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
+$_lang['date_use_current'] = 'Использовать текущую дату как откат';
+$_lang['date_use_current_desc'] = 'Когда значение для этого TV не требуется (Allow Blank = «Да») и не указана дата по умолчанию, параметр «Да» будет отображаться текущая дата.';
 $_lang['default'] = 'По умолчанию';
-$_lang['default_date_now'] = 'Today with Current Time';
-$_lang['default_date_today'] = 'Today (midnight)';
-$_lang['default_date_yesterday'] = 'Yesterday (midnight)';
-$_lang['default_date_tomorrow'] = 'Tomorrow (midnight)';
-$_lang['default_date_custom'] = 'Custom (see description below)';
+$_lang['default_date_now'] = 'Сегодня с текущим временем';
+$_lang['default_date_today'] = 'Сегодня (полуночь)';
+$_lang['default_date_yesterday'] = 'Вчера (полуночь)';
+$_lang['default_date_tomorrow'] = 'Завтра (полуночь)';
+$_lang['default_date_custom'] = 'Пользовательский (см. описание ниже)';
 $_lang['delim'] = 'Разделитель';
 $_lang['delimiter'] = 'Разделитель';
-$_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting multiple chooseable options).';
+$_lang['delimiter_desc'] = 'Один или более символов, используемых для разделения значений (применимо к TV с поддержкой нескольких выбранных опций).';
 $_lang['disabled_dates'] = 'Неактивные даты';
 $_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
     <p>Examples using the default format (“[[+format_default]]”) include:</p>
@@ -93,8 +93,8 @@ $_lang['email'] = 'Электронная почта';
 $_lang['file'] = 'Файл';
 $_lang['height'] = 'Высота';
 $_lang['hidden'] = 'Скрытый';
-$_lang['hide_time'] = 'Hide Time Option';
-$_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
+$_lang['hide_time'] = 'Скрыть параметр времени';
+$_lang['hide_time_desc'] = 'Удаляет возможность выбора времени из выбора даты TV.';
 $_lang['htmlarea'] = 'HTML-поле';
 $_lang['htmltag'] = 'HTML-тег';
 $_lang['image'] = 'Изображение';
@@ -109,7 +109,7 @@ $_lang['lower_case'] = 'Нижний регистр';
 $_lang['max_length'] = 'Максимальная длина';
 $_lang['min_length'] = 'Минимальная длина';
 $_lang['regex_text'] = 'Регулярное выражение содержит ошибку';
-$_lang['regex_text_desc'] = 'The message to show if the user enters text that is invalid according to the <abbr title="regular expression">regex</abbr> validator.';
+$_lang['regex_text_desc'] = 'Сообщение, показывающее, вводит ли пользователь текст, неверный в соответствии с <abbr title="regular expression">регулярным выражением</abbr> валидатором.';
 $_lang['regex'] = 'Проверка регулярного выражения';
 $_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
     <div class="example-list">
@@ -124,35 +124,35 @@ $_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abb
 $_lang['name'] = 'Название';
 $_lang['number'] = 'Число';
 $_lang['number_allowdecimals'] = 'Разрешить десятичные';
-$_lang['number_allownegative'] = 'Allow Negative';
-$_lang['number_decimalprecision'] = 'Precision';
-$_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
+$_lang['number_allownegative'] = 'Разрешить отрицательные';
+$_lang['number_decimalprecision'] = 'Точность';
+$_lang['number_decimalprecision_desc'] = 'Максимальное количество цифр, допустимое после десятичного разделителя. (По умолчанию: 2)';
 /* See note in number inputproperties config re separators */
-$_lang['number_decimalseparator'] = 'Separator';
-$_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
+$_lang['number_decimalseparator'] = 'Разделитель';
+$_lang['number_decimalseparator_desc'] = 'Символ, используемый как десятичный разделитель. (По умолчанию: «.»)';
 $_lang['number_maxvalue'] = 'Максимальное значение';
 $_lang['number_minvalue'] = 'Минимальное значение';
 $_lang['option'] = 'Переключатели (radio)';
 $_lang['parent_resources'] = 'Родительские ресурсы';
 $_lang['radio_columns'] = 'Столбцы';
-$_lang['radio_columns_desc'] = 'The number of columns the radio buttons are displayed in.';
+$_lang['radio_columns_desc'] = 'Количество столбцов, в которых отображаются переключатели.';
 $_lang['rawtext'] = 'Сырой текст (устарело)';
 $_lang['rawtextarea'] = 'Область сырого текста (устарело)';
 $_lang['required'] = 'Может быть незаполненным';
-$_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
+$_lang['required_desc'] = 'Выберите «Нет», чтобы сделать TV обязательным полем в ресурсах, к которым он привязан. (По умолчанию: «Да»)';
 $_lang['resourcelist'] = 'Список ресурсов';
 $_lang['resourcelist_depth'] = 'Глубина';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
-$_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
+$_lang['resourcelist_depth_desc'] = 'Количество подпапок для углубления поискового запроса в этом списке. (По умолчанию: 10)';
+$_lang['resourcelist_forceselection_desc'] = 'Выключено: список совпадений действителен.';
 $_lang['resourcelist_includeparent'] = 'Включать родителей';
-$_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
+$_lang['resourcelist_includeparent_desc'] = 'Выберите «Да» для включения в список ресурсов, указанных в поле «Родители».';
 $_lang['resourcelist_limitrelatedcontext'] = 'Ограничить текущим контекстом';
-$_lang['resourcelist_limitrelatedcontext_desc'] = 'Select “Yes” to only include the Resources related to the context of the current Resource.';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Выберите «Да», чтобы включить только ресурсы, связанные с контекстом текущего ресурса.';
 $_lang['resourcelist_limit'] = 'Лимит';
-$_lang['resourcelist_limit_desc'] = 'The maximum number of Resources shown in this TV’s listing. (Default: 0, meaning unlimited)';
-$_lang['resourcelist_listempty_text_desc'] = 'Disabled; selections will always match the list.';
+$_lang['resourcelist_limit_desc'] = 'Максимальное количество ресурсов, отображаемых в списке этого TV. (По умолчанию: 0, это неограниченно)';
+$_lang['resourcelist_listempty_text_desc'] = 'Выключено: выбор всегда будет соответствовать списку.';
 $_lang['resourcelist_parents'] = 'Родители';
-$_lang['resourcelist_parents_desc'] = 'If specified, this TV’s listing will include only the child resources from this comma-separated set of resource IDs (containers).';
+$_lang['resourcelist_parents_desc'] = 'Если указано, список TV будет включать только дочерние ресурсы из набора идентификаторов ресурсов (контейнеров), разделённых запятыми.';
 $_lang['resourcelist_where'] = 'Where условие';
 $_lang['resourcelist_where_desc'] = '
     <p>A JSON object of one or more Resource fields to filter this TV’s listing of Resources.</p>
@@ -169,7 +169,7 @@ $_lang['resourcelist_where_desc'] = '
 $_lang['richtext'] = 'Текстовый редактор';
 $_lang['sentence_case'] = 'Чувствительный к регистру';
 $_lang['start_day'] = 'Первый день недели';
-$_lang['start_day_desc'] = 'Day displayed as the beginning of the week in this TV’s date picker. (Default: “Sunday”)';
+$_lang['start_day_desc'] = 'День, отображаемый в начале недели в списке выбора даты этого TV. (по умолчанию: «Воскресенье»)';
 $_lang['string'] = 'Строка';
 $_lang['string_format'] = 'Строковый формат';
 $_lang['style'] = 'Стиль';
@@ -180,12 +180,12 @@ $_lang['textarea'] = 'Текстовая область';
 $_lang['textareamini'] = 'Текстовая область (мини)';
 $_lang['textbox'] = 'Текстовый блок';
 $_lang['time_increment'] = 'Приращение времени';
-$_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
+$_lang['time_increment_desc'] = 'Количество минут между каждым значением времени в списке. (По умолчанию: 15)';
 $_lang['title'] = 'Заголовок';
-$_lang['tv_default'] = 'Default Value';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
-$_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
-$_lang['tv_default_date'] = 'Default Date and Time';
+$_lang['tv_default'] = 'Значение по умолчанию';
+$_lang['tv_default_desc'] = 'Контент, который будет показываться, если содержимое введено пользователем, не предоставлено.';
+$_lang['tv_default_checkbox_desc'] = 'Набор опций, разделенных двумя каналами, выбранных для этого TV, если пользователь не проверяет один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр One==1||Option Two==2||Option Three==3), убедитесь, что вы ввели значение (т.е. «1» для параметра «1||3» для опции «1» и «1» для варианта «1»';
+$_lang['tv_default_date'] = 'Дата и время по умолчанию';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
     <div class="example-list">
         <ul>
@@ -195,34 +195,34 @@ $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide 
         </ul>
         Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
     </div>';
-$_lang['tv_default_email'] = 'Default Email Address';
-$_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
-$_lang['tv_default_file'] = 'Default File';
-$_lang['tv_default_file_desc'] = 'The file path this TV will show if the user does not provide one.';
-$_lang['tv_default_image'] = 'Default Image';
-$_lang['tv_default_image_desc'] = 'The image path this TV will show if the user does not provide one.';
-$_lang['tv_default_option'] = 'Default Option';
-$_lang['tv_default_option_desc'] = 'The option selected for this TV if the user does not choose one. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One)';
-$_lang['tv_default_options'] = 'Default Option(s)';
-$_lang['tv_default_options_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
+$_lang['tv_default_email'] = 'Адрес электронной почты по умолчанию';
+$_lang['tv_default_email_desc'] = 'Адрес электронной почты этого TV будет показываться, если пользователь не предоставит его.';
+$_lang['tv_default_file'] = 'Файл по умолчанию';
+$_lang['tv_default_file_desc'] = 'Путь к файлу, который TV покажет, если пользователь не предоставит его.';
+$_lang['tv_default_image'] = 'Изображение по умолчанию';
+$_lang['tv_default_image_desc'] = 'Путь к изображению, который будет показываться, если пользователь не предоставит его.';
+$_lang['tv_default_option'] = 'Опция по умолчанию';
+$_lang['tv_default_option_desc'] = 'Параметр выбран для этого TV, если пользователь не выбрал его. Если параметры включают в себя метки (напр. Параметр One==1||Option Two==2||Option Three==3), убедитесь, что вы ввели значение (т.е. “1” для опции One)';
+$_lang['tv_default_options'] = 'Параметры по умолчанию';
+$_lang['tv_default_options_desc'] = 'Набор опций, разделенных двумя каналами, выбранных для этого TV, если пользователь не выбирает один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр One==1||Option Two==2||Option Three==3), убедитесь, что вы ввели значение (т.е. «1» для параметра «1||3» для опции «1» и «1» для варианта «1»';
 $_lang['tv_default_radio_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox-multiple_desc'] = $_lang['tv_default_options_desc'];
-$_lang['tv_default_number'] = 'Default Number';
+$_lang['tv_default_number'] = 'Номер по умолчанию';
 $_lang['tv_default_number_desc'] = 'The number this TV will show if the user does not provide one.';
-$_lang['tv_default_resource'] = 'Default Resource (ID)';
-$_lang['tv_default_resourcelist_desc'] = 'The resource this TV will show if the user does not choose one.';
-$_lang['tv_default_tag'] = 'Default Tag(s)';
-$_lang['tv_default_tag_desc'] = 'A comma-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Tag One==1||Tag Two==2||Tag Three==3), be sure to enter the value (i.e., “1” for Tag One, or “1,3” for Tag One and Tag Three)';
-$_lang['tv_default_text'] = 'Default Text';
-$_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
-$_lang['tv_default_url'] = 'Default URL';
-$_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
-$_lang['tv_elements'] = 'Input Option Values';
-$_lang['tv_elements_checkbox'] = 'Checkbox Options';
-$_lang['tv_elements_listbox'] = 'Dropdown List Options';
-$_lang['tv_elements_radio'] = 'Radio Button Options';
-$_lang['tv_elements_tag'] = 'Tag Options';
+$_lang['tv_default_resource'] = 'Ресурс по умолчанию (ID)';
+$_lang['tv_default_resourcelist_desc'] = 'Ресурс, который этот TV покажет, если пользователь не выбрал.';
+$_lang['tv_default_tag'] = 'Тег(и) по умолчанию';
+$_lang['tv_default_tag_desc'] = 'Разделенный запятыми набор опций(ов) выбранных для этого TV, если пользователь не выбирает один или более вариантов. Если ваши опции включают метки (например, Tag One==1||Tag Two==2||Tag Three==3), не забудьте ввести значение (например: «1» для Tag One, или «1,3» для Tag One и Tag Three)';
+$_lang['tv_default_text'] = 'Текст по умолчанию';
+$_lang['tv_default_text_desc'] = 'Текстовое содержимое, которое будет показано TV, если пользователь не предоставит его.';
+$_lang['tv_default_url'] = 'URL по умолчанию';
+$_lang['tv_default_url_desc'] = 'URL-адрес, который этот TV покажет, если пользователь не предоставил его.';
+$_lang['tv_elements'] = 'Возможные значения';
+$_lang['tv_elements_checkbox'] = 'Параметры флажка';
+$_lang['tv_elements_listbox'] = 'Параметры выпадающего списка';
+$_lang['tv_elements_radio'] = 'Параметры радиокнопок';
+$_lang['tv_elements_tag'] = 'Параметры тегов';
 $_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
     <div class="example-list">
         <ul>
@@ -238,9 +238,9 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
-$_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
-$_lang['tv_type'] = 'Input Type';
+$_lang['tv_daterange_elements_desc'] = 'Описание тестовых опций для daterange с примером ph: [[+ex1]]';
+$_lang['tv_daterange_default_text_desc'] = 'Тестовый текст по умолчанию для daterange с примером ph: [[+ex1]]';
+$_lang['tv_type'] = 'Тип ввода';
 $_lang['upper_case'] = 'Верхний регистр';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Показать текст';
