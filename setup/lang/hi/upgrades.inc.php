@@ -50,7 +50,7 @@ $_lang['clipboard_flash_file_missing'] = 'कॉपी को क्लिपब
 $_lang['system_setting_cleanup_success'] = 'सिस्टम सेटिंग [[+कुंजी]] हटाई गई |
  ';
 $_lang['system_setting_cleanup_failed'] = 'सिस्टम सेटिंग \'[[कुंजी]]\' को हटाया नहीं जा सका |';
-$_lang['system_setting_update_xtype_success'] = 'Successfully changed the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
-$_lang['system_setting_update_xtype_failure'] = 'Failed to change the xtype for System Setting `[[+key]]` from `[[+old_xtype]]` to `[[+new_xtype]]`.';
-$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
-$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
+$_lang['system_setting_update_xtype_success'] = 'सिस्टम सेटिंग \'\'[[+key]] के लिए एक्सपाइप को \' [[old xrype]]\' से \'[[new xrype]]\' में सफलतापूर्वक बदल दिया गया |';
+$_lang['system_setting_update_xtype_failure'] = 'सिस्टम सेटिंग \'[[+key]]\' के लिए xtype को \'[[+old_xtype]]\' से \'[[ new x_type]]\' बदलने में विफल |';
+$_lang['system_setting_update_success'] = 'सिस्टम सेटिंग \'[[+कुंजी]]\' अपडेट की गई |';
+$_lang['system_setting_update_failed'] = 'सिस्टम सेटिंग \'[[+कुंजी]]\' अपडेट की गई |';
