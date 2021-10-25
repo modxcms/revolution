@@ -4647,8 +4647,6 @@ input::-moz-focus-inner {
   .x-form-item .modx-tv-image-preview {
     margin-top: 7px; }
     .x-form-item .modx-tv-image-preview img {
-      max-width: 400px;
-      max-height: 400px;
       display: block; }
   .x-form-item .modx-tag-list {
     list-style: none;
