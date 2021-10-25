@@ -154,6 +154,8 @@ input::-moz-focus-inner {
     margin-top: 7px;
 
     img {
+      max-width: 400px;
+      max-height: 400px;
       display: block;
     }
   }
