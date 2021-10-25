@@ -55,6 +55,13 @@ class modSystemPhpThumbProcessor extends modProcessor {
         $src = $this->source->prepareSrcForThumb($src);
         if (empty($src)) return '';
 
+        if (strtolower(substr(strrchr($src, '.'), 1)) === 'svg') {
+            /* Skip thumbnail generation for svg and output the file directly */
+            header('Content-Type: image/svg+xml');
+            echo @file_get_contents($src);
+            return '';
+        }
+
         $this->unsetProperty('t');
         $this->loadPhpThumb();
         /* set source and generate thumbnail */
