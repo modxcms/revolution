@@ -149,10 +149,6 @@ class modInstallRequest {
         $defaults['mgr_url'] = $defaults['context_mgr_url'];
         $defaults['connectors_path'] = $defaults['context_connectors_path'];
         $defaults['connectors_url'] = $defaults['context_connectors_url'];
-        $defaults['web_path_auto'] = 0;
-        $defaults['web_url_auto'] = 0;
-        $defaults['mgr_path_auto'] = 0;
-        $defaults['mgr_url_auto'] = 0;
         $defaults['connectors_path_auto'] = 0;
         $defaults['connectors_url_auto'] = 0;
         $defaults['processors_path'] = MODX_CORE_PATH . 'src/Revolution/Processors/';
