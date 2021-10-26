@@ -32,6 +32,5 @@ include dirname(__DIR__) . '/common/3.0.0-policy-template-group-description.php'
 include dirname(__DIR__) . '/common/3.0.0-policy-template-description.php';
 include dirname(__DIR__) . '/common/3.0.0-policy-description.php';
 include dirname(__DIR__) . '/common/3.0.0-non-index-field-length.php';
-include dirname(__DIR__) . '/common/3.0.0-update-base_help_url.php';
 include dirname(__DIR__) . '/common/3.0.0-template-preview.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-content-type-field.php';
