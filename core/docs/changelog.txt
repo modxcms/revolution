@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 3.0.0-beta1 (TBD)
+====================================
+
+
 MODX Revolution 3.0.0-alpha3 (October 27, 2021)
 ====================================
 - Fix accessing $modx->controller from plugins and services [#15871]
