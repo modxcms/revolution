@@ -98,26 +98,24 @@ class modManagerResponse extends modResponse
             $className = $this->getControllerClassName($this->route);
 
             /** @var modManagerController $controller */
-            $controller = $className::getInstance($this->modx, $className, [
+            $this->modx->controller = $className::getInstance($this->modx, $className, [
                 'namespace' => $this->namespace,
                 'namespace_path' => $this->namespacePath,
                 'action' => $this->route,
                 'controller' => $this->route,
             ]);
-            $controller->setProperties(array_merge($_GET,$_POST));
-            $controller->initialize();
+            $this->modx->controller->setProperties(array_merge($_GET,$_POST));
+            $this->modx->controller->initialize();
 
-            if (!$controller->checkPermissions()) {
+            if (!$this->modx->controller->checkPermissions()) {
                 throw new AccessDeniedException('Not allowed to access this controller.');
             }
-
-            $this->modx->controller = $controller;
 
             $this->body = $this->modx->controller->render();
             return $this->send();
         }
         catch (NotFoundException $e) {
-            $controller = new Error($this->modx, [
+            $this->modx->controller = new Error($this->modx, [
                 'message' => $this->modx->lexicon('action_err_ns'),
                 'errors' => [
                     $e->getMessage()
@@ -130,7 +128,7 @@ class modManagerResponse extends modResponse
                 $message .= ' (' . $message . ')';
             }
 
-            $controller = new Error($this->modx, [
+            $this->modx->controller = new Error($this->modx, [
                 'message' => $message,
                 'errors' => [
                     $e->getMessage()
@@ -138,18 +136,18 @@ class modManagerResponse extends modResponse
             ]);
         }
         catch (\Exception $e) {
-            $controller = new Error($this->modx, [
+            $this->modx->controller = new Error($this->modx, [
                 'message' => get_class($e) . ': ' . $e->getMessage(),
                 'errors' => $this->_formatTrace($e->getTrace())
             ]);
         }
         catch (\Error $e) {
-            $controller = new Error($this->modx, [
+            $this->modx->controller = new Error($this->modx, [
                 'message' => get_class($e) . ': ' . $e->getMessage(),
                 'errors' => $this->_formatTrace($e->getTrace())
             ]);
         }
-        $this->body = $controller->render();
+        $this->body = $this->modx->controller->render();
         return $this->send();
     }
 
