@@ -8,16 +8,16 @@
  */
 $_lang['attributes'] = 'विशेषताएँ';
 $_lang['capitalize'] = 'कैपिटल में लिखें';
-$_lang['checkbox'] = 'Check Box';
-$_lang['checkbox_columns'] = 'Columns';
+$_lang['checkbox'] = 'चेक बॉक्स';
+$_lang['checkbox_columns'] = 'स्तंभ';
 $_lang['checkbox_columns_desc'] = 'चेक बॉक्स में प्रदर्शित कर रहे हैं स्तंभों की संख्या।';
-$_lang['class'] = 'Class';
+$_lang['class'] = 'कक्षा';
 $_lang['combo_allowaddnewdata'] = 'नए आइटम जोड़ने की अनुमति दें';
 $_lang['combo_allowaddnewdata_desc'] = 'हाँ, की अनुमति देता है जब आइटम सूची में पहले से मौजूद नहीं है कि जोड़ा जाएगा। डिफ़ॉल्ट पर सं.';
 $_lang['combo_forceselection'] = 'चुनाव में फोर्स सूची में';
 $_lang['combo_forceselection_desc'] = 'इस हाँ करने के लिए सेट कर दिया जाता है, तो टाइप-आगे का उपयोग अगर, केवल सूची में आइटम्स की inputting अनुमति देते हैं।';
-$_lang['combo_forceselection_multi_desc'] = 'If this is set to Yes, only items already in the list are allowed. If No, new values can be entered a well.';
-$_lang['combo_listempty_text'] = 'Empty List Text';
+$_lang['combo_forceselection_multi_desc'] = 'यदि यह हा तो पर सेट है, तो केवल सूची मे पहले से ही आइटम की अनुमति हैं । यदि नही तो नए मूल्यों को एक कुएं में दर्ज  किया जा सकता हैं';
+$_lang['combo_listempty_text'] = 'खाली सूची पाठ';
 $_lang['combo_listempty_text_desc'] = 'प्रकार आगे-सूची में कोई मान नहीं रही है, और user types के हैं, तो इस पाठ प्रदर्शित करते हैं।';
 $_lang['combo_listheight'] = 'सूची ऊँचाई';
 $_lang['combo_listheight_desc'] = 'ऊँचाई, पिक्सेल, की ड्रॉप डाउन सूची में। कॉम्बो बॉक्स की ऊँचाई के लिए चूक।';
@@ -51,7 +51,7 @@ $_lang['disabled_days'] = 'विकलांग दिनों';
 $_lang['disabled_days_desc'] = 'दिन को अक्षम करने के लिए, 0-आधारित (डिफ़ॉल्ट रिक्त करने) का एक अल्पविराम-पृथक सूची। कुछ उदाहरण: <br />
  - अक्षम करें रविवार और शनिवार: 0,6 <br />
  -कार्यदिवस को अक्षम करें: 1,2,3,4,5';
-$_lang['dropdown'] = 'DropDown List Menu';
+$_lang['dropdown'] = 'ड्रॉपडाउन सूची मेनू';
 $_lang['earliest_date'] = 'जल्द से जल्द तारीख';
 $_lang['earliest_date_desc'] = 'चुना जा सकता है कि जल्द से जल्द अनुमति दी तारीख।';
 $_lang['earliest_time'] = 'जल्द से जल्द समय';
