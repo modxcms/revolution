@@ -22,8 +22,6 @@ $settings = [
     'manager_js_zlib_output_compression',
     'rb_base_dir',
     'rb_base_url',
-    'resource_static_allow_absolute',
-    'resource_static_path',
     'resolve_hostnames',
     'server_protocol',
     'strip_image_paths',
