@@ -87,7 +87,7 @@ class WelcomeManagerController extends modManagerController
         ];
         $this->addHtml('<script>Ext.onReady(function() {MODx.load(' . json_encode($obj) . ')});</script>');
         if ($this->showWelcomeScreen) {
-            $url = $this->modx->getOption('welcome_screen_url', null, 'http://misc.modx.com/revolution/welcome.20.html');
+            $url = $this->modx->getOption('welcome_screen_url', null, '//misc.modx.com/revolution/welcome.30.html');
             $this->addHtml('<script>Ext.onReady(function() { MODx.loadWelcomePanel("' . htmlspecialchars($url) . '"); });</script>');
         }
     }
