@@ -55,7 +55,7 @@ Only English lexicon changes are handled in GitHub. If you want to update anythi
     Let us know if this is related to any issue/pull request.
 
 ## Submit a Pull Request
-If this is your first PR, please create an account on the [MODX website](http://www.modx.com) and sign the [Contributors License Agreement](http://develop.modx.com/contribute/cla/). This is needed to ensure all code is licensed properly. We cannot merge pull requests without a signed CLA.
+If this is your first PR, please create an account on the [MODX website](http://www.modx.com) and sign the [Contributors License Agreement](https://modx.com/community/cla/). This is needed to ensure all code is licensed properly. We cannot merge pull requests without a signed CLA.
 
 MODX supports PHP from v5.3, so your PRs have to work on PHP 5.3+. **PRs must be backwards compatible.**
 
