@@ -5,9 +5,9 @@
  * @package setup
  * @subpackage lexicon
  */
-$_lang['add_column'] = 'Added new `[[+column]]` column to [[+table]].';
-$_lang['add_index'] = 'Added new index on `[[+index]]` for table [[+table]].';
-$_lang['alter_column'] = 'Modified column `[[+column]]` in table [[+table]].';
+$_lang['add_column'] = '[[+table]] में नया \'[[+column]]\' कॉलम जोड़ा गया।';
+$_lang['add_index'] = 'टेबल [[+table]] के लिए \'[[index]]\' पर नया इंडेक्स जोड़ा गया।';
+$_lang['alter_column'] = 'तालिका [[+table]] में संशोधित कॉलम \'[[colomn]]\' ।';
 $_lang['add_moduser_classkey'] = 'ModUser डेरिवेटिव का समर्थन करने के लिए जोड़ा गया class_key क्षेत्र।';
 $_lang['added_cachepwd'] = 'Early Revolution के रिलीज में लापता cachepwd क्षेत्र जोड़ा गया।';
 $_lang['added_content_ft_idx'] = 'जोड़े गए नए `content_ft_idx` full-text index on the fields `pagetitle`, `longtitle`, `description`, `introtext`, `content`.';
