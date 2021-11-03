@@ -1705,7 +1705,7 @@ $settings['static_elements_basepath']->fromArray([
   'area' => 'static_elements',
   'editedon' => null,
 ], '', true, true);
-$settings['resource_static_allow_absolute']= $xpdo->newObject('modSystemSetting');
+$settings['resource_static_allow_absolute']= $xpdo->newObject(modSystemSetting::class);
 $settings['resource_static_allow_absolute']->fromArray([
     'key' => 'resource_static_allow_absolute',
     'value' => '0',
@@ -1714,7 +1714,7 @@ $settings['resource_static_allow_absolute']->fromArray([
     'area' => 'static_resources',
     'editedon' => null,
 ], '', true, true);
-$settings['resource_static_path']= $xpdo->newObject('modSystemSetting');
+$settings['resource_static_path']= $xpdo->newObject(modSystemSetting::class);
 $settings['resource_static_path']->fromArray([
     'key' => 'resource_static_path',
     'value' => '{assets_path}',
