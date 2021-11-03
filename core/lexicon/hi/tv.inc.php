@@ -12,7 +12,7 @@ $_lang['filter_by_category'] = 'Category द्वारा फ़िल्ट�
 $_lang['rank'] = 'पद';
 $_lang['rendering_options'] = 'प्रतिपादन विकल्प';
 $_lang['tv'] = 'TV';
-$_lang['tvs'] = 'Template Variables';
+$_lang['tvs'] = 'पोस्टर चर';
 $_lang['tv_binding_msg'] = 'इस फ़ील्ड का उपयोग कर डेटा स्रोत बाइंडिंग का समर्थन करता है @ आदेशों';
 $_lang['tv_caption'] = 'कैप्शन';
 $_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
@@ -59,7 +59,7 @@ $_lang['tv_tab_sources_desc'] = 'यहाँ आप मीडिया स्�
 $_lang['tv_tab_tmpl_access'] = 'टेम्पलेट का उपयोग';
 $_lang['tv_tab_tmpl_access_desc'] = 'Select the templates that are allowed to access this TV.';
 $_lang['tv_tag_copied'] = 'TV tag copied!';
-$_lang['tv_widget'] = 'Widget';
+$_lang['tv_widget'] = 'विजेट';
 $_lang['tv_widget_prop'] = 'विजेट गुण';
 $_lang['tvd_err_remove'] = 'An error occurred while trying to delete the TV from the document.';
 $_lang['tvdg_err_remove'] = 'An error occurred while trying to delete the TV from the document group.';
