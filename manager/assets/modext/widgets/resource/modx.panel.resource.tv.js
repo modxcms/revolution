@@ -26,27 +26,5 @@ Ext.extend(MODx.panel.ResourceTV,MODx.Panel,{
     autoload: function() {
         return false;
     }
-    ,refreshTVs: function() {
-        return false;
-        var t = Ext.getCmp(this.config.templateField);
-        if (!t && !this.config.template) { return false; }
-        var template = this.config.template ? this.config.template : t.getValue();
-
-        this.getUpdater().update({
-            url: MODx.config.manager_url+'?a=resource/tvs'
-            ,method: 'GET'
-            ,params: {
-               'class_key': this.config.class_key
-               ,'template': template
-               ,'resource': this.config.resource
-            }
-            ,scripts: true
-            ,callback: function() {
-                this.fireEvent('load');
-                if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
-            }
-            ,scope: this
-        });
-    }
 });
 Ext.reg('modx-panel-resource-tv',MODx.panel.ResourceTV);
