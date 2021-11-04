@@ -10,9 +10,6 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\modStaticResource;
-use MODX\Revolution\modSymLink;
-use MODX\Revolution\modWebLink;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
@@ -25,6 +22,8 @@ use MODX\Revolution\modX;
  */
 class Delete extends Processor
 {
+    use ActionAccessTrait;
+
     /** @var modResource $resource */
     public $resource;
     /** @var modUser $lockedUser */
@@ -55,37 +54,11 @@ class Delete extends Processor
         if (empty($this->resource)) return $this->modx->lexicon('resource_err_nfs', ['id' => $id]);
 
         /* validate resource can be deleted */
-        if (!$this->checkDeletePermission() || !$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
+        if (!$this->checkActionPermission($this->resource->get('class_key'), 'delete')
+            || !$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
             return $this->modx->lexicon('permission_denied');
         }
         $this->deletedTime = time();
-        return true;
-    }
-
-    protected function checkDeletePermission(): bool
-    {
-        $permissions = [$this->permission];
-
-        $classKey = $this->resource->get('class_key');
-
-        $map = [
-            modWebLink::class => 'delete_weblink',
-            modSymLink::class => 'delete_symlink',
-            modStaticResource::class => 'delete_resource',
-        ];
-
-        if (array_key_exists($classKey, $map)) {
-            $permissions[] = $map[$classKey];
-        }
-
-        foreach ($permissions as $permission) {
-            if (!$this->modx->hasPermission($permission)) {
-                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
-                $this->permission = $permission;
-                return false;
-            }
-        }
-
         return true;
     }
 

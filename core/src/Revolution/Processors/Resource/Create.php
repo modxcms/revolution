@@ -59,7 +59,6 @@ namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\modDocument;
-use MODX\Revolution\modStaticResource;
 use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modResourceGroup;
@@ -74,6 +73,8 @@ use MODX\Revolution\modX;
 
 class Create extends CreateProcessor
 {
+    use ActionAccessTrait;
+
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
     public $permission = 'new_document';
@@ -115,32 +116,12 @@ class Create extends CreateProcessor
 
     public function checkPermissions(): bool
     {
-        $permissions = [$this->permission];
-
         // Get and normalise the class key to avoid bypassing checks with different capitalization
         $classKey = $this->getProperty('class_key',modDocument::class);
-        $obj = $this->modx->newObject($classKey);
-        $classKey = $obj ? $obj->get('class_key') : $classKey;
+        $object = $this->modx->newObject($classKey);
+        $classKey = $object ? $object->get('class_key') : $classKey;
 
-        $map = [
-            modWebLink::class => 'new_weblink',
-            modSymLink::class => 'new_symlink',
-            modStaticResource::class => 'new_static_resource',
-        ];
-
-        if (array_key_exists($classKey, $map)) {
-            $permissions[] = $map[$classKey];
-        }
-
-        foreach ($permissions as $permission) {
-            if (!$this->modx->hasPermission($permission)) {
-                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
-                $this->permission = $permission;
-                return false;
-            }
-        }
-
-        return true;
+        return $this->checkActionPermission($classKey, 'new');
     }
 
     /**

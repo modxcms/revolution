@@ -73,6 +73,8 @@ use MODX\Revolution\modX;
  */
 class Update extends UpdateProcessor
 {
+    use ActionAccessTrait;
+
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
     public $permission = 'save_document';
@@ -153,12 +155,12 @@ class Update extends UpdateProcessor
         }
 
         // Check if we have permission to **edit the current resource type**
-        if (!$this->checkEditPermissions($this->object->get('class_key'))) {
+        if (!$this->checkActionPermission($this->object->get('class_key'), 'edit')) {
             return $this->modx->lexicon('access_denied');
         }
         // If changing the resource type, check if we have permission to **create the selected resource type**
         if (($this->object->get('class_key') !== $properties['class_key'])
-            && !$this->checkCreatePermissions($properties['class_key'])
+            && !$this->checkActionPermission($properties['class_key'], 'new')
         ) {
             return $this->modx->lexicon('access_denied');
         }
@@ -196,56 +198,6 @@ class Update extends UpdateProcessor
         $this->handleResourceProperties();
         $this->unsetProperty('variablesmodified');
         return parent::beforeSet();
-    }
-
-    protected function checkEditPermissions(string $classKey): bool
-    {
-        $permissions = [$this->permission];
-
-        $map = [
-            modWebLink::class => 'edit_weblink',
-            modSymLink::class => 'edit_symlink',
-            modStaticResource::class => 'edit_static_resource',
-        ];
-
-        if (array_key_exists($classKey, $map)) {
-            $permissions[] = $map[$classKey];
-        }
-
-        foreach ($permissions as $permission) {
-            if (!$this->modx->hasPermission($permission)) {
-                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
-                $this->permission = $permission;
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    protected function checkCreatePermissions(string $classKey): bool
-    {
-        $permissions = [];
-
-        $map = [
-            modWebLink::class => 'new_weblink',
-            modSymLink::class => 'new_symlink',
-            modStaticResource::class => 'new_static_resource',
-        ];
-
-        if (array_key_exists($classKey, $map)) {
-            $permissions[] = $map[$classKey];
-        }
-
-        foreach ($permissions as $permission) {
-            if (!$this->modx->hasPermission($permission)) {
-                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
-                $this->permission = $permission;
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
