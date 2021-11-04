@@ -55,4 +55,10 @@ class SymLinkCreateManagerController extends ResourceCreateManagerController
     {
         return 'resource/symlink/create.tpl';
     }
+
+    public function checkPermissions(): bool
+    {
+        return $this->modx->hasPermission('new_document')
+            && $this->modx->hasPermission('new_symlink');
+    }
 }

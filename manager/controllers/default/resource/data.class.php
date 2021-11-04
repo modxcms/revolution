@@ -12,7 +12,7 @@ use MODX\Revolution\modResource;
 use xPDO\xPDO;
 use xPDO\Cache\xPDOCacheManager;
 
-require_once dirname(__FILE__) . '/resource.class.php';
+require_once __DIR__ . '/resource.class.php';
 
 /**
  * Loads the resource data page

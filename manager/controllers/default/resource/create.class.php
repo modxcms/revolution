@@ -15,7 +15,9 @@ use MODX\Revolution\modFormCustomizationSet;
 use MODX\Revolution\modResource;
 use xPDO\Om\xPDOQuery;
 
-require_once dirname(__FILE__) . '/resource.class.php';
+require_once __DIR__ . '/resource.class.php';
+
+class_alias(ResourceCreateManagerController::class, 'DocumentCreateManagerController');
 
 /**
  * Loads the create resource page
@@ -320,8 +322,4 @@ class ResourceCreateManagerController extends ResourceManagerController
     {
         return 'resource/create.tpl';
     }
-}
-
-class DocumentCreateManagerController extends ResourceCreateManagerController
-{
 }

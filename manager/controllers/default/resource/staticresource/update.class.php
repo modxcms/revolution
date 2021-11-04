@@ -95,4 +95,10 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
     {
         return 'resource/staticresource/update.tpl';
     }
+
+    public function checkPermissions(): bool
+    {
+        return $this->modx->hasPermission('edit_document')
+            && $this->modx->hasPermission('edit_static_resource');
+    }
 }

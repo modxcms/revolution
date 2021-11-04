@@ -71,4 +71,10 @@ class WebLinkCreateManagerController extends ResourceCreateManagerController
 
         return $placeholders;
     }
+
+    public function checkPermissions(): bool
+    {
+        return $this->modx->hasPermission('new_document')
+            && $this->modx->hasPermission('new_weblink');
+    }
 }

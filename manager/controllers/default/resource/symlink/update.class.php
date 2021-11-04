@@ -64,4 +64,10 @@ class SymlinkUpdateManagerController extends ResourceUpdateManagerController
     {
         return 'resource/symlink/update.tpl';
     }
+
+    public function checkPermissions(): bool
+    {
+        return $this->modx->hasPermission('edit_document')
+            && $this->modx->hasPermission('edit_symlink');
+    }
 }

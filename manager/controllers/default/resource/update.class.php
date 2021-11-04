@@ -12,7 +12,9 @@ use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 
-require_once dirname(__FILE__) . '/resource.class.php';
+require_once __DIR__ . '/resource.class.php';
+
+class_alias(ResourceUpdateManagerController::class, 'DocumentUpdateManagerController');
 
 /**
  * Loads the update resource page
@@ -22,7 +24,7 @@ require_once dirname(__FILE__) . '/resource.class.php';
  */
 class ResourceUpdateManagerController extends ResourceManagerController
 {
-    /** @var boolean Whether or not this Resource is locked for editing */
+    /** @var bool Whether this Resource is locked for editing */
     public $locked = false;
     /** @var string If the Resource is locked, the text on the locked button to show */
     public $lockedText = '';
@@ -278,8 +280,4 @@ class ResourceUpdateManagerController extends ResourceManagerController
     {
         return 'resource/update.tpl';
     }
-}
-
-class DocumentUpdateManagerController extends ResourceUpdateManagerController
-{
 }
