@@ -10,6 +10,9 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
+use MODX\Revolution\modStaticResource;
+use MODX\Revolution\modSymLink;
+use MODX\Revolution\modWebLink;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
@@ -18,7 +21,7 @@ use MODX\Revolution\modX;
 /**
  * Deletes a resource.
  *
- * @param integer $id The ID of the resource
+ * @param int $id The ID of the resource
  */
 class Delete extends Processor
 {
@@ -31,12 +34,9 @@ class Delete extends Processor
     /** @var int $deletedTime */
     public $deletedTime = 0;
 
-    public function checkPermissions()
-    {
-        return $this->modx->hasPermission('delete_document');
-    }
+    public $permission = 'delete_document';
 
-    public function getLanguageTopics()
+    public function getLanguageTopics(): array
     {
         return ['resource'];
     }
@@ -55,10 +55,37 @@ class Delete extends Processor
         if (empty($this->resource)) return $this->modx->lexicon('resource_err_nfs', ['id' => $id]);
 
         /* validate resource can be deleted */
-        if (!$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
+        if (!$this->checkDeletePermission() || !$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
             return $this->modx->lexicon('permission_denied');
         }
         $this->deletedTime = time();
+        return true;
+    }
+
+    protected function checkDeletePermission(): bool
+    {
+        $permissions = [$this->permission];
+
+        $classKey = $this->resource->get('class_key');
+
+        $map = [
+            modWebLink::class => 'delete_weblink',
+            modSymLink::class => 'delete_symlink',
+            modStaticResource::class => 'delete_resource',
+        ];
+
+        if (array_key_exists($classKey, $map)) {
+            $permissions[] = $map[$classKey];
+        }
+
+        foreach ($permissions as $permission) {
+            if (!$this->modx->hasPermission($permission)) {
+                // allow the error message shown to the user (in modProcessor->run()) to show the right failed permission
+                $this->permission = $permission;
+                return false;
+            }
+        }
+
         return true;
     }
 
