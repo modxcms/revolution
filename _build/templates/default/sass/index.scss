@@ -1474,6 +1474,17 @@ iframe[classname="x-hidden"] {
   .x-panel-bwrap {
     background-color: transparent !important;
   }
+
+  a {
+    text-decoration: none;
+    border-bottom: 1px dotted $colorSplash;
+    color: $colorSplash;
+
+    &:hover {
+      color: $black;
+    }
+  }
+
 }
 
 .with-title .panel-desc {

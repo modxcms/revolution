@@ -50,11 +50,12 @@ abstract class Create extends CreateProcessor
      */
     public function beforeSave()
     {
-        $name = $this->getProperty('name');
+        $nameField = $this->classKey === modTemplate::class ? 'templatename' : 'name';
+        $name = $this->getProperty($nameField, '');
 
         /* verify element with that name does not already exist */
         if ($this->alreadyExists($name)) {
-            $this->addFieldError('name', $this->modx->lexicon($this->objectType . '_err_ae', [
+            $this->addFieldError($nameField, $this->modx->lexicon($this->objectType . '_err_ae', [
                 'name' => $name,
             ]));
         }

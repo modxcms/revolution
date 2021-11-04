@@ -10,18 +10,26 @@ MODx.panel.Resource = function(config) {
         ,resource: ''
         ,bodyStyle: ''
         ,cls: 'container form-with-labels'
-        ,defaults: { collapsible: false ,autoHeight: true }
+        ,defaults: {
+            collapsible: false,
+            autoHeight: true
+        }
         ,forceLayout: true
         ,items: this.getFields(config)
         ,fileUpload: true
         ,useLoadingMask: true
         ,listeners: {
-            'setup': {fn:this.setup,scope:this}
-            ,'success': {fn:this.success,scope:this}
-            ,'failure': {fn:this.failure,scope:this}
-            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
-            ,'fieldChange': {fn:this.onFieldChange,scope:this}
-            ,'failureSubmit': {fn:this.failureSubmit,scope:this}
+            setup: {fn:this.setup,scope:this}
+            ,success: {fn:this.success,scope:this}
+            ,failure: {fn:this.failure,scope:this}
+            ,beforeSubmit: {fn:this.beforeSubmit,scope:this}
+            ,fieldChange: {fn:this.onFieldChange,scope:this}
+            ,failureSubmit: {
+                fn: function () {
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-resource-tabs')
+                },
+                scope: this
+            }
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this,config);
@@ -33,6 +41,7 @@ MODx.panel.Resource = function(config) {
     this.addEvents('tv-reset');
 };
 Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
+
     initialized: false
     ,defaultClassKey: 'MODX\\Revolution\\modDocument'
     ,classLexiconKey: 'document'
@@ -40,9 +49,19 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,rteLoaded: false
     ,contentField: 'ta'
     ,warnUnsavedChanges: false
+
     ,setup: function() {
+
         if (!this.initialized) {
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['modx-resource-settings','modx-page-settings','modx-panel-resource-tv'];
+            this.errorHandlingIgnoreTabs = ['modx-resource-access-permissions'];
+
             this.getForm().setValues(this.config.record);
+
             var tpl = this.getForm().findField('modx-resource-template');
             if (tpl) {
                 tpl.originalValue = this.config.record.template;
@@ -53,21 +72,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             } else if (pcmb) {
                 pcmb.setValue(this.config.record.parent_pagetitle+' ('+this.config.record.parent+')');
             }
-            if (!Ext.isEmpty(this.config.record.pagetitle)) {
-                var title = Ext.util.Format.stripTags(this.config.record.pagetitle);
-                title = Ext.util.Format.htmlEncode(title);
-                if (MODx.perm.tree_show_resource_ids) {
-                    title = title + (this.config.record.id ? ' <small>('+this.config.record.id+')</small>' : '');
-                }
-                Ext.getCmp('modx-header-breadcrumbs').updateHeader(title);
-            }
+
+            this.formatMainPanelTitle('resource', this.config.record);
+
             // initial check to enable realtime alias
-            if (Ext.isEmpty(this.config.record.alias)) {
-                this.config.aliaswasempty = true;
-            } else {
-                this.config.aliaswasempty = false;
-            }
-            this.config.translitloading = false; // the initial value for the realtime-alias throttling
+            this.config.aliaswasempty = Ext.isEmpty(this.config.record.alias) ? true : false ;
+            // the initial value for the realtime-alias throttling
+            this.config.translitloading = false;
 
             if (!Ext.isEmpty(this.config.record.resourceGroups)) {
                 var g = Ext.getCmp('modx-grid-resource-security');
@@ -79,6 +90,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
             this.defaultValues = this.config.record || {};
+
             if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
                 this.markDirty();
             }
@@ -203,6 +215,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,stay: Ext.state.Manager.get('modx.stay.'+MODx.request.a,'stay')
         });
     }
+
     ,success: function(o) {
         this.warnUnsavedChanges = false;
         var g = Ext.getCmp('modx-grid-resource-security');
@@ -230,79 +243,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;
         }
     }
-    ,failureSubmit: function() {
-        // This array contains the components we want to traverse in the order we prioritize them
-        var forms = [
-            'modx-resource-settings', // Document
-            'modx-page-settings', // Settings
-            'modx-panel-resource-tv' // Template Variables
-        ];
-
-        var tab_name = null;
-
-        // Loop each component and traverse the children recursively
-        for (var i = 0; i < forms.length; i++) {
-            var component = Ext.getCmp(forms[i]);
-            if (component && component.el && component.el.dom) {
-                if (this.traverseNode(component.el.dom)) {
-                    tab_name = forms[i];
-
-                    // We want to switch to the first tab that has an invalid state, no matter if the current
-                    // or any later tabs also have such states. We can therefore quit early here.
-                    break;
-                }
-            }
-        }
-
-        // If no invalid states were found, this check makes sure we don't switch tabs for no reason
-        if (tab_name === null) {
-            return;
-        }
-
-        var tabs = Ext.getCmp('modx-resource-tabs');
-        var tabs_index = null;
-
-        // The next check needs the tabs index value to check if it is hidden or not
-        if (tabs && tabs.items && tabs.items.keys) {
-            tabs_index = tabs.items.keys.indexOf(tab_name);
-        }
-
-        // We are already on a tab that has an invalid state. No need to switch
-        if (!tabs.items.items[tabs_index].hidden)  {
-            return;
-        }
-
-        // Activate the tab (this is done by passing the name of the tab)
-        tabs.activate(tab_name);
-    }
-
-    ,traverseNode: function(node) {
-        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
-            return true;
-        }
-
-        if (typeof node.children == 'undefined') {
-            return false;
-        }
-
-        for (var i = 0; i < node.children.length; i++) {
-            if (this.traverseNode(node.children[i])) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    ,failure: function(o) {
-        this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action == 'Resource/Create') {
-            var btn = Ext.getCmp('modx-abtn-save');
-            if (btn) { btn.enable(); }
-        }
-
-        this.fireEvent('failureSubmit');
-    }
 
     ,freezeUri: function(cb) {
         var uri = Ext.getCmp('modx-resource-uri');
@@ -313,6 +253,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             uri.hide();
         }
     }
+
     // used for realtime-alias transliteration
     ,translitAlias: function(string) {
         if (!this.config.translitloading) {
@@ -335,6 +276,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             });
         }
     }
+
     ,generateAliasRealTime: function(title) {
         // check some system settings before doing real time alias transliteration
         if (parseInt(MODx.config.friendly_alias_realtime) && parseInt(MODx.config.automatic_alias)) {
@@ -344,6 +286,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
         }
     }
+
     ,templateWarning: function() {
         var t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
@@ -369,6 +312,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },this);
         }
     }
+
     ,onFieldChange: function(o) {
         //a11y - Set Active Input
         if (o && o.field) {
@@ -397,15 +341,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             title: _(this.classLexiconKey)
             ,id: 'modx-resource-settings'
             ,cls: 'modx-resource-tab'
-            ,layout: 'form'
             ,labelAlign: 'top'
             ,bodyCssClass: 'tab-panel-wrapper main-wrapper'
             ,autoHeight: true
-            ,defaults: {
-                border: false
-                ,msgTarget: 'under'
-                ,width: 400
-            }
             ,items: this.getMainFields(config)
         });
         if (config.show_tvs && MODx.config.tvs_below_content != 1) {
@@ -422,8 +360,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,bodyCssClass: 'main-wrapper'
             ,autoHeight: true
             ,defaults: {
-                border: false
-                ,msgTarget: 'under'
+                border: false,
+                msgTarget: 'under'
             }
             ,items: this.getSettingFields(config)
         });
@@ -514,20 +452,21 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         config = config || {record:{}};
         return [{
             layout:'column'
-            ,border: false
-            ,anchor: '100%'
             ,id: 'modx-resource-main-columns'
             ,defaults: {
-                labelAlign: 'top'
-                ,border: false
-                ,msgTarget: 'under'
+                layout: 'form'
             }
             ,items:[{
                 columnWidth: .75
-                ,layout: 'form'
                 ,id: 'modx-resource-main-left'
                 ,cls: 'modx-resource-panel'
-                ,defaults: { msgTarget: 'under' }
+                ,defaults: {
+                    layout: 'form',
+                    anchor: '100%',
+                    validationEvent: 'change',
+                    labelSeparator: '',
+                    msgTarget: 'under',
+                }
                 ,collapsible: true
                 ,stateful: true
                 ,stateEvents: ['collapse', 'expand']
@@ -538,26 +477,29 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,items: this.getMainLeftFields(config)
             },{
                 columnWidth: .25
-                ,layout: 'form'
-                ,labelWidth: 0
-                ,border: false
                 ,id: 'modx-resource-main-right'
                 ,style: 'margin-right: 0'
-                ,defaults: { msgTarget: 'under' }
+                ,defaults: {
+                    layout: 'form',
+                    anchor: '100%',
+                    validationEvent: 'change',
+                    labelSeparator: '',
+                    msgTarget: 'under',
+                    defaults: {
+                        anchor: '100%',
+                        validationEvent: 'change',
+                        msgTarget: 'under'
+                    }
+                }
                 ,items: this.getMainRightFields(config)
             }]
         },{
             html: MODx.onDocFormRender, border: false
         },{
             xtype: 'hidden'
-            ,fieldLabel: _('id')
-            ,hideLabel: true
-            ,description: '<b>[[*id]]</b><br />'
             ,name: 'id'
             ,id: 'modx-resource-id'
-            ,anchor: '100%'
             ,value: config.resource || config.record.id
-            ,submitValue: true
         },{
             xtype: 'hidden'
             ,name: 'type'
@@ -596,16 +538,18 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,getMainLeftFields: function(config) {
         config = config || {record:{}};
-        var aliasLength = ~~MODx.config['friendly_alias_max_length'] || 0;
+        const aliasLength = ~~MODx.config['friendly_alias_max_length'] || 0;
         return [{
             layout: 'column'
-            ,border: false
-            ,anchor: '100%'
             ,defaults: {
-                labelAlign: 'top'
-                ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
+                layout: 'form',
+                labelSeparator: '',
+                defaults: {
+                    layout: 'form',
+                    anchor: '100%',
+                    validationEvent: 'change',
+                    msgTarget: 'under'
+                }
             }
             ,items: [{
                 columnWidth: .7
@@ -613,30 +557,17 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     xtype: 'textfield'
                     ,fieldLabel: _('resource_pagetitle')
                     ,required: true
-                    ,description: '<b>[[*pagetitle]]</b><br />'+_('resource_pagetitle_help')
+                    ,description: '<b>[[*pagetitle]]</b><br>'+_('resource_pagetitle_help')
                     ,name: 'pagetitle'
                     ,id: 'modx-resource-pagetitle'
                     ,maxLength: 191
-                    ,anchor: '100%'
                     ,allowBlank: false
                     ,enableKeyEvents: true
                     ,listeners: {
-                        'keyup': {
-                            fn: function(f) {
-                                var title = Ext.util.Format.stripTags(f.getValue());
-
+                        keyup: {
+                            fn: function(cmp) {
+                                const title = this.formatMainPanelTitle('resource', this.config.record, cmp.getValue(), true);
                                 this.generateAliasRealTime(title);
-
-                                title = Ext.util.Format.htmlEncode(title);
-                                if (MODx.request.a !== 'resource/create' && MODx.perm.tree_show_resource_ids === true) {
-                                    title = title+ ' <small>('+this.config.record.id+')</small>';
-                                }
-                                var breadCrumbsHeader = Ext.getCmp('modx-header-breadcrumbs');
-                                if (breadCrumbsHeader) {
-                                    breadCrumbsHeader.updateHeader(title);
-                                } else {
-                                    Ext.getCmp('modx-resource-header').el.dom.innerText = title;
-                                }
 
                                 // check some system settings before doing real time alias transliteration
                                 if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
@@ -649,11 +580,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                             scope: this
                         }
                         // also do realtime transliteration of alias on blur of pagetitle field
-                        // as sometimes (when typing very fast) the last letter(s) are not catched
-                        ,'blur': {
-                            fn: function(f,e) {
-                                var title = Ext.util.Format.stripTags(f.getValue());
-
+                        // as sometimes (when typing very fast) the last letter(s) are not caught
+                        ,blur: {
+                            fn: function(cmp, e) {
+                                const title = Ext.util.Format.stripTags(f.getValue());
                                 this.generateAliasRealTime(title);
                             },
                             scope: this
@@ -665,14 +595,13 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,items: [{
                     xtype: 'textfield'
                     ,fieldLabel: _('resource_alias')
-                    ,description: '<b>[[*alias]]</b><br />'+_('resource_alias_help')
+                    ,description: '<b>[[*alias]]</b><br>'+_('resource_alias_help')
                     ,name: 'alias'
                     ,id: 'modx-resource-alias'
                     ,maxLength: (aliasLength > 191 || aliasLength === 0) ? 191 : aliasLength
-                    ,anchor: '100%'
                     ,value: config.record.alias || ''
                     ,listeners: {
-                        'change': {fn: function(f,e) {
+                        change: {fn: function(f,e) {
                                 // when the alias is manually cleared, enable real time alias
                                 if (Ext.isEmpty(f.getValue())) {
                                     this.config.aliaswasempty = true;
@@ -685,32 +614,31 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_longtitle')
-            ,description: '<b>[[*longtitle]]</b><br />'+_('resource_longtitle_help')
+            ,description: '<b>[[*longtitle]]</b><br>'+_('resource_longtitle_help')
             ,name: 'longtitle'
             ,id: 'modx-resource-longtitle'
             ,maxLength: 191
-            ,anchor: '100%'
             ,value: config.record.longtitle || ''
         },{
             layout: 'column'
-            ,border: false
-            ,anchor: '100%'
             ,defaults: {
-                labelAlign: 'top'
-                ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
+                labelSeparator: '',
+                layout: 'form',
+                defaults: {
+                    anchor: '100%',
+                    grow: true,
+                    validationEvent: 'change',
+                    msgTarget: 'under'
+                }
             }
             ,items: [{
                 columnWidth: .5
                 ,items: [{
                     xtype: 'textarea'
                     ,fieldLabel: _('resource_description')
-                    ,description: '<b>[[*description]]</b><br />'+_('resource_description_help')
+                    ,description: '<b>[[*description]]</b><br>'+_('resource_description_help')
                     ,name: 'description'
                     ,id: 'modx-resource-description'
-                    ,grow: true
-                    ,anchor: '100%'
                     ,value: config.record.description || ''
 
                 }]
@@ -719,11 +647,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,items: [{
                     xtype: 'textarea'
                     ,fieldLabel: _('resource_summary')
-                    ,description: '<b>[[*introtext]]</b><br />'+_('resource_summary_help')
+                    ,description: '<b>[[*introtext]]</b><br>'+_('resource_summary_help')
                     ,name: 'introtext'
                     ,id: 'modx-resource-introtext'
-                    ,grow: true
-                    ,anchor: '100%'
                     ,value: config.record.introtext || ''
                 }]
             }]
@@ -733,9 +659,20 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
     ,getMainRightFields: function(config) {
         config = config || {};
-
         return [{
-            layout: 'form'
+            defaults: {
+                layout: 'form',
+                anchor: '100%',
+                labelSeparator: '',
+                validationEvent: 'change',
+                msgTarget: 'under',
+                defaults: {
+                    layout: 'form',
+                    anchor: '100%',
+                    validationEvent: 'change',
+                    msgTarget: 'under'
+                }
+            }
             ,id: 'modx-resource-main-right-top'
             ,cls: 'modx-resource-panel'
             ,title: _('resource_right_top_title')
@@ -746,13 +683,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 return { collapsed: this.collapsed };
             }
             ,items: [{
-                layout: 'form'
-                ,border: false
-                ,items: [{
+                items: [{
                     xtype: 'xcheckbox'
                     ,boxLabel: _('resource_published')
                     ,hideLabel: true
-                    ,description: '<b>[[*published]]</b><br />'+_('resource_published_help')
+                    ,description: '<b>[[*published]]</b><br>'+_('resource_published_help')
                     ,name: 'published'
                     ,id: 'modx-resource-published'
                     ,inputValue: 1
@@ -760,7 +695,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 },{
                     xtype: 'xcheckbox'
                     ,boxLabel: _('deleted')
-                    ,description: '<b>[[*deleted]]</b><br />'+_('resource_delete')
+                    ,description: '<b>[[*deleted]]</b><br>'+_('resource_delete')
                     ,hideLabel: true
                     ,cls: 'danger'
                     ,name: 'deleted'
@@ -771,7 +706,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },{
                 xtype: 'xdatetime'
                 ,fieldLabel: _('resource_publishedon')
-                ,description: '<b>[[*publishedon]]</b><br />'+_('resource_publishedon_help')
+                ,description: '<b>[[*publishedon]]</b><br>'+_('resource_publishedon_help')
                 ,name: 'publishedon'
                 ,id: 'modx-resource-publishedon'
                 ,allowBlank: true
@@ -785,7 +720,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },{
                 xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
                 ,fieldLabel: _('resource_publishdate')
-                ,description: '<b>[[*pub_date]]</b><br />'+_('resource_publishdate_help')
+                ,description: '<b>[[*pub_date]]</b><br>'+_('resource_publishdate_help')
                 ,name: 'pub_date'
                 ,id: 'modx-resource-pub-date'
                 ,allowBlank: true
@@ -799,7 +734,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },{
                 xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden'
                 ,fieldLabel: _('resource_unpublishdate')
-                ,description: '<b>[[*unpub_date]]</b><br />'+_('resource_unpublishdate_help')
+                ,description: '<b>[[*unpub_date]]</b><br>'+_('resource_unpublishdate_help')
                 ,name: 'unpub_date'
                 ,id: 'modx-resource-unpub-date'
                 ,allowBlank: true
@@ -812,8 +747,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,value: config.record.unpub_date
             }]
         },{
-            layout: 'form'
-            ,id: 'modx-resource-main-right-middle'
+            id: 'modx-resource-main-right-middle'
             ,cls: 'modx-resource-panel'
             ,title: _('resource_right_middle_title')
             ,collapsible: true
@@ -825,16 +759,14 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,items: [{
                 xtype: 'modx-combo-template'
                 ,fieldLabel: _('resource_template')
-                ,description: '<b>[[*template]]</b><br />'+_('resource_template_help')
+                ,description: '<b>[[*template]]</b><br>'+_('resource_template_help')
                 ,name: 'template'
                 ,id: 'modx-resource-template'
-                ,anchor: '100%'
                 ,listeners: {
                     'select': {fn: this.templateWarning,scope: this}
                 }}]
         },{
-            layout: 'form'
-            ,id: 'modx-resource-main-right-bottom'
+            id: 'modx-resource-main-right-bottom'
             ,cls: 'modx-resource-panel'
             ,title: _('resource_right_bottom_title')
             ,collapsible: true
@@ -848,7 +780,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,boxLabel: _('resource_hide_from_menus')
                 ,hideLabel: true
                 ,cls: 'warning'
-                ,description: '<b>[[*hidemenu]]</b><br />'+_('resource_hide_from_menus_help')
+                ,description: '<b>[[*hidemenu]]</b><br>'+_('resource_hide_from_menus_help')
                 ,name: 'hidemenu'
                 ,id: 'modx-resource-hidemenu'
                 ,inputValue: 1
@@ -856,70 +788,78 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('resource_menutitle')
-                ,description: '<b>[[*menutitle]]</b><br />'+_('resource_menutitle_help')
+                ,description: '<b>[[*menutitle]]</b><br>'+_('resource_menutitle_help')
                 ,name: 'menutitle'
                 ,id: 'modx-resource-menutitle'
                 ,maxLength: 255
-                ,anchor: '100%'
                 ,value: config.record.menutitle || ''
             },{
                 xtype: 'textfield'
                 ,fieldLabel: _('resource_link_attributes')
-                ,description: '<b>[[*link_attributes]]</b><br />'+_('resource_link_attributes_help')
+                ,description: '<b>[[*link_attributes]]</b><br>'+_('resource_link_attributes_help')
                 ,name: 'link_attributes'
                 ,id: 'modx-resource-link-attributes'
                 ,maxLength: 255
-                ,anchor: '100%'
                 ,value: config.record.link_attributes || ''
             },{
                 xtype: 'numberfield'
                 ,fieldLabel: _('resource_menuindex')
-                ,description: '<b>[[*menuindex]]</b><br />'+_('resource_menuindex_help')
+                ,description: '<b>[[*menuindex]]</b><br>'+_('resource_menuindex_help')
                 ,name: 'menuindex'
                 ,id: 'modx-resource-menuindex'
-                ,width: 75
+                ,allowNegative: false
+                ,allowDecimals: false
+                ,enableKeyEvents: true
                 ,value: parseInt(config.record.menuindex) || 0
+                ,listeners: {
+                    afterrender: function(field) {
+                        field.el.set({autocomplete: 'off'});
+                    },
+                    specialkey: function(field, e) {
+                        const currentVal = parseInt(field.value);
+                        if (e.getKey() == e.UP) {
+                            field.setValue(currentVal + 1);
+                        } else if (currentVal >= 1 && e.getKey() == e.DOWN) {
+                            field.setValue(currentVal - 1);
+                        }
+                    }
+                }
             }]
         }]
     }
 
     ,getSettingFields: function(config) {
         config = config || {record:{}};
-
         return [{
             layout:'column'
-            ,border: false
-            ,anchor: '100%'
             ,defaults: {
-                labelAlign: 'top'
-                ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
+                defaults: {
+                    layout: 'form',
+                    labelAlign: 'top',
+                    labelSeparator: '',
+                    defaults: {
+                        validationEvent: 'change',
+                        anchor: '100%',
+                        msgTarget: 'under'
+                    }
+                }
             }
             ,items:[{
                 columnWidth: .5
                 ,items: [{
                     id: 'modx-page-settings-left'
-                    ,layout: 'form'
-                    ,defaults: { msgTarget: 'under' }
                     ,items: this.getSettingLeftFields(config)
                 },{
                     id: 'modx-page-settings-box-left'
-                    ,layout: 'form'
-                    ,defaults: { msgTarget: 'under' }
                     ,items: this.getSettingRightFieldsetLeft(config)
                 }]
             },{
                 columnWidth: .5
                 ,items: [{
                     id: 'modx-page-settings-right'
-                    ,layout: 'form'
-                    ,defaults: { msgTarget: 'under' }
                     ,items: this.getSettingRightFields(config)
                 },{
                     id: 'modx-page-settings-box-right'
-                    ,layout: 'form'
-                    ,defaults: { msgTarget: 'under' }
                     ,items: this.getSettingRightFieldsetRight(config)
                 }]
 
@@ -931,21 +871,20 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         return [{
             xtype: 'modx-combo-class-derivatives'
             ,fieldLabel: _('resource_type')
-            ,description: '<b>[[*class_key]]</b><br />'
+            ,description: '<b>[[*class_key]]</b><br>'
             ,name: 'class_key'
             ,hiddenName: 'class_key'
             ,id: 'modx-resource-class-key'
             ,allowBlank: false
             ,value: config.record.class_key || 'MODX\\Revolution\\modDocument'
-            ,anchor: '100%'
         },{
             xtype: 'modx-combo-content-type'
             ,fieldLabel: _('resource_content_type')
-            ,description: '<b>[[*content_type]]</b><br />'+_('resource_content_type_help')
+            ,description: '<b>[[*content_type]]</b><br>'+_('resource_content_type_help')
             ,name: 'content_type'
             ,hiddenName: 'content_type'
             ,id: 'modx-resource-content-type'
-            ,anchor: '100%'
+            ,allowBlank: false
             ,value: config.record.content_type || (MODx.config.default_content_type || 1)
         }];
     }
@@ -954,47 +893,19 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         return [{
             xtype: 'modx-field-parent-change'
             ,fieldLabel: _('resource_parent')
-            ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
+            ,description: '<b>[[*parent]]</b><br>'+_('resource_parent_help')
             ,name: 'parent-cmb'
             ,id: 'modx-resource-parent'
             ,value: config.record.parent || 0
-            ,anchor: '100%'
         },{
             xtype: 'modx-combo-content-disposition'
             ,fieldLabel: _('resource_contentdispo')
-            ,description: '<b>[[*content_dispo]]</b><br />'+_('resource_contentdispo_help')
+            ,description: '<b>[[*content_dispo]]</b><br>'+_('resource_contentdispo_help')
             ,name: 'content_dispo'
             ,hiddenName: 'content_dispo'
             ,id: 'modx-resource-content-dispo'
-            ,anchor: '100%'
             ,value: config.record.content_dispo || 0
 
-        }];
-    }
-    // @deprecated
-    ,getSettingRightFieldset: function(config) {
-        return [{
-            layout: 'column'
-            ,id: 'modx-page-settings-box-columns'
-            ,border: false
-            ,anchor: '100%'
-            ,defaults: {
-                labelAlign: 'top'
-                ,border: false
-                ,layout: 'form'
-                ,msgTarget: 'under'
-            }
-            ,items: [{
-                columnWidth: .5
-                ,id: 'modx-page-settings-right-box-left'
-                ,defaults: { msgTarget: 'under' }
-                ,items: this.getSettingRightFieldsetLeft(config)
-            },{
-                columnWidth: .5
-                ,id: 'modx-page-settings-right-box-right'
-                ,defaults: { msgTarget: 'under' }
-                ,items: this.getSettingRightFieldsetRight(config)
-            }]
         }];
     }
 
@@ -1002,8 +913,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         return [{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_folder')
-            ,description: '<b>[[*isfolder]]</b><br />'+_('resource_folder_help')
-            ,hideLabel: true
+            ,description: '<b>[[*isfolder]]</b><br>'+_('resource_folder_help')
+            ,hideLabel: false
             ,name: 'isfolder'
             ,id: 'modx-resource-isfolder'
             ,inputValue: 1
@@ -1011,7 +922,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_show_in_tree')
-            ,description: '<b>[[*show_in_tree]]</b><br />'+_('resource_show_in_tree_help')
+            ,description: '<b>[[*show_in_tree]]</b><br>'+_('resource_show_in_tree_help')
             ,hideLabel: true
             ,name: 'show_in_tree'
             ,id: 'modx-resource-show-in-tree'
@@ -1021,7 +932,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_hide_children_in_tree')
-            ,description: '<b>[[*hide_children_in_tree]]</b><br />'+_('resource_hide_children_in_tree_help')
+            ,description: '<b>[[*hide_children_in_tree]]</b><br>'+_('resource_hide_children_in_tree_help')
             ,hideLabel: true
             ,name: 'hide_children_in_tree'
             ,id: 'modx-resource-hide-children-in-tree'
@@ -1031,7 +942,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_alias_visible')
-            ,description: '<b>[[*alias_visible]]</b><br />'+_('resource_alias_visible_help')
+            ,description: '<b>[[*alias_visible]]</b><br>'+_('resource_alias_visible_help')
             ,hideLabel: true
             ,name: 'alias_visible'
             ,id: 'modx-resource-alias-visible'
@@ -1050,11 +961,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         },{
             xtype: 'textfield'
             ,fieldLabel: _('resource_uri')
-            ,description: '<b>[[*uri]]</b><br />'+_('resource_uri_help')
+            ,description: '<b>[[*uri]]</b><br>'+_('resource_uri_help')
             ,name: 'uri'
             ,id: 'modx-resource-uri'
             ,maxLength: 255
-            ,anchor: '70%'
             ,value: config.record.uri || ''
             ,hidden: !config.record.uri_override
         }];
@@ -1064,8 +974,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         return [{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_richtext')
-            ,description: '<b>[[*richtext]]</b><br />'+_('resource_richtext_help')
-            ,hideLabel: true
+            ,description: '<b>[[*richtext]]</b><br>'+_('resource_richtext_help')
+            ,hideLabel: false
             ,name: 'richtext'
             ,id: 'modx-resource-richtext'
             ,inputValue: 1
@@ -1073,7 +983,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_searchable')
-            ,description: '<b>[[*searchable]]</b><br />'+_('resource_searchable_help')
+            ,description: '<b>[[*searchable]]</b><br>'+_('resource_searchable_help')
             ,hideLabel: true
             ,name: 'searchable'
             ,id: 'modx-resource-searchable'
@@ -1082,7 +992,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         },{
             xtype: 'xcheckbox'
             ,boxLabel: _('resource_cacheable')
-            ,description: '<b>[[*cacheable]]</b><br />'+_('resource_cacheable_help')
+            ,description: '<b>[[*cacheable]]</b><br>'+_('resource_cacheable_help')
             ,hideLabel: true
             ,name: 'cacheable'
             ,id: 'modx-resource-cacheable'
@@ -1142,11 +1052,11 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,preventRender: true
                 ,resource: config.resource
                 ,mode: config.mode || 'update'
-                ,"parent": config.record["parent"] || 0
-                ,"token": config.record.create_resource_token
+                ,parent: config.record['parent'] || 0
+                ,token: config.record.create_resource_token
                 ,reloaded: !Ext.isEmpty(MODx.request.reload)
                 ,listeners: {
-                    'afteredit': {fn:this.fieldChangeEvent,scope:this}
+                    afteredit: {fn:this.fieldChangeEvent,scope:this}
                 }
             }]
         };

@@ -24,10 +24,9 @@ MODx.panel.TV = function(config) {
         ,autoWidth: true
         ,monitorResize: true
         ,items: [{
-            html: _('tv_new')
-            ,id: 'modx-tv-header'
-            ,xtype: 'modx-header'
-        },MODx.getPageStructure([{
+            id: 'modx-tv-header',
+            xtype: 'modx-header'
+        }, MODx.getPageStructure([{
             title: _('general_information')
             ,layout: 'form'
             ,id: 'modx-tv-form'
@@ -81,7 +80,7 @@ MODx.panel.TV = function(config) {
                                 ,description: MODx.expandHelp ? '' : _('tv_name_desc')
                                 ,name: 'name'
                                 ,id: 'modx-tv-name'
-                                ,maxLength: 100
+                                ,maxLength: 50
                                 ,enableKeyEvents: true
                                 ,allowBlank: false
                                 ,value: config.record.name
@@ -89,19 +88,10 @@ MODx.panel.TV = function(config) {
                                 ,listeners: {
                                     keyup: {
                                         fn: function(cmp, e) {
-                                            let title = Ext.util.Format.stripTags(cmp.getValue()),
-                                                tagTitle
-                                                ;
-                                            title = Ext.util.Format.htmlEncode(title);
-                                            tagTitle = title.length > 0 ? title : _('example_tag_tvname');
-                                            title = _('tv') + ': ' + title;
-                                            if (MODx.request.a !== 'element/tv/create' && MODx.perm.tree_show_element_ids === true) {
-                                                title = title + ' <small>('+this.config.record.id+')</small>';
-                                            }
-
-                                            Ext.getCmp('modx-tv-header').getEl().update(title);
+                                            const   title = this.formatMainPanelTitle('tv', this.config.record, cmp.getValue(), true),
+                                                    tagTitle = title.length > 0 ? title : _('example_tag_tv_name')
+                                            ;
                                             cmp.nextSibling().getEl().child('.example-replace-name').update(tagTitle);
-
                                             MODx.setStaticElementPath('tv');
                                         }
                                         ,scope: this
@@ -251,6 +241,7 @@ MODx.panel.TV = function(config) {
                             }]
                         },{
                             columnWidth: 0.5
+                            ,cls: 'switch-container'
                             ,defaults: {
                                 anchor: '100%'
                                 ,msgTarget: 'under'
@@ -259,6 +250,7 @@ MODx.panel.TV = function(config) {
                             }
                             ,items: [{
                                 xtype: 'xcheckbox'
+                                ,hideLabel: true
                                 ,boxLabel: _('tv_lock')
                                 ,description: MODx.expandHelp ? '' : _('tv_lock_desc')
                                 ,name: 'locked'
@@ -314,7 +306,7 @@ MODx.panel.TV = function(config) {
                                 xtype: 'xcheckbox'
                                 ,hideLabel: true
                                 ,boxLabel: _('is_static')
-                                ,description: MODx.expandHelp ? '' : _('is_static_desc')
+                                ,description: MODx.expandHelp ? '' : _('is_static_tv_desc')
                                 ,name: 'static'
                                 ,id: 'modx-tv-static'
                                 ,inputValue: 1
@@ -323,7 +315,7 @@ MODx.panel.TV = function(config) {
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-tv-static'
                                 ,id: 'modx-tv-static-help'
-                                ,html: _('is_static_desc')
+                                ,html: _('is_static_tv_desc')
                                 ,cls: 'desc-under toggle-slider-above'
                             }]
                         }]
@@ -369,8 +361,10 @@ MODx.panel.TV = function(config) {
                                 }
                                 ,listeners: {
                                     select: {
-                                        fn: this.changeSource
-                                        ,scope: this
+                                        fn: function() {
+                                            this.setMediaSources('tv');
+                                        },
+                                        scope: this
                                     }
                                 }
                             },{
@@ -395,11 +389,22 @@ MODx.panel.TV = function(config) {
                                 ,fieldLabel: _('static_file')
                                 ,description: MODx.expandHelp ? '' : _('static_file_desc')
                                 ,name: 'static_file'
+                                ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
                                 ,openTo: config.record.openTo || ''
                                 ,id: 'modx-tv-static-file'
                                 ,triggerClass: 'x-form-code-trigger'
                                 ,maxLength: 255
                                 ,value: config.record.static_file || ''
+                                ,validator: function(value){
+                                    if (Ext.getCmp('modx-tv-static').getValue() === true) {
+                                        if (Ext.util.Format.trim(value) != '') {
+                                            return true;
+                                        } else {
+                                            return _('static_file_ns');
+                                        }
+                                    }
+                                    return true;
+                                }
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-tv-static-file'
@@ -452,9 +457,9 @@ MODx.panel.TV = function(config) {
                 ,preventRender: true
                 ,anchor: '100%'
                 ,listeners: {
-                    'rowclick': {fn:this.markDirty,scope:this}
-                    ,'afteredit': {fn:this.markDirty,scope:this}
-                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
+                    rowclick: {fn:this.markDirty,scope:this}
+                    ,afteredit: {fn:this.markDirty,scope:this}
+                    ,afterRemoveRow: {fn:this.markDirty,scope:this}
                 }
             }]
         },{
@@ -476,9 +481,9 @@ MODx.panel.TV = function(config) {
                 ,tv: config.tv
                 ,preventRender: true
                 ,listeners: {
-                    'rowclick': {fn:this.markDirty,scope:this}
-                    ,'afteredit': {fn:this.markDirty,scope:this}
-                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
+                    rowclick: {fn:this.markDirty,scope:this}
+                    ,afteredit: {fn:this.markDirty,scope:this}
+                    ,afterRemoveRow: {fn:this.markDirty,scope:this}
                 }
             }]
         },{
@@ -501,9 +506,9 @@ MODx.panel.TV = function(config) {
                 ,preventRender: true
                 ,anchor: '100%'
                 ,listeners: {
-                    'rowclick': {fn:this.markDirty,scope:this}
-                    ,'afteredit': {fn:this.markDirty,scope:this}
-                    ,'afterRemoveRow': {fn:this.markDirty,scope:this}
+                    rowclick: {fn:this.markDirty,scope:this}
+                    ,afteredit: {fn:this.markDirty,scope:this}
+                    ,afterRemoveRow: {fn:this.markDirty,scope:this}
                 }
             }]
         },{
@@ -522,18 +527,21 @@ MODx.panel.TV = function(config) {
             ,stateEvents: ['tabchange']
             ,hideMode: 'offsets'
             ,anchor: '100%'
-            ,getState:function() {
-                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            ,getState: function() {
+                return {
+                    activeTab: this.items.indexOf(this.getActiveTab())
+                };
             }
         })]
         ,useLoadingMask: true
         ,listeners: {
-            'setup': {fn:this.setup,scope:this}
-            ,'success': {fn:this.success,scope:this}
-            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
-            ,'failureSubmit': {
-                fn: function () {
-                    this.showErroredTab(['modx-tv-form'], 'modx-tv-tabs')
+            setup: {fn:this.setup,scope:this}
+            ,success: {fn:this.success,scope:this}
+            ,failure: {fn:this.failure,scope:this}
+            ,beforeSubmit: {fn:this.beforeSubmit,scope:this}
+            ,failureSubmit: {
+                fn: function() {
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-tv-tabs')
                 },
                 scope: this
             }
@@ -554,11 +562,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
      * @property {Number} tvId - Used to store this record's id for easy reference by other methods
      */
     ,tvId: null
-
-    /**
-     * @property {Boolean} isStatic - Used to track the state of the static file switch and its toggled fieldset
-     */
-    ,isStatic: false
 
     /**
      * @property {Object} nativeTypes - Defines the standard, built-in tv types so we can automate transformations
@@ -608,6 +611,91 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     ,newLoaderTypes: {
         input: [],
         output: []
+    }
+
+    /**
+     * @property {Object} validatorRefMap - Provides an easy way to map differently named fields to a
+     * common validator method, by tv type, without the need to pass in variables to the target method
+     * from the field item's validator config
+     */
+    ,validatorRefMap: {
+        text: {
+            minLtMax: {
+                compareTo: "inopt_maxLength",
+                errMsg: _("ext_minlenmaxfield")
+            },
+            maxGtMin: {
+                compareTo: "inopt_minLength",
+                errMsg: _("ext_maxlenminfield")
+            }
+        },
+        email: {
+            minLtMax: {
+                compareTo: "inopt_maxLength",
+                errMsg: _("ext_minlenmaxfield")
+            },
+            maxGtMin: {
+                compareTo: "inopt_minLength",
+                errMsg: _("ext_maxlenminfield")
+            }
+        },
+        number: {
+            minLtMax: {
+                compareTo: "inopt_maxValue",
+                errMsg: _("ext_minvalmaxfield")
+            },
+            maxGtMin: {
+                compareTo: "inopt_minValue",
+                errMsg: _("ext_maxvalminfield")
+            }
+        }
+    }
+
+    ,validatorCustomDefs: {}
+
+    ,listenerCustomDefs: {}
+
+    /**
+     * @property {Object} sharedComponentOverrides - Entry point for user-contributed TV
+     * overrides of the global input properties (currently input options [elements] and
+     * default value [default_text]).
+     */
+    ,sharedComponentOverrides: {}
+
+    ,setup: function() {
+
+        if (!this.initialized) {
+            /*
+                The itemId (not id) of each form tab to be included/excluded; these correspond to the
+                keys in each tab component's items property
+            */
+            this.errorHandlingTabs = ['form-tv'];
+            this.errorHandlingIgnoreTabs = ['panel-properties','form-template','form-access','form-sources'];
+            this.getForm().setValues(this.config.record);
+        } else {
+            this.clearDirty();
+            return true;
+        }
+
+        this.formatMainPanelTitle('tv', this.config.record);
+        this.getElementProperties(this.config.record.properties);
+
+        if (!Ext.isEmpty(this.config.record.sources) && !this.initialized) {
+            Ext.getCmp('modx-grid-element-sources').getStore().loadData(this.config.record.sources);
+        }
+
+        Ext.getCmp('modx-panel-tv-output-properties').showOutputProperties(Ext.getCmp('modx-tv-display'));
+        Ext.getCmp('modx-panel-tv-input-properties').showInputProperties(Ext.getCmp('modx-tv-type'));
+
+        this.fireEvent('ready',this.config.record);
+
+        if (MODx.onLoadEditor) {
+            MODx.onLoadEditor(this);
+        }
+
+        this.clearDirty();
+        this.initialized = true;
+        MODx.fireEvent('ready');
     }
 
     /**
@@ -673,96 +761,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         return allNewLoaderTypes.indexOf(tvType) === -1 ? true : false ;
     }
 
-    /**
-     * @property {Object} validatorRefMap - Provides an easy way to map differently named fields to a
-     * common validator method, by tv type, without the need to pass in variables to the target method
-     * from the field item's validator config
-     */
-    ,validatorRefMap: {
-        text: {
-            minLtMax: {
-                compareTo: "inopt_maxLength",
-                errMsg: _("ext_minlenmaxfield")
-            },
-            maxGtMin: {
-                compareTo: "inopt_minLength",
-                errMsg: _("ext_maxlenminfield")
-            }
-        },
-        email: {
-            minLtMax: {
-                compareTo: "inopt_maxLength",
-                errMsg: _("ext_minlenmaxfield")
-            },
-            maxGtMin: {
-                compareTo: "inopt_minLength",
-                errMsg: _("ext_maxlenminfield")
-            }
-        },
-        number: {
-            minLtMax: {
-                compareTo: "inopt_maxValue",
-                errMsg: _("ext_minvalmaxfield")
-            },
-            maxGtMin: {
-                compareTo: "inopt_minValue",
-                errMsg: _("ext_maxvalminfield")
-            }
-        }
-    }
-
-    /**
-     * @property {Object} sharedComponentOverrides - Entry point for user-contributed TV
-     * overrides of the global input properties (currently input options [elements] and
-     * default value [default_text]).
-     */
-    ,sharedComponentOverrides: {}
-
-    ,setup: function() {
-        if (this.initialized) { this.clearDirty(); return true; }
-        this.getForm().setValues(this.config.record);
-        if (!Ext.isEmpty(this.config.record.name)) {
-            var title = _('tv')+': '+this.config.record.name;
-            if (MODx.perm.tree_show_element_ids) {
-                title = title+ ' <small>('+this.config.record.id+')</small>';
-            }
-            Ext.getCmp('modx-tv-header').getEl().update(title);
-        }
-        var d;
-        if (!Ext.isEmpty(this.config.record.properties)) {
-            d = this.config.record.properties;
-            var g = Ext.getCmp('modx-grid-element-properties');
-            if (g) {
-                g.defaultProperties = d;
-                g.getStore().loadData(d);
-            }
-        }
-
-        if (!Ext.isEmpty(this.config.record.sources) && !this.initialized) {
-            Ext.getCmp('modx-grid-element-sources').getStore().loadData(this.config.record.sources);
-        }
-
-        Ext.getCmp('modx-panel-tv-output-properties').showOutputProperties(Ext.getCmp('modx-tv-display'));
-        Ext.getCmp('modx-panel-tv-input-properties').showInputProperties(Ext.getCmp('modx-tv-type'));
-
-        this.fireEvent('ready',this.config.record);
-        if (MODx.onLoadEditor) {MODx.onLoadEditor(this);}
-        this.clearDirty();
-        this.initialized = true;
-        MODx.fireEvent('ready');
-        return true;
-    }
-
-    /**
-     * Set the browser window "media source" source
-     */
-    ,changeSource: function() {
-        var browser = Ext.getCmp('modx-tv-static-file')
-            ,source = Ext.getCmp('modx-tv-static-source').getValue();
-
-        browser.config.source = source;
-    }
-
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-tv-template');
         var rg = Ext.getCmp('modx-grid-tv-security');
@@ -810,68 +808,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     }
 
     /**
-     * @property {Function} toggleFieldVisibility - Shows or hides a specified set of fields and their containing component
-     *
-     * @param {String} ctrlId - Id of the checkbox or listbox component that sets the toggle state
-     * @param {String} containerId - Id of the container with fields to be toggled
-     * @param {Array} fieldIds - An array of component ids to be toggled
-     * @param {Boolean} ctrlValToShow - The boolean value from the toggle component that indicates fields should be shown
-     * @param {Boolean} addSibling - Indicates if found field's next sibling (label) should be toggled as well; this applies when toggling items with separate help descriptions
-     *
-     */
-    ,toggleFieldVisibility: function(ctrlId, containerId, fieldIds, ctrlValToShow, addSibling) {
-
-        const   ctrlCmp = Ext.getCmp(ctrlId),
-                containerCmp = Ext.getCmp(containerId)
-            ;
-        if (!ctrlCmp || typeof ctrlCmp === 'undefined') {
-            console.error(`toggleFieldVisibility: Could not get the control component with the id '${ctrlId}'`);
-            return false;
-        }
-        if (containerId && (!containerCmp || typeof containerCmp === 'undefined')) {
-            console.error(`toggleFieldVisibility: Could not get the container component with the id '${containerId}'`);
-            return false;
-        }
-
-        addSibling = addSibling === false ? false : true ;
-        ctrlValToShow = ctrlValToShow === false ? false : true ;
-
-        const   showVal = ctrlCmp.xtype === 'combo-boolean' ? ctrlCmp.getValue() : ctrlCmp.checked ,
-                show = ctrlValToShow === false ? !showVal : showVal
-            ;
-
-        if (show) {
-            containerCmp.show();
-            // Must doLayout here to ensure field dimensions are calculated correctly before being shown
-            containerCmp.doLayout();
-        } else {
-            containerCmp.hide();
-        }
-
-        fieldIds.forEach(field => {
-            const fieldCmp = Ext.getCmp(field),
-                sibling = fieldCmp.nextSibling(),
-                siblingIsHelp = sibling && sibling.xtype === 'label' ? true : false
-                ;
-            if (fieldCmp) {
-                if (show) {
-                    fieldCmp.show();
-                    if (addSibling && siblingIsHelp) {
-                        sibling.show();
-                    }
-                } else {
-                    fieldCmp.hide();
-                    if (addSibling && siblingIsHelp) {
-                        sibling.hide();
-                    }
-                }
-            }
-        });
-    }
-
-    ,validatorCustomDefs: {}
-
-    /**
      * @property {Function} getValidatorDefs - Establishes special built-in validators and provides
      * an easy way for custom TVs to add their own via a custom override object
      *
@@ -914,8 +850,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
 
         return validatorDefs;
     }
-
-    ,listenerCustomDefs: {}
 
     /**
      * @property {Function} getListenerDefs - Establishes special built-in listeners and provides
@@ -1039,6 +973,12 @@ MODx.panel.TVInputProperties = function(config) {
         ,border: false
         ,defaults: {
             border: false
+            ,defaults: {
+                labelSeparator: ''
+                ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
+            }
         }
         ,cls: 'form-with-labels'
         ,items: [{

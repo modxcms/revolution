@@ -2,18 +2,18 @@ textarea {
   overflow: auto;
 }
 
-textarea.x-form-field,
-.x-form-textarea {
-  display: block; /* make the field description (below) stick to the bottom correctly */
+.x-form-textarea,
+textarea.x-form-field {
+  display: block;
+  /* make the field description (below) stick to the bottom correctly */
   font-family: $codefonts;
-  padding: 5px; /* override standard extjs theme */
+  padding: 5px;
+  /* override standard extjs theme */
 }
-
 /* use default manager font for TV textareas to have unified look across TVs */
 .modx-tv .x-form-textarea:not(div) {
   font-family: inherit;
 }
-
 /* general class that can be applied to any form field that should display code font */
 .modx-code-content {
   font-family: $codefonts;
@@ -24,24 +24,23 @@ textarea[name="introtext"],
 .modx-text-content {
   font: $baseText;
 }
-
 .x-form-text,
 /* this screws up clear cache modal #shame */
-textarea.x-form-field,
-.x-form-textarea {
+.x-form-textarea,
+textarea.x-form-field {
   max-width: 100%;
   background-color: $coreFieldBg;
   background-image: none;
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
-  transition: border-color .25s;
+  transition: border-color 0.25s;
 }
 
+.x-viewport .x-form-textarea .x-form-focus,
 .x-viewport .x-trigger-wrap-focus,
 .x-viewport input.x-form-focus,
-.x-viewport textarea.x-form-focus,
-.x-viewport .x-form-textarea .x-form-focus {
+.x-viewport textarea.x-form-focus {
   border-color: $mediumGray;
 }
 
@@ -53,34 +52,32 @@ textarea.x-form-field,
 textarea.x-form-invalid {
   border-color: $red !important;
 }
-
 /* fix oversize of buttons in FF */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-
 /* special rule for the TVs additional input/output properties form to have padding on top */
 #modx-input-props,
 #modx-widget-props {
-  padding: 15px 0 0 0;
+  padding: 15px 0 0;
 }
-
 /* the wrapper structure for form inputs */
 .x-form-item {
   display: block;
   margin: 0;
-  outline: 0 none; /* prevent firefox from creating ugly dotted outlines */
-  position: relative; /* boundary for absolutely positioned elements */
-
+  outline: 0 none;
+  /* prevent firefox from creating ugly dotted outlines */
+  position: relative;
+  /* boundary for absolutely positioned elements */
   /* general styles for form labels, paddings for various form layouts are handled below */
   label.x-form-item-label {
     color: $coreFieldLabelColor;
     font-size: 13px;
     font-weight: bold;
-    position: relative; /* boundary for absolutely positioned elements */
-
+    position: relative;
+    /* boundary for absolutely positioned elements */
     .modx-tv-label-title {
       display: inline-block;
     }
@@ -91,17 +88,18 @@ input::-moz-focus-inner {
       font-weight: normal;
     }
 
-    .modx-tv-reset,
-    .modx-field-utils {
+    .modx-field-utils,
+    .modx-tv-reset {
       cursor: pointer;
       display: inline-block;
       position: relative;
       opacity: 0;
-      filter: alpha(opacity=0); /* for IE <= 8 */
+      filter: alpha(opacity=0);
+      /* for IE <= 8 */
       padding: 0 0 0 3px;
       top: 0;
       right: 0;
-      transition: all .25s;
+      transition: all 0.25s;
       width: 16px;
       height: 16px;
 
@@ -109,7 +107,8 @@ input::-moz-focus-inner {
         @extend %pseudo-font;
         box-sizing: border-box;
         color: scale-color($coreFieldLabelColor, $lightness: 50%);
-        content: fa-content($fa-var-undo-alt); /* better match IMO for the action being taken */
+        content: fa-content($fa-var-undo-alt);
+        /* better match IMO for the action being taken */
         font-size: 14px;
         position: relative;
         bottom: 2px;
@@ -119,20 +118,24 @@ input::-moz-focus-inner {
         width: 16px;
         height: 16px;
       }
+
       &.modx-field-reset {
-          &::before {
-            content: fa-content($fa-var-undo-alt);
-          }
-          &:hover::before {
-            color: $green;
-          }
+        &::before {
+          content: fa-content($fa-var-undo-alt);
+        }
+
+        &:hover::before {
+          color: $green;
+        }
       }
+
       &.modx-field-clear {
         &::before {
           content: fa-content($fa-var-eraser);
           font-size: 15px;
           margin-bottom: 4px;
         }
+
         &:hover::before {
           color: $red;
         }
@@ -147,19 +150,17 @@ input::-moz-focus-inner {
       }
     }
 
-    &:hover .modx-tv-reset,
-    &:hover .modx-field-utils {
+    &:hover .modx-field-utils,
+    &:hover .modx-tv-reset {
       opacity: 1;
-      filter: alpha(opacity=100); /* for IE <= 8 */
+      filter: alpha(opacity=100);
+      /* for IE <= 8 */
     }
   }
-
   /* label.x-form-item-label */
-
   &.modx-tv {
     padding: 0 0 0 0 !important;
   }
-
   /* is outside of the label */
   .modx-tv-inherited {
     color: $darkGray;
@@ -168,7 +169,8 @@ input::-moz-focus-inner {
     font-style: italic;
     position: absolute;
     top: 19px;
-    right: 0; /* absolute position to avoid layout issues with long descriptions */
+    right: 0;
+    /* absolute position to avoid layout issues with long descriptions */
   }
 
   .modx-tv-image-preview {
@@ -178,7 +180,6 @@ input::-moz-focus-inner {
       display: block;
     }
   }
-
   /* Tag TVs tag list below */
   .modx-tag-list {
     list-style: none;
@@ -199,19 +200,21 @@ input::-moz-focus-inner {
         border-style: solid;
         border-width: 10px 10px 10px 0;
         border-color: transparent $lightGray transparent transparent;
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -10px;
-        transform: rotate(360deg); /* for better anti-aliasing in webkit browsers */
+        transform: rotate(360deg);
+        /* for better anti-aliasing in webkit browsers */
         width: 0;
         height: 0;
       }
 
       &:after {
         background-color: $white;
-        border-radius: 50%;  /* make a circle */
-        content: '';
+        border-radius: 50%;
+        /* make a circle */
+        content: "";
         position: absolute;
         top: 8px;
         left: -4px;
@@ -233,83 +236,86 @@ input::-moz-focus-inner {
           background-color: darken($colorSplash, 6%);
 
           &:before {
-            border-color: transparent darken($colorSplash, 6%) transparent transparent;
+            border-color: transparent darken($colorSplash, 6%) transparent
+              transparent;
           }
         }
       }
     }
   }
-
   /* a few styles for the old original type multi select TV */
   .modx-tv-legacy-select {
     border: 1px solid $borderColor;
     border-radius: $borderRadius;
     padding: 5px;
-    transition: all .25s;
+    transition: all 0.25s;
 
     &:focus {
       border: 1px solid $borderColorFocus;
     }
-
     /* does not work in webkit but it's here anyways if some browsers support it */
     option[selected] {
       background-color: $brandHover;
     }
   }
-
   /* style the labels and form items in the various form layouts */
   /* .x-form-label-left needs to come first, so .x-form-label-top rules can override, as some forms are strangely nested */
   .x-form-label-left & {
     /* targets .x-form-item */
-    padding: 15px 0 0 0;
-    padding-bottom: 0; /* override extjs default theme styles */
-
+    padding: 15px 0 0;
+    /* override extjs default theme styles */
     &:first-of-type {
       /* do not add the top padding to the first .x-form-item in this type of form layout */
       padding: 0;
     }
 
     label.x-form-item-label {
-      display: inline-block; /* override extjs default theme styles */
-      margin: 0; /* override extjs default theme styles */
-      padding: 7px 0 7px 0;
+      display: inline-block;
+      /* override extjs default theme styles */
+      margin: 0;
+      /* override extjs default theme styles */
+      padding: 7px 0;
     }
   }
 
   .x-form-label-top & {
     /* targets .x-form-item */
-    padding: 0; /* override the .x-form-label-left rule */
-    padding-bottom: 0; /* override extjs default theme styles */
-
+    padding: 0;
+    /* override the .x-form-label-left rule */
+    padding-bottom: 0;
+    /* override extjs default theme styles */
     label.x-form-item-label {
-      display: inline-block; /* override extjs default theme styles */
-      margin: 15px 0 4px 0;
+      display: inline-block;
+      /* override extjs default theme styles */
+      margin: 15px 0 4px;
       padding: 0;
     }
   }
 
   .x-window & {
-
     .x-form-item-label {
-      padding: 10px 0 4px 0; /* move the form fields a bit tighter together inside windows */
+      padding: 10px 0 4px;
+      /* move the form fields a bit tighter together inside windows */
     }
   }
 
   &.x-hide-label {
-    padding-top: 10px !important; /* make this override common rules */
-
+    padding-top: 10px !important;
+    /* make this override common rules */
     #modx-resource-content & {
-      padding-top: 0 !important; /* make this override the rule above */
+      padding-top: 0 !important;
+      /* make this override the rule above */
     }
 
     label.x-form-item-label {
-      display: none; /* override !important rule from above */
+      display: none;
+      /* override !important rule from above */
     }
   }
 
   &.disabled {
     label {
-        color: scale-color($coreFieldLabelColor, $lightness: 50%);
+      color: scale-color($coreFieldLabelColor, $lightness: 50%);
     }
   }
 
@@ -317,42 +323,42 @@ input::-moz-focus-inner {
     padding: 0;
     font: $baseText;
   }
-
   /* .x-form-element */
-
   /* prevent columns used inside form elements to have too much spacing, some custom TV types need this */
   .x-column-inner > .x-column {
-
-    ~.x-column {
+    ~ .x-column {
       margin-left: 5px;
     }
 
     .x-form-field-wrap {
-      width: auto !important; /* make sure the wrap is always full width of parent, fixes some custom TVs */
+      width: auto !important;
+      /* make sure the wrap is always full width of parent, fixes some custom TVs */
     }
   }
-
   /* prevent nested elements with class .container having a lot of margin, some custom TV types need this */
   .container {
     margin: 0;
   }
 
   .x-btn {
-    padding: 7px 10px 7px 10px;
+    padding: 7px 10px;
   }
 }
-
 /* .x-form-item */
-
 .desc-under {
   color: $coreFieldDescColor;
   display: block;
   font-size: 12px;
   font-style: italic;
-  margin: .4em 0 0 0;
+  margin: 0.4em 0 0;
+  transition: color 0.25s;
+
+  &:hover {
+    color: scale-color($coreFieldDescColor, $lightness: -50%);
+  }
 
   &.toggle-slider-above {
-    margin: .3em 0;
+    margin: 0.3em 0;
     padding-left: 3.9em;
   }
 
@@ -364,15 +370,17 @@ input::-moz-focus-inner {
 
   .example-list {
     ul {
-      margin: .4em 0;
+      margin: 0.4em 0;
+
       li {
         position: relative;
-        margin-bottom: .25em;
+        margin-bottom: 0.25em;
         padding-left: 1.25em;
+
         &::before {
           @extend %pseudo-font;
           position: absolute;
-          left: .2em;
+          left: 0.2em;
           top: 0;
           content: fa-content($fa-var-angle-double-right);
           color: scale-color($mediumGray, $lightness: 20%);
@@ -380,9 +388,10 @@ input::-moz-focus-inner {
       }
     }
   }
-  .example-input,
-  .copy-this {
-    padding: 0 .3em;
+
+  .copy-this,
+  .example-input {
+    padding: 0 0.3em;
     border-radius: 2px;
     transition: width 1s;
   }
@@ -390,6 +399,7 @@ input::-moz-focus-inner {
   .example-input {
     color: scale-color($green, $lightness: -5%, $saturation: -45%);
     background-color: scale-color($green, $lightness: 94%, $saturation: -20%);
+
     &:hover {
       background-color: scale-color($green, $lightness: 89%, $saturation: -10%);
       color: scale-color($green, $lightness: -20%, $saturation: -5%);
@@ -398,41 +408,50 @@ input::-moz-focus-inner {
   }
 
   .copy-this {
-      color: scale-color($blue, $lightness: -5%, $saturation: -40%);
-      background-color: scale-color($blue, $lightness: 92%, $saturation: -15%);
-      &:hover {
-          background-color: scale-color($blue, $lightness: 87%, $saturation: 5%);
-          color: scale-color($blue, $lightness: -35%);
-          cursor: pointer;
-          &::after {
-              @extend %pseudo-font;
-              content: fa-content($fa-var-copy);
-              color: scale-color($blue, $saturation: -40%);
-              display: inherit;
-              margin-left: .5em;
-          }
-          &:active {
-              color: $darkGray;
-              &::after {
-                  color: $darkGray;
-              }
-          }
-      }
-  }
-  .feedback {
-      margin-left: .75em;
+    color: scale-color($blue, $lightness: -5%, $saturation: -40%);
+    background-color: scale-color($blue, $lightness: 92%, $saturation: -15%);
+    position: relative;
+
+    &:hover {
+      background-color: scale-color($blue, $lightness: 87%, $saturation: 5%);
       color: scale-color($blue, $lightness: -35%);
-      font-style: normal;
-      &.item-copied {
-          opacity: 1;
-          transition: opacity 1.5s;
+      cursor: pointer;
+
+      &::after {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-copy);
+        color: scale-color($blue, $saturation: -40%);
+        position: absolute;
+        margin-left: 0.5em;
+        cursor: default;
       }
+
+      &:active {
+        color: $darkGray;
+
+        &::after {
+          color: $darkGray;
+        }
+      }
+    }
+  }
+
+  .feedback {
+    margin-left: 1.4rem;
+    color: scale-color($blue, $lightness: -35%);
+    font-style: normal;
+
+    &.item-copied {
+      opacity: 1;
+      transition: opacity 1.5s;
+    }
   }
 
   a {
     text-decoration: none;
     border-bottom: 1px dotted $mediumGray;
     color: $mediumGray;
+
     &:hover {
       color: $darkGray;
     }
@@ -441,22 +460,24 @@ input::-moz-focus-inner {
   .deemphasize {
     font-style: normal;
   }
-
 }
 
 .fs-toggle {
   padding-top: 1em;
   margin-top: 2em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   border-top: 1px dashed $borderColor;
 }
 
 .x-fieldset {
   border: 1px solid $borderColor;
-  border-radius: $borderRadius !important; /* !important ensures the border radius, also when the fieldset has a class that sets it to 0 */
-  margin: 15px 0 0 0;
-  overflow: visible; /* allow the legend to be displayed correctly */
-  padding: 0; /* override extjs default styles */
+  border-radius: $borderRadius !important;
+  /* !important ensures the border radius, also when the fieldset has a class that sets it to 0 */
+  margin: 15px 0 0;
+  overflow: visible;
+  /* allow the legend to be displayed correctly */
+  padding: 0;
+  /* override extjs default styles */
   position: relative;
 
   .x-fieldset-header {
@@ -469,22 +490,23 @@ input::-moz-focus-inner {
     position: relative;
 
     .x-fieldset-header-text {
-      line-height: 18px; /* prevent collapse button cut off */
+      line-height: 18px;
+      /* prevent collapse button cut off */
     }
   }
 
   .x-fieldset-bwrap {
     .x-fieldset-body {
-      overflow-x: hidden !important; /* prevent unnecessary horizontal scrollbars */
-      padding: 0 10px 10px 10px;
+      overflow-x: hidden !important;
+      /* prevent unnecessary horizontal scrollbars */
+      padding: 0 10px 10px;
     }
   }
-
   /* for toggled fieldsets */
   &.form-row-wrapper {
     .x-fieldset-bwrap {
       .x-fieldset-body {
-        padding: 0 15px 15px 15px;
+        padding: 0 15px 15px;
       }
     }
   }
@@ -493,36 +515,35 @@ input::-moz-focus-inner {
   &#tv-output-opts-fs {
     border: 0;
     margin: 0;
+
     .x-fieldset-bwrap {
       .x-fieldset-body {
         padding: 0;
       }
     }
+
     .x-fieldset {
       .x-fieldset-bwrap {
         .x-fieldset-body {
-          padding: 0 15px 15px 15px;
+          padding: 0 15px 15px;
         }
       }
     }
   }
-
 }
 
 .x-form-field {
   font: inherit;
-
   /* composite fields that are used by some extras */
   &.x-form-composite {
     margin-bottom: 0 !important;
-
     /* not sure if this applies to all buttons inside composite fields, could only find Image+ TV using this */
     .x-btn {
-      top: 1px !important; /* override inline style */
+      top: 1px !important;
+      /* override inline style */
     }
   }
 }
-
 /* the different input fields */
 .x-static-text-field {
   color: inherit;
@@ -537,7 +558,8 @@ input::-moz-focus-inner {
   /*box-sizing: border-box;*/
   /* we cannot use this because extjs calculates widths with the old box-model */
   line-height: 20px;
-  min-height: 20px; /* + 5px + 5px padding = 30px */
+  min-height: 20px;
+  /* + 5px + 5px padding = 30px */
   padding: 5px;
 }
 
@@ -545,38 +567,43 @@ input::-moz-focus-inner {
   max-width: 100%;
   background: $coreFieldBg;
   border: 1px solid $borderColor;
-  border-radius: $borderRadius; /*box-shadow: $shadowBorderField;*/
-
+  border-radius: $borderRadius;
+  /*box-shadow: $shadowBorderField;*/
   .x-form-text:not(.x-form-invalid) {
     border: 0;
   }
 
   .x-form-trigger {
     border: 0;
-    border-radius: 0 $borderRadius $borderRadius 0; /* override button styles border-radius */
-    box-shadow: none; /* override button styles box-shadow */
-    padding: 0; /* override button styles padding */
+    border-radius: 0 $borderRadius $borderRadius 0;
+    /* override button styles border-radius */
+    box-shadow: none;
+    /* override button styles box-shadow */
+    padding: 0;
+    /* override button styles padding */
     width: 30px;
-    height: 100% !important; /* height 100% to enable vertical centering, !important to override default extjs theme styles */
+    height: 100% !important;
+    /* height 100% to enable vertical centering, !important to override default extjs theme styles */
     position: absolute;
     top: 0;
     right: 0;
 
     &:before {
       @extend %pseudo-font;
-
       box-sizing: border-box;
       content: fa-content($fa-var-chevron-down);
       font-size: 14px;
-      margin-top: -7px; /* half of the height to center vertically with top 50% */
-      opacity: .8;
-      filter: alpha(opacity=60); /* for IE <= 8 */
+      margin-top: -7px;
+      /* half of the height to center vertically with top 50% */
+      opacity: 0.8;
+      filter: alpha(opacity=60);
+      /* for IE <= 8 */
       position: absolute;
       top: 50%;
       right: 0;
       text-align: center;
       width: 30px;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
     }
 
     &.x-form-trigger-over,
@@ -585,7 +612,8 @@ input::-moz-focus-inner {
 
       &:before {
         opacity: 1;
-        filter: alpha(opacity=100); /* for IE <= 8 */
+        filter: alpha(opacity=100);
+        /* for IE <= 8 */
       }
     }
 
@@ -595,16 +623,15 @@ input::-moz-focus-inner {
 
       &:before {
         opacity: 1;
-        filter: alpha(opacity=100); /* for IE <= 8 */
+        filter: alpha(opacity=100);
+        /* for IE <= 8 */
       }
     }
-
     /* for xtype datefield */
     &.x-form-date-trigger:before {
       content: fa-content($fa-var-calendar);
       font-weight: 400;
     }
-
     /* for xtype timefield, doesn't add the class somehow...but it's here anyways */
     /* to make it work the property ,triggerClass: 'x-form-time-trigger' has to be specified for xtype: 'timefield' */
     &.x-form-time-trigger:before {
@@ -626,7 +653,6 @@ input::-moz-focus-inner {
       content: fa-content($fa-var-file-code);
       font-weight: 400;
     }
-
   }
 
   &.x-datetime-wrap {
@@ -635,7 +661,6 @@ input::-moz-focus-inner {
 
     .ux-datetime-date {
       .x-form-trigger {
-
         &:before {
           content: fa-content($fa-var-calendar);
         }
@@ -644,17 +669,16 @@ input::-moz-focus-inner {
 
     .ux-datetime-time {
       .x-form-trigger {
-
         &:before {
           content: fa-content($fa-var-clock);
         }
       }
     }
   }
-
   /* xtype: fileuploadfield styles, mainly used for import windows */
   &.x-form-fileupload-wrap {
-    overflow: visible; /* allows the upload button to cover the border of the wrap on hover */
+    overflow: visible;
+    /* allows the upload button to cover the border of the wrap on hover */
     position: relative;
 
     .x-form-file {
@@ -663,18 +687,21 @@ input::-moz-focus-inner {
       right: 0;
       min-height: 20px;
       opacity: 0;
-      filter: alpha(opacity=0); /* for IE <= 8 */
+      filter: alpha(opacity=0);
+      /* for IE <= 8 */
       padding: 5px;
       z-index: 2;
     }
 
     .x-form-file-btn {
       border-radius: 0 $borderRadius $borderRadius 0;
-      padding: 7px; /* override default button padding */
+      padding: 7px;
+      /* override default button padding */
       position: absolute;
       top: 0;
       right: 0;
-      z-index: 1; /* needs to stay below the transparent file input field */
+      z-index: 1;
+      /* needs to stay below the transparent file input field */
       line-height: 0;
       box-shadow: none;
       border-left: solid 1px $borderColor;
@@ -682,7 +709,8 @@ input::-moz-focus-inner {
 
     .x-form-file-text {
       position: relative;
-      z-index: 3; /* needs to stay above the transparent file input field */
+      z-index: 3;
+      /* needs to stay above the transparent file input field */
     }
   }
 }
@@ -690,51 +718,45 @@ input::-moz-focus-inner {
 #x-form-el-modx-user-photo .x-form-file-trigger:before {
   content: fa-content($fa-var-file-image);
 }
-
-#x-form-el-modx-tv-locked {
-  margin-top: 1em;
-}
-
 /* .x-form-field-wrap */
-
 /* both, radio groups and checkbox groups are wrapped in a x-form-check-wrap */
-.x-form-check-wrap,
-.x-fieldset-checkbox-toggle legend {
+.x-fieldset-checkbox-toggle legend,
+.x-form-check-wrap {
   height: auto !important;
-  line-height: 18px; /* this is also default in the extjs default theme */
-
+  line-height: 18px;
+  /* this is also default in the extjs default theme */
   .x-form-label-left & {
-    padding: 7px 0 7px 0;
+    padding: 7px 0;
   }
 
   .x-form-label-top & {
     padding: 0;
   }
 
-  .x-form-cb-label,
-  .x-fieldset-header-text {
+  .x-fieldset-header-text,
+  .x-form-cb-label {
     color: $coreFieldLabelColor;
     cursor: pointer;
-    display: inline-block; /* make line-height apply */
+    display: inline-block;
+    /* make line-height apply */
     font-weight: normal;
     margin: 0;
     padding-left: 1.9em;
     position: relative;
-    top: 0; /* override extjs default style */
-
+    top: 0;
+    /* override extjs default style */
     .ext-ie8 & {
       padding-left: 3px;
 
       &:before {
-        content: '';
+        content: "";
       }
     }
 
     &:before {
       @extend %pseudo-font;
-
       box-sizing: border-box;
-      content: '';
+      content: "";
       font-size: 18px;
       padding-right: 3px;
       position: absolute;
@@ -746,8 +768,8 @@ input::-moz-focus-inner {
       height: 18px;
     }
 
-    &:hover:before,
-    &:focus:before {
+    &:focus:before,
+    &:hover:before {
       color: $colorSplash;
     }
 
@@ -755,10 +777,9 @@ input::-moz-focus-inner {
       color: darken($colorSplash, 6%);
     }
   }
-
   /* checkbox & radio button replacement */
-  .x-form-checkbox,
-  input[type="checkbox"], /* we need this to catch un-classed checkboxes in fieldset legends */
+  .x-form-checkbox, input[type="checkbox"],
+  /* we need this to catch un-classed checkboxes in fieldset legends */
   .x-form-radio {
     /*display: none;*/
     cursor: pointer;
@@ -779,15 +800,15 @@ input::-moz-focus-inner {
       height: 13px;
     }
 
-    &:hover + .x-form-cb-label:before,
-    &:hover + .x-fieldset-header-text:before,
+    &:focus + .x-fieldset-header-text:before,
     &:focus + .x-form-cb-label:before,
-    &:focus + .x-fieldset-header-text:before {
+    &:hover + .x-fieldset-header-text:before,
+    &:hover + .x-form-cb-label:before {
       color: $colorSplash;
     }
 
-    &:active + .x-form-cb-label:before,
-    &:active + .x-fieldset-header-text:before {
+    &:active + .x-fieldset-header-text:before,
+    &:active + .x-form-cb-label:before {
       color: darken($colorSplash, 6%);
     }
   }
@@ -814,39 +835,41 @@ input::-moz-focus-inner {
     font-weight: 400;
   }
 }
-
 /* .x-form-check-wrap */
 /* Special checboxes for resources and tv configs */
+#modx-chunk-tabs,
+#modx-plugin-tabs,
 #modx-resource-tabs,
+#modx-snippet-tabs,
+#modx-template-tabs,
 #modx-tv-tabs {
-
-  .x-form-check-wrap,
+  .x-fieldset legend,
   .x-fieldset-checkbox-toggle legend,
-  .x-fieldset legend {
-    [type="checkbox"]{
-
+  .x-form-check-wrap {
+    [type="checkbox"] {
       position: absolute;
       left: -9999px;
+
       html[dir="rtl"] & {
         right: -9999px;
         left: unset;
       }
 
-      &+.x-form-cb-label,
-      &+.x-fieldset-header-text {
+      & + .x-fieldset-header-text,
+      & + .x-form-cb-label {
         position: relative;
         padding-left: 3.6em;
-        padding-top: .2em;
+        padding-top: 0.2em;
         margin-left: 0;
         cursor: pointer;
         box-sizing: border-box;
-        line-height: 1; /* fixes vertical alignment with slider control */
-
-        &:before,
-        &:after {
-          content: '';
+        line-height: 1;
+        /* fixes vertical alignment with slider control */
+        &:after,
+        &:before {
+          content: "";
           position: absolute;
-          transition: all .2s ease;
+          transition: all 0.2s ease;
           font-size: inherit;
         }
 
@@ -863,7 +886,7 @@ input::-moz-focus-inner {
         &:after {
           left: 0.1em;
           top: 0.8em;
-          margin-top: -.65em;
+          margin-top: -0.65em;
           height: 1.3em;
           width: 1.3em;
           border-radius: 50%;
@@ -873,9 +896,8 @@ input::-moz-focus-inner {
       }
 
       &:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-fieldset-header-text,
+        & + .x-form-cb-label {
           &:after {
             left: 1.6em;
             top: 0.8em;
@@ -889,9 +911,8 @@ input::-moz-focus-inner {
       }
 
       &.danger:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-fieldset-header-text,
+        & + .x-form-cb-label {
           &:before {
             background-color: $red;
             border-color: $red;
@@ -900,9 +921,8 @@ input::-moz-focus-inner {
       }
 
       &.warning:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-fieldset-header-text,
+        & + .x-form-cb-label {
           &:before {
             background-color: $orange;
             border-color: $orange;
@@ -913,53 +933,63 @@ input::-moz-focus-inner {
   }
 }
 
+.switch-container {
+  padding-top: 1.6rem;
+}
+
 .x-form-check-group,
 .x-form-radio-group {
   /*overflow: visible; /* do not cut off the bottom of the input elements */
-  overflow: hidden; /* visible causes horizontal scrollbars in vertical tabs */
-  padding-bottom: 0.5em; /* prevent bottom-most sliders from being clipped */
-
+  overflow: hidden;
+  /* visible causes horizontal scrollbars in vertical tabs */
+  padding-bottom: 0.5em;
+  /* prevent bottom-most sliders from being clipped */
   .x-column {
     /* we need this to have access to the first child */
-
     .x-form-item {
       &:first-child {
-        padding: 4px 0 0 0;
+        padding: 4px 0 0;
       }
     }
   }
   /* applies to new xcheckboxgroup custom checkbox group */
   &.aggregated-group {
-      padding-left: 1em;
-      padding-right: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
-
-
 /* superboxselect / multi-select field */
 .x-superboxselect {
-  height: auto !important; /* override the extjs default theme style of 18px */
+  height: auto !important;
+  /* override the extjs default theme style of 18px */
   margin: 0;
   outline: 0;
-  padding: 0 5px 5px 5px; /* special padding because selected items need margin-top */
+  padding: 0 5px 5px;
+  /* special padding because selected items need margin-top */
   position: relative;
-  white-space: normal; /* make selected options wrap */
-  width: auto !important; /* prevents the right border to be cut off */
-
+  white-space: normal;
+  /* make selected options wrap */
+  width: auto !important;
+  /* prevents the right border to be cut off */
   .ext-strict .x-toolbar .x-small-editor & {
-    height: auto !important; /* override the extjs default theme style high specifiy + !important rule, wtf... */
+    height: auto !important;
+    /* override the extjs default theme style high specifiy + !important rule, wtf... */
   }
 
   ul {
     cursor: text;
     min-height: 20px;
-    overflow: visible; /* prevent item box-shadow from being cut off */
-    padding-right: 61px; /* 2 * 30px for each .x-form-trigger + 1px border */
-    white-space: normal; /* make selected options wrap */
-    width: auto !important; /* override extjs width calculation */
-
+    overflow: visible;
+    /* prevent item box-shadow from being cut off */
+    padding-right: 61px;
+    /* 2 * 30px for each .x-form-trigger + 1px border */
+    white-space: normal;
+    /* make selected options wrap */
+    width: auto !important;
+    /* override extjs width calculation */
     .x-toolbar & {
-      margin: -5px 0 0 -5px; /* fix for superbox selects in toolbars */
+      margin: -5px 0 0 -5px;
+      /* fix for superbox selects in toolbars */
     }
 
     li {
@@ -967,11 +997,12 @@ input::-moz-focus-inner {
       padding: 0;
 
       &.x-superboxselect-item {
-        cursor: default; /* don't make the selected options appear like full buttons */
+        cursor: default;
+        /* don't make the selected options appear like full buttons */
         font-size: 12px;
-        padding: 4px 18px 4px 4px !important; /* can somehow not override the extended rules */
+        padding: 4px 18px 4px 4px !important;
+        /* can somehow not override the extended rules */
         position: relative;
-
         /* focus styles need to be defined as the item is an li element which normally doesn't get :focus */
         &.x-superboxselect-item-focus {
           background-color: $buttonBgHover;
@@ -983,26 +1014,29 @@ input::-moz-focus-inner {
           border: 0;
           color: inherit;
           cursor: pointer;
-          display: inline-block; /*font-size: 1px;*/
-          outline: 0; /* fix firefox dotted outlines */
-          opacity: .6;
-          filter: alpha(opacity=60); /* for IE <= 8 */
+          display: inline-block;
+          /*font-size: 1px;*/
+          outline: 0;
+          /* fix firefox dotted outlines */
+          opacity: 0.6;
+          filter: alpha(opacity=60);
+          /* for IE <= 8 */
           padding: 0;
           position: absolute;
           top: 0;
           right: 0;
-          transition: opacity .25s;
+          transition: opacity 0.25s;
           width: 16px;
           height: 100%;
 
           &:before {
             @extend %pseudo-font;
-
             box-sizing: border-box;
             content: fa-content($fa-var-times);
             color: inherit;
             font-size: 14px;
-            margin-top: -7px; /* half of the height to center vertically with top 50% */
+            margin-top: -7px;
+            /* half of the height to center vertically with top 50% */
             position: absolute;
             top: 50%;
             right: 0;
@@ -1011,10 +1045,11 @@ input::-moz-focus-inner {
             width: 16px;
           }
 
-          &:hover,
-          &:focus {
+          &:focus,
+          &:hover {
             opacity: 1;
-            filter: alpha(opacity=100); /* for IE <= 8 */
+            filter: alpha(opacity=100);
+            /* for IE <= 8 */
           }
         }
       }
@@ -1034,10 +1069,9 @@ input::-moz-focus-inner {
 
   &.x-superboxselect-stacked li {
     box-sizing: border-box;
-    margin: 5px 0 0 0;
+    margin: 5px 0 0;
     width: 100%;
   }
-
   /* these buttons got the .x-form-trigger class assigned */
   .x-superboxselect-btns {
     overflow: visible;
@@ -1045,11 +1079,12 @@ input::-moz-focus-inner {
     top: 0;
     right: 0;
     width: 61px;
-    height: 100%; /* 61px account for the border of the clear button */
-
+    height: 100%;
+    /* 61px account for the border of the clear button */
     .x-superboxselect-btn-expand {
       border-radius: 0;
-      right: 31px; /* account for the border of the clear button */
+      right: 31px;
+      /* account for the border of the clear button */
     }
 
     .x-superboxselect-btn-clear {
@@ -1057,10 +1092,8 @@ input::-moz-focus-inner {
 
       &:before {
         @extend %pseudo-font;
-
         content: fa-content($fa-var-times);
       }
-
       /* we need to style that separator border individually */
       &:hover {
         border-left: 1px solid $borderColorHover;
@@ -1084,7 +1117,7 @@ input::-moz-focus-inner {
     margin-bottom: 2px;
   }
 
-  input[type=text],
+  input[type="text"],
   textarea {
     background-color: $coreFieldBg;
     background-image: none;
@@ -1094,13 +1127,12 @@ input::-moz-focus-inner {
     width: 97%;
   }
 
-  input[type=text] {
+  input[type="text"] {
     font-size: 13px;
     height: 20px !important;
     padding: 5px;
   }
 }
-
 /* cannot find this class anywhere, leaving it for savety, but most likely broken when it appears */
 .modx-tv-description {
   color: $darkGray;
@@ -1108,7 +1140,6 @@ input::-moz-focus-inner {
   line-height: 1.2;
   margin-top: 2px !important;
 }
-
 /* TODO: is it used? -> exside: yes, but it ha a class of .modx-tv-reset */
 .modx-tv-reload-btn {
   float: right;
@@ -1132,12 +1163,12 @@ input::-moz-focus-inner {
 }
 
 .x-editor .x-form-check-wrap {
-  background-color: $white
+  background-color: $white;
 }
-
 /* fix combo on grid editor bug */
 .x-grid-editor .x-form-field-wrap {
-  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0 100%;
+  background: #f6f2f7 url($imgPath+"modx-theme/form/combo-bck.png") repeat-x
+    scroll 0 100%;
 }
 
 .x-grid-editor .x-form-field-wrap input {
@@ -1146,7 +1177,7 @@ input::-moz-focus-inner {
 
 .x-grid-editor .x-form-field-wrap img {
   background-color: $white;
-  background-image: url($imgPath + 'modx-theme/form/trigger.png');
+  background-image: url($imgPath+"modx-theme/form/trigger.png");
 }
 
 .x-form-grow-sizer {
@@ -1162,7 +1193,8 @@ input::-moz-focus-inner {
 
   &:before {
     @extend %pseudo-font;
-    content: fa-content($fa-var-exclamation-triangle); /* : "\f071" */
+    content: fa-content($fa-var-exclamation-triangle);
+    /* : "\f071" */
     position: absolute;
     top: 3px;
     left: 3px;
@@ -1176,12 +1208,11 @@ input::-moz-focus-inner {
 
 .x-grid3 {
   .x-small-editor {
-
-    .x-form-text,
-    .x-form-field-wrap {
+    .x-form-field-wrap,
+    .x-form-text {
       font: $fontSmall;
       margin-top: 7px;
-      padding: 2px 5px 2px 5px;
+      padding: 2px 5px;
 
       .x-form-text {
         margin: 0;
@@ -1194,19 +1225,22 @@ input::-moz-focus-inner {
     }
   }
 }
-
 /* the following styles have to be outside of their component blocks as they are inserted at the end of the DOM */
 .x-combo-list {
-  border: 0; /* set the border on .x-combo-list-inner */
+  border: 0;
+  /* set the border on .x-combo-list-inner */
   border-radius: 0 0 $borderRadius $borderRadius;
-  overflow: visible; /* prevent the left/right borders of .x-combo-list-inner to be cut off */
-
+  overflow: visible;
+  /* prevent the left/right borders of .x-combo-list-inner to be cut off */
   .x-combo-list-inner {
     background-color: $dropdownBg;
-    border: 1px solid $mediumGray; /* apply the border here as we move this element 1px left to be in line with the combobox border */
+    border: 1px solid $mediumGray;
+    /* apply the border here as we move this element 1px left to be in line with the combobox border */
     border-radius: 0 0 $borderRadius $borderRadius;
-    margin-left: -1px; /* we cannot use this on the .x-combo-list element as it's used for position calculation */
-    width: 100% !important; /* override extjs calculated inline dimensions and stretch to container */
+    margin-left: -1px;
+    /* we cannot use this on the .x-combo-list element as it's used for position calculation */
+    width: 100% !important;
+    /* override extjs calculated inline dimensions and stretch to container */
   }
 
   .x-combo-list-item {
@@ -1244,7 +1278,6 @@ input::-moz-focus-inner {
     font-weight: bold;
     border-bottom: 1px solid $borderColor;
   }
-
   /* the pagination toolbar inside a combobox has 2 buttons left, text, pagenumberfield, text, 2 buttons */
   /* this information is important to understand the following code with uses sibling selectors for IE8 compat */
   .x-toolbar {
@@ -1255,16 +1288,17 @@ input::-moz-focus-inner {
     position: relative;
 
     .x-toolbar-ct {
-      padding: 5px 0 15px 0;
+      padding: 5px 0 15px;
     }
 
     .x-toolbar-left table {
-      margin: 0 auto; /* center the buttons regardless of listWidth */
+      margin: 0 auto;
+      /* center the buttons regardless of listWidth */
     }
 
     .x-toolbar-cell {
-      display: inline-block; /* make table cells act as block elements^^, dont look at me... =) */
-
+      display: inline-block;
+      /* make table cells act as block elements^^, dont look at me... =) */
       /* nested to override normal toolbar rules */
       .x-btn,
       .x-form-text {
@@ -1279,11 +1313,11 @@ input::-moz-focus-inner {
 
       .x-btn {
         padding: 1px;
-        transition: color .25s;
+        transition: color 0.25s;
 
         &.x-btn-over,
-        &:hover,
-        &:focus {
+        &:focus,
+        &:hover {
           color: $buttonBgHover;
         }
 
@@ -1294,7 +1328,7 @@ input::-moz-focus-inner {
 
         &.x-item-disabled {
           color: $buttonColor;
-          opacity: .4;
+          opacity: 0.4;
         }
 
         button:before {
@@ -1318,14 +1352,12 @@ input::-moz-focus-inner {
       padding: 0;
       text-align: center;
     }
-
     /* the first button << */
     .x-toolbar-cell:first-child {
       .x-btn {
         margin-left: 1px;
       }
     }
-
     /* the first text cell, "Page" */
     .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .xtb-text {
@@ -1336,9 +1368,12 @@ input::-moz-focus-inner {
         left: 0;
       }
     }
-
     /* the second text cell, "of X" */
-    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+    .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell {
       .xtb-text {
         display: inline-block;
         position: absolute;
@@ -1348,24 +1383,30 @@ input::-moz-focus-inner {
         left: 0;
       }
     }
-
     /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
-    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+    .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell {
       .x-btn {
         margin-right: 0;
       }
     }
-
     /* the refresh button */
     .x-toolbar-cell:last-child {
       opacity: 0;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
 
       .x-btn {
         font-size: 12px;
         line-height: 1;
         margin: 0;
-        opacity: .4;
+        opacity: 0.4;
         padding: 0;
         position: absolute;
         bottom: 2px;
@@ -1392,7 +1433,6 @@ input::-moz-focus-inner {
       }
     }
   }
-
   /* the small resize handle bottom right */
   .x-resizable-handle-southeast {
     bottom: 1px;
@@ -1401,7 +1441,7 @@ input::-moz-focus-inner {
 }
 
 .x-combo-list-hd {
-  background-image: url($imgPath + 'modx-theme/layout/panel-title-light-bg.gif');
+  background-image: url($imgPath+"modx-theme/layout/panel-title-light-bg.gif");
   border-bottom-color: #bcbcbc;
   color: #464646;
 }
@@ -1409,17 +1449,16 @@ input::-moz-focus-inner {
 .x-combo-list-small {
   font: $fontSmall;
 }
-
 /* The date TV calendar styles */
-.x-date-picker,
-.x-date-mp {
+.x-date-mp,
+.x-date-picker {
   background-color: $lightestGray;
 
   .x-btn,
-  .x-date-mp-ok,
-  .x-date-mp-cancel {
+  .x-date-mp-cancel,
+  .x-date-mp-ok {
     border: 0;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 10px;
     margin: 0 0 0 7px;
 
     &:first-child {
@@ -1433,33 +1472,33 @@ input::-moz-focus-inner {
     }
   }
 
-  .x-date-mp-ok,
-  .x-date-mp-cancel {
+  .x-date-mp-cancel,
+  .x-date-mp-ok {
     height: 16px;
   }
 }
 
 .x-date-middle {
-  padding: 5px 3px 5px 3px;
+  padding: 5px 3px;
 }
 
-.x-date-right a,
 .x-date-left a,
+.x-date-mp-ybtn a.x-date-mp-next,
 .x-date-mp-ybtn a.x-date-mp-prev,
-.x-date-mp-ybtn a.x-date-mp-next {
+.x-date-right a {
   display: inline-block;
-  opacity: .6;
-  filter: alpha(opacity=60); /* for IE <= 8 */
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  /* for IE <= 8 */
   margin: 0 auto;
   position: relative;
-  transition: opacity .25s;
+  transition: opacity 0.25s;
 
   &:before {
     @extend %pseudo-font;
-
     box-sizing: border-box;
     color: $colorSplash;
-    content: '';
+    content: "";
     font-size: 18px;
     position: absolute;
     top: 0;
@@ -1472,12 +1511,13 @@ input::-moz-focus-inner {
 
   &:hover {
     opacity: 1;
-    filter: alpha(opacity=100); /* for IE <= 8 */
+    filter: alpha(opacity=100);
+    /* for IE <= 8 */
   }
 }
 
-.x-date-right a,
-.x-date-mp-ybtn a.x-date-mp-next {
+.x-date-mp-ybtn a.x-date-mp-next,
+.x-date-right a {
   &:before {
     content: fa-content($fa-var-caret-right);
     left: auto;
@@ -1522,13 +1562,13 @@ td.x-date-mp-year a {
 
 td.x-date-mp-month a,
 td.x-date-mp-year a {
-  margin: 0 3px 0 3px;
+  margin: 0 3px;
 }
 
-.x-date-inner a:hover,
-.x-date-inner .x-date-prevday a:hover,
-.x-date-inner .x-date-nextday a:hover,
 .x-date-inner .x-date-disabled a:hover,
+.x-date-inner .x-date-nextday a:hover,
+.x-date-inner .x-date-prevday a:hover,
+.x-date-inner a:hover,
 td.x-date-mp-month a:hover,
 td.x-date-mp-year a:hover {
   background-color: $softGray;
@@ -1549,7 +1589,8 @@ td.x-date-mp-year a:hover {
 }
 
 .x-date-inner span {
-  font-style: normal; /* prevent italic font style because of em */
+  font-style: normal;
+  /* prevent italic font style because of em */
 }
 
 .x-date-inner .x-date-active span,
@@ -1565,8 +1606,8 @@ td.x-date-mp-sel a {
   color: $colorSplashContrast;
 }
 
-.x-date-inner .x-date-prevday a,
-.x-date-inner .x-date-nextday a {
+.x-date-inner .x-date-nextday a,
+.x-date-inner .x-date-prevday a {
   color: $softGray;
 }
 
@@ -1593,8 +1634,8 @@ td.x-date-mp-sep {
   color: $black;
   font: $fontSmall;
 }
-
 // Specific to package upgrades
+
 .radio-version {
   .x-form-check-wrap .x-form-cb-label {
     display: block;
@@ -1604,8 +1645,8 @@ td.x-date-mp-sep {
     }
   }
 }
-
 // Template picker on resource create window
+
 .x-form-template-picker {
   .x-form-template-picker-search {
     padding: 0 !important;
@@ -1620,8 +1661,8 @@ td.x-date-mp-sep {
       overflow: auto;
     }
 
-    .x-form-template-picker-item,
-    .x-form-template-picker-category {
+    .x-form-template-picker-category,
+    .x-form-template-picker-item {
       border-bottom: 1px solid $borderColor;
 
       &:last-child {
@@ -1681,18 +1722,18 @@ td.x-date-mp-sep {
     }
   }
 }
-
 // Shows a thumbnail of selected template
+
 .x-form-template-preview {
   height: 236px;
   border-radius: $borderRadius;
   background-color: $coreFieldBg;
   border: 1px solid $borderColor;
-  background: url('../images/tp-no-preview.png') no-repeat center center;
+  background: url("../images/tp-no-preview.png") no-repeat center center;
   overflow: hidden;
 
-  .x-panel-bwrap,
-  .x-panel-body {
+  .x-panel-body,
+  .x-panel-bwrap {
     position: relative;
     height: 100%;
   }
@@ -1709,6 +1750,6 @@ td.x-date-mp-sep {
     bottom: 0;
     padding: 10px 20px;
     color: #fff;
-    background-color: rgba(0, 0, 0, .8);
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }

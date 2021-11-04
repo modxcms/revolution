@@ -27,9 +27,15 @@ MODx.FormPanel = function(config) {
         ,errorReader: MODx.util.JSONReader
         ,checkDirty: true
         ,useLoadingMask: false
-        ,defaults: { collapsible: false ,autoHeight: true, border: false }
+        ,defaults: {
+            collapsible: false
+            ,autoHeight: true
+            ,border: false
+        }
     });
-    if (config.items) { this.addChangeEvent(config.items); }
+    if (config.items) {
+        this.addChangeEvent(config.items);
+    }
 
     MODx.FormPanel.superclass.constructor.call(this,config);
     this.config = config;
@@ -63,11 +69,24 @@ MODx.FormPanel = function(config) {
         this.clearDirty();
     }
     this.focusFirstField();
+    // console.log('FormPanel, this', this);
 };
 Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     isReady: false
     ,defaultValues: []
     ,initialized: false
+    /**
+     * @property {Boolean} isStatic - Used to track the state of the static file switch
+     * and its toggled fieldset; present in element editing form panels
+     */
+    ,isStatic: false
+
+    /*
+        Use these errorHandling properties to specify which tab components
+        should and should not be inspected for field errors
+    */
+    ,errorHandlingTabs: []
+    ,errorHandlingIgnoreTabs: []
 
     ,submit: function(o) {
         var fm = this.getForm();
@@ -102,10 +121,10 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                             Ext.callback(this.config.success,this.config.scope || this,[f,a]);
                         }
                         this.fireEvent('success',{
-                            form:f
-                            ,result:a.result
-                            ,options:o
-                            ,config:this.config
+                            form: f
+                            ,result: a.result
+                            ,options: o
+                            ,config: this.config
                         });
                         this.clearDirty();
                         this.fireEvent('setup',this.config);
@@ -124,6 +143,17 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             return false;
         }
         return true;
+    }
+
+    ,failure: function(o) {
+        this.warnUnsavedChanges = true;
+        if(this.getForm().baseParams.action.search(/\/create/i) !== -1) {
+            const btn = Ext.getCmp('modx-abtn-save');
+            if (btn) {
+                btn.enable();
+            }
+        }
+        this.fireEvent('failureSubmit');
     }
 
     ,focusFirstField: function() {
@@ -291,6 +321,33 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
     }
 
+    /**
+     * @property {Function} setMediaSources - Updates one or more file fields with the specified Media Source(s)
+     *
+     * @param {String} formId - Id specifying the element type (template, chunk, snippet, etc.)
+     * @param {String|Array} fieldKeys - Comma-separated list of unique file field identifiers used to access field
+     * components having the following naming convention: 'modx-[formId]-[fieldKey]-file|source' (e.g., 'modx-tv-static-file')
+     * @param {String} sharedSourceKey - When more than one file input is present,
+     * enter one of the fieldKeys to specify it as the source for all inputs
+     */
+    ,setMediaSources: function(formId, fieldKeys = 'static', sharedSourceKey = '') {
+        if (!Ext.isArray(fieldKeys)) {
+            fieldKeys = fieldKeys.split(',');
+        }
+        fieldKeys.forEach(fieldKey => {
+            fieldKey = fieldKey.trim();
+            const   fieldCmpId = 'modx-' + formId + '-' + fieldKey + '-file',
+                    sourceKey = !Ext.isEmpty(sharedSourceKey) ? sharedSourceKey : fieldKey,
+                    sourceCmpId = 'modx-' + formId + '-' + sourceKey + '-source',
+                    fieldCmp = Ext.getCmp(fieldCmpId),
+                    sourceCmp = Ext.getCmp(sourceCmpId)
+            ;
+            if (fieldCmp && sourceCmp) {
+                fieldCmp.config.source = sourceCmp.getValue();
+            }
+        });
+    }
+
     ,destroy: function() {
         for (var i = 0; i < this.dropTargets.length; i++) {
             this.dropTargets[i].destroy();
@@ -299,56 +356,111 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     /**
-     * Find errored field in the panel and activates the tab where the first error was found.
+     * @property {Function} getTabIdsFromKeys - Get tab ids for use in further processing
      *
-     * @param {Array} detectingForms - array of forms where we should find errors
-     * @param {String} tabsId - id of tab component for a given panel
+     * @param {Object} map - the items.map object of the primary tabs panel
+     * @param {Array} keys - an array of keys matching those in the tabsObj items.keys
      */
-    ,showErroredTab: function(detectingForms, tabsId) {
-        var tab = null, index = null;
-        for (var i = 0; i < detectingForms.length; i++) {
-            var component = Ext.getCmp(detectingForms[i]);
+    ,getTabIdsFromKeys: function(map, keys) {
+
+        let tabIds = [];
+
+        if (typeof map == 'object') {
+            if (Array.isArray(keys) && keys.length > 0) {
+                keys.forEach(function(key) {
+                    if(map.hasOwnProperty(key) && typeof map[key].id == 'string') {
+                        tabIds.push(map[key].id);
+                    } else if (key == 'modx-panel-resource-tv' && MODx.config.tvs_below_content == 1) {
+                        /*
+                            When evaluating a resource panel with TVs moved below content,
+                            the panel id needs to be added explicitly as, in this case, the TV panel
+                            is not part of the main tabs component
+                        */
+                        tabIds.push(key);
+                    }
+                });
+            }
+        }
+        return tabIds;
+    }
+
+    /**
+     * @property {Function} showErroredTab - Find errored field in the panel and activates the tab where the first error was found.
+     *
+     * @param {Array} targetForms - array of form tab itemIds to search for errors
+     * @param {String} tabsId - id of primary tab component for a given panel
+     */
+    ,showErroredTab: function(targetForms, tabsId) {
+
+        const mainTabs = Ext.getCmp(tabsId);
+        let searchTabs = this.getTabIdsFromKeys(mainTabs.items.map, targetForms),
+            mainTabName = null,
+            mainTabIndex = null,
+            component,
+            erroredNode = null
+            ;
+        /*
+            Add any custom panels, created on the fly via manager customization or CMPs,
+            to the searchTabs
+        */
+        if (mainTabs.items.length > mainTabs.initialConfig.items.length) {
+            mainTabs.items.keys.forEach(function(key) {
+                if (mainTabs.items.map[key].hasOwnProperty('id')) {
+                    if(this.errorHandlingIgnoreTabs.indexOf(mainTabs.items.map[key].id) === -1 && searchTabs.indexOf(mainTabs.items.map[key].id) === -1) {
+                        searchTabs.push(mainTabs.items.map[key].id);
+                    }
+                }
+            }, this);
+        }
+
+        for (let i = 0; i < searchTabs.length; i++) {
+            component = Ext.getCmp(searchTabs[i]);
             if (component && component.el && component.el.dom) {
-                if (this.detectErrors(component.el.dom)) {
-                    tab = component.itemId ? component.itemId : detectingForms[i];
+                erroredNode = this.detectErrors(component.el.dom);
+                if (erroredNode !== false) {
+                    mainTabName = component.itemId ? component.itemId : searchTabs[i];
                     break;
                 }
             }
         }
 
-        if (tab === null) {
-            return;
+        if (mainTabName !== null) {
+
+            const errFld = document.getElementById(erroredNode);
+
+            if (mainTabs && mainTabs.items && mainTabs.items.keys) {
+                mainTabIndex = mainTabs.items.keys.indexOf(mainTabName);
+                if (component.id == 'modx-panel-resource-tv' && MODx.config.tvs_below_content == 0 || component.id != 'modx-panel-resource-tv') {
+                    if (mainTabs.items.items[mainTabIndex].hidden) {
+                        mainTabs.activate(mainTabName);
+                    }
+                }
+            }
+
+            if (component.id == 'modx-panel-resource-tv') {
+                const errFldPanelId = errFld.closest('.x-panel').id,
+                    tvTabs = Ext.getCmp('modx-resource-vtabs')
+                    ;
+                if (tvTabs && tvTabs.items && tvTabs.items.keys) {
+                    const tvTabIndex = tvTabs.items.keys.indexOf(errFldPanelId);
+                    if (tvTabs.items.items[tvTabIndex] && tvTabs.items.items[tvTabIndex].hidden)  {
+                        tvTabs.activate(errFldPanelId);
+                    }
+                }
+            }
+            errFld.focus();
         }
-
-        var tabs = Ext.getCmp(tabsId);
-
-        if (tabs && tabs.items && tabs.items.keys) {
-            index = tabs.items.keys.indexOf(tab);
-        }
-
-        if (!tabs.items.items[index].hidden)  {
-            return;
-        }
-
-        tabs.activate(tab);
     }
 
     ,detectErrors: function(node) {
-        if (typeof node.classList !== 'undefined' && node.classList.contains('x-form-invalid')) {
-            return true;
-        }
-
-        if (typeof node.children == 'undefined') {
+        let erroredFlds = document.getElementById(node.id).querySelectorAll('.x-form-invalid'),
+            numErrors = erroredFlds.length
+            ;
+        if (numErrors > 0) {
+            return erroredFlds[0].id;
+        } else {
             return false;
         }
-
-        for (var i = 0; i < node.children.length; i++) {
-            if (this.detectErrors(node.children[i])) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -400,6 +512,149 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 }
             }
         });
+    }
+
+    /**
+     * @property {Function} toggleFieldVisibility - Shows or hides a specified set of fields and their containing component
+     *
+     * @param {String} ctrlId - Id of the checkbox or listbox component that sets the toggle state
+     * @param {String} containerId - Id of the container with fields to be toggled
+     * @param {Array} fieldIds - An array of component ids to be toggled
+     * @param {Boolean} ctrlValToShow - The boolean value from the toggle component that indicates fields should be shown
+     * @param {Boolean} addSibling - Indicates if found field's next sibling (label) should be toggled as well; this applies when toggling items with separate help descriptions
+     *
+     */
+    ,toggleFieldVisibility: function(ctrlId, containerId, fieldIds, ctrlValToShow, addSibling) {
+
+        const   ctrlCmp = Ext.getCmp(ctrlId),
+                containerCmp = Ext.getCmp(containerId)
+            ;
+        if (!ctrlCmp || typeof ctrlCmp === 'undefined') {
+            console.error(`toggleFieldVisibility: Could not get the control component with the id '${ctrlId}'`);
+            return false;
+        }
+        if (containerId && (!containerCmp || typeof containerCmp === 'undefined')) {
+            console.error(`toggleFieldVisibility: Could not get the container component with the id '${containerId}'`);
+            return false;
+        }
+
+        addSibling = addSibling === false ? false : true ;
+        ctrlValToShow = ctrlValToShow === false ? false : true ;
+
+        const   showVal = ctrlCmp.xtype === 'combo-boolean' ? ctrlCmp.getValue() : ctrlCmp.checked ,
+                show = ctrlValToShow === false ? !showVal : showVal
+            ;
+
+        if (show) {
+            containerCmp.show();
+            // Must doLayout here to ensure field dimensions are calculated correctly before being shown
+            containerCmp.doLayout();
+        } else {
+            containerCmp.hide();
+        }
+
+        fieldIds.forEach(field => {
+            const fieldCmp = Ext.getCmp(field),
+                sibling = fieldCmp.nextSibling(),
+                siblingIsHelp = sibling && sibling.xtype === 'label' ? true : false
+                ;
+            if (fieldCmp) {
+                if (show) {
+                    fieldCmp.show();
+                    if (addSibling && siblingIsHelp) {
+                        sibling.show();
+                    }
+                } else {
+                    fieldCmp.hide();
+                    if (addSibling && siblingIsHelp) {
+                        sibling.hide();
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * @property {Function} formatMainPanelTitle - Adds display information to saved title
+     *
+     * @param {String} formId - Id specifying resource or element type
+     * @param {Object} record - The data object for the current resource or element
+     * @param {String} realtimeValue - The current title value provided by keyup listener
+     * @param {Boolean} returnBaseTitle - Whether to output the non-pre/postfixed tag name (for chunks, tvs, and snippets)
+     */
+    ,formatMainPanelTitle: function(formId, record, realtimeValue = null, returnBaseTitle = false) {
+
+        let title = '',
+            baseTitle = ''
+        ;
+        const   modeCreate = record.hasOwnProperty('id') && record.id > 0 ? false : true,
+                modeLabel =  modeCreate ? _('create') + ' ' : _('edit') + ' ',
+                prefixSeparator = modeCreate && !realtimeValue ? '' : ': '
+        ;
+        if (!Ext.isEmpty(record)) {
+            const postfix = MODx.perm.tree_show_resource_ids && !Ext.isEmpty(record.id)
+                ? ' <small>(' + record.id + ')</small>'
+                : ''
+                ;
+            if (formId === 'resource') {
+                const headerCmp = Ext.getCmp('modx-header-breadcrumbs');
+                title = realtimeValue ? realtimeValue : record.pagetitle ;
+                baseTitle = this.encodeTitle(title, false);
+                title = this.encodeTitle(title) + postfix;
+                if (headerCmp) {
+                    headerCmp.updateHeader(title);
+                } else {
+                    Ext.getCmp('modx-resource-header').el.dom.innerText = title;
+                }
+            } else {
+                const   prefix = modeLabel + _(formId) + prefixSeparator,
+                        headerCmpId = 'modx-' + formId + '-header'
+                ;
+                if (realtimeValue) {
+                    baseTitle = this.encodeTitle(realtimeValue);
+                    title = prefix + baseTitle + postfix;
+                } else {
+                    title = formId === 'template' ? record.templatename : record.name ;
+                    baseTitle = this.encodeTitle(title);
+                    title = typeof title === 'undefined' ? prefix : prefix + baseTitle + postfix ;
+                }
+                Ext.getCmp(headerCmpId).getEl().update(title);
+            }
+        }
+        if (returnBaseTitle) {
+            return baseTitle;
+        }
+    }
+
+    /**
+     * @property {Function} encodeTitle - Prepares raw title for display in form titles or fields
+     *
+     * @param {String} title - The raw title value, from the record or provided by keyup listener
+     * @param {Boolean} htmlEncode - Set to false when preparing title for use in alias, etc.
+     */
+    ,encodeTitle: function(title, htmlEncode = true) {
+        if (title) {
+            title = htmlEncode
+                ? Ext.util.Format.htmlEncode(Ext.util.Format.stripTags(title))
+                : Ext.util.Format.stripTags(title)
+                ;
+        }
+        return title;
+    }
+
+    /**
+    * @property {Function} getElementProperties - Gets grid data for an element's properties
+    *
+    * @param {Array} properties - The set of properties from the current record
+     */
+    ,getElementProperties: function(properties) {
+        if (!Ext.isEmpty(properties)) {
+            const gridCmp = Ext.getCmp('modx-grid-element-properties');
+            if (gridCmp) {
+                gridCmp.defaultProperties = properties;
+                gridCmp.getStore().loadData(properties);
+            }
+        }
     }
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
