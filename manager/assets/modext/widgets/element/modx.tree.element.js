@@ -426,6 +426,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             });
         }
         if (ui.hasClass('pdelete')) {
+            m.push('-');
             m.push({
                 text: _('remove_'+a.type)
                 ,handler: this.removeElement
