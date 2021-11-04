@@ -583,7 +583,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                         // as sometimes (when typing very fast) the last letter(s) are not caught
                         ,blur: {
                             fn: function(cmp, e) {
-                                const title = Ext.util.Format.stripTags(f.getValue());
+                                const title = Ext.util.Format.stripTags(cmp.getValue());
                                 this.generateAliasRealTime(title);
                             },
                             scope: this
@@ -685,6 +685,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,items: [{
                 items: [{
                     xtype: 'xcheckbox'
+                    ,ctCls: 'display-switch'
                     ,boxLabel: _('resource_published')
                     ,hideLabel: true
                     ,description: '<b>[[*published]]</b><br>'+_('resource_published_help')
@@ -694,6 +695,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                     ,checked: parseInt(config.record.published)
                 },{
                     xtype: 'xcheckbox'
+                    ,ctCls: 'display-switch'
                     ,boxLabel: _('deleted')
                     ,description: '<b>[[*deleted]]</b><br>'+_('resource_delete')
                     ,hideLabel: true
@@ -777,6 +779,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             }
             ,items: [{
                 xtype: 'xcheckbox'
+                ,ctCls: 'display-switch'
                 ,boxLabel: _('resource_hide_from_menus')
                 ,hideLabel: true
                 ,cls: 'warning'
@@ -912,6 +915,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,getSettingRightFieldsetLeft: function(config) {
         return [{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_folder')
             ,description: '<b>[[*isfolder]]</b><br>'+_('resource_folder_help')
             ,hideLabel: false
@@ -921,6 +925,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.isfolder) || 0
         },{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_show_in_tree')
             ,description: '<b>[[*show_in_tree]]</b><br>'+_('resource_show_in_tree_help')
             ,hideLabel: true
@@ -931,6 +936,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
         },{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_hide_children_in_tree')
             ,description: '<b>[[*hide_children_in_tree]]</b><br>'+_('resource_hide_children_in_tree_help')
             ,hideLabel: true
@@ -941,6 +947,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.hide_children_in_tree)
         },{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_alias_visible')
             ,description: '<b>[[*alias_visible]]</b><br>'+_('resource_alias_visible_help')
             ,hideLabel: true
@@ -950,6 +957,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.alias_visible) || 1
         },{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_uri_override')
             ,description: _('resource_uri_override_help')
             ,hideLabel: true
@@ -973,6 +981,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     ,getSettingRightFieldsetRight: function(config) {
         return [{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_richtext')
             ,description: '<b>[[*richtext]]</b><br>'+_('resource_richtext_help')
             ,hideLabel: false
@@ -982,6 +991,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.richtext)
         },{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_searchable')
             ,description: '<b>[[*searchable]]</b><br>'+_('resource_searchable_help')
             ,hideLabel: true
@@ -991,6 +1001,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,checked: parseInt(config.record.searchable)
         },{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_cacheable')
             ,description: '<b>[[*cacheable]]</b><br>'+_('resource_cacheable_help')
             ,hideLabel: true
@@ -1001,6 +1012,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
 
         },{
             xtype: 'xcheckbox'
+            ,ctCls: 'display-switch'
             ,boxLabel: _('resource_syncsite')
             ,description: _('resource_syncsite_help')
             ,hideLabel: true

@@ -519,7 +519,7 @@ MODx.panel.TV = function(config) {
             ,elementType: 'MODX\\Revolution\\modTemplateVar'
             ,record: config.record
         }],{
-            id: 'modx-tv-tabs'
+            id: 'modx-tv-editor-tabs'
             ,forceLayout: true
             ,deferredRender: false
             ,stateful: true
@@ -541,7 +541,7 @@ MODx.panel.TV = function(config) {
             ,beforeSubmit: {fn:this.beforeSubmit,scope:this}
             ,failureSubmit: {
                 fn: function() {
-                    this.showErroredTab(this.errorHandlingTabs, 'modx-tv-tabs')
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-tv-editor-tabs')
                 },
                 scope: this
             }
