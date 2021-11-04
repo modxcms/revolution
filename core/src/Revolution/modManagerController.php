@@ -10,6 +10,7 @@
 
 namespace MODX\Revolution;
 
+use BrowserManagerController;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\System\Registry\Register\Read;
 use MODX\Revolution\Sources\modMediaSource;
@@ -145,11 +146,13 @@ abstract class modManagerController
 
     /**
      * Render the controller.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
+        if (!$this->checkPermissions()) {
+            $this->failure($this->modx->lexicon('access_denied'));
+        }
+
         $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
 
         $this->theme = $this->modx->getOption('manager_theme', null, 'default', true);
@@ -172,7 +175,7 @@ abstract class modManagerController
 
         $this->modx->invokeEvent('OnManagerPageBeforeRender', ['controller' => &$this]);
 
-        $placeholders = $this->process($this->scriptProperties);
+        $placeholders = !$this->isFailure ? $this->process($this->scriptProperties) : [];
         if (!$this->isFailure && !empty($placeholders) && is_array($placeholders)) {
             $this->setPlaceholders($placeholders);
         } elseif (!empty($placeholders)) {
@@ -474,7 +477,7 @@ abstract class modManagerController
      * Do permission checking in this method. Returning false will present a "permission denied" message.
      *
      * @abstract
-     * @return boolean
+     * @return bool
      */
     abstract public function checkPermissions();
 
@@ -639,7 +642,7 @@ abstract class modManagerController
                 ? 'MODx.defaultState = ' . json_encode($state) . ';'
                 : '';
             $layout = '';
-            if (!$this instanceof \BrowserManagerController) {
+            if (!$this instanceof BrowserManagerController) {
                 $data = [
                     'xtype' => 'modx-layout',
                     //'accordionPanels' => 'MODx.accordionPanels || []',
