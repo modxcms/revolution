@@ -6,23 +6,20 @@ use xPDO\xPDO;
 
 /**
  * A modResource derivative the represents a redirect link.
- *
- * {@inheritdoc}
- *
  * @package MODX\Revolution
  */
-class modWebLink extends modResource implements modResourceInterface
+class modWebLink extends modResource
 {
     /**
      * Overrides modResource::__construct to set the class key for this Resource type
      *
      * @param xPDO $xpdo A reference to the xPDO|modX instance
      */
-    function __construct(& $xpdo)
+    public function __construct(xPDO $xpdo)
     {
         parent:: __construct($xpdo);
         $this->set('type', 'reference');
-        $this->set('class_key', 'modWebLink');
+        $this->set('class_key', __CLASS__);
         $this->showInContextMenu = true;
     }
 

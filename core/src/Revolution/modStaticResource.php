@@ -6,12 +6,9 @@ use xPDO\xPDO;
 
 /**
  * A derivative of modResource that stores content on the filesystem.
- *
- * {@inheritdoc}
- *
  * @package MODX\Revolution
  */
-class modStaticResource extends modResource implements modResourceInterface
+class modStaticResource extends modResource
 {
     /**
      * @var string Path of the file containing the source content, relative to
@@ -33,10 +30,10 @@ class modStaticResource extends modResource implements modResourceInterface
      *
      * @param xPDO $xpdo A reference to the xPDO|modX instance
      */
-    function __construct(& $xpdo)
+    public function __construct(xPDO $xpdo)
     {
         parent:: __construct($xpdo);
-        $this->set('class_key', 'modStaticResource');
+        $this->set('class_key', __CLASS__);
         $this->showInContextMenu = true;
     }
 
