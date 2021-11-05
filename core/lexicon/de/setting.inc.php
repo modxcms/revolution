@@ -700,6 +700,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Geben Sie die standar
 $_lang['setting_static_elements_basepath'] = 'Basispfad für statische Elemente';
 $_lang['setting_static_elements_basepath_desc'] = 'Basispfad in dem statische Element-Dateien gespeichert werden.';
 
+$_lang['setting_resource_static_allow_absolute'] = 'Absoluten statischen Ressourcenpfad zulassen';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Mit dieser Einstellung können Benutzer einen vollständig qualifizierten absoluten Pfad zu einer beliebigen lesbaren Datei auf dem Server als Inhalt einer statischen Ressource eingeben. Wichtig: Die Aktivierung dieser Einstellung kann als erhebliches Sicherheitsrisiko angesehen werden! Es wird dringend empfohlen, diese Einstellung deaktiviert zu lassen, es sei denn, Sie vertrauen uneingeschränkt jedem einzelnen Manager-Benutzer.';
+
+$_lang['setting_resource_static_path'] = 'Basispfad für statische Ressourcen';
+$_lang['setting_resource_static_path_desc'] = 'Wenn resource_static_allow_absolute deaktiviert ist, sind statische Ressourcen auf den hier angegebenen absoluten Pfad beschränkt.  Wichtig: Wenn Sie diese Einstellung zu weit fassen, können Benutzer Dateien lesen, die sie nicht lesen sollten! Es wird dringend empfohlen, Benutzer mit dieser Einstellung auf ein bestimmtes Verzeichnis wie {core_path}static/ oder {assets_path} zu beschränken.';
+
 $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
 $_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
