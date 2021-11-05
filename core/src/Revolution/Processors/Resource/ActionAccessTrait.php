@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -26,7 +27,7 @@ trait ActionAccessTrait
      * Checks if specific action allowed for requested class key object
      *
      * @param string $classKey
-     * @param string $mode
+     * @param string $action
      *
      * @return bool
      */
@@ -34,7 +35,7 @@ trait ActionAccessTrait
     {
         $permissions = [$this->permission];
 
-        $map = array_map(static function($v) use($action) {
+        $map = array_map(static function ($v) use ($action) {
             return implode('_', [$action, $v]);
         }, $this->permissionsMap);
 
