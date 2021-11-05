@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,6 @@
  * @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\FormCustomization;
-
 
 use MODX\Revolution\modActionDom;
 use MODX\Revolution\MODxTestCase;
@@ -24,13 +24,15 @@ use MODX\Revolution\MODxTestCase;
  * @group FormCustomization
  * @group modActionDom
  */
-class modActionDomTest extends MODxTestCase {
+class modActionDomTest extends MODxTestCase
+{
     /**
      * Setup fixtures before each test.
      *
      * @before
      */
-    public function setUpFixtures() {
+    public function setUpFixtures()
+    {
         parent::setUpFixtures();
     }
 
@@ -42,7 +44,8 @@ class modActionDomTest extends MODxTestCase {
      * @param string $container
      * @dataProvider providerApply
      */
-    public function testApply($expected,$ruleType,$name,$value,$container) {
+    public function testApply($expected, $ruleType, $name, $value, $container)
+    {
         /** @var modActionDom $rule */
         $rule = $this->modx->newObject(modActionDom::class);
         $rule->fromArray([
@@ -58,43 +61,43 @@ class modActionDomTest extends MODxTestCase {
             'rank' => 0,
         ]);
         $content = $rule->apply(1);
-        $this->assertEquals($expected,$content);
+        $this->assertEquals($expected, $content);
     }
     /**
      * @return array
      */
-    public function providerApply() {
+    public function providerApply()
+    {
         return [
             [
-                'MODx.hideField("modx-panel-resource",["description"]);',
+                'MODx.hideField("modx-panel-resource", "description");',
                 'fieldVisible','description',0,'modx-panel-resource'
             ],
 
             [
-                'MODx.renameLabel("modx-panel-resource",["published"],["Active"]);',
+                'MODx.renameLabel("modx-panel-resource", "published", "Active");',
                 'fieldTitle','published','Active','modx-panel-resource'
             ],
 
             [
-                'MODx.renameTab("modx-resource-settings","Other Settings");',
+                'MODx.renameTab("modx-resource-settings", "Other Settings");',
                 'tabTitle','modx-resource-settings','Other Settings','modx-resource-tabs'
             ],
 
             [
-                'MODx.hideRegion("modx-resource-tabs","modx-resource-settings");',
+                'MODx.hideRegion("modx-resource-tabs", "modx-resource-settings");',
                 'tabVisible','modx-resource-settings',0,'modx-resource-tabs'
             ],
 
             [
-                'MODx.addTab("modx-resource-tabs",{title:"Other Tab",id:"tab-other"});',
+                'MODx.addTab("modx-resource-tabs", {id: "tab-other", title: "Other Tab"});',
                 'tabNew','tab-other','Other Tab','modx-resource-tabs'
             ],
 
             [
-                'MODx.moveTV(["tv15"],"modx-resource-settings");',
+                'MODx.moveTV("tv15", "modx-resource-settings");',
                 'tvMove','tv15','modx-resource-settings','modx-panel-resource'
             ],
         ];
     }
-
 }
