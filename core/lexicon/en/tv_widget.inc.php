@@ -127,6 +127,8 @@ $_lang['number_allowdecimals'] = 'Allow Decimals';
 $_lang['number_allownegative'] = 'Allow Negative';
 $_lang['number_decimalprecision'] = 'Precision';
 $_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
+$_lang['number_decimalprecision_strict'] = 'Strict Decimal Precision';
+$_lang['number_decimalprecision_strict_desc'] = 'When set to “Yes,” preserves trailing zeros in decimal numbers (defaults to “No”).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Separator';
 $_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';

@@ -23,6 +23,7 @@
 
 # Set values
 $allowDecimals = $params['allowDecimals'] === 'true' || $params['allowDecimals'] == 1 ? 'true' : 'false' ;
+$strictDecimalPrecision = $params['strictDecimalPrecision'] === 'true' || $params['strictDecimalPrecision'] == 1 ? 'true' : 'false' ;
 $decimalPrecision = !empty($params['decimalPrecision']) ? $params['decimalPrecision'] : 2 ;
 $decimalSeparator = !empty($params['decimalSeparator'])
     ? json_encode($params['decimalSeparator'])
@@ -43,6 +44,7 @@ $descKeys = [
     'allowdecimals_desc',
     'allownegative_desc',
     'number_decimalprecision_desc',
+    'number_decimalprecision_strict_desc',
     'number_decimalseparator_desc',
     'minvalue_desc',
     'maxvalue_desc'
@@ -191,7 +193,7 @@ $optsJS = <<<OPTSJS
             },
             items: [
                 {
-                    columnWidth: 0.5,
+                    columnWidth: 0.33,
                     defaults: {
                         anchor: '100%',
                         msgTarget: 'under',
@@ -214,7 +216,29 @@ $optsJS = <<<OPTSJS
                     }]
                 },
                 {
-                    columnWidth: 0.5,
+                    columnWidth: 0.33,
+                    defaults: {
+                        anchor: '100%',
+                        msgTarget: 'under',
+                        hideMode: 'visibility'
+                    },
+                    items: [{
+                        xtype: 'combo-boolean',
+                        fieldLabel: _('number_decimalprecision_strict'),
+                        description: {$this->helpContent['eh_number_decimalprecision_strict_desc']},
+                        name: 'inopt_strictDecimalPrecision',
+                        hiddenName: 'inopt_strictDecimalPrecision',
+                        id: 'inopt_strictDecimalPrecision{$tvId}',
+                        value: {$strictDecimalPrecision}
+                    },{
+                        xtype: '{$helpXtype}',
+                        forId: 'inopt_strictDecimalPrecision{$tvId}',
+                        html: {$this->helpContent['number_decimalprecision_strict_desc']},
+                        cls: 'desc-under'
+                    }]
+                },
+                {
+                    columnWidth: 0.34,
                     defaults: {
                         anchor: '100%',
                         msgTarget: 'under',
