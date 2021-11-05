@@ -700,6 +700,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Ange en standardkateg
 $_lang['setting_static_elements_basepath'] = 'Bassökväg för statiska element';
 $_lang['setting_static_elements_basepath_desc'] = 'Bassökvägen där statiska elements filer ska sparas.';
 
+$_lang['setting_resource_static_allow_absolute'] = 'Tillåt absolut sökväg till statisk resurs';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Denna inställning gör det möjligt för användare att ange en fullt kvalificerad absolut sökväg till en läsbar fil på servern som innehållet i en statisk resurs. Observera: aktivering av denna inställning kan anses vara en betydande säkerhetsrisk! Det rekommenderas starkt att hålla den här inställningen inaktiverad, såvida du inte helt litar på varje enskild användare av hanteraren.';
+
+$_lang['setting_resource_static_path'] = 'Sökväg till statisk resurs';
+$_lang['setting_resource_static_path_desc'] = 'När resource_static_allow_absolute är inaktiverad begränsas statiska resurser till att vara inom den absoluta sökvägen här. Observera: om denna inställning sätts för brett kan den tillåta användare att läsa filer som de inte borde kunna läsa! Det rekommenderas starkt att begränsa användare till en specifik katalog som {core_path}static/ eller {assets_path} med denna inställning.';
+
 $_lang['setting_symlink_merge_fields'] = 'Slå ihop resursfält i symlänkar';
 $_lang['setting_symlink_merge_fields_desc'] = 'Om du anger "Ja" här kommer ifyllda fält automatiskt att slås ihop med målresursen när vidarebefordring sker via symlänkar.';
 
