@@ -700,6 +700,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specifica una categor
 $_lang['setting_static_elements_basepath'] = 'Percorso di base degli elementi statici';
 $_lang['setting_static_elements_basepath_desc'] = 'Percorso di base dove memorizzare i file di elementi statici.';
 
+$_lang['setting_resource_static_allow_absolute'] = 'Consenti percorso risorsa statica assoluta';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Questa impostazione consente agli utenti di inserire un percorso assoluto completamente qualificato per qualsiasi file leggibile sul server come contenuto di una risorsa statica. Importante: abilitare questa impostazione può essere considerato un rischio significativo per la sicurezza! Si raccomanda vivamente di mantenere questa impostazione disabilitata, a meno che non ti fidi completamente ogni singolo utente manager.';
+
+$_lang['setting_resource_static_path'] = 'Percorso base risorsa statica';
+$_lang['setting_resource_static_path_desc'] = 'Quando resource_static_allow_absolute è disabilitato, le risorse statiche sono limitate ad essere all\'interno del percorso assoluto fornito qui. Importante: l\'impostazione di questo troppo largo può consentire agli utenti di leggere i file che non dovrebbero! Si raccomanda vivamente di limitare gli utenti a una directory specifica come {core_path}static/ o {assets_path} con questa impostazione.';
+
 $_lang['setting_symlink_merge_fields'] = 'Unisci Campi Risorsa nei Symlinks';
 $_lang['setting_symlink_merge_fields_desc'] = 'Se impostato su Si, unirà automaticamente i campi non-vuoti con la risorsa target in caso di reindirizzamento con Symlinks.';
 
