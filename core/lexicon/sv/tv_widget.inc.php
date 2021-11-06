@@ -127,6 +127,8 @@ $_lang['number_allowdecimals'] = 'Tillåt decimaler';
 $_lang['number_allownegative'] = 'Tillåt negativa';
 $_lang['number_decimalprecision'] = 'Precision';
 $_lang['number_decimalprecision_desc'] = 'Det maximala antalet siffror som tillåts efter decimalavgränsaren. (Standard: 2)';
+$_lang['number_decimalprecision_strict'] = 'Strict Decimal Precision';
+$_lang['number_decimalprecision_strict_desc'] = 'When set to “Yes,” preserves trailing zeros in decimal numbers (defaults to “No”).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Avgränsare';
 $_lang['number_decimalseparator_desc'] = 'Tecknet som används som decimalavgränsare. (Standard: ”.”)';
