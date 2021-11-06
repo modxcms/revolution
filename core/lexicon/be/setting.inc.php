@@ -876,3 +876,6 @@ $_lang['setting_error_log_filename_desc'] = 'Пазначце імя файла 
 
 $_lang['setting_error_log_filepath'] = 'Месцазнаходжанне лога памылак';
 $_lang['setting_error_log_filepath_desc'] = 'Па жаданні можна пазначыць абсалютны шлях да карыстацкага лога памылак. Вы можаце выкарыстоўваць запаўняльнікі падобныя да {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
