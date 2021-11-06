@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Personalizza il nome del file del f
 
 $_lang['setting_error_log_filepath'] = 'Percorso log degli errori';
 $_lang['setting_error_log_filepath_desc'] = 'Facoltativo, imposta un percorso assoluto del registro di errore personalizzato. È possibile utilizzare placehodlers come {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
