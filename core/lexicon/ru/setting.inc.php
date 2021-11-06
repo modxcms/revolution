@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Задайте название ф�
 
 $_lang['setting_error_log_filepath'] = 'Путь к журналу ошибок';
 $_lang['setting_error_log_filepath_desc'] = 'Дополнительно укажите абсолютный путь к пользовательскому файлу ошибок. Вы можете использовать плейсхолдер {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
