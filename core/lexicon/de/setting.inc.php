@@ -119,7 +119,7 @@ $_lang['setting_allow_multiple_emails'] = 'E-Mail-Adressen-Duplikate für Benutz
 $_lang['setting_allow_multiple_emails_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, dürfen mehrere Benutzer die selbe E-Mail-Adresse verwenden.';
 
 $_lang['setting_automatic_alias'] = 'Alias automatisch generieren';
-$_lang['setting_automatic_alias_desc'] = 'Wählen Sie "Ja", wenn das System beim Speichern automatisch einen auf dem Seitentitel der Ressource basierenden Alias generieren soll.';
+$_lang['setting_automatic_alias_desc'] = 'Wählen Sie „Ja“, wenn das System beim Speichern automatisch einen auf dem Seitentitel der Ressource basierenden Alias generieren soll.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatische Template Zuweisung';
 $_lang['setting_automatic_template_assignment_desc'] = 'Wählen Sie aus, wie ein Template beim Erstellen einer Ressource ausgewählt wird. Es sind folgende Werte möglich: system (Standard Template aus den Systemeinstellungen), parent (Wählt das Template der Eltern-Ressource) oder sibling (Wählt das meistbenutzte Template der Geschwister-Ressourcen)';
@@ -174,7 +174,7 @@ $_lang['setting_cache_lang_js'] = 'Lexikon-JavaScript-Zeichenketten cachen';
 $_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "Ja" gesetzt ist, werden Server-Header verwendet, um die ins JavaScript geladenen Lexikon-Zeichenketten für die Manager-Oberfläche zu cachen.';
 
 $_lang['setting_cache_lexicon_topics'] = 'Lexikon-Themen cachen';
-$_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf "Ja" zu belassen.';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf „Ja“ gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf „Ja“ zu belassen.';
 
 $_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namensraum gehörende Lexikon-Themen cachen';
 $_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namensraum gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
@@ -186,7 +186,7 @@ $_lang['setting_cache_resource_expires'] = 'Ablaufzeit für den partiellen Resso
 $_lang['setting_cache_resource_expires_desc'] = 'Ablaufzeit (in Sekunden) für den partiellen Ressourcen-Cache. Der Wert "0" bedeutet, dass der Cache niemals abläuft.';
 
 $_lang['setting_cache_scripts'] = 'Skript-Cache aktivieren';
-$_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, cacht MODX alle Skripte (Snippets und Plugins) in Dateien, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
+$_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf „Ja“ gesetzt, cacht MODX alle Skripte (Snippets und Plugins) in Dateien, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
 $_lang['setting_cache_system_settings'] = 'Systemeinstellungen-Cache aktivieren';
 $_lang['setting_cache_system_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
@@ -313,7 +313,7 @@ $_lang['setting_forgot_login_email'] = 'Login-vergessen-E-Mail';
 $_lang['setting_forgot_login_email_desc'] = 'Das Template für die E-Mail, die User erhalten, die ihren MODX-Benutzernamen und/oder ihr Passwort vergessen haben.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Alle Benutzergruppen-Zugehörigkeiten für die Formular-Anpassung nutzen';
-$_lang['setting_form_customization_use_all_groups_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden für die Formular-Anpassung ALLE Sets für ALLE Benutzergruppen, denen ein Benutzer angehört, genutzt, wenn Formular-Anpassungs-Sets angewendet werden. Anderenfalls wird nur das Set verwendet, das der primären Gruppe des Benutzers zugeordnet ist. Hinweis: Wenn Sie diese Einstellung auf "Ja" setzen, kann es wegen Konflikten zwischen Formular-Anpassungs-Sets zu Problemen kommen.';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Wenn diese Einstellung auf „Ja“ gesetzt wird, werden für die Formular-Anpassung ALLE Sets für ALLE Benutzergruppen, denen ein Benutzer angehört, genutzt, wenn Formular-Anpassungs-Sets angewendet werden. Anderenfalls wird nur das Set verwendet, das der primären Gruppe des Benutzers zugeordnet ist. Hinweis: Wenn Sie diese Einstellung auf „Ja“ setzen, kann es wegen Konflikten zwischen Formular-Anpassungs-Sets zu Problemen kommen.';
 
 $_lang['setting_forward_merge_excludes'] = 'Felder, deren Werte bei Verwendung von Symlinks nicht überschrieben werden sollen';
 $_lang['setting_forward_merge_excludes_desc'] = 'Bei Verwendung eines Symlinks werden die Werte in den Feldern der Ziel-Ressource überschrieben von den nichtleeren Werten des Symlinks; verwenden Sie diese kommaseparierte Liste von Ausnahmen, um die angegebenen Felder davor zu bewahren, von den Werten des Symlinks überschrieben zu werden.';
@@ -756,7 +756,7 @@ $_lang['setting_strip_image_paths'] = 'Relative Datei-Browser-Pfade?';
 $_lang['setting_strip_image_paths_desc'] = 'Wenn Sie diese Einstellung auf "Nein" setzen, wird MODX Datei-Browser-Ressourcen-Quellen (Bilder, Dateien, Flash-Animationen etc.) als absolute URLs speichern. Relative URLs dagegen sind hilfreich, wenn Sie Ihre MODX-Installation verschieben möchten, z.B. von einer Testsite zu einer produktiven Website. Falls Ihnen nicht klar ist, was das bedeutet, belassen Sie es am besten bei der Einstellung "Ja".';
 
 $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
-$_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
+$_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf „Ja“ gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
 $_lang['setting_syncsite_default'] = 'Cache standardmäßig leeren';
 $_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja", um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
@@ -772,10 +772,10 @@ $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';
 
 $_lang['setting_tvs_below_content'] = 'TVs unter den Inhalt verschieben';
-$_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Template-Variablen beim Bearbeiten von Ressourcen unter das Eingabefeld für den Inhalt zu verschieben.';
+$_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf „Ja“, um Template-Variablen beim Bearbeiten von Ressourcen unter das Eingabefeld für den Inhalt zu verschieben.';
 
 $_lang['setting_ui_debug_mode'] = 'Benutzerschnittstellen-Debug-Modus';
-$_lang['setting_ui_debug_mode_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Debug-Meldungen auszugeben, wenn Sie die Benutzerschnittstelle für das Standard-Manager-Theme verwenden. Sie müssen einen Browser verwenden, der console.log unterstützt.';
+$_lang['setting_ui_debug_mode_desc'] = 'Setzen Sie diese Einstellung auf „Ja“, um Debug-Meldungen auszugeben, wenn Sie die Benutzerschnittstelle für das Standard-Manager-Theme verwenden. Sie müssen einen Browser verwenden, der console.log unterstützt.';
 
 $_lang['setting_udperms_allowroot'] = 'Benutzer-Ressourcen im Site-Root zulassen';
 $_lang['setting_udperms_allowroot_desc'] = 'Möchten Sie Ihren Benutzern erlauben, neue Ressourcen im Wurzelverzeichnis der Website zu erstellen?';
@@ -803,7 +803,7 @@ $_lang['setting_upload_media'] = 'Hochladbare Medien-Dateitypen';
 $_lang['setting_upload_media_desc'] = 'Hier können Sie eine Liste von Dateitypen eingeben, die über den Ressourcen-Manager in das Verzeichnis assets/media/ hochgeladen werden können. Bitte geben Sie die Dateiendungen der Medientypen ein, durch Kommata getrennt.';
 
 $_lang['setting_use_alias_path'] = 'Suchmaschinenfreundliche Alias-Pfade';
-$_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf "Ja" setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias "kind" in einer Container-Ressource mit dem Alias "eltern" abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als "/eltern/kind.html" angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf "Ja" setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. "/assets/images" im Gegensatz zu "assets/images". Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
+$_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf „Ja“ setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias „kind“ in einer Container-Ressource mit dem Alias „eltern“ abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als „/eltern/kind.html“ angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf „Ja“ setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. „/assets/images” im Gegensatz zu „assets/images“. Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
 
 $_lang['setting_use_browser'] = 'Ressourcen-Browser aktivieren';
 $_lang['setting_use_browser_desc'] = 'Wählen Sie "Ja", um den Ressourcen-Browser zu aktivieren. Dies erlaubt Ihren Benutzern, Ressourcen wie Bilder, Flash- und Medien-Dateien auf den Server hochzuladen und dort durchzusehen.';
@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Passen Sie den Dateinamen der MODX-
 
 $_lang['setting_error_log_filepath'] = 'Fehlerprotokoll-Pfad';
 $_lang['setting_error_log_filepath_desc'] = 'Setzen Sie optional einen absoluten Pfad zum Speicherort eines benutzerdefinierten Fehlerprotokolls. Sie können Platzhalter wie {cache_path} verwenden.';
+
+$_lang['static_elements_html_extension'] = 'Datei-Endung für statische HTML-Elemente';
+$_lang['static_elements_html_extension_desc'] = 'Die Datei-Endung, die für statische Elemente mit HTML-Inhalt verwendet wird.';
