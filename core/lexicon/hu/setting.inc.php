@@ -816,3 +816,6 @@ $_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasz
 
 $_lang['setting_passwordless_expiration'] = 'Jelszó nélküli bejelentkezés lejárata';
 $_lang['setting_passwordless_expiration_desc'] = 'Hány másodpercig érvényes egy egyszeri bejelentkezési hivatkozás.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
