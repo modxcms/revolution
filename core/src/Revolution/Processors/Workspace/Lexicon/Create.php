@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -52,7 +53,7 @@ class Create extends Processor
         $this->entry = $this->modx->newObject(modLexiconEntry::class);
         $this->entry->fromArray($data);
         $this->entry->set('editedon', date('Y-m-d h:i:s'));
-        
+
         if ($this->entry->save() === false) {
             return $this->failure($this->modx->lexicon('entry_err_save'));
         }
