@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Állítsa be a MODX hibanapló áll
 
 $_lang['setting_error_log_filepath'] = 'Hibanapló állomány útvonala';
 $_lang['setting_error_log_filepath_desc'] = 'Megadhatja a saját hibanapló helyének teljes elérési útját. Használhat helyettesítőket, mint {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
