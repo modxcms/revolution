@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Anpassa filnamnet för MODX fellogg
 
 $_lang['setting_error_log_filepath'] = 'Felloggens sökväg';
 $_lang['setting_error_log_filepath_desc'] = 'Du kan ange en absolut sökväg till en anpassad plats för felloggen. Platshållare som {cache_path} kan användas.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
