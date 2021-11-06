@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -52,6 +53,7 @@ class UpdateFromGrid extends Processor
         if (empty($data)) {
             return $this->modx->lexicon('invalid_data');
         }
+        $data = array_map('trim', $data);
         $this->setProperties($data);
         $this->unsetProperty('data');
 

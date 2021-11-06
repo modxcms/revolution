@@ -405,6 +405,8 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,itemId: 'name'
             ,name: 'name'
             ,anchor: '100%'
+            ,msgTarget: 'under'
+            ,allowBlank: false
         },{
             xtype: 'modx-combo-namespace'
             ,fieldLabel: _('namespace')
@@ -412,6 +414,8 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,id: 'modx-'+this.ident+'-namespace'
             ,itemId: 'namespace'
             ,anchor: '100%'
+            ,msgTarget: 'under'
+            ,allowBlank: false
             ,listeners: {
                 'select': {fn: function(cb,r,i) {
                     cle = this.fp.getComponent('topic');
@@ -429,6 +433,8 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,id: 'modx-'+this.ident+'-topic'
             ,itemId: 'topic'
             ,anchor: '100%'
+            ,msgTarget: 'under'
+            ,allowBlank: false
         },{
             xtype: 'modx-combo-language'
             ,fieldLabel: _('language')
@@ -436,6 +442,8 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,id: 'modx-'+this.ident+'-language'
             ,itemId: 'language'
             ,anchor: '100%'
+            ,msgTarget: 'under'
+            ,allowBlank: false
         },{
             xtype: 'textarea'
             ,fieldLabel: _('value')
@@ -443,6 +451,7 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,itemId: 'value'
             ,name: 'value'
             ,anchor: '100%'
+            ,msgTarget: 'under'
         }]
     });
     MODx.window.LexiconEntryCreate.superclass.constructor.call(this,config);

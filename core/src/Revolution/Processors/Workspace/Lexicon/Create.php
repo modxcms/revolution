@@ -43,14 +43,16 @@ class Create extends Processor
      */
     public function process()
     {
-        if ($this->alreadyExists()) {
+        $data = array_map('trim', $this->getProperties());
+
+        if ($this->alreadyExists($data)) {
             return $this->failure($this->modx->lexicon('entry_err_ae'));
         }
 
         $this->entry = $this->modx->newObject(modLexiconEntry::class);
-        $this->entry->fromArray($this->getProperties());
+        $this->entry->fromArray($data);
         $this->entry->set('editedon', date('Y-m-d h:i:s'));
-
+        
         if ($this->entry->save() === false) {
             return $this->failure($this->modx->lexicon('entry_err_save'));
         }
@@ -61,13 +63,13 @@ class Create extends Processor
     /**
      * @return bool
      */
-    public function alreadyExists()
+    public function alreadyExists($data)
     {
         return $this->modx->getCount(modLexiconEntry::class, [
-                'name' => $this->getProperty('name'),
-                'namespace' => $this->getProperty('namespace'),
-                'language' => $this->getProperty('language'),
-                'topic' => $this->getProperty('topic'),
+                'name' => $data['name'],
+                'namespace' => $data['namespace'],
+                'language' => $data['language'],
+                'topic' => $data['topic']
             ]) > 0;
     }
 
