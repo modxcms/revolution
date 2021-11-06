@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Přizpůsobte si název souboru pro
 
 $_lang['setting_error_log_filepath'] = 'Cesta k protokolu chyb';
 $_lang['setting_error_log_filepath_desc'] = 'Volitelně nastavit absolutní cestu umístění protokolu chyb. Můžete použít placehodery jako např. {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Statické prvky html rozšíření';
+$_lang['static_elements_html_extension_desc'] = 'Přípona pro soubory použité statickými prvky s HTML obsahem.';
