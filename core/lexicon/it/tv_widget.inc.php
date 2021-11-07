@@ -69,17 +69,17 @@ $_lang['delim'] = 'Delimitatore';
 $_lang['delimiter'] = 'Delimitatore';
 $_lang['delimiter_desc'] = 'Uno o più caratteri utilizzati per separare i valori (applicabile alle TV che supportano più opzioni selezionabili).';
 $_lang['disabled_dates'] = 'Date disabilitate';
-$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
-    <p>Examples using the default format (“[[+format_default]]”) include:</p>
+$_lang['disabled_dates_desc'] = 'Un elenco separato, javascript <abbr title="regular expression">regex</abbr>-compatibile (meno delimitatori) delle date nel formato della data del gestore (attualmente «[[+format_current]]»).
+    <p>Gli esempi che utilizzano il formato predefinito (“[[+format_default]]”) includono:</p>
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (selects individual dates)</li>
-            <li><span class="example-input">[[+example_2a]]</span> (selects [[+example_2b]] and [[+example_2c]] of every year)</li>
-            <li><span class="example-input">[[+example_3a]]</span> (“^” to match beginning of string; this selects all of [[+example_3b]])</li>
-            <li><span class="example-input">[[+example_4a]]</span> (selects every day in [[+example_4b]])</li>
-            <li><span class="example-input">[[+example_5]]</span> (“$” to match end of string; this selects every day in March of every year)</li>
+            <li><span class="example-input">[[+example_1]]</span> (seleziona date individuali)</li>
+            <li><span class="example-input">[[+example_2a]]</span> (seleziona [[+example_2b]] e [[+example_2c]] di ogni anno)</li>
+            <li><span class="example-input">[[+example_3a]]</span> (“^” per abbinare l\'inizio della stringa; questo seleziona tutti i [[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> (seleziona ogni giorno in [[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5]]</span> (“$” per abbinare la fine della stringa; questo seleziona ogni giorno nel mese di marzo di ogni anno)</li>
         </ul>
-        Note: If your date format uses dot separators they will need to be escaped (e.g., “[[+example_6a]]” should be entered above as “[[+example_6b]]”).
+        Nota: se il formato della data utilizza separatori di punti dovranno avere sequenze di escape (e. ., «[[+example_6a]]» dovrebbe essere inserito sopra come «[[+example_6b]]»).
     </div>
 ';
 $_lang['disabled_days'] = 'Giorni Disabilitati';
@@ -93,8 +93,8 @@ $_lang['email'] = 'E-mail';
 $_lang['file'] = 'File';
 $_lang['height'] = 'Altezza';
 $_lang['hidden'] = 'Nascosto';
-$_lang['hide_time'] = 'Hide Time Option';
-$_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
+$_lang['hide_time'] = 'Nascondi Opzione Ora';
+$_lang['hide_time_desc'] = 'Rimuove la possibilità di scegliere un\'ora dal selettore di data di questa TV.';
 $_lang['htmlarea'] = 'Area HTML';
 $_lang['htmltag'] = 'Tag HTML';
 $_lang['image'] = 'Immagine';
@@ -109,29 +109,29 @@ $_lang['lower_case'] = 'Minuscolo';
 $_lang['max_length'] = 'Massima Lunghezza';
 $_lang['min_length'] = 'Minima Lunghezza';
 $_lang['regex_text'] = 'Errore dell\'Espressione Regolare';
-$_lang['regex_text_desc'] = 'The message to show if the user enters text that is invalid according to the <abbr title="regular expression">regex</abbr> validator.';
+$_lang['regex_text_desc'] = 'Il messaggio da mostrare se l\'utente inserisce testo che non è valido in base al validatore <abbr title="regular expression">regex</abbr>.';
 $_lang['regex'] = 'Convalidatore dell\'Espressione Regolare';
-$_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
-    <div class="example-list">
-        <ul>
-            <li><span class="example-input">[[+example_1]]</span> (pattern for U.S. zip codes)</li>
-            <li><span class="example-input">[[+example_2]]</span> (allow only letters)</li>
-            <li><span class="example-input">[[+example_3]]</span> (allow all characters except numbers)</li>
-            <li><span class="example-input">[[+example_4]]</span> (must end with the string “-XP”)</li>
-        </ul>
-    </div>
+$_lang['regex_desc'] = 'Una stringa compatibile con javascript <abbr title="regular expression">regex</abbr> (meno i delimitatori) per limitare il contenuto di questa TV. Qualche esempio:
+     <div class="example-list">
+         <ul>
+             <li><span class="example-input">[[+example_1]]</span> (schema per C.A.P. statunitensi)</li>
+             <li><span class="example-input">[[+example_2]]</span> (consenti solo lettere)</li>
+             <li><span class="example-input">[[+example_3]]</span> (consenti tutti i caratteri tranne i numeri)</li>
+             <li><span class="example-input">[[+example_4]]</span> (deve terminare con la stringa “-XP”)</li>
+         </ul>
+     </div> 
 ';
 $_lang['name'] = 'Nome';
 $_lang['number'] = 'Numero';
 $_lang['number_allowdecimals'] = 'Consenti Decimali';
-$_lang['number_allownegative'] = 'Allow Negative';
-$_lang['number_decimalprecision'] = 'Precision';
-$_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
-$_lang['number_decimalprecision_strict'] = 'Strict Decimal Precision';
-$_lang['number_decimalprecision_strict_desc'] = 'When set to “Yes,” preserves trailing zeros in decimal numbers (defaults to “No”).';
+$_lang['number_allownegative'] = 'Consenti Negativo';
+$_lang['number_decimalprecision'] = 'Precisione';
+$_lang['number_decimalprecision_desc'] = 'Il numero massimo di cifre consentito dopo il separatore decimale. (Predefinito: 2)';
+$_lang['number_decimalprecision_strict'] = 'Precisione Decimale rigorosa';
+$_lang['number_decimalprecision_strict_desc'] = 'Quando impostato a “Sì,” conserva gli zeri finali in numeri decimali (valori predefiniti a “No”).';
 /* See note in number inputproperties config re separators */
-$_lang['number_decimalseparator'] = 'Separator';
-$_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
+$_lang['number_decimalseparator'] = 'Separatore';
+$_lang['number_decimalseparator_desc'] = 'Il carattere usato come separatore decimale. (Predefinito: “.”)';
 $_lang['number_maxvalue'] = 'Valore Massimo';
 $_lang['number_minvalue'] = 'Valore Minimo';
 $_lang['option'] = 'Bottoni Scelta (Radio Options)';
