@@ -127,6 +127,8 @@ $_lang['number_allowdecimals'] = 'Разрешить десятичные';
 $_lang['number_allownegative'] = 'Разрешить отрицательные';
 $_lang['number_decimalprecision'] = 'Точность';
 $_lang['number_decimalprecision_desc'] = 'Максимальное количество цифр, допустимое после десятичного разделителя. (По умолчанию: 2)';
+$_lang['number_decimalprecision_strict'] = 'Strict Decimal Precision';
+$_lang['number_decimalprecision_strict_desc'] = 'When set to “Yes,” preserves trailing zeros in decimal numbers (defaults to “No”).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Разделитель';
 $_lang['number_decimalseparator_desc'] = 'Символ, используемый как десятичный разделитель. (По умолчанию: «.»)';

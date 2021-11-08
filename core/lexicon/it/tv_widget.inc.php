@@ -7,47 +7,47 @@
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Attributi';
-$_lang['attr_attr_desc'] = 'One or more space-separated attributes to add to this element’s tag (for example, <span class="example-input">rel="external" type="application/pdf"</span>).';
-$_lang['attr_class_desc'] = 'One or more space-separated CSS class names.';
-$_lang['attr_style_desc'] = 'CSS definitions (for example, <span class="example-input">color:#f36f99; text-decoration:none;</span>).';
+$_lang['attr_attr_desc'] = 'Uno o più attributi separati da spazi da aggiungere al tag di questo elemento (ad esempio, <span class="example-input">rel="external" type="application/pdf"</span>).';
+$_lang['attr_class_desc'] = 'Uno o più nomi di classe CSS separati da spazio.';
+$_lang['attr_style_desc'] = 'Definizioni CSS (ad esempio, <span class="example-input">color:#f36f99; text-decoration:none;</span>).';
 $_lang['attr_target_blank'] = 'Blank';
 $_lang['attr_target_parent'] = 'Parent';
 $_lang['attr_target_self'] = 'Self';
 $_lang['attr_target_top'] = 'Top';
-$_lang['attr_target_desc'] = 'Indicates in which window/tab or frame the linked url should open. To target a specific frame, enter its name in place of one of the provided options.';
+$_lang['attr_target_desc'] = 'Indica in quale finestra/scheda o cornice si aprirà l\'URL collegato. Per indirizzare un frame specifico, inserisci il suo nome al posto di una delle opzioni fornite.';
 $_lang['capitalize'] = 'Tutte Maiuscole';
 $_lang['checkbox'] = 'Spunta Casella';
 $_lang['checkbox_columns'] = 'Colonne';
 $_lang['checkbox_columns_desc'] = 'Il numero di colonne in cui vengono visualizzati i checkboxes.';
 $_lang['class'] = 'Classe';
-$_lang['classes'] = 'Class(es)';
+$_lang['classes'] = 'Classe/i';
 $_lang['combo_allowaddnewdata'] = 'Consenti Aggiunta Nuovi Elementi';
 $_lang['combo_allowaddnewdata_desc'] = 'Se abilitato, consente che siano aggiunti elementi, non ancora presenti nella lista. Defaults è No.';
-$_lang['combo_forceselection'] = 'Require Match';
-$_lang['combo_forceselection_desc'] = 'Only save typed option when it matches one already defined in the list.';
+$_lang['combo_forceselection'] = 'Richiedi Corrispondenza';
+$_lang['combo_forceselection_desc'] = 'Salva solo l\'opzione digitata quando corrisponde a quella già definita nella lista.';
 $_lang['combo_forceselection_multi_desc'] = 'Se questo è impostato a Sì, solo gli elementi già nell\'elenco sono consentiti. Se No, sono inseribili anche i nuovi valori.';
-$_lang['combo_listempty_text'] = 'Option Not Found Message';
-$_lang['combo_listempty_text_desc'] = 'Message to display when typed text does not match existing options.';
+$_lang['combo_listempty_text'] = 'Opzione Messaggio Non Trovato';
+$_lang['combo_listempty_text_desc'] = 'Messaggio da visualizzare quando il testo digitato non corrisponde alle opzioni esistenti.';
 $_lang['combo_listheight'] = 'Altezza Lista';
 $_lang['combo_listheight_desc'] = 'L\'altezza, in % o px, dell\'elenco a tendina stesso. Predefiniti all\'altezza della casella della combo.';
 $_lang['combo_listwidth'] = 'Larghezza Lista';
 $_lang['combo_listwidth_desc'] = 'La larghezza, in % o px, dell\'elenco a tendina stesso. Predefiniti alla larghezza della casella della combo.';
 $_lang['combo_maxheight'] = 'Massima Altezza';
-$_lang['combo_maxheight_desc'] = 'The maximum height in pixels of the dropdown list before scrollbars are shown. (Default: 300)';
+$_lang['combo_maxheight_desc'] = 'L\'altezza massima in pixels della lista dropdown prima che vengano mostrate le scrollbars (defaults è 300).';
 $_lang['combo_stackitems'] = 'Incolonna Oggetti Selezionati';
 $_lang['combo_stackitems_desc'] = 'Quando impostato su "SI", gli oggetti vengono mostrati 1 per linea. Di defaults il valore è "NO" e vengono mostrati tutti gli oggetti inline.';
 $_lang['combo_title'] = 'Testata Lista';
 $_lang['combo_title_desc'] = 'Se fornito, viene mostrato un elemento di testata con questo testo e aggiunto in cima alla lista dropdown.';
 $_lang['combo_typeahead'] = 'Abilita Auto-Completamento';
-$_lang['combo_typeahead_desc'] = 'Populate and autoselect options that match as you type after a configurable delay. (Default: No)';
-$_lang['combo_typeahead_delay'] = 'Delay';
-$_lang['combo_typeahead_delay_desc'] = 'Milliseconds before a matched option is shown. (Default: 250)';
+$_lang['combo_typeahead_desc'] = 'Popola e seleziona automaticamente le opzioni che corrispondono a quando digiti dopo un ritardo configurabile. (Predefinito: No)';
+$_lang['combo_typeahead_delay'] = 'Ritardo';
+$_lang['combo_typeahead_delay_desc'] = 'Millisecondi prima che sia visualizzata un\'opzione corrispondente. (Predefinito: 250)';
 $_lang['date'] = 'Data';
 $_lang['date_format'] = 'Formato Data';
-$_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/strftime" target="_blank">php’s strftime syntax</a>.
-    <div class="example-list">Common examples include:
+$_lang['date_format_desc'] = 'Inserisci un formato usando la sintassi strftime di <a href="https://www.php.net/strftime" target="_blank">php</a>.
+    <div class="example-list">Esempi comuni includono:
         <ul>
-            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (default format)</li>
+            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (formato predefinito)</li>
             <li><span class="example-input">[[+example_2a]]</span> ([[+example_2b]])</li>
             <li><span class="example-input">[[+example_3a]]</span> ([[+example_3b]])</li>
             <li><span class="example-input">[[+example_4a]]</span> ([[+example_4b]])</li>
@@ -57,29 +57,29 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
         </ul>
     </div>
 ';
-$_lang['date_use_current'] = 'Use Current Date as Fallback';
-$_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
+$_lang['date_use_current'] = 'Usa la data corrente come Fallback';
+$_lang['date_use_current_desc'] = 'Quando non è richiesto un valore per questa TV (Consenti vuoto = “Sì”) e non è specificata una data predefinita, impostando questa opzione a “Sì” verrà visualizzata la data corrente.';
 $_lang['default'] = 'Predefinito';
-$_lang['default_date_now'] = 'Today with Current Time';
-$_lang['default_date_today'] = 'Today (midnight)';
-$_lang['default_date_yesterday'] = 'Yesterday (midnight)';
-$_lang['default_date_tomorrow'] = 'Tomorrow (midnight)';
-$_lang['default_date_custom'] = 'Custom (see description below)';
+$_lang['default_date_now'] = 'Oggi con l\'ora corrente';
+$_lang['default_date_today'] = 'Oggi (mezzanotte)';
+$_lang['default_date_yesterday'] = 'Ieri (mezzanotte)';
+$_lang['default_date_tomorrow'] = 'Domani (mezzanotte)';
+$_lang['default_date_custom'] = 'Personalizzato (vedi descrizione qui sotto)';
 $_lang['delim'] = 'Delimitatore';
 $_lang['delimiter'] = 'Delimitatore';
-$_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting multiple chooseable options).';
+$_lang['delimiter_desc'] = 'Uno o più caratteri utilizzati per separare i valori (applicabile alle TV che supportano più opzioni selezionabili).';
 $_lang['disabled_dates'] = 'Date disabilitate';
-$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
-    <p>Examples using the default format (“[[+format_default]]”) include:</p>
+$_lang['disabled_dates_desc'] = 'Un elenco separato, javascript <abbr title="regular expression">regex</abbr>-compatibile (meno delimitatori) delle date nel formato della data del gestore (attualmente «[[+format_current]]»).
+    <p>Gli esempi che utilizzano il formato predefinito (“[[+format_default]]”) includono:</p>
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (selects individual dates)</li>
-            <li><span class="example-input">[[+example_2a]]</span> (selects [[+example_2b]] and [[+example_2c]] of every year)</li>
-            <li><span class="example-input">[[+example_3a]]</span> (“^” to match beginning of string; this selects all of [[+example_3b]])</li>
-            <li><span class="example-input">[[+example_4a]]</span> (selects every day in [[+example_4b]])</li>
-            <li><span class="example-input">[[+example_5]]</span> (“$” to match end of string; this selects every day in March of every year)</li>
+            <li><span class="example-input">[[+example_1]]</span> (seleziona date individuali)</li>
+            <li><span class="example-input">[[+example_2a]]</span> (seleziona [[+example_2b]] e [[+example_2c]] di ogni anno)</li>
+            <li><span class="example-input">[[+example_3a]]</span> (“^” per abbinare l\'inizio della stringa; questo seleziona tutti i [[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> (seleziona ogni giorno in [[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5]]</span> (“$” per abbinare la fine della stringa; questo seleziona ogni giorno nel mese di marzo di ogni anno)</li>
         </ul>
-        Note: If your date format uses dot separators they will need to be escaped (e.g., “[[+example_6a]]” should be entered above as “[[+example_6b]]”).
+        Nota: se il formato della data utilizza separatori di punti dovranno avere sequenze di escape (e. ., «[[+example_6a]]» dovrebbe essere inserito sopra come «[[+example_6b]]»).
     </div>
 ';
 $_lang['disabled_days'] = 'Giorni Disabilitati';
@@ -93,8 +93,8 @@ $_lang['email'] = 'E-mail';
 $_lang['file'] = 'File';
 $_lang['height'] = 'Altezza';
 $_lang['hidden'] = 'Nascosto';
-$_lang['hide_time'] = 'Hide Time Option';
-$_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
+$_lang['hide_time'] = 'Nascondi Opzione Ora';
+$_lang['hide_time_desc'] = 'Rimuove la possibilità di scegliere un\'ora dal selettore di data di questa TV.';
 $_lang['htmlarea'] = 'Area HTML';
 $_lang['htmltag'] = 'Tag HTML';
 $_lang['image'] = 'Immagine';
@@ -109,27 +109,29 @@ $_lang['lower_case'] = 'Minuscolo';
 $_lang['max_length'] = 'Massima Lunghezza';
 $_lang['min_length'] = 'Minima Lunghezza';
 $_lang['regex_text'] = 'Errore dell\'Espressione Regolare';
-$_lang['regex_text_desc'] = 'The message to show if the user enters text that is invalid according to the <abbr title="regular expression">regex</abbr> validator.';
+$_lang['regex_text_desc'] = 'Il messaggio da mostrare se l\'utente inserisce testo che non è valido in base al validatore <abbr title="regular expression">regex</abbr>.';
 $_lang['regex'] = 'Convalidatore dell\'Espressione Regolare';
-$_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
-    <div class="example-list">
-        <ul>
-            <li><span class="example-input">[[+example_1]]</span> (pattern for U.S. zip codes)</li>
-            <li><span class="example-input">[[+example_2]]</span> (allow only letters)</li>
-            <li><span class="example-input">[[+example_3]]</span> (allow all characters except numbers)</li>
-            <li><span class="example-input">[[+example_4]]</span> (must end with the string “-XP”)</li>
-        </ul>
-    </div>
+$_lang['regex_desc'] = 'Una stringa compatibile con javascript <abbr title="regular expression">regex</abbr> (meno i delimitatori) per limitare il contenuto di questa TV. Qualche esempio:
+     <div class="example-list">
+         <ul>
+             <li><span class="example-input">[[+example_1]]</span> (schema per C.A.P. statunitensi)</li>
+             <li><span class="example-input">[[+example_2]]</span> (consenti solo lettere)</li>
+             <li><span class="example-input">[[+example_3]]</span> (consenti tutti i caratteri tranne i numeri)</li>
+             <li><span class="example-input">[[+example_4]]</span> (deve terminare con la stringa “-XP”)</li>
+         </ul>
+     </div> 
 ';
 $_lang['name'] = 'Nome';
 $_lang['number'] = 'Numero';
 $_lang['number_allowdecimals'] = 'Consenti Decimali';
-$_lang['number_allownegative'] = 'Allow Negative';
-$_lang['number_decimalprecision'] = 'Precision';
-$_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
+$_lang['number_allownegative'] = 'Consenti Negativo';
+$_lang['number_decimalprecision'] = 'Precisione';
+$_lang['number_decimalprecision_desc'] = 'Il numero massimo di cifre consentito dopo il separatore decimale. (Predefinito: 2)';
+$_lang['number_decimalprecision_strict'] = 'Precisione Decimale rigorosa';
+$_lang['number_decimalprecision_strict_desc'] = 'Quando impostato a “Sì,” conserva gli zeri finali in numeri decimali (valori predefiniti a “No”).';
 /* See note in number inputproperties config re separators */
-$_lang['number_decimalseparator'] = 'Separator';
-$_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
+$_lang['number_decimalseparator'] = 'Separatore';
+$_lang['number_decimalseparator_desc'] = 'Il carattere usato come separatore decimale. (Predefinito: “.”)';
 $_lang['number_maxvalue'] = 'Valore Massimo';
 $_lang['number_minvalue'] = 'Valore Minimo';
 $_lang['option'] = 'Bottoni Scelta (Radio Options)';

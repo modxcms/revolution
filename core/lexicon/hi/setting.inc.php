@@ -700,6 +700,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'नए स्थि�
 $_lang['setting_static_elements_basepath'] = 'स्टेथिक तत्व बेसपाथ';
 $_lang['setting_static_elements_basepath_desc'] = 'स्थिर तत्व फाइलों को संग्रहित करने के लिए बेसपाथ';
 
+$_lang['setting_resource_static_allow_absolute'] = 'पूर्ण स्थिर संसाधन पथ की अनुमति दे';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'स्थैतिक संसाधन आधार पथ';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
+
 $_lang['setting_symlink_merge_fields'] = 'रिसोर्स फील्ड Symlinks में मर्ज करें';
 $_lang['setting_symlink_merge_fields_desc'] = 'यदि हाँ पर सेट किया, स्वचालित रूप से खाली फ़ील्ड लक्ष्य resource के साथ विलय होगा जब अग्रेषण Symlinks का उपयोग कर।';
 
@@ -810,3 +816,6 @@ $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter 
 
 $_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
 $_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
+
+$_lang['static_elements_html_extension'] = 'स्टेटिक एलिमेंट्स एचटीएमएल एक्सटेंशन';
+$_lang['static_elements_html_extension_desc'] = 'एचटीएमएल सामग्री के साथ स्थित तत्वों द्वारा उपयोग की जाने वाली फाइलों का उपयोग एक्सटेंशन।';

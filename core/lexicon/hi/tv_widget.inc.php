@@ -127,6 +127,8 @@ $_lang['number_allowdecimals'] = 'दशमलव की अनुमति द�
 $_lang['number_allownegative'] = 'Allow Negative';
 $_lang['number_decimalprecision'] = 'Precision';
 $_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
+$_lang['number_decimalprecision_strict'] = 'सख्त दशमलव प्रेसिजन';
+$_lang['number_decimalprecision_strict_desc'] = 'जब "हां" पर सेट किया जाता है तो दशमलव संख्यायो पिछला शून्य सुरक्षित रहता है (डिफॉल्ट रूप से "नही")।';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Separator';
 $_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';

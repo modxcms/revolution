@@ -35,7 +35,7 @@ $_lang['combo_listwidth_desc'] = 'Die Breite der Dropdown-Liste in Prozent oder 
 $_lang['combo_maxheight'] = 'Maximale Höhe';
 $_lang['combo_maxheight_desc'] = 'Die maximale Höhe der Dropdown-Liste in Pixeln, bevor Scrollbalken angezeigt werden (Standard: 300).';
 $_lang['combo_stackitems'] = 'Ausgewählte Elemente untereinander anzeigen';
-$_lang['combo_stackitems_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die bereits ausgewählten Elemente untereinander angezeigt (1 Element pro Zeile). Die Standardeinstellung ist "Nein", wodurch die Elemente nebeneinander angezeigt werden; ein Zeilenumbruch erfolgt nur, wenn in einer Zeile kein Platz mehr ist.';
+$_lang['combo_stackitems_desc'] = 'Wenn diese Einstellung auf „Ja“ gesetzt wird, werden die bereits ausgewählten Elemente untereinander angezeigt (1 Element pro Zeile). Die Standardeinstellung ist „Nein“, wodurch die Elemente nebeneinander angezeigt werden; ein Zeilenumbruch erfolgt nur, wenn in einer Zeile kein Platz mehr ist.';
 $_lang['combo_title'] = 'Erster Listeneintrag';
 $_lang['combo_title_desc'] = 'Wird hier etwas eingegeben, so wird an Anfang der Liste ein zusätzliches Element mit dem hier hinterlegten Text eingefügt.';
 $_lang['combo_typeahead'] = 'Autovervollständigung aktivieren';
@@ -58,7 +58,7 @@ $_lang['date_format_desc'] = 'Geben Sie ein Format mit der <a href="https://www.
     </div>
 ';
 $_lang['date_use_current'] = 'Aktuelles Datum als Fallback verwenden';
-$_lang['date_use_current_desc'] = 'Wenn kein Wert für diese TV benötigt wird (Leere Eingabe erlauben = "Ja") und kein Standarddatum angegeben ist, wird das aktuelle Datum angezeigt, sobald diese Option auf "Ja" gesetzt ist.';
+$_lang['date_use_current_desc'] = 'Wenn kein Wert für diese TV benötigt wird (Leere Eingabe erlauben = „Ja“) und kein Standarddatum angegeben ist, wird das aktuelle Datum angezeigt, sobald diese Option auf „Ja“ gesetzt ist.';
 $_lang['default'] = 'Standardeigenschaften';
 $_lang['default_date_now'] = 'Heute mit aktueller Zeit';
 $_lang['default_date_today'] = 'Heute (Mitternacht)';
@@ -129,6 +129,8 @@ $_lang['number_allowdecimals'] = 'Erlaube Dezimalstellen';
 $_lang['number_allownegative'] = 'Erlaube negative Zahlen';
 $_lang['number_decimalprecision'] = 'Präzision';
 $_lang['number_decimalprecision_desc'] = 'Die maximal zulässige Anzahl von Ziffern nach dem Dezimaltrennzeichen. (Standard: 2)';
+$_lang['number_decimalprecision_strict'] = 'Strenge Dezimalgenauigkeit';
+$_lang['number_decimalprecision_strict_desc'] = 'Wenn diese Einstellung auf „Ja“ gesetzt ist, werden nachgestellte Nullen in Dezimalzahlen beibehalten (Standardwert ist „Nein“).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Dezimaltrennzeichen';
 $_lang['number_decimalseparator_desc'] = 'Das als Dezimaltrennzeichen verwendete Zeichen (Standard: ",")';
