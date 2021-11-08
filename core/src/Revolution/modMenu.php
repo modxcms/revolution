@@ -84,13 +84,13 @@ class modMenu extends modAccessibleObject
     }
 
     /**
-     * Returns list of available languages in the system with descriptions ans translated names
+     * Returns list of available languages in the system with descriptions and translated names
      *
-     * @return array|null
+     * @return array
      */
-    protected function getLanguageMenu()
+    protected function getLanguageMenu(): array
     {
-        $languages = array_flip($this->xpdo->lexicon->getLanguageList('core'));
+        $languages = array_flip($this->xpdo->lexicon->getLanguageList());
 
         $this->xpdo->lexicon->load('core:languages');
 

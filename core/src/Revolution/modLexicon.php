@@ -461,7 +461,7 @@ class modLexicon
      *
      * @return array An array of available languages
      */
-    public function getLanguageList($namespace = 'core')
+    public function getLanguageList(string $namespace = 'core'): array
     {
         $corePath = $this->getNamespacePath($namespace);
         $lexPath = str_replace('//', '/', $corePath . '/lexicon/');
