@@ -59,14 +59,26 @@ MODx.grid.AccessPolicy = function(config) {
         ,columns: [this.sm,{
             header: _('policy_name')
             ,dataIndex: 'name'
+            ,id: 'modx-policy--policy-name'
             ,width: 200
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,editor: {
+                xtype: 'textfield',
+                allowBlank: false
+            }
             ,sortable: true
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/access/policy/update&id=' + record.data.id
-                });
-            }, scope: this }
+            ,renderer: {
+                fn: function(value, metaData, record) {
+                    if (!MODx.perm.policy_save || !MODx.perm.policy_edit) {
+                        metaData.css = 'editor-disabled';
+                        return value;
+                    }
+                    return this.renderLink(value, {
+                        href: '?a=security/access/policy/update&id=' + record.data.id,
+                        target: '_blank'
+                    });
+                },
+                scope: this
+            }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -78,13 +90,21 @@ MODx.grid.AccessPolicy = function(config) {
         },{
             header: _('policy_template')
             ,dataIndex: 'template_name'
+            ,id: 'modx-policy--template-name'
             ,width: 375
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/access/policy/template/update&id=' + record.data.template
-                    ,target: '_blank'
-                });
-            }, scope: this }
+            ,renderer: {
+                fn: function(value, metaData, record) {
+                    if (!MODx.perm.policy_template_save || !MODx.perm.policy_template_edit) {
+                        metaData.css = 'editor-disabled';
+                        return value;
+                    }
+                    return this.renderLink(value, {
+                        href: '?a=security/access/policy/template/update&id=' + record.data.template,
+                        target: '_blank'
+                    });
+                },
+                scope: this
+            }
         },{
             header: _('active_permissions')
             ,dataIndex: 'active_of'
@@ -93,6 +113,7 @@ MODx.grid.AccessPolicy = function(config) {
         }]
         ,tbar: [{
             text: _('create')
+            ,hidden: !MODx.perm.policy_new || !MODx.perm.policy_save
             ,cls:'primary-button'
             ,scope: this
             ,handler: this.createPolicy
@@ -102,6 +123,7 @@ MODx.grid.AccessPolicy = function(config) {
             ,handler: this.importPolicy
         },{
             text: _('bulk_actions')
+            ,hidden: !MODx.perm.policy_delete
             ,menu: [{
                 text: _('policy_remove_multiple')
                 ,handler: this.removeSelected
@@ -141,14 +163,25 @@ MODx.grid.AccessPolicy = function(config) {
         }]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
+
+    this.on('render', function(){
+        if (!MODx.perm.policy_save || !MODx.perm.policy_edit) {
+            const   colModel = this.getColumnModel(),
+                    nameIdx = colModel.getIndexById('modx-policy--policy-name')
+            ;
+            colModel.setEditable(nameIdx, false);
+        }
+    });
 };
 Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
+
     search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         this.getBottomToolbar().changePage(1);
         return true;
     }
+
     ,clearFilter: function() {
         this.getStore().baseParams = {
             action: 'Security/Access/Policy/GetList'
@@ -178,6 +211,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         this.windows.apc.reset();
         this.windows.apc.show(e.target);
     }
+
     ,exportPolicy: function(btn,e) {
         var id = this.menu.record.id;
         MODx.Ajax.request({
@@ -217,28 +251,32 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         var p = r.data.cls;
 
         var m = [];
-        if (this.getSelectionModel().getCount() > 1) {
+        if (this.getSelectionModel().getCount() > 1 && MODx.perm.policy_delete) {
             m.push({
                 text: _('policy_remove_multiple')
                 ,handler: this.removeSelected
             });
         } else {
-            if (p.indexOf('pedit') != -1) {
+            if (MODx.perm.policy_edit && MODx.perm.policy_save) {
                 m.push({
                     text: _('edit')
                     ,handler: this.editPolicy
                 });
+            }
+            if (MODx.perm.policy_save) {
                 m.push({
                     text: _('duplicate')
                     ,handler: this.confirm.createDelegate(this,["Security/Access/Policy/Duplicate","policy_duplicate_confirm"])
                 });
             }
-            if (m.length > 0) { m.push('-'); }
+            if (m.length > 0) {
+                m.push('-');
+            }
             m.push({
                 text: _('policy_export')
                 ,handler: this.exportPolicy
             });
-            if (p.indexOf('premove') != -1) {
+            if (MODx.perm.policy_delete) {
                 if (m.length > 0) m.push('-');
                 m.push({
                     text: _('delete')

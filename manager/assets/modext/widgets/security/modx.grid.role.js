@@ -20,6 +20,7 @@ MODx.grid.Role = function(config) {
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/Role/UpdateFromGrid'
+        ,clicksToEdit: 1
         ,columns: [{
             header: _('id')
             ,dataIndex: 'id'
@@ -28,45 +29,129 @@ MODx.grid.Role = function(config) {
         },{
             header: _('name')
             ,dataIndex: 'name'
+            ,id: 'role--name'
             ,width: 150
             ,sortable: true
-            ,editor: { xtype: 'textfield' }
+            ,editor: {
+                xtype: 'textfield'
+            }
+            ,renderer: {
+                fn: function(value, metaData, record) {
+                    if (!MODx.perm.save_role || !MODx.perm.edit_role || this.isProtected(record.data.authority)) {
+                        metaData.css = 'editor-disabled';
+                        // console.log('metaData: ', metaData);
+                        // console.log('this', this);
+                    }
+                    return value;
+                },
+                scope: this
+            }
+            ,listeners: {
+                dblclick: function(col, gp, rowIndex, e) {
+                    // console.log('dblclick, col: ', col);
+                    // console.log('dblclick, gp: ', gp);
+                    // console.log('dblclick, e: ', e);
+
+                }
+            }
         },{
             header: _('description')
             ,dataIndex: 'description'
+            ,id: 'role--description'
             ,width: 350
-            ,editor: { xtype: 'textarea' }
+            ,editor: {
+                xtype: 'textarea'
+            }
+            ,renderer: {
+                fn: function(value, metaData, record) {
+                    if (!MODx.perm.save_role || !MODx.perm.edit_role || this.isProtected(record.data.authority)) {
+                        metaData.css = 'editor-disabled';
+                    }
+                    return value;
+                },
+                scope: this
+            }
         },{
             header: _('authority')
             ,dataIndex: 'authority'
+            ,id: 'role--authority'
             ,width: 60
-            ,editor: { xtype: 'textfield' }
             ,sortable: true
+            ,editor: {
+                xtype: 'textfield'
+            }
+            ,renderer: {
+                fn: function(value, metaData, record, rowIndex, colIndex) {
+                    const isProtected = this.isProtected(record.data.authority);
+                    if (!MODx.perm.save_role || !MODx.perm.edit_role || isProtected) {
+                        metaData.css = 'editor-disabled';
+                        if (isProtected) {
+                            console.log(`protected row #${rowIndex} metaData:`, metaData);
+                        }
+                    }
+                    return value;
+                },
+                scope: this
+            }
         }]
         ,tbar: [{
             text: _('create')
+            ,hidden: !MODx.perm.new_role || !MODx.perm.save_role
             ,cls:'primary-button'
             ,handler: this.createRole
             ,scope: this
         }]
     });
     MODx.grid.Role.superclass.constructor.call(this,config);
-    this.on('beforeedit',this.checkEditable,this);
+
+    this.on('render', function() {
+        if (!MODx.perm.save_role || !MODx.perm.edit_role) {
+            const   colModel = this.getColumnModel(),
+                    editableCols = ['role--name', 'role--description', 'role--authority']
+            ;
+            editableCols.forEach(colId => {
+                const colIndex = colModel.getIndexById(colId);
+                colModel.setEditable(colIndex, false);
+            });
+        }
+    });
 };
 Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
-    checkEditable: function(o) {
-        var p = o.record.data.perm || '';
-        return p.indexOf('edit') != -1;
+
+    /**
+     * @property {Function} isProtected - Used to exclude the permanent roles of
+     * 'Super User' (0) and 'Member' (9999) for all permissions levels
+     *
+     * @param {Number} authority - The authority level for the role being tested
+     * @return {Boolean}
+     */
+    isProtected: function(authority) {
+        const protected = [0, 9999];
+        return protected.includes(authority);
+    }
+
+    ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        // console.log(`actionsColumnRenderer called from grid.role`);
+        // console.log('actionsColumnRenderer store: ',store);
+        // console.log('actionsColumnRenderer value: ',value);
+        // console.log('actionsColumnRenderer rowIndex: ',rowIndex);
+        // console.log('actionsColumnRenderer record: ',record);
+        // console.log('actionsColumnRenderer in lexicon.grid, rowIndex: ',rowIndex);
+        // console.log('actionsColumnRenderer in lexicon.grid, arguments: ',arguments);
+        // console.log('actionsColumnRenderer metaData: ',metaData);
+
+        if (MODx.perm.delete_role && !this.isProtected(record.data.authority)) {
+            return this.superclass().actionsColumnRenderer.apply(this, arguments);
+        }
     }
 
     ,getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.perm || '';
-        var m = [];
-        if (p.indexOf('remove') != -1) {
+        const record = this.getSelectionModel().getSelected();
+        let m = [];
+        if (MODx.perm.delete_role && !this.isProtected(record.data.authority)) {
             m.push({
-                text: _('delete')
-                ,handler: this.remove.createDelegate(this,['role_remove_confirm', 'Security/Role/Remove'])
+                text: _('delete'),
+                handler: this.remove.createDelegate(this,['role_remove_confirm', 'Security/Role/Remove'])
             });
         }
         return m;

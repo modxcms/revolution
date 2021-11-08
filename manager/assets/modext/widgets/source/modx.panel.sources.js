@@ -163,7 +163,14 @@ MODx.grid.Sources = function(config) {
     MODx.grid.Sources.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
-    getMenu: function() {
+
+    actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        if (record.data.cls) {
+            return this.superclass().actionsColumnRenderer.apply(this, arguments);
+        }
+    }
+
+    ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var p = r.data.cls;
 

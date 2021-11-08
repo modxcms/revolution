@@ -179,6 +179,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             this.getView().refresh(false);
         }
     }
+
     ,saveRecord: function(e) {
         e.record.data.menu = null;
         var p = this.config.saveParams || {};
@@ -666,6 +667,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 
     ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
         var actions = this.getActions.apply(this, [record, rowIndex, colIndex, store]);
+        // console.log('actionsColumnRenderer record: ',record);
         if (this.config.disableContextMenuAction !== true) {
             actions.push({
                 text: _('context_menu'),

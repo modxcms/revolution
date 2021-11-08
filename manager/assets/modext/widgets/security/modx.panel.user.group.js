@@ -430,9 +430,17 @@ MODx.grid.UserGroupUsers = function(config) {
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);
     this.addEvents('updateRole','addUser');
+    console.log(`MODx.grid.UserGroupUsers called from modx.panel.user.group.js`);
 };
 Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
-    getMenu: function() {
+
+    actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        if (MODx.perm.usergroup_user_edit) {
+            return this.superclass().actionsColumnRenderer.apply(this, arguments);
+        }
+    }
+    
+    ,getMenu: function() {
         var m = [];
         if (MODx.perm.usergroup_user_edit) {
             m.push({

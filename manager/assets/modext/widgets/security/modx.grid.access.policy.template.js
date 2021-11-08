@@ -59,14 +59,26 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         ,columns: [this.sm,{
             header: _('name')
             ,dataIndex: 'name'
+            ,id: 'modx-policy-template--template-name'
             ,width: 200
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
+            ,editor: {
+                xtype: 'textfield',
+                allowBlank: false
+            }
             ,sortable: true
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/access/policy/template/update&id=' + record.data.id
-                });
-            }, scope: this }
+            ,renderer: {
+                fn: function(value, metaData, record) {
+                    if (!MODx.perm.policy_template_save || !MODx.perm.policy_template_edit) {
+                        metaData.css = 'editor-disabled';
+                        return value;
+                    }
+                    return this.renderLink(value, {
+                        href: '?a=security/access/policy/template/update&id=' + record.data.id,
+                        target: '_blank'
+                    });
+                },
+                scope: this
+            }
         },{
             header: _('description')
             ,dataIndex: 'description'
@@ -96,6 +108,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         }]
         ,tbar: [{
             text: _('create')
+            ,hidden: !MODx.perm.policy_template_new || !MODx.perm.policy_template_save
             ,cls:'primary-button'
             ,scope: this
             ,handler: this.createPolicyTemplate
@@ -105,6 +118,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,handler: this.importPolicyTemplate
         },{
             text: _('bulk_actions')
+            ,hidden: !MODx.perm.policy_template_delete
             ,menu: [{
                 text: _('policy_remove_multiple')
                 ,handler: this.removeSelected
@@ -144,37 +158,51 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         }]
     });
     MODx.grid.AccessPolicyTemplate.superclass.constructor.call(this,config);
+
+    this.on('render', function(){
+        if (!MODx.perm.policy_template_save || !MODx.perm.policy_template_edit) {
+            const   colModel = this.getColumnModel(),
+                    nameIdx = colModel.getIndexById('modx-policy-template--template-name')
+            ;
+            colModel.setEditable(nameIdx, false);
+        }
+    });
 };
 Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
+
     getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var p = r.data.cls;
 
         var m = [];
 
-        if (this.getSelectionModel().getCount() > 1) {
+        if (this.getSelectionModel().getCount() > 1 && MODx.perm.policy_template_delete) {
             m.push({
                 text: _('policy_template_remove_multiple')
                 ,handler: this.removeSelected
             });
         } else {
-            if (p.indexOf('pedit') !== -1) {
+            if (MODx.perm.policy_template_save && MODx.perm.policy_template_edit) {
                 m.push({
                     text: _('edit')
                     ,handler: this.editPolicyTemplate
                 });
+            }
+            if (MODx.perm.policy_template_save) {
                 m.push({
                     text: _('duplicate')
                     ,handler: this.confirm.createDelegate(this,["Security/Access/Policy/Template/Duplicate","policy_template_duplicate_confirm"])
                 });
             }
-            if (m.length > 0) { m.push('-'); }
+            if (m.length > 0) {
+                m.push('-');
+            }
             m.push({
                 text: _('policy_template_export')
                 ,handler: this.exportPolicyTemplate
             });
 
-            if (p.indexOf('premove') !== -1) {
+            if (MODx.perm.policy_template_delete) {
                 if (m.length > 0) m.push('-');
                 m.push({
                     text: _('delete'),

@@ -36,6 +36,7 @@ MODx.grid.GroupSettings = function(config) {
         }]
     });
     MODx.grid.GroupSettings.superclass.constructor.call(this,config);
+    console.log(`MODx.grid.GroupSettings called`);
 };
 Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
     _showMenu: function(g,ri,e) {

@@ -272,6 +272,12 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	});
     }
 
+    ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
+        if (record.data.overridden) {
+            return this.superclass().actionsColumnRenderer.apply(this, arguments);
+        }
+    }
+
     ,revertEntry: function() {
         var p = this.menu.record;
         p.action = 'Workspace/Lexicon/Revert';
@@ -289,6 +295,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var m = [];
+        console.log('getMenu, r: ', r);
         if (r.data.overridden) {
             m.push({
                 text: _('entry_revert')
