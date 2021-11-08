@@ -898,7 +898,7 @@ class modUser extends modPrincipal
     public function generatePassword($length = null, array $options = [])
     {
         if ($length === null) {
-            $length = $this->xpdo->getOption('password_generated_length', null, 10, true);
+                $length = $this->xpdo->getOption('password_generated_length', null, 10, true);
         }
         $passwordMinimumLength = $this->xpdo->getOption('password_min_length', null, 8, true);
         if ($length < $passwordMinimumLength) {
@@ -911,7 +911,7 @@ class modUser extends modPrincipal
             return substr(implode($alphabet),0,$length);
         }
 
-        return bin2hex(random_bytes($length));
+        return substr(bin2hex(random_bytes($length)),$length);
     }
 
 
