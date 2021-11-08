@@ -904,19 +904,14 @@ class modUser extends modPrincipal
         if ($length < $passwordMinimumLength) {
             $length = $passwordMinimumLength;
         }
-        $options = array_merge([
-            'allowable_characters' => 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',
-            'srand_seed_multiplier' => 1000000,
-        ], $options);
 
-        $ps_len = strlen($options['allowable_characters']);
-        srand((double)microtime() * $options['srand_seed_multiplier']);
-        $pass = '';
-        for ($i = 0; $i < $length; $i++) {
-            $pass .= $options['allowable_characters'][mt_rand(0, $ps_len - 1)];
+        if ($options['alphabet']) {
+            $alphabet = array_merge(range('a', 'z'), range('A', 'Z'));
+            shuffle($alphabet);
+            return substr(implode($alphabet),0,$length);
         }
 
-        return $pass;
+        return bin2hex(random_bytes($length));
     }
 
 
