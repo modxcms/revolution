@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -51,6 +52,9 @@ class UpdateFromGrid extends Processor
         $data = $this->modx->fromJSON($data);
         if (empty($data)) {
             return $this->modx->lexicon('invalid_data');
+        }
+        foreach ($data as $k => $v) {
+            $data[$k] = $k === 'value' ? $v : trim($v);
         }
         $this->setProperties($data);
         $this->unsetProperty('data');
