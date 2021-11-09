@@ -44,7 +44,10 @@ class Create extends Processor
      */
     public function process()
     {
-        $data = array_map('trim', $this->getProperties());
+        $data = [];
+        foreach ($this->getProperties() as $k => $v) {
+            $data[$k] = $k === 'value' ? $v : trim($v);
+        }
 
         if ($this->alreadyExists($data)) {
             return $this->failure($this->modx->lexicon('entry_err_ae'));

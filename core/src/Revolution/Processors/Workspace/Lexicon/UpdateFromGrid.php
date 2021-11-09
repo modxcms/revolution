@@ -53,7 +53,9 @@ class UpdateFromGrid extends Processor
         if (empty($data)) {
             return $this->modx->lexicon('invalid_data');
         }
-        $data = array_map('trim', $data);
+        foreach ($data as $k => $v) {
+            $data[$k] = $k === 'value' ? $v : trim($v);
+        }
         $this->setProperties($data);
         $this->unsetProperty('data');
 
