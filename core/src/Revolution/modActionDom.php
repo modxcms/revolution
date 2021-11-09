@@ -32,57 +32,6 @@ class modActionDom extends modAccessibleSimpleObject
      */
     public function apply($objId = '')
     {
-        /*
-        $rule = '';
-        $encoding = $this->xpdo->getOption('modx_charset', null, 'UTF-8');
-
-        switch ($this->get('rule')) {
-            case 'fieldVisible':
-                if (!$this->get('value')) {
-                    $fields = explode(',', $this->get('name'));
-                    $rule = 'MODx.hideField("' . $this->get('container') . '",' . $this->xpdo->toJSON($fields) . ');';
-                }
-                break;
-            case 'fieldLabel':
-            case 'fieldTitle':
-                $fields = explode(',', $this->get('name'));
-                $values = explode(',', $this->get('value'));
-                foreach ($values as &$value) {
-                    $value = htmlspecialchars($value, ENT_COMPAT, $encoding);
-                }
-                $rule = 'MODx.renameLabel("' . $this->get('container') . '",' . $this->xpdo->toJSON($fields) . ',' . $this->xpdo->toJSON($values) . ');';
-                break;
-            case 'panelTitle':
-            case 'tabTitle':
-            case 'tabLabel':
-                $rule = 'MODx.renameTab("' . $this->get('name') . '","' . htmlspecialchars($this->get('value'),
-                        ENT_COMPAT, $encoding) . '");';
-                break;
-            case 'tabVisible':
-                if (!$this->get('value')) {
-                    $tabs = explode(',', $this->get('name'));
-                    $rule = '';
-                    foreach ($tabs as $tab) {
-                        $tab = trim($tab);
-                        $rule .= 'MODx.hideRegion("' . $this->get('container') . '","' . $tab . '");';
-                    }
-                }
-                break;
-            case 'tabNew':
-                $title = $this->get('value');
-                $rule = 'MODx.addTab("' . $this->get('container') . '",{title:"' . htmlspecialchars($title, ENT_COMPAT,
-                        $encoding) . '",id:"' . $this->get('name') . '"});';
-                break;
-            case 'tvMove':
-                $tvs = explode(',', $this->get('name'));
-                $rule = 'MODx.moveTV(' . $this->xpdo->toJSON($tvs) . ',"' . $this->get('value') . '");';
-                break;
-            default:
-                break;
-        }
-
-        return $rule;
-        */
         $rule = '';
         $encoding = $this->xpdo->getOption('modx_charset', null, 'UTF-8');
 
