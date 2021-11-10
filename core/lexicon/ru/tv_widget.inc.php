@@ -240,8 +240,6 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_daterange_elements_desc'] = 'Описание тестовых опций для daterange с примером ph: [[+ex1]]';
-$_lang['tv_daterange_default_text_desc'] = 'Тестовый текст по умолчанию для daterange с примером ph: [[+ex1]]';
 $_lang['tv_type'] = 'Тип ввода';
 $_lang['upper_case'] = 'Верхний регистр';
 $_lang['url'] = 'URL';
