@@ -46,7 +46,7 @@ class modSnippet extends modScript {
             ));
         } else if (!$saved && !empty($this->xpdo->lexicon)) {
             $msg = $isNew ? $this->xpdo->lexicon('snippet_err_create') : $this->xpdo->lexicon('snippet_err_save');
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.$this->toArray());
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$msg.print_r($this->toArray(),true));
         }
         return $saved;
     }
@@ -72,7 +72,7 @@ class modSnippet extends modScript {
                 'ancestors' => $ancestors,
             ));
         } else if (!$removed && !empty($this->xpdo->lexicon)) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('snippet_err_remove').$this->toArray());
+			$this->xpdo->log(xPDO::LOG_LEVEL_ERROR,$this->xpdo->lexicon('snippet_err_remove').print_r($this->toArray(),true));
         }
 
         return $removed;
