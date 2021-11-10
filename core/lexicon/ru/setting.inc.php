@@ -247,8 +247,8 @@ $_lang['setting_emailsender_err'] = 'Пожалуйста, укажите эле
 $_lang['setting_enable_dragdrop'] = 'Включить перетаскивание в древовидных меню ';
 $_lang['setting_enable_dragdrop_desc'] = 'Если указано «Нет», перетаскивание будет недоступно для деревьев ресурсов и элементов.';
 
-$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
-$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+$_lang['setting_enable_template_picker_in_tree'] = 'Включить выбор шаблонов в деревьях ресурсов';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Включите это, чтобы использовать окно выбора шаблонов при создании нового ресурса в дереве.';
 
 $_lang['setting_error_page'] = 'Страница ошибки 404 «Документ не найден»';
 $_lang['setting_error_page_desc'] = 'Введите ID ресурса, который вы хотите использовать как страницу ошибки 404 «Документ не найден». <strong>ВАЖНО: убедитесь, что этот ID принадлежит существующему ресурсу, и что этот ресурс опубликован!</strong>';
