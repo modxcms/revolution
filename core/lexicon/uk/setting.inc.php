@@ -382,7 +382,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
 
 $_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Sets connection prefix. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Встановлює префікс підключення. Опції "", "ssl" або "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Чи вмикати шифрування TLS автоматично, якщо сервер підтримує його, навіть якщо "SMTP шифрування" не встановлено на "tls"';
