@@ -1834,7 +1834,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $cls[] = 'pupdate';
         }
         $page = null;
-        if ($this->isFileBinary($path)) {
+        if (!$this->isFileBinary($path)) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction . '&file=' . $id . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;
@@ -1898,7 +1898,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $editAction = $this->getEditActionId();
 
         $page = null;
-        if ($this->isFileBinary($path)) {
+        if (!$this->isFileBinary($path)) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction . '&file=' . $path . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;
@@ -2322,7 +2322,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * Tells if a file is a binary file (some sort of text file) or not.
+     * Tells if a file is a binary file (instead of a textual-ish file) or not.
      *
      * @param string $file
      *
@@ -2333,7 +2333,22 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         try {
             $mime = $this->filesystem->mimeType($file);
 
-            return strpos($mime, 'text') === 0;
+            // Some mimetypes include a character set, e.g. application/json; charset=utf-8
+            // so we filter out the last part to make comparison easier
+            if (strpos($mime, ';') > 0) {
+                $mime = substr($mime, 0, strpos($mime, ';'));
+            }
+
+            return substr($mime, 0, 4) !== 'text'
+                && !in_array($mime, array(
+                    'application/json',
+                    'application/ld+json',
+                    'application/x-httpd-php', // also restricted by default based on extension
+                    'application/x-sh',
+                    'image/svg+xml',
+                    'application/xhtml+xml',
+                    'application/xml',
+                ), true);
         } catch (Exception $e) {
             // pass
         }
