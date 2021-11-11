@@ -39,12 +39,12 @@ $_lang['access_permissions_links'] = 'Felhasználói vagy dokumentumcsoportok hi
 $_lang['access_permissions_links_tab'] = 'Itt határozzuk meg, hogy melyik felhasználócsoportok kapnak hozzáférést (pl. alárendelt elemek szerkesztéséhez vagy létrehozásához) a dokumentumcsoportokhoz. Egy dokumentumcsoport és egy felhasználócsoport összekapcsolásához válassza ki a csoportot és kattintson a \'Összekapcsolás\' gombra. Az összekapcsolás eltávolításához kattintson az \'Eltávolítás ->\' gombra. Ez azonnal eltávolítja az összekapcsolást.';
 $_lang['access_permissions_no_documents_in_group'] = 'Egyik sem.';
 $_lang['access_permissions_no_users_in_group'] = 'Egyik sem.';
-$_lang['access_permissions_off'] = '<span class="warning">Access Permissions are not activated.</span> This means any changes made here will not have any effect until Access Permissions are activated.';
+$_lang['access_permissions_off'] = '<span class="warning">A hozzáférési engedélyek nincsenek bekapcsolva.</span> Az itt elvégzett módosításoknak nem lesz semmilyen hatásuk, amíg a hozzáférési engedélyek ki vannak kapcsolva..';
 $_lang['access_permissions_users_in_group'] = '<strong>Felhasználók a csoportban:</strong> ';
 $_lang['access_permissions_users_tab'] = 'Itt láthatók a létrehozott felhasználócsoportok. Létrehozhat új csoportokat, átnevezheti vagy törölheti őket, és megnézheti, hogy melyik felhasználók tagjai az egyes csoportoknak. Egy felhasználó egy csoporthoz adásához vagy onnan eltávolításához szerkessze közvetlenül a felhasználót.';
 $_lang['access_permissions_user_group'] = 'Felhasználói csoport:';
 $_lang['access_permissions_user_groups'] = 'Felhasználói csoportok';
-$_lang['access_permissions_user_group_access'] = 'Resource Groups this User Group has access to:';
+$_lang['access_permissions_user_group_access'] = 'Erőforráscsoportok, amelyeket ez a felhasználócsoport elérhet:';
 $_lang['access_permissions_user_message'] = 'Here you can select which User Groups this user belongs to. You can drag and drop each row to reorder the rank of each User Group. The User Group that has a rank of 0 will be declared the User\'s Primary Group, and will be the User Group that determines the User\'s Dashboard.';
 $_lang['access_permission_denied'] = 'You do not have the correct permissions for this document.';
 $_lang['access_permission_parent_denied'] = 'You do not have permission to create or move a document here! Please choose another location.';

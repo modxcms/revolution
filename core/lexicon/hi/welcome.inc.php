@@ -14,4 +14,4 @@ $_lang['yourinfo_message'] = 'इस खंड आप के बारे मे
 $_lang['yourinfo_previous_login'] = 'आपके अंतिम लॉगिन:';
 $_lang['yourinfo_title'] = 'आपकी जानकारी';
 $_lang['yourinfo_total_logins'] = 'लॉगइन्स की कुल संख्या:';
-$_lang['yourinfo_username'] = 'You are logged in as:';
+$_lang['yourinfo_username'] = 'आपने इसके रूप में लॉगिन किया गया है:';

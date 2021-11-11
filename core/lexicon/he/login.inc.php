@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'אינך רשאי להתחבר בזמן זה. א
 $_lang['login_blocked_too_many_attempts'] = 'חשבונך נחסם בעקבות נסיונות כושלים רבים.';
 $_lang['login_button'] = 'כניסה';
 $_lang['login_cannot_locate_account'] = 'שם המשתמש או הסיסמה שגויים. וודא שם המשתמש, הזן את הסיסמא שנית ונסה שוב. ';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'חשבון דואר אלקטרוני:';
 $_lang['login_err_unknown'] = 'שגיאה לא ידועה אירעה בעת ניסיון להתחבר.';
 $_lang['login_forget_your_login'] = 'שכחת את פרטי ההתחברות שלך?';

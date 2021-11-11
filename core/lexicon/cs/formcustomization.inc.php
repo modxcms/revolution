@@ -35,7 +35,7 @@ $_lang['filter_by_rule_type'] = 'Filtrovat dle pravidla...';
 $_lang['filter_by_search'] = 'Hledat...';
 $_lang['for_parent'] = 'Pro rodiče';
 $_lang['for_parent_desc'] = 'Toto políčko zaškrtněte pokud si přejete, aby bylo pravidlo aplikováno také na rodiče. Používejte pouze s dokumenty nebo objekty s políčkem `Rodič`. Vhodné pro stránku "Nový dokument."';
-$_lang['form_customization_msg'] = 'Na tomto místě najdete seznam aktuálně aplikovaných pravidel. Více informací o přizpůsobování formulářů najdete <a href="http://rtfm.modx.com/display/revolution20/Customizing+the+Manager" target="_blank">zde</a>. Berte na vědomí, že nesprávná pravidla mohou způsobit problémy v běhu MODX. Neaktivní pravidla jsou zobrazena šedě.';
+$_lang['form_customization_msg'] = 'Zde je seznam aktuálně aplikovaných pravidel. Více informací o pravidlech a přizpůsobení formulářů naleznete <a href="https://docs.modx.com/current/en/building-sites/client-proofing/form-customization" target="_blank">zde</a>. Vezměte prosím na vědomí, že nesprávná pravidla mohou způsobit problémy s instalací MODX Revolution. Neaktivní pravidla jsou šedá.';
 $_lang['form_rules'] = 'Pravidla formulářů';
 $_lang['import'] = 'Importovat';
 $_lang['import_from_xml'] = 'Importovat novou sadu z XML';

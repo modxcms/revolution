@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Αρχείο καταγραφής αλλαγών';
 $_lang['changelog_desc'] = 'Συμβουλευτείτε το αρχείο καταγραφής αλλαγών γι\' αυτήν την έκδοση.';
 $_lang['continue'] = 'Συνέχεια';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
-$_lang['curl_not_installed'] = 'Για να χρησιμοποιήσετε τη διαχείριση πακέτων, πρέπει να έχετε εγκαταστήσει την cURL και να την έχετε ρυθμίσει ως επέκταση της PHP. Για περισσότερες πληροφορίες σχετικά με την cURL, συμβουλευτείτε την <a href="http://php.net/curl" target="_blank">ιστοσελίδα PHP cURL</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Περιγραφή';
 $_lang['details'] = 'Λεπτομέρειες';
 $_lang['dir_err_assets'] = 'Your assets/ directory was not able to be created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';

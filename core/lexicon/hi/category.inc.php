@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['categories'] = 'Categories';
+$_lang['categories'] = 'श्रेणियां';
 $_lang['category_confirm_delete'] = 'क्या आप वाकई इस Category को दूर करना चाहते हैं? इस Category में सभी तत्वों को uncategorized दायर किया जाएगा।';
 $_lang['category_create'] = 'Category बनाएँ';
 $_lang['category_err_ae'] = 'एक Category उस नाम के साथ पहले से ही मौजूद है। कृपया एक भिन्न नाम का प्रयास करें।';
@@ -19,7 +19,7 @@ $_lang['category_err_ns_name'] = 'कृपया कोई मान्य Cate
 $_lang['category_err_remove'] = 'Category बनाने का प्रयास करते समय कोई त्रुटि उत्पन्न हुई।';
 $_lang['category_err_save'] = 'Category को सहेजने के लिए का प्रयास करते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['category_existing'] = 'मौजूदा Category';
-$_lang['category_heading'] = 'Category';
+$_lang['category_heading'] = 'श्रेणी';
 $_lang['category_msg'] = 'यहाँ आप देख सकते हैं और Category के आधार पर वर्गीकृत किया है सभी resources को संपादित कर सकते हैं।';
 $_lang['category_no_chunks'] = 'इस Category के लिए कोई chunk नहीं।';
 $_lang['category_no_plugins'] = 'इस Category के लिए कोई plugins नहीं.';

@@ -20,7 +20,7 @@ $_lang['changelog'] = 'チェンジログ';
 $_lang['changelog_desc'] = 'このバージョンのチェンジログを確認してください。';
 $_lang['continue'] = '続ける';
 $_lang['core_err_invalid'] = 'ビルドの実行には、アクティブなワークスペースを持った有効なコアがインストールされている必要があります。';
-$_lang['curl_not_installed'] = 'パッケージ管理には、cURL及びそのPHPエクステンションが必要です。より詳しい情報は、<a href="http://php.net/curl" target="_blank">PHP cURL website</a>から入手できます。';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = '説明';
 $_lang['details'] = '詳細';
 $_lang['dir_err_assets'] = 'assets/ ディレクトリは [[+path]] で作成できませんでした。<br />パッケージマネージャーまたはサードパーティー製のコンポーネントを使用する場合は、このディレクトリを作成し、書き込み可能にする必要があります。';

@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Afficher l\'aide sous les champs';
 $_lang['setting_inline_help_desc'] = '"Oui" affiche le texte d\'aide directement sous le champ. "Non" affiche le texte d\'aide dans un "tooltip".';
 
 $_lang['setting_link_tag_scheme'] = 'Schéma de génération d\'URL';
-$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération des URLs pour le tag [[~id]]. Les options disponibles sont décrites dans la documentation de la méthode <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()">makeURL()</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Localisation';
-$_lang['setting_locale_desc'] = 'Définie la localisation du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="http://php.net/setlocale" target="_blank">la documentation PHP de setlocale()</a> pour plus d\'information.';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Durée de vie du verrouillage';
 $_lang['setting_lock_ttl_desc'] = 'Nombre de secondes durant laquelle une ressource restera verrouillée lorsque l\'utilisateur l\'éditant est inactif.';
@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Personnaliser le nom de fichier du 
 
 $_lang['setting_error_log_filepath'] = 'Chemin d’accès du journal des erreurs';
 $_lang['setting_error_log_filepath_desc'] = 'Éventuellement défini un chemin d’accès absolu pour l’emplacement du journal un message d’erreur personnalisé. Vous pouvez utiliser des placeholders comme {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';

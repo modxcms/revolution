@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Változások naplója';
 $_lang['changelog_desc'] = 'Kérjük, nézze át a változások leírását ehhez a változathoz.';
 $_lang['continue'] = 'Tovább';
 $_lang['core_err_invalid'] = 'You must have a valid core installation with an active workspace to run the build.';
-$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Leírás';
 $_lang['details'] = 'Részletek';
 $_lang['dir_err_assets'] = 'Az assets/ mappát nem lehetett létrehozni a [[+path]] helyen.<br />Létre kell hoznia és írhatóvá kell tennie, ha használni akarja a csomagkezelést vagy a külső összetevőket.';

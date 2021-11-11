@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Historial de Cambios';
 $_lang['changelog_desc'] = 'Por favor, revisa el historial de cambios para esta versión.';
 $_lang['continue'] = 'Continuar';
 $_lang['core_err_invalid'] = 'Debes tener una instalación válida del núcleo con un espacio de trabajo activo para la construcción del paquete.';
-$_lang['curl_not_installed'] = 'cURL debe estar instalado y configurado como una extensión de PHP para utilizarlo en el Administrador de Paquetes. Puedes encontrar más información de cURL en la <a href="http://php.net/curl" target="_blank">página de cURL para PHP</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Descripción';
 $_lang['details'] = 'Detalles';
 $_lang['dir_err_assets'] = 'El directorio "assets/" no pudo ser creado en: [[+path]] <br />Se necesitará crear este directorio manualmente y otorgar derechos de escritura sobre el mismo si se quiere utilizar el Administrador de Paquetes o Componentes de Terceros.';

@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Muutused';
 $_lang['changelog_desc'] = 'Palun vaadake selle versiooni muutuseid.';
 $_lang['continue'] = 'Continue';
 $_lang['core_err_invalid'] = 'Teil peab olea kehtiv core installatsioon koos aktiivse töölauaga, et jookustada build-i.';
-$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Kirjeldus';
 $_lang['details'] = 'Detailid';
 $_lang['dir_err_assets'] = 'Teie assets/ kataloogi ei olnud võimalk luua: [[+path]] sihtkohta<br />Peate looma selle kataloogi ja tegema selle kirjutatavaks, kui soovite kasutada Pakkide Haldust või kolmanda osapoole Komponente.';

@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
-$_lang['setting_link_tag_scheme_desc'] = 'URL létrehozásának mintája a [[~id]] címkéhez. Választható értékek <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">itt</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Locale';
-$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="http://php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
 $_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
@@ -874,3 +874,6 @@ $_lang['setting_error_log_filename_desc'] = 'Állítsa be a MODX hibanapló áll
 
 $_lang['setting_error_log_filepath'] = 'Hibanapló állomány útvonala';
 $_lang['setting_error_log_filepath_desc'] = 'Megadhatja a saját hibanapló helyének teljes elérési útját. Használhat helyettesítőket, mint {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';

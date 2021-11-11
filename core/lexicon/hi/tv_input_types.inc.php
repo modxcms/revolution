@@ -6,21 +6,21 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['autotag'] = 'Auto-Tag';
-$_lang['text'] = 'Text';
-$_lang['textarea'] = 'Textarea';
-$_lang['textareamini'] = 'Textarea (Mini)';
-$_lang['richtext'] = 'RichText';
-$_lang['dropdown'] = 'DropDown List Menu';
-$_lang['listbox'] = 'Listbox (Single-Select)';
-$_lang['listbox-multiple'] = 'Listbox (Multi-Select)';
-$_lang['list-multiple-legacy'] = 'Legacy multiple list';
-$_lang['option'] = 'Radio Options';
-$_lang['checkbox'] = 'Check Box';
-$_lang['image'] = 'Image';
-$_lang['file'] = 'File';
-$_lang['url'] = 'URL';
+$_lang['autotag'] = 'ऑटो टैग';
+$_lang['text'] = 'मुलपाठ';
+$_lang['textarea'] = 'पाठक्षेत्र';
+$_lang['textareamini'] = 'छोटा पाठक्षेत्र';
+$_lang['richtext'] = 'रिच पाठ';
+$_lang['dropdown'] = 'ड्रॉपडाउन सूची मेनू';
+$_lang['listbox'] = 'सूची बॉक्स ( एकल चयन)';
+$_lang['listbox-multiple'] = 'सूची बॉक्स (बहु का चयन)';
+$_lang['list-multiple-legacy'] = 'लेगेसी एकाधिक सूची';
+$_lang['option'] = 'रेडियो विकल्प';
+$_lang['checkbox'] = 'चेक बॉक्स';
+$_lang['image'] = 'छवि';
+$_lang['file'] = 'फाइल';
+$_lang['url'] = 'यूआरएल';
 $_lang['email'] = 'ईमेल';
-$_lang['number'] = 'Number';
+$_lang['number'] = 'संख्या';
 $_lang['date'] = 'दिनांक';
 $_lang['tag'] = 'Tag:';

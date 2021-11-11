@@ -8,15 +8,15 @@
  */
 $_lang['area'] = 'क्षेत्र';
 $_lang['areas'] = 'क्षेत्रों';
-$_lang['class_name'] = 'Class Name';
+$_lang['class_name'] = 'कक्षा का नाम';
 $_lang['default'] = 'डिफ़ॉल्ट';
-$_lang['duplicate_of'] = 'Duplicate of [[+name]]';
+$_lang['duplicate_of'] = '[[+name]] का डुप्लीकेट';
 $_lang['element_properties_desc'] = 'यहाँ आप उस Element, या संपादित करें विशिष्ट गुण सेट करने के लिए डिफ़ॉल्ट गुण संपादित कर सकते हैं। <b>Note</b>: जब आप डिफ़ॉल्ट सेट को संपादित करें, आप गुणों के लिए डिफ़ॉल्ट गुण की बचत होगी। संपादन के एक विशिष्ट गुण सेट उन गुण सेटिंग सहेजें करेंगे संपत्ति सेट। करने के लिए <br /><br /> जब आप किसी गुण संपादित करने के लिए सेट करें चयनित है, डिफ़ॉल्ट गुण रंग <span style="color: gray;"> gray</span> में ग्रिड में दिखाएँ करेगा। ग्रे में गुण में गुण सेट नहीं हैं, लेकिन वहाँ आसान संपादन के लिए दिखाने के। <span style="color: green"> green color</span> में गुण गुण है कि डिफ़ॉल्ट रूप से ओवरराइड किया गया किया गया है रहे हैं। <span style="color: purple"> purple</span> में गुण हैं कि डिफ़ॉल्ट गुण. में नहीं कर रहे हैं नए गुण में कस्टम सेट <br /><br /><b>नोट:</b> यह सबसे अच्छा है अगर उन स्निपेट्स में उन्नत कर रहे हैं के रूप में स्निपेट्स स्थापित पैकेज प्रबंधन के माध्यम से, के लिए डिफ़ॉल्ट गुण नहीं संपादित करने के लिए, डिफ़ॉल्ट गुण अधिलेखित हो जाएगा। एक गुण सेट करें इसके बजाय का उपयोग करें।';
-$_lang['file'] = 'File';
-$_lang['color'] = 'Color';
+$_lang['file'] = 'फाइल';
+$_lang['color'] = 'रंग';
 $_lang['import'] = 'आयात';
 $_lang['new_name'] = 'नया Name';
-$_lang['object'] = 'Object';
+$_lang['object'] = 'वस्तु';
 $_lang['properties'] = 'गुण';
 $_lang['properties_default_locked'] = 'डिफ़ॉल्ट Properties लॉक्ड';
 $_lang['properties_default_locked_msg'] = 'केवल "unlock_element_properties" की अनुमति के साथ कोई user डिफ़ॉल्ट Properties अनलॉक कर सकते हैं।';
@@ -27,7 +27,7 @@ $_lang['properties_import_err_upload'] = 'कृपया एक मान्य
 $_lang['properties_import_msg'] = 'कृपया एक मान्य Properties फ़ाइल का चयन करें।';
 $_lang['properties_remove'] = 'Properties को हटा दें';
 $_lang['properties_remove_confirm'] = 'आप सुनिश्चित करें कि आप इन Properties को हटाना चाहते हैं?';
-$_lang['property'] = 'Property';
+$_lang['property'] = 'संपत्ति';
 $_lang['property_area_desc'] = 'क्षेत्र, या समूह, इस Properties के लिए संबंधित है।';
 $_lang['property_create'] = 'Properties बनाएँ';
 $_lang['property_description_desc'] = 'Properties का एक छोटा वर्णन। यह एक lexicon key गुण lexicon का हो सकता है।';
@@ -74,4 +74,4 @@ $_lang['propertyset_save'] = 'Property सेट सहेजें';
 $_lang['propertyset_update'] = 'अद्यतन Property सेट';
 $_lang['propertysets'] = 'Property सेट';
 $_lang['propertysets_desc'] = 'यहाँ आप अपनी Property सेट प्रबंधित कर सकते हैं। tree कि सेट Property ग्रिड में, जहाँ आप उन्हें संशोधित कर सकते हैं विशेष रूप से लोड करने के लिए में सेट करें क्लिक करें। तुम भी देते हैं या उनके लिए element unattach के tree में Property सेट पर राइट-क्लिक कर सकते हैं।';
-$_lang['propertysets_err_item_class_ns'] = 'Item class has not been specified';
+$_lang['propertysets_err_item_class_ns'] = 'आईटम वर्ग निर्दिष्ट नहीं किया गया है ';

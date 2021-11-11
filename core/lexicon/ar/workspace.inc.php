@@ -20,7 +20,7 @@ $_lang['changelog'] = 'سجل التغيير';
 $_lang['changelog_desc'] = 'الرجاء مراجعة سجل التغيير لهذا الإصدار.';
 $_lang['continue'] = 'استمرار';
 $_lang['core_err_invalid'] = 'يجب ان تملك تثبيت صالح للنواة مع مساحة عمل نشطة لتشغيل الاصدار.';
-$_lang['curl_not_installed'] = 'يجب أن يتم تثبيت وتهيئة cURL كإضافة للـ PHP لتستخدم إدارة الحزمة. يمكنك إيجاد معلومات أكثر حول cURL في<a href="http://php.net/curl" target="_blank">موقع PHP cRRL</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'التوصيف';
 $_lang['details'] = 'التفاصيل';
 $_lang['dir_err_assets'] = 'لم يستطع الدليل assets/ أن ينشئ في: [[+path]]<br />سوف تحتاج إنشاء هذا الدليل وجعله قابلاً للكتابة اذا كنت تريد استخدام مدير الحزمة أو مكونات الطرف الثالث.';

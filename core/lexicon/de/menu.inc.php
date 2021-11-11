@@ -12,7 +12,7 @@ $_lang['description_desc'] = 'Der Text oder Lexikon-Schlüssel, der für die Dar
 $_lang['handler'] = 'Handler';
 $_lang['handler_desc'] = '(Optional) Wenn hier etwas eingetragen ist, wird nicht das Aktions-Feld genutzt, sondern stattdessen dieser JavaScript-Code ausgeführt, wenn der Menüpunkt angeklickt wird.';
 $_lang['icon'] = 'Icon';
-$_lang['icon_desc'] = 'Ein optionales Icon / optionaler Code.';
+$_lang['icon_desc'] = 'Ein optionales Icon/optionaler Code.';
 $_lang['lexicon_key'] = 'Lexikon-Schlüssel';
 $_lang['lexicon_key_desc'] = 'Der Text oder Lexikon-Schlüssel, der für die Darstellung des Titels dieser Seite im Menü verwendet wird.';
 $_lang['menu_create'] = 'Menüpunkt erstellen';
@@ -34,6 +34,6 @@ $_lang['namespace_desc'] = 'Der Namensraum, auf dem dieser Menüpunkt basiert. H
 $_lang['parameters'] = 'Parameter';
 $_lang['parameters_desc'] = 'Beliebige Request-Parameter, die an die Ergebnis-URL angehängt werden sollen, wenn dieser Menüpunkt angeklickt wird (z.B.: &expire=1).';
 $_lang['permissions'] = 'Zugriffsberechtigung';
-$_lang['permissions_desc'] = 'Ein Zugangsschlüssel, der abgefragt werden soll, wenn dieser Menüpunkt aufgerufen wird.';
+$_lang['permissions_desc'] = 'Eine Zugriffsberechtigung, die zum Laden dieses Menüpunkts erforderlich ist.';
 $_lang['topmenu'] = 'Hauptmenü';
 $_lang['topmenu_desc'] = 'Dies erlaubt Ihnen, Aktionen mit Elementen des Hauptmenüs des MODX-Managers zu verknüpfen. Platzieren Sie die Menüpunkte einfach dort, wo Sie sie gern hätten.';

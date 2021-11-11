@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Alanlar için Satır İçi Yardım Metnini Gör
 $_lang['setting_inline_help_desc'] = 'Eğer \'Evet\'se, alanlar yardım metnini doğrudan alanın altında görüntüler. \'Hayır\' ise, tüm alanlarda araç ipucu tabanlı yardım alacaksınız.';
 
 $_lang['setting_link_tag_scheme'] = 'URL Oluşturma Şeması';
-$_lang['setting_link_tag_scheme_desc'] = 'Etiket için [[~ id]] URL oluşturma şeması. Mevcut seçenekler<a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">işte</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Yerel';
-$_lang['setting_locale_desc'] = 'Sistem için yerel ayar ayarla. Varsayılan olarak kullanmak için boş bırakın. Daha fazla bilgi için <a href="http://php.net/setlocale" target="_blank">PHP belgelerine</a> bakın.';
+$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
 
 $_lang['setting_lock_ttl'] = 'Yaşam için kilit süresi';
 $_lang['setting_lock_ttl_desc'] = 'Kullanıcı etkin olmadığında, bir Kaynaktaki bir kilitin kalacağı saniye sayısı.';
@@ -876,3 +876,6 @@ $_lang['setting_error_log_filename_desc'] = 'Customize the filename of the MODX 
 
 $_lang['setting_error_log_filepath'] = 'Error log path';
 $_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placehodlers like {cache_path}.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';

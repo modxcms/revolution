@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Changelog';
 $_lang['changelog_desc'] = 'Harap periksa changelog untuk versi ini.';
 $_lang['continue'] = 'Lanjut';
 $_lang['core_err_invalid'] = 'Anda harus memiliki package core yang sesuai dengan workspace yang aktif untuk menjalankan build package.';
-$_lang['curl_not_installed'] = 'cURL harus tersedia pada konfigurasi PHP untuk menggunakan Managemen Package. Untuk informasi lebih lanjut tentang cURL silahkan kunjungi <a href="http://php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
 $_lang['description'] = 'Deskripsi';
 $_lang['details'] = 'Detail';
 $_lang['dir_err_assets'] = 'Aset / direktori Anda tidak dapat dibuat di: [[+path]] <br /> Anda perlu membuat direktori ini dan membuatnya dapat ditulis jika Anda ingin menggunakan Package Management atau 3rd-Party Components.';

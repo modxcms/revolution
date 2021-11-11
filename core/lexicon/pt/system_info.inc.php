@@ -44,7 +44,7 @@ $_lang['phpmailer_version'] = 'Versão do <a href="https://github.com/PHPMailer/
 $_lang['server'] = 'Servidor';
 $_lang['servertime'] = 'Tempo do Servidor';
 $_lang['serveroffset'] = 'Diferença do Servidor';
-$_lang['smarty_version'] = 'Versão do <a href="http://smarty.net/" target="_blank">Smarty</a>';
+$_lang['smarty_version'] = '<a href="https://www.smarty.net/" target="_blank">Smarty</a> Version';
 $_lang['sysinfo_desc'] = 'Aqui você pode ver informações gerais sobre o seu ambiente MODx.';
 $_lang['view_sysinfo'] = 'Informação do Sistema';
 $_lang['table_prefix'] = 'Prefixo da tabela';

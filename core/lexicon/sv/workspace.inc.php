@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Ändringslogg';
 $_lang['changelog_desc'] = 'Läs igenom ändringsloggen för denna version.';
 $_lang['continue'] = 'Fortsätt';
 $_lang['core_err_invalid'] = 'Du måste ha en giltig kärninstallation med en aktiv arbetsyta för att kunna köra builden.';
-$_lang['curl_not_installed'] = 'cURL måste vara installerad och konfigurerad som ett tillägg för PHP om du ska kunna använda pakethanteringen. Du hittar mer information om cURL på <a href="http://php.net/curl" target="_blank">PHP cURL:s webbplats</a>.';
+$_lang['curl_not_installed'] = 'cURL måste vara installerad och konfigurerad som ett tillägg för PHP om du ska kunna använda pakethanteringen. Du hittar mer information om cURL på <a href="https://php.net/curl" target="_blank">PHP cURL:s webbplats</a>.';
 $_lang['description'] = 'Beskrivning';
 $_lang['details'] = 'Detaljer';
 $_lang['dir_err_assets'] = 'Din assets-katalog kunde inte skapas vid: [[+path]] <br />Du behöver skapa den här katalogen själv och göra den skrivbar om du vill använda pakethanteringen eller tredjepartskomponenter.';

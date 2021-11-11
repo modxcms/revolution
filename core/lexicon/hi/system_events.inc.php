@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['clear'] = 'Clear';
+$_lang['clear'] = 'स्पष्ट';
 $_lang['error_log'] = 'त्रुटि लॉग';
 $_lang['error_log_desc'] = 'यहाँ MODX Revolution के लिए त्रुटि लॉग है:';
 $_lang['error_log_download'] = 'डाउनलोड त्रुटि लॉग ([[+size]])';
