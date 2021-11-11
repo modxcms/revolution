@@ -157,8 +157,24 @@ class modFileHandler {
 
         if (filesize($file) > 0 && class_exists('\finfo')) {
             $finfo = new \finfo(FILEINFO_MIME);
+            $mimeType = strtolower($finfo->file($file));
 
-            return substr($finfo->file($file), 0, 4) !== 'text';
+            // Some mimetypes include a character set, e.g. application/json; charset=utf-8
+            // so we filter out the last part to make comparison easier
+            if (strpos($mimeType, ';') > 0) {
+                $mimeType = substr($mimeType, 0, strpos($mimeType, ';'));
+            }
+
+            return substr($mimeType, 0, 4) !== 'text'
+                && !in_array($mimeType, array(
+                    'application/json',
+                    'application/ld+json',
+                    'application/x-httpd-php', // also restricted by default based on extension
+                    'application/x-sh',
+                    'image/svg+xml',
+                    'application/xhtml+xml',
+                    'application/xml',
+                ), true);
         }
 
         $fh = @fopen($file, 'r');
