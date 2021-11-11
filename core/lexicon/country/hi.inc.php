@@ -9,13 +9,13 @@
 *
 */
 
-$_country_lang["ad"] = 'अंडोरा'; // Andorra
-$_country_lang["ae"] = 'संयुक्त अरब अमीरात'; // United Arab Emirates
-$_country_lang["af"] = 'अफ़गानिस्तान'; // Afghanistan
-$_country_lang["ag"] = 'एंटिगुआ और बरबुडा'; // Antigua and Barbuda
-$_country_lang["ai"] = 'एंगुइला'; // Anguilla
-$_country_lang["al"] = 'अल्बानिया'; // Albania
-$_country_lang["am"] = 'आर्मीनिया'; // Armenia
+$_country_lang["ad"] = 'ऐंडोरा'; // Andorra
+$_country_lang["ae"] = 'United arab Emirates'; // United Arab Emirates
+$_country_lang["af"] = 'अफ़ग़ानिस्तान'; // Afghanistan
+$_country_lang["ag"] = 'एंटिगुआ और बरबुडा '; // Antigua and Barbuda
+$_country_lang["ai"] = 'एंगुइला '; // Anguilla
+$_country_lang["al"] = 'अल्बानिया '; // Albania
+$_country_lang["am"] = 'आर्मीनिया '; // Armenia
 $_country_lang["ao"] = 'अंगोला'; // Angola
 $_country_lang["aq"] = 'अंटार्कटिका'; // Antarctica
 $_country_lang["ar"] = 'अर्जेंटीना'; // Argentina
