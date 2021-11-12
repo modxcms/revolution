@@ -417,10 +417,10 @@ $_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
 $_lang['setting_login_background_image'] = 'Login Background Image';
 $_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
 
-$_lang['setting_login_logo'] = 'Login Logo';
+$_lang['setting_login_logo'] = 'लॉगिन लोगो';
 $_lang['setting_login_logo_desc'] = 'The logo to show in the top left of the manager login. When left empty, it will show the MODX logo.';
 
-$_lang['setting_login_help_button'] = 'Show Help Button';
+$_lang['setting_login_help_button'] = 'सहायता बटन दिखाएँ';
 $_lang['setting_login_help_button_desc'] = 'When enabled you will find a help button on the login screen. It\'s possible to customize the information shown with the following lexicon entries in core/login: login_help_button_text, login_help_title, and login_help_text.';
 
 $_lang['setting_manager_login_start'] = 'Manager लॉगिन स्टार्टअप';
@@ -429,7 +429,7 @@ $_lang['setting_manager_login_start_desc'] = 'के बाद he/she manager �
 $_lang['setting_manager_theme'] = 'Manager थीम';
 $_lang['setting_manager_theme_desc'] = 'Content Manager के लिए Theme का चयन करें।';
 
-$_lang['setting_manager_logo'] = 'Manager Logo';
+$_lang['setting_manager_logo'] = 'मैनेजर लोगो';
 $_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
 $_lang['setting_manager_time_format'] = 'Manager समय स्वरूप';
@@ -574,10 +574,10 @@ $_lang['setting_publish_default'] = 'प्रकाशित डिफ़ॉल
 $_lang['setting_publish_default_desc'] = 'डिफ़ॉल्ट रूप से प्रकाशित सभी नए Resource बनाने के लिए \' हाँ\' का चयन करें।';
 $_lang['setting_publish_default_err'] = 'कृपया state चाहे या नहीं आप document डिफ़ॉल्ट रूप से प्रकाशित किया जा करने के लिए चाहते हैं।';
 
-$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content'] = 'सामग्री में खोज की अनुमति दें';
 $_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
 
-$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max'] = 'खोज परिणाम में मदों की संख्या';
 $_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
 
 $_lang['setting_request_controller'] = 'नियंत्रक फ़ाइलनाम का अनुरोध करें';
