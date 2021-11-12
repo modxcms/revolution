@@ -10,20 +10,20 @@ $_lang['attributes'] = 'विशेषताएँ';
 $_lang['attr_attr_desc'] = 'One or more space-separated attributes to add to this element’s tag (for example, <span class="example-input">rel="external" type="application/pdf"</span>).';
 $_lang['attr_class_desc'] = 'One or more space-separated CSS class names.';
 $_lang['attr_style_desc'] = 'CSS definitions (for example, <span class="example-input">color:#f36f99; text-decoration:none;</span>).';
-$_lang['attr_target_blank'] = 'Blank';
-$_lang['attr_target_parent'] = 'Parent';
-$_lang['attr_target_self'] = 'Self';
-$_lang['attr_target_top'] = 'Top';
+$_lang['attr_target_blank'] = 'रिक्त';
+$_lang['attr_target_parent'] = 'माता-पिता';
+$_lang['attr_target_self'] = 'स्वयं';
+$_lang['attr_target_top'] = 'सबसे ऊपर';
 $_lang['attr_target_desc'] = 'Indicates in which window/tab or frame the linked url should open. To target a specific frame, enter its name in place of one of the provided options.';
 $_lang['capitalize'] = 'कैपिटल में लिखें';
 $_lang['checkbox'] = 'चेक बॉक्स';
 $_lang['checkbox_columns'] = 'स्तंभ';
 $_lang['checkbox_columns_desc'] = 'चेक बॉक्स में प्रदर्शित कर रहे हैं स्तंभों की संख्या।';
 $_lang['class'] = 'कक्षा';
-$_lang['classes'] = 'Class(es)';
+$_lang['classes'] = 'क्लास(es)';
 $_lang['combo_allowaddnewdata'] = 'नए आइटम जोड़ने की अनुमति दें';
 $_lang['combo_allowaddnewdata_desc'] = 'हाँ, की अनुमति देता है जब आइटम सूची में पहले से मौजूद नहीं है कि जोड़ा जाएगा। डिफ़ॉल्ट पर सं.';
-$_lang['combo_forceselection'] = 'Require Match';
+$_lang['combo_forceselection'] = 'मैच की आवश्यकता है';
 $_lang['combo_forceselection_desc'] = 'Only save typed option when it matches one already defined in the list.';
 $_lang['combo_forceselection_multi_desc'] = 'यदि यह हा तो पर सेट है, तो केवल सूची मे पहले से ही आइटम की अनुमति हैं । यदि नही तो नए मूल्यों को एक कुएं में दर्ज  किया जा सकता हैं';
 $_lang['combo_listempty_text'] = 'Option Not Found Message';
@@ -40,7 +40,7 @@ $_lang['combo_title'] = 'सूची के शीर्ष लेख';
 $_lang['combo_title_desc'] = 'यदि आपूर्ति की है, तो एक शीर्षक तत्व इस पाठ से युक्त बनाया है और ड्रॉपडाउन सूची के शीर्ष में जोड़ा जाता है।';
 $_lang['combo_typeahead'] = 'Type-Ahead सक्षम करें';
 $_lang['combo_typeahead_desc'] = 'Populate and autoselect options that match as you type after a configurable delay. (Default: No)';
-$_lang['combo_typeahead_delay'] = 'Delay';
+$_lang['combo_typeahead_delay'] = 'देरी';
 $_lang['combo_typeahead_delay_desc'] = 'Milliseconds before a matched option is shown. (Default: 250)';
 $_lang['date'] = 'दिनांक';
 $_lang['date_format'] = 'दिनांक स्वरूप';
@@ -60,10 +60,10 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
 $_lang['date_use_current'] = 'Use Current Date as Fallback';
 $_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
 $_lang['default'] = 'डिफ़ॉल्ट';
-$_lang['default_date_now'] = 'Today with Current Time';
-$_lang['default_date_today'] = 'Today (midnight)';
-$_lang['default_date_yesterday'] = 'Yesterday (midnight)';
-$_lang['default_date_tomorrow'] = 'Tomorrow (midnight)';
+$_lang['default_date_now'] = 'आज बर्तमान समय के साथ';
+$_lang['default_date_today'] = 'आज (आधी रात)';
+$_lang['default_date_yesterday'] = 'बीता हुआ कल (आधी रात)';
+$_lang['default_date_tomorrow'] = 'आने बाला कल (आधी रात)';
 $_lang['default_date_custom'] = 'Custom (see description below)';
 $_lang['delim'] = 'सीमांकक';
 $_lang['delimiter'] = 'सीमांकक';
@@ -188,15 +188,15 @@ $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
 $_lang['tv_default_date'] = 'Default Date and Time';
-$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
-    <div class="example-list">
-        <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
-            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
-            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
-        </ul>
-        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
-    </div>';
+$_lang['tv_default_date_desc'] = 'यह दिखाने की तिथि कि क्या उपयोगकर्ता एक प्रदान नहीं करता है। ऊपर दी गई सूची में से एक सापेक्ष तिथि चुनें या निम्न में से किसी एक पैटर्न का उपयोग करके एक अलग तिथि दर्ज करें:
+<div class="example-list">
+  <उल>
+  <li><span class="example-input">[[+example_1]]</span> (संख्या घंटे पहले दर्शाती है)</li>
+  <li><span class="example-input">[[+example_2]]</span> (संख्या भविष्य के घंटों को दर्शाती है)</li>
+  <li><span class="example-input">[[+example_3]]</span> (दिखाए गए प्रारूप का उपयोग करके एक विशिष्ट तिथि [और यदि वांछित हो तो समय])</li>
+ </ul>
+नोट: ऊपर दिखाए गए "+" और "-" का उपयोग प्रति-सहज है, लेकिन सही ("+" समय में पिछड़े का प्रतिनिधित्व करता है)।
+  </div>';
 $_lang['tv_default_email'] = 'Default Email Address';
 $_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
 $_lang['tv_default_file'] = 'Default File';
