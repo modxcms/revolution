@@ -75,7 +75,7 @@ $_lang['confirm'] = 'Vahvista';
 $_lang['confirm_delete_message'] = 'Oletko varma, että haluat poistaa tämän viestin?';
 $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
-$_lang['confirm_undelete'] = 'Kaikki aladokumentit, jotka on poistettu samaan aikaan kuin tämä dokumentti, palautetaan myös. 
+$_lang['confirm_undelete'] = 'Kaikki aladokumentit, jotka on poistettu samaan aikaan kuin tämä dokumentti, palautetaan myös.
 Ddokumentit jotka on poistettu aikaisemmin pysyvät poistettuina.';
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = 'Konsoli';
@@ -415,7 +415,7 @@ $_lang['resource_groups'] = 'Resource Groups';
 $_lang['resource_management'] = 'Hallitse resursseja';
 $_lang['resource_name'] = 'Resurssin nimi';
 $_lang['resource_name_new'] = 'Uuden resurssin nimi';
-$_lang['resource_preview'] = 'Esikatsele';
+$_lang['resource_view'] = 'Esikatsele';
 $_lang['resource_overview'] = 'Yleiskatsaus';
 $_lang['resource_settings'] = 'Resurssin asetuksia';
 $_lang['resource_type'] = 'Resurssin tyyppi';
