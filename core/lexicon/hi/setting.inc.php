@@ -137,7 +137,7 @@ $_lang['setting_cache_alias_map'] = 'Context Alias Map कैश सक्षम
 $_lang['setting_cache_alias_map_desc'] = 'सक्षम होने पर, सभी Resource URIs हैं कैश्ड के संदर्भ में। पर छोटे साइटों को सक्षम और बेहतर प्रदर्शन के लिए बड़ा साइटों पर अक्षम करें।';
 
 $_lang['setting_use_context_resource_table'] = 'सन्दर्भ कैश रिफ्रेश के लिए संदर्भ संसाधन तालिका का उपयोग करे';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table_desc'] = 'सक्छम होने पर, संदर्भ कैश रिफ्रेस, प्रसंग संसाधन तालिका का उपयोग करते हैं! यह आपको प्रोग्रामेटिक रूप से एकाधिक संदर्भों में एक संसाधन रखने में सक्षम बनाता है! यदि आप API के माध्यम से उन एकाधिक संसाधन संदर्भों का उपयोग नहीं करते हैं, तोह आप इसे गलत पर सेट कर सकते हैं! तब बड़ी साइटों पर आपको प्रबंधक में संभावित प्रदर्शन को बढ़ावा मिलेगा';
 
 $_lang['setting_cache_context_settings'] = 'Context सेटिंग कैश सक्षम करें';
 $_lang['setting_cache_context_settings_desc'] = 'जब सक्षम, Context सेटिंग्स लोड समय को कम करने के लिए कैश्ड जाएगा।';
