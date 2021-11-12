@@ -160,5 +160,5 @@ $_lang['user_group_source_policy_desc'] = 'इस context के लिए य�
 $_lang['user_group_source_remove_confirm'] = 'Are you sure you want to delete this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'मीडिया स्रोत तक पहुंच प्रदान करने के लिए।';
 $_lang['user_group_user_access_msg'] = 'इस User Group में जो users को आप चाहते हैं का चयन करें।';
-$_lang['user_group_namespace_access'] = 'Namespaces';
+$_lang['user_group_namespace_access'] = 'नेमस्पेस';
 $_lang['user_group_namespace_access_desc'] = 'Set the Namespaces this User Group can access.';
