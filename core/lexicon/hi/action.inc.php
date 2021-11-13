@@ -8,7 +8,7 @@
  */
 $_lang['action'] = 'कार्यवाही';
 $_lang['action_confirm_remove'] = 'आप सुनिश्चित करें कि आप यह Action निकालना चाहते हैं? यह संभवतः आपके MODX manager interface भी तोड़ सकता है।';
-$_lang['action_create'] = 'Actionबनाएँ';
+$_lang['action_create'] = 'एक्शन बनाएँ';
 $_lang['action_create_here'] = 'Action यहाँ बनाएँ';
 $_lang['action_desc'] = 'MODX controllers के abstractions कार्रवाई कर रहे हैं। वे custom manager pages बनाने, साथ ही MODX प्रबंधक के top menu को पुनर्संगठित करने के लिए इस्तेमाल किया जा सकता।';
 $_lang['action_err_create'] = 'Action बनाते समय त्रुटि उत्पन्न हुई।';
