@@ -25,7 +25,7 @@ $_lang['usergroup'] = 'उपयोगकर्ता समूह';
 $_lang['filter_by_type'] = 'प्रकार के साथ फ़िल्टर करें';
 
 $_lang['message'] = 'संदेश';
-$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
+$_lang['message_remove_confirm'] = 'क्या आप बकाई इस संदेश को पूरी तरह हटाना चाहते हैं?';
 $_lang['message_send_email'] = 'ईमेल भेजें';
 $_lang['message_err_nfs'] = 'Message नहीं मिला।';
 $_lang['message_err_not_specified_subject'] = 'विषय निर्दिष्ट नहीं किया गया!';
