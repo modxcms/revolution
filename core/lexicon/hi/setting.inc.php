@@ -325,7 +325,7 @@ $_lang['setting_friendly_alias_max_length'] = 'FURL उपनाम अधिक
 $_lang['setting_friendly_alias_max_length_desc'] = 'यदि अधिक से अधिक शून्य, एक Resource alias में अनुमति देने के लिए वर्णों की अधिकतम संख्या। शून्य असीमित बराबर होती है।';
 
 $_lang['setting_friendly_alias_realtime'] = 'FURL उपनाम रियल-टाइम';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime_desc'] = 'यह निर्धारित करता है की पेजटाइटल टाइप करते समय पलाई पर एक संसाधन उपनाम बनाया जाना चाहिए या यदि संसाधन के सहेजे जाने पर ऐसा होना चाहिए (इसके प्रभाव के लिए सवाचलित_अलियास को सक्षम करने की आवश्यकता है).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'एलियास चरित्र प्रतिबंध विधि तह करना';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'एक Resource alias में प्रयुक्त वर्णों को प्रतिबंधित करने के लिए उपयोग की गई पद्धति। "पैटर्न" की अनुमति देता है बशर्ते "कानूनी" किसी भी कानूनी URL वर्णों की अनुमति देता है, होना करने के लिए एक RegEx पैटर्न "अल्फा" अनुमति देता है केवल वर्णमाला के अक्षर, और "अल्फ़ान्यूमेरिक" केवल अक्षरों और संख्याओं की अनुमति देता है।';
