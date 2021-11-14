@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan
 $_lang['setting_passwordless_expiration'] = 'Utgångstid för lösenordsfri inloggning';
 $_lang['setting_passwordless_expiration_desc'] = 'Anger i sekunder hur länge en engångs inloggningslänk gäller.';
 
-$_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['static_elements_html_extension'] = 'HTML-tillägg för statiska element';
+$_lang['static_elements_html_extension_desc'] = 'Tillägget för filer som används av statiska element med HTML-innehåll.';
