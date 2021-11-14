@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['login_language'] = 'भाषा';
-$_lang['login_activation_key_err'] = 'The activation key does not match! Please check your activation email and make sure you followed the correct URL.';
+$_lang['login_activation_key_err'] = 'सक्रियांन कुंजी मेल नहीं खाती! कृपया अपना सक्रियां इमेज जांचे और सुनिश्चित करे कि आपने सही यूआरएल का पालन किया है।';
 $_lang['login_blocked_admin'] = 'आपको एक व्यवस्थापक द्वारा प्रबंधक से अवरोधित कर दिया गया है ।';
 $_lang['login_blocked_error'] = 'आप अस्थायी रूप से अवरुद्ध हैं और log in नहीं कर सकता। कृपया बाद में पुन: प्रयास करें।';
 $_lang['login_blocked_ip'] = 'आप अपने वर्तमान IP address से लॉगइन करने के लिए अनुमति नहीं है।';
