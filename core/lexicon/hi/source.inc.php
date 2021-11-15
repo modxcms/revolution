@@ -82,19 +82,19 @@ $_lang['prop_s3.thumbnailType_desc'] = 'छवि प्रकार थंब�
 $_lang['prop_s3.url_desc'] = 'अमेज़न S3 इंस्टेंस का URL.';
 $_lang['prop_s3.endpoint_desc'] = 'Alternative S3-compatible endpoint URL, e.g., "https://s3.<region>.example.com". Review your S3-compatible provider’s documentation for the endpoint location. Leave empty for Amazon S3';
 $_lang['prop_s3.region_desc'] = 'बाल्टी का क्षेत्र | उदाहरण: हमें-पश्चिम - 1';
-$_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['prop_s3.prefix_desc'] = 'वैकल्पिक पथ/फोल्डर उपसर्ग';
 $_lang['s3_no_move_folder'] = 'फ़ोल्डर्स के इस समय में चलती S3 ड्रायवर समर्थन नहीं करता।';
 
 /* ftp source type */
-$_lang['prop_ftp.host_desc'] = 'Server hostname or IP address';
-$_lang['prop_ftp.username_desc'] = 'Username for authentication. Can be "anonymous".';
-$_lang['prop_ftp.password_desc'] = 'Password of user. Leave empty for anonymous user.';
+$_lang['prop_ftp.host_desc'] = 'सर्वर होस्टनाम या IP address';
+$_lang['prop_ftp.username_desc'] = 'प्रमाणिकरण के लिए उपयोगकर्ता नाम! "गुमनाम" हो सकता है!';
+$_lang['prop_ftp.password_desc'] = 'उपयोकर्ता का पासवर्ड. अनाम उपयोगकर्ता के लिए खाली छोड़ दें.';
 $_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
-$_lang['prop_ftp.port_desc'] = 'Port of the server, default is 21.';
+$_lang['prop_ftp.port_desc'] = 'सर्वर का पोर्ट, डिफाल्ट 21 है.';
 $_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
 $_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
 $_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
-$_lang['prop_ftp.timeout_desc'] = 'Timeout for connection in seconds.';
+$_lang['prop_ftp.timeout_desc'] = 'सेकंड में कनेक्शन के लिए समयबाह्य.';
 
 /* file type */
 $_lang['PNG'] = 'पीएनजी';
