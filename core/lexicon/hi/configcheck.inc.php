@@ -8,7 +8,7 @@
  */
 $_lang['configcheck_admin'] = 'कृपया किसी सिस्टम व्यवस्थापक से संपर्क करें और उन्हें इस संदेश के बारे में चेतावनी दें!';
 $_lang['configcheck_allowtagsinpost_context_enabled'] = 'allow_tags_in_post \'mgr\' बाहर Context सेटिंग सक्षम किया गया';
-$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'Allow_tags_in_post Context सेटिंग mgr Context के बाहर अपनी स्थापना में सक्षम है। MODX अनुशंसा करता है जब तक कि आपको स्पष्ट रूप से MODX tags, आंकिक निकायों या HTML script tags पोस्ट विधि एक के रूप में आपकी साइट के लिए के माध्यम से प्रस्तुत करने के लिए प्रयोक्ताओं की अनुमति यह सेटिंग अक्षम हो जाएगा। यह आम तौर पर छोड़कर mgr Context में निष्क्रिय किया जाना चाहिए।';
+$_lang['configcheck_allowtagsinpost_context_enabled_msg'] = 'Allow_tags_in_post Context सेटिंग mgr Context के बाहर अपनी स्थापना में सक्षम है। MODX अनुशंसा करता है जब तक कि आपको स्पष्ट रूप से MODX tags, आंकिक निकायों या HTML script tags पोस्ट विधि एक के रूप में आपकी साइट के लिए के माध्यम से प्रस्तुत करने के लिए प्रयोक्ताओं की अनुमति यह सेटिंग अक्षम हो जाएगा। यह आम तौर पर छोड़कर mgr Context में निष्क्रिय किया जाना चाहिए.';
 $_lang['configcheck_allowtagsinpost_system_enabled'] = 'allow_tags_in_post सिस्टम सेटिंग सक्षम किया गया';
 $_lang['configcheck_allowtagsinpost_system_enabled_msg'] = 'Allow_tags_in_post सिस्टम सेटिंग आपकी स्थापना में सक्षम है। MODX अनुशंसा करता है जब तक कि आपको स्पष्ट रूप से MODX tags, आंकिक निकायों या HTML script tags POST विधि एक के रूप में आपकी साइट के लिए के माध्यम से प्रस्तुत करने के लिए प्रयोक्ताओं की अनुमति यह सेटिंग अक्षम हो जाएगा। यह इस context विशिष्ट contexts के लिए सेटिंग्स के माध्यम से सक्षम करने के लिए बेहतर है।';
 $_lang['configcheck_cache'] = 'Cache directory नहीं लिखने योग्य';
