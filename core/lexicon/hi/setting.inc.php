@@ -130,7 +130,7 @@ $_lang['setting_blocked_minutes_desc'] = 'यहाँ आप एक Users व�
 $_lang['setting_cache_alias_map'] = 'Context Alias Map कैश सक्षम करें';
 $_lang['setting_cache_alias_map_desc'] = 'सक्षम होने पर, सभी Resource URIs हैं कैश्ड के संदर्भ में। पर छोटे साइटों को सक्षम और बेहतर प्रदर्शन के लिए बड़ा साइटों पर अक्षम करें।';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table';
+$_lang['setting_use_context_resource_table'] = 'सन्दर्भ संसाधन तालिका का उपयोग करें';
 $_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
 $_lang['setting_cache_context_settings'] = 'Context सेटिंग कैश सक्षम करें';
@@ -291,7 +291,7 @@ $_lang['setting_friendly_alias_max_length'] = 'FURL उपनाम अधिक
 $_lang['setting_friendly_alias_max_length_desc'] = 'यदि अधिक से अधिक शून्य, एक Resource alias में अनुमति देने के लिए वर्णों की अधिकतम संख्या। शून्य असीमित बराबर होती है।';
 
 $_lang['setting_friendly_alias_realtime'] = 'FURL उपनाम रियल-टाइम';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime_desc'] = 'यह निर्धारित करता है की पेजटाइटल टाइप करते समय पलाई पर एक संसाधन उपनाम बनाया जाना चाहिए या यदि संसाधन के सहेजे जाने पर ऐसा होना चाहिए (इसके प्रभाव के लिए सवाचलित_अलियास को सक्षम करने की आवश्यकता है).';
 
 $_lang['setting_friendly_alias_restrict_chars'] = 'एलियास चरित्र प्रतिबंध विधि तह करना';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'एक Resource alias में प्रयुक्त वर्णों को प्रतिबंधित करने के लिए उपयोग की गई पद्धति। "पैटर्न" की अनुमति देता है बशर्ते "कानूनी" किसी भी कानूनी URL वर्णों की अनुमति देता है, होना करने के लिए एक RegEx पैटर्न "अल्फा" अनुमति देता है केवल वर्णमाला के अक्षर, और "अल्फ़ान्यूमेरिक" केवल अक्षरों और संख्याओं की अनुमति देता है।';
@@ -381,7 +381,7 @@ $_lang['setting_mail_smtp_pass_desc'] = 'SMTP के खिलाफ को प�
 $_lang['setting_mail_smtp_port'] = 'SMTP पोर्ट';
 $_lang['setting_mail_smtp_port_desc'] = 'डिफ़ॉल्ट SMTP सर्वर पोर्ट सेट करता है।';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Connection Prefix';
+$_lang['setting_mail_smtp_prefix'] = 'SMTP कनेक्शन उपसर्ग';
 $_lang['setting_mail_smtp_prefix_desc'] = 'कनेक्शन उपसर्ग सेट करता है। विकल्प हैं "", "ssl" या "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'एसएमटीपी ऑटो टीएलस';
@@ -411,10 +411,10 @@ $_lang['setting_manager_favicon_url_desc'] = 'यदि सेट, इस URL �
 $_lang['setting_manager_login_url_alternate'] = 'वैकल्पिक URL लॉगिन Manager';
 $_lang['setting_manager_login_url_alternate_desc'] = 'जब वे Manager करने के लिए लॉगइन करने के लिए की जरूरत है एक जिसमें अप्रमाणिक users भेजने के लिए एक वैकल्पिक URL. प्रवेश फार्म वहाँ काम करने के लिए user "mgr" context के लिए लॉगिन करना होगा।';
 
-$_lang['setting_manager_tooltip_enable'] = 'Enable Manager Tooltips';
-$_lang['setting_manager_tooltip_delay'] = 'Delay Time for Manager Tooltips';
+$_lang['setting_manager_tooltip_enable'] = 'प्रबंधक टूलटिप्स सक्षम करें';
+$_lang['setting_manager_tooltip_delay'] = 'प्रबंधन टूलटिप्स के लिए विलम्ब का समय';
 
-$_lang['setting_login_background_image'] = 'Login Background Image';
+$_lang['setting_login_background_image'] = 'लॉगिन पृष्ठभूमि छवि';
 $_lang['setting_login_background_image_desc'] = 'The background image to use in the manager login. This will automatically stretch to fill the screen.';
 
 $_lang['setting_login_logo'] = 'लॉगिन लोगो';
@@ -679,7 +679,7 @@ $_lang['setting_site_unavailable_page_err'] = 'कृपया साइट अ�
 $_lang['setting_static_elements_automate_templates'] = 'टेम्पलेट के लिए स्थित तत्वों को स्वचालित करे';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
-$_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
+$_lang['setting_static_elements_automate_tvs'] = 'TV के लिए स्थिर तत्वों को स्वचलित करें?';
 $_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
 $_lang['setting_static_elements_automate_chunks'] = 'विखंडू के लिए स्थित तत्वों को स्वचालित करे?';
@@ -811,10 +811,10 @@ $_lang['setting_error_log_filename_desc'] = 'MODX त्रुटि लॉग �
 $_lang['setting_error_log_filepath'] = 'त्रुटि लॉग पथ';
 $_lang['setting_error_log_filepath_desc'] = 'व्वकल्पित रूप से एक कस्टम त्रुटि लॉग स्थान के लिए एक पूर्ण पथ सेट करें {cache _path} जैसे स्पेसहोल्डर का उपयोग कर सकते हैं |';
 
-$_lang['setting_passwordless_activated'] = 'Activate passwordless login';
+$_lang['setting_passwordless_activated'] = 'पासवर्ड रहित लॉगिन सक्रिय करें';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';
 
-$_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
+$_lang['setting_passwordless_expiration'] = 'पासवर्ड रहित लॉगिन समाप्ति';
 $_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
 $_lang['static_elements_html_extension'] = 'स्टेटिक एलिमेंट्स एचटीएमएल एक्सटेंशन';
