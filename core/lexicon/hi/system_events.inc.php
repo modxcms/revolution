@@ -14,7 +14,7 @@ $_lang['error_log_too_large'] = 'त्रुटि लॉग <em>[[+name]]</em>
 $_lang['system_events'] = 'सिस्टम ईवेंट्स';
 $_lang['priority'] = 'प्राथमिकता';
 
-$_lang['deprecated_log'] = 'Deprecations Log';
+$_lang['deprecated_log'] = 'पदावनति लॉग';
 $_lang['deprecated_log_desc'] = 'From time to time, old functionality is marked as deprecated to be removed in a future version. In such cases you\'ll find deprecation notices that alert you that updates will be necessary in the future.';
 $_lang['deprecated_definition'] = 'कार्यक्षमता';
 $_lang['deprecated_since'] = 'तब से पदावनत ';
