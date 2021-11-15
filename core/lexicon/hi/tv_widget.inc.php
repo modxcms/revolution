@@ -26,7 +26,7 @@ $_lang['combo_allowaddnewdata_desc'] = 'हाँ, की अनुमति द
 $_lang['combo_forceselection'] = 'मैच की आवश्यकता है';
 $_lang['combo_forceselection_desc'] = 'Only save typed option when it matches one already defined in the list.';
 $_lang['combo_forceselection_multi_desc'] = 'यदि यह हा तो पर सेट है, तो केवल सूची मे पहले से ही आइटम की अनुमति हैं । यदि नही तो नए मूल्यों को एक कुएं में दर्ज  किया जा सकता हैं';
-$_lang['combo_listempty_text'] = 'Option Not Found Message';
+$_lang['combo_listempty_text'] = 'विकल्प नहीं मिला सन्देश';
 $_lang['combo_listempty_text_desc'] = 'Message to display when typed text does not match existing options.';
 $_lang['combo_listheight'] = 'सूची ऊँचाई';
 $_lang['combo_listheight_desc'] = 'The height, in % or px, of the dropdown list itself. Defaults to the height of the combobox.';
@@ -93,7 +93,7 @@ $_lang['email'] = 'ईमेल';
 $_lang['file'] = 'फाइल';
 $_lang['height'] = 'ऊँचाई';
 $_lang['hidden'] = 'छिपा हुआ';
-$_lang['hide_time'] = 'Hide Time Option';
+$_lang['hide_time'] = 'समय विकल्प छुपायें';
 $_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
 $_lang['htmlarea'] = 'HTML क्षेत्र';
 $_lang['htmltag'] = 'HTML टैग';
@@ -124,13 +124,13 @@ $_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abb
 $_lang['name'] = 'नाम';
 $_lang['number'] = 'संख्या';
 $_lang['number_allowdecimals'] = 'दशमलव की अनुमति दें';
-$_lang['number_allownegative'] = 'Allow Negative';
-$_lang['number_decimalprecision'] = 'Precision';
+$_lang['number_allownegative'] = 'नकारात्मक की अनुमति दे';
+$_lang['number_decimalprecision'] = 'शुद्धता';
 $_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
 $_lang['number_decimalprecision_strict'] = 'सख्त दशमलव प्रेसिजन';
 $_lang['number_decimalprecision_strict_desc'] = 'जब "हां" पर सेट किया जाता है तो दशमलव संख्यायो पिछला शून्य सुरक्षित रहता है (डिफॉल्ट रूप से "नही")।';
 /* See note in number inputproperties config re separators */
-$_lang['number_decimalseparator'] = 'Separator';
+$_lang['number_decimalseparator'] = 'विभाजन';
 $_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
 $_lang['number_maxvalue'] = 'अधिकतम मान';
 $_lang['number_minvalue'] = 'न्यूनतम मान';
@@ -149,7 +149,7 @@ $_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are va
 $_lang['resourcelist_includeparent'] = 'Parents शामिल हैं';
 $_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
 $_lang['resourcelist_limitrelatedcontext'] = 'संबंधित Context के लिए सीमा';
-$_lang['resourcelist_limitrelatedcontext_desc'] = 'Select “Yes” to only include the Resources related to the context of the current Resource.';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'केवल वर्तमान संसाधन के सन्दर्भ से सम्बंधित संसाधनों को शामिल करने के लिए "हां" चुनें.';
 $_lang['resourcelist_limit'] = 'सीमा';
 $_lang['resourcelist_limit_desc'] = 'The maximum number of Resources shown in this TV’s listing. (Default: 0, meaning unlimited)';
 $_lang['resourcelist_listempty_text_desc'] = 'Disabled; selections will always match the list.';
@@ -184,10 +184,10 @@ $_lang['textbox'] = 'पाठ बॉक्स';
 $_lang['time_increment'] = 'समय बृद्दी';
 $_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
 $_lang['title'] = 'शीर्षक';
-$_lang['tv_default'] = 'Default Value';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
+$_lang['tv_default'] = 'डिफॉल्ट मान';
+$_lang['tv_default_desc'] = 'यदि उपयोगकर्ता द्वारा दर्ज की गई सामग्री प्रदान नहीं की जाती है तो यह TV वह सामग्री दिखायेगा!';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
-$_lang['tv_default_date'] = 'Default Date and Time';
+$_lang['tv_default_date'] = 'डिफाॅल्ट दिनांक और समय';
 $_lang['tv_default_date_desc'] = 'यह दिखाने की तिथि कि क्या उपयोगकर्ता एक प्रदान नहीं करता है। ऊपर दी गई सूची में से एक सापेक्ष तिथि चुनें या निम्न में से किसी एक पैटर्न का उपयोग करके एक अलग तिथि दर्ज करें:
 <div class="example-list">
   <उल>
@@ -197,32 +197,32 @@ $_lang['tv_default_date_desc'] = 'यह दिखाने की तिथि 
  </ul>
 नोट: ऊपर दिखाए गए "+" और "-" का उपयोग प्रति-सहज है, लेकिन सही ("+" समय में पिछड़े का प्रतिनिधित्व करता है)।
   </div>';
-$_lang['tv_default_email'] = 'Default Email Address';
+$_lang['tv_default_email'] = 'डिफॉल्ट ईमेल एड्रेस ';
 $_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
-$_lang['tv_default_file'] = 'Default File';
+$_lang['tv_default_file'] = 'डीफॉल्ट फाइल';
 $_lang['tv_default_file_desc'] = 'The file path this TV will show if the user does not provide one.';
-$_lang['tv_default_image'] = 'Default Image';
+$_lang['tv_default_image'] = 'डिफॉल्ट छवि ';
 $_lang['tv_default_image_desc'] = 'The image path this TV will show if the user does not provide one.';
-$_lang['tv_default_option'] = 'Default Option';
+$_lang['tv_default_option'] = 'डिफ़ॉल्ट विकल्प';
 $_lang['tv_default_option_desc'] = 'The option selected for this TV if the user does not choose one. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One)';
-$_lang['tv_default_options'] = 'Default Option(s)';
+$_lang['tv_default_options'] = 'डिफ़ॉल्ट विकल्प(s)';
 $_lang['tv_default_options_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
 $_lang['tv_default_radio_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox-multiple_desc'] = $_lang['tv_default_options_desc'];
-$_lang['tv_default_number'] = 'Default Number';
+$_lang['tv_default_number'] = 'डिफ़ॉल्ट नंबर';
 $_lang['tv_default_number_desc'] = 'The number this TV will show if the user does not provide one.';
-$_lang['tv_default_resource'] = 'Default Resource (ID)';
+$_lang['tv_default_resource'] = 'डिफ़ॉल्ट स्त्रोत (lD)';
 $_lang['tv_default_resourcelist_desc'] = 'The resource this TV will show if the user does not choose one.';
-$_lang['tv_default_tag'] = 'Default Tag(s)';
+$_lang['tv_default_tag'] = 'डिफ़ॉल्ट टैग(s)';
 $_lang['tv_default_tag_desc'] = 'A comma-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Tag One==1||Tag Two==2||Tag Three==3), be sure to enter the value (i.e., “1” for Tag One, or “1,3” for Tag One and Tag Three)';
-$_lang['tv_default_text'] = 'Default Text';
+$_lang['tv_default_text'] = 'डिफ़ॉल्ट Text';
 $_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
-$_lang['tv_default_url'] = 'Default URL';
+$_lang['tv_default_url'] = 'डिफ़ॉल्ट URL';
 $_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
-$_lang['tv_elements'] = 'Input Option Values';
-$_lang['tv_elements_checkbox'] = 'Checkbox Options';
-$_lang['tv_elements_listbox'] = 'Dropdown List Options';
+$_lang['tv_elements'] = 'इनपुट विकल्प मान';
+$_lang['tv_elements_checkbox'] = 'चैकबॉक्स विकल्प';
+$_lang['tv_elements_listbox'] = 'ड्रापडाउन लिस्ट विकल्प';
 $_lang['tv_elements_radio'] = 'Radio Button Options';
 $_lang['tv_elements_tag'] = 'Tag Options';
 $_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
