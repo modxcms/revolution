@@ -57,14 +57,14 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
         </ul>
     </div>
 ';
-$_lang['date_use_current'] = 'Use Current Date as Fallback';
+$_lang['date_use_current'] = 'फ़ॉलबैक के रूप मे वर्तमान तिथि का उपयोग करें';
 $_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
 $_lang['default'] = 'डिफ़ॉल्ट';
 $_lang['default_date_now'] = 'आज बर्तमान समय के साथ';
 $_lang['default_date_today'] = 'आज (आधी रात)';
 $_lang['default_date_yesterday'] = 'बीता हुआ कल (आधी रात)';
 $_lang['default_date_tomorrow'] = 'आने बाला कल (आधी रात)';
-$_lang['default_date_custom'] = 'Custom (see description below)';
+$_lang['default_date_custom'] = 'कस्टम (नीचे विवरण देखें)';
 $_lang['delim'] = 'सीमांकक';
 $_lang['delimiter'] = 'सीमांकक';
 $_lang['delimiter_desc'] = 'मूल्यों को अलग करने के लिए उपयोग किए जाने वाले एक या अधिक वर्ण (एकाधिक चयन योग्य विकल्पों का समर्थन करने वाले टीवी पर लागू)|';
@@ -94,7 +94,7 @@ $_lang['file'] = 'फाइल';
 $_lang['height'] = 'ऊँचाई';
 $_lang['hidden'] = 'छिपा हुआ';
 $_lang['hide_time'] = 'समय विकल्प छुपायें';
-$_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
+$_lang['hide_time_desc'] = 'इस TV के दिनांक पिकर से समय चुनने की छमता को हटा देता है.';
 $_lang['htmlarea'] = 'HTML क्षेत्र';
 $_lang['htmltag'] = 'HTML टैग';
 $_lang['image'] = 'छवि';
@@ -109,35 +109,34 @@ $_lang['lower_case'] = 'निचला मामला';
 $_lang['max_length'] = 'अधिकतम लंबाई';
 $_lang['min_length'] = 'न्यूनतम लम्बाई';
 $_lang['regex_text'] = 'रेगुलर एक्सप्रेशन त्रुटि';
-$_lang['regex_text_desc'] = 'The message to show if the user enters text that is invalid according to the <abbr title="regular expression">regex</abbr> validator.';
+$_lang['regex_text_desc'] = 'यह दिखाने के लिए सन्देश कि क्या उपयोगकर्ता ऐसे पाठ में प्रवेश करता है जो <abbr शीर्षक = "नियमित अभिव्यक्ति">रेगेक्स</abbr> सत्यापनकर्ता के अनुसार अमान्य है.';
 $_lang['regex'] = 'रेगुलर एक्सप्रेशन त्रुटि';
-$_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
+$_lang['regex_desc'] = 'इस TV की सामग्री को प्रतिबंधित करने के लिए एक जावास्क्रिप्ट<abbr शीर्षक = "रेगुलर एक्सप्रेशन">रेगेक्स</abbr> -संगत स्ट्रिंग (माइनस डिलीमीटर)। कुछ उदाहरण:
     <div class="example-list">
-        <ul>
-            <li><span class="example-input">[[+example_1]]</span> (pattern for U.S. zip codes)</li>
-            <li><span class="example-input">[[+example_2]]</span> (allow only letters)</li>
-            <li><span class="example-input">[[+example_3]]</span> (allow all characters except numbers)</li>
-            <li><span class="example-input">[[+example_4]]</span> (must end with the string “-XP”)</li>
+        <उल>
+            <li><span class="example-input">[[+example_1]]</span> (यू.एस. ज़िप कोड के लिए पैटर्न)</li>
+            <li><span class="example-input">[[+example_2]]</span> (केवल अक्षरों की अनुमति दें)</li>
+            <li><span class="example-input">[[+example_3]]</span> (संख्याओं को छोड़कर सभी वर्णों की अनुमति दें)</li>
+            <li><span class="example-input">[[+example_4]]</span> (स्ट्रिंग "-XP" के साथ खत्म होना चाहिए)</li>
         </ul>
-    </div>
-';
+    </div>';
 $_lang['name'] = 'नाम';
 $_lang['number'] = 'संख्या';
 $_lang['number_allowdecimals'] = 'दशमलव की अनुमति दें';
 $_lang['number_allownegative'] = 'नकारात्मक की अनुमति दे';
 $_lang['number_decimalprecision'] = 'शुद्धता';
-$_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
+$_lang['number_decimalprecision_desc'] = 'दसमलव विभाजन के बाद अनुमत अंको की अधिकतम संख्या. (डिफाॅल्ट: 2)';
 $_lang['number_decimalprecision_strict'] = 'सख्त दशमलव प्रेसिजन';
 $_lang['number_decimalprecision_strict_desc'] = 'जब "हां" पर सेट किया जाता है तो दशमलव संख्यायो पिछला शून्य सुरक्षित रहता है (डिफॉल्ट रूप से "नही")।';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'विभाजन';
-$_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
+$_lang['number_decimalseparator_desc'] = 'दसमलव विभाजन के रूप मे प्रयुक्त वर्ण. (डिफाॅल्ट: ".")';
 $_lang['number_maxvalue'] = 'अधिकतम मान';
 $_lang['number_minvalue'] = 'न्यूनतम मान';
 $_lang['option'] = 'रेडियो विकल्प';
 $_lang['parent_resources'] = 'Parent Resource';
 $_lang['radio_columns'] = 'स्तंभ';
-$_lang['radio_columns_desc'] = 'The number of columns the radio buttons are displayed in.';
+$_lang['radio_columns_desc'] = 'रेडिओ बटन प्रदर्शन होने बाले स्तम्भो की संख्या.';
 $_lang['rawtext'] = 'कच्चा पाठ (बहिष्कृत)';
 $_lang['rawtextarea'] = 'कच्चा टेक्सटरिया (बहिष्कृत)';
 $_lang['required'] = 'रिक्त की अनुमति दें';
@@ -200,7 +199,7 @@ $_lang['tv_default_date_desc'] = 'यह दिखाने की तिथि 
 $_lang['tv_default_email'] = 'डिफॉल्ट ईमेल एड्रेस ';
 $_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
 $_lang['tv_default_file'] = 'डीफॉल्ट फाइल';
-$_lang['tv_default_file_desc'] = 'The file path this TV will show if the user does not provide one.';
+$_lang['tv_default_file_desc'] = 'यदि उपयोगकर्ता एक प्रदान नहीं करता है तोह यह TV फ़ाइल पथ दिखाऐगा!';
 $_lang['tv_default_image'] = 'डिफॉल्ट छवि ';
 $_lang['tv_default_image_desc'] = 'The image path this TV will show if the user does not provide one.';
 $_lang['tv_default_option'] = 'डिफ़ॉल्ट विकल्प';
@@ -223,8 +222,8 @@ $_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not 
 $_lang['tv_elements'] = 'इनपुट विकल्प मान';
 $_lang['tv_elements_checkbox'] = 'चैकबॉक्स विकल्प';
 $_lang['tv_elements_listbox'] = 'ड्रापडाउन लिस्ट विकल्प';
-$_lang['tv_elements_radio'] = 'Radio Button Options';
-$_lang['tv_elements_tag'] = 'Tag Options';
+$_lang['tv_elements_radio'] = 'रेडियो बटन विकल्प';
+$_lang['tv_elements_tag'] = 'उपनाम विकल्प';
 $_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
     <div class="example-list">
         <ul>
@@ -240,7 +239,7 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_type'] = 'Input Type';
+$_lang['tv_type'] = 'इनपुट प्रकार';
 $_lang['upper_case'] = 'अपरकेस';
 $_lang['url'] = 'यूआरएल';
 $_lang['url_display_text'] = 'पाठ प्रदर्शित करें';
