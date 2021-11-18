@@ -713,7 +713,7 @@ $_lang['setting_syncsite_default'] = 'खाली कैश डिफ़ॉल�
 $_lang['setting_syncsite_default_desc'] = '\'हाँ\' आप डिफ़ॉल्ट रूप से एक संसाधन को सहेजने के बाद कैश को खाली करने के लिए का चयन करें।';
 $_lang['setting_syncsite_default_err'] = 'आप डिफ़ॉल्ट रूप से एक संसाधन की बचत के बाद कैश खाली करना चाहते हैं या नहीं, बताएं।';
 
-$_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
+$_lang['setting_topmenu_show_descriptions'] = 'मुख्य मेनू मे विवरण दिखाएं';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
 $_lang['setting_tree_default_sort'] = 'संसाधन ट्री डिफ़ॉल्ट सॉर्ट फ़ील्ड';
