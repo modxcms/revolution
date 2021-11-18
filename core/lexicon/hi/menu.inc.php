@@ -24,7 +24,7 @@ $_lang['menu_err_save'] = 'मेनू को बचाने का प्र�
 $_lang['menu_parent'] = 'जनक मेनू';
 $_lang['menu_parent_err_ns'] = 'Parent मेनू निर्दिष्ट नहीं!';
 $_lang['menu_parent_err_nf'] = 'Parent मेनू नहीं पाया!';
-$_lang['menu_top'] = 'Main Menu';
+$_lang['menu_top'] = 'मुख्य मेनू';
 $_lang['menus'] = 'मेनूज़';
 $_lang['namespace'] = 'Namespace:';
 $_lang['namespace_desc'] = 'Namespace जो इस मेनू आइटम पर आधारित है। यह भरी हुई है उस controller के लिए पथ का निर्धारण करेगा।';
@@ -32,5 +32,5 @@ $_lang['parameters'] = 'मापदंडों';
 $_lang['parameters_desc'] = 'किसी भी अनुरोध parameter आप जब इस मेनू क्लिक करके परिणाम URL को appended चाहते। (Ex: &expire=1)';
 $_lang['permissions'] = 'अनुमति';
 $_lang['permissions_desc'] = 'इस मेनू आइटम को लोड करने के लिए आवश्यक permission key।';
-$_lang['topmenu'] = 'Main Menu';
+$_lang['topmenu'] = 'मुख्य मेनू';
 $_lang['topmenu_desc'] = 'This allows you to associate actions with menu items in the main menu bar of the MODX manager. Simply place menus where you would like them in their respective positions.';
