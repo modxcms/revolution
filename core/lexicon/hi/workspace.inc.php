@@ -20,7 +20,7 @@ $_lang['changelog'] = 'परिवर्तन लॉग';
 $_lang['changelog_desc'] = 'इस संस्करण के लिए changelog की समीक्षा करें।';
 $_lang['continue'] = 'जारी रखें';
 $_lang['core_err_invalid'] = 'आपको एक मान्य कोर स्थापना बिल्ड को चलाने के लिए एक सक्रिय कार्यस्थान के साथ होना आवश्यक है।';
-$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'आप पैकेगे प्रबंधन का उपयोग करने के लिए PHP के लिए एक एक्सटेंशन के रूप में cURL को स्थापित और कॉन्फ़िगर किया जाना चाहिए. आप कर्ल के बारे में अधिक जानकारी <a href="https://www.php.net/curl" target="_blank">PHP cURL वेबसाइट</a> पर प्राप्त कर सकते हैं.';
 $_lang['description'] = 'Description:';
 $_lang['details'] = 'विवरण';
 $_lang['dir_err_assets'] = 'आपकी assets/ directory में बनाया जा करने में सक्षम नहीं था: [[+path]] <br /> आप इस directory बनाने के लिए और अगर आप पैकेज प्रबंधन या तृतीय-पक्ष घटक का उपयोग करना चाहते हैं यह लिखने योग्य बनाने के लिए की आवश्यकता होगी।';
