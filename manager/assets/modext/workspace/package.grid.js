@@ -148,7 +148,9 @@ MODx.grid.Package = function(config) {
     });
     MODx.grid.Package.superclass.constructor.call(this,config);
     this.on('render',function() {
-        this.mask = new Ext.LoadMask(this.body.dom);
+        this.mask = new Ext.LoadMask(this.body.dom, {
+            msg: _('loading_packages') + '...'
+        });
         if (!this.loaded) {
             this.mask.show();
         }
