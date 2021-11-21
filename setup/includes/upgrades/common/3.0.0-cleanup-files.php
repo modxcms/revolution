@@ -205,6 +205,9 @@ $cleanup = [
         'lexicon/uk/import.inc.php',
         'lexicon/yo/import.inc.php',
         'lexicon/zh/import.inc.php',
+
+        // remove unused processor present until beta2
+        'src/Revolution/Processors/Security/User/Group/',
     ],
     'manager' => [
         'min/',
