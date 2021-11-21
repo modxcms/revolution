@@ -94,7 +94,9 @@ class modInstallSettings {
     public function load() {
         if (file_exists($this->fileName)) {
             if (function_exists('opcache_invalidate')) {
-                opcache_invalidate($this->fileName);
+                if (stripos(__FILE__, ini_get('opcache.restrict_api')) !== false) {
+                    opcache_invalidate($this->fileName);
+                }
             }
             $this->settings = include $this->fileName;
             if (empty($this->settings)) {
