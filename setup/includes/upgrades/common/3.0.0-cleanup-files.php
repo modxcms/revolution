@@ -261,6 +261,9 @@ foreach ($cleanup as $folder => $files) {
 
 $this->runner->addResult(
     modInstallRunner::RESULT_SUCCESS,
-    '<p class="ok">'.$this->install->lexicon('legacy_cleanup_complete').
-    '<br /><small>'.$this->install->lexicon('legacy_cleanup_count', ['files' => $removedFiles, 'folders' => $removedDirs]).'</small></p>'
+    '<p class="ok">' . $this->install->lexicon('legacy_cleanup_complete') .
+    '<br /><small>' . $this->install->lexicon(
+        'legacy_cleanup_count',
+        ['files' => $removedFiles, 'folders' => $removedDirs]
+    ) . '</small></p>'
 );
