@@ -247,8 +247,8 @@ $_lang['setting_emailsender_err'] = 'Пожалуйста, укажите эле
 $_lang['setting_enable_dragdrop'] = 'Включить перетаскивание в древовидных меню ';
 $_lang['setting_enable_dragdrop_desc'] = 'Если указано «Нет», перетаскивание будет недоступно для деревьев ресурсов и элементов.';
 
-$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
-$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+$_lang['setting_enable_template_picker_in_tree'] = 'Включить выбор шаблонов в деревьях ресурсов';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Включите это, чтобы использовать окно выбора шаблонов при создании нового ресурса в дереве.';
 
 $_lang['setting_error_page'] = 'Страница ошибки 404 «Документ не найден»';
 $_lang['setting_error_page_desc'] = 'Введите ID ресурса, который вы хотите использовать как страницу ошибки 404 «Документ не найден». <strong>ВАЖНО: убедитесь, что этот ID принадлежит существующему ресурсу, и что этот ресурс опубликован!</strong>';
@@ -700,6 +700,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Укажите кат
 $_lang['setting_static_elements_basepath'] = 'Путь к файлам статических элементов';
 $_lang['setting_static_elements_basepath_desc'] = 'Путь к файлам, где хранятся статические элементы.';
 
+$_lang['setting_resource_static_allow_absolute'] = 'Разрешить абсолютный путь к статическим ресурсам';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Эта настройка позволяет пользователям вводить абсолютный путь к любому читаемому файлу на сервере в качестве содержимого статического ресурса. Важно: включение этой настройки может рассматриваться как риск безопасности! Настоятельно рекомендуется держать эту настройку выключенной, если вы не доверяете каждому пользователю системы управления.';
+
+$_lang['setting_resource_static_path'] = 'Путь к статическим ресурсам';
+$_lang['setting_resource_static_path_desc'] = 'При отключении "resource_static_allow_absolute" статические ресурсы могут находиться только в пределах пути, указанного здесь. Важно: настройка может позволить пользователям читать файлы, которые они не должны читать! Настоятельно рекомендуется ограничить пользователей определенным каталогом, таким как {core_path}static/ или {assets_path}.';
+
 $_lang['setting_symlink_merge_fields'] = 'Объединять поля ресурса с полями символической ссылки';
 $_lang['setting_symlink_merge_fields_desc'] = 'Если установлено значение «Да», то непустые поля символической ссылки заменят поля целевого ресурса при переадресации с использованием символической ссылки.';
 
@@ -810,3 +816,6 @@ $_lang['setting_passwordless_activated_desc'] = 'Если включено, по
 
 $_lang['setting_passwordless_expiration'] = 'Срок действия входа без пароля';
 $_lang['setting_passwordless_expiration_desc'] = 'Продолжительность времени в секундах, на которое действительна одноразовая ссылка для входа.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';

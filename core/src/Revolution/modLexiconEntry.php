@@ -39,18 +39,45 @@ class modLexiconEntry extends xPDOSimpleObject
     }
 
     /**
+     * Ensures required values are present or set to their defaults, when applicable
+     *
+     * @return boolean True when valid
+     */
+    private function validateEntry()
+    {
+        if (empty($this->get('name'))) {
+            return false;
+        }
+        if (empty($this->get('namespace'))) {
+            $this->set('namespace', 'core');
+        }
+        if (empty($this->get('topic'))) {
+            $this->set('topic', 'default');
+        }
+        if (empty($this->get('language'))) {
+            $defaultLanguage = $this->xpdo->getOption('cultureKey');
+            $language = !empty($defaultLanguage) ? $defaultLanguage : 'en' ;
+            $this->set('language', $language);
+        }
+        return true;
+    }
+
+    /**
      * Overrides xPDOObject::save to clear lexicon cache on saving.
      *
      * {@inheritdoc}
      */
     public function save($cacheFlag = null)
     {
+        if (!$this->validateEntry()) {
+            return false;
+        }
         if ($this->_new) {
             if (!$this->get('createdon')) {
                 $this->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
             }
         }
-        $saved = parent:: save($cacheFlag);
+        $saved = parent::save($cacheFlag);
         if ($saved && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
             $this->clearCache();
         }

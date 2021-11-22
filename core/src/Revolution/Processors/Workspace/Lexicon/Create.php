@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -43,12 +44,17 @@ class Create extends Processor
      */
     public function process()
     {
-        if ($this->alreadyExists()) {
+        $data = [];
+        foreach ($this->getProperties() as $k => $v) {
+            $data[$k] = $k === 'value' ? $v : trim($v);
+        }
+
+        if ($this->alreadyExists($data)) {
             return $this->failure($this->modx->lexicon('entry_err_ae'));
         }
 
         $this->entry = $this->modx->newObject(modLexiconEntry::class);
-        $this->entry->fromArray($this->getProperties());
+        $this->entry->fromArray($data);
         $this->entry->set('editedon', date('Y-m-d h:i:s'));
 
         if ($this->entry->save() === false) {
@@ -61,13 +67,13 @@ class Create extends Processor
     /**
      * @return bool
      */
-    public function alreadyExists()
+    public function alreadyExists($data)
     {
         return $this->modx->getCount(modLexiconEntry::class, [
-                'name' => $this->getProperty('name'),
-                'namespace' => $this->getProperty('namespace'),
-                'language' => $this->getProperty('language'),
-                'topic' => $this->getProperty('topic'),
+                'name' => $data['name'],
+                'namespace' => $data['namespace'],
+                'language' => $data['language'],
+                'topic' => $data['topic']
             ]) > 0;
     }
 

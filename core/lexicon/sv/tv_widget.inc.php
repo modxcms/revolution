@@ -69,19 +69,18 @@ $_lang['delim'] = 'Avgränsare';
 $_lang['delimiter'] = 'Avgränsare';
 $_lang['delimiter_desc'] = 'Ett eller flera tecken som används för att separera värden (gäller för mallvariabler som stöder flera valbara alternativ).';
 $_lang['disabled_dates'] = 'Inaktiverade datum';
-$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
-    <p>Examples using the default format (“[[+format_default]]”) include:</p>
+$_lang['disabled_dates_desc'] = 'En kommaseparerad lista med javascriptkompatibla <abbr title="reguljärt uttryck">regex</abbr>-(minus avgränsare) med datum i hanterarens datumformat (för närvarande ”[[+format_current]]”).
+    <p>Exempel som använder standardformatet (”[[+format_default]]”):</p>
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (selects individual dates)</li>
-            <li><span class="example-input">[[+example_2a]]</span> (selects [[+example_2b]] and [[+example_2c]] of every year)</li>
-            <li><span class="example-input">[[+example_3a]]</span> (“^” to match beginning of string; this selects all of [[+example_3b]])</li>
-            <li><span class="example-input">[[+example_4a]]</span> (selects every day in [[+example_4b]])</li>
-            <li><span class="example-input">[[+example_5]]</span> (“$” to match end of string; this selects every day in March of every year)</li>
+            <li><span class="example-input">[[+example_1]]</span> (väljer individuella datum)</li>
+            <li><span class="example-input">[[+example_2a]]</span> (väljer [[+example_2b]] och [[+example_2c]] varje år)</li>
+            <li><span class="example-input">[[+example_3a]]</span> (”^” för att matcha början av strängen; detta väljer alla [[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> (väljer varje dag i [[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5]]</span> (“$” för att matcha slutet av strängen; detta väljer varje dag i mars varje år)</li>
         </ul>
-        Note: If your date format uses dot separators they will need to be escaped (e.g., “[[+example_6a]]” should be entered above as “[[+example_6b]]”).
-    </div>
-';
+        Obs: Om ditt datumformat använder punktseparatorer måste de escapas (till exempel ”[[+example_6a]]” ska anges ovan som ”[[+example_6b]]”).
+    </div>';
 $_lang['disabled_days'] = 'Inaktiverade dagar';
 $_lang['disabled_days_desc'] = '';
 $_lang['dropdown'] = 'Rullgardinsmeny';
@@ -111,13 +110,13 @@ $_lang['min_length'] = 'Minimal längd';
 $_lang['regex_text'] = 'Fel i reguljärt uttryck';
 $_lang['regex_text_desc'] = 'Meddelandet som ska visas om användaren skriver in text som är ogiltig enligt <abbr title="regular expression">regex</abbr>-validatorn.';
 $_lang['regex'] = 'Validator för reguljära uttryck';
-$_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
+$_lang['regex_desc'] = 'En javascriptkompatibel <abbr title="reguljärt uttryck">regex</abbr>-sträng (minus avgränsare) för att begränsa innehållet i denna mallvariabel. Några exempel:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (pattern for U.S. zip codes)</li>
-            <li><span class="example-input">[[+example_2]]</span> (allow only letters)</li>
-            <li><span class="example-input">[[+example_3]]</span> (allow all characters except numbers)</li>
-            <li><span class="example-input">[[+example_4]]</span> (must end with the string “-XP”)</li>
+            <li><span class="example-input">[[+example_1]]</span> (mönster för amerikanskt postnummer)</li>
+            <li><span class="example-input">[[+example_2]]</span> (tillåt endast bokstäver)</li>
+            <li><span class="example-input">[[+example_3]]</span> (tillåt alla tecken utom siffror)</li>
+            <li><span class="example-input">[[+example_4]]</span> (måste avslutas med strängen ”-XP”)</li>
         </ul>
     </div>
 ';
@@ -127,6 +126,8 @@ $_lang['number_allowdecimals'] = 'Tillåt decimaler';
 $_lang['number_allownegative'] = 'Tillåt negativa';
 $_lang['number_decimalprecision'] = 'Precision';
 $_lang['number_decimalprecision_desc'] = 'Det maximala antalet siffror som tillåts efter decimalavgränsaren. (Standard: 2)';
+$_lang['number_decimalprecision_strict'] = 'Strikt decimalprecision';
+$_lang['number_decimalprecision_strict_desc'] = 'När denna sätts till ”Ja” bevaras avslutande nollor i decimaltal (standard är ”Nej”).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Avgränsare';
 $_lang['number_decimalseparator_desc'] = 'Tecknet som används som decimalavgränsare. (Standard: ”.”)';
@@ -155,16 +156,16 @@ $_lang['resourcelist_parents'] = 'Föräldrar';
 $_lang['resourcelist_parents_desc'] = 'Om värde anges här kommer denna mallvariabels lista endast att innehålla underordnade resurser från denna kommaseparerade lista med resurs-ID:n (behållare).';
 $_lang['resourcelist_where'] = 'Where-uttryck';
 $_lang['resourcelist_where_desc'] = '
-    <p>A JSON object of one or more Resource fields to filter this TV’s listing of Resources.</p>
-    <div class="example-list">Some examples:
+    <p>Ett JSON-objekt med ett eller flera resursfält som används för att filtrera denna mallvariabels lista över resurser.</p>
+    <div class="example-list">Några exempel:
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (only include Resources with template 4 applied)</li>
-            <li><span class="example-input">[[+example_2]]</span> (include all Resources, except for those named “Home”)</li>
-            <li><span class="example-input">[[+example_3]]</span> (include only Resources whose Resource Type is Weblink or Symlink)</li>
-            <li><span class="example-input">[[+example_4]]</span> (include only Resources that are published and are not containers)</li>
+            <li><span class="example-input">[[+example_1]]</span> (inkludera endast resurser som använder mall 4)</li>
+            <li><span class="example-input">[[+example_2]]</span> (inkludera alla resurser utom de som heter ”Hem”)</li>
+            <li><span class="example-input">[[+example_3]]</span> (inkludera endast resurser vars resurstyp är Webblänk eller Symlänk)</li>
+            <li><span class="example-input">[[+example_4]]</span> (inkludera endast resurser som är publicerade och inte är behållare)</li>
         </ul>
     </div>
-    <p>Note: Filtering by TV values is not supported.</p>
+    <p>Obs: Filtrering efter mallvariabelvärden stöds inte.</p>
 ';
 $_lang['richtext'] = 'Richtext';
 $_lang['sentence_case'] = 'Inledande versal';
@@ -184,7 +185,7 @@ $_lang['time_increment_desc'] = 'Antalet minuter mellan varje tidsvärde i lista
 $_lang['title'] = 'Titel';
 $_lang['tv_default'] = 'Standardvärde';
 $_lang['tv_default_desc'] = 'Innehållet som den här mallvariabeln visar om användaren inte anger något annat innehåll.';
-$_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
+$_lang['tv_default_checkbox_desc'] = 'En uppsättning alternativ separerade med dubbla pipe-tecken som väljs för den här mallvariabeln om användaren inte markerar ett eller flera egna val. Om dina alternativ inkluderar etiketter (till exempel "Alternativ ett==1||Alternativ två==2||Alternativ tre==3"), så behöver du ange värdet, det vill säga “1” för Alternativ ett eller “1||3” för Alternativ ett och Alternativ tre.';
 $_lang['tv_default_date'] = 'Förvalt datum och tid';
 $_lang['tv_default_date_desc'] = 'Det datum som visas om användaren inte anger ett. Välj ett relativt datum från listan ovan eller ange ett annat datum med hjälp av något av följande mönster:
     <div class="example-list">
@@ -204,7 +205,7 @@ $_lang['tv_default_image_desc'] = 'Den bildsökväg som mallvariabeln kommer att
 $_lang['tv_default_option'] = 'Standardalternativ';
 $_lang['tv_default_option_desc'] = 'Det alternativ som väljs för den här mallvariabeln om användaren inte väljer ett. Om dina alternativ innehåller etiketter (till exempel "Alternativ ett==1||Alternativ två==2||Alternativ tre==3"), så behöver du ange värdet (dvs. "1" för "Alternativ ett")';
 $_lang['tv_default_options'] = 'Standardalternativ';
-$_lang['tv_default_options_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
+$_lang['tv_default_options_desc'] = 'En uppsättning alternativ separerade med dubbla pipe-tecken som väljs för den här mallvariabeln om användaren inte väljer ett eller flera egna val. Om dina alternativ inkluderar etiketter (till exempel "Alternativ ett==1||Alternativ två==2||Alternativ tre==3"), så behöver du ange värdet, det vill säga “1” för Alternativ ett eller “1||3” för Alternativ ett och Alternativ tre.';
 $_lang['tv_default_radio_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox-multiple_desc'] = $_lang['tv_default_options_desc'];
@@ -213,23 +214,23 @@ $_lang['tv_default_number_desc'] = 'Numret som denna mallvariabel kommer att vis
 $_lang['tv_default_resource'] = 'Standardresurs (ID)';
 $_lang['tv_default_resourcelist_desc'] = 'Den resurs som mallvariabeln visar om användaren inte väljer en.';
 $_lang['tv_default_tag'] = 'Standardtagg(ar)';
-$_lang['tv_default_tag_desc'] = 'A comma-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Tag One==1||Tag Two==2||Tag Three==3), be sure to enter the value (i.e., “1” for Tag One, or “1,3” for Tag One and Tag Three)';
+$_lang['tv_default_tag_desc'] = 'En uppsättning alternativ separerade med kommatecken som väljs för den här mallvariabeln om användaren inte väljer ett eller flera egna val. Om dina alternativ inkluderar etiketter (till exempel "Tagg ett==1||Tagg två==2||Tagg tre==3"), så behöver du ange värdet, det vill säga “1” för Tagg ett eller “1||3” för Tagg ett och Tagg tre.';
 $_lang['tv_default_text'] = 'Standardtext';
 $_lang['tv_default_text_desc'] = 'Det textinnehåll som denna mallvariabel kommer att visa om användaren inte anger något.';
 $_lang['tv_default_url'] = 'Standard-URL';
 $_lang['tv_default_url_desc'] = 'Den URL som mallvariabeln visar om användaren inte anger en.';
 $_lang['tv_elements'] = 'Inmatningsvärden';
 $_lang['tv_elements_checkbox'] = 'Kryssrutealternativ';
-$_lang['tv_elements_listbox'] = 'Dropdown List Options';
-$_lang['tv_elements_radio'] = 'Radio Button Options';
-$_lang['tv_elements_tag'] = 'Tag Options';
-$_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
+$_lang['tv_elements_listbox'] = 'Alternativ för rullgardinsmeny';
+$_lang['tv_elements_radio'] = 'Alternativ för radioknapp';
+$_lang['tv_elements_tag'] = 'Taggalternativ';
+$_lang['tv_elements_desc'] = 'Definierar valbara alternativ för denna mallvariabel som kan matas in manuellt eller byggas med en enrads <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">databasfråga</a>. Några exempel:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">Bird||Cat||Dog</span> (shorthand for Bird==Bird||Cat==Cat||Dog==Dog)</li>
-            <li><span class="example-input">White==#ffffff||Black==#000000</span> (where label==value)</li>
-            <li><span class="example-input">[[+example_1]]</span> (builds a list of published Resources whose assigned template id is 1)</li>
-            <li><span class="example-input">[[+example_2]]</span> (builds the same list as the previous example, including a blank option)</li>
+            <li><span class="example-input">Fågel||Katt||Hund</span> (kortversion av Fågel==Fågel||Katt==Katt||Hund==Hund)</li>
+            <li><span class="example-input">Vit==#ffffff||Svart=#000000</span> (där etikett==värde)</li>
+            <li><span class="example-input">[[+example_1]]</span> (bygger en lista med publicerade resurser vars tilldelade mall-id är 1)</li>
+            <li><span class="example-input">[[+example_2]]</span> (bygger samma lista som i föregående exemplet, inklusive ett tomt alternativ)</li>
         </ul>
     </div>
     ';
@@ -238,9 +239,7 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
-$_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
-$_lang['tv_type'] = 'Input Type';
+$_lang['tv_type'] = 'Inmatningstyp';
 $_lang['upper_case'] = 'Versaler';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Visningstext';
