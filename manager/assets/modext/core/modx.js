@@ -310,13 +310,28 @@ Ext.extend(MODx,Ext.Component,{
         }
 
         if (MODx.config["static_elements_automate_" + typePlural] == 1) {
-            if (Ext.getCmp("modx-" + type + "-category").getValue() > 0) {
-                category = Ext.getCmp("modx-" + type + "-category").lastSelectionText;
+            category = Ext.getCmp("modx-" + type + "-category").getValue();
+            if (category > 0) {
+                Ext.Ajax.request({
+                    url: MODx.config.connector_url,
+                    method: 'GET',
+                    timeout: 60000,
+                    params: {
+                        action: 'element/category/getlist',
+                        id: category,
+                        limit: 0,
+                    },
+                    success: function (response) {
+                        var data = Ext.decode(response.responseText);
+                        categoryText = (data && data.success && data.results) ? data.results[0].name : '';
+                        if (categoryText) {
+                            name = Ext.getCmp("modx-" + type + "-" + nameField).getValue();
+                            path = MODx.getStaticElementsPath(name, categoryText, typePlural);
+                            Ext.getCmp("modx-" + type + "-static-file").setValue(path);
+                        }
+                    },
+                });
             }
-
-            name = Ext.getCmp("modx-" + type + "-" + nameField).getValue();
-            path = MODx.getStaticElementsPath(name, category, typePlural);
-            Ext.getCmp("modx-" + type + "-static-file").setValue(path);
         }
     }
 
