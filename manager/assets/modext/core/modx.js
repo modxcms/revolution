@@ -517,12 +517,8 @@ Ext.extend(MODx,Ext.Component,{
         if (tabPanel) {
             const tabObj = tabPanel.getItem(regionId);
             if (tabObj) {
-                // const z = tabPanel.hideTabStripItem(regionId),
-                //     idx = this._getNextActiveTab(tabPanel,regionId)
-                // ;
                 tabPanel.hideTabStripItem(regionId);
                 MODx.hiddenTabs.push(regionId);
-                // tabPanel.setActiveTab(idx);
                 tabPanel.setActiveTab(this._getNextActiveTab(tabPanel, regionId));
             } else {
                 const region = Ext.getCmp(regionId);
