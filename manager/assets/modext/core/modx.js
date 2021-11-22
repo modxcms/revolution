@@ -314,8 +314,6 @@ Ext.extend(MODx,Ext.Component,{
             if (category > 0) {
                 Ext.Ajax.request({
                     url: MODx.config.connector_url,
-                    method: 'GET',
-                    timeout: 60000,
                     params: {
                         action: 'element/category/getlist',
                         id: category,
