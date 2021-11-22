@@ -30,6 +30,8 @@ MODx.tree.UserGroup = function(config) {
         }]
     });
     MODx.tree.UserGroup.superclass.constructor.call(this,config);
+
+    // console.log('MODx.tree.UserGroup loading...');
 };
 Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     windows: {}

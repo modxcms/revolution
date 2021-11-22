@@ -13,14 +13,15 @@ MODx.grid.Lexicon = function(config) {
         ,url: MODx.config.connector_url
         ,fields: ['name','value','namespace','topic','language','editedon','overridden']
         ,baseParams: {
-            action: 'Workspace/Lexicon/GetList'
-            ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
-            ,topic: ''
-            ,language: MODx.config.cultureKey || 'en'
+            action: 'Workspace/Lexicon/GetList',
+            namespace: MODx.request['ns'] ? MODx.request['ns'] : 'core',
+            topic: '',
+            language: MODx.config.cultureKey || 'en'
         }
         ,width: '98%'
         ,paging: true
         ,autosave: true
+        ,preventSaveRefresh: false
         ,save_action: 'Workspace/Lexicon/UpdateFromGrid'
         ,columns: [{
             header: _('name')
@@ -33,7 +34,9 @@ MODx.grid.Lexicon = function(config) {
             ,dataIndex: 'value'
             ,width: 500
             ,sortable: false
-            ,editor: {xtype: 'textarea'}
+            ,editor: {
+                xtype: 'textarea'
+            }
             ,renderer: this._renderStatus
         },{
             header: _('last_modified')
@@ -59,7 +62,10 @@ MODx.grid.Lexicon = function(config) {
             ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : ''
             ,width: 150
             ,listeners: {
-                'select': {fn: this.changeNamespace,scope:this}
+                select: {
+                    fn: this.changeNamespace,
+                    scope: this
+                }
             }
         },{
             xtype: 'tbtext'
@@ -71,12 +77,15 @@ MODx.grid.Lexicon = function(config) {
             ,value: 'default'
             ,width: 150
             ,baseParams: {
-                action: 'Workspace/Lexicon/Topic/GetList'
-                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
-                ,'language': 'en'
+                action: 'Workspace/Lexicon/Topic/GetList',
+                namespace: MODx.request['ns'] ? MODx.request['ns'] : '',
+                language: 'en'
             }
             ,listeners: {
-                'select': {fn:this.changeTopic,scope:this}
+                select: {
+                    fn: this.changeTopic,
+                    scope: this
+                }
             }
         },{
             xtype: 'tbtext'
@@ -90,10 +99,13 @@ MODx.grid.Lexicon = function(config) {
             ,width: 100
             ,baseParams: {
                 action: 'System/Language/GetList'
-                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
+                ,namespace: MODx.request['ns'] ? MODx.request['ns'] : ''
             }
             ,listeners: {
-                'select': {fn:this.changeLanguage,scope:this}
+                select: {
+                    fn: this.changeLanguage,
+                    scope: this
+                }
             }
         },{
             xtype: 'textfield'
@@ -103,14 +115,20 @@ MODx.grid.Lexicon = function(config) {
             ,itemId: 'search'
             ,emptyText: _('search_by_key')
             ,listeners: {
-                'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
+                change: {
+                    fn: this.filter.createDelegate(this,['search'],true),
+                    scope: this
+                },
+                render: {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER,
+                            fn: this.blur,
+                            scope: cmp
+                        });
+                    },
+                    scope:this
+                }
             }
         },{
             xtype: 'button'
@@ -119,11 +137,15 @@ MODx.grid.Lexicon = function(config) {
             ,itemId: 'clear'
             ,text: _('filter_clear')
             ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                    'mouseout': { fn: function(evt){
+                click: {
+                    fn: this.clearFilter,
+                    scope: this
+                },
+                mouseout: {
+                    fn: function(evt){
                         this.removeClass('x-btn-focus');
                     }
-                    }
+                }
             }
         }]
         ,pagingItems: [{
@@ -135,6 +157,7 @@ MODx.grid.Lexicon = function(config) {
     MODx.grid.Lexicon.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
+
     console: null
 
     ,_renderStatus: function(v,md,rec,ri) {
@@ -152,7 +175,6 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         if (Ext.isEmpty(value)) {
             return '—';
         }
-
         return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
     }
 
@@ -162,6 +184,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	this.getBottomToolbar().changePage(1);
         return true;
     }
+
     ,clearFilter: function() {
     	this.store.baseParams = {
             action: 'Workspace/Lexicon/GetList'
@@ -185,12 +208,15 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
 
         tb.getComponent('search').setValue('');
     }
+
     ,changeNamespace: function(cb,nv,ov) {
         this.setFilterParams(cb.getValue(),'default','en');
     }
+
     ,changeTopic: function(cb,nv,ov) {
         this.setFilterParams(null,cb.getValue());
     }
+
     ,changeLanguage: function(cb,nv,ov) {
         this.setFilterParams(null,null,cb.getValue());
     }
@@ -236,6 +262,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         }
         this.getBottomToolbar().changePage(1);
     }
+
     ,loadWindow2: function(btn,e,o) {
         var tb = this.getTopToolbar();
     	this.menu.record = {
@@ -247,6 +274,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         }
     	this.loadWindow(btn, e, o);
     }
+
     ,reloadFromBase: function() {
     	Ext.Ajax.timeout = 0;
     	var topic = '/workspace/lexicon/reload/';
@@ -292,6 +320,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             }
     	});
     }
+
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var m = [];
@@ -328,6 +357,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         this.createEntryWindow.setValues(r);
         this.createEntryWindow.show(e.target);
     }
+
 });
 Ext.reg('modx-grid-lexicon',MODx.grid.Lexicon);
 

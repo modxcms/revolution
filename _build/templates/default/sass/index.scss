@@ -539,6 +539,14 @@ textarea.x-form-field {
 }
 
 /* grids */
+
+.modx-protected-row {
+    .x-grid3-cell-inner {
+        font-style: italic;
+        color: $colorSplash;
+    }
+}
+
 .x-small-editor .x-form-field {
   font-size: 12px !important;
 }
@@ -551,14 +559,11 @@ textarea.x-form-field {
   color: #999 !important;
 }
 
-a.x-grid-link {
-  color: $colorSplash;
-  text-decoration: underline;
-}
-
-a.x-grid-link:hover,
-a.x-grid-link:focus {
-  text-decoration: none;
+.x-grid-link {
+    @include textLink;
+    &.simulated-link {
+        cursor: pointer;
+    }
 }
 
 .x-editable-column {
@@ -826,6 +831,37 @@ a.x-grid-link:focus {
 }
 
 /* rowactions */
+.x-grid3-row {
+    &.disable-selection,
+    &.disable-selection.x-grid3-row-selected {
+        .x-grid3-row-checker {
+            position: relative;
+            &::before,
+            &::after {
+                color: $disabledTextColor;
+            }
+            &::before {
+                content: '\f0c8';
+            }
+            &::after {
+                content: '\f715';
+                font-size: 6px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: 2px;
+                margin-top: 1px;
+                transform: translate(-50%, -50%) rotate(98deg);
+                font-weight: 600;
+                font-family: 'Font Awesome 5 Free';
+            }
+            &:hover {
+                cursor: default;
+            }
+        }
+    }
+}
+
 .ux-row-action-cell .x-grid3-cell-inner {
   padding: 1px 0 0 0;
 }
@@ -1698,6 +1734,12 @@ iframe[classname="x-hidden"] {
 .x-selectable * {
   -khtml-user-select: all !important;
   user-select: text !important;
+}
+
+.x-selectable {
+    &.simulated-link * {
+        @include textLink;
+    }
 }
 
 /* Lightbox */

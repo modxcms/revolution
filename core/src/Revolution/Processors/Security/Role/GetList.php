@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Security\Role;
-
 
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUserGroupRole;
@@ -32,7 +32,11 @@ class GetList extends GetListProcessor
     public $languageTopics = ['user'];
     public $permission = 'view_role';
     public $defaultSortField = 'authority';
-    public $canRemove = false;
+
+    // public $canRemove = false;
+    protected $canCreate = false;
+    protected $canUpdate = false;
+    protected $canDelete = false;
 
     /**
      * {@inheritDoc}
@@ -48,7 +52,10 @@ class GetList extends GetListProcessor
             $this->setProperty('sort', 'name');
         }
 
-        $this->canRemove = $this->modx->hasPermission('delete_role');
+        // $this->canRemove = $this->modx->hasPermission('delete_role');
+        $this->canCreate = $this->modx->hasPermission('new_role') && $this->modx->hasPermission('save_role');
+        $this->canUpdate = $this->modx->hasPermission('edit_role') && $this->modx->hasPermission('save_role');
+        $this->canDelete = $this->modx->hasPermission('delete_role');
 
         return $initialized;
     }
@@ -90,21 +97,31 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $isCoreRole = $object->get('id') === 1
-            || $object->get('id') === 2
-            || $object->get('name') === 'Super User'
-            || $object->get('name') === 'Member';
+        $permissions = [
+            'create' => $this->canCreate,
+            'update' => $this->canUpdate,
+            'delete' => $this->canDelete
+        ];
 
-        $perm = [];
-        if (!$isCoreRole) {
-            $perm[] = 'edit';
-            if ($this->canRemove) {
-                $perm[] = 'remove';
-            }
+        $roleData = $object->toArray();
+
+        $roleName = $object->get('name');
+        $isCoreRole = $roleName === 'Super User' || $roleName === 'Member';
+
+        if ($isCoreRole) {
+            $baseKey = '_role_' . strtolower(str_replace(' ', '', $roleName)) . '_';
+            $roleData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
+            $roleData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
         }
-        $objectArray['perm'] = implode(' ', $perm);
 
-        return $objectArray;
+        $roleData['reserved'] = ['name' => ['Super User', 'Member']];
+        $roleData['isProtected'] = $isCoreRole ? true : false ;
+        $roleData['creator'] = $isCoreRole ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        $roleData['permissions'] = !$isCoreRole ? $permissions : [] ;
+
+        $msg = "\r\n prepareRow, \$role:\r\n" . print_r($role, true);
+        $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
+
+        return $roleData;
     }
 }

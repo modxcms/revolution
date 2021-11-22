@@ -20,7 +20,16 @@ MODx.grid.UserGroups = function(config) {
         ,baseParams: {
             action: 'Security/Group/GetList'
         }
-        ,fields: ['usergroup','name','member','role','rolename','primary_group','rank','user_group_desc']
+        ,fields: [
+            'usergroup',
+            'name',
+            'member',
+            'role',
+            'rolename',
+            'primary_group',
+            'rank',
+            'user_group_desc'
+        ]
         ,cls: 'modx-grid modx-grid-draggable'
         ,columns: [this.exp,
         {
@@ -54,8 +63,8 @@ MODx.grid.UserGroups = function(config) {
             ,scrollable: true
             ,targetCfg: {}
             ,listeners: {
-                'afterrowmove': {fn:this.onAfterRowMove,scope:this}
-                ,'beforerowmove': {fn:this.onBeforeRowMove,scope:this}
+                afterrowmove: {fn:this.onAfterRowMove,scope:this}
+                ,beforerowmove: {fn:this.onBeforeRowMove,scope:this}
             }
         }),
         this.exp]
@@ -66,6 +75,9 @@ MODx.grid.UserGroups = function(config) {
         }]
     });
     MODx.grid.UserGroups.superclass.constructor.call(this,config);
+
+    console.log('MODx.grid.UserGroups loading...');
+
     this.userRecord = new Ext.data.Record.create(['usergroup','name','member','role','rolename','primary_group']);
     this.addEvents('beforeUpdateRole','afterUpdateRole','beforeAddGroup','afterAddGroup','beforeReorderGroup','afterReorderGroup');
 };

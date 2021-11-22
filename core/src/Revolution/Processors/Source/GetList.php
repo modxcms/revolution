@@ -127,6 +127,7 @@ class GetList extends GetListProcessor
         }
 
         $cls = [];
+        $permissions = [];
         if ($canSave && $canEdit && $object->checkPolicy('save')) {
             $cls[] = 'pupdate';
         }
@@ -137,7 +138,11 @@ class GetList extends GetListProcessor
             $cls[] = 'pduplicate';
         }
 
+        $objectArray['recordPerms'] = $cls;
         $objectArray['cls'] = implode(' ', $cls);
+
+        $msg = "\r\n prepareRow, \$objectArray:\r\n" . print_r($objectArray, true);
+        $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
 
         return $objectArray;
     }
