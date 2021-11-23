@@ -97,6 +97,7 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
+        // Note: Role does not have a checkPolicy() method
         $permissions = [
             'create' => $this->canCreate,
             'update' => $this->canUpdate,
@@ -119,8 +120,8 @@ class GetList extends GetListProcessor
         $roleData['creator'] = $isCoreRole ? 'modx' : strtolower($this->modx->lexicon('user')) ;
         $roleData['permissions'] = !$isCoreRole ? $permissions : [] ;
 
-        $msg = "\r\n prepareRow, \$role:\r\n" . print_r($role, true);
-        $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
+        // $msg = "\r\n prepareRow, \$role:\r\n" . print_r($role, true);
+        // $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
 
         return $roleData;
     }

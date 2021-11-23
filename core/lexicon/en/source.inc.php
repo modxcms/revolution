@@ -6,6 +6,8 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['_source_filesystem_description'] = 'The default manager source containing all files this installation of MODX has access to.';
+$_lang['_source_filesystem_name'] = 'Filesystem';
 $_lang['access'] = 'Access Permissions';
 $_lang['base_path'] = 'Base Path';
 $_lang['base_path_relative'] = 'Base Path Relative?';
@@ -20,7 +22,9 @@ $_lang['source_access_remove'] = 'Delete Access';
 $_lang['source_access_remove_confirm'] = 'Are you sure you want to delete Access to this Source for this User Group?';
 $_lang['source_access_update'] = 'Edit Access';
 $_lang['source_description_desc'] = 'A short description of the Media Source.';
+$_lang['source_edit'] = 'Edit the settings for this source';
 $_lang['source_err_ae_name'] = 'A Media Source with that name already exists! Please specify a new name.';
+$_lang['source_err_name_reserved'] = 'The source name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['source_err_nf'] = 'Media Source not found!';
 $_lang['source_err_init'] = 'Could not initialize "[[+source]]" Media Source!';
 $_lang['source_err_nfs'] = 'No Media Source can be found with the id: [[+id]].';

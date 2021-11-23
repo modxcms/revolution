@@ -1,20 +1,3 @@
-/*
-* 
-* Copyright (C) 2021 MODX LLC
-* 
-* This file is part of MODX Revolution and was compiled using Grunt.
-* 
-* MODX Revolution is free software: you can redistribute it and/or modify it under the terms of the
-* GNU General Public License as published by the Free Software Foundation, either version 2 of the
-* License, or (at your option) any later version.
-* 
-* MODX Revolution is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-* without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-* 
-* See the GNU General Public License for more details. You should have received a copy of the GNU
-* General Public License along with MODX Revolution. If not, see <http://www.gnu.org/licenses/>.
-* 
-*/
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 /* Document
    ========================================================================== */
@@ -21891,15 +21874,15 @@ html[dir=rtl] #modx-tv-tabs .x-fieldset legend [type=checkbox] {
     background-color: #FFF;
 }
 
-/* fix combo on grid editor bug */
+.x-grid-editor {
+    z-index: 9002 !important;
+}
 .x-grid-editor .x-form-field-wrap {
     background: #f6f2f7 url("../images/modx-theme/form/combo-bck.png") repeat-x scroll 0 100%;
 }
-
 .x-grid-editor .x-form-field-wrap input {
     background-color: transparent !important;
 }
-
 .x-grid-editor .x-form-field-wrap img {
     background-color: #FFF;
     background-image: url("../images/modx-theme/form/trigger.png");
@@ -26365,6 +26348,11 @@ textarea.x-form-field {
 }
 
 /* grids */
+.modx-protected-row .x-grid3-cell-inner {
+    font-style: italic;
+    color: #234368;
+}
+
 .x-small-editor .x-form-field {
     font-size: 12px !important;
 }
@@ -26377,23 +26365,40 @@ textarea.x-form-field {
     color: #999 !important;
 }
 
-a.x-grid-link {
+.x-grid-link {
     color: #234368;
-    text-decoration: underline;
-}
-
-a.x-grid-link:hover,
-a.x-grid-link:focus {
     text-decoration: none;
+    border-bottom: 1px dotted #749fd0;
+}
+.x-grid-link:hover {
+    color: black;
+    border-bottom-color: #336299;
+}
+.x-grid-link.simulated-link {
+    cursor: pointer;
 }
 
 .x-editable-column {
-    cursor: pointer;
+    cursor: default;
 }
-.x-editable-column:hover, .x-editable-column:focus {
+.x-editable-column:not(.editor-disabled) {
+    cursor: pointer;
+    /*
+    a:hover {
+        &::after {
+        @include awesome-font;
+        content: '\f35d';
+        margin: 0 0 0 0.5em;
+        border-bottom: none;
+        color: $colorSplash;
+      }
+    }
+    */
+}
+.x-editable-column:not(.editor-disabled):hover, .x-editable-column:not(.editor-disabled):focus {
     color: #234368;
 }
-.x-editable-column:hover > div::after, .x-editable-column:focus > div::after {
+.x-editable-column:not(.editor-disabled):hover > div::after, .x-editable-column:not(.editor-disabled):focus > div::after {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -26635,6 +26640,31 @@ a.x-grid-link:focus {
 }
 
 /* rowactions */
+.x-grid3-row.disable-selection .x-grid3-row-checker, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker {
+    position: relative;
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker::before, .x-grid3-row.disable-selection .x-grid3-row-checker::after, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::before, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::after {
+    color: #aaaaaa;
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker::before, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::before {
+    content: "\f0c8";
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker::after, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::after {
+    content: "\f715";
+    font-size: 6px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: 2px;
+    margin-top: 1px;
+    transform: translate(-50%, -50%) rotate(98deg);
+    font-weight: 600;
+    font-family: "Font Awesome 5 Free";
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker:hover, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker:hover {
+    cursor: default;
+}
+
 .ux-row-action-cell .x-grid3-cell-inner {
     padding: 1px 0 0 0;
 }
@@ -27439,6 +27469,16 @@ html[dir=rtl] .x-hide-offsets {
 .x-selectable * {
     -khtml-user-select: all !important;
     user-select: text !important;
+}
+
+.x-selectable.simulated-link * {
+    color: #234368;
+    text-decoration: none;
+    border-bottom: 1px dotted #749fd0;
+}
+.x-selectable.simulated-link *:hover {
+    color: black;
+    border-bottom-color: #336299;
 }
 
 /* Lightbox */

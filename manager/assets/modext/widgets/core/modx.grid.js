@@ -584,20 +584,32 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
 
     /* Record-Level Permissions Checks, for objects with specific policies */
 
-    ,userCanEditRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'pupdate') {
-        const permissions = record[permissionsProperty];
-        return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
+    // ,userCanEditRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'pupdate') {
+    //     const permissions = record[permissionsProperty];
+    //     return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
+    // }
+    ,userCanEditRecord: function(record) {
+        const permissions = record.json.permissions;
+        return !Ext.isEmpty(permissions) && permissions.update === true ? true : false ;
     }
 
-    ,userCanDeleteRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'premove') {
-        const permissions = record[permissionsProperty];
-        // console.log('userCanDeleteRecord, permissions: ', permissions);
-        return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
+    // ,userCanDeleteRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'premove') {
+    //     const permissions = record[permissionsProperty];
+    //     // console.log('userCanDeleteRecord, permissions: ', permissions);
+    //     return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
+    // }
+    ,userCanDeleteRecord: function(record) {
+        const permissions = record.json.permissions;
+        return !Ext.isEmpty(permissions) && !record.json.isProtected && permissions.delete === true ? true : false ;
     }
 
-    ,userCanDuplicateRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'pduplicate') {
-        const permissions = record[permissionsProperty];
-        return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
+    // ,userCanDuplicateRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'pduplicate') {
+    //     const permissions = record[permissionsProperty];
+    //     return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
+    // }
+    ,userCanDuplicateRecord: function(record) {
+        const permissions = record.json.permissions;
+        return !Ext.isEmpty(permissions) && permissions.duplicate === true ? true : false ;
     }
 
     /**
@@ -651,36 +663,62 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         return protectedIdentifiers.includes(subject);
     }
 
-    // ,valueIsReserved: function(e, errorMessage) {
-    //     const reserved = e.record.json.reserved;
-    //     if (reserved && !Ext.isEmpty(reserved)) {
-    //         console.log('valueIsReserved, reserved keys: ', Object.keys(reserved));
-    //         Object.keys(reserved).forEach(key => {
-    //             if (e.field === key && reserved[key].includes(e.value)) {
-    //                 console.log('reserved value found!');
-    //                 Ext.Msg.alert('Error', errorMessage);
-    //                 return false;
-    //             }
-    //         });
-    //     }
-    //     return true;
-    // }
+    /*
+        Note to self: The following valueIsReserved methods worked, but when called
+        from the column model's field validator or from listeners (afteredit/etc)
+        the event timing was too early (the record.json.permissions and other extra
+        properties are not yet set)
+    */
+    /*
+    ,valueIsReserved: function(e, errorMessage) {
+        const reserved = e.record.json.reserved;
+        if (reserved && !Ext.isEmpty(reserved)) {
+            console.log('valueIsReserved, reserved keys: ', Object.keys(reserved));
+            Object.keys(reserved).forEach(key => {
+                if (e.field === key && reserved[key].includes(e.value)) {
+                    console.log('reserved value found!');
+                    Ext.Msg.alert('Error', errorMessage);
+                    return false;
+                }
+            });
+        }
+        return true;
+    }
+    */
+    /*
+    ,valueIsReserved: function(field, record, errorMessage) {
+        const reserved = record.json.reserved;
+        if (reserved && !Ext.isEmpty(reserved)) {
+            // console.log('valueIsReserved, reserved keys: ', Object.keys(reserved));
+            console.log('valueIsReserved, record: ', record);
+            Object.keys(reserved).forEach(key => {
+                if (field === key && reserved[key].includes(record.data[field])) {
+                    console.log('reserved value found!');
+                    Ext.Msg.alert('Error', errorMessage);
+                    return false;
+                }
+            });
+        }
+        return true;
+    }
+    */
 
-    // ,valueIsReserved: function(field, record, errorMessage) {
-    //     const reserved = record.json.reserved;
-    //     if (reserved && !Ext.isEmpty(reserved)) {
-    //         // console.log('valueIsReserved, reserved keys: ', Object.keys(reserved));
-    //         console.log('valueIsReserved, record: ', record);
-    //         Object.keys(reserved).forEach(key => {
-    //             if (field === key && reserved[key].includes(record.data[field])) {
-    //                 console.log('reserved value found!');
-    //                 Ext.Msg.alert('Error', errorMessage);
-    //                 return false;
-    //             }
-    //         });
-    //     }
-    //     return true;
-    // }
+    /**
+     *
+     */
+    ,valueIsReserved: function(reservedValues, value) {
+        if (!Ext.isArray(reservedValues)) {
+            reservedValues = reservedValues.split(',');
+        }
+        let isReserved = false;
+        reservedValues.forEach(reserved => {
+            if (reserved.toLowerCase() === value.toLowerCase()) {
+                isReserved = true;
+                return;
+            }
+        });
+        return isReserved;
+    }
 
     /**
      * @property {Function} getRemovableItemsFromSelection - Prunes protected items from the current
@@ -909,7 +947,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
                 if (record.json.hasOwnProperty('permissions')) {
                     // console.log('perms: ',record.json.permissions);
                     if (
-                        Ext.isEmpty(record.json.permissions) || 
+                        Ext.isEmpty(record.json.permissions) ||
                         Object.values(record.json.permissions).every(permission => permission === false) === true
                     ) {
                         return;

@@ -33,11 +33,9 @@ class GetList extends GetListProcessor
     public $permission = 'view_context';
     public $languageTopics = ['context'];
     public $defaultSortField = 'key';
-    /** @var boolean $canCreate Determines whether or not the user can create a context (/duplicate one) */
+
     protected $canCreate = false;
-    /** @var boolean $canUpdate Determines whether or not the user can edit a Context */
     protected $canUpdate = false;
-    /** @var boolean $canDelete Determines whether or not the user can remove a Context */
     protected $canDelete = false;
 
     /**

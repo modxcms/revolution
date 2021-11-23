@@ -43,8 +43,12 @@ MODx.grid.Role = function(config) {
                 xtype: 'textfield',
                 allowBlank: false,
                 blankText: _('role_err_ns_name'),
+                validationEvent: 'change',
                 validator: function(value) {
-                    if (this.gridEditor.record.json.reserved.name.includes(value)) {
+                    const   grid = Ext.getCmp('modx-grid-role'),
+                            reserved = this.gridEditor.record.json.reserved.name
+                    ;
+                    if (grid.valueIsReserved(reserved, value)) {
                         const msg = _('role_err_name_reserved', { reservedName: value });
                         Ext.Msg.alert(_('error'), msg);
                         return false;

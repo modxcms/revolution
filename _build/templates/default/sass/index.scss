@@ -567,19 +567,32 @@ textarea.x-form-field {
 }
 
 .x-editable-column {
-    cursor: default;
+  cursor: default;
   &:not(.editor-disabled) {
     cursor: pointer;
     &:hover,
     &:focus {
       color: $colorSplash;
-      > div::after {
+      > div {
+        &::after {
+            @include awesome-font;
+            content: fa-content($fa-var-pen);
+            margin: 0 0.5em;
+            color: $colorSplash;
+        }
+      }
+    }
+    /*
+    a:hover {
+        &::after {
         @include awesome-font;
-        content: fa-content($fa-var-pen);
-        margin: 0 0.5em;
+        content: '\f35d';
+        margin: 0 0 0 0.5em;
+        border-bottom: none;
         color: $colorSplash;
       }
     }
+    */
   }
 }
 

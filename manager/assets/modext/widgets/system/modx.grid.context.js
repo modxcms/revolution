@@ -68,6 +68,8 @@ MODx.grid.Context = function(config) {
         save_action: 'Context/UpdateFromGrid',
         remoteSort: true,
         primaryKey: 'key',
+        stateful: true,
+        stateId: 'modx-grid-context-state',
         columns: [{
             header: _('key'),
             dataIndex: 'key',
@@ -83,8 +85,12 @@ MODx.grid.Context = function(config) {
                 xtype: 'textfield',
                 allowBlank: false,
                 blankText: _('context_err_ns_name'),
+                validationEvent: 'change',
                 validator: function(value) {
-                    if (this.gridEditor.record.json.reserved.name.includes(value)) {
+                    const   grid = Ext.getCmp('modx-grid-context'),
+                            reserved = this.gridEditor.record.json.reserved.name
+                    ;
+                    if (grid.valueIsReserved(reserved, value)) {
                         const msg = _('context_err_name_reserved', { reservedName: value });
                         Ext.Msg.alert(_('error'), msg);
                         return false;
@@ -95,9 +101,11 @@ MODx.grid.Context = function(config) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    if (!this.userCanEdit || record.json.key === 'mgr') {
+                    value = value || record.json.name_trans;
+                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
+                    if (!userCanEdit || record.json.key === 'mgr') {
                         metaData.css = 'editor-disabled';
-                        if (!this.userCanEdit) {
+                        if (!userCanEdit) {
                             return value;
                         }
                     }
@@ -120,7 +128,8 @@ MODx.grid.Context = function(config) {
             renderer: {
                 fn: function(value, metaData, record) {
                     value = value || record.json.description_trans;
-                    if (!this.userCanEdit || record.json.key === 'mgr') {
+                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
+                    if (!userCanEdit || record.json.key === 'mgr') {
                         metaData.css = 'editor-disabled';
                     }
                     return value;
@@ -146,7 +155,8 @@ MODx.grid.Context = function(config) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    if (!this.userCanEdit || record.json.key === 'mgr') {
+                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
+                    if (!userCanEdit || record.json.key === 'mgr') {
                         metaData.css = 'editor-disabled';
                     }
                     return value;
@@ -260,7 +270,7 @@ Ext.extend(MODx.grid.Context, MODx.grid.Grid, {
                 m = []
         ;
 
-        if (this.userCanCreate) {
+        if (this.userCanCreate && this.userCanDuplicateRecord(record)) {
             m.push({
                 text: _('duplicate'),
                 handler: this.duplicateContext,
@@ -268,14 +278,14 @@ Ext.extend(MODx.grid.Context, MODx.grid.Grid, {
             });
         }
 
-        if (this.userCanEdit) {
+        if (this.userCanEdit && this.userCanEditRecord(record)) {
             m.push({
                 text: _('edit'),
                 handler: this.updateContext
             });
         }
 
-        if (this.userCanDelete && !record.json.isProtected) {
+        if (this.userCanDelete && this.userCanDeleteRecord(record)) {
             if (m.length > 0) {
                 m.push('-');
             }

@@ -30,6 +30,10 @@ class GetList extends GetListProcessor
     public $languageTopics = ['source'];
     public $permission = 'source_view';
 
+    protected $canCreate = false;
+    protected $canUpdate = false;
+    protected $canDelete = false;
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -41,8 +45,33 @@ class GetList extends GetListProcessor
             'showNone' => false,
             'query' => '',
             'streamsOnly' => false,
+            'exclude' => 'creator'
         ]);
+
+        $this->canCreate = $this->modx->hasPermission('source_save');
+        $this->canUpdate = $this->modx->hasPermission('source_edit');
+        $this->canDelete = $this->modx->hasPermission('source_delete');
+
         return $initialized;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
+    public function beforeQuery()
+    {
+        /*
+            Implementing a little trick here since 'creator' is an arbitrary field
+            not present in the database, used for distinguishing core/protected row data
+            from user-created data
+        */
+        if ($this->getProperty('sort') === 'creator') {
+            $this->setProperty('sort', 'FIELD(modMediaSource.name, "Filesystem")');
+            $dir = $this->getProperty('dir') === 'ASC' ? 'DESC' : 'ASC' ;
+            $this->setProperty('dir', $dir);
+        }
+        return true;
     }
 
     /**
@@ -114,36 +143,33 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $canEdit = $this->modx->hasPermission('source_edit');
-        $canSave = $this->modx->hasPermission('source_save');
-        $canRemove = $this->modx->hasPermission('source_delete');
+        $permissions = [
+            'create' => $this->canCreate && $object->checkPolicy('save'),
+            'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
+            'update' => $this->canUpdate && $object->checkPolicy('save'),
+            'delete' => $this->canDelete && $object->checkPolicy('remove')
+        ];
 
-        $objectArray = $object->toArray();
-        $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
+        $sourceData = $object->toArray();
 
-        $props = $object->getPropertyList();
-        if (isset($props['iconCls']) && !empty($props['iconCls'])) {
-            $objectArray['iconCls'] = $props['iconCls'];
+        $sourceKey = $object->get('name');
+        $coreSources = ['Filesystem'];
+        $isCoreSource = in_array($sourceKey, $coreSources);
+
+        if ($isCoreSource) {
+            $baseKey = '_source_' . strtolower(str_replace(' ', '', $sourceKey)) . '_';
+            $sourceData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
+            $sourceData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
         }
 
-        $cls = [];
-        $permissions = [];
-        if ($canSave && $canEdit && $object->checkPolicy('save')) {
-            $cls[] = 'pupdate';
+        $sourceData['reserved'] = ['name' => $coreSources];
+        $sourceData['isProtected'] = $isCoreSource ? true : false ;
+        $sourceData['creator'] = $isCoreSource ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        if ($isCoreSource) {
+            unset($permissions['delete']);
         }
-        if ($canRemove && $object->checkPolicy('remove')) {
-            $cls[] = 'premove';
-        }
-        if ($canSave && $object->checkPolicy('copy')) {
-            $cls[] = 'pduplicate';
-        }
+        $sourceData['permissions'] = $permissions;
 
-        $objectArray['recordPerms'] = $cls;
-        $objectArray['cls'] = implode(' ', $cls);
-
-        $msg = "\r\n prepareRow, \$objectArray:\r\n" . print_r($objectArray, true);
-        $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
-
-        return $objectArray;
+        return $sourceData;
     }
 }

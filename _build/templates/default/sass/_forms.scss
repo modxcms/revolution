@@ -35,7 +35,7 @@ textarea.x-form-field,
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
-  transition: border-color .25s;
+  transition: border-color 0.25s;
 }
 
 .x-viewport .x-trigger-wrap-focus,
@@ -101,7 +101,7 @@ input::-moz-focus-inner {
       padding: 0 0 0 3px;
       top: 0;
       right: 0;
-      transition: all .25s;
+      transition: all 0.25s;
       width: 16px;
       height: 16px;
 
@@ -109,7 +109,9 @@ input::-moz-focus-inner {
         @extend %pseudo-font;
         box-sizing: border-box;
         color: scale-color($coreFieldLabelColor, $lightness: 50%);
-        content: fa-content($fa-var-undo-alt); /* better match IMO for the action being taken */
+        content: fa-content(
+          $fa-var-undo-alt
+        ); /* better match IMO for the action being taken */
         font-size: 14px;
         position: relative;
         bottom: 2px;
@@ -120,12 +122,12 @@ input::-moz-focus-inner {
         height: 16px;
       }
       &.modx-field-reset {
-          &::before {
-            content: fa-content($fa-var-undo-alt);
-          }
-          &:hover::before {
-            color: $green;
-          }
+        &::before {
+          content: fa-content($fa-var-undo-alt);
+        }
+        &:hover::before {
+          color: $green;
+        }
       }
       &.modx-field-clear {
         &::before {
@@ -199,19 +201,21 @@ input::-moz-focus-inner {
         border-style: solid;
         border-width: 10px 10px 10px 0;
         border-color: transparent $lightGray transparent transparent;
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -10px;
-        transform: rotate(360deg); /* for better anti-aliasing in webkit browsers */
+        transform: rotate(
+          360deg
+        ); /* for better anti-aliasing in webkit browsers */
         width: 0;
         height: 0;
       }
 
       &:after {
         background-color: $white;
-        border-radius: 50%;  /* make a circle */
-        content: '';
+        border-radius: 50%; /* make a circle */
+        content: "";
         position: absolute;
         top: 8px;
         left: -4px;
@@ -233,7 +237,8 @@ input::-moz-focus-inner {
           background-color: darken($colorSplash, 6%);
 
           &:before {
-            border-color: transparent darken($colorSplash, 6%) transparent transparent;
+            border-color: transparent darken($colorSplash, 6%) transparent
+              transparent;
           }
         }
       }
@@ -245,7 +250,7 @@ input::-moz-focus-inner {
     border: 1px solid $borderColor;
     border-radius: $borderRadius;
     padding: 5px;
-    transition: all .25s;
+    transition: all 0.25s;
 
     &:focus {
       border: 1px solid $borderColorFocus;
@@ -289,7 +294,6 @@ input::-moz-focus-inner {
   }
 
   .x-window & {
-
     .x-form-item-label {
       padding: 10px 0 4px 0; /* move the form fields a bit tighter together inside windows */
     }
@@ -309,7 +313,7 @@ input::-moz-focus-inner {
 
   &.disabled {
     label {
-        color: scale-color($coreFieldLabelColor, $lightness: 50%);
+      color: scale-color($coreFieldLabelColor, $lightness: 50%);
     }
   }
 
@@ -322,8 +326,7 @@ input::-moz-focus-inner {
 
   /* prevent columns used inside form elements to have too much spacing, some custom TV types need this */
   .x-column-inner > .x-column {
-
-    ~.x-column {
+    ~ .x-column {
       margin-left: 5px;
     }
 
@@ -349,10 +352,10 @@ input::-moz-focus-inner {
   display: block;
   font-size: 12px;
   font-style: italic;
-  margin: .4em 0 0 0;
+  margin: 0.4em 0 0 0;
 
   &.toggle-slider-above {
-    margin: .3em 0;
+    margin: 0.3em 0;
     padding-left: 3.9em;
   }
 
@@ -364,15 +367,15 @@ input::-moz-focus-inner {
 
   .example-list {
     ul {
-      margin: .4em 0;
+      margin: 0.4em 0;
       li {
         position: relative;
-        margin-bottom: .25em;
+        margin-bottom: 0.25em;
         padding-left: 1.25em;
         &::before {
           @extend %pseudo-font;
           position: absolute;
-          left: .2em;
+          left: 0.2em;
           top: 0;
           content: fa-content($fa-var-angle-double-right);
           color: scale-color($mediumGray, $lightness: 20%);
@@ -382,7 +385,7 @@ input::-moz-focus-inner {
   }
   .example-input,
   .copy-this {
-    padding: 0 .3em;
+    padding: 0 0.3em;
     border-radius: 2px;
     transition: width 1s;
   }
@@ -398,35 +401,35 @@ input::-moz-focus-inner {
   }
 
   .copy-this {
-      color: scale-color($blue, $lightness: -5%, $saturation: -40%);
-      background-color: scale-color($blue, $lightness: 92%, $saturation: -15%);
-      &:hover {
-          background-color: scale-color($blue, $lightness: 87%, $saturation: 5%);
-          color: scale-color($blue, $lightness: -35%);
-          cursor: pointer;
-          &::after {
-              @extend %pseudo-font;
-              content: fa-content($fa-var-copy);
-              color: scale-color($blue, $saturation: -40%);
-              display: inherit;
-              margin-left: .5em;
-          }
-          &:active {
-              color: $darkGray;
-              &::after {
-                  color: $darkGray;
-              }
-          }
+    color: scale-color($blue, $lightness: -5%, $saturation: -40%);
+    background-color: scale-color($blue, $lightness: 92%, $saturation: -15%);
+    &:hover {
+      background-color: scale-color($blue, $lightness: 87%, $saturation: 5%);
+      color: scale-color($blue, $lightness: -35%);
+      cursor: pointer;
+      &::after {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-copy);
+        color: scale-color($blue, $saturation: -40%);
+        display: inherit;
+        margin-left: 0.5em;
       }
+      &:active {
+        color: $darkGray;
+        &::after {
+          color: $darkGray;
+        }
+      }
+    }
   }
   .feedback {
-      margin-left: .75em;
-      color: scale-color($blue, $lightness: -35%);
-      font-style: normal;
-      &.item-copied {
-          opacity: 1;
-          transition: opacity 1.5s;
-      }
+    margin-left: 0.75em;
+    color: scale-color($blue, $lightness: -35%);
+    font-style: normal;
+    &.item-copied {
+      opacity: 1;
+      transition: opacity 1.5s;
+    }
   }
 
   a {
@@ -441,13 +444,12 @@ input::-moz-focus-inner {
   .deemphasize {
     font-style: normal;
   }
-
 }
 
 .fs-toggle {
   padding-top: 1em;
   margin-top: 2em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   border-top: 1px dashed $borderColor;
 }
 
@@ -506,7 +508,6 @@ input::-moz-focus-inner {
       }
     }
   }
-
 }
 
 .x-form-field {
@@ -569,14 +570,14 @@ input::-moz-focus-inner {
       content: fa-content($fa-var-chevron-down);
       font-size: 14px;
       margin-top: -7px; /* half of the height to center vertically with top 50% */
-      opacity: .8;
+      opacity: 0.8;
       filter: alpha(opacity=60); /* for IE <= 8 */
       position: absolute;
       top: 50%;
       right: 0;
       text-align: center;
       width: 30px;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
     }
 
     &.x-form-trigger-over,
@@ -626,7 +627,6 @@ input::-moz-focus-inner {
       content: fa-content($fa-var-file-code);
       font-weight: 400;
     }
-
   }
 
   &.x-datetime-wrap {
@@ -635,7 +635,6 @@ input::-moz-focus-inner {
 
     .ux-datetime-date {
       .x-form-trigger {
-
         &:before {
           content: fa-content($fa-var-calendar);
         }
@@ -644,7 +643,6 @@ input::-moz-focus-inner {
 
     .ux-datetime-time {
       .x-form-trigger {
-
         &:before {
           content: fa-content($fa-var-clock);
         }
@@ -726,7 +724,7 @@ input::-moz-focus-inner {
       padding-left: 3px;
 
       &:before {
-        content: '';
+        content: "";
       }
     }
 
@@ -734,7 +732,7 @@ input::-moz-focus-inner {
       @extend %pseudo-font;
 
       box-sizing: border-box;
-      content: '';
+      content: "";
       font-size: 18px;
       padding-right: 3px;
       position: absolute;
@@ -819,12 +817,10 @@ input::-moz-focus-inner {
 /* Special checboxes for resources and tv configs */
 #modx-resource-tabs,
 #modx-tv-tabs {
-
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
   .x-fieldset legend {
-    [type="checkbox"]{
-
+    [type="checkbox"] {
       position: absolute;
       left: -9999px;
       html[dir="rtl"] & {
@@ -832,11 +828,11 @@ input::-moz-focus-inner {
         left: unset;
       }
 
-      &+.x-form-cb-label,
-      &+.x-fieldset-header-text {
+      & + .x-form-cb-label,
+      & + .x-fieldset-header-text {
         position: relative;
         padding-left: 3.6em;
-        padding-top: .2em;
+        padding-top: 0.2em;
         margin-left: 0;
         cursor: pointer;
         box-sizing: border-box;
@@ -844,9 +840,9 @@ input::-moz-focus-inner {
 
         &:before,
         &:after {
-          content: '';
+          content: "";
           position: absolute;
-          transition: all .2s ease;
+          transition: all 0.2s ease;
           font-size: inherit;
         }
 
@@ -863,7 +859,7 @@ input::-moz-focus-inner {
         &:after {
           left: 0.1em;
           top: 0.8em;
-          margin-top: -.65em;
+          margin-top: -0.65em;
           height: 1.3em;
           width: 1.3em;
           border-radius: 50%;
@@ -873,9 +869,8 @@ input::-moz-focus-inner {
       }
 
       &:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-form-cb-label,
+        & + .x-fieldset-header-text {
           &:after {
             left: 1.6em;
             top: 0.8em;
@@ -889,9 +884,8 @@ input::-moz-focus-inner {
       }
 
       &.danger:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-form-cb-label,
+        & + .x-fieldset-header-text {
           &:before {
             background-color: $red;
             border-color: $red;
@@ -900,9 +894,8 @@ input::-moz-focus-inner {
       }
 
       &.warning:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-form-cb-label,
+        & + .x-fieldset-header-text {
           &:before {
             background-color: $orange;
             border-color: $orange;
@@ -930,11 +923,10 @@ input::-moz-focus-inner {
   }
   /* applies to new xcheckboxgroup custom checkbox group */
   &.aggregated-group {
-      padding-left: 1em;
-      padding-right: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
-
 
 /* superboxselect / multi-select field */
 .x-superboxselect {
@@ -985,13 +977,13 @@ input::-moz-focus-inner {
           cursor: pointer;
           display: inline-block; /*font-size: 1px;*/
           outline: 0; /* fix firefox dotted outlines */
-          opacity: .6;
+          opacity: 0.6;
           filter: alpha(opacity=60); /* for IE <= 8 */
           padding: 0;
           position: absolute;
           top: 0;
           right: 0;
-          transition: opacity .25s;
+          transition: opacity 0.25s;
           width: 16px;
           height: 100%;
 
@@ -1084,7 +1076,7 @@ input::-moz-focus-inner {
     margin-bottom: 2px;
   }
 
-  input[type=text],
+  input[type="text"],
   textarea {
     background-color: $coreFieldBg;
     background-image: none;
@@ -1094,7 +1086,7 @@ input::-moz-focus-inner {
     width: 97%;
   }
 
-  input[type=text] {
+  input[type="text"] {
     font-size: 13px;
     height: 20px !important;
     padding: 5px;
@@ -1132,21 +1124,22 @@ input::-moz-focus-inner {
 }
 
 .x-editor .x-form-check-wrap {
-  background-color: $white
-}
-
-/* fix combo on grid editor bug */
-.x-grid-editor .x-form-field-wrap {
-  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0 100%;
-}
-
-.x-grid-editor .x-form-field-wrap input {
-  background-color: transparent !important;
-}
-
-.x-grid-editor .x-form-field-wrap img {
   background-color: $white;
-  background-image: url($imgPath + 'modx-theme/form/trigger.png');
+}
+
+.x-grid-editor {
+  z-index: 9002 !important;
+  .x-form-field-wrap {
+    background: #f6f2f7 url($imgPath+"modx-theme/form/combo-bck.png") repeat-x
+      scroll 0 100%;
+    input {
+      background-color: transparent !important;
+    }
+    img {
+      background-color: $white;
+      background-image: url($imgPath+"modx-theme/form/trigger.png");
+    }
+  }
 }
 
 .x-form-grow-sizer {
@@ -1176,7 +1169,6 @@ input::-moz-focus-inner {
 
 .x-grid3 {
   .x-small-editor {
-
     .x-form-text,
     .x-form-field-wrap {
       font: $fontSmall;
@@ -1279,7 +1271,7 @@ input::-moz-focus-inner {
 
       .x-btn {
         padding: 1px;
-        transition: color .25s;
+        transition: color 0.25s;
 
         &.x-btn-over,
         &:hover,
@@ -1294,7 +1286,7 @@ input::-moz-focus-inner {
 
         &.x-item-disabled {
           color: $buttonColor;
-          opacity: .4;
+          opacity: 0.4;
         }
 
         button:before {
@@ -1338,7 +1330,11 @@ input::-moz-focus-inner {
     }
 
     /* the second text cell, "of X" */
-    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+    .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell {
       .xtb-text {
         display: inline-block;
         position: absolute;
@@ -1350,7 +1346,15 @@ input::-moz-focus-inner {
     }
 
     /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
-    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+    .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell {
       .x-btn {
         margin-right: 0;
       }
@@ -1359,13 +1363,13 @@ input::-moz-focus-inner {
     /* the refresh button */
     .x-toolbar-cell:last-child {
       opacity: 0;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
 
       .x-btn {
         font-size: 12px;
         line-height: 1;
         margin: 0;
-        opacity: .4;
+        opacity: 0.4;
         padding: 0;
         position: absolute;
         bottom: 2px;
@@ -1401,7 +1405,7 @@ input::-moz-focus-inner {
 }
 
 .x-combo-list-hd {
-  background-image: url($imgPath + 'modx-theme/layout/panel-title-light-bg.gif');
+  background-image: url($imgPath+"modx-theme/layout/panel-title-light-bg.gif");
   border-bottom-color: #bcbcbc;
   color: #464646;
 }
@@ -1448,18 +1452,18 @@ input::-moz-focus-inner {
 .x-date-mp-ybtn a.x-date-mp-prev,
 .x-date-mp-ybtn a.x-date-mp-next {
   display: inline-block;
-  opacity: .6;
+  opacity: 0.6;
   filter: alpha(opacity=60); /* for IE <= 8 */
   margin: 0 auto;
   position: relative;
-  transition: opacity .25s;
+  transition: opacity 0.25s;
 
   &:before {
     @extend %pseudo-font;
 
     box-sizing: border-box;
     color: $colorSplash;
-    content: '';
+    content: "";
     font-size: 18px;
     position: absolute;
     top: 0;
@@ -1688,7 +1692,7 @@ td.x-date-mp-sep {
   border-radius: $borderRadius;
   background-color: $coreFieldBg;
   border: 1px solid $borderColor;
-  background: url('../images/tp-no-preview.png') no-repeat center center;
+  background: url("../images/tp-no-preview.png") no-repeat center center;
   overflow: hidden;
 
   .x-panel-bwrap,
@@ -1709,6 +1713,6 @@ td.x-date-mp-sep {
     bottom: 0;
     padding: 10px 20px;
     color: #fff;
-    background-color: rgba(0, 0, 0, .8);
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }
