@@ -520,6 +520,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
         }
         if (ui.hasClass('pdelete')) {
+            m.push('-');
             m.push({
                 text: _('remove_context')
                 ,handler: this.removeContext

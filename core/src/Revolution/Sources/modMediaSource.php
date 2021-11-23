@@ -2060,6 +2060,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $canCreate = $this->checkPolicy('create');
 
         $menu = [];
+        $menu[] = [
+            'text' => $this->xpdo->lexicon('directory_refresh'),
+            'handler' => 'this.refreshActiveNode',
+        ];
         if ($this->hasPermission('directory_create') && $canCreate) {
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_folder_create_here'),
@@ -2078,10 +2082,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'handler' => 'this.setVisibility',
             ];
         }
-        $menu[] = [
-            'text' => $this->xpdo->lexicon('directory_refresh'),
-            'handler' => 'this.refreshActiveNode',
-        ];
+        if ($this->hasPermission('directory_remove') && $canRemove) {
+            $menu[] = '-';
+            $menu[] = [
+                'text' => $this->xpdo->lexicon('file_folder_remove'),
+                'handler' => 'this.removeDirectory',
+            ];
+        }
         if ($this->hasPermission('file_upload') && $canCreate) {
             $menu[] = '-';
             $menu[] = [
@@ -2097,13 +2104,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $menu[] = [
                 'text' => $this->xpdo->lexicon('quick_create_file'),
                 'handler' => 'this.quickCreateFile',
-            ];
-        }
-        if ($this->hasPermission('directory_remove') && $canRemove) {
-            $menu[] = '-';
-            $menu[] = [
-                'text' => $this->xpdo->lexicon('file_folder_remove'),
-                'handler' => 'this.removeDirectory',
             ];
         }
 
@@ -2140,23 +2140,16 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     'handler' => 'this.quickUpdateFile',
                 ];
             }
-            if ($canOpen) {
-                $menu[] = [
-                    'text' => $this->xpdo->lexicon('file_open'),
-                    'handler' => 'this.openFile',
-                ];
-            }
             $menu[] = [
-                'text' => $this->xpdo->lexicon('rename'),
+                'text' => $this->xpdo->lexicon('file_rename'),
                 'handler' => 'this.renameFile',
             ];
-            if ($this->visibility_files && $canSave) {
-                $menu[] = [
-                    'text' => $this->xpdo->lexicon('file_folder_visibility'),
-                    'handler' => 'this.setVisibility',
-                ];
-            }
-            $menu[] = '-';
+        }
+        if ($this->hasPermission('file_view') && $canOpen) {
+            $menu[] = [
+                'text' => $this->xpdo->lexicon('file_open'),
+                'handler' => 'this.openFile',
+            ];
         }
         if ($this->hasPermission('file_view') && $canView) {
             $menu[] = [
@@ -2172,8 +2165,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 ];
             }
         }
+        if ($this->hasPermission('file_update') && $this->visibility_files && $canSave) {
+            $menu[] = [
+                'text' => $this->xpdo->lexicon('file_folder_visibility'),
+                'handler' => 'this.setVisibility',
+            ];
+        }
         if ($this->hasPermission('file_remove') && $canRemove) {
-            if (!empty($menu)) $menu[] = '-';
+            $menu[] = '-';
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_remove'),
                 'handler' => 'this.removeFile',
