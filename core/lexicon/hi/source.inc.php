@@ -92,8 +92,8 @@ $_lang['prop_ftp.password_desc'] = 'उपयोकर्ता का पास
 $_lang['prop_ftp.url_desc'] = 'If this FTP is has a public URL, you can enter its public http-address here. This will also enable image previews in the media browser.';
 $_lang['prop_ftp.port_desc'] = 'सर्वर का पोर्ट, डिफाल्ट 21 है.';
 $_lang['prop_ftp.root_desc'] = 'The root folder, it will be opened after connection';
-$_lang['prop_ftp.passive_desc'] = 'Enable or disable passive ftp mode';
-$_lang['prop_ftp.ssl_desc'] = 'Enable or disable ssl connection';
+$_lang['prop_ftp.passive_desc'] = 'निष्क्रिय ftp मोड को सक्षम या असक्षम करें';
+$_lang['prop_ftp.ssl_desc'] = 'ssl कनेक्शन सक्षम या अक्षम करें';
 $_lang['prop_ftp.timeout_desc'] = 'सेकंड में कनेक्शन के लिए समयबाह्य.';
 
 /* file type */
