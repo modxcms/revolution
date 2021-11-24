@@ -83,6 +83,7 @@ $_lang['file_package_err_invalid_name'] = 'A [[+name]] állomány neve érvényt
 $_lang['file_package_err_invalid_type'] = 'Ez az állomány nem tűnik átviteli csomagnak';
 $_lang['file_remove'] = 'Állomány törlése';
 $_lang['file_remove_confirm'] = 'Biztosan törli a(z) "[[+file]]" állományt? Egy állomány törlése hibát okozhat a weboldalában. Törlés előtt nézzen utána, hogy ez az állomány mire való.';
+$_lang['file_rename'] = 'Rename File';
 $_lang['file_saved'] = 'Állomány sikeresen frissítve!';
 $_lang['file_size'] = 'Állomány mérete';
 $_lang['file_size_bytes'] = 'bájt';
