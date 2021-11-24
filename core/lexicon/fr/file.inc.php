@@ -83,6 +83,7 @@ $_lang['file_package_err_invalid_name'] = 'Ce fichier [[+name]] a un nom invalid
 $_lang['file_package_err_invalid_type'] = 'Ce fichier ne semble pas être un paquet de transport';
 $_lang['file_remove'] = 'Supprimer le fichier';
 $_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
+$_lang['file_rename'] = 'Rename File';
 $_lang['file_saved'] = 'Fichier correctement mis à jour!';
 $_lang['file_size'] = 'Taille du fichier';
 $_lang['file_size_bytes'] = 'octets';
