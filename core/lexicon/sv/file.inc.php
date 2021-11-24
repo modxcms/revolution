@@ -83,6 +83,7 @@ $_lang['file_package_err_invalid_name'] = 'Den här filen [[+name]] har ett ogil
 $_lang['file_package_err_invalid_type'] = 'Denna fil verkar inte vara ett transportpaket.';
 $_lang['file_remove'] = 'Ta bort fil';
 $_lang['file_remove_confirm'] = 'Är du säker på att du vill ta bort filen: "[[+file]]"?<br />Att ta bort en fil kan potentiellt ha sönder din webbplats. Se till att du vet vad den här filen gör innan du tar bort den.';
+$_lang['file_rename'] = 'Rename File';
 $_lang['file_saved'] = 'Filen uppdaterades utan problem!';
 $_lang['file_size'] = 'Filstorlek';
 $_lang['file_size_bytes'] = 'byte';
