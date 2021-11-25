@@ -145,7 +145,6 @@
   }
 }
 
-
 /* Instead of writing the same code for every nav bar */
 @mixin navigation-list {
   list-style-type: none;
@@ -211,4 +210,14 @@
       }
     }
   }
+}
+
+@mixin textLink {
+    color: $colorSplash;
+    text-decoration: none;
+    border-bottom: 1px dotted scale-color($colorSplash, $lightness: 50%);
+    &:hover {
+      color: $black;
+      border-bottom-color: scale-color($black, $lightness: 40%);
+    }
 }
