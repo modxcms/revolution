@@ -190,7 +190,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
 
     ,hasSavePermissions: false
 
-    ,showActionsMenu: true
+    ,showActionsMenu: null
 
     ,onStoreException: function(dp,type,act,opt,resp){
         var r = Ext.decode(resp.responseText);
@@ -584,29 +584,16 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
 
     /* Record-Level Permissions Checks, for objects with specific policies */
 
-    // ,userCanEditRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'pupdate') {
-    //     const permissions = record[permissionsProperty];
-    //     return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
-    // }
     ,userCanEditRecord: function(record) {
         const permissions = record.json.permissions;
         return !Ext.isEmpty(permissions) && permissions.update === true ? true : false ;
     }
 
-    // ,userCanDeleteRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'premove') {
-    //     const permissions = record[permissionsProperty];
-    //     // console.log('userCanDeleteRecord, permissions: ', permissions);
-    //     return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
-    // }
     ,userCanDeleteRecord: function(record) {
         const permissions = record.json.permissions;
         return !Ext.isEmpty(permissions) && !record.json.isProtected && permissions.delete === true ? true : false ;
     }
 
-    // ,userCanDuplicateRecord: function(record, permissionsProperty = 'cls', permissionsKey = 'pduplicate') {
-    //     const permissions = record[permissionsProperty];
-    //     return !Ext.isEmpty(permissions) && permissions.indexOf(permissionsKey) !== -1 ? true : false ;
-    // }
     ,userCanDuplicateRecord: function(record) {
         const permissions = record.json.permissions;
         return !Ext.isEmpty(permissions) && permissions.duplicate === true ? true : false ;
@@ -635,10 +622,10 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
             permissions.push(modePermission);
         });
         // console.log('setShowActionsMenu: final permissions: ', permissions);
-        if (permissions.length === 0 || permissions.every(permission => permission === false) === true) {
-            this.showActionsMenu = false;
-            return;
-        }
+        this.showActionsMenu = permissions.length === 0 || permissions.every(permission => permission === false) === true
+            ? false
+            : true
+            ;
     }
 
     /**
@@ -924,11 +911,10 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
             showActionsMenu will be true if at least one user group-level permission is granted,
             excluding create/new permissions (since that is not executed by our context/actions menus)
         */
-        console.log('actionsColumnRenderer, record', record);
+        // console.log('actionsColumnRenderer, record', record);
         if (this.showActionsMenu) {
-            const isProtected = this.recordIsProtected(record.data[this.protectedDataIndex], this.protectedIdentifiers);
-            // const isProtected = record.json.isProtected;
-            // console.log('actionsColumnRenderer, record', record);
+            const isProtected = record.json.isProtected;
+            console.log('actionsColumnRenderer, showActionsMenu = true, record:', record);
             // console.log('actionsColumnRenderer, this', this);
             // console.log('actionsColumnRenderer, this is policy grid?', this instanceof MODx.grid.AccessPolicy);
             // console.log('actionsColumnRenderer, gridMenuActions', this.gridMenuActions);
@@ -954,17 +940,19 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
                     }
                 }
             }
-            const actions = this.getActions.apply(this, [record, rowIndex, colIndex, store]);
+        }
+        const actions = this.getActions.apply(this, arguments);
 
+        if (this.config.disableContextMenuAction !== true) {
             actions.push({
                 text: _('context_menu'),
                 action: 'contextMenu',
                 icon: 'gear'
             });
-            return this._getActionsColumnTpl().apply({
-                actions: actions
-            });
         }
+        return this._getActionsColumnTpl().apply({
+            actions: actions
+        });
     }
 
     /**
@@ -987,7 +975,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         return el.dom.outerHTML;
     }
 
-    ,getActions: function(record, rowIndex, colIndex, store) {
+    ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
         return [];
     }
 

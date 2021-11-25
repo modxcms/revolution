@@ -257,7 +257,7 @@ MODx.grid.Context = function(config) {
             );
         },
         beforeedit: function(e) {
-            if (e.record.json.key === 'mgr') {
+            if (e.record.json.key === 'mgr' || !this.userCanEditRecord(e.record)) {
                 return false;
             }
         }

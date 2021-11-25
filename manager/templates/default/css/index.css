@@ -26383,17 +26383,6 @@ textarea.x-form-field {
 }
 .x-editable-column:not(.editor-disabled) {
     cursor: pointer;
-    /*
-    a:hover {
-        &::after {
-        @include awesome-font;
-        content: '\f35d';
-        margin: 0 0 0 0.5em;
-        border-bottom: none;
-        color: $colorSplash;
-      }
-    }
-    */
 }
 .x-editable-column:not(.editor-disabled):hover, .x-editable-column:not(.editor-disabled):focus {
     color: #234368;

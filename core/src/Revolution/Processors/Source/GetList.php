@@ -151,7 +151,6 @@ class GetList extends GetListProcessor
         ];
 
         $sourceData = $object->toArray();
-
         $sourceKey = $object->get('name');
         $coreSources = ['Filesystem'];
         $isCoreSource = in_array($sourceKey, $coreSources);

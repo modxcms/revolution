@@ -33,7 +33,6 @@ class GetList extends GetListProcessor
     public $permission = 'view_role';
     public $defaultSortField = 'authority';
 
-    // public $canRemove = false;
     protected $canCreate = false;
     protected $canUpdate = false;
     protected $canDelete = false;
@@ -52,7 +51,6 @@ class GetList extends GetListProcessor
             $this->setProperty('sort', 'name');
         }
 
-        // $this->canRemove = $this->modx->hasPermission('delete_role');
         $this->canCreate = $this->modx->hasPermission('new_role') && $this->modx->hasPermission('save_role');
         $this->canUpdate = $this->modx->hasPermission('edit_role') && $this->modx->hasPermission('save_role');
         $this->canDelete = $this->modx->hasPermission('delete_role');
@@ -105,7 +103,6 @@ class GetList extends GetListProcessor
         ];
 
         $roleData = $object->toArray();
-
         $roleName = $object->get('name');
         $isCoreRole = $roleName === 'Super User' || $roleName === 'Member';
 
@@ -119,9 +116,6 @@ class GetList extends GetListProcessor
         $roleData['isProtected'] = $isCoreRole ? true : false ;
         $roleData['creator'] = $isCoreRole ? 'modx' : strtolower($this->modx->lexicon('user')) ;
         $roleData['permissions'] = !$isCoreRole ? $permissions : [] ;
-
-        // $msg = "\r\n prepareRow, \$role:\r\n" . print_r($role, true);
-        // $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
 
         return $roleData;
     }

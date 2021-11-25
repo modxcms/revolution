@@ -84,9 +84,6 @@ class GetList extends GetListProcessor
      */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        // $msg = "\r\n prepareQueryBeforeCount, \$properties:\r\n" . print_r($this->getProperties(), true);
-        // $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
-
         $search = $this->getProperty('search');
         if (!empty($search)) {
             $c->where([
@@ -139,17 +136,7 @@ class GetList extends GetListProcessor
             'delete' => $this->canDelete && $object->checkPolicy('remove')
         ];
 
-        // $policies = [
-        //     'save' => $object->checkPolicy('save'),
-        //     'copy' => $object->checkPolicy('copy'),
-        //     'remove' => $object->checkPolicy('remove')
-        // ];
-        //
-        // $msg = "\r\n context:, \$policies:\r\n" . print_r($policies, true);
-        // $this->modx->log(\modX::LOG_LEVEL_ERROR, $msg, '', __CLASS__);
-
         $contextData = $object->toArray();
-
         $contextKey = $object->get('key');
         $coreContexts = ['mgr', 'web'];
         $isCoreContext = in_array($contextKey, $coreContexts);
