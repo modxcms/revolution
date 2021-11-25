@@ -181,7 +181,8 @@ MODx.grid.Grid = function(config = {}) {
 
     this.on('click', this.onClickHandler, this);
 };
-Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
+Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
+
     windows: {}
 
     ,onStoreException: function(dataProxy, type, action, options, response) {
@@ -274,7 +275,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             if (response.data.length) {
                 // We get some data for specific field(s) error but not regular error message
                 Ext.each(response.data, function(data, index, list) {
-                    msg += (msg != '' ? '<br/>' : '') + data.msg;
+                    msg += (msg != '' ? '<br>' : '') + data.msg;
                 }, this);
             }
             if (Ext.isEmpty(msg)) {
@@ -566,6 +567,183 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         return z;
     }
 
+    /**
+     * @property {Function} setEditableColumnAccess - Enable/disable column editor based on user permissions
+     *
+     * @param {Array} columnIds - The ids of the columns that have an editor configured in the column model
+     *
+     * @return void
+     */
+    ,setEditableColumnAccess: function(columnIds) {
+        if (!this.userCanEdit && !Ext.isEmpty(columnIds)) {
+            const colModel = this.getColumnModel();
+            columnIds = columnIds.map(item => item.trim());
+            columnIds.forEach(colId => {
+                const colIndex = colModel.getIndexById(colId);
+                colModel.setEditable(colIndex, false);
+            });
+        }
+    }
+
+
+    /* User Group-Level Permissions Checks for the calling "class" object */
+
+    /**
+     * @property {Function} setUserCanEdit - Assigns a value to userCanEdit property based on
+     * the user's permissions; used to adjust which menu items are available, whether to render links
+     * to and item's editing page, and css cues across many grid classes
+     *
+     * @param {Array} permissions - A set of permissions keys to evaluate; note that many areas currently
+     * rely on a pair of permissions (save_x and edit_x), both of which must be enabled to edit a grid item
+     *
+     * @return void
+     */
+    ,setUserCanEdit: function(permissions) {
+        permissions = permissions.map(item => item.trim());
+        this.userCanEdit = permissions.every(permission => MODx.perm[permission]);
+    }
+
+    /**
+     * @property {Function} setUserCanCreate - Assigns a value to userCanCreate property based on
+     * the user's permissions; used to adjust which menu items are available (namely the Duplicate item)
+     * and whether to render the Create button in the grid's toolbar
+     *
+     * @param {Array} permissions - A set of permissions keys to evaluate; note that many areas currently
+     * rely on a pair of permissions (save_x and new_x), both of which must be enabled to create/duplicate a grid item
+     *
+     * @return void
+     */
+    ,setUserCanCreate: function(permissions) {
+        permissions = permissions.map(item => item.trim());
+        this.userCanCreate = permissions.every(permission => MODx.perm[permission]);
+    }
+
+    /**
+     * @property {Function} setUserCanDelete - Assigns a value to userCanDelete property based on
+     * the user's permissions; used to adjust which menu items are available in the context menus
+     * and whether to render the Delete menu item within a grid toolbar's Batch button
+     *
+     * @param {Array} permissions - A set of permissions keys to evaluate
+     *
+     * @return void
+     */
+    ,setUserCanDelete: function(permissions) {
+        permissions = permissions.map(item => item.trim());
+        this.userCanDelete = permissions.every(permission => MODx.perm[permission]);
+    }
+
+
+    /* Record-Level Permissions Checks, for objects with specific policies */
+
+    ,userCanEditRecord: function(record) {
+        const permissions = record.json.permissions;
+        return !Ext.isEmpty(permissions) && permissions.update === true ? true : false ;
+    }
+
+    ,userCanDeleteRecord: function(record) {
+        const permissions = record.json.permissions;
+        return !Ext.isEmpty(permissions) && !record.json.isProtected && permissions.delete === true ? true : false ;
+    }
+
+    ,userCanDuplicateRecord: function(record) {
+        const permissions = record.json.permissions;
+        return !Ext.isEmpty(permissions) && permissions.duplicate === true ? true : false ;
+    }
+
+    /**
+     * @property {Function} setShowActionsMenu - Based on properties set in the calling child class and the
+     * the current user's permissions for actions taken within that class (create, edit, delete, etc),
+     * evaluates whether the actions menu trigger should appear and sets boolean value on the showActionsMenu property
+     *
+     * @return void
+     */
+    ,setShowActionsMenu: function() {
+        if (this.config.disableContextMenuAction === true) {
+            this.showActionsMenu = false;
+            return;
+        }
+        const permissions = [];
+        this.gridMenuActions.forEach(mode => {
+            mode = mode == 'duplicate' ? 'userCanCreate' : 'userCan' + Ext.util.Format.capitalize(mode);
+            const modePermission = mode === 'userCanExport' ? true : this[mode] ;
+            if (['userCanCreate', 'userCanEdit'].includes(mode) && modePermission === true) {
+                this.hasSavePermissions = true;
+            }
+            permissions.push(modePermission);
+        });
+        this.showActionsMenu = permissions.length === 0 || permissions.every(permission => permission === false) === true
+            ? false
+            : true
+            ;
+    }
+
+    /**
+     * @property {Function} recordIsProtected - Used to remove the ability to delete
+     * specific record rows, regardless of permissions levels, based on a given record identifier
+     *
+     * @param {Number} subject - The value of the current record's identifier
+     * @param {Number} protectedIdentifiers - The record identifiers to be protected (making them non-editable/deletable)
+     *
+     * @return {Boolean}
+     */
+    ,recordIsProtected: function(subject, protectedIdentifiers) {
+        if (Ext.isEmpty(protectedIdentifiers)) {
+            return false;
+        }
+        protectedIdentifiers = protectedIdentifiers.map(identifier => {
+            return typeof identifier === 'string' ? identifier.trim() : identifier ;
+        });
+        return protectedIdentifiers.includes(subject);
+    }
+
+    /**
+     * @property {Function} valueIsReserved - Wraps a grid value with a real or simulated link — a trigger that appears
+     * like an anchor link, usually to access a dropdown chooser or other control
+     *
+     * @param {Array|String} reservedValues - A set of values that can not be used for a particular object's field
+     * @param {Object} value - The submitted value being tested
+     *
+     * @return {Boolean}
+     */
+    ,valueIsReserved: function(reservedValues, value) {
+        if (!Ext.isArray(reservedValues)) {
+            reservedValues = reservedValues.split(',');
+        }
+        let isReserved = false;
+        reservedValues.forEach(reserved => {
+            if (reserved.toLowerCase() === value.toLowerCase()) {
+                isReserved = true;
+                return;
+            }
+        });
+        return isReserved;
+    }
+
+    /**
+     * @property {Function} getRemovableItemsFromSelection - Prunes protected items from the current
+     * selection list before submitting for deletion, or for setting the state of the 'Delete Selected'
+     * menu item
+     *
+     * @param {String} itemIdType - The data type of the value being inspected (either string or integer)
+     *
+     * @return {Boolean|Array}
+     */
+    ,getRemovableItemsFromSelection: function(itemIdType = 'string') {
+        const   selectionList = this.getSelectedAsList(),
+                removableItems = []
+        ;
+        if (selectionList === false) {
+            return false;
+        }
+        selectionList.split(',').forEach(id => {
+            id = itemIdType === 'string' ? id : parseInt(id) ;
+            if (!this.recordIsProtected(id, this.protectedIdentifiers) && !this.nonRemoveableRecords.includes(id)) {
+                removableItems.push(id);
+            }
+        });
+        return removableItems.length > 0 ? removableItems : false ;
+    }
+
     ,renderEditableColumn: function(renderer) {
         return function(value, metaData, record, rowIndex, colIndex, store) {
             if (renderer) {
@@ -573,7 +751,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     var scope = (renderer.scope) ? renderer.scope : false;
                     renderer = renderer.fn.bind(scope);
                 }
-
                 if (typeof renderer === 'function') {
                     value = renderer(value, metaData, record, rowIndex, colIndex, store);
                 }
@@ -737,7 +914,36 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
-        var actions = this.getActions.apply(this, [record, rowIndex, colIndex, store]);
+        /*
+            showActionsMenu will be true if at least one user group-level permission is granted,
+            excluding create/new permissions (since that is not executed by our context/actions menus)
+        */
+        if (this.showActionsMenu) {
+            const isProtected = record.json.isProtected;
+
+            // Export is always available; only continue filtering if grid does not offer export
+            if (!this.gridMenuActions.includes('export')) {
+                if (!this.hasSavePermissions && isProtected) {
+                    return;
+                }
+                // Checking record-level permissions
+                if (record.data.hasOwnProperty('cls')) {
+                    if (Ext.isEmpty(record.data.cls)) {
+                        return;
+                    }
+                }
+                if (record.json.hasOwnProperty('permissions')) {
+                    if (
+                        Ext.isEmpty(record.json.permissions) ||
+                        Object.values(record.json.permissions).every(permission => permission === false) === true
+                    ) {
+                        return;
+                    }
+                }
+            }
+        }
+        const actions = this.getActions.apply(this, arguments);
+
         if (this.config.disableContextMenuAction !== true) {
             actions.push({
                 text: _('context_menu'),
@@ -745,20 +951,36 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 icon: 'gear'
             });
         }
-
         return this._getActionsColumnTpl().apply({
             actions: actions
         });
     }
 
-    ,renderLink: function(v,attr) {
-        var el = new Ext.Element(document.createElement('a'));
-        el.addClass('x-grid-link');
-        el.dom.title = _('edit');
-        for (var i in attr) {
-            el.dom[i] = attr[i];
+    /**
+     * @property {Function} renderLink - Wraps a grid value with a real or simulated link — a trigger that appears
+     * like an anchor link, usually to access a dropdown chooser or other control
+     *
+     * @param {String} content - The value being wrapped
+     * @param {Object} attributes - Html attributes to add to the link's tag
+     * @param {Boolean} isSimulated - Indicates whether the link is real (anchor tag) or not (simulated)
+     * @param {String} isSimulatedTag - The html tag name to wrap the content with
+     *
+     * @return {String}
+     */
+    ,renderLink: function(content, attributes = {}, isSimulated = false, isSimulatedTag = 'span') {
+        const   tag = isSimulated ? isSimulatedTag : 'a',
+                classes = isSimulated ? 'x-grid-link simulated-link' : 'x-grid-link',
+                el = new Ext.Element(document.createElement(tag))
+        ;
+        el.addClass(classes);
+        // Add default title if none given in attributes
+        if (!attributes.hasOwnProperty('title')) {
+            attributes.title = _('edit');
         }
-        el.dom.innerHTML = Ext.util.Format.htmlEncode(v);
+        Object.entries(attributes).forEach(([attr, value]) => {
+            el.dom[attr] = value;
+        });
+        el.dom.innerHTML = Ext.util.Format.htmlEncode(content);
         return el.dom.outerHTML;
     }
 
@@ -863,7 +1085,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         );
     }
 
-    ,getActions: function(record, rowIndex, colIndex, store) {
+    ,getActions: function(value, metaData, record, rowIndex, colIndex, store) {
         return [];
     }
 
@@ -1366,7 +1588,8 @@ MODx.grid.LocalGrid = function(config) {
     this.on('rowcontextmenu',this._showMenu,this);
 };
 
-Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
+Ext.extend(MODx.grid.LocalGrid, Ext.grid.EditorGridPanel, {
+
     windows: {}
 
     ,_loadStore: function(config) {
@@ -1546,7 +1769,6 @@ Ext.extend(MODx.grid.LocalGrid,Ext.grid.EditorGridPanel,{
             });
         }
     }
-
 
     ,remove: function(config) {
         if (this.destroying) {

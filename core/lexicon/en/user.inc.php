@@ -6,6 +6,10 @@
  * @package modx
  * @subpackage lexicon
  */
+$_lang['_role_member_description'] = 'The lowest-authority role, usually a user of the site but not of the manager.';
+$_lang['_role_member_name'] = 'Member';
+$_lang['_role_superuser_description'] = 'The highest-authority role, for manager users with complete control over all aspects of the site.';
+$_lang['_role_superuser_name'] = 'Super User';
 $_lang['active'] = 'Active';
 $_lang['address'] = 'Address';
 $_lang['administrator'] = 'Administrator';
@@ -41,11 +45,12 @@ $_lang['role_desc_description'] = 'A short description of the Role.';
 $_lang['role_err_ae'] = 'A role already exists with that name.';
 $_lang['role_err_duplicate'] = 'An error occurred while duplicating the role.';
 $_lang['role_err_has_users'] = 'There are users with this role. It cannot be deleted.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Role not found.';
 $_lang['role_err_nfs'] = 'Role not found with id: [[+role]]';
 $_lang['role_err_ns'] = 'Role not specified!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Please specify a name for the role.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'The role you are trying to delete is the admin role. This role cannot be deleted!';
 $_lang['role_remove'] = 'Delete Role';
@@ -75,6 +80,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = 'Country';
 $_lang['user_dob'] = 'Date of birth';
 $_lang['user_doesnt_exist'] = 'User does not exist';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through email.';
 $_lang['user_email'] = 'Email address';
 $_lang['user_err_access_permissions_save'] = 'An error occurred while saving user access permissions.';
@@ -178,7 +184,7 @@ $_lang['user_profile_err_save'] = 'An error occurred while attempting to save th
 $_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
 $_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
 $_lang['user_remote_data_msg'] = 'Edit remote user data here.';
-$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'An error occurred while saving user settings.';
 $_lang['user_settings'] = 'User Settings';

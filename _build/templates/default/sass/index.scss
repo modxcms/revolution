@@ -161,8 +161,8 @@ hr {
 }
 
 .wait {
-  background: transparent url($imgPath + "style/wait.gif") no-repeat scroll
-    center 55px;
+  background: transparent url($imgPath+"style/wait.gif") no-repeat scroll center
+    55px;
   color: $darkestGray;
   font-size: 15px;
   font-weight: bold;
@@ -443,7 +443,7 @@ textarea.x-form-field {
       bottom: 0;
       display: block;
       content: " ";
-      background: transparent url($imgPath + "restyle/dragndrop.svg") no-repeat
+      background: transparent url($imgPath+"restyle/dragndrop.svg") no-repeat
         center;
       background-size: 50% 50%;
       opacity: 0.1;
@@ -476,7 +476,7 @@ textarea.x-form-field {
 }
 
 #modx-panel-packages.drag-n-drop:before {
-  background: transparent url($imgPath + "restyle/dragndrop.svg") no-repeat top;
+  background: transparent url($imgPath+"restyle/dragndrop.svg") no-repeat top;
   background-size: 50% 30%;
   z-index: 0;
 }
@@ -541,6 +541,14 @@ textarea.x-form-field {
 }
 
 /* grids */
+
+.modx-protected-row {
+    .x-grid3-cell-inner {
+        font-style: italic;
+        color: $colorSplash;
+    }
+}
+
 .x-small-editor .x-form-field {
   font-size: 12px !important;
 }
@@ -553,14 +561,11 @@ textarea.x-form-field {
   color: #999 !important;
 }
 
-a.x-grid-link {
-  color: $colorSplash;
-  text-decoration: underline;
-}
-
-a.x-grid-link:hover,
-a.x-grid-link:focus {
-  text-decoration: none;
+.x-grid-link {
+    @include textLink;
+    &.simulated-link {
+        cursor: pointer;
+    }
 }
 
 .x-editable-column {
@@ -910,6 +915,37 @@ a.x-grid-link:focus {
 }
 
 /* rowactions */
+.x-grid3-row {
+    &.disable-selection,
+    &.disable-selection.x-grid3-row-selected {
+        .x-grid3-row-checker {
+            position: relative;
+            &::before,
+            &::after {
+                color: $disabledTextColor;
+            }
+            &::before {
+                content: '\f0c8';
+            }
+            &::after {
+                content: '\f715';
+                font-size: 6px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: 2px;
+                margin-top: 1px;
+                transform: translate(-50%, -50%) rotate(98deg);
+                font-weight: 600;
+                font-family: 'Font Awesome 5 Free';
+            }
+            &:hover {
+                cursor: default;
+            }
+        }
+    }
+}
+
 .ux-row-action-cell .x-grid3-cell-inner {
   padding: 1px 0 0 0;
 }
@@ -923,8 +959,8 @@ a.x-grid-link:focus {
 }
 
 .ux-row-action-item span {
-  background: transparent url($imgPath + "style/go-next.png") no-repeat scroll
-    1px 4px;
+  background: transparent url($imgPath+"style/go-next.png") no-repeat scroll 1px
+    4px;
   display: inline !important;
   line-height: 24px;
   margin: 0 5px;
@@ -933,22 +969,22 @@ a.x-grid-link:focus {
 }
 
 .icon-uninstall span {
-  background: url($imgPath + "style/delete.png") no-repeat scroll 1px 4px
+  background: url($imgPath+"style/delete.png") no-repeat scroll 1px 4px
     transparent;
 }
 
 .package-details span {
-  background: url($imgPath + "style/info.png") no-repeat scroll 1px 4px
+  background: url($imgPath+"style/info.png") no-repeat scroll 1px 4px
     transparent;
 }
 
 .package-download span {
-  background: url($imgPath + "style/download.png") no-repeat scroll 1px 4px
+  background: url($imgPath+"style/download.png") no-repeat scroll 1px 4px
     transparent;
 }
 
 .package-installed span {
-  background: url($imgPath + "style/accept.png") no-repeat scroll 1px 4px
+  background: url($imgPath+"style/accept.png") no-repeat scroll 1px 4px
     transparent;
 }
 
@@ -1182,7 +1218,7 @@ a.x-grid-link:focus {
 }
 
 .x-rbtn td {
-  background-image: url($imgPath + "restyle/icons/rbtn.gif");
+  background-image: url($imgPath+"restyle/icons/rbtn.gif");
   background-repeat: no-repeat;
   border: 0 none;
   height: 21px;
@@ -1418,38 +1454,36 @@ iframe[classname="x-hidden"] {
 
 /* file upload, is this the old legacy (single file) uploader? */
 .ext-ux-uploaddialog-addbtn {
-  background: url($imgPath + "restyle/fileup/file-add.gif") no-repeat left
-    center !important;
+  background: url($imgPath+"restyle/fileup/file-add.gif") no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-removebtn {
-  background: url($imgPath + "restyle/fileup/file-remove.gif") no-repeat left
+  background: url($imgPath+"restyle/fileup/file-remove.gif") no-repeat left
     center !important;
 }
 
 .ext-ux-uploaddialog-resetbtn {
-  background: url($imgPath + "restyle/fileup/reset.gif") no-repeat left center !important;
+  background: url($imgPath+"restyle/fileup/reset.gif") no-repeat left center !important;
 }
 
 .ext-ux-uploaddialog-uploadstartbtn {
-  background: url($imgPath + "restyle/fileup/upload-start.gif") no-repeat left
+  background: url($imgPath+"restyle/fileup/upload-start.gif") no-repeat left
     center !important;
 }
 
 .ext-ux-uploaddialog-uploadstopbtn {
-  background: url($imgPath + "restyle/fileup/upload-stop.gif") no-repeat left
+  background: url($imgPath+"restyle/fileup/upload-stop.gif") no-repeat left
     center !important;
 }
 
 .ext-ux-uploaddialog-indicator-stoped {
-  background: url($imgPath + "restyle/fileup/done.gif") no-repeat center center;
+  background: url($imgPath+"restyle/fileup/done.gif") no-repeat center center;
   height: 16px;
   width: 16px;
 }
 
 .ext-ux-uploaddialog-indicator-processing {
-  background: url($imgPath + "restyle/fileup/loading.gif") no-repeat center
-    center;
+  background: url($imgPath+"restyle/fileup/loading.gif") no-repeat center center;
   height: 16px;
   width: 16px;
 }
@@ -1461,19 +1495,19 @@ iframe[classname="x-hidden"] {
 }
 
 .ext-ux-uploaddialog-state-0 {
-  background-image: url($imgPath + "restyle/fileup/uncheck.gif");
+  background-image: url($imgPath+"restyle/fileup/uncheck.gif");
 }
 
 .ext-ux-uploaddialog-state-1 {
-  background-image: url($imgPath + "restyle/fileup/check.gif");
+  background-image: url($imgPath+"restyle/fileup/check.gif");
 }
 
 .ext-ux-uploaddialog-state-2 {
-  background-image: url($imgPath + "restyle/fileup/failed.gif");
+  background-image: url($imgPath+"restyle/fileup/failed.gif");
 }
 
 .ext-ux-uploaddialog-state-3 {
-  background-image: url($imgPath + "restyle/fileup/file-uploading.gif");
+  background-image: url($imgPath+"restyle/fileup/file-uploading.gif");
 }
 
 /* tree grid */
@@ -1883,6 +1917,12 @@ iframe[classname="x-hidden"] {
   user-select: text !important;
 }
 
+.x-selectable {
+    &.simulated-link * {
+        @include textLink;
+    }
+}
+
 /* Lightbox */
 #ux-lightbox {
   left: 0;
@@ -1915,7 +1955,7 @@ iframe[classname="x-hidden"] {
 }
 
 #ux-lightbox-loading {
-  background: url($imgPath + "style/loading.gif") no-repeat scroll center 15%
+  background: url($imgPath+"style/loading.gif") no-repeat scroll center 15%
     transparent;
   height: 25%;
   left: 0;
@@ -2004,7 +2044,7 @@ iframe[classname="x-hidden"] {
 }
 
 #ux-lightbox-data #ux-lightbox-navClose {
-  background: transparent url($imgPath + "style/close.png") no-repeat scroll 0 0;
+  background: transparent url($imgPath+"style/close.png") no-repeat scroll 0 0;
   float: right;
   height: 16px;
   outline: medium none;

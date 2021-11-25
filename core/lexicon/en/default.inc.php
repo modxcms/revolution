@@ -92,6 +92,7 @@ $_lang['create_folder_here'] = 'Create folder here';
 $_lang['create_user_group'] = 'Create User Group';
 $_lang['created'] = 'Created';
 $_lang['createdon'] = 'Creation date';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Current';
 $_lang['dashboard'] = 'Dashboard';
 $_lang['data_err_load'] = 'Error loading data.';
