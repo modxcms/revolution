@@ -1,5 +1,5 @@
 /**
- * Loads a grid of roles.
+ * Loads a grid of Roles.
  *
  * @class MODx.grid.Role
  * @extends MODx.grid.Grid
@@ -20,7 +20,8 @@ MODx.grid.Role = function(config = {}) {
             'name',
             'description',
             'authority',
-            'perm'
+            // 'perm',
+            'creator'
         ],
         paging: true,
         autosave: true,
@@ -33,14 +34,35 @@ MODx.grid.Role = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
+            id: 'modx-role--name',
             width: 150,
             sortable: true,
             editor: {
-                xtype: 'textfield'
+                xtype: 'textfield',
+                allowBlank: false,
+                blankText: _('role_err_ns_name'),
+                validationEvent: 'change',
+                validator: function(value) {
+                    const   grid = Ext.getCmp('modx-grid-role'),
+                            reserved = this.gridEditor.record.json.reserved.name
+                    ;
+                    if (grid.valueIsReserved(reserved, value)) {
+                        const msg = _('role_err_name_reserved', { reservedName: value });
+                        Ext.Msg.alert(_('error'), msg);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
             },
             renderer: {
-                fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                    metaData.css = this.setEditableCellClasses(record);
+                fn: function(value, metaData, record) {
+                    // Integrate this
+                    // metaData.css = this.setEditableCellClasses(record);
+                    if (!this.userCanEdit || record.json.isProtected) {
+                        metaData.css = 'editor-disabled';
+                    }
+                    value = record.json.isProtected ? record.json.name_trans : value ;
                     return Ext.util.Format.htmlEncode(value);
                 },
                 scope: this
@@ -48,19 +70,36 @@ MODx.grid.Role = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
+            id: 'modx-role--description',
             width: 350,
-            editor: { xtype: 'textarea' },
+            editor: {
+                xtype: 'textarea'
+            },
             renderer: {
-                fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                    metaData.css = this.setEditableCellClasses(record);
+                fn: function(value, metaData, record) {
+                    // Integrate this
+                    // metaData.css = this.setEditableCellClasses(record);
+                    if (!this.userCanEdit || record.json.isProtected) {
+                        metaData.css = 'editor-disabled';
+                    }
+                    value = record.json.isProtected ? record.json.description_trans : value ;
                     return Ext.util.Format.htmlEncode(value);
                 },
                 scope: this
             }
         }, {
+            header: _('creator'),
+            dataIndex: 'creator',
+            id: 'modx-role--creator',
+            width: 70,
+            align: 'center',
+            sortable: true
+        }, {
             header: _('authority'),
             dataIndex: 'authority',
+            id: 'modx-role--authority',
             width: 60,
+            align: 'center',
             sortable: true,
             editor: {
                 xtype: 'numberfield',
@@ -72,7 +111,11 @@ MODx.grid.Role = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                    metaData.css = this.setEditableCellClasses(record, [record.json.isAssigned]);
+                     // Integrate this
+                    // metaData.css = this.setEditableCellClasses(record, [record.json.isAssigned]);
+                    if (!this.userCanEdit || record.json.isProtected) {
+                        metaData.css = 'editor-disabled';
+                    }
                     return value;
                 },
                 scope: this
@@ -102,13 +145,54 @@ MODx.grid.Role = function(config = {}) {
             text: _('create'),
             cls: 'primary-button',
             handler: this.createRole,
-            scope: this
-        }]
+            scope: this,
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (!this.userCanCreate) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                }
+            }
+        }],
+        viewConfig: {
+            forceFit: true,
+            scrollOffset: 0,
+            getRowClass: function(record, index, rowParams, store) {
+                // Adds the returned class to the row container's css classes
+                return record.json.isProtected ? 'modx-protected-row' : '';
+            }
+        }
     });
     MODx.grid.Role.superclass.constructor.call(this, config);
-    this.on('beforeedit', this.checkCellIsEditable, this);
+
+    this.protectedDataIndex = 'name';
+    this.protectedIdentifiers = ['Super User', 'Member'];
+    this.gridMenuActions = ['delete'];
+
+    this.setUserCanEdit(['save_role', 'edit_role']);
+    this.setUserCanCreate(['save_role', 'new_role']);
+    this.setUserCanDelete(['delete_role']);
+    this.setShowActionsMenu();
+
+    this.on({
+        render: function() {
+            this.setEditableColumnAccess(
+                ['modx-role--name', 'modx-role--description', 'modx-role--authority']
+            );
+        },
+        beforeedit: function(e) {
+            if (e.record.json.isProtected) {
+                return false;
+            }
+        }
+    });
+
 };
 Ext.extend(MODx.grid.Role, MODx.grid.Grid, {
+
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
@@ -137,6 +221,7 @@ Ext.extend(MODx.grid.Role, MODx.grid.Grid, {
             }
         });
     }
+
 });
 Ext.reg('modx-grid-role', MODx.grid.Role);
 
@@ -166,9 +251,10 @@ MODx.window.CreateRole = function(config = {}) {
         }, {
             name: 'authority',
             fieldLabel: _('authority'),
-            xtype: 'textfield',
+            xtype: 'numberfield',
             allowNegative: false,
-            value: 0
+            value: 0,
+            maxValue: 9999
         }, {
             xtype: MODx.expandHelp ? 'box' : 'hidden',
             html: _('role_desc_authority'),

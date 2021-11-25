@@ -33,7 +33,10 @@ class GetList extends GetListProcessor
     public $languageTopics = ['user'];
     public $permission = 'view_role';
     public $defaultSortField = 'authority';
-    public $canRemove = false;
+
+    protected $canCreate = false;
+    protected $canUpdate = false;
+    protected $canDelete = false;
 
     /**
      * {@inheritDoc}
@@ -49,7 +52,9 @@ class GetList extends GetListProcessor
             $this->setProperty('sort', 'name');
         }
 
-        $this->canRemove = $this->modx->hasPermission('delete_role');
+        $this->canCreate = $this->modx->hasPermission('new_role') && $this->modx->hasPermission('save_role');
+        $this->canUpdate = $this->modx->hasPermission('edit_role') && $this->modx->hasPermission('save_role');
+        $this->canDelete = $this->modx->hasPermission('delete_role');
 
         return $initialized;
     }
@@ -103,25 +108,28 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectId = $object->get('id');
+        // Note: Role does not have a checkPolicy() method
+        $permissions = [
+            'create' => $this->canCreate,
+            'update' => $this->canUpdate,
+            'delete' => $this->canDelete
+        ];
+
+        $roleData = $object->toArray();
         $roleName = $object->get('name');
-        $isCoreRole = in_array($objectId, [1, 2]) || in_array($roleName, ['Super User', 'Member']);
+        $isCoreRole = $roleName === 'Super User' || $roleName === 'Member';
 
-        $perm = [];
-        if (!$isCoreRole) {
-            $perm[] = 'edit';
-            if ($this->isAssigned($objectId)) {
-                $objectArray['isAssigned'] = 1;
-            }
-            if ($this->canRemove) {
-                $perm[] = 'remove';
-            }
-        } else {
-            $objectArray['isProtected'] = 1;
+        if ($isCoreRole) {
+            $baseKey = '_role_' . strtolower(str_replace(' ', '', $roleName)) . '_';
+            $roleData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
+            $roleData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
         }
-        $objectArray['perm'] = implode(' ', $perm);
 
-        return $objectArray;
+        $roleData['reserved'] = ['name' => ['Super User', 'Member']];
+        $roleData['isProtected'] = $isCoreRole ? true : false ;
+        $roleData['creator'] = $isCoreRole ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        $roleData['permissions'] = !$isCoreRole ? $permissions : [] ;
+
+        return $roleData;
     }
 }
