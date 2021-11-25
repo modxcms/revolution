@@ -329,6 +329,10 @@ Ext.extend(MODx,Ext.Component,{
                         }
                     },
                 });
+            } else {
+                name = Ext.getCmp("modx-" + type + "-" + nameField).getValue();
+                path = MODx.getStaticElementsPath(name, '', typePlural);
+                Ext.getCmp("modx-" + type + "-static-file").setValue(path);
             }
         }
     }
