@@ -122,6 +122,12 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
      */
     ,getRootMenu: function(node) {
         var menu = [];
+        menu.push({
+            text: '<b>'+node.attributes.text+' ('+this.config.source+')</b>'
+            ,handler: function() {return false;}
+            ,header: true
+        });
+        menu.push('-');
         if (MODx.perm.directory_create) {
             menu.push({
                 text: _('file_folder_create')
