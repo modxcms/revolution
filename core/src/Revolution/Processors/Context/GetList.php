@@ -37,10 +37,10 @@ class GetList extends GetListProcessor
     public $languageTopics = ['context'];
     public $defaultSortField = 'key';
 
-    protected bool $canCreate = false;
-    protected bool $canUpdate = false;
-    protected bool $canDelete = false;
-    protected array $coreContexts;
+    protected $canCreate = false;
+    protected $canUpdate = false;
+    protected $canDelete = false;
+    protected $coreContexts;
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;

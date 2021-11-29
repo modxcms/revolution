@@ -34,10 +34,10 @@ class GetList extends GetListProcessor
     public $permission = 'view_role';
     public $defaultSortField = 'authority';
 
-    protected bool $canCreate = false;
-    protected bool $canUpdate = false;
-    protected bool $canDelete = false;
-    protected array $coreRoles;
+    protected $canCreate = false;
+    protected $canUpdate = false;
+    protected $canDelete = false;
+    protected $coreRoles;
 
     /**
      * {@inheritDoc}
