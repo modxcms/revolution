@@ -37,9 +37,10 @@ class GetList extends GetListProcessor
     public $languageTopics = ['context'];
     public $defaultSortField = 'key';
 
-    protected $canCreate = false;
-    protected $canUpdate = false;
-    protected $canDelete = false;
+    protected bool $canCreate = false;
+    protected bool $canUpdate = false;
+    protected bool $canDelete = false;
+    protected array $coreContexts;
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
@@ -60,6 +61,7 @@ class GetList extends GetListProcessor
         $this->canCreate = $this->modx->hasPermission('new_context');
         $this->canUpdate = $this->modx->hasPermission('edit_context');
         $this->canDelete = $this->modx->hasPermission('delete_context');
+        $this->coreContexts = $this->classKey::getCoreContexts();
 
         return $initialized;
     }
@@ -71,12 +73,15 @@ class GetList extends GetListProcessor
     public function beforeQuery()
     {
         /*
-            Implementing a little trick here since 'creator' is an arbitrary field
-            not present in the database, used for distinguishing core/protected row data
-            from user-created data
+            Implementing a little trick here since 'creator' (used for distinguishing core/protected row data
+            from user-created data) is an arbitrary field not present in the database, and the grid
+            utilizing this processor uses remote sorting.
         */
         if ($this->getProperty('sort') === 'creator') {
-            $this->setProperty('sort', 'FIELD(modContext.key, "mgr", "web")');
+            $keys = implode(',', array_map(function ($key) {
+                return '"' . $key . '"';
+            }, $this->coreContexts));
+            $this->setProperty('sort', 'FIELD(modContext.key, ' . $keys . ')');
             $dir = $this->getProperty('dir') === 'ASC' ? 'DESC' : 'ASC' ;
             $this->setProperty('dir', $dir);
         }
@@ -185,8 +190,9 @@ class GetList extends GetListProcessor
         $contextData = $object->toArray();
         $contextKey = $object->get('key');
         // $coreContexts = ['mgr', 'web'];
-        $coreContexts = $this->classKey::RESERVED_KEYS);
-        $isCoreContext = in_array($contextKey, $coreContexts);
+        // $coreContexts = $this->classKey::RESERVED_KEYS);
+        // $isCoreContext = in_array($contextKey, $coreContexts);
+        $isCoreContext = $object->isCoreContext($contextKey);
 
         if ($isCoreContext) {
             $baseKey = '_context_' . strtolower(str_replace(' ', '', $contextKey)) . '_';
@@ -194,8 +200,8 @@ class GetList extends GetListProcessor
             $contextData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
         }
 
-        $contextData['reserved'] = ['key' => $coreContexts, 'name' => ['Manager']];
-        $contextData['isProtected'] = $isCoreContext ? true : false ;
+        $contextData['reserved'] = ['key' => $this->coreContexts, 'name' => ['Manager']];
+        $contextData['isProtected'] = $isCoreContext;
         $contextData['creator'] = $isCoreContext ? 'modx' : strtolower($this->modx->lexicon('user')) ;
         if ($isCoreContext) {
             unset($permissions['delete']);

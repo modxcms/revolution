@@ -193,7 +193,7 @@ MODx.grid.Sources = function(config = {}) {
                         const   removableSources = this.getRemovableItemsFromSelection('int'),
                                 menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
                         ;
-                        if (!removableSources) {
+                        if (removableSources.length === 0) {
                             menuOptRemove.disable();
                         } else {
                             menuOptRemove.enable();
@@ -212,8 +212,11 @@ MODx.grid.Sources = function(config = {}) {
             scrollOffset: 0,
             getRowClass: function(record, index, rowParams, store) {
                 // Adds the returned class to the row container's css classes
-                const disableClasses = record.json.isProtected ? 'modx-protected-row disable-selection' : 'disable-selection' ;
-                return !this.grid.userCanDeleteRecord(record) ? disableClasses : '';
+                if (this.grid.userCanDeleteRecord(record)) {
+                    return '';
+                }
+                const rowClasses = 'disable-selection';
+                return record.json.isProtected ? `modx-protected-row  ${rowClasses}` : rowClasses ;
             }
         }
     });
@@ -336,7 +339,7 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
             to the processor.
         */
         const removableSources = this.getRemovableItemsFromSelection('int');
-        if (!removableSources) {
+        if (removableSources.length === 0) {
             return false;
         }
         MODx.msg.confirm({

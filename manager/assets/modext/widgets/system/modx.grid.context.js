@@ -91,7 +91,9 @@ MODx.grid.Context = function(config) {
                             reserved = this.gridEditor.record.json.reserved.name
                     ;
                     if (grid.valueIsReserved(reserved, value)) {
-                        const msg = _('context_err_name_reserved', { reservedName: value });
+                        const msg = _('context_err_name_reserved', {
+                            reservedName: value
+                        });
                         Ext.Msg.alert(_('error'), msg);
                         return false;
                     } else {
@@ -215,7 +217,6 @@ Ext.extend(MODx.grid.Context, MODx.grid.Grid, {
             record = this.getSelectionModel().getSelected(),
             m = []
         ;
-
         if (this.userCanCreate && this.userCanDuplicateRecord(record)) {
             m.push({
                 text: _('duplicate'),
@@ -223,14 +224,12 @@ Ext.extend(MODx.grid.Context, MODx.grid.Grid, {
                 scope: this
             });
         }
-
         if (this.userCanEdit && this.userCanEditRecord(record)) {
             m.push({
                 text: _('edit'),
                 handler: this.updateContext
             });
         }
-
         if (this.userCanDelete && this.userCanDeleteRecord(record)) {
             if (m.length > 0) {
                 m.push('-');

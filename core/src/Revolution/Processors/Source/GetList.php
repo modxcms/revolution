@@ -40,6 +40,8 @@ class GetList extends GetListProcessor
     protected $canUpdate = false;
     protected $canDelete = false;
 
+    protected $coreSources;
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -58,6 +60,7 @@ class GetList extends GetListProcessor
         $this->canCreate = $this->modx->hasPermission('source_save');
         $this->canUpdate = $this->modx->hasPermission('source_edit');
         $this->canDelete = $this->modx->hasPermission('source_delete');
+        $this->coreSources = $this->classKey::getCoreSources();
 
         return $initialized;
     }
@@ -69,12 +72,15 @@ class GetList extends GetListProcessor
     public function beforeQuery()
     {
         /*
-            Implementing a little trick here since 'creator' is an arbitrary field
-            not present in the database, used for distinguishing core/protected row data
-            from user-created data
+            Implementing a little trick here since 'creator' (used for distinguishing core/protected row data
+            from user-created data) is an arbitrary field not present in the database, and the grid
+            utilizing this processor uses remote sorting.
         */
         if ($this->getProperty('sort') === 'creator') {
-            $this->setProperty('sort', 'FIELD(modMediaSource.name, "Filesystem")');
+            $names = implode(',', array_map(function ($name) {
+                return '"' . $name . '"';
+            }, $this->coreSources));
+            $this->setProperty('sort', 'FIELD(modMediaSource.name, ' . $names . ')');
             $dir = $this->getProperty('dir') === 'ASC' ? 'DESC' : 'ASC' ;
             $this->setProperty('dir', $dir);
         }
@@ -180,18 +186,17 @@ class GetList extends GetListProcessor
         ];
 
         $sourceData = $object->toArray();
-        $sourceKey = $object->get('name');
-        $coreSources = ['Filesystem'];
-        $isCoreSource = in_array($sourceKey, $coreSources);
+        $sourceName = $object->get('name');
+        $isCoreSource = $object->isCoreSource($sourceName);
 
         if ($isCoreSource) {
-            $baseKey = '_source_' . strtolower(str_replace(' ', '', $sourceKey)) . '_';
+            $baseKey = '_source_' . strtolower(str_replace(' ', '', $sourceName)) . '_';
             $sourceData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
             $sourceData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
         }
 
-        $sourceData['reserved'] = ['name' => $coreSources];
-        $sourceData['isProtected'] = $isCoreSource ? true : false ;
+        $sourceData['reserved'] = ['name' => $this->coreSources];
+        $sourceData['isProtected'] = $isCoreSource;
         $sourceData['creator'] = $isCoreSource ? 'modx' : strtolower($this->modx->lexicon('user')) ;
         if ($isCoreSource) {
             unset($permissions['delete']);

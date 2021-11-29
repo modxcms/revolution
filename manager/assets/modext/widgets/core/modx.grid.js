@@ -593,14 +593,14 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      * the user's permissions; used to adjust which menu items are available, whether to render links
      * to and item's editing page, and css cues across many grid classes
      *
-     * @param {Array} permissions - A set of permissions keys to evaluate; note that many areas currently
+     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
      * rely on a pair of permissions (save_x and edit_x), both of which must be enabled to edit a grid item
      *
      * @return void
      */
-    ,setUserCanEdit: function(permissions) {
-        permissions = permissions.map(item => item.trim());
-        this.userCanEdit = permissions.every(permission => MODx.perm[permission]);
+    ,setUserCanEdit: function(groupPermissions) {
+        groupPermissions = groupPermissions.map(item => item.trim());
+        this.userCanEdit = groupPermissions.every(permission => MODx.perm[permission]);
     }
 
     /**
@@ -608,14 +608,14 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      * the user's permissions; used to adjust which menu items are available (namely the Duplicate item)
      * and whether to render the Create button in the grid's toolbar
      *
-     * @param {Array} permissions - A set of permissions keys to evaluate; note that many areas currently
+     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
      * rely on a pair of permissions (save_x and new_x), both of which must be enabled to create/duplicate a grid item
      *
      * @return void
      */
-    ,setUserCanCreate: function(permissions) {
-        permissions = permissions.map(item => item.trim());
-        this.userCanCreate = permissions.every(permission => MODx.perm[permission]);
+    ,setUserCanCreate: function(groupPermissions) {
+        groupPermissions = groupPermissions.map(item => item.trim());
+        this.userCanCreate = groupPermissions.every(permission => MODx.perm[permission]);
     }
 
     /**
@@ -623,31 +623,31 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      * the user's permissions; used to adjust which menu items are available in the context menus
      * and whether to render the Delete menu item within a grid toolbar's Batch button
      *
-     * @param {Array} permissions - A set of permissions keys to evaluate
+     * @param {Array} groupPermissions - A set of permissions keys to evaluate
      *
      * @return void
      */
-    ,setUserCanDelete: function(permissions) {
-        permissions = permissions.map(item => item.trim());
-        this.userCanDelete = permissions.every(permission => MODx.perm[permission]);
+    ,setUserCanDelete: function(groupPermissions) {
+        groupPermissions = groupPermissions.map(item => item.trim());
+        this.userCanDelete = groupPermissions.every(permission => MODx.perm[permission]);
     }
 
 
     /* Record-Level Permissions Checks, for objects with specific policies */
 
     ,userCanEditRecord: function(record) {
-        const permissions = record.json.permissions;
-        return !Ext.isEmpty(permissions) && permissions.update === true ? true : false ;
+        const objPermissions = record.json.permissions;
+        return !Ext.isEmpty(objPermissions) && objPermissions.update === true ? true : false ;
     }
 
     ,userCanDeleteRecord: function(record) {
-        const permissions = record.json.permissions;
-        return !Ext.isEmpty(permissions) && !record.json.isProtected && permissions.delete === true ? true : false ;
+        const objPermissions = record.json.permissions;
+        return !Ext.isEmpty(objPermissions) && !record.json.isProtected && objPermissions.delete === true ? true : false ;
     }
 
     ,userCanDuplicateRecord: function(record) {
-        const permissions = record.json.permissions;
-        return !Ext.isEmpty(permissions) && permissions.duplicate === true ? true : false ;
+        const objPermissions = record.json.permissions;
+        return !Ext.isEmpty(objPermissions) && objPermissions.duplicate === true ? true : false ;
     }
 
     /**
@@ -662,16 +662,16 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
             this.showActionsMenu = false;
             return;
         }
-        const permissions = [];
+        const permissionsValues = [];
         this.gridMenuActions.forEach(mode => {
             mode = mode == 'duplicate' ? 'userCanCreate' : 'userCan' + Ext.util.Format.capitalize(mode);
             const modePermission = mode === 'userCanExport' ? true : this[mode] ;
             if (['userCanCreate', 'userCanEdit'].includes(mode) && modePermission === true) {
                 this.hasSavePermissions = true;
             }
-            permissions.push(modePermission);
+            permissionsValues.push(modePermission);
         });
-        this.showActionsMenu = permissions.length === 0 || permissions.every(permission => permission === false) === true
+        this.showActionsMenu = permissionsValues.length === 0 || permissionsValues.every(value => value === false) === true
             ? false
             : true
             ;
@@ -706,17 +706,10 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      * @return {Boolean}
      */
     ,valueIsReserved: function(reservedValues, value) {
-        if (!Ext.isArray(reservedValues)) {
+        if (!Array.isArray(reservedValues)) {
             reservedValues = reservedValues.split(',');
         }
-        let isReserved = false;
-        reservedValues.forEach(reserved => {
-            if (reserved.toLowerCase() === value.toLowerCase()) {
-                isReserved = true;
-                return;
-            }
-        });
-        return isReserved;
+        return reservedValues.some(reserved => reserved.toLowerCase() === value.toLowerCase());
     }
 
     /**
@@ -726,7 +719,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      *
      * @param {String} itemIdType - The data type of the value being inspected (either string or integer)
      *
-     * @return {Boolean|Array}
+     * @return {Array}
      */
     ,getRemovableItemsFromSelection: function(itemIdType = 'string') {
         const   selectionList = this.getSelectedAsList(),
@@ -741,7 +734,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
                 removableItems.push(id);
             }
         });
-        return removableItems.length > 0 ? removableItems : false ;
+        return removableItems;
     }
 
     ,renderEditableColumn: function(renderer) {
@@ -915,18 +908,27 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
 
     ,actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
         /*
+            Note: To maintain backward compatibility for core grids that have not yet been updated
+            to the new permissions checks and for extras that may extend this class in their grids,
+            we check showActionsMenu for strict boolean values (which will only be set by grids using
+            the new checks); otherwise showActionsMenu will be null (its default value set above),
+            indicating the legacy checks are to be used.
+        */
+        if (this.showActionsMenu === false) {
+            return;
+        }
+        /*
             showActionsMenu will be true if at least one user group-level permission is granted,
-            excluding create/new permissions (since that is not executed by our context/actions menus)
+            excluding create/new permissions (since that is not executed by our context/actions menus).
         */
         if (this.showActionsMenu) {
             const isProtected = record.json.isProtected;
-
             // Export is always available; only continue filtering if grid does not offer export
             if (!this.gridMenuActions.includes('export')) {
                 if (!this.hasSavePermissions && isProtected) {
                     return;
                 }
-                // Checking record-level permissions
+                // Checking record-level permissions; this block checking for 'cls' can be removed once all grids are updated
                 if (record.data.hasOwnProperty('cls')) {
                     if (Ext.isEmpty(record.data.cls)) {
                         return;
@@ -935,7 +937,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
                 if (record.json.hasOwnProperty('permissions')) {
                     if (
                         Ext.isEmpty(record.json.permissions) ||
-                        Object.values(record.json.permissions).every(permission => permission === false) === true
+                        Object.values(record.json.permissions).every(permission => !permission)
                     ) {
                         return;
                     }
