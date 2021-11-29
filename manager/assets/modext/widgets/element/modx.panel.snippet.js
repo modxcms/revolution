@@ -150,11 +150,9 @@ MODx.panel.Snippet = function(config) {
                         ,value: config.record.category || 0
                         ,listeners: {
                             'afterrender': {scope:this,fn:function(f,e) {
-                                setTimeout(function(){
-                                    MODx.setStaticElementPath('snippet');
-                                }, 200);
+                                MODx.setStaticElementPath('snippet');
                             }}
-                            ,'change': {scope:this,fn:function(f,e) {
+                            ,'select': {scope:this,fn:function(f,e) {
                                 MODx.setStaticElementPath('snippet');
                             }}
                         }
