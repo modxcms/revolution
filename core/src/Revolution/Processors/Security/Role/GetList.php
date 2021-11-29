@@ -34,9 +34,10 @@ class GetList extends GetListProcessor
     public $permission = 'view_role';
     public $defaultSortField = 'authority';
 
-    protected $canCreate = false;
-    protected $canUpdate = false;
-    protected $canDelete = false;
+    protected bool $canCreate = false;
+    protected bool $canUpdate = false;
+    protected bool $canDelete = false;
+    protected array $coreRoles;
 
     /**
      * {@inheritDoc}
@@ -55,6 +56,7 @@ class GetList extends GetListProcessor
         $this->canCreate = $this->modx->hasPermission('new_role') && $this->modx->hasPermission('save_role');
         $this->canUpdate = $this->modx->hasPermission('edit_role') && $this->modx->hasPermission('save_role');
         $this->canDelete = $this->modx->hasPermission('delete_role');
+        $this->coreRoles = $this->classKey::getCoreRoles();
 
         return $initialized;
     }
@@ -117,7 +119,7 @@ class GetList extends GetListProcessor
 
         $roleData = $object->toArray();
         $roleName = $object->get('name');
-        $isCoreRole = $roleName === 'Super User' || $roleName === 'Member';
+        $isCoreRole = $object->isCoreRole($roleName);
 
         if ($isCoreRole) {
             $baseKey = '_role_' . strtolower(str_replace(' ', '', $roleName)) . '_';
@@ -125,8 +127,8 @@ class GetList extends GetListProcessor
             $roleData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
         }
 
-        $roleData['reserved'] = ['name' => ['Super User', 'Member']];
-        $roleData['isProtected'] = $isCoreRole ? true : false ;
+        $roleData['reserved'] = ['name' => $this->coreRoles];
+        $roleData['isProtected'] = $isCoreRole;
         $roleData['creator'] = $isCoreRole ? 'modx' : strtolower($this->modx->lexicon('user')) ;
         $roleData['permissions'] = !$isCoreRole ? $permissions : [] ;
 

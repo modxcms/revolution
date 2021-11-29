@@ -70,6 +70,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /** @var  Filesystem */
     protected $filesystem;
 
+    public const SOURCE_FILESYSTEM = 'Filesystem';
 
     /**
      * Get the default MODX filesystem source
@@ -441,7 +442,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             foreach ($directories as $dir) {
                 $ls[] = $dir;
             }
-
             array_multisort($fileNames, SORT_ASC, SORT_STRING, $files);
             foreach ($files as $file) {
                 $ls[] = $file;
@@ -1254,7 +1254,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         return false;
     }
-
 
     /**
      * @param string $object
@@ -2449,5 +2448,27 @@ QTIP;
         }
 
         return false;
+    }
+
+    /**
+     * Returns a list of core Media Sources
+     *
+     * @return array
+     */
+    public static function getCoreSources()
+    {
+        return [
+            self::SOURCE_FILESYSTEM
+        ];
+    }
+
+    /**
+     * @param string $name The name of the Media Source
+     *
+     * @return bool
+     */
+    public function isCoreSource($name)
+    {
+        return in_array($name, static::getCoreSources(), true);
     }
 }
