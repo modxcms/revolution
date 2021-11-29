@@ -418,7 +418,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                         $directories[$file_name]['visibility'] = $visibility;
                     }
                     $directories[$file_name]['menu'] = [
-                        'items' => $this->getListDirContextMenu(),
+                        'items' => $this->getListDirContextMenu($file_name),
                     ];
 
                 }
@@ -2053,13 +2053,19 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      *
      * @return array
      */
-    protected function getListDirContextMenu()
+    protected function getListDirContextMenu($dirName)
     {
         $canSave = $this->checkPolicy('save');
         $canRemove = $this->checkPolicy('remove');
         $canCreate = $this->checkPolicy('create');
 
         $menu = [];
+        $menu[] = [
+            'text' => '<b>' . $dirName . '</b>',
+            'handler' => '',
+            'header' => true,
+        ];
+        $menu[] = '-';
         $menu[] = [
             'text' => $this->xpdo->lexicon('directory_refresh'),
             'handler' => 'this.refreshActiveNode',
@@ -2122,6 +2128,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     protected function getListFileContextMenu($path, $editable = true, $data = [])
     {
+        $fileName = basename($path);
+
         $canSave = $this->checkPolicy('save');
         $canRemove = $this->checkPolicy('remove');
         $canView = $this->checkPolicy('view');
@@ -2129,6 +2137,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             (empty($data['visibility']) || $data['visibility'] === Visibility::PUBLIC);
 
         $menu = [];
+        $menu[] = [
+            'text' => '<b>' . $fileName . '</b>',
+            'handler' => '',
+            'header' => true,
+        ];
+        $menu[] = '-';
         if ($this->hasPermission('file_update') && $canSave) {
             if ($editable) {
                 $menu[] = [
