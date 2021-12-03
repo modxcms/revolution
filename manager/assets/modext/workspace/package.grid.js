@@ -149,7 +149,7 @@ MODx.grid.Package = function(config) {
     MODx.grid.Package.superclass.constructor.call(this,config);
     this.on('render',function() {
         this.mask = new Ext.LoadMask(this.body.dom, {
-            msg: _('checking_for_package_updates') + '...'
+            msg: _('checking_for_package_updates')
         });
         if (!this.loaded) {
             this.mask.show();
