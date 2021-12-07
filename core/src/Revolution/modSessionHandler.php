@@ -16,7 +16,7 @@ namespace MODX\Revolution;
  *
  * @package MODX\Revolution
  */
-class modSessionHandler
+class modSessionHandler implements \SessionHandlerInterface
 {
     /**
      * @var modX A reference to the modX instance controlling this session
@@ -68,7 +68,7 @@ class modSessionHandler
      * @return boolean Always returns true; actual connection is managed by
      * {@link modX}.
      */
-    public function open()
+    public function open($path, $name)
     {
         return true;
     }

@@ -19,6 +19,14 @@ use MODX\Revolution\modSessionHandler;
  */
 class Flush extends Processor
 {
+    /**
+     * @return array
+     */
+    public function getLanguageTopics()
+    {
+        return ['topmenu'];
+    }
+
     public function checkPermissions()
     {
         return $this->modx->hasPermission('flush_sessions');
@@ -26,14 +34,14 @@ class Flush extends Processor
 
     public function process()
     {
-        if ($this->modx->getOption('session_handler_class',null,modSessionHandler::class) === modSessionHandler::class) {
-            if (!$this->flushSessions()) {
-                return $this->failure($this->modx->lexicon('flush_sessions_err'));
-            }
-        } else {
+        $sessionHandler = $this->modx->services->get('session_handler');
+        if (!$sessionHandler instanceof modSessionHandler) {
             return $this->failure($this->modx->lexicon('flush_sessions_not_supported'));
         }
-        return $this->success();
+
+        return $this->flushSessions()
+            ? $this->success()
+            : $this->failure($this->modx->lexicon('flush_sessions_err'));
     }
 
     public function flushSessions()
