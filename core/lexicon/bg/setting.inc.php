@@ -21,7 +21,6 @@ $_lang['area_manager'] = 'Back-end Manager';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session and Cookie';
-$_lang['area_static_resources'] = 'Static Resources';
 $_lang['area_static_elements'] = 'Static Elements';
 $_lang['area_lexicon_string'] = 'Area Lexicon Entry';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
