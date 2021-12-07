@@ -2748,9 +2748,10 @@ class modX extends xPDO {
             if (!in_array($this->getSessionState(), [modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE], true)) {
                 $sessionHandlerClass = $this->getOption('session_handler_class', $options);
                 if (is_string($sessionHandlerClass) && !empty($sessionHandlerClass) && class_exists($sessionHandlerClass)) {
-                    $ch = new $sessionHandlerClass($this);
-                    if ($ch instanceof \SessionHandlerInterface) {
-                        $this->services->add('session_handler', $ch);
+                    $sh = new $sessionHandlerClass($this);
+                    if ($sh instanceof \SessionHandlerInterface) {
+                        $this->services->add('session_handler', $sh);
+                        session_set_save_handler($sh);
                     }
                 }
                 if (!$this->services->has('session_handler')) {
