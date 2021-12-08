@@ -374,7 +374,7 @@ $_lang['setting_link_tag_scheme'] = 'Схема URL';
 $_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Локаль';
-$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale_desc'] = 'Установка языка системы. Оставьте пустым, чтобы использовать значения по умолчанию. Смотрите <a href="https://www.php.net/setlocale" target="_blank">документацию PHP</a> для получения дополнительной информации.';
 
 $_lang['setting_lock_ttl'] = 'Время жизни блокировки';
 $_lang['setting_lock_ttl_desc'] = 'Количество секунд, на которое будет оставаться блокировка ресурса, если пользователь неактивен.';
@@ -673,7 +673,7 @@ $_lang['setting_session_cookie_httponly'] = 'Сессионные куки в р
 $_lang['setting_session_cookie_httponly_desc'] = 'Включите эту настройку для установки флага HttpOnly для сессионых кук.';
 
 $_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite_desc'] = 'Выберите Lax или Strict.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Максимальное время жизни сессии';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Позволяет настроить PHP-параметр «session.gc_maxlifetime» сборщика мусора при использовании обработчика «modSessionHandler».';
@@ -876,4 +876,4 @@ $_lang['setting_error_log_filepath'] = 'Путь к журналу ошибок'
 $_lang['setting_error_log_filepath_desc'] = 'Дополнительно укажите абсолютный путь к пользовательскому файлу ошибок. Вы можете использовать плейсхолдер {cache_path}.';
 
 $_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['static_elements_html_extension_desc'] = 'Расширение для файлов, используемых статическими элементами с HTML-содержимым.';
