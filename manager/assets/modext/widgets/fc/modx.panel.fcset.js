@@ -318,6 +318,13 @@ MODx.grid.FCSetFields = function(config = {}) {
     });
     MODx.grid.FCSetFields.superclass.constructor.call(this, config);
     this.propRecord = Ext.data.Record.create(config.fields);
+    this.on('afteredit', function(e) {
+        if (e.field === 'label') {
+            const value = MODx.util.stripAndEncode.run(e.value);
+            e.record.set('label', value);
+            e.record.commit();
+        }
+    });
 };
 Ext.extend(MODx.grid.FCSetFields, MODx.grid.LocalGrid);
 Ext.reg('modx-grid-fc-set-fields', MODx.grid.FCSetFields);
@@ -371,6 +378,13 @@ MODx.grid.FCSetTabs = function(config = {}) {
     });
     MODx.grid.FCSetTabs.superclass.constructor.call(this, config);
     this.propRecord = Ext.data.Record.create(config.fields);
+    this.on('afteredit', function(e) {
+        if (e.field === 'label') {
+            const value = MODx.util.stripAndEncode.run(e.value);
+            e.record.set('label', value);
+            e.record.commit();
+        }
+    });
 };
 Ext.extend(MODx.grid.FCSetTabs, MODx.grid.LocalGrid, {
     getMenu: function(g, ri) {
@@ -502,6 +516,13 @@ MODx.grid.FCSetTVs = function(config = {}) {
     });
     MODx.grid.FCSetTVs.superclass.constructor.call(this, config);
     this.propRecord = Ext.data.Record.create(config.fields);
+    this.on('afteredit', function(e) {
+        if (e.field === 'label') {
+            const value = MODx.util.stripAndEncode.run(e.value);
+            e.record.set('label', value);
+            e.record.commit();
+        }
+    });
 };
 Ext.extend(MODx.grid.FCSetTVs, MODx.grid.LocalGrid, {
 });
