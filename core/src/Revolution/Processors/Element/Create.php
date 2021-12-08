@@ -29,6 +29,16 @@ abstract class Create extends CreateProcessor
     /** @var modElement $object */
     public $object;
 
+    protected $elementNameField = 'name';
+
+    public function initialize()
+    {
+        if ($this->classKey === modTemplate::class) {
+            $this->elementNameField = 'templatename';
+        }
+        return parent::initialize();
+    }
+
     /**
      * Cleanup the process and send back the response
      *
@@ -37,9 +47,7 @@ abstract class Create extends CreateProcessor
     public function cleanup()
     {
         $this->clearCache();
-        $fields = ['id', 'description', 'locked', 'category'];
-        array_push($fields, ($this->classKey == modTemplate::class ? 'templatename' : 'name'));
-
+        $fields = ['id', $this->elementNameField, 'description', 'locked', 'category'];
         return $this->success('', $this->object->get($fields));
     }
 
@@ -50,14 +58,34 @@ abstract class Create extends CreateProcessor
      */
     public function beforeSave()
     {
-        $nameField = $this->classKey === modTemplate::class ? 'templatename' : 'name';
-        $name = $this->getProperty($nameField, '');
+        $locked = (bool)$this->getProperty('locked', false);
+        $this->object->set('locked', $locked);
 
-        /* verify element with that name does not already exist */
-        if ($this->alreadyExists($name)) {
-            $this->addFieldError($nameField, $this->modx->lexicon($this->objectType . '_err_ae', [
-                'name' => $name,
-            ]));
+        $elementClassName = array_pop(explode('\\', $this->classKey));
+
+        if ($elementClassName === 'modTemplateVar') {
+            if ($caption = $this->getProperty('caption', '')) {
+                $this->object->set('caption', strip_tags($caption));
+            }
+        }
+
+        if ($description = $this->getProperty('description', '')) {
+            $this->object->set('description', strip_tags($description));
+        }
+
+        $name = $this->getProperty($this->elementNameField, '');
+
+        /* verify element has a name and that name does not already exist */
+
+        if (empty($name)) {
+            $this->addFieldError($this->elementNameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
+        } else {
+            if ($this->alreadyExists($name)) {
+                $this->modx->error->addField(
+                    $this->elementNameField,
+                    $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
+                );
+            }
         }
 
         $category = $this->getProperty('category', 0);
@@ -71,9 +99,6 @@ abstract class Create extends CreateProcessor
                 $this->addFieldError('category', $this->modx->lexicon('access_denied'));
             }
         }
-
-        $locked = (bool)$this->getProperty('locked', false);
-        $this->object->set('locked', $locked);
 
         $this->setElementProperties();
         $this->validateElement();
@@ -90,7 +115,7 @@ abstract class Create extends CreateProcessor
     }
 
     /**
-     * Check to see if a Chunk already exists with specified name
+     * Check to see if an Element with the specified name already exists
      *
      * @param string $name
      *
@@ -98,13 +123,9 @@ abstract class Create extends CreateProcessor
      */
     public function alreadyExists($name)
     {
-        if ($this->classKey == modTemplate::class) {
-            $c = ['templatename' => $name];
-        } else {
-            $c = ['name' => $name];
-        }
-
-        return $this->modx->getCount($this->classKey, $c) > 0;
+        return $this->modx->getCount($this->classKey, [
+            $this->elementNameField => $name,
+        ]) > 0;
     }
 
     /**
