@@ -23,6 +23,8 @@ MODx.grid.PluginEvent = function(config) {
         ,baseParams: {
             action: 'Element/Plugin/Event/GetList'
             ,plugin: config.plugin
+            ,group: MODx.request.group ? decodeURIComponent(MODx.request.group) : ''
+            ,query: MODx.request.query || ''
             ,limit: 0
         }
         ,saveParams: {
@@ -82,25 +84,51 @@ MODx.grid.PluginEvent = function(config) {
             ,id: 'modx-plugin-event-filter-group'
             ,itemId: 'group'
             ,emptyText: _('group')+'...'
+            ,value: MODx.request.group ? decodeURIComponent(MODx.request.group) : ''
             ,width: 200
             ,listeners: {
-                'select': {fn:this.filterGroup,scope:this}
+                'select': {
+                    fn: function (cb, rec, ri) {
+                        if (!MODx.request.query) {
+                            this.filterByGroup(cb, rec, ri);
+                        }
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-plugin-event-search'
+            ,name: 'query'
+            ,id: 'modx-plugin-event-query'
             ,cls: 'x-form-filter'
             ,emptyText: _('search')
+            ,value: MODx.request.query || ''
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.eventSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                }
+                ,'afterrender': {
+                    fn: function (cb) {
+                        if (MODx.request.query) {
+                            this.eventSearch(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function (cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -122,23 +150,27 @@ MODx.grid.PluginEvent = function(config) {
     this.addEvents('updateEvent');
 };
 Ext.extend(MODx.grid.PluginEvent,MODx.grid.Grid,{
-    search: function(tf,newValue) {
+    eventSearch: function (tf, newValue) {
         var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getStore().load();
-        return true;
+        var s = this.getStore();
+        s.baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        s.load();
+        this.replaceState();
     }
-    ,filterGroup: function (cb,nv,ov) {
-        this.getStore().baseParams.group = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
-        this.getStore().load();
-        return true;
+    ,filterByGroup: function (cb, newValue, ov) {
+        var nv = Ext.isEmpty(newValue) || Ext.isObject(newValue) ? cb.getValue() : newValue;
+        var s = this.getStore();
+        s.baseParams.group = nv;
+        s.load();
+        this.replaceState();
     }
-    ,clearFilter: function() {
-        delete this.getStore().baseParams.query;
-        delete this.getStore().baseParams.group;
-        Ext.getCmp('modx-plugin-event-search').reset();
-        Ext.getCmp('modx-plugin-event-filter-group').reset();
-        this.getStore().load();
+    ,clearFilter: function () {
+        var s = this.getStore();
+        s.baseParams.group = s.baseParams.query = '';
+        Ext.getCmp('modx-plugin-event-filter-group').setValue('');
+        Ext.getCmp('modx-plugin-event-query').setValue('');
+        s.load();
+        this.replaceState();
     }
     ,updateEvent: function(btn,e) {
         var r = this.menu.record;

@@ -16,7 +16,7 @@ MODx.panel.Plugin = function(config) {
             action: 'Element/Plugin/Get'
         }
         ,id: 'modx-panel-plugin'
-		,cls: 'container form-with-labels'
+        ,cls: 'container form-with-labels'
         ,class_key: 'MODX\\Revolution\\modPlugin'
         ,plugin: ''
         ,bodyStyle: ''
@@ -357,17 +357,19 @@ MODx.panel.Plugin = function(config) {
                     }
                 }]
             },{
-				xtype: 'panel'
-				,cls:'main-wrapper'
-				,items: [{
-					xtype: 'textarea'
-					,fieldLabel: _('plugin_code')
-					,name: 'plugincode'
-					,id: 'modx-plugin-plugincode'
-					,anchor: '100%'
-					,height: 400
-					,value: config.record.plugincode || "<?php\n"
-                    ,tabIndex: 10
+                xtype: 'panel'
+                ,border: false
+                ,layout: 'form'
+                ,cls: 'main-wrapper'
+                ,labelAlign: 'top'
+                ,items: [{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('plugin_code')
+                    ,name: 'plugincode'
+                    ,id: 'modx-plugin-plugincode'
+                    ,anchor: '100%'
+                    ,height: 400
+                    ,value: config.record.plugincode || "<?php\n"
                 }]
             }]
         },{
@@ -379,7 +381,8 @@ MODx.panel.Plugin = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-plugin-event'
-				,cls:'main-wrapper'
+                ,cls: 'main-wrapper'
+                ,urlFilters: ['group', 'query']
                 ,preventRender: true
                 ,plugin: config.record.id || 0
                 ,listeners: {
