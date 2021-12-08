@@ -168,6 +168,27 @@ MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
     return input.replace(eventAttributes, 'on&#8203;$1');
 };
 
+/**
+ * Cleans and resets or returns a field's value; typically called:
+ *
+ * 1] via an event in a form field component's listeners object (use onChange callback)
+ * 2] via an event in a grid's column model (use onColumnRender callback)
+ * 3] directly via run
+ */
+MODx.util.stripAndEncode = {
+    onChange: function(cmp, newVal, originalVal) {
+        const value = cmp.getValue();
+        cmp.setValue(MODx.util.stripAndEncode.run(value));
+    },
+    onColumnRender: function(value, metaData, record, rowIndex, colIndex) {
+        return MODx.util.stripAndEncode.run(value);
+    },
+    run: function(value) {
+        value = Ext.util.Format.stripTags(value).replace(/\s{2,}/g, ' ');
+        return Ext.util.Format.htmlEncode(value);
+    }
+}
+
 /****************************************************************************
  *    Ext-specific overrides/extensions                                     *
  ****************************************************************************/

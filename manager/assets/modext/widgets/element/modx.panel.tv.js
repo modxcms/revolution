@@ -86,6 +86,7 @@ MODx.panel.TV = function(config) {
                                 ,maxLength: 50
                                 ,enableKeyEvents: true
                                 ,allowBlank: false
+                                ,blankText: _('tv_err_ns_name')
                                 ,value: config.record.name
                                 ,tabIndex: 1
                                 ,listeners: {
@@ -98,6 +99,16 @@ MODx.panel.TV = function(config) {
                                             MODx.setStaticElementPath('tv');
                                         }
                                         ,scope: this
+                                    },
+                                    change: {
+                                        fn: MODx.util.stripAndEncode.onChange
+                                    },
+                                    blur: {
+                                        fn: function(cmp) {
+                                            if (!cmp.getValue()) {
+                                                cmp.markInvalid(_('tv_err_ns_name'));
+                                            }
+                                        }
                                     }
                                 }
                             },{
@@ -174,6 +185,11 @@ MODx.panel.TV = function(config) {
                                 ,id: 'modx-tv-caption'
                                 ,tabIndex: 3
                                 ,value: config.record.caption
+                                ,listeners: {
+                                    change: {
+                                        fn: MODx.util.stripAndEncode.onChange
+                                    }
+                                }
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-tv-caption'
@@ -236,6 +252,11 @@ MODx.panel.TV = function(config) {
                                 ,maxLength: 255
                                 ,tabIndex: 5
                                 ,value: config.record.description || ''
+                                ,listeners: {
+                                    change: {
+                                        fn: MODx.util.stripAndEncode.onChange
+                                    }
+                                }
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-tv-description'
