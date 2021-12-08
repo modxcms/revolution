@@ -403,7 +403,7 @@ class modTemplateVar extends modElement
         $this->set('default_text', $this->processBindings($this->get('default_text'), $resourceId));
 
         /* strip tags from description */
-        $this->set('description', strip_tags($this->get('description')));
+        // $this->set('description', strip_tags($this->get('description')));
 
         $params = [];
         if ($paramstring = $this->get('display_params')) {
