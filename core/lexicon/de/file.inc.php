@@ -83,6 +83,7 @@ $_lang['file_package_err_invalid_name'] = 'Die Datei [[+name]] hat einen ungült
 $_lang['file_package_err_invalid_type'] = 'Diese Datei scheint kein Transport-Package zu sein';
 $_lang['file_remove'] = 'Datei löschen';
 $_lang['file_remove_confirm'] = 'Sind Sie sicher, dass Sie die Datei "[[+file]]" löschen möchten?<br />Das Löschen einer Datei kann möglicherweise dazu führen, dass Ihre Website ganz oder teilweise nicht mehr funktioniert. Stellen Sie sicher, dass Sie wissen, welchen Zweck diese Datei erfüllt, bevor Sie sie löschen.';
+$_lang['file_rename'] = 'Datei umbenennen';
 $_lang['file_saved'] = 'Datei erfolgreich aktualisiert!';
 $_lang['file_size'] = 'Dateigröße';
 $_lang['file_size_bytes'] = 'Bytes';

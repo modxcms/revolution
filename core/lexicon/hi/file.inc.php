@@ -84,6 +84,7 @@ $_lang['file_package_err_invalid_name'] = 'इस फाइल [[+namai]] मे
 $_lang['file_package_err_invalid_type'] = 'This file does not appear to be a transport package';
 $_lang['file_remove'] = 'फाइल हटाएं?';
 $_lang['file_remove_confirm'] = 'क्या आप बाकई इस फाइल को हटाना चाहते है: "[[+file]]"?<br /> किसी file को हटाने से संभावित रूप से आपकी वेवसाइड टूट सकती है सुनिश्चित करें की आप जानते है की यह फाइल इसे हटाने से पहले क्या करती है!';
+$_lang['file_rename'] = 'Rename File';
 $_lang['file_saved'] = 'फ़ाइल सफलतापूर्वक अद्यतन किया!';
 $_lang['file_size'] = 'फाइल का आकार';
 $_lang['file_size_bytes'] = 'बाइट';
