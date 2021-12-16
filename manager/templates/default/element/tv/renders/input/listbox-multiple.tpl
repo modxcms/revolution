@@ -13,20 +13,22 @@
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
-    var fld = new Ext.ux.form.SuperBoxSelect({
+    const fld = MODx.load({
     {/literal}
         xtype:'superboxselect'
         ,transform: 'tv{$tv->id}'
         ,id: 'tv{$tv->id}'
+        ,itemId: 'tv{$tv->id}'
         ,triggerAction: 'all'
         ,mode: 'local'
         ,extraItemCls: 'x-tag'
         ,expandBtnCls: 'x-form-trigger'
         ,clearBtnCls: 'x-form-trigger'
+        ,listClass: 'modx-superboxselect modx-tv-listbox-multiple'
         ,width: 400
         ,maxHeight: 300
-        ,displayField: "text"
-        ,valueField: "value"
+        ,displayField: 'text'
+        ,valueField: 'value'
         ,resizable: true
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         {if $params.typeAhead == 1 || $params.typeAhead == 'true'}
@@ -47,21 +49,37 @@ Ext.onReady(function() {
         ,addNewDataOnBlur: true
         ,stackItems: {if $params.stackItems|default && $params.stackItems|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
-
         {literal}
         ,listeners: {
-            'select': {fn:MODx.fireResourceFormChange, scope:this}
-            ,'beforeadditem': {fn:MODx.fireResourceFormChange, scope:this}
-            ,'newitem': {fn:function(bs,v,f) {
-                var item = {};
-                item[bs.valueField] = v;
-                item[bs.displayField] = v;
-                bs.addNewItem(item);
+            select: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            },
+            beforeadditem: function(cmp, selectedIndex, record) {
+                if (selectedIndex == '') {
+                    return false;
+                }
                 MODx.fireResourceFormChange();
-                return true;
-            },scope:this}
-            ,'beforeremoveitem': {fn:MODx.fireResourceFormChange, scope:this}
-            ,'clear': {fn:MODx.fireResourceFormChange, scope:this}
+            },
+            newitem: {
+                fn: function(bs, v, f) {
+                    let item = {};
+                    item[bs.valueField] = v;
+                    item[bs.displayField] = v;
+                    bs.addNewItem(item);
+                    MODx.fireResourceFormChange();
+                    return true;
+                },
+                scope: this
+            },
+            beforeremoveitem: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            },
+            clear: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            }
         }
     });
     Ext.getCmp('modx-panel-resource').getForm().add(fld);
