@@ -97,26 +97,33 @@ Ext.extend(MODx,Ext.Component,{
     }
 
     ,initMarkRequiredFields: function() {
-        var markdom = '<span class=\"field-required-mark\">*</span>';
 
-        var MarkRequiredFieldPlugin = function (config) {
+        const markerEl = '<span class=\"field-required-mark\">*</span>';
+
+        const MarkRequiredFieldPlugin = function (config) {
             config = config || {};
             Ext.apply(config, {
                 init: function(cmp) {
+                    
                     if (cmp.allowBlank !== false) return;
 
-                    var applyTo = cmp.applyTo;
-                    var label = cmp.fieldLabel;
-                    if (!applyTo) {
-                        if (label) {
-                            cmp.fieldLabel = label + markdom;
-                        } else if (cmp.caption && document.getElementById(cmp.caption)) {
-                            label = document.getElementById(cmp.caption);
-                            label.innerHTML = label.innerHTML + markdom;
+                    const cmpLabel = cmp.fieldLabel;
+
+                    if (cmpLabel) {
+                        cmp.fieldLabel = cmpLabel + markerEl;
+                    } else {
+                        let labelEl = null;
+                        if (cmp.caption && document.getElementById(cmp.caption)) {
+                            labelEl = document.getElementById(cmp.caption);
+                        } else {
+                            const id = cmp.itemId;
+                            if (id && id.match(/^tv[\d]*$/i)) {
+                                labelEl = document.getElementById(`${id}-caption`);
+                            }
                         }
-                    } else if (applyTo && applyTo.match(/^tv[\d]*$/i)) {
-                        label = document.getElementById(applyTo+'-caption');
-                        label.innerHTML = label.innerHTML + markdom;
+                        if (labelEl) {
+                            labelEl.innerHTML = labelEl.innerHTML + markerEl;
+                        }
                     }
                 }
             });
