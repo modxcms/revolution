@@ -42,7 +42,6 @@ abstract class modInstallTest {
         $this->_checkPHPVersion();
         $this->_checkDependencies();
         $this->_checkMemoryLimit();
-        $this->_checkSessions();
         $this->_checkCache();
         $this->_checkExport();
         $this->_checkPackages();
@@ -148,23 +147,6 @@ abstract class modInstallTest {
             $this->warn('simplexml','',$this->install->lexicon('test_simplexml_nf_msg'),$this->install->lexicon('test_simplexml_nf'));
         } else {
             $this->pass('simplexml');
-        }
-    }
-
-
-    /**
-     * Check sessions
-     */
-    protected function _checkSessions() {
-        if ($this->install->request instanceof modInstallCLIRequest) {
-            $this->pass('sessions');
-        } else {
-            $this->title('sessions',$this->install->lexicon('test_sessions_start').' ');
-            if (!empty($_SESSION) && $_SESSION['session_test'] != 1) {
-                $this->fail('sessions');
-            } else {
-                $this->pass('sessions');
-            }
         }
     }
 
