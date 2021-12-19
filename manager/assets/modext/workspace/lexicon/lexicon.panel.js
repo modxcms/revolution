@@ -31,6 +31,7 @@ MODx.panel.Lexicon = function(config) {
                 xtype: 'modx-grid-lexicon'
                 ,itemId: 'grid-lexicon'
 				,cls: 'main-wrapper'
+                ,urlFilters: ['namespace', 'topic', 'language', 'query']
                 ,title: ''
                 ,preventRender: true
             }]
