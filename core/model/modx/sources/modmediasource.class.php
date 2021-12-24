@@ -114,7 +114,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $this->setProperties($this->getProperties(true));
         $this->getPermissions();
-        $this->xpdo->lexicon->load('file');
+
+        if ($this->xpdo->lexicon) {
+            $this->xpdo->lexicon->load('file');
+        }
 
         if (!$this->ctx) {
             $this->ctx =& $this->xpdo->context;
@@ -1370,7 +1373,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     public function prepareProperties(array $properties = [])
     {
         foreach ($properties as &$property) {
-            if (!empty($property['lexicon'])) {
+            if (!empty($property['lexicon']) && $this->xpdo->lexicon) {
                 $this->xpdo->lexicon->load($property['lexicon']);
             }
             if (!empty($property['name'])) {

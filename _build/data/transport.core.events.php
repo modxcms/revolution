@@ -1208,5 +1208,11 @@ $events['OnPackageRemove']->fromArray(array (
   'service' => 2,
   'groupname' => 'Package Manager',
 ), '', true, true);
+$events['OnBeforeInitSession']= $xpdo->newObject(modEvent::class);
+$events['OnBeforeInitSession']->fromArray([
+    'name' => 'OnBeforeInitSession',
+    'service' => 5,
+    'groupname' => 'System',
+], '', true, true);
 
 return $events;

@@ -2487,7 +2487,7 @@ class modX extends xPDO {
         }
         if ($initialized) {
             $this->setLogLevel($this->getOption('log_level', $options, xPDO::LOG_LEVEL_ERROR));
-                
+
             $logTarget = $this->getOption('log_target', $options, 'FILE', true);
             if ($logTarget === 'FILE') {
                 $options = array();
@@ -2502,7 +2502,7 @@ class modX extends xPDO {
             } else {
                 $this->setLogTarget($logTarget);
             }
-            
+
             $debug = $this->getOption('debug');
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
@@ -2573,6 +2573,8 @@ class modX extends xPDO {
      * @param array|null $options Options to override Settings explicitly.
      */
     protected function _initSession($options = null) {
+        $this->invokeEvent('OnBeforeInitSession', is_array($options) ? $options : []);
+
         $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
         if ($this->getOption('session_enabled', $options, true) || isset($_GET['preview'])) {
             if (!in_array($this->getSessionState(), array(modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE), true)) {
