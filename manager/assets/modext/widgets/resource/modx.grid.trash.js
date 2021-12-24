@@ -6,7 +6,9 @@ MODx.grid.Trash = function (config) {
     Ext.applyIf(config, {
         url: MODx.config.connector_url,
         baseParams: {
-            action: 'Resource/Trash/GetList'
+            action: 'Resource/Trash/GetList',
+            context: MODx.request.context || '',
+            query: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
         },
         fields: [
             'id',
@@ -95,17 +97,40 @@ MODx.grid.Trash = function (config) {
             xtype: 'modx-combo-context',
             id: 'modx-trash-context',
             emptyText: _('context'),
+            value: MODx.request.context ? MODx.request.context : '',
             exclude: 'mgr',
             listeners: {
-                'select': {fn: this.searchContext, scope: this}
+                'select': {
+                    fn: function (cb, rec, ri) {
+                        if (!MODx.request.query) {
+                            this.searchContext(cb, rec, ri);
+                        }
+                    },
+                    scope: this
+                }
             }
         },{
             xtype: 'textfield',
-            id: 'modx-trash-search',
+            id: 'modx-trash-query',
             cls: 'x-form-filter',
             emptyText: _('search'),
+            value: MODx.request.query ? decodeURIComponent(MODx.request.query) : '',
             listeners: {
-                'change': {fn: this.search, scope: this},
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.searchResource(cb, rec, ri);
+                    },
+                    scope: this
+                },
+                'afterrender': {
+                    fn: function (cb) {
+                        if (MODx.request.query) {
+                            this.searchResource(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    },
+                    scope: this
+                },
                 'render': {
                     fn: function (cmp) {
                         new Ext.KeyMap(cmp.getEl(), {
@@ -113,7 +138,8 @@ MODx.grid.Trash = function (config) {
                             fn: this.blur,
                             scope: cmp
                         });
-                    }, scope: this
+                    },
+                    scope: this
                 }
             }
         }, {
@@ -167,28 +193,32 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         }
     },
 
-    search: function (tf, newValue) {
+    searchResource: function (tf, newValue) {
         var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        var s = this.getStore();
+        s.baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        s.load();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
-        return true;
+        this.replaceState();
     },
 
     searchContext: function (tf) {
-        this.getStore().baseParams.context = !Ext.isEmpty(tf) ? tf.value : '';
+        var nv = Ext.isEmpty(tf) || Ext.isObject(tf) ? tf.value : tf;
+        var s = this.getStore();
+        s.baseParams.context = nv;
+        s.load();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
-        return true;
+        this.replaceState();
     },
 
     clearFilter: function () {
-        this.getStore().baseParams.query = '';
-        this.getStore().baseParams.context = '';
-        Ext.getCmp('modx-trash-search').reset();
-        Ext.getCmp('modx-trash-context').reset();
+        var s = this.getStore();
+        s.baseParams.context = s.baseParams.query = '';
+        Ext.getCmp('modx-trash-context').setValue('');
+        Ext.getCmp('modx-trash-query').setValue('');
+        s.load();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
+        this.replaceState();
     },
 
     purgeResource: function () {

@@ -11,6 +11,7 @@ MODx.panel.Trash = function (config) {
                 xtype: 'modx-grid-trash',
                 id: 'modx-trash-resources',
                 cls: 'main-wrapper',
+                urlFilters: ['context', 'query'],
                 preventRender: true
             }]
         }], {
@@ -41,4 +42,3 @@ MODx.panel.Trash = function (config) {
 };
 Ext.extend(MODx.panel.Trash, MODx.FormPanel);
 Ext.reg('modx-panel-trash', MODx.panel.Trash);
-
