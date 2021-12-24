@@ -2743,6 +2743,8 @@ class modX extends xPDO {
      * @param array|null $options Options to override Settings explicitly.
      */
     protected function _initSession($options = null) {
+        $this->invokeEvent('OnBeforeInitSession');
+
         $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
         if ($this->getOption('session_enabled', $options, true) || isset($_GET['preview'])) {
             if (!in_array($this->getSessionState(), [modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE], true)) {
