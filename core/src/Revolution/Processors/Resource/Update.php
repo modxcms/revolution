@@ -494,6 +494,46 @@ class Update extends UpdateProcessor
     }
 
     /**
+     * Set deleted status for child resources
+     * @return void
+     */
+    public function setDeletedForChildren($parent, $status)
+    {
+        $childrens = $this->modx->getCollection(modResource::class, [
+            'parent' => $parent,
+        ]);
+        if (count($childrens) > 0) {
+            foreach ($childrens as $child) {
+                $child->set('deleted', $status);
+                if ($status === true) {
+                    $child->set('deletedby', $this->modx->user->get('id'));
+                    $child->set('deletedon', time(), 'integer');
+                } else {
+                    $child->set('deletedby', false);
+                    $child->set('deletedon', false);
+                }
+                $locked = $child->addLock();
+                if ($locked !== true) {
+                    $user = $this->modx->getObject(modUser::class, $locked);
+                    if ($user) {
+                        if ($status === true) {
+                            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('resource_locked_by', ['id' => $child->get('id'), 'user' => $user->get('username')]));
+                        } else {
+                            continue;
+                        }
+                    }
+                }
+                if ($child->save() == false) {
+                    $child->removeLock();
+                    $this->object->removeLock();
+                } else {
+                    $this->setDeletedForChildren($child->get('id'), $status);
+                }
+            }
+        }
+    }
+
+    /**
      * Check deleted status and ensure user has permissions to delete resource
      * @return boolean
      */
@@ -506,6 +546,9 @@ class Update extends UpdateProcessor
                     $this->setProperty('deleted', $this->object->get('deleted'));
                 } else {
                     $this->object->set('deleted', false);
+                    $this->object->set('deletedby', false);
+                    $this->object->set('deletedon', false);
+                    $this->setDeletedForChildren($this->object->get('id'), false);
                     $this->resourceUnDeleted = true;
                 }
             } else { /* delete */
@@ -513,6 +556,9 @@ class Update extends UpdateProcessor
                     $this->setProperty('deleted', $this->object->get('deleted'));
                 } else {
                     $this->object->set('deleted', true);
+                    $this->object->set('deletedby', $this->modx->user->get('id'));
+                    $this->object->set('deletedon', time(), 'integer');
+                    $this->setDeletedForChildren($this->object->get('id'), true);
                     $this->resourceDeleted = true;
                 }
             }
