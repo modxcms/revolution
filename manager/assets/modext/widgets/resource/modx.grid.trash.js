@@ -12,6 +12,7 @@ MODx.grid.Trash = function (config) {
         },
         fields: [
             'id',
+            'parent',
             'pagetitle',
             'longtitle',
             'published',
@@ -35,6 +36,11 @@ MODx.grid.Trash = function (config) {
             width: 20,
             sortable: true
         }, {
+            header: _('parent'),
+            dataIndex: 'parent',
+            width: 20,
+            sortable: true
+        }, {
             header: _('pagetitle'),
             dataIndex: 'pagetitle',
             width: 80,
@@ -54,12 +60,12 @@ MODx.grid.Trash = function (config) {
         }, {
             header: _('trash.deletedon_title'),
             dataIndex: 'deletedon',
-            width: 75,
+            width: 40,
             sortable: true
         }, {
             header: _('trash.deletedbyUser_title'),
             dataIndex: 'deletedby',
-            width: 75,
+            width: 40,
             sortable: true,
             renderer: function (value, metaData, record) {
                 return record.data.deletedby_name;
