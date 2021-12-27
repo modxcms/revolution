@@ -151,7 +151,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             menu.push([
                 '-'
                 ,{
-                    text: _('update')
+                    text: _('edit')
                     ,handler: function() {
                         MODx.loadPage('source/update', 'id=' + node.ownerTree.source);
                     }

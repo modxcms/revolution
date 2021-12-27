@@ -506,7 +506,7 @@ class modTransportProvider extends xPDOSimpleObject
 
         // Add params to the body if this is a POST request
         if ($method === 'POST') {
-            $request->withHeader('Content-Type','application/x-www-form-urlencoded');
+            $request = $request->withHeader('Content-Type','application/x-www-form-urlencoded');
             $request->getBody()->write(http_build_query($params));
         }
 

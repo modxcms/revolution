@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Možnost resetovat všechny přístupy.';
 $_lang['perm.frames_desc'] = 'Možnost používat MODX správce obsahu.';
 $_lang['perm.help_desc'] = 'Možnost zobrazení nápovědy.';
 $_lang['perm.home_desc'] = 'Možnost zobrazení úvodní stránky.';
-$_lang['perm.import_static_desc'] = 'Možnost použití nebo zobrazení importovacích stránek.';
 $_lang['perm.languages_desc'] = 'Možnost zobrazení a úpravy slovníků.';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'Možnost zobrazení a úpravy slovníků a internacionalizace.';

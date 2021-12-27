@@ -26,7 +26,7 @@ MODx.page.Package = function(config) {
                 MODx.loadPage('workspaces');
             }
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]

@@ -22,6 +22,10 @@ MODx.page.Profile = function(config) {
                 key: MODx.config.keymap_save || 's'
                 ,ctrl: true
             }]
+        },{
+            process: 'cancel'
+            ,text: _('cancel')
+            ,id: 'modx-abtn-cancel'
         }]
         ,components: [{
             xtype: 'modx-panel-profile'

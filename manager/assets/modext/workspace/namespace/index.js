@@ -11,7 +11,7 @@ MODx.page.Namespaces = function(config) {
             xtype: 'modx-panel-namespaces'
         }]
         ,buttons: [{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,handler: MODx.loadHelpPane
         }]
     });

@@ -12699,66 +12699,77 @@ body a:hover {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.select_lang .toggle {
-    color: #515151;
-    width: 25%;
-    float: right;
-    top: -3rem;
-    position: relative;
-    font-size: 18px;
-    text-align: center;
-}
-.select_lang .toggle span {
-    cursor: pointer;
-    border-bottom: 1px dotted;
-}
-.select_lang .toggle.pop {
-    display: none;
-}
-
-.languages {
+.languages-wrapper {
     display: flex;
     flex-flow: wrap;
 }
-.languages .language {
-    max-width: 25%;
-    flex-basis: 25%;
+.languages-item {
     cursor: pointer;
+    flex-basis: 25%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    max-width: 25%;
+    padding: 5px;
     position: relative;
 }
-.languages .language.other {
+.languages-item:focus-within .languages-item__inner, .languages-item--active .languages-item__inner {
+    border-color: #4A90E2;
+    background-color: #f1f6fd;
+    outline: 1px solid #4A90E2;
+}
+.languages-item--popular {
+    display: block;
+}
+.languages-item--other {
     display: none;
 }
-.languages .language .radio {
+.languages-item__radio {
     position: absolute;
     z-index: -1;
 }
-.languages .language .wrap {
-    display: block;
-    padding: 0.5rem 0.7rem;
-    border: 1px solid #DCDCDC;
-    margin: 5px;
+.languages-item__inner {
     background-color: #FBFBFB;
     border-radius: 3px;
+    border: 1px solid #DCDCDC;
     color: #515151;
-}
-.languages .language .wrap > span {
+    cursor: pointer;
     display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    padding: 0.6rem 0.7rem;
+    text-align: left;
+    width: 100%;
 }
-.languages .language .native {
+.languages-item__inner__native {
+    display: block;
     font-weight: bold;
     font-size: 1rem;
+    margin: 0 0 0.2rem;
 }
-.languages .language .name strong {
+.languages-item__inner__name {
+    display: block;
+}
+.languages-item__inner__code {
+    display: inline-block;
+    font-weight: bold;
     text-transform: uppercase;
 }
-.languages .language:hover input ~ .wrap, .languages .language:focus input ~ .wrap {
-    border-color: #4A90E2;
+.languages__toggler {
+    background-color: transparent;
+    border: 0;
+    color: #515151;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
 }
-.languages .language input:checked ~ .wrap,
-.languages .language input:focus ~ .wrap {
-    border-color: #4A90E2;
-    background-color: #f1f6fd;
+.languages__toggler > span {
+    cursor: pointer;
+    border-bottom: 1px dashed;
+}
+.languages__toggler-wrapper {
+    align-items: stretch;
+    display: flex;
+    justify-content: center;
 }
 
 [type=checkbox]:not(:checked), [type=checkbox]:checked {
@@ -13488,16 +13499,10 @@ pre,
         font-size: 12px;
         padding: 0;
     }
-
-    .select_lang .toggle {
-        width: 100%;
-        float: initial;
-        top: 0.5rem;
-        display: block;
-    }
-
-    .languages .language {
-        max-width: 100%;
+}
+@media (max-width: 767.98px) {
+    .languages-item {
         flex-basis: 100%;
+        max-width: 100%;
     }
 }

@@ -323,11 +323,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'import_static',
-    'description' => 'perm.import_static_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'language',
     'description' => 'perm.language_desc',
     'value' => true,

@@ -17,7 +17,12 @@
 
     <!-- Ignore vendor files -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <!-- Ignore generated model files -->
+    <exclude-pattern>*/mysql/*.php</exclude-pattern>
 
     <!-- Our base rule: set to PSR12-->
     <rule ref="PSR12" />
+    <rule ref="PSR12">
+        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
+    </rule>
 </ruleset>

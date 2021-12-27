@@ -6,12 +6,12 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['help_page_title'] = 'Aiuto & Supporto';
-$_lang['help_main_head'] = 'MODX è qui per voi';
-$_lang['help_main_subhead'] = 'Leggete sotto per ottenere l\'aiuto necessario per il vostro progetto MODX <br>Potete avere maggiori dettagli su <a href="https://modx.com/community/free-support-options">modx.com/community/free-support-options</a> o chiamando il + 1 (469) 777-6639';
+$_lang['help_page_title'] = 'Aiuto e Supporto';
+$_lang['help_main_head'] = 'MODX è Qui per Te';
+$_lang['help_main_subhead'] = 'Vedi sotto per ottenere l\'aiuto necessario per il tuo progetto di MODX<br>Trova altri dettagli su <a href="https://modx.com/community/free-support-options">modx.com/community/free-support-options</a> o chiama il + 1 (469) 777-6639';
 $_lang['forums'] = 'Forum';
-$_lang['forums_title'] = 'Forum della Comunità MODX';
-$_lang['forums_description'] = 'Aiuto gratuito da parte della Community';
+$_lang['forums_title'] = 'Forum della Community di MODX';
+$_lang['forums_description'] = 'Aiuto gratuito dalla Community';
 $_lang['forums_link'] = 'https://community.modx.com/';
 $_lang['docs'] = 'Documentazione';
 $_lang['docs_title'] = 'Leggi il Fantastico Manuale (di MODX)';

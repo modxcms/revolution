@@ -701,6 +701,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Пазначце ка
 $_lang['setting_static_elements_basepath'] = 'Базавы шлях да статычных элементаў';
 $_lang['setting_static_elements_basepath_desc'] = 'Базавы шлях да месца, дзе будуць захоўвацца файлы статычных элементаў.';
 
+$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+
+$_lang['setting_resource_static_path'] = 'Static resource base path';
+$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
+
 $_lang['setting_symlink_merge_fields'] = 'Аб\'ядноўваць палі рэсурсу з палямі сімвалічнай спасылкі';
 $_lang['setting_symlink_merge_fields_desc'] = 'Калі ўсталявана значэнне «Так», то не пустыя палі сімвалічнай спасылкі заменяць палі
 мэтавага рэсурсу пры пераадрасацыі з выкарыстаннем сімвалічнай спасылкі.';
@@ -812,3 +818,6 @@ $_lang['setting_passwordless_activated_desc'] = 'Пры ўключэнні ка�
 
 $_lang['setting_passwordless_expiration'] = 'Заканчэнне тэрміну дзеяння ўваходу ў сістэму';
 $_lang['setting_passwordless_expiration_desc'] = 'Як доўга спасылка для аднаразовага ўваходу сапраўдная ў секундах.';
+
+$_lang['static_elements_html_extension'] = 'Static elements html extension';
+$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';

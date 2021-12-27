@@ -10,6 +10,7 @@
 /* run upgrades common to all db platforms */
 include dirname(__DIR__) . '/common/3.0.0-cleanup-files.php';
 include dirname(__DIR__) . '/common/3.0.0-dashboard-widgets.php';
+include dirname(__DIR__) . '/common/3.0.0-new-tables.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-copy-to-clipboard.php';
 include dirname(__DIR__) . '/common/3.0.0-cleanup-system-settings.php';
 include dirname(__DIR__) . '/common/3.0.0-content-type-icon.php';
@@ -31,5 +32,5 @@ include dirname(__DIR__) . '/common/3.0.0-policy-template-group-description.php'
 include dirname(__DIR__) . '/common/3.0.0-policy-template-description.php';
 include dirname(__DIR__) . '/common/3.0.0-policy-description.php';
 include dirname(__DIR__) . '/common/3.0.0-non-index-field-length.php';
-include dirname(__DIR__) . '/common/3.0.0-update-base_help_url.php';
 include dirname(__DIR__) . '/common/3.0.0-template-preview.php';
+include dirname(__DIR__) . '/common/3.0.0-remove-content-type-field.php';

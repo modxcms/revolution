@@ -8,22 +8,22 @@
  */
 $_lang['help_page_title'] = 'सहायता & समर्थन';
 $_lang['help_main_head'] = 'MODX यहाँ आप के लिए है';
-$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/community/free-support-options">modx.com/community/free-support-options</a> or call +1 (469) 777-6639';
-$_lang['forums'] = 'Forums';
+$_lang['help_main_subhead'] = 'अपने MODEX प्रोजेक्ट के लिए आवश्यक सहायता प्राप्त करने के लिए नीचे देखें<br>अधिक विवरण <a href="https://modx.com/community/free-support-options">modx.com/community/free-support पर प्राप्त करें -विकल्प</a> या +1 (469) 777-6639 . पर कॉल करें';
+$_lang['forums'] = 'मंच';
 $_lang['forums_title'] = 'MODX सामुदायिक मंचों';
 $_lang['forums_description'] = 'नि: शुल्क समुदाय से मदद';
 $_lang['forums_link'] = 'https://community.modx.com/';
 $_lang['docs'] = 'प्रलेखन';
 $_lang['docs_title'] = 'शानदार (MODX) मैनुअल पढ़ें';
-$_lang['docs_description'] = 'आधिकारिक MODX नियमावली पढ़ें';
+$_lang['docs_description'] = 'आधिकारिक MODX मैनुअल पढ़ें';
 $_lang['docs_link'] = 'https://docs.modx.com/';
 $_lang['bugs'] = 'बग ट्रैकर';
 $_lang['bugs_title'] = 'बग्स रिपोर्ट & सुविधा का अनुरोध';
 $_lang['bugs_description'] = 'कोई समस्या है? हमें बताए !';
 $_lang['bugs_link'] = 'https://github.com/modxcms/revolution/issues';
-$_lang['localization'] = 'MODX localization';
-$_lang['localization_title'] = 'MODX localization';
-$_lang['localization_description'] = 'Help us with MODX localization';
+$_lang['localization'] = 'MODX स्थानीयकरण';
+$_lang['localization_title'] = 'MODX स्थानीयकरण';
+$_lang['localization_description'] = 'MODX स्थानीयकरण में हमारी सहायता करे';
 $_lang['localization_link'] = 'https://crowdin.com/project/modx-revolution';
 $_lang['support'] = 'व्यावसायिक समर्थन';
 $_lang['support_title'] = 'एक आपातकालीन सहायता टिकट खरीदें';
@@ -37,5 +37,5 @@ $_lang['social_follows'] = 'आप भी इन चैनलों पर <b>MO
 $_lang['follow'] = 'MODX का पालन करें';
 $_lang['like'] = 'MODX की तरह';
 $_lang['circle'] = 'MODX सर्कल';
-$_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/services/" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
+$_lang['help_about'] = 'आप जिस MODX® सॉफ़्टवेयर का उपयोग कर रहे हैं, वह उपयोगकर्ताओं, समर्थकों और डेवलपर्स के एक अद्भुत समुदाय के सहयोग का परिणाम है! 2004 के बाद से, एमओडीएक्स के पीछे की टीम ने इसे प्रायोजित और प्रबंधित किया है, वाणिज्यिक समर्थन और कमीशन सुविधाओं के माध्यम से चल रहे काम को वित्त पोषित किया है। एक घंटे की आपातकालीन सहायता प्राप्त करने के लिए आप <a href="https://modx.com/services/" class="supportTicket">स्रोत से सहायता खरीद सकते हैं</a> (दो घंटे की गैर-प्राथमिकता सहायता के लिए भी प्रयोग करने योग्य) ) या <a href="mailto:hello@modx.com?subject=MODX प्रबंधक पूछताछ">हमें ईमेल करें</a> यदि आपके पास सामान्य रूप से MODX के बारे मे कोई अन्य प्रश्न है!';
 $_lang['help_credit'] = 'MODX मुफ्त खुला स्रोत सॉफ़्टवेयर के तहत <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank"> GPL संस्करण 2.0</a> या बाद में लाइसेंस प्राप्त है। कॉपीराइट 2005-[[+current_year]] MODX, LLC द्वारा। "MODX" एक पंजीकृत ट्रेडमार्क है। सही काम करते हैं-कृपया इस क्रेडिट और इस पृष्ठ पर अन्य जानकारी बरकरार रखें।';

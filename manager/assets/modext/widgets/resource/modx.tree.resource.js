@@ -97,7 +97,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,duplicateResource: function(item,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
-        var name = node.ui.textNode.innerText;
+        var name = Ext.util.Format.htmlEncode(node.ui.textNode.innerText);
 
         var r = {
             resource: id
@@ -177,7 +177,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
     ,deleteDocument: function(itm,e) {
         var node = this.cm.activeNode;
         var id = node.id.split('_');id = id[1];
-        var resource = node.ui.textNode.innerText;
+        var resource = Ext.util.Format.htmlEncode(node.ui.textNode.innerText);
         MODx.msg.confirm({
             text: _('resource_delete_confirm',{
                 resource: resource
@@ -520,6 +520,7 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             });
         }
         if (ui.hasClass('pdelete')) {
+            m.push('-');
             m.push({
                 text: _('remove_context')
                 ,handler: this.removeContext

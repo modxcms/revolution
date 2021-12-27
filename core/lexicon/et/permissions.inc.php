@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Saab nullida kõik saidi sessioonid.';
 $_lang['perm.frames_desc'] = 'Saab kasutada MODX Manager-i kasutajaliidest.';
 $_lang['perm.help_desc'] = 'Vaadata Abi lehte.';
 $_lang['perm.home_desc'] = 'Vaadata Tervitus lehte.';
-$_lang['perm.import_static_desc'] = 'Vaadata ja kasutada Import lehti';
 $_lang['perm.languages_desc'] = 'Vaadata ja muuta Lexiconi Keeli.';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'Vaadata ja muuta Lexicone ja Rahvusvahelistumine (I18N).';

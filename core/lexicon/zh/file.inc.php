@@ -83,6 +83,7 @@ $_lang['file_package_err_invalid_name'] = 'This file [[+name]] has an invalid na
 $_lang['file_package_err_invalid_type'] = 'This file does not appear to be a transport package';
 $_lang['file_remove'] = '删除文件';
 $_lang['file_remove_confirm'] = 'Are you sure you want to delete the file: "[[+file]]"?<br />Deleting a file could potentially break your website. Make sure you know what this file does before deleting it.';
+$_lang['file_rename'] = 'Rename File';
 $_lang['file_saved'] = '文件已成功更新!';
 $_lang['file_size'] = '文件大小';
 $_lang['file_size_bytes'] = 'bytes';

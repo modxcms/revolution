@@ -356,13 +356,17 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 });
             }
         }
-        m.push({
-            text: _('quick_create')
-            ,handler: function() {return false;}
-            ,menu: {
-                items: mn
-            }
-        });
+        if (mn.length > 0) {
+            m.push({
+                text: _('quick_create')
+                , handler: function () {
+                    return false;
+                }
+                , menu: {
+                    items: mn
+                }
+            });
+        }
         return m;
     }
 
@@ -422,6 +426,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             });
         }
         if (ui.hasClass('pdelete')) {
+            m.push('-');
             m.push({
                 text: _('remove_'+a.type)
                 ,handler: this.removeElement
@@ -468,7 +473,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         }
         if (m.length > 2) {m.push('-');}
 
-        if (a.elementType) {
+        if (ui.hasClass('pnew_' + a.type)) {
             m.push({
                 text: _('add_to_category_'+a.type)
                 ,handler: this._createElement

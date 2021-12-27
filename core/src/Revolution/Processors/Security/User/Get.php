@@ -99,7 +99,7 @@ class Get extends GetProcessor
         $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? date($this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
             $userArray['lastlogin']) : '';
 
-        unset($userArray['password'], $userArray['cachepwd']);
+        unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
         return $this->success('', $userArray);
     }
 }

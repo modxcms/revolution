@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Security\Access\Policy\Template;
 
 use MODX\Revolution\modAccessPermission;
+use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessPolicyTemplate;
 use MODX\Revolution\modAccessPolicyTemplateGroup;
 use MODX\Revolution\Processors\Model\GetListProcessor;
@@ -71,15 +72,25 @@ class GetList extends GetListProcessor
      */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
+        $c->select($this->modx->getSelectColumns(modAccessPolicyTemplate::class, 'modAccessPolicyTemplate'));
+        $c->select(['template_group_name' => 'TemplateGroup.name']);
+
         $subQuery = $this->modx->newQuery(modAccessPermission::class);
         $subQuery->select('COUNT(modAccessPermission.id)');
         $subQuery->where([
             'modAccessPermission.template = modAccessPolicyTemplate.id',
         ]);
         $subQuery->prepare();
-        $c->select($this->modx->getSelectColumns(modAccessPolicyTemplate::class, 'modAccessPolicyTemplate'));
-        $c->select(['template_group_name' => 'TemplateGroup.name']);
         $c->select('(' . $subQuery->toSql() . ') AS ' . $this->modx->escape('total_permissions'));
+
+        $policyCountSubQuery = $this->modx->newQuery(modAccessPolicy::class);
+        $policyCountSubQuery->select('COUNT(modAccessPolicy.id)');
+        $policyCountSubQuery->where([
+            'modAccessPolicy.template = modAccessPolicyTemplate.id',
+        ]);
+        $policyCountSubQuery->prepare();
+        $c->select('(' . $policyCountSubQuery->toSql() . ') AS ' . $this->modx->escape('policy_count'));
+
         $id = $this->getProperty('id', '');
         if (!empty($id)) {
             $c->where([

@@ -38,7 +38,7 @@ $_lang['login_username_password_incorrect'] = 'Der von Ihnen eingegebene Benutze
 $_lang['login_user_inactive'] = 'Ihr Benutzeraccount wurde deaktiviert. Bitte kontaktieren Sie Ihren Systemadministrator und bitten Sie ihn, den Account zu aktivieren.';
 $_lang['login_email_subject'] = 'Ihre Login-Daten';
 $_lang['login_magiclink_subject'] = 'Ihr Einmal-Login-Link';
-$_lang['login_magiclink_err'] = 'Ihr Login-Link ist ungültig. Bitte fordern Sie einen Neuen an.';
+$_lang['login_magiclink_err'] = 'Ihr Login-Link ist ungültig. Bitte fordern Sie einen neuen an.';
 $_lang['login_magiclink_email'] = '<h2>Einmal-Login-Link</h2><p>Hier ist Ihr Link, um sich beim MODX-Manager anzumelden. Dieser Link ist gültig für die nächsten [[+expiration]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?magiclink=[[+hash]]" class="btn">Login</a></p><p class="small">Wenn Sie diesen Link nicht angefordert haben, ignorieren Sie diese E-Mail.</p>';
 $_lang['login_magiclink_default_msg'] = 'Wenn auf Ihre E-Mail Adresse <i>[[+email]]</i> ein Konto registriert ist, erhalten Sie in Kürze eine E-Mail.';
 $_lang['login_magiclink_error_msg'] = 'Das System konnte keinen Login-Link per E-Mail senden. Bitte kontaktieren Sie den Administrator, wenn dieser Fehler dauerhaft auftritt.';

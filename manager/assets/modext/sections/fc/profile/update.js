@@ -1,5 +1,5 @@
 /**
- * Loads the chunk update page
+ * Loads the FC Profile update page
  *
  * @class MODx.page.UpdateFCProfile
  * @extends MODx.Component
@@ -7,10 +7,10 @@
  * @xtype modx-page-fc-profile-update
  */
 MODx.page.UpdateFCProfile = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-	   formpanel: 'modx-panel-fc-profile'
-	   ,actions: {
+    config = config || {};
+    Ext.applyIf(config,{
+        formpanel: 'modx-panel-fc-profile'
+        ,actions: {
             'new': 'Security/Forms/Profile/Create'
             ,edit: 'Security/Forms/Profile/Update'
             ,cancel: 'security/forms'
@@ -31,7 +31,7 @@ MODx.page.UpdateFCProfile = function(config) {
             ,id: 'modx-abtn-cancel'
             ,params: {a:'security/forms'}
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
@@ -39,8 +39,8 @@ MODx.page.UpdateFCProfile = function(config) {
             xtype: 'modx-panel-fc-profile'
             ,record: config.record || {}
         }]
-	});
-	MODx.page.UpdateFCProfile.superclass.constructor.call(this,config);
+    });
+    MODx.page.UpdateFCProfile.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.UpdateFCProfile,MODx.Component);
 Ext.reg('modx-page-fc-profile-update',MODx.page.UpdateFCProfile);

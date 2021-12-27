@@ -14,7 +14,6 @@ namespace MODX\Revolution\Smarty;
 use Exception;
 use MODX\Revolution\modX;
 use Smarty;
-use SmartyBC;
 use xPDO\xPDO;
 
 /**
@@ -25,7 +24,7 @@ use xPDO\xPDO;
  *
  * @package MODX\Revolution\Smarty
  */
-class modSmarty extends SmartyBC
+class modSmarty extends Smarty
 {
     /**
      * A reference to the modX instance
@@ -56,7 +55,7 @@ class modSmarty extends SmartyBC
      * @param modX  $modx   A reference to the modX object
      * @param array $params An array of configuration parameters
      */
-    function __construct(modX &$modx, $params = [])
+    public function __construct(modX $modx, array $params = [])
     {
         parent:: __construct();
         $this->modx = &$modx;
@@ -79,6 +78,7 @@ class modSmarty extends SmartyBC
             $this->modx->cacheManager->writeTree($this->compile_dir);
         }
 
+        $this->muteUndefinedOrNullWarnings();
         $this->assign('app_name', 'MODX');
 
         $this->_blocks = [];

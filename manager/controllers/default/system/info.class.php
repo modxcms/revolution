@@ -42,7 +42,7 @@ class SystemInfoManagerController extends modManagerController {
         if ($dbtype_mysql && !empty($m['pdo_mysql'])) $pi = array_merge($pi, ['pdo_mysql' => $m['pdo_mysql']]);
         if (!empty($m['zip'])) $pi = array_merge($pi, ['zip' => $m['zip']]);
         $this->version = [
-            'smarty'=> $this->modx->smarty->_version,
+            'smarty'=> Smarty::SMARTY_VERSION,
             'PHPMailer'=> PHPMailer\PHPMailer\PHPMailer::VERSION
         ];
 

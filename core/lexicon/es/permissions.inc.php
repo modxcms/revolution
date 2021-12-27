@@ -72,7 +72,6 @@ $_lang['perm.flush_sessions_desc'] = 'Limpiar Sesiones a lo largo del sitio.';
 $_lang['perm.frames_desc'] = 'Poder utilizar la Interfaz del Panel de Administración de MODX.';
 $_lang['perm.help_desc'] = 'Ver la página de Ayuda.';
 $_lang['perm.home_desc'] = 'Ver la página de Bienvenida.';
-$_lang['perm.import_static_desc'] = 'Ver o usar las páginas de Importar.';
 $_lang['perm.languages_desc'] = 'Editar o ver Archivos de Idioma.';
 $_lang['perm.language_desc'] = 'To switch the current language in the manager.';
 $_lang['perm.lexicons_desc'] = 'Editar o ver Archivos de Idioma e Internacionalización.';

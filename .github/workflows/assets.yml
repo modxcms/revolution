@@ -1,0 +1,31 @@
+name: "Compile Assets"
+
+on:
+    push:
+        paths:
+            - "_build/templates/**"
+    pull_request:
+        paths:
+            - "_build/templates/**"
+
+    workflow_dispatch:
+
+jobs:
+    compile-assets:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+
+            -   name: Install Node.js
+                uses: actions/setup-node@v2
+                with:
+                    node-version: '14'
+                    cache: 'npm'
+                    cache-dependency-path: _build/templates/default/package-lock.json
+
+            -   name: Install NPM dependencies
+                run: cd _build/templates/default && npm install
+
+            -   name: Build assets
+                run: cd _build/templates/default && npm run build

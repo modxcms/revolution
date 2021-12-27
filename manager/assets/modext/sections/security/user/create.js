@@ -29,7 +29,7 @@ MODx.page.CreateUser = function(config) {
                 MODx.loadPage('security/user')
             }
         },{
-            text: _('help_ex')
+            text: '<i class="icon icon-question-circle"></i>'
             ,id: 'modx-abtn-help'
             ,handler: MODx.loadHelpPane
         }]
@@ -39,8 +39,8 @@ MODx.page.CreateUser = function(config) {
             ,user: 0
             ,name: ''
         }]
-	});
-	MODx.page.CreateUser.superclass.constructor.call(this,config);
+    });
+    MODx.page.CreateUser.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.page.CreateUser,MODx.Component);
 Ext.reg('modx-page-user-create',MODx.page.CreateUser);

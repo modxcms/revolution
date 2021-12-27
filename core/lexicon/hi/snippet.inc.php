@@ -6,9 +6,9 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['snippet'] = 'Snippet';
+$_lang['snippet'] = 'स्नीपेट';
 $_lang['snippets_available'] = 'आप के लिए उपलब्ध Snippets अपने पेज में शामिल करने के लिए';
-$_lang['snippet_code'] = 'Snippet code (php)';
+$_lang['snippet_code'] = 'स्नीपेट कोड (पीएचपी)';
 $_lang['snippet_delete_confirm'] = 'आप सुनिश्चित करें कि आप इस Snippet हटाना चाहते हैं?';
 $_lang['snippet_desc'] = 'Description:';
 $_lang['snippet_desc_category'] = 'Category इस snippet में अंतर्गत आता है।';
@@ -33,8 +33,8 @@ $_lang['snippet_lock_msg'] = 'Users को edit_locked विशेषता य
 $_lang['snippet_management_msg'] = 'यहाँ आप कौन सा snippet आप संपादित करना चाहते हैं चुन सकते हैं।';
 $_lang['snippet_msg'] = 'Here you can create/edit snippets. Remember, snippets are \'raw\' PHP code, and if you expect the output of the snippet to be shown at a certain point within the template, you need to return a value from within the snippet.';
 $_lang['snippet_name'] = 'Snippet नाम';
-$_lang['snippet_new'] = 'Create Snippet';
+$_lang['snippet_new'] = 'Snippet बनाएँ';
 $_lang['snippet_properties'] = 'डिफ़ॉल्ट गुण';
 $_lang['snippet_title'] = 'बनाएँ/संपादित करें snippet';
 $_lang['snippet_untitled'] = 'अनामांकित snippet';
-$_lang['snippets'] = 'Snippets';
+$_lang['snippets'] = 'स्निपेट्स';

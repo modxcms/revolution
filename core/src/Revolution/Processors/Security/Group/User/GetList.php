@@ -76,7 +76,7 @@ class GetList extends GetListProcessor
      */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
-        $c->select($this->modx->getSelectColumns($this->classKey, $c->getAlias()));
+        $c->select($this->modx->getSelectColumns($this->classKey, $c->getAlias(), '', ['id', 'username']));
         $c->select([
             'usergroup' => 'UserGroup.id',
             'usergroup_name' => 'UserGroup.name',
@@ -97,7 +97,7 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
+        $objectArray = $object->toArray('', false, true);
         $objectArray['role_name'] .= ' - ' . $objectArray['authority'];
 
         return $objectArray;

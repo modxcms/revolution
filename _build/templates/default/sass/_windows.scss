@@ -245,6 +245,29 @@
       color: $red;
     }
   }
+
+  /* message dialog windows */
+  &.x-window-plain {
+      .x-toolbar-left-row {
+          .x-toolbar-cell {
+              /*
+                  Note that because the MessageBox class in Extjs 3 is a singleton,
+                  it can not be extended or overriden and is very limited in its
+                  configuration options. Thus the fragile method here of selecting
+                  the button by dom position. Ext always outputs all 4 buttons into
+                  the markup and just hides ones not in use for a particular window type.
+                  For the time-being, the primary button will always be the
+                  first ("ok") or second ("yes", typically our save button) index.
+              */
+              &:nth-child(1),
+              &:nth-child(2) {
+                  .x-btn {
+                      @extend %primary-button;
+                  }
+              }
+          }
+      }
+  }
 }
 
 /* .x-window */

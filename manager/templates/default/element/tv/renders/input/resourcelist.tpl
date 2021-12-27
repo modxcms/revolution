@@ -1,6 +1,6 @@
 <select id="tv{$tv->id}" name="tv{$tv->id}">
 {foreach from=$opts item=item}
-    <option value="{$item.value}" {if $item.selected}selected="selected"{/if}>{$item.text}</option>
+    <option value="{$item.value|escape}" {if $item.selected} selected="selected"{/if}>{$item.text|escape}</option>
 {/foreach}
 </select>
 

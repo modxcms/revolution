@@ -22,8 +22,21 @@ foreach ($menu as $key => $value) {
     /** @var modMenu $menu_item */
 
     $menu_item = $modx->getObject(modMenu::class, ['text' => $key]);
-    $menu_item->set('description', '');
-    $menu_item->set('icon', $value);
-    $menu_item->save();
+    if ($menu_item instanceof modMenu) {
+        $menu_item->set('description', '');
+        $menu_item->set('icon', $value);
+        $menu_item->save();
+    }
+}
 
+$removed = [
+    'import_site',
+    'import_resources',
+];
+
+foreach ($removed as $key) {
+    $menu_item = $modx->getObject(modMenu::class, ['text' => $key]);
+    if ($menu_item instanceof modMenu) {
+        $menu_item->remove();
+    }
 }

@@ -8,8 +8,7 @@
  */
 MODx.page.CreateFile = function(config) {
     config = config || {};
-    var btns = [];
-    btns.push({
+    var buttons = [{
         process: 'Browser/File/Create'
         ,text: _('save')
         ,id: 'modx-abtn-save'
@@ -19,11 +18,10 @@ MODx.page.CreateFile = function(config) {
             key: MODx.config.keymap_save || 's'
             ,ctrl: true
         }]
-    });
-    btns.push({
+    },{
         text: _('cancel')
         ,id: 'modx-abtn-cancel'
-    });
+    }];
 
     Ext.applyIf(config,{
         formpanel: 'modx-panel-file-create'
@@ -32,7 +30,7 @@ MODx.page.CreateFile = function(config) {
             ,directory: config.directory
             ,record: config.record || {}
         }]
-        ,buttons: btns
+        ,buttons: buttons
     });
     MODx.page.CreateFile.superclass.constructor.call(this,config);
 };

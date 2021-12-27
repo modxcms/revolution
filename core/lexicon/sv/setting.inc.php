@@ -248,7 +248,7 @@ $_lang['setting_enable_dragdrop'] = 'Aktivera dra-och-släpp i resurs/elementtr�
 $_lang['setting_enable_dragdrop_desc'] = 'Om denna sätts till "Nej" hindras dra-och-släpp i resurs- och elementträden.';
 
 $_lang['setting_enable_template_picker_in_tree'] = 'Aktivera mallväljaren i resursträd';
-$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Aktivera den här för att använda mallväljaren när en ny resurs skapas i trädet.';
 
 $_lang['setting_error_page'] = 'Felsida';
 $_lang['setting_error_page_desc'] = 'Skriv in ID till den sida du vill skicka användare till om de försöker komma åt ett dokument som inte finns (404 Page Not Found).<br /><strong>OBS: Se till att detta ID tillhör ett existerande dokument, och att det har blivit publicerat!</strong>';
@@ -700,6 +700,12 @@ $_lang['setting_static_elements_default_category_desc'] = 'Ange en standardkateg
 $_lang['setting_static_elements_basepath'] = 'Bassökväg för statiska element';
 $_lang['setting_static_elements_basepath_desc'] = 'Bassökvägen där statiska elements filer ska sparas.';
 
+$_lang['setting_resource_static_allow_absolute'] = 'Tillåt absolut sökväg till statisk resurs';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Denna inställning gör det möjligt för användare att ange en fullt kvalificerad absolut sökväg till en läsbar fil på servern som innehållet i en statisk resurs. Observera: aktivering av denna inställning kan anses vara en betydande säkerhetsrisk! Det rekommenderas starkt att hålla den här inställningen inaktiverad, såvida du inte helt litar på varje enskild användare av hanteraren.';
+
+$_lang['setting_resource_static_path'] = 'Sökväg till statisk resurs';
+$_lang['setting_resource_static_path_desc'] = 'När resource_static_allow_absolute är inaktiverad begränsas statiska resurser till att vara inom den absoluta sökvägen här. Observera: om denna inställning sätts för brett kan den tillåta användare att läsa filer som de inte borde kunna läsa! Det rekommenderas starkt att begränsa användare till en specifik katalog som {core_path}static/ eller {assets_path} med denna inställning.';
+
 $_lang['setting_symlink_merge_fields'] = 'Slå ihop resursfält i symlänkar';
 $_lang['setting_symlink_merge_fields_desc'] = 'Om du anger "Ja" här kommer ifyllda fält automatiskt att slås ihop med målresursen när vidarebefordring sker via symlänkar.';
 
@@ -810,3 +816,6 @@ $_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan
 
 $_lang['setting_passwordless_expiration'] = 'Utgångstid för lösenordsfri inloggning';
 $_lang['setting_passwordless_expiration_desc'] = 'Anger i sekunder hur länge en engångs inloggningslänk gäller.';
+
+$_lang['static_elements_html_extension'] = 'HTML-tillägg för statiska element';
+$_lang['static_elements_html_extension_desc'] = 'Tillägget för filer som används av statiska element med HTML-innehåll.';

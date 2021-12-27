@@ -67,7 +67,7 @@ $_lang['setting_access_resource_group_enabled'] = 'Ressourcen-Gruppen-Zugriff pr
 $_lang['setting_access_resource_group_enabled_desc'] = 'Verwenden Sie diese Einstellung, um Ressourcen-Gruppen-ACL-Checks zu aktivieren oder zu deaktivieren (pro Kontext). <strong>HINWEIS: Wenn diese Option auf "Nein" gesetzt wurde, werden ALLE Ressourcen-Gruppen-Zugriffsberechtigungen ignoriert!</strong>';
 
 $_lang['setting_allow_mgr_access'] = 'Zugriff auf den MODX-Manager';
-$_lang['setting_allow_mgr_access_desc'] = 'Verwenden Sie diese Option, um den Zugriff auf die MODX-Manager-Oberfläche zu erlauben oder zu verbieten. <strong>HINWEIS: Wenn diese Einstellung auf "nein" gesetzt ist, werden Benutzer auf die "Startseite für in den Manager eingeloggte Benutzer" oder die "Startseite der Website" weitergeleitet.';
+$_lang['setting_allow_mgr_access_desc'] = 'Verwenden Sie diese Option, um den Zugriff auf die MODX-Manager-Oberfläche zu erlauben oder zu verbieten. <strong>HINWEIS: Wenn diese Einstellung auf "Nein" gesetzt ist, werden Benutzer auf die "Startseite für in den Manager eingeloggte Benutzer" oder die "Startseite der Website" weitergeleitet.';
 
 $_lang['setting_failed_login'] = 'Fehlgeschlagene Login-Versuche';
 $_lang['setting_failed_login_desc'] = 'Hier können Sie die Anzahl fehlgeschlagener Login-Versuche angeben, die erlaubt sind, bevor der Benutzer geblockt wird.';
@@ -116,7 +116,7 @@ $_lang['setting_allow_multiple_emails'] = 'E-Mail-Adressen-Duplikate für Benutz
 $_lang['setting_allow_multiple_emails_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, dürfen mehrere Benutzer die selbe E-Mail-Adresse verwenden.';
 
 $_lang['setting_automatic_alias'] = 'Alias automatisch generieren';
-$_lang['setting_automatic_alias_desc'] = 'Wählen Sie "Ja", wenn das System beim Speichern automatisch einen auf dem Seitentitel der Ressource basierenden Alias generieren soll.';
+$_lang['setting_automatic_alias_desc'] = 'Wählen Sie „Ja“, wenn das System beim Speichern automatisch einen auf dem Seitentitel der Ressource basierenden Alias generieren soll.';
 
 $_lang['setting_automatic_template_assignment'] = 'Automatische Template Zuweisung';
 $_lang['setting_automatic_template_assignment_desc'] = 'Wählen Sie aus, wie ein Template beim Erstellen einer Ressource ausgewählt wird. Es sind folgende Werte möglich: system (Standard Template aus den Systemeinstellungen), parent (Wählt das Template der Eltern-Ressource) oder sibling (Wählt das meistbenutzte Template der Geschwister-Ressourcen)';
@@ -130,7 +130,7 @@ $_lang['setting_blocked_minutes_desc'] = 'Hier können Sie die Anzahl der Minute
 $_lang['setting_cache_alias_map'] = 'Kontext-Alias-Cache aktivieren';
 $_lang['setting_cache_alias_map_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Ressourcen-URIs in den Kontext gecacht. Diese Einstellung sollte für kleinere Sites aktiviert und für größere Sites deaktiviert werden, um die Performance zu verbessern.';
 
-$_lang['setting_use_context_resource_table'] = 'Tabelle context_resource verwenden';
+$_lang['setting_use_context_resource_table'] = 'Kontextressourcen-Tabelle verwenden';
 $_lang['setting_use_context_resource_table_desc'] = 'Wenn diese Einstellung aktiviert ist, wird bei Kontext-Aktualisierungen die Tabelle context_resource verwendet. Dadurch sind Sie in der Lage, programmgesteuert eine Ressource mehreren Kontexten zuzuordnen. Wenn Sie diese Möglichkeit nicht mittels der API nutzen, können Sie diese Einstellung auf "Nein" stellen. Bei großen Websites werden Sie dadurch im Manager möglicherweise eine bessere Performance erreichen.';
 
 $_lang['setting_cache_context_settings'] = 'Kontext-Einstellungen-Cache aktivieren';
@@ -168,7 +168,7 @@ $_lang['setting_cache_lang_js'] = 'Lexikon-JavaScript-Zeichenketten cachen';
 $_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "Ja" gesetzt ist, werden Server-Header verwendet, um die ins JavaScript geladenen Lexikon-Zeichenketten für die Manager-Oberfläche zu cachen.';
 
 $_lang['setting_cache_lexicon_topics'] = 'Lexikon-Themen cachen';
-$_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf "Ja" zu belassen.';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf „Ja“ gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf „Ja“ zu belassen.';
 
 $_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namensraum gehörende Lexikon-Themen cachen';
 $_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namensraum gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
@@ -180,7 +180,7 @@ $_lang['setting_cache_resource_expires'] = 'Ablaufzeit für den partiellen Resso
 $_lang['setting_cache_resource_expires_desc'] = 'Ablaufzeit (in Sekunden) für den partiellen Ressourcen-Cache. Der Wert "0" bedeutet, dass der Cache niemals abläuft.';
 
 $_lang['setting_cache_scripts'] = 'Skript-Cache aktivieren';
-$_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, cacht MODX alle Skripte (Snippets und Plugins) in Dateien, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
+$_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf „Ja“ gesetzt, cacht MODX alle Skripte (Snippets und Plugins) in Dateien, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
 $_lang['setting_cache_system_settings'] = 'Systemeinstellungen-Cache aktivieren';
 $_lang['setting_cache_system_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
@@ -189,16 +189,16 @@ $_lang['setting_clear_cache_refresh_trees'] = 'Aktualisiere Bäume, wenn Site-Ca
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Wenn diese Einstellung aktiviert ist, werden die Ressourcen-, Element- und Dateibäume aktualisiert, wenn der Site-Cache geleert wird.';
 
 $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
-$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen - in diesen dann bitte auf "Nein" lassen!';
+$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen – in diesen dann bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js'] = 'Komprimierte JavaScript-Bibliotheken verwenden';
-$_lang['setting_compress_js_desc'] = 'Wenn diese Option aktiviert ist, liefert MODX eine komprimierte Version der Core-JavaScript-Datei aus. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen - in diesen dann bitte auf "Nein" lassen!';
+$_lang['setting_compress_js_desc'] = 'Wenn diese Option aktiviert ist, liefert MODX eine komprimierte Version der Core-JavaScript-Datei aus. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen – in diesen dann bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js_groups'] = 'Gruppieren nutzen, wenn JavaScript komprimiert wird';
 $_lang['setting_compress_js_groups_desc'] = 'Die Core-JavaScripts des MODX-Managers gruppieren durch Benutzung der groupsConfig-Funktion von minify. Setzen Sie diese Einstellung auf "Ja", wenn Sie Suhosin einsetzen oder sich andere einschränkende Faktoren auswirken.';
 
 $_lang['setting_concat_js'] = 'Verknüpfte Javascript-Bibliotheken verwenden';
-$_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine verknüpfte Version seiner meistverwendeten JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen - in diesen bitte auf "Nein" lassen!';
+$_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine verknüpfte Version seiner allgemeinen JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen – in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_confirm_navigation'] = 'Navigation bei ungespeicherten Änderungen bestätigen';
 $_lang['setting_confirm_navigation_desc'] = 'Wenn diese Option aktiviert ist, wird der Benutzer aufgefordert, seine Absicht zu bestätigen, wenn es ungespeicherte Änderungen gibt.';
@@ -279,46 +279,46 @@ $_lang['setting_feed_modx_security_enabled'] = 'MODX-Sicherheitshinweise-Feed ak
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, wird der Sicherheitshinweise-Feed auf der Startseite des Managers nicht angezeigt.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Alle Benutzergruppen-Zugehörigkeiten für die Formular-Anpassung nutzen';
-$_lang['setting_form_customization_use_all_groups_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden für die Formular-Anpassung ALLE Sets für ALLE Benutzergruppen, denen ein Benutzer angehört, genutzt, wenn Formular-Anpassungs-Sets angewendet werden. Anderenfalls wird nur das Set verwendet, das der primären Gruppe des Benutzers zugeordnet ist. Hinweis: Wenn Sie diese Einstellung auf "Ja" setzen, kann es wegen Konflikten zwischen Formular-Anpassungs-Sets zu Problemen kommen.';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Wenn diese Einstellung auf „Ja“ gesetzt wird, werden für die Formular-Anpassung ALLE Sets für ALLE Benutzergruppen, denen ein Benutzer angehört, genutzt, wenn Formular-Anpassungs-Sets angewendet werden. Anderenfalls wird nur das Set verwendet, das der primären Gruppe des Benutzers zugeordnet ist. Hinweis: Wenn Sie diese Einstellung auf „Ja“ setzen, kann es wegen Konflikten zwischen Formular-Anpassungs-Sets zu Problemen kommen.';
 
 $_lang['setting_forward_merge_excludes'] = 'Felder, deren Werte bei Verwendung von Symlinks nicht überschrieben werden sollen';
 $_lang['setting_forward_merge_excludes_desc'] = 'Bei Verwendung eines Symlinks werden die Werte in den Feldern der Ziel-Ressource überschrieben von den nichtleeren Werten des Symlinks; verwenden Sie diese kommaseparierte Liste von Ausnahmen, um die angegebenen Felder davor zu bewahren, von den Werten des Symlinks überschrieben zu werden.';
 
-$_lang['setting_friendly_alias_lowercase_only'] = 'Suchmaschinenfreundliche Aliasse in Kleinbuchstaben';
+$_lang['setting_friendly_alias_lowercase_only'] = 'Suchmaschinenfreundliche Aliase in Kleinbuchstaben';
 $_lang['setting_friendly_alias_lowercase_only_desc'] = 'Legt fest, ob nur Kleinbuchstaben in einem Ressourcen-Alias erlaubt sein sollen';
 
-$_lang['setting_friendly_alias_max_length'] = 'Maximale Länge suchmaschinenfreundlicher Aliasse';
+$_lang['setting_friendly_alias_max_length'] = 'Maximale Länge suchmaschinenfreundlicher Aliase';
 $_lang['setting_friendly_alias_max_length_desc'] = 'Ist dieser Wert größer als null, gibt er die maximale Anzahl an Zeichen an, die in einem Ressourcen-Alias erlaubt sind. Ist er null, so ist die Alias-Länge nicht begrenzt.';
 
 $_lang['setting_friendly_alias_realtime'] = 'Suchmaschinenfreundlicher Alias in Echtzeit';
 $_lang['setting_friendly_alias_realtime_desc'] = 'Bestimmt, ob der Ressourcen-Alias erstellt werden soll, während der Seitentitel eingeben wird, oder ob dies geschehen soll, wenn die Ressource gespeichert wird (die Option automatic_alias muss aktiviert sein, damit diese Einstellung sich auswirkt).';
 
-$_lang['setting_friendly_alias_restrict_chars'] = 'Suchmaschinenfreundliche Aliasse: Methode zur Einschränkung der erlaubten Zeichen';
+$_lang['setting_friendly_alias_restrict_chars'] = 'Suchmaschinenfreundliche Aliase: Methode zur Einschränkung der erlaubten Zeichen';
 $_lang['setting_friendly_alias_restrict_chars_desc'] = 'Die Methode, die zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen verwendet wird. "pattern" erlaubt die in einem separat anzugebenden regulären Ausdruck festgelegten Zeichen, "legal" erlaubt alle in einer URL zulässigen Zeichen, "alpha" erlaubt nur die Buchstaben des Alphabets und "alphanumeric" erlaubt nur Buchstaben und Ziffern.';
 
-$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Suchmaschinenfreundliche Aliasse: RegEx zur Einschränkung der erlaubten Zeichen';
+$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Suchmaschinenfreundliche Aliase: RegEx zur Einschränkung der erlaubten Zeichen';
 $_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'Ein gültiger regulärer Ausdruck zur Einschränkung der in einem Ressourcen-Alias erlaubten Zeichen.';
 
-$_lang['setting_friendly_alias_strip_element_tags'] = 'Suchmaschinenfreundliche Aliasse: Element-Tags löschen';
-$_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Gibt an, ob Element-Tags aus Ressourcen-Aliassen entfernt werden sollen.';
+$_lang['setting_friendly_alias_strip_element_tags'] = 'Suchmaschinenfreundliche Aliase: Element-Tags löschen';
+$_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Gibt an, ob Element-Tags aus Ressourcen-Aliasen entfernt werden sollen.';
 
-$_lang['setting_friendly_alias_translit'] = 'Transliteration suchmaschinenfreundlicher Aliasse';
+$_lang['setting_friendly_alias_translit'] = 'Transliteration suchmaschinenfreundlicher Aliase';
 $_lang['setting_friendly_alias_translit_desc'] = 'Die Transliterations-Methode, die auf einen für eine Ressource angegebenen Alias angewendet werden soll. Standardmäßig ist diese Enstellung leer oder enthält den Wert "none"; dann findet keine Transliteration statt. Andere mögliche Werte sind "iconv" (falls verfügbar) oder der Name einer Transliterations-Tabelle, die von einer benutzerdefinierten Transliterations-Service-Klasse zur Verfügung gestellt wird.';
 
-$_lang['setting_friendly_alias_translit_class'] = 'Suchmaschinenfreundliche Aliasse: Transliterations-Service-Klasse';
-$_lang['setting_friendly_alias_translit_class_desc'] = 'Eine optionale Service-Klasse, die (über ihren Namen aufrufbare) Transliterations-Dienste für die Generierung/Filterung suchmaschinenfreundlicher Aliasse zur Verfügung stellt.';
+$_lang['setting_friendly_alias_translit_class'] = 'Suchmaschinenfreundliche Aliase: Transliterations-Service-Klasse';
+$_lang['setting_friendly_alias_translit_class_desc'] = 'Eine optionale Service-Klasse, die (über ihren Namen aufrufbare) Transliterations-Dienste für die Generierung/Filterung suchmaschinenfreundlicher Aliase zur Verfügung stellt.';
 
-$_lang['setting_friendly_alias_translit_class_path'] = 'Suchmaschinenfreundliche Aliasse: Pfad zur Transliterations-Service-Klasse';
-$_lang['setting_friendly_alias_translit_class_path_desc'] = 'Der Pfad zum Model-Package, aus dem die Transliterations-Service-Klasse für suchmaschinenfreundliche Aliasse geladen wird.';
+$_lang['setting_friendly_alias_translit_class_path'] = 'Suchmaschinenfreundliche Aliase: Pfad zur Transliterations-Service-Klasse';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'Der Pfad zum Model-Package, aus dem die Transliterations-Service-Klasse für suchmaschinenfreundliche Aliase geladen wird.';
 
-$_lang['setting_friendly_alias_trim_chars'] = 'Suchmaschinenfreundliche Aliasse: abzuschneidende Zeichen';
+$_lang['setting_friendly_alias_trim_chars'] = 'Suchmaschinenfreundliche Aliase: abzuschneidende Zeichen';
 $_lang['setting_friendly_alias_trim_chars_desc'] = 'Zeichen, die am Ende eines übergebenen Ressourcen-Alias abgeschnitten werden sollen.';
 
-$_lang['setting_friendly_alias_word_delimiter'] = 'Suchmaschinenfreundliche Aliasse: Wort-Trennzeichen';
-$_lang['setting_friendly_alias_word_delimiter_desc'] = 'Das bevorzugte Wort-Trennzeichen für suchmaschinenfreundliche Aliasse.';
+$_lang['setting_friendly_alias_word_delimiter'] = 'Suchmaschinenfreundliche Aliase: Wort-Trennzeichen';
+$_lang['setting_friendly_alias_word_delimiter_desc'] = 'Das bevorzugte Wort-Trennzeichen für suchmaschinenfreundliche Aliase.';
 
-$_lang['setting_friendly_alias_word_delimiters'] = 'Suchmaschinenfreundliche Aliasse: mögliche Wort-Trennzeichen';
-$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Zeichen, die Wort-Trennzeichen repräsentieren, wenn suchmaschinenfreundliche Aliasse verarbeitet werden. Diese Zeichen werden konvertiert und konsolidiert zu dem bevorzugten Wort-Trennzeichen für suchmaschinenfreundliche Aliasse.';
+$_lang['setting_friendly_alias_word_delimiters'] = 'Suchmaschinenfreundliche Aliase: mögliche Wort-Trennzeichen';
+$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Zeichen, die Wort-Trennzeichen repräsentieren, wenn suchmaschinenfreundliche Aliase verarbeitet werden. Diese Zeichen werden konvertiert und konsolidiert zu dem bevorzugten Wort-Trennzeichen für suchmaschinenfreundliche Aliase.';
 
 $_lang['setting_friendly_urls'] = 'Suchmaschinenfreundliche URLs verwenden';
 $_lang['setting_friendly_urls_desc'] = 'Dies erlaubt Ihnen, suchmaschinenfreundliche URLs mit MODX zu verwenden. Bitte beachten Sie, dass dies nur für MODX-Installationen gilt, die auf einem Apache-Webserver laufen, und dass Sie eine .htaccess-Datei schreiben müssen, damit dies funktioniert. Mehr Informationen finden Sie in der .htaccess-Datei, die in der MODX-Distribution enthalten ist.';
@@ -334,7 +334,7 @@ $_lang['setting_hidemenu_default'] = 'Standardeinstellung für Option "nicht in 
 $_lang['setting_hidemenu_default_desc'] = 'Wählen Sie "Ja", wenn alle neuen Ressourcen standardmäßig nicht in Menüs angezeigt werden sollen.';
 
 $_lang['setting_inline_help'] = 'Inline-Erläuterungstexte für Felder anzeigen';
-$_lang['setting_inline_help_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Erläuterungstexte der Eingabefelder direkt unter den jeweiligen Feldern angezeigt. Wird "Nein" gewählt, so erhalten alle Felder stattdessen Tooltipp-basierte Erläuterungstexte.';
+$_lang['setting_inline_help_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, werden die Erläuterungstexte der Eingabefelder direkt unter den jeweiligen Feldern angezeigt. Wird "Nein" gewählt, so erhalten alle Felder stattdessen Tooltip-basierte Erläuterungstexte.';
 
 $_lang['setting_link_tag_scheme'] = 'URL-Generierungs-Schema';
 $_lang['setting_link_tag_scheme_desc'] = 'URL-Generierungs-Schema für das Tag [[~id]]. Mögliche Optionen: siehe <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">hier</a>.';
@@ -587,7 +587,7 @@ $_lang['setting_request_method_strict'] = 'Strikte Request-Methode';
 $_lang['setting_request_method_strict_desc'] = 'Wenn diese Option aktiviert ist, werden Requests über den Request-ID-Parameter ignoriert, wenn suchmaschinenfreundliche URLs verwendet werden, und Requests über den Request-Alias-Parameter werden ignoriert, wenn suchmaschinenfreundliche URLs nicht aktiviert sind.';
 
 $_lang['setting_request_param_alias'] = 'Request-Alias-Parameter';
-$_lang['setting_request_param_alias_desc'] = 'Der Name des GET-Parameters für Ressourcen-Aliasse, wenn eine Weiterleitung mittels suchmaschinenfreundlicher URLs stattfindet.';
+$_lang['setting_request_param_alias_desc'] = 'Der Name des GET-Parameters für Ressourcen-Aliase, wenn eine Weiterleitung mittels suchmaschinenfreundlicher URLs stattfindet.';
 
 $_lang['setting_request_param_id'] = 'Request-ID-Parameter';
 $_lang['setting_request_param_id_desc'] = 'Der Name des GET-Parameters für Ressourcen-IDs, wenn keine suchmaschinenfreundlichen URLs verwendet werden.';
@@ -654,7 +654,7 @@ $_lang['setting_show_tv_categories_header'] = 'Reiter-Überschrift "Kategorien" 
 $_lang['setting_show_tv_categories_header_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wurde, zeigt MODX die Überschrift "Kategorien" über dem ersten Kategorien-Reiter an, wenn TVs in einer Ressource bearbeitet werden.';
 
 $_lang['setting_signupemail_message'] = 'E-Mail nach Account-Erstellung';
-$_lang['setting_signupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] - Name Ihrer Website,<br />[[+saddr]] - E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] - URL Ihrer Website,<br />[[+uid]] - Benutzername oder ID des Benutzers,<br />[[+pwd]] - Passwort des Benutzers,<br />[[+ufn]] - Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
+$_lang['setting_signupemail_message_desc'] = 'Hier können Sie die Nachricht eingeben, die an einen Benutzer gesendet wird, wenn Sie einen Account für ihn erstellen und MODX ihm eine E-Mail senden lassen, die seinen Benutzernamen und sein Passwort enthält.<br /><strong>Hinweis:</strong> Die folgenden Platzhalter werden vom System ersetzt, wenn die Nachricht versendet wird:<br /><br />[[+sname]] – Name Ihrer Website,<br />[[+saddr]] – E-Mail-Adresse ihrer Website (bzw. des Webmasters),<br />[[+surl]] – URL Ihrer Website,<br />[[+uid]] – Benutzername oder ID des Benutzers,<br />[[+pwd]] – Passwort des Benutzers,<br />[[+ufn]] – Vollständiger Name des Benutzers.<br /><br /><strong>Achten Sie darauf, dass zumindest [[+uid]] und [[+pwd]] in der E-Mail enthalten sind, da sonst der Benutzername und das Passwort nicht mit der Mail versendet werden und Ihre Benutzer folglich ihre Zugangsdaten nicht kennen!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hallo [[+uid]],\n\nanbei erhalten Sie Ihre Zugangsdaten für das Backend von [[+sname]]:\n\nBenutzername: [[+uid]]\nPasswort: [[+pwd]]\n\nSobald Sie sich in den Manager ([[+surl]]) eingeloggt haben, können Sie Ihr Passwort ändern.\n\nMit freundlichen Grüßen,\nIhr Website-Administrator';
 
 $_lang['setting_site_name'] = 'Name Ihrer Website';
@@ -700,8 +700,14 @@ $_lang['setting_static_elements_default_category_desc'] = 'Geben Sie die standar
 $_lang['setting_static_elements_basepath'] = 'Basispfad für statische Elemente';
 $_lang['setting_static_elements_basepath_desc'] = 'Basispfad in dem statische Element-Dateien gespeichert werden.';
 
+$_lang['setting_resource_static_allow_absolute'] = 'Absoluten statischen Ressourcenpfad zulassen';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Mit dieser Einstellung können Benutzer einen vollständig qualifizierten absoluten Pfad zu einer beliebigen lesbaren Datei auf dem Server als Inhalt einer statischen Ressource eingeben. Wichtig: Die Aktivierung dieser Einstellung kann als erhebliches Sicherheitsrisiko angesehen werden! Es wird dringend empfohlen, diese Einstellung deaktiviert zu lassen, es sei denn, Sie vertrauen uneingeschränkt jedem einzelnen Manager-Benutzer.';
+
+$_lang['setting_resource_static_path'] = 'Basispfad für statische Ressourcen';
+$_lang['setting_resource_static_path_desc'] = 'Wenn resource_static_allow_absolute deaktiviert ist, sind statische Ressourcen auf den hier angegebenen absoluten Pfad beschränkt.  Wichtig: Wenn Sie diese Einstellung zu weit fassen, können Benutzer Dateien lesen, die sie nicht lesen sollten! Es wird dringend empfohlen, Benutzer mit dieser Einstellung auf ein bestimmtes Verzeichnis wie {core_path}static/ oder {assets_path} zu beschränken.';
+
 $_lang['setting_symlink_merge_fields'] = 'Ressourcen-Felder in Symlinks kombinieren';
-$_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
+$_lang['setting_symlink_merge_fields_desc'] = 'Wenn diese Einstellung auf „Ja“ gesetzt ist, werden nichtleere Felder automatisch mit denen der Ziel-Ressource kombiniert, wenn mit Hilfe von Symlinks weitergeleitet wird.';
 
 $_lang['setting_syncsite_default'] = 'Cache standardmäßig leeren';
 $_lang['setting_syncsite_default_desc'] = 'Wählen Sie "Ja", um standardmäßig den Cache zu leeren, nachdem eine Ressource gespeichert wurde.';
@@ -717,10 +723,10 @@ $_lang['setting_tree_root_id'] = 'Ressourcen-Baum-Basis-ID';
 $_lang['setting_tree_root_id_desc'] = 'Geben Sie hier eine gültige ID einer Ressource ein, um den Ressourcen-Baum links bei dieser Ressource als Basis beginnen zu lassen. Benutzer können dann nur Ressourcen sehen, die Kinder der angegebenen Ressource sind.';
 
 $_lang['setting_tvs_below_content'] = 'TVs unter den Inhalt verschieben';
-$_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um TVs beim Bearbeiten von Ressourcen unter das Eingabefeld für den Inhalt zu verschieben.';
+$_lang['setting_tvs_below_content_desc'] = 'Setzen Sie diese Einstellung auf „Ja“, um TVs beim Bearbeiten von Ressourcen unter das Eingabefeld für den Inhalt zu verschieben.';
 
 $_lang['setting_ui_debug_mode'] = 'Benutzerschnittstellen-Debug-Modus';
-$_lang['setting_ui_debug_mode_desc'] = 'Setzen Sie diese Einstellung auf "Ja", um Debug-Meldungen auszugeben, wenn Sie die Benutzerschnittstelle für das Standard-Manager-Theme verwenden. Sie müssen einen Browser verwenden, der console.log unterstützt.';
+$_lang['setting_ui_debug_mode_desc'] = 'Setzen Sie diese Einstellung auf „Ja“, um Debug-Meldungen auszugeben, wenn Sie die Benutzerschnittstelle für das Standard-Manager-Theme verwenden. Sie müssen einen Browser verwenden, der console.log unterstützt.';
 
 $_lang['setting_unauthorized_page'] = 'Seite für unautorisierte Zugriffe';
 $_lang['setting_unauthorized_page_desc'] = 'Geben Sie die ID der Ressource ein, die angezeigt werden soll, wenn eine geschützte Ressource aufgerufen wurde oder eine, für die dem Benutzer die Berechtigung fehlt. <strong>ACHTUNG: Stellen Sie sicher, dass die ID, die Sie eingeben, zu einer existierenden Ressource gehört, dass diese veröffentlicht wurde und öffentlich zugänglich ist!</strong>';
@@ -745,20 +751,20 @@ $_lang['setting_upload_translit'] = 'Namen von hochgeladenen Dateien transliteri
 $_lang['setting_upload_translit_desc'] = 'Wenn diese Option aktiviert ist, wird der Name einer hochgeladenen Datei gemäß den globalen Transliterationsregeln transliteriert.';
 
 $_lang['setting_use_alias_path'] = 'Suchmaschinenfreundliche Alias-Pfade';
-$_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf "Ja" setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias "kind" in einer Container-Ressource mit dem Alias "eltern" abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als "/eltern/kind.html" angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf "Ja" setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. "/assets/images" im Gegensatz zu "assets/images". Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
+$_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf „Ja“ setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias „kind“ in einer Container-Ressource mit dem Alias „eltern“ abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als „/eltern/kind.html“ angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf „Ja“ setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. „/assets/images” im Gegensatz zu „assets/images“. Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
 
 $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
 $_lang['setting_use_frozen_parent_uris'] = 'Fixierte Eltern-URLs verwenden';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'Wenn diese Option aktiviert ist, ist die URL einer Kind-Ressource relativ zu der fixierten URL einer ihrer Eltern-Ressourcen, wobei die Aliasse weiter oben im Ressourcen-Baum befindlicher Ressourcen ignoriert werden.';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Wenn diese Option aktiviert ist, ist die URL einer Kind-Ressource relativ zu der fixierten URL einer ihrer Eltern-Ressourcen, wobei die Aliase weiter oben im Ressourcen-Baum befindlicher Ressourcen ignoriert werden.';
 
 $_lang['setting_use_multibyte'] = 'Multibyte-Extension nutzen';
 $_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie die mbstring-Extension für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODX-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "Ja", wenn die mbstring-PHP-Extension installiert ist.';
 
 $_lang['setting_use_weblink_target'] = 'WebLink-Ziel verwenden';
-$_lang['setting_use_weblink_target_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie möchten, dass mittels MODX-Link-Tags ([[~RessourcenID]]) oder der Methode makeUrl() generierte Weblink-URLs aus der in der Weblink-Ressource eingegebenen URL bestehen. Anderenfalls bestehen diese aus der internen MODX-URL. Ein Beispiel: Es existieren ein Dokument mit der Ressourcen-ID 5 und dem Alias "mein-dokument" und ein Weblink mit der Ressourcen-ID 12, in dessen URL-Feld mit der Bezeichnung "Weblink" nur die Ressourcen-ID des Dokuments (5) engetragen wurde; suchmaschinenfreundliche URLs bzw. Aliasse sind aktiviert. In einem HTML-Link wird nun ein MODX-Link-Tag mit der Ressourcen-ID des Weblinks verwendet: &lt;a href="[[~12]]"&gt;Link auf den Weblink&lt;/a&gt;. Steht diese Einstellung auf "Ja", so enthält die generierte URL nur genau das, was in das URL-Feld des Weblinks eingegeben wurde, nämlich die Ressourcen-ID des Dokuments, also "5". Steht diese Einstellung auf "Nein", so enthält die generierte URL den Alias des verlinkten Dokuments plus die ggf. zugeordnete Endung, im Normalfall also "mein-dokument.html".';
+$_lang['setting_use_weblink_target_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie möchten, dass mittels MODX-Link-Tags ([[~RessourcenID]]) oder der Methode makeUrl() generierte Weblink-URLs aus der in der Weblink-Ressource eingegebenen URL bestehen. Anderenfalls bestehen diese aus der internen MODX-URL. Ein Beispiel: Es existieren ein Dokument mit der Ressourcen-ID 5 und dem Alias "mein-dokument" und ein Weblink mit der Ressourcen-ID 12, in dessen URL-Feld mit der Bezeichnung "Weblink" nur die Ressourcen-ID des Dokuments (5) engetragen wurde; suchmaschinenfreundliche URLs bzw. Aliase sind aktiviert. In einem HTML-Link wird nun ein MODX-Link-Tag mit der Ressourcen-ID des Weblinks verwendet: &lt;a href="[[~12]]"&gt;Link auf den Weblink&lt;/a&gt;. Steht diese Einstellung auf "Ja", so enthält die generierte URL nur genau das, was in das URL-Feld des Weblinks eingegeben wurde, nämlich die Ressourcen-ID des Dokuments, also "5". Steht diese Einstellung auf "Nein", so enthält die generierte URL den Alias des verlinkten Dokuments plus die ggf. zugeordnete Endung, im Normalfall also "mein-dokument.html".';
 
 $_lang['setting_user_nav_parent'] = 'Eltern-Element des Benutzer-Menüs';
 $_lang['setting_user_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Benutzer-Menü zu erstellen.';
@@ -810,3 +816,6 @@ $_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer 
 
 $_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
 $_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
+
+$_lang['static_elements_html_extension'] = 'Datei-Endung für statische HTML-Elemente';
+$_lang['static_elements_html_extension_desc'] = 'Die Datei-Endung, die für statische Elemente mit HTML-Inhalt verwendet wird.';
