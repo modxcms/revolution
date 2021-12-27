@@ -399,7 +399,6 @@ class RestClientRequest {
             CURLOPT_RETURNTRANSFER => $this->getOption('returnTransfer',true),
             CURLOPT_FOLLOWLOCATION => $this->getOption('followLocation',true),
             CURLOPT_TIMEOUT => $this->getOption('timeout',240),
-            CURLOPT_USERAGENT => $this->getOption('userAgent'),
             CURLOPT_CONNECTTIMEOUT => $this->getOption('connectTimeout',0),
             CURLOPT_DNS_CACHE_TIMEOUT => $this->getOption('dnsCacheTimeout',120),
             CURLOPT_VERBOSE => $this->getOption('verbose',false),
