@@ -1184,7 +1184,8 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                     ,id: 'modx-tv-elements'
                     ,itemId: 'fld-elements'
                     ,grow: true
-                    ,maxHeight: 160
+                    ,growMin: 30
+                    ,growMax: 200
                     ,value: value
                     ,plugins: new AddFieldUtilities.plugin.Class
                 };

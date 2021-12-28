@@ -717,6 +717,7 @@ Ext.reg('modx-window-quick-update-plugin',MODx.window.QuickUpdatePlugin);
 MODx.window.QuickCreateTV = function(config) {
     config = config || {};
     this.ident = config.ident || 'qtv'+Ext.id();
+    this.isSmallScreen = Ext.getBody().getViewSize().height <= 768;
 
     Ext.applyIf(config,{
         title: _('quick_create_tv')
@@ -754,17 +755,7 @@ MODx.window.QuickCreateTV = function(config) {
                             xtype: 'textfield'
                             ,name: 'name'
                             ,fieldLabel: _('name')
-                        },{
-                            xtype: 'textfield'
-                            ,name: 'caption'
-                            ,id: 'modx-'+this.ident+'-caption'
-                            ,fieldLabel: _('caption')
-                            ,description: MODx.expandHelp ? '' : _('tv_caption_desc')
-                        },{
-                            xtype: 'label'
-                            ,forId: 'modx-'+this.ident+'-caption'
-                            ,html: _('tv_caption_desc')
-                            ,cls: 'desc-under'
+                            ,allowBlank: false
                         }]
                     },{
                         columnWidth: 0.5
@@ -776,17 +767,6 @@ MODx.window.QuickCreateTV = function(config) {
                             xtype: 'modx-combo-tv-input-type'
                             ,fieldLabel: _('tv_type')
                             ,name: 'type'
-                        },{
-                            xtype: 'modx-combo-category'
-                            ,name: 'category'
-                            ,id: 'modx-'+this.ident+'-category'
-                            ,fieldLabel: _('category')
-                            ,description: MODx.expandHelp ? '' : _('tv_category_desc')
-                        },{
-                            xtype: MODx.expandHelp ? 'label' : 'hidden'
-                            ,forId: 'modx-'+this.ident+'-category'
-                            ,html: _('tv_category_desc')
-                            ,cls: 'desc-under'
                         }]
                     }]
                 }]
@@ -811,10 +791,65 @@ MODx.window.QuickCreateTV = function(config) {
                             ,validateOnBlur: false
                         }
                         ,items: [{
+                            xtype: 'textfield'
+                            ,name: 'caption'
+                            ,id: 'modx-'+this.ident+'-caption'
+                            ,fieldLabel: _('caption')
+                            ,description: MODx.expandHelp ? '' : _('tv_caption_desc')
+                        },{
+                            xtype: 'label'
+                            ,forId: 'modx-'+this.ident+'-caption'
+                            ,html: _('tv_caption_desc')
+                            ,cls: 'desc-under'
+                        }]
+                    },{
+                        columnWidth: 0.5
+                        ,defaults: {
+                            anchor: '100%'
+                            ,msgTarget: 'under'
+                        }
+                        ,items: [{
+                            xtype: 'modx-combo-category'
+                            ,name: 'category'
+                            ,id: 'modx-'+this.ident+'-category'
+                            ,fieldLabel: _('category')
+                            ,description: MODx.expandHelp ? '' : _('tv_category_desc')
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'modx-'+this.ident+'-category'
+                            ,html: _('tv_category_desc')
+                            ,cls: 'desc-under'
+                        }]
+                    }]
+                }]
+            },{
+                // row 3
+                cls:'form-row-wrapper',
+                defaults: {
+                    layout: 'column'
+                }
+                ,items: [{
+                    defaults: {
+                        layout: 'form'
+                        ,labelSeparator: ''
+                        ,labelAlign: 'top'
+                    }
+                    ,items: [{
+                        columnWidth: 0.5
+                        ,defaults: {
+                            anchor: '100%'
+                            ,msgTarget: 'under'
+                            ,validationEvent: 'change'
+                            ,validateOnBlur: false
+                        }
+                        ,items: [{
                             xtype: 'textarea'
                             ,name: 'description'
                             ,id: 'modx-'+this.ident+'-description'
                             ,fieldLabel: _('description')
+                            ,grow: true
+                            ,growMin: 50
+                            ,growMax: this.isSmallScreen ? 90 : 120
                             ,description: MODx.expandHelp ? '' : _('tv_description_desc')
                         },{
                             xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -844,6 +879,84 @@ MODx.window.QuickCreateTV = function(config) {
                             ,html: _('clear_cache_on_save_desc')
                             ,cls: 'desc-under toggle-slider-above'
                         }]
+                    }]
+                }]
+            },{
+                // row 4
+                cls:'form-row-wrapper',
+                defaults: {
+                    layout: 'column'
+                }
+                ,items: [{
+                    defaults: {
+                        layout: 'form'
+                        ,labelSeparator: ''
+                        ,labelAlign: 'top'
+                    }
+                    ,items: [{
+                        columnWidth: 1
+                        ,defaults: {
+                            anchor: '100%'
+                            ,msgTarget: 'under'
+                            ,validationEvent: 'change'
+                            ,validateOnBlur: false
+                        }
+                        ,items: [{
+                            xtype: 'textarea'
+                            ,fieldLabel: _('tv_elements')
+                            ,description: MODx.expandHelp ? '' : _('tv_elements_short_desc')
+                            ,name: 'els'
+                            ,id: 'modx-'+this.ident+'-elements'
+                            ,grow: true
+                            ,growMin: 30
+                            ,growMax: this.isSmallScreen ? 90 : 120
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'modx-'+this.ident+'-elements'
+                            ,html: _('tv_elements_short_desc')
+                            ,cls: 'desc-under'
+                        }]
+                    }]
+                }]
+            },{
+                // row 5
+                cls:'form-row-wrapper',
+                defaults: {
+                    layout: 'column'
+                }
+                ,items: [{
+                    defaults: {
+                        layout: 'form'
+                        ,labelSeparator: ''
+                        ,labelAlign: 'top'
+                    }
+                    ,items: [{
+                        columnWidth: 0.5
+                        ,defaults: {
+                            anchor: '100%'
+                            ,msgTarget: 'under'
+                            ,validationEvent: 'change'
+                            ,validateOnBlur: false
+                        }
+                        ,items: [{
+                            xtype: 'textarea'
+                            ,fieldLabel: _('tv_default')
+                            ,description: MODx.expandHelp ? '' : _('tv_default_desc')
+                            ,name: 'default_text'
+                            ,id: 'modx-'+this.ident+'-default-text'
+                            ,grow: true
+                            ,growMin: 30
+                            ,growMax: 60
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'modx-'+this.ident+'-default-text'
+                            ,html: _('tv_default_desc')
+                            ,cls: 'desc-under'
+                        }]
+                    },{
+                        // using empty column here to allow full-width of previous column in mobile contexts
+                        columnWidth: 0.5
+                        ,items: []
                     }]
                 }]
             }]

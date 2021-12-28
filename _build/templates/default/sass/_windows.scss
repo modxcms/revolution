@@ -268,6 +268,11 @@
           }
       }
   }
+  &.qce-window {
+      .x-window-body {
+          padding-top: 0;
+      }
+  }
 }
 
 /* .x-window */
