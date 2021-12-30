@@ -51,7 +51,6 @@ $_lang['tv_rank_desc'] = 'Use to control the positioning of this TV in Resource 
 $_lang['tv_reset_params'] = 'Reset parameters';
 $_lang['tv_tab_access_desc'] = 'Select the Resource Groups that this TV belongs to. Only users with access to the Groups selected will be able to modify this TV. If no Groups are selected, all users with access to the Manager will be able to modify the TV.';
 $_lang['tv_tab_general_desc'] = 'Here you can create/edit a <dfn>Template Variable</dfn> (TV). TVs must be assigned to templates in order to access them from snippets and documents.';
-$_lang['tv_tab_input_options'] = 'Input Options';
 $_lang['tv_tab_input_options_desc'] = '<p>Here you can edit the input options for the TV, specific to the type of input render that you select.</p>';
 $_lang['tv_tab_output_options'] = 'Output Options';
 $_lang['tv_tab_output_options_desc'] = '<p>Here you can edit the output options for the TV, specific to the type of output render that you select.</p>';
@@ -87,3 +86,16 @@ $_lang['tv_output_options_msg'] = $_lang['tv_tab_output_options_desc'];
 $_lang['tv_sources.intro_msg'] = $_lang['tv_tab_sources_desc'];
 $_lang['tv_tmpl_access'] = $_lang['tv_tab_tmpl_access'];
 $_lang['tv_tmpl_access_msg'] = $_lang['tv_tab_tmpl_access_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_tab_input_options
+    tv_caption_desc
+    tv_category_desc
+    tv_description_desc
+
+*/
