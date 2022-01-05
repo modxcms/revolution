@@ -228,7 +228,6 @@ Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
         }
     }
 });
-
 Ext.reg('modx-window-element-duplicate',MODx.window.DuplicateElement);
 
 MODx.window.CreateCategory = function(config) {
@@ -383,46 +382,152 @@ Ext.reg('modx-window-namespace-update',MODx.window.UpdateNamespace);
 
 MODx.window.QuickCreateChunk = function(config) {
     config = config || {};
+    this.ident = config.ident || `qcechunk${Ext.id()}`;
 
     Ext.applyIf(config,{
         title: _('quick_create_chunk')
-        ,width: 600
-        ,layout: 'anchor'
+        ,width: 700
+        ,layout: 'form'
         ,url: MODx.config.connector_url
         ,action: 'Element/Chunk/Create'
+        ,cls: 'qce-window qce-create'
+        ,modal: true
+        ,monitorResize: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
+            ,value: config.record.id || 0
         },{
-            xtype: 'textfield'
-            ,name: 'name'
-            ,fieldLabel: _('name')
-            ,anchor: '100%'
+            // row 1
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'name'
+                        ,fieldLabel: _('name')
+                        ,allowBlank: false
+                        ,maxLength: 50
+                        ,value: config.record.name || ''
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,name: 'category'
+                        ,id: `modx-${this.ident}-category`
+                        ,fieldLabel: _('category')
+                        ,description: MODx.expandHelp ? '' : _('chunk_category_desc')
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-category`
+                        ,html: _('chunk_category_desc')
+                        ,cls: 'desc-under'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'modx-combo-category'
-            ,name: 'category'
-            ,fieldLabel: _('category')
-            ,anchor: '100%'
+            // row 2
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textarea'
+                        ,name: 'description'
+                        ,id: `modx-${this.ident}-description`
+                        ,description: MODx.expandHelp ? '' : _('chunk_description_desc')
+                        ,fieldLabel: _('description')
+                        ,grow: true
+                        ,growMin: 50
+                        ,growMax: this.isSmallScreen ? 90 : 120
+                        ,value: config.record.description || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-description`
+                        ,html: _('chunk_description_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'xcheckbox'
+                        ,name: 'clearCache'
+                        ,id: `modx-${this.ident}-clear-cache`
+                        ,hideLabel: true
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
+                        ,ctCls: 'add-label-space'
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-clear-cache`
+                        ,html: _('clear_cache_on_save_desc')
+                        ,cls: 'desc-under toggle-slider-above'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'textarea'
-            ,name: 'description'
-            ,fieldLabel: _('description')
-            ,anchor: '100%'
-        },{
-            xtype: 'textarea'
-            ,name: 'snippet'
-            ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: 216
-        },{
-            xtype: 'xcheckbox'
-            ,name: 'clearCache'
-            ,hideLabel: true
-            ,boxLabel: _('clear_cache_on_save')
-            ,description: _('clear_cache_on_save_msg')
-            ,inputValue: 1
-            ,checked: true
+            // row 3
+            cls:'form-row-wrapper',
+            layout: 'form'
+            ,labelSeparator: ''
+            ,labelAlign: 'top'
+            ,defaults: {
+                anchor: '100%'
+                ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
+            }
+            ,items: [{
+                xtype: 'textarea'
+                ,fieldLabel: _('chunk_code')
+                ,name: 'snippet'
+                ,id: `modx-${this.ident}-code`
+                ,grow: true
+                ,growMin: 90
+                ,growMax: this.isSmallScreen ? 160 : 300
+                ,value: config.record.snippet || ''
+            }]
         }]
         ,keys: [{
             key: Ext.EventObject.ENTER
@@ -442,6 +547,7 @@ MODx.window.QuickUpdateChunk = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_chunk')
         ,action: 'Element/Chunk/Update'
+        ,cls: 'qce-window qce-update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -462,48 +568,155 @@ MODx.window.QuickUpdateChunk = function(config) {
 Ext.extend(MODx.window.QuickUpdateChunk, MODx.window.QuickCreateChunk);
 Ext.reg('modx-window-quick-update-chunk',MODx.window.QuickUpdateChunk);
 
+
 MODx.window.QuickCreateTemplate = function(config) {
     config = config || {};
+    this.ident = config.ident || `qcetemplate${Ext.id()}`;
 
     Ext.applyIf(config,{
         title: _('quick_create_template')
-        ,width: 600
+        ,width: 700
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Template/Create'
+        ,cls: 'qce-window qce-create'
+        ,modal: true
+        ,monitorResize: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
+            ,value: config.record.id || 0
         },{
-            xtype: 'textfield'
-            ,name: 'templatename'
-            ,fieldLabel: _('name')
-            ,anchor: '100%'
+            // row 1
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'templatename'
+                        ,fieldLabel: _('name')
+                        ,allowBlank: false
+                        ,maxLength: 50
+                        ,value: config.record.templatename || ''
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,name: 'category'
+                        ,id: `modx-${this.ident}-category`
+                        ,fieldLabel: _('category')
+                        ,description: MODx.expandHelp ? '' : _('template_category_desc')
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-category`
+                        ,html: _('template_category_desc')
+                        ,cls: 'desc-under'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'modx-combo-category'
-            ,name: 'category'
-            ,fieldLabel: _('category')
-            ,anchor: '100%'
+            // row 2
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textarea'
+                        ,name: 'description'
+                        ,id: `modx-${this.ident}-description`
+                        ,description: MODx.expandHelp ? '' : _('template_description_desc')
+                        ,fieldLabel: _('description')
+                        ,grow: true
+                        ,growMin: 50
+                        ,growMax: this.isSmallScreen ? 90 : 120
+                        ,value: config.record.description || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-description`
+                        ,html: _('template_description_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'xcheckbox'
+                        ,name: 'clearCache'
+                        ,id: `modx-${this.ident}-clear-cache`
+                        ,hideLabel: true
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
+                        ,ctCls: 'add-label-space'
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-clear-cache`
+                        ,html: _('clear_cache_on_save_desc')
+                        ,cls: 'desc-under toggle-slider-above'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'textarea'
-            ,name: 'description'
-            ,fieldLabel: _('description')
-            ,anchor: '100%'
-        },{
-            xtype: 'textarea'
-            ,name: 'content'
-            ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: 216
-        },{
-            xtype: 'xcheckbox'
-            ,name: 'clearCache'
-            ,hideLabel: true
-            ,boxLabel: _('clear_cache_on_save')
-            ,description: _('clear_cache_on_save_msg')
-            ,inputValue: 1
-            ,checked: true
+            // row 3
+            cls:'form-row-wrapper',
+            layout: 'form'
+            ,labelSeparator: ''
+            ,labelAlign: 'top'
+            ,defaults: {
+                anchor: '100%'
+                ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
+            }
+            ,items: [{
+                xtype: 'textarea'
+                ,fieldLabel: _('template_code')
+                ,name: 'content'
+                ,id: `modx-${this.ident}-code`
+                ,grow: true
+                ,growMin: 120
+                ,growMax: this.isSmallScreen ? 160 : 300
+                ,value: config.record.content || ''
+            }]
         }]
         ,keys: [{
             key: Ext.EventObject.ENTER
@@ -523,6 +736,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_template')
         ,action: 'Element/Template/Update'
+        ,cls: 'qce-window qce-update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -546,46 +760,152 @@ Ext.reg('modx-window-quick-update-template',MODx.window.QuickUpdateTemplate);
 
 MODx.window.QuickCreateSnippet = function(config) {
     config = config || {};
+    this.ident = config.ident || `qcesnippet${Ext.id()}`;
 
     Ext.applyIf(config,{
         title: _('quick_create_snippet')
-        ,width: 600
+        ,width: 700
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Snippet/Create'
+        ,cls: 'qce-window qce-create'
+        ,modal: true
+        ,monitorResize: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
+            ,value: config.record.id || 0
         },{
-            xtype: 'textfield'
-            ,name: 'name'
-            ,fieldLabel: _('name')
-            ,anchor: '100%'
+            // row 1
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'name'
+                        ,fieldLabel: _('name')
+                        ,allowBlank: false
+                        ,maxLength: 50
+                        ,value: config.record.name || ''
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,name: 'category'
+                        ,id: `modx-${this.ident}-category`
+                        ,fieldLabel: _('category')
+                        ,description: MODx.expandHelp ? '' : _('snippet_category_desc')
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-category`
+                        ,html: _('snippet_category_desc')
+                        ,cls: 'desc-under'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'modx-combo-category'
-            ,name: 'category'
-            ,fieldLabel: _('category')
-            ,anchor: '100%'
+            // row 2
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textarea'
+                        ,name: 'description'
+                        ,id: `modx-${this.ident}-description`
+                        ,description: MODx.expandHelp ? '' : _('snippet_description_desc')
+                        ,fieldLabel: _('description')
+                        ,grow: true
+                        ,growMin: 50
+                        ,growMax: this.isSmallScreen ? 90 : 120
+                        ,value: config.record.description || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-description`
+                        ,html: _('snippet_description_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'xcheckbox'
+                        ,name: 'clearCache'
+                        ,id: `modx-${this.ident}-clear-cache`
+                        ,hideLabel: true
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
+                        ,ctCls: 'add-label-space'
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-clear-cache`
+                        ,html: _('clear_cache_on_save_desc')
+                        ,cls: 'desc-under toggle-slider-above'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'textarea'
-            ,name: 'description'
-            ,fieldLabel: _('description')
-            ,anchor: '100%'
-        },{
-            xtype: 'textarea'
-            ,name: 'snippet'
-            ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: 216
-        },{
-            xtype: 'xcheckbox'
-            ,name: 'clearCache'
-            ,hideLabel: true
-            ,boxLabel: _('clear_cache_on_save')
-            ,description: _('clear_cache_on_save_msg')
-            ,inputValue: 1
-            ,checked: true
+            // row 3
+            cls:'form-row-wrapper',
+            layout: 'form'
+            ,labelSeparator: ''
+            ,labelAlign: 'top'
+            ,defaults: {
+                anchor: '100%'
+                ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
+            }
+            ,items: [{
+                xtype: 'textarea'
+                ,fieldLabel: _('snippet_code')
+                ,name: 'snippet'
+                ,id: `modx-${this.ident}-code`
+                ,grow: true
+                ,growMin: 90
+                ,growMax: this.isSmallScreen ? 160 : 300
+                ,value: config.record.snippet || ''
+            }]
         }]
         ,keys: [{
             key: Ext.EventObject.ENTER
@@ -605,6 +925,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_snippet')
         ,action: 'Element/Snippet/Update'
+        ,cls: 'qce-window qce-update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -626,57 +947,165 @@ Ext.extend(MODx.window.QuickUpdateSnippet,MODx.window.QuickCreateSnippet);
 Ext.reg('modx-window-quick-update-snippet',MODx.window.QuickUpdateSnippet);
 
 
-
 MODx.window.QuickCreatePlugin = function(config) {
     config = config || {};
+    this.ident = config.ident || `qceplugin${Ext.id()}`;
 
     Ext.applyIf(config,{
         title: _('quick_create_plugin')
-        ,width: 600
+        ,width: 700
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Plugin/Create'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
+            ,value: config.record.id || 0
         },{
-            xtype: 'textfield'
-            ,name: 'name'
-            ,fieldLabel: _('name')
-            ,anchor: '100%'
+            // row 1
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'name'
+                        ,fieldLabel: _('name')
+                        ,allowBlank: false
+                        ,maxLength: 50
+                        ,value: config.record.name || ''
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,name: 'category'
+                        ,id: `modx-${this.ident}-category`
+                        ,fieldLabel: _('category')
+                        ,description: MODx.expandHelp ? '' : _('plugin_category_desc')
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-category`
+                        ,html: _('plugin_category_desc')
+                        ,cls: 'desc-under'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'modx-combo-category'
-            ,name: 'category'
-            ,fieldLabel: _('category')
-            ,anchor: '100%'
+            // row 2
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textarea'
+                        ,name: 'description'
+                        ,id: `modx-${this.ident}-description`
+                        ,description: MODx.expandHelp ? '' : _('plugin_description_desc')
+                        ,fieldLabel: _('description')
+                        ,grow: true
+                        ,growMin: 50
+                        ,growMax: this.isSmallScreen ? 90 : 120
+                        ,value: config.record.description || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-description`
+                        ,html: _('plugin_description_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'xcheckbox'
+                        ,name: 'disabled'
+                        ,id: `modx-${this.ident}-disabled`
+                        ,hideLabel: true
+                        ,boxLabel: _('plugin_disabled')
+                        ,description: MODx.expandHelp ? '' : _('plugin_disabled_desc')
+                        ,ctCls: 'add-label-space'
+                        ,inputValue: 1
+                        ,checked: config.record.disabled || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-disabled`
+                        ,html: _('plugin_disabled_desc')
+                        ,cls: 'desc-under toggle-slider-above'
+                    },{
+                        xtype: 'xcheckbox'
+                        ,name: 'clearCache'
+                        ,id: `modx-${this.ident}-clear-cache`
+                        ,hideLabel: true
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-clear-cache`
+                        ,html: _('clear_cache_on_save_desc')
+                        ,cls: 'desc-under toggle-slider-above'
+                    }]
+                }]
+            }]
         },{
-            xtype: 'textarea'
-            ,name: 'description'
-            ,fieldLabel: _('description')
-            ,anchor: '100%'
-            ,rows: 2
-        },{
-            xtype: 'textarea'
-            ,name: 'plugincode'
-            ,fieldLabel: _('code')
-            ,anchor: '100%'
-            ,grow: true
-            ,growMax: 216
-        },{
-            xtype: 'xcheckbox'
-            ,name: 'disabled'
-            ,boxLabel: _('disabled')
-            ,hideLabel: true
-            ,inputValue: 1
-            ,checked: false
-        },{
-            xtype: 'xcheckbox'
-            ,name: 'clearCache'
-            ,boxLabel: _('clear_cache_on_save')
-            ,hideLabel: true
-            ,description: _('clear_cache_on_save_msg')
-            ,inputValue: 1
-            ,checked: true
+            // row 3
+            cls:'form-row-wrapper',
+            layout: 'form'
+            ,labelSeparator: ''
+            ,labelAlign: 'top'
+            ,defaults: {
+                anchor: '100%'
+                ,msgTarget: 'under'
+                ,validationEvent: 'change'
+                ,validateOnBlur: false
+            }
+            ,items: [{
+                xtype: 'textarea'
+                ,fieldLabel: _('plugin_code')
+                ,name: 'plugincode'
+                ,id: `modx-${this.ident}-code`
+                ,grow: true
+                ,growMin: 90
+                ,growMax: this.isSmallScreen ? 160 : 300
+                ,value: config.record.plugincode || ''
+            }]
         }]
         ,keys: [{
             key: Ext.EventObject.ENTER
@@ -696,6 +1125,7 @@ MODx.window.QuickUpdatePlugin = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_plugin')
         ,action: 'Element/Plugin/Update'
+        ,cls: 'qce-window qce-update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -719,92 +1149,257 @@ Ext.reg('modx-window-quick-update-plugin',MODx.window.QuickUpdatePlugin);
 
 MODx.window.QuickCreateTV = function(config) {
     config = config || {};
-    this.ident = config.ident || 'qtv'+Ext.id();
+    this.ident = config.ident || `qcetv${Ext.id()}`;
 
     Ext.applyIf(config,{
         title: _('quick_create_tv')
         ,width: 700
         ,url: MODx.config.connector_url
         ,action: 'Element/TemplateVar/Create'
+        ,cls: 'qce-window qce-create'
+        ,modal: true
+        ,monitorResize: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
+            ,value: config.record.id || 0
         },{
-            layout: 'column'
-            ,border: false
+            // row 1
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
             ,items: [{
-                columnWidth: .6
-                ,layout: 'form'
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
                 ,items: [{
-                    xtype: 'textfield'
-                    ,name: 'name'
-                    ,fieldLabel: _('name')
-                    ,anchor: '100%'
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'name'
+                        ,fieldLabel: _('name')
+                        ,allowBlank: false
+                        ,maxLength: 50
+                        ,value: config.record.name || ''
+                    }]
                 },{
-                    xtype: 'textfield'
-                    ,name: 'caption'
-                    ,id: 'modx-'+this.ident+'-caption'
-                    ,fieldLabel: _('caption')
-                    ,anchor: '100%'
-                },{
-                    xtype: 'label'
-                    ,forId: 'modx-'+this.ident+'-caption'
-                    ,html: _('caption_desc')
-                    ,cls: 'desc-under'
-                },{
-                    xtype: 'modx-combo-category'
-                    ,name: 'category'
-                    ,fieldLabel: _('category')
-                    ,anchor: '100%'
-                },{
-                    xtype: 'textarea'
-                    ,name: 'description'
-                    ,fieldLabel: _('description')
-                    ,anchor: '100%'
-                }]
-            },{
-                columnWidth: .4
-                ,border: false
-                ,layout: 'form'
-                ,items: [{
-                    xtype: 'modx-combo-tv-input-type'
-                    ,fieldLabel: _('tv_type')
-                    ,name: 'type'
-                    ,anchor: '100%'
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('tv_elements')
-                    ,name: 'els'
-                    ,id: 'modx-'+this.ident+'-elements'
-                    ,anchor: '100%'
-                },{
-                    xtype: 'label'
-                    ,forId: 'modx-'+this.ident+'-elements'
-                    ,html: _('tv_elements_short_desc')
-                    ,cls: 'desc-under'
-                },{
-                    xtype: 'textarea'
-                    ,fieldLabel: _('tv_default')
-                    ,name: 'default_text'
-                    ,id: 'modx-'+this.ident+'-default-text'
-                    ,anchor: '100%'
-                    ,grow: true
-                    ,growMax: Ext.getBody().getViewSize().height <= 768 ? 300 : 380
-                },{
-                    xtype: 'label'
-                    ,forId: 'modx-'+this.ident+'-default-text'
-                    ,html: _('tv_default_desc')
-                    ,cls: 'desc-under'
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'modx-combo-tv-input-type'
+                        ,fieldLabel: _('tv_type')
+                        ,name: 'type'
+                        ,value: config.record.type || 'text'
+                    }]
                 }]
             }]
         },{
-            xtype: 'xcheckbox'
-            ,name: 'clearCache'
-            ,hideLabel: true
-            ,boxLabel: _('clear_cache_on_save')
-            ,description: _('clear_cache_on_save_msg')
-            ,inputValue: 1
-            ,checked: true
+            // row 2
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textfield'
+                        ,name: 'caption'
+                        ,id: `modx-${this.ident}-caption`
+                        ,fieldLabel: _('caption')
+                        ,description: MODx.expandHelp ? '' : _('tv_caption_desc')
+                        ,maxLength: 50
+                        ,value: config.record.caption || ''
+                    },{
+                        xtype: 'label'
+                        ,forId: `modx-${this.ident}-caption`
+                        ,html: _('tv_caption_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'modx-combo-category'
+                        ,name: 'category'
+                        ,id: `modx-${this.ident}-category`
+                        ,fieldLabel: _('category')
+                        ,description: MODx.expandHelp ? '' : _('tv_category_desc')
+                        ,value: config.record.category || 0
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-category`
+                        ,html: _('tv_category_desc')
+                        ,cls: 'desc-under'
+                    }]
+                }]
+            }]
+        },{
+            // row 3
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textarea'
+                        ,name: 'description'
+                        ,id: `modx-${this.ident}-description`
+                        ,fieldLabel: _('description')
+                        ,description: MODx.expandHelp ? '' : _('tv_description_desc')
+                        ,grow: true
+                        ,growMin: 50
+                        ,growMax: this.isSmallScreen ? 90 : 120
+                        ,value: config.record.description || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-description`
+                        ,html: _('tv_description_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                    }
+                    ,items: [{
+                        xtype: 'xcheckbox'
+                        ,name: 'clearCache'
+                        ,id: `modx-${this.ident}-clear-cache`
+                        ,hideLabel: true
+                        ,boxLabel: _('clear_cache_on_save')
+                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
+                        ,ctCls: 'add-label-space'
+                        ,inputValue: 1
+                        ,checked: true
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-clear-cache`
+                        ,html: _('clear_cache_on_save_desc')
+                        ,cls: 'desc-under toggle-slider-above'
+                    }]
+                }]
+            }]
+        },{
+            // row 4
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 1
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textarea'
+                        ,name: 'els'
+                        ,id: `modx-${this.ident}-elements`
+                        ,fieldLabel: _('tv_elements')
+                        ,description: MODx.expandHelp ? '' : _('tv_elements_short_desc')
+                        ,grow: true
+                        ,growMin: 30
+                        ,growMax: this.isSmallScreen ? 90 : 120
+                        ,value: config.record.els || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-elements`
+                        ,html: _('tv_elements_short_desc')
+                        ,cls: 'desc-under'
+                    }]
+                }]
+            }]
+        },{
+            // row 5
+            cls:'form-row-wrapper',
+            defaults: {
+                layout: 'column'
+            }
+            ,items: [{
+                defaults: {
+                    layout: 'form'
+                    ,labelSeparator: ''
+                    ,labelAlign: 'top'
+                }
+                ,items: [{
+                    columnWidth: 0.5
+                    ,defaults: {
+                        anchor: '100%'
+                        ,msgTarget: 'under'
+                        ,validationEvent: 'change'
+                        ,validateOnBlur: false
+                    }
+                    ,items: [{
+                        xtype: 'textarea'
+                        ,name: 'default_text'
+                        ,id: `modx-${this.ident}-default-text`
+                        ,fieldLabel: _('tv_default')
+                        ,description: MODx.expandHelp ? '' : _('tv_default_desc')
+                        ,grow: true
+                        ,growMin: 30
+                        ,growMax: 60
+                        ,value: config.record.default_text || ''
+                    },{
+                        xtype: MODx.expandHelp ? 'label' : 'hidden'
+                        ,forId: `modx-${this.ident}-default-text`
+                        ,html: _('tv_default_desc')
+                        ,cls: 'desc-under'
+                    }]
+                },{
+                    // using empty column here to allow full-width of previous column in mobile contexts
+                    columnWidth: 0.5
+                    ,items: []
+                }]
+            }]
         }]
         ,keys: [{
             key: Ext.EventObject.ENTER
@@ -824,6 +1419,7 @@ MODx.window.QuickUpdateTV = function(config) {
     Ext.applyIf(config,{
         title: _('quick_update_tv')
         ,action: 'Element/TemplateVar/Update'
+        ,cls: 'qce-window qce-update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this

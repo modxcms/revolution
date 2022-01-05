@@ -570,9 +570,41 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     access when they are opened outside the
     context of their respective element types
 */
+
 // All
 
+// Chunks
+$_lang['chunk_code'] = 'Chunk Code (HTML)';
+$_lang['chunk_description_desc'] = 'Usage information for this Chunk shown in search results and as a tooltip in the Elements tree.';
+    // Temporarily match old keys to new ones to ensure compatibility
+    $_lang['chunk_desc_description'] = $_lang['chunk_description_desc'];
+
+// Plugins
+$_lang['plugin_code'] = 'Plugin Code (PHP)';
+$_lang['plugin_description_desc'] = 'Usage information for this Plugin shown in search results and as a tooltip in the Elements tree.';
+$_lang['plugin_disabled'] = 'Deactivate Plugin';
+$_lang['plugin_disabled_desc'] = 'When deactivated, this Plugin will not respond to events.';
+    // Temporarily match old keys to new ones to ensure compatibility
+    $_lang['plugin_desc'] = $_lang['description'];
+    $_lang['plugin_desc_description'] = $_lang['plugin_description_desc'];
+    $_lang['plugin_disabled_msg'] = $_lang['plugin_disabled_desc'];
+
+// Snippets
+$_lang['snippet_code'] = 'Snippet Code (PHP)';
+$_lang['snippet_description_desc'] = 'Usage information for this Snippet shown in search results and as a tooltip in the Elements tree.';
+    // Temporarily match old keys to new ones to ensure compatibility
+    $_lang['snippet_desc'] = $_lang['description'];
+    $_lang['snippet_desc_description'] = $_lang['snippet_description_desc'];
+
+// Templates
+$_lang['template_code'] = 'Template Code (HTML)';
+$_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
+    // Temporarily match old keys to new ones to ensure compatibility
+    $_lang['template_desc'] = $_lang['description'];
+    $_lang['template_desc_description'] = $_lang['template_description_desc'];
+
 // TVs
+$_lang['tv_tab_input_options'] = 'Input Options';
 $_lang['tv_type'] = 'Input Type';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';

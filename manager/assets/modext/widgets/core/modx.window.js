@@ -114,6 +114,7 @@ Ext.override(Ext.Window, {
  */
 MODx.Window = function(config) {
     config = config || {};
+    this.isSmallScreen = Ext.getBody().getViewSize().height <= 768;
     Ext.applyIf(config,{
         modal: false
         ,layout: 'auto'
@@ -300,6 +301,14 @@ Ext.extend(MODx.Window,Ext.Window,{
         return false;
     }
 
+    /* @smg6511:
+        Suggest moving away from using this bulk setValues method and
+        explicitly specifying each field’s value param in window configs,
+        as is done for standard form panel pages. This will already have been done
+        for the element quick create/edit windows. Also the above value-setting
+        procedure in the _loadForm method could be dropped too. All windows in
+        windows.js would need to be updated before dropping.
+    */
     ,setValues: function(r) {
         if (r === null) { return false; }
         this.fp.getForm().setValues(r);

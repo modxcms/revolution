@@ -916,7 +916,7 @@ input::-moz-focus-inner {
 
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
-  .x-fieldset legend {
+  .x-fieldset legend{
     [type="checkbox"]{
 
       position: absolute;
@@ -1238,7 +1238,7 @@ input::-moz-focus-inner {
 }
 
 .x-form-grow-sizer {
-  font: $fontSmall;
+  font: $baseText;
 }
 
 .x-form-invalid-msg {
