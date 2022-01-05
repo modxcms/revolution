@@ -10,9 +10,7 @@ $_lang['example_tag_snippet_name'] = 'NameOfSnippet';
 $_lang['snippet'] = 'Snippet';
 $_lang['snippets_available'] = 'Snippets available for you to include in your page';
 $_lang['snippet_category_desc'] = 'Use to group Snippets within the Elements tree.';
-$_lang['snippet_code'] = 'Snippet Code (PHP)';
 $_lang['snippet_delete_confirm'] = 'Are you sure you want to delete this snippet?';
-$_lang['snippet_description_desc'] = 'Usage information for this Snippet shown in search results and as a tooltip in the Elements tree.';
 $_lang['snippet_duplicate_confirm'] = 'Are you sure you want to duplicate this snippet?';
 $_lang['snippet_duplicate_error'] = 'An error occurred while duplicating the snippet.';
 $_lang['snippet_err_create'] = 'An error occurred while creating the snippet.';
@@ -40,9 +38,18 @@ $_lang['snippets'] = 'Snippets';
 // Temporarily match old keys to new ones to ensure compatibility
 // --fields
 $_lang['snippet_desc_category'] = $_lang['snippet_category_desc'];
-$_lang['snippet_desc_description'] = $_lang['snippet_description_desc'];
 $_lang['snippet_desc_name'] = $_lang['snippet_name_desc'];
 $_lang['snippet_lock_msg'] = $_lang['snippet_lock_desc'];
 
 // --tabs
 $_lang['snippet_msg'] = $_lang['snippet_tab_general_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    snippet_code
+    snippet_description_desc
+*/

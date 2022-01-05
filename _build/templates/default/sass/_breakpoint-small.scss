@@ -1,0 +1,20 @@
+// Breakpoint for up to tablet (portrait orientation) size 768px
+@include grid-media($tabletP) {
+
+}
+
+// Breakpoint for mobile size
+@include grid-media($mobile) {
+
+    .x-window {
+        &.qce-create,
+        &.qce-update {
+            .x-toolbar-cell {
+                display: block;
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+    }
+
+}

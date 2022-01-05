@@ -38,7 +38,7 @@ $_lang['tv_err_save_access_permissions'] = 'An error occurred while attempting t
 $_lang['tv_err_save'] = 'An error occurred while saving the TV.';
 $_lang['tv_inuse'] = 'The following document(s) are currently using this TV. To continue with the delete operation click the Delete button otherwise click the Cancel button.';
 $_lang['tv_inuse_template'] = 'The following template(s) are currently using this TV: [[+templates]].<br /><br />Please detach the TV from the template(s) before deleting it.';
-$_lang['is_static_tv_desc'] = 'Use an external file to store the default value for this TV. This may be useful if the default value’s content is particularly lengthy.';
+$_lang['tv_isstatic_desc'] = 'Use an external file to store the default value for this TV. This may be useful if the default value’s content is particularly lengthy.';
 $_lang['tv_lock'] = 'Restrict Editing';
 $_lang['tv_lock_desc'] = 'Only users with “edit_locked” permissions can edit this TV.';
 $_lang['tv_management_msg'] = 'Manage additional custom TVs for your documents.';
@@ -51,7 +51,6 @@ $_lang['tv_rank_desc'] = 'Use to control the positioning of this TV in Resource 
 $_lang['tv_reset_params'] = 'Reset parameters';
 $_lang['tv_tab_access_desc'] = 'Select the Resource Groups that this TV belongs to. Only users with access to the Groups selected will be able to modify this TV. If no Groups are selected, all users with access to the Manager will be able to modify the TV.';
 $_lang['tv_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Template Variable</em> (TV). Note that TVs must be assigned to templates in order to access them from snippets and documents.';
-$_lang['tv_tab_input_options'] = 'Input Options';
 $_lang['tv_tab_input_options_desc'] = '<p>Here you can edit the input options for the TV, specific to the type of input render that you select.</p>';
 $_lang['tv_tab_output_options'] = 'Output Options';
 $_lang['tv_tab_output_options_desc'] = '<p>Here you can edit the output options for the TV, specific to the type of output render that you select.</p>';
@@ -70,6 +69,7 @@ $_lang['tvt_err_save'] = 'An error occurred while trying to attach the TV to the
 
 // Temporarily match old keys to new ones to ensure compatibility
 // -- fields
+$_lang['is_static_tv_desc'] = $_lang['tv_isstatic_desc'];
 $_lang['tv_desc_caption'] = $_lang['tv_caption_desc'];
 $_lang['tv_desc_category'] = $_lang['tv_category_desc'];
 $_lang['tv_desc_description'] = $_lang['tv_description_desc'];
@@ -94,6 +94,7 @@ $_lang['tv_tmpl_access_msg'] = $_lang['tv_tab_tmpl_access_desc'];
     quick create/edit panels access to them when opened
     outside the context of their respective element types)
 
+    tv_tab_input_options
     tv_caption_desc
     tv_category_desc
     tv_description_desc
