@@ -12,8 +12,6 @@ $_lang['example_tag_chunk_name'] = 'NameOfChunk';
 
 $_lang['chunk'] = 'Chunk';
 $_lang['chunk_category_desc'] = 'Use to group Chunks within the Elements tree.';
-$_lang['chunk_code'] = 'Chunk Code (HTML)';
-$_lang['chunk_description_desc'] = 'Usage information for this Chunk shown in search results and as a tooltip in the Elements tree.';
 $_lang['chunk_delete_confirm'] = 'Are you sure you want to delete this chunk?';
 $_lang['chunk_duplicate_confirm'] = 'Are you sure you want to duplicate this chunk?';
 $_lang['chunk_err_create'] = 'An error occurred while trying to create the chunk.';
@@ -39,9 +37,18 @@ $_lang['chunks'] = 'Chunks';
 // Temporarily match old keys to new ones to ensure compatibility
 // --fields
 $_lang['chunk_desc_category'] = $_lang['chunk_category_desc'];
-$_lang['chunk_desc_description'] = $_lang['chunk_description_desc'];
 $_lang['chunk_desc_name'] = $_lang['chunk_name_desc'];
 $_lang['chunk_lock_msg'] = $_lang['chunk_lock_desc'];
 
 // --tabs
 $_lang['chunk_msg'] = $_lang['chunk_tab_general_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    chunk_code
+    chunk_description_desc
+*/
