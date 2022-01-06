@@ -10,7 +10,6 @@
 
 namespace MODX\Revolution;
 
-
 /**
  * Default database session handler class for MODX.
  *
@@ -42,7 +41,7 @@ class modSessionHandler implements modSessionHandlerInterface
      *
      * @param modX &$modx A reference to a {@link modX} instance.
      */
-    function __construct(modX &$modx)
+    public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
         $gcMaxlifetime = (integer)$this->modx->getOption('session_gc_maxlifetime');

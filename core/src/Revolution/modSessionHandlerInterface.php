@@ -10,7 +10,6 @@
 
 namespace MODX\Revolution;
 
-
 /**
  * Default database session handler class for MODX.
  *
@@ -18,7 +17,7 @@ namespace MODX\Revolution;
  */
 interface modSessionHandlerInterface
 {
-    function __construct(modX &$modx);
+    public function __construct(modX &$modx);
 
     /**
      * Opens the connection for the session handler.
