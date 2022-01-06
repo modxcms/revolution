@@ -43,8 +43,8 @@
         "vendor-dir": "core/vendor"
     },
     "require": {
-        "php": ">=7.2",
-        "xpdo/xpdo": "^3.0@dev",
+        "php": ">=7.2.5",
+        "xpdo/xpdo": "~3.0.1",
         "league/flysystem": "^2.0",
         "league/flysystem-aws-s3-v3": "^2.0",
         "phpmailer/phpmailer": "^6.0",
