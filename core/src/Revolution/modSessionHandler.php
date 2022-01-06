@@ -16,7 +16,7 @@ namespace MODX\Revolution;
  *
  * @package MODX\Revolution
  */
-class modSessionHandler
+class modSessionHandler implements modSessionHandlerInterface
 {
     /**
      * @var modX A reference to the modX instance controlling this session
@@ -192,5 +192,25 @@ class modSessionHandler
         }
 
         return $this->session;
+    }
+
+    /**
+     * Removes all sessions.
+     *
+     * @param modX $modx
+     *
+     * @access public
+     *
+     * @return boolean
+     */
+    public static function flushSessions(modX &$modx)
+    {
+        $sessionTable = $modx->getTableName(modSession::class);
+        if ($modx->query("TRUNCATE TABLE {$sessionTable}") == false) {
+            return false;
+        }
+
+        $modx->user->endSession();
+        return true;
     }
 }

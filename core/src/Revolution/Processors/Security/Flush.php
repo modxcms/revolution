@@ -10,9 +10,8 @@
 
 namespace MODX\Revolution\Processors\Security;
 
-use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\modSession;
 use MODX\Revolution\modSessionHandler;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Flush all sessions
@@ -26,25 +25,16 @@ class Flush extends Processor
 
     public function process()
     {
-        if ($this->modx->getOption('session_handler_class',null,modSessionHandler::class) === modSessionHandler::class) {
-            if (!$this->flushSessions()) {
-                return $this->failure($this->modx->lexicon('flush_sessions_err'));
-            }
-        } else {
+        $sessionHandler = $this->modx->getOption('session_handler_class',null,modSessionHandler::class);
+        if (!method_exists($sessionHandler, 'flushSessions')) {
             return $this->failure($this->modx->lexicon('flush_sessions_not_supported'));
         }
-        return $this->success();
-    }
 
-    public function flushSessions()
-    {
-        $flushed = true;
-        $sessionTable = $this->modx->getTableName(modSession::class);
-        if ($this->modx->query("TRUNCATE TABLE {$sessionTable}") == false) {
-            $flushed = false;
-        } else {
-            $this->modx->user->endSession();
+        $flushed = call_user_func_array([$sessionHandler, 'flushSessions'], [&$this->modx]);
+        if (!$flushed) {
+            return $this->failure($this->modx->lexicon('flush_sessions_err'));
         }
-        return $flushed;
+
+        return $this->success();
     }
 }
