@@ -570,7 +570,6 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 // All
 
 // TVs
-$_lang['tv_tab_input_options'] = 'Input Options';
 $_lang['tv_type'] = 'Input Type';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
