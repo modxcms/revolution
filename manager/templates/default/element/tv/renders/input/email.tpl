@@ -9,9 +9,10 @@
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
-    var fld = MODx.load({
+    const fld = MODx.load({
     {/literal}
         xtype: 'textfield'
+        ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
         ,width: '99%'
         ,vtype: 'email'
@@ -21,7 +22,12 @@ Ext.onReady(function() {
         {if $params.maxLength|default != '' && $params.maxLength|default > 0}{if $params.minLength|default != '' && $params.minLength|default >= 0 && $params.maxLength|default > $params.minLength|default},maxLength: {$params.maxLength|string_format:"%d"}{/if} {/if}
         {if $params.minLength|default != '' && $params.minLength|default >= 0},minLength: {$params.minLength|string_format:"%d"}{/if}
     {literal}
-        ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            keydown: { 
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            }
+        }
     });
     MODx.makeDroppable(fld);
     Ext.getCmp('modx-panel-resource').getForm().add(fld);

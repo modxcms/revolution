@@ -9,12 +9,15 @@
     // <![CDATA[
     {literal}
     Ext.onReady(function() {
-        var fld{/literal}{$tv->id}{literal} = MODx.load({
+        const fld = MODx.load({
         {/literal}
             xtype: 'displayfield'
+            ,itemId: 'tv{$tv->id}'
             ,tv: '{$tv->id}'
             ,renderTo: 'tv-image-{$tv->id}'
+            {if $tv->value != ''}
             ,value: '{$tv->value|escape:'javascript'}'
+            {/if}
             ,width: 400
             ,msgTarget: 'under'
         {literal}
@@ -28,13 +31,16 @@
     // <![CDATA[
     {literal}
     Ext.onReady(function() {
-        var fld{/literal}{$tv->id}{literal} = MODx.load({
+        const fld = MODx.load({
         {/literal}
             xtype: 'modx-panel-tv-image'
+            ,itemId: 'tv{$tv->id}'
             ,renderTo: 'tv-image-{$tv->id}'
             ,tv: '{$tv->id}'
+            {if $tv->value != ''}
             ,value: '{$tv->value|escape:'javascript'}'
             ,relativeValue: '{$tv->value|escape:'javascript'}'
+            {/if}
             ,width: 400
             ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
             ,wctx: '{if $params.wctx|default}{$params.wctx}{else}web{/if}'
@@ -43,34 +49,33 @@
         {literal}
             ,msgTarget: 'under'
             ,listeners: {
-                'select': {fn:function(data) {
-                    MODx.fireResourceFormChange();
-                    var d = Ext.get('tv-image-preview-{/literal}{$tv->id}{literal}');
-                    if (Ext.isEmpty(data.url)) {
-                        d.update('');
-                    } else {
-                        {/literal}
-                        d.update('<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&src='+data.url+'&wctx={$ctx}&source={$source}&version={$hash}" alt="" />');
-                        {literal}
+                select: {
+                    fn: function(data) {
+                        MODx.fireResourceFormChange();
+                        const d = Ext.get('tv-image-preview-{/literal}{$tv->id}{literal}');
+                        if (Ext.isEmpty(data.url)) {
+                            d.update('');
+                        } else {
+                            {/literal}
+                            d.update('<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&src='+data.url+'&wctx={$ctx}&source={$source}&version={$hash}" alt="" />');
+                            {literal}
+                        }
                     }
-                }}
+                }
             }
             ,validate: function () {
-                var value = Ext.getCmp('tv{/literal}{$tv->id}{literal}').value;
-                return !(!this.allowBlank && (value.length < 1));
+                return Ext.getCmp('tvbrowser{/literal}{$tv->id}{literal}').validate();
             }
-            ,markInvalid : Ext.emptyFn
-            ,clearInvalid : Ext.emptyFn
         });
-        MODx.makeDroppable(Ext.get('tv-image-{/literal}{$tv->id}{literal}'),function(v) {
-            var cb = Ext.getCmp('tvbrowser{/literal}{$tv->id}{literal}');
+        MODx.makeDroppable(Ext.get('tv-image-{/literal}{$tv->id}{literal}'), function(v) {
+            const cb = Ext.getCmp('tvbrowser{/literal}{$tv->id}{literal}');
             if (cb) {
                 cb.setValue(v);
-                cb.fireEvent('select',{relativeUrl:v});
+                cb.fireEvent('select', {relativeUrl: v});
             }
             return '';
         });
-        Ext.getCmp('modx-panel-resource').getForm().add(fld{/literal}{$tv->id}{literal});
+        Ext.getCmp('modx-panel-resource').getForm().add(fld);
     });
     {/literal}
     // ]]>

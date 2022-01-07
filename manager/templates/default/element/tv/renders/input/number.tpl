@@ -9,9 +9,10 @@
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
-    var fld = MODx.load({
+    const fld = MODx.load({
     {/literal}
         xtype: 'numberfield'
+        ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
         ,width: '99%'
         ,enableKeyEvents: true
@@ -25,7 +26,12 @@ Ext.onReady(function() {
         {if $params.minValue|default != '' && is_numeric($params.minValue|default)},minValue: {$params.minValue|default}{/if}
         ,msgTarget: 'under'
     {literal}
-        ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            keydown: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            }
+        }
     });
     MODx.makeDroppable(fld);
     Ext.getCmp('modx-panel-resource').getForm().add(fld);

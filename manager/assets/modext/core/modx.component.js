@@ -249,15 +249,11 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             var f = o.form.getForm ? o.form.getForm() : o.form;
             var isv = true;
             if (f.items && f.items.items) {
-                for (var fld in f.items.items) {
-                    if (f.items.items[fld] && f.items.items[fld].validate) {
-                        var fisv = f.items.items[fld].validate();
-                        if (!fisv) {
-                            f.items.items[fld].markInvalid();
-                            isv = false;
-                        }
+                f.items.items.forEach(item => {
+                    if (item && item.validate && !item.validate()) {
+                        isv = false;
                     }
-                }
+                });
             }
 
             if (isv) {

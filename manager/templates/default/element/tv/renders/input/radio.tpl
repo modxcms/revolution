@@ -4,10 +4,11 @@
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
-    var fld = MODx.load({
+    const fld = MODx.load({
     {/literal}
         xtype: 'radiogroup'
         ,id: 'tv{$tv->id}'
+        ,itemId: 'tv{$tv->id}'
         ,vertical: true
         ,columns: {if $params.columns|default}{$params.columns|default}{else}1{/if}
         ,renderTo: 'tv{$tv->id}-cb'
@@ -15,7 +16,6 @@ Ext.onReady(function() {
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,hideMode: 'offsets'
         ,msgTarget: 'under'
-
         ,items: [{foreach from=$opts item=item key=k name=cbs}
         {literal}{{/literal}
             name: 'tv{$tv->id}'
@@ -24,8 +24,11 @@ Ext.onReady(function() {
             ,checked: {if $item.checked}true{else}false{/if}
             ,inputValue: {$item.value}
             ,value: {$item.value}
-
-            {literal},listeners: { 'check': MODx.fireResourceFormChange }{/literal}
+            {literal}
+            ,listeners: {
+                check: MODx.fireResourceFormChange
+            }
+            {/literal}
 
         {literal}}{/literal}{if NOT $smarty.foreach.cbs.last},{/if}
         {/foreach}]
