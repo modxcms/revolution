@@ -766,42 +766,55 @@ header {
                 margin-left: 10px;
             }
         }
+    }
 
-        .col-1,
-        .col-2,
-        .col-3 {
-            line-height: 30px;
+    .context-property {
+        display: flex;
+        line-height: 30px;
+        width: 100%;
+
+        @media (max-width: 575.98px) {
+            flex-direction: column;
+        }
+
+        &_label {
+            flex-basis: 40%;
+
+            @media (max-width: 575.98px) {
+                flex-basis: 100%;
+                width: 100%;
+            }
 
             label {
                 color: $scorpion;
                 font-size: 16px;
                 letter-spacing: 0;
             }
+        }
 
-            input[type="text"],
-            input[type="email"],
-            input[type="password"] {
+        &_value {
+            align-items: center;
+            display: flex;
+            flex-basis: 60%;
+
+            @media (max-width: 575.98px) {
+                flex-basis: 100%;
+                width: 100%;
+            }
+
+            input[type="text"] {
                 font-size: 16px;
                 padding: 10px 20px;
                 width: 100%;
+
+                @media (max-width: 575.98px) {
+                    font-size: 14px;
+                }
             }
-        }
 
-        .col-1 {
-            flex-basis: 35%;
-        }
-
-        .col-2 {
-            flex-basis: 60%;
-        }
-
-        .col-3 {
-            flex-basis: 5%;
-            margin: 0 auto;
-            text-align: center;
-
-            input[type="checkbox"] {
-                width: auto;
+            &_checkbox-wrapper {
+                margin: 0 0 0 4px;
+                text-align: center;
             }
         }
     }
@@ -955,32 +968,6 @@ footer {
     #install {
         .labelHolder {
             flex-direction: column;
-
-            .col-1,
-            .col-2,
-            .col-3 {
-                flex-basis: 100%;
-                width: 100%;
-
-                input[type="text"] {
-                    font-size: 14px;
-                }
-            }
-
-            .col-3 {
-                margin-top: 10px;
-
-                [type="checkbox"]:not(:checked)+label:before,
-                [type="checkbox"]:checked+label:before {
-                    width: 1.5em;
-                    height: 1.5em;
-                }
-
-                [type="checkbox"]:not(:checked)+label:after,
-                [type="checkbox"]:checked+label:after {
-                    font-size: 1.4em;
-                }
-            }
         }
 
         #modx-db-step1-msg .title {

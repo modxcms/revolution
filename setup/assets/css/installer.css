@@ -13252,44 +13252,54 @@ header .wrapper_version {
     font-size: 14px;
     margin-left: 10px;
 }
-#install .labelHolder .col-1,
-#install .labelHolder .col-2,
-#install .labelHolder .col-3 {
+#install .context-property {
+    display: flex;
     line-height: 30px;
+    width: 100%;
 }
-#install .labelHolder .col-1 label,
-#install .labelHolder .col-2 label,
-#install .labelHolder .col-3 label {
+@media (max-width: 575.98px) {
+    #install .context-property {
+        flex-direction: column;
+    }
+}
+#install .context-property_label {
+    flex-basis: 40%;
+}
+@media (max-width: 575.98px) {
+    #install .context-property_label {
+        flex-basis: 100%;
+        width: 100%;
+    }
+}
+#install .context-property_label label {
     color: #606060;
     font-size: 16px;
     letter-spacing: 0;
 }
-#install .labelHolder .col-1 input[type=text],
-#install .labelHolder .col-1 input[type=email],
-#install .labelHolder .col-1 input[type=password],
-#install .labelHolder .col-2 input[type=text],
-#install .labelHolder .col-2 input[type=email],
-#install .labelHolder .col-2 input[type=password],
-#install .labelHolder .col-3 input[type=text],
-#install .labelHolder .col-3 input[type=email],
-#install .labelHolder .col-3 input[type=password] {
+#install .context-property_value {
+    align-items: center;
+    display: flex;
+    flex-basis: 60%;
+}
+@media (max-width: 575.98px) {
+    #install .context-property_value {
+        flex-basis: 100%;
+        width: 100%;
+    }
+}
+#install .context-property_value input[type=text] {
     font-size: 16px;
     padding: 10px 20px;
     width: 100%;
 }
-#install .labelHolder .col-1 {
-    flex-basis: 35%;
+@media (max-width: 575.98px) {
+    #install .context-property_value input[type=text] {
+        font-size: 14px;
+    }
 }
-#install .labelHolder .col-2 {
-    flex-basis: 60%;
-}
-#install .labelHolder .col-3 {
-    flex-basis: 5%;
-    margin: 0 auto;
+#install .context-property_value_checkbox-wrapper {
+    margin: 0 0 0 4px;
     text-align: center;
-}
-#install .labelHolder .col-3 input[type=checkbox] {
-    width: auto;
 }
 #install #modx-db-step1-msg,
 #install #modx-db-step2-msg {
@@ -13429,29 +13439,6 @@ pre,
 
     #install .labelHolder {
         flex-direction: column;
-    }
-    #install .labelHolder .col-1,
-#install .labelHolder .col-2,
-#install .labelHolder .col-3 {
-        flex-basis: 100%;
-        width: 100%;
-    }
-    #install .labelHolder .col-1 input[type=text],
-#install .labelHolder .col-2 input[type=text],
-#install .labelHolder .col-3 input[type=text] {
-        font-size: 14px;
-    }
-    #install .labelHolder .col-3 {
-        margin-top: 10px;
-    }
-    #install .labelHolder .col-3 [type=checkbox]:not(:checked) + label:before,
-#install .labelHolder .col-3 [type=checkbox]:checked + label:before {
-        width: 1.5em;
-        height: 1.5em;
-    }
-    #install .labelHolder .col-3 [type=checkbox]:not(:checked) + label:after,
-#install .labelHolder .col-3 [type=checkbox]:checked + label:after {
-        font-size: 1.4em;
     }
     #install #modx-db-step1-msg .title {
         margin-top: 10px;
