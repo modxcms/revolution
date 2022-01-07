@@ -10,12 +10,22 @@
 
 namespace MODX\Revolution\Processors\Security\Forms\Set;
 
+use MODX\Revolution\modFormCustomizationSet;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
+
 /**
  * Update a FC Profile from grid
  * @package MODX\Revolution\Processors\Security\Forms\Set
  */
-class UpdateFromGrid extends Update
+class UpdateFromGrid extends UpdateProcessor
 {
+    public $classKey = modFormCustomizationSet::class;
+    public $languageTopics = ['formcustomization'];
+    public $permission = 'customize_forms';
+    public $objectType = 'set';
+
+    protected $gridFields = ['id', 'action', 'description', 'template', 'constraint_field', 'constraint'];
+
     /**
      * @return bool|string|null
      * @throws \xPDO\xPDOException
@@ -27,9 +37,10 @@ class UpdateFromGrid extends Update
             return $this->modx->lexicon('invalid_data');
         }
         $properties = $this->modx->fromJSON($data);
+        $properties = array_intersect_key($properties, array_flip($this->gridFields));
         $this->setProperties($properties);
         $this->unsetProperty('data');
-        
+
         return parent::initialize();
     }
 }
