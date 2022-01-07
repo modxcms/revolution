@@ -4,6 +4,9 @@
  *
  * @package modx
  */
+
+/** @var xPDO $xpdo */
+
 use MODX\Revolution\modAccessPermission;
 
 $permissions = [];
@@ -108,6 +111,21 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'delete_weblink',
+    'description' => 'perm.delete_weblink_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'delete_symlink',
+    'description' => 'perm.delete_symlink_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'delete_static_resource',
+    'description' => 'perm.delete_static_resource_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'delete_eventlog',
     'description' => 'perm.delete_eventlog_desc',
     'value' => true,
@@ -190,6 +208,21 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'edit_document',
     'description' => 'perm.edit_document_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'edit_weblink',
+    'description' => 'perm.edit_weblink_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'edit_symlink',
+    'description' => 'perm.edit_symlink_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'edit_static_resource',
+    'description' => 'perm.edit_static_resource_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [

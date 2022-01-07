@@ -18,10 +18,12 @@ use MODX\Revolution\modX;
 /**
  * Deletes a resource.
  *
- * @param integer $id The ID of the resource
+ * @param int $id The ID of the resource
  */
 class Delete extends Processor
 {
+    use ActionAccessTrait;
+
     /** @var modResource $resource */
     public $resource;
     /** @var modUser $lockedUser */
@@ -31,12 +33,9 @@ class Delete extends Processor
     /** @var int $deletedTime */
     public $deletedTime = 0;
 
-    public function checkPermissions()
-    {
-        return $this->modx->hasPermission('delete_document');
-    }
+    public $permission = 'delete_document';
 
-    public function getLanguageTopics()
+    public function getLanguageTopics(): array
     {
         return ['resource'];
     }
@@ -55,7 +54,8 @@ class Delete extends Processor
         if (empty($this->resource)) return $this->modx->lexicon('resource_err_nfs', ['id' => $id]);
 
         /* validate resource can be deleted */
-        if (!$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
+        if (!$this->checkActionPermission($this->resource->get('class_key'), 'delete')
+            || !$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
             return $this->modx->lexicon('permission_denied');
         }
         $this->deletedTime = time();

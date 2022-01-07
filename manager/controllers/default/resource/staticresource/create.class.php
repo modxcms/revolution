@@ -56,4 +56,10 @@ class StaticResourceCreateManagerController extends ResourceCreateManagerControl
     {
         return 'resource/staticresource/create.tpl';
     }
+
+    public function checkPermissions(): bool
+    {
+        return $this->modx->hasPermission('new_document')
+            && $this->modx->hasPermission('new_static_resource');
+    }
 }
