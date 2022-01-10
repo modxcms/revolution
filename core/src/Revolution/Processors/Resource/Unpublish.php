@@ -57,8 +57,16 @@ class Unpublish extends Processor
             return $this->failure($this->modx->lexicon('resource_locked_by', ['id' => $this->resource->get('id'), 'user' => $this->lockedUser->get('username')]));
         }
 
-        if ($this->isSiteStart()) {
+        if ($this->isSitePage('site_start')) {
             return $this->failure($this->modx->lexicon('resource_err_unpublish_sitestart'));
+        }
+
+        if ($this->isSitePage('error_page')) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_errorpage'));
+        }
+
+        if ($this->isSitePage('site_unavailable_page')) {
+            return $this->failure($this->modx->lexicon('resource_err_unpublish_siteunavailable'));
         }
 
         $this->resource->set('published', false);
@@ -80,13 +88,13 @@ class Unpublish extends Processor
     }
 
     /**
-     * Checks if the given resource is set as site_start
+     * Checks if the given resource is set as page specified in the system settings
      * @return bool
      */
-    public function isSiteStart()
+    public function isSitePage(string $option)
     {
         $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
-        return ($this->resource->get('id') == $workingContext->getOption('site_start') || $this->resource->get('id') == $this->modx->getOption('site_start'));
+        return ($this->resource->get('id') == $workingContext->getOption($option) || $this->resource->get('id') == $this->modx->getOption($option));
     }
 
     /**

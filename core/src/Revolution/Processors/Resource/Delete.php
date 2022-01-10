@@ -68,10 +68,15 @@ class Delete extends Processor
      */
     public function process()
     {
-        if ($this->modx->getOption('site_start') == $this->resource->get('id')) {
+        if ($this->isSitePage('site_start')) {
             return $this->failure($this->modx->lexicon('resource_err_delete_sitestart'));
         }
-        if ($this->modx->getOption('site_unavailable_page') == $this->resource->get('id')) {
+
+        if ($this->isSitePage('error_page')) {
+            return $this->failure($this->modx->lexicon('resource_err_delete_errorpage'));
+        }
+
+        if ($this->isSitePage('site_unavailable_page')) {
             return $this->failure($this->modx->lexicon('resource_err_delete_siteunavailable'));
         }
 
@@ -118,6 +123,16 @@ class Delete extends Processor
         $outputArray['deletedCount'] = $deletedCount;
 
         return $this->success('', $outputArray);
+    }
+
+    /**
+     * Checks if the given resource is set as page specified in the system settings
+     * @return bool
+     */
+    public function isSitePage(string $option)
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption($option) || $this->resource->get('id') == $this->modx->getOption($option));
     }
 
     /**
