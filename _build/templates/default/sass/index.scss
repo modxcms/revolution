@@ -57,6 +57,7 @@ body {
   color: $mainText;
   font: $baseText;
   -webkit-font-smoothing: antialiased;
+  scrollbar-color: #e1e3e6 rgba(0, 0, 0, 0);
 
   a {
     color: $colorSplash;

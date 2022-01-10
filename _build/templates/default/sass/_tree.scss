@@ -309,6 +309,7 @@
     line-height: 34px;
     opacity: 0;
     transition: opacity .4s ease-in;
+    overflow: hidden;
 
     html[dir="rtl"] & {
       left: 6px;
