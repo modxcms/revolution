@@ -23938,6 +23938,7 @@ html[dir=rtl] .modx-tree-node-tool-ct {
     line-height: 34px;
     opacity: 0;
     transition: opacity 0.4s ease-in;
+    overflow: hidden;
 }
 html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     left: 6px;
@@ -25944,6 +25945,7 @@ body {
     color: black;
     font: normal 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
+    scrollbar-color: #e1e3e6 rgba(0, 0, 0, 0);
 }
 body a {
     color: #234368;
