@@ -2647,12 +2647,14 @@ class modX extends xPDO {
         $this->cultureKey = $cultureKey;
         $this->setOption('cultureKey', $cultureKey);
 
-        $locale = setlocale(LC_ALL, '0');
-        $targetLocale = $this->getOption('locale', null, $locale, true);
-        $result = setlocale(LC_ALL, $targetLocale);
+        if ($this->getOption('setlocale', $options, true)) {
+            $locale = setlocale(LC_ALL, '0');
+            $targetLocale = $this->getOption('locale', null, $locale, true);
+            $result = setlocale(LC_ALL, $targetLocale);
 
-        if ($result === false) {
-            $this->log(modX::LOG_LEVEL_ERROR, 'Could not set the locale. Please check if the locale ' . $this->getOption('locale', null, $locale) . ' exists on your system');
+            if ($result === false) {
+                $this->log(modX::LOG_LEVEL_ERROR, 'Could not set the locale. Please check if the locale ' . $this->getOption('locale', null, $locale) . ' exists on your system');
+            }
         }
 
         $this->services->add('lexicon', new modLexicon($this));
