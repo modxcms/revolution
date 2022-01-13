@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -11,9 +12,7 @@
 namespace MODX\Revolution\Processors\Security\Group;
 
 use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
-use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modX;
 
 /**
@@ -72,14 +71,18 @@ class Sort extends Processor
 
         /* readjust groups */
         foreach ($groups as $groupArray) {
-            if (empty($groupArray['id'])) continue;
-            if ($groupArray['id'] === 1) continue;
+            if (empty($groupArray['id'])) {
+                continue;
+            }
+
+            if ($groupArray['id'] === 1) {
+                continue;
+            }
 
             /** @var modUserGroup $userGroup */
             $userGroup = $this->modx->getObject(modUserGroup::class, $groupArray['id']);
             if ($userGroup === null) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR,
-                    'Could not sort group ' . $groupArray['id'] . ' because it could not be found.');
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not sort group ' . $groupArray['id'] . ' because it could not be found.');
                 continue;
             }
             $oldParentId = $userGroup->get('parent');
@@ -101,7 +104,7 @@ class Sort extends Processor
                 $userGroup->set('parent', $groupArray['parent']);
             }
 
-           $userGroup->save();
+            $userGroup->save();
         }
     }
 
@@ -126,5 +129,4 @@ class Sort extends Processor
             $this->getGroupsFormatted($ar_nodes, $children, $id);
         }
     }
-
 }

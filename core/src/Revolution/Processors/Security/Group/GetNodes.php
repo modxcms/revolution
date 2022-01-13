@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -166,5 +167,4 @@ class GetNodes extends Processor
 
         return $itemArray;
     }
-
 }
