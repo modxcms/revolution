@@ -17,8 +17,8 @@ MODx.tree.UserGroup = function(config) {
         ,rootIconCls: 'icon-group'
         ,root_id: 'n_ug_0'
         ,root_name: _('user_groups')
-        ,enableDrag: true
-        ,enableDrop: true
+        ,enableDD: true
+        ,ddGroup: 'modx-usergroup-dd'
         ,rootVisible: true
         ,ddAppendOnly: true
         ,useDefaultToolbar: true
@@ -181,18 +181,13 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
     }
 
     ,_handleDrop: function(e) {
-        s = false;
-        switch (e.dropNode.attributes.type) {
-            case 'user':
-                s = !(e.point == 'above' || e.point == 'below');
-                s = s && e.target.attributes.type == 'usergroup' && e.point == 'append';
-            break;
-            case 'usergroup':
-                s = true;
-            break;
-        }
-        return s;
+        var id = e.data.node.attributes.id.substr(2).split('_');
+        id = parseInt(id[1]);
 
+        if (id === 0) return false; // block Anonymous from moving
+        if (id === 1) return false; // block Administrator from moving
+
+        return true;
     }
 });
 Ext.reg('modx-tree-usergroup',MODx.tree.UserGroup);

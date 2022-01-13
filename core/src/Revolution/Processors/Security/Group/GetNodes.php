@@ -122,6 +122,8 @@ class GetNodes extends Processor
             $list[] = [
                 'text' => '(' . $this->modx->lexicon('anonymous') . ')',
                 'id' => 'n_ug_0',
+                'expanded' => true,
+                'allowDrop' => false,
                 'leaf' => true,
                 'type' => 'usergroup',
                 'cls' => $cls,
@@ -147,15 +149,22 @@ class GetNodes extends Processor
         $c->where(['parent' => $group->get('id')]);
         $c->limit(1);
         $count = $this->modx->getCount(modUserGroup::class, $c);
-        return [
+        $itemArray = [
             'text' => htmlentities($group->get('name'), ENT_QUOTES, 'UTF-8') . ' (' . $group->get('id') . ')',
             'id' => 'n_ug_' . $group->get('id'),
-            'leaf' => $count <= 0,
+            'hasChildren' => $count > 0,
             'type' => 'usergroup',
             'qtip' => $group->get('description'),
             'cls' => $cls,
+            'allowDrop' => true,
             'iconCls' => 'icon icon-group',
         ];
+
+        if (!$itemArray['hasChildren']) {
+            $itemArray['expanded'] = true;
+        }
+
+        return $itemArray;
     }
 
 }

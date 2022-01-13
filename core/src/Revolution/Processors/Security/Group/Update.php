@@ -81,6 +81,10 @@ class Update extends UpdateProcessor
             return $this->modx->lexicon('user_group_err_already_exists');
         }
 
+        if ($this->isAdminGroup()) {
+            $this->object->set('parent', 0);
+        }
+
         return parent::beforeSave();
     }
 
@@ -179,5 +183,10 @@ class Update extends UpdateProcessor
         }
 
         return $memberships;
+    }
+
+    public function isAdminGroup()
+    {
+        return $this->object->get('id') === 1 || $this->object->get('name') === $this->modx->lexicon('administrator');
     }
 }
