@@ -322,6 +322,15 @@ input::-moz-focus-inner {
   .x-form-element {
     padding: 0;
     font: $baseText;
+    .x-form-invalid-icon {
+        color: $red;
+        &::before {
+            @extend %pseudo-font;
+            content: fa-content($fa-var-exclamation-triangle); /* : "\f071" */
+            position: absolute;
+            left: 3px;
+        }
+    }
   }
   /* .x-form-element */
   /* prevent columns used inside form elements to have too much spacing, some custom TV types need this */
@@ -575,12 +584,9 @@ input::-moz-focus-inner {
 
   .x-form-trigger {
     border: 0;
-    border-radius: 0 $borderRadius $borderRadius 0;
-    /* override button styles border-radius */
-    box-shadow: none;
-    /* override button styles box-shadow */
-    padding: 0;
-    /* override button styles padding */
+    border-radius: 0 calc($borderRadius - 1px) calc($borderRadius - 1px) 0; /* override button styles border-radius */
+    box-shadow: none; /* override button styles box-shadow */
+    padding: 0; /* override button styles padding */
     width: 30px;
     height: 100% !important;
     /* height 100% to enable vertical centering, !important to override default extjs theme styles */
@@ -593,14 +599,12 @@ input::-moz-focus-inner {
       box-sizing: border-box;
       content: fa-content($fa-var-chevron-down);
       font-size: 14px;
-      margin-top: -7px;
-      /* half of the height to center vertically with top 50% */
-      opacity: 0.8;
-      filter: alpha(opacity=60);
-      /* for IE <= 8 */
+      opacity: .8;
+      filter: alpha(opacity=60); /* for IE <= 8 */
       position: absolute;
       top: 50%;
-      right: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
       width: 30px;
       transition: opacity 0.25s;
@@ -608,8 +612,6 @@ input::-moz-focus-inner {
 
     &.x-form-trigger-over,
     &:hover {
-      box-shadow: $mediumGray;
-
       &:before {
         opacity: 1;
         filter: alpha(opacity=100);
@@ -619,8 +621,6 @@ input::-moz-focus-inner {
 
     &.x-form-trigger-click,
     &:active {
-      box-shadow: $shadowBorderGrayActive;
-
       &:before {
         opacity: 1;
         filter: alpha(opacity=100);
@@ -658,6 +658,14 @@ input::-moz-focus-inner {
   &.x-datetime-wrap {
     background: none;
     border: 0;
+
+    .ux-datetime-date,
+    .ux-datetime-time {
+        vertical-align: top;
+        .x-form-invalid-msg {
+            white-space: normal;
+        }
+    }
 
     .ux-datetime-date {
       .x-form-trigger {
@@ -713,7 +721,23 @@ input::-moz-focus-inner {
       /* needs to stay above the transparent file input field */
     }
   }
+
 }
+
+.modx-tv-type-listbox-multiple {
+
+    .x-form-field-wrap {
+        border-color: #fff;
+        .x-form-text {
+            border: 1px solid $borderColor;
+            margin: -1px;
+            &.x-form-focus {
+                border-color: $mediumGray;
+            }
+        }
+    }
+}
+
 
 #x-form-el-modx-user-photo .x-form-file-trigger:before {
   content: fa-content($fa-var-file-image);
@@ -1095,14 +1119,6 @@ input::-moz-focus-inner {
         @extend %pseudo-font;
         content: fa-content($fa-var-times);
       }
-      /* we need to style that separator border individually */
-      &:hover {
-        border-left: 1px solid $borderColorHover;
-      }
-
-      &:active {
-        border-left: 1px solid $borderColorActive;
-      }
     }
   }
 }
@@ -1228,20 +1244,16 @@ input::-moz-focus-inner {
 }
 /* the following styles have to be outside of their component blocks as they are inserted at the end of the DOM */
 .x-combo-list {
-  border: 0;
-  /* set the border on .x-combo-list-inner */
-  border-radius: 0 0 $borderRadius $borderRadius;
-  overflow: visible;
-  /* prevent the left/right borders of .x-combo-list-inner to be cut off */
+  border: 0; /* set the border on .x-combo-list-inner */
+  border-radius: $borderRadius;
+  overflow: visible; /* prevent the left/right borders of .x-combo-list-inner to be cut off */
+
   .x-combo-list-inner {
     background-color: $dropdownBg;
-    border: 1px solid $mediumGray;
-    /* apply the border here as we move this element 1px left to be in line with the combobox border */
-    border-radius: 0 0 $borderRadius $borderRadius;
-    margin-left: -1px;
-    /* we cannot use this on the .x-combo-list element as it's used for position calculation */
-    width: 100% !important;
-    /* override extjs calculated inline dimensions and stretch to container */
+    border: 1px solid $mediumGray; /* apply the border here as we move this element 1px left to be in line with the combobox border */
+    border-radius: $borderRadius;
+    margin-left: -1px; /* we cannot use this on the .x-combo-list element as it's used for position calculation */
+    width: 100% !important; /* override extjs calculated inline dimensions and stretch to container */
   }
 
   .x-combo-list-item {
@@ -1251,8 +1263,9 @@ input::-moz-focus-inner {
     border: 0 !important;
     border-bottom: 1px solid $borderColor !important;
 
+    /* keep border to prevent unnecessary scroll bar on hover of last item */
     &:last-child {
-      border-bottom: 0;
+      border-bottom-color: $white !important;
     }
 
     &.x-combo-selected {
@@ -1439,6 +1452,12 @@ input::-moz-focus-inner {
     bottom: 1px;
     right: 3px;
   }
+
+    &.modx-superboxselect {
+        .x-combo-list-inner {
+            margin-left: 0;
+        }
+    }
 }
 
 .x-combo-list-hd {

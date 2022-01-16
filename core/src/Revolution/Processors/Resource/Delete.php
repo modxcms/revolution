@@ -18,10 +18,12 @@ use MODX\Revolution\modX;
 /**
  * Deletes a resource.
  *
- * @param integer $id The ID of the resource
+ * @param int $id The ID of the resource
  */
 class Delete extends Processor
 {
+    use ActionAccessTrait;
+
     /** @var modResource $resource */
     public $resource;
     /** @var modUser $lockedUser */
@@ -31,12 +33,9 @@ class Delete extends Processor
     /** @var int $deletedTime */
     public $deletedTime = 0;
 
-    public function checkPermissions()
-    {
-        return $this->modx->hasPermission('delete_document');
-    }
+    public $permission = 'delete_document';
 
-    public function getLanguageTopics()
+    public function getLanguageTopics(): array
     {
         return ['resource'];
     }
@@ -55,7 +54,8 @@ class Delete extends Processor
         if (empty($this->resource)) return $this->modx->lexicon('resource_err_nfs', ['id' => $id]);
 
         /* validate resource can be deleted */
-        if (!$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
+        if (!$this->checkActionPermission($this->resource->get('class_key'), 'delete')
+            || !$this->resource->checkPolicy(['save' => true, 'delete' => true])) {
             return $this->modx->lexicon('permission_denied');
         }
         $this->deletedTime = time();
@@ -68,10 +68,15 @@ class Delete extends Processor
      */
     public function process()
     {
-        if ($this->modx->getOption('site_start') == $this->resource->get('id')) {
+        if ($this->isSitePage('site_start')) {
             return $this->failure($this->modx->lexicon('resource_err_delete_sitestart'));
         }
-        if ($this->modx->getOption('site_unavailable_page') == $this->resource->get('id')) {
+
+        if ($this->isSitePage('error_page')) {
+            return $this->failure($this->modx->lexicon('resource_err_delete_errorpage'));
+        }
+
+        if ($this->isSitePage('site_unavailable_page')) {
             return $this->failure($this->modx->lexicon('resource_err_delete_siteunavailable'));
         }
 
@@ -118,6 +123,16 @@ class Delete extends Processor
         $outputArray['deletedCount'] = $deletedCount;
 
         return $this->success('', $outputArray);
+    }
+
+    /**
+     * Checks if the given resource is set as page specified in the system settings
+     * @return bool
+     */
+    public function isSitePage(string $option)
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption($option) || $this->resource->get('id') == $this->modx->getOption($option));
     }
 
     /**

@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\modDocument;
+use MODX\Revolution\modStaticResource;
 use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
@@ -28,50 +29,52 @@ use MODX\Revolution\modX;
 /**
  * Updates a resource.
  *
- * @param string $pagetitle The page title.
- * @param string $content The HTML content. Used in conjunction with $ta.
- * @param integer $template (optional) The modTemplate to use with this
+ * @param string $pagetitle         The page title.
+ * @param string $content           The HTML content. Used in conjunction with $ta.
+ * @param int    $template          (optional) The modTemplate to use with this
  * resource. Defaults to 0, or a blank template.
- * @param integer $parent (optional) The parent resource ID. Defaults to 0.
- * @param string $class_key (optional) The class key. Defaults to modDocument.
- * @param integer $menuindex (optional) The menu order. Defaults to 0.
+ * @param int    $parent            (optional) The parent resource ID. Defaults to 0.
+ * @param string $class_key         (optional) The class key. Defaults to modDocument.
+ * @param int    $menuindex         (optional) The menu order. Defaults to 0.
  * @param string $variablesmodified (optional) A collection of modified TVs.
  * Along with $tv1, $tv2, etc.
- * @param string $context_key (optional) The context in which this resource is
+ * @param string $context_key       (optional) The context in which this resource is
  * located. Defaults to web.
- * @param string $alias (optional) The alias for FURLs that this resource is
+ * @param string $alias             (optional) The alias for FURLs that this resource is
  * designated to.
- * @param integer $content_type (optional) The content type. Defaults to
+ * @param int     $content_type      (optional) The content type. Defaults to
  * text/html.
- * @param boolean $published (optional) The published status.
- * @param string $pub_date (optional) The date on which this resource should
+ * @param bool    $published         (optional) The published status.
+ * @param string  $pub_date          (optional) The date on which this resource should
  * become published.
- * @param string $unpub_date (optional) The date on which this resource should
+ * @param string  $unpub_date (optional) The date on which this resource should
  * become unpublished.
- * @param string $publishedon (optional) The date this resource was published.
+ * @param string  $publishedon (optional) The date this resource was published.
  * Defaults to time()
- * @param integer $publishedby (optional) The modUser who published this
+ * @param int     $publishedby (optional) The modUser who published this
  * resource. Defaults to the current user.
- * @param json $resource_groups (optional) A JSON array of resource groups to
+ * @param json    $resource_groups (optional) A JSON array of resource groups to
  * assign this resource to.
- * @param boolean $hidemenu (optional) If true, The resource will not show up in
+ * @param bool    $hidemenu (optional) If true, The resource will not show up in
  * menu builders.
- * @param boolean $isfolder (optional) Whether or not the resource is a
+ * @param bool    $isfolder (optional) Whether or not the resource is a
  * container of resources.
- * @param boolean $richtext (optional) If true, MODX will render the available
+ * @param bool    $richtext (optional) If true, MODX will render the available
  * RTE for editing this resource.
- * @param boolean $donthit (optional) (deprecated) If true, MODX will not log
+ * @param bool    $donthit (optional) (deprecated) If true, MODX will not log
  * visits on this resource.
- * @param boolean $cacheable (optional) If false, the resource will not be
+ * @param bool    $cacheable (optional) If false, the resource will not be
  * cached.
- * @param boolean $searchable (optional) If false, the resource will not appear
+ * @param bool    $searchable (optional) If false, the resource will not appear
  * in searches.
- * @param boolean $syncsite (optional) If false, will not empty the cache on
+ * @param bool    $syncsite (optional) If false, will not empty the cache on
  * save.
  * @return array
  */
 class Update extends UpdateProcessor
 {
+    use ActionAccessTrait;
+
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
     public $permission = 'save_document';
@@ -91,11 +94,11 @@ class Update extends UpdateProcessor
     public $template;
     /** @var modUser $lockedUser ; */
     public $lockedUser;
-    /** @var boolean $isSiteStart */
+    /** @var bool $isSiteStart */
     public $isSiteStart = false;
-    /** @var boolean $resourceDeleted */
+    /** @var bool $resourceDeleted */
     public $resourceDeleted = false;
-    /** @var boolean $resourceUnDeleted */
+    /** @var bool $resourceUnDeleted */
     public $resourceUnDeleted = false;
     /** @var modResource $oldParent */
     public $oldParent;
@@ -132,7 +135,7 @@ class Update extends UpdateProcessor
 
     /**
      * {@inheritDoc}
-     * @return boolean|string
+     * @return bool|string
      */
     public function beforeSet()
     {
@@ -147,7 +150,20 @@ class Update extends UpdateProcessor
 
         /* RTE workaround */
         $properties = $this->getProperties();
-        if (isset($properties['ta'])) $this->setProperty('content', $properties['ta']);
+        if (isset($properties['ta'])) {
+            $this->setProperty('content', $properties['ta']);
+        }
+
+        // Check if we have permission to **edit the current resource type**
+        if (!$this->checkActionPermission($this->object->get('class_key'), 'edit')) {
+            return $this->modx->lexicon('access_denied');
+        }
+        // If changing the resource type, check if we have permission to **create the selected resource type**
+        if (($this->object->get('class_key') !== $properties['class_key'])
+            && !$this->checkActionPermission($properties['class_key'], 'new')
+        ) {
+            return $this->modx->lexicon('access_denied');
+        }
 
         $this->workingContext = $this->modx->getContext($this->getProperty('context_key', $this->object->get('context_key') ? $this->object->get('context_key') : 'web'));
 
@@ -164,7 +180,7 @@ class Update extends UpdateProcessor
         $this->setUnPublishDate();
         $this->checkPublishedOn();
         $this->checkPublishingPermissions();
-        $result = $this->checkForUnPublishOnSiteStart();
+        $result = $this->checkForUnPublishOnSitePages();
         if ($result !== true) {
             return $result;
         }
@@ -198,8 +214,18 @@ class Update extends UpdateProcessor
     }
 
     /**
+     * Checks if the given resource is set as page specified in the system settings
+     * @return bool
+     */
+    public function isSitePage(string $option)
+    {
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
+        return ($this->resource->get('id') == $workingContext->getOption($option) || $this->resource->get('id') == $this->modx->getOption($option));
+    }
+
+    /**
      * Add a lock to the resource we are saving
-     * @return boolean
+     * @return bool
      */
     public function addLock()
     {
@@ -453,7 +479,7 @@ class Update extends UpdateProcessor
 
     /**
      * Deny publishing if the user does not have access to
-     * @return boolean
+     * @return bool
      */
     public function checkPublishingPermissions()
     {
@@ -477,30 +503,57 @@ class Update extends UpdateProcessor
     /**
      * Check to prevent unpublishing of site_start
      *
-     * @return boolean
+     * @return bool
      */
-    public function checkForUnPublishOnSiteStart()
+    public function checkForUnPublishOnSitePages()
     {
-        $passed = true;
+        $isSiteStart = $this->isSitePage('site_start');
+        $isSiteErrorPage = $this->isSitePage('error_page');
+        $isSiteUnavailablePage = $this->isSitePage('site_unavailable_page');
+        $deleted = $this->getProperty('deleted', null);
         $published = $this->getProperty('published', null);
         $publishDate = $this->getProperty('pub_date');
         $unPublishDate = $this->getProperty('unpub_date');
-        if ($this->isSiteStart && ($published !== null && empty($published))) {
-            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart');
-        } else if ($this->isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
-            $passed = $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
+
+        if ($isSiteStart && $deleted == 1) {
+            return $this->modx->lexicon('resource_err_delete_sitestart');
         }
-        return $passed;
+        if ($isSiteStart && $published == 0) {
+            return $this->modx->lexicon('resource_err_unpublish_sitestart');
+        }
+        if ($isSiteStart && (!empty($publishDate) || !empty($unPublishDate))) {
+            return $this->modx->lexicon('resource_err_unpublish_sitestart_dates');
+        }
+        if ($isSiteErrorPage && $deleted == 1) {
+            return $this->modx->lexicon('resource_err_delete_errorpage');
+        }
+        if ($isSiteErrorPage && $published == 0) {
+            return $this->modx->lexicon('resource_err_unpublish_errorpage');
+        }
+        if ($isSiteErrorPage && (!empty($publishDate) || !empty($unPublishDate))) {
+            return $this->modx->lexicon('resource_err_unpublish_errorpage_dates');
+        }
+        if ($isSiteUnavailablePage && $deleted == 1) {
+            return $this->modx->lexicon('resource_err_delete_siteunavailable');
+        }
+        if ($isSiteUnavailablePage && $published == 0) {
+            return $this->modx->lexicon('resource_err_unpublish_siteunavailable');
+        }
+        if ($isSiteUnavailablePage && (!empty($publishDate) || !empty($unPublishDate))) {
+            return $this->modx->lexicon('resource_err_unpublish_siteunavailable_dates');
+        }
+
+        return true;
     }
 
     /**
      * Check deleted status and ensure user has permissions to delete resource
-     * @return boolean
      */
-    public function checkDeletedStatus()
+    public function checkDeletedStatus(): bool
     {
-        $deleted = $this->getProperty('deleted', null);
-        if ($deleted !== null && $deleted != $this->object->get('deleted')) {
+        $deleted = $this->getProperty('deleted');
+
+        if ($deleted !== null && $deleted !== $this->object->get('deleted')) {
             if ($this->object->get('deleted')) { /* undelete */
                 if (!$this->modx->hasPermission('undelete_document')) {
                     $this->setProperty('deleted', $this->object->get('deleted'));
@@ -508,15 +561,29 @@ class Update extends UpdateProcessor
                     $this->object->set('deleted', false);
                     $this->resourceUnDeleted = true;
                 }
-            } else { /* delete */
-                if (!$this->modx->hasPermission('delete_document')) {
+            } else {
+                $hasPermission = $this->modx->hasPermission('delete_document');
+
+                $map = [
+                    modWebLink::class => 'delete_weblink',
+                    modSymLink::class => 'delete_symlink',
+                    modStaticResource::class => 'delete_resource',
+                ];
+
+                if (array_key_exists($this->object->get('class_key'), $map)) {
+                    $permission = $map[$this->object->get('class_key')];
+                    $hasPermission = $hasPermission && $this->modx->hasPermission($permission);
+                }
+
+                if (!$hasPermission) {
                     $this->setProperty('deleted', $this->object->get('deleted'));
                 } else {
-                    $this->object->set('deleted', true);
+                    $this->object->set('deleted',true);
                     $this->resourceDeleted = true;
                 }
             }
         }
+
         return $deleted;
     }
 
@@ -587,7 +654,7 @@ class Update extends UpdateProcessor
 
     /**
      * {@inheritDoc}
-     * @return boolean
+     * @return bool
      */
     public function beforeSave()
     {
@@ -598,7 +665,7 @@ class Update extends UpdateProcessor
 
     /**
      * {@inheritDoc}
-     * @return boolean
+     * @return bool
      */
     public function afterSave()
     {

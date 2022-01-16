@@ -148,8 +148,19 @@ MODx.grid.Package = function(config) {
     });
     MODx.grid.Package.superclass.constructor.call(this,config);
     this.on('render',function() {
-        this.getView().mainBody.update('<div class="x-grid-empty">' + _('loading') + '</div>');
-    },this);
+        this.mask = new Ext.LoadMask(this.body.dom, {
+            msg: _('checking_for_package_updates')
+        });
+        if (!this.loaded) {
+            this.mask.show();
+        }
+    }, this);
+    this.getStore().on('load', function(s) {
+        if (this.mask) {
+            this.mask.hide();
+        }
+        this.loaded = true;
+    }, this);
     this.on('afterrender', function () {
         this.uploader = new MODx.util.MultiUploadDialog.Upload({
             url: MODx.config.connector_url,

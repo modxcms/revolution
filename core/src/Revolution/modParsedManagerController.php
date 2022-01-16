@@ -51,7 +51,7 @@ HTML
     /**
      * @inheritDoc
      */
-    public function render()
+    public function render(): string
     {
         $html = parent::render();
         // Make controller placeholders available as modx placeholders

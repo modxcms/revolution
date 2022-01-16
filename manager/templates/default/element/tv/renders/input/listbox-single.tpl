@@ -8,11 +8,12 @@
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
-    var fld = MODx.load({
+    const fld = MODx.load({
     {/literal}
         xtype: 'combo'
         ,transform: 'tv{$tv->id}'
         ,id: 'tv{$tv->id}'
+        ,itemId: 'tv{$tv->id}'
         ,triggerAction: 'all'
         ,width: 400
         ,maxHeight: 300
@@ -34,7 +35,15 @@ Ext.onReady(function() {
         ,forceSelection: {if $params.forceSelection|default && $params.forceSelection|default != 'false'}true{else}false{/if}
         ,msgTarget: 'under'
     {literal}
-        ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            select: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            },
+            afterrender: function(cmp) {
+                cmp.clearInvalid();
+            }
+        }
     });
     Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });

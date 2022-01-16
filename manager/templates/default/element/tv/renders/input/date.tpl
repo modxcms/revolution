@@ -6,9 +6,10 @@
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
-    var fld = MODx.load({
+    const fld = MODx.load({
     {/literal}
         xtype: 'xdatetime'
+        ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
         ,name: 'tv{$tv->id}'
         ,dateFormat: MODx.config.manager_date_format
@@ -25,10 +26,17 @@ Ext.onReady(function() {
         ,dateWidth: 198
         ,timeWidth: 198
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
+        {if $tv->value != ''}
         ,value: '{$tv->value}'
+        {/if}
         ,msgTarget: 'under'
     {literal}
-        ,listeners: { 'change': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            change: { 
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            }
+        }
     });
     Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });

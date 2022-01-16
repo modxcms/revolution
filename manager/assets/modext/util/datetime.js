@@ -111,6 +111,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,minValue: this.minDateValue || ''
             ,startDay: this.startDay || 0
             ,allowBlank: this.allowBlank
+            ,msgTarget: this.msgTarget
             ,listeners:{
                   blur:{scope:this, fn:this.onBlur}
                  ,focus:{scope:this, fn:this.onFocus}
@@ -137,6 +138,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,minValue: this.minTimeValue || null
             ,hidden: this.hideTime
             ,allowBlank: this.allowBlank
+            ,msgTarget: this.msgTarget
             ,listeners:{
                   blur:{scope:this, fn:this.onBlur}
                  ,focus:{scope:this, fn:this.onFocus}
@@ -197,20 +199,52 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         this.df.el.swallowEvent(['keydown', 'keypress']);
         this.tf.el.swallowEvent(['keydown', 'keypress']);
 
-        // create icon for side invalid errorIcon
-        if('side' === this.msgTarget) {
-            var elp = this.el.findParent('.x-form-element', 10, true);
-            if(elp) {
-                this.errorIcon = elp.createChild({cls:'x-form-invalid-icon'});
-            }
+        switch (this.msgTarget) {
+            // create icon for side invalid errorIcon
+            /*
+                Note: This, intentionally or not, creates a single icon node
+                positioned at the end of the entire datetime element. Without this
+                case block, the default behaviour inserts two nodes (one at the end of
+                both the date and time elements).
+            */
+            case 'side':
+                const elp = this.el.findParent('.x-form-element', 10, true);
+                if (elp) {
+                    this.errorIcon = elp.createChild({cls: 'x-form-invalid-icon'});
+                }
+                const o = {
+                    errorIcon: this.errorIcon,
+                    msgTarget: 'side',
+                    alignErrorIcon: this.alignErrorIcon.createDelegate(this)
+                };
+                Ext.apply(this.df, o);
+                Ext.apply(this.tf, o);
+                break;
 
-            var o = {
-                 errorIcon:this.errorIcon
-                ,msgTarget:'side'
-                ,alignErrorIcon:this.alignErrorIcon.createDelegate(this)
-            };
-            Ext.apply(this.df, o);
-            Ext.apply(this.tf, o);
+            // create custom message targets for date and time fields
+            case 'under':
+                const   dateMsgElId = `ux-datetime-date-msg-${this.itemId}`,
+                        dateMsgWidth = Math.ceil(this.dateWidth - 30),
+                        dateMsgEl = Ext.DomHelper.append(this.df.container, {
+                            tag: 'div',
+                            cls: 'x-form-invalid-msg',
+                            style: `display: none; width: ${dateMsgWidth}px;`,
+                            id: dateMsgElId
+                        }),
+                        timeMsgElId = `ux-datetime-time-msg-${this.itemId}`,
+                        timeMsgWidth = Math.ceil(this.timeWidth - 30),
+                        timeMsgEl = Ext.DomHelper.append(this.tf.container, {
+                            tag: 'div',
+                            cls: 'x-form-invalid-msg',
+                            style: `display: none; width: ${timeMsgWidth}px;`,
+                            id: timeMsgElId
+                        })
+                ;
+                this.df.container.appendChild(dateMsgEl);
+                this.tf.container.appendChild(timeMsgEl);
+                this.df.msgTarget = dateMsgElId;
+                this.tf.msgTarget = timeMsgElId;
+                break;
         }
 
         // setup name for submit
@@ -355,10 +389,9 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         }
 
         // update underlying value
-        if(f === this.df) {
+        if (f === this.df) {
             this.updateDate();
-        }
-        else {
+        } else {
             this.updateTime();
         }
         this.updateHidden();
@@ -404,10 +437,12 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         var key = e.getKey();
         if(key === e.TAB) {
             if(t === this.df && !e.shiftKey) {
+                this.onBlur(t);
                 e.stopEvent();
                 this.tf.focus();
             }
             if(t === this.tf && e.shiftKey) {
+                this.onBlur(t);
                 e.stopEvent();
                 this.df.focus();
             }

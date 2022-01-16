@@ -79,4 +79,10 @@ class WebLinkUpdateManagerController extends ResourceUpdateManagerController
 
         return $placeholders;
     }
+
+    public function checkPermissions(): bool
+    {
+        return $this->modx->hasPermission('edit_document')
+            && $this->modx->hasPermission('edit_weblink');
+    }
 }

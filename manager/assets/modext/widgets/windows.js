@@ -777,7 +777,7 @@ MODx.window.QuickCreateTV = function(config) {
                 },{
                     xtype: 'label'
                     ,forId: 'modx-'+this.ident+'-elements'
-                    ,html: _('tv_elements_desc')
+                    ,html: _('tv_elements_short_desc')
                     ,cls: 'desc-under'
                 },{
                     xtype: 'textarea'

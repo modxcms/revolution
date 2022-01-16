@@ -9,9 +9,10 @@
 // <![CDATA[
 {literal}
 Ext.onReady(function() {
-    var fld = MODx.load({
+    const fld = MODx.load({
     {/literal}
         xtype: 'textfield'
+        ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
         ,width: '99%'
         ,enableKeyEvents: true
@@ -22,7 +23,12 @@ Ext.onReady(function() {
         {if $params.regex|default},regex: new RegExp(/{$params.regex|default|escape}/){/if}
         {if $params.regexText|default},regexText: '{$params.regexText|default|escape}'{/if}
     {literal}
-        ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            keydown: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            }
+        }
     });
     Ext.getCmp('modx-panel-resource').getForm().add(fld);
     MODx.makeDroppable(fld);

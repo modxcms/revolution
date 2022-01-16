@@ -72,6 +72,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                     Ext.get(n.getUI().getEl()).frame();
                     n.attributes.data.id = c.id;
                     n.attributes.data.category = c.category;
+                    n.attributes.data.rank = c.rank;
                 },scope:this}
                 ,'hide':{fn:function() {this.destroy();}}
             }
@@ -426,6 +427,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             });
         }
         if (ui.hasClass('pdelete')) {
+            m.push('-');
             m.push({
                 text: _('remove_'+a.type)
                 ,handler: this.removeElement

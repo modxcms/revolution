@@ -16,7 +16,7 @@
 // <![CDATA[
 Ext.onReady(function() {
     MODx.makeDroppable(Ext.get('tv{$tv->id}'));
-    var fld = MODx.load({
+    const protocols = MODx.load({
         xtype: 'combo'
         ,transform: 'tv{$tv->id}_prefix'
         ,id: 'tv{$tv->id}_prefix'
@@ -27,19 +27,30 @@ Ext.onReady(function() {
         ,forceSelection: false
         ,allowBlank: true
         ,msgTarget: 'under'
-        ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            select: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            }
+        }
     });
-    fld.wrap.applyStyles({
+    protocols.wrap.applyStyles({
         display: "inline-block"
     });
 
-    var fld = MODx.load({
+    const fld = MODx.load({
         xtype: 'textfield'
+        ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-        ,listeners: { 'keydown': { fn:MODx.fireResourceFormChange, scope:this}}
+        ,listeners: {
+            keydown: {
+                fn: MODx.fireResourceFormChange,
+                scope: this
+            }
+        }
     });
     MODx.makeDroppable(fld);
     Ext.getCmp('modx-panel-resource').getForm().add(fld);

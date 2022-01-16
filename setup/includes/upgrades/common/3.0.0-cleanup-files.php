@@ -205,6 +205,9 @@ $cleanup = [
         'lexicon/uk/import.inc.php',
         'lexicon/yo/import.inc.php',
         'lexicon/zh/import.inc.php',
+
+        // remove unused processor present until beta2
+        'src/Revolution/Processors/Security/User/Group/',
     ],
     'manager' => [
         'min/',
@@ -258,6 +261,9 @@ foreach ($cleanup as $folder => $files) {
 
 $this->runner->addResult(
     modInstallRunner::RESULT_SUCCESS,
-    '<p class="ok">'.$this->install->lexicon('legacy_cleanup_complete').
-    '<br /><small>'.$this->install->lexicon('legacy_cleanup_count', ['files' => $removedFiles, 'folders' => $removedDirs]).'</small></p>'
+    '<p class="ok">' . $this->install->lexicon('legacy_cleanup_complete') .
+    '<br /><small>' . $this->install->lexicon(
+        'legacy_cleanup_count',
+        ['files' => $removedFiles, 'folders' => $removedDirs]
+    ) . '</small></p>'
 );

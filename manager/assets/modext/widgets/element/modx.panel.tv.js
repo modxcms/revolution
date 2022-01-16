@@ -127,11 +127,9 @@ MODx.panel.TV = function(config) {
                                 ,tabIndex: 2
                                 ,listeners: {
                                     afterrender: {scope:this,fn:function(f,e) {
-                                        setTimeout(function(){
                                             MODx.setStaticElementPath('tv');
-                                        }, 200);
                                     }}
-                                    ,change: {scope:this,fn:function(f,e) {
+                                    ,select: {scope:this,fn:function(f,e) {
                                         MODx.setStaticElementPath('tv');
                                     }}
                                 }

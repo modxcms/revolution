@@ -83,6 +83,7 @@ $_lang['file_package_err_invalid_name'] = 'Tento soubor [[+name]] má neplatný 
 $_lang['file_package_err_invalid_type'] = 'Tento soubor se nezdá být přepravním balíčkem';
 $_lang['file_remove'] = 'Odstranit soubor';
 $_lang['file_remove_confirm'] = 'Jste si jisti, že chcete odstranit soubor: "[[+file]]"?<br />Odstranění souboru může potenciálně poškodit vaše webové stránky. Před odstraněním souboru se ujistěte, že víte, co tento soubor dělá.';
+$_lang['file_rename'] = 'Přejmenovat soubor';
 $_lang['file_saved'] = 'Aktualizace souboru proběhla úspěšně!';
 $_lang['file_size'] = 'Velikost souboru';
 $_lang['file_size_bytes'] = 'bajtů';

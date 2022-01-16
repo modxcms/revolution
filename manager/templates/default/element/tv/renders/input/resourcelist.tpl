@@ -13,11 +13,12 @@ Ext.onReady(function() {
         xtype: 'combo'
         ,transform: 'tv{$tv->id}'
         ,id: 'tv{$tv->id}'
+        ,itemId: 'tv{$tv->id}'
         ,triggerAction: 'all'
+        ,listClass: 'modx-tv-resourcelist'
         ,width: 400
         ,maxHeight: 300
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
-
         {if $params.title|default}
             ,title: '{$params.title|default|escape}'
         {/if}
@@ -34,22 +35,22 @@ Ext.onReady(function() {
             ,typeAhead: false
             ,editable: false
         {/if}
+        {literal}
         ,forceSelection: true
         ,msgTarget: 'under'
-
-        {if $params.allowBlank == 1 || $params.allowBlank == 'true'}
-        {else}
-        {literal}
-        ,validator: function(v) {
-            if (Ext.isEmpty(v) || v == '' || v == '-') {
-                return _('field_required');
+        ,listeners: {
+            select: function(cmp, record, selectedIndex) {
+                MODx.fireResourceFormChange();
+                if (cmp.lastSelectionText === '-') {
+                    cmp.setRawValue('');
+                }
+            },
+            afterrender: function(cmp) {
+                if (cmp.lastSelectionText === '-') {
+                    cmp.setRawValue('');
+                }
             }
-            return true;
         }
-        {/literal}
-        {/if}
-        {literal}
-        ,listeners: { 'select': { fn:MODx.fireResourceFormChange, scope:this}}
     });
     Ext.getCmp('modx-panel-resource').getForm().add(fld);
 });

@@ -127,6 +127,8 @@ $_lang['number_allowdecimals'] = 'Дазволіць дзесятковыя';
 $_lang['number_allownegative'] = 'Allow Negative';
 $_lang['number_decimalprecision'] = 'Precision';
 $_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
+$_lang['number_decimalprecision_strict'] = 'Strict Decimal Precision';
+$_lang['number_decimalprecision_strict_desc'] = 'When set to “Yes,” preserves trailing zeros in decimal numbers (defaults to “No”).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Separator';
 $_lang['number_decimalseparator_desc'] = 'The character used as the decimal separator. (Default: “.”)';
@@ -238,8 +240,6 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_daterange_elements_desc'] = 'Test options desc for daterange with example ph: [[+ex1]]';
-$_lang['tv_daterange_default_text_desc'] = 'Test default text desc for daterange with example ph: [[+ex1]]';
 $_lang['tv_type'] = 'Input Type';
 $_lang['upper_case'] = 'Верхні рэгістр';
 $_lang['url'] = 'URL';
