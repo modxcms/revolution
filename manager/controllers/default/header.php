@@ -197,7 +197,7 @@ class TopMenu
             $menuTpl .= '</li>'."\n";
 
             if (!empty($menu['children'])) {
-                $this->submenus .= '<ul id="limenu-'.$menu['id'].'-submenu"class="modx-subnav">';
+                $this->submenus .= '<ul id="limenu-' . $menu['id'] . '-submenu" class="modx-subnav modx-subnav-' . $menu['parent'] . '">';
                 $this->processSubMenus($this->submenus, $menu['children']);
                 $this->submenus .= '<div class="modx-subnav-arrow"></div></ul>';
             }
