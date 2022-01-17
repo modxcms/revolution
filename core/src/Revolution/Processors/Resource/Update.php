@@ -219,8 +219,8 @@ class Update extends UpdateProcessor
      */
     public function isSitePage(string $option)
     {
-        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
-        return ($this->resource->get('id') == $workingContext->getOption($option) || $this->resource->get('id') == $this->modx->getOption($option));
+        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->object->get('context_key') ? $this->object->get('context_key') : 'web'));
+        return ($this->object->get('id') == $workingContext->getOption($option) || $this->object->get('id') == $this->modx->getOption($option));
     }
 
     /**
