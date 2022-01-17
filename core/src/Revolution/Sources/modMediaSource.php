@@ -1944,11 +1944,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'original_height' => $original['height'],
             // preview
             'preview' => $preview,
-            'image' => $preview_image_info['src'],
+            'image' => $preview_image_info['src'] ?? '',
             'image_width' => $preview_image_info['width'],
             'image_height' => $preview_image_info['height'],
             // thumb
-            'thumb' => $thumb_image_info['src'],
+            'thumb' => $thumb_image_info['src'] ?? '',
             'thumb_width' => $thumb_image_info['width'],
             'thumb_height' => $thumb_image_info['height'],
 
@@ -1969,7 +1969,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         if ($this->visibility_files && $visibility) {
             $file_list['visibility'] = $visibility;
         }
-        $file_list['menu'] = $this->getListFileContextMenu($path, !empty($page));
 
         return $file_list;
     }
