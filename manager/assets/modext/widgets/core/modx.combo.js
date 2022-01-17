@@ -109,7 +109,8 @@ MODx.combo.ComboBox = function(config,getStore) {
         this.fireEvent('loaded', this);
         this.loaded = true;
         // Show the pagination panel if it didn't show up earlier
-        if (this.isExpanded() && this.pageSize < this.store.getTotalCount() && this.pageTb.hidden === true) {
+        if (this.isExpanded() && this.pageSize < this.store.getTotalCount()
+            && typeof this.pageTb !== 'undefined' && this.pageTb.hidden === true) {
             this.collapse();
             this.expand();
         }
@@ -124,10 +125,10 @@ Ext.extend(MODx.combo.ComboBox,Ext.form.ComboBox, {
             return;
         }
 
-        // unfortunately there is no default indicator wether a combo is open or not, so we add a class here
+        // unfortunately there is no default indicator for whether a combo is open or not, so we add a class here
         this.wrap.addClass('x-trigger-wrap-open');
 
-        if (this.mode == 'remote' && !this.loaded && this.tries < 4) {
+        if (this.mode === 'remote' && !this.loaded && this.tries < 4) {
             // Store not yet loaded, let's wait a little bit
             this.tries += 1;
             Ext.defer(this.expand, 250, this);
