@@ -84,7 +84,7 @@ abstract class modDashboardWidgetInterface
             $widgetArray['content'] = $output;
             $widgetArray['class'] = $this->cssBlockClass;
             $output = $this->getFileChunk('dashboard/block.tpl',$widgetArray);
-            $output = preg_replace('/\[\[([^\[\]]++|(?R))*?]]/s','',$output);
+            $output = preg_replace('/\[\[([^\[\]]++|(?R))*?]]/s', '', $output);
         }
         return $output;
     }
