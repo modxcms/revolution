@@ -238,50 +238,49 @@
   .table-wrapper {
     width: 100%;
     overflow: auto;
-  }
+    table {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
 
-  table {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-
-    th {
-      font-weight: bold;
-      text-align: initial;
-      padding: 10px;
-      border-bottom: 2px solid $lighterGray;
-    }
-
-    td {
-      padding: 10px;
-      border-bottom: 1px solid $lighterGray;
-      white-space: nowrap;
-      vertical-align: center;
-
-      .unpublished {
-        font-style: italic;
-        color: $mediumGray;
+      th {
+        font-weight: bold;
+        text-align: initial;
+        padding: 10px;
+        border-bottom: 2px solid $lighterGray;
       }
 
-      .deleted {
-        color: $delTextColor;
-        text-decoration: $delTextDeco;
-      }
-    }
-
-    tr:last-child {
       td {
-        border: none;
+        padding: 10px;
+        border-bottom: 1px solid $lighterGray;
+        white-space: nowrap;
+        vertical-align: center;
 
-        tr:last-child td {
+        .unpublished {
+          font-style: italic;
+          color: $mediumGray;
+        }
+
+        .deleted {
+          color: $delTextColor;
+          text-decoration: $delTextDeco;
+        }
+      }
+
+      tr:last-child {
+        td {
           border: none;
 
-          &:first-child {
-            border-bottom-left-radius: 10px;
-          }
+          tr:last-child td {
+            border: none;
 
-          &:last-child {
-            border-bottom-right-radius: 10px;
+            &:first-child {
+              border-bottom-left-radius: 10px;
+            }
+
+            &:last-child {
+              border-bottom-right-radius: 10px;
+            }
           }
         }
       }
