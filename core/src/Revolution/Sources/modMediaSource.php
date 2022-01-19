@@ -2061,7 +2061,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $menu = [];
         $menu[] = [
-            'text' => '<b>' . $dirName . '</b>',
+            'text' => '<b>' . htmlentities($dirName) . '</b>',
             'handler' => '',
             'header' => true,
         ];
@@ -2138,7 +2138,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $menu = [];
         $menu[] = [
-            'text' => '<b>' . $fileName . '</b>',
+            'text' => '<b>' . htmlentities($fileName) . '</b>',
             'handler' => '',
             'header' => true,
         ];
