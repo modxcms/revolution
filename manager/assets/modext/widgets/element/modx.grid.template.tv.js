@@ -91,7 +91,7 @@ MODx.grid.TemplateTV = function(config) {
             ,name: 'search'
             ,id: 'modx-temptv-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
                 ,'render': {fn: function(cmp) {

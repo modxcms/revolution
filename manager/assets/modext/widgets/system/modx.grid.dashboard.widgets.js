@@ -67,7 +67,7 @@ MODx.grid.DashboardWidgets = function(config) {
             ,name: 'search'
             ,id: 'modx-dashboard-widget-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
                 ,'render': {fn: function(cmp) {
@@ -154,7 +154,7 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('widget_remove_multiple')
+            title: _('selected_remove')
             ,text: _('widget_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {

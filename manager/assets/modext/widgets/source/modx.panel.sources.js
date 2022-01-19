@@ -117,7 +117,7 @@ MODx.grid.Sources = function(config) {
             ,name: 'search'
             ,id: 'modx-source-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,value: MODx.request.query
             ,listeners: {
                 'change': {
@@ -241,7 +241,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('source_remove_multiple')
+            title: _('selected_remove')
             ,text: _('source_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {

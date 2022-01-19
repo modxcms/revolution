@@ -91,7 +91,7 @@ MODx.grid.PluginEvent = function(config) {
             ,name: 'search'
             ,id: 'modx-plugin-event-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
                 ,'render': {fn: function(cmp) {

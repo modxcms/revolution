@@ -101,7 +101,7 @@ MODx.grid.FCSet = function(config) {
                 ,scope: this
             }]
         },{
-            text: _('import_from_xml')
+            text: _('import')
             ,handler: this.importSet
             ,scope: this
         },'->',{
@@ -109,7 +109,7 @@ MODx.grid.FCSet = function(config) {
             ,name: 'search'
             ,id: 'modx-fcs-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('filter_by_search')
+            ,emptyText: _('search')
             ,value: MODx.request.search
             ,listeners: {
                 'change': {
@@ -380,7 +380,7 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('set_remove_multiple')
+            title: _('selected_remove')
             ,text: _('set_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
@@ -521,7 +521,7 @@ Ext.reg('modx-window-fc-set-create',MODx.window.CreateFCSet);
 MODx.window.ImportFCSet = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        title: _('import_from_xml')
+        title: _('import')
         ,id: 'modx-window-fc-set-import'
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Set/Import'

@@ -101,7 +101,7 @@ MODx.grid.Lexicon = function(config) {
             ,id: 'modx-lexicon-filter-search'
             ,cls: 'x-form-filter'
             ,itemId: 'search'
-            ,emptyText: _('search_by_key')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
                 ,'render': {fn: function(cmp) {
@@ -338,7 +338,7 @@ MODx.window.ExportLexicon = function(config) {
     this.ident = config.ident || 'explex'+Ext.id();
     var r = config.record;
     Ext.applyIf(config,{
-        title: _('lexicon_export')
+        title: _('export')
         ,url: MODx.config.connector_url
         ,action: 'workspace/lexicon/export'
         ,fileUpload: true
