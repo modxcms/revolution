@@ -577,10 +577,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     public function getObjectContents($path)
     {
         try {
-            if (!$file = $this->filesystem->read($path)) {
+            if (!$this->filesystem->fileExists($path)) {
                 $this->addError('file', $this->xpdo->lexicon('file_err_nf'));
                 return [];
             }
+            $content = $this->filesystem->read($path);
         } catch (FilesystemException | UnableToReadFile $e) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return [];
@@ -596,7 +597,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'size' => $this->filesystem->fileSize($path),
                 'last_accessed' => $this->filesystem->lastModified($path), // We only have lastModified() here.
                 'last_modified' => $this->filesystem->lastModified($path),
-                'content' => $file,
+                'content' => $content,
                 'mime' => $this->filesystem->mimeType($path),
                 'image' => $this->isFileImage($path, $imageExtensions),
             ];
