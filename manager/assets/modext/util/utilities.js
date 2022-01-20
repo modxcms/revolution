@@ -214,7 +214,10 @@ MODx.util.safeHtml = (input, allowedTags, allowedAttributes) => {
         .match(/[a-z\-,]*/g) || [])
         .join('')
         .concat(',');
-    input = input.replace(commentsAndPhpTags, '').replace(hrefJavascript, 'href="javascript:void(0)"');
+    input = input
+        .replace(commentsAndPhpTags, '')
+        .replace(hrefJavascript, 'href="javascript:void(0)"')
+    ;
     do {
         length = input.length;
         input = strip(input, allowedTags, allowedAttributes);
