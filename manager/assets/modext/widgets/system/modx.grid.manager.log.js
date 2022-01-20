@@ -215,9 +215,9 @@ Ext.extend(MODx.grid.ManagerLog,MODx.grid.Grid, {
         if (MODx.perm.mgr_log_erase === true) {
             tbar.push({
                 xtype: 'button'
-                , text: _('mgrlog_clear')
-                , scope: this
-                , handler: function () {
+                ,text: _('mgrlog_clear')
+                ,scope: this
+                ,handler: function () {
                     var fp = Ext.getCmp(this.config.formpanel);
                     if (fp) {
                         fp.clearLog();
