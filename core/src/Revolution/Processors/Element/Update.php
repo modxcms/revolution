@@ -59,13 +59,26 @@ abstract class Update extends UpdateProcessor
         $elementClassName = array_pop(explode('\\', $this->classKey));
 
         if ($elementClassName === 'modTemplateVar') {
-            if ($caption = $this->getProperty('caption', '')) {
-                $this->object->set('caption', strip_tags($caption));
+            if ($caption = trim($this->getProperty('caption', ''))) {
+                $caption = $this->modx->stripHtml(
+                    $caption,
+                    $this->modx->getOption('elements_caption_allowedtags'),
+                    $this->modx->getOption('elements_caption_allowedattr')
+                );
+                $this->object->set('caption', $caption);
             }
         }
 
-        if ($description = $this->getProperty('description', '')) {
-            $this->object->set('description', strip_tags($description));
+        if ($description = trim($this->getProperty('description', ''))) {
+            $description = $elementClassName === 'modTemplateVar'
+                ? $this->modx->stripHtml(
+                    $description,
+                    $this->modx->getOption('elements_description_allowedtags'),
+                    $this->modx->getOption('elements_description_allowedattr')
+                )
+                : strip_tags($description)
+                ;
+            $this->object->set('description', $description);
         }
 
         /* verify element has a name and that name does not already exist */

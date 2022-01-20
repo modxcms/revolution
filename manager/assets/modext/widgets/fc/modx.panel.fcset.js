@@ -475,7 +475,14 @@ MODx.grid.FCSetTVs = function(config) {
     this.propRecord = Ext.data.Record.create(config.fields);
     this.on('afteredit', function(e) {
         if (e.field === 'label') {
-            const value = MODx.util.stripAndEncode.run(e.value);
+            let value = e.value.trim();
+            if (value.length > 0) {
+                value = MODx.util.safeHtml(
+                    value,
+                    MODx.config.elements_caption_allowedtags,
+                    MODx.config.elements_caption_allowedattr
+                )
+            }
             e.record.set('label', value);
             e.record.commit();
         }

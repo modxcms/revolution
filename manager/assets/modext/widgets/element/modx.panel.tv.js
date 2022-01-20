@@ -101,7 +101,12 @@ MODx.panel.TV = function(config) {
                                         ,scope: this
                                     },
                                     change: {
-                                        fn: MODx.util.stripAndEncode.onChange
+                                        fn: function(cmp) {
+                                            const value = cmp.getValue().trim();
+                                            if (value.length > 0) {
+                                                cmp.setValue(Ext.util.Format.stripTags(value));
+                                            }
+                                        }
                                     },
                                     blur: {
                                         fn: function(cmp) {
@@ -143,7 +148,7 @@ MODx.panel.TV = function(config) {
                                 ,tabIndex: 2
                                 ,listeners: {
                                     afterrender: {scope:this,fn:function(f,e) {
-                                            MODx.setStaticElementPath('tv');
+                                        MODx.setStaticElementPath('tv');
                                     }}
                                     ,select: {scope:this,fn:function(f,e) {
                                         MODx.setStaticElementPath('tv');
@@ -187,7 +192,16 @@ MODx.panel.TV = function(config) {
                                 ,value: config.record.caption
                                 ,listeners: {
                                     change: {
-                                        fn: MODx.util.stripAndEncode.onChange
+                                        fn: function(cmp) {
+                                            const value = cmp.getValue().trim();
+                                                if (value.length > 0) {
+                                                cmp.setValue(MODx.util.safeHtml(
+                                                    value,
+                                                    MODx.config.elements_caption_allowedtags,
+                                                    MODx.config.elements_caption_allowedattr
+                                                ));
+                                            }
+                                        }
                                     }
                                 }
                             },{
@@ -254,7 +268,16 @@ MODx.panel.TV = function(config) {
                                 ,value: config.record.description || ''
                                 ,listeners: {
                                     change: {
-                                        fn: MODx.util.stripAndEncode.onChange
+                                        fn: function(cmp) {
+                                            const value = cmp.getValue().trim();
+                                            if (value.length > 0) {
+                                                cmp.setValue(MODx.util.safeHtml(
+                                                    value,
+                                                    MODx.config.elements_description_allowedtags,
+                                                    MODx.config.elements_description_allowedattr
+                                                ));
+                                            }
+                                        }
                                     }
                                 }
                             },{

@@ -806,7 +806,12 @@ MODx.window.QuickCreateTV = function(config) {
                     ,blankText: _('tv_err_ns_name')
                     ,listeners: {
                         change: {
-                            fn: MODx.util.stripAndEncode.onChange
+                            fn: function(cmp) {
+                                const value = cmp.getValue().trim();
+                                if (value.length > 0) {
+                                    cmp.setValue(Ext.util.Format.stripTags(value));
+                                }
+                            }
                         }
                     }
                 },{
@@ -817,7 +822,16 @@ MODx.window.QuickCreateTV = function(config) {
                     ,anchor: '100%'
                     ,listeners: {
                         change: {
-                            fn: MODx.util.stripAndEncode.onChange
+                            fn: function(cmp) {
+                                const value = cmp.getValue().trim();
+                                    if (value.length > 0) {
+                                    cmp.setValue(MODx.util.safeHtml(
+                                        value,
+                                        MODx.config.elements_caption_allowedtags,
+                                        MODx.config.elements_caption_allowedattr
+                                    ));
+                                }
+                            }
                         }
                     }
                 },{
@@ -837,7 +851,16 @@ MODx.window.QuickCreateTV = function(config) {
                     ,anchor: '100%'
                     ,listeners: {
                         change: {
-                            fn: MODx.util.stripAndEncode.onChange
+                            fn: function(cmp) {
+                                const value = cmp.getValue().trim();
+                                if (value.length > 0) {
+                                    cmp.setValue(MODx.util.safeHtml(
+                                        value,
+                                        MODx.config.elements_description_allowedtags,
+                                        MODx.config.elements_description_allowedattr
+                                    ));
+                                }
+                            }
                         }
                     }
                 }]
