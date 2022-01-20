@@ -8,11 +8,11 @@
  */
 $_lang['help_page_title'] = 'Ajuda & Suporte';
 $_lang['help_main_head'] = 'MODX está aqui para você';
-$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/resources/free-support-options">modx.com/resources/free-support-options</a> or call +1 (469) 777-6639';
+$_lang['help_main_subhead'] = 'Para obter ajuda que você precisa para seu projeto MODX<br>Veja mais detalhes em <a href="https://modx.com/resources/free-support-options">modx.com/resources/free-support-options</a> ou ligue para +1 (469) 777-6639';
 $_lang['forums'] = 'Fóruns';
 $_lang['forums_title'] = 'Fóruns da Comunidade MODX';
 $_lang['forums_description'] = 'Ajuda grátis da Comunidade';
-$_lang['forums_link'] = 'https://community.modx.com/';
+$_lang['forums_link'] = 'http://forums.modx.com/';
 $_lang['docs'] = 'Documentação';
 $_lang['docs_title'] = 'Leia o fabuloso Manual (do MODX)';
 $_lang['docs_description'] = 'Leia os manuais oficiais do MODX';
@@ -33,5 +33,5 @@ $_lang['social_follows'] = 'Você também pode <b>seguir MODX</b> nestes canais.
 $_lang['follow'] = 'Siga MODX';
 $_lang['like'] = 'Curta MODX';
 $_lang['circle'] = 'Adicione MODX aos Circulos';
-$_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/solutions/services" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
-$_lang['help_credit'] = 'MODX is free open source software licensed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">GPL version 2.0</a> or later. Copyright 2005-[[+current_year]] by MODX, LLC. “MODX” is a registered trademark. Do the right thing—please keep this credit and the other information on this page intact.';
+$_lang['help_about'] = 'O software MODX® que você está usando é o resultado da colaboração com uma incrível comunidade de usuários, apoiadores e desenvolvedores. Desde 2004, a equipe por trás do MODX patrocinou e conseguiu, financiando o trabalho em curso através de suporte comercial e recursos encomendados. Você pode <a href="https://modx.com/solutions/services" class="supportTicket">comprar suporte </a> para obter uma assitência de emergência (também pode ser usado por duas horas de suporte não prioritário). Ou <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">mande-nos um e-mail</a> se você tiver alguma dúvida sobre o MODX.';
+$_lang['help_credit'] = 'MODX é um software de código aberto e livre, licenciado sob a <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">GPL versão 2.0</a> ou posterior. Copyright 2005-[[+current_year]] por MODX, LLC. "MODX" é uma marca registrada. Faça a coisa certa — por favor, mantenha intactos este crédito e outras informações nesta página.';
