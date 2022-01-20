@@ -24,7 +24,7 @@ class Truncate extends Processor
      */
     public function checkPermissions()
     {
-        return $this->modx->hasPermission('logs');
+        return $this->modx->hasPermission('mgr_log_erase');
     }
 
     /**
@@ -33,7 +33,7 @@ class Truncate extends Processor
     public function process()
     {
         $this->modx->exec("TRUNCATE {$this->modx->getTableName(modManagerLog::class)}");
-        
+
         return $this->success();
     }
 }

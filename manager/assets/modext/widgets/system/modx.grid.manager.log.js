@@ -193,7 +193,13 @@ MODx.grid.ManagerLog = function(config) {
             ,width: 300
             ,renderer: Ext.util.Format.htmlEncode
         }]
-        ,tbar: [{
+        ,tbar: this.getTbar()
+    });
+    MODx.grid.ManagerLog.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.grid.ManagerLog,MODx.grid.Grid, {
+    getTbar: function() {
+        var tbar = [{
             xtype: 'button'
             ,text: _('filter_clear')
             ,cls: 'primary-button'
@@ -205,19 +211,22 @@ MODx.grid.ManagerLog = function(config) {
                     fp.filter();
                 }
             }
-        },'->',{
-            xtype: 'button'
-            ,text: _('mgrlog_clear')
-            ,scope: this
-            ,handler: function() {
-                var fp = Ext.getCmp(this.config.formpanel);
-                if (fp) {
-                    fp.clearLog();
+        },'->'];
+        if (MODx.perm.mgr_log_erase === true) {
+            tbar.push({
+                xtype: 'button'
+                , text: _('mgrlog_clear')
+                , scope: this
+                , handler: function () {
+                    var fp = Ext.getCmp(this.config.formpanel);
+                    if (fp) {
+                        fp.clearLog();
+                    }
                 }
-            }
-        }]
-    });
-    MODx.grid.ManagerLog.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.grid.ManagerLog,MODx.grid.Grid);
+            });
+        }
+
+        return tbar;
+    }
+});
 Ext.reg('modx-grid-manager-log',MODx.grid.ManagerLog);
