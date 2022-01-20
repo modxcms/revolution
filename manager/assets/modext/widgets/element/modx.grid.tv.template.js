@@ -66,7 +66,7 @@ MODx.grid.TemplateVarTemplate = function(config) {
             xtype: 'textfield'
             ,name: 'query'
             ,id: 'modx-tvtemp-search'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
                 ,'render': {fn: function(cmp) {

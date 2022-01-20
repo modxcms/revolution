@@ -103,7 +103,7 @@ MODx.grid.Trash = function (config) {
             xtype: 'textfield',
             id: 'modx-trash-search',
             cls: 'x-form-filter',
-            emptyText: _('search_ellipsis'),
+            emptyText: _('search'),
             listeners: {
                 'change': {fn: this.search, scope: this},
                 'render': {

@@ -103,7 +103,7 @@ MODx.grid.AccessPolicy = function(config) {
         },{
             text: _('bulk_actions')
             ,menu: [{
-                text: _('policy_remove_multiple')
+                text: _('selected_remove')
                 ,handler: this.removeSelected
                 ,scope: this
             }]
@@ -112,7 +112,7 @@ MODx.grid.AccessPolicy = function(config) {
             ,name: 'search'
             ,id: 'modx-policy-search'
             ,cls: 'x-form-filter'
-            ,emptyText: _('search_ellipsis')
+            ,emptyText: _('search')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
                 ,'render': {fn: function(cmp) {
@@ -219,7 +219,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         var m = [];
         if (this.getSelectionModel().getCount() > 1) {
             m.push({
-                text: _('policy_remove_multiple')
+                text: _('selected_remove')
                 ,handler: this.removeSelected
             });
         } else {
@@ -235,7 +235,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
             }
             if (m.length > 0) { m.push('-'); }
             m.push({
-                text: _('policy_export')
+                text: _('export')
                 ,handler: this.exportPolicy
             });
             if (p.indexOf('premove') != -1) {
@@ -257,7 +257,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         if (cs === false) return false;
 
         MODx.msg.confirm({
-            title: _('policy_remove_multiple')
+            title: _('selected_remove')
             ,text: _('policy_remove_multiple_confirm')
             ,url: this.config.url
             ,params: {
@@ -385,7 +385,7 @@ MODx.window.ImportPolicy = function(config) {
     config = config || {};
     this.ident = config.ident || 'imppol-'+Ext.id();
     Ext.applyIf(config,{
-        title: _('policy_import')
+        title: _('import')
         ,id: 'modx-window-policy-import'
         ,url: MODx.config.connector_url
         ,action: 'Security/Access/Policy/Import'

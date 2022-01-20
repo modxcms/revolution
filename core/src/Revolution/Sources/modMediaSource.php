@@ -577,10 +577,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     public function getObjectContents($path)
     {
         try {
-            if (!$file = $this->filesystem->read($path)) {
+            if (!$this->filesystem->fileExists($path)) {
                 $this->addError('file', $this->xpdo->lexicon('file_err_nf'));
                 return [];
             }
+            $content = $this->filesystem->read($path);
         } catch (FilesystemException | UnableToReadFile $e) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return [];
@@ -596,7 +597,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'size' => $this->filesystem->fileSize($path),
                 'last_accessed' => $this->filesystem->lastModified($path), // We only have lastModified() here.
                 'last_modified' => $this->filesystem->lastModified($path),
-                'content' => $file,
+                'content' => $content,
                 'mime' => $this->filesystem->mimeType($path),
                 'image' => $this->isFileImage($path, $imageExtensions),
             ];
@@ -1944,11 +1945,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'original_height' => $original['height'],
             // preview
             'preview' => $preview,
-            'image' => $preview_image_info['src'],
+            'image' => $preview_image_info['src'] ?? '',
             'image_width' => $preview_image_info['width'],
             'image_height' => $preview_image_info['height'],
             // thumb
-            'thumb' => $thumb_image_info['src'],
+            'thumb' => $thumb_image_info['src'] ?? '',
             'thumb_width' => $thumb_image_info['width'],
             'thumb_height' => $thumb_image_info['height'],
 
@@ -1969,7 +1970,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         if ($this->visibility_files && $visibility) {
             $file_list['visibility'] = $visibility;
         }
-        $file_list['menu'] = $this->getListFileContextMenu($path, !empty($page));
 
         return $file_list;
     }

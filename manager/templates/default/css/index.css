@@ -23039,8 +23039,12 @@ ul.x-tab-strip-bottom .x-tab-left {
     list-style: none;
     position: absolute;
     left: 295px;
-    bottom: 0;
+    top: 0;
     z-index: 24;
+}
+#modx-footer .modx-subnav.modx-subnav-usernav .modx-subsubnav {
+    top: initial;
+    bottom: 0;
 }
 #modx-footer .modx-subnav-arrow {
     right: 100%;

@@ -295,8 +295,14 @@
       list-style: none;
       position: absolute;
       left: 295px;
-      bottom: 0;
+      top: 0;
       z-index: 24;
+    }
+    &.modx-subnav-usernav {
+      .modx-subsubnav {
+        top: initial;
+        bottom: 0;
+      }
     }
 
     &-arrow {
