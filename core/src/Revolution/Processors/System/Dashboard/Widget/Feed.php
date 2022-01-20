@@ -80,7 +80,7 @@ class Feed extends Processor
                 'title' => $item->get_title(),
                 'description' => $item->get_description(),
                 'link' => $item->get_permalink(),
-                'pubdate' => $item->get_local_date(),
+                'pubdate' => $item->get_date(),
             ]);
         }
 
