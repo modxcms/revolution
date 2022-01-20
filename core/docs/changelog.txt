@@ -2,8 +2,31 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.0.0-rc1 (TBD)
+MODX Revolution 3.0.0-rc1 (January 20, 2022)
 ====================================
+- Fix ability to edit empty files (#15977)
+- Simplify lexicons in grids (#15673)
+- Flatten lexicon parameters by dot notation (#15492)
+- Fix PHP warning: trim() expects parameter 1 to be string, array given (#15624)
+- Fix subsubnav position issue (#15970)
+- Fix undefined index in modMediaSource (#15966)
+- Fix combobox not expanding if processor response is slow (#15926)
+- Pass correct type to setlocale (#15961)
+- Update category's rank in the tree after save (#15956)
+- Fix setStaticElementPath method (#15921)
+- Add loading mask to Package Manager (#15907)
+- Form customization bug fixes and improvements (#15889)
+- Remove redundant session test in setup (#15941)
+- Add error_page and site_unavailable_page protection (#15579)
+- Fix Firefox rendering issues (#15962)
+- Fix UpdateFromGrid processor for Form Customization Sets (#15955)
+- Fix labels and descriptions in TV quick create/edit (#15951)
+- Add permissions to enforce access to specific resource types (#15888)
+- Setup context improvements (#15868)
+- Make validation error messages consistent on save (#15937)
+- Add PHP 8.1 to CI matrix (#15960)
+- Update xPDO to 3.0.1 for PHP 8.1 compatibility (#15959)
+- Add missing Static Resources lexicon key (#15931)
 
 MODX Revolution 3.0.0-beta2 (November 23, 2021)
 ====================================
@@ -13,12 +36,12 @@ MODX Revolution 3.0.0-beta2 (November 23, 2021)
 
 MODX Revolution 3.0.0-beta1 (November 9, 2021)
 ====================================
-Fix problems in lexicon creation form [#15892]
-Remove superfluous lexicon entries [#15884]
-Configurable extension for static html files [#15855]
-Add zero-padded decimal option for number TVs [#15890]
-Restrict static resources to predefined path [#15885]
-Remove unused refreshTVs method [#15882]
+- Fix problems in lexicon creation form [#15892]
+- Remove superfluous lexicon entries [#15884]
+- Configurable extension for static html files [#15855]
+- Add zero-padded decimal option for number TVs [#15890]
+- Restrict static resources to predefined path [#15885]
+- Remove unused refreshTVs method [#15882]
 
 MODX Revolution 3.0.0-alpha3 (October 27, 2021)
 ====================================
