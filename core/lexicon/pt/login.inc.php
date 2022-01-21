@@ -8,14 +8,14 @@
  */
 $_lang['login_language'] = 'Língua';
 $_lang['login_activation_key_err'] = 'Chave de ativação não combina! Por favor, verifique seu e-mail de ativação e verifique se você carregou a URL correta.';
-$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
+$_lang['login_blocked_admin'] = 'Você foi bloqueado por um administrador.';
 $_lang['login_blocked_error'] = 'Você está temporariamente bloqueado e não pode entrar. Por favor, tente novamente mais tarde.';
 $_lang['login_blocked_ip'] = 'Você não tem permissão para fazer login do seu endereço IP atual.';
 $_lang['login_blocked_time'] = 'Você não tem permissão para fazer login no momento. Por favor, tente novamente mais tarde.';
 $_lang['login_blocked_too_many_attempts'] = 'Você foi bloqueado devido a muitas tentativas de login.';
 $_lang['login_button'] = 'Entrar';
 $_lang['login_cannot_locate_account'] = 'O nome de usuário ou senha digitados estão incorretos. Por favor, verifique o nome de usuário, digitar novamente a senha, e tente novamente.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] por <a href="https://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; está licenciado sob a GPLv2 ou superior.';
 $_lang['login_email_label'] = 'Email da Conta:';
 $_lang['login_err_unknown'] = 'Ocorreu um erro desconhecido ao tentar para entrar.';
 $_lang['login_forget_your_login'] = 'Esqueceu seu Acesso?';
