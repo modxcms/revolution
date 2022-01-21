@@ -17,7 +17,7 @@ $_lang['system_events.name_desc'] = 'O nome do evento. Que você deve usar em um
 $_lang['system_events.groupname'] = 'Grupo';
 $_lang['system_events.groupname_desc'] = 'O nome do grupo onde pertence o novo evento. Selecione um existente ou digite um novo nome de grupo.';
 $_lang['system_events.plugins'] = 'Plugins';
-$_lang['system_events.plugins_desc'] = 'The list of plugins attached to the event. Pick up plugins that should be attached to event.';
+$_lang['system_events.plugins_desc'] = 'Lista de plugins associados ao evento. Escolha os plugins que deveja associar ao evento.';
 
 $_lang['system_events.service'] = 'Serviço';
 $_lang['system_events.service_1'] = 'Eventos de Parser de Serviço';
