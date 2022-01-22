@@ -268,7 +268,10 @@ MODx.panel.DashboardWidget = function(config) {
         }
     });
     MODx.panel.DashboardWidget.superclass.constructor.call(this,config);
-    Ext.getCmp('modx-extended-form').disable();
+    var ef = Ext.getCmp('modx-extended-form');
+    if (ef) {
+        ef.disable();
+    }
 };
 Ext.extend(MODx.panel.DashboardWidget,MODx.FormPanel,{
     initialized: false
