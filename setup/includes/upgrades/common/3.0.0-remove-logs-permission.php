@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Common upgrade script to remove the outdated logs permission
  *
