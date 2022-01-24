@@ -148,7 +148,7 @@ class GetRecentlyEditedResources extends GetListProcessor
 
         $row['menu'][] = '-';
         $row['menu'][] = [
-            'text'    => $this->modx->lexicon('resource_preview'),
+            'text'    => $this->modx->lexicon('resource_view'),
             'handler' => 'this.preview',
         ];
 
