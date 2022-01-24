@@ -46,6 +46,6 @@ class Remove extends RemoveProcessor
      */
     public function isAdminGroup()
     {
-        return $this->object->get('id') === 1 || $this->object->get('name') === $this->modx->lexicon('administrator');
+        return $this->object->get('id') === 1 || $this->object->get('name') === 'Administrator';
     }
 }
