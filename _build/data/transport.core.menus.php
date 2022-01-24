@@ -347,7 +347,7 @@ $children = [];
 $children[0]= $xpdo->newObject(modMenu::class);
 $children[0]->fromArray([
   'menuindex' => 0,
-  'text' => 'profile',
+  'text' => '{$username}',
   'description' => 'profile_desc',
   'parent' => 'user',
   'permissions' => 'change_profile',

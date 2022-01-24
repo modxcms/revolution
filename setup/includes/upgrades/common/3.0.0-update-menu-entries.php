@@ -30,3 +30,9 @@ if ($formCustomization) {
     }
 }
 
+/** @var modMenu $profileItem */
+$profileItem = $modx->getObject(modMenu::class, ['text' => 'profile']);
+if ($profileItem) {
+    $profileItem->set('text', '{$username}');
+    $profileItem->save();
+}
