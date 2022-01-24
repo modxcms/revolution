@@ -2331,7 +2331,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         try {
             $mime = $this->filesystem->mimeType($file);
-            $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG,$file . ' has a mime type of: ' . $mime);
+            $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, $file . ' has a mime type of: ' . $mime);
 
             // Some mimetypes include a character set, e.g. application/json; charset=utf-8
             // so we filter out the last part to make comparison easier
