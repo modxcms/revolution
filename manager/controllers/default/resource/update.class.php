@@ -14,8 +14,6 @@ use MODX\Revolution\modUser;
 
 require_once __DIR__ . '/resource.class.php';
 
-class_alias(ResourceUpdateManagerController::class, 'DocumentUpdateManagerController');
-
 /**
  * Loads the update resource page
  *
@@ -281,3 +279,5 @@ class ResourceUpdateManagerController extends ResourceManagerController
         return 'resource/update.tpl';
     }
 }
+
+class_alias(ResourceUpdateManagerController::class, 'DocumentUpdateManagerController');
