@@ -2216,7 +2216,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
             if (function_exists('exif_read_data')) {
                 $exif = @exif_read_data($absolute_path);
-                if (!empty($exif) && $exif['Orientation'] >= 5) {
+                if (!empty($exif) && array_key_exists('Orientation', $exif) && $exif['Orientation'] >= 5) {
                     // This image was rotated
                     $new_width = $size['height'];
                     $new_height = $size['width'];
@@ -2331,6 +2331,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         try {
             $mime = $this->filesystem->mimeType($file);
+            $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, $file . ' has a mime type of: ' . $mime);
 
             // Some mimetypes include a character set, e.g. application/json; charset=utf-8
             // so we filter out the last part to make comparison easier
@@ -2347,6 +2348,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     'image/svg+xml',
                     'application/xhtml+xml',
                     'application/xml',
+                    'application/x-empty',
                 ), true);
         } catch (Exception $e) {
             // pass
