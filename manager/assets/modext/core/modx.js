@@ -751,6 +751,7 @@ Ext.extend(MODx.Msg,Ext.Component,{
               this.addListener(i,l.fn,l.scope || this,l.options || {});
             }
         }
+        Ext.MessageBox.minWidth = (config.minWidth) ? config.minWidth : 200;
         Ext.Msg.confirm(config.title || _('warning'),config.text,function(e) {
             if (e == 'yes') {
                 MODx.Ajax.request({
