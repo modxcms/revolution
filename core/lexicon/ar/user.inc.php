@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'آخر وقت قام به المستخدم بت
 $_lang['user_profile_err_nf'] = 'خطأ فادح: لم يتم العثور على ملف المستخدم الشخصي.';
 $_lang['user_profile_err_save'] = 'حصل خطأ أثناء محاولة حفظ واصفات المستخدم.';
 $_lang['user_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف هذا المستخدم؟ لا يمكن التراجع عن هذا!';
-$_lang['user_remove_multiple'] = 'حذف مستخدمين متعددين';
 $_lang['user_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد حذف هؤلاء المستخدمين؟ لا يمكن التراجع عن هذا!';
 $_lang['user_remote_data_msg'] = 'تعديل التحكم في بيانات المستخدم هنا.';
 $_lang['user_role_update'] = 'Edit User Role';
