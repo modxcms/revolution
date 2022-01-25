@@ -183,8 +183,6 @@ $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Tidsintervall';
 $_lang['time_increment_desc'] = 'Antalet minuter mellan varje tidsvärde i listan. (Standard: 15)';
 $_lang['title'] = 'Titel';
-$_lang['tv_default'] = 'Standardvärde';
-$_lang['tv_default_desc'] = 'Innehållet som den här mallvariabeln visar om användaren inte anger något annat innehåll.';
 $_lang['tv_default_checkbox_desc'] = 'En uppsättning alternativ separerade med dubbla pipe-tecken som väljs för den här mallvariabeln om användaren inte markerar ett eller flera egna val. Om dina alternativ inkluderar etiketter (till exempel "Alternativ ett==1||Alternativ två==2||Alternativ tre==3"), så behöver du ange värdet, det vill säga “1” för Alternativ ett eller “1||3” för Alternativ ett och Alternativ tre.';
 $_lang['tv_default_date'] = 'Förvalt datum och tid';
 $_lang['tv_default_date_desc'] = 'Det datum som visas om användaren inte anger ett. Välj ett relativt datum från listan ovan eller ange ett annat datum med hjälp av något av följande mönster:
@@ -219,7 +217,6 @@ $_lang['tv_default_text'] = 'Standardtext';
 $_lang['tv_default_text_desc'] = 'Det textinnehåll som denna mallvariabel kommer att visa om användaren inte anger något.';
 $_lang['tv_default_url'] = 'Standard-URL';
 $_lang['tv_default_url_desc'] = 'Den URL som mallvariabeln visar om användaren inte anger en.';
-$_lang['tv_elements'] = 'Inmatningsvärden';
 $_lang['tv_elements_checkbox'] = 'Kryssrutealternativ';
 $_lang['tv_elements_listbox'] = 'Alternativ för rullgardinsmeny';
 $_lang['tv_elements_radio'] = 'Alternativ för radioknapp';
@@ -239,7 +236,6 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_type'] = 'Inmatningstyp';
 $_lang['upper_case'] = 'Versaler';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Visningstext';
@@ -247,3 +243,16 @@ $_lang['width'] = 'Bredd';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['tv_default_datetime'] = $_lang['tv_default_date'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_type
+    tv_default
+    tv_default_desc
+    tv_elements
+
+*/
