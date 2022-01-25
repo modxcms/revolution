@@ -93,7 +93,6 @@ $_lang['reports'] = 'Resoconti';
 $_lang['reports_desc'] = 'Rapporti di amministratore per la tua installazione MODX';
 $_lang['resource_groups'] = 'Gruppi di Risorse';
 $_lang['resource_groups_desc'] = 'Gestione dei gruppi a cui appartengono le risorse.';
-$_lang['search'] = 'Cerca';
 $_lang['search_desc'] = 'Cerca risorse. Scegli criteri e clicca a fianco per eseguire la ricerca.';
 $_lang['search_resulttype_actions'] = 'Azioni';
 $_lang['search_resulttype_chunks'] = 'Chunk';
