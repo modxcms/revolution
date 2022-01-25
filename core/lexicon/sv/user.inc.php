@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'Det senaste tillfället som användaren loggade
 $_lang['user_profile_err_nf'] = 'ALLVARLIGT FEL: Användarprofilen kunde inte hittas.';
 $_lang['user_profile_err_save'] = 'Ett fel inträffade när användarens attribut skulle sparas.';
 $_lang['user_remove_confirm'] = 'Är du säker på att du vill ta bort denna användare? Detta går inte att ångra!';
-$_lang['user_remove_multiple'] = 'Ta bort flera användare';
 $_lang['user_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort dessa användare? Detta går inte att ångra!';
 $_lang['user_remote_data_msg'] = 'Redigera en användares fjärrdata här.';
 $_lang['user_role_update'] = 'Redigera användarroll';
