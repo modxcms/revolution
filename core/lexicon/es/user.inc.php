@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'La última vez que el usuario inició sesión c
 $_lang['user_profile_err_nf'] = 'ERROR FATAL: Perfil de Usuario no encontrado.';
 $_lang['user_profile_err_save'] = 'Ocurrió un error mientras se intentaba guardar los atributos del usuario.';
 $_lang['user_remove_confirm'] = '¿Estás seguro de que quieres eliminar este usuario? Esto es irreversible';
-$_lang['user_remove_multiple'] = 'Eliminar Múltiples Usuarios';
 $_lang['user_remove_multiple_confirm'] = '¿Estás seguro de que quieres eliminar estos usuarios? ¡Esto es irreversible!';
 $_lang['user_remote_data_msg'] = 'Editar datos remoto del usuario aquí.';
 $_lang['user_role_update'] = 'Edit User Role';
