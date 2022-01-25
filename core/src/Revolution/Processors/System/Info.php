@@ -40,8 +40,8 @@ class Info extends Processor
         /* general */
         $data['modx_version'] = $this->modx->version['full_appname'];
         $data['code_name'] = $this->modx->version['code_name'];
-        $data['servertime'] = strftime('%I:%M:%S %p', time());
-        $data['localtime'] = strftime('%I:%M:%S %p', time() + $serverOffset);
+        $data['servertime'] = date('h:i:s A', time());
+        $data['localtime'] = date('h:i:s A', time() + $serverOffset);
         $data['serveroffset'] = $serverOffset / (60 * 60);
 
         /* database info */
@@ -58,7 +58,7 @@ class Info extends Processor
         $data['database_name'] = trim($this->modx->getOption('dbname'),
             $this->modx->_escapeCharOpen . $this->modx->_escapeCharClose);
         $data['database_server'] = $this->modx->getOption('host');
-        $data['now'] = strftime('%b %d, %Y %I:%M %p', time());
+        $data['now'] = date('M d, Y h:i A', time());
         $data['table_prefix'] = $this->modx->getOption('table_prefix');
 
         return $this->success('', $data);

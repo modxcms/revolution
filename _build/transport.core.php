@@ -167,7 +167,7 @@ $collection['1']->fromArray([
     'name' => 'modx.com',
     'description' => 'The official MODX transport provider for 3rd party components.',
     'service_url' => 'https://rest.modx.com/extras/',
-    'created' => strftime('%Y-%m-%d %H:%M:%S'),
+    'created' => date('Y-m-d H:i:s'),
 ], '', true, true);
 $attributes = [
     xPDOTransport::PRESERVE_KEYS => false,

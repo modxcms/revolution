@@ -96,7 +96,7 @@ class modTransportPackage extends xPDOObject
     public function save($cacheFlag = null)
     {
         if ($this->_new && !$this->get('created')) {
-            $this->set('created', strftime('%Y-%m-%d %H:%M:%S'));
+            $this->set('created', date('Y-m-d H:i:s'));
         }
         $saved = parent:: save($cacheFlag);
 
@@ -355,7 +355,7 @@ class modTransportPackage extends xPDOObject
             );
         }
         if ($installed) {
-            $this->set('installed', strftime('%Y-%m-%d %H:%M:%S'));
+            $this->set('installed', date('Y-m-d H:i:s'));
             $this->set('attributes', $attributes);
             $this->save();
         }

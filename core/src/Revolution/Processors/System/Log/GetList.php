@@ -121,11 +121,11 @@ class GetList extends Processor
             $wa['user'] = $user;
         }
         if (!empty($dateStart)) {
-            $dateStart = strftime('%Y-%m-%d', strtotime($dateStart . ' 00:00:00'));
+            $dateStart = date('Y-m-d', strtotime($dateStart . ' 00:00:00'));
             $wa['occurred:>='] = $dateStart;
         }
         if (!empty($dateEnd)) {
-            $dateEnd = strftime('%Y-%m-%d', strtotime($dateEnd . ' 23:59:59'));
+            $dateEnd = date('Y-m-d', strtotime($dateEnd . ' 23:59:59'));
             $wa['occurred:<='] = $dateEnd;
         }
 

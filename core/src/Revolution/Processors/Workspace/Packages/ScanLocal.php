@@ -123,7 +123,7 @@ class ScanLocal extends Processor
         $package = $this->modx->newObject(modTransportPackage::class);
         $package->set('signature', $signature);
         $package->set('state', 1);
-        $package->set('created', strftime('%Y-%m-%d %H:%M:%S'));
+        $package->set('created', date('Y-m-d H:i:s'));
         $package->set('workspace', $this->workspace->get('id'));
 
         /* set package version data */

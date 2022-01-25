@@ -91,10 +91,10 @@ class Get extends GetProcessor
             $userArray = array_merge($profile->toArray(), $userArray);
         }
 
-        $userArray['dob'] = !empty($userArray['dob']) ? strftime('%m/%d/%Y', $userArray['dob']) : '';
-        $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? strftime('%Y-%m-%d %H:%M:%S',
+        $userArray['dob'] = !empty($userArray['dob']) ? date('m/d/Y', $userArray['dob']) : '';
+        $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? date('Y-m-d H:i:s',
             $userArray['blockeduntil']) : '';
-        $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? strftime('%Y-%m-%d %H:%M:%S',
+        $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? date('Y-m-d H:i:s',
             $userArray['blockedafter']) : '';
         $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? date($this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
             $userArray['lastlogin']) : '';

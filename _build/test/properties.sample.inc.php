@@ -19,7 +19,7 @@
 use xPDO\xPDO;
 
 /* define some properties */
-$properties['runtime'] = strftime("%Y%m%dT%H%M%S");
+$properties['runtime'] = date('Ymd\THis');
 $properties['config_key'] = 'test';
 
 /* driver-specific connection properties */

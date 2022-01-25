@@ -18,7 +18,7 @@ class modTemplateVarInputRenderDate extends modTemplateVarInputRender {
     public function process($value,array $params = []) {
         $v = $value;
         if ($v != '' && $v != '0' && $v != '0000-00-00 00:00:00') {
-            $v = strftime('%Y-%m-%d %H:%M:%S',strtotime($v));
+            $v = date('Y-m-d H:i:s',strtotime($v));
         }
         $this->tv->set('value',$v);
 

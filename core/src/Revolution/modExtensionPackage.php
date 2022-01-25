@@ -27,9 +27,9 @@ class modExtensionPackage extends xPDOSimpleObject
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             $isNew = $this->isNew();
             if ($isNew) {
-                $this->set('created_at', strftime('%Y-%m-%d %H:%M:%S'));
+                $this->set('created_at', date('Y-m-d H:i:s'));
             } else {
-                $this->set('updated_at', strftime('%Y-%m-%d %H:%M:%S'));
+                $this->set('updated_at', date('Y-m-d H:i:s'));
             }
         }
         $saved = parent::save($cacheFlag);

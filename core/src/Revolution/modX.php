@@ -2025,7 +2025,7 @@ class modX extends xPDO {
         /** @var modManagerLog $ml */
         $ml = $this->newObject(modManagerLog::class);
         $ml->set('user', (integer) $userId);
-        $ml->set('occurred', strftime('%Y-%m-%d %H:%M:%S'));
+        $ml->set('occurred', date('Y-m-d H:i:s'));
         $ml->set('action', empty($action) ? 'unknown' : $action);
         $ml->set('classKey', empty($class_key) ? '' : $class_key);
         $ml->set('item', empty($item) ? 'unknown' : $item);
@@ -2921,7 +2921,7 @@ class modX extends xPDO {
                 if ($targetObj == 'FILE' && $cacheManager= $this->getCacheManager()) {
                     $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
                     $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
-                    $cacheManager->writeFile($filepath . $filename, '[' . strftime('%Y-%m-%d %H:%M:%S') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
+                    $cacheManager->writeFile($filepath . $filename, '[' . date('Y-m-d H:i:s') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
                 }
                 $this->sendError('fatal');
             }
@@ -2941,7 +2941,7 @@ class modX extends xPDO {
      * @param string $line The line number of the file that the message occurs for
      */
     protected function _logInRegister($register, $level, $msg, $def, $file, $line) {
-        $timestamp = strftime('%Y-%m-%d %H:%M:%S');
+        $timestamp = date('Y-m-d H:i:s');
         $messageKey = (string) time();
         $messageKey .= '-' . sprintf("%06d", $this->_logSequence);
         $message = [

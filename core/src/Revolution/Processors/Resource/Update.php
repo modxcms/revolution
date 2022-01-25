@@ -738,7 +738,7 @@ class Update extends UpdateProcessor
                         }
                         break;
                     case 'date':
-                        $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S', strtotime($value));
+                        $value = empty($value) ? '' : date('Y-m-d H:i:s', strtotime($value));
                         break;
                     /* ensure tag types trim whitespace from tags */
                     case 'tag':

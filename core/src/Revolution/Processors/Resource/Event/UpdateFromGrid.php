@@ -65,12 +65,12 @@ class UpdateFromGrid extends Processor
     {
         $publishDate = $this->getProperty('pub_date');
         if (!empty($publishDate)) {
-            $this->setProperty('pub_date', strftime('%Y-%m-%d %H:%M', strtotime($publishDate)));
+            $this->setProperty('pub_date', date('Y-m-d H:i', strtotime($publishDate)));
         }
 
         $unPublishDate = $this->getProperty('unpub_date');
         if (!empty($unPublishDate)) {
-            $this->setProperty('unpub_date', strftime('%Y-%m-%d %H:%M', strtotime($unPublishDate)));
+            $this->setProperty('unpub_date', date('Y-m-d H:i', strtotime($unPublishDate)));
         }
         return true;
     }
