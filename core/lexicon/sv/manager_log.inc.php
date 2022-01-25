@@ -9,7 +9,6 @@
 $_lang['action'] = 'Åtgärd';
 $_lang['date_end'] = 'Slutdatum';
 $_lang['date_start'] = 'Startdatum';
-$_lang['filter_clear'] = 'Rensa filter';
 $_lang['manager_log'] = 'Logg för hanteraren';
 $_lang['mgrlog_clear'] = 'Töm hanterarens logg';
 $_lang['mgrlog_clear_confirm'] = 'Är du säker på att du vill tömma hanterarens logg helt och hållet? Denna åtgärd går inte att ångra.';
