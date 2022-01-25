@@ -93,7 +93,6 @@ $_lang['reports'] = 'Raporlar';
 $_lang['reports_desc'] = 'MODX kurulumunuz için yönetici raporları';
 $_lang['resource_groups'] = 'Kaynak grupları';
 $_lang['resource_groups_desc'] = 'Gruplara Kaynak Ata';
-$_lang['search'] = 'Ara';
 $_lang['search_desc'] = 'Kaynaklar için arama.';
 $_lang['search_resulttype_actions'] = 'Eylemler';
 $_lang['search_resulttype_chunks'] = 'Yığınlar';
