@@ -93,7 +93,6 @@ $_lang['reports'] = 'Звіти';
 $_lang['reports_desc'] = 'Звіти щодо Вашої установки MODX для адміністратора';
 $_lang['resource_groups'] = 'Групи ресурсів';
 $_lang['resource_groups_desc'] = 'Управління приналежністю ресурсів до груп ресурсів';
-$_lang['search'] = 'Пошук';
 $_lang['search_desc'] = 'Пошук ресурсів.';
 $_lang['search_resulttype_actions'] = 'Дії';
 $_lang['search_resulttype_chunks'] = 'Чанки';
