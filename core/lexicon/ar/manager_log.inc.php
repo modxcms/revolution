@@ -9,7 +9,6 @@
 $_lang['action'] = 'إجراء';
 $_lang['date_end'] = 'تاريخ النهاية';
 $_lang['date_start'] = 'تاريخ البداية';
-$_lang['filter_clear'] = 'ازالة الفلتر';
 $_lang['manager_log'] = 'سجل المدير';
 $_lang['mgrlog_clear'] = 'إفراغ سجل المدير';
 $_lang['mgrlog_clear_confirm'] = 'هل أنت متأكد من أنك تريد إفراغ سجل مدير كاملاً؟ هذه العملية لا يمكن التراجع عنها.';
