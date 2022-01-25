@@ -9,7 +9,6 @@
 $_lang['action'] = 'Handling';
 $_lang['date_end'] = 'Slutdato';
 $_lang['date_start'] = 'Startdato';
-$_lang['filter_clear'] = 'Nulstil filter';
 $_lang['manager_log'] = 'Manager Log';
 $_lang['mgrlog_clear'] = 'Tøm Manager Log\'en';
 $_lang['mgrlog_clear_confirm'] = 'Er du sikker på du vil tømme Manager Log\'en helt? Dette kan ikke fortrydes.';
