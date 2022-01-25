@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'İsim Alanı için buraya bir isim verin.';
 $_lang['namespace_path'] = 'Çekirdek Yolu';
 $_lang['namespace_path_desc'] = 'Buradaki İsim Alanı için varlıklara mutlak bir yol belirtin. {core_path} gibi tutucular kullanabilirsiniz. Örneğin: {core_path}components/democomponent/';
 $_lang['namespace_remove_confirm'] = '"[[+name]]" isim alanını ve ilgili tüm içeriği silmek istediğinizden emin misiniz?';
-$_lang['namespace_remove_multiple'] = 'İsim Alanı sil';
 $_lang['namespace_remove_multiple_confirm'] = 'Bu alan adlarını ve tüm içeriği silmek istediğinizden emin misiniz?';
 $_lang['namespaces'] = 'İsim Alanları';
 $_lang['namespaces_desc'] = 'İsim alanları, paketler ve bileşenler için genel tanımlayıcılar olup araçları, sözlük simgelerini ve kaynakları bir araya getirmektedir.';
