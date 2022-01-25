@@ -55,14 +55,13 @@ $_lang['category_create'] = 'Create Category';
 $_lang['category_confirm_delete'] = 'Are you sure you want to delete this category? All Elements within it will revert to having no category.';
 $_lang['category_rename'] = 'Renomear Categoria';
 $_lang['category_remove'] = 'Delete Category';
-$_lang['chunk'] = 'Chunk';
+$_lang['chunk'] = 'Chunck';
 $_lang['chunks'] = 'Chunks';
 $_lang['class_key'] = 'Chave de Classe';
 $_lang['cleaningup'] = 'Limpando';
 $_lang['clear_cache'] = 'Limpar Cache';
 $_lang['clear_cache_on_save'] = 'Empty Cache'; // make consistent with how this appears on Resource editing panel
 $_lang['clear_cache_on_save_desc'] = 'Clear cache files when this item is saved.'; // make more general, as this action clears more than just this item's cache files
-$_lang['clear_filter'] = 'Limpar Filtro';
 $_lang['click_to_change'] = 'Clique para Mudar';
 $_lang['close'] = 'Cancelar';
 $_lang['code'] = 'Código';
@@ -143,7 +142,7 @@ $_lang['err_self_parent'] = 'Não se pode fazer algo ser pai de si!';
 $_lang['error'] = 'Erro';
 $_lang['error_sending_email'] = 'Erro enviando email';
 $_lang['error_sending_email_to'] = 'Erro enquanto enviava email para ';
-$_lang['error_loading_feed'] = 'An error occurred loading the feed.';
+$_lang['error_loading_feed'] = 'Ocorreu um erro ao carregar este feed.';
 $_lang['event_id'] = 'ID de Evento';
 $_lang['existing_category'] = 'Categoria Existente';
 $_lang['expand_all'] = 'Expandir TODOS';
@@ -293,7 +292,7 @@ $_lang['no_action'] = 'Sem ação';
 $_lang['no_category'] = 'Sem Categoria';
 $_lang['no_records_found'] = 'Nenhum registro encontrado.';
 $_lang['no_results'] = 'Nenhum resultado encontrado';
-$_lang['numberfield'] = 'Numberfield';
+$_lang['numberfield'] = 'Campo Numérico';
 $_lang['offline'] = 'Off-line';
 $_lang['ok'] = 'OK';
 $_lang['old_key'] = 'Chave Antiga';
@@ -325,7 +324,7 @@ $_lang['permission_denied'] = 'Permissão negada!';
 $_lang['permission_denied_processor'] = 'Permission \'[[+permission]]\' required for \'[[+action]]\'!';
 $_lang['permission_denied_msg'] = 'Você não tem a permissão de política de acesso para ver esta página. Se você acredita que isto é um erro, entre em contato com o administrador do sistema.';
 $_lang['please_wait'] = 'Por Favor Aguarde...';
-$_lang['plugin'] = 'Plugin';
+$_lang['plugin'] = 'Plug-in';
 $_lang['plugin_activate'] = 'Ativar Plugin';
 $_lang['plugin_deactivate'] = 'Desativar Plugin';
 $_lang['plugins'] = 'Plugins';
@@ -333,7 +332,7 @@ $_lang['po_make_all_unpub'] = 'Despublicar Todos';
 $_lang['po_make_all_pub'] = 'Publicar Todos';
 $_lang['po_preserve'] = 'Preservar Status de Publicação';
 $_lang['preview'] = 'Prever';
-$_lang['preserve_resources'] = 'Duplicate resources';
+$_lang['preserve_resources'] = 'Duplicar recursos';
 $_lang['preserve_alias'] = 'Preservar o alias de recursos duplicados';
 $_lang['preserve_menuindex'] = 'Preservar o índice de menu de recursos duplicados';
 $_lang['private'] = 'Privado';
@@ -414,7 +413,7 @@ $_lang['resource_groups'] = 'Grupos de Recursos';
 $_lang['resource_management'] = 'Gerenciar Recursos';
 $_lang['resource_name'] = 'Nome do Recurso';
 $_lang['resource_name_new'] = 'Novo Nome de Recurso';
-$_lang['resource_preview'] = 'Prever';
+$_lang['resource_view'] = 'Ver';
 $_lang['resource_overview'] = 'Visão Geral de Recurso';
 $_lang['resource_settings'] = 'Configurações de Recurso';
 $_lang['resource_type'] = 'Tipo de Recurso';
@@ -430,7 +429,6 @@ $_lang['scroll_dn'] = 'Rolar pra baixo';
 $_lang['scroll_up'] = 'Rolar pra cima';
 $_lang['search'] = 'Busca';
 $_lang['search_criteria'] = 'Critérios de Busca';
-$_lang['search_ellipsis'] = 'Busca...';
 $_lang['search_results'] = 'Resultados de Busca';
 $_lang['security'] = 'Segurança';
 $_lang['select_date'] = 'Selecione uma data';
@@ -487,7 +485,7 @@ $_lang['tmplvars'] = 'Variáveis de Template';
 $_lang['to'] = 'para';
 $_lang['today'] = 'Hoje';
 $_lang['toggle_richtext'] = 'Habilitar Editor Richtext';
-$_lang['total'] = 'total';
+$_lang['total'] = 'Total';
 $_lang['track_visitors_title'] = 'Registrar Estatísticas de Visitantes';
 $_lang['tree_collapse'] = 'Retrair árvore';
 $_lang['tree_expand'] = 'Expandir árvore';
@@ -559,3 +557,22 @@ $_lang['saturday'] = 'Sábado';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+
+/*
+    Shared lang entries for elements --
+
+    Necessary to to give quick create/edit panels
+    access when they are opened outside the
+    context of their respective element types
+*/
+// All
+
+// TVs
+$_lang['tv_type'] = 'Tipo de Opção';
+$_lang['tv_default'] = 'Valor Padrão';
+$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
+$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
+$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_elements'] = 'Valores de Opções para Entrada';
+$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
