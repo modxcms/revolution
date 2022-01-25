@@ -93,7 +93,6 @@ $_lang['reports'] = 'Hlášení';
 $_lang['reports_desc'] = 'Administrátorská hlášení pro tuto MODX instalaci';
 $_lang['resource_groups'] = 'Skupiny dokumentů';
 $_lang['resource_groups_desc'] = 'Správa skupin dokumentů.';
-$_lang['search'] = 'Hledat';
 $_lang['search_desc'] = 'Hledat dokument.';
 $_lang['search_resulttype_actions'] = 'Akce';
 $_lang['search_resulttype_chunks'] = 'Chunky';
