@@ -9,7 +9,6 @@
 $_lang['action'] = 'Aktion';
 $_lang['date_end'] = 'Enddatum';
 $_lang['date_start'] = 'Startdatum';
-$_lang['filter_clear'] = 'Filter zurücksetzen';
 $_lang['manager_log'] = 'Manager-Log';
 $_lang['mgrlog_clear'] = 'Manager-Log leeren';
 $_lang['mgrlog_clear_confirm'] = 'Sind Sie sicher, dass Sie das Manager-Log komplett leeren möchten? Dies kann nicht rückgängig gemacht werden.';
