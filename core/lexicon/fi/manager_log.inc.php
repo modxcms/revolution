@@ -9,7 +9,6 @@
 $_lang['action'] = 'Toiminto';
 $_lang['date_end'] = 'Päättymispäivä';
 $_lang['date_start'] = 'Alkamispäivä';
-$_lang['filter_clear'] = 'Tyhjennä suodatin';
 $_lang['manager_log'] = 'Hallinnan loki';
 $_lang['mgrlog_clear'] = 'Tyhjennä hallinnan loki';
 $_lang['mgrlog_clear_confirm'] = 'Haluatko varmasti tyhjentää hallinnan lokin? Toimintoa ei voi peruuttaa.';
