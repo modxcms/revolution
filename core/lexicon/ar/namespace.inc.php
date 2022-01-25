@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'حدد اسم من أجل فضاء الأسما
 $_lang['namespace_path'] = 'المسار الأساسي';
 $_lang['namespace_path_desc'] = 'حدد مسار مطلق إلى القلب من أجل فضاء الأسماء هنا. تستطيع استخدام حاملي العناصر مثل {core_path}. مثال:  {core_path}components/democomponent/';
 $_lang['namespace_remove_confirm'] = 'هل أنت متأكد من الذي تريد حذف فضاء الأسماء "[[name+]]"، وكل المحتوى المتعلق به؟';
-$_lang['namespace_remove_multiple'] = 'حذف فضاءات الأسماء';
 $_lang['namespace_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد حذف فضاءات الأسماء خذ وكافة المحتويات ذات الصلة بهم؟';
 $_lang['namespaces'] = 'فضاءات الأسماء';
 $_lang['namespaces_desc'] = 'فضاءات الأسماء هي معرفات عامة من أجل الحزم و المكونات، تسجيل وسائلهم، المصادر ودخولات المعجم مع بعضها.';
