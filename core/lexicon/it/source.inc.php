@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Si prega di specificare un nome per la Media Sou
 $_lang['source_name_desc'] = 'Il nome della Media Source.';
 $_lang['source_properties.intro_msg'] = 'Gestisci le proprietà di questa Media Source qui sotto.';
 $_lang['source_remove_confirm'] = 'Sei sicuro di voler eliminare questa Sorgente Multimediale? Questo potrebbe corrompere ogni TV assegnata a questa sorgente.';
-$_lang['source_remove_multiple'] = 'Eliminare più Media Sources';
 $_lang['source_remove_multiple_confirm'] = 'Sei sicuro di voler eliminare queste Media Sources? Questo potrebbe danneggiare qualsiasi TVs che sia stata assegnata a queste Sources.';
 $_lang['source_type'] = 'Tipo di Source';
 $_lang['source_type_desc'] = 'Il tipo, o driver, della Media Source. L\'origine utilizzerà questo driver per connettersi quando raccoglie i suoi dati. Ad esempio: File System catturerà i file dal file system. S3 otterrà i file da un bucket S3.';
