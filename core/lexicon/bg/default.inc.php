@@ -62,7 +62,6 @@ $_lang['cleaningup'] = 'Почистване';
 $_lang['clear_cache'] = 'Изчисти кеша';
 $_lang['clear_cache_on_save'] = 'Empty Cache'; // make consistent with how this appears on Resource editing panel
 $_lang['clear_cache_on_save_desc'] = 'Clear cache files when this item is saved.'; // make more general, as this action clears more than just this item's cache files
-$_lang['clear_filter'] = 'Изчисти филтъра';
 $_lang['click_to_change'] = 'Натични за промяна';
 $_lang['close'] = 'Затвори';
 $_lang['code'] = 'Код';
@@ -414,7 +413,7 @@ $_lang['resource_groups'] = 'Групи Ресурси';
 $_lang['resource_management'] = 'Управление на ресурси';
 $_lang['resource_name'] = 'Име на ресурс';
 $_lang['resource_name_new'] = 'Ново име на ресурс';
-$_lang['resource_preview'] = 'Преглед';
+$_lang['resource_view'] = 'Изглед';
 $_lang['resource_overview'] = 'Преглед на ресурс';
 $_lang['resource_settings'] = 'Настройки на ресурс';
 $_lang['resource_type'] = 'Тип ресурс';
@@ -430,7 +429,6 @@ $_lang['scroll_dn'] = 'Превърти надолу';
 $_lang['scroll_up'] = 'Превърти нагоре';
 $_lang['search'] = 'Търси';
 $_lang['search_criteria'] = 'Търсене по критерии';
-$_lang['search_ellipsis'] = 'Търсене...';
 $_lang['search_results'] = 'Резултати от търсенето';
 $_lang['security'] = 'Сигурност';
 $_lang['select_date'] = 'Избери дата';
@@ -559,3 +557,22 @@ $_lang['saturday'] = 'Събота';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+
+/*
+    Shared lang entries for elements --
+
+    Necessary to to give quick create/edit panels
+    access when they are opened outside the
+    context of their respective element types
+*/
+// All
+
+// TVs
+$_lang['tv_type'] = 'Тип въвеждане';
+$_lang['tv_default'] = 'Стойност по подразбиране';
+$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
+$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
+$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_elements'] = 'Опции за въвеждащи стойности';
+$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
