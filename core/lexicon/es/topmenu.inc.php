@@ -93,7 +93,6 @@ $_lang['reports'] = 'Informes';
 $_lang['reports_desc'] = 'Registro de administración de MODX';
 $_lang['resource_groups'] = 'Grupos de Recursos';
 $_lang['resource_groups_desc'] = 'Asignar los grupos a los que pertenecen los recursos';
-$_lang['search'] = 'Buscar';
 $_lang['search_desc'] = 'Buscar recursos.';
 $_lang['search_resulttype_actions'] = 'Acciones';
 $_lang['search_resulttype_chunks'] = 'Chunks';
