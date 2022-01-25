@@ -8,7 +8,7 @@
  */
 $_lang['ago'] = '[[+time]] назад';
 $_lang['ago_day'] = '[[+time]] д.';
-$_lang['ago_days'] = '[[+time]] д.';
+$_lang['ago_days'] = '[[+time]] дн.';
 $_lang['ago_hour'] = '[[+time]] ч.';
 $_lang['ago_hours'] = '[[+time]] ч.';
 $_lang['ago_minute'] = '1 мин.';
