@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Por favor, especifica el nombre para el Origen M
 $_lang['source_name_desc'] = 'El nombre del Origen Multimedia.';
 $_lang['source_properties.intro_msg'] = 'Gestiona debajo las propiedades de este Origen Multimedia.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'Eliminar Múltiples Orígenes Multimedia';
 $_lang['source_remove_multiple_confirm'] = '¿Estás seguro de que quieres eliminar estos Orígenes Multimedia? Esto podría inutilizar cualquier Variable de Plantilla asignada a las mismas.';
 $_lang['source_type'] = 'Tipo de Recurso';
 $_lang['source_type_desc'] = 'El tipo, o manejador, de los Orígenes Multimedia. El Recurso se conectará a este manejador cuando vaya a obtener datos. Por ejemplo: "Sistema de Archivos" tomará archivos directamente del sistema de archivos. "Amazon S3" tomará archivos desde un depósito de archivos de Amazon S3.';
