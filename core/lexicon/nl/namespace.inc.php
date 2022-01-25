@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Specificeer een naam voor deze Namespace.';
 $_lang['namespace_path'] = 'Core pad';
 $_lang['namespace_path_desc'] = 'Specificeer een absoluut pad naar de core van deze Namespace hier. Je mag placeholders als {core_path} hier gebruiken. Voorbeeld: {core_path}components/democomponent/';
 $_lang['namespace_remove_confirm'] = 'Weet je zeker dat je de namespace "[[+name]]" en alle gerelateerde content wilt verwijderen?';
-$_lang['namespace_remove_multiple'] = 'Namespaces verwijderen';
 $_lang['namespace_remove_multiple_confirm'] = 'Weet je zeker dat je deze namespaces en alle gerelateerde content wilt verwijderen?';
 $_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces_desc'] = 'Namespaces zijn globale identificaties voor pakketten en componenten, registratie van hun vehicles, lexicon vermeldingen en alle documenten samen.';

@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'Terakhir kali pengguna berhasil login.';
 $_lang['user_profile_err_nf'] = 'FATAL ERROR: Profil pengguna tidak ditemukan.';
 $_lang['user_profile_err_save'] = 'Terjadi kesalahan saat mencoba menyimpan atribut pengguna.';
 $_lang['user_remove_confirm'] = 'Yakin ingin menghapus pengguna ini? Ini ireversibel!';
-$_lang['user_remove_multiple'] = 'Hapus Beberapa User';
 $_lang['user_remove_multiple_confirm'] = 'Yakin ingin menghapus pengguna ini? Ini ireversibel!';
 $_lang['user_remote_data_msg'] = 'Edit data pengguna jarak jauh di sini.';
 $_lang['user_role_update'] = 'Edit User Role';

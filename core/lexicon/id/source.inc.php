@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Silakan tentukan nama untuk sumber Media.';
 $_lang['source_name_desc'] = 'Nama sumber Media.';
 $_lang['source_properties.intro_msg'] = 'Mengelola properti sumber ini di bawah ini.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'Menghapus beberapa sumber Media';
 $_lang['source_remove_multiple_confirm'] = 'Apakah Anda yakin Anda ingin menghapus sumber Media ini? Ini mungkin menghentikan setiap TV yang telah ditetapkan untuk sumber ini.';
 $_lang['source_type'] = 'Jenis Sumber';
 $_lang['source_type_desc'] = 'Jenisnya atau driver dari sumber Media. Sumber akan menggunakan driver ini untuk menyambungkan ketika mengumpulkan data. Sebagai contoh: sistem berkas akan mengambil file dari sistem file. S3 akan mendapatkan file dari S3 ember.';

@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'De tijd waarop de gebruiker voor het laatst is 
 $_lang['user_profile_err_nf'] = 'FATALE FOUT: Gebruikersprofiel niet gevonden.';
 $_lang['user_profile_err_save'] = 'Er is een fout opgetreden tijdens het proberen op te slaan van de gebruikersattributen.';
 $_lang['user_remove_confirm'] = 'Weet je zeker dat je deze gebruiker wilt verwijderen? Dit is onomkeerbaar!';
-$_lang['user_remove_multiple'] = 'Verwijder meerdere gebruikers';
 $_lang['user_remove_multiple_confirm'] = 'Weet je zeker dat je deze gebruikers wilt verwijderen? Dit is onomkeerbaar!';
 $_lang['user_remote_data_msg'] = 'Wijzig externe gebruikersdata hier.';
 $_lang['user_role_update'] = 'Edit User Role';

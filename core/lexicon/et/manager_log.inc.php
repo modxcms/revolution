@@ -9,7 +9,6 @@
 $_lang['action'] = 'Tegevus';
 $_lang['date_end'] = 'Lõpp Kuupäev';
 $_lang['date_start'] = 'Algus Kuupäev';
-$_lang['filter_clear'] = 'Puhasta Filter';
 $_lang['manager_log'] = 'Manageri Logi';
 $_lang['mgrlog_clear'] = 'Tühjanda Manageri Logi';
 $_lang['mgrlog_clear_confirm'] = 'Oled kindel, et soovid täielikult tühjendada manageri logi? Kustutatud logisid taastada pole võimalk.';

@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Indiquez un nom pour cet espace de nom.';
 $_lang['namespace_path'] = 'Chemin du core';
 $_lang['namespace_path_desc'] = 'Indiquez ici un chemin absolu vers le core de cet espace de nom (namespace). Vous pouvez utiliser des placeholders tels que {core_path}. Exemple: {core_path}components/democomponent';
 $_lang['namespace_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer l\'espace de nom « [[+name]] » et tous les contenus associés ?';
-$_lang['namespace_remove_multiple'] = 'Supprimer les espaces de noms';
 $_lang['namespace_remove_multiple_confirm'] = 'Êtes-vous sûr de vouloir supprimer ces espaces de noms ainsi que leurs contenus ?';
 $_lang['namespaces'] = 'Espaces de noms';
 $_lang['namespaces_desc'] = 'Les espaces de noms sont des identifiants globaux pour les extensions, qui identifient leurs véhicules, leurs entrées de lexique et leurs ressources.';

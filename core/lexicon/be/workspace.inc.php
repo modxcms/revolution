@@ -237,3 +237,4 @@ $_lang['modx'] = 'MODX';
 $_lang['modx_constraints'] = 'Калі ласка, змяніце версію MODX вашага сайта да версіі, якая адпавядае патрабаванням.';
 $_lang['available'] = 'Даступна';
 $_lang['not_available'] = 'Недаступна';
+$_lang['checking_for_package_updates'] = 'Checking for package updates...';

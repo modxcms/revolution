@@ -9,7 +9,6 @@
 $_lang['action'] = 'Tevékenység';
 $_lang['date_end'] = 'Befejez&#337; dátum';
 $_lang['date_start'] = 'Kezdő dátum';
-$_lang['filter_clear'] = 'Szűrő törlése';
 $_lang['manager_log'] = 'Manager Napló';
 $_lang['mgrlog_clear'] = 'A Manager Napló üres';
 $_lang['mgrlog_clear_confirm'] = 'Biztosan törölni akarja a teljes Manager Naplót? A műveletet nem lehet visszavonni!';

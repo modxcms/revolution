@@ -93,7 +93,6 @@ $_lang['reports'] = 'Справаздачы';
 $_lang['reports_desc'] = 'Справаздачы адміністратара для вашай MODX ўстаноўкі';
 $_lang['resource_groups'] = 'Групы рэсурсаў';
 $_lang['resource_groups_desc'] = 'Прызначэнне рэсурсаў да груп';
-$_lang['search'] = 'Пошук';
 $_lang['search_desc'] = 'Пошук рэсурсаў.';
 $_lang['search_resulttype_actions'] = 'Дзеянні';
 $_lang['search_resulttype_chunks'] = 'Чанкi';

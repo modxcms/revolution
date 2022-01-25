@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Zadejte název zdroje médií.';
 $_lang['source_name_desc'] = 'Název zdroje médií.';
 $_lang['source_properties.intro_msg'] = 'Správa vlastností tohoto zdroje.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'Odstranit více zdrojů médií';
 $_lang['source_remove_multiple_confirm'] = 'Opravdu chcete odstranit tyto zdroje médií? Toto může způsobit problémy s TVs, které jsou přiřazeny k těmto zdrojům.';
 $_lang['source_type'] = 'Typ zdroje';
 $_lang['source_type_desc'] = 'Typ nebo ovladač zdroje médií. Zdroj bude používat tento ovladač pro přístup k datům. Například: "Souborový systém" pracuje se soubory ze souborového systému. "Amazon S3" zajistí přístup k souborům ve službě Amazon S3.';

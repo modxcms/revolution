@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Angiv et Namespace-navn her.';
 $_lang['namespace_path'] = 'Core sti';
 $_lang['namespace_path_desc'] = 'Angiv her den fulde sti til Core for dette Namespace. Du kan bruge \'variable\' som {core_path}. Eksempel: {core_path}components/democomponent/';
 $_lang['namespace_remove_confirm'] = 'Er du sikker på, at du vil slette Namespace ved navn "[[+name]]" og alt relateret indhold?';
-$_lang['namespace_remove_multiple'] = 'Slet Namespaces';
 $_lang['namespace_remove_multiple_confirm'] = 'Er du sikker på, at du vil slette disse Namespaces og alt indhold relateret til dem?';
 $_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces_desc'] = 'Namespaces identificerer pakker og komponenter globalt, og knytter fil-pakker, lexicon-værdier og ressourcer sammen.';

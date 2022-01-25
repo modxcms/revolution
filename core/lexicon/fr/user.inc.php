@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'Date de la dernière connexion réussie de cet 
 $_lang['user_profile_err_nf'] = 'ERREUR FATALE : profil de l\'utilisateur introuvable.';
 $_lang['user_profile_err_save'] = 'Une erreur s\'est produite en tentant d\'enregistrer les attributs de l\'utilisateur.';
 $_lang['user_remove_confirm'] = 'Voulez-vous vraiment supprimer cet utilisateur? Cette opération est irréversible.';
-$_lang['user_remove_multiple'] = 'Supprimer plusieurs utilisateurs';
 $_lang['user_remove_multiple_confirm'] = 'Voulez-vous vraiment supprimer ces utilisateurs ? Cette opération est irréversible !';
 $_lang['user_remote_data_msg'] = 'Modifiez ici les données distantes de l\'utilisateur.';
 $_lang['user_role_update'] = 'Modifier le rôle de l\'utilisateur';

@@ -93,7 +93,6 @@ $_lang['reports'] = 'التقارير';
 $_lang['reports_desc'] = 'تقارير المشرف لتثبيت مودكس الخاص بك';
 $_lang['resource_groups'] = 'مجموعات الموارد';
 $_lang['resource_groups_desc'] = 'إرفاق المصادر بالمجموعات';
-$_lang['search'] = 'بحث';
 $_lang['search_desc'] = 'البحث عن المصادر.';
 $_lang['search_resulttype_actions'] = 'الإجراءات';
 $_lang['search_resulttype_chunks'] = 'قطع';

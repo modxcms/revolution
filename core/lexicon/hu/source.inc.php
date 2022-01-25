@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Kérjük, adja meg a médiaforrás nevét.';
 $_lang['source_name_desc'] = 'A médiaforrás neve.';
 $_lang['source_properties.intro_msg'] = 'Alább kezelheti a forrás tulajdonságait.';
 $_lang['source_remove_confirm'] = 'Biztosan törli ezt a médiaforrást? Használhatatlan lehet bármelyik sablonváltozó, amit ehhez az erőforráshoz rendelt.';
-$_lang['source_remove_multiple'] = 'Több médiaforrás törlése.';
 $_lang['source_remove_multiple_confirm'] = 'Biztosan törli ezeket a médiaforrásokat? Használhatatlan lehet bármelyik sablonváltozó, amit ezekhez az erőforrásokhoz rendelt.';
 $_lang['source_type'] = 'Forrásfajta';
 $_lang['source_type_desc'] = 'A médiaforrás fajtája vagy meghajtója. A forrás ezt a meghajtót használja a kapcsolódáshoz, amikor összegyűjti az adatokat. Például: A MODX fájlrendszere a fájlrendszerből olvas be állományokat. Az S3 egy S3 tárolóból veszi az állományokat.';

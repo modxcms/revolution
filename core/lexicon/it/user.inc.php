@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'L\'ultima volta che questo utente si è loggato
 $_lang['user_profile_err_nf'] = 'FATAL ERROR: Profilo Utente non trovato.';
 $_lang['user_profile_err_save'] = 'Si è verificato un errore durante il tentativo di salvare gli attributi dell\'utente.';
 $_lang['user_remove_confirm'] = 'Sei sicuro di voler rimuovere questo utente? Questa operazione è irreversibile!';
-$_lang['user_remove_multiple'] = 'Rimuovi Utenti Multipli';
 $_lang['user_remove_multiple_confirm'] = 'Sei sicuro di voler rimuovere questi utenti? Questa operazione è irreversibile!';
 $_lang['user_remote_data_msg'] = 'Modifica dati utente remoti.';
 $_lang['user_role_update'] = 'Modifica Ruolo Utente';

@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'กรุณาระบุชื่อสำห
 $_lang['source_name_desc'] = 'ชื่อของแหล่งข้อมูลมีเดีย';
 $_lang['source_properties.intro_msg'] = 'จัดการคุณสมบัติสำหรับแหล่งข้อมูลข้างล่างนี้';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'ลบหลายแหล่งข้อมูลมีเดีย';
 $_lang['source_remove_multiple_confirm'] = 'คุณแน่ใจว่าต้องการลบเหล่าแหล่งข้อมูลมีเดียนี้หรือไม่? นี่อาจจะสร้างความเสียหายให้กับตัวแปรแม่แบบใดๆที่คุณกำหนดมันให้กับเหล่าแหล่งข้อมูลนี้';
 $_lang['source_type'] = 'ประเภทแหล่งข้อมูล';
 $_lang['source_type_desc'] = 'ประเภทหรือไดรเวอร์ของแหล่งข้อมูลมีเดีย แหล่งข้อมูลจะใช้ไดรเวอร์นี้เพื่อเชื่อมต่อเมื่อรวบรวมข้อมูลของมัน ตัวอย่าง: ระบบไฟล์จะดึงไฟล์จากระบบไฟล์เดียวกัน เช่น S3 จะรับไฟล์จาก S3 bucket';

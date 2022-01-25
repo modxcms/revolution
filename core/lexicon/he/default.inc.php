@@ -62,7 +62,6 @@ $_lang['cleaningup'] = 'ניקיון';
 $_lang['clear_cache'] = 'נקה מטמון';
 $_lang['clear_cache_on_save'] = 'Empty Cache'; // make consistent with how this appears on Resource editing panel
 $_lang['clear_cache_on_save_desc'] = 'Clear cache files when this item is saved.'; // make more general, as this action clears more than just this item's cache files
-$_lang['clear_filter'] = 'נקה פילטר';
 $_lang['click_to_change'] = 'לחץ לשינוי';
 $_lang['close'] = 'סגור';
 $_lang['code'] = 'קודד';
@@ -414,7 +413,7 @@ $_lang['resource_groups'] = 'קבוצות משאבים';
 $_lang['resource_management'] = 'נהל משאבים';
 $_lang['resource_name'] = 'שם משאב';
 $_lang['resource_name_new'] = 'שם משאב חדש';
-$_lang['resource_preview'] = 'תצוגה מקדימה';
+$_lang['resource_view'] = 'מבט';
 $_lang['resource_overview'] = 'סקירה';
 $_lang['resource_settings'] = 'הגדרות משאב';
 $_lang['resource_type'] = 'סוג משאב';
@@ -430,7 +429,6 @@ $_lang['scroll_dn'] = 'גלול למטה';
 $_lang['scroll_up'] = 'גלול מעלה';
 $_lang['search'] = 'חפש';
 $_lang['search_criteria'] = 'קריטריוני חיפוש';
-$_lang['search_ellipsis'] = 'חפש...';
 $_lang['search_results'] = 'תוצאות חיפוש';
 $_lang['security'] = 'אבטחה';
 $_lang['select_date'] = 'בחר תאריך';
@@ -559,3 +557,22 @@ $_lang['saturday'] = 'שבת';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+
+/*
+    Shared lang entries for elements --
+
+    Necessary to to give quick create/edit panels
+    access when they are opened outside the
+    context of their respective element types
+*/
+// All
+
+// TVs
+$_lang['tv_type'] = 'סוג קלט';
+$_lang['tv_default'] = 'ערך ברירת מחדל';
+$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
+$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
+$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_elements'] = 'ערכי אופציות קלט';
+$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';

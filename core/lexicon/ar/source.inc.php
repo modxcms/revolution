@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'الرجاء تحديد اسم لمصدر الو
 $_lang['source_name_desc'] = 'اسم مصدر الوسائط.';
 $_lang['source_properties.intro_msg'] = 'إدارة خصائص هذا المصدر بالأسفل.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'حذف مصادر الوسائط المتعددة';
 $_lang['source_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد حذف مصدر الوسائط هذا؟ قد يؤدي هذا إلى عطب عناصر القالب التي قمت بإسنادها لهذا المصدر.';
 $_lang['source_type'] = 'نوع المصدر';
 $_lang['source_type_desc'] = 'النمط، أو السواقة لمصدر الوسائط. المصدر سوف يستخدم هذه السواقة ليتصل إليها عند جمع بياناتها. مثال: ملف النظام سوف يجمع الملفات من ملف النظام. S3 سوف يحصل على الملفات من حزمة S3.';

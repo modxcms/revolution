@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Tentukan nama untuk Namespace di sini.';
 $_lang['namespace_path'] = 'Inti jalan';
 $_lang['namespace_path_desc'] = 'Menentukan path absolut ke inti untuk Namespace ini di sini. Anda dapat menggunakan pengganti seperti {core_path}. Contoh: {core_path} komponen/democomponent /';
 $_lang['namespace_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus namespace ini dan semua konten terkait?';
-$_lang['namespace_remove_multiple'] = 'Menghapus Namespaces';
 $_lang['namespace_remove_multiple_confirm'] = 'Apakah Anda yakin Anda ingin menghapus namespaces ini dan semua konten mereka terkait?';
 $_lang['namespaces'] = 'Ruang nama';
 $_lang['namespaces_desc'] = 'Namespaces adalah pengidentifikasi global untuk paket dan komponen, mendaftarkan kendaraan, leksikon entri, dan sumber daya bersama-sama mereka.';

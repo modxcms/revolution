@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'The last time that the user successfully logged
 $_lang['user_profile_err_nf'] = 'ล้มเหลว: ไม่พบข้อมูลส่วนตัวของผู้ใช้นี้';
 $_lang['user_profile_err_save'] = 'เกิดข้อผิดพลาดในขณะที่พยายามบันทึกคุณลักษณะของผู้ใช้';
 $_lang['user_remove_confirm'] = 'คุณแน่ใจว่าต้องการลบผู้ใช้นี้? การกระทำนี้ไม่สามารถเรียกกลับคืนได้';
-$_lang['user_remove_multiple'] = 'ลบผู้ใช้หลายคน';
 $_lang['user_remove_multiple_confirm'] = 'คุณแน่ใจว่าต้องการลบผู้ใช้นี้? การกระทำนี้ไม่สามารถเรียกกลับคืนได้';
 $_lang['user_remote_data_msg'] = 'แก้ไขข้อมูลผู้ใช้ระยะไกลที่นี่';
 $_lang['user_role_update'] = 'Edit User Role';

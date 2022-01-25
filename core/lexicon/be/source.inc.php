@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Калі ласка, пазначце назву
 $_lang['source_name_desc'] = 'Назва крыніцы файлаў.';
 $_lang['source_properties.intro_msg'] = 'Ніжэй знаходзіцца кіраване ўласцівасцямі гэтай крыніцы.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'Выдаліць адразу некалькі крыніц файлаў';
 $_lang['source_remove_multiple_confirm'] = 'Вы сапраўды жадаеце выдаліць гэтыя крыніцы файлаў? Гэта можа зламаць некаторыя зменныя шаблону, якія вы прыстасавалі да гэтых крыніц.';
 $_lang['source_type'] = 'Тып крыніцы';
 $_lang['source_type_desc'] = 'Тып, або драйвер крыніцы файлаў. Крыніца будзе выкарыстоўваць гэты драйвер для падлучэння падчас збору сваіх дадзеных. Напрыклад: файлавая сістэма будзе захопліваць файлы з файлавай сістэмы. S3 атрымае файлы з вядра S3.';

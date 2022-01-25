@@ -94,7 +94,6 @@ $_lang['reports'] = '报告';
 $_lang['reports_desc'] = '管理MODX安装报告';
 $_lang['resource_groups'] = 'Resource Groups';
 $_lang['resource_groups_desc'] = '将资源分配到组';
-$_lang['search'] = '搜索';
 $_lang['search_desc'] = '搜索资源。';
 $_lang['search_resulttype_actions'] = '行为';
 $_lang['search_resulttype_chunks'] = '模板片段';

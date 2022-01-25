@@ -184,8 +184,6 @@ $_lang['textbox'] = 'Box Testo';
 $_lang['time_increment'] = 'Incremento Orario';
 $_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
 $_lang['title'] = 'Titolo';
-$_lang['tv_default'] = 'Default Value';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
 $_lang['tv_default_date'] = 'Default Date and Time';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
@@ -220,7 +218,6 @@ $_lang['tv_default_text'] = 'Default Text';
 $_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
 $_lang['tv_default_url'] = 'Default URL';
 $_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
-$_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_elements_checkbox'] = 'Checkbox Options';
 $_lang['tv_elements_listbox'] = 'Dropdown List Options';
 $_lang['tv_elements_radio'] = 'Radio Button Options';
@@ -240,7 +237,6 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_type'] = 'Input Type';
 $_lang['upper_case'] = 'Maiuscolo';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Visualizzazione Testo';
@@ -248,3 +244,16 @@ $_lang['width'] = 'Larghezza';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['tv_default_datetime'] = $_lang['tv_default_date'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_type
+    tv_default
+    tv_default_desc
+    tv_elements
+
+*/

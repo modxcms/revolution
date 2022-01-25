@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Adjon meg itt egy nevet a névtérnek.';
 $_lang['namespace_path'] = 'Alapkönyvtár';
 $_lang['namespace_path_desc'] = 'Adja meg itt ezen névtér alapelemeinek teljes elérési útját. Használhat helyettesítőket, mint {core_path}. Például: {core_path}components/democomponent/';
 $_lang['namespace_remove_confirm'] = 'Biztosan törli "[[+name]]" névteret és minden kapcsolódó tartalmat?';
-$_lang['namespace_remove_multiple'] = 'Névterek törlése';
 $_lang['namespace_remove_multiple_confirm'] = 'Biztosan törli ezeket a névtereket és minden hozzájuk kapcsolódó tartalmat?';
 $_lang['namespaces'] = 'Névterek';
 $_lang['namespaces_desc'] = 'A névterek rendszerszintű azonosítók csomagok és összetevők számára, a közvetítők, szókészletek és erőforrások közös bejegyzésére.';

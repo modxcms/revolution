@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'Der Zeitpunkt, zu dem sich der Benutzer zuletzt
 $_lang['user_profile_err_nf'] = 'FATALER FEHLER: Benutzerprofil nicht gefunden.';
 $_lang['user_profile_err_save'] = 'Beim Versuch, die Benutzer-Attribute zu speichern, ist ein Fehler aufgetreten.';
 $_lang['user_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Benutzer löschen möchten? Dies kann nicht rückgängig gemacht werden!';
-$_lang['user_remove_multiple'] = 'Mehrere Benutzer löschen';
 $_lang['user_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Benutzer löschen möchten? Dies kann nicht rückgängig gemacht werden!';
 $_lang['user_remote_data_msg'] = 'Daten des externen Benutzers bearbeiten (Benutzer, der über LDAP, Crowd, OpenID etc. angebunden ist).';
 $_lang['user_role_update'] = 'Benutzerrolle bearbeiten';

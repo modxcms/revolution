@@ -187,8 +187,6 @@ $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Zeitintervall';
 $_lang['time_increment_desc'] = 'Die Anzahl der Minuten zwischen zwei Zeitwerten in der Liste (Standard: 15).';
 $_lang['title'] = 'Titel';
-$_lang['tv_default'] = 'Standardwert';
-$_lang['tv_default_desc'] = 'Der Inhalt, den diese TV ausgibt, wenn kein vom Benutzer eingegebener Inhalt vorhanden ist.';
 $_lang['tv_default_checkbox_desc'] = 'Ein durch Doppel-Strich getrennter Satz von Optionen, die in dieser TV ausgewählt sind, wenn der Benutzer nicht einen oder mehrere markiert hat. Wenn Ihre Optionen Bezeichnungen enthalten (Option Eins==1|||Option Zwei==2||Option drei==3), dann geben Sie unbedingt nur den Wert ein (d.h. "1" für Option Eins, oder "1||3" für Option Eins und Option Drei)';
 $_lang['tv_default_date'] = 'Standard-Datum und -Zeit';
 $_lang['tv_default_date_desc'] = 'Das Datum, das angezeigt werden soll, wenn der Benutzer kein Datum angibt. Wählen Sie ein relatives Datum aus der obigen Liste oder geben Sie ein anderes Datum nach einem der folgenden Muster ein:
@@ -224,7 +222,6 @@ $_lang['tv_default_text'] = 'Standard-Text';
 $_lang['tv_default_text_desc'] = 'Der Text, den diese TV ausgibt, wenn der Benutzer keinen angibt.';
 $_lang['tv_default_url'] = 'Standard-URL';
 $_lang['tv_default_url_desc'] = 'Die URL, die diese TV ausgibt, wenn der Benutzer keine angibt.';
-$_lang['tv_elements'] = 'Eingabe-Optionswerte';
 $_lang['tv_elements_checkbox'] = 'Checkbox-Optionen';
 $_lang['tv_elements_listbox'] = 'Dropdown-Listen-Optionen';
 $_lang['tv_elements_radio'] = 'Radio-Button-Optionen';
@@ -243,7 +240,6 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_type'] = 'Eingabetyp';
 $_lang['upper_case'] = 'Großbuchstaben';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Link-Text';
@@ -251,3 +247,16 @@ $_lang['width'] = 'Breite';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['tv_default_datetime'] = $_lang['tv_default_date'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_type
+    tv_default
+    tv_default_desc
+    tv_elements
+
+*/

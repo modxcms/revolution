@@ -237,3 +237,4 @@ $_lang['modx'] = 'MODX';
 $_lang['modx_constraints'] = 'Si prega di cambiare la versione di MODX del tuo sito in una versione che soddisfa i vincoli.';
 $_lang['available'] = 'Disponibile';
 $_lang['not_available'] = 'Non disponibile';
+$_lang['checking_for_package_updates'] = 'Checking for package updates...';

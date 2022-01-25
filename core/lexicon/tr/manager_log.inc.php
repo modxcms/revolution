@@ -9,7 +9,6 @@
 $_lang['action'] = 'Eylem';
 $_lang['date_end'] = 'Bitiş Tarihi';
 $_lang['date_start'] = 'Başlangıç Tarihi';
-$_lang['filter_clear'] = 'Filtre temizle';
 $_lang['manager_log'] = 'Yönetici Günlüğü';
 $_lang['mgrlog_clear'] = 'Boş Yönetici Günlüğü';
 $_lang['mgrlog_clear_confirm'] = 'Yönetici günlüğünü tamamen boşaltmak istediğinizden emin misiniz? Bu işlem geri alınamaz.';

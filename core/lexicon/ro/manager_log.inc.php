@@ -9,7 +9,6 @@
 $_lang['action'] = 'Action';
 $_lang['date_end'] = 'Până la data';
 $_lang['date_start'] = 'Începând cu data';
-$_lang['filter_clear'] = 'Suprimă filtrarea';
 $_lang['manager_log'] = 'Manager Log';
 $_lang['mgrlog_clear'] = 'Empty Manager Log';
 $_lang['mgrlog_clear_confirm'] = 'Are you sure you want to completely empty the manager log? This cannot be undone.';

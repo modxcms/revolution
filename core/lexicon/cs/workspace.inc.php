@@ -237,3 +237,4 @@ $_lang['modx'] = 'MODX';
 $_lang['modx_constraints'] = 'Prosím, změňte verzi MODX na které váš web běží na verzi, která která vyhovuje závislostem.';
 $_lang['available'] = 'Dostupné';
 $_lang['not_available'] = 'Nedostupné';
+$_lang['checking_for_package_updates'] = 'Kontrola aktualizací balíčků...';

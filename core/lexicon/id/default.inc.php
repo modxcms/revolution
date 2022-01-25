@@ -62,7 +62,6 @@ $_lang['cleaningup'] = 'Membersihkan';
 $_lang['clear_cache'] = 'Hapus Cache';
 $_lang['clear_cache_on_save'] = 'Empty Cache'; // make consistent with how this appears on Resource editing panel
 $_lang['clear_cache_on_save_desc'] = 'Clear cache files when this item is saved.'; // make more general, as this action clears more than just this item's cache files
-$_lang['clear_filter'] = 'Hapus Filter';
 $_lang['click_to_change'] = 'Klik untuk perubahan';
 $_lang['close'] = 'Tutup';
 $_lang['code'] = 'Kode';
@@ -414,7 +413,7 @@ $_lang['resource_groups'] = 'Kelompok-kelompok sumber daya';
 $_lang['resource_management'] = 'Mengelola sumber daya';
 $_lang['resource_name'] = 'Nama sumber daya';
 $_lang['resource_name_new'] = 'Nama sumber daya baru';
-$_lang['resource_preview'] = 'Tinjauan';
+$_lang['resource_view'] = 'Pemandangan';
 $_lang['resource_overview'] = 'Ikhtisar sumber daya';
 $_lang['resource_settings'] = 'Pengaturan sumber';
 $_lang['resource_type'] = 'Tipe sumber daya';
@@ -430,7 +429,6 @@ $_lang['scroll_dn'] = 'Gulir ke bawah';
 $_lang['scroll_up'] = 'Gulir ke atas';
 $_lang['search'] = 'Cari';
 $_lang['search_criteria'] = 'Kriteria pencarian';
-$_lang['search_ellipsis'] = 'Cari...';
 $_lang['search_results'] = 'Hasil pencarian';
 $_lang['security'] = 'Keamanan';
 $_lang['select_date'] = 'Pilih tanggal';
@@ -559,3 +557,22 @@ $_lang['saturday'] = 'Sabtu';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+
+/*
+    Shared lang entries for elements --
+
+    Necessary to to give quick create/edit panels
+    access when they are opened outside the
+    context of their respective element types
+*/
+// All
+
+// TVs
+$_lang['tv_type'] = 'Jenis input';
+$_lang['tv_default'] = 'Nilai default';
+$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
+$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
+$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_elements'] = 'Nilai-nilai opsi masukan';
+$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';

@@ -93,7 +93,6 @@ $_lang['reports'] = 'Rapporter';
 $_lang['reports_desc'] = 'Administrativa rapporter för din MODX-installation';
 $_lang['resource_groups'] = 'Resursgrupper';
 $_lang['resource_groups_desc'] = 'Hantera de grupper som resurserna tillhör.';
-$_lang['search'] = 'Sök';
 $_lang['search_desc'] = 'Sök efter resurser.';
 $_lang['search_resulttype_actions'] = 'Åtgärder';
 $_lang['search_resulttype_chunks'] = 'Chunks';

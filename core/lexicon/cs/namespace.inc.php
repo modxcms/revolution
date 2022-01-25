@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Zadejte název pro tento jmenný prostor.';
 $_lang['namespace_path'] = 'Cesta ke Core';
 $_lang['namespace_path_desc'] = 'Zadejte absolutní cestu ke Core pro tento jmenný prostor. Je možno používat placeholdery jako je {core_path}. Např: {core_path}assets/demokomponenta"';
 $_lang['namespace_remove_confirm'] = 'Opravdu chcete odstranit jmenný prostor "[[+name]]" a vše na něj napojené?';
-$_lang['namespace_remove_multiple'] = 'Odstranit jmenný prostor';
 $_lang['namespace_remove_multiple_confirm'] = 'Opravdu chcete odstranit tento jmenný prostor a všechen jeho přidružený obsah?';
 $_lang['namespaces'] = 'Jmenné prostory';
 $_lang['namespaces_desc'] = 'Jmenné prostory jsou globální identifikátory pro balíčky a komponenty registrující jejich transportní prostředky, záznamy ve slovníku a dokumenty vše pohromadě.';

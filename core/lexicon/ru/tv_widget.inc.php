@@ -184,8 +184,6 @@ $_lang['textbox'] = 'Текстовый блок';
 $_lang['time_increment'] = 'Приращение времени';
 $_lang['time_increment_desc'] = 'Количество минут между каждым значением времени в списке. (По умолчанию: 15)';
 $_lang['title'] = 'Заголовок';
-$_lang['tv_default'] = 'Значение по умолчанию';
-$_lang['tv_default_desc'] = 'Контент, который будет показываться, если содержимое введено пользователем, не предоставлено.';
 $_lang['tv_default_checkbox_desc'] = 'Набор опций, разделенных двумя каналами, выбранных для этого TV, если пользователь не проверяет один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр One==1||Option Two==2||Option Three==3), убедитесь, что вы ввели значение (т.е. «1» для параметра «1||3» для опции «1» и «1» для варианта «1»';
 $_lang['tv_default_date'] = 'Дата и время по умолчанию';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
@@ -220,18 +218,17 @@ $_lang['tv_default_text'] = 'Текст по умолчанию';
 $_lang['tv_default_text_desc'] = 'Текстовое содержимое, которое будет показано TV, если пользователь не предоставит его.';
 $_lang['tv_default_url'] = 'URL по умолчанию';
 $_lang['tv_default_url_desc'] = 'URL-адрес, который этот TV покажет, если пользователь не предоставил его.';
-$_lang['tv_elements'] = 'Возможные значения';
 $_lang['tv_elements_checkbox'] = 'Параметры флажка';
 $_lang['tv_elements_listbox'] = 'Параметры выпадающего списка';
 $_lang['tv_elements_radio'] = 'Параметры радиокнопок';
 $_lang['tv_elements_tag'] = 'Параметры тегов';
-$_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
+$_lang['tv_elements_desc'] = 'Определяет выбираемые параметры для этого TV, которые могут быть введены вручную или собраны с помощью однострочного <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">запроса базы данных</a>. Некоторые примеры:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">Bird||Cat||Dog</span> (shorthand for Bird==Bird||Cat==Cat||Dog==Dog)</li>
-            <li><span class="example-input">White==#ffffff||Black==#000000</span> (where label==value)</li>
-            <li><span class="example-input">[[+example_1]]</span> (builds a list of published Resources whose assigned template id is 1)</li>
-            <li><span class="example-input">[[+example_2]]</span> (builds the same list as the previous example, including a blank option)</li>
+            <li><span class="example-input">Птица||Кошка||Собака</span> (короче для птицы==Птицы||Кошка==Кошка||Собака==Собака)</li>
+            <li><span class="example-input"><span class="example-input"> Белый==#ffffff|||Черный==#000000</span> (где label==value)</li>
+            <li><span class="example-input">[[+example_1]]</span> (строит список опубликованных ресурсов с назначенным id шаблона равным 1)</li>
+            <li><span class="example-input">[[+example_2]]</span> (строит тот же список, что и предыдущий пример, включая пустой вариант)</li>
         </ul>
     </div>
     ';
@@ -240,7 +237,6 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_type'] = 'Тип ввода';
 $_lang['upper_case'] = 'Верхний регистр';
 $_lang['url'] = 'URL';
 $_lang['url_display_text'] = 'Показать текст';
@@ -248,3 +244,16 @@ $_lang['width'] = 'Ширина';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['tv_default_datetime'] = $_lang['tv_default_date'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_type
+    tv_default
+    tv_default_desc
+    tv_elements
+
+*/

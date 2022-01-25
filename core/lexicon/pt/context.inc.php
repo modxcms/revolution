@@ -23,6 +23,6 @@ $_lang['context_id'] = 'ID Contexto';
 $_lang['context_key'] = 'Chave Contexto';
 $_lang['context_management_message'] = 'Gerenciar Contextos do Site.';
 $_lang['context_settings'] = 'Configurações de Contexto';
-$_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
+$_lang['context_settings_desc'] = 'Aqui você pode definir as configurações específicas para este Contexto. As configurações de Contexto irão substituir qualquer Configuração do Sistema com a mesma chave. <b>Cada configuração estará disponível através do espaço reservado [[++key]</b>.';
 $_lang['context_with_key_not_found'] = 'Contexto com chave %s não encontradop!';
 $_lang['contexts'] = 'Contextos';

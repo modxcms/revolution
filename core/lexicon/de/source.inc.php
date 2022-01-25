@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Bitte geben Sie einen Namen für die Medienquell
 $_lang['source_name_desc'] = 'Der Name der Medienquelle.';
 $_lang['source_properties.intro_msg'] = 'Verwalten Sie nachstehend die Eigenschaften dieser Medienquelle.';
 $_lang['source_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Medienquelle löschen möchten? Dadurch könnten alle TVs, die Sie dieser Quelle zugeordnet haben, unbrauchbar werden.';
-$_lang['source_remove_multiple'] = 'Mehrere Medienquellen löschen';
 $_lang['source_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Medienquellen löschen möchten? Dadurch könnten alle Template-Variablen, die Sie diesen Quellen zugeordnet haben, unbrauchbar werden.';
 $_lang['source_type'] = 'Quellen-Typ';
 $_lang['source_type_desc'] = 'Der Typ – oder Treiber – der Medienquelle. Die Quelle verwendet diesen Treiber, um eine Verbindung herzustellen, wenn sie ihre Daten abruft. Beispiele: "Dateisystem" holt Dateien vom Dateisystem; "S3" holt Dateien von einem S3-Bucket.';

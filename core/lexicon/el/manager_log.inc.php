@@ -9,7 +9,6 @@
 $_lang['action'] = 'Action';
 $_lang['date_end'] = 'Από: (ημ/νία)';
 $_lang['date_start'] = 'Έως: (ημ/νία)';
-$_lang['filter_clear'] = 'Καθαρισμός φίλτρου';
 $_lang['manager_log'] = 'Ιστορικό διαχείρισης';
 $_lang['mgrlog_clear'] = 'Διαγραφή του ιστορικού διαχείρισης';
 $_lang['mgrlog_clear_confirm'] = 'Είστε βέβαιοι ότι θέλετε να διαγράψετε όλο το ιστορικό διαχείρισης;';

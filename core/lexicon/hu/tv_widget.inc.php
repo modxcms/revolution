@@ -7,8 +7,8 @@
  * @subpackage lexicon
  */
 $_lang['attributes'] = 'Jellemzők';
-$_lang['attr_attr_desc'] = 'One or more space-separated attributes to add to this element’s tag (for example, <span class="example-input">rel="external" type="application/pdf"</span>).';
-$_lang['attr_class_desc'] = 'One or more space-separated CSS class names.';
+$_lang['attr_attr_desc'] = 'Egy vagy több, szóközzel elválasztott jellemző ehhez az elemhez (pl. <span class="example-input">rel="external" type="application/pdf"</span>).';
+$_lang['attr_class_desc'] = 'Egy vagy több, szóközzel elválasztott CSS osztály neve.';
 $_lang['attr_style_desc'] = 'CSS szabályok (például <span class="example-input">color:#f36f99; text-decoration:none;</span>).';
 $_lang['attr_target_blank'] = 'Üres';
 $_lang['attr_target_parent'] = 'Szülő';
@@ -33,21 +33,21 @@ $_lang['combo_listheight_desc'] = 'A lenyíló választék magassága százalék
 $_lang['combo_listwidth'] = 'Felsorolás szélessége';
 $_lang['combo_listwidth_desc'] = 'A lenyíló választék szélessége százalékban vagy képpontban. Alapértéke a vegyes szövegbeviteli doboz szélessége.';
 $_lang['combo_maxheight'] = 'Legnagyobb magasság';
-$_lang['combo_maxheight_desc'] = 'The maximum height in pixels of the dropdown list before scrollbars are shown. (Default: 300)';
+$_lang['combo_maxheight_desc'] = 'A lenyíló választék legnagyobb magassága képpontban, mielőtt megjelennek a gördítősávok (Alapérték: 300).';
 $_lang['combo_stackitems'] = 'Kiválasztott tételek halmozása';
 $_lang['combo_stackitems_desc'] = 'Ha Igen van beállítva, soronként 1 tétel jelenik meg. Alapértéke Nem, amikor a tételeket egy sorban jeleníti meg.';
 $_lang['combo_title'] = 'Felsorolás fejléce';
 $_lang['combo_title_desc'] = 'Ha meg van adva, egy fejléc elem jön létre, ami tartalmazza ezt a szöveget, és a lenyíló választék tetején szerepel.';
 $_lang['combo_typeahead'] = 'Gépeléskiegészítés engedélyezése';
-$_lang['combo_typeahead_desc'] = 'Populate and autoselect options that match as you type after a configurable delay. (Default: No)';
+$_lang['combo_typeahead_desc'] = 'Töltse be és jelölje is ki a lehetőségeket a begépelt szöveg alapján egy beállított késleltetéssel. (Alapérték: Nem)';
 $_lang['combo_typeahead_delay'] = 'Késleltetés';
-$_lang['combo_typeahead_delay_desc'] = 'Milliseconds before a matched option is shown. (Default: 250)';
+$_lang['combo_typeahead_delay_desc'] = 'Ezredmásodperc az illeszkedő lehetőség megjelenítése előtt. (Alapérték: 250)';
 $_lang['date'] = 'Dátum';
 $_lang['date_format'] = 'Dátum formátuma';
-$_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/strftime" target="_blank">php’s strftime syntax</a>.
+$_lang['date_format_desc'] = 'Adjon meg egy formátumot a <a href="https://www.php.net/strftime" target="_blank">php strftime szabályrendszere</a> használatával.
     <div class="example-list">Common examples include:
         <ul>
-            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (default format)</li>
+            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (alapértelmezett)</li>
             <li><span class="example-input">[[+example_2a]]</span> ([[+example_2b]])</li>
             <li><span class="example-input">[[+example_3a]]</span> ([[+example_3b]])</li>
             <li><span class="example-input">[[+example_4a]]</span> ([[+example_4b]])</li>
@@ -57,29 +57,29 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
         </ul>
     </div>
 ';
-$_lang['date_use_current'] = 'Use Current Date as Fallback';
-$_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
+$_lang['date_use_current'] = 'Használja a jelenlegi dátumot tartaléknak.';
+$_lang['date_use_current_desc'] = 'Ha egy érték ebben a sablonváltozóban nem kötelező (Üres engedélyezése = “Igen“), és az alapértelmezett dátum nincs megadva, ezt a beállítást “Igen“-re állítva megjeleníti a jelenlegi dátumot.';
 $_lang['default'] = 'Alapértelmezett';
 $_lang['default_date_now'] = 'Ma a jelenlegi időponttal';
 $_lang['default_date_today'] = 'Ma (éjfél)';
 $_lang['default_date_yesterday'] = 'Tegnap (éjfél)';
 $_lang['default_date_tomorrow'] = 'Holnap (éjfél)';
-$_lang['default_date_custom'] = 'Custom (see description below)';
+$_lang['default_date_custom'] = 'Egyéni (lásd a leírást alább)';
 $_lang['delim'] = 'Határolójel';
 $_lang['delimiter'] = 'Határolójel';
-$_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting multiple chooseable options).';
+$_lang['delimiter_desc'] = 'Egy vagy több írásjel az értékek elválasztására (a több lehetőséget is támogató sablonváltozókhoz)';
 $_lang['disabled_dates'] = 'Nem választható dátumok';
-$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
-    <p>Examples using the default format (“[[+format_default]]”) include:</p>
+$_lang['disabled_dates_desc'] = 'A kezelőben levő dátumformátumok vesszővel elválasztott, javascript <abbr title="reguláris kifejezés">regex</abbr>-alapú felsorolása (határolók nélkül)  (jelenleg “[[+format_current]]”).
+    <p>Példák az alapértelmezett formátum (“[[+format_default]]”) használatára:</p>
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (selects individual dates)</li>
-            <li><span class="example-input">[[+example_2a]]</span> (selects [[+example_2b]] and [[+example_2c]] of every year)</li>
-            <li><span class="example-input">[[+example_3a]]</span> (“^” to match beginning of string; this selects all of [[+example_3b]])</li>
-            <li><span class="example-input">[[+example_4a]]</span> (selects every day in [[+example_4b]])</li>
-            <li><span class="example-input">[[+example_5]]</span> (“$” to match end of string; this selects every day in March of every year)</li>
+            <li><span class="example-input">[[+example_1]]</span> (egyedi dátumok kiválasztása)</li>
+            <li><span class="example-input">[[+example_2a]]</span> ([[+example_2b]] és [[+example_2c]] kiválasztása minden évben)</li>
+            <li><span class="example-input">[[+example_3a]]</span> (“^” a betűsor elejére illeszkedik; az összes [[+example_3b]] kiválasztása)</li>
+            <li><span class="example-input">[[+example_4a]]</span> (kiválasztja [[+example_4b]] minden napját)</li>
+            <li><span class="example-input">[[+example_5]]</span> (“$” a betűsor végére illeszkedik; kiválasztja március minden napját minden évben)</li>
         </ul>
-        Note: If your date format uses dot separators they will need to be escaped (e.g., “[[+example_6a]]” should be entered above as “[[+example_6b]]”).
+        Megjegyzés: A dátumformátumban használt pont elválasztókat hatástalanítani kell (pl., “[[+example_6a]]” helyett “[[+example_6b]]”).
     </div>
 ';
 $_lang['disabled_days'] = 'Nem választható napok';
@@ -93,7 +93,7 @@ $_lang['email'] = 'E-mail';
 $_lang['file'] = 'Állomány';
 $_lang['height'] = 'Magasság';
 $_lang['hidden'] = 'Rejtett';
-$_lang['hide_time'] = 'Hide Time Option';
+$_lang['hide_time'] = 'Az időbeállítás elrejtése';
 $_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
 $_lang['htmlarea'] = 'HTML-terület';
 $_lang['htmltag'] = 'HTML jelölő';
@@ -127,7 +127,7 @@ $_lang['number_allowdecimals'] = 'Tizedesek engedélyezése';
 $_lang['number_allownegative'] = 'Negatív engedélyezése';
 $_lang['number_decimalprecision'] = 'Pontosság';
 $_lang['number_decimalprecision_desc'] = 'The maximum number of digits allowed after the decimal separator. (Default: 2)';
-$_lang['number_decimalprecision_strict'] = 'Strict Decimal Precision';
+$_lang['number_decimalprecision_strict'] = 'Szigorú tizedes pontosság';
 $_lang['number_decimalprecision_strict_desc'] = 'When set to “Yes,” preserves trailing zeros in decimal numbers (defaults to “No”).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Elválasztó';
@@ -145,7 +145,7 @@ $_lang['required_desc'] = 'Select “No” to make this TV a required field in t
 $_lang['resourcelist'] = 'Erőforrások felsorolása';
 $_lang['resourcelist_depth'] = 'Mélység';
 $_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
-$_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
+$_lang['resourcelist_forceselection_desc'] = 'Letiltva; csak a felsorolásban levő egyezések érvényesek.';
 $_lang['resourcelist_includeparent'] = 'Tartalmazza a szülőket';
 $_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
 $_lang['resourcelist_limitrelatedcontext'] = 'Szűkítse a kapcsolódó környezetre';
@@ -182,10 +182,8 @@ $_lang['textarea'] = 'Szövegmező';
 $_lang['textareamini'] = 'Szövegmező (mini)';
 $_lang['textbox'] = 'Szövegdoboz';
 $_lang['time_increment'] = 'Idő növelése';
-$_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
+$_lang['time_increment_desc'] = 'A felsorolt időértékek közötti különbség percben. (Alapérték: 15)';
 $_lang['title'] = 'Felirat';
-$_lang['tv_default'] = 'Alapérték';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
 $_lang['tv_default_date'] = 'Alapértelmezett dátum és idő';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
@@ -220,7 +218,6 @@ $_lang['tv_default_text'] = 'Alapértelmezett szöveg';
 $_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
 $_lang['tv_default_url'] = 'Alapértelmezett URL';
 $_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
-$_lang['tv_elements'] = 'Lenyíló választék értékei';
 $_lang['tv_elements_checkbox'] = 'Jelölőnégyzet beállításai';
 $_lang['tv_elements_listbox'] = 'Lenyíló felsorolás beállításai';
 $_lang['tv_elements_radio'] = 'Rádiógomb beállításai';
@@ -240,7 +237,6 @@ $_lang['tv_elements_listbox_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_listbox-multiple_desc'] = $_lang['tv_elements_listbox_desc'];
 $_lang['tv_elements_radio_desc'] = $_lang['tv_elements_option_desc'] = $_lang['tv_elements_desc'];
 $_lang['tv_elements_tag_desc'] = $_lang['tv_elements_desc'];
-$_lang['tv_type'] = 'Bevitel fajtája';
 $_lang['upper_case'] = 'Nagybetű';
 $_lang['url'] = 'Webcím';
 $_lang['url_display_text'] = 'Szöveg megjelenítése';
@@ -248,3 +244,16 @@ $_lang['width'] = 'Szélesség';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['tv_default_datetime'] = $_lang['tv_default_date'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_type
+    tv_default
+    tv_default_desc
+    tv_elements
+
+*/

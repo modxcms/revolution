@@ -21,20 +21,15 @@ $_lang['configcheck_errorpage_unavailable_msg'] = 'Це означає, що с�
 $_lang['configcheck_errorpage_unpublished'] = 'Сторінка помилки 404 "Документ не знайдений", що вказана у налаштуваннях системи, не опублікована або не існує.';
 $_lang['configcheck_errorpage_unpublished_msg'] = 'Це означає, що сторінка 404 помилки "Документ не знайдений" недоступна для відвідувачів сайту. Опублікуйте цю сторінку або переконайтеся, що її ідентифікатор правильно вказаний у налаштуваннях системи.';
 $_lang['configcheck_htaccess'] = 'Каталог ядра у відкритому доступі ';
-$_lang['configcheck_htaccess_msg'] = 'MODX detected that your core folder is (partially) accessible to the public.
-<strong>This is not recommended and a security risk.</strong>
-If your MODX installation is running on a Apache webserver
-you should at least set up the .htaccess file inside the core folder <em>[[+fileLocation]]</em>.
-This can be easily done by renaming the existing ht.access example file there to .htaccess.
-<p>There are other methods and webservers you may use, please read the <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx">Hardening MODX Guide</a>
-for further information about securing your site.</p>
-If you setup everything correctly, browsing e.g. to the <a href="[[+checkUrl]]" target="_blank">Changelog</a>
-should give you a 403 (permission denied) or better a 404 (not found). If you can see the changelog
-there in the browser, something is still wrong and you need to reconfigure or call an expert to solve this.';
+$_lang['configcheck_htaccess_msg'] = 'MODX виявив, що папка ядра доступна (частково) ззовні.
+<strong>Це не рекомендується та небезпечно.</strong>
+Якщо установку MODX запущено на веб-сервері Apache, ви повинні створити файл .htaccess всередині папки ядра <em>[[+fileLocation]]</em>. Це також можна зробити, перейменувавши вже наявний файл-приклад ht.access на .htaccess.
+<p>Також існують інші методи та веб-сервери, які ви можете використовувати, прочитайте <a href="https://docs.modx.com/3.x/en/getting-started/maintenance/securing-modx"> Посібник з посилення захисту MODX</a> для додаткового захисту вашого сайту.</p>
+Якщо ви правильно все налаштували, відкрийте у браузері, наприклад, список змін - <a href="[[+checkUrl]]" target="_blank">Changelog</a>. Це посилання має дати вам 403 код (заборонено доступ) або 404 (не знайдено). Якщо ви можете бачити список змін у браузері, все ще не так і вам потрібно змінити конфігурацію або знайти спеціаліста для вирішення цієї проблеми.';
 $_lang['configcheck_images'] = 'Каталог зображень недоступний для запису';
 $_lang['configcheck_images_msg'] = 'Каталог зображень недоступний для запису або не існує. Це означає, що функції управління зображеннями не працюватимуть!';
 $_lang['configcheck_installer'] = 'Каталог з програмою установки не був видалений';
-$_lang['configcheck_installer_msg'] = 'The setup/ directory contains the installer for MODX. Just imagine what might happen if an evil person finds this folder and runs the installer! They probably won\'t get too far, because they\'ll need to enter some user information for the database, but it\'s still best to delete this folder from your server. It is located at: [[+path]]';
+$_lang['configcheck_installer_msg'] = 'Каталог setup/ містить файли установки MODX. Тільки уявіть собі, що може статися, якщо зловмисник знайде його та запустить установку!<br /> Видаліть цей каталог із вашого сервера. Його розташування: [[+path]] ';
 $_lang['configcheck_lang_difference'] = 'Неправильна кількість записів у мовному файлі';
 $_lang['configcheck_lang_difference_msg'] = 'Кількість записів у вибраній мові відрізняється від кількості записів у мові за замовчуванням. Хоча це не обов\'язково може бути проблемою, але це привід для оновлення мовних файлів.';
 $_lang['configcheck_notok'] = 'У налаштуванні системи присутні помилки: ';

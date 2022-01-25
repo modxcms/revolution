@@ -16,14 +16,12 @@ Kui muudate vaikimisi väärtusi, siis salvestate vaikimisi omaduste alla. Muute
 Omadused, mis on hallid ei ole omaduste kogumis, aga neid kuvatakse seal lihtsamaks muutmiseks. Omadused, mis on <span style="color: green">rohelist</span> värvi on omadused mis domineerivad vaikimisi väärtust. Omadused, mis on <span style="color: purple">lillat</span> värvi on uued omadused teises kogumis mis ei ole vaikimisi kogu.<br /><br /><b>Märkus:</b> Parim on mitte muuta snippetite vaikimisi omadusi, mis on installitud Pakkide halduse kaudu, kui neid snippeteid uuendatakse, siis vaikimisi omadused kirjutatakse üle. Kasutage Omaduste Kogumit hoopis.';
 $_lang['file'] = 'File';
 $_lang['color'] = 'Color';
-$_lang['import'] = 'Import';
 $_lang['new_name'] = 'Uus Nimi';
 $_lang['object'] = 'Object';
 $_lang['properties'] = 'Omadused';
 $_lang['properties_default_locked'] = 'Vaikimisi Omadaused on Lukustatud';
 $_lang['properties_default_locked_msg'] = 'Ainult kasutajad kellel on "unlock_element_properties" õigus võivad lahti lukustada vaikimisi omadusi.';
 $_lang['properties_default_unlocked'] = 'Vaikimisi Omadused Lahti Lukustatud';
-$_lang['properties_import'] = 'Impordi Omadused';
 $_lang['properties_import_err_invalid'] = 'Fail, mille määrasite, ei ole korrektne omaduste fail. Palun proovige uuesti.';
 $_lang['properties_import_err_upload'] = 'Palun valige kehtiv omaduste fail üleslaadimiseks.';
 $_lang['properties_import_msg'] = 'Palun valige kehtiv omaduste fail.';

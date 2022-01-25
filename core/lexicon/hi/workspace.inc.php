@@ -237,3 +237,4 @@ $_lang['modx'] = 'मॉड्क्स';
 $_lang['modx_constraints'] = 'कृपया अपनी साइट के MODX संस्करण को उस संस्करण में बदले जो अनुकूल हो';
 $_lang['available'] = 'उपलब्ध';
 $_lang['not_available'] = 'अनुपलब्ध';
+$_lang['checking_for_package_updates'] = 'Checking for package updates...';

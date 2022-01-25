@@ -60,9 +60,8 @@ $_lang['chunks'] = 'Чанки';
 $_lang['class_key'] = 'Ключ класса';
 $_lang['cleaningup'] = 'Очистить';
 $_lang['clear_cache'] = 'Очистить кэш';
-$_lang['clear_cache_on_save'] = 'Пустой кэш'; // make consistent with how this appears on Resource editing panel
-$_lang['clear_cache_on_save_desc'] = 'Очистить кэш при сохранении этого элемента.'; // make more general, as this action clears more than just this item's cache files
-$_lang['clear_filter'] = 'Сбросить фильтр';
+$_lang['clear_cache_on_save'] = 'Очистить кэш'; // make consistent with how this appears on Resource editing panel
+$_lang['clear_cache_on_save_desc'] = 'Очистить кэш при сохранении элемента.'; // make more general, as this action clears more than just this item's cache files
 $_lang['click_to_change'] = 'Нажмите, чтобы изменить';
 $_lang['close'] = 'Закрыть';
 $_lang['code'] = 'Код';
@@ -414,7 +413,7 @@ $_lang['resource_groups'] = 'Группы ресурсов';
 $_lang['resource_management'] = 'Управление ресурсами';
 $_lang['resource_name'] = 'Название ресурса';
 $_lang['resource_name_new'] = 'Новое название ресурса';
-$_lang['resource_preview'] = 'Предпросмотр';
+$_lang['resource_view'] = 'Просмотреть';
 $_lang['resource_overview'] = 'Обзор ресурса';
 $_lang['resource_settings'] = 'Настройки ресурса';
 $_lang['resource_type'] = 'Тип ресурса';
@@ -430,7 +429,6 @@ $_lang['scroll_dn'] = 'Прокрутить вниз';
 $_lang['scroll_up'] = 'Прокрутить вверх';
 $_lang['search'] = 'Поиск';
 $_lang['search_criteria'] = 'Условия поиска';
-$_lang['search_ellipsis'] = 'Поиск...';
 $_lang['search_results'] = 'Результаты поиска';
 $_lang['security'] = 'Безопасность';
 $_lang['select_date'] = 'Выберите дату';
@@ -559,3 +557,22 @@ $_lang['saturday'] = 'Суббота';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+
+/*
+    Shared lang entries for elements --
+
+    Necessary to to give quick create/edit panels
+    access when they are opened outside the
+    context of their respective element types
+*/
+// All
+
+// TVs
+$_lang['tv_type'] = 'Тип ввода';
+$_lang['tv_default'] = 'Значение по умолчанию';
+$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
+$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
+$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_elements'] = 'Возможные значения';
+$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';

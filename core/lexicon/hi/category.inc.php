@@ -8,7 +8,7 @@
  */
 $_lang['categories'] = 'श्रेणियां';
 $_lang['category_confirm_delete'] = 'क्या आप बकाई इस श्रेणी को हटाना चाहते हैं| इस श्रेणी के सभी तत्वों को अवर्गीकृत में दर्ज किया जाएगा |';
-$_lang['category_create'] = 'Category बनाएँ';
+$_lang['category_create'] = 'कैटेगरी बनाएँ';
 $_lang['category_err_ae'] = 'एक Category उस नाम के साथ पहले से ही मौजूद है। कृपया एक भिन्न नाम का प्रयास करें।';
 $_lang['category_err_create'] = 'Category बनाने का प्रयास करते समय कोई त्रुटि उत्पन्न हुई।';
 $_lang['category_err_not_found'] = 'Category नहीं मिली!';

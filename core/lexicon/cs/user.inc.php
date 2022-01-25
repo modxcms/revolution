@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'Datum a čas, kdy byl tento uživatel naposled 
 $_lang['user_profile_err_nf'] = 'VÁŽNÁ CHYBA: Uživatelský profil nebyl nalezen.';
 $_lang['user_profile_err_save'] = 'Nastala chyba při ukládání uživatelských atributů.';
 $_lang['user_remove_confirm'] = 'Opravdu chcete odstranit tohoto uživatele? Tato událost je nevratná!';
-$_lang['user_remove_multiple'] = 'Odstranit více uživatelů';
 $_lang['user_remove_multiple_confirm'] = 'Opravdu chcete odstranit tyto uživatele? Tato událost je nevratná!';
 $_lang['user_remote_data_msg'] = 'Upravit vzdálená uživatelská data.';
 $_lang['user_role_update'] = 'Edit User Role';
