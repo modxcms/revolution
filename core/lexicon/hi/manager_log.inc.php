@@ -9,7 +9,6 @@
 $_lang['action'] = 'कार्यवाही';
 $_lang['date_end'] = 'आखरी तारीख';
 $_lang['date_start'] = 'शुरू वाली तारीख';
-$_lang['filter_clear'] = 'Filter साफ़ करें';
 $_lang['manager_log'] = 'उपयोगकर्ता का नाम या ईमेल';
 $_lang['mgrlog_clear'] = 'खाली Manager Log';
 $_lang['mgrlog_clear_confirm'] = 'तुम्हें यकीन है कि तुम पूरी तरह से खाली करें manager log करने के लिए चाहते हैं? यह लौटाया नहीं जा सकता।';
