@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Specify a name for the Namespace here.';
 $_lang['namespace_path'] = 'Core Path';
 $_lang['namespace_path_desc'] = 'Määra täielik kataloog siin: (näiteks: MODX_CORE_PATH . "assets/democomponent")';
 $_lang['namespace_remove_confirm'] = 'Oled kindel, et soovid eemaldada namespace ja kõik sellega seotud sisu?';
-$_lang['namespace_remove_multiple'] = 'Delete Namespaces';
 $_lang['namespace_remove_multiple_confirm'] = 'Are you sure you want to delete these namespaces and all their related content?';
 $_lang['namespaces'] = 'Namespace-id';
 $_lang['namespaces_desc'] = 'Namespace-id on globaalsed tunnused pakettidele ja komponentidel, registreerides nende vehicle-d, lexiconi kirjed ja ressurssid kõik kokku.';
