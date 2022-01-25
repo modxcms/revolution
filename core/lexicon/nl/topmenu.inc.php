@@ -93,7 +93,6 @@ $_lang['reports'] = 'Rapporten';
 $_lang['reports_desc'] = 'Rapporten van je MODX installatie';
 $_lang['resource_groups'] = 'Resource Groepen';
 $_lang['resource_groups_desc'] = 'Pagina\'s toewijzen aan gebruikersgroepen';
-$_lang['search'] = 'Zoeken';
 $_lang['search_desc'] = 'Zoek naar documenten.';
 $_lang['search_resulttype_actions'] = 'Acties';
 $_lang['search_resulttype_chunks'] = 'Chunks';
