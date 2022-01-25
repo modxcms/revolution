@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'The last time that the user successfully logged
 $_lang['user_profile_err_nf'] = 'FATAL ERROR: Kasutaja profiili ei leitud.';
 $_lang['user_profile_err_save'] = 'Tekkis viga üritades salvestada kasutaja atribuute.';
 $_lang['user_remove_confirm'] = 'Olete kin del, et soovite eemaldada selle kasutaja? See on pöördumatu!';
-$_lang['user_remove_multiple'] = 'Eemalda Mitu Kasutajat';
 $_lang['user_remove_multiple_confirm'] = 'Olete kindel, et soovite eemaldada need kasutajad? See on pöördumatu!';
 $_lang['user_remote_data_msg'] = 'Muuda kaugeid kasutajad andmed siit.';
 $_lang['user_role_update'] = 'Edit User Role';
