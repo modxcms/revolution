@@ -14,6 +14,9 @@
  * @package modx
  * @subpackage setup
  */
+if (ini_get('opcache.enable')) {
+    ini_set('opcache.enable', false);
+}
 require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'provisioner' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 $modInstall = new modInstall();
