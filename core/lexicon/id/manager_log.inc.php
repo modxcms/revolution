@@ -9,7 +9,6 @@
 $_lang['action'] = 'Aksi';
 $_lang['date_end'] = 'Tanggal berakhir';
 $_lang['date_start'] = 'Tanggal mulai';
-$_lang['filter_clear'] = 'Hapus Filter';
 $_lang['manager_log'] = 'Manajer Log';
 $_lang['mgrlog_clear'] = 'Mengosongkan Manager Log';
 $_lang['mgrlog_clear_confirm'] = 'Apakah Anda yakin Anda ingin benar-benar mengosongkan log Manajer? Ini tidak bisa dibatalkan.';
