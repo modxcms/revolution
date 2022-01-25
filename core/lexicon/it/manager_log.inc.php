@@ -9,7 +9,6 @@
 $_lang['action'] = 'Azione';
 $_lang['date_end'] = 'Data Finale';
 $_lang['date_start'] = 'Data Iniziale';
-$_lang['filter_clear'] = 'Cancella Filtro';
 $_lang['manager_log'] = 'Log del Manager';
 $_lang['mgrlog_clear'] = 'Svuota Log Manager';
 $_lang['mgrlog_clear_confirm'] = 'Sei sicuro di voler svuotare completamente i log del manager? Quest\'azione è irreversibile.';
