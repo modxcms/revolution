@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Medya Kaynağı için lütfen bir isim belirtin.
 $_lang['source_name_desc'] = 'Medya Kaynağının ismi.';
 $_lang['source_properties.intro_msg'] = 'Aşağıdaki kaynak için özellikleri yönetin.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'Çoklu Medya Kaynaklarını Sil';
 $_lang['source_remove_multiple_confirm'] = 'Bu medya kaynaklarını silmek istediğinize emin misiniz? Bunu yapmak, bu kaynaklar için atadığınız şablon değişkenlerinizi bozabilir.';
 $_lang['source_type'] = 'Kaynak türü';
 $_lang['source_type_desc'] = 'Medya kaynağının türü, ya da sürücüsü. Kaynak, bu sürücüyü, verilerini toplarken bağlanmak için kullanacaktır. Örneğin: Dosya Sistemi dosyaları dosya sisteminden alacaktır. S3, S3 kovasından dosyalarını çekecektir.';
