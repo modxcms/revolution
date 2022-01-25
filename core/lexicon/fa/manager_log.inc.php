@@ -9,7 +9,6 @@
 $_lang['action'] = 'فعالیت';
 $_lang['date_end'] = 'تاریخ پایان';
 $_lang['date_start'] = 'تاریخ آغاز';
-$_lang['filter_clear'] = 'پاک‌کردن فیلتر';
 $_lang['manager_log'] = 'لاگ مدیریت';
 $_lang['mgrlog_clear'] = 'خالی کردن لاگ مدیریت';
 $_lang['mgrlog_clear_confirm'] = 'آیا از خالی کردن کامل لاگ مدیریت مطمئن هستید؟ این کار قابل بازگردانی نیست!';
