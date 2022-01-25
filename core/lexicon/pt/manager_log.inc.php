@@ -9,7 +9,6 @@
 $_lang['action'] = 'Ação';
 $_lang['date_end'] = 'Data de Fim';
 $_lang['date_start'] = 'Data de Início';
-$_lang['filter_clear'] = 'Limpar Filtro';
 $_lang['manager_log'] = 'Relatório do Gerenciador';
 $_lang['mgrlog_clear'] = 'Relatório do Gerenciador Vazio';
 $_lang['mgrlog_clear_confirm'] = 'Tem certeza que quer esvaziar completamente o Relatório do Gerenciador? Isso não pode ser desfeito.';
