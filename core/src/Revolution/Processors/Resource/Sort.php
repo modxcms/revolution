@@ -189,7 +189,7 @@ class Sort extends Processor
             }
         }
 
-        if (!empty($newParent)) {
+        if (!empty($newParent) && $this->point === 'append') {
             $newParent->set('isfolder', true);
             $newParent->save();
 
