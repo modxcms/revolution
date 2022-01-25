@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'ユーザーが最後にログインした日�
 $_lang['user_profile_err_nf'] = '致命的なエラー: ユーザーのプロフィールが見つかりません.';
 $_lang['user_profile_err_save'] = 'ユーザー属性を保存中にエラーが発生しました。';
 $_lang['user_remove_confirm'] = 'このユーザーを本当に削除しますか？　削除を取り消すことはできません。';
-$_lang['user_remove_multiple'] = '複数ユーザーを削除';
 $_lang['user_remove_multiple_confirm'] = 'これらのユーザーを本当に削除しますか？　削除を取り消すことはできません。';
 $_lang['user_remote_data_msg'] = 'リモートユーザーのデータをここで編集します。';
 $_lang['user_role_update'] = 'Edit User Role';
