@@ -93,7 +93,6 @@ $_lang['reports'] = 'Jelentések';
 $_lang['reports_desc'] = 'Rendszergazdai jelentések a MODX telepítéséről';
 $_lang['resource_groups'] = 'Erőforráscsoportok';
 $_lang['resource_groups_desc'] = 'Erőforrások hozzárendelése csoportokhoz';
-$_lang['search'] = 'Keresés';
 $_lang['search_desc'] = 'Erőforrások keresése.';
 $_lang['search_resulttype_actions'] = 'Műveletek';
 $_lang['search_resulttype_chunks'] = 'Kódegységek';
