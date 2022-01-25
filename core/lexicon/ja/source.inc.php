@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'メディアソースの名前を指定してく
 $_lang['source_name_desc'] = 'メディアソースの名前を設定します。';
 $_lang['source_properties.intro_msg'] = 'このメディアソースのプロパティは以下の画面で設定します。';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'メディアソースの一括削除';
 $_lang['source_remove_multiple_confirm'] = 'これらのメディアソースを本当に削除しますか？　続行すると、指定されたメディアソースに関連付けられているテンプレート変数が正常に機能しなくなります。';
 $_lang['source_type'] = 'ソースタイプ';
 $_lang['source_type_desc'] = 'メディアソースとして使用するストレージの種類を選択します。MODXは対応したメディアソースドライバを選択することで異なるサービスに保存したデータも提供できます。';
