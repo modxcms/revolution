@@ -9,7 +9,7 @@
 $_lang['area'] = 'Terület';
 $_lang['area_authentication'] = 'Hitelesítés és biztonság';
 $_lang['area_caching'] = 'Gyorsítótárazás';
-$_lang['area_core'] = 'Core Code';
+$_lang['area_core'] = 'Magkód';
 $_lang['area_editor'] = 'Szerkesztő formázott szöveghez';
 $_lang['area_file'] = 'Állományrendszer';
 $_lang['area_filter'] = 'Szűrés terület alapján...';
@@ -17,11 +17,12 @@ $_lang['area_furls'] = 'Keresőbarát URL';
 $_lang['area_gateway'] = 'Átjáró';
 $_lang['area_language'] = 'Szókészlet és nyelv';
 $_lang['area_mail'] = 'Levelezés';
-$_lang['area_manager'] = 'Back-end Manager';
+$_lang['area_manager'] = 'Háttérkezelő';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Munkamenet és süti';
 $_lang['area_static_elements'] = 'Állandó elemek';
+$_lang['area_static_resources'] = 'Állandó erőforrások';
 $_lang['area_lexicon_string'] = 'Területi szókészlet-bejegyzés';
 $_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Weboldal';
@@ -32,10 +33,9 @@ $_lang['country'] = 'Ország';
 $_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
 $_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
 $_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
-$_lang['namespace'] = 'Namespace';
+$_lang['namespace'] = 'Névtér';
 $_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
-$_lang['namespace_filter'] = 'Filter by namespace...';
-$_lang['search_by_key'] = 'Keresés kulcs alapján...';
+$_lang['namespace_filter'] = 'Szűrés névtér alapján...';
 $_lang['setting_err'] = 'Please check your data for the following fields: ';
 $_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
 $_lang['setting_err_nf'] = 'A beállítás nem található.';
@@ -63,22 +63,22 @@ $_lang['setting_access_category_enabled_desc'] = 'Use this to enable or disable 
 $_lang['setting_access_context_enabled'] = 'Környezet-hozzáférés ellenőrzése';
 $_lang['setting_access_context_enabled_desc'] = 'Use this to enable or disable Context ACL checks. <strong>NOTE: If this option is set to no, then ALL Context Access Permissions will be ignored. DO NOT disable this system-wide or for the mgr Context or you will disable access to the manager interface.</strong>';
 
-$_lang['setting_access_resource_group_enabled'] = 'Check Resource Group Access';
+$_lang['setting_access_resource_group_enabled'] = 'Erőforráscsoport hozzáférésének ellenőrzése';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Use this to enable or disable Resource Group ACL checks (per Context). <strong>NOTE: If this option is set to no, then ALL Resource Group Access Permissions will be ignored!</strong>';
 
 $_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
 $_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
 
-$_lang['setting_failed_login'] = 'Failed Login Attempts';
+$_lang['setting_failed_login'] = 'Sikertelen bejelentkezési kísérletek';
 $_lang['setting_failed_login_desc'] = 'Here you can enter the number of failed login attempts that are allowed before a user is blocked.';
 
-$_lang['setting_login_allowed_days'] = 'Allowed Days';
+$_lang['setting_login_allowed_days'] = 'Engedélyezett napok';
 $_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
 
-$_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
+$_lang['setting_login_allowed_ip'] = 'Engedélyezett IP címek';
 $_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to log in from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
 
-$_lang['setting_login_homepage'] = 'Login Home Page';
+$_lang['setting_login_homepage'] = 'Bejelentkezés a nyitólapra';
 $_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged in. <strong>NOTE: Make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
 
 // system settings
@@ -106,7 +106,7 @@ $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipAr
 $_lang['setting_auto_menuindex'] = 'Menu indexing default';
 $_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
 
-$_lang['setting_auto_check_pkg_updates'] = 'Automatic Check for Package Updates';
+$_lang['setting_auto_check_pkg_updates'] = 'Csomagfrissítések önműködő keresése';
 $_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatically check for updates for packages in Package Management. This may slow the loading of the grid.';
 
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
@@ -115,7 +115,7 @@ $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minu
 $_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
 $_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
 
-$_lang['setting_automatic_alias'] = 'Automatically generate alias';
+$_lang['setting_automatic_alias'] = 'Hivatkozási név önműködő létrehozása';
 $_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
 
 $_lang['setting_automatic_template_assignment'] = 'Sablon önműködő hozzárendelése';
@@ -203,7 +203,7 @@ $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concat
 $_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
 $_lang['setting_confirm_navigation_desc'] = 'When this is enabled, the user will be prompted to confirm their intention if there are unsaved changes.';
 
-$_lang['setting_container_suffix'] = 'Container Suffix';
+$_lang['setting_container_suffix'] = 'Tároló utótagja';
 $_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
 
 $_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
@@ -216,25 +216,25 @@ $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in
 $_lang['setting_cultureKey'] = 'Language';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
 
-$_lang['setting_date_timezone'] = 'Default Time Zone';
+$_lang['setting_date_timezone'] = 'Alapértelmezett időzóna';
 $_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
 
-$_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug'] = 'Hibakeresés';
 $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
 
-$_lang['setting_default_content_type'] = 'Default Content Type';
+$_lang['setting_default_content_type'] = 'Alapértelmezett tartalomfajta';
 $_lang['setting_default_content_type_desc'] = 'Select the default Content Type you wish to use for new Resources. You can still select a different Content Type in the Resource editor; this setting just pre-selects one of your Content Types for you.';
 
 $_lang['setting_default_duplicate_publish_option'] = 'Default Duplicate Resource Publishing Option';
 $_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected option when duplicating a Resource. Can be either "unpublish" to unpublish all duplicates, "publish" to publish all duplicates, or "preserve" to preserve the publish state based on the duplicated Resource.';
 
-$_lang['setting_default_media_source'] = 'Default Media Source';
+$_lang['setting_default_media_source'] = 'Alapértelmezett médiaforrás';
 $_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
 
 $_lang['setting_default_media_source_type'] = 'Alapértelmezett médiaforrás-típus';
 $_lang['setting_default_media_source_type_desc'] = 'Az alapértelmezett médiaforrás-típus új médiaforrás létrehozásánál.';
 
-$_lang['setting_default_template'] = 'Default Template';
+$_lang['setting_default_template'] = 'Alapértelmezett sablon';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
 $_lang['setting_default_per_page'] = 'Default Per Page';
@@ -250,32 +250,32 @@ $_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and drop
 $_lang['setting_enable_template_picker_in_tree'] = 'Engedélyezze a sablonválasztót az erőforrások fában.';
 $_lang['setting_enable_template_picker_in_tree_desc'] = 'Engedélyezze a sablonválasztó felugró ablakos használatát új erőforrás létrehozásakor a fában.';
 
-$_lang['setting_error_page'] = 'Error Page';
+$_lang['setting_error_page'] = 'Hibaoldal';
 $_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist (404 Page Not Found). <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
 $_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
 
-$_lang['setting_ext_debug'] = 'ExtJS debug';
+$_lang['setting_ext_debug'] = 'ExtJS hibakeresés';
 $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to help debug your ExtJS code.';
 
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
 
-$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar'] = 'Gravatar engedélyezése';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
-$_lang['setting_failed_login_attempts'] = 'Failed Login Attempts';
+$_lang['setting_failed_login_attempts'] = 'Sikertelen bejelentkezési kísérletek';
 $_lang['setting_failed_login_attempts_desc'] = 'The number of failed login attempts a User is allowed before becoming \'blocked\'.';
 
-$_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
+$_lang['setting_feed_modx_news'] = 'MODX hírfolyam URL-je';
 $_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
 
-$_lang['setting_feed_modx_news_enabled'] = 'MODX News Feed Enabled';
+$_lang['setting_feed_modx_news_enabled'] = 'MODX hírfolyam engedélyezve';
 $_lang['setting_feed_modx_news_enabled_desc'] = 'If \'No\', MODX will hide the News feed in the welcome section of the manager.';
 
-$_lang['setting_feed_modx_security'] = 'MODX Security Notices Feed URL';
+$_lang['setting_feed_modx_security'] = 'MODX biztonsági jelzésfolyam URL-je';
 $_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODX Security Notices panel in the manager.';
 
-$_lang['setting_feed_modx_security_enabled'] = 'MODX Security Feed Enabled';
+$_lang['setting_feed_modx_security_enabled'] = 'MODX biztonsági folyam engedélyezve';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODX will hide the Security feed in the welcome section of the manager.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
