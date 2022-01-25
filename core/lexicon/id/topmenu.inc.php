@@ -93,7 +93,6 @@ $_lang['reports'] = 'Laporan';
 $_lang['reports_desc'] = 'Admin melapor untuk install MODX Anda';
 $_lang['resource_groups'] = 'Kelompok-kelompok sumber daya';
 $_lang['resource_groups_desc'] = 'Menetapkan sumber daya untuk kelompok';
-$_lang['search'] = 'Cari';
 $_lang['search_desc'] = 'Mencari sumber daya.';
 $_lang['search_resulttype_actions'] = 'Tindakan';
 $_lang['search_resulttype_chunks'] = 'Potongan';
