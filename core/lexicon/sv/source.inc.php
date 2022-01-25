@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Ange ett namn för mediakällan.';
 $_lang['source_name_desc'] = 'Mediakällans namn';
 $_lang['source_properties.intro_msg'] = 'Hantera egenskaperna för denna källa nedan.';
 $_lang['source_remove_confirm'] = 'Är du säker på att du vill ta bort denna mediakälla? Detta kan ha sönder mallvariabler som du har tilldelat till denna källa.';
-$_lang['source_remove_multiple'] = 'Ta bort flera mediakällor';
 $_lang['source_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort dessa mediakällor? Detta kan ha sönder mallvariabler som du har tilldelat till dessa källor.';
 $_lang['source_type'] = 'Källtyp';
 $_lang['source_type_desc'] = 'Mediakällans typ eller drivrutin. Källan kommer att använda denna drivrutin för att ansluta när den hämtar sin data. Till exempel: Filsystem hämtar filer från filsystemet. S3 hämtar filer från en S3-hink.';
