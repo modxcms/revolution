@@ -9,7 +9,6 @@
 $_lang['action'] = 'Działanie';
 $_lang['date_end'] = 'Data zakończenia';
 $_lang['date_start'] = 'Data rozpoczęcia';
-$_lang['filter_clear'] = 'Wyczyść filtr';
 $_lang['manager_log'] = 'Dziennik menedżera';
 $_lang['mgrlog_clear'] = 'Wyczyść dziennik menedżera';
 $_lang['mgrlog_clear_confirm'] = 'Na pewno chcesz całkowicie wyczyścić dziennik menedżera? Proces jest nieodwracalny.';
