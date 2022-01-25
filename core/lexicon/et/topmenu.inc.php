@@ -93,7 +93,6 @@ $_lang['reports'] = 'Rapordid';
 $_lang['reports_desc'] = 'Admin reports for your MODX install';
 $_lang['resource_groups'] = 'Resource Groups';
 $_lang['resource_groups_desc'] = 'Halda gruppe, millele ressurssid kuuluvad.';
-$_lang['search'] = 'Otsi';
 $_lang['search_desc'] = 'Otsi ressurssi.';
 $_lang['search_resulttype_actions'] = 'Tegevused';
 $_lang['search_resulttype_chunks'] = 'Chunkid';
