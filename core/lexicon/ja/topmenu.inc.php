@@ -93,7 +93,6 @@ $_lang['reports'] = 'レポート';
 $_lang['reports_desc'] = 'Admin reports for your MODX install';
 $_lang['resource_groups'] = 'リソースグループ';
 $_lang['resource_groups_desc'] = 'リソースグループを管理';
-$_lang['search'] = '検索';
 $_lang['search_desc'] = 'リソースの検索';
 $_lang['search_resulttype_actions'] = 'アクション';
 $_lang['search_resulttype_chunks'] = 'チャンク';
