@@ -87,3 +87,15 @@ $_lang['tv_output_options_msg'] = $_lang['tv_tab_output_options_desc'];
 $_lang['tv_sources.intro_msg'] = $_lang['tv_tab_sources_desc'];
 $_lang['tv_tmpl_access'] = $_lang['tv_tab_tmpl_access'];
 $_lang['tv_tmpl_access_msg'] = $_lang['tv_tab_tmpl_access_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    tv_caption_desc
+    tv_category_desc
+    tv_description_desc
+
+*/
