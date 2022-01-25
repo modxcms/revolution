@@ -273,7 +273,7 @@ class modDbRegister extends modRegister
                 $topicObj = $this->modx->newObject(modDbRegisterTopic::class);
                 $topicObj->set('queue', $queueId);
                 $topicObj->set('name', $topic);
-                $topicObj->set('created', strftime('%Y-%m-%d %H:%M:%S'));
+                $topicObj->set('created', date('Y-m-d H:i:s'));
                 if (!$topicObj->save()) {
                     $error = true;
                 }
@@ -295,7 +295,7 @@ class modDbRegister extends modRegister
                                 if (!is_int($msgIdx)) {
                                     $msgKey = $msgIdx;
                                 } else {
-                                    $msgKey = strftime('%Y%m%dT%H%M%S', $timestamp) . '-' . sprintf("%03d", $msgIdx);
+                                    $msgKey = date('Ymd\THis', $timestamp) . '-' . sprintf("%03d", $msgIdx);
                                 }
                                 if ($expires > 0) {
                                     $payload .= "if (time() > {$expires}) return null;\n";
@@ -309,8 +309,8 @@ class modDbRegister extends modRegister
                                     $messageObj->set('id', $msgKey);
                                 }
                                 if ($messageObj) {
-                                    $messageObj->set('created', strftime('%Y-%m-%d %H:%M:%S'));
-                                    $messageObj->set('valid', strftime('%Y-%m-%d %H:%M:%S', $timestamp));
+                                    $messageObj->set('created', date('Y-m-d H:i:s'));
+                                    $messageObj->set('valid', date('Y-m-d H:i:s', $timestamp));
                                     $messageObj->set('expires', $expires);
                                     $messageObj->set('payload', $payload);
                                     $messageObj->set('kill', $kill);

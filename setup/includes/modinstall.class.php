@@ -200,7 +200,7 @@ class modInstall {
                 [
                 'target' => 'FILE',
                 'options' => [
-                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y-%m-%dT%H.%M.%S').'.log'
+                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . date('Y-m-d\TH.i.s').'.log'
                 ]
                 ]
             );
@@ -476,7 +476,7 @@ class modInstall {
                 [
                 'target' => 'FILE',
                 'options' => [
-                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y%m%dT%H%M%S') . '.log'
+                    'filename' => 'install.' . MODX_CONFIG_KEY . '.' . date('Ymd\THis') . '.log'
                 ]
                 ]
             );
@@ -509,7 +509,7 @@ class modInstall {
                     [
                     'target' => 'FILE',
                     'options' => [
-                        'filename' => 'install.' . MODX_CONFIG_KEY . '.' . strftime('%Y%m%dT%H%M%S') . '.log'
+                        'filename' => 'install.' . MODX_CONFIG_KEY . '.' . date('Ymd\THis') . '.log'
                     ]
                     ]
                 );

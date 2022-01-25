@@ -74,7 +74,7 @@ class modLexiconEntry extends xPDOSimpleObject
         }
         if ($this->_new) {
             if (!$this->get('createdon')) {
-                $this->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
+                $this->set('createdon', date('Y-m-d H:i:s'));
             }
         }
         $saved = parent::save($cacheFlag);

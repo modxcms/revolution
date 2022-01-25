@@ -71,12 +71,12 @@ class Get extends Processor
             $userArray = array_merge($profile->toArray(), $userArray);
         }
 
-        $userArray['dob'] = !empty($userArray['dob']) ? strftime('%m/%d/%Y', $userArray['dob']) : '';
-        $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? strftime('%m/%d/%Y %I:%M %p',
+        $userArray['dob'] = !empty($userArray['dob']) ? date('m/d/Y', $userArray['dob']) : '';
+        $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? date('m/d/Y h:i A',
             $userArray['blockeduntil']) : '';
-        $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? strftime('%m/%d/%Y %I:%M %p',
+        $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? date('m/d/Y h:i A',
             $userArray['blockedafter']) : '';
-        $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? strftime('%m/%d/%Y', $userArray['lastlogin']) : '';
+        $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? date('m/d/Y', $userArray['lastlogin']) : '';
 
         return $this->success('', $userArray);
     }

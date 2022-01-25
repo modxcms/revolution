@@ -262,7 +262,7 @@ class Create extends CreateProcessor
         $scriptProperties['uri_override'] = empty($scriptProperties['uri_override']) ? 0 : 1;
 
         if (empty($scriptProperties['createdon'])) {
-            $scriptProperties['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
+            $scriptProperties['createdon'] = date('Y-m-d H:i:s');
         }
 
         if (empty($scriptProperties['createdby'])) {
@@ -507,7 +507,7 @@ class Create extends CreateProcessor
                         $value = implode(',', $newTags);
                         break;
                     case 'date':
-                        $value = empty($value) ? '' : strftime('%Y-%m-%d %H:%M:%S', strtotime($value));
+                        $value = empty($value) ? '' : date('Y-m-d H:i:s', strtotime($value));
                         break;
                     case 'url':
                         if ($this->getProperty($tvKey . '_prefix', '--') != '--') {

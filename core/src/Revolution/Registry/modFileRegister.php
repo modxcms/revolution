@@ -287,7 +287,7 @@ class modFileRegister extends modRegister
                                 }
                                 $msgKey = $msgIdx;
                             } else {
-                                $msgKey = strftime('%Y%m%dT%H%M%S', $timestamp) . '-' . sprintf("%03d", $msgIdx);
+                                $msgKey = date('Ymd\THis', $timestamp) . '-' . sprintf("%03d", $msgIdx);
                             }
                             $filename = $topicDirectory . $msgKey . '.msg.php';
                             $content = "<?php\n";

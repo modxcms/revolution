@@ -161,7 +161,7 @@ class modTransportProvider extends xPDOSimpleObject
                 'id' => (string)$package->id,
                 'name' => (string)$package->name,
                 'package_name' => (string)$package->package_name,
-                'releasedon' => strftime('%b %d, %Y', strtotime((string)$package->releasedon)),
+                'releasedon' => date('M d, Y', strtotime((string)$package->releasedon)),
             ];
         }
 
@@ -294,7 +294,7 @@ class modTransportProvider extends xPDOSimpleObject
             $package->set('signature', $signature);
             $package->set('state', 1);
             $package->set('workspace', 1);
-            $package->set('created', strftime('%Y-%m-%d %H:%M:%S'));
+            $package->set('created', date('Y-m-d H:i:s'));
             $package->set('provider', $this->get('id'));
             $package->set('metadata', $metadata);
             $package->set('package_name', $metadata['name']);
@@ -561,7 +561,7 @@ class modTransportProvider extends xPDOSimpleObject
     public function save($cacheFlag = null)
     {
         if ($this->isNew() && !$this->get('created')) {
-            $this->set('created', strftime('%Y-%m-%d %H:%M:%S'));
+            $this->set('created', date('Y-m-d H:i:s'));
         }
         $saved = parent:: save($cacheFlag);
 
