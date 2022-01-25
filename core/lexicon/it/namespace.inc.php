@@ -19,7 +19,6 @@ $_lang['namespace_name_desc'] = 'Specificare il nome del Namespace.';
 $_lang['namespace_path'] = 'Percorso Core';
 $_lang['namespace_path_desc'] = 'Specificare indirizzo in modo assoluto: (esempio: MODX_CORE_PATH . "assets/democomponent")';
 $_lang['namespace_remove_confirm'] = 'Sei sicuro di voler rimuovere il namespace "[[+name]]" e tutto il relativo contenuto?';
-$_lang['namespace_remove_multiple'] = 'Rimuovere NameSpace';
 $_lang['namespace_remove_multiple_confirm'] = 'Sei sicuro di voler rimuovere questi NameSpaces e tutti il relativi contenuti?';
 $_lang['namespaces'] = 'NameSpaces';
 $_lang['namespaces_desc'] = 'I NameSpaces sono degli identificatori globali per i pacchetti e i componenti: mettono in relazione fra di loro i corrispondenti obiettivi (veicoli), le voci lessicali e le risorse.';
