@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'Specificeer een naam voor de Media Source.';
 $_lang['source_name_desc'] = 'De naam van de Media Source.';
 $_lang['source_properties.intro_msg'] = 'Beheer de properties van deze Media Source hieronder.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'Verwijder Meerdere Media Sources';
 $_lang['source_remove_multiple_confirm'] = 'Weet je zeker dat je deze Media Sources wilt verwijderen? Dit kan TVs welke deze Sources gebruiken in de war brengen.';
 $_lang['source_type'] = 'Brontype';
 $_lang['source_type_desc'] = 'Het Source type, ook de Driver genoemd, van de Media Source. De Source zal deze Driver gebruiken om met de service te verbinden voor data weergave. "Bestandsserver" zal bestanden van de server laden, terwijl de "Amazon S3" Driver verbind met een Amazon S3 Bucket.';
