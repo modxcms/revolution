@@ -9,7 +9,6 @@
 $_lang['action'] = 'Acción';
 $_lang['date_end'] = 'Fecha Final';
 $_lang['date_start'] = 'Fecha Inicial';
-$_lang['filter_clear'] = 'Limpiar Filtro';
 $_lang['manager_log'] = 'Historial del Administrador';
 $_lang['mgrlog_clear'] = 'Vaciar Historial del Administrador';
 $_lang['mgrlog_clear_confirm'] = '¿Estás seguro de que quieres vaciar completamente el historial del administrador? Esta acción es irreversible.';
