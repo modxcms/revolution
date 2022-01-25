@@ -1954,8 +1954,10 @@ class modX extends xPDO {
      * @param string $prefix The placeholder prefix, defaults to [[+.
      * @param string $suffix The placeholder suffix, defaults to ]].
      * @return string The processed chunk with the placeholders replaced.
+     * @deprecated Prefer using $modx->getChunk, to be removed in MODX 4.0.
      */
     public function parseChunk($chunkName, $chunkArr, $prefix='[[+', $suffix=']]') {
+        $this->deprecated('3.0.0', 'Use $modx->getChunk instead');
         $chunk= $this->getChunk($chunkName);
         if (!empty($chunk) || $chunk === '0') {
             if(is_array($chunkArr)) {
