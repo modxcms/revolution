@@ -93,7 +93,6 @@ $_lang['reports'] = 'Raportit';
 $_lang['reports_desc'] = 'Admin reports for your MODX install';
 $_lang['resource_groups'] = 'Resource Groups';
 $_lang['resource_groups_desc'] = 'Assign Resources to Groups';
-$_lang['search'] = 'Haku';
 $_lang['search_desc'] = 'Hae resursseista.';
 $_lang['search_resulttype_actions'] = 'Toiminnot';
 $_lang['search_resulttype_chunks'] = 'Palaset';
