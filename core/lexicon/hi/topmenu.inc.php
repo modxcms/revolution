@@ -93,7 +93,6 @@ $_lang['reports'] = 'रिपोर्ट';
 $_lang['reports_desc'] = 'अपने MODX स्थापित करने के लिए व्यवस्थापक रिपोर्ट';
 $_lang['resource_groups'] = 'संसाधन समूह';
 $_lang['resource_groups_desc'] = 'Resources Groups को असाइन करें';
-$_lang['search'] = 'खोजें';
 $_lang['search_desc'] = 'Resources के लिए खोज।';
 $_lang['search_resulttype_actions'] = 'कार्यवाही';
 $_lang['search_resulttype_chunks'] = 'चक्स';
