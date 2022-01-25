@@ -174,7 +174,6 @@ $_lang['user_prevlogin_desc'] = 'Kullanıcının başarıyla giriş yaptığı s
 $_lang['user_profile_err_nf'] = 'KRİTİK HATA: Kullanıcı profili bulunamadı.';
 $_lang['user_profile_err_save'] = 'Kullanıcının özniteliklerini kaydetmeye çalışırken bir hata oluştu.';
 $_lang['user_remove_confirm'] = 'Bu kullanıcıyı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!';
-$_lang['user_remove_multiple'] = 'Birden Çok Kullanıcıyı Sil';
 $_lang['user_remove_multiple_confirm'] = 'Bu kullanıcıları silmek istediğinizden emin misiniz? Bu geri döndürülemez!';
 $_lang['user_remote_data_msg'] = 'Burada uzak kullanıcı verilerini düzenleyin.';
 $_lang['user_role_update'] = 'Edit User Role';
