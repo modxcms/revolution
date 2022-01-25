@@ -9,7 +9,6 @@
 $_lang['action'] = '行为';
 $_lang['date_end'] = '结束日期';
 $_lang['date_start'] = '开始日期';
-$_lang['filter_clear'] = '清除筛选器';
 $_lang['manager_log'] = '管理器日志';
 $_lang['mgrlog_clear'] = '清空管理日志';
 $_lang['mgrlog_clear_confirm'] = '确定想要完全清空管理日志？此操作不能撤消。';
