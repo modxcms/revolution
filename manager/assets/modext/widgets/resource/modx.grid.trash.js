@@ -433,7 +433,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         if (total !== undefined) {
             // if no resource is deleted, we disable the icon.
             // otherwise we have to update the tooltip
-            if (total = 0) {
+            if (total == 0) {
                 trashButton.disable();
                 trashButton.tooltip = new Ext.ToolTip({
                     target: trashButton.tabEl,
