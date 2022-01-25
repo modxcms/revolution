@@ -29,7 +29,6 @@ $_lang['source_err_ns_name'] = 'कृपया मीडिया के स्
 $_lang['source_name_desc'] = 'मीडिया के स्रोत का नाम।';
 $_lang['source_properties.intro_msg'] = 'नीचे इस स्रोत के लिए संपत्तियों का प्रबंधन।';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
-$_lang['source_remove_multiple'] = 'एकाधिक मीडिया स्रोतों को नष्ट';
 $_lang['source_remove_multiple_confirm'] = 'क्या वाकई आप इन मीडिया स्रोतों को नष्ट करने के लिए चाहते हैं? यह आप इन सूत्रों को असाइन किया गया है किसी भी टीवी टूट सकता है।';
 $_lang['source_type'] = 'स्रोत का प्रकार';
 $_lang['source_type_desc'] = 'प्रकार, या ड्रायवर, मीडिया के स्रोत की। स्रोत जब इसकी डेटा एकत्र करने के लिए कनेक्ट करने के लिए इस ड्राइवर का उपयोग करेंगे। उदाहरण के लिए: फ़ाइल सिस्टम फ़ाइलों को फ़ाइल सिस्टम से पकड़ लेना होगा। S3 फ़ाइलें एक S3 बाल्टी से मिल जाएगा।';
