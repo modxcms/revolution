@@ -386,8 +386,13 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'logs',
-    'description' => 'perm.logs_desc',
+    'name' => 'mgr_log_view',
+    'description' => 'perm.mgr_log_view_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'mgr_log_erase',
+    'description' => 'perm.mgr_log_erase_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [

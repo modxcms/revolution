@@ -44,7 +44,7 @@ class GetList extends Processor
      */
     public function checkPermissions()
     {
-        return $this->modx->hasPermission('logs');
+        return $this->modx->hasPermission('mgr_log_view');
     }
 
     /**

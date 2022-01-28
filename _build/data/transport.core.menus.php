@@ -297,7 +297,7 @@ $childrenOfReports[1]->fromArray([
     'text' => 'view_logging',
     'description' => 'view_logging_desc',
     'parent' => '',
-    'permissions' => 'logs',
+    'permissions' => 'mgr_log_view',
     'action' => 'system/logs',
 ], '', true, true);
 
