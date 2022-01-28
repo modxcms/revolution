@@ -44,10 +44,10 @@ $_lang['combo_typeahead_delay'] = 'Задержка';
 $_lang['combo_typeahead_delay_desc'] = 'Миллисекунды перед отображением соответствующего параметра. (По умолчанию: 250)';
 $_lang['date'] = 'Дата';
 $_lang['date_format'] = 'Формат даты';
-$_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/strftime" target="_blank">php’s strftime syntax</a>.
-    <div class="example-list">Common examples include:
+$_lang['date_format_desc'] = 'Введите формат, используя <a href="https://www.php.net/strftime" target="_blank">синтаксис PHP функции strftime</a>.
+    <div class="example-list">Общие примеры включают:
         <ul>
-            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (default format)</li>
+            <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (формат по умолчанию)</li>
             <li><span class="example-input">[[+example_2a]]</span> ([[+example_2b]])</li>
             <li><span class="example-input">[[+example_3a]]</span> ([[+example_3b]])</li>
             <li><span class="example-input">[[+example_4a]]</span> ([[+example_4b]])</li>
@@ -55,10 +55,9 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
             <li><span class="example-input">[[+example_6a]]</span> ([[+example_6b]])</li>
             <li><span class="example-input">[[+example_7a]]</span> ([[+example_7b]])</li>
         </ul>
-    </div>
-';
+    </div>';
 $_lang['date_use_current'] = 'Использовать текущую дату как откат';
-$_lang['date_use_current_desc'] = 'Когда значение для этого TV не требуется (Allow Blank = «Да») и не указана дата по умолчанию, параметр «Да» будет отображаться текущая дата.';
+$_lang['date_use_current_desc'] = 'Когда значение для этого TV не требуется ("Разрешить пустое" = «Да») и не указана дата по умолчанию, параметр «Да» будет отображаться текущая дата.';
 $_lang['default'] = 'По умолчанию';
 $_lang['default_date_now'] = 'Сегодня с текущим временем';
 $_lang['default_date_today'] = 'Сегодня (полуночь)';
@@ -69,19 +68,18 @@ $_lang['delim'] = 'Разделитель';
 $_lang['delimiter'] = 'Разделитель';
 $_lang['delimiter_desc'] = 'Один или более символов, используемых для разделения значений (применимо к TV с поддержкой нескольких выбранных опций).';
 $_lang['disabled_dates'] = 'Неактивные даты';
-$_lang['disabled_dates_desc'] = 'A comma-separated, javascript <abbr title="regular expression">regex</abbr>-compatible list (minus delimiters) of dates in the manager’s date format (currently “[[+format_current]]”).
-    <p>Examples using the default format (“[[+format_default]]”) include:</p>
+$_lang['disabled_dates_desc'] = 'Разделенный запятыми, javascript <abbr title="regular expression">regex</abbr>-совместимый список дат (без разделителей) дат в формате даты менеджера (в настоящее время “[[+format_current]]”).
+    <p>Примеры использования формата по умолчанию (“[[+format_default]]”) включают:</p>
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (selects individual dates)</li>
-            <li><span class="example-input">[[+example_2a]]</span> (selects [[+example_2b]] and [[+example_2c]] of every year)</li>
-            <li><span class="example-input">[[+example_3a]]</span> (“^” to match beginning of string; this selects all of [[+example_3b]])</li>
-            <li><span class="example-input">[[+example_4a]]</span> (selects every day in [[+example_4b]])</li>
-            <li><span class="example-input">[[+example_5]]</span> (“$” to match end of string; this selects every day in March of every year)</li>
+            <li><span class="example-input">[[+example_1]]</span> (выбирает отдельные даты)</li>
+            <li><span class="example-input">[[+example_2a]]</span> (выбор [[+example_2b]] и [[+example_2c]] каждого года)</li>
+            <li><span class="example-input">[[+example_3a]]</span> (“^” чтобы соответствовать началу строки; это выбирает все  [[+example_3b]])</li>
+            <li><span class="example-input">[[+example_4a]]</span> (выбор каждого дня в [[+example_4b]])</li>
+            <li><span class="example-input">[[+example_5]]</span> (“$” чтобы соответствовать концу строки; это выбирает каждый день в марте каждого года)</li>
         </ul>
-        Note: If your date format uses dot separators they will need to be escaped (e.g., “[[+example_6a]]” should be entered above as “[[+example_6b]]”).
-    </div>
-';
+        Примечание. Если в вашем формате даты используются разделители точки, их необходимо экранировать.  (например., “[[+example_6a]]” должно быть введено выше как  “[[+example_6b]]”).
+    </div>';
 $_lang['disabled_days'] = 'Неактивные дни';
 $_lang['disabled_days_desc'] = '';
 $_lang['dropdown'] = 'Выпадающий список';
@@ -111,23 +109,22 @@ $_lang['min_length'] = 'Минимальная длина';
 $_lang['regex_text'] = 'Регулярное выражение содержит ошибку';
 $_lang['regex_text_desc'] = 'Сообщение, показывающее, вводит ли пользователь текст, неверный в соответствии с <abbr title="regular expression">регулярным выражением</abbr> валидатором.';
 $_lang['regex'] = 'Проверка регулярного выражения';
-$_lang['regex_desc'] = 'A javascript <abbr title="regular expression">regex</abbr>-compatible string (minus delimiters) to restrict the content of this TV. Some examples:
+$_lang['regex_desc'] = 'JavaScript <abbr title="regular expression">regex</abbr>-совместимая строка (без разделителей), чтобы ограничить содержимое этого TV. Некоторые примеры: 
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (pattern for U.S. zip codes)</li>
-            <li><span class="example-input">[[+example_2]]</span> (allow only letters)</li>
-            <li><span class="example-input">[[+example_3]]</span> (allow all characters except numbers)</li>
-            <li><span class="example-input">[[+example_4]]</span> (must end with the string “-XP”)</li>
+            <li><span class="example-input">[[+example_1]]</span> (шаблон для почтовых индексов США)</li>
+            <li><span class="example-input">[[+example_2]]</span> (разрешать только буквы)</li>
+            <li><span class="example-input">[[+example_3]]</span> (разрешить все символы, кроме цифр)</li>
+            <li><span class="example-input">[[+example_4]]</span> (должен заканчиваться строкой “-XP”)</li>
         </ul>
-    </div>
-';
+    </div>';
 $_lang['name'] = 'Название';
 $_lang['number'] = 'Число';
 $_lang['number_allowdecimals'] = 'Разрешить десятичные';
 $_lang['number_allownegative'] = 'Разрешить отрицательные';
 $_lang['number_decimalprecision'] = 'Точность';
 $_lang['number_decimalprecision_desc'] = 'Максимальное количество цифр, допустимое после десятичного разделителя. (По умолчанию: 2)';
-$_lang['number_decimalprecision_strict'] = 'Strict Decimal Precision';
+$_lang['number_decimalprecision_strict'] = 'Строгая десятичная точность ';
 $_lang['number_decimalprecision_strict_desc'] = 'При значении «Да» сохраняет конечные нули в десятичных знаках (по умолчанию «Нет»).';
 /* See note in number inputproperties config re separators */
 $_lang['number_decimalseparator'] = 'Разделитель';
@@ -157,17 +154,16 @@ $_lang['resourcelist_parents'] = 'Родители';
 $_lang['resourcelist_parents_desc'] = 'Если указано, список TV будет включать только дочерние ресурсы из набора идентификаторов ресурсов (контейнеров), разделённых запятыми.';
 $_lang['resourcelist_where'] = 'Where условие';
 $_lang['resourcelist_where_desc'] = '
-    <p>A JSON object of one or more Resource fields to filter this TV’s listing of Resources.</p>
-    <div class="example-list">Some examples:
+    <p>A Объект JSON одного или нескольких полей ресурсов для фильтрации списка ресурсов этого TV. </p>
+    <div class="example-list">Некоторые примеры:
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (only include Resources with template 4 applied)</li>
-            <li><span class="example-input">[[+example_2]]</span> (include all Resources, except for those named “Home”)</li>
-            <li><span class="example-input">[[+example_3]]</span> (include only Resources whose Resource Type is Weblink or Symlink)</li>
-            <li><span class="example-input">[[+example_4]]</span> (include only Resources that are published and are not containers)</li>
+            <li><span class="example-input">[[+example_1]]</span> (выбрать только ресурсы с назначенным шаблоном 4)</li>
+            <li><span class="example-input">[[+example_2]]</span> (выбрать все ресурсы, за исключением тех, у которых имя “Home”)</li>
+            <li><span class="example-input">[[+example_3]]</span> (включать только ресурсы, тип которых является веб-ссылкой или символической ссылкой)</li>
+            <li><span class="example-input">[[+example_4]]</span> (включать только те ресурсы, которые опубликованы и не являются контейнерами)</li>
         </ul>
     </div>
-    <p>Note: Filtering by TV values is not supported.</p>
-';
+    <p>Примечание. Фильтрация по значениям TV не поддерживается.</p>';
 $_lang['richtext'] = 'Текстовый редактор';
 $_lang['sentence_case'] = 'Чувствительный к регистру';
 $_lang['start_day'] = 'Первый день недели';
@@ -184,16 +180,16 @@ $_lang['textbox'] = 'Текстовый блок';
 $_lang['time_increment'] = 'Приращение времени';
 $_lang['time_increment_desc'] = 'Количество минут между каждым значением времени в списке. (По умолчанию: 15)';
 $_lang['title'] = 'Заголовок';
-$_lang['tv_default_checkbox_desc'] = 'Набор опций, разделенных двумя каналами, выбранных для этого TV, если пользователь не проверяет один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр One==1||Option Two==2||Option Three==3), убедитесь, что вы ввели значение (т.е. «1» для параметра «1||3» для опции «1» и «1» для варианта «1»';
+$_lang['tv_default_checkbox_desc'] = 'Набор опций, разделенных двумя вертикальными чертами, выбранных для этого TV, если пользователь не проверяет один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр Один==1||Параметр Два==2||Параметр Три==3), убедитесь, что вы ввели значение (т.е. «1» для Параметра 1 ,«1||3» для Параметров Один и Три )';
 $_lang['tv_default_date'] = 'Дата и время по умолчанию';
-$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
+$_lang['tv_default_date_desc'] = 'Дата для отображения, если пользователь ее не предоставил. Выберите относительную дату из списка выше или введите другую дату, используя один из следующих шаблонов: 
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
-            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
-            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
+            <li><span class="example-input">[[+example_1]]</span> (число представляет количество "часов назад")</li>
+            <li><span class="example-input">[[+example_2]]</span> (число представляет количество часов в будущем)</li>
+            <li><span class="example-input">[[+example_3]]</span> (конкретная дата [и время, если необходимо] с использованием показанного формата)</li>
         </ul>
-        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
+        Примечание. Использование «+» и «-», показанное выше, противоречит здравому смыслу, но правильно («+» обозначает обратную во времени).
     </div>';
 $_lang['tv_default_email'] = 'Адрес электронной почты по умолчанию';
 $_lang['tv_default_email_desc'] = 'Адрес электронной почты этого TV будет показываться, если пользователь не предоставит его.';
@@ -202,9 +198,9 @@ $_lang['tv_default_file_desc'] = 'Путь к файлу, который TV по
 $_lang['tv_default_image'] = 'Изображение по умолчанию';
 $_lang['tv_default_image_desc'] = 'Путь к изображению, который будет показываться, если пользователь не предоставит его.';
 $_lang['tv_default_option'] = 'Опция по умолчанию';
-$_lang['tv_default_option_desc'] = 'Параметр выбран для этого TV, если пользователь не выбрал его. Если параметры включают в себя метки (напр. Параметр One==1||Option Two==2||Option Three==3), убедитесь, что вы ввели значение (т.е. “1” для опции One)';
+$_lang['tv_default_option_desc'] = 'Вариант для этого TV, если пользователь не указал его. Если параметры включают в себя метки (напр. Параметр Один==1||Параметр Два==2||Параметр Три==3), убедитесь, что вы ввели значение (т.е. “1” для Параметра Один)';
 $_lang['tv_default_options'] = 'Параметры по умолчанию';
-$_lang['tv_default_options_desc'] = 'Набор опций, разделенных двумя каналами, выбранных для этого TV, если пользователь не выбирает один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр One==1||Option Two==2||Option Three==3), убедитесь, что вы ввели значение (т.е. «1» для параметра «1||3» для опции «1» и «1» для варианта «1»';
+$_lang['tv_default_options_desc'] = 'Набор опций, разделенных двумя вертикальными линиями, выбранных для этого TV, если пользователь не выбирает один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр Один==1||Параметр Два==2||Параметр Три==3), убедитесь, что вы ввели значение (т.е. «1» для Параметра Один или «1||3» для Параметров Один и Три)';
 $_lang['tv_default_radio_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox-multiple_desc'] = $_lang['tv_default_options_desc'];
@@ -213,7 +209,7 @@ $_lang['tv_default_number_desc'] = 'Число, которое покажет э
 $_lang['tv_default_resource'] = 'Ресурс по умолчанию (ID)';
 $_lang['tv_default_resourcelist_desc'] = 'Ресурс, который этот TV покажет, если пользователь не выбрал.';
 $_lang['tv_default_tag'] = 'Тег(и) по умолчанию';
-$_lang['tv_default_tag_desc'] = 'Разделенный запятыми набор опций(ов) выбранных для этого TV, если пользователь не выбирает один или более вариантов. Если ваши опции включают метки (например, Tag One==1||Tag Two==2||Tag Three==3), не забудьте ввести значение (например: «1» для Tag One, или «1,3» для Tag One и Tag Three)';
+$_lang['tv_default_tag_desc'] = 'Разделенный запятыми набор опций(ов) выбранных для этого TV, если пользователь не выбирает один или более вариантов. Если ваши опции включают метки (например, Тег Раз==1||Тег Два==2||Тег Три==3), не забудьте ввести значение (например: «1» для Тег Один или «1,3» для Тег Один и Тег Три)';
 $_lang['tv_default_text'] = 'Текст по умолчанию';
 $_lang['tv_default_text_desc'] = 'Текстовое содержимое, которое будет показано TV, если пользователь не предоставит его.';
 $_lang['tv_default_url'] = 'URL по умолчанию';
@@ -222,10 +218,10 @@ $_lang['tv_elements_checkbox'] = 'Параметры флажка';
 $_lang['tv_elements_listbox'] = 'Параметры выпадающего списка';
 $_lang['tv_elements_radio'] = 'Параметры радиокнопок';
 $_lang['tv_elements_tag'] = 'Параметры тегов';
-$_lang['tv_elements_desc'] = 'Определяет выбираемые параметры для этого TV, которые могут быть введены вручную или собраны с помощью однострочного <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">запроса базы данных</a>. Некоторые примеры:
+$_lang['tv_elements_desc'] = 'Определяет выбираемые параметры для этого TV, которые могут быть введены вручную или собраны с помощью однострочного <a href="https://docs.modx.com/current/building-sites/elements/template-variables/bindings/select-binding" target="_blank">запроса базы данных</a>. Некоторые примеры:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">Птица||Кошка||Собака</span> (короче для птицы==Птицы||Кошка==Кошка||Собака==Собака)</li>
+            <li><span class="example-input">Птица||Кошка||Собака</span> (короче для птица==Птица||Кошка==Кошка||Собака==Собака)</li>
             <li><span class="example-input"><span class="example-input"> Белый==#ffffff|||Черный==#000000</span> (где label==value)</li>
             <li><span class="example-input">[[+example_1]]</span> (строит список опубликованных ресурсов с назначенным id шаблона равным 1)</li>
             <li><span class="example-input">[[+example_2]]</span> (строит тот же список, что и предыдущий пример, включая пустой вариант)</li>

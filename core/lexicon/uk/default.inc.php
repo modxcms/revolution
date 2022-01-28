@@ -570,9 +570,9 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 // TVs
 $_lang['tv_type'] = 'Тип вводу';
 $_lang['tv_default'] = 'Значення за замовчуванням';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
-$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
-$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
-$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_default_desc'] = 'Контент, який цей TV показуватиме, якщо контент користувачем не надано. ';
+$_lang['tv_caption_desc'] = 'Мітка, що відображається для цього TV на сторінках редагування ресурсів (можна перевизначити відповідно до шаблону або інших критеріїв за допомогою <a href="?a=security/forms" target="_blank">налаштування форми</a>). ';
+$_lang['tv_category_desc'] = 'Використовуйте для угруповання TV на сторінках редагування ресурсів та у дереві елементів. ';
+$_lang['tv_description_desc'] = 'Корисна інформація про використання цього TV відображається поруч із його заголовком на сторінках редагування ресурсів та у вигляді спливаючої підказки у дереві елементів. ';
 $_lang['tv_elements'] = 'Можливі значення';
-$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
+$_lang['tv_elements_short_desc'] = 'Определяє доступні для вибору параметри для цього TV, які можна ввести вручну або створити за допомогою однострокового <a href="https://docs.modx.com/current/ru/building-sites/elements/template-variables/bindings/select-binding" target="_blank">запроса до бази даних</a>. ';

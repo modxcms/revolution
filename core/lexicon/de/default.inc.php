@@ -570,9 +570,9 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 // TVs
 $_lang['tv_type'] = 'Eingabetyp';
 $_lang['tv_default'] = 'Standardwert';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
-$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
-$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
-$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_default_desc'] = 'Der Inhalt, den diese TV ausgibt, wenn kein vom Benutzer eingegebener Inhalt vorhanden ist.';
+$_lang['tv_caption_desc'] = 'Die für diese TV angezeigte Bezeichnung auf der Ressourcen-Bearbeitungsseite (kann per Template oder per <a href="?a=security/forms" target="_blank">Formularanpassung</a> überschrieben werden).';
+$_lang['tv_category_desc'] = 'TVs in Ressourcen-Bearbeitungsseiten und im Elementbaum zu gruppieren.';
+$_lang['tv_description_desc'] = 'Benutzungshinweise für diese TV neben dem Titel auf Ressourcen-Bearbeitungsseiten und als Tooltip im Elementbaum anzeigen.';
 $_lang['tv_elements'] = 'Eingabe-Optionswerte';
-$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
+$_lang['tv_elements_short_desc'] = 'Definiert die wählbaren Optionen für diese TV, die manuell eingegeben oder mit einer einzeiligen <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">Datenbankabfrage</a> erstellt werden können.';
