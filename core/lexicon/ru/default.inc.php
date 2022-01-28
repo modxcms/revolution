@@ -570,9 +570,9 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 // TVs
 $_lang['tv_type'] = 'Тип ввода';
 $_lang['tv_default'] = 'Значение по умолчанию';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
-$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
-$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
-$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_default_desc'] = 'Контент, который этот TV будет показывать, если контент пользователем  не предоставлен. ';
+$_lang['tv_caption_desc'] = 'Метка, отображаемая для этого TV на страницах редактирования ресурсов (можно переопределить в соответствии с шаблоном или другими критериями с помощью <a href="?a=security/forms" target="_blank">настройки формы</a>). ';
+$_lang['tv_category_desc'] = 'Используйте для группировки TV на страницах редактирования ресурсов и в дереве элементов.';
+$_lang['tv_description_desc'] = 'Полезная информация об использовании этого TV отображается рядом с его заголовком на страницах редактирования ресурсов и в виде всплывающей подсказки в дереве элементов. ';
 $_lang['tv_elements'] = 'Возможные значения';
-$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
+$_lang['tv_elements_short_desc'] = 'Определяет доступные для выбора параметры для этого TV, которые можно ввести вручную или создать с помощью однострочного <a href="https://docs.modx.com/current/ru/building-sites/elements/template-variables/bindings /select-binding" target="_blank">запроса к базе данных</a>. ';
