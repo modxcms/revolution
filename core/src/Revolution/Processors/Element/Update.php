@@ -49,6 +49,7 @@ abstract class Update extends UpdateProcessor
         /* make sure a name was specified */
         $nameField = $this->classKey === modTemplate::class ? 'templatename' : 'name';
         $name = $this->getProperty($nameField, '');
+
         if (empty($name)) {
             $this->addFieldError($nameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
         } elseif ($this->alreadyExists($name)) {
@@ -100,12 +101,11 @@ abstract class Update extends UpdateProcessor
 
     public function cleanup()
     {
+        $fields = array('id', 'description', 'locked', 'category', 'content');
+        array_push($fields, ($this->classKey == modTemplate::class ? 'templatename' : 'name'));
         return $this->success(
             '',
-            array_merge(
-                $this->object->get(['id', 'name', 'description', 'locked', 'category', 'content']),
-                ['previous_category' => $this->previousCategory]
-            )
+            array_merge($this->object->get($fields), ['previous_category' => $this->previousCategory])
         );
     }
 }
