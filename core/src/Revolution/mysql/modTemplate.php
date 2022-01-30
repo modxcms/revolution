@@ -9,11 +9,11 @@ class modTemplate extends \MODX\Revolution\modTemplate
         'version' => '3.0',
         'table' => 'site_templates',
         'extends' => 'MODX\\Revolution\\modElement',
-        'tableMeta' => 
+        'tableMeta' =>
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' => 
+        'fields' =>
         array (
             'templatename' => '',
             'description' => '',
@@ -28,9 +28,9 @@ class modTemplate extends \MODX\Revolution\modTemplate
             'static_file' => '',
             'preview_file' => '',
         ),
-        'fieldMeta' => 
+        'fieldMeta' =>
         array (
-            'templatename' => 
+            'templatename' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '50',
@@ -39,7 +39,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'default' => '',
                 'index' => 'unique',
             ),
-            'description' => 
+            'description' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -47,7 +47,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'null' => false,
                 'default' => '',
             ),
-            'editor_type' => 
+            'editor_type' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -55,7 +55,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'null' => false,
                 'default' => 0,
             ),
-            'category' => 
+            'category' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -64,7 +64,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'default' => 0,
                 'index' => 'fk',
             ),
-            'icon' => 
+            'icon' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -72,7 +72,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'null' => false,
                 'default' => '',
             ),
-            'template_type' => 
+            'template_type' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -80,14 +80,14 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'null' => false,
                 'default' => 0,
             ),
-            'content' => 
+            'content' =>
             array (
                 'dbtype' => 'mediumtext',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
             ),
-            'locked' => 
+            'locked' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -97,13 +97,13 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'default' => 0,
                 'index' => 'index',
             ),
-            'properties' => 
+            'properties' =>
             array (
                 'dbtype' => 'text',
                 'phptype' => 'array',
                 'null' => true,
             ),
-            'static' => 
+            'static' =>
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -113,7 +113,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'default' => 0,
                 'index' => 'index',
             ),
-            'static_file' => 
+            'static_file' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -121,7 +121,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'null' => false,
                 'default' => '',
             ),
-            'preview_file' => 
+            'preview_file' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
@@ -130,17 +130,17 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'default' => '',
             ),
         ),
-        'indexes' => 
+        'indexes' =>
         array (
-            'templatename' => 
+            'templatename' =>
             array (
                 'alias' => 'templatename',
                 'primary' => false,
                 'unique' => true,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'templatename' => 
+                    'templatename' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -148,15 +148,15 @@ class modTemplate extends \MODX\Revolution\modTemplate
                     ),
                 ),
             ),
-            'category' => 
+            'category' =>
             array (
                 'alias' => 'category',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'category' => 
+                    'category' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -164,15 +164,15 @@ class modTemplate extends \MODX\Revolution\modTemplate
                     ),
                 ),
             ),
-            'locked' => 
+            'locked' =>
             array (
                 'alias' => 'locked',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'locked' => 
+                    'locked' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -180,15 +180,15 @@ class modTemplate extends \MODX\Revolution\modTemplate
                     ),
                 ),
             ),
-            'static' => 
+            'static' =>
             array (
                 'alias' => 'static',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
+                'columns' =>
                 array (
-                    'static' => 
+                    'static' =>
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -197,24 +197,24 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 ),
             ),
         ),
-        'composites' => 
+        'composites' =>
         array (
-            'PropertySets' => 
+            'PropertySets' =>
             array (
                 'class' => 'MODX\\Revolution\\modElementPropertySet',
                 'local' => 'id',
                 'foreign' => 'element',
                 'owner' => 'local',
                 'cardinality' => 'many',
-                'criteria' => 
+                'criteria' =>
                 array (
-                    'foreign' => 
+                    'foreign' =>
                     array (
                         'element_class' => 'MODX\\Revolution\\modTemplate',
                     ),
                 ),
             ),
-            'TemplateVarTemplates' => 
+            'TemplateVarTemplates' =>
             array (
                 'class' => 'MODX\\Revolution\\modTemplateVarTemplate',
                 'local' => 'id',
@@ -223,9 +223,9 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'owner' => 'local',
             ),
         ),
-        'aggregates' => 
+        'aggregates' =>
         array (
-            'Category' => 
+            'Category' =>
             array (
                 'class' => 'MODX\\Revolution\\modCategory',
                 'local' => 'category',
@@ -233,7 +233,7 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Resources' => 
+            'Resources' =>
             array (
                 'class' => 'MODX\\Revolution\\modResource',
                 'local' => 'id',
@@ -242,6 +242,21 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'owner' => 'local',
             ),
         ),
+        'validation' =>
+        array (
+            'rules' =>
+            array (
+                'templatename' =>
+                array (
+                    'invalid' =>
+                    array (
+                        'type' => 'preg_match',
+                        'rule' => '/^(?!\\s)[a-zA-Z0-9\\x23-\\x2f\\x3a\\x5b-\\x5d\\x7f-\\xff-_\\s]+(?<!\\s)$/',
+                        'message' => 'template_err_invalid_name'
+                    ),
+                ),
+            ),
+        )
     );
 
     public static function listTemplateVars(
