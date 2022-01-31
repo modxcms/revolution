@@ -268,7 +268,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
 
         // We are already on a tab that has an invalid state. No need to switch
-        if (!tabs.items.items[tabs_index].hidden)  {
+        if (tabs.items.items[tabs_index] && !tabs.items.items[tabs_index].hidden) {
             return;
         }
 
