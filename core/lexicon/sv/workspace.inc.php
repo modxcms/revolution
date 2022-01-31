@@ -237,4 +237,4 @@ $_lang['modx'] = 'MODX';
 $_lang['modx_constraints'] = 'Ändra MODX-versionen som din webbplats körs på till en version som uppfyller kraven.';
 $_lang['available'] = 'Tillgänglig';
 $_lang['not_available'] = 'Inte tillgänglig';
-$_lang['checking_for_package_updates'] = 'Checking for package updates...';
+$_lang['checking_for_package_updates'] = 'Söker efter paketuppdateringar...';

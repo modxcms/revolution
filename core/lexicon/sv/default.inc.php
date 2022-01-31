@@ -570,9 +570,9 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 // TVs
 $_lang['tv_type'] = 'Inmatningstyp';
 $_lang['tv_default'] = 'Standardvärde';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
-$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
-$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
-$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_default_desc'] = 'Innehållet som den här mallvariabeln visar om användaren inte anger något annat innehåll.';
+$_lang['tv_caption_desc'] = 'Den etikett som visas för den här mallvariabeln på resursredigeringssidor (kan åsidosättas per mall eller efter andra kriterier med hjälp av <a href="?a=security/forms" target="_blank">formuläranpassning</a>).';
+$_lang['tv_category_desc'] = 'Använd för att gruppera mallvariabler på resursredigeringssidor och i elementträdet.';
+$_lang['tv_description_desc'] = 'Användningsinformation för denna mallvariabel som visas intill dess rubrik på resursredigeringssidor och som ett verktygstips i elementträdet.';
 $_lang['tv_elements'] = 'Alternativvärden för indata';
-$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
+$_lang['tv_elements_short_desc'] = 'Definierar de valbara alternativen för denna mallvariabel som kan matas in manuellt eller byggas med en enrads <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">databasfråga</a>.';
