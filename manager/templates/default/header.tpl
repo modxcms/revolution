@@ -18,7 +18,7 @@
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js"></script>
 <script src="{$_config.manager_url}assets/ext3/ext-all.js"></script>
 {/if}
-<script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}"></script>
+<script src="{$_config.manager_url}assets/modext/core/modx.js?mv={$versionToken}"></script>
 <script src="{$_config.manager_url}assets/lib/popper.min.js"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}"></script>
