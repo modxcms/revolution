@@ -1146,7 +1146,7 @@ MODx.getQRSettings = function(id,va) {
                 ,anchor: '100%'
                 ,parentcmp: 'modx-'+id+'-parent'
                 ,contextcmp: 'modx-'+id+'-context_key'
-                ,currentid: va['id']
+                ,currentid: va['id'] || 0
             },{
                 xtype: 'modx-combo-class-derivatives'
                 ,fieldLabel: _('resource_type')
