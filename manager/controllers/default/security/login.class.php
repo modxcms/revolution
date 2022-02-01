@@ -84,49 +84,20 @@ class SecurityLoginManagerController extends modManagerController
 
         // Define background
         $managerTheme = $this->modx->getOption('manager_theme', null, 'default');
-        $file_path = MODX_MANAGER_PATH . 'templates/' . $managerTheme . '/images/login/';
-        $file_url = MODX_MANAGER_URL . 'templates/' . $managerTheme . '/images/login/';
-        $this->modx->getVersionData();
-        $version = preg_replace('#-.*$#', '', $this->modx->version['full_version']);
         $background = $this->modx->getOption('login_background_image');
-        $season = '';
-        if (!$background || $background == 'auto') {
-            $month = date('m');
-            if ($month >= 3 && $month <= 5) {
-                $season = 'spring';
-            } elseif ($month >= 6 && $month <= 8) {
-                $season = 'summer';
-            } elseif ($month >= 9 && $month <= 11) {
-                $season = 'autumn';
-            } else {
-                $season = 'winter';
-            }
-            $background = '';
-        } elseif (in_array($background, ['spring', 'summer', 'autumn', 'winter'])) {
-            $season = $background;
-            $background = '';
-        }
-        if ($season) {
-            $file_name = $season . '-' . $version . '.jpg';
-            if (file_exists($file_path . $file_name)) {
-                $background = $file_url . $file_name;
-            }
-        }
-        if (!$background) {
+        if (empty($background)) {
             $background = $managerUrl . 'templates/' . $managerTheme . '/images/login/default-background.jpg';
         }
         $this->setPlaceholder('background', $background);
-        // --
 
         $logo = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/' . $managerTheme . '/images/modx-logo-color.svg', true);
         $this->setPlaceholder('logo', $logo);
 
         $this->setPlaceholder('siteUrl', $this->modx->getOption('site_url'));
-
         $this->setPlaceholder('show_help', (int)$this->modx->getOption('login_help_button'));
+
         $lifetime = $this->modx->getOption('session_cookie_lifetime', null, 0);
         $this->setPlaceholder('rememberme', $output = $this->modx->lexicon('login_remember', ['lifetime' => $this->getLifetimeString($lifetime)]));
-
 
         $this->checkForActiveInstallation();
         $this->checkForAllowManagerForgotPassword();
