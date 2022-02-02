@@ -4,7 +4,25 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.0-rc2 (TBD)
 ====================================
-
+Prevent random container conversion on resource move (#16001)
+Apply JSON_INVALID_UTF8_SUBSTITUTE flag to json_encode (#16025)
+Make MessageBox minWidth configurable (#15996)
+Change Children to composite relation for modUserGroup (#15968)
+Improve regex for stripping MODX tags in dashboard widgets (#15974)
+Fix selecting parent in quick create resource (#16002)
+Add cache-busting to manager JS (#16016)(#16026)
+Fix 'undefined' error if TV under content (#16008)
+Split logs permission into mgr_log_view/erase (#15981)
+Improve stripmodxtags output filter (#15975)
+Remove unnecessary uses of deprecated strftime() (#15999)
+Mark modX::parseChunk as deprecated (#15978)
+Fix Zend OPcache API warning when upgrading MODX (#15911)
+Fix aliases for resource controllers (#15997)
+Fix disabled trash button (#15994)
+Fix blank page when creating dashboard widget (#15987)
+Fix empty files not being clickable in the file tree (#15985)
+Display username in user menu (#15973)
+Switch resource_preview to resource_view (#15902)
 
 MODX Revolution 3.0.0-rc1 (January 20, 2022)
 ====================================
