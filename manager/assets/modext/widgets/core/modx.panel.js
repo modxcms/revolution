@@ -780,7 +780,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         ;
         if (!Ext.isEmpty(record)) {
             const postfix = MODx.perm.tree_show_resource_ids && !Ext.isEmpty(record.id)
-                ? `<small>(${record.id})</small>`
+                ? ` <small>(${record.id})</small>`
                 : ''
                 ;
             if (formId === 'resource') {
