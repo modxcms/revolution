@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Resource;
-
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\Processors\Processor;
@@ -53,9 +53,13 @@ class Sort extends Processor
 
         // Because of BC
         $data = urldecode($this->getProperty('data', ''));
-        if (empty($data)) $this->failure($this->modx->lexicon('invalid_data'));
+        if (empty($data)) {
+            return $this->failure($this->modx->lexicon('invalid_data'));
+        }
         $data = $this->modx->fromJSON($data);
-        if (empty($data)) $this->failure($this->modx->lexicon('invalid_data'));
+        if (empty($data)) {
+            return $this->failure($this->modx->lexicon('invalid_data'));
+        }
 
         // Because of BC
         $this->getNodesFormatted($data, $this->getProperty('parent', 0));
@@ -66,7 +70,7 @@ class Sort extends Processor
         $source = $this->getProperty('source', '');
         $point = $this->getProperty('point', '');
 
-        if (empty ($target)) {
+        if (empty($target)) {
             return $this->failure('Target not set');
         }
 
@@ -83,7 +87,9 @@ class Sort extends Processor
         $this->parseNodes($source, $target);
 
         $sorted = $this->sort();
-        if ($sorted !== true) return $this->failure($sorted);
+        if ($sorted !== true) {
+            return $this->failure($sorted);
+        }
 
         $this->fireAfterSort();
 
@@ -151,7 +157,6 @@ class Sort extends Processor
             'contextsAffected' => &$this->contextsAffected,
             'modifiedNodes' => &$this->nodesAffected, /* backward compat */
         ]);
-
     }
 
     public function clearCache()
@@ -174,8 +179,12 @@ class Sort extends Processor
         /** @var modResource $newParent */
         $newParent = $this->modx->getObject(modResource::class, $this->target->id);
 
-        if (empty($oldParent) && empty($newParent)) return;
-        if ($oldParent->id == $newParent->id) return;
+        if (empty($oldParent) && empty($newParent)) {
+            return;
+        }
+        if ($oldParent->id == $newParent->id) {
+            return;
+        }
 
         if (!empty($oldParent)) {
             $oldParentChildrenCount = $this->modx->getCount(modResource::class, ['parent' => $oldParent->get('id'), 'id:!=' => $node->id]);
@@ -189,7 +198,7 @@ class Sort extends Processor
             }
         }
 
-        if (!empty($newParent)) {
+        if (!empty($newParent) && $this->point === 'append') {
             $newParent->set('isfolder', true);
             $newParent->save();
 
@@ -343,10 +352,14 @@ class Sort extends Processor
     public function moveResourceAbove($lastRank)
     {
         $moved = $this->moveResource('source', $lastRank);
-        if ($moved !== true) return $moved;
+        if ($moved !== true) {
+            return $moved;
+        }
 
         $moved = $this->moveResource('target', $lastRank + 1);
-        if ($moved !== true) return $moved;
+        if ($moved !== true) {
+            return $moved;
+        }
 
         return $this->moveAffectedResources($lastRank);
     }
