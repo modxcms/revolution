@@ -54,11 +54,11 @@ class Sort extends Processor
         // Because of BC
         $data = urldecode($this->getProperty('data', ''));
         if (empty($data)) {
-            $this->failure($this->modx->lexicon('invalid_data'));
+            return $this->failure($this->modx->lexicon('invalid_data'));
         }
         $data = $this->modx->fromJSON($data);
         if (empty($data)) {
-            $this->failure($this->modx->lexicon('invalid_data'));
+            return $this->failure($this->modx->lexicon('invalid_data'));
         }
 
         // Because of BC
