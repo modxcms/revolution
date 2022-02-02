@@ -631,9 +631,10 @@ abstract class modManagerController
             }
 
             $o = '';
+            $suffix = '?mv=' . $this->_prepareVersionPostfix();
             // Add script tags for the required javascript
             foreach ($externals as $js) {
-                $o .= '<script src="' . $js . '"></script>' . "\n";
+                $o .= '<script src="' . $js . $suffix . '"></script>' . "\n";
             }
 
             // Get the state and user token for adding to the init script
@@ -758,6 +759,7 @@ abstract class modManagerController
         $cssjs = [];
         if (!empty($jsToCompress)) {
             foreach ($jsToCompress as $scr) {
+                $scr = strpos($scr, '?') === false ? $scr . '?mv=' . $versionPostFix : $scr . '&mv=' . $versionPostFix;
                 $cssjs[] = '<script src="' . $scr . '"></script>';
             }
         }
@@ -768,6 +770,7 @@ abstract class modManagerController
         }
         if (!empty($cssToCompress)) {
             foreach ($cssToCompress as $scr) {
+                $scr = strpos($scr, '?') === false ? $scr . '?mv=' . $versionPostFix : $scr . '&mv=' . $versionPostFix;
                 $cssjs[] = '<link href="' . $scr . '" rel="stylesheet" type="text/css" />';
             }
         }
