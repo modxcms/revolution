@@ -38,7 +38,7 @@ class SearchManagerController extends modManagerController {
         $this->addHtml("<script type=\"text/javascript\">Ext.onReady(function() {
     MODx.load({
         xtype: 'modx-page-search'
-        ,record: " . json_encode(['q' => $this->searchQuery])  . "
+        ,record: " . json_encode(['q' => $this->searchQuery], JSON_INVALID_UTF8_SUBSTITUTE)  . "
     });
 });</script>");
     }

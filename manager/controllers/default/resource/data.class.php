@@ -64,7 +64,7 @@ class ResourceDataManagerController extends ResourceManagerController
         ];
         $this->addHtml('<script>
         MODx.ctx = "' . $this->resource->get('context_key') . '";
-        Ext.onReady(function() {MODx.load(' . json_encode($data) . ')});</script>');
+        Ext.onReady(function() {MODx.load(' . json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE) . ')});</script>');
     }
 
 

@@ -45,6 +45,6 @@ class GetList extends Browser
 
         return $this->source->hasErrors()
             ? $this->failure($this->source->getErrors(), [])
-            : json_encode($list);
+            : json_encode($list, JSON_INVALID_UTF8_SUBSTITUTE);
     }
 }

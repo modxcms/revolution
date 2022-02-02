@@ -64,7 +64,7 @@ class SystemFileEditManagerController extends modManagerController
             'file' => $this->filename,
             'record' => $this->fileRecord,
             'canSave' => (int)$this->canSave,
-        ]);
+        ], JSON_INVALID_UTF8_SUBSTITUTE);
         $this->addHtml('<script>Ext.onReady(function() {MODx.load(' . $data . ');});</script>');
     }
 

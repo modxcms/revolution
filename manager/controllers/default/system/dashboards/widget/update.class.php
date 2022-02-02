@@ -111,7 +111,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
             'record' => $this->widgetArray,
         ];
 
-        $this->addHtml('<script>Ext.onReady(function() {MODx.load(' . json_encode($data) . ');});</script>');
+        $this->addHtml('<script>Ext.onReady(function() {MODx.load(' . json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE) . ');});</script>');
     }
 
     /**

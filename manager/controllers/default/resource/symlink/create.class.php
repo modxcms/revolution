@@ -41,7 +41,7 @@ class SymLinkCreateManagerController extends ResourceCreateManagerController
         MODx.config.publish_document = "' . $this->canPublish . '";
         MODx.onDocFormRender = "' . $this->onDocFormRender . '";
         MODx.ctx = "' . $this->ctx . '";
-        Ext.onReady(function() {MODx.load(' . json_encode($data) . ')});</script>');
+        Ext.onReady(function() {MODx.load(' . json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE) . ')});</script>');
 
         $this->loadRichTextEditor();
     }
