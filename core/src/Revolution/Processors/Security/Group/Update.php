@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -79,6 +80,10 @@ class Update extends UpdateProcessor
         $count = $this->modx->getCount(modUserGroup::class, $c);
         if ($count > 0) {
             return $this->modx->lexicon('user_group_err_already_exists');
+        }
+
+        if ($this->isAdminGroup()) {
+            $this->object->set('parent', 0);
         }
 
         return parent::beforeSave();
@@ -179,5 +184,10 @@ class Update extends UpdateProcessor
         }
 
         return $memberships;
+    }
+
+    public function isAdminGroup()
+    {
+        return $this->object->get('id') === 1 || $this->object->get('name') === 'Administrator';
     }
 }

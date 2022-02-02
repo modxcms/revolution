@@ -139,6 +139,14 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
         ),
         'composites' => 
         array (
+            'Children' => 
+            array (
+                'class' => 'MODX\\Revolution\\modUserGroup',
+                'local' => 'id',
+                'foreign' => 'parent',
+                'cardinality' => 'many',
+                'owner' => 'local',
+            ),
             'UserGroupMembers' => 
             array (
                 'class' => 'MODX\\Revolution\\modUserGroupMember',
@@ -165,14 +173,6 @@ class modUserGroup extends \MODX\Revolution\modUserGroup
                 'foreign' => 'id',
                 'cardinality' => 'one',
                 'owner' => 'foreign',
-            ),
-            'Children' => 
-            array (
-                'class' => 'MODX\\Revolution\\modUserGroup',
-                'local' => 'id',
-                'foreign' => 'parent',
-                'cardinality' => 'many',
-                'owner' => 'local',
             ),
             'Dashboard' => 
             array (

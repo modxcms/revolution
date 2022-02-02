@@ -105,7 +105,7 @@ MODx.panel.UserGroup = function(config) {
                                 ,fieldLabel: _('user_group_parent')
                                 ,editable: false
                                 ,anchor: '100%'
-                                ,disabled: config.record.id === 0
+                                ,disabled: config.record.id === 0 || config.record.name === 'Administrator'
                                 ,baseParams: {
                                     action: 'Security/Group/GetList'
                                     ,addNone: true
