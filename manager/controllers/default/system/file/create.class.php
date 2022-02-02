@@ -62,7 +62,7 @@ class SystemFileCreateManagerController extends modManagerController
         $data = json_encode([
             'xtype' => 'modx-page-file-create',
             'record' => $this->fileRecord,
-        ]);
+        ], JSON_INVALID_UTF8_SUBSTITUTE);
         $this->addHtml('<script>Ext.onReady(function() {MODx.load(' . $data . ');});</script>');
     }
 

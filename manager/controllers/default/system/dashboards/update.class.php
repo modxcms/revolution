@@ -127,7 +127,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
         $data = json_encode([
             'xtype' => 'modx-page-dashboard-update',
             'record' => $this->dashboardArray,
-        ]);
+        ], JSON_INVALID_UTF8_SUBSTITUTE);
         $this->addHtml('<script>Ext.onReady(function(){MODx.load(' . $data . ')});</script>');
     }
 
