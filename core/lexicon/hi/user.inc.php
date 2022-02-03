@@ -144,8 +144,7 @@ $_lang['user_group_member_err_save'] = 'को समूह में user ज�
 $_lang['user_group_new'] = 'User Group बनाएँ';
 $_lang['user_group_parent'] = 'जनक मेनू';
 $_lang['user_group_remove'] = 'User Group हटाएँ';
-$_lang['user_group_remove_confirm'] = 'क्या आप बाकई उपयोगकर्ता समूह को हटाना चाहते हैं:
-"[[+user_group]]"?';
+$_lang['user_group_remove_confirm'] = 'Are you sure you want to delete the User Group: "[[+user_group]]" and all it\'s children?';
 $_lang['user_group_settings'] = 'उपयोगकर्ता समूह सेटिंग';
 $_lang['user_group_settings_desc'] = 'User Group के लिए सेटिंग्स का प्रबंधन करें';
 $_lang['user_group_untitled'] = 'अनामांकित User Group';
