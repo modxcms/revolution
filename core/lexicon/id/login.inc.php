@@ -13,7 +13,7 @@ $_lang['login_blocked_error'] = 'Anda sementara diblokir dan tidak dapat masuk. 
 $_lang['login_blocked_ip'] = 'Anda tidak diperbolehkan untuk login dari alamat IP Anda saat ini.';
 $_lang['login_blocked_time'] = 'Anda tidak diperbolehkan untuk login pada saat ini. Harap coba lagi nanti.';
 $_lang['login_blocked_too_many_attempts'] = 'Anda telah diblokir karena terlalu banyak login gagal usaha.';
-$_lang['login_button'] = 'Login';
+$_lang['login_button'] = 'Masuk';
 $_lang['login_cannot_locate_account'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
 $_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/company" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
 $_lang['login_email_label'] = 'Akun email:';
@@ -30,7 +30,7 @@ $_lang['login_password'] = 'Sandi';
 $_lang['login_password_reset_act_sent'] = 'If the user or email exists, you’ll receive an email shortly.';
 $_lang['login_remember'] = 'Keep me logged in for [[+lifetime]]';
 $_lang['login_send_activation_email'] = 'Kirim Email aktivasi';
-$_lang['login_title'] = 'Login';
+$_lang['login_title'] = 'Masuk';
 $_lang['login_user_err_nf_email'] = 'If the user or email exists, you’ll receive an email shortly.';
 $_lang['login_username'] = 'Nama pengguna';
 $_lang['login_username_or_email'] = 'Nama pengguna atau Email';
