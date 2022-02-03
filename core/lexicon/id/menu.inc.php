@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['action'] = 'Aksi';
+$_lang['action'] = 'Tindakan';
 $_lang['action_desc'] = 'Path controller digunakan untuk item menu ini. Path ke controller dibangun dengan awalan Namespace path, controller, dan manajer tema dengan nilai ini. (Ex: pengguna/update untuk inti Namespace pergi ke controller [core_namespace_path] / [mgr_theme]/user/update.class.php)';
 $_lang['description_desc'] = 'Teks, atau kosa kata kunci, yang akan digunakan untuk render teks Deskripsi Halaman ini dalam menu.';
 $_lang['handler'] = 'Handler';
