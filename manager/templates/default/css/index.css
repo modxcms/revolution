@@ -25435,41 +25435,41 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     width: 100%;
     overflow: auto;
 }
-.dashboard table {
+.dashboard .table-wrapper table {
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-.dashboard table th {
+.dashboard .table-wrapper table th {
     font-weight: bold;
     text-align: initial;
     padding: 10px;
     border-bottom: 2px solid #F0F0F0;
 }
-.dashboard table td {
+.dashboard .table-wrapper table td {
     padding: 10px;
     border-bottom: 1px solid #F0F0F0;
     white-space: nowrap;
     vertical-align: center;
 }
-.dashboard table td .unpublished {
+.dashboard .table-wrapper table td .unpublished {
     font-style: italic;
     color: #999999;
 }
-.dashboard table td .deleted {
+.dashboard .table-wrapper table td .deleted {
     color: rgba(175, 90, 98, 0.5) !important;
     text-decoration: line-through;
 }
-.dashboard table tr:last-child td {
+.dashboard .table-wrapper table tr:last-child td {
     border: none;
 }
-.dashboard table tr:last-child td tr:last-child td {
+.dashboard .table-wrapper table tr:last-child td tr:last-child td {
     border: none;
 }
-.dashboard table tr:last-child td tr:last-child td:first-child {
+.dashboard .table-wrapper table tr:last-child td tr:last-child td:first-child {
     border-bottom-left-radius: 10px;
 }
-.dashboard table tr:last-child td tr:last-child td:last-child {
+.dashboard .table-wrapper table tr:last-child td tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
 }
 .dashboard .widget-footer {
