@@ -172,6 +172,6 @@ $_lang['weblink_new'] = 'Skapa webblänk';
 $_lang['weblink_response_code'] = 'Svarskod';
 $_lang['weblink_response_code_help'] = 'Den HTTP-svarskod som ska sändas för webblänken.';
 
-$_lang['resource_right_top_title'] = 'Publicerar';
+$_lang['resource_right_top_title'] = 'Publicering';
 $_lang['resource_right_middle_title'] = 'Mall';
 $_lang['resource_right_bottom_title'] = 'Beteende i menyn';
