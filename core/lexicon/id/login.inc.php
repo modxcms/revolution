@@ -8,14 +8,14 @@
  */
 $_lang['login_language'] = 'Bahasa';
 $_lang['login_activation_key_err'] = 'Kunci aktivasi tidak cocok! Silahkan periksa email aktivasi Anda dan pastikan Anda dimuat URL yang benar.';
-$_lang['login_blocked_admin'] = 'You have been blocked by an administrator.';
+$_lang['login_blocked_admin'] = 'Kamu telah di blokir oleh seorang administrator.';
 $_lang['login_blocked_error'] = 'Anda sementara diblokir dan tidak dapat masuk. Harap coba lagi nanti.';
 $_lang['login_blocked_ip'] = 'Anda tidak diperbolehkan untuk login dari alamat IP Anda saat ini.';
 $_lang['login_blocked_time'] = 'Anda tidak diperbolehkan untuk login pada saat ini. Harap coba lagi nanti.';
 $_lang['login_blocked_too_many_attempts'] = 'Anda telah diblokir karena terlalu banyak login gagal usaha.';
-$_lang['login_button'] = 'Login';
+$_lang['login_button'] = 'Masuk';
 $_lang['login_cannot_locate_account'] = 'Nama pengguna atau password yang Anda masukkan tidak benar.  Silakan periksa nama pengguna, ketik ulang sandi, dan coba lagi.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="http://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; dilisensikan di bawah GPLv2 atau selelahnya.';
 $_lang['login_email_label'] = 'Akun email:';
 $_lang['login_err_unknown'] = 'Kesalahan yang tidak dikenal terjadi ketika mencoba untuk log in.';
 $_lang['login_forget_your_login'] = 'Lupa Login Anda?';
@@ -25,7 +25,7 @@ $_lang['login_password'] = 'Sandi';
 $_lang['login_password_reset_act_sent'] = 'Jika pengguna atau email ada, Anda akan segera menerima email.';
 $_lang['login_remember'] = 'Ingat saya';
 $_lang['login_send_activation_email'] = 'Kirim Email aktivasi';
-$_lang['login_title'] = 'Login';
+$_lang['login_title'] = 'Masuk';
 $_lang['login_user_err_nf_email'] = 'Jika pengguna atau email ada, Anda akan segera menerima email.';
 $_lang['login_username'] = 'Nama pengguna';
 $_lang['login_username_or_email'] = 'Nama pengguna atau Email';
