@@ -388,7 +388,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     ,initPopper: function() {
         var el = this;
         var buttons = document.getElementById('modx-navbar').getElementsByClassName('top');
-        var position = window.innerWidth <= 640 ? 'bottom' : 'right';
+        var position = window.innerWidth <= 960 ? 'bottom' : 'right';
         for (var i = 0; i < buttons.length; i++) {
             var submenu = document.getElementById(buttons[i].id + '-submenu');
             new Popper(buttons[i], submenu, {
@@ -404,7 +404,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         enabled: true,
                         fn: function(data) {
                             for (var i in data.offsets.popper) {
-                                if (i != 'bottom' && i != 'right') {
+                                if (i !== 'bottom' && i !== 'right') {
                                     if (data.offsets.popper.hasOwnProperty(i)) {
                                         data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
                                             ? data.offsets.popper[i] + 'px'
@@ -436,6 +436,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         window.addEventListener('click', function() {
             el.hideMenu();
         });
+        if (window.innerWidth > 960) {
+            this.initSubPopper();
+        }
     }
 
     ,showMenu: function(el) {
@@ -446,11 +449,98 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             this.hideMenu();
             submenu.classList.add('active');
         }
+        this.hideSubMenu();
     }
     ,hideMenu: function() {
         var submenus = document.getElementsByClassName('modx-subnav');
         for (var i = 0; i < submenus.length; i++) {
             submenus[i].classList.remove('active');
+        }
+    }
+
+    ,initSubPopper: function () {
+        var buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
+        var position = window.innerWidth <= 960 ? 'bottom' : 'right';
+        for (var i = 0; i < buttons.length; i++) {
+            let popperInstance = null;
+
+            function create(button, submenu) {
+                popperInstance = new Popper(button, submenu, {
+                    placement: position,
+                    modifiers: {
+                        flip: {
+                            enabled: false
+                        },
+                        applyStyle: {
+                            enabled: true,
+                            fn: function (data) {
+                                for (var i in data.offsets.popper) {
+                                    if (i !== 'bottom' && i !== 'right') {
+                                        if (data.offsets.popper.hasOwnProperty(i)) {
+                                            data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
+                                                ? data.offsets.popper[i] + 'px'
+                                                : data.offsets.popper[i];
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        preventOverflow: {
+                            boundariesElement: document.getElementById('modx-container'),
+                            priority: position === 'right'
+                                ? ['bottom', 'top']
+                                : ['left', 'right']
+                        }
+                    }
+                });
+            }
+
+            function destroy() {
+                if (popperInstance) {
+                    popperInstance.destroy();
+                    popperInstance = null;
+                }
+            }
+
+            function show(button, menu) {
+                menu.classList.add('active');
+                create(button, menu);
+            }
+
+            function hide(menu) {
+                var buttons = menu.querySelectorAll('.sub');
+                for (var i = 0; i < buttons.length; i++) {
+                    var submenu = buttons[i].getElementsByTagName('ul')[0];
+                    submenu.classList.remove('active');
+                    buttons[i].classList.remove('active');
+                }
+                destroy();
+            }
+            console.log(buttons[i]);
+
+            buttons[i].onmouseenter = function (e) {
+                console.log(this);
+                e.stopPropagation();
+                var submenu = this.getElementsByTagName('ul')[0];
+                this.classList.add('active');
+                show(this, submenu);
+            };
+            buttons[i].onmouseleave = function (e) {
+                console.log(this);
+                e.stopPropagation();
+                var parentmenu = this.closest('ul');
+                this.classList.remove('active');
+                hide(parentmenu);
+            };
+        }
+    }
+
+    ,hideSubMenu: function () {
+        var buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
+        for (var i = 0; i < buttons.length; i++) {
+            var submenu = buttons[i].getElementsByTagName('ul')[0];
+            submenu.classList.remove('active');
+            buttons[i].classList.remove('active');
         }
     }
 

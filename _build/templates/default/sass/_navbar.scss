@@ -268,40 +268,43 @@
       }
     }
 
-    & li:hover ul ul,
-    & ul li:hover ul ul,
-    & ul ul li:hover ul ul {
-      display: none;
-    }
-
-    & li:hover ul,
-    & ul li:hover ul,
-    & ul ul li:hover ul,
-    & ul ul ul li:hover ul {
-      display: block;
-    }
-
     &.active {
       opacity: 1;
       visibility: visible;
     }
 
     .modx-subsubnav {
+      max-height: 99vh;
+      overflow-y: auto;
       border: 1px solid $navbarBorder;
       box-shadow: $boxShadowBig;
       border-radius: $borderRadius;
       background: $white;
-      display: none;
+      opacity: 0;
+      visibility: hidden;
       list-style: none;
       position: absolute;
-      left: 295px;
-      top: 0;
       z-index: 24;
-    }
-    &.modx-subnav-usernav {
-      .modx-subsubnav {
-        top: initial;
-        bottom: 0;
+      &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      &-arrow {
+        border: 8px solid transparent;
+        border-right-color: #FFF;
+        content: " ";
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+        z-index: 10010;
+        display: none;
+      }
+      &.active {
+        + .modx-subsubnav-arrow {
+          display: block;
+        }
       }
     }
 
@@ -314,12 +317,6 @@
       pointer-events: none;
       margin-top: -6px;
     }
-  }
-
-  // custom styles for language menu
-  #language .modx-subsubnav {
-    max-height: 86vh;
-    overflow-y: auto;
   }
 }
 
@@ -400,7 +397,6 @@
   #modx-footer {
     .modx-subnav {
       min-width: 300px;
-      top: 60px !important;
 
       .description {
         display: none;
@@ -437,8 +433,9 @@
       display: none;
     }
 
-    .modx-subnav-wrapper {
-      max-height: 400px;
+    // overflow for long subsubnav
+    .modx-subnav {
+      max-height: calc(99vh - 100px);
       overflow-y: auto;
     }
   }

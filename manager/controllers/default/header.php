@@ -336,7 +336,7 @@ class TopMenu
             if (!empty($menu['children'])) {
                 $smTpl .= '<ul class="modx-subsubnav">'."\n";
                 $this->processSubMenus($smTpl, $menu['children']);
-                $smTpl .= '</ul>'."\n";
+                $smTpl .= '</ul><div class="modx-subsubnav-arrow"></div>'."\n";
             }
             $smTpl .= '</li>';
             $output .= $smTpl;
