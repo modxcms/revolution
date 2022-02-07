@@ -428,7 +428,7 @@ abstract class xPDOQuery extends xPDOCriteria {
         if (!static::isValidClause($column)) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'SQL injection attempt detected in sortby column; clause rejected');
         } elseif (!empty($column)) {
-            $this->query['sortby'][] = array('column' => $column, 'direction' => $direction);
+            $this->query['sortby'][] = empty($direction) ? array('column' => $column) : array('column' => $column, 'direction' => $direction) ;
         }
         return $this;
     }
