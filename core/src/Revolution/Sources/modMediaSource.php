@@ -545,11 +545,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
-     * @param $path
+     * @param string $path
+     * @param bool $isNew
      *
      * @return array|bool
      */
-    public function getMetaData($path)
+    public function getMetaData($path, $isNew = false)
     {
         try {
             $data['path'] = $path;
@@ -557,9 +558,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $data['size'] = $this->filesystem->fileSize($path);
             $data['mimetype'] = $this->filesystem->mimeType($path);
             $data['type'] = $data['mimetype'] === 'directory' ? 'dir' : 'file';
-
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            if (!$isNew) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            } else {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\n\t" . $this->xpdo->lexicon('file_info_metadata_new', ['file' => $path]));
+            }
             $data = false;
         }
 

@@ -1143,9 +1143,9 @@ class modElement extends modAccessibleSimpleObject
     public function isStaticSourceMutable()
     {
         $isMutable = false;
-        $sourceFile = $this->getSourceFile();
+        $sourceFile = $this->getStaticFileName();
         if ($sourceFile && $source = $this->getSource()) {
-            if (!$isMutable = (bool)$source->getMetaData($sourceFile)) {
+            if (!$isMutable = (bool)$source->getMetaData($sourceFile, $this->isNew())) {
                 $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
                 $file = array_pop($path);
                 $isMutable = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, '');
