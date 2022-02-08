@@ -47,8 +47,12 @@ if (!is_object($modx) || !($modx instanceof \MODX\Revolution\modX)) {
 /* Set the actual start time */
 $modx->startTime= $tstart;
 
-/* Initialize the default 'web' context */
-$modx->initialize('web');
+/* Initialize a context */
+$contextKey = 'web';
+if (is_readable(__DIR__ . '/config.context.php')) {
+    $contextKey = require __DIR__ . '/config.context.php';
+}
+$modx->initialize($contextKey);
 
 /* execute the request handler */
 if (!MODX_API_MODE) {

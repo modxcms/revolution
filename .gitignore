@@ -8,6 +8,9 @@ web.config
 # ignore all config.core.php
 config.core.php
 
+# ignore all config.context.php
+config.context.php
+
 # ignore concatenated js
 modext.js
 
