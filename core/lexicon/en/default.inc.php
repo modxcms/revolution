@@ -268,7 +268,6 @@ $_lang['more_search_results'] = 'More Search Results...';
 $_lang['move'] = 'Move';
 $_lang['name'] = 'Name';
 $_lang['new'] = 'New';
-$_lang['new_category'] = 'Create Category';
 $_lang['new_chunk'] = 'Create Chunk';
 $_lang['new_folder'] = 'Create Folder';
 $_lang['new_key'] = 'Create Key';
