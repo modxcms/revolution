@@ -274,21 +274,15 @@
     }
 
     .modx-subsubnav {
-      max-height: 99vh;
+      max-height: calc(100vh - 12px);
       overflow-y: auto;
       border: 1px solid $navbarBorder;
       box-shadow: $boxShadowBig;
       border-radius: $borderRadius;
       background: $white;
-      opacity: 0;
-      visibility: hidden;
       list-style: none;
       position: absolute;
       z-index: 24;
-      &.active {
-        opacity: 1;
-        visibility: visible;
-      }
       &-arrow {
         border: 8px solid transparent;
         border-right-color: #FFF;
@@ -304,6 +298,14 @@
       &.active {
         + .modx-subsubnav-arrow {
           display: block;
+        }
+      }
+      @include grid-media($gtDesktop) {
+        opacity: 0;
+        visibility: hidden;
+        &.active {
+          opacity: 1;
+          visibility: visible;
         }
       }
     }
@@ -435,7 +437,7 @@
 
     // overflow for long subsubnav
     .modx-subnav {
-      max-height: calc(99vh - 100px);
+      max-height: calc(100vh - 109px);
       overflow-y: auto;
     }
   }
