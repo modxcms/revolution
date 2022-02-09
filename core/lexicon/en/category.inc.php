@@ -23,9 +23,10 @@ $_lang['category_err_save'] = 'An error occurred while trying to save the catego
 
     categories
     category
-    category_create
-    category_rename
-    category_remove
     category_confirm_delete
+    category_create
+    category_create_desc
+    category_remove
+    category_rename
 
 */

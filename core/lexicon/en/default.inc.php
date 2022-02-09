@@ -52,6 +52,7 @@ $_lang['caption_desc'] = 'The name to show beside the input when editing a TV on
 $_lang['categories'] = 'Categories';
 $_lang['category'] = 'Category';
 $_lang['category_create'] = 'Create Category';
+$_lang['category_create_desc'] = 'A Category will only be displayed if at least one Element is assigned to it (by default, all Categories, even empty ones, are displayed in the Categories tree).';
 $_lang['category_confirm_delete'] = 'Are you sure you want to delete this category? All Elements within it will revert to having no category.';
 $_lang['category_rename'] = 'Rename Category';
 $_lang['category_remove'] = 'Delete Category';

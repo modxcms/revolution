@@ -240,6 +240,9 @@ MODx.window.CreateCategory = function(config) {
         ,url: MODx.config.connector_url
         ,action: 'Element/Category/Create'
         ,fields: [{
+            xtype: 'modx-description'
+            ,html: _('category_create_desc')
+        },{
             fieldLabel: _('name')
             ,name: 'category'
             ,id: 'modx-'+this.ident+'-category'
