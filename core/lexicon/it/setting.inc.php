@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Visualizza il Testo di Aiuto Inline per i vari 
 $_lang['setting_inline_help_desc'] = 'Se \'SI\', i campi avranno il testo di aiuto direttamente sotto il campo stesso. Se\'NO\', tutti i campi avranno il testo aiuto nel tooltip-based.';
 
 $_lang['setting_link_tag_scheme'] = 'Schema Generazione URL';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Schema di generazione URL per il tag [[~id]]. Opzioni disponibili <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">qui</a>.';
 
 $_lang['setting_locale'] = 'Localizzazione';
-$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale_desc'] = 'Impostare il locale per il sistema. Lasciare vuoto per usare il predefinito. Vedere <a href="https://www.php.net/setlocale" target="_blank">la documentazione PHP</a> per maggiori informazioni.';
 
 $_lang['setting_lock_ttl'] = 'Tempo di Vita Blocco';
 $_lang['setting_lock_ttl_desc'] = 'Numero di secondi che un blocco su una risorsa rimarra\' attivo quano l\' utente è inattivo.';
@@ -875,5 +875,5 @@ $_lang['setting_error_log_filename_desc'] = 'Personalizza il nome del file del f
 $_lang['setting_error_log_filepath'] = 'Percorso log degli errori';
 $_lang['setting_error_log_filepath_desc'] = 'Facoltativo, imposta un percorso assoluto del registro di errore personalizzato. È possibile utilizzare placehodlers come {cache_path}.';
 
-$_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['static_elements_html_extension'] = 'Estensione html degli elementi statici';
+$_lang['static_elements_html_extension_desc'] = 'L\'estensione per i file utilizzati da elementi statici con contenuto HTML.';

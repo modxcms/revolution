@@ -15,7 +15,7 @@ $_lang['login_blocked_time'] = 'Non sei autorizzato ad accedere in questo moment
 $_lang['login_blocked_too_many_attempts'] = 'Sei stato bloccato dopo troppi tentativi di accesso falliti.';
 $_lang['login_button'] = 'Accedi';
 $_lang['login_cannot_locate_account'] = 'Nome Utente o Password errati.  Controlla il Nome Utente, ridigita la Password e riprova.';
-$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] by <a href="https://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; is licensed under the GPLv2 or later.';
+$_lang['login_copyright'] = '&copy; 2005-[[+current_year]] da <a href="https://modx.com/about/" target="_blank">MODX, LLC</a>. MODX Revolution&trade; è concesso in licenza sotto la GPLv2 o successivo.';
 $_lang['login_email_label'] = 'Account Email:';
 $_lang['login_err_unknown'] = 'Errore sconosciuto durante il tentativo di accesso.';
 $_lang['login_forget_your_login'] = 'Dati dimenticati?';

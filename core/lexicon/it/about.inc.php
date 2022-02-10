@@ -8,7 +8,7 @@
  */
 $_lang['help_page_title'] = 'Aiuto e Supporto';
 $_lang['help_main_head'] = 'MODX è Qui per Te';
-$_lang['help_main_subhead'] = 'See below to get the help you need for your MODX project<br>Find more details at <a href="https://modx.com/resources/free-support-options">modx.com/resources/free-support-options</a> or call +1 (469) 777-6639';
+$_lang['help_main_subhead'] = 'Vedi qui sotto per ottenere l\'aiuto necessario per il tuo progetto MODX<br>Trova maggiori dettagli su <a href="https://modx.com/resources/free-support-options">modx.com/resources/free-support-options</a> o chiama +1 (469) 777-6639';
 $_lang['forums'] = 'Forum';
 $_lang['forums_title'] = 'Forum della Community di MODX';
 $_lang['forums_description'] = 'Aiuto gratuito dalla Community';
@@ -33,5 +33,5 @@ $_lang['social_follows'] = 'È inoltre possibile <b>seguire MODX</b> su questi c
 $_lang['follow'] = 'Segui MODX';
 $_lang['like'] = 'Mi Piace MODX';
 $_lang['circle'] = 'Aggiungi MODX alle tue cerchie';
-$_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/solutions/services" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
-$_lang['help_credit'] = 'MODX is free open source software licensed under the <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">GPL version 2.0</a> or later. Copyright 2005-[[+current_year]] by MODX, LLC. “MODX” is a registered trademark. Do the right thing—please keep this credit and the other information on this page intact.';
+$_lang['help_about'] = 'Il software MODX® che stai utilizzando è il risultato della collaborazione con una straordinaria comunità di utenti, sostenitori e sviluppatori. Dal 2004, il team dietro MODX ha sponsorizzato e gestito, finanziando il lavoro in corso attraverso il supporto commerciale e le funzioni commissionate. È possibile <a href="https://modx.com/solutions/services" class="supportTicket">acquistare il supporto dalla fonte</a> per ottenere un\'ora di supporto di emergenza (utilizzabile anche per due ore di supporto non prioritario). Oppure <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">inviaci un\'email</a> se hai un\'altra domanda su MODX in generale.';
+$_lang['help_credit'] = 'MODX è software open source gratuito concesso sotto licenza <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">Versione GPL 2.0</a> o successiva. Copyright 2005-[[+current_year]] by MODX, LLC. “MODX” è un marchio registrato. Fai la cosa giusta, tieni intatto questi crediti e le altre informazioni presenti in questa pagina.';
