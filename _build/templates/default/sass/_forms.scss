@@ -846,10 +846,12 @@ input::-moz-focus-inner {
 /* Special checboxes for resources and tv configs */
 #modx-chunk-tabs,
 #modx-plugin-tabs,
-#modx-resource-tabs .display-switch,
+// #modx-resource-tabs .display-switch,
+#modx-resource-tabs,
 #modx-snippet-tabs,
 #modx-template-tabs,
-#modx-tv-tabs .display-switch,
+// #modx-tv-tabs .display-switch,
+#modx-tv-tabs,
 #modx-tv-editor-tabs {
 
   .x-form-check-wrap,
