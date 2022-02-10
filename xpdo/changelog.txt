@@ -1,5 +1,10 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.8.4-pl (February 10, 2022)
+====================================
+- Fix param typehint for xPDOCache add/set/replace methods (#210)
+- Improve PHP 8.1 compatibility (#223)
+
 xPDO 2.8.3-pl (March 31, 2021)
 ====================================
 - Prevent sleep()/benchmark() usage in criteria
