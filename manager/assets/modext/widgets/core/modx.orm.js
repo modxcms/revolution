@@ -180,6 +180,7 @@ Ext.extend(MODx.orm.Tree,Ext.tree.TreePanel,{
                         var nd = this.getSelectedNode();
                         nd.setId(r.name);
                         nd.setText(r.name);
+                        nd.attributes.name = r.name;
                         this.markFormPanelDirty();
                     },scope:this}
                 }
@@ -322,6 +323,7 @@ Ext.extend(MODx.orm.Form,Ext.Panel,{
         var val = f.findField(this.config.prefix+'_value').getValue();
         n.attributes.id = f.findField(this.config.prefix+'_id').getValue();
         n.attributes.text = txt;
+        n.attributes.name = txt;
         n.attributes.value = val;
         n.setText(txt+' - <i>'+Ext.util.Format.ellipsis(val,33)+'</i>');
         fp.markDirty();
