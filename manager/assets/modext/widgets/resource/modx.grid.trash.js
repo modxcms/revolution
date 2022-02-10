@@ -193,6 +193,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
 
     purgeResource: function () {
         MODx.msg.confirm({
+            minWidth: 500,
             title: _('trash.purge_confirm_title'),
             text: _('trash.purge_confirm_message', {
                 'list': this.listResources('')
@@ -226,6 +227,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             withPublish = '_with_publish';
         }
         MODx.msg.confirm({
+            minWidth: 500,
             title: _('trash.restore_confirm_title'),
             text: _('trash.restore_confirm_message' + withPublish, {
                 'list': this.listResources('')
@@ -258,6 +260,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         if (cs === false) return false;
 
         MODx.msg.confirm({
+            minWidth: 500,
             title: _('trash.purge_confirm_title'),
             text: _('trash.purge_confirm_message', {
                 'list': this.listResources('')
@@ -293,6 +296,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         if (cs === false) return false;
 
         MODx.msg.confirm({
+            minWidth: 500,
             title: _('trash.restore_confirm_title'),
             text: _('trash.restore_confirm_message', {
                 'list': this.listResources('')
@@ -328,6 +332,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         if (cs === false) return false;
 
         MODx.msg.confirm({
+            minWidth: 500,
             title: _('trash.purge_confirm_title'),
             text: _('trash.purge_all_confirm_message', {
                 'count': sm.selections.length,
@@ -375,6 +380,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         if (cs === false) return false;
 
         MODx.msg.confirm({
+            minWidth: 500,
             title: _('trash.restore_confirm_title'),
             text: _('trash.restore_all_confirm_message', {
                 'count': sm.selections.length,
