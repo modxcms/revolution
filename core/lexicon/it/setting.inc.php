@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Quando abilitato, gli utenti in
 $_lang['setting_passwordless_expiration'] = 'Scadenza accesso senza password';
 $_lang['setting_passwordless_expiration_desc'] = 'Quanto a lungo è valido un link d\'accesso una tantum in secondi.';
 
-$_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['static_elements_html_extension'] = 'Estensione html degli elementi statici';
+$_lang['static_elements_html_extension_desc'] = 'L\'estensione per i file utilizzati da elementi statici con contenuto HTML.';

@@ -137,41 +137,41 @@ $_lang['number_minvalue'] = 'Valore Minimo';
 $_lang['option'] = 'Bottoni Scelta (Radio Options)';
 $_lang['parent_resources'] = 'Risorse Genitori';
 $_lang['radio_columns'] = 'Colonne';
-$_lang['radio_columns_desc'] = 'The number of columns the radio buttons are displayed in.';
+$_lang['radio_columns_desc'] = 'Il numero di colonne in cui vengono visualizzati i pulsanti di selezione.';
 $_lang['rawtext'] = 'Puro testo (deprecato)';
 $_lang['rawtextarea'] = 'Pura Area testo (deprecato)';
 $_lang['required'] = 'Consenti Vuoto';
-$_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
+$_lang['required_desc'] = 'Selezionare “No” per rendere questo TV un campo obbligatorio nelle Risorse a cui è assegnato. (Predefinito: “Sì”)';
 $_lang['resourcelist'] = 'Elenco Risorse';
 $_lang['resourcelist_depth'] = 'Profondità';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
-$_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
+$_lang['resourcelist_depth_desc'] = 'Il numero di sottocartelle in cui scendere per la ricerca di questa lista. (Predefinito: 10)';
+$_lang['resourcelist_forceselection_desc'] = 'Disabilitato; solo le corrispondenze della lista sono valide.';
 $_lang['resourcelist_includeparent'] = 'Includi Genitori';
-$_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
+$_lang['resourcelist_includeparent_desc'] = 'Selezionare “Sì” per includere le risorse specificate nel campo Genitori nella lista.';
 $_lang['resourcelist_limitrelatedcontext'] = 'Limita ai Contesti Correlati';
-$_lang['resourcelist_limitrelatedcontext_desc'] = 'Select “Yes” to only include the Resources related to the context of the current Resource.';
+$_lang['resourcelist_limitrelatedcontext_desc'] = 'Selezionare “Sì” per includere solo le risorse relative al contesto della risorsa attuale.';
 $_lang['resourcelist_limit'] = 'Limite';
-$_lang['resourcelist_limit_desc'] = 'The maximum number of Resources shown in this TV’s listing. (Default: 0, meaning unlimited)';
-$_lang['resourcelist_listempty_text_desc'] = 'Disabled; selections will always match the list.';
+$_lang['resourcelist_limit_desc'] = 'Il numero massimo di Risorse mostrato nella lista di questa TV. (Predefinito: 0, significa illimitato)';
+$_lang['resourcelist_listempty_text_desc'] = 'Disabilitato; le selezioni corrisponderanno sempre all\'elenco.';
 $_lang['resourcelist_parents'] = 'Genitori';
-$_lang['resourcelist_parents_desc'] = 'If specified, this TV’s listing will include only the child resources from this comma-separated set of resource IDs (containers).';
+$_lang['resourcelist_parents_desc'] = 'Se specificato, l\'elenco di questa TV includerà solo le risorse figlio di questo insieme separato da virgole di ID risorsa (contenitori).';
 $_lang['resourcelist_where'] = 'Dove le condizioni';
 $_lang['resourcelist_where_desc'] = '
-    <p>A JSON object of one or more Resource fields to filter this TV’s listing of Resources.</p>
-    <div class="example-list">Some examples:
+    <p>Un oggetto JSON di uno o più campi di risorse per filtrare l\'elenco delle risorse di questa TV.</p>
+    <div class="example-list">Alcuni esempi:
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (only include Resources with template 4 applied)</li>
-            <li><span class="example-input">[[+example_2]]</span> (include all Resources, except for those named “Home”)</li>
-            <li><span class="example-input">[[+example_3]]</span> (include only Resources whose Resource Type is Weblink or Symlink)</li>
-            <li><span class="example-input">[[+example_4]]</span> (include only Resources that are published and are not containers)</li>
+            <li><span class="example-input">[[+example_1]]</span> (include solo le Risorse con il Template 4 applicato)</li>
+            <li><span class="example-input">[[+example_2]]</span> (include tutte le Risorse, ad eccezione di quelli denominati “Home”)</li>
+            <li><span class="example-input">[[+example_3]]</span> (include solo le Risorse il cui tipo di risorsa è Weblink o Symlink)</li>
+            <li><span class="example-input">[[+example_4]]</span> (include solo le Risorse che sono pubblicate e che non sono contenitori)</li>
         </ul>
     </div>
-    <p>Note: Filtering by TV values is not supported.</p>
+    <p>Nota: il filtraggio per i valori TV non è supportato.</p>
 ';
 $_lang['richtext'] = 'Area Testo Formattabile (RichText)';
 $_lang['sentence_case'] = 'Maiuscolo a inizio frase';
 $_lang['start_day'] = 'Giorno di Partenza';
-$_lang['start_day_desc'] = 'Day displayed as the beginning of the week in this TV’s date picker. (Default: “Sunday”)';
+$_lang['start_day_desc'] = 'Giorno visualizzato come l\'inizio della settimana nel selettore di data di questa TV (predefinito: “Domenica”)';
 $_lang['string'] = 'Stringa';
 $_lang['string_format'] = 'Formato Stringa';
 $_lang['style'] = 'Stile';
@@ -182,53 +182,53 @@ $_lang['textarea'] = 'Area di testo (Textarea)';
 $_lang['textareamini'] = 'Mini Area Testo(Mini TextArea)';
 $_lang['textbox'] = 'Box Testo';
 $_lang['time_increment'] = 'Incremento Orario';
-$_lang['time_increment_desc'] = 'The number of minutes between each time value in the list. (Default: 15)';
+$_lang['time_increment_desc'] = 'Il numero di minuti tra ogni valore temporale nella lista. (Predefinito: 15)';
 $_lang['title'] = 'Titolo';
-$_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
-$_lang['tv_default_date'] = 'Default Date and Time';
-$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
+$_lang['tv_default_checkbox_desc'] = 'Un insieme di opzioni selezionate per questa TV separate da due pipe se l\' utente non controlla una o più. Se le opzioni includono etichette (ad es. Opzione One==1<unk> <unk> Opzione Two==2<unk> <unk> Opzione Three==3), essere sicuri di inserire il valore (cioè, “1” per l\'opzione uno, o “1<unk> <unk> 3” per l\'opzione Uno e l\'opzione tre)';
+$_lang['tv_default_date'] = 'Data e ora predefinite';
+$_lang['tv_default_date_desc'] = 'La data da mostrare se l\'utente non ne fornisce una. Scegli una data relativa dalla lista qui sopra o inserisci una data diversa utilizzando uno dei seguenti modelli:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
-            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
-            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
+            <li><span class="example-input">[[+example_1]]</span> (numero rappresenta ore fa)</li>
+            <li><span class="example-input">[[+example_2]]</span> (numero rappresenta ore in futuro)</li>
+            <li><span class="example-input">[[+example_3]]</span> (data specifica [e ora se lo desideri] utilizzando il formato mostrato)</li>
         </ul>
-        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
+        Nota: l\'uso dei “+” e “-” mostrati sopra è contro-intuitivo, ma corretto (“+” rappresenta indietro nel tempo).
     </div>';
-$_lang['tv_default_email'] = 'Default Email Address';
-$_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
-$_lang['tv_default_file'] = 'Default File';
-$_lang['tv_default_file_desc'] = 'The file path this TV will show if the user does not provide one.';
-$_lang['tv_default_image'] = 'Default Image';
-$_lang['tv_default_image_desc'] = 'The image path this TV will show if the user does not provide one.';
-$_lang['tv_default_option'] = 'Default Option';
-$_lang['tv_default_option_desc'] = 'The option selected for this TV if the user does not choose one. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One)';
-$_lang['tv_default_options'] = 'Default Option(s)';
-$_lang['tv_default_options_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
+$_lang['tv_default_email'] = 'Indirizzo Email Predefinito';
+$_lang['tv_default_email_desc'] = 'L\'indirizzo email che questa TV mostrerà se l\'utente non ne fornisce uno.';
+$_lang['tv_default_file'] = 'File Predefinito';
+$_lang['tv_default_file_desc'] = 'Il percorso del file che questa TV mostrerà se l\'utente non ne fornisce uno.';
+$_lang['tv_default_image'] = 'Immagine Predefinita';
+$_lang['tv_default_image_desc'] = 'Il percorso dell\'immagine che questa TV mostrerà se l\'utente non ne fornisce uno.';
+$_lang['tv_default_option'] = 'Opzione Predefinita';
+$_lang['tv_default_option_desc'] = 'L\'opzione selezionata per questo televisore se l\'utente non sceglie una. Se le opzioni includono etichette (ad es. Opzione One==1<unk> <unk> Opzione Two==2<unk> <unk> Opzione Three==3), assicurarsi di inserire il valore (cioè, “1” per l\'opzione 1)';
+$_lang['tv_default_options'] = 'Opzioni Predefinite';
+$_lang['tv_default_options_desc'] = 'Un insieme di opzioni, separate da due pipe, selezionate per questa TV se l\'utente non sceglie una o più opzioni. Se le opzioni includono etichette (ad es. Opzione One==1<unk> <unk> Opzione Two==2<unk> <unk> Opzione Three==3), essere sicuri di inserire il valore (cioè, “1” per l\'opzione uno, o “1<unk> <unk> 3” per l\'opzione Uno e l\'opzione tre)';
 $_lang['tv_default_radio_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox_desc'] = $_lang['tv_default_option_desc'];
 $_lang['tv_default_listbox-multiple_desc'] = $_lang['tv_default_options_desc'];
-$_lang['tv_default_number'] = 'Default Number';
-$_lang['tv_default_number_desc'] = 'The number this TV will show if the user does not provide one.';
-$_lang['tv_default_resource'] = 'Default Resource (ID)';
-$_lang['tv_default_resourcelist_desc'] = 'The resource this TV will show if the user does not choose one.';
-$_lang['tv_default_tag'] = 'Default Tag(s)';
-$_lang['tv_default_tag_desc'] = 'A comma-separated set of option(s) selected for this TV if the user does not choose one or more. If your options include labels (e.g., Tag One==1||Tag Two==2||Tag Three==3), be sure to enter the value (i.e., “1” for Tag One, or “1,3” for Tag One and Tag Three)';
-$_lang['tv_default_text'] = 'Default Text';
-$_lang['tv_default_text_desc'] = 'The text content this TV will show if the user does not provide it.';
-$_lang['tv_default_url'] = 'Default URL';
-$_lang['tv_default_url_desc'] = 'The URL this TV will show if the user does not provide one.';
-$_lang['tv_elements_checkbox'] = 'Checkbox Options';
-$_lang['tv_elements_listbox'] = 'Dropdown List Options';
-$_lang['tv_elements_radio'] = 'Radio Button Options';
-$_lang['tv_elements_tag'] = 'Tag Options';
-$_lang['tv_elements_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>. Some examples:
+$_lang['tv_default_number'] = 'Numero Predefinito';
+$_lang['tv_default_number_desc'] = 'Il numero che la TV mostrerà se l\'utente non ne fornisce uno.';
+$_lang['tv_default_resource'] = 'Risorsa Predefinita (ID)';
+$_lang['tv_default_resourcelist_desc'] = 'La risorsa mostrata da questa TV se l\'utente non ne sceglie una.';
+$_lang['tv_default_tag'] = 'Tag(s) predefinito/i';
+$_lang['tv_default_tag_desc'] = 'Un insieme separato da virgole di opzioni selezionate per questa TV se l\'utente non sceglie una o più opzioni. Se le opzioni includono etichette (e. ., Tag One==1<unk> <unk> Tag Two==2<unk> <unk> Tag Three==3), assicuratevi di inserire il valore (cioè, “1” per Tag One, o “1,3” per Tag One e Tag Three)';
+$_lang['tv_default_text'] = 'Testo Predefinito';
+$_lang['tv_default_text_desc'] = 'Il contenuto del testo che la TV mostrerà se l\'utente non lo fornisce.';
+$_lang['tv_default_url'] = 'Url Predefinito';
+$_lang['tv_default_url_desc'] = 'L\'URL che questa TV mostrerà se l\'utente non ne fornisce uno.';
+$_lang['tv_elements_checkbox'] = 'Opzioni Checkbox';
+$_lang['tv_elements_listbox'] = 'Opzioni Elenco a tendina';
+$_lang['tv_elements_radio'] = 'Opzioni Pulsante Radio';
+$_lang['tv_elements_tag'] = 'Opzioni Tag';
+$_lang['tv_elements_desc'] = 'Definisce le opzioni selezionabili per questa TV , che possono essere inserite manualmente o costruite con una <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">query di database</a>. Alcuni esempi:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">Bird||Cat||Dog</span> (shorthand for Bird==Bird||Cat==Cat||Dog==Dog)</li>
-            <li><span class="example-input">White==#ffffff||Black==#000000</span> (where label==value)</li>
-            <li><span class="example-input">[[+example_1]]</span> (builds a list of published Resources whose assigned template id is 1)</li>
-            <li><span class="example-input">[[+example_2]]</span> (builds the same list as the previous example, including a blank option)</li>
+            <li><span class="example-input">Bird<unk> <unk> Cat<unk> <unk> Dog</span> (shorthand for Bird==Bird<unk> <unk> Cat==Cat<unk> <unk> Dog==Dog)</li>
+            <li><span class="example-input">Bianco==#ffff<unk> <unk> Black==#000000</span> (dove label==value)</li>
+            <li><span class="example-input">[[+example_1]]</span> (compila una lista di risorse pubblicate il cui ID modello assegnato è 1)</li>
+            <li><span class="example-input">[[+example_2]]</span> (costruisce la stessa lista dell\'esempio precedente, inclusa un\'opzione vuota)</li>
         </ul>
     </div>
     ';

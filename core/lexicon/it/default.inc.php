@@ -570,9 +570,9 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 // TVs
 $_lang['tv_type'] = 'Tipo di input';
 $_lang['tv_default'] = 'Valore Default';
-$_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
-$_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pages (can be overridden per template or other criteria using <a href="?a=security/forms" target="_blank">Form Customization</a>).';
-$_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
-$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
+$_lang['tv_default_desc'] = 'Il contenuto che questa TV mostrerà se il contenuto inserito dall\'utente non è fornito.';
+$_lang['tv_caption_desc'] = 'L\'etichetta mostrata per questo TV nelle pagine di modifica delle risorse (può essere sovrascritta per modello o altri criteri utilizzando <a href="?a=security/forms" target="_blank">Personalizzazione del Form</a>).';
+$_lang['tv_category_desc'] = 'Usa per raggruppare le TV nelle pagine di modifica delle risorse e all\'interno dell\'albero degli elementi.';
+$_lang['tv_description_desc'] = 'Informazioni di utilizzo per questa TV mostrate accanto alla didascalia nelle pagine di modifica delle risorse e come suggerimento nell\'albero degli elementi.';
 $_lang['tv_elements'] = 'Opzioni Valori Input';
-$_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
+$_lang['tv_elements_short_desc'] = 'Definisce le opzioni selezionabili per questo televisore, che possono essere inserite manualmente o costruite con una <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">query di database</a>.';
