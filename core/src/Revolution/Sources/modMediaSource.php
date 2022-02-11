@@ -562,7 +562,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             if (!$isNew) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             } else {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\n\t" . $this->xpdo->lexicon('file_info_metadata_new', ['file' => $path]));
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $this->xpdo->lexicon('file_info_metadata_new', ['file' => $path]));
             }
             $data = false;
         }
