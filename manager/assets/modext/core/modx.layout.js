@@ -508,6 +508,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 for (var i = 0; i < buttons.length; i++) {
                     var submenu = buttons[i].getElementsByTagName('ul')[0];
                     submenu.classList.remove('active');
+                    submenu.removeAttribute('style');
                     buttons[i].classList.remove('active');
                 }
                 destroy();

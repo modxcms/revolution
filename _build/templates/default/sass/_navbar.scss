@@ -274,8 +274,6 @@
     }
 
     .modx-subsubnav {
-      max-height: calc(100vh - 12px);
-      overflow-y: auto;
       border: 1px solid $navbarBorder;
       box-shadow: $boxShadowBig;
       border-radius: $borderRadius;
@@ -319,6 +317,12 @@
       pointer-events: none;
       margin-top: -6px;
     }
+  }
+
+  // custom styles for language menu
+  #language .modx-subsubnav {
+    max-height: calc(100vh - 12px);
+    overflow-y: auto;
   }
 }
 
