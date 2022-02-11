@@ -240,14 +240,14 @@ MODx.grid.FCSetFields = function(config) {
         ,fields: ['id','action','name','tab','tab_rank','other','rank','visible','label','default_value']
         ,autoHeight: true
         ,grouping: true
-        ,groupBy: 'tab'
+        ,groupBy: 'tab_rank'
         ,plugins: [this.vcb]
         ,stateful: false
         ,remoteSort: false
         ,sortBy: 'rank'
         ,sortDir: 'ASC'
         ,hideGroupedColumn: true
-        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('fields')+'" : "'+_('field')+'"]})'
+        ,groupTextTpl: '{[values.rs[0].data.tab]} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('fields')+'" : "'+_('field')+'"]})'
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -255,6 +255,10 @@ MODx.grid.FCSetFields = function(config) {
         },{
             header: _('region')+' ('+_('tab_id')+')'
             ,dataIndex: 'tab'
+            ,width: 100
+        },{
+            header: _('tab_rank')
+            ,dataIndex: 'tab_rank'
             ,width: 100
         },this.vcb,{
             header: _('label')
