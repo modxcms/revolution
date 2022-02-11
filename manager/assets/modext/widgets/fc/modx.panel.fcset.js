@@ -253,7 +253,7 @@ MODx.grid.FCSetFields = function(config) {
             ,dataIndex: 'name'
             ,width: 200
         },{
-            header: _('region')
+            header: _('region')+' ('+_('tab_id')+')'
             ,dataIndex: 'tab'
             ,width: 100
         },this.vcb,{
@@ -310,7 +310,7 @@ MODx.grid.FCSetTabs = function(config) {
         ,plugins: [this.vcb]
         ,stateful: false
         ,columns: [{
-            header: _('tab_id')
+            header: _('region')+' ('+_('tab_id')+')'
             ,dataIndex: 'name'
             ,width: 100
         },this.vcb,{
@@ -433,7 +433,7 @@ MODx.grid.FCSetTVs = function(config) {
             ,dataIndex: 'default_text'
             ,editable: false
         },{
-            header: _('region')
+            header: _('region')+' ('+_('tab_id')+')'
             ,dataIndex: 'tab'
             ,width: 100
             ,editor: { xtype: 'textfield' }
@@ -486,7 +486,7 @@ MODx.window.AddTabToSet = function(config) {
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,fieldLabel: _('tab_id')
+            ,fieldLabel: _('region')+' ('+_('tab_id')+')'
             ,id: 'modx-fcatab-id'
             ,allowBlank: false
             ,anchor: '100%'
