@@ -559,7 +559,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $data['mimetype'] = $this->filesystem->mimeType($path);
             $data['type'] = $data['mimetype'] === 'directory' ? 'dir' : 'file';
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            $this->xpdo->log(modX::LOG_LEVEL_WARN, $e->getMessage());
             $data = false;
         }
 
