@@ -728,7 +728,7 @@ class modResourceCreateProcessor extends modObjectCreateProcessor {
      * @return boolean
      */
     public function clearCache() {
-        $clear = $this->getProperty('syncsite',false) || $this->getProperty('clearCache',false);
+        $clear = $this->getProperty('syncsite',$this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache',false);
         if ($clear) {
             $this->modx->cacheManager->refresh(array(
                 'db' => array(),
