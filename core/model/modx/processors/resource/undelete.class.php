@@ -161,12 +161,15 @@ class modResourceUnDeleteProcessor extends modProcessor {
      * @return void
      */
     public function clearCache() {
-        $this->modx->cacheManager->refresh(array(
-            'db' => array(),
-            'auto_publish' => array('contexts' => array($this->resource->get('context_key'))),
-            'context_settings' => array('contexts' => array($this->resource->get('context_key'))),
-            'resource' => array('contexts' => array($this->resource->get('context_key'))),
-        ));
+			$clear = $this->getProperty('syncsite',$this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache',false);
+			if ($clear) {
+                $this->modx->cacheManager->refresh(array(
+                    'db' => array(),
+                    'auto_publish' => array('contexts' => array($this->resource->get('context_key'))),
+                    'context_settings' => array('contexts' => array($this->resource->get('context_key'))),
+                    'resource' => array('contexts' => array($this->resource->get('context_key'))),
+                ));
+			}
     }
 }
 return 'modResourceUnDeleteProcessor';
