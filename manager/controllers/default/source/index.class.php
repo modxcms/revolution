@@ -32,7 +32,7 @@ class SourceManagerController extends modManagerController {
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
         $this->addJavascript($mgrUrl.'assets/modext/widgets/source/modx.panel.sources.js');
-        $this->addJavascript($mgrUrl.'assets/modext/sections/source/index.js');
+        $this->addJavascript($mgrUrl.'assets/modext/sections/source/list.js');
         $this->addHtml('<script>Ext.onReady(function() { MODx.add("modx-page-sources"); });</script>');
     }
 
