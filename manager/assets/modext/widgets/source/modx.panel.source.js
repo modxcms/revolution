@@ -103,6 +103,7 @@ MODx.panel.Source = function(config) {
                                 ,fieldLabel: _('source_type')
                                 ,description: MODx.expandHelp ? '' : _('source_type_desc')
                                 ,anchor: '100%'
+                                ,value: config.record.class_key || MODx.config.default_media_source_type
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-source-type'
@@ -160,6 +161,8 @@ Ext.extend(MODx.panel.Source,MODx.FormPanel,{
         if (this.initialized) { return false; }
         if (Ext.isEmpty(this.config.record.id)) {
             this.fireEvent('ready');
+            Ext.getCmp('modx-grid-source-properties').disable();
+            Ext.getCmp('modx-grid-source-access').disable();
             return false;
         }
         this.getForm().setValues(this.config.record);
