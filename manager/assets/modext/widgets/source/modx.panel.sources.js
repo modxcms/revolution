@@ -103,8 +103,9 @@ MODx.grid.Sources = function(config) {
         }]
         ,tbar: [{
             text: _('create')
-            ,handler: { xtype: 'modx-window-source-create' ,blankValues: true }
             ,cls:'primary-button'
+            ,handler: this.createSource
+            ,scope: this
         },{
             text: _('bulk_actions')
             ,menu: [{
@@ -201,7 +202,7 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
     }
 
     ,createSource: function() {
-        MODx.loadPage('system/source/create');
+        MODx.loadPage('source/create');
     }
 
     ,updateSource: function() {
@@ -280,48 +281,13 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
 Ext.reg('modx-grid-sources',MODx.grid.Sources);
 
 /**
- * Generates the create Source window.
+ * Loads a grid of SourceTypes.
  *
- * @class MODx.window.CreateSource
- * @extends MODx.Window
- * @param {Object} config An object of options.
- * @xtype modx-window-source-create
+ * @class MODx.grid.SourceTypes
+ * @extends MODx.grid.Grid
+ * @param {Object} config An object of configuration properties
+ * @xtype modx-grid-source-types
  */
-MODx.window.CreateSource = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        title: _('create')
-        ,url: MODx.config.connector_url
-        ,autoHeight: true
-        ,action: 'Source/Create'
-        ,fields: [{
-            xtype: 'textfield'
-            ,fieldLabel: _('name')
-            ,name: 'name'
-            ,anchor: '100%'
-            ,allowBlank: false
-        },{
-            xtype: 'textarea'
-            ,fieldLabel: _('description')
-            ,name: 'description'
-            ,anchor: '100%'
-            ,grow: true
-        },{
-            name: 'class_key'
-            ,hiddenName: 'class_key'
-            ,xtype: 'modx-combo-source-type'
-            ,fieldLabel: _('source_type')
-            ,anchor: '100%'
-            ,allowBlank: false
-            ,value: MODx.config.default_media_source_type
-        }]
-        ,keys: []
-    });
-    MODx.window.CreateSource.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.window.CreateSource,MODx.Window);
-Ext.reg('modx-window-source-create',MODx.window.CreateSource);
-
 MODx.grid.SourceTypes = function(config) {
     config = config || {};
 
