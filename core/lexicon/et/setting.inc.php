@@ -382,11 +382,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Parool, millega SMTP-s audentida.';
 $_lang['setting_mail_smtp_port'] = 'SMTP Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Vaikimisi SMTP serveri port.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Ühenduse Prefix';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Määrab ühenduse prefix-i. Valikud on "", "ssl" või "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Võimaldab To välja eraldi protsessimist individiuaalselemailil, selle asemel, et saata kogu TO aadressitele';
