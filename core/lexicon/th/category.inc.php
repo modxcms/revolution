@@ -6,9 +6,6 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['categories'] = 'หมวดหมู่';
-$_lang['category_confirm_delete'] = 'Are you sure you want to delete this category? All elements in this category will be filed to uncategorized.';
-$_lang['category_create'] = 'สร้างหมวดหมู่';
 $_lang['category_err_ae'] = 'หมวดหมู่ชื่อนี้มีอยู่แล้ว กรุณาลองใช้ชื่อใหม่';
 $_lang['category_err_create'] = 'เกิดข้อผิดพลาดขณะที่พยายามสร้างหมวดหมู่.';
 $_lang['category_err_not_found'] = 'ไม่พบหมวดหมู่!';
@@ -18,13 +15,18 @@ $_lang['category_err_ns'] = 'ไม่มีหมวดหมู่ที่ร
 $_lang['category_err_ns_name'] = 'กรุณาระบุชื่อหมวดหมู่ที่ถูกต้องเหมาะสม';
 $_lang['category_err_remove'] = 'An error occurred while trying to delete the category.';
 $_lang['category_err_save'] = 'เกิดข้อผิดพลาดขณะที่พยายามบันทึกหมวดหมู่';
-$_lang['category_existing'] = 'มีหมวดหมู่นี้อยู่แล้ว';
-$_lang['category_heading'] = 'หมวดหมู่';
-$_lang['category_msg'] = 'คุณสามารถดูและแก้ไขรีซอร์สทั้งหมดซึ่งถูกจัดเรียงตามหมวดหมู่ได้ที่นี่';
-$_lang['category_no_chunks'] = 'ไม่มีชังค์สำหรับหมวดหมู่นี้';
-$_lang['category_no_plugins'] = 'ไม่มีปลั๊กอินสำหรับหมวดหมู่นี้';
-$_lang['category_no_snippets'] = 'ไม่มีสนิปเพตสำหรับหมวดหมู่นี้';
-$_lang['category_no_templates'] = 'ไม่มีแม่แบบสำหรับหมวดหมู่นี้';
-$_lang['category_no_template_variables'] = 'No TV for this category.';
-$_lang['category_rename'] = 'เปลี่ยนชื่อหมวดหมู่';
-$_lang['category_remove'] = 'Delete Category';
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them)
+
+    categories
+    category
+    category_confirm_delete
+    category_create
+    category_create_desc
+    category_remove
+    category_rename
+
+*/
