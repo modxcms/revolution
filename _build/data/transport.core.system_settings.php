@@ -857,9 +857,9 @@ $settings['mail_smtp_port']->fromArray([
   'area' => 'mail',
   'editedon' => null,
 ], '', true, true);
-$settings['mail_smtp_prefix'] = $xpdo->newObject(modSystemSetting::class);
-$settings['mail_smtp_prefix']->fromArray([
-  'key' => 'mail_smtp_prefix',
+$settings['mail_smtp_secure'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_secure']->fromArray([
+  'key' => 'mail_smtp_secure',
   'value' => '',
   'xtype' => 'textfield',
   'namespace' => 'core',
