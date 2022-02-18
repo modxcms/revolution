@@ -381,11 +381,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'รหัสผ่านที่รั
 $_lang['setting_mail_smtp_port'] = 'พอร์ต SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'ตั้งค่าปริยายให้กับพอร์ตของ SMTP เซิร์ฟเวอร์';
 
-$_lang['setting_mail_smtp_prefix'] = 'คำนำหน้าการเชื่อมต่อ SMTP';
-$_lang['setting_mail_smtp_prefix_desc'] = 'ตั้งคำนำหน้าการเชื่อมต่อ เหล่าตัวเลือกคือ "" "ssl" หรือ "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'มีความสามารถในการมีฟิลด์"ถึง" ที่มีกระบวนการเฉพาะแต่ละอีเมล์ แทนที่การส่งถึงที่อยู่';
