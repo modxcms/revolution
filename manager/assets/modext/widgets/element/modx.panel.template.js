@@ -284,6 +284,7 @@ MODx.panel.Template = function(config) {
             },{
                 xtype: 'modx-grid-template-tv'
                 ,cls:'main-wrapper'
+                ,urlFilters: ['category', 'query']
                 ,preventRender: true
                 ,anchor: '100%'
                 ,template: config.template
