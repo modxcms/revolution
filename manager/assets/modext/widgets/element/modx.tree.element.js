@@ -442,7 +442,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         }
         if (ui.hasClass('pnewcat')) {
             m.push({
-                text: _('new_category')
+                text: _('category_create')
                 ,handler: this.createCategory
             });
         }
@@ -514,7 +514,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         if (ui.hasClass('pnewcat')) {
             if (ui.hasClass('pnew')) {m.push('-');}
             m.push({
-                text: _('new_category')
+                text: _('category_create')
                 ,handler: this.createCategory
             });
         }
