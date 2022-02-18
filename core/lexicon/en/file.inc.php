@@ -73,7 +73,6 @@ $_lang['file_folder_parent_desc'] = 'Relative to the basePath of the media sourc
 $_lang['file_folder_remove'] = 'Delete Directory';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
 $_lang['file_folder_rename'] = 'Rename Directory';
-$_lang['file_info_metadata_new'] = 'Unable to access metaData for the file “[[+file]]” because it is for a new element and has not been created yet. An attempt will be made to create the file automatically.';
 $_lang['file_last_accessed'] = 'Last Accessed';
 $_lang['file_last_modified'] = 'Last Modified';
 $_lang['file_name'] = 'File Name';
