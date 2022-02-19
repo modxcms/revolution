@@ -700,6 +700,9 @@ $_lang['setting_static_elements_default_category_desc'] = 'Specify a default cat
 $_lang['setting_static_elements_basepath'] = 'Static elements basepath';
 $_lang['setting_static_elements_basepath_desc'] = 'Basepath of where to store the static elements files.';
 
+$_lang['setting_static_elements_filetypes'] = 'Static Element File Types';
+$_lang['setting_static_elements_filetypes_desc'] = 'A comma-separated list of file extensions that can be used for static elements.';
+
 $_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
 $_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
 

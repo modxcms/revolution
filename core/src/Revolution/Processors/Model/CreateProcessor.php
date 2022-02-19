@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Model;
-
 
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\Processors\ModelProcessor;
@@ -36,7 +36,6 @@ abstract class CreateProcessor extends ModelProcessor
     public function initialize()
     {
         $this->object = $this->modx->newObject($this->classKey);
-
         return parent::initialize();
     }
 
@@ -211,7 +210,10 @@ abstract class CreateProcessor extends ModelProcessor
      */
     public function logManagerAction()
     {
-        $this->modx->logManagerAction($this->objectType . '_create', $this->classKey,
-            $this->object->get($this->primaryKeyField));
+        $this->modx->logManagerAction(
+            $this->objectType . '_create',
+            $this->classKey,
+            $this->object->get($this->primaryKeyField)
+        );
     }
 }

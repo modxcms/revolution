@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Model;
-
 
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\modSystemEvent;
@@ -37,6 +37,12 @@ abstract class UpdateProcessor extends ModelProcessor
         if (empty($primaryKey)) {
             return $this->modx->lexicon($this->objectType . '_err_ns');
         }
+        $this->modx->log(
+            \modX::LOG_LEVEL_ERROR,
+            "\r\tUpdate->initialize
+        	\$this->classKey: " . $this->classKey . "
+        	\$primaryKey (element id): " . $primaryKey
+        );
         $this->object = $this->modx->getObject($this->classKey, $primaryKey);
         if (empty($this->object)) {
             return $this->modx->lexicon($this->objectType . '_err_nfs', [$this->primaryKeyField => $primaryKey]);
@@ -205,8 +211,11 @@ abstract class UpdateProcessor extends ModelProcessor
      */
     public function logManagerAction()
     {
-        $this->modx->logManagerAction($this->objectType . '_update', $this->classKey,
-            $this->object->get($this->primaryKeyField));
+        $this->modx->logManagerAction(
+            $this->objectType . '_update',
+            $this->classKey,
+            $this->object->get($this->primaryKeyField)
+        );
     }
 
     /**

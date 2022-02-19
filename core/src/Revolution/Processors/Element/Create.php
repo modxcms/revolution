@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element;
-
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
@@ -28,6 +28,61 @@ abstract class Create extends CreateProcessor
 {
     /** @var modElement $object */
     public $object;
+
+    protected $hasStaticFile = false;
+
+    public function initialize()
+    {
+        // Intitializing parent first, as we need the Element object created before moving forward
+        if (parent::initialize()) {
+            $className = array_pop(explode('\\', $this->classKey));
+            /*
+                There is at least one other Element type (modPropertySet) where static files
+                do not apply, so here we determine whether static processing will be needed
+                based on the Element being created.
+            */
+            $hasStaticContentOption = in_array(
+                $className,
+                ['modChunk', 'modPlugin', 'modSnippet', 'modTemplate', 'modTemplateVar']
+            );
+            if ($hasStaticContentOption && intval($this->getProperty('static', 0)) === 1) {
+                $file = $this->getProperty('static_file');
+                if (!empty($file)) {
+                    $this->hasStaticFile = true;
+                    $mediaSourceId = (int)$this->getProperty('source');
+                    // When file media source is set to "None"
+                    if ($mediaSourceId === 0) {
+                        $this->object->ignoreMediaSource = true;
+                        if (strpos($file, '/') === 0) {
+                            $this->object->staticPathIsAbsolute = true;
+                        }
+                    }
+                    // When there is an assigned media source
+                    if ($mediaSourceId > 0) {
+                        $this->object->ignoreMediaSource = false;
+                        $this->setProperty('static_file', ltrim($file, DIRECTORY_SEPARATOR));
+                    }
+
+                    $this->object->staticElementMediaSourceId = $mediaSourceId;
+                    $this->object->isStaticElementFile = true;
+
+                    if ($this->object->getSource()) {
+                        // Stop if error fetching media source
+                        if ($this->object->_source->hasErrors()) {
+                            $this->addFieldError('static_file', reset($this->object->_source->getErrors()));
+                            return false;
+                        }
+                    }
+                    $this->object->relayStaticPropertiesToMediaSource([
+                        'isStaticElementFile',
+                        'ignoreMediaSource',
+                        'staticPathIsAbsolute'
+                    ]);
+                }
+            }
+            return true;
+        }
+    }
 
     /**
      * Cleanup the process and send back the response
@@ -71,28 +126,32 @@ abstract class Create extends CreateProcessor
             }
         }
 
-        $locked = (boolean)$this->getProperty('locked', false);
+        $locked = (bool)$this->getProperty('locked', false);
         $this->object->set('locked', $locked);
 
         $this->setElementProperties();
         $this->validateElement();
 
-        if ($this->object->staticSourceChanged() || $this->object->staticContentChanged()) {
-            if ($this->object->get('content') !== '' && !$this->object->isStaticSourceMutable()) {
-                $source = $this->object->getSource();
-                if ($source && $source->hasErrors()) {
-                    $this->addFieldError('static_file', reset($source->getErrors()));
+        if ($this->hasStaticFile) {
+            // For new elements, only need to continue static processing if content is present
+            if ($this->object->get('content') !== '') {
+                $this->object->staticFileAbsolutePath = $this->object->getSourceFile();
+
+                // Check writability of file and file path (also checks for allowable file extension)
+                $fileValidated = $this->object->validateStaticFile();
+                if ($fileValidated !== true) {
+                    if (array_key_exists('msgData', $fileValidated)) {
+                        $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey'], $fileValidated['msgData']));
+                    } else {
+                        $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey']));
+                    }
+                    return false;
                 } else {
-                    $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
-                }
-            } else {
-                if (!$this->object->isStaticSourceValidPath()) {
-                    $this->addFieldError('static_file',
-                        $this->modx->lexicon('element_static_source_protected_invalid'));
+                    $this->object->staticIsWritable = true;
                 }
             }
         }
-
+        // end has static file
         return !$this->hasErrors();
     }
 
@@ -121,7 +180,6 @@ abstract class Create extends CreateProcessor
      */
     public function setElementProperties()
     {
-        $properties = null;
         $propertyData = $this->getProperty('propdata', null);
         if ($propertyData != null && is_string($propertyData)) {
             $propertyData = $this->modx->fromJSON($propertyData);

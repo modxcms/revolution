@@ -1,4 +1,5 @@
 <?php
+
 namespace MODX\Revolution\Sources;
 
 use Exception;
@@ -69,6 +70,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /** @var  Filesystem */
     protected $filesystem;
 
+    /** @var bool $isStaticElementFile passed from modElement processors */
+    public $isStaticElementFile = false;
+    public $ignoreMediaSource = false;
+    public $staticPathIsAbsolute = false;
 
     /**
      * Get the default MODX filesystem source
@@ -337,7 +342,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         return $properties;
     }
 
-
     /**
      * Return an array of files and folders at this current level in the directory structure
      *
@@ -361,7 +365,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $directories = $dirNames = $files = $fileNames = [];
 
         if (!empty($path)) {
-
             // Ensure the provided path can be read.
             try {
                 $mimeType = $this->filesystem->mimeType($path);
@@ -375,22 +378,20 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
                 return [];
             }
-
         }
 
         try {
             $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
             $contents = $this->filesystem->listContents($path)
-                ->filter(function(StorageAttributes $attributes) use ($re) {
+                ->filter(function (StorageAttributes $attributes) use ($re) {
                     return !preg_match($re, $attributes->path());
                 })
-                ->filter(function(StorageAttributes $attributes) use ($properties) {
+                ->filter(function (StorageAttributes $attributes) use ($properties) {
                     if ($attributes->isDir()) {
                         return $this->hasPermission('directory_list');
                     } elseif ($attributes->isFile()) {
                         return $this->hasPermission('file_list') && !$properties['hideFiles'];
                     }
-
                     return false;
                 });
 
@@ -420,9 +421,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     $directories[$file_name]['menu'] = [
                         'items' => $this->getListDirContextMenu(),
                     ];
-
-                }
-                elseif ($object instanceof FileAttributes) {
+                } elseif ($object instanceof FileAttributes) {
                     // @TODO review/refactor extension and mime_type would be better for filesystems that
                     // may not always have an extension on it. For example would be S3 and you have an HTML file
                     // but the name is just myPage - $this->filesystem->getMimetype($object['path']);
@@ -444,21 +443,17 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             foreach ($directories as $dir) {
                 $ls[] = $dir;
             }
-
             array_multisort($fileNames, SORT_ASC, SORT_STRING, $files);
             foreach ($files as $file) {
                 $ls[] = $file;
             }
-
             return $ls;
-
         } catch (FilesystemException $e) {
             $this->addError('path', $e->getMessage());
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return [];
         }
     }
-
 
     /**
      * Get a list of files in a specific directory.
@@ -486,14 +481,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $files = $fileNames = [];
 
         if (!empty($path) && $path != DIRECTORY_SEPARATOR) {
-
             try {
                 $mimeType = $this->filesystem->mimeType($path);
             } catch (FilesystemException | UnableToRetrieveMetadata $e) {
                 $this->addError('path', $e->getMessage());
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 return [];
-
             }
 
             // Ensure this is a directory.
@@ -543,7 +536,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         return $ls;
     }
 
-
     /**
      * @param $path
      *
@@ -557,7 +549,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $data['size'] = $this->filesystem->fileSize($path);
             $data['mimetype'] = $this->filesystem->mimeType($path);
             $data['type'] = $data['mimetype'] === 'directory' ? 'dir' : 'file';
-
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             $data = false;
@@ -565,7 +556,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         return $data;
     }
-
 
     /**
      * Get the contents of a specified file
@@ -695,11 +685,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             ? $this->sanitizePath($path . DIRECTORY_SEPARATOR . ltrim($name, DIRECTORY_SEPARATOR))
             : $name;
 
-        if (!$this->checkFileType($path)) {
+        // Note: Static Elements now check filetype before save
+        if (!$this->isStaticElementFile && !$this->checkFileType($path)) {
             return false;
         }
 
-        // Ensure file can be read.
+        // Ensure an existing file is only overwritten if allowed via upload_file_exists system setting
         try {
             if ($this->checkFileExists() && $this->filesystem->fileExists($path)) {
                 $this->addError('name', sprintf($this->xpdo->lexicon('file_err_ae'), $name));
@@ -716,8 +707,16 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $config['visibility'] = $this->xpdo->getOption('visibility', $properties, Visibility::PUBLIC);
         }
 
+        // $this->xpdo->log(
+        //     modX::LOG_LEVEL_ERROR,
+        //     "\n\tmodMediaSource->createObject:
+        //         \t\$properties: " . print_r($this->properties, true)
+        // );
+
         // Attempt creating the new file.
         try {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\t createObject(): Writing to this \$path: \r\t" . $path);
+            // return false;
             $this->filesystem->write($path, $content, $config);
         } catch (FilesystemException | UnableToWriteFile $e) {
             $this->addError('name', $this->xpdo->lexicon('file_err_create'));
@@ -993,12 +992,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             if (!$this->filesystem->fileExists($oldPath)) {
                 $this->addError('name', $this->xpdo->lexicon('file_err_invalid'));
                 return false;
-            }
-            elseif ($this->checkFileExists() && $this->filesystem->fileExists($newPath)) {
+            } elseif ($this->checkFileExists() && $this->filesystem->fileExists($newPath)) {
                 $this->addError('name', sprintf($this->xpdo->lexicon('file_err_ae'), $newName));
                 return false;
-            }
-            elseif (!$this->checkFileType($newName)) {
+            } elseif (!$this->checkFileType($newName)) {
                 return false;
             }
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
@@ -1038,16 +1035,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $path = $this->sanitizePath($path);
 
-        if (!$this->checkFiletype($path)) {
-            return false;
-        }
+        // if (!$this->checkFiletype($path)) {
+        //     return false;
+        // }
 
         // Ensure file can be read.
         try {
             if (!$this->checkFileType($path)) {
                 return false;
-            }
-            elseif (!$this->filesystem->fileExists($path)) {
+            } elseif (!$this->filesystem->fileExists($path)) {
                 $this->addError('file', $this->xpdo->lexicon('file_err_nf') . ': ' . $path);
                 return false;
             }
@@ -1063,6 +1059,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         // Attempt creating the file.
         try {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\tupdateObject(): Writing to this \$path: \r\t" . $path);
             $this->filesystem->write($path, $content, $config);
         } catch (FilesystemException | UnableToWriteFile $e) {
             $this->addError('name', $this->xpdo->lexicon('file_folder_err_update'));
@@ -1129,7 +1126,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 continue;
             }
 
-            if ((boolean)$this->xpdo->getOption('upload_translit')) {
+            if ((bool)$this->xpdo->getOption('upload_translit')) {
                 $file['name'] = $this->xpdo->filterPathSegment($file['name']);
             }
 
@@ -1208,7 +1205,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $this->filesystem->setVisibility($path, $visibility);
                 return true;
             }
-
         } catch (FilesystemException | UnableToSetVisibility $e) {
             $this->addError('path', $this->xpdo->lexicon('file_err_nf') . ' ' . $e->getMessage());
         }
@@ -1245,7 +1241,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      *
      * @return string
      */
-    public function getOpenTo($value,array $parameters = []) {
+    public function getOpenTo($value, array $parameters = [])
+    {
         $dirname = dirname($value);
         return $dirname == '.' ? '' : $dirname . '/';
     }
@@ -1507,13 +1504,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
                 if (!empty($propertyArray['options'])) {
                     foreach ($propertyArray['options'] as $optionKey => &$option) {
-                        if (empty($option['text']) && !empty($option['name'])) $option['text'] = $option['name'];
+                        if (empty($option['text']) && !empty($option['name'])) {
+                            $option['text'] = $option['name'];
+                        }
                         unset($option['menu'], $option['name']);
                     }
                 }
 
                 if ($propertyArray['type'] == 'combo-boolean' && is_numeric($propertyArray['value'])) {
-                    $propertyArray['value'] = (boolean)$propertyArray['value'];
+                    $propertyArray['value'] = (bool)$propertyArray['value'];
                 }
 
                 $propertiesArray[$key] = $propertyArray;
@@ -1546,7 +1545,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 return '';
             }
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,$e->getMessage());
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return '';
         }
 
@@ -1609,9 +1608,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $enabled = true;
         $context = 'mgr';
         if ($context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean)$this->xpdo->getOption('access_media_source_enabled', null, true);
+            $enabled = (bool)$this->xpdo->getOption('access_media_source_enabled', null, true);
         } elseif ($obj = $this->xpdo->getContext($context)) {
-            $enabled = (boolean)$obj->getOption('access_media_source_enabled', true);
+            $enabled = (bool)$obj->getOption('access_media_source_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -1708,9 +1707,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
         $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-        $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-        $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+        $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
+        $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
+        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
 
         if ($c->prepare() && $c->stmt->execute()) {
             while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -1762,7 +1761,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $this->filesystem = new Filesystem($this->adapter);
     }
 
-
     /**
      * Check that the filename has a file type extension that is allowed
      *
@@ -1770,32 +1768,107 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      *
      * @return bool
      */
-    protected function checkFileType($filename)
+    public function checkFileType($filename)
     {
-        if ($this->getOption('allowedFileTypes')) {
-            $allowedFileTypes = $this->getOption('allowedFileTypes');
-            $allowedFileTypes = (!is_array($allowedFileTypes)) ? explode(',', $allowedFileTypes) : $allowedFileTypes;
+        // $this->xpdo->log(
+        //     modX::LOG_LEVEL_ERROR,
+        //     "\r\tmodMediaSource->checkFileType:
+        //     get class, this: " . get_class($this) . "
+        //     source id: " . $this->get('id') . "
+        //     isStaticElement? " . $this->isStaticElementFile . "
+        //     staticPathIsAbsolute? " . $this->staticPathIsAbsolute . "
+        //     ignoreMediaSource? " . $this->ignoreMediaSource . "
+        //     opt upload_files: " . $this->xpdo->getOption('upload_files') . "
+        //     opt upload_images: " . $this->xpdo->getOption('upload_images') . "
+        //     opt upload_media: " . $this->xpdo->getOption('upload_media') . "
+        //     ms opt allowedFileTypes: " . $this->getPropertyList()['allowedFileTypes'] . "
+        //     ms opt imageExtensions " . $this->getOption('imageExtensions')
+        // );
+        $allowedFileTypes = [];
+        /*
+            Static elements will first use $staticElementFileTypes,
+            then fall back to $allowedFileTypes to determine valid types.
+        */
+        if ($staticElementFileTypes = $this->xpdo->getOption('static_elements_filetypes')) {
+            $staticElementFileTypes = !is_array($staticElementFileTypes)
+                ? explode(',', $staticElementFileTypes)
+                : $staticElementFileTypes
+                ;
         } else {
-            $allowedFiles = $this->xpdo->getOption('upload_files')
-                ? explode(',', $this->xpdo->getOption('upload_files')) : [];
-            $allowedImages = $this->xpdo->getOption('upload_images')
-                ? explode(',', $this->xpdo->getOption('upload_images')) : [];
-            $allowedMedia = $this->xpdo->getOption('upload_media')
-                ? explode(',', $this->xpdo->getOption('upload_media')) : [];
-            $allowedFileTypes = array_unique(array_merge($allowedFiles, $allowedImages, $allowedMedia));
-            $allowedFileTypes = array_map('trim', $allowedFileTypes);
-            $this->setOption('allowedFileTypes', $allowedFileTypes);
+            $staticElementFileTypes = [];
+        }
+        /*
+            $uploadFileTypes is fallback for static element files. Its list is also combined
+            with others when checking files in other contexts, such as the media/file browser.
+        */
+        if ($uploadFileTypes = $this->xpdo->getOption('upload_files')) {
+            $uploadFileTypes = !is_array($uploadFileTypes)
+                ? explode(',', $uploadFileTypes)
+                : $uploadFileTypes
+                ;
+        } else {
+            $uploadFileTypes = [];
         }
 
+        $allowedStaticFileTypes = !empty($staticElementFileTypes) ? $staticElementFileTypes : $uploadFileTypes ;
+
+        if ($this->isStaticElementFile && $this->ignoreMediaSource) {
+            // Applies when static file media source is set to "None"
+            $allowedFileTypes = $allowedStaticFileTypes;
+        } else {
+            // Applies when a media source is assigned
+            if ($mediaSourceFileTypes = $this->getPropertyList()['allowedFileTypes']) {
+                // FYI: This was trying to fetch via $this->getOption('allowedFileTypes'), but that finds nothing AFAIK
+                // File types specified in a media source override all other filetype settings
+                $mediaSourceFileTypes = !is_array($mediaSourceFileTypes)
+                    ? explode(',', $mediaSourceFileTypes)
+                    : $mediaSourceFileTypes
+                    ;
+                $allowedFileTypes = $mediaSourceFileTypes;
+            } else {
+                // Otherwise, filetype restrictions are determined by the core system settings
+                if ($this->isStaticElementFile) {
+                    $allowedFileTypes = $allowedStaticFileTypes;
+                } else {
+                    $allowedFileTypes = array_merge($allowedFileTypes, $uploadFileTypes);
+                    if ($imageFileTypes = $this->xpdo->getOption('upload_images')) {
+                        $imageFileTypes = !is_array($imageFileTypes)
+                            ? explode(',', $imageFileTypes)
+                            : $imageFileTypes
+                            ;
+                        $allowedFileTypes = array_merge($allowedFileTypes, $imageFileTypes);
+                    }
+                    if ($mediaFileTypes = $this->xpdo->getOption('upload_media')) {
+                        $mediaFileTypes = !is_array($mediaFileTypes)
+                            ? explode(',', $mediaFileTypes)
+                            : $mediaFileTypes
+                            ;
+                        $allowedFileTypes = array_merge($allowedFileTypes, $mediaFileTypes);
+                    }
+                }
+                $allowedFileTypes = array_map('trim', array_unique($allowedFileTypes));
+
+                // Question: What is the use of this line?
+                $this->setOption('allowedFileTypes', $allowedFileTypes);
+            }
+        }
+        $this->xpdo->log(
+            modX::LOG_LEVEL_ERROR,
+            "\r\tmodMediaSource->checkFileType: final types
+            \$allowedFileTypes: " . print_r($allowedFileTypes, true)
+        );
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
+            // $this->xpdo->log(
+            //     modX::LOG_LEVEL_ERROR,
+            //     "\r\tmodMediaSource->checkFileType: failing... file type not in array
+            //     \$allowedFileTypes: " . print_r($allowedFileTypes, true)
+            // );
             $this->addError('path', $this->xpdo->lexicon('file_err_ext_not_allowed', [
                 'ext' => $ext,
             ]));
-
             return false;
         }
-
         return true;
     }
 
@@ -2301,7 +2374,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 try {
                     $file = $this->filesystem->read($path);
                 } catch (FilesystemException $e) {
-                    $this->addError('file',$e->getMessage());
+                    $this->addError('file', $e->getMessage());
                 }
                 $size = @getimagesize($this->getBasePath() . $path);
                 if (is_array($size)) {
