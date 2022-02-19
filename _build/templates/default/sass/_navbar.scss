@@ -323,6 +323,7 @@
   #language .modx-subsubnav {
     max-height: calc(100vh - 12px);
     overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -443,6 +444,7 @@
     .modx-subnav {
       max-height: calc(100vh - 109px);
       overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 }
