@@ -20,6 +20,8 @@ use xPDO\Om\xPDOObject;
  */
 class GetList extends Processor
 {
+    const RESTRICT_ACTIONS = ['new', 'edit', 'delete'];
+
     /**
      * @return bool
      */
@@ -35,8 +37,43 @@ class GetList extends Processor
     {
         $this->setDefaultProperties([
             'class' => '',
+            'restrict_actions' => '',
         ]);
         return true;
+    }
+
+    /**
+     * @param array $descendents
+     * @return array
+     */
+    protected function checkRestrictions(array $descendents): array
+    {
+        $skip = explode(',', $this->getProperty('skip'));
+        $actions = explode(',', $this->getProperty('restrict_actions'));
+
+        $map = [
+            'MODX\Revolution\modWebLink' => 'weblink',
+            'MODX\Revolution\modSymLink' => 'symlink',
+            'MODX\Revolution\modStaticResource' => 'static_resource',
+        ];
+
+        foreach ($actions as $action) {
+            if (!in_array($action, self::RESTRICT_ACTIONS)) {
+                continue;
+            }
+
+            foreach ($descendents as $descendent) {
+                if ($descendent === 'MODX\Revolution\modDocument') {
+                    continue;
+                }
+
+                if (!$this->modx->hasPermission($action . '_' . $map[$descendent])) {
+                    $skip[] = $descendent;
+                }
+            }
+        }
+
+        return $skip;
     }
 
     /**
@@ -49,8 +86,8 @@ class GetList extends Processor
             $this->failure($this->modx->lexicon('class_err_ns'));
         }
 
-        $skip = explode(',', $this->getProperty('skip'));
         $descendants = $this->modx->getDescendants($class);
+        $skip = $this->checkRestrictions($descendants);
 
         $list = [];
         foreach ($descendants as $descendant) {

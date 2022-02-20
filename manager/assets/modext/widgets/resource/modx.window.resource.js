@@ -9,6 +9,11 @@ MODx.window.CreateResource = function(config = {}) {
                   items: [
                       {
                           xtype: 'modx-combo-class-derivatives',
+                          baseParams: {
+                              'action': 'System/Derivatives/GetList',
+                              'class': 'MODX\\Revolution\\modResource',
+                              'restrict_actions': 'new'
+                          },
                           fieldLabel: _('resource_type'),
                           description: MODx.expandHelp ? '' : _('resource_type_help'),
                           name: 'class_key',
