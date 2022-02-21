@@ -1353,49 +1353,15 @@ class modElement extends modAccessibleSimpleObject
     public function isStaticSourceMutable()
     {
         $isMutable = false;
-        // $sourceFile = $this->getSourceFile();
         $sourceFile = $this->getStaticFileName();
 
-        // if ($this->get('source') === 0) {
-        //
-        // }
-
         if ($sourceFile && $source = $this->getSource()) {
-            // $this->xpdo->log(
-            //     modX::LOG_LEVEL_ERROR,
-            //     "\n\tmodElement->isStaticSourceMutable: Before getMetaData test
-            //         \t\$sourceFile: " . $sourceFile . "
-            //         \tBacktrace: " . print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 4), true)
-            // );
             if (!$isMutable = (bool)$source->getMetaData($sourceFile)) {
-                // $this->xpdo->log(
-                //     modX::LOG_LEVEL_ERROR,
-                //     "\n\tmodElement->isStaticSourceMutable: file path before createObject
-                //         \t\$sourceFile: " . $sourceFile . "
-                //         \t\$sourceID: " . $this->get('source')
-                // );
                 $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                // $this->xpdo->log(
-                //     modX::LOG_LEVEL_ERROR,
-                //     "\n\tmodElement->isStaticSourceMutable: After getMetaData test (failed)
-                //         \t\$path (before pop): " . print_r($path, true)
-                // );
                 $file = array_pop($path);
-                // $this->xpdo->log(
-                //     modX::LOG_LEVEL_ERROR,
-                //     "\n\tmodElement->isStaticSourceMutable: After getMetaData test (failed)
-                //         \t\$file (popped off): " . $file . "
-                //         \t\$path (after pop): " . print_r($path, true)
-                // );
                 $isMutable = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, '');
-                // $this->xpdo->log(
-                //     modX::LOG_LEVEL_ERROR,
-                //     "\n\tmodElement->isStaticSourceMutable: After createObject
-                //         \t\$isMutable: " . $isMutable
-                // );
             }
         }
-
         return $isMutable;
     }
 
