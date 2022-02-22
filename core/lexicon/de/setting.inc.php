@@ -382,10 +382,10 @@ $_lang['setting_mail_smtp_port'] = 'SMTP-Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Legt den Standard-SMTP-Port fest.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Setzt den SMTP Secure Encyption Typ. Optionen sind "", "ssl" oder "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'TLS-Verschlüsselung automatisch aktivieren, wenn ein Server dies unterstützt, auch wenn "SMTP Secure" nicht auf "tls" eingestellt ist.';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP: Mails einzeln versenden';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden Mails an jeden Empfänger einzeln versendet, anderenfalls wird eine einzige Mail versendet, bei der alle Empfänger im entsprechenden Adressfeld stehen.';
