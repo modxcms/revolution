@@ -53,3 +53,5 @@ $_lang['system_setting_update_xtype_success'] = 'Sikeresen módosítva a `[[+key
 $_lang['system_setting_update_xtype_failure'] = 'Nem sikerült módosítani a `[[+key]]` rendszerbeállítás xtype-ját `[[+old_xtype]]` értékről `[[+new_xtype]]` értékre.';
 $_lang['system_setting_update_success'] = '\'[[+key]]\' rendszerbeállítás módosítva.';
 $_lang['system_setting_update_failed'] = '\'[[+key]]\' rendszerbeállítást nem sikerült módosítani.';
+$_lang['system_setting_rename_key_success'] = 'Successfully renamed the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';
+$_lang['system_setting_rename_key_failure'] = 'Failed to rename the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';

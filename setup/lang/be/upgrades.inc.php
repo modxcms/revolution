@@ -53,3 +53,5 @@ $_lang['system_setting_update_xtype_success'] = 'Паспяхова паменя
 $_lang['system_setting_update_xtype_failure'] = 'Немагчыма змяніць тып сістэмнага параметру `[[+key]]` з `[[+old_xtype]]` на `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'Налада сістэмы `[[+key]]` абноўлена.';
 $_lang['system_setting_update_failed'] = 'Не атрымалася абнавіць сістэмную наладу `[[+key]]`.';
+$_lang['system_setting_rename_key_success'] = 'Successfully renamed the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';
+$_lang['system_setting_rename_key_failure'] = 'Failed to rename the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';

@@ -381,11 +381,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Het wachtwoord voor de authenticatie vo
 $_lang['setting_mail_smtp_port'] = 'SMTP poort';
 $_lang['setting_mail_smtp_port_desc'] = 'Stel de standaard SMTP poort in.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP verbinding voorvoegsel';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Stel het voorvoegsel van de verbinding in. Mogelijk zijn "", "ssl" of "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Biedt de mogelijkheid om e-mail berichten afzonderlijk te sturen in plaats van het versturen naar alle \'naar\' adressen.';

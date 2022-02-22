@@ -54,3 +54,5 @@ $_lang['system_setting_update_xtype_success'] = 'सिस्टम सेटि
 $_lang['system_setting_update_xtype_failure'] = 'सिस्टम सेटिंग \'[[+key]]\' के लिए xtype को \'[[+old_xtype]]\' से \'[[ new x_type]]\' बदलने में विफल |';
 $_lang['system_setting_update_success'] = 'सिस्टम सेटिंग \'[[+कुंजी]]\' अपडेट की गई |';
 $_lang['system_setting_update_failed'] = 'सिस्टम सेटिंग \'[[+कुंजी]]\' अपडेट की गई |';
+$_lang['system_setting_rename_key_success'] = 'Successfully renamed the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';
+$_lang['system_setting_rename_key_failure'] = 'Failed to rename the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';

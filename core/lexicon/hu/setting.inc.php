@@ -381,11 +381,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'The password to authenticate to SMTP ag
 $_lang['setting_mail_smtp_port'] = 'SMTP Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP kapcsolódás előtagja';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Beállítja a kapcsolat előtagját. A lehetőségek "", "ssl" vagy "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP önműködő TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Az azt támogató kiszolgálón a TLS titkosítás önműködő engedélyezése még akkor is, ha az "SMTP titkosítás" nincs "tls" értékre állítva.';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Provides the ability to have the TO field process individual emails, instead of sending to entire TO addresses.';

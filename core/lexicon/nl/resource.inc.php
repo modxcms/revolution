@@ -65,7 +65,7 @@ $_lang['resource_err_move_to_child'] = 'Je kunt de pagina niet verplaatsen onder
 .';
 $_lang['resource_err_move_sitestart'] = 'De pagina is gelinkt aan de site_start variabele en kan niet naar een andere context verplaatst worden!';
 $_lang['resource_err_nf'] = 'Pagina niet gevonden.';
-$_lang['resource_err_nfs'] = 'Pagina met ID [[+id]] niet gevoden.';
+$_lang['resource_err_nfs'] = 'Pagina met ID [[+id]] niet gevonden.';
 $_lang['resource_err_ns'] = 'Pagina niet gespecificeerd.';
 $_lang['resource_err_own_parent'] = 'De pagina kan niet zijn eigen bovenliggende pagina zijn.';
 $_lang['resource_err_publish']  = 'Er is een fout opgetreden tijdens het publiceren van de pagina.';
