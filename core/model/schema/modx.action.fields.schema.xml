@@ -22,10 +22,14 @@
             <field name="description" />
             <field name="introtext" />
         </tab>
+        <tab name="modx-resource-content">
+            <field name="modx-resource-content" />
+        </tab>
         <tab name="modx-resource-main-right">
         </tab>
         <tab name="modx-resource-main-right-top">
             <field name="published" />
+            <field name="deleted" />
             <field name="publishedon" />
             <field name="pub_date" />
             <field name="unpub_date" />
@@ -34,9 +38,9 @@
             <field name="template" />
         </tab>
         <tab name="modx-resource-main-right-bottom">
+            <field name="hidemenu" />
             <field name="menutitle" />
             <field name="link_attributes" />
-            <field name="hidemenu" />
             <field name="menuindex" />
         </tab>
         <tab name="modx-page-settings">
@@ -51,25 +55,20 @@
         </tab>
         <tab name="modx-page-settings-box-left">
             <field name="isfolder" />
-            <field name="alias_visible" />
+            <field name="show_in_tree" />
             <field name="hide_children_in_tree" />
             <field name="alias_visible" />
-            <field name="richtext" />
             <field name="uri_override" />
             <field name="uri" />
         </tab>
         <tab name="modx-page-settings-box-right">
+            <field name="richtext" />
             <field name="cacheable" />
             <field name="searchable" />
-            <field name="show_in_tree" />
             <field name="syncsite" />
-            <field name="deleted" />
         </tab>
         <tab name="modx-panel-resource-tv" other="tv" />
         <tab name="modx-resource-access-permissions" />
-        <tab name="modx-resource-content">
-            <field name="modx-resource-content" />
-        </tab>
     </action>
 
     <action controller="resource/create" form="modx-panel-resource">
@@ -83,10 +82,14 @@
             <field name="description" />
             <field name="introtext" />
         </tab>
+        <tab name="modx-resource-content">
+            <field name="modx-resource-content" />
+        </tab>
         <tab name="modx-resource-main-right">
         </tab>
         <tab name="modx-resource-main-right-top">
             <field name="published" />
+            <field name="deleted" />
             <field name="publishedon" />
             <field name="pub_date" />
             <field name="unpub_date" />
@@ -95,9 +98,9 @@
             <field name="template" />
         </tab>
         <tab name="modx-resource-main-right-bottom">
+            <field name="hidemenu" />
             <field name="menutitle" />
             <field name="link_attributes" />
-            <field name="hidemenu" />
             <field name="menuindex" />
         </tab>
         <tab name="modx-page-settings">
@@ -112,24 +115,19 @@
         </tab>
         <tab name="modx-page-settings-box-left">
             <field name="isfolder" />
+            <field name="show_in_tree" />
             <field name="hide_children_in_tree" />
             <field name="alias_visible" />
-            <field name="alias_visible" />
-            <field name="richtext" />
             <field name="uri_override" />
             <field name="uri" />
         </tab>
         <tab name="modx-page-settings-box-right">
+            <field name="richtext" />
             <field name="cacheable" />
             <field name="searchable" />
-            <field name="show_in_tree" />
             <field name="syncsite" />
-            <field name="deleted" />
         </tab>
         <tab name="modx-panel-resource-tv" other="tv" />
         <tab name="modx-resource-access-permissions" />
-        <tab name="modx-resource-content">
-            <field name="modx-resource-content" />
-        </tab>
     </action>
 </actions>
