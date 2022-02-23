@@ -432,6 +432,9 @@ $_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager
 $_lang['setting_manager_logo'] = 'Manager Logo';
 $_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';
 
+$_lang['setting_manager_settings_areas_order'] = 'Areas Order in System Settings';
+$_lang['setting_manager_settings_areas_order_desc'] = 'Here you can set the order of Areas via their aliases in System Settings section, separated by commas (by default: site, editor, furls, gateway, file, caching, mail, manager, language, static_resources, static_elements, authentication, proxy, session, phpthumb, system).';
+
 $_lang['setting_manager_time_format'] = 'Manager Time Format';
 $_lang['setting_manager_time_format_desc'] = 'The format string, in PHP date() format, for the time settings represented in the manager.';
 

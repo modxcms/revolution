@@ -920,6 +920,15 @@ $settings['manager_favicon_url']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
+$settings['manager_settings_areas_order'] = $xpdo->newObject(modSystemSetting::class);
+$settings['manager_settings_areas_order']->fromArray([
+  'key' => 'manager_settings_areas_order',
+  'value' => 'site, editor, furls, gateway, file, caching, mail, manager, language, static_resources, static_elements, authentication, proxy, session, phpthumb, system',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['manager_time_format'] = $xpdo->newObject(modSystemSetting::class);
 $settings['manager_time_format']->fromArray([
   'key' => 'manager_time_format',
