@@ -118,6 +118,11 @@ class GetAreas extends Processor
             'COUNT(settingsCount.' . $this->modx->escape('key') . ') AS num_settings',
         ]);
         $c->groupby('settingsArea.' . $this->modx->escape('area') . ', settingsArea.' . $this->modx->escape('namespace'));
+        $areasOrderSetting = $this->modx->getOption('manager_settings_areas_order', null, '');
+        if ($areasOrderSetting) {
+            $areasOrder = "'" . str_replace(",", "', '", (str_replace(' ', '', str_replace("'", "", $areasOrderSetting)))) . "'";
+            $c->sortby("FIELD(settingsArea.area, " . $areasOrder . "), 'ASC'");
+        }
         $c->sortby($this->modx->escape('area'), $this->getProperty('dir', 'ASC'));
         return $c;
     }

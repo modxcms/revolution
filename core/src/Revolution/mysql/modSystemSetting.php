@@ -138,6 +138,11 @@ class modSystemSetting extends \MODX\Revolution\modSystemSetting
         $c->where($criteria);
 
         $count = $xpdo->getCount(\MODX\Revolution\modSystemSetting::class, $c);
+        $areasOrderSetting = $xpdo->getOption('manager_settings_areas_order', null, '');
+        if ($areasOrderSetting) {
+            $areasOrder = "'" . str_replace(",", "', '", (str_replace(' ', '', str_replace("'", "", $areasOrderSetting)))) . "'";
+            $c->sortby("FIELD(modSystemSetting.area, " . $areasOrder . "), 'ASC'");
+        }
         $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modSystemSetting::class, 'modSystemSetting', '', ['area']), 'ASC');
         foreach ($sort as $field => $dir) {
             $c->sortby($xpdo->getSelectColumns(\MODX\Revolution\modSystemSetting::class, 'modSystemSetting', '', [$field]), $dir);
