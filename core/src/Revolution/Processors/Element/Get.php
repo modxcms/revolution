@@ -27,11 +27,8 @@ abstract class Get extends GetProcessor
     public function initialize()
     {
         // Intitializing parent first, as we need the Element object created before moving forward
-        if (parent::initialize()) {
-            if (!$this->hasErrors()) {
-                $ready = $this->object->setupElement($this);
-            }
-            return $ready;
+        if (parent::initialize() === true) {
+            return $this->object->setupElement($this);
         }
     }
 
