@@ -35,7 +35,9 @@ abstract class Update extends UpdateProcessor
     {
         // Intitializing parent first, as we need the Element object created before moving forward
         if (parent::initialize()) {
-            $ready = $this->object->setupElement($this);
+            if (!$this->hasErrors()) {
+                $ready = $this->object->setupElement($this);
+            }
             // $this->modx->log(
             //     \modX::LOG_LEVEL_ERROR,
             //     "\r\tUpdate->initialize
