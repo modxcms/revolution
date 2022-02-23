@@ -742,6 +742,16 @@ Ext.extend(MODx,Ext.Component,{
         MODx.createResourceWindow.setValues(record);
         MODx.createResourceWindow.show();
     }
+
+    ,switchLanguage: function(lang) {
+        var params = {
+            switch: lang
+        };
+        Ext.iterate(MODx.request, function (key, value) {
+            params['target_' + key] = value;
+        });
+        MODx.loadPage('language', params);
+    }
 });
 Ext.reg('modx',MODx);
 
