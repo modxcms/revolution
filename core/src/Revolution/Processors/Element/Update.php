@@ -39,7 +39,7 @@ abstract class Update extends UpdateProcessor
             // $this->modx->log(
             //     \modX::LOG_LEVEL_ERROR,
             //     "\r\tUpdate->initialize
-            // 	\$testProp2: " . $this->testProp2
+            //     \$testProp2: " . $this->testProp2
             // );
             return $ready;
         }
@@ -93,20 +93,20 @@ abstract class Update extends UpdateProcessor
             //     \modX::LOG_LEVEL_ERROR,
             //     "\r\tUpdate->beforeSave: about to get source file and set absolute path"
             // );
-                $this->object->staticFileAbsolutePath = $this->object->getSourceFile();
+            $this->object->staticFileAbsolutePath = $this->object->getSourceFile();
 
-                // Check writability of file and file path (also checks for allowable file extension)
-                $fileValidated = $this->object->validateStaticFile();
-                if ($fileValidated !== true) {
-                    if (array_key_exists('msgData', $fileValidated)) {
-                        $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey'], $fileValidated['msgData']));
-                    } else {
-                        $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey']));
-                    }
-                    return false;
+            // Check writability of file and file path (also checks for allowable file extension)
+            $fileValidated = $this->object->validateStaticFile();
+            if ($fileValidated !== true) {
+                if (array_key_exists('msgData', $fileValidated)) {
+                    $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey'], $fileValidated['msgData']));
                 } else {
-                    $this->object->staticIsWritable = true;
+                    $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey']));
                 }
+                return false;
+            } else {
+                $this->object->staticIsWritable = true;
+            }
             // }
         }
         return !$this->hasErrors();
