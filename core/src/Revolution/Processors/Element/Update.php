@@ -29,58 +29,19 @@ abstract class Update extends UpdateProcessor
     /** @var modElement $object */
     public $object;
 
-    protected $hasStaticFile = false;
+    public $hasStaticFile = false;
 
     public function initialize()
     {
         // Intitializing parent first, as we need the Element object created before moving forward
         if (parent::initialize()) {
-            $className = array_pop(explode('\\', $this->classKey));
-            /*
-                There is at least one other Element type (modPropertySet) where static files
-                do not apply, so here we determine whether static processing will be needed
-                based on the Element being created.
-            */
-            $hasStaticContentOption = in_array(
-                $className,
-                ['modChunk', 'modPlugin', 'modSnippet', 'modTemplate', 'modTemplateVar']
-            );
-            if ($hasStaticContentOption && intval($this->getProperty('static', 0)) === 1) {
-                $file = $this->getProperty('static_file');
-                if (!empty($file)) {
-                    $this->hasStaticFile = true;
-                    $mediaSourceId = (int)$this->getProperty('source');
-                    // When file media source is set to "None"
-                    if ($mediaSourceId === 0) {
-                        $this->object->ignoreMediaSource = true;
-                        if (strpos($file, '/') === 0) {
-                            $this->object->staticPathIsAbsolute = true;
-                        }
-                    }
-                    // When there is an assigned media source
-                    if ($mediaSourceId > 0) {
-                        $this->object->ignoreMediaSource = false;
-                        $this->setProperty('static_file', ltrim($file, DIRECTORY_SEPARATOR));
-                    }
-
-                    $this->object->staticElementMediaSourceId = $mediaSourceId;
-                    $this->object->isStaticElementFile = true;
-
-                    if ($this->object->getSource()) {
-                        // Stop if error fetching media source
-                        if ($this->object->_source->hasErrors()) {
-                            $this->addFieldError('static_file', reset($this->object->_source->getErrors()));
-                            return false;
-                        }
-                    }
-                    $this->object->relayStaticPropertiesToMediaSource([
-                        'isStaticElementFile',
-                        'ignoreMediaSource',
-                        'staticPathIsAbsolute'
-                    ]);
-                }
-            }
-            return true;
+            $ready = $this->object->setupElement($this);
+            // $this->modx->log(
+            //     \modX::LOG_LEVEL_ERROR,
+            //     "\r\tUpdate->initialize
+            // 	\$testProp2: " . $this->testProp2
+            // );
+            return $ready;
         }
     }
 
@@ -127,7 +88,11 @@ abstract class Update extends UpdateProcessor
         }
         if ($this->hasStaticFile) {
             // For new elements, only need to continue static processing if content is present
-            if ($this->object->get('content') !== '') {
+            // if ($this->object->get('content') !== '') {
+            // $this->modx->log(
+            //     \modX::LOG_LEVEL_ERROR,
+            //     "\r\tUpdate->beforeSave: about to get source file and set absolute path"
+            // );
                 $this->object->staticFileAbsolutePath = $this->object->getSourceFile();
 
                 // Check writability of file and file path (also checks for allowable file extension)
@@ -142,7 +107,7 @@ abstract class Update extends UpdateProcessor
                 } else {
                     $this->object->staticIsWritable = true;
                 }
-            }
+            // }
         }
         return !$this->hasErrors();
     }

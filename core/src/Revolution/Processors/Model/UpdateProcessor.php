@@ -37,12 +37,7 @@ abstract class UpdateProcessor extends ModelProcessor
         if (empty($primaryKey)) {
             return $this->modx->lexicon($this->objectType . '_err_ns');
         }
-        $this->modx->log(
-            \modX::LOG_LEVEL_ERROR,
-            "\r\tUpdate->initialize
-        	\$this->classKey: " . $this->classKey . "
-        	\$primaryKey (element id): " . $primaryKey
-        );
+
         $this->object = $this->modx->getObject($this->classKey, $primaryKey);
         if (empty($this->object)) {
             return $this->modx->lexicon($this->objectType . '_err_nfs', [$this->primaryKeyField => $primaryKey]);

@@ -715,7 +715,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         // Attempt creating the new file.
         try {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\t createObject(): Writing to this \$path: \r\t" . $path);
+            // $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\t createObject(): Writing to this \$path: \r\t" . $path);
             // return false;
             $this->filesystem->write($path, $content, $config);
         } catch (FilesystemException | UnableToWriteFile $e) {
