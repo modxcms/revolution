@@ -197,7 +197,7 @@ class modElement extends modAccessibleSimpleObject
             if ($this->staticSourceChanged()) {
                 $staticContent = $this->getFileContent();
                 if ($staticContent !== $this->get('content')) {
-                    if ($this->isStaticSourceMutable() && $staticContent === '') {
+                    if ($staticContent === '') {
                         $this->setDirty('content');
                     } else {
                         $this->setContent($staticContent);
@@ -207,7 +207,7 @@ class modElement extends modAccessibleSimpleObject
             }
 
             $staticContentChanged = $this->staticContentChanged();
-            if ($staticContentChanged && !$this->isStaticSourceMutable()) {
+            if ($staticContentChanged) {
                 $this->setContent($this->getFileContent());
                 $staticContentChanged = false;
             }
@@ -691,7 +691,7 @@ class modElement extends modAccessibleSimpleObject
                 }
             }
             else {
-                $set = file_put_contents($sourceFile, $content) > 0;
+                $set = $this->xpdo->getCacheManager()->writeFile($sourceFile, $content);
             }
         }
 
@@ -1139,27 +1139,10 @@ class modElement extends modAccessibleSimpleObject
      * Return if the static source is mutable.
      *
      * @return boolean True if the source file is mutable.
+     * @deprecated Unreliable; just try to write a file and act on errors.
      */
     public function isStaticSourceMutable()
     {
-        $file = $this->getSourceFile();
-        if (!$file) {
-            return false;
-        }
-
-        if (file_exists($file)) {
-            return is_writable($file) && !is_dir($file);
-        }
-
-        $path = dirname($file);
-        if (file_exists($path) && is_dir($path)) {
-            return is_writable($path);
-        }
-
-        // As we got a value from getSourceFile, but not a full path, it's safe to assume this
-        // is a source-relative path that cannot be converted directly to a local path (eg S3, FTP).
-        // While we don't know for sure if a write will be successful, we return true here to avoid
-        // not trying to write to a remote media source at all.
         return true;
     }
 

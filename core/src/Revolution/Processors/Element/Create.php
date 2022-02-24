@@ -77,13 +77,11 @@ abstract class Create extends CreateProcessor
         $this->setElementProperties();
         $this->validateElement();
 
-        if ($this->object->staticSourceChanged() || $this->object->staticContentChanged()) {
-            if ($this->object->get('content') !== '' && !$this->object->isStaticSourceMutable()) {
-                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
-            }
-            elseif (!$this->object->isStaticSourceValidPath()) {
-                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_protected_invalid'));
-            }
+        if (
+            ($this->object->staticSourceChanged() || $this->object->staticContentChanged())
+            && !$this->object->isStaticSourceValidPath()
+        ) {
+            $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_protected_invalid'));
         }
 
         return !$this->hasErrors();
