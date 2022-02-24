@@ -1142,17 +1142,25 @@ class modElement extends modAccessibleSimpleObject
      */
     public function isStaticSourceMutable()
     {
-        $isMutable = false;
-        $sourceFile = $this->getStaticFileName();
-        if ($sourceFile && $source = $this->getSource()) {
-            if (!$isMutable = (bool)$source->getMetaData($sourceFile)) {
-                $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                $file = array_pop($path);
-                $isMutable = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, '');
-            }
+        $file = $this->getSourceFile();
+        if (!$file) {
+            return false;
         }
 
-        return $isMutable;
+        if (file_exists($file)) {
+            return is_writable($file) && !is_dir($file);
+        }
+
+        $path = dirname($file);
+        if (file_exists($path) && is_dir($path)) {
+            return is_writable($path);
+        }
+
+        // As we got a value from getSourceFile, but not a full path, it's safe to assume this
+        // is a source-relative path that cannot be converted directly to a local path (eg S3, FTP).
+        // While we don't know for sure if a write will be successful, we return true here to avoid
+        // not trying to write to a remote media source at all.
+        return true;
     }
 
     /**
