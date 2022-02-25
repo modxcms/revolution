@@ -381,7 +381,7 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Lösenordet som ska användas för att 
 $_lang['setting_mail_smtp_port'] = 'SMTP-port';
 $_lang['setting_mail_smtp_port_desc'] = 'Anger SMTP-serverns standardport.';
 
-$_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Säker';
 $_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
