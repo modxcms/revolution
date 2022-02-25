@@ -567,7 +567,7 @@ class Update extends UpdateProcessor
                 $map = [
                     modWebLink::class => 'delete_weblink',
                     modSymLink::class => 'delete_symlink',
-                    modStaticResource::class => 'delete_static_resource',
+                    modStaticResource::class => 'delete_resource',
                 ];
 
                 if (array_key_exists($this->object->get('class_key'), $map)) {
@@ -584,7 +584,7 @@ class Update extends UpdateProcessor
             }
         }
 
-        return $deleted;
+        return (bool)$deleted;
     }
 
     /**
