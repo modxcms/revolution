@@ -126,6 +126,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                 },{
                     xtype: 'modx-grid-access-policy'
                     ,cls:'main-wrapper'
+                    ,urlFilters: ['query']
                 }]
             });
         }

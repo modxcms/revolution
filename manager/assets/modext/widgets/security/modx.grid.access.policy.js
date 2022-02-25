@@ -49,6 +49,7 @@ MODx.grid.AccessPolicy = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'Security/Access/Policy/GetList'
+            ,query: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
         }
         ,fields: ['id','name','description', 'description_trans', 'class','data','parent','template','template_name','active_permissions','total_permissions','active_of','cls']
         ,paging: true
@@ -109,22 +110,37 @@ MODx.grid.AccessPolicy = function(config) {
             }]
         },'->',{
             xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-policy-search'
+            ,name: 'query'
+            ,id: 'modx-policy-query'
             ,cls: 'x-form-filter'
             ,emptyText: _('search')
+            ,value: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.policySearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                }
+                ,'afterrender': {
+                    fn: function (cb) {
+                        if (MODx.request.query) {
+                            this.policySearch(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function (cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -143,17 +159,20 @@ MODx.grid.AccessPolicy = function(config) {
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
-    search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+    policySearch: function(cb, newValue, oldValue) {
+        var nv = Ext.isEmpty(newValue) || Ext.isObject(newValue) ? cb.getValue() : newValue;
+        var s = this.getStore();
+        s.baseParams.query = nv;
+        s.load();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
     ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Security/Access/Policy/GetList'
-        };
-        Ext.getCmp('modx-policy-search').reset();
+        var s = this.getStore();
+        s.baseParams.query = '';
+        Ext.getCmp('modx-policy-query').setValue('');
+        s.load();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
