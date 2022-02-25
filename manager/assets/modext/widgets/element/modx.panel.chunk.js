@@ -19,6 +19,7 @@ MODx.panel.Chunk = function(config) {
         ,class_key: 'MODX\\Revolution\\modChunk'
         ,chunk: ''
         ,bodyStyle: ''
+        ,previousFileSource: config.record.source != null ? config.record.source : MODx.config.default_media_source
         ,items: [{
             html: _('chunk_new')
             ,id: 'modx-chunk-header'
@@ -99,33 +100,7 @@ MODx.panel.Chunk = function(config) {
                         ,forId: 'modx-chunk-description'
                         ,html: _('chunk_desc_description')
                         ,cls: 'desc-under'
-                    },{
-                        xtype: 'modx-combo-browser'
-                        ,browserEl: 'modx-browser'
-                        ,fieldLabel: _('static_file')
-                        ,description: MODx.expandHelp ? '' : _('static_file_msg')
-                        ,name: 'static_file'
-                        ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
-                        ,openTo: config.record.openTo || ''
-                        ,id: 'modx-chunk-static-file'
-                        ,triggerClass: 'x-form-code-trigger'
-                        ,anchor: '100%'
-                        ,maxLength: 255
-                        ,value: config.record.static_file || ''
-                        ,hidden: !config.record['static']
-                        ,hideMode: 'offsets'
-                        ,validator: function(value){
-                            if (Ext.getCmp('modx-chunk-static').getValue() === true) {
-                                if (Ext.util.Format.trim(value) != '') {
-                                    return true;
-                                } else {
-                                    return _('static_file_ns');
-                                }
-                            }
-
-                            return true;
-                        }
-                    },{
+                    },this.getStaticFileField('chunk', config.record),{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-chunk-static-file'
                         ,id: 'modx-chunk-static-file-help'
@@ -211,8 +186,10 @@ MODx.panel.Chunk = function(config) {
                         }
                         ,listeners: {
                             select: {
-                                fn: this.changeSource
-                                ,scope: this
+                                fn: function(cmp, record, selectedIndex) {
+                                    this.onChangeStaticSource(cmp, 'chunk');
+                                },
+                                scope: this
                             }
                         }
                     },{
@@ -294,16 +271,6 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
         this.initialized = true;
         MODx.fireEvent('ready');
         return true;
-    }
-
-    /**
-     * Set the browser window "media source" source
-     */
-    ,changeSource: function() {
-        var browser = Ext.getCmp('modx-chunk-static-file')
-            ,source = Ext.getCmp('modx-chunk-static-source').getValue();
-
-        browser.config.source = source;
     }
 
     ,beforeSubmit: function(o) {

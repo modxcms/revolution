@@ -415,6 +415,177 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             }
         });
     }
+
+    /**
+     * @property {Function} onChangeStaticSource - Updates the static file field based
+     * on the chosen source.
+     *
+     * @param {Object} cmp - The media source field's Ext.Component object
+     * @param {String} elType - The MODX element type (i.e., tv, chunk, or snippet)
+     */
+    ,onChangeStaticSource: function(cmp, elType) {
+
+        const   staticFileField = Ext.getCmp(`modx-${elType}-static-file`),
+                staticFile = staticFileField.getValue(),
+                staticDir = staticFile.slice(0, (staticFile.lastIndexOf('/') + 1)),
+                staticFileFieldId = staticFileField.id,
+                staticFileFieldContainer = Ext.getCmp(staticFileField.ownerCt.id),
+                itemKey = staticFileFieldContainer.items.keys.indexOf(staticFileFieldId),
+                previousSource = this.previousFileSource || 0,
+                currentSource = cmp.getValue(),
+                currentRecord = {
+                    static_file: staticFile,
+                    source: currentSource,
+                    openTo: staticDir
+                }
+        ;
+        let newStaticFile,
+            changeFieldType = false,
+            updateFieldSource = false
+        ;
+        if (elType === 'template') {
+            // need these in method's global scope, so define with var instead of const/let
+            var   staticPreviewFileField = Ext.getCmp(`modx-${elType}-preview-file`),
+                    staticPreviewFile = staticPreviewFileField.getValue(),
+                    staticPreviewDir = staticPreviewFile.slice(0, (staticPreviewFile.lastIndexOf('/') + 1)),
+                    staticPreviewFileFieldId = staticPreviewFileField.id,
+                    staticPreviewFileFieldContainer = Ext.getCmp(staticPreviewFileField.ownerCt.id),
+                    previewItemKey = staticPreviewFileFieldContainer.items.keys.indexOf(staticPreviewFileFieldId),
+                    currentPreviewRecord = {
+                        preview_file: staticPreviewFile,
+                        source: currentSource,
+                        openTo: staticPreviewDir
+                    },
+                    newPreviewFileField
+            ;
+        }
+
+        this.previousFileSource = currentSource;
+
+        if (previousSource > 0 && currentSource == 0) {
+            // change staticFileField from combo to textfield
+            newStaticFile = this.getStaticFileField(elType, currentRecord, false);
+            if (elType === 'template') {
+                newPreviewFileField = this.getTemplatePreviewImageField(currentPreviewRecord, false);
+            }
+            changeFieldType = true;
+        } else if (previousSource == 0 && currentSource > 0) {
+            // change staticFileField from textfield to combo
+            newStaticFile = this.getStaticFileField(elType, currentRecord);
+            if (elType === 'template') {
+                newPreviewFileField = this.getTemplatePreviewImageField(currentPreviewRecord);
+            }
+            changeFieldType = true;
+            updateFieldSource = true;
+        } else {
+            updateFieldSource = true;
+        }
+
+        if (updateFieldSource) {
+            if (changeFieldType) {
+                newStaticFile.source = currentSource;
+                if (elType === 'template') {
+                    newPreviewFileField.source = currentSource;
+                }
+            } else {
+                staticFileField.config.source = currentSource;
+                if (elType === 'template') {
+                    staticPreviewFileField.config.source = currentSource;
+                }
+            }
+        }
+
+        if (changeFieldType) {
+            staticFileField.clearInvalid();
+            staticFileField.destroy();
+            staticFileFieldContainer.insert(itemKey, newStaticFile);
+            if (elType === 'template') {
+                staticPreviewFileField.clearInvalid();
+                staticPreviewFileField.destroy();
+                staticPreviewFileFieldContainer.insert(previewItemKey, newPreviewFileField);
+            }
+            this.doLayout();
+        }
+    }
+
+    /**
+     * @property {Function} getStaticFileField - Builds the static field config based on the chosen media source.
+     *
+     * @param {String} elType - The MODX element type (i.e., tv, chunk, or snippet)
+     * @param {Object} record - The FormPanel record
+     * @param {Boolean} loadBrowserField - Whether to create a media browser combo for the static file field
+     */
+    ,getStaticFileField: function(elType, record, loadBrowserField = true) {
+        const   sharedConfig = {
+                    fieldLabel: _('static_file'),
+                    description: MODx.expandHelp ? '' : _('static_file_desc'),
+                    name: 'static_file',
+                    id: `modx-${elType}-static-file`,
+                    maxLength: 255,
+                    anchor: '100%',
+                    value: record.static_file || ''
+        };
+        let finalConfig;
+
+        if (record.source == 0) {
+            loadBrowserField = false;
+        }
+
+        if (loadBrowserField) {
+            finalConfig = Object.assign(sharedConfig, {
+                xtype: 'modx-combo-browser',
+                browserEl: 'modx-browser',
+                triggerClass: 'x-form-code-trigger',
+                source: record.source != null ? record.source : MODx.config.default_media_source,
+                openTo: record.openTo || ''
+            });
+        } else {
+            finalConfig = Object.assign(sharedConfig, {
+                xtype: 'textfield'
+            });
+        }
+        return finalConfig;
+    }
+
+    /**
+     * @property {Function} getTemplatePreviewImageField - Builds the template preview field config based on the chosen media source.
+     *
+     * @param {Object} record - The FormPanel record
+     * @param {Boolean} loadBrowserField - Whether to create a media browser combo for the preview image field
+     */
+    ,getTemplatePreviewImageField: function(record, loadBrowserField = true) {
+        const   sharedConfig = {
+                    fieldLabel: _('template_preview'),
+                    description: MODx.expandHelp ? '' : _('template_preview_description'),
+                    name: 'preview_file',
+                    id: 'modx-template-preview-file',
+                    allowedFileTypes: 'jpg,jpeg,png,gif,bmp',
+                    maxLength: 255,
+                    anchor: '100%',
+                    value: record.preview_file || ''
+        };
+        let finalConfig;
+
+        if (record.source == 0) {
+            loadBrowserField = false;
+        }
+
+        if (loadBrowserField) {
+            finalConfig = Object.assign(sharedConfig, {
+                xtype: 'modx-combo-browser',
+                browserEl: 'modx-browser',
+                triggerClass: 'x-form-image-trigger',
+                source: record.source != null ? record.source : MODx.config.default_media_source,
+                openTo: record.openTo || ''
+            });
+        } else {
+            finalConfig = Object.assign(sharedConfig, {
+                xtype: 'textfield'
+            });
+        }
+        return finalConfig;
+    }
+
 });
 Ext.reg('modx-formpanel',MODx.FormPanel);
 

@@ -23,6 +23,7 @@ MODx.panel.TV = function(config) {
         ,bodyStyle: ''
         ,autoWidth: true
         ,monitorResize: true
+        ,previousFileSource: config.record.source != null ? config.record.source : MODx.config.default_media_source
         ,items: [{
             html: _('tv_new')
             ,id: 'modx-tv-header'
@@ -367,8 +368,10 @@ MODx.panel.TV = function(config) {
                                 }
                                 ,listeners: {
                                     select: {
-                                        fn: this.changeSource
-                                        ,scope: this
+                                        fn: function(cmp, record, selectedIndex) {
+                                            this.onChangeStaticSource(cmp, 'tv');
+                                        },
+                                        scope: this
                                     }
                                 }
                             },{
@@ -387,18 +390,8 @@ MODx.panel.TV = function(config) {
                                 ,validateOnBlur: false
                                 ,hideMode: 'visibility'
                             }
-                            ,items: [{
-                                xtype: 'modx-combo-browser'
-                                ,browserEl: 'modx-browser'
-                                ,fieldLabel: _('static_file')
-                                ,description: MODx.expandHelp ? '' : _('static_file_desc')
-                                ,name: 'static_file'
-                                ,openTo: config.record.openTo || ''
-                                ,id: 'modx-tv-static-file'
-                                ,triggerClass: 'x-form-code-trigger'
-                                ,maxLength: 255
-                                ,value: config.record.static_file || ''
-                            },{
+                            ,items: [
+                                this.getStaticFileField('tv', config.record),{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-tv-static-file'
                                 ,id: 'modx-tv-static-file-help'
@@ -749,16 +742,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         this.initialized = true;
         MODx.fireEvent('ready');
         return true;
-    }
-
-    /**
-     * Set the browser window "media source" source
-     */
-    ,changeSource: function() {
-        var browser = Ext.getCmp('modx-tv-static-file')
-            ,source = Ext.getCmp('modx-tv-static-source').getValue();
-
-        browser.config.source = source;
     }
 
     ,beforeSubmit: function(o) {
