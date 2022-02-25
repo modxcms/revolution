@@ -8,11 +8,11 @@ MODx.panel.GroupsRoles = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-groups-roles'
-		,cls: 'container'
+        ,cls: 'container'
         ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
         ,items: [{
-             html: _('user_group_management')
+            html: _('user_group_management')
             ,id: 'modx-access-permissions-header'
             ,xtype: 'modx-header'
         },MODx.getPageStructure(this.getPageTabs(config),{
@@ -167,7 +167,6 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
             userGrid.store.baseParams.usergroup = usergroup;
             userGrid.clearFilter();
         }
-
     }
     ,fixPanelHeight: function() {
         // fixing border layout's height regarding to tree panel's

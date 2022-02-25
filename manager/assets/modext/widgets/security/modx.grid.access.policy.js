@@ -167,6 +167,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
+
     ,clearFilter: function() {
         var s = this.getStore();
         s.baseParams.query = '';
@@ -197,6 +198,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         this.windows.apc.reset();
         this.windows.apc.show(e.target);
     }
+
     ,exportPolicy: function(btn,e) {
         var id = this.menu.record.id;
         MODx.Ajax.request({
