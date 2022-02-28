@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Model;
-
 
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\Processors\ModelProcessor;
@@ -76,24 +76,6 @@ abstract class DuplicateProcessor extends ModelProcessor
         $this->newObject->fromArray($this->object->toArray());
         $name = $this->getNewName();
         $this->setNewName($name);
-
-        $staticFilename = $this->getProperty($this->staticfileField);
-        if (!empty($staticFilename)) {
-            $this->newObject->set('static_file', $staticFilename);
-        }
-
-        if ($this->alreadyExists($name)) {
-            $this->addFieldError(
-                $this->newNameField ? $this->newNameField : $this->nameField,
-                $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
-            );
-        }
-
-        /* Check if a static file already exists within specified static file path. */
-        if ($staticFilename && $this->staticFileAlreadyExists($staticFilename)) {
-            $this->modx->lexicon->load('core:element');
-            $this->addFieldError($this->staticfileField, $this->modx->lexicon('element_err_staticfile_exists'));
-        }
 
         $canSave = $this->beforeSave();
         if ($canSave !== true) {
@@ -172,9 +154,10 @@ abstract class DuplicateProcessor extends ModelProcessor
     public function getNewName()
     {
         $name = $this->getProperty($this->nameField);
-        $newName = !empty($name) ? $name : $this->modx->lexicon('duplicate_of',
-            ['name' => $this->object->get($this->nameField)]);
-
+        $newName = !empty($name)
+            ? $name
+            : $this->modx->lexicon('duplicate_of', ['name' => $this->object->get($this->nameField)])
+            ;
         return $newName;
     }
 
@@ -202,7 +185,6 @@ abstract class DuplicateProcessor extends ModelProcessor
         return $this->modx->getCount($this->classKey, [
                 $this->nameField => $name,
             ]) > 0;
-
     }
 
     /**

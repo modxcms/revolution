@@ -73,7 +73,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /** @var bool $isStaticElementFile passed from modElement processors */
     public $isStaticElementFile = false;
     public $ignoreMediaSource = false;
-    public $staticPathIsAbsolute = false;
 
     /**
      * Get the default MODX filesystem source
@@ -707,16 +706,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $config['visibility'] = $this->xpdo->getOption('visibility', $properties, Visibility::PUBLIC);
         }
 
-        // $this->xpdo->log(
-        //     modX::LOG_LEVEL_ERROR,
-        //     "\n\tmodMediaSource->createObject:
-        //         \t\$properties: " . print_r($this->properties, true)
-        // );
-
         // Attempt creating the new file.
         try {
-            // $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\t createObject(): Writing to this \$path: \r\t" . $path);
-            // return false;
             $this->filesystem->write($path, $content, $config);
         } catch (FilesystemException | UnableToWriteFile $e) {
             $this->addError('name', $this->xpdo->lexicon('file_err_create'));
@@ -987,6 +978,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $oldPath = $this->sanitizePath($oldPath);
         $newPath = $this->sanitizePath($newPath);
 
+        // Note: Static Elements now check filetype before save
+        if (!$this->isStaticElementFile && !$this->checkFileType($newName)) {
+            return false;
+        }
+
         // Ensure current file can be read, and new file doesn't exist.
         try {
             if (!$this->filesystem->fileExists($oldPath)) {
@@ -994,8 +990,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 return false;
             } elseif ($this->checkFileExists() && $this->filesystem->fileExists($newPath)) {
                 $this->addError('name', sprintf($this->xpdo->lexicon('file_err_ae'), $newName));
-                return false;
-            } elseif (!$this->checkFileType($newName)) {
                 return false;
             }
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
@@ -1035,15 +1029,14 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $path = $this->sanitizePath($path);
 
-        // if (!$this->checkFiletype($path)) {
-        //     return false;
-        // }
+        // Note: Static Elements now check filetype before save
+        if (!$this->isStaticElementFile && !$this->checkFileType($path)) {
+            return false;
+        }
 
         // Ensure file can be read.
         try {
-            if (!$this->checkFileType($path)) {
-                return false;
-            } elseif (!$this->filesystem->fileExists($path)) {
+            if (!$this->filesystem->fileExists($path)) {
                 $this->addError('file', $this->xpdo->lexicon('file_err_nf') . ': ' . $path);
                 return false;
             }
@@ -1059,7 +1052,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         // Attempt creating the file.
         try {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, "\r\tupdateObject(): Writing to this \$path: \r\t" . $path);
             $this->filesystem->write($path, $content, $config);
         } catch (FilesystemException | UnableToWriteFile $e) {
             $this->addError('name', $this->xpdo->lexicon('file_folder_err_update'));
@@ -1770,24 +1762,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function checkFileType($filename)
     {
-        // $this->xpdo->log(
-        //     modX::LOG_LEVEL_ERROR,
-        //     "\r\tmodMediaSource->checkFileType:
-        //     get class, this: " . get_class($this) . "
-        //     source id: " . $this->get('id') . "
-        //     isStaticElement? " . $this->isStaticElementFile . "
-        //     staticPathIsAbsolute? " . $this->staticPathIsAbsolute . "
-        //     ignoreMediaSource? " . $this->ignoreMediaSource . "
-        //     opt upload_files: " . $this->xpdo->getOption('upload_files') . "
-        //     opt upload_images: " . $this->xpdo->getOption('upload_images') . "
-        //     opt upload_media: " . $this->xpdo->getOption('upload_media') . "
-        //     ms opt allowedFileTypes: " . $this->getPropertyList()['allowedFileTypes'] . "
-        //     ms opt imageExtensions " . $this->getOption('imageExtensions')
-        // );
         $allowedFileTypes = [];
         /*
             Static elements will first use $staticElementFileTypes,
-            then fall back to $allowedFileTypes to determine valid types.
+            then fall back to $uploadFileTypes to determine valid types.
+            If a media source is used for the static element, its allowedFileTypes
+            will override this setting.
         */
         if ($staticElementFileTypes = $this->xpdo->getOption('static_elements_filetypes')) {
             $staticElementFileTypes = !is_array($staticElementFileTypes)
@@ -1818,7 +1798,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         } else {
             // Applies when a media source is assigned
             if ($mediaSourceFileTypes = $this->getPropertyList()['allowedFileTypes']) {
-                // FYI: This was trying to fetch via $this->getOption('allowedFileTypes'), but that finds nothing AFAIK
+                // NOTE: This was trying to fetch via $this->getOption('allowedFileTypes'), but that finds nothing AFAIK
                 // File types specified in a media source override all other filetype settings
                 $mediaSourceFileTypes = !is_array($mediaSourceFileTypes)
                     ? explode(',', $mediaSourceFileTypes)
@@ -1848,22 +1828,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 }
                 $allowedFileTypes = array_map('trim', array_unique($allowedFileTypes));
 
-                // Question: What is the use of this line?
+                // QUESTION: What is the use of this line?
                 $this->setOption('allowedFileTypes', $allowedFileTypes);
             }
         }
-        $this->xpdo->log(
-            modX::LOG_LEVEL_ERROR,
-            "\r\tmodMediaSource->checkFileType: final types
-            \$allowedFileTypes: " . print_r($allowedFileTypes, true)
-        );
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         if (!empty($allowedFileTypes) && !in_array($ext, $allowedFileTypes)) {
-            // $this->xpdo->log(
-            //     modX::LOG_LEVEL_ERROR,
-            //     "\r\tmodMediaSource->checkFileType: failing... file type not in array
-            //     \$allowedFileTypes: " . print_r($allowedFileTypes, true)
-            // );
             $this->addError('path', $this->xpdo->lexicon('file_err_ext_not_allowed', [
                 'ext' => $ext,
             ]));

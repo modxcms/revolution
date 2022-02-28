@@ -166,6 +166,10 @@ MODx.window.DuplicateElement = function(config) {
             ,name: 'static_file'
             ,id: 'modx-'+this.ident+'-static_file'
             ,anchor: '100%'
+        },{
+            xtype: 'hidden',
+            name: 'static',
+            value: true
         });
     }
 

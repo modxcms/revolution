@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element;
-
 
 use MODX\Revolution\Processors\Model\DuplicateProcessor;
 
@@ -22,10 +22,53 @@ use MODX\Revolution\Processors\Model\DuplicateProcessor;
  */
 class Duplicate extends DuplicateProcessor
 {
+    public $hasStaticFile = false;
+
+    public function initialize()
+    {
+        // Intitializing parent first, as we need the Element object created before moving forward
+        if (parent::initialize() === true) {
+            return $this->newObject->setupElement($this);
+        }
+    }
+
+    /**
+     * Validate the form
+     *
+     * @return boolean
+     */
+    public function beforeSave()
+    {
+        $name = $this->getProperty($this->nameField);
+
+        // verify element with that name does not already exist
+        if ($this->alreadyExists($name)) {
+            $this->addFieldError($this->nameField, $this->modx->lexicon($this->objectType . '_err_ae', [
+                'name' => $name,
+            ]));
+        }
+
+        if ($this->hasStaticFile) {
+            $newFile = $this->getProperty('static_file');
+            if (!empty($newFile)) {
+                $this->newObject->set('static_file', $newFile);
+            }
+            $this->newObject->staticFileAbsolutePath = $this->newObject->getSourceFile();
+
+            // Check writability of file and file path (also checks for allowable file extension)
+            $fileValidated = $this->newObject->validateStaticFile($this);
+
+            if ($fileValidated === true) {
+                $this->newObject->staticIsWritable = true;
+            }
+        }
+        return !$this->hasErrors();
+    }
+
     public function cleanup()
     {
         $fields = $this->newObject->get(['id', 'name', 'description', 'category', 'locked']);
-        $fields['redirect'] = (boolean)$this->getProperty('redirect', false);
+        $fields['redirect'] = (bool)$this->getProperty('redirect', false);
 
         return $this->success('', $fields);
     }

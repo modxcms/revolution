@@ -88,25 +88,15 @@ abstract class Create extends CreateProcessor
         $this->validateElement();
 
         if ($this->hasStaticFile) {
-            // For new elements, only need to continue static processing if content is present
-            // if ($this->object->get('content') !== '') {
             $this->object->staticFileAbsolutePath = $this->object->getSourceFile();
 
             // Check writability of file and file path (also checks for allowable file extension)
-            $fileValidated = $this->object->validateStaticFile();
-            if ($fileValidated !== true) {
-                if (array_key_exists('msgData', $fileValidated)) {
-                    $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey'], $fileValidated['msgData']));
-                } else {
-                    $this->addFieldError('static_file', $this->modx->lexicon($fileValidated['msgLexKey']));
-                }
-                return false;
-            } else {
+            $fileValidated = $this->object->validateStaticFile($this);
+
+            if ($fileValidated === true) {
                 $this->object->staticIsWritable = true;
             }
-            // }
         }
-        // end has static file
         return !$this->hasErrors();
     }
 
