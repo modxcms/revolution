@@ -53,3 +53,5 @@ $_lang['system_setting_update_xtype_success'] = 'Ändrade xtype för systeminst�
 $_lang['system_setting_update_xtype_failure'] = 'Kunde inte ändra xtype för systeminställningen `[[+key]]` från `[[+old_xtype]]` till `[[+new_xtype]]`.';
 $_lang['system_setting_update_success'] = 'Systeminställningen `[[+key]]` uppdaterades.';
 $_lang['system_setting_update_failed'] = 'Systeminställningen `[[+key]]` kunde inte uppdateras.';
+$_lang['system_setting_rename_key_success'] = 'Successfully renamed the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';
+$_lang['system_setting_rename_key_failure'] = 'Failed to rename the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';

@@ -399,7 +399,7 @@ class GetNodes extends Processor
                 }
             }
 
-            $cc = ($category->get('elementCount') > 0) ? ' (' . $category->get('elementCount') . ')' : '';
+            $cc = ($category->get('elementCount') > 0) ? ' [' . $category->get('elementCount') . ']' : '';
             $nodes[] = [
                 'text' => strip_tags($category->get('category')) . $cc,
                 'id' => 'n_' . $map[0] . '_category_' . ($category->get('id') != null ? $category->get('id') : 0),
@@ -623,7 +623,7 @@ class GetNodes extends Processor
                 }
             }
 
-            $cc = $elCount > 0 ? ' (' . $elCount . ')' : '';
+            $cc = $elCount > 0 ? ' [' . $elCount . ']' : '';
 
             $nodes[] = [
                 'text' => strip_tags($category->get('category')) . $cc,

@@ -103,9 +103,7 @@ class modMenu extends modAccessibleObject
                     strtoupper($code)
                 ),
                 'parent' => 'language',
-                'action' => 'language',
-                'params' => '&switch=' . $code,
-                'namespace' => 'core',
+                'handler' => 'MODx.switchLanguage("' . $code . '"); return false;',
                 'permissions' => ''
             ];
         }

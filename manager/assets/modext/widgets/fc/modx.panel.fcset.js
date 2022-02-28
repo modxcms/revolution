@@ -240,21 +240,25 @@ MODx.grid.FCSetFields = function(config) {
         ,fields: ['id','action','name','tab','tab_rank','other','rank','visible','label','default_value']
         ,autoHeight: true
         ,grouping: true
-        ,groupBy: 'tab'
+        ,groupBy: 'tab_rank'
         ,plugins: [this.vcb]
         ,stateful: false
         ,remoteSort: false
         ,sortBy: 'rank'
         ,sortDir: 'ASC'
         ,hideGroupedColumn: true
-        ,groupTextTpl: '{group} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('fields')+'" : "'+_('field')+'"]})'
+        ,groupTextTpl: '{[values.rs[0].data.tab]} ({[values.rs.length]} {[values.rs.length > 1 ? "'+_('fields')+'" : "'+_('field')+'"]})'
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
             ,width: 200
         },{
-            header: _('region')
+            header: _('region')+' ('+_('tab_id')+')'
             ,dataIndex: 'tab'
+            ,width: 100
+        },{
+            header: _('tab_rank')
+            ,dataIndex: 'tab_rank'
             ,width: 100
         },this.vcb,{
             header: _('label')
@@ -310,7 +314,7 @@ MODx.grid.FCSetTabs = function(config) {
         ,plugins: [this.vcb]
         ,stateful: false
         ,columns: [{
-            header: _('tab_id')
+            header: _('region')+' ('+_('tab_id')+')'
             ,dataIndex: 'name'
             ,width: 100
         },this.vcb,{
@@ -433,7 +437,7 @@ MODx.grid.FCSetTVs = function(config) {
             ,dataIndex: 'default_text'
             ,editable: false
         },{
-            header: _('region')
+            header: _('region')+' ('+_('tab_id')+')'
             ,dataIndex: 'tab'
             ,width: 100
             ,editor: { xtype: 'textfield' }
@@ -486,7 +490,7 @@ MODx.window.AddTabToSet = function(config) {
         },{
             xtype: 'textfield'
             ,name: 'name'
-            ,fieldLabel: _('tab_id')
+            ,fieldLabel: _('region')+' ('+_('tab_id')+')'
             ,id: 'modx-fcatab-id'
             ,allowBlank: false
             ,anchor: '100%'

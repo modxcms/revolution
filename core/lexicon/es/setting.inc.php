@@ -381,11 +381,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'La contraseña utilizada para autentica
 $_lang['setting_mail_smtp_port'] = 'Puerto de SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Configura el puerto predeterminado del servidor de SMTP.';
 
-$_lang['setting_mail_smtp_prefix'] = 'Prefijo de Conexión de SMTP';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Configura el prefijo de conexión SMTP. Las opciones son: "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'Un Solo Receptor de SMTP';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Provee la habilidad de que el campo "Destino" procese emails de individualmente, en lugar de enviar todos a la vez (correo colectivo).';

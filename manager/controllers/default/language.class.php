@@ -22,9 +22,16 @@ class LanguageManagerController extends modParsedManagerController
             return;
         }
 
+        $targetProperties = [];
+        foreach ($scriptProperties as $key => $value) {
+            if (strpos($key, 'target_') === 0) {
+                $key = substr($key, strlen('target_'));
+                $targetProperties[$key] = $value;
+            }
+        }
         $_SESSION['manager_language'] = $targetLanguage;
 
-        $this->modx->sendRedirect(MODX_MANAGER_URL);
+        $this->modx->sendRedirect(MODX_MANAGER_URL . (($targetProperties) ? '?' . http_build_query($targetProperties) : ''));
     }
 
     public function getPageTitle()

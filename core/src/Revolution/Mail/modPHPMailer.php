@@ -110,7 +110,7 @@ class modPHPMailer extends modMail
             case modMail::MAIL_SMTP_PORT :
                 $this->mailer->Port = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_PREFIX :
+            case modMail::MAIL_SMTP_SECURE :
                 $this->mailer->SMTPSecure = $this->attributes[$key];
                 break;
             case modMail::MAIL_SMTP_AUTOTLS :

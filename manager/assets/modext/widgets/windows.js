@@ -239,11 +239,14 @@ MODx.window.CreateCategory = function(config) {
     config = config || {};
     this.ident = config.ident || 'ccat'+Ext.id();
     Ext.applyIf(config,{
-        title: _('new_category')
+        title: _('category_create')
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'Element/Category/Create'
         ,fields: [{
+            xtype: 'modx-description'
+            ,html: _('category_create_desc')
+        },{
             fieldLabel: _('name')
             ,name: 'category'
             ,id: 'modx-'+this.ident+'-category'

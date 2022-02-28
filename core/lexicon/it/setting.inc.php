@@ -381,11 +381,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'La password per autenticatsi con SMTP.'
 $_lang['setting_mail_smtp_port'] = 'Porta SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Imposta la porta di default del server SMTP.';
 
-$_lang['setting_mail_smtp_prefix'] = 'Prefisso Connessione SMTP';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Imposta il prefisso della connessione. Le Opzioni sono "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Sicuro';
+$_lang['setting_mail_smtp_secure_desc'] = 'Imposta il tipo di cifratura sicura SMTP. Le opzioni sono "", "ssl" o "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'TLS Automatico SMTP';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Se abilitare la crittografia TLS automaticamente se un server la supporta, anche se "Crittografia SMTP" non è impostata a "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Indica se abilitare automaticamente la crittografia TLS se un server lo supporta, anche se "SMTP Sicuro" non è impostato su "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Invio Singolo A:';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Abilita l\'invio selettivo ai singoli destinatari "A:" delle mails, invece di inviare all\'intero elenco A: dei destinatari.';

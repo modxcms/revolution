@@ -386,11 +386,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'كلمة المرور للمصادقة 
 $_lang['setting_mail_smtp_port'] = 'منفذ SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'ضبط منفذ المخدم SMTP الافتراضي.';
 
-$_lang['setting_mail_smtp_prefix'] = 'بادئة اتصال SMTP';
-$_lang['setting_mail_smtp_prefix_desc'] = 'ضبط بادئة الاتصال. الخيارات هي ""،"ssl" أو "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
 $_lang['setting_mail_smtp_single_to_desc'] = 'يوفر قدرة الحصول على معالجة الحقل TO لرسائل البريد الإلكتروني المستقلة، بدلا من الإرسال إلى كل العناوين TO.';
