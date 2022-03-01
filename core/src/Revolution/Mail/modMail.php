@@ -112,9 +112,9 @@ abstract class modMail
      */
     const MAIL_SMTP_PORT = 'mail_smtp_port';
     /**
-     * @const An option for setting the mail SMTP prefix
+     * @const An option for setting the mail SMTP secure encryption type
      */
-    const MAIL_SMTP_PREFIX = 'mail_smtp_prefix';
+    const MAIL_SMTP_SECURE = 'mail_smtp_secure';
     /**
      * @const An option for setting the mail SMTP AutoTLS option
      */
@@ -253,7 +253,7 @@ abstract class modMail
             $default[modMail::MAIL_SMTP_KEEPALIVE] = $this->modx->getOption('mail_smtp_keepalive', null, false);
             $default[modMail::MAIL_SMTP_PASS] = $this->modx->getOption('mail_smtp_pass', null, '');
             $default[modMail::MAIL_SMTP_PORT] = $this->modx->getOption('mail_smtp_port', null, 25);
-            $default[modMail::MAIL_SMTP_PREFIX] = $this->modx->getOption('mail_smtp_prefix', null, '');
+            $default[modMail::MAIL_SMTP_SECURE] = $this->modx->getOption('mail_smtp_secure', null, '');
             $default[modMail::MAIL_SMTP_AUTOTLS] = $this->modx->getOption('mail_smtp_autotls',null,true);
             $default[modMail::MAIL_SMTP_SINGLE_TO] = $this->modx->getOption('mail_smtp_single_to', null, false);
             $default[modMail::MAIL_SMTP_TIMEOUT] = $this->modx->getOption('mail_smtp_timeout', null, 10);

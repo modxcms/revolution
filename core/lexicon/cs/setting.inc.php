@@ -381,11 +381,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Heslo pro autentizaci k SMTP serveru.';
 $_lang['setting_mail_smtp_port'] = 'SMTP port';
 $_lang['setting_mail_smtp_port_desc'] = 'Nastavení výchozího SMTP portu.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP prefix připojení';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Nastavení prefixu připojení. Možnosti jsou "", "ssl" nebo "tls"';
+$_lang['setting_mail_smtp_secure'] = 'SMTP zabezpečené';
+$_lang['setting_mail_smtp_secure_desc'] = 'Nastaví typ zabezpečení SMTP. Možnosti jsou "", "ssl" nebo "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP automatické TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Automaticky povolit TLS šifrování, pokud jej server podporuje, i když "SMTP Encryption" není nastaveno na "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Automaticky povolit TLS šifrování, pokud jej server podporuje, i když "SMTP zabezpečené" není nastaveno na "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP jednotlivě';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Možnost odesílání e-mailových zpráv jednotlivě.';

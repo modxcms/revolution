@@ -93,7 +93,7 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                             }
                             var datestamps = Ext.select(".date_stamp", container);
                             datestamps.each(function (el) {
-                                el.dom.innerText = new Date(el.dom.innerText).format(MODx.config.manager_date_format);
+                                el.dom.innerText = new Date(el.dom.innerText).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
                             });
                         }, scope: this
                     }

@@ -35,3 +35,4 @@ include dirname(__DIR__) . '/common/3.0.0-non-index-field-length.php';
 include dirname(__DIR__) . '/common/3.0.0-template-preview.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-content-type-field.php';
 include dirname(__DIR__) . '/common/3.0.0-remove-logs-permission.php';
+include dirname(__DIR__) . '/common/3.0.0-update-smtp-system-settings.php';

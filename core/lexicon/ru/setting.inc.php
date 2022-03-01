@@ -119,7 +119,7 @@ $_lang['setting_automatic_alias'] = 'Автоматически генериро
 $_lang['setting_automatic_alias_desc'] = 'Выберите «Да» для автоматической генерации псевдонимов на базе заголовка ресурса при его сохранении.';
 
 $_lang['setting_automatic_template_assignment'] = 'Автоматическое присвоение шаблона';
-$_lang['setting_automatic_template_assignment_desc'] = 'Выберите, как шаблон будет присваиваться при создании нового ресурса. Опции включают: «system» (шаблон по умолчанию из системных настроек), «parent» (наследуется шаблон родительского ресурса), или «sibling» (наследуется наиболее используемый шаблон соседних ресурсов)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Выберите, как шаблон будет присваиваться при создании нового ресурса. Доступно: "system" (шаблон по умолчанию из системных настроек), "parent" (шаблон родительского ресурса), или "sibling" (наиболее используемый шаблон соседних ресурсов).';
 
 $_lang['setting_base_help_url'] = 'URL помощи';
 $_lang['setting_base_help_url_desc'] = 'URL для ссылки помощи в верхнем правом углу страниц системы управления.';
@@ -381,11 +381,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Пароль, используемый 
 $_lang['setting_mail_smtp_port'] = 'SMTP номер порта';
 $_lang['setting_mail_smtp_port_desc'] = 'Укажите порт SMTP сервера.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP префикс для соединений';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Префикс соединений. Доступные варианты: «», «ssl», «tls»';
+$_lang['setting_mail_smtp_secure'] = 'SMTPS';
+$_lang['setting_mail_smtp_secure_desc'] = 'Задает тип шифрования "SMTPS". Доступно: "", "ssl" или "tls".';
 
 $_lang['setting_mail_smtp_autotls'] = 'Авто TLS для SMTP';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Включать ли TLS-шифрование автоматически, даже если "шифрование SMTP" не установлено на "TLS". При условии что сервер поддерживает "шифрование SMTP".';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Включать ли TLS-шифрование автоматически, даже если "SMTPS" не установлено на "TLS". При условии, что сервер поддерживает "SMTPS".';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP посылать по одному';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Предоставляет возможность отправлять сообщения адресатам из поля «to» по одному, вместо разовой отправки на все адреса.';
