@@ -66,9 +66,10 @@ class modStaticElementTest extends MODxTestCase {
 
         $el->set('source', $source->get('id'));
         $el->set('static_file', 'snippets/modSnippetTest/modSnippetTest.snippet.php');
-
+        $el->getSource();
         self::assertTrue($el->isStatic());
         self::assertEquals(MODX_BASE_PATH . '_build/test/data/snippets/modSnippetTest/modSnippetTest.snippet.php', $el->getSourceFile($rc));
+
         $source->set('is_stream', false);
         $source->save();
 
