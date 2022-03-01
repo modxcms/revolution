@@ -82,7 +82,7 @@ abstract class Update extends UpdateProcessor
         }
 
         if ($this->hasStaticFile) {
-            $this->object->staticFileAbsolutePath = $this->object->getSourceFile();
+            $this->object->staticFileAbsolutePath = $this->object->getStaticFileAbsolutePath();
 
             // Check writability of file and file path (also checks for allowable file extension)
             $fileValidated = $this->object->validateStaticFile($this);

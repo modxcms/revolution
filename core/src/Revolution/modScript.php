@@ -200,7 +200,7 @@ class modScript extends modElement
         return $result;
     }
 
-    public function getFileContent(array $options = [])
+    public function getFileContent(array $options = []): string
     {
         $content = parent::getFileContent($options);
         if (strncmp($content, '<?', 2) == 0) {
@@ -217,7 +217,7 @@ class modScript extends modElement
         return $content;
     }
 
-    public function setFileContent($content, array $options = [])
+    public function setFileContent($content, array $options = []): bool
     {
         $content = "<?php\n{$content}";
 

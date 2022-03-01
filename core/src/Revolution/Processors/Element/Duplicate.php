@@ -53,7 +53,7 @@ class Duplicate extends DuplicateProcessor
             if (!empty($newFile)) {
                 $this->newObject->set('static_file', $newFile);
             }
-            $this->newObject->staticFileAbsolutePath = $this->newObject->getSourceFile();
+            $this->newObject->staticFileAbsolutePath = $this->newObject->getStaticFileAbsolutePath();
 
             // Check writability of file and file path (also checks for allowable file extension)
             $fileValidated = $this->newObject->validateStaticFile($this);

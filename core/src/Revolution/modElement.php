@@ -271,6 +271,11 @@ class modElement extends modAccessibleSimpleObject
 
             if ($staticContentChanged) {
                 if ($this->staticIsWritable) {
+                    // $this->xpdo->log(
+                    //     \xPDO::LOG_LEVEL_ERROR,
+                    //     "\n\tmodElement->save:
+                    //     About to attempt to write file... "
+                    // );
                     $fileSaved = $this->setFileContent($this->get('content'));
                 } else {
                     $this->setContent($this->getFileContent());
@@ -279,6 +284,11 @@ class modElement extends modAccessibleSimpleObject
         }
 
         if ($fileSaved || (!$staticSourceChanged && !$staticContentChanged)) {
+            // $this->xpdo->log(
+            //     \xPDO::LOG_LEVEL_ERROR,
+            //     "\n\tmodElement->save:
+            //     The file was saved or was already in place, moving on to save element... "
+            // );
             $elementSaved = parent::save($cacheFlag);
         }
 
@@ -658,7 +668,19 @@ class modElement extends modAccessibleSimpleObject
 
         // Cache the path calculation - unless provided otherwise
         $recalculate = $this->getOption('recalculate_source_file', $options, $this->staticSourceChanged());
+        // $this->xpdo->log(
+        //     \xPDO::LOG_LEVEL_ERROR,
+        //     "\n\tmodElement->getSourceFile:
+        //     \$recalculate? " . $recalculate
+        // );
         if (!empty($this->_sourceFile) && !$recalculate) {
+            // $this->xpdo->log(
+            //     \xPDO::LOG_LEVEL_ERROR,
+            //     "\n\tmodElement->getSourceFile:
+            //     \$this->_sourceFile: " . $this->_sourceFile . "
+            //     \$this->staticSourceChanged: " . $this->staticSourceChanged() . "
+            //     options: " . print_r($options, true)
+            // );
             return $this->_sourceFile;
         }
 
@@ -683,9 +705,18 @@ class modElement extends modAccessibleSimpleObject
                 if ($this->_source) {
                     if ($this->_source->get('is_stream')) {
                         // Return full file path for streaming sources
+                        // $this->xpdo->log(
+                        //     \xPDO::LOG_LEVEL_ERROR,
+                        //     "\n\tmodElement->getSourceFile: is stream"
+                        // );
                         $result = $this->_source->getBasePath() . $filename;
-                    } elseif ($this->_source->getMetaData($filename)) {
+                    } elseif ($this->_source->getFilesystem()->fileExists($filename)) {
                         // If we can find a file relative to the source, return just the relative path
+                        // $this->xpdo->log(
+                        //     \xPDO::LOG_LEVEL_ERROR,
+                        //     "\n\tmodElement->getSourceFile: is not stream
+                        //     file: " . $filename
+                        // );
                         $result = $filename;
                     }
                 } else {
@@ -699,7 +730,11 @@ class modElement extends modAccessibleSimpleObject
                 $result = $sourcePath . $filename;
             }
         }
-
+        // $this->xpdo->log(
+        //     \xPDO::LOG_LEVEL_ERROR,
+        //     "\n\tmodElement->getSourceFile:
+        //     \$result: " . $result
+        // );
         $this->_sourceFile = $result;
 
         return $result;
@@ -735,11 +770,16 @@ class modElement extends modAccessibleSimpleObject
      * @return bool|string The content or false if the content could not be retrieved.
      */
     // Tmp Note: Method also used by modScript, which extends this class
-    public function getFileContent(array $options = [])
+    public function getFileContent(array $options = []): string
     {
-        $content = false;
+        // $content = false;
+        $content = '';
         $file = $this->get('static_file');
-
+        // $this->xpdo->log(
+        //     \xPDO::LOG_LEVEL_ERROR,
+        //     "\n\tmodElement->getFileContent: starting...
+        //     file: " . $file
+        // );
         if ($this->isStatic() && !empty($file)) {
             $sourceId = (int)$this->get('source');
             if ($sourceId === 0) {
@@ -754,8 +794,25 @@ class modElement extends modAccessibleSimpleObject
             }
             $sourceFile = $this->getSourceFile($options);
 
-            if (!$this->ignoreMediaSource && $file = $this->_source->getObjectContents($sourceFile)) {
-                $content = $file['content'];
+            // $this->xpdo->log(
+            //     \xPDO::LOG_LEVEL_ERROR,
+            //     "\n\tmodElement->getFileContent:
+            //     sourceFile: " . $sourceFile
+            // );
+
+            if (!$this->ignoreMediaSource) {
+                if ($this->_source->get('is_stream')) {
+                    $sourceBase = $this->_source->getBasePath();
+                    $sourceFile = str_replace($sourceBase, '', $sourceFile);
+                }
+                // $this->xpdo->log(
+                //     \xPDO::LOG_LEVEL_ERROR,
+                //     "\n\tmodElement->getFileContent: getting source file via MS...
+                //     sourceFile: " . $sourceFile
+                // );
+                if ($file = $this->_source->getObjectContents($sourceFile)) {
+                    $content = $file['content'];
+                }
             } else {
                 $this->staticFileAbsolutePath = $sourceFile;
                 $content = is_readable($sourceFile) ? file_get_contents($sourceFile) : '' ;
@@ -772,7 +829,7 @@ class modElement extends modAccessibleSimpleObject
      *
      * @return bool
      */
-    public function setFileContent($content, array $options = [])
+    public function setFileContent($content, array $options = []): bool
     {
         $set = false;
         if ($this->isStatic()) {
@@ -780,12 +837,29 @@ class modElement extends modAccessibleSimpleObject
                 $this->getSource();
             }
             $sourceFile = $this->getStaticFileName();
+            // $this->xpdo->log(
+            //     \xPDO::LOG_LEVEL_ERROR,
+            //     "\n\tmodElement->setFileContent: starting...
+            //     sourceFile: " . $sourceFile
+            // );
+            // When in update mode, this will ensure the file is copied to its new location if its source gets changed
             $recreateStaticFile = $this->staticSourceChanged() && !empty($this->staticFileAbsolutePath) && !file_exists($this->staticFileAbsolutePath);
 
             if (!$this->ignoreMediaSource) {
                 if ($this->isNew() || $recreateStaticFile) {
+                    if (!$recreateStaticFile && file_exists($this->staticFileAbsolutePath)) {
+                        // Returns true to skip attempting file creation when the file is already in place
+                        return true;
+                    }
                     $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
                     $file = array_pop($path);
+                    // $this->xpdo->log(
+                    //     \xPDO::LOG_LEVEL_ERROR,
+                    //     "\n\tmodElement->setFileContent: create new...
+                    //     file: " . $file . "
+                    //     file exists? " . file_exists($this->staticFileAbsolutePath) . "
+                    //     path: " . implode(DIRECTORY_SEPARATOR, $path)
+                    // );
                     $set = (bool)$this->_source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, $content);
                 } else {
                     $set = (bool)$this->_source->updateObject($sourceFile, $content);
@@ -810,7 +884,6 @@ class modElement extends modAccessibleSimpleObject
                 }
             }
         }
-
         return $set;
     }
 
@@ -1270,25 +1343,6 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Return if the static source is mutable.
-     *
-     * @return boolean True if the source file is mutable.
-     */
-    public function isStaticSourceMutable()
-    {
-        $isMutable = false;
-        $sourceFile = $this->getStaticFileName();
-        if ($sourceFile && $source = $this->getSource()) {
-            if (!$isMutable = (bool)$source->getMetaData($sourceFile)) {
-                $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                $file = array_pop($path);
-                $isMutable = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, '');
-            }
-        }
-        return $isMutable;
-    }
-
-    /**
      * Ensure the static source cannot browse the protected configuration directory
      *
      * @return boolean True if is a valid source path
@@ -1410,6 +1464,7 @@ class modElement extends modAccessibleSimpleObject
                 ]);
             }
         }
+        // $this->elementIsSetup = true;
         return true;
     }
 
@@ -1421,6 +1476,35 @@ class modElement extends modAccessibleSimpleObject
         foreach ($config as $property) {
             $this->_source->$property = $this->$property;
         }
+    }
+
+    /**
+     * Get the full server path to a file, taking into account whether the file
+     * is assigned to a media source and, if so, whether that source is streaming
+     */
+    public function getStaticFileAbsolutePath(): string
+    {
+        $path = '';
+        // $this->xpdo->log(
+        //     \xPDO::LOG_LEVEL_ERROR,
+        //     "\n\tmodElement->getStaticFileAbsolutePath:
+        //     ignoreMediaSource? " . $this->ignoreMediaSource . "
+        //     source name: " . $this->_source->get('name') . "
+        //     stream? " . $this->_source->get('is_stream')
+        // );
+        if ($this->_source || $this->getSource()) {
+            // $this->xpdo->log(
+            //     \xPDO::LOG_LEVEL_ERROR,
+            //     "\n\tmodElement->getStaticFileAbsolutePath:
+            //     source name: " . $this->_source->get('name')
+            // );
+            if (!$this->ignoreMediaSource && !$this->_source->get('is_stream')) {
+                $path = $this->_source->getBasePath() . $this->getStaticFileName();
+            } else {
+                $path = $this->getSourceFile();
+            }
+        }
+        return $path;
     }
 
     /**
@@ -1467,8 +1551,20 @@ class modElement extends modAccessibleSimpleObject
                 $fileName = array_pop($fileFragments);
                 $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
                 $fileDirectory = implode(DIRECTORY_SEPARATOR, $fileFragments);
-
+                // $this->xpdo->log(
+                //     \xPDO::LOG_LEVEL_ERROR,
+                //     "\n\tmodElement->validateStaticFile:
+                //     ignoreMediaSource? " . $this->ignoreMediaSource . "
+                //     staticFileAbsolutePath: " . $this->staticFileAbsolutePath . "
+                //     is stream: " . $this->_source->get('is_stream') . "
+                //     file: " . $file . "
+                //     fileDirectory: " . $fileDirectory
+                // );
                 if (!$this->staticPathIsWritable($fileDirectory)) {
+                    // $this->xpdo->log(
+                    //     \xPDO::LOG_LEVEL_ERROR,
+                    //     "\n\tmodElement->validateStaticFile: path not writable"
+                    // );
                     $processor->addFieldError('static_file', $this->xpdo->lexicon('file_folder_err_perms'));
                 }
                 // Exclude certain file types based on Element type
