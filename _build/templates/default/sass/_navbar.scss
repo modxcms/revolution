@@ -268,19 +268,6 @@
       }
     }
 
-    & li:hover ul ul,
-    & ul li:hover ul ul,
-    & ul ul li:hover ul ul {
-      display: none;
-    }
-
-    & li:hover ul,
-    & ul li:hover ul,
-    & ul ul li:hover ul,
-    & ul ul ul li:hover ul {
-      display: block;
-    }
-
     &.active {
       opacity: 1;
       visibility: visible;
@@ -291,17 +278,33 @@
       box-shadow: $boxShadowBig;
       border-radius: $borderRadius;
       background: $white;
-      display: none;
       list-style: none;
       position: absolute;
-      left: 295px;
-      top: 0;
       z-index: 24;
-    }
-    &.modx-subnav-usernav {
-      .modx-subsubnav {
-        top: initial;
-        bottom: 0;
+      &-arrow {
+        border: 8px solid transparent;
+        border-right-color: #FFF;
+        content: " ";
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+        z-index: 10010;
+        display: none;
+      }
+      &.active {
+        + .modx-subsubnav-arrow {
+          display: block;
+        }
+      }
+      @include grid-media($gtDesktop) {
+        opacity: 0;
+        visibility: hidden;
+        &.active {
+          opacity: 1;
+          visibility: visible;
+        }
       }
     }
 
@@ -318,8 +321,9 @@
 
   // custom styles for language menu
   #language .modx-subsubnav {
-    max-height: 86vh;
+    max-height: calc(100vh - 12px);
     overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -400,7 +404,6 @@
   #modx-footer {
     .modx-subnav {
       min-width: 300px;
-      top: 60px !important;
 
       .description {
         display: none;
@@ -437,9 +440,11 @@
       display: none;
     }
 
-    .modx-subnav-wrapper {
-      max-height: 400px;
+    // overflow for long subsubnav
+    .modx-subnav {
+      max-height: calc(100vh - 109px);
       overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 }
