@@ -23020,12 +23020,6 @@ ul.x-tab-strip-bottom .x-tab-left {
 #modx-footer .modx-subnav li a:hover .description {
     color: #707070;
 }
-#modx-footer .modx-subnav li:hover ul ul, #modx-footer .modx-subnav ul li:hover ul ul, #modx-footer .modx-subnav ul ul li:hover ul ul {
-    display: none;
-}
-#modx-footer .modx-subnav li:hover ul, #modx-footer .modx-subnav ul li:hover ul, #modx-footer .modx-subnav ul ul li:hover ul, #modx-footer .modx-subnav ul ul ul li:hover ul {
-    display: block;
-}
 #modx-footer .modx-subnav.active {
     opacity: 1;
     visibility: visible;
@@ -23035,16 +23029,34 @@ ul.x-tab-strip-bottom .x-tab-left {
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     background: #FFF;
-    display: none;
     list-style: none;
     position: absolute;
-    left: 295px;
-    top: 0;
     z-index: 24;
 }
-#modx-footer .modx-subnav.modx-subnav-usernav .modx-subsubnav {
-    top: initial;
-    bottom: 0;
+#modx-footer .modx-subnav .modx-subsubnav-arrow {
+    border: 8px solid transparent;
+    border-right-color: #FFF;
+    content: " ";
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 10010;
+    display: none;
+}
+#modx-footer .modx-subnav .modx-subsubnav.active + .modx-subsubnav-arrow {
+    display: block;
+}
+@media screen and (min-width: 961px) {
+    #modx-footer .modx-subnav .modx-subsubnav {
+        opacity: 0;
+        visibility: hidden;
+    }
+    #modx-footer .modx-subnav .modx-subsubnav.active {
+        opacity: 1;
+        visibility: visible;
+    }
 }
 #modx-footer .modx-subnav-arrow {
     right: 100%;
@@ -23056,8 +23068,9 @@ ul.x-tab-strip-bottom .x-tab-left {
     margin-top: -6px;
 }
 #modx-footer #language .modx-subsubnav {
-    max-height: 86vh;
+    max-height: calc(100vh - 12px);
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 @media screen and (max-width: 960px) {
@@ -23121,7 +23134,6 @@ ul.x-tab-strip-bottom .x-tab-left {
 
     #modx-footer .modx-subnav {
         min-width: 300px;
-        top: 60px !important;
     }
     #modx-footer .modx-subnav .description {
         display: none;
@@ -23150,9 +23162,10 @@ ul.x-tab-strip-bottom .x-tab-left {
     #modx-footer .modx-subnav-arrow {
         display: none;
     }
-    #modx-footer .modx-subnav-wrapper {
-        max-height: 400px;
+    #modx-footer .modx-subnav {
+        max-height: calc(100vh - 109px);
         overflow-y: auto;
+        overflow-x: hidden;
     }
 }
 @media (max-height: 520px) {
