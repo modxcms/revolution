@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -27,7 +28,8 @@ use MODX\Revolution\Sources\modMediaSource;
  * @group Element
  * @group modTag
  */
-class modStaticElementTest extends MODxTestCase {
+class modStaticElementTest extends MODxTestCase
+{
     /**
      * @before
      * @throws \xPDO\xPDOException
@@ -46,7 +48,7 @@ class modStaticElementTest extends MODxTestCase {
         $el = $this->modx->newObject(modSnippet::class);
         $el->fromArray([
             'static' => false,
-            'static_file' => MODX_BASE_PATH.'_build/test/data/snippets/modSnippetTest/modSnippetTest.snippet.php'
+            'static_file' => MODX_BASE_PATH . '_build/test/data/snippets/modSnippetTest/modSnippetTest.snippet.php'
         ]);
 
         self::assertFalse($el->isStatic());
@@ -67,7 +69,7 @@ class modStaticElementTest extends MODxTestCase {
         $el->set('source', $source->get('id'));
         $el->set('static_file', 'snippets/modSnippetTest/modSnippetTest.snippet.php');
         $el->setSource($source);
-        
+
         self::assertTrue($el->isStatic());
         self::assertEquals(MODX_BASE_PATH . '_build/test/data/snippets/modSnippetTest/modSnippetTest.snippet.php', $el->getSourceFile($rc));
 
