@@ -49,6 +49,7 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'Security/Access/Policy/Template/GetList'
+            ,query: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
         }
         ,fields: ['id','name','description','description_trans','template_group','template_group_name','total_permissions','policy_count','cls']
         ,paging: true
@@ -112,22 +113,37 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             }]
         },'->',{
             xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-policy-template-search'
+            ,name: 'query'
+            ,id: 'modx-policy-template-query'
             ,cls: 'x-form-filter'
             ,emptyText: _('search')
+            ,value: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.searchPolicyTemplate(cb, rec, ri);
+                    }
+                    ,scope: this
+                }
+                ,'afterrender': {
+                    fn: function (cb) {
+                        if (MODx.request.query) {
+                            this.searchPolicyTemplate(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function (cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -297,18 +313,21 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
         });
     }
 
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+    ,searchPolicyTemplate: function(cb, newValue, oldValue) {
+        var nv = Ext.isEmpty(newValue) || Ext.isObject(newValue) ? cb.getValue() : newValue;
+        var s = this.getStore();
+        s.baseParams.query = nv;
+        s.load();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
 
     ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Security/Access/Policy/Template/GetList'
-        };
-        Ext.getCmp('modx-policy-template-search').reset();
+        var s = this.getStore();
+        s.baseParams.query = '';
+        Ext.getCmp('modx-policy-template-query').setValue('');
+        s.load();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 });
