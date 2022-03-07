@@ -21,6 +21,7 @@ MODx.panel.Plugin = function(config) {
         ,plugin: ''
         ,bodyStyle: ''
         ,allowDrop: false
+        ,previousFileSource: config.record.source != null ? config.record.source : MODx.config.default_media_source
         ,items: [{
             html: _('plugin_new')
             ,id: 'modx-plugin-header'
@@ -101,33 +102,7 @@ MODx.panel.Plugin = function(config) {
                         ,forId: 'modx-plugin-description'
                         ,html: _('plugin_desc_description')
                         ,cls: 'desc-under'
-                    },{
-                        xtype: 'modx-combo-browser'
-                        ,browserEl: 'modx-browser'
-                        ,fieldLabel: _('static_file')
-                        ,description: MODx.expandHelp ? '' : _('static_file_msg')
-                        ,name: 'static_file'
-                        ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
-                        ,openTo: config.record.openTo || ''
-                        ,id: 'modx-plugin-static-file'
-                        ,triggerClass: 'x-form-code-trigger'
-                        ,anchor: '100%'
-                        ,maxLength: 255
-                        ,value: config.record.static_file || ''
-                        ,hidden: !config.record['static']
-                        ,hideMode: 'offsets'
-                        ,validator: function(value){
-                            if (Ext.getCmp('modx-plugin-static').getValue() === true) {
-                                if (Ext.util.Format.trim(value) != '') {
-                                    return true;
-                                } else {
-                                    return _('static_file_ns');
-                                }
-                            }
-
-                            return true;
-                        }
-                    },{
+                    },this.getStaticFileField('plugin', config.record),{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-plugin-static-file'
                         ,id: 'modx-plugin-static-file-help'
@@ -238,8 +213,10 @@ MODx.panel.Plugin = function(config) {
                         }
                         ,listeners: {
                             select: {
-                                fn: this.changeSource
-                                ,scope: this
+                                fn: function(cmp, record, selectedIndex) {
+                                    this.onChangeStaticSource(cmp, 'plugin');
+                                },
+                                scope: this
                             }
                         }
                     },{
@@ -337,16 +314,6 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
         this.clearDirty();
         MODx.fireEvent('ready');
         this.initialized = true;
-    }
-
-    /**
-     * Set the browser window "media source" source
-     */
-    ,changeSource: function() {
-        var browser = Ext.getCmp('modx-plugin-static-file')
-            ,source = Ext.getCmp('modx-plugin-static-source').getValue();
-
-        browser.config.source = source;
     }
 
     ,beforeSubmit: function(o) {

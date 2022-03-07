@@ -22,6 +22,7 @@ MODx.panel.Template = function(config) {
         ,class_key: 'modTemplate'
         ,template: ''
         ,bodyStyle: ''
+        ,previousFileSource: config.record.source != null ? config.record.source : MODx.config.default_media_source
         ,items: [{
             html: _('template_new')
             ,id: 'modx-template-header'
@@ -102,32 +103,7 @@ MODx.panel.Template = function(config) {
                         ,forId: 'modx-template-description'
                         ,html: _('template_desc_description')
                         ,cls: 'desc-under'
-                    },{
-                        xtype: 'modx-combo-browser'
-                        ,browserEl: 'modx-browser'
-                        ,fieldLabel: _('static_file')
-                        ,description: MODx.expandHelp ? '' : _('static_file_msg')
-                        ,name: 'static_file'
-                        ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
-                        ,openTo: config.record.openTo || ''
-                        ,id: 'modx-template-static-file'
-                        ,anchor: '100%'
-                        ,maxLength: 255
-                        ,value: config.record.static_file || ''
-                        ,hidden: !config.record['static']
-                        ,hideMode: 'offsets'
-                        ,validator: function(value){
-                            if (Ext.getCmp('modx-template-static').getValue() === true) {
-                                if (Ext.util.Format.trim(value) != '') {
-                                    return true;
-                                } else {
-                                    return _('static_file_ns');
-                                }
-                            }
-
-                            return true;
-                        }
-                    },{
+                    },this.getStaticFileField('template', config.record),{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
                         ,forId: 'modx-template-static-file'
                         ,id: 'modx-template-static-file-help'
@@ -138,21 +114,7 @@ MODx.panel.Template = function(config) {
                     },{
                         html: MODx.onTempFormRender
                         ,border: false
-                    },{
-                        xtype: 'modx-combo-browser',
-                        browserEl: 'modx-browser',
-                        fieldLabel: _('template_preview'),
-                        description: MODx.expandHelp ? '' : _('template_preview_description'),
-                        triggerClass: 'x-form-image-trigger',
-                        name: 'preview_file',
-                        source: null !== config.record.source ? config.record.source : MODx.config.default_media_source,
-                        openTo: config.record.openTo || '',
-                        allowedFileTypes: 'jpg,jpeg,png,gif,bmp',
-                        id: 'modx-template-preview-file',
-                        anchor: '100%',
-                        maxLength: 255,
-                        value: config.record.preview_file || ''
-                    }, {
+                    },this.getTemplatePreviewImageField(config.record), {
                         xtype: MODx.expandHelp ? 'label' : 'hidden',
                         forId: 'modx-template-preview-file',
                         id: 'modx-template-preview-file-help',
@@ -245,7 +207,9 @@ MODx.panel.Template = function(config) {
                         },
                         listeners: {
                             select: {
-                                fn: this.changeSource,
+                                fn: function(cmp, record, selectedIndex) {
+                                    this.onChangeStaticSource(cmp, 'template');
+                                },
                                 scope: this
                             }
                         }
@@ -347,19 +311,6 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
         this.initialized = true;
         MODx.fireEvent('ready');
         return true;
-    },
-    changeSource: function() {
-        var staticFile = Ext.getCmp('modx-template-static-file'),
-            previewFile = Ext.getCmp('modx-template-preview-file'),
-            source = Ext.getCmp('modx-template-static-source').getValue();
-
-        if (staticFile) {
-            staticFile.config.source = source;
-        }
-
-        if (previewFile) {
-            previewFile.config.source = source;
-        }
     }
     ,beforeSubmit: function(o) {
         var g = Ext.getCmp('modx-grid-template-tv');
