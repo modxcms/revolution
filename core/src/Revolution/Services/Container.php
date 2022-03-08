@@ -1,9 +1,8 @@
 <?php
 
-
 namespace MODX\Revolution\Services;
 
-
+use Exception;
 use Psr\Container\ContainerInterface;
 
 class Container extends \Pimple\Container implements ContainerInterface
@@ -28,7 +27,7 @@ class Container extends \Pimple\Container implements ContainerInterface
         if ($this->has($id)) {
             try {
                 return $this->offsetGet($id);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw new ContainerException($e->getMessage(), $e->getCode(), $e);
             }
         }
