@@ -527,6 +527,52 @@ MODx.util.getHeaderBreadCrumbs = function(header, trail) {
     };
 };
 
+/* Utility functions used for dynamic alteration of URLs */
+MODx.util.url = {
+    /**
+     * @property {Function} setParams - Sets or replaces url parameters passed via the filterData object
+     *
+     * @param {Object} filterData - A set of filter parameter name/value pairs to be added to (or changed in) the URL
+     * @param {Object} stateData - Optional data to be used in subsequent url processing
+     */
+    setParams: function(filterData, stateData = {}){
+        if (typeof window.history.replaceState !== 'undefined') {
+            const url = new URL(window.location.href),
+                  params = url.searchParams
+            ;
+            Object.entries(filterData).forEach(([param, value]) => {
+                params.set(param, value);
+            });
+            let newUrl = url.toString().replace(/%2F/g, '/');
+            window.history.replaceState(stateData, document.title, newUrl);
+        }
+    },
+    /**
+     * @property {Function} clearParams - Clears all dynamically set url parameters,
+     * while preserving those in a pre-defined list.
+     *
+     * @param {Object} stateData - Optional data to be used in subsequent url processing
+     */
+    clearParams: function(stateData = {}) {
+        if (typeof window.history.replaceState !== 'undefined') {
+            const preserve = ['a', 'id', 'key'],
+                  preserved = [],
+                  urlParts = window.location.href.split('?'),
+                  params = urlParts[1].split('&')
+            ;
+            params.forEach(param => {
+                const paramName = param.split('=')[0];
+                if (preserve.includes(paramName)) {
+                    preserved.push(param);
+                }
+            });
+            let newUrl = new URL(`${urlParts[0]}?${preserved.join('&')}`);
+            newUrl = newUrl.toString().replace(/%2F/g, '/');
+            window.history.replaceState(stateData, document.title, newUrl);
+        }
+    }
+}
+
 Ext.util.Format.trimCommas = function(s) {
     s = s.replace(',,',',');
     var len = s.length;
