@@ -17,10 +17,24 @@ MODx.grid.UserGroupSource = function(config) {
         ,baseParams: {
             action: 'Security/Access/UserGroup/Source/GetList'
             ,usergroup: config.usergroup
+            ,source: MODx.request.source || null
+            ,policy: MODx.request.policy || null
         }
         ,paging: true
         ,hideMode: 'offsets'
-        ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','permissions','menu']
+        ,fields: [
+            'id',
+            'target',
+            'name',
+            'principal',
+            'authority',
+            'authority_name',
+            'policy',
+            'policy_name',
+            'context_key',
+            'permissions',
+            'menu'
+        ]
         ,grouping: true
         ,groupBy: 'authority_name'
         ,singleText: _('policy')
@@ -68,30 +82,53 @@ MODx.grid.UserGroupSource = function(config) {
             ,handler: this.createAcl
         },'->',{
             xtype: 'modx-combo-source'
-            ,id: 'modx-ugsource-source-filter'
+            ,itemId: 'filter-source'
             ,emptyText: _('filter_by_source')
             ,width: 200
             ,allowBlank: true
+            ,value: MODx.request.source || null
             ,listeners: {
-                'select': {fn:this.filterSource,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'source');
+                    },
+                    scope: this
+                }
             }
         },{
             xtype: 'modx-combo-policy'
-            ,id: 'modx-ugsource-policy-filter'
+            ,itemId: 'filter-policy'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
+            ,value: MODx.request.policy || null
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
                 ,group: 'MediaSource'
             }
             ,listeners: {
-                'select': {fn:this.filterPolicy,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'policy');
+                    },
+                    scope: this
+                }
             }
         },{
             text: _('filter_clear')
-            ,id: 'modx-ugsource-clear-filter'
-            ,handler: this.clearFilter
-            ,scope: this
+            ,itemId: 'filter-clear'
+            ,listeners: {
+                click: {
+                    fn: function() {
+                        this.clearGridFilters('filter-source, filter-policy');
+                    },
+                    scope: this
+                },
+                mouseout: {
+                    fn: function(evt) {
+                        this.removeClass('x-btn-focus');
+                    }
+                }
+            }
         }]
     });
     MODx.grid.UserGroupSource.superclass.constructor.call(this,config);
@@ -100,24 +137,6 @@ MODx.grid.UserGroupSource = function(config) {
 Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
-
-    ,filterSource: function(cb,rec,ri) {
-        this.getStore().baseParams['source'] = rec.data['id'];
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,filterPolicy: function(cb,rec,ri) {
-        this.getStore().baseParams['policy'] = rec.data['id'];
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearFilter: function(btn,e) {
-        Ext.getCmp('modx-ugsource-source-filter').setValue('');
-        this.getStore().baseParams['source'] = '';
-        Ext.getCmp('modx-ugsource-policy-filter').setValue('');
-        this.getStore().baseParams['policy'] = '';
-        this.getBottomToolbar().changePage(1);
-    }
 
     ,createAcl: function(itm,e) {
         var r = {
