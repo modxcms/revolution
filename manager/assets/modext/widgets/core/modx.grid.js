@@ -767,23 +767,27 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     ,applyGridFilter: function(cmp, param = 'query') {
         const filterValue = cmp.getValue(),
               store = this.getStore(),
-              urlParams = {
-                  [param]: filterValue
-              }
+              urlParams = {}
         ;
         let tabPanel = this.ownerCt.ownerCt,
             hasParentTabPanel = false,
             parentTabItems,
             activeParentTabIdx
         ;
+        if (!Ext.isEmpty(filterValue)) {
+            urlParams[param] = filterValue;
+        }
         if (param == 'ns') {
             store.baseParams['namespace'] = filterValue;
         } else {
             store.baseParams[param] = filterValue;
         }
         /*
-            If a base class is extended twice, such as the settings class,
+            If there is an additional container in the structure,
             we need to search further for the tabs object...
+
+            NOTE: This may be able to be removed once all grid panels have been
+            updated and their structures have been made consistent with one another
         */
         if (!tabPanel.hasOwnProperty('xtype') || !tabPanel.xtype.includes('tabs')) {
             if (tabPanel.ownerCt && tabPanel.ownerCt.xtype && tabPanel.ownerCt.xtype.includes('tabs')) {

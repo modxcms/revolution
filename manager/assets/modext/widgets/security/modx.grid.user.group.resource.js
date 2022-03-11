@@ -95,7 +95,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             xtype: 'modx-combo-resourcegroup'
             ,itemId: 'filter-resourceGroup'
             ,emptyText: _('filter_by_resource_group')
-            ,width: 200
+            ,width: 210
             ,allowBlank: true
             ,value: MODx.request.resourceGroup || null
             ,listeners: {

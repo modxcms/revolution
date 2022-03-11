@@ -34,7 +34,7 @@ MODx.Tabs = function(config) {
                         Only proceed with the clearing process if the tab has changed.
                         This is needed to prevent clearing when a URL has been typed in.
 
-                        Note that currentTab is the previous one being navigated away from
+                        NOTE: The currentTab is the previous one being navigated away from
                     */
                     if (newTab.id != currentTab.id) {
                         const resetVerticalTabPanelFilters = (currentTab.items.items[0] && currentTab.items.items[0].xtype == 'modx-vtabs') || currentTab.ownerCt.xtype == 'modx-vtabs',
