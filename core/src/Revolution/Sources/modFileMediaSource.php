@@ -41,9 +41,9 @@ class modFileMediaSource extends modMediaSource
                         'public' => octdec($this->xpdo->getOption('new_folder_permissions', [], '0755')),
                         'private' => octdec($this->xpdo->getOption('private_folder_permissions', [], '0700')),
                     ],
-                ],Visibility::PUBLIC),
+                ],Visibility::PUBLIC), 
                 // Write flags
-                LOCK_EX,
+                LOCK_EX, 
                 // How to deal with links, either DISALLOW_LINKS or SKIP_LINKS
                 // Disallowing them causes exceptions when encountered
                 LocalFilesystemAdapter::DISALLOW_LINKS

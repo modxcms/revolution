@@ -1178,7 +1178,8 @@ class modElement extends modAccessibleSimpleObject
      *
      * @return string
      */
-    public function getPreviewUrl() {
+    public function getPreviewUrl() 
+    {
         if (!empty($this->get('preview_file'))) {
             $previewfile = $this->get('preview_file');
 
@@ -1189,14 +1190,14 @@ class modElement extends modAccessibleSimpleObject
                 if ($source && $source->get('is_stream')) {
                     $source->initialize();
 
-                    if (file_exists($source->getBasePath().$previewfile)) {
-                        return $source->getBaseUrl().$previewfile;
+                    if (file_exists($source->getBasePath() . $previewfile)) {
+                        return $source->getBaseUrl() . $previewfile;
                     }
                 }
             } else {
                 // Return "as is" if not assigned to a media source
-                if (file_exists(MODX_BASE_PATH.$previewfile)) {
-                    return MODX_BASE_URL.$previewfile;
+                if (file_exists(MODX_BASE_PATH . $previewfile)) {
+                    return MODX_BASE_URL . $previewfile;
                 }
             }
 
