@@ -17,7 +17,7 @@ class modFileMediaSource extends modMediaSource
 {
     protected $visibility_files = true;
     protected $visibility_dirs = true;
-
+    protected $static_element_mode = false;
 
     /**
      * @return bool
@@ -244,5 +244,29 @@ class modFileMediaSource extends modMediaSource
     public function getObjectUrl($object = '')
     {
         return $this->getBaseUrl() . $object;
+    }
+
+    /**
+     * Sets the media source to skip checking the file type.
+     *
+     * @return void
+     */
+    public function setStaticElementMode(): void
+    {
+        $this->static_element_mode = true;
+    }
+
+    /**
+     * Override to skip check for local static element filesystem saves.
+     *
+     * @inheritDoc
+     */
+    protected function checkFileType($filename): bool
+    {
+        if ($this->static_element_mode) {
+            return true;
+        }
+
+        return parent::checkFileType($filename);
     }
 }

@@ -681,6 +681,13 @@ class modElement extends modAccessibleSimpleObject
             $sourceFile = $this->getStaticFileName();
             if (($this->get('source') > 0) && $source = $this->getSource()) {
                 $source->initialize();
+
+                // Allow filesystem static elements to be saved without checking file type.
+                if ($source->get('class_key') === modFileMediaSource::class) {
+                    /** @var modFileMediaSource $source */
+                    $source->setStaticElementMode();
+                }
+
                 if ($source->getMetaData($sourceFile)) {
                     $set = (bool)$source->updateObject($sourceFile, $content);
                 }
