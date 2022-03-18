@@ -197,7 +197,7 @@ class modElement extends modAccessibleSimpleObject
             if ($this->staticSourceChanged()) {
                 $staticContent = $this->getFileContent();
                 if ($staticContent !== $this->get('content')) {
-                    if ($this->isStaticSourceMutable() && $staticContent === '') {
+                    if ($staticContent === '') {
                         $this->setDirty('content');
                     } else {
                         $this->setContent($staticContent);
@@ -207,7 +207,7 @@ class modElement extends modAccessibleSimpleObject
             }
 
             $staticContentChanged = $this->staticContentChanged();
-            if ($staticContentChanged && !$this->isStaticSourceMutable()) {
+            if ($staticContentChanged) {
                 $this->setContent($this->getFileContent());
                 $staticContentChanged = false;
             }
@@ -691,7 +691,7 @@ class modElement extends modAccessibleSimpleObject
                 }
             }
             else {
-                $set = file_put_contents($sourceFile, $content) > 0;
+                $set = $this->xpdo->getCacheManager()->writeFile($sourceFile, $content);
             }
         }
 
@@ -1139,20 +1139,11 @@ class modElement extends modAccessibleSimpleObject
      * Return if the static source is mutable.
      *
      * @return boolean True if the source file is mutable.
+     * @deprecated Unreliable; just try to write a file and act on errors.
      */
     public function isStaticSourceMutable()
     {
-        $isMutable = false;
-        $sourceFile = $this->getStaticFileName();
-        if ($sourceFile && $source = $this->getSource()) {
-            if (!$isMutable = (bool)$source->getMetaData($sourceFile)) {
-                $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                $file = array_pop($path);
-                $isMutable = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, '');
-            }
-        }
-
-        return $isMutable;
+        return true;
     }
 
     /**
