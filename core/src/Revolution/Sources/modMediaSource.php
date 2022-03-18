@@ -375,16 +375,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $this->addError('path', $this->xpdo->lexicon('file_folder_err_invalid'));
                 return [];
             }
-
         }
 
         try {
             $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
             $contents = $this->filesystem->listContents($path)
-                ->filter(function(StorageAttributes $attributes) use ($re) {
+                ->filter(function (StorageAttributes $attributes) use ($re) {
                     return !preg_match($re, $attributes->path());
                 })
-                ->filter(function(StorageAttributes $attributes) use ($properties) {
+                ->filter(function (StorageAttributes $attributes) use ($properties) {
                     if ($attributes->isDir()) {
                         return $this->hasPermission('directory_list');
                     } elseif ($attributes->isFile()) {
