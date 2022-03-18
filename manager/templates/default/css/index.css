@@ -22750,7 +22750,6 @@ ul.x-tab-strip-bottom .x-tab-left {
 .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li .x-tab-strip-text {
     line-height: 1.4;
     padding: 2px 0 2px 0;
-    word-break: break-all;
     white-space: pre-wrap;
 }
 .vertical-tabs-panel .vertical-tabs-header h4 {
