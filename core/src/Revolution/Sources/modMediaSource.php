@@ -588,7 +588,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
 
         $properties = $this->getPropertyList();
-        $imageExtensions = array_map('trim', explode(',', $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg')));
+        $imageExtensions = array_map('trim', explode(',',
+            $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg')));
         try {
             $fa = [
                 'name' => rtrim($path, DIRECTORY_SEPARATOR),
@@ -1194,7 +1195,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         try {
             $mimeType = $this->filesystem->mimeType($path);
-            if (($mimeType === 'directory' && $this->visibility_dirs) || ($mimeType !== 'directory' && $this->visibility_files)) {
+            if (($mimeType === 'directory' && $this->visibility_dirs)
+                || ($mimeType !== 'directory' && $this->visibility_files)) {
                 return $this->filesystem->visibility($path);
             }
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
@@ -1216,7 +1218,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $path = $this->sanitizePath($path);
         try {
             $mimeType = $this->filesystem->mimeType($path);
-            if (($mimeType === 'directory' && $this->visibility_dirs) || ($mimeType !== 'directory' && $this->visibility_files)) {
+            if (($mimeType === 'directory' && $this->visibility_dirs)
+                || ($mimeType !== 'directory' && $this->visibility_files)) {
                 $this->filesystem->setVisibility($path, $visibility);
                 return true;
             }

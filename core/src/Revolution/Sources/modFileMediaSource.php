@@ -30,7 +30,6 @@ class modFileMediaSource extends modMediaSource
             $localAdapter = new LocalFilesystemAdapter(
                 // Determine the root directory
                 $this->getBasePath(),
-
                 // If users would like to modify the private values, they can create
                 // new system settings: private_file_permissions and private_folder_permissions.
                 PortableVisibilityConverter::fromArray([
@@ -43,15 +42,12 @@ class modFileMediaSource extends modMediaSource
                         'private' => octdec($this->xpdo->getOption('private_folder_permissions', [], '0700')),
                     ],
                 ],Visibility::PUBLIC),
-
                 // Write flags
                 LOCK_EX,
-
                 // How to deal with links, either DISALLOW_LINKS or SKIP_LINKS
                 // Disallowing them causes exceptions when encountered
                 LocalFilesystemAdapter::DISALLOW_LINKS
             );
-
         } catch (Exception $e) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,
                 $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')]) . ' ' . $e->getMessage());
