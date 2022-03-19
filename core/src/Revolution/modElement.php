@@ -197,7 +197,7 @@ class modElement extends modAccessibleSimpleObject
             if ($this->staticSourceChanged()) {
                 $staticContent = $this->getFileContent();
                 if ($staticContent !== $this->get('content')) {
-                    if ($this->isStaticSourceMutable() && $staticContent === '') {
+                    if ($staticContent === '') {
                         $this->setDirty('content');
                     } else {
                         $this->setContent($staticContent);
@@ -207,10 +207,6 @@ class modElement extends modAccessibleSimpleObject
             }
 
             $staticContentChanged = $this->staticContentChanged();
-            if ($staticContentChanged && !$this->isStaticSourceMutable()) {
-                $this->setContent($this->getFileContent());
-                $staticContentChanged = false;
-            }
 
             /* If element is empty, set to true in order to create an empty static file. */
             $content = $this->get('content');
@@ -665,7 +661,6 @@ class modElement extends modAccessibleSimpleObject
         return $content;
     }
 
-
     /**
      * Set external file content from this instance.
      *
@@ -679,25 +674,18 @@ class modElement extends modAccessibleSimpleObject
         $set = false;
         if ($this->isStatic()) {
             $sourceFile = $this->getStaticFileName();
+
+            // If a media source is selected, prefix the base path.
             if (($this->get('source') > 0) && $source = $this->getSource()) {
                 $source->initialize();
-                if ($source->getMetaData($sourceFile)) {
-                    $set = (bool)$source->updateObject($sourceFile, $content);
-                }
-                else {
-                    $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                    $file = array_pop($path);
-                    $set = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, $content);
-                }
+                $sourceFile = $source->getBasePath() . $sourceFile;
             }
-            else {
-                $set = file_put_contents($sourceFile, $content) > 0;
-            }
+
+            $set = $this->xpdo->getCacheManager()->writeFile($sourceFile, $content);
         }
 
         return $set;
     }
-
 
     /**
      * Get the properties for this element instance for processing.
@@ -1139,20 +1127,11 @@ class modElement extends modAccessibleSimpleObject
      * Return if the static source is mutable.
      *
      * @return boolean True if the source file is mutable.
+     * @deprecated Unreliable; just try to write a file and act on errors.
      */
     public function isStaticSourceMutable()
     {
-        $isMutable = false;
-        $sourceFile = $this->getStaticFileName();
-        if ($sourceFile && $source = $this->getSource()) {
-            if (!$isMutable = (bool)$source->getMetaData($sourceFile)) {
-                $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                $file = array_pop($path);
-                $isMutable = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, '');
-            }
-        }
-
-        return $isMutable;
+        return true;
     }
 
     /**
@@ -1180,7 +1159,8 @@ class modElement extends modAccessibleSimpleObject
      *
      * @return string
      */
-    public function getPreviewUrl() {
+    public function getPreviewUrl()
+    {
         if (!empty($this->get('preview_file'))) {
             $previewfile = $this->get('preview_file');
 
@@ -1191,14 +1171,14 @@ class modElement extends modAccessibleSimpleObject
                 if ($source && $source->get('is_stream')) {
                     $source->initialize();
 
-                    if (file_exists($source->getBasePath().$previewfile)) {
-                        return $source->getBaseUrl().$previewfile;
+                    if (file_exists($source->getBasePath() . $previewfile)) {
+                        return $source->getBaseUrl() . $previewfile;
                     }
                 }
             } else {
                 // Return "as is" if not assigned to a media source
-                if (file_exists(MODX_BASE_PATH.$previewfile)) {
-                    return MODX_BASE_URL.$previewfile;
+                if (file_exists(MODX_BASE_PATH . $previewfile)) {
+                    return MODX_BASE_URL . $previewfile;
                 }
             }
 
