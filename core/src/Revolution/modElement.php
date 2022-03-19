@@ -207,10 +207,6 @@ class modElement extends modAccessibleSimpleObject
             }
 
             $staticContentChanged = $this->staticContentChanged();
-            if ($staticContentChanged) {
-                $this->setContent($this->getFileContent());
-                $staticContentChanged = false;
-            }
 
             /* If element is empty, set to true in order to create an empty static file. */
             $content = $this->get('content');
@@ -685,7 +681,7 @@ class modElement extends modAccessibleSimpleObject
                 // Allow filesystem static elements to be saved without checking file type.
                 if ($source->get('class_key') === modFileMediaSource::class) {
                     /** @var modFileMediaSource $source */
-                    $source->setStaticElementMode();
+                    $source->ignoreFileTypeMode();
                 }
 
                 if ($source->getMetaData($sourceFile)) {
@@ -1178,7 +1174,7 @@ class modElement extends modAccessibleSimpleObject
      *
      * @return string
      */
-    public function getPreviewUrl() 
+    public function getPreviewUrl()
     {
         if (!empty($this->get('preview_file'))) {
             $previewfile = $this->get('preview_file');

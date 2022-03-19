@@ -17,7 +17,7 @@ class modFileMediaSource extends modMediaSource
 {
     protected $visibility_files = true;
     protected $visibility_dirs = true;
-    protected $static_element_mode = false;
+    protected $ignore_file_type = false;
 
     /**
      * @return bool
@@ -41,9 +41,9 @@ class modFileMediaSource extends modMediaSource
                         'public' => octdec($this->xpdo->getOption('new_folder_permissions', [], '0755')),
                         'private' => octdec($this->xpdo->getOption('private_folder_permissions', [], '0700')),
                     ],
-                ],Visibility::PUBLIC), 
+                ],Visibility::PUBLIC),
                 // Write flags
-                LOCK_EX, 
+                LOCK_EX,
                 // How to deal with links, either DISALLOW_LINKS or SKIP_LINKS
                 // Disallowing them causes exceptions when encountered
                 LocalFilesystemAdapter::DISALLOW_LINKS
@@ -247,19 +247,19 @@ class modFileMediaSource extends modMediaSource
      *
      * @return void
      */
-    public function setStaticElementMode(): void
+    public function ignoreFileTypeMode(): void
     {
-        $this->static_element_mode = true;
+        $this->ignore_file_type = true;
     }
 
     /**
-     * Override to skip check for local static element filesystem saves.
+     * Override to skip file type checks.
      *
      * @inheritDoc
      */
     protected function checkFileType($filename): bool
     {
-        if ($this->static_element_mode) {
+        if ($this->ignore_file_type) {
             return true;
         }
 
