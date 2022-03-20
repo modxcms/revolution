@@ -703,6 +703,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         return finalConfig;
     }
 
+    /*
      * @property {Function} toggleFieldVisibility - Shows or hides a specified set of fields and their containing component
      *
      * @param {String} ctrlId - Id of the checkbox or listbox component that sets the toggle state
@@ -776,7 +777,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         ;
         const   modeCreate = record.hasOwnProperty('id') && record.id > 0 ? false : true,
                 modeLabel =  modeCreate ? _('create') + ' ' : _('edit') + ' ',
-                prefixSeparator = modeCreate && !realtimeValue ? '' : ': '
+                prefixSeparator = modeCreate && !realtimeValue ? '' : ': ',
+                formTypeLexKey = formId === 'resource' ? 'document' : formId,
+                prefix = modeLabel + _(formTypeLexKey) + prefixSeparator
         ;
         if (!Ext.isEmpty(record)) {
             const postfix = MODx.perm.tree_show_resource_ids && !Ext.isEmpty(record.id)
@@ -787,24 +790,21 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 const headerCmp = Ext.getCmp('modx-header-breadcrumbs');
                 title = realtimeValue ? realtimeValue : record.pagetitle ;
                 baseTitle = this.encodeTitle(title, false);
-                title = this.encodeTitle(title) + postfix;
+                title = typeof title === 'undefined' ? prefix : this.encodeTitle(title) + postfix ;
                 if (headerCmp) {
                     headerCmp.updateHeader(title);
                 } else {
                     Ext.getCmp('modx-resource-header').el.dom.innerText = title;
                 }
             } else {
-                const   prefix = modeLabel + _(formId) + prefixSeparator,
-                        headerCmpId = `modx-${formId}-header`
-                ;
+                const headerCmpId = `modx-${formId}-header`;
                 if (realtimeValue) {
                     baseTitle = this.encodeTitle(realtimeValue);
-                    title = prefix + baseTitle + postfix;
                 } else {
                     title = formId === 'template' ? record.templatename : record.name ;
                     baseTitle = this.encodeTitle(title);
-                    title = typeof title === 'undefined' ? prefix : prefix + baseTitle + postfix ;
                 }
+                title = typeof title === 'undefined' ? prefix : prefix + baseTitle + postfix ;
                 Ext.getCmp(headerCmpId).getEl().update(title);
             }
         }
