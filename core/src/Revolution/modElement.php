@@ -566,8 +566,11 @@ class modElement extends modAccessibleSimpleObject
      */
     public function getSourceFile(array $options = [])
     {
-        if ($this->isStatic() && (empty($this->_sourceFile) || $this->getOption('recalculate_source_file', $options,
-                    $this->staticSourceChanged()))) {
+        if (!$this->isStatic()) {
+            return false;
+        }
+
+        if (empty($this->_sourceFile) || $this->getOption('recalculate_source_file', $options, $this->staticSourceChanged())) {
             $filename = $this->get('static_file');
             if (!empty($filename)) {
                 $array = [];
@@ -575,17 +578,25 @@ class modElement extends modAccessibleSimpleObject
                     $this->xpdo->parser->processElementTags('', $filename);
                 }
             }
-            /** @var modMediaSource $source */
-            if ($source = $this->getSource()) {
-                $this->_sourceFile = !$source->getMetaData($filename) && $this->get('source') < 1
-                    ? $this->getSourcePath($options) . $filename
-                    : $filename;
+
+            if ($this->get('source') > 0) {
+                /** @var modMediaSource $source */
+                $source = $this->getOne('Source');
+                if ($source && $source->get('is_stream')) {
+                    $source->initialize();
+                    $filename = $source->getBasePath() . $filename;
+                }
+            }
+
+            if (!file_exists($filename) && $this->get('source') < 1) {
+                $this->getSourcePath($options);
+                $this->_sourceFile = $this->_sourcePath . $filename;
             } else {
-                return false;
+                $this->_sourceFile = $filename;
             }
         }
 
-        return $this->isStatic() ? $this->_sourceFile : false;
+        return $this->_sourceFile;
     }
 
 
@@ -618,12 +629,11 @@ class modElement extends modAccessibleSimpleObject
      */
     public function getFileContent(array $options = [])
     {
-        $content = false;
-        if ($this->isStatic() && $sourceFile = $this->getSourceFile($options)) {
-            if ($source = $this->getSource()) {
-                if ($file = $source->getObjectContents($sourceFile)) {
-                    return $file['content'];
-                }
+        $content = "";
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile && file_exists($sourceFile)) {
+                $content = file_get_contents($sourceFile);
             }
         }
 
@@ -642,15 +652,10 @@ class modElement extends modAccessibleSimpleObject
     public function setFileContent($content, array $options = [])
     {
         $set = false;
-        if ($this->isStatic() && $sourceFile = $this->getSourceFile($options)) {
-            if ($source = $this->getSource()) {
-                if ($source->getMetaData($sourceFile)) {
-                    $set = (bool)$source->updateObject($sourceFile, $content);
-                } else {
-                    $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                    $file = array_pop($path);
-                    $set = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, $content);
-                }
+        if ($this->isStatic()) {
+            $sourceFile = $this->getSourceFile($options);
+            if ($sourceFile) {
+                $set = $this->xpdo->cacheManager->writeFile($sourceFile, $content);
             }
         }
 
@@ -1102,12 +1107,26 @@ class modElement extends modAccessibleSimpleObject
     public function isStaticSourceMutable()
     {
         $isMutable = false;
-        $sourceFile = $this->getStaticFileName();
-        if ($sourceFile && $source = $this->getSource()) {
-            if (!$isMutable = (bool)$source->getMetaData($sourceFile)) {
-                $path = explode(DIRECTORY_SEPARATOR, trim($sourceFile, DIRECTORY_SEPARATOR));
-                $file = array_pop($path);
-                $isMutable = (bool)$source->createObject(implode(DIRECTORY_SEPARATOR, $path), $file, '');
+        $sourceFile = $this->getSourceFile();
+        if ($sourceFile) {
+            if (file_exists($sourceFile)) {
+                $isMutable = is_writable($sourceFile) && !is_dir($sourceFile);
+            } else {
+                $sourceDir = dirname($sourceFile);
+                $i = 100;
+                while (!empty($sourceDir)) {
+                    if (file_exists($sourceDir) && is_dir($sourceDir)) {
+                        $isMutable = is_writable($sourceDir);
+                        if ($isMutable) break;
+                    }
+                    if ($sourceDir != '/') {
+                        $sourceDir = dirname($sourceDir);
+                    } else {
+                        break;
+                    }
+                    $i--;
+                    if ($i < 0) break;
+                }
             }
         }
 
