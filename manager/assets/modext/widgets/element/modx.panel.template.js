@@ -203,7 +203,8 @@ MODx.panel.Template = function(config) {
                         baseParams: {
                             action: 'source/getList',
                             showNone: true,
-                            streamsOnly: true
+                            streamsOnly: true,
+                            filesystemOnly: true
                         },
                         listeners: {
                             select: {

@@ -183,6 +183,7 @@ MODx.panel.Chunk = function(config) {
                             action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
+                            ,filesystemOnly: true
                         }
                         ,listeners: {
                             select: {

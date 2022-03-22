@@ -12,6 +12,7 @@ namespace MODX\Revolution\Processors\Source;
 
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -41,6 +42,7 @@ class GetList extends GetListProcessor
             'showNone' => false,
             'query' => '',
             'streamsOnly' => false,
+            'filesystemOnly' => false,
         ]);
         return $initialized;
     }
@@ -79,11 +81,16 @@ class GetList extends GetListProcessor
                 'modMediaSource.is_stream' => true,
             ]);
         }
+        if ($this->getProperty('filesystemOnly')) {
+            $c->where([
+                'modMediaSource.class_key' => modFileMediaSource::class
+            ]);
+        }
         return $c;
     }
 
     /**
-     * Filter the query by the valueField of MODx.combo.MediaSource to get the initially value displayed right
+     * Filter the query by the valueField of MODx.combo.MediaSource to get the initial value displayed right
      * @param xPDOQuery $c
      * @return xPDOQuery
      */

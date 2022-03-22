@@ -365,6 +365,7 @@ MODx.panel.TV = function(config) {
                                     action: 'Source/GetList'
                                     ,showNone: true
                                     ,streamsOnly: true
+                                    ,filesystemOnly: true
                                 }
                                 ,listeners: {
                                     select: {

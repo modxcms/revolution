@@ -184,6 +184,7 @@ MODx.panel.Snippet = function(config) {
                             action: 'Source/GetList'
                             ,showNone: true
                             ,streamsOnly: true
+                            ,filesystemOnly: true
                         }
                         ,listeners: {
                             select: {
