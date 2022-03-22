@@ -629,7 +629,7 @@ class modElement extends modAccessibleSimpleObject
     {
         $array = [];
         $this->_sourcePath = $this->xpdo->getOption('element_static_path', $options,
-            $this->xpdo->getOption('components_path', $options, 'components/'));
+            $this->xpdo->getOption('components_path', $options, MODX_CORE_PATH . 'components/'));
         if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourcePath, $array)) {
             $this->xpdo->parser->processElementTags('', $this->_sourcePath);
         }
