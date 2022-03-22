@@ -253,10 +253,10 @@ class modResourceDeleteProcessor extends modProcessor {
 
     /**
      * Clear the site cache
-     * @return void
+     * @return boolean site cache cleared status
      */
     public function clearCache() {
-		$clear = $this->getProperty('syncsite',$this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache',false);
+	$clear = $this->getProperty('syncsite',$this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache',false);
         if ($clear) {
             $this->modx->cacheManager->refresh(array(
                 'db' => array(),
