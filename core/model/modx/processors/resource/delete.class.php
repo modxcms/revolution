@@ -253,7 +253,7 @@ class modResourceDeleteProcessor extends modProcessor {
 
     /**
      * Clear the site cache
-     * @return boolean site cache cleared status
+     * @return void
      */
     public function clearCache() {
 	$clear = $this->getProperty('syncsite',$this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache',false);
@@ -265,7 +265,6 @@ class modResourceDeleteProcessor extends modProcessor {
                 'resource' => array('contexts' => array($this->workingContext->get('key'))),
             ));
         }
-        return $clear;
     }
 
     /**
