@@ -85,13 +85,13 @@ class GetNodes extends Processor
                     $resources = $resourceGroup->getResources();
                     /** @var modResource $resource */
                     foreach ($resources as $resource) {
+                        $icons = $resource->getIconClasses();
                         $list[] = [
                             'text' => $resource->get('pagetitle') . ' (' . $resource->get('id') . ')',
                             'id' => 'n_' . $resource->get('id') . '_' . $resourceGroup->get('id'),
                             'leaf' => true,
                             'type' => modResource::class,
-                            'cls' => 'icon-' . $resource->get('class_key'),
-                            'iconCls' => 'icon-file',
+                            'iconCls' => implode(' ', $icons),
                         ];
                     }
                 }
