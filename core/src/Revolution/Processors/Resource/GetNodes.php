@@ -452,60 +452,7 @@ class GetNodes extends Processor
             }
         }
 
-        // Assign an icon class based on the class_key
-        try {
-            $reflectionClass = new ReflectionClass($resource->get('class_key'));
-            $classKey = strtolower($reflectionClass->getShortName());
-        } catch (ReflectionException $e) {
-            $classKey = strtolower($resource->get('class_key'));
-        }
-        if (substr($classKey, 0, 3) === 'mod') {
-            $classKey = substr($classKey, 3);
-        }
-
-        $iconCls = [];
-
-        $contentType = $resource->getOne('ContentType');
-        if ($contentType && $contentType->get('icon')) {
-            $iconCls = [$contentType->get('icon')];
-        }
-
-        $template = $resource->getOne('Template');
-        $tplIcon = '';
-        if ($template && $template->get('icon')) {
-            $tplIcon = $template->get('icon');
-            $iconCls = [$template->get('icon')];
-        }
-
-        $classKeyIcon = $this->modx->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
-        if (empty($iconCls)) {
-            $iconCls[] = $classKeyIcon;
-        }
-
-        switch ($classKey) {
-            case 'weblink':
-                $iconCls[] = $this->modx->getOption('mgr_tree_icon_weblink', null, 'tree-weblink');
-                break;
-
-            case 'symlink':
-                $iconCls[] = $this->modx->getOption('mgr_tree_icon_symlink', null, 'tree-symlink');
-                break;
-
-            case 'staticresource':
-                $iconCls[] = $this->modx->getOption('mgr_tree_icon_staticresource', null, 'tree-static-resource');
-                break;
-        }
-
-        // Icons specific with the context and resource ID for super specific tweaks
-        $iconCls[] = 'icon-' . $resource->get('context_key') . '-' . $resource->get('id');
-        $iconCls[] = 'icon-parent-' . $resource->get('context_key') . '-' . $resource->get('parent');
-
-        // Modifiers to indicate resource _state_
-        if ($hasChildren || $resource->isfolder) {
-            if (empty($tplIcon) && $classKeyIcon === 'tree-resource') {
-                $iconCls[] = $this->modx->getOption('mgr_tree_icon_folder', null, 'parent-resource');
-            }
-        }
+        $iconCls = $resource->getIconClasses();
 
         // Add icon class - and additional description to the tooltip - if the resource is locked.
         $locked = $resource->getLock();
