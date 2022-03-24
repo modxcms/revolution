@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Lorsque cette option est activ�
 $_lang['setting_passwordless_expiration'] = 'Expiration de la connexion sans mot de passe';
 $_lang['setting_passwordless_expiration_desc'] = 'Durée de validité en secondes d\'un lien de connexion unique.';
 
-$_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
+$_lang['setting_static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
