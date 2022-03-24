@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element;
-
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
@@ -43,7 +43,7 @@ abstract class Update extends UpdateProcessor
     {
         $locked = $this->getProperty('locked');
         if (!is_null($locked)) {
-            $this->object->set('locked', (boolean)$locked);
+            $this->object->set('locked', (bool)$locked);
         }
 
         /* make sure a name was specified */

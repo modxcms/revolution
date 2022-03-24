@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element;
-
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
@@ -71,7 +71,7 @@ abstract class Create extends CreateProcessor
             }
         }
 
-        $locked = (boolean)$this->getProperty('locked', false);
+        $locked = (bool)$this->getProperty('locked', false);
         $this->object->set('locked', $locked);
 
         $this->setElementProperties();
@@ -81,7 +81,7 @@ abstract class Create extends CreateProcessor
             if ($this->object->get('content') !== '' && !$this->object->isStaticSourceMutable()) {
                 $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
             } elseif (!$this->object->isStaticSourceValidPath()) {
-                $this->addFieldError('static_file',$this->modx->lexicon('element_static_source_protected_invalid'));
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_protected_invalid'));
             }
         }
 
