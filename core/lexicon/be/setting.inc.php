@@ -819,5 +819,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Пры ўключэнні ка�
 $_lang['setting_passwordless_expiration'] = 'Заканчэнне тэрміну дзеяння ўваходу ў сістэму';
 $_lang['setting_passwordless_expiration_desc'] = 'Як доўга спасылка для аднаразовага ўваходу сапраўдная ў секундах.';
 
-$_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
+$_lang['setting_static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
