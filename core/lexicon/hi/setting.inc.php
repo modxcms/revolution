@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter 
 $_lang['setting_passwordless_expiration'] = 'पासवर्ड रहित लॉगिन समाप्ति';
 $_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
-$_lang['static_elements_html_extension'] = 'स्टेटिक एलिमेंट्स एचटीएमएल एक्सटेंशन';
-$_lang['static_elements_html_extension_desc'] = 'एचटीएमएल सामग्री के साथ स्थित तत्वों द्वारा उपयोग की जाने वाली फाइलों का उपयोग एक्सटेंशन।';
+$_lang['setting_static_elements_html_extension'] = 'स्टेटिक एलिमेंट्स एचटीएमएल एक्सटेंशन';
+$_lang['setting_static_elements_html_extension_desc'] = 'एचटीएमएल सामग्री के साथ स्थित तत्वों द्वारा उपयोग की जाने वाली फाइलों का उपयोग एक्सटेंशन।';
