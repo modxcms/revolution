@@ -22,8 +22,8 @@ use xPDO\xPDO;
  * This class creates an instance of a modElement object. This should not be
  * called directly, but rather extended for derivative modElement classes.
  *
- * @property integer            $source
- * @property boolean            $property_preprocess
+ * @property int  $source
+ * @property bool $property_preprocess
  *
  * @property modAccessElement[] $Acls
  *
@@ -62,11 +62,11 @@ class modElement extends modAccessibleSimpleObject
      */
     public $_output = '';
     /**
-     * The boolean result of the element.
+     * The bool result of the element.
      *
      * This is typically only applicable to elements that use PHP source content.
      *
-     * @var boolean
+     * @var bool
      */
     public $_result = true;
     /**
@@ -82,11 +82,11 @@ class modElement extends modAccessibleSimpleObject
      */
     public $_token = '';
     /**
-     * @var boolean If the element is cacheable or not.
+     * @var bool If the element is cacheable or not.
      */
     public $_cacheable = true;
     /**
-     * @var boolean Indicates if the element was processed already.
+     * @var bool Indicates if the element was processed already.
      */
     public $_processed = false;
     /**
@@ -152,8 +152,7 @@ class modElement extends modAccessibleSimpleObject
                 : null;
         }
         /* automatically translate lexicon descriptions */
-        if ($k == 'properties' && !empty($value) && is_array($value)
-            && is_object($this->xpdo) && $this->xpdo instanceof modX && $this->xpdo->lexicon) {
+        if ($k == 'properties' && !empty($value) && is_array($value) && is_object($this->xpdo) && $this->xpdo instanceof modX && $this->xpdo->lexicon) {
             foreach ($value as &$property) {
                 if (!empty($property['lexicon'])) {
                     if (strpos($property['lexicon'], ':') !== false) {
@@ -365,11 +364,13 @@ class modElement extends modAccessibleSimpleObject
         $this->getProperties($properties);
         $this->getTag();
         if ($this->xpdo->getDebug() === true) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG,
-                "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties,
-                    true));
+            $this->xpdo->log(
+                xPDO::LOG_LEVEL_DEBUG,
+                "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") .
+                    "\nProperties: " . print_r($this->_properties, true)
+            );
         }
-        if ($this->isCacheable() && isset ($this->xpdo->elementCache[$this->_tag])) {
+        if ($this->isCacheable() && isset($this->xpdo->elementCache[$this->_tag])) {
             $this->_output = $this->xpdo->elementCache[$this->_tag];
             $this->_processed = true;
         } else {
@@ -397,7 +398,7 @@ class modElement extends modAccessibleSimpleObject
      */
     public function & getInputFilter()
     {
-        if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
+        if (!isset($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
             if (!$inputFilterClass = $this->get('input_filter')) {
                 $inputFilterClass = $this->xpdo->getOption('input_filter', null, modInputFilter::class);
             }
@@ -418,7 +419,7 @@ class modElement extends modAccessibleSimpleObject
      */
     public function & getOutputFilter()
     {
-        if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
+        if (!isset($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
             if (!$outputFilterClass = $this->get('output_filter')) {
                 $outputFilterClass = $this->xpdo->getOption('output_filter', null, modOutputFilter::class);
             }
@@ -441,7 +442,7 @@ class modElement extends modAccessibleSimpleObject
     public function filterInput()
     {
         $filter = $this->getInputFilter();
-        if ($filter !== null && $filter instanceof modInputFilter) {
+        if ($filter instanceof modInputFilter) {
             $filter->filter($this);
         }
     }
@@ -456,7 +457,7 @@ class modElement extends modAccessibleSimpleObject
     public function filterOutput()
     {
         $filter = $this->getOutputFilter();
-        if ($filter !== null && $filter instanceof modOutputFilter) {
+        if ($filter instanceof modOutputFilter) {
             $filter->filter($this);
         }
     }
@@ -472,9 +473,9 @@ class modElement extends modAccessibleSimpleObject
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean)$this->xpdo->getOption('access_category_enabled', null, true);
+            $enabled = (bool)$this->xpdo->getOption('access_category_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $enabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
+            $enabled = (bool)$this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -550,7 +551,7 @@ class modElement extends modAccessibleSimpleObject
      *                       accept language, revision identifiers, or other information to alter the
      *                       behavior of the method.
      *
-     * @return boolean True indicates the content was set.
+     * @return bool True indicates the content was set.
      */
     public function setContent($content, array $options = [])
     {
@@ -562,7 +563,7 @@ class modElement extends modAccessibleSimpleObject
      *
      * @param array $options An array of options.
      *
-     * @return string|boolean The absolute path to the static source file or false if not static.
+     * @return string|bool The absolute path to the static source file or false if not static.
      */
     public function getSourceFile(array $options = [])
     {
@@ -610,8 +611,11 @@ class modElement extends modAccessibleSimpleObject
     public function getSourcePath(array $options = [])
     {
         $array = [];
-        $this->_sourcePath = $this->xpdo->getOption('element_static_path', $options,
-            $this->xpdo->getOption('components_path', $options, MODX_CORE_PATH . 'components/'));
+        $this->_sourcePath = $this->xpdo->getOption(
+            'element_static_path',
+            $options,
+            $this->xpdo->getOption('components_path', $options, MODX_CORE_PATH . 'components/')
+        );
         if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($this->_sourcePath, $array)) {
             $this->xpdo->parser->processElementTags('', $this->_sourcePath);
         }
@@ -767,10 +771,10 @@ class modElement extends modAccessibleSimpleObject
      * @access public
      *
      * @param array|string $properties A property array or property string.
-     * @param boolean      $merge      Indicates if properties should be merged with
+     * @param bool      $merge      Indicates if properties should be merged with
      *                                 existing ones.
      *
-     * @return boolean true if the properties are set.
+     * @return bool true if the properties are set.
      */
     public function setProperties($properties, $merge = false)
     {
@@ -826,7 +830,7 @@ class modElement extends modAccessibleSimpleObject
                 }
 
                 if ($propertyArray['type'] == 'combo-boolean' && is_numeric($propertyArray['value'])) {
-                    $propertyArray['value'] = (boolean)$propertyArray['value'];
+                    $propertyArray['value'] = (bool)$propertyArray['value'];
                 }
 
                 $propertiesArray[$key] = $propertyArray;
@@ -852,7 +856,7 @@ class modElement extends modAccessibleSimpleObject
      * @param string|modPropertySet $propertySet A modPropertySet object or the
      *                                           name of a modPropertySet object to create a relationship with.
      *
-     * @return boolean True if a relationship was created or already exists.
+     * @return bool True if a relationship was created or already exists.
      */
     public function addPropertySet($propertySet)
     {
@@ -897,7 +901,7 @@ class modElement extends modAccessibleSimpleObject
      * @param string|modPropertySet $propertySet A modPropertySet object or the
      *                                           name of a modPropertySet object to dissociate from.
      *
-     * @return boolean True if a relationship was destroyed.
+     * @return bool True if a relationship was destroyed.
      */
     public function removePropertySet($propertySet)
     {
@@ -906,7 +910,7 @@ class modElement extends modAccessibleSimpleObject
             if (is_string($propertySet)) {
                 $propertySet = $this->xpdo->getObject(modPropertySet::class, ['name' => $propertySet]);
             }
-            if (is_object($propertySet) && $propertySet instanceof modPropertySet) {
+            if ($propertySet instanceof modPropertySet) {
                 $removed = $this->xpdo->removeObject(modElementPropertySet::class, [
                     'element' => $this->get('id'),
                     'element_class' => $this->_class,
@@ -922,8 +926,7 @@ class modElement extends modAccessibleSimpleObject
      * Indicates if the element is cacheable.
      *
      * @access public
-     * @return boolean True if the element can be stored to or retrieved from
-     * the element cache.
+     * @return bool True if the element can be stored to or retrieved from the element cache.
      */
     public function isCacheable()
     {
@@ -935,19 +938,19 @@ class modElement extends modAccessibleSimpleObject
      *
      * @access public
      *
-     * @param boolean $cacheable Indicates the value to set for cacheability of
+     * @param bool $cacheable Indicates the value to set for cacheability of
      *                           this element.
      */
     public function setCacheable($cacheable = true)
     {
-        $this->_cacheable = (boolean)$cacheable;
+        $this->_cacheable = (bool)$cacheable;
     }
 
     /**
      * Get the Source for this Element
      *
      * @param string  $contextKey
-     * @param boolean $fallbackToDefault
+     * @param bool $fallbackToDefault
      *
      * @return modMediaSource|null
      */
@@ -1002,7 +1005,7 @@ class modElement extends modAccessibleSimpleObject
     {
         /** @var modCacheManager $cacheManager */
         $cacheManager = $this->xpdo->getCacheManager();
-        if (!$cacheManager || !($cacheManager instanceof modCacheManager)) {
+        if (!$cacheManager instanceof modCacheManager) {
             return [];
         }
 
@@ -1016,7 +1019,7 @@ class modElement extends modAccessibleSimpleObject
     /**
      * Indicates if the instance has content in an external file.
      *
-     * @return boolean True if the instance has content stored in an external file.
+     * @return bool True if the instance has content stored in an external file.
      */
     public function isStatic()
     {
@@ -1026,7 +1029,7 @@ class modElement extends modAccessibleSimpleObject
     /**
      * Indicates if the content has changed and the Element has a mutable static source.
      *
-     * @return boolean
+     * @return bool
      */
     public function staticContentChanged()
     {
@@ -1092,7 +1095,7 @@ class modElement extends modAccessibleSimpleObject
     /**
      * Indicates if the static source has changed.
      *
-     * @return boolean
+     * @return bool
      */
     public function staticSourceChanged()
     {
@@ -1102,7 +1105,7 @@ class modElement extends modAccessibleSimpleObject
     /**
      * Return if the static source is mutable.
      *
-     * @return boolean True if the source file is mutable.
+     * @return bool True if the source file is mutable.
      */
     public function isStaticSourceMutable()
     {
@@ -1136,7 +1139,7 @@ class modElement extends modAccessibleSimpleObject
     /**
      * Ensure the static source cannot browse the protected configuration directory
      *
-     * @return boolean True if is a valid source path
+     * @return bool True if is a valid source path
      */
     public function isStaticSourceValidPath()
     {
@@ -1158,7 +1161,8 @@ class modElement extends modAccessibleSimpleObject
      *
      * @return string
      */
-    public function getPreviewUrl() {
+    public function getPreviewUrl()
+    {
         if (!empty($this->get('preview_file'))) {
             $previewfile = $this->get('preview_file');
 
@@ -1169,15 +1173,12 @@ class modElement extends modAccessibleSimpleObject
                 if ($source && $source->get('is_stream')) {
                     $source->initialize();
 
-                    if (file_exists($source->getBasePath().$previewfile)) {
-                        return $source->getBaseUrl().$previewfile;
+                    if (file_exists($source->getBasePath() . $previewfile)) {
+                        return $source->getBaseUrl() . $previewfile;
                     }
                 }
-            } else {
-                // Return "as is" if not assigned to a media source
-                if (file_exists(MODX_BASE_PATH.$previewfile)) {
-                    return MODX_BASE_URL.$previewfile;
-                }
+            } elseif (file_exists(MODX_BASE_PATH . $previewfile)) {
+                return MODX_BASE_URL . $previewfile;
             }
 
             if (file_exists($previewfile)) {
@@ -1186,17 +1187,5 @@ class modElement extends modAccessibleSimpleObject
         }
 
         return '';
-    }
-
-    private function getStaticFileName()
-    {
-        $filename = $this->get('static_file');
-        if (!empty($filename)) {
-            $array = [];
-            if ($this->xpdo->getParser() && $this->xpdo->parser->collectElementTags($filename, $array)) {
-                $this->xpdo->parser->processElementTags('', $filename);
-            }
-        }
-        return $filename;
     }
 }

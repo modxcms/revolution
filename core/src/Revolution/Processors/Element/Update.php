@@ -51,12 +51,12 @@ abstract class Update extends UpdateProcessor
         $name = $this->getProperty($nameField, '');
         if (empty($name)) {
             $this->addFieldError($nameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
-        } else {
-            if ($this->alreadyExists($name)) {
-                /* if changing name, but new one already exists */
-                $this->modx->error->addField($nameField,
-                    $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name]));
-            }
+        } elseif ($this->alreadyExists($name)) {
+            /* if changing name, but new one already exists */
+            $this->modx->error->addField(
+                $nameField,
+                $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
+            );
         }
 
         /* category */
@@ -74,7 +74,7 @@ abstract class Update extends UpdateProcessor
             if (!$this->object->isStaticSourceMutable()) {
                 $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
             } elseif (!$this->object->isStaticSourceValidPath()) {
-                $this->addFieldError('static_file',$this->modx->lexicon('element_static_source_protected_invalid'));
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_protected_invalid'));
             }
         }
 
@@ -100,9 +100,12 @@ abstract class Update extends UpdateProcessor
 
     public function cleanup()
     {
-        return $this->success('',
-            array_merge($this->object->get(['id', 'name', 'description', 'locked', 'category', 'content']),
-                ['previous_category' => $this->previousCategory]));
+        return $this->success(
+            '',
+            array_merge(
+                $this->object->get(['id', 'name', 'description', 'locked', 'category', 'content']),
+                ['previous_category' => $this->previousCategory]
+            )
+        );
     }
 }
-
