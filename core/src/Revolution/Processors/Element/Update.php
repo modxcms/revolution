@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element;
-
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
@@ -43,7 +43,7 @@ abstract class Update extends UpdateProcessor
     {
         $locked = $this->getProperty('locked');
         if (!is_null($locked)) {
-            $this->object->set('locked', (boolean)$locked);
+            $this->object->set('locked', (bool)$locked);
         }
 
         /* make sure a name was specified */
@@ -51,12 +51,12 @@ abstract class Update extends UpdateProcessor
         $name = $this->getProperty($nameField, '');
         if (empty($name)) {
             $this->addFieldError($nameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
-        } else {
-            if ($this->alreadyExists($name)) {
-                /* if changing name, but new one already exists */
-                $this->modx->error->addField($nameField,
-                    $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name]));
-            }
+        } elseif ($this->alreadyExists($name)) {
+            /* if changing name, but new one already exists */
+            $this->modx->error->addField(
+                $nameField,
+                $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
+            );
         }
 
         /* category */
@@ -70,19 +70,11 @@ abstract class Update extends UpdateProcessor
         }
 
         /* can't change content if static source is not writable */
-        if ($this->object->staticSourceChanged() || $this->object->staticContentChanged()) {
+        if ($this->object->staticContentChanged()) {
             if (!$this->object->isStaticSourceMutable()) {
-                $source = $this->object->getSource();
-                if ($source && $source->hasErrors()) {
-                    $this->addFieldError('static_file', reset($source->getErrors()));
-                } else {
-                    $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
-                }
-            } else {
-                if (!$this->object->isStaticSourceValidPath()) {
-                    $this->addFieldError('static_file',
-                        $this->modx->lexicon('element_static_source_protected_invalid'));
-                }
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
+            } elseif (!$this->object->isStaticSourceValidPath()) {
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_protected_invalid'));
             }
         }
 
@@ -108,9 +100,12 @@ abstract class Update extends UpdateProcessor
 
     public function cleanup()
     {
-        return $this->success('',
-            array_merge($this->object->get(['id', 'name', 'description', 'locked', 'category', 'content']),
-                ['previous_category' => $this->previousCategory]));
+        return $this->success(
+            '',
+            array_merge(
+                $this->object->get(['id', 'name', 'description', 'locked', 'category', 'content']),
+                ['previous_category' => $this->previousCategory]
+            )
+        );
     }
 }
-

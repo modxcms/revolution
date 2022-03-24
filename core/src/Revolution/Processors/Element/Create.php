@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element;
-
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
@@ -71,25 +71,17 @@ abstract class Create extends CreateProcessor
             }
         }
 
-        $locked = (boolean)$this->getProperty('locked', false);
+        $locked = (bool)$this->getProperty('locked', false);
         $this->object->set('locked', $locked);
 
         $this->setElementProperties();
         $this->validateElement();
 
-        if ($this->object->staticSourceChanged() || $this->object->staticContentChanged()) {
+        if ($this->object->staticContentChanged()) {
             if ($this->object->get('content') !== '' && !$this->object->isStaticSourceMutable()) {
-                $source = $this->object->getSource();
-                if ($source && $source->hasErrors()) {
-                    $this->addFieldError('static_file', reset($source->getErrors()));
-                } else {
-                    $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
-                }
-            } else {
-                if (!$this->object->isStaticSourceValidPath()) {
-                    $this->addFieldError('static_file',
-                        $this->modx->lexicon('element_static_source_protected_invalid'));
-                }
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
+            } elseif (!$this->object->isStaticSourceValidPath()) {
+                $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_protected_invalid'));
             }
         }
 
