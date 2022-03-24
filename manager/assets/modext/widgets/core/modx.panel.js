@@ -344,7 +344,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * enter one of the fieldKeys to specify it as the source for all inputs
      */
     ,setMediaSources: function(formId, fieldKeys = 'static', sharedSourceKey = '') {
-        if (!Ext.isArray(fieldKeys)) {
+        if (!Array.isArray(fieldKeys)) {
             fieldKeys = fieldKeys.split(',');
         }
         fieldKeys.forEach(fieldKey => {
@@ -376,7 +376,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      */
     ,getTabIdsFromKeys: function(map, keys) {
 
-        let tabIds = [];
+        const tabIds = [];
 
         if (typeof map == 'object') {
             if (Array.isArray(keys) && keys.length > 0) {
@@ -405,9 +405,10 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      */
     ,showErroredTab: function(targetForms, tabsId) {
 
-        const mainTabs = Ext.getCmp(tabsId);
-        let searchTabs = this.getTabIdsFromKeys(mainTabs.items.map, targetForms),
-            mainTabName = null,
+        const mainTabs = Ext.getCmp(tabsId),
+              searchTabs = this.getTabIdsFromKeys(mainTabs.items.map, targetForms)
+        ;
+        let mainTabName = null,
             mainTabIndex = null,
             component,
             erroredNode = null
@@ -419,7 +420,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         if (mainTabs.items.length > mainTabs.initialConfig.items.length) {
             mainTabs.items.keys.forEach(function(key) {
                 if (mainTabs.items.map[key].hasOwnProperty('id')) {
-                    if(this.errorHandlingIgnoreTabs.indexOf(mainTabs.items.map[key].id) === -1 && searchTabs.indexOf(mainTabs.items.map[key].id) === -1) {
+                    if(!this.errorHandlingIgnoreTabs.includes(mainTabs.items.map[key].id) && !searchTabs.includes(mainTabs.items.map[key].id)) {
                         searchTabs.push(mainTabs.items.map[key].id);
                     }
                 }
@@ -452,8 +453,8 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 
             if (component.id == 'modx-panel-resource-tv') {
                 const errFldPanelId = errFld.closest('.x-panel').id,
-                    tvTabs = Ext.getCmp('modx-resource-vtabs')
-                    ;
+                      tvTabs = Ext.getCmp('modx-resource-vtabs')
+                ;
                 if (tvTabs && tvTabs.items && tvTabs.items.keys) {
                     const tvTabIndex = tvTabs.items.keys.indexOf(errFldPanelId);
                     if (tvTabs.items.items[tvTabIndex] && tvTabs.items.items[tvTabIndex].hidden)  {
@@ -466,9 +467,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     ,detectErrors: function(node) {
-        let erroredFlds = document.getElementById(node.id).querySelectorAll('.x-form-invalid'),
-            numErrors = erroredFlds.length
-            ;
+        const erroredFlds = document.getElementById(node.id).querySelectorAll('.x-form-invalid'),
+              numErrors = erroredFlds.length
+        ;
         if (numErrors > 0) {
             return erroredFlds[0].id;
         } else {
@@ -485,9 +486,11 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      */
     ,insertTagCopyUtility: function(cmp, elType) {
         const helpTag = cmp.getEl().child('.example-replace-name'),
-            elTag = cmp.getEl().child('.copy-this');
+              elTag = cmp.getEl().child('.copy-this')
+        ;
         let nameVal = cmp.previousSibling().getValue(),
-            tagText;
+            tagText
+        ;
 
         // If the helptag isn't available, skip here. This may happen when a lexicon is missing or outdated
         // and doesn't contain the `example-replace-name` class.
@@ -715,8 +718,8 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      */
     ,toggleFieldVisibility: function(ctrlId, containerId, fieldIds, ctrlValToShow, addSibling) {
 
-        const   ctrlCmp = Ext.getCmp(ctrlId),
-                containerCmp = Ext.getCmp(containerId)
+        const ctrlCmp = Ext.getCmp(ctrlId),
+              containerCmp = Ext.getCmp(containerId)
         ;
         if (!ctrlCmp || typeof ctrlCmp === 'undefined') {
             console.error(`toggleFieldVisibility: Could not get the control component with the id '${ctrlId}'`);
@@ -730,8 +733,8 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         addSibling = addSibling === false ? false : true ;
         ctrlValToShow = ctrlValToShow === false ? false : true ;
 
-        const   showVal = ctrlCmp.xtype === 'combo-boolean' ? ctrlCmp.getValue() : ctrlCmp.checked ,
-                show = ctrlValToShow === false ? !showVal : showVal
+        const showVal = ctrlCmp.xtype === 'combo-boolean' ? ctrlCmp.getValue() : ctrlCmp.checked ,
+              show = ctrlValToShow === false ? !showVal : showVal
         ;
         if (show) {
             containerCmp.show();
@@ -743,9 +746,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
 
         fieldIds.forEach(field => {
             const fieldCmp = Ext.getCmp(field),
-                sibling = fieldCmp.nextSibling(),
-                siblingIsHelp = sibling && sibling.xtype === 'label' ? true : false
-                ;
+                  sibling = fieldCmp.nextSibling(),
+                  siblingIsHelp = sibling && sibling.xtype === 'label'
+            ;
             if (fieldCmp) {
                 if (show) {
                     fieldCmp.show();

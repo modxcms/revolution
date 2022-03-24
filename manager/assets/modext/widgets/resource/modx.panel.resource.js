@@ -76,7 +76,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             this.formatMainPanelTitle('resource', this.config.record);
 
             // initial check to enable realtime alias
-            this.config.aliaswasempty = Ext.isEmpty(this.config.record.alias) ? true : false ;
+            this.config.aliaswasempty = Ext.isEmpty(this.config.record.alias);
             // the initial value for the realtime-alias throttling
             this.config.translitloading = false;
 
