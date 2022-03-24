@@ -685,8 +685,7 @@ class modElement extends modAccessibleSimpleObject
         }
         if ($this->get('property_preprocess')) {
             foreach ($this->_properties as $pKey => $pValue) {
-                if ($this->xpdo->parser->processElementTags('', $pValue,
-                    $this->xpdo->parser->isProcessingUncacheable())) {
+                if ($this->xpdo->parser->processElementTags('', $pValue, $this->xpdo->parser->isProcessingUncacheable())) {
                     $this->_properties[$pKey] = $pValue;
                 }
             }
@@ -754,8 +753,7 @@ class modElement extends modAccessibleSimpleObject
             ]);
             if ($propertySetObj) {
                 if (is_array($propertySet)) {
-                    $propertySet = array_merge($propertySet,
-                        $this->xpdo->parser->parseProperties($propertySetObj->get('properties')));
+                    $propertySet = array_merge($propertySet, $this->xpdo->parser->parseProperties($propertySetObj->get('properties')));
                 } else {
                     $propertySet = $this->xpdo->parser->parseProperties($propertySetObj->get('properties'));
                 }
@@ -1120,7 +1118,9 @@ class modElement extends modAccessibleSimpleObject
                 while (!empty($sourceDir)) {
                     if (file_exists($sourceDir) && is_dir($sourceDir)) {
                         $isMutable = is_writable($sourceDir);
-                        if ($isMutable) break;
+                        if ($isMutable) {
+                            break;
+                        }
                     }
                     if ($sourceDir != '/') {
                         $sourceDir = dirname($sourceDir);
@@ -1128,7 +1128,9 @@ class modElement extends modAccessibleSimpleObject
                         break;
                     }
                     $i--;
-                    if ($i < 0) break;
+                    if ($i < 0) {
+                        break;
+                    }
                 }
             }
         }
