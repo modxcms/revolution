@@ -47,7 +47,7 @@ $_lang['setting_err_startint'] = 'Schlüsselnamen von Einstellungen dürfen nich
 $_lang['setting_err_invalid_document'] = 'Es gibt kein Dokument mit der ID %d. Bitte geben Sie ein existierendes Dokument an.';
 $_lang['setting_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Einstellung löschen möchten? Das könnte Ihre MODX-Installation unbrauchbar machen.';
 $_lang['settings_after_install'] = 'Da dies eine neue MODX-Installation ist, müssen Sie diese Einstellungen kontrollieren und ggf. einige Ihren Wünschen entsprechend ändern. Nachdem Sie die Einstellungen kontrolliert und ggf. angepasst haben, klicken Sie auf "Speichern", um die Daten in der Datenbank zu aktualisieren.<br /><br />';
-$_lang['settings_desc'] = 'Hier können Sie sowohl generelle Konfigurationseinstellungen für die MODX-Manager-Benutzeroberfläche vornehmen als auch festlegen, wie sich Ihre MODX-Website verhält. <b>Jede Einstellung ist ist mit dem [[++key]] Platzhalter verfügbar.</b><br />Doppelklicken Sie über der Einstellung, die Sie ändern möchten, auf die Werte-Spalte, um den Wert dynamisch direkt in der Tabelle zu bearbeiten, oder führen Sie einen Rechtsklick auf einer Einstellung aus, um weitere Optionen angeboten zu bekommen. Sie können, wo vorhanden, auch auf das "+"-Icon klicken, um eine Erläuterung zu der jeweiligen Einstellung zu bekommen.';
+$_lang['settings_desc'] = 'Hier können Sie sowohl generelle Konfigurationseinstellungen für die MODX-Manager-Benutzeroberfläche vornehmen als auch festlegen, wie sich Ihre MODX-Website verhält. <b>Jede Einstellung ist mit dem [[++key]] Platzhalter verfügbar.</b><br />Doppelklicken Sie über der Einstellung, die Sie ändern möchten, auf die Werte-Spalte, um den Wert dynamisch direkt in der Tabelle zu bearbeiten, oder führen Sie einen Rechtsklick auf einer Einstellung aus, um weitere Optionen angeboten zu bekommen. Sie können, wo vorhanden, auch auf das "+"-Icon klicken, um eine Erläuterung zu der jeweiligen Einstellung zu bekommen.';
 $_lang['settings_furls'] = 'Suchmaschinenfreundliche URLs';
 $_lang['settings_misc'] = 'Verschiedenes';
 $_lang['settings_site'] = 'Site';
@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer 
 $_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
 $_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
 
-$_lang['static_elements_html_extension'] = 'Datei-Endung für statische HTML-Elemente';
-$_lang['static_elements_html_extension_desc'] = 'Die Datei-Endung, die für statische Elemente mit HTML-Inhalt verwendet wird.';
+$_lang['setting_static_elements_html_extension'] = 'Datei-Endung für statische HTML-Elemente';
+$_lang['setting_static_elements_html_extension_desc'] = 'Die Datei-Endung, die für statische Elemente mit HTML-Inhalt verwendet wird.';
