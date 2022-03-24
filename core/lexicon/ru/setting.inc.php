@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Если включено, по
 $_lang['setting_passwordless_expiration'] = 'Срок действия входа без пароля';
 $_lang['setting_passwordless_expiration_desc'] = 'Продолжительность времени в секундах, на которое действительна одноразовая ссылка для входа.';
 
-$_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'Расширение для файлов, используемых статическими элементами с HTML-содержимым.';
+$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
+$_lang['setting_static_elements_html_extension_desc'] = 'Расширение для файлов, используемых статическими элементами с HTML-содержимым.';
