@@ -21,8 +21,8 @@ $_lang['area_manager'] = 'Gestionnaire';
 $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session et Cookie';
-$_lang['area_static_elements'] = 'Contenus statiques';
-$_lang['area_static_resources'] = 'Static Resources';
+$_lang['area_static_elements'] = 'Éléments statiques';
+$_lang['area_static_resources'] = 'Ressources statiques';
 $_lang['area_lexicon_string'] = 'Entrées du lexique de zone';
 $_lang['area_lexicon_string_msg'] = 'Entrez ici la clé de l\'entrée du lexique pour la zone. S\'il n\'y a pas d\'entrée de lexique, cela affichera la clé de la zone.<br />Zones du coeur : Authentification, cache, fichier, urls simples, passerelle, langue, gestionnaire, session, site, système';
 $_lang['area_site'] = 'Site';
@@ -247,8 +247,8 @@ $_lang['setting_emailsender_err'] = 'Veuillez indiquer l\'adresse e-mail d\'admi
 $_lang['setting_enable_dragdrop'] = 'Activer le Glisser-Déposer dans l\'arborescence de ressources/éléments';
 $_lang['setting_enable_dragdrop_desc'] = 'Inactif, empêchera l\'utilisation du glisser-déposer dans l\'arborescence de ressources et d\'éléments.';
 
-$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
-$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+$_lang['setting_enable_template_picker_in_tree'] = 'Activer le sélecteur de modèle dans l\'arborescence de ressources/éléments';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Activez cette option pour utiliser le sélecteur de modèle via une fenêtre modale lors de la création d\'une nouvelle ressource dans l\'arborescence.';
 
 $_lang['setting_error_page'] = 'Page d\'erreur';
 $_lang['setting_error_page_desc'] = 'Entrez l\'ID du document que vous souhaitez afficher aux utilisateurs qui demandent un document qui n\'existe pas. <strong>NOTE : assurez-vous que cet ID appartienne à un document publié existant!</strong>';
@@ -382,10 +382,10 @@ $_lang['setting_mail_smtp_port'] = 'Port SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Défini le port par défaut du serveur SMTP.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Paramétrage du type de sécurité pour le chiffrement SMTP. Les options valables sont : "", "ssl" ou "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Activation automatique du chiffrement TLS si le serveur le prend en charge, même si "SMTP Secure" n\'est pas réglé sur "tls".';
 
 $_lang['setting_mail_smtp_single_to'] = 'Simple destinataire SMTP';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Donne la possibilité d\'effectuer un champ destinataire individuel, au lieu d\'envoyer à tous les destinataires.';
@@ -615,7 +615,7 @@ $_lang['setting_session_cookie_domain'] = 'Cookie de session de domaine';
 $_lang['setting_session_cookie_domain_desc'] = 'Utilisez cette option pour personnaliser le domaine de session de cookie.';
 
 $_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choisissez entre Lax ou Strict.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Durée de vie du Cookie de Session';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Utilisez cette option pour personnaliser la durée de vie de session de coockie (en secondes). Ceci est utilisé la durée de la session côté client quand l\'option \'se rappeler de moi\' est utilisée lors du login.';
@@ -700,11 +700,11 @@ $_lang['setting_static_elements_default_category_desc'] = 'Spécifier une catég
 $_lang['setting_static_elements_basepath'] = 'Chemin de base des éléments statiques';
 $_lang['setting_static_elements_basepath_desc'] = 'Chemin de base où stocker les fichiers d\'éléments statiques.';
 
-$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
-$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+$_lang['setting_resource_static_allow_absolute'] = 'Autoriser le chemin absolu pour les ressources statiques';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Ce paramètre permet aux utilisateurs de saisir un chemin absolu entièrement qualifié vers tout fichier lisible sur le serveur comme contenu d\'une ressource statique. Important : l\'activation de ce paramètre peut être considérée comme un risque de sécurité important ! Il est fortement recommandé de garder ce paramètre désactivé, à moins que vous ne fassiez entièrement confiance à chaque utilisateur du gestionnaire.';
 
-$_lang['setting_resource_static_path'] = 'Static resource base path';
-$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
+$_lang['setting_resource_static_path'] = 'Chemin de base des ressources statiques';
+$_lang['setting_resource_static_path_desc'] = 'Lorsque le paramètre resource_static_allow_absolute est désactivé, les ressources statiques ne peuvent se trouver que dans le chemin absolu fourni ici.  Important : une définition trop large peut permettre aux utilisateurs de lire des fichiers qu\'ils ne devraient pas lire ! Il est fortement recommandé de limiter les utilisateurs à un répertoire spécifique tel que {core_path}static/ ou {assets_path} avec ce paramètre.';
 
 $_lang['setting_symlink_merge_fields'] = 'Fusionner les champs de ressource des liens symboliques';
 $_lang['setting_symlink_merge_fields_desc'] = 'Activé, cela fusionnera automatiquement les champs non vides avec ceux de la ressource cible, lors de redirections utilisant les liens symboliques.';
@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Lorsque cette option est activ�
 $_lang['setting_passwordless_expiration'] = 'Expiration de la connexion sans mot de passe';
 $_lang['setting_passwordless_expiration_desc'] = 'Durée de validité en secondes d\'un lien de connexion unique.';
 
-$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
-$_lang['setting_static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['setting_static_elements_html_extension'] = 'Extension html des éléments statiques';
+$_lang['setting_static_elements_html_extension_desc'] = 'L\'extension pour les fichiers utilisés par les éléments statiques avec du contenu HTML.';

@@ -49,7 +49,7 @@ $_lang['serveroffset'] = 'Décalage du serveur';
 $_lang['smarty_version'] = '<a href="http://smarty.net/" target="_blank">Smarty</a> Version';
 $_lang['sysinfo_desc'] = 'Vous pouvez consulter ici les informations générales au sujet de votre environnement MODX.';
 $_lang['view_sysinfo'] = 'Informations système';
-$_lang['table_prefix'] = 'Préfix de table';
+$_lang['table_prefix'] = 'Préfixe de table';
 $_lang['truncate_table'] = 'Cliquez ici pour tronquer cette table';
 $_lang['truncate_table_err'] = 'Erreur lorsque le système a voulu tronquer cette table';
 $_lang['version_codename'] = 'Nom de code de la version';

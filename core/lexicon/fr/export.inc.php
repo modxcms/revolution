@@ -8,7 +8,7 @@
  */
 $_lang['export_site_cacheable'] = 'Inclure les fichiers non mis en cache:';
 $_lang['export_site_exporting_document'] = 'Exporter les fichiers <strong>%s</strong> de <strong>%s</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><i>%s</i>, id %s</small><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-$_lang['export_site_failed'] = '<span style="color:#990000">Echec!</span>';
+$_lang['export_site_failed'] = '<span style="color:#990000">Echec&nbsp;!</span>';
 $_lang['export_site_html'] = 'Exporter le site en HTML';
 $_lang['export_site_maxtime'] = 'Temps maximum d\'export:';
 $_lang['export_site_maxtime_message'] = 'Vous pouvez indiquer ici le nombre de secondes maximum dont MODX dispose pour exporter le site (en écrasant les réglages PHP). 0 pour une durée illimitée. Notez cependant que spécifier la valeur à 0, ou une valeur très élevée peut entrainer des comportements bizarres du serveur et n\'est donc pas recommandé.';
