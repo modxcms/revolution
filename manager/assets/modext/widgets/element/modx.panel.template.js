@@ -199,7 +199,7 @@ MODx.panel.Template = function(config) {
                         name: 'source',
                         id: 'modx-template-static-source',
                         anchor: '100%',
-                        value: null !== config.record.source ? config.record.source : MODx.config.default_media_source,
+                        value: config.record.source != null ? config.record.source : MODx.config.default_media_source,
                         baseParams: {
                             action: 'source/getList',
                             showNone: true,

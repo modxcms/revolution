@@ -425,7 +425,8 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      */
     ,onChangeStaticSource: function(cmp, elType) {
 
-        const   staticFileField = Ext.getCmp(`modx-${elType}-static-file`),
+        const   isStatic = Ext.getCmp(`modx-${elType}-static`).getValue(),
+                staticFileField = Ext.getCmp(`modx-${elType}-static-file`),
                 staticFile = staticFileField.getValue(),
                 staticDir = staticFile.slice(0, (staticFile.lastIndexOf('/') + 1)),
                 staticFileFieldId = staticFileField.id,
@@ -434,6 +435,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 previousSource = this.previousFileSource || 0,
                 currentSource = cmp.getValue(),
                 currentRecord = {
+                    static: isStatic,
                     static_file: staticFile,
                     source: currentSource,
                     openTo: staticDir
@@ -445,18 +447,19 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         ;
         if (elType === 'template') {
             // need these in method's global scope, so define with var instead of const/let
-            var   staticPreviewFileField = Ext.getCmp(`modx-${elType}-preview-file`),
-                    staticPreviewFile = staticPreviewFileField.getValue(),
-                    staticPreviewDir = staticPreviewFile.slice(0, (staticPreviewFile.lastIndexOf('/') + 1)),
-                    staticPreviewFileFieldId = staticPreviewFileField.id,
-                    staticPreviewFileFieldContainer = Ext.getCmp(staticPreviewFileField.ownerCt.id),
-                    previewItemKey = staticPreviewFileFieldContainer.items.keys.indexOf(staticPreviewFileFieldId),
-                    currentPreviewRecord = {
-                        preview_file: staticPreviewFile,
-                        source: currentSource,
-                        openTo: staticPreviewDir
-                    },
-                    newPreviewFileField
+            var staticPreviewFileField = Ext.getCmp(`modx-${elType}-preview-file`),
+                staticPreviewFile = staticPreviewFileField.getValue(),
+                staticPreviewDir = staticPreviewFile.slice(0, (staticPreviewFile.lastIndexOf('/') + 1)),
+                staticPreviewFileFieldId = staticPreviewFileField.id,
+                staticPreviewFileFieldContainer = Ext.getCmp(staticPreviewFileField.ownerCt.id),
+                previewItemKey = staticPreviewFileFieldContainer.items.keys.indexOf(staticPreviewFileFieldId),
+                currentPreviewRecord = {
+                    static: isStatic,
+                    preview_file: staticPreviewFile,
+                    source: currentSource,
+                    openTo: staticPreviewDir
+                },
+                newPreviewFileField
             ;
         }
 
@@ -527,7 +530,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         };
         let finalConfig;
 
-        if (record.source == 0) {
+        if (record.source === 0 || !record.hasOwnProperty('source') && Ext.isEmpty(MODx.config.default_media_source)) {
             loadBrowserField = false;
         }
 
@@ -543,6 +546,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             finalConfig = Object.assign(sharedConfig, {
                 xtype: 'textfield'
             });
+        }
+        if (!record.static) {
+            finalConfig.hidden = true;
         }
         return finalConfig;
     }
@@ -566,7 +572,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         };
         let finalConfig;
 
-        if (record.source == 0) {
+        if (record.source === 0 || !record.hasOwnProperty('source') && Ext.isEmpty(MODx.config.default_media_source)) {
             loadBrowserField = false;
         }
 
