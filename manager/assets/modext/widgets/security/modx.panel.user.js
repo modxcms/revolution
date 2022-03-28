@@ -488,6 +488,10 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,anchor: '100%'
                     ,inputType: 'password'
                     ,xtype: 'textfield'
+                    ,autoCreate: {
+                        tag: "input"
+                        ,autocomplete: "new-password"
+                    }
                 }
                 ,items: [{
                     id: 'modx-user-specifiedpassword'

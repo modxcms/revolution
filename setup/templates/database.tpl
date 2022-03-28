@@ -46,7 +46,7 @@
             <label for="database-user">{$_lang.connection_database_login}</label>
         </div>
         <div class="col">
-            <input type="text" id="database-user" name="database_user" value="" />
+            <input type="text" id="database-user" name="database_user" value="" autocomplete="new-password" />
             <span class="field_error" id="database-user-error"></span>
         </div>
     </div>
@@ -55,7 +55,7 @@
             <label for="database-password">{$_lang.connection_database_pass}</label>
         </div>
         <div class="col">
-            <input id="database-password" type="password" name="database_password" value="" />
+            <input id="database-password" type="password" name="database_password" value="" autocomplete="new-password" />
             <span class="field_error" id="database-password-error"></span>
         </div>
     </div>
