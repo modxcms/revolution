@@ -2,9 +2,35 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.0.0-pl (TBD)
+MODX Revolution 3.0.0-pl (March 30, 2022)
 ====================================
-
+- Ensure non-standard ports are maintained in URL (#16087)
+- Fix incorrect word wrapping in manager panel (#16094)
+- Prevent autofilling passwords (#16105)
+- Fix static file field visibility in Element panels (#16102)
+- Fix various static element issues (#16098)
+- Add missing prefix to static_elements_html_extension lexicons (#16090)
+- Update xPDO to 3.1.0 and fix Container method signatures (#16088)
+- Fix Element Panel Static File UI (#16082)
+- Update PHP versions in setup tests (#16077)
+- Correct config check lexicon for cache mutability (#16085)
+- Enable popper for submenus on hover (#16041)
+- Fix typo for permission 'delete_static_resource' (#16079)
+- Call OnFileManagerFileRename if upload_translit renames new file (#16051)
+- Stay on current page after language switch (#16069)
+- Move existing value of mail_smtp_prefix to mail_smtp_secure (#16065)
+- Match Form Customization field order with resource form (#16052)
+- Fix dates on dashboard feeds (#15980)
+- Add explanatory text to create category (#16050)
+- Change lexicon key and text of mail_smtp_prefix (#16062)
+- Fix static element save issue (#16043)
+- Correct policy group descriptions (#16057)
+- Change brackets for category child elements (#16027)
+- Optionally determine context from config.context.php (#16045)
+- Change height of content (#16037)
+- Change minWidth of popup window in trash (#15984)
+- Cleanup unused background image logic (#16020)
+- Fix rename attribute or container in user extended field (#16039)
 
 MODX Revolution 3.0.0-rc2 (February 3, 2022)
 ====================================
