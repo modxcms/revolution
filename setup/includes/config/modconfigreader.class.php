@@ -75,7 +75,7 @@ abstract class modConfigReader {
             if ($_SERVER['SERVER_PORT'] != 80) {
                 $this->config['http_host']= str_replace(':' . $_SERVER['SERVER_PORT'], '', $this->config['http_host']); /* remove port from HTTP_HOST */
             }
-            $this->config['http_host'] .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
+            $this->config['http_host'] .= in_array($_SERVER['SERVER_PORT'], [80, 443]) ? '' : ':' . $_SERVER['SERVER_PORT'];
         } else {
             $this->config['http_host'] = 'localhost';
             $this->config['https_port'] = 443;
