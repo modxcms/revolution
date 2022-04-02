@@ -59,7 +59,7 @@ if (!empty($unsatisfiedExtensionRequirements)) {
         $unsatisfiedRequirementsErrors[] = [
             'title' => sprintf('MODX requires the PHP %s extension', $unsatisfiedExtensionRequirement),
             'description' => sprintf(
-                'You\'re PHP configuration at version %s does not appear to have this extension enabled.',
+                'Your PHP configuration at version %s does not appear to have this extension enabled.',
                 PHP_VERSION
             ),
         ];
