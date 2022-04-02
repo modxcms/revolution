@@ -406,10 +406,10 @@ class modTemplateVar extends modElement
         $this->set('default_text', $this->processBindings($this->get('default_text'), $resourceId));
 
         /* remove disallowed tags and attributes from description */
-        $this->set('description', $this->modx->stripHtml(
+        $this->set('description', $this->xpdo->stripHtml(
             $this->get('description'),
-            $this->modx->getOption('elements_description_allowedtags'),
-            $this->modx->getOption('elements_description_allowedattr')
+            $this->xpdo->getOption('elements_description_allowedtags'),
+            $this->xpdo->getOption('elements_description_allowedattr')
         ));
 
         $params = [];
