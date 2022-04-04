@@ -844,8 +844,15 @@ input::-moz-focus-inner {
 
 /* .x-form-check-wrap */
 /* Special checboxes for resources and tv configs */
+#modx-chunk-tabs,
+#modx-plugin-tabs,
+// #modx-resource-tabs .display-switch,
 #modx-resource-tabs,
-#modx-tv-tabs {
+#modx-snippet-tabs,
+#modx-template-tabs,
+// #modx-tv-tabs .display-switch,
+#modx-tv-tabs,
+#modx-tv-editor-tabs {
 
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
@@ -938,6 +945,10 @@ input::-moz-focus-inner {
       }
     }
   }
+}
+
+.switch-container {
+  padding-top: 1.6rem;
 }
 
 .x-form-check-group,
