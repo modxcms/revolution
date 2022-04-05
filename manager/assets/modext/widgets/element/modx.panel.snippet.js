@@ -401,18 +401,17 @@ Ext.extend(MODx.panel.Snippet,MODx.FormPanel,{
 
     ,setup: function() {
 
-        if (!this.initialized) {
-            /*
-                The itemId (not id) of each form tab to be included/excluded; these correspond to the
-                keys in each tab component's items property
-            */
-            this.errorHandlingTabs = ['modx-snippet-form'];
-            this.errorHandlingIgnoreTabs = ['modx-panel-element-properties'];
-            this.getForm().setValues(this.config.record);
-        } else {
+        if (this.initialized) {
             this.clearDirty();
             return true;
         }
+        /*
+            The itemId (not id) of each form tab to be included/excluded; these correspond to the
+            keys in each tab component's items property
+        */
+        this.errorHandlingTabs = ['modx-snippet-form'];
+        this.errorHandlingIgnoreTabs = ['modx-panel-element-properties'];
+        this.getForm().setValues(this.config.record);
 
         this.formatMainPanelTitle('snippet', this.config.record);
         this.getElementProperties(this.config.record.properties);
