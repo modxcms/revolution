@@ -229,16 +229,67 @@ MODx.panel.Template = function(config) {
                                 ,validationEvent: 'change'
                                 ,validateOnBlur: false
                             }
+                            ,items: [{
+                                xtype: 'modx-combo-source'
+                                ,fieldLabel: _('template_preview_source')
+                                ,description: MODx.expandHelp ? '' : _('template_preview_source_desc')
+                                ,name: 'preview_source'
+                                ,id: 'modx-template-preview-source'
+                                ,maxLength: 255
+                                ,submitValue: false
+                                ,hiddenName: 'source'
+                                ,value: config.record.source != null ? config.record.source : MODx.config.default_media_source
+                                ,baseParams: {
+                                    action: 'Source/GetList'
+                                    ,showNone: true
+                                    ,streamsOnly: true
+                                }
+                                ,listeners: {
+                                    select: {
+                                        fn: function(cmp, record, selectedIndex) {
+                                            this.onChangeStaticSource(cmp, 'template');
+                                            Ext.getCmp('modx-template-static-source').setValue(cmp.getValue());
+                                        },
+                                        scope: this
+                                    }
+                                }
+                            },{
+                                xtype: MODx.expandHelp ? 'label' : 'hidden'
+                                ,forId: 'modx-template-preview-source'
+                                ,html: _('template_preview_source_desc')
+                                ,cls: 'desc-under'
+                            }]
+                        },{
+                            columnWidth: 0.5
+                            ,defaults: {
+                                anchor: '100%'
+                                ,msgTarget: 'under'
+                                ,validationEvent: 'change'
+                                ,validateOnBlur: false
+                            }
                             ,items: [
                                 this.getTemplatePreviewImageField(config.record),{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden',
                                 forId: 'modx-template-preview-file',
-                                id: 'modx-template-preview-file-help',
                                 html: _('template_preview_desc'),
                                 cls: 'desc-under'
                             }]
-                        },{
-                            columnWidth: 0.5
+                        }]
+                    }]
+                },{
+                    // row 4 icon field
+                    cls:'form-row-wrapper'
+                    ,defaults: {
+                        layout: 'column'
+                    }
+                    ,items: [{
+                        defaults: {
+                            layout: 'form'
+                            ,labelSeparator: ''
+                            ,labelAlign: 'top'
+                        }
+                        ,items: [{
+                            columnWidth: 1
                             ,defaults: {
                                 anchor: '100%'
                                 ,msgTarget: 'under'
@@ -333,9 +384,11 @@ MODx.panel.Template = function(config) {
                                 xtype: 'modx-combo-source'
                                 ,fieldLabel: _('static_source')
                                 ,description: MODx.expandHelp ? '' : _('static_source_desc')
-                                ,name: 'source'
+                                ,name: 'static_source'
                                 ,id: 'modx-template-static-source'
                                 ,maxLength: 255
+                                ,submitValue: false
+                                ,hiddenName: 'source'
                                 ,value: config.record.source != null ? config.record.source : MODx.config.default_media_source
                                 ,baseParams: {
                                     action: 'Source/GetList'
@@ -346,6 +399,7 @@ MODx.panel.Template = function(config) {
                                     select: {
                                         fn: function(cmp, record, selectedIndex) {
                                             this.onChangeStaticSource(cmp, 'template');
+                                            Ext.getCmp('modx-template-preview-source').setValue(cmp.getValue());
                                         },
                                         scope: this
                                     }
