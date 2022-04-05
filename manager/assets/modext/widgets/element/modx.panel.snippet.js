@@ -22,10 +22,12 @@ MODx.panel.Snippet = function(config) {
         ,allowDrop: false
         ,previousFileSource: config.record.source != null ? config.record.source : MODx.config.default_media_source
         ,items: [{
-            id: 'modx-snippet-header',
-            xtype: 'modx-header'
-        }, MODx.getPageStructure([{
-            title: _('general_information')
+            html: _('snippet_new')
+            ,id: 'modx-snippet-header'
+            ,xtype: 'modx-header'
+        },MODx.getPageStructure([{
+            title: _('snippet_title')
+            ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-snippet-form'
             ,labelWidth: 150
@@ -300,8 +302,8 @@ MODx.panel.Snippet = function(config) {
                                 }
                                 ,listeners: {
                                     select: {
-                                        fn: function() {
-                                            this.setMediaSources('snippet');
+                                        fn: function(cmp, record, selectedIndex) {
+                                            this.onChangeStaticSource(cmp, 'snippet');
                                         },
                                         scope: this
                                     }
@@ -322,30 +324,8 @@ MODx.panel.Snippet = function(config) {
                                 ,validateOnBlur: false
                                 ,hideMode: 'visibility'
                             }
-                            ,items: [{
-                                xtype: 'modx-combo-browser'
-                                ,browserEl: 'modx-browser'
-                                ,fieldLabel: _('static_file')
-                                ,description: MODx.expandHelp ? '' : _('static_file_desc')
-                                ,name: 'static_file'
-                                ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
-                                ,openTo: config.record.openTo || ''
-                                ,id: 'modx-snippet-static-file'
-                                ,triggerClass: 'x-form-code-trigger'
-                                ,maxLength: 255
-                                ,value: config.record.static_file || ''
-                                ,tabIndex: 8
-                                ,validator: function(value){
-                                    if (Ext.getCmp('modx-snippet-static').getValue() === true) {
-                                        if (Ext.util.Format.trim(value) != '') {
-                                            return true;
-                                        } else {
-                                            return _('static_file_ns');
-                                        }
-                                    }
-                                    return true;
-                                }
-                            },{
+                            ,items: [
+                                this.getStaticFileField('snippet', config.record),{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-snippet-static-file'
                                 ,id: 'modx-snippet-static-file-help'
