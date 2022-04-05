@@ -592,6 +592,69 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     }
 
     /**
+     * @property {Function} addNewLoaderType - Inserts given tv type, and optionally output render type, into newLoaderTypes object
+     *
+     * @param {String|Array} renderTypeKeys - The TV type (e.g., 'date') or output render type (e.g., 'string') or both in an array if differently named (e.g., ['tvName', 'renderName'])
+     * @param {String|Array} propTypes - Optional; Which property panel(s) use the given renderTypeKey (currently either 'input' or 'output')
+     *
+     * Example usage:
+     * addNewLoaderType('tvName', 'input'); - adds 'tvName' to newLoaderTypes.input array
+     * addNewLoaderType('tvName'); - adds 'tvName' to newLoaderTypes.input array and an output render by the same name ('tvName') to the newLoaderTypes.output array
+     * addNewLoaderType(['tvName', 'renderName'], ['input', 'output']); OR simply addNewLoaderType(['tvName', 'renderName']); - adds tvName' to newLoaderTypes.input array and 'renderName' to newLoaderTypes.output array
+     *
+     */
+    ,addNewLoaderType: function(renderTypeKeys, propTypes) {
+
+        propTypes = propTypes || ['input', 'output'];
+
+        if (typeof propTypes === 'string') {
+            // String indicates a single propType was given, meaning only one renderTypeKey should have been given
+            if (typeof renderTypeKeys !== 'string') {
+                console.error('addNewLoaderType: The renderTypeKeys parameter must be a string when the propTypes parameter is a string. The value passed for renderTypeKeys was: ', renderTypeKeys);
+                return false;
+            }
+            this.newLoaderTypes[propTypes].push(renderTypeKeys);
+        } else {
+            // Let's just make sure this is an array and it's not empty
+            if(Ext.isArray(propTypes) && propTypes.length > 0) {
+                const matchKeystoTypes = Ext.isArray(renderTypeKeys) && renderTypeKeys.length == propTypes.length ? true : false ;
+                Ext.each(propTypes, function(type, i) {
+                    if (!this.newLoaderTypes.hasOwnProperty(type)) {
+                        this.newLoaderTypes[type] = [];
+                    }
+                    if (matchKeystoTypes) {
+                        this.newLoaderTypes[type].push(renderTypeKeys[i]);
+                    } else {
+                        this.newLoaderTypes[type].push(renderTypeKeys);
+                    }
+                }, this);
+            } else {
+                console.error('addNewLoaderType: There was a problem matching the renderTypeKeys to the propTypes');
+                console.error('addNewLoaderType: renderTypeKeys - ', renderTypeKeys);
+                console.error('addNewLoaderType: propTypes, - ', propTypes);
+            }
+        }
+    }
+
+    /**
+     * @property {Function} useLegacyLoader - Provides backward compatibility for non-native (community-authored)
+     * TVs that have not updated to the new configuration loader
+     *
+     * @param {String} tvType - The TV type (e.g., 'date')
+     * @param {String} propType - The properties panel being loaded (currently either 'input' or 'output')
+     * @returns {Boolean}
+     */
+    ,useLegacyLoader: function(tvType, propType) {
+        let allNewLoaderTypes;
+        if (this.newLoaderTypes.hasOwnProperty(propType) && this.newLoaderTypes[propType].length > 0) {
+            allNewLoaderTypes = [...this.nativeTypes[propType], ...this.newLoaderTypes[propType]]
+        } else {
+            allNewLoaderTypes = this.nativeTypes[propType];
+        }
+        return allNewLoaderTypes.indexOf(tvType) === -1 ? true : false ;
+    }
+
+    /**
      * @property {Object} validatorRefMap - Provides an easy way to map differently named fields to a
      * common validator method, by tv type, without the need to pass in variables to the target method
      * from the field item's validator config
@@ -629,10 +692,6 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         }
     }
 
-    ,validatorCustomDefs: {}
-
-    ,listenerCustomDefs: {}
-
     /**
      * @property {Object} sharedComponentOverrides - Entry point for user-contributed TV
      * overrides of the global input properties (currently input options [elements] and
@@ -641,24 +700,23 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     ,sharedComponentOverrides: {}
 
     ,setup: function() {
-
-        if (!this.initialized) {
-            /*
-                The itemId (not id) of each form tab to be included/excluded; these correspond to the
-                keys in each tab component's items property
-            */
-            this.errorHandlingTabs = ['form-tv'];
-            this.errorHandlingIgnoreTabs = ['panel-properties','form-template','form-access','form-sources'];
-            this.getForm().setValues(this.config.record);
-        } else {
+        
+        if (this.initialized) {
             this.clearDirty();
             return true;
         }
+        /*
+            The itemId (not id) of each form tab to be included/excluded; these correspond to the
+            keys in each tab component's items property
+        */
+        this.errorHandlingTabs = ['form-tv'];
+        this.errorHandlingIgnoreTabs = ['panel-properties','form-template','form-access','form-sources'];
 
+        this.getForm().setValues(this.config.record);
         this.formatMainPanelTitle('tv', this.config.record);
         this.getElementProperties(this.config.record.properties);
 
-        if (!Ext.isEmpty(this.config.record.sources) && !this.initialized) {
+        if (!Ext.isEmpty(this.config.record.sources)) {
             Ext.getCmp('modx-grid-element-sources').getStore().loadData(this.config.record.sources);
         }
 
@@ -722,6 +780,8 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
         }
     }
 
+    ,validatorCustomDefs: {}
+
     /**
      * @property {Function} getValidatorDefs - Establishes special built-in validators and provides
      * an easy way for custom TVs to add their own via a custom override object
@@ -765,6 +825,8 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
 
         return validatorDefs;
     }
+
+    ,listenerCustomDefs: {}
 
     /**
      * @property {Function} getListenerDefs - Establishes special built-in listeners and provides
