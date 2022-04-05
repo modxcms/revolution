@@ -229,21 +229,8 @@ MODx.panel.Template = function(config) {
                                 ,validationEvent: 'change'
                                 ,validateOnBlur: false
                             }
-                            ,items: [{
-                                xtype: 'modx-combo-browser',
-                                browserEl: 'modx-browser',
-                                fieldLabel: _('template_preview'),
-                                description: MODx.expandHelp ? '' : _('template_preview_desc'),
-                                triggerClass: 'x-form-image-trigger',
-                                name: 'preview_file',
-                                source: null !== config.record.source ? config.record.source : MODx.config.default_media_source,
-                                openTo: config.record.openTo || '',
-                                allowedFileTypes: 'jpg,jpeg,png,gif,bmp',
-                                id: 'modx-template-preview-file',
-                                anchor: '100%',
-                                maxLength: 255,
-                                value: config.record.preview_file || ''
-                            }, {
+                            ,items: [
+                                this.getTemplatePreviewImageField(config.record),{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden',
                                 forId: 'modx-template-preview-file',
                                 id: 'modx-template-preview-file-help',
@@ -357,8 +344,8 @@ MODx.panel.Template = function(config) {
                                 }
                                 ,listeners: {
                                     select: {
-                                        fn: function() {
-                                            this.setMediaSources('template', 'static,preview', 'static');
+                                        fn: function(cmp, record, selectedIndex) {
+                                            this.onChangeStaticSource(cmp, 'template');
                                         },
                                         scope: this
                                     }
@@ -379,29 +366,8 @@ MODx.panel.Template = function(config) {
                                 ,validateOnBlur: false
                                 ,hideMode: 'visibility'
                             }
-                            ,items: [{
-                                xtype: 'modx-combo-browser'
-                                ,browserEl: 'modx-browser'
-                                ,fieldLabel: _('static_file')
-                                ,description: MODx.expandHelp ? '' : _('static_file_desc')
-                                ,name: 'static_file'
-                                ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
-                                ,openTo: config.record.openTo || ''
-                                ,id: 'modx-template-static-file'
-                                ,triggerClass: 'x-form-code-trigger'
-                                ,maxLength: 255
-                                ,value: config.record.static_file || ''
-                                ,validator: function(value){
-                                    if (Ext.getCmp('modx-template-static').getValue() === true) {
-                                        if (Ext.util.Format.trim(value) != '') {
-                                            return true;
-                                        } else {
-                                            return _('static_file_ns');
-                                        }
-                                    }
-                                    return true;
-                                }
-                            },{
+                            ,items: [
+                                this.getStaticFileField('template', config.record),{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-template-static-file'
                                 ,id: 'modx-template-static-file-help'
@@ -482,10 +448,11 @@ MODx.panel.Template = function(config) {
         ,listeners: {
             setup: {fn:this.setup,scope:this}
             ,success: {fn:this.success,scope:this}
+            ,failure: {fn:this.failure,scope:this}
             ,beforeSubmit: {fn:this.beforeSubmit,scope:this}
             ,failureSubmit: {
                 fn: function() {
-                    this.showErroredTab(['modx-template-form'], 'modx-template-tabs')
+                    this.showErroredTab(this.errorHandlingTabs, 'modx-template-tabs')
                 },
                 scope: this
             }
@@ -499,18 +466,17 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
 
     ,setup: function() {
 
-        if (!this.initialized) {
-            /*
-                The itemId (not id) of each form tab to be included/excluded; these correspond to the
-                keys in each tab component's items property
-            */
-            this.errorHandlingTabs = ['modx-template-form'];
-            this.errorHandlingIgnoreTabs = ['modx-panel-element-properties','form-template'];
-            this.getForm().setValues(this.config.record);
-        } else {
+        if (this.initialized) {
             this.clearDirty();
             return true;
         }
+        /*
+            The itemId (not id) of each form tab to be included/excluded; these correspond to the
+            keys in each tab component's items property
+        */
+        this.errorHandlingTabs = ['modx-template-form'];
+        this.errorHandlingIgnoreTabs = ['modx-panel-element-properties','form-template'];
+        this.getForm().setValues(this.config.record);
 
         this.formatMainPanelTitle('template', this.config.record);
         this.getElementProperties(this.config.record.properties);
