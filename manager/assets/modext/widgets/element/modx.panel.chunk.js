@@ -297,8 +297,8 @@ MODx.panel.Chunk = function(config) {
                                 }
                                 ,listeners: {
                                     select: {
-                                        fn: function() {
-                                            this.setMediaSources('chunk');
+                                        fn: function(cmp, record, selectedIndex) {
+                                            this.onChangeStaticSource(cmp, 'chunk');
                                         },
                                         scope: this
                                     }
@@ -319,29 +319,8 @@ MODx.panel.Chunk = function(config) {
                                 ,validateOnBlur: false
                                 ,hideMode: 'visibility'
                             }
-                            ,items: [{
-                                xtype: 'modx-combo-browser'
-                                ,browserEl: 'modx-browser'
-                                ,fieldLabel: _('static_file')
-                                ,description: MODx.expandHelp ? '' : _('static_file_desc')
-                                ,name: 'static_file'
-                                ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
-                                ,openTo: config.record.openTo || ''
-                                ,id: 'modx-chunk-static-file'
-                                ,triggerClass: 'x-form-code-trigger'
-                                ,maxLength: 255
-                                ,value: config.record.static_file || ''
-                                ,validator: function(value){
-                                    if (Ext.getCmp('modx-chunk-static').getValue() === true) {
-                                        if (Ext.util.Format.trim(value) != '') {
-                                            return true;
-                                        } else {
-                                            return _('static_file_ns');
-                                        }
-                                    }
-                                    return true;
-                                }
-                            },{
+                            ,items: [
+                                this.getStaticFileField('chunk', config.record),{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-chunk-static-file'
                                 ,id: 'modx-chunk-static-file-help'
@@ -416,18 +395,17 @@ Ext.extend(MODx.panel.Chunk,MODx.FormPanel,{
 
     ,setup: function() {
 
-        if (!this.initialized) {
-            /*
-                The itemId (not id) of each form tab to be included/excluded; these correspond to the
-                keys in each tab component's items property
-            */
-            this.errorHandlingTabs = ['modx-chunk-form'];
-            this.errorHandlingIgnoreTabs = ['modx-panel-element-properties'];
-            this.getForm().setValues(this.config.record);
-        } else {
+        if (this.initialized) {
             this.clearDirty();
             return true;
         }
+        /*
+            The itemId (not id) of each form tab to be included/excluded; these correspond to the
+            keys in each tab component's items property
+        */
+        this.errorHandlingTabs = ['modx-chunk-form'];
+        this.errorHandlingIgnoreTabs = ['modx-panel-element-properties'];
+        this.getForm().setValues(this.config.record);
 
         this.formatMainPanelTitle('chunk', this.config.record);
         this.getElementProperties(this.config.record.properties);
