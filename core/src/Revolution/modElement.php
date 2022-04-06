@@ -300,7 +300,7 @@ class modElement extends modAccessibleSimpleObject
             }
             $tag = '[[';
             $tag .= $this->getToken();
-            $tag .= $this->get('name');
+            $tag .= strlen($this->get('name')) > 0 ? $this->get('name') : md5(uniqid(rand()));
             if (!empty($this->_propertyString)) {
                 $tag .= $this->_propertyString;
             }
