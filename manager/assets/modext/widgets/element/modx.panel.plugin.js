@@ -305,8 +305,8 @@ MODx.panel.Plugin = function(config) {
                                 }
                                 ,listeners: {
                                     select: {
-                                        fn: function() {
-                                            this.setMediaSources('plugin');
+                                        fn: function(cmp, record, selectedIndex) {
+                                            this.onChangeStaticSource(cmp, 'plugin');
                                         },
                                         scope: this
                                     }
@@ -327,30 +327,8 @@ MODx.panel.Plugin = function(config) {
                                 ,validateOnBlur: false
                                 ,hideMode: 'visibility'
                             }
-                            ,items: [{
-                                xtype: 'modx-combo-browser'
-                                ,browserEl: 'modx-browser'
-                                ,fieldLabel: _('static_file')
-                                ,description: MODx.expandHelp ? '' : _('static_file_desc')
-                                ,name: 'static_file'
-                                ,source: config.record.source != null ? config.record.source : MODx.config.default_media_source
-                                ,openTo: config.record.openTo || ''
-                                ,id: 'modx-plugin-static-file'
-                                ,triggerClass: 'x-form-code-trigger'
-                                ,maxLength: 255
-                                ,value: config.record.static_file || ''
-                                ,tabIndex: 9
-                                ,validator: function(value){
-                                    if (Ext.getCmp('modx-plugin-static').getValue() === true) {
-                                        if (Ext.util.Format.trim(value) != '') {
-                                            return true;
-                                        } else {
-                                            return _('static_file_ns');
-                                        }
-                                    }
-                                    return true;
-                                }
-                            },{
+                            ,items: [
+                                this.getStaticFileField('plugin', config.record),{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-plugin-static-file'
                                 ,id: 'modx-plugin-static-file-help'
@@ -440,18 +418,17 @@ Ext.extend(MODx.panel.Plugin,MODx.FormPanel,{
 
     ,setup: function() {
 
-        if (!this.initialized) {
-            /*
-                The itemId (not id) of each form tab to be included/excluded; these correspond to the
-                keys in each tab component's items property
-            */
-            this.errorHandlingTabs = ['modx-plugin-form'];
-            this.errorHandlingIgnoreTabs = ['modx-plugin-sysevents','modx-panel-element-properties'];
-            this.getForm().setValues(this.config.record);
-        } else {
+        if (this.initialized) {
             this.clearDirty();
             return true;
         }
+        /*
+            The itemId (not id) of each form tab to be included/excluded; these correspond to the
+            keys in each tab component's items property
+        */
+        this.errorHandlingTabs = ['modx-plugin-form'];
+        this.errorHandlingIgnoreTabs = ['modx-plugin-sysevents','modx-panel-element-properties'];
+        this.getForm().setValues(this.config.record);
 
         this.formatMainPanelTitle('plugin', this.config.record);
         this.getElementProperties(this.config.record.properties);

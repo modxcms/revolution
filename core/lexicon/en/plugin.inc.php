@@ -42,7 +42,7 @@ $_lang['plugin_name_desc'] = 'The name of this Plugin.';
 $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Edit Plugin Execution Order by Event';
 $_lang['plugin_properties'] = 'Plugin Properties';
-$_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <a href="#x-form-el-modx-plugin-plugincode">Plugin Code</a> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
+$_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
 $_lang['plugin_title'] = 'Create/edit plugin';
 $_lang['plugin_untitled'] = 'Untitled plugin';
 $_lang['plugins'] = 'Plugins';
