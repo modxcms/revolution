@@ -36,6 +36,5 @@ $_lang['email_sub_button'] = 'Kaydolmak';
 $_lang['social_follows'] = 'Ayrıca, bu kanallarda <b> MODX\'i takip edebilirsiniz </ b>.';
 $_lang['follow'] = 'MODX \'i Takip et';
 $_lang['like'] = 'MODX\'i Beğen';
-$_lang['circle'] = 'MODX sınıfı';
 $_lang['help_about'] = 'Kullandığınız MODX® yazılımı, harika bir kullanıcı, destekçi ve geliştirici topluluğu ile işbirliğinin sonucudur. 2004\'ten beri MODX\'in arkasındaki ekip, ticari destek ve görevlendirilen özellikler aracılığıyla devam eden çalışmaları finanse ederek sponsor oldu ve yönetti. Bir saatlik acil durum desteği almak için <a href="https://modx.com/services/" class="supportTicket"> kaynaktan destek satın alabilirsiniz </a> (önceliksiz iki saatlik destek için de kullanılabilir) ). Veya genel olarak MODX hakkında başka bir sorunuz varsa <a href="mailto:hello@modx.com?subject=MODX Yönetici Sorgusu "> bize e-posta gönderin </a>.';
 $_lang['help_credit'] = 'MODX, <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank"> GPL sürüm 2.0 </a> veya daha yenisi ile lisanslanmış ücretsiz açık kaynaklı bir yazılımdır. Copyright 2005 - [[+current_year]]tarafından MODX, LLC. "MODX" tescilli bir ticari markadır. Doğru olanı yapın - lütfen bu krediyi ve bu sayfadaki diğer bilgileri sağlam tutun.';
