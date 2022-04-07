@@ -36,6 +36,5 @@ $_lang['email_sub_button'] = 'สมัครสมาชิก';
 $_lang['social_follows'] = 'คุณยังสามารถที่จะ<b>ติดตาม MODX</b>ได้ที่ช่องทางเหล่านี้.';
 $_lang['follow'] = 'ติดตาม MODX';
 $_lang['like'] = 'ถูกใจ MODX';
-$_lang['circle'] = 'เพิ่ม MODX เข้าแวดวง';
 $_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/services/" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
 $_lang['help_credit'] = 'MODX เป็นซอร์ฟแวร์เสรีภายใต้สัญญาอนุญาตของ<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL รุ่น 2.0</a> หรือรุ่นใหม่กว่า. สงวนลิขสิทธิ์ 2005-[[+current_year]] โดย MODX, LLC. "MODX" เป็นเครื่องหมายการค้าจดทะเบียน จงทำสิ่งที่ถูกต้อง — โปรดรักษาส่วนข้อมูลเครดิตและข้อมูลอื่นๆของหน้านี้ไว้เหมือนเดิม.';
