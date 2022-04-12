@@ -30,10 +30,22 @@ MODx.grid.DatabaseTables = function(config) {
             header: _('database_table_datasize')
             ,dataIndex: 'Data_size'
             ,width: 70
+            ,renderer: function(value, metaData, record, rowIndex, colIndex, store) {
+              if (record.json.canTruncate == true) {
+                  return `<a href="javascript:;" onclick="truncate('${record.data.Name}')" title="${_('truncate_table')}">${value}</a>`;
+              }
+              return value;
+           }
         },{
             header: _('database_table_overhead')
             ,dataIndex: 'Data_free'
             ,width: 70
+            ,renderer: function(value, metaData, record, rowIndex, colIndex, store) {
+              if (record.json.canOptimize == true) {
+                  return `<a href="javascript:;" onclick="optimize('${record.data.Name}')" title="${_('optimize_table')}">${value}</a>`;
+              }
+              return value;
+           }
         },{
             header: _('database_table_effectivesize')
             ,dataIndex: 'Effective_size'
