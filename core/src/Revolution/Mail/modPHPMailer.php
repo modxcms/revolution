@@ -222,13 +222,14 @@ class modPHPMailer extends modMail
 
         $sent = false;
         try {
-            if (strpos($this->mailer->ContentType, 'html') !== false) {
-                if (!empty($this->mailer->Body)) {
-                    $html = new InlineStyle($this->mailer->Body);
-                    /** @noinspection PhpParamsInspection */
-                    $html->applyStylesheet($html->extractStylesheets());
-                    $this->mailer->Body = $html->getHTML();
-                }
+            if (!empty($this->mailer->Body) && (strpos($this->mailer->ContentType, 'html') !== false)) {
+                $body = $this->mailer->Body;
+                // Turn UTF-8 characters into entities
+                $body = mb_convert_encoding($body, 'HTML-ENTITIES', 'UTF-8');
+                $html = new InlineStyle($body);
+                /** @noinspection PhpParamsInspection */
+                $html->applyStylesheet($html->extractStylesheets());
+                $this->mailer->Body = $html->getHTML();
             }
             $sent = $this->mailer->send();
         } catch (Exception $e) {
