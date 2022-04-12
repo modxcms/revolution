@@ -189,25 +189,11 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         w.show(e.target);
     }
 
-    ,downloadFile: function(item,e) {
-        var node = this.cm.activeNode;
-        var data = this.lookup[node.id];
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Browser/File/Download'
-                ,file: data.pathRelative
-                ,wctx: MODx.ctx || ''
-                ,source: this.config.source
-            }
-            ,listeners: {
-                'success':{fn:function(r) {
-                    if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
-                    }
-                },scope:this}
-            }
-        });
+    ,downloadFile: function(item, e) {
+        const node = this.cm.activeNode,
+              data = this.lookup[node.id]
+        ;
+        location.href = `${MODx.config.connector_url}?action=Browser/File/Download&download=1&file=${data.pathRelative}&HTTP_MODAUTH=${MODx.siteId}&source=${this.config.source}&wctx=${MODx.ctx}`;
     }
 
     ,copyRelativePath: function(item,e) {
