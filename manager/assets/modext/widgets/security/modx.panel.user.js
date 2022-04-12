@@ -34,7 +34,11 @@
         }
     });
     MODx.panel.User.superclass.constructor.call(this,config);
-    Ext.getCmp('modx-user-panel-newpassword').getEl().dom.style.display = 'none';
+    const passwordPanel = Ext.getCmp('modx-user-panel-newpassword');
+    passwordPanel.items.each(item => {
+        item.getEl().set({autocomplete: 'new-password'});
+    });
+    passwordPanel.getEl().dom.style.display = 'none';
     Ext.getCmp('modx-user-password-genmethod-s').on('check',this.showNewPassword,this);
     Ext.getCmp('modx-extended-form').disable();
 };
@@ -109,12 +113,16 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
         }
     }
 
-    ,showNewPassword: function(cb,v) {
-        var el = Ext.getCmp('modx-user-panel-newpassword').getEl();
-        if (v) {
-            el.slideIn('t',{useDisplay:true});
+    ,showNewPassword: function(cmp, checked) {
+        const passwordPanel = Ext.getCmp('modx-user-panel-newpassword'),
+              panelElement = passwordPanel.getEl(),
+              fxOptions = { useDisplay: true }
+        ;
+        if (checked) {
+            panelElement.slideIn('t', fxOptions);
+            passwordPanel.doLayout();
         } else {
-            el.slideOut('t',{useDisplay:true});
+            panelElement.slideOut('t', fxOptions);
         }
     }
 
@@ -488,10 +496,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,anchor: '100%'
                     ,inputType: 'password'
                     ,xtype: 'textfield'
-                    ,autoCreate: {
-                        tag: "input"
-                        ,autocomplete: "new-password"
-                    }
                 }
                 ,items: [{
                     id: 'modx-user-specifiedpassword'
