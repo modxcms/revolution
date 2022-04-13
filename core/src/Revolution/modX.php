@@ -2468,7 +2468,7 @@ class modX extends xPDO {
         }
 
         $deprecation = $this->_getDeprecatedMethod($since, $deprecatedDef, $recommendation);
-        $deprecation->addCaller($caller['class'] ?? '', $caller['function'], $deprecatedMethod['file'], $deprecatedMethod['line']);
+        $deprecation->addCaller($caller['class'] ?? '', $caller['function'] ?? '', $deprecatedMethod['file'], $deprecatedMethod['line']);
     }
 
     /**
