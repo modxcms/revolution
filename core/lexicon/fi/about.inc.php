@@ -36,6 +36,5 @@ $_lang['email_sub_button'] = 'Luo tili';
 $_lang['social_follows'] = 'Voit myös <b>seurata MODX:\'\'</b> näiltä kanavilta.';
 $_lang['follow'] = 'Seuraa MODX:ää';
 $_lang['like'] = 'Tykkää MODX:stä';
-$_lang['circle'] = 'Ympyröi MODX';
 $_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/services/" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
 $_lang['help_credit'] = 'MODX on ilmainen avoimen lähdekoodin ohjelmistoja lisensoitu <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank"> GPL-versio 2.0</a> tai uudempi. Tekijänoikeus 2005-[[+current_year]] MODX, LLC. "MODX" on rekisteröity tavaramerkki. Tehkää oikea tekoja — säilyttäkää tämä teksti ja muu tieto ennallaan.';

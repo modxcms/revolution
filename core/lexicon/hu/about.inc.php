@@ -36,6 +36,5 @@ $_lang['email_sub_button'] = 'Regisztráció';
 $_lang['social_follows'] = 'Az alábbi csatornákon <b>követheti a MODX-et</b>.';
 $_lang['follow'] = 'MODX követése';
 $_lang['like'] = 'MODX lájkolása';
-$_lang['circle'] = 'Körözze a MODX-et';
 $_lang['help_about'] = 'A jelen MODX® programcsomag nagyszerű felhasználók, támogatók és fejlesztők közösségével való együttműködés eredménye. A MODX mögött álló csapat 2004 óta tartja fenn és irányítja ezt, a folyamatos munkát fizetős támogatás és megbízásos fejlesztéseken keresztül megalapozva. Vásárolhat <a href="https://modx.com/services/" class="supportTicket">a forrástól</a> egy óra sürgősségi támogatást (felhasználható két óra nem elsőbbségi támogatásra is). Vagy <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">írjon nekünk</a>, ha más általános kérdése van a MODX-ről.';
 $_lang['help_credit'] = 'A MODX ingyenes nyílt forrású szoftver a <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL 2.0</a> vagy későbbi változata alapján engedélyezve. Copyright 2005-[[+current_year]] a MODX LLC részére. A "MODX" bejegyzett védjegy. Cselekedjen helyesen - kérjük, ne változtassa meg a hitelesítő és egyéb információkat ezen az oldalon.';

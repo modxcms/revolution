@@ -36,6 +36,5 @@ $_lang['email_sub_button'] = 'Εγγραφή';
 $_lang['social_follows'] = 'Επίσης μπορείτε να κάνετε <b>follow στο MODX</b> στα παρακάτω δίκτυα.';
 $_lang['follow'] = 'Follow MODX';
 $_lang['like'] = 'Like MODX';
-$_lang['circle'] = 'Circle MODX';
 $_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/services/" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
 $_lang['help_credit'] = 'Το MODX είναι ελεύθερο λογισμικό / λογισμικό ανοιχτού κώδικα που καλύπτεται από τη γενική δημόσια άδεια <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL έκδοση 2.0</a> ή πιο πρόσφατη. Copyright: 2005-[[+current_year]] από την MODX, LLC. Το “MODX” είναι καταχωρημένη επωνυμία. Θα το εκτιμούσαμε αν διατηρούσατε την επωνυμία “MODX” και τις υπόλοιπες πληροφορίες αυτής της σελίδας αναλλοίωτες.';

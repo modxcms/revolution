@@ -37,6 +37,5 @@ $_lang['email_sub_button'] = '注册';
 $_lang['social_follows'] = '您还可以在这些频道上 <b>跟随 MODX</b>。';
 $_lang['follow'] = '跟随MODX';
 $_lang['like'] = '赞MODX';
-$_lang['circle'] = '圈MODX';
 $_lang['help_about'] = 'The MODX® software you are using is the result of collaboration with an amazing community of users, supporters and developers. Since 2004, the team behind MODX has sponsored and managed it, funding ongoing work through commercial support and commissioned features. You can <a href="https://modx.com/services/" class="supportTicket">buy support from the source</a> to get one hour of emergency support (also usable for two hours non-priority support). Or <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">email us</a> if you have another question about MODX in general.';
 $_lang['help_credit'] = 'MODX 是免费的开源软件，在 <a href="http://www.gnu.org/licenses/gpl-2.0.html"target="_blank"> GPL 版本 2.0</a> 或更高版本许可证下发布。版权所有 2005-[[+current_year]] MODX，LLC。"MODX"是一个注册的商标。做正确的事情 — — 请保持本信用证和这个页面上的其他信息不变。';

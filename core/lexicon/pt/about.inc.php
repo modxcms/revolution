@@ -36,6 +36,5 @@ $_lang['email_sub_button'] = 'Cadastre-se';
 $_lang['social_follows'] = 'Você também pode <b>seguir MODX</b> nestes canais.';
 $_lang['follow'] = 'Siga MODX';
 $_lang['like'] = 'Curta MODX';
-$_lang['circle'] = 'Adicione MODX aos Circulos';
 $_lang['help_about'] = 'O software MODX® que você está usando é o resultado da colaboração com uma incrível comunidade de usuários, apoiadores e desenvolvedores. Desde 2004, a equipe por trás do MODX patrocinou e conseguiu, financiando o trabalho através de suporte comercial e com projetos personalizados . Você pode <a href="https://modx.com/services/" class="supportTicket">comprar suporte </a> para obter uma hora de assistência de emergência (também pode ser usado por duas horas de suporte não prioritário). Ou <a href="mailto:hello@modx.com?subject=MODX Manager Inquiry ">mande-nos um e-mail</a> se você tiver outra pergunta sobre MODX em geral.';
 $_lang['help_credit'] = 'MODX é software livre de código aberto, licenciado sob a <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL versão 2.0</a> ou posterior. Copyright 2005-[[+current_year]] por MODX, LLC. "MODX" é uma marca registrada. Faça a coisa certa — por favor, mantenha intactos os créditos e outras informações nesta página.';
