@@ -22,7 +22,7 @@
 session_start();
 
 /* set error reporting */
-error_reporting(E_ALL & ~E_NOTICE);
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 
 $setupPath= strtr(realpath(dirname(__DIR__)), '\\', '/') . '/';
 define('MODX_SETUP_PATH', $setupPath);
