@@ -33,7 +33,7 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
     public $languageTopics = ['template', 'category'];
     public $defaultSortField = 'templatename';
     public $permission = 'view_template';
-    
+
     public function initialize()
     {
         $this->setDefaultProperties([
