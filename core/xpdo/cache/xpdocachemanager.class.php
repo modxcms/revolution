@@ -872,7 +872,7 @@ abstract class xPDOCache {
      *
      * @access public
      * @param string $key A unique key identifying the item being set.
-     * @param string $var A reference to the PHP variable representing the item.
+     * @param mixed $var A reference to the PHP variable representing the item.
      * @param integer $expire The amount of seconds for the variable to expire in.
      * @param array $options Additional options for the operation.
      * @return boolean True if successful
@@ -884,7 +884,7 @@ abstract class xPDOCache {
      *
      * @access public
      * @param string $key A unique key identifying the item being set.
-     * @param string $var A reference to the PHP variable representing the item.
+     * @param mixed $var A reference to the PHP variable representing the item.
      * @param integer $expire The amount of seconds for the variable to expire in.
      * @param array $options Additional options for the operation.
      * @return boolean True if successful
@@ -896,7 +896,7 @@ abstract class xPDOCache {
      *
      * @access public
      * @param string $key A unique key identifying the item being set.
-     * @param string $var A reference to the PHP variable representing the item.
+     * @param mixed $var A reference to the PHP variable representing the item.
      * @param integer $expire The amount of seconds for the variable to expire in.
      * @param array $options Additional options for the operation.
      * @return boolean True if successful
