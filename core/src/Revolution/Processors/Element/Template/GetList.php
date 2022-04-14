@@ -33,6 +33,15 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
     public $languageTopics = ['template', 'category'];
     public $defaultSortField = 'templatename';
     public $permission = 'view_template';
+    
+    public function initialize()
+    {
+        $this->setDefaultProperties([
+            'limit' => 0
+        ]);
+
+        return parent::initialize();
+    }
 
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
@@ -44,7 +53,7 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
             ]);
         }
 
-        $c->sortby('category_name');
+        $c->sortby('Category.category');
         $c->sortby('templatename');
 
         return $c;
