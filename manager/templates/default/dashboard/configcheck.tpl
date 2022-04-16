@@ -8,6 +8,4 @@
             </li>
         {/foreach}
     </ul>
-{else}
-    <h4 class="green">{$_lang.configcheck_ok}</h4>
 {/if}
