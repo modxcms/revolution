@@ -89,7 +89,7 @@ MODx.panel.Snippet = function(config) {
                                     keyup: {
                                         fn: function(cmp, e) {
                                             const   title = this.formatMainPanelTitle('snippet', this.config.record, cmp.getValue(), true),
-                                                    tagTitle = title.length > 0 ? title : _('example_tag_snippet_name')
+                                                    tagTitle = title && title.length > 0 ? title : _('example_tag_snippet_name')
                                             ;
                                             cmp.nextSibling().getEl().child('.example-replace-name').update(tagTitle);
                                             MODx.setStaticElementPath('snippet');
