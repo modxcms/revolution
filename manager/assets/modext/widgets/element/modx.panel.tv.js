@@ -90,7 +90,7 @@ MODx.panel.TV = function(config) {
                                     keyup: {
                                         fn: function(cmp, e) {
                                             const   title = this.formatMainPanelTitle('tv', this.config.record, cmp.getValue(), true),
-                                                    tagTitle = title.length > 0 ? title : _('example_tag_tv_name')
+                                                    tagTitle = title && title.length > 0 ? title : _('example_tag_tv_name')
                                                 ;
                                             cmp.nextSibling().getEl().child('.example-replace-name').update(tagTitle);
                                             MODx.setStaticElementPath('tv');
@@ -700,7 +700,7 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     ,sharedComponentOverrides: {}
 
     ,setup: function() {
-        
+
         if (this.initialized) {
             this.clearDirty();
             return true;
