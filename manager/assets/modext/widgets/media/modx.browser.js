@@ -201,6 +201,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 ,source: this.config.source
             }
             ,listeners: {
+                'failure': {fn: function(r) {
+                    MODx.msg.alert(_('alert'), r.message);
+                },scope:this},
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
                         location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;

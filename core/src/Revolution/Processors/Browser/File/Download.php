@@ -40,7 +40,11 @@ class Download extends Browser
 
         // Manager asks for file url
         if (!$this->getProperty('download')) {
-            return $this->success('', ['url' => rawurlencode($this->source->getObjectUrl($file))]);
+            if ($this->source->getFilesystem()->fileExists($file)) {
+                return $this->success('', ['url' => rawurlencode($file)]);
+            } else {
+                return $this->failure($this->modx->lexicon('file_err_nf') . ': ' . $file);
+            }
         }
 
         // Download file
