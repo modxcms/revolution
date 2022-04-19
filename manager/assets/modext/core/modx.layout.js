@@ -517,17 +517,14 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 }
                 destroy();
             }
-            console.log(buttons[i]);
 
             buttons[i].onmouseenter = function (e) {
-                console.log(this);
                 e.stopPropagation();
                 var submenu = this.getElementsByTagName('ul')[0];
                 this.classList.add('active');
                 show(this, submenu);
             };
             buttons[i].onmouseleave = function (e) {
-                console.log(this);
                 e.stopPropagation();
                 var parentmenu = this.closest('ul');
                 this.classList.remove('active');
