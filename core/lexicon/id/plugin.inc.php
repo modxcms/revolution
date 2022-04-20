@@ -10,15 +10,13 @@ $_lang['event'] = 'Peristiwa';
 $_lang['events'] = 'Peristiwa';
 $_lang['plugin'] = 'Plugin';
 $_lang['plugin_add'] = 'Menambahkan Plugin';
-$_lang['plugin_code'] = 'Kode plugin (php)';
+$_lang['plugin_category_desc'] = 'Use to group Plugins within the Elements tree.';
+$_lang['plugin_code'] = 'Plugin Code (PHP)';
 $_lang['plugin_config'] = 'Konfigurasi plugin';
-$_lang['plugin_desc'] = 'Deskripsi';
-$_lang['plugin_desc_category'] = 'Kategori Plugin ini termasuk dalam.';
-$_lang['plugin_desc_description'] = 'Deskripsi singkat dari Plugin ini.';
-$_lang['plugin_desc_name'] = 'Nama Plugin ini.';
+$_lang['plugin_description_desc'] = 'Usage information for this Plugin shown in search results and as a tooltip in the Elements tree.';
 $_lang['plugin_delete_confirm'] = 'Apakah Anda yakin Anda ingin menghapus plugin ini?';
-$_lang['plugin_disabled'] = 'Plugin yang tidak aktif';
-$_lang['plugin_disabled_msg'] = 'Plugin telah di non-aktifkan dan tidak akan merespon pada events.';
+$_lang['plugin_disabled'] = 'Deactivate Plugin';
+$_lang['plugin_disabled_msg'] = 'When deactivated, this Plugin will not respond to events.';
 $_lang['plugin_duplicate_confirm'] = 'Apakah Anda yakin Anda ingin menduplikasi plugin ini?';
 $_lang['plugin_err_create'] = 'Terjadi kesalahan saat membuat plugin.';
 $_lang['plugin_err_ae'] = 'Plugin yang sudah ada dengan nama "[[+name]]".';
@@ -37,14 +35,24 @@ $_lang['plugin_event_err_save'] = 'Terjadi kesalahan saat menyimpan kegiatan plu
 $_lang['plugin_event_msg'] = 'Pilih peristiwa-peristiwa yang Anda ingin agar plugin ini mendengarkan.';
 $_lang['plugin_event_plugin_remove_confirm'] = 'Are you sure you want to delete this plugin from this event?';
 $_lang['plugin_lock'] = 'Plugin telah dikunci untuk editing';
-$_lang['plugin_lock_msg'] = 'Pengguna harus memiliki atribut edit_locked untuk mengedit plugin ini.';
+$_lang['plugin_lock_desc'] = 'Only users with “edit_locked” permissions can edit this Plugin.';
 $_lang['plugin_locked_message'] = 'Plugin ini terkunci.';
 $_lang['plugin_management_msg'] = 'Di sini Anda dapat memilih plugin yang ingin Anda edit.';
-$_lang['plugin_msg'] = 'Here you can create/edit plugins. Plugins are \'raw\' PHP codes that are invoked whenever the selected System Events are triggered.';
-$_lang['plugin_name'] = 'Nama plugin';
+$_lang['plugin_name_desc'] = 'Nama Plugin ini.';
 $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Edit Plugin rangka pelaksanaan acara';
 $_lang['plugin_properties'] = 'Plugin properti';
+$_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
 $_lang['plugin_title'] = 'Membuat edit plugin';
 $_lang['plugin_untitled'] = 'Plugin tanpa nama/judul';
 $_lang['plugins'] = 'Plugin';
+
+// Temporarily match old keys to new ones to ensure compatibility
+// --fields
+$_lang['plugin_desc_category'] = $_lang['plugin_category_desc'];
+$_lang['plugin_desc_description'] = $_lang['plugin_description_desc'];
+$_lang['plugin_desc_name'] = $_lang['plugin_name_desc'];
+$_lang['plugin_lock_msg'] = $_lang['plugin_lock_desc'];
+
+// --tabs
+$_lang['plugin_msg'] = $_lang['plugin_tab_general_desc'];
