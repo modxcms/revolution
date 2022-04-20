@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['example_tag_tvname'] = 'TVІм\'я ';
+$_lang['example_tag_tv_name'] = 'NameOfTV';
 $_lang['has_access'] = 'Доступно для редагування?';
 $_lang['filter_by_category'] = 'Фільтр за категорією...';
 $_lang['rank'] = 'Порядок';
@@ -20,7 +20,7 @@ $_lang['tv_category_desc'] = 'Використовуйте для групува
 $_lang['tv_change_template_msg'] = 'Зміна цього шаблону призведе до перезавантаження TV для сторінки з втратою всіх не збережених змін. <br /> <br /> Ви впевнені, що хочете змінити цей шаблон? ';
 $_lang['tv_delete_confirm'] = 'Ви впевнені, що хочете видалити цей TV? ';
 $_lang['tv_description'] = 'Описання';
-$_lang['tv_description_desc'] = 'Пояснювальна інформація про це TV поле відображається поруч із його заголовком на сторінках редагування ресурсів та як підказка у дереві елементів. ';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages, as a tooltip in the Elements tree, and within search results.';
 $_lang['tv_err_delete'] = 'Відбулася помилка під час спроби видалити TV поле. ';
 $_lang['tv_err_duplicate'] = 'Сталася помилка під час спроби копіювання TV поля. ';
 $_lang['tv_err_duplicate_templates'] = 'Сталася помилка під час копіювання TV шаблону. ';
@@ -38,11 +38,11 @@ $_lang['tv_err_save_access_permissions'] = 'Сталася помилка при
 $_lang['tv_err_save'] = 'Сталася помилка під час збереження TV.';
 $_lang['tv_inuse'] = 'Наступні ресурси використовують цей TV. Щоб продовжити видалення, натисніть кнопку «Видалити». Якщо ви передумали, натисніть кнопку «Скасувати». ';
 $_lang['tv_inuse_template'] = 'Наступний шаблон (або шаблони) використовує це TV: [[+templates]]. <br /> <br /> Будь ласка, Відв\'яжіть TV від шаблону (або шаблонів) перед його видаленням. ';
+$_lang['is_static_tv_desc'] = 'Use an external file to store the default value for this TV. This may be useful if the default value’s content is particularly lengthy.';
 $_lang['tv_lock'] = 'Обмежити редагування';
 $_lang['tv_lock_desc'] = 'Редагувати TV можуть лише користувачі з правами доступу "edit_locked".';
 $_lang['tv_management_msg'] = 'Управління ТВ для ваших ресурсів. ';
-$_lang['tv_name'] = 'Назва TV';
-$_lang['tv_name_desc'] = 'Помістіть контент, створений у цьому ТV в ресурсі, шаблоні або чанці, використовуючи наступний тег MODX: <span class="copy-this">[[*<span class="example-replace-name"><span class="example-replace-name"> '.$_lang['example_tag_tvname'].'</span>]]</span>';
+$_lang['tv_name_desc'] = 'Помістіть контент, створений у цьому ТV в ресурсі, шаблоні або чанці, використовуючи наступний тег MODX: <span class="copy-this">[[*<span class="example-replace-name"><span class="example-replace-name"> '.$_lang['example_tag_tv_name'].'</span>]]</span>';
 $_lang['tv_new'] = 'Створити TV';
 $_lang['tv_novars'] = ' TV не знайдені';
 $_lang['tv_properties'] = 'Параметри за замовчуванням';
@@ -50,7 +50,7 @@ $_lang['tv_rank'] = 'Порядок сортування';
 $_lang['tv_rank_desc'] = 'Використовується для керування позиціонуванням TV на сторінках редагування ресурсів (може бути перевизначено за шаблоном або іншими критеріями за допомогою <a href="?a=security/forms" target="_blank">Налаштування форм</a>). ';
 $_lang['tv_reset_params'] = 'Скинути параметри';
 $_lang['tv_tab_access_desc'] = 'Виберіть групи ресурсів, до яких належить цей TV. Тільки користувачі з доступом до вибраних груп зможуть змінювати цей його. Якщо жодну групу не вибрано, всі користувачі з доступом до менеджера зможуть змінювати TV. ';
-$_lang['tv_tab_general_desc'] = 'Тут можна створити/редагувати <dfn>додаткове поле</dfn> (TV). Для доступу до них необхідно призначити TV для шаблонів. ';
+$_lang['tv_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Template Variable</em> (TV). Note that TVs must be assigned to templates in order to access them from snippets and documents.';
 $_lang['tv_tab_input_options'] = 'Параметри вводу';
 $_lang['tv_tab_input_options_desc'] = '<p>Тут можна редагувати параметри введення для TV, специфічні для типу візуалізації, який ви оберете.</p> ';
 $_lang['tv_tab_output_options'] = 'Параметри виводу';
