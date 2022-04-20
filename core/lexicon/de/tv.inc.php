@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['example_tag_tvname'] = 'NameDerTV';
+$_lang['example_tag_tv_name'] = 'NameOfTV';
 $_lang['has_access'] = 'Hat Zugriff?';
 $_lang['filter_by_category'] = 'Nach Kategorie filtern …';
 $_lang['rank'] = 'Rang';
@@ -20,7 +20,7 @@ $_lang['tv_category_desc'] = 'TVs in Ressourcen-Bearbeitungsseiten und im Elemen
 $_lang['tv_change_template_msg'] = 'Das Wechseln des Templates führt dazu, dass die TVs neu geladen werden, wobei alle nicht gespeicherten Änderungen verloren gehen.<br /><br />Sind Sie sicher, dass Sie das Template wechseln möchten?';
 $_lang['tv_delete_confirm'] = 'Sind Sie sicher, dass Sie diese TV löschen möchten?';
 $_lang['tv_description'] = 'Beschreibung';
-$_lang['tv_description_desc'] = 'Benutzungshinweise für diese TV neben dem Titel auf Ressourcen-Bearbeitungsseiten und als Tooltip im Elementbaum anzeigen.';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages, as a tooltip in the Elements tree, and within search results.';
 $_lang['tv_err_delete'] = 'Beim Versuch, die TV zu löschen, ist ein Fehler aufgetreten.';
 $_lang['tv_err_duplicate'] = 'Beim Versuch, die TV zu duplizieren, ist ein Fehler aufgetreten.';
 $_lang['tv_err_duplicate_templates'] = 'Beim Duplizieren der TV-Templates ist ein Fehler aufgetreten.';
@@ -38,11 +38,11 @@ $_lang['tv_err_save_access_permissions'] = 'Beim Versuch, die Zugriffsrechte der
 $_lang['tv_err_save'] = 'Beim Speichern der TV ist ein Fehler aufgetreten.';
 $_lang['tv_inuse'] = 'Die unten aufgeführten Dokumente verwenden momentan diese TV. Um mit dem Löschen fortzufahren, klicken Sie bitte auf den Löschen-Button, anderenfalls klicken Sie auf den Abbrechen-Button.';
 $_lang['tv_inuse_template'] = 'Die folgenden Templates nutzen derzeit diese TV: [[+templates]].<br /><br />Bitte löschen Sie die TV aus den Templates, bevor Sie sie löschen.';
+$_lang['is_static_tv_desc'] = 'Use an external file to store the default value for this TV. This may be useful if the default value’s content is particularly lengthy.';
 $_lang['tv_lock'] = 'Bearbeitung einschränken';
 $_lang['tv_lock_desc'] = 'Nur Benutzer mit „edit_locked“ Zugriffsberechtigung können diese TV bearbeiten.';
 $_lang['tv_management_msg'] = 'Verwalten Sie zusätzliche benutzerdefinierte TVs für Ihre Ressourcen.';
-$_lang['tv_name'] = 'TV-Name';
-$_lang['tv_name_desc'] = 'Platzieren Sie den von dieser TV generierten Inhalt in einer Ressource, einem Template oder einem Chunk mit folgendem MODX-Tag: <span class="copy-this">[[*<span class="example-replace-name">'.$_lang['example_tag_tvname'].'</span>]]</span>';
+$_lang['tv_name_desc'] = 'Platzieren Sie den von dieser TV generierten Inhalt in einer Ressource, einem Template oder einem Chunk mit folgendem MODX-Tag: <span class="copy-this">[[*<span class="example-replace-name">'.$_lang['example_tag_tv_name'].'</span>]]</span>';
 $_lang['tv_new'] = 'TV erstellen';
 $_lang['tv_novars'] = 'Keine TVs gefunden';
 $_lang['tv_properties'] = 'Standardeigenschaften';
@@ -50,7 +50,7 @@ $_lang['tv_rank'] = 'Sortierreihenfolge';
 $_lang['tv_rank_desc'] = 'Die für diese TV benutzte Position auf der Ressourcen-Bearbeitungsseite (kann per Template oder per <a href="?a=security/forms" target="_blank">Formularanpassung</a> überschrieben werden).';
 $_lang['tv_reset_params'] = 'Parameter zurücksetzen';
 $_lang['tv_tab_access_desc'] = 'Wählen Sie die Ressourcen-Gruppen, denen diese TV zugeordnet werden soll. Nur Benutzer mit Zugriff auf die ausgewählten Gruppen können diese TV ändern. Wenn keine Gruppen ausgewählt sind, können alle Benutzer, die Zugriff auf den Manager haben, die TV ändern.';
-$_lang['tv_tab_general_desc'] = 'Hier können Sie <dfn>Template-Variablen</dfn> (TV) erstellen oder bearbeiten. TVs müssen Templates zugeordnet werden, wenn von Snippets oder Dokumenten aus auf sie zugegriffen werden soll.';
+$_lang['tv_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Template Variable</em> (TV). Note that TVs must be assigned to templates in order to access them from snippets and documents.';
 $_lang['tv_tab_input_options'] = 'Eingabe-Optionen';
 $_lang['tv_tab_input_options_desc'] = '<p>Hier können Sie die Eingabe-Optionen für die TV bearbeiten. Die verfügbaren Optionen sind abhängig vom Eingabetyp, den Sie auswählen.</p>';
 $_lang['tv_tab_output_options'] = 'Ausgabe-Optionen';
