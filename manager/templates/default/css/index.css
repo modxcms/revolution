@@ -21060,6 +21060,10 @@ input::-moz-focus-inner {
     font-size: 12px;
     font-style: italic;
     margin: 0.4em 0 0 0;
+    transition: color 0.25s;
+}
+.desc-under:hover {
+    color: #4d4d4d;
 }
 .desc-under.toggle-slider-above {
     margin: 0.3em 0;
@@ -21103,6 +21107,7 @@ input::-moz-focus-inner {
 .desc-under .copy-this {
     color: #5e8bbf;
     background-color: #f1f6fc;
+    position: relative;
 }
 .desc-under .copy-this:hover {
     background-color: #e7f1fb;
@@ -21112,8 +21117,9 @@ input::-moz-focus-inner {
 .desc-under .copy-this:hover::after {
     content: "\f0c5";
     color: #6892c4;
-    display: inherit;
+    position: absolute;
     margin-left: 0.5em;
+    cursor: default;
 }
 .desc-under .copy-this:hover:active {
     color: #515151;
@@ -21122,7 +21128,7 @@ input::-moz-focus-inner {
     color: #515151;
 }
 .desc-under .feedback {
-    margin-left: 0.75em;
+    margin-left: 1.4rem;
     color: #1b5ca8;
     font-style: normal;
 }
@@ -21364,10 +21370,6 @@ input::-moz-focus-inner {
 
 #x-form-el-modx-user-photo .x-form-file-trigger:before {
     content: "\f1c5";
-}
-
-#x-form-el-modx-tv-locked {
-    margin-top: 1em;
 }
 
 /* .x-form-field-wrap */
