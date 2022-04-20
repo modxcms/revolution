@@ -162,9 +162,7 @@ MODx.panel.TV = function(config) {
                         ,value: config.record.category || 0
                         ,listeners: {
                             'afterrender': {scope:this,fn:function(f,e) {
-                                setTimeout(function(){
-                                    MODx.setStaticElementPath('tv');
-                                }, 200);
+                                MODx.setStaticElementPath('tv');
                             }}
                             ,'change': {scope:this,fn:function(f,e) {
                                 MODx.setStaticElementPath('tv');
