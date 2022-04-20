@@ -10,15 +10,13 @@ $_lang['event'] = 'Sündmus';
 $_lang['events'] = 'Sündmused';
 $_lang['plugin'] = 'Plugin';
 $_lang['plugin_add'] = 'Lisa Plugin';
-$_lang['plugin_code'] = 'Plugina kood (php)';
+$_lang['plugin_category_desc'] = 'Use to group Plugins within the Elements tree.';
+$_lang['plugin_code'] = 'Plugin Code (PHP)';
 $_lang['plugin_config'] = 'Plugina konfiguratsioon';
-$_lang['plugin_desc'] = 'Kirjeldus';
-$_lang['plugin_desc_category'] = 'The Category this Plugin belongs in.';
-$_lang['plugin_desc_description'] = 'A short description of this Plugin.';
-$_lang['plugin_desc_name'] = 'The name of this Plugin.';
+$_lang['plugin_description_desc'] = 'Usage information for this Plugin shown in search results and as a tooltip in the Elements tree.';
 $_lang['plugin_delete_confirm'] = 'Oled kindel, et soovid kustutada selle plugina?';
-$_lang['plugin_disabled'] = 'Inactive plugin';
-$_lang['plugin_disabled_msg'] = 'Plugin is deactivated and will not respond to events.';
+$_lang['plugin_disabled'] = 'Deactivate Plugin';
+$_lang['plugin_disabled_msg'] = 'When deactivated, this Plugin will not respond to events.';
 $_lang['plugin_duplicate_confirm'] = 'Oled kindel, et soovid dubleerida seda pluginat?';
 $_lang['plugin_err_create'] = 'Tekkis viga plugina loomisel';
 $_lang['plugin_err_ae'] = 'Plugin nimega "[[+name]]" juba eksisteerib.';
@@ -37,14 +35,24 @@ $_lang['plugin_event_err_save'] = 'Tekkis viga plugina sündmuse salvestamisel.'
 $_lang['plugin_event_msg'] = 'Vali sündmused, mida see plugin peaks kuulama.';
 $_lang['plugin_event_plugin_remove_confirm'] = 'Are you sure you want to delete this plugin from this event?';
 $_lang['plugin_lock'] = 'Plugin locked for editing';
-$_lang['plugin_lock_msg'] = 'Kasutajatel peab olema edit_locked attribuut, et seda pluginat muuta.';
+$_lang['plugin_lock_desc'] = 'Only users with “edit_locked” permissions can edit this Plugin.';
 $_lang['plugin_locked_message'] = 'Plugin on lukustatud.';
 $_lang['plugin_management_msg'] = 'Siit saate valida millist pluginat soovite muuta.';
-$_lang['plugin_msg'] = 'Here you can create/edit plugins. Plugins are \'raw\' PHP codes that are invoked whenever the selected System Events are triggered.';
-$_lang['plugin_name'] = 'Plugina nimi';
+$_lang['plugin_name_desc'] = 'The name of this Plugin.';
 $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Muuda plugina Käivitus Järjekorda sündmuse järgi';
 $_lang['plugin_properties'] = 'Plugina Omadused';
+$_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
 $_lang['plugin_title'] = 'Loo või muuda pluginat';
 $_lang['plugin_untitled'] = 'Nimetud plugin';
 $_lang['plugins'] = 'Pluginad';
+
+// Temporarily match old keys to new ones to ensure compatibility
+// --fields
+$_lang['plugin_desc_category'] = $_lang['plugin_category_desc'];
+$_lang['plugin_desc_description'] = $_lang['plugin_description_desc'];
+$_lang['plugin_desc_name'] = $_lang['plugin_name_desc'];
+$_lang['plugin_lock_msg'] = $_lang['plugin_lock_desc'];
+
+// --tabs
+$_lang['plugin_msg'] = $_lang['plugin_tab_general_desc'];
