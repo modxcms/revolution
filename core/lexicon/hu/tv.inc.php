@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['example_tag_tvname'] = 'SablonváltozóNeve';
+$_lang['example_tag_tv_name'] = 'NameOfTV';
 $_lang['has_access'] = 'Hozzáférhet?';
 $_lang['filter_by_category'] = 'Szűrés kategória alapján...';
 $_lang['rank'] = 'Rangsor';
@@ -20,7 +20,7 @@ $_lang['tv_category_desc'] = 'Használja a sablonváltozók csoportosítására 
 $_lang['tv_change_template_msg'] = 'A sablon cseréje miatt az oldal újratöltődik, így elvesznek a mentetlen módosítások.<br /><br /> Biztosan cseréli a sablont?';
 $_lang['tv_delete_confirm'] = 'Biztosan törli ezt a sablonváltozót?';
 $_lang['tv_description'] = 'Leírás';
-$_lang['tv_description_desc'] = 'Ennek a sablonváltozónak a használatáról az erőforrás-szerkesztő oldalakon levő felirata mellett, és elemleírásként az összetevők fájában talál tájékoztatást.';
+$_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages, as a tooltip in the Elements tree, and within search results.';
 $_lang['tv_err_delete'] = 'Hiba történt a sablonváltozó törlése közben.';
 $_lang['tv_err_duplicate'] = 'Hiba történt a sablonváltozó kettőzésekor.';
 $_lang['tv_err_duplicate_templates'] = 'Hiba történt a sablonváltozó másolatának létrehozásakor.';
@@ -38,11 +38,11 @@ $_lang['tv_err_save_access_permissions'] = 'Hiba történt a sablonváltozó hoz
 $_lang['tv_err_save'] = 'Hiba történt a sablonváltozó mentésekor.';
 $_lang['tv_inuse'] = 'A következő dokumentum(ok) jelenleg használják ezt a sablonváltozót. A törlési művelet folytatásához kattintson a Törlés gombra, egyébként kattintson a Mégsem gombra.';
 $_lang['tv_inuse_template'] = 'A következő sablon(ok) használják jelenleg ezt a sablonváltozót: [[+templates]].<br /><br />Kérjük, válassza le a sablonváltozót a sablon(ok)ról, mielőtt törölné.';
+$_lang['is_static_tv_desc'] = 'Use an external file to store the default value for this TV. This may be useful if the default value’s content is particularly lengthy.';
 $_lang['tv_lock'] = 'Szerkesztés korlátozása';
 $_lang['tv_lock_desc'] = 'A sablonváltozó szerkesztéséhez szükség van az “edit_locked“ felhasználói engedélyre.';
 $_lang['tv_management_msg'] = 'További egyéni sablonváltozók kezelése a dokumentumaihoz.';
-$_lang['tv_name'] = 'Sablonváltozó neve';
-$_lang['tv_name_desc'] = 'Helyezze a sablonváltozó által létrehozott tartalmat egy erőforrásba, sablonba, vagy kódegységbe a következő MODX címkével: <span class="copy-this">[[*<span class="example-replace-name">'.$_lang['example_tag_tvname'].'</span>]]</span>';
+$_lang['tv_name_desc'] = 'Helyezze a sablonváltozó által létrehozott tartalmat egy erőforrásba, sablonba, vagy kódegységbe a következő MODX címkével: <span class="copy-this">[[*<span class="example-replace-name">'.$_lang['example_tag_tv_name'].'</span>]]</span>';
 $_lang['tv_new'] = 'Sablonváltozó létrehozása';
 $_lang['tv_novars'] = 'Nem található sablonváltozó';
 $_lang['tv_properties'] = 'Alaptulajdonságok';
@@ -50,7 +50,7 @@ $_lang['tv_rank'] = 'Sorrend';
 $_lang['tv_rank_desc'] = 'Használja a sablonváltozó elhelyezkedésének beállításához az erőforrás-szerkesztő oldalakon (felülírható sablonszinten, vagy más feltételek alapján az <a href="?a=security/forms" target="_blank">Űrlap testreszabása</a> használatával).';
 $_lang['tv_reset_params'] = 'Jellemzők alaphelyzetbe állítása';
 $_lang['tv_tab_access_desc'] = 'Válassza ki az erőforráscsoportokat, amelyekhez ez a sablonváltozó tartozik. Csak az ezekhez a csoportokhoz hozzáféréssel rendelkező felhasználók módosíthatják ezt a sablonváltozót. Ha nem választ csoportot, a kezelőhöz hozzáféréssel rendelkező minden felhasználó módosíthatja.';
-$_lang['tv_tab_general_desc'] = 'Itt létrehozhatja vagy szerkesztheti a <dfn>sablonváltozót</dfn>. A sablonváltozókat sablonokhoz kell rendelni, hogy elérhetők legyenek a kódrészletekből és a dokumentumokból.';
+$_lang['tv_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Template Variable</em> (TV). Note that TVs must be assigned to templates in order to access them from snippets and documents.';
 $_lang['tv_tab_input_options'] = 'Beviteli beállítások';
 $_lang['tv_tab_input_options_desc'] = '<p>Itt módosíthatja a sablonváltozó beviteli beállításait a választott beviteli megjelenítéstől függően.</p>';
 $_lang['tv_tab_output_options'] = 'Kimenetei beállítások';
