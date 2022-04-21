@@ -8,7 +8,7 @@
  */
 
 // Entry out of alpha order because it must come before the entry it's used in below
-$_lang['example_tag_chunk_name'] = 'NameOfChunk';
+$_lang['example_tag_chunk_name'] = 'NameDesChunks';
 
 $_lang['chunk'] = 'Chunk';
 $_lang['chunk_category_desc'] = 'Verwenden, um Chunks innerhalb des Element-Baums zu gruppieren.';
