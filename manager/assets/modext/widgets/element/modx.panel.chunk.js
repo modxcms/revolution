@@ -74,7 +74,9 @@ MODx.panel.Chunk = function(config) {
                             },{
                                 xtype: 'textfield'
                                 ,fieldLabel: _('name')
-                                ,description: MODx.expandHelp ? '' : _('chunk_name_desc')
+                                ,description: MODx.expandHelp ? '' : _('chunk_name_desc', {
+                                    tag: `<span class="copy-this">[[$<span class="example-replace-name">${_('example_tag_chunk_name')}</span>]]</span>`
+                                })
                                 ,name: 'name'
                                 ,id: 'modx-chunk-name'
                                 ,maxLength: 50
@@ -97,7 +99,9 @@ MODx.panel.Chunk = function(config) {
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-chunk-name'
-                                ,html: _('chunk_name_desc')
+                                ,html: _('chunk_name_desc', {
+                                    tag: `<span class="copy-this">[[$<span class="example-replace-name">${_('example_tag_chunk_name')}</span>]]</span>`
+                                })
                                 ,cls: 'desc-under'
                                 ,listeners: {
                                     afterrender: {
