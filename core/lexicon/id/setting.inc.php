@@ -50,7 +50,7 @@ $_lang['setting_remove'] = 'Hapus pengaturan';
 $_lang['setting_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus pengaturan ini? Ini mungkin akan menghentikan instalasi MODX.';
 $_lang['setting_update'] = 'Perbaharui pengaturan';
 $_lang['settings_after_install'] = 'Sebagai instalasi baru, Anda diminta untuk mengendalikan pengaturan ini, dan merubah apapun yang mungkin Anda ingin. Setelah Anda telah menguasai pengaturan, tekan \'Simpan\' untuk memperbarui pengaturan database. <br /><br />';
-$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
+$_lang['settings_desc'] = 'Di sini Anda dapat mengatur preferensi Umum dan pengaturan konfigurasi untuk pengaturan antarmuka MODX, serta bagaimana situs MODX Anda berjalan. Klik dua kali pada kolom nilai pada setelan yang ingin Anda edit secara dinamis mengedit melalui grid, atau klik kanan pada setelan untuk opsi lebih lanjut. Anda juga dapat mengklik tanda "+" untuk keterangan pengaturan.';
 $_lang['settings_furls'] = 'URL yang berkaitan';
 $_lang['settings_misc'] = 'Bermacam-macam';
 $_lang['settings_site'] = 'Situs';
@@ -97,8 +97,8 @@ $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Pengaturan ini ke 
 $_lang['setting_allow_tags_in_post'] = 'Memungkinkan Tag dalam posting';
 $_lang['setting_allow_tags_in_post_desc'] = 'Jika salah, Semua POST yang bervariasi akan dicopot oleh penanda tulisan HTML, numerik entitas dan penanda MODX. MODX merekomendasikan untuk meninggalkan pengaturan ini ke salah untuk konteks lain manager, dimana diatur ke benar dengan standarnya.';
 
-$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Nonaktifkan eval di TV binding';
+$_lang['setting_allow_tv_eval_desc'] = 'Pilih opsi ini untuk mengaktifkan atau menonaktifkan eval dalam pengikatan TV. Jika opsi ini disetel ke no, kode / nilai hanya akan ditangani sebagai teks biasa.';
 
 $_lang['setting_anonymous_sessions'] = 'Session Anonymous';
 $_lang['setting_anonymous_sessions_desc'] = 'Jika dinonaktifkan, hanya user yang sudah login akan mendapatkan PHP session. Hal ini dapat mengurangi overhead untuk user anonymus serta mengurangi beban pada situs MODX, jika memang mereka tidak perlu memiliki session PHP yang unik. Jika nilai session_enabled "false", maka hal ini tidak akan berpengaruh karena session PHP tidak pernah dihidupkan.';
@@ -121,8 +121,8 @@ $_lang['setting_allow_multiple_emails_desc'] = 'Jika diaktifkan, pengguna dapat 
 $_lang['setting_automatic_alias'] = 'Secara otomatis menghasilkan alias';
 $_lang['setting_automatic_alias_desc'] = 'Pilih \'Ya\' untuk memiliki sistem yang secara otomatis menghasilkan alias berdasarkan judul halaman sumber daya saat menyimpan.';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
-$_lang['setting_automatic_template_assignment_desc'] = 'Choose how templates are assigned to new Resources on creation. Options include: system (default template from system settings), parent (inherits the parent template), or sibling (inherits the most used sibling template)';
+$_lang['setting_automatic_template_assignment'] = 'Penugasa Template Otomatis';
+$_lang['setting_automatic_template_assignment_desc'] = 'Pilih bagaimana template ditetapkan ke Resources baru saat pembuatan. Pilihannya meliputi: system(template default dari pengaturan sistem), parent (mewarisi template induk), atau sibling(mewarisi template sibling yang paling sering digunakan)';
 
 $_lang['setting_base_help_url'] = 'Bantuan dasar URL';
 $_lang['setting_base_help_url_desc'] = 'URL dasar yang digunakan untuk membangun link bantuan di bagian atas kanan dari halaman di manager.';
@@ -136,8 +136,8 @@ $_lang['setting_cache_action_map_desc'] = 'Bila diaktifkan, tindakan (atau peta 
 $_lang['setting_cache_alias_map'] = 'Mengaktifkan cache konteks Alias peta';
 $_lang['setting_cache_alias_map_desc'] = 'Ketika diaktifkan, Semua URI sumber daya cache ke dalam konteks. Mengaktifkan situs yang lebih kecil dan menonaktifkan pada situs yang lebih besar untuk kinerja yang lebih baik.';
 
-$_lang['setting_use_context_resource_table'] = 'Use the context resource table for context cache refreshes';
-$_lang['setting_use_context_resource_table_desc'] = 'When enabled, context cache refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
+$_lang['setting_use_context_resource_table'] = 'Gunakan tabel resource konteks untuk merefresh cache konteks';
+$_lang['setting_use_context_resource_table_desc'] = 'Bila diaktifkan, merefresh konteks menggunakan tabel context_resource. Ini memungkinkan kamu secara programatikal memiliki satu resource dalam beberapa konteks. Jika kamu tidak menggunakan beberapa konteks resource itu melalui API, kamu dapat menyetel ini ke false. Di website besar kamu akan mendapatkan potensi peningkatan kinerja manajer saat itu.';
 
 $_lang['setting_cache_context_settings'] = 'Mengaktifkan konteks pengaturan Cache';
 $_lang['setting_cache_context_settings_desc'] = 'Bila diaktifkan, pengaturan konteks akan di-cache untuk mengurangi beban.';
@@ -409,13 +409,13 @@ $_lang['setting_mail_smtp_hosts_desc'] = 'Menetapkan SMTP host.  Semua host haru
 $_lang['setting_mail_smtp_keepalive'] = 'SMTP tetap-hidup';
 $_lang['setting_mail_smtp_keepalive_desc'] = 'Mencegah koneksi SMTP ditutup setelah setiap pengiriman e-mail. Tidak dianjurkan.';
 
-$_lang['setting_mail_smtp_pass'] = 'SMTP Password';
+$_lang['setting_mail_smtp_pass'] = 'Kata sandi SMTP';
 $_lang['setting_mail_smtp_pass_desc'] = 'Password untuk melakukan otentikasi ke SMTP melawan.';
 
 $_lang['setting_mail_smtp_port'] = 'SMTP Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Menetapkan default SMTP server port.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
+$_lang['setting_mail_smtp_prefix'] = 'SMPT enkripsi';
 $_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
