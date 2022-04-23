@@ -44,6 +44,12 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
             ]);
         }
 
+        return $c;
+    }
+
+    public function prepareQueryAfterCount(xPDOQuery $c)
+    {
+        $c = parent::prepareQueryAfterCount($c);
         $c->sortby('category_name');
         $c->sortby('templatename');
 
