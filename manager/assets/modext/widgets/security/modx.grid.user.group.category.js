@@ -241,7 +241,7 @@ MODx.window.CreateUGCat = function(config) {
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
                 ,group: 'Element,Object'
-                ,combo: '1'
+                ,combo: true
             }
             ,anchor: '100%'
             ,listeners: {

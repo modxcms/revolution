@@ -724,7 +724,7 @@ MODx.combo.Country = function(config) {
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Country/GetList'
-            ,combo: 1
+            ,combo: true
         }
         ,displayField: 'country'
         ,valueField: 'iso'

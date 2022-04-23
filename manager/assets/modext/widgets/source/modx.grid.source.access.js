@@ -189,7 +189,7 @@ MODx.window.CreateSourceAccess = function(config) {
             ,value: r.principal || ''
             ,baseParams: {
                 action: 'Security/Group/GetList'
-                ,combo: '1'
+                ,combo: true
             }
             ,anchor: '100%'
         },{
