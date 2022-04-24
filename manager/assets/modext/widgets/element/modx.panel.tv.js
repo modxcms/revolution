@@ -78,7 +78,9 @@ MODx.panel.TV = function(config) {
                             },{
                                 xtype: 'textfield'
                                 ,fieldLabel: _('name')
-                                ,description: MODx.expandHelp ? '' : _('tv_name_desc')
+                                ,description: MODx.expandHelp ? '' : _('tv_name_desc', {
+                                    tag: `<span class="copy-this">[[*<span class="example-replace-name">${_('example_tag_tv_name')}</span>]]</span>`
+                                })
                                 ,name: 'name'
                                 ,id: 'modx-tv-name'
                                 ,maxLength: 50
@@ -101,7 +103,9 @@ MODx.panel.TV = function(config) {
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-tv-name'
-                                ,html: _('tv_name_desc')
+                                ,html: _('tv_name_desc', {
+                                    tag: `<span class="copy-this">[[*<span class="example-replace-name">${_('example_tag_tv_name')}</span>]]</span>`
+                                })
                                 ,cls: 'desc-under'
                                 ,listeners: {
                                     afterrender: {

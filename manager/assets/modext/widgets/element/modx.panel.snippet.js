@@ -77,7 +77,9 @@ MODx.panel.Snippet = function(config) {
                             },{
                                 xtype: 'textfield'
                                 ,fieldLabel: _('name')
-                                ,description: MODx.expandHelp ? '' : _('snippet_name_desc')
+                                ,description: MODx.expandHelp ? '' : _('snippet_name_desc', {
+                                    tag: `<span class="copy-this">[[<span class="example-replace-name">${_('example_tag_snippet_name')}</span>]]</span>`
+                                })
                                 ,name: 'name'
                                 ,id: 'modx-snippet-name'
                                 ,maxLength: 50
@@ -100,7 +102,9 @@ MODx.panel.Snippet = function(config) {
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-snippet-name'
-                                ,html: _('snippet_name_desc')
+                                ,html: _('snippet_name_desc', {
+                                    tag: `<span class="copy-this">[[<span class="example-replace-name">${_('example_tag_snippet_name')}</span>]]</span>`
+                                })
                                 ,cls: 'desc-under'
                                 ,listeners: {
                                     afterrender: {
