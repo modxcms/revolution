@@ -20,6 +20,7 @@ Ext.onReady(function() {
         ,allowDecimals: {if $params.allowDecimals|default && $params.allowDecimals|default != 'false' && $params.allowDecimals|default != 'No'}true{else}false{/if}
         ,allowNegative: {if $params.allowNegative|default && $params.allowNegative|default != 'false' && $params.allowNegative|default != 'No'}true{else}false{/if}
         ,decimalPrecision: {if $params.decimalPrecision|default >= 0}{$params.decimalPrecision|default|string_format:"%d"}{else}2{/if}
+        ,strictDecimalPrecision: {if $params.strictDecimalPrecision|default && $params.strictDecimalPrecision|default != 'false' && $params.strictDecimalPrecision|default != 'No'}true{else}false{/if}
         ,decimalSeparator: {if $params.decimalSeparator|default}'{$params.decimalSeparator|default}'{else}'.'{/if}
         {if $params.maxValue|default != '' && is_numeric($params.maxValue|default)},maxValue: {$params.maxValue|default}{/if}
         {if $params.minValue|default != '' && is_numeric($params.minValue|default)},minValue: {$params.minValue|default}{/if}
