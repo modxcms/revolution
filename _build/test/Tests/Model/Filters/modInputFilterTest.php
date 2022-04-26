@@ -9,6 +9,7 @@
  *
  * @package modx-test
 */
+
 namespace MODX\Revolution\Tests\Model\Filters;
 
 
@@ -25,8 +26,8 @@ use MODX\Revolution\MODxTestCase;
  * @group Filters
  * @group modInputFilter
  */
-class modInputFilterTest extends MODxTestCase {
-
+class modInputFilterTest extends MODxTestCase
+{
     /**
      * @dataProvider providerFilter
      * @param $elementName
@@ -35,7 +36,8 @@ class modInputFilterTest extends MODxTestCase {
      * @param $expectedModifiers
      * @return void
      */
-    public function testFilter($elementName, $expectedElementName, $expectedComands, $expectedModifiers) {
+    public function testFilter($elementName, $expectedElementName, $expectedComands, $expectedModifiers)
+    {
         $element = new modFieldTag($this->modx);
         $element->set('name', $elementName);
 
@@ -50,7 +52,8 @@ class modInputFilterTest extends MODxTestCase {
     /**
      * dataProvider for testFilter
      */
-    public function providerFilter() {
+    public function providerFilter()
+    {
         return [
             [
                 'pagetitle:eq=`0`:then=`foo`:else=`bar`',
