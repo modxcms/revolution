@@ -2,9 +2,31 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.0.1-pl (TBD)
+MODX Revolution 3.0.1-pl (April 28, 2022)
 ====================================
-
+- Make sure file name and line number are included in error messages (#16106)
+- Add MODx.util.FileDownload helper method (#16150)
+- Fix hidden TVs for all core resource types (#16163)
+- Fix count in Element/Template/GetList processor (#16160)
+- Normalize boolean value of the combo property (#16161)
+- Add Unit Test for modInputFilter (#16165)
+- Rework concatenated lexicon entries (#16156)
+- Don't show Configuration Check dashboard widget if all checks pass (#16151)
+- Fix file downloads from Media Browser (#16152)
+- Improve Form Panel Validation and Field Display - Part 6, Plugin Panel (#16125)
+- Improve Form Panel Validation and Field Display - Part 5, Chunk Panel (#16128)
+- Improve Form Panel Validation and Field Display - Part 4, Template Panel (#16122)
+- Improve Form Panel Validation and Field Display - Part 3, Snippet Panel (#16119)
+- Improve Form Panel Validation and Field Display - Part 2, TV Panel (#16118)
+- Remove console.logs from layout (#16153)
+- Adjust placeholder filtering and accessible options for @SELECT (#16149)
+- Fix typo in setup error message (#16112)
+- Fix uncaught TypeError when calling a deprecated method from file (#16142)
+- Use random hash in getTag if Element name is blank (#16127)
+- Fix display of optimize and truncate links in Database Tables panel (#16132)
+- Treat email contents as UTF-8 to fix mangled characters (#16130)
+- Fix inability to specify password in user create/update (#16126)
+- Improve Form Panel Validation and Field Display (#16012)
 
 MODX Revolution 3.0.0-pl (March 30, 2022)
 ====================================
