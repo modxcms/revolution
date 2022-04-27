@@ -32,7 +32,6 @@ $_lang['configcheck_installer_msg'] = 'Das Verzeichnis setup/ enthält das Insta
 $_lang['configcheck_lang_difference'] = 'Falsche Anzahl von Einträgen in der Sprachdatei';
 $_lang['configcheck_lang_difference_msg'] = 'Die momentan ausgewählte Sprache hat eine andere Anzahl von Einträgen als die Standardsprache. Das muss nicht notwendigerweise ein Problem sein, kann aber bedeuten, dass die Sprachdatei aktualisiert werden muss.';
 $_lang['configcheck_notok'] = 'Ein oder mehrere Konfigurationsdetails haben die Prüfung nicht bestanden: ';
-$_lang['configcheck_ok'] = 'Prüfung bestanden – keine Warnungen.';
 $_lang['configcheck_phpversion'] = 'PHP-Version ist veraltet';
 $_lang['configcheck_phpversion_msg'] = 'Ihre PHP-Version [[+phpversion]] wird nicht mehr von den PHP-Entwicklern gepflegt. Das bedeutet, dass keine Sicherheitsupdates mehr zur Verfügung gestellt werden. Es ist wahrscheinlich, dass MODX oder ein Extra aktuell oder in naher Zukunft diese Version nicht mehr unterstützen werden. Bitte aktualisieren Sie so schnell wie möglich Ihre Umgebung zumindest auf PHP [[+phprequired]], um Ihre Seite abzusichern.';
 $_lang['configcheck_register_globals'] = 'register_globals ist in Ihrer php.ini-Konfigurationsdatei auf ON gesetzt';
