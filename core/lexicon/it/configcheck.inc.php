@@ -29,7 +29,6 @@ $_lang['configcheck_installer_msg'] = 'La cartella setup/ contiene i files di in
 $_lang['configcheck_lang_difference'] = '<b>Il numero di termini nel file della lingua non è corretto.</b>';
 $_lang['configcheck_lang_difference_msg'] = 'La lingua attualmente selezionata ha un numero di termini diverso da quello della lingua di default. Non è necessariamente un problema, ma la cosa può significare che si debba aggiornare il file.';
 $_lang['configcheck_notok'] = '<span style="color:#990000">ERRATI uno o più dettagli di configurazione: </span>';
-$_lang['configcheck_ok'] = '<span style="color:#009900">Tutti i controlli OK - nessun avviso da riportare.</span>';
 $_lang['configcheck_phpversion'] = 'La versione di PHP è obsoleta';
 $_lang['configcheck_phpversion_msg'] = 'La versione di PHP in uso [[+phpversion]] non è più mantenuta dagli sviluppatori PHP, questo significa che non vengono rilasciati gli aggiornamenti di sicurezza. È anche probabile che MODX o un pacchetto aggiuntivo ora o nel prossimo futuro non supporterà più questa versione. Si consiglia di aggiornare PHP almeno alla versione [[+phprequired]] appena possibile per proteggere il vostro sito.';
 $_lang['configcheck_register_globals'] = '<b>register_globals è settato ad ON nel file di configurazione php.ini.</b>';
