@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Dil dosyasındaki girdilerin sayısı yanlış';
 $_lang['configcheck_lang_difference_msg'] = 'Seçili dil varsayılan dilden farklı sayıda girdi içeriyor. Her ne kadar bir sorun değilse de, bu dil dosyasının güncelleneceği anlamına gelebilir.';
 $_lang['configcheck_notok'] = 'Bir veya birkaç yapılandırma detayları kontrol edilmedi:';
-$_lang['configcheck_ok'] = 'Kontrol tamamlandı - rapor etmek için uyarı yok.';
 $_lang['configcheck_phpversion'] = 'PHP sürümü güncel değil';
 $_lang['configcheck_phpversion_msg'] = 'Kullandığın PHP sürümü [[+phpversion]] artık PHP geliştiricileri tarafından sürdürülmemektedir. buda güvenlik güncelleştirmeleri olmayacak manasına gelmekte. Ayrıca MODX veya bir extra pakette şimdi veya yakın gelecekte bu sürümü desteklemeyecek. Lütfen sitenizin güvenliğini en çabuk şekilde sağlamak için ortamınızı en az PHP [[+phprequired]] olacak şekilde güncelleyin.';
 $_lang['configcheck_register_globals'] = 'php.ini yapılandırma dosyanızda register_globals AÇIK olarak ayarlanmıştır';
