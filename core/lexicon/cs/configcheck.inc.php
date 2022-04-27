@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Nesprávný počet záznamů v jazykovém souboru';
 $_lang['configcheck_lang_difference_msg'] = 'Aktuálně vybraný jazyk má rozdílný počet záznamů než výchozí jazyk angličtina. Mělo by dojít k aktualizaci jazykového souboru pro tuto verzi MODX.';
 $_lang['configcheck_notok'] = 'Jeden nebo více konfiguračních údajů není správně nastaveno: ';
-$_lang['configcheck_ok'] = 'Kontrola OK - žádné varování do reportu.';
 $_lang['configcheck_phpversion'] = 'Verze PHP je zastaralá';
 $_lang['configcheck_phpversion_msg'] = 'Vaše verze PHP [[+phpversion]] již není vyvíjena vývojáři PHP, což znamená, že nejsou k dispozici žádné aktualizace zabezpečení. Je rovněž pravděpodobné, že MODX nebo některý z balíčků již dnes nebo v blízké budoucnosti nebude podporovat tuto verzi. Prosím aktualizujte své prostředí na serveru alespoň na verzi PHP [[+phprequired]] co nejdříve.';
 $_lang['configcheck_register_globals'] = 'register_globals v php.ini je nastaveno na ON';
