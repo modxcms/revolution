@@ -7481,6 +7481,13 @@ ul.x-tab-strip-bottom {
 .x-tree-node-el:hover .modx-tree-node-btn-create, .x-tree-node-el:focus .modx-tree-node-btn-create {
   opacity: 1.0; }
 
+/* Back out create button visibility for resource groups panel */
+#modx-panel-resource-groups #modx-gr-tree-resource .modx-tree-node-tool-ct {
+  display: none; }
+
+#modx-panel-resource-groups #modx-gr-tree-resource .x-tree-node-el .modx-tree-node-btn-create {
+  display: none; }
+
 .x-tree-root-ct {
   border-radius: 0;
   overflow: hidden;
