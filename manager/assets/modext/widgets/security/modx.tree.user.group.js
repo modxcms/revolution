@@ -318,7 +318,7 @@ MODx.window.CreateUserGroup = function(config) {
                         ,baseParams: {
                             action: 'Security/Access/Policy/GetList'
                             ,group: 'Administrator'
-                            ,combo: '1'
+                            ,combo: true
                         }
                         ,name: 'aw_manager_policy'
                         ,fieldLabel: _('user_group_aw_manager_policy')

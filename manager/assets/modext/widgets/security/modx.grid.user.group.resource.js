@@ -245,7 +245,7 @@ MODx.window.CreateUGRG = function(config) {
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
                 ,group: 'Resource,Object'
-                ,combo: '1'
+                ,combo: true
             }
             ,anchor: '100%'
             ,listeners: {

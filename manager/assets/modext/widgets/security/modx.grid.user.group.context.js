@@ -243,7 +243,7 @@ MODx.window.CreateUGAccessContext = function(config) {
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
                 ,group: 'Administrator,Object'
-                ,combo: '1'
+                ,combo: true
             }
             ,allowBlank: false
             ,anchor: '100%'
