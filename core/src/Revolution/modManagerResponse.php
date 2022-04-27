@@ -138,13 +138,13 @@ class modManagerResponse extends modResponse
         catch (\Exception $e) {
             $this->modx->controller = new Error($this->modx, [
                 'message' => get_class($e) . ': ' . $e->getMessage(),
-                'errors' => $this->_formatTrace($e->getTrace())
+                'errors' => [$e->getFile() . ':' . $e->getLine()] + $this->_formatTrace($e->getTrace())
             ]);
         }
         catch (\Error $e) {
             $this->modx->controller = new Error($this->modx, [
                 'message' => get_class($e) . ': ' . $e->getMessage(),
-                'errors' => $this->_formatTrace($e->getTrace())
+                'errors' => [$e->getFile() . ':' . $e->getLine()] + $this->_formatTrace($e->getTrace())
             ]);
         }
         $this->body = $this->modx->controller->render();
@@ -168,7 +168,7 @@ class modManagerResponse extends modResponse
                     $args[] = gettype($arg);
                 }
             }
-            $line .= implode(', ', $args) . ')';
+            $line .= implode(', ', $args) . ') in ' . $entry['file'] . ':' . $entry['line'];
             $return[] = htmlentities($line, ENT_QUOTES, 'UTF-8');
         }
         return $return;
