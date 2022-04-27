@@ -9,9 +9,12 @@
  *
  * @package modx-test
 */
+
 namespace MODX\Revolution\Tests\Model\Filters;
 
 
+use MODX\Revolution\Filters\modInputFilter;
+use MODX\Revolution\modFieldTag;
 use MODX\Revolution\MODxTestCase;
 
 /**
@@ -23,8 +26,49 @@ use MODX\Revolution\MODxTestCase;
  * @group Filters
  * @group modInputFilter
  */
-class modInputFilterTest extends MODxTestCase {
-    public function testExample() {
-        $this->assertTrue(true);
+class modInputFilterTest extends MODxTestCase
+{
+    /**
+     * @dataProvider providerFilter
+     * @param $elementName
+     * @param $expectedElementName
+     * @param $expectedComands
+     * @param $expectedModifiers
+     * @return void
+     */
+    public function testFilter($elementName, $expectedElementName, $expectedComands, $expectedModifiers)
+    {
+        $element = new modFieldTag($this->modx);
+        $element->set('name', $elementName);
+
+        $modInputFilter = new modInputFilter($this->modx);
+        $modInputFilter->filter($element);
+
+        $this->assertEquals($expectedElementName, $element->get('name'));
+        $this->assertEquals($expectedComands, $modInputFilter->getCommands());
+        $this->assertEquals($expectedModifiers, $modInputFilter->getModifiers());
+    }
+
+    /**
+     * dataProvider for testFilter
+     */
+    public function providerFilter()
+    {
+        return [
+            [
+                'pagetitle:eq=`0`:then=`foo`:else=`bar`',
+                'pagetitle',
+                [
+                    'eq',
+                    'then',
+                    'else',
+                ],
+                [
+                    '0',
+                    'foo',
+                    'bar',
+                ]
+            ]
+        ];
     }
 }
