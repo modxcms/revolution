@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Ukorrekt antal linier i sprogfilen';
 $_lang['configcheck_lang_difference_msg'] = 'Det valgte sprog har et andet antal linier end standardsproget. Det er ikke nødvendigvis et problem med det kan betyde at sprogfilen skal opdateres.';
 $_lang['configcheck_notok'] = 'Der var en eller flere konfigurationstjek som ikke var OK: ';
-$_lang['configcheck_ok'] = 'Check gik OK - ingen advarsler at rapportere.';
 $_lang['configcheck_phpversion'] = 'PHP version is outdated';
 $_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'register_globals er sat til ON i din php.ini konfigurationsfil';
