@@ -36,7 +36,6 @@ $_lang['configcheck_installer_msg'] = 'A setup/ mappában megtalálható a MODX 
 $_lang['configcheck_lang_difference'] = 'Helytelen számú bejegyzés a nyelvi állományban';
 $_lang['configcheck_lang_difference_msg'] = 'A jelenleg kiválasztott nyelvben eltérő számú bejegyzés szerepel, mint az alapértelmezettben. Habár ez nem feltétlen okoz hibát, jelentheti azt, hogy frissíteni kell a nyelvi állományt.';
 $_lang['configcheck_notok'] = 'Egy vagy több beállítás nincs rendben: ';
-$_lang['configcheck_ok'] = 'Az ellenőrzés nem talált hibát.';
 $_lang['configcheck_phpversion'] = 'A PHP verziója elavult';
 $_lang['configcheck_phpversion_msg'] = 'A PHP verzióját [[+phpversion]] már nem támogatják a PHP fejlesztői, ezért nem érhetők el biztonsági frissítések. Valószínű az is, hogy a MODX vagy hozzáadott csomagok most, vagy a jövőben nem támogatják ezt a verziót. Kérjük, az oldala biztonsága érdekében frissítsen legalább PHP [[+phprequired]] verzióra amint lehet.';
 $_lang['configcheck_register_globals'] = 'A register_globals értéke ON a php.ini állományban';
