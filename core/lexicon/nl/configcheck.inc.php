@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Er is een onjuist aantal entries gevonden in het taalbestand';
 $_lang['configcheck_lang_difference_msg'] = 'Het huidige geselecteerd taalbestand heeft een verschillend aantal entries dan de standaard taal. Waar dit niet direct een probleem is, kan dit betekenen dat dit bestand geupdate moet worden.';
 $_lang['configcheck_notok'] = 'E&eacute;n of meerdere configuratiedetails zijn niet succesvol: ';
-$_lang['configcheck_ok'] = 'Controle geeft OKE - Geen fouten te melden.';
 $_lang['configcheck_phpversion'] = 'Verouderde PHP versie';
 $_lang['configcheck_phpversion_msg'] = 'De gebruikte PHP versie [[+phpversion]] is niet meer ondersteund door de PHP ontwikkelaars, wat betekent dat er geen beveiligingsupdates voor beschikbaar zijn. Het is mogelijk dat MODX of een uitbreiding voor MODX nu of in de toekomst deze versie niet meer zal ondersteunen. Zorg er voor dat uw server omgeving zo spoedig mogelijk geüpdatet wordt naar ten minste PHP [[+phprequired]] om uw site veilig te houden.';
 $_lang['configcheck_register_globals'] = 'register_globals staat AAN in jouw php.ini bestand';

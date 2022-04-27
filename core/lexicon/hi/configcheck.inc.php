@@ -39,7 +39,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'language file में entries की ग़लत संख्या';
 $_lang['configcheck_lang_difference_msg'] = 'वर्तमान में चयनित भाषा डिफ़ॉल्ट भाषा से प्रविष्टियों का एक अलग संख्या है। जरूरी नहीं कि एक समस्या है जबकि, यह मतलब हो सकता है language file अद्यतन की जरूरत है।';
 $_lang['configcheck_notok'] = 'एक या एक से अधिक configuration details ठीक बाहर की जाँच नहीं किया: ';
-$_lang['configcheck_ok'] = 'Check passed OK - कोई चेतावनियाँ रिपोर्ट को पारित कर दिया।';
 $_lang['configcheck_phpversion'] = 'पीएचपी संस्करण पुराना है';
 $_lang['configcheck_phpversion_msg'] = 'आपका PHP संस्करण [[+PHP version]] अब PHP डेवलपर्स द्वारा अनुरक्षित नहीं है, जिसका अर्थ है की कोई सुरक्षा अघतन उपलब्ध नही है | यह भी संभावना है कि एमओडीएक्स या एक अतिरिक पैकेज अभी या निकट भविष्य में संस्करण का समर्थन नही करेगा | कृपया अपनी साइड को सुरक्षित करने के लिए अपने परिवेश को कम से कम PHP [[+PHP required]] पर यथाशीघ्र अपडेट करें|';
 $_lang['configcheck_register_globals'] = 'register_globals अपने php. ini configuration file में सेट करने के लिए पर है';

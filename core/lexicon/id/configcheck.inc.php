@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Jumlah entri salah dalam file bahasa';
 $_lang['configcheck_lang_difference_msg'] = 'Bahasa yang dipilih saat ini memiliki nomor yang berbeda dari entri dari bahasa default. Sementara tidak masalah, ini mungkin berarti file bahasa perlu diupdate.';
 $_lang['configcheck_notok'] = 'Satu atau lebih detail konfigurasi tidak disetel dengan baik: ';
-$_lang['configcheck_ok'] = 'Check sudah OK - tidak ada peringatan untuk laporan.';
 $_lang['configcheck_phpversion'] = 'Versi PHP terlalu rendah';
 $_lang['configcheck_phpversion_msg'] = 'Versi PHP [[+phpversion]] di server Anda tidak lagi dilanjutkan oleh para pengembang PHP, yang berarti tidak tersedia pembaruan. Hal ini juga dapat berarti bahwa MODX atau berbagai addon yang ada sekarang tidak lagi mendukung versi PHP tersebut. Perbarui server Anda, setidaknya gunakan PHP [[+phprequired]] untuk mengamankan situs Anda.';
 $_lang['configcheck_register_globals'] = 'register_globals diatur ke ON di file konfigurasi php.ini Anda';

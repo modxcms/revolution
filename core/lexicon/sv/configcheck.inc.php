@@ -32,7 +32,6 @@ $_lang['configcheck_installer_msg'] = 'Mappen setup/ innehåller installationspr
 $_lang['configcheck_lang_difference'] = 'Fel antal fraser i språkfilen';
 $_lang['configcheck_lang_difference_msg'] = 'Språket som för närvarande är valt har ett annat antal fraser än standardspråket. Detta behöver inte vara ett problem, men kan betyda att språkfilen behöver uppdateras.';
 $_lang['configcheck_notok'] = 'En eller flera konfigurationsdetaljer är inte korrekta: ';
-$_lang['configcheck_ok'] = 'Kontrollen utförd OK - inga varningar att rapportera.';
 $_lang['configcheck_phpversion'] = 'PHP-versionen är föråldrad';
 $_lang['configcheck_phpversion_msg'] = 'Din PHP-version [[+phpversion]] underhålls inte längre av PHP-utvecklarna vilket betyder att inga säkerhetsuppdateringar finns tillgängliga. Det är också troligt att MODX eller något extrapaket, nu eller i framtiden, inte längre kommer att stödja denna version. Uppdatera din miljö till minst PHP [[+phprequired]] så snart som möjligt för att säkra din webbplats.';
 $_lang['configcheck_register_globals'] = 'register_globals är satt till ON i din php.ini konfigurationsfil';

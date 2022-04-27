@@ -29,7 +29,6 @@ $_lang['configcheck_installer_msg'] = 'Le répertoire setup/ contient les script
 $_lang['configcheck_lang_difference'] = 'Nombre incorrect d\'entrées dans votre fichier de langue';
 $_lang['configcheck_lang_difference_msg'] = 'La langue actuelle a un nombre différent d\'entrées par rapport à la langue par défaut. Bien que cela ne soit pas un problème, cela peut signifier que votre fichier de langue a besoin d\'être mis à jour.';
 $_lang['configcheck_notok'] = 'Un ou plusieurs détails de configuration n\'ont pas été validés: ';
-$_lang['configcheck_ok'] = 'Vérifications passées avec succès - pas d\'avertissement à signaler.';
 $_lang['configcheck_phpversion'] = 'La version de PHP est obsolète';
 $_lang['configcheck_phpversion_msg'] = 'Votre version de PHP [[+phpversion]] n\'est plus maintenue par les développeurs PHP, ce qui signifie qu\'aucune mise à jour de sécurité ne sera disponible. Il est également probable que MODX ou l\'une de ses extensions ne soit pas compatible. Afin de sécuriser votre site, veuillez mettre à jour votre environnement en PHP [[+phprequired]] dès que possible.';
 $_lang['configcheck_register_globals'] = 'register_globals est fixé à ON dans votre fichier de configuration php.ini';

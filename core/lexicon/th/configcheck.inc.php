@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'ตัวเลขของเอนทรีในไฟล์ภาษาไม่ถูกต้อง';
 $_lang['configcheck_lang_difference_msg'] = 'การเลือกภาษาในตอนนี้มีหมายเลขของเอนทรีกับภาษาปริยาย แต่ที่ไม่ได้เป็นปัญหาที่สำคัญ นี่หมายความว่าไฟล์ภาษาจำเป็นต้องถูกอัปเดต';
 $_lang['configcheck_notok'] = 'มีหนึ่งหรือมากกว่าของรายละเอียดการตั้งค่าได้แจ้งว่าไม่เรียบร้อย: ';
-$_lang['configcheck_ok'] = 'ผ่านการตรวจสอบเรียบร้อย - ไม่มีรายงานคำเตือน';
 $_lang['configcheck_phpversion'] = 'PHP version is outdated';
 $_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'register_globals ถูกตั้งเป็น ON ในไฟล์การตั้งค่า php.ini ของคุณ';

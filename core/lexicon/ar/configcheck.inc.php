@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'عدد غير صحيح من المدخلات ضمن ملف اللغة';
 $_lang['configcheck_lang_difference_msg'] = 'اللغة المحددة حاليا تحتوي على عدد مختلف من الإدخالات عن اللغة الافتراضية. إنها ليست بالضرورة مشكلة، قد يعني هذا أن ملف اللغة بحاجة إلى ترقية.';
 $_lang['configcheck_notok'] = 'يوجد واحد أوكثر من تفاصيل التهيئة لم يتم فحصهن بشكل جيد: ';
-$_lang['configcheck_ok'] = 'تحقق من ضغط موافق - لا يوجد تحذيرات للإبلاغ عنها.';
 $_lang['configcheck_phpversion'] = 'إصدارPHP قديم';
 $_lang['configcheck_phpversion_msg'] = 'الخاص بك PHP الإصدار [[+phpversion]] لم تعد تحت المحافظة لمطوري بي إتش بي، مما يعني عدم توفر تحديثات أمنية. من المرجح أيضا أن MODX أو حزمة إضافية الآن أو في المستقبل القريب لم يعد يدعم هذا الإصدار. الرجاء تحديث البيئة الخاصة بك على الأقل إلى PHP [[+phpversion]] وقت ممكن لتأمين موقع الويب الخاص بك.';
 $_lang['configcheck_register_globals'] = 'register_globals لم يتم ضبطها إلى ON ضمن ملف التهيئة php.ini';
