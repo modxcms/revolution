@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Virheellinen määrä merkintöjä kielitiedostossa';
 $_lang['configcheck_lang_difference_msg'] = 'Valittuna olevassa kielessä on eri määrä merkintöjä kuin oletuskielessä. Vaikka tämä ei välttämättä aiheuta ongelmia, voi olla että kielitiedosto pitää päivittää.';
 $_lang['configcheck_notok'] = 'Yksi tai useampi yksittäinen asetus ei läpäissyt tarkistusta: ';
-$_lang['configcheck_ok'] = 'Tarkistus sujui ongelmitta - ei varoituksia.';
 $_lang['configcheck_phpversion'] = 'PHP version is outdated';
 $_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'register_globals on asetettu päälle php.ini asetustiedostossa';
