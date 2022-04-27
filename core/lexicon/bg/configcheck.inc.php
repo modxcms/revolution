@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Неправилен брой записи в езиков файл';
 $_lang['configcheck_lang_difference_msg'] = 'Избраният език има различен брой записи от езика по подразбиране. Докато не е непременно голям проблем това може да означава, че езиковия файл трябва да бъде актуализиран.';
 $_lang['configcheck_notok'] = 'Един или повече конфигурационни детайли не излезнаха OK: ';
-$_lang['configcheck_ok'] = 'Проверката мина добре - няма предупреждения за докладване.';
 $_lang['configcheck_phpversion'] = 'PHP version is outdated';
 $_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'register_globals е настроена на Включено (ON) във Вашия php.ini конфигурационен файл';
