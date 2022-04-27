@@ -925,8 +925,7 @@ MODx.window.QuickCreateResource = function(config) {
                             ,anchor: '100%'
                             ,baseParams: {
                                 action: 'Element/Template/GetList'
-                                ,combo: '1'
-                                ,limit: 0
+                                ,combo: true
                             }
                             ,value: MODx.config.default_template
                         },{

@@ -385,8 +385,7 @@ MODx.combo.Template = function(config) {
         url         : MODx.config.connector_url,
         baseParams  : {
             action      : 'Element/Template/GetList',
-            combo       : 1,
-            limit       : 0
+            combo       : true
         },
         fields      : ['id', 'templatename', 'description', 'category_name', 'preview', 'time'],
         name        : 'template',

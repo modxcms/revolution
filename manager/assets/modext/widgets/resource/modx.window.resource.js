@@ -148,7 +148,8 @@ MODx.combo.TemplatePicker = function(config) {
             url: MODx.config.connector_url,
             baseParams: {
                 action: 'Element/Template/GetList',
-                combo: true
+                combo: true,
+                limit: 0
             },
             root: 'results',
             totalProperty: 'total',
