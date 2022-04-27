@@ -2,9 +2,33 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.8.4-pl (TBD)
+MODX Revolution 2.8.4-pl (April 28, 2022)
 ====================================
+- Hide resource create button in resource groups panel (#15833)
+- Fix active state for files in main tree (#15835)
+- Add zero-padding decimal place option for number TVs (#15840)
+- Make hidden TV's work for weblinks, symlinks and static resources  (#16162)
+- Skip creation of thumbnails for SVGs (#15865)
+- Fix setStaticElementPath method (#15912)
+- Ignore E_DEPRECATED and E_STRICT errors in setup (#16147)
+- Update to Smarty 3.1.44 (#16146)
+- Fix issue with special characters in media source folder names (#16071)
+- Make MessageBox minWidth configurable (#15995)
+- Update to xPDO 2.8.4-pl (#16143)
+- Fix combobox not expanding if processor response is slow (#15992)
+- Improve regex for stripping MODX tags in dashboard widgets (#15964)
+- Fix disabled trash button (#15993)
+- Improve stripmodxtags output filter (#15963)
+- Remove duplicate CURLOPT_USER settings in modRest (#15949)
+- Fix isBinary check (#15900)
+- Add configurable extension for static html files (#15722)
+- Hide user settings tab based on permissions (#15756)
+- Update phpThumb v1.7.17-202109221111 (#15816)
+- Lazy load thumbnails in media browser (#15804)
+- Update PHPMailer 6.5.1 (#15808)
+- Fix image TV display via hash (#15731)
 - New edit_media_source lexicon (#15737)
+- Fix PHP 5.6 compatibility issue on system info (#15728)
 
 MODX Revolution 2.8.3-pl (May 28, 2021)
 ====================================
