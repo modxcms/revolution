@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'فایل زبان دارای تعداد نادرستی از کلیدهاست';
 $_lang['configcheck_lang_difference_msg'] = 'The currently selected language has a different number of entries than the default language. While not necessarily a problem, this may mean the language file needs to be updated.';
 $_lang['configcheck_notok'] = 'برخی از موارد پیکربندی به درستی بررسی نشدند: ';
-$_lang['configcheck_ok'] = 'نتیجه‌ی بررسی مطلوب است و مشکلی وجود ندارد.';
 $_lang['configcheck_phpversion'] = 'PHP version is outdated';
 $_lang['configcheck_phpversion_msg'] = 'Your PHP version [[+phpversion]] is no longer maintained by the PHP developers, which means no security updates are available. It is also likely that MODX or an extra package now or in the near future will no longer support this version. Please update your environment at least to PHP [[+phprequired]] as soon as possible to secure your site.';
 $_lang['configcheck_register_globals'] = 'گزینه‌ی register_globals در فایل پیکربندیِ php.ini فعال است';
