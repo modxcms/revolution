@@ -38,7 +38,6 @@ $_lang['configcheck_installer_msg'] = 'The setup/ directory contains the install
 $_lang['configcheck_lang_difference'] = 'Número incorrecto de entradas en el archivo de idioma';
 $_lang['configcheck_lang_difference_msg'] = 'El archivo de idioma configurado actualmente tiene un número diferente de entradas que el archivo de idioma por defecto. A pesar de que esto no supone necesariamente un problema, puede significar que el archivo de idioma necesita ser actualizado.';
 $_lang['configcheck_notok'] = 'Uno o más detalles de configuración no están correctos: ';
-$_lang['configcheck_ok'] = 'La revisión fue exitosa - sin advertencias que mostrar.';
 $_lang['configcheck_phpversion'] = 'La versión de PHP está desactualizada';
 $_lang['configcheck_phpversion_msg'] = 'Los desarrolladores de PHP ya no mantienen tu versión de PHP [[+phpversion]], lo que significa que no hay actualizaciones de seguridad disponibles. También es probable que MODX o un paquete adicional, ahora o en el futuro cercano, ya no admitan esta versión. Actualiza tu entorno al menos a PHP [[+phprequired]] lo antes posible para asegurar tu sitio.';
 $_lang['configcheck_register_globals'] = '"register_globals" está activado en el archivo de configuración php.ini';
