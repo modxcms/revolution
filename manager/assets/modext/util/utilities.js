@@ -833,3 +833,125 @@ Ext.define('AddFieldUtilities.plugin.Class', {
         // copy tag trigger TBD
     }
 });
+
+// This utility method allows downloading files with a failure and a success callback.
+// It uses the following setting in the fields property:
+//
+// Key     | Default | Description
+// ------- | ------- | -----------
+// url     | MODx.config.connector_url | The download url
+// timeout | 30      | Set a polling timeout
+// debug   | false   | Log the polling in the console
+// params  | {}      | Additional params for the connector url
+// success | null    | Callback called after a successful download,
+// failure | null    | Callback called after a failed download
+
+// To use the success callback, the download processor has to set a cookie i.e. by:
+// if ($this->getProperty('cookieName')) {
+//     setcookie($this->getProperty('cookieName'), 'true', time() + 10, '/');
+// }
+
+MODx.util.FileDownload = function (fields) {
+    if (!Ext.isObject(fields)) {
+        return;
+    }
+
+    var me = this;
+    me.clearCookie = function () {
+        Ext.util.Cookies.set(cookieName, null, new Date("January 1, 1970"), '/');
+        Ext.util.Cookies.clear(cookieName, '/');
+    }
+    me.randomHex = function (len) {
+        const hex = '0123456789ABCDEF';
+        let output = '';
+        for (let i = 0; i < len; ++i) {
+            output += hex.charAt(Math.floor(Math.random() * hex.length));
+        }
+        return output;
+    }
+    me.isFinished = function (successCallback, failureCallback) {
+        // Check if file is started downloading
+        if (Ext.util.Cookies.get(cookieName) && Ext.util.Cookies.get(cookieName) === 'true') {
+            me.clearCookie();
+            if (successCallback) {
+                successCallback({success: true, message: _('$file_msg_download_success')});
+            }
+            return;
+        }
+        // Check for error / IF any error happens the frame will have content
+        try {
+            if (frame.dom.contentDocument.body.innerHTML.length > 0) {
+                var result = Ext.decode(frame.dom.contentDocument.body.innerHTML);
+                result = (result) ? result : {success: false, message: _('file_msg_download_error')};
+                me.clearCookie();
+                if (failureCallback) {
+                    failureCallback(result);
+                }
+                frame.dom.contentDocument.body.innerHTML = "";
+                return;
+            }
+        } catch (e) {
+            console.log(e);
+        }
+
+        if (polling) {
+            if (debug) {
+                console.log('polling ' + polling);
+            }
+            // Download is not finished. Check again in 100 milliseconds.
+            window.setTimeout(function () {
+                polling--;
+                me.isFinished(successCallback, failureCallback);
+            }, 100);
+        } else {
+            // Polling timeout with no fileDownload cookie set
+            me.clearCookie();
+            if (failureCallback) {
+                failureCallback({success: false, message: _('file_err_download_timeout')});
+            }
+        }
+    };
+
+    var cookieName = 'fileDownload' + me.randomHex(16);
+    var polling = fields.timeout * 10 || 300;
+    var ident = fields.ident || 'filedownload-' + Ext.id();
+    var url = fields.url || MODx.config.connector_url;
+    var params = fields.params || {};
+    var debug = fields.debug || false;
+    var successCallback = fields.success || null;
+    var failureCallback = fields.failure || null;
+
+    var body = Ext.getBody();
+    var frame = body.createChild({
+        tag: 'iframe',
+        cls: 'x-hidden',
+        id: ident + '-iframe',
+        name: ident + '-iframe',
+    });
+    var form = body.createChild({
+        tag: 'form',
+        cls: 'x-hidden',
+        id: ident + '-form',
+        action: url,
+        target: ident + '-iframe',
+        method: 'post',
+    });
+    params.HTTP_MODAUTH = MODx.siteId;
+    if (typeof successCallback === 'function') {
+        params.cookieName = cookieName;
+    }
+    Ext.iterate(params, function (name, value) {
+        form.createChild({
+            tag: 'input',
+            type: 'text',
+            cls: 'x-hidden',
+            id: ident + '-' + name,
+            name: name,
+            value: value
+        });
+    });
+    form.dom.submit();
+    if (successCallback || failureCallback) {
+        me.isFinished(successCallback, failureCallback);
+    }
+};
