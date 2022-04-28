@@ -226,16 +226,22 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
 
     ,exportPolicyTemplate: function(btn,e) {
         var id = this.menu.record.id;
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'Security/Access/Policy/Template/Export'
-                ,id: id
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    location.href = this.config.url+'?action=Security/Access/Policy/Template/Export&download=1&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
-                },scope:this}
+        MODx.util.FileDownload({
+            url: MODx.config.connectorUrl,
+            params: {
+                action: 'Security/Access/Policy/Template/Export',
+                id: id,
+                download: true,
+            },
+            success: function (response) {
+                MODx.msg.status({
+                    title: _('success'),
+                    message: response.message || _('file_msg_download_success'),
+                    delay: 2
+                });
+            },
+            failure: function (response) {
+                MODx.msg.alert(_('error'), response.message);
             }
         });
     }

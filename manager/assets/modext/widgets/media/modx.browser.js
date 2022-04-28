@@ -189,26 +189,27 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         w.show(e.target);
     }
 
-    ,downloadFile: function(item,e) {
+    ,downloadFile: function(item, e) {
         var node = this.cm.activeNode;
         var data = this.lookup[node.id];
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Browser/File/Download'
-                ,file: data.pathRelative
-                ,wctx: MODx.ctx || ''
-                ,source: this.config.source
-            }
-            ,listeners: {
-                'failure': {fn: function(r) {
-                    MODx.msg.alert(_('alert'), r.message);
-                },scope:this},
-                'success':{fn:function(r) {
-                    if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
-                    }
-                },scope:this}
+        MODx.util.FileDownload({
+            url: MODx.config.connectorUrl,
+            params: {
+                action: 'Browser/File/Download',
+                file: data.pathRelative,
+                wctx: MODx.ctx || '',
+                source: this.config.source,
+                download: true,
+            },
+            success: function (response) {
+                MODx.msg.status({
+                    title: _('success'),
+                    message: response.message || _('file_msg_download_success'),
+                    delay: 2
+                });
+            },
+            failure: function (response) {
+                MODx.msg.alert(_('error'), response.message);
             }
         });
     }

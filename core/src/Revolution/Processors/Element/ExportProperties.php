@@ -33,14 +33,12 @@ class ExportProperties extends Processor
 
     public function process()
     {
-        $response = false;
-        $download = $this->getProperty('download');
-
-        if (!empty($download)) {
-            $response = $this->download();
+        $cookieName = $this->getProperty('cookieName');
+        if ($cookieName) {
+            setcookie($cookieName, 'true', time() + 10, '/');
         }
 
-        return $response;
+        return $this->download();
     }
 
     /**
@@ -61,11 +59,12 @@ class ExportProperties extends Processor
 
         $fileName = strtolower(str_replace(' ', '-', $this->getProperty('id'))) . '.export.js';
 
-        $fileobj = $fileHandler->make($this->modx->getOption('core_path', null,
-                MODX_CORE_PATH) . 'export/properties/' . $fileName);
+        $fileobj = $fileHandler->make($this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/properties/' . $fileName);
 
         $fileobj->setContent($data);
-        $fileobj->download();
+        $fileobj->download([
+            'mimetype' => 'text/javascript'
+        ]);
 
         return true;
     }

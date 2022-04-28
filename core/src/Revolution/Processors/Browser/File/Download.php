@@ -51,6 +51,12 @@ class Download extends Browser
         @session_write_close();
         try {
             if ($data = $this->source->getObjectContents($file)) {
+                // Set cookie for sucessCallback in MODx.util.FileDownload
+                $cookieName = $this->getProperty('cookieName', '');
+                if ($cookieName) {
+                    setcookie($cookieName, 'true', time() + 10, '/');
+                }
+
                 $name = preg_replace('#[^\w\-.]#ui', '_', $data['basename']);
                 header('Content-type: ' . $data['mime']);
                 header('Content-Length: ' . $data['size']);

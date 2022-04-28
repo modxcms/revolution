@@ -689,9 +689,28 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
     }
 
-    ,downloadFile: function(item,e) {
+    ,downloadFile: function(item, e) {
         var node = this.cm.activeNode;
-        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+node.attributes.pathRelative+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+        MODx.util.FileDownload({
+            url: MODx.config.connectorUrl,
+            params: {
+                action: 'Browser/File/Download',
+                file: node.attributes.pathRelative,
+                wctx: MODx.ctx || '',
+                source: this.getSource(),
+                download: true,
+            },
+            success: function (response) {
+                MODx.msg.status({
+                    title: _('success'),
+                    message: response.message || _('file_msg_download_success'),
+                    delay: 2
+                });
+            },
+            failure: function (response) {
+                MODx.msg.alert(_('error'), response.message);
+            }
+        });
     }
 
     ,copyRelativePath: function(item,e) {

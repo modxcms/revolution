@@ -32,6 +32,11 @@ class Download extends Processor
      */
     public function process()
     {
+        $cookieName = $this->getProperty('cookieName');
+        if ($cookieName) {
+            setcookie($cookieName, 'true', time() + 10, '/');
+        }
+
         $logTarget = $this->modx->getLogTarget();
         if (!is_array($logTarget)) {
             $logTarget = ['options' => []];
@@ -47,6 +52,7 @@ class Download extends Processor
         header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="error.' . time() . '.log');
         ob_get_level() && @ob_end_flush();
+        @session_write_close();
         readfile($file);
         die();
     }

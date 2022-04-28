@@ -236,16 +236,22 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
 
     ,exportSet: function(btn,e) {
         var id = this.menu.record.id;
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'Security/Forms/Set/Export'
-                ,id: id
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    location.href = this.config.url+'?action=Security/Forms/Set/Export&download='+r.message+'&id='+id+'&HTTP_MODAUTH='+MODx.siteId;
-                },scope:this}
+        MODx.util.FileDownload({
+            url: MODx.config.connectorUrl,
+            params: {
+                action: 'Security/Forms/Set/Export',
+                id: id,
+                download: true,
+            },
+            success: function (response) {
+                MODx.msg.status({
+                    title: _('success'),
+                    message: response.message || _('file_msg_download_success'),
+                    delay: 2
+                });
+            },
+            failure: function (response) {
+                MODx.msg.alert(_('error'), response.message);
             }
         });
     }

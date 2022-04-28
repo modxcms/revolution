@@ -33,24 +33,24 @@ abstract class ExportProcessor extends GetProcessor
 
     public function cleanup()
     {
-        if (!extension_loaded('XMLWriter') || !class_exists('XMLWriter')) {
-            return $this->failure($this->modx->lexicon('xmlwriter_err_nf'));
+        $cookieName = $this->getProperty('cookieName');
+        if ($cookieName) {
+            setcookie($cookieName, 'true', time() + 10, '/');
         }
 
-        $download = $this->getProperty($this->downloadProperty);
-        if (empty($download)) {
-            return $this->cache();
+        if (!extension_loaded('XMLWriter') || !class_exists('XMLWriter')) {
+            return $this->failure($this->modx->lexicon('xmlwriter_err_nf'));
         }
 
         return $this->download();
     }
 
     /**
-     * Cache the data to an export file
+     * Create a temporary file object and serve as a download to the browser
      *
      * @return array|string
      */
-    public function cache()
+    public function download()
     {
         $this->xml = new XMLWriter();
         $this->xml->openMemory();
@@ -63,17 +63,21 @@ abstract class ExportProcessor extends GetProcessor
         $this->xml->endDocument();
         $data = $this->xml->outputMemory();
 
-        $f = $this->object->get($this->nameField) . '.xml';
-        $fileName = $this->modx->getOption('core_path', null,
-                MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $f;
-
-        /** @var modCacheManager $cacheManager */
-        $cacheManager = $this->modx->getCacheManager();
-        $cacheManager->writeFile($fileName, $data);
-
         $this->logManagerAction();
 
-        return $this->success($f);
+        /** @var modFileHandler $fileHandler */
+        $fileHandler = $this->modx->getService('fileHandler', modFileHandler::class);
+
+        $fileName = strtolower(str_replace(' ', '-', $this->object->get($this->nameField))) . '.' . $this->objectType . '.xml';
+
+        $fileobj = $fileHandler->make($this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $fileName);
+
+        $fileobj->setContent($data);
+        $fileobj->download([
+            'mimetype' => 'text/xml'
+        ]);
+
+        return true;
     }
 
     /**
@@ -82,33 +86,6 @@ abstract class ExportProcessor extends GetProcessor
      * @abstract
      */
     abstract public function prepareXml();
-
-    /**
-     * Attempt to download the exported file to the browser
-     *
-     * @return mixed
-     */
-    public function download()
-    {
-        $fileName = $this->object->get($this->nameField) . '.xml';
-        $file = $this->modx->getOption('core_path', null,
-                MODX_CORE_PATH) . 'export/' . $this->objectType . '/' . $fileName;
-
-        /** @var modFileHandler $fileHandler */
-        $fileHandler = $this->modx->getService('fileHandler', modFileHandler::class);
-        $fileObj = $fileHandler->make($file);
-        $name = strtolower(str_replace([' ', '/'], '-', $this->object->get($this->nameField)));
-
-        if (!$fileObj->exists()) {
-            return $this->failure($file);
-        }
-
-        $o = $fileObj->getContents();
-
-        $fileObj->download(['filename' => $name . '.' . $this->objectType . '.xml']);
-
-        return $o;
-    }
 
     /**
      * Log the export manager action

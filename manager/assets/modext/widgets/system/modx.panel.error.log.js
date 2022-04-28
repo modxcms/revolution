@@ -91,7 +91,22 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         return true;
     }
     ,download: function() {
-        location.href = this.config.url+'?action=System/ErrorLog/Download&HTTP_MODAUTH='+MODx.siteId;
+        MODx.util.FileDownload({
+            url: MODx.config.connectorUrl,
+            params: {
+                action: 'System/ErrorLog/Download'
+            },
+            success: function (response) {
+                MODx.msg.status({
+                    title: _('success'),
+                    message: response.message || _('file_msg_download_success'),
+                    delay: 2
+                });
+            },
+            failure: function (response) {
+                MODx.msg.alert(_('error'), response.message);
+            }
+        });
     }
     /**
      * Set the textarea height to make use of the maximum "space" the client viewport allows

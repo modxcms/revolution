@@ -10,6 +10,7 @@
 
 namespace MODX\Revolution\Processors\System;
 
+use MODX\Revolution\File\modFileHandler;
 use MODX\Revolution\Processors\Processor;
 
 /**
@@ -23,46 +24,23 @@ class DownloadOutput extends Processor
      */
     public function process()
     {
-        if ($this->getProperty('download')) {
-            $output = $this->download();
-        } else {
-            $output = $this->cache();
+        $cookieName = $this->getProperty('cookieName');
+        if ($cookieName) {
+            setcookie($cookieName, 'true', time() + 10, '/');
         }
-        return $output;
+
+        return $this->download();
     }
 
     /**
-     * Download the output to the browser
-     * @return string
+     * Create a temporary file object and serve as a download to the browser
+     *
+     * @return bool|string
      */
     public function download()
     {
-        $dl = $this->getProperty('download');
-        $dl = str_replace(['../', '..', 'config'], '', $dl);
-        $dl = ltrim($dl, '/');
-
-        $f = $this->modx->getOption('core_path') . $dl;
-        $o = $this->modx->cacheManager->get($dl);
-        if (!$o) {
-            return '';
-        }
-
-        $this->modx->cacheManager->delete($dl);
-
-        $bn = basename($f);
-        @session_write_close();
-        header('Content-Type: application/force-download');
-        header('Content-Disposition: attachment; filename="' . $bn . '-' . date('Y-m-d Hi') . '.txt"');
-        return $o;
-    }
-
-    /**
-     * Cache the data stored
-     * @return array|string
-     */
-    public function cache()
-    {
         $data = $this->getProperty('data');
+
         if (empty($data)) {
             return $this->failure($this->modx->lexicon('invalid_data'));
         }
@@ -70,22 +48,20 @@ class DownloadOutput extends Processor
         $data = strip_tags($data, '<br><span><hr><li>');
         $data = str_replace(['<li>', '<hr>', '<br>', '<span>', '<?php', '<?', '?>'], "\r\n", $data);
         $data = strip_tags($data);
-        $o = '/*
-* MODX Console Output
-*
-* @date ' . date('Y-m-d H:i:s') . '
-*/
-' . $data . '
-/* EOF */
-';
+        $output = "/*\r\n* MODX Console Output\r\n*\r\n* @date " . date('Y-m-d H:i:s') . "\r\n*/\r\n" . $data . "\r\n/* EOF */\r\n";
 
-        /* setup filenames and write to file */
-        $file = 'export/console/output';
-        $fileName = $this->modx->getOption('core_path') . $file;
-        if (file_exists($fileName)) {
-            $this->modx->cacheManager->delete($fileName);
-        }
-        $success = $this->modx->cacheManager->set($file, $o);
-        return $success ? $this->success($file) : $this->failure($this->modx->lexicon('cache_err_write'));
+        /** @var modFileHandler $fileHandler */
+        $fileHandler = $this->modx->getService('fileHandler', modFileHandler::class);
+
+        $fileName = 'output-' . date('Y-m-d Hi') . '.txt';
+
+        $fileobj = $fileHandler->make($this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/console/' . $fileName);
+
+        $fileobj->setContent($output);
+        $fileobj->download([
+            'mimetype' => 'text/plain'
+        ]);
+
+        return true;
     }
 }

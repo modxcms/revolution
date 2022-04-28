@@ -874,7 +874,7 @@ MODx.util.FileDownload = function (fields) {
         if (Ext.util.Cookies.get(cookieName) && Ext.util.Cookies.get(cookieName) === 'true') {
             me.clearCookie();
             if (successCallback) {
-                successCallback({success: true, message: _('$file_msg_download_success')});
+                successCallback({success: true, message: _('file_msg_download_success')});
             }
             return;
         }
@@ -941,14 +941,13 @@ MODx.util.FileDownload = function (fields) {
         params.cookieName = cookieName;
     }
     Ext.iterate(params, function (name, value) {
-        form.createChild({
-            tag: 'input',
-            type: 'text',
+        var textarea = form.createChild({
+            tag: 'textarea',
             cls: 'x-hidden',
             id: ident + '-' + name,
-            name: name,
-            value: value
+            name: name
         });
+        textarea.dom.innerText = value;
     });
     form.dom.submit();
     if (successCallback || failureCallback) {

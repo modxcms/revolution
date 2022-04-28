@@ -116,16 +116,21 @@ Ext.extend(MODx.Console,Ext.Window,{
 
     ,download: function() {
         var c = this.getComponent('body').getEl().dom.innerHTML || '&nbsp;';
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'System/DownloadOutput'
-                ,data: c
-            }
-            ,listeners: {
-                'success':{fn:function(r) {
-                    location.href = MODx.config.connector_url+'?action=System/DownloadOutput&HTTP_MODAUTH='+MODx.siteId+'&download='+r.message;
-                },scope:this}
+        MODx.util.FileDownload({
+            url: MODx.config.connectorUrl,
+            params: {
+                action: 'System/DownloadOutput',
+                data: c
+            },
+            success: function (response) {
+                MODx.msg.status({
+                    title: _('success'),
+                    message: response.message || _('file_msg_download_success'),
+                    delay: 2
+                });
+            },
+            failure: function (response) {
+                MODx.msg.alert(_('error'), response.message);
             }
         });
     }

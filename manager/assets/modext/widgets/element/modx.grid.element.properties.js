@@ -437,7 +437,27 @@ Ext.extend(MODx.grid.ElementProperties,MODx.grid.LocalProperty,{
 
     ,exportProperties: function (btn,e) {
         var id = Ext.getCmp('modx-combo-property-set').getValue();
-        location.href = MODx.config.connector_url+'?action=Element/ExportProperties&download=1&id='+id+'&data='+this.encode()+'&HTTP_MODAUTH='+MODx.siteId;
+        if (id) {
+            MODx.util.FileDownload({
+                url: MODx.config.connectorUrl,
+                params: {
+                    action: 'Element/ExportProperties',
+                    id: id,
+                    data: this.encode(),
+                    download: true,
+                },
+                success: function (response) {
+                    MODx.msg.status({
+                        title: _('success'),
+                        message: response.message || _('file_msg_download_success'),
+                        delay: 2
+                    });
+                },
+                failure: function (response) {
+                    MODx.msg.alert(_('error'), response.message);
+                }
+            });
+        }
     }
 
     ,importProperties: function (btn,e) {
