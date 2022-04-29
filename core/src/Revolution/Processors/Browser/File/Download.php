@@ -48,7 +48,6 @@ class Download extends Browser
         }
 
         // Download file
-        @session_write_close();
         try {
             if ($data = $this->source->getObjectContents($file)) {
                 // Set cookie for sucessCallback in MODx.util.FileDownload
@@ -62,12 +61,13 @@ class Download extends Browser
                 header('Content-Length: ' . $data['size']);
                 header('Content-Disposition: attachment; filename=' . $name);
 
+                @session_write_close();
                 exit($data['content']);
             } else {
-                exit($this->modx->lexicon('file_err_open') . $this->getProperty('file'));
+                return $this->failure($this->modx->lexicon('file_err_open') . $this->getProperty('file'));
             }
         } catch (Exception $e) {
-            exit($e->getMessage());
+            return $this->failure($e->getMessage());
         }
     }
 }

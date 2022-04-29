@@ -243,6 +243,7 @@ class modFile extends modFileSystemResource
         header('Content-Disposition: attachment; filename=' . $options['filename']);
         header('Content-Length: ' . $this->getSize());
 
+        @session_write_close();
         echo $output;
         die();
     }

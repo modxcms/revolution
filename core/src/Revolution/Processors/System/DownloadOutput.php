@@ -53,7 +53,7 @@ class DownloadOutput extends Processor
         /** @var modFileHandler $fileHandler */
         $fileHandler = $this->modx->getService('fileHandler', modFileHandler::class);
 
-        $fileName = 'output-' . date('Y-m-d Hi') . '.txt';
+        $fileName = 'output-' . date('Y-m-d_H-i') . '.txt';
 
         $fileobj = $fileHandler->make($this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'export/console/' . $fileName);
 
