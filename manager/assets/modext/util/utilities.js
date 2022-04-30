@@ -856,7 +856,7 @@ MODx.util.FileDownload = function (fields) {
         return;
     }
 
-    var me = this;
+    let me = this;
     me.clearCookie = function () {
         Ext.util.Cookies.set(cookieName, null, new Date("January 1, 1970"), '/');
         Ext.util.Cookies.clear(cookieName, '/');
@@ -873,25 +873,24 @@ MODx.util.FileDownload = function (fields) {
         // Check if file is started downloading
         if (Ext.util.Cookies.get(cookieName) && Ext.util.Cookies.get(cookieName) === 'true') {
             me.clearCookie();
-            if (successCallback) {
+            if (typeof successCallback === 'function') {
                 successCallback({success: true, message: _('file_msg_download_success')});
             }
             return;
         }
         // Check for error / IF any error happens the frame will have content
         try {
-            if (frame.dom.contentDocument.body.innerHTML.length > 0) {
-                var result = Ext.decode(frame.dom.contentDocument.body.innerHTML);
+            var response = frame.dom.contentDocument.body.innerHTML;
+            if (response.length > 0) {
+                let result = Ext.decode(frame.dom.contentDocument.body.innerHTML);
                 result = (result) ? result : {success: false, message: _('file_msg_download_error')};
-                me.clearCookie();
-                if (failureCallback) {
-                    failureCallback(result);
-                }
+                me.failure(failureCallback, result);
                 frame.dom.contentDocument.body.innerHTML = "";
                 return;
             }
         } catch (e) {
-            console.log(e);
+            me.failure(failureCallback, {success: false, message: MODx.util.safeHtml(response)});
+            return;
         }
 
         if (polling) {
@@ -905,43 +904,49 @@ MODx.util.FileDownload = function (fields) {
             }, 100);
         } else {
             // Polling timeout with no fileDownload cookie set
-            me.clearCookie();
-            if (failureCallback) {
-                failureCallback({success: false, message: _('file_err_download_timeout')});
-            }
+            me.failure(failureCallback, {success: false, message: _('file_err_download_timeout')});
         }
     };
+    me.failure = function (failureCallback, result) {
+        me.clearCookie();
+        if (failureCallback) {
+            failureCallback(result);
+        }
+    }
 
-    var cookieName = 'fileDownload' + me.randomHex(16);
-    var polling = fields.timeout * 10 || 300;
-    var ident = fields.ident || 'filedownload-' + Ext.id();
-    var url = fields.url || MODx.config.connector_url;
-    var params = fields.params || {};
-    var debug = fields.debug || false;
-    var successCallback = fields.success || null;
-    var failureCallback = fields.failure || null;
+    const cookieName = 'fileDownload' + me.randomHex(16),
+        ident = fields.ident || 'filedownload-' + Ext.id(),
+        url = fields.url || MODx.config.connector_url,
+        debug = fields.debug || false;
 
-    var body = Ext.getBody();
-    var frame = body.createChild({
-        tag: 'iframe',
-        cls: 'x-hidden',
-        id: ident + '-iframe',
-        name: ident + '-iframe',
-    });
-    var form = body.createChild({
-        tag: 'form',
-        cls: 'x-hidden',
-        id: ident + '-form',
-        action: url,
-        target: ident + '-iframe',
-        method: 'post',
-    });
+    let params = fields.params || {},
+        polling = fields.timeout * 10 || 300,
+        successCallback = fields.success || null,
+        failureCallback = fields.failure || null,
+        body = Ext.getBody();
+
+    let frame = body.createChild({
+            tag: 'iframe',
+            cls: 'x-hidden',
+            id: ident + '-iframe',
+            name: ident + '-iframe',
+        }),
+        form = body.createChild({
+            tag: 'form',
+            cls: 'x-hidden',
+            id: ident + '-form',
+            action: url,
+            target: ident + '-iframe',
+            method: 'post',
+        });
     params.HTTP_MODAUTH = MODx.siteId;
     if (typeof successCallback === 'function') {
         params.cookieName = cookieName;
+    } else {
+        polling = 0;
     }
     Ext.iterate(params, function (name, value) {
-        var textarea = form.createChild({
+        let textarea = form.createChild({
             tag: 'textarea',
             cls: 'x-hidden',
             id: ident + '-' + name,
