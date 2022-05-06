@@ -115,8 +115,40 @@ Ext.override(Ext.Window, {
 MODx.Window = function(config) {
     config = config || {};
     this.isSmallScreen = Ext.getBody().getViewSize().height <= 768;
+    /*
+        Update boolean modxFbarHas[___]SaveSwitch properties for later use
+    */
+    if (config.hasOwnProperty('modxFbarSaveSwitches') && config.modxFbarSaveSwitches.length > 0) {
+        config.modxFbarSaveSwitches.forEach(saveSwitch => {
+            saveSwitch = saveSwitch[0].toUpperCase() + saveSwitch.slice(1);
+            const configKey = `modxFbarHas${saveSwitch}Switch`;
+            config[configKey] = true;
+        });
+
+    }
+    /*
+        Setup the standard system footer bar if fbar and buttons properties are empty.
+        Note that buttons overrides fbar and can be used to specify a customized
+        set of window buttons.
+    */
+    if (!config.hasOwnProperty('fbar') && (!config.hasOwnProperty('buttons') || config.buttons.length == 0)) {
+        const footerBar = this.getWindowFbar(config);
+        if (footerBar) {
+            config.buttonAlign = 'left';
+            config.fbar = footerBar;
+        }
+    }
     Ext.applyIf(config,{
         modal: false
+
+        ,modxFbarHasClearCacheSwitch: false
+        ,modxFbarHasDuplicateValuesSwitch: false
+        ,modxFbarHasRedirectSwitch: false
+
+        ,modxFbarButtons: config.modxFbarButtons || 'c-s'
+        ,modxFbarSaveSwitches: []
+        ,modxPseudoModal: false
+
         ,layout: 'auto'
         ,closeAction: 'hide'
         ,shadow: true
@@ -130,6 +162,7 @@ MODx.Window = function(config) {
         ,constrain: true
         ,constrainHeader: true
         ,cls: 'modx-window'
+        /*
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
@@ -140,6 +173,7 @@ MODx.Window = function(config) {
             ,scope: this
             ,handler: this.submit
         }]
+        */
         ,record: {}
         ,keys: [{
             key: Ext.EventObject.ENTER
@@ -151,15 +185,34 @@ MODx.Window = function(config) {
                     } else {
                         this.submit();
                     }
-
                 }
             ,scope: this
+        }]
+        ,tools: [{
+            id: 'gear',
+            title: 'Window Settings',
+            // href: '#'
+            menu: {
+                xtype: 'menu',
+                anchor: true,
+                items: [
+                    {
+                    xtype: 'menucheckitem',
+                    text: 'Remove Masks',
+                    checked: true
+                    // bind: '{indented}'
+                }, {
+                    text: 'Disabled Item',
+                    disabled: true,
+                    separator: true
+                }
+                ]
+            }
         }]
     });
     MODx.Window.superclass.constructor.call(this,config);
     this.options = config;
     this.config = config;
-
     this.addEvents({
         success: true
         ,failure: true
@@ -167,16 +220,87 @@ MODx.Window = function(config) {
         ,updateWindow: false
     });
     this._loadForm();
-    this.on('show',function() {
-        if (this.config.blankValues) { this.fp.getForm().reset(); }
-        if (this.config.allowDrop) { this.loadDropZones(); }
-        this.syncSize();
-        this.focusFirstField();
-    },this);
-    this.on('afterrender', function() {
-        this.originalHeight = this.el.getHeight();
-        this.toolsHeight = this.originalHeight - this.body.getHeight() + 50;
-        this.resizeWindow();
+    this.on({
+        render: function() {
+            console.log('window render, this:', this);
+            if (MODx.config.enable_overlays) {
+                if (this.modxPseudoModal) {
+                    if (MODx.openPseudoModals.length === 0) {
+                        MODx.mask = this.container.createChild({cls:'ext-el-mask clickthrough'}, this.el.dom);
+                        MODx.mask.setStyle('backgroundColor', overlayCssColorNonblocking);
+                        // console.log('render, dynamic mask color: ', overlayCssColorNonblocking);
+                        MODx.mask.hide();
+                        MODx.mask.resizeMask = function() {
+                            // console.log('window resized!');
+                            MODx.mask.setSize(Ext.lib.Dom.getViewWidth(true), Ext.lib.Dom.getViewHeight(true));
+                        };
+                        // console.log('custom mask el: ', MODx.mask);
+                        window.addEventListener('resize', MODx.mask.resizeMask);
+                    }
+                    MODx.openPseudoModals.push({
+                        modalId: this.itemId
+                    });
+                    // console.log('open modxPseudoModals: ',MODx.openPseudoModals);
+                }
+                if (this.modal) {
+                    console.log('rendering real modal...');
+                }
+            }
+        },
+        afterrender: function() {
+            this.originalHeight = this.el.getHeight();
+            this.toolsHeight = this.originalHeight - this.body.getHeight() + 50;
+            this.resizeWindow();
+        },
+        beforeShow: function() {
+            if (this.modxPseudoModal && !MODx.mask.isVisible()) {
+                Ext.getBody().addClass('x-body-masked');
+                MODx.mask.setSize(Ext.lib.Dom.getViewWidth(true), Ext.lib.Dom.getViewHeight(true));
+                MODx.mask.show();
+            }
+        },
+        show: function() {
+            // console.log('showing a modxPseudoModal...');
+            // console.log(`modxPseudoModal opacity: ${overlayOpacityNonblocking}`);
+            if (this.modxPseudoModal && MODx.mask.isVisible()) {
+                setTimeout(function() {
+                    MODx.mask.setStyle('opacity', overlayOpacityNonblocking);
+                    // MODx.mask.addClass('fade-in');
+                }, 250);
+            }
+            // console.log('show, mask color: ', MODx.mask.getColor('backgroundColor'));
+            if (this.config.blankValues) {
+                this.fp.getForm().reset();
+            }
+            if (this.config.allowDrop) {
+                this.loadDropZones();
+            }
+            this.syncSize();
+            this.focusFirstField();
+        },
+        beforehide: function() {
+            if (this.modxPseudoModal && MODx.mask && MODx.openPseudoModals.length === 1) {
+                MODx.mask.removeClass('fade-in');
+            }
+        },
+        hide: function() {
+            if (this.modxPseudoModal) {
+                if (MODx.openPseudoModals.length > 1) {
+                    MODx.openPseudoModals.forEach((modxPseudoModal, i) => {
+                        if (modxPseudoModal.modalId == this.itemId) {
+                            MODx.openPseudoModals.splice(i, 1);
+                        }
+                    });
+                } else {
+                    MODx.openPseudoModals = [];
+                    MODx.mask.hide();
+                    MODx.mask.remove();
+                    Ext.getBody().removeClass('x-body-masked');
+                    window.removeEventListener('resize', MODx.mask.resizeMask);
+                }
+                // console.log('hide, openPseudoModals: ', MODx.openPseudoModals);
+            }
+        }
     });
     Ext.EventManager.onWindowResize(this.resizeWindow, this);
 };
@@ -199,6 +323,60 @@ Ext.extend(MODx.Window,Ext.Window,{
                 }
             }
         }
+
+        /*
+            When a switch is rendered in the footer bar, we need to
+            insert a hidden field in the form to to be able to relay its value to
+            the processor
+        */
+        if (this.config.hasOwnProperty('modxFbarSaveSwitches') && this.config.modxFbarSaveSwitches.length > 0) {
+            this.config.modxFbarSaveSwitches.forEach(saveSwitch => {
+                switch (saveSwitch) {
+                    case 'redirect':
+                        defaultValue = this.config.redirect ;
+                        break;
+                    case 'duplicateValues':
+                        defaultValue = 0;
+                        break;
+                    default:
+                        defaultValue = 1;
+
+                }
+                this.setFbarSwitchHiddenField(saveSwitch, defaultValue);
+            });
+
+        }
+        console.log('final fields: ', this.config.fields);
+        /*
+        if (this.modxFbarHasClearCacheSwitch) {
+            // console.log('adding hidden cache switch...');
+            const   switchId = `${this.id}-clearcache`,
+                    switchCmp = Ext.getCmp(switchId)
+            ;
+            if (switchCmp) {
+                this.config.fields.push({
+                    xtype: 'hidden'
+                    ,name: 'clearCache'
+                    ,id: `${switchId}-hidden`
+                    ,value: 1
+                });
+            }
+        }
+        if (this.modxFbarHasRedirectSwitch) {
+            // console.log('adding hidden redirect switch..., default val: ',this.config.redirect);
+            const   switchId = `${this.id}-redirect`,
+                    switchCmp = Ext.getCmp(switchId)
+            ;
+            if (switchCmp) {
+                this.config.fields.push({
+                    xtype: 'hidden'
+                    ,name: 'redirect'
+                    ,id: `${switchId}-hidden`
+                    ,value: this.config.redirect ? 1 : 0
+                });
+            }
+        }
+        */
         this.fp = this.createForm({
             url: this.config.url
             ,baseParams: this.config.baseParams || { action: this.config.action || '' }
@@ -219,6 +397,7 @@ Ext.extend(MODx.Window,Ext.Window,{
             if (fld) { fld.focus(false,200); }
         }
     }
+
     ,findFirstTextField: function(i) {
         i = i || 0;
         var fld = this.fp.getForm().items.itemAt(i);
@@ -234,6 +413,10 @@ Ext.extend(MODx.Window,Ext.Window,{
         close = close === false ? false : true;
         var f = this.fp.getForm();
         if (f.isValid() && this.fireEvent('beforeSubmit',f.getValues())) {
+            // console.log('window form submit, this:', this);
+            // console.log('window form submit, form:', f);
+            console.log('window form submit, form vals:', f.getValues());
+            // return false;
             f.submit({
                 waitMsg: this.config.waitMsg ||  _('saving')
                 ,submitEmptyText: this.config.submitEmptyText !== false
@@ -276,6 +459,7 @@ Ext.extend(MODx.Window,Ext.Window,{
             ,errorReader: MODx.util.JSONReader
             ,defaults: this.config.formDefaults || {
                 msgTarget: this.config.msgTarget || 'under'
+                ,anchor: '100%'
             }
             ,url: this.config.url
             ,baseParams: this.config.baseParams || {}
@@ -313,6 +497,7 @@ Ext.extend(MODx.Window,Ext.Window,{
         if (r === null) { return false; }
         this.fp.getForm().setValues(r);
     }
+
     ,reset: function() {
         this.fp.getForm().reset();
     }
@@ -359,5 +544,141 @@ Ext.extend(MODx.Window,Ext.Window,{
             el.setHeight('auto');
         }
     }
+
+    /**
+     *
+     */
+    ,setFbarSwitchHiddenField: function(fbarSwitchFieldName, defaultValue = 1) {
+
+        const   switchId = `${this.id}-${fbarSwitchFieldName}`,
+                switchCmp = Ext.getCmp(switchId)
+        ;
+        if (switchCmp) {
+            this.config.fields.push({
+                xtype: 'hidden',
+                name: fbarSwitchFieldName,
+                id: `${switchId}-hidden`,
+                value: defaultValue
+            });
+        }
+    }
+
+    /**
+     *
+     */
+    ,getFbarSwitch: function(windowId, fbarSwitchFieldName, switchLabel, switchIsChecked = true) {
+
+        const switchCmp = {
+            xtype: 'xcheckbox',
+            id: `${windowId}-${fbarSwitchFieldName}`,
+            hideLabel: true,
+            boxLabel: switchLabel,
+            inputValue: 1,
+            checked: switchIsChecked,
+            listeners: {
+                check: {
+                    fn: function(cmp) {
+                        const hiddenCmp = Ext.getCmp(`${windowId}-${fbarSwitchFieldName}-hidden`);
+                        if (hiddenCmp) {
+                            const value = cmp.getValue() === false ? 0 : 1;
+                            hiddenCmp.setValue(value);
+                        }
+                    },
+                    scope: this
+                }
+            }
+        };
+        // console.log(`getting switch (${fbarSwitchFieldName}): `, switchCmp);
+        return switchCmp;
+    }
+
+    /**
+     *
+     */
+    ,getSaveButton: function(config, isPrimaryButton = true, isSaveAndClose = false) {
+        // console.log('getSaveButton, this', this);
+        const defaultBtnText = isSaveAndClose ? _('save_and_close') : _('save') ;
+        let btn;
+        if (isPrimaryButton) {
+            // console.log('modxFbarButtons: ',config.modxFbarButtons);
+            // console.log('isPrimaryButton, config.saveBtnText: ',config.saveBtnText);
+            // console.log('isPrimaryButton, isSaveAndClose: ',isSaveAndClose);
+            btn = {
+                text: config.saveBtnText || defaultBtnText,
+                cls: 'primary-button',
+                handler: this.submit,
+                scope: this
+            };
+        } else {
+            btn = {
+                text: config.saveBtnText || defaultBtnText,
+                handler: function() {
+                    this.submit(false);
+                },
+                scope: this
+            };
+        }
+        // console.log('getSaveButton, btn:', btn);
+        return btn;
+    }
+
+    /**
+     *
+     */
+    ,getWindowButtons: function(config) {
+        const   btns = [{
+                    text: config.cancelBtnText || _('cancel'),
+                    handler: function() {
+                        this.config.closeAction !== 'close' ? this.hide() : this.close();
+                    },
+                    scope: this
+                }],
+                specification = config.modxFbarButtons || 'c-s'
+        ;
+        switch(specification) {
+            case 'c-s':
+                btns.push(this.getSaveButton(config));
+                break;
+            case 'c-s-sc':
+                btns.push(this.getSaveButton(config, false));
+                btns.push(this.getSaveButton(config, true, true));
+                break;
+            case 'custom':
+                break;
+        }
+        return btns;
+    }
+
+    /**
+     *
+     */
+    ,getWindowFbar: function(config) {
+        // console.log('getting window fbar...');
+        const   windowId = config.id,
+                windowButtons = this.getWindowButtons(config),
+                footerBar = []
+        ;
+        if (config.modxFbarHasClearCacheSwitch) {
+            const cacheSwitch = this.getFbarSwitch(windowId, 'clearCache', _('clear_cache_on_save'));
+            footerBar.push(cacheSwitch);
+        }
+        if (config.modxFbarHasDuplicateValuesSwitch) {
+            const dupValuesSwitch = this.getFbarSwitch(windowId, 'duplicateValues', _('element_duplicate_values'), false);
+            footerBar.push(dupValuesSwitch);
+        }
+        if (config.modxFbarHasRedirectSwitch) {
+            const redirectSwitch = this.getFbarSwitch(windowId, 'redirect', _('duplicate_redirect'), config.redirect);
+            footerBar.push(redirectSwitch);
+        }
+        footerBar.push('->');
+        if (windowButtons && windowButtons.length > 0) {
+            windowButtons.forEach(button => {
+                footerBar.push(button);
+            });
+        }
+
+        return footerBar;
+    }
+
 });
 Ext.reg('modx-window',MODx.Window);
