@@ -7,11 +7,14 @@
  * @xtype modx-window-resource-duplicate
  */
 MODx.window.DuplicateResource = function(config) {
+
     config = config || {};
-    this.ident = config.ident || 'dupres'+Ext.id();
+    const windowId = `window-dup-resource-${Ext.id()}`;
+
     Ext.applyIf(config,{
-        title: config.pagetitle ? _('duplicate') + ' ' + config.pagetitle : _('duplication_options')
-        ,id: this.ident
+        id: windowId
+        ,title: config.pagetitle ? `${_('duplicate')} ${config.pagetitle}` : _('duplication_options')
+        ,modxPseudoModal: true
     });
     MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };
@@ -28,30 +31,26 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
         var items = [];
         items.push({
             xtype: 'textfield'
-            ,id: 'modx-'+this.ident+'-name'
-            ,fieldLabel: _('resource_name_new')
             ,name: 'name'
-            ,anchor: '100%'
+            ,fieldLabel: _('resource_name_new')
             ,value: ''
         });
 
         if (this.config.hasChildren) {
             items.push({
                 xtype: 'xcheckbox'
+                ,name: 'duplicate_children'
                 ,boxLabel: _('duplicate_children') + '  ('+this.config.childCount+')'
                 ,hideLabel: true
-                ,name: 'duplicate_children'
-                ,id: 'modx-'+this.ident+'-duplicate-children'
                 ,checked: true
             });
         }
 
         items.push({
             xtype: 'xcheckbox'
+            ,name: 'redirect'
             ,boxLabel: _('duplicate_redirect')
             ,hideLabel: true
-            ,name: 'redirect'
-            ,id: 'modx-'+this.ident+'-duplicate-redirect'
             ,checked: this.config.redirect
         });
 
@@ -65,19 +64,19 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 ,columns: 1
                 ,value: pov
                 ,items: [{
-                    boxLabel: _('po_make_all_unpub')
+                    name: 'published_mode'
+                    ,boxLabel: _('po_make_all_unpub')
                     ,hideLabel: true
-                    ,name: 'published_mode'
                     ,inputValue: 'unpublish'
                 },{
-                    boxLabel: _('po_make_all_pub')
+                    name: 'published_mode'
+                    ,boxLabel: _('po_make_all_pub')
                     ,hideLabel: true
-                    ,name: 'published_mode'
                     ,inputValue: 'publish'
                 },{
-                    boxLabel: _('po_preserve')
+                    name: 'published_mode'
+                    ,boxLabel: _('po_preserve')
                     ,hideLabel: true
-                    ,name: 'published_mode'
                     ,inputValue: 'preserve'
                 }]
             }]
@@ -90,9 +89,6 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
                 ,id: this.config.resource
                 ,prefixDuplicate: true
             }
-            ,labelWidth: 125
-            ,defaultType: 'textfield'
-            ,autoHeight: true
             ,items: items
         });
 
@@ -110,121 +106,190 @@ Ext.reg('modx-window-resource-duplicate',MODx.window.DuplicateResource);
  * @xtype modx-window-element-duplicate
  */
 MODx.window.DuplicateElement = function(config) {
-    config = config || {};
-    this.ident = config.ident || 'dupeel-'+Ext.id();
 
-    var flds = [{
+    config = config || {};
+
+    const   windowId = `window-dup-element-${Ext.id()}`,
+            staticFileCmpId = `${windowId}-modx-static_file`,
+            nameFieldName = config.record.type == 'template' ? 'templatename' : 'name' ,
+            createExampleTag = ['tv', 'chunk', 'snippet'].includes(config.record.type),
+            defaultExampleTag = createExampleTag ? _(`example_tag_${config.record.type}_name`) : '' ,
+            elementNameCmpId = `${windowId}-modx-name`,
+            nameFieldListeners = {
+                change: function(cmp) {
+                    cmp.setValue(cmp.getValue().trim());
+                }
+            },
+            nameHelpListeners = {}
+    ;
+    if (createExampleTag) {
+        Object.assign(nameHelpListeners, {
+            afterrender: function(cmp) {
+                MODx.util.insertTagCopyUtility(cmp, config.record.type);
+            }
+        });
+    }
+    // console.log('record:', config.record);
+    // console.log('name field listeners: ',nameFieldListeners);
+    const flds = [{
         xtype: 'hidden'
         ,name: 'id'
-        ,id: 'modx-'+this.ident+'-id'
     },{
         xtype: 'hidden'
         ,name: 'source'
-        ,id: 'modx-'+this.ident+'-source'
     },{
         xtype: 'textfield'
-        ,fieldLabel: _('element_name_new')
-        ,name: config.record.type == 'template' ? 'templatename' : 'name'
-        ,id: 'modx-'+this.ident+'-name'
-        ,anchor: '100%'
+        ,name: nameFieldName
+        ,id: elementNameCmpId
+        ,fieldLabel: _(`${config.record.type}_new_name`) || _('element_name_new')
         ,enableKeyEvents: true
-        ,listeners: {
-            'afterRender' : {scope:this,fn:function(f,e) {
-                this.setStaticElementsPath(f);
-            }},
-            'keyup': {scope:this,fn:function(f,e) {
-                this.setStaticElementsPath(f);
-            }}
-        }
+        ,allowBlank: false
+        ,listeners: nameFieldListeners
+        ,value: config.record.name
+    },{
+        xtype: 'box'
+        ,hidden: MODx.expandHelp ? false : true
+        ,html: createExampleTag
+            ? _(`${config.record.type}_name_desc`, {
+                tag: `<span class="copy-this">[[*<span class="example-replace-name">${defaultExampleTag}</span>]]</span>`
+            })
+            :  _(`${config.record.type}_name_desc`) || ''
+        ,cls: 'desc-under'
+        ,listeners: nameHelpListeners
     }];
 
     if (config.record.type == 'tv') {
         flds.push({
             xtype: 'textfield'
-            ,fieldLabel: _('element_caption_new')
             ,name: 'caption'
-            ,id: 'modx-'+this.ident+'-caption'
-            ,anchor: '100%'
-        });
-        flds.push({
-            xtype: 'xcheckbox'
-            ,hideLabel: true
-            ,boxLabel: _('element_duplicate_values')
-            ,labelSeparator: ''
-            ,name: 'duplicateValues'
-            ,id: 'modx-'+this.ident+'-duplicate-values'
-            ,anchor: '100%'
-            ,inputValue: 1
-            ,checked: false
+            ,fieldLabel: _(`tv_new_caption`) || _('element_caption_new')
+            ,value: config.record.caption
+        },{
+            xtype: 'box'
+            ,hidden: MODx.expandHelp ? false : true
+            ,html: _('tv_caption_desc')
+            ,cls: 'desc-under'
         });
     }
 
     if (config.record.static === true) {
         flds.push({
             xtype: 'textfield'
-            ,fieldLabel: _('static_file')
             ,name: 'static_file'
-            ,id: 'modx-'+this.ident+'-static_file'
-            ,anchor: '100%'
+            ,id: staticFileCmpId
+            ,fieldLabel: _('static_file')
+            ,listeners: {
+                change: {
+                    fn: function(cmp) {
+                        const file = cmp.getValue().trim();
+                        if (!Ext.isEmpty(file)) {
+                            const fileName =
+                            cmp.setValue(MODx.util.Format.fileFullPath(file));
+                        }
+                    },
+                    scope: this
+                }
+            }
+        },{
+            xtype: 'box'
+            ,hidden: MODx.expandHelp ? false : true
+            ,html: _('static_file_desc')
+            ,cls: 'desc-under'
         });
     }
 
-    flds.push({
-        xtype: 'xcheckbox'
-        ,boxLabel: _('duplicate_redirect')
-        ,hideLabel: true
-        ,name: 'redirect'
-        ,id: 'modx-'+this.ident+'-duplicate-redirect'
-        ,checked: config.redirect
-    });
-
     Ext.applyIf(config,{
-        title: _('duplicate_'+config.record.type)
+        id: windowId
+        ,title: _('duplicate_'+config.record.type)
         ,url: MODx.config.connector_url
-        ,action: 'element/'+config.record.type+'/duplicate'
+        ,action: `element/${config.record.type}/duplicate`
         ,width: 600
         ,fields: flds
         ,labelWidth: 150
+        ,modxPseudoModal: true
+        ,modxFbarSaveSwitches: config.record.type == 'tv' ? ['duplicateValues', 'redirect'] : ['redirect']
     });
     MODx.window.DuplicateElement.superclass.constructor.call(this,config);
-};
 
-Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
-    setStaticElementsPath: function(f) {
-        if (this.config.record.static === true) {
-            var category = this.config.record.category;
+    if (this.config.record.static) {
 
-            if (typeof category !== 'number') {
-                if (Ext.getCmp('modx-' + this.config.record.type + '-category').getValue() > 0) {
-                    category = Ext.getCmp('modx-' + this.config.record.type + '-category').lastSelectionText;
-                }
+        const   elementAutomationType = `${this.config.record.type}s`,
+                staticsAutomationConfigKey = `static_elements_automate_${elementAutomationType}`
+        ;
+        this.staticsAutomated = MODx.config[staticsAutomationConfigKey] ? true : false ;
 
-                var path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
-                Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
-            } else {
-                // If category is set but is a number, retrieve full category name.
-                if (typeof category === "number" && category > 0) {
-                    MODx.Ajax.request({
-                        url: MODx.config.connector_url
-                        ,params: {
-                            action: 'Element/Category/GetList'
-                            ,id: category
-                        }
-                        ,listeners: {
-                            'success': {fn:function(response) {
-                                for (var i = 0; i < response.results.length; i++) {
-                                    if (response.results[i].id === category) {
-                                        category = response.results[i].name;
-                                    }
-                                }
-
-                                var path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
-                                Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
-                            },scope:this}
-                        }
-                  });
-                }
+        if (this.staticsAutomated) {
+            const elementCategory = this.config.record.category || 0;
+            this.staticElementType = elementAutomationType;
+            this.getElementCategoryName(elementCategory);
+        } else {
+            const   currentPath = this.config.record.static_file,
+                    fileName = currentPath.indexOf('/') !== -1 ? currentPath.split('/').pop() : currentPath,
+                    fileExt = fileName.indexOf('.') !== -1 ? fileName.slice(fileName.lastIndexOf('.')) : ''
+            ;
+            this.staticElementBasePath = currentPath.replace(fileName, '');
+            this.staticElementFileExt = fileExt;
+        }
+        Ext.getCmp(elementNameCmpId).on({
+            afterrender: {
+                fn: function(cmp) {
+                    const elementName = cmp.getValue().trim() || this.config.record.name;
+                    let path;
+                    if (this.staticsAutomated) {
+                        path = MODx.getStaticElementsPath(elementName, this.staticElementCategoryName, this.staticElementType);
+                    } else {
+                        path = MODx.util.Format.staticElementPathFragment(elementName);
+                        path = `${this.staticElementBasePath}${path}${this.staticElementFileExt}`;
+                    }
+                    Ext.getCmp(staticFileCmpId).setValue(path);
+                },
+                scope: this,
+                delay: 250
+            },
+            keyup: {
+                fn: function(cmp, e) {
+                    const elementName = cmp.getValue().trim();
+                    let path;
+                    if (this.staticsAutomated) {
+                        path = MODx.getStaticElementsPath(elementName, this.staticElementCategoryName, this.staticElementType);
+                    } else {
+                        path = MODx.util.Format.staticElementPathFragment(elementName);
+                        path = `${this.staticElementBasePath}${path}${this.staticElementFileExt}`;
+                    }
+                    Ext.getCmp(staticFileCmpId).setValue(path);
+                },
+                scope: this
             }
+        });
+    }
+
+};
+Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
+
+    getElementCategoryName: function(categoryId) {
+
+        if (typeof categoryId === 'number' && categoryId > 0) {
+            MODx.Ajax.request({
+                url: MODx.config.connector_url
+                ,params: {
+                    action: 'Element/Category/GetList'
+                    ,id: categoryId
+                }
+                ,listeners: {
+                    success: {
+                        fn: function(response) {
+                            response.results.forEach(result => {
+                                if (result.id === categoryId) {
+                                    this.staticElementCategoryName = result.name;
+                                }
+                            });
+                        },
+                        scope: this
+                    }
+                }
+          });
+        } else {
+            this.staticElementCategoryName = '';
         }
     }
 });
@@ -232,34 +297,32 @@ Ext.reg('modx-window-element-duplicate',MODx.window.DuplicateElement);
 
 MODx.window.CreateCategory = function(config) {
     config = config || {};
-    this.ident = config.ident || 'ccat'+Ext.id();
+    // this.ident = config.ident || 'ccat'+Ext.id();
     Ext.applyIf(config,{
         title: _('category_create')
         ,id: this.ident
         ,url: MODx.config.connector_url
         ,action: 'Element/Category/Create'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'modx-description'
             ,html: _('category_create_desc')
         },{
             fieldLabel: _('name')
             ,name: 'category'
-            ,id: 'modx-'+this.ident+'-category'
+            // ,id: 'modx-'+this.ident+'-category'
             ,xtype: 'textfield'
-            ,anchor: '100%'
         },{
             fieldLabel: _('parent')
             ,name: 'parent'
             ,hiddenName: 'parent'
-            ,id: 'modx-'+this.ident+'-parent'
+            // ,id: 'modx-'+this.ident+'-parent'
             ,xtype: 'modx-combo-category'
-            ,anchor: '100%'
         },{
             fieldLabel: _('rank')
             ,name: 'rank'
-            ,id: 'modx-'+this.ident+'-rank'
+            // ,id: 'modx-'+this.ident+'-rank'
             ,xtype: 'numberfield'
-            ,anchor: '100%'
         }]
     });
     MODx.window.CreateCategory.superclass.constructor.call(this,config);
@@ -294,13 +357,11 @@ MODx.window.RenameCategory = function(config) {
             ,id: 'modx-'+this.ident+'-category'
             ,width: 150
             ,value: config.record.category
-            ,anchor: '100%'
         },{
             fieldLabel: _('rank')
             ,name: 'rank'
             ,id: 'modx-'+this.ident+'-rank'
             ,xtype: 'numberfield'
-            ,anchor: '100%'
         }]
     });
     MODx.window.RenameCategory.superclass.constructor.call(this,config);
@@ -381,18 +442,20 @@ Ext.reg('modx-window-namespace-update',MODx.window.UpdateNamespace);
 
 
 MODx.window.QuickCreateChunk = function(config) {
+
     config = config || {};
-    this.ident = config.ident || `qcechunk${Ext.id()}`;
+    const windowId = `window-qce-chunk-${Ext.id()}`;
 
     Ext.applyIf(config,{
-        title: _('quick_create_chunk')
+        id: windowId
+        ,title: _('quick_create_chunk')
         ,width: 700
         ,layout: 'form'
         ,url: MODx.config.connector_url
         ,action: 'Element/Chunk/Create'
         ,cls: 'qce-window qce-create'
-        ,modal: true
-        ,monitorResize: true
+        ,modxPseudoModal: true
+        ,modxFbarSaveSwitches: ['clearCache']
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -434,13 +497,11 @@ MODx.window.QuickCreateChunk = function(config) {
                     ,items: [{
                         xtype: 'modx-combo-category'
                         ,name: 'category'
-                        ,id: `modx-${this.ident}-category`
                         ,fieldLabel: _('category')
                         ,description: MODx.expandHelp ? '' : _('chunk_category_desc')
                         ,value: config.record.category || 0
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-category`
                         ,html: _('chunk_category_desc')
                         ,cls: 'desc-under'
                     }]
@@ -469,7 +530,6 @@ MODx.window.QuickCreateChunk = function(config) {
                     ,items: [{
                         xtype: 'textarea'
                         ,name: 'description'
-                        ,id: `modx-${this.ident}-description`
                         ,description: MODx.expandHelp ? '' : _('chunk_description_desc')
                         ,fieldLabel: _('description')
                         ,grow: true
@@ -478,31 +538,8 @@ MODx.window.QuickCreateChunk = function(config) {
                         ,value: config.record.description || ''
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-description`
                         ,html: _('chunk_description_desc')
                         ,cls: 'desc-under'
-                    }]
-                },{
-                    columnWidth: 0.5
-                    ,defaults: {
-                        anchor: '100%'
-                        ,msgTarget: 'under'
-                    }
-                    ,items: [{
-                        xtype: 'xcheckbox'
-                        ,name: 'clearCache'
-                        ,id: `modx-${this.ident}-clear-cache`
-                        ,hideLabel: true
-                        ,boxLabel: _('clear_cache_on_save')
-                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
-                        ,ctCls: 'add-label-space'
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-clear-cache`
-                        ,html: _('clear_cache_on_save_desc')
-                        ,cls: 'desc-under toggle-slider-above'
                     }]
                 }]
             }]
@@ -522,7 +559,6 @@ MODx.window.QuickCreateChunk = function(config) {
                 xtype: 'textarea'
                 ,fieldLabel: _('chunk_code')
                 ,name: 'snippet'
-                ,id: `modx-${this.ident}-code`
                 ,grow: true
                 ,growMin: 90
                 ,growMax: this.isSmallScreen ? 160 : 300
@@ -548,20 +584,7 @@ MODx.window.QuickUpdateChunk = function(config) {
         title: _('quick_update_chunk')
         ,action: 'Element/Chunk/Update'
         ,cls: 'qce-window qce-update'
-        ,buttons: [{
-            text: config.cancelBtnText || _('cancel')
-            ,scope: this
-            ,handler: function() { this.hide(); }
-        },{
-            text: config.saveBtnText || _('save')
-            ,scope: this
-            ,handler: function() { this.submit(false); }
-        },{
-            text: config.saveBtnText || _('save_and_close')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.submit
-        }]
+        ,modxFbarButtons: 'c-s-sc'
     });
     MODx.window.QuickUpdateChunk.superclass.constructor.call(this,config);
 };
@@ -570,18 +593,19 @@ Ext.reg('modx-window-quick-update-chunk',MODx.window.QuickUpdateChunk);
 
 
 MODx.window.QuickCreateTemplate = function(config) {
+
     config = config || {};
-    this.ident = config.ident || `qcetemplate${Ext.id()}`;
+    const windowId = `window-qce-template-${Ext.id()}`;
 
     Ext.applyIf(config,{
-        title: _('quick_create_template')
+        id: windowId
+        ,title: _('quick_create_template')
         ,width: 700
-        ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Template/Create'
         ,cls: 'qce-window qce-create'
-        ,modal: true
-        ,monitorResize: true
+        ,modxPseudoModal: true
+        ,modxFbarSaveSwitches: ['clearCache']
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -623,13 +647,11 @@ MODx.window.QuickCreateTemplate = function(config) {
                     ,items: [{
                         xtype: 'modx-combo-category'
                         ,name: 'category'
-                        ,id: `modx-${this.ident}-category`
                         ,fieldLabel: _('category')
                         ,description: MODx.expandHelp ? '' : _('template_category_desc')
                         ,value: config.record.category || 0
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-category`
                         ,html: _('template_category_desc')
                         ,cls: 'desc-under'
                     }]
@@ -648,7 +670,7 @@ MODx.window.QuickCreateTemplate = function(config) {
                     ,labelAlign: 'top'
                 }
                 ,items: [{
-                    columnWidth: 0.5
+                    columnWidth: 1
                     ,defaults: {
                         anchor: '100%'
                         ,msgTarget: 'under'
@@ -658,7 +680,6 @@ MODx.window.QuickCreateTemplate = function(config) {
                     ,items: [{
                         xtype: 'textarea'
                         ,name: 'description'
-                        ,id: `modx-${this.ident}-description`
                         ,description: MODx.expandHelp ? '' : _('template_description_desc')
                         ,fieldLabel: _('description')
                         ,grow: true
@@ -667,31 +688,8 @@ MODx.window.QuickCreateTemplate = function(config) {
                         ,value: config.record.description || ''
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-description`
                         ,html: _('template_description_desc')
                         ,cls: 'desc-under'
-                    }]
-                },{
-                    columnWidth: 0.5
-                    ,defaults: {
-                        anchor: '100%'
-                        ,msgTarget: 'under'
-                    }
-                    ,items: [{
-                        xtype: 'xcheckbox'
-                        ,name: 'clearCache'
-                        ,id: `modx-${this.ident}-clear-cache`
-                        ,hideLabel: true
-                        ,boxLabel: _('clear_cache_on_save')
-                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
-                        ,ctCls: 'add-label-space'
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-clear-cache`
-                        ,html: _('clear_cache_on_save_desc')
-                        ,cls: 'desc-under toggle-slider-above'
                     }]
                 }]
             }]
@@ -711,7 +709,6 @@ MODx.window.QuickCreateTemplate = function(config) {
                 xtype: 'textarea'
                 ,fieldLabel: _('template_code')
                 ,name: 'content'
-                ,id: `modx-${this.ident}-code`
                 ,grow: true
                 ,growMin: 120
                 ,growMax: this.isSmallScreen ? 160 : 300
@@ -737,20 +734,7 @@ MODx.window.QuickUpdateTemplate = function(config) {
         title: _('quick_update_template')
         ,action: 'Element/Template/Update'
         ,cls: 'qce-window qce-update'
-        ,buttons: [{
-            text: config.cancelBtnText || _('cancel')
-            ,scope: this
-            ,handler: function() { this.hide(); }
-        },{
-            text: config.saveBtnText || _('save')
-            ,scope: this
-            ,handler: function() { this.submit(false); }
-        },{
-            text: config.saveBtnText || _('save_and_close')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.submit
-        }]
+        ,modxFbarButtons: 'c-s-sc'
     });
     MODx.window.QuickUpdateTemplate.superclass.constructor.call(this,config);
 };
@@ -759,18 +743,19 @@ Ext.reg('modx-window-quick-update-template',MODx.window.QuickUpdateTemplate);
 
 
 MODx.window.QuickCreateSnippet = function(config) {
+
     config = config || {};
-    this.ident = config.ident || `qcesnippet${Ext.id()}`;
+    const windowId = `window-qce-snippet-${Ext.id()}`;
 
     Ext.applyIf(config,{
-        title: _('quick_create_snippet')
+        id: windowId
+        ,title: _('quick_create_snippet')
         ,width: 700
-        ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Snippet/Create'
         ,cls: 'qce-window qce-create'
-        ,modal: true
-        ,monitorResize: true
+        ,modxPseudoModal: true
+        ,modxFbarSaveSwitches: ['clearCache']
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -812,13 +797,11 @@ MODx.window.QuickCreateSnippet = function(config) {
                     ,items: [{
                         xtype: 'modx-combo-category'
                         ,name: 'category'
-                        ,id: `modx-${this.ident}-category`
                         ,fieldLabel: _('category')
                         ,description: MODx.expandHelp ? '' : _('snippet_category_desc')
                         ,value: config.record.category || 0
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-category`
                         ,html: _('snippet_category_desc')
                         ,cls: 'desc-under'
                     }]
@@ -837,7 +820,7 @@ MODx.window.QuickCreateSnippet = function(config) {
                     ,labelAlign: 'top'
                 }
                 ,items: [{
-                    columnWidth: 0.5
+                    columnWidth: 1
                     ,defaults: {
                         anchor: '100%'
                         ,msgTarget: 'under'
@@ -847,7 +830,6 @@ MODx.window.QuickCreateSnippet = function(config) {
                     ,items: [{
                         xtype: 'textarea'
                         ,name: 'description'
-                        ,id: `modx-${this.ident}-description`
                         ,description: MODx.expandHelp ? '' : _('snippet_description_desc')
                         ,fieldLabel: _('description')
                         ,grow: true
@@ -856,31 +838,8 @@ MODx.window.QuickCreateSnippet = function(config) {
                         ,value: config.record.description || ''
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-description`
                         ,html: _('snippet_description_desc')
                         ,cls: 'desc-under'
-                    }]
-                },{
-                    columnWidth: 0.5
-                    ,defaults: {
-                        anchor: '100%'
-                        ,msgTarget: 'under'
-                    }
-                    ,items: [{
-                        xtype: 'xcheckbox'
-                        ,name: 'clearCache'
-                        ,id: `modx-${this.ident}-clear-cache`
-                        ,hideLabel: true
-                        ,boxLabel: _('clear_cache_on_save')
-                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
-                        ,ctCls: 'add-label-space'
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-clear-cache`
-                        ,html: _('clear_cache_on_save_desc')
-                        ,cls: 'desc-under toggle-slider-above'
                     }]
                 }]
             }]
@@ -926,20 +885,7 @@ MODx.window.QuickUpdateSnippet = function(config) {
         title: _('quick_update_snippet')
         ,action: 'Element/Snippet/Update'
         ,cls: 'qce-window qce-update'
-        ,buttons: [{
-            text: config.cancelBtnText || _('cancel')
-            ,scope: this
-            ,handler: function() { this.hide(); }
-        },{
-            text: config.saveBtnText || _('save')
-            ,scope: this
-            ,handler: function() { this.submit(false); }
-        },{
-            text: config.saveBtnText || _('save_and_close')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.submit
-        }]
+        ,modxFbarButtons: 'c-s-sc'
     });
     MODx.window.QuickUpdateSnippet.superclass.constructor.call(this,config);
 };
@@ -948,15 +894,19 @@ Ext.reg('modx-window-quick-update-snippet',MODx.window.QuickUpdateSnippet);
 
 
 MODx.window.QuickCreatePlugin = function(config) {
+
     config = config || {};
-    this.ident = config.ident || `qceplugin${Ext.id()}`;
+    const windowId = `window-qce-plugin-${Ext.id()}`;
 
     Ext.applyIf(config,{
-        title: _('quick_create_plugin')
+        id: windowId
+        ,title: _('quick_create_plugin')
         ,width: 700
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Element/Plugin/Create'
+        ,modxPseudoModal: true
+        ,modxFbarSaveSwitches: ['clearCache']
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -998,13 +948,11 @@ MODx.window.QuickCreatePlugin = function(config) {
                     ,items: [{
                         xtype: 'modx-combo-category'
                         ,name: 'category'
-                        ,id: `modx-${this.ident}-category`
                         ,fieldLabel: _('category')
                         ,description: MODx.expandHelp ? '' : _('plugin_category_desc')
                         ,value: config.record.category || 0
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-category`
                         ,html: _('plugin_category_desc')
                         ,cls: 'desc-under'
                     }]
@@ -1033,7 +981,6 @@ MODx.window.QuickCreatePlugin = function(config) {
                     ,items: [{
                         xtype: 'textarea'
                         ,name: 'description'
-                        ,id: `modx-${this.ident}-description`
                         ,description: MODx.expandHelp ? '' : _('plugin_description_desc')
                         ,fieldLabel: _('description')
                         ,grow: true
@@ -1042,7 +989,6 @@ MODx.window.QuickCreatePlugin = function(config) {
                         ,value: config.record.description || ''
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-description`
                         ,html: _('plugin_description_desc')
                         ,cls: 'desc-under'
                     }]
@@ -1055,7 +1001,6 @@ MODx.window.QuickCreatePlugin = function(config) {
                     ,items: [{
                         xtype: 'xcheckbox'
                         ,name: 'disabled'
-                        ,id: `modx-${this.ident}-disabled`
                         ,hideLabel: true
                         ,boxLabel: _('plugin_disabled')
                         ,description: MODx.expandHelp ? '' : _('plugin_disabled_desc')
@@ -1064,22 +1009,7 @@ MODx.window.QuickCreatePlugin = function(config) {
                         ,checked: config.record.disabled || 0
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-disabled`
                         ,html: _('plugin_disabled_desc')
-                        ,cls: 'desc-under toggle-slider-above'
-                    },{
-                        xtype: 'xcheckbox'
-                        ,name: 'clearCache'
-                        ,id: `modx-${this.ident}-clear-cache`
-                        ,hideLabel: true
-                        ,boxLabel: _('clear_cache_on_save')
-                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-clear-cache`
-                        ,html: _('clear_cache_on_save_desc')
                         ,cls: 'desc-under toggle-slider-above'
                     }]
                 }]
@@ -1100,7 +1030,6 @@ MODx.window.QuickCreatePlugin = function(config) {
                 xtype: 'textarea'
                 ,fieldLabel: _('plugin_code')
                 ,name: 'plugincode'
-                ,id: `modx-${this.ident}-code`
                 ,grow: true
                 ,growMin: 90
                 ,growMax: this.isSmallScreen ? 160 : 300
@@ -1126,20 +1055,7 @@ MODx.window.QuickUpdatePlugin = function(config) {
         title: _('quick_update_plugin')
         ,action: 'Element/Plugin/Update'
         ,cls: 'qce-window qce-update'
-        ,buttons: [{
-            text: config.cancelBtnText || _('cancel')
-            ,scope: this
-            ,handler: function() { this.hide(); }
-        },{
-            text: config.saveBtnText || _('save')
-            ,scope: this
-            ,handler: function() { this.submit(false); }
-        },{
-            text: config.saveBtnText || _('save_and_close')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.submit
-        }]
+        ,modxFbarButtons: 'c-s-sc'
     });
     MODx.window.QuickUpdatePlugin.superclass.constructor.call(this,config);
 };
@@ -1148,17 +1064,21 @@ Ext.reg('modx-window-quick-update-plugin',MODx.window.QuickUpdatePlugin);
 
 
 MODx.window.QuickCreateTV = function(config) {
+
     config = config || {};
-    this.ident = config.ident || `qcetv${Ext.id()}`;
+    const windowId = `window-qce-tv-${Ext.id()}`;
 
     Ext.applyIf(config,{
-        title: _('quick_create_tv')
-        ,width: 700
+        id: windowId
+        ,title: _('quick_create_tv')
+        ,width: 640
         ,url: MODx.config.connector_url
         ,action: 'Element/TemplateVar/Create'
         ,cls: 'qce-window qce-create'
-        ,modal: true
-        ,monitorResize: true
+        ,modxPseudoModal: true
+        ,modxFbarSaveSwitches: ['clearCache']
+        // ,saveBtnText: 'Test Save'
+        // ,cancelBtnText: 'Test Cancel'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -1187,9 +1107,41 @@ MODx.window.QuickCreateTV = function(config) {
                         xtype: 'textfield'
                         ,name: 'name'
                         ,fieldLabel: _('name')
+                        ,description: MODx.expandHelp ? '' : _('tv_name_desc', {
+                            tag: `<span class="copy-this">[[*<span class="example-replace-name">${_('example_tag_tv_name')}</span>]]</span>`
+                        })
                         ,allowBlank: false
                         ,maxLength: 50
                         ,value: config.record.name || ''
+                        ,enableKeyEvents: true
+                        ,listeners: {
+                            keyup: {
+                                fn: function(cmp, e) {
+                                    let title = Ext.util.Format.stripTags(cmp.getValue()),
+                                        tagTitle
+                                        ;
+                                    title = Ext.util.Format.htmlEncode(title);
+                                    tagTitle = title.length > 0 ? title : _('example_tag_tv_name');
+                                    cmp.nextSibling().getEl().child('.example-replace-name').update(tagTitle);
+                                }
+                                ,scope: this
+                            }
+                        }
+                    },{
+                        xtype: 'box'
+                        ,hidden: MODx.expandHelp ? false : true
+                        ,html: _('tv_name_desc', {
+                            tag: `<span class="copy-this">[[*<span class="example-replace-name">${_('example_tag_tv_name')}</span>]]</span>`
+                        })
+                        ,cls: 'desc-under'
+                        ,listeners: {
+                            afterrender: {
+                                fn: function(cmp) {
+                                    MODx.util.insertTagCopyUtility(cmp, 'tv');
+                                }
+                                ,scope: this
+                            }
+                        }
                     }]
                 },{
                     columnWidth: 0.5
@@ -1202,6 +1154,11 @@ MODx.window.QuickCreateTV = function(config) {
                         ,fieldLabel: _('tv_type')
                         ,name: 'type'
                         ,value: config.record.type || 'text'
+                    },{
+                        xtype: 'box'
+                        ,hidden: MODx.expandHelp ? false : true
+                        ,html: _('tv_type_desc')
+                        ,cls: 'desc-under'
                     }]
                 }]
             }]
@@ -1228,14 +1185,13 @@ MODx.window.QuickCreateTV = function(config) {
                     ,items: [{
                         xtype: 'textfield'
                         ,name: 'caption'
-                        ,id: `modx-${this.ident}-caption`
                         ,fieldLabel: _('caption')
                         ,description: MODx.expandHelp ? '' : _('tv_caption_desc')
                         ,maxLength: 50
                         ,value: config.record.caption || ''
                     },{
-                        xtype: 'label'
-                        ,forId: `modx-${this.ident}-caption`
+                        xtype: 'box'
+                        ,hidden: MODx.expandHelp ? false : true
                         ,html: _('tv_caption_desc')
                         ,cls: 'desc-under'
                     }]
@@ -1248,13 +1204,11 @@ MODx.window.QuickCreateTV = function(config) {
                     ,items: [{
                         xtype: 'modx-combo-category'
                         ,name: 'category'
-                        ,id: `modx-${this.ident}-category`
                         ,fieldLabel: _('category')
                         ,description: MODx.expandHelp ? '' : _('tv_category_desc')
                         ,value: config.record.category || 0
                     },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-category`
+                        xtype: MODx.expandHelp ? 'box' : 'hidden'
                         ,html: _('tv_category_desc')
                         ,cls: 'desc-under'
                     }]
@@ -1273,7 +1227,7 @@ MODx.window.QuickCreateTV = function(config) {
                     ,labelAlign: 'top'
                 }
                 ,items: [{
-                    columnWidth: 0.5
+                    columnWidth: 1
                     ,defaults: {
                         anchor: '100%'
                         ,msgTarget: 'under'
@@ -1283,40 +1237,16 @@ MODx.window.QuickCreateTV = function(config) {
                     ,items: [{
                         xtype: 'textarea'
                         ,name: 'description'
-                        ,id: `modx-${this.ident}-description`
                         ,fieldLabel: _('description')
                         ,description: MODx.expandHelp ? '' : _('tv_description_desc')
                         ,grow: true
-                        ,growMin: 50
+                        ,growMin: 30
                         ,growMax: this.isSmallScreen ? 90 : 120
                         ,value: config.record.description || ''
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-description`
                         ,html: _('tv_description_desc')
                         ,cls: 'desc-under'
-                    }]
-                },{
-                    columnWidth: 0.5
-                    ,defaults: {
-                        anchor: '100%'
-                        ,msgTarget: 'under'
-                    }
-                    ,items: [{
-                        xtype: 'xcheckbox'
-                        ,name: 'clearCache'
-                        ,id: `modx-${this.ident}-clear-cache`
-                        ,hideLabel: true
-                        ,boxLabel: _('clear_cache_on_save')
-                        ,description: MODx.expandHelp ? '' : _('clear_cache_on_save_desc')
-                        ,ctCls: 'add-label-space'
-                        ,inputValue: 1
-                        ,checked: true
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-clear-cache`
-                        ,html: _('clear_cache_on_save_desc')
-                        ,cls: 'desc-under toggle-slider-above'
                     }]
                 }]
             }]
@@ -1343,7 +1273,6 @@ MODx.window.QuickCreateTV = function(config) {
                     ,items: [{
                         xtype: 'textarea'
                         ,name: 'els'
-                        ,id: `modx-${this.ident}-elements`
                         ,fieldLabel: _('tv_elements')
                         ,description: MODx.expandHelp ? '' : _('tv_elements_short_desc')
                         ,grow: true
@@ -1352,7 +1281,6 @@ MODx.window.QuickCreateTV = function(config) {
                         ,value: config.record.els || ''
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-elements`
                         ,html: _('tv_elements_short_desc')
                         ,cls: 'desc-under'
                     }]
@@ -1381,7 +1309,6 @@ MODx.window.QuickCreateTV = function(config) {
                     ,items: [{
                         xtype: 'textarea'
                         ,name: 'default_text'
-                        ,id: `modx-${this.ident}-default-text`
                         ,fieldLabel: _('tv_default')
                         ,description: MODx.expandHelp ? '' : _('tv_default_desc')
                         ,grow: true
@@ -1390,7 +1317,6 @@ MODx.window.QuickCreateTV = function(config) {
                         ,value: config.record.default_text || ''
                     },{
                         xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: `modx-${this.ident}-default-text`
                         ,html: _('tv_default_desc')
                         ,cls: 'desc-under'
                     }]
@@ -1407,6 +1333,14 @@ MODx.window.QuickCreateTV = function(config) {
             ,fn: this.submit
             ,scope: this
         }]
+        /*
+        ,buttons: [{
+            text: 'Test One'
+        },{
+            text: 'Test Two'
+            ,cls: 'primary-button'
+        }]
+        */
     });
     MODx.window.QuickCreateTV.superclass.constructor.call(this,config);
 };
@@ -1420,20 +1354,7 @@ MODx.window.QuickUpdateTV = function(config) {
         title: _('quick_update_tv')
         ,action: 'Element/TemplateVar/Update'
         ,cls: 'qce-window qce-update'
-        ,buttons: [{
-            text: config.cancelBtnText || _('cancel')
-            ,scope: this
-            ,handler: function() { this.hide(); }
-        },{
-            text: config.saveBtnText || _('save')
-            ,scope: this
-            ,handler: function() { this.submit(false); }
-        },{
-            text: config.saveBtnText || _('save_and_close')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.submit
-        }]
+        ,modxFbarButtons: 'c-s-sc'
     });
     MODx.window.QuickUpdateTV.superclass.constructor.call(this,config);
 };
@@ -1442,63 +1363,64 @@ Ext.reg('modx-window-quick-update-tv',MODx.window.QuickUpdateTV);
 
 
 MODx.window.DuplicateContext = function(config) {
+
     config = config || {};
-    this.ident = config.ident || 'dupctx'+Ext.id();
     Ext.Ajax.timeout = 0;
+    const   windowId = `window-dup-context-${Ext.id()}`,
+            preserveAliasCmpId = `${windowId}-modx-preserve_alias`,
+            preserveMenuIndexCmpId = `${windowId}-modx-preserve_menuindex`
+    ;
+
     Ext.applyIf(config,{
-        title: _('duplicate')
-        ,id: this.ident
+        id: windowId
+        ,title: _('duplicate')
         ,url: MODx.config.connector_url
         ,action: 'Context/Duplicate'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'statictextfield'
-            ,id: 'modx-'+this.ident+'-key'
-            ,fieldLabel: _('old_key')
             ,name: 'key'
-            ,anchor: '100%'
+            ,fieldLabel: _('old_key')
             ,submitValue: true
         },{
             xtype: 'textfield'
-            ,id: 'modx-'+this.ident+'-newkey'
-            ,fieldLabel: _('new_key')
             ,name: 'newkey'
-            ,anchor: '100%'
+            ,fieldLabel: _('new_key')
             ,value: ''
         },{
             xtype: 'checkbox'
-            ,id: 'modx-'+this.ident+'-preserveresources'
+            ,name: 'preserve_resources'
             ,hideLabel: true
             ,boxLabel: _('preserve_resources')
-            ,name: 'preserve_resources'
-            ,anchor: '100%'
             ,checked: true
             ,listeners: {
-                'check': {fn: function(cb,checked) {
-                    if (checked) {
-                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(true).enable();
-                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(true).enable();
-                    } else {
-                        this.fp.getForm().findField('modx-'+this.ident+'-preservealias').setValue(false).disable();
-                        this.fp.getForm().findField('modx-'+this.ident+'-preservemenuindex').setValue(false).disable();
-                    }
-                },scope:this}
+                check: {
+                    fn: function(cb, checked) {
+                        const form = this.fp.getForm();
+                        if (checked) {
+                            form.findField(preserveAliasCmpId).setValue(true).enable();
+                            form.findField(preserveMenuIndexCmpId).setValue(true).enable();
+                        } else {
+                            form.findField(preserveAliasCmpId).setValue(false).disable();
+                            form.findField(preserveMenuIndexCmpId).setValue(false).disable();
+                        }
+                    },
+                    scope: this
+                }
             }
-
         },{
             xtype: 'checkbox'
-            ,id: 'modx-'+this.ident+'-preservealias'
-            ,hideLabel: true
-            ,boxLabel: _('preserve_alias') // Todo: add translation
+            ,id: preserveAliasCmpId
             ,name: 'preserve_alias'
-            ,anchor: '100%'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_alias')
             ,checked: true
         },{
             xtype: 'checkbox'
-            ,id: 'modx-'+this.ident+'-preservemenuindex'
-            ,hideLabel: true
-            ,boxLabel: _('preserve_menuindex') // Todo: add translation
+            ,id: preserveMenuIndexCmpId
             ,name: 'preserve_menuindex'
-            ,anchor: '100%'
+            ,hideLabel: true
+            ,boxLabel: _('preserve_menuindex')
             ,checked: true
         }]
     });
@@ -1508,12 +1430,14 @@ Ext.extend(MODx.window.DuplicateContext,MODx.Window);
 Ext.reg('modx-window-context-duplicate',MODx.window.DuplicateContext);
 
 MODx.window.Login = function(config) {
+
     config = config || {};
-    this.ident = config.ident || 'dupctx'+Ext.id();
     Ext.Ajax.timeout = 0;
+    const windowId = `window-login-extend-${Ext.id()}`;
+
     Ext.applyIf(config,{
-        title: _('login')
-        ,id: this.ident
+        id: windowId
+        ,title: _('login')
         ,url: MODx.config.connectors_url
         ,action: 'Security/Login'
         ,fields: [{
@@ -1521,17 +1445,13 @@ MODx.window.Login = function(config) {
             ,xtype: 'modx-description'
         },{
             xtype: 'textfield'
-            ,id: 'modx-'+this.ident+'-username'
-            ,fieldLabel: _('username')
             ,name: 'username'
-            ,anchor: '100%'
+            ,fieldLabel: _('username')
         },{
             xtype: 'textfield'
-            ,inputType: 'password'
-            ,id: 'modx-'+this.ident+'-password'
-            ,fieldLabel: _('password')
             ,name: 'password'
-            ,anchor: '100%'
+            ,inputType: 'password'
+            ,fieldLabel: _('password')
         },{
             xtype: 'hidden'
             ,name: 'rememberme'
@@ -1540,7 +1460,9 @@ MODx.window.Login = function(config) {
         ,buttons: [{
             text: _('logout')
             ,scope: this
-            ,handler: function() { location.href = '?logout=1' }
+            ,handler: function() {
+                location.href = '?logout=1'
+            }
         },{
             text: _('login')
             ,cls: 'primary-button'

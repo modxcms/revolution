@@ -46,6 +46,18 @@ Ext.extend(MODx,Ext.Component,{
     ,expandHelp: true
     ,defaultState: []
 
+    /**
+     * Tracks our custom non click event blocking 'pseudo' modals; should contain
+     * an object for each currently open modal containing at minimum a reference to
+     * the modal window’s id (itemId).
+     */
+    ,openPseudoModals: []
+
+    /**
+     * An Ext.Element object containing the page mask created by pseudo modals.
+     */
+    ,mask: {}
+
     ,startup: function() {
         this.initQuickTips();
         this.initMarkRequiredFields();
@@ -437,49 +449,37 @@ Ext.extend(MODx,Ext.Component,{
     }
 
     ,getStaticElementsPath: function(name, category, type) {
-        var path = MODx.config.static_elements_basepath,
+
+        let path = MODx.config.static_elements_basepath,
             ext  = '';
-
-        if (category.length > 0) {
-            category = category.replace(/[^\w\s-]/gi, "");
-            category = category.replace(/\s/g, '-').toLowerCase();
-            // Convert nested elements to nested directory structure.
-            category = category.replace(/--/gi, '/');
-            category = "/" + category + "/";
-        } else {
-            category = "/";
-        }
-
+        const htmlExtension = MODx.config.static_elements_html_extension || '.tpl';
+        // console.log('cat before: ',category);
+        category = category.length > 0 ? MODx.util.Format.staticElementPathFragment(category, true) : '/' ;
+        // console.log('cat after: ',category);
         // Remove trailing slash.
-        path = path.replace(/\/$/, "");
+        path = path.replace(/\/$/, '');
 
         switch(type) {
-            case "templates":
-                ext = ".template" + (MODx.config.static_elements_html_extension || ".tpl");
+            case 'templates':
+                ext = `.template${htmlExtension}`;
                 break;
-            case "tvs":
-                ext = ".tv" + (MODx.config.static_elements_html_extension || ".tpl");
+            case 'tvs':
+                ext = `.tv${htmlExtension}`;
                 break;
-            case "chunks":
-                ext = ".chunk" + (MODx.config.static_elements_html_extension || ".tpl");
+            case 'chunks':
+                ext = `.chunk${htmlExtension}`;
                 break;
-            case "snippets":
-                ext = ".snippet.php";
+            case 'snippets':
+                ext = '.snippet.php';
                 break;
-            case "plugins":
-                ext = ".plugin.php";
+            case 'plugins':
+                ext = '.plugin.php';
                 break;
         }
 
-        // Remove special characters and spaces.
-        name = name.replace(/[^\w\s-]/gi, '');
-        name = name.replace(/\s/g, '-').toLowerCase();
-
-        if (name.length > 0) {
-            path += "/" + type + category + name + ext;
-        } else {
-            path += "/" + type + category;
-        }
+        name = MODx.util.Format.staticElementPathFragment(name);
+        path += '/' + type + category;
+        path += name.length > 0 ? name + ext : '' ;
 
         return path;
     }

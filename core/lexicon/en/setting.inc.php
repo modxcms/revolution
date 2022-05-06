@@ -494,6 +494,23 @@ $_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in t
 
 $_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
 $_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+$_lang['setting_enable_overlays'] = 'Enable Overlays';
+$_lang['setting_enable_overlays_desc'] = 'If enabled, a semi-transparent overlay will mask the manager’s main interface below editing windows and dialog boxes, enhancing user focus on the front window(s).';
+
+$_lang['setting_overlay_color'] = 'Overlay Color';
+$_lang['setting_overlay_color_desc'] = 'Any valid css color specified in Hexadecimal, RGB/A, HSL/A, W3C named, or transparent format.';
+
+$_lang['setting_overlay_opacity_blocking'] = 'Overlay Opacity (Blocking)';
+$_lang['setting_overlay_opacity_blocking_desc'] = 'Controls how opaque a dialog window’s underlying overlay (mask) will be. This type of overlay is also used as a mask for disabled grids and blocks interaction with the elements below. Valid values range from 0 (completely transparent) to 100 (completely opaque).';
+
+$_lang['setting_overlay_opacity_nonblocking'] = 'Overlay Opacity (Non-Blocking)';
+$_lang['setting_overlay_opacity_nonblocking_desc'] = 'Controls how opaque an editing window’s non-blocking underlying overlay (mask) will be. This type of overlay allows interaction with the elements below. Valid values range from 0 (completely transparent) to 100 (completely opaque).';
+
+$_lang['setting_overlay_tint_blocking'] = 'Overlay Tint (Blocking)';
+$_lang['setting_overlay_tint_blocking_desc'] = 'The percentage of white added to lighten a dialog window’s underlying overlay color. This type of overlay is also used as a mask for disabled grids and blocks interaction with the elements below. Valid values range from 0 (no lightening) to 100 (completely white) in increments of 5.';
+
+$_lang['setting_overlay_tint_nonblocking'] = 'Overlay Tint (Non-Blocking)';
+$_lang['setting_overlay_tint_nonblocking_desc'] = 'The percentage of white added to lighten an editing window’s non-blocking underlying overlay color. This type of overlay allows interaction with the elements below. Valid values range from 0 (no lightening) to 100 (completely white) in increments of 5.';
 
 $_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';

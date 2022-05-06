@@ -2157,5 +2157,59 @@ $settings['static_elements_html_extension']->fromArray([
     'area' => 'static_elements',
     'editedon' => null,
 ], '', true, true);
+$settings['enable_overlays'] = $xpdo->newObject(modSystemSetting::class);
+$settings['enable_overlays']->fromArray([
+    'key' => 'enable_overlays',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['overlay_color'] = $xpdo->newObject(modSystemSetting::class);
+$settings['overlay_color']->fromArray([
+    'key' => 'overlay_color',
+    'value' => '#0d141d',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['overlay_opacity_blocking'] = $xpdo->newObject(modSystemSetting::class);
+$settings['overlay_opacity_blocking']->fromArray([
+    'key' => 'overlay_opacity_blocking',
+    'value' => 50,
+    'xtype' => 'numberfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['overlay_opacity_nonblocking'] = $xpdo->newObject(modSystemSetting::class);
+$settings['overlay_opacity_nonblocking']->fromArray([
+    'key' => 'overlay_opacity_nonblocking',
+    'value' => 50,
+    'xtype' => 'numberfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['overlay_tint_blocking'] = $xpdo->newObject(modSystemSetting::class);
+$settings['overlay_tint_blocking']->fromArray([
+    'key' => 'overlay_tint_blocking',
+    'value' => 0,
+    'xtype' => 'numberfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['overlay_tint_nonblocking'] = $xpdo->newObject(modSystemSetting::class);
+$settings['overlay_tint_nonblocking']->fromArray([
+    'key' => 'overlay_tint_nonblocking',
+    'value' => 70,
+    'xtype' => 'numberfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
 
 return $settings;
