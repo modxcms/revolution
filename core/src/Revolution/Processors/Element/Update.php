@@ -86,13 +86,14 @@ abstract class Update extends UpdateProcessor
         $name = $this->getProperty($this->elementNameField, '');
 
         if (empty($name)) {
-            $this->addFieldError($nameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
-        } else if ($this->alreadyExists($name)) {
-            /* if changing name, but new one already exists */
-            $this->modx->error->addField(
-                $nameField,
-                $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
-            );
+            $this->addFieldError($this->elementNameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
+        } else {
+            if ($this->alreadyExists($name)) {
+                $this->addFieldError(
+                    $this->elementNameField,
+                    $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
+                );
+            }
         }
 
         /* category */
