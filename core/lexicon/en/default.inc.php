@@ -574,6 +574,8 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 // All
 $_lang['static_file'] = 'Static File';
 $_lang['static_file_desc'] = 'The external file location where the source code for this element is stored.';
+    // Temporarily match old keys to new ones to ensure compatibility
+    $_lang['static_file_msg'] = $_lang['static_file_desc'];
 
 // Chunks
 $_lang['example_tag_chunk_name'] = 'NameOfChunk';
@@ -584,6 +586,7 @@ $_lang['chunk_new_name'] = 'New Chunk Name';
 $_lang['chunk_tag_copied'] = 'Chunk tag copied!';
     // Temporarily match old keys to new ones to ensure compatibility
     $_lang['chunk_desc_description'] = $_lang['chunk_description_desc'];
+    $_lang['chunk_desc_name'] = $_lang['chunk_name_desc'];
 
 // Plugins
 $_lang['plugin_code'] = 'Plugin Code (PHP)';
