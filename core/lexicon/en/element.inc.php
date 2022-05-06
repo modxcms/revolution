@@ -38,7 +38,6 @@ $_lang['static_file_ns'] = 'You have to specify a static file.';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['is_static_msg'] = $_lang['is_static_desc'];
-$_lang['static_file_msg'] = $_lang['static_file_desc'];
 $_lang['static_source_msg'] = $_lang['static_source_desc'];
 
 /*

@@ -34,7 +34,6 @@ $_lang['chunks'] = 'Chunks';
 // Temporarily match old keys to new ones to ensure compatibility
 // --fields
 $_lang['chunk_desc_category'] = $_lang['chunk_category_desc'];
-$_lang['chunk_desc_name'] = $_lang['chunk_name_desc'];
 $_lang['chunk_lock_msg'] = $_lang['chunk_lock_desc'];
 
 // --tabs
