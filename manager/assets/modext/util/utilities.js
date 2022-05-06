@@ -207,13 +207,15 @@ MODx.util.safeHtml = (input, allowedTags, allowedAttributes) => {
     allowedTags = ((`${allowedTags || '<a><br><i><em><b><strong>'}`)
         .toLowerCase()
         .match(/<[a-z][a-z0-9]*>/g) || [])
-        .join('');
+        .join('')
+    ;
     // making sure the allowedAttributes arg is a comma separated string containing only attributes in lowercase (a,b,c)
     allowedAttributes = ((`${allowedAttributes || 'href,class'}`)
         .toLowerCase()
         .match(/[a-z\-,]*/g) || [])
         .join('')
-        .concat(',');
+        .concat(',')
+    ;
     input = input
         .replace(commentsAndPhpTags, '')
         .replace(hrefJavascript, 'href="javascript:void(0)"')

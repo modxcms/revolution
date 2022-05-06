@@ -516,6 +516,7 @@ MODx.grid.FCSetTVs = function(config = {}) {
     });
     MODx.grid.FCSetTVs.superclass.constructor.call(this, config);
     this.propRecord = Ext.data.Record.create(config.fields);
+    // eslint-disable-next-line prefer-arrow-callback, func-names
     this.on('afteredit', function(e) {
         if (e.field === 'label') {
             let value = e.value.trim();
@@ -524,7 +525,7 @@ MODx.grid.FCSetTVs = function(config = {}) {
                     value,
                     MODx.config.elements_caption_allowedtags,
                     MODx.config.elements_caption_allowedattr
-                )
+                );
             }
             e.record.set('label', value);
             e.record.commit();
