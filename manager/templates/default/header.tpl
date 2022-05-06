@@ -20,11 +20,52 @@
 {/if}
 <script src="{$_config.manager_url}assets/modext/core/modx.js?mv={$versionToken}"></script>
 <script src="{$_config.manager_url}assets/lib/popper.min.js"></script>
+<script src="{$_config.manager_url}assets/lib/values.min.js"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}"></script>
 
 <script>
+    {literal}
     const tvPanelOverrides = [];
+
+    // Define overlay/mask colors used by windows and grids
+    const   overlayColor = MODx.config.overlay_color || '#000000',
+            overlayColorTable = new Values(overlayColor),
+            overlayTints = overlayColorTable ? overlayColorTable.tints(5) : false,
+            overlayTintBlocking = parseInt(MODx.config.overlay_tint_blocking) || 100,
+            overlayTintNonblocking = parseInt(MODx.config.overlay_tint_nonblocking) || 0,
+            overlayOpacityBlocking = parseInt(MODx.config.overlay_opacity_blocking) / 100 || 0.5,
+            overlayOpacityNonblocking = parseInt(MODx.config.overlay_opacity_nonblocking) / 100 || 0.5
+    ;
+    let overlayCssColorBlocking = overlayColor,
+        overlayCssColorNonblocking = overlayColor
+    ;
+    if (overlayTints && overlayTints.length > 0 && overlayTints[0].hasOwnProperty('weight')) {
+        const getOverlayCssColor = function(overlayTint) {
+            console.log('tint setting, start: ',overlayTint);
+            switch (overlayTint) {
+                case 0:
+                    color = overlayColor;
+                    break;
+                case 100:
+                    color = '#ffffff';
+                    break;
+                default:
+                    if (overlayTint % 5 !== 0) {
+                        overlayTint = Math.round(overlayTint/5) * 5;
+                    }
+                    color = `#${overlayTints.find(tint => tint.weight == overlayTint).hex}`;
+            }
+            console.log('tint setting, final: ',overlayTint);
+            return color;
+        };
+        overlayCssColorBlocking = getOverlayCssColor(overlayTintBlocking);
+        overlayCssColorNonblocking = getOverlayCssColor(overlayTintNonblocking);
+    }
+    console.log(`Blocking color (${overlayColor}) tinted to ${overlayTintBlocking} = ${overlayCssColorBlocking}`);
+    console.log(`Nonblocking color (${overlayColor}) tinted to ${overlayTintNonblocking} = ${overlayCssColorNonblocking}`);
+    // console.log('modx cfg: ',MODx.config);
+    {/literal}
 </script>
 
 {$maincssjs}
@@ -34,6 +75,7 @@
 
 <script>
     MODx.config.search_enabled = {$_search};
+    {literal}
     if (!Ext.isEmpty(tvPanelOverrides)) {
         let fn = {},
             vd = {},
@@ -73,7 +115,9 @@
             fn
         });
     }
+    {/literal}
 </script>
+
 </head>
 <body id="modx-body-tag">
 

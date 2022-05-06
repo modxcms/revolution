@@ -110,7 +110,7 @@ MODx.panel.TV = function(config) {
                                 ,listeners: {
                                     afterrender: {
                                         fn: function(cmp) {
-                                            this.insertTagCopyUtility(cmp, 'tv');
+                                            MODx.util.insertTagCopyUtility(cmp, 'tv');
                                         }
                                         ,scope: this
                                     }
