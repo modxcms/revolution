@@ -86,15 +86,15 @@ abstract class Create extends CreateProcessor
             $this->object->set('description', $description);
         }
 
-        $name = $this->getProperty($this->elementNameField, '');
-
         /* verify element has a name and that name does not already exist */
+
+        $name = $this->getProperty($this->elementNameField, '');
 
         if (empty($name)) {
             $this->addFieldError($this->elementNameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
         } else {
             if ($this->alreadyExists($name)) {
-                $this->modx->error->addField(
+                $this->addFieldError(
                     $this->elementNameField,
                     $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
                 );
