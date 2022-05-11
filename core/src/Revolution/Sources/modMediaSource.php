@@ -2088,6 +2088,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'handler' => 'this.renameDirectory',
             ];
         }
+        $menu[] = array(
+            'text' => $this->xpdo->lexicon('file_folder_copy_path'),
+            'handler' => 'this.copyRelativePath',
+        );
         if ($this->visibility_dirs && $this->hasPermission('directory_chmod') && $canSave) {
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_folder_visibility'),
@@ -2158,6 +2162,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             ];
         }
         if ($this->hasPermission('file_view') && $canOpen) {
+            $menu[] = array(
+                'text' => $this->xpdo->lexicon('file_copy_path'),
+                'handler' => 'this.copyRelativePath',
+            );
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_open'),
                 'handler' => 'this.openFile',
