@@ -2088,10 +2088,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'handler' => 'this.renameDirectory',
             ];
         }
-        $menu[] = array(
+        $menu[] = [
             'text' => $this->xpdo->lexicon('file_folder_copy_path'),
             'handler' => 'this.copyRelativePath',
-        );
+        ];
         if ($this->visibility_dirs && $this->hasPermission('directory_chmod') && $canSave) {
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_folder_visibility'),
