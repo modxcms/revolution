@@ -2162,10 +2162,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             ];
         }
         if ($this->hasPermission('file_view') && $canOpen) {
-            $menu[] = array(
+            $menu[] = [
                 'text' => $this->xpdo->lexicon('file_copy_path'),
                 'handler' => 'this.copyRelativePath',
-            );
+            ];
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_open'),
                 'handler' => 'this.openFile',
