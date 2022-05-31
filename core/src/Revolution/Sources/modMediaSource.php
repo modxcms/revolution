@@ -1108,7 +1108,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $this->xpdo->context->prepare();
         $maxFileSize = $this->xpdo->getOption('upload_maxsize', null, 1048576);
 
-        foreach ($objects as $file) {
+        foreach ($objects as $key => $file) {
             $this->xpdo->invokeEvent('OnFileManagerBeforeUpload', [
                 'files' => &$objects,
                 'file' => &$file,
@@ -1170,6 +1170,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 }
             }
+            
+            $objects[$key] = $file;
         }
 
         $this->xpdo->invokeEvent('OnFileManagerUpload', [
