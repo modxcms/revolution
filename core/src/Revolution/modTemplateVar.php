@@ -830,9 +830,7 @@ class modTemplateVar extends modElement
      */
     public function getBindingDataFromValue($value)
     {
-        if (is_string($value)) {
-            $nvalue = trim($value);
-        }
+        $nvalue = is_string($value) ? trim($value) : '';
         $cmd = false;
         $param = '';
         $properties = [];
