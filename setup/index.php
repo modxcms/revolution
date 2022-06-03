@@ -62,10 +62,12 @@ if (version_compare(MODX_SETUP_PHP_VERSION,'5.3.0') >= 0) {
 }
 if (!$isCommandLine) {
     $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
-    $installBaseUrl= (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
+    $installBaseUrl = (!$https || strtolower($https) != 'on') ? 'http://' : 'https://';
     $installBaseUrl .= $_SERVER['HTTP_HOST'];
-    if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] != '' && $_SERVER['SERVER_PORT'] != 80) $installBaseUrl= str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
-    $installBaseUrl .= ($_SERVER['SERVER_PORT'] == 80 || ($https !== false || strtolower($https) == 'on')) ? '' : ':' . $_SERVER['SERVER_PORT'];
+    if (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] !== '' && $_SERVER['SERVER_PORT'] !== 80) {
+        $installBaseUrl = str_replace(':' . $_SERVER['SERVER_PORT'], '', $installBaseUrl);
+    }
+    $installBaseUrl .= in_array($_SERVER['SERVER_PORT'], [80, 443]) ? '' : ':' . $_SERVER['SERVER_PORT'];
     $installBaseUrl .= $_SERVER['SCRIPT_NAME'];
     $installBaseUrl = htmlspecialchars($installBaseUrl, ENT_QUOTES, 'utf-8');
     define('MODX_SETUP_URL', $installBaseUrl);
