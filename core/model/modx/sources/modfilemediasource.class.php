@@ -205,7 +205,6 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     'iconCls' => 'icon icon-file icon-'.$ext . ($file->isWritable() ? '' : ' icon-lock'),
                     'type' => 'file',
                     'leaf' => true,
-                    // 'qtip' => in_array($ext,$imagesExts) ? '<img src="'.$fromManagerUrl.'" alt="'.$fileName.'" />' : '',
                     'page' => $this->fileHandler->isBinary($filePathName) ? null : $page,
                     'perms' => $octalPerms,
                     'path' => $bases['pathAbsoluteWithPath'].$fileName,
@@ -218,7 +217,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 );
                 $files[$fileName]['menu'] = array('items' => $this->getListContextMenu($file,$files[$fileName]));
 
-                // trough tree config we can request a tree without image-preview tooltips, don't do any work if not necessary
+                // through tree config we can request a tree without image-preview tooltips, don't do any work if not necessary
                 if (!$hideTooltips) {
 
                     $files[$fileName]['qtip'] = '';
