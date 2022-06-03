@@ -158,7 +158,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $dirnames[] = strtoupper($fileName);
                 $directories[$fileName] = array(
-                    'id' => rawurlencode($bases['urlRelative'].rtrim($fileName, '/').'/'),
+                    'id' => $bases['urlRelative'].rtrim($fileName, '/').'/',
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
                     'iconCls' => 'icon icon-folder',
@@ -199,7 +199,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
-                    'id' => rawurlencode($bases['urlRelative'].$fileName),
+                    'id' => $bases['urlRelative'].$fileName,
                     'text' => $fileName,
                     'cls' => implode(' ',$cls),
                     'iconCls' => 'icon icon-file icon-'.$ext . ($file->isWritable() ? '' : ' icon-lock'),
@@ -1186,7 +1186,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
 
                 $filenames[] = strtoupper($fileName);
                 $files[$fileName] = array(
-                    'id' => rawurlencode($bases['urlAbsoluteWithPath'].$fileName),
+                    'id' => $bases['urlAbsoluteWithPath'].$fileName,
                     'name' => $fileName,
                     'cls' => 'icon-'.$fileExtension,
                     'image' => $image,

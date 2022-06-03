@@ -212,7 +212,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
                 $filenames[] = strtoupper($fileName);
                 $files[$currentPath] = array(
-                    'id' => rawurlencode($currentPath),
+                    'id' => $currentPath,
                     'text' => $fileName,
                     'cls' => implode(' ', $cls),
                     'iconCls' => 'icon icon-file icon-'.$ext,
@@ -451,7 +451,7 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
 
                 $filenames[] = strtoupper($fileName);
                 $fileArray = array(
-                    'id' => rawurlencode($currentPath),
+                    'id' => $currentPath,
                     'name' => $fileName,
                     'url' => $url,
                     'relativeUrl' => $url,
