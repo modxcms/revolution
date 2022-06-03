@@ -58,12 +58,6 @@ class modBrowserFolderGetListProcessor extends modProcessor {
         }
         $this->source->setRequestProperties($this->getProperties());
         $this->source->initialize();
-
-        $this->modx->log(
-            modX::LOG_LEVEL_ERROR,
-            "modBrowserFolderGetListProcessor::process, dir: {$this->getProperty('dir')}"
-        );
-
         $list = $this->source->getContainerList($this->getProperty('dir'));
 
         return $this->modx->toJSON($list);
