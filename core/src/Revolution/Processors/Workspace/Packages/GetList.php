@@ -215,7 +215,11 @@ class GetList extends GetListProcessor
                 }
                 if ($provider) {
                     $updates = $provider->latest($package->get('signature'));
-                    $updates = ['count' => count($updates)];
+                    if (is_string($updates)) {
+                        $updates = ['count' => 0];
+                    } else {
+                        $updates = ['count' => count($updates)];
+                    }
                     $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire,
                         $updateCacheOptions);
                 }
