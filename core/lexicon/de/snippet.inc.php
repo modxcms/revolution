@@ -35,8 +35,6 @@ $_lang['snippet_new'] = 'Snippet erstellen';
 $_lang['snippet_properties'] = 'Standardeigenschaften';
 $_lang['snippet_tab_general_desc'] = 'Hier können Sie die grundlegenden Attribute für dieses <em>Snippet</em> sowie dessen Inhalt eingeben. Der Inhalt muss PHP sein, entweder im Feld <em>Snippet Code</em> oder in einer statischen externen Datei. Um Ausgaben aus deinem Snippet an dem Punkt zu erhalten, an dem es aufgerufen wird (innerhalb eines Templates oder Chunk), ein Wert muss innerhalb des Codes zurückgegeben werden.';
 $_lang['snippet_tag_copied'] = 'Snippet Tag kopiert!';
-$_lang['snippet_title'] = 'Snippet erstellen/bearbeiten';
-$_lang['snippet_untitled'] = 'Unbenanntes Snippet';
 $_lang['snippets'] = 'Snippets';
 
 // Temporarily match old keys to new ones to ensure compatibility
