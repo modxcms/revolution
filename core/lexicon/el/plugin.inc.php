@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Διαμορφώστε τη σειρά εκτέλεσης του κώδικα των πρόσθετου βάση συμβάντων';
 $_lang['plugin_properties'] = 'Ιδιότητες του πρόσθετου';
 $_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
-$_lang['plugin_title'] = 'Δημιουργήστε/τροποποιήστε πρόσθετο';
-$_lang['plugin_untitled'] = 'Πρόσθετο χωρίς όνομα';
 $_lang['plugins'] = 'Πρόσθετα';
 
 // Temporarily match old keys to new ones to ensure compatibility
