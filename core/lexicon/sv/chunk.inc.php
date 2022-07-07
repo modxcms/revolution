@@ -34,8 +34,6 @@ $_lang['chunk_new'] = 'Skapa chunk';
 $_lang['chunk_properties'] = 'Standardegenskaper';
 $_lang['chunk_tab_general_desc'] = 'Här kan du ange grundläggande attribut för denna <em>chunk</em> samt dess innehåll. Innehållet måste vara HTML, antingen placerat i fältet <em>Chunk-kod</em> nedan eller i en statisk extern fil, och kan inkludera MODX-taggar. Observera att PHP-kod inte kan köras i detta element.';
 $_lang['chunk_tag_copied'] = 'Chunk-taggen kopierades!';
-$_lang['chunk_title'] = 'Skapa/redigera chunk';
-$_lang['chunk_untitled'] = 'Namnlös Chunk';
 $_lang['chunks'] = 'Chunks';
 
 // Temporarily match old keys to new ones to ensure compatibility
