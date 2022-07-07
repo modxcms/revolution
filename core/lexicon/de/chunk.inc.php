@@ -34,8 +34,6 @@ $_lang['chunk_new'] = 'Chunk erstellen';
 $_lang['chunk_properties'] = 'Standardeigenschaften';
 $_lang['chunk_tab_general_desc'] = 'Hier können Sie die grundlegenden Attribute für diesen <em>Chunk</em> sowie dessen Inhalt eingeben. Der Inhalt muss HTML sein, entweder im Feld <em>Chunk Code</em> oder in einer statischen externen Datei. Er kann MODX-Tags enthalten. Beachten Sie jedoch, dass PHP-Code in diesem Element nicht ausgeführt wird.';
 $_lang['chunk_tag_copied'] = 'Chunk-Tag kopiert!';
-$_lang['chunk_title'] = 'Chunk erstellen/bearbeiten';
-$_lang['chunk_untitled'] = 'Unbenannter Chunk';
 $_lang['chunks'] = 'Chunks';
 
 // Temporarily match old keys to new ones to ensure compatibility
