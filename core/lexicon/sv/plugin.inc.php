@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Skapa plugin';
 $_lang['plugin_priority'] = 'Redigera körordningen för plugins efter händelse';
 $_lang['plugin_properties'] = 'Pluginens egenskaper';
 $_lang['plugin_tab_general_desc'] = 'Här kan du ange grundläggande attribut för denna <em>plugin</em> samt dess innehåll. Innehållet måste vara PHP, antingen placerat i fältet <em>Plugin-kod</em> nedan eller i en statisk extern fil. PHP-koden som anges körs som svar på en eller flera MODX-systemhändelser som du anger.';
-$_lang['plugin_title'] = 'Skapa/redigera plugin';
-$_lang['plugin_untitled'] = 'Namnlös plugin';
 $_lang['plugins'] = 'Plugins';
 
 // Temporarily match old keys to new ones to ensure compatibility
