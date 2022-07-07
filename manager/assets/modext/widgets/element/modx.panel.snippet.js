@@ -26,7 +26,7 @@ MODx.panel.Snippet = function(config) {
             ,id: 'modx-snippet-header'
             ,xtype: 'modx-header'
         },MODx.getPageStructure([{
-            title: _('snippet_title')
+            title: _('general_information')
             ,defaults: { border: false ,msgTarget: 'side' }
             ,layout: 'form'
             ,id: 'modx-snippet-form'
