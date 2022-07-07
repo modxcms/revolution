@@ -34,8 +34,6 @@ $_lang['chunk_new'] = 'Создать чанк';
 $_lang['chunk_properties'] = 'Параметры по умолчанию';
 $_lang['chunk_tab_general_desc'] = 'Здесь вы можете задать основные параметры <em>чанка</em>, а также его содержимое. Содержимое должно быть HTML, либо помещенное в поле <em>Код чанка (HTML)</em> ниже, либо в статичном внешнем файле, и может содержать теги MODX. Обратите внимание, что PHP-код выполняться не будет.';
 $_lang['chunk_tag_copied'] = 'Тег чанка скопирован!';
-$_lang['chunk_title'] = 'Создать/редактировать чанк';
-$_lang['chunk_untitled'] = 'Безымянный чанк';
 $_lang['chunks'] = 'Чанки';
 
 // Temporarily match old keys to new ones to ensure compatibility
