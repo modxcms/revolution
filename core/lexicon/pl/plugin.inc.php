@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Edit Plugin Execution Order by Event';
 $_lang['plugin_properties'] = 'Właściwości wtyczki';
 $_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
-$_lang['plugin_title'] = 'Utwórz/edytuj wtyczkę';
-$_lang['plugin_untitled'] = 'Wtyczka bez tytułu';
 $_lang['plugins'] = 'Pluginy';
 
 // Temporarily match old keys to new ones to ensure compatibility
