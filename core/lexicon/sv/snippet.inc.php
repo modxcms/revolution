@@ -35,8 +35,6 @@ $_lang['snippet_new'] = 'Skapa snippet';
 $_lang['snippet_properties'] = 'Standardegenskaper';
 $_lang['snippet_tab_general_desc'] = 'Här kan du ange grundläggande attribut för denna <em>snippet</em> samt dess innehåll. Innehållet måste vara PHP, antingen placerat i fältet <em>Snippet-kod</em> nedan eller i en statisk extern fil. För att ta emot utdata från snippeten vid den punkt där den kallas (i en mall eller chunk) så måste ett värde returneras från koden.';
 $_lang['snippet_tag_copied'] = 'Snippet-tagg kopierad!';
-$_lang['snippet_title'] = 'Skapa/redigera snippet';
-$_lang['snippet_untitled'] = 'Namnlös snippet';
 $_lang['snippets'] = 'Snippets';
 
 // Temporarily match old keys to new ones to ensure compatibility
