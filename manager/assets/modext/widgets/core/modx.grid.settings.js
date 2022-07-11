@@ -234,6 +234,14 @@ MODx.grid.SettingsGrid = function(config) {
         ,scrollOffset: 0
     });
     MODx.grid.SettingsGrid.superclass.constructor.call(this,config);
+
+    // prevents navigation to next cell editor field when pressing the ENTER key
+    this.selModel.onEditorKey = this.selModel.onEditorKey.createInterceptor(function(field, e) {
+        if (e.getKey() == Ext.EventObject.ENTER) {
+            e.stopEvent();
+            return false;
+        }
+    });
 };
 Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     _addEnterKeyHandler: function() {
