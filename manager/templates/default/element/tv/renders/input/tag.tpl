@@ -8,6 +8,7 @@
 
 <script>
 // <![CDATA[
+document.getElementById('tv{$tv->id}').setAttribute('autocomplete', globalAutoCompleteSetting);
 {literal}
 Ext.onReady(function() {
     var fld = MODx.load({

@@ -14,6 +14,7 @@
 
 <script>
 // <![CDATA[
+document.getElementById('tv{$tv->id}').setAttribute('autocomplete', globalAutoCompleteSetting);
 Ext.onReady(function() {
     MODx.makeDroppable(Ext.get('tv{$tv->id}'));
     const protocols = MODx.load({

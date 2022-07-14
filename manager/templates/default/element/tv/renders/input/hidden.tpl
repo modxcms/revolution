@@ -2,6 +2,7 @@
 
 <script>
 // <![CDATA[
+document.getElementById('tv{$tv->id}').setAttribute('autocomplete', globalAutoCompleteSetting);
 {literal}
 MODx.on('ready',function() {
     const fld = MODx.load({

@@ -201,7 +201,6 @@ MODx.combo.SystemEventGroups = function(config) {
 		,typeAhead: true
 		,editable: true
 		,allowBlank: false
-		,autocomplete: true
 		,pageSize: 10
 		,url: MODx.config.connector_url
 		,baseParams: {

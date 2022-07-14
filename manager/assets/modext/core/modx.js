@@ -2,6 +2,18 @@ Ext.namespace('MODx');
 Ext.apply(Ext,{
     isFirebug: (window.console && window.console.firebug)
 });
+
+/*
+    Note that currently (07/2022) it is practically impossible to
+    force Chrome to turn autocomplete off. Other browsers will comply
+    with autocomplete="off". Creating a global value here so we can easily
+    manage the attribute in one place.
+
+    The old trick of setting autocomplete="new-password" for non-password
+    fields appears to no longer work (Chrome)
+*/
+const globalAutoCompleteSetting = 'off';
+
 /* work around IE9 createContextualFragment bug
    http://www.sencha.com/forum/showthread.php?125869-Menu-shadow-probolem-in-IE9
  */
@@ -39,8 +51,35 @@ Ext.extend(MODx,Ext.Component,{
         this.initMarkRequiredFields();
         this.request = this.getURLParameters();
         this.Ajax = this.load({ xtype: 'modx-ajax' });
-        Ext.override(Ext.form.Field,{
-            defaultAutoCreate: {tag: "input", type: "text", size: "20", autocomplete: "on", msgTarget: 'under' }
+        Ext.override(Ext.form.Field, {
+            defaultAutoCreate: {
+                tag: 'input',
+                type: 'text',
+                size: '20',
+                autocomplete: globalAutoCompleteSetting,
+                msgTarget: 'under'
+            }
+        });
+        Ext.override(Ext.form.TextArea,{
+            onRender: function(ct, position) {
+                if (!this.el){
+                    this.defaultAutoCreate = {
+                        tag: 'textarea',
+                        style: 'width:100px;height:60px;',
+                        autocomplete: globalAutoCompleteSetting
+                    };
+                }
+                Ext.form.TextArea.superclass.onRender.call(this, ct, position);
+                if (this.grow){
+                    this.textSizeEl = Ext.DomHelper.append(document.body, {
+                        tag: 'pre', cls: 'x-form-grow-sizer'
+                    });
+                    if(this.preventScrollbars){
+                        this.el.setStyle('overflow', 'hidden');
+                    }
+                    this.el.setHeight(this.growMin);
+                }
+            }
         });
 
         Ext.Ajax.on('requestexception',this.onAjaxException,this);
@@ -104,7 +143,7 @@ Ext.extend(MODx,Ext.Component,{
             config = config || {};
             Ext.apply(config, {
                 init: function(cmp) {
-                    
+
                     if (cmp.allowBlank !== false) return;
 
                     const cmpLabel = cmp.fieldLabel;
