@@ -68,7 +68,7 @@ class GetList extends GetListProcessor
             'modAccessPermission.description',
             'Template.lexicon',
         ]);
-        $c->groupby('modAccessPermission.name');
+        $c->groupby('modAccessPermission.id');
         $name = $this->getProperty('name', '');
         if (!empty($name)) {
             $c->where([
