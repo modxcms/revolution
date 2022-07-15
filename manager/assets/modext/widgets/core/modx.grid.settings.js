@@ -237,7 +237,7 @@ MODx.grid.SettingsGrid = function(config) {
 
     // prevents navigation to next cell editor field when pressing the ENTER key
     this.selModel.onEditorKey = this.selModel.onEditorKey.createInterceptor(function(field, e) {
-        if (e.getKey() == Ext.EventObject.ENTER) {
+        if (e.getKey() == Ext.EventObject.ENTER && !e.ctrlKey) {
             e.stopEvent();
             return false;
         }
