@@ -52,17 +52,18 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
         // delete_document - thats perhaps not necessary, because all documents are already deleted
         // but we need the purge_deleted permission - for every single file
 
+        if ($deleted = $this->getDeleted()) {
+            $c->where(['modResource.id:IN' => $deleted]);
+        } else {
+            return;
+        }
+
         if (!empty($query)) {
             $c->where(array('modResource.pagetitle:LIKE' => '%' . $query . '%'));
             $c->orCondition(array('modResource.longtitle:LIKE' => '%' . $query . '%'));
         }
         if (!empty($context)) {
             $c->where(array('modResource.context_key' => $context));
-        }
-        if ($deleted = $this->getDeleted()) {
-            $c->where(array('modResource.id:IN' => $deleted));
-        } else {
-            $c->where(array('modResource.id' => 0));
         }
 
         return $c;
