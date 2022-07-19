@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Beépülő létrehozása';
 $_lang['plugin_priority'] = 'Beépülő végrehajtási sorának szerkesztése esemény alapján';
 $_lang['plugin_properties'] = 'Beépülő tulajdonságai';
 $_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
-$_lang['plugin_title'] = 'Beépülő létrehozása, módosítása';
-$_lang['plugin_untitled'] = 'Névtelen beépülő';
 $_lang['plugins'] = 'Beépülők';
 
 // Temporarily match old keys to new ones to ensure compatibility

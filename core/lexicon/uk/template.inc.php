@@ -48,10 +48,8 @@ $_lang['template_properties'] = 'Параметри за замовчуванн�
 $_lang['template_reset_all'] = 'Скинути шаблон для всіх сторінок, встановити шаблон за замовчуванням';
 $_lang['template_reset_specific'] = 'Скинути лише \'%s\' сторінок';
 $_lang['template_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Template</em> as well as its content. The content must be HTML, either placed in the <em>Template Code</em> field below or in a static external file, and may include MODX tags. Note that changed or new templates won’t be visible in your site’s cached pages until the cache is emptied; however, you can use the preview function on a page to see the template in action.';
-$_lang['template_title'] = 'Створити/редагувати шаблон';
 $_lang['template_tv_edit'] = 'Редагувати порядок TV ';
 $_lang['template_tv_msg'] = ' <abbr title="Template Variables">TV</abbr> призначені для цього шаблону, перераховані нижче.';
-$_lang['template_untitled'] = 'Безіменний шаблон';
 $_lang['templates'] = 'Шаблони';
 $_lang['tvt_err_nf'] = 'У TV немає доступу до вказаного шаблону.';
 $_lang['tvt_err_remove'] = 'Сталася помилка при спробі видалення TV з шаблону.';

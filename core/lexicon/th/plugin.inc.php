@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'แก้ไขปลั๊กอินโดยจัดการเรียงตามเหตุการณ์';
 $_lang['plugin_properties'] = 'คุณสมบัติปลั๊กอิน';
 $_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
-$_lang['plugin_title'] = 'สร้าง/แก้ไข ปลั๊กอิน';
-$_lang['plugin_untitled'] = 'ปลั๊กอินไม่มีชื่อ';
 $_lang['plugins'] = 'ปลั๊กอิน';
 
 // Temporarily match old keys to new ones to ensure compatibility

@@ -34,8 +34,6 @@ $_lang['chunk_new'] = 'Create Chunk';
 $_lang['chunk_properties'] = 'คุณสมบัติปริยาย';
 $_lang['chunk_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Chunk</em> as well as its content. The content must be HTML, either placed in the <em>Chunk Code</em> field below or in a static external file, and may include MODX tags. Note, however, that PHP code will not run in this element.';
 $_lang['chunk_tag_copied'] = 'Chunk tag copied!';
-$_lang['chunk_title'] = 'สร้าง/แก้ไขชังค์';
-$_lang['chunk_untitled'] = 'ชังค์ไม่มีชื่อ';
 $_lang['chunks'] = 'ชังค์';
 
 // Temporarily match old keys to new ones to ensure compatibility
