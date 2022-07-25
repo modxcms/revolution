@@ -364,9 +364,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,autoDestroy: true
                 ,listeners:{
                     load: function(){
-                        var cmp = Ext.getCmp('modx-content');
-                        if(typeof cmp !== "undefined") {
-                            cmp.doLayout(); /* Fix layout bug with absolute positioning */
+                        const cmp = Ext.getCmp('modx-content');
+                        if (cmp) {
+                            cmp.doLayout();
                         }
                     }
                 }
@@ -383,9 +383,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,autoDestroy: true
                 ,listeners:{
                     load: function(){
-                        var cmp = Ext.getCmp('modx-content');
-                        if(typeof cmp !== "undefined") {
-                            cmp.doLayout(); /* Fix layout bug with absolute positioning */
+                        const cmp = Ext.getCmp('modx-content');
+                        if (cmp) {
+                            cmp.doLayout();
                         }
                     }
                 }
