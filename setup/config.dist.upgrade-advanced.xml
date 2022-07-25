@@ -8,7 +8,7 @@
 -->
 <modx>
 	<database_type>mysql</database_type>
-    <database_server>localhost</database_server>
+    <database_server>127.0.0.1</database_server>
     <database>modx_modx</database>
     <database_user>db_username</database_user>
     <database_password>db_password</database_password>
