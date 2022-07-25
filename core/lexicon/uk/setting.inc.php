@@ -24,37 +24,37 @@ $_lang['area_session'] = 'Сеанси та куки';
 $_lang['area_static_elements'] = 'Статичні елементи';
 $_lang['area_static_resources'] = 'Статичні ресурси';
 $_lang['area_lexicon_string'] = 'Запис словника для розділу';
-$_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
+$_lang['area_lexicon_string_msg'] = 'Введіть ключ запису словника розділу. Якщо запис з таким ключем не знайдено, з\'явиться сам ключ. <br />Розділи простору "core": authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Сайт';
 $_lang['area_system'] = 'Система і сервер';
 $_lang['areas'] = 'Розділи';
 $_lang['charset'] = 'Кодування';
 $_lang['country'] = 'Країна';
-$_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
-$_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
-$_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
+$_lang['description_desc'] = 'Короткий опис налаштування. Можна вказати запис словника на основі ключа формату «setting_» + ключ + «_desc».';
+$_lang['key_desc'] = 'Ключ налаштування. Буде доступний у контенті через плейсхолдер [[++key]]';
+$_lang['name_desc'] = 'Назва налаштування. Можна вказати запис словника, який базується на ключі, формату «setting_» + ключ.';
 $_lang['namespace'] = 'Простір імен';
-$_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
+$_lang['namespace_desc'] = 'Простір імен, з яким це налаштування пов\'язане. Тема словника "default" для цього простору імен буде використана під час перегляду.';
 $_lang['namespace_filter'] = 'Фільтр за простором імен...';
 $_lang['setting_err'] = 'Перевірте свої дані на наступні поля: ';
-$_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
+$_lang['setting_err_ae'] = 'Налаштування з таким ключем є. Будь ласка, вкажіть інший ключ.';
 $_lang['setting_err_nf'] = 'Налаштування не знайдено.';
 $_lang['setting_err_ns'] = 'Налаштування не вказано';
 $_lang['setting_err_not_editable'] = 'This setting can\'t be edited in the grid. Please use the gear/context menu to edit the value!';
 $_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
-$_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
-$_lang['setting_err_startint'] = 'Settings may not start with an integer.';
-$_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
+$_lang['setting_err_save'] = 'Помилка при спробі зберегти налаштування.';
+$_lang['setting_err_startint'] = 'Назва настройки не може починатися з цифри.';
+$_lang['setting_err_invalid_document'] = 'Документ із ID %d не існує. Будь ласка, вкажіть існуючий документ.';
 $_lang['setting_remove_confirm'] = 'Ви впевнені, що хочете видалити це налаштування? Це може порушити встановлення MODX.';
-$_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
-$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
+$_lang['settings_after_install'] = 'У разі нової установки вам необхідно проконтролювати введені налаштування та, при необхідності, змінити їх. Після того, як ви перевірите налаштування, натисніть «Зберегти» для оновлення налаштувань бази даних.<br /><br />';
+$_lang['settings_desc'] = 'Тут ви можете змінити основні опції та налаштування системи керування MODX, а також сайту. <b>Кожна настройка буде доступна через плейсхолдер [[++key]].</b><br />Двічі натисніть за параметром у колонці «Значення» для редагування, або натисніть правою кнопкою миші для інших дій. Щоб побачити опис налаштування, натисніть «+».';
 $_lang['settings_furls'] = 'Дружні URL';
 $_lang['settings_misc'] = 'Різне';
 $_lang['settings_site'] = 'Сайт';
 $_lang['settings_ui'] = 'Інтерфейс &amp; Можливості';
 $_lang['settings_users'] = 'Користувач';
-$_lang['system_settings'] = 'System Settings';
-$_lang['usergroup'] = 'User Group';
+$_lang['system_settings'] = 'Системні налаштування';
+$_lang['usergroup'] = 'Група користувачів';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Перевіряти доступ до категорій';
@@ -66,63 +66,63 @@ $_lang['setting_access_context_enabled_desc'] = 'Використовуйте д
 $_lang['setting_access_resource_group_enabled'] = 'Перевіряти доступ до груп ресурсів';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Використовуйте для увімкнення або вимкнення перевірки доступу до груп ресурсів. <strong>ВАЖЛИВО: Якщо цей параметр встановлено у "Ні", то всі політики доступу до груп ресурсів ігноруватимуться!</strong>';
 
-$_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
-$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
+$_lang['setting_allow_mgr_access'] = 'Доступ до системи керування';
+$_lang['setting_allow_mgr_access_desc'] = 'Активуйте цю опцію для доступу до системи керування.<br /><strong>ВАЖЛИВО: Якщо це налаштування встановлено в «Ні», то користувачі будуть перенаправлені на сторінку авторизації або на головну сторінку.</strong>';
 
 $_lang['setting_failed_login'] = 'Ліміт спроб авторизації';
 $_lang['setting_failed_login_desc'] = 'Тут Ви можете вказати кількість невдалих спроб входу до системи, при перевищенні якої користувача буде заблоковано.';
 
-$_lang['setting_login_allowed_days'] = 'Allowed Days';
-$_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
+$_lang['setting_login_allowed_days'] = 'Дозволені дні';
+$_lang['setting_login_allowed_days_desc'] = 'Виберіть дні, коли цей користувач може увійти.';
 
-$_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
-$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to log in from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
+$_lang['setting_login_allowed_ip'] = 'Дозволені IP адреси';
+$_lang['setting_login_allowed_ip_desc'] = 'Вкажіть IP-адреси через кому, з яких користувачеві дозволено входити в систему керування.';
 
-$_lang['setting_login_homepage'] = 'Login Home Page';
-$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged in. <strong>NOTE: Make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_login_homepage'] = 'Головна сторінка авторизованого користувача';
+$_lang['setting_login_homepage_desc'] = 'Вкажіть ID ресурсу, на який користувач буде перенаправлений після авторизації. <strong>ВАЖЛИВО: переконайтеся, що ID належить існуючому та опублікованому ресурсу, і що користувач має право на його перегляд!</strong>';
 
 // system settings
-$_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
-$_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
+$_lang['setting_access_policies_version'] = 'Версія системи управління політиками доступу';
+$_lang['setting_access_policies_version_desc'] = 'Версія системи керування політиками доступу. НЕ МЕНЯЙТЕ!';
 
-$_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
-$_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
+$_lang['setting_allow_forward_across_contexts'] = 'Дозволити перенаправлення через контексти';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Якщо дозволено, символічні посилання та метод API modX::sendForward() зможуть перенаправляти запити на ресурси з інших контекстів.';
 
 $_lang['setting_allow_manager_login_forgot_password'] = 'Дозволити "Забув пароль" на сторінці входу до системи';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Встановлення значення "Ні" вимкне функцію "Забув пароль" на сторінці авторизації Менеджера.';
 
-$_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
-$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
+$_lang['setting_allow_tags_in_post'] = 'Дозволити передачу HTML тегів у POST';
+$_lang['setting_allow_tags_in_post_desc'] = 'Якщо вибрано «Ні», всі параметри POST в межах системи керування будуть очищені від будь-яких тегів. MODX рекомендує залишити це налаштування увімкненим («Так»).';
 
-$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Дозволити виконання коду у TV';
+$_lang['setting_allow_tv_eval_desc'] = 'Виберіть цей параметр, щоб дозволити або заборонити виконання коду TV. Якщо вибрано «Ні», код або значення буде оброблено як звичайний текст.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Анонімні сесії';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
-$_lang['setting_archive_with'] = 'Force PCLZip Archives';
-$_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
+$_lang['setting_archive_with'] = 'Використати PCLZip';
+$_lang['setting_archive_with_desc'] = 'Якщо вибрано "Так", роботи з zip-архівами буде використовуватися PCLZip замість ZipArchive. Виберіть "Так", якщо у вас виникають проблеми з розпакуванням пакетів у "Менеджері пакетів".';
 
-$_lang['setting_auto_menuindex'] = 'Menu indexing default';
-$_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
+$_lang['setting_auto_menuindex'] = 'Нумерація меню за замовчуванням';
+$_lang['setting_auto_menuindex_desc'] = 'Виберіть «Так», щоб автоматично нумерувати меню за промовчанням.';
 
-$_lang['setting_auto_check_pkg_updates'] = 'Automatic Check for Package Updates';
-$_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatically check for updates for packages in Package Management. This may slow the loading of the grid.';
+$_lang['setting_auto_check_pkg_updates'] = 'Автоматично перевіряти наявність оновлень пакетів';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'Якщо вибрано "Так", MODX автоматично перевірятиме наявність оновлень для пакетів у Менеджері пакетів. Це може сповільнити завантаження таблиці, яка відображає пакети.';
 
-$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
-$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
+$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Час життя кешу результатів автоматичної перевірки наявності оновлень пакетів';
+$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'Тривалість часу (у хвилинах), на який «Менеджер пакетів» кешуватиме результати перевірки наявності оновлень пакетів.';
 
 $_lang['setting_allow_multiple_emails'] = 'Дозволити користувачам мати однакові e-mail';
 $_lang['setting_allow_multiple_emails_desc'] = 'Якщо увімкнено, різні користувачі можуть використовувати одну й ту ж адресу електронної пошти.';
 
-$_lang['setting_automatic_alias'] = 'Automatically generate alias';
-$_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
+$_lang['setting_automatic_alias'] = 'Автоматично генерувати псевдонім';
+$_lang['setting_automatic_alias_desc'] = 'Виберіть «Так» для автоматичної генерації псевдонімів на базі заголовка ресурсу під час його збереження.';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Автоматичне присвоєння шаблону';
 $_lang['setting_automatic_template_assignment_desc'] = 'Виберіть, як шаблони будуть призначатися нових ресурсів при створенні. Можливі варіанти: system (шаблон за замовчуванням з системних налаштувань), parent (успадковує батьківський шаблон) або sibling (успадковує найбільш використовуваний шаблон sibling)';
 
-$_lang['setting_base_help_url'] = 'Base Help URL';
-$_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
+$_lang['setting_base_help_url'] = 'URL допомоги';
+$_lang['setting_base_help_url_desc'] = 'URL допомоги у верхньому правому куті сторінок системи керування.';
 
 $_lang['setting_blocked_minutes'] = 'Тривалість блокування';
 $_lang['setting_blocked_minutes_desc'] = 'Тут Ви можете вказати час (у хвилинах), на який буде заблоковано користувача в разі перевищення кількості невдалих спроб входу до системи. Будь ласка, вводьте лише цифри (без ком, пробілів тощо)';
