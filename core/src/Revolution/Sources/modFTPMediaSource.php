@@ -155,7 +155,7 @@ class modFTPMediaSource extends modMediaSource
                 'name' => 'imageExtensions',
                 'desc' => 'prop_file.imageExtensions_desc',
                 'type' => 'textfield',
-                'value' => 'jpg,jpeg,png,gif',
+                'value' => 'jpg,jpeg,png,gif,webp',
                 'lexicon' => 'core:source',
             ],
             'skipFiles' => [
