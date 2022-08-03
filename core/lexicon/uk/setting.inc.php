@@ -133,71 +133,71 @@ $_lang['setting_cache_alias_map_desc'] = 'Якщо увімкнено, усі UR
 $_lang['setting_use_context_resource_table'] = 'Use the context resource table';
 $_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
-$_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
-$_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
+$_lang['setting_cache_context_settings'] = 'Включити кешування налаштувань контекстів';
+$_lang['setting_cache_context_settings_desc'] = 'Якщо вибрано "Так", параметри контекстів кешуватимуться для прискорення завантаження сторінок.';
 
-$_lang['setting_cache_db'] = 'Enable Database Cache';
-$_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
+$_lang['setting_cache_db'] = 'Увімкнути кешування бази даних';
+$_lang['setting_cache_db_desc'] = 'Якщо вибрано "Так", об\'єкти та набори результатів вибірки за SQL-запитами кешуються, значно знижуючи навантаження на базу.';
 
-$_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
-$_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
+$_lang['setting_cache_db_expires'] = 'Час життя кешу бази даних';
+$_lang['setting_cache_db_expires_desc'] = 'Значення (у секундах) встановлює час життя кешу для результатів запиту до бази даних.';
 
-$_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
-$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+$_lang['setting_cache_db_session'] = 'Включити кешування сесій, що обробляються базою даних';
+$_lang['setting_cache_db_session_desc'] = 'Якщо вибрано «Так», і налаштування «cache_db» увімкнено, сесії, що зберігаються в базі даних, також кешуватимуться.';
 
-$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
-$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+$_lang['setting_cache_db_session_lifetime'] = 'Час життя кешу сесій бази даних';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'Значення (у секундах) встановлює час життя кешу сесій бази даних.';
 
-$_lang['setting_cache_default'] = 'Cacheable default';
-$_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
-$_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
+$_lang['setting_cache_default'] = 'Кешований за замовчуванням';
+$_lang['setting_cache_default_desc'] = 'Виберіть «Так», щоб зробити все нові ресурси кешованими за замовчуванням.';
+$_lang['setting_cache_default_err'] = 'Кешувати ресурси за промовчанням?';
 
-$_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
-$_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
+$_lang['setting_cache_expires'] = 'Час життя кешу';
+$_lang['setting_cache_expires_desc'] = 'Значення (у секундах) встановлює час кешу.';
 
-$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
-$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
+$_lang['setting_cache_resource_clear_partial'] = 'Часткове очищення кешу для зазначених контекстів';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'Коли увімкнено, MODX оновить кеш ресурсів лише для зазначених контекстів.';
 
-$_lang['setting_cache_format'] = 'Caching Format to Use';
-$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
+$_lang['setting_cache_format'] = 'Використовуваний формат кешу';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = серіалізація. Виберіть один із форматів.';
 
-$_lang['setting_cache_handler'] = 'Caching Handler Class';
-$_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching.';
+$_lang['setting_cache_handler'] = 'Клас-обробник системи кешування';
+$_lang['setting_cache_handler_desc'] = 'Назва класу-обробника, що використовується для кешування.';
 
-$_lang['setting_cache_lang_js'] = 'Cache Lexicon JS Strings';
-$_lang['setting_cache_lang_js_desc'] = 'If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
+$_lang['setting_cache_lang_js'] = 'Кешувати JavaScript-файли із записами словника';
+$_lang['setting_cache_lang_js_desc'] = 'Якщо вибрано «Так», будуть додані заголовки, що кеширують, до JavaScript-файлів із записами словників для системи управління.';
 
-$_lang['setting_cache_lexicon_topics'] = 'Cache Lexicon Topics';
-$_lang['setting_cache_lexicon_topics_desc'] = 'When enabled, all Lexicon Topics will be cached so as to greatly reduce load times for Internationalization functionality. MODX strongly recommends leaving this set to \'Yes\'.';
+$_lang['setting_cache_lexicon_topics'] = 'Кешувати теми словників';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Якщо вибрано "Так", всі теми словників будуть кешуватися для збільшення швидкості завантаження сторінок системи керування. MODX рекомендує залишити цей параметр увімкненим ("Так").';
 
-$_lang['setting_cache_noncore_lexicon_topics'] = 'Cache Non-Core Lexicon Topics';
-$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'When disabled, non-core Lexicon Topics will be not be cached. This is useful to disable when developing your own Extras.';
+$_lang['setting_cache_noncore_lexicon_topics'] = 'Кешувати теми словників, які не входять до ядра';
+$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Якщо вибрано "Ні", теми словників, які не входять до ядра, не будуть кешуватися. Це може бути зручним при розробці компонентів.';
 
-$_lang['setting_cache_resource'] = 'Enable Partial Resource Cache';
-$_lang['setting_cache_resource_desc'] = 'Partial resource caching is configurable by resource when this feature is enabled.  Disabling this feature will disable it globally.';
+$_lang['setting_cache_resource'] = 'Включити часткове кешування ресурсів';
+$_lang['setting_cache_resource_desc'] = 'Якщо вибрано "Так", часткове кешування визначається самими ресурсами. Вимкнення опції відключить його на всьому сайті.';
 
-$_lang['setting_cache_resource_expires'] = 'Expiration Time for Partial Resource Cache';
-$_lang['setting_cache_resource_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for partial Resource caching.';
+$_lang['setting_cache_resource_expires'] = 'Час життя часткового кешу ресурсів';
+$_lang['setting_cache_resource_expires_desc'] = 'Значення (у секундах) встановлює час часткового кешу ресурсів.';
 
-$_lang['setting_cache_scripts'] = 'Enable Script Cache';
-$_lang['setting_cache_scripts_desc'] = 'When enabled, MODX will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODX recommends leaving this set to \'Yes\'.';
+$_lang['setting_cache_scripts'] = 'Увімкнути кешування скриптів';
+$_lang['setting_cache_scripts_desc'] = 'Якщо вибрано «Так», MODX кешуватиме всі скрипти (сніппети та плагіни) у файли для збільшення швидкості завантаження. MODX рекомендує залишити це налаштування увімкненим («Так»).';
 
-$_lang['setting_cache_system_settings'] = 'Enable System Setting Cache';
-$_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODX recommends leaving this on.';
+$_lang['setting_cache_system_settings'] = 'Увімкнути кешування налаштувань системи';
+$_lang['setting_cache_system_settings_desc'] = 'Якщо вибрано "Так", налаштування системи будуть кешуватися для прискорення завантаження сторінок. MODX рекомендує залишити це налаштування увімкненим ("Так").';
 
-$_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear';
-$_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
+$_lang['setting_clear_cache_refresh_trees'] = 'Оновлювати деревоподібні меню під час очищення кешу сайту';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'Якщо вибрано "Так", після оновлення кешу сайту оновлюватимуться деревоподібні меню.';
 
-$_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css'] = 'Використовувати стислий CSS';
+$_lang['setting_compress_css_desc'] = 'Якщо вибрано "Так", MODX буде використовувати стислі версії файлів CSS-стилів у системі керування.';
 
-$_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a compressed version of the core scripts file.';
+$_lang['setting_compress_js'] = 'Використовувати стиснуті JavaScript бібліотеки';
+$_lang['setting_compress_js_desc'] = 'Якщо вибрано "Так", MODX надаватиме стислу версію файлу зі скриптами системи керування.';
 
-$_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
-$_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
+$_lang['setting_compress_js_groups'] = 'Використовувати угруповання під час стиснення JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Групувати JavaScript-файли системи керування MODX, використовуючи конфігурацію "groupsConfig" для компресора Google. Виберіть «Так», якщо ви використовуєте розширення suhosin або інші обмеження.';
 
-$_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
+$_lang['setting_concat_js'] = 'Використовувати об\'єднані JavaScript-бібліотеки';
 $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
 $_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
@@ -635,7 +635,7 @@ $_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the ses
 $_lang['setting_session_handler_class'] = 'Session Handler Class Name';
 $_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
-$_lang['setting_session_name'] = 'Session Name';
+$_lang['setting_session_name'] = 'Назва сесii';
 $_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODX. Leave blank to use the default PHP session name.';
 
 $_lang['setting_settings_version'] = 'Settings Version';
@@ -644,7 +644,7 @@ $_lang['setting_settings_version_desc'] = 'The current installed version of MODX
 $_lang['setting_settings_distro'] = 'Settings Distribution';
 $_lang['setting_settings_distro_desc'] = 'The current installed distribution of MODX.';
 
-$_lang['setting_set_header'] = 'Set HTTP Headers';
+$_lang['setting_set_header'] = 'Встановити HTTP-заголовки';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
 $_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
@@ -657,7 +657,7 @@ $_lang['setting_signupemail_message'] = 'Sign-up email';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
-$_lang['setting_site_name'] = 'Site name';
+$_lang['setting_site_name'] = 'Назва сайту';
 $_lang['setting_site_name_desc'] = 'Enter the name of your site here.';
 $_lang['setting_site_name_err']  = 'Please enter a site name.';
 
@@ -665,7 +665,7 @@ $_lang['setting_site_start'] = 'Site start';
 $_lang['setting_site_start_desc'] = 'Enter the ID of the Resource you want to use as homepage here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
 $_lang['setting_site_start_err'] = 'Please specify a Resource ID that is the site start.';
 
-$_lang['setting_site_status'] = 'Site status';
+$_lang['setting_site_status'] = 'Статус сайту';
 $_lang['setting_site_status_desc'] = 'Select \'Yes\' to publish your site on the web. If you select \'No\', your visitors will see the \'Site unavailable message\', and won\'t be able to browse the site.';
 $_lang['setting_site_status_err'] = 'Please select whether or not the site is online (Yes) or offline (No).';
 
