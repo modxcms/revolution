@@ -61,10 +61,10 @@ class modTemplateVarInputRenderListboxMultiple extends modTemplateVarInputRender
 
         // Ensure custom values are displayed when the listbox is editable
         if (isset($params['forceSelection']) && empty($params['forceSelection'])) {
-            $customSelections = array_diff($savedValues, $optsValues);
-            if (!empty($customSelections)) {
+            $customValues = array_diff($savedValues, $optsValues);
+            if (!empty($customValues)) {
                 $customData = [];
-                foreach ($customSelections as $customValue) {
+                foreach ($customValues as $customValue) {
                     $customValue = htmlspecialchars($customValue, ENT_COMPAT, 'UTF-8');
                     $customData[] = [
                         'text' => $customValue,
