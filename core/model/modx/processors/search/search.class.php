@@ -184,6 +184,7 @@ class modSearchProcessor extends modProcessor
                 'modResource.context_key:IN' => $contextKeys,
             )
         ));
+        $c->sortby('IF(`modResource`.`pagetitle` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->sortby('modResource.createdon', 'DESC');
 
         $c->limit($this->maxResults);
@@ -213,7 +214,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
             'OR:id:=' => $this->query,
         ));
-
+        $c->sortby('IF(`name` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection('modSnippet', $c);
@@ -239,7 +240,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
             'OR:id:=' => $this->query,
         ));
-
+        $c->sortby('IF(`name` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
@@ -265,7 +266,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
             'OR:id:=' => $this->query,
         ));
-
+        $c->sortby('IF(`templatename` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
@@ -291,7 +292,7 @@ class modSearchProcessor extends modProcessor
             'OR:description:LIKE' => '%' . $this->query .'%',
             'OR:id:=' => $this->query,
         ));
-
+        $c->sortby('IF(`name` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
@@ -317,7 +318,7 @@ class modSearchProcessor extends modProcessor
             'OR:caption:LIKE' => '%' . $this->query .'%',
             'OR:id:=' => $this->query,
         ));
-
+        $c->sortby('IF(`name` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->limit($this->maxResults);
 
         $collection = $this->modx->getCollection($class, $c);
@@ -349,7 +350,7 @@ class modSearchProcessor extends modProcessor
             'OR:Profile.email:LIKE' => '%' . $this->query .'%',
             'OR:id:=' => $this->query,
         ));
-
+        $c->sortby('IF(`username` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->limit($this->maxResults);
 
         /** @var modUserProfile[] $collection */
