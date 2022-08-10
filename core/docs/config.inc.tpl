@@ -57,14 +57,14 @@ if (!defined('MODX_URL_SCHEME')) {
 }
 if (!defined('MODX_HTTP_HOST')) {
     if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
-        $http_host='{http_host}';
+        $http_host = '{http_host}';
         define('MODX_HTTP_HOST', $http_host);
     } else {
         $http_host= array_key_exists('HTTP_HOST', $_SERVER) ? htmlspecialchars($_SERVER['HTTP_HOST'], ENT_QUOTES) : '{http_host}';
-        if ($_SERVER['SERVER_PORT'] != 80) {
-            $http_host= str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host); // remove port from HTTP_HOST
+        if ($_SERVER['SERVER_PORT'] !== 80) {
+            $http_host = str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host);
         }
-        $http_host .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
+        $http_host .= in_array($_SERVER['SERVER_PORT'], [80, 443]) ? '' : ':' . $_SERVER['SERVER_PORT'];
         define('MODX_HTTP_HOST', $http_host);
     }
 }

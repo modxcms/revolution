@@ -69,13 +69,13 @@ abstract class modConfigReader {
      */
     public function getHttpHost() {
         if (php_sapi_name() != 'cli') {
-            $this->config['https_port'] = isset ($_POST['httpsport']) ? $_POST['httpsport'] : '443';
+            $this->config['https_port'] = isset($_POST['httpsport']) ? $_POST['httpsport'] : 443;
             $isSecureRequest = ((isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') || $_SERVER['SERVER_PORT'] == $this->config['https_port']);
-            $this->config['http_host']= $_SERVER['HTTP_HOST'];
+            $this->config['http_host'] = $_SERVER['HTTP_HOST'];
             if ($_SERVER['SERVER_PORT'] != 80) {
-                $this->config['http_host']= str_replace(':' . $_SERVER['SERVER_PORT'], '', $this->config['http_host']); /* remove port from HTTP_HOST */
+                $this->config['http_host'] = str_replace(':' . $_SERVER['SERVER_PORT'], '', $this->config['http_host']);
             }
-            $this->config['http_host'] .= ($_SERVER['SERVER_PORT'] == 80 || $isSecureRequest) ? '' : ':' . $_SERVER['SERVER_PORT'];
+            $this->config['http_host'] .= in_array($_SERVER['SERVER_PORT'], [80, 443]) ? '' : ':' . $_SERVER['SERVER_PORT'];
         } else {
             $this->config['http_host'] = 'localhost';
             $this->config['https_port'] = 443;
