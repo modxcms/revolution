@@ -143,7 +143,7 @@ class modFileMediaSource extends modMediaSource
                 'name' => 'imageExtensions',
                 'desc' => 'prop_file.imageExtensions_desc',
                 'type' => 'textfield',
-                'value' => 'jpg,jpeg,png,gif,svg',
+                'value' => 'jpg,jpeg,png,gif,svg,webp',
                 'lexicon' => 'core:source',
             ],
             'thumbnailType' => [
@@ -154,6 +154,7 @@ class modFileMediaSource extends modMediaSource
                     ['name' => 'PNG', 'value' => 'png'],
                     ['name' => 'JPG', 'value' => 'jpg'],
                     ['name' => 'GIF', 'value' => 'gif'],
+                    ['name' => 'WebP', 'value' => 'webp'],
                 ],
                 'value' => 'png',
                 'lexicon' => 'core:source',
