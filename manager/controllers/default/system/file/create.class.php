@@ -84,7 +84,7 @@ class SystemFileCreateManagerController extends modManagerController
         $directory = !empty($scriptProperties['directory']) ? $scriptProperties['directory'] : '';
 
         $this->fileRecord = [
-            'directory' => strip_tags(preg_replace('#^[.\/]+#u', '', $directory)),
+            'directory' => strip_tags(preg_replace('#^(\.{2}|/)+#u', '', $directory)),
             'source' => $source->get('id'),
         ];
 
