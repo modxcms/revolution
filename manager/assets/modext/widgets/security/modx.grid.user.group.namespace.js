@@ -18,9 +18,21 @@ MODx.grid.UserGroupNamespace = function(config) {
             action: 'Security/Access/UserGroup/AccessNamespace/GetList'
             ,usergroup: config.usergroup
         }
+        ,fields: [
+            'id',
+			'target',
+			'name',
+			'principal',
+			'authority',
+			'authority_name',
+			'policy',
+            'context_key',
+            'policy_name',
+			'permissions',
+			'cls'
+        ]
         ,paging: true
         ,hideMode: 'offsets'
-        ,fields: ['id','target','name','principal','authority','authority_name','policy', 'context_key', 'policy_name','permissions','menu']
         ,grouping: true
         ,groupBy: 'authority_name'
         ,singleText: _('policy')
@@ -29,93 +41,170 @@ MODx.grid.UserGroupNamespace = function(config) {
         ,sortDir: 'ASC'
         ,remoteSort: true
         ,plugins: [this.exp]
-        ,columns: [this.exp,{
-            header: _('namespace')
-            ,dataIndex: 'name'
-            ,width: 120
-            ,sortable: true
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=workspaces/namespace'
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        },{
-            header: _('minimum_role')
-            ,dataIndex: 'authority_name'
-            ,width: 100
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/permission'
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        },{
-            header: _('policy')
-            ,dataIndex: 'policy_name'
-            ,width: 200
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/access/policy/update&id=' + record.data.policy
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        }]
-        ,tbar: [{
-            text: _('namespace_add')
-            ,cls:'primary-button'
-            ,scope: this
-            ,handler: this.createAcl
-        },'->',{
-            xtype: 'modx-combo-namespace'
-            ,id: 'modx-ugnamespace-namespace-filter'
-            ,emptyText: _('filter_by_namespace')
-            ,width: 200
-            ,allowBlank: true
-            ,listeners: {
-                'select': {fn:this.filterNamespace,scope:this}
+        ,columns: [
+            this.exp,
+            {
+                header: _('namespace')
+                ,dataIndex: 'name'
+                ,width: 120
+                ,sortable: true
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('workspaces/namespace', 'name')
+            },{
+                header: _('minimum_role')
+                ,dataIndex: 'authority_name'
+                ,width: 100
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('security/permission', 'authority_name')
+            },{
+                header: _('policy')
+                ,dataIndex: 'policy_name'
+                ,width: 200
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
+                    linkParams: [{ key: 'id', valueIndex: 'policy'}]
+                })
             }
-        },{
-            xtype: 'modx-combo-policy'
-            ,id: 'modx-ugnamespace-policy-filter'
-            ,emptyText: _('filter_by_policy')
-            ,allowBlank: true
-            ,baseParams: {
-                action: 'Security/Access/Policy/GetList'
-                ,group: 'Namespace'
+        ]
+        ,tbar: [
+            {
+                text: _('namespace_add')
+                ,cls:'primary-button'
+                ,scope: this
+                ,handler: this.createAcl
+            },
+            '->',
+            {
+                xtype: 'modx-combo-namespace'
+                ,itemId: 'filter-namespace'
+                ,emptyText: _('filter_by_namespace')
+                ,editable: false
+                ,width: 200
+                ,allowBlank: true
+                ,baseParams: {
+                    action: 'Workspace/PackageNamespace/GetList',
+                    isGridFilter: true,
+                    usergroup: config.usergroup
+                }
+                ,listeners: {
+                    select: {
+                        fn: function(cmp, record, selectedIndex) {
+                            this.filterNamespace(record);
+                            this.updateDependentFilter('filter-policy-namespace', 'namespace', record.data.name);
+                        },
+                        scope: this
+                    }
+                }
+            },{
+                xtype: 'modx-combo-policy'
+                ,itemId: 'filter-policy-namespace'
+                ,emptyText: _('filter_by_policy')
+                ,width: 180
+                ,allowBlank: true
+                ,baseParams: {
+                    action: 'Security/Access/Policy/GetList',
+                    group: 'Namespace',
+                    isGridFilter: true,
+                    targetGrid: 'MODx.grid.UserGroupNamespace',
+                    usergroup: config.usergroup
+                }
+                ,listeners: {
+                    select: {
+                        fn: function(cmp, record, selectedIndex) {
+                            this.filterPolicy(record);
+                            this.updateDependentFilter('filter-namespace', 'policy', record.data.id);
+                        },
+                        scope: this
+                    }
+                }
+            },{
+                text: _('filter_clear')
+                ,itemId: 'filter-clear'
+                ,handler: function(cmp, e) {
+                    this.clearFilter();
+                    this.updateDependentFilter('filter-policy-namespace', 'namespace', '', true);
+                    this.updateDependentFilter('filter-namespace', 'policy', '', true);
+                }
+                ,scope: this
             }
-            ,listeners: {
-                'select': {fn:this.filterPolicy,scope:this}
-            }
-        },{
-            text: _('filter_clear')
-            ,id: 'modx-ugnamespace-clear-filter'
-            ,handler: this.clearFilter
-            ,scope: this
-        }]
+        ]
     });
     MODx.grid.UserGroupNamespace.superclass.constructor.call(this,config);
     this.addEvents('createAcl','updateAcl');
+
+    const gridFilterData = [
+        { filterId: 'filter-policy-namespace', dependentParams: ['namespace'] },
+        { filterId: 'filter-namespace', dependentParams: ['policy'] }
+    ];
+
+    this.on({
+        createAcl: function() {
+            if (arguments[0].a.response.status == 200) {
+                this.clearFilter();
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        updateAcl: function() {
+            if (arguments[0].a.response.status == 200) {
+                this.clearFilter();
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        afterRemoveRow: function() {
+            this.clearFilter();
+            this.refreshFilterOptions(gridFilterData);
+        }
+    });
 };
 Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
 
-    ,filterNamespace: function(cb,rec,ri) {
-        this.getStore().baseParams['namespace'] = rec.data['name'];
+    ,getMenu: function() {
+        const record = this.getSelectionModel().getSelected(),
+              permissions = record.data.cls,
+              menu = []
+        ;
+
+        if (this.getSelectionModel().getCount() > 1) {
+            // Currently not allowing bulk actions for this grid
+        } else {
+            if (permissions.indexOf('pedit') != -1) {
+                menu.push({
+                    text: _('access_namespace_update'),
+                    handler: this.updateAcl
+                });
+            }
+            if (permissions.indexOf('premove') != -1) {
+                if (menu.length > 0) {
+                    menu.push('-');
+                }
+                menu.push({
+                    text: _('access_namespace_remove'),
+                    handler: this.remove.createDelegate(this,['confirm_remove','Security/Access/UserGroup/AccessNamespace/Remove'])
+                });
+            }
+        }
+
+        if (menu.length > 0) {
+            this.addContextMenuItem(menu);
+        }
+    }
+
+    ,filterNamespace: function(record) {
+        this.getStore().baseParams['namespace'] = record.data['name'];
         this.getBottomToolbar().changePage(1);
     }
 
-    ,filterPolicy: function(cb,rec,ri) {
-        this.getStore().baseParams['policy'] = rec.data['id'];
+    ,filterPolicy: function(record) {
+        this.getStore().baseParams['policy'] = record.data['id'];
         this.getBottomToolbar().changePage(1);
     }
 
-    ,clearFilter: function(btn,e) {
-        Ext.getCmp('modx-ugnamespace-namespace-filter').setValue('');
-        this.getStore().baseParams['source'] = '';
-        Ext.getCmp('modx-ugnamespace-policy-filter').setValue('');
-        this.getStore().baseParams['policy'] = '';
+    ,clearFilter: function() {
+        const gridStore = this.getStore();
+        gridStore.baseParams['namespace'] = '';
+        gridStore.baseParams['policy'] = '';
         this.getBottomToolbar().changePage(1);
     }
 

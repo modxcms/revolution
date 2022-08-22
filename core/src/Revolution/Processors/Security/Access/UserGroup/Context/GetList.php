@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -67,7 +68,7 @@ class GetList extends GetListProcessor
         $userGroup = $this->getProperty('usergroup');
         $c->where([
             'principal_class' => modUserGroup::class,
-            'principal' => $userGroup,
+            'principal' => $userGroup
         ]);
         $context = $this->getProperty('context', false);
         if (!empty($context)) {
@@ -94,7 +95,6 @@ class GetList extends GetListProcessor
             'policy_name' => 'Policy.name',
             'policy_data' => 'Policy.data',
         ]);
-
         return $c;
     }
 
@@ -109,7 +109,10 @@ class GetList extends GetListProcessor
         if (empty($objectArray['name'])) {
             $objectArray['name'] = '(' . $this->modx->lexicon('none') . ')';
         }
-        $objectArray['authority_name'] = !empty($objectArray['role_name']) ? $objectArray['role_name'] . ' - ' . $objectArray['authority'] : $objectArray['authority'];
+        $objectArray['authority_name'] = !empty($objectArray['role_name'])
+            ? $objectArray['role_name'] . ' - ' . $objectArray['authority']
+            : $objectArray['authority']
+            ;
 
         /* get permissions list */
         $data = $objectArray['policy_data'];
@@ -127,7 +130,11 @@ class GetList extends GetListProcessor
         }
 
         $cls = '';
-        if (($objectArray['target'] === 'web' || $objectArray['target'] === 'mgr') && $objectArray['policy_name'] === 'Administrator' && ($this->userGroup && $this->userGroup->get('name') === 'Administrator')) {
+        if (
+            ($objectArray['target'] === 'web' || $objectArray['target'] === 'mgr')
+            && $objectArray['policy_name'] === 'Administrator'
+            && ($this->userGroup && $this->userGroup->get('name') === 'Administrator')
+        ) {
         } else {
             $cls .= 'pedit premove';
         }
