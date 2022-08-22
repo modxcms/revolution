@@ -79,7 +79,6 @@ MODx.grid.Grid = function(config) {
         };
 
         Ext.applyIf(config.groupingConfig, groupingConfig);
-
         Ext.applyIf(config,{
             view: new Ext.grid.GroupingView(config.groupingConfig)
         });
@@ -392,6 +391,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     ,direction: this.config.sortDir || 'ASC'
                 }
                 ,remoteSort: this.config.remoteSort || false
+                ,remoteGroup: this.config.remoteGroup || false
                 ,groupField: this.config.groupBy || 'name'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
@@ -729,6 +729,42 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         return el.dom.outerHTML;
     }
 
+    /**
+     * @property {Function} getLinkTemplate - Adds a link on a grid column's value based on the passed params.
+     * Usage of this method is necessary for grouping grids, where usage of renderers on its column model
+     * interfere with the grouping functionality.
+     *
+     * @param {String} controllerPath - The initial part of the URL query indicating the controller action
+     * @param {String} displayValueIndex - The data index used as the link's text
+     * @param {Object} options - Additional URL query parameters (linkParams) and attributes for the link's anchor tag
+     * @return {Ext.Template}
+     */
+    ,getLinkTemplate: function(controllerPath, displayValueIndex, options = {}) {
+        /*
+            linkParams, if given, should be an array of objects in the following format:
+            [{ key: 'paramKey', valueIndex: 'paramValue' }, ...{}]
+        */
+        Ext.applyIf(options, {
+            linkParams: [],
+            linkClass: 'x-grid-link',
+            linkTitle: _('edit'),
+            linkTarget: '_blank'
+        });
+        let params = '';
+        controllerPath = controllerPath.indexOf('?a=') === 0 ? controllerPath : `?a=${controllerPath}` ;
+        if (options.linkParams.length > 0) {
+            params = [];
+            options.linkParams.forEach(param => {
+                params.push(`${param.key}={${param.valueIndex}}`);
+            });
+            params = `&${params.join('&')}`;
+        }
+        return new Ext.Template(
+            `<tpl><a href="${controllerPath}${params}" class="${options.linkClass}" title="${options.linkTitle}" target="${options.linkTarget}">{${displayValueIndex}:htmlEncode}</a></tpl>`,
+            { compiled: true }
+        );
+    }
+
     ,getActions: function(record, rowIndex, colIndex, store) {
         return [];
     }
@@ -892,6 +928,82 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         MODx.util.url.clearParams();
         this.getBottomToolbar().changePage(1);
     }
+    
+    /**
+     * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
+     * within a secondary container; they will be nested when they have labels and those labels are
+     * positioned above the filter's input.
+     */
+    ,hasNestedFilters: false
+
+    /**
+     * @property {Function} getFilterComponent - Gets a filter component from the top toolbar by its itemId
+     *
+     * @param {String} filterId - The Ext itemId of the filter component to fetch
+     * @return {Ext.Component}
+     */
+    ,getFilterComponent: function(filterId) {
+        const topToolbar = this.getTopToolbar(),
+              cmp = this.hasNestedFilters && filterId !== 'filter-query'
+                ? topToolbar.find('itemId', `${filterId}-container`)[0].getComponent(filterId)
+                : topToolbar.getComponent(filterId)
+        ;
+        if (typeof cmp !== 'undefined') {
+            return cmp;
+        }
+        console.error(`getFilterComponent: The filter component with itemId '${filterId}' could not be retrieved.`);
+    }
+
+    /**
+     * @property {Function} refreshFilterOptions - Used to syncronize a filter's store options to those available in its target grid
+     *
+     * @param {Array} filterData - An array of objects containing info needed to refresh each filter
+     * @param {Boolean} clearDependentParams - If true, will clear values of dependentParams specified in the filterData
+     */
+    ,refreshFilterOptions: function(filterData = [], clearDependentParams = true) {
+        if (filterData.length > 0) {
+            filterData.forEach(data => {
+                const filter = this.getFilterComponent(data.filterId);
+                if (filter) {
+                    const store = filter.getStore();
+                    filter.setValue('');
+                    if (store) {
+                        if (data.hasOwnProperty('dependentParams')) {
+                            const dependentParams = Array.isArray(data.dependentParams) ? data.dependentParams : data.dependentParams.split(',');
+                            dependentParams.forEach(param => {
+                                if (clearDependentParams && store.baseParams.hasOwnProperty(param)) {
+                                    store.baseParams[param] = '';
+                                }
+                            });
+                        }
+                        store.load();
+                    }
+                }
+            });
+        this.refresh();
+        }
+    }
+
+    /**
+     * @property {Function} updateDependentFilter - Reloads a related filter's store based on the current filter's selected item
+     *
+     * @param {String} filterId - The Ext id of the filter to update
+     * @param {String} paramKey - Filter baseParams property
+     * @param {Mixed} paramValue - Filter baseParams value for the paramKey
+     * @param {Boolean} clearValue - Set true to clear filter's selected value
+     */
+    ,updateDependentFilter: function(filterId, paramKey, paramValue, clearValue = false) {
+        const filter = this.getFilterComponent(filterId),
+              filterStore = filter ? filter.getStore() : null
+        ;
+        if (filterStore && typeof paramKey == 'string') {
+            if (clearValue) {
+                filter.setValue('');
+            }
+            filterStore.baseParams[paramKey] = paramValue;
+            filterStore.load();
+        }
+    }
 });
 
 /* local grid */
@@ -960,8 +1072,8 @@ MODx.grid.LocalGrid = function(config) {
 
     MODx.grid.LocalGrid.superclass.constructor.call(this,config);
     this.addEvents({
-        beforeRemoveRow: true
-        ,afterRemoveRow: true
+        beforeRemoveRow: true,
+        afterRemoveRow: true
     });
     this.on('rowcontextmenu',this._showMenu,this);
 };

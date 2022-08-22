@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -11,7 +12,9 @@
 namespace MODX\Revolution\Processors\Security\ResourceGroup;
 
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\modAccessResourceGroup;
 use MODX\Revolution\modResourceGroup;
+use MODX\Revolution\modUserGroup;
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -28,6 +31,48 @@ class GetList extends GetListProcessor
     public $languageTopics = ['access'];
     public $permission = 'resourcegroup_view';
 
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    private $isGridFilter;
+
+    public function initialize()
+    {
+        $initialized = parent::initialize();
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
+        return $initialized;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
+        /*
+            When this class is used to fetch data for a grid filter's store (combo),
+            limit results to only those resource groups present in the current grid.
+        */
+        if ($this->isGridFilter) {
+            if ($userGroup = $this->getProperty('usergroup', false)) {
+                $c->innerJoin(
+                    modAccessResourceGroup::class,
+                    'modAccessResourceGroup',
+                    [
+                        '`modAccessResourceGroup`.`target` = `modResourceGroup`.`id`',
+                        '`modAccessResourceGroup`.`principal` = ' . (int)$userGroup,
+                        '`modAccessResourceGroup`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
+                    ]
+                );
+            }
+            if ($policy = $this->getProperty('policy', false)) {
+                $c->where([
+                    '`modAccessResourceGroup`.`policy`' => (int)$policy
+                ]);
+            }
+        }
+        return $c;
+    }
+
     /**
      * Filter the query by the valueField of MODx.combo.ResourceGroup to get the initially value displayed right
      * @param xPDOQuery $c
@@ -42,7 +87,6 @@ class GetList extends GetListProcessor
                 $c->getAlias() . '.id:IN' => is_string($key) ? explode(',', $key) : $key,
             ]);
         }
-
         return $c;
     }
 }

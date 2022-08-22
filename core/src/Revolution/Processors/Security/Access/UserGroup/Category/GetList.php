@@ -138,17 +138,6 @@ class GetList extends GetListProcessor
             $cls .= 'pedit premove';
         }
         $objectArray['cls'] = $cls;
-        $objectArray['menu'] = [
-            [
-                'text' => $this->modx->lexicon('access_category_update'),
-                'handler' => 'this.updateAcl',
-            ],
-            '-',
-            [
-                'text' => $this->modx->lexicon('access_category_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["Security/Access/UserGroup/Category/Remove"])',
-            ]
-        ];
 
         return $objectArray;
     }

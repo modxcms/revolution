@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,8 +11,9 @@
 
 namespace MODX\Revolution\Processors\Context;
 
-
 use MODX\Revolution\modContext;
+use MODX\Revolution\modAccessContext;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -40,6 +42,9 @@ class GetList extends GetListProcessor
     /** @var boolean $canCreate Determines whether or not the user can create a context (/duplicate one) */
     public $canCreate = false;
 
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    private $isGridFilter;
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -54,7 +59,7 @@ class GetList extends GetListProcessor
         $this->canCreate = $this->modx->hasPermission('new_context');
         $this->canEdit = $this->modx->hasPermission('edit_context');
         $this->canRemove = $this->modx->hasPermission('delete_context');
-
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
         return $initialized;
     }
 
@@ -79,7 +84,28 @@ class GetList extends GetListProcessor
                 'key:NOT IN' => is_string($exclude) ? explode(',', $exclude) : $exclude,
             ]);
         }
-
+        /*
+            When this class is used to fetch data for a grid filter's store (combo),
+            limit results to only those contexts present in the current grid.
+        */
+        if ($this->isGridFilter) {
+            if ($userGroup = $this->getProperty('usergroup', false)) {
+                $c->innerJoin(
+                    modAccessContext::class,
+                    'modAccessContext',
+                    [
+                        '`modAccessContext`.`target` = `modContext`.`key`',
+                        '`modAccessContext`.`principal` = ' . (int)$userGroup,
+                        '`modAccessContext`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
+                    ]
+                );
+                if ($policy = $this->getProperty('policy', false)) {
+                    $c->where([
+                        '`modAccessContext`.`policy`' => (int)$policy
+                    ]);
+                }
+            }
+        }
         return $c;
     }
 

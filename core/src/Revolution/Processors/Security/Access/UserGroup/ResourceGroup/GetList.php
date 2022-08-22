@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -115,7 +116,10 @@ class GetList extends GetListProcessor
         if (empty($objectArray['name'])) {
             $objectArray['name'] = '(' . $this->modx->lexicon('none') . ')';
         }
-        $objectArray['authority_name'] = !empty($objectArray['role_name']) ? $objectArray['role_name'] . ' - ' . $objectArray['authority'] : $objectArray['authority'];
+        $objectArray['authority_name'] = !empty($objectArray['role_name'])
+            ? $objectArray['role_name'] . ' - ' . $objectArray['authority']
+            : $objectArray['authority']
+            ;
 
         /* get permissions list */
         $data = $objectArray['policy_data'];
@@ -132,22 +136,15 @@ class GetList extends GetListProcessor
         }
 
         $cls = '';
-        if (($objectArray['target'] === 'web' || $objectArray['target'] == 'mgr') && $objectArray['policy_name'] === 'Administrator' && ($this->userGroup && $this->userGroup->get('name') === 'Administrator')) {
+        if (
+            ($objectArray['target'] === 'web' || $objectArray['target'] == 'mgr')
+            && $objectArray['policy_name'] === 'Administrator'
+            && ($this->userGroup && $this->userGroup->get('name') === 'Administrator')
+        ) {
         } else {
             $cls .= 'pedit premove';
         }
         $objectArray['cls'] = $cls;
-        $objectArray['menu'] = [
-            [
-                'text' => $this->modx->lexicon('access_rgroup_update'),
-                'handler' => 'this.updateAcl',
-            ],
-            '-',
-            [
-                'text' => $this->modx->lexicon('access_rgroup_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["Security/Access/UserGroup/ResourceGroup/Remove"])',
-            ],
-        ];
 
         return $objectArray;
     }
