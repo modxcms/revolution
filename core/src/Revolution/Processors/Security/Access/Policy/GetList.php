@@ -43,7 +43,7 @@ class GetList extends GetListProcessor
     public $languageTopics = ['policy', 'en:policy'];
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
-    private $isGridFilter;
+    protected $isGridFilter;
 
     /**
      * @return bool
