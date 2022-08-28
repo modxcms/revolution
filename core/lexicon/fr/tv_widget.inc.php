@@ -26,7 +26,7 @@ $_lang['combo_allowaddnewdata_desc'] = 'Autorise l\'ajout de nouveaux éléments
 $_lang['combo_forceselection'] = 'Require Match';
 $_lang['combo_forceselection_desc'] = 'Only save typed option when it matches one already defined in the list.';
 $_lang['combo_forceselection_multi_desc'] = 'Si cette valeur est définie à Oui, seuls les éléments déjà dans la liste sont autorisés. Si Non, de nouvelles valeurs peuvent être saisies aussi.';
-$_lang['combo_listempty_text'] = 'Option Not Found Message';
+$_lang['combo_listempty_text'] = 'Option Message introuvable';
 $_lang['combo_listempty_text_desc'] = 'Message to display when typed text does not match existing options.';
 $_lang['combo_listheight'] = 'Largeur de liste';
 $_lang['combo_listheight_desc'] = 'La hauteur, en % ou en pixels, de la liste déroulante. Par défaut, hauteur de la combobox.';
@@ -40,7 +40,7 @@ $_lang['combo_title'] = 'Entête de liste';
 $_lang['combo_title_desc'] = 'Un élément d\'entête contenant ce texte est créé et ajouté en haut de la liste.';
 $_lang['combo_typeahead'] = 'Activer l\'auto-complétion';
 $_lang['combo_typeahead_desc'] = 'Populate and autoselect options that match as you type after a configurable delay. (Default: No)';
-$_lang['combo_typeahead_delay'] = 'Delay';
+$_lang['combo_typeahead_delay'] = 'Délai';
 $_lang['combo_typeahead_delay_desc'] = 'Milliseconds before a matched option is shown. (Default: 250)';
 $_lang['date'] = 'Date';
 $_lang['date_format'] = 'Format de date';
@@ -57,14 +57,14 @@ $_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/
         </ul>
     </div>
 ';
-$_lang['date_use_current'] = 'Use Current Date as Fallback';
+$_lang['date_use_current'] = 'Utiliser la date actuelle comme valeur de secours';
 $_lang['date_use_current_desc'] = 'When a value for this TV is not required (Allow Blank = “Yes”) and a Default Date is not specified, setting this option to “Yes” will display the current date.';
 $_lang['default'] = 'Défaut';
-$_lang['default_date_now'] = 'Today with Current Time';
-$_lang['default_date_today'] = 'Today (midnight)';
-$_lang['default_date_yesterday'] = 'Yesterday (midnight)';
-$_lang['default_date_tomorrow'] = 'Tomorrow (midnight)';
-$_lang['default_date_custom'] = 'Custom (see description below)';
+$_lang['default_date_now'] = 'Aujourd\'hui avec l\'heure actuelle';
+$_lang['default_date_today'] = 'Aujourd\'hui (minuit)';
+$_lang['default_date_yesterday'] = 'Hier (minuit)';
+$_lang['default_date_tomorrow'] = 'Demain (minuit)';
+$_lang['default_date_custom'] = 'Personnalisé (voir description ci-dessous)';
 $_lang['delim'] = 'Délimiteur';
 $_lang['delimiter'] = 'Délimiteur';
 $_lang['delimiter_desc'] = 'One or more characters used to separate values (applicable to TVs supporting multiple chooseable options).';
@@ -93,7 +93,7 @@ $_lang['email'] = 'E-mail';
 $_lang['file'] = 'Enregistrer';
 $_lang['height'] = 'Hauteur';
 $_lang['hidden'] = 'Masqué';
-$_lang['hide_time'] = 'Hide Time Option';
+$_lang['hide_time'] = 'Cacher l\'option de temps';
 $_lang['hide_time_desc'] = 'Removes the ability to choose a time from this TV’s date picker.';
 $_lang['htmlarea'] = 'Zone HTML';
 $_lang['htmltag'] = 'Balise HTML';
