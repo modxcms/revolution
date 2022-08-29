@@ -34,7 +34,7 @@ class GetList extends GetListProcessor
     public $permission = 'namespaces';
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
-    private $isGridFilter;
+    protected $isGridFilter = false;
 
     /**
      * {@inheritDoc}
