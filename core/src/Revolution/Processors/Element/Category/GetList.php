@@ -36,7 +36,7 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'category';
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
-    protected $isGridFilter;
+    protected $isGridFilter = false;
 
     public function initialize()
     {
