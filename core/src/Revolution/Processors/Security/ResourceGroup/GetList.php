@@ -32,7 +32,7 @@ class GetList extends GetListProcessor
     public $permission = 'resourcegroup_view';
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
-    private $isGridFilter;
+    protected $isGridFilter = false;
 
     public function initialize()
     {
