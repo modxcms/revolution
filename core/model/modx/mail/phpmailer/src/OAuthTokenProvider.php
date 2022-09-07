@@ -1,10 +1,10 @@
 <?php
 
 /**
- * PHPMailer Exception class.
+ * PHPMailer - PHP email creation and transport class.
  * PHP Version 5.5.
  *
- * @see       https://github.com/PHPMailer/PHPMailer/ The PHPMailer GitHub project
+ * @see https://github.com/PHPMailer/PHPMailer/ The PHPMailer GitHub project
  *
  * @author    Marcus Bointon (Synchro/coolbru) <phpmailer@synchromedia.co.uk>
  * @author    Jim Jagielski (jimjag) <jimjag@gmail.com>
@@ -22,19 +22,23 @@
 namespace PHPMailer\PHPMailer;
 
 /**
- * PHPMailer exception handler.
+ * OAuthTokenProvider - OAuth2 token provider interface.
+ * Provides base64 encoded OAuth2 auth strings for SMTP authentication.
  *
- * @author Marcus Bointon <phpmailer@synchromedia.co.uk>
+ * @see     OAuth
+ * @see     SMTP::authenticate()
+ *
+ * @author  Peter Scopes (pdscopes)
+ * @author  Marcus Bointon (Synchro/coolbru) <phpmailer@synchromedia.co.uk>
  */
-class Exception extends \Exception
+interface OAuthTokenProvider
 {
     /**
-     * Prettify error message output.
+     * Generate a base64-encoded OAuth token ensuring that the access token has not expired.
+     * The string to be base 64 encoded should be in the form:
+     * "user=<user_email_address>\001auth=Bearer <access_token>\001\001"
      *
      * @return string
      */
-    public function errorMessage()
-    {
-        return '<strong>' . htmlspecialchars($this->getMessage(), ENT_COMPAT | ENT_HTML401) . "</strong><br />\n";
-    }
+    public function getOauth64();
 }
