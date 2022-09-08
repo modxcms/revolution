@@ -103,7 +103,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $hideTooltips = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false' ? true : false;
         $editAction = $this->getEditActionId();
 
-        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
+        $imagesExts = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg,webp');
         $imagesExts = explode(',',$imagesExts);
         $skipFiles = $this->getOption('skipFiles',$properties,'.svn,.git,_notes,nbproject,.idea,.DS_Store');
         $skipFiles = explode(',',$skipFiles);
@@ -679,7 +679,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         if (!$file->isReadable()) {
             $this->addError('file',$this->xpdo->lexicon('file_err_perms'));
         }
-        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
+        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg,webp');
         $imageExtensions = explode(',',$imageExtensions);
         $fileExtension = pathinfo($objectPath,PATHINFO_EXTENSION);
 
@@ -1030,7 +1030,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
         $modAuth = $this->xpdo->user->getUserToken($this->xpdo->context->get('key'));
 
         /* get default settings */
-        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg');
+        $imageExtensions = $this->getOption('imageExtensions',$properties,'jpg,jpeg,png,gif,svg,webp');
         $imageExtensions = explode(',',$imageExtensions);
         $use_multibyte = $this->ctx->getOption('use_multibyte', false);
         $encoding = $this->ctx->getOption('modx_charset', 'UTF-8');
@@ -1292,7 +1292,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                 'name' => 'imageExtensions',
                 'desc' => 'prop_file.imageExtensions_desc',
                 'type' => 'textfield',
-                'value' => 'jpg,jpeg,png,gif,svg',
+                'value' => 'jpg,jpeg,png,gif,svg,webp',
                 'lexicon' => 'core:source',
             ),
             'thumbnailType' => array(
@@ -1303,6 +1303,7 @@ class modFileMediaSource extends modMediaSource implements modMediaSourceInterfa
                     array('name' => 'PNG','value' => 'png'),
                     array('name' => 'JPG','value' => 'jpg'),
                     array('name' => 'GIF','value' => 'gif'),
+                    array('name' => 'WebP','value' => 'webp'),
                 ),
                 'value' => 'png',
                 'lexicon' => 'core:source',
