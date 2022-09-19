@@ -40,6 +40,11 @@ class modPhpThumb extends phpThumb
             define('IMG_WEBP', 32);
         }
 
+        if (version_compare(PHP_VERSION, '8.1.0', '<=')) {
+            // The constant IMG_AVIF is available as of PHP 8.1.
+            define('IMG_AVIF', 256);
+        }
+
         parent::__construct();
     }
 
