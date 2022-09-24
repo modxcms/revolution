@@ -63,12 +63,12 @@ class GetList extends GetListProcessor
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select([
-            'modAccessPermission.id',
+            'id' => 'MIN(modAccessPermission.id)',
             'modAccessPermission.name',
             'modAccessPermission.description',
             'Template.lexicon',
         ]);
-        $c->groupby('modAccessPermission.id');
+        $c->groupby('modAccessPermission.name, modAccessPermission.description, Template.lexicon');
         $name = $this->getProperty('name', '');
         if (!empty($name)) {
             $c->where([
