@@ -176,6 +176,8 @@ input::-moz-focus-inner {
 
     img {
       display: block;
+      max-width: 400px;
+      max-height: 400px;
     }
   }
 

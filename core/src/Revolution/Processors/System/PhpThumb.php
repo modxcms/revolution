@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -68,6 +69,13 @@ class PhpThumb extends Processor
 
         $src = $this->source->prepareSrcForThumb($src);
         if (empty($src)) {
+            return '';
+        }
+
+        if (pathinfo($src)['extension'] == 'svg') {
+            /* Skip thumbnail generation for svg and output the file directly */
+            header('Content-Type: image/svg+xml');
+            echo file_get_contents($src);
             return '';
         }
 
