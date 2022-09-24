@@ -10,6 +10,10 @@
 
 namespace MODX\Revolution\Processors\System\Derivatives;
 
+use MODX\Revolution\modDocument;
+use MODX\Revolution\modStaticResource;
+use MODX\Revolution\modSymLink;
+use MODX\Revolution\modWebLink;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
 use xPDO\Om\xPDOObject;
@@ -52,9 +56,9 @@ class GetList extends Processor
         $actions = explode(',', $this->getProperty('restrict_actions'));
 
         $map = [
-            'MODX\Revolution\modWebLink' => 'weblink',
-            'MODX\Revolution\modSymLink' => 'symlink',
-            'MODX\Revolution\modStaticResource' => 'static_resource',
+            modWebLink::class => 'weblink',
+            modSymLink::class => 'symlink',
+            modStaticResource::class => 'static_resource',
         ];
 
         foreach ($actions as $action) {
@@ -63,7 +67,7 @@ class GetList extends Processor
             }
 
             foreach ($descendents as $descendent) {
-                if ($descendent === 'MODX\Revolution\modDocument') {
+                if ($descendent === modDocument::class) {
                     continue;
                 }
 
