@@ -37,8 +37,8 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
-        @rmdir(MODX_BASE_PATH.'assets/test5/');
-        @rmdir(MODX_BASE_PATH.'assets/test6/');
+        @rmdir(MODX_BASE_PATH . 'assets/test5/');
+        @rmdir(MODX_BASE_PATH . 'assets/test6/');
     }
     /**
      * Cleanup data after this test case.
@@ -49,8 +49,8 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
-        @rmdir(MODX_BASE_PATH.'assets/test5/');
-        @rmdir(MODX_BASE_PATH.'assets/test6/');
+        @rmdir(MODX_BASE_PATH . 'assets/test5/');
+        @rmdir(MODX_BASE_PATH . 'assets/test6/');
     }
     /**
      * Setup fixtures before each test.
@@ -232,7 +232,10 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             $dirs = $result;
         }
         $success = !$response->isError() && is_array($dirs) && !empty($dirs);
-        $this->assertTrue($success,'Could not get list of files and dirs ignoring symlink in '.GetList::class.' test '.__METHOD__);
+        $this->assertTrue(
+            $success,
+            'Could not get list of files and dirs ignoring symlink in '.GetList::class.' test '.__METHOD__
+        );
     }
     /**
      * Test data provider for getList processor with symlink present
