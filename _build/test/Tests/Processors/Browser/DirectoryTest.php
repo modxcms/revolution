@@ -214,16 +214,17 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
      * @dataProvider providerGetDirectoryListWithSymlink
      * @param string $dir A string path to the directory to list.
      */
-    public function testGetDirectoryListWithSymlink($target, $link) {
-        $dirtarget = $this->modx->getOption('base_path').$target;
-        $dirlink = $this->modx->getOption('base_path').$link;
+    public function testGetDirectoryListWithSymlink($target, $link)
+    {
+        $dirtarget = $this->modx->getOption('base_path') . $target;
+        $dirlink = $this->modx->getOption('base_path') . $link;
         @symlink($dirtarget, $dirlink);
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(GetList::class, [
             'id' => 'assets',
         ]);
         if (empty($response)) {
-            $this->fail('Could not load '.GetList::class.' processor');
+            $this->fail('Could not load ' . GetList::class . ' processor');
         }
         $result = $response->getResponse();
         if (is_string($result)) {
@@ -234,14 +235,15 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         $success = !$response->isError() && is_array($dirs) && !empty($dirs);
         $this->assertTrue(
             $success,
-            'Could not get list of files and dirs ignoring symlink in '.GetList::class.' test '.__METHOD__
+            'Could not get list of files and dirs ignoring symlink in ' . GetList::class . ' test ' . __METHOD__
         );
     }
     /**
      * Test data provider for getList processor with symlink present
      * @return array
      */
-    public function providerGetDirectoryListWithSymlink() {
+    public function providerGetDirectoryListWithSymlink()
+    {
         return [
             ['assets/test5', 'assets/test6'],
         ];
