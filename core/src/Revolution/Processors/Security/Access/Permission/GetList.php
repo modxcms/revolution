@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -44,14 +45,21 @@ class GetList extends GetListProcessor
      */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
+        $n = $this->modx->newQuery($this->classKey);
+        $n->select([
+            'total' => 'COUNT(DISTINCT `modAccessPermission`.`name`)'
+        ]);
+
         $c->leftJoin(modAccessPolicyTemplate::class, 'Template');
-        $c->query['DISTINCT'] = 'DISTINCT';
+
         $query = $this->getProperty('query', '');
         if (!empty($query)) {
-            $c->where([
-                'modAccessPermission.name:LIKE' => '%' . $query . '%',
-            ]);
+            $query = ['modAccessPermission.name:LIKE' => '%' . $query . '%'];
+            $c->where($query);
+            $n->where($query);
         }
+
+        $this->listTotal = $this->modx->getObject($this->classKey, $n)->get('total');
 
         return $c;
     }
@@ -63,12 +71,13 @@ class GetList extends GetListProcessor
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->select([
-            'modAccessPermission.id',
+            'id' => 'MIN(modAccessPermission.id)',
             'modAccessPermission.name',
             'modAccessPermission.description',
-            'Template.lexicon',
+            'Template.lexicon'
         ]);
-        $c->groupby('modAccessPermission.name');
+        $c->groupby('modAccessPermission.name, modAccessPermission.description, Template.lexicon');
+
         $name = $this->getProperty('name', '');
         if (!empty($name)) {
             $c->where([
