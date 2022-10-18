@@ -72,7 +72,7 @@ class PhpThumb extends Processor
             return '';
         }
 
-        if (pathinfo($src)['extension'] == 'svg') {
+        if (strtolower(pathinfo($src, PATHINFO_EXTENSION)) === 'svg') {
             /* Skip thumbnail generation for svg and output the file directly */
             header('Content-Type: image/svg+xml');
             echo file_get_contents($src);
