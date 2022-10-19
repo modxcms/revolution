@@ -53,11 +53,85 @@ class modInputFilter
             $matches = [];
             $name = trim(substr($output, 0, $splitPos));
             $modifiers = substr($output, $splitPos);
-            if (preg_match_all('~:([^:=]+)(?:=`((?:(?:[^:=][\s\S]*?|(?R))*?))`)?~s', $modifiers, $matches)) {
-                $this->_commands = $matches[1]; /* modifier commands */
-                $this->_modifiers = $matches[2]; /* modifier values */
+
+
+            $chars = mb_str_split($modifiers);
+            $depth = 0;
+            $command = '';
+            $commandModifiers = '';
+            $inModifier = false;
+            foreach ($chars as $i => $char) {
+                switch ($char) {
+                    // `[[` indicates the start of a nested tag, which increases the depth.
+                    // The character is added to either the command or the commandModifiers
+                    case '[':
+                        if ($chars[$i + 1] === '[') {
+                            $depth++;
+                        }
+                        $depth === 0 ? $command .= $char : $commandModifiers .= $char;
+                        break;
+
+                    // `]]` indicates the end of a nested tag, which decreases the depth.
+                    // The character is added to either the command or the commandModifiers
+                    case ']':
+                        $depth === 0 ? $command .= $char : $commandModifiers .= $char;
+                        if ($chars[$i - 1] === ']') {
+                            $depth--;
+                        }
+
+                        break;
+                    // The `=` sign (equals) is the separator between the command and its modifiers
+                    // The character is only added to the modifiers when we're inside a nested tag;
+                    // otherwise the command name would include the `=` sign when opening the modifiers
+                    case '=':
+                        if ($inModifier) {
+                            $commandModifiers .= $char;
+                        }
+                        break;
+                    // The ` sign is either the start or end of a modifier.
+                    // However, we may encounter a ` inside a NESTED tag, which we need to leave alone.
+                    // That's why only when we're at the ROOT of the tag we toggle the inModifier flag.
+                    // The character is also added to the modifiers to preserve nested tags.
+                    case '`':
+                        if ($depth === 0) {
+                            $inModifier = !$inModifier;
+                        }
+                        else {
+                            $commandModifiers .= $char;
+                        }
+                        break;
+                    // The `:` sign (colon) is a separator between multiple commands in a string.
+                    // We may also encounter it inside a NESTED tag, in which case need to preserve it.
+                    // At the root level, this saves the command and its modifiers and resets it
+                    // for the next pass to process further.
+                    case ':':
+                        if (!$inModifier) {
+                            if (!empty($command)) {
+                                $this->_commands[] = $command;
+                                $this->_modifiers[] = $commandModifiers;
+                            }
+                            $command = $commandModifiers = '';
+                        }
+                        else {
+                            $commandModifiers .= $char;
+                        }
+                        break;
+
+                    // Any other characters are plain strings and thus need to be added to either
+                    // the modifier or root command we're currently processing
+                    default:
+                        $inModifier ? $commandModifiers .= $char : $command .= $char;
+                        break;
+                }
+            }
+
+            // After a pass over the entire tag, make sure to save the last command and its modifiers if set.
+            if (!empty($command)) {
+                $this->_commands[] = $command;
+                $this->_modifiers[] = $commandModifiers;
             }
         }
+
         $element->set('name', $name);
     }
 

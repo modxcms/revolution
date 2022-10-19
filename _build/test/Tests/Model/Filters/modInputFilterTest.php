@@ -68,7 +68,29 @@ class modInputFilterTest extends MODxTestCase
                     'foo',
                     'bar',
                 ]
-            ]
+            ],
+            [
+                'content:notempty=`[[!Wayfinder? &startId=`0` &level=`1`]]`',
+                'content',
+                [
+                    'notempty',
+                ],
+                [
+                    '[[!Wayfinder? &startId=`0` &level=`1`]]',
+                ]
+            ],
+            [
+                'pagetitle:default=`[[*longtitle]]`:toPlaceholder=`title`',
+                'pagetitle',
+                [
+                    'default',
+                    'toPlaceholder',
+                ],
+                [
+                    '[[*longtitle]]',
+                    'title',
+                ]
+            ],
         ];
     }
 }

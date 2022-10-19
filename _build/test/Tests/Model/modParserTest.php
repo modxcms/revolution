@@ -33,7 +33,16 @@ class modParserTest extends MODxTestCase {
      */
     public static function setUpFixturesBeforeClass() {
         $modx = MODxTestHarness::getFixture(modX::class, 'modx', true);
-        $placeholders = ['tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2'];
+        $placeholders = [
+            'tag' => 'Tag',
+            'tag1' => 'Tag1',
+            'tag2' => 'Tag2',
+            'is1' => '1',
+            'is2' => '2',
+            'is3' => '3',
+            'not_empty_content' => 'This is some not empty content.',
+            'empty_content' => 'This is some not empty content.',
+        ];
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
 
@@ -332,6 +341,136 @@ class modParserTest extends MODxTestCase {
                 [
                     'parentTag' => '',
                     'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "1"
+                ],
+                "[[+is1:is=`1`:then=`[[+is1]]`:else=`
+    [[+is1:is=`2`:then=`[[+is1]]`:else=`more`]]
+`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "[[+is2:is=`2`:then=`2`:else=`more`]]"
+                ],
+                "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 2,
+                    'content' => "2"
+                ],
+                "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                [
+                    'processed' => 2,
+                    'content' => "more"
+                ],
+                "[[+is3:is=`1`:then=`[[+is3]]`:else=`[[+is3:is=`2`:then=`[[+is3]]`:else=`more`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "[[!Wayfinder? &startId=`0` &level=`1`]]"
+                ],
+                "[[+not_empty_content:notempty=`[[!Wayfinder? &startId=`0` &level=`1`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "Tag1"
+                ],
+                "[[+tag[[+is1]]]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "Tag1"
+                ],
+                "[[[[+is1:gt=`1`:then=`+tag[[+is2]]`:default=`+tag[[+is1]]`]]]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "[[!+tag1]]"
+                ],
+                "[[![[+is1:lt=`2`:then=`+tag[[+is1]]`:default=`+tag[[+is2]]`]]]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => false,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
