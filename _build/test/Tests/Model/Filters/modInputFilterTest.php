@@ -91,6 +91,38 @@ class modInputFilterTest extends MODxTestCase
                     'title',
                 ]
             ],
+            [
+                'echoinput:input=`[[++mail_smtp_hosts]] [[echoinput:eq=`0`:then=`test1:[[++mail_smtp_hosts]];`:else=`test2:[[++mail_smtp_hosts]]`?input=`0`]]`',
+                'echoinput',
+                [
+                    'input',
+                ],
+                [
+                    '[[++mail_smtp_hosts]] [[echoinput:eq=`0`:then=`test1:[[++mail_smtp_hosts]];`:else=`test2:[[++mail_smtp_hosts]]`?input=`0`]]',
+                ]
+            ],
+            [
+                'content:notempty=`[[!Wayfinder? &startId=`0` &level=`1`]]`',
+                'content',
+                [
+                    'notempty',
+                ],
+                [
+                    '[[!Wayfinder? &startId=`0` &level=`1`]]',
+                ]
+            ],
+            [
+                'content:up:trim',
+                'content',
+                [
+                    'up',
+                    'trim',
+                ],
+                [
+                    '',
+                    '',
+                ]
+            ]
         ];
     }
 }
