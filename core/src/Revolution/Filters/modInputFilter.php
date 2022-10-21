@@ -50,7 +50,6 @@ class modInputFilter
         $name = $output;
         $splitPos = strpos($output, ':');
         if ($splitPos !== false && $splitPos > 0) {
-            $matches = [];
             $name = trim(substr($output, 0, $splitPos));
             $modifiers = substr($output, $splitPos);
 
@@ -60,23 +59,37 @@ class modInputFilter
             $command = '';
             $commandModifiers = '';
             $inModifier = false;
+            $skipNext = false;
             foreach ($chars as $i => $char) {
+                if ($skipNext) {
+                    $skipNext = false;
+                    continue;
+                }
+
                 switch ($char) {
                     // `[[` indicates the start of a nested tag, which increases the depth.
                     // The character is added to either the command or the commandModifiers
                     case '[':
                         if ($chars[$i + 1] === '[') {
                             $depth++;
+                            $depth === 0 ? $command .= $char.$char : $commandModifiers .= $char.$char;
+                            $skipNext = true;
                         }
-                        $depth === 0 ? $command .= $char : $commandModifiers .= $char;
+                        else {
+                            $depth === 0 ? $command .= $char : $commandModifiers .= $char;
+                        }
                         break;
 
                     // `]]` indicates the end of a nested tag, which decreases the depth.
                     // The character is added to either the command or the commandModifiers
                     case ']':
-                        $depth === 0 ? $command .= $char : $commandModifiers .= $char;
-                        if ($chars[$i - 1] === ']') {
+                        if ($chars[$i + 1] === ']') {
+                            $depth === 0 ? $command .= $char.$char : $commandModifiers .= $char.$char;
                             $depth--;
+                            $skipNext = true;
+                        }
+                        else {
+                            $depth === 0 ? $command .= $char : $commandModifiers .= $char;
                         }
 
                         break;

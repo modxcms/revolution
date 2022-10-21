@@ -41,7 +41,7 @@ class modParserTest extends MODxTestCase {
             'is2' => '2',
             'is3' => '3',
             'not_empty_content' => 'This is some not empty content.',
-            'empty_content' => 'This is some not empty content.',
+            'empty_content' => '',
         ];
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
@@ -119,6 +119,7 @@ class modParserTest extends MODxTestCase {
      * @param array $params An array of parameters for the processElementTags() method.
      */
     public function testProcessElementTags($expected, $content, $params) {
+        $c = $content;
         $processed = $this->modx->parser->processElementTags(
             $params['parentTag'],
             $content,
@@ -133,7 +134,7 @@ class modParserTest extends MODxTestCase {
             'processed' => $processed,
             'content' => $content
         ];
-        $this->assertEquals($expected, $actual, "Did not get expected results from tag parsing.");
+        $this->assertEquals($expected, $actual, "Did not get expected results from parsing {$c}.");
     }
     /**
      * dataProvider for testProcessElementTags.
@@ -367,6 +368,69 @@ class modParserTest extends MODxTestCase {
                 ]
             ],
             [
+                // This test makes sure that spacing around the `:` doesn't matter and spacing in
+                // the output is kept
+                [
+                    'processed' => 1,
+                    'content' => "
+                        [[+is2
+                            :is=`2`
+                            :then=`2`
+                            :else=`more`
+                        ]]
+                    "
+                ],
+                "[[+is2
+                    :is=`1`
+                    :then=`[[+is2]]`
+                    :else=`
+                        [[+is2
+                            :is=`2`
+                            :then=`[[+is2]]`
+                            :else=`more`
+                        ]]
+                    `
+                ]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Same as previous, but now parsing 2-depth to get the final result
+                [
+                    'processed' => 2,
+                    'content' => "
+                        2
+                    "
+                ],
+                "[[+is2
+                    :is=`1`
+                    :then=`[[+is2]]`
+                    :else=`
+                        [[+is2
+                            :is=`2`
+                            :then=`[[+is2]]`
+                            :else=`more`
+                        ]]
+                    `
+                ]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
                 [
                     'processed' => 1,
                     'content' => "[[+is2:is=`2`:then=`2`:else=`more`]]"
@@ -471,6 +535,110 @@ class modParserTest extends MODxTestCase {
                 [
                     'parentTag' => '',
                     'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Test a tag that contains itself in a filter
+                [
+                    'processed' => 1,
+                    'content' => "<p>This is some not empty content.</p>"
+                ],
+                "[[+not_empty_content:notempty=`<p>[[+not_empty_content]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Sanity check the notempty/default with different (empty) input
+                [
+                    'processed' => 1,
+                    'content' => "<p>Other content</p>"
+                ],
+                "[[!+empty_content:notempty=`<p>[[!+not_empty_content]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Check that the (invalid) inner tag is returned after one cycle
+                [
+                    'processed' => 1,
+                    'content' => "<p>[[!+This is some not empty content.]]</p>"
+                ],
+                "[[!+not_empty_content:notempty=`<p>[[!+[[!+not_empty_content]]]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Check that the invalid tag returns empty once removed in a 2nd cycle
+                [
+                    'processed' => 2,
+                    'content' => "<p></p>"
+                ],
+                "[[!+not_empty_content:notempty=`<p>[[!+[[!+not_empty_content]]]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                // Check that the default triggers for a non-existent tag with itself nested
+                // Also checks a regression where the depth is miscalculated due to [[!+[[!+ being
+                // seen as 2 deep, while ]]]] was seen as 3 (due to 3 unique combinations of ]])
+                [
+                    'processed' => 1,
+                    'content' => "Doesn't exist"
+                ],
+                "[[!+invalid_tag:notempty=`<p>[[!+[[!+invalid_tag]]]]</p>`:default=`Doesn't exist`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Also works with a valid double inner tag as result
+                [
+                    'processed' => 1,
+                    'content' => "Tag2"
+                ],
+                "[[!+invalid_tag:notempty=`<p>[[!+tag[[+is1]]]]</p>`:default=`[[!+tag[[+is2]]]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
                     'removeUnprocessed' => false,
                     'prefix' => '[[',
                     'suffix' => ']]',
