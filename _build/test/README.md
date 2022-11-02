@@ -7,4 +7,4 @@ Copy `_build/test/properties.sample.inc.php` to `_build/test/properties.inc.php`
 * `$properties['mysql_string_username']= '';` database username
 * `$properties['mysql_string_password']= '';` database password
 
-From the commandline at the root of the projeect, run `composer run-script phpunit`
+From the commandline at the root of the project, run `composer run-script phpunit`
