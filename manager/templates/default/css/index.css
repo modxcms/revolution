@@ -20910,6 +20910,8 @@ input::-moz-focus-inner {
 }
 .x-form-item .modx-tv-image-preview img {
     display: block;
+    max-width: 400px;
+    max-height: 400px;
 }
 .x-form-item .modx-tag-list {
     list-style: none;
