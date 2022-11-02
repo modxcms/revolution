@@ -49,7 +49,7 @@ class modFileMediaSource extends modMediaSource
 
                 // How to deal with links, either DISALLOW_LINKS or SKIP_LINKS
                 // Disallowing them causes exceptions when encountered
-                LocalFilesystemAdapter::DISALLOW_LINKS
+                LocalFilesystemAdapter::SKIP_LINKS
             );
 
         } catch (Exception $e) {
