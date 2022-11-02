@@ -564,9 +564,11 @@ class modX extends xPDO {
 
             $this->getCacheManager();
             $this->getConfig();
-            $this->_initNamespaces();
-            $this->_initContext($contextKey, false, $options);
-            $this->_loadExtensionPackages($options);
+            if (!$this->getOption(xPDO::OPT_SETUP)) {
+                $this->_initNamespaces();
+                $this->_initContext($contextKey, false, $options);
+                $this->_loadExtensionPackages($options);
+            }
             $this->_initSession($options);
             $this->_initErrorHandler($options);
             $this->_initHttpClient();
@@ -575,13 +577,15 @@ class modX extends xPDO {
             $this->services->add('registry', new modRegistry($this));
             $this->registry = $this->services->get('registry');
 
-            $this->invokeEvent(
-                'OnMODXInit',
-                [
-                    'contextKey' => $contextKey,
-                    'options' => $options,
-                ]
-            );
+            if (!$this->getOption(xPDO::OPT_SETUP)) {
+                $this->invokeEvent(
+                    'OnMODXInit',
+                    [
+                        'contextKey' => $contextKey,
+                        'options' => $options,
+                    ]
+                );
+            }
 
             if (is_array ($this->config)) {
                 $c = $this->config;
