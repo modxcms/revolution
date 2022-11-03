@@ -45,8 +45,8 @@ class GetList extends GetListProcessor
      */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        $n = $this->modx->newQuery($this->classKey);
-        $n->select([
+        $totalQuery = $this->modx->newQuery($this->classKey);
+        $totalQuery->select([
             'total' => 'COUNT(DISTINCT `modAccessPermission`.`name`)'
         ]);
 
@@ -56,10 +56,10 @@ class GetList extends GetListProcessor
         if (!empty($query)) {
             $query = ['modAccessPermission.name:LIKE' => '%' . $query . '%'];
             $c->where($query);
-            $n->where($query);
+            $totalQuery->where($query);
         }
 
-        $this->listTotal = $this->modx->getObject($this->classKey, $n)->get('total');
+        $this->listTotal = $this->modx->getObject($this->classKey, $totalQuery)->get('total');
 
         return $c;
     }
