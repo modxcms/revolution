@@ -173,11 +173,16 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     windows: {}
 
     ,onStoreException: function(dp,type,act,opt,resp){
-        var r = Ext.decode(resp.responseText);
-        if (r.message) {
-            this.getView().emptyText = r.message;
-            this.getView().refresh(false);
+        let r;
+        try {
+            r = Ext.decode(resp.responseText);
+        } catch (e) {
+            this.getView().emptyText = 'Invalid response from server: <pre><code>' + MODx.util.safeHtml(resp.responseText) + '</code></pre>';
         }
+        if (r && r.message) {
+            this.getView().emptyText = r.message;
+        }
+        this.getView().refresh(false);
     }
     ,saveRecord: function(e) {
         e.record.data.menu = null;
