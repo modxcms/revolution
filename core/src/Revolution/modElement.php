@@ -278,9 +278,9 @@ class modElement extends modAccessibleSimpleObject
                     } else {
                         if (is_array($value)) {
                             $func = function ($item) use (&$func) {
-                                if (is_array($item)){
+                                if (is_array($item)) {
                                     return array_map($func, $item);
-                                } else if ($item instanceof \xPDOObject) {
+                                } elseif ($item instanceof \xPDOObject) {
                                     return $item->toArray('', false, true);
                                 } else {
                                     return $item;
