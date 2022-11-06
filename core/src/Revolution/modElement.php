@@ -277,11 +277,16 @@ class modElement extends modAccessibleSimpleObject
                         $propTemp[$key] = $key . '=`' . $value . '`';
                     } else {
                         if (is_array($value)) {
-                            array_walk_recursive($value, function (&$item, $key) {
-                                if ($item instanceof \xPDOObject) {
-                                    $item = $item->toArray('', false, true);
+                            $func = function ($item) use (&$func) {
+                                if (is_array($item)){
+                                    return array_map($func, $item);
+                                } else if ($item instanceof \xPDOObject) {
+                                    return $item->toArray('', false, true);
+                                } else {
+                                    return $item;
                                 }
-                            });
+                            };
+                            $value = array_map($func, $value);
                         } elseif ($value instanceof \xPDOObject) {
                             $value = $value->toArray('', false, true);
                         }
