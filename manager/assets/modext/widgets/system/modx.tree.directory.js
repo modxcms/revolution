@@ -366,10 +366,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,getPath: function(node) {
-        let path = '';
-        if (node !== undefined && node.attributes) {
-            path = node.attributes.path || '';
-        }
+        let path = node?.attributes?.path || '';
 
         // a little bit of security: strip leading / or .
         // full path security checking has to be implemented on server
