@@ -33,7 +33,16 @@ class modParserTest extends MODxTestCase {
      */
     public static function setUpFixturesBeforeClass() {
         $modx = MODxTestHarness::getFixture(modX::class, 'modx', true);
-        $placeholders = ['tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2'];
+        $placeholders = [
+            'tag' => 'Tag',
+            'tag1' => 'Tag1',
+            'tag2' => 'Tag2',
+            'is1' => '1',
+            'is2' => '2',
+            'is3' => '3',
+            'not_empty_content' => 'This is some not empty content.',
+            'empty_content' => '',
+        ];
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
 
@@ -110,6 +119,7 @@ class modParserTest extends MODxTestCase {
      * @param array $params An array of parameters for the processElementTags() method.
      */
     public function testProcessElementTags($expected, $content, $params) {
+        $c = $content;
         $processed = $this->modx->parser->processElementTags(
             $params['parentTag'],
             $content,
@@ -124,7 +134,7 @@ class modParserTest extends MODxTestCase {
             'processed' => $processed,
             'content' => $content
         ];
-        $this->assertEquals($expected, $actual, "Did not get expected results from tag parsing.");
+        $this->assertEquals($expected, $actual, "Did not get expected results from parsing {$c}.");
     }
     /**
      * dataProvider for testProcessElementTags.
@@ -329,6 +339,303 @@ class modParserTest extends MODxTestCase {
                     'content' => "[[+notATag? &but=`Tag2`]]Tag2Tag1"
                 ],
                 "[[+notATag? &but=`[[+tag2]]`]][[+tag2]][[!+tag1]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "1"
+                ],
+                "[[+is1:is=`1`:then=`[[+is1]]`:else=`
+    [[+is1:is=`2`:then=`[[+is1]]`:else=`more`]]
+`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // This test makes sure that spacing around the `:` doesn't matter and spacing in
+                // the output is kept
+                [
+                    'processed' => 1,
+                    'content' => "
+                        [[+is2
+                            :is=`2`
+                            :then=`2`
+                            :else=`more`
+                        ]]
+                    "
+                ],
+                "[[+is2
+                    :is=`1`
+                    :then=`[[+is2]]`
+                    :else=`
+                        [[+is2
+                            :is=`2`
+                            :then=`[[+is2]]`
+                            :else=`more`
+                        ]]
+                    `
+                ]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Same as previous, but now parsing 2-depth to get the final result
+                [
+                    'processed' => 2,
+                    'content' => "
+                        2
+                    "
+                ],
+                "[[+is2
+                    :is=`1`
+                    :then=`[[+is2]]`
+                    :else=`
+                        [[+is2
+                            :is=`2`
+                            :then=`[[+is2]]`
+                            :else=`more`
+                        ]]
+                    `
+                ]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "[[+is2:is=`2`:then=`2`:else=`more`]]"
+                ],
+                "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 2,
+                    'content' => "2"
+                ],
+                "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                [
+                    'processed' => 2,
+                    'content' => "more"
+                ],
+                "[[+is3:is=`1`:then=`[[+is3]]`:else=`[[+is3:is=`2`:then=`[[+is3]]`:else=`more`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "[[!Wayfinder? &startId=`0` &level=`1`]]"
+                ],
+                "[[+not_empty_content:notempty=`[[!Wayfinder? &startId=`0` &level=`1`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "Tag1"
+                ],
+                "[[+tag[[+is1]]]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "Tag1"
+                ],
+                "[[[[+is1:gt=`1`:then=`+tag[[+is2]]`:default=`+tag[[+is1]]`]]]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "[[!+tag1]]"
+                ],
+                "[[![[+is1:lt=`2`:then=`+tag[[+is1]]`:default=`+tag[[+is2]]`]]]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Test a tag that contains itself in a filter
+                [
+                    'processed' => 1,
+                    'content' => "<p>This is some not empty content.</p>"
+                ],
+                "[[+not_empty_content:notempty=`<p>[[+not_empty_content]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => false,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Sanity check the notempty/default with different (empty) input
+                [
+                    'processed' => 1,
+                    'content' => "<p>Other content</p>"
+                ],
+                "[[!+empty_content:notempty=`<p>[[!+not_empty_content]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Check that the (invalid) inner tag is returned after one cycle
+                [
+                    'processed' => 1,
+                    'content' => "<p>[[!+This is some not empty content.]]</p>"
+                ],
+                "[[!+not_empty_content:notempty=`<p>[[!+[[!+not_empty_content]]]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Check that the invalid tag returns empty once removed in a 2nd cycle
+                [
+                    'processed' => 2,
+                    'content' => "<p></p>"
+                ],
+                "[[!+not_empty_content:notempty=`<p>[[!+[[!+not_empty_content]]]]</p>`:default=`<p>Other content</p>`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => true,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                // Check that the default triggers for a non-existent tag with itself nested
+                // Also checks a regression where the depth is miscalculated due to [[!+[[!+ being
+                // seen as 2 deep, while ]]]] was seen as 3 (due to 3 unique combinations of ]])
+                [
+                    'processed' => 1,
+                    'content' => "Doesn't exist"
+                ],
+                "[[!+invalid_tag:notempty=`<p>[[!+[[!+invalid_tag]]]]</p>`:default=`Doesn't exist`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Also works with a valid double inner tag as result
+                [
+                    'processed' => 1,
+                    'content' => "Tag2"
+                ],
+                "[[!+invalid_tag:notempty=`<p>[[!+tag[[+is1]]]]</p>`:default=`[[!+tag[[+is2]]]]`]]",
                 [
                     'parentTag' => '',
                     'processUncacheable' => true,
