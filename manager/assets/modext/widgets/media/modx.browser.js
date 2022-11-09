@@ -998,10 +998,12 @@ MODx.Media = function(config) {
     });
 
     Ext.applyIf(config, {
-        cls: 'modx-browser modx-browser-panel container'
+        cls: 'modx-browser modx-browser-panel'
         ,layout: 'border'
-        ,width: '98%'
-        ,height: '95%'
+        ,width: '100%'
+        ,height: '100%'
+        ,style: 'background-color: transparent'
+        ,border: false
         ,items: [{
             region: 'west'
             ,width: 250
@@ -1010,6 +1012,7 @@ MODx.Media = function(config) {
             ,cls: 'modx-browser-tree'
             ,autoScroll: true
             ,split: true
+            ,margins: '10 0 10 18'
         },{
             region: 'center'
             ,layout: 'fit'
@@ -1020,12 +1023,14 @@ MODx.Media = function(config) {
             ,border: false
             ,tbar: this.getToolbar()
             ,bbar: this.getPathbar()
+            ,margins: '10 0 10 0'
         },{
             region: 'east'
             ,width: 250
             ,id: this.ident+'-img-detail-panel'
             ,cls: 'modx-browser-details-ct'
             ,split: true
+            ,margins: '10 10 10 0'
         }]
     });
     MODx.Media.superclass.constructor.call(this, config);
