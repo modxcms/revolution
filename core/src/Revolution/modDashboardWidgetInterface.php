@@ -11,6 +11,7 @@
 namespace MODX\Revolution;
 
 
+use Throwable;
 use xPDO\xPDO;
 
 /**
@@ -78,7 +79,16 @@ abstract class modDashboardWidgetInterface
      * @return string
      */
     public function process() {
-        $output = $this->render();
+        try {
+            $output = $this->render();
+        } catch (Throwable $t) {
+            $this->controller->setPlaceholder('_e', [
+                'message' => $t->getMessage(),
+                'errors' => explode("\n", $t->getTraceAsString()),
+            ]);
+            $output = $this->controller->fetchTemplate('error.tpl');
+        }
+
         if (!empty($output)) {
             $widgetArray = $this->widget->toArray();
             $widgetArray['content'] = $output;
