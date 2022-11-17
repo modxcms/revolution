@@ -74,6 +74,8 @@ class modSmarty extends SmartyBC {
 
         $this->_blocks = array();
         $this->_derived = null;
+        
+        $this->muteExpectedErrors();
     }
 
     /**
