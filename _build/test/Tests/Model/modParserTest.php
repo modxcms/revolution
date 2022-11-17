@@ -646,6 +646,140 @@ class modParserTest extends MODxTestCase {
                     'depth' => 0
                 ]
             ],
+            [
+                // Various tests for literal brackets [] in the modifier
+                [
+                    'processed' => 1,
+                    'content' => "[]"
+                ],
+                "[[+tag1:notempty=`[]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // Test for literal []'s not being broken things
+                [
+                    'processed' => 1,
+                    'content' => "[ ][ ]"
+                ],
+                "[[+tag1:notempty=`[ ][ ]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "["
+                ],
+                "[[+tag1:notempty=`[`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "["
+                ],
+                "[[!+tag1:notempty=`[`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "]"
+                ],
+                "[[+tag1:notempty=`]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // various special characters in the modifier
+                [
+                    'processed' => 1,
+                    'content' => "]=:["
+                ],
+                "[[+tag1:notempty=`]=:[`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 0
+                ]
+            ],
+            [
+                // tags within brackets
+                [
+                    'processed' => 1,
+                    'content' => '<input type="text" name="item[ Tag2 ][name]" />'
+                ],
+                '[[+tag1:notempty=`<input type="text" name="item[ [[+tag2]] ][name]" />`]]',
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 1
+                ]
+            ],
+            // tags directly within brackets
+            // @todo this test fails
+//            [
+//                [
+//                    'processed' => 1,
+//                    'content' => '<input type="text" name="item[Tag2][name]" />'
+//                ],
+//                '[[+tag1:notempty=`<input type="text" name="item[[[+tag2]]][name]" />`]]',
+//                [
+//                    'parentTag' => '',
+//                    'processUncacheable' => true,
+//                    'removeUnprocessed' => false,
+//                    'prefix' => '[[',
+//                    'suffix' => ']]',
+//                    'tokens' => [],
+//                    'depth' => 1
+//                ]
+//            ],
         ];
     }
 
