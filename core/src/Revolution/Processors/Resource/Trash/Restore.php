@@ -24,13 +24,13 @@ use MODX\Revolution\modUser;
 class Restore extends Processor
 {
     /** @var modResource[] $resources */
-    private $resources;
+    private $resources = [];
 
     /** @var array $failures Failed ids of restored resources */
-    private $failures;
+    private $failures = [];
 
     /** @var array $success Ids of successfully restored resources */
-    private $success;
+    private $success = [];
 
     public function checkPermissions()
     {
@@ -76,7 +76,6 @@ class Restore extends Processor
 
     public function process()
     {
-        $this->success = [];
         $contexts = [];
 
         foreach ($this->resources as $resource) {
@@ -122,7 +121,7 @@ class Restore extends Processor
         $outputArray['failures'] = $this->failures;
 
         $msg = '';
-        if ($outputArray['successes'] > 0) {
+        if (count($outputArray['successes']) > 0) {
             $msg = $this->modx->lexicon('trash.restore_success', [
                 'list' => implode(', ', $this->success),
                 'count_success' => count($this->success),
