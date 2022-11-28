@@ -868,7 +868,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             callback = this.config.onSelect || this.onSelectHandler,
             lookup = this.view.lookup,
             scope = this.config.scope,
-            source = data.source;
+            source = this.config.source;
         this.hide(this.config.animEl || null,function(){
             if(selNode && callback){
                 var data = lookup[selNode.id];
@@ -1602,7 +1602,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             callback = this.config.onSelect || this.onSelectHandler,
             lookup = this.view.lookup,
             scope = this.config.scope,
-            source = data.source;
+            source = this.config.source;
         if (callback) {
             data = (selNode) ? lookup[selNode.id] : null;
             data.source = source;
