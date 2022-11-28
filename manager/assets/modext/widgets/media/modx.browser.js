@@ -864,13 +864,15 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
     }
 
     ,onSelect: function(data) {
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
+        var selNode = this.view.getSelectedNodes()[0],
+            callback = this.config.onSelect || this.onSelectHandler,
+            lookup = this.view.lookup,
+            scope = this.config.scope,
+            source = data.source;
         this.hide(this.config.animEl || null,function(){
             if(selNode && callback){
                 var data = lookup[selNode.id];
+                data.source = source;
                 Ext.callback(callback,scope || this,[data]);
                 this.fireEvent('select',data);
             }
@@ -1596,12 +1598,14 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 
     ,onSelect: function(data) {
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
+        var selNode = this.view.getSelectedNodes()[0],
+            callback = this.config.onSelect || this.onSelectHandler,
+            lookup = this.view.lookup,
+            scope = this.config.scope,
+            source = data.source;
         if (callback) {
             data = (selNode) ? lookup[selNode.id] : null;
+            data.source = source;
             Ext.callback(callback, scope || this, [data]);
             this.fireEvent('select', data);
             if (window.top.opener) {
