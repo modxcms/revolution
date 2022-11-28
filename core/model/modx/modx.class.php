@@ -2506,8 +2506,10 @@ class modX extends xPDO {
         $this->setOption('cultureKey', $cultureKey);
 
         if ($this->getOption('setlocale', $options, true)) {
-            $locale = setlocale(LC_ALL, null);
-            $result = setlocale(LC_ALL, $this->getOption('locale', null, $locale));
+            $locale = setlocale(LC_ALL, '0');
+            $targetLocale = $this->getOption('locale', null, $locale, true);
+            $result = setlocale(LC_ALL, $targetLocale);
+
             if ($result === false) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not set the locale. Please check if the locale ' . $this->getOption('locale', null, $locale) . ' exists on your system');
             }
