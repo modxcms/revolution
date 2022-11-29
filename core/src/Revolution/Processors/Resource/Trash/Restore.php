@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -85,9 +86,12 @@ class Restore extends Processor
 
             if (!$this->addLock($resource)) {
                 $lockedUser = $this->modx->getObject(modUser::class, $resource->getLock());
-                return $this->failure($this->modx->lexicon('resource_locked_by', [
+                return $this->failure($this->modx->lexicon(
+                    'resource_locked_by',
+                    [
                         'id' => $resource->get('id'),
-                        'user' => ($lockedUser) ? $lockedUser->get('username') : '(unknown)']
+                        'user' => ($lockedUser) ? $lockedUser->get('username') : '(unknown)',
+                    ]
                 ));
             }
 
