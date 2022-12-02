@@ -1093,9 +1093,9 @@ class CGIF
 		for ($i = 0; $i < $NumColorsInPal; $i++) {
 			$ThisImageColor[$i] = imagecolorallocate(
 									$PlottingIMG,
-									ord($pal{($i * 3) + 0}),
-									ord($pal{($i * 3) + 1}),
-									ord($pal{($i * 3) + 2}));
+									ord($pal[($i * 3) + 0]),
+									ord($pal[($i * 3) + 1]),
+									ord($pal[($i * 3) + 2]));
 		}
 
 		// PREPARE BITMAP BITS
