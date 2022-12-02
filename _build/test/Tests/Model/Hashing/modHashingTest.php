@@ -12,6 +12,11 @@
 namespace MODX\Revolution\Tests\Model\Hashing;
 
 
+use MODX\Revolution\Hashing\modHashing;
+use MODX\Revolution\Hashing\modMD5;
+use MODX\Revolution\Hashing\modNative;
+use MODX\Revolution\Hashing\modPBKDF2;
+use MODX\Revolution\modParser;
 use MODX\Revolution\MODxTestCase;
 
 /**
@@ -54,6 +59,37 @@ class modHashingTest extends MODxTestCase {
             ['option8', null, null, [], null],
             ['option8', [], null, [], null],
             ['option8', null, [], [], null],
+        ];
+    }
+
+    /**
+     * @dataProvider providerGetHashInstance
+     * @param $key
+     * @param $class
+     * @param $expected
+     * @return void
+     */
+    public function testGetHashInstance($key, $class, $expected)
+    {
+        /** @var modHashing $modHashing */
+        $modHashing = $this->modx->getService('hashing', 'hashing.modHashing');
+
+        $hasher = $modHashing->getHash($key, $class);
+        if ($expected === null) {
+            $this->assertNull($hasher);
+        }
+        else {
+            $this->assertInstanceOf($expected, $hasher);
+        }
+    }
+
+    public function providerGetHashInstance()
+    {
+        return [
+            ['hasher-md5', modMD5::class, modMD5::class],
+            ['hasher-native', modNative::class, modNative::class],
+            ['hasher-pbkdf2', modPBKDF2::class, modPBKDF2::class],
+            ['hasher-null', modParser::class, null], // Not a hasher class should return null
         ];
     }
 }
