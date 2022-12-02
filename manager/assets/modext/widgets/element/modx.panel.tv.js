@@ -1388,6 +1388,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
 
         if(inputOptValsItem){
             if(hideInputOptValsItemFor.indexOf(type) !== -1){
+                inputOptValsItem.allowBlank = true;
                 inputOptValsItem.hide().nextSibling().hide();
             } else {
                 this.updateSharedComponent(type, inputOptValsItem, inputOptValsItemVal);
@@ -1399,6 +1400,9 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                 */
                 if (typeChanged) {
                     Ext.getCmp('modx-tv-elements').clearInvalid();
+                    if(this.isNativeType){
+                        inputOptValsItem.allowBlank = false;
+                    }
                 }
             }
         }
