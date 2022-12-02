@@ -58,7 +58,7 @@ class modResourceDeleteProcessor extends modProcessor {
         $map = [
             'modWebLink' => 'delete_weblink',
             'modSymLink' => 'delete_symlink',
-            'modStaticResource' => 'delete_resource',
+            'modStaticResource' => 'delete_static_resource',
         ];
         if (array_key_exists($classKey, $map)) {
             $permissions[] = $map[$classKey];
