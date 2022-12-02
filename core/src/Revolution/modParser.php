@@ -147,8 +147,11 @@ class modParser
             }
         }
 
-        $pattern = '/\Q'.$prefix.'\E((?:(?:[^'.$subSuffix.$subPrefix.'][\s\S]*?|(?R))*?))\Q'.$suffix.'\E/x';
+        $pattern = '/\Q'.$prefix.'\E((?:(?:[^'.$subSuffix.$subPrefix.']++[\s\S]*?|(?R))*?))\Q'.$suffix.'\E/x';
         preg_match_all($pattern, $origContent, $matches, PREG_SET_ORDER);
+        if (preg_last_error() !== PREG_NO_ERROR) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Encountered a parser error: [' . preg_last_error() . '] ' . preg_last_error_msg());
+        }
 
         $matchCount = count($matches);
 
