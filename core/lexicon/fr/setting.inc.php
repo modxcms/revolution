@@ -247,8 +247,8 @@ $_lang['setting_emailsender_err'] = 'Veuillez indiquer l\'adresse e-mail d\'admi
 $_lang['setting_enable_dragdrop'] = 'Activer le Glisser-Déposer dans l\'arborescence de ressources/éléments';
 $_lang['setting_enable_dragdrop_desc'] = 'Inactif, empêchera l\'utilisation du glisser-déposer dans l\'arborescence de ressources et d\'éléments.';
 
-$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
-$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+$_lang['setting_enable_template_picker_in_tree'] = 'Activer le sélecteur de modèle dans l\'arborescence des ressources';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Activez cette option pour utiliser la fenêtre modale du sélecteur de template lors de la création d\'une nouvelle ressource dans l\'arborescence.';
 
 $_lang['setting_error_page'] = 'Page d\'erreur';
 $_lang['setting_error_page_desc'] = 'Entrez l\'ID du document que vous souhaitez afficher aux utilisateurs qui demandent un document qui n\'existe pas. <strong>NOTE : assurez-vous que cet ID appartienne à un document publié existant!</strong>';
@@ -382,10 +382,10 @@ $_lang['setting_mail_smtp_port'] = 'Port SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Défini le port par défaut du serveur SMTP.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Définit le type d\'encyption sécurisé SMTP. Les options sont "", "ssl" ou "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Activer le cryptage TLS automatiquement si un serveur le supporte, même si "SMTP Secure" n\'est pas réglé sur "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'Simple destinataire SMTP';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Donne la possibilité d\'effectuer un champ destinataire individuel, au lieu d\'envoyer à tous les destinataires.';
@@ -747,8 +747,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Entrez la taille maximale des fichiers 
 $_lang['setting_upload_media'] = 'Types de média autorisés';
 $_lang['setting_upload_media_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être chargés dans \'assets/média/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de média, séparées par des virgules.';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
-$_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Translittérer les noms des fichiers téléchargés ?';
+$_lang['setting_upload_translit_desc'] = 'Si cette option est activée, le nom d\'un fichier téléchargé sera modifié selon les règles de translittération globales (suppression des caractères spéciaux...)';
 
 $_lang['setting_use_alias_path'] = 'Utiliser les alias simples';
 $_lang['setting_use_alias_path_desc'] = 'Sélectionner "Oui" pour cette option affichera le chemin complet de la ressource si la ressource a un alias. Par exemple, si une ressource ayant pour alias "enfant" est située dans une ressource conteneur ayant pour alias "parent", alors l\'alias du chemin complet sera affiché "/parent/enfant.html".<br /><strong>NOTE : Mettre "oui" dans cette option (activer les alias simples) implique l\'utilisation de chemin absolu pour les objets (tels qu\'images, css, javascripts, etc.), par exemple : "\'/assets/images" au lieu de "assets/images". En faisant ainsi, vous éviterez au navigateur (ou serveur web) d\'ajouter le chemin relatif à l\'alias.</strong>';
