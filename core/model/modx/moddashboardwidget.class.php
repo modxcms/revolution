@@ -317,10 +317,17 @@ abstract class modDashboardWidgetInterface {
     public function renderAsSnippet($content = '') {
         if (empty($content)) $content = $this->widget->get('content');
         $content = str_replace(array('<?php','?>'),'',$content);
-        $snippet = $this->modx->newObject('modSnippet');
-        $snippet->set('content', $content);
-        return $snippet->process(array(
+        $closure = function ($scriptProperties) use ($content) {
+            global $modx;
+            if (is_array($scriptProperties)) {
+                extract($scriptProperties, EXTR_SKIP);
+            }
+
+            return eval($content);
+        };
+
+        return $closure([
             'controller' => $this->controller,
-        ));
+        ]);
     }
 }
