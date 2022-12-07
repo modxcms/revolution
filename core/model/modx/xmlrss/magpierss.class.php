@@ -149,7 +149,7 @@ class MagpieRSS {
         $this->normalize();
     }
 
-    function feed_start_element($p, $element, &$attrs) {
+    function feed_start_element($p, $element, $attrs) {
         $el = $element = strtolower($element);
         $attrs = array_change_key_case($attrs, CASE_LOWER);
 
