@@ -326,8 +326,8 @@ abstract class modDashboardWidgetInterface {
             return eval($content);
         };
 
-        return $closure([
+        return $closure(array(
             'controller' => $this->controller,
-        ]);
+        ));
     }
 }
