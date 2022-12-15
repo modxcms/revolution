@@ -172,12 +172,45 @@ MODx.grid.Grid = function(config) {
 Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     windows: {}
 
-    ,onStoreException: function(dp,type,act,opt,resp){
-        var r = Ext.decode(resp.responseText);
-        if (r.message) {
-            this.getView().emptyText = r.message;
-            this.getView().refresh(false);
+    ,onStoreException: function(dataProxy, type, action, options, response) {
+        const responseStatusCode = response.status || 'Unknown',
+              responseStatusText = !Ext.isEmpty(response.statusText) ? `(${response.statusText})` : ''
+        ;
+        let output = '',
+            msg = ''
+        ;
+        if (Ext.isEmpty(response.responseText)) {
+            // When php display_error is off, responseText will likely be empty and only general status info will be available
+            output = responseStatusCode !== 200 ? `<div class="error-status-info">${responseStatusCode} ${responseStatusText}</div>` : '';
+        } else {
+            // When php display_error is on OR the error is caught and explicity sent from the MODx class triggering the error, responseText should contain error text or possibly an object containing message text
+            try {
+                const responseText = Ext.decode(response.responseText);
+                // In what scenario will responseText be an object with a message property?
+                if (responseText && responseText.message) {
+                    output = responseText.message;
+                }
+            } catch (e) {
+                output = response.responseText;
+            }
         }
+        if (output) {
+            if (MODx.config.debug > 0) {
+                output = MODx.util.safeHtml(output, '<table><tbody><tr><th><td><div><i><em><b><strong>', 'class,colspan,rowspan');
+                msg = _('error_grid_get_content_toscreen', {
+                    message: `<pre><code>${output}</code></pre>`
+                });
+            } else {
+                msg = _('error_grid_get_content_tolog');
+                output = Ext.util.Format.stripTags(output).replaceAll('&gt;', '>').replaceAll('&lt;', '<');
+                console.error(output);
+            }
+        } else {
+            // With some scenarios, such as when php display_errors = 1 and MODx system setting debug = 0 (reporting off), the reponseText will be empty and the status will be 200
+            msg = _('error_grid_get_content_no_msg');
+        }
+        this.getView().emptyText = `<div class="error-with-icon">${msg}</div>`;
+        this.getView().refresh(false);
     }
     ,saveRecord: function(e) {
         e.record.data.menu = null;
