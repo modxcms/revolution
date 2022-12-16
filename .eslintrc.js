@@ -3,7 +3,10 @@ module.exports = {
         browser: true,
         es2021: true,
     },
-    extends: 'eslint:recommended',
+    extends: [
+        'eslint:recommended',
+        'airbnb-base',
+    ],
     globals: {
         MODx: 'readonly',
         Ext: 'readonly',
@@ -25,5 +28,14 @@ module.exports = {
         ecmaVersion: 'latest',
     },
     rules: {
+        // TODO Enable rules gradually
+        indent: 0,
+        quotes: ['error', 'single'],
+        semi: 0,
+        'space-before-function-paren': 0,
+        'comma-dangle': 0,
+        'prefer-arrow-callback': 0,
+        'space-before-blocks': 0,
+        'object-shorthand': 0,
     },
 }
