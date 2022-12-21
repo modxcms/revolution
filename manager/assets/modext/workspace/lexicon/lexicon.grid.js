@@ -48,7 +48,7 @@ MODx.grid.Lexicon = function(config) {
             ,handler: this.createEntry
             ,scope: this
         },{
-            text: _('reload_from_base')
+            text: _('lexicon_revert')
             ,handler: this.reloadFromBase
             ,scope: this
         },
@@ -247,30 +247,46 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     	this.loadWindow(btn, e, o);
     }
     ,reloadFromBase: function() {
-    	Ext.Ajax.timeout = 0;
-    	var topic = '/workspace/lexicon/reload/';
-        this.console = MODx.load({
-           xtype: 'modx-console'
-           ,register: 'mgr'
-           ,topic: topic
+        const tb = this.getTopToolbar(),
+            namespace = tb.getComponent('namespace').getValue(),
+            topic = tb.getComponent('topic').getValue(),
+            language = tb.getComponent('language').getValue(),
+            registryTopic = '/workspace/lexicon/reload/';
+
+        MODx.msg.confirm({
+            text: _('lexicon_revert_confirm', {
+                namespace: namespace
+                ,topic: topic
+                ,language: language
+            })
+            ,url: this.config.url
+            ,params: {
+                action: 'Workspace/Lexicon/ReloadFromBase'
+                ,register: 'mgr'
+                ,topic: registryTopic
+                ,namespace: namespace
+                ,lexiconTopic: topic
+                ,language: language
+            }
+            ,listeners: {
+                'success': {
+                    fn:function() {
+                        this.console = MODx.load({
+                            xtype: 'modx-console'
+                            ,register: 'mgr'
+                            ,topic: registryTopic
+                        });
+
+                        this.console.on('complete',function(){
+                            this.refresh();
+                        },this);
+                        this.console.show(Ext.getBody());
+                    }
+                    ,scope:this
+                }
+            }
         });
-
-        this.console.on('complete',function(){
-            this.refresh();
-        },this);
-        this.console.show(Ext.getBody());
-
-    	MODx.Ajax.request({
-    	   url: this.config.url
-    	   ,params: {action: 'Workspace/Lexicon/ReloadFromBase' ,register: 'mgr' ,topic: topic}
-    	   ,listeners: {
-                'success': {fn:function(r) {
-                    this.refresh();
-                },scope:this}
-	       }
-    	});
     }
-
     ,revertEntry: function() {
         var p = this.menu.record;
         p.action = 'Workspace/Lexicon/Revert';
