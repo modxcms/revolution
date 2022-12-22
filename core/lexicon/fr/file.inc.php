@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['directory'] = 'Répertoire';
-$_lang['file_confirm_remove'] = 'Voulez-vous vraiment supprimer ce fichier? Cela pourrait potentiellement endommager votre site.';
+$_lang['file_confirm_remove'] = 'Voulez-vous vraiment supprimer ce fichier ? Cela pourrait potentiellement endommager votre site web. Assurez-vous de comprendre ce que fait ce fichier avant de le supprimer.';
 $_lang['file_create'] = 'Créer un fichier';
 $_lang['file_deleted'] = 'Succès !';
 $_lang['file_delete_file'] = 'Supprimer le fichier';
@@ -32,8 +32,8 @@ $_lang['file_err_perms_rename'] = 'Le serveur web n\'a pas les permissions néce
 $_lang['file_err_perms_remove'] = 'Le serveur web n\'a pas les permissions nécessaires pour supprimer le fichier.';
 $_lang['file_err_rename'] = 'MODX n\'a pas réussi à renommer le fichier. Veuillez vérifier que les permissions sont paramétrées correctement.';
 $_lang['file_err_remove'] = 'MODX n\'a pas réussi à supprimer le fichier. Veuillez vérifier que les permissions sont paramétrées correctement.';
-$_lang['file_err_save'] = 'Impossible de sauvegarder le fichier, veuillez vérifier que le répertoire cible est accessible en écriture!';
-$_lang['file_err_too_large'] = 'Le fichier est trop volumineux ([[+size]] bytes). Veuillez vous assurer que vos fichiers fassent moins de [[+allowed]] bytes.';
+$_lang['file_err_save'] = 'Impossible de sauvegarder le fichier, veuillez vérifier que le répertoire cible est accessible en écriture !';
+$_lang['file_err_too_large'] = 'Le fichier est trop volumineux ([[+size]] octets). Veuillez vous assurer que vos fichiers fassent moins de [[+allowed]] octets.';
 $_lang['file_err_unzip'] = 'Échec de la décompression!';
 $_lang['file_err_unzip_invalid_path'] = 'Chemin invalide pour le fichier décompressé.';
 $_lang['file_err_unzip_missing_lib'] = ' Librairie zip manquante (php_zip.dll / zip.so)';
@@ -128,7 +128,7 @@ $_lang['upload.buttons.clear']            = 'Vider la liste';
 $_lang['upload.buttons.upload']           = 'Envoyer';
 $_lang['upload.buttons.close']            = 'Annuler';
 $_lang['upload.title.destination_path']   = 'Répertoire de destination : [[+path]]';
-$_lang['upload.upload_progress']          = '[[+chargé]] / [[+total]]';
+$_lang['upload.upload_progress']          = '[[+loaded]] / [[+total]]';
 $_lang['upload.notpermitted.extension']   = 'Charger un fichier .[[+ext]] n\'est pas autorisé !';
 $_lang['upload.notpermitted.filesize']    = 'La taille  ([[+size]]) du fichier dépasse la limite autorisée ! (max. [[+max]])';
 $_lang['upload.columns.file']             = 'Enregistrer';
