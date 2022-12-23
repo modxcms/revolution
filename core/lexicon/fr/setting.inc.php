@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Groupe';
+$_lang['area'] = 'Champs d\'application';
 $_lang['area_authentication'] = 'Authentification et sécurité';
 $_lang['area_caching'] = 'Cache';
 $_lang['area_core'] = 'Code du core';
@@ -614,8 +614,8 @@ $_lang['setting_server_offset_time_desc'] = 'Indiquez le nombre d\'heures de dé
 $_lang['setting_session_cookie_domain'] = 'Cookie de session de domaine';
 $_lang['setting_session_cookie_domain_desc'] = 'Utilisez cette option pour personnaliser le domaine de session de cookie.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Cookie de session Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choisissez entre "Lax" ou "Strict".';
 
 $_lang['setting_session_cookie_lifetime'] = 'Durée de vie du Cookie de Session';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Utilisez cette option pour personnaliser la durée de vie de session de coockie (en secondes). Ceci est utilisé la durée de la session côté client quand l\'option \'se rappeler de moi\' est utilisée lors du login.';
@@ -700,11 +700,11 @@ $_lang['setting_static_elements_default_category_desc'] = 'Spécifier une catég
 $_lang['setting_static_elements_basepath'] = 'Chemin de base des éléments statiques';
 $_lang['setting_static_elements_basepath_desc'] = 'Chemin de base où stocker les fichiers d\'éléments statiques.';
 
-$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
-$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+$_lang['setting_resource_static_allow_absolute'] = 'Permettre d\'utiliser le chemin absolu pour les ressources statiques';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Ce paramètre permet aux utilisateurs d\'entrer un chemin absolu entièrement qualifié vers n\'importe quel fichier lisible sur le serveur en tant que contenu d\'une ressource statique. Important : l\'activation de ce paramètre peut être considérée comme un risque de sécurité très important ! Il est fortement recommandé de garder ce paramètre désactivé, à moins que vous ne fassiez entièrement confiance à chaque utilisateur du "manager".';
 
 $_lang['setting_resource_static_path'] = 'Chemin de base de ressource statique';
-$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
+$_lang['setting_resource_static_path_desc'] = 'Lorsque resource_static_allow_absolute est désactivé, les ressources statiques sont limitées à être dans le chemin absolu fourni ici. Important : le paramétrage trop large peut permettre aux utilisateurs de lire les fichiers qu\'ils ne devraient pas ! Il est fortement recommandé de limiter les utilisateurs à un répertoire spécifique tel que {core_path}static/ ou {assets_path} avec ce paramètre.';
 
 $_lang['setting_symlink_merge_fields'] = 'Fusionner les champs de ressource des liens symboliques';
 $_lang['setting_symlink_merge_fields_desc'] = 'Activé, cela fusionnera automatiquement les champs non vides avec ceux de la ressource cible, lors de redirections utilisant les liens symboliques.';
@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Lorsque cette option est activ�
 $_lang['setting_passwordless_expiration'] = 'Expiration de la connexion sans mot de passe';
 $_lang['setting_passwordless_expiration_desc'] = 'Durée de validité en secondes d\'un lien de connexion unique.';
 
-$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
-$_lang['setting_static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['setting_static_elements_html_extension'] = 'Extension html des éléments statiques';
+$_lang['setting_static_elements_html_extension_desc'] = 'L\'extension pour les fichiers utilisés par les éléments statiques avec du contenu HTML.';
