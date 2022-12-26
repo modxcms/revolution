@@ -302,10 +302,11 @@ class modPhpThumb extends phpthumb
             $this->SendSaveAsFileHeaderIfNeeded();
 
             header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $nModified) . ' GMT');
-            if (@$_SERVER['HTTP_IF_MODIFIED_SINCE'] && ($nModified == strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) && @$_SERVER['SERVER_PROTOCOL']) {
-                header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
-                exit;
-            }
+            # Fix PHP warning: Undefined array key "HTTP_IF_MODIFIED_SINCE"
+               if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && ($nModified == strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) && isset($_SERVER['SERVER_PROTOCOL'])) {
+                  header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+               exit;
+               }
 
             $getimagesize = @getimagesize($this->cache_filename);
             if ($getimagesize) {
@@ -332,13 +333,25 @@ class modPhpThumb extends phpthumb
         if (headers_sent()) {
             return false;
         }
-        $downloadfilename = phpthumb_functions::SanitizeFilename(@$_GET['sia'] ? $_GET['sia'] : (@$_GET['down'] ? $_GET['down'] : 'phpThumb_generated_thumbnail' . (@$_GET['f'] ? $_GET['f'] : 'jpg')));
-        if (@$downloadfilename) {
-            $this->DebugMessage('SendSaveAsFileHeaderIfNeeded() sending header: Content-Disposition: ' . (@$_GET['down'] ? 'attachment' : 'inline') . '; filename="' . $downloadfilename . '"',
-                __FILE__, __LINE__);
-            header('Content-Disposition: ' . (@$_GET['down'] ? 'attachment' : 'inline') . '; filename="' . $downloadfilename . '"');
+    # Fix PHP warning: "Undefined array key sia"
+    if (isset($_GET['sia'])) {
+        $downloadfilename = phpthumb_functions::SanitizeFilename($_GET['sia']);
+    } elseif (isset($_GET['down'])) {
+        $downloadfilename = phpthumb_functions::SanitizeFilename($_GET['down']);
+    } else {
+        $downloadfilename = 'phpThumb_generated_thumbnail' . (isset($_GET['f']) ? $_GET['f'] : 'jpg');
+    } 
+   
+    # Fix PHP warning: "Undefined array key down"
+    if (isset($downloadfilename)) {
+        if (isset($_GET['down'])) {
+            $this->DebugMessage('SendSaveAsFileHeaderIfNeeded() sending header: Content-Disposition: attachment; filename="' . $downloadfilename . '"', __FILE__, __LINE__);
+            header('Content-Disposition: attachment; filename="' . $downloadfilename . '"');
+        } else {
+            $this->DebugMessage('SendSaveAsFileHeaderIfNeeded() sending header: Content-Disposition: inline; filename="' . $downloadfilename . '"', __FILE__, __LINE__);
+            header('Content-Disposition: inline; filename="' . $downloadfilename . '"');
         }
-
+    }
         return true;
     }
 
