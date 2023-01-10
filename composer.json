@@ -39,6 +39,12 @@
         "issues": "https://github.com/modxcms/revolution/issues/",
         "source": "https://github.com/modxcms/revolution/"
     },
+    "funding": [
+        {
+            "type": "opencollective",
+            "url": "https://opencollective.com/modx"
+        }
+    ],
     "config": {
         "vendor-dir": "core/vendor"
     },
