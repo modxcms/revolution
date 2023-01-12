@@ -11,7 +11,7 @@
 
 
 /**
- * @property modX $modx
+ * @var modX $modx
  */
 
 use MODX\Revolution\modChunk;
