@@ -2776,6 +2776,7 @@ class xPDO {
  *
  */
 class xPDOCriteria {
+    public $xpdo= null;
     public $sql= '';
     public $stmt= null;
     public $bindings= array ();

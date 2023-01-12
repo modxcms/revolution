@@ -1,5 +1,10 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.8.5-pl (January 12, 2023)
+====================================
+- Force query operator to the uppercase (#244)
+- Add public xpdo property to xPDOCriteria (#240)
+
 xPDO 2.8.4-pl (February 10, 2022)
 ====================================
 - Fix param typehint for xPDOCache add/set/replace methods (#210)
