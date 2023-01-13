@@ -738,14 +738,8 @@ $_lang['setting_upload_files_desc'] = 'Here you can enter a list of files that c
 $_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
 $_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
-$_lang['setting_upload_images'] = 'Uploadable Image Types';
-$_lang['setting_upload_images_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/images/\' using the Resource Manager. Please enter the extensions for the image types, separated by commas.';
-
 $_lang['setting_upload_maxsize'] = 'Maximum upload size';
 $_lang['setting_upload_maxsize_desc'] = 'Enter the maximum file size that can be uploaded via the file manager. Upload file size must be entered in bytes. <strong>NOTE: Large files can take a very long time to upload!</strong>';
-
-$_lang['setting_upload_media'] = 'Uploadable Media Types';
-$_lang['setting_upload_media_desc'] = 'Here you can enter a list of files that can be uploaded into \'assets/media/\' using the Resource Manager. Please enter the extensions for the media types, separated by commas.';
 
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';

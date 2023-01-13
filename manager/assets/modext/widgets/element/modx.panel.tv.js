@@ -1236,7 +1236,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                                 ,fieldLabel: _('tv_default_file')
                                 ,openTo: this.record.openTo || ''
                                 ,source: this.record.source
-                                ,allowedFileTypes: 'txt'
+                                ,allowedFileTypes: MODx.config.upload_files
                                 ,triggerClass: 'x-form-code-trigger'
                                 ,maxLength: 255
                                 ,hideMode: 'offsets'
@@ -1251,7 +1251,7 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                                 ,fieldLabel: _('tv_default_image')
                                 ,openTo: this.record.openTo || ''
                                 ,source: this.record.source
-                                ,allowedFileTypes: MODx.config.upload_images
+                                ,allowedFileTypes: MODx.config.upload_files
                                 ,triggerClass: 'x-form-code-trigger'
                                 ,maxLength: 255
                                 ,hideMode: 'offsets'

@@ -1805,29 +1805,11 @@ $settings['upload_file_exists']->fromArray([
   'area' => 'file',
   'editedon' => null,
 ], '', true, true);
-$settings['upload_images'] = $xpdo->newObject(modSystemSetting::class);
-$settings['upload_images']->fromArray([
-  'key' => 'upload_images',
-  'value' => 'jpg,jpeg,png,gif,psd,ico,bmp,tiff,svg,svgz,webp',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
 $settings['upload_maxsize'] = $xpdo->newObject(modSystemSetting::class);
 $settings['upload_maxsize']->fromArray([
   'key' => 'upload_maxsize',
   'value' => 1048576,
   'xtype' => 'numberfield',
-  'namespace' => 'core',
-  'area' => 'file',
-  'editedon' => null,
-], '', true, true);
-$settings['upload_media'] = $xpdo->newObject(modSystemSetting::class);
-$settings['upload_media']->fromArray([
-  'key' => 'upload_media',
-  'value' => 'mp3,wav,au,wmv,avi,mpg,mpeg',
-  'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',
   'editedon' => null,
