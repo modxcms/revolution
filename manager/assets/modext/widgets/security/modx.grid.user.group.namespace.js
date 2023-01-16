@@ -17,10 +17,24 @@ MODx.grid.UserGroupNamespace = function(config) {
         ,baseParams: {
             action: 'Security/Access/UserGroup/AccessNamespace/GetList'
             ,usergroup: config.usergroup
+            ,namespace: MODx.request.namespace || null
+            ,policy: MODx.request.policy || null
         }
         ,paging: true
         ,hideMode: 'offsets'
-        ,fields: ['id','target','name','principal','authority','authority_name','policy', 'context_key', 'policy_name','permissions','menu']
+        ,fields: [
+            'id',
+            'target',
+            'name',
+            'principal',
+            'authority',
+            'authority_name',
+            'policy',
+            'context_key',
+            'policy_name',
+            'permissions',
+            'menu'
+        ]
         ,grouping: true
         ,groupBy: 'authority_name'
         ,singleText: _('policy')
@@ -68,30 +82,53 @@ MODx.grid.UserGroupNamespace = function(config) {
             ,handler: this.createAcl
         },'->',{
             xtype: 'modx-combo-namespace'
-            ,id: 'modx-ugnamespace-namespace-filter'
+            ,itemId: 'filter-namespace'
             ,emptyText: _('filter_by_namespace')
             ,width: 200
             ,allowBlank: true
+            ,value: MODx.request.namespace || null
             ,listeners: {
-                'select': {fn:this.filterNamespace,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'namespace');
+                    },
+                    scope: this
+                }
             }
         },{
             xtype: 'modx-combo-policy'
-            ,id: 'modx-ugnamespace-policy-filter'
+            ,itemId: 'filter-policy'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
+            ,value: MODx.request.policy || null
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
                 ,group: 'Namespace'
             }
             ,listeners: {
-                'select': {fn:this.filterPolicy,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'policy');
+                    },
+                    scope: this
+                }
             }
         },{
             text: _('filter_clear')
-            ,id: 'modx-ugnamespace-clear-filter'
-            ,handler: this.clearFilter
-            ,scope: this
+            ,itemId: 'filter-clear'
+            ,listeners: {
+                click: {
+                    fn: function() {
+                        this.clearGridFilters('filter-namespace, filter-policy');
+                    },
+                    scope: this
+                },
+                mouseout: {
+                    fn: function(evt) {
+                        this.removeClass('x-btn-focus');
+                    }
+                }
+            }
         }]
     });
     MODx.grid.UserGroupNamespace.superclass.constructor.call(this,config);
@@ -100,24 +137,6 @@ MODx.grid.UserGroupNamespace = function(config) {
 Ext.extend(MODx.grid.UserGroupNamespace,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
-
-    ,filterNamespace: function(cb,rec,ri) {
-        this.getStore().baseParams['namespace'] = rec.data['name'];
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,filterPolicy: function(cb,rec,ri) {
-        this.getStore().baseParams['policy'] = rec.data['id'];
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearFilter: function(btn,e) {
-        Ext.getCmp('modx-ugnamespace-namespace-filter').setValue('');
-        this.getStore().baseParams['source'] = '';
-        Ext.getCmp('modx-ugnamespace-policy-filter').setValue('');
-        this.getStore().baseParams['policy'] = '';
-        this.getBottomToolbar().changePage(1);
-    }
 
     ,createAcl: function(itm,e) {
         var r = {

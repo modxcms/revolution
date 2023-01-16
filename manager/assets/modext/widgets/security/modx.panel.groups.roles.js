@@ -164,7 +164,7 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
             userGrid.usergroup = usergroup;
             userGrid.config.usergroup = usergroup;
             userGrid.store.baseParams.usergroup = usergroup;
-            userGrid.clearFilter();
+            userGrid.clearGridFilters('filter-username');
         }
 
     }

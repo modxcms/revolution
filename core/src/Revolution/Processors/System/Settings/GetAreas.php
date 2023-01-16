@@ -66,6 +66,7 @@ class GetAreas extends Processor
 
         $list = [];
         if ($c->prepare() && $c->stmt->execute()) {
+            $optionData = [];
             while ($r = $c->stmt->fetch(PDO::FETCH_NUM)) {
                 list($area, $namespace, $count) = $r;
                 $name = $area;
@@ -76,14 +77,27 @@ class GetAreas extends Processor
                 if ($this->modx->lexicon->exists($lex)) {
                     $name = $this->modx->lexicon($lex);
                 }
-                if ($name === null) {
+                if (empty($name)) {
                     $name = $this->modx->lexicon('none');
                 }
+                if (array_key_exists($area, $optionData)) {
+                    $optionData[$area]['count'] = $count + $optionData[$area]['count'];
+                } else {
+                    $optionData[$area]['label'] = $name;
+                    $optionData[$area]['count'] = $count;
+                }
+            }
+        }
+        if (!empty($optionData)) {
+            foreach ($optionData as $area => $areaData) {
                 $list[] = [
-                    'd' => "$name ({$count})",
-                    'v' => $area,
+                    'd' => $areaData['label'] . ' (' . $areaData['count'] . ')',
+                    'v' => $area
                 ];
             }
+            usort($list, function ($a, $b) {
+                return strtolower($a['d']) <=> strtolower($b['d']);
+            });
         }
         return $this->outputArray($list);
     }

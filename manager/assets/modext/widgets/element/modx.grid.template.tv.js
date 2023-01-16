@@ -23,6 +23,8 @@ MODx.grid.TemplateTV = function(config) {
             action: 'Element/Template/TemplateVar/GetList'
             ,template: config.template
             ,sort: 'tv_rank'
+            ,category: MODx.request.category || ''
+            ,query: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
         }
         ,saveParams: {
             template: config.template
@@ -80,27 +82,52 @@ MODx.grid.TemplateTV = function(config) {
             ,hiddenName: 'filter_category'
             ,id: 'modx-temptv-filter-category'
             ,emptyText: _('filter_by_category')
-            ,value: ''
+            ,value: MODx.request.category || ''
             ,allowBlank: true
             ,width: 150
             ,listeners: {
-                'select': {fn: this.filterByCategory, scope:this}
+                'select': {
+                    fn: function (cb, rec, ri) {
+                        if (!MODx.request.query) {
+                            this.filterByCategory(cb, rec, ri);
+                        }
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-temptv-search'
+            ,name: 'query'
+            ,id: 'modx-temptv-query'
             ,cls: 'x-form-filter'
             ,emptyText: _('search')
+            ,value: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
             ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.tvSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                }
+                ,'afterrender': {
+                    fn: function (cb) {
+                        if (MODx.request.query) {
+                            this.tvSearch(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function (cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
             }
         },{
             xtype: 'button'
@@ -164,26 +191,31 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
         }, this);
     }
 
-    ,filterByCategory: function(cb,rec,ri) {
-        this.getStore().baseParams['category'] = cb.getValue();
+    ,filterByCategory: function (cb, newValue, ov) {
+        var nv = Ext.isEmpty(newValue) || Ext.isObject(newValue) ? cb.getValue() : newValue;
+        var s = this.getStore();
+        s.baseParams.category = nv;
+        s.load();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
-    ,search: function(tf,newValue,oldValue) {
+    ,tvSearch: function(tf, newValue, ov) {
         var nv = newValue || tf;
-        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        Ext.getCmp('modx-temptv-filter-category').setValue('');
+        var s = this.getStore();
+        s.baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        s.load();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
-        return true;
     }
 
     ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Element/Template/TemplateVar/GetList'
-            ,template: this.config.template
-        };
-        Ext.getCmp('modx-temptv-filter-category').reset();
-        Ext.getCmp('modx-temptv-search').setValue('');
+        var s = this.getStore();
+        s.baseParams.category = s.baseParams.query = '';
+        Ext.getCmp('modx-temptv-filter-category').setValue('');
+        Ext.getCmp('modx-temptv-query').setValue('');
+        s.load();
+        this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 

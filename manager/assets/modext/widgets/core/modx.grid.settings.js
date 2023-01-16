@@ -30,90 +30,119 @@ MODx.grid.SettingsGrid = function(config) {
     '->'
     ,{
         xtype: 'modx-combo-namespace'
-        ,id: 'modx-filter-namespace'
+        ,itemId: 'filter-ns'
         ,emptyText: _('namespace_filter')
-        ,preselectValue: (MODx.request.ns) ? MODx.request.ns : 'core'
         ,allowBlank: false
         ,editable: true
         ,typeAhead: true
+        ,minChars: 2
         ,forceSelection: true
-        ,queryParam: 'search'
-        ,width: 150
+        ,width: 200
+        ,value: MODx.request.ns || null
         ,listeners: {
-            'select': {
-                fn: function (cb, rec, ri) {
-                    if (!MODx.request.query) {
-                        this.filterByNamespace(cb, rec, ri)
+            select: {
+                fn: function (cmp, record, selectedIndex) {
+                    this.applyGridFilter(cmp, 'ns');
+                    const areaCmp = cmp.ownerCt.getComponent('filter-area');
+                    if (areaCmp) {
+                        this.getAreaFilterOptions(areaCmp);
                     }
-                }
-                ,scope:this
+                },
+                scope: this
+            },
+            change: {
+                // Support typed-in value (where the select event is not triggered)
+                fn: function (cmp, newValue, oldValue) {
+                    if (newValue != oldValue) {
+                        this.applyGridFilter(cmp, 'ns');
+                        const areaCmp = cmp.ownerCt.getComponent('filter-area');
+                        if (areaCmp) {
+                            this.getAreaFilterOptions(areaCmp);
+                        }
+                    }
+                },
+                scope: this
             }
         }
     },{
         xtype: 'modx-combo-area'
-        ,id: 'modx-filter-area'
+        ,itemId: 'filter-area'
         ,emptyText: _('area_filter')
-        ,value: MODx.request.area
+        ,value: MODx.request.area || null
         ,baseParams: {
             action: 'System/Settings/GetAreas'
-            ,namespace: MODx.request.ns ? MODx.request.ns : 'core'
+            ,namespace: MODx.request.ns || null
         }
         ,width: 250
         ,allowBlank: true
         ,editable: true
         ,typeAhead: true
+        ,minChars: 2
         ,forceSelection: true
         ,listeners: {
-            'select': {
-                fn: function (cb, rec, ri) {
-                    if (!MODx.request.query) {
-                        this.filterByArea(cb, rec, ri);
+            select: {
+                fn: function (cmp, record, selectedIndex) {
+                    this.applyGridFilter(cmp, 'area');
+                },
+                scope: this
+            },
+            change: {
+                // Support typed-in value (where the select event is not triggered)
+                fn: function (cmp, newValue, oldValue) {
+                    if (newValue != oldValue) {
+                        this.applyGridFilter(cmp, 'area');
                     }
-                }
-                ,scope:this
+                },
+                scope: this
             }
         }
     },{
         xtype: 'textfield'
-        ,id: 'modx-filter-query'
-        ,cls: 'x-form-filter'
+        ,itemId: 'filter-query'
         ,emptyText: _('search')
-        ,value: MODx.request.query
+        ,value: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
         ,listeners: {
-            'change': {
-                fn: function (cb, rec, ri) {
-                    this.filterByQuery(cb, rec, ri);
-                }
-                ,scope: this
+            change: {
+                fn: function (cmp, newValue, oldValue) {
+                    this.applyGridFilter(cmp);
+                },
+                scope: this
             },
-            'afterrender': {
-                fn: function (cb){
+            afterrender: {
+                fn: function(cmp) {
                     if (MODx.request.query) {
-                        this.filterByQuery(cb, cb.value);
-                        MODx.request.query = '';
+                        this.applyGridFilter(cmp);
                     }
-                }
-                ,scope: this
-            }
-            ,'render': {
+                },
+                scope: this
+            },
+            render: {
                 fn: function(cmp) {
                     new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
+                        key: Ext.EventObject.ENTER,
+                        fn: this.blur,
+                        scope: cmp
                     });
                 }
                 ,scope: this
             }
         }
     },{
-        xtype: 'button'
-        ,id: 'modx-filter-clear'
-        ,cls: 'x-form-filter-clear'
-        ,text: _('filter_clear')
+        text: _('filter_clear')
+        ,itemId: 'filter-clear'
         ,listeners: {
-            'click': { fn: this.clearFilter, scope: this },
-            'mouseout': { fn: function(evt) {
+            click: {
+                fn: function(cmp) {
+                    this.clearGridFilters('filter-ns, filter-area, filter-query');
+                    const areaCmp = cmp.ownerCt.getComponent('filter-area');
+                    if (areaCmp) {
+                        this.getAreaFilterOptions(areaCmp);
+                    }
+                },
+                scope: this
+            },
+            mouseout: {
+                fn: function(evt) {
                     this.removeClass('x-btn-focus');
                 }
             }
@@ -191,12 +220,26 @@ MODx.grid.SettingsGrid = function(config) {
 
     Ext.applyIf(config, {
         cm: this.cm
-        ,fields: ['key','name','value','description','xtype','namespace','area','area_text','editedon','oldkey','menu','name_trans','description_trans']
+        ,fields: [
+            'key',
+            'name',
+            'value',
+            'description',
+            'xtype',
+            'namespace',
+            'area',
+            'area_text',
+            'editedon',
+            'oldkey',
+            'menu',
+            'name_trans',
+            'description_trans'
+        ]
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Settings/GetList'
-            ,namespace: MODx.request.ns ? MODx.request.ns : 'core'
-            ,area: MODx.request.area
+            ,namespace: MODx.request.ns || null
+            ,area: MODx.request.area || null
         }
         ,clicksToEdit: 2
         ,grouping: true
@@ -299,73 +342,16 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         uss.show(e.target);
     }
 
-    ,clearFilter: function() {
-        var s = this.getStore();
-        var filterNs = Ext.getCmp('modx-filter-namespace');
-        var filterQuery = Ext.getCmp('modx-filter-query');
-        var ns = MODx.request.ns ? MODx.request.ns : 'core';
-        s.baseParams = this.initialConfig.baseParams;
-
-        s.baseParams.namespace = ns;
-        s.baseParams.area = '';
-        s.baseParams.query = '';
-        MODx.request.ns = '';
-        MODx.request.query = '';
-        filterNs.preselectValue = ns;
-        filterNs.setValue(ns);
-        filterQuery.setValue('');
-        this.clearArea();
-        this.replaceState();
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearArea: function () {
-        var filterArea = Ext.getCmp('modx-filter-area');
-        if (filterArea) {
-            filterArea.store.baseParams.namespace = this.getStore().baseParams.namespace;
-            filterArea.store.removeAll();
-            filterArea.store.load();
-            filterArea.setValue('');
-        }
-    }
-
-    ,filterByQuery: function(tf,newValue,oldValue) {
-        var s = this.getStore();
-        var filterNs = Ext.getCmp('modx-filter-namespace');
-        var ns = MODx.request.ns ? MODx.request.ns : 'core';
-        if (newValue) {
-            ns = '';
-        }
-        s.baseParams.query = newValue;
-        s.baseParams.namespace = ns;
-        s.baseParams.area = '';
-        filterNs.preselectValue = (ns) ? ns : false;
-        filterNs.setValue(ns);
-        this.clearArea();
-        this.replaceState();
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,filterByNamespace: function(cb,rec,ri) {
-        var s = this.getStore();
-        s.baseParams.namespace = rec.data.name;
-        if (!MODx.request.area) {
-            s.baseParams.area = '';
-            this.getBottomToolbar().changePage(1);
-
-            this.clearArea();
-        } else {
-            s.baseParams.area = MODx.request.area;
-            MODx.request.area = '';
-        }
-        this.replaceState();
-    }
-
-    ,filterByArea: function(cb,rec,ri) {
-        var s = this.getStore();
-        s.baseParams.area = rec.data.v;
-        this.getBottomToolbar().changePage(1);
-        this.replaceState();
+    /**
+     * @property {Function} getAreaFilterOptions - Builds the dropdown list of Areas based on the namespace
+     *
+     * @param {Object} cmp - The Area filter's Ext component
+     */
+    ,getAreaFilterOptions: function(cmp) {
+        cmp.store.baseParams.namespace = this.getStore().baseParams.namespace;
+        cmp.store.removeAll();
+        cmp.store.load();
+        cmp.setValue('');
     }
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
@@ -519,7 +505,7 @@ MODx.window.CreateSetting = function(config) {
                     ,fieldLabel: _('namespace')
                     ,name: 'namespace'
                     ,id: 'modx-cs-namespace'
-                    ,value: Ext.getCmp('modx-filter-namespace').getValue()
+                    ,value: config.grid.getTopToolbar().getComponent('filter-ns').getValue()
                     ,anchor: '100%'
                 },{
                     xtype: 'label'
@@ -533,7 +519,7 @@ MODx.window.CreateSetting = function(config) {
                     ,name: 'area'
                     ,id: 'modx-cs-area'
                     ,anchor: '100%'
-                    ,value: Ext.getCmp('modx-filter-area').getValue()
+                    ,value: config.grid.getTopToolbar().getComponent('filter-area').getValue()
                 },{
                     xtype: 'label'
                     ,forId: 'modx-cs-area'
@@ -555,8 +541,8 @@ MODx.window.CreateSetting = function(config) {
     this.on('show',function() {
         this.reset();
         this.setValues({
-            namespace: Ext.getCmp('modx-filter-namespace').value
-            ,area: Ext.getCmp('modx-filter-area').value
+            namespace: config.grid.getTopToolbar().getComponent('filter-ns').value
+            ,area: config.grid.getTopToolbar().getComponent('filter-area').value
         });
     },this);
 };

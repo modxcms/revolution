@@ -25,12 +25,6 @@ MODx.panel.UserGroup = function(config) {
             ,id: 'modx-usergroup-tabs'
             ,forceLayout: true
             ,deferredRender: false
-            ,stateful: true
-            ,stateId: 'modx-usergroup-tabpanel'
-            ,stateEvents: ['tabchange']
-            ,getState:function() {
-                return {activeTab:this.items.indexOf(this.getActiveTab())};
-            }
             ,items: [{
                 title: _('general_information')
                 ,defaults: {
@@ -139,7 +133,6 @@ MODx.panel.UserGroup = function(config) {
                     ,items: [{
                         title: _('user_group_context_access')
                         ,itemId: 'user-group-context-access'
-                        // ,forceLayout: true
                         ,hideMode: 'offsets'
                         ,layout: 'form'
                         ,items: [{
@@ -284,7 +277,6 @@ MODx.panel.UserGroup = function(config) {
                     ,xtype: 'modx-description'
                 },{
                     xtype: 'modx-grid-group-settings'
-                    ,urlFilters: ['namespace', 'area', 'query']
                     ,cls: 'main-wrapper'
                     ,preventRender: true
                     ,group: config.record.id
@@ -358,6 +350,7 @@ MODx.grid.UserGroupUsers = function(config) {
         ,baseParams: {
             action: 'Security/Group/User/GetList'
             ,usergroup: config.usergroup
+            ,username: MODx.request.username ? decodeURIComponent(MODx.request.username) : ''
         }
         ,paging: true
         ,grouping: true
@@ -367,7 +360,13 @@ MODx.grid.UserGroupUsers = function(config) {
         ,pluralText: _('users')
         ,sortBy: 'authority'
         ,sortDir: 'ASC'
-        ,fields: ['id','username','role','role_name','authority']
+        ,fields: [
+            'id',
+            'username',
+            'role',
+            'role_name',
+            'authority'
+        ]
         ,columns: [{
             header: _('username')
             ,dataIndex: 'username'
@@ -396,36 +395,58 @@ MODx.grid.UserGroupUsers = function(config) {
             ,cls: 'primary-button'
             ,handler: this.updateUserGroup
             ,hidden: (MODx.perm.usergroup_edit == 0 || config.ownerCt.id != 'modx-tree-panel-usergroup')
-        },'->',{
+        },{
             text: _('user_group_user_add')
             ,cls: 'primary-button'
             ,handler: this.addUser
             ,hidden: MODx.perm.usergroup_user_edit == 0
-        },{
+        },'->',{
             xtype: 'textfield'
-            ,id: 'modx-ugu-filter-username'
-            ,cls: 'x-form-filter'
-            ,listeners: {
-                'change': {fn:this.searchUser,scope:this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true; }
-                        ,scope: cmp
-                    });
-                }}
-            }
+            ,itemId: 'filter-username'
             ,emptyText: _('search')
-            ,scope: this
+            ,value: MODx.request.username ? decodeURIComponent(MODx.request.username) : ''
+            ,listeners: {
+                change: {
+                    fn: function (cmp, newValue, oldValue) {
+                        this.applyGridFilter(cmp, 'username');
+                    },
+                    scope: this
+                },
+                afterrender: {
+                    fn: function(cmp) {
+                        if (MODx.request.query) {
+                            this.applyGridFilter(cmp, 'username');
+                        }
+                    },
+                    scope: this
+                },
+                render: {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER,
+                            fn: this.blur,
+                            scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
+            }
         },{
             text: _('filter_clear')
-            ,id: 'modx-ugu-clear-filter'
-            ,cls: 'x-form-filter-clear'
-            ,handler: this.clearFilter
-            ,scope: this
+            ,itemId: 'filter-clear'
+            ,listeners: {
+                click: {
+                    fn: function() {
+                        this.clearGridFilters('filter-username');
+                    },
+                    scope: this
+                },
+                mouseout: {
+                    fn: function(evt) {
+                        this.removeClass('x-btn-focus');
+                    }
+                }
+            }
         }]
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);
@@ -506,17 +527,6 @@ Ext.extend(MODx.grid.UserGroupUsers,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    }
-
-    ,searchUser: function(tf,nv,ov) {
-        this.getStore().baseParams['username'] = Ext.getCmp('modx-ugu-filter-username').getValue();
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearFilter: function(btn,e) {
-        Ext.getCmp('modx-ugu-filter-username').setValue('');
-        this.getStore().baseParams['username'] = '';
-        this.getBottomToolbar().changePage(1);
     }
 });
 Ext.reg('modx-grid-user-group-users',MODx.grid.UserGroupUsers);

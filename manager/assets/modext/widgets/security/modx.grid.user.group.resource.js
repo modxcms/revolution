@@ -17,10 +17,24 @@ MODx.grid.UserGroupResourceGroup = function(config) {
         ,baseParams: {
             action: 'Security/Access/UserGroup/ResourceGroup/GetList'
             ,usergroup: config.usergroup
+            ,resourceGroup: MODx.request.resourceGroup || null
+            ,policy: MODx.request.policy || null
         }
         ,paging: true
         ,hideMode: 'offsets'
-        ,fields: ['id','target','name','principal','authority','authority_name','policy','policy_name','context_key','permissions','menu']
+        ,fields: [
+            'id',
+            'target',
+            'name',
+            'principal',
+            'authority',
+            'authority_name',
+            'policy',
+            'policy_name',
+            'context_key',
+            'permissions',
+            'menu'
+        ]
         ,grouping: true
         ,groupBy: 'authority_name'
         ,singleText: _('policy')
@@ -79,30 +93,53 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,handler: this.createAcl
         },'->',{
             xtype: 'modx-combo-resourcegroup'
-            ,id: 'modx-ugrg-resourcegroup-filter'
+            ,itemId: 'filter-resourceGroup'
             ,emptyText: _('filter_by_resource_group')
-            ,width: 200
+            ,width: 210
             ,allowBlank: true
+            ,value: MODx.request.resourceGroup || null
             ,listeners: {
-                'select': {fn:this.filterResourceGroup,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'resourceGroup');
+                    },
+                    scope: this
+                }
             }
         },{
             xtype: 'modx-combo-policy'
-            ,id: 'modx-ugrg-policy-filter'
+            ,itemId: 'filter-policy'
             ,emptyText: _('filter_by_policy')
+            ,allowBlank: true
+            ,value: MODx.request.policy || null
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
                 ,group: 'Object'
             }
-            ,allowBlank: true
             ,listeners: {
-                'select': {fn:this.filterPolicy,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'policy');
+                    },
+                    scope: this
+                }
             }
         },{
             text: _('filter_clear')
-            ,id: 'modx-ugrg-clear-filter'
-            ,handler: this.clearFilter
-            ,scope: this
+            ,itemId: 'filter-clear'
+            ,listeners: {
+                click: {
+                    fn: function() {
+                        this.clearGridFilters('filter-resourceGroup, filter-policy');
+                    },
+                    scope: this
+                },
+                mouseout: {
+                    fn: function(evt) {
+                        this.removeClass('x-btn-focus');
+                    }
+                }
+            }
         }]
     });
     MODx.grid.UserGroupResourceGroup.superclass.constructor.call(this,config);
@@ -111,23 +148,6 @@ MODx.grid.UserGroupResourceGroup = function(config) {
 Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
-
-    ,filterResourceGroup: function(cb,rec,ri) {
-        this.getStore().baseParams['resourceGroup'] = rec.data['id'];
-        this.getBottomToolbar().changePage(1);
-    }
-    ,filterPolicy: function(cb,rec,ri) {
-        this.getStore().baseParams['policy'] = rec.data['id'];
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearFilter: function(btn,e) {
-        Ext.getCmp('modx-ugrg-resourcegroup-filter').setValue('');
-        this.getStore().baseParams['resourceGroup'] = '';
-        Ext.getCmp('modx-ugrg-policy-filter').setValue('');
-        this.getStore().baseParams['policy'] = '';
-        this.getBottomToolbar().changePage(1);
-    }
 
     ,createAcl: function(itm,e) {
         var r = {
