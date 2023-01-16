@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Model;
-
 
 use MODX\Revolution\modAccessibleObject;
 use MODX\Revolution\Processors\ModelProcessor;
@@ -25,8 +25,8 @@ use xPDO\Om\xPDOQuery;
  */
 abstract class GetListProcessor extends ModelProcessor
 {
-    const CLASS_ALLOW_EDIT = 'pedit';
-    const CLASS_ALLOW_REMOVE = 'premove';
+    public const CLASS_ALLOW_EDIT = 'pedit';
+    public const CLASS_ALLOW_REMOVE = 'premove';
 
     /** @var string $defaultSortField The default field to sort by */
     public $defaultSortField = 'name';
@@ -36,6 +36,8 @@ abstract class GetListProcessor extends ModelProcessor
     public $checkListPermission = true;
     /** @var int $currentIndex The current index of successful iteration */
     public $currentIndex = 0;
+    /** @var int $listTotal  An alternative and explicitly set count to be used in extending processors where the default getCount method will not work (e.g., when an accurate count depends upon an aggregated column) */
+    public $listTotal = 0;
 
     /**
      * {@inheritDoc}
@@ -147,17 +149,21 @@ abstract class GetListProcessor extends ModelProcessor
         /* query for chunks */
         $c = $this->modx->newQuery($this->classKey);
         $c = $this->prepareQueryBeforeCount($c);
-        $data['total'] = $this->modx->getCount($this->classKey, $c);
+        $data['total'] = $this->listTotal ?: $this->modx->getCount($this->classKey, $c);
         $c = $this->prepareQueryAfterCount($c);
 
         $sortClassKey = $this->getSortClassKey();
         $sortAlias = $this->getSortClassKey();
         if (strpos($sortAlias, '\\') !== false) {
             $explodedAlias = explode('\\', $sortAlias);
-            $sortAlias= array_pop($explodedAlias);
+            $sortAlias = array_pop($explodedAlias);
         }
-        $sortKey = $this->modx->getSelectColumns($sortClassKey, $this->getProperty('sortAlias', $sortAlias), '',
-            [$this->getProperty('sort')]);
+        $sortKey = $this->modx->getSelectColumns(
+            $sortClassKey,
+            $this->getProperty('sortAlias', $sortAlias),
+            '',
+            [$this->getProperty('sort')]
+        );
         if (empty($sortKey)) {
             $sortKey = $this->getProperty('sort');
         }

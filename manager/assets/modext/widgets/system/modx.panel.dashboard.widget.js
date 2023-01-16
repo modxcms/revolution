@@ -4,7 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-dashboard-widget-form
  */
-MODx.panel.DashboardWidget = function(config) {
+ MODx.panel.DashboardWidget = function(config) {
     config = config || {};
 
     var itms = [];
@@ -126,6 +126,16 @@ MODx.panel.DashboardWidget = function(config) {
                     ,description: _('widget_permission_desc')
                     ,anchor: '100%'
                     ,value: config.record.permission || ''
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp, newValue, oldValue) {
+                                if (Ext.isEmpty(cmp.getValue())) {
+                                    cmp.getStore().load();
+                                }
+                            },
+                            scope: this
+                        }
+                    }
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
                     ,forId: 'modx-dashboard-permission'
