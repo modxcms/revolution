@@ -26767,6 +26767,77 @@ a.x-grid-link:focus {
     margin-right: 0;
 }
 
+.x-grid-empty .error-with-icon {
+    padding: 1rem;
+    font: normal 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #CF1124;
+    line-height: 1.3;
+}
+.x-grid-empty .error-with-icon::before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands";
+    font-weight: 900;
+    content: "\f071";
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+.x-grid-empty .error-with-icon * {
+    color: #09121c;
+    line-height: 1.6;
+    text-align: left;
+}
+.x-grid-empty .error-with-icon .error-status-info {
+    text-align: center;
+    margin: 0.25rem 0;
+}
+.x-grid-empty .error-with-icon code {
+    white-space: pre-line;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 11px;
+}
+
+.xdebug-error {
+    border: none;
+}
+.xdebug-error tbody td, .xdebug-error tbody th {
+    border-style: solid none none none !important;
+    border-width: thin !important;
+    border-color: #DCDCDC;
+    padding: 0.1rem 0.25rem;
+}
+.xdebug-error tbody th {
+    color: black !important;
+    font-weight: 700;
+}
+.xdebug-error tbody th:first {
+    border-top: none !important;
+}
+.xdebug-error tbody th[colspan="5"] {
+    text-align: center !important;
+    border-color: #FFF;
+    border-width: thick !important;
+    padding: 0.5rem 2rem;
+}
+.xdebug-error tbody th[bgcolor^="#f57"] {
+    background: #fdf0f1;
+    font-weight: 400;
+}
+.xdebug-error tbody th[bgcolor^="#e9b"] {
+    background: #234368;
+    color: #FFF !important;
+}
+.xdebug-error tbody td {
+    background-color: #FFF;
+}
+.xdebug-error tbody tr:nth-child(even) td {
+    background-color: #F0F0F0;
+}
+
 /* panel stylings */
 .modx-page-header,
 .modx-page-header div {
