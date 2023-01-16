@@ -17,15 +17,15 @@ MODx.panel.Workspace = function(config) {
     MODx.panel.Workspace.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.Workspace,MODx.Panel ,{
-    getItems: function(config) {
-        var i = [{
+    getItems: function() {
+        const i = [{
             html: _('package_management')
             ,id: 'modx-workspace-header'
             ,xtype: 'modx-header'
         }];
 
         if (MODx.errors.length > 0) {
-            var errors = [];
+            const errors = [];
             Ext.each(MODx.errors, function(error) {
                 errors.push('<p>'+error+'</p>')
             });

@@ -81,18 +81,18 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
         }
     }
 
-    ,_renderType: function(v,md,rec,ri) {
+    ,_renderType: function(v) {
         switch (v) {
-            case 'combo-boolean': return _('yesno'); break;
-            case 'datefield': return _('date'); break;
-            case 'numberfield': return _('integer'); break;
+            case 'combo-boolean': return _('yesno');
+            case 'datefield': return _('date');
+            case 'numberfield': return _('integer');
         }
         return _(v);
     }
-    ,_renderName: function(v,md,rec,ri) {
+    ,_renderName: function(v,md,rec) {
         switch (rec.data.overridden) {
             case 1:
-                return '<span style="color: green;">'+v+'</span>'; break;
+                return '<span style="color: green;">'+v+'</span>';
             case 2:
                 return '<span style="color: purple;">'+v+'</span>';
             default:
@@ -107,8 +107,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             ,blankValues: true
             ,listeners: {
                 'success': {fn:function(r) {
-
-                    var rec = new this.propRecord({
+                    const rec = new this.propRecord({
                         name: r.name
                         ,desc: r.desc
                         ,desc_trans: r.desc
@@ -132,11 +131,11 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
             ,record: this.menu.record
             ,listeners: {
                 'success': {fn:function(r) {
-                    var s = this.getStore();
-                    var ri = this.menu.recordIndex;
-                    var d = this.defaultProperties[ri];
+                    const s = this.getStore();
+                    const ri = this.menu.recordIndex;
+                    let d = this.defaultProperties[ri];
                     d = (d && d[4]) ? d[4] : r.value;
-                    var rec = s.getAt(this.menu.recordIndex);
+                    const rec = s.getAt(this.menu.recordIndex);
                     rec.set('name',r.name);
                     rec.set('desc',r.desc);
                     rec.set('desc_trans', r.desc);
@@ -152,13 +151,13 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
         });
     }
 
-    ,revert: function(btn,e) {
+    ,revert: function() {
         Ext.Msg.confirm(_('warning'),_('property_revert_confirm'),function(e) {
             if (e == 'yes') {
-                var ri = this.menu.recordIndex;
-                var d = this.defaultProperties[ri];
+                const ri = this.menu.recordIndex;
+                const d = this.defaultProperties[ri];
                 if (d) {
-                    var rec = this.getStore().getAt(ri);
+                    const rec = this.getStore().getAt(ri);
                     rec.set('name',d[0]);
                     rec.set('desc',d[1]);
                     rec.set('xtype',d[2]);
@@ -171,7 +170,7 @@ Ext.extend(MODx.grid.SourceProperties,MODx.grid.LocalProperty,{
         },this);
     }
 
-    ,revertAll: function(btn,e) {
+    ,revertAll: function() {
         Ext.Msg.confirm(_('warning'),_('property_revert_all_confirm'),function(e) {
             if (e == 'yes') {
                 this.getStore().loadData(this.defaultProperties);
@@ -630,9 +629,9 @@ MODx.form.SourceValueField = function(config) {
     this.on('change',this.checkValue,this);
 };
 Ext.extend(MODx.form.SourceValueField,Ext.form.TextField,{
-    checkValue: function(fld,nv,ov) {
-        var t = Ext.getCmp(this.config.xtypeField).getValue();
-        var v = fld.getValue();
+    checkValue: function(fld) {
+        const t = Ext.getCmp(this.config.xtypeField).getValue();
+        let v = fld.getValue();
         if (t == 'combo-boolean') {
             v = (v == '1' || v == 'true' || v == 1 || v == true || v == _('yes') || v == 'yes') ? 1 : 0;
             fld.setValue(v);

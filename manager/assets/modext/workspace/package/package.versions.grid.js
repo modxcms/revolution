@@ -53,8 +53,8 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
         }
     }
 
-    ,removePriorVersion: function(btn,e) {
-        var r = this.menu.record;
+    ,removePriorVersion: function() {
+        const r = this.menu.record;
         MODx.msg.confirm({
             title: _('package_version_remove')
             ,text: _('package_version_remove_confirm')
@@ -75,7 +75,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
 
     /* Purge old package versions */
     ,purgePackageVersions: function(btn,e) {
-        var topic = '/Workspace/Packages/Purge/';
+        const topic = '/Workspace/Packages/Purge/';
 
         this.loadWindow(btn,e,{
             xtype: 'modx-window-package-versions-purge'
@@ -85,7 +85,7 @@ Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
                 ,register: 'mgr'
             }
             ,listeners: {
-                success: {fn: function(o) {
+                success: {fn: function() {
                     this.refresh();
                 },scope:this}
             }
@@ -138,7 +138,7 @@ MODx.window.PurgePackageVersions = function(config) {
 };
 Ext.extend(MODx.window.PurgePackageVersions,MODx.Window,{
     submit: function() {
-        var r = this.config.record;
+        const r = this.config.record;
         if (this.fp.getForm().isValid()) {
             Ext.getCmp('modx-grid-package-versions').loadConsole(Ext.getBody(),r.topic);
             this.fp.getForm().baseParams = {
@@ -152,7 +152,7 @@ Ext.extend(MODx.window.PurgePackageVersions,MODx.Window,{
                 ,scope: this
                 ,failure: function(frm,a) {
                     this.fireEvent('failure',frm,a);
-                    var g = Ext.getCmp('modx-grid-package-versions');
+                    const g = Ext.getCmp('modx-grid-package-versions');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
@@ -160,7 +160,7 @@ Ext.extend(MODx.window.PurgePackageVersions,MODx.Window,{
                 }
                 ,success: function(frm,a) {
                     this.fireEvent('success',{f:frm,a:a});
-                    var g = Ext.getCmp('modx-grid-package-versions');
+                    const g = Ext.getCmp('modx-grid-package-versions');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();

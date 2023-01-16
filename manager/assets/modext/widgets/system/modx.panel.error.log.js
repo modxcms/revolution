@@ -97,14 +97,14 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
      * Set the textarea height to make use of the maximum "space" the client viewport allows
      */
     ,setTextareaHeight: function() {
-        var elem = Ext.getCmp('modx-error-log-content');
+        const elem = Ext.getCmp('modx-error-log-content');
         // Client viewport visible height
-        var clientHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight
-            // Our textarea "top" position
-            ,elemTop = elem.el.getTop()
-            // The followings are to prevent scrolling if possible (slice is to remove "px" from the values, since we want integers)
-            ,wrapperPadding = this.el.select('.main-wrapper').first().getStyle('padding-bottom').slice(0, -2)
-            ,containerMargin = this.el.getStyle('margin-bottom').slice(0, -2);
+        const clientHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight;
+        // Our textarea "top" position
+        const elemTop = elem.el.getTop();
+        // The followings are to prevent scrolling if possible (slice is to remove "px" from the values, since we want integers)
+        const wrapperPadding = this.el.select('.main-wrapper').first().getStyle('padding-bottom').slice(0, -2);
+        const containerMargin = this.el.getStyle('margin-bottom').slice(0, -2);;
 
         // Now set our max available height for our textarea
         elem.el.setHeight(clientHeight - elemTop - wrapperPadding - containerMargin);

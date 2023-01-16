@@ -36,16 +36,16 @@ MODx.panel.Packages = function(config) {
             text: _('cancel')
             ,id:'package-list-reset'
             ,hidden: true
-            ,handler: function(btn, e){
-                var bc = Ext.getCmp('packages-breadcrumbs');
-                var last = bc.data.trail[bc.data.trail.length - 2];
+            ,handler: function(){
+                const bc = Ext.getCmp('packages-breadcrumbs');
+                const last = bc.data.trail[bc.data.trail.length - 2];
                 if (last != undefined && last.rec != undefined) {
                     bc.data.trail.pop();
                     bc.data.trail.pop();
                     bc.data.trail.shift();
                     bc.updateDetail(bc.data);
 
-                    var grid = Ext.getCmp('modx-package-grid');
+                    const grid = Ext.getCmp('modx-package-grid');
                     grid.install(last.rec);
                     return;
                 }
@@ -91,8 +91,8 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
      */
     ,install: function(va, event, options){
         options = options || {};
-        var r;
-        var g = Ext.getCmp('modx-package-grid');
+        let r;
+        const g = Ext.getCmp('modx-package-grid');
         if (!g) return false;
 
         // Set the signature from the button config (set in MODx.panel.PackageBeforeInstall.updatePanel)
@@ -103,11 +103,11 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
         }
 
         // Load up the installation console
-        var topic = '/workspace/package/install/'+r.signature+'/';
+        const topic = '/workspace/package/install/'+r.signature+'/';
         g.loadConsole(Ext.getBody(),topic);
 
         // Grab the params to send to the install processor
-        var params = {
+        const params = {
             action: 'Workspace/Packages/Install'
             ,signature: r.signature
             ,register: 'mgr'
@@ -122,19 +122,19 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
             ,params: params
             ,listeners: {
                 'success': {fn:function() {
-                    var bc = Ext.getCmp('packages-breadcrumbs');
-                    var trail= bc.data.trail;
+                    const bc = Ext.getCmp('packages-breadcrumbs');
+                    const trail = bc.data.trail;
                     trail.pop();
 
                     if (trail.length > 1) {
-                        last = trail[trail.length - 1];
+                        const last = trail[trail.length - 1];
 
                         if (last != undefined && last.rec != undefined) {
                             bc.data.trail.pop();
                             bc.data.trail.shift();
                             bc.updateDetail(bc.data);
 
-                            var grid = Ext.getCmp('modx-package-grid');
+                            const grid = Ext.getCmp('modx-package-grid');
                             grid.install(last.rec);
                             return;
                         }
@@ -163,7 +163,7 @@ Ext.extend(MODx.panel.Packages,MODx.Panel,{
             this.win.title = _('setup_options');
         }
         this.win.show(btn);
-        var opts = Ext.getCmp('modx-package-beforeinstall').getOptions();
+        const opts = Ext.getCmp('modx-package-beforeinstall').getOptions();
         this.win.fetch(opts);
     }
 });
@@ -226,7 +226,7 @@ Ext.extend(MODx.panel.PackagesBrowser,MODx.Panel,{
     }
 
     ,updateBreadcrumbs: function(msg, highlight){
-        var bd = { text: msg };
+        const bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
 
         bd.trail = [{ text : _('package_browser') }];

@@ -129,16 +129,16 @@ Ext.extend(MODx.panel.Package,MODx.FormPanel,{
         });
     }
 
-    ,beforeSubmit: function(o) {
+    ,beforeSubmit: function() {
         return this.fireEvent('save',{
             values: this.getForm().getValues()
         });
     }
 
-    ,success: function(r) {
+    ,success: function() {
     }
 
-    ,getPageHeader: function(config) {
+    ,getPageHeader: function() {
         return MODx.util.getHeaderBreadCrumbs('modx-package-header', [{
             text: _('package_management'),
             href: MODx.getPage('workspaces')

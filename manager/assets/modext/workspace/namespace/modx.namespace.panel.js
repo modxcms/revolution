@@ -124,7 +124,7 @@ MODx.grid.Namespace = function(config) {
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
+                'mouseout': { fn: function(){
                     this.removeClass('x-btn-focus');
                     }
                 }
@@ -135,9 +135,9 @@ MODx.grid.Namespace = function(config) {
 };
 Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
     getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.perm;
-        var m = [];
+        const r = this.getSelectionModel().getSelected();
+        const p = r.data.perm;
+        const m = [];
         if (this.getSelectionModel().getCount() > 1) {
             m.push({
                 text: _('selected_remove')
@@ -160,7 +160,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
     }
 
     ,namespaceUpdate: function(elem, vent) {
-        var win = MODx.load({
+        const win = MODx.load({
             xtype: 'modx-window-namespace-update'
             ,record: this.menu.record
             ,listeners: {
@@ -174,16 +174,16 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         win.show(vent.target);
     }
 
-    ,namespaceSearch: function(tf,newValue,oldValue) {
-        var s = this.getStore();
+    ,namespaceSearch: function(tf,newValue) {
+        const s = this.getStore();
         s.baseParams.search = newValue;
         this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
     ,clearFilter: function() {
-        var s = this.getStore();
-        var namespaceSearch = Ext.getCmp('modx-namespace-search');
+        const s = this.getStore();
+        const namespaceSearch = Ext.getCmp('modx-namespace-search');
         s.baseParams = {
             action: 'Workspace/PackageNamespace/GetList'
         };
@@ -194,7 +194,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
     }
 
     ,removeSelected: function() {
-        var cs = this.getSelectedAsList();
+        const cs = this.getSelectedAsList();
         if (cs === false) return false;
 
         MODx.msg.confirm({
@@ -206,7 +206,7 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
                 ,namespaces: cs
             }
             ,listeners: {
-                'success': {fn:function(r) {
+                'success': {fn:function() {
                     this.getSelectionModel().clearSelections(true);
                     this.refresh();
                 },scope:this}
