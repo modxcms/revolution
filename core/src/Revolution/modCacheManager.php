@@ -629,20 +629,13 @@ class modCacheManager extends xPDOCacheManager
                         $results[$partition] = $this->clean($partOptions);
                     } else {
                         /* Only clear resource cache for the provided contexts. */
+                        $successful = true;
                         foreach ($partOptions['contexts'] as $ctx) {
-                            $this->modx->cacheManager->delete(
-                                $ctx,
-                                [
-                                    xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null,
-                                        'resource'),
-                                    xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null,
-                                        $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-                                    xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption('cache_resource_format', null,
-                                        $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null,
-                                            xPDOCacheManager::CACHE_PHP)),
-                                ]
-                            );
+                            if (!$this->deleteTree($this->getCachePath() . $partKey . DIRECTORY_SEPARATOR . $ctx)) {
+                                $successful = false;
+                            }
                         }
+                        $results[$partition] = $successful;
                     }
                     break;
                 case 'scripts':
