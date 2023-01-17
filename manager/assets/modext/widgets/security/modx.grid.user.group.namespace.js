@@ -17,7 +17,7 @@ MODx.grid.UserGroupNamespace = function(config) {
         ,baseParams: {
             action: 'Security/Access/UserGroup/AccessNamespace/GetList'
             ,usergroup: config.usergroup
-            ,namespace: MODx.request.namespace || null
+            ,namespace: MODx.request.ns || null
             ,policy: MODx.request.policy || null
         }
         ,fields: [
@@ -27,9 +27,9 @@ MODx.grid.UserGroupNamespace = function(config) {
 			'principal',
 			'authority',
 			'authority_name',
-			'policy',
-            'context_key',
+            'policy',
             'policy_name',
+            'context_key',
 			'permissions',
 			'cls'
         ]
@@ -71,7 +71,7 @@ MODx.grid.UserGroupNamespace = function(config) {
         ,tbar: [
             {
                 text: _('namespace_add')
-                ,cls:'primary-button'
+                ,cls: 'primary-button'
                 ,scope: this
                 ,handler: this.createAcl
             },
@@ -83,7 +83,7 @@ MODx.grid.UserGroupNamespace = function(config) {
                 ,editable: false
                 ,width: 200
                 ,allowBlank: true
-                ,value: MODx.request.namespace || null
+                ,value: MODx.request.ns || null
                 ,baseParams: {
                     action: 'Workspace/PackageNamespace/GetList',
                     isGridFilter: true,
@@ -93,7 +93,12 @@ MODx.grid.UserGroupNamespace = function(config) {
                     select: {
                         fn: function(cmp, record, selectedIndex) {
                             this.updateDependentFilter('filter-policy-namespace', 'namespace', record.data.name);
-                            this.applyGridFilter(cmp, 'namespace');
+                            /*
+                                There's an odd conflict in the processor when using 'namespace' as the
+                                query param, therefor the alternate param 'ns' is used this listener, its component value, and in the value of
+                                this grid's main baseParams config
+                            */
+                            this.applyGridFilter(cmp, 'ns');
                         },
                         scope: this
                     }
@@ -129,7 +134,7 @@ MODx.grid.UserGroupNamespace = function(config) {
                         fn: function() {
                             this.updateDependentFilter('filter-policy-namespace', 'namespace', '', true);
                             this.updateDependentFilter('filter-namespace', 'policy', '', true);
-                            this.clearGridFilters('filter-namespace, filter-policy');
+                            this.clearGridFilters('filter-namespace, filter-policy-namespace');
                         },
                         scope: this
                     },
@@ -154,18 +159,15 @@ MODx.grid.UserGroupNamespace = function(config) {
     this.on({
         createAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         updateAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         afterRemoveRow: function() {
-            this.clearFilter();
             this.refreshFilterOptions(gridFilterData);
         }
     });

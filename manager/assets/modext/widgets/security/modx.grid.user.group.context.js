@@ -129,7 +129,7 @@ MODx.grid.UserGroupContext = function(config) {
                         fn: function() {
                             this.updateDependentFilter('filter-policy-context', 'context', '', true);
                             this.updateDependentFilter('filter-context', 'policy', '', true);
-                            this.clearGridFilters('filter-context, filter-policy');
+                            this.clearGridFilters('filter-context, filter-policy-context');
                         },
                         scope: this
                     },
@@ -151,27 +151,18 @@ MODx.grid.UserGroupContext = function(config) {
         { filterId: 'filter-context', dependentParams: ['policy'] }
     ];
 
-    this.getStore().on({
-        save: function(store, batch, data){
-            console.log('context grid store save occurred.');
-        }
-    });
-
     this.on({
         createAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         updateAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         afterRemoveRow: function() {
-            this.clearFilter();
             this.refreshFilterOptions(gridFilterData);
         }
     });

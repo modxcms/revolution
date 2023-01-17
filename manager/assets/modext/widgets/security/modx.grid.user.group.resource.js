@@ -87,7 +87,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             '->',
             {
                 xtype: 'modx-combo-resourcegroup'
-                ,itemId: 'filter-resourcegroup'
+                ,itemId: 'filter-resourceGroup'
                 ,emptyText: _('filter_by_resource_group')
                 ,width: 210
                 ,allowBlank: true
@@ -100,7 +100,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                 ,listeners: {
                     select: {
                         fn: function(cmp, record, selectedIndex) {
-                            this.updateDependentFilter('filter-policy-resourcegroup', 'resourceGroup', record.data.id);
+                            this.updateDependentFilter('filter-policy-resourceGroup', 'resourceGroup', record.data.id);
                             this.applyGridFilter(cmp, 'resourceGroup');
                         },
                         scope: this
@@ -108,7 +108,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                 }
             },{
                 xtype: 'modx-combo-policy'
-                ,itemId: 'filter-policy-resourcegroup'
+                ,itemId: 'filter-policy-resourceGroup'
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
@@ -123,7 +123,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                 ,listeners: {
                     select: {
                         fn: function(cmp, record, selectedIndex) {
-                            this.updateDependentFilter('filter-resourcegroup', 'policy', record.data.id);
+                            this.updateDependentFilter('filter-resourceGroup', 'policy', record.data.id);
                             this.applyGridFilter(cmp, 'policy');
                         },
                         scope: this
@@ -135,9 +135,9 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                 ,listeners: {
                     click: {
                         fn: function() {
-                            this.updateDependentFilter('filter-policy-resourcegroup', 'resourceGroup', '', true);
-                            this.updateDependentFilter('filter-resourcegroup', 'policy', '', true);
-                            this.clearGridFilters('filter-resourceGroup, filter-policy');
+                            this.updateDependentFilter('filter-policy-resourceGroup', 'resourceGroup', '', true);
+                            this.updateDependentFilter('filter-resourceGroup', 'policy', '', true);
+                            this.clearGridFilters('filter-resourceGroup, filter-policy-resourceGroup');
                         },
                         scope: this
                     },
@@ -155,25 +155,22 @@ MODx.grid.UserGroupResourceGroup = function(config) {
     this.addEvents('createAcl','updateAcl');
 
     const gridFilterData = [
-        { filterId: 'filter-policy-resourcegroup', dependentParams: ['resourceGroup'] },
-        { filterId: 'filter-resourcegroup', dependentParams: ['policy'] }
+        { filterId: 'filter-policy-resourceGroup', dependentParams: ['resourceGroup'] },
+        { filterId: 'filter-resourceGroup', dependentParams: ['policy'] }
     ];
 
     this.on({
         createAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         updateAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         afterRemoveRow: function() {
-            this.clearFilter();
             this.refreshFilterOptions(gridFilterData);
         }
     });

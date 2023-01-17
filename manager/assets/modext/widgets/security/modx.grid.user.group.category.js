@@ -135,7 +135,7 @@ MODx.grid.UserGroupCategory = function(config) {
                         fn: function() {
                             this.updateDependentFilter('filter-policy-category', 'category', '', true);
                             this.updateDependentFilter('filter-category', 'policy', '', true);
-                            this.clearGridFilters('filter-category, filter-policy');
+                            this.clearGridFilters('filter-category, filter-policy-category');
                         },
                         scope: this
                     },
@@ -160,18 +160,15 @@ MODx.grid.UserGroupCategory = function(config) {
     this.on({
         createAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         updateAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         afterRemoveRow: function() {
-            this.clearFilter();
             this.refreshFilterOptions(gridFilterData);
         }
     });

@@ -914,8 +914,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             itemId: 'filter-category', where 'category' is the record index to filter on
         */
         itemIds.forEach(itemId => {
-            const cmp = this.getTopToolbar().getComponent(itemId.trim());
-            let param = cmp.itemId.replace('filter-', '');
+            const id = itemId.trim(),
+                  cmp = this.getFilterComponent(id)
+            ;
+            let param = id.split('-')[1];
             param = param == 'ns' ? 'namespace' : param ;
             if (cmp.xtype.includes('combo')) {
                 cmp.setValue(null);

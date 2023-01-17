@@ -130,7 +130,7 @@ MODx.grid.UserGroupSource = function(config) {
                         fn: function() {
                             this.updateDependentFilter('filter-policy-source', 'source', '', true);
                             this.updateDependentFilter('filter-source', 'policy', '', true);
-                            this.clearGridFilters('filter-source, filter-policy');
+                            this.clearGridFilters('filter-source, filter-policy-source');
                         },
                         scope: this
                     },
@@ -155,18 +155,15 @@ MODx.grid.UserGroupSource = function(config) {
     this.on({
         createAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         updateAcl: function() {
             if (arguments[0].a.response.status == 200) {
-                this.clearFilter();
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         afterRemoveRow: function() {
-            this.clearFilter();
             this.refreshFilterOptions(gridFilterData);
         }
     });
