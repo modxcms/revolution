@@ -20,21 +20,21 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             ,resourceGroup: MODx.request.resourceGroup || null
             ,policy: MODx.request.policy || null
         }
-        ,paging: true
-        ,hideMode: 'offsets'
         ,fields: [
             'id',
-            'target',
-            'name',
-            'principal',
-            'authority',
-            'authority_name',
-            'policy',
-            'policy_name',
-            'context_key',
-            'permissions',
-            'menu'
+			'target',
+			'name',
+			'principal',
+			'authority',
+			'authority_name',
+			'policy',
+			'policy_name',
+			'context_key',
+			'permissions',
+			'cls'
         ]
+        ,paging: true
+        ,hideMode: 'offsets'
         ,grouping: true
         ,groupBy: 'authority_name'
         ,singleText: _('policy')
@@ -43,111 +43,173 @@ MODx.grid.UserGroupResourceGroup = function(config) {
         ,sortDir: 'ASC'
         ,remoteSort: true
         ,plugins: [this.exp]
-        ,columns: [this.exp,{
-            header: _('resource_group')
-            ,dataIndex: 'name'
-            ,width: 120
-            ,sortable: true
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/resourcegroup'
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        },{
-            header: _('minimum_role')
-            ,dataIndex: 'authority_name'
-            ,width: 100
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/permission'
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        },{
-            header: _('policy')
-            ,dataIndex: 'policy_name'
-            ,width: 200
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/access/policy/update&id=' + record.data.policy
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        },{
-            header: _('context')
-            ,dataIndex: 'context_key'
-            ,width: 150
-            ,sortable: true
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=context/update&key=' + record.data.context_key
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        }]
-        ,tbar: [{
-            text: _('resource_group_add')
-            ,cls:'primary-button'
-            ,scope: this
-            ,handler: this.createAcl
-        },'->',{
-            xtype: 'modx-combo-resourcegroup'
-            ,itemId: 'filter-resourceGroup'
-            ,emptyText: _('filter_by_resource_group')
-            ,width: 210
-            ,allowBlank: true
-            ,value: MODx.request.resourceGroup || null
-            ,listeners: {
-                select: {
-                    fn: function (cmp, record, selectedIndex) {
-                        this.applyGridFilter(cmp, 'resourceGroup');
-                    },
-                    scope: this
+        ,columns: [
+            this.exp,
+            {
+                header: _('resource_group')
+                ,dataIndex: 'name'
+                ,width: 120
+                ,sortable: true
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('security/resourcegroup', 'name')
+            },{
+                header: _('minimum_role')
+                ,dataIndex: 'authority_name'
+                ,width: 100
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('security/permission', 'authority_name')
+            },{
+                header: _('policy')
+                ,dataIndex: 'policy_name'
+                ,width: 200
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
+                    linkParams: [{ key: 'id', valueIndex: 'policy'}]
+                })
+            },{
+                header: _('context')
+                ,dataIndex: 'context_key'
+                ,width: 150
+                ,sortable: true
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('context/update', 'context_key', {
+                    linkParams: [{ key: 'key', valueIndex: 'context_key'}]
+                })
+            }
+        ]
+        ,tbar: [
+            {
+                text: _('resource_group_add')
+                ,cls:'primary-button'
+                ,scope: this
+                ,handler: this.createAcl
+            },
+            '->',
+            {
+                xtype: 'modx-combo-resourcegroup'
+                ,itemId: 'filter-resourceGroup'
+                ,emptyText: _('filter_by_resource_group')
+                ,width: 210
+                ,allowBlank: true
+                ,value: MODx.request.resourceGroup || null
+                ,baseParams: {
+                    action: 'Security/ResourceGroup/GetList',
+                    isGridFilter: true,
+                    usergroup: config.usergroup
                 }
-            }
-        },{
-            xtype: 'modx-combo-policy'
-            ,itemId: 'filter-policy'
-            ,emptyText: _('filter_by_policy')
-            ,allowBlank: true
-            ,value: MODx.request.policy || null
-            ,baseParams: {
-                action: 'Security/Access/Policy/GetList'
-                ,group: 'Object'
-            }
-            ,listeners: {
-                select: {
-                    fn: function (cmp, record, selectedIndex) {
-                        this.applyGridFilter(cmp, 'policy');
-                    },
-                    scope: this
-                }
-            }
-        },{
-            text: _('filter_clear')
-            ,itemId: 'filter-clear'
-            ,listeners: {
-                click: {
-                    fn: function() {
-                        this.clearGridFilters('filter-resourceGroup, filter-policy');
-                    },
-                    scope: this
-                },
-                mouseout: {
-                    fn: function(evt) {
-                        this.removeClass('x-btn-focus');
+                ,listeners: {
+                    select: {
+                        fn: function(cmp, record, selectedIndex) {
+                            this.updateDependentFilter('filter-policy-resourceGroup', 'resourceGroup', record.data.id);
+                            this.applyGridFilter(cmp, 'resourceGroup');
+                        },
+                        scope: this
                     }
                 }
+            },{
+                xtype: 'modx-combo-policy'
+                ,itemId: 'filter-policy-resourceGroup'
+                ,emptyText: _('filter_by_policy')
+                ,width: 180
+                ,allowBlank: true
+                ,value: MODx.request.policy || null
+                ,baseParams: {
+                    action: 'Security/Access/Policy/GetList',
+                    group: 'Resource,Object',
+                    isGridFilter: true,
+                    targetGrid: 'MODx.grid.UserGroupResourceGroup',
+                    usergroup: config.usergroup
+                }
+                ,listeners: {
+                    select: {
+                        fn: function(cmp, record, selectedIndex) {
+                            this.updateDependentFilter('filter-resourceGroup', 'policy', record.data.id);
+                            this.applyGridFilter(cmp, 'policy');
+                        },
+                        scope: this
+                    }
+                }
+            },{
+                text: _('filter_clear')
+                ,itemId: 'filter-clear'
+                ,listeners: {
+                    click: {
+                        fn: function() {
+                            this.updateDependentFilter('filter-policy-resourceGroup', 'resourceGroup', '', true);
+                            this.updateDependentFilter('filter-resourceGroup', 'policy', '', true);
+                            this.clearGridFilters('filter-resourceGroup, filter-policy-resourceGroup');
+                        },
+                        scope: this
+                    },
+                    mouseout: {
+                        fn: function(evt) {
+                            this.removeClass('x-btn-focus');
+                        }
+                    }
+                }
+                ,scope: this
             }
-        }]
+        ]
     });
     MODx.grid.UserGroupResourceGroup.superclass.constructor.call(this,config);
     this.addEvents('createAcl','updateAcl');
+
+    const gridFilterData = [
+        { filterId: 'filter-policy-resourceGroup', dependentParams: ['resourceGroup'] },
+        { filterId: 'filter-resourceGroup', dependentParams: ['policy'] }
+    ];
+
+    this.on({
+        createAcl: function() {
+            if (arguments[0].a.response.status == 200) {
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        updateAcl: function() {
+            if (arguments[0].a.response.status == 200) {
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        afterRemoveRow: function() {
+            this.refreshFilterOptions(gridFilterData);
+        }
+    });
 };
 Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
+
     combos: {}
     ,windows: {}
+
+    ,getMenu: function() {
+        const record = this.getSelectionModel().getSelected(),
+              permissions = record.data.cls,
+              menu = []
+        ;
+
+        if (this.getSelectionModel().getCount() > 1) {
+            // Currently not allowing bulk actions for this grid
+        } else {
+            if (permissions.indexOf('pedit') != -1) {
+                menu.push({
+                    text: _('access_rgroup_update'),
+                    handler: this.updateAcl
+                });
+            }
+            if (permissions.indexOf('premove') != -1) {
+                if (menu.length > 0) {
+                    menu.push('-');
+                }
+                menu.push({
+                    text: _('access_rgroup_remove'),
+                    handler: this.remove.createDelegate(this,['confirm_remove','Security/Access/UserGroup/ResourceGroup/Remove'])
+                });
+            }
+        }
+
+        if (menu.length > 0) {
+            this.addContextMenuItem(menu);
+        }
+    }
 
     ,createAcl: function(itm,e) {
         var r = {
@@ -187,6 +249,7 @@ Ext.extend(MODx.grid.UserGroupResourceGroup,MODx.grid.Grid,{
         this.windows.updateAcl.setValues(r);
         this.windows.updateAcl.show(e.target);
     }
+
 });
 Ext.reg('modx-grid-user-group-resource-group',MODx.grid.UserGroupResourceGroup);
 

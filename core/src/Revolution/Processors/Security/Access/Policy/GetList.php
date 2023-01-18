@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,11 +11,17 @@
 
 namespace MODX\Revolution\Processors\Security\Access\Policy;
 
+use MODX\Revolution\modAccessCategory;
+use MODX\Revolution\modAccessContext;
+use MODX\Revolution\modAccessNamespace;
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modAccessPolicyTemplate;
 use MODX\Revolution\modAccessPolicyTemplateGroup;
+use MODX\Revolution\modAccessResourceGroup;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Sources\modAccessMediaSource;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -35,6 +42,9 @@ class GetList extends GetListProcessor
     public $permission = 'policy_view';
     public $languageTopics = ['policy', 'en:policy'];
 
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    protected $isGridFilter = false;
+
     /**
      * @return bool
      */
@@ -47,6 +57,7 @@ class GetList extends GetListProcessor
             'combo' => false,
             'query' => '',
         ]);
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
         return $initialized;
     }
 
@@ -57,19 +68,100 @@ class GetList extends GetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c->innerJoin(modAccessPolicyTemplate::class, 'Template');
+
         $group = $this->getProperty('group');
         if (!empty($group)) {
             $group = is_array($group) ? $group : explode(',', $group);
-            $c->innerJoin(modAccessPolicyTemplateGroup::class, 'TemplateGroup',
-                'TemplateGroup.id = Template.template_group');
+            $c->innerJoin(
+                modAccessPolicyTemplateGroup::class,
+                'TemplateGroup',
+                'TemplateGroup.id = Template.template_group'
+            );
             $c->where(['TemplateGroup.name:IN' => $group]);
         }
+
         $query = $this->getProperty('query', '');
         if (!empty($query)) {
             $c->where([
                 'modAccessPolicy.name:LIKE' => '%' . $query . '%',
                 'OR:modAccessPolicy.description:LIKE' => '%' . $query . '%'
             ]);
+        }
+
+        /*
+            When this class is used to fetch data for a grid filter's store (combo),
+            limit results to only those policies present in the current grid.
+        */
+        if ($this->isGridFilter) {
+            $userGroup = $this->getProperty('usergroup', '');
+            $targetGrid = $this->getProperty('targetGrid', '');
+
+            if (!empty($userGroup) && !empty($targetGrid)) {
+                switch ($targetGrid) {
+                    case 'MODx.grid.UserGroupContext':
+                        $joinClass = modAccessContext::class;
+                        $joinAlias = 'modAccessContext';
+                        // Note that context pk is a string ('key' is the dataIndex), not an int id
+                        $context = $this->getProperty('context', '');
+                        if (!empty($context)) {
+                            $c->where([
+                                '`modAccessContext`.`target`' => $context
+                            ]);
+                        }
+                        break;
+                    case 'MODx.grid.UserGroupResourceGroup':
+                        $joinClass = modAccessResourceGroup::class;
+                        $joinAlias = 'modAccessResourceGroup';
+                        $resourceGroup = $this->getProperty('resourceGroup', '');
+                        if (!empty($resourceGroup)) {
+                            $c->where([
+                                '`modAccessResourceGroup`.`target`' => (int)$resourceGroup
+                            ]);
+                        }
+                        break;
+                    case 'MODx.grid.UserGroupCategory':
+                        $joinClass = modAccessCategory::class;
+                        $joinAlias = 'modAccessCategory';
+                        $category = $this->getProperty('category', '');
+                        if (!empty($category)) {
+                            $c->where([
+                                '`modAccessCategory`.`target`' => (int)$category
+                            ]);
+                        }
+                        break;
+                    case 'MODx.grid.UserGroupSource':
+                        $joinClass = modAccessMediaSource::class;
+                        $joinAlias = 'modAccessMediaSource';
+                        $source = $this->getProperty('source', '');
+                        if (!empty($source)) {
+                            $c->where([
+                                '`modAccessMediaSource`.`target`' => (int)$source
+                            ]);
+                        }
+                        break;
+                    case 'MODx.grid.UserGroupNamespace':
+                        $joinClass = modAccessNamespace::class;
+                        $joinAlias = 'modAccessNamespace';
+                        // Note that namespace pk is a string ('name' is the dataIndex), not an int id
+                        $namespace = $this->getProperty('namespace', '');
+                        if (!empty($namespace)) {
+                            $c->where([
+                                '`modAccessNamespace`.`target`' => $namespace
+                            ]);
+                        }
+                        break;
+                }
+                $c->innerJoin(
+                    $joinClass,
+                    $joinAlias,
+                    [
+                        '`' . $joinAlias . '`.`policy` = `modAccessPolicy`.`id`',
+                        '`' . $joinAlias . '`.`principal` = ' . $userGroup,
+                        '`' . $joinAlias . '`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
+                    ]
+                );
+                $c->groupby('`modAccessPolicy`.`id`');
+            }
         }
         return $c;
     }
@@ -82,7 +174,7 @@ class GetList extends GetListProcessor
     {
         $subc = $this->modx->newQuery(modAccessPermission::class);
         $subc->select('COUNT(modAccessPermission.id)');
-        $subc->where(['modAccessPermission.template = Template.id',]);
+        $subc->where(['modAccessPermission.template = Template.id']);
         $subc->prepare();
         $c->select($this->modx->getSelectColumns(modAccessPolicy::class, 'modAccessPolicy'));
         $c->select(['template_name' => 'Template.name']);
