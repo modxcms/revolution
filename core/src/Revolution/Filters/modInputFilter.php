@@ -72,11 +72,11 @@ class modInputFilter
                     case '[':
                         if ($chars[$i + 1] === '[') {
                             $depth++;
-                            $depth === 0 ? $command .= $char.$char : $commandModifiers .= $char.$char;
+                            $inModifier ? $commandModifiers .= $char.$char : $command .= $char.$char;
                             $skipNext = true;
                         }
                         else {
-                            $depth === 0 ? $command .= $char : $commandModifiers .= $char;
+                            $inModifier ? $commandModifiers .= $char : $command .= $char;
                         }
                         break;
 
@@ -84,12 +84,12 @@ class modInputFilter
                     // The character is added to either the command or the commandModifiers
                     case ']':
                         if ($chars[$i + 1] === ']') {
-                            $depth === 0 ? $command .= $char.$char : $commandModifiers .= $char.$char;
+                            $inModifier ? $commandModifiers .= $char.$char : $command .= $char.$char;
                             $depth--;
                             $skipNext = true;
                         }
                         else {
-                            $depth === 0 ? $command .= $char : $commandModifiers .= $char;
+                            $inModifier ? $commandModifiers .= $char : $command .= $char;
                         }
 
                         break;
@@ -110,7 +110,7 @@ class modInputFilter
                             $inModifier = !$inModifier;
                         }
                         else {
-                            $commandModifiers .= $char;
+                            $inModifier ? $commandModifiers .= $char : $command .= $char;
                         }
                         break;
                     // The `:` sign (colon) is a separator between multiple commands in a string.
