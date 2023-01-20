@@ -1790,7 +1790,7 @@ $settings['unauthorized_page']->fromArray([
 $settings['upload_files'] = $xpdo->newObject(modSystemSetting::class);
 $settings['upload_files']->fromArray([
   'key' => 'upload_files',
-  'value' => 'txt,html,htm,xml,js,js.map,css,scss,less,css.map,zip,gz,rar,z,tgz,tar,mp3,mp4,aac,wav,au,wmv,avi,mpg,mpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,tiff,svg,svgz,gif,psd,ico,bmp,webp,odt,ods,odp,odb,odg,odf,md,ttf,woff,woff2,eot',
+  'value' => 'aac,au,avi,bmp,css,css.map,doc,docx,eot,gif,gz,htm,html,ico,jpeg,jpg,js,js.map,less,md,mp3,mp4,mpeg,mpg,odb,odf,odg,odp,ods,odt,pdf,png,ppt,pptx,psd,rar,scss,svg,svgz,tar,tgz,tiff,ttf,txt,wav,webp,wmv,woff,woff2,xls,xlsx,xml,z,zip',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'file',

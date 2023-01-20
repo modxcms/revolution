@@ -45,6 +45,7 @@ if ($upload_files_setting) {
 
     $upload_files_arr_new = array_unique(array_merge($upload_files_arr, $upload_images_arr, $upload_media_arr));
     $upload_files_arr_new = array_filter($upload_files_arr_new);
+    sort($upload_files_arr_new);
 
     $upload_files_value_new = implode(',', $upload_files_arr_new);
     $upload_files_setting->set('value', $upload_files_value_new);
