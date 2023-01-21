@@ -1681,11 +1681,7 @@ class modX extends xPDO {
             foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
                 /** @var modPlugin $plugin */
                 $plugin= null;
-                if (!version_compare(PHP_VERSION, '5.4', '>=')) {
-                    $this->Event = & $this->event;
-                } else {
-                    $this->Event = clone $this->event;
-                }
+                $this->Event = clone $this->event;
                 $this->event->resetEventObject();
                 $this->event->name= $eventName;
                 if (isset ($this->pluginCache[$pluginId])) {
@@ -2791,27 +2787,19 @@ class modX extends xPDO {
                 }
                 $site_sessionname = $this->getOption('session_name', $options, '');
                 if (!empty($site_sessionname)) session_name($site_sessionname);
-                if (PHP_VERSION_ID < 70300) {
-                    session_set_cookie_params(
-                        $cookieLifetime,
-                        $cookiePath,
-                        $cookieDomain,
-                        $cookieSecure,
-                        $cookieHttpOnly
-                    );
-                } else {
-                    $cookie_params = [
-                        'lifetime' => $cookieLifetime,
-                        'path' => $cookiePath,
-                        'domain' => $cookieDomain,
-                        'secure' => $cookieSecure,
-                        'httponly' => $cookieHttpOnly
-                    ];
-                    if ($cookieSamesite !== '') {
-                        $cookie_params['samesite'] = $cookieSamesite;
-                    }
-                    session_set_cookie_params($cookie_params);
+
+                $cookie_params = [
+                    'lifetime' => $cookieLifetime,
+                    'path' => $cookiePath,
+                    'domain' => $cookieDomain,
+                    'secure' => $cookieSecure,
+                    'httponly' => $cookieHttpOnly
+                ];
+                if ($cookieSamesite !== '') {
+                    $cookie_params['samesite'] = $cookieSamesite;
                 }
+                session_set_cookie_params($cookie_params);
+
                 if ($this->getOption('anonymous_sessions', $options, true) || isset($_COOKIE[session_name()])) {
                     if (!$this->startSession()) {
                         $this->log(modX::LOG_LEVEL_ERROR, 'Unable to initialize a session', '', __METHOD__, __FILE__, __LINE__);
@@ -2836,19 +2824,7 @@ class modX extends xPDO {
                             if ($cookieSamesite !== '') {
                                 $cookie_settings['samesite'] = $cookieSamesite;
                             }
-                            if (PHP_VERSION_ID < 70300) {
-                                setcookie(
-                                    session_name(),
-                                    session_id(),
-                                    $cookieExpiration,
-                                    $cookiePath,
-                                    $cookieDomain,
-                                    $cookieSecure,
-                                    $cookieHttpOnly
-                                );
-                            } else {
-                                setcookie(session_name(), session_id(), $cookie_settings);
-                            }
+                            setcookie(session_name(), session_id(), $cookie_settings);
                         }
                     }
                 } else {
