@@ -15,6 +15,7 @@ use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
 use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\Validation\modValidator;
 
 /**
@@ -61,9 +62,9 @@ abstract class Create extends CreateProcessor
         $locked = (bool)$this->getProperty('locked', false);
         $this->object->set('locked', $locked);
 
-        $elementClassName = array_pop(explode('\\', $this->classKey));
+        $isTV = $this->classKey === modTemplateVar::class;
 
-        if ($elementClassName === 'modTemplateVar') {
+        if ($isTV) {
             if ($caption = trim($this->getProperty('caption', ''))) {
                 $caption = $this->modx->stripHtml(
                     $caption,
@@ -75,7 +76,7 @@ abstract class Create extends CreateProcessor
         }
 
         if ($description = trim($this->getProperty('description', ''))) {
-            $description = $elementClassName === 'modTemplateVar'
+            $description = $isTV
                 ? $this->modx->stripHtml(
                     $description,
                     $this->modx->getOption('elements_description_allowedtags'),
