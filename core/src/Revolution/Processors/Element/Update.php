@@ -15,6 +15,7 @@ use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
 use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
 
 /**
  * Abstract class for Update Element processors. To be extended for each derivative element type.
@@ -56,9 +57,9 @@ abstract class Update extends UpdateProcessor
             $this->object->set('locked', (bool)$locked);
         }
 
-        $elementClassName = array_pop(explode('\\', $this->classKey));
+        $isTV = $this->classKey === modTemplateVar::class;
 
-        if ($elementClassName === 'modTemplateVar') {
+        if ($isTV) {
             if ($caption = trim($this->getProperty('caption', ''))) {
                 $caption = $this->modx->stripHtml(
                     $caption,
@@ -70,7 +71,7 @@ abstract class Update extends UpdateProcessor
         }
 
         if ($description = trim($this->getProperty('description', ''))) {
-            $description = $elementClassName === 'modTemplateVar'
+            $description = $isTV
                 ? $this->modx->stripHtml(
                     $description,
                     $this->modx->getOption('elements_description_allowedtags'),
