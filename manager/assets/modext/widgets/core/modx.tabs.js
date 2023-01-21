@@ -1,3 +1,4 @@
+/* eslint-disable */
 MODx.Tabs = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -36,9 +37,9 @@ MODx.Tabs = function(config) {
 
                         NOTE: The currentTab is the previous one being navigated away from
                     */
-                    if (newTab.id != currentTab.id) {
-                        const resetVerticalTabPanelFilters = (currentTab.items.items[0] && currentTab.items.items[0].xtype == 'modx-vtabs') || currentTab.ownerCt.xtype == 'modx-vtabs',
-                              changedBetweenVtabs = newTab.ownerCt.xtype == 'modx-vtabs' && currentTab.ownerCt.xtype == 'modx-vtabs'
+                    if (newTab && currentTab && newTab.id !== currentTab.id) {
+                        const resetVerticalTabPanelFilters = (currentTab.items?.items[0]?.xtype === 'modx-vtabs') || currentTab.ownerCt?.xtype === 'modx-vtabs',
+                              changedBetweenVtabs = newTab.ownerCt?.xtype === 'modx-vtabs' && currentTab.ownerCt?.xtype === 'modx-vtabs'
                         ;
                         let itemsSource,
                             gridObj = null
