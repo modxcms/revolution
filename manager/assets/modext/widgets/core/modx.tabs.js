@@ -1,4 +1,3 @@
-/* eslint-disable */
 MODx.Tabs = function(config) {
     config = config || {};
     Ext.applyIf(config,{
