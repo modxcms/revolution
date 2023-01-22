@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Plugin erstellen';
 $_lang['plugin_priority'] = 'Legen Sie die Plugin-Ausführungsreihenfolge nach Ereignis fest';
 $_lang['plugin_properties'] = 'Plugin-Einstellungen';
 $_lang['plugin_tab_general_desc'] = 'Hier können Sie die grundlegenden Attribute für dieses <em>Plugin</em> sowie dessen Inhalt eingeben. Der Inhalt muss PHP sein, entweder im Feld <em>Plugin Code</em> oder in einer statischen externen Datei. Der eingegebene PHP-Code wird als Reaktion auf ein oder mehrere von Ihnen angegebene MODX-Systemereignisse ausgeführt.';
-$_lang['plugin_title'] = 'Plugin erstellen/bearbeiten';
-$_lang['plugin_untitled'] = 'Unbenanntes Plugin';
 $_lang['plugins'] = 'Plugins';
 
 // Temporarily match old keys to new ones to ensure compatibility

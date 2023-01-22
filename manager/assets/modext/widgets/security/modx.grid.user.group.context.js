@@ -17,8 +17,20 @@ MODx.grid.UserGroupContext = function(config) {
         ,baseParams: {
             action: 'Security/Access/UserGroup/Context/GetList'
             ,usergroup: config.usergroup
+            ,context: MODx.request.context || null
+            ,policy: MODx.request.policy || null
         }
-        ,fields: ['id','target','principal','authority','authority_name','policy','policy_name','permissions','cls']
+        ,fields: [
+            'id',
+            'target',
+            'principal',
+            'authority',
+            'authority_name',
+            'policy',
+            'policy_name',
+            'permissions',
+            'cls'
+        ]
         ,paging: true
         ,hideMode: 'offsets'
         ,grouping: true
@@ -70,29 +82,54 @@ MODx.grid.UserGroupContext = function(config) {
             ,handler: this.createAcl
         },'->',{
             xtype: 'modx-combo-context'
-            ,id: 'modx-ugc-context-filter'
+            ,itemId: 'filter-context'
             ,emptyText: _('filter_by_context')
             ,allowBlank: true
+            ,width: 160
+            ,value: MODx.request.context || null
             ,listeners: {
-                'select': {fn:this.filterContext,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'context');
+                    },
+                    scope: this
+                }
             }
         },{
             xtype: 'modx-combo-policy'
-            ,id: 'modx-ugc-policy-filter'
+            ,itemId: 'filter-policy'
             ,emptyText: _('filter_by_policy')
             ,allowBlank: true
+            ,width: 160
+            ,value: MODx.request.policy || null
             ,baseParams: {
                 action: 'Security/Access/Policy/GetList'
                 ,group: 'Administrator'
             }
             ,listeners: {
-                'select': {fn:this.filterPolicy,scope:this}
+                select: {
+                    fn: function (cmp, record, selectedIndex) {
+                        this.applyGridFilter(cmp, 'policy');
+                    },
+                    scope: this
+                }
             }
         },{
             text: _('filter_clear')
-            ,id: 'modx-ugc-clear-filter'
-            ,handler: this.clearFilter
-            ,scope: this
+            ,itemId: 'filter-clear'
+            ,listeners: {
+                click: {
+                    fn: function() {
+                        this.clearGridFilters('filter-context, filter-policy');
+                    },
+                    scope: this
+                },
+                mouseout: {
+                    fn: function(evt) {
+                        this.removeClass('x-btn-focus');
+                    }
+                }
+            }
         }]
     });
     MODx.grid.UserGroupContext.superclass.constructor.call(this,config);
@@ -128,24 +165,6 @@ Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
         if (m.length > 0) {
             this.addContextMenuItem(m);
         }
-    }
-
-    ,filterContext: function(cb,rec,ri) {
-        this.getStore().baseParams['context'] = rec.data['key'];
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,filterPolicy: function(cb,rec,ri) {
-        this.getStore().baseParams['policy'] = rec.data['id'];
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearFilter: function(btn,e) {
-        Ext.getCmp('modx-ugc-context-filter').setValue('');
-        this.getStore().baseParams['context'] = '';
-        Ext.getCmp('modx-ugc-policy-filter').setValue('');
-        this.getStore().baseParams['policy'] = '';
-        this.getBottomToolbar().changePage(1);
     }
 
     ,createAcl: function(itm,e) {

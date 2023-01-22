@@ -287,6 +287,16 @@ MODx.window.NewTemplatePermission = function(config) {
             ,hiddenName: 'name'
             ,id: 'modx-'+this.ident+'-name'
             ,anchor: '100%'
+            ,listeners: {
+                change: {
+                    fn: function(cmp, newValue, oldValue) {
+                        if (Ext.isEmpty(cmp.getValue())) {
+                            cmp.getStore().load();
+                        }
+                    },
+                    scope: this
+                }
+            }
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')

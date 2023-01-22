@@ -162,7 +162,7 @@ class modS3MediaSource extends modMediaSource
                 'name' => 'imageExtensions',
                 'desc' => 'prop_s3.imageExtensions_desc',
                 'type' => 'textfield',
-                'value' => 'jpg,jpeg,png,gif,svg',
+                'value' => 'jpg,jpeg,png,gif,svg,webp',
                 'lexicon' => 'core:source',
             ],
             'visibility' => [

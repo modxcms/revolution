@@ -1067,11 +1067,9 @@ MODx.combo.SettingKey = function(config) {
         ,baseParams: {
             action: 'System/Settings/GetList'
         }
-        ,typeAhead: false
         ,triggerAction: 'all'
         ,editable: true
         ,forceSelection: false
-        ,queryParam: 'key'
         ,pageSize: 20
     });
     MODx.combo.SettingKey.superclass.constructor.call(this,config);

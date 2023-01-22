@@ -830,9 +830,7 @@ class modTemplateVar extends modElement
      */
     public function getBindingDataFromValue($value)
     {
-        if (is_string($value)) {
-            $nvalue = trim($value);
-        }
+        $nvalue = is_string($value) ? trim($value) : '';
         $cmd = false;
         $param = '';
         $properties = [];
@@ -1005,7 +1003,7 @@ class modTemplateVar extends modElement
             $regexp2 = '/(\S+)\s+(.+)/is'; /* Split binding on second whitespace to get properties */
 
             $properties = [];
-            if (preg_match($regexp2, $match[2] , $match2)) {
+            if (strtoupper($match[1]) != 'SELECT' && preg_match($regexp2, $match[2], $match2)) {
                 if (isset($match2[2])) {
                     $props = json_decode($match2[2],true);
                     $valid = json_last_error() === JSON_ERROR_NONE;

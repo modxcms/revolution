@@ -95,7 +95,7 @@ class modHashing
     public function getHash($key, $class, $options = [])
     {
         $className = $this->modx->loadClass($class, '', false, true);
-        if ($className) {
+        if (class_exists($className) && is_subclass_of($className, modHash::class, true)) {
             if (empty($key)) {
                 $exploded = explode('\\', $className);
                 $key = strtolower(str_replace('mod', '', array_pop($exploded)));

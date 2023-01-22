@@ -37,6 +37,8 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
+        @rmdir(MODX_BASE_PATH . 'assets/test5/');
+        @rmdir(MODX_BASE_PATH . 'assets/test6/');
     }
     /**
      * Cleanup data after this test case.
@@ -47,6 +49,8 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
+        @rmdir(MODX_BASE_PATH . 'assets/test5/');
+        @rmdir(MODX_BASE_PATH . 'assets/test6/');
     }
     /**
      * Setup fixtures before each test.
@@ -201,6 +205,47 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
             ['manager/',true],
             ['manager/assets',true],
             ['fakedirectory/',false],
+        ];
+    }
+
+    /**
+     * Tests the browser/directory/getList processor with symlink present
+     *
+     * @dataProvider providerGetDirectoryListWithSymlink
+     * @param string $dir A string path to the directory to list.
+     */
+    public function testGetDirectoryListWithSymlink($target, $link)
+    {
+        $dirtarget = $this->modx->getOption('base_path') . $target;
+        $dirlink = $this->modx->getOption('base_path') . $link;
+        @symlink($dirtarget, $dirlink);
+        /** @var ProcessorResponse $response */
+        $response = $this->modx->runProcessor(GetList::class, [
+            'id' => 'assets',
+        ]);
+        if (empty($response)) {
+            $this->fail('Could not load ' . GetList::class . ' processor');
+        }
+        $result = $response->getResponse();
+        if (is_string($result)) {
+            $dirs = json_decode($result, true);
+        } else {
+            $dirs = $result;
+        }
+        $success = !$response->isError() && is_array($dirs) && !empty($dirs);
+        $this->assertTrue(
+            $success,
+            'Could not get list of files and dirs ignoring symlink in ' . GetList::class . ' test ' . __METHOD__
+        );
+    }
+    /**
+     * Test data provider for getList processor with symlink present
+     * @return array
+     */
+    public function providerGetDirectoryListWithSymlink()
+    {
+        return [
+            ['assets/test5', 'assets/test6'],
         ];
     }
 }

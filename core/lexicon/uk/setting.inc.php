@@ -24,37 +24,37 @@ $_lang['area_session'] = 'Сеанси та куки';
 $_lang['area_static_elements'] = 'Статичні елементи';
 $_lang['area_static_resources'] = 'Статичні ресурси';
 $_lang['area_lexicon_string'] = 'Запис словника для розділу';
-$_lang['area_lexicon_string_msg'] = 'Enter the key of the lexicon entry for the area here. If there is no lexicon entry, it will just display the area key.<br />Core Areas: authentication, caching, file, furls, gateway, language, manager, session, site, system';
+$_lang['area_lexicon_string_msg'] = 'Введіть ключ запису словника розділу. Якщо запис з таким ключем не знайдено, з\'явиться сам ключ. <br />Розділи простору "core": authentication, caching, file, furls, gateway, language, manager, session, site, system';
 $_lang['area_site'] = 'Сайт';
 $_lang['area_system'] = 'Система і сервер';
 $_lang['areas'] = 'Розділи';
 $_lang['charset'] = 'Кодування';
 $_lang['country'] = 'Країна';
-$_lang['description_desc'] = 'A short description of the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key + "_desc".';
-$_lang['key_desc'] = 'The key for the Setting. It will be available in your content via the [[++key]] placeholder.';
-$_lang['name_desc'] = 'A Name for the Setting. This can be a Lexicon Entry based on the key, following the format "setting_" + key.';
+$_lang['description_desc'] = 'Короткий опис налаштування. Можна вказати запис словника на основі ключа формату «setting_» + ключ + «_desc».';
+$_lang['key_desc'] = 'Ключ налаштування. Буде доступний у контенті через плейсхолдер [[++key]]';
+$_lang['name_desc'] = 'Назва налаштування. Можна вказати запис словника, який базується на ключі, формату «setting_» + ключ.';
 $_lang['namespace'] = 'Простір імен';
-$_lang['namespace_desc'] = 'The Namespace that this Setting is associated with. The default Lexicon Topic will be loaded for this Namespace when grabbing Settings.';
+$_lang['namespace_desc'] = 'Простір імен, з яким це налаштування пов\'язане. Тема словника "default" для цього простору імен буде використана під час перегляду.';
 $_lang['namespace_filter'] = 'Фільтр за простором імен...';
 $_lang['setting_err'] = 'Перевірте свої дані на наступні поля: ';
-$_lang['setting_err_ae'] = 'Setting with that key already exists. Please specify another key name.';
+$_lang['setting_err_ae'] = 'Налаштування з таким ключем є. Будь ласка, вкажіть інший ключ.';
 $_lang['setting_err_nf'] = 'Налаштування не знайдено.';
 $_lang['setting_err_ns'] = 'Налаштування не вказано';
 $_lang['setting_err_not_editable'] = 'This setting can\'t be edited in the grid. Please use the gear/context menu to edit the value!';
 $_lang['setting_err_remove'] = 'An error occurred while trying to delete the setting.';
-$_lang['setting_err_save'] = 'An error occurred while trying to save the setting.';
-$_lang['setting_err_startint'] = 'Settings may not start with an integer.';
-$_lang['setting_err_invalid_document'] = 'There is no document with ID %d. Please specify an existing document.';
+$_lang['setting_err_save'] = 'Помилка при спробі зберегти налаштування.';
+$_lang['setting_err_startint'] = 'Назва настройки не може починатися з цифри.';
+$_lang['setting_err_invalid_document'] = 'Документ із ID %d не існує. Будь ласка, вкажіть існуючий документ.';
 $_lang['setting_remove_confirm'] = 'Ви впевнені, що хочете видалити це налаштування? Це може порушити встановлення MODX.';
-$_lang['settings_after_install'] = 'As this is a new install, you are required to control these settings, and change any that you may wish to. After you\'ve controlled the settings, press \'Save\' to update the settings database.<br /><br />';
-$_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
+$_lang['settings_after_install'] = 'У разі нової установки вам необхідно проконтролювати введені налаштування та, при необхідності, змінити їх. Після того, як ви перевірите налаштування, натисніть «Зберегти» для оновлення налаштувань бази даних.<br /><br />';
+$_lang['settings_desc'] = 'Тут ви можете змінити основні опції та налаштування системи керування MODX, а також сайту. <b>Кожна настройка буде доступна через плейсхолдер [[++key]].</b><br />Двічі натисніть за параметром у колонці «Значення» для редагування, або натисніть правою кнопкою миші для інших дій. Щоб побачити опис налаштування, натисніть «+».';
 $_lang['settings_furls'] = 'Дружні URL';
 $_lang['settings_misc'] = 'Різне';
 $_lang['settings_site'] = 'Сайт';
 $_lang['settings_ui'] = 'Інтерфейс &amp; Можливості';
 $_lang['settings_users'] = 'Користувач';
-$_lang['system_settings'] = 'System Settings';
-$_lang['usergroup'] = 'User Group';
+$_lang['system_settings'] = 'Системні налаштування';
+$_lang['usergroup'] = 'Група користувачів';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Перевіряти доступ до категорій';
@@ -66,63 +66,63 @@ $_lang['setting_access_context_enabled_desc'] = 'Використовуйте д
 $_lang['setting_access_resource_group_enabled'] = 'Перевіряти доступ до груп ресурсів';
 $_lang['setting_access_resource_group_enabled_desc'] = 'Використовуйте для увімкнення або вимкнення перевірки доступу до груп ресурсів. <strong>ВАЖЛИВО: Якщо цей параметр встановлено у "Ні", то всі політики доступу до груп ресурсів ігноруватимуться!</strong>';
 
-$_lang['setting_allow_mgr_access'] = 'Manager Interface Access';
-$_lang['setting_allow_mgr_access_desc'] = 'Select this option to enable or disable access to the manager interface. <strong>NOTE: If this option is set to no, then the user will be redirected to the Manager Login Startup or to the Site Start web page.</strong>';
+$_lang['setting_allow_mgr_access'] = 'Доступ до системи керування';
+$_lang['setting_allow_mgr_access_desc'] = 'Активуйте цю опцію для доступу до системи керування.<br /><strong>ВАЖЛИВО: Якщо це налаштування встановлено в «Ні», то користувачі будуть перенаправлені на сторінку авторизації або на головну сторінку.</strong>';
 
 $_lang['setting_failed_login'] = 'Ліміт спроб авторизації';
 $_lang['setting_failed_login_desc'] = 'Тут Ви можете вказати кількість невдалих спроб входу до системи, при перевищенні якої користувача буде заблоковано.';
 
-$_lang['setting_login_allowed_days'] = 'Allowed Days';
-$_lang['setting_login_allowed_days_desc'] = 'Select the days that this user is allowed to login.';
+$_lang['setting_login_allowed_days'] = 'Дозволені дні';
+$_lang['setting_login_allowed_days_desc'] = 'Виберіть дні, коли цей користувач може увійти.';
 
-$_lang['setting_login_allowed_ip'] = 'Allowed IP Address';
-$_lang['setting_login_allowed_ip_desc'] = 'Enter the IP addresses that this user is allowed to log in from. <strong>NOTE: Separate multiple IP addresses with a comma (,)</strong>';
+$_lang['setting_login_allowed_ip'] = 'Дозволені IP адреси';
+$_lang['setting_login_allowed_ip_desc'] = 'Вкажіть IP-адреси через кому, з яких користувачеві дозволено входити в систему керування.';
 
-$_lang['setting_login_homepage'] = 'Login Home Page';
-$_lang['setting_login_homepage_desc'] = 'Enter the ID of the document you want to send the user to after he/she has logged in. <strong>NOTE: Make sure the ID you enter belongs to an existing document, and that it has been published and is accessible by this user!</strong>';
+$_lang['setting_login_homepage'] = 'Головна сторінка авторизованого користувача';
+$_lang['setting_login_homepage_desc'] = 'Вкажіть ID ресурсу, на який користувач буде перенаправлений після авторизації. <strong>ВАЖЛИВО: переконайтеся, що ID належить існуючому та опублікованому ресурсу, і що користувач має право на його перегляд!</strong>';
 
 // system settings
-$_lang['setting_access_policies_version'] = 'Access Policy Schema Version';
-$_lang['setting_access_policies_version_desc'] = 'The version of the Access Policy system. DO NOT CHANGE.';
+$_lang['setting_access_policies_version'] = 'Версія системи управління політиками доступу';
+$_lang['setting_access_policies_version_desc'] = 'Версія системи керування політиками доступу. НЕ МЕНЯЙТЕ!';
 
-$_lang['setting_allow_forward_across_contexts'] = 'Allow Forwarding Across Contexts';
-$_lang['setting_allow_forward_across_contexts_desc'] = 'When true, Symlinks and modX::sendForward() API calls can forward requests to Resources in other Contexts.';
+$_lang['setting_allow_forward_across_contexts'] = 'Дозволити перенаправлення через контексти';
+$_lang['setting_allow_forward_across_contexts_desc'] = 'Якщо дозволено, символічні посилання та метод API modX::sendForward() зможуть перенаправляти запити на ресурси з інших контекстів.';
 
 $_lang['setting_allow_manager_login_forgot_password'] = 'Дозволити "Забув пароль" на сторінці входу до системи';
 $_lang['setting_allow_manager_login_forgot_password_desc'] = 'Встановлення значення "Ні" вимкне функцію "Забув пароль" на сторінці авторизації Менеджера.';
 
-$_lang['setting_allow_tags_in_post'] = 'Allow Tags in POST';
-$_lang['setting_allow_tags_in_post_desc'] = 'If false, all POST variables will be stripped of HTML script tags, numeric entities, and MODX tags. MODX recommends to leave this set to false for Contexts other than mgr, where it is set to true by default.';
+$_lang['setting_allow_tags_in_post'] = 'Дозволити передачу HTML тегів у POST';
+$_lang['setting_allow_tags_in_post_desc'] = 'Якщо вибрано «Ні», всі параметри POST в межах системи керування будуть очищені від будь-яких тегів. MODX рекомендує залишити це налаштування увімкненим («Так»).';
 
-$_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
-$_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
+$_lang['setting_allow_tv_eval'] = 'Дозволити виконання коду у TV';
+$_lang['setting_allow_tv_eval_desc'] = 'Виберіть цей параметр, щоб дозволити або заборонити виконання коду TV. Якщо вибрано «Ні», код або значення буде оброблено як звичайний текст.';
 
-$_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
+$_lang['setting_anonymous_sessions'] = 'Анонімні сесії';
 $_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
 
-$_lang['setting_archive_with'] = 'Force PCLZip Archives';
-$_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
+$_lang['setting_archive_with'] = 'Використати PCLZip';
+$_lang['setting_archive_with_desc'] = 'Якщо вибрано "Так", роботи з zip-архівами буде використовуватися PCLZip замість ZipArchive. Виберіть "Так", якщо у вас виникають проблеми з розпакуванням пакетів у "Менеджері пакетів".';
 
-$_lang['setting_auto_menuindex'] = 'Menu indexing default';
-$_lang['setting_auto_menuindex_desc'] = 'Select \'Yes\' to turn on automatic menu index incrementing by default.';
+$_lang['setting_auto_menuindex'] = 'Нумерація меню за замовчуванням';
+$_lang['setting_auto_menuindex_desc'] = 'Виберіть «Так», щоб автоматично нумерувати меню за промовчанням.';
 
-$_lang['setting_auto_check_pkg_updates'] = 'Automatic Check for Package Updates';
-$_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatically check for updates for packages in Package Management. This may slow the loading of the grid.';
+$_lang['setting_auto_check_pkg_updates'] = 'Автоматично перевіряти наявність оновлень пакетів';
+$_lang['setting_auto_check_pkg_updates_desc'] = 'Якщо вибрано "Так", MODX автоматично перевірятиме наявність оновлень для пакетів у Менеджері пакетів. Це може сповільнити завантаження таблиці, яка відображає пакети.';
 
-$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
-$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
+$_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Час життя кешу результатів автоматичної перевірки наявності оновлень пакетів';
+$_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'Тривалість часу (у хвилинах), на який «Менеджер пакетів» кешуватиме результати перевірки наявності оновлень пакетів.';
 
 $_lang['setting_allow_multiple_emails'] = 'Дозволити користувачам мати однакові e-mail';
 $_lang['setting_allow_multiple_emails_desc'] = 'Якщо увімкнено, різні користувачі можуть використовувати одну й ту ж адресу електронної пошти.';
 
-$_lang['setting_automatic_alias'] = 'Automatically generate alias';
-$_lang['setting_automatic_alias_desc'] = 'Select \'Yes\' to have the system automatically generate an alias based on the Resource\'s page title when saving.';
+$_lang['setting_automatic_alias'] = 'Автоматично генерувати псевдонім';
+$_lang['setting_automatic_alias_desc'] = 'Виберіть «Так» для автоматичної генерації псевдонімів на базі заголовка ресурсу під час його збереження.';
 
-$_lang['setting_automatic_template_assignment'] = 'Automatic Template Assignment';
+$_lang['setting_automatic_template_assignment'] = 'Автоматичне присвоєння шаблону';
 $_lang['setting_automatic_template_assignment_desc'] = 'Виберіть, як шаблони будуть призначатися нових ресурсів при створенні. Можливі варіанти: system (шаблон за замовчуванням з системних налаштувань), parent (успадковує батьківський шаблон) або sibling (успадковує найбільш використовуваний шаблон sibling)';
 
-$_lang['setting_base_help_url'] = 'Base Help URL';
-$_lang['setting_base_help_url_desc'] = 'The base URL by which to build the Help links in the top right of pages in the manager.';
+$_lang['setting_base_help_url'] = 'URL допомоги';
+$_lang['setting_base_help_url_desc'] = 'URL допомоги у верхньому правому куті сторінок системи керування.';
 
 $_lang['setting_blocked_minutes'] = 'Тривалість блокування';
 $_lang['setting_blocked_minutes_desc'] = 'Тут Ви можете вказати час (у хвилинах), на який буде заблоковано користувача в разі перевищення кількості невдалих спроб входу до системи. Будь ласка, вводьте лише цифри (без ком, пробілів тощо)';
@@ -133,71 +133,71 @@ $_lang['setting_cache_alias_map_desc'] = 'Якщо увімкнено, усі UR
 $_lang['setting_use_context_resource_table'] = 'Use the context resource table';
 $_lang['setting_use_context_resource_table_desc'] = 'When enabled, context refreshes use the context_resource table. This enables you to programmatically have one resource in multiple contexts. If you do not use those multiple resource contexts via the API, you can set this to false. On large sites you will get a potential performance boost in the manager then.';
 
-$_lang['setting_cache_context_settings'] = 'Enable Context Setting Cache';
-$_lang['setting_cache_context_settings_desc'] = 'When enabled, context settings will be cached to reduce load times.';
+$_lang['setting_cache_context_settings'] = 'Включити кешування налаштувань контекстів';
+$_lang['setting_cache_context_settings_desc'] = 'Якщо вибрано "Так", параметри контекстів кешуватимуться для прискорення завантаження сторінок.';
 
-$_lang['setting_cache_db'] = 'Enable Database Cache';
-$_lang['setting_cache_db_desc'] = 'When enabled, objects and raw result sets from SQL queries are cached to significantly reduce database loads.';
+$_lang['setting_cache_db'] = 'Увімкнути кешування бази даних';
+$_lang['setting_cache_db_desc'] = 'Якщо вибрано "Так", об\'єкти та набори результатів вибірки за SQL-запитами кешуються, значно знижуючи навантаження на базу.';
 
-$_lang['setting_cache_db_expires'] = 'Expiration Time for DB Cache';
-$_lang['setting_cache_db_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for DB result-set caching.';
+$_lang['setting_cache_db_expires'] = 'Час життя кешу бази даних';
+$_lang['setting_cache_db_expires_desc'] = 'Значення (у секундах) встановлює час життя кешу для результатів запиту до бази даних.';
 
-$_lang['setting_cache_db_session'] = 'Enable Database Session Cache';
-$_lang['setting_cache_db_session_desc'] = 'When enabled, and cache_db is enabled, database sessions will be cached in the DB result-set cache.';
+$_lang['setting_cache_db_session'] = 'Включити кешування сесій, що обробляються базою даних';
+$_lang['setting_cache_db_session_desc'] = 'Якщо вибрано «Так», і налаштування «cache_db» увімкнено, сесії, що зберігаються в базі даних, також кешуватимуться.';
 
-$_lang['setting_cache_db_session_lifetime'] = 'Expiration Time for DB Session Cache';
-$_lang['setting_cache_db_session_lifetime_desc'] = 'This value (in seconds) sets the amount of time cache files last for session entries in the DB result-set cache.';
+$_lang['setting_cache_db_session_lifetime'] = 'Час життя кешу сесій бази даних';
+$_lang['setting_cache_db_session_lifetime_desc'] = 'Значення (у секундах) встановлює час життя кешу сесій бази даних.';
 
-$_lang['setting_cache_default'] = 'Cacheable default';
-$_lang['setting_cache_default_desc'] = 'Select \'Yes\' to make all new Resources cacheable by default.';
-$_lang['setting_cache_default_err'] = 'Please state whether or not you want documents to be cached by default.';
+$_lang['setting_cache_default'] = 'Кешований за замовчуванням';
+$_lang['setting_cache_default_desc'] = 'Виберіть «Так», щоб зробити все нові ресурси кешованими за замовчуванням.';
+$_lang['setting_cache_default_err'] = 'Кешувати ресурси за промовчанням?';
 
-$_lang['setting_cache_expires'] = 'Expiration Time for Default Cache';
-$_lang['setting_cache_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for default caching.';
+$_lang['setting_cache_expires'] = 'Час життя кешу';
+$_lang['setting_cache_expires_desc'] = 'Значення (у секундах) встановлює час кешу.';
 
-$_lang['setting_cache_resource_clear_partial'] = 'Clear Partial Resource Cache for provided contexts';
-$_lang['setting_cache_resource_clear_partial_desc'] = 'When enabled, MODX refresh will only clear resource cache for the provided contexts.';
+$_lang['setting_cache_resource_clear_partial'] = 'Часткове очищення кешу для зазначених контекстів';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'Коли увімкнено, MODX оновить кеш ресурсів лише для зазначених контекстів.';
 
-$_lang['setting_cache_format'] = 'Caching Format to Use';
-$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialize. One of the formats';
+$_lang['setting_cache_format'] = 'Використовуваний формат кешу';
+$_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = серіалізація. Виберіть один із форматів.';
 
-$_lang['setting_cache_handler'] = 'Caching Handler Class';
-$_lang['setting_cache_handler_desc'] = 'The class name of the type handler to use for caching.';
+$_lang['setting_cache_handler'] = 'Клас-обробник системи кешування';
+$_lang['setting_cache_handler_desc'] = 'Назва класу-обробника, що використовується для кешування.';
 
-$_lang['setting_cache_lang_js'] = 'Cache Lexicon JS Strings';
-$_lang['setting_cache_lang_js_desc'] = 'If set to true, this will use server headers to cache the lexicon strings loaded into JavaScript for the manager interface.';
+$_lang['setting_cache_lang_js'] = 'Кешувати JavaScript-файли із записами словника';
+$_lang['setting_cache_lang_js_desc'] = 'Якщо вибрано «Так», будуть додані заголовки, що кеширують, до JavaScript-файлів із записами словників для системи управління.';
 
-$_lang['setting_cache_lexicon_topics'] = 'Cache Lexicon Topics';
-$_lang['setting_cache_lexicon_topics_desc'] = 'When enabled, all Lexicon Topics will be cached so as to greatly reduce load times for Internationalization functionality. MODX strongly recommends leaving this set to \'Yes\'.';
+$_lang['setting_cache_lexicon_topics'] = 'Кешувати теми словників';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Якщо вибрано "Так", всі теми словників будуть кешуватися для збільшення швидкості завантаження сторінок системи керування. MODX рекомендує залишити цей параметр увімкненим ("Так").';
 
-$_lang['setting_cache_noncore_lexicon_topics'] = 'Cache Non-Core Lexicon Topics';
-$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'When disabled, non-core Lexicon Topics will be not be cached. This is useful to disable when developing your own Extras.';
+$_lang['setting_cache_noncore_lexicon_topics'] = 'Кешувати теми словників, які не входять до ядра';
+$_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Якщо вибрано "Ні", теми словників, які не входять до ядра, не будуть кешуватися. Це може бути зручним при розробці компонентів.';
 
-$_lang['setting_cache_resource'] = 'Enable Partial Resource Cache';
-$_lang['setting_cache_resource_desc'] = 'Partial resource caching is configurable by resource when this feature is enabled.  Disabling this feature will disable it globally.';
+$_lang['setting_cache_resource'] = 'Включити часткове кешування ресурсів';
+$_lang['setting_cache_resource_desc'] = 'Якщо вибрано "Так", часткове кешування визначається самими ресурсами. Вимкнення опції відключить його на всьому сайті.';
 
-$_lang['setting_cache_resource_expires'] = 'Expiration Time for Partial Resource Cache';
-$_lang['setting_cache_resource_expires_desc'] = 'This value (in seconds) sets the amount of time cache files last for partial Resource caching.';
+$_lang['setting_cache_resource_expires'] = 'Час життя часткового кешу ресурсів';
+$_lang['setting_cache_resource_expires_desc'] = 'Значення (у секундах) встановлює час часткового кешу ресурсів.';
 
-$_lang['setting_cache_scripts'] = 'Enable Script Cache';
-$_lang['setting_cache_scripts_desc'] = 'When enabled, MODX will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODX recommends leaving this set to \'Yes\'.';
+$_lang['setting_cache_scripts'] = 'Увімкнути кешування скриптів';
+$_lang['setting_cache_scripts_desc'] = 'Якщо вибрано «Так», MODX кешуватиме всі скрипти (сніппети та плагіни) у файли для збільшення швидкості завантаження. MODX рекомендує залишити це налаштування увімкненим («Так»).';
 
-$_lang['setting_cache_system_settings'] = 'Enable System Setting Cache';
-$_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODX recommends leaving this on.';
+$_lang['setting_cache_system_settings'] = 'Увімкнути кешування налаштувань системи';
+$_lang['setting_cache_system_settings_desc'] = 'Якщо вибрано "Так", налаштування системи будуть кешуватися для прискорення завантаження сторінок. MODX рекомендує залишити це налаштування увімкненим ("Так").';
 
-$_lang['setting_clear_cache_refresh_trees'] = 'Refresh Trees on Site Cache Clear';
-$_lang['setting_clear_cache_refresh_trees_desc'] = 'When enabled, will refresh the trees after clearing the site cache.';
+$_lang['setting_clear_cache_refresh_trees'] = 'Оновлювати деревоподібні меню під час очищення кешу сайту';
+$_lang['setting_clear_cache_refresh_trees_desc'] = 'Якщо вибрано "Так", після оновлення кешу сайту оновлюватимуться деревоподібні меню.';
 
-$_lang['setting_compress_css'] = 'Use Compressed CSS';
-$_lang['setting_compress_css_desc'] = 'When this is enabled, MODX will use a compressed version of its CSS stylesheets in the manager interface.';
+$_lang['setting_compress_css'] = 'Використовувати стислий CSS';
+$_lang['setting_compress_css_desc'] = 'Якщо вибрано "Так", MODX буде використовувати стислі версії файлів CSS-стилів у системі керування.';
 
-$_lang['setting_compress_js'] = 'Use Compressed JavaScript Libraries';
-$_lang['setting_compress_js_desc'] = 'When this is enabled, MODX will serve a compressed version of the core scripts file.';
+$_lang['setting_compress_js'] = 'Використовувати стиснуті JavaScript бібліотеки';
+$_lang['setting_compress_js_desc'] = 'Якщо вибрано "Так", MODX надаватиме стислу версію файлу зі скриптами системи керування.';
 
-$_lang['setting_compress_js_groups'] = 'Use Grouping When Compressing JavaScript';
-$_lang['setting_compress_js_groups_desc'] = 'Group the core MODX manager JavaScript using minify\'s groupsConfig. Set to Yes if using suhosin or other limiting factors.';
+$_lang['setting_compress_js_groups'] = 'Використовувати угруповання під час стиснення JavaScript';
+$_lang['setting_compress_js_groups_desc'] = 'Групувати JavaScript-файли системи керування MODX, використовуючи конфігурацію "groupsConfig" для компресора Google. Виберіть «Так», якщо ви використовуєте розширення suhosin або інші обмеження.';
 
-$_lang['setting_concat_js'] = 'Use Concatenated Javascript Libraries';
+$_lang['setting_concat_js'] = 'Використовувати об\'єднані JavaScript-бібліотеки';
 $_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
 
 $_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
@@ -635,7 +635,7 @@ $_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the ses
 $_lang['setting_session_handler_class'] = 'Session Handler Class Name';
 $_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
-$_lang['setting_session_name'] = 'Session Name';
+$_lang['setting_session_name'] = 'Назва сесii';
 $_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODX. Leave blank to use the default PHP session name.';
 
 $_lang['setting_settings_version'] = 'Settings Version';
@@ -644,7 +644,7 @@ $_lang['setting_settings_version_desc'] = 'The current installed version of MODX
 $_lang['setting_settings_distro'] = 'Settings Distribution';
 $_lang['setting_settings_distro_desc'] = 'The current installed distribution of MODX.';
 
-$_lang['setting_set_header'] = 'Set HTTP Headers';
+$_lang['setting_set_header'] = 'Встановити HTTP-заголовки';
 $_lang['setting_set_header_desc'] = 'When enabled, MODX will attempt to set the HTTP headers for Resources.';
 
 $_lang['setting_send_poweredby_header'] = 'Send X-Powered-By Header';
@@ -657,7 +657,7 @@ $_lang['setting_signupemail_message'] = 'Sign-up email';
 $_lang['setting_signupemail_message_desc'] = 'Here you can set the message sent to your users when you create an account for them and let MODX send them an email containing their username and password. <br /><strong>Note:</strong> The following placeholders are replaced by the Content Manager when the message is sent: <br /><br />[[+sname]] - Name of your web site, <br />[[+saddr]] - Your web site email address, <br />[[+surl]] - Your site URL, <br />[[+uid]] - User\'s login name or id, <br />[[+pwd]] - User\'s password, <br />[[+ufn]] - User\'s full name. <br /><br /><strong>Leave the [[+uid]] and [[+pwd]] in the email, or else the username and password won\'t be sent in the mail and your users won\'t know their username or password!</strong>';
 $_lang['setting_signupemail_message_default'] = 'Hello [[+uid]] \n\nHere are your login details for [[+sname]] Content Manager:\n\nUsername: [[+uid]]\nPassword: [[+pwd]]\n\nOnce you log into the Content Manager ([[+surl]]), you can change your password.\n\nRegards,\nSite Administrator';
 
-$_lang['setting_site_name'] = 'Site name';
+$_lang['setting_site_name'] = 'Назва сайту';
 $_lang['setting_site_name_desc'] = 'Enter the name of your site here.';
 $_lang['setting_site_name_err']  = 'Please enter a site name.';
 
@@ -665,7 +665,7 @@ $_lang['setting_site_start'] = 'Site start';
 $_lang['setting_site_start_desc'] = 'Enter the ID of the Resource you want to use as homepage here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
 $_lang['setting_site_start_err'] = 'Please specify a Resource ID that is the site start.';
 
-$_lang['setting_site_status'] = 'Site status';
+$_lang['setting_site_status'] = 'Статус сайту';
 $_lang['setting_site_status_desc'] = 'Select \'Yes\' to publish your site on the web. If you select \'No\', your visitors will see the \'Site unavailable message\', and won\'t be able to browse the site.';
 $_lang['setting_site_status_err'] = 'Please select whether or not the site is online (Yes) or offline (No).';
 

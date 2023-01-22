@@ -167,15 +167,6 @@ abstract class modInstallRunner {
         $configTpl = MODX_CORE_PATH . 'docs/config.inc.tpl';
         $configFile = MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 
-        /**
-         * Sanitize MySQL Password before writing to config, escaping '
-         * I'm sure there's a better way to do this, but this works for now.
-         * Otherwise, we risk fatal PHP errors if the entered Password
-         * contains any single quotes as they would escape the string.
-         * See GitHub issue 12502 for more information. https://github.com/modxcms/revolution/issues/12502
-         */
-        $this->install->settings->settings['database_password'] = addslashes($this->install->settings->settings['database_password']);
-
         $settings = $this->install->settings->fetch();
         $settings['last_install_time'] = time();
         $settings['site_id'] = uniqid('modx',true);
@@ -192,6 +183,11 @@ abstract class modInstallRunner {
                 if ($content) {
                     $replace = [];
                     foreach ($settings as $key => $value) {
+                        // Sanitize MySQL Password before writing to config, escaping single quotes and backslashes (https://github.com/modxcms/revolution/issues/12502)
+                        if ($key == 'database_password') {
+                            $value = str_replace("\\", "\\\\", $value);
+                            $value = str_replace("'", "\\'", $value);
+                        }
                         if (is_scalar($value)) {
                             $replace['{' . $key . '}'] = "{$value}";
                         } elseif (is_array($value)) {

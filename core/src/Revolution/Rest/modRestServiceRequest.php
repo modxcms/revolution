@@ -115,7 +115,7 @@ class modRestServiceRequest
                 }
             }
         }
-        array_walk_recursive($headers, ['modRestServiceRequest', '_trimString']);
+        array_walk_recursive($headers, [$this, '_trimString']);
         $this->headers = $headers;
     }
 
@@ -204,7 +204,7 @@ class modRestServiceRequest
                 break;
         }
         if ($this->service->getOption('trimParameters', false)) {
-            array_walk_recursive($this->parameters, ['modRestServiceRequest', '_trimString']);
+            array_walk_recursive($this->parameters, [$this, '_trimString']);
         }
 
         return $params;

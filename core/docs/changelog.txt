@@ -2,8 +2,45 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.0.2-pl (TBD)
+MODX Revolution 3.0.3-pl (January 17, 2023)
 ====================================
+- Fix cache_resource_clear_partial functionality (#16346)
+- Add new error reporting for grids (#16331)
+- Fix Validation Error When Switching TV Types (#16319)
+- Fix TypeError exceptions when restoring deleted resources (#16303)
+- Permissions Combo Fix (#16273)
+- Grid filtering via URL parameters -- Usergroup ACL (#16089)
+- Fix issues with TV Media Sources upgrading from 2.x (#16338)
+- Update legacy Element class references for PropertySets (#16337)
+- Ensure modHashing::getHash is limited to modHash instances (#16320)
+- Catch dashboard widget errors on a per-widget basis (#16289)
+
+MODX Revolution 3.0.2-pl (November 16, 2022)
+====================================
+- Remove the scrolling overflow from the modx-browser panel (#16280)
+- Determine upload path based on the tree node's path attribute (#16292)
+- Fix getTag() side effects in MODX 3 (#16294)
+- Fix nested tag parsing in filters (#16288)
+- Fix ability to edit .htaccess (#16249)
+- Exclude @SELECT binding from properties check (#16286)
+- Ignore symlinks to avoid errors (#16272)
+- Enable SVG thumbnail preview for image TVs (#16271)
+- Avoid PHP warnings by only requiring deprecated.php once (#16269)
+- Fix installation for specific MySQL passwords (#16264)
+- Fix rendering of user-entered values in editable listbox-multiple TVs (#16242)
+- Check if modx-content is defined before calling doLayout (#16230)
+- Avoid instantiating namespaces, extension packages, and the OnMODXInit event during setup (#16291)
+- Include missing Flysystem FTP adapter (#16203)
+- Correct processor action names (#16246)
+- Add support for WebP images in the Media Browser (#16235)
+- Change behavior of ENTER key in settings grid cell editor (#16220)
+- Handle package provider API error (#16217)
+- Fix fatal TypeError in modRestService (#16190)
+- Restore download listeners (#16184)
+- Fix typeahead in settings combo for Context/User section (#16176)
+- Prevent PHP warning: Undefined variable $nvalue (#16199)
+- Revert copy paths for a directory / file in tree (#16180)
+- Follow-up element lexicon and style changes (#16170)
 
 MODX Revolution 3.0.1-pl (April 28, 2022)
 ====================================

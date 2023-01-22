@@ -592,6 +592,76 @@ a.x-grid-link:focus {
   margin-right: 0;
 }
 
+.x-grid-empty {
+  .error-with-icon {
+    padding: 1rem;
+    font: $fontMedium;
+    color: $red;
+    line-height: 1.3;
+    &::before {
+      @include awesome-font;
+      content: fa-content($fa-var-exclamation-triangle);
+      display: inline-block;
+      margin-right: .5rem;
+    }
+    * {
+      color: $colorSplashDark;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .error-status-info {
+      text-align: center;
+      margin: .25rem 0;
+    }
+    code {
+      white-space: pre-line;
+      font-family: $codefonts;
+      font-size: 11px;
+    }
+  }
+}
+
+.xdebug-error {
+  border: none;
+  tbody {
+    td, th {
+      border-style: solid none none none !important;
+      border-width: thin !important;
+      border-color: $softGray;
+      padding: 0.1rem 0.25rem;
+    }
+    th {
+      color: $black !important;
+      font-weight: 700;
+      &:first {
+        border-top: none !important;
+      }
+      &[colspan="5"] {
+        text-align: center !important;
+        border-color: $white;
+        border-width: thick !important;
+        padding: .5rem 2rem;
+      }
+      // The main error header rows
+      &[bgcolor^="#f57"] {
+        background: scale-color($color: $red, $saturation: -10%, $lightness: 94%);
+        font-weight: 400;
+      }
+      // The "Call Stack" header row 
+      &[bgcolor^="#e9b"] {
+        background: $colorSplash;
+        color: $white !important;
+      }
+    }
+    td {
+      background-color: $white;
+    }
+    tr:nth-child(even) td {
+      background-color: $lighterGray;
+    }
+  }
+}
+
 /* panel stylings */
 .modx-page-header,
 .modx-page-header div {

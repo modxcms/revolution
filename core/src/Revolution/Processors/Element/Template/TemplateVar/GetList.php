@@ -47,14 +47,16 @@ class GetList extends GetListProcessor
 
         $category = (integer)$this->getProperty('category', 0);
         if ($category) {
-            $conditions['category'] = $category;
+            $conditions[] = ['category' => $category];
         }
 
-        $search = $this->getProperty('search', '');
-        if (!empty($search)) {
-            $conditions['name:LIKE'] = '%' . $search . '%';
-            $conditions['OR:description:LIKE'] = '%' . $search . '%';
-            $conditions['OR:caption:LIKE'] = '%' . $search . '%';
+        $query = $this->getProperty('query', '');
+        if (!empty($query)) {
+            $conditions[] = [
+                'name:LIKE' => '%' . $query . '%',
+                'OR:caption:LIKE' => '%' . $query . '%',
+                'OR:description:LIKE' => '%' . $query . '%',
+            ];
         }
 
         return $conditions;

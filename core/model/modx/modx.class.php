@@ -22,5 +22,5 @@ if (!file_exists(MODX_CORE_PATH . 'vendor/autoload.php')) {
     exit();
 }
 require MODX_CORE_PATH . 'vendor/autoload.php';
-require MODX_CORE_PATH . 'include/deprecated.php';
+require_once MODX_CORE_PATH . 'include/deprecated.php';
 

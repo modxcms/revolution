@@ -1,0 +1,14 @@
+{
+    "name": "revolution",
+    "title": "MODX Revolution",
+    "version": "3.0.0",
+    "license": "GPL-2.0+",
+    "repository": "https://github.com/modxcms/revolution",
+    "devDependencies": {
+        "eslint": "8.29.0",
+        "eslint-config-airbnb-base": "15.0.0"
+    },
+    "scripts": {
+        "js:lint": "npx eslint manager/assets setup/assets --config=\".eslintrc.js\""
+    }
+}

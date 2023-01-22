@@ -332,7 +332,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $properties['modx_charset'] = $this->getOption('modx_charset', $properties, 'UTF-8');
         $properties['hideFiles'] = !empty($properties['hideFiles']) && $properties['hideFiles'] != 'false';
         $properties['hideTooltips'] = !empty($properties['hideTooltips']) && $properties['hideTooltips'] != 'false';
-        $properties['imageExtensions'] = $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg');
+        $properties['imageExtensions'] = $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg,webp');
 
         return $properties;
     }
@@ -588,7 +588,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
 
         $properties = $this->getPropertyList();
-        $imageExtensions = array_map('trim', explode(',', $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg')));
+        $imageExtensions = array_map(
+            'trim',
+            explode(',', $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg,webp'))
+        );
         try {
             $fa = [
                 'name' => rtrim($path, DIRECTORY_SEPARATOR),
@@ -1257,7 +1260,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      *
      * @return string
      */
-    public function getOpenTo($value,array $parameters = []) {
+    public function getOpenTo($value, array $parameters = [])
+    {
         $dirname = dirname($value);
         return $dirname == '.' ? '' : $dirname . '/';
     }
@@ -2088,6 +2092,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'handler' => 'this.renameDirectory',
             ];
         }
+        $menu[] = [
+            'text' => $this->xpdo->lexicon('file_folder_copy_path'),
+            'handler' => 'this.copyRelativePath',
+        ];
         if ($this->visibility_dirs && $this->hasPermission('directory_chmod') && $canSave) {
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_folder_visibility'),
@@ -2158,6 +2166,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             ];
         }
         if ($this->hasPermission('file_view') && $canOpen) {
+            $menu[] = [
+                'text' => $this->xpdo->lexicon('file_copy_path'),
+                'handler' => 'this.copyRelativePath',
+            ];
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_open'),
                 'handler' => 'this.openFile',

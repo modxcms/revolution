@@ -172,12 +172,45 @@ MODx.grid.Grid = function(config) {
 Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     windows: {}
 
-    ,onStoreException: function(dp,type,act,opt,resp){
-        var r = Ext.decode(resp.responseText);
-        if (r.message) {
-            this.getView().emptyText = r.message;
-            this.getView().refresh(false);
+    ,onStoreException: function(dataProxy, type, action, options, response) {
+        const responseStatusCode = response.status || 'Unknown',
+              responseStatusText = !Ext.isEmpty(response.statusText) ? `(${response.statusText})` : ''
+        ;
+        let output = '',
+            msg = ''
+        ;
+        if (Ext.isEmpty(response.responseText)) {
+            // When php display_error is off, responseText will likely be empty and only general status info will be available
+            output = responseStatusCode !== 200 ? `<div class="error-status-info">${responseStatusCode} ${responseStatusText}</div>` : '';
+        } else {
+            // When php display_error is on OR the error is caught and explicity sent from the MODx class triggering the error, responseText should contain error text or possibly an object containing message text
+            try {
+                const responseText = Ext.decode(response.responseText);
+                // In what scenario will responseText be an object with a message property?
+                if (responseText && responseText.message) {
+                    output = responseText.message;
+                }
+            } catch (e) {
+                output = response.responseText;
+            }
         }
+        if (output) {
+            if (MODx.config.debug > 0) {
+                output = MODx.util.safeHtml(output, '<table><tbody><tr><th><td><div><i><em><b><strong>', 'class,colspan,rowspan');
+                msg = _('error_grid_get_content_toscreen', {
+                    message: `<pre><code>${output}</code></pre>`
+                });
+            } else {
+                msg = _('error_grid_get_content_tolog');
+                output = Ext.util.Format.stripTags(output).replaceAll('&gt;', '>').replaceAll('&lt;', '<');
+                console.error(output);
+            }
+        } else {
+            // With some scenarios, such as when php display_errors = 1 and MODx system setting debug = 0 (reporting off), the reponseText will be empty and the status will be 200
+            msg = _('error_grid_get_content_no_msg');
+        }
+        this.getView().emptyText = `<div class="error-with-icon">${msg}</div>`;
+        this.getView().refresh(false);
     }
     ,saveRecord: function(e) {
         e.record.data.menu = null;
@@ -364,7 +397,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,autoDestroy: true
                 ,listeners:{
                     load: function(){
-                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                        const cmp = Ext.getCmp('modx-content');
+                        if (cmp) {
+                            cmp.doLayout();
+                        }
                     }
                 }
             });
@@ -380,7 +416,10 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,autoDestroy: true
                 ,listeners:{
                     load: function(){
-                        Ext.getCmp('modx-content').doLayout(); /* Fix layout bug with absolute positioning */
+                        const cmp = Ext.getCmp('modx-content');
+                        if (cmp) {
+                            cmp.doLayout();
+                        }
                     }
                 }
             });
@@ -749,6 +788,109 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         ) {
             window.history.replaceState(this.getStore().baseParams, document.title, this.makeUrl());
         }
+    }
+
+    /**
+     * @property {Function} applyGridFilter - Filters the grid data by the passed filter component (field)
+     *
+     * @param {Object} cmp - The filter field's Ext.Component object
+     * @param {String} param - The record index to apply the filter on;
+     * may also be the general query/search field name.
+     */
+    ,applyGridFilter: function(cmp, param = 'query') {
+        const filterValue = cmp.getValue(),
+              store = this.getStore(),
+              urlParams = {}
+        ;
+        let tabPanel = this.ownerCt.ownerCt,
+            hasParentTabPanel = false,
+            parentTabItems,
+            activeParentTabIdx
+        ;
+        if (!Ext.isEmpty(filterValue)) {
+            urlParams[param] = filterValue;
+        }
+        if (param == 'ns') {
+            store.baseParams['namespace'] = filterValue;
+        } else {
+            store.baseParams[param] = filterValue;
+        }
+        /*
+            If there is an additional container in the structure,
+            we need to search further for the tabs object...
+
+            NOTE: This may be able to be removed once all grid panels have been
+            updated and their structures have been made consistent with one another
+        */
+        if (!tabPanel.hasOwnProperty('xtype') || !tabPanel.xtype.includes('tabs')) {
+            if (tabPanel.ownerCt && tabPanel.ownerCt.xtype && tabPanel.ownerCt.xtype.includes('tabs')) {
+                tabPanel = tabPanel.ownerCt;
+            }
+        }
+        // Make sure we've retrieved a tab panel before working on/with it
+        if (tabPanel && tabPanel.xtype.includes('tabs')) {
+            /*
+                Determine if this is a vertical tab panel; if so there will also be a
+                horizontal parent tab panel that needs to be accounted for
+            */
+            if (tabPanel.xtype == 'modx-vtabs') {
+                const parentTabPanel = tabPanel.ownerCt.ownerCt;
+                if (parentTabPanel && parentTabPanel.xtype.includes('tabs')) {
+                    const activeParentTab = parentTabPanel.getActiveTab();
+                    hasParentTabPanel = true;
+                    parentTabItems = parentTabPanel.items;
+                    activeParentTabIdx = parentTabItems.indexOf(activeParentTab);
+                }
+            }
+            const activeTab = tabPanel.getActiveTab(),
+                  tabItems = tabPanel.items,
+                  activeTabIdx = tabItems.indexOf(activeTab)
+            ;
+            // Only need to add tab index to the URL when there are multiple tabs
+            if (hasParentTabPanel) {
+                if (tabItems.length > 1) {
+                    urlParams.vtab = activeTabIdx;
+                }
+                if (parentTabItems.length > 1) {
+                    urlParams.tab = activeParentTabIdx;
+                }
+            } else {
+                if (tabItems.length > 1) {
+                    urlParams.tab = activeTabIdx;
+                }
+            }
+        }
+        store.load();
+        MODx.util.url.setParams(urlParams)
+        this.getBottomToolbar().changePage(1);
+    }
+
+    /**
+     * @property {Function} clearGridFilters - Clears all grid filters and sets them to their default value
+     *
+     * @param {String} itemIds - A comma-separated list of the Ext component ids to be cleared
+     */
+    ,clearGridFilters: function(itemIds) {
+        const store = this.getStore();
+        itemIds = Array.isArray(itemIds) ? itemIds : itemIds.split(',');
+        /*
+            Note that param below relies on the following naming convention being followed for each filter's config:
+            itemId: 'filter-category', where 'category' is the record index to filter on
+        */
+        itemIds.forEach(itemId => {
+            const cmp = this.getTopToolbar().getComponent(itemId.trim());
+            let param = cmp.itemId.replace('filter-', '');
+            param = param == 'ns' ? 'namespace' : param ;
+            if (cmp.xtype.includes('combo')) {
+                cmp.setValue(null);
+            } else {
+                cmp.setValue('');
+            }
+            store.baseParams[param] = '';
+        });
+        store.load();
+        MODx.util.url.clearParams();
+        this.getBottomToolbar().changePage(1);
     }
 });
 

@@ -94,7 +94,7 @@ class GetList extends GetListProcessor
                 '-',
                 [
                     'text' => $this->modx->lexicon('delete'),
-                    'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove", "workspace/providers/remove"])',
+                    'handler' => 'this.remove.createDelegate(this,["provider_confirm_remove", "Workspace/Providers/Remove"])',
                 ]
             ];
         }

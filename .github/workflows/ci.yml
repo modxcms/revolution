@@ -63,4 +63,9 @@ jobs:
         run: cd _build/test && ./generateConfigs.sh auto
 
       - name: Run PHPUnit
-        run: core/vendor/bin/phpunit  --enforce-time-limit -c ./_build/test/phpunit.xml
+        run: XDEBUG_MODE=coverage core/vendor/bin/phpunit --enforce-time-limit -c ./_build/test/phpunit.xml --coverage-clover coverage.xml
+
+      - name: Upload CodeCov
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage.xml

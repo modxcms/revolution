@@ -365,28 +365,8 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         });
     }
 
-    ,getPath:function(node) {
-        var path = '',
-            p, a;
-
-        if (node != undefined && node != null) {
-            // get path for non-root node
-            if(node !== this.root) {
-                p = node.parentNode;
-                a = [node.text];
-                while(p && p !== this.root) {
-                    a.unshift(p.text);
-                    p = p.parentNode;
-                }
-                a.unshift(this.root.attributes.path || '');
-                path = a.join(this.pathSeparator);
-            }
-
-            // path for root node is it's path attribute
-            else {
-                path = node.attributes.path || '';
-            }
-        }
+    ,getPath: function(node) {
+        let path = node?.attributes?.path || '';
 
         // a little bit of security: strip leading / or .
         // full path security checking has to be implemented on server
@@ -691,7 +671,25 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,downloadFile: function(item,e) {
         var node = this.cm.activeNode;
-        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+node.attributes.pathRelative+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+        MODx.Ajax.request({
+            url: MODx.config.connector_url
+            ,params: {
+                action: 'Browser/File/Download'
+                ,file: node.attributes.pathRelative
+                ,wctx: MODx.ctx || ''
+                ,source: this.getSource()
+            }
+            ,listeners: {
+                'failure': {fn: function(r) {
+                        MODx.msg.alert(_('alert'), r.message);
+                    },scope:this},
+                'success':{fn:function(r) {
+                        if (!Ext.isEmpty(r.object.url)) {
+                            location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.getSource()+'&wctx='+MODx.ctx;
+                        }
+                    },scope:this}
+            }
+        });
     }
 
     ,copyRelativePath: function(item,e) {

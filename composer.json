@@ -39,6 +39,12 @@
         "issues": "https://github.com/modxcms/revolution/issues/",
         "source": "https://github.com/modxcms/revolution/"
     },
+    "funding": [
+        {
+            "type": "opencollective",
+            "url": "https://opencollective.com/modx"
+        }
+    ],
     "config": {
         "vendor-dir": "core/vendor"
     },
@@ -47,6 +53,7 @@
         "xpdo/xpdo": "~3.1.0",
         "league/flysystem": "^2.0",
         "league/flysystem-aws-s3-v3": "^2.0",
+        "league/flysystem-ftp": "^2.0",
         "phpmailer/phpmailer": "^6.0",
         "smarty/smarty": "^4.0",
         "james-heinrich/phpthumb": "^1.7",

@@ -58,7 +58,7 @@ class modOutputFilter
 
             for ($i = 0; $i < $count; $i++) {
 
-                $m_cmd = $modifier_cmd[$i];
+                $m_cmd = trim($modifier_cmd[$i]);
                 $m_val = $modifier_value[$i];
 
                 $this->log('Processing Modifier: ' . $m_cmd . ' (parameters: ' . $m_val . ')');

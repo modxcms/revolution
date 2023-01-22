@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Groupe';
+$_lang['area'] = 'Champs d\'application';
 $_lang['area_authentication'] = 'Authentification et sécurité';
 $_lang['area_caching'] = 'Cache';
 $_lang['area_core'] = 'Code du core';
@@ -22,7 +22,7 @@ $_lang['area_phpthumb'] = 'phpThumb';
 $_lang['area_proxy'] = 'Proxy';
 $_lang['area_session'] = 'Session et Cookie';
 $_lang['area_static_elements'] = 'Contenus statiques';
-$_lang['area_static_resources'] = 'Static Resources';
+$_lang['area_static_resources'] = 'Ressources statiques';
 $_lang['area_lexicon_string'] = 'Entrées du lexique de zone';
 $_lang['area_lexicon_string_msg'] = 'Entrez ici la clé de l\'entrée du lexique pour la zone. S\'il n\'y a pas d\'entrée de lexique, cela affichera la clé de la zone.<br />Zones du coeur : Authentification, cache, fichier, urls simples, passerelle, langue, gestionnaire, session, site, système';
 $_lang['area_site'] = 'Site';
@@ -247,8 +247,8 @@ $_lang['setting_emailsender_err'] = 'Veuillez indiquer l\'adresse e-mail d\'admi
 $_lang['setting_enable_dragdrop'] = 'Activer le Glisser-Déposer dans l\'arborescence de ressources/éléments';
 $_lang['setting_enable_dragdrop_desc'] = 'Inactif, empêchera l\'utilisation du glisser-déposer dans l\'arborescence de ressources et d\'éléments.';
 
-$_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
-$_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
+$_lang['setting_enable_template_picker_in_tree'] = 'Activer le sélecteur de modèle dans l\'arborescence des ressources';
+$_lang['setting_enable_template_picker_in_tree_desc'] = 'Activez cette option pour utiliser la fenêtre modale du sélecteur de template lors de la création d\'une nouvelle ressource dans l\'arborescence.';
 
 $_lang['setting_error_page'] = 'Page d\'erreur';
 $_lang['setting_error_page_desc'] = 'Entrez l\'ID du document que vous souhaitez afficher aux utilisateurs qui demandent un document qui n\'existe pas. <strong>NOTE : assurez-vous que cet ID appartienne à un document publié existant!</strong>';
@@ -382,10 +382,10 @@ $_lang['setting_mail_smtp_port'] = 'Port SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Défini le port par défaut du serveur SMTP.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Définit le type d\'encyption sécurisé SMTP. Les options sont "", "ssl" ou "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Activer le cryptage TLS automatiquement si un serveur le supporte, même si "SMTP Secure" n\'est pas réglé sur "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'Simple destinataire SMTP';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Donne la possibilité d\'effectuer un champ destinataire individuel, au lieu d\'envoyer à tous les destinataires.';
@@ -614,8 +614,8 @@ $_lang['setting_server_offset_time_desc'] = 'Indiquez le nombre d\'heures de dé
 $_lang['setting_session_cookie_domain'] = 'Cookie de session de domaine';
 $_lang['setting_session_cookie_domain_desc'] = 'Utilisez cette option pour personnaliser le domaine de session de cookie.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Cookie de session Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choisissez entre "Lax" ou "Strict".';
 
 $_lang['setting_session_cookie_lifetime'] = 'Durée de vie du Cookie de Session';
 $_lang['setting_session_cookie_lifetime_desc'] = 'Utilisez cette option pour personnaliser la durée de vie de session de coockie (en secondes). Ceci est utilisé la durée de la session côté client quand l\'option \'se rappeler de moi\' est utilisée lors du login.';
@@ -700,11 +700,11 @@ $_lang['setting_static_elements_default_category_desc'] = 'Spécifier une catég
 $_lang['setting_static_elements_basepath'] = 'Chemin de base des éléments statiques';
 $_lang['setting_static_elements_basepath_desc'] = 'Chemin de base où stocker les fichiers d\'éléments statiques.';
 
-$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
-$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+$_lang['setting_resource_static_allow_absolute'] = 'Permettre d\'utiliser le chemin absolu pour les ressources statiques';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Ce paramètre permet aux utilisateurs d\'entrer un chemin absolu entièrement qualifié vers n\'importe quel fichier lisible sur le serveur en tant que contenu d\'une ressource statique. Important : l\'activation de ce paramètre peut être considérée comme un risque de sécurité très important ! Il est fortement recommandé de garder ce paramètre désactivé, à moins que vous ne fassiez entièrement confiance à chaque utilisateur du "manager".';
 
-$_lang['setting_resource_static_path'] = 'Static resource base path';
-$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
+$_lang['setting_resource_static_path'] = 'Chemin de base de ressource statique';
+$_lang['setting_resource_static_path_desc'] = 'Lorsque resource_static_allow_absolute est désactivé, les ressources statiques sont limitées à être dans le chemin absolu fourni ici. Important : le paramétrage trop large peut permettre aux utilisateurs de lire les fichiers qu\'ils ne devraient pas ! Il est fortement recommandé de limiter les utilisateurs à un répertoire spécifique tel que {core_path}static/ ou {assets_path} avec ce paramètre.';
 
 $_lang['setting_symlink_merge_fields'] = 'Fusionner les champs de ressource des liens symboliques';
 $_lang['setting_symlink_merge_fields_desc'] = 'Activé, cela fusionnera automatiquement les champs non vides avec ceux de la ressource cible, lors de redirections utilisant les liens symboliques.';
@@ -747,8 +747,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Entrez la taille maximale des fichiers 
 $_lang['setting_upload_media'] = 'Types de média autorisés';
 $_lang['setting_upload_media_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être chargés dans \'assets/média/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de média, séparées par des virgules.';
 
-$_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
-$_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
+$_lang['setting_upload_translit'] = 'Translittérer les noms des fichiers téléchargés ?';
+$_lang['setting_upload_translit_desc'] = 'Si cette option est activée, le nom d\'un fichier téléchargé sera modifié selon les règles de translittération globales (suppression des caractères spéciaux...)';
 
 $_lang['setting_use_alias_path'] = 'Utiliser les alias simples';
 $_lang['setting_use_alias_path_desc'] = 'Sélectionner "Oui" pour cette option affichera le chemin complet de la ressource si la ressource a un alias. Par exemple, si une ressource ayant pour alias "enfant" est située dans une ressource conteneur ayant pour alias "parent", alors l\'alias du chemin complet sera affiché "/parent/enfant.html".<br /><strong>NOTE : Mettre "oui" dans cette option (activer les alias simples) implique l\'utilisation de chemin absolu pour les objets (tels qu\'images, css, javascripts, etc.), par exemple : "\'/assets/images" au lieu de "assets/images". En faisant ainsi, vous éviterez au navigateur (ou serveur web) d\'ajouter le chemin relatif à l\'alias.</strong>';
@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Lorsque cette option est activ�
 $_lang['setting_passwordless_expiration'] = 'Expiration de la connexion sans mot de passe';
 $_lang['setting_passwordless_expiration_desc'] = 'Durée de validité en secondes d\'un lien de connexion unique.';
 
-$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
-$_lang['setting_static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['setting_static_elements_html_extension'] = 'Extension html des éléments statiques';
+$_lang['setting_static_elements_html_extension_desc'] = 'L\'extension pour les fichiers utilisés par les éléments statiques avec du contenu HTML.';

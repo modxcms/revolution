@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -24,13 +25,13 @@ use MODX\Revolution\modUser;
 class Restore extends Processor
 {
     /** @var modResource[] $resources */
-    private $resources;
+    private $resources = [];
 
     /** @var array $failures Failed ids of restored resources */
-    private $failures;
+    private $failures = [];
 
     /** @var array $success Ids of successfully restored resources */
-    private $success;
+    private $success = [];
 
     public function checkPermissions()
     {
@@ -76,7 +77,6 @@ class Restore extends Processor
 
     public function process()
     {
-        $this->success = [];
         $contexts = [];
 
         foreach ($this->resources as $resource) {
@@ -86,9 +86,12 @@ class Restore extends Processor
 
             if (!$this->addLock($resource)) {
                 $lockedUser = $this->modx->getObject(modUser::class, $resource->getLock());
-                return $this->failure($this->modx->lexicon('resource_locked_by', [
+                return $this->failure($this->modx->lexicon(
+                    'resource_locked_by',
+                    [
                         'id' => $resource->get('id'),
-                        'user' => ($lockedUser) ? $lockedUser->get('username') : '(unknown)']
+                        'user' => ($lockedUser) ? $lockedUser->get('username') : '(unknown)',
+                    ]
                 ));
             }
 
@@ -122,7 +125,7 @@ class Restore extends Processor
         $outputArray['failures'] = $this->failures;
 
         $msg = '';
-        if ($outputArray['successes'] > 0) {
+        if (count($outputArray['successes']) > 0) {
             $msg = $this->modx->lexicon('trash.restore_success', [
                 'list' => implode(', ', $this->success),
                 'count_success' => count($this->success),

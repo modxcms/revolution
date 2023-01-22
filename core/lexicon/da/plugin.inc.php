@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Rediger kørselsrækkefølge af plugins efter events';
 $_lang['plugin_properties'] = 'Pluginegenskaber';
 $_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
-$_lang['plugin_title'] = 'Opret og redigér plugin';
-$_lang['plugin_untitled'] = 'Unavngivet plugin';
 $_lang['plugins'] = 'Plugins';
 
 // Temporarily match old keys to new ones to ensure compatibility

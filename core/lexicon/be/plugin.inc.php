@@ -43,8 +43,6 @@ $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Змяніць парадак выканання плагінаў (сартаваны па падзеі)';
 $_lang['plugin_properties'] = 'Налады плагіна';
 $_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
-$_lang['plugin_title'] = 'Стварыць/рэдагаваць плагін';
-$_lang['plugin_untitled'] = 'Плагін без назвы';
 $_lang['plugins'] = 'Плагiны';
 
 // Temporarily match old keys to new ones to ensure compatibility
