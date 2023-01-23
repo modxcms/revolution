@@ -1,7 +1,7 @@
 MODx.window.CreateResource = function(config) {
     config = config || {};
     this.ident = config.ident || 'tplpick'+Ext.id();
-    var id = this.ident;
+    const id = this.ident;
     Ext.applyIf(config, {
         autoHeight: true,
         title: _('document_new'),
@@ -163,7 +163,7 @@ MODx.combo.TemplatePicker = function(config) {
                     scope: this
                 },
                 'loadexception': {fn: function(o,trans,resp) {
-                        var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
+                        const status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
                         MODx.msg.alert(_('error'), status + resp.responseText);
                     }}
             }
@@ -175,10 +175,10 @@ MODx.combo.TemplatePicker = function(config) {
 
 Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
     loadItems: function(store, data) {
-        var value = this.value;
+        const value = this.value;
 
-        var items = [];
-        var category = '';
+        const items = [];
+        let category = '';
 
         Ext.each(data, function(record) {
             if (category !== record.data.category_name) {
@@ -214,7 +214,7 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
             listeners: {
                 'render': {
                     fn: function(tf) {
-                        var value = tf.getValue();
+                        const value = tf.getValue();
 
                         if (value.record) {
                             this.fireEvent('select', value.record);
@@ -224,7 +224,7 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
                 },
                 'change': {
                     fn: function(tf) {
-                        var value = tf.getValue();
+                        const value = tf.getValue();
 
                         if (value.record) {
                             this.fireEvent('select', value.record);
@@ -238,12 +238,13 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
         this.doLayout();
     },
     filterItems: function(tf) {
-        if (undefined !== (panel = Ext.getCmp('modx-template-picker-templates'))) {
+        const panel = Ext.getCmp('modx-template-picker-templates')
+        if (panel) {
             panel.items.each(function(object) {
                 if (!Ext.isEmpty(tf.getValue()) && object.record) {
-                    var regex = new RegExp(tf.getValue(), 'i');
+                    const regex = new RegExp(tf.getValue(), 'i');
 
-                    if (-1 === object.record.data.templatename.search(regex)) {
+                    if (object.record.data.templatename.search(regex) === -1) {
                         object.hide();
                     } else {
                         object.show();
@@ -271,14 +272,16 @@ MODx.panel.TemplatePreview = function(config) {
 Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
     setPreview: function(record) {
         this.removeAll();
-        if ('' == record.data.preview || undefined === record.data.preview) {
+
+        let html = '';
+        if (record.data.preview == '' || undefined === record.data.preview) {
             this.addClass('x-form-template-preview-empty');
 
-            var html = '';
+            html = '';
         } else {
             this.removeClass('x-form-template-preview-empty');
 
-            var html = '<img src="' + record.data.preview + '" alt="' + record.data.templatename + '" />';
+            html = '<img src="' + record.data.preview + '" alt="' + record.data.templatename + '" />';
         }
 
         this.add({
@@ -288,7 +291,7 @@ Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
                 cls: 'x-form-template-preview-image',
                 html: html
             },
-            hidden: '' == record.data.image ? true : false
+            hidden: record.data.image == ''
         }, {
             xtype: 'box',
             autoEl: {
@@ -296,7 +299,7 @@ Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
                 cls: 'x-form-template-preview-desc',
                 html: '<p>' + record.data.description + '</p>'
             },
-            hidden: '' == record.data.description ? true : false
+            hidden: record.data.description == ''
         });
 
         this.doLayout();

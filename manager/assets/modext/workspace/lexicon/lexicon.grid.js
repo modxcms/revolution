@@ -137,10 +137,10 @@ MODx.grid.Lexicon = function(config) {
 Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     console: null
 
-    ,_renderStatus: function(v,md,rec,ri) {
+    ,_renderStatus: function(v,md,rec) {
         switch (rec.data.overridden) {
             case 1:
-                return '<span style="color: green;">'+v+'</span>';break;
+                return '<span style="color: green;">'+v+'</span>';
             case 2:
                 return '<span style="color: purple;">'+v+'</span>';
             default:
@@ -170,36 +170,37 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             ,language: 'en'
     	};
     	this.getBottomToolbar().changePage(1);
-        var tb = this.getTopToolbar();
+        const tb = this.getTopToolbar();
     	tb.getComponent('namespace').setValue('core');
 
-        var tcb = tb.getComponent('topic');
+        const tcb = tb.getComponent('topic');
         tcb.store.baseParams['namespace'] = 'core';
         tcb.store.load();
     	tcb.setValue('default');
 
-    	var tcl = tb.getComponent('language');
+    	const tcl = tb.getComponent('language');
         tcb.store.baseParams['namespace'] = 'core';
         tcb.store.load();
         tcl.setValue('en');
 
         tb.getComponent('search').setValue('');
     }
-    ,changeNamespace: function(cb,nv,ov) {
+    ,changeNamespace: function(cb) {
         this.setFilterParams(cb.getValue(),'default','en');
     }
-    ,changeTopic: function(cb,nv,ov) {
+    ,changeTopic: function(cb) {
         this.setFilterParams(null,cb.getValue());
     }
-    ,changeLanguage: function(cb,nv,ov) {
+    ,changeLanguage: function(cb) {
         this.setFilterParams(null,null,cb.getValue());
     }
 
     ,setFilterParams: function(ns,t,l) {
-        var tb = this.getTopToolbar();
-        if (!tb) {return false;}
+        const tb = this.getTopToolbar();
+        if (!tb) { return false; }
 
-        var tcb,tcl;
+        let tcb;
+        let tcl;
         if (ns) {
             tb.getComponent('namespace').setValue(ns);
 
@@ -227,7 +228,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             if (tcb) {tcb.setValue(t);}
         }
 
-        var s = this.getStore();
+        const s = this.getStore();
         if (s) {
             if (ns) {s.baseParams['namespace'] = ns;}
             if (t) {s.baseParams['topic'] = t || 'default';}
@@ -237,7 +238,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         this.getBottomToolbar().changePage(1);
     }
     ,loadWindow2: function(btn,e,o) {
-        var tb = this.getTopToolbar();
+        const tb = this.getTopToolbar();
     	this.menu.record = {
             'namespace': tb.getComponent('namespace').getValue()
             ,language: tb.getComponent('language').getValue()
@@ -249,7 +250,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
     ,reloadFromBase: function() {
     	Ext.Ajax.timeout = 0;
-    	var topic = '/workspace/lexicon/reload/';
+    	const topic = '/workspace/lexicon/reload/';
         this.console = MODx.load({
            xtype: 'modx-console'
            ,register: 'mgr'
@@ -273,22 +274,22 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
 
     ,revertEntry: function() {
-        var p = this.menu.record;
+        const p = this.menu.record;
         p.action = 'Workspace/Lexicon/Revert';
 
     	MODx.Ajax.request({
     	   url: this.config.url
     	   ,params: p
     	   ,listeners: {
-                'success': {fn:function(r) {
+                'success': {fn:function() {
                     this.refresh();
                 },scope:this}
             }
     	});
     }
     ,getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var m = [];
+        const r = this.getSelectionModel().getSelected();
+        const m = [];
         if (r.data.overridden) {
             m.push({
                 text: _('entry_revert')
@@ -299,9 +300,9 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
     }
 
     ,createEntry: function(btn,e) {
-        var r = this.menu.record || {};
+        const r = this.menu.record || {};
 
-        var tb = this.getTopToolbar();
+        const tb = this.getTopToolbar();
     	r['namespace'] = tb.getComponent('namespace').getValue();
         r.language =  tb.getComponent('language').getValue();
         r.topic = tb.getComponent('topic').getValue();
@@ -336,7 +337,6 @@ Ext.reg('modx-grid-lexicon',MODx.grid.Lexicon);
 MODx.window.ExportLexicon = function(config) {
     config = config || {};
     this.ident = config.ident || 'explex'+Ext.id();
-    var r = config.record;
     Ext.applyIf(config,{
         title: _('export')
         ,url: MODx.config.connector_url
@@ -357,13 +357,15 @@ MODx.window.ExportLexicon = function(config) {
             ,itemId: 'namespace'
             ,anchor: '100%'
             ,listeners: {
-                'select': {fn: function(cb,r,i) {
-                    cle = this.fp.getComponent('topic');
+                'select': {fn: function(cb) {
+                    const cle = this.fp.getComponent('topic');
                     if (cle) {
                         cle.store.baseParams['namespace'] = cb.getValue();
                         cle.setValue('');
                         cle.store.reload();
-                    } else {MODx.debug('cle not found');}
+                    } else {
+                        MODx.debug('cle not found');
+                    }
                 },scope:this}
             }
         },{
@@ -392,7 +394,6 @@ Ext.reg('modx-window-lexicon-export',MODx.window.ExportLexicon);
 MODx.window.LexiconEntryCreate = function(config) {
     config = config || {};
     this.ident = config.ident || 'lexentc'+Ext.id();
-    var r = config.record;
     Ext.applyIf(config,{
         title: _('create')
         ,url: MODx.config.connector_url
@@ -417,8 +418,8 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,msgTarget: 'under'
             ,allowBlank: false
             ,listeners: {
-                'select': {fn: function(cb,r,i) {
-                    cle = this.fp.getComponent('topic');
+                'select': {fn: function(cb) {
+                    const cle = this.fp.getComponent('topic');
                     if (cle) {
                         cle.store.baseParams['namespace'] = cb.getValue();
                         cle.setValue('');
