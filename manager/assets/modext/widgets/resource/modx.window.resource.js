@@ -1,7 +1,69 @@
-MODx.window.CreateResource = function(config) {
-    config = config || {};
-    this.ident = config.ident || 'tplpick'+Ext.id();
-    var id = this.ident;
+MODx.window.CreateResource = function(config = {}) {
+    this.ident = config.ident || `tplpick${Ext.id()}`;
+    const id = this.ident,
+          requireAlias = parseInt(MODx.config.friendly_urls, 10) && !parseInt(MODx.config.automatic_alias, 10),
+          aliasLength = parseInt(MODx.config.friendly_alias_max_length, 10) || 0,
+          resourceDetail = [
+              {
+                  columnWidth: requireAlias ? 0.33 : 0.5,
+                  items: [
+                      {
+                          xtype: 'modx-combo-class-derivatives',
+                          fieldLabel: _('resource_type'),
+                          description: MODx.expandHelp ? '' : _('resource_type_help'),
+                          name: 'class_key',
+                          hiddenName: 'class_key',
+                          anchor: '100%',
+                          allowBlank: false,
+                          value: config.record.class_key || 'MODX\\Revolution\\modDocument',
+                      }
+                  ]
+              }, {
+                  columnWidth: requireAlias ? 0.33 : 0.5,
+                  items: [
+                      {
+                          xtype: 'modx-field-parent-change',
+                          fieldLabel: _('resource_parent'),
+                          description: `<b>[[*parent]]</b><br>${_('resource_parent_help')}`,
+                          name: 'parent-cmb',
+                          id: `modx-${id}-parent-change`,
+                          value: config.record.parent || 0,
+                          anchor: '100%',
+                          parentcmp: 'modx-template-picker-parent-id',
+                          contextcmp: 'modx-template-picker-parent-context',
+                          currentid: id
+                      }
+                  ]
+              }
+          ]
+    ;
+    if (requireAlias) {
+        resourceDetail.push({
+            columnWidth: 0.34,
+            defaults: {
+                anchor: '100%',
+                enableKeyEvents: true,
+                validationEvent: 'change',
+                validateOnBlur: false,
+                msgTarget: 'under'
+            },
+            items: [
+                {
+                    xtype: 'textfield',
+                    fieldLabel: _('resource_alias'),
+                    name: 'alias',
+                    allowBlank: false,
+                    maxLength: (aliasLength > 191 || aliasLength === 0) ? 191 : aliasLength,
+                    value: config.record.alias || '',
+                    listeners: {
+                        afterrender: function() {
+                            this.clearInvalid();
+                        }
+                    }
+                }
+            ]
+        });
+    }
     Ext.applyIf(config, {
         autoHeight: true,
         title: _('document_new'),
@@ -15,50 +77,33 @@ MODx.window.CreateResource = function(config) {
             fieldLabel: _('resource_pagetitle'),
             description: MODx.expandHelp ? '' : _('resource_pagetitle_help'),
             name: 'pagetitle',
+            maxLength: 191,
             anchor: '100%',
-            allowBlank: false
-        },{
+            allowBlank: false,
+            validationEvent: 'change',
+            validateOnBlur: false,
+            value: config.record.pagetitle || '',
+            listeners: {
+                afterrender: function() {
+                    this.clearInvalid();
+                }
+            }
+        }, {
             xtype: 'hidden',
             name: 'parent',
-            id: 'modx-template-picker-parent-id',
-        },{
+            id: 'modx-template-picker-parent-id'
+        }, {
             xtype: 'hidden',
             name: 'context_key',
-            id: 'modx-template-picker-parent-context',
-        },{
+            id: 'modx-template-picker-parent-context'
+        }, {
             layout: 'column',
             defaults: {
                 layout: 'form',
                 labelSeparator: ''
             },
-            items: [{
-                columnWidth: .5,
-                items: [{
-                    xtype: 'modx-combo-class-derivatives',
-                    fieldLabel: _('resource_type'),
-                    description: MODx.expandHelp ? '' : _('resource_type_help'),
-                    name: 'class_key',
-                    hiddenName: 'class_key',
-                    anchor: '100%',
-                    allowBlank: false,
-                    value: config.record.class_key || 'MODX\\Revolution\\modDocument'
-                }]
-            },{
-                columnWidth: .5,
-                items: [{
-                    xtype: 'modx-field-parent-change'
-                    ,fieldLabel: _('resource_parent')
-                    ,description: '<b>[[*parent]]</b><br />'+_('resource_parent_help')
-                    ,name: 'parent-cmb'
-                    ,id: 'modx-'+id+'-parent-change'
-                    ,value: config.record.parent || 0
-                    ,anchor: '100%'
-                    ,parentcmp: 'modx-template-picker-parent-id'
-                    ,contextcmp: 'modx-template-picker-parent-context'
-                    ,currentid: id
-                }]
-            }]
-        },{
+            items: resourceDetail
+        }, {
             xtype: 'modx-panel-template-picker',
             fieldLabel: _('resource_template'),
             description: MODx.expandHelp ? '' : _('resource_template_help'),
@@ -66,7 +111,6 @@ MODx.window.CreateResource = function(config) {
             value: config.record.template || MODx.config.default_template
         }]
     });
-
     MODx.window.CreateResource.superclass.constructor.call(this, config);
 };
 
@@ -87,21 +131,21 @@ MODx.panel.TemplatePicker = function(config) {
                 labelSeparator: ''
             },
             items: [{
-                columnWidth: .4,
+                columnWidth: 0.4,
                 items: [{
                     xtype: 'modx-combo-template-picker',
                     id: 'modx-resource-template-picker',
                     name: 'template',
                     value: config.record || MODx.config.default_template,
                     listeners: {
-                        'select': {
+                        select: {
                             fn: this.setPreview,
                             scope: this
                         }
                     }
                 }]
             }, {
-                columnWidth: .6,
+                columnWidth: 0.6,
                 items: [{
                     xtype: 'modx-panel-template-preview',
                     id: 'modx-resource-template-preview'
@@ -163,9 +207,9 @@ MODx.combo.TemplatePicker = function(config) {
                     scope: this
                 },
                 'loadexception': {fn: function(o,trans,resp) {
-                        var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
-                        MODx.msg.alert(_('error'), status + resp.responseText);
-                    }}
+                    var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
+                    MODx.msg.alert(_('error'), status + resp.responseText);
+                }}
             }
         })
     });
