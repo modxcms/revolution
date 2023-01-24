@@ -54,7 +54,7 @@ class modInputFilter
             $modifiers = substr($output, $splitPos);
 
 
-            $chars = mb_str_split($modifiers);
+            $chars = function_exists('mb_str_split') ? mb_str_split($modifiers) : str_split($modifiers);
             $depth = 0;
             $command = '';
             $commandModifiers = '';

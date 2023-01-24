@@ -14,8 +14,6 @@
  * @package setup
  */
 /* do a little bit of environment cleanup if possible */
-@ini_set('magic_quotes_runtime',0);
-@ini_set('magic_quotes_sybase',0);
 @ini_set('opcache.revalidate_freq', 0);
 
 /* start session */
