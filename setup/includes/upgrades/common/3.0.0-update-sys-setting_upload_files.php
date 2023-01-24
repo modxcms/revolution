@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Common upgrade script for modify upload_files System Setting
  *
@@ -54,11 +55,15 @@ if ($upload_files_setting) {
     }
 
     if ($success) {
-        $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,
-            sprintf($messageTemplate, 'ok', $this->install->lexicon('system_setting_update_success', ['key' => 'upload_files'])));
+        $this->runner->addResult(
+            modInstallRunner::RESULT_SUCCESS,
+            sprintf($messageTemplate, 'ok', $this->install->lexicon('system_setting_update_success', ['key' => 'upload_files']))
+        );
     } else {
-        $this->runner->addResult(modInstallRunner::RESULT_WARNING,
-            sprintf($messageTemplate, 'warning', $this->install->lexicon('system_setting_update_failed', ['key' => 'upload_files'])));
+        $this->runner->addResult(
+            modInstallRunner::RESULT_WARNING,
+            sprintf($messageTemplate, 'warning', $this->install->lexicon('system_setting_update_failed', ['key' => 'upload_files']))
+        );
     }
 }
 
@@ -68,11 +73,15 @@ foreach ($keysRemove as $key) {
     $setting = $modx->getObject(modSystemSetting::class, ['key' => $key]);
     if ($setting instanceof modSystemSetting) {
         if ($setting->remove()) {
-            $this->runner->addResult(modInstallRunner::RESULT_SUCCESS,
-                sprintf($messageTemplate, 'ok', $this->install->lexicon('system_setting_cleanup_success', ['key' => $key])));
+            $this->runner->addResult(
+                modInstallRunner::RESULT_SUCCESS,
+                sprintf($messageTemplate, 'ok', $this->install->lexicon('system_setting_cleanup_success', ['key' => $key]))
+            );
         } else {
-            $this->runner->addResult(modInstallRunner::RESULT_WARNING,
-                sprintf($messageTemplate, 'warning', $this->install->lexicon('system_setting_cleanup_failure', ['key' => $key])));
+            $this->runner->addResult(
+                modInstallRunner::RESULT_WARNING,
+                sprintf($messageTemplate, 'warning', $this->install->lexicon('system_setting_cleanup_failure', ['key' => $key]))
+            );
         }
     }
 }
