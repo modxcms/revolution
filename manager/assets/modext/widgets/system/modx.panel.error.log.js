@@ -104,7 +104,7 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         const elemTop = elem.el.getTop();
         // The followings are to prevent scrolling if possible (slice is to remove "px" from the values, since we want integers)
         const wrapperPadding = this.el.select('.main-wrapper').first().getStyle('padding-bottom').slice(0, -2);
-        const containerMargin = this.el.getStyle('margin-bottom').slice(0, -2);;
+        const containerMargin = this.el.getStyle('margin-bottom').slice(0, -2);
 
         // Now set our max available height for our textarea
         elem.el.setHeight(clientHeight - elemTop - wrapperPadding - containerMargin);

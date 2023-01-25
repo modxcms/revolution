@@ -763,6 +763,8 @@ Ext.extend(MODx,Ext.Component,{
             listeners: {
                 'success': {
                     fn: function(r) {
+                        console.log('X');
+                        console.log(r);
                         MODx.loadPage('?a=resource/update&id=' + r.a.result.object.id);
                     },
                     scope: this
