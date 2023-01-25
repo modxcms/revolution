@@ -413,7 +413,7 @@ MODx.panel.PackageBrowserDetails = function(config) {
 				+'<tpl for=".">'
 					+'<div class="selected">'
 						+'<tpl if="screenshot">'
-							+'<a href="{screenshot}" title="package_preview_view" alt="package_preview_view" class="lightbox">'
+							+'<a href="{screenshot}" title="'+_('package_preview_view')+'" alt="'+_('package_preview_view')+'" class="lightbox">'
 								+'<img src="{screenshot}" alt="{name}" />'
 							+'</a>'
 						+'</tpl>'
