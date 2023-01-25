@@ -136,14 +136,12 @@ Ext.extend(MODx,Ext.Component,{
     }
 
     ,initMarkRequiredFields: function() {
-
-        const markerEl = '<span class=\"field-required-mark\">*</span>';
+        const markerEl = '<span class="field-required-mark">*</span>';
 
         const MarkRequiredFieldPlugin = function (config) {
             config = config || {};
             Ext.apply(config, {
                 init: function(cmp) {
-
                     if (cmp.allowBlank !== false) return;
 
                     const cmpLabel = cmp.fieldLabel;
@@ -763,8 +761,6 @@ Ext.extend(MODx,Ext.Component,{
             listeners: {
                 'success': {
                     fn: function(r) {
-                        console.log('X');
-                        console.log(r);
                         MODx.loadPage('?a=resource/update&id=' + r.a.result.object.id);
                     },
                     scope: this
