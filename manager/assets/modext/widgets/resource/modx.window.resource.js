@@ -175,7 +175,6 @@ MODx.combo.TemplatePicker = function(config) {
 
 Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
     loadItems: function(store, data) {
-        console.log('loadItems');
         const value = this.value;
 
         const items = [];
@@ -215,7 +214,6 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
             listeners: {
                 'render': {
                     fn: function(tf) {
-                        console.log('render');
                         const value = tf.getValue();
 
                         if (value.record) {
@@ -226,7 +224,6 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
                 },
                 'change': {
                     fn: function(tf) {
-                        console.log('change');
                         const value = tf.getValue();
 
                         if (value.record) {
@@ -241,7 +238,6 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
         this.doLayout();
     },
     filterItems: function(tf) {
-        console.log('filterItems')
         const panel = Ext.getCmp('modx-template-picker-templates')
         if (panel) {
             panel.items.each(function(object) {
@@ -275,8 +271,6 @@ MODx.panel.TemplatePreview = function(config) {
 
 Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
     setPreview: function(record) {
-        console.log('setPreview');
-        console.log(record);
         this.removeAll();
 
         let html = '';
