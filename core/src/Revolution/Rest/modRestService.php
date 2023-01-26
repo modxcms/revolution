@@ -219,7 +219,7 @@ class modRestService
         
         $iterateDirectories = $this->iterateDirectories($basePath . '/*' . $controllerClassFilePostfix, GLOB_NOSORT);
     	if ($iterateDirectories) {           
-        	$contollersList = array();     
+        	$contollersList = [];     
         	
 	        foreach ($iterateDirectories as $controller) {
 	            $controller = $basePath != '/' ? str_replace($basePath, '', $controller) : $controller;
