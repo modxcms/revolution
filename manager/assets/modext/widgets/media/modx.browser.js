@@ -608,6 +608,7 @@ MODx.browser.Window = function(config) {
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
         ,openTo: config.openTo || ''
+        ,multiSelect: config.multiSelect || false
         ,ident: this.ident
         ,id: this.ident+'-view'
         ,tree: this.tree
@@ -863,18 +864,27 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
         this.returnEl = el;
     }
 
-    ,onSelect: function(data) {
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
-        this.hide(this.config.animEl || null,function(){
-            if(selNode && callback){
-                var data = lookup[selNode.id];
-                Ext.callback(callback,scope || this,[data]);
-                this.fireEvent('select',data);
+    ,onSelect: function() {
+        const selNodes = this.view.getSelectedNodes(),
+            callback = this.config.onSelect || this.onSelectHandler,
+            lookup = this.view.lookup,
+            scope = this.config.scope,
+            source = parseInt(this.config.source || MODx.config.default_media_source);
+
+        this.hide(this.config.animEl || null, function () {
+            if (callback) {
+                selNodes.forEach((selNode) => {
+                    try {
+                        let selData = lookup[selNode.id];
+                        selData.source = source;
+                        Ext.callback(callback, scope || this, [selData]);
+                        this.fireEvent('select', selData);
+                    } catch (e) {
+                        console.error('Error processing MODx.Browser onSelect callback:', e);
+                    }
+                });
             }
-        },scope);
+        }, scope);
     }
 
     ,onSelectHandler: function(data) {
@@ -1344,6 +1354,7 @@ MODx.browser.RTE = function(config) {
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
         ,openTo: config.openTo || ''
+        ,multiSelect: config.multiSelect || false
         ,ident: this.ident
         ,id: this.ident+'-view'
         ,tree: this.tree
@@ -1595,19 +1606,29 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
         this.returnEl = el;
     }
 
-    ,onSelect: function(data) {
-        var selNode = this.view.getSelectedNodes()[0];
-        var callback = this.config.onSelect || this.onSelectHandler;
-        var lookup = this.view.lookup;
-        var scope = this.config.scope;
+    ,onSelect: function() {
+        const selNodes = this.view.getSelectedNodes(),
+            callback = this.config.onSelect || this.onSelectHandler,
+            lookup = this.view.lookup,
+            scope = this.config.scope,
+            source = parseInt(this.config.source || MODx.config.default_media_source);
+
         if (callback) {
-            data = (selNode) ? lookup[selNode.id] : null;
-            Ext.callback(callback, scope || this, [data]);
-            this.fireEvent('select', data);
-            if (window.top.opener) {
-                window.top.close();
-                window.top.opener.focus();
-            }
+            selNodes.forEach((selNode) => {
+                try {
+                    let selData = lookup[selNode.id];
+                    selData.source = source;
+                    Ext.callback(callback, scope || this, [selData]);
+                    this.fireEvent('select', selData);
+                } catch (e) {
+                    console.error('Error processing MODx.Browser onSelect callback:', e);
+                }
+            });
+        }
+
+        if (window.top.opener) {
+            window.top.close();
+            window.top.opener.focus();
         }
     }
 
