@@ -815,9 +815,6 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,enableKeyEvents: true
                 ,value: parseInt(config.record.menuindex) || 0
                 ,listeners: {
-                    afterrender: function(field) {
-                        field.el.set({autocomplete: 'off'});
-                    },
                     specialkey: function(field, e) {
                         const currentVal = parseInt(field.value);
                         if (e.getKey() == e.UP) {

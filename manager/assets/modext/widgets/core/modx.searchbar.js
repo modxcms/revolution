@@ -20,7 +20,6 @@ MODx.SearchBar = function(config) {
             tag: 'input'
             ,type: 'text'
             ,size: '24'
-            ,autocomplete: 'off'
             ,tabindex: '0'
             ,hasfocus:true
             ,'aria-label' : _('search')

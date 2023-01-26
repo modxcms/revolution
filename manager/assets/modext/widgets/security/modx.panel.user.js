@@ -522,7 +522,6 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
             ,xtype: 'textfield'
             ,allowBlank: false
             ,anchor: '100%'
-            ,autoCreate: {tag: "input", type: "text", size: "20", autocomplete: "off", msgTarget: "under"}
             ,listeners: {
                 'keyup': {scope:this,fn:function(f,e) {
                     Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));

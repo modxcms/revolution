@@ -7,6 +7,7 @@
 
 <script>
 // <![CDATA[
+document.getElementById('tv{$tv->id}').setAttribute('autocomplete', globalAutoCompleteSetting);
 {literal}
 Ext.onReady(function() {
     const fld = MODx.load({
@@ -23,7 +24,7 @@ Ext.onReady(function() {
         {if $params.minLength|default != '' && $params.minLength|default >= 0},minLength: {$params.minLength|string_format:"%d"}{/if}
     {literal}
         ,listeners: {
-            keydown: { 
+            keydown: {
                 fn: MODx.fireResourceFormChange,
                 scope: this
             }
