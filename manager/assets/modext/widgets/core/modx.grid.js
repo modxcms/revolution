@@ -800,7 +800,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     ,applyGridFilter: function(cmp, param = 'query') {
         const filterValue = cmp.getValue(),
               store = this.getStore(),
-              urlParams = {}
+              urlParams = {},
+              bottomToolbar = this.getBottomToolbar()
         ;
         let tabPanel = this.ownerCt.ownerCt,
             hasParentTabPanel = false,
@@ -862,7 +863,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
         store.load();
         MODx.util.url.setParams(urlParams)
-        this.getBottomToolbar().changePage(1);
+        if (bottomToolbar) {
+            bottomToolbar.changePage(1);
+        }
     }
 
     /**
@@ -871,7 +874,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
      * @param {String} itemIds - A comma-separated list of the Ext component ids to be cleared
      */
     ,clearGridFilters: function(itemIds) {
-        const store = this.getStore();
+        const store = this.getStore(),
+              bottomToolbar = this.getBottomToolbar()
+        ;
         itemIds = Array.isArray(itemIds) ? itemIds : itemIds.split(',');
         /*
             Note that param below relies on the following naming convention being followed for each filter's config:
@@ -890,7 +895,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         });
         store.load();
         MODx.util.url.clearParams();
-        this.getBottomToolbar().changePage(1);
+        if (bottomToolbar) {
+            bottomToolbar.changePage(1);
+        }
     }
 });
 
