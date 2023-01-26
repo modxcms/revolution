@@ -575,6 +575,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                 ,inputValue: pkg.info
                 ,labelSeparator: ''
                 ,checked: i === 0
+                ,_changelog: pkg.changelog
                 ,listeners: {
                     afterrender: {
                         fn: function (radio) {
@@ -592,7 +593,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                                     ,style: 'white-space: pre-wrap'
                                     ,fields: [{
                                         xtype: 'box'
-                                        ,html: pkg.changelog
+                                        ,html: radio._changelog
                                     }]
                                     ,buttons: [{
                                         text: _('close')
